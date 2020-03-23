@@ -1,9 +1,10 @@
 import React from 'react';
 import { DefaultSeo } from 'next-seo';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
-import { theme } from '../../utils/styles';
-import { createSEOConfig } from '../../utils/seo';
+import { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import { theme } from '../utils/styles';
+import { createSEOConfig } from '../utils/seo';
 import './global.css';
 import Footer from '../components/Footer';
 
@@ -27,14 +28,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: opacity ease 200ms;
+`;
+
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <DefaultSeo {...createSEOConfig({})} />
       <GlobalStyle />
       <BaseCSS />
-      <Component {...pageProps} />
-      <Footer />
+      <ModalProvider backgroundComponent={FadingBackground}>
+        <Component {...pageProps} />
+        <Footer />
+      </ModalProvider>
     </ThemeProvider>
   );
 }

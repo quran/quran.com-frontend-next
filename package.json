@@ -9,6 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "final-form": "^4.18.7",
+    "isomorphic-unfetch": "^3.0.0",
+    "luxon": "^1.22.0",
     "next": "^9.3.1",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.0.3",
@@ -16,13 +19,16 @@
     "next-seo": "^4.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-final-form": "^6.3.5",
     "react-icons": "^3.9.0",
     "react-use": "^13.27.0",
     "styled-bootstrap-grid": "^3.1.0",
     "styled-breakpoints": "^8.1.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "styled-react-modal": "^2.0.0"
   },
   "devDependencies": {
+    "@types/luxon": "^1.22.0",
     "@types/node": "^13.9.3",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
