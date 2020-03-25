@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useMutation } from '@apollo/react-hooks';
 import { DateTime } from 'luxon';
 import { Form, Field } from 'react-final-form';
 import { Row, Col } from 'styled-bootstrap-grid';
 import { IoMdTime, IoMdList, IoIosLink } from 'react-icons/io';
-import { makeUrl } from '../utils/api';
+import { CREATE_POST, POSTS_QUERY } from '../graphql/posts';
 
 const TitleInput = styled.input`
   font-family: Schear Grotesk;
@@ -63,7 +64,7 @@ const InputContainer = styled.div`
 `;
 
 const ErrorText = styled.p`
-  color: #e50000;
+  color: ${(props) => props.theme.redColor};
   font-family: Maison Neue;
 `;
 
@@ -71,20 +72,19 @@ const required = (value: string) => (value ? undefined : 'Required');
 
 const NewPostform = ({ onCloseModal }: { onCloseModal: () => void }) => {
   const todayDate = new Date();
+  const [submitData] = useMutation(CREATE_POST, { refetchQueries: [{ query: POSTS_QUERY }] });
 
   const submit = (data) =>
-    fetch(makeUrl('/posts.json'), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        post: {
-          ...data,
-          time_start: DateTime.fromSQL(`${data.date} ${data.time_start}`),
-          time_end: DateTime.fromSQL(`${data.date} ${data.time_end}`),
+    submitData({
+      variables: {
+        data: {
+          post: {
+            ...data,
+            time_start: DateTime.fromSQL(`${data.date} ${data.time_start}`).toISO(),
+            time_end: DateTime.fromSQL(`${data.date} ${data.time_end}`).toISO(),
+          },
         },
-      }),
+      },
     }).then(onCloseModal);
 
   return (
@@ -94,6 +94,7 @@ const NewPostform = ({ onCloseModal }: { onCloseModal: () => void }) => {
         <form onSubmit={handleSubmit}>
           <Field
             name="title"
+            validate={required}
             render={({ input, meta }) => (
               <>
                 <TitleInput {...input} placeholder="Title" required />
@@ -128,8 +129,18 @@ const NewPostform = ({ onCloseModal }: { onCloseModal: () => void }) => {
                   name="time_end"
                   render={({ input }) => <Input type="time" {...input} required />}
                   initialValue="13:00"
+                  validate={(value, values) =>
+                    // @ts-ignore
+                    value > values.time_start ? undefined : 'End time cannot be after start'
+                  }
                 />
               </TimeFields>
+              <Field
+                name="time_end"
+                render={({ meta }) =>
+                  meta.touched && meta.error && <ErrorText>{meta.error}</ErrorText>
+                }
+              />
               <Divider />
             </Col>
           </Row>

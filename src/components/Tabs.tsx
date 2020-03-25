@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'styled-bootstrap-grid';
 
-const NavTab = styled.button`
+const NavTab = styled.button<{ selected: boolean }>`
   font-family: Maison Neue;
   font-style: normal;
   font-weight: ${(props) => (props.selected ? 'bold' : 500)};
@@ -15,6 +15,12 @@ const NavTab = styled.button`
   background: none;
   text-align: left;
   padding-left: 0px;
+  opacity: ${(props) => (props.selected ? 1 : 0.6)};
+`;
+
+const BorderBottom = styled.hr<{ selected: boolean }>`
+  position: absolute;
+  width: 100%;
   opacity: ${(props) => (props.selected ? 1 : 0.6)};
   border-bottom: 2px solid #000;
 `;
@@ -46,6 +52,7 @@ export const Tab = ({
   return (
     <NavTab onClick={handleClick} selected={selected}>
       {label}
+      <BorderBottom selected={selected} />
     </NavTab>
   );
 };

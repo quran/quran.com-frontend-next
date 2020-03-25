@@ -9,7 +9,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.0-beta.41",
+    "@apollo/react-hooks": "3.1.3",
+    "@apollo/react-ssr": "3.1.3",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link": "^1.2.13",
+    "apollo-link-http": "1.5.16",
+    "apollo-link-rest": "^0.8.0-beta.0",
+    "fetch-headers": "^2.0.0",
     "final-form": "^4.18.7",
+    "graphql": "^14.6.0",
+    "graphql-anywhere": "^4.2.6",
+    "graphql-tag": "^2.10.3",
     "isomorphic-unfetch": "^3.0.0",
     "luxon": "^1.22.0",
     "next": "^9.3.1",
@@ -17,6 +29,7 @@
     "next-fonts": "^1.0.3",
     "next-optimized-images": "^2.5.5",
     "next-seo": "^4.4.0",
+    "qs": "^6.9.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-final-form": "^6.3.5",
@@ -32,6 +45,7 @@
     "@types/node": "^13.9.3",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
+    "babel-plugin-graphql-tag": "^2.5.0",
     "babel-plugin-styled-components": "^1.10.7",
     "typescript": "^3.8.3"
   }

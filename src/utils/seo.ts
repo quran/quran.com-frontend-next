@@ -1,11 +1,12 @@
 import { NextSeoProps } from 'next-seo';
+import logo from '../../static/lobby-logo.png';
 
 export const config = {
-  siteName: 'sitename',
-  siteDescription: 'sitedescription',
-  defaultPageTitle: 'pagetitle',
+  siteName: 'Lobby',
+  siteDescription: 'Connect with people over chat',
+  defaultPageTitle: 'Lobby',
   baseUrl: 'twitter.com',
-  websiteLogo: '',
+  websiteLogo: logo,
   twitterHandle: '@twitter',
   twitterCardType: 'twitter',
 };
@@ -38,7 +39,7 @@ export function createSEOConfig({
           url: config.websiteLogo,
           width: 280,
           height: 280,
-          alt: 'mmahalwy',
+          alt: config.siteName,
         },
       ],
       site_name: config.siteName,
