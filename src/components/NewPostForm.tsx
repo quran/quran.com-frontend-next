@@ -138,7 +138,7 @@ const NewPostform = ({ onCloseModal }: { onCloseModal: () => void }) => {
               <Field
                 name="time_end"
                 render={({ meta }) =>
-                  meta.touched && meta.error && <ErrorText>{meta.error}</ErrorText>
+                  meta.touched && meta.error ? <ErrorText>{meta.error}</ErrorText> : null
                 }
               />
               <Divider />
