@@ -1,5 +1,5 @@
 import { NextSeoProps } from 'next-seo';
-import logo from '../../static/lobby-logo.png';
+import logo from '../../public/logo.png';
 
 export const config = {
   siteName: 'Lobby',

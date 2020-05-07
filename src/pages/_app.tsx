@@ -1,48 +1,18 @@
 import React from 'react';
 import { DefaultSeo } from 'next-seo';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { BaseCSS } from 'styled-bootstrap-grid';
-import { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import { ThemeProvider } from 'styled-components';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
 import './global.css';
 import Footer from '../components/Footer';
 
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'Maison Neue';
-    src: url('/static/fonts/MaisonNeue-Medium.otf');
-    /* src: url('/static/fonts/MaisonNeue-Bold.eot'); */
-    /* src: url('/static/fonts/MaisonNeue-Bold.ttf'); */
-    /* src: url('/static/fonts/MaisonNeueWEB-Bold.woff'); */
-    /* src: url('/static/fonts/MaisonNeueWEB-Bold.woff2'); */
-  }
-
-  @font-face {
-    font-family: 'Schear Grotesk';
-    /* src: url('/static/fonts/SchearGrotesk-Black.eot'); */
-    /* src: url('/static/fonts/SchearGrotesk-Black.ttf'); */
-    src: url('/static/fonts/SchearGrotesk-Black.otf');
-    /* src: url('/static/fonts/SchearGrotesk-Black.woff'); */
-    /* src: url('/static/fonts/SchearGrotesk-Black.woff2'); */
-  }
-`;
-
-const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${(props) => props.opacity};
-  transition: opacity ease 200ms;
-`;
-
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
       <DefaultSeo {...createSEOConfig({})} />
-      <GlobalStyle />
-      <BaseCSS />
-      <ModalProvider backgroundComponent={FadingBackground}>
-        <Component {...pageProps} />
-        <Footer />
-      </ModalProvider>
+
+      <Component {...pageProps} />
+      <Footer />
     </ThemeProvider>
   );
 }

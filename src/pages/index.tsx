@@ -1,171 +1,50 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Container, Row, Col } from 'styled-bootstrap-grid';
-import { DateTime } from 'luxon';
-import { NextPage } from 'next';
-import { useQuery } from '@apollo/react-hooks';
-import Navbar from '../components/Navbar';
-import Link from '../components/Link';
-import Tabs, { Tab } from '../components/Tabs';
-import PostType from '../../types/PostType';
-import { withApollo } from '../components/withApollo';
-import { POSTS_QUERY } from '../graphql/posts';
+import { Container, Row } from 'styled-bootstrap-grid';
+import { NextPage, GetStaticProps } from 'next';
+import fetch from 'isomorphic-unfetch';
+import { camelizeKeys } from 'humps';
+import ChaptersList from '../components/chapters/ChapterList';
+import { makeUrl } from '../utils/api';
+import ChapterType from '../../types/ChapterType';
+import CardRow from '../components/dls/Cards/CardRow';
+import Card from '../components/dls/Cards/Card';
 
-const GrayContainer = styled.div`
-  min-height: 100vh;
-`;
-
-const Time = styled.p`
-  font-family: Maison Neue;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 20px;
-  letter-spacing: 0.06em;
-  color: #222222;
-  margin-bottom: 1.25rem;
-  margin-top: 2rem;
-`;
-
-const Title1 = styled.h2<{ isLive: boolean }>`
-  font-family: Schear Grotesk;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 56px;
-  line-height: 48px;
-  text-transform: uppercase;
-  color: ${(props) => (props.isLive ? props.theme.redColor : '#222222')};
-  margin-bottom: 1rem;
-`;
-
-const Description = styled.p`
-  font-family: Maison Neue;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 20px;
-  color: #222222;
-  margin-bottom: 1rem;
-`;
-
-const RedLink = styled.a`
-  color: ${(props) => props.theme.redColor};
-  text-decoration: none;
-`;
-
-const Divider = styled.hr`
-  margin-top: 4rem;
-  opacity: 0.1;
-`;
-
-const LiveIcon = styled.span`
-  height: 8px;
-  width: 8px;
-  border-radius: 8px;
-  background: ${(props) => props.theme.redColor};
-  display: inline-block;
-`;
-
-const Item = ({ item }: { item: PostType }) => {
-  const now = DateTime.fromJSDate(new Date());
-  const isLive = DateTime.fromISO(item.time_start) < now && now < DateTime.fromISO(item.time_end);
-  console.log(item);
-
+const Index: NextPage<{ chapters: ChapterType[] }> = ({ chapters }) => {
   return (
-    <>
-      <Time>
-        {isLive ? (
-          <RedLink>
-            <LiveIcon /> Live
-          </RedLink>
-        ) : (
-          <>
-            {DateTime.fromISO(item.time_start).toLocaleString(DateTime.TIME_SIMPLE)} -{' '}
-            {DateTime.fromISO(item.time_end).toLocaleString(DateTime.TIME_SIMPLE)}
-          </>
-        )}
-        ,{' '}
-        {DateTime.fromISO(item.time_start).toLocaleString({
-          month: 'short',
-          day: '2-digit',
-        })}
-      </Time>
-      <Title1 isLive={isLive}>{item.title}</Title1>
-      <Description>{item.description}</Description>
-      <Description>
-        <Link href={item.url} target="_blank">
-          RSVP
-        </Link>
-      </Description>
-    </>
+    <Container>
+      <Row>
+        <CardRow mb={2}>
+          <Card
+            title="Salah"
+            subtitle="Search prayer time for any location"
+            image="https://cdn.qurancdn.com/packs/media/images/salah-935518782bf136f39dc70621fd40ea31.jpg"
+          />
+          <Card
+            title="Sunnah"
+            subtitle="The Hadith of Prophet Muhammad(PBUH)"
+            image="https://cdn.qurancdn.com/packs/media/images/sunnah-d502b874bd3d2334924e68707f8dda79.png"
+          />
+          <Card
+            title="Noble Quran in audio"
+            subtitle="Learning & listening at the same time"
+            image="https://cdn.qurancdn.com/packs/media/images/audio-0680e4f9fac1d663f0e286459461e08d.png"
+          />
+        </CardRow>
+        <ChaptersList chapters={chapters.slice(0, 38)} />
+        <ChaptersList chapters={chapters.slice(38, 76)} />
+        <ChaptersList chapters={chapters.slice(76, 114)} />
+      </Row>
+    </Container>
   );
 };
 
-const Index: NextPage<{ posts: PostType[] }> = ({ posts = [] }) => {
-  const { loading, error, data } = useQuery(POSTS_QUERY);
+export const getStaticProps: GetStaticProps = async (context) => {
+  const repsonse = await fetch(makeUrl('/chapters'));
+  const payload = await repsonse.json();
 
-  return (
-    <GrayContainer>
-      <Navbar />
-      <Container>
-        <Tabs defaultKey="upcoming">
-          <Tab label="Upcoming" key="upcoming">
-            <Row>
-              {data?.posts
-                ?.filter((a) => DateTime.fromISO(a.time_end) > DateTime.fromJSDate(new Date()))
-                .sort((a, b) =>
-                  DateTime.fromISO(a.time_start) > DateTime.fromISO(b.time_start) ? 1 : -1,
-                )
-                .map((item, index) => (
-                  <Col xl="4" xs="12" key={item.id}>
-                    {index > 2 && <Divider />}
-                    <Item item={item} />
-                  </Col>
-                ))}
-            </Row>
-          </Tab>
-          <Tab label="Recently added" key="recent">
-            <Row>
-              {data?.posts
-                ?.sort((a, b) =>
-                  DateTime.fromISO(a.created_at) > DateTime.fromISO(b.created_at) ? -1 : 1,
-                )
-                .map((item, index) => (
-                  <Col xl="4" xs="12" key={item.id}>
-                    {index > 2 && <Divider />}
-                    <Item item={item} />
-                  </Col>
-                ))}
-            </Row>
-          </Tab>
-          <Tab label="Previous" key="previous">
-            <Row>
-              {data?.posts
-                ?.filter((a) => DateTime.fromISO(a.time_end) < DateTime.fromJSDate(new Date()))
-                ?.sort((a, b) =>
-                  DateTime.fromISO(a.created_at) > DateTime.fromISO(b.created_at) ? -1 : 1,
-                )
-                .map((item, index) => (
-                  <Col xl="4" xs="12" key={item.id}>
-                    {index > 2 && <Divider />}
-                    <Item item={item} />
-                  </Col>
-                ))}
-            </Row>
-          </Tab>
-        </Tabs>
-      </Container>
-    </GrayContainer>
-  );
+  return {
+    props: { chapters: camelizeKeys(payload.chapters) },
+  };
 };
 
-// Index.getInitialProps = async (context) => {
-//   const response = await fetch(makeUrl('/posts.json'));
-//   const posts = await response.json();
-
-//   return {
-//     posts,
-//   };
-// };
-
-export default withApollo({ ssr: false })(Index);
+export default Index;
