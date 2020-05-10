@@ -1,0 +1,37 @@
+extends: 
+  - airbnb
+  - airbnb/hooks
+  - "plugin:import/typescript"
+  - prettier
+  - prettier/react
+parser: babel-eslint
+plugins: 
+  - prettier
+rules: 
+  react/jsx-filename-extension: 0 # allow jsx in non .jsx files
+  react/jsx-props-no-spreading: 0 # allow spreading props
+  import/extensions: 
+    - 2
+    - ignorePackages
+    - 
+      ts: never
+      tsx: never
+overrides:
+  -
+    extends:
+      - "plugin:@typescript-eslint/eslint-recommended"
+      - "plugin:@typescript-eslint/recommended"
+      - "prettier/@typescript-eslint"
+    files: ["*.ts", "*.tsx"]
+    rules:
+      "@typescript-eslint/no-unused-vars": 2
+
+      # these are checked by the TS compiler
+      react/forbid-prop-types: 0
+      react/jsx-no-undef: 0
+      react/no-unused-prop-types: 0
+      react/prop-types: 0
+      react/react-in-jsx-scope: 0
+
+      # allow ts-ignore comments
+      "@typescript-eslint/ban-ts-ignore": 0
