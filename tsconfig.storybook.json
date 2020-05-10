@@ -19,6 +19,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["src/**/*.stories.tsx", "types/**/*.ts", "module.d.ts"],
+  "include": ["src/**/*.stories.tsx", "types/**/*.ts", "module.d.ts", "global.d.ts"],
   "exclude": ["node_modules", "build", "scripts"]
 }

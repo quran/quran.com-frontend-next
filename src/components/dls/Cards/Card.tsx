@@ -49,7 +49,7 @@ type CardProps = {
 
 const Card = ({ title, subtitle, image }: CardProps) => (
   <CardContainer>
-    <Image src={image} />
+    <Image src={image} role="presentation" alt={title} />
     <Caption>
       <div>
         <Title>{title}</Title>

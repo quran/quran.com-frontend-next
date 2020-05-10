@@ -1,15 +1,32 @@
 import { addDecorator, addParameters } from '@storybook/react';
-import { ThemeProvider } from 'styled-components';
 import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
+import { withThemesProvider } from 'storybook-addon-styled-component-theme';
+import styled from 'styled-components';
 
-import { theme } from '../src/utils/styles';
+import { theme, darkTheme } from '../src/utils/styles';
+import makeFonts, { baseUrl } from '../src/styles/fonts';
+import { makeGlobalCss } from '../src/styles/GlobalStyles';
 
-const themeDecorator = (storyFn) => <ThemeProvider theme={theme}>{storyFn()}</ThemeProvider>;
+const themes = [theme, darkTheme];
+const Wrapper = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor};
+  min-height: 100vh;
+`;
+
+const themeDecorator = (storyFn) => (
+  <Wrapper>
+    <style dangerouslySetInnerHTML={{ __html: makeFonts(baseUrl) }} />
+    <style dangerouslySetInnerHTML={{ __html: makeGlobalCss(16) }} />
+    {storyFn()}
+  </Wrapper>
+);
+
 // V6
 // export const decorators = [themeDecorator];
-// Consider using this: https://github.com/echoulen/storybook-addon-styled-component-theme
 addDecorator(themeDecorator);
+addDecorator(withThemesProvider(themes));
+
 const viewports = {
   xsmall: {
     name: 'X Small',

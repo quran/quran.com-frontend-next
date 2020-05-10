@@ -1,10 +1,10 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0-modified | 20110126
-   License: none (public domain)
-*/
+import { createGlobalStyle } from 'styled-components';
+import makeFonts from './fonts';
+
+export const makeGlobalCss = (baseSize = 16) => `
 
 html {
-  font-size: 16px;
+  font-size: ${baseSize}px;
 }
 
 html,
@@ -94,6 +94,8 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: "SFProText-Regular", "Helvetica Neue", Helvetica, Arial;
+  line-height: 1.5rem;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -166,7 +168,7 @@ textarea {
 }
 
 /**
- * Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ * Correct 'inline-block' display not defined in IE 6/7/8/9 and Firefox 3.
  */
 
 audio,
@@ -179,7 +181,7 @@ video {
 }
 
 /**
- * Prevent modern browsers from displaying `audio` without controls.
+ * Prevent modern browsers from displaying 'audio' without controls.
  * Remove excess height in iOS 5 devices.
  */
 
@@ -198,8 +200,8 @@ audio:not([controls]) {
 }
 
 /**
- * 1. Correct text resizing oddly in IE 6/7 when body `font-size` is set using
- *    `em` units.
+ * 1. Correct text resizing oddly in IE 6/7 when body 'font-size' is set using
+ *    'em' units.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
  *    user zoom.
  */
@@ -211,7 +213,7 @@ html {
 }
 
 /**
- * Address `outline` inconsistency between Chrome and other browsers.
+ * Address 'outline' inconsistency between Chrome and other browsers.
  */
 
 a:focus {
@@ -228,7 +230,7 @@ a:hover {
 }
 
 /**
- * 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
+ * 1. Remove border when inside 'a' element in IE 6/7/8/9 and Firefox 3.
  * 2. Improve image quality when scaled in IE 7.
  */
 
@@ -294,7 +296,7 @@ textarea {
 }
 
 /**
- * Address Firefox 3+ setting `line-height` on `input` using `!important` in
+ * Address Firefox 3+ setting 'line-height' on 'input' using '!important' in
  * the UA stylesheet.
  */
 
@@ -304,10 +306,10 @@ input {
 }
 
 /**
- * Address inconsistent `text-transform` inheritance for `button` and `select`.
- * All other form control elements do not inherit `text-transform` values.
- * Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.
- * Correct `select` style inheritance in Firefox 4+ and Opera.
+ * Address inconsistent 'text-transform' inheritance for 'button' and 'select'.
+ * All other form control elements do not inherit 'text-transform' values.
+ * Correct 'button' style inheritance in Chrome, Safari 5+, and IE 6+.
+ * Correct 'select' style inheritance in Firefox 4+ and Opera.
  */
 
 button,
@@ -316,11 +318,11 @@ select {
 }
 
 /**
- * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
- *    and `video` controls.
- * 2. Correct inability to style clickable `input` types in iOS.
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native 'audio'
+ *    and 'video' controls.
+ * 2. Correct inability to style clickable 'input' types in iOS.
  * 3. Improve usability and consistency of cursor style between image-type
- *    `input` and others.
+ *    'input' and others.
  * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
  *    Known issue: inner spacing remains in IE 6.
  */
@@ -359,9 +361,9 @@ input[type='radio'] {
 }
 
 /**
- * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
- *    (include `-moz` to future-proof).
+ * 1. Address 'appearance' set to 'searchfield' in Safari 5 and Chrome.
+ * 2. Address 'box-sizing' set to 'border-box' in Safari 5 and Chrome
+ *    (include '-moz' to future-proof).
  */
 
 input[type='search'] {
@@ -448,3 +450,12 @@ textarea {
   color: #000;
   padding: 0.2em 0;
 }
+
+`;
+
+const GlobalStyle = createGlobalStyle`
+  ${makeGlobalCss()}
+  ${makeFonts()}
+`;
+
+export default GlobalStyle;
