@@ -1,10 +1,10 @@
 import React from 'react';
 import Element from 'react-scroll/modules/components/Element';
+import { Col } from 'styled-bootstrap-grid';
+import styled from 'styled-components';
 import QuranTranslation from '../dls/QuranTranslation/QuranTranslation';
 import VerseType from '../../../types/VerseType';
 import VerseText from './VerseText';
-import { Col } from 'styled-bootstrap-grid';
-import styled from 'styled-components';
 
 const VerseContainer = styled(Element)`
   padding: 2rem 1rem;
