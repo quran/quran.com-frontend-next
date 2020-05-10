@@ -7,9 +7,6 @@ import ChapterType from '../../types/ChapterType';
 import CardRow from '../components/dls/Cards/CardRow';
 import Card from '../components/dls/Cards/Card';
 import { getChapters } from '../api';
-import sunnahImage from '../../public/images/sunnah.png';
-import salahImage from '../../public/images/salah.jpg';
-import qaudioImage from '../../public/images/qaudio.jpeg';
 
 type IndexProps = {
   chaptersResponse: {
@@ -42,7 +39,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const chaptersResponse = await getChapters();
 
   return {
