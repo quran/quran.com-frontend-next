@@ -40,5 +40,5 @@ export const getChapterVerses = async (id: string | number | string[]) => {
 };
 
 export const getChapterVersesResponse = async (id: string | number | string[]) => {
-  return await fetcher(makeUrl(`/chapters/${id}/verses`));
+  return fetcher(makeUrl(`/chapters/${id}/verses`));
 };
