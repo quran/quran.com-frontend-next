@@ -7,7 +7,7 @@ const CardRowContainer = styled.div<MarginProps & PaddingProps>`
   display: grid;
   grid-gap: 0.75rem;
   grid-template-columns: 0px;
-  grid-template-rows: 180px;
+  grid-template-rows: auto;
   grid-auto-flow: column;
   grid-auto-columns: auto;
 

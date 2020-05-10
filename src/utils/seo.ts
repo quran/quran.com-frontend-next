@@ -1,10 +1,11 @@
 import { NextSeoProps } from 'next-seo';
 import logo from '../../public/logo.png';
+import { theme } from './styles';
 
 export const config = {
-  siteName: 'Lobby',
-  siteDescription: 'Connect with people over chat',
-  defaultPageTitle: 'Lobby',
+  siteName: "Al-Qur'an al-Kareem - القرآن الكريم",
+  siteDescription: 'The Quran translated into many languages in a simple and easy interface',
+  defaultPageTitle: 'Quran.com',
   baseUrl: 'twitter.com',
   websiteLogo: logo,
   twitterHandle: '@twitter',
@@ -28,6 +29,7 @@ export function createSEOConfig({
   return {
     title: seoTitle,
     description: setDescription,
+    titleTemplate: '%s - Quran.com',
     openGraph: {
       type: 'website',
       locale: 'en_US',
@@ -49,5 +51,23 @@ export function createSEOConfig({
       site: config.twitterHandle,
       cardType: config.twitterCardType,
     },
+    additionalMetaTags: [
+      {
+        name: 'Charset',
+        content: 'UTF-8',
+      },
+      {
+        name: 'Distribution',
+        content: 'Global',
+      },
+      {
+        name: 'Rating',
+        content: 'General',
+      },
+      {
+        name: 'theme-color',
+        content: theme.colors.primary,
+      },
+    ],
   }; // defaultImageHeight: 500, // defaultImageWidth: 500,
 }

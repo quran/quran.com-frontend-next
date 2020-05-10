@@ -10,6 +10,7 @@ const CardContainer = styled.figure`
   scroll-snap-align: center;
   margin: 0px;
   overflow: hidden;
+  height: 180px;
 `;
 
 const Image = styled.img`
