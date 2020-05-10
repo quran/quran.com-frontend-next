@@ -9,6 +9,7 @@ const CardContainer = styled.figure`
   white-space: normal;
   scroll-snap-align: center;
   margin: 0px;
+  overflow: hidden;
 `;
 
 const Image = styled.img`

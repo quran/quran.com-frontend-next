@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import ChapterIcon from './ChapterIcon';
 import ChapterType from '../../../types/ChapterType';
 
@@ -53,16 +54,18 @@ type Props = {
 
 const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (
   <Item key={chapter.id}>
-    <StyledLink href={`/${chapter.id}`}>
-      <Container>
-        <Number>{chapter.chapterNumber}</Number>
-        <NameContainer>
-          <NameArabic>{chapter.nameSimple}</NameArabic>
-          <NameEnglish>{chapter.translatedName.name}</NameEnglish>
-        </NameContainer>
-        <ChapterIcon id={String(chapter.id)} />
-      </Container>
-    </StyledLink>
+    <Link as={`/${chapter.id}`} href="/[chapterId]" passHref>
+      <StyledLink>
+        <Container>
+          <Number>{chapter.chapterNumber}</Number>
+          <NameContainer>
+            <NameArabic>{chapter.nameSimple}</NameArabic>
+            <NameEnglish>{chapter.translatedName.name}</NameEnglish>
+          </NameContainer>
+          <ChapterIcon id={String(chapter.id)} />
+        </Container>
+      </StyledLink>
+    </Link>
   </Item>
 );
 

@@ -6,6 +6,9 @@ import ChapterType from '../../types/ChapterType';
 import CardRow from '../components/dls/Cards/CardRow';
 import Card from '../components/dls/Cards/Card';
 import { getChapters } from '../api';
+import sunnahImage from '../../public/images/sunnah.png';
+import salahImage from '../../public/images/salah.jpg';
+import qaudioImage from '../../public/images/qaudio.jpeg';
 
 type IndexProps = {
   chaptersResponse: {
@@ -18,20 +21,16 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
     <Container>
       <Row>
         <CardRow mb={2}>
-          <Card
-            title="Salah"
-            subtitle="Search prayer time for any location"
-            image="https://cdn.qurancdn.com/packs/media/images/salah-935518782bf136f39dc70621fd40ea31.jpg"
-          />
+          <Card title="Salah" subtitle="Search prayer time for any location" image={salahImage} />
           <Card
             title="Sunnah"
             subtitle="The Hadith of Prophet Muhammad(PBUH)"
-            image="https://cdn.qurancdn.com/packs/media/images/sunnah-d502b874bd3d2334924e68707f8dda79.png"
+            image={sunnahImage}
           />
           <Card
             title="Noble Quran in audio"
             subtitle="Learning & listening at the same time"
-            image="https://cdn.qurancdn.com/packs/media/images/audio-0680e4f9fac1d663f0e286459461e08d.png"
+            image={qaudioImage}
           />
         </CardRow>
         <ChaptersList chapters={chapters.slice(0, 38)} />
