@@ -1,27 +1,9 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet, createGlobalStyle } from 'styled-components';
+import { ServerStyleSheet } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
+import GlobalStyle from '../styles/GlobalStyles';
 
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'Maison Neue';
-    src: url('/static/fonts/MaisonNeue-Medium.otf');
-    /* src: url('/static/fonts/MaisonNeue-Bold.eot'); */
-    /* src: url('/static/fonts/MaisonNeue-Bold.ttf'); */
-    /* src: url('/static/fonts/MaisonNeueWEB-Bold.woff'); */
-    /* src: url('/static/fonts/MaisonNeueWEB-Bold.woff2'); */
-  }
-
-  @font-face {
-    font-family: 'Schear Grotesk';
-    /* src: url('/static/fonts/SchearGrotesk-Black.eot'); */
-    /* src: url('/static/fonts/SchearGrotesk-Black.ttf'); */
-    src: url('/static/fonts/SchearGrotesk-Black.otf');
-    /* src: url('/static/fonts/SchearGrotesk-Black.woff'); */
-    /* src: url('/static/fonts/SchearGrotesk-Black.woff2'); */
-  }
-`;
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
     // Step 1: Create an instance of ServerStyleSheet
@@ -53,7 +35,6 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
         </Head>

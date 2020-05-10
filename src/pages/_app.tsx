@@ -3,7 +3,6 @@ import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
-import './global.css';
 import Footer from '../components/Footer';
 
 function MyApp({ Component, pageProps }) {

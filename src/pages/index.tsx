@@ -1,15 +1,19 @@
 import React from 'react';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps } from 'next';
-import fetch from 'isomorphic-unfetch';
-import { camelizeKeys } from 'humps';
 import ChaptersList from '../components/chapters/ChapterList';
-import { makeUrl } from '../utils/api';
 import ChapterType from '../../types/ChapterType';
 import CardRow from '../components/dls/Cards/CardRow';
 import Card from '../components/dls/Cards/Card';
+import { getChapters } from '../api';
 
-const Index: NextPage<{ chapters: ChapterType[] }> = ({ chapters }) => {
+type IndexProps = {
+  chaptersResponse: {
+    chapters: ChapterType[];
+  };
+};
+
+const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   return (
     <Container>
       <Row>
@@ -39,11 +43,10 @@ const Index: NextPage<{ chapters: ChapterType[] }> = ({ chapters }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const repsonse = await fetch(makeUrl('/chapters'));
-  const payload = await repsonse.json();
+  const chaptersResponse = await getChapters();
 
   return {
-    props: { chapters: camelizeKeys(payload.chapters) },
+    props: { chaptersResponse },
   };
 };
 

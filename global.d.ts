@@ -1,0 +1,1 @@
+type $TsFixMe = any;

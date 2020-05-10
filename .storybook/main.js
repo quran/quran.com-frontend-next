@@ -10,6 +10,7 @@ module.exports = {
     '@storybook/addon-storysource',
     '@storybook/addon-viewport/register',
     '@storybook/addon-a11y/register',
+    'storybook-addon-styled-component-theme/dist/register',
   ],
   webpackFinal: async (config) => {
     config.module.rules.push({
