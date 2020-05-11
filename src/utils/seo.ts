@@ -44,6 +44,7 @@ export function createSEOConfig({
           alt: config.siteName,
         },
       ],
+      // eslint-disable-next-line  @typescript-eslint/camelcase
       site_name: config.siteName,
     },
     twitter: {

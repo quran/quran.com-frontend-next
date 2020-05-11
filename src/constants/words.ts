@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export enum WORD_TYPES {
   CHAR_TYPE_WORD = 'word',
   CHAR_TYPE_END = 'end',

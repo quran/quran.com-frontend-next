@@ -9,7 +9,7 @@ const FooterContainer = styled.footer`
 
 const Footer = () => (
   <FooterContainer>
-    <Container></Container>
+    <Container />
   </FooterContainer>
 );
 

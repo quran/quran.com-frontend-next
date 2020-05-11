@@ -30,6 +30,7 @@ const Tabs = ({ initial, children }: TabsProps) => {
   return (
     <div>
       <section role="tabpanel">
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */}
         <nav role="tablist">
           <TabNavList>
             {React.Children.map(children, (child, i) => {
@@ -54,6 +55,6 @@ type TabProps = {
   children: ReactNode;
 };
 
-export const Tab = ({ title, children }: TabProps) => <>{children}</>;
+export const Tab = ({ children }: TabProps) => <>{children}</>;
 
 export default Tabs;
