@@ -1,8 +1,8 @@
 import React from 'react';
-import ChapterBlock from './ChapterBlock';
 import styled from 'styled-components';
-import ChapterType from '../../../types/ChapterType';
 import { Col } from 'styled-bootstrap-grid';
+import ChapterBlock from './ChapterBlock';
+import ChapterType from '../../../types/ChapterType';
 
 const List = styled.ul`
   padding-left: 0px;

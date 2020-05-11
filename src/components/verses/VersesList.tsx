@@ -8,7 +8,7 @@ type VersesListProps = {
   chapter: ChapterType;
 };
 
-const VersesList = ({ verses, chapter }: VersesListProps) => (
+const VersesList = ({ verses }: VersesListProps) => (
   <>
     {verses.map((verse) => (
       <Verse key={verse.verseKey} verse={verse} />
