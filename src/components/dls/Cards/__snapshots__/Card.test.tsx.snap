@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render 1`] = `
+.c0 {
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  white-space: normal;
+  -webkit-scroll-snap-align: center;
+  -moz-scroll-snap-align: center;
+  -ms-scroll-snap-align: center;
+  scroll-snap-align: center;
+  margin: 0px;
+  overflow: hidden;
+  height: 180px;
+}
+
+.c1 {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.c2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,172,193,0.7);
+  border-radius: 10px;
+  font-family: SFProText-Regular;
+  font-size: 16px;
+  color: #fff;
+  padding: 16px 30px;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  font-family: SFProText-Regular;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 7px;
+}
+
+<div>
+  <figure
+    class="c0"
+  >
+    <img
+      alt="title"
+      class="c1"
+      role="presentation"
+      src="#"
+    />
+    <div
+      class="c2"
+    >
+      <div>
+        <h3
+          class="c3"
+        >
+          title
+        </h3>
+        <p>
+          subtitle
+        </p>
+      </div>
+    </div>
+  </figure>
+</div>
+`;
