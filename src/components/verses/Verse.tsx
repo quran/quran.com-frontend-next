@@ -7,7 +7,7 @@ import VerseType from '../../../types/VerseType';
 import VerseText from './VerseText';
 
 const VerseContainer = styled(Element)`
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
 `;
 
 type VerseProps = {
