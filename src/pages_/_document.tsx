@@ -16,8 +16,8 @@ export default class MyDocument extends Document {
         <>
           <BaseCSS />
           <App {...props} />
-        </>,
-      ),
+        </>
+      )
     );
 
     // Step 3: Extract the styles as <style> tags
@@ -34,7 +34,10 @@ export default class MyDocument extends Document {
     return (
       <html lang="en">
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
           <style
