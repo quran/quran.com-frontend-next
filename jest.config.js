@@ -21,6 +21,7 @@ module.exports = {
     'jest-watch-select-projects',
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
+    'jest-runner-eslint/watch-fix',
   ],
   projects: ['./tests/configs/jest.client.js', './tests/configs/jest.lint.js'],
 };
