@@ -41,3 +41,5 @@ node_modules/
 out
 
 .now
+
+public/fonts/
