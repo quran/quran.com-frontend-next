@@ -10,7 +10,7 @@ import VerseType from '../types/VerseType';
 //   headers: {'X-Custom-Header': 'foobar'}
 // });
 
-export const fetcher = async function(input: RequestInfo, init?: RequestInit) {
+export const fetcher = async function (input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
   return res.json();
 };
