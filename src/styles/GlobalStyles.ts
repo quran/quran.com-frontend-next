@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import makeFonts from './fonts';
+import makeFonts, { baseUrl } from './fonts';
 
 export const makeGlobalCss = (baseSize = 16) => `
 
@@ -455,7 +455,7 @@ textarea {
 
 const GlobalStyle = createGlobalStyle`
   ${makeGlobalCss()}
-  ${makeFonts()}
+  ${makeFonts(baseUrl)}
 `;
 
 export default GlobalStyle;

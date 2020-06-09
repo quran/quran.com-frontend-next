@@ -119,7 +119,7 @@ const CONTENT: { [key: string]: string } = {
 };
 
 export default styled.span<{ id: string | number }>`
-  font-family: 'surah_names' !important;
+  font-family: 'surahnames' !important;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

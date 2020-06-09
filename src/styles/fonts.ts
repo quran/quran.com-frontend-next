@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 
-export const baseUrl = 'https://quran-1f14.kxcdn.com';
+export const baseUrl = 'https://qurancdn.nyc3.cdn.digitaloceanspaces.com';
 
 export const makeFont = (url: string, pageNumber: string | number) => `
 @font-face {
@@ -23,28 +23,28 @@ const makePageNumberFonts = (url = '') =>
 // TODO: For later
 // @font-face {
 //   font-family: 'Maison Neue';
-//   src: url('/fonts/MaisonNeue-Medium.otf');
-//   /* src: url('/fonts/MaisonNeue-Bold.eot'); */
-//   /* src: url('/fonts/MaisonNeue-Bold.ttf'); */
-//   /* src: url('/fonts/MaisonNeueWEB-Bold.woff'); */
-//   /* src: url('/fonts/MaisonNeueWEB-Bold.woff2'); */
+//   src: url('${url}/fonts/MaisonNeue-Medium.otf');
+//   /* src: url('${url}/fonts/MaisonNeue-Bold.eot'); */
+//   /* src: url('${url}/fonts/MaisonNeue-Bold.ttf'); */
+//   /* src: url('${url}/fonts/MaisonNeueWEB-Bold.woff'); */
+//   /* src: url('${url}/fonts/MaisonNeueWEB-Bold.woff2'); */
 // }
 
 // @font-face {
 //   font-family: 'Schear Grotesk';
-//   /* src: url('/fonts/SchearGrotesk-Black.eot'); */
-//   /* src: url('/fonts/SchearGrotesk-Black.ttf'); */
-//   src: url('/fonts/SchearGrotesk-Black.otf');
-//   /* src: url('/fonts/SchearGrotesk-Black.woff'); */
-//   /* src: url('/fonts/SchearGrotesk-Black.woff2'); */
+//   /* src: url('${url}/fonts/SchearGrotesk-Black.eot'); */
+//   /* src: url('${url}/fonts/SchearGrotesk-Black.ttf'); */
+//   src: url('${url}/fonts/SchearGrotesk-Black.otf');
+//   /* src: url('${url}/fonts/SchearGrotesk-Black.woff'); */
+//   /* src: url('${url}/fonts/SchearGrotesk-Black.woff2'); */
 // }
 
-const makeFonts = (url = '') =>
+const makeFonts = (url = baseUrl) =>
   `
 ${makePageNumberFonts(url)}
 @font-face {
   font-family: quran-common;
-  src: url('/fonts/quran-common/quran_common.ttf')
+  src: url('${url}/fonts/quran-common/quran_common.ttf')
     format('truetype');
 }
 .p0,
@@ -112,65 +112,65 @@ ${makePageNumberFonts(url)}
 }
 @font-face {
   font-family: 'SSStandard';
-  src: url('/fonts/ss-standard/ss-standard.eot');
-  src: url('/fonts/ss-standard/ss-standard.eot?#iefix')
+  src: url('${url}/fonts/ss-standard/ss-standard.eot');
+  src: url('${url}/fonts/ss-standard/ss-standard.eot?#iefix')
       format('embedded-opentype'),
-    url('/fonts/ss-standard/ss-standard.woff')
+    url('${url}/fonts/ss-standard/ss-standard.woff')
       format('woff'),
-    url('/fonts/ss-standard/ss-standard.ttf')
+    url('${url}/fonts/ss-standard/ss-standard.ttf')
       format('truetype'),
-    url('/fonts/ss-standard/ss-standard.svg#SSStandard')
+    url('${url}/fonts/ss-standard/ss-standard.svg#SSStandard')
       format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Nafees';
-  src: url('/fonts/nafees/nafees-nastaleeq-webfont.eot?#iefix')
+  src: url('${url}/fonts/nafees/nafees-nastaleeq-webfont.eot?#iefix')
       format('embedded-opentype'),
-    url('/fonts/nafees/nafees-nastaleeq-webfont.woff')
+    url('${url}/fonts/nafees/nafees-nastaleeq-webfont.woff')
       format('woff'),
-    url('/fonts/nafees/nafees-nastaleeq-webfont.ttf')
+    url('${url}/fonts/nafees/nafees-nastaleeq-webfont.ttf')
       format('truetype'),
-    url('/fonts/nafees/nafees-nastaleeq-webfont.svg#NafeesRegular')
+    url('${url}/fonts/nafees/nafees-nastaleeq-webfont.svg#NafeesRegular')
       format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'divehi';
-  src: url('/fonts/divehi/divehi.eot?#iefix')
+  src: url('${url}/fonts/divehi/divehi.eot?#iefix')
       format('embedded-opentype'),
-    url('/fonts/divehi/divehi.woff2') format('woff2'),
-    url('/fonts/divehi/divehi.woff') format('woff'),
-    url('/fonts/divehi/divehi.ttf') format('truetype'),
-    url('/fonts/divehi/divehi.svg#dhivehiregular')
+    url('${url}/fonts/divehi/divehi.woff2') format('woff2'),
+    url('${url}/fonts/divehi/divehi.woff') format('woff'),
+    url('${url}/fonts/divehi/divehi.ttf') format('truetype'),
+    url('${url}/fonts/divehi/divehi.svg#dhivehiregular')
       format('svg');
 }
 @font-face {
-  font-family: 'surah_names';
-  src: url('/fonts/surah_names/surah_names.eot?yg3f94');
-  src: url('/fonts/surah_names/surah_names.eot?yg3f94#iefix')
+  font-family: 'surahnames';
+  src: url('${url}/fonts/surah-names/surah-names.eot');
+  src: url('${url}/fonts/surah-names/surah-names.eot#iefix')
       format('embedded-opentype'),
-    url('/fonts/surah_names/surah_names.ttf?yg3f94')
+    url('${url}/fonts/surah-names/surah-names.ttf')
       format('truetype'),
-    url('/fonts/surah_names/surah_names.woff?yg3f94')
+    url('${url}/fonts/surah-names/surah-names.woff')
       format('woff'),
-    url('/fonts/surah_names/surah_names.svg?yg3f94#surah_names')
+    url('${url}/fonts/surah-names/surah-names.svg#surah-names')
       format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'bismillah';
-  src: url('/fonts/bismillah/bismillah.eot?yg3f94');
-  src: url('/fonts/bismillah/bismillah.eot?yg3f94#iefix')
+  src: url('${url}/fonts/bismillah/bismillah.eot');
+  src: url('${url}/fonts/bismillah/bismillah.eot#iefix')
       format('embedded-opentype'),
-    url('/fonts/bismillah/bismillah.ttf?yg3f94')
+    url('${url}/fonts/bismillah/bismillah.ttf')
       format('truetype'),
-    url('/fonts/bismillah/bismillah.woff?yg3f94')
+    url('${url}/fonts/bismillah/bismillah.woff')
       format('woff'),
-    url('/fonts/bismillah/bismillah.svg?yg3f94#bismillah')
+    url('${url}/fonts/bismillah/bismillah.svg#bismillah')
       format('svg');
   font-weight: normal;
   font-style: normal;
