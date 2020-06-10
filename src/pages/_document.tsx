@@ -2,7 +2,8 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
-import GlobalStyle from '../styles/GlobalStyles';
+import { makeGlobalCss } from '../styles/GlobalStyles';
+import makeFonts, { baseUrl } from '../styles/fonts';
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -14,7 +15,6 @@ export default class MyDocument extends Document {
       sheet.collectStyles(
         <>
           <BaseCSS />
-          <GlobalStyle />
           <App {...props} />
         </>,
       ),
@@ -37,6 +37,14 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+          ${makeGlobalCss()}
+          ${makeFonts(baseUrl)}
+          `,
+            }}
+          />
         </Head>
         <body>
           <Main />
