@@ -1,0 +1,16 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      # Utilize a cache when installing deps for a potentially quicker build
+      - uses: bahmutov/npm-install@v1
+      - run: yarn test
+          
