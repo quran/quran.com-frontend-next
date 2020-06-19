@@ -95,7 +95,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   font-family: "SFProText-Regular", "Helvetica Neue", Helvetica, Arial;
-  line-height: 4rem;
+  line-height: 1.47;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -451,6 +451,29 @@ textarea {
   padding: 0.2em 0;
 }
 
+h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: .5rem;
+  font-weight: 500;
+  line-height: 1.57;
+}
+
+// Default h4 color
+h4 {
+  color: #00acc1;
+  font-family: SFProText-Medium;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #8a8a8a;
+}
+
+a:hover {
+  color: #00acc1;
+}
 `;
 
 const GlobalStyle = createGlobalStyle`
