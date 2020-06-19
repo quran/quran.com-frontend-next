@@ -12,7 +12,7 @@
     "lint": "eslint . --ext=tsx,ts,js,jsx",
     "lint:fix": "yarn lint --fix",
     "generate-sitemap": "node sitemap-generator.js ",
-    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
