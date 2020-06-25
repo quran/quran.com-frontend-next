@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import makeFonts, { baseUrl } from './fonts';
 
-export const makeGlobalCss = (baseSize = 16) => `
+export const makeGlobalCss = (baseSize = 16) =>
+  `
 
 html {
   font-size: ${baseSize}px;
@@ -451,7 +452,9 @@ textarea {
   padding: 0.2em 0;
 }
 
-`;
+`
+    .replace(/\n/g, '')
+    .replace(/\s/g, '');
 
 const GlobalStyle = createGlobalStyle`
   ${makeGlobalCss()}
