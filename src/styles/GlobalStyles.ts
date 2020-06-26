@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import makeFonts, { baseUrl } from './fonts';
 
-export const makeGlobalCss = (baseSize = 16) => `
+export const makeGlobalCss = (baseSize = 16) =>
+  `
 
 html {
   font-size: ${baseSize}px;
@@ -474,7 +475,9 @@ a {
 a:hover {
   color: #00acc1;
 }
-`;
+`
+    .replace(/\n/g, '')
+    .replace(/\s/g, '');
 
 const GlobalStyle = createGlobalStyle`
   ${makeGlobalCss()}
