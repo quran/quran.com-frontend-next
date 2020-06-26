@@ -25,6 +25,8 @@
     <a href="https://github.com/quran/quran.com-frontend-next/issues">Report Bug</a>
     ·
     <a href="https://github.com/quran/quran.com-frontend-next/issues">Request Feature</a>
+    •
+    <a href="https://quran.github.io/quran.com-frontend-next/storybook/master">Storybook</a>
   </p>
 </p>
 
@@ -66,6 +68,8 @@ One mistake we made previously is treated each component as unique. This made ou
 ### Storybook.js
 
 Our components are built within Storybook.js. See files with name `.stories.tsx`. This helps engineers view their work outside of the product, making it super easy to test different configurations of the component.
+
+[We also display all our components here](https://quran.github.io/quran.com-frontend-next/storybook/master).
 
 ### Typescript
 
