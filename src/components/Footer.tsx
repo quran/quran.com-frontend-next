@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container, Row, Col } from 'styled-bootstrap-grid';
-import styled from 'styled-components';
+import React from "react";
+import { Container, Row, Col } from "styled-bootstrap-grid";
+import styled from "styled-components";
 
 const FooterContainer = styled.footer`
   float: left;
@@ -78,18 +78,30 @@ const Footer = () => (
             </Title>
             <ul>
               <List>
-                <a href="https://quranicaudio.com/" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://quranicaudio.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Quraninaudio.com
                 </a>
               </List>
               <List>
-                <a href="https://sunnah.com/" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://sunnah.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Salah.com
                 </a>
               </List>
               <List>
-                <a href="https://legacy.quran.com/" target="_blank" rel="noopener noreferrer">
-                  {' '}
+                <a
+                  href="https://legacy.quran.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
                   Legacy Quran.com
                 </a>
               </List>
@@ -121,12 +133,20 @@ const Footer = () => (
                 </a>
               </List>
               <List>
-                <a href="https://quran.com/36" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://quran.com/36"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Surah Yaseen (يس)
                 </a>
               </List>
               <List>
-                <a href="https://quran.com/2/255" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://quran.com/2/255"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Ayat Al-Kursi (آية الكرسي)
                 </a>
               </List>
@@ -137,13 +157,14 @@ const Footer = () => (
           <div className="copyright">
             <Content>
               <span className="en">
-                Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study,
-                and learn The Noble Quran. The Noble Quran has many names including Al-Quran
-                Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.
+                Quran.com is a Sadaqah Jariyah. We hope to make it easy for
+                everyone to read, study, and learn The Noble Quran. The Noble
+                Quran has many names including Al-Quran Al-Kareem, Al-Ketab,
+                Al-Furqan, Al-Maw&apos;itha, Al-Thikr, and Al-Noor.
               </span>
             </Content>
             <p>
-              &copy; 2020 <a href="quran.com">Quran.com</a>.{' '}
+              &copy; 2020 <a href="quran.com">Quran.com</a>.{" "}
               <span className="en">All Rights Reserved</span>
             </p>
           </div>
