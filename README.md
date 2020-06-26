@@ -17,7 +17,7 @@
   <p align="center">
     The official source code repository for Quran.com
     <br />
-    <a href="#contact"><strong>Join the Slack Channel »</strong></a>
+    <a href="https://join.slack.com/t/quran/shared_invite/zt-fepnm2rp-TDTHcUpmgXQ2lt207pd9MA"><strong>Join the Slack Channel »</strong></a>
     <br />
     <br />
     <a href="https://quran.com">Visit Quran.com</a>
@@ -25,6 +25,8 @@
     <a href="https://github.com/quran/quran.com-frontend-next/issues">Report Bug</a>
     ·
     <a href="https://github.com/quran/quran.com-frontend-next/issues">Request Feature</a>
+    •
+    <a href="https://quran.github.io/quran.com-frontend-next/storybook/master">Storybook</a>
   </p>
 </p>
 
@@ -67,6 +69,8 @@ One mistake we made previously is treated each component as unique. This made ou
 
 Our components are built within Storybook.js. See files with name `.stories.tsx`. This helps engineers view their work outside of the product, making it super easy to test different configurations of the component.
 
+[We also display all our components here](https://quran.github.io/quran.com-frontend-next/storybook/master).
+
 ### Typescript
 
 We chose typescript as the language of choice of it's ease of type-safety. Please create types where you see fit.
@@ -77,11 +81,7 @@ If you are interested to help out, please look at issues on the Github repo. Thi
 
 ### Filing bugs
 
-Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏
-
-### Contact
-
-Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new) with your email to join our Slack channel, and we'll try to add you as soon as possible.
+Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new).
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
