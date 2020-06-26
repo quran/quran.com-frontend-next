@@ -17,7 +17,7 @@
   <p align="center">
     The official source code repository for Quran.com
     <br />
-    <a href="#contact"><strong>Join the Slack Channel »</strong></a>
+    <a href="https://join.slack.com/t/quran/shared_invite/zt-fepnm2rp-TDTHcUpmgXQ2lt207pd9MA"><strong>Join the Slack Channel »</strong></a>
     <br />
     <br />
     <a href="https://quran.com">Visit Quran.com</a>
@@ -77,11 +77,7 @@ If you are interested to help out, please look at issues on the Github repo. Thi
 
 ### Filing bugs
 
-Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏
-
-### Contact
-
-Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new) with your email to join our Slack channel, and we'll try to add you as soon as possible.
+Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new).
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
