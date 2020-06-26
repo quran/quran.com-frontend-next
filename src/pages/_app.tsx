@@ -5,7 +5,7 @@ import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
 import Footer from '../components/Footer';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
       <DefaultSeo {...createSEOConfig({})} />
