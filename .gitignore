@@ -43,3 +43,5 @@ out
 .now
 
 public/fonts/
+
+package-lock.json
