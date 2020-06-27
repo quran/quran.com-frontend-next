@@ -19,7 +19,6 @@ rules:
 overrides:
   -
     extends:
-      - "plugin:@typescript-eslint/eslint-recommended"
       - "plugin:@typescript-eslint/recommended"
       - "prettier/@typescript-eslint"
     files: ["*.ts", "*.tsx"]
@@ -34,4 +33,17 @@ overrides:
       react/react-in-jsx-scope: 0
 
       # allow ts-ignore comments
-      "@typescript-eslint/ban-ts-ignore": 0
+      "@typescript-eslint/ban-ts-comment": 0
+
+      # ensure variables, functions, and properties are camelCase, UPPER_CASE, or PascalCase
+      # ensure types are PascalCase
+      "@typescript-eslint/naming-convention":
+        - 2
+        - selector: variableLike
+          format:
+            - camelCase
+            - UPPER_CASE
+            - PascalCase
+        - selector: typeLike
+          format:
+            - PascalCase
