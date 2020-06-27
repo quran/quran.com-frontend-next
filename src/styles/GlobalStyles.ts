@@ -452,14 +452,12 @@ textarea {
   padding: 0.2em 0;
 }
 
-/* 
-  temp fix for select text issue: 
-*/
+/* below style 4 ayat highlighting */
 
 .kQnwuJ{
   user-select: none !important;
 }
-/*end temp fix for selecting text issue: */
+/ *end ayat highlighting  */
 
 `
     .replace(/\n/g, '')
