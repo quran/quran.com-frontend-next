@@ -9,6 +9,7 @@ import { getChapters } from '../api';
 import sunnahImage from '../../public/images/sunnah.png';
 import salahImage from '../../public/images/salah.jpg';
 import qaudioImage from '../../public/images/qaudio.jpeg';
+import Navbar from '../components/ui/navbar';
 
 type IndexProps = {
   chaptersResponse: {
@@ -18,26 +19,29 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   return (
-    <Container>
-      <Row>
-        <CardRow mb={2}>
-          <Card title="Salah" subtitle="Search prayer time for any location" image={salahImage} />
-          <Card
-            title="Sunnah"
-            subtitle="The Hadith of Prophet Muhammad(PBUH)"
-            image={sunnahImage}
-          />
-          <Card
-            title="Noble Quran in audio"
-            subtitle="Learning & listening at the same time"
-            image={qaudioImage}
-          />
-        </CardRow>
-        <ChaptersList chapters={chapters.slice(0, 38)} />
-        <ChaptersList chapters={chapters.slice(38, 76)} />
-        <ChaptersList chapters={chapters.slice(76, 114)} />
-      </Row>
-    </Container>
+    <React.Fragment>
+      <Navbar/>
+      <Container>
+        <Row>
+          <CardRow mb={2}>
+            <Card title="Salah" subtitle="Search prayer time for any location" image={salahImage} />
+            <Card
+              title="Sunnah"
+              subtitle="The Hadith of Prophet Muhammad(PBUH)"
+              image={sunnahImage}
+            />
+            <Card
+              title="Noble Quran in audio"
+              subtitle="Learning & listening at the same time"
+              image={qaudioImage}
+            />
+          </CardRow>
+          <ChaptersList chapters={chapters.slice(0, 38)} />
+          <ChaptersList chapters={chapters.slice(38, 76)} />
+          <ChaptersList chapters={chapters.slice(76, 114)} />
+        </Row>
+      </Container>
+    </React.Fragment>
   );
 };
 
