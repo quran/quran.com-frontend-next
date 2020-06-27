@@ -452,6 +452,15 @@ textarea {
   padding: 0.2em 0;
 }
 
+/* 
+  temp fix for select text issue: 
+*/
+
+.kQnwuJ{
+  user-select: none !important;
+}
+/*end temp fix for selecting text issue: */
+
 `
     .replace(/\n/g, '')
     .replace(/\s/g, '');
