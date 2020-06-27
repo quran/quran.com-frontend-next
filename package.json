@@ -9,7 +9,8 @@
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "lint": "eslint . --ext=tsx,ts,json --fix",
+    "lint": "eslint . --ext=tsx,ts",
+    "lint:fix": "yarn lint --fix",
     "test": "yarn lint"
   },
   "dependencies": {
@@ -79,6 +80,6 @@
     }
   },
   "lint-staged": {
-    "*.{tsx,ts}": "yarn lint"
+    "*.{tsx,ts}": "yarn lint:fix"
   }
 }
