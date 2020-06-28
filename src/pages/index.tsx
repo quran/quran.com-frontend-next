@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps } from 'next';
 import ChaptersList from '../components/chapters/ChapterList';
@@ -19,7 +19,7 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   return (
-    <React.Fragment>
+    <Fragment>
       <Navbar/>
       <Container>
         <Row>
@@ -41,7 +41,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
           <ChaptersList chapters={chapters.slice(76, 114)} />
         </Row>
       </Container>
-    </React.Fragment>
+    </Fragment>
   );
 };
 
