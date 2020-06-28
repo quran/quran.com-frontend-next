@@ -459,68 +459,7 @@ textarea {
 }
 / *end ayat highlighting  */
 
-/*navbar start*/
-.navbar-container{
-  min-height:60px;
-  display:flex;
-  flex-direction:row;
-  background:#32312C;
-  justify-content:space-evenly;
-}
-.navbar-lang{
-  display:inline-block;
-  font-size:10px;
-  color:lightgrey;
-}
-.navbar-quran-title{
-  color:#4CA9BE;
-}
-.navbar-s-input-wrapper{
-  position:relative;
-}  
-.navbar-input-el{
-  background:#1D2021;
-  padding:10px;
-  width: 180%;
-  color: grey;
-  height:40px;
-  outline: none;
-  border: none;
-  position: relative;
-  right: 60%;
-  border-radius:5px;
-}
-.navbar-s-button{
-  position:absolute;
-  top:20px;
-  right:-35px;
-  background-color:#4CA9BE;
-  border:none;
-  border-radius:6px;
-  font-size:12px;
-  color:white;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-.navbar-sicon-wrapper{
-  display:none;
-  position:relative;
-  top:10px;
-  background-color:#4CA9BE;
-  border-radius:5px;
-  text-align: center;
-  height: 40px;
-  color: white;
-  width: 40px;
-}
-.navbar-micon{
-  position:absolute;
-  top:15px;
-  color:grey;
-}
-/* below media query code tested but not working with current setup, pls fix */
+/* below media query code belongs in Navbar component, tested but not working with current setup, pls fix */
 @media screen and (max-width: 885px){
   .navbar-s-input-wrapper{
     display:none;
