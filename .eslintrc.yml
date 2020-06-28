@@ -44,6 +44,15 @@ overrides:
             - camelCase
             - UPPER_CASE
             - PascalCase
+        - selector: memberLike
+          # allow double underscore prefix (e.g. __html)
+          filter:
+            regex: ^__
+            match: false
+          format:
+            - camelCase
+            - UPPER_CASE
+            - PascalCase
         - selector: typeLike
           format:
             - PascalCase
