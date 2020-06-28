@@ -41,7 +41,7 @@ jobs:
           git add .
           git status
           git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
-          git commit -m "Deploy storybook for ${GITHUB_REF##*/}." --allow-empty
+          git commit -m "Deploy storybook for ${GITHUB_REF##*/}."
           git pull --no-edit --quiet
           git push origin gh-pages
         env:
