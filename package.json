@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
+    "dev": "next-translate && next dev",
+    "build": "next-translate && next build",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -24,6 +24,7 @@
     "next-fonts": "^1.0.3",
     "next-optimized-images": "^2.5.5",
     "next-seo": "^4.4.0",
+    "next-translate": "^0.17.1",
     "nextjs-sitemap-generator": "^1.0.0",
     "polished": "^3.6.2",
     "qs": "^6.9.2",
