@@ -30,7 +30,7 @@ const Tabs = ({ initial, children }: TabsProps) => {
   return (
     <div>
       <section role="tabpanel">
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */}
         <nav role="tablist">
           <TabNavList>
             {React.Children.map(children, (child, i) => {
