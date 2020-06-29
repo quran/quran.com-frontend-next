@@ -2,8 +2,8 @@
 import I18nProvider from 'next-translate/I18nProvider'
 import React from 'react'
 import C from '../../../src/pages_/about'
-import ns0 from '../../../locales/ar/common.json'
-import ns1 from '../../../locales/ar/about.json'
+import ns0 from '../../.././locales/ar/common.json'
+import ns1 from '../../.././locales/ar/about.json'
 
 const namespaces = { 'common': ns0, 'about': ns1 }
 

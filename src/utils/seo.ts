@@ -32,7 +32,7 @@ export function createSEOConfig({
     titleTemplate: '%s - Quran.com',
     openGraph: {
       type: 'website',
-      locale: 'en_US',  //TODO: (@abdellatif): adjust this based on the next-translate locale
+      locale: 'en_US', // TODO: (@abdellatif): adjust this based on the next-translate locale
       url: canonicalUrl,
       title: seoTitle,
       description: setDescription,

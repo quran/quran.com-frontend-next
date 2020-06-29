@@ -1,10 +1,11 @@
 // @ts-nocheck
 import I18nProvider from 'next-translate/I18nProvider'
 import React from 'react'
-import C, * as _rest from '../../src/pages_/[chapterId]'
-import ns0 from '../../locales/en/common.json'
+import C, * as _rest from '../../src/pages_'
+import ns0 from '../.././locales/en/common.json'
+import ns1 from '../.././locales/en/home.json'
 
-const namespaces = { 'common': ns0 }
+const namespaces = { 'common': ns0, 'home': ns1 }
 
 export default function Page(p){
   return (
@@ -25,7 +26,7 @@ if(C && C.getInitialProps) {
 }
 
 export const getStaticProps = ctx => _rest.getStaticProps({ ...ctx, lang: 'en' })
-export const getStaticPaths = ctx => _rest.getStaticPaths({ ...ctx, lang: 'en' })
 
 
-export * from '../../src/pages_/[chapterId]'
+
+export * from '../../src/pages_'
