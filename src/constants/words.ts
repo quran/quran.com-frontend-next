@@ -1,4 +1,5 @@
-// eslint-disable-next-line import/prefer-default-export
+/* eslint-disable import/prefer-default-export */
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export enum WORD_TYPES {
   CHAR_TYPE_WORD = 'word',
   CHAR_TYPE_END = 'end',
