@@ -452,14 +452,36 @@ textarea {
   padding: 0.2em 0;
 }
 
-/* 
-  temp fix for select text issue: 
-*/
+/* below style 4 ayat highlighting */
 
 .kQnwuJ{
   user-select: none !important;
 }
-/*end temp fix for selecting text issue: */
+/ *end ayat highlighting  */
+
+/* below media query code belongs in Navbar component, tested but not working with current setup, pls fix */
+@media screen and (max-width: 885px){
+  .navbar-s-input-wrapper{
+    display:none;
+  }
+  .navbar-sicon-wrapper{
+    display:inline-block;
+    position:absolute;
+    right:60px;
+  }
+  .navbar-micon{
+    position:absolute;
+    right:20px;
+  }
+  .navbar-quran-title{
+    position:absolute;
+    left:10px;
+  }
+  .navbar-lang{
+    display:none;
+  }
+}
+/*navbar end*/
 
 `
     .replace(/\n/g, '')
