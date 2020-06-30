@@ -18,6 +18,7 @@
     "@types/styled-components": "^5.1.0",
     "@types/styled-system": "^5.1.9",
     "humps": "^2.0.1",
+    "imagemin-svgo": "^8.0.0",
     "lodash": "^4.17.15",
     "next": "^9.4.4",
     "next-compose-plugins": "^2.2.0",
