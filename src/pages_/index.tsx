@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import ChaptersList from '../components/chapters/ChapterList';
 import ChapterType from '../../types/ChapterType';
 import CardRow from '../components/dls/Cards/CardRow';
@@ -17,21 +18,21 @@ type IndexProps = {
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
+  const { t } = useTranslation();
+  const salah = t('common:Salah');
+  const salahSubtitle = t('home:salahSubtitle');
+  const sunnah = t('common:Sunnah');
+  const sunnahSubtitle = t('home:sunnahSubtitle');
+  const quranAudio = t('home:quranAudio');
+  const quranAudioSubtitle = t('home:quranAudioSubtitle');
+
   return (
     <Container>
       <Row>
         <CardRow mb={2}>
-          <Card title="Salah" subtitle="Search prayer time for any location" image={salahImage} />
-          <Card
-            title="Sunnah"
-            subtitle="The Hadith of Prophet Muhammad(PBUH)"
-            image={sunnahImage}
-          />
-          <Card
-            title="Noble Quran in audio"
-            subtitle="Learning & listening at the same time"
-            image={qaudioImage}
-          />
+          <Card title={salah} subtitle={salahSubtitle} image={salahImage} />
+          <Card title={sunnah} subtitle={sunnahSubtitle} image={sunnahImage} />
+          <Card title={quranAudio} subtitle={quranAudioSubtitle} image={qaudioImage} />
         </CardRow>
         <ChaptersList chapters={chapters.slice(0, 38)} />
         <ChaptersList chapters={chapters.slice(38, 76)} />
