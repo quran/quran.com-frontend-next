@@ -42,7 +42,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const chaptersResponse = await getChapters();
 
   return {
