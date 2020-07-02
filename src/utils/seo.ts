@@ -32,7 +32,7 @@ export function createSEOConfig({
     titleTemplate: '%s - Quran.com',
     openGraph: {
       type: 'website',
-      locale: 'en_US',
+      locale: 'en_US', // TODO: (@abdellatif): adjust this based on the next-translate locale
       url: canonicalUrl,
       title: seoTitle,
       description: setDescription,
@@ -44,7 +44,7 @@ export function createSEOConfig({
           alt: config.siteName,
         },
       ],
-      // eslint-disable-next-line  @typescript-eslint/camelcase
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       site_name: config.siteName,
     },
     twitter: {
