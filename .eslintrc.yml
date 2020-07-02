@@ -46,6 +46,7 @@ overrides:
       react/no-unused-prop-types: 0
       react/prop-types: 0
       react/react-in-jsx-scope: 0
+      import/no-extraneous-dependencies: ["error", {"devDependencies": ["**/*.test.ts", "**/*.test.tsx", 'tests/**/*']}]
 
       # allow ts-ignore comments
       "@typescript-eslint/ban-ts-comment": 0
