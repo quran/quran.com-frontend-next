@@ -96,7 +96,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   font-family: "SFProText-Regular", "Helvetica Neue", Helvetica, Arial;
-  line-height: 4rem;
+  line-height: 1rem;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -452,8 +452,8 @@ textarea {
   padding: 0.2em 0;
 }
 
-/* 
-  temp fix for select text issue: 
+/*
+  temp fix for select text issue:
 */
 
 .kQnwuJ{
