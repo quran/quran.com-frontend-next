@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
 import ChaptersList from '../components/chapters/ChapterList';
 import ChapterType from '../../types/ChapterType';
 import CardRow from '../components/dls/Cards/CardRow';
@@ -10,6 +11,7 @@ import { getChapters } from '../api';
 import sunnahImage from '../../public/images/sunnah.png';
 import salahImage from '../../public/images/salah.jpg';
 import qaudioImage from '../../public/images/qaudio.jpeg';
+import { decrement, selectCount, increment } from '../redux/slices/counter';
 
 type IndexProps = {
   chaptersResponse: {
@@ -25,9 +27,16 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   const sunnahSubtitle = t('home:sunnahSubtitle');
   const quranAudio = t('home:quranAudio');
   const quranAudioSubtitle = t('home:quranAudioSubtitle');
+  const dispatch = useDispatch();
+  const counterValue = useSelector(selectCount);
 
   return (
     <Container>
+      <div style={{ fontSize: 50, margin: 30 }}>
+        <span onClick={() => dispatch({ type: decrement.type })}>-</span>
+        <span>{counterValue}</span>
+        <span onClick={() => dispatch({ type: increment.type })}>+</span>
+      </div>
       <Row>
         <CardRow mb={2}>
           <Card title={salah} subtitle={salahSubtitle} image={salahImage} />
