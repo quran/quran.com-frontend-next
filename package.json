@@ -14,7 +14,8 @@
     "generate-sitemap": "node sitemap-generator.js ",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "chromatic": "npx chromatic --project-token=4vl3po4qjwl"
   },
   "jest-runner-eslint": {
     "cliOptions": {
@@ -74,6 +75,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-graphql-tag": "^2.5.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "chromatic": "^5.0.0",
     "eslint": "^7.3.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
