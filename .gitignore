@@ -46,6 +46,7 @@ out
 .now
 public/fonts/
 build/
+storybook-static/
 
 package-lock.json
 coverage
