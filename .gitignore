@@ -45,6 +45,7 @@ out
 
 .now
 public/fonts/
+build/
 
 package-lock.json
 coverage
