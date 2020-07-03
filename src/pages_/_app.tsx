@@ -2,19 +2,22 @@ import React from 'react';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
 import Footer from '../components/Footer';
-import store from '../redux/store';
+import store, { persistor } from '../redux/store';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <DefaultSeo {...createSEOConfig({})} />
-        <Component {...pageProps} />
-        <Footer />
-      </ThemeProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <DefaultSeo {...createSEOConfig({})} />
+          <Component {...pageProps} />
+          <Footer />
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }
