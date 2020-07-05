@@ -1,30 +1,41 @@
-extends: 
+extends:
   - airbnb
   - airbnb/hooks
-  - "plugin:import/typescript"
+  - 'plugin:import/typescript'
   - prettier
   - prettier/react
 parser: babel-eslint
-plugins: 
+plugins:
   - prettier
-rules: 
+rules:
   react/jsx-filename-extension: 0 # allow jsx in non .jsx files
   react/jsx-props-no-spreading: 0 # allow spreading props
-  import/extensions: 
+  import/extensions:
     - 2
     - ignorePackages
-    - 
-      ts: never
+    - ts: never
       tsx: never
+  prettier/prettier:
+    - 2
+    - arrowParens: always
+      bracketSpacing: true
+      jsxBracketSameLine: false
+      printWidth: 100
+      proseWrap: always
+      requirePragma: false
+      semi: true
+      singleQuote: true
+      tabWidth: 2
+      trailingComma: all
+      useTabs: false
+
 overrides:
-  -
-    extends:
-      - "plugin:@typescript-eslint/eslint-recommended"
-      - "plugin:@typescript-eslint/recommended"
-      - "prettier/@typescript-eslint"
-    files: ["*.ts", "*.tsx"]
+  - extends:
+      - 'plugin:@typescript-eslint/recommended'
+      - 'prettier/@typescript-eslint'
+    files: ['*.ts', '*.tsx']
     rules:
-      "@typescript-eslint/no-unused-vars": 2
+      '@typescript-eslint/no-unused-vars': 2
 
       # these are checked by the TS compiler
       react/forbid-prop-types: 0
@@ -32,6 +43,30 @@ overrides:
       react/no-unused-prop-types: 0
       react/prop-types: 0
       react/react-in-jsx-scope: 0
+      import/no-extraneous-dependencies:
+        ['error', { 'devDependencies': ['**/*.test.ts', '**/*.test.tsx', 'tests/**/*'] }]
 
       # allow ts-ignore comments
-      "@typescript-eslint/ban-ts-ignore": 0
+      '@typescript-eslint/ban-ts-comment': 0
+
+      # ensure variables, functions, and properties are camelCase, UPPER_CASE, or PascalCase
+      # ensure types are PascalCase
+      '@typescript-eslint/naming-convention':
+        - 2
+        - selector: variableLike
+          format:
+            - camelCase
+            - UPPER_CASE
+            - PascalCase
+        - selector: memberLike
+          # allow double underscore prefix (e.g. __html)
+          filter:
+            regex: ^__
+            match: false
+          format:
+            - camelCase
+            - UPPER_CASE
+            - PascalCase
+        - selector: typeLike
+          format:
+            - PascalCase

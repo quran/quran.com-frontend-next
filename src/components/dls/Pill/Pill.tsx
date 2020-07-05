@@ -12,7 +12,7 @@ const PillContainer = styled.div`
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 50px;
+  border-radius: 24px;
   background: ${({ theme }) => rgba(theme.colors.primary, 0.15)};
   border: 1px solid ${({ theme }) => rgba(theme.colors.primary, 0.5)};
   padding: 0.75rem 2rem;

@@ -1,16 +1,9 @@
-import fetch from 'isomorphic-unfetch';
 import { camelizeKeys } from 'humps';
 import { makeUrl } from './utils/api';
 import ChapterType from '../types/ChapterType';
 import VerseType from '../types/VerseType';
 
-// const instance = axios.create({
-//   baseURL: 'https://some-domain.com/api/',
-//   timeout: 1000,
-//   headers: {'X-Custom-Header': 'foobar'}
-// });
-
-export const fetcher = async function(input: RequestInfo, init?: RequestInit) {
+export const fetcher = async function (input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
   return res.json();
 };

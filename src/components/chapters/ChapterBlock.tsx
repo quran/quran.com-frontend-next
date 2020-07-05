@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
+import Link from 'next-translate/Link';
 import ChapterIcon from './ChapterIcon';
 import ChapterType from '../../../types/ChapterType';
 

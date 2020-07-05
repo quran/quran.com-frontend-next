@@ -1,3 +1,6 @@
+# Auto-generated pages directory
+src/pages
+
 # Logs
 logs
 *.log
@@ -41,5 +44,10 @@ node_modules/
 out
 
 .now
-
 public/fonts/
+build/
+storybook-static/
+
+package-lock.json
+coverage
+.jest-test-results.json

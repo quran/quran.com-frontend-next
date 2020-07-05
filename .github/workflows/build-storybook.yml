@@ -8,18 +8,18 @@ jobs:
   build-storybook:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: npm install
-      run: |
-        npm install
-    - name: Build Storybook
-      run: |
-        npm run build-storybook
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: storybook-files
-        path: storybook-static
+      - uses: actions/checkout@v2
+      - name: npm install
+        run: |
+          npm install
+      - name: Build Storybook
+        run: |
+          npm run build-storybook
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: storybook-files
+          path: storybook-static
 
   deploy-storybook:
     runs-on: ubuntu-latest
@@ -40,6 +40,7 @@ jobs:
           mv storybook-static storybook/${GITHUB_REF##*/}
           git add .
           git status
+          git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
           git commit -m "Deploy storybook for ${GITHUB_REF##*/}."
           git pull --no-edit --quiet
           git push origin gh-pages
@@ -48,3 +49,10 @@ jobs:
           GIT_AUTHOR_NAME: ${{ github.actor }}
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
+  deploy-chromatic:
+    runs-on: ubuntu-latest
+    - uses: chromaui/action@v1
+      with:
+        projectToken: 4vl3po4qjwl
+        token: ${{ secrets.GITHUB_TOKEN }}
+        exitOnceUploaded: true
