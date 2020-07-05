@@ -96,7 +96,7 @@ video {
   font: inherit;
   vertical-align: baseline;
   font-family: "SFProText-Regular", "Helvetica Neue", Helvetica, Arial;
-  line-height: 1.47rem;
+  line-height: 1.25rem;
 }
 
 /* make sure to set some focus styles for accessibility */
