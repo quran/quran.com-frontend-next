@@ -5,7 +5,8 @@ const AnchorStyle = styled.a`
   cursor: pointer;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.grey['2']};
-  & :hover {
+
+  &:hover {
     color: ${({ theme }) => theme.colors.primary};
   }
 `;
