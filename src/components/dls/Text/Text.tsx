@@ -5,7 +5,7 @@ const primaryColor = css`
 `;
 
 const largeSize = css`
-  font-size: ${({ theme }) => theme.fontSizes[2]};
+  font-size: ${({ theme }) => theme.fontSizes[3]};
 `;
 
 const smallSize = css`
