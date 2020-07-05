@@ -1,28 +1,30 @@
-import React from "react";
-import { Container, Row, Col } from "styled-bootstrap-grid";
-import styled from "styled-components";
+import React from 'react';
+import { Container, Row, Col } from 'styled-bootstrap-grid';
+import styled from 'styled-components';
+import Text from './dls/Text/Text';
+import Anchor from './Anchor';
 
 const FooterContainer = styled.footer`
   float: left;
   width: 100%;
-  background: #eee;
-  font-size: 14px;
-  color: #8a8a8a;
-  padding: 30px 20px;
+  background: ${({ theme }) => theme.colors.grey['1']};
+  font-size: ${({ theme }) => theme.fontSizes[2]};
+  color: ${({ theme }) => theme.colors.grey['2']};
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 `;
 
 const FooterTab = styled.div`
   float: left;
   width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Title = styled.h4`
-  font-size: 20px;
+  margin-bottom: 1.25rem;
 `;
 
 const List = styled.li`
-  margin: 5px 0;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 `;
 
 const Copyright = styled(Col)`
@@ -39,135 +41,76 @@ const Footer = () => (
       <Row>
         <Col lg={2} md={3} sm={6}>
           <FooterTab>
-            <Title>
-              <span className="en">Navigate</span>
-            </Title>
+            <Text primary large>
+              Navigate
+            </Text>
             <ul>
               <List>
-                <a href="/pages/apps">
-                  <span className="en">Download</span>
-                </a>
+                <Anchor href="/pages/apps">Download</Anchor>
               </List>
               <List>
-                <a href="/pages/about_us">
-                  <span className="en">About us</span>
-                </a>
+                <Anchor href="/pages/about_us">About us</Anchor>
               </List>
               <List>
-                <a href="/pages/donations">
-                  <span className="en">Contribute</span>
-                </a>
+                <Anchor href="/pages/donations">Contribute</Anchor>
               </List>
               <List>
-                <a href="/pages/help_and_feedback">
-                  <span className="en">Help & feedback</span>
-                </a>
+                <Anchor href="/pages/help_and_feedback">Help & feedback</Anchor>
               </List>
               <List>
-                <a href="/pages/developers">
-                  <span className="en">Developers</span>
-                </a>
+                <Anchor href="/pages/developers">Developers</Anchor>
               </List>
             </ul>
           </FooterTab>
         </Col>
         <Col lg={2} md={3} sm={6}>
           <FooterTab>
-            <Title>
-              <span className="en">Useful sites</span>
-            </Title>
+            <Text primary large>
+              Useful sites
+            </Text>
             <ul>
               <List>
-                <a
-                  href="https://quranicaudio.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Quraninaudio.com
-                </a>
+                <Anchor href="https://quranicaudio.com/">Quraninaudio.com</Anchor>
               </List>
               <List>
-                <a
-                  href="https://sunnah.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Salah.com
-                </a>
+                <Anchor href="https://sunnah.com/">Salah.com</Anchor>
               </List>
               <List>
-                <a
-                  href="https://legacy.quran.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {" "}
-                  Legacy Quran.com
-                </a>
+                <Anchor href="https://legacy.quran.com/">Legacy Quran.com</Anchor>
               </List>
               <List>
-                <a
-                  href="https://corpus.quran.com/wordbyword.jsp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Corpus.Quran.com
-                </a>
+                <Anchor href="https://corpus.quran.com/wordbyword.jsp">Corpus.Quran.com</Anchor>
               </List>
             </ul>
           </FooterTab>
         </Col>
         <Col lg={2} md={3} sm={6}>
           <FooterTab>
-            <Title>
-              <span className="en">Other links</span>
-            </Title>
+            <Text primary large>
+              Other links
+            </Text>
             <ul>
               <List>
-                <a
-                  href="https://quran.com/sitemap.xml.gz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Sitemap
-                </a>
+                <Anchor href="https://quran.com/sitemap.xml.gz">Sitemap</Anchor>
               </List>
               <List>
-                <a
-                  href="https://quran.com/36"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Surah Yaseen (يس)
-                </a>
+                <Anchor href="https://quran.com/36">Surah Yaseen (يس)</Anchor>
               </List>
               <List>
-                <a
-                  href="https://quran.com/2/255"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Ayat Al-Kursi (آية الكرسي)
-                </a>
+                <Anchor href="https://quran.com/2/255">Ayat Al-Kursi (آية الكرسي)</Anchor>
               </List>
             </ul>
           </FooterTab>
         </Col>
         <Copyright lg={4} md={6} sm={12}>
-          <div className="copyright">
-            <Content>
-              <span className="en">
-                Quran.com is a Sadaqah Jariyah. We hope to make it easy for
-                everyone to read, study, and learn The Noble Quran. The Noble
-                Quran has many names including Al-Quran Al-Kareem, Al-Ketab,
-                Al-Furqan, Al-Maw&apos;itha, Al-Thikr, and Al-Noor.
-              </span>
-            </Content>
-            <p>
-              &copy; 2020 <a href="quran.com">Quran.com</a>.{" "}
-              <span className="en">All Rights Reserved</span>
-            </p>
-          </div>
+          <Content>
+            Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and
+            learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem,
+            Al-Ketab, Al-Furqan, Al-Maw&apos;itha, Al-Thikr, and Al-Noor.
+          </Content>
+          <Content>
+            &copy; 2020 <Anchor href="quran.com">Quran.com</Anchor>. All Rights Reserved
+          </Content>
         </Copyright>
       </Row>
     </Container>
