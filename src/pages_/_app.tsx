@@ -1,21 +1,20 @@
 import React from 'react';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
-import { Provider } from 'react-redux';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
 import Footer from '../components/Footer';
-import store from '../redux/store';
+import ReduxProvider from '../redux/Provider';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (
-    <Provider store={store}>
+    <ReduxProvider>
       <ThemeProvider theme={theme}>
         <DefaultSeo {...createSEOConfig({})} />
         <Component {...pageProps} />
         <Footer />
       </ThemeProvider>
-    </Provider>
+    </ReduxProvider>
   );
 }
 
