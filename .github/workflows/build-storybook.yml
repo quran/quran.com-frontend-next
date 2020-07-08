@@ -9,10 +9,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: npm install
         run: |
-          npm install
+          yarn
       - name: Build Storybook
         run: |
-          npm run build-storybook
+          yarn build-storybook
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
