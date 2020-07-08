@@ -13,4 +13,3 @@ jobs:
       # Utilize a cache when installing deps for a potentially quicker build
       - uses: bahmutov/npm-install@v1
       - run: yarn test
-          

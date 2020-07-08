@@ -1,7 +1,7 @@
 extends:
   - airbnb
   - airbnb/hooks
-  - "plugin:import/typescript"
+  - 'plugin:import/typescript'
   - 'plugin:prettier/recommended'
   - prettier/react
 parser: babel-eslint
@@ -18,9 +18,9 @@ rules:
 
 overrides:
   - extends:
-      - "plugin:@typescript-eslint/recommended"
-      - "prettier/@typescript-eslint"
-    files: ["*.ts", "*.tsx"]
+      - 'plugin:@typescript-eslint/recommended'
+      - 'prettier/@typescript-eslint'
+    files: ['*.ts', '*.tsx']
     rules:
       "@typescript-eslint/no-unused-vars": 2
       "@typescript-eslint/explicit-module-boundary-types": off # allow typescript to automatically determine the return type
@@ -36,19 +36,14 @@ overrides:
       react/prop-types: 0
       react/react-in-jsx-scope: 0
       import/no-extraneous-dependencies:
-        [
-          "error",
-          {
-            "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "tests/**/*"],
-          },
-        ]
+        ['error', { 'devDependencies': ['**/*.test.ts', '**/*.test.tsx', 'tests/**/*'] }]
 
       # allow ts-ignore comments
-      "@typescript-eslint/ban-ts-comment": 0
+      '@typescript-eslint/ban-ts-comment': 0
 
       # ensure variables, functions, and properties are camelCase, UPPER_CASE, or PascalCase
       # ensure types are PascalCase
-      "@typescript-eslint/naming-convention":
+      '@typescript-eslint/naming-convention':
         - 2
         - selector: variableLike
           format:
@@ -71,9 +66,9 @@ settings:
   import/resolver:
     node:
       paths:
-        - "."
+        - '.'
       extensions:
-        - ".js"
-        - ".jsx"
-        - ".ts"
-        - ".tsx"
+        - '.js'
+        - '.jsx'
+        - '.ts'
+        - '.tsx'
