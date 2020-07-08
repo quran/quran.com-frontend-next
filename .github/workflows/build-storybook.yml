@@ -1,9 +1,7 @@
-name: build-storybook
+name: Build Storybook and Chromatic
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
+
 jobs:
   build-storybook:
     runs-on: ubuntu-latest
