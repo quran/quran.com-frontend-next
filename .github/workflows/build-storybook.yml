@@ -50,6 +50,9 @@ jobs:
   deploy-chromatic:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - run: |
+          yarn
       - uses: chromaui/action@v1
         with:
           projectToken: 4vl3po4qjwl
