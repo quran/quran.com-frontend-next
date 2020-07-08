@@ -2,7 +2,7 @@ extends:
   - airbnb
   - airbnb/hooks
   - "plugin:import/typescript"
-  - prettier
+  - 'plugin:prettier/recommended'
   - prettier/react
 parser: babel-eslint
 plugins:
@@ -15,19 +15,6 @@ rules:
     - ignorePackages
     - ts: never
       tsx: never
-  prettier/prettier:
-    - 2
-    - arrowParens: always
-      bracketSpacing: true
-      jsxBracketSameLine: false
-      printWidth: 100
-      proseWrap: always
-      requirePragma: false
-      semi: true
-      singleQuote: true
-      tabWidth: 2
-      trailingComma: all
-      useTabs: false
 
 overrides:
   - extends:
