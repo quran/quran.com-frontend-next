@@ -1,60 +1,28 @@
 import React from 'react';
-import pad from 'lodash/pad';
-import WordWrap from './WordWrap';
-import WordGlyph from './WordGlyph';
-import WordType from '../../../../types/WordType';
-import { WORD_TYPES } from '../../../constants/words';
-import WordTransparent from './WordTransparent';
+import WordType from 'types/WordType';
+import IndoPakWordText from './IndoPakWordText';
+import MadaniWordText from './MadaniWordText';
+import UthmaniWordText from './UthmaniWordText';
 
 type QuranWordProps = {
   word: WordType;
-  setCurrentWord?: $TsFixMe;
-  pause?: $TsFixMe;
-  setCurrentVerseKey?: $TsFixMe;
-  playCurrentWord?: $TsFixMe;
-  tooltip: 'translation' | 'transliteration';
-  audioPosition?: number;
-  isCurrentVersePlaying?: boolean;
-  isSearched?: boolean;
-  useTextFont?: boolean;
+  fontStyle?: 'textMadani' | 'uthmani' | 'indopak';
+  highlight?: boolean;
 };
 
-const QuranWord = ({
-  word,
-  isCurrentVersePlaying = false,
-  audioPosition,
-  useTextFont,
-}: QuranWordProps) => {
-  let text = '';
+const QuranWord = (props: QuranWordProps) => {
+  const { word, fontStyle } = props;
+  let WordText;
 
-  // const className = `${useTextFont ? 'text-' : ''}${word.className} ${word.charType} ${
-  //   word.highlight ? word.highlight : ''
-  // }`;
-
-  if (useTextFont) {
-    if (word.charType === WORD_TYPES.CHAR_TYPE_END) {
-      text = pad(word.verseKey.split(':')[1], 3, '0');
-    } else if (word.textMadani) {
-      text = word.textMadani;
-    }
+  if (fontStyle === 'uthmani') {
+    WordText = <UthmaniWordText code={word.code} pageNumber={123} />;
+  } else if (fontStyle === 'indopak') {
+    WordText = <IndoPakWordText text={word.textMadani} />;
   } else {
-    text = word.code;
+    WordText = <MadaniWordText text={word.textMadani} />;
   }
 
-  return (
-    <WordWrap
-      role="button"
-      tabIndex={audioPosition}
-      highlight={isCurrentVersePlaying}
-      // onDoubleClick={this.handleSegmentPlay}
-      // onClick={this.handleWordPlay}
-      // onKeyPress={this.handleWordPlay}
-    >
-      <WordGlyph wordClassName={word.className} dangerouslySetInnerHTML={{ __html: text }} />
-
-      <WordTransparent dangerouslySetInnerHTML={{ __html: `${word.textMadani} ` || ' ' }} />
-    </WordWrap>
-  );
+  return WordText;
 };
 
 export default QuranWord;
