@@ -15,7 +15,7 @@ const QuranWord = (props: QuranWordProps) => {
   let WordText;
 
   if (fontStyle === 'uthmani') {
-    WordText = <UthmaniWordText code={word.code} pageNumber={123} />;
+    WordText = <UthmaniWordText code={word.code} pageNumber={word.pageNumber} />;
   } else if (fontStyle === 'indopak') {
     WordText = <IndoPakWordText text={word.textMadani} />;
   } else {

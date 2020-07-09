@@ -7,8 +7,12 @@ type UthmaniWordTextProps = {
 };
 
 const UthmaniWordText = (props: UthmaniWordTextProps) => {
-  const { code } = props;
-  return <div className={code} />;
+  const { code, pageNumber } = props;
+
+  // eslint-disable-next-line react/no-danger
+  return (
+    <span style={{ fontFamily: `p${pageNumber}` }} dangerouslySetInnerHTML={{ __html: code }} />
+  ); // Eslint
 };
 
 export default UthmaniWordText;
