@@ -36,6 +36,12 @@ ${makePageNumberFonts(url)}
     text-align: left;
   }
 }
+
+// TODO (@abdellatif): host the IndoPak font on digital ocean
+@font-face {
+  font-family: IndoPak,
+  src: url('https://cdn.qurancdn.com/packs/media/fonts/quran_fonts/pdms/pdms-saleem-quranfont-15655c16c81400acbb1afa946de8b8e8.ttf') format('truetype');
+}
 @font-face {
   font-family: 'SFProText-Regular';
   src: local("SFProText Regular"), local("SFProText-Regular"),
