@@ -6,7 +6,7 @@ type MadaniWordTextProps = {
 
 const MadaniWordText = (props: MadaniWordTextProps) => {
   const { text } = props;
-  return <span>{text}</span>;
+  return <span>{`${text} `}</span>;
 };
 
 export default MadaniWordText;

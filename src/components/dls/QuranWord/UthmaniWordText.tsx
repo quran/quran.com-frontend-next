@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type UthmaniWordTextProps = {
   code: string;
@@ -11,8 +12,11 @@ const UthmaniWordText = (props: UthmaniWordTextProps) => {
 
   // eslint-disable-next-line react/no-danger
   return (
-    <span style={{ fontFamily: `p${pageNumber}` }} dangerouslySetInnerHTML={{ __html: code }} />
-  ); // Eslint
+    <StyledUthmaniWordText pageNumber={pageNumber} dangerouslySetInnerHTML={{ __html: code }} />
+  );
 };
 
+const StyledUthmaniWordText = styled.span<{ pageNumber: number }>`
+  font-family: ${(props) => `p${props.pageNumber}`};
+`;
 export default UthmaniWordText;

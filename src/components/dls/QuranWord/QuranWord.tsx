@@ -6,7 +6,7 @@ import UthmaniWordText from './UthmaniWordText';
 
 type QuranWordProps = {
   word: WordType;
-  fontStyle?: 'textMadani' | 'uthmani' | 'indopak';
+  fontStyle?: 'madani' | 'uthmani' | 'indopak';
   highlight?: boolean;
 };
 

@@ -12,7 +12,7 @@ const VerseText = ({ verse }: VerseTextProps) => (
       <QuranWord
         key={[word.position, word.code, word.lineNum].join('-')}
         word={word}
-        fontStyle="uthmani"
+        fontStyle="indopak"
       />
     ))}
   </>
