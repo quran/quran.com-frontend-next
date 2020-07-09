@@ -10,8 +10,8 @@ type UthmaniWordTextProps = {
 const UthmaniWordText = (props: UthmaniWordTextProps) => {
   const { code, pageNumber } = props;
 
-  // eslint-disable-next-line react/no-danger
   return (
+    // eslint-disable-next-line react/no-danger
     <StyledUthmaniWordText pageNumber={pageNumber} dangerouslySetInnerHTML={{ __html: code }} />
   );
 };
