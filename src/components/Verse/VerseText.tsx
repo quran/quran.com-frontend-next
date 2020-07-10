@@ -29,13 +29,13 @@ const VerseText = ({ verse, fontStyle }: VerseTextProps) => {
 };
 
 const StyledVerseText = styled.div<{ styles: QuranReaderStyles }>`
-  display: inline-block;
   line-height: ${(props) => props.styles.quranTextLineHeight}rem;
+  line-break: anywhere;
 `;
 
 const StyledVerseTextContainer = styled.div<{ styles: QuranReaderStyles }>`
+  display: inline-block;
   direction: rtl;
-  line-break: anywhere;
   font-size: ${(props) => props.styles.quranTextFontSize}rem;
   letter-spacing: ${(props) => props.styles.quranTextLetterSpacing}rem;
 `;
