@@ -2,14 +2,24 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const FONT_SCALING_FACTOR = 1.1;
 
+export type QuranReaderStyles = {
+  translationFontSize: number;
+  quranTextFontSize: number;
+  quranTextLineHeight: number;
+  quranTextLetterSpacing: number;
+};
+
+const initialState: QuranReaderStyles = {
+  // the base sizes in rem
+  translationFontSize: 1,
+  quranTextFontSize: 2,
+  quranTextLineHeight: 3,
+  quranTextLetterSpacing: 0.25,
+};
+
 export const quranReaderStylesSlice = createSlice({
   name: 'quranReaderStyles',
-  initialState: {
-    // the base sizes in rem
-    translationFontSize: 2,
-    quranTextFontSize: 3,
-    quranTextlineHeight: 0.25,
-  },
+  initialState,
   reducers: {
     increaseTranslationTextSize: (state) => {
       return {
@@ -21,7 +31,8 @@ export const quranReaderStylesSlice = createSlice({
       return {
         ...state,
         quranTextFontSize: state.quranTextFontSize * FONT_SCALING_FACTOR,
-        quranTextlineHeight: state.quranTextlineHeight * FONT_SCALING_FACTOR,
+        quranTextLineHeight: state.quranTextLineHeight * FONT_SCALING_FACTOR,
+        quranTextLetterSpacing: state.quranTextLetterSpacing * FONT_SCALING_FACTOR,
       };
     },
     decreaseTranslationTextSize: (state) => {
@@ -34,7 +45,8 @@ export const quranReaderStylesSlice = createSlice({
       return {
         ...state,
         quranTextFontSize: state.quranTextFontSize / FONT_SCALING_FACTOR,
-        quranTextlineHeight: state.quranTextlineHeight / FONT_SCALING_FACTOR,
+        quranTextLineHeight: state.quranTextLineHeight / FONT_SCALING_FACTOR,
+        quranTextLetterSpacing: state.quranTextLetterSpacing / FONT_SCALING_FACTOR,
       };
     },
   },
@@ -47,6 +59,6 @@ export const {
   decreaseTranslationTextSize,
 } = quranReaderStylesSlice.actions;
 
-export const selectQuranReaderStyle = (state) => state.quranReaderStyle;
+export const selectQuranReaderStyles = (state) => state.quranReaderStyles;
 
 export default quranReaderStylesSlice.reducer;

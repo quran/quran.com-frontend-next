@@ -14,7 +14,6 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
       {verses.map((verse) => (
         <VerseTextContainer key={verse.id}>
           <VerseText verse={verse} fontStyle="uthmani" />
-          {/* TODO (@abdellatif): use the translation from the API */}
           <StyledText>{verse.translations && verse.translations[0]?.text}</StyledText>
           <hr />
         </VerseTextContainer>
