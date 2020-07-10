@@ -11,16 +11,18 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import quranReaderStyles from './slices/QuranReader/styles';
+import readingMode from './slices/QuranReader/readingMode';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['quranReaderStyles'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
+  whitelist: ['quranReaderStyles', 'readingMode'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
 const rootReducer = combineReducers({
   quranReaderStyles,
+  readingMode,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
