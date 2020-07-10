@@ -23,7 +23,7 @@ const StyledMushafView = styled.div`
   letter-spacing: 0.25rem; //TODO (@abdellatif): update to use the theme font size
   max-width: 100%;
   direction: rtl;
-  margin: 1rem;
+  margin: 1rem auto;
 `;
 
 export default MushafView;
