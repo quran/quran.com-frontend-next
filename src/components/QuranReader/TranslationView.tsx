@@ -15,7 +15,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
         <VerseTextContainer key={verse.id}>
           <VerseText verse={verse} fontStyle="uthmani" />
           {/* TODO (@abdellatif): use the translation from the API */}
-          <StyledText>This is a sample translation</StyledText>
+          <StyledText>{verse.translations && verse.translations[0]?.text}</StyledText>
           <hr />
         </VerseTextContainer>
       ))}
@@ -23,15 +23,10 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
   );
 };
 
-const VerseTextContainer = styled.div`
-  font-size: 2rem; //TODO (@abdellatif): update to use the theme font size
-  line-height: 3rem; //TODO (@abdellatif): update to use the theme font size
-  letter-spacing: 0.25rem; //TODO (@abdellatif): update to use the theme font size
-`;
+const VerseTextContainer = styled.div``;
 
 const StyledTranslationView = styled.div`
   max-width: 100%;
-  direction: rtl;
   margin: 1rem auto;
 `;
 

@@ -16,10 +16,14 @@ type ChapterProps = {
 };
 
 const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesResponse }) => {
-  const { data } = useSWR(makeUrl(`/chapters/${chapter.id}/`), fetcher, {
-    initialData: versesResponse,
-    revalidateOnFocus: false,
-  });
+  const { data } = useSWR(
+    makeUrl(`/chapters/${chapter.id}/verses?translations=20`), // TODO: select the translation using a helper function
+    fetcher,
+    {
+      initialData: versesResponse,
+      revalidateOnFocus: false,
+    },
+  );
 
   return (
     <Container>
