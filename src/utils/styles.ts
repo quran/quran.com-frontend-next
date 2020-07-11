@@ -23,7 +23,7 @@ export const theme = {
     text: '#607d8b',
     gray: '#777',
     black: '#000000',
-    grey: { '1': '#eee', '2': '#8a8a8a' },
+    grey: { grey1: '#eee', grey2: '#8a8a8a' },
   },
   breakpoints: {
     sm: '576px',

@@ -7,9 +7,9 @@ import Anchor from './Anchor/Anchor';
 const FooterContainer = styled.footer`
   float: left;
   width: 100%;
-  background: ${({ theme }) => theme.colors.grey['1']};
+  background: ${({ theme }) => theme.colors.grey.grey1};
   font-size: ${({ theme }) => theme.fontSizes[2]};
-  color: ${({ theme }) => theme.colors.grey['2']};
+  color: ${({ theme }) => theme.colors.grey.grey2};
   padding-top: 1.875rem;
   padding-bottom: 1.875rem;
   padding-left: 1.25rem;

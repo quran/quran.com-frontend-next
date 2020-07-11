@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const AnchorStyle = styled.a`
   cursor: pointer;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.grey['2']};
+  color: ${({ theme }) => theme.colors.grey.grey2};
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
