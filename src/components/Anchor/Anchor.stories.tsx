@@ -1,5 +1,5 @@
 import React from 'react';
-import Anchor from '.';
+import Anchor from './Anchor';
 
 export default {
   title: 'dls|Anchor',
