@@ -1,4 +1,4 @@
-enum ReadingView {
+export enum ReadingView {
   Translation = 'translation', // Displays verse by verse with translation
   QuranPage = 'quranPage', // Displays the Quran text only similar to a physical Quran page
 }
