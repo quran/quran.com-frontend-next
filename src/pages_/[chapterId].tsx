@@ -27,7 +27,7 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesR
 
   return (
     <Container>
-      <Row>{data.verses && <QuranReader verses={data.verses} view="reading" />}</Row>
+      <Row>{data.verses && <QuranReader verses={data.verses} />}</Row>
     </Container>
   );
 };
