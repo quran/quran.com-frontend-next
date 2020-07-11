@@ -5,9 +5,9 @@ import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import ChapterType from '../../types/ChapterType';
 import { getChapters, getChapter, getChapterVerses, fetcher } from '../api';
-import VersesList from '../components/verses/VersesList';
 import { makeUrl } from '../utils/api';
 import VerseType from '../../types/VerseType';
+import QuranReader from '../components/QuranReader';
 
 type ChapterProps = {
   chaptersResponse: { chapters: ChapterType[] };
@@ -16,14 +16,18 @@ type ChapterProps = {
 };
 
 const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesResponse }) => {
-  const { data } = useSWR(makeUrl(`/chapters/${chapter.id}/verses`), fetcher, {
-    initialData: versesResponse,
-    revalidateOnFocus: false,
-  });
+  const { data } = useSWR(
+    makeUrl(`/chapters/${chapter.id}/verses?translations=20`), // TODO: select the translation using the user preference
+    fetcher,
+    {
+      initialData: versesResponse,
+      revalidateOnFocus: false,
+    },
+  );
 
   return (
     <Container>
-      <Row>{data.verses && <VersesList chapter={chapter} verses={data.verses} />}</Row>
+      <Row>{data.verses && <QuranReader verses={data.verses} />}</Row>
     </Container>
   );
 };

@@ -1,9 +1,7 @@
-name: build-storybook
+name: Build Storybook and Chromatic
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
+
 jobs:
   build-storybook:
     runs-on: ubuntu-latest
@@ -11,10 +9,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: npm install
         run: |
-          npm install
+          yarn
       - name: Build Storybook
         run: |
-          npm run build-storybook
+          yarn build-storybook
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
@@ -51,8 +49,12 @@ jobs:
           GIT_COMMITTER_NAME: ${{ github.actor }}
   deploy-chromatic:
     runs-on: ubuntu-latest
-    - uses: chromaui/action@v1
-      with:
-        projectToken: 4vl3po4qjwl
-        token: ${{ secrets.GITHUB_TOKEN }}
-        exitOnceUploaded: true
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          yarn
+      - uses: chromaui/action@v1
+        with:
+          projectToken: 4vl3po4qjwl
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exitOnceUploaded: true
