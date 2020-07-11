@@ -17,7 +17,7 @@ type ChapterProps = {
 
 const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesResponse }) => {
   const { data } = useSWR(
-    makeUrl(`/chapters/${chapter.id}/verses?translations=20`), // TODO: select the translation using the user preference
+    makeUrl(`/chapters/${chapter.id}/verses`, { translations: 20 }), // TODO: select the translation using the user preference
     fetcher,
     {
       initialData: versesResponse,
