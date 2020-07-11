@@ -1,12 +1,13 @@
 import React from 'react';
 import WordType from 'types/WordType';
+import { QuranFonts } from 'src/components/QuranReader/types';
 import IndoPakWordText from './IndoPakWordText';
 import MadaniWordText from './MadaniWordText';
 import UthmaniWordText from './UthmaniWordText';
 
 type QuranWordProps = {
   word: WordType;
-  fontStyle?: 'madani' | 'uthmani' | 'indopak';
+  fontStyle?: QuranFonts;
   highlight?: boolean;
 };
 
@@ -14,9 +15,9 @@ const QuranWord = (props: QuranWordProps) => {
   const { word, fontStyle } = props;
   let WordText;
 
-  if (fontStyle === 'uthmani') {
+  if (fontStyle === QuranFonts.Uthmani) {
     WordText = <UthmaniWordText code={word.code} pageNumber={word.pageNumber} />;
-  } else if (fontStyle === 'indopak') {
+  } else if (fontStyle === QuranFonts.IndoPak) {
     WordText = <IndoPakWordText text={word.textMadani} />;
   } else {
     WordText = <MadaniWordText text={word.textMadani} />;
