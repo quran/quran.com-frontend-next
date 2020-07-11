@@ -1,6 +1,12 @@
 enum ReadingView {
-  Translation = 'translation',
-  Page = 'page',
+  Translation = 'translation', // Displays verse by verse with translation
+  QuranPage = 'quranPage', // Displays the Quran text only similar to a physical Quran page
 }
 
-export default ReadingView;
+export enum QuranFonts {
+  Uthmani = 'uthmani',
+  Madani = 'madani',
+  IndoPak = 'indopak',
+}
+
+export default { ReadingView, QuranFonts };

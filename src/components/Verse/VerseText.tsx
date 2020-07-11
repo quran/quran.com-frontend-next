@@ -4,10 +4,11 @@ import { useSelector } from 'react-redux';
 import VerseType from '../../../types/VerseType';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { selectQuranReaderStyles, QuranReaderStyles } from '../../redux/slices/QuranReader/styles';
+import { QuranFonts } from '../QuranReader/types';
 
 type VerseTextProps = {
   verse: VerseType;
-  fontStyle?: 'uthmani' | 'madani' | 'indopak';
+  fontStyle?: QuranFonts;
 };
 
 const VerseText = ({ verse, fontStyle }: VerseTextProps) => {

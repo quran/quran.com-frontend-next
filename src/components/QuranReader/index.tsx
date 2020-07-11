@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import VerseType from '../../../types/VerseType';
-import MushafView from './MushafView';
+import QuranPageView from './QuranPageView';
 import TranslationView from './TranslationView';
 import { selectReadingMode } from '../../redux/slices/QuranReader/readingMode';
 import ReadingView from './types';
@@ -13,8 +13,8 @@ type QuranReaderProps = {
 const QuranReader = ({ verses }: QuranReaderProps) => {
   const readingMode = useSelector(selectReadingMode);
 
-  if (readingMode === ReadingView.Page) {
-    return <MushafView verses={verses} />;
+  if (readingMode === ReadingView.QuranPage) {
+    return <QuranPageView verses={verses} />;
   }
 
   return <TranslationView verses={verses} />;
