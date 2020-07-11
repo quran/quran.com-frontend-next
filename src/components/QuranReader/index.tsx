@@ -4,6 +4,7 @@ import VerseType from '../../../types/VerseType';
 import MushafView from './MushafView';
 import TranslationView from './TranslationView';
 import { selectReadingMode } from '../../redux/slices/QuranReader/readingMode';
+import ReadingView from './types';
 
 type QuranReaderProps = {
   verses: VerseType[];
@@ -12,7 +13,7 @@ type QuranReaderProps = {
 const QuranReader = ({ verses }: QuranReaderProps) => {
   const readingMode = useSelector(selectReadingMode);
 
-  if (readingMode === 'mushaf') {
+  if (readingMode === ReadingView.Page) {
     return <MushafView verses={verses} />;
   }
 

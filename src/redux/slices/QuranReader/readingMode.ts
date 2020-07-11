@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import ReadingView from 'src/components/QuranReader/types';
 
-export type ReadingMode = 'translation' | 'mushaf';
-
-const initialState: ReadingMode = 'translation';
+const initialState: ReadingView = ReadingView.Translation;
 
 export const readingModeSlice = createSlice({
   name: 'readingMode',
   initialState,
   reducers: {
-    setReadingMode: (state: ReadingMode, action: PayloadAction<ReadingMode>) => {
+    setReadingMode: (state: ReadingView, action: PayloadAction<ReadingView>) => {
       state = action.payload;
     },
   },
