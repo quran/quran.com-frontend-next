@@ -3,7 +3,7 @@ import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer/Footer';
 import ReduxProvider from '../redux/Provider';
 
 function MyApp({ Component, pageProps }): JSX.Element {

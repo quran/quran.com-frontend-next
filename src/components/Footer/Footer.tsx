@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
-import Text from './dls/Text/Text';
-import Anchor from './Anchor/Anchor';
+import Text from '../dls/Text/Text';
+import Anchor from '../Anchor/Anchor';
 
 const FooterContainer = styled.footer`
   float: left;
