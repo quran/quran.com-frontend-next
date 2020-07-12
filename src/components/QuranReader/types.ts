@@ -3,10 +3,10 @@ export enum ReadingView {
   QuranPage = 'quranPage', // Displays the Quran text only similar to a physical Quran page
 }
 
-export enum QuranFonts {
+export enum QuranFont {
   Uthmani = 'uthmani',
   Madani = 'madani',
   IndoPak = 'indopak',
 }
 
-export default { ReadingView, QuranFonts };
+export default { ReadingView, QuranFont };
