@@ -27,7 +27,7 @@ export const getChapterInfo = async (id: string | number | string[]) => {
 };
 
 export const getChapterVerses = async (id: string | number | string[]) => {
-  const payload = await fetcher(makeUrl(`/chapters/${id}/verses?translations=20`)); // TODO (@abdellatif): parameterize the default translation
+  const payload = await fetcher(makeUrl(`/chapters/${id}/verses`, { translations: 20 })); // TODO (@abdellatif): parameterize the default translation
 
   return camelizeKeys(payload) as { verses: VerseType[] };
 };
