@@ -1,3 +1,5 @@
+import { stringify } from 'qs';
+
 export const apiUrl = 'http://api.quran.com/api/v3';
 
 /**
@@ -12,12 +14,6 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
 
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
-  const parametersStringified = JSON.stringify(parameters);
-  const formattedParameters = JSON.parse(
-    parametersStringified,
-    (key, val) => (typeof val !== 'object' && val !== null ? String(val) : val), // Converts the value to a string in each key/value pair
-  );
-
-  const queryParameters = `?${new URLSearchParams(formattedParameters).toString()}`;
+  const queryParameters = `?${stringify(parameters)}`;
   return `${apiUrl}${path}${queryParameters}`;
 };
