@@ -5,6 +5,7 @@ import { useSWRInfinite } from 'swr';
 import { makeUrl } from 'src/utils/api';
 import VerseType from 'types/VerseType';
 import { InfiniteScroll } from 'react-simple-infinite-scroll';
+import { camelizeKeys } from 'humps';
 import QuranPageView from './QuranPageView';
 import TranslationView from './TranslationView';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
@@ -18,7 +19,7 @@ type QuranReaderProps = {
 // TODO: document
 const verseFetcher = async function (input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
-  return res.json().then((data) => data.verses);
+  return res.json().then((data) => camelizeKeys(data.verses));
 };
 
 // TODO: add stopping point
