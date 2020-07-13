@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import VerseType from '../../../types/VerseType';
 import VerseText from '../Verse/VerseText';
-import { QuranFonts } from './types';
 
 type QuranPageViewProps = {
   verses: VerseType[];
@@ -12,8 +11,7 @@ const QuranPageView = ({ verses }: QuranPageViewProps) => {
   return (
     <StyledQuranPageView>
       {verses.map((verse) => (
-        // TODO (@abdellatif): read the font from the user prefernces
-        <VerseText verse={verse} fontStyle={QuranFonts.Uthmani} key={verse.id} />
+        <VerseText verse={verse} key={verse.id} />
       ))}
     </StyledQuranPageView>
   );

@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { QuranFont } from 'src/components/QuranReader/types';
 
 const FONT_SCALING_FACTOR = 1.1;
 
@@ -7,6 +8,7 @@ export type QuranReaderStyles = {
   quranTextFontSize: number;
   quranTextLineHeight: number;
   quranTextLetterSpacing: number;
+  quranFont: QuranFont;
 };
 
 const initialState: QuranReaderStyles = {
@@ -15,6 +17,7 @@ const initialState: QuranReaderStyles = {
   quranTextFontSize: 2,
   quranTextLineHeight: 3,
   quranTextLetterSpacing: 0.25,
+  quranFont: QuranFont.Uthmani,
 };
 
 export const quranReaderStylesSlice = createSlice({
@@ -47,6 +50,12 @@ export const quranReaderStylesSlice = createSlice({
         quranTextFontSize: state.quranTextFontSize / FONT_SCALING_FACTOR,
         quranTextLineHeight: state.quranTextLineHeight / FONT_SCALING_FACTOR,
         quranTextLetterSpacing: state.quranTextLetterSpacing / FONT_SCALING_FACTOR,
+      };
+    },
+    setQuranFont: (state: QuranReaderStyles, action: PayloadAction<QuranFont>) => {
+      return {
+        ...state,
+        quranFont: action.payload,
       };
     },
   },
