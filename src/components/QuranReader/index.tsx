@@ -1,39 +1,71 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import ChapterType from 'types/ChapterType';
-import { fetcher } from 'src/api';
-import { useSWRInfinite } from 'swr';
+import { camelizeKeys } from 'humps';
+import { InfiniteScroll } from 'react-simple-infinite-scroll';
 import { makeUrl } from 'src/utils/api';
-import VerseType from 'types/VerseType';
+import { useSWRInfinite } from 'swr';
+import { VersesResponse } from 'types/APIResponses';
+import ChapterType from 'types/ChapterType';
+import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import QuranPageView from './QuranPageView';
 import TranslationView from './TranslationView';
-import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import { ReadingView } from './types';
 
 type QuranReaderProps = {
-  initialData: { verses: VerseType[] };
+  initialData: VersesResponse;
   chapter: ChapterType;
 };
 
+const INFINITE_SCROLLER_CONFIG = {
+  threshold: 2000, // Number of pixels before the sentinel reaches the viewport to trigger onLoadMore()
+};
+
+/**
+ * A custom fetcher that returns the verses array from the api result.
+ * We need this workaround as useSWRInfinite requires the data from the api
+ * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
+ */
+const verseFetcher = async function (input: RequestInfo, init?: RequestInit) {
+  const res = await fetch(input, init);
+  return res.json().then((data) => camelizeKeys(data.verses));
+};
+
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
-  const { data } = useSWRInfinite(
+  const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
-      return makeUrl(`/chapters/${chapter.id}/verses`, { translations: 20, page: index }); // TODO: select the translation using the user preference
+      return makeUrl(`/chapters/${chapter.id}/verses`, {
+        translations: 20,
+        page: index + 1,
+        limit: 25,
+      }); // TODO: select the translation using the user preference
     },
-    fetcher,
+    verseFetcher,
     {
       initialData: initialData.verses,
-      revalidateOnFocus: false,
+      revalidateOnFocus: true,
     },
   );
-
   const readingView = useSelector(selectReadingView);
+  const pageLimit = initialData.meta.totalPages;
+  const verses = data.flat(1);
+  let view;
 
   if (readingView === ReadingView.QuranPage) {
-    return <QuranPageView verses={data} />;
+    view = <QuranPageView verses={verses} />;
+  } else {
+    view = <TranslationView verses={verses} />;
   }
 
-  return <TranslationView verses={data} />;
+  return (
+    <InfiniteScroll
+      threshold={INFINITE_SCROLLER_CONFIG.threshold}
+      isLoading={isValidating}
+      hasMore={size < pageLimit}
+      onLoadMore={() => setSize(size + 1)}
+    >
+      {view}
+    </InfiniteScroll>
+  );
 };
 
 export default QuranReader;

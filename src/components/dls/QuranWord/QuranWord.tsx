@@ -11,8 +11,7 @@ type QuranWordProps = {
   highlight?: boolean;
 };
 
-const QuranWord = (props: QuranWordProps) => {
-  const { word, fontStyle } = props;
+const QuranWord = ({ word, fontStyle }: QuranWordProps) => {
   let WordText;
 
   if (fontStyle === QuranFont.Uthmani) {

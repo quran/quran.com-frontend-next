@@ -2,15 +2,14 @@ import React from 'react';
 import range from 'lodash/range';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
-import VerseType from 'types/VerseType';
-import ChapterType from '../../types/ChapterType';
+import { ChapterResponse, ChaptersResponse, VersesResponse } from 'types/APIResponses';
 import { getChapters, getChapter, getChapterVerses } from '../api';
 import QuranReader from '../components/QuranReader';
 
 type ChapterProps = {
-  chaptersResponse: { chapters: ChapterType[] };
-  chapterResponse: { chapter: ChapterType };
-  versesResponse: { verses: VerseType[] };
+  chaptersResponse: ChaptersResponse;
+  chapterResponse: ChapterResponse;
+  versesResponse: VersesResponse;
 };
 
 const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesResponse }) => {
