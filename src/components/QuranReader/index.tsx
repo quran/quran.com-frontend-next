@@ -16,6 +16,11 @@ type QuranReaderProps = {
   chapter: ChapterType;
 };
 
+const INFINITE_SCROLLER_CONFIG = {
+  throttle: 250, // Scroll handler will be executed at most once per the number of milliseconds specified.
+  threshold: 2000, // Number of pixels before the sentinel reaches the viewport to trigger onLoadMore()
+};
+
 /**
  * A custom fetcher that returns the verses array from the api result.
  * We need this workaround as useSWRInfinite requires the data from the api
@@ -29,7 +34,11 @@ const verseFetcher = async function (input: RequestInfo, init?: RequestInit) {
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
-      return makeUrl(`/chapters/${chapter.id}/verses`, { translations: 20, page: index + 1 }); // TODO: select the translation using the user preference
+      return makeUrl(`/chapters/${chapter.id}/verses`, {
+        translations: 20,
+        page: index + 1,
+        limit: 25,
+      }); // TODO: select the translation using the user preference
     },
     verseFetcher,
     {
@@ -49,8 +58,8 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
 
   return (
     <InfiniteScroll
-      throttle={100}
-      threshold={2000}
+      throttle={INFINITE_SCROLLER_CONFIG.throttle}
+      threshold={INFINITE_SCROLLER_CONFIG.threshold}
       isLoading={isValidating}
       hasMore={size < pageLimit}
       onLoadMore={() => setSize(size + 1)}

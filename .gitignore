@@ -51,3 +51,5 @@ storybook-static/
 package-lock.json
 coverage
 .jest-test-results.json
+
+.vercel
