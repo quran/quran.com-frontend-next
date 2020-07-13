@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import VerseType from '../../../types/VerseType';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { selectQuranReaderStyles, QuranReaderStyles } from '../../redux/slices/QuranReader/styles';
-import { QuranFonts } from '../QuranReader/types';
+import { QuranFont } from '../QuranReader/types';
 
 type VerseTextProps = {
   verse: VerseType;
-  fontStyle?: QuranFonts;
+  fontStyle?: QuranFont;
 };
 
-const VerseText = ({ verse, fontStyle }: VerseTextProps) => {
+const VerseText = ({ verse }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   return (
@@ -21,7 +21,7 @@ const VerseText = ({ verse, fontStyle }: VerseTextProps) => {
           <QuranWord
             key={[word.position, word.code, word.lineNum].join('-')}
             word={word}
-            fontStyle={fontStyle}
+            fontStyle={quranReaderStyles.quranFont}
           />
         ))}
       </StyledVerseText>
