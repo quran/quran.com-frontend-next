@@ -1,6 +1,6 @@
 import { stringify } from 'qs';
 
-export const apiUrl = 'http://api.quran.com/api/v3';
+export const apiUrl = 'https://quran.com/api/api/v3';
 
 /**
  * Generates a url to make an api call to our backend

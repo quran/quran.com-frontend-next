@@ -17,7 +17,6 @@ type QuranReaderProps = {
 };
 
 const INFINITE_SCROLLER_CONFIG = {
-  throttle: 250, // Scroll handler will be executed at most once per the number of milliseconds specified.
   threshold: 2000, // Number of pixels before the sentinel reaches the viewport to trigger onLoadMore()
 };
 
@@ -58,7 +57,6 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
 
   return (
     <InfiniteScroll
-      throttle={INFINITE_SCROLLER_CONFIG.throttle}
       threshold={INFINITE_SCROLLER_CONFIG.threshold}
       isLoading={isValidating}
       hasMore={size < pageLimit}
