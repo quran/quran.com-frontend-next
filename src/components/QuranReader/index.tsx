@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import ChapterType from 'types/ChapterType';
-import { useSWRInfinite } from 'swr';
-import { makeUrl } from 'src/utils/api';
-import { InfiniteScroll } from 'react-simple-infinite-scroll';
 import { camelizeKeys } from 'humps';
+import { InfiniteScroll } from 'react-simple-infinite-scroll';
+import { makeUrl } from 'src/utils/api';
+import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
+import ChapterType from 'types/ChapterType';
+import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import QuranPageView from './QuranPageView';
 import TranslationView from './TranslationView';
-import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import { ReadingView } from './types';
 
 type QuranReaderProps = {
@@ -47,12 +47,13 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   );
   const readingView = useSelector(selectReadingView);
   const pageLimit = initialData.meta.totalPages;
-
+  const verses = data.flat(1);
   let view;
+
   if (readingView === ReadingView.QuranPage) {
-    view = <QuranPageView verses={data.flat(1)} />;
+    view = <QuranPageView verses={verses} />;
   } else {
-    view = <TranslationView verses={data.flat(1)} />;
+    view = <TranslationView verses={verses} />;
   }
 
   return (
