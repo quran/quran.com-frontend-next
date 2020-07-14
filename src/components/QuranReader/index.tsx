@@ -16,9 +16,7 @@ type QuranReaderProps = {
   chapter: ChapterType;
 };
 
-const INFINITE_SCROLLER_CONFIG = {
-  threshold: 2000, // Number of pixels before the sentinel reaches the viewport to trigger onLoadMore()
-};
+const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
 
 /**
  * A custom fetcher that returns the verses array from the api result.
@@ -59,7 +57,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   return (
     <InfiniteScroll
       initialLoad={false}
-      threshold={INFINITE_SCROLLER_CONFIG.threshold}
+      threshold={INFINITE_SCROLLER_THRESHOLD}
       hasMore={size < pageLimit}
       loadMore={() => {
         if (!isValidating) {
