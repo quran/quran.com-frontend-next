@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { camelizeKeys } from 'humps';
-import { InfiniteScroll } from 'react-simple-infinite-scroll';
+import InfiniteScroll from 'react-infinite-scroller';
 import { makeUrl } from 'src/utils/api';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
@@ -25,7 +25,7 @@ const INFINITE_SCROLLER_CONFIG = {
  * We need this workaround as useSWRInfinite requires the data from the api
  * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
  */
-const verseFetcher = async function (input: RequestInfo, init?: RequestInit) {
+const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
   const res = await fetch(input, init);
   return res.json().then((data) => camelizeKeys(data.verses));
 };
@@ -58,10 +58,14 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
 
   return (
     <InfiniteScroll
+      initialLoad={false}
       threshold={INFINITE_SCROLLER_CONFIG.threshold}
-      isLoading={isValidating}
       hasMore={size < pageLimit}
-      onLoadMore={() => setSize(size + 1)}
+      loadMore={() => {
+        if (!isValidating) {
+          setSize(size + 1);
+        }
+      }}
     >
       {view}
     </InfiniteScroll>
