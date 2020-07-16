@@ -97,6 +97,9 @@ video {
   vertical-align: baseline;
   font-family: "SFProText-Regular", "Helvetica Neue", Helvetica, Arial;
   line-height: 1rem;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* make sure to set some focus styles for accessibility */

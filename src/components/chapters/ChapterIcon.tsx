@@ -129,9 +129,6 @@ export default styled.span<{ id: string | number }>`
   float: right;
   color: ${({ theme }) => theme.colors.text};
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   &:before {
     content: '${({ id }) => String.raw`\e${CONTENT[id] || '903'}`}';
   }
