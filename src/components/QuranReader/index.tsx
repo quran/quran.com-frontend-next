@@ -6,6 +6,7 @@ import { makeUrl } from 'src/utils/api';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import ChapterType from 'types/ChapterType';
+import styled from 'styled-components';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
@@ -55,7 +56,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   }
 
   return (
-    <InfiniteScroll
+    <StyledInfiniteScroll
       initialLoad={false}
       threshold={INFINITE_SCROLLER_THRESHOLD}
       hasMore={size < pageLimit}
@@ -66,8 +67,12 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
       }}
     >
       {view}
-    </InfiniteScroll>
+    </StyledInfiniteScroll>
   );
 };
+
+const StyledInfiniteScroll = styled(InfiniteScroll)`
+  width: 100%;
+`;
 
 export default QuranReader;

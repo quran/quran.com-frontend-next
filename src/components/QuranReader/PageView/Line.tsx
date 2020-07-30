@@ -28,14 +28,17 @@ const Line = ({ words }: LineProps) => {
 };
 
 const StyledLine = styled.div<{ styles: QuranReaderStyles }>`
-  line-height: ${(props) => props.styles.quranTextLineHeight}rem;
+  /* TODO (@abdellatif): make the vw dimension adaptive */
+  line-height: min(8vw, ${(props) => props.styles.quranTextLineHeight}rem);
   line-break: anywhere;
+  text-align: center;
 `;
 
 const StyledLineContainer = styled.div<{ styles: QuranReaderStyles }>`
   display: block;
   direction: rtl;
-  font-size: ${(props) => props.styles.quranTextFontSize}rem;
+  /* TODO (@abdellatif): make the vw dimension adaptive */
+  font-size: min(5vw, ${(props) => props.styles.quranTextFontSize}rem);
   letter-spacing: ${(props) => props.styles.quranTextLetterSpacing}rem;
 `;
 
