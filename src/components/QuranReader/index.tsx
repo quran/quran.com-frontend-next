@@ -7,7 +7,7 @@ import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import ChapterType from 'types/ChapterType';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
-import QuranPageView from './QuranPageView';
+import PageView from './PageView';
 import TranslationView from './TranslationView';
 import { ReadingView } from './types';
 
@@ -49,7 +49,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   let view;
 
   if (readingView === ReadingView.QuranPage) {
-    view = <QuranPageView verses={verses} />;
+    view = <PageView verses={verses} />;
   } else {
     view = <TranslationView verses={verses} />;
   }
