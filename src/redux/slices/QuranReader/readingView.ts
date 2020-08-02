@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReadingView } from 'src/components/QuranReader/types';
 
-const initialState: ReadingView = ReadingView.Translation;
+const initialState: ReadingView = ReadingView.QuranPage;
 
 export const readingViewSlice = createSlice({
   name: 'readingView',
