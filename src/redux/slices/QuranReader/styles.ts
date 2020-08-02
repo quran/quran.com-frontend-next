@@ -16,7 +16,7 @@ const initialState: QuranReaderStyles = {
   translationFontSize: 1,
   quranTextFontSize: 2,
   quranTextLineHeight: 3,
-  quranTextLetterSpacing: 0.25,
+  quranTextLetterSpacing: 0,
   quranFont: QuranFont.Uthmani,
 };
 
