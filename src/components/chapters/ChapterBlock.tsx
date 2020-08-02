@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next-translate/Link';
+import ChapterType from 'types/ChapterType';
 import ChapterIcon from './ChapterIcon';
-import ChapterType from '../../../types/ChapterType';
 
 const Item = styled.li`
   list-style: none;
