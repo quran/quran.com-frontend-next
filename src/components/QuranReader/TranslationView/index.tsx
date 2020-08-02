@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import VerseType from '../../../types/VerseType';
-import VerseText from '../Verse/VerseText';
-import Text from '../dls/Text/Text';
+import VerseType from '../../../../types/VerseType';
+import VerseText from '../../Verse/VerseText';
+import Text from '../../dls/Text/Text';
 
 type TranslationViewProps = {
   verses: VerseType[];
