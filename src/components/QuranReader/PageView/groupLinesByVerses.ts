@@ -10,9 +10,6 @@ import VerseType from 'types/VerseType';
  *  Page1-Line3: [words]
  *  ...
  * }
- *
- * Note: as a potential performance improvement, we can memoize the calls in the function
- * In my (@abdellatif) tests it doesn't seem to be necessary
  */
 const groupLinesByVerses = (verses: VerseType[]) => {
   const words = [];
