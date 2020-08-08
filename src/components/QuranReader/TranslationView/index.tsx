@@ -13,7 +13,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
     <StyledTranslationView>
       {verses.map((verse) => (
         <VerseTextContainer highlight={false} key={verse.id}>
-          <VerseText verse={verse} />
+          <VerseText words={verse.words} />
           <StyledText>{verse.translations && verse.translations[0]?.text}</StyledText>
           <hr />
         </VerseTextContainer>

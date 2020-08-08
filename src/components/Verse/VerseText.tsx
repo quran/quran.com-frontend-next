@@ -1,21 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import VerseType from '../../../types/VerseType';
+import WordType from 'types/WordType';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { selectQuranReaderStyles, QuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 
 type VerseTextProps = {
-  verse: VerseType;
+  words: WordType[];
 };
 
-const VerseText = ({ verse }: VerseTextProps) => {
+const VerseText = ({ words }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   return (
     <StyledVerseTextContainer styles={quranReaderStyles}>
       <StyledVerseText styles={quranReaderStyles}>
-        {verse.words?.map((word) => (
+        {words?.map((word) => (
           <QuranWord
             key={[word.position, word.code, word.lineNum].join('-')}
             word={word}
@@ -39,4 +39,4 @@ const StyledVerseTextContainer = styled.div<{ styles: QuranReaderStyles }>`
   letter-spacing: ${(props) => props.styles.quranTextLetterSpacing}rem;
 `;
 
-export default VerseText;
+export default React.memo(VerseText);
