@@ -42,4 +42,4 @@ const StyledLineContainer = styled.div<{ styles: QuranReaderStyles }>`
   letter-spacing: ${(props) => props.styles.quranTextLetterSpacing}rem;
 `;
 
-export default Line;
+export default React.memo(Line);
