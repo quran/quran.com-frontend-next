@@ -12,7 +12,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
   return (
     <StyledTranslationView>
       {verses.map((verse) => (
-        <VerseTextContainer key={verse.id}>
+        <VerseTextContainer highlight={false} key={verse.id}>
           <VerseText verse={verse} />
           <StyledText>{verse.translations && verse.translations[0]?.text}</StyledText>
           <hr />
@@ -22,7 +22,9 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
   );
 };
 
-const VerseTextContainer = styled.div``;
+const VerseTextContainer = styled.div<{ highlight: boolean }>`
+  background: ${({ highlight, theme }) => highlight && theme.colors.gray};
+`;
 
 const StyledTranslationView = styled.div`
   max-width: 100%;

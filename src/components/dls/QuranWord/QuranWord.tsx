@@ -10,10 +10,9 @@ type QuranWordProps = {
   word: WordType;
   fontStyle?: QuranFont;
   highlight?: boolean;
-  highlightBackground?: boolean;
 };
 
-const QuranWord = ({ word, fontStyle, highlight, highlightBackground }: QuranWordProps) => {
+const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
   let WordText;
 
   if (fontStyle === QuranFont.Uthmani) {
@@ -24,21 +23,15 @@ const QuranWord = ({ word, fontStyle, highlight, highlightBackground }: QuranWor
     WordText = <MadaniWordText text={word.textMadani} />;
   }
 
-  return (
-    <StyledWordContainer highlight={highlight} highlightBackground={highlightBackground}>
-      {WordText}
-    </StyledWordContainer>
-  );
+  return <StyledWordContainer highlight={highlight}>{WordText}</StyledWordContainer>;
 };
 
 type StyledWordContainerProps = {
-  highlight: boolean;
-  highlightBackground?: boolean;
+  highlight?: boolean;
 };
 
 const StyledWordContainer = styled.span<StyledWordContainerProps>`
   color: ${(props) => props.highlight && props.theme.colors.primary};
-  background: ${(props) => props.highlightBackground && props.theme.colors.gray};
 `;
 
 export default QuranWord;
