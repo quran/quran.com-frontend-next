@@ -103,6 +103,9 @@
     "ts-loader": "^7.0.2",
     "typescript": "^3.8.3"
   },
+  "prettier": {
+    "singleQuote": true
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
