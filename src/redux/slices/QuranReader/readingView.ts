@@ -7,9 +7,7 @@ export const readingViewSlice = createSlice({
   name: 'readingView',
   initialState,
   reducers: {
-    setReadingView: (state: ReadingView, action: PayloadAction<ReadingView>) => {
-      state = action.payload;
-    },
+    setReadingView: (draft, action: PayloadAction) => action.payload,
   },
 });
 
