@@ -3,7 +3,7 @@ import { makeUrl } from './utils/api';
 import ChapterType from '../types/ChapterType';
 import VerseType from '../types/VerseType';
 
-export const fetcher = async function (input: RequestInfo, init?: RequestInit) {
+export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
   return res.json();
 };
