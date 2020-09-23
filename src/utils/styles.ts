@@ -1,3 +1,4 @@
+import { css } from 'styled-components';
 import merge from 'lodash/merge';
 
 const BASE_PX = 16;
@@ -17,12 +18,19 @@ export const theme = {
     px: BASE_PX,
     unit: 1, // base font-size is 16px
   },
+  border: {
+    radius: 4,
+  },
   colors: {
     primary: '#00acc1',
     white: '#fff',
     text: '#607d8b',
     gray: '#777',
     black: '#000000',
+    red: '#e50000',
+    yellow: '#F2A026',
+    green: '#5FD855',
+    blue: '#0085CA',
   },
   breakpoints: {
     sm: '576px',
@@ -40,3 +48,17 @@ export const darkTheme = merge({}, theme, {
     text: '#fff',
   },
 });
+
+export const resetButton = css`
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  margin: 0px;
+  padding: 0px;
+  border: 0;
+  user-select: auto;
+  text-decoration: none;
+  font-size: inherit;
+  vertical-align: middle;
+  display: inline-block;
+`;

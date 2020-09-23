@@ -2,11 +2,13 @@ import React from 'react';
 import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { initializeApollo } from 'src/apolloClient';
+import { CHAPTERS_QUERY } from 'src/graphql/queries/chapters';
+import { useQuery } from '@apollo/client';
 import ChaptersList from '../components/chapters/ChapterList';
 import ChapterType from '../../types/ChapterType';
 import CardRow from '../components/dls/Cards/CardRow';
 import Card from '../components/dls/Cards/Card';
-import { getChapters } from '../api';
 import sunnahImage from '../../public/images/sunnah.png';
 import salahImage from '../../public/images/salah.jpg';
 import qaudioImage from '../../public/images/qaudio.jpeg';
@@ -17,7 +19,7 @@ type IndexProps = {
   };
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
+const Index: NextPage<IndexProps> = () => {
   const { t } = useTranslation();
   const salah = t('common:Salah');
   const salahSubtitle = t('home:salahSubtitle');
@@ -25,6 +27,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   const sunnahSubtitle = t('home:sunnahSubtitle');
   const quranAudio = t('home:quranAudio');
   const quranAudioSubtitle = t('home:quranAudioSubtitle');
+  const { data } = useQuery(CHAPTERS_QUERY);
 
   return (
     <Container>
@@ -34,19 +37,33 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
           <Card title={sunnah} subtitle={sunnahSubtitle} image={sunnahImage} />
           <Card title={quranAudio} subtitle={quranAudioSubtitle} image={qaudioImage} />
         </CardRow>
-        <ChaptersList chapters={chapters.slice(0, 38)} />
-        <ChaptersList chapters={chapters.slice(38, 76)} />
-        <ChaptersList chapters={chapters.slice(76, 114)} />
+        {data?.chapters && (
+          <>
+            <ChaptersList chapters={data?.chapters?.slice(0, 38)} />
+            <ChaptersList chapters={data?.chapters?.slice(38, 76)} />
+            <ChaptersList chapters={data?.chapters?.slice(76, 114)} />
+          </>
+        )}
       </Row>
     </Container>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const chaptersResponse = await getChapters();
+  const apolloClient = initializeApollo();
+
+  try {
+    await apolloClient.query({
+      query: CHAPTERS_QUERY,
+    });
+  } catch (e) {
+    console.log(e);
+  }
 
   return {
-    props: { chaptersResponse },
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
   };
 };
 

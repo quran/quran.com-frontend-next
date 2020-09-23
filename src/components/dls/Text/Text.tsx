@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+const bold = css`
+  font-weight: 600;
+`;
+
 const primaryColor = css`
   color: ${({ theme }) => theme.colors.primary};
 `;
@@ -23,13 +27,14 @@ const color = css<ColorProps>`
   ${(props) => props.primary && primaryColor}
 `;
 
-type FontSizeProps = { small?: boolean; mini?: boolean; large?: boolean };
+type FontSizeProps = { small?: boolean; mini?: boolean; large?: boolean; bold?: boolean };
 
 const fontSize = css<FontSizeProps>`
   font-size: 1rem;
   ${(props) => props.small && smallSize};
   ${(props) => props.mini && miniSize};
   ${(props) => props.large && largeSize};
+  ${(props) => props.bold && bold};
 `;
 
 const Text = styled.p<ColorProps & FontSizeProps & { isArabic?: boolean }>`
