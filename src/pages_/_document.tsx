@@ -38,6 +38,7 @@ export default class MyDocument extends Document {
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
           <style
+            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: `
           ${makeGlobalCss()}
