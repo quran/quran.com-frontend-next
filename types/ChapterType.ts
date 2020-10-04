@@ -9,8 +9,8 @@ interface ChapterType {
   nameSimple: string;
   nameArabic: string;
   chapterNumber: number;
-  translatedName: any;
-  languageName: any;
+  translatedName: Record<'name' | 'languageName', string>;
+  languageName: string;
 }
 
 export default ChapterType;

@@ -37,8 +37,10 @@ overrides:
     rules:
       "@typescript-eslint/no-unused-vars": 2
       "@typescript-eslint/explicit-module-boundary-types": off # allow typescript to automatically determine the return type
-      "no-param-reassign": off # TODO: disable it only for the redux directory, it's used to reassign the state
-
+      "no-param-reassign": [
+          "error",
+          { "props": true, "ignorePropertyModificationsFor": ["draft"] }, # allow object property reassign only for redux toolkit draft object
+        ]
       # these are checked by the TS compiler
       react/forbid-prop-types: 0
       react/jsx-no-undef: 0
