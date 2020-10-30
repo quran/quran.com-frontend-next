@@ -36,7 +36,6 @@ const Text = styled.p<ColorProps & FontSizeProps & { isArabic?: boolean }>`
   ${color}
   ${fontSize}
   text-align: ${(props) => (props.isArabic ? 'right' : 'left')};
-
 `;
 
 export default Text;
