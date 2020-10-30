@@ -4,7 +4,6 @@ import styled from 'styled-components';
 type UthmaniWordTextProps = {
   code: string;
   pageNumber: number;
-  wordId?: number;
 };
 
 const UthmaniWordText = ({ code, pageNumber }: UthmaniWordTextProps) => {
