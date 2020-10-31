@@ -13,6 +13,7 @@ const DIMENSIONS = {
   WIDTH: 360,
   HEIGHT: 180,
 };
+
 const Card = ({ title, subtitle, image }: CardProps) => (
   <CardContainer>
     <StyledImage

@@ -1,5 +1,4 @@
 import { NextSeoProps } from 'next-seo';
-// import logo from '../../public/logo.png';
 import { theme } from './styles';
 
 export const config = {
