@@ -9,9 +9,19 @@ type CardProps = {
   image: string;
 };
 
+const DIMENSIONS = {
+  WIDTH: 360,
+  HEIGHT: 180,
+};
 const Card = ({ title, subtitle, image }: CardProps) => (
   <CardContainer>
-    <StyledImage src={image} role="presentation" alt={title} unsized />
+    <StyledImage
+      src={image}
+      role="presentation"
+      alt={title}
+      width={DIMENSIONS.WIDTH}
+      height={DIMENSIONS.HEIGHT}
+    />
     <Caption>
       <div>
         <Title>{title}</Title>
