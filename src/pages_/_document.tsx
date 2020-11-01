@@ -1,5 +1,5 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Main, NextScript, Html } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { makeGlobalCss } from '../styles/GlobalStyles';
@@ -32,9 +32,8 @@ export default class MyDocument extends Document {
     const { styleTags } = this.props;
 
     return (
-      <html lang="en">
+      <Html lang="en">
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
           <style
@@ -51,7 +50,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }
