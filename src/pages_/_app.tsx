@@ -1,9 +1,9 @@
 import React from 'react';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
+import Footer from '../components/Footer';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
-import Footer from '../components/Footer';
 import ReduxProvider from '../redux/Provider';
 
 function MyApp({ Component, pageProps }): JSX.Element {
