@@ -2,7 +2,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
-import Link from 'next-translate/Link';
+import Link from 'next/link';
 import content from './content.json';
 import Copyright from './Copyright';
 
@@ -63,7 +63,7 @@ const Footer = () => (
                 {links.map(({ href, target, text }) => (
                   <li key={href}>
                     <Link href={href} passHref>
-                      <StyledLink target={target && target} rel={target && 'noopener noreferrer'}>
+                      <StyledLink target={target && target} rel={target && 'external'}>
                         <span className="en">{text}</span>
                       </StyledLink>
                     </Link>

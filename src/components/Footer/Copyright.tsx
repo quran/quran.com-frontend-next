@@ -2,7 +2,7 @@
 import React from 'react';
 import { Col } from 'styled-bootstrap-grid';
 import styled from 'styled-components';
-import Link from 'next-translate/Link';
+import Link from 'next/link';
 
 const StyledCopyright = styled.div`
   color: ${({ theme }) => theme.colors.text};
@@ -22,7 +22,6 @@ const StyledCopyright = styled.div`
 const StyledLink = styled.a`
   color: ${({ theme }) => theme.colors.primary};
   text-decoration: none;
-  /* font-size: 14px; */
 `;
 
 const Copyright = () => (
