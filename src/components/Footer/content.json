@@ -1,0 +1,64 @@
+{
+  "tabs": [
+    {
+      "tab": "Navigate",
+      "links": [
+        { "href": "/about-us", "text": "About us" },
+        { "href": "/donations", "text": "Contribute" },
+        { "href": "/support", "text": "Help &amp; feedback" },
+        { "href": "/developers", "text": "Developers" },
+        { "href": "/apps", "text": "Download" }
+      ]
+    },
+    {
+      "tab": "Useful Sites",
+      "links": [
+        {
+          "href": "https://quranicaudio.com/",
+          "target": "_blank",
+          "text": "Quraninaudio.com"
+        },
+        {
+          "href": "https://salah.com/",
+          "target": "_blank",
+          "text": "Salah.com"
+        },
+        {
+          "href": "https://sunnah.com/",
+          "target": "_blank",
+          "text": "Sunnah.com"
+        },
+        {
+          "href": "https://legacy.quran.com/",
+          "target": "_blank",
+          "text": "Legacy Quran.com"
+        },
+        {
+          "href": "https://corpus.quran.com/wordbyword.jsp",
+          "target": "_blank",
+          "text": "Corpus.Quran.com"
+        }
+      ]
+    },
+    {
+      "tab": "Other Links",
+      "links": [
+        {
+          "href": "https://quran.com/sitemap.xml.gz",
+          "target": "_blank",
+          "text": "Sitemap"
+        },
+        {
+          "href": "https://quran.com/36",
+          "target": "_blank",
+          "text": "Surah Yaseen (يس)"
+        },
+        {
+          "href": "https://quran.com/2/255",
+          "target": "_blank",
+          "text": "Ayat Al-Kursi (آية الكرسي)"
+        }
+      ]
+    }
+  ]
+}
