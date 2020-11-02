@@ -58,8 +58,10 @@ exports[`should render 1`] = `
     <img
       alt="title"
       class="c1"
+      height="180"
       role="presentation"
       src="#"
+      width="360"
     />
     <div
       class="c2"
