@@ -1,6 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rgba } from 'polished';
+import Image from 'next/image';
+
+type CardProps = {
+  title: string;
+  subtitle: string;
+  image: string;
+};
+
+const DIMENSIONS = {
+  WIDTH: 360,
+  HEIGHT: 180,
+};
+
+const Card = ({ title, subtitle, image }: CardProps) => (
+  <CardContainer>
+    <StyledImage
+      src={image}
+      role="presentation"
+      alt={title}
+      width={DIMENSIONS.WIDTH}
+      height={DIMENSIONS.HEIGHT}
+    />
+    <Caption>
+      <div>
+        <Title>{title}</Title>
+        <p>{subtitle}</p>
+      </div>
+    </Caption>
+  </CardContainer>
+);
 
 const CardContainer = styled.figure`
   position: relative;
@@ -13,7 +43,7 @@ const CardContainer = styled.figure`
   height: 180px;
 `;
 
-const Image = styled.img`
+const StyledImage = styled(Image)`
   max-width: 100%;
   height: auto;
   border-radius: 10px;
@@ -42,23 +72,5 @@ const Title = styled.h3`
   color: #fff;
   margin-bottom: 7px;
 `;
-
-type CardProps = {
-  title: string;
-  subtitle: string;
-  image: string;
-};
-
-const Card = ({ title, subtitle, image }: CardProps) => (
-  <CardContainer>
-    <Image src={image} role="presentation" alt={title} />
-    <Caption>
-      <div>
-        <Title>{title}</Title>
-        <p>{subtitle}</p>
-      </div>
-    </Caption>
-  </CardContainer>
-);
 
 export default Card;

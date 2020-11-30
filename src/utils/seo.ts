@@ -1,5 +1,4 @@
 import { NextSeoProps } from 'next-seo';
-import logo from '../../public/logo.png';
 import { theme } from './styles';
 
 export const config = {
@@ -7,7 +6,7 @@ export const config = {
   siteDescription: 'The Quran translated into many languages in a simple and easy interface',
   defaultPageTitle: 'Quran.com',
   baseUrl: 'twitter.com',
-  websiteLogo: logo,
+  websiteLogo: '/logo.png',
   twitterHandle: '@twitter',
   twitterCardType: 'twitter',
 };
