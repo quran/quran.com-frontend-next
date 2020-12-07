@@ -55,14 +55,29 @@ exports[`should render 1`] = `
   <figure
     class="c0"
   >
-    <img
-      alt="title"
-      class="c1"
-      height="180"
-      role="presentation"
-      src="#"
-      width="360"
-    />
+    <div
+      style="display: inline-block; max-width: 100%; overflow: hidden; position: relative; box-sizing: border-box; margin: 0px;"
+    >
+      <div
+        style="box-sizing: border-box; display: block; max-width: 100%;"
+      >
+        <img
+          alt=""
+          aria-hidden="true"
+          role="presentation"
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
+          style="max-width: 100%; display: block;"
+        />
+      </div>
+      <img
+        alt="title"
+        class="c1"
+        decoding="async"
+        role="presentation"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+        style="visibility: hidden; position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; box-sizing: border-box; padding: 0px; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
+      />
+    </div>
     <div
       class="c2"
     >
