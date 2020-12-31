@@ -1,5 +1,10 @@
 const withPlugins = require('next-compose-plugins');
-const withOptimizedImages = require('next-optimized-images');
 const withFonts = require('next-fonts');
 
-module.exports = withPlugins([[withOptimizedImages], [withFonts]]);
+const config = {
+  images: {
+    domains: ['cdn.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
+  },
+};
+
+module.exports = withPlugins([withFonts], config);
