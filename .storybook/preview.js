@@ -4,7 +4,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { theme, darkTheme } from '../src/utils/styles';
-import makeFonts, { baseUrl } from '../src/styles/fonts';
+import makeFonts from '../src/styles/fonts';
 import { makeGlobalCss } from '../src/styles/GlobalStyles';
 
 const themes = [theme, darkTheme];
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const themeDecorator = (storyFn) => (
   <ThemeProvider theme={themes[0]}>
     <Wrapper>
-      <style dangerouslySetInnerHTML={{ __html: makeFonts(baseUrl) }} />
+      <style dangerouslySetInnerHTML={{ __html: makeFonts() }} />
       <style dangerouslySetInnerHTML={{ __html: makeGlobalCss(16) }} />
       {storyFn()}
     </Wrapper>

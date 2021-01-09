@@ -3,7 +3,7 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { makeGlobalCss } from '../styles/GlobalStyles';
-import makeFonts, { baseUrl } from '../styles/fonts';
+import makeFonts from '../styles/fonts';
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -41,7 +41,7 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
           ${makeGlobalCss()}
-          ${makeFonts(baseUrl)}
+          ${makeFonts()}
           `,
             }}
           />

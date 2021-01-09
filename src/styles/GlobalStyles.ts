@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import makeFonts, { baseUrl } from './fonts';
+import makeFonts from './fonts';
 import resetCSS from './reset';
 
 export const makeGlobalCss = (baseSize = 16) =>
@@ -13,7 +13,7 @@ ${resetCSS}
 
 const GlobalStyle = createGlobalStyle`
   ${makeGlobalCss()}
-  ${makeFonts(baseUrl)}
+  ${makeFonts()}
 `;
 
 export default GlobalStyle;

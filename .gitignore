@@ -44,7 +44,6 @@ node_modules/
 out
 
 .now
-public/fonts/
 build/
 storybook-static/
 
