@@ -103,6 +103,7 @@ ${makePageNumberFonts()}
       format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {

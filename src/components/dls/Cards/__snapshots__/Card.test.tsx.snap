@@ -66,7 +66,7 @@ exports[`should render 1`] = `
           aria-hidden="true"
           role="presentation"
           src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2ZXJzaW9uPSIxLjEiLz4="
-          style="max-width: 100%; display: block;"
+          style="max-width: 100%; display: block; margin: 0px; padding: 0px;"
         />
       </div>
       <img
