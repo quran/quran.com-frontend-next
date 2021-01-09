@@ -41,7 +41,7 @@ ${makePageNumberFonts()}
 @font-face {
   font-family: 'SFProText-Regular';
   src: local("SFProText Regular"), local("SFProText-Regular"),
-    local("SF Pro Text Regular"), url("fonts/SFPro/SFProText-Regular.woff2"),
+    local("SF Pro Text Regular"),
     url("fonts/SFPro/SFProText-Regular.eot?#iefix") format("embedded-opentype"),
     url("fonts/SFPro/SFProText-Regular.woff") format("woff"),
     url("fonts/SFPro/SFProText-Regular.ttf") format("truetype"),
