@@ -1,4 +1,4 @@
-name: Build Storybook and Chromatic
+name: Build Storybook
 
 on: [push, pull_request]
 
@@ -47,14 +47,3 @@ jobs:
           GIT_AUTHOR_NAME: ${{ github.actor }}
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
-  deploy-chromatic:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
-          yarn
-      - uses: chromaui/action@v1
-        with:
-          projectToken: 4vl3po4qjwl
-          token: ${{ secrets.GITHUB_TOKEN }}
-          exitOnceUploaded: true
