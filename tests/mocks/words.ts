@@ -1,4 +1,5 @@
 import merge from 'lodash/merge';
+import { CharType } from 'types/WordType';
 
 export const mockWord = (overrides = {}) =>
   merge(
@@ -14,7 +15,7 @@ export const mockWord = (overrides = {}) =>
       pageNumber: 1,
       code: '&#xfb51;',
       codeV3: '&#xfb51;',
-      charType: 'word',
+      charType: CharType.Word,
       audio: { url: 'verses/wbw/001_001_001.mp3' },
       translation: {
         id: 1,
@@ -47,7 +48,7 @@ export default [
     pageNumber: 1,
     code: '&#xfb51;',
     codeV3: '&#xfb51;',
-    charType: 'word',
+    charType: CharType.Word,
     audio: { url: 'verses/wbw/001_001_001.mp3' },
     translation: {
       id: 1,
@@ -76,7 +77,7 @@ export default [
     pageNumber: 1,
     code: '&#xfb52;',
     codeV3: '&#xfb52;',
-    charType: 'word',
+    charType: CharType.Word,
     audio: { url: 'verses/wbw/001_001_002.mp3' },
     translation: {
       id: 2,
@@ -105,7 +106,7 @@ export default [
     pageNumber: 1,
     code: '&#xfb53;',
     codeV3: '&#xfb53;',
-    charType: 'word',
+    charType: CharType.Word,
     audio: { url: 'verses/wbw/001_001_003.mp3' },
     translation: {
       id: 3,
@@ -134,7 +135,7 @@ export default [
     pageNumber: 1,
     code: '&#xfb54;',
     codeV3: '&#xfb54;',
-    charType: 'word',
+    charType: CharType.Word,
     audio: { url: 'verses/wbw/001_001_004.mp3' },
     translation: {
       id: 4,
@@ -163,7 +164,7 @@ export default [
     pageNumber: 1,
     code: '&#xfb55;',
     codeV3: '&#xa001;',
-    charType: 'end',
+    charType: CharType.End,
     audio: { url: null },
     translation: null,
     transliteration: null,

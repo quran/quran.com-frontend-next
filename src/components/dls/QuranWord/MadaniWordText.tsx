@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 type MadaniWordTextProps = {
   text: string;
@@ -6,7 +7,10 @@ type MadaniWordTextProps = {
 
 const MadaniWordText = (props: MadaniWordTextProps) => {
   const { text } = props;
-  return <span>{`${text} `}</span>;
+  return <StyledMadaniWordText>{`${text} `}</StyledMadaniWordText>;
 };
 
+const StyledMadaniWordText = styled.span`
+  font-family: Madani;
+`;
 export default MadaniWordText;
