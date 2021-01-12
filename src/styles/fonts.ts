@@ -34,8 +34,13 @@ ${makePageNumberFonts()}
 }
 
 @font-face {
-  font-family: IndoPak,
+  font-family: IndoPak;
   src: url('fonts/indoPak/_PDMS_Saleem_QuranFont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Madani;
+  src: url('fonts/madani/KFGQPC.otf') format('opentype');
 }
 
 @font-face {
