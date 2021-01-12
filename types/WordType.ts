@@ -1,10 +1,14 @@
 import TranslationType from './TranslationType';
 import TransliterationType from './TransliterationType';
 
+export enum CharType {
+  Word = 'word',
+  End = 'end',
+}
 interface WordType {
   arabic?: string;
   verseKey: string;
-  charType: string;
+  charType: CharType;
   className: string;
   code: string;
   lineNumber: number;
