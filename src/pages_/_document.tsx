@@ -1,9 +1,9 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { BaseCSS } from 'styled-bootstrap-grid';
 import { makeGlobalCss } from '../styles/GlobalStyles';
-import makeFonts, { baseUrl } from '../styles/fonts';
+import makeFonts from '../styles/fonts';
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -32,9 +32,8 @@ export default class MyDocument extends Document {
     const { styleTags } = this.props;
 
     return (
-      <html lang="en">
+      <Html>
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           {/* Step 5: Output the styles in the head  */}
           {styleTags}
           <style
@@ -42,7 +41,7 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
           ${makeGlobalCss()}
-          ${makeFonts(baseUrl)}
+          ${makeFonts()}
           `,
             }}
           />
@@ -51,7 +50,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

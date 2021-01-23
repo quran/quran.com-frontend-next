@@ -62,10 +62,11 @@ export const quranReaderStylesSlice = createSlice({
 });
 
 export const {
-  increaseTranslationTextSize,
-  increaseQuranTextSize,
   decreaseQuranTextSize,
   decreaseTranslationTextSize,
+  increaseQuranTextSize,
+  increaseTranslationTextSize,
+  setQuranFont,
 } = quranReaderStylesSlice.actions;
 
 export const selectQuranReaderStyles = (state) => state.quranReaderStyles;

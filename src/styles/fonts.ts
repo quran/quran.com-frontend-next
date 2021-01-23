@@ -1,31 +1,27 @@
 import range from 'lodash/range';
 
-export const baseUrl = 'https://quranstatic.nyc3.cdn.digitaloceanspaces.com';
-
-export const makeFont = (url: string, pageNumber: string | number) => `
+export const makeUthmaniFont = (pageNumber: string | number) => `
 @font-face {
   font-family: p${pageNumber};
-  src: url('${url}/fonts/quran-fonts/v1/woff2/p${pageNumber}.woff2'),
-  url('${url}/fonts/quran-fonts/v1/tff/p${pageNumber}.ttf') format('truetype'),
-  url('${url}/fonts/quran-fonts/v1/woff/p${pageNumber}.woff') format("woff");
+  src: url('fonts/QCF-uthmani/QCF_P${`00${pageNumber}`.slice(-3)}.ttf') format('truetype');
 }
 `;
 
-const makePageNumberFonts = (url = '') =>
+const makePageNumberFonts = () =>
   range(604)
     .map((number) => {
       const pageNumber = number + 1;
 
-      return makeFont(url, pageNumber);
+      return makeUthmaniFont(pageNumber);
     })
     .join('');
 
-const makeFonts = (url = baseUrl) =>
+const makeFonts = () =>
   `
-${makePageNumberFonts(url)}
+${makePageNumberFonts()}
 @font-face {
   font-family: quran-common;
-  src: url('${url}/fonts/quran-common/quran_common.ttf')
+  src: url('fonts/quran-common/quran_common.ttf')
     format('truetype');
 }
 .p0,
@@ -37,19 +33,24 @@ ${makePageNumberFonts(url)}
   }
 }
 
-// TODO (@abdellatif): host the IndoPak font on digital ocean
 @font-face {
-  font-family: IndoPak,
-  src: url('https://cdn.qurancdn.com/packs/media/fonts/quran_fonts/pdms/pdms-saleem-quranfont-15655c16c81400acbb1afa946de8b8e8.ttf') format('truetype');
+  font-family: IndoPak;
+  src: url('fonts/indoPak/_PDMS_Saleem_QuranFont.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: Madani;
+  src: url('fonts/madani/KFGQPC.otf') format('opentype');
+}
+
 @font-face {
   font-family: 'SFProText-Regular';
   src: local("SFProText Regular"), local("SFProText-Regular"),
-    local("SF Pro Text Regular"), url("${url}/fonts/SFProText-Regular.woff2"),
-    url("${url}/fonts/SFProText-Regular.eot?#iefix") format("embedded-opentype"),
-    url("${url}/fonts/SFProText-Regular.woff") format("woff"),
-    url("${url}/fonts/SFProText-Regular.ttf") format("truetype"),
-    url("${url}/fonts/SFProText-Regular.svg#SFProText-Regular") format("svg");
+    local("SF Pro Text Regular"),
+    url("fonts/SFPro/SFProText-Regular.eot?#iefix") format("embedded-opentype"),
+    url("fonts/SFPro/SFProText-Regular.woff") format("woff"),
+    url("fonts/SFPro/SFProText-Regular.ttf") format("truetype"),
+    url("fonts/SFPro/SFProText-Regular.svg#SFProText-Regular") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -58,11 +59,11 @@ ${makePageNumberFonts(url)}
 @font-face {
   font-family: 'SFProText-Medium';
   src: local("SFProText Medium"), local("SFProText-Medium"),
-    local("SF Pro Text Medium"), url("${url}/fonts/SFProText-Medium.woff2"),
-    url("${url}/fonts/SFProText-Medium.eot?#iefix") format("embedded-opentype"),
-    url("${url}/fonts/SFProText-Medium.woff") format("woff"),
-    url("${url}/fonts/SFProText-Medium.ttf") format("truetype"),
-    url("${url}/fonts/SFProText-Medium.svg#SFProText-Medium") format("svg");
+    local("SF Pro Text Medium"), url("fonts/SFPro/SFProText-Medium.woff2"),
+    url("fonts/SFPro/SFProText-Medium.eot?#iefix") format("embedded-opentype"),
+    url("fonts/SFPro/SFProText-Medium.woff") format("woff"),
+    url("fonts/SFPro/SFProText-Medium.ttf") format("truetype"),
+    url("fonts/SFPro/SFProText-Medium.svg#SFProText-Medium") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -71,11 +72,11 @@ ${makePageNumberFonts(url)}
 @font-face {
   font-family: 'SFProText-Bold';
   src: local("SFProText Bold"), local("SFProText-Bold"),
-    local("SF Pro Text Bold"), url("${url}/fonts/SFProText-Bold.woff2"),
-    url("${url}/fonts/SFProText-Bold.eot?#iefix") format("embedded-opentype"),
-    url("${url}/fonts/SFProText-Bold.woff") format("woff"),
-    url("${url}/fonts/SFProText-Bold.ttf") format("truetype"),
-    url("${url}/fonts/SFProText-Bold.svg#SFProText-Bold") format("svg");
+    local("SF Pro Text Bold"), url("fonts/SFPro//SFProText-Bold.woff2"),
+    url("fonts/SFPro/SFProText-Bold.eot?#iefix") format("embedded-opentype"),
+    url("fonts/SFPro/SFProText-Bold.woff") format("woff"),
+    url("fonts/SFPro/SFProText-Bold.ttf") format("truetype"),
+    url("fonts/SFPro/SFProText-Bold.svg#SFProText-Bold") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -83,92 +84,47 @@ ${makePageNumberFonts(url)}
 
 @font-face {
   font-family: "bismillah";
-  src: url("${url}/fonts/bismillah/bismillah.woff2"),
-    url("${url}/fonts/bismillah/bismillah.eot?#iefix")
+  src: url("fonts/bismillah/bismillah.woff2"),
+    url("fonts/bismillah/bismillah.eot?#iefix")
       format("embedded-opentype"),
-    url("${url}/fonts/bismillah/bismillah.woff") format("woff"),
-    url("${url}/fonts/bismillah/bismillah.ttf") format("truetype"),
-    url("${url}/fonts/bismillah/bismillah.svg#bismillah") format("svg");
+    url("fonts/bismillah/bismillah.woff") format("woff"),
+    url("fonts/bismillah/bismillah.ttf") format("truetype"),
+    url("fonts/bismillah/bismillah.svg#bismillah") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-.word_font {
-  line-height: 150%;
-}
-@font-face {
-  font-family: 'SSStandard';
-  src: url('${url}/fonts/ss-standard/ss-standard.eot');
-  src: url('${url}/fonts/ss-standard/ss-standard.eot?#iefix')
-      format('embedded-opentype'),
-    url('${url}/fonts/ss-standard/ss-standard.woff')
-      format('woff'),
-    url('${url}/fonts/ss-standard/ss-standard.ttf')
-      format('truetype'),
-    url('${url}/fonts/ss-standard/ss-standard.svg#SSStandard')
-      format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Nafees';
-  src: url('${url}/fonts/nafees/nafees-nastaleeq-webfont.eot?#iefix')
-      format('embedded-opentype'),
-    url('${url}/fonts/nafees/nafees-nastaleeq-webfont.woff')
-      format('woff'),
-    url('${url}/fonts/nafees/nafees-nastaleeq-webfont.ttf')
-      format('truetype'),
-    url('${url}/fonts/nafees/nafees-nastaleeq-webfont.svg#NafeesRegular')
-      format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'divehi';
-  src: url('${url}/fonts/divehi/divehi.eot?#iefix')
-      format('embedded-opentype'),
-    url('${url}/fonts/divehi/divehi.woff2') format('woff2'),
-    url('${url}/fonts/divehi/divehi.woff') format('woff'),
-    url('${url}/fonts/divehi/divehi.ttf') format('truetype'),
-    url('${url}/fonts/divehi/divehi.svg#dhivehiregular')
-      format('svg');
-}
 @font-face {
   font-family: 'surahnames';
-  src: url('${url}/fonts/surah-names/surah-names.eot');
-  src: url('${url}/fonts/surah-names/surah-names.eot#iefix')
+  src: url('fonts/surah-names/surah-names.eot');
+  src: url('fonts/surah-names/surah-names.eot#iefix')
       format('embedded-opentype'),
-    url('${url}/fonts/surah-names/surah-names.ttf')
+    url('fonts/surah-names/surah-names.ttf')
       format('truetype'),
-    url('${url}/fonts/surah-names/surah-names.woff')
+    url('fonts/surah-names/surah-names.woff')
       format('woff'),
-    url('${url}/fonts/surah-names/surah-names.svg#surah-names')
+    url('fonts/surah-names/surah-names.svg#surah-names')
       format('svg');
   font-weight: normal;
   font-style: normal;
-}
-@font-face {
-  font-family: 'bismillah';
-  src: url('${url}/fonts/bismillah/bismillah.eot');
-  src: url('${url}/fonts/bismillah/bismillah.eot#iefix')
-      format('embedded-opentype'),
-    url('${url}/fonts/bismillah/bismillah.ttf')
-      format('truetype'),
-    url('${url}/fonts/bismillah/bismillah.woff')
-      format('woff'),
-    url('${url}/fonts/bismillah/bismillah.svg#bismillah')
-      format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-#bismillah {
-  font-family: 'bismillah';
-  font-size: 60px;
-  color: #000;
-  padding: 25px 0;
+  font-display: swap;
 }
 
+@font-face {
+  font-family: 'bismillah';
+  src: url('fonts/bismillah/bismillah.eot');
+  src: url('fonts/bismillah/bismillah.eot#iefix')
+      format('embedded-opentype'),
+    url('fonts/bismillah/bismillah.ttf')
+      format('truetype'),
+    url('fonts/bismillah/bismillah.woff')
+      format('woff'),
+    url('fonts/bismillah/bismillah.svg#bismillah')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 `
     .replace(/\n/g, '')
     .replace(/\s/g, '');

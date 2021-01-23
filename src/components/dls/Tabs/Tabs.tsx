@@ -24,8 +24,8 @@ type TabsProps = {
   children: ReactElement[];
 };
 
-const Tabs = ({ initial, children }: TabsProps) => {
-  const [currentTab, setCurrentTab] = useState(initial || 0);
+const Tabs = ({ initial = 0, children }: TabsProps) => {
+  const [currentTab, setCurrentTab] = useState(initial);
 
   return (
     <div>
