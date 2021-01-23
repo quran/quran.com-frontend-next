@@ -10,6 +10,7 @@ yarn-error.log*
 
 # system files
 .DS_Store
+.idea
 
 # Runtime data
 pids
