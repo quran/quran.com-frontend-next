@@ -3,9 +3,10 @@ import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
 import DeveloperUtility from 'src/components/developerUtility';
+import Navbar from 'src/components/Navbar/Navbar';
+import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import { theme } from '../utils/styles';
 import { createSEOConfig } from '../utils/seo';
-import Footer from '../components/Footer';
 import ReduxProvider from '../redux/Provider';
 
 function MyApp({ Component, pageProps }): JSX.Element {
@@ -17,9 +18,10 @@ function MyApp({ Component, pageProps }): JSX.Element {
       <ReduxProvider>
         <ThemeProvider theme={theme}>
           <DefaultSeo {...createSEOConfig({})} />
+          <Navbar />
           <DeveloperUtility />
           <Component {...pageProps} />
-          <Footer />
+          <AudioPlayer />
         </ThemeProvider>
       </ReduxProvider>
     </>
