@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { BsWrench } from 'react-icons/bs';
 import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
+import NotesAdjustment from './NotesAdjustment';
 
 /**
  * A set of developer utilities only availble on development environments
@@ -27,6 +28,7 @@ const DeveloperUtility = () => {
     <Container expanded>
       <FontAdjustment />
       <ReadingViewAdjustment />
+      <NotesAdjustment />
       <div>
         <button type="button" onClick={() => setIsExpanded(false)}>
           close
