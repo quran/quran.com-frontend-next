@@ -23,8 +23,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
-    "@types/styled-components": "^5.1.0",
-    "@types/styled-system": "^5.1.9",
     "humps": "^2.0.1",
     "lodash": "^4.17.19",
     "next": "^10.0.5",
@@ -69,6 +67,8 @@
     "@types/qs": "^6.9.3",
     "@types/react": "^16.9.25",
     "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.1.0",
+    "@types/styled-system": "^5.1.9",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
     "awesome-typescript-loader": "^5.2.1",

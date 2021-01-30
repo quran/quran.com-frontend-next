@@ -1,7 +1,7 @@
 import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
-import { theme as themeObj } from '../src/utils/styles';
+import { theme as themeObj } from '../src/styles/theme';
 
 function render(ui, { theme = themeObj, ...options } = {}) {
   function Wrapper({ children }) {
