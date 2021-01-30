@@ -6,7 +6,7 @@ import ChapterIcon from './ChapterIcon';
 
 const Item = styled.li`
   list-style: none;
-  margin-bottom: ${({ theme }) => theme.base.unit * 2}rem;
+  margin-bottom: ${({ theme }) => theme.spacing.large};
 
   &:hover {
     background: #f1f1f1;
@@ -15,13 +15,13 @@ const Item = styled.li`
 
 const NameArabic = styled.div`
   font-size: 1.25rem;
-  margin-bottom: ${({ theme }) => theme.base.unit}rem;
-  color: ${({ theme }) => theme.colors.text};
+  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  color: ${({ theme }) => theme.colors.text.default};
 `;
 
 const Number = styled.p`
   margin: 0;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const NameContainer = styled.div`
@@ -34,7 +34,7 @@ const NameContainer = styled.div`
 const NameEnglish = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const StyledLink = styled.a`

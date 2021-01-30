@@ -1,42 +1,98 @@
-import merge from 'lodash/merge';
-
-const BASE_PX = 16;
-const fonts = {
-  montserrat: 'Montserrat, sans-serif',
-  sourceSans: 'Source Sans Pro, sans-serif',
-  timesNew: 'Times New Roman, sans-serif',
-};
-const makeRem = (size: number) => `${size / BASE_PX}rem`;
-
 export const theme = {
   name: 'Default',
-  backgroundColor: '#fff',
-  fonts,
-  fontSizes: [makeRem(12), makeRem(14), makeRem(16), makeRem(20), makeRem(24), makeRem(32)],
-  base: {
-    px: BASE_PX,
-    unit: 1, // base font-size is 16px
+  fonts: {
+    primary: 'Montserrat, sans-serif',
+    secondary: 'Source Sans Pro, sans-serif',
+    tertiary: 'Times New Roman, sans-serif',
   },
   colors: {
-    primary: '#00acc1',
-    white: '#fff',
-    text: '#607d8b',
-    gray: '#777',
-    black: '#000000',
+    // These colors will change according to the theme
+    primary: {
+      faded: '#fff',
+      faint: '#fff',
+      medium: '#00acc1',
+      deep: '#fff',
+    },
+    secondary: {
+      faded: '#fff',
+      faint: '#fff',
+      medium: '#fff',
+      deep: '#fff',
+    },
+    tertiary: {
+      faded: '#fff',
+      faint: '#fff',
+      medium: '#fff',
+      deep: '#fff',
+    },
+    text: {
+      default: '#607d8b',
+      link: '#fff',
+      warning: '#fff',
+      error: '#fff',
+    },
+    background: {
+      // no opinions atm, can evolve it over time
+    },
   },
+
+  // For the following sections, these are the rem dimensions that we used at Twitter (info is public).
+  spacing: {
+    // You can use multiples of spaces and/or combine to achieve the desired spacing. E.g "2x @mega + 1x @small"
+    micro: '0.2rem',
+    xxsmall: '0.4rem',
+    xsmall: '0.6rem',
+    small: '0.8rem',
+    medium: '1rem',
+    large: '1.2rem',
+    mega: '2rem',
+  },
+
+  fontSizes: {
+    small: '0.6rem',
+    normal: '0.7rem',
+    large: '0.8rem',
+    xlarge: '1rem',
+    jumbo: '1.2rem',
+  },
+
+  lineHeights: {
+    small: '0.8rem',
+    normal: '1rem',
+    large: '1.2rem',
+    xlarge: '1.4rem',
+    jumbo: '1.6rem',
+  },
+
+  fontWeights: {
+    normal: 400,
+    bold: 700,
+  },
+
+  shadows: {
+    // no opinions atm, can evolve it over time
+  },
+
+  elevations: {
+    // no opinions atm, can evolve it over time
+  },
+
   breakpoints: {
-    sm: '576px',
-    md: '768px',
-    lg: '992px',
-    xl: '1200px',
+    // These should not be considered "tokens" per se but they'll be in the code
+    mobileS: '320px',
+    mobileM: '375px',
+    mobileL: '425px',
+    tablet: '768px',
+    laptop: '1024px',
+  },
+
+  transitions: {
+    fast: '0.3s',
+    regular: '0.6s',
+    slow: '0.9s',
   },
 };
 
-export const darkTheme = merge({}, theme, {
+export const darkTheme = {
   ...theme,
-  name: 'Dark',
-  backgroundColor: '#111',
-  colors: {
-    text: '#fff',
-  },
-});
+};
