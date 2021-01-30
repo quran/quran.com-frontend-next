@@ -6,7 +6,6 @@ export const theme = {
     tertiary: 'Times New Roman, sans-serif',
   },
   colors: {
-    // These colors will change according to the theme
     primary: {
       faded: '#fff',
       faint: '#fff',
@@ -32,7 +31,7 @@ export const theme = {
       error: '#fff',
     },
     background: {
-      // no opinions atm, can evolve it over time
+      // TODO: @Aqeel: add tokens for the backround colors
     },
   },
 
@@ -70,15 +69,14 @@ export const theme = {
   },
 
   shadows: {
-    // no opinions atm, can evolve it over time
+    // TODO: @Aqeel: add tokens for the shadows
   },
 
   elevations: {
-    // no opinions atm, can evolve it over time
+    // TODO: @Aqeel: add tokens for the elevation
   },
 
   breakpoints: {
-    // These should not be considered "tokens" per se but they'll be in the code
     mobileS: '320px',
     mobileM: '375px',
     mobileL: '425px',
