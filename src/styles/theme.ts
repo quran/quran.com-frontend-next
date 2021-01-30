@@ -1,4 +1,6 @@
-export const theme = {
+import { Theme } from './styled';
+
+export const theme: Theme = {
   name: 'Default',
   fonts: {
     primary: 'Montserrat, sans-serif',
@@ -35,7 +37,6 @@ export const theme = {
     },
   },
 
-  // For the following sections, these are the rem dimensions that we used at Twitter (info is public).
   spacing: {
     // You can use multiples of spaces and/or combine to achieve the desired spacing. E.g "2x @mega + 1x @small"
     micro: '0.2rem',

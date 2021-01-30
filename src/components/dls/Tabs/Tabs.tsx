@@ -12,9 +12,9 @@ const selectedCss = css<{ selected: boolean }>`
 
 const TabNavItem = styled.li<{ selected: boolean }>`
   color: ${({ theme }) => theme.colors.text.default};
-  font-size: ${({ theme }) => theme.base.unit * 1.5}rem;
+  font-size: ${({ theme }) => theme.spacing.large};
   display: inline-block;
-  margin-right: ${({ theme }) => theme.base.unit * 2.5}rem;
+  margin-right: ${({ theme }) => theme.spacing.mega};
   cursor: pointer;
   ${(props) => props.selected && selectedCss}
 `;

@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { media } from 'styled-bootstrap-grid';
 import { space, MarginProps, PaddingProps } from 'styled-system';
 
 const CardRowContainer = styled.div<MarginProps & PaddingProps>`
@@ -18,10 +17,6 @@ const CardRowContainer = styled.div<MarginProps & PaddingProps>`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  ${media.xs`
-    grid-auto-columns: calc(100% - 0.75rem * 3);
-  `}
 
   overflow-x: scroll;
   scroll-snap-type: x proximity;
