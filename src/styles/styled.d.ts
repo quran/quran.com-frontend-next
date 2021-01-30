@@ -61,8 +61,36 @@ type FontWeights = {
   bold: number;
 };
 
-type Shadows = Record<string, unknown>;
-type Elevation = Record<string, unknown>;
+type BorderRadiuses = {
+  sharp: string;
+  pill: string;
+  default: string;
+  circle: string;
+};
+type Shadows = {
+  light: string;
+  regular: string;
+  heavy: string;
+};
+
+type Opacity = {
+  30: string;
+  50: string;
+  75: string;
+  85: string;
+};
+
+type ZIndexes = {
+  min: string;
+  default: string;
+  sticky: string;
+  header: string;
+  toast: string;
+  dropdown: string;
+  spinner: string;
+  modal: string;
+  max: string;
+};
 
 type Breakpoints = {
   mobileS: string;
@@ -86,8 +114,10 @@ export interface Theme {
   fontSizes: FontSizes;
   lineHeights: LineHeights;
   fontWeights: FontWeights;
+  borderRadiuses: BorderRadiuses;
   shadows: Shadows;
-  elevations: Elevation;
+  opacity: Opacity;
+  zIndexes: ZIndexes;
   breakpoints: Breakpoints;
   transitions: Transitions;
 }

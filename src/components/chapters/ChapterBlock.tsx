@@ -14,7 +14,7 @@ const Item = styled.li`
 `;
 
 const NameArabic = styled.div`
-  font-size: 1.25rem;
+  font-size: ${(props) => props.theme.fontSizes.jumbo};
   margin-bottom: ${({ theme }) => theme.spacing.medium};
   color: ${({ theme }) => theme.colors.text.default};
 `;
@@ -28,18 +28,18 @@ const NameContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding-left: 0.75rem;
+  padding-left: ${(props) => props.theme.spacing.small};
 `;
 
 const NameEnglish = styled.div`
-  font-size: 0.8rem;
+  font-size: ${(props) => props.theme.fontSizes.normal};
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const StyledLink = styled.a`
   display: block;
-  padding: 10px 10px;
+  padding: ${(props) => props.theme.spacing.xsmall} ${(props) => props.theme.spacing.xsmall};
   text-decoration: none;
 `;
 

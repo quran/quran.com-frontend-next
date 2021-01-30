@@ -124,8 +124,8 @@ export default styled.span<{ id: string | number }>`
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
-  font-size: 25px;
+  line-height: ${(props) => props.theme.lineHeights.normal};
+  font-size: ${(props) => props.theme.fontSizes.jumbo};
   float: right;
   color: ${({ theme }) => theme.colors.text.default};
 

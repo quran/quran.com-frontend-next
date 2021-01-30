@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next-translate && next dev",
     "build": "next-translate && next build",
+    "snapshots:update": "jest --updateSnapshot",
     "start": "next start",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",

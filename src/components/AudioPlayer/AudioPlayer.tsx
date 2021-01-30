@@ -7,10 +7,12 @@ const AudioPlayer = () => {
 
 const StyledContainer = styled.div`
   position: sticky;
-  min-height: 40px;
+  min-height: calc(
+    ${(props) => props.theme.spacing.mega} + ${(props) => props.theme.spacing.medium}
+  );
   width: 100%;
   bottom: 0;
   text-align: center;
-  background: #ffebab; // placeholder
+  background: #ffebab;
 `;
 export default AudioPlayer;

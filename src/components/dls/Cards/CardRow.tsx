@@ -4,8 +4,8 @@ import { space, MarginProps, PaddingProps } from 'styled-system';
 
 const CardRowContainer = styled.div<MarginProps & PaddingProps>`
   display: grid;
-  grid-gap: 0.75rem;
-  grid-template-columns: 0px;
+  grid-gap: ${(props) => props.theme.spacing.small};
+  grid-template-columns: 0;
   grid-template-rows: auto;
   grid-auto-flow: column;
   grid-auto-columns: auto;
@@ -20,14 +20,14 @@ const CardRowContainer = styled.div<MarginProps & PaddingProps>`
 
   overflow-x: scroll;
   scroll-snap-type: x proximity;
-  padding-bottom: calc(0.75 * 0.75rem);
-  margin-bottom: calc(-0.25 * 0.75rem);
+  padding-bottom: ${(props) => props.theme.spacing.xsmall};
+  margin-bottom: -${(props) => props.theme.spacing.micro};
   ${space}
 
   &:before,
   &:after {
     content: '';
-    width: 10px;
+    width: ${(props) => props.theme.spacing.xsmall};
   }
 `;
 
