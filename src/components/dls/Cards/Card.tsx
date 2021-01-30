@@ -56,7 +56,7 @@ const Caption = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background: ${(props) => rgba(props.theme.colors.primary, 0.7)};
+  background: ${(props) => rgba(props.theme.colors.primary.medium, 0.7)};
   border-radius: 10px;
   font-family: SFProText-Regular;
   font-size: 16px;

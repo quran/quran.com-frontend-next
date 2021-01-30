@@ -127,7 +127,7 @@ export default styled.span<{ id: string | number }>`
   line-height: 1;
   font-size: 25px;
   float: right;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.text.default};
 
   &:before {
     content: '${({ id }) => String.raw`\e${CONTENT[id] || '903'}`}';

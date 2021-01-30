@@ -6,12 +6,12 @@ const TabNavList = styled.ul`
 `;
 
 const selectedCss = css<{ selected: boolean }>`
-  color: ${({ theme }) => theme.colors.primary};
-  border-bottom: 3px solid ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary.medium};
+  border-bottom: 3px solid ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const TabNavItem = styled.li<{ selected: boolean }>`
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.text.default};
   font-size: ${({ theme }) => theme.base.unit * 1.5}rem;
   display: inline-block;
   margin-right: ${({ theme }) => theme.base.unit * 2.5}rem;

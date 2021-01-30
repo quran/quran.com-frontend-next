@@ -66,7 +66,7 @@ export function createSEOConfig({
       },
       {
         name: 'theme-color',
-        content: theme.colors.primary,
+        content: theme.colors.primary.medium,
       },
     ],
   }; // defaultImageHeight: 500, // defaultImageWidth: 500,
