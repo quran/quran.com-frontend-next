@@ -69,12 +69,36 @@ export const theme: Theme = {
     bold: 700,
   },
 
-  shadows: {
-    // TODO: @Aqeel: add tokens for the shadows
+  borderRadiuses: {
+    sharp: '0',
+    pill: '20rem',
+    default: '0.25rem',
+    circle: '50%',
   },
 
-  elevations: {
-    // TODO: @Aqeel: add tokens for the elevation
+  shadows: {
+    light: '',
+    regular: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
+    heavy: '',
+  },
+
+  opacity: {
+    30: '30%',
+    50: '50%',
+    75: '75%',
+    85: '85%',
+  },
+
+  zIndexes: {
+    min: '-999',
+    default: '1',
+    sticky: '300',
+    header: '400',
+    toast: '500',
+    dropdown: '600',
+    spinner: '700',
+    modal: '800',
+    max: '999',
   },
 
   breakpoints: {

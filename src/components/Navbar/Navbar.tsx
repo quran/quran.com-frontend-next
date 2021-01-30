@@ -7,7 +7,9 @@ const Navbar = () => {
 
 const StyledNav = styled.nav`
   position: relative;
-  min-height: 50px;
+  min-height: calc(
+    ${(props) => props.theme.spacing.mega} + ${(props) => props.theme.spacing.large}
+  );
   width: 100%;
   text-align: center;
   border-bottom: 1px black solid;

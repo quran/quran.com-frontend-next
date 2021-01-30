@@ -5,7 +5,7 @@ import ChapterBlock from './ChapterBlock';
 import ChapterType from '../../../types/ChapterType';
 
 const List = styled.ul`
-  padding-left: 0px;
+  padding-left: 0;
 `;
 
 type Props = {

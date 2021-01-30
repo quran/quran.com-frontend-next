@@ -3,22 +3,22 @@
 exports[`should render 1`] = `
 .c0 {
   position: relative;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   width: 100%;
   white-space: normal;
   -webkit-scroll-snap-align: center;
   -moz-scroll-snap-align: center;
   -ms-scroll-snap-align: center;
   scroll-snap-align: center;
-  margin: 0px;
+  margin: 0;
   overflow: hidden;
-  height: 180px;
+  height: calc(6 * 2rem);
 }
 
 .c1 {
   max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   width: 100%;
 }
 
@@ -29,11 +29,11 @@ exports[`should render 1`] = `
   bottom: 0;
   left: 0;
   background: rgba(0,172,193,0.7);
-  border-radius: 10px;
+  border-radius: 0.25rem;
   font-family: SFProText-Regular;
-  font-size: 16px;
+  font-size: 1rem;
   color: #fff;
-  padding: 16px 30px;
+  padding: 1rem 2rem;
   -webkit-align-items: flex-end;
   -webkit-box-align: flex-end;
   -ms-flex-align: flex-end;
@@ -46,9 +46,9 @@ exports[`should render 1`] = `
 
 .c3 {
   font-family: SFProText-Regular;
-  font-size: 26px;
+  font-size: calc(2 * 0.8rem);
   color: #fff;
-  margin-bottom: 7px;
+  margin-bottom: 0.4rem;
 }
 
 <div>

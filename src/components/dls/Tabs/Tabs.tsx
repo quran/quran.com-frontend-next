@@ -7,7 +7,8 @@ const TabNavList = styled.ul`
 
 const selectedCss = css<{ selected: boolean }>`
   color: ${({ theme }) => theme.colors.primary.medium};
-  border-bottom: 3px solid ${({ theme }) => theme.colors.primary.medium};
+  border-bottom: ${(props) => props.theme.spacing.micro} solid
+    ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const TabNavItem = styled.li<{ selected: boolean }>`
