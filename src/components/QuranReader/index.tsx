@@ -11,6 +11,7 @@ import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
 import { ReadingView } from './types';
+import Notes from './Notes/Notes';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -56,18 +57,21 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   }
 
   return (
-    <StyledInfiniteScroll
-      initialLoad={false}
-      threshold={INFINITE_SCROLLER_THRESHOLD}
-      hasMore={size < pageLimit}
-      loadMore={() => {
-        if (!isValidating) {
-          setSize(size + 1);
-        }
-      }}
-    >
-      {view}
-    </StyledInfiniteScroll>
+    <>
+      <StyledInfiniteScroll
+        initialLoad={false}
+        threshold={INFINITE_SCROLLER_THRESHOLD}
+        hasMore={size < pageLimit}
+        loadMore={() => {
+          if (!isValidating) {
+            setSize(size + 1);
+          }
+        }}
+      >
+        {view}
+      </StyledInfiniteScroll>
+      <Notes />
+    </>
   );
 };
 
