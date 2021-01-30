@@ -3,7 +3,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { theme, darkTheme } from '../src/utils/styles';
+import { theme, darkTheme } from '../src/styles/theme';
 import makeFonts from '../src/styles/fonts';
 import { makeGlobalCss } from '../src/styles/GlobalStyles';
 

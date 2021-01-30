@@ -1,5 +1,5 @@
 import { NextSeoProps } from 'next-seo';
-import { theme } from './styles';
+import { theme } from '../styles/theme';
 
 export const config = {
   siteName: "Al-Qur'an al-Kareem - القرآن الكريم",

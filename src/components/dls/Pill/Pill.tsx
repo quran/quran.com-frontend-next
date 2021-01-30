@@ -20,7 +20,7 @@ const PillContainer = styled.div`
 
   &:hover {
     background: ${({ theme }) => theme.colors.primary.medium};
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.primary.deep};
   }
 `;
 

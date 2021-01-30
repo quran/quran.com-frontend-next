@@ -23,7 +23,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
 };
 
 const VerseTextContainer = styled.div<{ highlight: boolean }>`
-  background: ${({ highlight, theme }) => highlight && theme.colors.gray};
+  background: ${({ highlight, theme }) => highlight && theme.colors.primary.medium};
 `;
 
 const StyledTranslationView = styled.div`
