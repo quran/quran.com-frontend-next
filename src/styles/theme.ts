@@ -33,7 +33,7 @@ export const theme: Theme = {
       error: '#fff',
     },
     background: {
-      // TODO: @Aqeel: add tokens for the backround colors
+      default: '#fff',
     },
   },
 

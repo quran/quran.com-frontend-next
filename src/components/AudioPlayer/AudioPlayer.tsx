@@ -14,5 +14,6 @@ const StyledContainer = styled.div`
   bottom: 0;
   text-align: center;
   background: #ffebab;
+  z-index: ${(props) => props.theme.zIndexes.sticky};
 `;
 export default AudioPlayer;
