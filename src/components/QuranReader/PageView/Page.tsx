@@ -21,7 +21,7 @@ const Page = ({ verses }: PageProps) => {
 };
 
 const StyledPage = styled.div`
-  margin: 1rem auto;
+  margin: 0 auto;
 `;
 
 export default React.memo(Page);

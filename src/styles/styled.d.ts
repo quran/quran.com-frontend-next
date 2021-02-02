@@ -20,7 +20,9 @@ type ColorText = {
   error: string;
 };
 
-type ColorBackground = Record<string, unknown>;
+type ColorBackground = {
+  default: string;
+};
 
 type Colors = {
   primary: ColorBase;

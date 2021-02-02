@@ -1,6 +1,5 @@
 import React from 'react';
 import range from 'lodash/range';
-import { Container, Row } from 'styled-bootstrap-grid';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import { ChapterResponse, ChaptersResponse, VersesResponse } from 'types/APIResponses';
 import { getChapters, getChapter, getChapterVerses } from '../api';
@@ -13,13 +12,7 @@ type ChapterProps = {
 };
 
 const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesResponse }) => {
-  return (
-    <Container>
-      <Row>
-        <QuranReader initialData={versesResponse} chapter={chapter} />
-      </Row>
-    </Container>
-  );
+  return <QuranReader initialData={versesResponse} chapter={chapter} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

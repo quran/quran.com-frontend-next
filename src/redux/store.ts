@@ -18,7 +18,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['quranReaderStyles', 'readingView', 'notes'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
+  whitelist: ['quranReaderStyles', 'readingView'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
 const rootReducer = combineReducers({
