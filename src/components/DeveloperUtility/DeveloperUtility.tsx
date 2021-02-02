@@ -5,6 +5,7 @@ import { BsWrench } from 'react-icons/bs';
 import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
 import NotesAdjustment from './NotesAdjustment';
+import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 
 /**
  * A set of developer utilities only availble on development environments
@@ -29,6 +30,7 @@ const DeveloperUtility = () => {
       <FontAdjustment />
       <ReadingViewAdjustment />
       <NotesAdjustment />
+      <AudioPlayerAdjustment />
       <div>
         <button type="button" onClick={() => setIsExpanded(false)}>
           close

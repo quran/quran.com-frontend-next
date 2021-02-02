@@ -13,6 +13,8 @@ import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/
 import quranReaderStyles from './slices/QuranReader/styles';
 import readingView from './slices/QuranReader/readingView';
 import notes from './slices/QuranReader/notes';
+import navbar from './slices/navbar';
+import audioPlayerStyle from './slices/AudioPlayer/style';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   quranReaderStyles,
   readingView,
   notes,
+  navbar,
+  audioPlayerStyle,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
