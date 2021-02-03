@@ -14,6 +14,7 @@ import PageView from './PageView';
 import TranslationView from './TranslationView';
 import { ReadingView } from './types';
 import Notes from './Notes/Notes';
+import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -61,6 +62,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
 
   return (
     <>
+      <ContextMenu />
       <Container isSideBarVisible={isSideBarVisible}>
         <StyledInfiniteScroll
           initialLoad={false}
