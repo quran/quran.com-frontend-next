@@ -8,26 +8,30 @@ import {
 
 const AudioPlayer = () => {
   const { visibility } = useSelector(selectAudioPlayerStyle);
-  const isVisible =
-    visibility === AudioPlayerVisibility.Expanded || visibility === AudioPlayerVisibility.Minimized;
+  const isHidden = visibility === AudioPlayerVisibility.Hidden;
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
+  const isExpanded = visibility === AudioPlayerVisibility.Expanded;
 
   return (
-    <StyledContainer isVisible={isVisible} isMinimized={isMinimized}>
+    <StyledContainer isHidden={isHidden} isMinimized={isMinimized} isExpanded={isExpanded}>
       [Placeholder AudioPlayer]
     </StyledContainer>
   );
 };
 
-const StyledContainer = styled.div<{ isVisible: boolean; isMinimized: boolean }>`
+const StyledContainer = styled.div<{
+  isHidden: boolean;
+  isMinimized: boolean;
+  isExpanded: boolean;
+}>`
   position: sticky;
-  min-height: ${(props) =>
-    props.isMinimized
-      ? props.theme.spacing.medium
-      : `calc(
+  ${(props) => props.isHidden && `height: 0;`}
+  ${(props) => props.isMinimized && `height: ${props.theme.spacing.medium};`}
+  ${(props) =>
+    props.isExpanded &&
+    `height: calc(
     ${props.theme.spacing.mega} + ${props.theme.spacing.medium}
-  )`};
-  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
+  );`}
   width: 100%;
   bottom: 0;
   text-align: center;
