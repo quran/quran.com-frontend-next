@@ -6,6 +6,7 @@ import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
+import NavbarAdjustment from './NavbarAdjustment';
 
 /**
  * A set of developer utilities only availble on development environments
@@ -30,6 +31,7 @@ const DeveloperUtility = () => {
       <FontAdjustment />
       <ReadingViewAdjustment />
       <NotesAdjustment />
+      <NavbarAdjustment />
       <AudioPlayerAdjustment />
       <div>
         <button type="button" onClick={() => setIsExpanded(false)}>
