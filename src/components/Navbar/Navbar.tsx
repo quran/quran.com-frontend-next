@@ -11,10 +11,11 @@ const Navbar = () => {
 
 const StyledNav = styled.nav<{ isVisible: boolean }>`
   position: relative;
-  visibility: ${(props) => (props.isVisible ? 'visible' : 'hidden')};
-  min-height: ${NAVBAR_HEIGHT};
+  height: ${(props) => (props.isVisible ? NAVBAR_HEIGHT : '0')};
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
   width: 100%;
   text-align: center;
+  transition: ${(props) => props.theme.transitions.regular};
   background: ${(props) => props.theme.colors.background.default};
   z-index: ${(props) => props.theme.zIndexes.header};
   border-bottom: 1px black solid;

@@ -32,6 +32,7 @@ const StyledContainer = styled.div<{
     `height: calc(
     ${props.theme.spacing.mega} + ${props.theme.spacing.medium}
   );`}
+  opacity: ${(props) => (props.isHidden ? 0 : 1)};
   width: 100%;
   bottom: 0;
   text-align: center;
