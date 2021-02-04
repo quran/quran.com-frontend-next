@@ -28,7 +28,9 @@ const DeveloperUtility = () => {
   }
 
   return (
-    <Container expanded>
+    <Container type="button" expanded>
+      Developer Utility
+      <hr />
       <FontAdjustment />
       <ReadingViewAdjustment />
       <NotesAdjustment />
