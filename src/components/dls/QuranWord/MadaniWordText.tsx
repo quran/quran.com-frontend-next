@@ -7,7 +7,7 @@ type MadaniWordTextProps = {
 
 const MadaniWordText = (props: MadaniWordTextProps) => {
   const { text } = props;
-  return <StyledMadaniWordText>{`${text} `}</StyledMadaniWordText>;
+  return <StyledMadaniWordText>{text}</StyledMadaniWordText>;
 };
 
 const StyledMadaniWordText = styled.span`

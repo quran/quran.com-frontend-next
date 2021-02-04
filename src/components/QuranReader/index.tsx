@@ -83,7 +83,6 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
 };
 
 const Container = styled.div<{ isSideBarVisible: boolean }>`
-  background: red;
   min-height: calc(100vh - ${NAVBAR_HEIGHT});
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     transition: ${(props) => props.theme.transitions.regular};
