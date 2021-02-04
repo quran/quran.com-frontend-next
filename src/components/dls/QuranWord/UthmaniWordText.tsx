@@ -15,6 +15,5 @@ const UthmaniWordText = ({ code, pageNumber }: UthmaniWordTextProps) => {
 
 const StyledUthmaniWordText = styled.span<{ pageNumber: number }>`
   font-family: ${(props) => `p${props.pageNumber}`};
-  word-spacing: 1rem;
 `;
 export default UthmaniWordText;
