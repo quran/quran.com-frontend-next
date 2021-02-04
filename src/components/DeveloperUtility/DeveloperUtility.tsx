@@ -28,7 +28,7 @@ const DeveloperUtility = () => {
   }
 
   return (
-    <Container type="button" aria-label="Developer utility" expanded>
+    <Container type="button" expanded>
       Developer Utility
       <hr />
       <FontAdjustment />
@@ -46,7 +46,9 @@ const DeveloperUtility = () => {
   );
 };
 
-const Container = styled.button<{ expanded: boolean }>`
+const Container = styled.button.attrs({
+  'aria-label': 'developer-utility',
+})<{ expanded: boolean }>`
   background: black;
   color: white;
   position: fixed;
