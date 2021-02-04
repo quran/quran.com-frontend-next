@@ -3,12 +3,19 @@ import { QuranFont } from 'src/components/QuranReader/types';
 
 const FONT_SCALING_FACTOR = 1.1;
 
+export enum LetterSpacingMultiplyer { // Used to justify the words on the line, fonts with smaller words need a smaller multiplier
+  Madani = 17,
+  IndoPak = 13,
+  None = 1,
+}
+
 export type QuranReaderStyles = {
   translationFontSize: number;
   quranTextFontSize: number;
   quranTextLineHeight: number;
   quranTextLetterSpacing: number;
   quranFont: QuranFont;
+  letterSpacingMultiplier: LetterSpacingMultiplyer;
 };
 
 const initialState: QuranReaderStyles = {
@@ -17,7 +24,8 @@ const initialState: QuranReaderStyles = {
   quranTextFontSize: 2,
   quranTextLineHeight: 3,
   quranTextLetterSpacing: 0,
-  quranFont: QuranFont.Uthmani,
+  quranFont: QuranFont.Madani,
+  letterSpacingMultiplier: LetterSpacingMultiplyer.Madani,
 };
 
 export const quranReaderStylesSlice = createSlice({
@@ -53,10 +61,26 @@ export const quranReaderStylesSlice = createSlice({
       };
     },
     setQuranFont: (state: QuranReaderStyles, action: PayloadAction<QuranFont>) => {
-      return {
-        ...state,
-        quranFont: action.payload,
-      };
+      switch (action.payload) {
+        case QuranFont.Madani:
+          return {
+            ...state,
+            quranFont: action.payload,
+            letterSpacingMultiplier: LetterSpacingMultiplyer.Madani,
+          };
+        case QuranFont.IndoPak:
+          return {
+            ...state,
+            quranFont: action.payload,
+            letterSpacingMultiplier: LetterSpacingMultiplyer.IndoPak,
+          };
+        default:
+          return {
+            ...state,
+            quranFont: action.payload,
+            letterSpacingMultiplier: LetterSpacingMultiplyer.None,
+          };
+      }
     },
   },
 });
