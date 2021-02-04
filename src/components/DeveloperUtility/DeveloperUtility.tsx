@@ -28,7 +28,7 @@ const DeveloperUtility = () => {
   }
 
   return (
-    <Container type="button" expanded>
+    <Container type="button" aria-label="Developer utility" expanded>
       Developer Utility
       <hr />
       <FontAdjustment />
