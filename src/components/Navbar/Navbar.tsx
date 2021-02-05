@@ -10,7 +10,7 @@ const Navbar = () => {
 };
 
 const StyledNav = styled.nav<{ isVisible: boolean }>`
-  position: relative;
+  position: fixed;
   height: ${(props) => (props.isVisible ? NAVBAR_HEIGHT : '0')};
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   width: 100%;

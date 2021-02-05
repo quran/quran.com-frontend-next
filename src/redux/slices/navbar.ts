@@ -4,7 +4,7 @@ export type Navbar = {
   isVisible: boolean;
 };
 
-const initialState: Navbar = { isVisible: false };
+const initialState: Navbar = { isVisible: true };
 
 export const navbarSlice = createSlice({
   name: 'navbar',
