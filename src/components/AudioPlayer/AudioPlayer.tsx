@@ -25,20 +25,10 @@ const StyledContainer = styled.div<{
   isMinimized: boolean;
   isExpanded: boolean;
 }>`
-  position: sticky;
+  position: fixed;
   ${(props) => props.isHidden && `height: 0;`}
-  ${(props) =>
-    props.isMinimized &&
-    `
-  height: ${AUDIO_PLAYER_MINIZED_HEIGHT};
-  margin-bottom: -${AUDIO_PLAYER_MINIZED_HEIGHT};
-  `}
-  ${(props) =>
-    props.isExpanded &&
-    `
-    height: ${AUDIO_PLAYER_EXPANDED_HEIGHT};
-    marging-bottom: -${AUDIO_PLAYER_EXPANDED_HEIGHT};
-    `}
+  ${(props) => props.isMinimized && `height: ${AUDIO_PLAYER_MINIZED_HEIGHT};`}
+  ${(props) => props.isExpanded && `height: ${AUDIO_PLAYER_EXPANDED_HEIGHT};`}
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
   width: 100%;
   bottom: 0;

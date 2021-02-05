@@ -6,13 +6,13 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
-  return <StyledNav isVisible={isVisible}>[Placeholder Navbar]</StyledNav>;
+  return <StyledNav isVisible={isVisible}>{isVisible && `[Placeholder Navbar]`}</StyledNav>;
 };
 
 const StyledNav = styled.nav<{ isVisible: boolean }>`
   position: fixed;
-  height: ${(props) => (props.isVisible ? NAVBAR_HEIGHT : '0')};
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  height: ${NAVBAR_HEIGHT};
+  ${(props) => !props.isVisible && `transform: translateY(-${NAVBAR_HEIGHT});`}
   width: 100%;
   text-align: center;
   transition: ${(props) => props.theme.transitions.regular};
