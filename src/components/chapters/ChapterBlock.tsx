@@ -6,7 +6,7 @@ import ChapterIcon from './ChapterIcon';
 
 const Item = styled.li`
   list-style: none;
-  margin-bottom: ${({ theme }) => theme.base.unit * 2}rem;
+  margin-bottom: ${({ theme }) => theme.spacing.large};
 
   &:hover {
     background: #f1f1f1;
@@ -14,32 +14,32 @@ const Item = styled.li`
 `;
 
 const NameArabic = styled.div`
-  font-size: 1.25rem;
-  margin-bottom: ${({ theme }) => theme.base.unit}rem;
-  color: ${({ theme }) => theme.colors.text};
+  font-size: ${(props) => props.theme.fontSizes.jumbo};
+  margin-bottom: ${({ theme }) => theme.spacing.medium};
+  color: ${({ theme }) => theme.colors.text.default};
 `;
 
 const Number = styled.p`
   margin: 0;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const NameContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding-left: 0.75rem;
+  padding-left: ${(props) => props.theme.spacing.small};
 `;
 
 const NameEnglish = styled.div`
-  font-size: 0.8rem;
+  font-size: ${(props) => props.theme.fontSizes.normal};
   text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const StyledLink = styled.a`
   display: block;
-  padding: 10px 10px;
+  padding: ${(props) => props.theme.spacing.xsmall} ${(props) => props.theme.spacing.xsmall};
   text-decoration: none;
 `;
 

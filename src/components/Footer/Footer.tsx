@@ -104,9 +104,9 @@ const Footer: React.FC = () => {
 
 const Link = styled.a`
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${() => '#787877'};
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary.medium};
   }
 `;
 
@@ -129,11 +129,11 @@ const StyledFooter = styled.footer`
   width: 100%;
   padding: 30px 0 3rem;
   background-color: #32312c;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${() => '#787877'};
 
   h4 {
     font-size: 20px;
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary.medium};
     margin-bottom: 1rem;
   }
 `;

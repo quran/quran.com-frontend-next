@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const primaryColor = css`
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary.medium};
 `;
 
 const largeSize = css`
@@ -19,7 +19,7 @@ const miniSize = css`
 type ColorProps = { primary?: boolean };
 
 const color = css<ColorProps>`
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.text.default};
   ${(props) => props.primary && primaryColor}
 `;
 

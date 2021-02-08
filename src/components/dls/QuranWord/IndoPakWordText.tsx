@@ -7,7 +7,7 @@ type IndoPakWordTextProps = {
 
 const IndoPakWordText = (props: IndoPakWordTextProps) => {
   const { text } = props;
-  return <StyledIndoPakWordText>{`${text} `}</StyledIndoPakWordText>;
+  return <StyledIndoPakWordText>{text}</StyledIndoPakWordText>;
 };
 
 const StyledIndoPakWordText = styled.span`

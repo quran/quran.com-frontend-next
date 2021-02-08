@@ -45,7 +45,7 @@ type StyledWordContainerProps = {
 };
 
 const StyledWordContainer = styled.span<StyledWordContainerProps>`
-  color: ${(props) => props.highlight && props.theme.colors.primary};
+  color: ${(props) => props.highlight && props.theme.colors.primary.medium};
 `;
 
 export default QuranWord;

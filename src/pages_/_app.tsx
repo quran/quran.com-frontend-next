@@ -2,11 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'styled-components';
-import DeveloperUtility from 'src/components/developerUtility';
+import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import Footer from 'src/components/Footer/Footer';
-import { theme } from '../utils/styles';
+import { theme } from '../styles/theme';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 

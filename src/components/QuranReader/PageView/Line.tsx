@@ -1,10 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { selectQuranReaderStyles, QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import WordType from 'types/WordType';
 import VerseText from 'src/components/Verse/VerseText';
-import groupVersesByLine from './groupVersesByLine';
 
 type LineProps = {
   words: Array<WordType>;
@@ -12,14 +11,10 @@ type LineProps = {
 
 const Line = ({ words }: LineProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const versesOnLine = useMemo(() => groupVersesByLine(words), [words]);
-
   return (
     <StyledLineContainer styles={quranReaderStyles}>
       <StyledLine styles={quranReaderStyles}>
-        {Object.keys(versesOnLine).map((key) => (
-          <VerseText words={versesOnLine[key]} key={key} />
-        ))}
+        <VerseText words={words} />
       </StyledLine>
     </StyledLineContainer>
   );

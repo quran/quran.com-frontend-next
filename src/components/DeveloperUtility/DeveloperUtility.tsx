@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import { BsWrench } from 'react-icons/bs';
 import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
+import NotesAdjustment from './NotesAdjustment';
+import AudioPlayerAdjustment from './AudioPlayerAdjustment';
+import NavbarAdjustment from './NavbarAdjustment';
+import ContextMenuAdjustment from './ContextMenuAdjustment';
 
 /**
  * A set of developer utilities only availble on development environments
@@ -24,9 +28,15 @@ const DeveloperUtility = () => {
   }
 
   return (
-    <Container expanded>
+    <Container type="button" expanded>
+      Developer Utility
+      <hr />
       <FontAdjustment />
       <ReadingViewAdjustment />
+      <NotesAdjustment />
+      <NavbarAdjustment />
+      <AudioPlayerAdjustment />
+      <ContextMenuAdjustment />
       <div>
         <button type="button" onClick={() => setIsExpanded(false)}>
           close
@@ -36,22 +46,24 @@ const DeveloperUtility = () => {
   );
 };
 
-const Container = styled.button<{ expanded: boolean }>`
+const Container = styled.button.attrs({
+  'aria-label': 'developer-utility',
+})<{ expanded: boolean }>`
   background: black;
   color: white;
   position: fixed;
-  top: 50px;
-  right: 50px;
-  height: ${(props) => (props.expanded ? 'auto' : ' 60px')};
-  width: ${(props) => (props.expanded ? 'auto' : ' 60px')};
+  top: calc(${(props) => props.theme.spacing.mega} + ${(props) => props.theme.spacing.medium});
+  right: calc(${(props) => props.theme.spacing.mega} + ${(props) => props.theme.spacing.medium});
+  height: ${(props) => (props.expanded ? 'auto' : `calc(2 *${props.theme.spacing.mega})`)};
+  width: ${(props) => (props.expanded ? 'auto' : `calc(2 *${props.theme.spacing.mega})`)};
   z-index: 100;
   border-radius: ${(props) => (props.expanded ? '10%' : ' 100%')};
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: ${(props) => props.theme.shadows.regular};
   text-align: center;
 `;
 
 const StyledWrench = styled(BsWrench)`
-  height: 60px;
-  width: 25px;
+  height: calc(2 * ${(props) => props.theme.spacing.mega});
+  width: calc(${(props) => props.theme.spacing.large} + ${(props) => props.theme.spacing.xxsmall});
 `;
 export default DeveloperUtility;

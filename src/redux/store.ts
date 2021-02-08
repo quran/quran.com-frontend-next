@@ -12,6 +12,10 @@ import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import quranReaderStyles from './slices/QuranReader/styles';
 import readingView from './slices/QuranReader/readingView';
+import notes from './slices/QuranReader/notes';
+import contextMenu from './slices/QuranReader/contextMenu';
+import navbar from './slices/navbar';
+import audioPlayerStyle from './slices/AudioPlayer/style';
 
 const persistConfig = {
   key: 'root',
@@ -21,6 +25,10 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+  audioPlayerStyle,
+  contextMenu,
+  navbar,
+  notes,
   quranReaderStyles,
   readingView,
 });

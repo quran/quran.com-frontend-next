@@ -12,15 +12,17 @@ const PillContainer = styled.div`
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 24px;
-  background: ${({ theme }) => rgba(theme.colors.primary, 0.15)};
-  border: 1px solid ${({ theme }) => rgba(theme.colors.primary, 0.5)};
-  padding: 0.75rem 2rem;
-  color: ${({ theme }) => theme.colors.primary};
+  border-radius: calc(
+    ${(props) => props.theme.spacing.large} + ${(props) => props.theme.spacing.xxsmall}
+  );
+  background: ${({ theme }) => rgba(theme.colors.primary.medium, 0.15)};
+  border: 1px solid ${({ theme }) => rgba(theme.colors.primary.medium, 0.5)};
+  padding: ${(props) => props.theme.spacing.small} ${(props) => props.theme.spacing.mega};
+  color: ${({ theme }) => theme.colors.primary.medium};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.primary.medium};
+    color: ${({ theme }) => theme.colors.primary.deep};
   }
 `;
 

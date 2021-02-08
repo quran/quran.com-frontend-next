@@ -23,16 +23,16 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
 };
 
 const VerseTextContainer = styled.div<{ highlight: boolean }>`
-  background: ${({ highlight, theme }) => highlight && theme.colors.gray};
+  background: ${({ highlight, theme }) => highlight && theme.colors.primary.medium};
 `;
 
 const StyledTranslationView = styled.div`
   max-width: 100%;
-  margin: 1rem auto;
+  margin: ${(props) => props.theme.spacing.medium} auto;
 `;
 
 const StyledText = styled(Text)`
-  letter-spacing: 0rem;
+  letter-spacing: 0;
 `;
 
 export default TranslationView;
