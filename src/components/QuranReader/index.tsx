@@ -7,7 +7,7 @@ import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import ChapterType from 'types/ChapterType';
 import styled from 'styled-components';
-import { NAVBAR_HEIGHT, NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
+import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
@@ -83,7 +83,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
 };
 
 const Container = styled.div<{ isSideBarVisible: boolean }>`
-  min-height: calc(100vh - ${NAVBAR_HEIGHT});
+  padding-top: calc(3 * ${(props) => props.theme.spacing.mega});
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     transition: ${(props) => props.theme.transitions.regular};
     margin-right: ${(props) => (props.isSideBarVisible ? NOTES_SIDE_BAR_DESKTOP_WIDTH : 0)};

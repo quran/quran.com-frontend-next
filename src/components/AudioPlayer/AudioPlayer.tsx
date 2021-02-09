@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { AUDIO_PLAYER_EXPANDED_HEIGHT, AUDIO_PLAYER_MINIZED_HEIGHT } from 'src/styles/constants';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -24,14 +25,10 @@ const StyledContainer = styled.div<{
   isMinimized: boolean;
   isExpanded: boolean;
 }>`
-  position: sticky;
+  position: fixed;
   ${(props) => props.isHidden && `height: 0;`}
-  ${(props) => props.isMinimized && `height: ${props.theme.spacing.medium};`}
-  ${(props) =>
-    props.isExpanded &&
-    `height: calc(
-    ${props.theme.spacing.mega} + ${props.theme.spacing.medium}
-  );`}
+  ${(props) => props.isMinimized && `height: ${AUDIO_PLAYER_MINIZED_HEIGHT};`}
+  ${(props) => props.isExpanded && `height: ${AUDIO_PLAYER_EXPANDED_HEIGHT};`}
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
   width: 100%;
   bottom: 0;

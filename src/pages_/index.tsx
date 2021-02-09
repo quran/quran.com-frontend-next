@@ -24,7 +24,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   const quranAudioSubtitle = t('home:quranAudioSubtitle');
 
   return (
-    <Container>
+    <Container style={{ paddingTop: '4rem' }}>
       <Row>
         <CardRow mb={2}>
           <Card title={salah} subtitle={salahSubtitle} image="/images/sunnah.png" />
