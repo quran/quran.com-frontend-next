@@ -36,7 +36,7 @@ module.exports = {
         },
       ],
     });
-    config.resolve.extensions.push('.ts', '.tsx');
+    config.resolve.extensions.push('.ts', '.tsx', '.css');
 
     // Add support for absolute paths
      config.resolve.modules = [
