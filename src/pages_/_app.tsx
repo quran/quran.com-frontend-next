@@ -8,6 +8,9 @@ import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import { theme } from '../styles/theme';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
+import '../styles/reset.css';
+import '../styles/fonts.css';
+import '../styles/uthmani-fonts.css';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (

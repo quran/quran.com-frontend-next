@@ -4,8 +4,9 @@ import { withKnobs } from '@storybook/addon-knobs';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { theme, darkTheme } from '../src/styles/theme';
-import makeFonts from '../src/styles/fonts';
-import { makeGlobalCss } from '../src/styles/GlobalStyles';
+import ResetCSS from '../src/styles/reset.css';
+import GlobalFonts from '../src/styles/fonts.css';
+import UthmaniFonts from '../src/styles/uthmani-fonts.css';
 
 const themes = [theme, darkTheme];
 const Wrapper = styled.div`
@@ -15,9 +16,10 @@ const Wrapper = styled.div`
 
 const themeDecorator = (storyFn) => (
   <ThemeProvider theme={themes[0]}>
+    <link rel="stylesheet" href={ResetCSS} />
+    <link rel="stylesheet" href={GlobalFonts} />
+    <link rel="stylesheet" href={UthmaniFonts} />
     <Wrapper>
-      <style dangerouslySetInnerHTML={{ __html: makeFonts() }} />
-      <style dangerouslySetInnerHTML={{ __html: makeGlobalCss(16) }} />
       {storyFn()}
     </Wrapper>
   </ThemeProvider>
