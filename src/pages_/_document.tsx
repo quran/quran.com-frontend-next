@@ -1,7 +1,6 @@
 import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { BaseCSS } from 'styled-bootstrap-grid';
 import { makeGlobalCss } from '../styles/GlobalStyles';
 import makeFonts from '../styles/fonts';
 
@@ -14,7 +13,6 @@ export default class MyDocument extends Document {
     const page = renderPage((App) => (props) =>
       sheet.collectStyles(
         <>
-          <BaseCSS />
           <App {...props} />
         </>,
       ),
