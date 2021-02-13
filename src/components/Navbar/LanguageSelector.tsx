@@ -2,7 +2,7 @@ import React from 'react';
 import { CENTER_VERTICALLY } from 'src/styles/utility';
 import styled from 'styled-components';
 
-const LanuageSelector = () => {
+const LanguageSelector = () => {
   return <Container>English</Container>;
 };
 
@@ -15,4 +15,4 @@ const Container = styled.div`
     margin-left: ${(props) => props.theme.spacing.medium};
   }
 `;
-export default LanuageSelector;
+export default LanguageSelector;
