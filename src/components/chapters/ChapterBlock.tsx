@@ -54,7 +54,7 @@ type Props = {
 
 const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (
   <Item key={chapter.id}>
-    <Link as={`/${chapter.id}`} href="/[chapterId]" passHref preload={false}>
+    <Link as={`/${chapter.id}`} href="/[chapterId]" passHref>
       <StyledLink>
         <Container>
           <Number>{chapter.chapterNumber}</Number>
