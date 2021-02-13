@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { CenterVertically } from 'src/styles/utility';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 type ButtonProps = {
   iconHref?: string;
@@ -10,6 +11,8 @@ type ButtonProps = {
   text?: string;
   name?: string;
   disabled?: boolean;
+  href?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export enum ButtonSizes {
@@ -40,9 +43,16 @@ const BUTTON_SIZES = {
   },
 };
 
-const Button = ({ iconHref, iconAlt, size = ButtonSizes.Medium, text, disabled }: ButtonProps) => {
+const Button = ({
+  iconHref,
+  iconAlt,
+  size = ButtonSizes.Medium,
+  text,
+  disabled,
+  href,
+}: ButtonProps) => {
   return (
-    <Container disabled={disabled} size={size}>
+    <Container disabled={disabled} size={size} href={href}>
       {iconHref && (
         <CenterVertically>
           <Icon
@@ -50,6 +60,7 @@ const Button = ({ iconHref, iconAlt, size = ButtonSizes.Medium, text, disabled }
             alt={iconAlt || iconHref}
             width={BUTTON_SIZES[size].icon.width}
             height={BUTTON_SIZES[size].icon.height}
+            priority
           />
         </CenterVertically>
       )}
@@ -58,7 +69,27 @@ const Button = ({ iconHref, iconAlt, size = ButtonSizes.Medium, text, disabled }
   );
 };
 
-const Container = styled.button<ButtonProps>`
+const Container = ({ children, disabled, size, href }) => {
+  if (href) {
+    return (
+      <Link href={href} passHref>
+        <StyledAnchor>
+          <StyledContainer disabled={disabled} size={size}>
+            {children}
+          </StyledContainer>
+        </StyledAnchor>
+      </Link>
+    );
+  }
+
+  return (
+    <StyledContainer disabled={disabled} size={size}>
+      {children}
+    </StyledContainer>
+  );
+};
+
+const StyledContainer = styled.button<ButtonProps>`
   cursor: pointer;
   border-radius: ${(props) => props.theme.borderRadiuses.circle};
   border: none;
@@ -76,6 +107,9 @@ const Container = styled.button<ButtonProps>`
   opacity: ${props.theme.opacity[50]};`};
 `;
 
+const StyledAnchor = styled.a`
+  text-decoration: none;
+`;
 const Icon = styled(Image)`
   div {
     margin: 0 auto;

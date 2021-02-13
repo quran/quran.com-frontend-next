@@ -15,7 +15,12 @@ const Navbar = () => {
         <StyledItemsContainer>
           <CenterVertically>
             <LeftCTA>
-              <Button iconHref="/icons/Logo.svg" size={ButtonSizes.Medium} iconAlt="logo" />
+              <Button
+                iconHref="/icons/Logo.svg"
+                size={ButtonSizes.Medium}
+                iconAlt="logo"
+                href="/"
+              />
               <LanuageSelector />
             </LeftCTA>
           </CenterVertically>
@@ -56,16 +61,8 @@ const LeftCTA = styled.div`
   display: flex;
   margin-left: ${(props) => props.theme.spacing.medium};
 
-  > button {
-    margin-right: ${(props) => props.theme.spacing.xxsmall};
-  }
-
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     margin-left: ${(props) => `calc(1*${props.theme.spacing.mega})`};
-
-    > button {
-      margin-right: ${(props) => props.theme.spacing.medium};
-    }
   }
 `;
 const RightCTA = styled.div`

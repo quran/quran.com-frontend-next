@@ -7,6 +7,12 @@ const LanuageSelector = () => {
 };
 
 const Container = styled.div`
-  ${CENTER_VERTICALLY}
+  ${CENTER_VERTICALLY};
+
+  margin-left: ${(props) => props.theme.spacing.xxsmall};
+
+  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    margin-left: ${(props) => props.theme.spacing.medium};
+  }
 `;
 export default LanuageSelector;
