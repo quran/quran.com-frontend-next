@@ -1,8 +1,10 @@
 import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
-import ChaptersList from '../components/chapters/ChapterList';
+import dynamic from 'next/dynamic';
 import ChapterType from '../../types/ChapterType';
 import { getChapters } from '../api';
+
+const DynamicChaptersList = dynamic(() => import('../components/chapters/ChapterList'));
 
 type IndexProps = {
   chaptersResponse: {
@@ -13,9 +15,7 @@ type IndexProps = {
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   return (
     <div style={{ paddingTop: '4rem' }}>
-      <ChaptersList chapters={chapters.slice(0, 38)} />
-      <ChaptersList chapters={chapters.slice(38, 76)} />
-      <ChaptersList chapters={chapters.slice(76, 114)} />
+      <DynamicChaptersList chapters={chapters} />
     </div>
   );
 };
