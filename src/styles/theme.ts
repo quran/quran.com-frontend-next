@@ -33,7 +33,11 @@ export const theme: Theme = {
       error: '#fff',
     },
     background: {
+      fadedGreyScale: 'rgba(0, 0, 0, 0.06)',
       default: '#fff',
+    },
+    borders: {
+      hairline: 'rgb(235, 238, 240)',
     },
   },
 

@@ -21,15 +21,20 @@ type ColorText = {
 };
 
 type ColorBackground = {
+  fadedGreyScale: string;
   default: string;
 };
 
+type ColorBorders = {
+  hairline: string;
+};
 type Colors = {
   primary: ColorBase;
   secondary: ColorBase;
   tertiary: ColorBase;
   text: ColorText;
   background: ColorBackground;
+  borders: ColorBorders;
 };
 
 type Spacing = {
