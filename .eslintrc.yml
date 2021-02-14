@@ -91,3 +91,4 @@ settings:
         - ".ts"
         - ".tsx"
         - ".d.ts"
+        - ".svg"

@@ -1,18 +1,16 @@
-import Image from 'next/image';
 import React from 'react';
-import { CenterVertically } from 'src/styles/utility';
+import { CENTER_VERTICALLY } from 'src/styles/utility';
 import styled from 'styled-components';
 import Link from 'next/link';
 
 type ButtonProps = {
-  iconHref?: string;
-  iconAlt?: string;
   size?: ButtonSizes;
   text?: string;
   name?: string;
   disabled?: boolean;
   href?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  icon?: React.ReactNode;
 };
 
 export enum ButtonSizes {
@@ -43,27 +41,10 @@ const BUTTON_SIZES = {
   },
 };
 
-const Button = ({
-  iconHref,
-  iconAlt,
-  size = ButtonSizes.Medium,
-  text,
-  disabled,
-  href,
-}: ButtonProps) => {
+const Button = ({ size = ButtonSizes.Medium, text, disabled, href, icon }: ButtonProps) => {
   return (
     <Container disabled={disabled} size={size} href={href}>
-      {iconHref && (
-        <CenterVertically>
-          <Icon
-            src={iconHref}
-            alt={iconAlt || iconHref}
-            width={BUTTON_SIZES[size].icon.width}
-            height={BUTTON_SIZES[size].icon.height}
-            priority
-          />
-        </CenterVertically>
-      )}
+      {icon && <IconContainer size={size}>{icon}</IconContainer>}
       {text}
     </Container>
   );
@@ -107,12 +88,17 @@ const StyledContainer = styled.button<ButtonProps>`
   opacity: ${props.theme.opacity[50]};`};
 `;
 
+const IconContainer = styled.div<ButtonProps>`
+  ${CENTER_VERTICALLY}
+
+  > svg {
+    margin: auto;
+    height: ${(props) => BUTTON_SIZES[props.size].icon.height}px;
+    width: ${(props) => BUTTON_SIZES[props.size].icon.width}px;
+  }
+`;
 const StyledAnchor = styled.a`
   text-decoration: none;
 `;
-const Icon = styled(Image)`
-  div {
-    margin: 0 auto;
-  }
-`;
+
 export default Button;
