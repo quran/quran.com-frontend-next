@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import dynamic from 'next/dynamic';
 import ChapterType from '../../types/ChapterType';
@@ -13,9 +13,15 @@ type IndexProps = {
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
+  const [didMount, setDidMount] = useState(false);
+
+  useEffect(() => {
+    setDidMount(true);
+  }, []);
+
   return (
     <div style={{ paddingTop: '4rem' }}>
-      <DynamicChaptersList chapters={chapters} />
+      {didMount && <DynamicChaptersList chapters={chapters} />}
     </div>
   );
 };
