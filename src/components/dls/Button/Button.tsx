@@ -2,7 +2,6 @@ import React from 'react';
 import { CENTER_VERTICALLY } from 'src/styles/utility';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { isIOS } from 'react-device-detect';
 
 type ButtonProps = {
   size?: ButtonSizes;
@@ -77,6 +76,7 @@ const StyledContainer = styled.button<ButtonProps>`
   border: none;
   height: ${(props) => BUTTON_SIZES[props.size].iconContainer.height}px;
   width: ${(props) => BUTTON_SIZES[props.size].iconContainer.width}px;
+  padding: 0;
   display: inline-block;
   align-items: center;
   background: transparent;
@@ -96,14 +96,6 @@ const IconContainer = styled.div<ButtonProps>`
     margin: auto;
     height: ${(props) => BUTTON_SIZES[props.size].icon.height}px;
     width: ${(props) => BUTTON_SIZES[props.size].icon.width}px;
-
-    /* Fix SVG alignment bug on iOS */
-    ${isIOS &&
-    `position: relative;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);`}
   }
 `;
 const StyledAnchor = styled.a`
