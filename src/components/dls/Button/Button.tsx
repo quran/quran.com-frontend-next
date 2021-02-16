@@ -31,12 +31,12 @@ const BUTTON_SIZES = {
   },
   small: {
     icon: {
-      width: 24,
-      height: 24,
+      width: 20,
+      height: 20,
     },
     iconContainer: {
-      width: 40,
-      height: 40,
+      width: 38,
+      height: 38,
     },
   },
 };

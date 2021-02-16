@@ -6,11 +6,10 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 import { CenterVertically } from 'src/styles/utility';
 import Button, { ButtonSizes } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
-import IconLogo from '../../../public/icons/Logo.svg';
-import IconProfile from '../../../public/icons/user.svg';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';
 import IconSearch from '../../../public/icons/search.svg';
+import IconMenu from '../../../public/icons/menu.svg';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
@@ -20,13 +19,13 @@ const Navbar = () => {
         <StyledItemsContainer>
           <CenterVertically>
             <LeftCTA>
-              <Button icon={<IconLogo />} size={ButtonSizes.Medium} href="/" />
+              <Button icon={<IconMenu />} size={ButtonSizes.Small} href="/" />
+              {/* <Button icon={<IconLogo />} size={ButtonSizes.Medium} href="/" /> */}
               <LanuageSelector />
             </LeftCTA>
           </CenterVertically>
           <CenterVertically>
             <RightCTA>
-              <Button icon={<IconProfile />} size={ButtonSizes.Small} />
               <Button icon={<IconSettings />} size={ButtonSizes.Small} />
               <Button icon={<IconReader />} size={ButtonSizes.Small} />
               <Button icon={<IconSearch />} size={ButtonSizes.Small} />
