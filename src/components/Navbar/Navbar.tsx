@@ -1,8 +1,8 @@
 import React from 'react';
 import { NAVBAR_HEIGHT } from 'src/styles/constants';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { selectNavbar } from 'src/redux/slices/navbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectNavbar, setIsSideMenuOpen } from 'src/redux/slices/navbar';
 import { CenterVertically } from 'src/styles/utility';
 import Button, { ButtonSizes } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
@@ -10,17 +10,25 @@ import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
+import SideMenu from './SideMenu/SideMenu';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
+
+  const dispatch = useDispatch();
+
+  const openSideMenu = () => {
+    dispatch({ type: setIsSideMenuOpen.type, payload: true });
+  };
+
   return (
     <StyledNav isVisible={isVisible}>
       {isVisible && (
         <StyledItemsContainer>
           <CenterVertically>
             <LeftCTA>
-              <Button icon={<IconMenu />} size={ButtonSizes.Small} href="/" />
-              {/* <Button icon={<IconLogo />} size={ButtonSizes.Medium} href="/" /> */}
+              <SideMenu />
+              <Button icon={<IconMenu />} size={ButtonSizes.Small} onClick={openSideMenu} />
               <LanuageSelector />
             </LeftCTA>
           </CenterVertically>

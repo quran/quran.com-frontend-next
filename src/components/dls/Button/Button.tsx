@@ -41,16 +41,23 @@ const BUTTON_SIZES = {
   },
 };
 
-const Button = ({ size = ButtonSizes.Medium, text, disabled, href, icon }: ButtonProps) => {
+const Button = ({
+  size = ButtonSizes.Medium,
+  text,
+  disabled,
+  href,
+  icon,
+  onClick,
+}: ButtonProps) => {
   return (
-    <Container disabled={disabled} size={size} href={href}>
+    <Container disabled={disabled} size={size} href={href} onClick={onClick}>
       {icon && <IconContainer size={size}>{icon}</IconContainer>}
       {text}
     </Container>
   );
 };
 
-const Container = ({ children, disabled, size, href }) => {
+const Container = ({ children, disabled, size, href, onClick }) => {
   if (href) {
     return (
       <Link href={href} passHref>
@@ -64,7 +71,7 @@ const Container = ({ children, disabled, size, href }) => {
   }
 
   return (
-    <StyledContainer disabled={disabled} size={size}>
+    <StyledContainer disabled={disabled} size={size} onClick={onClick}>
       {children}
     </StyledContainer>
   );
