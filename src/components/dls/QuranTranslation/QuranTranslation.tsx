@@ -8,10 +8,8 @@ type QuranTranslationProps = {
 
 const QuranTranslation = ({ translation }: QuranTranslationProps) => (
   <>
-    <Text primary small>
-      {translation.resourceName}
-    </Text>
-    <Text large dangerouslySetInnerHTML={{ __html: translation.text }} />
+    <Text>{translation.resourceName}</Text>
+    <Text>{translation.text}/</Text>
   </>
 );
 

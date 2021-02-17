@@ -9,9 +9,7 @@ const About = () => {
 
   return (
     <>
-      <Text large primary>
-        {quranCom}
-      </Text>
+      <Text>{quranCom}</Text>
       <Text>{description}</Text>
     </>
   );

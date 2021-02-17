@@ -1,41 +1,59 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-const primaryColor = css`
-  color: ${({ theme }) => theme.colors.primary.medium};
-`;
+export enum TextAlign {
+  Left = 'left',
+  Right = 'right',
+  Center = 'center',
+  Justify = 'justify',
+}
 
-const largeSize = css`
-  font-size: ${({ theme }) => theme.fontSizes[2]};
-`;
+export enum TextColor {
+  Default = 'default',
+  Primary = 'primary',
+  Secondary = 'secondary',
+}
 
-const smallSize = css`
-  font-size: ${({ theme }) => theme.fontSizes[1]};
-`;
+export enum TextSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+}
 
-const miniSize = css`
-  font-size: ${({ theme }) => theme.fontSizes[0]};
-`;
+export enum TextWeight {
+  Normal = 'normal',
+  Bold = 'bold',
+}
 
-type ColorProps = { primary?: boolean };
+type TextProps = {
+  children: React.ReactNode;
+  color?: TextColor;
+  align?: TextAlign;
+  italic?: boolean;
+  size?: TextSize;
+  underline?: boolean;
+  isInline?: boolean;
+};
 
-const color = css<ColorProps>`
-  color: ${({ theme }) => theme.colors.text.default};
-  ${(props) => props.primary && primaryColor}
-`;
+const Text = (props: TextProps) => {
+  const { children } = props;
+  return <Container {...props}>{children}</Container>;
+};
 
-type FontSizeProps = { small?: boolean; mini?: boolean; large?: boolean };
+const getTextColor = (props: any) => {
+  const { color, theme } = props;
+  if (color === TextColor.Primary) {
+    return theme.colors.primary.medium;
+  }
+  if (color === TextColor.Secondary) {
+    return theme.colors.secondary.medium;
+  }
 
-const fontSize = css<FontSizeProps>`
-  font-size: 1rem;
-  ${(props) => props.small && smallSize};
-  ${(props) => props.mini && miniSize};
-  ${(props) => props.large && largeSize};
-`;
+  return theme.colors.text.default;
+};
 
-const Text = styled.p<ColorProps & FontSizeProps & { isArabic?: boolean }>`
-  ${color}
-  ${fontSize}
-  text-align: ${(props) => (props.isArabic ? 'right' : 'left')};
+const Container = styled.p<TextProps>`
+  /* Text color */
+  color: ${(props) => getTextColor(props)};
 `;
 
 export default Text;
