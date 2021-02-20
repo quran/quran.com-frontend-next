@@ -27,6 +27,7 @@ type FontSizeProps = { small?: boolean; mini?: boolean; large?: boolean };
 
 const fontSize = css<FontSizeProps>`
   font-size: 1rem;
+  font-family: 'SFProText-Medium';
   ${(props) => props.small && smallSize};
   ${(props) => props.mini && miniSize};
   ${(props) => props.large && largeSize};
