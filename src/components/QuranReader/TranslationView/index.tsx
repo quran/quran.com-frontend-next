@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import VerseType from '../../../../types/VerseType';
 import VerseText from '../../Verse/VerseText';
-import Text from '../../dls/Text/Text';
 
 type TranslationViewProps = {
   verses: VerseType[];
@@ -31,7 +30,7 @@ const StyledTranslationView = styled.div`
   margin: ${(props) => props.theme.spacing.medium} auto;
 `;
 
-const StyledText = styled(Text)`
+const StyledText = styled.span`
   letter-spacing: 0;
 `;
 
