@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import { selectNavbar, setIsSideMenuOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { NAVBAR_HEIGHT, SIDE_MENU_DESKTOP_WIDTH } from 'src/styles/constants';
 import { CenterVertically, CENTER_VERTICALLY } from 'src/styles/utility';
+import { useRouter } from 'next/router';
 import IconClose from '../../../../public/icons/close.svg';
 import IconHome from '../../../../public/icons/home.svg';
 import IconCollection from '../../../../public/icons/collection.svg';
@@ -24,13 +25,23 @@ import MobileApps from './MobileApps';
 const SideMenu = () => {
   const isOpen = useSelector(selectNavbar).isSideMenuOpen;
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const closeSideMenu = () => {
+  const closeSideMenu = useCallback(() => {
     dispatch({ type: setIsSideMenuOpen.type, payload: false });
-  };
+  }, [dispatch]);
+
+  // Hide navbar after succesful navigation
+  useEffect(() => {
+    router.events.on('routeChangeComplete', () => {
+      if (isOpen) {
+        closeSideMenu();
+      }
+    });
+  }, [closeSideMenu, router.events, isOpen]);
 
   return (
-    <NoOverFlow>
+    <>
       {isOpen && (
         <div>
           <Container>
@@ -97,23 +108,23 @@ const SideMenu = () => {
           </Container>
         </div>
       )}
-    </NoOverFlow>
+    </>
   );
 };
 
-const NoOverFlow = styled.div`
-  overflow: hidden;
-`;
 const Container = styled.div`
   background: ${(props) => props.theme.colors.background.default};
   position: fixed;
-  overflow-y: auto;
   height: 100vh;
   width: 100%;
   left: 0;
   top: 0;
   bottom: 0;
   z-index: ${(props) => props.theme.zIndexes.header};
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
 
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     width: ${SIDE_MENU_DESKTOP_WIDTH};
