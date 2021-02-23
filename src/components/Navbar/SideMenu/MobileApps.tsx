@@ -5,12 +5,12 @@ import { CenterHorizontally } from 'src/styles/utility';
 import SideMenuItem from './SideMenuItem';
 import IconMobile from '../../../../public/icons/mobile.svg';
 
-const IMAGES_CONTAINER_WIDTH = '17rem';
+const IMAGES_CONTAINER_WIDTH = '17.5rem';
 
 const MobileApps = () => {
   return (
     <Container>
-      <SideMenuItem title="Mobile Apps" icon={<IconMobile />} />
+      <SideMenuItem title="Mobile Apps" icon={<IconMobile />} isStale />
       <CenterHorizontally>
         <ImagesContainer>
           <a
@@ -25,7 +25,7 @@ const MobileApps = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Image src="/images/play-store.svg" width={120} height={40} />
+            <Image src="/images/play-store.svg" width={135} height={40} />
           </a>
         </ImagesContainer>
       </CenterHorizontally>

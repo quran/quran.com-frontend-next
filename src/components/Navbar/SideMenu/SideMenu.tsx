@@ -48,13 +48,13 @@ const SideMenu = () => {
             </Header>
             <ListItemsContainer>
               <SubTitle>Menu</SubTitle>
-              <SideMenuItem title="Home" icon={<IconHome />} />
-              <SideMenuItem title="About us" icon={<IconInfo />} />
-              <SideMenuItem title="Updates" icon={<IconUpdates />} />
-              <SideMenuItem title="Developers" icon={<IconDevelopers />} />
-              <SideMenuItem title="Contribute" icon={<IconDonate />} />
-              <SideMenuItem title="Privacy" icon={<IconLock />} />
-              <SideMenuItem title="Help & Feedback" icon={<IconFeedback />} />
+              <SideMenuItem title="Home" icon={<IconHome />} href="/" />
+              <SideMenuItem title="About us" icon={<IconInfo />} href="/about" />
+              <SideMenuItem title="Updates" icon={<IconUpdates />} href="/updates" />
+              <SideMenuItem title="Developers" icon={<IconDevelopers />} href="/developers" />
+              <SideMenuItem title="Contribute" icon={<IconDonate />} href="/contribute" />
+              <SideMenuItem title="Privacy" icon={<IconLock />} href="/privacy" />
+              <SideMenuItem title="Help & Feedback" icon={<IconFeedback />} href="/help" />
               <SideMenuItem title="Quran Radio" icon={<IconRadio2 />} />
               <SubTitle>Selected Collections</SubTitle>
               <SideMenuItem title="Duaas" icon={<IconCollection />} />
@@ -62,11 +62,36 @@ const SideMenu = () => {
               <SideMenuItem title="Names of Allah" icon={<IconCollection />} />
               <SideMenuItem title="Revelation" icon={<IconCollection />} />
               <SubTitle>Network</SubTitle>
-              <SideMenuItem title="Quranicaudio.com" icon={<IconQ />} isExternalLink />
-              <SideMenuItem title="Salah.com" icon={<IconQ />} isExternalLink />
-              <SideMenuItem title="Sunnah.com" icon={<IconQ />} isExternalLink />
-              <SideMenuItem title="Legacy.quran.com" icon={<IconQ />} isExternalLink />
-              <SideMenuItem title="Corpus.quran.com" icon={<IconQ />} isExternalLink />
+              <SideMenuItem
+                title="Quranicaudio.com"
+                icon={<IconQ />}
+                href="https://quranicaudio.com"
+                isExternalLink
+              />
+              <SideMenuItem
+                title="Salah.com"
+                icon={<IconQ />}
+                href="https://salah.com"
+                isExternalLink
+              />
+              <SideMenuItem
+                title="Sunnah.com"
+                icon={<IconQ />}
+                href="https://sunnah.com"
+                isExternalLink
+              />
+              <SideMenuItem
+                title="Legacy.quran.com"
+                icon={<IconQ />}
+                href="https://legacy.quran.com"
+                isExternalLink
+              />
+              <SideMenuItem
+                title="Corpus.quran.com"
+                icon={<IconQ />}
+                href="https://corpus.quran.com"
+                isExternalLink
+              />
               <MobileApps />
             </ListItemsContainer>
           </Container>
