@@ -19,6 +19,7 @@ import IconRadio2 from '../../../../public/icons/radio-2.svg';
 
 import LanguageSelector from '../LanguageSelector';
 import SideMenuItem from './SideMenuItem';
+import MobileApps from './MobileApps';
 
 const SideMenu = () => {
   const isOpen = useSelector(selectNavbar).isSideMenuOpen;
@@ -66,6 +67,7 @@ const SideMenu = () => {
               <SideMenuItem title="Sunnah.com" icon={<IconQ />} isExternalLink />
               <SideMenuItem title="Legacy.quran.com" icon={<IconQ />} isExternalLink />
               <SideMenuItem title="Corpus.quran.com" icon={<IconQ />} isExternalLink />
+              <MobileApps />
             </ListItemsContainer>
           </Container>
         </div>
