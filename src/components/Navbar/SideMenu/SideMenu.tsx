@@ -42,85 +42,85 @@ const SideMenu = () => {
 
   return (
     <>
-      {isOpen && (
-        <div>
-          <Container>
-            <Header>
-              <CenterVertically>
-                <LeftCTA>
-                  <LanguageSelector />
-                </LeftCTA>
-              </CenterVertically>
-              <CenterVertically>
-                <RightCTA>
-                  <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeSideMenu} />
-                </RightCTA>
-              </CenterVertically>
-            </Header>
-            <ListItemsContainer>
-              <SubTitle>Menu</SubTitle>
-              <SideMenuItem title="Home" icon={<IconHome />} href="/" />
-              <SideMenuItem title="About us" icon={<IconInfo />} href="/about" />
-              <SideMenuItem title="Updates" icon={<IconUpdates />} href="/updates" />
-              <SideMenuItem title="Developers" icon={<IconDevelopers />} href="/developers" />
-              <SideMenuItem title="Contribute" icon={<IconDonate />} href="/contribute" />
-              <SideMenuItem title="Privacy" icon={<IconLock />} href="/privacy" />
-              <SideMenuItem title="Help & Feedback" icon={<IconFeedback />} href="/help" />
-              <SideMenuItem title="Quran Radio" icon={<IconRadio2 />} />
-              <SubTitle>Selected Collections</SubTitle>
-              <SideMenuItem title="Duaas" icon={<IconCollection />} />
-              <SideMenuItem title="Jewels of Quran" icon={<IconCollection />} />
-              <SideMenuItem title="Names of Allah" icon={<IconCollection />} />
-              <SideMenuItem title="Revelation" icon={<IconCollection />} />
-              <SubTitle>Network</SubTitle>
-              <SideMenuItem
-                title="Quranicaudio.com"
-                icon={<IconQ />}
-                href="https://quranicaudio.com"
-                isExternalLink
-              />
-              <SideMenuItem
-                title="Salah.com"
-                icon={<IconQ />}
-                href="https://salah.com"
-                isExternalLink
-              />
-              <SideMenuItem
-                title="Sunnah.com"
-                icon={<IconQ />}
-                href="https://sunnah.com"
-                isExternalLink
-              />
-              <SideMenuItem
-                title="Legacy.quran.com"
-                icon={<IconQ />}
-                href="https://legacy.quran.com"
-                isExternalLink
-              />
-              <SideMenuItem
-                title="Corpus.quran.com"
-                icon={<IconQ />}
-                href="https://corpus.quran.com"
-                isExternalLink
-              />
-              <MobileApps />
-            </ListItemsContainer>
-          </Container>
-        </div>
-      )}
+      <div>
+        <Container isOpen={isOpen}>
+          <Header>
+            <CenterVertically>
+              <LeftCTA>
+                <LanguageSelector />
+              </LeftCTA>
+            </CenterVertically>
+            <CenterVertically>
+              <RightCTA>
+                <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeSideMenu} />
+              </RightCTA>
+            </CenterVertically>
+          </Header>
+          <ListItemsContainer>
+            <SubTitle>Menu</SubTitle>
+            <SideMenuItem title="Home" icon={<IconHome />} href="/" />
+            <SideMenuItem title="About us" icon={<IconInfo />} href="/about" />
+            <SideMenuItem title="Updates" icon={<IconUpdates />} href="/updates" />
+            <SideMenuItem title="Developers" icon={<IconDevelopers />} href="/developers" />
+            <SideMenuItem title="Contribute" icon={<IconDonate />} href="/contribute" />
+            <SideMenuItem title="Privacy" icon={<IconLock />} href="/privacy" />
+            <SideMenuItem title="Help & Feedback" icon={<IconFeedback />} href="/help" />
+            <SideMenuItem title="Quran Radio" icon={<IconRadio2 />} />
+            <SubTitle>Selected Collections</SubTitle>
+            <SideMenuItem title="Duaas" icon={<IconCollection />} />
+            <SideMenuItem title="Jewels of Quran" icon={<IconCollection />} />
+            <SideMenuItem title="Names of Allah" icon={<IconCollection />} />
+            <SideMenuItem title="Revelation" icon={<IconCollection />} />
+            <SubTitle>Network</SubTitle>
+            <SideMenuItem
+              title="Quranicaudio.com"
+              icon={<IconQ />}
+              href="https://quranicaudio.com"
+              isExternalLink
+            />
+            <SideMenuItem
+              title="Salah.com"
+              icon={<IconQ />}
+              href="https://salah.com"
+              isExternalLink
+            />
+            <SideMenuItem
+              title="Sunnah.com"
+              icon={<IconQ />}
+              href="https://sunnah.com"
+              isExternalLink
+            />
+            <SideMenuItem
+              title="Legacy.quran.com"
+              icon={<IconQ />}
+              href="https://legacy.quran.com"
+              isExternalLink
+            />
+            <SideMenuItem
+              title="Corpus.quran.com"
+              icon={<IconQ />}
+              href="https://corpus.quran.com"
+              isExternalLink
+            />
+            <MobileApps />
+          </ListItemsContainer>
+        </Container>
+      </div>
     </>
   );
 };
 
-const Container = styled.div`
+const Container = styled.div<{ isOpen: boolean }>`
   background: ${(props) => props.theme.colors.background.default};
   position: fixed;
   height: 100vh;
   width: 100%;
-  left: 0;
+  left: ${(props) => (props.isOpen ? 0 : '-100%')};
   top: 0;
   bottom: 0;
   z-index: ${(props) => props.theme.zIndexes.header};
+
+  transition: ${(props) => props.theme.transitions.regular};
 
   overflow-y: auto;
   overflow-x: hidden;
@@ -128,6 +128,7 @@ const Container = styled.div`
 
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     width: ${SIDE_MENU_DESKTOP_WIDTH};
+    left: ${(props) => (props.isOpen ? 0 : `-${SIDE_MENU_DESKTOP_WIDTH}`)};
   }
 `;
 
