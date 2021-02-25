@@ -1,34 +1,42 @@
 import React from 'react';
 import { NAVBAR_HEIGHT } from 'src/styles/constants';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { selectNavbar } from 'src/redux/slices/navbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectNavbar, setIsSideMenuOpen } from 'src/redux/slices/navbar';
 import { CenterVertically } from 'src/styles/utility';
-import Button, { ButtonSizes } from '../dls/Button/Button';
+import Button, { ButtonSize } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
+import SideMenu from './SideMenu/SideMenu';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
+
+  const dispatch = useDispatch();
+
+  const openSideMenu = () => {
+    dispatch({ type: setIsSideMenuOpen.type, payload: true });
+  };
+
   return (
     <StyledNav isVisible={isVisible}>
       {isVisible && (
         <StyledItemsContainer>
           <CenterVertically>
             <LeftCTA>
-              <Button icon={<IconMenu />} size={ButtonSizes.Small} href="/" />
-              {/* <Button icon={<IconLogo />} size={ButtonSizes.Medium} href="/" /> */}
+              <SideMenu />
+              <Button icon={<IconMenu />} size={ButtonSize.Small} onClick={openSideMenu} />
               <LanuageSelector />
             </LeftCTA>
           </CenterVertically>
           <CenterVertically>
             <RightCTA>
-              <Button icon={<IconSettings />} size={ButtonSizes.Small} />
-              <Button icon={<IconReader />} size={ButtonSizes.Small} />
-              <Button icon={<IconSearch />} size={ButtonSizes.Small} />
+              <Button icon={<IconSettings />} size={ButtonSize.Small} />
+              <Button icon={<IconReader />} size={ButtonSize.Small} />
+              <Button icon={<IconSearch />} size={ButtonSize.Small} />
             </RightCTA>
           </CenterVertically>
         </StyledItemsContainer>
@@ -42,7 +50,6 @@ const StyledNav = styled.nav<{ isVisible: boolean }>`
   height: ${NAVBAR_HEIGHT};
   ${(props) => !props.isVisible && `transform: translateY(-${NAVBAR_HEIGHT});`}
   width: 100%;
-  text-align: center;
   transition: ${(props) => props.theme.transitions.regular};
   background: ${(props) => props.theme.colors.background.default};
   z-index: ${(props) => props.theme.zIndexes.header};

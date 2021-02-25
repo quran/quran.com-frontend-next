@@ -2,9 +2,10 @@ import React from 'react';
 import { CENTER_VERTICALLY } from 'src/styles/utility';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { ICON_SIZES } from '../IconContainer/IconContainer';
 
 type ButtonProps = {
-  size?: ButtonSizes;
+  size?: ButtonSize;
   text?: string;
   name?: string;
   disabled?: boolean;
@@ -13,44 +14,39 @@ type ButtonProps = {
   icon?: React.ReactNode;
 };
 
-export enum ButtonSizes {
+export enum ButtonSize {
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
 }
+
 const BUTTON_SIZES = {
-  medium: {
-    icon: {
-      width: 32,
-      height: 32,
-    },
-    iconContainer: {
-      width: 44,
-      height: 44,
-    },
-  },
   small: {
-    icon: {
-      width: 20,
-      height: 20,
-    },
+    icon: ICON_SIZES.small,
     iconContainer: {
       width: 38,
       height: 38,
     },
   },
+  medium: {
+    icon: ICON_SIZES.medium,
+    iconContainer: {
+      width: 44,
+      height: 44,
+    },
+  },
 };
 
-const Button = ({ size = ButtonSizes.Medium, text, disabled, href, icon }: ButtonProps) => {
+const Button = ({ size = ButtonSize.Medium, text, disabled, href, icon, onClick }: ButtonProps) => {
   return (
-    <Container disabled={disabled} size={size} href={href}>
+    <Container disabled={disabled} size={size} href={href} onClick={onClick}>
       {icon && <IconContainer size={size}>{icon}</IconContainer>}
       {text}
     </Container>
   );
 };
 
-const Container = ({ children, disabled, size, href }) => {
+const Container = ({ children, disabled, size, href, onClick }) => {
   if (href) {
     return (
       <Link href={href} passHref>
@@ -64,7 +60,7 @@ const Container = ({ children, disabled, size, href }) => {
   }
 
   return (
-    <StyledContainer disabled={disabled} size={size}>
+    <StyledContainer disabled={disabled} size={size} onClick={onClick}>
       {children}
     </StyledContainer>
   );

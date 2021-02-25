@@ -17,7 +17,7 @@ export const theme: Theme = {
     secondary: {
       faded: '#fff',
       faint: '#fff',
-      medium: '#fff',
+      medium: '#C8C8C8',
       deep: '#fff',
     },
     tertiary: {

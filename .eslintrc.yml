@@ -59,6 +59,18 @@ overrides:
       # allow ts-ignore comments
       "@typescript-eslint/ban-ts-comment": 0
 
+      # allow the usage of next/Link component
+      jsx-a11y/anchor-is-valid:
+        - error
+        - components:
+            - Link
+          specialLink:
+            - hrefLeft
+            - hrefRight
+          aspects:
+            - invalidHref
+            - preferButton
+
       # ensure variables, functions, and properties are camelCase, UPPER_CASE, or PascalCase
       # ensure types are PascalCase
       "@typescript-eslint/naming-convention":
