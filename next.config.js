@@ -1,5 +1,6 @@
 const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
+const nextTranslate = require('next-translate');
 
 const config = {
   images: {
@@ -8,4 +9,4 @@ const config = {
   future: { webpack5: true },
 };
 
-module.exports = withPlugins([withFonts], config);
+module.exports = withPlugins([withFonts, nextTranslate], config);
