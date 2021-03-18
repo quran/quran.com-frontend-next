@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { NAVBAR_HEIGHT, SIDE_MENU_DESKTOP_WIDTH } from 'src/styles/constants';
 import { CenterVertically, CENTER_VERTICALLY } from 'src/styles/utility';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import IconClose from '../../../../public/icons/close.svg';
 import IconHome from '../../../../public/icons/home.svg';
 import IconCollection from '../../../../public/icons/collection.svg';
@@ -45,6 +46,11 @@ const SideMenu = () => {
       <Header>
         <CenterVertically>
           <LeftCTA>
+            <Link href="/">
+              <a>
+                <Button icon={<IconQ />} size={ButtonSize.Small} />
+              </a>
+            </Link>
             <LanguageSelector />
           </LeftCTA>
         </CenterVertically>
@@ -133,11 +139,7 @@ const Header = styled.div`
 
 const LeftCTA = styled.div`
   display: flex;
-  margin-left: ${(props) => props.theme.spacing.medium};
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    margin-left: ${(props) => `calc(1*${props.theme.spacing.mega})`};
-  }
+  margin-left: ${(props) => props.theme.spacing.xsmall};
 `;
 const RightCTA = styled.div`
   display: flex;
