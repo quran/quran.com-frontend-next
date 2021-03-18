@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectNavbar, setIsSideMenuOpen } from 'src/redux/slices/navbar';
 import { CenterVertically } from 'src/styles/utility';
+import Link from 'next/link';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
+import IconQ from '../../../public/icons/Q.svg';
 import SideMenu from './SideMenu/SideMenu';
 
 const Navbar = () => {
@@ -29,6 +31,11 @@ const Navbar = () => {
             <LeftCTA>
               <SideMenu />
               <Button icon={<IconMenu />} size={ButtonSize.Small} onClick={openSideMenu} />
+              <Link href="/">
+                <a>
+                  <Button icon={<IconQ />} size={ButtonSize.Small} />
+                </a>
+              </Link>
               <LanuageSelector />
             </LeftCTA>
           </CenterVertically>
