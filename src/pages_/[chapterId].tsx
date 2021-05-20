@@ -4,6 +4,7 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import { ChapterResponse, ChaptersResponse, VersesResponse } from 'types/APIResponses';
 import { getChapters, getChapter, getChapterVerses } from '../api';
 import QuranReader from '../components/QuranReader';
+import { QuranFont } from '../components/QuranReader/types';
 
 type ChapterProps = {
   chaptersResponse: ChaptersResponse;
@@ -19,7 +20,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const [chaptersResponse, chapterResponse, versesResponse] = await Promise.all([
     getChapters(),
     getChapter(params.chapterId),
-    getChapterVerses(params.chapterId),
+    getChapterVerses(params.chapterId, QuranFont.Uthmani),
   ]);
   return {
     props: {

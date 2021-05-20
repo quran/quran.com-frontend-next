@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
-import { makeUrl } from 'src/utils/api';
+import { makeUrl, ITEMS_PER_PAGE } from 'src/utils/api';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import ChapterType from 'types/ChapterType';
@@ -12,7 +12,7 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
-import { ReadingView } from './types';
+import { QuranFont, ReadingView } from './types';
 import Notes from './Notes/Notes';
 import ContextMenu from './ContextMenu';
 
@@ -36,11 +36,15 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
-      return makeUrl(`/chapters/${chapter.id}/verses`, {
+      return makeUrl(`/verses/by_chapter/${chapter.id}`, {
+        words: true,
         translations: 20,
+        fields: 'v1_page',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        word_fields: `verse_key,v1_page,location,${QuranFont.Uthmani}`,
         page: index + 1,
-        limit: 25,
-      }); // TODO: select the translation using the user preference
+        limit: ITEMS_PER_PAGE,
+      }); // TODO: select the translation and font type using the user preference
     },
     verseFetcher,
     {
@@ -50,7 +54,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   );
   const readingView = useSelector(selectReadingView);
   const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const pageLimit = initialData.meta.totalPages;
+  const pageLimit = initialData.pagination.totalPages;
   const verses = data.flat(1);
   let view;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import WordType, { CharType } from 'types/WordType';
+import WordType from 'types/WordType';
 import { QuranFont } from 'src/components/QuranReader/types';
 import styled from 'styled-components';
 import IndoPakWordText from './IndoPakWordText';
@@ -16,13 +16,13 @@ const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
   let WordText;
 
   // Render all words except ayah markers
-  if (fontStyle === QuranFont.Uthmani || word.charType !== CharType.End) {
-    if (fontStyle === QuranFont.Uthmani) {
-      WordText = <UthmaniWordText code={word.code} pageNumber={word.pageNumber} />;
+  if (fontStyle === QuranFont.MadaniV1 || QuranFont.MadaniV2) {
+    if (fontStyle === QuranFont.MadaniV1) {
+      WordText = <UthmaniWordText code={word.codeV1} pageNumber={word.pageNumber} />;
     } else if (fontStyle === QuranFont.IndoPak) {
       WordText = <IndoPakWordText text={word.textMadani} />;
     } else {
-      WordText = <MadaniWordText text={word.textMadani} />;
+      WordText = <MadaniWordText text={word.textUthmani} />;
     }
   } else {
     // Render ayah markers
