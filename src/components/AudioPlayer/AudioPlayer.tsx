@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { AUDIO_PLAYER_EXPANDED_HEIGHT, AUDIO_PLAYER_MINIZED_HEIGHT } from 'src/styles/constants';
+import { secondsFormatter } from 'src/utils/datetime';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -20,8 +21,10 @@ const AudioPlayer = () => {
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
-  const audioDuration = audioPlayerEl.current.duration;
+  let audioDuration = 0;
+
   if (audioPlayerEl.current) {
+    audioDuration = audioPlayerEl.current.duration;
     audioPlayerEl.current.onended = () => setIsPlaying(false); // set playing to false when the audio finishes playing
   }
 
@@ -83,7 +86,7 @@ const AudioPlayer = () => {
         +15
       </button>
       <br />
-      {`${currentTime} / ${audioDuration}`}
+      {`${secondsFormatter(currentTime)} / ${secondsFormatter(audioDuration)}`}
     </StyledContainer>
   );
 };
