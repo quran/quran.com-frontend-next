@@ -10,7 +10,7 @@ export type Style = {
   visibility: AudioPlayerVisibility;
 };
 
-const initialState: Style = { visibility: AudioPlayerVisibility.Hidden };
+const initialState: Style = { visibility: AudioPlayerVisibility.Expanded };
 
 export const audioPlayerStyleSlice = createSlice({
   name: 'audioPlayerStyle',
