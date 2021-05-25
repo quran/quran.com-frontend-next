@@ -25,7 +25,7 @@ const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
         pageNumber={word.pageNumber}
       />
     );
-  } else if (word.charType !== CharType.End) {
+  } else if (word.charTypeName !== CharType.End) {
     // Render all words except ayah markers
 
     if (fontStyle === QuranFont.IndoPak) {
