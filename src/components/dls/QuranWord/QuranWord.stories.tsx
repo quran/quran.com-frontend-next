@@ -9,7 +9,7 @@ export default {
 };
 
 export const withUthmaniText = () => <QuranWord word={mockWord()} fontStyle={QuranFont.Uthmani} />;
+export const withIndoPakText = () => <QuranWord word={mockWord()} fontStyle={QuranFont.IndoPak} />;
 
-export const withIndoParkText = () => <QuranWord word={mockWord()} fontStyle={QuranFont.IndoPak} />;
-
-export const withMadaniText = () => <QuranWord word={mockWord()} fontStyle={QuranFont.Madani} />;
+export const withQCFV1Text = () => <QuranWord word={mockWord()} fontStyle={QuranFont.MadaniV1} />;
+export const withQCFV2Text = () => <QuranWord word={mockWord()} fontStyle={QuranFont.MadaniV2} />;
