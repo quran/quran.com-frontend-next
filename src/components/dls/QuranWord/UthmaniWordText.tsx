@@ -4,16 +4,21 @@ import styled from 'styled-components';
 type UthmaniWordTextProps = {
   code: string;
   pageNumber: number;
+  fontVersion: string;
 };
 
-const UthmaniWordText = ({ code, pageNumber }: UthmaniWordTextProps) => {
+const UthmaniWordText = ({ code, pageNumber, fontVersion }: UthmaniWordTextProps) => {
   return (
     // eslint-disable-next-line react/no-danger
-    <StyledUthmaniWordText pageNumber={pageNumber} dangerouslySetInnerHTML={{ __html: code }} />
+    <StyledUthmaniWordText
+      fontVersion={fontVersion}
+      pageNumber={pageNumber}
+      dangerouslySetInnerHTML={{ __html: code }}
+    />
   );
 };
 
-const StyledUthmaniWordText = styled.span<{ pageNumber: number }>`
-  font-family: ${(props) => `p${props.pageNumber}`};
+const StyledUthmaniWordText = styled.span<{ pageNumber: number; fontVersion: string }>`
+  font-family: ${(props) => `p${props.pageNumber}-${props.fontVersion}`};
 `;
 export default UthmaniWordText;

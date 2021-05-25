@@ -12,17 +12,22 @@ type QuranWordProps = {
   highlight?: boolean;
 };
 
-const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
-  let WordText;
+const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
 
-  // Render all words except ayah markers
-  if (fontStyle === QuranFont.Uthmani || word.charType !== CharType.End) {
-    if (fontStyle === QuranFont.Uthmani) {
-      WordText = <UthmaniWordText code={word.code} pageNumber={word.pageNumber} />;
-    } else if (fontStyle === QuranFont.IndoPak) {
-      WordText = <IndoPakWordText text={word.textMadani} />;
+const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
+  let wordText;
+
+  if (QCFFontCodes.includes(fontStyle)) {
+    wordText = (
+      <UthmaniWordText fontVersion={fontStyle} code={word.codeV1} pageNumber={word.pageNumber} />
+    );
+  } else if (word.charType !== CharType.End) {
+    // Render all words except ayah markers
+
+    if (fontStyle === QuranFont.IndoPak) {
+      wordText = <IndoPakWordText text={word.textIndopak} />;
     } else {
-      WordText = <MadaniWordText text={word.textMadani} />;
+      wordText = <MadaniWordText text={word.textUthmani} />;
     }
   } else {
     // Render ayah markers
@@ -34,10 +39,10 @@ const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
 
     // reverse the arabic digits such that they're displayed as 10, 11, 12.. instead of 01, 11, 21
     const reversedArabicVerseNumber = arabicVerseNumber.split('').reverse().join('');
-    WordText = <MadaniWordText text={`${reversedArabicVerseNumber} `} />;
+    wordText = <MadaniWordText text={`${reversedArabicVerseNumber} `} />;
   }
 
-  return <StyledWordContainer highlight={highlight}>{WordText}</StyledWordContainer>;
+  return <StyledWordContainer highlight={highlight}>{wordText}</StyledWordContainer>;
 };
 
 type StyledWordContainerProps = {

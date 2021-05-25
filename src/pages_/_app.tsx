@@ -10,7 +10,7 @@ import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 import '../styles/reset.css';
 import '../styles/fonts.css';
-import '../styles/uthmani-fonts.css';
+import '../styles/uthmani-fonts.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (
