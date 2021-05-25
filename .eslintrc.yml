@@ -38,6 +38,7 @@ overrides:
       "@typescript-eslint/no-unused-vars": 2
       "@typescript-eslint/explicit-module-boundary-types": off # allow typescript to automatically determine the return type
       "react/require-default-props": off # defaultProps will eventually be deprecated. You can follow the discussions here: https://twitter.com/dan_abramov/status/1133878326358171650
+      "jsx-a11y/media-has-caption": off # we don't currently support captions for audio files
       "no-param-reassign": [
           "error",
           { "props": true, "ignorePropertyModificationsFor": ["draft"] }, # allow object property reassign only for redux toolkit draft object
