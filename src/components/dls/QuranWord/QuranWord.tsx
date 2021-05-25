@@ -1,5 +1,5 @@
 import React from 'react';
-import WordType from 'types/WordType';
+import WordType, { CharType } from 'types/WordType';
 import { QuranFont } from 'src/components/QuranReader/types';
 import styled from 'styled-components';
 import IndoPakWordText from './IndoPakWordText';
@@ -12,17 +12,22 @@ type QuranWordProps = {
   highlight?: boolean;
 };
 
-const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
-  let WordText;
+const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
 
-  // Render all words except ayah markers
-  if (fontStyle === QuranFont.MadaniV1 || QuranFont.MadaniV2) {
-    if (fontStyle === QuranFont.MadaniV1) {
-      WordText = <UthmaniWordText code={word.codeV1} pageNumber={word.pageNumber} />;
-    } else if (fontStyle === QuranFont.IndoPak) {
-      WordText = <IndoPakWordText text={word.textMadani} />;
+const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
+  let wordText;
+
+  if (QCFFontCodes.includes(fontStyle)) {
+    wordText = (
+      <UthmaniWordText fontVersion={fontStyle} code={word.codeV1} pageNumber={word.pageNumber} />
+    );
+  } else if (word.charType !== CharType.End) {
+    // Render all words except ayah markers
+
+    if (fontStyle === QuranFont.IndoPak) {
+      wordText = <IndoPakWordText text={word.textIndopak} />;
     } else {
-      WordText = <MadaniWordText text={word.textUthmani} />;
+      wordText = <MadaniWordText text={word.textUthmani} />;
     }
   } else {
     // Render ayah markers
@@ -34,10 +39,10 @@ const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
 
     // reverse the arabic digits such that they're displayed as 10, 11, 12.. instead of 01, 11, 21
     const reversedArabicVerseNumber = arabicVerseNumber.split('').reverse().join('');
-    WordText = <MadaniWordText text={`${reversedArabicVerseNumber} `} />;
+    wordText = <MadaniWordText text={`${reversedArabicVerseNumber} `} />;
   }
 
-  return <StyledWordContainer highlight={highlight}>{WordText}</StyledWordContainer>;
+  return <StyledWordContainer highlight={highlight}>{wordText}</StyledWordContainer>;
 };
 
 type StyledWordContainerProps = {

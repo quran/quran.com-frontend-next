@@ -22,12 +22,7 @@ const groupLinesByVerses = (verses: VerseType[]) => {
   });
 
   // Groups the words based on their (page and) line number
-  /* TODO: (@naveed-ahmad) use v1Page, v2page instead. Depneds on font type use has selected.
-       OR change the backend to send pageNumber based on font type user has requested
-  */
   const lines = _.groupBy(words, (word) => {
-    // eslint-disable-next-line no-param-reassign
-    word.pageNumber = word.v1Page || word.v2Page;
     return `Page${word.pageNumber}-Line${word.lineNumber}`;
   });
 

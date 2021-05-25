@@ -3,11 +3,11 @@ import ChapterType from './ChapterType';
 
 // The response from the verses endpoint that returns a list of verses
 export interface VersesResponse {
-  meta: {
+  pagination: {
+    perPage: number;
     currentPage: number;
-    nextPage: number;
-    prevPage: number;
-    totalCount: number;
+    nextPage: number | null;
+    totalRecords: number;
     totalPages: number;
   };
   verses: VerseType[];

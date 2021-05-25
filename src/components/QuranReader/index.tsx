@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
-import { makeUrl, ITEMS_PER_PAGE } from 'src/utils/api';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import ChapterType from 'types/ChapterType';
@@ -12,9 +11,11 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
-import { QuranFont, ReadingView } from './types';
+import { ReadingView } from './types';
 import Notes from './Notes/Notes';
 import ContextMenu from './ContextMenu';
+import { makeVersesUrl } from '../../utils/apiPaths';
+import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -34,17 +35,14 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 };
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
-      return makeUrl(`/verses/by_chapter/${chapter.id}`, {
-        words: true,
-        translations: 20,
-        fields: 'v1_page',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        word_fields: `verse_key,v1_page,location,${QuranFont.Uthmani}`,
+      // TODO: select the translation using the user preference
+      return makeVersesUrl(chapter.id, {
         page: index + 1,
-        limit: ITEMS_PER_PAGE,
-      }); // TODO: select the translation and font type using the user preference
+        wordFields: `verse_key, page_number, location, ${quranReaderStyles.quranFont}`,
+      });
     },
     verseFetcher,
     {

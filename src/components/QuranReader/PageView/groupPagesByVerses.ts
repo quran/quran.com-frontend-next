@@ -14,11 +14,6 @@ import VerseType from 'types/VerseType';
 const groupPagesByVerses = (verses: VerseType[]) => {
   // Groups the verses based on their page number
   const pages = _.groupBy(verses, (verse) => {
-    /* TODO: (@naveed-ahmad) change the api to send page_number based on font type.
-         Then remove this assignment */
-
-    // eslint-disable-next-line no-param-reassign
-    verse.pageNumber = verse.v1Page || verse.v2Page;
     return `Page${verse.pageNumber}`;
   });
 

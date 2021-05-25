@@ -17,10 +17,14 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesR
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const chapterId = String(params.chapterId);
+
   const [chaptersResponse, chapterResponse, versesResponse] = await Promise.all([
     getChapters(),
-    getChapter(params.chapterId),
-    getChapterVerses(params.chapterId, QuranFont.Uthmani),
+    getChapter(chapterId),
+    getChapterVerses(chapterId, {
+      wordFields: `verse_key, page_number, location, ${QuranFont.Uthmani}`,
+    }),
   ]);
   return {
     props: {
