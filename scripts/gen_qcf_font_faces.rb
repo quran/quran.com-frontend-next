@@ -4,6 +4,9 @@
 #
 
 File.open("src/styles/qcf-v1-fonts.css", "wb") do |file|
+  file.puts("/*
+NOTE: don't change this file manually. Update script/gen_qcf_font_faces.rb and run script again to generate this file
+ */")
   # Generate v1 font face for each page
   1.upto(604) do |page|
     file.puts("
@@ -19,7 +22,9 @@ end
 
 File.open("src/styles/qcf-v2-fonts.css", "wb") do |file|
   # Generate v2 font face for each page
-
+  file.puts("/*
+NOTE: don't change this file manually. Update script/gen_qcf_font_faces.rb and run script again to generate this file
+ */")
   1.upto(604) do |page|
     file.puts("
        @font-face {
