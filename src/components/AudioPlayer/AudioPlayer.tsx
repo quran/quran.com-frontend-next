@@ -12,6 +12,10 @@ import {
   selectAudioPlayerState,
   setCurrentTime,
 } from '../../redux/slices/AudioPlayer/state';
+import PlayIcon from '../../../public/icons/play-circle-outline.svg';
+import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
+import MinusTenIcon from '../../../public/icons/minus-ten.svg';
+import Button, { ButtonSize } from '../dls/Button/Button';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -59,32 +63,31 @@ const AudioPlayer = () => {
         onTimeUpdate={onTimeUpdate}
       />
       {isPlaying ? (
-        <button
+        // Pause
+        <Button
+          icon={<PauseIcon />}
+          size={ButtonSize.Medium}
           onClick={() => {
             audioPlayerEl.current.pause();
             dispatch({ type: setIsPlaying.type, payload: false });
           }}
-          type="button"
-        >
-          pause
-        </button>
+        />
       ) : (
-        <button
+        // Play
+        <Button
+          icon={<PlayIcon />}
+          size={ButtonSize.Medium}
           onClick={() => {
             audioPlayerEl.current.play();
             dispatch({ type: setIsPlaying.type, payload: true });
           }}
-          type="button"
-        >
-          play
-        </button>
+        />
       )}
-      <button onClick={() => setTime(audioPlayerEl.current.currentTime - 15)} type="button">
-        -15
-      </button>
-      <button onClick={() => setTime(audioPlayerEl.current.currentTime + 15)} type="button">
-        +15
-      </button>
+      <Button
+        icon={<MinusTenIcon />}
+        size={ButtonSize.Medium}
+        onClick={() => setTime(audioPlayerEl.current.currentTime - 15)}
+      />
       <br />
       {`${secondsFormatter(currentTime)} / ${secondsFormatter(audioDuration)}`}
     </StyledContainer>
