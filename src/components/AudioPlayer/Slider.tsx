@@ -1,7 +1,73 @@
 import React from 'react';
+import { secondsFormatter } from 'src/utils/datetime';
+import _ from 'lodash';
+import styled from 'styled-components';
 
-const Slider = () => {
-  return <>Hello world</>;
+const NUMBER_OF_SPLITS = 100;
+
+type SliderProps = {
+  currentTime: number;
+  audioDuration: number;
+  setTime: (number) => void;
 };
+
+/**
+ * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
+ * the audio playback completion and are used for seeking audio at a particular time.
+ */
+const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
+  const splitDuration = audioDuration / NUMBER_OF_SPLITS;
+
+  const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
+    const splitStartTime = splitDuration * index;
+    const isComplete = currentTime >= splitStartTime;
+    return (
+      <Split
+        isComplete={isComplete}
+        key={index}
+        startTime={splitStartTime}
+        onClick={() => setTime(splitStartTime)}
+      />
+    );
+  });
+
+  return (
+    <>
+      {secondsFormatter(currentTime)}
+      <StyledSplitsContainer>{splits}</StyledSplitsContainer>
+      {secondsFormatter(audioDuration)}
+    </>
+  );
+};
+
+type SplitProps = {
+  isComplete: boolean;
+  startTime: number;
+  onClick: () => void;
+};
+
+const Split = ({ isComplete, startTime, onClick }: SplitProps) => {
+  return (
+    <StyledSplit
+      isComplete={isComplete}
+      title={secondsFormatter(startTime)}
+      onClick={() => onClick()}
+    />
+  );
+};
+
+const StyledSplit = styled.span<{ isComplete: boolean }>`
+  height: 1px;
+  width: 1%;
+  cursor: pointer;
+  display: inline-block;
+  background-color: ${({ isComplete, theme }) =>
+    isComplete ? theme.colors.primary.medium : theme.colors.secondary.medium};
+`;
+
+const StyledSplitsContainer = styled.div`
+  display: inline-block;
+  width: 70%;
+`;
 
 export default Slider;
