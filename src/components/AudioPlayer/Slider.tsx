@@ -32,11 +32,11 @@ const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
   });
 
   return (
-    <>
+    <StyledContainer>
       {secondsFormatter(currentTime)}
       <StyledSplitsContainer>{splits}</StyledSplitsContainer>
       {secondsFormatter(audioDuration)}
-    </>
+    </StyledContainer>
   );
 };
 
@@ -56,18 +56,25 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => {
   );
 };
 
-const StyledSplit = styled.span<{ isComplete: boolean }>`
-  height: 1px;
-  width: 1%;
-  cursor: pointer;
-  display: inline-block;
-  background-color: ${({ isComplete, theme }) =>
-    isComplete ? theme.colors.primary.medium : theme.colors.secondary.medium};
+const StyledContainer = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.medium};
 `;
 
 const StyledSplitsContainer = styled.div`
   display: inline-block;
   width: 70%;
+  margin-left: ${({ theme }) => theme.spacing.medium};
+  margin-right: ${({ theme }) => theme.spacing.medium};
+`;
+
+const StyledSplit = styled.span<{ isComplete: boolean }>`
+  height: 1px;
+  width: 1%;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: calc(1.5 * ${({ theme }) => theme.spacing.micro});
+  background-color: ${({ isComplete, theme }) =>
+    isComplete ? theme.colors.primary.medium : theme.colors.secondary.medium};
 `;
 
 export default Slider;

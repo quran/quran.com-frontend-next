@@ -93,7 +93,7 @@ const AudioPlayer = () => {
           <Button
             icon={<MinusTenIcon />}
             size={ButtonSize.Medium}
-            onClick={() => setTime(audioPlayerEl.current.currentTime - 15)}
+            onClick={() => setTime(audioPlayerEl.current.currentTime - 10)}
           />
         </ActionButtonsContainers>
         <SliderContainer>
@@ -117,7 +117,7 @@ const StyledContainer = styled.div<{
   width: 100%;
   bottom: 0;
   text-align: center;
-  background: #ffebab;
+  background: ${({ theme }) => theme.colors.background.neutralGrey};
   transition: ${(props) => props.theme.transitions.regular};
   z-index: ${(props) => props.theme.zIndexes.sticky};
 `;
@@ -129,7 +129,9 @@ const StyledInnerContainer = styled.div`
   justify-content: space-around;
 `;
 
-const ActionButtonsContainers = styled.div``;
+const ActionButtonsContainers = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.micro};
+`;
 
 const SliderContainer = styled.div`
   width: 70%;

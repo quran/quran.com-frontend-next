@@ -22,6 +22,7 @@ type ColorText = {
 
 type ColorBackground = {
   fadedGreyScale: string;
+  neutralGrey: string;
   default: string;
 };
 
