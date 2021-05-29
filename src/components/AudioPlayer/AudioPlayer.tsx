@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -34,9 +34,38 @@ const AudioPlayer = () => {
 
   let audioDuration = 0;
 
+  const onAudioPlay = useCallback(() => {
+    dispatch({ type: setIsPlaying.type, payload: true });
+  }, [dispatch]);
+  const onAudioPause = useCallback(() => {
+    dispatch({ type: setIsPlaying.type, payload: false });
+  }, [dispatch]);
+
+  const onAudioEnded = useCallback(() => {
+    dispatch({ type: setIsPlaying.type, payload: false });
+  }, [dispatch]);
+
+  // eventListeners useEffect
+  useEffect(() => {
+    let currentRef = null;
+    if (audioPlayerEl && audioPlayerEl.current) {
+      currentRef = audioPlayerEl.current;
+      currentRef.addEventListener('play', onAudioPlay);
+      currentRef.addEventListener('pause', onAudioPause);
+      currentRef.addEventListener('ended', onAudioEnded);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener('play', onAudioPlay);
+        currentRef.removeEventListener('pause', onAudioPause);
+        currentRef.removeEventListener('ended', onAudioEnded);
+      }
+    };
+  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded]);
+
   if (audioPlayerEl.current) {
     audioDuration = audioPlayerEl.current.duration;
-    audioPlayerEl.current.onended = () => setIsPlaying(false); // set playing to false when the audio finishes playing
   }
 
   // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
@@ -101,7 +130,6 @@ const AudioPlayer = () => {
               size={ButtonSize.Medium}
               onClick={() => {
                 audioPlayerEl.current.pause();
-                dispatch({ type: setIsPlaying.type, payload: false });
               }}
             />
           ) : (
@@ -111,7 +139,6 @@ const AudioPlayer = () => {
               size={ButtonSize.Medium}
               onClick={() => {
                 audioPlayerEl.current.play();
-                dispatch({ type: setIsPlaying.type, payload: true });
               }}
             />
           )}

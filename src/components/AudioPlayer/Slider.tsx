@@ -69,7 +69,7 @@ const StyledSplitsContainer = styled.div`
 
 const StyledSplit = styled.span<{ isComplete: boolean }>`
   height: 1px;
-  width: 1%;
+  width: ${100 / NUMBER_OF_SPLITS}%;
   cursor: pointer;
   display: inline-block;
   margin-bottom: calc(1.5 * ${({ theme }) => theme.spacing.micro});
