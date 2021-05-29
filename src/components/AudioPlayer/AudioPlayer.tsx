@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -21,6 +21,7 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import Slider from './Slider';
+import AudioKeyBoardListeners from './AudioKeyboardListeners';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const AudioPlayer = () => {
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
+
   let audioDuration = 0;
 
   if (audioPlayerEl.current) {
@@ -43,20 +45,39 @@ const AudioPlayer = () => {
     dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
   };
 
-  const setTime = (time) => {
-    let newTime = time;
-
-    // upper and lower bound case handling
-    if (time < 0) {
-      newTime = 0;
-    } else if (time > audioDuration) {
-      newTime = audioDuration;
+  const togglePlaying = useCallback(() => {
+    if (isPlaying) {
+      audioPlayerEl.current.pause();
+      dispatch({ type: setIsPlaying.type, payload: false });
+    } else {
+      audioPlayerEl.current.play();
+      dispatch({ type: setIsPlaying.type, payload: true });
     }
+  }, [dispatch, isPlaying]);
 
-    audioPlayerEl.current.currentTime = newTime;
-    dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
-  };
+  const setTime = useCallback(
+    (time) => {
+      let newTime = time;
 
+      // upper and lower bound case handling
+      if (time < 0) {
+        newTime = 0;
+      } else if (time > audioDuration) {
+        newTime = audioDuration;
+      }
+
+      audioPlayerEl.current.currentTime = newTime;
+      dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
+    },
+    [audioDuration, dispatch],
+  );
+
+  const seek = useCallback(
+    (duration) => {
+      setTime(audioPlayerEl.current.currentTime + duration);
+    },
+    [setTime],
+  );
   return (
     <StyledContainer isHidden={isHidden} isMinimized={isMinimized} isExpanded={isExpanded}>
       <StyledInnerContainer>
@@ -67,6 +88,10 @@ const AudioPlayer = () => {
           id="audio-player"
           ref={audioPlayerEl}
           onTimeUpdate={onTimeUpdate}
+        />
+        <AudioKeyBoardListeners
+          seek={(seekDuration) => seek(seekDuration)}
+          togglePlaying={() => togglePlaying()}
         />
         <ActionButtonsContainers>
           {isPlaying ? (
@@ -90,11 +115,7 @@ const AudioPlayer = () => {
               }}
             />
           )}
-          <Button
-            icon={<MinusTenIcon />}
-            size={ButtonSize.Medium}
-            onClick={() => setTime(audioPlayerEl.current.currentTime - 15)}
-          />
+          <Button icon={<MinusTenIcon />} size={ButtonSize.Medium} onClick={() => seek(-10)} />
         </ActionButtonsContainers>
         <SliderContainer>
           <Slider currentTime={currentTime} audioDuration={audioDuration} setTime={setTime} />
@@ -117,7 +138,7 @@ const StyledContainer = styled.div<{
   width: 100%;
   bottom: 0;
   text-align: center;
-  background: #ffebab;
+  background: ${({ theme }) => theme.colors.background.neutralGrey};
   transition: ${(props) => props.theme.transitions.regular};
   z-index: ${(props) => props.theme.zIndexes.sticky};
 `;
@@ -129,7 +150,9 @@ const StyledInnerContainer = styled.div`
   justify-content: space-around;
 `;
 
-const ActionButtonsContainers = styled.div``;
+const ActionButtonsContainers = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.micro};
+`;
 
 const SliderContainer = styled.div`
   width: 70%;
