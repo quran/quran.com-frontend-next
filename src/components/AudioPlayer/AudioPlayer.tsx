@@ -1,11 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  AUDIO_PLAYER_EXPANDED_HEIGHT,
-  AUDIO_PLAYER_MINIZED_HEIGHT,
-  MAX_AUDIO_PLAYER_WIDTH,
-} from 'src/styles/constants';
+import { AUDIO_PLAYER_EXPANDED_HEIGHT, AUDIO_PLAYER_MINIZED_HEIGHT } from 'src/styles/constants';
 import { CENTER_HORIZONTALLY } from 'src/styles/utility';
 import {
   AudioPlayerVisibility,
@@ -171,7 +167,6 @@ const StyledContainer = styled.div<{
 `;
 
 const StyledInnerContainer = styled.div`
-  max-width: ${MAX_AUDIO_PLAYER_WIDTH};
   ${CENTER_HORIZONTALLY}
   display: flex;
   justify-content: space-around;
