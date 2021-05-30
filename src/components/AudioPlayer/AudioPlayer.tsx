@@ -143,6 +143,8 @@ const AudioPlayer = () => {
         <SliderContainer>
           <Slider currentTime={currentTime} audioDuration={audioDuration} setTime={setTime} />
         </SliderContainer>
+        {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
+        <div />
       </StyledInnerContainer>
     </StyledContainer>
   );
@@ -169,7 +171,7 @@ const StyledContainer = styled.div<{
 const StyledInnerContainer = styled.div`
   ${CENTER_HORIZONTALLY}
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 const ActionButtonsContainers = styled.div`
