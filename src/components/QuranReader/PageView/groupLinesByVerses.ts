@@ -2,7 +2,7 @@ import _ from 'lodash';
 import VerseType from 'types/VerseType';
 
 /**
- * Groups verses into lines to match the Quran Page (Madani Mushaf) layout
+ * Groups verses into lines to match the Quran Page (Mushaf) layout
  * The returning value is an object containing the page and line number as a key,
  * and array of word for the value. E.g.
  * {

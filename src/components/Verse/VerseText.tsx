@@ -27,7 +27,11 @@ const VerseText = ({ words }: VerseTextProps) => {
     >
       <StyledVerseText styles={quranReaderStyles}>
         {words?.map((word) => (
-          <QuranWord key={word.location} word={word} fontStyle={quranReaderStyles.quranFont} />
+          <QuranWord
+            key={[word.position, word.code, word.lineNum].join('-')}
+            word={word}
+            fontStyle={quranReaderStyles.quranFont}
+          />
         ))}
       </StyledVerseText>
     </StyledVerseTextContainer>

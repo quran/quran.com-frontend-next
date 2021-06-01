@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import VerseType from '../../../../types/VerseType';
 import VerseText from '../../Verse/VerseText';
-import TranslationType from '../../../../types/TranslationType';
 
 type TranslationViewProps = {
   verses: VerseType[];
@@ -14,9 +13,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
       {verses.map((verse) => (
         <VerseTextContainer highlight={false} key={verse.id}>
           <VerseText words={verse.words} />
-          {verse.translations?.map((translation: TranslationType) => (
-            <StyledText dangerouslySetInnerHTML={{ __html: translation.text }} />
-          ))}
+          <StyledText>{verse.translations && verse.translations[0]?.text}</StyledText>
           <hr />
         </VerseTextContainer>
       ))}
@@ -33,7 +30,7 @@ const StyledTranslationView = styled.div`
   margin: ${(props) => props.theme.spacing.medium} auto;
 `;
 
-const StyledText = styled.div`
+const StyledText = styled.span`
   letter-spacing: 0;
 `;
 

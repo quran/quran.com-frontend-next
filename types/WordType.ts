@@ -4,24 +4,20 @@ import TransliterationType from './TransliterationType';
 export enum CharType {
   Word = 'word',
   End = 'end',
-  Pause = 'pause',
-  Sajdah = 'sajdah',
 }
-
 interface WordType {
+  arabic?: string;
   verseKey: string;
-  charTypeName: CharType;
-  codeV1?: string;
-  codeV2?: string;
-  pageNumber?: number;
-  lineNumber?: number;
+  charType: CharType;
+  className: string;
+  code: string;
+  lineNumber: number;
+  pageNumber: number;
   position: number;
-  location?: string;
   translation?: TranslationType;
   transliteration?: TransliterationType;
-  id?: number;
-  textUthmani?: string;
-  textIndopak?: string;
+  wordId?: number;
+  textMadani?: string | null;
   highlight?: string;
   audio: $TsFixMe;
   [key: string]: $TsFixMe;

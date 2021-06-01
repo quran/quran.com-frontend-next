@@ -1,7 +1,6 @@
 import { stringify } from 'qs';
 
-export const ITEMS_PER_PAGE = 10;
-export const { NEXT_PUBLIC_API_HOST } = process.env;
+export const apiUrl = 'https://api.quran.com/api/v3';
 
 /**
  * Generates a url to make an api call to our backend
@@ -10,11 +9,11 @@ export const { NEXT_PUBLIC_API_HOST } = process.env;
  */
 export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
   if (!parameters) {
-    return `${NEXT_PUBLIC_API_HOST}${path}`;
+    return `${apiUrl}${path}`;
   }
 
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
   const queryParameters = `?${stringify(parameters)}`;
-  return `${NEXT_PUBLIC_API_HOST}${path}${queryParameters}`;
+  return `${apiUrl}${path}${queryParameters}`;
 };

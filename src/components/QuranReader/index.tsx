@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
+import { makeUrl } from 'src/utils/api';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import ChapterType from 'types/ChapterType';
@@ -14,8 +15,6 @@ import TranslationView from './TranslationView';
 import { ReadingView } from './types';
 import Notes from './Notes/Notes';
 import ContextMenu from './ContextMenu';
-import { makeVersesUrl } from '../../utils/apiPaths';
-import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -35,14 +34,13 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 };
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
-      // TODO: select the translation using the user preference
-      return makeVersesUrl(chapter.id, {
+      return makeUrl(`/chapters/${chapter.id}/verses`, {
+        translations: 20,
         page: index + 1,
-        wordFields: `verse_key, page_number, location, ${quranReaderStyles.quranFont}`,
-      });
+        limit: 25,
+      }); // TODO: select the translation using the user preference
     },
     verseFetcher,
     {
@@ -52,7 +50,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   );
   const readingView = useSelector(selectReadingView);
   const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const pageLimit = initialData.pagination.totalPages;
+  const pageLimit = initialData.meta.totalPages;
   const verses = data.flat(1);
   let view;
 

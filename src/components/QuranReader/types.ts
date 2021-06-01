@@ -4,10 +4,9 @@ export enum ReadingView {
 }
 
 export enum QuranFont {
-  MadaniV1 = 'code_v1',
-  MadaniV2 = 'code_v2',
-  Uthmani = 'text_uthmani',
-  IndoPak = 'text_indopak',
+  Uthmani = 'uthmani',
+  Madani = 'madani',
+  IndoPak = 'indopak',
 }
 
 export default { ReadingView, QuranFont };
