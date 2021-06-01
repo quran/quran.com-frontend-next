@@ -11,7 +11,8 @@ interface VerseType {
   rubNumber: number;
   verseKey: string;
   words: Array<WordType>;
-  textUthmani?: string;
+  textMadani: string;
+  textSimple: string;
   sajdah?: boolean;
   translations?: Array<TranslationType>;
   audio?: $TsFixMe;

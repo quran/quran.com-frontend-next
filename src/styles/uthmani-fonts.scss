@@ -1,0 +1,24 @@
+$page: 0;
+
+@for $p from 1 through 604 {
+  @if $p < 10 {
+    $page: "00"+$p;
+  } @else if $p < 100{
+    $page: "0"+$p;
+  } @else{
+    $page: $p;
+  }
+
+  @font-face {
+    font-family: "p#{$p}-code_v1";
+    src: local('QCF_P#{$page}'),
+    url('/fonts/QCF-uthmani/QCF_P#{$page}.ttf') format('truetype');
+  }
+
+  /*TODO:(@naveed-ahmad) add v2 fonts*/
+  @font-face {
+    font-family: "p#{$p}-code_v2";
+    src: local(QCF200#{$p}),
+    url('/fonts/QCF-uthmani/QCF_P#{$page}.ttf') format('truetype');
+  }
+}
