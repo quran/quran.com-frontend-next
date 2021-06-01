@@ -7,13 +7,11 @@ type UthmaniWordTextProps = {
   fontVersion: string;
 };
 
-const fixVersionName = (version) => version.replace('code_', '');
-
 const UthmaniWordText = ({ code, pageNumber, fontVersion }: UthmaniWordTextProps) => {
   return (
     // eslint-disable-next-line react/no-danger
     <StyledUthmaniWordText
-      fontVersion={fixVersionName(fontVersion)}
+      fontVersion={fontVersion}
       pageNumber={pageNumber}
       dangerouslySetInnerHTML={{ __html: code }}
     />
