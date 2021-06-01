@@ -9,7 +9,7 @@ export enum CharType {
 }
 
 interface WordType {
-  verseKey?: string;
+  verseKey: string;
   charTypeName: CharType;
   codeV1?: string;
   codeV2?: string;
@@ -23,7 +23,7 @@ interface WordType {
   textUthmani?: string;
   textIndopak?: string;
   highlight?: string;
-  audioUrl: $TsFixMe;
+  audio: $TsFixMe;
   [key: string]: $TsFixMe;
 }
 
