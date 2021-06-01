@@ -73,12 +73,10 @@ const AudioPlayer = () => {
   const togglePlaying = useCallback(() => {
     if (isPlaying) {
       audioPlayerEl.current.pause();
-      dispatch({ type: setIsPlaying.type, payload: false });
     } else {
       audioPlayerEl.current.play();
-      dispatch({ type: setIsPlaying.type, payload: true });
     }
-  }, [dispatch, isPlaying]);
+  }, [isPlaying]);
 
   const setTime = useCallback(
     (time) => {
@@ -172,10 +170,18 @@ const StyledInnerContainer = styled.div`
   ${CENTER_HORIZONTALLY}
   display: flex;
   justify-content: center;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    flex-direction: row-reverse;
+  }
 `;
 
 const ActionButtonsContainers = styled.div`
   margin-top: ${({ theme }) => theme.spacing.micro};
+  display: flex;
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    flex-direction: row-reverse;
+  }
 `;
 
 const SliderContainer = styled.div`
