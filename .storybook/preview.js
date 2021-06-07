@@ -6,7 +6,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import { theme, darkTheme } from '../src/styles/theme';
 import ResetCSS from '../src/styles/reset.css';
 import GlobalFonts from '../src/styles/fonts.css';
-import UthmaniFonts from '../src/styles/uthmani-fonts.css';
+import QCFV1Fonts from '../src/styles/qcf-v1-fonts.css';
+import QCFV2Fonts from '../src/styles/qcf-v2-fonts.css';
 
 const themes = [theme, darkTheme];
 const Wrapper = styled.div`
@@ -18,7 +19,9 @@ const themeDecorator = (storyFn) => (
   <ThemeProvider theme={themes[0]}>
     <link rel="stylesheet" href={ResetCSS} />
     <link rel="stylesheet" href={GlobalFonts} />
-    <link rel="stylesheet" href={UthmaniFonts} />
+    <link rel="stylesheet" href={QCFV1Fonts} />
+    <link rel="stylesheet" href={QCFV2Fonts} />
+
     <Wrapper>
       {storyFn()}
     </Wrapper>

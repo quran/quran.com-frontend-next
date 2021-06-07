@@ -42,7 +42,6 @@
     "react-scroll": "^1.7.16",
     "react-use": "^13.27.0",
     "redux-persist": "^6.0.0",
-    "sass": "^1.34.0",
     "storybook-styled-components": "^1.1.4",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5",
