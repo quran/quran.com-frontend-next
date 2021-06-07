@@ -10,8 +10,10 @@
 
 @font-face {
   font-family: "Madani";
-  src: url("/fonts/madani/KFGQPC.otf") format("opentype");
-}
+  src: local("me_quranR3HOQ"),
+  url("/fonts/madani/me_quran.woff2"),
+  url("/fonts/madani/me_quran.woff2") format("truetype");
+};
 
 @font-face {
   font-family: "SFProText-Regular";
