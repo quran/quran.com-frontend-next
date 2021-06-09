@@ -15,7 +15,10 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
         <VerseTextContainer highlight={false} key={verse.id}>
           <VerseText words={verse.words} />
           {verse.translations?.map((translation: TranslationType) => (
-            <StyledText dangerouslySetInnerHTML={{ __html: translation.text }} />
+            <StyledText
+              key={translation.id}
+              dangerouslySetInnerHTML={{ __html: translation.text }}
+            />
           ))}
           <hr />
         </VerseTextContainer>
