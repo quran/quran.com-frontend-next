@@ -12,7 +12,7 @@
   font-family: "Madani";
   src: local("me_quranR3HOQ"),
   url("/fonts/madani/me_quran.woff2"),
-  url("/fonts/madani/me_quran.woff2") format("truetype");
+  url("/fonts/madani/me_quran.ttf") format("truetype");
 };
 
 @font-face {
