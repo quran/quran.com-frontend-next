@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
+    "@xstate/react": "^1.3.4",
     "humps": "^2.0.1",
     "lodash": "^4.17.19",
     "next": "^10.2.2",
@@ -45,7 +46,8 @@
     "storybook-styled-components": "^1.1.4",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5",
-    "swr": "^0.3.0"
+    "swr": "^0.3.0",
+    "xstate": "^4.20.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

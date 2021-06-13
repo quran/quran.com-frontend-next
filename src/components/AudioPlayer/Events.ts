@@ -1,0 +1,10 @@
+export const LOADED = 'LOADED';
+export const FAIL = 'FAIL';
+export const PLAY = 'PLAY';
+export const UPDATE_TIMING = 'UPDATE_TIMING';
+export const PAUSE = 'PAUSE';
+export const END = 'END';
+export const TOGGLE = 'TOGGLE';
+export const SEEK = 'SEEK';
+export const STALL = 'STALL';
+export const CAN_PLAY = 'CAN_PLAY';

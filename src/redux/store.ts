@@ -15,7 +15,6 @@ import readingView from './slices/QuranReader/readingView';
 import notes from './slices/QuranReader/notes';
 import contextMenu from './slices/QuranReader/contextMenu';
 import navbar from './slices/navbar';
-import audioPlayerState from './slices/AudioPlayer/state';
 import audioPlayerStyle from './slices/AudioPlayer/style';
 
 const persistConfig = {
@@ -26,7 +25,6 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  audioPlayerState,
   audioPlayerStyle,
   contextMenu,
   navbar,

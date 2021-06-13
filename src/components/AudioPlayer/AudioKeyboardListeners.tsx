@@ -3,10 +3,11 @@ import { useCallback, useEffect } from 'react';
 const SEEK_DURATION = 5;
 type AudioKeyBoardListenersProps = {
   togglePlaying: () => void;
-  seek: (seekDuration: number) => void;
+  seek: (seekDuration: number, absoluteTime?: boolean) => void;
+  disabled: boolean;
 };
 
-const AudioKeyBoardListeners = ({ seek, togglePlaying }: AudioKeyBoardListenersProps) => {
+const AudioKeyBoardListeners = ({ seek, togglePlaying, disabled }: AudioKeyBoardListenersProps) => {
   const spaceKeyHandler = useCallback(
     (event) => {
       if (event.code === 'Space') {
@@ -31,13 +32,15 @@ const AudioKeyBoardListeners = ({ seek, togglePlaying }: AudioKeyBoardListenersP
   );
 
   useEffect(() => {
-    window.addEventListener('keypress', spaceKeyHandler);
-    window.addEventListener('keydown', arrowKeyHandler);
+    if (!disabled) {
+      window.addEventListener('keypress', spaceKeyHandler);
+      window.addEventListener('keydown', arrowKeyHandler);
+    }
     return () => {
       window.removeEventListener('keypress', spaceKeyHandler);
       window.removeEventListener('keydown', arrowKeyHandler);
     };
-  }, [spaceKeyHandler, arrowKeyHandler]);
+  }, [spaceKeyHandler, arrowKeyHandler, disabled]);
   return <></>;
 };
 
