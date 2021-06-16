@@ -7,6 +7,4 @@ export const NOTES_SIDE_BAR_DESKTOP_WIDTH = '26rem';
 export const AUDIO_PLAYER_EXPANDED_HEIGHT = '3rem';
 export const AUDIO_PLAYER_MINIZED_HEIGHT = '1rem';
 
-export const MAX_AUDIO_PLAYER_WIDTH = '40rem';
-
 export default NAVBAR_HEIGHT;

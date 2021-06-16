@@ -1,11 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  AUDIO_PLAYER_EXPANDED_HEIGHT,
-  AUDIO_PLAYER_MINIZED_HEIGHT,
-  MAX_AUDIO_PLAYER_WIDTH,
-} from 'src/styles/constants';
+import { AUDIO_PLAYER_EXPANDED_HEIGHT, AUDIO_PLAYER_MINIZED_HEIGHT } from 'src/styles/constants';
 import { CENTER_HORIZONTALLY } from 'src/styles/utility';
 import {
   AudioPlayerVisibility,
@@ -77,12 +73,10 @@ const AudioPlayer = () => {
   const togglePlaying = useCallback(() => {
     if (isPlaying) {
       audioPlayerEl.current.pause();
-      dispatch({ type: setIsPlaying.type, payload: false });
     } else {
       audioPlayerEl.current.play();
-      dispatch({ type: setIsPlaying.type, payload: true });
     }
-  }, [dispatch, isPlaying]);
+  }, [isPlaying]);
 
   const setTime = useCallback(
     (time) => {
@@ -147,6 +141,8 @@ const AudioPlayer = () => {
         <SliderContainer>
           <Slider currentTime={currentTime} audioDuration={audioDuration} setTime={setTime} />
         </SliderContainer>
+        {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
+        <div />
       </StyledInnerContainer>
     </StyledContainer>
   );
@@ -171,14 +167,21 @@ const StyledContainer = styled.div<{
 `;
 
 const StyledInnerContainer = styled.div`
-  max-width: ${MAX_AUDIO_PLAYER_WIDTH};
   ${CENTER_HORIZONTALLY}
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    flex-direction: row-reverse;
+  }
 `;
 
 const ActionButtonsContainers = styled.div`
   margin-top: ${({ theme }) => theme.spacing.micro};
+  display: flex;
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    flex-direction: row-reverse;
+  }
 `;
 
 const SliderContainer = styled.div`

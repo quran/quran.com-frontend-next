@@ -2,6 +2,7 @@ import React from 'react';
 import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
 import styled from 'styled-components';
+import { AUDIO_PLAYER_EXPANDED_HEIGHT } from 'src/styles/constants';
 
 const NUMBER_OF_SPLITS = 100;
 
@@ -65,10 +66,20 @@ const StyledSplitsContainer = styled.div`
   width: 70%;
   margin-left: ${({ theme }) => theme.spacing.medium};
   margin-right: ${({ theme }) => theme.spacing.medium};
+
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    position: fixed;
+    bottom: ${AUDIO_PLAYER_EXPANDED_HEIGHT};
+    left: 0;
+    width: 100%;
+    margin: 0;
+    height: calc(1.25 * ${({ theme }) => theme.spacing.xxsmall});
+    /* display: none; */
+  }
 `;
 
 const StyledSplit = styled.span<{ isComplete: boolean }>`
-  height: 1px;
+  height: 2px;
   width: ${100 / NUMBER_OF_SPLITS}%;
   cursor: pointer;
   display: inline-block;
