@@ -31,9 +31,9 @@ const VerseText = ({ words }: VerseTextProps) => {
         isQuranPage={isQuranPage}
         centerAlignPage={centerAlignPage}
       >
-        {words?.map((word) => (
-          <QuranWord key={word.location} word={word} font={quranReaderStyles.quranFont} />
-        ))}
+        {words?.map((word) => {
+          return <QuranWord key={word.id} word={word} font={quranReaderStyles.quranFont} />;
+        })}
       </StyledVerseText>
     </StyledVerseTextContainer>
   );

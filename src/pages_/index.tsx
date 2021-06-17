@@ -11,6 +11,7 @@ type IndexProps = {
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
+  if (!chapters) return null;
   return (
     <div style={{ paddingTop: '4rem' }}>
       <ChaptersList chapters={chapters.slice(0, 38)} />
