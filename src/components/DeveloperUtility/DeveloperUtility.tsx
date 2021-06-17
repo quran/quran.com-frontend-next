@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { IS_DEVELOPMENT } from 'src/utils/environment';
 import styled from 'styled-components';
 import { BsWrench } from 'react-icons/bs';
+import Draggable from 'react-draggable';
 import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import NavbarAdjustment from './NavbarAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
-
 /**
  * A set of developer utilities only availble on development environments
  */
@@ -21,28 +21,32 @@ const DeveloperUtility = () => {
 
   if (!isExpanded) {
     return (
-      <Container expanded={false} type="button" onClick={() => setIsExpanded(true)}>
-        <StyledWrench />
-      </Container>
+      <Draggable bounds="parent">
+        <Container expanded={false} type="button" onClick={() => setIsExpanded(true)}>
+          <StyledWrench />
+        </Container>
+      </Draggable>
     );
   }
 
   return (
-    <Container type="button" expanded>
-      Developer Utility
-      <hr />
-      <FontAdjustment />
-      <ReadingViewAdjustment />
-      <NotesAdjustment />
-      <NavbarAdjustment />
-      <AudioPlayerAdjustment />
-      <ContextMenuAdjustment />
-      <div>
-        <button type="button" onClick={() => setIsExpanded(false)}>
-          close
-        </button>
-      </div>
-    </Container>
+    <Draggable bounds="parent">
+      <Container type="button" expanded>
+        Developer Utility
+        <hr />
+        <FontAdjustment />
+        <ReadingViewAdjustment />
+        <NotesAdjustment />
+        <NavbarAdjustment />
+        <AudioPlayerAdjustment />
+        <ContextMenuAdjustment />
+        <div>
+          <button type="button" onClick={() => setIsExpanded(false)}>
+            close
+          </button>
+        </div>
+      </Container>
+    </Draggable>
   );
 };
 
