@@ -41,7 +41,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
       // TODO: select the translation using the user preference
       return makeVersesUrl(chapter.id, {
         page: index + 1,
-        wordFields: `verse_key, page_number, location, ${quranReaderStyles.quranFont}`,
+        wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
       });
     },
     verseFetcher,

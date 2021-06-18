@@ -8,6 +8,7 @@ export enum QuranFont {
   MadaniV2 = 'code_v2',
   Uthmani = 'text_uthmani',
   IndoPak = 'text_indopak',
+  QPCHafs = 'qpc_uthmani_hafs',
 }
 
 export default { ReadingView, QuranFont };
