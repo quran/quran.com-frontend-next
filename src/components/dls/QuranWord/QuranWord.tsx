@@ -1,45 +1,26 @@
 import React from 'react';
-import WordType, { CharType } from 'types/WordType';
+import WordType from 'types/WordType';
 import { QuranFont } from 'src/components/QuranReader/types';
 import styled from 'styled-components';
-import IndoPakWordText from './IndoPakWordText';
 import MadaniWordText from './MadaniWordText';
 import UthmaniWordText from './UthmaniWordText';
 
 type QuranWordProps = {
   word: WordType;
-  fontStyle?: QuranFont;
+  font?: QuranFont;
   highlight?: boolean;
 };
 
 const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
 
-const QuranWord = ({ word, fontStyle, highlight }: QuranWordProps) => {
+const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
   let wordText;
 
-  if (QCFFontCodes.includes(fontStyle)) {
-    wordText = (
-      <UthmaniWordText fontVersion={fontStyle} code={word.text} pageNumber={word.pageNumber} />
-    );
-  } else if (word.charTypeName !== CharType.End) {
-    // Render all words except ayah markers
-
-    if (fontStyle === QuranFont.IndoPak) {
-      wordText = <IndoPakWordText text={word.text} />;
-    } else {
-      wordText = <MadaniWordText fontVersion={fontStyle} text={word.text} />;
-    }
+  if (QCFFontCodes.includes(font)) {
+    wordText = <UthmaniWordText font={font} code={word.text} pageNumber={word.pageNumber} />;
   } else {
-    // Render ayah markers
-    // Extract the verse number and convert it to Arabic digits
-    const arabicVerseNumber = parseInt(
-      word.verseKey.substring(word.verseKey.indexOf(':') + 1),
-      10,
-    ).toLocaleString('ar-EG');
-
-    // reverse the arabic digits such that they're displayed as 10, 11, 12.. instead of 01, 11, 21
-    const reversedArabicVerseNumber = arabicVerseNumber.split('').reverse().join('');
-    wordText = <MadaniWordText text={`${reversedArabicVerseNumber} `} fontVersion={fontStyle} />;
+    // Render all words except ayah markers
+    wordText = <MadaniWordText font={font} text={word.text} charType={word.charTypeName} />;
   }
 
   return <StyledWordContainer highlight={highlight}>{wordText}</StyledWordContainer>;
