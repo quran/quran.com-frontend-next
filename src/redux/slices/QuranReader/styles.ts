@@ -25,8 +25,8 @@ const initialState: QuranReaderStyles = {
   quranTextFontSize: 2,
   quranTextLineHeight: 3,
   quranTextLetterSpacing: 0,
-  quranFont: QuranFont.MadaniV1,
-  letterSpacingMultiplier: LetterSpacingMultiplyer.MadaniV1,
+  quranFont: QuranFont.QPCHafs,
+  letterSpacingMultiplier: LetterSpacingMultiplyer.None,
 };
 
 export const quranReaderStylesSlice = createSlice({

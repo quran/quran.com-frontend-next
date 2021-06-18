@@ -19,7 +19,6 @@ const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
   if (QCFFontCodes.includes(font)) {
     wordText = <UthmaniWordText font={font} code={word.text} pageNumber={word.pageNumber} />;
   } else {
-    // Render all words except ayah markers
     wordText = <MadaniWordText font={font} text={word.text} charType={word.charTypeName} />;
   }
 
