@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     getChapters(),
     getChapter(chapterId),
     getChapterVerses(chapterId, {
-      wordFields: `verse_key, page_number, location, ${QuranFont.Uthmani}`,
+      wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
     }),
   ]);
   return {

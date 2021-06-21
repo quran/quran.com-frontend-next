@@ -6,13 +6,14 @@ import groupLinesByVerses from './groupLinesByVerses';
 
 type PageProps = {
   verses: VerseType[];
+  page: number;
 };
 
-const Page = ({ verses }: PageProps) => {
+const Page = ({ verses, page }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
 
   return (
-    <StyledPage>
+    <StyledPage id={`page-${page}`}>
       {Object.keys(lines).map((key) => (
         <Line words={lines[key]} key={key} />
       ))}

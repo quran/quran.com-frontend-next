@@ -13,8 +13,8 @@ const PageView = ({ verses }: PageViewProps) => {
 
   return (
     <StyledPageView>
-      {Object.keys(pages).map((key) => (
-        <Page verses={pages[key]} key={key} />
+      {Object.keys(pages).map((pageNumber) => (
+        <Page verses={pages[pageNumber]} key={`page-${pageNumber}`} page={Number(pageNumber)} />
       ))}
     </StyledPageView>
   );
@@ -23,6 +23,10 @@ const PageView = ({ verses }: PageViewProps) => {
 const StyledPageView = styled.div`
   max-width: 100%;
   direction: rtl;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
 `;
 
 export default React.memo(PageView);

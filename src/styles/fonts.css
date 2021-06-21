@@ -9,11 +9,18 @@
 }
 
 @font-face {
-  font-family: "Madani";
+  font-family: "meQuran";
   src: local("me_quranR3HOQ"),
   url("/fonts/madani/me_quran.woff2"),
   url("/fonts/madani/me_quran.ttf") format("truetype");
-};
+}
+
+@font-face {
+  font-family: "UthmanicHafs1Ver17";
+  src: local('KFGQPC HAFS Uthmanic Script Regular. Version 0.17'),
+  url("/fonts/uthmanic_hafs/UthmanicHafs1-Ver17.woff2"),
+  url("/fonts/uthmanic_hafs/UthmanicHafs1-Ver17.ttf") format('truetype');
+}
 
 @font-face {
   font-family: "SFProText-Regular";
