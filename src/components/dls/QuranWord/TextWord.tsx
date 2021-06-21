@@ -23,7 +23,7 @@ const getFontFaimly = (font: string, charType: string) => {
   return UTHMANI_HAFS_FONTS[font] || DEFAULT_FONT_FAMILY;
 };
 
-const MadaniWordText = (props: MadaniWordTextProps) => {
+const TextWord = (props: MadaniWordTextProps) => {
   const { text, font, charType } = props;
   return (
     <StyledHasfWordText font={font} charType={charType}>
@@ -34,7 +34,8 @@ const MadaniWordText = (props: MadaniWordTextProps) => {
 
 const StyledHasfWordText = styled.span<{ font: string; charType: string }>`
   unicode-bidi: bidi-override;
+  line-height: normal;
   font-family: ${(props) => `${getFontFaimly(props.font, props.charType)}`};
 `;
 
-export default MadaniWordText;
+export default TextWord;

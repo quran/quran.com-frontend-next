@@ -1,23 +1,21 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import VerseType from '../../../../types/VerseType';
 import Line from './Line';
 import groupLinesByVerses from './groupLinesByVerses';
-import { selectQuranReaderStyles } from '../../../redux/slices/QuranReader/styles';
 
 type PageProps = {
   verses: VerseType[];
+  page: number;
 };
 
-const Page = ({ verses }: PageProps) => {
+const Page = ({ verses, page }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   return (
-    <StyledPage>
+    <StyledPage id={`page-${page}`}>
       {Object.keys(lines).map((key) => (
-        <Line words={lines[key]} key={[key, quranReaderStyles.quranFont].join('_')} />
+        <Line words={lines[key]} key={key} />
       ))}
     </StyledPage>
   );
