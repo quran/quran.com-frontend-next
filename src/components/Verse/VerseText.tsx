@@ -12,13 +12,13 @@ type VerseTextProps = {
 };
 
 // Pages where we want to have center align text to resemble the Madani Mushaf
-const CENTER_ALIGN_PAGES = [1, 2];
+const CENTER_ALIGNED_PAGES = [1, 2];
 
 const VerseText = ({ words }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const readingView = useSelector(selectReadingView);
   const isQuranPage = readingView === ReadingView.QuranPage;
-  const centerAlignPage = CENTER_ALIGN_PAGES.includes(words[0].pageNumber);
+  const centerAlignPage = CENTER_ALIGNED_PAGES.includes(words[0].pageNumber);
 
   return (
     <StyledVerseTextContainer
