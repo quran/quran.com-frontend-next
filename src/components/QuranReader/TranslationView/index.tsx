@@ -32,7 +32,7 @@ const VerseTextContainer = styled.div<{ highlight: boolean }>`
 `;
 
 const StyledTranslationView = styled.div`
-  max-width: 100%;
+  max-width: 80%;
   margin: ${(props) => props.theme.spacing.medium} auto;
 `;
 

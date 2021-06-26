@@ -26,7 +26,11 @@ const VerseText = ({ words }: VerseTextProps) => {
       isQuranPage={isQuranPage}
       centerAlignPage={centerAlignPage}
     >
-      <StyledVerseText styles={quranReaderStyles} centerAlignPage={centerAlignPage}>
+      <StyledVerseText
+        styles={quranReaderStyles}
+        isQuranPage={isQuranPage}
+        centerAlignPage={centerAlignPage}
+      >
         {words?.map((word) => (
           <QuranWord key={word.location} word={word} font={quranReaderStyles.quranFont} />
         ))}
@@ -52,9 +56,17 @@ const StyledVerseTextContainer = styled.div<{
   `}
 `;
 
-const StyledVerseText = styled.div<{ styles: QuranReaderStyles; centerAlignPage: boolean }>`
+const StyledVerseText = styled.div<{
+  styles: QuranReaderStyles;
+  centerAlignPage: boolean;
+  isQuranPage: boolean;
+}>`
   display: flex;
-  justify-content: ${(props) => (props.centerAlignPage ? 'center' : 'space-between')};
+  ${({ isQuranPage }) =>
+    isQuranPage &&
+    `
+    justify-content: ${(props) => (props.centerAlignPage ? 'center' : 'space-between')};
+  `}
 `;
 
 export default React.memo(VerseText);
