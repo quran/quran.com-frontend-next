@@ -1,7 +1,7 @@
-import SlugType from './SlugType';
-import TranslatedNameType from './TranslatedNameType';
+import Slug from './SlugType';
+import TranslatedName from './TranslatedNameType';
 
-interface ChapterType {
+interface Chapter {
   id: number | string;
   versesCount: number;
   bismillahPre: boolean;
@@ -12,9 +12,9 @@ interface ChapterType {
   nameSimple: string;
   nameArabic: string;
   chapterNumber: number;
-  translatedName: TranslatedNameType;
-  defaultSlug: SlugType;
-  slugs?: Array<SlugType>;
+  translatedName: TranslatedName;
+  defaultSlug: Slug;
+  slugs?: Slug[];
 }
 
-export default ChapterType;
+export default Chapter;

@@ -4,7 +4,7 @@ import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
-import ChapterType from 'types/ChapterType';
+import Chapter from 'types/ChapterType';
 import styled from 'styled-components';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
@@ -19,7 +19,7 @@ import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
-  chapter: ChapterType;
+  chapter: Chapter;
 };
 
 const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()

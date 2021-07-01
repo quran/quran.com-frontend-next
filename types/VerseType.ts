@@ -1,7 +1,7 @@
-import WordType from './WordType';
-import TranslationType from './TranslationType';
+import Word from './WordType';
+import Translation from './TranslationType';
 
-interface VerseType {
+interface Verse {
   id: number;
   verseNumber: number;
   chapterId: number | string;
@@ -10,11 +10,11 @@ interface VerseType {
   hizbNumber: number;
   rubNumber: number;
   verseKey: string;
-  words: Array<WordType>;
+  words: Word[];
   textUthmani?: string;
   sajdah?: boolean;
-  translations?: Array<TranslationType>;
+  translations?: Translation[];
   audio?: $TsFixMe;
 }
 
-export default VerseType;
+export default Verse;

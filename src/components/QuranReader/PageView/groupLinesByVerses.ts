@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import VerseType from 'types/VerseType';
+import Verse from 'types/VerseType';
 
 /**
  * Groups verses into lines to match the Quran Page (Madani Mushaf) layout
@@ -11,7 +11,7 @@ import VerseType from 'types/VerseType';
  *  ...
  * }
  */
-const groupLinesByVerses = (verses: VerseType[]) => {
+const groupLinesByVerses = (verses: Verse[]) => {
   const words = [];
 
   // Flattens the verses into an array of words

@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import VerseType from '../../../../types/VerseType';
+import Verse from '../../../../types/VerseType';
 import VerseText from '../../Verse/VerseText';
-import TranslationType from '../../../../types/TranslationType';
+import Translation from '../../../../types/TranslationType';
 
 type TranslationViewProps = {
-  verses: VerseType[];
+  verses: Verse[];
 };
 
 const TranslationView = ({ verses }: TranslationViewProps) => {
@@ -14,7 +14,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
       {verses.map((verse) => (
         <VerseTextContainer highlight={false} key={verse.id}>
           <VerseText words={verse.words} />
-          {verse.translations?.map((translation: TranslationType) => (
+          {verse.translations?.map((translation: Translation) => (
             <StyledText
               key={translation.id}
               dangerouslySetInnerHTML={{ __html: translation.text }}

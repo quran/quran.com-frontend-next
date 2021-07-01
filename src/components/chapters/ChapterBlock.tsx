@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import ChapterType from 'types/ChapterType';
+import Chapter from 'types/ChapterType';
 import ChapterIcon from './ChapterIcon';
 
 const Item = styled.li`
@@ -49,7 +49,7 @@ const Container = styled.div`
 `;
 
 type Props = {
-  chapter: ChapterType;
+  chapter: Chapter;
 };
 
 const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (

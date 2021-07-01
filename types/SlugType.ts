@@ -1,6 +1,6 @@
-interface SlugType {
+interface Slug {
   slug: string;
   locale: string;
 }
 
-export default SlugType;
+export default Slug;

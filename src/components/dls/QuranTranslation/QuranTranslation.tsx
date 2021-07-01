@@ -1,8 +1,8 @@
 import React from 'react';
-import TranslationType from '../../../../types/TranslationType';
+import Translation from '../../../../types/TranslationType';
 
 type QuranTranslationProps = {
-  translation: TranslationType;
+  translation: Translation;
 };
 
 const QuranTranslation = ({ translation }: QuranTranslationProps) => (

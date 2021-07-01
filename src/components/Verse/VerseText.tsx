@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import WordType from 'types/WordType';
+import Word from 'types/WordType';
 import { selectReadingView } from 'src/redux/slices/QuranReader/readingView';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { selectQuranReaderStyles, QuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { ReadingView } from '../QuranReader/types';
 
 type VerseTextProps = {
-  words: WordType[];
+  words: Word[];
 };
 
 // Pages where we want to have center align text to resemble the Madani Mushaf

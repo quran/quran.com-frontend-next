@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import VerseType from 'types/VerseType';
+import Verse from 'types/VerseType';
 
 /**
  * Groups verses into pages to match the Quran Page (Mushaf) layout
@@ -11,7 +11,7 @@ import VerseType from 'types/VerseType';
  *  ...
  * }
  */
-const groupPagesByVerses = (verses: VerseType[]) => {
+const groupPagesByVerses = (verses: Verse[]) => {
   // Groups the verses based on their page number
   const pages = _.groupBy(verses, (verse) => {
     return verse.pageNumber;

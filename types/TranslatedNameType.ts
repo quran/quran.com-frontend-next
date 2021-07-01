@@ -1,6 +1,6 @@
-interface TranslatedNameType {
+interface TranslatedName {
   name: string;
   languageName: string;
 }
 
-export default TranslatedNameType;
+export default TranslatedName;
