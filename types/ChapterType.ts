@@ -14,7 +14,7 @@ interface ChapterType {
   chapterNumber: number;
   translatedName: TranslatedNameType;
   defaultSlug: SlugType;
-  slugs: Array<SlugType>;
+  slugs?: Array<SlugType>;
 }
 
 export default ChapterType;
