@@ -12,6 +12,7 @@ export const chapter = {
     languageName: 'english',
     name: 'The Opener',
   },
+  defaultSlug: { slug: 'al-fatihah', locale: 'english' },
   languageName: 'english',
   pages: [1, 2],
 };
@@ -27,6 +28,7 @@ export const chapter2 = {
   nameSimple: 'Al-Baqarah',
   versesCount: 286,
   pages: [2, 49],
+  defaultSlug: { slug: 'al-baqarah', locale: 'english' },
   translatedName: { languageName: 'english', name: 'The Cow' },
 };
 
@@ -41,6 +43,7 @@ export const chapter3 = {
   nameSimple: "Ali 'Imran",
   versesCount: 200,
   pages: [50, 76],
+  defaultSlug: { slug: 'ali-imran', locale: 'english' },
   translatedName: { languageName: 'english', name: 'Family of Imran' },
 };
 
