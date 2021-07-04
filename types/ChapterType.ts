@@ -1,5 +1,8 @@
-interface ChapterType {
-  id: number;
+import Slug from './SlugType';
+import TranslatedName from './TranslatedNameType';
+
+interface Chapter {
+  id: number | string;
   versesCount: number;
   bismillahPre: boolean;
   revelationOrder: number;
@@ -9,8 +12,9 @@ interface ChapterType {
   nameSimple: string;
   nameArabic: string;
   chapterNumber: number;
-  translatedName: Record<'name' | 'languageName', string>;
-  languageName: string;
+  translatedName: TranslatedName;
+  defaultSlug: Slug;
+  slugs?: Slug[];
 }
 
-export default ChapterType;
+export default Chapter;

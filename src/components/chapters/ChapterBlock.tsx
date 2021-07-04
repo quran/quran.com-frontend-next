@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from 'next-translate/Link';
-import ChapterType from 'types/ChapterType';
+import Link from 'next/link';
+import Chapter from 'types/ChapterType';
 import ChapterIcon from './ChapterIcon';
 
 const Item = styled.li`
@@ -31,7 +31,7 @@ const NameContainer = styled.div`
   padding-left: ${(props) => props.theme.spacing.small};
 `;
 
-const NameEnglish = styled.div`
+const NameTranslated = styled.div`
   font-size: ${(props) => props.theme.fontSizes.normal};
   text-transform: uppercase;
   color: ${({ theme }) => theme.colors.primary.medium};
@@ -49,7 +49,7 @@ const Container = styled.div`
 `;
 
 type Props = {
-  chapter: ChapterType;
+  chapter: Chapter;
 };
 
 const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (
@@ -60,9 +60,11 @@ const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (
           <Number>{chapter.chapterNumber}</Number>
           <NameContainer>
             <NameArabic>{chapter.nameSimple}</NameArabic>
-            <NameEnglish>{chapter.translatedName.name}</NameEnglish>
+            <NameTranslated className={chapter.translatedName.languageName}>
+              {chapter.translatedName.name}
+            </NameTranslated>
           </NameContainer>
-          <ChapterIcon id={String(chapter.id)} />
+          <ChapterIcon id={String(chapter.chapterNumber)} />
         </Container>
       </StyledLink>
     </Link>

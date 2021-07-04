@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import VerseType from '../../../../types/VerseType';
+import Verse from '../../../../types/VerseType';
 import Line from './Line';
 import groupLinesByVerses from './groupLinesByVerses';
 
 type PageProps = {
-  verses: VerseType[];
+  verses: Verse[];
   page: number;
 };
 

@@ -1,4 +1,4 @@
-interface TranslationType {
+interface Translation {
   id?: number;
   languageName: string;
   text: string;
@@ -7,4 +7,4 @@ interface TranslationType {
   authorName?: string;
 }
 
-export default TranslationType;
+export default Translation;

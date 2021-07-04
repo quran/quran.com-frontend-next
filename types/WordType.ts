@@ -1,5 +1,5 @@
-import TranslationType from './TranslationType';
-import TransliterationType from './TransliterationType';
+import Translation from './TranslationType';
+import Transliteration from './TransliterationType';
 
 export enum CharType {
   Word = 'word',
@@ -8,7 +8,7 @@ export enum CharType {
   Sajdah = 'sajdah',
 }
 
-interface WordType {
+interface Word {
   verseKey?: string;
   charTypeName: CharType;
   codeV1?: string;
@@ -17,8 +17,8 @@ interface WordType {
   lineNumber?: number;
   position: number;
   location?: string;
-  translation?: TranslationType;
-  transliteration?: TransliterationType;
+  translation?: Translation;
+  transliteration?: Transliteration;
   id?: number;
   textUthmani?: string;
   textIndopak?: string;
@@ -27,4 +27,4 @@ interface WordType {
   [key: string]: $TsFixMe;
 }
 
-export default WordType;
+export default Word;

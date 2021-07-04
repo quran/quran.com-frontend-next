@@ -1,6 +1,6 @@
-interface TransliterationType {
+interface Transliteration {
   languageName?: string;
   text?: string;
 }
 
-export default TransliterationType;
+export default Transliteration;

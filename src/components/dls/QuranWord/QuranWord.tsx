@@ -1,12 +1,12 @@
 import React from 'react';
-import WordType from 'types/WordType';
+import Word from 'types/WordType';
 import { QuranFont } from 'src/components/QuranReader/types';
 import styled from 'styled-components';
 import TextWord from './TextWord';
 import GlypWord from './GlypWord';
 
 type QuranWordProps = {
-  word: WordType;
+  word: Word;
   font?: QuranFont;
   highlight?: boolean;
 };
