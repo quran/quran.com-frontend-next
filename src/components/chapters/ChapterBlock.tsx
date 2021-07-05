@@ -49,7 +49,7 @@ const Container = styled.div`
 `;
 
 const ChapterIconContainer = styled.span`
-  * {
+  span {
     font-family: 'surahnames';
     font-variant: normal;
     text-transform: none;

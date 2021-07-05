@@ -64,10 +64,6 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
     view = <TranslationView verses={verses} />;
   }
 
-  const fontFaces = isQCFFont(quranReaderStyles.quranFont)
-    ? buildQCFFontFace(verses, quranReaderStyles.quranFont)
-    : '';
-
   return (
     <>
       <ContextMenu />
@@ -82,7 +78,9 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
             }
           }}
         >
-          <style>{fontFaces}</style>
+          {isQCFFont(quranReaderStyles.quranFont) && (
+            <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
+          )}
           {view}
         </StyledInfiniteScroll>
       </Container>

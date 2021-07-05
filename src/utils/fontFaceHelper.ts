@@ -1,13 +1,16 @@
 import VerseType from 'types/VerseType';
 import { QuranFont } from 'src/components/QuranReader/types';
-import unique from 'array-unique';
+import { range } from 'lodash';
 
 const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
 
 export const isQCFFont = (font: QuranFont) => QCFFontCodes.includes(font);
 
 const getPages = (verses: VerseType[]) => {
-  return unique(verses.map((verse) => verse.pageNumber));
+  const firstPage = verses[0].pageNumber;
+  const lastPage = verses[verses.length - 1].pageNumber;
+
+  return range(firstPage, lastPage);
 };
 
 const buildV1FontFace = (pageNumber: string | number) => {

@@ -116,6 +116,6 @@ const CONTENT: { [key: string]: string } = {
 
 export default styled.span<{ id?: string | number }>`
   &:before {
-    content: '${(props) => String.raw`\e${CONTENT[props.id] || '903'}`}';
+    content: '${({ id }) => String.raw`\e${CONTENT[id] || '903'}`}';
   }
 `;
