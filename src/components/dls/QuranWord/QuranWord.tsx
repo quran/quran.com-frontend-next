@@ -2,6 +2,7 @@ import React from 'react';
 import Word from 'types/WordType';
 import { QuranFont } from 'src/components/QuranReader/types';
 import styled from 'styled-components';
+import { isQCFFont } from 'src/utils/fontFaceHelper';
 import TextWord from './TextWord';
 import GlypWord from './GlypWord';
 
@@ -11,8 +12,7 @@ type QuranWordProps = {
   highlight?: boolean;
 };
 
-const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
-const getGlyph = (word, font) => {
+const getGlyph = (word: Word, font: QuranFont) => {
   if (font === QuranFont.MadaniV1) return word.codeV1;
   return word.codeV2;
 };
@@ -20,7 +20,7 @@ const getGlyph = (word, font) => {
 const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
   let wordText;
 
-  if (QCFFontCodes.includes(font)) {
+  if (isQCFFont(font)) {
     wordText = <GlypWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
   } else {
     wordText =

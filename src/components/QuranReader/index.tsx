@@ -10,12 +10,14 @@ import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
+
 import TranslationView from './TranslationView';
 import { ReadingView } from './types';
 import Notes from './Notes/Notes';
 import ContextMenu from './ContextMenu';
 import { makeVersesUrl } from '../../utils/apiPaths';
 import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
+import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -62,6 +64,10 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
     view = <TranslationView verses={verses} />;
   }
 
+  const fontFaces = isQCFFont(quranReaderStyles.quranFont)
+    ? buildQCFFontFace(verses, quranReaderStyles.quranFont)
+    : '';
+
   return (
     <>
       <ContextMenu />
@@ -76,6 +82,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
             }
           }}
         >
+          <style>{fontFaces}</style>
           {view}
         </StyledInfiniteScroll>
       </Container>

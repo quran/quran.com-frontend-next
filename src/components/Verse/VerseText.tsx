@@ -62,10 +62,10 @@ const StyledVerseText = styled.div<{
   isQuranPage: boolean;
 }>`
   display: flex;
-  ${({ isQuranPage }) =>
+  ${({ isQuranPage, centerAlignPage }) =>
     isQuranPage &&
     `
-    justify-content: ${(props) => (props.centerAlignPage ? 'center' : 'space-between')};
+    justify-content: ${centerAlignPage ? 'center' : 'space-between'};
   `}
 `;
 

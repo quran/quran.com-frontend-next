@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
+    "array-unique": "^0.3.2",
     "humps": "^2.0.1",
     "lodash": "^4.17.19",
     "next": "^10.2.2",

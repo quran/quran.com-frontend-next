@@ -2,16 +2,11 @@
 import styled from 'styled-components';
 
 const CONTENT: { [key: string]: string } = {
-  59: '900',
-  60: '901',
-  48: '902',
   1: '904',
   2: '905',
   3: '906',
   4: '907',
   5: '908',
-  38: '909',
-  39: '90a',
   6: '90b',
   7: '90c',
   8: '90d',
@@ -40,6 +35,12 @@ const CONTENT: { [key: string]: string } = {
   31: '924',
   32: '925',
   33: '926',
+  34: '92e',
+  35: '92f',
+  36: '930',
+  37: '931',
+  38: '909',
+  39: '90a',
   40: '927',
   41: '928',
   42: '929',
@@ -47,11 +48,8 @@ const CONTENT: { [key: string]: string } = {
   44: '92b',
   45: '92c',
   46: '92d',
-  34: '92e',
-  35: '92f',
-  36: '930',
-  37: '931',
   47: '932',
+  48: '902',
   49: '933',
   50: '934',
   51: '935',
@@ -62,10 +60,8 @@ const CONTENT: { [key: string]: string } = {
   56: '93a',
   57: '93b',
   58: '93c',
-  79: '93d',
-  80: '93e',
-  81: '93f',
-  82: '940',
+  59: '900',
+  60: '901',
   61: '941',
   62: '942',
   63: '943',
@@ -118,18 +114,8 @@ const CONTENT: { [key: string]: string } = {
   114: '972',
 };
 
-export default styled.span<{ id: string | number }>`
-  font-family: 'surahnames' !important;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: ${(props) => props.theme.lineHeights.normal};
-  font-size: ${(props) => props.theme.fontSizes.jumbo};
-  float: right;
-  color: ${({ theme }) => theme.colors.text.default};
-
+export default styled.span<{ id?: string | number }>`
   &:before {
-    content: '${({ id }) => String.raw`\e${CONTENT[id] || '903'}`}';
+    content: '${(props) => String.raw`\e${CONTENT[props.id] || '903'}`}';
   }
 `;
