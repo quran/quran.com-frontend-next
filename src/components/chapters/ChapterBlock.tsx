@@ -48,6 +48,17 @@ const Container = styled.div`
   width: 100%;
 `;
 
+const ChapterIconContainer = styled.span`
+  span {
+    font-family: 'surahnames';
+    font-variant: normal;
+    text-transform: none;
+    line-height: ${(props) => props.theme.lineHeights.normal};
+    font-size: ${(props) => props.theme.fontSizes.jumbo};
+    color: ${({ theme }) => theme.colors.text.default};
+  }
+`;
+
 type Props = {
   chapter: Chapter;
 };
@@ -64,7 +75,10 @@ const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (
               {chapter.translatedName.name}
             </NameTranslated>
           </NameContainer>
-          <ChapterIcon id={String(chapter.chapterNumber)} />
+          <ChapterIconContainer>
+            <ChapterIcon id={String(chapter.id)} />
+            <ChapterIcon />
+          </ChapterIconContainer>
         </Container>
       </StyledLink>
     </Link>
