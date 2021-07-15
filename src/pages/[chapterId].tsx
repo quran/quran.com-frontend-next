@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from 'next/error';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
@@ -8,12 +9,16 @@ import QuranReader from '../components/QuranReader';
 import { QuranFont } from '../components/QuranReader/types';
 
 type ChapterProps = {
-  chapterResponse: ChapterResponse;
-  versesResponse: VersesResponse;
+  chapterResponse?: ChapterResponse;
+  versesResponse?: VersesResponse;
+  hasError?: boolean;
 };
 
-const Chapter: NextPage<ChapterProps> = ({ chapterResponse: { chapter }, versesResponse }) => {
-  return <QuranReader initialData={versesResponse} chapter={chapter} />;
+const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasError }) => {
+  if (hasError) {
+    return <Error statusCode={500} />;
+  }
+  return <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -33,7 +38,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
   if (chapterResponse.status === 500 || versesResponse.status === 500) {
     return {
-      notFound: true,
+      props: {
+        hasError: true,
+      },
+      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
   return {
