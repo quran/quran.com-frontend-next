@@ -9,8 +9,8 @@ export default {
 
 export const normal = () => (
   <Tabs>
-    <Card title="Title1" subtitle="Subtitle" image={image} />
-    <Card title="Title2" subtitle="Subtitle" image={image} />
-    <Card title="Title3" subtitle="Subtitle" image={image} />
+    <Card title="Title1" subtitle="Subtitle" image={image.toString()} />
+    <Card title="Title2" subtitle="Subtitle" image={image.toString()} />
+    <Card title="Title3" subtitle="Subtitle" image={image.toString()} />
   </Tabs>
 );
