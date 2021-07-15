@@ -11,6 +11,9 @@ module.exports = {
     '@storybook/addon-viewport/register',
     '@storybook/addon-a11y/register',
   ],
+  typescript: {
+    reactDocgen: false,
+  },
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
@@ -25,13 +28,6 @@ module.exports = {
           loader: require.resolve('ts-loader'),
           options: {
             configFile: path.resolve(__dirname, '../tsconfig.storybook.json'),
-          },
-        },
-
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-          options: {
-            tsconfigPath: path.resolve(__dirname, '../tsconfig.storybook.json'),
           },
         },
       ],
