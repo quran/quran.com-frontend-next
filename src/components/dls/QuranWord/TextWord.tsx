@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { decamelizeKeys } from 'humps';
-import { CharType } from 'types/WordType';
+import { CharType } from 'types/Word';
 
 type MadaniWordTextProps = {
   text: string;

@@ -1,5 +1,5 @@
-import Verse from './VerseType';
-import Chapter from './ChapterType';
+import Verse from './Verse';
+import Chapter from './Chapter';
 
 // The response from the verses endpoint that returns a list of verses
 export interface VersesResponse {

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Verse from 'types/VerseType';
+import Verse from 'types/Verse';
 
 /**
  * Groups verses into pages to match the Quran Page (Mushaf) layout

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import Chapter from 'types/ChapterType';
+import Chapter from 'types/Chapter';
 import ChapterIcon from './ChapterIcon';
 
 const Item = styled.li`

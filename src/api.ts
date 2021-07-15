@@ -1,7 +1,7 @@
 import { camelizeKeys } from 'humps';
 import { makeUrl } from './utils/api';
-import Chapter from '../types/ChapterType';
-import Verse from '../types/VerseType';
+import Chapter from '../types/Chapter';
+import Verse from '../types/Verse';
 import { makeVersesUrl } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {

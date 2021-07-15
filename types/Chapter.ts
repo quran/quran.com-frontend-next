@@ -1,5 +1,5 @@
-import Slug from './SlugType';
-import TranslatedName from './TranslatedNameType';
+import Slug from './Slug';
+import TranslatedName from './TranslatedName';
 
 interface Chapter {
   id: number | string;

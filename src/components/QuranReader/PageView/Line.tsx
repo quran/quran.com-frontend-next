@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { selectQuranReaderStyles, QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import Word from 'types/WordType';
+import Word from 'types/Word';
 import VerseText from 'src/components/Verse/VerseText';
 
 type LineProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Word from 'types/WordType';
+import Word from 'types/Word';
 import { QuranFont } from 'src/components/QuranReader/types';
 import styled from 'styled-components';
 import { isQCFFont } from 'src/utils/fontFaceHelper';

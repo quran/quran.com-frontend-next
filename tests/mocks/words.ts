@@ -1,5 +1,5 @@
 import merge from 'lodash/merge';
-import { CharType } from 'types/WordType';
+import { CharType } from 'types/Word';
 
 export const mockWord = (overrides = {}) =>
   merge(
