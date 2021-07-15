@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
+import RTLLayoutDetector from '../components/RTLLayoutDetector';
 import { theme } from '../styles/theme';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
@@ -22,7 +23,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
           <DefaultSeo {...createSEOConfig({})} />
           <Navbar />
           <DeveloperUtility />
-          <Component {...pageProps} />
+          <RTLLayoutDetector>
+            <Component {...pageProps} />
+          </RTLLayoutDetector>
           <AudioPlayer />
         </ThemeProvider>
       </ReduxProvider>
