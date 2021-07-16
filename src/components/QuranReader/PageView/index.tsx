@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import Verse from '../../../../types/VerseType';
+import Verse from '../../../../types/Verse';
 import Page from './Page';
 import groupPagesByVerses from './groupPagesByVerses';
 

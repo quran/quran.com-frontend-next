@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ChapterBlock from './ChapterBlock';
-import Chapter from '../../../types/ChapterType';
+import Chapter from '../../../types/Chapter';
 
 const List = styled.ul`
   padding-left: 0;

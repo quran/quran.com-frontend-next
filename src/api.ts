@@ -1,7 +1,7 @@
 import { camelizeKeys } from 'humps';
 import { makeUrl } from './utils/api';
-import Chapter from '../types/ChapterType';
-import Verse from '../types/VerseType';
+import Chapter from '../types/Chapter';
+import Verse from '../types/Verse';
 import { makeVersesUrl } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {
@@ -18,7 +18,11 @@ export const getChapters = async () => {
 export const getChapter = async (id: string | number) => {
   const payload = await fetcher(makeUrl(`/chapters/${id}`));
 
-  return camelizeKeys(payload) as { chapter: Chapter };
+  return camelizeKeys(payload) as {
+    chapter: Chapter;
+    status?: number;
+    error?: string;
+  };
 };
 
 export const getChapterInfo = async (id: string | number) => {
@@ -31,7 +35,11 @@ export const getChapterVerses = async (id: string | number, params?: Record<stri
   const payload = await fetcher(makeVersesUrl(id, params));
   // TODO (@abdellatif): parameterize the default translation
 
-  return camelizeKeys(payload) as { verses: Verse[] };
+  return camelizeKeys(payload) as {
+    verses: Verse[];
+    status?: number;
+    error?: string;
+  };
 };
 
 export const getChapterVersesResponse = async (

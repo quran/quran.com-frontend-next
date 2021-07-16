@@ -1,5 +1,5 @@
-import Translation from './TranslationType';
-import Transliteration from './TransliterationType';
+import Translation from './Translation';
+import Transliteration from './Transliteration';
 
 export enum CharType {
   Word = 'word',

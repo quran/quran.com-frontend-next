@@ -4,7 +4,7 @@ import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
-import Chapter from 'types/ChapterType';
+import Chapter from 'types/Chapter';
 import styled from 'styled-components';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';

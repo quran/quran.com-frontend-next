@@ -1,5 +1,5 @@
 import React from 'react';
-import Translation from '../../../../types/TranslationType';
+import Translation from '../../../../types/Translation';
 
 type QuranTranslationProps = {
   translation: Translation;

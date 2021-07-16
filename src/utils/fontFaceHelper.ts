@@ -1,4 +1,4 @@
-import VerseType from 'types/VerseType';
+import Verse from 'types/Verse';
 import { QuranFont } from 'src/components/QuranReader/types';
 import { range } from 'lodash';
 
@@ -6,7 +6,7 @@ const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
 
 export const isQCFFont = (font: QuranFont) => QCFFontCodes.includes(font);
 
-const getPages = (verses: VerseType[]) => {
+const getPages = (verses: Verse[]) => {
   const firstPage = verses[0].pageNumber;
   const lastPage = verses[verses.length - 1].pageNumber;
 
@@ -34,7 +34,7 @@ const buildV2FontFace = (pageNumber: string | number) => {
  }`;
 };
 
-export const buildQCFFontFace = (verses: VerseType[], fontType: QuranFont) => {
+export const buildQCFFontFace = (verses: Verse[], fontType: QuranFont) => {
   const pageNumbers = getPages(verses);
   let fontFaces;
 

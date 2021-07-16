@@ -1,5 +1,5 @@
-import Word from './WordType';
-import Translation from './TranslationType';
+import Word from './Word';
+import Translation from './Translation';
 
 interface Verse {
   id: number;

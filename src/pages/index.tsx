@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import ChaptersList from '../components/chapters/ChapterList';
-import Chapter from '../../types/ChapterType';
+import Chapter from '../../types/Chapter';
 import { getChapters } from '../api';
 
 type IndexProps = {
