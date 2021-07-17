@@ -1,8 +1,9 @@
 import { camelizeKeys } from 'humps';
+import { TranslationsResponse } from 'types/APIResponses';
 import { makeUrl } from './utils/api';
 import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
-import { makeVersesUrl } from './utils/apiPaths';
+import { makeTranslationsUrl, makeVersesUrl } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
@@ -47,4 +48,17 @@ export const getChapterVersesResponse = async (
   params?: Record<string, unknown>,
 ) => {
   return fetcher(makeVersesUrl(id, params));
+};
+
+/**
+ * Get the current available translations with the name translated in the current language.
+ *
+ * @param {string} language we use this to get translated names of authors in specific the current language.
+ *
+ * @returns {Promise<TranslationsResponse>}
+ */
+export const getAvailableTranslations = async (language: string): Promise<TranslationsResponse> => {
+  const payload = await fetcher(makeTranslationsUrl(language));
+
+  return camelizeKeys(payload) as TranslationsResponse;
 };

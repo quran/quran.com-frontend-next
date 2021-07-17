@@ -8,7 +8,9 @@ import Chapter from 'types/Chapter';
 import styled from 'styled-components';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
+import { joinStringArray } from 'src/utils/string';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
+import { selectCurrentTranslations } from '../../redux/slices/QuranReader/translations';
 import PageView from './PageView';
 
 import TranslationView from './TranslationView';
@@ -38,18 +40,19 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const currentTranslations = useSelector(selectCurrentTranslations) as string[];
   const { data, size, setSize, isValidating } = useSWRInfinite(
-    (index) => {
-      // TODO: select the translation using the user preference
-      return makeVersesUrl(chapter.id, {
+    (index) =>
+      makeVersesUrl(chapter.id, {
         page: index + 1,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
-      });
-    },
+        translations: joinStringArray(currentTranslations),
+      }),
     verseFetcher,
     {
       initialData: initialData.verses,
-      revalidateOnFocus: true,
+      revalidateOnFocus: false, // disable auto revalidation when window gets focused
+      revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
   const readingView = useSelector(selectReadingView);
