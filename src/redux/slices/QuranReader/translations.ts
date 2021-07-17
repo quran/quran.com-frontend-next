@@ -8,7 +8,7 @@ export const translationsSlice = createSlice({
   name: 'translations',
   initialState,
   reducers: {
-    setCurrentTranslations: (state, action: PayloadAction) => {
+    setCurrentTranslations: (state, action: PayloadAction<string[]>) => {
       // this is to handle if the user un-selects all translations, we will reset it to defaults.
       return action.payload.length ? action.payload : DEFAULT_TRANSLATIONS;
     },
