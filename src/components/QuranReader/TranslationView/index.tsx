@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
 
 type TranslationViewProps = {
   verses: Verse[];
+  quranReaderStyles: QuranReaderStyles;
 };
 
-const TranslationView = ({ verses }: TranslationViewProps) => {
+const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => {
   return (
     <StyledTranslationView>
       {verses.map((verse) => (
@@ -16,6 +18,7 @@ const TranslationView = ({ verses }: TranslationViewProps) => {
           <VerseText words={verse.words} />
           {verse.translations?.map((translation: Translation) => (
             <StyledText
+              quranReaderStyles={quranReaderStyles}
               key={translation.id}
               dangerouslySetInnerHTML={{ __html: translation.text }}
             />
@@ -36,8 +39,10 @@ const StyledTranslationView = styled.div`
   margin: ${(props) => props.theme.spacing.medium} auto;
 `;
 
-const StyledText = styled.div`
+const StyledText = styled.div<{ quranReaderStyles: QuranReaderStyles }>`
   letter-spacing: 0;
+  font-size: min(5vw, ${(props) => props.quranReaderStyles.translationFontSize}rem);
+  line-height: normal;
 `;
 
 export default TranslationView;

@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
+import { selectTranslations } from '../../redux/slices/QuranReader/translations';
 import PageView from './PageView';
 
 import TranslationView from './TranslationView';
@@ -38,18 +39,19 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const selectedTranslations = useSelector(selectTranslations) as number[];
   const { data, size, setSize, isValidating } = useSWRInfinite(
-    (index) => {
-      // TODO: select the translation using the user preference
-      return makeVersesUrl(chapter.id, {
+    (index) =>
+      makeVersesUrl(chapter.id, {
         page: index + 1,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
-      });
-    },
+        translations: selectedTranslations.join(', '),
+      }),
     verseFetcher,
     {
       initialData: initialData.verses,
-      revalidateOnFocus: true,
+      revalidateOnFocus: false, // disable auto revalidation when window gets focused
+      revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
   const readingView = useSelector(selectReadingView);
@@ -61,7 +63,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   if (readingView === ReadingView.QuranPage) {
     view = <PageView verses={verses} />;
   } else {
-    view = <TranslationView verses={verses} />;
+    view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
   }
 
   return (
