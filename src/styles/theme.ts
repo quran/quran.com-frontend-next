@@ -61,6 +61,10 @@ export const theme: Theme = {
     jumbo: '1.2rem',
   },
 
+  heights: {
+    jumbo: '13.75rem',
+  },
+
   lineHeights: {
     small: '0.8rem',
     normal: '1rem',

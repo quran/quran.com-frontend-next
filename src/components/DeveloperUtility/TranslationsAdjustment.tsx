@@ -2,26 +2,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getAvailableTranslations } from 'src/api';
-import { TranslationsResponse } from 'types/APIResponses';
 import TranslationResource from 'types/TranslationResource';
 import useTranslation from 'next-translate/useTranslation';
 import {
-  selectCurrentTranslations,
-  setCurrentTranslations,
+  selectTranslations,
+  setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
 
-const StyledSelect = styled.select.attrs({
-  name: 'translations',
-  multiple: true,
-})`
-  background-color: white;
-  width: 100%;
-  height: 220px;
-`;
-
-const TranslationAdjustment = () => {
+const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
-  const currentTranslations = useSelector(selectCurrentTranslations) as string[];
+  const selectedTranslations = useSelector(selectTranslations) as number[];
   const { lang } = useTranslation();
   const [translations, setTranslations] = useState<TranslationResource[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -29,7 +19,7 @@ const TranslationAdjustment = () => {
 
   useEffect(() => {
     getAvailableTranslations(lang)
-      .then((res: TranslationsResponse) => {
+      .then((res) => {
         // if there is an internal server error.
         if (res.status === 500) {
           setHasError(true);
@@ -47,26 +37,26 @@ const TranslationAdjustment = () => {
   }
 
   /**
-   * Handle when and item(s) get selected or un-selected.
+   * Handle when an item(s) get selected or un-selected.
    *
    * @param {React.ChangeEvent<HTMLSelectElement>} e
    */
-  const onSelectedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // extract the selected translation IDs as an arrays of strings
-    const selectedTranslations = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value,
-    ) as string[];
-    dispatch({ type: setCurrentTranslations.type, payload: selectedTranslations });
+  const onSelectedTranslationsChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // extract the selected translation IDs
+    const selectedTranslationsIDs = Array.from(e.target.selectedOptions, (option) =>
+      Number(option.value),
+    );
+    dispatch({ type: setSelectedTranslations.type, payload: selectedTranslationsIDs });
   };
 
   return (
     <div>
+      Selected translations{' '}
       <button type="button" onClick={() => setIsExpanded((prevIsExpanded) => !prevIsExpanded)}>
         <p>{isExpanded ? 'Hide' : 'Show'} Translations</p>
       </button>
       {isExpanded && (
-        <StyledSelect onChange={onSelectedChange} defaultValue={currentTranslations}>
+        <StyledSelect onChange={onSelectedTranslationsChange} defaultValue={selectedTranslations}>
           {translations.map((translation) => (
             <option key={translation.id} value={translation.id}>
               {translation.translatedName.name}
@@ -78,4 +68,13 @@ const TranslationAdjustment = () => {
   );
 };
 
-export default TranslationAdjustment;
+const StyledSelect = styled.select.attrs({
+  name: 'translations',
+  multiple: true,
+})`
+  background-color: white;
+  width: 100%;
+  height: ${(props) => props.theme.heights.jumbo};
+`;
+
+export default TranslationsAdjustment;

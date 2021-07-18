@@ -8,9 +8,8 @@ import Chapter from 'types/Chapter';
 import styled from 'styled-components';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { joinStringArray } from 'src/utils/string';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
-import { selectCurrentTranslations } from '../../redux/slices/QuranReader/translations';
+import { selectTranslations } from '../../redux/slices/QuranReader/translations';
 import PageView from './PageView';
 
 import TranslationView from './TranslationView';
@@ -40,13 +39,13 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const currentTranslations = useSelector(selectCurrentTranslations) as string[];
+  const selectedTranslations = useSelector(selectTranslations) as number[];
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       makeVersesUrl(chapter.id, {
         page: index + 1,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
-        translations: joinStringArray(currentTranslations),
+        translations: selectedTranslations.join(', '),
       }),
     verseFetcher,
     {
@@ -64,7 +63,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   if (readingView === ReadingView.QuranPage) {
     view = <PageView verses={verses} />;
   } else {
-    view = <TranslationView verses={verses} />;
+    view = <TranslationView verses={verses} styles={quranReaderStyles} />;
   }
 
   return (

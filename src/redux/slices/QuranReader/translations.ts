@@ -1,22 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const DEFAULT_TRANSLATIONS = ['20'];
+const DEFAULT_TRANSLATIONS = [20, 131];
 
-const initialState: string[] = DEFAULT_TRANSLATIONS;
+const initialState: number[] = DEFAULT_TRANSLATIONS;
 
 export const translationsSlice = createSlice({
   name: 'translations',
   initialState,
   reducers: {
-    setCurrentTranslations: (state, action: PayloadAction<string[]>) => {
-      // this is to handle if the user un-selects all translations, we will reset it to defaults.
-      return action.payload.length ? action.payload : DEFAULT_TRANSLATIONS;
-    },
+    setSelectedTranslations: (state, action: PayloadAction<number[]>) => action.payload,
   },
 });
 
-export const { setCurrentTranslations } = translationsSlice.actions;
+export const { setSelectedTranslations } = translationsSlice.actions;
 
-export const selectCurrentTranslations = (state) => state.translations;
+export const selectTranslations = (state) => state.translations;
 
 export default translationsSlice.reducer;

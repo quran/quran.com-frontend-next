@@ -25,7 +25,7 @@ export interface ChapterResponse {
 }
 
 export interface TranslationsResponse {
-  translations: TranslationResource[];
+  translations?: TranslationResource[];
   status?: number;
   error?: string;
 }
