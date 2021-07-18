@@ -1,6 +1,6 @@
 import Verse from './Verse';
 import Chapter from './Chapter';
-import TranslationResource from './TranslationResource';
+import AvailableTranslation from './AvailableTranslation';
 
 // The response from the verses endpoint that returns a list of verses
 export interface VersesResponse {
@@ -25,7 +25,7 @@ export interface ChapterResponse {
 }
 
 export interface TranslationsResponse {
-  translations?: TranslationResource[];
+  translations?: AvailableTranslation[];
   status?: number;
   error?: string;
 }

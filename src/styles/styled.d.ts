@@ -64,10 +64,6 @@ type LineHeights = {
   jumbo: string;
 };
 
-type Heights = {
-  jumbo: string;
-};
-
 type FontWeights = {
   normal: number;
   bold: number;
@@ -124,7 +120,6 @@ export interface Theme {
   colors: Colors;
   spacing: Spacing;
   fontSizes: FontSizes;
-  heights: Heights;
   lineHeights: LineHeights;
   fontWeights: FontWeights;
   borderRadiuses: BorderRadiuses;

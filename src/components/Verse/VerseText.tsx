@@ -22,12 +22,12 @@ const VerseText = ({ words }: VerseTextProps) => {
 
   return (
     <StyledVerseTextContainer
-      styles={quranReaderStyles}
+      quranReaderStyles={quranReaderStyles}
       isQuranPage={isQuranPage}
       centerAlignPage={centerAlignPage}
     >
       <StyledVerseText
-        styles={quranReaderStyles}
+        quranReaderStyles={quranReaderStyles}
         isQuranPage={isQuranPage}
         centerAlignPage={centerAlignPage}
       >
@@ -40,24 +40,24 @@ const VerseText = ({ words }: VerseTextProps) => {
 };
 
 const StyledVerseTextContainer = styled.div<{
-  styles: QuranReaderStyles;
+  quranReaderStyles: QuranReaderStyles;
   isQuranPage: boolean;
   centerAlignPage: boolean;
 }>`
   display: block;
   direction: rtl;
-  font-size: ${(props) => props.styles.quranTextFontSize}rem;
+  font-size: ${(props) => props.quranReaderStyles.quranTextFontSize}rem;
 
   ${(props) =>
     props.isQuranPage &&
     !props.centerAlignPage &&
     `
-  min-width: min(95%, calc(${props.styles.letterSpacingMultiplier} * ${props.styles.quranTextFontSize}rem));
+  min-width: min(95%, calc(${props.quranReaderStyles.letterSpacingMultiplier} * ${props.quranReaderStyles.quranTextFontSize}rem));
   `}
 `;
 
 const StyledVerseText = styled.div<{
-  styles: QuranReaderStyles;
+  quranReaderStyles: QuranReaderStyles;
   centerAlignPage: boolean;
   isQuranPage: boolean;
 }>`

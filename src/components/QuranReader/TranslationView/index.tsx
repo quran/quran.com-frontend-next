@@ -7,10 +7,10 @@ import Translation from '../../../../types/Translation';
 
 type TranslationViewProps = {
   verses: Verse[];
-  styles: QuranReaderStyles;
+  quranReaderStyles: QuranReaderStyles;
 };
 
-const TranslationView = ({ verses, styles }: TranslationViewProps) => {
+const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => {
   return (
     <StyledTranslationView>
       {verses.map((verse) => (
@@ -18,7 +18,7 @@ const TranslationView = ({ verses, styles }: TranslationViewProps) => {
           <VerseText words={verse.words} />
           {verse.translations?.map((translation: Translation) => (
             <StyledText
-              styles={styles}
+              quranReaderStyles={quranReaderStyles}
               key={translation.id}
               dangerouslySetInnerHTML={{ __html: translation.text }}
             />
@@ -39,9 +39,10 @@ const StyledTranslationView = styled.div`
   margin: ${(props) => props.theme.spacing.medium} auto;
 `;
 
-const StyledText = styled.div<{ styles: QuranReaderStyles }>`
+const StyledText = styled.div<{ quranReaderStyles: QuranReaderStyles }>`
   letter-spacing: 0;
-  font-size: min(5vw, ${(props) => props.styles.translationFontSize}rem);
+  font-size: min(5vw, ${(props) => props.quranReaderStyles.translationFontSize}rem);
+  line-height: normal;
 `;
 
 export default TranslationView;

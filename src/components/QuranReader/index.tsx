@@ -63,7 +63,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   if (readingView === ReadingView.QuranPage) {
     view = <PageView verses={verses} />;
   } else {
-    view = <TranslationView verses={verses} styles={quranReaderStyles} />;
+    view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
   }
 
   return (

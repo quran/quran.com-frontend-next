@@ -1,6 +1,6 @@
 import TranslatedName from './TranslatedName';
 
-interface TranslationResource {
+interface AvailableTranslation {
   id?: number;
   name?: string;
   authorName?: string;
@@ -8,4 +8,4 @@ interface TranslationResource {
   languageName?: string;
   translatedName?: TranslatedName;
 }
-export default TranslationResource;
+export default AvailableTranslation;
