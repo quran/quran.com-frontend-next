@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export const CHAPTERS_DETAILS = [
+const CHAPTERS_DETAILS = [
   { versesCount: 7 },
   { versesCount: 286 },
   { versesCount: 200 },
@@ -115,3 +115,7 @@ export const CHAPTERS_DETAILS = [
   { versesCount: 5 },
   { versesCount: 6 },
 ];
+
+module.exports = {
+  CHAPTERS_DETAILS,
+};

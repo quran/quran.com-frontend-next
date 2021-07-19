@@ -1,4 +1,4 @@
-import { CHAPTERS_DETAILS } from './const';
+import * as constants from './const.js';
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
@@ -36,7 +36,7 @@ export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
   if (
     Number.isNaN(verseIdNumber) ||
     verseIdNumber < 1 ||
-    verseIdNumber > CHAPTERS_DETAILS[chapterIdNumber - 1].versesCount
+    verseIdNumber > constants.CHAPTERS_DETAILS[chapterIdNumber - 1].versesCount
   ) {
     return false;
   }
