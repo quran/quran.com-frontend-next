@@ -17,7 +17,7 @@ const generateVersesPaths = () => {
 
 sitemap({
   baseUrl: 'https://quran.com',
-  ignoredPaths: ['/[chapterId]'],
+  ignoredPaths: ['/[chapterId]', '/[chapterId]/[verseId]'],
   extraPaths: chapters.map((id) => `/${id}`).concat(generateVersesPaths()),
   pagesDirectory: `${__dirname}/src/pages`,
   targetDirectory: 'public/',
