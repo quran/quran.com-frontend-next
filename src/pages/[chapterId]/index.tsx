@@ -3,10 +3,10 @@ import Error from 'next/error';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
-import { isValidChapterId } from '../utils/validator';
-import { getChapter, getChapterVerses } from '../api';
-import QuranReader from '../components/QuranReader';
-import { QuranFont } from '../components/QuranReader/types';
+import { isValidChapterId } from '../../utils/validator';
+import { getChapter, getChapterVerses } from '../../api';
+import QuranReader from '../../components/QuranReader';
+import { QuranFont } from '../../components/QuranReader/types';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;

@@ -5,6 +5,7 @@
     "*": ["common"],
     "/": ["home"],
     "/about": ["about"],
-    "/[chapterid]": ["common"]
+    "/[chapterId]": ["common"],
+    "/[chapterId]/[verseId]": ["common"]
   }
 }
