@@ -17,7 +17,7 @@ const UTHMANI_HAFS_FONTS = decamelizeKeys({
   textIndopak: 'IndoPak',
 });
 
-const getFontFaimly = (font: string, charType: string) => {
+const getFontFamily = (font: string, charType: string) => {
   if (charType === CharType.End) return DEFAULT_FONT_FAMILY;
 
   return UTHMANI_HAFS_FONTS[font] || DEFAULT_FONT_FAMILY;
@@ -26,16 +26,16 @@ const getFontFaimly = (font: string, charType: string) => {
 const TextWord = (props: MadaniWordTextProps) => {
   const { text, font, charType } = props;
   return (
-    <StyledHasfWordText font={font} charType={charType}>
+    <StyledHafsWordText font={font} charType={charType}>
       {text}
-    </StyledHasfWordText>
+    </StyledHafsWordText>
   );
 };
 
-const StyledHasfWordText = styled.span<{ font: string; charType: string }>`
+const StyledHafsWordText = styled.span<{ font: string; charType: string }>`
   unicode-bidi: bidi-override;
   line-height: normal;
-  font-family: ${(props) => `${getFontFaimly(props.font, props.charType)}`};
+  font-family: ${(props) => `${getFontFamily(props.font, props.charType)}`};
 `;
 
 export default TextWord;
