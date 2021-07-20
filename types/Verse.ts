@@ -1,6 +1,6 @@
 import Word from './Word';
 import Translation from './Translation';
-import AudioFile from './AudioFile';
+import AudioResponse from './AudioResponse';
 
 interface Verse {
   id: number;
@@ -28,7 +28,7 @@ interface Verse {
   codeV1?: string;
   codeV2?: string;
   translations?: Translation[];
-  audio?: AudioFile;
+  audio?: AudioResponse;
 }
 
 export default Verse;

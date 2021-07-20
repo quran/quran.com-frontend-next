@@ -1,9 +1,9 @@
 import { camelizeKeys } from 'humps';
-import { TranslationsResponse, VerseResponse } from 'types/APIResponses';
+import { TranslationsResponse } from 'types/APIResponses';
 import { makeUrl } from './utils/api';
 import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
-import { makeTranslationsUrl, makeVerseByKeyUrl, makeVersesUrl } from './utils/apiPaths';
+import { makeTranslationsUrl, makeVersesUrl } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
@@ -61,22 +61,4 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
   const payload = await fetcher(makeTranslationsUrl(language));
 
   return camelizeKeys(payload) as TranslationsResponse;
-};
-
-/**
- * Get a verse by the chapterId and verseId.
- *
- * @param {string} chapterId
- * @param {string} verseId
- * @param {Record<string,any>} params
- * @returns {Promise<VerseResponse>}
- */
-export const getVerseByKey = async (
-  chapterId: string,
-  verseId: string,
-  params?: Record<string, unknown>,
-): Promise<VerseResponse> => {
-  const payload = await fetcher(makeVerseByKeyUrl(chapterId, verseId, params));
-
-  return camelizeKeys(payload) as VerseResponse;
 };

@@ -29,9 +29,3 @@ export interface TranslationsResponse {
   status?: number;
   error?: string;
 }
-
-export interface VerseResponse {
-  verse?: Verse;
-  status?: number;
-  error?: string;
-}

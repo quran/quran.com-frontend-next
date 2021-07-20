@@ -22,20 +22,3 @@ export const makeVersesUrl = (id: string | number, params?: Record<string, unkno
  */
 export const makeTranslationsUrl = (language: string): string =>
   makeUrl('/resources/translations', decamelizeKeys({ language }));
-
-/**
- * Compose the url for the get verse by key API.
- *
- * @param {string} chapterId
- * @param {string} verseId
- * @returns {string}
- */
-export const makeVerseByKeyUrl = (
-  chapterId: string,
-  verseId: string | number,
-  params?: Record<string, unknown>,
-): string => {
-  const verseKey = `${chapterId}:${verseId}`; // e.g. 10:5 = 5th verse of 10th chapter.
-  const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
-  return makeUrl(`/verses/by_key/${verseKey}`, decamelizeKeys(apiParams));
-};

@@ -1,21 +1,22 @@
 import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
-import { getVerseByKey } from 'src/api';
-import { VerseResponse } from 'types/APIResponses';
-import VerseReader from 'src/components/QuranReader/VerseReader';
+import { getChapter, getChapterVerses } from 'src/api';
+import { ChapterResponse, VersesResponse } from 'types/APIResponses';
+import QuranReader from 'src/components/QuranReader';
 import { QuranFont } from 'src/components/QuranReader/types';
 
 type VerseProps = {
+  chapterResponse?: ChapterResponse;
+  versesResponse?: VersesResponse;
   hasError?: boolean;
-  verseResponse?: VerseResponse;
 };
 
-const Verse: NextPage<VerseProps> = ({ hasError, verseResponse }) => {
+const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  return <VerseReader initialData={verseResponse.verse} />;
+  return <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
@@ -28,11 +29,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  const verseResponse = await getVerseByKey(chapterId, verseId, {
-    wordFields: `location, ${QuranFont.QPCHafs}`,
-  });
+  const [chapterResponse, versesResponse] = await Promise.all([
+    getChapter(chapterId),
+    getChapterVerses(chapterId, {
+      page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
+      perPage: 1, // only 1 verse per page
+      wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
+    }),
+  ]);
 
-  if (verseResponse.status === 500) {
+  // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
+  if (chapterResponse.status === 500 || versesResponse.status === 500) {
     return {
       props: {
         hasError: true,
@@ -40,9 +47,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
+
   return {
     props: {
-      verseResponse,
+      chapterResponse,
+      versesResponse,
     },
     revalidate: 604800, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
