@@ -6,10 +6,9 @@ const chapters = range(1, 115);
 
 const generateVersesPaths = () => {
   const paths = [];
-  range(114).forEach((chapterId) => {
-    const chapterNumber = chapterId + 1;
+  chapters.forEach((chapterId) => {
     range(chaptersData[chapterId].versesCount).forEach((verseId) => {
-      paths.push(`/${chapterNumber}/${verseId + 1}`);
+      paths.push(`/${chapterId}/${verseId + 1}`);
     });
   });
   return paths;

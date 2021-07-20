@@ -38,19 +38,19 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 };
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
-  const isVerse = initialData.verses.length === 1;
+  const isVerseView = initialData.verses.length === 1;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const selectedTranslations = useSelector(selectTranslations) as number[];
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
       // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-      const page = isVerse ? initialData.verses[0].verseNumber : index + 1;
+      const page = isVerseView ? initialData.verses[0].verseNumber : index + 1;
       return makeVersesUrl(chapter.id, {
         page,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
         translations: selectedTranslations.join(', '),
-        ...(isVerse && { perPage: 1 }),
+        ...(isVerseView && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
       });
     },
     verseFetcher,
@@ -61,7 +61,7 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
     },
   );
   const readingView = useSelector(selectReadingView);
-  const pageLimit = isVerse ? 1 : initialData.pagination.totalPages;
+  const pageLimit = isVerseView ? 1 : initialData.pagination.totalPages;
   const verses = data.flat(1);
   let view;
 

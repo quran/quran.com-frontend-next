@@ -30,13 +30,12 @@ export const isValidChapterId = (chapterId: string): boolean => {
  * @returns {boolean}
  */
 export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
-  const chapterIdNumber = Number(chapterId);
   const verseIdNumber = Number(verseId);
   // is not a valid number, below 1 or above the maximum number of verses for the chapter.
   if (
     Number.isNaN(verseIdNumber) ||
     verseIdNumber < 1 ||
-    verseIdNumber > chaptersData[chapterIdNumber - 1].versesCount
+    verseIdNumber > chaptersData[chapterId].versesCount
   ) {
     return false;
   }
