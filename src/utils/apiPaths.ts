@@ -1,9 +1,10 @@
 import { decamelizeKeys } from 'humps';
+import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
 import { ITEMS_PER_PAGE, makeUrl } from './api';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
-  translations: 20,
+  translations: DEFAULT_TRANSLATIONS.join(', '),
   limit: ITEMS_PER_PAGE,
 };
 
