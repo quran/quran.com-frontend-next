@@ -61,6 +61,7 @@ const StyledVerseText = styled.div<{
   centerAlignPage: boolean;
   isQuranPage: boolean;
 }>`
+  flex-wrap: wrap;
   display: flex;
   ${({ isQuranPage, centerAlignPage }) =>
     isQuranPage &&
