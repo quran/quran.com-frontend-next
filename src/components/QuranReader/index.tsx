@@ -8,7 +8,10 @@ import Chapter from 'types/Chapter';
 import styled from 'styled-components';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
-import { useSelectorTyped } from 'src/redux/store';
+import {
+  selectTranslations,
+  TranslationsSettings,
+} from 'src/redux/slices/QuranReader/translations';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 
@@ -41,9 +44,9 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const isVerseView = initialData.verses.length === 1;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const { selectedTranslations, isUsingDefaultTranslations } = useSelectorTyped(
-    (state) => state.translations,
-  );
+  const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
+    selectTranslations,
+  ) as TranslationsSettings;
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
       // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
