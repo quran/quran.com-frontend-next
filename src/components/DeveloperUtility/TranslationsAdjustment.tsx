@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import {
   selectTranslations,
   setSelectedTranslations,
+  TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
 
 /**
@@ -20,7 +21,7 @@ const numbersToStringsArray = (numbersArray: number[]): string[] =>
 
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectTranslations) as number[];
+  const { selectedTranslations } = useSelector(selectTranslations) as TranslationsSettings;
   const { lang } = useTranslation();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
