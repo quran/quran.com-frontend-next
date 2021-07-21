@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { getAvailableTranslations } from 'src/api';
 import AvailableTranslation from 'types/AvailableTranslation';
 import useTranslation from 'next-translate/useTranslation';
-import {
-  selectTranslations,
-  setSelectedTranslations,
-  TranslationsSettings,
-} from 'src/redux/slices/QuranReader/translations';
+import { setSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { useSelectorTyped } from 'src/redux/store';
 
 /**
  * Convert an array of numbers to an array of strings.
@@ -21,7 +18,7 @@ const numbersToStringsArray = (numbersArray: number[]): string[] =>
 
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
-  const { selectedTranslations } = useSelector(selectTranslations) as TranslationsSettings;
+  const { selectedTranslations } = useSelectorTyped((state) => state.translations);
   const { lang } = useTranslation();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

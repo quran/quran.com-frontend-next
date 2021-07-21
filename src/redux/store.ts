@@ -8,6 +8,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { useSelector } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import quranReaderStyles from './slices/QuranReader/styles';
@@ -51,5 +52,10 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+// infer the `RootState` type from the store itself.
+type RootState = ReturnType<typeof rootReducer>;
+
+export const useSelectorTyped = <T>(fn: (state: RootState) => T): T => useSelector(fn);
 
 export default store;

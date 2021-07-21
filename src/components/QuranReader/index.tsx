@@ -8,11 +8,8 @@ import Chapter from 'types/Chapter';
 import styled from 'styled-components';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
+import { useSelectorTyped } from 'src/redux/store';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
-import {
-  selectTranslations,
-  TranslationsSettings,
-} from '../../redux/slices/QuranReader/translations';
 import PageView from './PageView';
 
 import TranslationView from './TranslationView';
@@ -44,9 +41,9 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   const isVerseView = initialData.verses.length === 1;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
-    selectTranslations,
-  ) as TranslationsSettings;
+  const { selectedTranslations, isUsingDefaultTranslations } = useSelectorTyped(
+    (state) => state.translations,
+  );
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
       // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
@@ -66,43 +63,47 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
     },
   );
   const readingView = useSelector(selectReadingView);
-  let body;
-  let view;
   // if we are fetching the data (this will only happen when the user has changed the default translations so the initialData will be set to null).
   if (!data) {
-    // TODO: add a proper loading indicator
-    body = <StyledLoading>loading...</StyledLoading>;
-  } else {
-    const pageLimit = isVerseView ? 1 : initialData.pagination.totalPages;
-    const verses = data.flat(1);
-    if (readingView === ReadingView.QuranPage) {
-      view = <PageView verses={verses} />;
-    } else {
-      view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
-    }
-    body = (
-      <StyledInfiniteScroll
-        initialLoad={false}
-        threshold={INFINITE_SCROLLER_THRESHOLD}
-        hasMore={size < pageLimit}
-        loadMore={() => {
-          if (!isValidating) {
-            setSize(size + 1);
-          }
-        }}
-      >
-        {isQCFFont(quranReaderStyles.quranFont) && (
-          <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
-        )}
-        {view}
-      </StyledInfiniteScroll>
+    return (
+      <>
+        <ContextMenu />
+        <Container isSideBarVisible={isSideBarVisible}>
+          <StyledLoading>loading...</StyledLoading>
+        </Container>
+        <Notes />
+      </>
     );
+  }
+  let view;
+  const pageLimit = isVerseView ? 1 : initialData.pagination.totalPages;
+  const verses = data.flat(1);
+  if (readingView === ReadingView.QuranPage) {
+    view = <PageView verses={verses} />;
+  } else {
+    view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
   }
 
   return (
     <>
       <ContextMenu />
-      <Container isSideBarVisible={isSideBarVisible}>{body}</Container>
+      <Container isSideBarVisible={isSideBarVisible}>
+        <StyledInfiniteScroll
+          initialLoad={false}
+          threshold={INFINITE_SCROLLER_THRESHOLD}
+          hasMore={size < pageLimit}
+          loadMore={() => {
+            if (!isValidating) {
+              setSize(size + 1);
+            }
+          }}
+        >
+          {isQCFFont(quranReaderStyles.quranFont) && (
+            <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
+          )}
+          {view}
+        </StyledInfiniteScroll>
+      </Container>
       <Notes />
     </>
   );
