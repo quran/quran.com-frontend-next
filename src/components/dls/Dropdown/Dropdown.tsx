@@ -5,7 +5,7 @@ import { rgba } from 'polished';
 import useOutsideClickDetector from '../../../hooks/useOutsideClickDetector';
 
 interface Props {
-  overlay: ReactNode | ReactNode[];
+  overlay: ReactNode;
   children: ReactNode | ReactNode[];
   overlayClassName?: string;
   onVisibleChange?: (visible: boolean) => void;

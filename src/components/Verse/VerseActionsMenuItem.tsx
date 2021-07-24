@@ -7,7 +7,7 @@ interface Props {
   onClick: () => void;
 }
 
-const VerseSettingsMenuItem: React.FC<Props> = ({ title, icon, onClick }) => (
+const VerseActionsMenuItem: React.FC<Props> = ({ title, icon, onClick }) => (
   <StyledContainer onClick={onClick}>
     <IconContainer icon={icon} size={IconSize.Xsmall} color={IconColor.primary} />
     <TitleContainer>{title}</TitleContainer>
@@ -33,4 +33,4 @@ const TitleContainer = styled.span`
   vertical-align: text-top;
 `;
 
-export default VerseSettingsMenuItem;
+export default VerseActionsMenuItem;

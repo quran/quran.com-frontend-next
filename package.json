@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
+    "clipboard-copy": "^4.0.1",
     "humps": "^2.0.1",
     "lodash": "^4.17.19",
     "next": "^11.0.1",
