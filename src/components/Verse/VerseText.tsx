@@ -6,7 +6,7 @@ import { selectReadingView } from 'src/redux/slices/QuranReader/readingView';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { selectQuranReaderStyles, QuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { ReadingView } from '../QuranReader/types';
-import isCenterAlignPage from './pageUtils';
+import isCenterAlignedPage from './pageUtils';
 
 type VerseTextProps = {
   words: Word[];
@@ -17,7 +17,7 @@ const VerseText = ({ words }: VerseTextProps) => {
   const readingView = useSelector(selectReadingView);
   const isQuranPage = readingView === ReadingView.QuranPage;
   const { lineNumber, pageNumber } = words[0];
-  const centerAlignPage = useMemo(() => isCenterAlignPage(pageNumber, lineNumber), [
+  const centerAlignPage = useMemo(() => isCenterAlignedPage(pageNumber, lineNumber), [
     pageNumber,
     lineNumber,
   ]);
