@@ -10,7 +10,6 @@ import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 import '../styles/reset.css';
 import '../styles/fonts.css';
-import '../styles/mushafPage.css';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (
