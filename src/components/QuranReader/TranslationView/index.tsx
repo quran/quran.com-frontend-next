@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import VerseActions from 'src/components/Verse/VerseActions';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
@@ -24,6 +25,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
           <Link as={`/${chapterId}/${verse.verseNumber}`} href="/[chapterId]/[verseId]" passHref>
             <StyledVerseLink>{verse.verseKey}</StyledVerseLink>
           </Link>
+          <VerseActions verse={verse} />
           <VerseText words={verse.words} />
           {verse.translations?.map((translation: Translation) => (
             <StyledText
@@ -41,6 +43,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
 
 const StyledVerseLink = styled.p`
   cursor: pointer;
+  width: fit-content;
 `;
 
 const VerseTextContainer = styled.div<{ highlight: boolean }>`
