@@ -27,6 +27,7 @@ const VerseText = ({ words }: VerseTextProps) => {
       centerAlignPage={centerAlignPage}
     >
       <StyledVerseText
+        className="ayah-text"
         quranReaderStyles={quranReaderStyles}
         isQuranPage={isQuranPage}
         centerAlignPage={centerAlignPage}
