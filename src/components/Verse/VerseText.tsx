@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import Word from 'types/Word';
@@ -6,19 +6,21 @@ import { selectReadingView } from 'src/redux/slices/QuranReader/readingView';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { selectQuranReaderStyles, QuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { ReadingView } from '../QuranReader/types';
+import isCenterAlignedPage from './pageUtils';
 
 type VerseTextProps = {
   words: Word[];
 };
 
-// Pages where we want to have center align text to resemble the Madani Mushaf
-const CENTER_ALIGNED_PAGES = [1, 2];
-
 const VerseText = ({ words }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const readingView = useSelector(selectReadingView);
   const isQuranPage = readingView === ReadingView.QuranPage;
-  const centerAlignPage = CENTER_ALIGNED_PAGES.includes(words[0].pageNumber);
+  const { lineNumber, pageNumber } = words[0];
+  const centerAlignPage = useMemo(() => isCenterAlignedPage(pageNumber, lineNumber), [
+    pageNumber,
+    lineNumber,
+  ]);
 
   return (
     <StyledVerseTextContainer

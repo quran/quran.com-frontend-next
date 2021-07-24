@@ -10,7 +10,7 @@ const getPages = (verses: Verse[]) => {
   const firstPage = verses[0].pageNumber;
   const lastPage = verses[verses.length - 1].pageNumber;
 
-  return range(firstPage, lastPage);
+  return range(firstPage, lastPage + 1);
 };
 
 const buildV1FontFace = (pageNumber: string | number) => {
