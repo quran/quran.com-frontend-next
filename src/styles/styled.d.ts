@@ -24,6 +24,7 @@ type ColorBackground = {
   fadedGreyScale: string;
   neutralGrey: string;
   default: string;
+  fadedBlackScale: string;
 };
 
 type ColorBorders = {
