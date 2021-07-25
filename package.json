@@ -50,6 +50,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "@svgr/webpack": "^5.5.0",
+    "babel-plugin-polyfill-corejs2": "^0.2.2",
+    "babel-plugin-polyfill-regenerator": "^0.2.2",
     "@storybook/addon-a11y": "^6.3.4",
     "@storybook/addon-essentials": "^6.3.5",
     "@storybook/addon-info": "^5.3.21",

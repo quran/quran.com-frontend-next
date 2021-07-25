@@ -12,6 +12,17 @@ module.exports = {
     reactDocgen: false,
   },
   webpackFinal: async (config) => {
+    // Default rule for images /\.(svg|ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
+    const fileLoaderRule = config.module.rules.find(rule => rule.test && rule.test.test && rule.test.test('.svg'));
+    // we should exclude handling .svg files by file-loader.
+    fileLoaderRule.exclude = /\.svg$/;  
+    // and add our own loader (@svgr/webpack)
+    config.module.rules.push({
+      test: /\.svg$/,
+      enforce: 'pre',
+      loader: require.resolve('@svgr/webpack'),
+    });
+    // add a loader to handle ts|tsx files.
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       use: [

@@ -36,6 +36,7 @@ export const theme: Theme = {
       fadedGreyScale: 'rgba(0, 0, 0, 0.06)',
       neutralGrey: '#f8f8f8',
       default: '#fff',
+      fadedBlackScale: 'rgba(0, 0, 0, 0.5)',
     },
     borders: {
       hairline: 'rgb(235, 238, 240)',
