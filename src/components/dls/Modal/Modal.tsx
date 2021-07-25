@@ -5,17 +5,45 @@ import styled from 'styled-components';
 import Close from '../../../../public/icons/close.svg';
 import Button, { ButtonSize } from '../Button/Button';
 
+export enum ModalSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
+  XLarge = 'xLarge',
+}
+
+const MODAL_SIZE_VIEWPORT_WIDTH = {
+  [ModalSize.Small]: 25,
+  [ModalSize.Medium]: 50,
+  [ModalSize.Large]: 75,
+  [ModalSize.XLarge]: 90,
+};
+
+const MODAL_SIZE_VIEWPORT_HEIGHT = {
+  [ModalSize.Small]: 40,
+  [ModalSize.Medium]: 50,
+  [ModalSize.Large]: 60,
+  [ModalSize.XLarge]: 70,
+};
+
+const MODAL_SIZE_BODY_HEIGHT = {
+  [ModalSize.Small]: 82,
+  [ModalSize.Medium]: 85,
+  [ModalSize.Large]: 87,
+  [ModalSize.XLarge]: 88,
+};
+
 interface Props {
   visible: boolean;
   children?: ReactNode | ReactNode[];
   onClose: () => void;
   centered?: boolean;
   showCloseIcon?: boolean;
-  closeIcon?: ReactNode;
+  customCloseIcon?: ReactNode;
   canCloseByKeyboard?: boolean;
   closeWhenClickingOutside?: boolean;
   title?: ReactNode;
-  width?: number;
+  size?: ModalSize;
 }
 
 const Modal: React.FC<Props> = ({
@@ -23,11 +51,11 @@ const Modal: React.FC<Props> = ({
   children,
   centered = false,
   showCloseIcon = true,
-  closeIcon,
+  customCloseIcon,
   canCloseByKeyboard = true,
   closeWhenClickingOutside = true,
   title,
-  width = 580,
+  size = ModalSize.Medium,
   onClose,
 }) => {
   const contentContainer = useRef(null);
@@ -47,19 +75,19 @@ const Modal: React.FC<Props> = ({
 
   return (
     <ModalContainer isOpen={visible} centered={centered}>
-      <ContentContainer width={width} ref={contentContainer}>
+      <ContentContainer size={size} ref={contentContainer}>
         <HeaderContainer hasTitle={!!title}>
           {title && <div>{title}</div>}
           {showCloseIcon && (
             <Button
-              icon={closeIcon || <Close />}
+              icon={customCloseIcon || <Close />}
               size={ButtonSize.Small}
               onClick={handleCloseModal}
             />
           )}
         </HeaderContainer>
         <hr />
-        {children}
+        <BodyContainer size={size}>{children}</BodyContainer>
       </ContentContainer>
     </ModalContainer>
   );
@@ -80,7 +108,6 @@ const ModalContainer = styled.div<{ isOpen: boolean; centered: boolean }>`
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: ${({ theme }) => theme.colors.background.fadedBlackScale};
   ${({ centered, theme }) =>
     centered
@@ -88,12 +115,22 @@ const ModalContainer = styled.div<{ isOpen: boolean; centered: boolean }>`
       : `padding-top: calc(4 * ${theme.spacing.large});`}
 `;
 
-const ContentContainer = styled.div<{ width: number }>`
+const BodyContainer = styled.div<{ size: ModalSize }>`
+  overflow: auto;
+  max-height: ${({ size }) => MODAL_SIZE_BODY_HEIGHT[size]}%;
+  height: ${({ size }) => MODAL_SIZE_BODY_HEIGHT[size]}%;
+`;
+
+const ContentContainer = styled.div<{ size: ModalSize }>`
   background-color: ${({ theme }) => theme.colors.background.default};
   margin: auto;
   padding: ${({ theme }) => theme.spacing.small};
   border: 1px solid #888;
-  width: ${({ width }) => width}px;
+  border-radius: ${(props) => props.theme.borderRadiuses.default};
+  height: ${({ size }) => `${MODAL_SIZE_VIEWPORT_HEIGHT[size]}vh`};
+  max-height: ${({ size }) => `${MODAL_SIZE_VIEWPORT_HEIGHT[size]}vh`};
+  width: ${({ size }) => `${MODAL_SIZE_VIEWPORT_WIDTH[size]}vw`};
+  max-width: ${({ size }) => `${MODAL_SIZE_VIEWPORT_WIDTH[size]}vw`};
 `;
 
 export default Modal;

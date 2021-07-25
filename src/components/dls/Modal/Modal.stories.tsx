@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Modal from './Modal';
+import Modal, { ModalSize } from './Modal';
 
 export default {
   title: 'dls|Modals',
@@ -61,15 +61,16 @@ export default {
         category: 'Optional',
       },
     },
-    width: {
-      defaultValue: 520,
-      description: 'The width of the modal in pixels.',
+    size: {
+      defaultValue: ModalSize.Medium,
+      description: 'The size of the modal.',
       table: {
         category: 'Optional',
       },
-      control: { type: 'number' },
+      options: [ModalSize.Small, ModalSize.Medium, ModalSize.Large, ModalSize.XLarge],
+      control: { type: 'select' },
     },
-    closeIcon: {
+    customCloseIcon: {
       description: 'Custom close icon',
       table: {
         category: 'Optional',
@@ -101,8 +102,10 @@ const Template = (args) => {
   );
 };
 
-const ModalBody = <div style={{ textAlign: 'center' }}>Modal body</div>;
-const VeryLongModelBody = <div style={{ textAlign: 'center', height: 1000 }}>Modal body</div>;
+const ModalBody = <div>Modal body</div>;
+const VeryLongModelBody = <div style={{ height: 1000 }}>Modal body</div>;
+const VeryWideModelBody = <div style={{ width: 2000 }}>Modal body</div>;
+const VeryWideAndLongModelBody = <div style={{ width: 2000, height: 10000 }}>Modal body</div>;
 
 export const DefaultModal = Template.bind({});
 DefaultModal.args = {
@@ -113,14 +116,19 @@ DefaultModal.args = {
 export const VerticallyScrollableModal = Template.bind({});
 VerticallyScrollableModal.args = {
   children: VeryLongModelBody,
-  title: 'Scrollable Modal',
+  title: 'Vertically Scrollable Modal',
 };
 
 export const HorizontallyScrollableModal = Template.bind({});
 HorizontallyScrollableModal.args = {
-  children: ModalBody,
-  title: 'Scrollable Modal',
-  width: 2000,
+  children: VeryWideModelBody,
+  title: 'Horizontally Scrollable Modal',
+};
+
+export const VerticallyAndHorizontallyScrollableModal = Template.bind({});
+VerticallyAndHorizontallyScrollableModal.args = {
+  children: VeryWideAndLongModelBody,
+  title: 'Vertically And Horizontally Scrollable Modal',
 };
 
 export const ModalWithoutCloseIcon = Template.bind({});
