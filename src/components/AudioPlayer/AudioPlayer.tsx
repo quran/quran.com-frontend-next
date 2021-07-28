@@ -90,7 +90,6 @@ const AudioPlayer = () => {
   const setTime = useCallback(
     (time) => {
       let newTime = time;
-      console.log({ time, audioDuration });
       // upper and lower bound case handling
       if (time < 0) {
         newTime = 0;
