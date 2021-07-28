@@ -18,6 +18,7 @@ import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import Slider from './Slider';
 import AudioKeyBoardListeners from './AudioKeyboardListeners';
+import MediaSessionApiListeners from './MediaSessionAPIListeners';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -70,13 +71,21 @@ const AudioPlayer = () => {
     dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
   };
 
+  const play = useCallback(() => {
+    audioPlayerEl.current.play();
+  }, [audioPlayerEl]);
+
+  const pause = useCallback(() => {
+    audioPlayerEl.current.pause();
+  }, [audioPlayerEl]);
+
   const togglePlaying = useCallback(() => {
     if (isPlaying) {
-      audioPlayerEl.current.pause();
+      pause();
     } else {
-      audioPlayerEl.current.play();
+      play();
     }
-  }, [isPlaying]);
+  }, [play, pause, isPlaying]);
 
   const setTime = useCallback(
     (time) => {
@@ -115,6 +124,13 @@ const AudioPlayer = () => {
         <AudioKeyBoardListeners
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
+        />
+        <MediaSessionApiListeners
+          play={play}
+          pause={pause}
+          seek={(seekDuration) => seek(seekDuration)}
+          playNextTrack={null}
+          playPreviousTrack={null}
         />
         <ActionButtonsContainers>
           {isPlaying ? (
