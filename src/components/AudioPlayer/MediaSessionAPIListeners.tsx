@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SEEK_DURATION_MS = 5000;
+const SEEK_DURATION_SECONDS = 5;
 
 type MediaSessionAPIListenersProps = {
   play: () => void;
@@ -46,8 +46,8 @@ const MediaSessionApiListeners = ({
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.setActionHandler('seekbackward', () => seek(-SEEK_DURATION_MS));
-      navigator.mediaSession.setActionHandler('seekforward', () => seek(SEEK_DURATION_MS));
+      navigator.mediaSession.setActionHandler('seekbackward', () => seek(-SEEK_DURATION_SECONDS));
+      navigator.mediaSession.setActionHandler('seekforward', () => seek(SEEK_DURATION_SECONDS));
     }
   }, [seek]);
 
