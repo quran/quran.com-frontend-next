@@ -6,18 +6,22 @@ import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import Chapter from 'types/Chapter';
 import styled from 'styled-components';
-import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
+import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
+import {
+  selectTranslations,
+  TranslationsSettings,
+} from 'src/redux/slices/QuranReader/translations';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 
 import TranslationView from './TranslationView';
 import { ReadingView } from './types';
-import Notes from './Notes/Notes';
-import ContextMenu from './ContextMenu';
 import { makeVersesUrl } from '../../utils/apiPaths';
 import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
+import ContextMenu from './ContextMenu';
+import Notes from './Notes/Notes';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -37,31 +41,50 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 };
 
 const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
+  const isVerseView = initialData.verses.length === 1;
+  const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
+    selectTranslations,
+  ) as TranslationsSettings;
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
-      // TODO: select the translation using the user preference
+      // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
+      const page = isVerseView ? initialData.verses[0].verseNumber : index + 1;
       return makeVersesUrl(chapter.id, {
-        page: index + 1,
+        page,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
+        translations: selectedTranslations.join(', '),
+        ...(isVerseView && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
       });
     },
     verseFetcher,
     {
-      initialData: initialData.verses,
-      revalidateOnFocus: true,
+      initialData: isUsingDefaultTranslations ? initialData.verses : null, // initialData is set to null if the user changes/has changed the default translations so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations the user had selected and we will show a loading indicator instead.
+      revalidateOnFocus: false, // disable auto revalidation when window gets focused
+      revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
   const readingView = useSelector(selectReadingView);
-  const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const pageLimit = initialData.pagination.totalPages;
-  const verses = data.flat(1);
+  // if we are fetching the data (this will only happen when the user has changed the default translations so the initialData will be set to null).
+  if (!data) {
+    return (
+      <>
+        <ContextMenu />
+        <Container isSideBarVisible={isSideBarVisible}>
+          <StyledLoading>loading...</StyledLoading>
+        </Container>
+        <Notes />
+      </>
+    );
+  }
   let view;
-
+  const pageLimit = isVerseView ? 1 : initialData.pagination.totalPages;
+  const verses = data.flat(1);
   if (readingView === ReadingView.QuranPage) {
     view = <PageView verses={verses} />;
   } else {
-    view = <TranslationView verses={verses} />;
+    view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
   }
 
   return (
@@ -89,15 +112,22 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   );
 };
 
+const StyledLoading = styled.div`
+  text-align: center;
+  max-width: 80%;
+  margin: ${(props) => props.theme.spacing.medium} auto;
+`;
+
+const StyledInfiniteScroll = styled(InfiniteScroll)`
+  width: 100%;
+`;
+
 const Container = styled.div<{ isSideBarVisible: boolean }>`
   padding-top: calc(3 * ${(props) => props.theme.spacing.mega});
   @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     transition: ${(props) => props.theme.transitions.regular};
     margin-right: ${(props) => (props.isSideBarVisible ? NOTES_SIDE_BAR_DESKTOP_WIDTH : 0)};
   } ;
-`;
-const StyledInfiniteScroll = styled(InfiniteScroll)`
-  width: 100%;
 `;
 
 export default QuranReader;
