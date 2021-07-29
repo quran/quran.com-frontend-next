@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 
-import ComboBox, { ComboBoxSize } from './ComboBox';
+import SearchDropdown, { SearchDropdownSize } from './SearchDropdown';
 
 export default {
-  title: 'dls|ComboBox',
-  component: ComboBox,
+  title: 'dls|SearchDropdown',
+  component: SearchDropdown,
   argTypes: {
     selectorText: {
       table: {
         category: 'Required',
       },
       description:
-        'The text shown on the selector area that when clicked toggles the visibility of the combobox body.',
+        'The text shown on the selector area that when clicked toggles the visibility of the search dropdown body.',
     },
     id: {
       table: {
         category: 'Required',
       },
       description:
-        'A unique identifier for the combobox. This is added to avoid collision when 2 comboboxes are existent in the DOM.',
+        'A unique identifier for the search dropdown. This is added to avoid collision when 2 search dropdowns are existent in the DOM.',
     },
     onSelect: {
       table: {
         category: 'Required',
       },
       description:
-        'A function that will be called when an option is selected. The function will pass the name of the option selected along with id of the combobox.',
+        'A function that will be called when an option is selected. The function will pass the name of the option selected along with id of the search dropdown.',
     },
     options: {
       table: {
         category: 'Required',
       },
       description:
-        'The options of the combobox. Each option will have to have id, value, name, label and checked and disabled are optional.',
+        'The options of the search dropdown. Each option will have to have id, value, name, label and checked and disabled are optional.',
     },
     selectedOption: {
       table: {
@@ -42,9 +42,9 @@ export default {
       description: 'The value of "name" attribute of the selected option.',
     },
     size: {
-      defaultValue: ComboBoxSize.Medium,
-      description: `The size of the combobox.`,
-      options: Object.values(ComboBoxSize).map((size) => size),
+      defaultValue: SearchDropdownSize.Medium,
+      description: `The size of the search dropdown.`,
+      options: Object.values(SearchDropdownSize).map((size) => size),
       control: { type: 'radio' },
       table: {
         category: 'Optional',
@@ -82,7 +82,7 @@ export default {
       table: {
         category: 'Optional',
       },
-      description: 'The label of the combobox.',
+      description: 'The label of the search dropdown.',
     },
     searchPlaceHolder: {
       defaultValue: 'Type search query...',
@@ -102,7 +102,7 @@ const Template = (args) => {
     setSelectedOption(selectedName);
   };
   return (
-    <ComboBox
+    <SearchDropdown
       {...args}
       selectedOption={selectedOption}
       selectorText={selectedOption}
@@ -126,8 +126,8 @@ const OPTIONS = [
   },
 ];
 
-export const DefaultComboBox = Template.bind({});
-DefaultComboBox.args = {
+export const DefaultSearchDropdown = Template.bind({});
+DefaultSearchDropdown.args = {
   id: 'default',
   options: OPTIONS,
 };

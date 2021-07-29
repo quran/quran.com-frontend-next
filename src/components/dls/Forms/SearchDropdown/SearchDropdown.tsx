@@ -4,18 +4,18 @@ import CaretIcon from '../../../../../public/icons/caret-up.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
 import Button, { ButtonSize } from '../../Button/Button';
 
-export enum ComboBoxSize {
+export enum SearchDropdownSize {
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
 }
 
 const SIZE_MULTIPLIER = {
-  [ComboBoxSize.Small]: 5,
-  [ComboBoxSize.Medium]: 8,
-  [ComboBoxSize.Large]: 11,
+  [SearchDropdownSize.Small]: 5,
+  [SearchDropdownSize.Medium]: 8,
+  [SearchDropdownSize.Large]: 11,
 };
-interface ComboBoxOption {
+interface SearchDropdownOption {
   id: string;
   value: string;
   name: string;
@@ -25,20 +25,20 @@ interface ComboBoxOption {
 }
 
 interface Props {
-  onSelect: (selectedName: string, comboboxId: string) => void;
+  onSelect: (selectedName: string, dropDownIdId: string) => void;
   selectorText: string;
-  options: ComboBoxOption[];
+  options: SearchDropdownOption[];
   id: string;
   noResultText?: string;
   label?: string | ReactNode;
   searchPlaceHolder?: string;
-  size?: ComboBoxSize;
+  size?: SearchDropdownSize;
   selectedOption?: string;
   showClearSearchIcon?: boolean;
   allowSearching?: boolean;
 }
 
-const ComboBox: React.FC<Props> = ({
+const SearchDropdown: React.FC<Props> = ({
   options,
   searchPlaceHolder = 'Type search query...',
   selectorText,
@@ -48,12 +48,12 @@ const ComboBox: React.FC<Props> = ({
   noResultText = 'No results found.',
   label,
   id,
-  size = ComboBoxSize.Medium,
+  size = SearchDropdownSize.Medium,
   onSelect,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredOptions, setFilteredOptions] = useState<ComboBoxOption[]>(options);
+  const [filteredOptions, setFilteredOptions] = useState<SearchDropdownOption[]>(options);
 
   const onSelectorClicked = () => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
@@ -65,7 +65,7 @@ const ComboBox: React.FC<Props> = ({
    * @param {ChangeEvent<HTMLInputElement>} event
    */
   const onOptionSelected = (event: ChangeEvent<HTMLInputElement>) => {
-    // we will pass the name of the selected option and the id of the whole combobox to avoid collision in-case we have the same name but for 2 different comboboxes.
+    // we will pass the name of the selected option and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
     onSelect(event.target.name, id);
     setIsOpened(false);
   };
@@ -98,12 +98,12 @@ const ComboBox: React.FC<Props> = ({
   return (
     <>
       {label && <StyledLabel>{label}</StyledLabel>}
-      <ComboBoxContainer size={size}>
+      <SearchDropdownContainer size={size}>
         <SelectorContainer onClick={onSelectorClicked}>
           {selectorText}
           <Button icon={<StyledCaretIcon isOpened={isOpened} />} size={ButtonSize.XSmall} />
         </SelectorContainer>
-        <ComboBoxBodyContainer isOpened={isOpened}>
+        <SearchDropdownBodyContainer isOpened={isOpened}>
           {allowSearching && (
             <SearchInputContainer>
               <SearchInput
@@ -149,18 +149,18 @@ const ComboBox: React.FC<Props> = ({
               </OptionContainer>
             )}
           </OptionsContainer>
-        </ComboBoxBodyContainer>
-      </ComboBoxContainer>
+        </SearchDropdownBodyContainer>
+      </SearchDropdownContainer>
     </>
   );
 };
 
 const StyledLabel = styled.p`
-  padding-top: ${({ theme }) => theme.spacing.nano};
-  padding-bottom: ${({ theme }) => theme.spacing.nano};
+  padding-top: ${({ theme }) => theme.spacing.micro};
+  padding-bottom: ${({ theme }) => theme.spacing.micro};
 `;
 
-const ComboBoxContainer = styled.div<{ size: ComboBoxSize }>`
+const SearchDropdownContainer = styled.div<{ size: SearchDropdownSize }>`
   display: flex;
   width: ${({ theme, size }) => `calc(${SIZE_MULTIPLIER[size]}* ${theme.spacing.mega})`};
   flex-direction: column;
@@ -174,14 +174,14 @@ const SelectorContainer = styled.div`
   height: ${({ theme }) => theme.spacing.mega};
   cursor: pointer;
   border-radius: ${({ theme }) => theme.borderRadiuses.default};
-  border: ${({ theme }) => `${theme.spacing.nano} solid ${theme.colors.borders.hairline}`};
-  padding-right: ${({ theme }) => theme.spacing.nano};
-  padding-left: ${({ theme }) => theme.spacing.nano};
+  border: ${({ theme }) => `1px solid ${theme.colors.borders.hairline}`};
+  padding-right: ${({ theme }) => theme.spacing.micro};
+  padding-left: ${({ theme }) => theme.spacing.micro};
 `;
 
-const ComboBoxBodyContainer = styled.div<{ isOpened: boolean }>`
+const SearchDropdownBodyContainer = styled.div<{ isOpened: boolean }>`
   position: absolute;
-  margin-top: ${({ theme }) => `calc(${theme.spacing.mega} + 3 * ${theme.spacing.nano})`};
+  margin-top: ${({ theme }) => `calc(${theme.spacing.mega} + 3 * ${theme.spacing.micro})`};
   width: 100%;
   z-index: ${({ theme }) => theme.zIndexes.dropdown};
   transition: ${({ theme }) => theme.transitions.regular};
@@ -193,7 +193,7 @@ const ComboBoxBodyContainer = styled.div<{ isOpened: boolean }>`
 `;
 
 const StyledCaretIcon = styled(CaretIcon)<{ isOpened: boolean }>`
-  ${({ isOpened, theme }) => isOpened && `${theme.transformations.rotateXOneEighty};`}
+  ${({ isOpened }) => isOpened && 'transform: rotateX(180deg);'}
   transition: ${({ theme }) => theme.transitions.regular};
 `;
 
@@ -203,8 +203,8 @@ const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: ${({ theme }) => theme.borderRadiuses.default};
-  border: ${({ theme }) => `${theme.spacing.nano} solid ${theme.colors.borders.hairline}`};
-  margin-bottom: ${({ theme }) => theme.spacing.nano};
+  border: ${({ theme }) => `1px solid ${theme.colors.borders.hairline}`};
+  margin-bottom: ${({ theme }) => theme.spacing.micro};
   height: ${({ theme }) => theme.spacing.mega};
 `;
 
@@ -248,4 +248,4 @@ const OptionLabel = styled.label<{ disabled: boolean }>`
   ${({ disabled }) => !disabled && `cursor: pointer; `}
 `;
 
-export default ComboBox;
+export default SearchDropdown;
