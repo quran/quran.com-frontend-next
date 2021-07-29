@@ -45,6 +45,7 @@ export const theme: Theme = {
 
   spacing: {
     // You can use multiples of spaces and/or combine to achieve the desired spacing. E.g "2x @mega + 1x @small"
+    nano: '0.1rem',
     micro: '0.2rem',
     xxsmall: '0.4rem',
     xsmall: '0.6rem',
@@ -55,6 +56,7 @@ export const theme: Theme = {
   },
 
   fontSizes: {
+    xsmall: '0.5rem',
     small: '0.6rem',
     normal: '0.7rem',
     large: '0.8rem',
@@ -113,6 +115,10 @@ export const theme: Theme = {
     mobileL: '425px',
     tablet: '768px',
     laptop: '1024px',
+  },
+
+  transformations: {
+    rotateXOneEighty: 'transform: rotateX(180deg);',
   },
 
   transitions: {

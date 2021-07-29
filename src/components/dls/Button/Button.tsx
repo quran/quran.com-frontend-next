@@ -15,24 +15,39 @@ type ButtonProps = {
 };
 
 export enum ButtonSize {
+  XSmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
 }
 
 const BUTTON_SIZES = {
-  small: {
+  [ButtonSize.XSmall]: {
+    icon: ICON_SIZES.xsmall,
+    iconContainer: {
+      width: 28,
+      height: 28,
+    },
+  },
+  [ButtonSize.Small]: {
     icon: ICON_SIZES.small,
     iconContainer: {
       width: 38,
       height: 38,
     },
   },
-  medium: {
+  [ButtonSize.Medium]: {
     icon: ICON_SIZES.medium,
     iconContainer: {
       width: 44,
       height: 44,
+    },
+  },
+  [ButtonSize.Large]: {
+    icon: ICON_SIZES.large,
+    iconContainer: {
+      width: 52,
+      height: 52,
     },
   },
 };

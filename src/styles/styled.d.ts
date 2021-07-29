@@ -40,6 +40,7 @@ type Colors = {
 };
 
 type Spacing = {
+  nano: string;
   micro: string;
   xxsmall: string;
   xsmall: string;
@@ -50,6 +51,7 @@ type Spacing = {
 };
 
 type FontSizes = {
+  xsmall: string;
   small: string;
   normal: string;
   large: string;
@@ -115,6 +117,10 @@ type Transitions = {
   slow: string;
 };
 
+type Transformations = {
+  rotateXOneEighty: string;
+};
+
 export interface Theme {
   name: string;
   fonts: Fonts;
@@ -129,6 +135,7 @@ export interface Theme {
   zIndexes: ZIndexes;
   breakpoints: Breakpoints;
   transitions: Transitions;
+  transformations: Transformations;
 }
 
 // Extends the styled components interface with the theme
