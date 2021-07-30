@@ -25,26 +25,26 @@ export default {
         category: 'Required',
       },
       description:
-        'A function that will be called when an option is selected. The function will pass the name of the option selected along with id of the search dropdown.',
+        'A function that will be called when an item is selected. The function will pass the name of the item selected along with id of the search dropdown.',
     },
-    options: {
+    items: {
       table: {
         category: 'Required',
       },
       description:
-        'The options of the search dropdown. Each option will have to have id, value, name, label and checked and disabled are optional.',
+        'The items of the search dropdown. Each item will have to have id, value, name, label and checked and disabled are itemal.',
     },
-    selectedOption: {
+    selectedItem: {
       table: {
         category: 'Optional',
       },
       control: { type: 'text' },
-      description: 'The value of "name" attribute of the selected option.',
+      description: 'The value of "name" attribute of the selected item.',
     },
     size: {
       defaultValue: SearchDropdownSize.Medium,
       description: `The size of the search dropdown.`,
-      options: Object.values(SearchDropdownSize).map((size) => size),
+      items: Object.values(SearchDropdownSize).map((size) => size),
       control: { type: 'radio' },
       table: {
         category: 'Optional',
@@ -52,7 +52,7 @@ export default {
     },
     showClearSearchIcon: {
       defaultValue: true,
-      options: [true, false],
+      items: [true, false],
       control: { type: 'radio' },
       table: {
         category: 'Optional',
@@ -62,7 +62,7 @@ export default {
     },
     allowSearching: {
       defaultValue: true,
-      options: [true, false],
+      items: [true, false],
       control: { type: 'radio' },
       table: {
         category: 'Optional',
@@ -75,7 +75,7 @@ export default {
       table: {
         category: 'Optional',
       },
-      description: 'The text that shows when no options match the search query.',
+      description: 'The text that shows when no items match the search query.',
     },
     label: {
       control: { type: 'text' },
@@ -96,38 +96,38 @@ export default {
 };
 
 const Template = (args) => {
-  const [selectedOption, setSelectedOption] = useState('Option2');
+  const [selectedItem, setSelectedItem] = useState('Item2');
 
   const onSelect = (selectedName: string) => {
-    setSelectedOption(selectedName);
+    setSelectedItem(selectedName);
   };
   return (
     <SearchDropdown
       {...args}
-      selectedOption={selectedOption}
-      selectorText={selectedOption}
+      selectedItem={selectedItem}
+      selectorText={selectedItem}
       onSelect={onSelect}
     />
   );
 };
 
-const OPTIONS = [
+const ITEMS = [
   {
-    id: 'Option1',
-    name: 'Option1',
-    value: 'Option1',
-    label: 'Option 1',
+    id: 'Item1',
+    name: 'Item1',
+    value: 'Item1',
+    label: 'Item 1',
   },
   {
-    id: 'Option2',
-    name: 'Option2',
-    value: 'Option2',
-    label: 'Option 2',
+    id: 'Item2',
+    name: 'Item2',
+    value: 'Item2',
+    label: 'Item 2',
   },
 ];
 
 export const DefaultSearchDropdown = Template.bind({});
 DefaultSearchDropdown.args = {
   id: 'default',
-  options: OPTIONS,
+  items: ITEMS,
 };

@@ -15,7 +15,7 @@ const SIZE_MULTIPLIER = {
   [SearchDropdownSize.Medium]: 8,
   [SearchDropdownSize.Large]: 11,
 };
-interface SearchDropdownOption {
+interface SearchDropdownItem {
   id: string;
   value: string;
   name: string;
@@ -27,22 +27,22 @@ interface SearchDropdownOption {
 interface Props {
   onSelect: (selectedName: string, dropDownIdId: string) => void;
   selectorText: string;
-  options: SearchDropdownOption[];
+  items: SearchDropdownItem[];
   id: string;
   noResultText?: string;
   label?: string | ReactNode;
   searchPlaceHolder?: string;
   size?: SearchDropdownSize;
-  selectedOption?: string;
+  selectedItem?: string;
   showClearSearchIcon?: boolean;
   allowSearching?: boolean;
 }
 
 const SearchDropdown: React.FC<Props> = ({
-  options,
+  items,
   searchPlaceHolder = 'Type search query...',
   selectorText,
-  selectedOption,
+  selectedItem,
   allowSearching = true,
   showClearSearchIcon = true,
   noResultText = 'No results found.',
@@ -53,38 +53,38 @@ const SearchDropdown: React.FC<Props> = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredOptions, setFilteredOptions] = useState<SearchDropdownOption[]>(options);
+  const [filteredItems, setFilteredItems] = useState<SearchDropdownItem[]>(items);
 
   const onSelectorClicked = () => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
   };
 
   /**
-   * Handle when an option is selected.
+   * Handle when an item is selected.
    *
    * @param {ChangeEvent<HTMLInputElement>} event
    */
-  const onOptionSelected = (event: ChangeEvent<HTMLInputElement>) => {
-    // we will pass the name of the selected option and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
+  const onItemSelected = (event: ChangeEvent<HTMLInputElement>) => {
+    // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
     onSelect(event.target.name, id);
     setIsOpened(false);
   };
 
   /**
-   * Handle when the user searches for an option.
+   * Handle when the user searches for an item.
    *
    * @param {React.FormEvent<HTMLInputElement>} event
    * @returns {void}
    */
   const onSearchQueryChange = (event: React.FormEvent<HTMLInputElement>): void => {
     const newSearchQuery = event.currentTarget.value;
-    // if the search query is empty it means it has been cleared so we set the original options back.
-    setFilteredOptions(
+    // if the search query is empty it means it has been cleared so we set the original items back.
+    setFilteredItems(
       newSearchQuery === ''
-        ? options
-        : options.filter((option) => {
-            // we convert the search query and the option's label to lowercase first then check if the label contains a part/all of the search query.
-            return option.label.toLowerCase().includes(newSearchQuery.toLowerCase());
+        ? items
+        : items.filter((item) => {
+            // we convert the search query and the item's label to lowercase first then check if the label contains a part/all of the search query.
+            return item.label.toLowerCase().includes(newSearchQuery.toLowerCase());
           }),
     );
     setSearchQuery(newSearchQuery);
@@ -92,7 +92,7 @@ const SearchDropdown: React.FC<Props> = ({
 
   const onClearButtonClicked = () => {
     setSearchQuery('');
-    setFilteredOptions(options);
+    setFilteredItems(items);
   };
 
   return (
@@ -121,34 +121,34 @@ const SearchDropdown: React.FC<Props> = ({
               )}
             </SearchInputContainer>
           )}
-          <OptionsContainer isOpened={isOpened}>
-            {filteredOptions.map((option) => {
-              const checked = selectedOption && selectedOption === option.name;
-              const disabled = option.disabled || false;
-              const optionId = `${id}-${option.id}`;
+          <ItemsContainer isOpened={isOpened}>
+            {filteredItems.map((item) => {
+              const checked = selectedItem && selectedItem === item.name;
+              const disabled = item.disabled || false;
+              const itemId = `${id}-${item.id}`;
               return (
-                <label htmlFor={optionId}>
-                  <OptionContainer key={optionId} checked={checked} disabled={disabled}>
+                <label htmlFor={itemId}>
+                  <ItemContainer key={itemId} checked={checked} disabled={disabled}>
                     <StyledInput
-                      id={optionId}
-                      name={option.name}
+                      id={itemId}
+                      name={item.name}
                       disabled={disabled}
                       checked={checked}
-                      onChange={onOptionSelected}
+                      onChange={onItemSelected}
                     />
-                    <OptionLabel htmlFor={optionId} disabled={disabled}>
-                      {option.label}
-                    </OptionLabel>
-                  </OptionContainer>
+                    <ItemLabel htmlFor={itemId} disabled={disabled}>
+                      {item.label}
+                    </ItemLabel>
+                  </ItemContainer>
                 </label>
               );
             })}
-            {!filteredOptions.length && (
-              <OptionContainer checked={false} disabled>
+            {!filteredItems.length && (
+              <ItemContainer checked={false} disabled>
                 {noResultText}
-              </OptionContainer>
+              </ItemContainer>
             )}
-          </OptionsContainer>
+          </ItemsContainer>
         </SearchDropdownBodyContainer>
       </SearchDropdownContainer>
     </>
@@ -218,7 +218,7 @@ const SearchInput = styled.input.attrs({
   }
 `;
 
-const OptionsContainer = styled.div<{ isOpened: boolean }>`
+const ItemsContainer = styled.div<{ isOpened: boolean }>`
   border-radius: ${({ theme }) => theme.borderRadiuses.default};
   border: 1px solid ${({ theme }) => theme.colors.borders.hairline};
   overflow: hidden;
@@ -226,7 +226,7 @@ const OptionsContainer = styled.div<{ isOpened: boolean }>`
   overflow-y: scroll;
 `;
 
-const OptionContainer = styled.div<{ checked: boolean; disabled: boolean }>`
+const ItemContainer = styled.div<{ checked: boolean; disabled: boolean }>`
   padding: ${({ theme }) => theme.spacing.xxsmall};
   ${({ disabled, theme }) =>
     !disabled &&
@@ -244,7 +244,7 @@ const StyledInput = styled.input.attrs({
   display: none;
 `;
 
-const OptionLabel = styled.label<{ disabled: boolean }>`
+const ItemLabel = styled.label<{ disabled: boolean }>`
   ${({ disabled }) => !disabled && `cursor: pointer; `}
 `;
 
