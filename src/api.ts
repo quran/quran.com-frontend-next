@@ -3,7 +3,12 @@ import { TranslationsResponse } from 'types/APIResponses';
 import { makeUrl } from './utils/api';
 import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
-import { makeTranslationsUrl, makeVersesUrl } from './utils/apiPaths';
+import {
+  makeAdvancedCopyUrl,
+  makeTranslationsInfoUrl,
+  makeTranslationsUrl,
+  makeVersesUrl,
+} from './utils/apiPaths';
 
 export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {
   const res = await fetch(input, init);
@@ -61,4 +66,30 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
   const payload = await fetcher(makeTranslationsUrl(language));
 
   return camelizeKeys(payload) as TranslationsResponse;
+};
+
+/**
+ * Get the information of translations by their IDs.
+ *
+ * @param {string} language the current user locale.
+ * @param {number[]} translations the ids of the translations selected.
+ * @returns
+ */
+export const getTranslationsInfo = async (language: string, translations: number[]) => {
+  const payload = await fetcher(makeTranslationsInfoUrl(language, translations));
+
+  return camelizeKeys(payload) as TranslationsResponse;
+};
+
+/**
+ * Get the advanced copy content that will be copied to clipboard and put in a file.
+ *
+ * @param {Record<string, unknown>} params
+ * @returns
+ */
+export const getAdvancedCopyContent = async (params: Record<string, unknown>) => {
+  const payload = await fetcher(makeAdvancedCopyUrl(params));
+
+  // TODO: (@osama): add request response types
+  return camelizeKeys(payload);
 };

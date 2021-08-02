@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { IS_DEVELOPMENT } from 'src/utils/environment';
 import styled from 'styled-components';
 import { BsWrench } from 'react-icons/bs';
 import FontAdjustment from './FontAdjustment';
@@ -16,7 +15,7 @@ import TranslationsAdjustment from './TranslationsAdjustment';
 const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (!IS_DEVELOPMENT) {
+  if (process.env.NEXT_PUBLIC_ENV !== 'development') {
     return <></>;
   }
 
