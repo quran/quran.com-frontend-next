@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, ReactNode, useEffect } from 'react';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Close from '../../../../public/icons/close.svg';
 import Button, { ButtonSize } from '../Button/Button';
 
@@ -17,6 +17,13 @@ const MODAL_SIZE_VIEWPORT_WIDTH = {
   [ModalSize.Medium]: 50,
   [ModalSize.Large]: 75,
   [ModalSize.XLarge]: 90,
+};
+
+const SMALL_SCREENS_MODAL_SIZE_VIEWPORT_WIDTH = {
+  [ModalSize.Small]: 70,
+  [ModalSize.Medium]: 75,
+  [ModalSize.Large]: 80,
+  [ModalSize.XLarge]: 85,
 };
 
 const MODAL_SIZE_VIEWPORT_HEIGHT = {
@@ -100,6 +107,16 @@ const HeaderContainer = styled.div<{ hasTitle: boolean }>`
   justify-content: ${(props) => (props.hasTitle ? 'space-between' : 'flex-end')};
 `;
 
+const scaleAnimation = keyframes`
+  from {
+    transform: scale(0.3);
+  }
+
+  to {
+    transform: scale(1);
+  }
+`;
+
 const ModalContainer = styled.div<{ isOpen: boolean; centered: boolean }>`
   ${(props) => !props.isOpen && `display: none;`}
   position: fixed;
@@ -122,6 +139,7 @@ const BodyContainer = styled.div<{ size: ModalSize }>`
 `;
 
 const ContentContainer = styled.div<{ size: ModalSize }>`
+  animation: ${scaleAnimation} ${(props) => props.theme.transitions.fast};
   background-color: ${({ theme }) => theme.colors.background.default};
   margin: auto;
   padding: ${({ theme }) => theme.spacing.small};
@@ -131,6 +149,10 @@ const ContentContainer = styled.div<{ size: ModalSize }>`
   max-height: ${({ size }) => `${MODAL_SIZE_VIEWPORT_HEIGHT[size]}vh`};
   width: ${({ size }) => `${MODAL_SIZE_VIEWPORT_WIDTH[size]}vw`};
   max-width: ${({ size }) => `${MODAL_SIZE_VIEWPORT_WIDTH[size]}vw`};
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    width: ${({ size }) => `${SMALL_SCREENS_MODAL_SIZE_VIEWPORT_WIDTH[size]}vw`};
+    max-width: ${({ size }) => `${SMALL_SCREENS_MODAL_SIZE_VIEWPORT_WIDTH[size]}vw`};
+  }
 `;
 
 export default Modal;

@@ -26,6 +26,7 @@ const Container = styled.div<{
   isNavbarVisible: boolean;
   isSideBarVisible: boolean;
 }>`
+  z-index: ${(props) => props.theme.zIndexes.default};
   background: #ffb800;
   text-align: center;
   position: fixed;

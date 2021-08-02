@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useState, ReactNode } from 'react';
+import React, { ChangeEvent, useState, ReactNode, useEffect, RefObject, useCallback } from 'react';
 import styled from 'styled-components';
+import useScroll from '../../../../hooks/useScrollToElement';
 import CaretIcon from '../../../../../public/icons/caret-up.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
 import Button, { ButtonSize } from '../../Button/Button';
+import SearchDropdownItem, { DropdownItem } from './SearchDropdownItem';
 
 export enum SearchDropdownSize {
   Small = 'small',
@@ -15,19 +17,11 @@ const SIZE_MULTIPLIER = {
   [SearchDropdownSize.Medium]: 8,
   [SearchDropdownSize.Large]: 11,
 };
-interface SearchDropdownItem {
-  id: string;
-  value: string;
-  name: string;
-  label: string;
-  checked?: boolean;
-  disabled?: boolean;
-}
 
 interface Props {
   onSelect: (selectedName: string, dropDownIdId: string) => void;
   selectorText: string;
-  items: SearchDropdownItem[];
+  items: DropdownItem[];
   id: string;
   noResultText?: string;
   label?: string | ReactNode;
@@ -37,6 +31,10 @@ interface Props {
   showClearSearchIcon?: boolean;
   allowSearching?: boolean;
 }
+
+const SCROLL_TO_SELECTED_ELEMENT_OPTIONS = {
+  block: 'nearest', // 'block' relates to vertical alignment. see: https://stackoverflow.com/a/48635751/1931451 for nearest.
+} as ScrollIntoViewOptions;
 
 const SearchDropdown: React.FC<Props> = ({
   items,
@@ -53,7 +51,18 @@ const SearchDropdown: React.FC<Props> = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filteredItems, setFilteredItems] = useState<SearchDropdownItem[]>(items);
+  const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
+  const [scrollToSelectedItem, selectedItemRef]: [
+    () => void,
+    RefObject<HTMLDivElement>,
+  ] = useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
+
+  useEffect(() => {
+    // once the dropdown is opened, scroll to the selected item.
+    if (isOpened) {
+      scrollToSelectedItem();
+    }
+  }, [isOpened, scrollToSelectedItem]);
 
   const onSelectorClicked = () => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
@@ -64,11 +73,14 @@ const SearchDropdown: React.FC<Props> = ({
    *
    * @param {ChangeEvent<HTMLInputElement>} event
    */
-  const onItemSelected = (event: ChangeEvent<HTMLInputElement>) => {
-    // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
-    onSelect(event.target.name, id);
-    setIsOpened(false);
-  };
+  const onItemSelected = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
+      onSelect(event.target.name, id);
+      setIsOpened(false);
+    },
+    [id, onSelect],
+  );
 
   /**
    * Handle when the user searches for an item.
@@ -127,26 +139,19 @@ const SearchDropdown: React.FC<Props> = ({
               const disabled = item.disabled || false;
               const itemId = `${id}-${item.id}`;
               return (
-                <label htmlFor={itemId}>
-                  <ItemContainer key={itemId} checked={checked} disabled={disabled}>
-                    <StyledInput
-                      id={itemId}
-                      name={item.name}
-                      disabled={disabled}
-                      checked={checked}
-                      onChange={onItemSelected}
-                    />
-                    <ItemLabel htmlFor={itemId} disabled={disabled}>
-                      {item.label}
-                    </ItemLabel>
-                  </ItemContainer>
-                </label>
+                <SearchDropdownItem
+                  onItemSelected={onItemSelected}
+                  key={itemId}
+                  checked={checked}
+                  disabled={disabled}
+                  itemId={itemId}
+                  selectedItemRef={selectedItemRef}
+                  item={item}
+                />
               );
             })}
             {!filteredItems.length && (
-              <ItemContainer checked={false} disabled>
-                {noResultText}
-              </ItemContainer>
+              <SearchDropdownItem noResultText={noResultText} checked={false} disabled isNotFound />
             )}
           </ItemsContainer>
         </SearchDropdownBodyContainer>
@@ -224,28 +229,6 @@ const ItemsContainer = styled.div<{ isOpened: boolean }>`
   overflow: hidden;
   max-height: ${({ theme }) => `calc(5*${theme.spacing.mega})`};
   overflow-y: scroll;
-`;
-
-const ItemContainer = styled.div<{ checked: boolean; disabled: boolean }>`
-  padding: ${({ theme }) => theme.spacing.xxsmall};
-  ${({ disabled, theme }) =>
-    !disabled &&
-    `cursor: pointer; 
-    &:hover {
-      background: ${theme.colors.borders.hairline};
-    }`}
-  ${({ disabled, theme }) => disabled && `color: ${disabled && theme.colors.secondary.medium};`}
-  ${({ checked, theme }) => checked && `background: ${theme.colors.borders.hairline};`}
-`;
-
-const StyledInput = styled.input.attrs({
-  type: 'radio',
-})`
-  display: none;
-`;
-
-const ItemLabel = styled.label<{ disabled: boolean }>`
-  ${({ disabled }) => !disabled && `cursor: pointer; `}
 `;
 
 export default SearchDropdown;
