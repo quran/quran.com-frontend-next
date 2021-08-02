@@ -11,19 +11,23 @@ interface Props {
 }
 
 const VerseActions: React.FC<Props> = ({ verse }) => {
-  const [verseModalType, setVerseModalType] = useState<VerseActionModalType>(null);
+  const [activeVerseActionModal, setActiveVerseActionModal] = useState<VerseActionModalType>(null);
 
   return (
     <>
-      <Dropdown overlay={<VerseActionsMenu verse={verse} setVerseModalType={setVerseModalType} />}>
+      <Dropdown
+        overlay={
+          <VerseActionsMenu verse={verse} setActiveVerseActionModal={setActiveVerseActionModal} />
+        }
+      >
         <Container>
           <OverflowMenu />
         </Container>
       </Dropdown>
       <VerseActionModal
-        verseModalType={verseModalType}
+        activeVerseActionModal={activeVerseActionModal}
         verse={verse}
-        setVerseModalType={setVerseModalType}
+        setActiveVerseActionModal={setActiveVerseActionModal}
       />
     </>
   );

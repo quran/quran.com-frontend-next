@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState, ReactNode, useEffect, RefObject, useCallback } from 'react';
 import styled from 'styled-components';
 import useScroll from '../../../../hooks/useScrollToElement';
-import CaretIcon from '../../../../../public/icons/caret-up.svg';
+import CaretIcon from '../../../../../public/icons/caret-down.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
 import Button, { ButtonSize } from '../../Button/Button';
 import SearchDropdownItem, { DropdownItem } from './SearchDropdownItem';

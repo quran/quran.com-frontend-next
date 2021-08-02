@@ -33,7 +33,7 @@ export const makeTranslationsUrl = (language: string): string =>
  * @param {number[]} translations an array holding the translations' IDs.
  * @returns {string}
  */
-export const makeTranslationsFilterUrl = (language: string, translations: number[]): string =>
+export const makeTranslationsInfoUrl = (language: string, translations: number[]): string =>
   makeUrl(
     '/resources/translations/filter',
     decamelizeKeys({ language, translations: translations.join(', ') }),

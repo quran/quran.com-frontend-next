@@ -13,32 +13,36 @@ const MODAL_TYPE_TITLE = {
 };
 
 interface Props {
-  verseModalType: VerseActionModalType;
+  activeVerseActionModal: VerseActionModalType;
   verse: Verse;
-  setVerseModalType: Dispatch<SetStateAction<VerseActionModalType>>;
+  setActiveVerseActionModal: Dispatch<SetStateAction<VerseActionModalType>>;
 }
 
-const VerseActionModal: React.FC<Props> = ({ verseModalType, verse, setVerseModalType }) => {
+const VerseActionModal: React.FC<Props> = ({
+  activeVerseActionModal,
+  verse,
+  setActiveVerseActionModal,
+}) => {
   // handle when the modal is closed.
   const onClose = useCallback(() => {
-    setVerseModalType(null);
-  }, [setVerseModalType]);
+    setActiveVerseActionModal(null);
+  }, [setActiveVerseActionModal]);
 
   // no need to render anything to the DOM if the modal is not meant to be visible.
-  if (!verseModalType) {
+  if (!activeVerseActionModal) {
     return null;
   }
 
   let modalContent: ReactNode;
   // this will be extended to include tafsirs and share
-  if (verseModalType === VerseActionModalType.AdvancedCopy) {
+  if (activeVerseActionModal === VerseActionModalType.AdvancedCopy) {
     modalContent = <VerseAdvancedCopy verse={verse} />;
   }
 
   return (
     <Modal
       visible
-      title={<TitleContainer>{[MODAL_TYPE_TITLE[verseModalType]]}</TitleContainer>}
+      title={<TitleContainer>{[MODAL_TYPE_TITLE[activeVerseActionModal]]}</TitleContainer>}
       onClose={onClose}
     >
       {modalContent}

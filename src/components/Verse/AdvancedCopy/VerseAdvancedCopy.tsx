@@ -4,14 +4,13 @@ import { useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import Verse from 'types/Verse';
-import range from 'lodash/range';
 import {
   selectTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
 import useTranslation from 'next-translate/useTranslation';
+import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
 import RadioButton from '../../dls/Forms/RadioButton/RadioButton';
-import * as chaptersData from '../../../../data/chapters.json';
 import Button, { ButtonSize } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
@@ -19,24 +18,8 @@ import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './Verses
 interface Props {
   verse: Verse;
 }
+const RESET_BUTTON_TIMEOUT_MS = 3 * 1000;
 
-/**
- * This will generate all the keys for the verses of a chapter. a key is `{chapterId}:{verseId}`.
- *
- * @param {string} chapterId
- * @returns {string[]}
- */
-const generateChapterVersesKeys = (chapterId: string): string[] =>
-  range(chaptersData[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
-
-/**
- * Get the verse number for its key. A key is the combination between the verse's chapter
- * and its number separated by ":" e.g. 1:5.
- *
- * @param {string} verseKey
- * @returns {Number} The verse number extracted from the key.
- */
-const getVerseNumberFromKey = (verseKey: string): number => Number(verseKey.split(':')[1]);
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
  *
@@ -96,7 +79,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
     let timeoutId: ReturnType<typeof setTimeout>;
     // if the user has just copied the text, we should change the text back to Copy after 3 seconds.
     if (isCopied === true) {
-      timeoutId = setTimeout(() => setIsCopied(false), 3 * 1000);
+      timeoutId = setTimeout(() => setIsCopied(false), RESET_BUTTON_TIMEOUT_MS);
     }
     return () => {
       clearTimeout(timeoutId);

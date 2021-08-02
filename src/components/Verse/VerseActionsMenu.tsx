@@ -9,10 +9,10 @@ import { VerseActionModalType } from './VerseActionModal';
 
 interface Props {
   verse: Verse;
-  setVerseModalType: Dispatch<SetStateAction<VerseActionModalType>>;
+  setActiveVerseActionModal: Dispatch<SetStateAction<VerseActionModalType>>;
 }
 
-const VerseActionsMenu: React.FC<Props> = ({ verse, setVerseModalType }) => {
+const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal }) => {
   const [isCopied, setIsCopied] = useState(false);
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -32,7 +32,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setVerseModalType }) => {
   };
 
   const onAdvancedCopyClicked = () => {
-    setVerseModalType(VerseActionModalType.AdvancedCopy);
+    setActiveVerseActionModal(VerseActionModalType.AdvancedCopy);
   };
 
   return (

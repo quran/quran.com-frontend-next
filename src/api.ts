@@ -5,7 +5,7 @@ import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
-  makeTranslationsFilterUrl,
+  makeTranslationsInfoUrl,
   makeTranslationsUrl,
   makeVersesUrl,
 } from './utils/apiPaths';
@@ -75,8 +75,8 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
  * @param {number[]} translations the ids of the translations selected.
  * @returns
  */
-export const getFilteredTranslations = async (language: string, translations: number[]) => {
-  const payload = await fetcher(makeTranslationsFilterUrl(language, translations));
+export const getTranslationsInfo = async (language: string, translations: number[]) => {
+  const payload = await fetcher(makeTranslationsInfoUrl(language, translations));
 
   return camelizeKeys(payload) as TranslationsResponse;
 };

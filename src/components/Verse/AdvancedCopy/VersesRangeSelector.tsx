@@ -47,7 +47,7 @@ const SelectorContainer: React.FC<SelectorProps> = memo(
         selectedItem={selectedItem}
         items={dropdownItems}
         onSelect={onSelect}
-        searchPlaceHolder="Search a verse"
+        searchPlaceHolder="Search for a verse"
         selectorText={selectedItem}
         label={<StyledLabel>{type === RangeSelectorType.START ? 'From' : 'To'} Verse:</StyledLabel>}
       />
