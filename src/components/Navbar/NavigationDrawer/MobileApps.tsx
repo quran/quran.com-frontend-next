@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { CenterHorizontally } from 'src/styles/utility';
-import SideMenuItem from './SideMenuItem';
+import NavigationDrawerItem from './NavigationDrawerItem';
 import IconMobile from '../../../../public/icons/mobile.svg';
 
 const IMAGES_CONTAINER_WIDTH = '17.5rem';
@@ -10,7 +10,7 @@ const IMAGES_CONTAINER_WIDTH = '17.5rem';
 const MobileApps = () => {
   return (
     <Container>
-      <SideMenuItem title="Mobile Apps" icon={<IconMobile />} isStale />
+      <NavigationDrawerItem title="Mobile Apps" icon={<IconMobile />} isStale />
       <CenterHorizontally>
         <ImagesContainer>
           <a

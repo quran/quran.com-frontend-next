@@ -2,11 +2,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type Navbar = {
   isVisible: boolean;
-  isSideMenuOpen: boolean;
-  isSideSearchOpen: boolean;
+  isNavigationDrawerOpen: boolean;
+  isSearchDrawerOpen: boolean;
 };
 
-const initialState: Navbar = { isVisible: true, isSideMenuOpen: false, isSideSearchOpen: false };
+const initialState: Navbar = {
+  isVisible: true,
+  isNavigationDrawerOpen: false,
+  isSearchDrawerOpen: false,
+};
 
 export const navbarSlice = createSlice({
   name: 'navbar',
@@ -18,22 +22,26 @@ export const navbarSlice = createSlice({
         isVisible: action.payload,
       };
     },
-    setIsSideMenuOpen: (state: Navbar, action: PayloadAction<boolean>) => {
+    setIsNavigationDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        isSideMenuOpen: action.payload,
+        isNavigationDrawerOpen: action.payload,
       };
     },
-    setIsSideSearchOpen: (state: Navbar, action: PayloadAction<boolean>) => {
+    setIsSearchDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        isSideSearchOpen: action.payload,
+        isSearchDrawerOpen: action.payload,
       };
     },
   },
 });
 
-export const { setIsVisible, setIsSideMenuOpen, setIsSideSearchOpen } = navbarSlice.actions;
+export const {
+  setIsVisible,
+  setIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
+} = navbarSlice.actions;
 
 export const selectNavbar = (state) => state.navbar;
 

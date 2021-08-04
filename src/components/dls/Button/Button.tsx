@@ -62,7 +62,8 @@ const Button = ({ size = ButtonSize.Medium, text, disabled, href, icon, onClick 
 };
 
 const Container = ({ children, disabled, size, href, onClick }) => {
-  if (href) {
+  // if href was passed and also the button is not disabled.
+  if (href && !disabled) {
     return (
       <Link href={href} passHref>
         <StyledAnchor>
@@ -91,9 +92,11 @@ const StyledContainer = styled.button<ButtonProps>`
   display: inline-block;
   align-items: center;
   background: transparent;
-  &:hover {
-    background: ${(props) => props.theme.colors.background.fadedGreyScale};
-  }
+  ${({ disabled, theme }) =>
+    !disabled &&
+    `&:hover {
+    background: ${theme.colors.background.fadedGreyScale};
+  }`}
   ${(props) =>
     props.disabled &&
     `cursor: default;

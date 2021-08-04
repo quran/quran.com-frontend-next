@@ -12,7 +12,7 @@ const Search: NextPage = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState(router.query.query || '');
   // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
-  const isInputRTL = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
+  const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
 
   /**
    * Handle when the search query is changed.
@@ -40,7 +40,7 @@ const Search: NextPage = () => {
   return (
     <StyledPage>
       <StyledPageHeader>Search</StyledPageHeader>
-      <SearchInputContainer isInputRTL={isInputRTL}>
+      <SearchInputContainer isRTLInput={isRTLInput}>
         <SearchInput
           ref={searchInputRef}
           dir="auto"
@@ -68,13 +68,13 @@ const StyledPageHeader = styled.p`
   font-size: ${(props) => props.theme.fontSizes.jumbo};
 `;
 
-const SearchInputContainer = styled.div<{ isInputRTL: boolean }>`
+const SearchInputContainer = styled.div<{ isRTLInput: boolean }>`
   width: 100%;
   border: 1px solid ${({ theme }) => theme.colors.borders.hairline};
   border-radius: ${({ theme }) => theme.borderRadiuses.pill};
   padding: ${({ theme }) => theme.spacing.xsmall};
   display: flex;
-  flex-direction: ${({ isInputRTL }) => (isInputRTL ? 'row-reverse' : 'row')};
+  flex-direction: ${({ isRTLInput }) => (isRTLInput ? 'row-reverse' : 'row')};
   align-items: center;
   justify-content: space-between;
 `;

@@ -2,7 +2,11 @@ import React from 'react';
 import { NAVBAR_HEIGHT } from 'src/styles/constants';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectNavbar, setIsSideSearchOpen, setIsSideMenuOpen } from 'src/redux/slices/navbar';
+import {
+  selectNavbar,
+  setIsSearchDrawerOpen,
+  setIsNavigationDrawerOpen,
+} from 'src/redux/slices/navbar';
 import { CenterVertically } from 'src/styles/utility';
 import Link from 'next/link';
 import Button, { ButtonSize } from '../dls/Button/Button';
@@ -12,20 +16,20 @@ import IconReader from '../../../public/icons/reader.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
 import IconQ from '../../../public/icons/Q.svg';
-import SideMenu from './SideMenu/SideMenu';
-import SideSearch from './SideSearch/SideSearch';
+import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
+import SearchDrawer from './SearchDrawer/SearchDrawer';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
 
   const dispatch = useDispatch();
 
-  const openSideMenu = () => {
-    dispatch({ type: setIsSideMenuOpen.type, payload: true });
+  const openNavigationDrawer = () => {
+    dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
   };
 
-  const openSideSearch = () => {
-    dispatch({ type: setIsSideSearchOpen.type, payload: true });
+  const openSearchDrawer = () => {
+    dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
   };
 
   return (
@@ -34,8 +38,14 @@ const Navbar = () => {
         <StyledItemsContainer>
           <CenterVertically>
             <LeftCTA>
-              <SideMenu />
-              <Button icon={<IconMenu />} size={ButtonSize.Small} onClick={openSideMenu} />
+              <>
+                <Button
+                  icon={<IconMenu />}
+                  size={ButtonSize.Small}
+                  onClick={openNavigationDrawer}
+                />
+                <NavigationDrawer />
+              </>
               <Link href="/">
                 <a>
                   <Button icon={<IconQ />} size={ButtonSize.Small} />
@@ -46,10 +56,12 @@ const Navbar = () => {
           </CenterVertically>
           <CenterVertically>
             <RightCTA>
-              <SideSearch />
               <Button icon={<IconSettings />} size={ButtonSize.Small} />
               <Button icon={<IconReader />} size={ButtonSize.Small} />
-              <Button icon={<IconSearch />} size={ButtonSize.Small} onClick={openSideSearch} />
+              <>
+                <Button icon={<IconSearch />} size={ButtonSize.Small} onClick={openSearchDrawer} />
+                <SearchDrawer />
+              </>
             </RightCTA>
           </CenterVertically>
         </StyledItemsContainer>
