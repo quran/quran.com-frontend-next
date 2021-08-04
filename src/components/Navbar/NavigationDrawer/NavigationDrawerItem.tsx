@@ -5,7 +5,7 @@ import { CENTER_VERTICALLY } from 'src/styles/utility';
 import styled from 'styled-components';
 import IconNorthEast from '../../../../public/icons/north_east.svg';
 
-type SideMenuItemProps = {
+type NavigationDrawerItemProps = {
   title?: string;
   icon?: React.ReactNode;
   isExternalLink?: boolean;
@@ -13,13 +13,13 @@ type SideMenuItemProps = {
   isStale?: boolean;
 };
 
-const SideMenuItem = ({
+const NavigationDrawerItem = ({
   title,
   icon,
   isExternalLink,
   href,
   isStale = false,
-}: SideMenuItemProps) => {
+}: NavigationDrawerItemProps) => {
   const isLink = !!href;
   return (
     <LinkContainer href={href} isExternalLink={isExternalLink}>
@@ -106,4 +106,4 @@ const A = styled.a`
   }
 `;
 
-export default SideMenuItem;
+export default NavigationDrawerItem;

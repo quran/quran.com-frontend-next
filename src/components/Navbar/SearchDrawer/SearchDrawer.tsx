@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { selectNavbar, setIsSideSearchOpen } from 'src/redux/slices/navbar';
+import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -14,10 +14,12 @@ import useDebounce from 'src/hooks/useDebounce';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 
-const SideSearch: React.FC = () => {
+const DEBOUNCING_PERIOD_MS = 1000;
+
+const SearchDrawer: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const isOpen = useSelector(selectNavbar).isSideSearchOpen;
+  const isOpen = useSelector(selectNavbar).isSearchDrawerOpen;
   const { lang } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();
@@ -25,10 +27,11 @@ const SideSearch: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
   // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
-  const isInputRTL = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
+  const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
-  const debouncedSearchQuery = useDebounce<string>(searchQuery, 1000);
+  const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
 
+  // This useEffect is triggered when the debouncedSearchQuery value changes
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
@@ -65,10 +68,8 @@ const SideSearch: React.FC = () => {
     setHasError(false);
   };
 
-  const closeSideSearch = useCallback(() => {
-    // clear the search query before closing.
-    resetQueryAndResults();
-    dispatch({ type: setIsSideSearchOpen.type, payload: false });
+  const closeSearchDrawer = useCallback(() => {
+    dispatch({ type: setIsSearchDrawerOpen.type, payload: false });
   }, [dispatch]);
 
   /**
@@ -90,26 +91,23 @@ const SideSearch: React.FC = () => {
   useEffect(() => {
     router.events.on('routeChangeComplete', () => {
       if (isOpen) {
-        closeSideSearch();
+        closeSearchDrawer();
       }
     });
-  }, [closeSideSearch, router.events, isOpen]);
+  }, [closeSearchDrawer, router.events, isOpen]);
 
   return (
     <Container isOpen={isOpen}>
       <Header>
         <HeaderContentContainer>
           <HeaderContent>
-            {searchQuery ? (
-              <Link href={`search?query=${searchQuery}`} passHref>
-                <a>
-                  <Button icon={<IconSearch />} size={ButtonSize.Small} />
-                </a>
-              </Link>
-            ) : (
-              <Button icon={<IconSearch />} size={ButtonSize.Small} disabled={!searchQuery} />
-            )}
-            <SearchInputContainer isInputRTL={isInputRTL}>
+            <Button
+              icon={<IconSearch />}
+              size={ButtonSize.Small}
+              disabled={!searchQuery}
+              href={`search?query=${searchQuery}`}
+            />
+            <SearchInputContainer isRTLInput={isRTLInput}>
               <SearchInput
                 ref={searchInputRef}
                 dir="auto"
@@ -120,11 +118,11 @@ const SideSearch: React.FC = () => {
               />
               {searchQuery && <StyledClear onClick={resetQueryAndResults}>Clear</StyledClear>}
             </SearchInputContainer>
-            <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeSideSearch} />
+            <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeSearchDrawer} />
           </HeaderContent>
         </HeaderContentContainer>
       </Header>
-      <SideSearchBody>
+      <SearchDrawerBody>
         {isSearching && <div>Searching...</div>}
         {!isSearching && hasError && <div>Something went wrong!</div>}
         {!isSearching && !hasError && searchResult && (
@@ -148,7 +146,7 @@ const SideSearch: React.FC = () => {
             </ResultSummaryContainer>
           </div>
         )}
-      </SideSearchBody>
+      </SearchDrawerBody>
     </Container>
   );
 };
@@ -164,7 +162,8 @@ const ResultSummaryContainer = styled.div`
   justify-content: space-between;
 `;
 
-const SideSearchBody = styled.div`
+const SearchDrawerBody = styled.div`
+  margin-top: ${NAVBAR_HEIGHT};
   padding: ${(props) => props.theme.spacing.medium};
 `;
 
@@ -202,20 +201,26 @@ const Container = styled.div<{ isOpen: boolean }>`
 `;
 
 const Header = styled.div`
+  width: 100%;
+  background-color: ${(props) => props.theme.colors.background.default};
+  position: fixed;
   height: ${NAVBAR_HEIGHT};
   border-bottom: 1px ${(props) => props.theme.colors.borders.hairline} solid;
+  padding: 0 ${(props) => props.theme.spacing.medium};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    width: ${SIDE_MENU_DESKTOP_WIDTH};
+  }
 `;
 
 const HeaderContentContainer = styled.div`
+  margin-right: ${(props) => props.theme.spacing.medium};
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding-left: ${(props) => props.theme.spacing.medium};
-  padding-right: ${(props) => props.theme.spacing.medium};
 `;
 
 const HeaderContent = styled.div`
@@ -224,11 +229,11 @@ const HeaderContent = styled.div`
   justify-content: space-between;
 `;
 
-const SearchInputContainer = styled.div<{ isInputRTL: boolean }>`
+const SearchInputContainer = styled.div<{ isRTLInput: boolean }>`
   height: 100%;
   width: 80%;
   display: flex;
-  flex-direction: ${({ isInputRTL }) => (isInputRTL ? 'row-reverse' : 'row')};
+  flex-direction: ${({ isRTLInput }) => (isRTLInput ? 'row-reverse' : 'row')};
   align-items: center;
   justify-content: space-between;
 `;
@@ -236,6 +241,7 @@ const SearchInputContainer = styled.div<{ isInputRTL: boolean }>`
 const SearchInput = styled.input.attrs({
   type: 'text',
 })`
+  width: 100%;
   border: 0;
   &:focus {
     outline: none;
@@ -252,4 +258,4 @@ const StyledClear = styled.p`
   font-size: ${(props) => props.theme.fontSizes.normal};
 `;
 
-export default SideSearch;
+export default SearchDrawer;
