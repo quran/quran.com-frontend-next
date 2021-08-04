@@ -1,6 +1,7 @@
 import { decamelizeKeys } from 'humps';
 import { QuranFont } from 'src/components/QuranReader/types';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
+import { SearchRequest } from 'types/APIRequests';
 import { ITEMS_PER_PAGE, makeUrl } from './api';
 
 export const DEFAULT_VERSES_PARAMS = {
@@ -47,3 +48,12 @@ export const makeTranslationsInfoUrl = (language: string, translations: number[]
  */
 export const makeAdvancedCopyUrl = (params: Record<string, unknown>): string =>
   makeUrl('/verses/advance_copy', decamelizeKeys(params));
+
+/**
+ * Compose the url for search API.
+ *
+ * @param {SearchRequest} params the request params.
+ * @returns {string}
+ */
+export const makeSearchResultsUrl = (params: SearchRequest): string =>
+  makeUrl('/search', decamelizeKeys(params));
