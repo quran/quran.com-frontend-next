@@ -2,7 +2,7 @@ import React from 'react';
 import { NAVBAR_HEIGHT } from 'src/styles/constants';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectNavbar, setIsSideMenuOpen } from 'src/redux/slices/navbar';
+import { selectNavbar, setIsSideSearchOpen, setIsSideMenuOpen } from 'src/redux/slices/navbar';
 import { CenterVertically } from 'src/styles/utility';
 import Link from 'next/link';
 import Button, { ButtonSize } from '../dls/Button/Button';
@@ -13,6 +13,7 @@ import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
 import IconQ from '../../../public/icons/Q.svg';
 import SideMenu from './SideMenu/SideMenu';
+import SideSearch from './SideSearch/SideSearch';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
@@ -21,6 +22,10 @@ const Navbar = () => {
 
   const openSideMenu = () => {
     dispatch({ type: setIsSideMenuOpen.type, payload: true });
+  };
+
+  const openSideSearch = () => {
+    dispatch({ type: setIsSideSearchOpen.type, payload: true });
   };
 
   return (
@@ -41,9 +46,10 @@ const Navbar = () => {
           </CenterVertically>
           <CenterVertically>
             <RightCTA>
+              <SideSearch />
               <Button icon={<IconSettings />} size={ButtonSize.Small} />
               <Button icon={<IconReader />} size={ButtonSize.Small} />
-              <Button icon={<IconSearch />} size={ButtonSize.Small} />
+              <Button icon={<IconSearch />} size={ButtonSize.Small} onClick={openSideSearch} />
             </RightCTA>
           </CenterVertically>
         </StyledItemsContainer>

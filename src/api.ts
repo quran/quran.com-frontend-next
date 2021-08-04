@@ -1,10 +1,12 @@
 import { camelizeKeys } from 'humps';
-import { TranslationsResponse } from 'types/APIResponses';
+import { TranslationsResponse, SearchResponse } from 'types/APIResponses';
+import { SearchRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
 import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
+  makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
   makeVersesUrl,
@@ -92,4 +94,16 @@ export const getAdvancedCopyContent = async (params: Record<string, unknown>) =>
 
   // TODO: (@osama): add request response types
   return camelizeKeys(payload);
+};
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {SearchRequest} params
+ * @returns  {Promise<SearchResponse>}
+ */
+export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> => {
+  const payload = await fetcher(makeSearchResultsUrl(params));
+
+  return camelizeKeys(payload) as SearchResponse;
 };
