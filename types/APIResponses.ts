@@ -42,3 +42,9 @@ export interface SearchResponse {
   status?: number;
   error?: string;
 }
+
+export interface AdvancedCopyRawResultResponse {
+  result?: string;
+  status?: number;
+  error?: string;
+}
