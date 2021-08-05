@@ -1,7 +1,7 @@
 import { decamelizeKeys } from 'humps';
 import { QuranFont } from 'src/components/QuranReader/types';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
-import { SearchRequest } from 'types/APIRequests';
+import { AdvancedCopyRequest, SearchRequest } from 'types/APIRequests';
 import { ITEMS_PER_PAGE, makeUrl } from './api';
 
 export const DEFAULT_VERSES_PARAMS = {
@@ -30,24 +30,24 @@ export const makeTranslationsUrl = (language: string): string =>
 /**
  * Compose the url for the translations' filter API.
  *
- * @param {string} language the user's language code.
+ * @param {string} locale the user's language code.
  * @param {number[]} translations an array holding the translations' IDs.
  * @returns {string}
  */
-export const makeTranslationsInfoUrl = (language: string, translations: number[]): string =>
+export const makeTranslationsInfoUrl = (locale: string, translations: number[]): string =>
   makeUrl(
     '/resources/translations/filter',
-    decamelizeKeys({ language, translations: translations.join(', ') }),
+    decamelizeKeys({ locale, translations: translations.join(', ') }),
   );
 
 /**
  * Compose the url for the advanced copy API.
  *
- * @param {Record<string, unknown>} params the request params.
+ * @param {AdvancedCopyRequest} params the request params.
  * @returns {string}
  */
-export const makeAdvancedCopyUrl = (params: Record<string, unknown>): string =>
-  makeUrl('/verses/advance_copy', decamelizeKeys(params));
+export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
+  makeUrl('/verses/advanced_copy', decamelizeKeys(params));
 
 /**
  * Compose the url for search API.

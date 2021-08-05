@@ -10,6 +10,8 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import useTranslation from 'next-translate/useTranslation';
 import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
+import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
+import { QuranFont } from 'src/components/QuranReader/types';
 import RadioButton from '../../dls/Forms/RadioButton/RadioButton';
 import Button, { ButtonSize } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
@@ -89,41 +91,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
   useEffect(() => {
     // only fetch when there is at least one translation.
     if (selectedTranslations.length) {
-      // TODO: (@osama): call BE instead.
-      const response = {
-        translations: [
-          {
-            id: 131,
-            name: 'Dr. Mustafa Khattab, the Clear Quran',
-            authorName: 'Dr. Mustafa Khattab',
-            slug: 'clearquran-with-tafsir',
-            languageName: 'english',
-            translatedName: {
-              name: 'Dr. Mustafa Khattab',
-              languageName: 'english',
-            },
-          },
-          {
-            id: 20,
-            name: 'Saheeh International',
-            authorName: 'Saheeh International',
-            slug: 'en-sahih-international',
-            languageName: 'english',
-            translatedName: {
-              name: 'Saheeh International',
-              languageName: 'english',
-            },
-          },
-        ],
-      };
-      const responseTranslations = {};
-      response.translations.forEach((translation) => {
-        responseTranslations[translation.id] = {
-          shouldBeCopied: false, // the default is to not copy the translation
-          name: translation.translatedName.name,
-        };
+      getTranslationsInfo(lang, selectedTranslations).then((response) => {
+        // if there is no error
+        if (response.status !== 500) {
+          const responseTranslations = {};
+          response.translations.forEach((translation) => {
+            responseTranslations[translation.id] = {
+              shouldBeCopied: false, // the default is to not copy the translation
+              name: translation.translatedName.name,
+            };
+          });
+          setTranslations(responseTranslations);
+        }
       });
-      setTranslations(responseTranslations);
     }
   }, [lang, selectedTranslations]);
 
@@ -176,21 +156,46 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
         return;
       }
     }
-
-    // TODO: (@osama): call BE, handle errors, loading and replace below with response from BE.
-    const content = verse.textUthmani;
-    clipboardCopy(content).then(() => {
-      setIsCopied(true);
-      const objectUrl = window.URL.createObjectURL(new Blob([content], { type: 'text/plain' }));
-      setCustomMessage(
-        <p>
-          Text is copied successfully in your clipboard.{' '}
-          <a href={objectUrl} download="quran.copy.txt">
-            Click here
-          </a>{' '}
-          if you want to download text file.
-        </p>,
-      );
+    // by default the from and to will be the current verse.
+    let fromVerse = verse.verseKey;
+    let toVerse = verse.verseKey;
+    // if range of verse was selected
+    if (showRangeOfVerses) {
+      fromVerse = rangeStartVerse;
+      toVerse = rangeEndVerse;
+    }
+    // filter the translations
+    const toBeCopiedTranslations = Object.keys(translations).filter(
+      (translationId) => translations[translationId].shouldBeCopied === true,
+    );
+    getAdvancedCopyRawResult({
+      raw: true,
+      from: fromVerse,
+      to: toVerse,
+      footnote: shouldCopyFootnotes,
+      ...(toBeCopiedTranslations.length > 0 && { translations: toBeCopiedTranslations.join(', ') }), // only include the translations when at least 1 translation has been selected.
+      ...(shouldCopyText && { fields: QuranFont.Uthmani }), // only include the Quranic text if the user chose to.
+    }).then((response) => {
+      // if there is an error
+      if (response.status === 500) {
+        setCustomMessage('Something went wrong, please try again!');
+      } else {
+        clipboardCopy(response.result).then(() => {
+          const objectUrl = window.URL.createObjectURL(
+            new Blob([response.result], { type: 'text/plain' }),
+          );
+          setIsCopied(true);
+          setCustomMessage(
+            <p>
+              Text is copied successfully in your clipboard.{' '}
+              <a href={objectUrl} download="quran.copy.txt">
+                Click here
+              </a>{' '}
+              if you want to download text file.
+            </p>,
+          );
+        });
+      }
     });
   };
 

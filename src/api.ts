@@ -1,6 +1,10 @@
 import { camelizeKeys } from 'humps';
-import { TranslationsResponse, SearchResponse } from 'types/APIResponses';
-import { SearchRequest } from 'types/APIRequests';
+import {
+  TranslationsResponse,
+  SearchResponse,
+  AdvancedCopyRawResultResponse,
+} from 'types/APIResponses';
+import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
 import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
@@ -73,12 +77,12 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
 /**
  * Get the information of translations by their IDs.
  *
- * @param {string} language the current user locale.
+ * @param {string} locale the current user locale.
  * @param {number[]} translations the ids of the translations selected.
  * @returns
  */
-export const getTranslationsInfo = async (language: string, translations: number[]) => {
-  const payload = await fetcher(makeTranslationsInfoUrl(language, translations));
+export const getTranslationsInfo = async (locale: string, translations: number[]) => {
+  const payload = await fetcher(makeTranslationsInfoUrl(locale, translations));
 
   return camelizeKeys(payload) as TranslationsResponse;
 };
@@ -86,13 +90,14 @@ export const getTranslationsInfo = async (language: string, translations: number
 /**
  * Get the advanced copy content that will be copied to clipboard and put in a file.
  *
- * @param {Record<string, unknown>} params
- * @returns
+ * @param {AdvancedCopyRequest} params
+ * @returns {Promise<AdvancedCopyRawResultResponse>}
  */
-export const getAdvancedCopyContent = async (params: Record<string, unknown>) => {
+export const getAdvancedCopyRawResult = async (
+  params: AdvancedCopyRequest,
+): Promise<AdvancedCopyRawResultResponse> => {
   const payload = await fetcher(makeAdvancedCopyUrl(params));
 
-  // TODO: (@osama): add request response types
   return camelizeKeys(payload);
 };
 
