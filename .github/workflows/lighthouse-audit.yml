@@ -4,7 +4,7 @@ name: Lighthouse Audit
 on: [pull_request]
 
 jobs:
-  build-storybook:
+  lighthouse-audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,5 +23,5 @@ jobs:
         run: |
           lhci autorun
         # to enable lighthouse results as separate checks in PR
-        # env:
-        #   LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{secrets.LHCI_GITHUB_APP_TOKEN}}
