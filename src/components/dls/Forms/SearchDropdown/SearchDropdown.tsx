@@ -57,6 +57,15 @@ const SearchDropdown: React.FC<Props> = ({
     RefObject<HTMLDivElement>,
   ] = useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
 
+  // if there are any changes in the items, we should update the filteredItems.
+  // this is necessary when the parent items are have initial empty value and
+  // the actual values are fetched remotely and by the time they have a value,
+  // filteredItems would have already been initialized with the initial items value
+  // and the actual values wouldn't reflect.
+  useEffect(() => {
+    setFilteredItems(items);
+  }, [items]);
+
   useEffect(() => {
     // once the dropdown is opened, scroll to the selected item.
     if (isOpened) {
@@ -170,18 +179,19 @@ const SearchDropdownContainer = styled.div<{ size: SearchDropdownSize }>`
   width: ${({ theme, size }) => `calc(${SIZE_MULTIPLIER[size]}* ${theme.spacing.mega})`};
   flex-direction: column;
   position: relative;
+  max-width: 100%;
+  background-color: ${({ theme }) => theme.colors.background.default};
 `;
 
 const SelectorContainer = styled.div`
   justify-content: space-between;
   display: flex;
   align-items: center;
-  height: ${({ theme }) => theme.spacing.mega};
+  min-height: ${({ theme }) => theme.spacing.mega};
   cursor: pointer;
   border-radius: ${({ theme }) => theme.borderRadiuses.default};
   border: ${({ theme }) => `1px solid ${theme.colors.borders.hairline}`};
-  padding-right: ${({ theme }) => theme.spacing.micro};
-  padding-left: ${({ theme }) => theme.spacing.micro};
+  padding: ${({ theme }) => theme.spacing.micro};
 `;
 
 const SearchDropdownBodyContainer = styled.div<{ isOpened: boolean }>`

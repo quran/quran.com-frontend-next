@@ -28,6 +28,15 @@ export const makeTranslationsUrl = (language: string): string =>
   makeUrl('/resources/translations', decamelizeKeys({ language }));
 
 /**
+ * Compose the url for the languages API.
+ *
+ * @param {string} language
+ * @returns {string}
+ */
+export const makeLanguagesUrl = (language: string): string =>
+  makeUrl('/resources/languages', decamelizeKeys({ language }));
+
+/**
  * Compose the url for the translations' filter API.
  *
  * @param {string} locale the user's language code.

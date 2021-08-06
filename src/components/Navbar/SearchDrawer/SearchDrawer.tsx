@@ -96,6 +96,7 @@ const SearchDrawer: React.FC = () => {
     });
   }, [closeSearchDrawer, router.events, isOpen]);
 
+  // TODO: add the translation section.
   return (
     <Container isOpen={isOpen}>
       <Header>
@@ -105,7 +106,7 @@ const SearchDrawer: React.FC = () => {
               icon={<IconSearch />}
               size={ButtonSize.Small}
               disabled={!searchQuery}
-              href={`search?query=${searchQuery}`}
+              href={`/search?query=${searchQuery}`}
             />
             <SearchInputContainer isRTLInput={isRTLInput}>
               <SearchInput
@@ -130,14 +131,22 @@ const SearchDrawer: React.FC = () => {
             <p>Results</p>
             {searchResult.search.results.map((result) => (
               <SearchResultItem key={result.verseId}>
-                <SearchResultText dangerouslySetInnerHTML={{ __html: result.text }} />
-                <div>VerseKey</div>
+                <QuranTextContainer>
+                  <div>VerseKey</div>
+                  <SearchResultText dangerouslySetInnerHTML={{ __html: result.text }} />
+                </QuranTextContainer>
+                {result.translations.map((translation) => (
+                  <TranslationContainer key={translation.id}>
+                    <div dangerouslySetInnerHTML={{ __html: translation.text }} />
+                    <TranslationName>{translation.name}</TranslationName>
+                  </TranslationContainer>
+                ))}
               </SearchResultItem>
             ))}
             <ResultSummaryContainer>
               <p>{searchResult.search.totalResults} results</p>
               {searchResult.search.totalResults > 0 && (
-                <Link href={`search?query=${searchQuery}`} passHref>
+                <Link href={`/search?query=${searchQuery}`} passHref>
                   <a>
                     <p>Show all results</p>
                   </a>
@@ -151,8 +160,24 @@ const SearchDrawer: React.FC = () => {
   );
 };
 
+const TranslationName = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.normal};
+  color: ${({ theme }) => theme.colors.text.default};
+`;
+
+const TranslationContainer = styled.div`
+  margin: ${({ theme }) => theme.spacing.small} 0;
+`;
+
+const QuranTextContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 const SearchResultText = styled.div`
   line-height: ${(props) => props.theme.lineHeights.large};
+  direction: rtl;
 `;
 
 const ResultSummaryContainer = styled.div`
@@ -174,10 +199,6 @@ const SearchResultItem = styled.div`
   padding: ${(props) => props.theme.spacing.small};
   margin-top: ${(props) => props.theme.spacing.xsmall};
   margin-bottom: ${(props) => props.theme.spacing.xsmall};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  direction: rtl;
 `;
 
 const Container = styled.div<{ isOpen: boolean }>`
