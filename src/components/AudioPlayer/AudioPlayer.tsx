@@ -120,10 +120,10 @@ const AudioPlayer = () => {
           ref={audioPlayerEl}
           onTimeUpdate={onTimeUpdate}
         />
-        <AudioKeyBoardListeners
+        {/* <AudioKeyBoardListeners
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
-        />
+        /> */}
         <MediaSessionApiListeners
           play={play}
           pause={pause}
