@@ -3,6 +3,7 @@ import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { AUDIO_PLAYER_EXPANDED_HEIGHT } from 'src/styles/constants';
+import { MobileOnly } from 'src/styles/utility';
 
 const NUMBER_OF_SPLITS = 100;
 
@@ -18,10 +19,12 @@ type SliderProps = {
  */
 const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
+  const remainingTime = audioDuration - currentTime;
+  const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
 
   const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;
-    const isComplete = currentTime >= splitStartTime;
+    const isComplete = isAudioLoaded && currentTime >= splitStartTime;
     return (
       <Split
         isComplete={isComplete}
@@ -34,9 +37,12 @@ const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
 
   return (
     <StyledContainer>
-      {secondsFormatter(currentTime)}
+      {/* {secondsFormatter(currentTime)} */}
       <StyledSplitsContainer>{splits}</StyledSplitsContainer>
-      {secondsFormatter(audioDuration)}
+      <MobileOnly>
+        Mishary Al - Affasy <br />
+      </MobileOnly>
+      {secondsFormatter(remainingTime)}
     </StyledContainer>
   );
 };
@@ -59,6 +65,10 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => {
 
 const StyledContainer = styled.div`
   margin-top: ${({ theme }) => theme.spacing.medium};
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    text-align: left;
+    margin-top: ${({ theme }) => theme.spacing.xsmall};
+  }
 `;
 
 const StyledSplitsContainer = styled.div`

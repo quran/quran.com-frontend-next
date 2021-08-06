@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { AUDIO_PLAYER_EXPANDED_HEIGHT, AUDIO_PLAYER_MINIZED_HEIGHT } from 'src/styles/constants';
-import { CENTER_HORIZONTALLY } from 'src/styles/utility';
+import { CENTER_HORIZONTALLY, DesktopOnly } from 'src/styles/utility';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -151,13 +151,17 @@ const AudioPlayer = () => {
               }}
             />
           )}
-          <Button icon={<MinusTenIcon />} size={ButtonSize.Medium} onClick={() => seek(-10)} />
+          <DesktopOnly>
+            <Button icon={<MinusTenIcon />} size={ButtonSize.Medium} onClick={() => seek(-10)} />
+          </DesktopOnly>
         </ActionButtonsContainers>
         <SliderContainer>
           <Slider currentTime={currentTime} audioDuration={audioDuration} setTime={setTime} />
         </SliderContainer>
-        {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
-        <div />
+        <DesktopOnly>
+          {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
+          <div />
+        </DesktopOnly>
       </StyledInnerContainer>
     </StyledContainer>
   );
@@ -188,6 +192,7 @@ const StyledInnerContainer = styled.div`
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
     flex-direction: row-reverse;
+    justify-content: space-between;
   }
 `;
 
@@ -202,4 +207,5 @@ const ActionButtonsContainers = styled.div`
 const SliderContainer = styled.div`
   width: 70%;
 `;
+
 export default AudioPlayer;

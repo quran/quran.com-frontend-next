@@ -17,6 +17,17 @@ export const CENTER_HORIZONTALLY = `
   margin: auto;  
 `;
 
+export const DesktopOnly = styled.span`
+  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    display: none;
+  }
+`;
+
+export const MobileOnly = styled.span`
+  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.mobileL}) {
+    display: none;
+  }
+`;
 export const CenterHorizontally = styled.div``;
 
 const CenterHorizontallyVertically = ({ children }) => {
