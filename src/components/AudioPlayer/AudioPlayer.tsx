@@ -17,7 +17,7 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import Slider from './Slider';
-import AudioKeyBoardListeners from './AudioKeyboardListeners';
+// import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
 
 const AudioPlayer = () => {
@@ -79,13 +79,13 @@ const AudioPlayer = () => {
     audioPlayerEl.current.pause();
   }, [audioPlayerEl]);
 
-  const togglePlaying = useCallback(() => {
-    if (isPlaying) {
-      pause();
-    } else {
-      play();
-    }
-  }, [play, pause, isPlaying]);
+  // const togglePlaying = useCallback(() => {
+  //   if (isPlaying) {
+  //     pause();
+  //   } else {
+  //     play();
+  //   }
+  // }, [play, pause, isPlaying]);
 
   const setTime = useCallback(
     (time) => {
@@ -120,10 +120,10 @@ const AudioPlayer = () => {
           ref={audioPlayerEl}
           onTimeUpdate={onTimeUpdate}
         />
-        <AudioKeyBoardListeners
+        {/* <AudioKeyBoardListeners
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
-        />
+        /> */}
         <MediaSessionApiListeners
           play={play}
           pause={pause}
