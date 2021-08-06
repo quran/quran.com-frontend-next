@@ -189,6 +189,8 @@ const StyledInnerContainer = styled.div`
   ${CENTER_HORIZONTALLY}
   display: flex;
   justify-content: center;
+  padding-left: ${({ theme }) => theme.spacing.xsmall};
+  padding-right: ${({ theme }) => theme.spacing.xsmall};
 
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
     flex-direction: row-reverse;
