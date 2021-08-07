@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import styled from 'styled-components';
-import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,6 +15,7 @@ import LanguagesFilter from 'src/components/Search/LanguagesFilter';
 import SearchResultItem from 'src/components/Search/SearchResultItem';
 import AvailableTranslation from 'types/AvailableTranslation';
 import AvailableLanguage from 'types/AvailableLanguage';
+import NextSeoHead from 'src/components/NextSeoHead';
 import IconClose from '../../public/icons/close.svg';
 
 const PAGE_SIZE = 20;
@@ -156,7 +156,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
 
   return (
     <>
-      <NextSeo title={debouncedSearchQuery} />
+      <NextSeoHead title={debouncedSearchQuery} />
       <StyledPage>
         <PageHeader>Search</PageHeader>
         <SearchInputContainer isRTLInput={isRTLInput}>

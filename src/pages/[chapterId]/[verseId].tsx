@@ -1,12 +1,12 @@
 import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { getChapter, getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
 import { QuranFont } from 'src/components/QuranReader/types';
+import NextSeoHead from 'src/components/NextSeoHead';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;
@@ -23,7 +23,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   return (
     <>
-      <NextSeo title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoHead title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
       <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
-import { NextSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
+import NextSeoHead from 'src/components/NextSeoHead';
 
 const About = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const About = () => {
 
   return (
     <>
-      <NextSeo title={t('about:title')} />
+      <NextSeoHead title={t('about:title')} />
       <span>{quranCom}</span>
       <span>{description}</span>
     </>

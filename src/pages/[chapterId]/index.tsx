@@ -1,9 +1,9 @@
 import React from 'react';
-import { NextSeo } from 'next-seo';
 import Error from 'next/error';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
+import NextSeoHead from 'src/components/NextSeoHead';
 import { isValidChapterId } from '../../utils/validator';
 import { getChapter, getChapterVerses } from '../../api';
 import QuranReader from '../../components/QuranReader';
@@ -21,7 +21,7 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
   }
   return (
     <>
-      <NextSeo
+      <NextSeoHead
         title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
       />
       <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
