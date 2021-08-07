@@ -1,37 +1,38 @@
-/* eslint-disable react/no-danger */
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import { NextPage } from 'next';
+import { GetStaticProps, NextPage } from 'next';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import Pagination from 'src/components/dls/Pagination/Pagination';
-import { getSearchResults } from 'src/api';
+import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/APIResponses';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
 import TranslationsFilter from 'src/components/Search/TranslationsFilter';
 import LanguagesFilter from 'src/components/Search/LanguagesFilter';
+import SearchResultItem from 'src/components/Search/SearchResultItem';
+import AvailableTranslation from 'types/AvailableTranslation';
+import AvailableLanguage from 'types/AvailableLanguage';
 import IconClose from '../../public/icons/close.svg';
 
 const PAGE_SIZE = 20;
 const DEBOUNCING_PERIOD_MS = 1000;
 
-const Search: NextPage = () => {
+type SearchProps = {
+  languages: AvailableLanguage[];
+  translations: AvailableTranslation[];
+};
+
+const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { lang } = useTranslation();
-  const [searchQuery, setSearchQuery] = useState<string>((router.query.query as string) || '');
-  const [currentPage, setCurrentPage] = useState<number>(
-    router.query.page ? Number(router.query.page) : 1,
-  );
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    (router.query.language as string) || lang,
-  );
-  const [selectedTranslation, setSelectedTranslation] = useState<string>(
-    router.query.translation as string,
-  );
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(lang);
+  const [selectedTranslation, setSelectedTranslation] = useState<string>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
@@ -50,6 +51,27 @@ const Search: NextPage = () => {
     [currentPage, debouncedSearchQuery, selectedLanguage, selectedTranslation],
   );
   useAddQueryParamsToUrl('/search', queryParams);
+
+  // We need this since pages that are statically optimized will be hydrated
+  // without their route parameters provided, i.e query will be an empty object ({}).
+  // After hydration, Next.js will trigger an update to provide the route parameters
+  // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
+  useEffect(() => {
+    if (router.isReady) {
+      if (router.query.query) {
+        setSearchQuery(router.query.query as string);
+      }
+      if (router.query.page) {
+        setCurrentPage(Number(router.query.page));
+      }
+      if (router.query.language) {
+        setSelectedLanguage(router.query.language as string);
+      }
+      if (router.query.translation) {
+        setSelectedTranslation(router.query.translation as string);
+      }
+    }
+  }, [router]);
 
   /**
    * Handle when the search query is changed.
@@ -141,6 +163,7 @@ const Search: NextPage = () => {
           placeholder="Search"
           onChange={onSearchQueryChange}
           value={searchQuery}
+          disabled={isSearching}
         />
         {searchQuery && (
           <Button icon={<IconClose />} size={ButtonSize.XSmall} onClick={onClearClicked} />
@@ -150,12 +173,12 @@ const Search: NextPage = () => {
         <FiltersContainer>
           <BoldHeader>Filters</BoldHeader>
           <LanguagesFilter
-            lang={lang}
+            languages={languages}
             selectedLanguage={selectedLanguage}
             onLanguageChange={onLanguageChange}
           />
           <TranslationsFilter
-            lang={lang}
+            translations={translations}
             selectedTranslation={selectedTranslation}
             onTranslationChange={onTranslationChange}
           />
@@ -167,18 +190,7 @@ const Search: NextPage = () => {
             <div>
               <BoldHeader>Results</BoldHeader>
               {searchResult.search.results.map((result) => (
-                <SearchResultItem key={result.verseId}>
-                  <QuranTextContainer>
-                    <div>VerseKey</div>
-                    <SearchResultText dangerouslySetInnerHTML={{ __html: result.text }} />
-                  </QuranTextContainer>
-                  {result.translations.map((translation) => (
-                    <TranslationContainer key={translation.id}>
-                      <div dangerouslySetInnerHTML={{ __html: translation.text }} />
-                      <TranslationName>{translation.name}</TranslationName>
-                    </TranslationContainer>
-                  ))}
-                </SearchResultItem>
+                <SearchResultItem key={result.verseId} result={result} />
               ))}
               <PaginationContainer>
                 {debouncedSearchQuery && (
@@ -202,21 +214,6 @@ const PaginationContainer = styled.div`
   min-height: calc(2 * ${({ theme }) => theme.spacing.mega});
 `;
 
-const TranslationName = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.normal};
-  color: ${({ theme }) => theme.colors.text.default};
-`;
-
-const TranslationContainer = styled.div`
-  margin: ${({ theme }) => theme.spacing.small} 0;
-`;
-
-const QuranTextContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const BodyContainer = styled.div`
   width: 70%;
   @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
@@ -227,20 +224,6 @@ const BodyContainer = styled.div`
 const BoldHeader = styled.p`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   margin-bottom: ${({ theme }) => theme.spacing.small};
-`;
-
-const SearchResultText = styled.div`
-  line-height: ${({ theme }) => theme.lineHeights.large};
-  direction: rtl;
-`;
-
-const SearchResultItem = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.borders.hairline};
-  border-radius: ${({ theme }) => theme.borderRadiuses.default};
-  background-color: ${({ theme }) => theme.colors.background.neutralGrey};
-  padding: ${({ theme }) => theme.spacing.small};
-  margin-top: ${({ theme }) => theme.spacing.xsmall};
-  margin-bottom: ${({ theme }) => theme.spacing.xsmall};
 `;
 
 const FiltersContainer = styled.div`
@@ -307,5 +290,28 @@ const PageBody = styled.div`
     display: block;
   }
 `;
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([
+    getAvailableLanguages(locale),
+    getAvailableTranslations(locale),
+  ]);
+
+  let translations = [];
+  let languages = [];
+  if (availableLanguagesResponse.status !== 500) {
+    languages = availableLanguagesResponse.languages;
+  }
+  if (availableTranslationsResponse.status !== 500) {
+    translations = availableTranslationsResponse.translations;
+  }
+
+  return {
+    props: {
+      languages,
+      translations,
+    },
+  };
+};
 
 export default Search;
