@@ -3,6 +3,7 @@ import {
   TranslationsResponse,
   SearchResponse,
   AdvancedCopyRawResultResponse,
+  LanguagesResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
@@ -10,6 +11,7 @@ import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
+  makeLanguagesUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
@@ -72,6 +74,19 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
   const payload = await fetcher(makeTranslationsUrl(language));
 
   return camelizeKeys(payload) as TranslationsResponse;
+};
+
+/**
+ * Get the current available languages with the name translated in the current language.
+ *
+ * @param {string} language we use this to get language names in specific the current language.
+ *
+ * @returns {Promise<LanguagesResponse>}
+ */
+export const getAvailableLanguages = async (language: string): Promise<LanguagesResponse> => {
+  const payload = await fetcher(makeLanguagesUrl(language));
+
+  return camelizeKeys(payload) as LanguagesResponse;
 };
 
 /**

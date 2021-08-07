@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { SIDE_MENU_DESKTOP_WIDTH, NAVBAR_HEIGHT } from 'src/styles/constants';
-import Link from 'next/link';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { getSearchResults } from 'src/api';
@@ -13,6 +12,7 @@ import { SearchResponse } from 'types/APIResponses';
 import useDebounce from 'src/hooks/useDebounce';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
+import SearchDrawerBody from './SearchDrawerBody';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -105,7 +105,7 @@ const SearchDrawer: React.FC = () => {
               icon={<IconSearch />}
               size={ButtonSize.Small}
               disabled={!searchQuery}
-              href={`search?query=${searchQuery}`}
+              href={`/search?query=${searchQuery}`}
             />
             <SearchInputContainer isRTLInput={isRTLInput}>
               <SearchInput
@@ -122,63 +122,15 @@ const SearchDrawer: React.FC = () => {
           </HeaderContent>
         </HeaderContentContainer>
       </Header>
-      <SearchDrawerBody>
-        {isSearching && <div>Searching...</div>}
-        {!isSearching && hasError && <div>Something went wrong!</div>}
-        {!isSearching && !hasError && searchResult && (
-          <div>
-            <p>Results</p>
-            {searchResult.search.results.map((result) => (
-              <SearchResultItem key={result.verseId}>
-                <SearchResultText dangerouslySetInnerHTML={{ __html: result.text }} />
-                <div>VerseKey</div>
-              </SearchResultItem>
-            ))}
-            <ResultSummaryContainer>
-              <p>{searchResult.search.totalResults} results</p>
-              {searchResult.search.totalResults > 0 && (
-                <Link href={`search?query=${searchQuery}`} passHref>
-                  <a>
-                    <p>Show all results</p>
-                  </a>
-                </Link>
-              )}
-            </ResultSummaryContainer>
-          </div>
-        )}
-      </SearchDrawerBody>
+      <SearchDrawerBody
+        hasError={hasError}
+        searchResult={searchResult}
+        isSearching={isSearching}
+        searchQuery={searchQuery}
+      />
     </Container>
   );
 };
-
-const SearchResultText = styled.div`
-  line-height: ${(props) => props.theme.lineHeights.large};
-`;
-
-const ResultSummaryContainer = styled.div`
-  margin-top: ${(props) => props.theme.spacing.medium};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const SearchDrawerBody = styled.div`
-  margin-top: ${NAVBAR_HEIGHT};
-  padding: ${(props) => props.theme.spacing.medium};
-`;
-
-const SearchResultItem = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.borders.hairline};
-  border-radius: ${(props) => props.theme.borderRadiuses.default};
-  background-color: ${(props) => props.theme.colors.background.neutralGrey};
-  padding: ${(props) => props.theme.spacing.small};
-  margin-top: ${(props) => props.theme.spacing.xsmall};
-  margin-bottom: ${(props) => props.theme.spacing.xsmall};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  direction: rtl;
-`;
 
 const Container = styled.div<{ isOpen: boolean }>`
   background: ${(props) => props.theme.colors.background.default};
