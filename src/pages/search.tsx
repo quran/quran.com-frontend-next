@@ -15,6 +15,7 @@ import LanguagesFilter from 'src/components/Search/LanguagesFilter';
 import SearchResultItem from 'src/components/Search/SearchResultItem';
 import AvailableTranslation from 'types/AvailableTranslation';
 import AvailableLanguage from 'types/AvailableLanguage';
+import NextSeoHead from 'src/components/NextSeoHead';
 import IconClose from '../../public/icons/close.svg';
 
 const PAGE_SIZE = 20;
@@ -154,59 +155,63 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   }, []);
 
   return (
-    <StyledPage>
-      <PageHeader>Search</PageHeader>
-      <SearchInputContainer isRTLInput={isRTLInput}>
-        <SearchInput
-          ref={searchInputRef}
-          dir="auto"
-          placeholder="Search"
-          onChange={onSearchQueryChange}
-          value={searchQuery}
-          disabled={isSearching}
-        />
-        {searchQuery && (
-          <Button icon={<IconClose />} size={ButtonSize.XSmall} onClick={onClearClicked} />
-        )}
-      </SearchInputContainer>
-      <PageBody>
-        <FiltersContainer>
-          <BoldHeader>Filters</BoldHeader>
-          <LanguagesFilter
-            languages={languages}
-            selectedLanguage={selectedLanguage}
-            onLanguageChange={onLanguageChange}
+    <>
+      <NextSeoHead title={debouncedSearchQuery} />
+      <StyledPage>
+        <PageHeader>Search</PageHeader>
+        <SearchInputContainer isRTLInput={isRTLInput}>
+          <SearchInput
+            ref={searchInputRef}
+            dir="auto"
+            placeholder="Search"
+            onChange={onSearchQueryChange}
+            value={searchQuery}
+            disabled={isSearching}
           />
-          <TranslationsFilter
-            translations={translations}
-            selectedTranslation={selectedTranslation}
-            onTranslationChange={onTranslationChange}
-          />
-        </FiltersContainer>
-        <BodyContainer>
-          {isSearching && <div>Searching...</div>}
-          {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
-          {!isSearching && !hasError && searchResult && (
-            <div>
-              <BoldHeader>Results</BoldHeader>
-              {searchResult.search.results.map((result) => (
-                <SearchResultItem key={result.verseId} result={result} />
-              ))}
-              <PaginationContainer>
-                {debouncedSearchQuery && (
-                  <Pagination
-                    currentPage={currentPage}
-                    totalCount={searchResult.search.totalResults}
-                    onPageChange={onPageChange}
-                    pageSize={PAGE_SIZE}
-                  />
-                )}
-              </PaginationContainer>
-            </div>
+          {searchQuery && (
+            <Button icon={<IconClose />} size={ButtonSize.XSmall} onClick={onClearClicked} />
           )}
-        </BodyContainer>
-      </PageBody>
-    </StyledPage>
+        </SearchInputContainer>
+        <PageBody>
+          <FiltersContainer>
+            <BoldHeader>Filters</BoldHeader>
+            <LanguagesFilter
+              languages={languages}
+              selectedLanguage={selectedLanguage}
+              onLanguageChange={onLanguageChange}
+            />
+            <TranslationsFilter
+              translations={translations}
+              selectedTranslation={selectedTranslation}
+              onTranslationChange={onTranslationChange}
+            />
+          </FiltersContainer>
+          <BodyContainer>
+            {isSearching && <div>Searching...</div>}
+            {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
+            {!isSearching && !hasError && searchResult && (
+              <div>
+                <BoldHeader>Results</BoldHeader>
+                {searchResult.search.results.length === 0 && <p>No results found!</p>}
+                {searchResult.search.results.map((result) => (
+                  <SearchResultItem key={result.verseId} result={result} />
+                ))}
+                <PaginationContainer>
+                  {debouncedSearchQuery && (
+                    <Pagination
+                      currentPage={currentPage}
+                      totalCount={searchResult.search.totalResults}
+                      onPageChange={onPageChange}
+                      pageSize={PAGE_SIZE}
+                    />
+                  )}
+                </PaginationContainer>
+              </div>
+            )}
+          </BodyContainer>
+        </PageBody>
+      </StyledPage>
+    </>
   );
 };
 

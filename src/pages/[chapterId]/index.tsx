@@ -3,6 +3,7 @@ import Error from 'next/error';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
+import NextSeoHead from 'src/components/NextSeoHead';
 import { isValidChapterId } from '../../utils/validator';
 import { getChapter, getChapterVerses } from '../../api';
 import QuranReader from '../../components/QuranReader';
@@ -18,7 +19,14 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  return <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />;
+  return (
+    <>
+      <NextSeoHead
+        title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
+      />
+      <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
