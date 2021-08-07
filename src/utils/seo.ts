@@ -68,6 +68,10 @@ export function createSEOConfig({
         name: 'theme-color',
         content: theme.colors.primary.medium,
       },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+      },
     ],
   }; // defaultImageHeight: 500, // defaultImageWidth: 500,
 }
