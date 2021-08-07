@@ -1,0 +1,144 @@
+{
+    "extends": [
+        "airbnb",
+        "airbnb/hooks",
+        "plugin:import/typescript",
+        "prettier",
+        "prettier/react"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+        "prettier"
+    ],
+    "rules": {
+        "react/jsx-filename-extension": 0,
+        "react/jsx-props-no-spreading": 0,
+        "import/extensions": [
+            2,
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "prettier/prettier": [
+            2,
+            {
+                "arrowParens": "always",
+                "bracketSpacing": true,
+                "jsxBracketSameLine": false,
+                "printWidth": 100,
+                "proseWrap": "always",
+                "requirePragma": false,
+                "semi": true,
+                "singleQuote": true,
+                "tabWidth": 2,
+                "trailingComma": "all",
+                "useTabs": false
+            }
+        ]
+    },
+    "overrides": [{
+        "extends": [
+            "plugin:@typescript-eslint/recommended",
+            "prettier/@typescript-eslint"
+        ],
+        "files": [
+            "*.ts",
+            "*.tsx"
+        ],
+        "rules": {
+            "@typescript-eslint/no-unused-vars": 2,
+            "@typescript-eslint/explicit-module-boundary-types": "off",
+            "react/require-default-props": "off",
+            "jsx-a11y/media-has-caption": "off",
+            "no-param-reassign": [
+                "error",
+                {
+                    "props": true,
+                    "ignorePropertyModificationsFor": [
+                        "draft"
+                    ]
+                }
+            ],
+            "react/forbid-prop-types": 0,
+            "react/jsx-no-undef": 0,
+            "react/no-unused-prop-types": 0,
+            "react/prop-types": 0,
+            "react/react-in-jsx-scope": 0,
+            "import/no-extraneous-dependencies": [
+                "error",
+                {
+                    "devDependencies": [
+                        "**/*.test.ts",
+                        "**/*.test.tsx",
+                        "tests/**/*"
+                    ]
+                }
+            ],
+            "@typescript-eslint/ban-ts-comment": 0,
+            "jsx-a11y/anchor-is-valid": [
+                "error",
+                {
+                    "components": [
+                        "Link"
+                    ],
+                    "specialLink": [
+                        "hrefLeft",
+                        "hrefRight"
+                    ],
+                    "aspects": [
+                        "invalidHref",
+                        "preferButton"
+                    ]
+                }
+            ],
+            "@typescript-eslint/naming-convention": [
+                2,
+                {
+                    "selector": "variableLike",
+                    "format": [
+                        "camelCase",
+                        "UPPER_CASE",
+                        "PascalCase"
+                    ]
+                },
+                {
+                    "selector": "memberLike",
+                    "filter": {
+                        "regex": "^__",
+                        "match": false
+                    },
+                    "format": [
+                        "camelCase",
+                        "UPPER_CASE",
+                        "PascalCase"
+                    ]
+                },
+                {
+                    "selector": "typeLike",
+                    "format": [
+                        "PascalCase"
+                    ]
+                }
+            ]
+        }
+    }],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": [
+                    "."
+                ],
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx",
+                    ".d.ts",
+                    ".svg"
+                ]
+            }
+        }
+    }
+}
