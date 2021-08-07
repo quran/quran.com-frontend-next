@@ -1,4 +1,5 @@
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import Error from 'next/error';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
@@ -18,7 +19,14 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  return <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />;
+  return (
+    <>
+      <NextSeo
+        title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
+      />
+      <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

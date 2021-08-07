@@ -1,5 +1,7 @@
 import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { getChapter, getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
@@ -13,10 +15,18 @@ type VerseProps = {
 };
 
 const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError }) => {
+  const {
+    query: { verseId },
+  } = useRouter();
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  return <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />;
+  return (
+    <>
+      <NextSeo title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
+      <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
