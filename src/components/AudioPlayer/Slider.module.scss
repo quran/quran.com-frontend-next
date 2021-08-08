@@ -1,0 +1,47 @@
+@import "src/styles/breakpoints";
+@import "src/styles/constants";
+
+.container {
+  text-align: left;
+  margin-top: var(--spacing-small);
+  @include tablet {
+    text-align: inherit;
+    margin-top: var(--spacing-medium)
+  }
+}
+
+.splitsContainer {
+    display: inline-block;
+    position: fixed;
+    bottom: $audio-player-expanded-height;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: calc(1.25 * var(--spacing-xxsmall));
+
+    @include tablet {
+      width: 70%;
+      position: inherit;
+      bottom: inherit;
+      margin-left: var(--spacing-medium);
+      margin-right: var(--spacing-medium);
+  }
+}
+
+.split {
+  height: 2px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: calc(1.5 * var(--spacing-micro));
+  background-color: var(--colors-secondary-medium);
+}
+
+.splitCompleted {
+  background-color: var(--colors-primary-medium);
+}
+
+.reciterNameContainer{
+  @include tablet {
+    display: none;
+  }
+}

@@ -1,0 +1,71 @@
+@import "src/styles/breakpoints";
+@import "src/styles/constants";
+@import "src/styles/utility";
+
+.container {
+  position: fixed;
+  opacity: 1;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  background: var(--colors-background-neutral-grey);
+  transition: var(--transitions-regular);
+  z-index: var(--z-indexes-sticky);
+}
+
+.containerHidden {
+  height: 0;
+  opacity: 0;
+}
+
+.containerMinimized {
+  height: $audio-player-minized-height;
+}
+
+.containerExpanded {
+  height: $audio-player-expanded-height;
+}
+
+.innerContainer {
+  @include center-horizontally;
+  display: flex;
+  padding-left: var(--spacing-xsmall);
+  padding-right: var(--spacing-xsmall);
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  @include tablet {  
+    flex-direction: inherit;
+    justify-content: center;
+  }
+}
+
+.actionButtonsContainer {
+  margin-top: var(--spacing-micro);
+  display: flex;
+  flex-direction: row-reverse;
+
+  @include tablet {
+    flex-direction: inherit;
+  }
+}
+
+.seekBackwardsContainer {
+  display: none;
+
+  @include tablet {
+    display: inherit;
+  }
+}
+
+.placeholderRightSection {
+  display: none;
+  @include tablet {
+    display: inherit;
+  }
+}
+
+.sliderContainer {
+  width: 70%;
+}
+
+

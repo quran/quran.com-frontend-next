@@ -1,9 +1,8 @@
 import React from 'react';
 import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
-import styled from 'styled-components';
-import { AUDIO_PLAYER_EXPANDED_HEIGHT } from 'src/styles/constants';
-import { MobileOnly } from 'src/styles/utility';
+import classNames from 'classnames';
+import styles from './Slider.module.scss';
 
 const NUMBER_OF_SPLITS = 100;
 
@@ -36,14 +35,14 @@ const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
   });
 
   return (
-    <StyledContainer>
+    <div className={styles.container}>
       {/* {secondsFormatter(currentTime)} */}
-      <StyledSplitsContainer>{splits}</StyledSplitsContainer>
-      <MobileOnly>
+      <div className={styles.splitsContainer}>{splits}</div>
+      <div className={styles.reciterNameContainer}>
         Mishary Al - Affasy <br />
-      </MobileOnly>
+      </div>
       {secondsFormatter(remainingTime)}
-    </StyledContainer>
+    </div>
   );
 };
 
@@ -55,47 +54,14 @@ type SplitProps = {
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => {
   return (
-    <StyledSplit
-      isComplete={isComplete}
+    /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+    <span
+      className={classNames(styles.split, { [styles.splitCompleted]: isComplete })}
       title={secondsFormatter(startTime)}
       onClick={() => onClick()}
+      style={{ width: `${100 / NUMBER_OF_SPLITS}%` }}
     />
   );
 };
-
-const StyledContainer = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.medium};
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    text-align: left;
-    margin-top: ${({ theme }) => theme.spacing.xsmall};
-  }
-`;
-
-const StyledSplitsContainer = styled.div`
-  display: inline-block;
-  width: 70%;
-  margin-left: ${({ theme }) => theme.spacing.medium};
-  margin-right: ${({ theme }) => theme.spacing.medium};
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    position: fixed;
-    bottom: ${AUDIO_PLAYER_EXPANDED_HEIGHT};
-    left: 0;
-    width: 100%;
-    margin: 0;
-    height: calc(1.25 * ${({ theme }) => theme.spacing.xxsmall});
-    /* display: none; */
-  }
-`;
-
-const StyledSplit = styled.span<{ isComplete: boolean }>`
-  height: 2px;
-  width: ${100 / NUMBER_OF_SPLITS}%;
-  cursor: pointer;
-  display: inline-block;
-  margin-bottom: calc(1.5 * ${({ theme }) => theme.spacing.micro});
-  background-color: ${({ isComplete, theme }) =>
-    isComplete ? theme.colors.primary.medium : theme.colors.secondary.medium};
-`;
 
 export default Slider;

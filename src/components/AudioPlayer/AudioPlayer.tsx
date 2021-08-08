@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import styled from 'styled-components';
+
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
-import { AUDIO_PLAYER_EXPANDED_HEIGHT, AUDIO_PLAYER_MINIZED_HEIGHT } from 'src/styles/constants';
-import { CENTER_HORIZONTALLY, DesktopOnly } from 'src/styles/utility';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -19,6 +18,7 @@ import Button, { ButtonSize } from '../dls/Button/Button';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
+import styles from './AudioPlayer.module.scss';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -110,8 +110,14 @@ const AudioPlayer = () => {
     [setTime],
   );
   return (
-    <StyledContainer isHidden={isHidden} isMinimized={isMinimized} isExpanded={isExpanded}>
-      <StyledInnerContainer>
+    <div
+      className={classNames(styles.container, {
+        [styles.containerHidden]: isHidden,
+        [styles.containerMinimized]: isMinimized,
+        [styles.containerExpanded]: isExpanded,
+      })}
+    >
+      <div className={styles.innerContainer}>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           src="https://server12.mp3quran.net/tnjy/004.mp3"
@@ -131,7 +137,7 @@ const AudioPlayer = () => {
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <ActionButtonsContainers>
+        <div className={styles.actionButtonsContainer}>
           {isPlaying ? (
             // Pause
             <Button
@@ -151,63 +157,18 @@ const AudioPlayer = () => {
               }}
             />
           )}
-          <DesktopOnly>
+          <div className={styles.seekBackwardsContainer}>
             <Button icon={<MinusTenIcon />} size={ButtonSize.Medium} onClick={() => seek(-10)} />
-          </DesktopOnly>
-        </ActionButtonsContainers>
-        <SliderContainer>
+          </div>
+        </div>
+        <div className={styles.sliderContainer}>
           <Slider currentTime={currentTime} audioDuration={audioDuration} setTime={setTime} />
-        </SliderContainer>
-        <DesktopOnly>
-          {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
-          <div />
-        </DesktopOnly>
-      </StyledInnerContainer>
-    </StyledContainer>
+        </div>
+        {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
+        <div className={styles.placeholderRightSection} />
+      </div>
+    </div>
   );
 };
-
-const StyledContainer = styled.div<{
-  isHidden: boolean;
-  isMinimized: boolean;
-  isExpanded: boolean;
-}>`
-  position: fixed;
-  ${(props) => props.isHidden && `height: 0;`}
-  ${(props) => props.isMinimized && `height: ${AUDIO_PLAYER_MINIZED_HEIGHT};`}
-  ${(props) => props.isExpanded && `height: ${AUDIO_PLAYER_EXPANDED_HEIGHT};`}
-  opacity: ${(props) => (props.isHidden ? 0 : 1)};
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-  background: ${({ theme }) => theme.colors.background.neutralGrey};
-  transition: ${(props) => props.theme.transitions.regular};
-  z-index: ${(props) => props.theme.zIndexes.sticky};
-`;
-
-const StyledInnerContainer = styled.div`
-  ${CENTER_HORIZONTALLY}
-  display: flex;
-  justify-content: center;
-  padding-left: ${({ theme }) => theme.spacing.xsmall};
-  padding-right: ${({ theme }) => theme.spacing.xsmall};
-
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  }
-`;
-
-const ActionButtonsContainers = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.micro};
-  display: flex;
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    flex-direction: row-reverse;
-  }
-`;
-
-const SliderContainer = styled.div`
-  width: 70%;
-`;
 
 export default AudioPlayer;
