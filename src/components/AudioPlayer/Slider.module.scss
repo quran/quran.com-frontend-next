@@ -4,7 +4,7 @@
 .container {
   text-align: left;
   margin-top: var(--spacing-small);
-  @include tablet {
+  @include breakpoints.tablet {
     text-align: inherit;
     margin-top: var(--spacing-medium)
   }
@@ -13,13 +13,13 @@
 .splitsContainer {
     display: inline-block;
     position: fixed;
-    bottom: $audio-player-expanded-height;
+    bottom: constants.$audio-player-expanded-height;
     left: 0;
     margin: 0;
     width: 100%;
     height: calc(1.25 * var(--spacing-xxsmall));
 
-    @include tablet {
+    @include breakpoints.tablet {
       width: 70%;
       position: inherit;
       bottom: inherit;
@@ -41,7 +41,7 @@
 }
 
 .reciterNameContainer{
-  @include tablet {
+  @include breakpoints.tablet {
     display: none;
   }
 }
