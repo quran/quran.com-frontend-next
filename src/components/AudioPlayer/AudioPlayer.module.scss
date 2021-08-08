@@ -1,6 +1,6 @@
-@import "src/styles/breakpoints";
-@import "src/styles/constants";
-@import "src/styles/utility";
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+@use "src/styles/utility";
 
 .container {
   position: fixed;

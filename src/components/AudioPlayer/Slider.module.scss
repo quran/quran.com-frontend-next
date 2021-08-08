@@ -1,5 +1,5 @@
-@import "src/styles/breakpoints";
-@import "src/styles/constants";
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
 
 .container {
   text-align: left;
