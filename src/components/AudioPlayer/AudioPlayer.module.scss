@@ -1,6 +1,6 @@
-@import "src/styles/breakpoints";
-@import "src/styles/constants";
-@import "src/styles/utility";
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+@use "src/styles/utility";
 
 .container {
   position: fixed;
@@ -19,21 +19,21 @@
 }
 
 .containerMinimized {
-  height: $audio-player-minized-height;
+  height: constants.$audio-player-minized-height;
 }
 
 .containerExpanded {
-  height: $audio-player-expanded-height;
+  height: constants.$audio-player-expanded-height;
 }
 
 .innerContainer {
-  @include center-horizontally;
+  @include utility.center-horizontally;
   display: flex;
   padding-left: var(--spacing-xsmall);
   padding-right: var(--spacing-xsmall);
   flex-direction: row-reverse;
   justify-content: space-between;
-  @include tablet {  
+  @include breakpoints.tablet {  
     flex-direction: inherit;
     justify-content: center;
   }
@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: row-reverse;
 
-  @include tablet {
+  @include breakpoints.tablet {
     flex-direction: inherit;
   }
 }
@@ -52,14 +52,14 @@
 .seekBackwardsContainer {
   display: none;
 
-  @include tablet {
+  @include breakpoints.tablet {
     display: inherit;
   }
 }
 
 .placeholderRightSection {
   display: none;
-  @include tablet {
+  @include breakpoints.tablet {
     display: inherit;
   }
 }
