@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { getAvailableTranslations } from 'src/api';
 import AvailableTranslation from 'types/AvailableTranslation';
 import useTranslation from 'next-translate/useTranslation';
@@ -9,7 +8,7 @@ import {
   setSelectedTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
-
+import styles from './translationsAdjustment.module.scss';
 /**
  * Convert an array of numbers to an array of strings.
  *
@@ -66,7 +65,10 @@ const TranslationsAdjustment = () => {
         <p>{isExpanded ? 'Hide' : 'Show'} Translations</p>
       </button>
       {isExpanded && (
-        <StyledSelect
+        <select
+          name="translations"
+          multiple
+          className={styles.styledSelect}
           onChange={onSelectedTranslationsChange}
           defaultValue={numbersToStringsArray(selectedTranslations)}
         >
@@ -75,19 +77,10 @@ const TranslationsAdjustment = () => {
               {translation.translatedName.name}
             </option>
           ))}
-        </StyledSelect>
+        </select>
       )}
     </div>
   );
 };
-
-const StyledSelect = styled.select.attrs({
-  name: 'translations',
-  multiple: true,
-})`
-  background-color: white;
-  width: 100%;
-  height: calc(5 * ${(props) => props.theme.spacing.mega});
-`;
 
 export default TranslationsAdjustment;
