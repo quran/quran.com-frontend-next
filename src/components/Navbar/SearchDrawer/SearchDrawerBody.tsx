@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import Link from 'next/link';
 import SearchResultItem from 'src/components/Search/SearchResultItem';
-import { NAVBAR_HEIGHT } from 'src/styles/constants';
 import { SearchResponse } from 'types/APIResponses';
+import styles from './searchDrawerBody.module.scss';
 
 interface Props {
   isSearching: boolean;
@@ -19,7 +18,7 @@ const SearchDrawerBody: React.FC<Props> = ({
   searchQuery,
 }) => {
   return (
-    <Container>
+    <div className={styles.container}>
       {isSearching && <div>Searching...</div>}
       {!isSearching && hasError && <div>Something went wrong!</div>}
       {!isSearching && !hasError && searchResult && (
@@ -28,7 +27,7 @@ const SearchDrawerBody: React.FC<Props> = ({
           {searchResult.search.results.map((result) => (
             <SearchResultItem key={result.verseId} result={result} />
           ))}
-          <ResultSummaryContainer>
+          <div className={styles.resultsSummaryContainer}>
             <p>{searchResult.search.totalResults} results</p>
             {searchResult.search.totalResults > 0 && (
               <Link href={`/search?query=${searchQuery}`} passHref>
@@ -37,23 +36,11 @@ const SearchDrawerBody: React.FC<Props> = ({
                 </a>
               </Link>
             )}
-          </ResultSummaryContainer>
+          </div>
         </div>
       )}
-    </Container>
+    </div>
   );
 };
-
-const ResultSummaryContainer = styled.div`
-  margin-top: ${(props) => props.theme.spacing.medium};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Container = styled.div`
-  margin-top: ${NAVBAR_HEIGHT};
-  padding: ${(props) => props.theme.spacing.medium};
-`;
 
 export default SearchDrawerBody;
