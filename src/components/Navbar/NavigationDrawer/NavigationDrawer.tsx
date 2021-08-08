@@ -2,11 +2,9 @@ import React, { useCallback, useEffect } from 'react';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { NAVBAR_HEIGHT, SIDE_MENU_DESKTOP_WIDTH } from 'src/styles/constants';
-import { CenterVertically, CENTER_VERTICALLY } from 'src/styles/utility';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import classNames from 'classnames';
 import IconClose from '../../../../public/icons/close.svg';
 import IconHome from '../../../../public/icons/home.svg';
 import IconCollection from '../../../../public/icons/collection.svg';
@@ -18,7 +16,7 @@ import IconDonate from '../../../../public/icons/donate.svg';
 import IconLock from '../../../../public/icons/lock.svg';
 import IconFeedback from '../../../../public/icons/feedback.svg';
 import IconRadio2 from '../../../../public/icons/radio-2.svg';
-
+import styles from './navigationDrawer.module.scss';
 import LanguageSelector from '../LanguageSelector';
 import NavigationDrawerItem from './NavigationDrawerItem';
 import MobileApps from './MobileApps';
@@ -42,26 +40,26 @@ const NavigationDrawer = () => {
   }, [closeNavigationDrawer, router.events, isOpen]);
 
   return (
-    <Container isOpen={isOpen}>
-      <Header>
-        <CenterVertically>
-          <LeftCTA>
+    <div className={classNames(styles.container, { [styles.containerOpen]: isOpen })}>
+      <div className={styles.header}>
+        <div className={styles.centerVertically}>
+          <div className={styles.leftCTA}>
             <Link href="/">
               <a>
                 <Button icon={<IconQ />} size={ButtonSize.Small} />
               </a>
             </Link>
             <LanguageSelector />
-          </LeftCTA>
-        </CenterVertically>
-        <CenterVertically>
-          <RightCTA>
+          </div>
+        </div>
+        <div className={styles.centerVertically}>
+          <div className={styles.rightCTA}>
             <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeNavigationDrawer} />
-          </RightCTA>
-        </CenterVertically>
-      </Header>
-      <ListItemsContainer>
-        <SubTitle>Menu</SubTitle>
+          </div>
+        </div>
+      </div>
+      <div className={styles.listItemsContainer}>
+        <h3 className={styles.subtitle}>Menu</h3>
         <NavigationDrawerItem title="Home" icon={<IconHome />} href="/" />
         <NavigationDrawerItem title="About us" icon={<IconInfo />} href="/about" />
         <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" />
@@ -70,12 +68,12 @@ const NavigationDrawer = () => {
         <NavigationDrawerItem title="Privacy" icon={<IconLock />} href="/privacy" />
         <NavigationDrawerItem title="Help & Feedback" icon={<IconFeedback />} href="/help" />
         <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} />
-        <SubTitle>Selected Collections</SubTitle>
+        <h3 className={styles.subtitle}>Selected Collections</h3>
         <NavigationDrawerItem title="Duaas" icon={<IconCollection />} />
         <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} />
         <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} />
         <NavigationDrawerItem title="Revelation" icon={<IconCollection />} />
-        <SubTitle>Network</SubTitle>
+        <h3 className={styles.subtitle}>Network</h3>
         <NavigationDrawerItem
           title="Quranicaudio.com"
           icon={<IconQ />}
@@ -107,73 +105,9 @@ const NavigationDrawer = () => {
           isExternalLink
         />
         <MobileApps />
-      </ListItemsContainer>
-    </Container>
+      </div>
+    </div>
   );
 };
 
-const Container = styled.div<{ isOpen: boolean }>`
-  background: ${(props) => props.theme.colors.background.default};
-  position: fixed;
-  height: 100vh;
-  width: 100%;
-  left: ${(props) => (props.isOpen ? 0 : '-100%')};
-  top: 0;
-  bottom: 0;
-  z-index: ${(props) => props.theme.zIndexes.header};
-
-  transition: ${(props) => props.theme.transitions.regular};
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior-y: contain;
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    width: ${SIDE_MENU_DESKTOP_WIDTH};
-    left: ${(props) => (props.isOpen ? 0 : `-${SIDE_MENU_DESKTOP_WIDTH}`)};
-  }
-`;
-
-const Header = styled.div`
-  height: ${NAVBAR_HEIGHT};
-  border-bottom: 1px ${(props) => props.theme.colors.borders.hairline} solid;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const LeftCTA = styled.div`
-  display: flex;
-  margin-left: ${(props) => props.theme.spacing.xsmall};
-`;
-const RightCTA = styled.div`
-  display: flex;
-  margin-right: ${(props) => props.theme.spacing.medium};
-
-  > button {
-    margin-left: ${(props) => props.theme.spacing.micro};
-  }
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    margin-right: ${(props) => `calc(1*${props.theme.spacing.mega})`};
-
-    > button {
-      margin-left: ${(props) => props.theme.spacing.xsmall};
-    }
-  }
-`;
-
-const ListItemsContainer = styled.div`
-  padding-left: ${(props) => props.theme.spacing.medium};
-  padding-right: ${(props) => props.theme.spacing.medium};
-`;
-
-const SubTitle = styled.h3`
-  ${CENTER_VERTICALLY}
-  font-size: ${(props) => props.theme.fontSizes.large};
-  text-transform: uppercase;
-  font-weight: ${(props) => props.theme.fontWeights.bold};
-  border-bottom: 1px ${(props) => props.theme.colors.borders.hairline} solid;
-  min-height: calc(${(props) => `${props.theme.spacing.mega} + ${props.theme.spacing.small}`});
-`;
 export default NavigationDrawer;
