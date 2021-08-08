@@ -8,10 +8,10 @@
 .overlay {
     position: absolute;
     border-radius: 3%;
-    background: var(--colors-background-neutral-grey);
-    transition: var(--transitions-fast);
-    z-index: var(--z-indexes-dropdown);
-    border: 1px solid var(--colors-primary-medium);
+    background: var(--color-background-neutral-grey);
+    transition: var(--transition-fast);
+    z-index: var(--z-index-dropdown);
+    border: 1px solid var(--color-primary-medium);
     opacity: 0;
     visibility: hidden;
     padding: var(--spacing-micro);

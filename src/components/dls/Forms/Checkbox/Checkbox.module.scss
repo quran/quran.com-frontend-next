@@ -30,27 +30,27 @@
 }
 
 .disabledLabelText {
-    color: var(--colors-secondary-medium);
+    color: var(--color-secondary-medium);
 }
 .labelText {
-    transition: var(--transitions-fast);
+    transition: var(--transition-fast);
 }
 
 .smallLabelText {
-    font-size: var(--font-sizes-small);
+    font-size: var(--font-size-small);
 }
 
 .mediumLabelText {
-    font-size: calc(2 * var(--font-sizes-small));
+    font-size: calc(2 * var(--font-size-small));
 }
 
 .largeLabelText {
-    font-size: calc(3 * var(--font-sizes-small));
+    font-size: calc(3 * var(--font-size-small));
 }
 
 .iconContainer {
-    transition: var(--transitions-fast);
-    border: 1px solid var(--colors-borders-hairline);
+    transition: var(--transition-fast);
+    border: 1px solid var(--color-borders-hairline);
     > svg {
         visibility: visible;
         display: block;
@@ -65,11 +65,11 @@
 }
 
 .inActiveIconContainer {
-    background: var(--colors-background-neutral-grey);
+    background: var(--color-background-neutral-grey);
 }
 
 .activeIconContainer {
-    background: var(--colors-text-default);
+    background: var(--color-text-default);
 }
 
 .smallIconContainer {
