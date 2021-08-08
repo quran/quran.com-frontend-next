@@ -45,7 +45,8 @@
         ],
         "files": [
             "*.ts",
-            "*.tsx"
+            "*.tsx",
+            "*.scss"
         ],
         "rules": {
             "@typescript-eslint/no-unused-vars": 2,

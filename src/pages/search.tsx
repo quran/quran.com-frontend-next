@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { GetStaticProps, NextPage } from 'next';
-import styled from 'styled-components';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
@@ -17,6 +17,7 @@ import AvailableTranslation from 'types/AvailableTranslation';
 import AvailableLanguage from 'types/AvailableLanguage';
 import NextSeoHead from 'src/components/NextSeoHead';
 import IconClose from '../../public/icons/close.svg';
+import styles from './search.module.scss';
 
 const PAGE_SIZE = 20;
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -157,10 +158,16 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   return (
     <>
       <NextSeoHead title={debouncedSearchQuery} />
-      <StyledPage>
-        <PageHeader>Search</PageHeader>
-        <SearchInputContainer isRTLInput={isRTLInput}>
-          <SearchInput
+      <div className={styles.pageContainer}>
+        <p className={styles.header}>Search</p>
+        <div
+          className={classNames(styles.searchInputContainer, {
+            [styles.rtlFlexDirection]: isRTLInput,
+          })}
+        >
+          <input
+            className={styles.searchInput}
+            type="text"
             ref={searchInputRef}
             dir="auto"
             placeholder="Search"
@@ -171,10 +178,10 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
           {searchQuery && (
             <Button icon={<IconClose />} size={ButtonSize.XSmall} onClick={onClearClicked} />
           )}
-        </SearchInputContainer>
-        <PageBody>
-          <FiltersContainer>
-            <BoldHeader>Filters</BoldHeader>
+        </div>
+        <div className={styles.pageBody}>
+          <div className={styles.filtersContainer}>
+            <p className={styles.boldHeader}>Filters</p>
             <LanguagesFilter
               languages={languages}
               selectedLanguage={selectedLanguage}
@@ -185,18 +192,18 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
               selectedTranslation={selectedTranslation}
               onTranslationChange={onTranslationChange}
             />
-          </FiltersContainer>
-          <BodyContainer>
+          </div>
+          <div className={styles.bodyContainer}>
             {isSearching && <div>Searching...</div>}
             {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
             {!isSearching && !hasError && searchResult && (
               <div>
-                <BoldHeader>Results</BoldHeader>
+                <p className={styles.boldHeader}>Results</p>
                 {searchResult.search.results.length === 0 && <p>No results found!</p>}
                 {searchResult.search.results.map((result) => (
                   <SearchResultItem key={result.verseId} result={result} />
                 ))}
-                <PaginationContainer>
+                <div className={styles.paginationContainer}>
                   {debouncedSearchQuery && (
                     <Pagination
                       currentPage={currentPage}
@@ -205,96 +212,15 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
                       pageSize={PAGE_SIZE}
                     />
                   )}
-                </PaginationContainer>
+                </div>
               </div>
             )}
-          </BodyContainer>
-        </PageBody>
-      </StyledPage>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
-
-const PaginationContainer = styled.div`
-  min-height: calc(2 * ${({ theme }) => theme.spacing.mega});
-`;
-
-const BodyContainer = styled.div`
-  width: 70%;
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    width: auto;
-  }
-`;
-
-const BoldHeader = styled.p`
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  margin-bottom: ${({ theme }) => theme.spacing.small};
-`;
-
-const FiltersContainer = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.borders.hairline};
-  border-radius: ${({ theme }) => theme.borderRadiuses.default};
-  background-color: ${({ theme }) => theme.colors.background.neutralGrey};
-  min-height: ${({ theme }) => `calc(6*${theme.spacing.mega})`};
-  margin-right: ${({ theme }) => theme.spacing.xsmall};
-  width: 30%;
-  padding: ${({ theme }) => theme.spacing.small};
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    width: auto;
-    margin: ${({ theme }) => theme.spacing.xsmall} 0;
-  }
-`;
-
-const PageHeader = styled.p`
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  margin: ${({ theme }) => theme.spacing.medium} 0;
-  font-size: ${({ theme }) => theme.fontSizes.jumbo};
-`;
-
-const SearchInputContainer = styled.div<{ isRTLInput: boolean }>`
-  border: 1px solid ${({ theme }) => theme.colors.borders.hairline};
-  border-radius: ${({ theme }) => theme.borderRadiuses.pill};
-  padding: ${({ theme }) => theme.spacing.xxsmall};
-  display: flex;
-  flex-direction: ${({ isRTLInput }) => (isRTLInput ? 'row-reverse' : 'row')};
-  align-items: center;
-  justify-content: space-between;
-  height: ${({ theme }) => theme.spacing.large};
-  margin: ${({ theme }) => theme.spacing.medium} 0;
-`;
-
-const SearchInput = styled.input.attrs({
-  type: 'text',
-})`
-  border: 0;
-  width: 90%;
-  font-size: ${({ theme }) => theme.fontSizes.large};
-  &:focus {
-    outline: none;
-  }
-  &:disabled {
-    background: none;
-  }
-`;
-
-const StyledPage = styled.div`
-  padding-top: calc(2 * ${({ theme }) => theme.spacing.mega});
-  width: 70%;
-  margin: 0 auto;
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    width: 90%;
-  }
-`;
-
-const PageBody = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  @media only screen and (max-width: ${({ theme }) => theme.breakpoints.mobileL}) {
-    display: block;
-  }
-`;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([

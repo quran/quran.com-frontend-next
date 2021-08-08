@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 import range from 'lodash/range';
+import classNames from 'classnames';
 import Button, { ButtonSize } from '../Button/Button';
 import NextIcon from '../../../../public/icons/caret-forward.svg';
 import PreviousIcon from '../../../../public/icons/caret-back.svg';
+import styles from './Pagination.module.scss';
 
 interface Props {
   currentPage: number;
@@ -84,38 +85,43 @@ const Pagination: React.FC<Props> = ({
 
   const showingUntilItem = currentPage * pageSize;
   return (
-    <PaginationContainer>
-      <ButtonContainer isSelected={false}>
+    <div className={styles.container}>
+      <div className={styles.buttonContainer}>
         <Button
           disabled={currentPage === 1}
           size={ButtonSize.Small}
           icon={<PreviousIcon />}
           onClick={onPrevious}
         />
-      </ButtonContainer>
+      </div>
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
           return <div>{DOTS}</div>;
         }
 
         return (
-          <ButtonContainer isSelected={pageNumber === currentPage} key={pageNumber}>
+          <div
+            className={classNames(styles.buttonContainer, {
+              [styles.selectedButton]: pageNumber === currentPage,
+            })}
+            key={pageNumber}
+          >
             <Button
               size={ButtonSize.Small}
               text={pageNumber.toString()}
               onClick={() => onPageChange(pageNumber as number)}
             />
-          </ButtonContainer>
+          </div>
         );
       })}
-      <ButtonContainer isSelected={false}>
+      <div className={styles.buttonContainer}>
         <Button
           disabled={currentPage === paginationRange[paginationRange.length - 1]}
           size={ButtonSize.Small}
           icon={<NextIcon />}
           onClick={onNext}
         />
-      </ButtonContainer>
+      </div>
       {showSummary && (
         <p>
           {showingUntilItem - (pageSize - 1)}-
@@ -123,22 +129,8 @@ const Pagination: React.FC<Props> = ({
           RESULTS
         </p>
       )}
-    </PaginationContainer>
+    </div>
   );
 };
-
-const ButtonContainer = styled.div<{ isSelected: boolean }>`
-  margin: ${({ theme }) => theme.spacing.micro};
-  ${({ isSelected, theme }) =>
-    isSelected &&
-    `background: ${theme.colors.background.fadedGreyScale}; border-radius: ${theme.borderRadiuses.circle};`}
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
 
 export default Pagination;

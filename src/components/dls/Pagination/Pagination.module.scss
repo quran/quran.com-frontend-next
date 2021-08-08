@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.buttonContainer {
+    margin: var(--spacing-micro);
+}
+
+.selectedButton {
+    background: var(--colors-background-faded-grey-scale);
+    border-radius: var(--border-radiuses-circle);
+}

@@ -12,6 +12,7 @@
     "build-storybook": "build-storybook",
     "lint": "eslint . --ext=tsx,ts,js,jsx",
     "lint:fix": "yarn lint --fix",
+    "lint:scss": "yarn stylelint '**/*.scss'",
     "generate-sitemap": "node sitemap-generator.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
+    "classnames": "^2.3.1",
     "clipboard-copy": "^4.0.1",
     "humps": "^2.0.1",
     "lodash": "^4.17.19",
@@ -44,6 +46,7 @@
     "react-scroll": "^1.7.16",
     "react-use": "^13.27.0",
     "redux-persist": "^6.0.0",
+    "sass": "^1.37.5",
     "storybook-styled-components": "^1.1.4",
     "styled-components": "^5.0.1",
     "styled-system": "^5.1.5",
@@ -101,6 +104,8 @@
     "react-docgen-typescript-loader": "^3.7.2",
     "react-test-renderer": "^16.13.1",
     "storybook-addon-styled-component-theme": "^2.0.0",
+    "stylelint": "^13.13.1",
+    "stylelint-scss": "^3.20.1",
     "ts-loader": "^7.0.2",
     "typescript": "^4.3.2"
   },
@@ -110,6 +115,7 @@
     }
   },
   "lint-staged": {
-    "*.{tsx,ts}": "yarn lint:fix"
+    "*.{tsx,ts}": "yarn lint:fix",
+    "*.scss": "yarn lint:scss"
   }
 }

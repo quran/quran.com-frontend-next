@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
-import styled from 'styled-components';
 import AvailableLanguage from 'types/AvailableLanguage';
 import SearchDropdown from '../dls/Forms/SearchDropdown/SearchDropdown';
+import styles from './Filter.module.scss';
 
 interface Props {
   onLanguageChange: (languageIsoCode: string) => void;
@@ -35,15 +35,10 @@ const LanguagesFilter: React.FC<Props> = memo(
         items={languagesItems}
         onSelect={onLanguageChange}
         selectorText={selectorText}
-        label={<StyledDropdownLabel>Language</StyledDropdownLabel>}
+        label={<div className={styles.dropdownLabel}>Language</div>}
       />
     );
   },
 );
-
-const StyledDropdownLabel = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: ${({ theme }) => theme.fontSizes.small};
-`;
 
 export default LanguagesFilter;
