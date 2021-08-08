@@ -1,14 +1,12 @@
 import React from 'react';
-import { NAVBAR_HEIGHT } from 'src/styles/constants';
-import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectNavbar,
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
 } from 'src/redux/slices/navbar';
-import { CenterVertically } from 'src/styles/utility';
 import Link from 'next/link';
+import classNames from 'classnames';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
@@ -18,6 +16,7 @@ import IconMenu from '../../../public/icons/menu.svg';
 import IconQ from '../../../public/icons/Q.svg';
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
 import SearchDrawer from './SearchDrawer/SearchDrawer';
+import styles from './navbar.module.scss';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
@@ -33,11 +32,11 @@ const Navbar = () => {
   };
 
   return (
-    <StyledNav isVisible={isVisible}>
+    <nav className={classNames(styles.styledNav, { [styles.styledNavHidden]: !isVisible })}>
       {isVisible && (
-        <StyledItemsContainer>
-          <CenterVertically>
-            <LeftCTA>
+        <div className={styles.itemsContainer}>
+          <div className={styles.centerVertically}>
+            <div className={styles.leftCTA}>
               <>
                 <Button
                   icon={<IconMenu />}
@@ -52,65 +51,22 @@ const Navbar = () => {
                 </a>
               </Link>
               <LanuageSelector />
-            </LeftCTA>
-          </CenterVertically>
-          <CenterVertically>
-            <RightCTA>
+            </div>
+          </div>
+          <div className={styles.centerVertically}>
+            <div className={styles.rightCTA}>
               <Button icon={<IconSettings />} size={ButtonSize.Small} />
               <Button icon={<IconReader />} size={ButtonSize.Small} />
               <>
                 <Button icon={<IconSearch />} size={ButtonSize.Small} onClick={openSearchDrawer} />
                 <SearchDrawer />
               </>
-            </RightCTA>
-          </CenterVertically>
-        </StyledItemsContainer>
+            </div>
+          </div>
+        </div>
       )}
-    </StyledNav>
+    </nav>
   );
 };
-
-const StyledNav = styled.nav<{ isVisible: boolean }>`
-  position: fixed;
-  height: ${NAVBAR_HEIGHT};
-  ${(props) => !props.isVisible && `transform: translateY(-${NAVBAR_HEIGHT});`}
-  width: 100%;
-  transition: ${(props) => props.theme.transitions.regular};
-  background: ${(props) => props.theme.colors.background.default};
-  z-index: ${(props) => props.theme.zIndexes.header};
-  border-bottom: 1px ${(props) => props.theme.colors.borders.hairline} solid;
-`;
-
-const StyledItemsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100%;
-`;
-
-const LeftCTA = styled.div`
-  display: flex;
-  margin-left: ${(props) => props.theme.spacing.medium};
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    margin-left: ${(props) => `calc(1*${props.theme.spacing.mega})`};
-  }
-`;
-const RightCTA = styled.div`
-  display: flex;
-  margin-right: ${(props) => props.theme.spacing.medium};
-
-  > button {
-    margin-left: ${(props) => props.theme.spacing.micro};
-  }
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    margin-right: ${(props) => `calc(1*${props.theme.spacing.mega})`};
-
-    > button {
-      margin-left: ${(props) => props.theme.spacing.xsmall};
-    }
-  }
-`;
 
 export default Navbar;
