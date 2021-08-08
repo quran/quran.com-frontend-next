@@ -1,0 +1,25 @@
+.container {
+    display: grid;
+    grid-gap: var(--spacing-small);
+    grid-template-columns: 0;
+    grid-template-rows: auto;
+    grid-auto-flow: column;
+    grid-auto-columns: auto;
+
+    grid-column: 1 / -1;
+
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    overflow-x: scroll;
+    scroll-snap-type: x proximity;
+    padding-bottom: var(--spacing-xsmall);
+    margin-bottom: -var(--spacing-micro);
+    &:before,
+    &:after {
+        content: "";
+        width: var(--spacing-xsmall);
+    }
+}

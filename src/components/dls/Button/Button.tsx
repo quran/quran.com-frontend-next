@@ -3,6 +3,7 @@ import { CENTER_VERTICALLY } from 'src/styles/utility';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { ICON_SIZES } from '../IconContainer/IconContainer';
+import styles from './Button.module.scss';
 
 type ButtonProps = {
   size?: ButtonSize;
@@ -66,11 +67,11 @@ const Container = ({ children, disabled, size, href, onClick }) => {
   if (href && !disabled) {
     return (
       <Link href={href} passHref>
-        <StyledAnchor>
+        <a className={styles.anchor}>
           <StyledContainer disabled={disabled} size={size}>
             {children}
           </StyledContainer>
-        </StyledAnchor>
+        </a>
       </Link>
     );
   }
@@ -111,9 +112,6 @@ const IconContainer = styled.div<ButtonProps>`
     height: ${(props) => BUTTON_SIZES[props.size].icon.height}px;
     width: ${(props) => BUTTON_SIZES[props.size].icon.width}px;
   }
-`;
-const StyledAnchor = styled.a`
-  text-decoration: none;
 `;
 
 export default Button;

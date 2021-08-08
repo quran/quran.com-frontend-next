@@ -1,0 +1,43 @@
+@use "sass:color";
+
+.container {
+    position: relative;
+    width: fit-content;
+}
+
+.overlay {
+    position: absolute;
+    border-radius: 3%;
+    background: var(--colors-background-neutral-grey);
+    transition: var(--transitions-fast);
+    z-index: var(--z-indexes-dropdown);
+    border: 1px solid var(--colors-primary-medium);
+    opacity: 0;
+    visibility: hidden;
+    padding: var(--spacing-micro);
+}
+
+.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+.placementLeft {
+    margin-right: var(--spacing-xsmall);
+    right: 100%;
+    top: -var(--spacing-medium);
+}
+.placementRight {
+    margin-left: var(--spacing-xsmall);
+    left: 100%;
+    top: -var(--spacing-medium);
+}
+.placementTop {
+    margin-bottom: var(--spacing-xsmall);
+    bottom: 100%;
+}
+
+.placementBottom {
+    margin-top: var(--spacing-xsmall);
+    top: 100%;
+}

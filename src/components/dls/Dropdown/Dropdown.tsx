@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { ReactNode, useRef, useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
-import { rgba } from 'polished';
+import classNames from 'classnames';
 import useOutsideClickDetector from '../../../hooks/useOutsideClickDetector';
+import styles from './Dropdown.module.scss';
 
 interface Props {
   overlay: ReactNode;
@@ -19,13 +19,6 @@ export enum Placement {
   TOP = 'top',
   BOTTOM = 'bottom',
 }
-
-const PLACEMENT_MARGIN_DIRECTION = {
-  [Placement.TOP]: 'bottom',
-  [Placement.BOTTOM]: 'top',
-  [Placement.RIGHT]: 'left',
-  [Placement.LEFT]: 'right',
-};
 
 const Dropdown: React.FC<Props> = ({
   children,
@@ -64,40 +57,33 @@ const Dropdown: React.FC<Props> = ({
   };
 
   return (
-    <StyledContainer ref={dropdownRef}>
+    <div className={styles.container} ref={dropdownRef}>
       <a onClick={handleOnClick} aria-hidden="true">
         {children}
       </a>
-      <StyledOverlay isOpen={isOpen} className={overlayClassName} placement={placement}>
+      <div
+        className={classNames(
+          overlayClassName,
+          styles.overlay,
+          { [styles.open]: isOpen },
+          {
+            [styles.placementTop]: placement === Placement.TOP,
+          },
+          {
+            [styles.placementBottom]: placement === Placement.BOTTOM,
+          },
+          {
+            [styles.placementRight]: placement === Placement.RIGHT,
+          },
+          {
+            [styles.placementLeft]: placement === Placement.LEFT,
+          },
+        )}
+      >
         <div>{overlay}</div>
-      </StyledOverlay>
-    </StyledContainer>
+      </div>
+    </div>
   );
 };
-
-const StyledContainer = styled.div`
-  position: relative;
-  width: fit-content;
-`;
-
-const StyledOverlay = styled.div<{ isOpen: boolean; placement: Placement }>`
-  opacity: ${(props) => (props.isOpen ? 1 : 0)};
-  ${(props) => !props.isOpen && `visibility: hidden;`}
-  position: absolute;
-  background: ${({ theme }) => theme.colors.background.neutralGrey};
-  transition: ${(props) => props.theme.transitions.fast};
-  z-index: ${(props) => props.theme.zIndexes.dropdown};
-  border: 1px solid ${({ theme }) => rgba(theme.colors.primary.medium, 0.8)};
-  border-radius: 3%;
-  ${(props) =>
-    `margin-${PLACEMENT_MARGIN_DIRECTION[props.placement]}: ${props.theme.spacing.xxsmall};`}
-  padding: ${(props) => props.theme.spacing.micro};
-  ${(props) =>
-    props.placement === Placement.RIGHT && `left: 100%; top: -${props.theme.spacing.medium};  `}
-  ${(props) =>
-    props.placement === Placement.LEFT && `right: 100%; top: -${props.theme.spacing.medium}; `}
-  ${(props) => props.placement === Placement.TOP && `bottom: 100%;`}
-  ${(props) => props.placement === Placement.BOTTOM && `top: 100%;`}
-`;
 
 export default Dropdown;

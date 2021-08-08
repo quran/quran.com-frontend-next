@@ -1,18 +1,13 @@
 import React, { ChangeEvent } from 'react';
-import styled from 'styled-components';
+import classNames from 'classnames';
 import TickIcon from '../../../../../public/icons/tick.svg';
+import styles from './Checkbox.module.scss';
 
 export enum CheckboxSize {
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
 }
-
-const SIZE_MULTIPLIER = {
-  [CheckboxSize.Small]: 1,
-  [CheckboxSize.Medium]: 2,
-  [CheckboxSize.Large]: 3,
-};
 
 interface Props {
   id: string;
@@ -43,74 +38,46 @@ const Checkbox: React.FC<Props> = ({
     onChange(event, event.target.checked);
 
   return (
-    <CheckboxContainer>
-      <StyledLabel htmlFor={id} disabled={disabled}>
-        <CheckboxBodyContainer>
-          <StyledCheckboxInput
+    <div className={styles.container}>
+      <label htmlFor={id} className={classNames(styles.label, { [styles.disabled]: disabled })}>
+        <div className={styles.bodyContainer}>
+          <input
+            type="checkbox"
+            className={styles.input}
             checked={checked}
             onChange={handleChange}
             disabled={disabled}
             id={id}
             name={name}
           />
-          <IconContainer checked={checked} size={size} disabled={disabled}>
+          <div
+            className={classNames(styles.iconContainer, {
+              [styles.smallIconContainer]: size === CheckboxSize.Small,
+              [styles.mediumIconContainer]: size === CheckboxSize.Medium,
+              [styles.largeIconContainer]: size === CheckboxSize.Large,
+              [styles.inActiveIconContainer]: disabled || !checked,
+              [styles.activeIconContainer]: checked && !disabled,
+              [styles.unCheckedIconContainer]: !checked,
+            })}
+          >
             <TickIcon />
-          </IconContainer>
-        </CheckboxBodyContainer>
+          </div>
+        </div>
         {label && (
-          <StyledLabelText disabled={disabled} size={size}>
+          <p
+            className={classNames(styles.labelText, {
+              [styles.smallLabelText]: size === CheckboxSize.Small,
+              [styles.mediumLabelText]: size === CheckboxSize.Medium,
+              [styles.largeLabelText]: size === CheckboxSize.Large,
+              [styles.disabledLabelText]: disabled,
+            })}
+          >
             {label}
-          </StyledLabelText>
+          </p>
         )}
-      </StyledLabel>
-    </CheckboxContainer>
+      </label>
+    </div>
   );
 };
-
-const CheckboxBodyContainer = styled.div`
-  padding: ${({ theme }) => theme.spacing.micro};
-`;
-
-const StyledLabel = styled.label<{ disabled: boolean }>`
-  display: flex;
-  align-items: center;
-  ${({ disabled }) => !disabled && `cursor: pointer; `}
-`;
-
-const StyledLabelText = styled.p<{ disabled: boolean; size: CheckboxSize }>`
-  color: ${({ disabled, theme }) => disabled && theme.colors.secondary.medium};
-  font-size: ${({ theme, size }) => `calc(${SIZE_MULTIPLIER[size]} * ${theme.fontSizes.small})`};
-  transition: ${({ theme }) => theme.transitions.fast};
-`;
-
-const CheckboxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  margin-top: ${({ theme }) => theme.spacing.micro};
-  margin-bottom: ${({ theme }) => theme.spacing.micro};
-  min-width: ${({ theme }) => `calc(5 * ${theme.spacing.mega})`};
-`;
-
-const StyledCheckboxInput = styled.input.attrs({ type: 'checkbox' })`
-  position: absolute;
-  margin: 0;
-  appearance: none;
-  opacity: 0;
-  outline: 0;
-`;
-
-const IconContainer = styled.div<{ checked: boolean; size: CheckboxSize; disabled: boolean }>`
-  width: ${({ theme, size }) => `calc(${SIZE_MULTIPLIER[size]} * ${theme.spacing.xxsmall})`};
-  height: ${({ theme, size }) => `calc(${SIZE_MULTIPLIER[size]} * ${theme.spacing.xxsmall})`};
-  background: ${({ theme, checked, disabled }) =>
-    checked && !disabled ? theme.colors.text.default : theme.colors.borders.hairline};
-  transition: ${({ theme }) => theme.transitions.fast};
-  > svg {
-    visibility: ${({ checked }) => !checked && 'hidden'};
-    display: block;
-    margin: auto;
-  }
-`;
 
 export default Checkbox;
