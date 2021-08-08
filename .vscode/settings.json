@@ -11,10 +11,14 @@
     "editor.formatOnSave": true,
     "typescript.format.enable": false,
     "javascript.format.enable": false,
+    "cssVariables.lookupFiles": [
+        "src/styles/theme.scss"
+    ],
     "prettier.disableLanguages": [
         "javascript",
         "javascriptreact",
         "typescript",
-        "typescriptreact"
-    ]
+        "typescriptreact",
+        "scss"
+    ],
 }
