@@ -9,12 +9,12 @@
 
 .header {
     margin: var(--spacing-medium) 0;
-    font-size: var(--font-sizes-jumbo);
-    font-weight: var(--font-weights-bold);
+    font-size: var(--font-size-jumbo);
+    font-weight: var(--font-weight-bold);
 }
 
 .boldHeader {
-    font-weight: var(--font-weights-bold);
+    font-weight: var(--font-weight-bold);
     margin-bottom: var(--spacing-small);
 }
 
@@ -30,8 +30,8 @@
 }
 
 .searchInputContainer {
-    border: 1px solid var(--colors-borders-hairline);
-    border-radius: var(--border-radiuses-pill);
+    border: 1px solid var(--color-borders-hairline);
+    border-radius: var(--border-radius-pill);
     padding: var(--spacing-xxsmall);
     display: flex;
     flex-direction: row;
@@ -48,7 +48,7 @@
 .searchInput {
     border: 0;
     width: 90%;
-    font-size: var(--font-sizes-large);
+    font-size: var(--font-size-large);
     &:focus {
         outline: none;
     }
@@ -68,9 +68,9 @@
 }
 
 .filtersContainer {
-    border: 1px solid var(--colors-borders-hairline);
-    border-radius: var(--border-radiuses-default);
-    background-color: var(--colors-background-neutral-grey);
+    border: 1px solid var(--color-borders-hairline);
+    border-radius: var(--border-radius-default);
+    background-color: var(--color-background-neutral-grey);
     min-height: calc(6 * var(--spacing-mega));
     margin-right: var(--spacing-xsmall);
     width: 30%;
