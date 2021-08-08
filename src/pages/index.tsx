@@ -3,6 +3,7 @@ import { NextPage, GetStaticProps } from 'next';
 import ChaptersList from '../components/chapters/ChapterList';
 import Chapter from '../../types/Chapter';
 import { getChapters } from '../api';
+import styles from './index.module.scss';
 
 type IndexProps = {
   chaptersResponse: {
@@ -12,7 +13,7 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   return (
-    <div style={{ paddingTop: '4rem' }}>
+    <div className={styles.container}>
       <ChaptersList chapters={chapters.slice(0, 38)} />
       <ChaptersList chapters={chapters.slice(38, 76)} />
       <ChaptersList chapters={chapters.slice(76, 114)} />

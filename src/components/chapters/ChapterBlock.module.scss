@@ -1,0 +1,53 @@
+.item {
+    list-style: none;
+    margin-bottom: var(--spacing-large);
+    &:hover {
+        background: var(--colors-background-neutral-grey);
+    }
+}
+
+.link {
+    display: block;
+    padding: var(--spacing-xsmall);
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.number {
+    margin: 0;
+    color: var(--colors-primary-medium);
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-left: var(--spacing-small);
+}
+
+.nameArabic {
+    font-size: var(--font-sizes-jumbo);
+    margin-bottom: var(--spacing-medium);
+    color: var(--colors-text-default);
+}
+
+.iconContainer {
+    span {
+        font-family: "surahnames";
+        font-variant: normal;
+        text-transform: none;
+        line-height: var(--line-heights-normal);
+        font-size: var(--font-sizes-jumbo);
+        color: var(--colors-text-default);
+    }
+}
+
+.nameTranslated {
+    text-transform: uppercase;
+    font-size: var(--font-sizes-normal);
+    color: var(--colors-primary-medium);
+}

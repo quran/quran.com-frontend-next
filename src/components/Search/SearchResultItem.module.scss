@@ -1,0 +1,16 @@
+.translationName {
+    color: var(--colors-text-default);
+    font-size: var(--font-sizes-normal);
+}
+
+.translationContainer {
+    margin: var(--spacing-small) 0;
+}
+
+.itemContainer {
+    border: 1px solid var(--colors-borders-hairline);
+    border-radius: var(--border-radiuses-default);
+    background-color: var(--colors-background-neutral-grey);
+    padding: var(--spacing-small);
+    margin: var(--spacing-xsmall) 0;
+}
