@@ -1,0 +1,86 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: var(--spacing-micro);
+    margin-bottom: var(--spacing-micro);
+    min-width: calc(5 * var(--spacing-mega));
+}
+
+.label.disabled {
+    cursor: default;
+}
+
+.label {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.bodyContainer {
+    padding: var(--spacing-micro);
+}
+
+.input {
+    position: absolute;
+    margin: 0;
+    appearance: none;
+    opacity: 0;
+    outline: 0;
+}
+
+.disabledLabelText {
+    color: var(--colors-secondary-medium);
+}
+.labelText {
+    transition: var(--transitions-fast);
+}
+
+.smallLabelText {
+    font-size: var(--font-sizes-small);
+}
+
+.mediumLabelText {
+    font-size: calc(2 * var(--font-sizes-small));
+}
+
+.largeLabelText {
+    font-size: calc(3 * var(--font-sizes-small));
+}
+
+.iconContainer {
+    transition: var(--transitions-fast);
+    border: 1px solid var(--colors-borders-hairline);
+    > svg {
+        visibility: visible;
+        display: block;
+        margin: auto;
+    }
+}
+
+.unCheckedIconContainer {
+    > svg {
+        visibility: hidden;
+    }
+}
+
+.inActiveIconContainer {
+    background: var(--colors-background-neutral-grey);
+}
+
+.activeIconContainer {
+    background: var(--colors-text-default);
+}
+
+.smallIconContainer {
+    width: var(--spacing-xxsmall);
+    height: var(--spacing-xxsmall);
+}
+.mediumIconContainer {
+    width: calc(2 * var(--spacing-xxsmall));
+    height: calc(2 * var(--spacing-xxsmall));
+}
+.largeIconContainer {
+    width: calc(3 * var(--spacing-xxsmall));
+    height: calc(3 * var(--spacing-xxsmall));
+}
