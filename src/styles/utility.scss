@@ -1,0 +1,10 @@
+@mixin center-horizontally {
+  display: inline-block;
+  margin: auto;  
+}
+
+@mixin center-vertically {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
