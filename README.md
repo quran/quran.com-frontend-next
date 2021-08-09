@@ -74,7 +74,7 @@ Our components are built within Storybook.js. See files with name `.stories.tsx`
 ### Recommended Extensions
 
 [CSS Variable Autocomplete](https://marketplace.visualstudio.com/items?itemName=vunguyentuan.vscode-css-variables): Auto-completion for our theme variable names.
-
+[VSCode Stylelint](https://github.com/stylelint/vscode-stylelint)
 ### Typescript
 
 We chose typescript as the language of choice of it's ease of type-safety. Please create types where you see fit.
