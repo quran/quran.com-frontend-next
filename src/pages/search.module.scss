@@ -4,7 +4,7 @@
     padding-top: calc(2 * var(--spacing-mega));
     margin: 0 auto;
     width: 90%;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         width: 70%;
     }
 }
@@ -22,7 +22,7 @@
 
 .bodyContainer {
     width: auto;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         width: 70%;
     }
 }
@@ -62,7 +62,7 @@
 .pageBody {
     width: 100%;
     display: block;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         display: flex;
         align-items: baseline;
         justify-content: center;
@@ -77,7 +77,7 @@
     padding: var(--spacing-small);
     width: auto;
     margin: var(--spacing-xsmall) 0;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         margin-right: var(--spacing-xsmall);
         width: 30%;
     }

@@ -78,7 +78,7 @@
     max-height: 40vh;
     width: 70vw;
     max-width: 70vw;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         width: 25vw;
         max-width: 25vw;
     }
@@ -89,7 +89,7 @@
     max-height: 50vh;
     width: 75vw;
     max-width: 75vw;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         width: 50vw;
         max-width: 50vw;
     }
@@ -102,7 +102,7 @@
     max-width: 75vw;
     width: 80vw;
     max-width: 80vw;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         width: 75vw;
         max-width: 75vw;
     }
@@ -113,7 +113,7 @@
     max-height: 70vh;
     width: 85vw;
     max-width: 85vw;
-    @include breakpoints.mobileL {
+    @include breakpoints.tablet {
         width: 90vw;
         max-width: 90vw;
     }
