@@ -1,0 +1,25 @@
+.container {
+  background: black;
+  color: white;
+  position: fixed;
+  top: calc(var(--spacing-mega) + var(--spacing-medium));
+  right: calc(var(--spacing-mega) + var(--spacing-medium));
+  height: calc(2*var(--spacing-mega));
+  width: calc(2*var(--spacing-mega));
+  
+  z-index: var(--z-index-max);
+  border-radius: 100%;
+  box-shadow: var(--shadow-regular);
+  text-align: center;
+}
+
+.containerExpanded {
+  height: auto;
+  width: auto;
+  border-radius: 10%;
+}
+
+.wrench {
+  height: calc(2 * var(--spacing-mega));
+  width: calc(var(--spacing-large) + var(--spacing-xxsmall));
+}
