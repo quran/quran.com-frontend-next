@@ -1,5 +1,6 @@
 import React, { RefObject, ChangeEvent, memo } from 'react';
-import styled from 'styled-components';
+import classNames from 'classnames';
+import styles from './SearchDropdownItem.module.scss';
 
 export interface DropdownItem {
   id: string;
@@ -33,49 +34,35 @@ const SearchDropdownItem: React.FC<Props> = ({
 }) => {
   if (isNotFound) {
     return (
-      <ItemContainer checked={false} disabled>
-        {noResultText}
-      </ItemContainer>
+      <div className={classNames(styles.itemContainer, styles.disabledItem)}>{noResultText}</div>
     );
   }
   return (
     <label htmlFor={itemId} key={itemId}>
-      <ItemContainer checked={checked} disabled={disabled} ref={checked ? selectedItemRef : null}>
-        <StyledInput
+      <div
+        ref={checked ? selectedItemRef : null}
+        className={classNames(
+          styles.itemContainer,
+          { [styles.checkedItemContainer]: checked },
+          { [styles.disabledItem]: disabled },
+          { [styles.enabledItem]: !disabled },
+        )}
+      >
+        <input
+          type="radio"
+          className={styles.input}
           id={itemId}
           name={item.name}
           disabled={disabled}
           checked={checked}
           onChange={onItemSelected}
         />
-        <ItemLabel htmlFor={itemId} disabled={disabled}>
+        <label htmlFor={itemId} className={classNames({ [styles.itemLabel]: !disabled })}>
           {item.label}
-        </ItemLabel>
-      </ItemContainer>
+        </label>
+      </div>
     </label>
   );
 };
-
-const StyledInput = styled.input.attrs({
-  type: 'radio',
-})`
-  display: none;
-`;
-
-const ItemLabel = styled.label<{ disabled: boolean }>`
-  ${({ disabled }) => !disabled && `cursor: pointer; `}
-`;
-
-const ItemContainer = styled.div<{ checked: boolean; disabled: boolean }>`
-  padding: ${({ theme }) => theme.spacing.xxsmall};
-  ${({ disabled, theme }) =>
-    !disabled &&
-    `cursor: pointer; 
-    &:hover {
-      background: ${theme.colors.borders.hairline};
-    }`}
-  ${({ disabled, theme }) => disabled && `color: ${disabled && theme.colors.secondary.medium};`}
-  ${({ checked, theme }) => checked && `background: ${theme.colors.borders.hairline};`}
-`;
 
 export default memo(SearchDropdownItem);

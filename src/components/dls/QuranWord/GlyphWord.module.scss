@@ -1,0 +1,14 @@
+.styledWord {
+    line-height: normal;
+}
+
+@mixin generate-words($version: 1) {
+    @for $i from 1 through 604 {
+        .word-#{$i}-v#{$version} {
+            font-family: p#{$i}-v#{$version};
+        }
+    }
+}
+
+@include generate-words;
+@include generate-words(2);

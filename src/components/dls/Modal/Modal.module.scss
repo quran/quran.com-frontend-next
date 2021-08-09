@@ -1,0 +1,120 @@
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.headerWithTitleContainer {
+    justify-content: space-between;
+}
+
+.container {
+    position: fixed;
+    z-index: var(--z-index-modal);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-background-faded-black-scale);
+    padding-top: calc(4 * var(--spacing-large));
+}
+
+.hiddenContainer {
+    display: none;
+}
+
+.centeredContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bodyContainer {
+    overflow: auto;
+}
+
+.smallBodyContainer {
+    max-height: 82%;
+    height: 82%;
+}
+.mediumBodyContainer {
+    max-height: 85%;
+    height: 85%;
+}
+.largeBodyContainer {
+    max-height: 87%;
+    height: 87%;
+}
+.xLargeBodyContainer {
+    max-height: 88%;
+    height: 88%;
+}
+
+@include utility.keyframes(scale) {
+    from {
+        transform: scale(0.3);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+.contentContainer {
+    background-color: var(--color-background-default);
+    margin: auto;
+    padding: var(--spacing-small);
+    border: 1px solid var(--color-borders-hairline);
+    border-radius: var(--border-radius-default);
+    @include utility.animation("scale #{var(--transition-fast)}");
+}
+
+.smallContentContainer {
+    height: 40vh;
+    max-height: 40vh;
+    width: 70vw;
+    max-width: 70vw;
+    @include breakpoints.mobileL {
+        width: 25vw;
+        max-width: 25vw;
+    }
+}
+
+.mediumContentContainer {
+    height: 50vh;
+    max-height: 50vh;
+    width: 75vw;
+    max-width: 75vw;
+    @include breakpoints.mobileL {
+        width: 50vw;
+        max-width: 50vw;
+    }
+}
+
+.largeContentContainer {
+    height: 60vh;
+    max-height: 60vh;
+    width: 75vw;
+    max-width: 75vw;
+    width: 80vw;
+    max-width: 80vw;
+    @include breakpoints.mobileL {
+        width: 75vw;
+        max-width: 75vw;
+    }
+}
+
+.xLargeContentContainer {
+    height: 70vh;
+    max-height: 70vh;
+    width: 85vw;
+    max-width: 85vw;
+    @include breakpoints.mobileL {
+        width: 90vw;
+        max-width: 90vw;
+    }
+}
