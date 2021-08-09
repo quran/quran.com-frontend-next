@@ -18,12 +18,13 @@ import contextMenu from './slices/QuranReader/contextMenu';
 import navbar from './slices/navbar';
 import audioPlayerState from './slices/AudioPlayer/state';
 import audioPlayerStyle from './slices/AudioPlayer/style';
+import theme from './slices/theme';
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['quranReaderStyles', 'readingView', 'translations'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
+  whitelist: ['quranReaderStyles', 'readingView', 'translations', 'theme'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
 const rootReducer = combineReducers({
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   quranReaderStyles,
   readingView,
   translations,
+  theme,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

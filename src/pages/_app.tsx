@@ -6,6 +6,7 @@ import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
+import ThemeProvider from '../styles/ThemeProvider';
 import '../styles/reset.css';
 import '../styles/fonts.css';
 import '../styles/theme.scss';
@@ -17,11 +18,13 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <ReduxProvider>
-        <DefaultSeo {...createSEOConfig({})} />
-        <Navbar />
-        <DeveloperUtility />
-        <Component {...pageProps} />
-        <AudioPlayer />
+        <ThemeProvider>
+          <DefaultSeo {...createSEOConfig({})} />
+          <Navbar />
+          <DeveloperUtility />
+          <Component {...pageProps} />
+          <AudioPlayer />
+        </ThemeProvider>
       </ReduxProvider>
     </>
   );
