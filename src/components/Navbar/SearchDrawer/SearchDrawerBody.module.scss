@@ -1,0 +1,13 @@
+@use "src/styles/constants";
+
+.container {
+  margin-top: constants.$navbar-height;
+  padding: var(--spacing-medium);
+}
+
+.resultsSummaryContainer {
+  margin-top: var(--spacing-medium);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

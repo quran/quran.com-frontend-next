@@ -1,0 +1,21 @@
+@use "src/styles/utility";
+
+$images-container-width: 17.5rem;
+
+.container {
+    background: var(--color-background-faded-grey-scale);
+}
+
+.centerHorizontally {
+  @include utility.center-horizontally;
+  width: 100%;
+}
+
+.imagesContainer {
+  display: flex;
+  max-width: $images-container-width;
+  justify-content: space-between;
+  margin: auto;
+  padding-top: var(--spacing-xxsmall);
+  padding-bottom: var(--spacing-mega);
+}

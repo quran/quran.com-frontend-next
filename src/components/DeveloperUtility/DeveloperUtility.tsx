@@ -8,7 +8,7 @@ import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import NavbarAdjustment from './NavbarAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import TranslationsAdjustment from './TranslationsAdjustment';
-import styles from './developerUtility.module.scss';
+import styles from './DeveloperUtility.module.scss';
 /**
  * A set of developer utilities only availble on development environments
  */

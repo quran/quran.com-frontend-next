@@ -1,0 +1,12 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.container {
+  @include utility.center-vertically;
+
+  margin-left: var(--spacing-xxsmall);
+
+  @include breakpoints.tablet {
+    margin-left: var(--spacing-medium);
+  }
+}

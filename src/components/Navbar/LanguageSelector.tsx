@@ -1,18 +1,8 @@
 import React from 'react';
-import { CENTER_VERTICALLY } from 'src/styles/utility';
-import styled from 'styled-components';
+import styles from './LanguageSelector.module.scss';
 
 const LanuageSelector = () => {
-  return <Container>English</Container>;
+  return <div className={styles.container}>English</div>;
 };
 
-const Container = styled.div`
-  ${CENTER_VERTICALLY};
-
-  margin-left: ${(props) => props.theme.spacing.xxsmall};
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    margin-left: ${(props) => props.theme.spacing.medium};
-  }
-`;
 export default LanuageSelector;

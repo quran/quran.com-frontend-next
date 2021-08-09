@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { SIDE_MENU_DESKTOP_WIDTH, NAVBAR_HEIGHT } from 'src/styles/constants';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/APIResponses';
 import useDebounce from 'src/hooks/useDebounce';
+import classNames from 'classnames';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import SearchDrawerBody from './SearchDrawerBody';
+import styles from './SearchDrawer.module.scss';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -97,18 +97,24 @@ const SearchDrawer: React.FC = () => {
   }, [closeSearchDrawer, router.events, isOpen]);
 
   return (
-    <Container isOpen={isOpen}>
-      <Header>
-        <HeaderContentContainer>
-          <HeaderContent>
+    <div className={classNames(styles.container, { [styles.containerOpen]: isOpen })}>
+      <div className={styles.header}>
+        <div className={styles.headerContentContainer}>
+          <div className={styles.headerContent}>
             <Button
               icon={<IconSearch />}
               size={ButtonSize.Small}
               disabled={!searchQuery}
               href={`/search?query=${searchQuery}`}
             />
-            <SearchInputContainer isRTLInput={isRTLInput}>
-              <SearchInput
+            <div
+              className={classNames(styles.searchInputContainer, {
+                [styles.searchInputContainerRTL]: isRTLInput,
+              })}
+            >
+              <input
+                className={styles.searchInput}
+                type="text"
                 ref={searchInputRef}
                 dir="auto"
                 placeholder="Search"
@@ -116,98 +122,24 @@ const SearchDrawer: React.FC = () => {
                 value={searchQuery}
                 disabled={isSearching}
               />
-              {searchQuery && <StyledClear onClick={resetQueryAndResults}>Clear</StyledClear>}
-            </SearchInputContainer>
+              {searchQuery && (
+                <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
+                  Clear
+                </button>
+              )}
+            </div>
             <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeSearchDrawer} />
-          </HeaderContent>
-        </HeaderContentContainer>
-      </Header>
+          </div>
+        </div>
+      </div>
       <SearchDrawerBody
         hasError={hasError}
         searchResult={searchResult}
         isSearching={isSearching}
         searchQuery={searchQuery}
       />
-    </Container>
+    </div>
   );
 };
-
-const Container = styled.div<{ isOpen: boolean }>`
-  background: ${(props) => props.theme.colors.background.default};
-  position: fixed;
-  height: 100vh;
-  width: 100%;
-  right: ${(props) => (props.isOpen ? 0 : '-100%')};
-  top: 0;
-  bottom: 0;
-  z-index: ${(props) => props.theme.zIndexes.header};
-  transition: ${(props) => props.theme.transitions.regular};
-  overflow-y: auto;
-  overflow-x: hidden;
-  overscroll-behavior-y: contain;
-
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    width: ${SIDE_MENU_DESKTOP_WIDTH};
-    right: ${(props) => (props.isOpen ? 0 : `-${SIDE_MENU_DESKTOP_WIDTH}`)};
-  }
-`;
-
-const Header = styled.div`
-  width: 100%;
-  background-color: ${(props) => props.theme.colors.background.default};
-  position: fixed;
-  height: ${NAVBAR_HEIGHT};
-  border-bottom: 1px ${(props) => props.theme.colors.borders.hairline} solid;
-  padding: 0 ${(props) => props.theme.spacing.medium};
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    width: ${SIDE_MENU_DESKTOP_WIDTH};
-  }
-`;
-
-const HeaderContentContainer = styled.div`
-  margin-right: ${(props) => props.theme.spacing.medium};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-`;
-
-const HeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const SearchInputContainer = styled.div<{ isRTLInput: boolean }>`
-  height: 100%;
-  width: 80%;
-  display: flex;
-  flex-direction: ${({ isRTLInput }) => (isRTLInput ? 'row-reverse' : 'row')};
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const SearchInput = styled.input.attrs({
-  type: 'text',
-})`
-  width: 100%;
-  border: 0;
-  &:focus {
-    outline: none;
-  }
-  &:disabled {
-    background: none;
-  }
-`;
-
-const StyledClear = styled.p`
-  text-transform: uppercase;
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: ${(props) => props.theme.fontSizes.normal};
-`;
 
 export default SearchDrawer;
