@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Verse from 'types/Verse';
-import styled from 'styled-components';
 import Dropdown from '../dls/Dropdown/Dropdown';
 import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
 import VerseActionsMenu from './VerseActionsMenu';
 import VerseActionModal, { VerseActionModalType } from './VerseActionModal';
+import styles from './VerseActions.module.scss';
 
 interface Props {
   verse: Verse;
@@ -20,9 +20,9 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
           <VerseActionsMenu verse={verse} setActiveVerseActionModal={setActiveVerseActionModal} />
         }
       >
-        <Container>
+        <span className={styles.container}>
           <OverflowMenu />
-        </Container>
+        </span>
       </Dropdown>
       <VerseActionModal
         activeVerseActionModal={activeVerseActionModal}
@@ -32,9 +32,5 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
     </>
   );
 };
-
-const Container = styled.span`
-  cursor: pointer;
-`;
 
 export default VerseActions;

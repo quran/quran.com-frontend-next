@@ -1,8 +1,8 @@
 import { useCallback, Dispatch, SetStateAction, ReactNode } from 'react';
-import styled from 'styled-components';
 import Verse from 'types/Verse';
 import Modal from '../dls/Modal/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+import styles from './VerseActionModal.module.scss';
 
 export enum VerseActionModalType {
   AdvancedCopy = 'advancedCopy',
@@ -42,16 +42,14 @@ const VerseActionModal: React.FC<Props> = ({
   return (
     <Modal
       visible
-      title={<TitleContainer>{[MODAL_TYPE_TITLE[activeVerseActionModal]]}</TitleContainer>}
+      title={
+        <div className={styles.titleContainer}>{[MODAL_TYPE_TITLE[activeVerseActionModal]]}</div>
+      }
       onClose={onClose}
     >
       {modalContent}
     </Modal>
   );
 };
-
-const TitleContainer = styled.div`
-  font-weight: bold;
-`;
 
 export default VerseActionModal;
