@@ -85,6 +85,14 @@ const Container = styled.div<{ isLink: boolean; isStale: boolean }>`
 const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
+  &:hover {
+    color: ${(props) => props.theme.colors.primary.medium};
+
+    path {
+      fill: ${(props) => props.theme.colors.primary.medium};
+    }
+  }
 `;
 
 const TitleContainer = styled.span`
@@ -98,10 +106,10 @@ const A = styled.a`
   color: inherit;
   cursor: pointer;
   &:hover {
-    color: #0057ff;
+    color: ${(props) => props.theme.colors.primary.medium};
 
     path {
-      fill: #0057ff;
+      fill: ${(props) => props.theme.colors.primary.medium};
     }
   }
 `;

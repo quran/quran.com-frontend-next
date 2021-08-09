@@ -39,7 +39,7 @@ const DeveloperUtility = () => {
       type="button"
     >
       Developer Utility
-      <hr />
+      <div className={styles.divider} />
       <FontAdjustment />
       <ReadingViewAdjustment />
       <NotesAdjustment />
@@ -48,7 +48,7 @@ const DeveloperUtility = () => {
       <TranslationsAdjustment />
       <ContextMenuAdjustment />
       <div>
-        <button type="button" onClick={() => setIsExpanded(false)}>
+        <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close
         </button>
       </div>

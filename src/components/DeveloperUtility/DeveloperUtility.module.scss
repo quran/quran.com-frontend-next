@@ -1,25 +1,49 @@
 .container {
-  background: black;
-  color: white;
-  position: fixed;
-  top: calc(var(--spacing-mega) + var(--spacing-medium));
-  right: calc(var(--spacing-mega) + var(--spacing-medium));
-  height: calc(2*var(--spacing-mega));
-  width: calc(2*var(--spacing-mega));
-  
-  z-index: var(--z-index-max);
-  border-radius: 100%;
-  box-shadow: var(--shadow-regular);
-  text-align: center;
+	background: rgb(230, 230, 230);
+	border: 1px solid rgba(0, 0, 0, 0.13);
+	color: black;
+	position: fixed;
+	top: calc(var(--spacing-mega) + var(--spacing-medium) + 1em);
+	right: calc(var(--spacing-mega) + var(--spacing-medium));
+	height: calc(2*var(--spacing-mega));
+	width: calc(2*var(--spacing-mega));
+
+	z-index: var(--z-index-max);
+	border-radius: 100%;
+	box-shadow: var(--shadow-developer-utility);
+	text-align: center;
+	cursor: pointer;
+	padding: unset;
 }
 
 .containerExpanded {
-  height: auto;
-  width: auto;
-  border-radius: 10%;
+	cursor: unset;
+	height: auto;
+	width: auto;
+	padding: 10px;
+	border-radius: 13px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: flex-start;
+}
+
+.divider {
+	width: 100%;
+	border-top: 1px solid rgba(0, 0, 0, 0.14);
+	margin: 0 0 6px 0;
+}
+
+.closeButton {
+	background: linear-gradient(180deg, rgba(108, 179, 250, 1) 0%, rgba(6, 125, 255, 1) 100%);
+	border: none;
+	border-radius: 7.5px;
+	color: white;
+	padding: 3px 14px;
+	box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.15);
 }
 
 .wrench {
-  height: calc(2 * var(--spacing-mega));
-  width: calc(var(--spacing-large) + var(--spacing-xxsmall));
+	height: calc(2 * var(--spacing-mega));
+	width: calc(var(--spacing-large) + var(--spacing-xxsmall));
 }
