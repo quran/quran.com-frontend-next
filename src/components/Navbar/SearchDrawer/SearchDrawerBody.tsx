@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import SearchResultItem from 'src/components/Search/SearchResultItem';
 import { SearchResponse } from 'types/APIResponses';
-import styles from './searchDrawerBody.module.scss';
+import styles from './SearchDrawerBody.module.scss';
 
 interface Props {
   isSearching: boolean;

@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import SearchDrawerBody from './SearchDrawerBody';
-import styles from './searchDrawer.module.scss';
+import styles from './SearchDrawer.module.scss';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 

@@ -16,7 +16,7 @@ import IconMenu from '../../../public/icons/menu.svg';
 import IconQ from '../../../public/icons/Q.svg';
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
 import SearchDrawer from './SearchDrawer/SearchDrawer';
-import styles from './navbar.module.scss';
+import styles from './Navbar.module.scss';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);

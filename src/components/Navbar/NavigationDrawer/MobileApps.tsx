@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import NavigationDrawerItem from './NavigationDrawerItem';
 import IconMobile from '../../../../public/icons/mobile.svg';
-import styles from './mobileApps.module.scss';
+import styles from './MobileApps.module.scss';
 
 const MobileApps = () => {
   return (

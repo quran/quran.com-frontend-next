@@ -8,7 +8,7 @@ import {
   setSelectedTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
-import styles from './translationsAdjustment.module.scss';
+import styles from './TranslationsAdjustment.module.scss';
 /**
  * Convert an array of numbers to an array of strings.
  *

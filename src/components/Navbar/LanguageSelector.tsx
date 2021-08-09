@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './languageSelector.module.scss';
+import styles from './LanguageSelector.module.scss';
 
 const LanuageSelector = () => {
   return <div className={styles.container}>English</div>;

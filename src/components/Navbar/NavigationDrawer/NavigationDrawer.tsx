@@ -16,7 +16,7 @@ import IconDonate from '../../../../public/icons/donate.svg';
 import IconLock from '../../../../public/icons/lock.svg';
 import IconFeedback from '../../../../public/icons/feedback.svg';
 import IconRadio2 from '../../../../public/icons/radio-2.svg';
-import styles from './navigationDrawer.module.scss';
+import styles from './NavigationDrawer.module.scss';
 import LanguageSelector from '../LanguageSelector';
 import NavigationDrawerItem from './NavigationDrawerItem';
 import MobileApps from './MobileApps';
