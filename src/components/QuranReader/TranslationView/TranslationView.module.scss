@@ -1,0 +1,18 @@
+.verseLink {
+    cursor: pointer;
+    width: fit-content;
+}
+
+.container {
+    max-width: 80%;
+    margin: var(--spacing-medium) auto;
+}
+
+.text {
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.highlightedContainer {
+    background: var(--color-primary-medium);
+}

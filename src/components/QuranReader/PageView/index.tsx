@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components';
 import Verse from '../../../../types/Verse';
 import Page from './Page';
 import groupPagesByVerses from './groupPagesByVerses';
+import styles from './PageView.module.scss';
 
 type PageViewProps = {
   verses: Verse[];
@@ -12,21 +12,12 @@ const PageView = ({ verses }: PageViewProps) => {
   const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
 
   return (
-    <StyledPageView>
+    <div className={styles.container}>
       {Object.keys(pages).map((pageNumber) => (
         <Page verses={pages[pageNumber]} key={`page-${pageNumber}`} page={Number(pageNumber)} />
       ))}
-    </StyledPageView>
+    </div>
   );
 };
-
-const StyledPageView = styled.div`
-  max-width: 100%;
-  direction: rtl;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: center;
-`;
 
 export default React.memo(PageView);
