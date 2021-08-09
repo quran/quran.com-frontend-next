@@ -221,7 +221,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
 
   return (
     <>
-      <p className={styles.styledLabel}>Select ayah range</p>
+      <p className={styles.label}>Select ayah range</p>
       <div className={styles.rangeTypeSelectorContainer}>
         <RadioButton
           checked={!showRangeOfVerses}
@@ -249,7 +249,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           onSelect={onRangeBoundariesChange}
         />
       )}
-      <p className={styles.styledLabel}>What do you want to copy?</p>
+      <p className={styles.label}>What do you want to copy?</p>
       <Checkbox
         onChange={onShouldCopyTextChange}
         checked={shouldCopyText}
@@ -258,7 +258,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
       />
       {Object.keys(translations).length !== 0 && (
         <>
-          <p className={styles.styledLabel}>Translations:</p>
+          <p className={styles.label}>Translations:</p>
           {Object.keys(translations).map((translationId) => (
             <Checkbox
               key={translationId}
@@ -270,7 +270,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           ))}
         </>
       )}
-      <p className={styles.styledLabel}>Also copy Footnote(s)?</p>
+      <p className={styles.label}>Also copy Footnote(s)?</p>
       <RadioButton
         checked={!shouldCopyFootnotes}
         id="No"
@@ -287,7 +287,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
         onChange={() => setShouldCopyFootnotes(true)}
         value="Yes"
       />
-      {customMessage && <div className={styles.styledCustomMessage}>{customMessage}</div>}
+      {customMessage && <div className={styles.customMessage}>{customMessage}</div>}
       <div className={styles.buttonContainer}>
         <Button
           text={isCopied ? 'Copied!' : 'Copy'}

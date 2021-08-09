@@ -1,17 +1,15 @@
-.styledLabel {
+.searchDropdownLabel {
   margin-top: var(--spacing-xsmall);
   margin-bottom: var(--spacing-xsmall);
   font-weight: var(--font-weight-bold);
 }
-.styledSelectorContainer {
+.selectorContainer {
     margin-top: var(--spacing-micro);
     margin-bottom: var(--spacing-micro);
 }
 .selectorsContainer {
     justify-content: space-between;
     flex-wrap: wrap;
-}
-.selectorsContainerVisible {
     display: flex; 
 }
 .selectorsContainerInvisible {

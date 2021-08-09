@@ -42,7 +42,7 @@ Memoizing the selector will save re-renders to each selector and its items when:
 */
 const SelectorContainer: React.FC<SelectorProps> = memo(
   ({ type, selectedItem, dropdownItems, onSelect }) => (
-    <div className={styles.styledSelectorContainer}>
+    <div className={styles.selectedContainer}>
       <SearchDropdown
         id={type}
         selectedItem={selectedItem}
@@ -51,7 +51,7 @@ const SelectorContainer: React.FC<SelectorProps> = memo(
         searchPlaceHolder="Search for a verse"
         selectorText={selectedItem}
         label={
-          <span className={styles.styledLabel}>
+          <span className={styles.searchDropdownLabel}>
             {type === RangeSelectorType.START ? 'From' : 'To'} Verse:
           </span>
         }
@@ -69,8 +69,7 @@ const VersesRangeSelector: React.FC<Props> = ({
 }) => {
   return (
     <div
-      className={classNames(styles.selectorsContainer, {
-        [styles.selectorsContainerVisible]: isVisible,
+      className={classNames(styles.rangeSelectorContainer, {
         [styles.selectorsContainerInvisible]: !isVisible,
       })}
     >
