@@ -8,19 +8,16 @@ import ResetCSS from '../src/styles/reset.css';
 import GlobalFonts from '../src/styles/fonts.css';
 
 const themes = [theme, darkTheme];
-const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.backgroundColor};
-  min-height: 100vh;
-`;
+
 
 const themeDecorator = (storyFn) => (
   <ThemeProvider theme={themes[0]}>
     <link rel="stylesheet" href={ResetCSS} />
     <link rel="stylesheet" href={GlobalFonts} />
 
-    <Wrapper>
+    <div>
       {storyFn()}
-    </Wrapper>
+    </div>
   </ThemeProvider>
 );
 

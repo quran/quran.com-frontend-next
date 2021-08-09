@@ -14,3 +14,14 @@
     padding: var(--spacing-small);
     margin: var(--spacing-xsmall) 0;
 }
+
+.quranTextContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quranTextResult {
+    line-height: var(--line-height-large);
+    direction: rtl;
+}
