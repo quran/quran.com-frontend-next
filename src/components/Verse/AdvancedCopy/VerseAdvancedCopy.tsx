@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
@@ -16,6 +15,7 @@ import RadioButton from '../../dls/Forms/RadioButton/RadioButton';
 import Button, { ButtonSize } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
+import styles from './VerseAdvancedCopy.module.scss';
 
 interface Props {
   verse: Verse;
@@ -221,8 +221,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
 
   return (
     <>
-      <StyledLabel>Select ayah range</StyledLabel>
-      <RangeTypeSelectorContainer>
+      <p className={styles.styledLabel}>Select ayah range</p>
+      <div className={styles.rangeTypeSelectorContainer}>
         <RadioButton
           checked={!showRangeOfVerses}
           id="single"
@@ -239,7 +239,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           onChange={onRangeOfVersesTypeSelected}
           value="multiple"
         />
-      </RangeTypeSelectorContainer>
+      </div>
       {rangeStartVerse && (
         <VersesRangeSelector
           isVisible={showRangeOfVerses}
@@ -249,7 +249,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           onSelect={onRangeBoundariesChange}
         />
       )}
-      <StyledLabel>What do you want to copy?</StyledLabel>
+      <p className={styles.styledLabel}>What do you want to copy?</p>
       <Checkbox
         onChange={onShouldCopyTextChange}
         checked={shouldCopyText}
@@ -258,7 +258,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
       />
       {Object.keys(translations).length !== 0 && (
         <>
-          <StyledLabel>Translations:</StyledLabel>
+          <p className={styles.styledLabel}>Translations:</p>
           {Object.keys(translations).map((translationId) => (
             <Checkbox
               key={translationId}
@@ -270,7 +270,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           ))}
         </>
       )}
-      <StyledLabel>Also copy Footnote(s)?</StyledLabel>
+      <p className={styles.styledLabel}>Also copy Footnote(s)?</p>
       <RadioButton
         checked={!shouldCopyFootnotes}
         id="No"
@@ -287,41 +287,16 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
         onChange={() => setShouldCopyFootnotes(true)}
         value="Yes"
       />
-      {customMessage && <StyledCustomMessage>{customMessage}</StyledCustomMessage>}
-      <ButtonContainer>
+      {customMessage && <div className={styles.styledCustomMessage}>{customMessage}</div>}
+      <div className={styles.buttonContainer}>
         <Button
           text={isCopied ? 'Copied!' : 'Copy'}
           onClick={onCopyTextClicked}
           size={ButtonSize.Large}
         />
-      </ButtonContainer>
+      </div>
     </>
   );
 };
 
-const StyledCustomMessage = styled.div`
-  padding: ${({ theme }) => theme.spacing.xxsmall};
-  border: ${({ theme }) => `1px solid ${theme.colors.borders.hairline}`};
-  border-radius: ${({ theme }) => theme.borderRadiuses.default};
-`;
-
-const StyledLabel = styled.p`
-  margin-top: ${({ theme }) => theme.spacing.xsmall};
-  margin-bottom: ${({ theme }) => theme.spacing.xsmall};
-  font-weight: ${(props) => props.theme.fontWeights.bold};
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const RangeTypeSelectorContainer = styled.div`
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  flex-wrap: wrap;
-`;
 export default VerseAdvancedCopy;

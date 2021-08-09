@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import styled from 'styled-components';
+import classNames from 'classnames';
+import styles from './VersesRangeSelector.module.scss';
 import SearchDropdown from '../../dls/Forms/SearchDropdown/SearchDropdown';
 
 export interface RangeVerseItem {
@@ -41,7 +42,7 @@ Memoizing the selector will save re-renders to each selector and its items when:
 */
 const SelectorContainer: React.FC<SelectorProps> = memo(
   ({ type, selectedItem, dropdownItems, onSelect }) => (
-    <StyledSelectorContainer>
+    <div className={styles.styledSelectorContainer}>
       <SearchDropdown
         id={type}
         selectedItem={selectedItem}
@@ -49,9 +50,13 @@ const SelectorContainer: React.FC<SelectorProps> = memo(
         onSelect={onSelect}
         searchPlaceHolder="Search for a verse"
         selectorText={selectedItem}
-        label={<StyledLabel>{type === RangeSelectorType.START ? 'From' : 'To'} Verse:</StyledLabel>}
+        label={
+          <span className={styles.styledLabel}>
+            {type === RangeSelectorType.START ? 'From' : 'To'} Verse:
+          </span>
+        }
       />
-    </StyledSelectorContainer>
+    </div>
   ),
 );
 
@@ -63,7 +68,12 @@ const VersesRangeSelector: React.FC<Props> = ({
   isVisible,
 }) => {
   return (
-    <SelectorsContainer isVisible={isVisible}>
+    <div
+      className={classNames(styles.selectorsContainer, {
+        [styles.selectorsContainerVisible]: isVisible,
+        [styles.selectorsContainerInvisible]: !isVisible,
+      })}
+    >
       <SelectorContainer
         selectedItem={rangeStartVerse}
         type={RangeSelectorType.START}
@@ -76,25 +86,8 @@ const VersesRangeSelector: React.FC<Props> = ({
         dropdownItems={dropdownItems}
         onSelect={onSelect}
       />
-    </SelectorsContainer>
+    </div>
   );
 };
-
-const SelectorsContainer = styled.div<{ isVisible: boolean }>`
-  justify-content: space-between;
-  display: ${({ isVisible }) => (isVisible ? 'flex' : 'none')};
-  flex-wrap: wrap;
-`;
-
-const StyledSelectorContainer = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.micro};
-  margin-bottom: ${({ theme }) => theme.spacing.micro};
-`;
-
-const StyledLabel = styled.span`
-  margin-top: ${({ theme }) => theme.spacing.xsmall};
-  margin-bottom: ${({ theme }) => theme.spacing.xsmall};
-  font-weight: ${(props) => props.theme.fontWeights.bold};
-`;
 
 export default VersesRangeSelector;
