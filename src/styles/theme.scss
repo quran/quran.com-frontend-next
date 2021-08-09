@@ -2,6 +2,7 @@
 @use './themes/dark';
 @use './themes/sepia';
 
+/** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
     --font-primary: "Montserrat, sans-serif";
     --font-secondary: "Source Sans Pro, sans-serif";
@@ -56,6 +57,7 @@
 
     @include light.mode;
 
+    // Detect OS dark mode
     @media (prefers-color-scheme: dark) {
         @include dark.mode;
     }
@@ -71,7 +73,7 @@
     @include dark.mode;
 }
 
-/** Dark Theme */
+/** Sepia Theme */
 [data-theme="sepia"] {
     @include sepia.mode;
 }
