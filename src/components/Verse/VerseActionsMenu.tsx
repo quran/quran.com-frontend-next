@@ -1,11 +1,11 @@
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
-import styled from 'styled-components';
 import clipboardCopy from 'clipboard-copy';
 import Verse from '../../../types/Verse';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 import CopyIcon from '../../../public/icons/copy.svg';
 import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import { VerseActionModalType } from './VerseActionModal';
+import styles from './VerseActionsMenu.module.scss';
 
 interface Props {
   verse: Verse;
@@ -37,7 +37,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
 
   return (
     <>
-      <StyledContainer>
+      <div className={styles.container}>
         <VerseActionsMenuItem
           title={isCopied ? 'Copied!' : 'Copy'}
           icon={<CopyIcon />}
@@ -48,13 +48,9 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
           icon={<AdvancedCopyIcon />}
           onClick={onAdvancedCopyClicked}
         />
-      </StyledContainer>
+      </div>
     </>
   );
 };
-
-const StyledContainer = styled.div`
-  width: calc(9 * ${(props) => props.theme.spacing.large});
-`;
 
 export default VerseActionsMenu;
