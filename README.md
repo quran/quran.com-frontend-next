@@ -57,10 +57,6 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 The app runs on next.js and will automatically hot reload when you make changes.
 
-### Styling
-
-We use `styled-components` as our styling library. When adding a new library (for example, for tooltips), please ensure it uses `styled-components` as the styling library. We want to avoid sending large JS files to our users, so having a mix of styling solutions will not be good. `styled-components` also allows us to code-split and send JS + CSS for what is needed.
-
 ### DLS (design language system)
 
 One mistake we made previously is treated each component as unique. This made our work not scalable. Secondly, when looking at large companies, they often develop a design style language that can be used across the app without the need to create unique components and ensure better consistency across the product. We are trying to take a similar approach. If something can be used elsewhere, please put it inside the `dls/` directory and create stories for it.
