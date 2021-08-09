@@ -44,7 +44,7 @@
 }
 
 .headerContentContainer {
-   margin-right: var(--spacing-medium);
+  margin-right: var(--spacing-medium);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +57,7 @@
   justify-content: space-between;
 }
 
-.searchInputContainer{
+.searchInputContainer {
   height: 100%;
   width: 80%;
   display: flex;
@@ -71,6 +71,8 @@
 }
 
 .clear {
+  background: none;
+  border: none;
   text-transform: uppercase;
   text-decoration: underline;
   cursor: pointer;

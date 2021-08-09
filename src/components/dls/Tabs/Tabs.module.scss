@@ -1,0 +1,16 @@
+.tabNavItem {
+    color: var(--color-text-default);
+    font-size: var(--spacing-large);
+    display: inline-block;
+    margin-right: var(--spacing-mega);
+    cursor: pointer;
+}
+
+.activeNavItem {
+    color: var(--color-primary-medium);
+    border-bottom: var(--spacing-micro) solid var(--color-primary-medium);
+}
+
+.navList {
+    padding: 0;
+}

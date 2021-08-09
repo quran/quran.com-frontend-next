@@ -1,24 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import React, { useState, ReactElement, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
-
-const TabNavList = styled.ul`
-  padding: 0;
-`;
-
-const selectedCss = css<{ selected: boolean }>`
-  color: ${({ theme }) => theme.colors.primary.medium};
-  border-bottom: ${(props) => props.theme.spacing.micro} solid
-    ${({ theme }) => theme.colors.primary.medium};
-`;
-
-const TabNavItem = styled.li<{ selected: boolean }>`
-  color: ${({ theme }) => theme.colors.text.default};
-  font-size: ${({ theme }) => theme.spacing.large};
-  display: inline-block;
-  margin-right: ${({ theme }) => theme.spacing.mega};
-  cursor: pointer;
-  ${(props) => props.selected && selectedCss}
-`;
+import classNames from 'classnames';
+import styles from './Tabs.module.scss';
 
 type TabsProps = {
   initial?: number;
@@ -31,19 +16,19 @@ const Tabs = ({ initial = 0, children }: TabsProps) => {
   return (
     <div>
       <section role="tabpanel">
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */}
         <nav role="tablist">
-          <TabNavList>
-            {React.Children.map(children, (child, i) => {
-              const selected = currentTab === i;
-
-              return (
-                <TabNavItem selected={selected} onClick={() => setCurrentTab(i)}>
-                  {child.props.title}
-                </TabNavItem>
-              );
-            })}
-          </TabNavList>
+          <ul className={styles.navList}>
+            {React.Children.map(children, (child, i) => (
+              <li
+                onClick={() => setCurrentTab(i)}
+                className={classNames(styles.tabNavItem, {
+                  [styles.activeNavItem]: currentTab === i,
+                })}
+              >
+                {child.props.title}
+              </li>
+            ))}
+          </ul>
         </nav>
         {children[currentTab]}
       </section>
