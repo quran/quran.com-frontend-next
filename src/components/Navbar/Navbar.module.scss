@@ -13,7 +13,7 @@
 }
 
 .styledNavHidden {
-  transform: translateY(-constants.$navbar-height);
+  transform: translateY(0 - constants.$navbar-height);
 }
 
 .itemsContainer {
