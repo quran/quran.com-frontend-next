@@ -3,7 +3,7 @@ import { render as rtlRender } from '@testing-library/react';
 
 function render(ui, { ...options } = {}) {
   function Wrapper({ children }) {
-    return <div>{children}</div>;
+    return <>{children}</>;
   }
 
   return rtlRender(ui, { wrapper: Wrapper, ...options });
