@@ -7,8 +7,8 @@ import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 import ThemeProvider from '../styles/ThemeProvider';
-import '../styles/reset.css';
-import '../styles/fonts.css';
+import '../styles/reset.scss';
+import '../styles/fonts.scss';
 import '../styles/theme.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
