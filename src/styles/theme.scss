@@ -1,4 +1,7 @@
-/** Light Theme */
+@use './themes/light';
+@use './themes/dark';
+@use './themes/sepia';
+
 :root {
     --font-primary: "Montserrat, sans-serif";
     --font-secondary: "Source Sans Pro, sans-serif";
@@ -11,33 +14,6 @@
     --spacing-medium: 1rem;
     --spacing-large: 1.2rem;
     --spacing-mega: 2rem;
-
-    --color-primary-faded: #fff;
-    --color-primary-faint: #fff;
-    --color-primary-medium: #00acc1;
-    --color-primary-deep: #fff;
-
-    --color-secondary-faded: #fff;
-    --color-secondary-faint: #fff;
-    --color-secondary-medium: #c8c8c8;
-    --color-secondary-deep: #fff;
-
-    --color-tertiary-faded: #fff;
-    --color-tertiary-faint: #fff;
-    --color-tertiary-medium: #fff;
-    --color-tertiary-deep: #fff;
-
-    --color-text-default: #607d8b;
-    --color-text-link: #fff;
-    --color-text-warning: #fff;
-    --color-text-error: #fff;
-
-    --color-background-faded-grey-scale: rgba(0, 0, 0, 0.06);
-    --color-background-neutral-grey: #f8f8f8;
-    --color-background-default: #fff;
-    --color-background-faded-black-scale: rgba(0, 0, 0, 0.5);
-
-    --color-borders-hairline: rgb(235, 238, 240);
 
     --font-size-small: 0.6rem;
     --font-size-normal: 0.7rem;
@@ -59,10 +35,6 @@
     --border-radius-default: 0.25rem;
     --border-radius-circle: 50%;
 
-    --shadow-light: "";
-    --shadow-regular: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    --shadow-heavy: "";
-
     --opacity-30: 30%;
     --opacity-50: 50%;
     --opacity-75: 75%;
@@ -81,34 +53,25 @@
     --transition-fast: 0.3s;
     --transition-regular: 0.6s;
     --transition-slow: 0.9s;
+
+    @include light.mode;
+
+    @media (prefers-color-scheme: dark) {
+        @include dark.mode;
+    }
+}
+
+/** Light Theme */
+[data-theme="light"] {
+    @include light.mode;
 }
 
 /** Dark Theme */
 [data-theme="dark"] {
-    --color-primary-faded: #fff;
-    --color-primary-faint: #fff;
-    --color-primary-medium: rgb(51, 204, 255);
-    --color-primary-deep: #fff;
+    @include dark.mode;
+}
 
-    --color-secondary-faded: #fff;
-    --color-secondary-faint: #fff;
-    --color-secondary-medium: rgb(238, 0, 255);
-    --color-secondary-deep: #fff;
-
-    --color-tertiary-faded: #fff;
-    --color-tertiary-faint: #fff;
-    --color-tertiary-medium: #fff;
-    --color-tertiary-deep: #fff;
-
-    --color-text-default: #fff;
-    --color-text-link: #fff;
-    --color-text-warning: #fff;
-    --color-text-error: #fff;
-
-    --color-background-faded-grey-scale: rgba(0, 0, 0, 0.06);
-    --color-background-neutral-grey: #f8f8f8;
-    --color-background-default: rgb(6, 6, 6);
-    --color-background-faded-black-scale: rgba(0, 0, 0, 0.5);
-
-    --color-borders-hairline: rgb(235, 238, 240);
+/** Dark Theme */
+[data-theme="sepia"] {
+    @include sepia.mode;
 }

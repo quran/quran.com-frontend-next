@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum ThemeType {
+  System = 'system',
   Light = 'light',
   Dark = 'dark',
   Sepia = 'sepia',
@@ -11,7 +12,7 @@ export type Theme = {
 };
 
 const initialState: Theme = {
-  type: ThemeType.Light,
+  type: ThemeType.System,
 };
 
 export const themeSlice = createSlice({
