@@ -1,83 +1,83 @@
 :root {
-    --font-primary: "Montserrat, sans-serif";
-    --font-secondary: "Source Sans Pro, sans-serif";
-    --font-tertiary: "Times New Roman, sans-serif";
+  --font-primary: "Montserrat, sans-serif";
+  --font-secondary: "Source Sans Pro, sans-serif";
+  --font-tertiary: "Times New Roman, sans-serif";
 
-    --spacing-micro: 0.2rem;
-    --spacing-xxsmall: 0.4rem;
-    --spacing-xsmall: 0.6rem;
-    --spacing-small: 0.8rem;
-    --spacing-medium: 1rem;
-    --spacing-large: 1.2rem;
-    --spacing-mega: 2rem;
+  --spacing-micro: 0.2rem;
+  --spacing-xxsmall: 0.4rem;
+  --spacing-xsmall: 0.6rem;
+  --spacing-small: 0.8rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.2rem;
+  --spacing-mega: 2rem;
 
-    --color-primary-faded: #fff;
-    --color-primary-faint: #fff;
-    --color-primary-medium: #00acc1;
-    --color-primary-deep: #fff;
+  --color-primary-faded: #fff;
+  --color-primary-faint: #fff;
+  --color-primary-medium: #00acc1;
+  --color-primary-deep: #fff;
 
-    --color-secondary-faded: #fff;
-    --color-secondary-faint: #fff;
-    --color-secondary-medium: #c8c8c8;
-    --color-secondary-deep: #fff;
+  --color-secondary-faded: #fff;
+  --color-secondary-faint: #fff;
+  --color-secondary-medium: #c8c8c8;
+  --color-secondary-deep: #fff;
 
-    --color-tertiary-faded: #fff;
-    --color-tertiary-faint: #fff;
-    --color-tertiary-medium: #fff;
-    --color-tertiary-deep: #fff;
+  --color-tertiary-faded: #fff;
+  --color-tertiary-faint: #fff;
+  --color-tertiary-medium: #fff;
+  --color-tertiary-deep: #fff;
 
-    --color-text-default: #607d8b;
-    --color-text-link: #fff;
-    --color-text-warning: #fff;
-    --color-text-error: #fff;
+  --color-text-default: #607d8b;
+  --color-text-link: #fff;
+  --color-text-warning: #fff;
+  --color-text-error: #fff;
 
-    --color-background-faded-grey-scale: rgba(0, 0, 0, 0.06);
-    --color-background-neutral-grey: #f8f8f8;
-    --color-background-default: #fff;
-    --color-background-faded-black-scale: rgba(0, 0, 0, 0.5);
+  --color-background-faded-grey-scale: rgba(0, 0, 0, 0.06);
+  --color-background-neutral-grey: #f8f8f8;
+  --color-background-default: #fff;
+  --color-background-faded-black-scale: rgba(0, 0, 0, 0.5);
 
-    --color-borders-hairline: rgb(235, 238, 240);
+  --color-borders-hairline: rgb(235, 238, 240);
 
-    --font-size-small: 0.6rem;
-    --font-size-normal: 0.7rem;
-    --font-size-large: 0.8rem;
-    --font-size-xlarge: 1rem;
-    --font-size-jumbo: 1.2rem;
+  --font-size-small: 0.6rem;
+  --font-size-normal: 0.7rem;
+  --font-size-large: 0.8rem;
+  --font-size-xlarge: 1rem;
+  --font-size-jumbo: 1.2rem;
 
-    --line-height-small: 0.8rem;
-    --line-height-normal: 1rem;
-    --line-height-large: 1.2rem;
-    --line-height-xlarge: 1.4rem;
-    --line-height-jumbo: 1.6rem;
+  --line-height-small: 0.8rem;
+  --line-height-normal: 1rem;
+  --line-height-large: 1.2rem;
+  --line-height-xlarge: 1.4rem;
+  --line-height-jumbo: 1.6rem;
 
-    --font-weight-normal: 400;
-    --font-weight-bold: 700;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
 
-    --border-radius-sharp: 0;
-    --border-radius-pill: 20rem;
-    --border-radius-default: 0.25rem;
-    --border-radius-circle: 50%;
+  --border-radius-sharp: 0;
+  --border-radius-pill: 20rem;
+  --border-radius-default: 0.25rem;
+  --border-radius-circle: 50%;
 
-    --shadow-light: "";
-    --shadow-regular: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    --shadow-heavy: "";
+  --shadow-light: "";
+  --shadow-regular: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --shadow-heavy: "";
 
-    --opacity-30: 30%;
-    --opacity-50: 50%;
-    --opacity-75: 75%;
-    --opacity-85: 85%;
+  --opacity-30: 30%;
+  --opacity-50: 50%;
+  --opacity-75: 75%;
+  --opacity-85: 85%;
 
-    --z-index-min: -999;
-    --z-index-default: 1;
-    --z-index-sticky: 300;
-    --z-index-header: 400;
-    --z-index-toast: 500;
-    --z-index-dropdown: 600;
-    --z-index-spinner: 700;
-    --z-index-modal: 800;
-    --z-index-max: 999;
+  --z-index-min: -999;
+  --z-index-default: 1;
+  --z-index-sticky: 300;
+  --z-index-header: 400;
+  --z-index-toast: 500;
+  --z-index-dropdown: 600;
+  --z-index-spinner: 700;
+  --z-index-modal: 800;
+  --z-index-max: 999;
 
-    --transition-fast: 0.3s;
-    --transition-regular: 0.6s;
-    --transition-slow: 0.9s;
+  --transition-fast: 0.3s;
+  --transition-regular: 0.6s;
+  --transition-slow: 0.9s;
 }

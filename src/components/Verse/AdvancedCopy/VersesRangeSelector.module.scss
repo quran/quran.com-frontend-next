@@ -4,14 +4,14 @@
   font-weight: var(--font-weight-bold);
 }
 .selectorContainer {
-    margin-top: var(--spacing-micro);
-    margin-bottom: var(--spacing-micro);
+  margin-top: var(--spacing-micro);
+  margin-bottom: var(--spacing-micro);
 }
 .selectorsContainer {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    display: flex; 
+  justify-content: space-between;
+  flex-wrap: wrap;
+  display: flex;
 }
 .selectorsContainerInvisible {
-    display: none;
+  display: none;
 }

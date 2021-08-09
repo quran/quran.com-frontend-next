@@ -33,7 +33,7 @@
   padding-right: var(--spacing-xsmall);
   flex-direction: row-reverse;
   justify-content: space-between;
-  @include breakpoints.tablet {  
+  @include breakpoints.tablet {
     flex-direction: inherit;
     justify-content: center;
   }
@@ -67,5 +67,3 @@
 .sliderContainer {
   width: 70%;
 }
-
-

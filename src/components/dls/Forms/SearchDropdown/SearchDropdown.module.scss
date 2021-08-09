@@ -1,87 +1,87 @@
 .label {
-    padding: var(--spacing-micro) 0;
+  padding: var(--spacing-micro) 0;
 }
 
 .container {
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
-    border-radius: var(--border-radius-default);
-    border: 1px solid var(--color-borders-hairline);
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-borders-hairline);
 }
 
 .selectorContainer {
-    min-height: var(--spacing-mega);
-    cursor: pointer;
-    padding: var(--spacing-micro);
+  min-height: var(--spacing-mega);
+  cursor: pointer;
+  padding: var(--spacing-micro);
 }
 
 .searchInputContainer {
-    background-color: var(--color-background-default);
-    margin-bottom: var(--spacing-micro);
-    height: var(--spacing-mega);
+  background-color: var(--color-background-default);
+  margin-bottom: var(--spacing-micro);
+  height: var(--spacing-mega);
 }
 
 .itemsContainer {
-    border-radius: var(--border-radius-default);
-    border: 1px solid var(--color-borders-hairline);
-    overflow: hidden;
-    max-height: calc(5 * var(--spacing-mega));
-    overflow-y: scroll;
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-borders-hairline);
+  overflow: hidden;
+  max-height: calc(5 * var(--spacing-mega));
+  overflow-y: scroll;
 }
 
 .searchInput {
-    width: 100%;
-    border: 0;
-    &:focus {
-        outline: none;
-    }
+  width: 100%;
+  border: 0;
+  &:focus {
+    outline: none;
+  }
 }
 
 .searchDropdownContainer {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    max-width: 100%;
-    background-color: var(--color-background-default);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 100%;
+  background-color: var(--color-background-default);
 }
 
 .smallSearchDropdownContainer {
-    width: calc(5 * var(--spacing-mega));
+  width: calc(5 * var(--spacing-mega));
 }
 .mediumSearchDropdownContainer {
-    width: calc(8 * var(--spacing-mega));
+  width: calc(8 * var(--spacing-mega));
 }
 .largeSearchDropdownContainer {
-    width: calc(11 * var(--spacing-mega));
+  width: calc(11 * var(--spacing-mega));
 }
 
 .searchDropdownBodyContainer {
-    position: absolute;
-    margin-top: calc(var(--spacing-mega) + 3 * var(--spacing-micro));
-    width: 100%;
-    z-index: var(--z-index-dropdown);
-    transition: var(--transition-regular);
-    background-color: var(--color-background-default);
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
+  position: absolute;
+  margin-top: calc(var(--spacing-mega) + 3 * var(--spacing-micro));
+  width: 100%;
+  z-index: var(--z-index-dropdown);
+  transition: var(--transition-regular);
+  background-color: var(--color-background-default);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .openedSearchDropdownBodyContainer {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .caretIconButton {
-    svg {
-        transition: var(--transition-regular);
-    }
+  svg {
+    transition: var(--transition-regular);
+  }
 }
 
 .openedCaretIconButton {
-    svg {
-        transform: rotateX(180deg);
-    }
+  svg {
+    transform: rotateX(180deg);
+  }
 }
