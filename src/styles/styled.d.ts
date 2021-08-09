@@ -1,5 +1,3 @@
-import 'styled-components';
-
 type Fonts = {
   primary: string;
   secondary: string;
@@ -129,10 +127,4 @@ export interface Theme {
   zIndexes: ZIndexes;
   breakpoints: Breakpoints;
   transitions: Transitions;
-}
-
-// Extends the styled components interface with the theme
-declare module 'styled-components' {
-  // eslint-disable-next-line
-  export interface DefaultTheme extends Theme {}
 }
