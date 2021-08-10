@@ -1,4 +1,4 @@
 .container {
-  padding-top: calc(2 * var(--spacing-mega));
+  min-height: 100vh;
   background: var(--color-background-default);
 }

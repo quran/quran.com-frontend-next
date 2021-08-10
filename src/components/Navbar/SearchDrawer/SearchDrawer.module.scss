@@ -82,6 +82,8 @@
 .searchInput {
   width: 100%;
   border: 0;
+  background: var(--color-background-default);
+  color: var(--color-text-default);
   &:focus {
     outline: none;
   }

@@ -1,6 +1,7 @@
 .verseLink {
   cursor: pointer;
   width: fit-content;
+  color: var(--color-text-default);
 }
 
 .container {
@@ -11,6 +12,7 @@
 .text {
   letter-spacing: 0;
   line-height: normal;
+  color: var(--color-text-default);
 }
 
 .highlightedContainer {
