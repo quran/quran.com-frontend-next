@@ -1,0 +1,26 @@
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+
+.infiniteScroll {
+    width: 100%;
+}
+
+.loading {
+    text-align: center;
+    max-width: 80%;
+    margin: var(--spacing-medium) auto;
+}
+
+.container {
+    padding-top: calc(3 * var(--spacing-mega));
+    @include breakpoints.tablet {
+        transition: var(--transition-regular);
+        margin-right: 0;
+    }
+}
+
+.withVisibleSideBar {
+    @include breakpoints.tablet {
+        margin-right: constants.$notes-side-bar-desktop-width;
+    }
+}

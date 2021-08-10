@@ -5,16 +5,14 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import Chapter from 'types/Chapter';
-import styled from 'styled-components';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { NOTES_SIDE_BAR_DESKTOP_WIDTH } from 'src/styles/constants';
 import {
   selectTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
+import classNames from 'classnames';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
-
 import TranslationView from './TranslationView';
 import { ReadingView } from './types';
 import { makeVersesUrl } from '../../utils/apiPaths';
@@ -22,6 +20,7 @@ import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import ContextMenu from './ContextMenu';
 import Notes from './Notes/Notes';
+import styles from './QuranReader.module.scss';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -71,9 +70,13 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
     return (
       <>
         <ContextMenu />
-        <Container isSideBarVisible={isSideBarVisible}>
-          <StyledLoading>loading...</StyledLoading>
-        </Container>
+        <div
+          className={classNames(styles.container, {
+            [styles.withVisibleSideBar]: isSideBarVisible,
+          })}
+        >
+          <div className={styles.loading}>loading...</div>
+        </div>
         <Notes />
       </>
     );
@@ -90,44 +93,30 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
   return (
     <>
       <ContextMenu />
-      <Container isSideBarVisible={isSideBarVisible}>
-        <StyledInfiniteScroll
-          initialLoad={false}
-          threshold={INFINITE_SCROLLER_THRESHOLD}
-          hasMore={size < pageLimit}
-          loadMore={() => {
-            if (!isValidating) {
-              setSize(size + 1);
-            }
-          }}
-        >
-          {isQCFFont(quranReaderStyles.quranFont) && (
-            <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
-          )}
-          {view}
-        </StyledInfiniteScroll>
-      </Container>
+      <div
+        className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
+      >
+        <div className={styles.infiniteScroll}>
+          <InfiniteScroll
+            initialLoad={false}
+            threshold={INFINITE_SCROLLER_THRESHOLD}
+            hasMore={size < pageLimit}
+            loadMore={() => {
+              if (!isValidating) {
+                setSize(size + 1);
+              }
+            }}
+          >
+            {isQCFFont(quranReaderStyles.quranFont) && (
+              <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
+            )}
+            {view}
+          </InfiniteScroll>
+        </div>
+      </div>
       <Notes />
     </>
   );
 };
-
-const StyledLoading = styled.div`
-  text-align: center;
-  max-width: 80%;
-  margin: ${(props) => props.theme.spacing.medium} auto;
-`;
-
-const StyledInfiniteScroll = styled(InfiniteScroll)`
-  width: 100%;
-`;
-
-const Container = styled.div<{ isSideBarVisible: boolean }>`
-  padding-top: calc(3 * ${(props) => props.theme.spacing.mega});
-  @media only screen and (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    transition: ${(props) => props.theme.transitions.regular};
-    margin-right: ${(props) => (props.isSideBarVisible ? NOTES_SIDE_BAR_DESKTOP_WIDTH : 0)};
-  } ;
-`;
 
 export default QuranReader;

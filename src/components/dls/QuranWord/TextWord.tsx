@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { decamelizeKeys } from 'humps';
 import { CharType } from 'types/Word';
+import classNames from 'classnames';
+import styles from './TextWord.module.scss';
 
 type MadaniWordTextProps = {
   text: string;
@@ -10,32 +11,28 @@ type MadaniWordTextProps = {
 };
 
 const DEFAULT_FONT_FAMILY = 'UthmanicHafs1Ver17';
+const ME_QURAN = 'meQuran';
+const INDO_PAK = 'IndoPak';
 
 const UTHMANI_HAFS_FONTS = decamelizeKeys({
   qpcUthmaniHafs: DEFAULT_FONT_FAMILY,
-  textUthmani: 'meQuran',
-  textIndopak: 'IndoPak',
+  textUthmani: ME_QURAN,
+  textIndopak: INDO_PAK,
 });
 
-const getFontFamily = (font: string, charType: string) => {
-  if (charType === CharType.End) return DEFAULT_FONT_FAMILY;
-
-  return UTHMANI_HAFS_FONTS[font] || DEFAULT_FONT_FAMILY;
-};
-
-const TextWord = (props: MadaniWordTextProps) => {
-  const { text, font, charType } = props;
-  return (
-    <StyledHafsWordText font={font} charType={charType}>
-      {text}
-    </StyledHafsWordText>
-  );
-};
-
-const StyledHafsWordText = styled.span<{ font: string; charType: string }>`
-  unicode-bidi: bidi-override;
-  line-height: normal;
-  font-family: ${(props) => `${getFontFamily(props.font, props.charType)}`};
-`;
+const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => (
+  <span
+    className={classNames(styles.word, {
+      [styles[DEFAULT_FONT_FAMILY]]:
+        charType === CharType.End ||
+        !UTHMANI_HAFS_FONTS[font] ||
+        UTHMANI_HAFS_FONTS[font] === DEFAULT_FONT_FAMILY,
+      [styles[ME_QURAN]]: UTHMANI_HAFS_FONTS[font] === ME_QURAN,
+      [styles[INDO_PAK]]: UTHMANI_HAFS_FONTS[font] === INDO_PAK,
+    })}
+  >
+    {text}
+  </span>
+);
 
 export default TextWord;

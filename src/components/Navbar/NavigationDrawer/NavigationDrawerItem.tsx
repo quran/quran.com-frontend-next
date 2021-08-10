@@ -1,9 +1,9 @@
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 import IconContainer, { IconColor, IconSize } from 'src/components/dls/IconContainer/IconContainer';
-import { CENTER_VERTICALLY } from 'src/styles/utility';
-import styled from 'styled-components';
 import IconNorthEast from '../../../../public/icons/north_east.svg';
+import styles from './NavigationDrawerItem.module.scss';
 
 type NavigationDrawerItemProps = {
   title?: string;
@@ -20,14 +20,13 @@ const NavigationDrawerItem = ({
   href,
   isStale = false,
 }: NavigationDrawerItemProps) => {
-  const isLink = !!href;
   return (
     <LinkContainer href={href} isExternalLink={isExternalLink}>
-      <Container isLink={isLink} isStale={isStale}>
-        <InnerContainer>
+      <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
+        <div className={styles.innerContainer}>
           <div>
             <IconContainer icon={icon} size={IconSize.Xsmall} color={IconColor.secondary} />
-            <TitleContainer>{title}</TitleContainer>
+            <span className={styles.titleContainer}>{title}</span>
           </div>
           <div>
             {isExternalLink && (
@@ -38,8 +37,8 @@ const NavigationDrawerItem = ({
               />
             )}
           </div>
-        </InnerContainer>
-      </Container>
+        </div>
+      </div>
     </LinkContainer>
   );
 };
@@ -56,62 +55,16 @@ const LinkContainer = ({ href, isExternalLink, children }: LinkContainerProps) =
   }
   if (isExternalLink) {
     return (
-      <A href={href} target="_blank" rel="noreferrer">
+      <a className={styles.anchor} href={href} target="_blank" rel="noreferrer">
         {children}
-      </A>
+      </a>
     );
   }
   return (
     <Link href={href} passHref>
-      <A>{children}</A>
+      <a className={styles.anchor}>{children}</a>
     </Link>
   );
 };
-
-const Container = styled.div<{ isLink: boolean; isStale: boolean }>`
-  ${CENTER_VERTICALLY}
-  min-height: calc(${(props) => `${props.theme.spacing.mega} + ${props.theme.spacing.small}`});
-  padding-left: ${(props) => props.theme.spacing.micro};
-  padding-right: ${(props) => props.theme.spacing.micro};
-  border-bottom: 1px ${(props) => props.theme.colors.borders.hairline} solid;
-
-  ${(props) =>
-    !props.isStale &&
-    `&:hover {
-    background: #f9fcff;
-  }`}
-`;
-
-const InnerContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  &:hover {
-    color: ${(props) => props.theme.colors.primary.medium};
-
-    path {
-      fill: ${(props) => props.theme.colors.primary.medium};
-    }
-  }
-`;
-
-const TitleContainer = styled.span`
-  margin-left: ${(props) => props.theme.spacing.medium};
-  font-size: ${(props) => props.theme.fontSizes.xlarge};
-  vertical-align: text-top;
-`;
-
-const A = styled.a`
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  &:hover {
-    color: ${(props) => props.theme.colors.primary.medium};
-
-    path {
-      fill: ${(props) => props.theme.colors.primary.medium};
-    }
-  }
-`;
 
 export default NavigationDrawerItem;

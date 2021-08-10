@@ -1,12 +1,14 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
-import styled from 'styled-components';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import VerseActions from 'src/components/Verse/VerseActions';
+import classNames from 'classnames';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
+import styles from './TranslationView.module.scss';
 
 type TranslationViewProps = {
   verses: Verse[];
@@ -19,46 +21,27 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
     query: { chapterId },
   } = router;
   return (
-    <StyledTranslationView>
+    <div className={styles.container}>
       {verses.map((verse) => (
-        <VerseTextContainer highlight={false} key={verse.id}>
+        <div key={verse.id} className={classNames({ [styles.highlightedContainer]: false })}>
           <Link as={`/${chapterId}/${verse.verseNumber}`} href="/[chapterId]/[verseId]" passHref>
-            <StyledVerseLink>{verse.verseKey}</StyledVerseLink>
+            <p className={styles.verseLink}>{verse.verseKey}</p>
           </Link>
           <VerseActions verse={verse} />
           <VerseText words={verse.words} />
           {verse.translations?.map((translation: Translation) => (
-            <StyledText
-              quranReaderStyles={quranReaderStyles}
+            <div
+              className={styles.text}
               key={translation.id}
               dangerouslySetInnerHTML={{ __html: translation.text }}
+              style={{ fontSize: `${quranReaderStyles.translationFontSize}rem` }}
             />
           ))}
           <hr />
-        </VerseTextContainer>
+        </div>
       ))}
-    </StyledTranslationView>
+    </div>
   );
 };
-
-const StyledVerseLink = styled.p`
-  cursor: pointer;
-  width: fit-content;
-`;
-
-const VerseTextContainer = styled.div<{ highlight: boolean }>`
-  background: ${({ highlight, theme }) => highlight && theme.colors.primary.medium};
-`;
-
-const StyledTranslationView = styled.div`
-  max-width: 80%;
-  margin: ${(props) => props.theme.spacing.medium} auto;
-`;
-
-const StyledText = styled.div<{ quranReaderStyles: QuranReaderStyles }>`
-  letter-spacing: 0;
-  font-size: min(5vw, ${(props) => props.quranReaderStyles.translationFontSize}rem);
-  line-height: normal;
-`;
 
 export default TranslationView;

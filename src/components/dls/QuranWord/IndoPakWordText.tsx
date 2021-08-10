@@ -1,17 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styles from './IndoPakWordText.module.scss';
 
 type IndoPakWordTextProps = {
   text: string;
 };
 
-const IndoPakWordText = (props: IndoPakWordTextProps) => {
-  const { text } = props;
-  return <StyledIndoPakWordText>{text}</StyledIndoPakWordText>;
+const IndoPakWordText: React.FC<IndoPakWordTextProps> = ({ text }) => {
+  return <span className={styles.text}>{text}</span>;
 };
-
-const StyledIndoPakWordText = styled.span`
-  font-family: IndoPak;
-`;
 
 export default IndoPakWordText;

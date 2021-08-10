@@ -1,0 +1,17 @@
+.container {
+  padding-left: var(--spacing-xxsmall);
+  padding-right: var(--spacing-xxsmall);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  padding-top: var(--spacing-xsmall);
+  padding-bottom: var(--spacing-xsmall);
+  &:hover {
+    background: var(--color-background-faded-grey-scale);
+  }
+}
+.title {
+  margin-left: var(--spacing-medium);
+  font-size: var(--font-size-xlarge);
+  vertical-align: text-top;
+}

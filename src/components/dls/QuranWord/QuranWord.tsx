@@ -1,10 +1,11 @@
 import React from 'react';
-import Word from 'types/Word';
+import Word, { CharType } from 'types/Word';
 import { QuranFont } from 'src/components/QuranReader/types';
-import styled from 'styled-components';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
+import classNames from 'classnames';
 import TextWord from './TextWord';
-import GlypWord from './GlypWord';
+import GlyphWord from './GlyphWord';
+import styles from './QuranWord.module.scss';
 
 type QuranWordProps = {
   word: Word;
@@ -21,26 +22,21 @@ const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
   let wordText;
 
   if (isQCFFont(font)) {
-    wordText = <GlypWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
+    wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
   } else {
     wordText =
-      word.charTypeName === 'pause' ? (
+      word.charTypeName === CharType.Pause ? (
         ''
       ) : (
         <TextWord font={font} text={word.text} charType={word.charTypeName} />
       );
   }
 
-  return <StyledWordContainer highlight={highlight}>{wordText}</StyledWordContainer>;
+  return (
+    <span className={classNames(styles.container, { [styles.highlighted]: highlight })}>
+      {wordText}
+    </span>
+  );
 };
-
-type StyledWordContainerProps = {
-  highlight?: boolean;
-};
-
-const StyledWordContainer = styled.span<StyledWordContainerProps>`
-  color: ${(props) => props.highlight && props.theme.colors.primary.medium};
-  display: inline-block;
-`;
 
 export default QuranWord;

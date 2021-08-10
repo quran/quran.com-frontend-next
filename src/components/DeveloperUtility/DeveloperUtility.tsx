@@ -8,6 +8,7 @@ import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import NavbarAdjustment from './NavbarAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import TranslationsAdjustment from './TranslationsAdjustment';
+import ThemeAdjustment from './ThemeAdjustment';
 import styles from './DeveloperUtility.module.scss';
 /**
  * A set of developer utilities only availble on development environments
@@ -40,6 +41,7 @@ const DeveloperUtility = () => {
     >
       Developer Utility
       <div className={styles.divider} />
+      <ThemeAdjustment />
       <FontAdjustment />
       <ReadingViewAdjustment />
       <NotesAdjustment />

@@ -1,9 +1,11 @@
+@use "src/styles/breakpoints";
+
 .pageContainer {
     padding-top: calc(2 * var(--spacing-mega));
-    width: 70%;
     margin: 0 auto;
-    @media only screen and (max-width: var(--breakpoints-mobileL)) {
-        width: 90%;
+    width: 90%;
+    @include breakpoints.tablet {
+        width: 70%;
     }
 }
 
@@ -19,9 +21,9 @@
 }
 
 .bodyContainer {
-    width: 70%;
-    @media only screen and (max-width: var(--breakpoints-mobileL)) {
-        width: auto;
+    width: auto;
+    @include breakpoints.tablet {
+        width: 70%;
     }
 }
 
@@ -59,11 +61,11 @@
 
 .pageBody {
     width: 100%;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    @media only screen and (max-width: var(--breakpoints-mobileL)) {
-        display: block;
+    display: block;
+    @include breakpoints.tablet {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
     }
 }
 
@@ -72,11 +74,11 @@
     border-radius: var(--border-radius-default);
     background-color: var(--color-background-neutral-grey);
     min-height: calc(6 * var(--spacing-mega));
-    margin-right: var(--spacing-xsmall);
-    width: 30%;
     padding: var(--spacing-small);
-    @media only screen and (max-width: var(--breakpoints-mobileL)) {
-        width: auto;
-        margin: var(--spacing-xsmall) 0;
+    width: auto;
+    margin: var(--spacing-xsmall) 0;
+    @include breakpoints.tablet {
+        margin-right: var(--spacing-xsmall);
+        width: 30%;
     }
 }

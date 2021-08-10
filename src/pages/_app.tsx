@@ -1,15 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
 import { DefaultSeo } from 'next-seo';
-import { ThemeProvider } from 'styled-components';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
-import { theme } from '../styles/theme';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
-import '../styles/reset.css';
-import '../styles/fonts.css';
+import ThemeProvider from '../styles/ThemeProvider';
+import '../styles/reset.scss';
+import '../styles/fonts.scss';
 import '../styles/theme.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
@@ -19,7 +18,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="manifest" href="/manifest.json" />
       </Head>
       <ReduxProvider>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider>
           <DefaultSeo {...createSEOConfig({})} />
           <Navbar />
           <DeveloperUtility />

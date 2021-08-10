@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react';
-import styled from 'styled-components';
 import classNames from 'classnames';
 import styles from './RadioButton.module.scss';
 
@@ -46,14 +45,14 @@ const RadioButton: React.FC<Props> = ({
         className={classNames(styles.label, { [styles.disabled]: disabled || checked })}
       >
         <div className={styles.buttonContainer}>
-          <RadioInputContainer
-            size={size}
-            disabled={disabled}
-            checked={checked}
+          <div
             className={classNames(styles.inputContainer, {
               [styles.smallInputContainer]: size === RadioButtonSize.Small,
               [styles.mediumInputContainer]: size === RadioButtonSize.Medium,
               [styles.largeInputContainer]: size === RadioButtonSize.Large,
+              [styles.inactiveInputContainer]: !disabled && !checked,
+              [styles.activeInputContainer]: !disabled && checked,
+              [styles.disabledInputContainer]: disabled,
             })}
           >
             <input
@@ -66,7 +65,7 @@ const RadioButton: React.FC<Props> = ({
               value={value}
               onChange={handleChange}
             />
-          </RadioInputContainer>
+          </div>
         </div>
         {label && (
           <p
@@ -84,25 +83,5 @@ const RadioButton: React.FC<Props> = ({
     </div>
   );
 };
-
-const RadioInputContainer = styled.div<{
-  size: RadioButtonSize;
-  checked: boolean;
-  disabled: boolean;
-}>`
-  ${({ disabled, checked, theme }) =>
-    !disabled &&
-    !checked &&
-    `
-    border-color: ${theme.colors.borders.hairline};
-    &:hover {
-      border-color: ${theme.colors.text.default};
-    }`}
-  ${({ checked, disabled, theme }) =>
-    !disabled && checked && `border-color: ${theme.colors.text.default};`}
-  ${({ disabled, theme }) =>
-    disabled &&
-    `border-color: ${theme.colors.secondary.medium}; background-color: ${theme.colors.secondary.medium};`}
-`;
 
 export default RadioButton;

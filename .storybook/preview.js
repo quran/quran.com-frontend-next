@@ -1,27 +1,23 @@
 import { addDecorator, addParameters } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
-import styled, { ThemeProvider } from 'styled-components';
 
 import { theme, darkTheme } from '../src/styles/theme';
 import ResetCSS from '../src/styles/reset.css';
 import GlobalFonts from '../src/styles/fonts.css';
 
 const themes = [theme, darkTheme];
-const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.backgroundColor};
-  min-height: 100vh;
-`;
+
 
 const themeDecorator = (storyFn) => (
-  <ThemeProvider theme={themes[0]}>
+  <>
     <link rel="stylesheet" href={ResetCSS} />
     <link rel="stylesheet" href={GlobalFonts} />
 
-    <Wrapper>
+    <div>
       {storyFn()}
-    </Wrapper>
-  </ThemeProvider>
+    </div>
+  </>
 );
 
 // V6
