@@ -13,8 +13,7 @@ const getPages = (verses: Verse[]) => {
   return range(firstPage, lastPage + 1);
 };
 
-const buildV1FontFace = (pageNumber: string | number) => {
-  return `@font-face {
+const buildV1FontFace = (pageNumber: string | number) => `@font-face {
         font-family: 'p${pageNumber}-v1';
         src: local(QCF_P${String(pageNumber).padStart(3, '0')}),
         url('/fonts/v1/woff2/p${pageNumber}.woff2') format('woff2'),
@@ -22,17 +21,14 @@ const buildV1FontFace = (pageNumber: string | number) => {
         url('/fonts/v1/ttf/p${pageNumber}.ttf') format('truetype');
         font-display: swap;
     }`;
-};
 
-const buildV2FontFace = (pageNumber: string | number) => {
-  return `@font-face {
+const buildV2FontFace = (pageNumber: string | number) => `@font-face {
     font-family: 'p${pageNumber}-v2';
     src: local(QCF2${String(pageNumber).padStart(3, '0')}),
     url('/fonts/v2/woff2/p${pageNumber}.woff2') format('woff2'),
     url('/fonts/v2/woff/p${pageNumber}.woff') format('woff');
     font-display: swap;
  }`;
-};
 
 export const buildQCFFontFace = (verses: Verse[], fontType: QuranFont) => {
   const pageNumbers = getPages(verses);

@@ -11,18 +11,14 @@ export const audioPlayerStateSlice = createSlice({
   name: 'audioPlayerState',
   initialState,
   reducers: {
-    setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isPlaying: action.payload,
-      };
-    },
-    setCurrentTime: (state: AudioState, action: PayloadAction<number>) => {
-      return {
-        ...state,
-        currentTime: action.payload,
-      };
-    },
+    setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => ({
+      ...state,
+      isPlaying: action.payload,
+    }),
+    setCurrentTime: (state: AudioState, action: PayloadAction<number>) => ({
+      ...state,
+      currentTime: action.payload,
+    }),
   },
 });
 

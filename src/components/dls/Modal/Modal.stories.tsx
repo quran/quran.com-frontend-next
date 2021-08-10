@@ -87,7 +87,8 @@ export default {
 };
 
 const Template = (args) => {
-  const [isVisible, setIsVisible] = useState(args.visible);
+  const { visible } = args;
+  const [isVisible, setIsVisible] = useState(visible);
   const onClose = () => {
     setIsVisible(false);
   };

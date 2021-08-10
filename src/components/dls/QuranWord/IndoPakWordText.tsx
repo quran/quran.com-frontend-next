@@ -5,8 +5,8 @@ type IndoPakWordTextProps = {
   text: string;
 };
 
-const IndoPakWordText: React.FC<IndoPakWordTextProps> = ({ text }) => {
-  return <span className={styles.text}>{text}</span>;
-};
+const IndoPakWordText: React.FC<IndoPakWordTextProps> = ({ text }) => (
+  <span className={styles.text}>{text}</span>
+);
 
 export default IndoPakWordText;

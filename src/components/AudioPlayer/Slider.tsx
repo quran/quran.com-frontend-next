@@ -12,6 +12,16 @@ type SliderProps = {
   setTime: (number) => void;
 };
 
+const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
+  /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+  <span
+    className={classNames(styles.split, { [styles.splitCompleted]: isComplete })}
+    title={secondsFormatter(startTime)}
+    onClick={() => onClick()}
+    style={{ width: `${100 / NUMBER_OF_SPLITS}%` }}
+  />
+);
+
 /**
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
@@ -50,18 +60,6 @@ type SplitProps = {
   isComplete: boolean;
   startTime: number;
   onClick: () => void;
-};
-
-const Split = ({ isComplete, startTime, onClick }: SplitProps) => {
-  return (
-    /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
-    <span
-      className={classNames(styles.split, { [styles.splitCompleted]: isComplete })}
-      title={secondsFormatter(startTime)}
-      onClick={() => onClick()}
-      style={{ width: `${100 / NUMBER_OF_SPLITS}%` }}
-    />
-  );
 };
 
 export default Slider;
