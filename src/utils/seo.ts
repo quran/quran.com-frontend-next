@@ -1,5 +1,4 @@
 import { NextSeoProps } from 'next-seo';
-import { theme } from '../styles/theme';
 
 export const config = {
   siteName: "Al-Qur'an al-Kareem - القرآن الكريم",
@@ -66,7 +65,7 @@ export function createSEOConfig({
       },
       {
         name: 'theme-color',
-        content: theme.colors.primary.medium,
+        content: '#fff', // placeholder
       },
       {
         name: 'viewport',

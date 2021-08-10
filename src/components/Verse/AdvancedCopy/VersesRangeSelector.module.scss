@@ -3,11 +3,11 @@
   margin-bottom: var(--spacing-xsmall);
   font-weight: var(--font-weight-bold);
 }
-.selectorContainer {
+.selectedContainer {
   margin-top: var(--spacing-micro);
   margin-bottom: var(--spacing-micro);
 }
-.selectorsContainer {
+.rangeSelectorContainer {
   justify-content: space-between;
   flex-wrap: wrap;
   display: flex;
