@@ -1,9 +1,10 @@
 .container {
-	background: rgb(230, 230, 230);
+	//background: rgb(230, 230, 230);
+	background: var(--color-background-neutral-grey);
 	border: 1px solid rgba(0, 0, 0, 0.13);
 	color: black;
 	position: fixed;
-	top: calc(var(--spacing-mega) + var(--spacing-medium) + 1em);
+	top: calc(var(--spacing-mega) + var(--spacing-mega));
 	right: calc(var(--spacing-mega) + var(--spacing-medium));
 	height: calc(2*var(--spacing-mega));
 	width: calc(2*var(--spacing-mega));
@@ -20,26 +21,26 @@
 	cursor: unset;
 	height: auto;
 	width: auto;
-	padding: 10px;
-	border-radius: 13px;
+	padding: var(--spacing-xsmall);
+	border-radius: var(--spacing-small);
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: var(--spacing-xsmall);
 	align-items: flex-start;
 }
 
 .divider {
 	width: 100%;
-	border-top: 1px solid rgba(0, 0, 0, 0.14);
-	margin: 0 0 6px 0;
+	border-top: 1px solid var(--color-background-faded-grey-scale);
+	margin-bottom: var(--spacing-xxxsmall);
 }
 
 .closeButton {
 	background: linear-gradient(180deg, rgba(108, 179, 250, 1) 0%, rgba(6, 125, 255, 1) 100%);
 	border: none;
-	border-radius: 7.5px;
+	border-radius: var(--spacing-xsmall);
 	color: white;
-	padding: 3px 14px;
+	padding: var(--spacing-micro) var(--spacing-small);
 	box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.15);
 }
 
