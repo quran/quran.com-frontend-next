@@ -3,14 +3,17 @@
         "airbnb",
         "airbnb/hooks",
         "plugin:import/typescript",
-        "prettier",
-        "prettier/react"
+        "prettier"
     ],
     "parser": "babel-eslint",
     "plugins": [
         "prettier"
     ],
     "rules": {
+        "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
+        "@typescript-eslint/no-use-before-define": ["error"],
+        "no-shadow": "off", // we need to disable this @see https://stackoverflow.com/a/63961972/1931451
+        "@typescript-eslint/no-shadow": ["error"],
         "react/jsx-filename-extension": 0,
         "react/jsx-props-no-spreading": 0,
         "import/extensions": [
@@ -41,7 +44,7 @@
     "overrides": [{
         "extends": [
             "plugin:@typescript-eslint/recommended",
-            "prettier/@typescript-eslint"
+            "prettier"
         ],
         "files": [
             "*.ts",

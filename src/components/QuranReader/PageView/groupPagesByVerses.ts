@@ -13,9 +13,7 @@ import Verse from 'types/Verse';
  */
 const groupPagesByVerses = (verses: Verse[]) => {
   // Groups the verses based on their page number
-  const pages = _.groupBy(verses, (verse) => {
-    return verse.pageNumber;
-  });
+  const pages = _.groupBy(verses, (verse) => verse.pageNumber);
 
   return pages;
 };

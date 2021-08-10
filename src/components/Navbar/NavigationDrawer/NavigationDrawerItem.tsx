@@ -13,42 +13,6 @@ type NavigationDrawerItemProps = {
   isStale?: boolean;
 };
 
-const NavigationDrawerItem = ({
-  title,
-  icon,
-  isExternalLink,
-  href,
-  isStale = false,
-}: NavigationDrawerItemProps) => {
-  return (
-    <LinkContainer href={href} isExternalLink={isExternalLink}>
-      <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
-        <div className={styles.innerContainer}>
-          <div>
-            <IconContainer icon={icon} size={IconSize.Xsmall} color={IconColor.secondary} />
-            <span className={styles.titleContainer}>{title}</span>
-          </div>
-          <div>
-            {isExternalLink && (
-              <IconContainer
-                icon={<IconNorthEast />}
-                size={IconSize.Xsmall}
-                color={IconColor.secondary}
-              />
-            )}
-          </div>
-        </div>
-      </div>
-    </LinkContainer>
-  );
-};
-
-type LinkContainerProps = {
-  href?: string;
-  isExternalLink?: boolean;
-  children: React.ReactNode;
-};
-
 const LinkContainer = ({ href, isExternalLink, children }: LinkContainerProps) => {
   if (!href) {
     return <>{children}</>;
@@ -65,6 +29,40 @@ const LinkContainer = ({ href, isExternalLink, children }: LinkContainerProps) =
       <a className={styles.anchor}>{children}</a>
     </Link>
   );
+};
+
+const NavigationDrawerItem = ({
+  title,
+  icon,
+  isExternalLink,
+  href,
+  isStale = false,
+}: NavigationDrawerItemProps) => (
+  <LinkContainer href={href} isExternalLink={isExternalLink}>
+    <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
+      <div className={styles.innerContainer}>
+        <div>
+          <IconContainer icon={icon} size={IconSize.Xsmall} color={IconColor.secondary} />
+          <span className={styles.titleContainer}>{title}</span>
+        </div>
+        <div>
+          {isExternalLink && (
+            <IconContainer
+              icon={<IconNorthEast />}
+              size={IconSize.Xsmall}
+              color={IconColor.secondary}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  </LinkContainer>
+);
+
+type LinkContainerProps = {
+  href?: string;
+  isExternalLink?: boolean;
+  children: React.ReactNode;
 };
 
 export default NavigationDrawerItem;

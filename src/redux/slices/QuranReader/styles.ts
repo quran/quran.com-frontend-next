@@ -33,34 +33,26 @@ export const quranReaderStylesSlice = createSlice({
   name: 'quranReaderStyles',
   initialState,
   reducers: {
-    increaseTranslationTextSize: (state) => {
-      return {
-        ...state,
-        translationFontSize: state.translationFontSize * FONT_SCALING_FACTOR,
-      };
-    },
-    increaseQuranTextSize: (state) => {
-      return {
-        ...state,
-        quranTextFontSize: state.quranTextFontSize * FONT_SCALING_FACTOR,
-        quranTextLineHeight: state.quranTextLineHeight * FONT_SCALING_FACTOR,
-        quranTextLetterSpacing: state.quranTextLetterSpacing * FONT_SCALING_FACTOR,
-      };
-    },
-    decreaseTranslationTextSize: (state) => {
-      return {
-        ...state,
-        translationFontSize: state.translationFontSize / FONT_SCALING_FACTOR,
-      };
-    },
-    decreaseQuranTextSize: (state) => {
-      return {
-        ...state,
-        quranTextFontSize: state.quranTextFontSize / FONT_SCALING_FACTOR,
-        quranTextLineHeight: state.quranTextLineHeight / FONT_SCALING_FACTOR,
-        quranTextLetterSpacing: state.quranTextLetterSpacing / FONT_SCALING_FACTOR,
-      };
-    },
+    increaseTranslationTextSize: (state) => ({
+      ...state,
+      translationFontSize: state.translationFontSize * FONT_SCALING_FACTOR,
+    }),
+    increaseQuranTextSize: (state) => ({
+      ...state,
+      quranTextFontSize: state.quranTextFontSize * FONT_SCALING_FACTOR,
+      quranTextLineHeight: state.quranTextLineHeight * FONT_SCALING_FACTOR,
+      quranTextLetterSpacing: state.quranTextLetterSpacing * FONT_SCALING_FACTOR,
+    }),
+    decreaseTranslationTextSize: (state) => ({
+      ...state,
+      translationFontSize: state.translationFontSize / FONT_SCALING_FACTOR,
+    }),
+    decreaseQuranTextSize: (state) => ({
+      ...state,
+      quranTextFontSize: state.quranTextFontSize / FONT_SCALING_FACTOR,
+      quranTextLineHeight: state.quranTextLineHeight / FONT_SCALING_FACTOR,
+      quranTextLetterSpacing: state.quranTextLetterSpacing / FONT_SCALING_FACTOR,
+    }),
     setQuranFont: (state: QuranReaderStyles, action: PayloadAction<QuranFont>) => {
       switch (action.payload) {
         case QuranFont.MadaniV1:

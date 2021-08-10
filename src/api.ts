@@ -59,9 +59,7 @@ export const getChapterVerses = async (id: string | number, params?: Record<stri
 export const getChapterVersesResponse = async (
   id: string | number,
   params?: Record<string, unknown>,
-) => {
-  return fetcher(makeVersesUrl(id, params));
-};
+) => fetcher(makeVersesUrl(id, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
