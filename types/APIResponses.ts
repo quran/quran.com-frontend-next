@@ -3,6 +3,7 @@ import Chapter from './Chapter';
 import AvailableTranslation from './AvailableTranslation';
 import SearchResult from './SearchResult';
 import AvailableLanguage from './AvailableLanguage';
+import Reciter from './Reciter';
 
 // The response from the verses endpoint that returns a list of verses
 export interface VersesResponse {
@@ -34,6 +35,12 @@ export interface TranslationsResponse {
 
 export interface LanguagesResponse {
   languages?: AvailableLanguage[];
+  status?: number;
+  error?: string;
+}
+
+export interface RecitersResponse {
+  reciters?: Reciter[];
   status?: number;
   error?: string;
 }

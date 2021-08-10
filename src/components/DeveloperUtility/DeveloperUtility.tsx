@@ -9,6 +9,7 @@ import NavbarAdjustment from './NavbarAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import TranslationsAdjustment from './TranslationsAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
+import ReciterAdjustment from './ReciterAdjustment';
 import styles from './DeveloperUtility.module.scss';
 /**
  * A set of developer utilities only availble on development environments
@@ -49,6 +50,7 @@ const DeveloperUtility = () => {
       <AudioPlayerAdjustment />
       <TranslationsAdjustment />
       <ContextMenuAdjustment />
+      <ReciterAdjustment />
       <div>
         <button type="button" onClick={() => setIsExpanded(false)}>
           close

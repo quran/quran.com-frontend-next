@@ -37,6 +37,14 @@ export const makeLanguagesUrl = (language: string): string =>
   makeUrl('/resources/languages', decamelizeKeys({ language }));
 
 /**
+ * Compose the url for reciters API.
+ *
+ * @param {string} language
+ * @returns {string
+ */
+export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
+
+/**
  * Compose the url for the translations' filter API.
  *
  * @param {string} locale the user's language code.

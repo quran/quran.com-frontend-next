@@ -4,6 +4,7 @@ import {
   SearchResponse,
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
+  RecitersResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
@@ -12,6 +13,7 @@ import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
   makeLanguagesUrl,
+  makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
@@ -87,6 +89,17 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
   const payload = await fetcher(makeLanguagesUrl(language));
 
   return camelizeKeys(payload) as LanguagesResponse;
+};
+
+/**
+ * Get the current available reciters with the name translated in the current language.
+ *
+ * @returns {Promise<RecitersResponse>}
+ */
+export const getAvailableReciters = async (): Promise<RecitersResponse> => {
+  const payload = await fetcher(makeRecitersUrl());
+
+  return camelizeKeys(payload) as RecitersResponse;
 };
 
 /**
