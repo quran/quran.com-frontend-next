@@ -30,6 +30,9 @@
     @include utility.center-vertically;
     > svg {
         margin: auto;
+        path {
+            color: var(--color-text-default)
+        }
     }
     color: var(--color-text-default)
 }
