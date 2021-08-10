@@ -1,0 +1,32 @@
+@mixin mode {
+  --color-primary-faded: #fff;
+  --color-primary-faint: #fff;
+  --color-primary-medium: #00acc1;
+  --color-primary-deep: #fff;
+
+  --color-secondary-faded: #fff;
+  --color-secondary-faint: #fff;
+  --color-secondary-medium: #c8c8c8;
+  --color-secondary-deep: #fff;
+
+  --color-tertiary-faded: #fff;
+  --color-tertiary-faint: #fff;
+  --color-tertiary-medium: #fff;
+  --color-tertiary-deep: #fff;
+
+  --color-text-default: #607d8b;
+  --color-text-link: #fff;
+  --color-text-warning: #fff;
+  --color-text-error: #fff;
+
+  --color-background-faded-grey-scale: rgba(0, 0, 0, 0.06);
+  --color-background-neutral-grey: #f8f8f8;
+  --color-background-default: #f4ecd8;
+  --color-background-faded-black-scale: rgba(0, 0, 0, 0.5);
+
+  --color-borders-hairline: rgb(235, 238, 240);
+
+  --shadow-light: "";
+  --shadow-regular: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --shadow-heavy: "";
+}
