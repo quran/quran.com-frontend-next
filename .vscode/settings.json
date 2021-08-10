@@ -13,7 +13,7 @@
     "javascript.format.enable": false,
     "cssVariables.lookupFiles": [
         "src/styles/theme.scss",
-        "src/styles/themes/dark.scss", // include one of the theme file
+        "src/styles/themes/light.scss", // include one of the theme file
     ],
     "prettier.disableLanguages": [
         "javascript",

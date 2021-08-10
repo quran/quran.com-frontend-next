@@ -1,6 +1,7 @@
 .verseText {
   flex-wrap: wrap;
   display: flex;
+  color: var(--color-text-default); 
 }
 .verseTextContainer {
   display: block;
