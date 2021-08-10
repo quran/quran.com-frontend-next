@@ -12,7 +12,7 @@
     "build-storybook": "build-storybook",
     "lint": "eslint . --ext=tsx,ts,js,jsx",
     "lint:fix": "yarn lint --fix",
-    "lint:scss": "yarn stylelint '**/*.scss'",
+    "lint:scss": "yarn stylelint '**/*.scss' --fix",
     "generate-sitemap": "node sitemap-generator.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -97,6 +97,7 @@
     "react-test-renderer": "^16.13.1",
     "sass": "^1.37.5",
     "stylelint": "^13.13.1",
+    "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.20.1",
     "ts-loader": "^7.0.2",
     "typescript": "^4.3.2"

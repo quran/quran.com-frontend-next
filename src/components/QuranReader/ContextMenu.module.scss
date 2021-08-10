@@ -2,31 +2,31 @@
 @use "src/styles/breakpoints";
 
 .container {
-    background: #ffb800;
-    text-align: center;
-    position: fixed;
-    z-index: var(--z-index-default);
+  background: #ffb800;
+  text-align: center;
+  position: fixed;
+  z-index: var(--z-index-default);
+  transition: var(--transition-regular);
+  width: 100%;
+  top: 0;
+  height: var(--spacing-medium);
+  @include breakpoints.tablet {
     transition: var(--transition-regular);
-    width: 100%;
-    top: 0;
-    height: var(--spacing-medium);
-    @include breakpoints.tablet {
-        transition: var(--transition-regular);
-        margin-right: 0;
-    }
+    margin-right: 0;
+  }
 }
 
 .visibleContainer {
-    top: constants.$navbar-height;
+  top: constants.$navbar-height;
 }
 
 .expandedContainer {
-    height: var(--spacing-mega);
+  height: var(--spacing-mega);
 }
 
 .withVisibleSideBar {
-    @include breakpoints.tablet {
-        margin-right: constants.$notes-side-bar-desktop-width;
-        width: calc(100% - #{constants.$notes-side-bar-desktop-width});
-    }
+  @include breakpoints.tablet {
+    margin-right: constants.$notes-side-bar-desktop-width;
+    width: calc(100% - #{constants.$notes-side-bar-desktop-width});
+  }
 }

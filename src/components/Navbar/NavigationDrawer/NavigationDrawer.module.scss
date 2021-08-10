@@ -24,10 +24,10 @@
 }
 
 .containerOpen {
-    background: var(--color-background-default);
-    left: 0;
+  background: var(--color-background-default);
+  left: 0;
 
-    @include breakpoints.tablet {
+  @include breakpoints.tablet {
     left: 0;
   }
 }
