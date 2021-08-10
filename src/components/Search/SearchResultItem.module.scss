@@ -1,27 +1,38 @@
 .translationName {
-    color: var(--color-text-default);
-    font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  font-size: var(--font-size-normal);
 }
 
 .translationContainer {
-    margin: var(--spacing-small) 0;
+  margin: var(--spacing-small) 0;
 }
 
 .itemContainer {
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-default);
-    background-color: var(--color-background-neutral-grey);
-    padding: var(--spacing-small);
-    margin: var(--spacing-xsmall) 0;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-background-neutral-grey);
+  padding: var(--spacing-small);
+  margin: var(--spacing-xsmall) 0;
 }
 
 .quranTextContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .quranTextResult {
-    line-height: var(--line-height-large);
-    direction: rtl;
+  line-height: var(--line-height-large);
+  direction: rtl;
+}
+
+.quranTextContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quranTextResult {
+  line-height: var(--line-height-large);
+  direction: rtl;
 }

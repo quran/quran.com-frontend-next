@@ -46,7 +46,7 @@
   }
 
   @include breakpoints.tablet {
-     margin-right: var(--spacing-mega);
+    margin-right: var(--spacing-mega);
 
     > button {
       margin-left: var(--spacing-xsmall);

@@ -1,7 +1,7 @@
 .verseText {
   flex-wrap: wrap;
   display: flex;
-  color: var(--color-text-default); 
+  color: var(--color-text-default);
 }
 .verseTextContainer {
   display: block;
@@ -9,8 +9,8 @@
 }
 
 .verseTextCenterAlign {
-    justify-content: center;
+  justify-content: center;
 }
 .verseTextSpaceBetween {
-    justify-content: space-between;
+  justify-content: space-between;
 }

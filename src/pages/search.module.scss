@@ -1,84 +1,84 @@
 @use "src/styles/breakpoints";
 
 .pageContainer {
-    padding-top: calc(2 * var(--spacing-mega));
-    margin: 0 auto;
-    width: 90%;
-    @include breakpoints.tablet {
-        width: 70%;
-    }
+  padding-top: calc(2 * var(--spacing-mega));
+  margin: 0 auto;
+  width: 90%;
+  @include breakpoints.tablet {
+    width: 70%;
+  }
 }
 
 .header {
-    margin: var(--spacing-medium) 0;
-    font-size: var(--font-size-jumbo);
-    font-weight: var(--font-weight-bold);
+  margin: var(--spacing-medium) 0;
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
 }
 
 .boldHeader {
-    font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-small);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-small);
 }
 
 .bodyContainer {
-    width: auto;
-    @include breakpoints.tablet {
-        width: 70%;
-    }
+  width: auto;
+  @include breakpoints.tablet {
+    width: 70%;
+  }
 }
 
 .paginationContainer {
-    min-height: calc(2 * var(--spacing-mega));
+  min-height: calc(2 * var(--spacing-mega));
 }
 
 .searchInputContainer {
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-pill);
-    padding: var(--spacing-xxsmall);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: var(--spacing-large);
-    margin: var(--spacing-medium) 0;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-pill);
+  padding: var(--spacing-xxsmall);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--spacing-large);
+  margin: var(--spacing-medium) 0;
 }
 
 .rtlFlexDirection {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 .searchInput {
-    border: 0;
-    width: 90%;
-    font-size: var(--font-size-large);
-    &:focus {
-        outline: none;
-    }
-    &:disabled {
-        background: none;
-    }
+  border: 0;
+  width: 90%;
+  font-size: var(--font-size-large);
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: none;
+  }
 }
 
 .pageBody {
-    width: 100%;
-    display: block;
-    @include breakpoints.tablet {
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-    }
+  width: 100%;
+  display: block;
+  @include breakpoints.tablet {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+  }
 }
 
 .filtersContainer {
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-default);
-    background-color: var(--color-background-neutral-grey);
-    min-height: calc(6 * var(--spacing-mega));
-    padding: var(--spacing-small);
-    width: auto;
-    margin: var(--spacing-xsmall) 0;
-    @include breakpoints.tablet {
-        margin-right: var(--spacing-xsmall);
-        width: 30%;
-    }
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-background-neutral-grey);
+  min-height: calc(6 * var(--spacing-mega));
+  padding: var(--spacing-small);
+  width: auto;
+  margin: var(--spacing-xsmall) 0;
+  @include breakpoints.tablet {
+    margin-right: var(--spacing-xsmall);
+    width: 30%;
+  }
 }
