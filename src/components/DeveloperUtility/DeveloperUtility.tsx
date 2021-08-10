@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BsWrench } from 'react-icons/bs';
 import classNames from 'classnames';
 import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
@@ -10,6 +9,7 @@ import ContextMenuAdjustment from './ContextMenuAdjustment';
 import TranslationsAdjustment from './TranslationsAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
 import styles from './DeveloperUtility.module.scss';
+import WrenchIcon from '../../../public/icons/wrench.svg';
 /**
  * A set of developer utilities only availble on development environments
  */
@@ -28,7 +28,7 @@ const DeveloperUtility = () => {
         type="button"
         onClick={() => setIsExpanded(true)}
       >
-        <BsWrench className={styles.wrench} />
+        <WrenchIcon className={styles.wrench} />
       </button>
     );
   }

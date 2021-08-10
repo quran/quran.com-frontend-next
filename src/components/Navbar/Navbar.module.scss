@@ -21,6 +21,7 @@
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
+  color: var(--color-text-default);
 }
 
 .centerVertically {
@@ -45,7 +46,7 @@
   }
 
   @include breakpoints.tablet {
-     margin-right: var(--spacing-mega);
+    margin-right: var(--spacing-mega);
 
     > button {
       margin-left: var(--spacing-xsmall);

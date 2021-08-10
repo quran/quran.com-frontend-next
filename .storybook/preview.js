@@ -1,20 +1,15 @@
 import { addDecorator, addParameters } from '@storybook/react';
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
 
-import { theme, darkTheme } from '../src/styles/theme';
-import ResetCSS from '../src/styles/reset.css';
-import GlobalFonts from '../src/styles/fonts.css';
-
-const themes = [theme, darkTheme];
-
+import ResetCSS from '../src/styles/reset.scss';
+import Theme from '../src/styles/theme.scss'
+import GlobalFonts from '../src/styles/fonts.scss';
 
 const themeDecorator = (storyFn) => (
   <>
-    <link rel="stylesheet" href={ResetCSS} />
     <link rel="stylesheet" href={GlobalFonts} />
-
-    <div>
+    <link rel="stylesheet" href={ResetCSS} />
+    <link rel="stylesheet" href={Theme} />
+    <div data-theme="light">
       {storyFn()}
     </div>
   </>
@@ -25,38 +20,38 @@ const themeDecorator = (storyFn) => (
 addDecorator(themeDecorator);
 
 const viewports = {
-  xsmall: {
-    name: 'X Small',
+  mobileS: {
+    name: 'MobileS',
     styles: {
       width: `320px`,
       height: '100%',
     },
   },
-  small: {
-    name: 'Small',
+  mobileM: {
+    name: 'MobileM',
     styles: {
-      width: `${theme.breakpoints.sm - 1}px`,
+      width: `375px`,
       height: '100%',
     },
   },
-  medium: {
-    name: 'Medium',
+  mobileL: {
+    name: 'MobileL',
     styles: {
-      width: `${theme.breakpoints.md}px`,
+      width: `425px`,
       height: '100%',
     },
   },
-  large: {
-    name: 'Large',
+  tablet: {
+    name: 'Tablet',
     styles: {
-      width: `${theme.breakpoints.lg}px`,
+      width: `768px`,
       height: '100%',
     },
   },
-  xlarge: {
-    name: 'X Large',
+  desktop: {
+    name: 'Desktop',
     styles: {
-      width: `${theme.breakpoints.xl}px`,
+      width: `1024px`,
       height: '100%',
     },
   },
@@ -68,9 +63,3 @@ addParameters({
     },
   },
 });
-addDecorator(withA11y);
-addDecorator(
-  withKnobs({
-    escapeHTML: false,
-  }),
-);

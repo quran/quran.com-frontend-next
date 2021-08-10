@@ -1,25 +1,25 @@
 .input {
-    display: none;
+  display: none;
 }
 
 .itemLabel {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .itemContainer {
-    padding: var(--spacing-xxsmall);
+  padding: var(--spacing-xxsmall);
 }
 
 .enabledItem {
-    cursor: pointer;
-    &:hover {
-        background: var(--color-borders-hairline);
-    }
+  cursor: pointer;
+  &:hover {
+    background: var(--color-borders-hairline);
+  }
 }
 .disabledItem {
-    color: var(--color-secondary-medium);
+  color: var(--color-secondary-medium);
 }
 
 .checkedItemContainer {
-    background: var(--color-borders-hairline);
+  background: var(--color-borders-hairline);
 }

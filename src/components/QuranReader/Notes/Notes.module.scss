@@ -2,21 +2,21 @@
 @use "src/styles/breakpoints";
 
 .container {
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #2e75ff;
-    overflow-x: hidden;
-    padding-top: constants.$navbar-height;
-    z-index: var(--z-index-default);
-    transition: var(--transition-regular);
-    width: 0;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #2e75ff;
+  overflow-x: hidden;
+  padding-top: constants.$navbar-height;
+  z-index: var(--z-index-default);
+  transition: var(--transition-regular);
+  width: 0;
 }
 
 .visibleContainer {
-    width: calc(100% - (2 * var(--spacing-mega)));
-    @include breakpoints.tablet {
-        width: constants.$notes-side-bar-desktop-width;
-    }
+  width: calc(100% - (2 * var(--spacing-mega)));
+  @include breakpoints.tablet {
+    width: constants.$notes-side-bar-desktop-width;
+  }
 }

@@ -1,54 +1,54 @@
 .item {
-	list-style: none;
-	margin-bottom: var(--spacing-large);
-	&:hover {
-		background: var(--color-background-neutral-grey);
-	}
+  list-style: none;
+  margin-bottom: var(--spacing-large);
+  &:hover {
+    background: var(--color-background-neutral-grey);
+  }
 }
 
 .link {
-	display: block;
-	padding: var(--spacing-xsmall);
-	text-decoration: none;
+  display: block;
+  padding: var(--spacing-xsmall);
+  text-decoration: none;
 }
 
 .container {
-	display: flex;
-	width: 100%;
-	align-items: center;
+  display: flex;
+  width: 100%;
+  align-items: center;
 }
 
 .number {
-	margin: 0;
-	color: var(--color-primary-medium);
+  margin: 0;
+  color: var(--color-primary-medium);
 }
 
 .nameContainer {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	padding-left: var(--spacing-small);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-left: var(--spacing-small);
 }
 
 .nameArabic {
-	font-size: var(--font-size-jumbo);
-	margin-bottom: var(--spacing-medium);
-	color: var(--color-text-default);
+  font-size: var(--font-size-jumbo);
+  margin-bottom: var(--spacing-medium);
+  color: var(--color-text-default);
 }
 
 .iconContainer {
-	span {
-		font-family: "surahnames";
-		font-variant: normal;
-		text-transform: none;
-		line-height: var(--line-height-normal);
-		font-size: var(--font-size-jumbo);
-		color: var(--color-text-default);
-	}
+  span {
+    font-family: "surahnames";
+    font-variant: normal;
+    text-transform: none;
+    line-height: var(--line-height-normal);
+    font-size: var(--font-size-jumbo);
+    color: var(--color-text-default);
+  }
 }
 
 .nameTranslated {
-	text-transform: uppercase;
-	font-size: var(--font-size-normal);
-	color: var(--color-primary-medium);
+  text-transform: uppercase;
+  font-size: var(--font-size-normal);
+  color: var(--color-primary-medium);
 }

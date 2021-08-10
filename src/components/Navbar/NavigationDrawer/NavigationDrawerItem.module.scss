@@ -34,14 +34,14 @@
 }
 
 .anchor {
-	text-decoration: none;
-	color: inherit;
-	cursor: pointer;
-	&:hover {
-		color: var(--color-primary-medium);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  &:hover {
+    color: var(--color-primary-medium);
 
-		path {
-			fill: var(--color-primary-medium);
-		}
-	}
+    path {
+      fill: var(--color-primary-medium);
+    }
+  }
 }

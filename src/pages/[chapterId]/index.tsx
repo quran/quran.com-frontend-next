@@ -61,11 +61,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [], // no pre-rendered chapters at build time.
-    fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-  };
-};
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [], // no pre-rendered chapters at build time.
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+});
 
 export default Chapter;

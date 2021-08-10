@@ -1,43 +1,43 @@
 @use "sass:color";
 
 .container {
-    position: relative;
-    width: fit-content;
+  position: relative;
+  width: fit-content;
 }
 
 .overlay {
-    position: absolute;
-    border-radius: 3%;
-    background: var(--color-background-neutral-grey);
-    transition: var(--transition-fast);
-    z-index: var(--z-index-dropdown);
-    border: 1px solid var(--color-primary-medium);
-    opacity: 0;
-    visibility: hidden;
-    padding: var(--spacing-micro);
+  position: absolute;
+  border-radius: 3%;
+  background: var(--color-background-neutral-grey);
+  transition: var(--transition-fast);
+  z-index: var(--z-index-dropdown);
+  border: 1px solid var(--color-primary-medium);
+  opacity: 0;
+  visibility: hidden;
+  padding: var(--spacing-micro);
 }
 
 .open {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .placementLeft {
-    margin-right: var(--spacing-xsmall);
-    right: 100%;
-    top: -var(--spacing-medium);
+  margin-right: var(--spacing-xsmall);
+  right: 100%;
+  top: -var(--spacing-medium);
 }
 .placementRight {
-    margin-left: var(--spacing-xsmall);
-    left: 100%;
-    top: -var(--spacing-medium);
+  margin-left: var(--spacing-xsmall);
+  left: 100%;
+  top: -var(--spacing-medium);
 }
 .placementTop {
-    margin-bottom: var(--spacing-xsmall);
-    bottom: 100%;
+  margin-bottom: var(--spacing-xsmall);
+  bottom: 100%;
 }
 
 .placementBottom {
-    margin-top: var(--spacing-xsmall);
-    top: 100%;
+  margin-top: var(--spacing-xsmall);
+  top: 100%;
 }

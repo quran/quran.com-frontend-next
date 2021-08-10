@@ -22,9 +22,7 @@ const groupLinesByVerses = (verses: Verse[]) => {
   });
 
   // Groups the words based on their (page and) line number
-  const lines = _.groupBy(words, (word) => {
-    return `Page${word.pageNumber}-Line${word.lineNumber}`;
-  });
+  const lines = _.groupBy(words, (word) => `Page${word.pageNumber}-Line${word.lineNumber}`);
 
   return lines;
 };

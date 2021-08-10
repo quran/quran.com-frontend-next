@@ -1,15 +1,15 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .buttonContainer {
-    margin: var(--spacing-micro);
+  margin: var(--spacing-micro);
 }
 
 .selectedButton {
-    background: var(--color-background-faded-grey-scale);
-    border-radius: var(--border-radius-circle);
+  background: var(--color-background-faded-grey-scale);
+  border-radius: var(--border-radius-circle);
 }

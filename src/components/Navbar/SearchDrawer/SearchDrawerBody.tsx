@@ -16,31 +16,29 @@ const SearchDrawerBody: React.FC<Props> = ({
   hasError,
   searchResult,
   searchQuery,
-}) => {
-  return (
-    <div className={styles.container}>
-      {isSearching && <div>Searching...</div>}
-      {!isSearching && hasError && <div>Something went wrong!</div>}
-      {!isSearching && !hasError && searchResult && (
-        <div>
-          <p>Results</p>
-          {searchResult.search.results.map((result) => (
-            <SearchResultItem key={result.verseId} result={result} />
-          ))}
-          <div className={styles.resultsSummaryContainer}>
-            <p>{searchResult.search.totalResults} results</p>
-            {searchResult.search.totalResults > 0 && (
-              <Link href={`/search?query=${searchQuery}`} passHref>
-                <a>
-                  <p>Show all results</p>
-                </a>
-              </Link>
-            )}
-          </div>
+}) => (
+  <div className={styles.container}>
+    {isSearching && <div>Searching...</div>}
+    {!isSearching && hasError && <div>Something went wrong!</div>}
+    {!isSearching && !hasError && searchResult && (
+      <div>
+        <p>Results</p>
+        {searchResult.search.results.map((result) => (
+          <SearchResultItem key={result.verseId} result={result} />
+        ))}
+        <div className={styles.resultsSummaryContainer}>
+          <p>{searchResult.search.totalResults} results</p>
+          {searchResult.search.totalResults > 0 && (
+            <Link href={`/search?query=${searchQuery}`} passHref>
+              <a>
+                <p>Show all results</p>
+              </a>
+            </Link>
+          )}
         </div>
-      )}
-    </div>
-  );
-};
+      </div>
+    )}
+  </div>
+);
 
 export default SearchDrawerBody;

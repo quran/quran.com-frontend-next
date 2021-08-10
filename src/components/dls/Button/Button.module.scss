@@ -1,67 +1,71 @@
 @use "src/styles/utility";
 
 .anchor {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .styledContainer {
-    cursor: pointer;
-    border-radius: var(--border-radius-circle);
-    border: none;
-    padding: 0;
-    display: inline-block;
-    align-items: center;
-    background: transparent;
+  cursor: pointer;
+  border-radius: var(--border-radius-circle);
+  border: none;
+  padding: 0;
+  display: inline-block;
+  align-items: center;
+  background: transparent;
 }
 
 .hoverableContainer {
-    &:hover {
-        background: var(--color-background-faded-grey-scale);
-    }
+  &:hover {
+    background: var(--color-background-faded-grey-scale);
+  }
 }
 
 .disabledContainer {
-    cursor: default;
-    opacity: var(--opacity-50);
-    pointer-events: none;
+  cursor: default;
+  opacity: var(--opacity-50);
+  pointer-events: none;
 }
 
 .iconContainer {
-    @include utility.center-vertically;
-    > svg {
-        margin: auto;
+  @include utility.center-vertically;
+  > svg {
+    margin: auto;
+    path {
+      color: var(--color-text-default);
     }
+  }
+  color: var(--color-text-default);
 }
 
 .xsmallStyledContainer {
-    width: 28px;
-    height: 28px;
-    svg {
-        width: 16px;
-        height: 16px;
-    }
+  width: 28px;
+  height: 28px;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 .smallStyledContainer {
-    width: 38px;
-    height: 38px;
-    svg {
-        width: 20px;
-        height: 20px;
-    }
+  width: 38px;
+  height: 38px;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 }
 .mediumStyledContainer {
-    width: 44px;
-    height: 44px;
-    svg {
-        width: 32px;
-        height: 32px;
-    }
+  width: 44px;
+  height: 44px;
+  svg {
+    width: 32px;
+    height: 32px;
+  }
 }
 .largeStyledContainer {
-    width: 52px;
-    height: 52px;
-    svg {
-        width: 36px;
-        height: 36px;
-    }
+  width: 52px;
+  height: 52px;
+  svg {
+    width: 36px;
+    height: 36px;
+  }
 }

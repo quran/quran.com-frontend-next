@@ -66,27 +66,25 @@ const VersesRangeSelector: React.FC<Props> = ({
   rangeEndVerse,
   onSelect,
   isVisible,
-}) => {
-  return (
-    <div
-      className={classNames(styles.rangeSelectorContainer, {
-        [styles.selectorsContainerInvisible]: !isVisible,
-      })}
-    >
-      <SelectorContainer
-        selectedItem={rangeStartVerse}
-        type={RangeSelectorType.START}
-        dropdownItems={dropdownItems}
-        onSelect={onSelect}
-      />
-      <SelectorContainer
-        selectedItem={rangeEndVerse}
-        type={RangeSelectorType.END}
-        dropdownItems={dropdownItems}
-        onSelect={onSelect}
-      />
-    </div>
-  );
-};
+}) => (
+  <div
+    className={classNames(styles.rangeSelectorContainer, {
+      [styles.selectorsContainerInvisible]: !isVisible,
+    })}
+  >
+    <SelectorContainer
+      selectedItem={rangeStartVerse}
+      type={RangeSelectorType.START}
+      dropdownItems={dropdownItems}
+      onSelect={onSelect}
+    />
+    <SelectorContainer
+      selectedItem={rangeEndVerse}
+      type={RangeSelectorType.END}
+      dropdownItems={dropdownItems}
+      onSelect={onSelect}
+    />
+  </div>
+);
 
 export default VersesRangeSelector;

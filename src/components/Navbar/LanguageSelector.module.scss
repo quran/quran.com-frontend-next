@@ -5,6 +5,7 @@
   @include utility.center-vertically;
 
   margin-left: var(--spacing-xxsmall);
+  color: var(--color-text-default);
 
   @include breakpoints.tablet {
     margin-left: var(--spacing-medium);

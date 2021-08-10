@@ -20,15 +20,6 @@ export enum ButtonSize {
   Large = 'large',
 }
 
-const Button = ({ size = ButtonSize.Medium, text, disabled, href, icon, onClick }: ButtonProps) => {
-  return (
-    <Container disabled={disabled} size={size} href={href} onClick={onClick}>
-      {icon && <div className={styles.iconContainer}>{icon}</div>}
-      {text}
-    </Container>
-  );
-};
-
 const Container = ({ children, disabled, size, href, onClick }) => {
   // if href was passed and also the button is not disabled.
   if (href && !disabled) {
@@ -70,5 +61,12 @@ const Container = ({ children, disabled, size, href, onClick }) => {
     </button>
   );
 };
+
+const Button = ({ size = ButtonSize.Medium, text, disabled, href, icon, onClick }: ButtonProps) => (
+  <Container disabled={disabled} size={size} href={href} onClick={onClick}>
+    {icon && <div className={styles.iconContainer}>{icon}</div>}
+    {text}
+  </Container>
+);
 
 export default Button;

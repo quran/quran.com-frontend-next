@@ -10,12 +10,10 @@ export const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
-    setIsVisible: (state: Notes, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isVisible: action.payload,
-      };
-    },
+    setIsVisible: (state: Notes, action: PayloadAction<boolean>) => ({
+      ...state,
+      isVisible: action.payload,
+    }),
   },
 });
 
