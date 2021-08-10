@@ -51,6 +51,8 @@
   border: 0;
   width: 90%;
   font-size: var(--font-size-large);
+  background: var(--color-background-default);
+  color: var(--color-text-default);
   &:focus {
     outline: none;
   }
