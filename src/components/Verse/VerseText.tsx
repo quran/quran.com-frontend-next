@@ -4,7 +4,7 @@ import Word from 'types/Word';
 import { selectReadingView } from 'src/redux/slices/QuranReader/readingView';
 import classNames from 'classnames';
 import QuranWord from '../dls/QuranWord/QuranWord';
-import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
+import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { ReadingView } from '../QuranReader/types';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
@@ -14,7 +14,7 @@ type VerseTextProps = {
 };
 
 const VerseText = ({ words }: VerseTextProps) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const readingView = useSelector(selectReadingView);
   const isQuranPage = readingView === ReadingView.QuranPage;
   const { lineNumber, pageNumber } = words[0];
@@ -27,7 +27,7 @@ const VerseText = ({ words }: VerseTextProps) => {
     <div
       className={classNames(styles.verseTextContainer)}
       style={{
-        fontSize: `${quranReaderStyles.verseTextFontSize}rem`,
+        fontSize: `${quranReaderStyles.quranTextFontSize}rem`,
         minWidth:
           isQuranPage && !centerAlignPage
             ? `min(95%, calc(${quranReaderStyles.letterSpacingMultiplier} * ${quranReaderStyles.quranTextFontSize}rem))`
