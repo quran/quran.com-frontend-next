@@ -60,8 +60,6 @@ const AudioPlayer = () => {
         currentRef.removeEventListener('pause', onAudioPause);
         currentRef.removeEventListener('ended', onAudioEnded);
       }
-      // reset isPlaying state
-      onAudioEnded();
     };
   }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded]);
 
