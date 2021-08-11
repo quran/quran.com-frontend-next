@@ -43,10 +43,10 @@ export const makeLanguagesUrl = (language: string): string =>
  * @returns {string
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
-export const makeReciterAudioUrl = (reciterId: number, chapter: number) =>
+export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
   makeUrl(`/audio/reciter/${reciterId}`, decamelizeKeys({ chapter }));
 
-export const makeReciterAudioTimestampUrl = (reciterId: number, verseKey: string) => {
+export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) => {
   return makeUrl(`/audio/reciter/50/timestamp?verse_key=${verseKey}`);
 };
 

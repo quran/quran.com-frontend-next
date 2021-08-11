@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { getVerseAudioTimestamp } from 'src/api';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -12,7 +10,7 @@ import {
   setIsPlaying,
   selectAudioPlayerState,
   setCurrentTime,
-  selectReciter,
+  selectAudioUrl,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -22,7 +20,6 @@ import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
 import styles from './AudioPlayer.module.scss';
-import useAudioData from './useAudioData';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -32,7 +29,7 @@ const AudioPlayer = () => {
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
-  const audioData = useAudioData();
+  const audio = useSelector(selectAudioUrl, shallowEqual);
 
   let audioDuration = 0;
 
@@ -66,7 +63,7 @@ const AudioPlayer = () => {
       // reset isPlaying state
       onAudioEnded();
     };
-  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, audioData.url]);
+  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded]);
 
   if (audioPlayerEl.current) {
     audioDuration = audioPlayerEl.current.duration;
@@ -110,15 +107,6 @@ const AudioPlayer = () => {
     [audioDuration, dispatch],
   );
 
-  // TODO: Tempoary hack, need to implement proper solution. Maybe something like this https://github.com/E-Kuerschner/useAudioPlayer
-  if (typeof window !== 'undefined') {
-    // @ts-ignore
-    window.setTime = (time) => {
-      setTime(time);
-      play();
-    };
-  }
-
   const seek = useCallback(
     (duration) => {
       setTime(audioPlayerEl.current.currentTime + duration);
@@ -136,7 +124,7 @@ const AudioPlayer = () => {
       <div className={styles.innerContainer}>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
-          src={audioData.url}
+          src={audio?.audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerEl}
@@ -186,20 +174,5 @@ const AudioPlayer = () => {
     </div>
   );
 };
-
-// TOOD: this is temporary, to test functionality. need to refactor, remove global window, etc
-export const setAudioTime = createAsyncThunk<void, string>(
-  'setAudioTime',
-  async (verseKey, thunkApi) => {
-    const currentState = thunkApi.getState();
-    const reciter = selectReciter(currentState);
-
-    const timeStamp = await getVerseAudioTimestamp(reciter?.id, verseKey);
-    const startTime = timeStamp.result.timestampFrom;
-
-    // @ts-ignore
-    window.setTime(startTime / 1000);
-  },
-);
 
 export default AudioPlayer;

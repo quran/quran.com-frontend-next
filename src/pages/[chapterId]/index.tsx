@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Error from 'next/error';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
-import { useDispatch } from 'react-redux';
-import { setChapter } from 'src/redux/slices/AudioPlayer/state';
 import { isValidChapterId } from '../../utils/validator';
 import { getChapter, getChapterVerses } from '../../api';
 import QuranReader from '../../components/QuranReader';
@@ -18,16 +16,10 @@ type ChapterProps = {
 };
 
 const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasError }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setChapter(Number(chapterResponse.chapter.id)));
-  }, [dispatch, chapterResponse.chapter?.id]);
-
   if (hasError) {
     return <Error statusCode={500} />;
   }
 
-  // set initial chapter for audio player
   return (
     <>
       <NextSeoHead

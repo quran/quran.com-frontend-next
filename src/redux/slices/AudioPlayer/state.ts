@@ -1,35 +1,57 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-// TODO: The filesize is getting big. need to split into another file
-
-type Reciter = {
-  id: number;
-  name: string;
-};
-
-export type Audio = {
-  url: string;
-  totalDuration: number;
-};
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getAudioFile, getVerseTimestamps } from 'src/api';
+import { AudioFile } from 'types/AudioFile';
+import Reciter from 'types/Reciter';
 
 export type AudioState = {
   isPlaying: boolean;
   currentTime: number;
-  reciter?: Reciter;
-  audio: Audio;
-  chapter: number;
+  reciter: Reciter;
+  audio: AudioFile;
 };
 
 const initialState: AudioState = {
   isPlaying: false,
   currentTime: 0,
-  reciter: null,
-  chapter: 1,
-  audio: {
-    url: '',
-    totalDuration: 0,
+  audio: null,
+  reciter: {
+    id: 5,
+    name: 'Mishari Rashid al-`Afasy',
+    recitationStyle: 'Warsh',
+    relativePath: 'mishaari_raashid_al_3afaasee',
   },
 };
+
+export const selectAudioPlayerState = (state) => state.audioPlayerState;
+export const selectReciter = (state) => state.audioPlayerState.reciter;
+export const selectAudioUrl = (state) => state.audioPlayerState.audio;
+
+export const setAudioFile = createAsyncThunk<AudioFile, number>(
+  'audioPlayerState/setAudioFile',
+  async (chapter, thunkAPI) => {
+    const reciter = selectReciter(thunkAPI.getState());
+
+    const res = await getAudioFile(reciter.id, chapter);
+    if (res.status === 500) {
+      throw new Error('server error: fail to get audio file');
+    }
+    const firstAudio = res.audioFiles[0];
+    if (!firstAudio) {
+      throw new Error('No audio file found');
+    }
+
+    return firstAudio;
+  },
+);
+
+export const playVerse = createAsyncThunk<number, string>(
+  'setAudioTime',
+  async (verseKey, thunkApi) => {
+    const reciter = selectReciter(thunkApi.getState());
+    const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
+    return timeStamp.result.timestampFrom;
+  },
+);
 
 export const audioPlayerStateSlice = createSlice({
   name: 'audioPlayerState',
@@ -50,12 +72,6 @@ export const audioPlayerStateSlice = createSlice({
     setChapter: (state, action: PayloadAction<number>) => {
       return { ...state, chapter: action.payload };
     },
-    setAudio: (state, action: PayloadAction<Audio>) => {
-      return {
-        ...state,
-        audio: action.payload,
-      };
-    },
     setCurrentTime: (state: AudioState, action: PayloadAction<number>) => {
       return {
         ...state,
@@ -63,17 +79,26 @@ export const audioPlayerStateSlice = createSlice({
       };
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(setAudioFile.fulfilled, (state, action: PayloadAction<AudioFile>) => {
+      return {
+        ...state,
+        audio: action.payload,
+      };
+    });
+    builder.addCase(playVerse.fulfilled, (state, action: PayloadAction<number>) => {
+      return {
+        ...state,
+        currentTime: action.payload,
+      };
+    });
+  },
 });
-
-export const selectAudioPlayerState = (state) => state.audioPlayerState;
-export const selectReciter = (state) => state.audioPlayerState.reciter;
-export const selectChapter = (state) => state.audioPlayerState.chapter;
 
 export const {
   setIsPlaying,
   setCurrentTime,
   setReciter,
-  setAudio,
   setChapter,
 } = audioPlayerStateSlice.actions;
 

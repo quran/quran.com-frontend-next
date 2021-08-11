@@ -46,13 +46,13 @@ export interface RecitersResponse {
   error?: string;
 }
 
-export interface ReciterAudioResponse {
+export interface AudioFilesResponse {
   audioFiles: AudioFile[];
   status?: number;
   error?: string;
 }
 
-export interface AudioTimestampResponse {
+export interface AudioTimestampsResponse {
   result: {
     timestampFrom: number;
     timestampTo: number;

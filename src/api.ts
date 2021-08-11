@@ -5,8 +5,8 @@ import {
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
   RecitersResponse,
-  ReciterAudioResponse,
-  AudioTimestampResponse,
+  AudioFilesResponse,
+  AudioTimestampsResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
@@ -15,8 +15,8 @@ import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
   makeLanguagesUrl,
-  makeReciterAudioTimestampUrl,
-  makeReciterAudioUrl,
+  makeAudioTimestampsUrl,
+  makeAudioFilesUrl,
   makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
@@ -96,7 +96,7 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
 };
 
 /**
- * Get the current available reciters with the name translated in the current language.
+ * Get list of available reciters.
  *
  * @returns {Promise<RecitersResponse>}
  */
@@ -106,21 +106,34 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> => {
   return camelizeKeys(payload) as RecitersResponse;
 };
 
-export const getReciterAudio = async (
-  reciterId: number,
-  chapter,
-): Promise<ReciterAudioResponse> => {
-  const payload = await fetcher(makeReciterAudioUrl(reciterId, chapter));
+/**
+ * Get audio file for a specific reciter and chapter.
+ * @param {number} reciterId
+ * @param {number} chapter the id of the chapter
+ */
 
-  return camelizeKeys(payload) as ReciterAudioResponse;
+export const getAudioFile = async (
+  reciterId: number,
+  chapter: number,
+): Promise<AudioFilesResponse> => {
+  const payload = await fetcher(makeAudioFilesUrl(reciterId, chapter));
+
+  return camelizeKeys(payload) as AudioFilesResponse;
 };
 
-export const getVerseAudioTimestamp = async (
+/**
+ * Get the timestamps for a specific verseKey. 
+ * We need this to select to move the cursor in the audio player when we click "play" in a specific verse.
+
+ * @param {number} reciterId 
+ * @param {number} verseKey example "1:1", meaning chapter 1, verse 1
+ */
+export const getVerseTimestamps = async (
   reciterId: number,
-  verseKey,
-): Promise<AudioTimestampResponse> => {
-  const payload = await fetcher(makeReciterAudioTimestampUrl(reciterId, verseKey));
-  return camelizeKeys(payload) as AudioTimestampResponse;
+  verseKey: string,
+): Promise<AudioTimestampsResponse> => {
+  const payload = await fetcher(makeAudioTimestampsUrl(reciterId, verseKey));
+  return camelizeKeys(payload) as AudioTimestampsResponse;
 };
 
 /**
