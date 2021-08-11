@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 const URLDebug = () => {
-  const audioData = useSelector((state: any) => state.audioPlayerState.audio.audioUrl);
+  const audioData = useSelector((state: any) => state.audioPlayerState.audio?.audioUrl);
   return (
     <div
       style={{
@@ -10,7 +10,7 @@ const URLDebug = () => {
         direction: 'rtl',
       }}
     >
-      {audioData.url}
+      {audioData}
     </div>
   );
 };

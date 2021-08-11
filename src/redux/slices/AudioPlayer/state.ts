@@ -49,7 +49,7 @@ export const playVerse = createAsyncThunk<number, string>(
   async (verseKey, thunkApi) => {
     const reciter = selectReciter(thunkApi.getState());
     const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
-    return timeStamp.result.timestampFrom;
+    return timeStamp.result.timestampFrom / 1000;
   },
 );
 

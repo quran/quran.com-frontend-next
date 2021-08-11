@@ -31,9 +31,8 @@ const ReciterAdjustment: React.FC = () => {
         name="reciters"
         onChange={onSelectedReciterChange}
         className={styles.select}
-        defaultValue={null}
+        value={selectedReciter.id}
       >
-        <option selected={selectedReciter === null}>Select Reciter</option>
         {(reciters as Reciter[]).map((reciter) => (
           <option key={reciter.id} value={reciter.id}>
             {reciter.name}
