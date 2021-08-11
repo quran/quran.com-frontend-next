@@ -1,7 +1,7 @@
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
-import { getCurrentPath } from 'src/utils/url';
+import { getOrigin } from 'src/utils/url';
 import Verse from '../../../types/Verse';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 import CopyIcon from '../../../public/icons/copy.svg';
@@ -65,9 +65,9 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
   };
 
   const onShareClicked = () => {
-    const path = getCurrentPath();
-    if (path) {
-      clipboardCopy(path).then(() => {
+    const origin = getOrigin();
+    if (origin) {
+      clipboardCopy(`${origin}/${chapterId}/${verse.verseNumber}`).then(() => {
         setIsShared(true);
       });
     }
