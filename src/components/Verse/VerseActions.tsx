@@ -5,6 +5,7 @@ import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
 import VerseActionsMenu from './VerseActionsMenu';
 import VerseActionModal, { VerseActionModalType } from './VerseActionModal';
 import styles from './VerseActions.module.scss';
+import PlayVerseAudioButton from './PlayVerseAudioButton';
 
 interface Props {
   verse: Verse;
@@ -29,6 +30,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
         verse={verse}
         setActiveVerseActionModal={setActiveVerseActionModal}
       />
+      <PlayVerseAudioButton verseKey={verse.verseKey} />
     </>
   );
 };

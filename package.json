@@ -61,6 +61,7 @@
     "@types/qs": "^6.9.7",
     "@types/react": "^17.0.16",
     "@types/react-dom": "^17.0.9",
+    "@types/react-redux": "^7.1.18",
     "@types/wicg-mediasession": "^1.1.2",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "awesome-typescript-loader": "^5.2.1",

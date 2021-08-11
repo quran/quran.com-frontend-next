@@ -4,6 +4,9 @@ import {
   SearchResponse,
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
+  RecitersResponse,
+  AudioFilesResponse,
+  AudioTimestampsResponse,
   TafsirsResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
@@ -14,6 +17,9 @@ import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
   makeLanguagesUrl,
+  makeAudioTimestampsUrl,
+  makeAudioFilesUrl,
+  makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
@@ -87,6 +93,47 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
   const payload = await fetcher(makeLanguagesUrl(language));
 
   return camelizeKeys(payload) as LanguagesResponse;
+};
+
+/**
+ * Get list of available reciters.
+ *
+ * @returns {Promise<RecitersResponse>}
+ */
+export const getAvailableReciters = async (): Promise<RecitersResponse> => {
+  const payload = await fetcher(makeRecitersUrl());
+
+  return camelizeKeys(payload) as RecitersResponse;
+};
+
+/**
+ * Get audio file for a specific reciter and chapter.
+ * @param {number} reciterId
+ * @param {number} chapter the id of the chapter
+ */
+
+export const getAudioFile = async (
+  reciterId: number,
+  chapter: number,
+): Promise<AudioFilesResponse> => {
+  const payload = await fetcher(makeAudioFilesUrl(reciterId, chapter));
+
+  return camelizeKeys(payload) as AudioFilesResponse;
+};
+
+/**
+ * Get the timestamps for a specific verseKey. 
+ * We need this to select to move the cursor in the audio player when we click "play" in a specific verse.
+
+ * @param {number} reciterId 
+ * @param {number} verseKey example "1:1", meaning chapter 1, verse 1
+ */
+export const getVerseTimestamps = async (
+  reciterId: number,
+  verseKey: string,
+): Promise<AudioTimestampsResponse> => {
+  const payload = await fetcher(makeAudioTimestampsUrl(reciterId, verseKey));
+  return camelizeKeys(payload) as AudioTimestampsResponse;
 };
 
 /**

@@ -4,6 +4,8 @@ import AvailableTranslation from './AvailableTranslation';
 import TafsirInfo from './TafsirInfo';
 import SearchResult from './SearchResult';
 import AvailableLanguage from './AvailableLanguage';
+import Reciter from './Reciter';
+import { AudioFile } from './AudioFile';
 
 export interface BaseResponse {
   status?: number;
@@ -40,6 +42,26 @@ export interface LanguagesResponse extends BaseResponse {
   languages?: AvailableLanguage[];
 }
 
+export interface RecitersResponse {
+  reciters?: Reciter[];
+  status?: number;
+  error?: string;
+}
+
+export interface AudioFilesResponse {
+  audioFiles: AudioFile[];
+  status?: number;
+  error?: string;
+}
+
+export interface AudioTimestampsResponse {
+  result: {
+    timestampFrom: number;
+    timestampTo: number;
+  };
+  status?: number;
+  error?: string;
+}
 export interface SearchResponse extends BaseResponse {
   search?: {
     query: string;

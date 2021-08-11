@@ -19,6 +19,7 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
   if (hasError) {
     return <Error statusCode={500} />;
   }
+
   return (
     <>
       <NextSeoHead

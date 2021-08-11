@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -10,6 +9,7 @@ import {
   setIsPlaying,
   selectAudioPlayerState,
   setCurrentTime,
+  selectAudioFile,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -28,6 +28,7 @@ const AudioPlayer = () => {
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
+  const audioFile = useSelector(selectAudioFile, shallowEqual);
 
   let audioDuration = 0;
 
@@ -120,7 +121,7 @@ const AudioPlayer = () => {
       <div className={styles.innerContainer}>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
-          src="https://server12.mp3quran.net/tnjy/004.mp3"
+          src={audioFile?.audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerEl}

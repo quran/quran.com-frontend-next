@@ -25,3 +25,8 @@
     margin-right: constants.$notes-side-bar-desktop-width;
   }
 }
+
+.playButton {
+  display: flex;
+  justify-content: center;
+}

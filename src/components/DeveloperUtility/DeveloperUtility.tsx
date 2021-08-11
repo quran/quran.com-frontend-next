@@ -9,6 +9,7 @@ import TafsirsAdjustment from './TafsirsAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import TranslationsAdjustment from './TranslationsAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
+import ReciterAdjustment from './ReciterAdjustment';
 import styles from './DeveloperUtility.module.scss';
 import WrenchIcon from '../../../public/icons/wrench.svg';
 /**
@@ -51,6 +52,7 @@ const DeveloperUtility = () => {
       <TranslationsAdjustment />
       <TafsirsAdjustment />
       <ContextMenuAdjustment />
+      <ReciterAdjustment />
       <div>
         <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close

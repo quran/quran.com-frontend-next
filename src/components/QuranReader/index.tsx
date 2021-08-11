@@ -22,6 +22,7 @@ import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import ContextMenu from './ContextMenu';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
+import PlayChapterAudioButton from './PlayButton';
 import TafsirView from './TafsirView';
 
 type QuranReaderProps = {
@@ -121,6 +122,7 @@ const QuranReader = ({
       <div
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
+        <PlayChapterAudioButton chapterId={Number(chapter.id)} />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}

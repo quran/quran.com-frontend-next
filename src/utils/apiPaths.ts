@@ -37,6 +37,19 @@ export const makeLanguagesUrl = (language: string): string =>
   makeUrl('/resources/languages', decamelizeKeys({ language }));
 
 /**
+ * Compose the url for reciters API.
+ *
+ * @param {string} language
+ * @returns {string
+ */
+export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
+export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
+  makeUrl(`/audio/reciter/${reciterId}`, decamelizeKeys({ chapter }));
+
+export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
+  makeUrl(`/audio/reciter/${reciterId}/timestamp?verse_key=${verseKey}`);
+
+/**
  * Compose the url for the translations' filter API.
  *
  * @param {string} locale the user's language code.
