@@ -57,49 +57,31 @@ export const audioPlayerStateSlice = createSlice({
   name: 'audioPlayerState',
   initialState,
   reducers: {
-    setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isPlaying: action.payload,
-      };
-    },
-    setReciter: (state, action: PayloadAction<Reciter>) => {
-      return {
-        ...state,
-        reciter: action.payload,
-      };
-    },
-    setChapter: (state, action: PayloadAction<number>) => {
-      return { ...state, chapter: action.payload };
-    },
-    setCurrentTime: (state: AudioState, action: PayloadAction<number>) => {
-      return {
-        ...state,
-        currentTime: action.payload,
-      };
-    },
+    setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => ({
+      ...state,
+      isPlaying: action.payload,
+    }),
+    setReciter: (state, action: PayloadAction<Reciter>) => ({
+      ...state,
+      reciter: action.payload,
+    }),
+    setCurrentTime: (state: AudioState, action: PayloadAction<number>) => ({
+      ...state,
+      currentTime: action.payload,
+    }),
   },
   extraReducers: (builder) => {
-    builder.addCase(setAudioFile.fulfilled, (state, action: PayloadAction<AudioFile>) => {
-      return {
-        ...state,
-        audio: action.payload,
-      };
-    });
-    builder.addCase(playVerse.fulfilled, (state, action: PayloadAction<number>) => {
-      return {
-        ...state,
-        currentTime: action.payload,
-      };
-    });
+    builder.addCase(setAudioFile.fulfilled, (state, action: PayloadAction<AudioFile>) => ({
+      ...state,
+      audio: action.payload,
+    }));
+    builder.addCase(playVerse.fulfilled, (state, action: PayloadAction<number>) => ({
+      ...state,
+      currentTime: action.payload,
+    }));
   },
 });
 
-export const {
-  setIsPlaying,
-  setCurrentTime,
-  setReciter,
-  setChapter,
-} = audioPlayerStateSlice.actions;
+export const { setIsPlaying, setCurrentTime, setReciter } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

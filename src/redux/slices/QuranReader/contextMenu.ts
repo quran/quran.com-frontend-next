@@ -10,12 +10,10 @@ export const contextMenuSlice = createSlice({
   name: 'contextMenu',
   initialState,
   reducers: {
-    setIsExpanded: (state: ContextMenu, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isExpanded: action.payload,
-      };
-    },
+    setIsExpanded: (state: ContextMenu, action: PayloadAction<boolean>) => ({
+      ...state,
+      isExpanded: action.payload,
+    }),
   },
 });
 

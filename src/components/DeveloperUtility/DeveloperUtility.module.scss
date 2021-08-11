@@ -1,22 +1,46 @@
 .container {
-  background: black;
-  color: white;
+  background: var(--color-background-neutral-grey);
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  color: black;
   position: fixed;
-  top: calc(var(--spacing-mega) + var(--spacing-medium));
+  top: calc(var(--spacing-mega) + var(--spacing-mega));
   right: calc(var(--spacing-mega) + var(--spacing-medium));
   height: calc(2 * var(--spacing-mega));
   width: calc(2 * var(--spacing-mega));
 
   z-index: var(--z-index-max);
   border-radius: 100%;
-  box-shadow: var(--shadow-regular);
+  box-shadow: 0px 12px 60px 0px rgba(0, 0, 0, 0.2);
   text-align: center;
+  cursor: pointer;
+  padding: unset;
 }
 
 .containerExpanded {
+  cursor: unset;
   height: auto;
   width: auto;
-  border-radius: 10%;
+  padding: var(--spacing-xsmall);
+  border-radius: var(--spacing-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+  align-items: flex-start;
+}
+
+.divider {
+  width: 100%;
+  border-top: 1px solid var(--color-background-faded-grey-scale);
+  margin-bottom: var(--spacing-xxxsmall);
+}
+
+.closeButton {
+  background: var(--color-primary-medium);
+  border: none;
+  border-radius: var(--spacing-xsmall);
+  color: white;
+  padding: var(--spacing-micro) var(--spacing-small);
+  box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.15);
 }
 
 .wrench {

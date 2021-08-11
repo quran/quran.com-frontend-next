@@ -16,12 +16,10 @@ export const audioPlayerStyleSlice = createSlice({
   name: 'audioPlayerStyle',
   initialState,
   reducers: {
-    setVisibility: (state: Style, action: PayloadAction<AudioPlayerVisibility>) => {
-      return {
-        ...state,
-        visibility: action.payload,
-      };
-    },
+    setVisibility: (state: Style, action: PayloadAction<AudioPlayerVisibility>) => ({
+      ...state,
+      visibility: action.payload,
+    }),
   },
 });
 

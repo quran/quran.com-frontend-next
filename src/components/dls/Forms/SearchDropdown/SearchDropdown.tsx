@@ -49,10 +49,8 @@ const SearchDropdown: React.FC<Props> = ({
   const [isOpened, setIsOpened] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
-  const [scrollToSelectedItem, selectedItemRef]: [
-    () => void,
-    RefObject<HTMLDivElement>,
-  ] = useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
+  const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
+    useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
 
   // if there are any changes in the items, we should update the filteredItems.
   // this is necessary when the parent items are have initial empty value and
@@ -100,10 +98,10 @@ const SearchDropdown: React.FC<Props> = ({
     setFilteredItems(
       newSearchQuery === ''
         ? items
-        : items.filter((item) => {
+        : items.filter((item) =>
             // we convert the search query and the item's label to lowercase first then check if the label contains a part/all of the search query.
-            return item.label.toLowerCase().includes(newSearchQuery.toLowerCase());
-          }),
+            item.label.toLowerCase().includes(newSearchQuery.toLowerCase()),
+          ),
     );
     setSearchQuery(newSearchQuery);
   };

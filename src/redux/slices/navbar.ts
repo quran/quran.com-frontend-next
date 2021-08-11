@@ -16,32 +16,23 @@ export const navbarSlice = createSlice({
   name: 'navbar',
   initialState,
   reducers: {
-    setIsVisible: (state: Navbar, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isVisible: action.payload,
-      };
-    },
-    setIsNavigationDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isNavigationDrawerOpen: action.payload,
-      };
-    },
-    setIsSearchDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isSearchDrawerOpen: action.payload,
-      };
-    },
+    setIsVisible: (state: Navbar, action: PayloadAction<boolean>) => ({
+      ...state,
+      isVisible: action.payload,
+    }),
+    setIsNavigationDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
+      ...state,
+      isNavigationDrawerOpen: action.payload,
+    }),
+    setIsSearchDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
+      ...state,
+      isSearchDrawerOpen: action.payload,
+    }),
   },
 });
 
-export const {
-  setIsVisible,
-  setIsNavigationDrawerOpen,
-  setIsSearchDrawerOpen,
-} = navbarSlice.actions;
+export const { setIsVisible, setIsNavigationDrawerOpen, setIsSearchDrawerOpen } =
+  navbarSlice.actions;
 
 export const selectNavbar = (state) => state.navbar;
 

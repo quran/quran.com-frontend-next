@@ -11,15 +11,13 @@ type IndexProps = {
   };
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
-  return (
-    <div className={styles.container}>
-      <ChaptersList chapters={chapters.slice(0, 38)} />
-      <ChaptersList chapters={chapters.slice(38, 76)} />
-      <ChaptersList chapters={chapters.slice(76, 114)} />
-    </div>
-  );
-};
+const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
+  <div className={styles.container}>
+    <ChaptersList chapters={chapters.slice(0, 38)} />
+    <ChaptersList chapters={chapters.slice(38, 76)} />
+    <ChaptersList chapters={chapters.slice(76, 114)} />
+  </div>
+);
 
 export const getStaticProps: GetStaticProps = async () => {
   const chaptersResponse = await getChapters();

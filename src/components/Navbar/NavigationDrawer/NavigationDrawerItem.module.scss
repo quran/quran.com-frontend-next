@@ -1,29 +1,36 @@
 @use "src/styles/utility";
 
 .container {
-  @include utility.center-vertically;
+	@include utility.center-vertically;
 
-  min-height: calc(var(--spacing-mega) + var(--spacing-small));
-  padding-left: var(--spacing-micro);
-  padding-right: var(--spacing-micro);
-  border-bottom: 1px var(--color-borders-hairline) solid;
+	min-height: calc(var(--spacing-mega) + var(--spacing-small));
+	padding-left: var(--spacing-micro);
+	padding-right: var(--spacing-micro);
+	border-bottom: 1px var(--color-borders-hairline) solid;
 }
 
 .containerStale {
-  &:hover {
-    background: var(--color-background-neutral-grey);
-  }
+	&:hover {
+		background: var(--color-background-neutral-grey);
+	}
 }
 
 .innerContainer {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	&:hover {
+		color: var(--color-primary-medium);
+
+		path {
+			fill: var(--color-primary-medium);
+		}
+	}
 }
 
 .titleContainer {
-  margin-left: var(--spacing-medium);
-  font-size: x-large;
-  vertical-align: text-top;
+	margin-left: var(--spacing-medium);
+	font-size: x-large;
+	vertical-align: text-top;
 }
 
 .anchor {

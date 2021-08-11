@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BsWrench } from 'react-icons/bs';
 import classNames from 'classnames';
 import FontAdjustment from './FontAdjustment';
 import ReadingViewAdjustment from './ReadingViewAdjustment';
@@ -11,7 +10,7 @@ import TranslationsAdjustment from './TranslationsAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
 import ReciterAdjustment from './ReciterAdjustment';
 import styles from './DeveloperUtility.module.scss';
-import URLDebug from './UrlDebug';
+import WrenchIcon from '../../../public/icons/wrench.svg';
 /**
  * A set of developer utilities only availble on development environments
  */
@@ -30,7 +29,7 @@ const DeveloperUtility = () => {
         type="button"
         onClick={() => setIsExpanded(true)}
       >
-        <BsWrench className={styles.wrench} />
+        <WrenchIcon className={styles.wrench} />
       </button>
     );
   }
@@ -42,7 +41,7 @@ const DeveloperUtility = () => {
       type="button"
     >
       Developer Utility
-      <hr />
+      <div className={styles.divider} />
       <ThemeAdjustment />
       <FontAdjustment />
       <ReadingViewAdjustment />
@@ -52,9 +51,8 @@ const DeveloperUtility = () => {
       <TranslationsAdjustment />
       <ContextMenuAdjustment />
       <ReciterAdjustment />
-      <URLDebug />
       <div>
-        <button type="button" onClick={() => setIsExpanded(false)}>
+        <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close
         </button>
       </div>

@@ -9,7 +9,7 @@ const themeDecorator = (storyFn) => (
     <link rel="stylesheet" href={GlobalFonts} />
     <link rel="stylesheet" href={ResetCSS} />
     <link rel="stylesheet" href={Theme} />
-    <div>
+    <div data-theme="light">
       {storyFn()}
     </div>
   </>

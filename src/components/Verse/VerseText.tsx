@@ -18,10 +18,10 @@ const VerseText = ({ words }: VerseTextProps) => {
   const readingView = useSelector(selectReadingView);
   const isQuranPage = readingView === ReadingView.QuranPage;
   const { lineNumber, pageNumber } = words[0];
-  const centerAlignPage = useMemo(() => isCenterAlignedPage(pageNumber, lineNumber), [
-    pageNumber,
-    lineNumber,
-  ]);
+  const centerAlignPage = useMemo(
+    () => isCenterAlignedPage(pageNumber, lineNumber),
+    [pageNumber, lineNumber],
+  );
 
   return (
     <div
