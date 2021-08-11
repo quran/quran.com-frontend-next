@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import FontAdjustment from './FontAdjustment';
-import ReadingViewAdjustment from './ReadingViewAdjustment';
+import ReadingPreferenceAdjustment from './ReadingPreferenceAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import NavbarAdjustment from './NavbarAdjustment';
@@ -44,7 +44,7 @@ const DeveloperUtility = () => {
       <div className={styles.divider} />
       <ThemeAdjustment />
       <FontAdjustment />
-      <ReadingViewAdjustment />
+      <ReadingPreferenceAdjustment />
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />

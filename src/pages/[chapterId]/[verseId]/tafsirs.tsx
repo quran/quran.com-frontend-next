@@ -7,7 +7,7 @@ import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
 import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReader from 'src/components/QuranReader';
-import { ReadingMode } from 'src/components/QuranReader/types';
+import { QuranReaderDataType } from 'src/components/QuranReader/types';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -28,7 +28,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
       <QuranReader
         initialData={verses}
         chapter={chapter.chapter}
-        readingMode={ReadingMode.TafsirMode}
+        quranReaderDataType={QuranReaderDataType.Tafsir}
       />
     </>
   );
