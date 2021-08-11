@@ -54,7 +54,7 @@ export const setAudioFile = createAsyncThunk<AudioFile, number>(
 );
 
 export const playVerse = createAsyncThunk<number, string>(
-  'setAudioTime',
+  'audioPlayerState/setAudioTime',
   async (verseKey, thunkApi) => {
     const reciter = selectReciter(thunkApi.getState());
     const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
