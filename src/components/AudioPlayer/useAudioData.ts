@@ -7,16 +7,21 @@ const useAudioData = (): Audio => {
   const chapter = useSelector(selectChapter);
   const reciter = useSelector(selectReciter, shallowEqual);
 
-  const { data: audio, error } = useSWR(`/audio/${reciter?.id}/${chapter}`, () =>
-    getReciterAudio(reciter.id, chapter).then((res) => {
-      if (res.status === 500) return Promise.reject(new Error(res.error));
-      const firstAudio = res.audioFiles[0];
-      if (!firstAudio) return Promise.reject(new Error('No audio file'));
-      return {
-        url: firstAudio.audioUrl,
-        totalDuration: firstAudio.duration,
-      };
-    }),
+  const { data: audio, error } = useSWR(
+    `/audio/${reciter?.id}/${chapter}`,
+    () =>
+      getReciterAudio(reciter.id, chapter).then((res) => {
+        if (res.status === 500) return Promise.reject(new Error(res.error));
+        const firstAudio = res.audioFiles[0];
+        if (!firstAudio) return Promise.reject(new Error('No audio file'));
+        return {
+          url: firstAudio.audioUrl,
+          totalDuration: firstAudio.duration,
+        };
+      }),
+    {
+      revalidateOnFocus: false,
+    },
   );
 
   if (error || !audio) {

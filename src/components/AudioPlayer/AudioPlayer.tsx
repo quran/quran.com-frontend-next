@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
+import { getVerseAudioTimestamp } from 'src/api';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -10,6 +12,7 @@ import {
   setIsPlaying,
   selectAudioPlayerState,
   setCurrentTime,
+  selectReciter,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -107,6 +110,15 @@ const AudioPlayer = () => {
     [audioDuration, dispatch],
   );
 
+  // TODO: Tempoary hack, need to implement proper solution. Maybe something like this https://github.com/E-Kuerschner/useAudioPlayer
+  if (typeof window !== 'undefined') {
+    // @ts-ignore
+    window.setTime = (time) => {
+      setTime(time);
+      play();
+    };
+  }
+
   const seek = useCallback(
     (duration) => {
       setTime(audioPlayerEl.current.currentTime + duration);
@@ -174,5 +186,20 @@ const AudioPlayer = () => {
     </div>
   );
 };
+
+// TOOD: this is temporary, to test functionality. need to refactor, remove global window, etc
+export const setAudioTime = createAsyncThunk<void, string>(
+  'setAudioTime',
+  async (verseKey, thunkApi) => {
+    const currentState = thunkApi.getState();
+    const reciter = selectReciter(currentState);
+
+    const timeStamp = await getVerseAudioTimestamp(reciter?.id, verseKey);
+    const startTime = timeStamp.result.timestampFrom;
+
+    // @ts-ignore
+    window.setTime(startTime / 1000);
+  },
+);
 
 export default AudioPlayer;

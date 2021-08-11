@@ -52,6 +52,15 @@ export interface ReciterAudioResponse {
   error?: string;
 }
 
+export interface AudioTimestampResponse {
+  result: {
+    timestampFrom: number;
+    timestampTo: number;
+  };
+  status?: number;
+  error?: string;
+}
+
 export interface SearchResponse {
   search?: {
     query: string;
