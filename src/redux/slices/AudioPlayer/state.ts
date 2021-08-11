@@ -24,7 +24,7 @@ const initialState: AudioState = {
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
 export const selectReciter = (state) => state.audioPlayerState.reciter;
-export const selectAudioUrl = (state) => state.audioPlayerState.audio?.url;
+export const selectAudioUrl = (state) => state.audioPlayerState.audio?.audioUrl;
 
 export const setAudioFile = createAsyncThunk<AudioFile, number>(
   'audioPlayerState/setAudioFile',
