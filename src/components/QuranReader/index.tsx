@@ -27,7 +27,7 @@ import TafsirView from './TafsirView';
 type QuranReaderProps = {
   initialData: VersesResponse;
   chapter: Chapter;
-  readingMode: ReadingMode;
+  readingMode?: ReadingMode;
 };
 
 const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
