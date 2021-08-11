@@ -47,7 +47,7 @@ export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
   makeUrl(`/audio/reciter/${reciterId}`, decamelizeKeys({ chapter }));
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
-  makeUrl(`/audio/reciter/50/timestamp?verse_key=${verseKey}`);
+  makeUrl(`/audio/reciter/${reciterId}/timestamp?verse_key=${verseKey}`);
 
 /**
  * Compose the url for the translations' filter API.
