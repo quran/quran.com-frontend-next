@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-
 import classNames from 'classnames';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -29,7 +28,7 @@ const AudioPlayer = () => {
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
-  const audio = useSelector(selectAudioUrl, shallowEqual);
+  const audioUrl = useSelector(selectAudioUrl);
 
   let audioDuration = 0;
 
@@ -122,7 +121,7 @@ const AudioPlayer = () => {
       <div className={styles.innerContainer}>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
-          src={audio?.audioUrl}
+          src={audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerEl}
