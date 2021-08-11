@@ -122,7 +122,7 @@ const QuranReader = ({
       <div
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
-        <PlayButton chapterId={chapter.chapterNumber} />
+        <PlayButton chapterId={Number(chapter.id)} />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}
