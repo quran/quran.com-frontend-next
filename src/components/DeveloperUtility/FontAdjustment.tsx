@@ -5,6 +5,8 @@ import {
   decreaseTranslationTextSize,
   increaseQuranTextSize,
   increaseTranslationTextSize,
+  increaseTafsirTextSize,
+  decreaseTafsirTextSize,
   selectQuranReaderStyles,
   setQuranFont,
 } from 'src/redux/slices/QuranReader/styles';
@@ -54,6 +56,16 @@ const FontAdjustment = () => {
           -
         </button>{' '}
         <button onClick={() => dispatch({ type: increaseTranslationTextSize.type })} type="button">
+          +
+        </button>
+      </div>
+      {/* Tafsir Font size */}
+      <div>
+        Tafsir font size{' '}
+        <button onClick={() => dispatch({ type: decreaseTafsirTextSize.type })} type="button">
+          -
+        </button>{' '}
+        <button onClick={() => dispatch({ type: increaseTafsirTextSize.type })} type="button">
           +
         </button>
       </div>

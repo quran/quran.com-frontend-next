@@ -5,6 +5,7 @@ import ReadingViewAdjustment from './ReadingViewAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import NavbarAdjustment from './NavbarAdjustment';
+import TafsirsAdjustment from './TafsirsAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import TranslationsAdjustment from './TranslationsAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
@@ -48,6 +49,7 @@ const DeveloperUtility = () => {
       <NavbarAdjustment />
       <AudioPlayerAdjustment />
       <TranslationsAdjustment />
+      <TafsirsAdjustment />
       <ContextMenuAdjustment />
       <div>
         <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>

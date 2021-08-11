@@ -11,6 +11,7 @@ export enum LetterSpacingMultiplyer { // Used to justify the words on the line, 
 }
 
 export type QuranReaderStyles = {
+  tafsirFontSize: number;
   translationFontSize: number;
   quranTextFontSize: number;
   quranTextLineHeight: number;
@@ -22,6 +23,7 @@ export type QuranReaderStyles = {
 const initialState: QuranReaderStyles = {
   // the base sizes in rem
   translationFontSize: 1,
+  tafsirFontSize: 1,
   quranTextFontSize: 2,
   quranTextLineHeight: 3,
   quranTextLetterSpacing: 0,
@@ -37,15 +39,23 @@ export const quranReaderStylesSlice = createSlice({
       ...state,
       translationFontSize: state.translationFontSize * FONT_SCALING_FACTOR,
     }),
+    decreaseTranslationTextSize: (state) => ({
+      ...state,
+      translationFontSize: state.translationFontSize / FONT_SCALING_FACTOR,
+    }),
+    increaseTafsirTextSize: (state) => ({
+      ...state,
+      tafsirFontSize: state.tafsirFontSize * FONT_SCALING_FACTOR,
+    }),
+    decreaseTafsirTextSize: (state) => ({
+      ...state,
+      tafsirFontSize: state.tafsirFontSize / FONT_SCALING_FACTOR,
+    }),
     increaseQuranTextSize: (state) => ({
       ...state,
       quranTextFontSize: state.quranTextFontSize * FONT_SCALING_FACTOR,
       quranTextLineHeight: state.quranTextLineHeight * FONT_SCALING_FACTOR,
       quranTextLetterSpacing: state.quranTextLetterSpacing * FONT_SCALING_FACTOR,
-    }),
-    decreaseTranslationTextSize: (state) => ({
-      ...state,
-      translationFontSize: state.translationFontSize / FONT_SCALING_FACTOR,
     }),
     decreaseQuranTextSize: (state) => ({
       ...state,
@@ -79,10 +89,12 @@ export const quranReaderStylesSlice = createSlice({
 });
 
 export const {
-  decreaseQuranTextSize,
-  decreaseTranslationTextSize,
   increaseQuranTextSize,
+  decreaseQuranTextSize,
   increaseTranslationTextSize,
+  decreaseTranslationTextSize,
+  increaseTafsirTextSize,
+  decreaseTafsirTextSize,
   setQuranFont,
 } = quranReaderStylesSlice.actions;
 

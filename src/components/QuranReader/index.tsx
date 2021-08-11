@@ -11,20 +11,23 @@ import {
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
+import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
 import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
-import { ReadingView } from './types';
+import { ReadingMode, ReadingView } from './types';
 import { makeVersesUrl } from '../../utils/apiPaths';
 import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import ContextMenu from './ContextMenu';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
+import TafsirView from './TafsirView';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
   chapter: Chapter;
+  readingMode: ReadingMode;
 };
 
 const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
@@ -38,34 +41,48 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
   const res = await fetch(input, init);
   return res.json().then((data) => camelizeKeys(data.verses));
 };
-
-const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
-  const isVerseView = initialData.verses.length === 1;
+const QuranReader = ({
+  initialData,
+  chapter,
+  readingMode = ReadingMode.ChapterMode,
+}: QuranReaderProps) => {
+  const isVerseMode = readingMode === ReadingMode.VerseMode;
+  const isTafsirMode = readingMode === ReadingMode.TafsirMode;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
     selectTranslations,
   ) as TranslationsSettings;
+  const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
       // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-      const page = isVerseView ? initialData.verses[0].verseNumber : index + 1;
+      const page = isVerseMode || isTafsirMode ? initialData.verses[0].verseNumber : index + 1;
+      if (isTafsirMode) {
+        return makeVersesUrl(chapter.id, {
+          page,
+          perPage: 1,
+          translations: null,
+          tafsirs: selectedTafsirs.join(','),
+          wordFields: `location, ${quranReaderStyles.quranFont}`,
+        });
+      }
       return makeVersesUrl(chapter.id, {
         page,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
         translations: selectedTranslations.join(', '),
-        ...(isVerseView && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
+        ...(isVerseMode && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
       });
     },
     verseFetcher,
     {
-      initialData: isUsingDefaultTranslations ? initialData.verses : null, // initialData is set to null if the user changes/has changed the default translations so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations the user had selected and we will show a loading indicator instead.
+      initialData: isUsingDefaultTranslations && isUsingDefaultTafsirs ? initialData.verses : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
       revalidateOnFocus: false, // disable auto revalidation when window gets focused
       revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
   const readingView = useSelector(selectReadingView);
-  // if we are fetching the data (this will only happen when the user has changed the default translations so the initialData will be set to null).
+  // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
   if (!data) {
     return (
       <>
@@ -82,12 +99,20 @@ const QuranReader = ({ initialData, chapter }: QuranReaderProps) => {
     );
   }
   let view;
-  const pageLimit = isVerseView ? 1 : initialData.pagination.totalPages;
+  const pageLimit = isVerseMode ? 1 : initialData.pagination.totalPages;
   const verses = data.flat(1);
-  if (readingView === ReadingView.QuranPage) {
+  if (readingMode === ReadingMode.TafsirMode) {
+    view = <TafsirView verse={verses[0]} />;
+  } else if (readingView === ReadingView.QuranPage) {
     view = <PageView verses={verses} />;
   } else {
-    view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
+    view = (
+      <TranslationView
+        verses={verses}
+        quranReaderStyles={quranReaderStyles}
+        readingMode={readingMode}
+      />
+    );
   }
 
   return (
