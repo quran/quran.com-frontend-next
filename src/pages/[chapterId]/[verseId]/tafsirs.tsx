@@ -52,6 +52,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       translations: null,
       tafsirs: DEFAULT_TAFSIRS,
       wordFields: 'location',
+      tafsirFields: 'resource_name',
     }),
   ]);
   // if the chapter or verses APIs failed

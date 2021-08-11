@@ -17,7 +17,7 @@ const TafsirView: React.FC<Props> = ({ verse }) => {
       <VerseText words={verse.words} />
       {verse.tafsirs?.map((tafsir) => (
         <div key={tafsir.id}>
-          {tafsir.name && <p className={styles.tafsirName}>{tafsir.name}</p>}
+          {tafsir.resourceName && <p className={styles.tafsirName}>{tafsir.resourceName}</p>}
           <div
             className={styles.tafsirContainer}
             dangerouslySetInnerHTML={{ __html: tafsir.text }}

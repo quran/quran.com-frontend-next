@@ -66,6 +66,7 @@ const QuranReader = ({
           translations: null,
           tafsirs: selectedTafsirs.join(','),
           wordFields: `location, ${quranReaderStyles.quranFont}`,
+          tafsirFields: 'resource_name',
         });
       }
       return makeVersesUrl(chapter.id, {
