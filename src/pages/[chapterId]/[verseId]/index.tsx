@@ -5,7 +5,7 @@ import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { getChapter, getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
-import { QuranFont, ReadingMode } from 'src/components/QuranReader/types';
+import { QuranFont, QuranReaderDataType } from 'src/components/QuranReader/types';
 import NextSeoHead from 'src/components/NextSeoHead';
 
 type VerseProps = {
@@ -27,7 +27,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
       <QuranReader
         initialData={versesResponse}
         chapter={chapterResponse.chapter}
-        readingMode={ReadingMode.VerseMode}
+        quranReaderDataType={QuranReaderDataType.Verse}
       />
     </>
   );

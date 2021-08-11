@@ -12,10 +12,10 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
 import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
-import { selectReadingView } from '../../redux/slices/QuranReader/readingView';
+import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreference';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
-import { ReadingMode, ReadingView } from './types';
+import { QuranReaderDataType, ReadingPreference } from './types';
 import { makeVersesUrl } from '../../utils/apiPaths';
 import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
@@ -27,7 +27,7 @@ import TafsirView from './TafsirView';
 type QuranReaderProps = {
   initialData: VersesResponse;
   chapter: Chapter;
-  readingMode?: ReadingMode;
+  quranReaderDataType?: QuranReaderDataType;
 };
 
 const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
@@ -44,10 +44,10 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 const QuranReader = ({
   initialData,
   chapter,
-  readingMode = ReadingMode.ChapterMode,
+  quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
-  const isVerseMode = readingMode === ReadingMode.VerseMode;
-  const isTafsirMode = readingMode === ReadingMode.TafsirMode;
+  const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
+  const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
@@ -57,8 +57,8 @@ const QuranReader = ({
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => {
       // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-      const page = isVerseMode || isTafsirMode ? initialData.verses[0].verseNumber : index + 1;
-      if (isTafsirMode) {
+      const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
+      if (isTafsirData) {
         return makeVersesUrl(chapter.id, {
           page,
           perPage: 1,
@@ -71,7 +71,7 @@ const QuranReader = ({
         page,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
         translations: selectedTranslations.join(', '),
-        ...(isVerseMode && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
+        ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
       });
     },
     verseFetcher,
@@ -81,7 +81,7 @@ const QuranReader = ({
       revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
-  const readingView = useSelector(selectReadingView);
+  const readingPreference = useSelector(selectReadingPreference);
   // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
   if (!data) {
     return (
@@ -99,18 +99,18 @@ const QuranReader = ({
     );
   }
   let view;
-  const pageLimit = isVerseMode ? 1 : initialData.pagination.totalPages;
+  const pageLimit = isVerseData || isTafsirData ? 1 : initialData.pagination.totalPages;
   const verses = data.flat(1);
-  if (readingMode === ReadingMode.TafsirMode) {
+  if (quranReaderDataType === QuranReaderDataType.Tafsir) {
     view = <TafsirView verse={verses[0]} />;
-  } else if (readingView === ReadingView.QuranPage) {
+  } else if (readingPreference === ReadingPreference.QuranPage) {
     view = <PageView verses={verses} />;
   } else {
     view = (
       <TranslationView
         verses={verses}
         quranReaderStyles={quranReaderStyles}
-        readingMode={readingMode}
+        quranReaderDataType={quranReaderDataType}
       />
     );
   }

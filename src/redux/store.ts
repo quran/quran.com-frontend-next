@@ -11,7 +11,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import quranReaderStyles from './slices/QuranReader/styles';
-import readingView from './slices/QuranReader/readingView';
+import readingPreference from './slices/QuranReader/readingPreference';
 import notes from './slices/QuranReader/notes';
 import translations from './slices/QuranReader/translations';
 import tafsirs from './slices/QuranReader/tafsirs';
@@ -25,7 +25,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  whitelist: ['quranReaderStyles', 'readingView', 'translations', 'theme', 'tafsirs'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
+  whitelist: ['quranReaderStyles', 'readingPreference', 'translations', 'theme', 'tafsirs'], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
 const rootReducer = combineReducers({
@@ -35,7 +35,7 @@ const rootReducer = combineReducers({
   navbar,
   notes,
   quranReaderStyles,
-  readingView,
+  readingPreference,
   translations,
   theme,
   tafsirs,

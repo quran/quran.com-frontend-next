@@ -1,12 +1,15 @@
-export enum ReadingView {
+export enum ReadingPreference {
   Translation = 'translation', // Displays verse by verse with translation
   QuranPage = 'quranPage', // Displays the Quran text only similar to a physical Quran page
 }
 
-export enum ReadingMode {
-  ChapterMode = 'chapter',
-  VerseMode = 'verse',
-  TafsirMode = 'tafsir',
+export enum QuranReaderDataType {
+  Chapter = 'chapter',
+  Verse = 'verse',
+  Tafsir = 'tafsir',
+  Hizb = 'hizb',
+  Juz = 'juz',
+  Rub = 'rub',
 }
 
 export enum QuranFont {
@@ -17,4 +20,4 @@ export enum QuranFont {
   QPCHafs = 'qpc_uthmani_hafs',
 }
 
-export default { ReadingView, QuranFont };
+export default { ReadingPreference, QuranFont };

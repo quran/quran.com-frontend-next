@@ -9,15 +9,19 @@ import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
-import { ReadingMode } from '../types';
+import { QuranReaderDataType } from '../types';
 
 type TranslationViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
-  readingMode: ReadingMode;
+  quranReaderDataType: QuranReaderDataType;
 };
 
-const TranslationView = ({ verses, quranReaderStyles, readingMode }: TranslationViewProps) => {
+const TranslationView = ({
+  verses,
+  quranReaderStyles,
+  quranReaderDataType,
+}: TranslationViewProps) => {
   const router = useRouter();
   const {
     query: { chapterId },
@@ -26,7 +30,7 @@ const TranslationView = ({ verses, quranReaderStyles, readingMode }: Translation
     <div className={styles.container}>
       {verses.map((verse) => (
         <div key={verse.id} className={classNames({ [styles.highlightedContainer]: false })}>
-          {readingMode === ReadingMode.ChapterMode && (
+          {quranReaderDataType === QuranReaderDataType.Chapter && (
             <Link as={`/${chapterId}/${verse.verseNumber}`} href="/[chapterId]/[verseId]" passHref>
               <p className={styles.verseLink}>{verse.verseKey}</p>
             </Link>
