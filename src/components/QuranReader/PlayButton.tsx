@@ -6,7 +6,7 @@ import Button from '../dls/Button/Button';
 interface Props {
   chapterId: number;
 }
-const PlayButton = (props: Props) => {
+const PlayChapterAudioButton = (props: Props) => {
   const dispatch = useDispatch();
   const play = () => {
     dispatch(setAudioFile(props.chapterId));
@@ -18,4 +18,4 @@ const PlayButton = (props: Props) => {
   );
 };
 
-export default PlayButton;
+export default PlayChapterAudioButton;

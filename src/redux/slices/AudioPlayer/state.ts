@@ -3,29 +3,38 @@ import { getAudioFile, getVerseTimestamps } from 'src/api';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
+const DEFAULT_RECITER = {
+  id: 5,
+  name: 'Mishari Rashid al-`Afasy',
+  recitationStyle: 'Warsh',
+  relativePath: 'mishaari_raashid_al_3afaasee',
+};
+
 export type AudioState = {
   isPlaying: boolean;
   currentTime: number;
   reciter: Reciter;
-  audio: AudioFile;
+  audioFile: AudioFile;
 };
 
 const initialState: AudioState = {
   isPlaying: false,
   currentTime: 0,
-  audio: null,
-  reciter: {
-    id: 5,
-    name: 'Mishari Rashid al-`Afasy',
-    recitationStyle: 'Warsh',
-    relativePath: 'mishaari_raashid_al_3afaasee',
-  },
+  audioFile: null,
+  reciter: DEFAULT_RECITER,
 };
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
 export const selectReciter = (state) => state.audioPlayerState.reciter;
-export const selectAudioUrl = (state) => state.audioPlayerState.audio?.audioUrl;
+export const selectAudioFile = (state) => state.audioPlayerState.audio;
 
+/**
+ * get the audio file for the current reciter
+ * and set the value to redux state
+ *
+ * @param {number} chapter the chapter id
+ *
+ */
 export const setAudioFile = createAsyncThunk<AudioFile, number>(
   'audioPlayerState/setAudioFile',
   async (chapter, thunkAPI) => {
@@ -73,7 +82,7 @@ export const audioPlayerStateSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(setAudioFile.fulfilled, (state, action: PayloadAction<AudioFile>) => ({
       ...state,
-      audio: action.payload,
+      audioFile: action.payload,
     }));
     builder.addCase(playVerse.fulfilled, (state, action: PayloadAction<number>) => ({
       ...state,
