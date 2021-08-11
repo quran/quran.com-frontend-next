@@ -4,6 +4,7 @@ import {
   SearchResponse,
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
+  TafsirsResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
@@ -11,6 +12,7 @@ import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
+  makeTafsirsUrl,
   makeLanguagesUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
@@ -124,4 +126,16 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
   const payload = await fetcher(makeSearchResultsUrl(params));
 
   return camelizeKeys(payload) as SearchResponse;
+};
+
+/**
+ * Get the list of tafsirs.
+ *
+ * @param {string} language
+ * @returns {Promise<TafsirsResponse>}
+ */
+export const getTafsirs = async (language: string): Promise<TafsirsResponse> => {
+  const payload = await fetcher(makeTafsirsUrl(language));
+
+  return camelizeKeys(payload);
 };

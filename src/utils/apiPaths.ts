@@ -66,3 +66,12 @@ export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
  */
 export const makeSearchResultsUrl = (params: SearchRequest): string =>
   makeUrl('/search', decamelizeKeys(params));
+
+/**
+ * Compose the url for the tafsirs API.
+ *
+ * @param {string} language the user's language code.
+ * @returns {string}
+ */
+export const makeTafsirsUrl = (language: string): string =>
+  makeUrl('/resources/tafsirs', decamelizeKeys({ language }));

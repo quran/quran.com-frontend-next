@@ -1,6 +1,7 @@
 import Word from './Word';
 import Translation from './Translation';
 import AudioResponse from './AudioResponse';
+import Tafsir from './Tafsir';
 
 interface Verse {
   id: number;
@@ -28,6 +29,7 @@ interface Verse {
   codeV1?: string;
   codeV2?: string;
   translations?: Translation[];
+  tafsirs?: Tafsir[];
   audio?: AudioResponse;
 }
 

@@ -8,15 +8,8 @@ import {
   setSelectedTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
+import { numbersToStringsArray } from 'src/utils/array';
 import styles from './TranslationsAdjustment.module.scss';
-/**
- * Convert an array of numbers to an array of strings.
- *
- * @param {number[]} numbersArray
- * @returns {string[]}
- */
-const numbersToStringsArray = (numbersArray: number[]): string[] =>
-  numbersArray.map((number) => String(number));
 
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();

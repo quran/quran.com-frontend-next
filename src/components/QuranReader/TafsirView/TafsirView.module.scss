@@ -1,0 +1,24 @@
+.container {
+  max-width: 80%;
+  margin: var(--spacing-medium) auto;
+}
+.tafsirName {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  padding-bottom: var(--spacing-xxsmall);
+  margin: var(--spacing-xxsmall) 0;
+  border-bottom: 1px solid var(--color-primary-medium);
+  color: var(--color-primary-medium);
+}
+
+.tafsirContainer {
+  color: var(--color-text-default);
+  border-bottom: 1px solid var(--color-primary-medium);
+  padding: var(--spacing-large) 0;
+  letter-spacing: 0;
+  line-height: normal;
+  * {
+    letter-spacing: 0;
+    line-height: normal;
+  }
+}

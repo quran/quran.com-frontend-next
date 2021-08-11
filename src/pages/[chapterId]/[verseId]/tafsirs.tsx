@@ -4,17 +4,18 @@ import { useRouter } from 'next/router';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { getChapter, getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
-import QuranReader from 'src/components/QuranReader';
-import { QuranFont } from 'src/components/QuranReader/types';
 import NextSeoHead from 'src/components/NextSeoHead';
+import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
+import QuranReader from 'src/components/QuranReader';
+import { ReadingMode } from 'src/components/QuranReader/types';
 
-type VerseProps = {
-  chapterResponse?: ChapterResponse;
-  versesResponse?: VersesResponse;
+type AyahTafsirProp = {
+  chapter?: ChapterResponse;
+  verses?: VersesResponse;
   hasError?: boolean;
 };
 
-const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError }) => {
+const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => {
   const {
     query: { verseId },
   } = useRouter();
@@ -23,8 +24,12 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   return (
     <>
-      <NextSeoHead title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
-      <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
+      <NextSeoHead title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
+      <QuranReader
+        initialData={verses}
+        chapter={chapter.chapter}
+        readingMode={ReadingMode.TafsirMode}
+      />
     </>
   );
 };
@@ -44,11 +49,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     getChapterVerses(chapterId, {
       page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
       perPage: 1, // only 1 verse per page
-      wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
+      translations: null,
+      tafsirs: DEFAULT_TAFSIRS,
+      wordFields: 'location',
     }),
   ]);
-
-  // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
+  // if the chapter or verses APIs failed
   if (chapterResponse.status === 500 || versesResponse.status === 500) {
     return {
       props: {
@@ -57,19 +63,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
-
   return {
     props: {
-      chapterResponse,
-      versesResponse,
+      chapter: chapterResponse,
+      verses: versesResponse,
     },
     revalidate: 604800, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
 };
-
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [], // no pre-rendered chapters at build time.
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
 });
 
-export default Verse;
+export default AyahTafsir;
