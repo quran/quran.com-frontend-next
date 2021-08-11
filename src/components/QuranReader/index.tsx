@@ -22,8 +22,8 @@ import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import ContextMenu from './ContextMenu';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
-import PlayChapterAudioButton from './PlayButton';
 import TafsirView from './TafsirView';
+import PlayChapterAudioButton from './PlayChapterAudioButton';
 
 type QuranReaderProps = {
   initialData: VersesResponse;

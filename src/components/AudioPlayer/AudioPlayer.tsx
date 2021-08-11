@@ -43,6 +43,13 @@ const AudioPlayer = () => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
 
+  // Sync the global audio player element reference with the AudioPlayer component. 
+  useEffect(() => {
+    if (process.browser && window) {
+      window.audioPlayerEl = audioPlayerEl.current;
+    }
+  }, [audioPlayerEl]);
+
   // eventListeners useEffect
   useEffect(() => {
     let currentRef = null;
@@ -110,6 +117,8 @@ const AudioPlayer = () => {
     },
     [setTime],
   );
+
+  console.log(currentTime);
   return (
     <div
       className={classNames(styles.container, {

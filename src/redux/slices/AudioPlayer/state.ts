@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAudioFile, getVerseTimestamps } from 'src/api';
+import { triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
@@ -35,8 +36,8 @@ export const selectAudioFile = (state) => state.audioPlayerState.audioFile;
  * @param {number} chapter the chapter id
  *
  */
-export const setAudioFile = createAsyncThunk<AudioFile, number>(
-  'audioPlayerState/setAudioFile',
+export const loadAudioFile = createAsyncThunk<AudioFile, number>(
+  'audioPlayerState/loadAudioFile',
   async (chapter, thunkAPI) => {
     const reciter = selectReciter(thunkAPI.getState());
 
@@ -58,6 +59,7 @@ export const playVerse = createAsyncThunk<number, string>(
   async (verseKey, thunkApi) => {
     const reciter = selectReciter(thunkApi.getState());
     const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
+    triggerSetCurrentTime(timeStamp.result.timestampFrom / 1000);
     return timeStamp.result.timestampFrom / 1000;
   },
 );
@@ -80,7 +82,7 @@ export const audioPlayerStateSlice = createSlice({
     }),
   },
   extraReducers: (builder) => {
-    builder.addCase(setAudioFile.fulfilled, (state, action: PayloadAction<AudioFile>) => ({
+    builder.addCase(loadAudioFile.fulfilled, (state, action: PayloadAction<AudioFile>) => ({
       ...state,
       audioFile: action.payload,
     }));
