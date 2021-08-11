@@ -1,13 +1,19 @@
 import Verse from './Verse';
 import Chapter from './Chapter';
 import AvailableTranslation from './AvailableTranslation';
+import TafsirInfo from './TafsirInfo';
 import SearchResult from './SearchResult';
 import AvailableLanguage from './AvailableLanguage';
 import Reciter from './Reciter';
 import { AudioFile } from './AudioFile';
 
+export interface BaseResponse {
+  status?: number;
+  error?: string;
+}
+
 // The response from the verses endpoint that returns a list of verses
-export interface VersesResponse {
+export interface VersesResponse extends BaseResponse {
   pagination: {
     perPage: number;
     currentPage: number;
@@ -19,25 +25,21 @@ export interface VersesResponse {
 }
 
 // The response from the chapters endpoint that returns a list of the chapters
-export interface ChaptersResponse {
+export interface ChaptersResponse extends BaseResponse {
   chapters: Chapter[];
 }
 
 // The response from the chapter endpoint that returns information on a chapter
-export interface ChapterResponse {
+export interface ChapterResponse extends BaseResponse {
   chapter: Chapter;
 }
 
-export interface TranslationsResponse {
+export interface TranslationsResponse extends BaseResponse {
   translations?: AvailableTranslation[];
-  status?: number;
-  error?: string;
 }
 
-export interface LanguagesResponse {
+export interface LanguagesResponse extends BaseResponse {
   languages?: AvailableLanguage[];
-  status?: number;
-  error?: string;
 }
 
 export interface RecitersResponse {
@@ -60,8 +62,7 @@ export interface AudioTimestampsResponse {
   status?: number;
   error?: string;
 }
-
-export interface SearchResponse {
+export interface SearchResponse extends BaseResponse {
   search?: {
     query: string;
     totalResults: number;
@@ -69,12 +70,12 @@ export interface SearchResponse {
     totalPages: number;
     results: SearchResult[];
   };
-  status?: number;
-  error?: string;
 }
 
-export interface AdvancedCopyRawResultResponse {
+export interface AdvancedCopyRawResultResponse extends BaseResponse {
   result?: string;
-  status?: number;
-  error?: string;
+}
+
+export interface TafsirsResponse extends BaseResponse {
+  tafsirs?: TafsirInfo[];
 }
