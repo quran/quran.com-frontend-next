@@ -26,7 +26,7 @@ const initialState: AudioState = {
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
 export const selectReciter = (state) => state.audioPlayerState.reciter;
-export const selectAudioFile = (state) => state.audioPlayerState.audio;
+export const selectAudioFile = (state) => state.audioPlayerState.audioFile;
 
 /**
  * get the audio file for the current reciter

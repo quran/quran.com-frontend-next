@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   AudioPlayerVisibility,
   selectAudioPlayerStyle,
@@ -28,7 +28,7 @@ const AudioPlayer = () => {
   const isMinimized = visibility === AudioPlayerVisibility.Minimized;
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
-  const audioFile = useSelector(selectAudioFile);
+  const audioFile = useSelector(selectAudioFile, shallowEqual);
 
   let audioDuration = 0;
 
