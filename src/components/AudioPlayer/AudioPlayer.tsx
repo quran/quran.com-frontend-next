@@ -60,8 +60,10 @@ const AudioPlayer = () => {
         currentRef.removeEventListener('pause', onAudioPause);
         currentRef.removeEventListener('ended', onAudioEnded);
       }
+      // reset isPlaying state
+      onAudioEnded();
     };
-  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded]);
+  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, audioData.url]);
 
   if (audioPlayerEl.current) {
     audioDuration = audioPlayerEl.current.duration;
@@ -122,7 +124,6 @@ const AudioPlayer = () => {
       <div className={styles.innerContainer}>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
-          key={audioData.url}
           src={audioData.url}
           style={{ display: 'none' }}
           id="audio-player"
