@@ -5,6 +5,7 @@ import {
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
   RecitersResponse,
+  ReciterAudioResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { makeUrl } from './utils/api';
@@ -13,6 +14,7 @@ import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
   makeLanguagesUrl,
+  makeReciterAudioUrl,
   makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
@@ -100,6 +102,15 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> => {
   const payload = await fetcher(makeRecitersUrl());
 
   return camelizeKeys(payload) as RecitersResponse;
+};
+
+export const getReciterAudio = async (
+  reciterId: number,
+  chapter,
+): Promise<ReciterAudioResponse> => {
+  const payload = await fetcher(makeReciterAudioUrl(reciterId, chapter));
+
+  return camelizeKeys(payload) as ReciterAudioResponse;
 };
 
 /**

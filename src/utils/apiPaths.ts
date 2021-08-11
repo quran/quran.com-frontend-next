@@ -44,6 +44,9 @@ export const makeLanguagesUrl = (language: string): string =>
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
 
+export const makeReciterAudioUrl = (reciterId: number, chapter: number) =>
+  makeUrl(`/audio/reciter/${reciterId}`, decamelizeKeys({ chapter }));
+
 /**
  * Compose the url for the translations' filter API.
  *

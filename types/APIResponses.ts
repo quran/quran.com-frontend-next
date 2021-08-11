@@ -4,6 +4,7 @@ import AvailableTranslation from './AvailableTranslation';
 import SearchResult from './SearchResult';
 import AvailableLanguage from './AvailableLanguage';
 import Reciter from './Reciter';
+import { AudioFile } from './AudioFile';
 
 // The response from the verses endpoint that returns a list of verses
 export interface VersesResponse {
@@ -41,6 +42,12 @@ export interface LanguagesResponse {
 
 export interface RecitersResponse {
   reciters?: Reciter[];
+  status?: number;
+  error?: string;
+}
+
+export interface ReciterAudioResponse {
+  audioFiles: AudioFile[];
   status?: number;
   error?: string;
 }

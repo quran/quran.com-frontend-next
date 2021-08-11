@@ -19,7 +19,7 @@ const ReciterAdjustment: React.FC = () => {
 
   const onSelectedReciterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const reciter = reciters.find((r) => r.id === Number(e.target.value));
-    dispatch({ type: setReciter.type, payload: reciter });
+    dispatch(setReciter(reciter));
   };
 
   if (error) return null;

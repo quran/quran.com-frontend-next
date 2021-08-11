@@ -11,6 +11,8 @@ import TranslationsAdjustment from './TranslationsAdjustment';
 import ThemeAdjustment from './ThemeAdjustment';
 import ReciterAdjustment from './ReciterAdjustment';
 import styles from './DeveloperUtility.module.scss';
+import URLDebug from './UrlDebug';
+import ChapterAdjustment from './ChapterAdjustment';
 /**
  * A set of developer utilities only availble on development environments
  */
@@ -51,6 +53,8 @@ const DeveloperUtility = () => {
       <TranslationsAdjustment />
       <ContextMenuAdjustment />
       <ReciterAdjustment />
+      <ChapterAdjustment />
+      <URLDebug />
       <div>
         <button type="button" onClick={() => setIsExpanded(false)}>
           close
