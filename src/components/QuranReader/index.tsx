@@ -15,7 +15,7 @@ import { selectReadingPreference } from '../../redux/slices/QuranReader/readingP
 import PageView from './PageView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
-import { makeJuzVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
+import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import ContextMenu from './ContextMenu';
@@ -48,7 +48,6 @@ const QuranReader = ({
 }: QuranReaderProps) => {
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
-  const isJuzData = quranReaderDataType === QuranReaderDataType.Juz;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
@@ -63,9 +62,10 @@ const QuranReader = ({
         quranReaderStyles,
         selectedTranslations,
         selectedTafsirs,
-        isJuzData,
+        quranReaderDataType === QuranReaderDataType.Juz,
         isVerseData,
         isTafsirData,
+        quranReaderDataType === QuranReaderDataType.Page,
         id,
       ),
     verseFetcher,
@@ -75,7 +75,7 @@ const QuranReader = ({
       revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
-  const readingPreference = useSelector(selectReadingPreference);
+  const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
   if (!data) {
     return (
@@ -146,6 +146,7 @@ const getRequestKey = (
   isJuzData: boolean,
   isVerseData: boolean,
   isTafsirData: boolean,
+  isQuranicPageData: boolean,
   id: string | number,
 ): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
@@ -157,6 +158,14 @@ const getRequestKey = (
       translations: selectedTranslations.join(', '),
     });
   }
+  if (isQuranicPageData) {
+    return makePageVersesUrl(id, {
+      page,
+      wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
+      translations: selectedTranslations.join(', '),
+    });
+  }
+
   if (isTafsirData) {
     return makeVersesUrl(id, {
       page,

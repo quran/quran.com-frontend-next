@@ -59,3 +59,21 @@ export const isValidJuzId = (juzId: string): boolean => {
   }
   return true;
 };
+
+/**
+ * Validate a pageId which can be in-valid in 2 cases:
+ *
+ * 1. if it's a string that is not numeric e.g. "test".
+ * 2. if it's a numeric string but lies outside the range 1->604.
+ *
+ * @param {string} chapterId
+ * @returns {boolean}
+ */
+export const isValidPageId = (juzId: string): boolean => {
+  const juzIdNumber = Number(juzId);
+  // if it's not a numeric string or it's numeric but out of the range of chapter 1->604
+  if (Number.isNaN(juzIdNumber) || juzIdNumber > 604 || juzIdNumber < 1) {
+    return false;
+  }
+  return true;
+};

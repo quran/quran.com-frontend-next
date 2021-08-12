@@ -28,6 +28,7 @@ import {
   makeTranslationsUrl,
   makeVersesUrl,
   makeJuzVersesUrl,
+  makePageVersesUrl,
 } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(
@@ -205,5 +206,21 @@ export const getJuzVerses = async (
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => {
   const payload = await fetcher(makeJuzVersesUrl(id, params));
+  return camelizeKeys(payload);
+};
+
+/**
+ * Get the verses of a specific page.
+ *
+ * @param {string} id the ID of the page.
+ * @param {string} params the params that we might need to include that differs from the default ones.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
+export const getPageVerses = async (
+  id: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => {
+  const payload = await fetcher(makePageVersesUrl(id, params));
   return camelizeKeys(payload);
 };
