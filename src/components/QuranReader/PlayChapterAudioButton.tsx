@@ -1,8 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { loadAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
 import styles from './PlayButton.module.scss';
 import Button from '../dls/Button/Button';
-import { triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 
 interface Props {
   chapterId: number;
@@ -10,8 +9,7 @@ interface Props {
 const PlayChapterAudioButton = (props: Props) => {
   const dispatch = useDispatch();
   const play = () => {
-    dispatch(loadAudioFile(props.chapterId));
-    triggerPlayAudio();
+    dispatch(loadAndPlayAudioFile(props.chapterId));
   };
   return (
     <div className={styles.container}>

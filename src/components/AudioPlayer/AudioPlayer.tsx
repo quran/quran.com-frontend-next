@@ -10,6 +10,7 @@ import {
   selectAudioPlayerState,
   setCurrentTime,
   selectAudioFile,
+  // selectAudioFileStatus,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -29,6 +30,7 @@ const AudioPlayer = () => {
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
+  // const audioFileStatus = useSelector(selectAudioFileStatus);
 
   let audioDuration = 0;
 
@@ -43,7 +45,7 @@ const AudioPlayer = () => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
 
-  // Sync the global audio player element reference with the AudioPlayer component. 
+  // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
     if (process.browser && window) {
       window.audioPlayerEl = audioPlayerEl.current;
@@ -118,7 +120,6 @@ const AudioPlayer = () => {
     [setTime],
   );
 
-  console.log(currentTime);
   return (
     <div
       className={classNames(styles.container, {
