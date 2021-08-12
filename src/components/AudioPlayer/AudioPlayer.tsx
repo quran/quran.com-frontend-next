@@ -10,6 +10,9 @@ import {
   selectAudioPlayerState,
   setCurrentTime,
   selectAudioFile,
+  selectAudioFileStatus,
+  setAudioStatus,
+  AudioFileStatus,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -29,6 +32,7 @@ const AudioPlayer = () => {
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
+  const audioFileStatus = useSelector(selectAudioFileStatus);
 
   let audioDuration = 0;
 
@@ -43,6 +47,17 @@ const AudioPlayer = () => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
 
+  const onAudioLoaded = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioFileStatus.Ready });
+  }, [dispatch]);
+
+  // Sync the global audio player element reference with the AudioPlayer component.
+  useEffect(() => {
+    if (process.browser && window) {
+      window.audioPlayerEl = audioPlayerEl.current;
+    }
+  }, [audioPlayerEl]);
+
   // eventListeners useEffect
   useEffect(() => {
     let currentRef = null;
@@ -51,6 +66,7 @@ const AudioPlayer = () => {
       currentRef.addEventListener('play', onAudioPlay);
       currentRef.addEventListener('pause', onAudioPause);
       currentRef.addEventListener('ended', onAudioEnded);
+      currentRef.addEventListener('canplaythrough', onAudioLoaded);
     }
 
     return () => {
@@ -58,9 +74,10 @@ const AudioPlayer = () => {
         currentRef.removeEventListener('play', onAudioPlay);
         currentRef.removeEventListener('pause', onAudioPause);
         currentRef.removeEventListener('ended', onAudioEnded);
+        currentRef.removeEventListener('canplaythrough', onAudioLoaded);
       }
     };
-  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded]);
+  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
   if (audioPlayerEl.current) {
     audioDuration = audioPlayerEl.current.duration;
@@ -110,6 +127,7 @@ const AudioPlayer = () => {
     },
     [setTime],
   );
+
   return (
     <div
       className={classNames(styles.container, {
@@ -119,6 +137,7 @@ const AudioPlayer = () => {
       })}
     >
       <div className={styles.innerContainer}>
+        <div>{audioFileStatus}</div>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           src={audioFile?.audioUrl}

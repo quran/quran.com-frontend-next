@@ -10,6 +10,7 @@ import {
   TafsirsResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
+import { AudioFile } from 'types/AudioFile';
 import { makeUrl } from './utils/api';
 import Chapter from '../types/Chapter';
 import Verse from '../types/Verse';
@@ -112,13 +113,24 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> => {
  * @param {number} chapter the id of the chapter
  */
 
-export const getAudioFile = async (
-  reciterId: number,
-  chapter: number,
-): Promise<AudioFilesResponse> => {
+export const getAudioFile = async (reciterId: number, chapter: number): Promise<AudioFile> => {
   const payload = await fetcher(makeAudioFilesUrl(reciterId, chapter));
 
-  return camelizeKeys(payload) as AudioFilesResponse;
+  const res = camelizeKeys(payload) as AudioFilesResponse;
+
+  if (res.error) {
+    throw new Error(res.error);
+  }
+  if (res.status === 500) {
+    throw new Error('server error: fail to get audio file');
+  }
+
+  const firstAudio = res.audioFiles[0];
+  if (!firstAudio) {
+    throw new Error('No audio file found');
+  }
+
+  return firstAudio;
 };
 
 /**

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
 import styles from './PlayButton.module.scss';
 import Button from '../dls/Button/Button';
 
@@ -9,7 +9,7 @@ interface Props {
 const PlayChapterAudioButton = (props: Props) => {
   const dispatch = useDispatch();
   const play = () => {
-    dispatch(setAudioFile(props.chapterId));
+    dispatch(loadAndPlayAudioFile(props.chapterId));
   };
   return (
     <div className={styles.container}>
