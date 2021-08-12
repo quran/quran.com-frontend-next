@@ -108,13 +108,13 @@ export const audioPlayerStateSlice = createSlice({
     }),
     audioLoaded: (state) => ({
       ...state,
-      AudioFileStatus: AudioFileStatus.Loaded,
+      audioFileStatus: AudioFileStatus.Loaded,
     }),
   },
   extraReducers: (builder) => {
     builder.addCase(loadAndPlayAudioFile.pending, (state) => ({
       ...state,
-      AudioFileStatus: AudioFileStatus.Loading,
+      audioFileStatus: AudioFileStatus.Loading,
     }));
   },
 });

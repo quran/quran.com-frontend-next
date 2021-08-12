@@ -11,7 +11,7 @@ import {
   setCurrentTime,
   selectAudioFile,
   audioLoaded,
-  // selectAudioFileStatus,
+  selectAudioFileStatus,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -31,7 +31,7 @@ const AudioPlayer = () => {
   const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
-  // const audioFileStatus = useSelector(selectAudioFileStatus);
+  const audioFileStatus = useSelector(selectAudioFileStatus);
 
   let audioDuration = 0;
 
@@ -136,6 +136,7 @@ const AudioPlayer = () => {
       })}
     >
       <div className={styles.innerContainer}>
+        <div>{audioFileStatus}</div>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           src={audioFile?.audioUrl}
