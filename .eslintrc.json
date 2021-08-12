@@ -11,7 +11,7 @@
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
-        "@typescript-eslint/no-use-before-define": ["error"],
+        "@typescript-eslint/no-use-before-define": "off",
         "no-shadow": "off", // we need to disable this @see https://stackoverflow.com/a/63961972/1931451
         "@typescript-eslint/no-shadow": ["error"],
         "react/jsx-filename-extension": 0,

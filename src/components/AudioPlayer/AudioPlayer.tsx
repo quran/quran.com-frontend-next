@@ -10,8 +10,9 @@ import {
   selectAudioPlayerState,
   setCurrentTime,
   selectAudioFile,
-  audioLoaded,
   selectAudioFileStatus,
+  setAudioStatus,
+  AudioFileStatus,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -47,7 +48,7 @@ const AudioPlayer = () => {
   }, [dispatch]);
 
   const onAudioLoaded = useCallback(() => {
-    dispatch({ type: audioLoaded.type });
+    dispatch({ type: setAudioStatus.type, payload: AudioFileStatus.Ready });
   }, [dispatch]);
 
   // Sync the global audio player element reference with the AudioPlayer component.

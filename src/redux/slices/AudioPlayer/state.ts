@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAudioFile, getVerseTimestamps } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
+import { getChapterNumberFromKey } from 'src/utils/verse';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
@@ -11,10 +12,10 @@ const DEFAULT_RECITER = {
   relativePath: 'mishaari_raashid_al_3afaasee',
 };
 
-enum AudioFileStatus {
-  Loaded = 'Loaded',
+export enum AudioFileStatus {
+  Ready = 'Ready',
   Loading = 'Loading',
-  Empty = 'Empty',
+  NoFile = 'NoFile',
 }
 
 export type AudioState = {
@@ -30,13 +31,14 @@ const initialState: AudioState = {
   currentTime: 0,
   audioFile: null,
   reciter: DEFAULT_RECITER,
-  audioFileStatus: AudioFileStatus.Empty,
+  audioFileStatus: AudioFileStatus.NoFile,
 };
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
 export const selectReciter = (state) => state.audioPlayerState.reciter;
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
+export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
 
 /**
  * get the audio file for the current reciter
@@ -49,19 +51,12 @@ export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFile
 export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
   'audioPlayerState/loadAndPlayAudioFile',
   async (chapter, thunkAPI) => {
+    thunkAPI.dispatch(setAudioStatus(AudioFileStatus.Loading));
+
     const reciter = selectReciter(thunkAPI.getState());
+    const audioFile = await getAudioFile(reciter.id, chapter);
 
-    const res = await getAudioFile(reciter.id, chapter);
-    if (res.status === 500) {
-      throw new Error('server error: fail to get audio file');
-    }
-    const firstAudio = res.audioFiles[0];
-    if (!firstAudio) {
-      throw new Error('No audio file found');
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    thunkAPI.dispatch(setAudioFile(firstAudio));
+    thunkAPI.dispatch(setAudioFile(audioFile));
     triggerPlayAudio();
   },
 );
@@ -77,12 +72,21 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
 export const playVerse = createAsyncThunk<void, string>(
   'audioPlayerState/setAudioTime',
   async (verseKey, thunkApi) => {
-    const reciter = selectReciter(thunkApi.getState());
+    const state = thunkApi.getState();
+    const reciter = selectReciter(state);
+    let audioFile = selectAudioFile(state);
+    const chapter = getChapterNumberFromKey(verseKey);
+    if (!audioFile || audioFile.chapterId !== chapter) {
+      audioFile = await getAudioFile(reciter.id, chapter);
+      thunkApi.dispatch(setAudioFile(audioFile));
+    }
+
     const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
     const timeStampInSecond = timeStamp.result.timestampFrom / 1000;
     triggerSetCurrentTime(timeStampInSecond);
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     thunkApi.dispatch(setCurrentTime(timeStampInSecond));
+
+    triggerPlayAudio();
   },
 );
 
@@ -106,20 +110,14 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       audioFile: action.payload,
     }),
-    audioLoaded: (state) => ({
+    setAudioStatus: (state, action: PayloadAction<AudioFileStatus>) => ({
       ...state,
-      audioFileStatus: AudioFileStatus.Loaded,
+      audioFileStatus: action.payload,
     }),
-  },
-  extraReducers: (builder) => {
-    builder.addCase(loadAndPlayAudioFile.pending, (state) => ({
-      ...state,
-      audioFileStatus: AudioFileStatus.Loading,
-    }));
   },
 });
 
-export const { setIsPlaying, setCurrentTime, setReciter, setAudioFile, audioLoaded } =
+export const { setIsPlaying, setCurrentTime, setReciter, setAudioFile, setAudioStatus } =
   audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

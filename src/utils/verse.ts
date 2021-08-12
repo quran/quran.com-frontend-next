@@ -18,3 +18,4 @@ export const generateChapterVersesKeys = (chapterId: string): string[] =>
  * @returns {Number} The verse number extracted from the key.
  */
 export const getVerseNumberFromKey = (verseKey: string): number => Number(verseKey.split(':')[1]);
+export const getChapterNumberFromKey = (verseKey: string): number => Number(verseKey.split(':')[0]);
