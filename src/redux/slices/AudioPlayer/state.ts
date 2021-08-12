@@ -106,6 +106,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       audioFile: action.payload,
     }),
+    audioLoaded: (state) => ({
+      ...state,
+      AudioFileStatus: AudioFileStatus.Loaded,
+    }),
   },
   extraReducers: (builder) => {
     builder.addCase(loadAndPlayAudioFile.pending, (state) => ({
@@ -115,7 +119,7 @@ export const audioPlayerStateSlice = createSlice({
   },
 });
 
-export const { setIsPlaying, setCurrentTime, setReciter, setAudioFile } =
+export const { setIsPlaying, setCurrentTime, setReciter, setAudioFile, audioLoaded } =
   audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

@@ -10,6 +10,7 @@ import {
   selectAudioPlayerState,
   setCurrentTime,
   selectAudioFile,
+  audioLoaded,
   // selectAudioFileStatus,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
@@ -45,6 +46,10 @@ const AudioPlayer = () => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
 
+  const onAudioLoaded = useCallback(() => {
+    dispatch({ type: audioLoaded.type });
+  }, [dispatch]);
+
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
     if (process.browser && window) {
@@ -60,6 +65,7 @@ const AudioPlayer = () => {
       currentRef.addEventListener('play', onAudioPlay);
       currentRef.addEventListener('pause', onAudioPause);
       currentRef.addEventListener('ended', onAudioEnded);
+      currentRef.addEventListener('canplaythrough', onAudioLoaded);
     }
 
     return () => {
@@ -67,9 +73,10 @@ const AudioPlayer = () => {
         currentRef.removeEventListener('play', onAudioPlay);
         currentRef.removeEventListener('pause', onAudioPause);
         currentRef.removeEventListener('ended', onAudioEnded);
+        currentRef.removeEventListener('canplaythrough', onAudioLoaded);
       }
     };
-  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded]);
+  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
   if (audioPlayerEl.current) {
     audioDuration = audioPlayerEl.current.duration;
