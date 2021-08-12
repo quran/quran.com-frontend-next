@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Chapter from 'types/Chapter';
-import ChapterIcon from './ChapterIcon';
+import ChapterIconContainer from './ChapterIcon/ChapterIconContainer';
 import styles from './ChapterBlock.module.scss';
 
 type Props = {
@@ -18,10 +18,7 @@ const ChapterBlock: React.FC<Props> = ({ chapter }: Props) => (
             <div className={styles.nameArabic}>{chapter.nameSimple}</div>
             <div className={styles.nameTranslated}>{chapter.translatedName.name}</div>
           </div>
-          <span className={styles.iconContainer}>
-            <ChapterIcon id={String(chapter.id)} />
-            <ChapterIcon />
-          </span>
+          <ChapterIconContainer chapterId={String(chapter.id)} />
         </div>
       </a>
     </Link>

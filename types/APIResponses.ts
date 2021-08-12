@@ -42,25 +42,19 @@ export interface LanguagesResponse extends BaseResponse {
   languages?: AvailableLanguage[];
 }
 
-export interface RecitersResponse {
+export interface RecitersResponse extends BaseResponse {
   reciters?: Reciter[];
-  status?: number;
-  error?: string;
 }
 
-export interface AudioFilesResponse {
+export interface AudioFilesResponse extends BaseResponse {
   audioFiles: AudioFile[];
-  status?: number;
-  error?: string;
 }
 
-export interface AudioTimestampsResponse {
+export interface AudioTimestampsResponse extends BaseResponse {
   result: {
     timestampFrom: number;
     timestampTo: number;
   };
-  status?: number;
-  error?: string;
 }
 export interface SearchResponse extends BaseResponse {
   search?: {

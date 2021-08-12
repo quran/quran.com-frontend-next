@@ -7,8 +7,9 @@ import { ITEMS_PER_PAGE, makeUrl } from './api';
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
   translations: DEFAULT_TRANSLATIONS.join(', '),
+  translationFields: 'resource_name', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
-  fields: QuranFont.Uthmani, // we need text_uthmani field when copying the verse
+  fields: `${QuranFont.Uthmani},chapter_id`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir.
 };
 
 export const makeVersesUrl = (id: string | number, params?: Record<string, unknown>) => {
@@ -88,3 +89,17 @@ export const makeSearchResultsUrl = (params: SearchRequest): string =>
  */
 export const makeTafsirsUrl = (language: string): string =>
   makeUrl('/resources/tafsirs', decamelizeKeys({ language }));
+
+/**
+ * Compose the url for Juz's verses API.
+ *
+ * @param {string} id  the Id of the juz.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeJuzVersesUrl = (id: string | number, params?: Record<string, unknown>): string => {
+  // allow overriding the default values e.g. translations
+  const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
+
+  return makeUrl(`/verses/by_juz/${id}`, decamelizeKeys(apiParams));
+};

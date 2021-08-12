@@ -1,0 +1,13 @@
+.container {
+  text-align: center;
+  border-bottom: 1px var(--color-borders-hairline) solid;
+  padding: var(--spacing-large) 0;
+  margin: var(--spacing-large) 0;
+}
+
+.item {
+  font-size: calc(2 * var(--font-size-large));
+  letter-spacing: 0;
+  line-height: normal;
+  color: var(--color-text-default);
+}

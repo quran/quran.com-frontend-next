@@ -26,7 +26,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
       <NextSeoHead title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={versesResponse}
-        chapter={chapterResponse.chapter}
+        id={chapterResponse.chapter.id}
         quranReaderDataType={QuranReaderDataType.Verse}
       />
     </>

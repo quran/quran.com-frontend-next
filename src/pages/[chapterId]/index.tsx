@@ -25,7 +25,7 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
       <NextSeoHead
         title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
       />
-      <QuranReader initialData={versesResponse} chapter={chapterResponse.chapter} />
+      <QuranReader initialData={versesResponse} id={chapterResponse.chapter.id} />
     </>
   );
 };

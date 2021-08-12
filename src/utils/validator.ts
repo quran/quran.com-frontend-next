@@ -41,3 +41,21 @@ export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
   }
   return true;
 };
+
+/**
+ * Validate a juzId which can be in-valid in 2 cases:
+ *
+ * 1. if it's a string that is not numeric e.g. "test".
+ * 2. if it's a numeric string but lies outside the range 1->30.
+ *
+ * @param {string} chapterId
+ * @returns {boolean}
+ */
+export const isValidJuzId = (juzId: string): boolean => {
+  const juzIdNumber = Number(juzId);
+  // if it's not a numeric string or it's numeric but out of the range of chapter 1->30
+  if (Number.isNaN(juzIdNumber) || juzIdNumber > 30 || juzIdNumber < 1) {
+    return false;
+  }
+  return true;
+};

@@ -12,7 +12,7 @@
 }
 
 .container {
-  padding-top: calc(3 * var(--spacing-mega));
+  padding: calc(3 * var(--spacing-mega)) 0;
   background: var(--color-background-default);
   @include breakpoints.tablet {
     transition: var(--transition-regular);
