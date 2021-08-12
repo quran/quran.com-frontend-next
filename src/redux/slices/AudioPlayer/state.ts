@@ -62,13 +62,12 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
 );
 
 /**
- * get the audio file for the current reciter
- * and set the value to redux state
+ * get the timestamp for the the verseKey
+ * and then play it and update the redux state
  *
- * @param {number} chapter the chapter id
+ * @param {number} verseKey example 1:1 -> al-fatihah verse 1
  *
  */
-
 export const playVerse = createAsyncThunk<void, string>(
   'audioPlayerState/setAudioTime',
   async (verseKey, thunkApi) => {
@@ -77,6 +76,7 @@ export const playVerse = createAsyncThunk<void, string>(
     let audioFile = selectAudioFile(state);
     const chapter = getChapterNumberFromKey(verseKey);
     if (!audioFile || audioFile.chapterId !== chapter) {
+      thunkApi.dispatch(setAudioStatus(AudioFileStatus.Loading));
       audioFile = await getAudioFile(reciter.id, chapter);
       thunkApi.dispatch(setAudioFile(audioFile));
     }
