@@ -81,6 +81,8 @@ export const playVerse = createAsyncThunk<void, string>(
     const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
     const timeStampInSecond = timeStamp.result.timestampFrom / 1000;
     triggerSetCurrentTime(timeStampInSecond);
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    thunkApi.dispatch(setCurrentTime(timeStampInSecond));
   },
 );
 
