@@ -8,12 +8,14 @@ import {
   AudioFilesResponse,
   AudioTimestampsResponse,
   TafsirsResponse,
+  ChapterResponse,
+  ChaptersResponse,
+  VersesResponse,
+  BaseResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { AudioFile } from 'types/AudioFile';
 import { makeUrl } from './utils/api';
-import Chapter from '../types/Chapter';
-import Verse from '../types/Verse';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -25,50 +27,38 @@ import {
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
   makeVersesUrl,
+  makeJuzVersesUrl,
 } from './utils/apiPaths';
 
-export const fetcher = async function fetcher(input: RequestInfo, init?: RequestInit) {
+export const fetcher = async function fetcher(
+  input: RequestInfo,
+  init?: RequestInit,
+): Promise<BaseResponse> {
   const res = await fetch(input, init);
   return res.json();
 };
 
-export const getChapters = async () => {
+export const getChapters = async (): Promise<ChaptersResponse> => {
   const payload = await fetcher(makeUrl(`/chapters`));
-
-  return camelizeKeys(payload) as { chapters: Chapter[] };
-};
-
-export const getChapter = async (id: string | number) => {
-  const payload = await fetcher(makeUrl(`/chapters/${id}`));
-
-  return camelizeKeys(payload) as {
-    chapter: Chapter;
-    status?: number;
-    error?: string;
-  };
-};
-
-export const getChapterInfo = async (id: string | number) => {
-  const payload = await fetcher(makeUrl(`/chapters/${id}/info`));
 
   return camelizeKeys(payload);
 };
 
-export const getChapterVerses = async (id: string | number, params?: Record<string, unknown>) => {
+export const getChapter = async (id: string | number): Promise<ChapterResponse> => {
+  const payload = await fetcher(makeUrl(`/chapters/${id}`));
+
+  return camelizeKeys(payload);
+};
+
+export const getChapterVerses = async (
+  id: string | number,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => {
   const payload = await fetcher(makeVersesUrl(id, params));
   // TODO (@abdellatif): parameterize the default translation
 
-  return camelizeKeys(payload) as {
-    verses: Verse[];
-    status?: number;
-    error?: string;
-  };
+  return camelizeKeys(payload);
 };
-
-export const getChapterVersesResponse = async (
-  id: string | number,
-  params?: Record<string, unknown>,
-) => fetcher(makeVersesUrl(id, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
@@ -80,7 +70,7 @@ export const getChapterVersesResponse = async (
 export const getAvailableTranslations = async (language: string): Promise<TranslationsResponse> => {
   const payload = await fetcher(makeTranslationsUrl(language));
 
-  return camelizeKeys(payload) as TranslationsResponse;
+  return camelizeKeys(payload);
 };
 
 /**
@@ -93,7 +83,7 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
 export const getAvailableLanguages = async (language: string): Promise<LanguagesResponse> => {
   const payload = await fetcher(makeLanguagesUrl(language));
 
-  return camelizeKeys(payload) as LanguagesResponse;
+  return camelizeKeys(payload);
 };
 
 /**
@@ -104,7 +94,7 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
 export const getAvailableReciters = async (): Promise<RecitersResponse> => {
   const payload = await fetcher(makeRecitersUrl());
 
-  return camelizeKeys(payload) as RecitersResponse;
+  return camelizeKeys(payload);
 };
 
 /**
@@ -145,7 +135,7 @@ export const getVerseTimestamps = async (
   verseKey: string,
 ): Promise<AudioTimestampsResponse> => {
   const payload = await fetcher(makeAudioTimestampsUrl(reciterId, verseKey));
-  return camelizeKeys(payload) as AudioTimestampsResponse;
+  return camelizeKeys(payload);
 };
 
 /**
@@ -153,12 +143,15 @@ export const getVerseTimestamps = async (
  *
  * @param {string} locale the current user locale.
  * @param {number[]} translations the ids of the translations selected.
- * @returns
+ * @returns {Promise<TranslationsResponse>}
  */
-export const getTranslationsInfo = async (locale: string, translations: number[]) => {
+export const getTranslationsInfo = async (
+  locale: string,
+  translations: number[],
+): Promise<TranslationsResponse> => {
   const payload = await fetcher(makeTranslationsInfoUrl(locale, translations));
 
-  return camelizeKeys(payload) as TranslationsResponse;
+  return camelizeKeys(payload);
 };
 
 /**
@@ -184,7 +177,7 @@ export const getAdvancedCopyRawResult = async (
 export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> => {
   const payload = await fetcher(makeSearchResultsUrl(params));
 
-  return camelizeKeys(payload) as SearchResponse;
+  return camelizeKeys(payload);
 };
 
 /**
@@ -196,5 +189,21 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
 export const getTafsirs = async (language: string): Promise<TafsirsResponse> => {
   const payload = await fetcher(makeTafsirsUrl(language));
 
+  return camelizeKeys(payload);
+};
+
+/**
+ * Get the verses of a specific Juz.
+ *
+ * @param {string} id the ID of the Juz.
+ * @param {string} params the params that we might need to include that differs from the default ones.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
+export const getJuzVerses = async (
+  id: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => {
+  const payload = await fetcher(makeJuzVersesUrl(id, params));
   return camelizeKeys(payload);
 };

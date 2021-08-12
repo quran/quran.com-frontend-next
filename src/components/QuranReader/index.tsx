@@ -4,7 +4,6 @@ import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
-import Chapter from 'types/Chapter';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
   selectTranslations,
@@ -16,18 +15,17 @@ import { selectReadingPreference } from '../../redux/slices/QuranReader/readingP
 import PageView from './PageView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
-import { makeVersesUrl } from '../../utils/apiPaths';
+import { makeJuzVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
 import { selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import ContextMenu from './ContextMenu';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
-import PlayChapterAudioButton from './PlayChapterAudioButton';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
-  chapter: Chapter;
+  id: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
   quranReaderDataType?: QuranReaderDataType;
 };
 
@@ -44,11 +42,12 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
 };
 const QuranReader = ({
   initialData,
-  chapter,
+  id,
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
+  const isJuzData = quranReaderDataType === QuranReaderDataType.Juz;
   const isSideBarVisible = useSelector(selectNotes).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
@@ -59,8 +58,15 @@ const QuranReader = ({
     (index) => {
       // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
       const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
+      if (isJuzData) {
+        return makeJuzVersesUrl(id, {
+          page,
+          wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
+          translations: selectedTranslations.join(', '),
+        });
+      }
       if (isTafsirData) {
-        return makeVersesUrl(chapter.id, {
+        return makeVersesUrl(id, {
           page,
           perPage: 1,
           translations: null,
@@ -69,7 +75,7 @@ const QuranReader = ({
           tafsirFields: 'resource_name',
         });
       }
-      return makeVersesUrl(chapter.id, {
+      return makeVersesUrl(id, {
         page,
         wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
         translations: selectedTranslations.join(', '),
@@ -123,7 +129,6 @@ const QuranReader = ({
       <div
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
-        <PlayChapterAudioButton chapterId={Number(chapter.id)} />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}

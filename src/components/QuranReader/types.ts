@@ -10,6 +10,7 @@ export enum QuranReaderDataType {
   Hizb = 'hizb',
   Juz = 'juz',
   Rub = 'rub',
+  Page = 'page',
 }
 
 export enum QuranFont {

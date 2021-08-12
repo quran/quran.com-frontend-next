@@ -27,7 +27,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
       <NextSeoHead title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={verses}
-        chapter={chapter.chapter}
+        id={chapter.chapter.id}
         quranReaderDataType={QuranReaderDataType.Tafsir}
       />
     </>

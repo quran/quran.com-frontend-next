@@ -22,9 +22,6 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
-  const {
-    query: { chapterId },
-  } = useRouter();
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     // if the user has just copied the text, we should change the text back to Copy after 3 seconds.
@@ -60,14 +57,14 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
   const onTafsirsClicked = () => {
     router.push({
       pathname: '/[chapterId]/[verseId]/tafsirs',
-      query: { chapterId, verseId: verse.verseNumber },
+      query: { chapterId: verse.chapterId, verseId: verse.verseNumber },
     });
   };
 
   const onShareClicked = () => {
     const origin = getWindowOrigin();
     if (origin) {
-      clipboardCopy(`${origin}/${chapterId}/${verse.verseNumber}`).then(() => {
+      clipboardCopy(`${origin}/${verse.chapterId}/${verse.verseNumber}`).then(() => {
         setIsShared(true);
       });
     }

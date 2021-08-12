@@ -1,14 +1,12 @@
 import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
+import { ChaptersResponse } from 'types/APIResponses';
 import ChaptersList from '../components/chapters/ChapterList';
-import Chapter from '../../types/Chapter';
 import { getChapters } from '../api';
 import styles from './index.module.scss';
 
 type IndexProps = {
-  chaptersResponse: {
-    chapters: Chapter[];
-  };
+  chaptersResponse: ChaptersResponse;
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
