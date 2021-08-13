@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReadingPreference } from 'src/components/QuranReader/types';
 
-const initialState: ReadingPreference = ReadingPreference.QuranPage;
+const initialState: ReadingPreference = ReadingPreference.Reading;
 
 export const readingPreferenceSlice = createSlice({
   name: 'readingPreference',

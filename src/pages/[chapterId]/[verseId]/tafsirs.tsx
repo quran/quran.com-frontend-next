@@ -8,6 +8,10 @@ import NextSeoHead from 'src/components/NextSeoHead';
 import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -61,7 +65,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       props: {
         hasError: true,
       },
-      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
   return {
@@ -69,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chapter: chapterResponse,
       verses: versesResponse,
     },
-    revalidate: 604800, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
 };
 export const getStaticPaths: GetStaticPaths = async () => ({
