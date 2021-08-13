@@ -12,6 +12,7 @@ import {
   ChaptersResponse,
   VersesResponse,
   BaseResponse,
+  ChapterInfoResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { AudioFile } from 'types/AudioFile';
@@ -28,6 +29,8 @@ import {
   makeTranslationsUrl,
   makeVersesUrl,
   makeJuzVersesUrl,
+  makeChapterInfoUrl,
+  makePageVersesUrl,
 } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(
@@ -44,8 +47,11 @@ export const getChapters = async (): Promise<ChaptersResponse> => {
   return camelizeKeys(payload);
 };
 
-export const getChapter = async (id: string | number): Promise<ChapterResponse> => {
-  const payload = await fetcher(makeUrl(`/chapters/${id}`));
+export const getChapter = async (
+  id: string | number,
+  language: string,
+): Promise<ChapterResponse> => {
+  const payload = await fetcher(makeUrl(`/chapters/${id}`, { language }));
 
   return camelizeKeys(payload);
 };
@@ -193,6 +199,22 @@ export const getTafsirs = async (language: string): Promise<TafsirsResponse> => 
 };
 
 /**
+ * Get a chapter's info
+ *
+ * @param {string} chapterId
+ * @param {string} language
+ * @returns {Promise<ChapterInfoResponse>}
+ */
+export const getChapterInfo = async (
+  chapterId: string,
+  language: string,
+): Promise<ChapterInfoResponse> => {
+  const payload = await fetcher(makeChapterInfoUrl(chapterId, language));
+
+  return camelizeKeys(payload);
+};
+
+/**
  * Get the verses of a specific Juz.
  *
  * @param {string} id the ID of the Juz.
@@ -205,5 +227,21 @@ export const getJuzVerses = async (
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => {
   const payload = await fetcher(makeJuzVersesUrl(id, params));
+  return camelizeKeys(payload);
+};
+
+/**
+ * Get the verses of a specific page.
+ *
+ * @param {string} id the ID of the page.
+ * @param {string} params the params that we might need to include that differs from the default ones.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
+export const getPageVerses = async (
+  id: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => {
+  const payload = await fetcher(makePageVersesUrl(id, params));
   return camelizeKeys(payload);
 };

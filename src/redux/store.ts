@@ -19,6 +19,7 @@ import contextMenu from './slices/QuranReader/contextMenu';
 import navbar from './slices/navbar';
 import audioPlayerState from './slices/AudioPlayer/state';
 import theme from './slices/theme';
+import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 
 const persistConfig = {
   key: 'root',
@@ -28,7 +29,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  audioPlayerState,
+  audioPlayerState: persistReducer(audioPlayerPersistConfig, audioPlayerState),
   contextMenu,
   navbar,
   notes,

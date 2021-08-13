@@ -91,6 +91,16 @@ export const makeTafsirsUrl = (language: string): string =>
   makeUrl('/resources/tafsirs', decamelizeKeys({ language }));
 
 /**
+ * Compose the url for the chapter's info API.
+ *
+ * @param {string} chapterId the chapter Id.
+ * @param {string} language the user's language code.
+ * @returns {string}
+ */
+export const makeChapterInfoUrl = (chapterId: string, language: string): string =>
+  makeUrl(`/chapters/${chapterId}/info`, decamelizeKeys({ language }));
+
+/**
  * Compose the url for Juz's verses API.
  *
  * @param {string} id  the Id of the juz.
@@ -102,4 +112,21 @@ export const makeJuzVersesUrl = (id: string | number, params?: Record<string, un
   const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
 
   return makeUrl(`/verses/by_juz/${id}`, decamelizeKeys(apiParams));
+};
+
+/**
+ * Compose the url for page's verses API.
+ *
+ * @param {string} id  the Id of the page.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makePageVersesUrl = (
+  id: string | number,
+  params?: Record<string, unknown>,
+): string => {
+  // allow overriding the default values e.g. translations
+  const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
+
+  return makeUrl(`/verses/by_page/${id}`, decamelizeKeys(apiParams));
 };

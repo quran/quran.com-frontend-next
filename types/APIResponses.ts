@@ -6,6 +6,7 @@ import SearchResult from './SearchResult';
 import AvailableLanguage from './AvailableLanguage';
 import Reciter from './Reciter';
 import { AudioFile } from './AudioFile';
+import ChapterInfo from './ChapterInfo';
 
 export interface BaseResponse {
   status?: number;
@@ -72,4 +73,8 @@ export interface AdvancedCopyRawResultResponse extends BaseResponse {
 
 export interface TafsirsResponse extends BaseResponse {
   tafsirs?: TafsirInfo[];
+}
+
+export interface ChapterInfoResponse extends BaseResponse {
+  chapterInfo?: ChapterInfo;
 }

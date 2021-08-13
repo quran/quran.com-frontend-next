@@ -30,7 +30,7 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const chapterId = String(params.chapterId);
   // we need to validate the chapterId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
   if (!isValidChapterId(chapterId)) {
@@ -39,7 +39,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
   const [chapterResponse, versesResponse] = await Promise.all([
-    getChapter(chapterId),
+    getChapter(chapterId, locale),
     getChapterVerses(chapterId, {
       wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
     }),
