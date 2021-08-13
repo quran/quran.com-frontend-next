@@ -124,7 +124,13 @@ export const audioPlayerStateSlice = createSlice({
   },
 });
 
-export const { setIsPlaying, setCurrentTime, setReciter, setAudioFile, setAudioStatus } =
-  audioPlayerStateSlice.actions;
+export const {
+  setIsPlaying,
+  setCurrentTime,
+  setReciter,
+  setAudioFile,
+  setAudioStatus,
+  setIsMinimized,
+} = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;
