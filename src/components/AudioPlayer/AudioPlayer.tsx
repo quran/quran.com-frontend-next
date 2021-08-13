@@ -2,10 +2,6 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
-  AudioPlayerVisibility,
-  selectAudioPlayerStyle,
-} from '../../redux/slices/AudioPlayer/style';
-import {
   setIsPlaying,
   selectAudioPlayerState,
   setCurrentTime,
@@ -13,6 +9,7 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
+  selectIsMinimized,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -25,16 +22,13 @@ import styles from './AudioPlayer.module.scss';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const { visibility } = useSelector(selectAudioPlayerStyle);
   const { isPlaying, currentTime } = useSelector(selectAudioPlayerState);
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
-
+  const isMinimized = useSelector(selectIsMinimized);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
-  const isMinimized = !isHidden && visibility === AudioPlayerVisibility.Minimized;
-  const isExpanded = !isHidden && visibility === AudioPlayerVisibility.Expanded;
 
   let audioDuration = 0;
 
@@ -141,7 +135,7 @@ const AudioPlayer = () => {
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
         [styles.containerMinimized]: isMinimized,
-        [styles.containerExpanded]: isExpanded,
+        [styles.containerExpanded]: !isMinimized,
         [styles.containerLoading]: isLoading,
       })}
     >
