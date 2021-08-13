@@ -12,6 +12,7 @@ import {
   ChaptersResponse,
   VersesResponse,
   BaseResponse,
+  ChapterInfoResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { AudioFile } from 'types/AudioFile';
@@ -28,6 +29,7 @@ import {
   makeTranslationsUrl,
   makeVersesUrl,
   makeJuzVersesUrl,
+  makeChapterInfoUrl,
 } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(
@@ -44,8 +46,11 @@ export const getChapters = async (): Promise<ChaptersResponse> => {
   return camelizeKeys(payload);
 };
 
-export const getChapter = async (id: string | number): Promise<ChapterResponse> => {
-  const payload = await fetcher(makeUrl(`/chapters/${id}`));
+export const getChapter = async (
+  id: string | number,
+  language: string,
+): Promise<ChapterResponse> => {
+  const payload = await fetcher(makeUrl(`/chapters/${id}`, { language }));
 
   return camelizeKeys(payload);
 };
@@ -188,6 +193,22 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
  */
 export const getTafsirs = async (language: string): Promise<TafsirsResponse> => {
   const payload = await fetcher(makeTafsirsUrl(language));
+
+  return camelizeKeys(payload);
+};
+
+/**
+ * Get a chapter's info
+ *
+ * @param {string} chapterId
+ * @param {string} language
+ * @returns {Promise<ChapterInfoResponse>}
+ */
+export const getChapterInfo = async (
+  chapterId: string,
+  language: string,
+): Promise<ChapterInfoResponse> => {
+  const payload = await fetcher(makeChapterInfoUrl(chapterId, language));
 
   return camelizeKeys(payload);
 };

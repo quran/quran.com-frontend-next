@@ -33,7 +33,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const chapterId = String(params.chapterId);
   const verseId = String(params.verseId);
   // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const [chapterResponse, versesResponse] = await Promise.all([
-    getChapter(chapterId),
+    getChapter(chapterId, locale),
     getChapterVerses(chapterId, {
       page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
       perPage: 1, // only 1 verse per page
