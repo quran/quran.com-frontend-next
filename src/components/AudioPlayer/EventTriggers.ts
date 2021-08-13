@@ -22,4 +22,10 @@ export const triggerSetCurrentTime = (newTime: number) => {
   }
 };
 
+export const triggerSeek = (duration) => {
+  if (process.browser && window) {
+    triggerSetCurrentTime(window.audioPlayerEl.currentTime + duration);
+  }
+};
+
 export default { triggerPlayAudio, triggerPauseAudio, triggerSetCurrentTime };
