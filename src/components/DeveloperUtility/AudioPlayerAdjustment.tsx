@@ -5,19 +5,19 @@ import { selectIsMinimized, setIsMinimized } from 'src/redux/slices/AudioPlayer/
 const AudioPlayerAdjustment = () => {
   const dispatch = useDispatch();
   const isMinimized = useSelector(selectIsMinimized);
-  const availableVisibilities = ['true', 'false'];
+  const options = ['true', 'false'];
 
   return (
-    <label htmlFor="audio-player-visibility">
+    <label htmlFor="audio-player-is-minimized">
       Audio player isMinimized
       <select
-        name="audio-player-visibility"
+        name="audio-player-is-minimized"
         onChange={(event) =>
           dispatch({ type: setIsMinimized.type, payload: event.target.value === 'true' })
         }
         value={isMinimized}
       >
-        {availableVisibilities.map((value) => (
+        {options.map((value) => (
           <option key={value} value={value}>
             {value}
           </option>
