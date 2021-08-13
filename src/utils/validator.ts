@@ -70,9 +70,9 @@ export const isValidJuzId = (juzId: string): boolean => {
  * @returns {boolean}
  */
 export const isValidPageId = (juzId: string): boolean => {
-  const juzIdNumber = Number(juzId);
+  const pageIdNumber = Number(juzId);
   // if it's not a numeric string or it's numeric but out of the range of chapter 1->604
-  if (Number.isNaN(juzIdNumber) || juzIdNumber > 604 || juzIdNumber < 1) {
+  if (Number.isNaN(pageIdNumber) || pageIdNumber > 604 || pageIdNumber < 1) {
     return false;
   }
   return true;
