@@ -4,6 +4,7 @@ import Chapter from 'types/Chapter';
 import _ from 'lodash';
 import ChapterInfo from 'types/ChapterInfo';
 import Image from 'next/image';
+import { getBlurDataUrl } from 'src/utils/image';
 import styles from './Info.module.scss';
 
 interface Props {
@@ -15,7 +16,12 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => (
   <div className={styles.container}>
     <div className={styles.infoBody}>
       <div className={styles.imageContainer}>
-        <Image src={`/images/${chapter.revelationPlace}.jpg`} layout="fill" />
+        <Image
+          src={`/images/${chapter.revelationPlace}.jpg`}
+          layout="fill"
+          placeholder="blur"
+          blurDataURL={getBlurDataUrl(200, 250)}
+        />
       </div>
       <div className={styles.infoTextContainer}>
         <div className={styles.headerContainer}>
