@@ -24,6 +24,7 @@ export type AudioState = {
   reciter: Reciter;
   audioFile: AudioFile;
   audioFileStatus: AudioFileStatus;
+  isMinimized: boolean;
 };
 
 const initialState: AudioState = {
@@ -32,6 +33,7 @@ const initialState: AudioState = {
   audioFile: null,
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
+  isMinimized: false,
 };
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
@@ -39,6 +41,7 @@ export const selectReciter = (state) => state.audioPlayerState.reciter;
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
+export const selectIsMinimized = (state) => state.audioPlayerState.isMinimized;
 
 /**
  * get the audio file for the current reciter
@@ -114,10 +117,20 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       audioFileStatus: action.payload,
     }),
+    setIsMinimized: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isMinimized: action.payload,
+    }),
   },
 });
 
-export const { setIsPlaying, setCurrentTime, setReciter, setAudioFile, setAudioStatus } =
-  audioPlayerStateSlice.actions;
+export const {
+  setIsPlaying,
+  setCurrentTime,
+  setReciter,
+  setAudioFile,
+  setAudioStatus,
+  setIsMinimized,
+} = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

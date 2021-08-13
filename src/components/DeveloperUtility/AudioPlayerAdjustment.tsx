@@ -1,31 +1,25 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  AudioPlayerVisibility,
-  selectAudioPlayerStyle,
-  setVisibility,
-} from 'src/redux/slices/AudioPlayer/style';
+import { selectIsMinimized, setIsMinimized } from 'src/redux/slices/AudioPlayer/state';
 
 const AudioPlayerAdjustment = () => {
   const dispatch = useDispatch();
-  const audioPlayerStyle = useSelector(selectAudioPlayerStyle);
-  const availableVisibilities = [];
-
-  Object.values(AudioPlayerVisibility).forEach((visibility) =>
-    availableVisibilities.push(visibility),
-  );
+  const isMinimized = useSelector(selectIsMinimized);
+  const options = ['true', 'false'];
 
   return (
-    <label htmlFor="audio-player-visibility">
-      Audio player visibility{' '}
+    <label htmlFor="audio-player-is-minimized">
+      Audio player isMinimized
       <select
-        name="audio-player-visibility"
-        onChange={(event) => dispatch({ type: setVisibility.type, payload: event.target.value })}
-        value={audioPlayerStyle.visibility}
+        name="audio-player-is-minimized"
+        onChange={(event) =>
+          dispatch({ type: setIsMinimized.type, payload: event.target.value === 'true' })
+        }
+        value={isMinimized}
       >
-        {availableVisibilities.map((visibility) => (
-          <option key={visibility} value={visibility}>
-            {visibility}
+        {options.map((value) => (
+          <option key={value} value={value}>
+            {value}
           </option>
         ))}
       </select>

@@ -2,10 +2,6 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
-  AudioPlayerVisibility,
-  selectAudioPlayerStyle,
-} from '../../redux/slices/AudioPlayer/style';
-import {
   setIsPlaying,
   selectAudioPlayerState,
   setCurrentTime,
@@ -13,6 +9,7 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
+  selectIsMinimized,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -25,14 +22,13 @@ import styles from './AudioPlayer.module.scss';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const { visibility } = useSelector(selectAudioPlayerStyle);
   const { isPlaying, currentTime } = useSelector(selectAudioPlayerState);
-  const isHidden = visibility === AudioPlayerVisibility.Hidden;
-  const isMinimized = visibility === AudioPlayerVisibility.Minimized;
-  const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
+  const isMinimized = useSelector(selectIsMinimized);
+  const isHidden = audioFileStatus === AudioFileStatus.NoFile;
+  const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   let audioDuration = 0;
 
@@ -86,7 +82,10 @@ const AudioPlayer = () => {
   // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
   const onTimeUpdate = () => {
     // update the current audio time in redux
-    dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
+    dispatch({
+      type: setCurrentTime.type,
+      payload: audioPlayerEl.current.currentTime,
+    });
   };
 
   const play = useCallback(() => {
@@ -116,7 +115,10 @@ const AudioPlayer = () => {
       }
 
       audioPlayerEl.current.currentTime = newTime;
-      dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
+      dispatch({
+        type: setCurrentTime.type,
+        payload: audioPlayerEl.current.currentTime,
+      });
     },
     [audioDuration, dispatch],
   );
@@ -133,11 +135,11 @@ const AudioPlayer = () => {
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
         [styles.containerMinimized]: isMinimized,
-        [styles.containerExpanded]: isExpanded,
+        [styles.containerExpanded]: !isMinimized,
+        [styles.containerLoading]: isLoading,
       })}
     >
       <div className={styles.innerContainer}>
-        <div>{audioFileStatus}</div>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           src={audioFile?.audioUrl}
