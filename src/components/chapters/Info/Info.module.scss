@@ -4,6 +4,7 @@
   padding: calc(2 * var(--spacing-mega)) 0;
   margin: 0 auto;
   max-width: 90%;
+  color: var(--color-text-default);
   @include breakpoints.tablet {
     max-width: 75%;
   }
