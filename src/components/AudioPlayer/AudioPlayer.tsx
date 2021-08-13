@@ -146,7 +146,6 @@ const AudioPlayer = () => {
       })}
     >
       <div className={styles.innerContainer}>
-        <div>{audioFileStatus}</div>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           src={audioFile?.audioUrl}
