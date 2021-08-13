@@ -27,12 +27,14 @@ const AudioPlayer = () => {
   const dispatch = useDispatch();
   const { visibility } = useSelector(selectAudioPlayerStyle);
   const { isPlaying, currentTime } = useSelector(selectAudioPlayerState);
-  const isHidden = visibility === AudioPlayerVisibility.Hidden;
-  const isMinimized = visibility === AudioPlayerVisibility.Minimized;
-  const isExpanded = visibility === AudioPlayerVisibility.Expanded;
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
+
+  const isHidden = audioFileStatus === AudioFileStatus.NoFile;
+  const isLoading = audioFileStatus === AudioFileStatus.Loading;
+  const isMinimized = !isHidden && visibility === AudioPlayerVisibility.Minimized;
+  const isExpanded = !isHidden && visibility === AudioPlayerVisibility.Expanded;
 
   let audioDuration = 0;
 
@@ -86,7 +88,10 @@ const AudioPlayer = () => {
   // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
   const onTimeUpdate = () => {
     // update the current audio time in redux
-    dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
+    dispatch({
+      type: setCurrentTime.type,
+      payload: audioPlayerEl.current.currentTime,
+    });
   };
 
   const play = useCallback(() => {
@@ -116,7 +121,10 @@ const AudioPlayer = () => {
       }
 
       audioPlayerEl.current.currentTime = newTime;
-      dispatch({ type: setCurrentTime.type, payload: audioPlayerEl.current.currentTime });
+      dispatch({
+        type: setCurrentTime.type,
+        payload: audioPlayerEl.current.currentTime,
+      });
     },
     [audioDuration, dispatch],
   );
@@ -134,6 +142,7 @@ const AudioPlayer = () => {
         [styles.containerHidden]: isHidden,
         [styles.containerMinimized]: isMinimized,
         [styles.containerExpanded]: isExpanded,
+        [styles.containerLoading]: isLoading,
       })}
     >
       <div className={styles.innerContainer}>
