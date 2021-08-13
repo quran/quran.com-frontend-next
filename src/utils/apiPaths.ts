@@ -91,6 +91,16 @@ export const makeTafsirsUrl = (language: string): string =>
   makeUrl('/resources/tafsirs', decamelizeKeys({ language }));
 
 /**
+ * Compose the url for the chapter's info API.
+ *
+ * @param {string} chapterId the chapter Id.
+ * @param {string} language the user's language code.
+ * @returns {string}
+ */
+export const makeChapterInfoUrl = (chapterId: string, language: string): string =>
+  makeUrl(`/chapters/${chapterId}/info`, decamelizeKeys({ language }));
+
+/**
  * Compose the url for Juz's verses API.
  *
  * @param {string} id  the Id of the juz.

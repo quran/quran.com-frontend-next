@@ -11,3 +11,9 @@
   line-height: normal;
   color: var(--color-text-default);
 }
+
+.actionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,74 @@
+@use "src/styles/breakpoints";
+
+.container {
+  padding: calc(2 * var(--spacing-mega)) 0;
+  margin: 0 auto;
+  max-width: 90%;
+  color: var(--color-text-default);
+  @include breakpoints.tablet {
+    max-width: 75%;
+  }
+}
+
+.infoBody {
+  width: 100%;
+  display: block;
+  @include breakpoints.tablet {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.imageContainer {
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  height: 200px;
+  width: 250px;
+  position: relative;
+  @include breakpoints.tablet {
+    margin-right: var(--spacing-large);
+  }
+}
+
+.infoTextContainer {
+  width: auto;
+  @include breakpoints.tablet {
+    width: 80%;
+  }
+}
+
+.headerContainer {
+  margin: var(--spacing-xsmall) 0;
+  padding-bottom: var(--spacing-xsmall);
+  border-bottom: 1px solid var(--color-borders-hairline);
+  @include breakpoints.tablet {
+    display: flex;
+  }
+}
+
+.surahName {
+  font-size: calc(2 * var(--font-size-large));
+  font-weight: var(--font-weight-bold);
+  line-height: normal;
+  width: 100%;
+  @include breakpoints.tablet {
+    width: 50%;
+  }
+}
+
+.detailsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-xsmall);
+  width: 100%;
+  @include breakpoints.tablet {
+    padding-top: 0;
+    width: 50%;
+  }
+}
+
+.detailHeader {
+  font-weight: var(--font-weight-bold);
+  padding-bottom: var(--spacing-xxsmall);
+}
