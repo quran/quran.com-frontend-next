@@ -16,7 +16,7 @@ type VerseTextProps = {
 const VerseText = ({ words }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const readingPreference = useSelector(selectReadingPreference);
-  const isQuranPage = readingPreference === ReadingPreference.QuranPage;
+  const isReadingMode = readingPreference === ReadingPreference.Reading;
   const { lineNumber, pageNumber } = words[0];
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber),
@@ -29,15 +29,15 @@ const VerseText = ({ words }: VerseTextProps) => {
       style={{
         fontSize: `${quranReaderStyles.quranTextFontSize}rem`,
         minWidth:
-          isQuranPage && !centerAlignPage
+          isReadingMode && !centerAlignPage
             ? `min(95%, calc(${quranReaderStyles.letterSpacingMultiplier} * ${quranReaderStyles.quranTextFontSize}rem))`
             : null,
       }}
     >
       <div
         className={classNames(styles.verseText, {
-          [styles.verseTextCenterAlign]: isQuranPage && centerAlignPage,
-          [styles.verseTextSpaceBetween]: isQuranPage && !centerAlignPage,
+          [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
+          [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
         })}
       >
         {words?.map((word) => (

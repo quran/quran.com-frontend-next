@@ -6,8 +6,13 @@ import { useRouter } from 'next/router';
 import { isValidJuzId } from 'src/utils/validator';
 import { VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
-import { QuranFont, QuranReaderDataType } from 'src/components/QuranReader/types';
+import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import NextSeoHead from 'src/components/NextSeoHead';
+import { getDefaultWordFields } from 'src/utils/api';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;
@@ -43,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const juzVersesResponse = await getJuzVerses(juzId, {
-    wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
+    ...getDefaultWordFields(),
   });
   // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
   if (juzVersesResponse.status === 500) {
@@ -51,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       props: {
         hasError: true,
       },
-      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
 
@@ -59,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       juzVerses: juzVersesResponse,
     },
-    revalidate: 604800, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
 };
 

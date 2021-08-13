@@ -5,8 +5,13 @@ import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { getChapter, getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
-import { QuranFont, QuranReaderDataType } from 'src/components/QuranReader/types';
+import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import NextSeoHead from 'src/components/NextSeoHead';
+import { getDefaultWordFields } from 'src/utils/api';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;
@@ -48,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     getChapterVerses(chapterId, {
       page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
       perPage: 1, // only 1 verse per page
-      wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
+      ...getDefaultWordFields(),
     }),
   ]);
 
@@ -58,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       props: {
         hasError: true,
       },
-      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
 
@@ -67,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chapterResponse,
       versesResponse,
     },
-    revalidate: 604800, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
 };
 

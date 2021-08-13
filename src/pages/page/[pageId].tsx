@@ -4,10 +4,15 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import NextSeoHead from 'src/components/NextSeoHead';
 import { isValidPageId } from 'src/utils/validator';
 import { getPageVerses } from 'src/api';
-import { QuranFont, QuranReaderDataType } from 'src/components/QuranReader/types';
+import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import { VersesResponse } from 'types/APIResponses';
 import { useRouter } from 'next/router';
 import QuranReader from 'src/components/QuranReader';
+import { getDefaultWordFields } from 'src/utils/api';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 
 interface Props {
   pageVerses: VersesResponse;
@@ -43,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const pageVersesResponse = await getPageVerses(pageId, {
-    wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
+    ...getDefaultWordFields(),
   });
   // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
   if (pageVersesResponse.status === 500) {
@@ -51,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       props: {
         hasError: true,
       },
-      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
 
@@ -59,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       pageVerses: pageVersesResponse,
     },
-    revalidate: 604800, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
 };
 

@@ -11,6 +11,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
 import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
+import { getDefaultWordFields } from 'src/utils/api';
 import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreference';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
@@ -57,15 +58,14 @@ const QuranReader = ({
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey(
+        quranReaderDataType,
         index,
         initialData,
         quranReaderStyles,
         selectedTranslations,
         selectedTafsirs,
-        quranReaderDataType === QuranReaderDataType.Juz,
         isVerseData,
         isTafsirData,
-        quranReaderDataType === QuranReaderDataType.Page,
         id,
       ),
     verseFetcher,
@@ -97,7 +97,7 @@ const QuranReader = ({
   const verses = data.flat(1);
   if (quranReaderDataType === QuranReaderDataType.Tafsir) {
     view = <TafsirView verse={verses[0]} />;
-  } else if (readingPreference === ReadingPreference.QuranPage) {
+  } else if (readingPreference === ReadingPreference.Reading) {
     view = <PageView verses={verses} />;
   } else {
     view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
@@ -138,31 +138,30 @@ const QuranReader = ({
  * again or return the cached response.
  */
 const getRequestKey = (
+  quranReaderDataType: QuranReaderDataType,
   index: number,
   initialData: VersesResponse,
   quranReaderStyles: QuranReaderStyles,
   selectedTranslations: number[],
   selectedTafsirs: number[],
-  isJuzData: boolean,
   isVerseData: boolean,
   isTafsirData: boolean,
-  isQuranicPageData: boolean,
   id: string | number,
 ): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
-  if (isJuzData) {
+  if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, {
       page,
-      wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
       translations: selectedTranslations.join(', '),
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
   }
-  if (isQuranicPageData) {
+  if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, {
       page,
-      wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
       translations: selectedTranslations.join(', '),
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
   }
 
@@ -178,8 +177,8 @@ const getRequestKey = (
   }
   return makeVersesUrl(id, {
     page,
-    wordFields: `verse_key, verse_id, page_number, location, ${quranReaderStyles.quranFont}`,
     translations: selectedTranslations.join(', '),
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
   });
 };

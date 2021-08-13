@@ -5,14 +5,16 @@ import { getChapter, getChapterInfo } from 'src/api';
 import { ChapterInfoResponse, ChapterResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
 import Info from 'src/components/chapters/Info';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 
 interface Props {
   chapterResponse?: ChapterResponse;
   chapterInfoResponse?: ChapterInfoResponse;
   hasError?: boolean;
 }
-
-const REVALIDATION_PERIOD_SECONDS = 2592000; // 30 days
 
 const ChapterInfo: NextPage<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
   if (hasError) {
@@ -48,7 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       props: {
         hasError: true,
       },
-      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
 
@@ -57,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chapterInfoResponse,
       chapterResponse,
     },
-    revalidate: REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
+    revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
   };
 };
 

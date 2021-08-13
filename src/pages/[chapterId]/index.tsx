@@ -4,10 +4,14 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
+import { getDefaultWordFields } from 'src/utils/api';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 import { isValidChapterId } from '../../utils/validator';
 import { getChapter, getChapterVerses } from '../../api';
 import QuranReader from '../../components/QuranReader';
-import { QuranFont } from '../../components/QuranReader/types';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;
@@ -41,7 +45,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const [chapterResponse, versesResponse] = await Promise.all([
     getChapter(chapterId, locale),
     getChapterVerses(chapterId, {
-      wordFields: `verse_key, verse_id, page_number, location, ${QuranFont.QPCHafs}`,
+      ...getDefaultWordFields(),
     }),
   ]);
   // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
@@ -50,7 +54,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       props: {
         hasError: true,
       },
-      revalidate: 35, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
   return {
@@ -58,7 +62,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chapterResponse,
       versesResponse,
     },
-    revalidate: 604800, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };
 };
 
