@@ -15,6 +15,7 @@ type VerseTextProps = {
 
 const VerseText = ({ words }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
+  const { quranTextFontScale } = quranReaderStyles;
   const readingPreference = useSelector(selectReadingPreference);
   const isReadingMode = readingPreference === ReadingPreference.Reading;
   const { lineNumber, pageNumber } = words[0];
@@ -25,14 +26,10 @@ const VerseText = ({ words }: VerseTextProps) => {
 
   return (
     <div
-      className={classNames(styles.verseTextContainer)}
-      style={{
-        fontSize: `${quranReaderStyles.quranTextFontSize}rem`,
-        minWidth:
-          isReadingMode && !centerAlignPage
-            ? `min(95%, calc(${quranReaderStyles.letterSpacingMultiplier} * ${quranReaderStyles.quranTextFontSize}rem))`
-            : null,
-      }}
+      className={classNames(
+        styles.verseTextContainer,
+        styles[`quran-font-size-${quranTextFontScale}`],
+      )}
     >
       <div
         className={classNames(styles.verseText, {

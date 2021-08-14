@@ -33,9 +33,11 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
           {verse.translations?.map((translation: Translation) => (
             <div key={translation.id}>
               <div
-                className={styles.text}
+                className={classNames(
+                  styles.text,
+                  styles[`translation-font-size-${quranReaderStyles.translationFontScale}`],
+                )}
                 dangerouslySetInnerHTML={{ __html: translation.text }}
-                style={{ fontSize: `${quranReaderStyles.translationFontSize}rem` }}
               />
               <p className={styles.translationName}>— {translation.resourceName}</p>
             </div>

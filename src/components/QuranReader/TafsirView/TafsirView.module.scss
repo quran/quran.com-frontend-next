@@ -1,3 +1,6 @@
+@use "src/styles/constants";
+@use "src/styles/utility";
+
 .container {
   max-width: 80%;
   margin: var(--spacing-medium) auto;
@@ -22,3 +25,5 @@
     line-height: normal;
   }
 }
+
+@include utility.generate-font-sizes("tafsir");
