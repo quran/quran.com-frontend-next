@@ -1,67 +1,50 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { QuranFont } from 'src/components/QuranReader/types';
 
-const FONT_SCALING_FACTOR = 1.1;
-
-export enum LetterSpacingMultiplyer { // Used to justify the words on the line, fonts with smaller words need a smaller multiplier
-  MadaniV1 = 17,
-  MadaniV2 = 17,
-  IndoPak = 13,
-  None = 1,
-}
+export const MAXIMUM_FONT_STEP = 5;
 
 export type QuranReaderStyles = {
-  tafsirFontSize: number;
-  translationFontSize: number;
-  quranTextFontSize: number;
-  quranTextLineHeight: number;
-  quranTextLetterSpacing: number;
+  tafsirFontScale: number;
+  translationFontScale: number;
+  quranTextFontScale: number;
   quranFont: QuranFont;
-  letterSpacingMultiplier: LetterSpacingMultiplyer;
 };
 
 const initialState: QuranReaderStyles = {
   // the base sizes in rem
-  translationFontSize: 1,
-  tafsirFontSize: 1,
-  quranTextFontSize: 2,
-  quranTextLineHeight: 3,
-  quranTextLetterSpacing: 0,
+  tafsirFontScale: 3,
+  quranTextFontScale: 3,
+  translationFontScale: 3,
   quranFont: QuranFont.QPCHafs,
-  letterSpacingMultiplier: LetterSpacingMultiplyer.None,
 };
 
 export const quranReaderStylesSlice = createSlice({
   name: 'quranReaderStyles',
   initialState,
   reducers: {
-    increaseTranslationTextSize: (state) => ({
+    increaseQuranTextFontScale: (state) => ({
       ...state,
-      translationFontSize: state.translationFontSize * FONT_SCALING_FACTOR,
+      quranTextFontScale: state.quranTextFontScale + 1,
     }),
-    decreaseTranslationTextSize: (state) => ({
+    decreaseQuranTextFontScale: (state) => ({
       ...state,
-      translationFontSize: state.translationFontSize / FONT_SCALING_FACTOR,
+      quranTextFontScale: state.quranTextFontScale - 1,
     }),
-    increaseTafsirTextSize: (state) => ({
+    increaseTranslationFontScale: (state) => ({
       ...state,
-      tafsirFontSize: state.tafsirFontSize * FONT_SCALING_FACTOR,
+      translationFontScale: state.translationFontScale + 1,
     }),
-    decreaseTafsirTextSize: (state) => ({
+    decreaseTranslationFontScale: (state) => ({
       ...state,
-      tafsirFontSize: state.tafsirFontSize / FONT_SCALING_FACTOR,
+      translationFontScale: state.translationFontScale - 1,
     }),
-    increaseQuranTextSize: (state) => ({
+    increaseTafsirFontScale: (state) => ({
       ...state,
-      quranTextFontSize: state.quranTextFontSize * FONT_SCALING_FACTOR,
-      quranTextLineHeight: state.quranTextLineHeight * FONT_SCALING_FACTOR,
-      quranTextLetterSpacing: state.quranTextLetterSpacing * FONT_SCALING_FACTOR,
+      tafsirFontScale: state.tafsirFontScale + 1,
     }),
-    decreaseQuranTextSize: (state) => ({
+    decreaseTafsirFontScale: (state) => ({
       ...state,
-      quranTextFontSize: state.quranTextFontSize / FONT_SCALING_FACTOR,
-      quranTextLineHeight: state.quranTextLineHeight / FONT_SCALING_FACTOR,
-      quranTextLetterSpacing: state.quranTextLetterSpacing / FONT_SCALING_FACTOR,
+      tafsirFontScale: state.tafsirFontScale - 1,
     }),
     setQuranFont: (state: QuranReaderStyles, action: PayloadAction<QuranFont>) => {
       switch (action.payload) {
@@ -69,19 +52,16 @@ export const quranReaderStylesSlice = createSlice({
           return {
             ...state,
             quranFont: action.payload,
-            letterSpacingMultiplier: LetterSpacingMultiplyer.MadaniV1,
           };
         case QuranFont.IndoPak:
           return {
             ...state,
             quranFont: action.payload,
-            letterSpacingMultiplier: LetterSpacingMultiplyer.IndoPak,
           };
         default:
           return {
             ...state,
             quranFont: action.payload,
-            letterSpacingMultiplier: LetterSpacingMultiplyer.None,
           };
       }
     },
@@ -89,13 +69,13 @@ export const quranReaderStylesSlice = createSlice({
 });
 
 export const {
-  increaseQuranTextSize,
-  decreaseQuranTextSize,
-  increaseTranslationTextSize,
-  decreaseTranslationTextSize,
-  increaseTafsirTextSize,
-  decreaseTafsirTextSize,
+  increaseTafsirFontScale,
+  decreaseTafsirFontScale,
   setQuranFont,
+  increaseQuranTextFontScale,
+  decreaseQuranTextFontScale,
+  increaseTranslationFontScale,
+  decreaseTranslationFontScale,
 } = quranReaderStylesSlice.actions;
 
 export const selectQuranReaderStyles = (state) => state.quranReaderStyles;

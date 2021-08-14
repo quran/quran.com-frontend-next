@@ -1,4 +1,5 @@
 /* eslint-disable react/no-danger */
+import classNames from 'classnames';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import VerseText from 'src/components/Verse/VerseText';
@@ -19,9 +20,11 @@ const TafsirView: React.FC<Props> = ({ verse }) => {
         <div key={tafsir.id}>
           {tafsir.resourceName && <p className={styles.tafsirName}>{tafsir.resourceName}</p>}
           <div
-            className={styles.tafsirContainer}
+            className={classNames(
+              styles.tafsirContainer,
+              styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
+            )}
             dangerouslySetInnerHTML={{ __html: tafsir.text }}
-            style={{ fontSize: `${quranReaderStyles.tafsirFontSize}rem` }}
           />
         </div>
       ))}
