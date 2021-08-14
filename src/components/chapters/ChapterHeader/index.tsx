@@ -14,9 +14,11 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => (
     <div className={styles.item}>
       <ChapterIconContainer chapterId={chapterId} />
     </div>
-    <div className={styles.item}>
-      <Bismillah />
-    </div>
+    {chapterId !== '9' && (
+      <div className={styles.item}>
+        <Bismillah />
+      </div>
+    )}
     <div className={styles.actionsContainer}>
       <PlayChapterAudioButton chapterId={Number(chapterId)} />
       <Button text="Info" href={`${chapterId}/info`} />
