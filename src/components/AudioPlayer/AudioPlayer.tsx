@@ -19,10 +19,16 @@ import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
 import styles from './AudioPlayer.module.scss';
+import {
+  triggerPauseAudio,
+  triggerPlayAudio,
+  triggerSeek,
+  triggerSetCurrentTime,
+} from './EventTriggers';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const { isPlaying, currentTime } = useSelector(selectAudioPlayerState);
+  const { isPlaying, currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
@@ -30,7 +36,7 @@ const AudioPlayer = () => {
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
-  let audioDuration = 0;
+  const durationInSeconds = audioFile?.duration / 1000 || 0;
 
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
@@ -38,11 +44,9 @@ const AudioPlayer = () => {
   const onAudioPause = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
-
   const onAudioEnded = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
-
   const onAudioLoaded = useCallback(() => {
     dispatch({ type: setAudioStatus.type, payload: AudioFileStatus.Ready });
   }, [dispatch]);
@@ -75,10 +79,6 @@ const AudioPlayer = () => {
     };
   }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
-  if (audioPlayerEl.current) {
-    audioDuration = audioPlayerEl.current.duration;
-  }
-
   // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
   const onTimeUpdate = () => {
     // update the current audio time in redux
@@ -88,47 +88,10 @@ const AudioPlayer = () => {
     });
   };
 
-  const play = useCallback(() => {
-    audioPlayerEl.current.play();
-  }, [audioPlayerEl]);
-
-  const pause = useCallback(() => {
-    audioPlayerEl.current.pause();
-  }, [audioPlayerEl]);
-
-  // const togglePlaying = useCallback(() => {
-  //   if (isPlaying) {
-  //     pause();
-  //   } else {
-  //     play();
-  //   }
-  // }, [play, pause, isPlaying]);
-
-  const setTime = useCallback(
-    (time) => {
-      let newTime = time;
-      // upper and lower bound case handling
-      if (time < 0) {
-        newTime = 0;
-      } else if (time > audioDuration) {
-        newTime = audioDuration;
-      }
-
-      audioPlayerEl.current.currentTime = newTime;
-      dispatch({
-        type: setCurrentTime.type,
-        payload: audioPlayerEl.current.currentTime,
-      });
-    },
-    [audioDuration, dispatch],
-  );
-
-  const seek = useCallback(
-    (duration) => {
-      setTime(audioPlayerEl.current.currentTime + duration);
-    },
-    [setTime],
-  );
+  useEffect(() => {
+    triggerSetCurrentTime(currentTime);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
@@ -153,38 +116,36 @@ const AudioPlayer = () => {
           togglePlaying={() => togglePlaying()}
         /> */}
         <MediaSessionApiListeners
-          play={play}
-          pause={pause}
-          seek={(seekDuration) => seek(seekDuration)}
+          play={triggerPauseAudio}
+          pause={triggerPauseAudio}
+          seek={(seekDuration) => {
+            triggerSeek(seekDuration);
+          }}
           playNextTrack={null}
           playPreviousTrack={null}
         />
         <div className={styles.actionButtonsContainer}>
           {isPlaying ? (
             // Pause
-            <Button
-              icon={<PauseIcon />}
-              size={ButtonSize.Medium}
-              onClick={() => {
-                audioPlayerEl.current.pause();
-              }}
-            />
+            <Button icon={<PauseIcon />} size={ButtonSize.Medium} onClick={triggerPauseAudio} />
           ) : (
             // Play
-            <Button
-              icon={<PlayIcon />}
-              size={ButtonSize.Medium}
-              onClick={() => {
-                audioPlayerEl.current.play();
-              }}
-            />
+            <Button icon={<PlayIcon />} size={ButtonSize.Medium} onClick={triggerPlayAudio} />
           )}
           <div className={styles.seekBackwardsContainer}>
-            <Button icon={<MinusTenIcon />} size={ButtonSize.Medium} onClick={() => seek(-10)} />
+            <Button
+              icon={<MinusTenIcon />}
+              size={ButtonSize.Medium}
+              onClick={() => triggerSeek(-10)}
+            />
           </div>
         </div>
         <div className={styles.sliderContainer}>
-          <Slider currentTime={currentTime} audioDuration={audioDuration} setTime={setTime} />
+          <Slider
+            currentTime={currentTime}
+            audioDuration={durationInSeconds}
+            setTime={triggerSetCurrentTime}
+          />
         </div>
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.placeholderRightSection} />
