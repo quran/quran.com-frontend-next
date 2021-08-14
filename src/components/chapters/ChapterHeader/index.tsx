@@ -9,12 +9,14 @@ interface Props {
   chapterId: string;
 }
 
+const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
+
 const ChapterHeader: React.FC<Props> = ({ chapterId }) => (
   <div className={styles.container}>
     <div className={styles.item}>
       <ChapterIconContainer chapterId={chapterId} />
     </div>
-    {chapterId !== '9' && (
+    {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && (
       <div className={styles.item}>
         <Bismillah />
       </div>
