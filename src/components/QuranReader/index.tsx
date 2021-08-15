@@ -169,6 +169,7 @@ const getRequestKey = ({
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, {
       page,
+      reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
@@ -176,6 +177,7 @@ const getRequestKey = ({
   if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, {
       page,
+      reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
