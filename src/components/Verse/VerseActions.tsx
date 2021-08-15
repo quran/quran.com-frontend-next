@@ -30,7 +30,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
         verse={verse}
         setActiveVerseActionModal={setActiveVerseActionModal}
       />
-      <PlayVerseAudioButton verseKey={verse.verseKey} />
+      <PlayVerseAudioButton verse={verse} />
     </>
   );
 };
