@@ -69,7 +69,7 @@ const QuranReader = ({
         isVerseData,
         isTafsirData,
         id,
-        reciter,
+        reciter: reciter.id,
       }),
     verseFetcher,
     {
@@ -162,8 +162,8 @@ const getRequestKey = ({
   quranReaderDataType,
   selectedTranslations,
   selectedTafsirs,
-}: // reciter,
-RequestKeyInput): string => {
+  reciter,
+}: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
@@ -193,7 +193,7 @@ RequestKeyInput): string => {
   }
 
   return makeVersesUrl(id, {
-    reciter: 50,
+    reciter,
     page,
     translations: selectedTranslations.join(', '),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
