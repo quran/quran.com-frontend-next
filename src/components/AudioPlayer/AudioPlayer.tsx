@@ -10,6 +10,7 @@ import {
   setAudioStatus,
   AudioFileStatus,
   selectIsMinimized,
+  setIsMinimized,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -26,6 +27,13 @@ import {
   triggerSetCurrentTime,
 } from './EventTriggers';
 
+// Need to stopPropagation() to prevent the event from bubbling up to the parent container
+// which cause dispatch `setIsMinimized` to be called
+const withStopPropagation = (cb: () => void) => (e) => {
+  e.stopPropagation();
+  cb();
+};
+
 const AudioPlayer = () => {
   const dispatch = useDispatch();
   const { isPlaying, currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
@@ -37,6 +45,10 @@ const AudioPlayer = () => {
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   const durationInSeconds = audioFile?.duration / 1000 || 0;
+
+  const toggleMimimized = () => {
+    dispatch({ type: setIsMinimized.type, payload: !isMinimized });
+  };
 
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
@@ -95,6 +107,10 @@ const AudioPlayer = () => {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      onClick={toggleMimimized}
+      onKeyPress={toggleMimimized}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
         [styles.containerMinimized]: isMinimized,
@@ -127,16 +143,24 @@ const AudioPlayer = () => {
         <div className={styles.actionButtonsContainer}>
           {isPlaying ? (
             // Pause
-            <Button icon={<PauseIcon />} size={ButtonSize.Medium} onClick={triggerPauseAudio} />
+            <Button
+              icon={<PauseIcon />}
+              size={ButtonSize.Medium}
+              onClick={withStopPropagation(triggerPauseAudio)}
+            />
           ) : (
             // Play
-            <Button icon={<PlayIcon />} size={ButtonSize.Medium} onClick={triggerPlayAudio} />
+            <Button
+              icon={<PlayIcon />}
+              size={ButtonSize.Medium}
+              onClick={withStopPropagation(triggerPlayAudio)}
+            />
           )}
           <div className={styles.seekBackwardsContainer}>
             <Button
               icon={<MinusTenIcon />}
               size={ButtonSize.Medium}
-              onClick={() => triggerSeek(-10)}
+              onClick={withStopPropagation(() => triggerSeek(-10))}
             />
           </div>
         </div>
