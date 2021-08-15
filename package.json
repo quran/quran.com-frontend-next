@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
+    "@sentry/nextjs": "^6.11.0",
     "classnames": "^2.3.1",
     "clipboard-copy": "^4.0.1",
     "humps": "^2.0.1",
