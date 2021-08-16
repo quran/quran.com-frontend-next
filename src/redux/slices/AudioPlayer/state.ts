@@ -3,13 +3,7 @@ import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
-
-const DEFAULT_RECITER = {
-  id: 5,
-  name: 'Mishari Rashid al-`Afasy',
-  recitationStyle: 'Warsh',
-  relativePath: 'mishaari_raashid_al_3afaasee',
-};
+import { DEFAULT_RECITER } from './defaultData';
 
 export enum AudioFileStatus {
   Ready = 'Ready',
@@ -78,7 +72,7 @@ interface PlayFromInput {
   reciterId: number;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput>(
-  'audioPlayerState/setAudioTime',
+  'audioPlayerState/playFrom',
   async ({ timestamp, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
