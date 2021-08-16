@@ -9,8 +9,9 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
-  selectIsMinimized,
-  setIsMinimized,
+  selectVisibility,
+  setVisibility,
+  Visibility,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
@@ -35,14 +36,15 @@ const AudioPlayer = () => {
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
-  const isMinimized = useSelector(selectIsMinimized);
+  const visibility = useSelector(selectVisibility);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   const durationInSeconds = audioFile?.duration / 1000 || 0;
 
-  const toggleMimimized = () => {
-    dispatch({ type: setIsMinimized.type, payload: !isMinimized });
+  const toggleVisibility = () => {
+    const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
+    dispatch({ type: setVisibility.type, payload: nextValue });
   };
 
   const onAudioPlay = useCallback(() => {
@@ -104,12 +106,12 @@ const AudioPlayer = () => {
     <div
       role="button"
       tabIndex={0}
-      onClick={toggleMimimized}
-      onKeyPress={toggleMimimized}
+      onClick={toggleVisibility}
+      onKeyPress={toggleVisibility}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
-        [styles.containerMinimized]: isMinimized,
-        [styles.containerExpanded]: !isMinimized,
+        [styles.containerMinimized]: visibility === Visibility.Minimized,
+        [styles.containerExpanded]: visibility === Visibility.Expanded,
         [styles.containerLoading]: isLoading,
       })}
     >
@@ -137,7 +139,7 @@ const AudioPlayer = () => {
         />
         <div
           className={classNames(styles.actionButtonsContainer, {
-            [styles.actionButtonsContainerHidden]: !isMinimized,
+            [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
           })}
         >
           {isPlaying ? (

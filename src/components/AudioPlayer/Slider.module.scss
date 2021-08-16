@@ -27,6 +27,9 @@
     margin-right: var(--spacing-medium);
   }
 }
+.splitBottom {
+  bottom: constants.$audio-player-minimized-height;
+}
 
 .split {
   height: 2px;
