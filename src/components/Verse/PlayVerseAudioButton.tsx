@@ -6,10 +6,10 @@ import Verse from 'types/Verse';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import Button from '../dls/Button/Button';
 
-interface Props {
+interface PlayVerseAudioProps {
   verse: Verse;
 }
-const PlayVerseAudioButton = (props: Props) => {
+const PlayVerseAudioButton = (props: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
   return (
     <Button
