@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getAudioFile, getVerseTimestamps } from 'src/api';
+import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
-import { getChapterNumberFromKey } from 'src/utils/verse';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
@@ -37,7 +36,9 @@ const initialState: AudioState = {
 };
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
-export const selectReciter = (state) => state.audioPlayerState.reciter;
+export const selectReciter = (state) => state.audioPlayerState.reciter as Reciter;
+export const selectIsUsingDefaultReciter = (state) =>
+  state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile as AudioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
@@ -71,23 +72,26 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
  * @param {number} verseKey example 1:1 -> al-fatihah verse 1
  *
  */
-export const playVerse = createAsyncThunk<void, string>(
+interface PlayFromInput {
+  timestamp: number;
+  chapterId: number;
+  reciterId: number;
+}
+export const playFrom = createAsyncThunk<void, PlayFromInput>(
   'audioPlayerState/setAudioTime',
-  async (verseKey, thunkApi) => {
+  async ({ timestamp, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
     let audioFile = selectAudioFile(state);
-    const chapter = getChapterNumberFromKey(verseKey);
-    if (!audioFile || audioFile.chapterId !== chapter) {
+    if (!audioFile || audioFile.chapterId !== chapterId || reciter.id !== reciterId) {
       thunkApi.dispatch(setAudioStatus(AudioFileStatus.Loading));
-      audioFile = await getAudioFile(reciter.id, chapter);
+      audioFile = await getAudioFile(reciter.id, chapterId);
       thunkApi.dispatch(setAudioFile(audioFile));
     }
 
-    const timeStamp = await getVerseTimestamps(reciter?.id, verseKey);
-    const timeStampInSecond = timeStamp.result.timestampFrom / 1000;
-    triggerSetCurrentTime(timeStampInSecond);
-    thunkApi.dispatch(setCurrentTime(timeStampInSecond));
+    const timestampInSeconds = timestamp / 1000;
+    thunkApi.dispatch(setCurrentTime(timestampInSeconds));
+    triggerSetCurrentTime(timestampInSeconds);
 
     triggerPlayAudio();
   },

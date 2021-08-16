@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useSWRInfinite } from 'swr';
@@ -12,6 +12,7 @@ import {
 import classNames from 'classnames';
 import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
 import { getDefaultWordFields } from 'src/utils/api';
+import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreference';
 import PageView from './PageView';
 import TranslationView from './TranslationView';
@@ -55,9 +56,11 @@ const QuranReader = ({
     selectTranslations,
   ) as TranslationsSettings;
   const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const reciter = useSelector(selectReciter, shallowEqual);
+  const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
-      getRequestKey(
+      getRequestKey({
         quranReaderDataType,
         index,
         initialData,
@@ -67,10 +70,14 @@ const QuranReader = ({
         isVerseData,
         isTafsirData,
         id,
-      ),
+        reciter: reciter.id,
+      }),
     verseFetcher,
     {
-      initialData: isUsingDefaultTranslations && isUsingDefaultTafsirs ? initialData.verses : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
+      initialData:
+        isUsingDefaultTranslations && isUsingDefaultTafsirs && isUsingDefaultReciter
+          ? initialData.verses
+          : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
       revalidateOnFocus: false, // disable auto revalidation when window gets focused
       revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
@@ -132,27 +139,41 @@ const QuranReader = ({
   );
 };
 
+interface RequestKeyInput {
+  quranReaderDataType: QuranReaderDataType;
+  index: number;
+  initialData: VersesResponse;
+  quranReaderStyles: QuranReaderStyles;
+  selectedTranslations: number[];
+  selectedTafsirs: number[];
+  isVerseData: boolean;
+  isTafsirData: boolean;
+  id: string | number;
+  reciter: number;
+}
 /**
  * Generate the request key (the API url based on the params)
  * which will be used by useSwr to determine whether to call BE
  * again or return the cached response.
  */
-const getRequestKey = (
-  quranReaderDataType: QuranReaderDataType,
-  index: number,
-  initialData: VersesResponse,
-  quranReaderStyles: QuranReaderStyles,
-  selectedTranslations: number[],
-  selectedTafsirs: number[],
-  isVerseData: boolean,
-  isTafsirData: boolean,
-  id: string | number,
-): string => {
+const getRequestKey = ({
+  id,
+  isVerseData,
+  isTafsirData,
+  initialData,
+  index,
+  quranReaderStyles,
+  quranReaderDataType,
+  selectedTranslations,
+  selectedTafsirs,
+  reciter,
+}: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, {
       page,
+      reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
@@ -160,6 +181,7 @@ const getRequestKey = (
   if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, {
       page,
+      reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
@@ -175,7 +197,9 @@ const getRequestKey = (
       tafsirFields: 'resource_name',
     });
   }
+
   return makeVersesUrl(id, {
+    reciter,
     page,
     translations: selectedTranslations.join(', '),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
