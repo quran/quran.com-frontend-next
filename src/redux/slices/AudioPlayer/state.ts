@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
-import { getChapterNumberFromKey } from 'src/utils/verse';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
-import Verse from 'types/Verse';
 
 const DEFAULT_RECITER = {
   id: 5,
@@ -74,22 +72,26 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
  * @param {number} verseKey example 1:1 -> al-fatihah verse 1
  *
  */
-export const playVerse = createAsyncThunk<void, Verse>(
+interface PlayFromInput {
+  timestamp: number;
+  chapterId: number;
+  reciterId: number;
+}
+export const playFrom = createAsyncThunk<void, PlayFromInput>(
   'audioPlayerState/setAudioTime',
-  async (verse, thunkApi) => {
+  async ({ timestamp, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
     let audioFile = selectAudioFile(state);
-    const chapter = getChapterNumberFromKey(verse.verseKey);
-    if (!audioFile || audioFile.chapterId !== chapter) {
+    if (!audioFile || audioFile.chapterId !== chapterId || reciter.id !== reciterId) {
       thunkApi.dispatch(setAudioStatus(AudioFileStatus.Loading));
-      audioFile = await getAudioFile(reciter.id, chapter);
+      audioFile = await getAudioFile(reciter.id, chapterId);
       thunkApi.dispatch(setAudioFile(audioFile));
     }
 
-    const timeStampInSecond = verse.timestamps?.timestampFrom / 1000;
-    triggerSetCurrentTime(timeStampInSecond);
-    thunkApi.dispatch(setCurrentTime(timeStampInSecond));
+    const timestampInSeconds = timestamp / 1000;
+    thunkApi.dispatch(setCurrentTime(timestampInSeconds));
+    triggerSetCurrentTime(timestampInSeconds);
 
     triggerPlayAudio();
   },
