@@ -52,6 +52,9 @@
     flex-direction: inherit;
   }
 }
+.actionButtonsContainerHidden {
+  display: none;
+}
 
 .seekBackwardsContainer {
   display: none;
@@ -69,5 +72,8 @@
 }
 
 .sliderContainer {
-  width: 70%;
+  width: 100%;
+  @include breakpoints.tablet {
+    width: 70%;
+  }
 }

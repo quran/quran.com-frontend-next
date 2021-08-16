@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.container > * + * {
+  margin-left: var(--spacing-xsmall);
+}

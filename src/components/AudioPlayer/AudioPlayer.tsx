@@ -26,13 +26,8 @@ import {
   triggerSeek,
   triggerSetCurrentTime,
 } from './EventTriggers';
-
-// Need to stopPropagation() to prevent the event from bubbling up to the parent container
-// which cause dispatch `setIsMinimized` to be called
-const withStopPropagation = (cb: () => void) => (e) => {
-  e.stopPropagation();
-  cb();
-};
+import PlaybackControls from './PlaybackControls';
+import { withStopPropagation } from './util';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -140,7 +135,11 @@ const AudioPlayer = () => {
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <div className={styles.actionButtonsContainer}>
+        <div
+          className={classNames(styles.actionButtonsContainer, {
+            [styles.actionButtonsContainerHidden]: !isMinimized,
+          })}
+        >
           {isPlaying ? (
             // Pause
             <Button
@@ -174,6 +173,7 @@ const AudioPlayer = () => {
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.placeholderRightSection} />
       </div>
+      <PlaybackControls />
     </div>
   );
 };
