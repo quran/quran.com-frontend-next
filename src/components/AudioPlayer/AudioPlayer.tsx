@@ -41,6 +41,7 @@ const AudioPlayer = () => {
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   const durationInSeconds = audioFile?.duration / 1000 || 0;
+  console.log(visibility);
 
   const toggleVisibility = () => {
     const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
@@ -110,7 +111,7 @@ const AudioPlayer = () => {
       onKeyPress={toggleVisibility}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
-        [styles.containerMinimized]: visibility === Visibility.Minimized,
+        [styles.containerDefault]: visibility === Visibility.Default,
         [styles.containerExpanded]: visibility === Visibility.Expanded,
         [styles.containerLoading]: isLoading,
       })}
@@ -175,7 +176,7 @@ const AudioPlayer = () => {
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.placeholderRightSection} />
       </div>
-      <PlaybackControls />
+      {visibility === Visibility.Expanded && <PlaybackControls />}
     </div>
   );
 };
