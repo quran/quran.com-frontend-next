@@ -39,6 +39,8 @@ const initialState: AudioState = {
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
 export const selectReciter = (state) => state.audioPlayerState.reciter as Reciter;
+export const selectIsUsingDefaultReciter = (state) =>
+  state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile as AudioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
