@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const DEFAULT_RECITER = {
   id: 5,
   name: 'Mishari Rashid al-`Afasy',
