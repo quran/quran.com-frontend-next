@@ -16,6 +16,7 @@
         "@typescript-eslint/no-shadow": ["error"],
         "react/jsx-filename-extension": 0,
         "react/jsx-props-no-spreading": 0,
+        "import/prefer-default-export": "off",
         "import/extensions": [
             2,
             "ignorePackages",
