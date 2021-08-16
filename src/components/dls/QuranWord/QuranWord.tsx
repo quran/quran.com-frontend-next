@@ -19,23 +19,22 @@ const getGlyph = (word: Word, font: QuranFont) => {
 };
 
 const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
-  let wordText;
-
-  if (isQCFFont(font)) {
-    wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
-  } else {
-    wordText =
-      word.charTypeName === CharType.Pause ? (
-        ''
-      ) : (
-        <TextWord font={font} text={word.text} charType={word.charTypeName} />
-      );
+  if (word.charTypeName === CharType.Pause) {
+    return null;
   }
+  const wordText = isQCFFont(font) ? (
+    <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />
+  ) : (
+    <TextWord font={font} text={word.text} charType={word.charTypeName} />
+  );
 
   return (
-    <span className={classNames(styles.container, { [styles.highlighted]: highlight })}>
-      {wordText}
-    </span>
+    <>
+      {word.isAfterLineBreak && <br />}
+      <span className={classNames(styles.container, { [styles.highlighted]: highlight })}>
+        {wordText}
+      </span>
+    </>
   );
 };
 

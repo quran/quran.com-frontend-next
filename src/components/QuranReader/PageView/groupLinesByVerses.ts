@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Verse from 'types/Verse';
+import Word from 'types/Word';
 
 /**
  * Groups verses into lines to match the Quran Page (Madani Mushaf) layout
@@ -12,19 +13,29 @@ import Verse from 'types/Verse';
  * }
  */
 const groupLinesByVerses = (verses: Verse[]) => {
-  const words = [];
+  const words = [] as Word[];
 
   // Flattens the verses into an array of words
   verses.forEach((verse) => {
-    verse.words.forEach((word) => {
-      words.push(word);
-    });
+    let initialWordLine = verse.words[0].lineNumber;
+    for (let index = 0; index < verse.words.length; index += 1) {
+      const word = verse.words[index];
+      // it means the current word although it belongs to the current verse, but in the physical mushaf, it's on another line
+      if (word.lineNumber > initialWordLine) {
+        words.push({
+          ...word,
+          isAfterLineBreak: true,
+        });
+        // we need this in-case the verse spans across multiple lines
+        initialWordLine = word.lineNumber;
+      } else {
+        words.push(word);
+      }
+    }
   });
 
   // Groups the words based on their (page and) line number
-  const lines = _.groupBy(words, (word) => `Page${word.pageNumber}-Line${word.lineNumber}`);
-
-  return lines;
+  return _.groupBy(words, (word) => `Verse${word.verseKey}`);
 };
 
 export default groupLinesByVerses;

@@ -23,6 +23,7 @@ interface Word {
   textUthmani?: string;
   textIndopak?: string;
   highlight?: string;
+  isAfterLineBreak?: boolean;
   audioUrl: $TsFixMe;
   [key: string]: $TsFixMe;
 }
