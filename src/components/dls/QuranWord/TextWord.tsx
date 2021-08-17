@@ -7,7 +7,7 @@ import styles from './TextWord.module.scss';
 type MadaniWordTextProps = {
   text: string;
   font: string;
-  charType: string;
+  charType: CharType;
 };
 
 const DEFAULT_FONT_FAMILY = 'UthmanicHafs1Ver17';
@@ -27,8 +27,8 @@ const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => (
         charType === CharType.End ||
         !UTHMANI_HAFS_FONTS[font] ||
         UTHMANI_HAFS_FONTS[font] === DEFAULT_FONT_FAMILY,
-      [styles[ME_QURAN]]: UTHMANI_HAFS_FONTS[font] === ME_QURAN,
-      [styles[INDO_PAK]]: UTHMANI_HAFS_FONTS[font] === INDO_PAK,
+      [styles[ME_QURAN]]: charType !== CharType.End && UTHMANI_HAFS_FONTS[font] === ME_QURAN,
+      [styles[INDO_PAK]]: charType !== CharType.End && UTHMANI_HAFS_FONTS[font] === INDO_PAK,
     })}
   >
     {text}
