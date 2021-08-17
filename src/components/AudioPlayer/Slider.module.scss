@@ -45,3 +45,20 @@
     display: none;
   }
 }
+
+// local utility probably should be extracted to global
+.hidden {
+  display: none;
+}
+.visible {
+  display: inline-block;
+}
+
+@include breakpoints.desktop {
+  .lgHidden {
+    display: none;
+  }
+  .lgVisible {
+    display: inline-block;
+  }
+}

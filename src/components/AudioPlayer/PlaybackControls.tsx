@@ -15,31 +15,35 @@ const PlaybackControls = () => {
   const isPlaying = useSelector(selectIsPlaying);
   return (
     <div className={styles.container}>
-      <Button icon={<RepeatIcon />} size={ButtonSize.Small} />
+      <Button icon={<RepeatIcon />} size={ButtonSize.Small} desktopSize={ButtonSize.Medium} />
       <Button
         icon={<ReplayIcon />}
         size={ButtonSize.Small}
+        desktopSize={ButtonSize.Medium}
         onClick={withStopPropagation(() => triggerSeek(-10))}
       />
       {isPlaying ? (
         <Button
           icon={<PauseIcon />}
           size={ButtonSize.Small}
+          desktopSize={ButtonSize.Medium}
           onClick={withStopPropagation(triggerPauseAudio)}
         />
       ) : (
         <Button
           icon={<PlayIcon />}
           size={ButtonSize.Small}
+          desktopSize={ButtonSize.Medium}
           onClick={withStopPropagation(triggerPlayAudio)}
         />
       )}
       <Button
         icon={<ForwardIcon />}
         size={ButtonSize.Small}
+        desktopSize={ButtonSize.Medium}
         onClick={withStopPropagation(() => triggerSeek(10))}
       />
-      <Button icon={<ShareIcon />} size={ButtonSize.Small} />
+      <Button icon={<ShareIcon />} size={ButtonSize.Small} desktopSize={ButtonSize.Medium} />
     </div>
   );
 };

@@ -17,8 +17,8 @@ import {
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
-import CaretDown from '../../../public/icons/caret-down.svg';
-import CaretUp from '../../../public/icons/caret-up.svg';
+import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
+import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
@@ -169,6 +169,20 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
+            visible={{
+              currentTime: {
+                desktop: visibility === Visibility.Expanded,
+                mobile: false,
+              },
+              remainingTime: {
+                desktop: true,
+                mobile: true,
+              },
+              slider: {
+                desktop: true,
+                mobile: true,
+              },
+            }}
             currentTime={currentTime}
             audioDuration={durationInSeconds}
             setTime={triggerSetCurrentTime}
@@ -177,10 +191,10 @@ const AudioPlayer = () => {
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.placeholderRightSection}>
           {visibility === Visibility.Expanded && (
-            <Button icon={<CaretDown />} size={ButtonSize.Small} />
+            <Button icon={<UnfoldLessIcon />} size={ButtonSize.Small} />
           )}
           {visibility === Visibility.Default && (
-            <Button icon={<CaretUp />} size={ButtonSize.Small} />
+            <Button icon={<UnfoldMoreIcon />} size={ButtonSize.Small} />
           )}
         </div>
       </div>

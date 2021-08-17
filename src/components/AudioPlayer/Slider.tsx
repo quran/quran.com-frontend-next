@@ -6,10 +6,20 @@ import styles from './Slider.module.scss';
 
 const NUMBER_OF_SPLITS = 100;
 
+type ScreenSize = {
+  desktop: boolean;
+  mobile: boolean;
+};
+
 type SliderProps = {
   currentTime: number;
   audioDuration: number;
   setTime: (number) => void;
+  visible: {
+    currentTime: ScreenSize;
+    remainingTime: ScreenSize;
+    slider: ScreenSize;
+  };
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
@@ -26,7 +36,7 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
  */
-const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
+const Slider = ({ currentTime, audioDuration, setTime, visible }: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
@@ -44,14 +54,28 @@ const Slider = ({ currentTime, audioDuration, setTime }: SliderProps) => {
     );
   });
 
+  const visibilityClassName = (item: ScreenSize) =>
+    classNames({
+      [styles.hidden]: !item.mobile,
+      [styles.visible]: item.mobile,
+      [styles.lgHidden]: !item.desktop,
+      [styles.lgVisible]: item.desktop,
+    });
+
   return (
     <div className={styles.container}>
-      {/* {secondsFormatter(currentTime)} */}
-      <div className={styles.splitsContainer}>{splits}</div>
+      <span className={visibilityClassName(visible.currentTime)}>
+        {secondsFormatter(currentTime)}
+      </span>
+      <div className={classNames(styles.splitsContainer, visibilityClassName(visible.slider))}>
+        {splits}
+      </div>
       <div className={styles.reciterNameContainer}>
         Mishary Al - Affasy <br />
       </div>
-      {secondsFormatter(remainingTime)}
+      <span className={visibilityClassName(visible.remainingTime)}>
+        {secondsFormatter(remainingTime)}
+      </span>
     </div>
   );
 };
