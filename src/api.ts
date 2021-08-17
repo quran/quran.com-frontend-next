@@ -32,7 +32,6 @@ import {
   makeChapterInfoUrl,
   makePageVersesUrl,
 } from './utils/apiPaths';
-import { DEFAULT_RECITER } from './redux/slices/AudioPlayer/defaultData';
 
 export const fetcher = async function fetcher(
   input: RequestInfo,
@@ -61,12 +60,7 @@ export const getChapterVerses = async (
   id: string | number,
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => {
-  const payload = await fetcher(
-    makeVersesUrl(id, {
-      reciter: DEFAULT_RECITER.id,
-      ...params,
-    }),
-  );
+  const payload = await fetcher(makeVersesUrl(id, params));
   // TODO (@abdellatif): parameterize the default translation
 
   return camelizeKeys(payload);
