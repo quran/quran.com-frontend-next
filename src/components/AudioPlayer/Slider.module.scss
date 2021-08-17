@@ -3,7 +3,7 @@
 
 .container {
   text-align: left;
-  margin-top: var(--spacing-small);
+  margin-top: var(--spacing-xxsmall);
   @include breakpoints.tablet {
     text-align: inherit;
     margin-top: var(--spacing-medium);
