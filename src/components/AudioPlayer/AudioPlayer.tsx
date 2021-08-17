@@ -169,20 +169,7 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
-            visible={{
-              currentTime: {
-                desktop: visibility === Visibility.Expanded,
-                mobile: false,
-              },
-              remainingTime: {
-                desktop: true,
-                mobile: true,
-              },
-              slider: {
-                desktop: true,
-                mobile: true,
-              },
-            }}
+            visibility={visibility}
             currentTime={currentTime}
             audioDuration={durationInSeconds}
             setTime={triggerSetCurrentTime}

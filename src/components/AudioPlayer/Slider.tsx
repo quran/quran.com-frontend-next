@@ -2,24 +2,16 @@ import React from 'react';
 import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
 import classNames from 'classnames';
+import { Visibility } from 'src/redux/slices/AudioPlayer/state';
 import styles from './Slider.module.scss';
 
 const NUMBER_OF_SPLITS = 100;
-
-type ScreenSize = {
-  desktop: boolean;
-  mobile: boolean;
-};
 
 type SliderProps = {
   currentTime: number;
   audioDuration: number;
   setTime: (number) => void;
-  visible: {
-    currentTime: ScreenSize;
-    remainingTime: ScreenSize;
-    slider: ScreenSize;
-  };
+  visibility: Visibility;
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
@@ -36,7 +28,7 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
  */
-const Slider = ({ currentTime, audioDuration, setTime, visible }: SliderProps) => {
+const Slider = ({ currentTime, audioDuration, setTime, visibility }: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
@@ -54,28 +46,20 @@ const Slider = ({ currentTime, audioDuration, setTime, visible }: SliderProps) =
     );
   });
 
-  const visibilityClassName = (item: ScreenSize) =>
-    classNames({
-      [styles.hidden]: !item.mobile,
-      [styles.visible]: item.mobile,
-      [styles.lgHidden]: !item.desktop,
-      [styles.lgVisible]: item.desktop,
-    });
-
   return (
     <div className={styles.container}>
-      <span className={visibilityClassName(visible.currentTime)}>
+      <span
+        className={classNames(styles.currentTime, {
+          [styles.currentTimeExpanded]: visibility === Visibility.Expanded,
+        })}
+      >
         {secondsFormatter(currentTime)}
       </span>
-      <div className={classNames(styles.splitsContainer, visibilityClassName(visible.slider))}>
-        {splits}
-      </div>
+      <div className={classNames(styles.splitsContainer)}>{splits}</div>
       <div className={styles.reciterNameContainer}>
         Mishary Al - Affasy <br />
       </div>
-      <span className={visibilityClassName(visible.remainingTime)}>
-        {secondsFormatter(remainingTime)}
-      </span>
+      <span className={styles.remainingTime}>{secondsFormatter(remainingTime)}</span>
     </div>
   );
 };

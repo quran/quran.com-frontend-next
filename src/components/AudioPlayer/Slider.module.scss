@@ -46,19 +46,15 @@
   }
 }
 
-// local utility probably should be extracted to global
-.hidden {
-  display: none;
-}
-.visible {
-  display: inline-block;
-}
-
-@include breakpoints.desktop {
-  .lgHidden {
+.currentTime {
+  @include breakpoints.desktop {
     display: none;
   }
-  .lgVisible {
+}
+
+.currentTimeExpanded {
+  display: none;
+  @include breakpoints.desktop {
     display: inline-block;
   }
 }
