@@ -37,6 +37,7 @@ export const selectAudioFile = (state) => state.audioPlayerState.audioFile as Au
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
 export const selectIsMinimized = (state) => state.audioPlayerState.isMinimized;
+export const selectCurrentTime = (state) => state.audioPlayerState.currentTime;
 
 /**
  * get the audio file for the current reciter
