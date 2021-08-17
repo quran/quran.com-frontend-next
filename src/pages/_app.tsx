@@ -4,12 +4,31 @@ import { DefaultSeo } from 'next-seo';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 import ThemeProvider from '../styles/ThemeProvider';
 import '../styles/reset.scss';
 import '../styles/fonts.scss';
 import '../styles/theme.scss';
+import '../styles/npogress.scss';
+
+Router.events.on('routeChangeStart', (...[, { shallow }]) => {
+  if (!shallow) {
+    NProgress.start();
+  }
+});
+Router.events.on('routeChangeComplete', (...[, { shallow }]) => {
+  if (!shallow) {
+    NProgress.done();
+  }
+});
+Router.events.on('routeChangeError', (...[, { shallow }]) => {
+  if (!shallow) {
+    NProgress.done();
+  }
+});
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (
