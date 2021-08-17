@@ -14,6 +14,19 @@ const config = {
     runtimeCaching,
     publicExcludes: ['!fonts/v1/**/*', '!fonts/v2/**/*'],
   },
+  async headers() {
+    return [
+      {
+        source: '/fonts/:font*', // match wildcard fonts' path which will match any font file on any level under /fonts.
+        headers: [
+          {
+            key: 'cache-control',
+            value: 'public, max-age=31536000, immutable', // Max-age is 1 year. immutable indicates that the font will not change over the expiry time.
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = withPlugins([withPWA, withFonts, nextTranslate], config);
