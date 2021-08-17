@@ -64,13 +64,12 @@
   }
 }
 
-.placeholderRightSection {
+.rightSection {
   display: none;
   @include breakpoints.tablet {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 50%;
     margin-top: var(--space-small);
   }
 }

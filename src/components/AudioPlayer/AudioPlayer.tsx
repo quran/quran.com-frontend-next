@@ -176,7 +176,7 @@ const AudioPlayer = () => {
           />
         </div>
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
-        <div className={styles.placeholderRightSection}>
+        <div className={styles.rightSection}>
           {visibility === Visibility.Expanded && (
             <Button icon={<UnfoldLessIcon />} size={ButtonSize.Small} />
           )}
