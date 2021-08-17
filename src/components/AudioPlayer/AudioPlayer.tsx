@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { withStopPropagation } from 'src/utils/event';
 import {
   setIsPlaying,
   selectAudioPlayerState,
@@ -28,7 +29,6 @@ import {
   triggerSetCurrentTime,
 } from './EventTriggers';
 import PlaybackControls from './PlaybackControls';
-import { withStopPropagation } from './util';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -41,7 +41,6 @@ const AudioPlayer = () => {
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   const durationInSeconds = audioFile?.duration / 1000 || 0;
-  console.log(visibility);
 
   const toggleVisibility = () => {
     const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
