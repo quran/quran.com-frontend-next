@@ -3,6 +3,7 @@ const withFonts = require('next-fonts');
 const nextTranslate = require('next-translate');
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
+const securityHeaders = require('./configs/SecurityHeaders.js');
 
 const config = {
   images: {
@@ -16,6 +17,10 @@ const config = {
   },
   async headers() {
     return [
+      {
+        source: '/:route*', // apply security rules to all routes.
+        headers: securityHeaders,
+      },
       {
         source: '/fonts/:font*', // match wildcard fonts' path which will match any font file on any level under /fonts.
         headers: [
