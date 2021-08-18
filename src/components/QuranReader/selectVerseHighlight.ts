@@ -29,7 +29,7 @@ const findHighlightedWordPosition = (currentTime: number, timestampSegments: [nu
   );
   if (!highlightedSegment) return null;
   const wordPosition = highlightedSegment[0];
-  return wordPosition + 1;
+  return wordPosition + 1; // +1 because the word position is not 0 based. while in timestampSegments it is 0 based
 };
 
 // to be used with `useSelector` to prevent unnecassary re rendering
