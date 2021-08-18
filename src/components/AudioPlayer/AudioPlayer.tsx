@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { withStopPropagation } from 'src/utils/event';
 import {
   setIsPlaying,
   selectAudioPlayerState,
@@ -9,11 +10,15 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
-  selectIsMinimized,
+  selectVisibility,
+  setVisibility,
+  Visibility,
 } from '../../redux/slices/AudioPlayer/state';
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
+import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
+import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 import Button, { ButtonSize } from '../dls/Button/Button';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
@@ -25,6 +30,7 @@ import {
   triggerSeek,
   triggerSetCurrentTime,
 } from './EventTriggers';
+import PlaybackControls from './PlaybackControls';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -32,11 +38,16 @@ const AudioPlayer = () => {
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
-  const isMinimized = useSelector(selectIsMinimized);
+  const visibility = useSelector(selectVisibility);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   const durationInSeconds = audioFile?.duration / 1000 || 0;
+
+  const toggleVisibility = () => {
+    const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
+    dispatch({ type: setVisibility.type, payload: nextValue });
+  };
 
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
@@ -95,10 +106,14 @@ const AudioPlayer = () => {
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      onClick={toggleVisibility}
+      onKeyPress={toggleVisibility}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
-        [styles.containerMinimized]: isMinimized,
-        [styles.containerExpanded]: !isMinimized,
+        [styles.containerDefault]: visibility === Visibility.Default,
+        [styles.containerExpanded]: visibility === Visibility.Expanded,
         [styles.containerLoading]: isLoading,
       })}
     >
@@ -124,32 +139,53 @@ const AudioPlayer = () => {
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <div className={styles.actionButtonsContainer}>
+        <div
+          className={classNames(styles.actionButtonsContainer, {
+            [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
+          })}
+        >
           {isPlaying ? (
             // Pause
-            <Button icon={<PauseIcon />} size={ButtonSize.Medium} onClick={triggerPauseAudio} />
+            <Button
+              icon={<PauseIcon />}
+              size={ButtonSize.Medium}
+              onClick={withStopPropagation(triggerPauseAudio)}
+            />
           ) : (
             // Play
-            <Button icon={<PlayIcon />} size={ButtonSize.Medium} onClick={triggerPlayAudio} />
+            <Button
+              icon={<PlayIcon />}
+              size={ButtonSize.Medium}
+              onClick={withStopPropagation(triggerPlayAudio)}
+            />
           )}
           <div className={styles.seekBackwardsContainer}>
             <Button
               icon={<MinusTenIcon />}
               size={ButtonSize.Medium}
-              onClick={() => triggerSeek(-10)}
+              onClick={withStopPropagation(() => triggerSeek(-10))}
             />
           </div>
         </div>
         <div className={styles.sliderContainer}>
           <Slider
+            visibility={visibility}
             currentTime={currentTime}
             audioDuration={durationInSeconds}
             setTime={triggerSetCurrentTime}
           />
         </div>
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
-        <div className={styles.placeholderRightSection} />
+        <div className={styles.rightSection}>
+          {visibility === Visibility.Expanded && (
+            <Button icon={<UnfoldLessIcon />} size={ButtonSize.Small} />
+          )}
+          {visibility === Visibility.Default && (
+            <Button icon={<UnfoldMoreIcon />} size={ButtonSize.Small} />
+          )}
+        </div>
       </div>
+      {visibility === Visibility.Expanded && <PlaybackControls />}
     </div>
   );
 };

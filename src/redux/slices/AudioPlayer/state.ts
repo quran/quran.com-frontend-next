@@ -11,13 +11,19 @@ export enum AudioFileStatus {
   NoFile = 'NoFile',
 }
 
+export enum Visibility {
+  Minimized = 'Minimized',
+  Default = 'Default',
+  Expanded = 'Expanded',
+}
+
 export type AudioState = {
   isPlaying: boolean;
   currentTime: number;
   reciter: Reciter;
   audioFile: AudioFile;
   audioFileStatus: AudioFileStatus;
-  isMinimized: boolean;
+  visibility: Visibility;
 };
 
 const initialState: AudioState = {
@@ -26,7 +32,7 @@ const initialState: AudioState = {
   audioFile: null,
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
-  isMinimized: false,
+  visibility: Visibility.Default,
 };
 
 export const selectAudioPlayerState = (state) => state.audioPlayerState;
@@ -36,7 +42,7 @@ export const selectIsUsingDefaultReciter = (state) =>
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile as AudioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
-export const selectIsMinimized = (state) => state.audioPlayerState.isMinimized;
+export const selectVisibility = (state) => state.audioPlayerState.visibility;
 export const selectCurrentTime = (state) => state.audioPlayerState.currentTime;
 
 /**
@@ -116,9 +122,9 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       audioFileStatus: action.payload,
     }),
-    setIsMinimized: (state, action: PayloadAction<boolean>) => ({
+    setVisibility: (state, action: PayloadAction<Visibility>) => ({
       ...state,
-      isMinimized: action.payload,
+      visibility: action.payload,
     }),
   },
 });
@@ -129,7 +135,7 @@ export const {
   setReciter,
   setAudioFile,
   setAudioStatus,
-  setIsMinimized,
+  setVisibility,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

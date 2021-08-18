@@ -14,7 +14,7 @@ import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/taf
 import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreference';
-import PageView from './PageView';
+import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
@@ -105,10 +105,16 @@ const QuranReader = ({
   if (quranReaderDataType === QuranReaderDataType.Tafsir) {
     view = <TafsirView verse={verses[0]} />;
   } else if (readingPreference === ReadingPreference.Reading) {
-    view = <PageView verses={verses} />;
+    view = <ReadingView verses={verses} />;
   } else {
     view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
   }
+
+  const loadMore = () => {
+    if (!isValidating) {
+      setSize(size + 1);
+    }
+  };
 
   return (
     <>
@@ -121,11 +127,14 @@ const QuranReader = ({
             initialLoad={false}
             threshold={INFINITE_SCROLLER_THRESHOLD}
             hasMore={size < pageLimit}
-            loadMore={() => {
-              if (!isValidating) {
-                setSize(size + 1);
-              }
-            }}
+            loadMore={loadMore}
+            loader={
+              <div className={styles.loadMoreContainer} key={0}>
+                <button type="button" onClick={loadMore} disabled={isValidating}>
+                  {isValidating ? 'Loading ...' : 'Load More ...'}
+                </button>
+              </div>
+            }
           >
             {isQCFFont(quranReaderStyles.quranFont) && (
               <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>

@@ -1,26 +1,25 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import Word from 'types/Word';
-import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreference';
 import classNames from 'classnames';
+import { getWordDataFromLocation } from 'src/utils/verse';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
-import { ReadingPreference } from '../QuranReader/types';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 import selectHighlightIndex from './VerseTextHighlight';
+import ChapterHeader from '../chapters/ChapterHeader';
 
 type VerseTextProps = {
   words: Word[];
+  isReadingMode?: boolean;
   timestampSegments?: [number[]];
 };
 
-const VerseText = ({ words, timestampSegments }: VerseTextProps) => {
+const VerseText = ({ words, isReadingMode = false, timestampSegments }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
-  const readingPreference = useSelector(selectReadingPreference);
-  const isReadingMode = readingPreference === ReadingPreference.Reading;
-  const { lineNumber, pageNumber } = words[0];
+  const { lineNumber, pageNumber, location } = words[0];
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],
@@ -28,30 +27,37 @@ const VerseText = ({ words, timestampSegments }: VerseTextProps) => {
   const highlightIndex = useSelector((state) =>
     selectHighlightIndex(state, timestampSegments, words),
   );
+  const firstWordData = getWordDataFromLocation(location);
 
   return (
-    <div
-      className={classNames(
-        styles.verseTextContainer,
-        styles[`quran-font-size-${quranTextFontScale}`],
+    <>
+      {isReadingMode && firstWordData.isFirstWordOfFirstVerseOfSurah && (
+        <ChapterHeader chapterId={firstWordData.chapterId} />
       )}
-    >
       <div
-        className={classNames(styles.verseText, {
-          [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
-          [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
-        })}
+        className={classNames(
+          styles.verseTextContainer,
+          styles[`quran-font-size-${quranTextFontScale}`],
+        )}
       >
-        {words?.map((word, index) => (
-          <QuranWord
-            key={word.location}
-            word={word}
-            font={quranReaderStyles.quranFont}
-            highlight={index === highlightIndex}
-          />
-        ))}
+        <div
+          className={classNames(styles.verseText, {
+            [styles.bigText]: quranTextFontScale > 3,
+            [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
+            [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
+          })}
+        >
+          {words?.map((word, index) => (
+            <QuranWord
+              key={word.location}
+              word={word}
+              font={quranReaderStyles.quranFont}
+              highlight={highlightIndex === index}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

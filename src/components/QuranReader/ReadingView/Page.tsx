@@ -3,6 +3,7 @@ import Verse from '../../../../types/Verse';
 import Line from './Line';
 import groupLinesByVerses from './groupLinesByVerses';
 import styles from './Page.module.scss';
+import PageFooter from './PageFooter';
 
 type PageProps = {
   verses: Verse[];
@@ -15,8 +16,9 @@ const Page = ({ verses, page }: PageProps) => {
   return (
     <div id={`page-${page}`} className={styles.container}>
       {Object.keys(lines).map((key) => (
-        <Line words={lines[key]} key={key} />
+        <Line lineKey={key} words={lines[key]} key={key} />
       ))}
+      <PageFooter page={page} />
     </div>
   );
 };

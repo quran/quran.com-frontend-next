@@ -1,14 +1,22 @@
 @use "src/styles/constants";
 @use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 .verseText {
-  flex-wrap: wrap;
   display: flex;
   color: var(--color-text-default);
+  align-items: center;
 }
 .verseTextContainer {
   display: block;
   direction: rtl;
+}
+
+.bigText {
+  display: block;
+  @include breakpoints.tablet {
+    display: flex;
+  }
 }
 
 .verseTextCenterAlign {
