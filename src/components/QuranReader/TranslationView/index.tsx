@@ -17,9 +17,9 @@ type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
 };
 
-// extracting the rendering to RenderVerse, instead of rendering directly inside TranslationView
-// so we can use `useSelector` here. When the `isVerseHighlighted` change. only one verse re rendered.
-// instead of rerendering the whole translation view / whole verses
+// useSelector inside RenderVerse, for individual verse
+// instead of using useSelector in TranslationView
+// so only one verse get re rendered when the highlight changes
 const RenderVerse = ({
   verse,
   quranReaderStyles,
