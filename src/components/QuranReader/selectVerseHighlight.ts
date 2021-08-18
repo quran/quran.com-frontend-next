@@ -4,6 +4,7 @@ import inRange from 'lodash/inRange';
 
 const selectIsVerseHighlighted = (state, verse: Verse) => {
   const audioFile = selectAudioFile(state);
+  if (!audioFile) return false;
   if (verse.chapterId !== audioFile.chapterId) return false;
 
   const currentTime = selectCurrentTime(state);
