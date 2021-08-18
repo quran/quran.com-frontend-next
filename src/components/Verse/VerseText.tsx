@@ -7,7 +7,7 @@ import QuranWord from '../dls/QuranWord/QuranWord';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
-import selectHighlightIndex from './selectHighlightIndex';
+import selectHighlightIndex from './selectHighlightedIndex';
 import ChapterHeader from '../chapters/ChapterHeader';
 
 type VerseTextProps = {
