@@ -39,8 +39,8 @@ const selectHighlightedWordPosition = (state, timestampSegments: [number[]]) => 
 };
 
 const selectVerseHighlight = (state, verse: Verse) => ({
-  highlighted: selectIsVerseHighlighted(state, verse),
-  position: selectHighlightedWordPosition(state, verse.timestamps.segments),
+  verseHighlighted: selectIsVerseHighlighted(state, verse),
+  wordPosition: selectHighlightedWordPosition(state, verse.timestamps.segments),
 });
 
 export default selectVerseHighlight;

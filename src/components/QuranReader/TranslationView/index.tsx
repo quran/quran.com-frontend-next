@@ -27,7 +27,7 @@ const RenderVerse = ({
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
 }) => {
-  const { highlighted, position } = useSelector(
+  const { verseHighlighted: highlighted, wordPosition: position } = useSelector(
     (state) => selectIsVerseHighlighted(state, verse),
     shallowEqual,
   );
