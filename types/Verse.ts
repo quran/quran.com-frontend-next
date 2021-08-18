@@ -31,6 +31,13 @@ interface Verse {
   translations?: Translation[];
   tafsirs?: Tafsir[];
   audio?: AudioResponse;
+  timestamps?: {
+    verseKey: string;
+    timestampFrom: number;
+    timestampTo: number;
+    duration: number;
+    segments: [number[]];
+  };
 }
 
 export default Verse;

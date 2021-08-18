@@ -23,7 +23,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => (
     )}
     <div className={styles.actionsContainer}>
       <PlayChapterAudioButton chapterId={Number(chapterId)} />
-      <Button text="Info" href={`${chapterId}/info`} />
+      <Button text="Info" href={`/${chapterId}/info`} />
     </div>
   </div>
 );
