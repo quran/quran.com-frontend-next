@@ -29,7 +29,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
             <p className={styles.verseLink}>{verse.verseKey}</p>
           </Link>
           <VerseActions verse={verse} />
-          <VerseText words={verse.words} segments={verse.timestamps.segments} />
+          <VerseText words={verse.words} timestampSegments={verse.timestamps.segments} />
           {verse.translations?.map((translation: Translation) => (
             <div key={translation.id}>
               <div

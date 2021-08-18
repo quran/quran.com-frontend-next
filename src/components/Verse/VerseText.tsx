@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import Word from 'types/Word';
+import Word, { CharType } from 'types/Word';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreference';
 import classNames from 'classnames';
 import { selectCurrentTime } from 'src/redux/slices/AudioPlayer/state';
@@ -13,16 +13,18 @@ import styles from './VerseText.module.scss';
 
 type VerseTextProps = {
   words: Word[];
-  segments?: [number[]];
+  timestampSegments?: [number[]];
 };
 
 const shouldHighlight = (currentTime: number, segment: number[]) => {
   const startTime = segment[1];
   const endTime = segment[2];
-  return inRange(currentTime, startTime, endTime);
+  const currentTimeInMiliseconds = currentTime * 1000;
+  const introDuration = 6000; // temporary hack (only works for mishary), need to be fixed on backend
+  return inRange(currentTimeInMiliseconds - introDuration, startTime, endTime);
 };
 
-const VerseText = ({ words, segments }: VerseTextProps) => {
+const VerseText = ({ words, timestampSegments }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const currentTime = useSelector(selectCurrentTime);
   const { quranTextFontScale } = quranReaderStyles;
@@ -49,11 +51,11 @@ const VerseText = ({ words, segments }: VerseTextProps) => {
       >
         {words?.map((word, index) => {
           const highlight =
-            segments &&
+            timestampSegments &&
             // example: bismillahirrahmanirrahim, is detected as 4 words with chapterTypeName 'word'
             // + 1 word with chapterTypeName 'end'. So 5 word in total. Need to check before doing shouldHighlight
-            word.charTypeName === 'word' &&
-            shouldHighlight(currentTime, segments[index]);
+            word.charTypeName === CharType.Word &&
+            shouldHighlight(currentTime, timestampSegments[index]);
 
           return (
             <QuranWord
