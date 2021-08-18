@@ -9,11 +9,11 @@ type LineProps = {
 };
 
 const Line = ({ lineKey, words }: LineProps) => (
-  <div id={lineKey} className={styles.container}>
-    <div className={styles.line}>
+  <span id={lineKey} className={styles.container}>
+    <span className={styles.line}>
       <VerseText words={words} isReadingMode />
-    </div>
-  </div>
+    </span>
+  </span>
 );
 
 export default React.memo(Line);

@@ -29,13 +29,13 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
       {isReadingMode && firstWordData.isFirstWordOfFirstVerseOfSurah && (
         <ChapterHeader chapterId={firstWordData.chapterId} />
       )}
-      <div
+      <span
         className={classNames(
           styles.verseTextContainer,
           styles[`quran-font-size-${quranTextFontScale}`],
         )}
       >
-        <div
+        <span
           className={classNames(styles.verseText, {
             [styles.bigText]: quranTextFontScale > 3,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
@@ -45,8 +45,8 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
           {words?.map((word) => (
             <QuranWord key={word.location} word={word} font={quranReaderStyles.quranFont} />
           ))}
-        </div>
-      </div>
+        </span>
+      </span>
     </>
   );
 };

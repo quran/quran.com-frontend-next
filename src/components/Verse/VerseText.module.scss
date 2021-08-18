@@ -3,19 +3,15 @@
 @use "src/styles/breakpoints";
 
 .verseText {
-  display: flex;
   color: var(--color-text-default);
   align-items: center;
 }
 .verseTextContainer {
-  display: block;
   direction: rtl;
 }
 
 .bigText {
-  display: block;
   @include breakpoints.tablet {
-    display: flex;
   }
 }
 
