@@ -7,25 +7,21 @@ import QuranWord from '../dls/QuranWord/QuranWord';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
-import selectHighlightedWordPosition from './selectHighlightedWordPosition';
 import ChapterHeader from '../chapters/ChapterHeader';
 
 type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
-  timestampSegments?: [number[]];
+  highlightedWordPosition?: number;
 };
 
-const VerseText = ({ words, isReadingMode = false, timestampSegments }: VerseTextProps) => {
+const VerseText = ({ words, isReadingMode = false, highlightedWordPosition }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const { lineNumber, pageNumber, location } = words[0];
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],
-  );
-  const highlightedWordPosition = useSelector((state) =>
-    selectHighlightedWordPosition(state, timestampSegments),
   );
   const firstWordData = getWordDataFromLocation(location);
 

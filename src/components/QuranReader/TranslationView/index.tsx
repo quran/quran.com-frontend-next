@@ -5,12 +5,12 @@ import Link from 'next/link';
 import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
-import selectHighlightedVerse from '../selectIsVerseHighlighted';
+import selectIsVerseHighlighted from '../selectVerseHighlight';
 
 type TranslationViewProps = {
   verses: Verse[];
@@ -27,13 +27,16 @@ const RenderVerse = ({
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
 }) => {
-  const isVerseHighlighted = useSelector((state) => selectHighlightedVerse(state, verse));
+  const { highlighted, position } = useSelector(
+    (state) => selectIsVerseHighlighted(state, verse),
+    shallowEqual,
+  );
   return (
     <div key={verse.id}>
       {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
       <div
         className={classNames({
-          [styles.highlightedContainer]: isVerseHighlighted,
+          [styles.highlightedContainer]: highlighted,
         })}
       >
         <Link
@@ -44,7 +47,7 @@ const RenderVerse = ({
           <p className={styles.verseLink}>{verse.verseKey}</p>
         </Link>
         <VerseActions verse={verse} />
-        <VerseText words={verse.words} timestampSegments={verse.timestamps.segments} />
+        <VerseText words={verse.words} highlightedWordPosition={highlighted ? position : null} />
         {verse.translations?.map((translation: Translation) => (
           <div key={translation.id}>
             <div
