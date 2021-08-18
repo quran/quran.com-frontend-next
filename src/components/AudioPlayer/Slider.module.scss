@@ -47,9 +47,7 @@
 }
 
 .currentTime {
-  @include breakpoints.desktop {
-    display: none;
-  }
+  display: none;
 }
 
 .currentTimeExpanded {
