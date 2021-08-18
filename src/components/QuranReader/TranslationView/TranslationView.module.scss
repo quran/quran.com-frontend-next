@@ -24,7 +24,7 @@
 }
 
 .highlightedContainer {
-  background: var(--color-primary-medium);
+  background: var(--color-secondary-medium);
 }
 
 @include utility.generate-font-sizes("translation");
