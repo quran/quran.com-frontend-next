@@ -7,7 +7,7 @@ import QuranWord from '../dls/QuranWord/QuranWord';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
-import selectHighlightIndex from './VerseTextHighlight';
+import selectHighlightIndex from './selectHighlightIndex';
 import ChapterHeader from '../chapters/ChapterHeader';
 
 type VerseTextProps = {
@@ -24,8 +24,8 @@ const VerseText = ({ words, isReadingMode = false, timestampSegments }: VerseTex
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],
   );
-  const highlightIndex = useSelector((state) =>
-    selectHighlightIndex(state, timestampSegments, words),
+  const highlightedPosition = useSelector((state) =>
+    selectHighlightIndex(state, timestampSegments),
   );
   const firstWordData = getWordDataFromLocation(location);
 
@@ -47,12 +47,12 @@ const VerseText = ({ words, isReadingMode = false, timestampSegments }: VerseTex
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
           })}
         >
-          {words?.map((word, index) => (
+          {words?.map((word) => (
             <QuranWord
               key={word.location}
               word={word}
               font={quranReaderStyles.quranFont}
-              highlight={highlightIndex === index}
+              highlight={highlightedPosition === word.position}
             />
           ))}
         </div>
