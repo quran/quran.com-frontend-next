@@ -14,7 +14,7 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com;
   style-src 'self' 'unsafe-inline';
   img-src * data:;
-  media-src 'self' https://*.quranicaudio.com;
+  media-src 'self' *.quranicaudio.com *.qurancdn.com;
   connect-src *;
 `;
 
