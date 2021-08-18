@@ -2,7 +2,9 @@ import { QuranFont } from 'src/components/QuranReader/types';
 import { stringify } from 'qs';
 
 export const ITEMS_PER_PAGE = 10;
-export const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
+// eslint-disable-next-line
+export const API_HOST = process.env.API_HOST;
 
 /**
  * Generates a url to make an api call to our backend

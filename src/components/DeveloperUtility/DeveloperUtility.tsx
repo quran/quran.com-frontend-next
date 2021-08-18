@@ -18,9 +18,10 @@ import WrenchIcon from '../../../public/icons/wrench.svg';
 const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (process.env.NEXT_PUBLIC_ENV !== 'development') {
-    return <></>;
-  }
+  // Uncomment once we have a settings menu and don't want to expose the developer utilities
+  // if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') {
+  //   return <></>;
+  // }
 
   if (!isExpanded) {
     return (
