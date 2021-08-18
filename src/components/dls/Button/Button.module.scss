@@ -1,4 +1,5 @@
 @use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 .anchor {
   text-decoration: none;
@@ -68,5 +69,41 @@
   svg {
     width: 36px;
     height: 36px;
+  }
+}
+
+// desktop size, TODO: ideally this shouldn't be duplicated
+@include breakpoints.desktop {
+  .xsmallDesktopContainer {
+    width: 28px;
+    height: 28px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+  .smallDesktopContainer {
+    width: 38px;
+    height: 38px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .mediumDesktopContainer {
+    width: 44px;
+    height: 44px;
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .largeDesktopContainer {
+    width: 52px;
+    height: 52px;
+    svg {
+      width: 36px;
+      height: 36px;
+    }
   }
 }
