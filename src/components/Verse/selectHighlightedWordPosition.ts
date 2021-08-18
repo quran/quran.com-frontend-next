@@ -19,9 +19,9 @@ const findHighlightedPosition = (currentTime: number, timestampSegments: [number
 };
 
 // to be used with `useSelector` to prevent unnecassary re rendering
-const selectHighlightedPosition = (state, timestampSegments: [number[]]) => {
+const selectHighlightedWordPosition = (state, timestampSegments: [number[]]) => {
   const currentTime = selectCurrentTime(state);
   return findHighlightedPosition(currentTime, timestampSegments);
 };
 
-export default selectHighlightedPosition;
+export default selectHighlightedWordPosition;
