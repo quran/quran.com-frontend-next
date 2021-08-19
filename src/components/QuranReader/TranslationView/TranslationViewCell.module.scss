@@ -1,0 +1,24 @@
+@use "src/styles/utility";
+
+.highlightedContainer {
+  background: var(--color-secondary-medium);
+}
+
+.verseLink {
+  cursor: pointer;
+  width: fit-content;
+  color: var(--color-text-default);
+}
+
+.text {
+  letter-spacing: 0;
+  line-height: normal;
+  color: var(--color-text-default);
+}
+
+@include utility.generate-font-sizes("translation");
+
+.translationName {
+  color: var(--color-text-default);
+  font-size: var(--font-size-normal);
+}

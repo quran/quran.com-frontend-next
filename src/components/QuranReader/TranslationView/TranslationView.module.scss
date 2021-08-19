@@ -1,30 +1,4 @@
-@use "src/styles/constants";
-@use "src/styles/utility";
-
-.verseLink {
-  cursor: pointer;
-  width: fit-content;
-  color: var(--color-text-default);
-}
-
 .container {
   max-width: 80%;
   margin: var(--spacing-medium) auto;
 }
-
-.text {
-  letter-spacing: 0;
-  line-height: normal;
-  color: var(--color-text-default);
-}
-
-.translationName {
-  color: var(--color-text-default);
-  font-size: var(--font-size-normal);
-}
-
-.highlightedContainer {
-  background: var(--color-secondary-medium);
-}
-
-@include utility.generate-font-sizes("translation");
