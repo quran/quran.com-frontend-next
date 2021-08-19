@@ -17,7 +17,7 @@ export const selectIsVerseHighlighted = (state, verse: Verse) => {
   );
 };
 
-// given the current audio timestamp, and array of segment audio segments
+// given the current audio timestamp, and array of segment audio segments (e.g [ [1, 200, 300], [2, 300, 1200] ])
 // see which word should be highlighted, and then return the word position
 export const selectHighlightedWordPosition = (state, timestampSegments: [number[]]) => {
   const currentTime = selectCurrentTime(state);

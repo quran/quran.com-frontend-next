@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import Link from 'next/link';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseActions from 'src/components/Verse/VerseActions';
+import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Translation from 'types/Translation';
@@ -23,6 +23,7 @@ const TranslationViewCell: React.FC<TranslatioViewCellProps> = ({ verse }) => {
   const wordPosition = useSelector((state) =>
     selectHighlightedWordPosition(state, verse.timestamps.segments),
   );
+
   return (
     <div key={verse.id}>
       {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
@@ -31,13 +32,7 @@ const TranslationViewCell: React.FC<TranslatioViewCellProps> = ({ verse }) => {
           [styles.highlightedContainer]: isVerseHighlighted,
         })}
       >
-        <Link
-          as={`/${verse.chapterId}/${verse.verseNumber}`}
-          href="/[chapterId]/[verseId]"
-          passHref
-        >
-          <p className={styles.verseLink}>{verse.verseKey}</p>
-        </Link>
+        <VerseLink verseKey={verse.verseKey} />
         <VerseActions verse={verse} />
         <VerseText
           words={verse.words}
