@@ -25,5 +25,8 @@
 .verseTextSpaceBetween {
   justify-content: space-between;
 }
+.verseTextWrap {
+  flex-wrap: wrap;
+}
 
 @include utility.generate-font-sizes();

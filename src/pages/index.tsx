@@ -1,6 +1,7 @@
 import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import { ChaptersResponse } from 'types/APIResponses';
+import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
 import ChaptersList from '../components/chapters/ChapterList';
 import { getChapters } from '../api';
 import styles from './index.module.scss';
@@ -11,6 +12,7 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.container}>
+    <BookmarkedVersesList />
     <ChaptersList chapters={chapters.slice(0, 38)} />
     <ChaptersList chapters={chapters.slice(38, 76)} />
     <ChaptersList chapters={chapters.slice(76, 114)} />
