@@ -26,6 +26,8 @@ export const bookmarksSlice = createSlice({
       }
       return {
         ...state,
+        // inserting the new pair at beginning of the object will make it sorted by the date verses were bookmarked
+        // +new Date() gets the timestamp that we bookmarked the verse at.
         bookmarkedVerses: { [verseKey]: +new Date(), ...state.bookmarkedVerses },
       };
     },
@@ -36,6 +38,7 @@ export const { toggleVerseBookmark } = bookmarksSlice.actions;
 
 export const selectBookmarks = (state) => state.bookmarks;
 export const selectOrderedBookmarkedVerses = (state) =>
+  // sort the bookmarked verses by the order they appear in the Mushaf.
   _(state.bookmarks.bookmarkedVerses).toPairs().sortBy(0).fromPairs().value();
 
 export default bookmarksSlice.reducer;
