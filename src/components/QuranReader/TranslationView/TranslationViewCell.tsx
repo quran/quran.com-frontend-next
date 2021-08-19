@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseActions from 'src/components/Verse/VerseActions';
 import VerseText from 'src/components/Verse/VerseText';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 import selectVerseHighlightStatus from '../selectVerseHighlightStatus';
@@ -13,9 +13,9 @@ import styles from './TranslationViewCell.module.scss';
 
 interface TranslatioViewCellProps {
   verse: Verse;
-  quranReaderStyles: QuranReaderStyles;
 }
-const TranslationViewCell: React.FC<TranslatioViewCellProps> = ({ verse, quranReaderStyles }) => {
+const TranslationViewCell: React.FC<TranslatioViewCellProps> = ({ verse }) => {
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { isVerseHighlighted, wordPosition } = useSelector(
     (state) => selectVerseHighlightStatus(state, verse),
     shallowEqual,

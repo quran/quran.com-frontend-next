@@ -107,7 +107,7 @@ const QuranReader = ({
   } else if (readingPreference === ReadingPreference.Reading) {
     view = <ReadingView verses={verses} />;
   } else {
-    view = <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
+    view = <TranslationView verses={verses} />;
   }
 
   const loadMore = () => {
