@@ -1,8 +1,16 @@
+@use "src/styles/breakpoints";
+
 .line {
   text-align: center;
 }
 
 .container {
-  display: block;
   direction: rtl;
+}
+
+.inline {
+  display: inline;
+  @include breakpoints.tablet {
+    display: block;
+  }
 }

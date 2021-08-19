@@ -12,8 +12,15 @@
   direction: rtl;
 }
 
-.bigText {
-  display: block;
+.specialLayoutContainer {
+  display: inline;
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+
+.specialLayout {
+  display: inline;
   @include breakpoints.tablet {
     display: flex;
   }
