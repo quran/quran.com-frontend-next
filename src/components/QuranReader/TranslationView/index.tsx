@@ -1,10 +1,10 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import Link from 'next/link';
 import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import VerseLink from 'src/components/Verse/VerseLink';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
@@ -21,13 +21,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
       <div key={verse.id}>
         {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
         <div className={classNames({ [styles.highlightedContainer]: false })}>
-          <Link
-            as={`/${verse.chapterId}/${verse.verseNumber}`}
-            href="/[chapterId]/[verseId]"
-            passHref
-          >
-            <p className={styles.verseLink}>{verse.verseKey}</p>
-          </Link>
+          <VerseLink verseKey={verse.verseKey} />
           <VerseActions verse={verse} />
           <VerseText words={verse.words} />
           {verse.translations?.map((translation: Translation) => (

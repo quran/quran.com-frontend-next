@@ -37,7 +37,8 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
       >
         <div
           className={classNames(styles.verseText, {
-            [styles.bigText]: quranTextFontScale > 3,
+            [styles.verseTextWrap]: !isReadingMode,
+            [styles.bigText]: isReadingMode && quranTextFontScale > 3,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
           })}
