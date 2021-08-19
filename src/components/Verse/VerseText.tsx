@@ -23,6 +23,7 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
     [pageNumber, lineNumber],
   );
   const firstWordData = getWordDataFromLocation(location);
+  const isBigTextLayout = isReadingMode && quranTextFontScale > 3;
 
   return (
     <>
@@ -33,12 +34,13 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
         className={classNames(
           styles.verseTextContainer,
           styles[`quran-font-size-${quranTextFontScale}`],
+          { [styles.largeQuranTextLayoutContainer]: isBigTextLayout },
         )}
       >
         <div
           className={classNames(styles.verseText, {
             [styles.verseTextWrap]: !isReadingMode,
-            [styles.bigText]: isReadingMode && quranTextFontScale > 3,
+            [styles.largeQuranTextLayout]: isBigTextLayout,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
           })}
