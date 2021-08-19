@@ -3,7 +3,7 @@ import Verse from 'types/Verse';
 import inRange from 'lodash/inRange';
 
 // Returns whether the verse should be highlighted the given the current audio timestamp
-const selectIsVerseHighlighted = (state, verse: Verse) => {
+export const selectIsVerseHighlighted = (state, verse: Verse) => {
   const audioFile = selectAudioFile(state);
   if (!audioFile) return false;
   if (verse.chapterId !== audioFile.chapterId) return false;
@@ -15,6 +15,29 @@ const selectIsVerseHighlighted = (state, verse: Verse) => {
     verse.timestamps.timestampFrom,
     verse.timestamps.timestampTo,
   );
+};
+
+// given the current audio timestamp, and array of segment audio segments
+// see which word should be highlighted, and then return the word position
+export const selectHighlightedWordPosition = (state, timestampSegments: [number[]]) => {
+  const currentTime = selectCurrentTime(state);
+  return findHighlightedWordPosition(currentTime, timestampSegments);
+};
+
+// given the list of verses, with timestampFrom and timestampTo and the current audio timestamp
+// determine which verseKey is currently playing
+export const selectHighlightedVerseKey = (state, verses: Verse[]) => {
+  const currentTimeInMilliseconds = selectCurrentTime(state) * 1000;
+  const highlightedVerse = verses.find((verse) =>
+    inRange(
+      currentTimeInMilliseconds,
+      verse.timestamps.timestampFrom,
+      verse.timestamps.timestampTo,
+    ),
+  );
+
+  if (!highlightedVerse) return null;
+  return highlightedVerse.verseKey;
 };
 
 // given the currentTime and an audio segment
@@ -40,20 +63,3 @@ const findHighlightedWordPosition = (currentTime: number, timestampSegments: [nu
   const wordPosition = highlightedSegment[0];
   return wordPosition + 1; // +1 because the word position is not 0 based. while in timestampSegments it is 0 based
 };
-
-// given the current audio timestamp, and array of segment audio segments
-// see which word should be highlighted, and then return the word position
-const selectHighlightedWordPosition = (state, timestampSegments: [number[]]) => {
-  const currentTime = selectCurrentTime(state);
-  return findHighlightedWordPosition(currentTime, timestampSegments);
-};
-
-// given the current audio timestamp, and the Verse data
-// we want to see if "this verse should be highlighted or not"
-// and "which word in this verse should be highlighted"
-const selectVerrseHighlightStatus = (state, verse: Verse) => ({
-  isVerseHighlighted: selectIsVerseHighlighted(state, verse),
-  wordPosition: selectHighlightedWordPosition(state, verse.timestamps.segments),
-});
-
-export default selectVerrseHighlightStatus;

@@ -1,14 +1,17 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseActions from 'src/components/Verse/VerseActions';
 import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
-import selectVerseHighlightStatus from '../selectVerseHighlightStatus';
+import {
+  selectIsVerseHighlighted,
+  selectHighlightedWordPosition,
+} from '../selectVerseHighlightStatus';
 import styles from './TranslationViewCell.module.scss';
 
 interface TranslatioViewCellProps {
@@ -16,9 +19,9 @@ interface TranslatioViewCellProps {
 }
 const TranslationViewCell: React.FC<TranslatioViewCellProps> = ({ verse }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const { isVerseHighlighted, wordPosition } = useSelector(
-    (state) => selectVerseHighlightStatus(state, verse),
-    shallowEqual,
+  const isVerseHighlighted = useSelector((state) => selectIsVerseHighlighted(state, verse));
+  const wordPosition = useSelector((state) =>
+    selectHighlightedWordPosition(state, verse.timestamps.segments),
   );
   return (
     <div key={verse.id}>
@@ -38,6 +41,7 @@ const TranslationViewCell: React.FC<TranslatioViewCellProps> = ({ verse }) => {
         <VerseActions verse={verse} />
         <VerseText
           words={verse.words}
+          highlightedVerseKey={isVerseHighlighted && verse.verseKey}
           highlightedWordPosition={isVerseHighlighted ? wordPosition : null}
         />
         {verse.translations?.map((translation: Translation) => (

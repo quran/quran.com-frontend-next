@@ -10,7 +10,8 @@ import styles from './QuranWord.module.scss';
 type QuranWordProps = {
   word: Word;
   font?: QuranFont;
-  highlighted?: boolean;
+  textHighlighted?: boolean;
+  backgroundHighlighted?: boolean;
 };
 
 const getGlyph = (word: Word, font: QuranFont) => {
@@ -18,7 +19,7 @@ const getGlyph = (word: Word, font: QuranFont) => {
   return word.codeV2;
 };
 
-const QuranWord = ({ word, font, highlighted: highlight }: QuranWordProps) => {
+const QuranWord = ({ word, font, textHighlighted, backgroundHighlighted }: QuranWordProps) => {
   let wordText;
 
   if (isQCFFont(font)) {
@@ -33,7 +34,12 @@ const QuranWord = ({ word, font, highlighted: highlight }: QuranWordProps) => {
   }
 
   return (
-    <span className={classNames(styles.container, { [styles.highlighted]: highlight })}>
+    <span
+      className={classNames(styles.container, {
+        [styles.textHighlighted]: textHighlighted,
+        [styles.backgroundHighlighted]: backgroundHighlighted,
+      })}
+    >
       {wordText}
     </span>
   );

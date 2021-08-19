@@ -2,6 +2,10 @@
   display: inline-block;
 }
 
-.highlighted {
+.textHighlighted {
   color: var(--color-primary-medium);
+}
+
+.backgroundHighlighted {
+  background-color: var(--color-secondary-medium);
 }

@@ -13,9 +13,15 @@ type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
   highlightedWordPosition?: number;
+  highlightedVerseKey?: string;
 };
 
-const VerseText = ({ words, isReadingMode = false, highlightedWordPosition }: VerseTextProps) => {
+const VerseText = ({
+  words,
+  isReadingMode = false,
+  highlightedWordPosition,
+  highlightedVerseKey,
+}: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const { lineNumber, pageNumber, location } = words[0];
@@ -48,7 +54,10 @@ const VerseText = ({ words, isReadingMode = false, highlightedWordPosition }: Ve
               key={word.location}
               word={word}
               font={quranReaderStyles.quranFont}
-              highlighted={highlightedWordPosition === word.position}
+              textHighlighted={
+                highlightedWordPosition === word.position && highlightedVerseKey === word.verseKey
+              }
+              backgroundHighlighted={highlightedVerseKey === word.verseKey}
             />
           ))}
         </div>
