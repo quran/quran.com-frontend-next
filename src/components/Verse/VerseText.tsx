@@ -48,7 +48,7 @@ const VerseText = ({ words, isReadingMode = false, highlightedWordPosition }: Ve
               key={word.location}
               word={word}
               font={quranReaderStyles.quranFont}
-              highlight={highlightedWordPosition === word.position}
+              highlighted={highlightedWordPosition === word.position}
             />
           ))}
         </div>

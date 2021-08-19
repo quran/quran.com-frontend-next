@@ -53,7 +53,7 @@ const selectHighlightedWordPosition = (state, timestampSegments: [number[]]) => 
 // and "which word in this verse should be highlighted"
 // TODO: @muhajirdev, review efficiency of this function. Check if https://github.com/reduxjs/reselect can boost performance
 const selectVerrseHighlightStatus = (state, verse: Verse) => ({
-  verseHighlighted: selectIsVerseHighlighted(state, verse),
+  isVerseHighlighted: selectIsVerseHighlighted(state, verse),
   wordPosition: selectHighlightedWordPosition(state, verse.timestamps.segments),
 });
 

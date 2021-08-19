@@ -27,7 +27,7 @@ const RenderVerse = ({
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
 }) => {
-  const { verseHighlighted, wordPosition } = useSelector(
+  const { isVerseHighlighted, wordPosition } = useSelector(
     (state) => selectVerseHighlightStatus(state, verse),
     shallowEqual,
   );
@@ -36,7 +36,7 @@ const RenderVerse = ({
       {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
       <div
         className={classNames({
-          [styles.highlightedContainer]: verseHighlighted,
+          [styles.highlightedContainer]: isVerseHighlighted,
         })}
       >
         <Link
@@ -49,7 +49,7 @@ const RenderVerse = ({
         <VerseActions verse={verse} />
         <VerseText
           words={verse.words}
-          highlightedWordPosition={verseHighlighted ? wordPosition : null}
+          highlightedWordPosition={isVerseHighlighted ? wordPosition : null}
         />
         {verse.translations?.map((translation: Translation) => (
           <div key={translation.id}>
