@@ -1,0 +1,19 @@
+@use "src/styles/breakpoints";
+
+.bookmarksContainer {
+  padding: var(--spacing-xsmall) calc(2 * var(--spacing-large));
+}
+
+.bookmarksHeader {
+  margin-bottom: var(--spacing-xsmall);
+}
+
+.verseLinksContainer {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, calc(2 * var(--spacing-mega))));
+  gap: var(--spacing-small);
+  @include breakpoints.tablet {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Verse from '../../../../types/Verse';
 import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';

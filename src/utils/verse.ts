@@ -13,7 +13,7 @@ export const generateChapterVersesKeys = (chapterId: string): string[] =>
   range(chaptersData[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
 
 /**
- * Get the chapter number for its key. A key is the combination between the verse's chapter
+ * Get the chapter number from its key. A key is the combination between the verse's chapter
  * and its number separated by ":" e.g. 1:5.
  *
  * @param {string} verseKey
@@ -23,7 +23,7 @@ export const getChapterNumberFromKey = (verseKey: string): number =>
   Number(verseKey.split(COLON_SPLITTER)[0]);
 
 /**
- * Get the verse number for its key. A key is the combination between the verse's chapter
+ * Get the verse number from its key. A key is the combination between the verse's chapter
  * and its number separated by ":" e.g. 1:5.
  *
  * @param {string} verseKey
@@ -31,6 +31,17 @@ export const getChapterNumberFromKey = (verseKey: string): number =>
  */
 export const getVerseNumberFromKey = (verseKey: string): number =>
   Number(verseKey.split(COLON_SPLITTER)[1]);
+
+/**
+ * Get the chapter and verse number of a verse from its key.
+ *
+ * @param {string} verseKey
+ * @returns {[String, String]} The verse number extracted from the key.
+ */
+export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, string] => {
+  const splits = verseKey.split(COLON_SPLITTER);
+  return [splits[0], splits[1]];
+};
 
 /**
  * Extract the data related to a word. The first is the chapter Id,
