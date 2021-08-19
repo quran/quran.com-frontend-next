@@ -8,7 +8,7 @@
   direction: rtl;
 }
 
-.inline {
+.mobileInline {
   display: inline;
   @include breakpoints.tablet {
     display: block;

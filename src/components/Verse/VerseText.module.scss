@@ -12,14 +12,14 @@
   direction: rtl;
 }
 
-.specialLayoutContainer {
+.largeQuranTextLayoutContainer {
   display: inline;
   @include breakpoints.tablet {
     display: block;
   }
 }
 
-.specialLayout {
+.largeQuranTextLayout {
   display: inline;
   @include breakpoints.tablet {
     display: flex;

@@ -6,7 +6,7 @@
   margin-bottom: var(--spacing-xsmall);
 }
 
-.centerText {
+.mobileCenterText {
   text-align: center;
   @include breakpoints.tablet {
     text-align: start;

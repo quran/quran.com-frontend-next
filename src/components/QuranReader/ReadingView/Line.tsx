@@ -7,12 +7,15 @@ import styles from './Line.module.scss';
 type LineProps = {
   words: Word[];
   lineKey: string;
-  hasSpecialLayout: boolean;
+  isBigTextLayout: boolean;
 };
 
-const Line = ({ lineKey, words, hasSpecialLayout }: LineProps) => (
-  <div id={lineKey} className={classNames(styles.container, { [styles.inline]: hasSpecialLayout })}>
-    <div className={classNames(styles.line, { [styles.inline]: hasSpecialLayout })}>
+const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => (
+  <div
+    id={lineKey}
+    className={classNames(styles.container, { [styles.mobileInline]: isBigTextLayout })}
+  >
+    <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
       <VerseText words={words} isReadingMode />
     </div>
   </div>

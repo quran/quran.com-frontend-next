@@ -16,15 +16,15 @@ type PageProps = {
 const Page = ({ verses, page }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
   const { quranTextFontScale } = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
-  const hasSpecialLayout = quranTextFontScale > 3;
+  const isBigTextLayout = quranTextFontScale > 3;
 
   return (
     <div
       id={`page-${page}`}
-      className={classNames(styles.container, { [styles.centerText]: hasSpecialLayout })}
+      className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
       {Object.keys(lines).map((key) => (
-        <Line lineKey={key} words={lines[key]} key={key} hasSpecialLayout={hasSpecialLayout} />
+        <Line lineKey={key} words={lines[key]} key={key} isBigTextLayout={isBigTextLayout} />
       ))}
       <PageFooter page={page} />
     </div>
