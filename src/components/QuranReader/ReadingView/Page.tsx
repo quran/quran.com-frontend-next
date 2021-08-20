@@ -28,26 +28,15 @@ const Page = ({ verses, page }: PageProps) => {
 
   return (
     <div id={`page-${page}`} className={styles.container}>
-      {Object.keys(lines).map((key) => {
-        const words = lines[key];
-        // checking containsHighlightedWord is to prevent re-rendering
-        // and then passing null to highlightedVerseKey and highlightedWordPosition
-        // when it doesn't contains highlighted word
-        // so it won't re-render, because we're passing the same props (null)
-        const containsHighlightedWord = words.some(
-          (word) =>
-            word.verseKey === highlightedVerseKey && word.position === highlightedWordPosition,
-        );
-        return (
-          <Line
-            lineKey={key}
-            words={words}
-            key={key}
-            highlightedVerseKey={containsHighlightedWord ? highlightedVerseKey : null}
-            highlightedWordPosition={containsHighlightedWord ? highlightedWordPosition : null}
-          />
-        );
-      })}
+      {Object.keys(lines).map((key) => (
+        <Line
+          lineKey={key}
+          words={lines[key]}
+          key={key}
+          highlightedVerseKey={highlightedVerseKey}
+          highlightedWordPosition={highlightedWordPosition}
+        />
+      ))}
       <PageFooter page={page} />
     </div>
   );
