@@ -2,6 +2,15 @@
   display: inline-block;
 }
 
+.wbwContainer {
+  text-align: center;
+  padding: var(--spacing-micro);
+}
+
 .highlighted {
   color: var(--color-primary-medium);
+}
+
+.wbwText {
+  font-size: var(--font-size-small);
 }

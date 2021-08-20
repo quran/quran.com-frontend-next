@@ -3,6 +3,8 @@ import Word, { CharType } from 'types/Word';
 import { QuranFont } from 'src/components/QuranReader/types';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -19,23 +21,30 @@ const getGlyph = (word: Word, font: QuranFont) => {
 };
 
 const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
-  let wordText;
+  const { showWordByWordTranslation, showWordByWordTransliteration } =
+    useSelector(selectReadingPreferences);
+  const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
+  let wordText = null;
 
   if (isQCFFont(font)) {
     wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
-  } else {
-    wordText =
-      word.charTypeName === CharType.Pause ? (
-        ''
-      ) : (
-        <TextWord font={font} text={word.text} charType={word.charTypeName} />
-      );
+  } else if (word.charTypeName !== CharType.Pause) {
+    wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
 
   return (
-    <span className={classNames(styles.container, { [styles.highlighted]: highlight })}>
+    <div
+      className={classNames(styles.container, {
+        [styles.highlighted]: highlight,
+        [styles.wbwContainer]: isWordByWordLayout,
+      })}
+    >
       {wordText}
-    </span>
+      {showWordByWordTransliteration && (
+        <p className={styles.wbwText}>{word.transliteration?.text}</p>
+      )}
+      {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
+    </div>
   );
 };
 

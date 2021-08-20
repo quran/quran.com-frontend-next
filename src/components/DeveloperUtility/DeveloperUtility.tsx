@@ -12,6 +12,7 @@ import ThemeAdjustment from './ThemeAdjustment';
 import ReciterAdjustment from './ReciterAdjustment';
 import styles from './DeveloperUtility.module.scss';
 import WrenchIcon from '../../../public/icons/wrench.svg';
+import WordByWordAdjustment from './WordByWordAdjustment';
 /**
  * A set of developer utilities only availble on development environments
  */
@@ -46,6 +47,7 @@ const DeveloperUtility = () => {
       <ThemeAdjustment />
       <FontAdjustment />
       <ReadingPreferenceAdjustment />
+      <WordByWordAdjustment />
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />
