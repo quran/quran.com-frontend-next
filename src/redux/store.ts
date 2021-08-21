@@ -11,7 +11,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import quranReaderStyles from './slices/QuranReader/styles';
-import readingPreference from './slices/QuranReader/readingPreference';
+import readingPreferences from './slices/QuranReader/readingPreferences';
 import notes from './slices/QuranReader/notes';
 import translations from './slices/QuranReader/translations';
 import tafsirs from './slices/QuranReader/tafsirs';
@@ -28,7 +28,7 @@ const persistConfig = {
   storage,
   whitelist: [
     'quranReaderStyles',
-    'readingPreference',
+    'readingPreferences',
     'translations',
     'theme',
     'tafsirs',
@@ -42,7 +42,7 @@ const rootReducer = combineReducers({
   navbar,
   notes,
   quranReaderStyles,
-  readingPreference,
+  readingPreferences,
   translations,
   theme,
   tafsirs,
