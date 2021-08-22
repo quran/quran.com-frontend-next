@@ -1,14 +1,29 @@
 @use "src/styles/constants";
 @use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 .verseText {
-  flex-wrap: wrap;
   display: flex;
   color: var(--color-text-default);
+  align-items: center;
 }
 .verseTextContainer {
   display: block;
   direction: rtl;
+}
+
+.largeQuranTextLayoutContainer {
+  display: inline;
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+
+.largeQuranTextLayout {
+  display: inline;
+  @include breakpoints.tablet {
+    display: flex;
+  }
 }
 
 .verseTextCenterAlign {
@@ -16,6 +31,9 @@
 }
 .verseTextSpaceBetween {
   justify-content: space-between;
+}
+.verseTextWrap {
+  flex-wrap: wrap;
 }
 
 @include utility.generate-font-sizes();

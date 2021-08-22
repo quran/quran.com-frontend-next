@@ -12,15 +12,17 @@ import ThemeAdjustment from './ThemeAdjustment';
 import ReciterAdjustment from './ReciterAdjustment';
 import styles from './DeveloperUtility.module.scss';
 import WrenchIcon from '../../../public/icons/wrench.svg';
+import WordByWordAdjustment from './WordByWordAdjustment';
 /**
  * A set of developer utilities only availble on development environments
  */
 const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (process.env.NEXT_PUBLIC_ENV !== 'development') {
-    return <></>;
-  }
+  // Uncomment once we have a settings menu and don't want to expose the developer utilities
+  // if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') {
+  //   return <></>;
+  // }
 
   if (!isExpanded) {
     return (
@@ -46,6 +48,7 @@ const DeveloperUtility = () => {
       <ThemeAdjustment />
       <FontAdjustment />
       <ReadingPreferenceAdjustment />
+      <WordByWordAdjustment />
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />

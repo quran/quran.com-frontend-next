@@ -1,0 +1,13 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container > button + button {
+  margin-left: var(--spacing-xsmall);
+  @include breakpoints.desktop {
+    margin-left: var(--spacing-medium);
+  }
+}
