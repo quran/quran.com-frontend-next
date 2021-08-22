@@ -3,8 +3,10 @@ import { stringify } from 'qs';
 
 export const ITEMS_PER_PAGE = 10;
 
-// eslint-disable-next-line
-export const API_HOST = process.env.API_HOST;
+// env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
+export const API_HOST = process.env.NEXT_PUBLIC_VERCEL_ENV
+  ? 'https://staging.quran.com/api/qdc'
+  : 'https://staging.quran.com/api/qdc';
 
 /**
  * Generates a url to make an api call to our backend

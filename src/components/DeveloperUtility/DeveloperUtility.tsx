@@ -20,7 +20,7 @@ const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Uncomment once we have a settings menu and don't want to expose the developer utilities
-  // if (process.env.VERCEL_ENV !== 'production') {
+  // if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') {
   //   return <></>;
   // }
 

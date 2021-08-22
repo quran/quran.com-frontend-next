@@ -5,7 +5,7 @@ const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 const securityHeaders = require('./configs/SecurityHeaders.js');
 
-const isDev = process.env.VERCEL_ENV === 'development';
+const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const config = {
   images: {
     domains: ['cdn.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
