@@ -1,15 +1,44 @@
+enum ButtonSize {
+  Small = 'small',
+  Normal = 'normal',
+  Large = 'Large',
+}
+
+enum ButtonShape {
+  Square = 'square',
+  Circle = 'circle',
+}
+
+enum ButtonAlign {
+  Start = 'start',
+  Grow = 'grow',
+}
+
+enum ButtonType {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Error = 'error',
+  Warning = 'warning',
+  Alert = 'alert',
+}
+
+enum ButtonVariant {
+  Shadow = 'shadow',
+  Ghost = 'ghost',
+}
+
 type ButtonNewProps = {
-  size?: 'small' | 'normal' | 'large';
-  shape?: 'square' | 'circle';
+  size?: ButtonSize;
+  shape?: ButtonShape;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  align?: 'start' | 'grow';
-  type?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'alert';
-  variant?: 'shadow' | 'ghost';
+  align?: ButtonAlign;
+  type?: ButtonType;
+  variant?: ButtonVariant;
   loading?: boolean;
   href?: string;
   disabled?: boolean;
-  width?: number;
 };
 
 const Button: React.FC<ButtonNewProps> = ({ href, children, disabled }) => {
