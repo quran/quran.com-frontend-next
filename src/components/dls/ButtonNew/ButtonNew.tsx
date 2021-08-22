@@ -1,4 +1,4 @@
-export type ButtonNewProps = {
+type ButtonNewProps = {
   size: 'small' | 'normal' | 'large';
   shape: 'square' | 'circle';
   prefix: React.ReactNode;
