@@ -1,19 +1,20 @@
-import React from 'react';
-import useTranslation from 'next-translate/useTranslation';
-import NextSeoHead from 'src/components/NextSeoHead';
-import { GetStaticProps } from 'next';
+import React from "react";
+import useTranslation from "next-translate/useTranslation";
+import NextSeoHead from "src/components/NextSeoHead";
+import { GetStaticProps } from "next";
+import styles from "./about.module.scss";
 
 const About = () => {
   const { t } = useTranslation();
-  const quranCom = t('common:Quran-com');
-  const description = t('about:description');
+  const quranCom = t("common:Quran-com");
+  const description = t("about:description");
 
   return (
-    <>
-      <NextSeoHead title={t('about:title')} />
-      <span>{quranCom}</span>
-      <span>{description}</span>
-    </>
+    <div className={styles.container}>
+      <NextSeoHead title={t("about:title")} />
+      <h1 className={styles.aboutHeader}>{quranCom}</h1>
+      <h3 className={styles.aboutDescription}>{description}</h3>
+    </div>
   );
 };
 

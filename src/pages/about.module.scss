@@ -1,0 +1,19 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+.container {
+  padding-top: calc(2 * var(--spacing-mega));
+  background: var(--color-background-default);
+}
+
+.aboutHeader {
+  text-align: center;
+  color: var(--color-primary-faded);
+  font-weight: bold;
+}
+
+.aboutDescription {
+  padding-top: 32px;
+  font-weight: lighter;
+  text-align: center;
+  color: var(--color-secondary-faint);
+}
