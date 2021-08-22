@@ -24,6 +24,7 @@
     }
   },
   "dependencies": {
+    "@radix-ui/react-checkbox": "^0.0.17",
     "@radix-ui/react-id": "^0.0.6",
     "@radix-ui/react-polymorphic": "^0.0.13",
     "@radix-ui/react-visually-hidden": "^0.0.15",
