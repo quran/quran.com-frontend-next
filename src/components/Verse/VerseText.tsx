@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Word from 'types/Word';
 import classNames from 'classnames';
 import { getWordDataFromLocation } from 'src/utils/verse';
+import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranWord from '../dls/QuranWord/QuranWord';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import isCenterAlignedPage from './pageUtils';
@@ -18,11 +19,15 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const { lineNumber, pageNumber, location } = words[0];
+  const { showWordByWordTranslation, showWordByWordTransliteration } =
+    useSelector(selectReadingPreferences);
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],
   );
   const firstWordData = getWordDataFromLocation(location);
+  const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
+  const isBigTextLayout = isWordByWordLayout || (isReadingMode && quranTextFontScale > 3);
 
   return (
     <>
@@ -33,11 +38,13 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
         className={classNames(
           styles.verseTextContainer,
           styles[`quran-font-size-${quranTextFontScale}`],
+          { [styles.largeQuranTextLayoutContainer]: isBigTextLayout },
         )}
       >
         <div
           className={classNames(styles.verseText, {
-            [styles.bigText]: quranTextFontScale > 3,
+            [styles.verseTextWrap]: !isReadingMode,
+            [styles.largeQuranTextLayout]: isBigTextLayout,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
           })}

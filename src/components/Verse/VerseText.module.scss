@@ -12,8 +12,15 @@
   direction: rtl;
 }
 
-.bigText {
-  display: block;
+.largeQuranTextLayoutContainer {
+  display: inline;
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+
+.largeQuranTextLayout {
+  display: inline;
   @include breakpoints.tablet {
     display: flex;
   }
@@ -24,6 +31,9 @@
 }
 .verseTextSpaceBetween {
   justify-content: space-between;
+}
+.verseTextWrap {
+  flex-wrap: wrap;
 }
 
 @include utility.generate-font-sizes();

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectReadingPreference,
   setReadingPreference,
-} from 'src/redux/slices/QuranReader/readingPreference';
+} from 'src/redux/slices/QuranReader/readingPreferences';
 import { ReadingPreference } from '../QuranReader/types';
 
 const ReadingPreferenceAdjustment = () => {

@@ -1,4 +1,8 @@
 import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import classNames from 'classnames';
+import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import Verse from '../../../../types/Verse';
 import Line from './Line';
 import groupLinesByVerses from './groupLinesByVerses';
@@ -12,11 +16,19 @@ type PageProps = {
 
 const Page = ({ verses, page }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
+  const { quranTextFontScale } = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
+  const { showWordByWordTranslation, showWordByWordTransliteration } =
+    useSelector(selectReadingPreferences);
+  const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
+  const isBigTextLayout = isWordByWordLayout || quranTextFontScale > 3;
 
   return (
-    <div id={`page-${page}`} className={styles.container}>
+    <div
+      id={`page-${page}`}
+      className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
+    >
       {Object.keys(lines).map((key) => (
-        <Line lineKey={key} words={lines[key]} key={key} />
+        <Line lineKey={key} words={lines[key]} key={key} isBigTextLayout={isBigTextLayout} />
       ))}
       <PageFooter page={page} />
     </div>

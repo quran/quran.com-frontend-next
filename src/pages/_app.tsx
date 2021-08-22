@@ -4,6 +4,7 @@ import { DefaultSeo } from 'next-seo';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
+import { IdProvider } from '@radix-ui/react-id';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 import ThemeProvider from '../styles/ThemeProvider';
@@ -19,11 +20,13 @@ function MyApp({ Component, pageProps }): JSX.Element {
       </Head>
       <ReduxProvider>
         <ThemeProvider>
-          <DefaultSeo {...createSEOConfig({})} />
-          <Navbar />
-          <DeveloperUtility />
-          <Component {...pageProps} />
-          <AudioPlayer />
+          <IdProvider>
+            <DefaultSeo {...createSEOConfig({})} />
+            <Navbar />
+            <DeveloperUtility />
+            <Component {...pageProps} />
+            <AudioPlayer />
+          </IdProvider>
         </ThemeProvider>
       </ReduxProvider>
     </>
