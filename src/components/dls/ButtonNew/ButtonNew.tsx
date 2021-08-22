@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 enum ButtonSize {
   Small = 'small',
   Normal = 'normal',
@@ -42,7 +44,12 @@ type ButtonNewProps = {
 };
 
 const Button: React.FC<ButtonNewProps> = ({ href, children, disabled }) => {
-  if (href && !disabled) return <a>{children}</a>;
+  if (href && !disabled)
+    return (
+      <Link href={href}>
+        <a>{children}</a>;
+      </Link>
+    );
 
   return <button type="button">{children}</button>;
 };
