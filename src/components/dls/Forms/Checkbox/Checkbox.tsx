@@ -1,28 +1,26 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import classNames from 'classnames';
+import { Indicator, Root } from '@radix-ui/react-checkbox';
 import TickIcon from '../../../../../public/icons/tick.svg';
+import DividerHorizontalIcon from '../../../../../public/icons/divider-horizontal.svg';
 import styles from './Checkbox.module.scss';
 
-export enum CheckboxSize {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-}
+const INDETERMINATE = 'indeterminate';
 
 interface Props {
   id: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-  checked?: boolean;
+  onChange: (checked: boolean) => void;
+  checked?: boolean | typeof INDETERMINATE;
   disabled?: boolean;
+  required?: boolean;
   label?: string;
   name?: string;
-  size?: CheckboxSize;
 }
 
 const Checkbox: React.FC<Props> = ({
-  checked = false,
   disabled = false,
-  size = CheckboxSize.Medium,
+  required = false,
+  checked,
   id,
   label,
   name,
@@ -31,51 +29,35 @@ const Checkbox: React.FC<Props> = ({
   /**
    * Handle when the value of the checkbox input changes.
    *
-   * @param {ChangeEvent<HTMLInputElement>} event
+   * @param {Boolean} newChecked
    * @returns {void}
    */
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void =>
-    onChange(event, event.target.checked);
+  const handleChange = (newChecked: boolean): void => {
+    onChange(newChecked);
+  };
 
   return (
-    <div className={styles.container}>
-      <label htmlFor={id} className={classNames(styles.label, { [styles.disabled]: disabled })}>
-        <div className={styles.bodyContainer}>
-          <input
-            type="checkbox"
-            className={styles.input}
-            checked={checked}
-            onChange={handleChange}
-            disabled={disabled}
-            id={id}
-            name={name}
-          />
-          <div
-            className={classNames(styles.iconContainer, {
-              [styles.smallIconContainer]: size === CheckboxSize.Small,
-              [styles.mediumIconContainer]: size === CheckboxSize.Medium,
-              [styles.largeIconContainer]: size === CheckboxSize.Large,
-              [styles.inActiveIconContainer]: disabled || !checked,
-              [styles.activeIconContainer]: checked && !disabled,
-              [styles.unCheckedIconContainer]: !checked,
-            })}
-          >
-            <TickIcon />
-          </div>
-        </div>
-        {label && (
-          <p
-            className={classNames(styles.labelText, {
-              [styles.smallLabelText]: size === CheckboxSize.Small,
-              [styles.mediumLabelText]: size === CheckboxSize.Medium,
-              [styles.largeLabelText]: size === CheckboxSize.Large,
-              [styles.disabledLabelText]: disabled,
-            })}
-          >
-            {label}
-          </p>
-        )}
-      </label>
+    <div className={classNames(styles.container, { [styles.disabled]: disabled })}>
+      <Root
+        disabled={disabled}
+        name={name}
+        required={required}
+        onCheckedChange={handleChange}
+        id={id}
+        className={styles.checkbox}
+        {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
+      >
+        <Indicator
+          className={classNames(styles.indicator, { [styles.disabledIndicator]: disabled })}
+        >
+          {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
+        </Indicator>
+      </Root>
+      {label && (
+        <label className={styles.label} htmlFor={id}>
+          {label}
+        </label>
+      )}
     </div>
   );
 };
