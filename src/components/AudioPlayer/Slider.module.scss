@@ -3,7 +3,7 @@
 
 .container {
   text-align: left;
-  margin-top: var(--spacing-small);
+  margin-top: var(--spacing-xxsmall);
   @include breakpoints.tablet {
     text-align: inherit;
     margin-top: var(--spacing-medium);
@@ -13,7 +13,7 @@
 .splitsContainer {
   display: inline-block;
   position: fixed;
-  bottom: constants.$audio-player-expanded-height;
+  bottom: constants.$audio-player-default-height;
   left: 0;
   margin: 0;
   width: 100%;
@@ -43,5 +43,16 @@
 .reciterNameContainer {
   @include breakpoints.tablet {
     display: none;
+  }
+}
+
+.currentTime {
+  display: none;
+}
+
+.currentTimeExpanded {
+  display: none;
+  @include breakpoints.desktop {
+    display: inline-block;
   }
 }

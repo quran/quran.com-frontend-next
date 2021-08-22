@@ -1,13 +1,33 @@
 @mixin mode {
   --color-primary-faded: #fff;
   --color-primary-faint: #fff;
-  --color-primary-medium: rgb(51, 204, 255);
+  --color-primary-medium: #fff;
   --color-primary-deep: #fff;
 
   --color-secondary-faded: #fff;
   --color-secondary-faint: #fff;
   --color-secondary-medium: rgb(238, 0, 255);
   --color-secondary-deep: #fff;
+
+  --color-success-faded: #fff;
+  --color-success-faint: #fff;
+  --color-success-medium: #0070f3;
+  --color-success-deep: #fff;
+
+  --color-error-faded: #fff;
+  --color-error-faint: #fff;
+  --color-error-medium: #ee0102;
+  --color-error-deep: #fff;
+
+  --color-warning-faded: #fff;
+  --color-warning-faint: #fff;
+  --color-warning-medium: #f5a623;
+  --color-warning-deep: #fff;
+
+  --color-alert-faded: #fff;
+  --color-alert-faint: #fff;
+  --color-alert-medium: #ff0080;
+  --color-alert-deep: #fff;
 
   --color-tertiary-faded: #fff;
   --color-tertiary-faint: #fff;

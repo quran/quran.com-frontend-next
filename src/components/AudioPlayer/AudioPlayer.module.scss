@@ -18,8 +18,8 @@
   opacity: 0;
 }
 
-.containerMinimized {
-  height: constants.$audio-player-minimized-height;
+.containerDefault {
+  height: constants.$audio-player-default-height;
 }
 
 .containerExpanded {
@@ -52,6 +52,9 @@
     flex-direction: inherit;
   }
 }
+.actionButtonsContainerHidden {
+  opacity: 0;
+}
 
 .seekBackwardsContainer {
   display: none;
@@ -61,13 +64,19 @@
   }
 }
 
-.placeholderRightSection {
+.rightSection {
   display: none;
   @include breakpoints.tablet {
-    display: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--space-small);
   }
 }
 
 .sliderContainer {
-  width: 70%;
+  width: 100%;
+  @include breakpoints.tablet {
+    width: 70%;
+  }
 }

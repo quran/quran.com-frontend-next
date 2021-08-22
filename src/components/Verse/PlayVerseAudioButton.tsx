@@ -1,20 +1,28 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { playVerse } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 
 import PlayIcon from '../../../public/icons/play-circle-outline.svg';
 import Button from '../dls/Button/Button';
 
-interface Props {
-  verseKey: string;
+interface PlayVerseAudioProps {
+  timestamp: number;
+  chapterId: number;
+  reciterId: number;
 }
-const PlayVerseAudioButton = (props: Props) => {
+const PlayVerseAudioButton = ({ chapterId, reciterId, timestamp }: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
   return (
     <Button
       icon={<PlayIcon />}
       onClick={() => {
-        dispatch(playVerse(props.verseKey));
+        dispatch(
+          playFrom({
+            chapterId,
+            reciterId,
+            timestamp,
+          }),
+        );
       }}
     />
   );

@@ -1,5 +1,6 @@
 import { decamelizeKeys } from 'humps';
 import { QuranFont } from 'src/components/QuranReader/types';
+import { DEFAULT_RECITER } from 'src/redux/slices/AudioPlayer/defaultData';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
 import { AdvancedCopyRequest, SearchRequest } from 'types/APIRequests';
 import { ITEMS_PER_PAGE, makeUrl } from './api';
@@ -10,6 +11,7 @@ export const DEFAULT_VERSES_PARAMS = {
   translationFields: 'resource_name', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
   fields: `${QuranFont.Uthmani},chapter_id`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir.
+  reciter: DEFAULT_RECITER.id,
 };
 
 export const makeVersesUrl = (id: string | number, params?: Record<string, unknown>) => {
