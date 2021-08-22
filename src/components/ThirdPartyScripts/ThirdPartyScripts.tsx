@@ -1,14 +1,9 @@
 import React from 'react';
-import Script from 'next/script';
+import GoogleAnalyticsScript from './GoogleAnalyticsScript';
 
 const ThirdPartyScripts = () => (
   <>
-    <Script src="https://www.googletagmanager.com/gtag/js?id=UA-8496014-1" strategy="lazyOnload">
-      {`window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         gtag('config', 'UA-8496014-1');`}
-    </Script>
+    <GoogleAnalyticsScript />
   </>
 );
 
