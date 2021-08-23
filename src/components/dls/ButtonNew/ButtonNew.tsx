@@ -82,7 +82,7 @@ const Button: React.FC<ButtonNewProps> = ({
 
   // when loading, replace the content with loading icon
   let content;
-  if (loading && !prefix) content = 'loading icon';
+  if (loading && !prefix) content = <Spinner size={SpinnerSize[size]} />;
   else content = children;
 
   // when loading, replace the prefix icon with loading icon
