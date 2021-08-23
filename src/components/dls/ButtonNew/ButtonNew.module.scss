@@ -66,16 +66,16 @@
 
 // size
 .large {
-  line-height: var(--line-height-large);
   font-size: var(--font-size-large);
+  height: calc(3 * var(--spacing-medium));
 }
 .normal {
-  line-height: var(--line-height-normal);
   font-size: var(--font-size-normal);
+  height: calc(2.5 * var(--spacing-medium));
 }
 .small {
-  line-height: var(--line-height-small);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
+  height: calc(2 * var(--spacing-medium));
 }
 
 // shape
