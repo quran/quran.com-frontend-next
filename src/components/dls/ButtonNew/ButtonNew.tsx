@@ -33,7 +33,6 @@ type ButtonNewProps = {
   shape?: ButtonShape;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  align?: ButtonAlign;
   type?: ButtonType;
   variant?: ButtonVariant;
   loading?: boolean;
