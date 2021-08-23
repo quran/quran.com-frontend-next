@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
 import styles from './ButtonNew.module.scss';
+import Spinner, { SpinnerSize } from './Spinner';
 
 export enum ButtonSize {
   Small = 'small',
@@ -86,7 +87,7 @@ const Button: React.FC<ButtonNewProps> = ({
 
   // when loading, replace the prefix icon with loading icon
   let prefixFinal;
-  if (loading && prefix) prefixFinal = 'loading icon';
+  if (loading && prefix) prefixFinal = <Spinner size={SpinnerSize[size]} />;
   else prefixFinal = prefix;
 
   if (href && !disabled)

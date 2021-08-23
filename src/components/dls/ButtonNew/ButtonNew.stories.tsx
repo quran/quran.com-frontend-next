@@ -63,6 +63,12 @@ WithIconPrefix.args = {
   prefix: <SettingIcon />,
 };
 
+export const WithIconLoading = Template.bind({});
+WithIconLoading.args = {
+  prefix: <SettingIcon />,
+  loading: true,
+};
+
 export const WithIconSuffix = Template.bind({});
 WithIconSuffix.args = {
   suffix: <SettingIcon />,
