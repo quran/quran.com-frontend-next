@@ -16,19 +16,19 @@
 }
 .warning {
   background-color: var(--color-warning-medium);
-  color: var(--color-text-default);
+  color: var(--color-text-inverse);
 }
 .alert {
   background-color: var(--color-alert-medium);
-  color: var(--color-text-default);
+  color: var(--color-text-inverse);
 }
 .success {
   background-color: var(--color-success-medium);
-  color: var(--color-text-default);
+  color: var(--color-text-inverse);
 }
 .error {
   background-color: var(--color-alert-medium);
-  color: var(--color-text-default);
+  color: var(--color-text-inverse);
 }
 
 // size
