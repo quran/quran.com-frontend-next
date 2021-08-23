@@ -123,19 +123,24 @@
 
 // suffix and prefix container
 .suffix {
-  margin-left: var(--spacing-xxsmall);
+  display: flex;
+  margin-left: calc(0.5 * var(--spacing-medium));
 }
 .prefix {
-  margin-right: var(--spacing-xxsmall);
+  display: flex;
+  margin-right: calc(0.5 * var(--spacing-medium));
 }
 
 // svg sizes
 .large > span > svg {
-  height: 24px;
+  height: calc(1.5 * var(--spacing-medium));
+  width: calc(1.5 * var(--spacing-medium));
 }
 .normal > span > svg {
-  height: 18px;
+  height: calc(1.25 * var(--spacing-medium));
+  width: calc(1.25 * var(--spacing-medium));
 }
 .small > span > svg {
-  height: 10px;
+  height: calc(1 * var(--spacing-medium));
+  width: calc(1 * var(--spacing-medium));
 }
