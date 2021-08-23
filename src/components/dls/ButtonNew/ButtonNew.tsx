@@ -45,14 +45,28 @@ type ButtonNewProps = {
   disabled?: boolean;
 };
 
-const Button: React.FC<ButtonNewProps> = ({ href, children, disabled, type }) => {
-  const classes = classNames({
+const Button: React.FC<ButtonNewProps> = ({
+  href,
+  children,
+  disabled = false,
+  type = ButtonType.Primary,
+  size = ButtonSize.Normal,
+}) => {
+  const classes = classNames(styles.base, {
+    // type
     [styles.primary]: type === ButtonType.Primary,
     [styles.secondary]: type === ButtonType.Secondary,
     [styles.warning]: type === ButtonType.Warning,
     [styles.alert]: type === ButtonType.Alert,
     [styles.success]: type === ButtonType.Secondary,
     [styles.error]: type === ButtonType.Error,
+
+    // size
+    [styles.large]: size === ButtonSize.Large,
+    [styles.normal]: size === ButtonSize.Normal,
+    [styles.small]: size === ButtonSize.Small,
+
+    //
   });
 
   if (href && !disabled)
