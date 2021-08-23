@@ -143,6 +143,9 @@
   cursor: not-allowed;
   pointer-events: none;
   background-color: var(--color-background-neutral-grey);
+  border: 1px solid var(--color-secondary-medium);
+  color: var(--color-text-default);
+  opacity: 0.7;
 }
 
 // suffix and prefix container
