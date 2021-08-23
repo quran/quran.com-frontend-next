@@ -6,7 +6,7 @@ import styles from './ButtonNew.module.scss';
 export enum ButtonSize {
   Small = 'small',
   Normal = 'normal',
-  Large = 'Large',
+  Large = 'large',
 }
 
 export enum ButtonShape {
