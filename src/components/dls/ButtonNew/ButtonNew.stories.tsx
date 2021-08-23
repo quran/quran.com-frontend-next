@@ -26,11 +26,13 @@ export default {
     },
     disabled: {
       defaultValue: false,
+      description: `[OPTIONAL] indicate whether the button is disabled or not`,
       options: [true, false],
       control: { type: 'radio' },
     },
     loading: {
       defaultValue: false,
+      description: `[OPTIONAL] indicate whether the button is in loading state or not`,
       options: [true, false],
       control: { type: 'radio' },
     },
