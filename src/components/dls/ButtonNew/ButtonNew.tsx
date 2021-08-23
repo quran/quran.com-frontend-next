@@ -80,14 +80,9 @@ const Button: React.FC<ButtonNewProps> = ({
     [styles.disabled]: disabled || loading,
   });
 
-  // when loading, replace the content with loading icon
-  let content;
-  if (loading && !prefix) content = <Spinner size={SpinnerSize[size]} />;
-  else content = children;
-
   // when loading, replace the prefix icon with loading icon
   let prefixFinal;
-  if (loading && prefix) prefixFinal = <Spinner size={SpinnerSize[size]} />;
+  if (loading) prefixFinal = <Spinner size={SpinnerSize[size]} />;
   else prefixFinal = prefix;
 
   if (href && !disabled)
@@ -104,7 +99,7 @@ const Button: React.FC<ButtonNewProps> = ({
   return (
     <button type="button" className={classes} disabled={disabled} onClick={onClick}>
       {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
-      <span>{content}</span>
+      <span>{children}</span>
       {suffix && <span className={styles.suffix}>{suffix}</span>}
     </button>
   );
