@@ -9,12 +9,15 @@
   all: unset;
   background-color: var(--color-primary-faint);
   border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-primary-medium);
+  border: 1px solid var(--color-secondary-medium);
   width: var(--spacing-large);
   height: var(--spacing-large);
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover {
+    border: 1px solid var(--color-primary-medium);
+  }
 }
 
 .checkbox[data-focus-visible-added] {
