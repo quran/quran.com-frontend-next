@@ -1,22 +1,22 @@
 import Link from 'next/link';
 
-enum ButtonSize {
+export enum ButtonSize {
   Small = 'small',
   Normal = 'normal',
   Large = 'Large',
 }
 
-enum ButtonShape {
+export enum ButtonShape {
   Square = 'square',
   Circle = 'circle',
 }
 
-enum ButtonAlign {
+export enum ButtonAlign {
   Start = 'start',
   Grow = 'grow',
 }
 
-enum ButtonType {
+export enum ButtonType {
   Primary = 'primary',
   Secondary = 'secondary',
   Success = 'success',
@@ -25,7 +25,7 @@ enum ButtonType {
   Alert = 'alert',
 }
 
-enum ButtonVariant {
+export enum ButtonVariant {
   Shadow = 'shadow',
   Ghost = 'ghost',
 }
