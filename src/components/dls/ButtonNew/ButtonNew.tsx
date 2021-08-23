@@ -77,7 +77,11 @@ const Button: React.FC<ButtonNewProps> = ({
   if (href && !disabled)
     return (
       <Link href={href}>
-        <a className={classes}>{children}</a>;
+        <a className={classes}>
+          {prefix}
+          <span>{children}</span>
+          {suffix}
+        </a>
       </Link>
     );
 
