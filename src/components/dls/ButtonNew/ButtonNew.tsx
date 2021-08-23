@@ -64,9 +64,9 @@ const Button: React.FC<ButtonNewProps> = ({
     // type
     [styles.primary]: type === ButtonType.Primary,
     [styles.secondary]: type === ButtonType.Secondary,
+    [styles.success]: type === ButtonType.Success,
     [styles.warning]: type === ButtonType.Warning,
     [styles.alert]: type === ButtonType.Alert,
-    [styles.success]: type === ButtonType.Secondary,
     [styles.error]: type === ButtonType.Error,
 
     // size
