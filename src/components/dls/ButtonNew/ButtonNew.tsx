@@ -14,11 +14,6 @@ export enum ButtonShape {
   Circle = 'circle',
 }
 
-export enum ButtonAlign {
-  Start = 'start',
-  Grow = 'grow',
-}
-
 export enum ButtonType {
   Primary = 'primary',
   Secondary = 'secondary',
@@ -52,7 +47,6 @@ const Button: React.FC<ButtonNewProps> = ({
   onClick,
   children,
   disabled = false,
-  align,
   loading,
   type = ButtonType.Primary,
   size = ButtonSize.Normal,
@@ -110,14 +104,7 @@ const Button: React.FC<ButtonNewProps> = ({
   return (
     <button type="button" className={classes} disabled={disabled} onClick={onClick}>
       {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
-      <span
-        className={classNames([styles.content], {
-          [styles.align]: align === ButtonAlign.Start,
-          [styles.grow]: align === ButtonAlign.Grow,
-        })}
-      >
-        {content}
-      </span>
+      <span>{content}</span>
       {suffix && <span className={styles.suffix}>{suffix}</span>}
     </button>
   );
