@@ -129,3 +129,11 @@
   margin-right: auto;
   margin-left: auto;
 }
+
+// suffix and prefix container
+.suffix {
+  margin-left: var(--spacing-xxsmall);
+}
+.prefix {
+  margin-right: var(--spacing-xxsmall);
+}
