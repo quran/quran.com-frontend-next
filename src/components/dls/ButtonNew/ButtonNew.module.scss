@@ -82,3 +82,8 @@
   color: var(--color-alert-medium);
   background-color: var(--color-error-deep);
 }
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}

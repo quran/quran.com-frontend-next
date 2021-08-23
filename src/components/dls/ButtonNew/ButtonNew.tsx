@@ -49,6 +49,7 @@ const Button: React.FC<ButtonNewProps> = ({
   href,
   children,
   disabled = false,
+  loading,
   type = ButtonType.Primary,
   size = ButtonSize.Normal,
   shape = ButtonShape.Square,
@@ -77,13 +78,25 @@ const Button: React.FC<ButtonNewProps> = ({
     // variant
     [styles.shadow]: variant === ButtonVariant.Shadow,
     [styles.ghost]: variant === ButtonVariant.Ghost,
+
+    [styles.disabled]: disabled,
   });
+
+  // when loading, replace the content with loading icon
+  let content;
+  if (loading && !prefix) content = 'loading icon';
+  else content = children;
+
+  // when loading, replace the prefix icon with loading icon
+  let prefixFinal;
+  if (loading && prefix) prefixFinal = 'loading icon';
+  else prefixFinal = prefix;
 
   if (href && !disabled)
     return (
       <Link href={href}>
         <a className={classes}>
-          {prefix}
+          {prefixFinal}
           <span>{children}</span>
           {suffix}
         </a>
@@ -91,9 +104,9 @@ const Button: React.FC<ButtonNewProps> = ({
     );
 
   return (
-    <button type="button" className={classes}>
-      {prefix}
-      <span>{children}</span>
+    <button type="button" className={classes} disabled={disabled}>
+      {prefixFinal}
+      <span>{content}</span>
       {suffix}
     </button>
   );

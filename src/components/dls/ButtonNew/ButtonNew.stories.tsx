@@ -24,6 +24,16 @@ export default {
       options: Object.values(ButtonType),
       control: { type: 'select' },
     },
+    disabled: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: 'radio' },
+    },
+    loading: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: 'radio' },
+    },
   },
 };
 
