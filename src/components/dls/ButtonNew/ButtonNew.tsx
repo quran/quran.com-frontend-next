@@ -1,4 +1,6 @@
+import classNames from 'classnames';
 import Link from 'next/link';
+import styles from './ButtonNew.module.scss';
 
 export enum ButtonSize {
   Small = 'small',
@@ -43,15 +45,28 @@ type ButtonNewProps = {
   disabled?: boolean;
 };
 
-const Button: React.FC<ButtonNewProps> = ({ href, children, disabled }) => {
+const Button: React.FC<ButtonNewProps> = ({ href, children, disabled, type }) => {
+  const classes = classNames({
+    [styles.primary]: type === ButtonType.Primary,
+    [styles.secondary]: type === ButtonType.Secondary,
+    [styles.warning]: type === ButtonType.Warning,
+    [styles.alert]: type === ButtonType.Alert,
+    [styles.success]: type === ButtonType.Secondary,
+    [styles.error]: type === ButtonType.Error,
+  });
+
   if (href && !disabled)
     return (
       <Link href={href}>
-        <a>{children}</a>;
+        <a className={classes}>{children}</a>;
       </Link>
     );
 
-  return <button type="button">{children}</button>;
+  return (
+    <button type="button" className={classes}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
