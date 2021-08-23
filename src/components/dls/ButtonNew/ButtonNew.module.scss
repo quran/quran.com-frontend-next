@@ -3,6 +3,7 @@
   padding: 0 var(--spacing-small);
   display: flex;
   align-items: center;
+  font-weight: 500;
 }
 
 // type
@@ -91,34 +92,57 @@
   box-shadow: var(--shadow-light);
 }
 
+.ghost {
+  background-color: transparent;
+  &:hover {
+    background-image: linear-gradient(
+      to right,
+      hsla(0, 0%, 100%, 0.8),
+      hsla(0, 0%, 100%, 0.8)
+    );
+  }
+}
 .ghost.primary {
   color: var(--color-primary-medium);
-  background-color: var(--color-primary-deep);
+  &:hover {
+    background-color: var(--color-primary-medium);
+  }
 }
 .ghost.secondary {
   color: var(--color-secondary-medium);
-  background-color: var(--color-secondary-deep);
+  &:hover {
+    background-color: var(--color-secondary-medium);
+  }
 }
 .ghost.warning {
   color: var(--color-warning-medium);
-  background-color: var(--color-warning-deep);
+  &:hover {
+    background-color: var(--color-warning-medium);
+  }
 }
 .ghost.alert {
   color: var(--color-alert-medium);
-  background-color: var(--color-alert-deep);
+  &:hover {
+    background-color: var(--color-alert-medium);
+  }
 }
 .ghost.success {
   color: var(--color-success-medium);
-  background-color: var(--color-success-deep);
+  &:hover {
+    background-color: var(--color-success-medium);
+  }
 }
 .ghost.error {
   color: var(--color-alert-medium);
-  background-color: var(--color-error-deep);
+  &:hover {
+    background-color: var(--color-alert-medium);
+  }
 }
 
 .disabled {
   cursor: not-allowed;
   pointer-events: none;
+  background-color: var(--color-background-neutral-grey);
 }
 
 // suffix and prefix container

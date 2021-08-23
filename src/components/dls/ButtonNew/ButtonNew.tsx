@@ -77,7 +77,7 @@ const Button: React.FC<ButtonNewProps> = ({
     [styles.shadow]: variant === ButtonVariant.Shadow,
     [styles.ghost]: variant === ButtonVariant.Ghost,
 
-    [styles.disabled]: disabled,
+    [styles.disabled]: disabled || loading,
   });
 
   // when loading, replace the content with loading icon

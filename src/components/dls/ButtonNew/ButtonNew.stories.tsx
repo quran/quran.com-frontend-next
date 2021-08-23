@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonNew, { ButtonShape, ButtonSize, ButtonType } from './ButtonNew';
+import ButtonNew, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './ButtonNew';
 import SettingIcon from '../../../../public/icons/settings.svg';
 
 export default {
@@ -22,6 +22,11 @@ export default {
       defaultValue: ButtonType.Primary,
       description: `[OPTIONAL] The color of the button. by default primary`,
       options: Object.values(ButtonType),
+      control: { type: 'select' },
+    },
+    variant: {
+      description: `[OPTIONAL] The color of the button. by default primary`,
+      options: [...Object.values(ButtonVariant), null],
       control: { type: 'select' },
     },
     disabled: {
