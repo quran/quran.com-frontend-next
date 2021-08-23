@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import Link from 'next/link';
+import { MouseEventHandler } from 'react';
 import styles from './ButtonNew.module.scss';
 
 export enum ButtonSize {
@@ -43,10 +44,12 @@ type ButtonNewProps = {
   loading?: boolean;
   href?: string;
   disabled?: boolean;
+  onClick?: MouseEventHandler;
 };
 
 const Button: React.FC<ButtonNewProps> = ({
   href,
+  onClick,
   children,
   disabled = false,
   loading,
@@ -104,7 +107,7 @@ const Button: React.FC<ButtonNewProps> = ({
     );
 
   return (
-    <button type="button" className={classes} disabled={disabled}>
+    <button type="button" className={classes} disabled={disabled} onClick={onClick}>
       {prefixFinal}
       <span>{content}</span>
       {suffix}

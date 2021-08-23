@@ -1,6 +1,6 @@
 import React from 'react';
 import ButtonNew, { ButtonShape, ButtonSize, ButtonType } from './ButtonNew';
-import IconNorthEast from '../../../../public/icons/settings.svg';
+import SettingIcon from '../../../../public/icons/settings.svg';
 
 export default {
   title: 'dls/Button',
@@ -34,6 +34,12 @@ export default {
       options: [true, false],
       control: { type: 'radio' },
     },
+    prefix: {
+      description: `[OPTIONAL] icon prefix`,
+    },
+    suffix: {
+      description: `[OPTIONAL] icon suffix`,
+    },
   },
 };
 
@@ -52,10 +58,10 @@ ButtonSmall.args = {};
 
 export const WithIconPrefix = Template.bind({});
 WithIconPrefix.args = {
-  prefix: <IconNorthEast />,
+  prefix: <SettingIcon />,
 };
 
 export const WithIconSuffix = Template.bind({});
 WithIconSuffix.args = {
-  suffix: <IconNorthEast />,
+  suffix: <SettingIcon />,
 };
