@@ -8,27 +8,27 @@
 // type
 .primary {
   background-color: var(--color-primary-medium);
-  color: var(--color-primary-deep);
+  color: var(--color-text-inverse);
 }
 .secondary {
   background-color: var(--color-secondary-medium);
-  color: var(--color-secondary-deep);
+  color: var(--color-text-default);
 }
 .warning {
   background-color: var(--color-warning-medium);
-  color: var(--color-warning-deep);
+  color: var(--color-text-default);
 }
 .alert {
   background-color: var(--color-alert-medium);
-  color: var(--color-alert-deep);
+  color: var(--color-text-default);
 }
 .success {
   background-color: var(--color-success-medium);
-  color: var(--color-success-deep);
+  color: var(--color-text-default);
 }
 .error {
   background-color: var(--color-alert-medium);
-  color: var(--color-error-deep);
+  color: var(--color-text-default);
 }
 
 // size
@@ -51,4 +51,34 @@
 }
 .circle {
   border-radius: var(--border-radius-circle);
+}
+
+// variant
+.shadow {
+  box-shadow: var(--shadow-light);
+}
+
+.ghost.primary {
+  color: var(--color-primary-medium);
+  background-color: var(--color-primary-deep);
+}
+.ghost.secondary {
+  color: var(--color-secondary-medium);
+  background-color: var(--color-secondary-deep);
+}
+.ghost.warning {
+  color: var(--color-warning-medium);
+  background-color: var(--color-warning-deep);
+}
+.ghost.alert {
+  color: var(--color-alert-medium);
+  background-color: var(--color-alert-deep);
+}
+.ghost.success {
+  color: var(--color-success-medium);
+  background-color: var(--color-success-deep);
+}
+.ghost.error {
+  color: var(--color-alert-medium);
+  background-color: var(--color-error-deep);
 }

@@ -54,6 +54,7 @@ const Button: React.FC<ButtonNewProps> = ({
   shape = ButtonShape.Square,
   prefix,
   suffix,
+  variant,
 }) => {
   const classes = classNames(styles.base, {
     // type
@@ -72,6 +73,10 @@ const Button: React.FC<ButtonNewProps> = ({
     // shape
     [styles.square]: shape === ButtonShape.Square,
     [styles.circle]: shape === ButtonShape.Circle,
+
+    // variant
+    [styles.shadow]: variant === ButtonVariant.Shadow,
+    [styles.ghost]: variant === ButtonVariant.Ghost,
   });
 
   if (href && !disabled)
