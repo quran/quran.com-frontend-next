@@ -32,10 +32,13 @@
 // size
 .large {
   line-height: var(--line-height-large);
+  font-size: var(--font-size-large);
 }
 .normal {
   line-height: var(--line-height-normal);
+  font-size: var(--font-size-normal);
 }
 .small {
   line-height: var(--line-height-small);
+  font-size: var(--font-size-small);
 }
