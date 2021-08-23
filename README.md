@@ -57,6 +57,10 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 The app runs on next.js and will automatically hot reload when you make changes.
 
+### Environment variables
+
+If you have access to a Quran.com associated vercel account, run `vercel env pull`. Otherwise, rename the `env.example` file to  `env.local` and you should be good to go. 
+
 ### DLS (design language system)
 
 One mistake we made previously is treated each component as unique. This made our work not scalable. Secondly, when looking at large companies, they often develop a design style language that can be used across the app without the need to create unique components and ensure better consistency across the product. We are trying to take a similar approach. If something can be used elsewhere, please put it inside the `dls/` directory and create stories for it.

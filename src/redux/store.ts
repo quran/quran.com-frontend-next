@@ -59,7 +59,7 @@ const store = configureStore({
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
-  devTools: process.env.NODE_ENV === 'development', // disables the devtools in production
+  devTools: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development', // disables the devtools in production
 });
 
 export const persistor = persistStore(store);

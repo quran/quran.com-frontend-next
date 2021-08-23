@@ -1,5 +1,5 @@
 import React from 'react';
-import Checkbox, { CheckboxSize } from './Checkbox';
+import Checkbox from './Checkbox';
 
 export default {
   title: 'dls|Checkbox',
@@ -18,19 +18,9 @@ export default {
       description:
         'A function that will be called when the checkbox button changes either from checked=>un-checked or the other way around.',
     },
-    size: {
-      defaultValue: CheckboxSize.Medium,
-      description: `The size of the RadioButton.`,
-      options: [CheckboxSize.Large, CheckboxSize.Medium, CheckboxSize.Small],
-      control: { type: 'radio' },
-      table: {
-        category: 'Optional',
-      },
-    },
     checked: {
-      defaultValue: false,
-      options: [true, false],
-      control: { type: 'boolean' },
+      options: [true, false, 'indeterminate'],
+      control: { type: 'select' },
       table: {
         category: 'Optional',
       },
@@ -67,7 +57,6 @@ DefaultCheckbox.args = {
   id: 'option1',
   name: 'option1',
   label: 'Checkbox Value',
-  checked: false,
   disabled: false,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChange: () => {},
