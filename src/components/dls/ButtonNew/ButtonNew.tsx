@@ -52,6 +52,7 @@ const Button: React.FC<ButtonNewProps> = ({
   onClick,
   children,
   disabled = false,
+  align,
   loading,
   type = ButtonType.Primary,
   size = ButtonSize.Normal,
@@ -109,7 +110,14 @@ const Button: React.FC<ButtonNewProps> = ({
   return (
     <button type="button" className={classes} disabled={disabled} onClick={onClick}>
       {prefixFinal}
-      <span>{content}</span>
+      <span
+        className={classNames({
+          [styles.align]: align === ButtonAlign.Start,
+          [styles.grow]: align === ButtonAlign.Grow,
+        })}
+      >
+        {content}
+      </span>
       {suffix}
     </button>
   );

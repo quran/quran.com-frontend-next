@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonNew, { ButtonShape, ButtonSize, ButtonType } from './ButtonNew';
+import ButtonNew, { ButtonAlign, ButtonShape, ButtonSize, ButtonType } from './ButtonNew';
 import SettingIcon from '../../../../public/icons/settings.svg';
 
 export default {
@@ -41,6 +41,11 @@ export default {
     },
     suffix: {
       description: `[OPTIONAL] icon suffix`,
+    },
+    align: {
+      description: `button alignment. we can see the effect when we have prefix and suffix icon`,
+      options: [...Object.values(ButtonAlign), null],
+      control: { type: 'radio' },
     },
   },
 };
