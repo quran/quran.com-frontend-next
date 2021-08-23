@@ -1,5 +1,6 @@
 import React from 'react';
 import ButtonNew, { ButtonShape, ButtonSize, ButtonType } from './ButtonNew';
+import IconNorthEast from '../../../../public/icons/settings.svg';
 
 export default {
   title: 'dls/Button',
@@ -26,15 +27,25 @@ export default {
   },
 };
 
-const Template = (args) => <ButtonNew {...args}>some text here</ButtonNew>;
+const Template = (args) => <ButtonNew {...args}>Upload</ButtonNew>;
 
 export const DefaultButton = Template.bind({});
 DefaultButton.args = {};
 
 export const LoadingButton = Template.bind({});
-DefaultButton.args = {
+LoadingButton.args = {
   loading: true,
 };
 
 export const ButtonSmall = Template.bind({});
-DefaultButton.args = {};
+ButtonSmall.args = {};
+
+export const WithIconPrefix = Template.bind({});
+WithIconPrefix.args = {
+  prefix: <IconNorthEast />,
+};
+
+export const WithIconSuffix = Template.bind({});
+WithIconSuffix.args = {
+  suffix: <IconNorthEast />,
+};

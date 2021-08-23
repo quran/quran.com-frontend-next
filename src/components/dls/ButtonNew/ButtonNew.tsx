@@ -52,6 +52,8 @@ const Button: React.FC<ButtonNewProps> = ({
   type = ButtonType.Primary,
   size = ButtonSize.Normal,
   shape = ButtonShape.Square,
+  prefix,
+  suffix,
 }) => {
   const classes = classNames(styles.base, {
     // type
@@ -67,6 +69,7 @@ const Button: React.FC<ButtonNewProps> = ({
     [styles.normal]: size === ButtonSize.Normal,
     [styles.small]: size === ButtonSize.Small,
 
+    // shape
     [styles.square]: shape === ButtonShape.Square,
     [styles.circle]: shape === ButtonShape.Circle,
   });
@@ -80,7 +83,9 @@ const Button: React.FC<ButtonNewProps> = ({
 
   return (
     <button type="button" className={classes}>
-      {children}
+      {prefix}
+      <span>{children}</span>
+      {suffix}
     </button>
   );
 };
