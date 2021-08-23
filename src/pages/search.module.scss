@@ -11,7 +11,7 @@
 
 .header {
   margin: var(--spacing-medium) 0;
-  font-size: var(--font-size-jumbo);
+  font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
 }
 
@@ -50,7 +50,7 @@
 .searchInput {
   border: 0;
   width: 90%;
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-small);
   background: var(--color-background-default);
   color: var(--color-text-default);
   &:focus {
