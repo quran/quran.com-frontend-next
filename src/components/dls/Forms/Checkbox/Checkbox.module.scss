@@ -10,8 +10,8 @@
   background-color: var(--color-primary-faint);
   border-radius: var(--border-radius-default);
   border: 1px solid var(--color-secondary-medium);
-  width: var(--spacing-large);
-  height: var(--spacing-large);
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,7 +36,7 @@
 
 .label {
   padding-left: var(--spacing-xsmall);
-  font-size: 15px;
+  font-size: var(--font-size-normal);
   line-height: 1px;
   user-select: none;
 }
