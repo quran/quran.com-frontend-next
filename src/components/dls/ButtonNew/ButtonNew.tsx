@@ -51,6 +51,7 @@ const Button: React.FC<ButtonNewProps> = ({
   disabled = false,
   type = ButtonType.Primary,
   size = ButtonSize.Normal,
+  shape = ButtonShape.Square,
 }) => {
   const classes = classNames(styles.base, {
     // type
@@ -66,7 +67,8 @@ const Button: React.FC<ButtonNewProps> = ({
     [styles.normal]: size === ButtonSize.Normal,
     [styles.small]: size === ButtonSize.Small,
 
-    //
+    [styles.square]: shape === ButtonShape.Square,
+    [styles.circle]: shape === ButtonShape.Circle,
   });
 
   if (href && !disabled)

@@ -42,3 +42,11 @@
   line-height: var(--line-height-small);
   font-size: var(--font-size-small);
 }
+
+// shape
+.square {
+  border-radius: var(--border-radius-default);
+}
+.circle {
+  border-radius: var(--border-radius-circle);
+}
