@@ -57,11 +57,11 @@
   @for $i from 1 through constants.$maximum-font-step {
     .#{$name}-font-size-#{$i} {
       font-size: calc(
-        #{map.get($mobile-font-scale-multiplier, $i)} * var(--font-size-large)
+        #{map.get($mobile-font-scale-multiplier, $i)} * var(--font-size-normal)
       );
       @include breakpoints.tablet {
         font-size: calc(
-          #{map.get($font-scale-multiplier, $i)} * var(--font-size-large)
+          #{map.get($font-scale-multiplier, $i)} * var(--font-size-normal)
         );
       }
     }

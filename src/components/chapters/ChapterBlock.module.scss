@@ -31,13 +31,13 @@
 }
 
 .nameArabic {
-  font-size: var(--font-size-jumbo);
+  font-size: var(--font-size-large);
   margin-bottom: var(--spacing-medium);
   color: var(--color-text-default);
 }
 
 .nameTranslated {
   text-transform: uppercase;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-small);
   color: var(--color-primary-medium);
 }

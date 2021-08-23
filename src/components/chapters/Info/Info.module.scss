@@ -47,7 +47,7 @@
 }
 
 .surahName {
-  font-size: calc(2 * var(--font-size-large));
+  font-size: var(--font-size-normal);
   font-weight: var(--font-weight-bold);
   line-height: normal;
   width: 100%;
