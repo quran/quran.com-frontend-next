@@ -137,3 +137,14 @@
 .prefix {
   margin-right: var(--spacing-xxsmall);
 }
+
+// svg sizes
+.large > span > svg {
+  height: 24px;
+}
+.normal > span > svg {
+  height: 18px;
+}
+.small > span > svg {
+  height: 10px;
+}

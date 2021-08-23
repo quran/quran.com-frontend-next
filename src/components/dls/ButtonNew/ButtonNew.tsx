@@ -111,7 +111,7 @@ const Button: React.FC<ButtonNewProps> = ({
     <button type="button" className={classes} disabled={disabled} onClick={onClick}>
       {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
       <span
-        className={classNames({
+        className={classNames([styles.content], {
           [styles.align]: align === ButtonAlign.Start,
           [styles.grow]: align === ButtonAlign.Grow,
         })}
