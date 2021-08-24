@@ -71,7 +71,7 @@
 }
 .normal {
   font-size: var(--font-size-normal);
-  height: var(--spacing-medium);
+  height: calc(2.5 * var(--spacing-medium));
 }
 .small {
   font-size: var(--font-size-normal);

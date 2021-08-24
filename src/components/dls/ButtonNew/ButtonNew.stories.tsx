@@ -93,3 +93,8 @@ export const IconGhost = TemplateIcon.bind({});
 IconGhost.args = {
   variant: ButtonVariant.Ghost,
 };
+
+export const IconCircle = TemplateIcon.bind({});
+IconCircle.args = {
+  shape: ButtonShape.Circle,
+};
