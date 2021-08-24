@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import Button, { ButtonSize } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/ButtonNew/ButtonNew';
 import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -46,7 +46,9 @@ const NavigationDrawer = () => {
           <div className={styles.leftCTA}>
             <Link href="/">
               <a>
-                <Button icon={<IconQ />} size={ButtonSize.Small} />
+                <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+                  <IconQ />
+                </Button>
               </a>
             </Link>
             <LanguageSelector />
@@ -54,7 +56,13 @@ const NavigationDrawer = () => {
         </div>
         <div className={styles.centerVertically}>
           <div className={styles.rightCTA}>
-            <Button icon={<IconClose />} size={ButtonSize.Small} onClick={closeNavigationDrawer} />
+            <Button
+              variant={ButtonVariant.Ghost}
+              size={ButtonSize.Small}
+              onClick={closeNavigationDrawer}
+            >
+              <IconClose />
+            </Button>
           </div>
         </div>
       </div>
