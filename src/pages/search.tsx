@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { GetStaticProps, NextPage } from 'next';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import Pagination from 'src/components/dls/Pagination/Pagination';
@@ -176,7 +176,11 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             disabled={isSearching}
           />
           {searchQuery && (
-            <Button variant={ButtonVariant.Ghost} onClick={onClearClicked}>
+            <Button
+              shape={ButtonShape.Circle}
+              variant={ButtonVariant.Ghost}
+              onClick={onClearClicked}
+            >
               <IconClose />
             </Button>
           )}
