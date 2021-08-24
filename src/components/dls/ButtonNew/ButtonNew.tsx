@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { MouseEventHandler } from 'react';
 import styles from './ButtonNew.module.scss';
-import Spinner, { SpinnerSize } from './Spinner';
+import Spinner, { SpinnerSize } from '../Spinner/Spinner';
 
 export enum ButtonSize {
   Small = 'small',
