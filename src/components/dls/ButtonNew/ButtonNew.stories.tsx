@@ -7,7 +7,7 @@ export default {
   component: ButtonNew,
   argTypes: {
     size: {
-      defaultValue: ButtonSize.Normal,
+      defaultValue: ButtonSize.Medium,
       description: `[OPTIONAL] The size of the button`,
       options: Object.values(ButtonSize),
       control: { type: 'radio' },

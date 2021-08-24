@@ -6,7 +6,7 @@ import Spinner, { SpinnerSize } from '../Spinner/Spinner';
 
 export enum ButtonSize {
   Small = 'small',
-  Normal = 'normal',
+  Medium = 'medium',
   Large = 'large',
 }
 
@@ -49,7 +49,7 @@ const Button: React.FC<ButtonNewProps> = ({
   disabled = false,
   loading,
   type = ButtonType.Primary,
-  size = ButtonSize.Normal,
+  size = ButtonSize.Medium,
   shape = ButtonShape.Square,
   prefix,
   suffix,
@@ -68,7 +68,7 @@ const Button: React.FC<ButtonNewProps> = ({
 
     // size
     [styles.large]: size === ButtonSize.Large,
-    [styles.normal]: size === ButtonSize.Normal,
+    [styles.normal]: size === ButtonSize.Medium,
     [styles.small]: size === ButtonSize.Small,
 
     // shape
