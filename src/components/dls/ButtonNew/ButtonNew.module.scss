@@ -66,15 +66,15 @@
 
 // size
 .large {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-large);
   height: calc(3 * var(--spacing-medium));
 }
 .normal {
-  font-size: calc(0.875 * var(--font-size-normal));
-  height: calc(2.5 * var(--spacing-medium));
+  font-size: var(--font-size-normal);
+  height: var(--spacing-medium);
 }
 .small {
-  font-size: calc(0.875 * var(--font-size-normal));
+  font-size: var(--font-size-normal);
   height: calc(2 * var(--spacing-medium));
 }
 
