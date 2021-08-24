@@ -1,6 +1,8 @@
 # workflow for running lighthouse audit
 name: Lighthouse Audit
-
+env: 
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+  
 on: [pull_request]
 
 jobs:
