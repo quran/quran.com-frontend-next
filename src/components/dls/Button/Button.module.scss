@@ -192,3 +192,10 @@
     opacity: 0.7;
   }
 }
+.ghost.disabled {
+  border: none;
+  background: inherit;
+  &:hover {
+    background: inherit;
+  }
+}

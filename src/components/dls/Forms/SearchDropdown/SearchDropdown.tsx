@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import useScroll from '../../../../hooks/useScrollToElement';
 import CaretIcon from '../../../../../public/icons/caret-down.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
-import Button, { ButtonSize, ButtonVariant } from '../../Button/Button';
+import Button, { ButtonVariant } from '../../Button/Button';
 import SearchDropdownItem, { DropdownItem } from './SearchDropdownItem';
 import styles from './SearchDropdown.module.scss';
 
@@ -131,7 +131,7 @@ const SearchDropdown: React.FC<Props> = ({
               [styles.openedCaretIconButton]: isOpened,
             })}
           >
-            <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+            <Button variant={ButtonVariant.Ghost}>
               <CaretIcon />
             </Button>
           </div>
@@ -151,11 +151,7 @@ const SearchDropdown: React.FC<Props> = ({
                 value={searchQuery}
               />
               {showClearSearchIcon && (
-                <Button
-                  variant={ButtonVariant.Ghost}
-                  size={ButtonSize.Small}
-                  onClick={onClearButtonClicked}
-                >
+                <Button variant={ButtonVariant.Ghost} onClick={onClearButtonClicked}>
                   <CloseIcon />
                 </Button>
               )}

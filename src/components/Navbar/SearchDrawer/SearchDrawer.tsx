@@ -3,7 +3,7 @@ import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/APIResponses';
@@ -103,7 +103,6 @@ const SearchDrawer: React.FC = () => {
           <div className={styles.headerContent}>
             <Button
               variant={ButtonVariant.Ghost}
-              size={ButtonSize.Small}
               disabled={!searchQuery}
               href={`/search?query=${searchQuery}`}
             >
@@ -130,11 +129,7 @@ const SearchDrawer: React.FC = () => {
                 </button>
               )}
             </div>
-            <Button
-              variant={ButtonVariant.Ghost}
-              size={ButtonSize.Small}
-              onClick={closeSearchDrawer}
-            >
+            <Button variant={ButtonVariant.Ghost} onClick={closeSearchDrawer}>
               <IconClose />
             </Button>
           </div>

@@ -7,7 +7,7 @@ import {
 } from 'src/redux/slices/navbar';
 import Link from 'next/link';
 import classNames from 'classnames';
-import Button, { ButtonSize, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';
@@ -40,7 +40,7 @@ const Navbar = () => {
               <>
                 <Button
                   variant={ButtonVariant.Ghost}
-                  size={ButtonSize.Small}
+                  shape={ButtonShape.Circle}
                   onClick={openNavigationDrawer}
                 >
                   <IconMenu />
@@ -49,7 +49,7 @@ const Navbar = () => {
               </>
               <Link href="/">
                 <a>
-                  <Button size={ButtonSize.Small} variant={ButtonVariant.Ghost}>
+                  <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
                     <IconQ />
                   </Button>
                 </a>
@@ -59,17 +59,17 @@ const Navbar = () => {
           </div>
           <div className={styles.centerVertically}>
             <div className={styles.rightCTA}>
-              <Button size={ButtonSize.Small} variant={ButtonVariant.Ghost}>
+              <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
                 <IconSettings />
               </Button>
-              <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
                 <IconReader />
               </Button>
               <>
                 <Button
                   variant={ButtonVariant.Ghost}
-                  size={ButtonSize.Small}
                   onClick={openSearchDrawer}
+                  shape={ButtonShape.Circle}
                 >
                   <IconSearch />
                 </Button>
