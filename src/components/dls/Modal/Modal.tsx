@@ -3,7 +3,7 @@ import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import classNames from 'classnames';
 import Close from '../../../../public/icons/close.svg';
-import Button, { ButtonSize } from '../Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '../ButtonNew/ButtonNew';
 import styles from './Modal.module.scss';
 
 export enum ModalSize {
@@ -78,10 +78,12 @@ const Modal: React.FC<Props> = ({
           {title && <div>{title}</div>}
           {showCloseIcon && (
             <Button
-              icon={customCloseIcon || <Close />}
               size={ButtonSize.Small}
+              variant={ButtonVariant.Ghost}
               onClick={handleCloseModal}
-            />
+            >
+              {customCloseIcon || <Close />}
+            </Button>
           )}
         </div>
         <hr />
