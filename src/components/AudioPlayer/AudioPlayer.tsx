@@ -19,7 +19,7 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
-import Button, { ButtonSize } from '../dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '../dls/ButtonNew/ButtonNew';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
@@ -147,24 +147,30 @@ const AudioPlayer = () => {
           {isPlaying ? (
             // Pause
             <Button
-              icon={<PauseIcon />}
+              variant={ButtonVariant.Ghost}
               size={ButtonSize.Medium}
               onClick={withStopPropagation(triggerPauseAudio)}
-            />
+            >
+              <PauseIcon />
+            </Button>
           ) : (
             // Play
             <Button
-              icon={<PlayIcon />}
+              variant={ButtonVariant.Ghost}
               size={ButtonSize.Medium}
               onClick={withStopPropagation(triggerPlayAudio)}
-            />
+            >
+              <PlayIcon />
+            </Button>
           )}
           <div className={styles.seekBackwardsContainer}>
             <Button
-              icon={<MinusTenIcon />}
+              variant={ButtonVariant.Ghost}
               size={ButtonSize.Medium}
               onClick={withStopPropagation(() => triggerSeek(-10))}
-            />
+            >
+              <MinusTenIcon />
+            </Button>
           </div>
         </div>
         <div className={styles.sliderContainer}>
@@ -178,10 +184,14 @@ const AudioPlayer = () => {
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.rightSection}>
           {visibility === Visibility.Expanded && (
-            <Button icon={<UnfoldLessIcon />} size={ButtonSize.Small} />
+            <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+              <UnfoldLessIcon />
+            </Button>
           )}
           {visibility === Visibility.Default && (
-            <Button icon={<UnfoldMoreIcon />} size={ButtonSize.Small} />
+            <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+              <UnfoldMoreIcon />
+            </Button>
           )}
         </div>
       </div>
