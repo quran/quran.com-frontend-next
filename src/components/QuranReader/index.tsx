@@ -20,7 +20,6 @@ import { QuranReaderDataType, ReadingPreference } from './types';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
 import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
 import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
-import ContextMenu from './ContextMenu';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
@@ -87,7 +86,6 @@ const QuranReader = ({
   if (!data) {
     return (
       <>
-        <ContextMenu />
         <div
           className={classNames(styles.container, {
             [styles.withVisibleSideBar]: isSideBarVisible,
@@ -118,7 +116,6 @@ const QuranReader = ({
 
   return (
     <>
-      <ContextMenu />
       <div
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
