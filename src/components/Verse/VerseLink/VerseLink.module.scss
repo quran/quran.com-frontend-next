@@ -4,10 +4,10 @@
   cursor: pointer;
   text-align: center;
   width: fit-content;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-small);
   min-width: var(--spacing-mega);
   @include breakpoints.tablet {
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-small);
     min-width: calc(1.25 * var(--spacing-mega));
   }
   color: var(--color-text-default);
