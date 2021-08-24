@@ -1,13 +1,12 @@
 # workflow for running lighthouse audit
 name: Lighthouse Audit
-
+env:
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 on: [pull_request]
 
 jobs:
   lighthouse-audit:
     runs-on: ubuntu-latest
-    env: 
-      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
