@@ -8,42 +8,50 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import ReplayIcon from '../../../public/icons/replay_10.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
-import Button, { ButtonSize } from '../dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '../dls/ButtonNew/ButtonNew';
 import { triggerPauseAudio, triggerPlayAudio, triggerSeek } from './EventTriggers';
 
 const PlaybackControls = () => {
   const isPlaying = useSelector(selectIsPlaying);
   return (
     <div className={styles.container}>
-      <Button icon={<RepeatIcon />} size={ButtonSize.Small} desktopSize={ButtonSize.Medium} />
+      <Button variant={ButtonVariant.Ghost} size={ButtonSize.Large}>
+        <RepeatIcon />
+      </Button>
       <Button
-        icon={<ReplayIcon />}
-        size={ButtonSize.Small}
-        desktopSize={ButtonSize.Medium}
+        variant={ButtonVariant.Ghost}
+        size={ButtonSize.Large}
         onClick={withStopPropagation(() => triggerSeek(-10))}
-      />
+      >
+        <ReplayIcon />
+      </Button>
       {isPlaying ? (
         <Button
-          icon={<PauseIcon />}
-          size={ButtonSize.Small}
-          desktopSize={ButtonSize.Medium}
+          variant={ButtonVariant.Ghost}
+          size={ButtonSize.Large}
           onClick={withStopPropagation(triggerPauseAudio)}
-        />
+        >
+          <PauseIcon />
+        </Button>
       ) : (
         <Button
-          icon={<PlayIcon />}
-          size={ButtonSize.Small}
-          desktopSize={ButtonSize.Medium}
+          variant={ButtonVariant.Ghost}
+          size={ButtonSize.Large}
           onClick={withStopPropagation(triggerPlayAudio)}
-        />
+        >
+          <PlayIcon />
+        </Button>
       )}
       <Button
-        icon={<ForwardIcon />}
-        size={ButtonSize.Small}
-        desktopSize={ButtonSize.Medium}
+        variant={ButtonVariant.Ghost}
+        size={ButtonSize.Large}
         onClick={withStopPropagation(() => triggerSeek(10))}
-      />
-      <Button icon={<ShareIcon />} size={ButtonSize.Small} desktopSize={ButtonSize.Medium} />
+      >
+        <ForwardIcon />
+      </Button>
+      <Button variant={ButtonVariant.Ghost} size={ButtonSize.Large}>
+        <ShareIcon />
+      </Button>
     </div>
   );
 };
