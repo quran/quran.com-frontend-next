@@ -88,3 +88,8 @@ const TemplateIcon = (args) => (
 );
 
 export const Icon = TemplateIcon.bind({});
+
+export const IconGhost = TemplateIcon.bind({});
+IconGhost.args = {
+  variant: ButtonVariant.Ghost,
+};
