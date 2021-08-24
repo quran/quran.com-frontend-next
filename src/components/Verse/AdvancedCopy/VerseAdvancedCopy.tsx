@@ -11,7 +11,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
 import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
-import RadioButton from '../../dls/Forms/RadioButton/RadioButton';
+import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Button, { ButtonSize } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
@@ -49,6 +49,11 @@ const validateRangeSelection = (
   }
   return null;
 };
+
+const SINGLE_VERSE = 'single';
+const MULTIPLE_VERSES = 'multiple';
+const TRUE_STRING = String(true);
+const FALSE_STRING = String(false);
 
 const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
   const { lang } = useTranslation();
@@ -146,6 +151,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
     }
   };
 
+  /**
+   * Handle when the range type changes.
+   *
+   * @param {string} type
+   */
+  const onRangeTypeChange = (type: string) => {
+    if (type === SINGLE_VERSE) {
+      setShowRangeOfVerses(false);
+    } else {
+      onRangeOfVersesTypeSelected();
+    }
+  };
+
   const onCopyTextClicked = () => {
     // if a range is selected, we need to validate it first
     if (showRangeOfVerses) {
@@ -204,6 +222,15 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
   };
 
   /**
+   * Handle when the should copy footnote radio changes.
+   *
+   * @param {string} shouldCopyString
+   */
+  const onShouldCopyFootnoteChange = (shouldCopyString: string) => {
+    setShouldCopyFootnotes(shouldCopyString === TRUE_STRING);
+  };
+
+  /**
    * Handle when a translationId is checked/unchecked.
    *
    * @param {string} translationId
@@ -222,24 +249,24 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
   return (
     <>
       <p className={styles.label}>Select ayah range</p>
-      <div className={styles.rangeTypeSelectorContainer}>
-        <RadioButton
-          checked={!showRangeOfVerses}
-          id="single"
-          label={`Current verse ${verse.verseKey}`}
-          name="single"
-          onChange={() => setShowRangeOfVerses(false)}
-          value="single"
-        />
-        <RadioButton
-          checked={showRangeOfVerses}
-          id="multiple"
-          label="Range of verses"
-          name="multiple"
-          onChange={onRangeOfVersesTypeSelected}
-          value="multiple"
-        />
-      </div>
+      <RadioGroup
+        label="Select verses range"
+        orientation={RadioGroupOrientation.Horizontal}
+        onChange={onRangeTypeChange}
+        value={showRangeOfVerses ? MULTIPLE_VERSES : SINGLE_VERSE}
+        items={[
+          {
+            value: SINGLE_VERSE,
+            id: SINGLE_VERSE,
+            label: `Current verse ${verse.verseKey}`,
+          },
+          {
+            value: MULTIPLE_VERSES,
+            id: MULTIPLE_VERSES,
+            label: 'Range of verses',
+          },
+        ]}
+      />
       {rangeStartVerse && (
         <VersesRangeSelector
           isVisible={showRangeOfVerses}
@@ -271,21 +298,22 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
         </>
       )}
       <p className={styles.label}>Also copy Footnote(s)?</p>
-      <RadioButton
-        checked={!shouldCopyFootnotes}
-        id="No"
-        label="No"
-        name="No"
-        onChange={() => setShouldCopyFootnotes(false)}
-        value="No"
-      />
-      <RadioButton
-        checked={shouldCopyFootnotes}
-        id="Yes"
-        label="Yes"
-        name="Yes"
-        onChange={() => setShouldCopyFootnotes(true)}
-        value="Yes"
+      <RadioGroup
+        label="Should copy footnotes"
+        value={shouldCopyFootnotes ? TRUE_STRING : FALSE_STRING}
+        onChange={onShouldCopyFootnoteChange}
+        items={[
+          {
+            value: FALSE_STRING,
+            id: FALSE_STRING,
+            label: 'No',
+          },
+          {
+            value: TRUE_STRING,
+            id: TRUE_STRING,
+            label: 'Yes',
+          },
+        ]}
       />
       {customMessage && <div className={styles.customMessage}>{customMessage}</div>}
       <div className={styles.buttonContainer}>
