@@ -90,7 +90,7 @@ const Button: React.FC<ButtonNewProps> = ({
       <Link href={href}>
         <a className={classes}>
           {prefixFinal}
-          <span>{children}</span>
+          <span className={styles.content}>{children}</span>
           {suffix}
         </a>
       </Link>
@@ -99,7 +99,7 @@ const Button: React.FC<ButtonNewProps> = ({
   return (
     <button type="button" className={classes} disabled={disabled} onClick={onClick}>
       {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
-      <span>{children}</span>
+      <span className={styles.content}>{children}</span>
       {suffix && <span className={styles.suffix}>{suffix}</span>}
     </button>
   );

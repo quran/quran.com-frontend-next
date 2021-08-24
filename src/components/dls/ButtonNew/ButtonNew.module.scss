@@ -149,6 +149,9 @@
   display: flex;
   margin-right: calc(0.5 * var(--spacing-medium));
 }
+.content {
+  display: flex;
+}
 
 // svg sizes
 .large > span > svg {
