@@ -3,7 +3,7 @@ import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import classNames from 'classnames';
 import Close from '../../../../public/icons/close.svg';
-import Button, { ButtonSize, ButtonVariant } from '../ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from '../Button/Button';
 import styles from './Modal.module.scss';
 
 export enum ModalSize {

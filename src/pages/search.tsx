@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { GetStaticProps, NextPage } from 'next';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import Pagination from 'src/components/dls/Pagination/Pagination';

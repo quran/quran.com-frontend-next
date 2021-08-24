@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';

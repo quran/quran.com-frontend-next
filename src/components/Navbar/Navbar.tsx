@@ -7,7 +7,7 @@ import {
 } from 'src/redux/slices/navbar';
 import Link from 'next/link';
 import classNames from 'classnames';
-import Button, { ButtonSize, ButtonVariant } from '../dls/ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';

@@ -12,7 +12,7 @@ import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/vers
 import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
-import Button, { ButtonSize, ButtonVariant } from '../../dls/ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
 import styles from './VerseAdvancedCopy.module.scss';

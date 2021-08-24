@@ -1,7 +1,7 @@
 import Bismillah from 'src/components/dls/Bismillah/Bismillah';
 import React from 'react';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
-import Button, { ButtonVariant } from 'src/components/dls/ButtonNew/ButtonNew';
+import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import ChapterIconContainer from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
 

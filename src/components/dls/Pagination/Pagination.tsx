@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import range from 'lodash/range';
 import classNames from 'classnames';
-import Button, { ButtonSize } from '../ButtonNew/ButtonNew';
+import Button, { ButtonSize } from '../Button/Button';
 import NextIcon from '../../../../public/icons/caret-forward.svg';
 import PreviousIcon from '../../../../public/icons/caret-back.svg';
 import styles from './Pagination.module.scss';

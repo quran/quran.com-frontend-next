@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import useScroll from '../../../../hooks/useScrollToElement';
 import CaretIcon from '../../../../../public/icons/caret-down.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
-import Button, { ButtonSize, ButtonVariant } from '../../ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from '../../Button/Button';
 import SearchDropdownItem, { DropdownItem } from './SearchDropdownItem';
 import styles from './SearchDropdown.module.scss';
 

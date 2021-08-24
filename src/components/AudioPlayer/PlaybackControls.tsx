@@ -8,7 +8,7 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import ReplayIcon from '../../../public/icons/replay_10.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
-import Button, { ButtonSize, ButtonVariant } from '../dls/ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import { triggerPauseAudio, triggerPlayAudio, triggerSeek } from './EventTriggers';
 
 const PlaybackControls = () => {

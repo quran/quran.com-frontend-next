@@ -19,7 +19,7 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
-import Button, { ButtonSize, ButtonVariant } from '../dls/ButtonNew/ButtonNew';
+import Button, { ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
