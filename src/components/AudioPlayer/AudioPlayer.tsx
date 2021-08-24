@@ -19,7 +19,7 @@ import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
-import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
@@ -147,6 +147,7 @@ const AudioPlayer = () => {
           {isPlaying ? (
             // Pause
             <Button
+              size={ButtonSize.Large}
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(triggerPauseAudio)}
@@ -157,6 +158,7 @@ const AudioPlayer = () => {
             // Play
             <Button
               shape={ButtonShape.Circle}
+              size={ButtonSize.Large}
               variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(triggerPlayAudio)}
             >
@@ -166,6 +168,7 @@ const AudioPlayer = () => {
           <div className={styles.seekBackwardsContainer}>
             <Button
               shape={ButtonShape.Circle}
+              size={ButtonSize.Large}
               variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(() => triggerSeek(-10))}
             >
