@@ -61,7 +61,9 @@ LoadingButton.args = {
 };
 
 export const ButtonSmall = Template.bind({});
-ButtonSmall.args = {};
+ButtonSmall.args = {
+  size: ButtonSize.Small,
+};
 
 export const WithIconPrefix = Template.bind({});
 WithIconPrefix.args = {
@@ -78,3 +80,11 @@ export const WithIconSuffix = Template.bind({});
 WithIconSuffix.args = {
   suffix: <SettingIcon />,
 };
+
+const TemplateIcon = (args) => (
+  <ButtonNew {...args}>
+    <SettingIcon />
+  </ButtonNew>
+);
+
+export const Icon = TemplateIcon.bind({});
