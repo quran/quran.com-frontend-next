@@ -1,8 +1,13 @@
 .base {
   border: none;
-  padding: 0 var(--spacing-small);
   display: flex;
   align-items: center;
+}
+.withText {
+  padding: 0 var(--spacing-small);
+}
+.withIcon {
+  justify-content: center;
 }
 
 // type
@@ -69,12 +74,21 @@
   font-size: var(--font-size-large);
   height: calc(3 * var(--spacing-medium));
 }
+.withIcon.large {
+  width: calc(3 * var(--spacing-medium));
+}
 .normal {
   font-size: var(--font-size-normal);
   height: calc(2.5 * var(--spacing-medium));
 }
+.withIcon.normal {
+  width: calc(2.5 * var(--spacing-medium));
+}
 .small {
   font-size: var(--font-size-normal);
+  height: calc(2 * var(--spacing-medium));
+}
+.withIcon.small {
   height: calc(2 * var(--spacing-medium));
 }
 

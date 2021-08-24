@@ -56,6 +56,8 @@ const Button: React.FC<ButtonNewProps> = ({
   variant,
 }) => {
   const classes = classNames(styles.base, {
+    [styles.withText]: typeof children === 'string',
+    [styles.withIcon]: typeof children !== 'string',
     // type
     [styles.primary]: type === ButtonType.Primary,
     [styles.secondary]: type === ButtonType.Secondary,
