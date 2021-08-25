@@ -44,13 +44,25 @@
   overflow: hidden;
   max-height: calc(5 * var(--spacing-mega));
   overflow-y: scroll;
+
+  // Hack to show the scrollbar on OSX, otherwise the scrollbar is hidden and the component does not indicate scrollability
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--spacing-xxsmall);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-default);
+    background-color: var(--color-background-backdrop);
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  }
 }
 
 .searchIconContainer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-alert-medium);
+  color: var(--color-background-alternative-deep);
   pointer-events: none;
   position: absolute;
   left: var(--spacing-small);
@@ -70,7 +82,7 @@
   justify-content: center;
   width: var(--spacing-small);
   height: var(--spacing-small);
-  color: var(--color-alert-medium);
+  color: var(--color-background-alternative-deep);
   position: absolute;
   right: var(--spacing-medium);
   top: 50%;
@@ -156,7 +168,7 @@
   right: var(--spacing-medium);
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-alert-medium);
+  color: var(--color-background-alternative-deep);
   svg {
     transition: var(--transition-fast);
   }
@@ -174,6 +186,6 @@
 }
 
 .disabledInput {
-  color: var(--color-alert-medium);
+  color: var(--color-background-alternative-deep);
   background: var(--color-background-neutral-grey);
 }
