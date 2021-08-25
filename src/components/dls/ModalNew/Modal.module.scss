@@ -1,10 +1,30 @@
+@keyframes overlayShow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .overlay {
-  background-color: #000;
-  position: "fixed";
+  background-color: rgba($color: #000000, $alpha: 0.1);
+  position: fixed;
   inset: 0;
-  // '@media (prefers-reduced-motion: no-preference)': {
-  //   animation: `${overlayShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`,
-  // },
+  @media (prefers-reduced-motion: no-preference) {
+    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@keyframes contentShow {
+  0% {
+    opacity: 0;
+    transform: "translate(-50%, -48%) scale(.96)";
+  }
+  100% {
+    opacity: 1;
+    transform: "translate(-50%, -50%) scale(1)";
+  }
 }
 
 .content {
@@ -22,7 +42,7 @@
   padding: 25px;
 
   @media (prefers-reduced-motion: no-preference) {
-    //   animation: ${`${contentShow} 150ms cubic-bezier(0.16, 1, 0.3, 1)`};
+    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform;
   }
 

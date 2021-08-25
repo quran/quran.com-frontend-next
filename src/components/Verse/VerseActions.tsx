@@ -8,7 +8,6 @@ import VerseActionsMenu from './VerseActionsMenu';
 import VerseActionModal, { VerseActionModalType } from './VerseActionModal';
 import styles from './VerseActions.module.scss';
 import PlayVerseAudioButton from './PlayVerseAudioButton';
-import Modal from '../dls/ModalNew/Modal';
 
 interface Props {
   verse: Verse;
@@ -29,7 +28,6 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
           <OverflowMenu />
         </span>
       </Dropdown>
-      <Modal title="test" />
       <VerseActionModal
         activeVerseActionModal={activeVerseActionModal}
         verse={verse}
