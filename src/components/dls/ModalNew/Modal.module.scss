@@ -56,10 +56,15 @@
 }
 
 .title {
-  margin: 0px;
-  font-weight: 500;
-  // color: ${mauve.mauve12};
-  font-size: 17px;
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  line-height: var(--line-height-jumbo);
+}
+.subtitle {
+  text-align: center;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
 }
 
 .description {

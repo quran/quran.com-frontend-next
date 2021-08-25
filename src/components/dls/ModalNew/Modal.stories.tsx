@@ -1,12 +1,13 @@
 /* eslint-disable react/button-has-type */
-import { Modal, Trigger, Action, Actions, Title, Body } from './Modal';
+import Button from '../Button/Button';
+import { Modal, Trigger, Action, Actions, Title, Body, Subtitle } from './Modal';
 
 export default {
   title: 'dls/Modal',
 };
 
 export const Default = () => (
-  <Modal trigger={<Trigger>test</Trigger>}>
+  <Modal trigger={<Trigger as={Button}>test</Trigger>}>
     <Body>
       <p>test</p>
       <button>aa</button>
@@ -17,7 +18,9 @@ export const Default = () => (
 export const WithAction = () => (
   <Modal trigger={<Trigger>test</Trigger>}>
     <Body>
-      <Title>This is a title</Title>
+      <Title>MODAL</Title>
+      <Subtitle>THIS IS A MODAL</Subtitle>
+      <p>Some content contained within this modal</p>
     </Body>
     <Actions>
       <Action>Cancel</Action>
