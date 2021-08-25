@@ -3,7 +3,8 @@
         "airbnb",
         "airbnb/hooks",
         "plugin:import/typescript",
-        "prettier"
+        "prettier",
+        "plugin:@next/next/recommended"
     ],
     "parser": "babel-eslint",
     "plugins": [

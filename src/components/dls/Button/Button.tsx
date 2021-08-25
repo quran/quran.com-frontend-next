@@ -1,86 +1,110 @@
-import React from 'react';
-import Link from 'next/link';
 import classNames from 'classnames';
+import Link from 'next/link';
+import { MouseEventHandler } from 'react';
 import styles from './Button.module.scss';
-
-type ButtonProps = {
-  size?: ButtonSize;
-  desktopSize?: ButtonSize;
-  text?: string;
-  name?: string;
-  disabled?: boolean;
-  href?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  icon?: React.ReactNode;
-};
+import Spinner, { SpinnerSize } from '../Spinner/Spinner';
 
 export enum ButtonSize {
-  XSmall = 'xsmall',
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
 }
 
-const Container: React.FC<ButtonProps> = ({
-  children,
-  disabled,
-  size,
-  desktopSize,
+export enum ButtonShape {
+  Square = 'square',
+  Circle = 'circle',
+}
+
+export enum ButtonType {
+  Primary = 'primary',
+  Secondary = 'secondary',
+  Success = 'success',
+  Error = 'error',
+  Warning = 'warning',
+  Alert = 'alert',
+}
+
+export enum ButtonVariant {
+  Shadow = 'shadow',
+  Ghost = 'ghost',
+}
+
+type ButtonNewProps = {
+  size?: ButtonSize;
+  shape?: ButtonShape;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
+  type?: ButtonType;
+  variant?: ButtonVariant;
+  loading?: boolean;
+  href?: string;
+  disabled?: boolean;
+  onClick?: MouseEventHandler;
+};
+
+const Button: React.FC<ButtonNewProps> = ({
   href,
   onClick,
+  children,
+  disabled = false,
+  loading,
+  type = ButtonType.Primary,
+  size = ButtonSize.Medium,
+  shape = ButtonShape.Square,
+  prefix,
+  suffix,
+  variant,
 }) => {
-  const classes = {
-    [styles.hoverableContainer]: !disabled,
-    [styles.disabledContainer]: disabled,
-    [styles.xsmallStyledContainer]: size === ButtonSize.XSmall,
-    [styles.smallStyledContainer]: size === ButtonSize.Small,
-    [styles.mediumStyledContainer]: size === ButtonSize.Medium,
-    [styles.largeStyledContainer]: size === ButtonSize.Large,
-    [styles.xsmallDesktopContainer]: desktopSize === ButtonSize.XSmall,
-    [styles.smallDesktopContainer]: desktopSize === ButtonSize.Small,
-    [styles.mediumDesktopContainer]: desktopSize === ButtonSize.Medium,
-    [styles.largeDesktopContainer]: desktopSize === ButtonSize.Large,
-  };
+  const classes = classNames(styles.base, {
+    [styles.withText]: typeof children === 'string',
+    [styles.withIcon]: typeof children !== 'string',
+    // type
+    [styles.primary]: type === ButtonType.Primary,
+    [styles.secondary]: type === ButtonType.Secondary,
+    [styles.success]: type === ButtonType.Success,
+    [styles.warning]: type === ButtonType.Warning,
+    [styles.alert]: type === ButtonType.Alert,
+    [styles.error]: type === ButtonType.Error,
 
-  // if href was passed and also the button is not disabled.
-  if (href && !disabled) {
+    // size
+    [styles.large]: size === ButtonSize.Large,
+    [styles.normal]: size === ButtonSize.Medium,
+    [styles.small]: size === ButtonSize.Small,
+
+    // shape
+    [styles.square]: shape === ButtonShape.Square,
+    [styles.circle]: shape === ButtonShape.Circle,
+
+    // variant
+    [styles.shadow]: variant === ButtonVariant.Shadow,
+    [styles.ghost]: variant === ButtonVariant.Ghost,
+
+    [styles.disabled]: disabled || loading,
+  });
+
+  // when loading, replace the prefix icon with loading icon
+  let prefixFinal;
+  if (loading) prefixFinal = <Spinner size={SpinnerSize[size]} />;
+  else prefixFinal = prefix;
+
+  if (href && !disabled)
     return (
-      <Link href={href} passHref>
-        <a className={styles.anchor}>
-          <button type="button" className={classNames(styles.styledContainer, classes)}>
-            {children}
-          </button>
+      <Link href={href}>
+        <a className={classes}>
+          {prefixFinal}
+          <span className={styles.content}>{children}</span>
+          {suffix}
         </a>
       </Link>
     );
-  }
 
   return (
-    <button type="button" onClick={onClick} className={classNames(styles.styledContainer, classes)}>
-      {children}
+    <button type="button" className={classes} disabled={disabled} onClick={onClick}>
+      {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
+      <span className={styles.content}>{children}</span>
+      {suffix && <span className={styles.suffix}>{suffix}</span>}
     </button>
   );
 };
-
-const Button = ({
-  size = ButtonSize.Medium,
-  text,
-  disabled,
-  href,
-  icon,
-  onClick,
-  desktopSize,
-}: ButtonProps) => (
-  <Container
-    disabled={disabled}
-    size={size}
-    href={href}
-    onClick={onClick}
-    desktopSize={desktopSize}
-  >
-    {icon && <div className={styles.iconContainer}>{icon}</div>}
-    {text}
-  </Container>
-);
 
 export default Button;

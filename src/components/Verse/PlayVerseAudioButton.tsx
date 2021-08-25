@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 
-import PlayIcon from '../../../public/icons/play-circle-outline.svg';
-import Button from '../dls/Button/Button';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
 interface PlayVerseAudioProps {
   timestamp: number;
@@ -14,7 +14,9 @@ const PlayVerseAudioButton = ({ chapterId, reciterId, timestamp }: PlayVerseAudi
   const dispatch = useDispatch();
   return (
     <Button
-      icon={<PlayIcon />}
+      variant={ButtonVariant.Ghost}
+      shape={ButtonShape.Circle}
+      size={ButtonSize.Large}
       onClick={() => {
         dispatch(
           playFrom({
@@ -24,7 +26,9 @@ const PlayVerseAudioButton = ({ chapterId, reciterId, timestamp }: PlayVerseAudi
           }),
         );
       }}
-    />
+    >
+      <PlayIcon />
+    </Button>
   );
 };
 export default PlayVerseAudioButton;

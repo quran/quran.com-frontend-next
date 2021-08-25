@@ -2,7 +2,7 @@ import React from 'react';
 import Dropdown, { Placement } from './Dropdown';
 
 export default {
-  title: 'dls|Dropdowns',
+  title: 'dls/Dropdowns',
   component: Dropdown,
   argTypes: {
     placement: {

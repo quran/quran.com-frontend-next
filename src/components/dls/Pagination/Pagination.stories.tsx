@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Pagination from './Pagination';
 
 export default {
-  title: 'dls|Pagination',
+  title: 'dls/Pagination',
   component: Pagination,
   argTypes: {
     totalCount: {

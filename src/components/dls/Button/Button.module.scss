@@ -1,109 +1,201 @@
-@use "src/styles/utility";
-@use "src/styles/breakpoints";
-
-.anchor {
+.base {
+  border: none;
+  display: flex;
+  align-items: center;
   text-decoration: none;
 }
-
-.styledContainer {
-  cursor: pointer;
-  border-radius: var(--border-radius-circle);
-  border: none;
-  padding: 0;
-  display: inline-block;
-  align-items: center;
-  background: transparent;
-  color: var(--color-text-default);
+.withText {
+  padding: 0 var(--spacing-small);
+}
+.withIcon {
+  justify-content: center;
 }
 
-.hoverableContainer {
+// type
+.primary {
+  background-color: var(--color-primary-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-primary-medium);
   &:hover {
-    background: var(--color-background-alternative);
+    color: var(--color-primary-medium);
+    background-color: var(--color-text-inverse);
   }
 }
 
-.disabledContainer {
-  cursor: default;
-  opacity: var(--opacity-50);
-  pointer-events: none;
-}
-
-.iconContainer {
-  @include utility.center-vertically;
-  > svg {
-    margin: auto;
-    path {
-      color: var(--color-text-default);
-    }
-  }
+.secondary {
+  background-color: var(--color-secondary-medium);
   color: var(--color-text-default);
-}
-
-.xsmallStyledContainer {
-  width: 28px;
-  height: 28px;
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-.smallStyledContainer {
-  width: 38px;
-  height: 38px;
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-}
-.mediumStyledContainer {
-  width: 44px;
-  height: 44px;
-  svg {
-    width: 32px;
-    height: 32px;
-  }
-}
-.largeStyledContainer {
-  width: 52px;
-  height: 52px;
-  svg {
-    width: 36px;
-    height: 36px;
+  border: 1px solid var(--color-secondary-medium);
+  &:hover {
+    color: var(--color-secondary-medium);
+    background-color: var(--color-text-default);
   }
 }
 
-// desktop size, TODO: ideally this shouldn't be duplicated
-@include breakpoints.desktop {
-  .xsmallDesktopContainer {
-    width: 28px;
-    height: 28px;
-    svg {
-      width: 16px;
-      height: 16px;
-    }
+.success {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-success-medium);
+  &:hover {
+    color: var(--color-success-medium);
+    background-color: var(--color-text-inverse);
   }
-  .smallDesktopContainer {
-    width: 38px;
-    height: 38px;
-    svg {
-      width: 20px;
-      height: 20px;
-    }
+}
+
+.warning {
+  background-color: var(--color-warning-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-warning-medium);
+  &:hover {
+    color: var(--color-warning-medium);
+    background-color: var(--color-text-inverse);
   }
-  .mediumDesktopContainer {
-    width: 44px;
-    height: 44px;
-    svg {
-      width: 32px;
-      height: 32px;
-    }
+}
+.alert {
+  background-color: var(--color-alert-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-alert-medium);
+  &:hover {
+    color: var(--color-alert-medium);
+    background-color: var(--color-text-inverse);
   }
-  .largeDesktopContainer {
-    width: 52px;
-    height: 52px;
-    svg {
-      width: 36px;
-      height: 36px;
-    }
+}
+.error {
+  background-color: var(--color-alert-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-error-medium);
+  &:hover {
+    color: var(--color-alert-medium);
+    background-color: var(--color-text-inverse);
+  }
+}
+
+// size
+.large {
+  font-size: var(--font-size-large);
+  height: calc(3 * var(--spacing-medium));
+}
+.withIcon.large {
+  width: calc(3 * var(--spacing-medium));
+}
+.normal {
+  font-size: var(--font-size-normal);
+  height: calc(2.5 * var(--spacing-medium));
+}
+.withIcon.normal {
+  width: calc(2.5 * var(--spacing-medium));
+}
+.small {
+  font-size: var(--font-size-normal);
+  height: calc(2 * var(--spacing-medium));
+}
+.withIcon.small {
+  height: calc(2 * var(--spacing-medium));
+}
+
+// shape
+.square {
+  border-radius: var(--border-radius-default);
+}
+.circle {
+  border-radius: var(--border-radius-circle);
+}
+
+// variant
+.shadow {
+  box-shadow: var(--shadow-regular);
+}
+
+.ghost {
+  background-color: transparent;
+  border: none;
+  &:hover {
+    background-image: linear-gradient(
+      to right,
+      hsla(0, 0%, 100%, 0.8),
+      hsla(0, 0%, 100%, 0.8)
+    );
+  }
+}
+.ghost.primary {
+  color: var(--color-primary-medium);
+  &:hover {
+    background-color: var(--color-primary-medium);
+  }
+}
+.ghost.secondary {
+  color: var(--color-secondary-medium);
+  &:hover {
+    background-color: var(--color-secondary-medium);
+  }
+}
+.ghost.warning {
+  color: var(--color-warning-medium);
+  &:hover {
+    background-color: var(--color-warning-medium);
+  }
+}
+.ghost.alert {
+  color: var(--color-alert-medium);
+  &:hover {
+    background-color: var(--color-alert-medium);
+  }
+}
+.ghost.success {
+  color: var(--color-success-medium);
+  &:hover {
+    background-color: var(--color-success-medium);
+  }
+}
+.ghost.error {
+  color: var(--color-alert-medium);
+  &:hover {
+    background-color: var(--color-alert-medium);
+  }
+}
+
+// suffix and prefix container
+.suffix {
+  display: flex;
+  margin-left: calc(0.5 * var(--spacing-medium));
+}
+.prefix {
+  display: flex;
+  margin-right: calc(0.5 * var(--spacing-medium));
+}
+.content {
+  display: flex;
+}
+
+// svg sizes
+.large > span > svg {
+  height: calc(1.5 * var(--spacing-medium));
+  width: calc(1.5 * var(--spacing-medium));
+}
+.normal > span > svg {
+  height: calc(1.25 * var(--spacing-medium));
+  width: calc(1.25 * var(--spacing-medium));
+}
+.small > span > svg {
+  height: calc(1 * var(--spacing-medium));
+  width: calc(1 * var(--spacing-medium));
+}
+
+.base.disabled {
+  cursor: not-allowed;
+  background-color: var(--color-background-alternative);
+  border: 1px solid var(--color-secondary-medium);
+  color: var(--color-text-default);
+  opacity: 0.7;
+  &:hover {
+    background-color: var(--color-background-alternative);
+    opacity: 0.7;
+  }
+}
+.ghost.disabled {
+  border: none;
+  background: inherit;
+  &:hover {
+    background: inherit;
   }
 }
