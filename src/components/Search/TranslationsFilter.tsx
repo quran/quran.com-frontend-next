@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import AvailableTranslation from 'types/AvailableTranslation';
-import SearchDropdown from '../dls/Forms/SearchDropdown/SearchDropdown';
+import Combobox from '../dls/Forms/Combobox';
 import styles from './Filter.module.scss';
 
 interface Props {
@@ -15,9 +15,7 @@ const TranslationsFilter: React.FC<Props> = memo(
     const matchedTranslation = translations.find(
       (translation) => translation.id.toString() === selectedTranslation,
     );
-    const selectorText = matchedTranslation
-      ? matchedTranslation.translatedName.name
-      : 'Select a translation';
+    const initialInputValue = matchedTranslation ? matchedTranslation.translatedName.name : '';
 
     const translationsItems = useMemo(
       () =>
@@ -34,12 +32,13 @@ const TranslationsFilter: React.FC<Props> = memo(
     );
 
     return (
-      <SearchDropdown
+      <Combobox
         id="translations"
-        selectedItem={selectedTranslation || ''}
+        value={selectedTranslation || ''}
         items={translationsItems}
-        onSelect={onTranslationChange}
-        selectorText={selectorText}
+        onChange={onTranslationChange}
+        initialInputValue={initialInputValue}
+        placeholder="Select a translation"
         label={<div className={styles.dropdownLabel}>Translation</div>}
       />
     );
