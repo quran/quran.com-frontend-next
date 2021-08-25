@@ -2,10 +2,11 @@ import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import styles from './Modal.module.scss';
 
-const Root = ({ children }) => (
+const Root = ({ children, trigger }) => (
   <DialogPrimitive.Root>
     <DialogPrimitive.Overlay className={styles.overlay} />
-    {children}
+    {trigger}
+    <Content>{children}</Content>
   </DialogPrimitive.Root>
 );
 
@@ -18,11 +19,16 @@ export const Content = React.forwardRef<HTMLDivElement, any>(
     </DialogPrimitive.Content>
   ),
 );
+
+export const Body = ({ children }) => <div className={styles.body}>{children}</div>;
 export const Title = ({ children }) => (
   <DialogPrimitive.Title className={styles.title}>{children}</DialogPrimitive.Title>
 );
 export const Subtitle = ({ children }) => (
   <DialogPrimitive.Description className={styles.subtitle}>{children}</DialogPrimitive.Description>
 );
-export const Actions = ({ children }) => <div className={styles.actionContainer}>{children}</div>;
-export const Action = ({ children }) => <DialogPrimitive.Close>{children}</DialogPrimitive.Close>;
+
+export const Actions = ({ children }) => <div className={styles.actionsContainer}>{children}</div>;
+export const Action = ({ children }) => (
+  <DialogPrimitive.Close className={styles.action}>{children}</DialogPrimitive.Close>
+);

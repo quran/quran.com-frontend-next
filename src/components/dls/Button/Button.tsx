@@ -29,7 +29,7 @@ export enum ButtonVariant {
   Ghost = 'ghost',
 }
 
-type ButtonNewProps = {
+export type ButtonNewProps = {
   size?: ButtonSize;
   shape?: ButtonShape;
   prefix?: React.ReactNode;
@@ -40,9 +40,10 @@ type ButtonNewProps = {
   href?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler;
+  children: React.ReactNode;
 };
 
-const Button: React.FC<ButtonNewProps> = ({
+const Button = ({
   href,
   onClick,
   children,
@@ -54,7 +55,7 @@ const Button: React.FC<ButtonNewProps> = ({
   prefix,
   suffix,
   variant,
-}) => {
+}: ButtonNewProps) => {
   const classes = classNames(styles.base, {
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',

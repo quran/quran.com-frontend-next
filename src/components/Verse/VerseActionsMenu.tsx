@@ -100,11 +100,10 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
           icon={<AdvancedCopyIcon />}
           onClick={onAdvancedCopyClicked}
         />
-        <Modal.Modal>
-          <Modal.Trigger>Test</Modal.Trigger>
-          <Modal.Content>
+        <Modal.Modal trigger={<Modal.Trigger>Test</Modal.Trigger>}>
+          <Modal.Body>
             <VerseAdvancedCopy verse={verse} />
-          </Modal.Content>
+          </Modal.Body>
         </Modal.Modal>
         <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
         <VerseActionsMenuItem

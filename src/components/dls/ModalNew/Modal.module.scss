@@ -30,6 +30,7 @@
 .content {
   background-color: white;
   border-radius: 6px;
+  overflow: hidden;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   position: fixed;
@@ -39,7 +40,6 @@
   width: 90vw;
   max-width: 450px;
   max-height: 85vh;
-  padding: 25px;
 
   @media (prefers-reduced-motion: no-preference) {
     animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -49,6 +49,10 @@
   &:focus {
     outline: none;
   }
+}
+
+.body {
+  padding: 25px;
 }
 
 .title {
@@ -64,7 +68,15 @@
   font-size: 15px;
   line-height: 1.5;
 }
-.actionContainer {
+.actionsContainer {
   display: flex;
   justify-content: stretch;
+}
+.action {
+  flex: 1;
+  border: none;
+  border-top: 1px solid var(--color-borders-hairline);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
 }
