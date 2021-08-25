@@ -182,12 +182,12 @@
 
 .base.disabled {
   cursor: not-allowed;
-  background-color: var(--color-background-neutral-grey);
+  background-color: var(--color-background-alternative);
   border: 1px solid var(--color-secondary-medium);
   color: var(--color-text-default);
   opacity: 0.7;
   &:hover {
-    background-color: var(--color-background-neutral-grey);
+    background-color: var(--color-background-alternative);
     opacity: 0.7;
   }
 }
