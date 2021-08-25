@@ -2,7 +2,7 @@
 import Modal from './Modal';
 
 export default {
-  title: 'dls/Modal',
+  title: 'dls/NewModal',
 };
 
 export const Default = () => (
