@@ -8,7 +8,7 @@ interface Props {
 
 const PageFooter: React.FC<Props> = ({ page }) => (
   <div className={styles.pageText}>
-    <Link href={`/page/${page}`}>
+    <Link href={`/page/${page}`} passHref>
       <p className={styles.pageLink}>{`Page ${page}`}</p>
     </Link>
   </div>
