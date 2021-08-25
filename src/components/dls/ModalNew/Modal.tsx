@@ -15,7 +15,6 @@ export const Content = React.forwardRef<HTMLDivElement, any>(
   ({ children, ...props }, forwardedRef) => (
     <DialogPrimitive.Content {...props} ref={forwardedRef} className={styles.content}>
       {children}
-      <DialogPrimitive.Close>X</DialogPrimitive.Close>
     </DialogPrimitive.Content>
   ),
 );
@@ -25,6 +24,5 @@ export const Title = ({ children }) => (
 export const Subtitle = ({ children }) => (
   <DialogPrimitive.Description className={styles.subtitle}>{children}</DialogPrimitive.Description>
 );
-export const Action = ({ children, onClick }) => (
-  <DialogPrimitive.Close onClick={onClick}>{children}</DialogPrimitive.Close>
-);
+export const Actions = ({ children }) => <div className={styles.actionContainer}>{children}</div>;
+export const Action = ({ children }) => <DialogPrimitive.Close>{children}</DialogPrimitive.Close>;

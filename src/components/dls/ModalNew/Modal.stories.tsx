@@ -1,17 +1,28 @@
 /* eslint-disable react/button-has-type */
-import { Content, Modal, Trigger, Action } from './Modal';
+import { Content, Modal, Trigger, Action, Actions } from './Modal';
 
 export default {
   title: 'dls/Modal',
 };
 
-export const ModalNormal = () => (
+export const Default = () => (
   <Modal>
     <Trigger>test</Trigger>
     <Content>
       <p>test</p>
       <button>aa</button>
-      <Action onClick={() => console.log('clicked')}>Submit</Action>
+    </Content>
+  </Modal>
+);
+
+export const WithAction = () => (
+  <Modal>
+    <Trigger>test</Trigger>
+    <Content>
+      <Actions>
+        <Action>Cancel</Action>
+        <Action>Submit</Action>
+      </Actions>
     </Content>
   </Modal>
 );
