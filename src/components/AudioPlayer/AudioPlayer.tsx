@@ -14,7 +14,7 @@ import {
   setVisibility,
   Visibility,
 } from '../../redux/slices/AudioPlayer/state';
-import PlayIcon from '../../../public/icons/play-circle-outline.svg';
+import PlayIcon from '../../../public/icons/play_arrow.svg';
 import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
