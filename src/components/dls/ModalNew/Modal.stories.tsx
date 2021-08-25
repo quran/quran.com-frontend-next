@@ -1,5 +1,4 @@
 /* eslint-disable react/button-has-type */
-import Button from '../Button/Button';
 import Modal from './Modal';
 
 export default {
@@ -7,7 +6,7 @@ export default {
 };
 
 export const Default = () => (
-  <Modal trigger={<Modal.Trigger as={Button}>test</Modal.Trigger>}>
+  <Modal trigger={<Modal.Trigger>test</Modal.Trigger>}>
     <Modal.Body>
       <p>test</p>
       <button>aa</button>
