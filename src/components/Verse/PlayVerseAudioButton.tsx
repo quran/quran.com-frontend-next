@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 
-import PlayIcon from '../../../public/icons/play_arrow.svg';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
 interface PlayVerseAudioProps {
