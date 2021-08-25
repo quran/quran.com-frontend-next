@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 import AvailableLanguage from 'types/AvailableLanguage';
-import SearchDropdown from '../dls/Forms/SearchDropdown/SearchDropdown';
+import Combobox from '../dls/Forms/Combobox';
 import styles from './Filter.module.scss';
 
 interface Props {
@@ -13,9 +13,7 @@ const LanguagesFilter: React.FC<Props> = memo(
   ({ languages, selectedLanguage, onLanguageChange }) => {
     // we need to match the selectedLanguage because if it comes from the URL's query param and the user had entered an invalid languageCode in the url, we should set a different text
     const matchedLanguage = languages.find((language) => language.isoCode === selectedLanguage);
-    const selectorText = matchedLanguage
-      ? matchedLanguage.translatedName.name
-      : 'Select a language';
+    const initialInputValue = matchedLanguage ? matchedLanguage.translatedName.name : '';
 
     const languagesItems = useMemo(
       () =>
@@ -29,12 +27,13 @@ const LanguagesFilter: React.FC<Props> = memo(
     );
 
     return (
-      <SearchDropdown
+      <Combobox
         id="languages"
-        selectedItem={selectedLanguage}
+        value={selectedLanguage}
         items={languagesItems}
-        onSelect={onLanguageChange}
-        selectorText={selectorText}
+        onChange={onLanguageChange}
+        initialInputValue={initialInputValue}
+        placeholder="Select a language"
         label={<div className={styles.dropdownLabel}>Language</div>}
       />
     );

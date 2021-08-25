@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import classNames from 'classnames';
 import styles from './VersesRangeSelector.module.scss';
-import SearchDropdown from '../../dls/Forms/SearchDropdown/SearchDropdown';
+import Combobox from '../../dls/Forms/Combobox';
 
 export interface RangeVerseItem {
   id: string;
@@ -19,15 +19,15 @@ interface Props {
   dropdownItems: RangeVerseItem[];
   rangeStartVerse: string;
   rangeEndVerse: string;
-  onSelect: (selectedName: string, dropdownId: RangeSelectorType) => void;
+  onChange: (selectedName: string, dropdownId: RangeSelectorType) => void;
   isVisible: boolean;
 }
 
 interface SelectorProps {
   type: RangeSelectorType;
-  selectedItem: string;
+  value: string;
   dropdownItems: RangeVerseItem[];
-  onSelect: (selectedName: string, dropdownId: string) => void;
+  onChange: (selectedName: string, dropdownId: string) => void;
 }
 
 /*
@@ -41,17 +41,17 @@ Memoizing the selector will save re-renders to each selector and its items when:
         since we will have higher number items which will be re-rendering un-necessarily.
 */
 const SelectorContainer: React.FC<SelectorProps> = memo(
-  ({ type, selectedItem, dropdownItems, onSelect }) => (
+  ({ type, value, dropdownItems, onChange }) => (
     <div className={styles.selectedContainer}>
-      <SearchDropdown
+      <Combobox
         id={type}
-        selectedItem={selectedItem}
+        value={value}
         items={dropdownItems}
-        onSelect={onSelect}
-        searchPlaceHolder="Search for a verse"
-        selectorText={selectedItem}
+        onChange={onChange}
+        placeholder="Search for a verse"
+        initialInputValue={value}
         label={
-          <span className={styles.searchDropdownLabel}>
+          <span className={styles.comboboxLabel}>
             {type === RangeSelectorType.START ? 'From' : 'To'} Verse:
           </span>
         }
@@ -64,7 +64,7 @@ const VersesRangeSelector: React.FC<Props> = ({
   dropdownItems,
   rangeStartVerse,
   rangeEndVerse,
-  onSelect,
+  onChange,
   isVisible,
 }) => (
   <div
@@ -73,16 +73,16 @@ const VersesRangeSelector: React.FC<Props> = ({
     })}
   >
     <SelectorContainer
-      selectedItem={rangeStartVerse}
+      value={rangeStartVerse}
       type={RangeSelectorType.START}
       dropdownItems={dropdownItems}
-      onSelect={onSelect}
+      onChange={onChange}
     />
     <SelectorContainer
-      selectedItem={rangeEndVerse}
+      value={rangeEndVerse}
       type={RangeSelectorType.END}
       dropdownItems={dropdownItems}
-      onSelect={onSelect}
+      onChange={onChange}
     />
   </div>
 );
