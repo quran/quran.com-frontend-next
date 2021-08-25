@@ -1,65 +1,100 @@
 import React from 'react';
-import Button, { ButtonSize } from './Button';
-import IconLogo from '../../../../public/icons/Logo.svg';
+import ButtonNew, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
+import SettingIcon from '../../../../public/icons/settings.svg';
 
 export default {
-  title: 'dls/Buttons',
-  component: Button,
+  title: 'dls/Button',
+  component: ButtonNew,
   argTypes: {
     size: {
       defaultValue: ButtonSize.Medium,
-      description: `The size of the button`,
-      table: {
-        category: 'Optional',
-      },
-      options: Object.values(ButtonSize).map((size) => size),
+      description: `[OPTIONAL] The size of the button`,
+      options: Object.values(ButtonSize),
       control: { type: 'radio' },
+    },
+    shape: {
+      defaultValue: ButtonShape.Square,
+      description: `[OPTIONAL] The shape of the button. By default square`,
+      options: Object.values(ButtonShape),
+      control: { type: 'radio' },
+    },
+    type: {
+      defaultValue: ButtonType.Primary,
+      description: `[OPTIONAL] The color of the button. by default primary`,
+      options: Object.values(ButtonType),
+      control: { type: 'select' },
+    },
+    variant: {
+      description: `[OPTIONAL] The color of the button. by default primary`,
+      options: [...Object.values(ButtonVariant), null],
+      control: { type: 'select' },
     },
     disabled: {
       defaultValue: false,
-      description: `Whether the button is disabled or not.`,
-      table: {
-        category: 'Optional',
-      },
+      description: `[OPTIONAL] indicate whether the button is disabled or not`,
       options: [true, false],
       control: { type: 'radio' },
     },
-    text: {
-      table: {
-        category: 'Optional',
-      },
-      control: { type: 'text' },
-      description: 'The text inside the button.',
+    loading: {
+      defaultValue: false,
+      description: `[OPTIONAL] indicate whether the button is in loading state or not`,
+      options: [true, false],
+      control: { type: 'radio' },
     },
-    name: {
-      table: {
-        category: 'Optional',
-      },
-      control: { type: 'text' },
-      description: 'The name of the button.',
+    prefix: {
+      description: `[OPTIONAL] icon prefix`,
     },
-    onClick: {
-      table: {
-        category: 'Optional',
-      },
-      description: 'A handler for when the button is clicked.',
-    },
-    href: {
-      table: {
-        category: 'Optional',
-      },
-      description: 'When present, the button will act like an anchor that navigate to the href.',
-    },
-    icon: {
-      table: {
-        category: 'Optional',
-      },
-      description: 'The icon inside the button.',
+    suffix: {
+      description: `[OPTIONAL] icon suffix`,
     },
   },
 };
 
-const Template = (args) => <Button icon={<IconLogo />} {...args} />;
+const Template = (args) => <ButtonNew {...args}>Upload</ButtonNew>;
 
 export const DefaultButton = Template.bind({});
 DefaultButton.args = {};
+
+export const LoadingButton = Template.bind({});
+LoadingButton.args = {
+  loading: true,
+};
+
+export const ButtonSmall = Template.bind({});
+ButtonSmall.args = {
+  size: ButtonSize.Small,
+};
+
+export const WithIconPrefix = Template.bind({});
+WithIconPrefix.args = {
+  prefix: <SettingIcon />,
+};
+
+export const WithIconLoading = Template.bind({});
+WithIconLoading.args = {
+  prefix: <SettingIcon />,
+  loading: true,
+};
+
+export const WithIconSuffix = Template.bind({});
+WithIconSuffix.args = {
+  suffix: <SettingIcon />,
+};
+
+const TemplateIcon = (args) => (
+  <ButtonNew {...args}>
+    <SettingIcon />
+  </ButtonNew>
+);
+
+export const Icon = TemplateIcon.bind({});
+
+export const IconGhost = TemplateIcon.bind({});
+IconGhost.args = {
+  variant: ButtonVariant.Ghost,
+};
+
+export const IconCircle = TemplateIcon.bind({});
+IconCircle.args = {
+  shape: ButtonShape.Circle,
+};

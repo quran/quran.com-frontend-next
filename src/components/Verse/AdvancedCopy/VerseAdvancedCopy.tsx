@@ -12,7 +12,7 @@ import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/vers
 import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
-import Button, { ButtonSize } from '../../dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
 import styles from './VerseAdvancedCopy.module.scss';
@@ -322,11 +322,9 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
       />
       {customMessage && <div className={styles.customMessage}>{customMessage}</div>}
       <div className={styles.buttonContainer}>
-        <Button
-          text={isCopied ? 'Copied!' : 'Copy'}
-          onClick={onCopyTextClicked}
-          size={ButtonSize.Large}
-        />
+        <Button variant={ButtonVariant.Ghost} onClick={onCopyTextClicked} size={ButtonSize.Large}>
+          {isCopied ? 'Copied!' : 'Copy'}
+        </Button>
       </div>
     </>
   );

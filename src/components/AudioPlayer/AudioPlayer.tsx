@@ -14,12 +14,12 @@ import {
   setVisibility,
   Visibility,
 } from '../../redux/slices/AudioPlayer/state';
-import PlayIcon from '../../../public/icons/play-circle-outline.svg';
-import PauseIcon from '../../../public/icons/pause-circle-outline.svg';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
+import PauseIcon from '../../../public/icons/pause.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
-import Button, { ButtonSize } from '../dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
@@ -147,24 +147,33 @@ const AudioPlayer = () => {
           {isPlaying ? (
             // Pause
             <Button
-              icon={<PauseIcon />}
-              size={ButtonSize.Medium}
+              size={ButtonSize.Large}
+              shape={ButtonShape.Circle}
+              variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(triggerPauseAudio)}
-            />
+            >
+              <PauseIcon />
+            </Button>
           ) : (
             // Play
             <Button
-              icon={<PlayIcon />}
-              size={ButtonSize.Medium}
+              shape={ButtonShape.Circle}
+              size={ButtonSize.Large}
+              variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(triggerPlayAudio)}
-            />
+            >
+              <PlayIcon />
+            </Button>
           )}
           <div className={styles.seekBackwardsContainer}>
             <Button
-              icon={<MinusTenIcon />}
-              size={ButtonSize.Medium}
+              shape={ButtonShape.Circle}
+              size={ButtonSize.Large}
+              variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(() => triggerSeek(-10))}
-            />
+            >
+              <MinusTenIcon />
+            </Button>
           </div>
         </div>
         <div className={styles.sliderContainer}>
@@ -178,10 +187,14 @@ const AudioPlayer = () => {
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.rightSection}>
           {visibility === Visibility.Expanded && (
-            <Button icon={<UnfoldLessIcon />} size={ButtonSize.Small} />
+            <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+              <UnfoldLessIcon />
+            </Button>
           )}
           {visibility === Visibility.Default && (
-            <Button icon={<UnfoldMoreIcon />} size={ButtonSize.Small} />
+            <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+              <UnfoldMoreIcon />
+            </Button>
           )}
         </div>
       </div>

@@ -7,7 +7,7 @@ import {
 } from 'src/redux/slices/navbar';
 import Link from 'next/link';
 import classNames from 'classnames';
-import Button, { ButtonSize } from '../dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconReader from '../../../public/icons/reader.svg';
@@ -39,15 +39,19 @@ const Navbar = () => {
             <div className={styles.leftCTA}>
               <>
                 <Button
-                  icon={<IconMenu />}
-                  size={ButtonSize.Small}
+                  variant={ButtonVariant.Ghost}
+                  shape={ButtonShape.Circle}
                   onClick={openNavigationDrawer}
-                />
+                >
+                  <IconMenu />
+                </Button>
                 <NavigationDrawer />
               </>
               <Link href="/">
                 <a>
-                  <Button icon={<IconQ />} size={ButtonSize.Small} />
+                  <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+                    <IconQ />
+                  </Button>
                 </a>
               </Link>
               <LanuageSelector />
@@ -55,10 +59,20 @@ const Navbar = () => {
           </div>
           <div className={styles.centerVertically}>
             <div className={styles.rightCTA}>
-              <Button icon={<IconSettings />} size={ButtonSize.Small} />
-              <Button icon={<IconReader />} size={ButtonSize.Small} />
+              <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+                <IconSettings />
+              </Button>
+              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+                <IconReader />
+              </Button>
               <>
-                <Button icon={<IconSearch />} size={ButtonSize.Small} onClick={openSearchDrawer} />
+                <Button
+                  variant={ButtonVariant.Ghost}
+                  onClick={openSearchDrawer}
+                  shape={ButtonShape.Circle}
+                >
+                  <IconSearch />
+                </Button>
                 <SearchDrawer />
               </>
             </div>
