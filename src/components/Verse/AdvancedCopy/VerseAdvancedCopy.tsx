@@ -12,7 +12,7 @@ import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/vers
 import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
-import Button, { ButtonSize } from '../../dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
 import styles from './VerseAdvancedCopy.module.scss';
@@ -25,8 +25,9 @@ const RESET_BUTTON_TIMEOUT_MS = 3 * 1000;
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
  *
- * 1. The range start and end verses are the same which is not a valid range. The user should have selected current verse option instead.
- * 2. The range end verse is before the range start verse e.g. from verse 6 -> verse 4.
+ * 1. One of the two ranges have been cleared and don't have a value.
+ * 2. The range start and end verses are the same which is not a valid range. The user should have selected current verse option instead.
+ * 3. The range end verse is before the range start verse e.g. from verse 6 -> verse 4.
  *
  * @param {string} selectedRangeStartVerseKey
  * @param {string} selectedRangeEndVerseKey
@@ -36,6 +37,10 @@ const validateRangeSelection = (
   selectedRangeStartVerseKey: string,
   selectedRangeEndVerseKey: string,
 ): string | null => {
+  // if one of them is empty.
+  if (!selectedRangeStartVerseKey || !selectedRangeEndVerseKey) {
+    return 'Range start and end must have a value.';
+  }
   // if both keys are the same.
   if (selectedRangeStartVerseKey === selectedRangeEndVerseKey) {
     return 'Range start and end should be different.';
@@ -267,13 +272,13 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           },
         ]}
       />
-      {rangeStartVerse && (
+      {rangeStartVerse !== null && (
         <VersesRangeSelector
           isVisible={showRangeOfVerses}
           dropdownItems={rangeVersesItems}
           rangeStartVerse={rangeStartVerse}
           rangeEndVerse={rangeEndVerse}
-          onSelect={onRangeBoundariesChange}
+          onChange={onRangeBoundariesChange}
         />
       )}
       <p className={styles.label}>What do you want to copy?</p>
@@ -317,11 +322,9 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
       />
       {customMessage && <div className={styles.customMessage}>{customMessage}</div>}
       <div className={styles.buttonContainer}>
-        <Button
-          text={isCopied ? 'Copied!' : 'Copy'}
-          onClick={onCopyTextClicked}
-          size={ButtonSize.Large}
-        />
+        <Button variant={ButtonVariant.Ghost} onClick={onCopyTextClicked} size={ButtonSize.Large}>
+          {isCopied ? 'Copied!' : 'Copy'}
+        </Button>
       </div>
     </>
   );

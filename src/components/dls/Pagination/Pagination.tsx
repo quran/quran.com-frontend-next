@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import range from 'lodash/range';
 import classNames from 'classnames';
-import Button, { ButtonSize } from '../Button/Button';
+import Button, { ButtonVariant } from '../Button/Button';
 import NextIcon from '../../../../public/icons/caret-forward.svg';
 import PreviousIcon from '../../../../public/icons/caret-back.svg';
 import styles from './Pagination.module.scss';
@@ -87,12 +87,9 @@ const Pagination: React.FC<Props> = ({
   return (
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
-        <Button
-          disabled={currentPage === 1}
-          size={ButtonSize.Small}
-          icon={<PreviousIcon />}
-          onClick={onPrevious}
-        />
+        <Button variant={ButtonVariant.Ghost} disabled={currentPage === 1} onClick={onPrevious}>
+          <PreviousIcon />
+        </Button>
       </div>
       {paginationRange.map((pageNumber) => {
         if (pageNumber === DOTS) {
@@ -107,20 +104,22 @@ const Pagination: React.FC<Props> = ({
             key={pageNumber}
           >
             <Button
-              size={ButtonSize.Small}
-              text={pageNumber.toString()}
+              variant={ButtonVariant.Ghost}
               onClick={() => onPageChange(pageNumber as number)}
-            />
+            >
+              {pageNumber.toString()}
+            </Button>
           </div>
         );
       })}
       <div className={styles.buttonContainer}>
         <Button
+          variant={ButtonVariant.Ghost}
           disabled={currentPage === paginationRange[paginationRange.length - 1]}
-          size={ButtonSize.Small}
-          icon={<NextIcon />}
           onClick={onNext}
-        />
+        >
+          <NextIcon />
+        </Button>
       </div>
       {showSummary && (
         <p>

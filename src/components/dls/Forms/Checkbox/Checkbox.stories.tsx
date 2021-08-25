@@ -2,7 +2,7 @@ import React from 'react';
 import Checkbox from './Checkbox';
 
 export default {
-  title: 'dls|Checkbox',
+  title: 'dls/Checkbox',
   component: Checkbox,
   argTypes: {
     id: {

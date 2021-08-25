@@ -1,6 +1,6 @@
-import React, { RefObject, ChangeEvent, memo } from 'react';
+import React, { RefObject, ChangeEvent, memo, ReactNode } from 'react';
 import classNames from 'classnames';
-import styles from './SearchDropdownItem.module.scss';
+import styles from './ComboboxItem.module.scss';
 
 export interface DropdownItem {
   id: string;
@@ -9,6 +9,8 @@ export interface DropdownItem {
   label: string;
   checked?: boolean;
   disabled?: boolean;
+  prefix?: ReactNode;
+  suffix?: string;
 }
 
 interface Props {
@@ -19,10 +21,10 @@ interface Props {
   item?: DropdownItem;
   onItemSelected?: (event: ChangeEvent<HTMLInputElement>) => void;
   isNotFound?: boolean;
-  noResultText?: string;
+  emptyMessage?: string;
 }
 
-const SearchDropdownItem: React.FC<Props> = ({
+const ComboboxItem: React.FC<Props> = ({
   checked,
   disabled,
   itemId,
@@ -30,11 +32,11 @@ const SearchDropdownItem: React.FC<Props> = ({
   item,
   onItemSelected,
   isNotFound = false,
-  noResultText,
+  emptyMessage,
 }) => {
   if (isNotFound) {
     return (
-      <div className={classNames(styles.itemContainer, styles.disabledItem)}>{noResultText}</div>
+      <div className={classNames(styles.itemContainer, styles.disabledItem)}>{emptyMessage}</div>
     );
   }
   return (
@@ -43,7 +45,6 @@ const SearchDropdownItem: React.FC<Props> = ({
         ref={checked ? selectedItemRef : null}
         className={classNames(
           styles.itemContainer,
-          { [styles.checkedItemContainer]: checked },
           { [styles.disabledItem]: disabled },
           { [styles.enabledItem]: !disabled },
         )}
@@ -56,13 +57,20 @@ const SearchDropdownItem: React.FC<Props> = ({
           disabled={disabled}
           checked={checked}
           onChange={onItemSelected}
+          data-item-label={item.label}
         />
-        <label htmlFor={itemId} className={classNames({ [styles.itemLabel]: !disabled })}>
-          {item.label}
+        <label
+          htmlFor={itemId}
+          className={classNames(styles.labelContainer, { [styles.itemLabel]: !disabled })}
+        >
+          <div className={classNames(styles.prefixContainer, { [styles.checkedItem]: checked })}>
+            {item.prefix && <div className={styles.prefix}>{item.prefix}</div>} {item.label}
+          </div>
+          {item.suffix && <div className={styles.suffixContainer}>{item.suffix}</div>}
         </label>
       </div>
     </label>
   );
 };
 
-export default memo(SearchDropdownItem);
+export default memo(ComboboxItem);
