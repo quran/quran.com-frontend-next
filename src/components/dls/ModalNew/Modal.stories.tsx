@@ -8,8 +8,9 @@ export default {
 export const Default = () => (
   <Modal trigger={<Modal.Trigger>test</Modal.Trigger>}>
     <Modal.Body>
-      <p>test</p>
-      <button>aa</button>
+      <Modal.Title>MODAL</Modal.Title>
+      <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      <p>Some content contained within this modal</p>
     </Modal.Body>
   </Modal>
 );
