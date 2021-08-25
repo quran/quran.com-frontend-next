@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Modal, { ModalSize } from './Modal';
 
 export default {
-  title: 'dls|Modals',
+  title: 'dls/Modals',
   component: Modal,
   argTypes: {
     visible: {
