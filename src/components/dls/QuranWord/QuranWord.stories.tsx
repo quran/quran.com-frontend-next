@@ -5,7 +5,7 @@ import QuranWord from './QuranWord';
 import { mockWord } from '../../../../tests/mocks/words';
 
 export default {
-  title: 'dls|QuranWord',
+  title: 'dls/QuranWord',
 };
 
 export const withUthmaniText = () => <QuranWord word={mockWord()} font={QuranFont.Uthmani} />;

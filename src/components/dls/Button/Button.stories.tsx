@@ -3,7 +3,7 @@ import Button, { ButtonSize } from './Button';
 import IconLogo from '../../../../public/icons/Logo.svg';
 
 export default {
-  title: 'dls|Buttons',
+  title: 'dls/Buttons',
   component: Button,
   argTypes: {
     size: {
