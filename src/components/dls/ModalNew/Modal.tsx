@@ -1,20 +1,30 @@
-import * as Dialog from '@radix-ui/react-dialog';
+import React from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import styles from './Modal.module.scss';
 
-interface ModalProps {
-  title: string;
-}
-
-const Modal: React.FC<ModalProps> = () => (
-  <Dialog.Root>
-    <Dialog.Trigger>Test</Dialog.Trigger>
-    <Dialog.Overlay className={styles.overlay}>test</Dialog.Overlay>
-    <Dialog.Content className={styles.content}>
-      <Dialog.Title>test</Dialog.Title>
-      <Dialog.Description>Test</Dialog.Description>
-      <Dialog.Close>yep</Dialog.Close>
-    </Dialog.Content>
-  </Dialog.Root>
+const Root = ({ children }) => (
+  <DialogPrimitive.Root>
+    <DialogPrimitive.Overlay className={styles.overlay} />
+    {children}
+  </DialogPrimitive.Root>
 );
 
-export default Modal;
+export const Modal = Root;
+export const { Trigger } = DialogPrimitive;
+export const Content = React.forwardRef<HTMLDivElement, any>(
+  ({ children, ...props }, forwardedRef) => (
+    <DialogPrimitive.Content {...props} ref={forwardedRef} className={styles.content}>
+      {children}
+      <DialogPrimitive.Close>X</DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  ),
+);
+export const Title = ({ children }) => (
+  <DialogPrimitive.Title className={styles.title}>{children}</DialogPrimitive.Title>
+);
+export const Subtitle = ({ children }) => (
+  <DialogPrimitive.Description className={styles.subtitle}>{children}</DialogPrimitive.Description>
+);
+export const Action = ({ children, onClick }) => (
+  <DialogPrimitive.Close onClick={onClick}>{children}</DialogPrimitive.Close>
+);
