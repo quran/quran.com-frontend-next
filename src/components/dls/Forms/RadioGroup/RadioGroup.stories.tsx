@@ -3,7 +3,7 @@ import React from 'react';
 import RadioGroup, { RadioGroupOrientation } from './RadioGroup';
 
 export default {
-  title: 'dls|RadioGroup',
+  title: 'dls/RadioGroup',
   component: RadioGroup,
   argTypes: {
     items: {

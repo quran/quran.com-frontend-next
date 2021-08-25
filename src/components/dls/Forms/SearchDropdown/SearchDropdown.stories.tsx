@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SearchDropdown, { SearchDropdownSize } from './SearchDropdown';
 
 export default {
-  title: 'dls|SearchDropdown',
+  title: 'dls/SearchDropdown',
   component: SearchDropdown,
   argTypes: {
     selectorText: {
