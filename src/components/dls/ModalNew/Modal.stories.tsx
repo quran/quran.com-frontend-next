@@ -9,9 +9,11 @@ export default {
 export const Default = () => (
   <Modal trigger={<Modal.Trigger>This is a regular button component</Modal.Trigger>}>
     <Modal.Body>
-      <Modal.Title>MODAL</Modal.Title>
-      <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
-      <p>Some content contained within this modal</p>
+      <Modal.Header>
+        <Modal.Title>MODAL</Modal.Title>
+        <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+        <p>Some content contained within this modal</p>
+      </Modal.Header>
     </Modal.Body>
   </Modal>
 );
@@ -25,8 +27,10 @@ export const WithGhostButtonTrigger = () => (
     }
   >
     <Modal.Body>
-      <Modal.Title>MODAL</Modal.Title>
-      <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      <Modal.Header>
+        <Modal.Title>MODAL</Modal.Title>
+        <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      </Modal.Header>
       <p>Some content contained within this modal</p>
     </Modal.Body>
   </Modal>
@@ -55,7 +59,7 @@ export const WithActionCallback = () => (
         <Modal.Title>MODAL</Modal.Title>
         <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
       </Modal.Header>
-      <p>Some content contained within this modal</p>
+      <p>Click one of the action, you should see an alert</p>
     </Modal.Body>
     <Modal.Actions>
       <Modal.Action onClick={() => alert('cancel clicked')}>Cancel</Modal.Action>
