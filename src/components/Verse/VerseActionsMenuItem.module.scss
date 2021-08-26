@@ -12,11 +12,12 @@
     width: var(--spacing-medium);
     height: var(--spacing-medium);
     path {
-      fill: var(--color-background-default);
+      fill: var(--color-background-inverse);
     }
   }
 }
 .title {
+  color: var(--color-text-default);
   margin-left: var(--spacing-medium);
   font-size: var(--font-size-normal);
   vertical-align: text-top;

@@ -13,7 +13,7 @@
 .content {
   border-radius: var(--border-radius-default);
   padding: var(--spacing-xsmall);
-  background-color: var(--color-background-inverse);
+  background-color: var(--color-background-default);
   box-shadow: var(--shadow-regular);
   &:focus {
     box-shadow: 0 0 0 2px var(--color-secondary-medium);
