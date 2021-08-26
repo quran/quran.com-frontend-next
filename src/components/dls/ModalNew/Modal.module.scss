@@ -66,7 +66,7 @@ $mobileBottom: -15%;
 }
 
 .overlay {
-  background-color: rgba(#000, 0.25);
+  background-color: var(--color-background-backdrop);
   position: fixed;
   inset: 0;
 }
