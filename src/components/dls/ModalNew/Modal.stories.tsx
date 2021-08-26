@@ -1,4 +1,4 @@
-/* eslint-disable react/button-has-type */
+import { ButtonVariant, ButtonType } from '../Button/Button';
 import Modal from './Modal';
 
 export default {
@@ -6,7 +6,23 @@ export default {
 };
 
 export const Default = () => (
-  <Modal trigger={<Modal.Trigger>test</Modal.Trigger>}>
+  <Modal trigger={<Modal.Trigger>This is a regular button component</Modal.Trigger>}>
+    <Modal.Body>
+      <Modal.Title>MODAL</Modal.Title>
+      <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      <p>Some content contained within this modal</p>
+    </Modal.Body>
+  </Modal>
+);
+
+export const WithGhostButtonTrigger = () => (
+  <Modal
+    trigger={
+      <Modal.Trigger variant={ButtonVariant.Ghost} type={ButtonType.Success}>
+        I am a ghost button with type success
+      </Modal.Trigger>
+    }
+  >
     <Modal.Body>
       <Modal.Title>MODAL</Modal.Title>
       <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
@@ -16,7 +32,7 @@ export const Default = () => (
 );
 
 export const WithAction = () => (
-  <Modal trigger={<Modal.Trigger>test</Modal.Trigger>}>
+  <Modal trigger={<Modal.Trigger>With Action</Modal.Trigger>}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>

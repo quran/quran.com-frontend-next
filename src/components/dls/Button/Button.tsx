@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import { MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 import styles from './Button.module.scss';
 import Spinner, { SpinnerSize } from '../Spinner/Spinner';
 
@@ -29,7 +29,7 @@ export enum ButtonVariant {
   Ghost = 'ghost',
 }
 
-export type ButtonNewProps = {
+export type ButtonProps = {
   size?: ButtonSize;
   shape?: ButtonShape;
   prefix?: React.ReactNode;
@@ -55,7 +55,7 @@ const Button = ({
   prefix,
   suffix,
   variant,
-}: ButtonNewProps) => {
+}: ButtonProps) => {
   const classes = classNames(styles.base, {
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',

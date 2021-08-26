@@ -1,6 +1,7 @@
 import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import styles from './Modal.module.scss';
+import Button, { ButtonProps } from '../Button/Button';
 
 const Modal = ({ children, trigger }) => (
   <DialogPrimitive.Root>
@@ -36,7 +37,13 @@ const Action = ({ children, onClick }: ActionProps) => (
   </DialogPrimitive.Close>
 );
 
-Modal.Trigger = DialogPrimitive.Trigger;
+const Trigger = ({ children, ...props }: ButtonProps) => (
+  <DialogPrimitive.Trigger {...props} as={Button}>
+    {children}
+  </DialogPrimitive.Trigger>
+);
+
+Modal.Trigger = Trigger; // This is an alias for a button. it supports all button props
 Modal.Body = Body;
 Modal.Header = Header;
 Modal.Title = Title;
