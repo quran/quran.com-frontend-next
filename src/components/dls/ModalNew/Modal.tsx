@@ -17,6 +17,7 @@ const Content = React.forwardRef<HTMLDivElement, any>(({ children, ...props }, f
 ));
 
 const Body = ({ children }) => <div className={styles.body}>{children}</div>;
+const Header = ({ children }) => <div className={styles.header}>{children}</div>;
 const Title = ({ children }) => (
   <DialogPrimitive.Title className={styles.title}>{children}</DialogPrimitive.Title>
 );
@@ -37,6 +38,7 @@ const Action = ({ children, onClick }: ActionProps) => (
 
 Modal.Trigger = DialogPrimitive.Trigger;
 Modal.Body = Body;
+Modal.Header = Header;
 Modal.Title = Title;
 Modal.Subtitle = Subtitle;
 Modal.Actions = Actions;

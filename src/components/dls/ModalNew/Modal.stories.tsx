@@ -18,8 +18,10 @@ export const Default = () => (
 export const WithAction = () => (
   <Modal trigger={<Modal.Trigger>test</Modal.Trigger>}>
     <Modal.Body>
-      <Modal.Title>MODAL</Modal.Title>
-      <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      <Modal.Header>
+        <Modal.Title>MODAL</Modal.Title>
+        <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      </Modal.Header>
       <p>Some content contained within this modal</p>
     </Modal.Body>
     <Modal.Actions>
