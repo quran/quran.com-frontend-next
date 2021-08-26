@@ -35,7 +35,7 @@ const Subtitle = ({ children }) => (
   <DialogPrimitive.Description className={styles.subtitle}>{children}</DialogPrimitive.Description>
 );
 
-const Footer = ({ children }) => <footer className={styles.footer}>{children}</footer>;
+const Footer = ({ children }) => <div className={styles.footer}>{children}</div>;
 type ActionProps = {
   children: React.ReactNode;
   onClick?: () => void;
