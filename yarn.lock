@@ -2298,6 +2298,29 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-compose-refs" "0.0.5"
 
+"@radix-ui/react-tooltip@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-tooltip/-/react-tooltip-0.0.21.tgz#86160645cf0441fa7f465c8aaa265887cc3ff9b4"
+  integrity sha512-+QLMXclfX0XM3inY5LEAvmKsomQ+S0cqzo1v/oS8CiIcawg01RDLV9mzjDYLnpE4eKokn30d+gk4r1YAtWIbZA==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "0.0.5"
+    "@radix-ui/react-compose-refs" "0.0.5"
+    "@radix-ui/react-context" "0.0.5"
+    "@radix-ui/react-id" "0.0.6"
+    "@radix-ui/react-polymorphic" "0.0.13"
+    "@radix-ui/react-popper" "0.0.18"
+    "@radix-ui/react-portal" "0.0.15"
+    "@radix-ui/react-presence" "0.0.15"
+    "@radix-ui/react-primitive" "0.0.15"
+    "@radix-ui/react-slot" "0.0.12"
+    "@radix-ui/react-use-controllable-state" "0.0.6"
+    "@radix-ui/react-use-escape-keydown" "0.0.6"
+    "@radix-ui/react-use-layout-effect" "0.0.5"
+    "@radix-ui/react-use-previous" "0.0.5"
+    "@radix-ui/react-use-rect" "0.0.7"
+    "@radix-ui/react-visually-hidden" "0.0.15"
+
 "@radix-ui/react-use-body-pointer-events@0.0.7":
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-use-body-pointer-events/-/react-use-body-pointer-events-0.0.7.tgz#e4249690ca0db85c969400e867476206feda4d1e"
@@ -2358,7 +2381,7 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@radix-ui/react-visually-hidden@^0.0.15":
+"@radix-ui/react-visually-hidden@0.0.15", "@radix-ui/react-visually-hidden@^0.0.15":
   version "0.0.15"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-visually-hidden/-/react-visually-hidden-0.0.15.tgz#7bd18af3fb5da1349f9b04006d22c3d6e9ce0453"
   integrity sha512-8J13Nzu9MfT2z+mDTGRfBukPi5L9LXLV7w1HvNZPVqxGLK8p7/CoXnt8XdS1HKSFm6akZmWJXMZVNVBUsONOcA==

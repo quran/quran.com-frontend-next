@@ -23,7 +23,7 @@ interface Props {
   isModal?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
-  avoidCollisions?: true;
+  avoidCollisions?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -46,6 +46,7 @@ const Popover: React.FC<Props> = ({
         {trigger}
       </RadixPopover.Trigger>
       <RadixPopover.Content
+        portalled={false}
         sideOffset={2}
         side={contentSide}
         align={contentAlign}
