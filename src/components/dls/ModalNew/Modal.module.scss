@@ -81,9 +81,13 @@
   flex: 1;
   border: none;
   border-top: 1px solid var(--color-borders-hairline);
+  background-color: inherit;
   padding-top: 10px;
   padding-bottom: 10px;
   overflow: hidden;
+}
+.action:not(:only-child):not(:last-child) {
+  border-right: 1px solid var(--color-borders-hairline);
 }
 .header {
   display: flex;

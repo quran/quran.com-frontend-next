@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { ButtonVariant, ButtonType } from '../Button/Button';
 import Modal from './Modal';
 
@@ -43,6 +44,22 @@ export const WithAction = () => (
     <Modal.Actions>
       <Modal.Action>Cancel</Modal.Action>
       <Modal.Action>Submit</Modal.Action>
+    </Modal.Actions>
+  </Modal>
+);
+
+export const WithActionCallback = () => (
+  <Modal trigger={<Modal.Trigger>With Action</Modal.Trigger>}>
+    <Modal.Body>
+      <Modal.Header>
+        <Modal.Title>MODAL</Modal.Title>
+        <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      </Modal.Header>
+      <p>Some content contained within this modal</p>
+    </Modal.Body>
+    <Modal.Actions>
+      <Modal.Action onClick={() => alert('cancel clicked')}>Cancel</Modal.Action>
+      <Modal.Action onClick={() => alert('Submit clicked')}>Submit</Modal.Action>
     </Modal.Actions>
   </Modal>
 );
