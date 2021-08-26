@@ -11,7 +11,7 @@
 */
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com;
+  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://vitals.vercel-insights.com;
   style-src 'self' 'unsafe-inline';
   img-src * data:;
   media-src 'self' *.quranicaudio.com *.qurancdn.com https://qurancdn.com;
