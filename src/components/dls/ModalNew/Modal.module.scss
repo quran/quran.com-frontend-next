@@ -1,6 +1,14 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
 
+$animationDuration: 0.35s;
+$animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
+$desktopWidth: 90vw;
+$desktopMaxWidth: 450px;
+$mobileWidth: 100vw;
+$maxHeight: 85vw;
+$mobileBottom: -15%;
+
 @include utility.keyframes(fadeIn) {
   from {
     opacity: 0;
@@ -26,10 +34,10 @@
 }
 
 .overlay[data-state="open"] {
-  animation: fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn $animationDuration $animationEasing;
 }
 .overlay[data-state="closed"] {
-  animation: fadeOut 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeOut $animationDuration $animationEasing;
 }
 
 @include utility.keyframes(desktopContentIn) {
@@ -76,19 +84,19 @@
   overflow: hidden;
   box-shadow: var(--shadow-large);
   position: fixed;
-  bottom: -14.5%;
+  bottom: $mobileBottom;
   left: 50%;
-  max-height: 85vh;
-  width: 100vw;
+  max-height: $maxHeight;
+  width: $mobileWidth;
   transform: translate(-50%, -50%);
 
   &:focus {
     outline: none;
   }
 
-  @include breakpoints.tablet {
-    width: 90vw;
-    max-width: 450px;
+  @include breakpoints.desktop {
+    width: $desktopWidth;
+    max-width: $desktopMaxWidth;
     bottom: inherit;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -96,21 +104,21 @@
 }
 
 .content[data-state="open"] {
-  animation: mobileContentIn 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: mobileContentIn $animationDuration $animationEasing,
+    fadeIn $animationDuration $animationEasing;
 
   @include breakpoints.tablet {
-    animation: desktopContentIn 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: desktopContentIn $animationDuration $animationEasing,
+      fadeIn $animationDuration $animationEasing;
   }
 }
 
 .content[data-state="closed"] {
-  animation: mobileContentOut 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: mobileContentOut $animationDuration $animationEasing,
+    fadeIn $animationDuration $animationEasing;
   @include breakpoints.tablet {
-    animation: desktopContentOut 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-      fadeOut 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: desktopContentOut $animationDuration $animationEasing,
+      fadeOut $animationDuration $animationEasing;
   }
 }
 
