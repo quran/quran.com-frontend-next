@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Link from 'next/link';
-import { MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
 import styles from './Button.module.scss';
 import Spinner, { SpinnerSize } from '../Spinner/Spinner';
 
@@ -29,7 +29,7 @@ export enum ButtonVariant {
   Ghost = 'ghost',
 }
 
-type ButtonNewProps = {
+export type ButtonProps = {
   size?: ButtonSize;
   shape?: ButtonShape;
   prefix?: React.ReactNode;
@@ -42,7 +42,7 @@ type ButtonNewProps = {
   onClick?: MouseEventHandler;
 };
 
-const Button: React.FC<ButtonNewProps> = ({
+const Button: React.FC<ButtonProps> = ({
   href,
   onClick,
   children,
