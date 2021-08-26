@@ -80,7 +80,7 @@ $mobileBottom: -15%;
 
 .content {
   background-color: white;
-  border-radius: 6px;
+  border-radius: var(--border-radius-default);
   overflow: hidden;
   box-shadow: var(--shadow-large);
   position: fixed;
