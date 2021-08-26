@@ -1,0 +1,21 @@
+.container {
+  margin: var(--spacing-micro) 0;
+}
+
+.trigger {
+  all: unset;
+  &:focus {
+    box-shadow: 0 0 0 2px var(--color-secondary-medium);
+    border-radius: var(--border-radius-circle);
+  }
+}
+
+.content {
+  border-radius: var(--border-radius-default);
+  padding: var(--spacing-xsmall);
+  background-color: var(--color-background-inverse);
+  box-shadow: var(--shadow-regular);
+  &:focus {
+    box-shadow: 0 0 0 2px var(--color-secondary-medium);
+  }
+}

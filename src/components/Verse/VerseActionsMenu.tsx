@@ -86,31 +86,29 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
 
   const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
   return (
-    <>
-      <div className={styles.container}>
-        <VerseActionsMenuItem
-          title={isCopied ? 'Copied!' : 'Copy'}
-          icon={<CopyIcon />}
-          onClick={onCopyClicked}
-        />
-        <VerseActionsMenuItem
-          title="Advanced Copy"
-          icon={<AdvancedCopyIcon />}
-          onClick={onAdvancedCopyClicked}
-        />
-        <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
-        <VerseActionsMenuItem
-          title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
-          icon={<ShareIcon />}
-          onClick={onShareClicked}
-        />
-        <VerseActionsMenuItem
-          title={isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
-          icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
-          onClick={onToggleBookmarkClicked}
-        />
-      </div>
-    </>
+    <div className={styles.container}>
+      <VerseActionsMenuItem
+        title={isCopied ? 'Copied!' : 'Copy'}
+        icon={<CopyIcon />}
+        onClick={onCopyClicked}
+      />
+      <VerseActionsMenuItem
+        title="Advanced Copy"
+        icon={<AdvancedCopyIcon />}
+        onClick={onAdvancedCopyClicked}
+      />
+      <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
+      <VerseActionsMenuItem
+        title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
+        icon={<ShareIcon />}
+        onClick={onShareClicked}
+      />
+      <VerseActionsMenuItem
+        title={isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
+        icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
+        onClick={onToggleBookmarkClicked}
+      />
+    </div>
   );
 };
 
