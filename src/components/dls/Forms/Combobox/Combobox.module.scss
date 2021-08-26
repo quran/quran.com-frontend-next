@@ -1,3 +1,5 @@
+$webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+
 .label {
   padding: var(--spacing-micro) 0;
 }
@@ -54,7 +56,7 @@
   &::-webkit-scrollbar-thumb {
     border-radius: var(--border-radius-default);
     background-color: var(--color-background-backdrop);
-    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+    box-shadow: $webkit-thumb-shadow;
   }
 }
 
@@ -132,7 +134,7 @@
 .comboboxBodyContainer {
   position: absolute;
   border-radius: var(--border-radius-default);
-  box-shadow: var(--shadow-regular);
+  box-shadow: var(--shadow-large);
   width: 100%;
   z-index: var(--z-index-dropdown);
   transition: var(--transition-fast);

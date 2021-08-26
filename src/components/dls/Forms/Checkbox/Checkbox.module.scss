@@ -21,12 +21,6 @@
   }
 }
 
-.checkbox[data-focus-visible-added] {
-  &:focus {
-    box-shadow: 0 0 0 2px var(--color-secondary-medium);
-  }
-}
-
 .checkbox[data-state="checked"],
 .checkbox[data-state="indeterminate"] {
   border: 1px solid var(--color-borders-hairline);

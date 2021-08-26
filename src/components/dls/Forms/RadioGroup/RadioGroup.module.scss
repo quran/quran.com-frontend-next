@@ -57,11 +57,6 @@
 .radioItem[data-state="checked"][data-disabled] {
   border: 1px solid var(--color-secondary-medium);
 }
-.radioItem[data-focus-visible-added] {
-  &:focus {
-    box-shadow: 0 0 0 2px var(--color-secondary-medium);
-  }
-}
 
 .label {
   font-size: var(--font-size-normal);
