@@ -26,7 +26,7 @@ const Subtitle = ({ children }) => (
 
 const Actions = ({ children }) => <div className={styles.actionsContainer}>{children}</div>;
 type ActionProps = {
-  children: React.Node;
+  children: React.ReactNode;
   onClick?: () => void;
 };
 const Action = ({ children, onClick }: ActionProps) => (
