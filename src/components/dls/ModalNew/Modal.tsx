@@ -25,8 +25,14 @@ const Subtitle = ({ children }) => (
 );
 
 const Actions = ({ children }) => <div className={styles.actionsContainer}>{children}</div>;
-const Action = ({ children }) => (
-  <DialogPrimitive.Close className={styles.action}>{children}</DialogPrimitive.Close>
+type ActionProps = {
+  children: React.Node;
+  onClick?: () => void;
+};
+const Action = ({ children, onClick }: ActionProps) => (
+  <DialogPrimitive.Close className={styles.action} onClick={onClick}>
+    {children}
+  </DialogPrimitive.Close>
 );
 
 Modal.Trigger = DialogPrimitive.Trigger;
