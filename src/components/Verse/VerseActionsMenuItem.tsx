@@ -1,4 +1,3 @@
-import IconContainer, { IconColor, IconSize } from 'src/components/dls/IconContainer/IconContainer';
 import styles from './VerseActionsMenuItem.module.scss';
 
 interface Props {
@@ -15,7 +14,7 @@ const VerseActionsMenuItem: React.FC<Props> = ({ title, icon, onClick }) => (
     className={styles.container}
     onClick={onClick}
   >
-    <IconContainer icon={icon} size={IconSize.Xsmall} color={IconColor.primary} />
+    {icon}
     <div className={styles.title}>{title}</div>
   </div>
 );

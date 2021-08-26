@@ -1,16 +1,23 @@
 .container {
-  padding-left: var(--spacing-xxsmall);
-  padding-right: var(--spacing-xxsmall);
   cursor: pointer;
   display: flex;
   flex-direction: row;
-  padding-top: var(--spacing-xsmall);
-  padding-bottom: var(--spacing-xsmall);
+  padding: var(--spacing-xxsmall);
   &:hover {
-    background: var(--color-background-faded-grey-scale);
+    border-radius: var(--border-radius-default);
+    background: var(--color-background-alternative);
+  }
+  svg {
+    min-width: 10%;
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+    path {
+      fill: var(--color-background-inverse);
+    }
   }
 }
 .title {
+  color: var(--color-text-default);
   margin-left: var(--spacing-medium);
   font-size: var(--font-size-normal);
   vertical-align: text-top;

@@ -2,12 +2,12 @@ import { useState } from 'react';
 import Verse from 'types/Verse';
 import { useSelector } from 'react-redux';
 import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import Dropdown from '../dls/Dropdown/Dropdown';
+import Popover from '../dls/Popover';
 import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
 import VerseActionsMenu from './VerseActionsMenu';
 import VerseActionModal, { VerseActionModalType } from './VerseActionModal';
-import styles from './VerseActions.module.scss';
 import PlayVerseAudioButton from './PlayVerseAudioButton';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
 interface Props {
   verse: Verse;
@@ -19,15 +19,15 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
 
   return (
     <>
-      <Dropdown
-        overlay={
-          <VerseActionsMenu verse={verse} setActiveVerseActionModal={setActiveVerseActionModal} />
+      <Popover
+        trigger={
+          <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} size={ButtonSize.Medium}>
+            <OverflowMenu />
+          </Button>
         }
       >
-        <span className={styles.container}>
-          <OverflowMenu />
-        </span>
-      </Dropdown>
+        <VerseActionsMenu verse={verse} setActiveVerseActionModal={setActiveVerseActionModal} />
+      </Popover>
       <VerseActionModal
         activeVerseActionModal={activeVerseActionModal}
         verse={verse}
