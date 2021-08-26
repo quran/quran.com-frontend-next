@@ -125,6 +125,12 @@
 .action:last-child {
   color: var(--color-text-default);
 }
+.action[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background-color: var(--color-background-neutral-grey);
+  color: var(--color-text-faded);
+}
 
 .header {
   display: flex;

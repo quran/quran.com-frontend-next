@@ -30,9 +30,10 @@ const Actions = ({ children }) => <div className={styles.actionsContainer}>{chil
 type ActionProps = {
   children: React.ReactNode;
   onClick?: () => void;
+  disabled?: boolean;
 };
-const Action = ({ children, onClick }: ActionProps) => (
-  <DialogPrimitive.Close className={styles.action} onClick={onClick}>
+const Action = ({ children, onClick, disabled }: ActionProps) => (
+  <DialogPrimitive.Close className={styles.action} onClick={onClick} disabled={disabled}>
     {children}
   </DialogPrimitive.Close>
 );

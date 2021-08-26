@@ -63,3 +63,19 @@ export const WithActionCallback = () => (
     </Modal.Actions>
   </Modal>
 );
+
+export const WithDisabledAction = () => (
+  <Modal trigger={<Modal.Trigger>With Action</Modal.Trigger>}>
+    <Modal.Body>
+      <Modal.Header>
+        <Modal.Title>MODAL</Modal.Title>
+        <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      </Modal.Header>
+      <p>Some content contained within this modal</p>
+    </Modal.Body>
+    <Modal.Actions>
+      <Modal.Action>Cancel</Modal.Action>
+      <Modal.Action disabled>Submit</Modal.Action>
+    </Modal.Actions>
+  </Modal>
+);
