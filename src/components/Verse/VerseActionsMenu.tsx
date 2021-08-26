@@ -18,8 +18,6 @@ import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import { VerseActionModalType } from './VerseActionModal';
 import styles from './VerseActionsMenu.module.scss';
-import Modal from '../dls/ModalNew/Modal';
-import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 
 interface Props {
   verse: Verse;
@@ -100,11 +98,6 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
           icon={<AdvancedCopyIcon />}
           onClick={onAdvancedCopyClicked}
         />
-        <Modal trigger={<Modal.Trigger>Test</Modal.Trigger>}>
-          <Modal.Body>
-            <VerseAdvancedCopy verse={verse} />
-          </Modal.Body>
-        </Modal>
         <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
         <VerseActionsMenuItem
           title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
