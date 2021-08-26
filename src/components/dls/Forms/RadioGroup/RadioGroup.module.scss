@@ -59,7 +59,7 @@
 }
 .radioItem[data-focus-visible-added] {
   &:focus {
-    box-shadow: 0 0 0 2px var(--color-secondary-medium);
+    box-shadow: var(--shadow-small);
   }
 }
 

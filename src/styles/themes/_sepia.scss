@@ -49,7 +49,11 @@
 
   --color-borders-hairline: rgb(235, 238, 240);
 
-  --shadow-light: "";
-  --shadow-regular: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  --shadow-heavy: "";
+  --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-large: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-xlarge: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-jumbo: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
 }
