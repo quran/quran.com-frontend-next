@@ -81,7 +81,7 @@ $mobileBottom: -15%;
   background-color: white;
   border-radius: var(--border-radius-default);
   overflow: hidden;
-  box-shadow: var(--shadow-large);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
   position: fixed;
   bottom: $mobileBottom;
   left: 50%;
