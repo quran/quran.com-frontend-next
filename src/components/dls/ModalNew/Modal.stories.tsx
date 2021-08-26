@@ -82,7 +82,7 @@ export const WithDisabledAction = () => (
       <p>Some content contained within this modal</p>
     </Modal.Body>
     <Modal.Footer>
-      <Modal.Action>Cancel</Modal.Action>
+      <Modal.CloseAction>Cancel</Modal.CloseAction>
       <Modal.Action disabled>Submit</Modal.Action>
     </Modal.Footer>
   </Modal>
