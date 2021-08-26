@@ -80,7 +80,7 @@ $maxHeight: 85vw;
   background-color: white;
   border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-jumbo);
   position: fixed;
   bottom: 0%;
   max-height: $maxHeight;
