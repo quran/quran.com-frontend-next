@@ -45,10 +45,10 @@ export const WithAction = () => (
       </Modal.Header>
       <p>Some content contained within this modal</p>
     </Modal.Body>
-    <Modal.Actions>
+    <Modal.Footer>
       <Modal.Action>Cancel</Modal.Action>
       <Modal.Action>Submit</Modal.Action>
-    </Modal.Actions>
+    </Modal.Footer>
   </Modal>
 );
 
@@ -61,10 +61,10 @@ export const WithActionCallback = () => (
       </Modal.Header>
       <p>Click one of the action, you should see an alert</p>
     </Modal.Body>
-    <Modal.Actions>
+    <Modal.Footer>
       <Modal.Action onClick={() => alert('cancel clicked')}>Cancel</Modal.Action>
       <Modal.Action onClick={() => alert('Submit clicked')}>Submit</Modal.Action>
-    </Modal.Actions>
+    </Modal.Footer>
   </Modal>
 );
 
@@ -77,9 +77,9 @@ export const WithDisabledAction = () => (
       </Modal.Header>
       <p>Some content contained within this modal</p>
     </Modal.Body>
-    <Modal.Actions>
+    <Modal.Footer>
       <Modal.Action>Cancel</Modal.Action>
       <Modal.Action disabled>Submit</Modal.Action>
-    </Modal.Actions>
+    </Modal.Footer>
   </Modal>
 );

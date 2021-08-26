@@ -26,7 +26,7 @@ const Subtitle = ({ children }) => (
   <DialogPrimitive.Description className={styles.subtitle}>{children}</DialogPrimitive.Description>
 );
 
-const Actions = ({ children }) => <footer className={styles.actionsContainer}>{children}</footer>;
+const Footer = ({ children }) => <footer className={styles.footer}>{children}</footer>;
 type ActionProps = {
   children: React.ReactNode;
   onClick?: () => void;
@@ -49,7 +49,7 @@ Modal.Body = Body;
 Modal.Header = Header;
 Modal.Title = Title;
 Modal.Subtitle = Subtitle;
-Modal.Actions = Actions;
+Modal.Footer = Footer;
 Modal.Action = Action;
 
 export default Modal;
