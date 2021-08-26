@@ -40,10 +40,9 @@ export type ButtonProps = {
   href?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler;
-  children: React.ReactNode;
 };
 
-const Button = ({
+const Button: React.FC<ButtonProps> = ({
   href,
   onClick,
   children,
@@ -55,7 +54,7 @@ const Button = ({
   prefix,
   suffix,
   variant,
-}: ButtonProps) => {
+}) => {
   const classes = classNames(styles.base, {
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',
