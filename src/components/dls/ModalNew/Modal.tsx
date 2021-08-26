@@ -8,8 +8,8 @@ type ModalProps = {
   open?: boolean;
   onClickOutside?: () => void;
 };
-const Modal = ({ children, trigger, open: active, onClickOutside }: ModalProps) => (
-  <DialogPrimitive.Root open={active}>
+const Modal = ({ children, trigger, open, onClickOutside }: ModalProps) => (
+  <DialogPrimitive.Root open={open}>
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger && (
       <DialogPrimitive.Trigger as="div" className={styles.trigger}>
