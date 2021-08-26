@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -29,7 +31,7 @@
   animation: fadeOut 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes contentIn {
+@keyframes desktopContentIn {
   0% {
     opacity: 0;
     transform: translate(-50%, -70%);
@@ -40,14 +42,30 @@
   }
 }
 
-@keyframes contentOut {
+@keyframes desktopContentOut {
   0% {
-    opacity: 1;
     transform: translate(-50%, -50%);
   }
   100% {
-    opacity: 0;
     transform: translate(-50%, -70%);
+  }
+}
+
+@keyframes mobileContentIn {
+  0% {
+    transform: translate(-50%, 50%);
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes mobileContentOut {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(-50%, 50%);
   }
 }
 
@@ -57,29 +75,42 @@
   overflow: hidden;
   box-shadow: var(--shadow-large);
   position: fixed;
-  top: 50%;
+  bottom: -14.5%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90vw;
-  max-width: 450px;
   max-height: 85vh;
-
-  @media (prefers-reduced-motion: no-preference) {
-    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: transform;
-  }
+  width: 100vw;
+  transform: translate(-50%, -50%);
 
   &:focus {
     outline: none;
   }
+
+  @include breakpoints.tablet {
+    width: 90vw;
+    max-width: 450px;
+    bottom: inherit;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .content[data-state="open"] {
-  animation: contentIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: mobileContentIn 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @include breakpoints.tablet {
+    animation: desktopContentIn 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 .content[data-state="closed"] {
-  animation: contentOut 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: mobileContentOut 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  @include breakpoints.tablet {
+    animation: desktopContentOut 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      fadeOut 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
 .body {
