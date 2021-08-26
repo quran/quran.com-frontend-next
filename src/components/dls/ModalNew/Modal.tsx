@@ -40,7 +40,6 @@ type ActionProps = {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
-  closeModal?: boolean;
 };
 
 const Action = ({ children, onClick, disabled }: ActionProps) => (
