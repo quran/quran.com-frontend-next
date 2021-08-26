@@ -62,9 +62,6 @@ const Navbar = () => {
               <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
                 <IconSettings />
               </Button>
-              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
-                <IconReader />
-              </Button>
               <>
                 <Button
                   variant={ButtonVariant.Ghost}
