@@ -8,7 +8,7 @@
 .content {
   border-radius: var(--border-radius-default);
   padding: var(--spacing-xxsmall);
-  color: var(--color-text-default);
+  color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
   text-align: center;
   max-width: calc(8 * var(--spacing-mega));
@@ -18,7 +18,7 @@
 }
 
 .noInverse {
-  color: var(--color-text-inverse);
+  color: var(--color-text-default);
   background-color: var(--color-background-default);
   > span {
     fill: var(--color-background-default);
