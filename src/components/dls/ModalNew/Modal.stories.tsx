@@ -7,7 +7,7 @@ export default {
 };
 
 export const Default = () => (
-  <Modal trigger={<Modal.Trigger>This is a regular button component</Modal.Trigger>}>
+  <Modal trigger={<Button>This is a regular button component</Button>}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -21,9 +21,9 @@ export const Default = () => (
 export const WithGhostButtonTrigger = () => (
   <Modal
     trigger={
-      <Modal.Trigger variant={ButtonVariant.Ghost} type={ButtonType.Success}>
+      <Button variant={ButtonVariant.Ghost} type={ButtonType.Success}>
         I am a ghost button with type success
-      </Modal.Trigger>
+      </Button>
     }
   >
     <Modal.Body>
@@ -37,7 +37,7 @@ export const WithGhostButtonTrigger = () => (
 );
 
 export const WithAction = () => (
-  <Modal trigger={<Modal.Trigger>With Action</Modal.Trigger>}>
+  <Modal trigger={<Button>With Action</Button>}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -53,7 +53,7 @@ export const WithAction = () => (
 );
 
 export const WithActionCallback = () => (
-  <Modal trigger={<Modal.Trigger>With Action</Modal.Trigger>}>
+  <Modal trigger={<Button>With Action</Button>}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -69,7 +69,7 @@ export const WithActionCallback = () => (
 );
 
 export const WithDisabledAction = () => (
-  <Modal trigger={<Modal.Trigger>With Action</Modal.Trigger>}>
+  <Modal trigger={<Button>With Action</Button>}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
