@@ -52,7 +52,7 @@
 }
 
 .body {
-  padding: 25px;
+  padding: var(--spacing-mega);
 }
 
 .title {
@@ -65,11 +65,11 @@
   text-align: center;
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-xlarge);
 }
 
 .description {
   margin: 10px 0 20px;
-  // color: ${mauve.mauve11};
   font-size: 15px;
   line-height: 1.5;
 }
@@ -92,4 +92,6 @@
 .header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-large);
 }
