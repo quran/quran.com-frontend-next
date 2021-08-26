@@ -79,7 +79,7 @@ $mobileBottom: -15%;
 
 .content {
   background-color: white;
-  border-radius: var(--border-radius-default);
+  border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
   position: fixed;
@@ -92,6 +92,7 @@ $mobileBottom: -15%;
     outline: none;
   }
   @include breakpoints.desktop {
+    border-radius: var(--border-radius-default);
     width: $desktopWidth;
     max-width: $desktopMaxWidth;
     bottom: inherit;
