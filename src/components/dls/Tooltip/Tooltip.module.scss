@@ -1,0 +1,53 @@
+.trigger {
+  all: unset;
+  &:focus {
+    box-shadow: var(--shadow-small);
+  }
+}
+
+.content {
+  border-radius: var(--border-radius-default);
+  padding: var(--spacing-xxsmall);
+  color: var(--color-text-inverse);
+  background-color: var(--color-background-inverse);
+  text-align: center;
+  max-width: calc(8 * var(--spacing-mega));
+  > span {
+    fill: var(--color-background-inverse);
+  }
+}
+
+.noInverse {
+  color: var(--color-text-default);
+  background-color: var(--color-background-default);
+  > span {
+    fill: var(--color-background-default);
+  }
+}
+.noCenter {
+  text-align: initial;
+}
+.secondary {
+  background-color: var(--color-secondary-medium);
+  > span {
+    fill: var(--color-secondary-medium);
+  }
+}
+.success {
+  background-color: var(--color-success-medium);
+  > span {
+    fill: var(--color-success-medium);
+  }
+}
+.warning {
+  background-color: var(--color-warning-medium);
+  > span {
+    fill: var(--color-warning-medium);
+  }
+}
+.error {
+  background-color: var(--color-alert-medium);
+  > span {
+    fill: var(--color-alert-medium);
+  }
+}

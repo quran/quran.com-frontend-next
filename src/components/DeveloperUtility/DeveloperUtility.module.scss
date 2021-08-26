@@ -10,7 +10,7 @@
 
   z-index: var(--z-index-max);
   border-radius: 100%;
-  box-shadow: 0px 12px 60px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-small);
   text-align: center;
   cursor: pointer;
   padding: unset;
@@ -40,7 +40,7 @@
   border-radius: var(--spacing-xsmall);
   color: white;
   padding: var(--spacing-micro) var(--spacing-small);
-  box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-normal);
 }
 
 .wrench {
