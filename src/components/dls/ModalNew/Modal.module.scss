@@ -63,6 +63,7 @@
 }
 .subtitle {
   text-align: center;
+  color: var(--color-text-faded);
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-xlarge);
@@ -81,14 +82,19 @@
   flex: 1;
   border: none;
   border-top: 1px solid var(--color-borders-hairline);
+  font-size: var(--font-size-normal);
   background-color: inherit;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: var(--spacing-large);
+  color: var(--color-text-faded);
   overflow: hidden;
 }
 .action:not(:only-child):not(:last-child) {
   border-right: 1px solid var(--color-borders-hairline);
 }
+.action:last-child {
+  color: var(--color-text-default);
+}
+
 .header {
   display: flex;
   flex-direction: column;
