@@ -7,7 +7,6 @@ $desktopWidth: 90vw;
 $desktopMaxWidth: calc(28.125 * var(--spacing-medium));
 $mobileWidth: 100vw;
 $maxHeight: 85vw;
-$mobileBottom: -15%;
 
 @include utility.keyframes(fadeIn) {
   from {
@@ -49,19 +48,19 @@ $mobileBottom: -15%;
 
 @include utility.keyframes(mobileContentIn) {
   0% {
-    transform: translate(-50%, 50%);
+    transform: translate(0%, 100%);
   }
   100% {
-    transform: translate(-50%, -50%);
+    transform: translate(0%, 0%);
   }
 }
 
 @include utility.keyframes(mobileContentOut) {
   0% {
-    transform: translate(-50%, -50%);
+    transform: translate(0%, 0%);
   }
   100% {
-    transform: translate(-50%, 50%);
+    transform: translate(0%, 100%);
   }
 }
 
@@ -83,11 +82,9 @@ $mobileBottom: -15%;
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
   position: fixed;
-  bottom: $mobileBottom;
-  left: 50%;
+  bottom: 0%;
   max-height: $maxHeight;
   width: $mobileWidth;
-  transform: translate(-50%, -50%);
   &:focus {
     outline: none;
   }
@@ -96,6 +93,7 @@ $mobileBottom: -15%;
     width: $desktopWidth;
     max-width: $desktopMaxWidth;
     bottom: inherit;
+    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
   }

@@ -60,7 +60,10 @@ export const WithActionCallback = () => (
         <Modal.Title>MODAL</Modal.Title>
         <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
       </Modal.Header>
-      <p>Click submit, you should see an alert</p>
+      <p>
+        Click submit, you should see an alertaaa fafaskfas fkasf kasfaks faskf ajsl fakfaslkf
+        aslfkas jjflafj alsf al l
+      </p>
     </Modal.Body>
     <Modal.Footer>
       <Modal.CloseAction>Cancel</Modal.CloseAction>
