@@ -23,7 +23,7 @@ interface Props {
   isModal?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
-  avoidCollisions?: true;
+  avoidCollisions?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
