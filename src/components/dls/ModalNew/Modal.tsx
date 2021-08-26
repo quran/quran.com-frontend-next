@@ -42,10 +42,16 @@ type ActionProps = {
   disabled?: boolean;
 };
 
-const Action = ({ children, onClick, disabled }: ActionProps) => (
+const CloseAction = ({ children, onClick, disabled }: ActionProps) => (
   <DialogPrimitive.Close className={styles.action} onClick={onClick} disabled={disabled}>
     {children}
   </DialogPrimitive.Close>
+);
+
+const Action = ({ children, onClick, disabled }: ActionProps) => (
+  <button type="button" className={styles.action} onClick={onClick} disabled={disabled}>
+    {children}
+  </button>
 );
 
 Modal.Body = Body;
@@ -54,5 +60,6 @@ Modal.Title = Title;
 Modal.Subtitle = Subtitle;
 Modal.Footer = Footer;
 Modal.Action = Action;
+Modal.CloseAction = CloseAction;
 
 export default Modal;

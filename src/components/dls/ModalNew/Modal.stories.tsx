@@ -47,7 +47,7 @@ export const WithAction = () => (
       <p>Some content contained within this modal</p>
     </Modal.Body>
     <Modal.Footer>
-      <Modal.Action>Cancel</Modal.Action>
+      <Modal.CloseAction>Cancel</Modal.CloseAction>
       <Modal.Action>Submit</Modal.Action>
     </Modal.Footer>
   </Modal>
@@ -60,10 +60,10 @@ export const WithActionCallback = () => (
         <Modal.Title>MODAL</Modal.Title>
         <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
       </Modal.Header>
-      <p>Click one of the action, you should see an alert</p>
+      <p>Click submit, you should see an alert</p>
     </Modal.Body>
     <Modal.Footer>
-      <Modal.Action onClick={() => alert('cancel clicked')}>Cancel</Modal.Action>
+      <Modal.CloseAction>Cancel</Modal.CloseAction>
       <Modal.Action onClick={() => alert('Submit clicked')}>Submit</Modal.Action>
     </Modal.Footer>
   </Modal>
