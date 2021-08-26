@@ -12,8 +12,8 @@ export const Default = () => (
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
         <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
-        <p>Some content contained within this modal</p>
       </Modal.Header>
+      <p>Some content contained within this modal</p>
     </Modal.Body>
   </Modal>
 );
