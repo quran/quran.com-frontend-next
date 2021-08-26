@@ -1,6 +1,7 @@
 @use "src/styles/breakpoints";
+@use "src/styles/utility";
 
-@keyframes fadeIn {
+@include utility.keyframes(fadeIn) {
   from {
     opacity: 0;
   }
@@ -9,7 +10,7 @@
   }
 }
 
-@keyframes fadeOut {
+@include utility.keyframes(fadeOut) {
   from {
     opacity: 1;
   }
@@ -31,7 +32,7 @@
   animation: fadeOut 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes desktopContentIn {
+@include utility.keyframes(desktopContentIn) {
   0% {
     opacity: 0;
     transform: translate(-50%, -70%);
@@ -42,7 +43,7 @@
   }
 }
 
-@keyframes desktopContentOut {
+@include utility.keyframes(desktopContentOut) {
   0% {
     transform: translate(-50%, -50%);
   }
@@ -51,7 +52,7 @@
   }
 }
 
-@keyframes mobileContentIn {
+@include utility.keyframes(mobileContentIn) {
   0% {
     transform: translate(-50%, 50%);
   }
@@ -60,7 +61,7 @@
   }
 }
 
-@keyframes mobileContentOut {
+@include utility.keyframes(mobileContentOut) {
   0% {
     transform: translate(-50%, -50%);
   }
@@ -131,11 +132,6 @@
   line-height: var(--line-height-xlarge);
 }
 
-.description {
-  margin: 10px 0 20px;
-  font-size: 15px;
-  line-height: 1.5;
-}
 .actionsContainer {
   display: flex;
   justify-content: stretch;
