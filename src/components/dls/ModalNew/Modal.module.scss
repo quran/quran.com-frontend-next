@@ -147,6 +147,12 @@ $mobileBottom: -15%;
   padding: var(--spacing-large);
   color: var(--color-text-faded);
   overflow: hidden;
+  transition: background-color $animationDuration $animationEasing;
+  &:hover {
+    opacity: var(--opacity-75);
+    background-color: var(--color-background-alternative);
+    color: var(--color-text-default);
+  }
 }
 .action:not(:only-child):not(:last-child) {
   border-right: 1px solid var(--color-borders-hairline);
@@ -157,7 +163,7 @@ $mobileBottom: -15%;
 .action[disabled] {
   opacity: var(--opacity-75);
   cursor: not-allowed;
-  background-color: var(--color-background-neutral-grey);
+  background-color: var(--color-background-alternative);
   color: var(--color-text-faded);
 }
 
