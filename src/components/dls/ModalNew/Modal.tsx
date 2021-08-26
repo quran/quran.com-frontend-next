@@ -5,10 +5,10 @@ import styles from './Modal.module.scss';
 type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
-  active?: boolean;
+  open?: boolean;
   onClickOutside?: () => void;
 };
-const Modal = ({ children, trigger, active, onClickOutside }: ModalProps) => (
+const Modal = ({ children, trigger, open: active, onClickOutside }: ModalProps) => (
   <DialogPrimitive.Root open={active}>
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger && (
@@ -54,18 +54,5 @@ Modal.Title = Title;
 Modal.Subtitle = Subtitle;
 Modal.Footer = Footer;
 Modal.Action = Action;
-
-// optional hook, if we want the modal to be controlled
-export const useModal = (defaultState = false): [boolean, () => void, () => void] => {
-  const [active, setActive] = React.useState<boolean>(defaultState);
-  const close = () => {
-    setActive(false);
-  };
-  const open = () => {
-    setActive(true);
-  };
-
-  return [active as boolean, open, close];
-};
 
 export default Modal;

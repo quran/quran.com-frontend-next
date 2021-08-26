@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
+import { useState } from 'react';
 import Button, { ButtonVariant, ButtonType } from '../Button/Button';
-import Modal, { useModal } from './Modal';
+import Modal from './Modal';
 
 export default {
   title: 'dls/NewModal',
@@ -85,12 +86,12 @@ export const WithDisabledAction = () => (
 );
 
 export const WithControlledComponent = () => {
-  const [active, open, close] = useModal();
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      <Button onClick={open}>a trigger button</Button>
-      <Modal active={active} onClickOutside={close}>
+      <Button onClick={() => setOpen(true)}>a trigger button</Button>
+      <Modal open={open} onClickOutside={() => setOpen(false)}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>MODAL</Modal.Title>
