@@ -1,19 +1,35 @@
-@keyframes overlayShow {
-  0% {
+@keyframes fadeIn {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .overlay {
-  background-color: rgba($color: #000000, $alpha: 0.1);
+  background-color: rgba(#000, 0.25);
   position: fixed;
   inset: 0;
-  @media (prefers-reduced-motion: no-preference) {
-    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
+}
+
+.overlay[data-state="open"],
+.content[data-state="open"] {
+  animation: fadeIn 300ms ease-out;
+}
+
+.overlay[data-state="closed"],
+.content[data-state="closed"] {
+  animation: fadeOut 300ms ease-in;
 }
 
 @keyframes contentShow {
@@ -31,8 +47,7 @@
   background-color: white;
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  box-shadow: var(--shadow-large);
   position: fixed;
   top: 50%;
   left: 50%;

@@ -11,11 +11,11 @@ const Modal = ({ children, trigger }) => (
   </DialogPrimitive.Root>
 );
 
-const Content = React.forwardRef<HTMLDivElement, any>(({ children, ...props }, forwardedRef) => (
-  <DialogPrimitive.Content {...props} ref={forwardedRef} className={styles.content}>
+const Content = ({ children, ...props }) => (
+  <DialogPrimitive.Content {...props} className={styles.content}>
     {children}
   </DialogPrimitive.Content>
-));
+);
 
 const Body = ({ children }) => <div className={styles.body}>{children}</div>;
 const Header = ({ children }) => <div className={styles.header}>{children}</div>;
