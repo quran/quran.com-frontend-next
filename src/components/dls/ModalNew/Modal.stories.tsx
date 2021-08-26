@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
-import { ButtonVariant, ButtonType } from '../Button/Button';
-import Modal from './Modal';
+import Button, { ButtonVariant, ButtonType } from '../Button/Button';
+import Modal, { useModal } from './Modal';
 
 export default {
   title: 'dls/NewModal',
@@ -83,3 +83,26 @@ export const WithDisabledAction = () => (
     </Modal.Footer>
   </Modal>
 );
+
+export const WithControlledComponent = () => {
+  const [active, open, close] = useModal();
+
+  return (
+    <>
+      <Button onClick={open}>a trigger button</Button>
+      <Modal active={active} onClickOutside={close}>
+        <Modal.Body>
+          <Modal.Header>
+            <Modal.Title>MODAL</Modal.Title>
+            <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+          </Modal.Header>
+          <p>Some content contained within this modal</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Modal.Action>Cancel</Modal.Action>
+          <Modal.Action disabled>Submit</Modal.Action>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};

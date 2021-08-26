@@ -3,11 +3,17 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import styles from './Modal.module.scss';
 import Button, { ButtonProps } from '../Button/Button';
 
-const Modal = ({ children, trigger }) => (
-  <DialogPrimitive.Root>
+type ModalProps = {
+  children: React.ReactNode;
+  trigger?: React.ReactNode;
+  active?: boolean;
+  onClickOutside?: () => void;
+};
+const Modal = ({ children, trigger, active, onClickOutside }: ModalProps) => (
+  <DialogPrimitive.Root open={active}>
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger}
-    <Content>{children}</Content>
+    <Content onInteractOutside={onClickOutside}>{children}</Content>
   </DialogPrimitive.Root>
 );
 
@@ -31,7 +37,9 @@ type ActionProps = {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  closeModal?: boolean;
 };
+
 const Action = ({ children, onClick, disabled }: ActionProps) => (
   <DialogPrimitive.Close className={styles.action} onClick={onClick} disabled={disabled}>
     {children}
@@ -51,5 +59,18 @@ Modal.Title = Title;
 Modal.Subtitle = Subtitle;
 Modal.Footer = Footer;
 Modal.Action = Action;
+
+// optional hook, if we want the modal to be controlled
+export const useModal = (defaultState = false): [boolean, () => void, () => void] => {
+  const [active, setActive] = React.useState<boolean>(defaultState);
+  const close = () => {
+    setActive(false);
+  };
+  const open = () => {
+    setActive(true);
+  };
+
+  return [active as boolean, open, close];
+};
 
 export default Modal;
