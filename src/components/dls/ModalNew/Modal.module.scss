@@ -6,7 +6,6 @@ $animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
 $desktopWidth: 90vw;
 $desktopMaxWidth: calc(28.125 * var(--spacing-medium));
 $mobileWidth: 100vw;
-$maxHeight: 85vw;
 
 @include utility.keyframes(fadeIn) {
   from {
@@ -83,7 +82,6 @@ $maxHeight: 85vw;
   box-shadow: var(--shadow-jumbo);
   position: fixed;
   bottom: 0%;
-  max-height: $maxHeight;
   width: $mobileWidth;
   &:focus {
     outline: none;
