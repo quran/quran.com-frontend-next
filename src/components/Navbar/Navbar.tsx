@@ -10,7 +10,6 @@ import classNames from 'classnames';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import LanuageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
-import IconReader from '../../../public/icons/reader.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
 import IconQ from '../../../public/icons/Q.svg';
@@ -61,9 +60,6 @@ const Navbar = () => {
             <div className={styles.rightCTA}>
               <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
                 <IconSettings />
-              </Button>
-              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
-                <IconReader />
               </Button>
               <>
                 <Button
