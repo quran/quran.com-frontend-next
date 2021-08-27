@@ -16,7 +16,7 @@
   overflow-x: hidden;
   overscroll-behavior-y: contain;
 
-  border-right: 1px solid var(--color-borders-hairline);
+  box-shadow: var(--shadow-normal);
 
   left: -100%;
   @include breakpoints.tablet {
