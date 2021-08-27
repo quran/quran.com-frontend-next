@@ -90,12 +90,21 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
       />
 
       <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
-        <Modal.Body>
-          <Modal.Header>
-            <Modal.Title>Advanced Copy</Modal.Title>
-          </Modal.Header>
-          <VerseAdvancedCopy verse={verse} />
-        </Modal.Body>
+        <VerseAdvancedCopy verse={verse}>
+          {({ ayahSelectionComponent, actionText, onCopy }) => (
+            <>
+              <Modal.Body>
+                <Modal.Header>
+                  <Modal.Title>Advanced Copy</Modal.Title>
+                </Modal.Header>
+                {ayahSelectionComponent}
+              </Modal.Body>
+              <Modal.Footer>
+                <Modal.Action onClick={onCopy}>{actionText}</Modal.Action>
+              </Modal.Footer>
+            </>
+          )}
+        </VerseAdvancedCopy>
       </Modal>
 
       <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
@@ -12,13 +12,13 @@ import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/vers
 import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
-import Button, { ButtonSize, ButtonVariant } from '../../dls/Button/Button';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
 import styles from './VerseAdvancedCopy.module.scss';
 
 interface Props {
   verse: Verse;
+  children({ onCopy, actionText, ayahSelectionComponent }): React.ReactElement;
 }
 const RESET_BUTTON_TIMEOUT_MS = 3 * 1000;
 
@@ -60,7 +60,7 @@ const MULTIPLE_VERSES = 'multiple';
 const TRUE_STRING = String(true);
 const FALSE_STRING = String(false);
 
-const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
+const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   const { chapterId } = router.query;
@@ -82,7 +82,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
     Record<number, { shouldBeCopied: boolean; name: string }>
   >({});
   // a custom message that will be shown to the user in the case we have an error or success.
-  const [customMessage, setCustomMessage] = useState(null);
+  const [customMessageComponent, setCustomMessage] = useState(null);
   // whether the selection has been copied successfully to the clipboard or not.
   const [isCopied, setIsCopied] = useState(false);
 
@@ -251,7 +251,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
     }));
   };
 
-  return (
+  const ayahSelectionComponent = (
     <>
       <p className={styles.label}>Select ayah range</p>
       <RadioGroup
@@ -320,14 +320,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse }) => {
           },
         ]}
       />
-      {customMessage && <div className={styles.customMessage}>{customMessage}</div>}
-      <div className={styles.buttonContainer}>
-        <Button variant={ButtonVariant.Ghost} onClick={onCopyTextClicked} size={ButtonSize.Large}>
-          {isCopied ? 'Copied!' : 'Copy'}
-        </Button>
-      </div>
+      {customMessageComponent && (
+        <div className={styles.customMessage}>{customMessageComponent}</div>
+      )}
     </>
   );
+
+  const actionText = isCopied ? 'Copied!' : 'Copy';
+
+  return children({
+    ayahSelectionComponent,
+    actionText,
+    onCopy: onCopyTextClicked,
+  });
 };
 
 export default VerseAdvancedCopy;
