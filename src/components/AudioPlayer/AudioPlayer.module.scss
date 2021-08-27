@@ -8,9 +8,12 @@
   width: 100%;
   bottom: 0;
   text-align: center;
-  background: var(--color-background-alternative);
+  color: var(--color-text-default);
+  background: var(--color-background-default);
   transition: var(--transition-regular);
   z-index: var(--z-index-sticky);
+  box-shadow: var(--shadow-large);
+  border-top: 1px solid var(--color-borders-hairline);
 }
 
 .containerHidden {
