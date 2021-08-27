@@ -1,7 +1,7 @@
 import React from 'react';
 import ChapterBlock from './ChapterBlock';
 import Chapter from '../../../types/Chapter';
-import styles from './ChapterList.module.scss';
+import styles from './ChaptersList.module.scss';
 
 type Props = {
   chapters: Chapter[];
