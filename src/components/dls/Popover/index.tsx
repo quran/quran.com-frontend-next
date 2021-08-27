@@ -46,7 +46,6 @@ const Popover: React.FC<Props> = ({
         {trigger}
       </RadixPopover.Trigger>
       <RadixPopover.Content
-        portalled={false}
         sideOffset={2}
         side={contentSide}
         align={contentAlign}
