@@ -84,7 +84,7 @@ const Button: React.FC<ButtonProps> = ({
 
   // when loading, replace the prefix icon with loading icon
   let prefixFinal;
-  if (loading) prefixFinal = <Spinner size={SpinnerSize[size]} />;
+  if (loading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
   else prefixFinal = prefix;
 
   if (href && !disabled)

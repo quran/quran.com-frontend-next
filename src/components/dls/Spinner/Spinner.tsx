@@ -3,7 +3,7 @@ import styles from './Spinner.module.scss';
 
 export enum SpinnerSize {
   Small = 'small',
-  Normal = 'normal',
+  Medium = 'medium',
   Large = 'Large',
 }
 type SpinnerProps = {
@@ -11,16 +11,22 @@ type SpinnerProps = {
 };
 
 const Spinner = ({ size }: SpinnerProps) => (
-  <svg
+  <div
     className={classNames(styles.spinner, {
       [styles.large]: size === SpinnerSize.Large,
-      [styles.normal]: size === SpinnerSize.Normal,
+      [styles.normal]: size === SpinnerSize.Medium,
       [styles.small]: size === SpinnerSize.Small,
     })}
-    viewBox="0 0 50 50"
   >
-    <circle className={styles.path} cx="25" cy="25" r="20" fill="none" strokeWidth="5" />
-  </svg>
+    <div className={styles.container}>{getSpans()}</div>
+  </div>
 );
+
+const getSpans = () =>
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  [...new Array(12)].map((_, index) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <span className={styles.span} key={`spinner-${index}`} />
+  ));
 
 export default Spinner;
