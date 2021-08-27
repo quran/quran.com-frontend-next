@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .bookmarksContainer {
-  padding-bottom: var(--spacing-large);
+  padding: var(--spacing-large) 0;
 }
 
 .bookmarksHeader {

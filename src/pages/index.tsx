@@ -15,11 +15,13 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.pageContainer}>
-    <Image
-      src={homepageImage}
-      layout="responsive" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
-      placeholder="blur" // to have a blur effect while loading.
-    />
+    <div className={styles.imageContainer}>
+      <Image
+        src={homepageImage}
+        layout="responsive" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
+        placeholder="blur" // to have a blur effect while loading.
+      />
+    </div>
     <div className={styles.chaptersListContainer}>
       <QuickLinks />
       <BookmarkedVersesList />

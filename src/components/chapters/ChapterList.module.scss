@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: var(--spacing-large);
   @include breakpoints.tablet {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

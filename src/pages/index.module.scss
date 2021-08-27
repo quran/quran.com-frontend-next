@@ -1,14 +1,26 @@
 @use "src/styles/breakpoints";
 
+$image-max-width: 100rem;
+$list-max-width: 80rem;
+
 .pageContainer {
   padding: var(--spacing-small);
   padding-top: calc(2 * var(--spacing-mega));
 }
 
-.chaptersListContainer {
-  padding-top: 10px;
+.imageContainer {
   @include breakpoints.tablet {
-    max-width: 65%;
+    width: 90%;
+    max-width: $image-max-width;
+    margin: 0 auto;
+  }
+}
+
+.chaptersListContainer {
+  padding-top: calc(2 * var(--spacing-large));
+  @include breakpoints.tablet {
+    width: 65%;
+    max-width: $list-max-width;
     margin: 0 auto;
   }
 }
