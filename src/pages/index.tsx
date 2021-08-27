@@ -1,8 +1,11 @@
 import React from 'react';
+import Image from 'next/image';
 import { NextPage, GetStaticProps } from 'next';
 import { ChaptersResponse } from 'types/APIResponses';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
-import ChaptersList from '../components/chapters/ChapterList';
+import homepageImage from 'public/images/homepage.png';
+import ChaptersList from '../components/chapters/ChaptersList';
+import QuickLinks from '../components/HomePage/QuickLinks';
 import { getChapters } from '../api';
 import styles from './index.module.scss';
 
@@ -11,11 +14,19 @@ type IndexProps = {
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
-  <div className={styles.container}>
-    <BookmarkedVersesList />
-    <ChaptersList chapters={chapters.slice(0, 38)} />
-    <ChaptersList chapters={chapters.slice(38, 76)} />
-    <ChaptersList chapters={chapters.slice(76, 114)} />
+  <div className={styles.pageContainer}>
+    <div className={styles.imageContainer}>
+      <Image
+        src={homepageImage}
+        layout="responsive" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
+        placeholder="blur" // to have a blur effect while loading.
+      />
+    </div>
+    <div className={styles.chaptersListContainer}>
+      <QuickLinks />
+      <BookmarkedVersesList />
+      <ChaptersList chapters={chapters} />
+    </div>
   </div>
 );
 

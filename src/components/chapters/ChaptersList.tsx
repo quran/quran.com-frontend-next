@@ -1,17 +1,18 @@
 import React from 'react';
 import ChapterBlock from './ChapterBlock';
 import Chapter from '../../../types/Chapter';
+import styles from './ChaptersList.module.scss';
 
 type Props = {
   chapters: Chapter[];
 };
 
 const ChaptersList: React.FC<Props> = ({ chapters }: Props) => (
-  <ul>
+  <div className={styles.container}>
     {chapters.map((chapter) => (
       <ChapterBlock key={chapter.id} chapter={chapter} />
     ))}
-  </ul>
+  </div>
 );
 
 export default ChaptersList;
