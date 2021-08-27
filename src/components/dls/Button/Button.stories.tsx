@@ -1,10 +1,10 @@
 import React from 'react';
-import ButtonNew, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
 import SettingIcon from '../../../../public/icons/settings.svg';
 
 export default {
   title: 'dls/Button',
-  component: ButtonNew,
+  component: Button,
   argTypes: {
     size: {
       defaultValue: ButtonSize.Medium,
@@ -50,7 +50,7 @@ export default {
   },
 };
 
-const Template = (args) => <ButtonNew {...args}>Upload</ButtonNew>;
+const Template = (args) => <Button {...args}>Upload</Button>;
 
 export const DefaultButton = Template.bind({});
 DefaultButton.args = {};
@@ -82,9 +82,9 @@ WithIconSuffix.args = {
 };
 
 const TemplateIcon = (args) => (
-  <ButtonNew {...args}>
+  <Button {...args}>
     <SettingIcon />
-  </ButtonNew>
+  </Button>
 );
 
 export const Icon = TemplateIcon.bind({});
