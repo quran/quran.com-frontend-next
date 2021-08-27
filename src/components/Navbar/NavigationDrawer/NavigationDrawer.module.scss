@@ -16,6 +16,8 @@
   overflow-x: hidden;
   overscroll-behavior-y: contain;
 
+  border-right: 1px solid var(--color-borders-hairline);
+
   left: -100%;
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
