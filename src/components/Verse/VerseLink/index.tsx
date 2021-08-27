@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import React from 'react';
+import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import styles from './VerseLink.module.scss';
 
@@ -10,9 +10,15 @@ interface Props {
 const VerseLink: React.FC<Props> = ({ verseKey }) => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return (
-    <Link as={`/${chapterId}/${verseNumber}`} href="/[chapterId]/[verseId]" passHref>
-      <p className={styles.verseLink}>{verseKey}</p>
-    </Link>
+    <div className={styles.verseLink}>
+      <Button
+        href={`/${chapterId}/${verseNumber}`}
+        variant={ButtonVariant.Shadow}
+        type={ButtonType.Secondary}
+      >
+        {verseKey}
+      </Button>
+    </div>
   );
 };
 

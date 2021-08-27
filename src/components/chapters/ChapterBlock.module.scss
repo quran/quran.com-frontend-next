@@ -1,43 +1,64 @@
+@use "src/styles/breakpoints";
+
 .item {
-  list-style: none;
-  margin-bottom: var(--spacing-large);
+  border: 1px solid var(--color-background-alternative-deep);
+  border-radius: var(--border-radius-default);
+  min-height: calc(4 * var(--spacing-medium));
+  margin-bottom: var(--spacing-small);
   &:hover {
     background: var(--color-background-alternative);
+    box-shadow: var(--shadow-normal);
+    border-color: var(--color-background-inverse);
+  }
+  @include breakpoints.tablet {
+    margin-bottom: 0;
   }
 }
 
 .link {
-  display: block;
-  padding: var(--spacing-xsmall);
   text-decoration: none;
+}
+
+.sectionContainer {
+  height: calc(2 * var(--spacing-large));
 }
 
 .container {
   display: flex;
-  width: 100%;
-  align-items: center;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--spacing-medium);
+}
+
+.leftContainer {
+  width: 70%;
+  display: flex;
 }
 
 .number {
+  min-width: calc(2 * var(--spacing-large));
   margin: 0;
   color: var(--color-primary-medium);
 }
 
-.nameContainer {
+.detailsContainer {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  padding-left: var(--spacing-small);
+  justify-content: space-between;
 }
 
 .nameArabic {
   font-size: var(--font-size-large);
-  margin-bottom: var(--spacing-medium);
   color: var(--color-text-default);
 }
 
 .nameTranslated {
-  text-transform: uppercase;
+  font-size: var(--font-size-small);
+  color: var(--color-primary-medium);
+}
+
+.numberOfVerses {
+  text-align: right;
   font-size: var(--font-size-small);
   color: var(--color-primary-medium);
 }

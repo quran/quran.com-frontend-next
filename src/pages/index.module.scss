@@ -1,4 +1,14 @@
-.container {
+@use "src/styles/breakpoints";
+
+.pageContainer {
+  padding: var(--spacing-small);
   padding-top: calc(2 * var(--spacing-mega));
-  background: var(--color-background-default);
+}
+
+.chaptersListContainer {
+  padding-top: 10px;
+  @include breakpoints.tablet {
+    max-width: 65%;
+    margin: 0 auto;
+  }
 }

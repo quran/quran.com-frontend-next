@@ -1,16 +1,16 @@
 @use "src/styles/breakpoints";
 
-.bookmarksContainer {
+.container {
   padding-bottom: var(--spacing-large);
 }
 
-.bookmarksHeader {
+.header {
   margin-bottom: var(--spacing-xsmall);
 }
 
-.verseLinksContainer {
+.quickLinksContainer {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-small);
   @include breakpoints.tablet {
     display: flex;

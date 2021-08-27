@@ -1,0 +1,17 @@
+@use "src/styles/breakpoints";
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include breakpoints.tablet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-small);
+  }
+  @include breakpoints.desktop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-small);
+  }
+}

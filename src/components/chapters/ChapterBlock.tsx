@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Chapter from 'types/Chapter';
+import classNames from 'classnames';
 import ChapterIconContainer from './ChapterIcon/ChapterIconContainer';
 import styles from './ChapterBlock.module.scss';
 
@@ -9,20 +10,25 @@ type Props = {
 };
 
 const ChapterBlock: React.FC<Props> = ({ chapter }: Props) => (
-  <li key={chapter.id} className={styles.item}>
+  <div key={chapter.id} className={styles.item}>
     <Link as={`/${chapter.id}`} href="/[chapterId]" passHref>
       <a className={styles.link}>
         <div className={styles.container}>
-          <p className={styles.number}>{chapter.id}</p>
-          <div className={styles.nameContainer}>
-            <div className={styles.nameArabic}>{chapter.nameSimple}</div>
-            <div className={styles.nameTranslated}>{chapter.translatedName.name}</div>
+          <div className={classNames(styles.leftContainer, styles.sectionContainer)}>
+            <p className={styles.number}>{chapter.id}</p>
+            <div className={styles.detailsContainer}>
+              <div className={styles.nameArabic}>{chapter.nameSimple}</div>
+              <div className={styles.nameTranslated}>{chapter.translatedName.name}</div>
+            </div>
           </div>
-          <ChapterIconContainer chapterId={String(chapter.id)} />
+          <div className={classNames(styles.detailsContainer, styles.sectionContainer)}>
+            <ChapterIconContainer chapterId={String(chapter.id)} />
+            <p className={styles.numberOfVerses}>{chapter.versesCount} ayahs</p>
+          </div>
         </div>
       </a>
     </Link>
-  </li>
+  </div>
 );
 
 export default ChapterBlock;

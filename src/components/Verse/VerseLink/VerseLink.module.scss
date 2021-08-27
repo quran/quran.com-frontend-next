@@ -1,21 +1,5 @@
 @use "src/styles/breakpoints";
 
 .verseLink {
-  cursor: pointer;
-  text-align: center;
   width: fit-content;
-  font-size: var(--font-size-small);
-  min-width: var(--spacing-mega);
-  @include breakpoints.tablet {
-    font-size: var(--font-size-small);
-    min-width: calc(1.25 * var(--spacing-mega));
-  }
-  color: var(--color-text-default);
-  padding: var(--spacing-xxsmall);
-  border: 1px solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-default);
-  margin-right: var(--spacing-xsmall);
-  &:hover {
-    background: var(--color-primary-medium);
-  }
 }
