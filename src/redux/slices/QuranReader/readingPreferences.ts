@@ -13,7 +13,7 @@ export type ReadingPreferences = {
 };
 
 const initialState: ReadingPreferences = {
-  readingPreference: ReadingPreference.Reading,
+  readingPreference: ReadingPreference.Translation,
   showWordByWordTranslation: false,
   selectedWordByWordTranslation: DEFAULT_TRANSLATION,
   showWordByWordTransliteration: false,
