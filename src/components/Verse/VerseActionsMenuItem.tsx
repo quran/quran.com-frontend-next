@@ -3,7 +3,7 @@ import styles from './VerseActionsMenuItem.module.scss';
 interface Props {
   title: string;
   icon: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const VerseActionsMenuItem: React.FC<Props> = ({ title, icon, onClick }) => (

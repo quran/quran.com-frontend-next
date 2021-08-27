@@ -1,4 +1,4 @@
-import { useState, useEffect, SetStateAction, Dispatch } from 'react';
+import { useState, useEffect } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import { getWindowOrigin } from 'src/utils/url';
@@ -16,17 +16,17 @@ import ShareIcon from '../../../public/icons/share.svg';
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
-import { VerseActionModalType } from './VerseActionModal';
 import styles from './VerseActionsMenu.module.scss';
+import Modal from '../dls/ModalNew/Modal';
+import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 
 interface Props {
   verse: Verse;
-  setActiveVerseActionModal: Dispatch<SetStateAction<VerseActionModalType>>;
 }
 
 const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 
-const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal }) => {
+const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const dispatch = useDispatch();
   const { bookmarkedVerses } = useSelector(selectBookmarks) as Bookmarks;
   const [isCopied, setIsCopied] = useState(false);
@@ -60,10 +60,6 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
     });
   };
 
-  const onAdvancedCopyClicked = () => {
-    setActiveVerseActionModal(VerseActionModalType.AdvancedCopy);
-  };
-
   const onTafsirsClicked = () => {
     router.push({
       pathname: '/[chapterId]/[verseId]/tafsirs',
@@ -92,11 +88,16 @@ const VerseActionsMenu: React.FC<Props> = ({ verse, setActiveVerseActionModal })
         icon={<CopyIcon />}
         onClick={onCopyClicked}
       />
-      <VerseActionsMenuItem
-        title="Advanced Copy"
-        icon={<AdvancedCopyIcon />}
-        onClick={onAdvancedCopyClicked}
-      />
+
+      <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
+        <Modal.Body>
+          <Modal.Header>
+            <Modal.Title>Advanced Copy</Modal.Title>
+          </Modal.Header>
+          <VerseAdvancedCopy verse={verse} />
+        </Modal.Body>
+      </Modal>
+
       <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
       <VerseActionsMenuItem
         title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
