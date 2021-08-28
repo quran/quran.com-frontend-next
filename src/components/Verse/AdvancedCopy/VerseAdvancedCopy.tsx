@@ -20,7 +20,7 @@ interface Props {
   verse: Verse;
   children({ onCopy, actionText, ayahSelectionComponent }): React.ReactElement;
 }
-const RESET_BUTTON_TIMEOUT_MS = 3 * 1000;
+const RESET_BUTTON_TIMEOUT_MS = 5 * 1000;
 
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
@@ -326,7 +326,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     </>
   );
 
-  const actionText = isCopied ? 'Copied!' : 'Copy';
+  const actionText = isCopied ? 'Copied to clipboard' : 'Copy';
 
   return children({
     ayahSelectionComponent,
