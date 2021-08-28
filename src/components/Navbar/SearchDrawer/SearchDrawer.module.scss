@@ -14,7 +14,6 @@
   overflow-x: hidden;
   overscroll-behavior-y: contain;
   right: -100%;
-  box-shadow: var(--shadow-normal);
 
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
@@ -23,6 +22,7 @@
 }
 
 .containerOpen {
+  box-shadow: var(--shadow-normal);
   right: 0;
   @include breakpoints.tablet {
     right: 0;
