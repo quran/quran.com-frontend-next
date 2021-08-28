@@ -61,7 +61,6 @@ const Tooltip: React.FC<Props> = ({
       {children}
     </RadixTooltip.Trigger>
     <RadixTooltip.Content
-      portalled={false}
       sideOffset={2}
       side={contentSide}
       align={contentAlign}
