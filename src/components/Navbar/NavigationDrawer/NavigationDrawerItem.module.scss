@@ -18,13 +18,6 @@
 .innerContainer {
   display: flex;
   justify-content: space-between;
-  &:hover {
-    color: var(--color-primary-medium);
-
-    path {
-      fill: var(--color-primary-medium);
-    }
-  }
 }
 
 .titleContainer {
