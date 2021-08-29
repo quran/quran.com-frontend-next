@@ -13,6 +13,7 @@
 .text {
   letter-spacing: 0;
   line-height: normal;
+  padding-bottom: var(--spacing-micro);
   color: var(--color-text-default);
 }
 
@@ -46,9 +47,10 @@
   padding-bottom: var(--spacing-xsmall);
 }
 .bookmarkIconContainer {
-  position: absolute;
-  top: calc(-1 * var(--spacing-micro));
-  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: var(--spacing-medium);
 }
 
 @include utility.generate-font-sizes-translation();
