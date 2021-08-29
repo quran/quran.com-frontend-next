@@ -15,7 +15,7 @@
   box-shadow: var(--shadow-large);
   border-top: 1px solid var(--color-borders-hairline);
 
-  // on mobile, use can click container to expand the audioplayer
+  // on mobile, user can click container to expand the audioplayer
   // but on desktop we don't want that behavior.
   // so we disable the pointer-event -> user can't click the container
   // and we anble the pointer-event on all button inside container
