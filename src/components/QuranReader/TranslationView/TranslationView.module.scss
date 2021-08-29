@@ -31,11 +31,17 @@
 .contentContainer {
   flex: 1;
   padding-top: var(--spacing-mega);
+  position: relative;
 }
 .actionContainer {
   @include breakpoints.tablet {
     padding-right: var(--spacing-medium);
   }
+}
+.bookmarkIconContainer {
+  position: absolute;
+  top: calc(-1 * var(--spacing-micro));
+  right: 0;
 }
 
 @include utility.generate-font-sizes("translation");

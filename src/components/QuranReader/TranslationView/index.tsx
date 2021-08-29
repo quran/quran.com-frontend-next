@@ -5,16 +5,34 @@ import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { useSelector } from 'react-redux';
+import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
+import StarIcon from '../../../../public/icons/star.svg';
 
 type TranslationViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
 };
 
+const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
+  const { bookmarkedVerses } = useSelector(selectBookmarks);
+  const isVerseBookmarked = !!bookmarkedVerses[verseKey];
+
+  if (!isVerseBookmarked) return null;
+
+  return (
+    <div className={styles.bookmarkIconContainer}>
+      <Button size={ButtonSize.Small} variant={ButtonVariant.Ghost}>
+        <StarIcon />
+      </Button>
+    </div>
+  );
+};
 const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => (
   <div className={styles.container}>
     {verses.map((verse) => (
@@ -26,6 +44,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
             <VerseActions verse={verse} />
           </div>
           <div className={styles.contentContainer}>
+            <BookmarkIcon verseKey={verse.verseKey} />
             <VerseText words={verse.words} />
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id}>
