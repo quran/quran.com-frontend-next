@@ -33,7 +33,7 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
   height: var(--spacing-small);
   color: var(--color-background-alternative-deep);
   position: absolute;
-  right: var(--spacing-xxsmall);
+  right: var(--spacing-medium);
   top: 50%;
   transform: translateY(-50%);
   outline: none;
@@ -83,7 +83,7 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
   width: var(--spacing-medium);
   height: var(--spacing-medium);
   position: absolute;
-  right: var(--spacing-xxsmall);
+  right: var(--spacing-medium);
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-background-alternative-deep);
@@ -128,7 +128,7 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 0 var(--spacing-large);
+  padding: 0 var(--spacing-mega);
   color: var(--color-text-default);
 }
 
@@ -182,7 +182,7 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
 }
 
 .selectSearch {
-  left: var(--spacing-xxsmall);
+  left: var(--spacing-medium);
 }
 
 .overflow {
