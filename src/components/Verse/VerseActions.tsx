@@ -16,6 +16,11 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
 
   return (
     <>
+      <PlayVerseAudioButton
+        timestamp={verse.timestamps.timestampFrom}
+        chapterId={Number(verse.chapterId)}
+        reciterId={reciter.id}
+      />
       <Popover
         trigger={
           <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Square} size={ButtonSize.Large}>
@@ -25,11 +30,6 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
       >
         <VerseActionsMenu verse={verse} />
       </Popover>
-      <PlayVerseAudioButton
-        timestamp={verse.timestamps.timestampFrom}
-        chapterId={Number(verse.chapterId)}
-        reciterId={reciter.id}
-      />
     </>
   );
 };
