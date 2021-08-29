@@ -80,7 +80,6 @@ export default {
       description: 'Whether the combobox should support multi-select.',
     },
     tagsLimit: {
-      defaultValue: 3,
       control: { type: 'number' },
       table: {
         category: 'Optional',

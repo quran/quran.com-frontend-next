@@ -62,7 +62,7 @@ const Combobox: React.FC<Props> = ({
   clearable = true,
   isMultiSelect = false,
   emptyMessage = 'No results',
-  tagsLimit = 3,
+  tagsLimit,
   label,
   id,
   size = ComboboxSize.Medium,
@@ -392,7 +392,7 @@ const Combobox: React.FC<Props> = ({
                 }
               }
               // prevent selecting when the tags limit has been reached.
-              const preventSelecting = tags && tags.length >= tagsLimit;
+              const preventSelecting = tagsLimit && tags && tags.length >= tagsLimit;
               const isItemDisabled =
                 disabled === true || item.disabled === true || preventSelecting;
               const itemId = `${id}-${item.id}`;
