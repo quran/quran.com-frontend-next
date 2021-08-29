@@ -108,7 +108,6 @@ const AudioPlayer = () => {
         [styles.containerHidden]: isHidden,
         [styles.containerDefault]: visibility === Visibility.Default,
         [styles.containerExpanded]: visibility === Visibility.Expanded,
-        [styles.containerLoading]: isLoading,
       })}
     >
       <div className={styles.innerContainer}>
@@ -143,6 +142,7 @@ const AudioPlayer = () => {
             <Button
               shape={ButtonShape.Circle}
               size={ButtonSize.Large}
+              disabled={isLoading}
               variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(() => triggerSeek(-10))}
             >

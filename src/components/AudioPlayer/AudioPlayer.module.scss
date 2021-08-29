@@ -28,9 +28,6 @@
 .containerExpanded {
   height: constants.$audio-player-expanded-height;
 }
-.containerLoading {
-  pointer-events: none; // disable the interaction while loading
-}
 
 .innerContainer {
   @include utility.center-horizontally;
