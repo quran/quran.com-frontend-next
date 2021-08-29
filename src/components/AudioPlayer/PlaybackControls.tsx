@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 
 import ForwardIcon from '../../../public/icons/forward_10.svg';
@@ -9,30 +11,37 @@ import { triggerSeek } from './EventTriggers';
 import styles from './PlaybackControls.module.scss';
 import PlayPauseButton from './PlayPauseButton';
 
-const PlaybackControls = () => (
-  <div className={styles.container}>
-    <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} size={ButtonSize.Large}>
-      <RepeatIcon />
-    </Button>
-    <Button
-      variant={ButtonVariant.Ghost}
-      shape={ButtonShape.Circle}
-      size={ButtonSize.Large}
-      onClick={withStopPropagation(() => triggerSeek(-10))}
-    >
-      <ReplayIcon />
-    </Button>
-    <PlayPauseButton />
-    <Button
-      variant={ButtonVariant.Ghost}
-      shape={ButtonShape.Circle}
-      size={ButtonSize.Large}
-      onClick={withStopPropagation(() => triggerSeek(10))}
-    >
-      <ForwardIcon />
-    </Button>
-    <DownloadAudioButton />
-  </div>
-);
+const PlaybackControls = () => {
+  const audioFileStatus = useSelector(selectAudioFileStatus);
+  const isLoading = audioFileStatus === AudioFileStatus.Loading;
+
+  return (
+    <div className={styles.container}>
+      <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} size={ButtonSize.Large}>
+        <RepeatIcon />
+      </Button>
+      <Button
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        size={ButtonSize.Large}
+        disabled={isLoading}
+        onClick={withStopPropagation(() => triggerSeek(-10))}
+      >
+        <ReplayIcon />
+      </Button>
+      <PlayPauseButton />
+      <Button
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        size={ButtonSize.Large}
+        disabled={isLoading}
+        onClick={withStopPropagation(() => triggerSeek(10))}
+      >
+        <ForwardIcon />
+      </Button>
+      <DownloadAudioButton />
+    </div>
+  );
+};
 
 export default PlaybackControls;
