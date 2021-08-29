@@ -67,3 +67,32 @@
     }
   }
 }
+
+@mixin generate-font-sizes-translation() {
+  $font-scale-multiplier: (
+    1: 1,
+    2: 1.2,
+    3: 1.3,
+    4: 1.5,
+    5: 2,
+  );
+  $mobile-font-scale-multiplier: (
+    1: 1,
+    2: 1.2,
+    3: 1.3,
+    4: 1.5,
+    5: 2,
+  );
+  @for $i from 1 through constants.$maximum-font-step {
+    .translation-font-size-#{$i} {
+      font-size: calc(
+        #{map.get($mobile-font-scale-multiplier, $i)} * var(--font-size-normal)
+      );
+      @include breakpoints.tablet {
+        font-size: calc(
+          #{map.get($font-scale-multiplier, $i)} * var(--font-size-normal)
+        );
+      }
+    }
+  }
+}
