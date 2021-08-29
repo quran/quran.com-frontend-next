@@ -1,4 +1,5 @@
 $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+$container-width: calc(8 * var(--spacing-mega));
 
 .label {
   padding: var(--spacing-micro) 0;
@@ -59,7 +60,7 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
   margin-top: var(--spacing-micro);
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-large);
-  width: calc(8 * var(--spacing-mega));
+  width: $container-width;
   z-index: var(--z-index-dropdown);
   transition: var(--transition-fast);
   background-color: var(--color-background-default);
@@ -102,7 +103,7 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
 
 .comboboxContainer {
   max-width: 100%;
-  width: calc(8 * var(--spacing-mega));
+  width: $container-width;
 }
 
 .enabled {
