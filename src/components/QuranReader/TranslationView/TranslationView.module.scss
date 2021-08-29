@@ -27,6 +27,7 @@
 .cellContainer {
   display: flex;
   justify-content: space-between;
+  padding: var(--spacing-medium) 0;
 }
 .contentContainer {
   flex: 1;
@@ -37,6 +38,12 @@
   @include breakpoints.tablet {
     padding-right: var(--spacing-medium);
   }
+}
+.verseContainer {
+  padding-bottom: var(--spacing-medium);
+}
+.translationContainer {
+  padding-bottom: var(--spacing-xsmall);
 }
 .bookmarkIconContainer {
   position: absolute;
