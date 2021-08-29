@@ -18,7 +18,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
     <>
       <Popover
         trigger={
-          <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} size={ButtonSize.Medium}>
+          <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Square} size={ButtonSize.Large}>
             <OverflowMenu />
           </Button>
         }
