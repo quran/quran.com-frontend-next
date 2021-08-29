@@ -199,3 +199,10 @@
     background: inherit;
   }
 }
+
+.base > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
