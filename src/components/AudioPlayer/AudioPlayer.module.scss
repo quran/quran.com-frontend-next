@@ -29,7 +29,6 @@
   height: constants.$audio-player-expanded-height;
 }
 .containerLoading {
-  opacity: var(--opacity-50);
   pointer-events: none; // disable the interaction while loading
 }
 
