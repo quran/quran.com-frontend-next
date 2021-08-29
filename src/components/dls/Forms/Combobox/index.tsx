@@ -29,18 +29,20 @@ export enum ComboboxSize {
   Large = 'large',
 }
 
+type InitialSelectedItems = string[];
 type MultiSelectValue = Record<string, boolean>;
 type Value = string | MultiSelectValue;
+type InitialValue = string | InitialSelectedItems;
 interface Props {
   id: string;
   items: DropdownItem[];
-  onChange?: (selectedName: Value, dropDownIdId: string) => void;
+  onChange?: (selectedValues: InitialValue, dropDownId: string) => void;
   initialInputValue?: string;
   emptyMessage?: string;
   label?: string | ReactNode;
   placeholder?: string;
   size?: ComboboxSize;
-  value?: Value;
+  value?: InitialValue;
   clearable?: boolean;
   isMultiSelect?: boolean;
   tagsLimit?: number;
@@ -70,9 +72,15 @@ const Combobox: React.FC<Props> = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState<string>(initialInputValue || '');
-  const [selectedValue, setSelectedValue] = useState<Value>(
-    () => value || getDefaultValue(isMultiSelect),
-  );
+  const [selectedValue, setSelectedValue] = useState<Value>(() => {
+    if (!value) {
+      return getDefaultValue(isMultiSelect);
+    }
+    if (!isMultiSelect) {
+      return value as string;
+    }
+    return arrayToObject(value as InitialSelectedItems);
+  });
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
@@ -105,7 +113,9 @@ const Combobox: React.FC<Props> = ({
     if (!value) {
       setSelectedValue(getDefaultValue(isMultiSelect));
     } else {
-      setSelectedValue(value);
+      setSelectedValue(
+        isMultiSelect ? arrayToObject(value as InitialSelectedItems) : (value as string),
+      );
     }
   }, [value, isMultiSelect]);
 
@@ -146,9 +156,9 @@ const Combobox: React.FC<Props> = ({
   useEffect(() => {
     if (onChange) {
       // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
-      onChange(selectedValue, id);
+      onChange(isMultiSelect ? Object.keys(selectedValue) : (selectedValue as string), id);
     }
-  }, [id, onChange, selectedValue]);
+  }, [isMultiSelect, id, onChange, selectedValue]);
 
   useEffect(() => {
     // once the dropdown is opened, scroll to the selected item.
@@ -428,5 +438,19 @@ const Combobox: React.FC<Props> = ({
  * @returns {Value}
  */
 const getDefaultValue = (isMultiSelect: boolean): Value => (isMultiSelect ? {} : '');
+
+/**
+ * Convert the initial values array of strings to an object.
+ *
+ * @param {InitialSelectedItems} array
+ * @returns {MultiSelectValue}
+ */
+const arrayToObject = (array: InitialSelectedItems): MultiSelectValue => {
+  const multiSelectValue = {};
+  array.forEach((selectedItem) => {
+    multiSelectValue[selectedItem] = true;
+  });
+  return multiSelectValue;
+};
 
 export default Combobox;

@@ -188,5 +188,5 @@ ComboboxWithPreSelectedItems.args = {
   id: 'multi-select-with-preselected-items',
   items: generateItems(),
   isMultiSelect: true,
-  value: { Item1: true, Item2: true, Item3: true, Item4: true, Item5: true },
+  value: ['Item1', 'Item2', 'Item3', 'Item4'],
 };
