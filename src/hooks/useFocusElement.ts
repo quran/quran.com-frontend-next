@@ -6,7 +6,7 @@ import { useRef, RefObject } from 'react';
  * @param {FocusOptions} options
  * @returns {[() => void, RefObject<T>]}
  */
-export const useScrollToElement = <T extends HTMLElement>(
+export const useFocusElement = <T extends HTMLElement>(
   options?: FocusOptions,
 ): [() => void, RefObject<T>] => {
   const elementRef = useRef<T>(null);
@@ -21,4 +21,4 @@ export const useScrollToElement = <T extends HTMLElement>(
   return [executeFocus, elementRef];
 };
 
-export default useScrollToElement;
+export default useFocusElement;
