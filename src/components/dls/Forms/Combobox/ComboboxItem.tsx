@@ -19,7 +19,7 @@ interface Props {
   itemId?: string;
   selectedItemRef?: RefObject<HTMLDivElement>;
   item?: DropdownItem;
-  onItemSelected?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onItemSelectedChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   isNotFound?: boolean;
   emptyMessage?: string;
 }
@@ -30,7 +30,7 @@ const ComboboxItem: React.FC<Props> = ({
   itemId,
   selectedItemRef,
   item,
-  onItemSelected,
+  onItemSelectedChange,
   isNotFound = false,
   emptyMessage,
 }) => {
@@ -47,23 +47,24 @@ const ComboboxItem: React.FC<Props> = ({
           styles.itemContainer,
           { [styles.disabledItem]: disabled },
           { [styles.enabledItem]: !disabled },
+          { [styles.checkedItem]: checked },
         )}
       >
         <input
-          type="radio"
+          type="checkbox"
           className={styles.input}
           id={itemId}
           name={item.name}
           disabled={disabled}
           checked={checked}
-          onChange={onItemSelected}
+          onChange={onItemSelectedChange}
           data-item-label={item.label}
         />
         <label
           htmlFor={itemId}
           className={classNames(styles.labelContainer, { [styles.itemLabel]: !disabled })}
         >
-          <div className={classNames(styles.prefixContainer, { [styles.checkedItem]: checked })}>
+          <div className={styles.prefixContainer}>
             {item.prefix && <div className={styles.prefix}>{item.prefix}</div>} {item.label}
           </div>
           {item.suffix && <div className={styles.suffixContainer}>{item.suffix}</div>}

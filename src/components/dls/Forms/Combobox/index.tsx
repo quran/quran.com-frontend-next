@@ -10,11 +10,13 @@ import React, {
   RefObject,
   useCallback,
   useRef,
+  useMemo,
 } from 'react';
 import classNames from 'classnames';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useScroll from '../../../../hooks/useScrollToElement';
+import useFocus from '../../../../hooks/useFocusElement';
 import CaretIcon from '../../../../../public/icons/caret-down.svg';
 import IconSearch from '../../../../../public/icons/search.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
@@ -27,17 +29,21 @@ export enum ComboboxSize {
   Large = 'large',
 }
 
+type MultiSelectValue = Record<string, boolean>;
+type Value = string | MultiSelectValue;
 interface Props {
   id: string;
   items: DropdownItem[];
-  onChange?: (selectedName: string, dropDownIdId: string) => void;
+  onChange?: (selectedName: Value, dropDownIdId: string) => void;
   initialInputValue?: string;
   emptyMessage?: string;
   label?: string | ReactNode;
   placeholder?: string;
   size?: ComboboxSize;
-  value?: string;
+  value?: Value;
   clearable?: boolean;
+  isMultiSelect?: boolean;
+  tagsLimit?: number;
   disabled?: boolean;
   hasError?: boolean;
 }
@@ -54,7 +60,9 @@ const Combobox: React.FC<Props> = ({
   initialInputValue,
   disabled = false,
   clearable = true,
+  isMultiSelect = false,
   emptyMessage = 'No results',
+  tagsLimit = 3,
   label,
   id,
   size = ComboboxSize.Medium,
@@ -62,10 +70,13 @@ const Combobox: React.FC<Props> = ({
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState<string>(initialInputValue || '');
-  const [selectedValue, setSelectedValue] = useState(value || '');
+  const [selectedValue, setSelectedValue] = useState<Value>(
+    () => value || getDefaultValue(isMultiSelect),
+  );
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
+  const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const comboBoxRef = useRef(null);
   const closeCombobox = useCallback(() => {
     setIsOpened(false);
@@ -91,13 +102,53 @@ const Combobox: React.FC<Props> = ({
 
   // if there are any changes in the value, we should update the selectedValue.
   useEffect(() => {
-    setSelectedValue(value);
-  }, [value]);
+    if (!value) {
+      setSelectedValue(getDefaultValue(isMultiSelect));
+    } else {
+      setSelectedValue(value);
+    }
+  }, [value, isMultiSelect]);
 
   // if there are any changes in the initialInputValue, we should update the inputValue.
   useEffect(() => {
     setInputValue(initialInputValue);
   }, [initialInputValue]);
+
+  const tags = useMemo(() => {
+    if (!isMultiSelect) {
+      return null;
+    }
+    // get the labels of the selected items by looking inside items array
+    return items
+      .filter((item) => Object.keys(selectedValue as MultiSelectValue).includes(item.name))
+      .map((item) => item.label);
+  }, [isMultiSelect, items, selectedValue]);
+
+  // if it's multiSelect & the inputValue is empty and we have at least 1 tag, then clicking the backspace should remove the last tag.
+  const shouldDeleteLastTag = useKeyPressedDetector(
+    'Backspace',
+    isMultiSelect && !inputValue && !!tags.length,
+  );
+
+  // listener for when the backspace is clicked.
+  useEffect(() => {
+    if (shouldDeleteLastTag) {
+      setSelectedValue((prevSelectedValue: MultiSelectValue) => {
+        const newSelectedValues = { ...prevSelectedValue };
+        const lastTag = Object.keys(newSelectedValues).pop();
+        delete newSelectedValues[lastTag];
+        return newSelectedValues;
+      });
+    }
+  }, [shouldDeleteLastTag]);
+
+  // listen to any change in selectedValue and invoke the callback if it exists.
+  useEffect(() => {
+    if (onChange) {
+      // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
+      onChange(selectedValue, id);
+    }
+  }, [id, onChange, selectedValue]);
 
   useEffect(() => {
     // once the dropdown is opened, scroll to the selected item.
@@ -108,6 +159,10 @@ const Combobox: React.FC<Props> = ({
 
   const onSelectorClicked = () => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
+    // we need to focus on the input field whenever the user clicks anywhere inside the component.
+    if (isMultiSelect) {
+      focusInput();
+    }
   };
 
   /**
@@ -115,19 +170,31 @@ const Combobox: React.FC<Props> = ({
    *
    * @param {ChangeEvent<HTMLInputElement>} event
    */
-  const onItemSelected = useCallback(
+  const onItemSelectedChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const { itemLabel } = event.target.dataset;
       const selectedItemName = event.target.name;
-      setSelectedValue(selectedItemName);
-      if (onChange) {
-        // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
-        onChange(selectedItemName, id);
+      const isUnSelect = !event.currentTarget.checked;
+      if (isMultiSelect) {
+        setSelectedValue((prevSelectedValues: MultiSelectValue) => {
+          const newSelectedValues = { ...prevSelectedValues };
+          if (isUnSelect) {
+            delete newSelectedValues[selectedItemName];
+          } else {
+            newSelectedValues[selectedItemName] = true;
+          }
+          return newSelectedValues;
+        });
+        setInputValue(''); // reset the input value even if it's selecting.
+        setFilteredItems(items); // reset the filtered items.
+      } else {
+        setInputValue(isUnSelect ? '' : itemLabel);
+        const newSelectedValue = isUnSelect ? '' : selectedItemName;
+        setSelectedValue(newSelectedValue);
       }
-      setInputValue(itemLabel);
-      setIsOpened(false);
+      setIsOpened(false); // close the items container
     },
-    [id, onChange],
+    [isMultiSelect, items],
   );
 
   /**
@@ -151,60 +218,139 @@ const Combobox: React.FC<Props> = ({
     setIsOpened(true);
   };
 
+  /**
+   * Handle when the clear button is clicked.
+   * We will reset the input value, the selected value
+   * and the filtered items.
+   *
+   * @param {MouseEvent} event
+   */
   const onClearButtonClicked = (event: MouseEvent) => {
     event.stopPropagation();
     setInputValue('');
-    setSelectedValue('');
-    if (onChange) {
-      onChange('', id);
-    }
+    const defaultSelectedValue = getDefaultValue(isMultiSelect);
+    setSelectedValue(defaultSelectedValue);
     setFilteredItems(items);
   };
+
+  /**
+   * Handle when removing a tag.
+   *
+   * @param {MouseEvent} event
+   * @param {string} tag
+   */
+  const onRemoveTagClicked = (event: MouseEvent, tag: string) => {
+    event.stopPropagation();
+    const toBeRemovedTag = items.find((item) => item.label === tag);
+    setSelectedValue((prevSelectedValues: MultiSelectValue) => {
+      const newSelectedValues = { ...prevSelectedValues };
+      delete newSelectedValues[toBeRemovedTag.name];
+      return newSelectedValues;
+    });
+  };
+
+  const shouldShowCaret =
+    (!isMultiSelect && !inputValue) || (isMultiSelect && !inputValue && !tags.length);
+
+  const shouldShowClear =
+    clearable &&
+    ((!isMultiSelect && !!inputValue) || (isMultiSelect && (!!inputValue || !!tags.length)));
 
   return (
     <>
       {label && <p className={styles.label}>{label}</p>}
       <div
-        role="combobox"
         ref={comboBoxRef}
-        aria-haspopup="listbox"
-        aria-expanded={isOpened}
-        aria-owns={id}
-        className={classNames(styles.comboboxContainer, {
-          [styles.disabledContainer]: disabled,
-          [styles.smallComboboxContainer]: size === ComboboxSize.Small,
-          [styles.mediumComboboxContainer]: size === ComboboxSize.Medium,
-          [styles.largeComboboxContainer]: size === ComboboxSize.Large,
-        })}
+        className={classNames(styles.comboboxContainer, { [styles.enabled]: !disabled })}
       >
         <div
           onClick={onSelectorClicked}
-          className={classNames(styles.container, {
-            [styles.disabled]: disabled,
+          className={classNames(styles.select, {
+            [styles.disabledSearch]: disabled,
           })}
         >
-          <div aria-hidden="true" className={styles.searchIconContainer}>
-            <IconSearch />
-          </div>
-          <input
-            type="text"
-            autoComplete="off"
-            aria-autocomplete="list"
-            role="searchbox"
-            spellCheck="false"
-            aria-controls={id}
-            aria-label={placeholder}
-            className={classNames(styles.searchInputContainer, {
-              [styles.activeInput]: !disabled && !hasError && isOpened,
-              [styles.disabledInput]: disabled,
+          <span
+            className={classNames(styles.iconContainer, styles.selectSearch)}
+            unselectable="on"
+            aria-hidden="true"
+          >
+            <span role="img" className={styles.icon}>
+              <IconSearch />
+            </span>
+          </span>
+          <div
+            className={classNames(styles.selector, {
+              [styles.disabledSelector]: disabled,
+              [styles.activeSelector]: !disabled && !hasError && isOpened,
               [styles.hasError]: hasError,
             })}
-            placeholder={placeholder}
-            disabled={disabled}
-            onChange={onInputValueChange}
-            value={inputValue}
-          />
-          {!inputValue && (
+          >
+            <div
+              className={classNames({
+                [styles.overflow]: isMultiSelect,
+                [styles.fullWidth]: !isMultiSelect,
+              })}
+            >
+              {isMultiSelect &&
+                tags.map((tag) => (
+                  <div key={tag} className={styles.overflowItem}>
+                    <span
+                      className={classNames(styles.item, {
+                        [styles.largeItem]: size === ComboboxSize.Large,
+                      })}
+                    >
+                      <span className={styles.itemContent}>{tag}</span>
+                      <span
+                        className={styles.itemRemove}
+                        unselectable="on"
+                        aria-hidden="true"
+                        onClick={(event) => {
+                          onRemoveTagClicked(event, tag);
+                        }}
+                      >
+                        <span role="img" aria-label="close" className={styles.icon}>
+                          <CloseIcon />
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                ))}
+              <div className={styles.overflowItem}>
+                <div
+                  className={classNames(styles.search, { [styles.fullWidth]: !isMultiSelect })}
+                  style={{
+                    ...(isMultiSelect && inputValue && { width: `${inputValue.length}rem` }),
+                  }}
+                >
+                  <input
+                    ref={inputRef}
+                    autoComplete="off"
+                    type="search"
+                    className={classNames(styles.multiSelectSearchInput, {
+                      [styles.smallSearchInput]: size === ComboboxSize.Small,
+                      [styles.mediumSearchInput]: size === ComboboxSize.Medium,
+                      [styles.largeSearchInput]: size === ComboboxSize.Large,
+                    })}
+                    role="combobox"
+                    aria-haspopup="listbox"
+                    aria-expanded={isOpened}
+                    aria-owns={id}
+                    aria-autocomplete="list"
+                    onChange={onInputValueChange}
+                    value={inputValue}
+                    disabled={disabled}
+                    readOnly={false}
+                    unselectable="on"
+                    {...(!isMultiSelect && { placeholder })}
+                  />
+                </div>
+              </div>
+            </div>
+            {isMultiSelect && !tags.length && !inputValue && (
+              <span className={styles.placeholder}>{placeholder}</span>
+            )}
+          </div>
+          {shouldShowCaret && (
             <div
               className={classNames(styles.caretIconButton, {
                 [styles.openedCaretIconButton]: isOpened,
@@ -214,22 +360,22 @@ const Combobox: React.FC<Props> = ({
               <CaretIcon />
             </div>
           )}
-          {clearable && inputValue && (
-            <button
-              type="button"
+          {shouldShowClear && (
+            <span
+              className={styles.clearIconContainer}
+              unselectable="on"
+              aria-hidden="true"
               onClick={onClearButtonClicked}
-              className={classNames(styles.clearIconContainer, { [styles.disabled]: disabled })}
-              aria-label="Clear selected value"
             >
-              <CloseIcon />
-            </button>
+              <span role="img" aria-label="close-circle" className={styles.icon}>
+                <CloseIcon />
+              </span>
+            </span>
           )}
         </div>
         <div
           className={classNames(styles.comboboxBodyContainer, {
             [styles.openedComboboxBodyContainer]: isOpened,
-            [styles.smallComboboxBodyContainer]: size === ComboboxSize.Small,
-            [styles.mediumComboboxBodyContainer]: size === ComboboxSize.Medium,
             [styles.largeComboboxBodyContainer]: size === ComboboxSize.Large,
           })}
           aria-modal="true"
@@ -237,12 +383,22 @@ const Combobox: React.FC<Props> = ({
         >
           <div className={styles.itemsContainer} role="listbox">
             {filteredItems.map((item) => {
-              const checked = selectedValue && selectedValue === item.name;
-              const isItemDisabled = disabled === true || item.disabled === true;
+              let checked = false;
+              if (selectedValue) {
+                if (!isMultiSelect && selectedValue === item.name) {
+                  checked = true;
+                } else if (isMultiSelect && selectedValue[item.name] !== undefined) {
+                  checked = true;
+                }
+              }
+              // prevent selecting when the tags limit has been reached.
+              const preventSelecting = tags && tags.length >= tagsLimit;
+              const isItemDisabled =
+                disabled === true || item.disabled === true || preventSelecting;
               const itemId = `${id}-${item.id}`;
               return (
                 <ComboboxItem
-                  onItemSelected={onItemSelected}
+                  onItemSelectedChange={onItemSelectedChange}
                   key={itemId}
                   checked={checked}
                   disabled={isItemDisabled}
@@ -261,5 +417,16 @@ const Combobox: React.FC<Props> = ({
     </>
   );
 };
+
+/**
+ * Get the default value based on the type:
+ *
+ * - if it's multi-select, it's an empty object.
+ * - if it's single-select, it's an empty string.
+ *
+ * @param {boolean} isMultiSelect
+ * @returns {Value}
+ */
+const getDefaultValue = (isMultiSelect: boolean): Value => (isMultiSelect ? {} : '');
 
 export default Combobox;

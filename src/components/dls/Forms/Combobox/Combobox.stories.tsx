@@ -70,6 +70,23 @@ export default {
       },
       description: 'Whether the combobox is disabled or not.',
     },
+    isMultiSelect: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'Whether the combobox should support multi-select.',
+    },
+    tagsLimit: {
+      defaultValue: 3,
+      control: { type: 'number' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'The maximum number of items allowed to be selected.',
+    },
     hasError: {
       defaultValue: false,
       options: [true, false],
@@ -107,105 +124,70 @@ export default {
 
 const Template = (args) => <Combobox {...args} />;
 
-const ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-  },
-];
-const SUFFIXED_ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-    suffix: 'Quran',
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-    suffix: 'Sunnah',
-  },
-];
-const PREFIXED_ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-    prefix: <SettingIcon />,
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-    prefix: <SearchIcon />,
-  },
-];
-const PREFIXED_AND_SUFFIXED_ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-    suffix: 'Quran',
-    prefix: <SettingIcon />,
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-    suffix: 'Sunnah',
-    prefix: <SearchIcon />,
-  },
-];
+const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false) => {
+  const items = [];
+  for (let index = 1; index <= numberOfItems; index += 1) {
+    items.push({
+      id: `Item${index}`,
+      name: `Item${index}`,
+      value: `Item${index}`,
+      label: `Item ${index}`,
+      ...(hasSuffix && { suffix: index % 2 ? `Item` : 'Another-Item' }),
+      ...(hasPrefix && { prefix: index % 2 ? <SettingIcon /> : <SearchIcon /> }),
+    });
+  }
+  return items;
+};
 
 export const DefaultCombobox = Template.bind({});
 DefaultCombobox.args = {
   id: 'default',
-  items: ITEMS,
+  items: generateItems(),
 };
 
 export const ComboboxWithError = Template.bind({});
 ComboboxWithError.args = {
   id: 'default',
-  items: ITEMS,
+  items: generateItems(),
   hasError: true,
 };
 
 export const DisabledCombobox = Template.bind({});
 DisabledCombobox.args = {
   id: 'default',
-  items: ITEMS,
+  items: generateItems(),
   disabled: true,
 };
 
 export const ComboboxWithSuffixedItems = Template.bind({});
 ComboboxWithSuffixedItems.args = {
   id: 'suffixed',
-  items: SUFFIXED_ITEMS,
+  items: generateItems(10, true),
 };
 
 export const ComboboxWithPrefixedItems = Template.bind({});
 ComboboxWithPrefixedItems.args = {
   id: 'prefixed',
-  items: PREFIXED_ITEMS,
+  items: generateItems(10, false, true),
 };
 
 export const ComboboxWithPrefixedAndSuffixedItems = Template.bind({});
 ComboboxWithPrefixedAndSuffixedItems.args = {
   id: 'prefixed_and_suffixed',
-  items: PREFIXED_AND_SUFFIXED_ITEMS,
+  items: generateItems(10, true, true),
+};
+
+export const ComboboxWithMultiSelect = Template.bind({});
+ComboboxWithMultiSelect.args = {
+  id: 'multi-select',
+  items: generateItems(),
+  isMultiSelect: true,
+};
+
+export const ComboboxWithPreSelectedItems = Template.bind({});
+ComboboxWithPreSelectedItems.args = {
+  id: 'multi-select-with-preselected-items',
+  items: generateItems(),
+  isMultiSelect: true,
+  value: { Item1: true, Item2: true, Item3: true, Item4: true, Item5: true },
 };
