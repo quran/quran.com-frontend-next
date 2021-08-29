@@ -16,7 +16,6 @@ type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
 };
 
-// remove negative absolue, use fix height.
 const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => (
   <div className={styles.container}>
     {verses.map((verse) => (
