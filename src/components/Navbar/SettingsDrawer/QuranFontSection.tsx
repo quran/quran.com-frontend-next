@@ -4,6 +4,7 @@ import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { QuranFont } from 'src/components/QuranReader/types';
+import VerseText from 'src/components/Verse/VerseText';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
@@ -13,6 +14,8 @@ import {
   selectQuranReaderStyles,
   setQuranFont,
 } from 'src/redux/slices/QuranReader/styles';
+import verseSample from './sample-verse-data';
+import scssStyles from './QuranFontSection.module.scss';
 
 import { Section, SectionDescription, SectionLabel, SectionRow, SectionTitle } from './Section';
 
@@ -104,6 +107,9 @@ const QuranFontSection = () => {
           }
         />
       </SectionRow>
+      <div className={scssStyles.verseSampleContainer}>
+        <VerseText words={verseSample.words} />
+      </div>
       <SectionDescription>
         KPFG Fonts provide higher quality but take longer to load and cannot be copied through the
         browser.
