@@ -72,7 +72,7 @@ export default {
       description: 'Whether the combobox is disabled or not.',
     },
     isMultiSelect: {
-      defaultValue: false,
+      defaultValue: true,
       options: [true, false],
       control: { type: 'radio' },
       table: {
