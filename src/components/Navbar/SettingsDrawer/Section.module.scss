@@ -15,6 +15,9 @@
   padding-top: var(--spacing-medium);
   font-style: italic;
 }
+.invisible {
+  visibility: hidden;
+}
 .row {
   display: flex;
   justify-content: space-between;

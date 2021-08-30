@@ -28,13 +28,13 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       readingPreference: action.payload,
     }),
-    toggleShowWordByWordTranslation: (state) => ({
+    setShowWordByWordTranslation: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      showWordByWordTranslation: !state.showWordByWordTranslation,
+      showWordByWordTranslation: action.payload,
     }),
-    toggleShowWordByWordTransliteration: (state) => ({
+    setShowWordByWordTransliteration: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      showWordByWordTransliteration: !state.showWordByWordTransliteration,
+      showWordByWordTransliteration: action.payload,
     }),
     setSelectedWordByWordTranslation: (state, action: PayloadAction<number>) => ({
       ...state,
@@ -49,8 +49,8 @@ export const readingPreferencesSlice = createSlice({
 
 export const {
   setReadingPreference,
-  toggleShowWordByWordTranslation,
-  toggleShowWordByWordTransliteration,
+  setShowWordByWordTranslation,
+  setShowWordByWordTransliteration,
   setSelectedWordByWordTranslation,
   setSelectedWordByWordTransliteration,
 } = readingPreferencesSlice.actions;

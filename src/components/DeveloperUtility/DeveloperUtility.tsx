@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
 import classNames from 'classnames';
-import FontAdjustment from './FontAdjustment';
-import ReadingPreferenceAdjustment from './ReadingPreferenceAdjustment';
-import NotesAdjustment from './NotesAdjustment';
-import AudioPlayerAdjustment from './AudioPlayerAdjustment';
-import NavbarAdjustment from './NavbarAdjustment';
-import TafsirsAdjustment from './TafsirsAdjustment';
-import ContextMenuAdjustment from './ContextMenuAdjustment';
-import TranslationsAdjustment from './TranslationsAdjustment';
-import ThemeAdjustment from './ThemeAdjustment';
-import ReciterAdjustment from './ReciterAdjustment';
-import styles from './DeveloperUtility.module.scss';
+import React, { useState } from 'react';
+
 import WrenchIcon from '../../../public/icons/wrench.svg';
-import WordByWordAdjustment from './WordByWordAdjustment';
+import AudioPlayerAdjustment from './AudioPlayerAdjustment';
+import ContextMenuAdjustment from './ContextMenuAdjustment';
+import styles from './DeveloperUtility.module.scss';
+import FontAdjustment from './FontAdjustment';
+import NavbarAdjustment from './NavbarAdjustment';
+import NotesAdjustment from './NotesAdjustment';
+import ReadingPreferenceAdjustment from './ReadingPreferenceAdjustment';
+import ReciterAdjustment from './ReciterAdjustment';
+import TafsirsAdjustment from './TafsirsAdjustment';
+import ThemeAdjustment from './ThemeAdjustment';
+import TranslationsAdjustment from './TranslationsAdjustment';
+
 /**
  * A set of developer utilities only availble on development environments
  */
@@ -48,7 +49,6 @@ const DeveloperUtility = () => {
       <ThemeAdjustment />
       <FontAdjustment />
       <ReadingPreferenceAdjustment />
-      <WordByWordAdjustment />
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />

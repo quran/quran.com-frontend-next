@@ -105,7 +105,8 @@ const QuranFontSection = () => {
         />
       </SectionRow>
       <SectionDescription>
-        The system theme automatically adopts to your light/dark mode settings
+        KPFG Fonts provide higher quality but take longer to load and cannot be copied through the
+        browser.
       </SectionDescription>
     </Section>
   );

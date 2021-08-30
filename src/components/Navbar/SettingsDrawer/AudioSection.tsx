@@ -43,7 +43,6 @@ const AudioSection = () => {
           value={selectedReciter.id.toString()}
           onChange={onSelectedReciterChange}
         />
-        k
       </SectionRow>
     </Section>
   );

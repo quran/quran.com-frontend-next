@@ -29,7 +29,7 @@ const ThemeSection = () => {
           onChange={(value) => dispatch({ type: setTheme.type, payload: value })}
         />
       </SectionRow>
-      <SectionDescription>
+      <SectionDescription visible={theme.type === 'system'}>
         The system theme automatically adopts to your light/dark mode settings
       </SectionDescription>
     </Section>
