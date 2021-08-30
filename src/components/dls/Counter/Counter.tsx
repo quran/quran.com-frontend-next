@@ -16,9 +16,6 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
     <Button
       disabled={!onIncrement}
       onClick={() => {
-        console.log('jalan nih');
-        console.log(onIncrement);
-        console.log(typeof onIncrement);
         onIncrement();
       }}
     >

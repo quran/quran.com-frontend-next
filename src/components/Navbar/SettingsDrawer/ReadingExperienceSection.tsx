@@ -6,7 +6,8 @@ import {
   selectReadingPreference,
   setReadingPreference,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { Section, SectionDescription, SectionLabel, SectionRow, SectionTitle } from './Section';
+
+import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
 
 // TODO: internationalize labels
 const preferences = [
@@ -43,9 +44,6 @@ const ReadingExperienceSection = () => {
           />
         </div>
       </SectionRow>
-      <SectionDescription>
-        The system theme automatically adopts to your light/dark mode settings
-      </SectionDescription>
     </Section>
   );
 };

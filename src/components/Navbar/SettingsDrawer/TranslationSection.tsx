@@ -1,8 +1,17 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getAvailableTranslations } from 'src/api';
+import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import ComboboxSize from 'src/components/dls/Forms/Combobox/types/ComboboxSize';
+import {
+  decreaseTranslationFontScale,
+  increaseTranslationFontScale,
+  MAXIMUM_FONT_STEP,
+  MINIMUM_FONT_STEP,
+  QuranReaderStyles,
+  selectQuranReaderStyles,
+} from 'src/redux/slices/QuranReader/styles';
 import {
   selectTranslations,
   setSelectedTranslations,
@@ -11,6 +20,7 @@ import {
 import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
+
 import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
 
 const translationsToComboboxItems = (translations) =>
@@ -24,6 +34,8 @@ const translationsToComboboxItems = (translations) =>
 const TranslationSection = () => {
   const dispatch = useDispatch();
   const { selectedTranslations } = useSelector(selectTranslations) as TranslationsSettings;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const { translationFontScale } = quranReaderStyles;
   const { lang } = useTranslation();
 
   const { data: translations, error } = useSWR(`get-translations/${lang}`, () =>
@@ -52,6 +64,22 @@ const TranslationSection = () => {
           value={numbersToStringsArray(selectedTranslations)}
           onChange={(values) =>
             dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
+          }
+        />
+      </SectionRow>
+      <SectionRow>
+        <SectionLabel>Translation</SectionLabel>
+        <Counter
+          count={translationFontScale}
+          onIncrement={
+            MAXIMUM_FONT_STEP === translationFontScale
+              ? null
+              : () => dispatch(increaseTranslationFontScale())
+          }
+          onDecrement={
+            MINIMUM_FONT_STEP === translationFontScale
+              ? null
+              : () => dispatch(decreaseTranslationFontScale())
           }
         />
       </SectionRow>
