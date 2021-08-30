@@ -67,7 +67,7 @@ const Combobox: React.FC<Props> = ({
     if (!isMultiSelect) {
       return value as string;
     }
-    return arrayToObject(value as InitialSelectedItems);
+    return convertArrayToObject(value as InitialSelectedItems);
   });
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
@@ -100,7 +100,7 @@ const Combobox: React.FC<Props> = ({
       setSelectedValue(getDefaultValue(isMultiSelect));
     } else {
       setSelectedValue(
-        isMultiSelect ? arrayToObject(value as InitialSelectedItems) : (value as string),
+        isMultiSelect ? convertArrayToObject(value as InitialSelectedItems) : (value as string),
       );
     }
   }, [value, isMultiSelect]);
@@ -364,7 +364,7 @@ const getDefaultValue = (isMultiSelect: boolean): Value => (isMultiSelect ? {} :
  * @param {InitialSelectedItems} array
  * @returns {MultiSelectValue}
  */
-const arrayToObject = (array: InitialSelectedItems): MultiSelectValue => {
+const convertArrayToObject = (array: InitialSelectedItems): MultiSelectValue => {
   const multiSelectValue = {};
   array.forEach((selectedItem) => {
     multiSelectValue[selectedItem] = true;
