@@ -13,6 +13,7 @@ type QuranWordProps = {
   word: Word;
   font?: QuranFont;
   highlight?: boolean;
+  allowWordByWord?: boolean;
 };
 
 const getGlyph = (word: Word, font: QuranFont) => {
@@ -20,7 +21,7 @@ const getGlyph = (word: Word, font: QuranFont) => {
   return word.codeV2;
 };
 
-const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
+const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordProps) => {
   const { showWordByWordTranslation, showWordByWordTransliteration } =
     useSelector(selectReadingPreferences);
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
@@ -40,10 +41,14 @@ const QuranWord = ({ word, font, highlight }: QuranWordProps) => {
       })}
     >
       {wordText}
-      {showWordByWordTransliteration && (
-        <p className={styles.wbwText}>{word.transliteration?.text}</p>
+      {allowWordByWord && (
+        <>
+          {showWordByWordTransliteration && (
+            <p className={styles.wbwText}>{word.transliteration?.text}</p>
+          )}
+          {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
+        </>
       )}
-      {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
     </div>
   );
 };
