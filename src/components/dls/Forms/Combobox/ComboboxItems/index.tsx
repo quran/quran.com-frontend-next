@@ -3,7 +3,7 @@ import React, { ChangeEvent, useEffect, RefObject } from 'react';
 import useScroll from 'src/hooks/useScrollToElement';
 import ComboboxItem, { DropdownItem } from '../ComboboxItem';
 import ComboboxSize from '../types/ComboboxSize';
-import { InitialValue } from '../types/Values';
+import { Value } from '../types/Values';
 import styles from './ComboboxItems.module.scss';
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   filteredItems: DropdownItem[];
   emptyMessage: string;
   onItemSelectedChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  selectedValue: InitialValue;
+  selectedValue: Value;
 }
 
 const SCROLL_TO_SELECTED_ELEMENT_OPTIONS = {
