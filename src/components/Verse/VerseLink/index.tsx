@@ -1,6 +1,6 @@
 import React from 'react';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import { getVerseNavigationUrl } from 'src/utils/verse';
+import { getVerseNavigationUrl } from 'src/utils/navigation';
 import styles from './VerseLink.module.scss';
 
 interface Props {

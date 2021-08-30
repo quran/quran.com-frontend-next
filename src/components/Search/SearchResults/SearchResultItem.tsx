@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import { getVerseNavigationUrl } from 'src/utils/verse';
+import { getVerseNavigationUrl } from 'src/utils/navigation';
 import { SearchVerseResult } from 'types/SearchVerseResult';
 import styles from './SearchResultItem.module.scss';
 
