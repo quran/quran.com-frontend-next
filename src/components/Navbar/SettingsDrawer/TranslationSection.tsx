@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAvailableTranslations } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import ComboboxSize from 'src/components/dls/Forms/Combobox/types/ComboboxSize';
 import {
   selectTranslations,
-  //   setSelectedTranslations,
+  setSelectedTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
 import useSWR from 'swr';
@@ -17,11 +17,19 @@ const throwStatusError = (res: any) => {
   }
 };
 
+const toArrayString = (values) => values.map((v) => v.toString());
+const toArrayNumber = (values) => values.map((v) => Number(v));
+
 const translationsToComboboxItems = (translations) =>
-  translations.map((item) => ({ id: item.id, value: item.id, label: item.name, name: item.id }));
+  translations.map((item) => ({
+    id: item.id.toString(),
+    value: item.id,
+    label: item.name.toString(),
+    name: item.id.toString(),
+  }));
 
 const TranslationSection = () => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { selectedTranslations } = useSelector(selectTranslations) as TranslationsSettings;
   const { lang } = useTranslation();
 
@@ -48,8 +56,8 @@ const TranslationSection = () => {
           items={items || []}
           isMultiSelect
           size={ComboboxSize.Medium}
-          value={selectedTranslations}
-          //   onChange={(values) => dispatch(setSelectedTranslations(toArrayNumber(values)))}
+          value={toArrayString(selectedTranslations)}
+          onChange={(values) => dispatch(setSelectedTranslations(toArrayNumber(values)))}
         />
       </SectionRow>
     </Section>
