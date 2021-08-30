@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from 'src/components/dls/Button/Button';
+import AudioSection from './AudioSection';
 import QuranFontSection from './QuranFontSection';
 
 import ReadingExperienceSection from './ReadingExperienceSection';
-import { Section, SectionTitle } from './Section';
 import styles from './SettingsBody.module.scss';
 import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
@@ -16,18 +16,8 @@ const SettingsBody = () => (
     <QuranFontSection />
     <TranslationSection />
     <TafsirSection />
-
-    <Section>
-      <SectionTitle>Audio</SectionTitle>
-      <div>
-        <div>Reciter</div>
-        <div>==</div>
-      </div>
-    </Section>
-
-    <div>
-      <Button>Reset settings</Button>
-    </div>
+    <AudioSection />
+    <Button>Reset settings</Button>
   </div>
 );
 
