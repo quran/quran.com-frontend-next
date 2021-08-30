@@ -92,3 +92,8 @@
     background: none;
   }
 }
+
+.bodyContainer {
+  margin-top: constants.$navbar-height;
+  padding: var(--spacing-medium);
+}

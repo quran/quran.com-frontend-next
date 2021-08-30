@@ -3,15 +3,15 @@ import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/APIResponses';
 import useDebounce from 'src/hooks/useDebounce';
 import classNames from 'classnames';
+import SearchResults from 'src/components/Search/SearchResults';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
-import SearchDrawerBody from './SearchDrawerBody';
 import styles from './SearchDrawer.module.scss';
 
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -133,6 +133,7 @@ const SearchDrawer: React.FC = () => {
             <Button
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
+              size={ButtonSize.Small}
               onClick={closeSearchDrawer}
             >
               <IconClose />
@@ -140,12 +141,14 @@ const SearchDrawer: React.FC = () => {
           </div>
         </div>
       </div>
-      <SearchDrawerBody
-        hasError={hasError}
-        searchResult={searchResult}
-        isSearching={isSearching}
-        searchQuery={searchQuery}
-      />
+      <div className={styles.bodyContainer}>
+        <SearchResults
+          searchResult={searchResult}
+          searchQuery={searchQuery}
+          isSearching={isSearching}
+          hasError={hasError}
+        />
+      </div>
     </div>
   );
 };

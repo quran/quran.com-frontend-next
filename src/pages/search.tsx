@@ -2,20 +2,19 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { GetStaticProps, NextPage } from 'next';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import useTranslation from 'next-translate/useTranslation';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
-import Pagination from 'src/components/dls/Pagination/Pagination';
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/APIResponses';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
 import TranslationsFilter from 'src/components/Search/TranslationsFilter';
 import LanguagesFilter from 'src/components/Search/LanguagesFilter';
-import SearchResultItem from 'src/components/Search/SearchResultItem';
 import AvailableTranslation from 'types/AvailableTranslation';
 import AvailableLanguage from 'types/AvailableLanguage';
 import NextSeoHead from 'src/components/NextSeoHead';
+import SearchResults from 'src/components/Search/SearchResults';
 import IconClose from '../../public/icons/close.svg';
 import styles from './search.module.scss';
 
@@ -109,7 +108,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
         query,
         language,
         size: PAGE_SIZE,
-        page: page - 1, // the API starts the pagination at 0.
+        page,
       })
         .then((response) => {
           if (response.status === 500) {
@@ -179,6 +178,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             <Button
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
+              size={ButtonSize.Small}
               onClick={onClearClicked}
             >
               <IconClose />
@@ -200,27 +200,16 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             />
           </div>
           <div className={styles.bodyContainer}>
-            {isSearching && <div>Searching...</div>}
-            {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
-            {!isSearching && !hasError && searchResult && (
-              <div>
-                <p className={styles.boldHeader}>Results</p>
-                {searchResult.search.results.length === 0 && <p>No results found!</p>}
-                {searchResult.search.results.map((result) => (
-                  <SearchResultItem key={result.verseId} result={result} />
-                ))}
-                <div className={styles.paginationContainer}>
-                  {debouncedSearchQuery && (
-                    <Pagination
-                      currentPage={currentPage}
-                      totalCount={searchResult.search.totalResults}
-                      onPageChange={onPageChange}
-                      pageSize={PAGE_SIZE}
-                    />
-                  )}
-                </div>
-              </div>
-            )}
+            <SearchResults
+              isSearching={isSearching}
+              hasError={hasError}
+              searchResult={searchResult}
+              searchQuery={debouncedSearchQuery}
+              isSearchDrawer={false}
+              currentPage={currentPage}
+              onPageChange={onPageChange}
+              pageSize={PAGE_SIZE}
+            />
           </div>
         </div>
       </div>
