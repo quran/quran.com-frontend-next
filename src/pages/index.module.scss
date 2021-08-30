@@ -16,7 +16,7 @@ $list-max-width: 80rem;
   }
 }
 
-.chaptersListContainer {
+.listContainer {
   padding-top: calc(2 * var(--spacing-large));
   @include breakpoints.tablet {
     width: 65%;
