@@ -1,0 +1,22 @@
+.iconContainer {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: inline-block;
+  width: var(--spacing-small);
+  height: var(--spacing-small);
+  color: var(--color-background-alternative-deep);
+  user-select: none;
+}
+
+.icon svg {
+  display: inline-block;
+  width: var(--spacing-small);
+  height: var(--spacing-small);
+  overflow: hidden;
+}
+
+.selectSearch {
+  left: var(--spacing-medium);
+}

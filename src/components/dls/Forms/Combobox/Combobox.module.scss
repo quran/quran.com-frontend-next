@@ -1,52 +1,5 @@
-$webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
-$container-width: calc(8 * var(--spacing-mega));
-
 .label {
   padding: var(--spacing-micro) 0;
-}
-
-.itemsContainer {
-  border-radius: var(--border-radius-default);
-  overflow: hidden;
-  max-height: calc(5 * var(--spacing-mega));
-  overflow-y: scroll;
-
-  // Hack to show the scrollbar on OSX, otherwise the scrollbar is hidden and the component does not indicate scrollability
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: var(--spacing-xxsmall);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: var(--border-radius-default);
-    background-color: var(--color-background-backdrop);
-    box-shadow: $webkit-thumb-shadow;
-  }
-}
-
-.clearIconContainer {
-  user-select: none;
-  background: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--spacing-small);
-  height: var(--spacing-small);
-  color: var(--color-background-alternative-deep);
-  position: absolute;
-  right: var(--spacing-medium);
-  top: 50%;
-  transform: translateY(-50%);
-  outline: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 .disabledSearch,
@@ -55,55 +8,9 @@ $container-width: calc(8 * var(--spacing-mega));
   cursor: not-allowed;
 }
 
-.comboboxBodyContainer {
-  position: absolute;
-  margin-top: var(--spacing-micro);
-  border-radius: var(--border-radius-default);
-  box-shadow: var(--shadow-large);
-  width: $container-width;
-  z-index: var(--z-index-dropdown);
-  transition: var(--transition-fast);
-  background-color: var(--color-background-default);
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  font-size: var(--font-size-normal);
-}
-
-.largeComboboxBodyContainer {
-  font-size: var(--font-size-large);
-}
-
-.openedComboboxBodyContainer {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.caretIconButton {
-  width: var(--spacing-medium);
-  height: var(--spacing-medium);
-  position: absolute;
-  right: var(--spacing-medium);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-background-alternative-deep);
-  svg {
-    transition: var(--transition-fast);
-  }
-  cursor: pointer;
-}
-
-.openedCaretIconButton {
-  svg {
-    transform: rotate(180deg);
-    transition: var(--transition-fast);
-  }
-}
-
 .comboboxContainer {
   max-width: 100%;
-  width: $container-width;
+  width: calc(8 * var(--spacing-mega));
 }
 
 .enabled {
@@ -160,29 +67,6 @@ $container-width: calc(8 * var(--spacing-mega));
   text-overflow: ellipsis;
   pointer-events: none;
   max-width: 80%;
-}
-
-.iconContainer {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  display: inline-block;
-  width: var(--spacing-small);
-  height: var(--spacing-small);
-  color: var(--color-background-alternative-deep);
-  user-select: none;
-}
-
-.icon svg {
-  display: inline-block;
-  width: var(--spacing-small);
-  height: var(--spacing-small);
-  overflow: hidden;
-}
-
-.selectSearch {
-  left: var(--spacing-medium);
 }
 
 .overflow {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Combobox from './index';
 import SettingIcon from '../../../../../public/icons/settings.svg';
 import SearchIcon from '../../../../../public/icons/search.svg';
-import ComboboxSize from './ComboboxSize';
+import ComboboxSize from './types/ComboboxSize';
 
 export default {
   title: 'dls/Combobox/SingleSelect',

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { memo } from 'react';
 import styles from './Tag.module.scss';
 import CloseIcon from '../../../../../../public/icons/close.svg';
-import ComboboxSize from '../ComboboxSize';
+import ComboboxSize from '../types/ComboboxSize';
 
 interface Props {
   onRemoveTagClicked: (event: React.MouseEvent<HTMLSpanElement>, tag: string) => void;

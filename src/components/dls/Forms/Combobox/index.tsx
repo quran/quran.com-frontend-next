@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
-  MouseEvent,
   ChangeEvent,
   useState,
   ReactNode,
@@ -15,20 +14,17 @@ import React, {
 import classNames from 'classnames';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useScroll from '../../../../hooks/useScrollToElement';
 import useFocus from '../../../../hooks/useFocusElement';
-import CaretIcon from '../../../../../public/icons/caret-down.svg';
-import IconSearch from '../../../../../public/icons/search.svg';
-import CloseIcon from '../../../../../public/icons/close.svg';
-import ComboboxItem, { DropdownItem } from './ComboboxItem';
+import { DropdownItem } from './ComboboxItem';
 import styles from './Combobox.module.scss';
 import Tag from './Tag';
-import ComboboxSize from './ComboboxSize';
+import ComboboxSize from './types/ComboboxSize';
+import ClearInputIcon from './Icons/ClearInputIcon';
+import CaretInputIcon from './Icons/CaretInputIcon';
+import SearchInputIcon from './Icons/SearchInputIcon';
+import ComboboxItems from './ComboboxItems';
+import { InitialValue, Value, MultiSelectValue, InitialSelectedItems } from './types/Values';
 
-type InitialSelectedItems = string[];
-type MultiSelectValue = Record<string, boolean>;
-type Value = string | MultiSelectValue;
-type InitialValue = string | InitialSelectedItems;
 interface Props {
   id: string;
   items: DropdownItem[];
@@ -45,10 +41,6 @@ interface Props {
   disabled?: boolean;
   hasError?: boolean;
 }
-
-const SCROLL_TO_SELECTED_ELEMENT_OPTIONS = {
-  block: 'nearest', // 'block' relates to vertical alignment. see: https://stackoverflow.com/a/48635751/1931451 for nearest.
-} as ScrollIntoViewOptions;
 
 const Combobox: React.FC<Props> = ({
   items,
@@ -78,8 +70,6 @@ const Combobox: React.FC<Props> = ({
     return arrayToObject(value as InitialSelectedItems);
   });
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
-  const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const comboBoxRef = useRef(null);
   const closeCombobox = useCallback(() => {
@@ -139,10 +129,10 @@ const Combobox: React.FC<Props> = ({
   const invokeOnChangeCallback = useCallback(
     (newValue) => {
       if (onChange) {
-        onChange(isMultiSelect ? Object.keys(newValue) : (selectedValue as string), id);
+        onChange(isMultiSelect ? Object.keys(newValue) : (newValue as string), id);
       }
     },
-    [id, isMultiSelect, onChange, selectedValue],
+    [id, isMultiSelect, onChange],
   );
 
   // listener for when the backspace is clicked.
@@ -157,13 +147,6 @@ const Combobox: React.FC<Props> = ({
       });
     }
   }, [id, invokeOnChangeCallback, shouldDeleteLastTag]);
-
-  useEffect(() => {
-    // once the dropdown is opened, scroll to the selected item.
-    if (isOpened) {
-      scrollToSelectedItem();
-    }
-  }, [isOpened, scrollToSelectedItem]);
 
   const onSelectorClicked = () => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
@@ -198,9 +181,11 @@ const Combobox: React.FC<Props> = ({
         setFilteredItems(items); // reset the filtered items.
       } else {
         setInputValue(isUnSelect ? '' : itemLabel);
-        const newSelectedValue = isUnSelect ? '' : selectedItemName;
-        setSelectedValue(newSelectedValue);
-        invokeOnChangeCallback(newSelectedValue);
+        setSelectedValue(() => {
+          const newSelectedValue = isUnSelect ? '' : selectedItemName;
+          invokeOnChangeCallback(newSelectedValue);
+          return newSelectedValue;
+        });
       }
       setIsOpened(false); // close the items container
     },
@@ -233,14 +218,16 @@ const Combobox: React.FC<Props> = ({
    * We will reset the input value, the selected value
    * and the filtered items.
    *
-   * @param {MouseEvent} event
+   * @param {React.MouseEvent<HTMLSpanElement>} event
    */
-  const onClearButtonClicked = (event: MouseEvent) => {
+  const onClearButtonClicked = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.stopPropagation();
     setInputValue('');
-    const defaultSelectedValue = getDefaultValue(isMultiSelect);
-    setSelectedValue(defaultSelectedValue);
-    invokeOnChangeCallback(defaultSelectedValue);
+    setSelectedValue(() => {
+      const defaultSelectedValue = getDefaultValue(isMultiSelect);
+      invokeOnChangeCallback(defaultSelectedValue);
+      return defaultSelectedValue;
+    });
     setFilteredItems(items);
   };
 
@@ -267,7 +254,8 @@ const Combobox: React.FC<Props> = ({
   const shouldShowCaret =
     (!isMultiSelect && !inputValue) || (isMultiSelect && !inputValue && !tags.length);
   const shouldShowClear = clearable && !shouldShowCaret;
-
+  // if we should prevent selecting when the tags limit has been reached.
+  const preventSelecting = tagsLimit && tags && tags.length >= tagsLimit;
   return (
     <>
       {label && <p className={styles.label}>{label}</p>}
@@ -281,15 +269,7 @@ const Combobox: React.FC<Props> = ({
             [styles.disabledSearch]: disabled,
           })}
         >
-          <span
-            className={classNames(styles.iconContainer, styles.selectSearch)}
-            unselectable="on"
-            aria-hidden="true"
-          >
-            <span role="img" className={styles.icon}>
-              <IconSearch />
-            </span>
-          </span>
+          <SearchInputIcon />
           <div
             className={classNames(styles.selector, {
               [styles.disabledSelector]: disabled,
@@ -344,69 +324,24 @@ const Combobox: React.FC<Props> = ({
               <span className={styles.placeholder}>{placeholder}</span>
             )}
           </div>
-          {shouldShowCaret && (
-            <div
-              className={classNames(styles.caretIconButton, {
-                [styles.openedCaretIconButton]: isOpened,
-              })}
-              aria-label="Show more"
-            >
-              <CaretIcon />
-            </div>
-          )}
-          {shouldShowClear && (
-            <span
-              className={styles.clearIconContainer}
-              unselectable="on"
-              aria-hidden="true"
-              onClick={onClearButtonClicked}
-            >
-              <span role="img" aria-label="close-circle" className={styles.icon}>
-                <CloseIcon />
-              </span>
-            </span>
-          )}
+          <CaretInputIcon isOpened={isOpened} shouldShowIcon={shouldShowCaret} />
+          <ClearInputIcon
+            shouldShowIcon={shouldShowClear}
+            onClearButtonClicked={onClearButtonClicked}
+          />
         </div>
-        <div
-          className={classNames(styles.comboboxBodyContainer, {
-            [styles.openedComboboxBodyContainer]: isOpened,
-            [styles.largeComboboxBodyContainer]: size === ComboboxSize.Large,
-          })}
-          aria-modal="true"
-          role="dialog"
-        >
-          <div className={styles.itemsContainer} role="listbox">
-            {filteredItems.map((item) => {
-              let checked = false;
-              if (selectedValue) {
-                if (!isMultiSelect && selectedValue === item.name) {
-                  checked = true;
-                } else if (isMultiSelect && selectedValue[item.name] !== undefined) {
-                  checked = true;
-                }
-              }
-              // prevent selecting when the tags limit has been reached.
-              const preventSelecting = tagsLimit && tags && tags.length >= tagsLimit;
-              const isItemDisabled =
-                disabled === true || item.disabled === true || preventSelecting;
-              const itemId = `${id}-${item.id}`;
-              return (
-                <ComboboxItem
-                  onItemSelectedChange={onItemSelectedChange}
-                  key={itemId}
-                  checked={checked}
-                  disabled={isItemDisabled}
-                  itemId={itemId}
-                  selectedItemRef={selectedItemRef}
-                  item={item}
-                />
-              );
-            })}
-            {!filteredItems.length && (
-              <ComboboxItem emptyMessage={emptyMessage} checked={false} disabled isNotFound />
-            )}
-          </div>
-        </div>
+        <ComboboxItems
+          onItemSelectedChange={onItemSelectedChange}
+          isOpened={isOpened}
+          disabled={disabled}
+          size={size}
+          filteredItems={filteredItems}
+          isMultiSelect={isMultiSelect}
+          preventSelecting={preventSelecting}
+          selectedValue={selectedValue}
+          id={id}
+          emptyMessage={emptyMessage}
+        />
       </div>
     </>
   );
