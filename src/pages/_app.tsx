@@ -6,6 +6,7 @@ import Navbar from 'src/components/Navbar/Navbar';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import { IdProvider } from '@radix-ui/react-id';
+import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
 import { createSEOConfig } from '../utils/seo';
 import ReduxProvider from '../redux/Provider';
 import ThemeProvider from '../styles/ThemeProvider';
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
             <DeveloperUtility />
             <Component {...pageProps} />
             <AudioPlayer />
+            <FeedbackWidget />
           </IdProvider>
         </ThemeProvider>
       </ReduxProvider>

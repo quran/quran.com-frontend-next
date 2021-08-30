@@ -1,0 +1,23 @@
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+
+.container {
+  position: fixed;
+  bottom: var(--spacing-mega);
+  right: calc(1 * var(--spacing-medium));
+  transition: var(--transition-regular);
+  z-index: var(--z-index-modal);
+  @include breakpoints.tablet {
+    right: calc(var(--spacing-mega) + var(--spacing-medium));
+  }
+}
+
+.audioPlayerOpen {
+  margin-bottom: constants.$audio-player-default-height;
+  bottom: var(--spacing-medium);
+}
+
+.audioPlayerExpanded {
+  margin-bottom: constants.$audio-player-expanded-height;
+  bottom: var(--spacing-medium);
+}
