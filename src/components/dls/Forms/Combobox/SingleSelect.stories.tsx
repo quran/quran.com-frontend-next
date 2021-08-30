@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import Combobox, { ComboboxSize } from './index';
+import Combobox from './index';
 import SettingIcon from '../../../../../public/icons/settings.svg';
 import SearchIcon from '../../../../../public/icons/search.svg';
+import ComboboxSize from './types/ComboboxSize';
 
 export default {
-  title: 'dls/Combobox',
+  title: 'dls/Combobox/SingleSelect',
   component: Combobox,
   argTypes: {
     id: {
@@ -70,6 +71,22 @@ export default {
       },
       description: 'Whether the combobox is disabled or not.',
     },
+    isMultiSelect: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'Whether the combobox should support multi-select.',
+    },
+    tagsLimit: {
+      control: { type: 'number' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'The maximum number of items allowed to be selected.',
+    },
     hasError: {
       defaultValue: false,
       options: [true, false],
@@ -105,107 +122,104 @@ export default {
   },
 };
 
+const ControlledRemoteTemplate = (args) => {
+  const [value, setValue] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // imitate the behavior of fetching from a remote datastore.
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setValue('Item1');
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  const onChange = (newSelectedValue: string) => {
+    setValue(newSelectedValue);
+  };
+  return (
+    <Combobox
+      {...args}
+      value={value}
+      initialInputValue={isLoading ? 'Loading...' : value}
+      onChange={onChange}
+    />
+  );
+};
+
+// this template will be controlled where the value is a local value and not fetched from a remote datastore.
+const ControlledLocalTemplate = (args) => {
+  const [value, setValue] = useState('Item1');
+  const onChange = (newSelectedValue: string) => {
+    setValue(newSelectedValue);
+  };
+  return <Combobox {...args} value={value} initialInputValue={value} onChange={onChange} />;
+};
+
 const Template = (args) => <Combobox {...args} />;
 
-const ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-  },
-];
-const SUFFIXED_ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-    suffix: 'Quran',
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-    suffix: 'Sunnah',
-  },
-];
-const PREFIXED_ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-    prefix: <SettingIcon />,
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-    prefix: <SearchIcon />,
-  },
-];
-const PREFIXED_AND_SUFFIXED_ITEMS = [
-  {
-    id: 'Item1',
-    name: 'Item1',
-    value: 'Item1',
-    label: 'Item 1',
-    suffix: 'Quran',
-    prefix: <SettingIcon />,
-  },
-  {
-    id: 'Item2',
-    name: 'Item2',
-    value: 'Item2',
-    label: 'Item 2',
-    suffix: 'Sunnah',
-    prefix: <SearchIcon />,
-  },
-];
+const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false) => {
+  const items = [];
+  for (let index = 1; index <= numberOfItems; index += 1) {
+    items.push({
+      id: `Item${index}`,
+      name: `Item${index}`,
+      value: `Item${index}`,
+      label: `Item ${index}`,
+      ...(hasSuffix && { suffix: index % 2 ? `Item` : 'Another-Item' }),
+      ...(hasPrefix && { prefix: index % 2 ? <SettingIcon /> : <SearchIcon /> }),
+    });
+  }
+  return items;
+};
 
 export const DefaultCombobox = Template.bind({});
 DefaultCombobox.args = {
   id: 'default',
-  items: ITEMS,
+  items: generateItems(),
+};
+
+export const DefaultControlledCombobox = ControlledLocalTemplate.bind({});
+DefaultControlledCombobox.args = {
+  id: 'controlled-local-single-select',
+  items: generateItems(),
+};
+
+export const RemoteControlledCombobox = ControlledRemoteTemplate.bind({});
+RemoteControlledCombobox.args = {
+  id: 'controlled-remote-single-select',
+  items: generateItems(),
 };
 
 export const ComboboxWithError = Template.bind({});
 ComboboxWithError.args = {
   id: 'default',
-  items: ITEMS,
+  items: generateItems(),
   hasError: true,
 };
 
 export const DisabledCombobox = Template.bind({});
 DisabledCombobox.args = {
   id: 'default',
-  items: ITEMS,
+  items: generateItems(),
   disabled: true,
 };
 
 export const ComboboxWithSuffixedItems = Template.bind({});
 ComboboxWithSuffixedItems.args = {
   id: 'suffixed',
-  items: SUFFIXED_ITEMS,
+  items: generateItems(10, true),
 };
 
 export const ComboboxWithPrefixedItems = Template.bind({});
 ComboboxWithPrefixedItems.args = {
   id: 'prefixed',
-  items: PREFIXED_ITEMS,
+  items: generateItems(10, false, true),
 };
 
 export const ComboboxWithPrefixedAndSuffixedItems = Template.bind({});
 ComboboxWithPrefixedAndSuffixedItems.args = {
   id: 'prefixed_and_suffixed',
-  items: PREFIXED_AND_SUFFIXED_ITEMS,
+  items: generateItems(10, true, true),
 };

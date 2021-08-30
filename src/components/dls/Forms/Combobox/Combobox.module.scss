@@ -1,193 +1,115 @@
-$webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
-
 .label {
   padding: var(--spacing-micro) 0;
 }
 
-.container {
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-  height: 100%;
+.disabledSearch,
+.disabledSearch * {
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
-.searchInputContainer {
-  text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-borders-hairline);
-  font-size: inherit;
+.comboboxContainer {
+  max-width: 100%;
+  width: calc(8 * var(--spacing-mega));
+}
+
+.enabled {
   cursor: text;
-  outline: 0;
+}
+
+.select {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.selector {
+  padding: var(--spacing-micro) var(--spacing-xsmall);
+  position: relative;
+  background-color: var(--color-background-default);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   padding: 0 var(--spacing-mega);
-  background: var(--color-background-default);
   color: var(--color-text-default);
 }
 
-.activeInput {
+.activeSelector {
   border: 1px solid var(--color-primary-medium);
 }
-.searchInputContainer:not(.disabledInput):not(.hasError) {
+.selector:not(.disabledSelector):not(.hasError) {
   &:hover {
     border: 1px solid var(--color-primary-medium);
   }
 }
-
 .hasError {
   border: 1px solid var(--color-error-medium);
 }
 
-.itemsContainer {
-  border-radius: var(--border-radius-default);
-  overflow: hidden;
-  max-height: calc(5 * var(--spacing-mega));
-  overflow-y: scroll;
-
-  // Hack to show the scrollbar on OSX, otherwise the scrollbar is hidden and the component does not indicate scrollability
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: var(--spacing-xxsmall);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: var(--border-radius-default);
-    background-color: var(--color-background-backdrop);
-    box-shadow: $webkit-thumb-shadow;
-  }
-}
-
-.searchIconContainer {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-background-alternative-deep);
-  pointer-events: none;
-  position: absolute;
-  left: var(--spacing-small);
-  top: 50%;
-  z-index: 1;
-  transform: translateY(-50%);
-  width: var(--spacing-medium);
-  height: var(--spacing-medium);
-}
-
-.clearIconContainer {
-  user-select: none;
-  background: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--spacing-small);
-  height: var(--spacing-small);
-  color: var(--color-background-alternative-deep);
-  position: absolute;
-  right: var(--spacing-medium);
-  top: 50%;
-  transform: translateY(-50%);
-  outline: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-  text-decoration: none;
-}
-
-.searchInput {
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
-}
-
-.comboboxContainer {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  max-width: 100%;
-  width: calc(8 * var(--spacing-mega));
-  background: var(--color-background-default);
-  border-radius: var(--border-radius-default);
-}
-
-.disabledContainer {
+.disabledSelector {
+  background: var(--color-background-neutral-grey);
   cursor: not-allowed;
 }
 
-.smallComboboxContainer {
+.placeholder {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  flex: 1;
+  overflow: hidden;
+  color: var(--color-text-faded);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  max-width: 80%;
+}
+
+.overflow {
+  position: relative;
+  display: flex;
+  flex: auto;
+  flex-wrap: wrap;
+  max-width: 100%;
+  align-items: center;
+}
+
+.multiSelectSearchInput {
+  margin: 0;
+  padding: 0;
+  background: 0 0;
+  border: none;
+  outline: none;
+  appearance: none;
+  width: 100%;
+}
+
+.smallSearchInput {
   height: var(--spacing-mega);
 }
-.mediumComboboxContainer {
+.mediumSearchInput {
   height: calc(2 * var(--spacing-large));
 }
-.largeComboboxContainer {
+.largeSearchInput {
   height: calc(3 * var(--spacing-medium));
 }
 
-.comboboxBodyContainer {
-  position: absolute;
-  border-radius: var(--border-radius-default);
-  box-shadow: var(--shadow-large);
-  width: 100%;
-  z-index: var(--z-index-dropdown);
-  transition: var(--transition-fast);
-  background-color: var(--color-background-default);
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  font-size: var(--font-size-normal);
+.overflowItem {
+  flex: none;
+  align-self: center;
+  max-width: 100%;
 }
 
-.smallComboboxBodyContainer {
-  margin-top: calc(var(--spacing-mega) + var(--spacing-xsmall));
-}
-
-.mediumComboboxBodyContainer {
-  margin-top: calc(var(--spacing-mega) + var(--spacing-small));
-}
-.largeComboboxBodyContainer {
-  font-size: var(--font-size-large);
-  margin-top: calc(var(--spacing-mega) + 2 * var(--spacing-small));
-}
-
-.openedComboboxBodyContainer {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.caretIconButton {
+.search {
+  position: relative;
+  max-width: 100%;
   width: var(--spacing-medium);
-  height: var(--spacing-medium);
-  position: absolute;
-  right: var(--spacing-medium);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-background-alternative-deep);
-  svg {
-    transition: var(--transition-fast);
-  }
 }
 
-.openedCaretIconButton {
-  svg {
-    transform: rotate(180deg);
-    transition: var(--transition-fast);
-  }
-}
-
-.disabled {
-  pointer-events: none;
-}
-
-.disabledInput {
-  color: var(--color-background-alternative-deep);
-  background: var(--color-background-neutral-grey);
+.fullWidth {
+  width: 100%;
 }
