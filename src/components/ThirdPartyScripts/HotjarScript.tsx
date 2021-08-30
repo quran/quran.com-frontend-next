@@ -8,7 +8,7 @@ const HotjarScript = () => {
   }
 
   return (
-    <Script strategy="lazyOnload">
+    <Script strategy="lazyOnload" id="hotjar-script">
       {`(function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
         h._hjSettings={hjid:2578202,hjsv:6};
