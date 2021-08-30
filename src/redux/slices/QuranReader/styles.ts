@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { QuranFont } from 'src/components/QuranReader/types';
 
 export const MAXIMUM_FONT_STEP = 5;
+export const MINIMUM_FONT_STEP = 1;
 
 export type QuranReaderStyles = {
   tafsirFontScale: number;

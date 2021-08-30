@@ -1,13 +1,19 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { QuranFont } from 'src/components/QuranReader/types';
 import {
+  decreaseQuranTextFontScale,
+  increaseQuranTextFontScale,
+  MAXIMUM_FONT_STEP,
+  MINIMUM_FONT_STEP,
   QuranReaderStyles,
   selectQuranReaderStyles,
   setQuranFont,
 } from 'src/redux/slices/QuranReader/styles';
+
 import { Section, SectionDescription, SectionLabel, SectionRow, SectionTitle } from './Section';
 
 const views = [
@@ -55,8 +61,8 @@ const getLabel = (font: QuranFont, selectedView) =>
 
 const QuranFontSection = () => {
   const dispatch = useDispatch();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
-  const { quranFont } = quranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const { quranFont, quranTextFontScale } = quranReaderStyles;
   const selectedView = getSelectedView(quranFont);
 
   return (
@@ -80,6 +86,22 @@ const QuranFontSection = () => {
           initialInputValue={getLabel(quranFont, selectedView)}
           items={styles[selectedView]}
           onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
+        />
+      </SectionRow>
+      <SectionRow>
+        <SectionLabel>Font size</SectionLabel>
+        <Counter
+          count={quranTextFontScale}
+          onDecrement={
+            quranTextFontScale === MINIMUM_FONT_STEP
+              ? null
+              : () => dispatch(decreaseQuranTextFontScale())
+          }
+          onIncrement={
+            quranTextFontScale === MAXIMUM_FONT_STEP
+              ? null
+              : () => dispatch(increaseQuranTextFontScale())
+          }
         />
       </SectionRow>
       <SectionDescription>
