@@ -1,0 +1,20 @@
+.container {
+  margin-bottom: calc(2 * var(--spacing-large));
+  padding: var(--spacing-medium);
+  background: #ffefcf;
+  border-radius: var(--border-radius-default);
+
+  p:not(:last-child) {
+    margin-bottom: var(--spacing-medium);
+  }
+
+  // TODO: migrate this to use our future Link component
+  a {
+    color: var(--color-success-medium);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}

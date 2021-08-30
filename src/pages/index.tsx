@@ -4,6 +4,7 @@ import { NextPage, GetStaticProps } from 'next';
 import { ChaptersResponse } from 'types/APIResponses';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
 import homepageImage from 'public/images/homepage.png';
+import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import ChaptersList from '../components/chapters/ChaptersList';
 import QuickLinks from '../components/HomePage/QuickLinks';
 import { getChapters } from '../api';
@@ -22,7 +23,8 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
         placeholder="blur" // to have a blur effect while loading.
       />
     </div>
-    <div className={styles.chaptersListContainer}>
+    <div className={styles.listContainer}>
+      <HomePageWelcomeMessage />
       <QuickLinks />
       <BookmarkedVersesList />
       <ChaptersList chapters={chapters} />
