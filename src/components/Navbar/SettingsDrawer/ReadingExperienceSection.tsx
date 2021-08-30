@@ -25,14 +25,13 @@ const preferences = [
 const ReadingExperienceSection = () => {
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
-  console.log(readingPreference);
 
   return (
     <Section>
       <SectionTitle>Reading Experience</SectionTitle>
       <SectionRow>
         <SectionLabel>Mode</SectionLabel>
-        <div style={{ width: '100%' }}>
+        <div>
           <RadioGroup
             onChange={(value) =>
               dispatch(setReadingPreference(value as unknown as ReadingPreference))

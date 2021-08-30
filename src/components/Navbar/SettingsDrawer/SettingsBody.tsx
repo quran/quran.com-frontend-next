@@ -1,4 +1,9 @@
+import React from 'react';
+import Button from 'src/components/dls/Button/Button';
+import QuranFontSection from './QuranFontSection';
+
 import ReadingExperienceSection from './ReadingExperienceSection';
+import { Section, SectionTitle } from './Section';
 import styles from './SettingsBody.module.scss';
 import ThemeSection from './ThemeSection';
 
@@ -6,42 +11,7 @@ const SettingsBody = () => (
   <div className={styles.container}>
     <ThemeSection />
     <ReadingExperienceSection />
-    {/* <Section>
-      <SectionTitle>Reading Experiece</SectionTitle>
-      <div>
-        <div>view</div>
-        <div>translation</div>
-        <div>reading</div>
-      </div>
-      <div>
-        <div>tooltip</div>
-      </div>
-      <div>
-        <div>word by word</div>
-      </div>
-    </Section>
-
-    <Section>
-      <SectionTitle>quran font</SectionTitle>
-      <div>
-        <div>type</div>
-        <div>uthamani</div>
-        <div>indopak</div>
-      </div>
-      <div>
-        <div>style</div>
-        <div>style</div>
-      </div>
-      <div>
-        <div>font size</div>
-        <div> - 3 +</div>
-      </div>
-      <div>font preview section</div>
-      <div>
-        KPFG Fonts provide higher quality but take longer to load and cannot be copied through the
-        browser
-      </div>
-    </Section>
+    <QuranFontSection />
 
     <Section>
       <SectionTitle>Translation</SectionTitle>
@@ -76,9 +46,8 @@ const SettingsBody = () => (
     </Section>
 
     <div>
-      <Button>Reset sttings</Button>
+      <Button>Reset settings</Button>
     </div>
-  */}
   </div>
 );
 

@@ -2,18 +2,30 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-jumbo);
   line-height: var(--line-height-jumbo);
+  padding-bottom: var(--spacing-medium);
 }
 .section {
+  padding-bottom: var(--spacing-mega);
 }
 
 .label {
 }
 
 .description {
+  padding-top: var(--spacing-medium);
   font-style: italic;
 }
 .row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.row > *:first-child {
+  max-width: calc(3 * var(--spacing-mega));
+}
+.row > * {
+  flex: 1;
+}
+.row + .row {
+  margin-top: var(--spacing-xsmall);
 }
