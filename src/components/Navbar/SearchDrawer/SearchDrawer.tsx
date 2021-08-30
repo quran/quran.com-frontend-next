@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState, RefObject } from 'react';
 import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -10,6 +10,8 @@ import { SearchResponse } from 'types/APIResponses';
 import useDebounce from 'src/hooks/useDebounce';
 import classNames from 'classnames';
 import SearchResults from 'src/components/Search/SearchResults';
+import useFocus from 'src/hooks/useFocusElement';
+import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import styles from './SearchDrawer.module.scss';
@@ -17,7 +19,7 @@ import styles from './SearchDrawer.module.scss';
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar).isSearchDrawerOpen;
   const { lang } = useTranslation();
@@ -30,6 +32,11 @@ const SearchDrawer: React.FC = () => {
   const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+
+  // once the component mounts, focus the input field
+  useEffect(() => {
+    focusInput();
+  }, [focusInput]);
 
   // This useEffect is triggered when the debouncedSearchQuery value changes
   useEffect(() => {
@@ -96,6 +103,7 @@ const SearchDrawer: React.FC = () => {
     });
   }, [closeSearchDrawer, router.events, isOpen]);
 
+  const searchUrl = getSearchQueryNavigationUrl(searchQuery);
   return (
     <div className={classNames(styles.container, { [styles.containerOpen]: isOpen })}>
       <div className={styles.header}>
@@ -105,7 +113,7 @@ const SearchDrawer: React.FC = () => {
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               disabled={!searchQuery}
-              href={`/search?query=${searchQuery}`}
+              href={searchUrl}
             >
               <IconSearch />
             </Button>

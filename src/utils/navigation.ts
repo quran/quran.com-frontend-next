@@ -60,3 +60,11 @@ export const resolveUrlBySearchNavigationType = (
   // for the Surah navigation
   return getSurahNavigationUrl(key);
 };
+
+/**
+ * Get the href link to the search page with a specific query.
+ *
+ * @param {string} query the search query.
+ * @returns {string}
+ */
+export const getSearchQueryNavigationUrl = (query: string): string => `/search?query=${query}`;

@@ -14,7 +14,7 @@ import React, {
 import classNames from 'classnames';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useFocus from '../../../../hooks/useFocusElement';
+import useFocus from 'src/hooks/useFocusElement';
 import { DropdownItem } from './ComboboxItem';
 import styles from './Combobox.module.scss';
 import Tag from './Tag';
