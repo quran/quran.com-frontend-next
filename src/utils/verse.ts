@@ -62,3 +62,14 @@ export const getWordDataFromLocation = (
     isFirstWordOfFirstVerseOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
   };
 };
+
+/**
+ * Get the href link to a verse.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseNavigationUrl = (verseKey: string): string => {
+  const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  return `/${chapterId}/${verseNumber}`;
+};

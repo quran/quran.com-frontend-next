@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-background-alternative);
+  padding: var(--spacing-small);
+  margin: var(--spacing-xsmall) 0;
+}
+
+.name {
+  font-size: var(--font-size-normal);
+  line-height: var(--line-height-large);
+  padding: var(--spacing-micro);
+}
+
+.link {
+  text-decoration: none;
+  color: var(--color-text-default);
+}
+
+.key {
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-background-alternative-deep);
+  padding: var(--spacing-micro);
+}

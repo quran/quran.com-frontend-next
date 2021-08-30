@@ -2,26 +2,29 @@ import Verse from './Verse';
 import Chapter from './Chapter';
 import AvailableTranslation from './AvailableTranslation';
 import TafsirInfo from './TafsirInfo';
-import SearchResult from './SearchResult';
 import AvailableLanguage from './AvailableLanguage';
 import Reciter from './Reciter';
 import { AudioFile } from './AudioFile';
 import ChapterInfo from './ChapterInfo';
+import { SearchNavigationResult } from './SearchNavigationResult';
+import { SearchVerseResult } from './SearchVerseResult';
 
 export interface BaseResponse {
   status?: number;
   error?: string;
 }
 
+interface Pagination {
+  perPage: number;
+  currentPage: number;
+  nextPage: number | null;
+  totalRecords: number;
+  totalPages: number;
+}
+
 // The response from the verses endpoint that returns a list of verses
 export interface VersesResponse extends BaseResponse {
-  pagination: {
-    perPage: number;
-    currentPage: number;
-    nextPage: number | null;
-    totalRecords: number;
-    totalPages: number;
-  };
+  pagination: Pagination;
   verses: Verse[];
 }
 
@@ -58,12 +61,10 @@ export interface AudioTimestampsResponse extends BaseResponse {
   };
 }
 export interface SearchResponse extends BaseResponse {
-  search?: {
-    query: string;
-    totalResults: number;
-    currentPage: number;
-    totalPages: number;
-    results: SearchResult[];
+  pagination: Pagination;
+  result?: {
+    navigation: SearchNavigationResult[];
+    verses: SearchVerseResult[];
   };
 }
 

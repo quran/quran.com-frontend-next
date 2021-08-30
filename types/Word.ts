@@ -22,7 +22,8 @@ interface Word {
   id?: number;
   textUthmani?: string;
   textIndopak?: string;
-  highlight?: string;
+  highlight?: string | boolean;
+  text?: string;
   audioUrl: $TsFixMe;
   [key: string]: $TsFixMe;
 }

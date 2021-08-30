@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .pageContainer {
-  padding-top: calc(2 * var(--spacing-mega));
+  padding: calc(2 * var(--spacing-mega)) 0;
   margin: 0 auto;
   width: 90%;
   @include breakpoints.tablet {
@@ -13,11 +13,6 @@
   margin: var(--spacing-medium) 0;
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-}
-
-.boldHeader {
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-small);
 }
 
 .bodyContainer {
@@ -50,7 +45,7 @@
 .searchInput {
   border: 0;
   width: 90%;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
   background: var(--color-background-default);
   color: var(--color-text-default);
   &:focus {
