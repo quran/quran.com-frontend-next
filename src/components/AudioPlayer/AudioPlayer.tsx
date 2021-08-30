@@ -14,8 +14,6 @@ import {
   setVisibility,
   Visibility,
 } from '../../redux/slices/AudioPlayer/state';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
-import PauseIcon from '../../../public/icons/pause.svg';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
@@ -24,17 +22,13 @@ import Slider from './Slider';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import MediaSessionApiListeners from './MediaSessionAPIListeners';
 import styles from './AudioPlayer.module.scss';
-import {
-  triggerPauseAudio,
-  triggerPlayAudio,
-  triggerSeek,
-  triggerSetCurrentTime,
-} from './EventTriggers';
+import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
 import PlaybackControls from './PlaybackControls';
+import PlayPauseButton from './PlayPauseButton';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const { isPlaying, currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
+  const { currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
@@ -114,7 +108,6 @@ const AudioPlayer = () => {
         [styles.containerHidden]: isHidden,
         [styles.containerDefault]: visibility === Visibility.Default,
         [styles.containerExpanded]: visibility === Visibility.Expanded,
-        [styles.containerLoading]: isLoading,
       })}
     >
       <div className={styles.innerContainer}>
@@ -144,31 +137,12 @@ const AudioPlayer = () => {
             [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
           })}
         >
-          {isPlaying ? (
-            // Pause
-            <Button
-              size={ButtonSize.Large}
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={withStopPropagation(triggerPauseAudio)}
-            >
-              <PauseIcon />
-            </Button>
-          ) : (
-            // Play
-            <Button
-              shape={ButtonShape.Circle}
-              size={ButtonSize.Large}
-              variant={ButtonVariant.Ghost}
-              onClick={withStopPropagation(triggerPlayAudio)}
-            >
-              <PlayIcon />
-            </Button>
-          )}
+          <PlayPauseButton />
           <div className={styles.seekBackwardsContainer}>
             <Button
               shape={ButtonShape.Circle}
               size={ButtonSize.Large}
+              disabled={isLoading}
               variant={ButtonVariant.Ghost}
               onClick={withStopPropagation(() => triggerSeek(-10))}
             >
