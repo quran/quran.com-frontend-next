@@ -2,4 +2,12 @@
   min-height: 100vh;
   background: var(--color-background-default);
   color: var(--color-text-default);
+
+  ::selection {
+    background: var(--color-highlight);
+  }
+
+  ::-moz-selection {
+    background: var(--color-highlight);
+  }
 }

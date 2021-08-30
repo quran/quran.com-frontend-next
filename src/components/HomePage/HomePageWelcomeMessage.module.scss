@@ -10,7 +10,7 @@
 
   // TODO: migrate this to use our future Link component
   a {
-    color: var(--color-success-medium);
+    color: var(--color-text-link);
     text-decoration: none;
     &:hover {
       text-decoration: underline;
