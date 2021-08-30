@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from 'src/components/dls/Button/Button';
 import AudioSection from './AudioSection';
 import QuranFontSection from './QuranFontSection';
 
 import ReadingExperienceSection from './ReadingExperienceSection';
+import ResetButton from './ResetButton';
 import styles from './SettingsBody.module.scss';
 import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
@@ -17,7 +17,7 @@ const SettingsBody = () => (
     <TranslationSection />
     <TafsirSection />
     <AudioSection />
-    <Button>Reset settings</Button>
+    <ResetButton />
   </div>
 );
 

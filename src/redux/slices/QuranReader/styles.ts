@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { QuranFont } from 'src/components/QuranReader/types';
+import reset from '../reset';
 
 export const MAXIMUM_FONT_STEP = 5;
 export const MINIMUM_FONT_STEP = 1;
@@ -66,6 +67,9 @@ export const quranReaderStylesSlice = createSlice({
           };
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(reset, () => initialState);
   },
 });
 

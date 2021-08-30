@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { areArraysEquals } from 'src/utils/array';
+import reset from '../reset';
 
 // English Mokhtasar and Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = [171, 169];
@@ -24,6 +25,9 @@ export const tafsirsSlice = createSlice({
       isUsingDefaultTafsirs: areArraysEquals(DEFAULT_TAFSIRS, action.payload), // check if the user is using the default tafsirs on each tafsir change.
       selectedTafsirs: action.payload,
     }),
+  },
+  extraReducers: (builder) => {
+    builder.addCase(reset, () => initialState);
   },
 });
 
