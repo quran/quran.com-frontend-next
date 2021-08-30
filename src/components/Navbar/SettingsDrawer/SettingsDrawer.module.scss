@@ -1,0 +1,94 @@
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+
+.container {
+  background: var(--color-background-default);
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: var(--z-index-header);
+  transition: var(--transition-regular);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  right: -100%;
+
+  @include breakpoints.tablet {
+    width: constants.$side-menu-desktop-width;
+    right: calc(0 - constants.$side-menu-desktop-width);
+  }
+}
+
+.containerOpen {
+  box-shadow: var(--shadow-normal);
+  right: 0;
+  @include breakpoints.tablet {
+    right: 0;
+  }
+}
+
+.header {
+  width: 100%;
+  background-color: var(--color-background-default);
+  position: fixed;
+  height: constants.$navbar-height;
+  border-bottom: 1px var(--color-borders-hairline) solid;
+  padding: 0 var(--spacing-medium);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include breakpoints.tablet {
+    width: constants.$side-menu-desktop-width;
+  }
+}
+
+.headerContentContainer {
+  margin-right: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchInputContainer {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchInputContainerRTL {
+  flex-direction: row-reverse;
+}
+
+.clear {
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: var(--font-size-small);
+}
+
+.searchInput {
+  width: 100%;
+  border: 0;
+  background: var(--color-background-default);
+  color: var(--color-text-default);
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: none;
+  }
+}

@@ -1,0 +1,6 @@
+@use "src/styles/constants";
+
+.container {
+  margin-top: constants.$navbar-height;
+  padding: var(--spacing-medium);
+}
