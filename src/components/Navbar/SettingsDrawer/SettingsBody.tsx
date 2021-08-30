@@ -5,6 +5,7 @@ import QuranFontSection from './QuranFontSection';
 import ReadingExperienceSection from './ReadingExperienceSection';
 import { Section, SectionTitle } from './Section';
 import styles from './SettingsBody.module.scss';
+import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
 import TranslationSection from './TranslationSection';
 
@@ -14,18 +15,7 @@ const SettingsBody = () => (
     <ReadingExperienceSection />
     <QuranFontSection />
     <TranslationSection />
-
-    <Section>
-      <SectionTitle>Tafsir</SectionTitle>
-      <div>
-        <div>translation</div>
-        <div>aak</div>
-      </div>
-      <div>
-        <div>font size</div>
-        <div>-3=</div>
-      </div>
-    </Section>
+    <TafsirSection />
 
     <Section>
       <SectionTitle>Audio</SectionTitle>

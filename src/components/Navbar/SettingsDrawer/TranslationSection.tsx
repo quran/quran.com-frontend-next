@@ -8,17 +8,10 @@ import {
   setSelectedTranslations,
   TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
+import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
-
-const throwStatusError = (res: any) => {
-  if (res.stats === 500) {
-    throw new Error('fail to get translations');
-  }
-};
-
-const toArrayString = (values) => values.map((v) => v.toString());
-const toArrayNumber = (values) => values.map((v) => Number(v));
 
 const translationsToComboboxItems = (translations) =>
   translations.map((item) => ({
@@ -35,7 +28,7 @@ const TranslationSection = () => {
 
   const { data: translations, error } = useSWR(`get-translations/${lang}`, () =>
     getAvailableTranslations(lang).then((res) => {
-      throwStatusError(res);
+      throwIfError(res);
       return res.translations;
     }),
   );
@@ -56,8 +49,10 @@ const TranslationSection = () => {
           items={items || []}
           isMultiSelect
           size={ComboboxSize.Medium}
-          value={toArrayString(selectedTranslations)}
-          onChange={(values) => dispatch(setSelectedTranslations(toArrayNumber(values)))}
+          value={numbersToStringsArray(selectedTranslations)}
+          onChange={(values) =>
+            dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
+          }
         />
       </SectionRow>
     </Section>
