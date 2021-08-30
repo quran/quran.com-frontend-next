@@ -53,4 +53,4 @@
   height: var(--spacing-medium);
 }
 
-@include utility.generate-font-sizes-translation();
+@include utility.generate-font-sizes("translation");
