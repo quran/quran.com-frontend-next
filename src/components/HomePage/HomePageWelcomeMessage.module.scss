@@ -1,7 +1,7 @@
 .container {
   margin-bottom: calc(2 * var(--spacing-large));
   padding: var(--spacing-medium);
-  background: #ffefcf;
+  background: var(--color-warning-faded);
   border-radius: var(--border-radius-default);
 
   p:not(:last-child) {
