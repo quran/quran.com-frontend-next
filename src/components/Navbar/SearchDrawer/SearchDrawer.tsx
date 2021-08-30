@@ -33,10 +33,12 @@ const SearchDrawer: React.FC = () => {
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
 
-  // once the component mounts, focus the input field
+  // once the drawer is open, focus the input field
   useEffect(() => {
-    focusInput();
-  }, [focusInput]);
+    if (isOpen) {
+      focusInput();
+    }
+  }, [isOpen, focusInput]);
 
   // This useEffect is triggered when the debouncedSearchQuery value changes
   useEffect(() => {
