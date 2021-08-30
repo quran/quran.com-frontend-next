@@ -109,7 +109,6 @@ $container-width: calc(8 * var(--spacing-mega));
 .enabled {
   cursor: text;
 }
-// ----------------------
 
 .select {
   box-sizing: border-box;
@@ -193,46 +192,6 @@ $container-width: calc(8 * var(--spacing-mega));
   flex-wrap: wrap;
   max-width: 100%;
   align-items: center;
-}
-
-.item {
-  position: relative;
-  display: flex;
-  flex: none;
-  box-sizing: border-box;
-  max-width: 100%;
-  height: var(--spacing-large);
-  margin: var(--spacing-micro) 0;
-  background: var(--color-background-alternative);
-  border-radius: var(--border-radius-default);
-  user-select: none;
-  margin-inline-end: var(--spacing-xxsmall);
-  padding-inline-end: var(--spacing-xxsmall);
-  padding-inline-start: var(--spacing-xxsmall);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: var(--font-size-normal);
-}
-
-.largeItem {
-  font-size: var(--font-size-large);
-}
-
-.itemContent {
-  display: inline-block;
-  margin-right: var(--spacing-micro);
-  overflow: hidden;
-  white-space: pre;
-  text-overflow: ellipsis;
-}
-
-.itemRemove {
-  cursor: pointer;
-  svg {
-    width: var(--spacing-xsmall);
-    height: var(--spacing-xsmall);
-  }
 }
 
 .multiSelectSearchInput {

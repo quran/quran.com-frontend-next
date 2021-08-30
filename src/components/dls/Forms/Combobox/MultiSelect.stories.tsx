@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import Combobox, { ComboboxSize } from './index';
+import Combobox from './index';
 import SettingIcon from '../../../../../public/icons/settings.svg';
 import SearchIcon from '../../../../../public/icons/search.svg';
+import ComboboxSize from './ComboboxSize';
 
 export default {
-  title: 'dls/Combobox',
+  title: 'dls/Combobox/MultiSelect',
   component: Combobox,
   argTypes: {
     id: {
@@ -121,7 +122,42 @@ export default {
   },
 };
 
-const Template = (args) => <Combobox {...args} />;
+const ControlledRemoteTemplate = (args) => {
+  const [value, setValue] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // imitate the behavior of fetching from a remote datastore.
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setValue(['Item1', 'Item2', 'Item3', 'Item4']);
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+  const onChange = (newSelectedValues: string[]) => {
+    setValue(newSelectedValues);
+  };
+  return (
+    <Combobox
+      {...args}
+      value={value}
+      initialInputValue={isLoading ? 'Loading...' : ''}
+      isMultiSelect
+      onChange={onChange}
+    />
+  );
+};
+
+// this template will be controlled where the value is a local value and not fetched from a remote datastore.
+const ControlledLocalTemplate = (args) => {
+  const [value, setValue] = useState(['Item1', 'Item2', 'Item3', 'Item4']);
+  const onChange = (newSelectedValues: string[]) => {
+    setValue(newSelectedValues);
+  };
+  return <Combobox {...args} value={value} isMultiSelect onChange={onChange} />;
+};
+
+const Template = (args) => <Combobox isMultiSelect {...args} />;
 
 const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false) => {
   const items = [];
@@ -140,53 +176,18 @@ const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false)
 
 export const DefaultCombobox = Template.bind({});
 DefaultCombobox.args = {
-  id: 'default',
-  items: generateItems(),
-};
-
-export const ComboboxWithError = Template.bind({});
-ComboboxWithError.args = {
-  id: 'default',
-  items: generateItems(),
-  hasError: true,
-};
-
-export const DisabledCombobox = Template.bind({});
-DisabledCombobox.args = {
-  id: 'default',
-  items: generateItems(),
-  disabled: true,
-};
-
-export const ComboboxWithSuffixedItems = Template.bind({});
-ComboboxWithSuffixedItems.args = {
-  id: 'suffixed',
-  items: generateItems(10, true),
-};
-
-export const ComboboxWithPrefixedItems = Template.bind({});
-ComboboxWithPrefixedItems.args = {
-  id: 'prefixed',
-  items: generateItems(10, false, true),
-};
-
-export const ComboboxWithPrefixedAndSuffixedItems = Template.bind({});
-ComboboxWithPrefixedAndSuffixedItems.args = {
-  id: 'prefixed_and_suffixed',
-  items: generateItems(10, true, true),
-};
-
-export const ComboboxWithMultiSelect = Template.bind({});
-ComboboxWithMultiSelect.args = {
   id: 'multi-select',
   items: generateItems(),
-  isMultiSelect: true,
 };
 
-export const ComboboxWithPreSelectedItems = Template.bind({});
-ComboboxWithPreSelectedItems.args = {
-  id: 'multi-select-with-preselected-items',
+export const ControlledCombobox = ControlledLocalTemplate.bind({});
+ControlledCombobox.args = {
+  id: 'controlled-local-multi-select',
   items: generateItems(),
-  isMultiSelect: true,
-  value: ['Item1', 'Item2', 'Item3', 'Item4'],
+};
+
+export const RemoteControlledCombobox = ControlledRemoteTemplate.bind({});
+RemoteControlledCombobox.args = {
+  id: 'controlled-remote-multi-select',
+  items: generateItems(),
 };

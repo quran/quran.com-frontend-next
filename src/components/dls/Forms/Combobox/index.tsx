@@ -22,12 +22,8 @@ import IconSearch from '../../../../../public/icons/search.svg';
 import CloseIcon from '../../../../../public/icons/close.svg';
 import ComboboxItem, { DropdownItem } from './ComboboxItem';
 import styles from './Combobox.module.scss';
-
-export enum ComboboxSize {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-}
+import Tag from './Tag';
+import ComboboxSize from './ComboboxSize';
 
 type InitialSelectedItems = string[];
 type MultiSelectValue = Record<string, boolean>;
@@ -140,6 +136,15 @@ const Combobox: React.FC<Props> = ({
     isMultiSelect && !inputValue && !!tags.length,
   );
 
+  const invokeOnChangeCallback = useCallback(
+    (newValue) => {
+      if (onChange) {
+        onChange(isMultiSelect ? Object.keys(newValue) : (selectedValue as string), id);
+      }
+    },
+    [id, isMultiSelect, onChange, selectedValue],
+  );
+
   // listener for when the backspace is clicked.
   useEffect(() => {
     if (shouldDeleteLastTag) {
@@ -147,18 +152,11 @@ const Combobox: React.FC<Props> = ({
         const newSelectedValues = { ...prevSelectedValue };
         const lastTag = Object.keys(newSelectedValues).pop();
         delete newSelectedValues[lastTag];
+        invokeOnChangeCallback(newSelectedValues);
         return newSelectedValues;
       });
     }
-  }, [shouldDeleteLastTag]);
-
-  // listen to any change in selectedValue and invoke the callback if it exists.
-  useEffect(() => {
-    if (onChange) {
-      // we will pass the name of the selected item and the id of the whole search dropdown to avoid collision in-case we have the same name but for 2 different search dropdowns.
-      onChange(isMultiSelect ? Object.keys(selectedValue) : (selectedValue as string), id);
-    }
-  }, [isMultiSelect, id, onChange, selectedValue]);
+  }, [id, invokeOnChangeCallback, shouldDeleteLastTag]);
 
   useEffect(() => {
     // once the dropdown is opened, scroll to the selected item.
@@ -193,6 +191,7 @@ const Combobox: React.FC<Props> = ({
           } else {
             newSelectedValues[selectedItemName] = true;
           }
+          invokeOnChangeCallback(newSelectedValues);
           return newSelectedValues;
         });
         setInputValue(''); // reset the input value even if it's selecting.
@@ -201,10 +200,11 @@ const Combobox: React.FC<Props> = ({
         setInputValue(isUnSelect ? '' : itemLabel);
         const newSelectedValue = isUnSelect ? '' : selectedItemName;
         setSelectedValue(newSelectedValue);
+        invokeOnChangeCallback(newSelectedValue);
       }
       setIsOpened(false); // close the items container
     },
-    [isMultiSelect, items],
+    [invokeOnChangeCallback, isMultiSelect, items],
   );
 
   /**
@@ -240,31 +240,33 @@ const Combobox: React.FC<Props> = ({
     setInputValue('');
     const defaultSelectedValue = getDefaultValue(isMultiSelect);
     setSelectedValue(defaultSelectedValue);
+    invokeOnChangeCallback(defaultSelectedValue);
     setFilteredItems(items);
   };
 
   /**
    * Handle when removing a tag.
    *
-   * @param {MouseEvent} event
+   * @param {React.MouseEvent<HTMLSpanElement>} event
    * @param {string} tag
    */
-  const onRemoveTagClicked = (event: MouseEvent, tag: string) => {
-    event.stopPropagation();
-    const toBeRemovedTag = items.find((item) => item.label === tag);
-    setSelectedValue((prevSelectedValues: MultiSelectValue) => {
-      const newSelectedValues = { ...prevSelectedValues };
-      delete newSelectedValues[toBeRemovedTag.name];
-      return newSelectedValues;
-    });
-  };
+  const onRemoveTagClicked = useCallback(
+    (event: React.MouseEvent<HTMLSpanElement>, tag: string) => {
+      event.stopPropagation();
+      const toBeRemovedTag = items.find((item) => item.label === tag);
+      setSelectedValue((prevSelectedValues: MultiSelectValue) => {
+        const newSelectedValues = { ...prevSelectedValues };
+        delete newSelectedValues[toBeRemovedTag.name];
+        invokeOnChangeCallback(newSelectedValues);
+        return newSelectedValues;
+      });
+    },
+    [invokeOnChangeCallback, items],
+  );
 
   const shouldShowCaret =
     (!isMultiSelect && !inputValue) || (isMultiSelect && !inputValue && !tags.length);
-
-  const shouldShowClear =
-    clearable &&
-    ((!isMultiSelect && !!inputValue) || (isMultiSelect && (!!inputValue || !!tags.length)));
+  const shouldShowClear = clearable && !shouldShowCaret;
 
   return (
     <>
@@ -304,25 +306,7 @@ const Combobox: React.FC<Props> = ({
               {isMultiSelect &&
                 tags.map((tag) => (
                   <div key={tag} className={styles.overflowItem}>
-                    <span
-                      className={classNames(styles.item, {
-                        [styles.largeItem]: size === ComboboxSize.Large,
-                      })}
-                    >
-                      <span className={styles.itemContent}>{tag}</span>
-                      <span
-                        className={styles.itemRemove}
-                        unselectable="on"
-                        aria-hidden="true"
-                        onClick={(event) => {
-                          onRemoveTagClicked(event, tag);
-                        }}
-                      >
-                        <span role="img" aria-label="close" className={styles.icon}>
-                          <CloseIcon />
-                        </span>
-                      </span>
-                    </span>
+                    <Tag tag={tag} onRemoveTagClicked={onRemoveTagClicked} size={size} />
                   </div>
                 ))}
               <div className={styles.overflowItem}>
