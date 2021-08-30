@@ -26,8 +26,9 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
     [pageNumber, lineNumber],
   );
   const firstWordData = getWordDataFromLocation(location);
-  const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const isBigTextLayout = isWordByWordLayout || (isReadingMode && quranTextFontScale > 3);
+  const isBigTextLayout =
+    isReadingMode &&
+    (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
   return (
     <>
