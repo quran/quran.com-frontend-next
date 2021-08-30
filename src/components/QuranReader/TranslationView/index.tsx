@@ -9,6 +9,7 @@ import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
+import BookmarkIcon from './BookmarkIcon';
 
 type TranslationViewProps = {
   verses: Verse[];
@@ -20,24 +21,31 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
     {verses.map((verse) => (
       <div key={verse.id}>
         {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
-        <div className={classNames({ [styles.highlightedContainer]: false })}>
-          <VerseLink verseKey={verse.verseKey} />
-          <VerseActions verse={verse} />
-          <VerseText words={verse.words} />
-          {verse.translations?.map((translation: Translation) => (
-            <div key={translation.id}>
-              <div
-                className={classNames(
-                  styles.text,
-                  styles[`translation-font-size-${quranReaderStyles.translationFontScale}`],
-                )}
-                dangerouslySetInnerHTML={{ __html: translation.text }}
-              />
-              <p className={styles.translationName}>— {translation.resourceName}</p>
+        <div className={classNames(styles.cellContainer, { [styles.highlightedContainer]: false })}>
+          <div className={styles.actionContainer}>
+            <VerseLink verseKey={verse.verseKey} />
+            <VerseActions verse={verse} />
+          </div>
+          <div className={styles.contentContainer}>
+            <BookmarkIcon verseKey={verse.verseKey} />
+            <div className={styles.verseContainer}>
+              <VerseText words={verse.words} />
             </div>
-          ))}
-          <hr />
+            {verse.translations?.map((translation: Translation) => (
+              <div key={translation.id} className={styles.verseContainer}>
+                <div
+                  className={classNames(
+                    styles.text,
+                    styles[`translation-font-size-${quranReaderStyles.translationFontScale}`],
+                  )}
+                  dangerouslySetInnerHTML={{ __html: translation.text }}
+                />
+                <p className={styles.translationName}>— {translation.resourceName}</p>
+              </div>
+            ))}
+          </div>
         </div>
+        <hr />
       </div>
     ))}
   </div>

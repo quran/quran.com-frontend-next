@@ -112,8 +112,8 @@
   &:hover {
     background-image: linear-gradient(
       to right,
-      hsla(0, 0%, 100%, 0.8),
-      hsla(0, 0%, 100%, 0.8)
+      var(--color-background-alternative),
+      var(--color-background-alternative)
     );
   }
 }
@@ -197,5 +197,12 @@
   background: inherit;
   &:hover {
     background: inherit;
+  }
+}
+
+.base > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
   }
 }
