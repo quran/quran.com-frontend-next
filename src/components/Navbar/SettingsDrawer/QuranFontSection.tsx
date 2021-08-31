@@ -62,6 +62,13 @@ const getSelectedView = (font: QuranFont) => {
 const getLabel = (font: QuranFont, selectedView) =>
   styles[selectedView].find((v) => v.id === font)?.label;
 
+// get default style for selected view. We take the first style in this case
+// for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
+const getDefaultViewStyle = (view) => {
+  const style = styles[view][0];
+  return style.value;
+};
+
 const QuranFontSection = () => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -74,7 +81,7 @@ const QuranFontSection = () => {
       <SectionRow>
         <SectionLabel>View</SectionLabel>
         <RadioGroup
-          onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
+          onChange={(value) => dispatch(setQuranFont(getDefaultViewStyle(value)))}
           value={selectedView}
           label="Mode"
           items={views}
