@@ -4,12 +4,14 @@ export type Navbar = {
   isVisible: boolean;
   isNavigationDrawerOpen: boolean;
   isSearchDrawerOpen: boolean;
+  isSettingsDrawerOpen: boolean;
 };
 
 const initialState: Navbar = {
   isVisible: true,
   isNavigationDrawerOpen: false,
   isSearchDrawerOpen: false,
+  isSettingsDrawerOpen: false,
 };
 
 export const navbarSlice = createSlice({
@@ -28,11 +30,19 @@ export const navbarSlice = createSlice({
       ...state,
       isSearchDrawerOpen: action.payload,
     }),
+    setIsSettingsDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
+      ...state,
+      isSettingsDrawerOpen: action.payload,
+    }),
   },
 });
 
-export const { setIsVisible, setIsNavigationDrawerOpen, setIsSearchDrawerOpen } =
-  navbarSlice.actions;
+export const {
+  setIsVisible,
+  setIsNavigationDrawerOpen,
+  setIsSearchDrawerOpen,
+  setIsSettingsDrawerOpen,
+} = navbarSlice.actions;
 
 export const selectNavbar = (state) => state.navbar;
 

@@ -8,7 +8,7 @@
   height: calc(2 * var(--spacing-mega));
   width: calc(2 * var(--spacing-mega));
 
-  z-index: var(--z-index-max);
+  z-index: var(--z-index-sticky);
   border-radius: 100%;
   box-shadow: var(--shadow-small);
   text-align: center;

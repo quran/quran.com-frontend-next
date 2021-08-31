@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReadingPreference } from 'src/components/QuranReader/types';
+import resetSettings from '../reset-settings';
 
 const DEFAULT_TRANSLATION = 20; // just a placeholder.
 const DEFAULT_TRANSLITERATION = 12; // just a placeholder.
@@ -28,13 +29,13 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       readingPreference: action.payload,
     }),
-    toggleShowWordByWordTranslation: (state) => ({
+    setShowWordByWordTranslation: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      showWordByWordTranslation: !state.showWordByWordTranslation,
+      showWordByWordTranslation: action.payload,
     }),
-    toggleShowWordByWordTransliteration: (state) => ({
+    setShowWordByWordTransliteration: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      showWordByWordTransliteration: !state.showWordByWordTransliteration,
+      showWordByWordTransliteration: action.payload,
     }),
     setSelectedWordByWordTranslation: (state, action: PayloadAction<number>) => ({
       ...state,
@@ -45,12 +46,17 @@ export const readingPreferencesSlice = createSlice({
       selectedWordByWordTransliteration: action.payload,
     }),
   },
+  // reset the state to initial state
+  // when `reset` action is dispatched
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => initialState);
+  },
 });
 
 export const {
   setReadingPreference,
-  toggleShowWordByWordTranslation,
-  toggleShowWordByWordTransliteration,
+  setShowWordByWordTranslation,
+  setShowWordByWordTransliteration,
   setSelectedWordByWordTranslation,
   setSelectedWordByWordTransliteration,
 } = readingPreferencesSlice.actions;

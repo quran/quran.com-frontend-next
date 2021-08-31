@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { areArraysEquals } from 'src/utils/array';
+import resetSettings from '../reset-settings';
 
 export const DEFAULT_TRANSLATIONS = [20, 131];
 
@@ -23,6 +24,11 @@ export const translationsSlice = createSlice({
       isUsingDefaultTranslations: areArraysEquals(DEFAULT_TRANSLATIONS, action.payload), // check if the user is using the default translations on each translation change.
       selectedTranslations: action.payload,
     }),
+  },
+  // reset the translation state to initial state
+  // when `reset` action is dispatched
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 

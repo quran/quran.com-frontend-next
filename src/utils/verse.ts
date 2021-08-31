@@ -1,5 +1,6 @@
 import range from 'lodash/range';
 import * as chaptersData from '../../data/chapters.json';
+import * as sampleVerse from './sample-verse.json';
 
 const COLON_SPLITTER = ':';
 
@@ -62,3 +63,10 @@ export const getWordDataFromLocation = (
     isFirstWordOfFirstVerseOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
   };
 };
+
+/**
+ * get sample verse data
+ * it currently return 2:5 (Al baqarah verse 5)
+ * @returns {Verse} verse
+ */
+export const getSampleVerse = () => sampleVerse;
