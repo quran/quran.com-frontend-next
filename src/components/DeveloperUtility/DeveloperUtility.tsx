@@ -14,7 +14,7 @@ import NotesAdjustment from './NotesAdjustment';
 const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Uncomment once we have a settings menu and don't want to expose the developer utilities
+  // only show the developer utilities if we're in development mode
   if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
     return <></>;
   }
