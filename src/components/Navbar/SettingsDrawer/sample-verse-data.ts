@@ -1,5 +1,8 @@
 import Word from 'types/Word';
 
+// a hard coded sample verse
+// currently we use it in QuranFontSection, so we can show the preview of the verse
+// when use users are changing the font size, style, etc
 const verseSample = {
   id: 16,
   verseNumber: 9,
