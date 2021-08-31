@@ -42,6 +42,7 @@ const AudioSection = () => {
       <SectionRow>
         <SectionLabel>Reciter</SectionLabel>
         <Combobox
+          clearable={false}
           id="audio-reciter"
           items={items}
           initialInputValue={selectedReciter.name}
