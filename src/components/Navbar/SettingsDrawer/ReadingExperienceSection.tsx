@@ -54,6 +54,12 @@ const wordByWordOptions = [
   },
 ];
 
+// get the value from the redux store for translation and transliteration
+// and returns
+// 'both' if both are true,
+// 'translation' if only translation is true,
+// 'transliteration' if only transliteration is true,
+// 'none' if neither are true
 const useWordByWordValue = () => {
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectReadingPreferences,
@@ -76,6 +82,11 @@ const ReadingExperienceSection = () => {
   const readingPreference = useSelector(selectReadingPreference);
 
   const wordByWordValue = useWordByWordValue();
+
+  // dispatch the action to word by word state
+  // if the value is 'both' set word by word translation and transliteration to true
+  // if the value is 'translation' set word by word translation to true
+  // if the value is 'transliteration' set word by word transliteration to true
   const onWordByWordChange = (value: string) => {
     const showWordByWordTranslation = value === 'both' || value === 'translation';
     const showWordByWordTransliteration = value === 'both' || value === 'transliteration';
