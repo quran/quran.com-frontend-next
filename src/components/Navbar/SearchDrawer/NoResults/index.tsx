@@ -11,14 +11,16 @@ interface Props {
 const NoResults: React.FC<Props> = ({ searchQuery, searchUrl }) => (
   <>
     <div className={styles.container}>
-      <div className={styles.iconContainer}>
-        <IconSearch />
+      <div className={styles.mainBody}>
+        <div className={styles.iconContainer}>
+          <IconSearch />
+        </div>
+        <p className={styles.mainMessage}>No results found</p>
+        <p className={styles.secondaryMessage}>
+          We could not find any matching search results for {`"${searchQuery}"`}. try searching for
+          a different keyword.{' '}
+        </p>
       </div>
-      <p className={styles.mainMessage}>No results found</p>
-      <p className={styles.secondaryMessage}>
-        We could not find any matching search results for {`"${searchQuery}"`}. try searching for a
-        different keyword.{' '}
-      </p>
     </div>
     <AdvancedSearchLink searchUrl={searchUrl} />
   </>

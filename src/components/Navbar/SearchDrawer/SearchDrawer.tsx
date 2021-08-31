@@ -114,12 +114,25 @@ const SearchDrawer: React.FC = () => {
     (!isSearching && !hasError && searchResult && searchResult.pagination.totalRecords === 0);
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
 
+  /**
+   * When the keyword is clicked, we move the cursor to the end of
+   * the input field after setting its value.
+   *
+   * @param {string} keyword
+   */
+  const onSearchKeywordClicked = (keyword: string) => {
+    const end = keyword.length;
+    setSearchQuery(keyword);
+    searchInputRef.current.setSelectionRange(end, end);
+    focusInput();
+  };
+
   return (
     <div className={classNames(styles.container, { [styles.containerOpen]: isOpen })}>
       <div className={styles.header}>
         <div className={styles.headerContentContainer}>
           <div className={styles.headerContent}>
-            <DrawerCloseButton onClick={closeSearchDrawer} />
+            <DrawerSearchButton disabled={!searchQuery} href={searchUrl} />
             <div
               className={classNames(styles.searchInputContainer, {
                 [styles.searchInputContainerRTL]: isRTLInput,
@@ -141,7 +154,7 @@ const SearchDrawer: React.FC = () => {
                 </button>
               )}
             </div>
-            <DrawerSearchButton disabled={!searchQuery} href={searchUrl} />
+            <DrawerCloseButton onClick={closeSearchDrawer} />
           </div>
         </div>
       </div>
@@ -151,7 +164,7 @@ const SearchDrawer: React.FC = () => {
         })}
       >
         {!searchQuery ? (
-          <PreInput setSearchQuery={setSearchQuery} />
+          <PreInput onSearchKeywordClicked={onSearchKeywordClicked} />
         ) : (
           <>
             {isSearching ? (

@@ -1,5 +1,13 @@
 .container {
   margin: var(--spacing-large);
+  height: 100%;
+}
+
+.mainBody {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  justify-content: center;
 }
 
 .iconContainer {
