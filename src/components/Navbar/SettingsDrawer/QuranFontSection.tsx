@@ -55,7 +55,7 @@ const styles = {
 // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
 // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
 // if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
-const getSelectedView = (font: QuranFont) => {
+const getSelectedType = (font: QuranFont) => {
   const selectedViewEntry = Object.entries(styles).find(([, values]) =>
     values.some((v) => v.id === font),
   );
@@ -63,17 +63,18 @@ const getSelectedView = (font: QuranFont) => {
     const view = selectedViewEntry[0];
     return view;
   }
-  return QuranReaderStylesInitialState.quranFont;
+  // if no font is given, or invalid font is given, get type for default font
+  return getSelectedType(QuranReaderStylesInitialState.quranFont);
 };
 
 // get the label for selected style. For example for QuranFont.MadaniV1, it will be 'King Fahad Complex V1'
-const getLabel = (font: QuranFont, selectedView) =>
-  styles[selectedView].find((v) => v.id === font)?.label;
+const getLabel = (font: QuranFont, selectedType) =>
+  styles[selectedType].find((v) => v.id === font)?.label;
 
 // get default style for selected view. We take the first style in this case
 // for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
-const getDefaultViewStyle = (view) => {
-  const style = styles[view][0];
+const getDefaultTypeStyle = (selectedType) => {
+  const style = styles[selectedType][0];
   return style.value;
 };
 
@@ -81,7 +82,7 @@ const QuranFontSection = () => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranFont, quranTextFontScale } = quranReaderStyles;
-  const selectedView = getSelectedView(quranFont);
+  const selectedType = getSelectedType(quranFont);
 
   return (
     <Section>
@@ -89,8 +90,8 @@ const QuranFontSection = () => {
       <Section.Row>
         <Section.Label>Type</Section.Label>
         <RadioGroup
-          onChange={(value) => dispatch(setQuranFont(getDefaultViewStyle(value)))}
-          value={selectedView}
+          onChange={(value) => dispatch(setQuranFont(getDefaultTypeStyle(value)))}
+          value={selectedType}
           label="type"
           items={type}
           orientation={RadioGroupOrientation.Horizontal}
@@ -101,8 +102,8 @@ const QuranFontSection = () => {
         <Combobox
           id="quran-font-styles"
           value={quranFont}
-          initialInputValue={getLabel(quranFont, selectedView)}
-          items={styles[selectedView]}
+          initialInputValue={getLabel(quranFont, selectedType)}
+          items={styles[selectedType]}
           onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
         />
       </Section.Row>
