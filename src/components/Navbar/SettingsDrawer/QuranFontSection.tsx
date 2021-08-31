@@ -57,6 +57,7 @@ const getSelectedView = (font: QuranFont) => {
   const [view] = Object.entries(styles).find(([, values]) => values.some((v) => v.id === font));
   return view;
 };
+
 // get the label for selected style. For example for QuranFont.MadaniV1, it will be 'King Fahad Complex V1'
 const getLabel = (font: QuranFont, selectedView) =>
   styles[selectedView].find((v) => v.id === font)?.label;
