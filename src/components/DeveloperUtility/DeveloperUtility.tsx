@@ -5,14 +5,8 @@ import WrenchIcon from '../../../public/icons/wrench.svg';
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';
-import FontAdjustment from './FontAdjustment';
 import NavbarAdjustment from './NavbarAdjustment';
 import NotesAdjustment from './NotesAdjustment';
-import ReadingPreferenceAdjustment from './ReadingPreferenceAdjustment';
-import ReciterAdjustment from './ReciterAdjustment';
-import TafsirsAdjustment from './TafsirsAdjustment';
-import ThemeAdjustment from './ThemeAdjustment';
-import TranslationsAdjustment from './TranslationsAdjustment';
 
 /**
  * A set of developer utilities only availble on development environments
@@ -46,16 +40,10 @@ const DeveloperUtility = () => {
     >
       Developer Utility
       <div className={styles.divider} />
-      <ThemeAdjustment />
-      <FontAdjustment />
-      <ReadingPreferenceAdjustment />
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />
-      <TranslationsAdjustment />
-      <TafsirsAdjustment />
       <ContextMenuAdjustment />
-      <ReciterAdjustment />
       <div>
         <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close
