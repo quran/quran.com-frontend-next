@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
-import { Section, SectionLabel, SectionTitle, SectionDescription, SectionRow } from './Section';
+import Section from './Section';
 
 // TODO: internationalize label
 const themes = [
@@ -19,9 +19,9 @@ const ThemeSection = () => {
   const theme = useSelector(selectTheme);
   return (
     <Section>
-      <SectionTitle>Theme</SectionTitle>
-      <SectionRow>
-        <SectionLabel>Mode</SectionLabel>
+      <Section.Title>Theme</Section.Title>
+      <Section.Row>
+        <Section.Label>Mode</Section.Label>
         <Combobox
           id="theme-section"
           value={theme.type}
@@ -29,10 +29,10 @@ const ThemeSection = () => {
           items={themes}
           onChange={(value) => dispatch({ type: setTheme.type, payload: value })}
         />
-      </SectionRow>
-      <SectionDescription visible={theme.type === 'system'}>
+      </Section.Row>
+      <Section.Footer visible={theme.type === 'system'}>
         The system theme automatically adopts to your light/dark mode settings
-      </SectionDescription>
+      </Section.Footer>
     </Section>
   );
 };

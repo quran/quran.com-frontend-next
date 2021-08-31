@@ -21,7 +21,7 @@ import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 
-import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
+import Section from './Section';
 
 // convert translations data (from API) to combobox items
 // so we can use Combobox component
@@ -55,9 +55,9 @@ const TranslationSection = () => {
 
   return (
     <Section>
-      <SectionTitle>Translation</SectionTitle>
-      <SectionRow>
-        <SectionLabel>Translation</SectionLabel>
+      <Section.Title>Translation</Section.Title>
+      <Section.Row>
+        <Section.Label>Translation</Section.Label>
         <Combobox
           id="translations"
           items={items || []}
@@ -68,9 +68,9 @@ const TranslationSection = () => {
             dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
           }
         />
-      </SectionRow>
-      <SectionRow>
-        <SectionLabel>Translation</SectionLabel>
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>Translation</Section.Label>
 
         {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop
@@ -88,7 +88,7 @@ const TranslationSection = () => {
               : () => dispatch(decreaseTranslationFontScale())
           }
         />
-      </SectionRow>
+      </Section.Row>
     </Section>
   );
 };

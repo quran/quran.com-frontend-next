@@ -11,7 +11,7 @@ import {
   setShowWordByWordTransliteration,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 
-import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
+import Section from './Section';
 
 // TODO: internationalize labels
 const preferences = [
@@ -99,9 +99,9 @@ const ReadingExperienceSection = () => {
 
   return (
     <Section>
-      <SectionTitle>Reading Experience</SectionTitle>
-      <SectionRow>
-        <SectionLabel>Mode</SectionLabel>
+      <Section.Title>Reading Experience</Section.Title>
+      <Section.Row>
+        <Section.Label>Mode</Section.Label>
         <RadioGroup
           onChange={(value) =>
             dispatch(setReadingPreference(value as unknown as ReadingPreference))
@@ -111,9 +111,9 @@ const ReadingExperienceSection = () => {
           items={preferences}
           orientation={RadioGroupOrientation.Horizontal}
         />
-      </SectionRow>
-      <SectionRow>
-        <SectionLabel>Word By Word</SectionLabel>
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>Word By Word</Section.Label>
         <Combobox
           id="wordByWord"
           items={wordByWordOptions}
@@ -121,7 +121,7 @@ const ReadingExperienceSection = () => {
           value={wordByWordValue}
           onChange={onWordByWordChange}
         />
-      </SectionRow>
+      </Section.Row>
     </Section>
   );
 };

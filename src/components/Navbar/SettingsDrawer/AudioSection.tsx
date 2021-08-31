@@ -4,7 +4,7 @@ import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import useSWR from 'swr';
 import Reciter from 'types/Reciter';
-import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
+import Section from './Section';
 
 // convert the reciter's data from API to combobox items
 // so we can use with Combobox component
@@ -39,9 +39,9 @@ const AudioSection = () => {
   const items = recitersToComboboxItems(reciters);
   return (
     <Section>
-      <SectionTitle>Audio</SectionTitle>
-      <SectionRow>
-        <SectionLabel>Reciter</SectionLabel>
+      <Section.Title>Audio</Section.Title>
+      <Section.Row>
+        <Section.Label>Reciter</Section.Label>
         <Combobox
           clearable={false}
           id="audio-reciter"
@@ -50,7 +50,7 @@ const AudioSection = () => {
           value={selectedReciter.id.toString()}
           onChange={onSelectedReciterChange}
         />
-      </SectionRow>
+      </Section.Row>
     </Section>
   );
 };

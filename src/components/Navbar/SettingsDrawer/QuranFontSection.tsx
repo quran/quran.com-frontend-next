@@ -17,7 +17,7 @@ import {
 import verseSample from './sample-verse-data';
 import scssStyles from './QuranFontSection.module.scss';
 
-import { Section, SectionDescription, SectionLabel, SectionRow, SectionTitle } from './Section';
+import Section from './Section';
 
 // in the UI, we have two view / font categories, indopak and uthmani.
 const views = [
@@ -77,9 +77,9 @@ const QuranFontSection = () => {
 
   return (
     <Section>
-      <SectionTitle>Quran Font</SectionTitle>
-      <SectionRow>
-        <SectionLabel>View</SectionLabel>
+      <Section.Title>Quran Font</Section.Title>
+      <Section.Row>
+        <Section.Label>View</Section.Label>
         <RadioGroup
           onChange={(value) => dispatch(setQuranFont(getDefaultViewStyle(value)))}
           value={selectedView}
@@ -87,9 +87,9 @@ const QuranFontSection = () => {
           items={views}
           orientation={RadioGroupOrientation.Horizontal}
         />
-      </SectionRow>
-      <SectionRow>
-        <SectionLabel>Style</SectionLabel>
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>Style</Section.Label>
         <Combobox
           id="quran-font-styles"
           value={quranFont}
@@ -97,9 +97,9 @@ const QuranFontSection = () => {
           items={styles[selectedView]}
           onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
         />
-      </SectionRow>
-      <SectionRow>
-        <SectionLabel>Font size</SectionLabel>
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>Font size</Section.Label>
         <Counter
           count={quranTextFontScale}
           onDecrement={
@@ -113,16 +113,16 @@ const QuranFontSection = () => {
               : () => dispatch(increaseQuranTextFontScale())
           }
         />
-      </SectionRow>
+      </Section.Row>
       <div className={scssStyles.verseSampleContainer}>
         <VerseText words={verseSample.words} />
       </div>
-      <SectionDescription
+      <Section.Footer
         visible={quranFont === QuranFont.MadaniV1 || quranFont === QuranFont.MadaniV2}
       >
         KPFG Fonts provide higher quality but take longer to load and cannot be copied through the
         browser.
-      </SectionDescription>
+      </Section.Footer>
     </Section>
   );
 };

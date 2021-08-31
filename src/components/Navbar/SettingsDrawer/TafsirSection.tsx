@@ -10,7 +10,7 @@ import {
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
-import { SectionLabel, SectionRow, SectionTitle, Section } from './Section';
+import Section from './Section';
 
 // convert tafsir data (from API) to combobox items structure
 // so use it with Combobox component
@@ -40,9 +40,9 @@ const TafsirSection = () => {
 
   return (
     <Section>
-      <SectionTitle>Tafsir</SectionTitle>
-      <SectionRow>
-        <SectionLabel>Tafsir</SectionLabel>
+      <Section.Title>Tafsir</Section.Title>
+      <Section.Row>
+        <Section.Label>Tafsir</Section.Label>
         <Combobox
           id="tafsir"
           isMultiSelect
@@ -52,7 +52,7 @@ const TafsirSection = () => {
           }
           value={numbersToStringsArray(selectedTafsirs)}
         />
-      </SectionRow>
+      </Section.Row>
     </Section>
   );
 };
