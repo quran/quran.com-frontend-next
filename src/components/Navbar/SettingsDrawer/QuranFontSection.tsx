@@ -49,10 +49,13 @@ const styles = {
 };
 
 // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
+// for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
+// if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
 const getSelectedView = (font: QuranFont) => {
   const [view] = Object.entries(styles).find(([, values]) => values.some((v) => v.id === font));
   return view;
 };
+// get the label for selected style. For example for QuranFont.MadaniV1, it will be 'King Fahad Complex V1'
 const getLabel = (font: QuranFont, selectedView) =>
   styles[selectedView].find((v) => v.id === font)?.label;
 
