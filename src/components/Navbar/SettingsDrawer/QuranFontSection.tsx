@@ -4,7 +4,7 @@ import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { QuranFont } from 'src/components/QuranReader/types';
-import VerseText from 'src/components/Verse/VerseText';
+// import VerseText from 'src/components/Verse/VerseText';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
@@ -15,9 +15,9 @@ import {
   setQuranFont,
   initialState as QuranReaderStylesInitialState,
 } from 'src/redux/slices/QuranReader/styles';
-import { getSampleVerse } from 'src/utils/verse';
-import Word from 'types/Word';
-import styles from './QuranFontSection.module.scss';
+// import { getSampleVerse } from 'src/utils/verse';
+// import Word from 'types/Word';
+// import styles from './QuranFontSection.module.scss';
 
 import Section from './Section';
 
@@ -123,9 +123,9 @@ const QuranFontSection = () => {
           }
         />
       </Section.Row>
-      <div className={styles.verseSampleContainer}>
+      {/* <div className={styles.verseSampleContainer}>
         <VerseText words={getSampleVerse().words as Word[]} />
-      </div>
+      </div> */}
       <Section.Footer
         visible={quranFont === QuranFont.MadaniV1 || quranFont === QuranFont.MadaniV2}
       >
