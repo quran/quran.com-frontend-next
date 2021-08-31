@@ -47,7 +47,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
       page: currentPage,
       language: selectedLanguage,
       query: debouncedSearchQuery,
-      translation: selectedTranslation,
+      translations: selectedTranslation,
     }),
     [currentPage, debouncedSearchQuery, selectedLanguage, selectedTranslation],
   );

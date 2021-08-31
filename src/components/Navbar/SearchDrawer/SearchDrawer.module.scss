@@ -35,7 +35,6 @@
   position: fixed;
   height: constants.$navbar-height;
   border-bottom: 1px var(--color-borders-hairline) solid;
-  padding: 0 var(--spacing-medium);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -45,7 +44,6 @@
 }
 
 .headerContentContainer {
-  margin-right: var(--spacing-medium);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +54,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 var(--spacing-xsmall);
 }
 
 .searchInputContainer {
@@ -106,6 +105,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: calc(92% - #{constants.$navbar-height});
+  height: 85vh;
   text-align: center;
 }
