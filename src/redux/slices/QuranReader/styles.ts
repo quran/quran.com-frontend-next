@@ -68,6 +68,8 @@ export const quranReaderStylesSlice = createSlice({
       }
     },
   },
+  // reset the state to the initial state
+  // when `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(reset, () => initialState);
   },

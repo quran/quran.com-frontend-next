@@ -127,6 +127,8 @@ export const audioPlayerStateSlice = createSlice({
       visibility: action.payload,
     }),
   },
+  // reset reciter to DEFAULT_RECITER
+  // WHEN `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(reset, (state) => ({
       ...state,

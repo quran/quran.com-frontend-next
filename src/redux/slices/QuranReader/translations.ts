@@ -25,6 +25,8 @@ export const translationsSlice = createSlice({
       selectedTranslations: action.payload,
     }),
   },
+  // reset the translation state to initial state
+  // when `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(reset, () => initialState);
   },

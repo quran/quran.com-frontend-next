@@ -46,6 +46,8 @@ export const readingPreferencesSlice = createSlice({
       selectedWordByWordTransliteration: action.payload,
     }),
   },
+  // reset the state to initial state
+  // when `reset` action is dispatched
   extraReducers: (builder) => {
     builder.addCase(reset, () => initialState);
   },

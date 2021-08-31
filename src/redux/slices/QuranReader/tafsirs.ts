@@ -26,6 +26,8 @@ export const tafsirsSlice = createSlice({
       selectedTafsirs: action.payload,
     }),
   },
+  // reset the tafsirs to initial state
+  // when reset action is dispatched
   extraReducers: (builder) => {
     builder.addCase(reset, () => initialState);
   },
