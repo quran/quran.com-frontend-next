@@ -12,7 +12,7 @@ export type QuranReaderStyles = {
   quranFont: QuranFont;
 };
 
-const initialState: QuranReaderStyles = {
+export const initialState: QuranReaderStyles = {
   // the base sizes in rem
   tafsirFontScale: 3,
   quranTextFontScale: 3,

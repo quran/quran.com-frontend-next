@@ -13,6 +13,7 @@ import {
   QuranReaderStyles,
   selectQuranReaderStyles,
   setQuranFont,
+  initialState as QuranReaderStylesInitialState,
 } from 'src/redux/slices/QuranReader/styles';
 import { getSampleVerse } from 'src/utils/verse';
 import Word from 'types/Word';
@@ -55,8 +56,11 @@ const styles = {
 // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
 // if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
 const getSelectedView = (font: QuranFont) => {
-  const [view] = Object.entries(styles).find(([, values]) => values.some((v) => v.id === font));
-  return view;
+  const selectedViewEntry = Object.entries(styles).find(([, values]) =>
+    values.some((v) => v.id === font),
+  );
+  if (selectedViewEntry) return selectedViewEntry[0];
+  return QuranReaderStylesInitialState.quranFont;
 };
 
 // get the label for selected style. For example for QuranFont.MadaniV1, it will be 'King Fahad Complex V1'
