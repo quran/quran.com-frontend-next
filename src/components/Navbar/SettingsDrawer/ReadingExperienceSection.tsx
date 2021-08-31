@@ -55,6 +55,9 @@ const wordByWordOptions = [
   },
 ];
 
+// given the id of option, return the label
+const getLabel = (id) => wordByWordOptions.find((option) => option.id === id)?.label;
+
 type WordByWordValue = 'both' | 'translation' | 'transliteration' | 'none';
 
 // get the value from the redux store for translation and transliteration
@@ -123,7 +126,7 @@ const ReadingExperienceSection = () => {
         <Combobox
           id="wordByWord"
           items={wordByWordOptions}
-          initialInputValue={wordByWordValue}
+          initialInputValue={getLabel(wordByWordValue)}
           value={wordByWordValue}
           onChange={onWordByWordChange}
         />
