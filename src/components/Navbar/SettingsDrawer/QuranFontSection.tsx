@@ -59,7 +59,10 @@ const getSelectedView = (font: QuranFont) => {
   const selectedViewEntry = Object.entries(styles).find(([, values]) =>
     values.some((v) => v.id === font),
   );
-  if (selectedViewEntry) return selectedViewEntry[0];
+  if (selectedViewEntry) {
+    const view = selectedViewEntry[0];
+    return view;
+  }
   return QuranReaderStylesInitialState.quranFont;
 };
 
