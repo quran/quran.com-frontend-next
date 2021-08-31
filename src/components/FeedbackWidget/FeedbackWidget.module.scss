@@ -7,7 +7,7 @@
   bottom: var(--spacing-mega);
   right: calc(1 * var(--spacing-medium));
   transition: var(--transition-regular);
-  z-index: var(--z-index-modal);
+  z-index: var(--z-index-sticky);
   @include breakpoints.tablet {
     display: inherit;
     right: calc(var(--spacing-mega) + var(--spacing-medium));
