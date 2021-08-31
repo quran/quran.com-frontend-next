@@ -3,8 +3,8 @@ import styles from './Counter.module.scss';
 
 type CounterProps = {
   count: number;
-  onIncrement: () => void;
-  onDecrement: () => void;
+  onIncrement?: () => void;
+  onDecrement?: () => void;
 };
 
 /**
