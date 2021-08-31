@@ -23,6 +23,8 @@ import useSWR from 'swr';
 
 import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
 
+// convert translations data (from API) to combobox items
+// so we can use Combobox component
 const translationsToComboboxItems = (translations) =>
   translations.map((item) => ({
     id: item.id.toString(),
@@ -38,7 +40,7 @@ const TranslationSection = () => {
   const { translationFontScale } = quranReaderStyles;
   const { lang } = useTranslation();
 
-  const { data: translations, error } = useSWR(`get-translations/${lang}`, () =>
+  const { data: translations, error } = useSWR(`/translations/${lang}`, () =>
     getAvailableTranslations(lang).then((res) => {
       throwIfError(res);
       return res.translations;
@@ -69,6 +71,10 @@ const TranslationSection = () => {
       </SectionRow>
       <SectionRow>
         <SectionLabel>Translation</SectionLabel>
+
+        {/* we want to disable onIncrement, when current translationFontScale is MAXIMUM_FONT_STEP
+            we do it by giving onIncrement props a null
+            same for onDecrement */}
         <Counter
           count={translationFontScale}
           onIncrement={

@@ -12,7 +12,7 @@ import useSWR from 'swr';
 import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { SectionLabel, SectionRow, SectionTitle, Section } from './Section';
 
-// convert translations data (from API) to combobox items structure
+// convert tafsir data (from API) to combobox items structure
 // so use it with Combobox component
 const tafsirsToComboboxItems = (translations) =>
   translations.map((item) => ({

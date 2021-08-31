@@ -11,6 +11,7 @@ const themes = [
   { id: 'sepia', value: 'sepia', label: 'Sepia', name: 'sepia' },
 ];
 
+// given the id of a theme, return the label. data from the themes array above
 const getLabelById = (id: string) => themes.find((theme) => theme.id === id)?.label;
 
 const ThemeSection = () => {
