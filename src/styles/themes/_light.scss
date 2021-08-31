@@ -4,42 +4,32 @@
   --color-primary-medium: #000;
   --color-primary-deep: #fff;
 
-  --color-secondary-faded: #fff;
-  --color-secondary-faint: #fff;
-  --color-secondary-medium: #c8c8c8;
-  --color-secondary-deep: #fff;
+  --color-secondary-faded: #eaeaea;
+  --color-secondary-faint: #999;
+  --color-secondary-medium: #666;
+  --color-secondary-deep: #333;
 
-  --color-success-faded: #fff;
-  --color-success-faint: #fff;
+  --color-success-faded: #d3e5ff;
+  --color-success-faint: #3291ff;
   --color-success-medium: #0070f3;
-  --color-success-deep: #fff;
+  --color-success-deep: #0761d1;
 
-  --color-error-faded: #fff;
-  --color-error-faint: #fff;
+  --color-error-faded: #f7d4d6;
+  --color-error-faint: #ff1a1a;
   --color-error-medium: #ee0102;
-  --color-error-deep: #fff;
+  --color-error-deep: #c50000;
 
   --color-warning-faded: #ffefcf;
   --color-warning-faint: #f7b955;
   --color-warning-medium: #f5a623;
-  --color-warning-deep: #fff;
-
-  --color-alert-faded: #fff;
-  --color-alert-faint: #fff;
-  --color-alert-medium: #ff0080;
-  --color-alert-deep: #fff;
-
-  --color-tertiary-faded: #fff;
-  --color-tertiary-faint: #fff;
-  --color-tertiary-medium: #fff;
-  --color-tertiary-deep: #fff;
+  --color-warning-deep: #ab570a;
 
   --color-text-default: #000;
   --color-text-faded: #666;
   --color-text-inverse: #fff;
-  --color-text-link: #fff;
-  --color-text-warning: #fff;
-  --color-text-error: #fff;
+  --color-text-link: #0070f3;
+  --color-text-warning: #ab570a;
+  --color-text-error: #c50000;
 
   --color-background-default: #fff;
   --color-background-alternative: #eaeaea;
@@ -48,6 +38,8 @@
   --color-background-backdrop: rgba(0, 0, 0, 0.25);
 
   --color-borders-hairline: rgb(235, 238, 240);
+
+  --color-highlight: #79ffe1;
 
   --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);

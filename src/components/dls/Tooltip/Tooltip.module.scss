@@ -46,8 +46,8 @@
   }
 }
 .error {
-  background-color: var(--color-alert-medium);
+  background-color: var(--color-error-medium);
   > span {
-    fill: var(--color-alert-medium);
+    fill: var(--color-error-medium);
   }
 }

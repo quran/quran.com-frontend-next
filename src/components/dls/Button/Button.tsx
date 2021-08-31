@@ -21,7 +21,6 @@ export enum ButtonType {
   Success = 'success',
   Error = 'error',
   Warning = 'warning',
-  Alert = 'alert',
 }
 
 export enum ButtonVariant {
@@ -63,7 +62,6 @@ const Button: React.FC<ButtonProps> = ({
     [styles.secondary]: type === ButtonType.Secondary,
     [styles.success]: type === ButtonType.Success,
     [styles.warning]: type === ButtonType.Warning,
-    [styles.alert]: type === ButtonType.Alert,
     [styles.error]: type === ButtonType.Error,
 
     // size

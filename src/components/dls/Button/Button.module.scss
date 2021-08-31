@@ -51,21 +51,13 @@
     background-color: var(--color-text-inverse);
   }
 }
-.alert {
-  background-color: var(--color-alert-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-alert-medium);
-  &:hover {
-    color: var(--color-alert-medium);
-    background-color: var(--color-text-inverse);
-  }
-}
+
 .error {
-  background-color: var(--color-alert-medium);
+  background-color: var(--color-error-medium);
   color: var(--color-text-inverse);
   border: 1px solid var(--color-error-medium);
   &:hover {
-    color: var(--color-alert-medium);
+    color: var(--color-error-medium);
     background-color: var(--color-text-inverse);
   }
 }
@@ -135,12 +127,7 @@
     background-color: var(--color-warning-medium);
   }
 }
-.ghost.alert {
-  color: var(--color-alert-medium);
-  &:hover {
-    background-color: var(--color-alert-medium);
-  }
-}
+
 .ghost.success {
   color: var(--color-success-medium);
   &:hover {
@@ -148,9 +135,9 @@
   }
 }
 .ghost.error {
-  color: var(--color-alert-medium);
+  color: var(--color-error-medium);
   &:hover {
-    background-color: var(--color-alert-medium);
+    background-color: var(--color-error-medium);
   }
 }
 
