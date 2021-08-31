@@ -14,13 +14,14 @@ import {
   selectQuranReaderStyles,
   setQuranFont,
 } from 'src/redux/slices/QuranReader/styles';
-import verseSample from './sample-verse-data';
+import { getSampleVerse } from 'src/utils/verse';
+import Word from 'types/Word';
 import scssStyles from './QuranFontSection.module.scss';
 
 import Section from './Section';
 
 // in the UI, we have two view / font categories, indopak and uthmani.
-const views = [
+const type = [
   { id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak, name: QuranFont.IndoPak },
   { id: QuranFont.Uthmani, label: 'Uthmani', value: QuranFont.Uthmani, name: QuranFont.Uthmani },
 ];
@@ -84,7 +85,7 @@ const QuranFontSection = () => {
           onChange={(value) => dispatch(setQuranFont(getDefaultViewStyle(value)))}
           value={selectedView}
           label="Mode"
-          items={views}
+          items={type}
           orientation={RadioGroupOrientation.Horizontal}
         />
       </Section.Row>
@@ -115,7 +116,7 @@ const QuranFontSection = () => {
         />
       </Section.Row>
       <div className={scssStyles.verseSampleContainer}>
-        <VerseText words={verseSample.words} />
+        <VerseText words={getSampleVerse().words as Word[]} />
       </div>
       <Section.Footer
         visible={quranFont === QuranFont.MadaniV1 || quranFont === QuranFont.MadaniV2}

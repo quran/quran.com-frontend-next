@@ -3,7 +3,7 @@ import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
-import reset from '../reset';
+import resetSettings from '../reset-settings';
 import { DEFAULT_RECITER } from './defaultData';
 
 export enum AudioFileStatus {
@@ -130,7 +130,7 @@ export const audioPlayerStateSlice = createSlice({
   // reset reciter to DEFAULT_RECITER
   // WHEN `reset` action is dispatched
   extraReducers: (builder) => {
-    builder.addCase(reset, (state) => ({
+    builder.addCase(resetSettings, (state) => ({
       ...state,
       reciter: DEFAULT_RECITER,
     }));

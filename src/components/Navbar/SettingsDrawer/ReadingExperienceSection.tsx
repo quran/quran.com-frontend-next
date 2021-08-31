@@ -63,11 +63,10 @@ type WordByWordValue = 'both' | 'translation' | 'transliteration' | 'none';
 // 'translation' if only translation is true,
 // 'transliteration' if only transliteration is true,
 // 'none' if neither are true
-const useWordByWordValue = (): WordByWordValue => {
-  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectReadingPreferences,
-    shallowEqual,
-  );
+const getWordByWordValue = (
+  showWordByWordTranslation,
+  showWordByWordTransliteration,
+): WordByWordValue => {
   if (showWordByWordTranslation && showWordByWordTransliteration) {
     return 'both';
   }
@@ -83,18 +82,25 @@ const useWordByWordValue = (): WordByWordValue => {
 const ReadingExperienceSection = () => {
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
+  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
+    selectReadingPreferences,
+    shallowEqual,
+  );
 
-  const wordByWordValue: WordByWordValue = useWordByWordValue(); // 'both' | 'translation' | 'transliteration', or 'none'
+  const wordByWordValue: WordByWordValue = getWordByWordValue(
+    showWordByWordTranslation,
+    showWordByWordTransliteration,
+  ); // 'both' | 'translation' | 'transliteration', or 'none'
 
   // dispatch the action to word by word state
   // if the value is 'both' set word by word translation and transliteration to true
   // if the value is 'translation' set word by word translation to true
   // if the value is 'transliteration' set word by word transliteration to true
   const onWordByWordChange = (value: WordByWordValue) => {
-    const showWordByWordTranslation = value === 'both' || value === 'translation';
-    const showWordByWordTransliteration = value === 'both' || value === 'transliteration';
-    dispatch(setShowWordByWordTranslation(showWordByWordTranslation));
-    dispatch(setShowWordByWordTransliteration(showWordByWordTransliteration));
+    const wordBywordTranslation = value === 'both' || value === 'translation';
+    const wordByWordTransliteration = value === 'both' || value === 'transliteration';
+    dispatch(setShowWordByWordTranslation(wordBywordTranslation));
+    dispatch(setShowWordByWordTransliteration(wordByWordTransliteration));
   };
 
   return (

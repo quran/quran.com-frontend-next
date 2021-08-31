@@ -2,12 +2,13 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getAvailableReciters } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
+import { makeRecitersUrl } from 'src/utils/apiPaths';
 import useSWR from 'swr';
 import Reciter from 'types/Reciter';
 import Section from './Section';
 
 // convert the reciter's data from API to combobox items
-// so we can use with Combobox component
+// so we can use it with Combobox component
 const recitersToComboboxItems = (reciters) =>
   reciters.map((item: Reciter) => ({
     id: item.id.toString(),
@@ -18,10 +19,13 @@ const recitersToComboboxItems = (reciters) =>
 
 const AudioSection = () => {
   const dispatch = useDispatch();
-  const { data, error } = useSWR(`/reciters`, () =>
-    getAvailableReciters().then((res) =>
-      res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
-    ),
+  const { data, error } = useSWR(
+    makeRecitersUrl(),
+    () =>
+      getAvailableReciters().then((res) =>
+        res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
+      ),
+    { revalidateOnFocus: false, revalidateOnMount: false, revalidateOnReconnect: false },
   );
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const reciters = data || [];

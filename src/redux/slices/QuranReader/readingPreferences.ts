@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReadingPreference } from 'src/components/QuranReader/types';
-import reset from '../reset';
+import resetSettings from '../reset-settings';
 
 const DEFAULT_TRANSLATION = 20; // just a placeholder.
 const DEFAULT_TRANSLITERATION = 12; // just a placeholder.
@@ -49,7 +49,7 @@ export const readingPreferencesSlice = createSlice({
   // reset the state to initial state
   // when `reset` action is dispatched
   extraReducers: (builder) => {
-    builder.addCase(reset, () => initialState);
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 

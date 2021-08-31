@@ -10,4 +10,4 @@ import { createAction } from '@reduxjs/toolkit';
 
 // current usage
 // - currently being used in `SettingsDrawer/ResetButton.tsx`
-export default createAction('resetState');
+export default createAction('resetSettings');

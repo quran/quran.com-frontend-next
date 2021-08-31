@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { areArraysEquals } from 'src/utils/array';
-import reset from '../reset';
+import resetSettings from '../reset-settings';
 
 // English Mokhtasar and Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = [171, 169];
@@ -29,7 +29,7 @@ export const tafsirsSlice = createSlice({
   // reset the tafsirs to initial state
   // when reset action is dispatched
   extraReducers: (builder) => {
-    builder.addCase(reset, () => initialState);
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 

@@ -24,9 +24,6 @@
 .containerOpen {
   box-shadow: var(--shadow-normal);
   right: 0;
-  @include breakpoints.tablet {
-    right: 0;
-  }
 }
 
 .header {

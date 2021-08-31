@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import reset from 'src/redux/slices/reset';
+import resetSettings from 'src/redux/slices/reset-settings';
 import Button from 'src/components/dls/Button/Button';
 
 // reset button will dispatch a `reset` action
@@ -7,7 +7,7 @@ import Button from 'src/components/dls/Button/Button';
 // for example, check slices/theme.ts. it has extra reducer that listens to `reset` action
 const ResetButton = () => {
   const dispatch = useDispatch();
-  return <Button onClick={() => dispatch(reset())}>Reset settings</Button>;
+  return <Button onClick={() => dispatch(resetSettings())}>Reset settings</Button>;
 };
 
 export default ResetButton;

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { areArraysEquals } from 'src/utils/array';
-import reset from '../reset';
+import resetSettings from '../reset-settings';
 
 export const DEFAULT_TRANSLATIONS = [20, 131];
 
@@ -28,7 +28,7 @@ export const translationsSlice = createSlice({
   // reset the translation state to initial state
   // when `reset` action is dispatched
   extraReducers: (builder) => {
-    builder.addCase(reset, () => initialState);
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 
