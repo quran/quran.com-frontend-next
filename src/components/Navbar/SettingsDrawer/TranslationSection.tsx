@@ -72,9 +72,9 @@ const TranslationSection = () => {
       <SectionRow>
         <SectionLabel>Translation</SectionLabel>
 
-        {/* we want to disable onIncrement, when current translationFontScale is MAXIMUM_FONT_STEP
-            we do it by giving onIncrement props a null
-            same for onDecrement */}
+        {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
+            we do this by giving null to `onIncrement` prop
+            same applies to `onDecrement` */}
         <Counter
           count={translationFontScale}
           onIncrement={
