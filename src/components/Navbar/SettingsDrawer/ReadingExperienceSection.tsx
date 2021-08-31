@@ -110,13 +110,13 @@ const ReadingExperienceSection = () => {
     <Section>
       <Section.Title>Reading Experience</Section.Title>
       <Section.Row>
-        <Section.Label>Mode</Section.Label>
+        <Section.Label>View</Section.Label>
         <RadioGroup
           onChange={(value) =>
             dispatch(setReadingPreference(value as unknown as ReadingPreference))
           }
           value={readingPreference}
-          label="Mode"
+          label="view"
           items={preferences}
           orientation={RadioGroupOrientation.Horizontal}
         />

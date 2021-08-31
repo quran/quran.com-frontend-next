@@ -80,11 +80,11 @@ const QuranFontSection = () => {
     <Section>
       <Section.Title>Quran Font</Section.Title>
       <Section.Row>
-        <Section.Label>View</Section.Label>
+        <Section.Label>Type</Section.Label>
         <RadioGroup
           onChange={(value) => dispatch(setQuranFont(getDefaultViewStyle(value)))}
           value={selectedView}
-          label="Mode"
+          label="type"
           items={type}
           orientation={RadioGroupOrientation.Horizontal}
         />
