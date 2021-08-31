@@ -28,26 +28,20 @@ const styles = {
   [QuranFont.IndoPak]: [{ id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak }],
   [QuranFont.Uthmani]: [
     {
-      id: QuranFont.Uthmani,
-      label: 'Uthmani',
-      value: QuranFont.Uthmani,
-      name: QuranFont.Uthmani,
-    },
-    {
       id: QuranFont.QPCHafs,
-      label: 'QPCHafs',
+      label: 'QPC Uthmani Hafs',
       value: QuranFont.QPCHafs,
       name: QuranFont.QPCHafs,
     },
     {
       id: QuranFont.MadaniV1,
-      label: 'MadaniV1',
+      label: 'King Fahad Complex V1',
       value: QuranFont.MadaniV1,
       name: QuranFont.MadaniV1,
     },
     {
       id: QuranFont.MadaniV2,
-      label: 'MadaniV2',
+      label: 'King Fahad Complex V2',
       value: QuranFont.MadaniV2,
       name: QuranFont.MadaniV2,
     },
@@ -110,7 +104,9 @@ const QuranFontSection = () => {
       <div className={scssStyles.verseSampleContainer}>
         <VerseText words={verseSample.words} />
       </div>
-      <SectionDescription>
+      <SectionDescription
+        visible={quranFont === QuranFont.MadaniV1 || quranFont === QuranFont.MadaniV2}
+      >
         KPFG Fonts provide higher quality but take longer to load and cannot be copied through the
         browser.
       </SectionDescription>
