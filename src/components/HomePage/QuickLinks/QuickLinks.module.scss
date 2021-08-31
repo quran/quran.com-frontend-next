@@ -15,5 +15,12 @@
   @include breakpoints.tablet {
     display: flex;
     align-items: center;
+    gap: inherit;
+  }
+}
+
+.quickLinksContainer > a + a {
+  @include breakpoints.tablet {
+    margin-left: var(--spacing-small);
   }
 }
