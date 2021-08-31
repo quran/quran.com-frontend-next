@@ -3,10 +3,13 @@ import { getAvailableReciters } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import useSWR from 'swr';
+import Reciter from 'types/Reciter';
 import { Section, SectionLabel, SectionRow, SectionTitle } from './Section';
 
-const recitersToComboboxItems = (translations) =>
-  translations.map((item) => ({
+// convert the reciter's data from API to combobox items
+// so we can use with Combobox component
+const recitersToComboboxItems = (reciters) =>
+  reciters.map((item: Reciter) => ({
     id: item.id.toString(),
     value: item.id,
     label: item.name.toString(),
@@ -23,6 +26,8 @@ const AudioSection = () => {
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const reciters = data || [];
 
+  // given the reciterId, get the full reciter object.
+  // and setReciter in redux
   const onSelectedReciterChange = (reciterId: string) => {
     const reciter = reciters.find((r) => r.id === Number(reciterId));
     dispatch(setReciter(reciter));
