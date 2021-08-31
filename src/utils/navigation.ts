@@ -67,4 +67,5 @@ export const resolveUrlBySearchNavigationType = (
  * @param {string} query the search query.
  * @returns {string}
  */
-export const getSearchQueryNavigationUrl = (query: string): string => `/search?query=${query}`;
+export const getSearchQueryNavigationUrl = (query?: string): string =>
+  `/search${query ? `?query=${query}` : ''}`;

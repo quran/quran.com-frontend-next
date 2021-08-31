@@ -12,9 +12,12 @@ import classNames from 'classnames';
 import SearchResults from 'src/components/Search/SearchResults';
 import useFocus from 'src/hooks/useFocusElement';
 import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import IconClose from '../../../../public/icons/close.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import styles from './SearchDrawer.module.scss';
+import PreInput from './PreInput';
+import NoResults from './NoResults';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -151,13 +154,45 @@ const SearchDrawer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className={styles.bodyContainer}>
-        <SearchResults
-          searchResult={searchResult}
-          searchQuery={searchQuery}
-          isSearching={isSearching}
-          hasError={hasError}
-        />
+      <div
+        className={classNames(styles.bodyContainer, {
+          [styles.internalContainer]:
+            !searchQuery ||
+            isSearching ||
+            hasError ||
+            (!isSearching &&
+              !hasError &&
+              searchResult &&
+              searchResult.pagination.totalRecords === 0),
+        })}
+      >
+        {!searchQuery ? (
+          <PreInput setSearchQuery={setSearchQuery} />
+        ) : (
+          <>
+            {isSearching ? (
+              <div className={styles.spinnerContainer}>
+                <Spinner size={SpinnerSize.Large} />
+              </div>
+            ) : (
+              <>
+                {hasError && <div>Something went wrong, please try again!</div>}
+                {!hasError && searchResult && (
+                  <>
+                    {searchResult.pagination.totalRecords === 0 ? (
+                      <NoResults searchQuery={searchQuery} searchUrl={searchUrl} />
+                    ) : (
+                      <SearchResults
+                        searchResult={searchResult}
+                        searchQuery={debouncedSearchQuery}
+                      />
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

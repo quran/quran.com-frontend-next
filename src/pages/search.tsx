@@ -200,16 +200,24 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             />
           </div>
           <div className={styles.bodyContainer}>
-            <SearchResults
-              isSearching={isSearching}
-              hasError={hasError}
-              searchResult={searchResult}
-              searchQuery={debouncedSearchQuery}
-              isSearchDrawer={false}
-              currentPage={currentPage}
-              onPageChange={onPageChange}
-              pageSize={PAGE_SIZE}
-            />
+            {isSearching && <div>Searching...</div>}
+            {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
+            {!isSearching && !hasError && searchResult && (
+              <>
+                {searchResult.pagination.totalRecords === 0 ? (
+                  <p>No results found!</p>
+                ) : (
+                  <SearchResults
+                    searchResult={searchResult}
+                    searchQuery={debouncedSearchQuery}
+                    isSearchDrawer={false}
+                    currentPage={currentPage}
+                    onPageChange={onPageChange}
+                    pageSize={PAGE_SIZE}
+                  />
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
