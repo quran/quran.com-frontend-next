@@ -1,0 +1,32 @@
+.container {
+  margin: var(--spacing-large);
+  height: 100%;
+}
+
+.mainBody {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  justify-content: center;
+}
+
+.iconContainer {
+  padding: var(--spacing-large);
+  color: var(--color-secondary-medium);
+}
+
+.iconContainer svg {
+  width: calc(2 * var(--spacing-large));
+  height: calc(2 * var(--spacing-large));
+}
+
+.mainMessage {
+  padding: var(--spacing-medium);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  line-height: normal;
+}
+
+.secondaryMessage {
+  font-size: var(--font-size-normal);
+}

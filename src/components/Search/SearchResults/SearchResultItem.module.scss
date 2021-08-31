@@ -5,6 +5,9 @@
 
 .translationContainer {
   margin: var(--spacing-small) 0;
+  em {
+    color: var(--color-success-medium);
+  }
 }
 
 .link {

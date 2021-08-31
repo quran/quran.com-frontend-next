@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
 
+$internal-container-height: 85vh;
+
 .container {
   background: var(--color-background-default);
   position: fixed;
@@ -35,7 +37,6 @@
   position: fixed;
   height: constants.$navbar-height;
   border-bottom: 1px var(--color-borders-hairline) solid;
-  padding: 0 var(--spacing-medium);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -45,7 +46,6 @@
 }
 
 .headerContentContainer {
-  margin-right: var(--spacing-medium);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,6 +56,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 var(--spacing-xsmall);
 }
 
 .searchInputContainer {
@@ -96,4 +97,16 @@
 .bodyContainer {
   margin-top: constants.$navbar-height;
   padding: var(--spacing-medium);
+}
+
+.spinnerContainer div {
+  margin: 0 auto;
+}
+
+.internalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: $internal-container-height;
+  text-align: center;
 }
