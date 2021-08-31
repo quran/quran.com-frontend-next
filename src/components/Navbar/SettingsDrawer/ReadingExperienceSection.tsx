@@ -27,6 +27,7 @@ const preferences = [
   },
 ];
 
+// wordByWordOptions will be used as items in Combobox component
 const wordByWordOptions = [
   {
     id: 'none',
