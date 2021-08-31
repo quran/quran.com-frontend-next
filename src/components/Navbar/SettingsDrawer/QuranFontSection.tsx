@@ -19,11 +19,13 @@ import scssStyles from './QuranFontSection.module.scss';
 
 import { Section, SectionDescription, SectionLabel, SectionRow, SectionTitle } from './Section';
 
+// in the UI, we have two view / font categories, indopak and uthmani.
 const views = [
   { id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak, name: QuranFont.IndoPak },
   { id: QuranFont.Uthmani, label: 'Uthmani', value: QuranFont.Uthmani, name: QuranFont.Uthmani },
 ];
 
+// when one of the view is selected, user can choose which style they want to use
 const styles = {
   [QuranFont.IndoPak]: [{ id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak }],
   [QuranFont.Uthmani]: [
