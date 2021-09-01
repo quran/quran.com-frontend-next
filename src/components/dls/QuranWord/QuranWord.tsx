@@ -54,6 +54,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
           text={getTooltipText(showTooltipFor, word)}
           contentSide={ContentSide.TOP}
           onOpenChange={setIsTooltipOpened}
+          delay={0}
         >
           {wordText}
         </Tooltip>
