@@ -18,11 +18,12 @@ type CounterProps = {
  */
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
   <div className={styles.container}>
-    <Button disabled={!onDecrement} onClick={onDecrement}>
+    <Button tooltip="decrement" disabled={!onDecrement} onClick={onDecrement}>
       -
     </Button>
     <span className={styles.count}>{count}</span>
     <Button
+      tooltip="increment"
       disabled={!onIncrement}
       onClick={() => {
         onIncrement();

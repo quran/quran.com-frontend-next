@@ -20,6 +20,7 @@ const PlayPauseButton = () => {
   if (isLoading)
     return (
       <Button
+        tooltip="Loading ..."
         size={ButtonSize.Large}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
@@ -32,6 +33,7 @@ const PlayPauseButton = () => {
   if (isPlaying) {
     return (
       <Button
+        tooltip="Pause"
         size={ButtonSize.Large}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
@@ -43,6 +45,7 @@ const PlayPauseButton = () => {
   }
   return (
     <Button
+      tooltip="Play"
       shape={ButtonShape.Circle}
       size={ButtonSize.Large}
       variant={ButtonVariant.Ghost}

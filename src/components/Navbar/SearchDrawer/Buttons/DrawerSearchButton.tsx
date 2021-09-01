@@ -8,7 +8,13 @@ interface Props {
 }
 
 const DrawerSearchButton: React.FC<Props> = ({ disabled, href }) => (
-  <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost} disabled={disabled} href={href}>
+  <Button
+    tooltip="Search"
+    shape={ButtonShape.Circle}
+    variant={ButtonVariant.Ghost}
+    disabled={disabled}
+    href={href}
+  >
     <IconSearch />
   </Button>
 );

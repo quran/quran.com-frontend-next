@@ -176,6 +176,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
           />
           {searchQuery && (
             <Button
+              tooltip="clear"
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               size={ButtonSize.Small}

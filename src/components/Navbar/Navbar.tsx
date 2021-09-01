@@ -44,6 +44,7 @@ const Navbar = () => {
             <div className={styles.leftCTA}>
               <>
                 <Button
+                  tooltip="menu"
                   variant={ButtonVariant.Ghost}
                   shape={ButtonShape.Circle}
                   onClick={openNavigationDrawer}
