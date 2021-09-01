@@ -5,7 +5,6 @@ import { selectNavbar, setIsSettingsDrawerOpen } from 'src/redux/slices/navbar';
 import { useCallback, useRef, useEffect } from 'react';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import SettingsIcon from '../../../../public/icons/settings.svg';
 import IconClose from '../../../../public/icons/close.svg';
 import styles from './SettingsDrawer.module.scss';
 import SettingsBody from './SettingsBody';
@@ -38,9 +37,6 @@ const SettingsDrawer = () => {
       <div className={styles.header}>
         <div className={styles.headerContentContainer}>
           <div className={styles.headerContent}>
-            <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-              <SettingsIcon />
-            </Button>
             <Button
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
@@ -48,6 +44,7 @@ const SettingsDrawer = () => {
             >
               <IconClose />
             </Button>
+            <div className={styles.headerTitle}>Settings</div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 .title {
-  font-weight: var(--font-weight-bold);
-  padding-bottom: var(--spacing-xsmall);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+  padding-bottom: var(--spacing-medium);
 }
 .section {
   padding-bottom: calc(1 * var(--spacing-mega));
