@@ -1,3 +1,8 @@
+export enum WordByWordType {
+  Translation = 'translation',
+  Transliteration = 'transliteration',
+}
+
 export enum ReadingPreference {
   Translation = 'translation', // Displays verse by verse with translation
   Reading = 'reading', // Displays the Quran text only similar to a physical Quran page without any translations.
