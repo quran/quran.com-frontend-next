@@ -22,13 +22,15 @@ const ThemeSection = () => {
       <Section.Title>Theme</Section.Title>
       <Section.Row>
         <Section.Label>Mode</Section.Label>
-        <Combobox
-          id="theme-section"
-          value={theme.type}
-          initialInputValue={getLabelById(theme.type)}
-          items={themes}
-          onChange={(value) => dispatch({ type: setTheme.type, payload: value })}
-        />
+        <div>
+          <Combobox
+            id="theme-section"
+            value={theme.type}
+            initialInputValue={getLabelById(theme.type)}
+            items={themes}
+            onChange={(value) => dispatch({ type: setTheme.type, payload: value })}
+          />
+        </div>
       </Section.Row>
       <Section.Footer visible={theme.type === 'system'}>
         The system theme automatically adopts to your light/dark mode settings

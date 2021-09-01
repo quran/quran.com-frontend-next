@@ -46,14 +46,16 @@ const AudioSection = () => {
       <Section.Title>Audio</Section.Title>
       <Section.Row>
         <Section.Label>Reciter</Section.Label>
-        <Combobox
-          clearable={false}
-          id="audio-reciter"
-          items={items}
-          initialInputValue={selectedReciter.name}
-          value={selectedReciter.id.toString()}
-          onChange={onSelectedReciterChange}
-        />
+        <div>
+          <Combobox
+            clearable={false}
+            id="audio-reciter"
+            items={items}
+            initialInputValue={selectedReciter.name}
+            value={selectedReciter.id.toString()}
+            onChange={onSelectedReciterChange}
+          />
+        </div>
       </Section.Row>
     </Section>
   );
