@@ -22,6 +22,7 @@ const PlaybackControls = () => {
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         size={ButtonSize.Large}
+        disabled
       >
         <RepeatIcon />
       </Button>

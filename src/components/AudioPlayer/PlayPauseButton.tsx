@@ -45,7 +45,7 @@ const PlayPauseButton = () => {
   }
   return (
     <Button
-      tooltip="Play"
+      tooltip="play"
       shape={ButtonShape.Circle}
       size={ButtonSize.Large}
       variant={ButtonVariant.Ghost}

@@ -67,7 +67,7 @@ const Navbar = () => {
             <div className={styles.rightCTA}>
               <>
                 <Button
-                  tooltip="Settings"
+                  tooltip="settings"
                   shape={ButtonShape.Circle}
                   variant={ButtonVariant.Ghost}
                   onClick={openSettingsDrawer}
@@ -78,7 +78,7 @@ const Navbar = () => {
               </>
               <>
                 <Button
-                  tooltip="Search"
+                  tooltip="search"
                   variant={ButtonVariant.Ghost}
                   onClick={openSearchDrawer}
                   shape={ButtonShape.Circle}

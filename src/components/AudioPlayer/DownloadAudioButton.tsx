@@ -37,7 +37,7 @@ const DownloadAudioButton = () => {
 
   return (
     <Button
-      tooltip="Download"
+      tooltip="download"
       onClick={onClick}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
