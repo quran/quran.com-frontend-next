@@ -82,7 +82,9 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
 const getTooltipText = (showTooltipFor: WordByWordType[], word: Word): ReactNode => (
   <>
     {showTooltipFor.map((tooltipTextType) => (
-      <p key={tooltipTextType}>{word[tooltipTextType].text}</p>
+      <p key={tooltipTextType} className={styles.tooltipText}>
+        {word[tooltipTextType].text}
+      </p>
     ))}
   </>
 );
