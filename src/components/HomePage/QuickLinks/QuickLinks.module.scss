@@ -19,7 +19,7 @@
   }
 }
 
-.quickLinksContainer > a + a {
+.quickLinksContainer > .quickLink + .quickLink {
   @include breakpoints.tablet {
     margin-left: var(--spacing-small);
   }

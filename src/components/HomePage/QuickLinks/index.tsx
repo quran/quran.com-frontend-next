@@ -38,7 +38,12 @@ const QuickLinks: React.FC = () => (
     <p className={styles.header}>Quick Links</p>
     <div className={styles.quickLinksContainer}>
       {QUICK_LINKS.map((quickLink) => (
-        <QuickLink key={quickLink.slug} slug={quickLink.slug} text={quickLink.text} />
+        <QuickLink
+          key={quickLink.slug}
+          slug={quickLink.slug}
+          text={quickLink.text}
+          className={styles.quickLink}
+        />
       ))}
     </div>
   </div>
