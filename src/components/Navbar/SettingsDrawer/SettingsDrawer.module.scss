@@ -27,6 +27,7 @@
 }
 
 .header {
+  z-index: inherit;
   width: 100%;
   background-color: var(--color-background-default);
   position: fixed;

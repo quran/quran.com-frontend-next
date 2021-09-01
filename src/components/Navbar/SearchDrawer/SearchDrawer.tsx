@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, RefObject } from 'react';
+import React, { useCallback, useEffect, useState, RefObject, useRef } from 'react';
 import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -12,6 +12,8 @@ import SearchResults from 'src/components/Search/SearchResults';
 import useFocus from 'src/hooks/useFocusElement';
 import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import styles from './SearchDrawer.module.scss';
 import PreInput from './PreInput';
 import NoResults from './NoResults';
@@ -21,6 +23,7 @@ import DrawerSearchButton from './Buttons/DrawerSearchButton';
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
+  const drawerRef = useRef(null);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar).isSearchDrawerOpen;
@@ -34,6 +37,21 @@ const SearchDrawer: React.FC = () => {
   const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+  const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
+
+  const closeSearchDrawer = useCallback(() => {
+    dispatch({ type: setIsSearchDrawerOpen.type, payload: false });
+  }, [dispatch]);
+
+  // listen to any changes of escape key being pressed.
+  useEffect(() => {
+    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
+    if (isEscapeKeyPressed === true) {
+      closeSearchDrawer();
+    }
+  }, [closeSearchDrawer, isEscapeKeyPressed]);
+
+  useOutsideClickDetector(drawerRef, closeSearchDrawer, isOpen);
 
   // once the drawer is open, focus the input field
   useEffect(() => {
@@ -78,10 +96,6 @@ const SearchDrawer: React.FC = () => {
     // reset the error
     setHasError(false);
   };
-
-  const closeSearchDrawer = useCallback(() => {
-    dispatch({ type: setIsSearchDrawerOpen.type, payload: false });
-  }, [dispatch]);
 
   /**
    * Handle when the search query is changed.
@@ -128,7 +142,10 @@ const SearchDrawer: React.FC = () => {
   };
 
   return (
-    <div className={classNames(styles.container, { [styles.containerOpen]: isOpen })}>
+    <div
+      className={classNames(styles.container, { [styles.containerOpen]: isOpen })}
+      ref={drawerRef}
+    >
       <div className={styles.header}>
         <div className={styles.headerContentContainer}>
           <div className={styles.headerContent}>

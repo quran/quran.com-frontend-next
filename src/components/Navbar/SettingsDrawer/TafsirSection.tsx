@@ -43,15 +43,17 @@ const TafsirSection = () => {
       <Section.Title>Tafsir</Section.Title>
       <Section.Row>
         <Section.Label>Tafsir</Section.Label>
-        <Combobox
-          id="tafsir"
-          isMultiSelect
-          items={items}
-          onChange={(values) =>
-            dispatch(setSelectedTafsirs(stringsToNumbersArray(values as string[])))
-          }
-          value={numbersToStringsArray(selectedTafsirs)}
-        />
+        <div>
+          <Combobox
+            id="tafsir"
+            isMultiSelect
+            items={items}
+            onChange={(values) =>
+              dispatch(setSelectedTafsirs(stringsToNumbersArray(values as string[])))
+            }
+            value={numbersToStringsArray(selectedTafsirs)}
+          />
+        </div>
       </Section.Row>
     </Section>
   );

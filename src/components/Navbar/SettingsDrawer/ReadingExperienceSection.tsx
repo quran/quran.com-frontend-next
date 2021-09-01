@@ -75,23 +75,27 @@ const ReadingExperienceSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>Word By Word</Section.Label>
-        <Combobox
-          id="wordByWord"
-          items={wordByWordOptions}
-          initialInputValue={getLabelById(wordByWordValue)}
-          value={wordByWordValue}
-          onChange={onWordByWordChange}
-        />
+        <div>
+          <Combobox
+            id="wordByWord"
+            items={wordByWordOptions}
+            initialInputValue={getLabelById(wordByWordValue)}
+            value={wordByWordValue}
+            onChange={onWordByWordChange}
+          />
+        </div>
       </Section.Row>
       <Section.Row>
         <Section.Label>Show Tooltip For</Section.Label>
-        <Combobox
-          id="showToolTipFor"
-          items={wordByWordOptions}
-          initialInputValue={getLabelById(tooltipWordByWordValue)}
-          value={tooltipWordByWordValue}
-          onChange={onTooltipWordByWordChange}
-        />
+        <div>
+          <Combobox
+            id="showToolTipFor"
+            items={wordByWordOptions}
+            initialInputValue={getLabelById(tooltipWordByWordValue)}
+            value={tooltipWordByWordValue}
+            onChange={onTooltipWordByWordChange}
+          />
+        </div>
       </Section.Row>
     </Section>
   );

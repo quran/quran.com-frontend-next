@@ -58,16 +58,18 @@ const TranslationSection = () => {
       <Section.Title>Translation</Section.Title>
       <Section.Row>
         <Section.Label>Translation</Section.Label>
-        <Combobox
-          id="translations"
-          items={items || []}
-          isMultiSelect
-          size={ComboboxSize.Medium}
-          value={numbersToStringsArray(selectedTranslations)}
-          onChange={(values) =>
-            dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
-          }
-        />
+        <div>
+          <Combobox
+            id="translations"
+            items={items || []}
+            isMultiSelect
+            size={ComboboxSize.Medium}
+            value={numbersToStringsArray(selectedTranslations)}
+            onChange={(values) =>
+              dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
+            }
+          />
+        </div>
       </Section.Row>
       <Section.Row>
         <Section.Label>Translation</Section.Label>

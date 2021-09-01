@@ -99,13 +99,15 @@ const QuranFontSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>Style</Section.Label>
-        <Combobox
-          id="quran-font-styles"
-          value={quranFont}
-          initialInputValue={getLabel(quranFont, selectedType)}
-          items={fonts[selectedType]}
-          onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
-        />
+        <div>
+          <Combobox
+            id="quran-font-styles"
+            value={quranFont}
+            initialInputValue={getLabel(quranFont, selectedType)}
+            items={fonts[selectedType]}
+            onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
+          />
+        </div>
       </Section.Row>
       <Section.Row>
         <Section.Label>Font size</Section.Label>
