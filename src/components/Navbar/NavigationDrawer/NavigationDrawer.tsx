@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import classNames from 'classnames';
+import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import IconClose from '../../../../public/icons/close.svg';
 // import IconHome from '../../../../public/icons/home.svg';
 // import IconCollection from '../../../../public/icons/collection.svg';
@@ -22,13 +24,25 @@ import NavigationDrawerItem from './NavigationDrawerItem';
 import MobileApps from './MobileApps';
 
 const NavigationDrawer = () => {
+  const drawerRef = useRef(null);
   const isOpen = useSelector(selectNavbar).isNavigationDrawerOpen;
   const dispatch = useDispatch();
   const router = useRouter();
+  const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
 
   const closeNavigationDrawer = useCallback(() => {
     dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
   }, [dispatch]);
+
+  // listen to any changes of escape key being pressed.
+  useEffect(() => {
+    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
+    if (isEscapeKeyPressed === true) {
+      closeNavigationDrawer();
+    }
+  }, [closeNavigationDrawer, isEscapeKeyPressed]);
+
+  useOutsideClickDetector(drawerRef, closeNavigationDrawer, isOpen);
 
   // Hide navbar after succesful navigation
   useEffect(() => {
@@ -40,7 +54,10 @@ const NavigationDrawer = () => {
   }, [closeNavigationDrawer, router.events, isOpen]);
 
   return (
-    <div className={classNames(styles.container, { [styles.containerOpen]: isOpen })}>
+    <div
+      className={classNames(styles.container, { [styles.containerOpen]: isOpen })}
+      ref={drawerRef}
+    >
       <div className={styles.header}>
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
