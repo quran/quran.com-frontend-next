@@ -123,13 +123,15 @@ const ReadingExperienceSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>Word By Word</Section.Label>
-        <Combobox
-          id="wordByWord"
-          items={wordByWordOptions}
-          initialInputValue={getLabel(wordByWordValue)}
-          value={wordByWordValue}
-          onChange={onWordByWordChange}
-        />
+        <div>
+          <Combobox
+            id="wordByWord"
+            items={wordByWordOptions}
+            initialInputValue={getLabel(wordByWordValue)}
+            value={wordByWordValue}
+            onChange={onWordByWordChange}
+          />
+        </div>
       </Section.Row>
     </Section>
   );
