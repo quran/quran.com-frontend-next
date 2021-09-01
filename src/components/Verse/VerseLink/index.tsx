@@ -5,7 +5,6 @@ import styles from './VerseLink.module.scss';
 
 interface Props {
   verseKey: string;
-  g;
 }
 
 const VerseLink: React.FC<Props> = ({ verseKey }) => {
