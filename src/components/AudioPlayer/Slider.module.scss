@@ -18,13 +18,27 @@
   margin: 0;
   width: 100%;
   height: calc(1.25 * var(--spacing-xxsmall));
-
+  transition: var(--transition-regular);
   @include breakpoints.tablet {
     width: 70%;
     position: inherit;
     bottom: inherit;
     margin-left: var(--spacing-medium);
     margin-right: var(--spacing-medium);
+  }
+}
+
+.splitsContainerExpanded {
+  left: 15%;
+  margin: 0 auto;
+  width: 65%;
+  margin-bottom: 1rem;
+  margin-left: var(--spacing-medium);
+  margin-right: var(--spacing-medium);
+  position: inherit;
+
+  @include breakpoints.tablet {
+    width: 70%;
   }
 }
 
@@ -41,18 +55,21 @@
 }
 
 .reciterNameContainer {
+  transition: var(--transition-regular);
   @include breakpoints.tablet {
     display: none;
   }
 }
 
-.currentTime {
+.reciterNameContainerExpanded {
   display: none;
 }
 
-.currentTimeExpanded {
+.currentTime {
   display: none;
-  @include breakpoints.desktop {
-    display: inline-block;
-  }
+  transition: var(--transition-regular);
+}
+
+.currentTimeExpanded {
+  display: inline-block;
 }
