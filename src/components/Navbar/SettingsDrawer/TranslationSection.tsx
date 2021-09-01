@@ -72,7 +72,7 @@ const TranslationSection = () => {
         </div>
       </Section.Row>
       <Section.Row>
-        <Section.Label>Translation</Section.Label>
+        <Section.Label>Font size</Section.Label>
 
         {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop
