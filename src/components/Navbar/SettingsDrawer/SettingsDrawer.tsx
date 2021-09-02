@@ -37,6 +37,7 @@ const SettingsDrawer = () => {
       <div className={styles.header}>
         <div className={styles.headerContentContainer}>
           <div className={styles.headerContent}>
+            <div className={styles.headerTitle}>Settings</div>
             <Button
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
@@ -44,7 +45,6 @@ const SettingsDrawer = () => {
             >
               <IconClose />
             </Button>
-            <div className={styles.headerTitle}>Settings</div>
           </div>
         </div>
       </div>
