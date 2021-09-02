@@ -140,7 +140,7 @@ const AudioPlayer = () => {
           <PlayPauseButton />
           <div className={styles.seekBackwardsContainer}>
             <Button
-              tooltip="seek -10s"
+              tooltip="Fast-forward 10 seconds"
               shape={ButtonShape.Circle}
               size={ButtonSize.Large}
               disabled={isLoading}
@@ -162,12 +162,12 @@ const AudioPlayer = () => {
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
         <div className={styles.rightSection}>
           {visibility === Visibility.Expanded && (
-            <Button tooltip="minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+            <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
               <UnfoldLessIcon />
             </Button>
           )}
           {visibility === Visibility.Default && (
-            <Button tooltip="expand" variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+            <Button tooltip="Expand" variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
               <UnfoldMoreIcon />
             </Button>
           )}

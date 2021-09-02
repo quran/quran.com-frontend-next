@@ -24,7 +24,7 @@ const SettingsDrawer = () => {
               <SettingsIcon />
             </Button>
             <Button
-              tooltip="close"
+              tooltip="Close"
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               onClick={closeSearchDrawer}

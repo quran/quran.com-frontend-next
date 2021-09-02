@@ -8,7 +8,7 @@ interface Props {
 
 const DrawerCloseButton: React.FC<Props> = ({ onClick }) => (
   <Button
-    tooltip="close"
+    tooltip="Close"
     shape={ButtonShape.Circle}
     variant={ButtonVariant.Ghost}
     onClick={onClick}

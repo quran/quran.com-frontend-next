@@ -102,7 +102,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <Wrapper
-      condition={!!tooltip}
+      shouldWrap={!!tooltip}
       wrapper={(tooltipChildren) => <Tooltip text={tooltip}>{tooltipChildren}</Tooltip>}
     >
       <button type="button" className={classes} disabled={disabled} onClick={onClick}>

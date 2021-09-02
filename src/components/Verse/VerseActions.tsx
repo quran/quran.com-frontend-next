@@ -27,7 +27,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => {
       <Popover
         trigger={
           <Button
-            tooltip="actions menu"
+            tooltip="Actions menu"
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
             size={ButtonSize.Large}
