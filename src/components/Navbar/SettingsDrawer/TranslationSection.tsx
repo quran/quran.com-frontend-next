@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getAvailableTranslations } from 'src/api';
@@ -40,6 +41,11 @@ const TranslationSection = () => {
   const { translationFontScale } = quranReaderStyles;
   const { lang } = useTranslation();
 
+  const onTranslationsChange = useCallback(
+    (values) => dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[]))),
+    [dispatch],
+  );
+
   const { data: translations, error } = useSWR(`/translations/${lang}`, () =>
     getAvailableTranslations(lang).then((res) => {
       throwIfError(res);
@@ -65,9 +71,7 @@ const TranslationSection = () => {
             isMultiSelect
             size={ComboboxSize.Medium}
             value={numbersToStringsArray(selectedTranslations)}
-            onChange={(values) =>
-              dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
-            }
+            onChange={onTranslationsChange}
           />
         </div>
       </Section.Row>

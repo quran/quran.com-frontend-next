@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTafsirs } from 'src/api';
@@ -27,6 +28,11 @@ const TafsirSection = () => {
   const { selectedTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
   const { lang } = useTranslation();
 
+  const onTafsirsChange = useCallback(
+    (values) => dispatch(setSelectedTafsirs(stringsToNumbersArray(values as string[]))),
+    [dispatch],
+  );
+
   const { data: tafsirs, error } = useSWR(`/tafsirs/${lang}`, () =>
     getTafsirs(lang).then((res) => {
       throwIfError(res);
@@ -48,9 +54,7 @@ const TafsirSection = () => {
             id="tafsir"
             isMultiSelect
             items={items}
-            onChange={(values) =>
-              dispatch(setSelectedTafsirs(stringsToNumbersArray(values as string[])))
-            }
+            onChange={onTafsirsChange}
             value={numbersToStringsArray(selectedTafsirs)}
           />
         </div>

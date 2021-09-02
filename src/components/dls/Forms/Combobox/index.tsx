@@ -40,6 +40,7 @@ interface Props {
   tagsLimit?: number;
   disabled?: boolean;
   hasError?: boolean;
+  minimumRequiredItems?: number;
 }
 
 const Combobox: React.FC<Props> = ({
@@ -56,6 +57,7 @@ const Combobox: React.FC<Props> = ({
   label,
   id,
   size = ComboboxSize.Medium,
+  minimumRequiredItems = 0,
   onChange,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -120,10 +122,34 @@ const Combobox: React.FC<Props> = ({
       .map((item) => item.label);
   }, [isMultiSelect, items, selectedValue]);
 
-  // if it's multiSelect & the inputValue is empty and we have at least 1 tag, then clicking the backspace should remove the last tag.
+  /**
+   * By default we can un-select any items. We disallow unselecting items when
+   * we meet the the following conditions:
+   *
+   * 1. minimumRequiredItems has a value above 0.
+   * 2. if it's isMultiSelect:
+   *    2.1 there should be some selected items already.
+   *    2.2 the number of selected items are either equal to
+   *        or below the minimum required selected items.
+   * 3. if it's not isMultiSelect: there should already be a selected value.
+   */
+  const hasMinimumRequiredItems = minimumRequiredItems > 0;
+  const preventUnselectingItems =
+    hasMinimumRequiredItems &&
+    ((tags && tags.length <= minimumRequiredItems) || (!isMultiSelect && selectedValue));
+
+  /**
+   * We detect whether we should allow to delete the last selected tag when clicking
+   * the backspace key based on the following conditions:
+   *
+   * 1. it it's multiSelect.
+   * 2. The input value doesn't have a value otherwise, backspace key should be used to remove the input value and not the present tags.
+   * 3. We at least have 1 tag present.
+   * 4. We allow un-selecting items.
+   */
   const shouldDeleteLastTag = useKeyPressedDetector(
     'Backspace',
-    isMultiSelect && !inputValue && !!tags.length,
+    isMultiSelect && !inputValue && !!tags.length && !preventUnselectingItems,
   );
 
   const invokeOnChangeCallback = useCallback(
@@ -166,20 +192,28 @@ const Combobox: React.FC<Props> = ({
       const { itemLabel } = event.target.dataset;
       const selectedItemName = event.target.name;
       const isUnSelect = !event.currentTarget.checked;
+      /*
+          only change the selected value if:
+          1. we are selecting.
+          2. we are un-selecting and we are not prevented from un-selecting.
+        */
+      const shouldProcessChange = !isUnSelect || (isUnSelect && !preventUnselectingItems);
       if (isMultiSelect) {
-        setSelectedValue((prevSelectedValues: MultiSelectValue) => {
-          const newSelectedValues = { ...prevSelectedValues };
-          if (isUnSelect) {
-            delete newSelectedValues[selectedItemName];
-          } else {
-            newSelectedValues[selectedItemName] = true;
-          }
-          invokeOnChangeCallback(newSelectedValues);
-          return newSelectedValues;
-        });
+        if (shouldProcessChange) {
+          setSelectedValue((prevSelectedValues: MultiSelectValue) => {
+            const newSelectedValues = { ...prevSelectedValues };
+            if (isUnSelect) {
+              delete newSelectedValues[selectedItemName];
+            } else {
+              newSelectedValues[selectedItemName] = true;
+            }
+            invokeOnChangeCallback(newSelectedValues);
+            return newSelectedValues;
+          });
+        }
         setInputValue(''); // reset the input value even if it's selecting.
         setFilteredItems(items); // reset the filtered items.
-      } else {
+      } else if (shouldProcessChange) {
         setInputValue(isUnSelect ? '' : itemLabel);
         setSelectedValue(() => {
           const newSelectedValue = isUnSelect ? '' : selectedItemName;
@@ -189,7 +223,7 @@ const Combobox: React.FC<Props> = ({
       }
       setIsOpened(false); // close the items container
     },
-    [invokeOnChangeCallback, isMultiSelect, items],
+    [preventUnselectingItems, invokeOnChangeCallback, isMultiSelect, items],
   );
 
   /**
@@ -222,13 +256,26 @@ const Combobox: React.FC<Props> = ({
    */
   const onClearButtonClicked = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.stopPropagation();
-    setInputValue('');
-    setSelectedValue(() => {
-      const defaultSelectedValue = getDefaultValue(isMultiSelect);
-      invokeOnChangeCallback(defaultSelectedValue);
-      return defaultSelectedValue;
-    });
-    setFilteredItems(items);
+    /*
+      Don't allow the clearing of the selected items when:
+
+      1. it's multiSelect.
+      2. has minimum required items set.
+      This is done to avoid clearing all items while the minimum amount of items 
+      that should be selected is set. 
+    */
+    if (!(hasMinimumRequiredItems && isMultiSelect)) {
+      setInputValue('');
+      // if it's allowed to un-select items.
+      if (!preventUnselectingItems) {
+        setSelectedValue(() => {
+          const defaultSelectedValue = getDefaultValue(isMultiSelect);
+          invokeOnChangeCallback(defaultSelectedValue);
+          return defaultSelectedValue;
+        });
+      }
+      setFilteredItems(items);
+    }
   };
 
   /**
@@ -240,15 +287,18 @@ const Combobox: React.FC<Props> = ({
   const onRemoveTagClicked = useCallback(
     (event: React.MouseEvent<HTMLSpanElement>, tag: string) => {
       event.stopPropagation();
-      const toBeRemovedTag = items.find((item) => item.label === tag);
-      setSelectedValue((prevSelectedValues: MultiSelectValue) => {
-        const newSelectedValues = { ...prevSelectedValues };
-        delete newSelectedValues[toBeRemovedTag.name];
-        invokeOnChangeCallback(newSelectedValues);
-        return newSelectedValues;
-      });
+      // if it's allowed to un-select items.
+      if (!preventUnselectingItems) {
+        const toBeRemovedTag = items.find((item) => item.label === tag);
+        setSelectedValue((prevSelectedValues: MultiSelectValue) => {
+          const newSelectedValues = { ...prevSelectedValues };
+          delete newSelectedValues[toBeRemovedTag.name];
+          invokeOnChangeCallback(newSelectedValues);
+          return newSelectedValues;
+        });
+      }
     },
-    [invokeOnChangeCallback, items],
+    [invokeOnChangeCallback, items, preventUnselectingItems],
   );
 
   const shouldShowCaret =

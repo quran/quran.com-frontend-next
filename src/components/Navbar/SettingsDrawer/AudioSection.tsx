@@ -48,8 +48,8 @@ const AudioSection = () => {
         <Section.Label>Reciter</Section.Label>
         <div>
           <Combobox
-            clearable={false}
             id="audio-reciter"
+            minimumRequiredItems={1}
             items={items}
             initialInputValue={selectedReciter.name}
             value={selectedReciter.id.toString()}
