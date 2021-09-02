@@ -33,7 +33,6 @@
   position: fixed;
   height: constants.$navbar-height;
   box-sizing: border-box;
-  padding-left: var(--spacing-xxsmall);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -50,10 +49,17 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  padding-left: var(--spacing-medium);
+  padding-right: var(--spacing-medium);
+}
+
+.closeIcon {
+  // aligning the close icon with the rest of components
+  margin-right: calc(-1 * var(--spacing-xxsmall));
 }
 
 .headerContent {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
