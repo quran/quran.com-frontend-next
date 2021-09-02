@@ -25,7 +25,7 @@ const AudioSection = () => {
       getAvailableReciters().then((res) =>
         res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
       ),
-    { revalidateOnFocus: false, revalidateOnMount: false, revalidateOnReconnect: false },
+    { revalidateOnFocus: false, revalidateOnReconnect: true },
   );
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const reciters = data || [];
