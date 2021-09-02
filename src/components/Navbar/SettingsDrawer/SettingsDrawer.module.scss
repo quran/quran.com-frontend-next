@@ -51,6 +51,7 @@
   width: 100%;
   padding-left: var(--spacing-medium);
   padding-right: var(--spacing-xsmall);
+  // less padding on the right, because close icon already have padding
 }
 
 .headerContent {
