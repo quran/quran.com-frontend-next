@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Counter from 'src/components/dls/Counter/Counter';
-import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import Select from 'src/components/dls/Forms/Select';
 import { QuranFont } from 'src/components/QuranReader/types';
 // import VerseText from 'src/components/Verse/VerseText';
 import {
@@ -67,10 +67,6 @@ const getSelectedType = (font: QuranFont) => {
   return getSelectedType(QuranReaderStylesInitialState.quranFont);
 };
 
-// get the label for selected font. For example for QuranFont.MadaniV1, it will be 'King Fahad Complex V1'
-const getLabel = (font: QuranFont, selectedType) =>
-  fonts[selectedType].find((v) => v.id === font)?.label;
-
 // get default font for selected type. We take the first font in this case
 // for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
 const getDefaultFont = (selectedType) => {
@@ -99,15 +95,13 @@ const QuranFontSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>Style</Section.Label>
-        <div>
-          <Combobox
-            id="quran-font-styles"
-            value={quranFont}
-            initialInputValue={getLabel(quranFont, selectedType)}
-            items={fonts[selectedType]}
-            onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
-          />
-        </div>
+        <Select
+          id="quranFontStyles"
+          name="quranFontStyles"
+          options={fonts[selectedType]}
+          value={quranFont}
+          onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
+        />
       </Section.Row>
       <Section.Row>
         <Section.Label>Font size</Section.Label>

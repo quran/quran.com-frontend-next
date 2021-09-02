@@ -1,7 +1,5 @@
 import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import Combobox from 'src/components/dls/Forms/Combobox';
-import capitalize from 'lodash/capitalize';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
 import {
@@ -12,6 +10,8 @@ import {
   setShowWordByWordTransliteration,
   setShowTooltipFor,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import Select from 'src/components/dls/Forms/Select';
+import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
 import Section from './Section';
 
 const ReadingExperienceSection = () => {
@@ -75,27 +75,23 @@ const ReadingExperienceSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>Word By Word</Section.Label>
-        <div>
-          <Combobox
-            id="wordByWord"
-            items={wordByWordOptions}
-            initialInputValue={getLabelById(wordByWordValue)}
-            value={wordByWordValue}
-            onChange={onWordByWordChange}
-          />
-        </div>
+        <Select
+          id="wordByWord"
+          name="wordByWord"
+          options={wordByWordOptions}
+          value={wordByWordValue}
+          onChange={onWordByWordChange}
+        />
       </Section.Row>
       <Section.Row>
         <Section.Label>Show Tooltip For</Section.Label>
-        <div>
-          <Combobox
-            id="showToolTipFor"
-            items={wordByWordOptions}
-            initialInputValue={getLabelById(tooltipWordByWordValue)}
-            value={tooltipWordByWordValue}
-            onChange={onTooltipWordByWordChange}
-          />
-        </div>
+        <Select
+          id="showToolTipFor"
+          name="showToolTipFor"
+          options={wordByWordOptions}
+          value={tooltipWordByWordValue}
+          onChange={onTooltipWordByWordChange}
+        />
       </Section.Row>
     </Section>
   );
@@ -104,35 +100,17 @@ const ReadingExperienceSection = () => {
 const NONE = 'none';
 const BOTH = 'both';
 
-const generateItems = (items: string[], isCombobox = true) =>
-  items.map((item) => ({
-    id: item,
-    value: item,
-    label: capitalize(item),
-    ...(isCombobox && { name: item }),
-  }));
-
 // TODO: internationalize labels
-const preferences = generateItems(
-  [ReadingPreference.Reading, ReadingPreference.Translation],
-  false,
-);
-// wordByWordOptions will be used as items in Combobox component
-const wordByWordOptions = generateItems([
+const preferences = generateRadioItems([ReadingPreference.Reading, ReadingPreference.Translation]);
+
+// wordByWordOptions will be used as items in select component
+// TODO: internationalize labels
+const wordByWordOptions = generateSelectOptions([
   NONE,
   WordByWordType.Translation,
   WordByWordType.Transliteration,
   BOTH,
 ]);
-
-/**
- * Get the label of the combobox based on the id.
- *
- * @param {string} id
- * @returns {string}
- */
-const getLabelById = (id: string): string =>
-  wordByWordOptions.find((option) => option.id === id)?.label;
 
 type WordByWordValue = typeof BOTH | typeof NONE | WordByWordType;
 
@@ -167,8 +145,8 @@ const getWordByWordValue = (
  */
 const getTooltipWordByWordValue = (showTooltipFor: WordByWordType[]): WordByWordValue =>
   getWordByWordValue(
-    showTooltipFor.includes(WordByWordType.Translation),
-    showTooltipFor.includes(WordByWordType.Transliteration),
+    showTooltipFor && showTooltipFor.includes(WordByWordType.Translation),
+    showTooltipFor && showTooltipFor.includes(WordByWordType.Transliteration),
   );
 
 export default ReadingExperienceSection;
