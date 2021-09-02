@@ -16,7 +16,7 @@ const SettingsDrawer = () => {
   const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
 
   const closeSettingsDrawer = useCallback(() => {
-    dispatch({ type: setIsSettingsDrawerOpen, payload: false });
+    dispatch({ type: setIsSettingsDrawerOpen.type, payload: false });
   }, [dispatch]);
 
   // listen to any changes of escape key being pressed.
