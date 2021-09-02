@@ -14,6 +14,7 @@ const PlayVerseAudioButton = ({ chapterId, reciterId, timestamp }: PlayVerseAudi
   const dispatch = useDispatch();
   return (
     <Button
+      tooltip="Play"
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
       size={ButtonSize.Large}

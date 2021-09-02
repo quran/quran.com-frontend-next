@@ -39,6 +39,7 @@ const SettingsDrawer = () => {
           <div className={styles.headerContent}>
             <div className={styles.headerTitle}>Settings</div>
             <Button
+              tooltip="Close"
               className={styles.closeIcon}
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}

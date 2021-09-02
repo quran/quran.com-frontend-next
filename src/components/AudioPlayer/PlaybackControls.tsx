@@ -17,10 +17,17 @@ const PlaybackControls = () => {
 
   return (
     <div className={styles.container}>
-      <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} size={ButtonSize.Large}>
+      <Button
+        tooltip="Feature coming soon"
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        size={ButtonSize.Large}
+        disabled
+      >
         <RepeatIcon />
       </Button>
       <Button
+        tooltip="Rewind 10 seconds"
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         size={ButtonSize.Large}
@@ -31,6 +38,7 @@ const PlaybackControls = () => {
       </Button>
       <PlayPauseButton />
       <Button
+        tooltip="Fast-forward 10 seconds"
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         size={ButtonSize.Large}
