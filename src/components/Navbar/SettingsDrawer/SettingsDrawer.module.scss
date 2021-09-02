@@ -27,12 +27,12 @@
 }
 
 .header {
+  z-index: inherit;
   width: 100%;
   background-color: var(--color-background-default);
   position: fixed;
   height: constants.$navbar-height;
-  border-bottom: 1px var(--color-borders-hairline) solid;
-  padding: 0 var(--spacing-medium);
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -40,13 +40,22 @@
     width: constants.$side-menu-desktop-width;
   }
 }
+.headerTitle {
+  font-size: var(--font-size-large);
+}
 
 .headerContentContainer {
-  margin-right: var(--spacing-medium);
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  padding-left: var(--spacing-medium);
+  padding-right: var(--spacing-medium);
+}
+
+.closeIcon {
+  // aligning the close icon with the rest of components
+  margin-right: calc(-1 * var(--spacing-xxsmall));
 }
 
 .headerContent {

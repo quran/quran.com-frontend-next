@@ -1,8 +1,5 @@
 .trigger {
   all: unset;
-  &:focus {
-    box-shadow: var(--shadow-small);
-  }
 }
 
 .content {

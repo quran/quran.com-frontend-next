@@ -71,16 +71,6 @@ export default {
         category: 'Optional',
       },
     },
-    open: {
-      defaultValue: undefined,
-      options: [true, false],
-      control: { type: 'radio' },
-      table: {
-        category: 'Optional',
-      },
-      description:
-        'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
-    },
     tip: {
       defaultValue: true,
       options: [true, false],
@@ -178,13 +168,6 @@ TooltipWithoutTip.args = {
   children: DefaultTrigger,
   text: Text,
   tip: false,
-};
-
-export const ControlledTooltip = Template.bind({});
-ControlledTooltip.args = {
-  children: <p>Hovering away will not close the tooltip</p>,
-  text: Text,
-  open: true,
 };
 
 export const TooltipCollidesWithWindowEdges = Template.bind({});

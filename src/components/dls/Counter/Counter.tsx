@@ -1,5 +1,7 @@
-import Button from '../Button/Button';
+import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 import styles from './Counter.module.scss';
+import PlusIcon from '../../../../public/icons/plus.svg';
+import MinusIcon from '../../../../public/icons/minus.svg';
 
 type CounterProps = {
   count: number;
@@ -18,18 +20,26 @@ type CounterProps = {
  */
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
   <div className={styles.container}>
-    <Button tooltip="Decrement" disabled={!onDecrement} onClick={onDecrement}>
-      -
+    <Button
+      tooltip="Decrement"
+      shape={ButtonShape.Circle}
+      variant={ButtonVariant.Ghost}
+      disabled={!onDecrement}
+      onClick={onDecrement}
+    >
+      <MinusIcon />
     </Button>
     <span className={styles.count}>{count}</span>
     <Button
       tooltip="Increment"
+      variant={ButtonVariant.Ghost}
+      shape={ButtonShape.Circle}
       disabled={!onIncrement}
       onClick={() => {
         onIncrement();
       }}
     >
-      +
+      <PlusIcon />
     </Button>
   </div>
 );

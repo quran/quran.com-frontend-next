@@ -58,19 +58,21 @@ const TranslationSection = () => {
       <Section.Title>Translation</Section.Title>
       <Section.Row>
         <Section.Label>Translation</Section.Label>
-        <Combobox
-          id="translations"
-          items={items || []}
-          isMultiSelect
-          size={ComboboxSize.Medium}
-          value={numbersToStringsArray(selectedTranslations)}
-          onChange={(values) =>
-            dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
-          }
-        />
+        <div>
+          <Combobox
+            id="translations"
+            items={items || []}
+            isMultiSelect
+            size={ComboboxSize.Medium}
+            value={numbersToStringsArray(selectedTranslations)}
+            onChange={(values) =>
+              dispatch(setSelectedTranslations(stringsToNumbersArray(values as string[])))
+            }
+          />
+        </div>
       </Section.Row>
       <Section.Row>
-        <Section.Label>Translation</Section.Label>
+        <Section.Label>Font size</Section.Label>
 
         {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop

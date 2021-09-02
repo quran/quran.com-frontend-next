@@ -42,6 +42,7 @@ export type ButtonProps = {
   disabled?: boolean;
   onClick?: MouseEventHandler;
   tooltip?: string;
+  className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -57,8 +58,9 @@ const Button: React.FC<ButtonProps> = ({
   suffix,
   variant,
   tooltip,
+  className,
 }) => {
-  const classes = classNames(styles.base, {
+  const classes = classNames(styles.base, className, {
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',
     // type
