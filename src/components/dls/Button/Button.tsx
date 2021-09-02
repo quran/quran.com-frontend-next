@@ -39,7 +39,7 @@ export type ButtonProps = {
   href?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler;
-  className: string;
+  className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
