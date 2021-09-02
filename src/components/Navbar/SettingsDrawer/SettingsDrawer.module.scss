@@ -50,8 +50,12 @@
   justify-content: center;
   width: 100%;
   padding-left: var(--spacing-medium);
-  padding-right: var(--spacing-xsmall);
-  // less padding on the right, because close icon already have padding
+  padding-right: var(--spacing-medium);
+}
+
+.closeIcon {
+  // aligning the close icon with the rest of components
+  margin-right: calc(-1 * var(--spacing-xxsmall));
 }
 
 .headerContent {
