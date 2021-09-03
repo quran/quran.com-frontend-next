@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
 
+$split-height: 2px;
+
 .container {
   text-align: left;
   margin-top: var(--spacing-xxsmall);
@@ -32,7 +34,7 @@
   left: 15%;
   margin: 0 auto;
   width: 65%;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-medium);
   margin-left: var(--spacing-medium);
   margin-right: var(--spacing-medium);
   position: inherit;
@@ -43,7 +45,7 @@
 }
 
 .split {
-  height: 2px;
+  height: $split-height;
   cursor: pointer;
   display: inline-block;
   margin-bottom: calc(1.5 * var(--spacing-micro));

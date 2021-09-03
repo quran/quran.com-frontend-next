@@ -3,7 +3,6 @@ import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
 import classNames from 'classnames';
 import { Visibility } from 'src/redux/slices/AudioPlayer/state';
-import Reciter from 'types/Reciter';
 import styles from './Slider.module.scss';
 
 const NUMBER_OF_SPLITS = 100;
@@ -13,7 +12,7 @@ type SliderProps = {
   audioDuration: number;
   setTime: (number) => void;
   visibility: Visibility;
-  reciterName: Reciter['name'];
+  reciterName: string;
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
