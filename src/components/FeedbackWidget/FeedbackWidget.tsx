@@ -1,4 +1,3 @@
-import { FeedbackFish } from '@feedback-fish/react';
 import classNames from 'classnames';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -20,16 +19,16 @@ const FeedbackWidget = () => {
   const isAudioPlayerExpanded = !isHidden && audioPlayerVisibility === Visibility.Expanded;
 
   return (
-    <FeedbackFish projectId="3649f32ef147eb">
-      <div
-        className={classNames(styles.container, {
-          [styles.audioPlayerOpen]: isAudioPlayerOpen,
-          [styles.audioPlayerExpanded]: isAudioPlayerExpanded,
-        })}
-      >
+    <div
+      className={classNames(styles.container, {
+        [styles.audioPlayerOpen]: isAudioPlayerOpen,
+        [styles.audioPlayerExpanded]: isAudioPlayerExpanded,
+      })}
+    >
+      <a href="https://quran.upvoty.com" target="_blank" rel="noreferrer">
         <Button>Feedback</Button>
-      </div>
-    </FeedbackFish>
+      </a>
+    </div>
   );
 };
 
