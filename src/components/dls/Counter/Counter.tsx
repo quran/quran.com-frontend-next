@@ -21,7 +21,7 @@ type CounterProps = {
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
   <div className={styles.container}>
     <Button
-      tooltip="Decrement"
+      tooltip="Decrease"
       shape={ButtonShape.Circle}
       variant={ButtonVariant.Ghost}
       disabled={!onDecrement}
@@ -31,7 +31,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
     </Button>
     <span className={styles.count}>{count}</span>
     <Button
-      tooltip="Increment"
+      tooltip="Increase"
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
       disabled={!onIncrement}
