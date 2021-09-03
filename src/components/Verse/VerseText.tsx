@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import Word from 'types/Word';
 import classNames from 'classnames';
-import { getWordDataFromLocation } from 'src/utils/verse';
+import { isFirstWordOfSurah } from 'src/utils/verse';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import QuranWord from '../dls/QuranWord/QuranWord';
-import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 import ChapterHeader from '../chapters/ChapterHeader';
@@ -25,14 +25,14 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],
   );
-  const firstWordData = getWordDataFromLocation(location);
+  const firstWordData = isFirstWordOfSurah(location);
   const isBigTextLayout =
     isReadingMode &&
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
   return (
     <>
-      {isReadingMode && firstWordData.isFirstWordOfFirstVerseOfSurah && (
+      {isReadingMode && firstWordData.isFirstWordOfSurah && (
         <ChapterHeader chapterId={firstWordData.chapterId} />
       )}
       <div

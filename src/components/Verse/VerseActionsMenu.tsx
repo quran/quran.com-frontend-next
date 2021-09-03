@@ -8,7 +8,6 @@ import {
   selectBookmarks,
   toggleVerseBookmark,
 } from 'src/redux/slices/QuranReader/bookmarks';
-import Verse from '../../../types/Verse';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 import CopyIcon from '../../../public/icons/copy.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
@@ -19,6 +18,13 @@ import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import styles from './VerseActionsMenu.module.scss';
 import Modal from '../dls/ModalNew/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+
+interface Verse {
+  textUthmani: string;
+  verseKey: string;
+  chapterId: number | string;
+  verseNumber: number;
+}
 
 interface Props {
   verse: Verse;
@@ -93,7 +99,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
         triggerClassName={styles.container}
         trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}
       >
-        <VerseAdvancedCopy verse={verse}>
+        <VerseAdvancedCopy verseKey={verse.verseKey}>
           {({ ayahSelectionComponent, actionText, onCopy }) => (
             <>
               <Modal.Body>

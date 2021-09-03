@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
-import Verse from 'types/Verse';
 import {
   selectTranslations,
   TranslationsSettings,
@@ -17,7 +16,7 @@ import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './Verses
 import styles from './VerseAdvancedCopy.module.scss';
 
 interface Props {
-  verse: Verse;
+  verseKey: string;
   children({ onCopy, actionText, ayahSelectionComponent }): React.ReactElement;
 }
 const RESET_BUTTON_TIMEOUT_MS = 5 * 1000;
@@ -60,7 +59,7 @@ const MULTIPLE_VERSES = 'multiple';
 const TRUE_STRING = String(true);
 const FALSE_STRING = String(false);
 
-const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
+const VerseAdvancedCopy: React.FC<Props> = ({ verseKey, children }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   const { chapterId } = router.query;
@@ -180,8 +179,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       }
     }
     // by default the from and to will be the current verse.
-    let fromVerse = verse.verseKey;
-    let toVerse = verse.verseKey;
+    let fromVerse = verseKey;
+    let toVerse = verseKey;
     // if range of verse was selected
     if (showRangeOfVerses) {
       fromVerse = rangeStartVerse;
@@ -263,7 +262,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           {
             value: SINGLE_VERSE,
             id: SINGLE_VERSE,
-            label: `Current verse ${verse.verseKey}`,
+            label: `Current verse ${verseKey}`,
           },
           {
             value: MULTIPLE_VERSES,

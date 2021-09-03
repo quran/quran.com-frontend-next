@@ -15,6 +15,8 @@ interface Word {
   codeV2?: string;
   pageNumber?: number;
   lineNumber?: number;
+  chapterId?: number | string;
+  verseNumber?: number;
   position: number;
   location?: string;
   translation?: Translation;

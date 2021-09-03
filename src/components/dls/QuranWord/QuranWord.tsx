@@ -6,6 +6,10 @@ import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
+import VerseActionsMenu from 'src/components/Verse/VerseActionsMenu';
+import { isEndOfVerseWord } from 'src/utils/verse';
+import Wrapper from 'src/components/Wrapper';
+import HoverCard from 'src/components/dls/HoverCard';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -35,13 +39,15 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
 
+  const isWordEndOfVerse = isEndOfVerseWord(word);
   // only show tooltip when it's not the verse number,
   // when it's allowed to have wbw and when the settings
   // is set to either translation or transliteration or both.
-  const showTooltip =
-    word.charTypeName !== CharType.End && allowWordByWord && !!showTooltipFor.length;
+  const showTooltip = !isWordEndOfVerse && allowWordByWord && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = highlight || isTooltipOpened;
+  // The verse's menu should only show when it's the end of the verse's word and when word by word is allowed.
+  const showVerseActionsMenu = allowWordByWord && isWordEndOfVerse;
   return (
     <div
       className={classNames(styles.container, {
@@ -49,17 +55,40 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
         [styles.wbwContainer]: isWordByWordLayout,
       })}
     >
-      {showTooltip ? (
-        <Tooltip
-          text={getTooltipText(showTooltipFor, word)}
+      {showVerseActionsMenu ? (
+        <HoverCard
+          openDelay={0}
+          closeDelay={0}
+          body={
+            <VerseActionsMenu
+              verse={{
+                textUthmani: word.textUthmani,
+                verseKey: word.verseKey,
+                chapterId: word.chapterId,
+                verseNumber: word.verseNumber,
+              }}
+            />
+          }
           contentSide={ContentSide.TOP}
-          onOpenChange={setIsTooltipOpened}
-          delay={0}
         >
           {wordText}
-        </Tooltip>
+        </HoverCard>
       ) : (
-        wordText
+        <Wrapper
+          shouldWrap={showTooltip}
+          wrapper={(children) => (
+            <Tooltip
+              text={getTooltipText(showTooltipFor, word)}
+              contentSide={ContentSide.TOP}
+              onOpenChange={setIsTooltipOpened}
+              delay={0}
+            >
+              {children}
+            </Tooltip>
+          )}
+        >
+          {wordText}
+        </Wrapper>
       )}
       {allowWordByWord && (
         <>

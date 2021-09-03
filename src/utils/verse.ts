@@ -1,4 +1,6 @@
 import range from 'lodash/range';
+import Verse from 'types/Verse';
+import Word, { CharType } from 'types/Word';
 import * as chaptersData from '../../data/chapters.json';
 import * as sampleVerse from './sample-verse.json';
 
@@ -45,6 +47,17 @@ export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, str
 };
 
 /**
+ * Split the word's location and get the surahNumber, verseNumber and wordNumber.
+ *
+ * @param {String} wordLocation the word location {surahNumber}:{verseNumber}:{wordNumber}
+ * @returns {[String, String, String]}
+ */
+export const getWordDataByLocation = (wordLocation: string): [string, string, string] => {
+  const locationSplits = wordLocation.split(COLON_SPLITTER);
+  return [locationSplits[0], locationSplits[1], locationSplits[2]];
+};
+
+/**
  * Extract the data related to a word. The first is the chapter Id,
  * the second is whether the word is the first word of the first verse
  * of the Surah. To do that we will have to split the word location
@@ -54,13 +67,13 @@ export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, str
  *
  * @param {string} wordLocation whose format is {surahNumber}:{verseNumber}:{wordNumber} e.g. "112:1:1"
  */
-export const getWordDataFromLocation = (
+export const isFirstWordOfSurah = (
   wordLocation: string,
-): { chapterId: string; isFirstWordOfFirstVerseOfSurah: boolean } => {
-  const locationSplits = wordLocation.split(COLON_SPLITTER);
+): { chapterId: string; isFirstWordOfSurah: boolean } => {
+  const locationSplits = getWordDataByLocation(wordLocation);
   return {
     chapterId: locationSplits[0],
-    isFirstWordOfFirstVerseOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
+    isFirstWordOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
   };
 };
 
@@ -70,3 +83,45 @@ export const getWordDataFromLocation = (
  * @returns {Verse} verse
  */
 export const getSampleVerse = () => sampleVerse;
+
+/**
+ * Check whether the current word is end of verse the verse based on the char type.
+ * @param {Word} word
+ * @returns {boolean}
+ */
+export const isEndOfVerseWord = (word: Word): boolean => word.charTypeName === CharType.End;
+
+/**
+ * Return the data needed for the last word of the verse that represents the verse's number.
+ *
+ * @param {Verse} verse
+ */
+export const getVerseEndData = (verse: Verse) => ({
+  textUthmani: verse.textUthmani,
+  chapterId: verse.chapterId,
+  verseNumber: verse.verseNumber,
+});
+
+/**
+ * Get the verse words. We will put the BE's response for each word
+ * except when the word is the end of the verse then we append some
+ * data that belongs to the verse which will be used when showing the
+ * verse's action menu on hovering over the verse's number.
+ *
+ * @param {Verse} verse
+ * @returns {Word[]}
+ */
+export const getVerseWords = (verse: Verse): Word[] => {
+  const words = [] as Word[];
+  verse.words.forEach((word) => {
+    if (isEndOfVerseWord(word)) {
+      words.push({
+        ...word,
+        ...getVerseEndData(verse),
+      });
+    } else {
+      words.push(word);
+    }
+  });
+  return words;
+};

@@ -6,8 +6,9 @@
   border-radius: var(--border-radius-default);
   padding: var(--spacing-xxsmall);
   color: var(--color-text-inverse);
-  background-color: var(--color-background-inverse);
+  background-color: var(--color-background-default);
+  box-shadow: var(--shadow-normal);
   > span {
-    fill: var(--color-background-inverse);
+    fill: var(--color-background-default);
   }
 }

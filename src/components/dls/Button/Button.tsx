@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import Link from 'next/link';
 import React, { MouseEventHandler } from 'react';
+import Tooltip from 'src/components/dls/Tooltip';
+import Wrapper from 'src/components/Wrapper';
 import styles from './Button.module.scss';
 import Spinner, { SpinnerSize } from '../Spinner/Spinner';
-import Tooltip from '../Tooltip/index';
-import Wrapper from '../Wrapper/Wrapper';
 
 export enum ButtonSize {
   Small = 'small',
