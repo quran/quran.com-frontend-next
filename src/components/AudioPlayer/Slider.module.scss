@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
 
+$split-height: 2px;
+
 .container {
   text-align: left;
   margin-top: var(--spacing-xxsmall);
@@ -18,7 +20,7 @@
   margin: 0;
   width: 100%;
   height: calc(1.25 * var(--spacing-xxsmall));
-
+  transition: var(--transition-regular);
   @include breakpoints.tablet {
     width: 70%;
     position: inherit;
@@ -28,8 +30,22 @@
   }
 }
 
+.splitsContainerExpanded {
+  left: 15%;
+  margin: 0 auto;
+  width: 65%;
+  margin-bottom: var(--spacing-medium);
+  margin-left: var(--spacing-medium);
+  margin-right: var(--spacing-medium);
+  position: inherit;
+
+  @include breakpoints.tablet {
+    width: 70%;
+  }
+}
+
 .split {
-  height: 2px;
+  height: $split-height;
   cursor: pointer;
   display: inline-block;
   margin-bottom: calc(1.5 * var(--spacing-micro));
@@ -41,18 +57,21 @@
 }
 
 .reciterNameContainer {
+  transition: var(--transition-regular);
   @include breakpoints.tablet {
     display: none;
   }
 }
 
-.currentTime {
+.reciterNameContainerExpanded {
   display: none;
 }
 
-.currentTimeExpanded {
+.currentTime {
   display: none;
-  @include breakpoints.desktop {
-    display: inline-block;
-  }
+  transition: var(--transition-regular);
+}
+
+.currentTimeExpanded {
+  display: inline-block;
 }

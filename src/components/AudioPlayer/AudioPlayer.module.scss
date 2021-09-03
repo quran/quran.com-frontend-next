@@ -28,8 +28,7 @@
 }
 
 .containerHidden {
-  height: 0;
-  opacity: 0;
+  display: none;
 }
 
 .containerDefault {
@@ -53,6 +52,10 @@
   }
 }
 
+.innerContainerExpanded {
+  margin-top: var(--spacing-micro);
+}
+
 .actionButtonsContainer {
   margin-top: var(--spacing-micro);
   display: flex;
@@ -63,7 +66,7 @@
   }
 }
 .actionButtonsContainerHidden {
-  opacity: 0;
+  display: none;
 }
 
 .seekBackwardsContainer {

@@ -12,6 +12,7 @@ type SliderProps = {
   audioDuration: number;
   setTime: (number) => void;
   visibility: Visibility;
+  reciterName: string;
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
@@ -28,10 +29,11 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
  */
-const Slider = ({ currentTime, audioDuration, setTime, visibility }: SliderProps) => {
+const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
+  const isExpanded = visibility === Visibility.Expanded;
 
   const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;
@@ -50,14 +52,24 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility }: SliderProps
     <div className={styles.container}>
       <span
         className={classNames(styles.currentTime, {
-          [styles.currentTimeExpanded]: visibility === Visibility.Expanded,
+          [styles.currentTimeExpanded]: isExpanded,
         })}
       >
         {secondsFormatter(currentTime)}
       </span>
-      <div className={classNames(styles.splitsContainer)}>{splits}</div>
-      <div className={styles.reciterNameContainer}>
-        Mishary Al - Affasy <br />
+      <div
+        className={classNames(styles.splitsContainer, {
+          [styles.splitsContainerExpanded]: isExpanded,
+        })}
+      >
+        {splits}
+      </div>
+      <div
+        className={classNames(styles.reciterNameContainer, {
+          [styles.reciterNameContainerExpanded]: isExpanded,
+        })}
+      >
+        {reciterName} <br />
       </div>
       <span className={styles.remainingTime}>{secondsFormatter(remainingTime)}</span>
     </div>

@@ -13,6 +13,7 @@ import {
   selectVisibility,
   setVisibility,
   Visibility,
+  selectReciter,
 } from '../../redux/slices/AudioPlayer/state';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
@@ -35,7 +36,7 @@ const AudioPlayer = () => {
   const visibility = useSelector(selectVisibility);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
-
+  const reciterName = useSelector(selectReciter).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
 
   const toggleVisibility = () => {
@@ -110,7 +111,11 @@ const AudioPlayer = () => {
         [styles.containerExpanded]: visibility === Visibility.Expanded,
       })}
     >
-      <div className={styles.innerContainer}>
+      <div
+        className={classNames(styles.innerContainer, {
+          [styles.innerContainerExpanded]: visibility === Visibility.Expanded,
+        })}
+      >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           src={audioFile?.audioUrl}
@@ -157,6 +162,7 @@ const AudioPlayer = () => {
             currentTime={currentTime}
             audioDuration={durationInSeconds}
             setTime={triggerSetCurrentTime}
+            reciterName={reciterName}
           />
         </div>
         {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
