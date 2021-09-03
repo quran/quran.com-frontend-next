@@ -5,10 +5,9 @@
 }
 
 .item {
-  font-size: var(--font-size-normal);
-  letter-spacing: 0;
-  line-height: normal;
+  margin-bottom: var(--spacing-large);
   color: var(--color-text-default);
+  opacity: var(--opacity-85);
 }
 
 .actionsContainer {

@@ -27,8 +27,8 @@
   color: var(--color-text-default);
   border: 1px solid var(--color-secondary-medium);
   &:hover {
-    color: var(--color-secondary-medium);
-    background-color: var(--color-text-default);
+    color: var(--color-text-default);
+    background-color: var(--color-background-alternative-deep);
   }
 }
 
