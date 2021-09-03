@@ -17,8 +17,14 @@
 }
 .secondary {
   color: var(--color-text-faded);
+  &:hover {
+    color: var(--color-primary-medium);
+  }
 }
 .blend {
   text-decoration: underline;
   font-weight: var(--font-weight-semibold);
+  &:hover {
+    opacity: var(--opacity-50);
+  }
 }
