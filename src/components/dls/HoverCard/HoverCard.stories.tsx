@@ -123,13 +123,6 @@ HoverCardWithoutTip.args = {
   tip: false,
 };
 
-export const ControlledHoverCard = Template.bind({});
-ControlledHoverCard.args = {
-  children: <p>Hovering away will not close the hover card</p>,
-  body: Body,
-  open: true,
-};
-
 export const HoverCardCollidesWithWindowEdges = Template.bind({});
 HoverCardCollidesWithWindowEdges.args = {
   children: DefaultTrigger,
