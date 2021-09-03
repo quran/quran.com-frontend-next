@@ -2392,6 +2392,21 @@
     "@radix-ui/react-primitive" "0.0.15"
     "@radix-ui/react-use-callback-ref" "0.0.5"
 
+"@radix-ui/react-hover-card@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-hover-card/-/react-hover-card-0.0.4.tgz#b0e07b1142131a0b246425f86a40a21f36ee4068"
+  integrity sha512-aZq6vnFyNZL6JroY22R/MX39TQN1ZUqHmh3rnwOIDqb8Wtu+VoyKOMKtkBlwdFMl6xrwiG2stFEwtqqTC5YxVw==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "0.0.5"
+    "@radix-ui/react-context" "0.0.5"
+    "@radix-ui/react-polymorphic" "0.0.13"
+    "@radix-ui/react-popper" "0.0.18"
+    "@radix-ui/react-portal" "0.0.15"
+    "@radix-ui/react-presence" "0.0.15"
+    "@radix-ui/react-primitive" "0.0.15"
+    "@radix-ui/react-use-controllable-state" "0.0.6"
+
 "@radix-ui/react-id@0.0.6", "@radix-ui/react-id@^0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-id/-/react-id-0.0.6.tgz#c4b27d11861805e91ac296e7758ab47e3947b65c"
