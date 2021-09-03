@@ -45,6 +45,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  a {
+    color: var(--color-primary-medium) !important;
+  }
 }
 
 .nameArabic {

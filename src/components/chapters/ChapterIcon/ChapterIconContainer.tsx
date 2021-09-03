@@ -1,13 +1,26 @@
+import classNames from 'classnames';
 import React from 'react';
 import ChapterIcon from 'src/components/chapters/ChapterIcon';
 import styles from './ChapterIconContainer.module.scss';
 
-interface Props {
-  chapterId: string;
+export enum ChapterIconsSize {
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
 }
 
-const IconContainer: React.FC<Props> = ({ chapterId }) => (
-  <span className={styles.iconContainer}>
+interface Props {
+  chapterId: string;
+  size?: ChapterIconsSize;
+}
+
+const IconContainer: React.FC<Props> = ({ chapterId, size = ChapterIconsSize.Medium }) => (
+  <span
+    className={classNames(styles.iconContainer, {
+      [styles.iconContainerSmall]: size === ChapterIconsSize.Small,
+      [styles.iconContainerLarge]: size === ChapterIconsSize.Large,
+    })}
+  >
     <ChapterIcon id={chapterId} />
     <ChapterIcon />
   </span>

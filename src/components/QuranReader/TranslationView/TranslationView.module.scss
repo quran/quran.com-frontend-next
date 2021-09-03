@@ -54,6 +54,6 @@
 }
 
 .divider {
-  border-top: 1px var(--color-secondary-medium) solid;
+  border-top: 1px var(--color-borders-hairline) solid;
 }
 @include utility.generate-font-sizes("translation");

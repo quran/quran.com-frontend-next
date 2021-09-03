@@ -1,8 +1,8 @@
-import Bismillah from 'src/components/dls/Bismillah/Bismillah';
+import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import React from 'react';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import ChapterIconContainer from '../ChapterIcon/ChapterIconContainer';
+import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
 
 interface Props {
@@ -14,11 +14,11 @@ const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 const ChapterHeader: React.FC<Props> = ({ chapterId }) => (
   <div className={styles.container}>
     <div className={styles.item}>
-      <ChapterIconContainer chapterId={chapterId} />
+      <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
     </div>
     {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && (
       <div className={styles.item}>
-        <Bismillah />
+        <Bismillah size={BismillahSize.Large} />
       </div>
     )}
     <div className={styles.actionsContainer}>

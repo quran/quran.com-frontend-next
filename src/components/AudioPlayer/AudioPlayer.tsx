@@ -145,7 +145,7 @@ const AudioPlayer = () => {
           <PlayPauseButton />
           <div className={styles.seekBackwardsContainer}>
             <Button
-              tooltip="Fast-forward 10 seconds"
+              tooltip="Rewind 10 seconds"
               shape={ButtonShape.Circle}
               size={ButtonSize.Large}
               disabled={isLoading}
