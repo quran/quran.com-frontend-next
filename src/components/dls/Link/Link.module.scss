@@ -1,0 +1,18 @@
+.base {
+  text-decoration: none;
+  color: inherit;
+}
+// variants
+.highlight {
+  color: var(--color-text-link);
+}
+.primary {
+  color: var(--color-primary-medium);
+}
+.secondary {
+  color: var(--color-text-faded);
+}
+.blend {
+  text-decoration: underline;
+  font-weight: var(--font-weight-semibold);
+}
