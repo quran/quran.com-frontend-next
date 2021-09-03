@@ -5,9 +5,15 @@
 // variants
 .highlight {
   color: var(--color-text-link);
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .primary {
   color: var(--color-primary-medium);
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .secondary {
   color: var(--color-text-faded);
