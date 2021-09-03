@@ -2,7 +2,6 @@
 @use "src/styles/constants";
 
 .container {
-  display: none; // Disable the feedback widget on mobile, Feedback fish introduced CLS on small devices
   position: fixed;
   bottom: var(--spacing-mega);
   right: calc(1 * var(--spacing-medium));
