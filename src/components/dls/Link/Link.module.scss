@@ -1,0 +1,30 @@
+.base {
+  text-decoration: none;
+  color: inherit;
+}
+// variants
+.highlight {
+  color: var(--color-text-link);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.primary {
+  color: var(--color-primary-medium);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.secondary {
+  color: var(--color-text-faded);
+  &:hover {
+    color: var(--color-primary-medium);
+  }
+}
+.blend {
+  text-decoration: underline;
+  font-weight: var(--font-weight-semibold);
+  &:hover {
+    opacity: var(--opacity-50);
+  }
+}
