@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useCallback } from 'react';
 import Combobox from './index';
 import SettingIcon from '../../../../../public/icons/settings.svg';
 import SearchIcon from '../../../../../public/icons/search.svg';
@@ -28,7 +27,7 @@ export default {
         category: 'Optional',
       },
       description:
-        'A function that will be called when an item is selected. The function will pass the name of the item selected along with id of the combobox.',
+        'A function that will be called when an item is selected. The function will pass the name of the item selected along with id of the combobox. This should be used with useCallback.',
     },
     initialInputValue: {
       table: {
@@ -96,6 +95,15 @@ export default {
       },
       description: 'Whether the combobox has an error or not.',
     },
+    minimumRequiredItems: {
+      defaultValue: 0,
+      control: { type: 'number' },
+      table: {
+        category: 'Optional',
+      },
+      description:
+        'If above 0 will indicate the minimum number of items that should be present at any give time. This will be useful when controlling the component.',
+    },
     emptyMessage: {
       defaultValue: 'No results',
       control: { type: 'text' },
@@ -135,9 +143,9 @@ const ControlledRemoteTemplate = (args) => {
     }, 1000);
   }, []);
 
-  const onChange = (newSelectedValue: string) => {
+  const onChange = useCallback((newSelectedValue: string) => {
     setValue(newSelectedValue);
-  };
+  }, []);
   return (
     <Combobox
       {...args}
@@ -151,9 +159,9 @@ const ControlledRemoteTemplate = (args) => {
 // this template will be controlled where the value is a local value and not fetched from a remote datastore.
 const ControlledLocalTemplate = (args) => {
   const [value, setValue] = useState('Item1');
-  const onChange = (newSelectedValue: string) => {
+  const onChange = useCallback((newSelectedValue: string) => {
     setValue(newSelectedValue);
-  };
+  }, []);
   return <Combobox {...args} value={value} initialInputValue={value} onChange={onChange} />;
 };
 
@@ -184,6 +192,13 @@ export const DefaultControlledCombobox = ControlledLocalTemplate.bind({});
 DefaultControlledCombobox.args = {
   id: 'controlled-local-single-select',
   items: generateItems(),
+};
+
+export const ControlledComboboxWithARequiredValue = ControlledLocalTemplate.bind({});
+ControlledComboboxWithARequiredValue.args = {
+  id: 'controlled-local-single-select-with-required-value',
+  items: generateItems(),
+  minimumRequiredItems: 1,
 };
 
 export const RemoteControlledCombobox = ControlledRemoteTemplate.bind({});

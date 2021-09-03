@@ -3,6 +3,8 @@ import Link from 'next/link';
 import React, { MouseEventHandler } from 'react';
 import styles from './Button.module.scss';
 import Spinner, { SpinnerSize } from '../Spinner/Spinner';
+import Tooltip from '../Tooltip/index';
+import Wrapper from '../Wrapper/Wrapper';
 
 export enum ButtonSize {
   Small = 'small',
@@ -39,6 +41,7 @@ export type ButtonProps = {
   href?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler;
+  tooltip?: string;
   className?: string;
 };
 
@@ -54,6 +57,7 @@ const Button: React.FC<ButtonProps> = ({
   prefix,
   suffix,
   variant,
+  tooltip,
   className,
 }) => {
   const classes = classNames(styles.base, className, {
@@ -99,11 +103,16 @@ const Button: React.FC<ButtonProps> = ({
     );
 
   return (
-    <button type="button" className={classes} disabled={disabled} onClick={onClick}>
-      {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
-      <span className={styles.content}>{children}</span>
-      {suffix && <span className={styles.suffix}>{suffix}</span>}
-    </button>
+    <Wrapper
+      shouldWrap={!!tooltip}
+      wrapper={(tooltipChildren) => <Tooltip text={tooltip}>{tooltipChildren}</Tooltip>}
+    >
+      <button type="button" className={classes} disabled={disabled} onClick={onClick}>
+        {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
+        <span className={styles.content}>{children}</span>
+        {suffix && <span className={styles.suffix}>{suffix}</span>}
+      </button>
+    </Wrapper>
   );
 };
 

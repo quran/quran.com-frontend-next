@@ -1,28 +1,23 @@
-import React, { useState } from 'react';
 import classNames from 'classnames';
-import FontAdjustment from './FontAdjustment';
-import ReadingPreferenceAdjustment from './ReadingPreferenceAdjustment';
-import NotesAdjustment from './NotesAdjustment';
-import AudioPlayerAdjustment from './AudioPlayerAdjustment';
-import NavbarAdjustment from './NavbarAdjustment';
-import TafsirsAdjustment from './TafsirsAdjustment';
-import ContextMenuAdjustment from './ContextMenuAdjustment';
-import TranslationsAdjustment from './TranslationsAdjustment';
-import ThemeAdjustment from './ThemeAdjustment';
-import ReciterAdjustment from './ReciterAdjustment';
-import styles from './DeveloperUtility.module.scss';
+import React, { useState } from 'react';
+
 import WrenchIcon from '../../../public/icons/wrench.svg';
-import WordByWordAdjustment from './WordByWordAdjustment';
+import AudioPlayerAdjustment from './AudioPlayerAdjustment';
+import ContextMenuAdjustment from './ContextMenuAdjustment';
+import styles from './DeveloperUtility.module.scss';
+import NavbarAdjustment from './NavbarAdjustment';
+import NotesAdjustment from './NotesAdjustment';
+
 /**
  * A set of developer utilities only availble on development environments
  */
 const DeveloperUtility = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Uncomment once we have a settings menu and don't want to expose the developer utilities
-  // if (process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production') {
-  //   return <></>;
-  // }
+  // only show the developer utilities if we're in development mode
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
+    return <></>;
+  }
 
   if (!isExpanded) {
     return (
@@ -45,17 +40,10 @@ const DeveloperUtility = () => {
     >
       Developer Utility
       <div className={styles.divider} />
-      <ThemeAdjustment />
-      <FontAdjustment />
-      <ReadingPreferenceAdjustment />
-      <WordByWordAdjustment />
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />
-      <TranslationsAdjustment />
-      <TafsirsAdjustment />
       <ContextMenuAdjustment />
-      <ReciterAdjustment />
       <div>
         <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close

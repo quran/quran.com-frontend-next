@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { QuranFont } from 'src/components/QuranReader/types';
+import resetSettings from '../reset-settings';
 
 export const MAXIMUM_FONT_STEP = 5;
+export const MINIMUM_FONT_STEP = 1;
 
 export type QuranReaderStyles = {
   tafsirFontScale: number;
@@ -10,7 +12,7 @@ export type QuranReaderStyles = {
   quranFont: QuranFont;
 };
 
-const initialState: QuranReaderStyles = {
+export const initialState: QuranReaderStyles = {
   // the base sizes in rem
   tafsirFontScale: 3,
   quranTextFontScale: 3,
@@ -65,6 +67,11 @@ export const quranReaderStylesSlice = createSlice({
           };
       }
     },
+  },
+  // reset the state to the initial state
+  // when `reset` action is dispatched
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 

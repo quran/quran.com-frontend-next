@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import styles from './RadioGroup.module.scss';
 
-interface RadioItem {
+export interface RadioItem {
   value: string;
   id: string;
   label: string;

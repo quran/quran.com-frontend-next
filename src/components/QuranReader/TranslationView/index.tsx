@@ -45,7 +45,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
             ))}
           </div>
         </div>
-        <hr />
+        <div className={styles.divider} />
       </div>
     ))}
   </div>

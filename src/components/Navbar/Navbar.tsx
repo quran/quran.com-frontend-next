@@ -4,11 +4,12 @@ import {
   selectNavbar,
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
+  setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
 import Link from 'next/link';
 import classNames from 'classnames';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
-import LanuageSelector from './LanguageSelector';
+import LanguageSelector from './LanguageSelector';
 import IconSettings from '../../../public/icons/settings.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconMenu from '../../../public/icons/menu.svg';
@@ -16,6 +17,7 @@ import IconQ from '../../../public/icons/Q.svg';
 import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
 import SearchDrawer from './SearchDrawer/SearchDrawer';
 import styles from './Navbar.module.scss';
+import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar);
@@ -30,6 +32,10 @@ const Navbar = () => {
     dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
   };
 
+  const openSettingsDrawer = () => {
+    dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
+  };
+
   return (
     <nav className={classNames(styles.styledNav, { [styles.styledNavHidden]: !isVisible })}>
       {isVisible && (
@@ -38,6 +44,7 @@ const Navbar = () => {
             <div className={styles.leftCTA}>
               <>
                 <Button
+                  tooltip="Menu"
                   variant={ButtonVariant.Ghost}
                   shape={ButtonShape.Circle}
                   onClick={openNavigationDrawer}
@@ -53,16 +60,25 @@ const Navbar = () => {
                   </Button>
                 </a>
               </Link>
-              <LanuageSelector />
+              <LanguageSelector />
             </div>
           </div>
           <div className={styles.centerVertically}>
             <div className={styles.rightCTA}>
-              <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-                <IconSettings />
-              </Button>
               <>
                 <Button
+                  tooltip="Settings"
+                  shape={ButtonShape.Circle}
+                  variant={ButtonVariant.Ghost}
+                  onClick={openSettingsDrawer}
+                >
+                  <IconSettings />
+                </Button>
+                <SettingsDrawer />
+              </>
+              <>
+                <Button
+                  tooltip="Search"
                   variant={ButtonVariant.Ghost}
                   onClick={openSearchDrawer}
                   shape={ButtonShape.Circle}

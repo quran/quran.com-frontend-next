@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReadingPreference } from 'src/components/QuranReader/types';
+import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
+import resetSettings from '../reset-settings';
 
 const DEFAULT_TRANSLATION = 20; // just a placeholder.
 const DEFAULT_TRANSLITERATION = 12; // just a placeholder.
@@ -10,6 +11,7 @@ export type ReadingPreferences = {
   selectedWordByWordTranslation: number;
   showWordByWordTransliteration: boolean;
   selectedWordByWordTransliteration: number;
+  showTooltipFor: WordByWordType[];
 };
 
 const initialState: ReadingPreferences = {
@@ -18,6 +20,7 @@ const initialState: ReadingPreferences = {
   selectedWordByWordTranslation: DEFAULT_TRANSLATION,
   showWordByWordTransliteration: false,
   selectedWordByWordTransliteration: DEFAULT_TRANSLITERATION,
+  showTooltipFor: [WordByWordType.Translation],
 };
 
 export const readingPreferencesSlice = createSlice({
@@ -28,13 +31,13 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       readingPreference: action.payload,
     }),
-    toggleShowWordByWordTranslation: (state) => ({
+    setShowWordByWordTranslation: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      showWordByWordTranslation: !state.showWordByWordTranslation,
+      showWordByWordTranslation: action.payload,
     }),
-    toggleShowWordByWordTransliteration: (state) => ({
+    setShowWordByWordTransliteration: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      showWordByWordTransliteration: !state.showWordByWordTransliteration,
+      showWordByWordTransliteration: action.payload,
     }),
     setSelectedWordByWordTranslation: (state, action: PayloadAction<number>) => ({
       ...state,
@@ -44,15 +47,25 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       selectedWordByWordTransliteration: action.payload,
     }),
+    setShowTooltipFor: (state, action: PayloadAction<WordByWordType[]>) => ({
+      ...state,
+      showTooltipFor: action.payload,
+    }),
+  },
+  // reset the state to initial state
+  // when `reset` action is dispatched
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 
 export const {
   setReadingPreference,
-  toggleShowWordByWordTranslation,
-  toggleShowWordByWordTransliteration,
+  setShowWordByWordTranslation,
+  setShowWordByWordTransliteration,
   setSelectedWordByWordTranslation,
   setSelectedWordByWordTransliteration,
+  setShowTooltipFor,
 } = readingPreferencesSlice.actions;
 
 export const selectReadingPreferences = (state) => state.readingPreferences as ReadingPreferences;

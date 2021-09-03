@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import resetSettings from './reset-settings';
 
 export enum ThemeType {
   System = 'system',
@@ -24,10 +25,13 @@ export const themeSlice = createSlice({
       type: action.payload,
     }),
   },
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => initialState);
+  },
 });
 
 export const { setTheme } = themeSlice.actions;
 
-export const selectTheme = (state) => state.theme;
+export const selectTheme = (state) => state.theme as Theme;
 
 export default themeSlice.reducer;
