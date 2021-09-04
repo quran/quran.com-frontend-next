@@ -17,10 +17,10 @@ const SearchResultItem: React.FC<Props> = ({ result }) => (
         <div className={styles.quranTextContainer}>
           <p className={styles.verseKey}>{result.verseKey}</p>
           <div className={styles.quranTextResult}>
-            {result.words.map((word) => (
+            {result.words.map((word, index) => (
               <QuranWord
                 highlight={!!word.highlight}
-                key={word.id}
+                key={`${result.verseKey}:${index + 1}`}
                 word={word}
                 allowWordByWord={false}
               />

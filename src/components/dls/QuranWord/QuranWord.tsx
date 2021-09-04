@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
+import Wrapper from 'src/components/Wrapper/Wrapper';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -49,18 +50,21 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
         [styles.wbwContainer]: isWordByWordLayout,
       })}
     >
-      {showTooltip ? (
-        <Tooltip
-          text={getTooltipText(showTooltipFor, word)}
-          contentSide={ContentSide.TOP}
-          onOpenChange={setIsTooltipOpened}
-          delay={0}
-        >
-          {wordText}
-        </Tooltip>
-      ) : (
-        wordText
-      )}
+      <Wrapper
+        shouldWrap={showTooltip}
+        wrapper={(children) => (
+          <Tooltip
+            text={getTooltipText(showTooltipFor, word)}
+            contentSide={ContentSide.TOP}
+            onOpenChange={setIsTooltipOpened}
+            delay={0}
+          >
+            {children}
+          </Tooltip>
+        )}
+      >
+        {wordText}
+      </Wrapper>
       {allowWordByWord && (
         <>
           {showWordByWordTransliteration && (

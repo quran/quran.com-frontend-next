@@ -44,6 +44,16 @@ export default {
         category: 'Optional',
       },
     },
+    open: {
+      defaultValue: undefined,
+      options: [true, false],
+      control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+      description:
+        'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
+    },
     tip: {
       defaultValue: true,
       options: [true, false],
@@ -121,6 +131,13 @@ HoverCardWithoutTip.args = {
   children: DefaultTrigger,
   body: Body,
   tip: false,
+};
+
+export const HoverCardControlledTooltip = Template.bind({});
+HoverCardControlledTooltip.args = {
+  children: DefaultTrigger,
+  body: Body,
+  open: true,
 };
 
 export const HoverCardCollidesWithWindowEdges = Template.bind({});

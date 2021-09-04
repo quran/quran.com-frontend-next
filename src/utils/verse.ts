@@ -45,6 +45,17 @@ export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, str
 };
 
 /**
+ * Split the word's location and get the surahNumber, verseNumber and wordNumber.
+ *
+ * @param {String} wordLocation the word location {surahNumber}:{verseNumber}:{wordNumber}
+ * @returns {[String, String, String]}
+ */
+export const getWordDataByLocation = (wordLocation: string): [string, string, string] => {
+  const locationSplits = wordLocation.split(COLON_SPLITTER);
+  return [locationSplits[0], locationSplits[1], locationSplits[2]];
+};
+
+/**
  * Extract the data related to a word. The first is the chapter Id,
  * the second is whether the word is the first word of the first verse
  * of the Surah. To do that we will have to split the word location
@@ -54,13 +65,13 @@ export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, str
  *
  * @param {string} wordLocation whose format is {surahNumber}:{verseNumber}:{wordNumber} e.g. "112:1:1"
  */
-export const getWordDataFromLocation = (
+export const getFirstWordOfSurah = (
   wordLocation: string,
-): { chapterId: string; isFirstWordOfFirstVerseOfSurah: boolean } => {
-  const locationSplits = wordLocation.split(COLON_SPLITTER);
+): { chapterId: string; isFirstWordOfSurah: boolean } => {
+  const locationSplits = getWordDataByLocation(wordLocation);
   return {
     chapterId: locationSplits[0],
-    isFirstWordOfFirstVerseOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
+    isFirstWordOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
   };
 };
 
