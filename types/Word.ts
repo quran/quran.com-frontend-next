@@ -6,6 +6,7 @@ export enum CharType {
   End = 'end',
   Pause = 'pause',
   Sajdah = 'sajdah',
+  RubElHizb = 'rub-el-hizb',
 }
 
 interface Word {

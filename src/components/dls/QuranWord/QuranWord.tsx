@@ -36,11 +36,15 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
 
-  // only show tooltip when it's not the verse number,
-  // when it's allowed to have wbw and when the settings
-  // is set to either translation or transliteration or both.
+  /*
+    Only show the tooltip when the following conditions are met:
+
+    1. When the current character is of type Word.
+    2. When it's allowed to have word by word (won't be allowed for search results as of now).
+    3. When the tooltip settings are set to either translation or transliteration or both.
+  */
   const showTooltip =
-    word.charTypeName !== CharType.End && allowWordByWord && !!showTooltipFor.length;
+    word.charTypeName === CharType.Word && allowWordByWord && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = highlight || isTooltipOpened;
   return (
