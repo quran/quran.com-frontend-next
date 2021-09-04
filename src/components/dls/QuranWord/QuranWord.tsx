@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
 import VerseActionsMenu from 'src/components/Verse/VerseActionsMenu';
-import { isEndOfVerseWord } from 'src/utils/verse';
+import { isAyahMarker } from 'src/utils/verse';
 import Wrapper from 'src/components/Wrapper';
 import HoverCard from 'src/components/dls/HoverCard';
 import TextWord from './TextWord';
@@ -39,7 +39,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
 
-  const isWordEndOfVerse = isEndOfVerseWord(word);
+  const isWordEndOfVerse = isAyahMarker(word);
   // only show tooltip when it's not the verse number,
   // when it's allowed to have wbw and when the settings
   // is set to either translation or transliteration or both.
@@ -61,7 +61,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
           closeDelay={0}
           body={
             <VerseActionsMenu
-              verse={{
+              actionsVerse={{
                 textUthmani: word.textUthmani,
                 verseKey: word.verseKey,
                 chapterId: word.chapterId,

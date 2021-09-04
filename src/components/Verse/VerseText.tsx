@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import Word from 'types/Word';
 import classNames from 'classnames';
-import { isFirstWordOfSurah } from 'src/utils/verse';
+import { getFirstWordOfSurah } from 'src/utils/verse';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
@@ -25,7 +25,7 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],
   );
-  const firstWordData = isFirstWordOfSurah(location);
+  const firstWordData = getFirstWordOfSurah(location);
   const isBigTextLayout =
     isReadingMode &&
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);

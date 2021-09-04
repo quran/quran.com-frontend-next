@@ -19,20 +19,20 @@ import styles from './VerseActionsMenu.module.scss';
 import Modal from '../dls/ModalNew/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 
-interface Verse {
-  textUthmani: string;
-  verseKey: string;
-  chapterId: number | string;
-  verseNumber: number;
+interface ActionsVerse {
+  textUthmani?: string;
+  verseKey?: string;
+  chapterId?: number | string;
+  verseNumber?: number;
 }
 
 interface Props {
-  verse: Verse;
+  actionsVerse: ActionsVerse;
 }
 
 const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 
-const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
+const VerseActionsMenu: React.FC<Props> = ({ actionsVerse }) => {
   const dispatch = useDispatch();
   const { bookmarkedVerses } = useSelector(selectBookmarks) as Bookmarks;
   const [isCopied, setIsCopied] = useState(false);
@@ -61,7 +61,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   }, [isShared]);
 
   const onCopyClicked = () => {
-    clipboardCopy(verse.textUthmani).then(() => {
+    clipboardCopy(actionsVerse.textUthmani).then(() => {
       setIsCopied(true);
     });
   };
@@ -69,24 +69,24 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const onTafsirsClicked = () => {
     router.push({
       pathname: '/[chapterId]/[verseId]/tafsirs',
-      query: { chapterId: verse.chapterId, verseId: verse.verseNumber },
+      query: { chapterId: actionsVerse.chapterId, verseId: actionsVerse.verseNumber },
     });
   };
 
   const onShareClicked = () => {
     const origin = getWindowOrigin();
     if (origin) {
-      clipboardCopy(`${origin}/${verse.chapterId}/${verse.verseNumber}`).then(() => {
+      clipboardCopy(`${origin}/${actionsVerse.chapterId}/${actionsVerse.verseNumber}`).then(() => {
         setIsShared(true);
       });
     }
   };
 
   const onToggleBookmarkClicked = () => {
-    dispatch({ type: toggleVerseBookmark.type, payload: verse.verseKey });
+    dispatch({ type: toggleVerseBookmark.type, payload: actionsVerse.verseKey });
   };
 
-  const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
+  const isVerseBookmarked = !!bookmarkedVerses[actionsVerse.verseKey];
   return (
     <div className={styles.container}>
       <VerseActionsMenuItem
@@ -99,7 +99,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
         triggerClassName={styles.container}
         trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}
       >
-        <VerseAdvancedCopy verseKey={verse.verseKey}>
+        <VerseAdvancedCopy verseKey={actionsVerse.verseKey}>
           {({ ayahSelectionComponent, actionText, onCopy }) => (
             <>
               <Modal.Body>

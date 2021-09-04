@@ -5,7 +5,7 @@ import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
-import { getVerseWords } from 'src/utils/verse';
+import { getWordsWithHelperData } from 'src/utils/verse';
 import VerseText from 'src/components/Verse/VerseText';
 import Verse from '../../../../types/Verse';
 import Translation from '../../../../types/Translation';
@@ -30,7 +30,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
           <div className={styles.contentContainer}>
             <BookmarkIcon verseKey={verse.verseKey} />
             <div className={styles.verseContainer}>
-              <VerseText words={getVerseWords(verse)} />
+              <VerseText words={getWordsWithHelperData(verse)} />
             </div>
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id} className={styles.verseContainer}>

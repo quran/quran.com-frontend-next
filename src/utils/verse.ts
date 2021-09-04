@@ -67,7 +67,7 @@ export const getWordDataByLocation = (wordLocation: string): [string, string, st
  *
  * @param {string} wordLocation whose format is {surahNumber}:{verseNumber}:{wordNumber} e.g. "112:1:1"
  */
-export const isFirstWordOfSurah = (
+export const getFirstWordOfSurah = (
   wordLocation: string,
 ): { chapterId: string; isFirstWordOfSurah: boolean } => {
   const locationSplits = getWordDataByLocation(wordLocation);
@@ -86,10 +86,11 @@ export const getSampleVerse = () => sampleVerse;
 
 /**
  * Check whether the current word is end of verse the verse based on the char type.
+ *
  * @param {Word} word
  * @returns {boolean}
  */
-export const isEndOfVerseWord = (word: Word): boolean => word.charTypeName === CharType.End;
+export const isAyahMarker = (word: Word): boolean => word.charTypeName === CharType.End;
 
 /**
  * Return the data needed for the last word of the verse that represents the verse's number.
@@ -111,10 +112,10 @@ export const getVerseEndData = (verse: Verse) => ({
  * @param {Verse} verse
  * @returns {Word[]}
  */
-export const getVerseWords = (verse: Verse): Word[] => {
+export const getWordsWithHelperData = (verse: Verse): Word[] => {
   const words = [] as Word[];
   verse.words.forEach((word) => {
-    if (isEndOfVerseWord(word)) {
+    if (isAyahMarker(word)) {
       words.push({
         ...word,
         ...getVerseEndData(verse),

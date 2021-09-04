@@ -36,7 +36,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => (
         </Button>
       }
     >
-      <VerseActionsMenu verse={verse} />
+      <VerseActionsMenu actionsVerse={verse} />
     </Popover>
   </>
 );
