@@ -25,7 +25,7 @@ const FeedbackWidget = () => {
         [styles.audioPlayerExpanded]: isAudioPlayerExpanded,
       })}
     >
-      <a href="https://quran.upvoty.com" target="_blank" rel="noreferrer">
+      <a href="https://feedback.quran.com" target="_blank" rel="noreferrer">
         <Button>Feedback</Button>
       </a>
     </div>

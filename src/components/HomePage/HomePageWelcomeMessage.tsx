@@ -6,7 +6,7 @@ const HomePageWelcomeMessage = () => (
     <p>
       Welcome to the pre-release version of the new Quran.com! We are actively adding new features
       and pushing changes. Please give us your{' '}
-      <a href="https://quran.upvoty.com" target="_blank" rel="noreferrer">
+      <a href="https://feedback.quran.com" target="_blank" rel="noreferrer">
         feedback here
       </a>
       , and join the #beta channel on our{' '}
