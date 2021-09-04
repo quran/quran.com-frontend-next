@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useCallback, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import styles from './Tooltip.module.scss';
@@ -27,6 +27,7 @@ interface Props {
   text: ReactNode;
   children: ReactNode | ReactNode[];
   onOpenChange?: (open: boolean) => void;
+  open?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
   avoidCollisions?: boolean;
@@ -41,6 +42,7 @@ const Tooltip: React.FC<Props> = ({
   text,
   children,
   onOpenChange,
+  open,
   type,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
@@ -49,54 +51,33 @@ const Tooltip: React.FC<Props> = ({
   tip = true,
   invertColors = true,
   centerText = true,
-}) => {
-  // we need this to handle on trigger click to support mobile devices since the library doesn't support it out of the box.
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleIsOpen = useCallback(() => {
-    setIsOpen((prevIsOpen) => !prevIsOpen);
-  }, []);
-
-  // listen to any changes in isOpen and trigger the onChange callback if it exists.
-  useEffect(() => {
-    if (onOpenChange) {
-      onOpenChange(isOpen);
-    }
-  }, [isOpen, onOpenChange]);
-
-  return (
-    <RadixTooltip.Root
-      delayDuration={delay}
-      open={isOpen}
-      onOpenChange={(open) => {
-        setIsOpen(open);
-      }}
+}) => (
+  <RadixTooltip.Root
+    delayDuration={delay}
+    {...(typeof open !== 'undefined' && { open })}
+    {...(onOpenChange && { onOpenChange })}
+  >
+    <RadixTooltip.Trigger aria-label="Open tooltip" className={styles.trigger}>
+      {children}
+    </RadixTooltip.Trigger>
+    <RadixTooltip.Content
+      sideOffset={2}
+      side={contentSide}
+      align={contentAlign}
+      avoidCollisions={avoidCollisions}
+      className={classNames(styles.content, {
+        [styles.noInverse]: invertColors === false,
+        [styles.noCenter]: centerText === false,
+        [styles.success]: type === TooltipType.SUCCESS,
+        [styles.warning]: type === TooltipType.WARNING,
+        [styles.error]: type === TooltipType.ERROR,
+        [styles.secondary]: type === TooltipType.SECONDARY,
+      })}
     >
-      <RadixTooltip.Trigger
-        aria-label="Open tooltip"
-        className={styles.trigger}
-        onClick={toggleIsOpen}
-      >
-        {children}
-      </RadixTooltip.Trigger>
-      <RadixTooltip.Content
-        sideOffset={2}
-        side={contentSide}
-        align={contentAlign}
-        avoidCollisions={avoidCollisions}
-        className={classNames(styles.content, {
-          [styles.noInverse]: invertColors === false,
-          [styles.noCenter]: centerText === false,
-          [styles.success]: type === TooltipType.SUCCESS,
-          [styles.warning]: type === TooltipType.WARNING,
-          [styles.error]: type === TooltipType.ERROR,
-          [styles.secondary]: type === TooltipType.SECONDARY,
-        })}
-      >
-        {text}
-        {tip && <RadixTooltip.Arrow />}
-      </RadixTooltip.Content>
-    </RadixTooltip.Root>
-  );
-};
+      {text}
+      {tip && <RadixTooltip.Arrow />}
+    </RadixTooltip.Content>
+  </RadixTooltip.Root>
+);
 
 export default Tooltip;
