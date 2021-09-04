@@ -9,16 +9,19 @@ const GoogleAnalyticsScript = () => {
   }
 
   return (
-    <Script
-      src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`}
-      strategy="lazyOnload"
-      id="google-analytics-script"
-    >
-      {`window.dataLayer = window.dataLayer || [];
+    <>
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`}
+        strategy="lazyOnload"
+        id="google-analytics-script-url"
+      />
+      <Script id="google-analytics-script-code">
+        {`window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
          gtag('config', '${ANALYTICS_ID})';`}
-    </Script>
+      </Script>
+    </>
   );
 };
 
