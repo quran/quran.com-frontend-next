@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getTafsirs } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import {
@@ -11,6 +11,15 @@ import {
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+import {
+  MAXIMUM_FONT_STEP,
+  MINIMUM_FONT_STEP,
+  QuranReaderStyles,
+  selectQuranReaderStyles,
+  increaseTafsirFontScale,
+  decreaseTafsirFontScale,
+} from 'src/redux/slices/QuranReader/styles';
+import Counter from 'src/components/dls/Counter/Counter';
 import Section from './Section';
 
 // convert tafsir data (from API) to combobox items structure
@@ -27,6 +36,8 @@ const TafsirSection = () => {
   const dispatch = useDispatch();
   const { selectedTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
   const { lang } = useTranslation();
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const { tafsirFontScale } = quranReaderStyles;
 
   const onTafsirsChange = useCallback(
     (values) => dispatch(setSelectedTafsirs(stringsToNumbersArray(values as string[]))),
@@ -59,6 +70,18 @@ const TafsirSection = () => {
             value={numbersToStringsArray(selectedTafsirs)}
           />
         </div>
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>Tafsir font size</Section.Label>
+        <Counter
+          count={tafsirFontScale}
+          onDecrement={
+            tafsirFontScale === MINIMUM_FONT_STEP ? null : () => dispatch(decreaseTafsirFontScale())
+          }
+          onIncrement={
+            tafsirFontScale === MAXIMUM_FONT_STEP ? null : () => dispatch(increaseTafsirFontScale())
+          }
+        />
       </Section.Row>
     </Section>
   );
