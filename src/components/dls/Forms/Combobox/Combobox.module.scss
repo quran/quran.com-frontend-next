@@ -106,13 +106,13 @@
 }
 
 .tagContainer {
-  max-width: 90%;
+  max-width: calc(100% - var(--spacing-xxsmall));
 }
 
 .search {
   position: relative;
   max-width: 100%;
-  width: var(--spacing-medium);
+  width: var(--spacing-xxsmall);
 }
 
 .fullWidth {
