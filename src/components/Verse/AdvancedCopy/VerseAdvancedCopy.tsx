@@ -102,7 +102,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // translations data
   // only show that's already selected in redux
   // and then map it to {ID: {shouldBeCopied: boolean, name: string}}
-  // shouldBeCopied is derived from `translationIdToCopy`
+  // shouldBeCopied is derived from `translationIDsToCopy`
   const translations = availableTranslations
     .filter((translation) => selectedTranslations.includes(translation.id))
     .reduce<Record<number, { shouldBeCopied: boolean; name: string }>>(
