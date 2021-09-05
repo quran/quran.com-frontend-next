@@ -51,6 +51,7 @@ const TafsirSection = () => {
         <Section.Label>Tafsir</Section.Label>
         <div>
           <Combobox
+            minimumRequiredItems={1}
             id="tafsir"
             isMultiSelect
             items={items}
