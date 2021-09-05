@@ -17,7 +17,7 @@ import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import styles from './VerseActionsMenu.module.scss';
-import Modal from '../dls/ModalNew/Modal';
+import Modal from '../dls/Modal/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 
 interface Props {

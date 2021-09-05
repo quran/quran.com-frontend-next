@@ -1,105 +1,70 @@
-import React, { useCallback, useRef, ReactNode, useEffect } from 'react';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import React from 'react';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import classNames from 'classnames';
-import Close from '../../../../public/icons/close.svg';
-import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 import styles from './Modal.module.scss';
 
-export enum ModalSize {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large',
-  XLarge = 'xLarge',
-}
-
-interface Props {
-  visible: boolean;
-  children?: ReactNode | ReactNode[];
-  onClose: () => void;
-  centered?: boolean;
-  showCloseIcon?: boolean;
-  customCloseIcon?: ReactNode;
-  canCloseByKeyboard?: boolean;
-  closeWhenClickingOutside?: boolean;
-  title?: ReactNode;
-  size?: ModalSize;
-}
-
-const Modal: React.FC<Props> = ({
-  visible,
-  children,
-  centered = false,
-  showCloseIcon = true,
-  customCloseIcon,
-  canCloseByKeyboard = true,
-  closeWhenClickingOutside = true,
-  title,
-  size = ModalSize.Medium,
-  onClose,
-}) => {
-  const contentContainer = useRef(null);
-  const handleCloseModal = useCallback(() => {
-    onClose();
-  }, [onClose]);
-  const isEscapeKeyPressed = useKeyPressedDetector('Escape', canCloseByKeyboard);
-  useOutsideClickDetector(contentContainer, handleCloseModal, closeWhenClickingOutside);
-
-  // listen to any changes of escape key being pressed.
-  useEffect(() => {
-    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
-    if (canCloseByKeyboard && isEscapeKeyPressed === true) {
-      handleCloseModal();
-    }
-  }, [canCloseByKeyboard, handleCloseModal, isEscapeKeyPressed]);
-
-  return (
-    <div
-      className={classNames(
-        styles.container,
-        { [styles.hiddenContainer]: !visible },
-        { [styles.centeredContainer]: centered },
-      )}
-    >
-      <div
-        ref={contentContainer}
-        className={classNames(styles.contentContainer, {
-          [styles.smallContentContainer]: size === ModalSize.Small,
-          [styles.mediumContentContainer]: size === ModalSize.Medium,
-          [styles.largeContentContainer]: size === ModalSize.Large,
-          [styles.xLargeContentContainer]: size === ModalSize.XLarge,
-        })}
-      >
-        <div
-          className={classNames(styles.headerContainer, {
-            [styles.headerWithTitleContainer]: !!title,
-          })}
-        >
-          {title && <div>{title}</div>}
-          {showCloseIcon && (
-            <Button
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={handleCloseModal}
-            >
-              {customCloseIcon || <Close />}
-            </Button>
-          )}
-        </div>
-        <hr />
-        <div
-          className={classNames(styles.bodyContainer, {
-            [styles.smallBodyContainer]: size === ModalSize.Small,
-            [styles.mediumBodyContainer]: size === ModalSize.Medium,
-            [styles.largeBodyContainer]: size === ModalSize.Large,
-            [styles.xLargeBodyContainer]: size === ModalSize.XLarge,
-          })}
-        >
-          {children}
-        </div>
-      </div>
-    </div>
-  );
+type ModalProps = {
+  children: React.ReactNode;
+  trigger?: React.ReactNode;
+  triggerClassName?: string;
+  open?: boolean;
+  onClickOutside?: () => void;
 };
+const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: ModalProps) => (
+  <DialogPrimitive.Root open={open}>
+    <DialogPrimitive.Overlay className={styles.overlay} />
+    {trigger && (
+      <DialogPrimitive.Trigger
+        as="div"
+        className={classNames(styles.trigger, { [triggerClassName]: triggerClassName })}
+      >
+        {trigger}
+      </DialogPrimitive.Trigger>
+    )}
+    <Content onInteractOutside={onClickOutside}>{children}</Content>
+  </DialogPrimitive.Root>
+);
+
+const Content = ({ children, ...props }) => (
+  <DialogPrimitive.Content {...props} className={styles.content}>
+    {children}
+  </DialogPrimitive.Content>
+);
+
+const Body = ({ children }) => <div className={styles.body}>{children}</div>;
+const Header = ({ children }) => <div className={styles.header}>{children}</div>;
+const Title = ({ children }) => (
+  <DialogPrimitive.Title className={styles.title}>{children}</DialogPrimitive.Title>
+);
+const Subtitle = ({ children }) => (
+  <DialogPrimitive.Description className={styles.subtitle}>{children}</DialogPrimitive.Description>
+);
+
+const Footer = ({ children }) => <div className={styles.footer}>{children}</div>;
+type ActionProps = {
+  children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean;
+};
+
+const CloseAction = ({ children, onClick, disabled }: ActionProps) => (
+  <DialogPrimitive.Close className={styles.action} onClick={onClick} disabled={disabled}>
+    {children}
+  </DialogPrimitive.Close>
+);
+
+const Action = ({ children, onClick, disabled }: ActionProps) => (
+  <button type="button" className={styles.action} onClick={onClick} disabled={disabled}>
+    {children}
+  </button>
+);
+
+Modal.Body = Body;
+Modal.Header = Header;
+Modal.Title = Title;
+Modal.Subtitle = Subtitle;
+Modal.Footer = Footer;
+Modal.Action = Action;
+Modal.CloseAction = CloseAction;
 
 export default Modal;
