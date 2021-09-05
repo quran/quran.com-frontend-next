@@ -1,4 +1,5 @@
-import Separator, { SeparatorOrientation } from './Separator';
+import Separator from './Separator';
+import styles from './Separator.stories.module.scss';
 
 export default {
   title: 'dls/Separator',
@@ -8,7 +9,9 @@ export default {
 export const Horizontal = () => (
   <div>
     <h1>aa</h1>
-    <Separator orientation={SeparatorOrientation.Horizontal} />
+    <div className={styles.horizontalSeparator}>
+      <Separator />
+    </div>
     <h1>aa</h1>
   </div>
 );
@@ -16,7 +19,9 @@ export const Horizontal = () => (
 export const Vertical = () => (
   <div style={{ display: 'flex', height: '30px', alignItems: 'center' }}>
     <h1>aa</h1>
-    <Separator orientation={SeparatorOrientation.Vertical} />
+    <div className={styles.verticalSeparator}>
+      <Separator vertical />
+    </div>
     <h1>aa</h1>
   </div>
 );

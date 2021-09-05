@@ -2,17 +2,15 @@ import classNames from 'classnames';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import styles from './Separator.module.scss';
 
-export enum SeparatorOrientation {
-  Horizontal = 'horizontal',
-  Vertical = 'vertical',
-}
-
 type SeparatorProps = {
-  orientation: SeparatorOrientation;
+  vertical?: boolean;
 };
 
-const Separator = ({ orientation }: SeparatorProps) => (
-  <SeparatorPrimitive.Separator orientation={orientation} className={classNames(styles.base)} />
+const Separator = ({ vertical = false }: SeparatorProps) => (
+  <SeparatorPrimitive.Separator
+    orientation={vertical ? 'vertical' : 'horizontal'}
+    className={classNames(styles.base)}
+  />
 );
 
 export default Separator;
