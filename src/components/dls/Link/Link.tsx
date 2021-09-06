@@ -12,11 +12,16 @@ export enum LinkVariant {
 type LinkProps = {
   href: string;
   variant?: LinkVariant;
+  newTab?: boolean;
+  download?: string;
 };
 
-const Link: React.FC<LinkProps> = ({ href, children, variant }) => (
+const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
   <NextLink href={href}>
     <a
+      download={download}
+      target={newTab ? '_blank' : undefined}
+      rel={newTab ? 'noreferrer' : undefined}
       className={classNames(styles.base, {
         [styles.highlight]: variant === LinkVariant.Highlight,
         [styles.primary]: variant === LinkVariant.Primary,

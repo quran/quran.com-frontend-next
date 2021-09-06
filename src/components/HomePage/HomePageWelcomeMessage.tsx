@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from '../dls/Link/Link';
 import styles from './HomePageWelcomeMessage.module.scss';
 
 const HomePageWelcomeMessage = () => (
@@ -6,13 +7,13 @@ const HomePageWelcomeMessage = () => (
     <p>
       Welcome to the pre-release version of the new Quran.com! We are actively adding new features
       and pushing changes. Please give us your{' '}
-      <a href="https://feedback.quran.com" target="_blank" rel="noreferrer">
+      <Link href="https://feedback.quran.com" newTab>
         feedback here
-      </a>
+      </Link>
       , and join the #beta channel on our{' '}
-      <a href="https://discord.gg/H62eG8ss" target="blank">
+      <Link href="https://discord.gg/H62eG8ss" newTab>
         discord server
-      </a>{' '}
+      </Link>{' '}
       for the latest updates.
     </p>
     <p>May Allah swt accept your deeds. </p>

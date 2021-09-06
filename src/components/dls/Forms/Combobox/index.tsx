@@ -335,7 +335,7 @@ const Combobox: React.FC<Props> = ({
             >
               {isMultiSelect &&
                 tags.map((tag) => (
-                  <div key={tag} className={styles.overflowItem}>
+                  <div key={tag} className={classNames(styles.overflowItem, styles.tagContainer)}>
                     <Tag tag={tag} onRemoveTagClicked={onRemoveTagClicked} size={size} />
                   </div>
                 ))}

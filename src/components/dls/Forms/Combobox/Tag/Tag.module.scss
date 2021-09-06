@@ -2,16 +2,17 @@
   position: relative;
   display: flex;
   flex: none;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   max-width: 100%;
-  height: var(--spacing-large);
   margin: var(--spacing-micro) 0;
   background: var(--color-background-alternative);
   border-radius: var(--border-radius-default);
   user-select: none;
   margin-inline-end: var(--spacing-xxsmall);
-  padding-inline-end: var(--spacing-xxsmall);
-  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -28,6 +29,7 @@
   overflow: hidden;
   white-space: pre;
   text-overflow: ellipsis;
+  padding: var(--spacing-xxsmall);
 }
 
 .itemRemove {

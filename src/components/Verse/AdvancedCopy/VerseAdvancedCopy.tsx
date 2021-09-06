@@ -14,6 +14,7 @@ import { QuranFont } from 'src/components/QuranReader/types';
 import useSWR from 'swr';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { throwIfError } from 'src/utils/error';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
@@ -224,9 +225,9 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           setCustomMessage(
             <p>
               Text is copied successfully in your clipboard.{' '}
-              <a href={objectUrl} download="quran.copy.txt">
+              <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
                 Click here
-              </a>{' '}
+              </Link>{' '}
               if you want to download text file.
             </p>,
           );
