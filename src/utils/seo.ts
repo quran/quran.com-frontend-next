@@ -28,6 +28,8 @@ export function createSEOConfig({
     title: seoTitle,
     description: setDescription,
     titleTemplate: '%s - Quran.com',
+    dangerouslySetAllPagesToNoFollow: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow
+    dangerouslySetAllPagesToNoIndex: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex
     openGraph: {
       type: 'website',
       locale: 'en_US', // TODO: (@abdellatif): adjust this based on the next-translate locale
