@@ -22,7 +22,6 @@ const IconContainer: React.FC<Props> = ({ chapterId, size = ChapterIconsSize.Med
     })}
   >
     <ChapterIcon id={chapterId} />
-    <ChapterIcon />
   </span>
 );
 

@@ -1,17 +1,23 @@
 .container {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: var(--spacing-xxsmall) 0;
   margin: var(--spacing-xxsmall) 0;
+  position: relative;
 }
 
-.item {
-  margin-bottom: var(--spacing-large);
-  color: var(--color-text-default);
-  opacity: var(--opacity-85);
+.left {
 }
 
-.actionsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.right {
+}
+
+.QOutlineWrapper {
+  position: absolute;
+}
+
+.chapterId {
+  margin-bottom: 1rem;
+  text-align: right;
 }

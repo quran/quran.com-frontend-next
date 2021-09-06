@@ -1,33 +1,73 @@
-import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
+// import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import React from 'react';
-import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+// import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
+import Button, { ButtonVariant, ButtonSize } from 'src/components/dls/Button/Button';
 import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
+import PlayIcon from '../../../../public/icons/play-arrow.svg';
+import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
 
 interface Props {
   chapterId: string;
+  chapterName?: string;
+  translatedChapterName?: string;
 }
 
-const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
+// const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
-const ChapterHeader: React.FC<Props> = ({ chapterId }) => (
+const ChapterHeader: React.FC<Props> = ({
+  chapterId,
+  chapterName = 'Al-Fatihah',
+  translatedChapterName = 'The Opener',
+}) => (
   <div className={styles.container}>
-    <div className={styles.item}>
-      <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
-    </div>
-    {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && (
-      <div className={styles.item}>
-        <Bismillah size={BismillahSize.Large} />
-      </div>
-    )}
-    <div className={styles.actionsContainer}>
-      <PlayChapterAudioButton chapterId={Number(chapterId)} />
+    <div className={styles.left}>
+      <div>{translatedChapterName}</div>
+      <div>Surah {chapterName}</div>
       <Button variant={ButtonVariant.Ghost} href={`/${chapterId}/info`}>
         Info
       </Button>
     </div>
+    <div className={styles.right}>
+      <div className={styles.QOutlineWrapper}>
+        <QOutlineIcon />
+      </div>
+      <div className={styles.chapterId}>{formatChapterId(chapterId)}</div>
+      <div style={{ textAlign: 'right' }}>
+        <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
+      </div>
+      <Button size={ButtonSize.Small} variant={ButtonVariant.Ghost} prefix={<PlayIcon />}>
+        Play Audio
+      </Button>
+    </div>
+
+    {/* <div className={styles.item}>
+    </div>
+    <div className={styles.actionsContainer}>
+      <PlayChapterAudioButton chapterId={Number(chapterId)} />
+    </div> */}
   </div>
 );
 
 export default ChapterHeader;
+
+// {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && (
+//   <div className={styles.item}>
+//     <Bismillah size={BismillahSize.Large} />
+//   </div>
+// )}
+
+/**
+ * Format chapter id, add prefix '0' if it's a single digit number
+ *
+ * @param id chapter id
+ * @returns formatted chapter id
+ *
+ * @example
+ * // returns '01'
+ * formatChapterId('1')
+ * @example
+ * // returns '102'
+ * formatChapterId('102')
+ */
+const formatChapterId = (id: string) => `0${id}`.slice(-2);
