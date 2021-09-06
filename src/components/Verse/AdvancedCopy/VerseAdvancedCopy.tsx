@@ -11,8 +11,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
 import { getAdvancedCopyRawResult, getAvailableTranslations } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import useSWR from 'swr';
+import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { throwIfError } from 'src/utils/error';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
@@ -80,41 +80,14 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [shouldCopyText, setShouldCopyText] = useState(true);
   // whether the selected verses' footnotes should be copied or not.
   const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(false);
+  // a map of the IDs of the translations the users had selected and whether it should be copied or not. Will not be copied by default.
+  const [translations, setTranslations] = useState<
+    Record<number, { shouldBeCopied: boolean; name: string }>
+  >({});
   // a custom message that will be shown to the user in the case we have an error or success.
   const [customMessageComponent, setCustomMessage] = useState(null);
   // whether the selection has been copied successfully to the clipboard or not.
   const [isCopied, setIsCopied] = useState(false);
-
-  // Get available translations
-  // because we already have call the API in settings menu. useSWR will save it to cache.
-  // in this component, we will get the data from the cache.
-  // so, no rerender, not layout shift.
-  const { data: availableTranslations } = useSWR(makeTranslationsUrl(lang), () =>
-    getAvailableTranslations(lang).then((res) => {
-      throwIfError(res);
-      return res.translations;
-    }),
-  );
-
-  // a map of the IDs of the translations the users had selected and whether it should be copied or not.
-  const [translationIDsToCopy, setTranslationIDsToCopy] = useState({});
-
-  // translations data
-  // only show that's already selected in redux
-  // and then map it to {ID: {shouldBeCopied: boolean, name: string}}
-  // shouldBeCopied is derived from `translationIDsToCopy`
-  const translations = availableTranslations
-    .filter((translation) => selectedTranslations.includes(translation.id))
-    .reduce<Record<number, { shouldBeCopied: boolean; name: string }>>(
-      (acc, translation) => ({
-        ...acc,
-        [translation.id]: {
-          shouldBeCopied: translationIDsToCopy[translation.id],
-          name: translation.translatedName.name,
-        },
-      }),
-      {},
-    );
 
   // listen to any changes to the value of isCopied.
   useEffect(() => {
@@ -127,6 +100,35 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       clearTimeout(timeoutId);
     };
   }, [isCopied]);
+
+  // Get available translations
+  // because we already have call the API in settings menu. useSWR will save it to cache.
+  // in this component, we will get the data from the cache.
+  // so, no rerender, not layout shift.
+  const { data: availableTranslations } = useSWR(
+    makeTranslationsUrl(lang),
+    () =>
+      getAvailableTranslations(lang).then((res) => {
+        throwIfError(res);
+        return res.translations;
+      }),
+    {
+      revalidateOnFocus: false,
+    },
+  );
+
+  useEffect(() => {
+    const responseTranslations = {};
+    availableTranslations
+      .filter((translation) => selectedTranslations.includes(translation.id))
+      .forEach((translation) => {
+        responseTranslations[translation.id] = {
+          shouldBeCopied: false, // the default is to not copy the translation
+          name: translation.translatedName.name,
+        };
+      });
+    setTranslations(responseTranslations);
+  }, [lang, selectedTranslations, availableTranslations]);
 
   /**
    * Handle when either the range start/end's verse is selected.
@@ -253,7 +255,13 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
    * @returns {void}
    */
   const onCopyTranslationChange = (translationId: string): void => {
-    setTranslationIDsToCopy((ids) => ({ ...ids, [translationId]: !ids[translationId] }));
+    setTranslations((prevTranslations) => ({
+      ...prevTranslations,
+      [translationId]: {
+        ...prevTranslations[translationId],
+        shouldBeCopied: !prevTranslations[translationId].shouldBeCopied,
+      },
+    }));
   };
 
   const ayahSelectionComponent = (
@@ -293,16 +301,21 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         id="quranText"
         label="Arabic text (Uthmani text)"
       />
-      {Object.keys(translations).length !== 0 && (
+      {selectedTranslations.length !== 0 && (
         <>
           <p className={styles.label}>Translations:</p>
-          {Object.keys(translations).map((translationId) => (
+          {selectedTranslations.map((translationId) => (
             <Checkbox
               key={translationId}
-              onChange={() => onCopyTranslationChange(translationId)}
-              checked={translations[translationId].shouldBeCopied}
-              id={translationId}
-              label={translations[translationId].name}
+              onChange={
+                translations[translationId]
+                  ? () => onCopyTranslationChange(translationId.toString())
+                  : // eslint-disable-next-line @typescript-eslint/no-empty-function
+                    () => {}
+              }
+              checked={translations[translationId]?.shouldBeCopied}
+              id={translationId.toString()}
+              label={translations[translationId]?.name}
             />
           ))}
         </>
