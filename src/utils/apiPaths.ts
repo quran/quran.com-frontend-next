@@ -132,3 +132,11 @@ export const makePageVersesUrl = (
 
   return makeUrl(`/verses/by_page/${id}`, decamelizeKeys(apiParams));
 };
+
+/**
+ * Compose the url for footnote's API.
+ *
+ * @param {string} footnoteId
+ * @returns {string}
+ */
+export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);

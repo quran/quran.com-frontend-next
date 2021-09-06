@@ -1,15 +1,15 @@
-/* eslint-disable react/no-danger */
 import React from 'react';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
+import VerseText from 'src/components/Verse/VerseText';
 import Verse from '../../../../types/Verse';
-import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
 import BookmarkIcon from './BookmarkIcon';
+import TranslationText from './TranslationText';
 
 type TranslationViewProps = {
   verses: Verse[];
@@ -33,12 +33,9 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
             </div>
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id} className={styles.verseContainer}>
-                <div
-                  className={classNames(
-                    styles.text,
-                    styles[`translation-font-size-${quranReaderStyles.translationFontScale}`],
-                  )}
-                  dangerouslySetInnerHTML={{ __html: translation.text }}
+                <TranslationText
+                  translationFontScale={quranReaderStyles.translationFontScale}
+                  text={translation.text}
                 />
                 <p className={styles.translationName}>— {translation.resourceName}</p>
               </div>
