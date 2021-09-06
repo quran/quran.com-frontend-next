@@ -105,7 +105,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // Get available translations
   // because we already have call the API in settings menu. useSWR will save it to cache.
   // in this component, we will get the data from the cache.
-  // so, no rerender, not layout shift.
+  // so, no rerender, no layout shift.
   const { data: availableTranslations } = useSWR(
     makeTranslationsUrl(lang),
     () =>
