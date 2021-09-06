@@ -48,7 +48,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = highlight || isTooltipOpened;
   return (
-    <div
+    <span
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,
@@ -77,7 +77,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
           {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
         </>
       )}
-    </div>
+    </span>
   );
 };
 
