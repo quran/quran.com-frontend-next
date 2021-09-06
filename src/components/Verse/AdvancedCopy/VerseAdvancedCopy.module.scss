@@ -19,8 +19,7 @@
 // clone of checkbox properties
 .emptyCheckbox {
   min-height: var(--spacing-medium);
-  border-top: 1px solid transparent;
-  border-bottom: 1px solid transparent;
+  border: 1px solid transparent;
   margin-top: var(--spacing-micro);
   margin-bottom: var(--spacing-micro);
 }
