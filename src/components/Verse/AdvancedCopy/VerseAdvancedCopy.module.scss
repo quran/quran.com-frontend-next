@@ -15,3 +15,10 @@
   margin-bottom: var(--spacing-xsmall);
   color: var(--color-text-default);
 }
+
+// clone of checkbox properties
+.emptyCheckbox {
+  min-height: 18px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
