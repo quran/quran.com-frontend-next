@@ -7,6 +7,7 @@ import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPr
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import clipboardCopy from 'clipboard-copy';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
@@ -43,6 +44,12 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
         )}
       >
         <div
+          onCopy={(e) => {
+            // Clean up the text before copying to clipboard
+            e.preventDefault();
+            const textToCopy = window.getSelection().toString().split('\n').join(' ');
+            clipboardCopy(textToCopy);
+          }}
           className={classNames(styles.verseText, {
             [styles.verseTextWrap]: !isReadingMode,
             [styles.largeQuranTextLayout]: isBigTextLayout,
