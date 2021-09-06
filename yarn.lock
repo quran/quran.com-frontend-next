@@ -2526,6 +2526,15 @@
     "@radix-ui/react-use-callback-ref" "0.0.5"
     "@radix-ui/react-use-controllable-state" "0.0.6"
 
+"@radix-ui/react-separator@^0.0.15":
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-separator/-/react-separator-0.0.15.tgz#86033bc45bbe8049bb78af0e05a73684b88fca07"
+  integrity sha512-Zs5lTQ2FYXWz99psf+TiYb1ywArAywnACJtmQ4LGIgIRVCdH2qH7QbUbAmGMmsqn1AKrD5rEWedHDGN3aLikVA==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/react-polymorphic" "0.0.13"
+    "@radix-ui/react-primitive" "0.0.15"
+
 "@radix-ui/react-slot@0.0.12":
   version "0.0.12"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-slot/-/react-slot-0.0.12.tgz#c4d8a75fffca561aeeca2ed9603384d86757f60a"
