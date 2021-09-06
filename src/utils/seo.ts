@@ -16,11 +16,16 @@ type SeoConfigType = {
   canonicalUrl?: string;
 };
 
+interface SEOProps extends NextSeoProps {
+  dangerouslySetAllPagesToNoFollow?: boolean;
+  dangerouslySetAllPagesToNoIndex?: boolean;
+}
+
 export function createSEOConfig({
   title,
   description,
   canonicalUrl,
-}: SeoConfigType = {}): NextSeoProps {
+}: SeoConfigType = {}): SEOProps {
   const seoTitle = title || config.defaultPageTitle;
   const setDescription = description ?? config.siteDescription;
 
