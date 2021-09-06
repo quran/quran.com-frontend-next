@@ -46,3 +46,7 @@
   color: var(--color-text-default);
   font-size: var(--font-size-large);
 }
+.actionContainer {
+  position: relative;
+  z-index: var(--z-index-default);
+}

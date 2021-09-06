@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
 import styles from './PlayButton.module.scss';
-import Button, { ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '../dls/Button/Button';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
 
 interface Props {
   chapterId: number;
@@ -13,8 +14,13 @@ const PlayChapterAudioButton = (props: Props) => {
   };
   return (
     <div className={styles.container}>
-      <Button variant={ButtonVariant.Ghost} onClick={play}>
-        Play
+      <Button
+        size={ButtonSize.Small}
+        variant={ButtonVariant.Ghost}
+        prefix={<PlayIcon />}
+        onClick={play}
+      >
+        Play Audio
       </Button>
     </div>
   );
