@@ -56,7 +56,7 @@ export const selectVisibility = (state) => state.audioPlayerState.visibility;
 export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
   'audioPlayerState/loadAndPlayAudioFile',
   async (chapter, thunkAPI) => {
-    // play directly if current audio file is already loaded
+    // play directly the audio file for this chapter is already loaded.
     const currentAudioFile = selectAudioFile(thunkAPI.getState());
     if (currentAudioFile && currentAudioFile.chapterId === chapter) {
       triggerPlayAudio();
