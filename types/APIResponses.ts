@@ -8,6 +8,7 @@ import { AudioFile } from './AudioFile';
 import ChapterInfo from './ChapterInfo';
 import { SearchNavigationResult } from './SearchNavigationResult';
 import { SearchVerseResult } from './SearchVerseResult';
+import Footnote from './Footnote';
 
 export interface BaseResponse {
   status?: number;
@@ -78,4 +79,8 @@ export interface TafsirsResponse extends BaseResponse {
 
 export interface ChapterInfoResponse extends BaseResponse {
   chapterInfo?: ChapterInfo;
+}
+
+export interface FootnoteResponse extends BaseResponse {
+  footNote?: Footnote;
 }

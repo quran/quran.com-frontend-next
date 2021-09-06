@@ -1,5 +1,4 @@
 @use "src/styles/constants";
-@use "src/styles/utility";
 @use "src/styles/breakpoints";
 
 .container {
@@ -8,13 +7,6 @@
     max-width: 80%;
   }
   margin: var(--spacing-medium) auto;
-}
-
-.text {
-  letter-spacing: 0;
-  line-height: normal;
-  padding-bottom: var(--spacing-micro);
-  color: var(--color-text-default);
 }
 
 .translationName {
@@ -56,4 +48,3 @@
 .divider {
   border-top: 1px var(--color-borders-hairline) solid;
 }
-@include utility.generate-font-sizes("translation");
