@@ -315,7 +315,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
                 label={translations[translationId].name}
               />
             ) : (
-              <div className={styles.emptyCheckbox} />
+              <div key={translationId} className={styles.emptyCheckbox} />
             ),
           )}
         </>
