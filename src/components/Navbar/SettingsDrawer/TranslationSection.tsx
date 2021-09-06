@@ -22,6 +22,7 @@ import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 
+import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import Section from './Section';
 
 // convert translations data (from API) to combobox items
@@ -46,7 +47,7 @@ const TranslationSection = () => {
     [dispatch],
   );
 
-  const { data: translations, error } = useSWR(`/translations/${lang}`, () =>
+  const { data: translations, error } = useSWR(makeTranslationsUrl(lang), () =>
     getAvailableTranslations(lang).then((res) => {
       throwIfError(res);
       return res.translations;
