@@ -155,7 +155,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     setCurrentPage(1);
   }, []);
 
-  const noResponseResults =
+  const isEmptyResponse =
     searchResult &&
     searchResult.pagination.totalRecords === 0 &&
     !searchResult.result.navigation.length;
@@ -210,7 +210,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
             {!isSearching && !hasError && searchResult && (
               <>
-                {noResponseResults ? (
+                {isEmptyResponse ? (
                   <p>No results found!</p>
                 ) : (
                   <SearchResults
