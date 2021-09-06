@@ -304,20 +304,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       {selectedTranslations.length !== 0 && (
         <>
           <p className={styles.label}>Translations:</p>
-          {selectedTranslations.map((translationId) => (
-            <Checkbox
-              key={translationId}
-              onChange={
-                translations[translationId]
-                  ? () => onCopyTranslationChange(translationId.toString())
-                  : // eslint-disable-next-line @typescript-eslint/no-empty-function
-                    () => {}
-              }
-              checked={translations[translationId]?.shouldBeCopied}
-              id={translationId.toString()}
-              label={translations[translationId]?.name}
-            />
-          ))}
+          {selectedTranslations.map((translationId) =>
+            translations[translationId] ? (
+              <Checkbox
+                key={translationId}
+                onChange={() => onCopyTranslationChange(translationId.toString())}
+                checked={translations[translationId].shouldBeCopied}
+                id={translationId.toString()}
+                label={translations[translationId].name}
+              />
+            ) : (
+              <div className={styles.emptyCheckbox} />
+            ),
+          )}
         </>
       )}
       <p className={styles.label}>Also copy Footnote(s)?</p>
