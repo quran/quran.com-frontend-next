@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { ButtonVariant, ButtonSize } from 'src/components/dls/Button/Button';
+import Button, { ButtonVariant, ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
@@ -22,8 +22,10 @@ const ChapterHeader: React.FC<Props> = ({
   <div>
     <div className={styles.container}>
       <div className={styles.left}>
-        <div>{translatedChapterName}</div>
-        <div>Surah {chapterName}</div>
+        <div className={styles.translatedChapterName}>{translatedChapterName}</div>
+        <div className={styles.chapterName}>
+          Surah <br /> {chapterName}
+        </div>
         <Button variant={ButtonVariant.Ghost} href={`/${chapterId}/info`}>
           Info
         </Button>
@@ -36,7 +38,12 @@ const ChapterHeader: React.FC<Props> = ({
         <div style={{ textAlign: 'right' }}>
           <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
         </div>
-        <Button size={ButtonSize.Small} variant={ButtonVariant.Ghost} prefix={<PlayIcon />}>
+        <Button
+          type={ButtonType.Success}
+          size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
+          prefix={<PlayIcon />}
+        >
           Play Audio
         </Button>
       </div>

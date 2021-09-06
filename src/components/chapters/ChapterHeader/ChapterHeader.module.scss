@@ -15,14 +15,34 @@
 
 .QOutlineWrapper {
   position: absolute;
+  top: 0;
+  bottom: 0;
+  right: var(--spacing-medium);
+
+  > svg {
+    height: 100%;
+  }
 }
 
 .chapterId {
   margin-bottom: 1rem;
   text-align: right;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
 }
 
 .bismillahContainer {
   display: flex;
   justify-content: center;
+}
+.translatedChapterName {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-faded);
+}
+.chapterName {
+  margin-top: var(--spacing-xsmall);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  font-size: var(--font-size-large);
 }
