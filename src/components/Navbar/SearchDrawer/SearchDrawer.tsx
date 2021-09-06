@@ -67,7 +67,7 @@ const SearchDrawer: React.FC = () => {
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,
-        language: lang,
+        filterLanguages: lang,
       })
         .then((response) => {
           if (response.status === 500) {
@@ -121,11 +121,12 @@ const SearchDrawer: React.FC = () => {
     });
   }, [closeSearchDrawer, router.events, isOpen]);
 
+  const noResponseResults =
+    searchResult &&
+    searchResult.pagination.totalRecords === 0 &&
+    !searchResult.result.navigation.length;
   const isPreInputLayout =
-    !searchQuery ||
-    isSearching ||
-    hasError ||
-    (!isSearching && !hasError && searchResult && searchResult.pagination.totalRecords === 0);
+    !searchQuery || isSearching || hasError || (!isSearching && !hasError && noResponseResults);
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
 
   /**
@@ -193,7 +194,7 @@ const SearchDrawer: React.FC = () => {
                 {hasError && <div>Something went wrong, please try again!</div>}
                 {!hasError && searchResult && (
                   <>
-                    {searchResult.pagination.totalRecords === 0 ? (
+                    {noResponseResults ? (
                       <NoResults searchQuery={searchQuery} searchUrl={searchUrl} />
                     ) : (
                       <SearchResults

@@ -106,9 +106,10 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
       setIsSearching(true);
       getSearchResults({
         query,
-        language,
+        filterLanguages: language,
         size: PAGE_SIZE,
         page,
+        ...(translation && { filterTranslations: translation }), // translations will be included only when there is a selected translation
       })
         .then((response) => {
           if (response.status === 500) {
@@ -154,6 +155,10 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     setCurrentPage(1);
   }, []);
 
+  const noResponseResults =
+    searchResult &&
+    searchResult.pagination.totalRecords === 0 &&
+    !searchResult.result.navigation.length;
   return (
     <>
       <NextSeoHead title={debouncedSearchQuery} />
@@ -205,7 +210,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
             {!isSearching && !hasError && searchResult && (
               <>
-                {searchResult.pagination.totalRecords === 0 ? (
+                {noResponseResults ? (
                   <p>No results found!</p>
                 ) : (
                   <SearchResults
