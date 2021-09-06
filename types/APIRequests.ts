@@ -1,6 +1,7 @@
 export interface SearchRequest {
   query: string;
-  language: string;
+  filterLanguages: string;
+  filterTranslations?: string;
   size?: number;
   page?: number;
 }
