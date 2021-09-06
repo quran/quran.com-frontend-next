@@ -38,7 +38,7 @@
 .number {
   min-width: calc(2 * var(--spacing-large));
   margin: 0;
-  color: var(--color-primary-medium);
+  color: var(--color-text-default);
 }
 
 .detailsContainer {
@@ -49,16 +49,17 @@
 
 .nameArabic {
   font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-default);
 }
 
 .nameTranslated {
   font-size: var(--font-size-small);
-  color: var(--color-primary-medium);
+  color: var(--color-text-faded);
 }
 
 .numberOfVerses {
   text-align: right;
   font-size: var(--font-size-small);
-  color: var(--color-primary-medium);
+  color: var(--color-text-faded);
 }

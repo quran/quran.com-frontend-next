@@ -17,7 +17,7 @@
   color: var(--color-text-inverse);
   border: 1px solid var(--color-primary-medium);
   &:hover {
-    color: var(--color-primary-medium);
+    color: var(--color-text-default);
     background-color: var(--color-text-inverse);
   }
 }
@@ -110,7 +110,7 @@
   }
 }
 .ghost.primary {
-  color: var(--color-primary-medium);
+  color: var(--color-text-default);
   &:hover {
     background-color: var(--color-primary-medium);
   }
