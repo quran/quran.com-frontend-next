@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 
 import WrenchIcon from '../../../public/icons/wrench.svg';
+import Separator from '../dls/Separator/Separator';
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';
@@ -39,7 +40,9 @@ const DeveloperUtility = () => {
       type="button"
     >
       Developer Utility
-      <div className={styles.divider} />
+      <div className={styles.separator}>
+        <Separator />
+      </div>
       <NotesAdjustment />
       <NavbarAdjustment />
       <AudioPlayerAdjustment />

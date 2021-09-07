@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
+import Separator from 'src/components/dls/Separator/Separator';
 import Verse from '../../../../types/Verse';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
@@ -42,7 +43,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
             ))}
           </div>
         </div>
-        <div className={styles.divider} />
+        <Separator />
       </div>
     ))}
   </div>
