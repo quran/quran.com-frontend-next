@@ -187,20 +187,20 @@
   }
 }
 
-.primary.ghost > span > svg {
+.base.ghost > span > svg {
   fill: var(--color-text-default);
   & > path {
     fill: var(--color-text-default);
   }
 }
 
-.primary > span > svg {
+.base > span > svg {
   fill: var(--color-text-inverse);
   & > path {
     fill: var(--color-text-inverse);
   }
 }
-.primary:hover > span > svg {
+.base:hover > span > svg {
   fill: var(--color-text-default);
   & > path {
     fill: var(--color-text-default);
