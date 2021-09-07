@@ -19,6 +19,17 @@
   }
 }
 
+.backContainer {
+  width: fit-content;
+}
+
+.backIcon {
+  margin: var(--spacing-micro) 0;
+  @include breakpoints.tablet {
+    margin: 0 var(--spacing-micro);
+  }
+}
+
 .imageContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
