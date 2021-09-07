@@ -199,7 +199,10 @@
   & > path {
     fill: var(--color-text-inverse);
   }
-  &:hover > path {
+}
+.primary:hover > span > svg {
+  fill: var(--color-text-default);
+  & > path {
     fill: var(--color-text-default);
   }
 }
