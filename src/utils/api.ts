@@ -35,5 +35,5 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string } => ({
-  wordFields: `verse_key, verse_id, page_number, location, ${quranFont}`,
+  wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}`,
 });

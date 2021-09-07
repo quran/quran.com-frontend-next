@@ -49,6 +49,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
   const shouldBeHighLighted = highlight || isTooltipOpened;
   return (
     <div
+      data-word-position={`${word.verseKey}:${word.position}`}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,

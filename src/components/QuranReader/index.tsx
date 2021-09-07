@@ -13,6 +13,8 @@ import classNames from 'classnames';
 import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
 import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import Verse from 'types/Verse';
+import clipboardCopy from 'clipboard-copy';
 import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreferences';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
@@ -40,6 +42,49 @@ const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentine
 const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
   const res = await fetch(input, init);
   return res.json().then((data) => camelizeKeys(data.verses));
+};
+
+const getWordSelectionArray = (start: string, end: string, verses: Verse[]) => {
+  const [startChapter, startVerseNumber, startWordPosition] = start.split(':');
+  const [endChapter, endVerseNumber, endWordPosition] = end.split(':');
+
+  return verses
+    .filter((verse) => {
+      const [chapter, verseNumber] = verse.verseKey.split(':');
+      return (
+        Number(chapter) >= Number(startChapter) &&
+        Number(chapter) <= Number(endChapter) &&
+        Number(verseNumber) >= Number(startVerseNumber) &&
+        Number(verseNumber) <= Number(endVerseNumber)
+      );
+    })
+    .map((verse) => verse.words)
+    .map((words) =>
+      words
+        .filter((word) => {
+          const [chapter, verseNumber] = word.verseKey.split(':');
+          const { position } = word;
+
+          // filter out unselected word in start verse
+          if (
+            Number(chapter) === Number(startChapter) &&
+            Number(verseNumber) === Number(startVerseNumber) &&
+            Number(position) < Number(startWordPosition)
+          )
+            return false;
+
+          // filter out unselected word in end verse
+          if (
+            Number(chapter) === Number(endChapter) &&
+            Number(verseNumber) === Number(endVerseNumber) &&
+            Number(position) > Number(endWordPosition)
+          )
+            return false;
+
+          return true;
+        })
+        .map((word) => word.textUthmani),
+    );
 };
 
 const QuranReader = ({
@@ -117,6 +162,22 @@ const QuranReader = ({
   return (
     <>
       <div
+        onCopy={() => {
+          const selection = window.getSelection();
+          const begin =
+            // @ts-ignore
+            selection.anchorNode.parentNode.parentNode.getAttribute('data-word-position');
+          // @ts-ignore
+          const end = selection.focusNode.parentNode.parentNode.getAttribute('data-word-position');
+
+          console.log(selection);
+          console.log(begin, end);
+
+          const words = getWordSelectionArray(begin, end, verses);
+          const textToCopy = words.flat().join(' ');
+          console.log(textToCopy);
+          clipboardCopy(textToCopy);
+        }}
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
         <div className={styles.infiniteScroll}>
