@@ -44,49 +44,6 @@ const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
   return res.json().then((data) => camelizeKeys(data.verses));
 };
 
-const getWordSelectionArray = (start: string, end: string, verses: Verse[]) => {
-  const [startChapter, startVerseNumber, startWordPosition] = start.split(':');
-  const [endChapter, endVerseNumber, endWordPosition] = end.split(':');
-
-  return verses
-    .filter((verse) => {
-      const [chapter, verseNumber] = verse.verseKey.split(':');
-      return (
-        Number(chapter) >= Number(startChapter) &&
-        Number(chapter) <= Number(endChapter) &&
-        Number(verseNumber) >= Number(startVerseNumber) &&
-        Number(verseNumber) <= Number(endVerseNumber)
-      );
-    })
-    .map((verse) => verse.words)
-    .map((words) =>
-      words
-        .filter((word) => {
-          const [chapter, verseNumber] = word.verseKey.split(':');
-          const { position } = word;
-
-          // filter out unselected word in start verse
-          if (
-            Number(chapter) === Number(startChapter) &&
-            Number(verseNumber) === Number(startVerseNumber) &&
-            Number(position) < Number(startWordPosition)
-          )
-            return false;
-
-          // filter out unselected word in end verse
-          if (
-            Number(chapter) === Number(endChapter) &&
-            Number(verseNumber) === Number(endVerseNumber) &&
-            Number(position) > Number(endWordPosition)
-          )
-            return false;
-
-          return true;
-        })
-        .map((word) => word.textUthmani),
-    );
-};
-
 const QuranReader = ({
   initialData,
   id,
@@ -164,11 +121,9 @@ const QuranReader = ({
       <div
         onCopy={() => {
           const selection = window.getSelection();
-          const begin =
-            // @ts-ignore
-            selection.anchorNode.parentNode.parentNode.getAttribute('data-word-position');
-          // @ts-ignore
-          const end = selection.focusNode.parentNode.parentNode.getAttribute('data-word-position');
+          const begin = findWordPositionInNode(selection.anchorNode);
+
+          const end = findWordPositionInNode(selection.focusNode);
 
           console.log(selection);
           console.log(begin, end);
@@ -275,3 +230,78 @@ const getRequestKey = ({
 };
 
 export default QuranReader;
+
+const getWordSelectionArray = (start: string, end: string, verses: Verse[]) => {
+  const [startChapter, startVerseNumber, startWordPosition] = start.split(':');
+  const [endChapter, endVerseNumber, endWordPosition] = end.split(':');
+
+  return verses
+    .filter((verse) => {
+      const [chapter, verseNumber] = verse.verseKey.split(':');
+      return (
+        Number(chapter) >= Number(startChapter) &&
+        Number(chapter) <= Number(endChapter) &&
+        Number(verseNumber) >= Number(startVerseNumber) &&
+        Number(verseNumber) <= Number(endVerseNumber)
+      );
+    })
+    .map((verse) => verse.words)
+    .map((words) =>
+      words
+        .filter((word) => {
+          const [chapter, verseNumber] = word.verseKey.split(':');
+          const { position } = word;
+
+          // filter out unselected word in start verse
+          if (
+            Number(chapter) === Number(startChapter) &&
+            Number(verseNumber) === Number(startVerseNumber) &&
+            Number(position) < Number(startWordPosition)
+          )
+            return false;
+
+          // filter out unselected word in end verse
+          if (
+            Number(chapter) === Number(endChapter) &&
+            Number(verseNumber) === Number(endVerseNumber) &&
+            Number(position) > Number(endWordPosition)
+          )
+            return false;
+
+          return true;
+        })
+        .map((word) => word.textUthmani),
+    );
+};
+
+/**
+ * given a DOM node, this function will try to get the data attribute 'data-word-position'
+ * if it can't find it, it will try to find it in `parentNode`. Repeat until `maxIteration`
+ * and return null if it still can't find the `data-word-position'
+ *
+ * Why we need this function?
+ * - When we select the text sometime the focusNode is a text, we need to find the data in the parentNode
+ * - sometime it's the node that contains 'data-word-position'. So we don't need to find the parentNode
+ * - sometime the node is wrapped with <Tooltip> so we need to find the parentNode of parentNode
+ *
+ * @param node the DOM Node
+ * @param iteration to track how many many iteration we did, so we can when it reaches `maxIteration`
+ * @param maxIteration stop the function and return null when it reaches maxIteration
+ * @returns wordPosition, example: "2:255:3" -> meaning chapter 2, verse 255, position 3
+ */
+const findWordPositionInNode = (node, iteration = 0, maxIteration = 3) => {
+  if (iteration > maxIteration) return null;
+
+  // if this node is a text, then it doesn't have function `getAttribute`. find it in `parentNode`
+  if (!node.getAttribute) {
+    return findWordPositionInNode(node.parentNode, iteration + 1);
+  }
+
+  const data = node.getAttribute('data-word-position');
+
+  // if can't find the 'data-word-position', find it in the parentNode
+  if (!data) {
+    return findWordPositionInNode(node.parentNode, iteration + 1);
+  }
+  return data;
+};
