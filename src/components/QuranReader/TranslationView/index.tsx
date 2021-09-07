@@ -5,6 +5,7 @@ import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
+import Chapter from 'types/Chapter';
 import Verse from '../../../../types/Verse';
 import VerseText from '../../Verse/VerseText';
 import Translation from '../../../../types/Translation';
@@ -14,13 +15,20 @@ import BookmarkIcon from './BookmarkIcon';
 type TranslationViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
+  chapters: Record<string, Chapter>;
 };
 
-const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => (
+const TranslationView = ({ verses, quranReaderStyles, chapters }: TranslationViewProps) => (
   <div className={styles.container}>
     {verses.map((verse) => (
       <div key={verse.id}>
-        {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
+        {verse.verseNumber === 1 && (
+          <ChapterHeader
+            chapterId={String(verse.chapterId)}
+            nameSimple={chapters[verse.chapterId.toString()].nameSimple}
+            translatedName={chapters[verse.chapterId.toString()].translatedName.name}
+          />
+        )}
         <div className={classNames(styles.cellContainer, { [styles.highlightedContainer]: false })}>
           <div className={styles.actionContainer}>
             <VerseLink verseKey={verse.verseKey} />

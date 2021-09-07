@@ -187,13 +187,6 @@
   }
 }
 
-.base.ghost > span > svg {
-  fill: var(--color-text-default);
-  & > path {
-    fill: var(--color-text-default);
-  }
-}
-
 .base > span > svg {
   fill: var(--color-text-inverse);
   & > path {
@@ -201,6 +194,13 @@
   }
 }
 .base:hover > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
+
+.base.ghost > span > svg {
   fill: var(--color-text-default);
   & > path {
     fill: var(--color-text-default);

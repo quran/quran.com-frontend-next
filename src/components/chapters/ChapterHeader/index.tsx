@@ -9,23 +9,19 @@ import PlayIcon from '../../../../public/icons/play-arrow.svg';
 
 interface Props {
   chapterId: string;
-  chapterName?: string;
-  translatedChapterName?: string;
+  nameSimple: string;
+  translatedName?: string;
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
-const ChapterHeader: React.FC<Props> = ({
-  chapterId,
-  chapterName = 'Al-Fatihah',
-  translatedChapterName = 'The Opener',
-}) => (
+const ChapterHeader: React.FC<Props> = ({ chapterId, nameSimple, translatedName }) => (
   <div>
     <div className={styles.container}>
       <div className={styles.left}>
-        <div className={styles.translatedChapterName}>{translatedChapterName}</div>
+        <div className={styles.translatedChapterName}>{translatedName}</div>
         <div className={styles.chapterName}>
-          Surah <br /> {chapterName}
+          Surah <br /> {nameSimple}
         </div>
         <div className={styles.infoContainer}>
           <Button

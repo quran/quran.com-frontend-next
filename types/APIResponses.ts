@@ -26,6 +26,7 @@ interface Pagination {
 export interface VersesResponse extends BaseResponse {
   pagination: Pagination;
   verses: Verse[];
+  chapters?: Record<string, Chapter>;
 }
 
 // The response from the chapters endpoint that returns a list of the chapters

@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const pageVersesResponse = await getPageVerses(pageId, {
+    surahDetail: true,
     ...getDefaultWordFields(),
   });
   // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
