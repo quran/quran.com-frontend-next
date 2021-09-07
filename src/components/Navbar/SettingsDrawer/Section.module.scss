@@ -3,9 +3,8 @@
   font-weight: var(--font-weight-semibold);
   padding-bottom: var(--spacing-medium);
 }
-.section {
-  padding-bottom: calc(1 * var(--spacing-mega));
-  border-bottom: 1px solid var(--color-borders-hairline);
+.separator {
+  margin-top: var(--spacing-mega);
   margin-bottom: var(--spacing-mega);
 }
 
