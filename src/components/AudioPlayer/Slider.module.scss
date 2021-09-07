@@ -17,6 +17,10 @@ $split-height: 2px;
 .containerExpanded {
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    padding-bottom: 0;
+  }
 }
 
 .splitsContainer {
