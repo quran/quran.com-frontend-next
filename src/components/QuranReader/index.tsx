@@ -103,7 +103,7 @@ const QuranReader = ({
   if (quranReaderDataType === QuranReaderDataType.Tafsir) {
     view = <TafsirView verse={verses[0]} />;
   } else if (readingPreference === ReadingPreference.Reading) {
-    view = <ReadingView verses={verses} />;
+    view = <ReadingView chapters={initialData.chapters} verses={verses} />;
   } else {
     view = (
       <TranslationView
