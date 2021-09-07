@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       perPage: 1, // only 1 verse per page
       translations: null,
       tafsirs: DEFAULT_TAFSIRS,
-      wordFields: 'location, text_uthmani',
+      wordFields: 'location, verse_key, location, text_uthmani',
       tafsirFields: 'resource_name',
     }),
   ]);
