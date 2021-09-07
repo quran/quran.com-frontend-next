@@ -31,6 +31,15 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
     isReadingMode &&
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
+  const onCopy = (e) => {
+    // preventDefault behavior, so that the raw text is not copied to the clipboard
+    e.preventDefault();
+    // clean up the text to remove the "\n" between the word before copying
+    const textToCopy = window.getSelection().toString().split('\n').join(' ');
+
+    clipboardCopy(textToCopy);
+  };
+
   return (
     <>
       {isReadingMode && firstWordData.isFirstWordOfSurah && (
@@ -44,12 +53,7 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
         )}
       >
         <div
-          onCopy={(e) => {
-            // Clean up the ayah before copying to clipboard
-            e.preventDefault();
-            const textToCopy = window.getSelection().toString().split('\n').join(' ');
-            clipboardCopy(textToCopy);
-          }}
+          onCopy={onCopy}
           className={classNames(styles.verseText, {
             [styles.verseTextWrap]: !isReadingMode,
             [styles.largeQuranTextLayout]: isBigTextLayout,
