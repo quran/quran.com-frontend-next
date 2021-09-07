@@ -10,7 +10,7 @@
   }
 }
 .primary {
-  color: var(--color-primary-medium);
+  color: var(--color-text-default);
   &:hover {
     text-decoration: underline;
   }
@@ -18,7 +18,7 @@
 .secondary {
   color: var(--color-text-faded);
   &:hover {
-    color: var(--color-primary-medium);
+    color: var(--color-text-default);
   }
 }
 .blend {
