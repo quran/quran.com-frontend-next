@@ -187,7 +187,7 @@
   }
 }
 
-.base > span > svg {
+.primary.ghost > span > svg {
   fill: var(--color-text-default);
   & > path {
     fill: var(--color-text-default);
