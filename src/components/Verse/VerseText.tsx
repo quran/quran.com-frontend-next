@@ -45,7 +45,7 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
       >
         <div
           onCopy={(e) => {
-            // Clean up the text before copying to clipboard
+            // Clean up the ayah before copying to clipboard
             e.preventDefault();
             const textToCopy = window.getSelection().toString().split('\n').join(' ');
             clipboardCopy(textToCopy);
