@@ -220,7 +220,7 @@ const getRequestKey = ({
       perPage: 1,
       translations: null,
       tafsirs: selectedTafsirs.join(','),
-      wordFields: `location, ${quranReaderStyles.quranFont}`,
+      wordFields: `location, text_uthmani, ${quranReaderStyles.quranFont}`,
       tafsirFields: 'resource_name',
     });
   }
