@@ -81,3 +81,21 @@ export const getFirstWordOfSurah = (
  * @returns {Verse} verse
  */
 export const getSampleVerse = () => sampleVerse;
+
+// reference : https://gomakethings.com/sorting-an-array-by-multiple-criteria-with-vanilla-javascript/
+export const sortVerseWordPosition = (positions: string[]) =>
+  positions.sort((a, b) => {
+    const [aChapter, aVerse, aWord] = a.split(':');
+    const [bChapter, bVerse, bWord] = b.split(':');
+
+    if (Number(aChapter) > Number(bChapter)) return 1;
+    if (Number(aChapter) < Number(bChapter)) return -1;
+
+    if (Number(aVerse) > Number(bVerse)) return 1;
+    if (Number(aVerse) < Number(bVerse)) return -1;
+
+    if (Number(aWord) > Number(bWord)) return 1;
+    if (Number(aWord) < Number(bWord)) return -1;
+
+    return 0;
+  });

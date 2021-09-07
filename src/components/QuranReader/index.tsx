@@ -15,6 +15,7 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import Verse from 'types/Verse';
 import clipboardCopy from 'clipboard-copy';
+import { sortVerseWordPosition } from 'src/utils/verse';
 import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreferences';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
@@ -121,9 +122,13 @@ const QuranReader = ({
       <div
         onCopy={() => {
           const selection = window.getSelection();
-          const begin = findWordPositionInNode(selection.anchorNode);
+          const position1 = findWordPositionInNode(selection.anchorNode);
+          const position2 = findWordPositionInNode(selection.focusNode);
 
-          const end = findWordPositionInNode(selection.focusNode);
+          // we need to sort the position, otherwise if user select from left to right
+          // or bottom to top. The anchor position will > focus position. and it breaks
+          // our function
+          const [begin, end] = sortVerseWordPosition([position1, position2]);
 
           console.log(selection);
           console.log(begin, end);
