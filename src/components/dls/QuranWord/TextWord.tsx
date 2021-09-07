@@ -11,12 +11,10 @@ type MadaniWordTextProps = {
 };
 
 const DEFAULT_FONT_FAMILY = 'UthmanicHafs1Ver17';
-const ME_QURAN = 'meQuran';
 const INDO_PAK = 'IndoPak';
 
 const UTHMANI_HAFS_FONTS = decamelizeKeys({
   qpcUthmaniHafs: DEFAULT_FONT_FAMILY,
-  textUthmani: ME_QURAN,
   textIndopak: INDO_PAK,
 });
 
@@ -27,7 +25,6 @@ const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => (
         charType === CharType.End ||
         !UTHMANI_HAFS_FONTS[font] ||
         UTHMANI_HAFS_FONTS[font] === DEFAULT_FONT_FAMILY,
-      [styles[ME_QURAN]]: charType !== CharType.End && UTHMANI_HAFS_FONTS[font] === ME_QURAN,
       [styles[INDO_PAK]]: charType !== CharType.End && UTHMANI_HAFS_FONTS[font] === INDO_PAK,
     })}
   >

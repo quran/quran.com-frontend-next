@@ -95,9 +95,9 @@ const Button: React.FC<ButtonProps> = ({
     return (
       <Link href={href}>
         <a className={classes}>
-          {prefixFinal}
+          {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
           <span className={styles.content}>{children}</span>
-          {suffix}
+          {suffix && <span className={styles.suffix}>{suffix}</span>}
         </a>
       </Link>
     );

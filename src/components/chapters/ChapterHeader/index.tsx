@@ -1,10 +1,11 @@
 import React from 'react';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
 import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
+import PlayIcon from '../../../../public/icons/play-arrow.svg';
 
 interface Props {
   chapterId: string;
@@ -26,18 +27,27 @@ const ChapterHeader: React.FC<Props> = ({
         <div className={styles.chapterName}>
           Surah <br /> {chapterName}
         </div>
-        <Button variant={ButtonVariant.Ghost} href={`/${chapterId}/info`}>
-          Surah Info
-        </Button>
+        <div className={styles.infoContainer}>
+          <Button
+            size={ButtonSize.Small}
+            prefix={<PlayIcon />}
+            type={ButtonType.Secondary}
+            href="/a"
+          >
+            Surah Info
+          </Button>
+        </div>
       </div>
       <div className={styles.right}>
-        <div className={styles.QOutlineWrapper}>
-          <QOutlineIcon />
-        </div>
         <div className={styles.chapterId}>{formatChapterId(chapterId)}</div>
-        <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
+        <div className={styles.arabicSurahNameContainer}>
+          <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
+        </div>
         <div className={styles.actionContainer}>
           <PlayChapterAudioButton chapterId={Number(chapterId)} />
+        </div>
+        <div className={styles.QOutlineWrapper}>
+          <QOutlineIcon />
         </div>
       </div>
     </div>
