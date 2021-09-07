@@ -4,16 +4,19 @@
   padding: var(--spacing-xxsmall) 0;
   margin: var(--spacing-xxsmall) 0;
   position: relative;
+  direction: ltr;
 }
 
 .left {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .right {
   display: flex;
   flex-direction: column;
+  text-align: right;
 }
 
 .QOutlineWrapper {
