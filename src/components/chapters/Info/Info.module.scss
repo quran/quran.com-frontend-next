@@ -21,12 +21,16 @@
 
 .backContainer {
   width: fit-content;
+  margin: var(--spacing-small) 0;
 }
 
 .backIcon {
   margin: var(--spacing-micro) 0;
   @include breakpoints.tablet {
     margin: 0 var(--spacing-micro);
+  }
+  > svg {
+    margin-right: var(--spacing-xxsmall);
   }
 }
 

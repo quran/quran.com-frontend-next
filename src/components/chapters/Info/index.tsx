@@ -17,24 +17,26 @@ interface Props {
 const Info: React.FC<Props> = ({ chapter, chapterInfo }) => (
   <div className={styles.container}>
     <div className={styles.infoBody}>
-      <div className={styles.backContainer}>
-        <Button
-          variant={ButtonVariant.Ghost}
-          href={`/${chapterInfo.chapterId}`}
-          className={styles.backIcon}
-          prefix={<BackIcon />}
-          size={ButtonSize.Small}
-        >
-          Go to Surah
-        </Button>
-      </div>
-      <div className={styles.imageContainer}>
-        <Image
-          src={`/images/${chapter.revelationPlace}.jpg`}
-          layout="fill"
-          placeholder="blur"
-          blurDataURL={getBlurDataUrl(200, 250)}
-        />
+      <div>
+        <div className={styles.backContainer}>
+          <Button
+            variant={ButtonVariant.Ghost}
+            href={`/${chapterInfo.chapterId}`}
+            className={styles.backIcon}
+            prefix={<BackIcon />}
+            size={ButtonSize.Small}
+          >
+            Go to Surah
+          </Button>
+        </div>
+        <div className={styles.imageContainer}>
+          <Image
+            src={`/images/${chapter.revelationPlace}.jpg`}
+            layout="fill"
+            placeholder="blur"
+            blurDataURL={getBlurDataUrl(200, 250)}
+          />
+        </div>
       </div>
       <div className={styles.infoTextContainer}>
         <div className={styles.headerContainer}>
