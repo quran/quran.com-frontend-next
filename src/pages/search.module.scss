@@ -29,7 +29,7 @@
 .searchInputContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-pill);
-  padding: var(--spacing-xxsmall);
+  padding: var(--spacing-xxsmall) var(--spacing-xsmall);
   display: flex;
   flex-direction: row;
   align-items: center;
