@@ -6,9 +6,20 @@ $split-height: 2px;
 .container {
   text-align: left;
   margin-top: var(--spacing-xxsmall);
+  display: flex;
+  flex-direction: column;
   @include breakpoints.tablet {
+    display: inherit;
     text-align: inherit;
     margin-top: var(--spacing-medium);
+  }
+}
+.containerExpanded {
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    padding-bottom: 0;
   }
 }
 
@@ -16,12 +27,15 @@ $split-height: 2px;
   display: inline-block;
   position: fixed;
   bottom: constants.$audio-player-default-height;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
   margin: 0;
   width: 100%;
   height: calc(1.25 * var(--spacing-xxsmall));
   transition: var(--transition-regular);
   @include breakpoints.tablet {
+    left: 0;
+    transform: none;
     width: 70%;
     position: inherit;
     bottom: inherit;
@@ -31,16 +45,21 @@ $split-height: 2px;
 }
 
 .splitsContainerExpanded {
-  left: 15%;
+  left: 50%;
   margin: 0 auto;
-  width: 65%;
+  width: 60%;
+  transform: translate(-50%, 0);
   margin-bottom: var(--spacing-medium);
-  margin-left: var(--spacing-medium);
-  margin-right: var(--spacing-medium);
-  position: inherit;
+  position: fixed;
+  bottom: inherit;
 
   @include breakpoints.tablet {
+    margin-left: var(--spacing-medium);
+    margin-right: var(--spacing-medium);
+    transform: translate(0, 0);
+    position: inherit;
     width: 70%;
+    position: inherit;
   }
 }
 
