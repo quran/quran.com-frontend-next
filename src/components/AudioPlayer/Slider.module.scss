@@ -2,6 +2,8 @@
 @use "src/styles/constants";
 
 $split-height: 2px;
+$mobile-split-padding: 20%;
+$tablet-split-padding: 5%;
 
 .container {
   text-align: left;
@@ -43,14 +45,14 @@ $split-height: 2px;
   margin: 0 auto;
   left: 0;
   right: 0;
-  padding-right: 20%;
-  padding-left: 20%;
+  padding-right: $mobile-split-padding;
+  padding-left: $mobile-split-padding;
   margin-bottom: var(--spacing-mega);
   bottom: constants.$audio-player-default-height;
 
   @include breakpoints.tablet {
-    padding-right: 5%;
-    padding-left: 5%;
+    padding-right: $tablet-split-padding;
+    padding-left: $tablet-split-padding;
   }
 }
 
