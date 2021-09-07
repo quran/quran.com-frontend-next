@@ -1,6 +1,8 @@
 import React from 'react';
-import styles from './LanguageSelector.module.scss';
+// import styles from './LanguageSelector.module.scss';
 
-const LanuageSelector = () => <div className={styles.container}>English</div>;
+// <div className={styles.container}>English</div>;
+// placeholder until we support localization.
+const LanuageSelector = () => <></>;
 
 export default LanuageSelector;
