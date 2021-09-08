@@ -1,5 +1,4 @@
 import capitalize from 'lodash/capitalize';
-import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
 import { RadioItem } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { SelectOption } from 'src/components/dls/Forms/Select';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -38,22 +37,3 @@ export const generateRadioItems = (items: string[]): RadioItem[] =>
  */
 export const getTranslatedLabelWithLanguage = (item: TafsirInfo | AvailableTranslation): string =>
   `${capitalize(item.languageName)} - ${item.translatedName.name}`;
-
-/**
- * Convert a TafsirInfo or AvailableTranslation items into combobox items.
- *
- * @param {TafsirInfo[] | AvailableTranslation[]} items
- * @returns  {DropdownItem[]}
- */
-export const itemsToComboboxItems = (
-  items: TafsirInfo[] | AvailableTranslation[],
-): DropdownItem[] =>
-  items.map((item: TafsirInfo | AvailableTranslation) => {
-    const stringId = item.id.toString();
-    return {
-      id: stringId,
-      value: stringId,
-      label: getTranslatedLabelWithLanguage(item),
-      name: stringId,
-    };
-  });
