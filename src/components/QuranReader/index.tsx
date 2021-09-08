@@ -23,7 +23,7 @@ import { QuranReaderDataType, ReadingPreference } from './types';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
-import ContextMenu from './ContextMenu';
+// import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -117,7 +117,7 @@ const QuranReader = ({
 
   return (
     <>
-      <ContextMenu />
+      {/* <ContextMenu /> */}
       <div
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
