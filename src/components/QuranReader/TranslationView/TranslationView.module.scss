@@ -51,10 +51,10 @@
   justify-content: flex-end;
 }
 
-.actionContainerLeft > * + * {
+.actionContainerLeft > .actionItem + .actionItem {
   margin-left: var(--spacing-small);
 }
 
-.actionContainerRight > * + * {
+.actionContainerRight > .actionItem + .actionItem {
   margin-right: var(--spacing-small);
 }

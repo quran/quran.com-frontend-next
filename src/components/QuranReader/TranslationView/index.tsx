@@ -25,11 +25,15 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
         <div className={classNames(styles.cellContainer, { [styles.highlightedContainer]: false })}>
           <div className={styles.actionContainer}>
             <div className={styles.actionContainerLeft}>
-              <VerseLink verseKey={verse.verseKey} />
-              <BookmarkIcon verseKey={verse.verseKey} />
+              <div className={styles.actionItem}>
+                <VerseLink verseKey={verse.verseKey} />
+              </div>
+              <div className={styles.actionItem}>
+                <BookmarkIcon verseKey={verse.verseKey} />
+              </div>
             </div>
             <div className={styles.actionContainerRight}>
-              <div>
+              <div className={styles.actionItem}>
                 <VerseActions verse={verse} />
               </div>
             </div>
