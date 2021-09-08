@@ -37,7 +37,7 @@ const TranslationView = ({ verses, quranReaderStyles, chapters }: TranslationVie
           <div className={styles.contentContainer}>
             <BookmarkIcon verseKey={verse.verseKey} />
             <div className={styles.verseContainer}>
-              <VerseText words={verse.words} />
+              <VerseText words={verse.words} chapters={chapters} />
             </div>
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id} className={styles.verseContainer}>
