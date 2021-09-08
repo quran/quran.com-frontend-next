@@ -7,7 +7,6 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import styles from './ContextMenu.module.scss';
 
-// TODO: memoize children because they will re-render with scrolling due to useScrollDirection
 const ContextMenu = () => {
   const dispatch = useDispatch();
   const isSideBarVisible = useSelector(selectNotes).isVisible;

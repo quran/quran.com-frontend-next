@@ -1,9 +1,12 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import throttle from 'lodash/throttle';
 
 export enum ScrollDirection {
   Down = 'down',
   Up = 'up',
 }
+
+const DEFAULT_THROTTLING_WAIT_TIME_MS = 300;
 
 /**
  * A hook that detects scrolling and determines whether
@@ -11,11 +14,14 @@ export enum ScrollDirection {
  * callback.
  *
  * @param {direction: ScrollDirection, position: number) => void} onDirectionChange
+ * @param {number} throttlingWaitTime The number of milliseconds to throttle callback invocations to.
  */
 const useScrollDirection = (
   onDirectionChange: (direction: ScrollDirection, position: number) => void,
+  throttlingWaitTime: number = DEFAULT_THROTTLING_WAIT_TIME_MS,
 ) => {
-  const [, setLastYPosition] = useState<number>(0);
+  // useRef is used instead of useState to avoid having to re-render on every scroll.
+  const lastYPosition = useRef(0);
 
   /*
     When the window scrolls, we check the new Y position against the
@@ -24,23 +30,22 @@ const useScrollDirection = (
     - If not, the user is scrolling up.
   */
   const onScroll = useCallback(() => {
-    setLastYPosition((lastYPosition) => {
-      const newYPosition = window.pageYOffset;
-      onDirectionChange(
-        lastYPosition < newYPosition ? ScrollDirection.Down : ScrollDirection.Up,
-        newYPosition,
-      );
-      return newYPosition;
-    });
+    const newYPosition = window.pageYOffset;
+    onDirectionChange(
+      lastYPosition.current < newYPosition ? ScrollDirection.Down : ScrollDirection.Up,
+      newYPosition,
+    );
+    lastYPosition.current = newYPosition;
   }, [onDirectionChange]);
+  const onScrollThrottled = throttle(onScroll, throttlingWaitTime);
 
   // bind the scroll listener on mount and un-bind it on un-mounting.
   useEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScrollThrottled);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('scroll', onScrollThrottled);
     };
-  }, [onScroll]);
+  }, [onScrollThrottled]);
 };
 
 export default useScrollDirection;
