@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useMemo } from 'react';
 import throttle from 'lodash/throttle';
 
 export enum ScrollDirection {
@@ -37,7 +37,11 @@ const useScrollDirection = (
     );
     lastYPosition.current = newYPosition;
   }, [onDirectionChange]);
-  const onScrollThrottled = throttle(onScroll, throttlingWaitTime);
+
+  const onScrollThrottled = useMemo(
+    () => throttle(onScroll, throttlingWaitTime),
+    [onScroll, throttlingWaitTime],
+  );
 
   // bind the scroll listener on mount and un-bind it on un-mounting.
   useEffect(() => {
