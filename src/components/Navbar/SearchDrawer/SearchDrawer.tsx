@@ -19,7 +19,7 @@ import styles from './SearchDrawer.module.scss';
 import PreInput from './PreInput';
 import NoResults from './NoResults';
 import DrawerCloseButton from './Buttons/DrawerCloseButton';
-import DrawerSearchButton from './Buttons/DrawerSearchButton';
+import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -156,7 +156,7 @@ const SearchDrawer: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.headerContentContainer}>
           <div className={styles.headerContent}>
-            <DrawerSearchButton disabled={!searchQuery} href={searchUrl} />
+            <DrawerSearchIcon />
             <div
               className={classNames(styles.searchInputContainer, {
                 [styles.searchInputContainerRTL]: isRTLInput,

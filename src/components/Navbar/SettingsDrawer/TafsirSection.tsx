@@ -20,17 +20,23 @@ import {
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import Counter from 'src/components/dls/Counter/Counter';
+import { getTranslatedLabelWithLanguage } from 'src/utils/input';
+import TafsirInfo from 'types/TafsirInfo';
+import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
 import Section from './Section';
 
 // convert tafsir data (from API) to combobox items structure
 // so use it with Combobox component
-const tafsirsToComboboxItems = (translations) =>
-  translations.map((item) => ({
-    id: item.id.toString(),
-    value: item.id,
-    label: item.name.toString(),
-    name: item.id.toString(),
-  }));
+const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
+  tafsirs.map((item) => {
+    const stringId = item.id.toString();
+    return {
+      id: stringId,
+      value: stringId,
+      label: getTranslatedLabelWithLanguage(item),
+      name: stringId,
+    };
+  });
 
 const TafsirSection = () => {
   const dispatch = useDispatch();

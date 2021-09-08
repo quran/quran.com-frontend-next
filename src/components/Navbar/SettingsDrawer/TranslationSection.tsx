@@ -20,19 +20,24 @@ import {
 import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
-
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
+import { getTranslatedLabelWithLanguage } from 'src/utils/input';
+import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
+import AvailableTranslation from 'types/AvailableTranslation';
 import Section from './Section';
 
 // convert translations data (from API) to combobox items
 // so we can use Combobox component
-const translationsToComboboxItems = (translations) =>
-  translations.map((item) => ({
-    id: item.id.toString(),
-    value: item.id,
-    label: item.name.toString(),
-    name: item.id.toString(),
-  }));
+const translationsToComboboxItems = (translations: AvailableTranslation[]): DropdownItem[] =>
+  translations.map((item) => {
+    const stringId = item.id.toString();
+    return {
+      id: stringId,
+      value: stringId,
+      label: getTranslatedLabelWithLanguage(item),
+      name: stringId,
+    };
+  });
 
 const TranslationSection = () => {
   const dispatch = useDispatch();
