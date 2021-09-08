@@ -143,10 +143,10 @@ const AudioPlayer = () => {
             [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
           })}
         >
-          <PlayPauseButton />
           <div className={styles.mobileCloseButtonContainer}>
             <CloseButton />
           </div>
+          <PlayPauseButton />
           <div className={styles.seekBackwardsContainer}>
             <Button
               tooltip="Rewind 10 seconds"

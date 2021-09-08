@@ -9,7 +9,7 @@ const CloseButton = () => {
   const dispatch = useDispatch();
   return (
     <Button
-      tooltip="Close audio player"
+      tooltip="Close"
       shape={ButtonShape.Circle}
       variant={ButtonVariant.Ghost}
       onClick={withStopPropagation(() => {
