@@ -2,6 +2,7 @@ import React from 'react';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
+import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
 import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
@@ -19,8 +20,8 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, nameSimple, translatedName 
   <div>
     <div className={styles.container}>
       <div className={styles.left}>
-        <div className={styles.translatedChapterName}>{translatedName}</div>
-        <div className={styles.chapterName}>
+        <div className={styles.translatedName}>{translatedName}</div>
+        <div className={styles.nameSimple}>
           Surah <br /> {nameSimple}
         </div>
         <div className={styles.infoContainer}>
@@ -28,7 +29,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, nameSimple, translatedName 
             size={ButtonSize.Small}
             prefix={<PlayIcon />}
             variant={ButtonVariant.Ghost}
-            href="/a"
+            href={getChapterInfoUrl(chapterId)}
           >
             Surah Info
           </Button>
@@ -58,18 +59,3 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, nameSimple, translatedName 
 );
 
 export default ChapterHeader;
-
-/**
- * Format chapter id, add prefix '0' if it's a single digit number
- *
- * @param id chapter id
- * @returns formatted chapter id
- *
- * @example
- * // returns '01'
- * formatChapterId('1')
- * @example
- * // returns '102'
- * formatChapterId('102')
- */
-const formatChapterId = (id: string) => `0${id}`.slice(-2);
