@@ -8,6 +8,7 @@ import {
   selectBookmarks,
   toggleVerseBookmark,
 } from 'src/redux/slices/QuranReader/bookmarks';
+import { getVerseUrl } from 'src/utils/verse';
 import Verse from '../../../types/Verse';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 import CopyIcon from '../../../public/icons/copy.svg';
@@ -19,6 +20,8 @@ import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import styles from './VerseActionsMenu.module.scss';
 import Modal from '../dls/Modal/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+import Link from '../dls/Link/Link';
+import LinkIcon from '../../../public/icons/east.svg';
 
 interface Props {
   verse: Verse;
@@ -81,6 +84,10 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   };
 
   const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
+
+  const verseUrl = getVerseUrl(verse.verseKey);
+  const shouldShowGoToAyah = router.asPath !== verseUrl;
+
   return (
     <div className={styles.container}>
       <VerseActionsMenuItem
@@ -121,6 +128,12 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
         icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
         onClick={onToggleBookmarkClicked}
       />
+
+      {shouldShowGoToAyah && (
+        <Link href={verseUrl}>
+          <VerseActionsMenuItem title="Go to Ayah" icon={<LinkIcon />} />
+        </Link>
+      )}
     </div>
   );
 };

@@ -81,3 +81,14 @@ export const getFirstWordOfSurah = (
  * @returns {Verse} verse
  */
 export const getSampleVerse = () => sampleVerse;
+
+/**
+ * Given the verseKey, return the verseUrl
+ *
+ * @param {string} verseKey, example: "1:5"
+ * @returns {string} verseUrl , example "/1/5";
+ */
+export const getVerseUrl = (verseKey: string): string => {
+  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  return `/${chapterNumber}/${verseNumber}`;
+};
