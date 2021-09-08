@@ -169,7 +169,7 @@ const AudioPlayer = () => {
             reciterName={reciterName}
           />
         </div>
-        <div className={styles.rightSection}>
+        <div className={styles.desktopRightActions}>
           {visibility === Visibility.Expanded && (
             <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
               <UnfoldLessIcon />

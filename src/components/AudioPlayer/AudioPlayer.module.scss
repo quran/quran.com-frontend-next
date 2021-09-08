@@ -77,7 +77,7 @@
   }
 }
 
-.rightSection {
+.desktopRightActions {
   display: none;
   @include breakpoints.tablet {
     display: flex;
