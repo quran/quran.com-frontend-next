@@ -24,11 +24,18 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
         {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
         <div className={classNames(styles.cellContainer, { [styles.highlightedContainer]: false })}>
           <div className={styles.actionContainer}>
-            <VerseLink verseKey={verse.verseKey} />
-            <VerseActions verse={verse} />
+            <div className={styles.actionContainerLeft}>
+              <VerseLink verseKey={verse.verseKey} />
+              <BookmarkIcon verseKey={verse.verseKey} />
+            </div>
+            <div className={styles.actionContainerRight}>
+              <div>
+                <VerseActions verse={verse} />
+              </div>
+            </div>
           </div>
+
           <div className={styles.contentContainer}>
-            <BookmarkIcon verseKey={verse.verseKey} />
             <div className={styles.verseContainer}>
               <VerseText words={verse.words} />
             </div>

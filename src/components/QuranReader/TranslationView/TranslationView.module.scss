@@ -19,6 +19,7 @@
 }
 .cellContainer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: var(--spacing-medium) 0;
 }
@@ -28,9 +29,8 @@
   position: relative;
 }
 .actionContainer {
-  @include breakpoints.tablet {
-    padding-right: var(--spacing-medium);
-  }
+  display: flex;
+  justify-content: space-between;
 }
 .verseContainer {
   padding-bottom: var(--spacing-medium);
@@ -38,9 +38,23 @@
 .translationContainer {
   padding-bottom: var(--spacing-xsmall);
 }
-.bookmarkIconContainer {
+
+.actionContainerLeft,
+.actionContainerRight {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  height: var(--spacing-medium);
+}
+.actionContainerLeft {
+  justify-content: flex-start;
+}
+.actionContainerRight {
+  justify-content: flex-end;
+}
+
+.actionContainerLeft > * + * {
+  margin-left: var(--spacing-small);
+}
+
+.actionContainerRight > * + * {
+  margin-right: var(--spacing-small);
 }
