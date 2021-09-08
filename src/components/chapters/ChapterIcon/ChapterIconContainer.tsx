@@ -12,7 +12,7 @@ export enum ChapterIconsSize {
 interface Props {
   chapterId: string;
   size?: ChapterIconsSize;
-  withSurahPrefix: boolean;
+  withSurahPrefix?: boolean;
 }
 
 const IconContainer: React.FC<Props> = ({

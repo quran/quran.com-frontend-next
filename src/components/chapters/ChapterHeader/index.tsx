@@ -37,7 +37,11 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, nameSimple, translatedName 
       <div className={styles.right}>
         <div className={styles.chapterId}>{formatChapterId(chapterId)}</div>
         <div className={styles.arabicSurahNameContainer}>
-          <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Large} />
+          <ChapterIconContainer
+            chapterId={chapterId}
+            size={ChapterIconsSize.Large}
+            withSurahPrefix={false}
+          />
         </div>
         <div className={styles.actionContainer}>
           <PlayChapterAudioButton chapterId={Number(chapterId)} />
