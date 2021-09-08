@@ -26,6 +26,7 @@ import styles from './AudioPlayer.module.scss';
 import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
+import CloseButton from './CloseButton';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -143,6 +144,9 @@ const AudioPlayer = () => {
           })}
         >
           <PlayPauseButton />
+          <div className={styles.mobileCloseIconContainer}>
+            <CloseButton />
+          </div>
           <div className={styles.seekBackwardsContainer}>
             <Button
               tooltip="Rewind 10 seconds"
@@ -176,6 +180,7 @@ const AudioPlayer = () => {
               <UnfoldMoreIcon />
             </Button>
           )}
+          <CloseButton />
         </div>
       </div>
       {visibility === Visibility.Expanded && <PlaybackControls />}

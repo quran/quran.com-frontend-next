@@ -94,3 +94,11 @@
     width: 70%;
   }
 }
+
+.mobileCloseIconContainer {
+  display: flex;
+  align-items: center;
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
