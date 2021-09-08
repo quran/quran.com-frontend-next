@@ -1,0 +1,8 @@
+.container {
+  margin: var(--spacing-small);
+  opacity: var(--opacity-75);
+  > svg {
+    height: calc(1.25 * var(--spacing-medium));
+    width: calc(1.25 * var(--spacing-medium));
+  }
+}

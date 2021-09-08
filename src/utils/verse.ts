@@ -103,3 +103,14 @@ export const formatChapterId = (id: string) => `0${id}`.slice(-2);
  * @returns {string} chapterUrl
  */
 export const getChapterInfoUrl = (chapterId: string) => `/${chapterId}/info`;
+
+/**
+ * Given the verseKey, return the verseUrl
+ *
+ * @param {string} verseKey, example: "1:5"
+ * @returns {string} verseUrl , example "/1/5";
+ */
+export const getVerseUrl = (verseKey: string): string => {
+  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  return `/${chapterNumber}/${verseNumber}`;
+};
