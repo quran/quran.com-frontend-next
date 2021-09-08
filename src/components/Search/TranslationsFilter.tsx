@@ -1,4 +1,5 @@
 import React, { memo, useMemo } from 'react';
+import { getTranslatedLabelWithLanguage } from 'src/utils/input';
 import AvailableTranslation from 'types/AvailableTranslation';
 import Combobox from '../dls/Forms/Combobox';
 import styles from './Filter.module.scss';
@@ -25,7 +26,7 @@ const TranslationsFilter: React.FC<Props> = memo(
             id: stringId,
             name: stringId,
             value: stringId,
-            label: translation.translatedName.name,
+            label: getTranslatedLabelWithLanguage(translation),
           };
         }),
       [translations],
