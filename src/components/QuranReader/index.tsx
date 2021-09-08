@@ -13,16 +13,17 @@ import classNames from 'classnames';
 import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
 import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreferences';
+import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
+import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
+import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
-import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
-import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
+import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -116,6 +117,7 @@ const QuranReader = ({
 
   return (
     <>
+      <ContextMenu />
       <div
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
