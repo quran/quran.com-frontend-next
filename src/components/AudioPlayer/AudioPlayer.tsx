@@ -144,7 +144,7 @@ const AudioPlayer = () => {
           })}
         >
           <PlayPauseButton />
-          <div className={styles.mobileCloseIconContainer}>
+          <div className={styles.mobileCloseButtonContainer}>
             <CloseButton />
           </div>
           <div className={styles.seekBackwardsContainer}>
