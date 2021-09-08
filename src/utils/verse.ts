@@ -89,7 +89,6 @@ export const getSampleVerse = () => sampleVerse;
  * @returns verseUrl , example "/1/5";
  */
 export const getVerseUrl = (verseKey: string): string => {
-  const chapterNumber = getChapterNumberFromKey(verseKey);
-  const verseNumber = getVerseNumberFromKey(verseKey);
+  const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterNumber}/${verseNumber}`;
 };
