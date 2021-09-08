@@ -85,8 +85,8 @@ export const getSampleVerse = () => sampleVerse;
 /**
  * Given the verseKey, return the verseUrl
  *
- * @param verseKey, example: "1:5"
- * @returns verseUrl , example "/1/5";
+ * @param {string} verseKey, example: "1:5"
+ * @returns {string} verseUrl , example "/1/5";
  */
 export const getVerseUrl = (verseKey: string): string => {
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
