@@ -101,7 +101,7 @@ const QuranReader = ({
   const pageLimit = isVerseData || isTafsirData ? 1 : initialData.pagination.totalPages;
   const verses = data.flat(1);
   if (quranReaderDataType === QuranReaderDataType.Tafsir) {
-    view = <TafsirView verse={verses[0]} />;
+    view = <TafsirView chapters={initialData.chapters} verse={verses[0]} />;
   } else if (readingPreference === ReadingPreference.Reading) {
     view = <ReadingView chapters={initialData.chapters} verses={verses} />;
   } else {
