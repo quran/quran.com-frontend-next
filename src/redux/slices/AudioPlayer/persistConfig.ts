@@ -4,7 +4,7 @@ const audioPlayerPersistConfig = {
   key: 'audioPlayerState',
   storage,
   version: 1,
-  blacklist: ['isPlaying'],
+  blacklist: ['isPlaying', 'visibility'],
 };
 
 export default audioPlayerPersistConfig;

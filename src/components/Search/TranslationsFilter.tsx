@@ -33,7 +33,7 @@ const TranslationsFilter: React.FC<Props> = memo(
 
     return (
       <Combobox
-        id="translations"
+        id="translationsFilter"
         value={selectedTranslation || ''}
         items={translationsItems}
         onChange={onTranslationChange}

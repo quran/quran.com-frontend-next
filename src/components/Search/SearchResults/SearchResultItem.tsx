@@ -3,11 +3,11 @@ import Link from 'next/link';
 import React from 'react';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import { getVerseNavigationUrl } from 'src/utils/navigation';
-import { SearchVerseResult } from 'types/SearchVerseResult';
+import Verse from 'types/Verse';
 import styles from './SearchResultItem.module.scss';
 
 interface Props {
-  result: SearchVerseResult;
+  result: Verse;
 }
 
 const SearchResultItem: React.FC<Props> = ({ result }) => (
@@ -28,7 +28,7 @@ const SearchResultItem: React.FC<Props> = ({ result }) => (
           </div>
         </div>
         {result.translations?.map((translation) => (
-          <div key={translation.id} className={styles.translationContainer}>
+          <div key={translation.resourceId} className={styles.translationContainer}>
             <div dangerouslySetInnerHTML={{ __html: translation.text }} />
             <p className={styles.translationName}> - {translation.resourceName}</p>
           </div>

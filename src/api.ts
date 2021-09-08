@@ -13,6 +13,7 @@ import {
   VersesResponse,
   BaseResponse,
   ChapterInfoResponse,
+  FootnoteResponse,
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { AudioFile } from 'types/AudioFile';
@@ -31,6 +32,7 @@ import {
   makeJuzVersesUrl,
   makeChapterInfoUrl,
   makePageVersesUrl,
+  makeFootnoteUrl,
 } from './utils/apiPaths';
 
 export const fetcher = async function fetcher(
@@ -243,5 +245,17 @@ export const getPageVerses = async (
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => {
   const payload = await fetcher(makePageVersesUrl(id, params));
+  return camelizeKeys(payload);
+};
+
+/**
+ * Get the footnote details.
+ *
+ * @param {string} footnoteId the ID of the footnote.
+ *
+ * @returns {Promise<FootnoteResponse>}
+ */
+export const getFootnote = async (footnoteId: string): Promise<FootnoteResponse> => {
+  const payload = await fetcher(makeFootnoteUrl(footnoteId));
   return camelizeKeys(payload);
 };

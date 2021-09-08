@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import Verse from 'types/Verse';
-import {
-  selectTranslations,
-  TranslationsSettings,
-} from 'src/redux/slices/QuranReader/translations';
+import { selectTranslations } from 'src/redux/slices/QuranReader/translations';
 import useTranslation from 'next-translate/useTranslation';
 import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
-import { getAdvancedCopyRawResult, getTranslationsInfo } from 'src/api';
+import { getAdvancedCopyRawResult, getAvailableTranslations } from 'src/api';
 import { QuranFont } from 'src/components/QuranReader/types';
+import useSWR from 'swr';
+import { makeTranslationsUrl } from 'src/utils/apiPaths';
+import { throwIfError } from 'src/utils/error';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
@@ -65,7 +65,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   const { chapterId } = router.query;
-  const { selectedTranslations } = useSelector(selectTranslations) as TranslationsSettings;
+  const { selectedTranslations } = useSelector(selectTranslations);
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
   // the items that will be passed to the range start and end dropdown selectors. The value will be populated only once the user chooses the verses range option.
@@ -99,24 +99,34 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     };
   }, [isCopied]);
 
+  // Get available translations
+  // because we already have call the API in settings menu. useSWR will save it to cache.
+  // in this component, we will get the data from the cache.
+  // so, no rerender, no layout shift.
+  const { data: availableTranslations } = useSWR(
+    makeTranslationsUrl(lang),
+    () =>
+      getAvailableTranslations(lang).then((res) => {
+        throwIfError(res);
+        return res.translations;
+      }),
+    {
+      revalidateOnFocus: false,
+    },
+  );
+
   useEffect(() => {
-    // only fetch when there is at least one translation.
-    if (selectedTranslations.length) {
-      getTranslationsInfo(lang, selectedTranslations).then((response) => {
-        // if there is no error
-        if (response.status !== 500) {
-          const responseTranslations = {};
-          response.translations.forEach((translation) => {
-            responseTranslations[translation.id] = {
-              shouldBeCopied: false, // the default is to not copy the translation
-              name: translation.translatedName.name,
-            };
-          });
-          setTranslations(responseTranslations);
-        }
+    const responseTranslations = {};
+    availableTranslations
+      .filter((translation) => selectedTranslations.includes(translation.id))
+      .forEach((translation) => {
+        responseTranslations[translation.id] = {
+          shouldBeCopied: false, // the default is to not copy the translation
+          name: translation.translatedName.name,
+        };
       });
-    }
-  }, [lang, selectedTranslations]);
+    setTranslations(responseTranslations);
+  }, [lang, selectedTranslations, availableTranslations]);
 
   /**
    * Handle when either the range start/end's verse is selected.
@@ -289,18 +299,22 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         id="quranText"
         label="Arabic text (Uthmani text)"
       />
-      {Object.keys(translations).length !== 0 && (
+      {selectedTranslations.length !== 0 && (
         <>
           <p className={styles.label}>Translations:</p>
-          {Object.keys(translations).map((translationId) => (
-            <Checkbox
-              key={translationId}
-              onChange={() => onCopyTranslationChange(translationId)}
-              checked={translations[translationId].shouldBeCopied}
-              id={translationId}
-              label={translations[translationId].name}
-            />
-          ))}
+          {selectedTranslations.map((translationId) =>
+            translations[translationId] ? (
+              <Checkbox
+                key={translationId}
+                onChange={() => onCopyTranslationChange(translationId.toString())}
+                checked={translations[translationId].shouldBeCopied}
+                id={translationId.toString()}
+                label={translations[translationId].name}
+              />
+            ) : (
+              <div key={translationId} className={styles.emptyCheckbox} />
+            ),
+          )}
         </>
       )}
       <p className={styles.label}>Also copy Footnote(s)?</p>

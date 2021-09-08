@@ -7,7 +7,7 @@ import Reciter from './Reciter';
 import { AudioFile } from './AudioFile';
 import ChapterInfo from './ChapterInfo';
 import { SearchNavigationResult } from './SearchNavigationResult';
-import { SearchVerseResult } from './SearchVerseResult';
+import Footnote from './Footnote';
 
 export interface BaseResponse {
   status?: number;
@@ -65,7 +65,7 @@ export interface SearchResponse extends BaseResponse {
   pagination: Pagination;
   result?: {
     navigation: SearchNavigationResult[];
-    verses: SearchVerseResult[];
+    verses: Verse[];
   };
 }
 
@@ -79,4 +79,8 @@ export interface TafsirsResponse extends BaseResponse {
 
 export interface ChapterInfoResponse extends BaseResponse {
   chapterInfo?: ChapterInfo;
+}
+
+export interface FootnoteResponse extends BaseResponse {
+  footNote?: Footnote;
 }
