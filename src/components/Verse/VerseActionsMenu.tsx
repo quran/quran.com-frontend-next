@@ -21,7 +21,7 @@ import styles from './VerseActionsMenu.module.scss';
 import Modal from '../dls/Modal/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 import Link from '../dls/Link/Link';
-import LinkIcon from '../../../public/icons/north_east.svg';
+import LinkIcon from '../../../public/icons/east.svg';
 
 interface Props {
   verse: Verse;
