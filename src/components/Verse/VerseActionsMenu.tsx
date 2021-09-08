@@ -84,6 +84,10 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   };
 
   const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
+
+  const verseUrl = getVerseUrl(verse.verseKey);
+  const shouldShowGoToAyah = router.asPath !== verseUrl;
+
   return (
     <div className={styles.container}>
       <VerseActionsMenuItem
@@ -125,9 +129,11 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
         onClick={onToggleBookmarkClicked}
       />
 
-      <Link href={getVerseUrl(verse.verseKey)}>
-        <VerseActionsMenuItem title="Go to Ayah" icon={<LinkIcon />} />
-      </Link>
+      {shouldShowGoToAyah && (
+        <Link href={verseUrl}>
+          <VerseActionsMenuItem title="Go to Ayah" icon={<LinkIcon />} />
+        </Link>
+      )}
     </div>
   );
 };
