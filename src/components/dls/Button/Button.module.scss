@@ -11,6 +11,20 @@
   justify-content: center;
 }
 
+// base svg color
+.base > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.base:hover > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
+
 // type
 .primary {
   background-color: var(--color-primary-medium);
@@ -32,6 +46,19 @@
   }
 }
 
+.secondary > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.secondary:hover > span > svg {
+  fill: var(--color-secondary-medium);
+  & > path {
+    fill: var(--color-secondary-medium);
+  }
+}
+
 .success {
   background-color: var(--color-success-medium);
   color: var(--color-text-inverse);
@@ -39,6 +66,18 @@
   &:hover {
     color: var(--color-success-medium);
     background-color: var(--color-text-inverse);
+  }
+}
+.success > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.success:hover > span > svg {
+  fill: var(--color-success-medium);
+  & > path {
+    fill: var(--color-success-medium);
   }
 }
 
@@ -51,6 +90,18 @@
     background-color: var(--color-text-inverse);
   }
 }
+.warning > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.warning:hover > span > svg {
+  fill: var(--color-warning-medium);
+  & > path {
+    fill: var(--color-warning-medium);
+  }
+}
 
 .error {
   background-color: var(--color-error-medium);
@@ -59,6 +110,18 @@
   &:hover {
     color: var(--color-error-medium);
     background-color: var(--color-text-inverse);
+  }
+}
+.error > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.error:hover > span > svg {
+  fill: var(--color-error-medium);
+  & > path {
+    fill: var(--color-error-medium);
   }
 }
 
@@ -187,20 +250,8 @@
   }
 }
 
-.base > span > svg {
-  fill: var(--color-text-inverse);
-  & > path {
-    fill: var(--color-text-inverse);
-  }
-}
-.base:hover > span > svg {
-  fill: var(--color-text-default);
-  & > path {
-    fill: var(--color-text-default);
-  }
-}
-
-.base.ghost > span > svg {
+.base.ghost > span > svg,
+.base.secondary > span > svg {
   fill: var(--color-text-default);
   & > path {
     fill: var(--color-text-default);
