@@ -26,6 +26,7 @@ import styles from './AudioPlayer.module.scss';
 import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
+import CloseButton from './CloseButton';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -142,6 +143,9 @@ const AudioPlayer = () => {
             [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
           })}
         >
+          <div className={styles.mobileCloseButtonContainer}>
+            <CloseButton />
+          </div>
           <PlayPauseButton />
           <div className={styles.seekBackwardsContainer}>
             <Button
@@ -165,8 +169,7 @@ const AudioPlayer = () => {
             reciterName={reciterName}
           />
         </div>
-        {/* The div below serves as placeholder for a right section, as well as for centering the slider */}
-        <div className={styles.rightSection}>
+        <div className={styles.desktopRightActions}>
           {visibility === Visibility.Expanded && (
             <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
               <UnfoldLessIcon />
@@ -177,6 +180,7 @@ const AudioPlayer = () => {
               <UnfoldMoreIcon />
             </Button>
           )}
+          <CloseButton />
         </div>
       </div>
       {visibility === Visibility.Expanded && <PlaybackControls />}

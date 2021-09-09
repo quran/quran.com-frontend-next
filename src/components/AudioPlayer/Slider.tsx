@@ -49,7 +49,11 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }
   });
 
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.containerExpanded]: isExpanded,
+      })}
+    >
       <span
         className={classNames(styles.currentTime, {
           [styles.currentTimeExpanded]: isExpanded,

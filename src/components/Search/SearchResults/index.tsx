@@ -36,7 +36,7 @@ const SearchResults: React.FC<Props> = ({
       <p className={styles.boldHeader}>Results</p>
       <>
         {searchResult.result.verses.map((result) => (
-          <SearchResultItem key={result.verseId} result={result} />
+          <SearchResultItem key={result.verseKey} result={result} />
         ))}
         {isSearchDrawer ? (
           <div className={styles.resultsSummaryContainer}>

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
+import Separator from 'src/components/dls/Separator/Separator';
 import Verse from '../../../../types/Verse';
 import Translation from '../../../../types/Translation';
 import styles from './TranslationView.module.scss';
@@ -23,11 +24,22 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
         {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
         <div className={classNames(styles.cellContainer, { [styles.highlightedContainer]: false })}>
           <div className={styles.actionContainer}>
-            <VerseLink verseKey={verse.verseKey} />
-            <VerseActions verse={verse} />
+            <div className={styles.actionContainerLeft}>
+              <div className={styles.actionItem}>
+                <VerseLink verseKey={verse.verseKey} />
+              </div>
+              <div className={styles.actionItem}>
+                <BookmarkIcon verseKey={verse.verseKey} />
+              </div>
+            </div>
+            <div className={styles.actionContainerRight}>
+              <div className={styles.actionItem}>
+                <VerseActions verse={verse} />
+              </div>
+            </div>
           </div>
+
           <div className={styles.contentContainer}>
-            <BookmarkIcon verseKey={verse.verseKey} />
             <div className={styles.verseContainer}>
               <VerseText words={verse.words} />
             </div>
@@ -42,7 +54,7 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
             ))}
           </div>
         </div>
-        <div className={styles.divider} />
+        <Separator />
       </div>
     ))}
   </div>

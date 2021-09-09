@@ -5,8 +5,7 @@ import Popover from '../dls/Popover';
 import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
 import VerseActionsMenu from './VerseActionsMenu';
 // import PlayVerseAudioButton from './PlayVerseAudioButton';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-import styles from './VerseActions.module.scss';
+import Button, { ButtonType } from '../dls/Button/Button';
 
 interface Props {
   verse: Verse;
@@ -16,7 +15,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => (
   // const reciter = useSelector(selectReciter);
 
   <>
-    <div className={styles.playVerseContainer}>
+    <div>
       {/* Comment out the audio verse functionality until the backend serves correct data */}
       {/* <PlayVerseAudioButton
           timestamp={verse.timestamps.timestampFrom}
@@ -26,12 +25,7 @@ const VerseActions: React.FC<Props> = ({ verse }) => (
     </div>
     <Popover
       trigger={
-        <Button
-          tooltip="Actions menu"
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          size={ButtonSize.Large}
-        >
+        <Button tooltip="Actions menu" type={ButtonType.Secondary}>
           <OverflowMenu />
         </Button>
       }

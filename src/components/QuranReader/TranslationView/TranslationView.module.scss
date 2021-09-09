@@ -10,7 +10,7 @@
 }
 
 .translationName {
-  color: var(--color-text-default);
+  color: var(--color-text-faded);
   font-size: var(--font-size-small);
 }
 
@@ -19,6 +19,7 @@
 }
 .cellContainer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: var(--spacing-medium) 0;
 }
@@ -28,9 +29,8 @@
   position: relative;
 }
 .actionContainer {
-  @include breakpoints.tablet {
-    padding-right: var(--spacing-medium);
-  }
+  display: flex;
+  justify-content: space-between;
 }
 .verseContainer {
   padding-bottom: var(--spacing-medium);
@@ -38,13 +38,23 @@
 .translationContainer {
   padding-bottom: var(--spacing-xsmall);
 }
-.bookmarkIconContainer {
+
+.actionContainerLeft,
+.actionContainerRight {
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  height: var(--spacing-medium);
+}
+.actionContainerLeft {
+  justify-content: flex-start;
+}
+.actionContainerRight {
+  justify-content: flex-end;
 }
 
-.divider {
-  border-top: 1px var(--color-borders-hairline) solid;
+.actionContainerLeft > .actionItem + .actionItem {
+  margin-left: var(--spacing-small);
+}
+
+.actionContainerRight > .actionItem + .actionItem {
+  margin-right: var(--spacing-small);
 }

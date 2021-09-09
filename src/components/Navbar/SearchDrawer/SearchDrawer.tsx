@@ -14,15 +14,17 @@ import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+import { selectTranslations } from 'src/redux/slices/QuranReader/translations';
 import styles from './SearchDrawer.module.scss';
 import PreInput from './PreInput';
 import NoResults from './NoResults';
 import DrawerCloseButton from './Buttons/DrawerCloseButton';
-import DrawerSearchButton from './Buttons/DrawerSearchButton';
+import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
+  const { selectedTranslations } = useSelector(selectTranslations);
   const drawerRef = useRef(null);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -67,7 +69,11 @@ const SearchDrawer: React.FC = () => {
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,
-        language: lang,
+        filterLanguages: lang,
+        ...(selectedTranslations &&
+          !!selectedTranslations.length && {
+            filterTranslations: selectedTranslations.join(','),
+          }),
       })
         .then((response) => {
           if (response.status === 500) {
@@ -86,7 +92,7 @@ const SearchDrawer: React.FC = () => {
       // reset the result
       setSearchResult(null);
     }
-  }, [lang, debouncedSearchQuery]);
+  }, [lang, debouncedSearchQuery, selectedTranslations]);
 
   const resetQueryAndResults = () => {
     // reset the search query
@@ -121,11 +127,12 @@ const SearchDrawer: React.FC = () => {
     });
   }, [closeSearchDrawer, router.events, isOpen]);
 
+  const isEmptyResponse =
+    searchResult &&
+    searchResult.pagination.totalRecords === 0 &&
+    !searchResult.result.navigation.length;
   const isPreInputLayout =
-    !searchQuery ||
-    isSearching ||
-    hasError ||
-    (!isSearching && !hasError && searchResult && searchResult.pagination.totalRecords === 0);
+    !searchQuery || isSearching || hasError || (!isSearching && !hasError && isEmptyResponse);
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
 
   /**
@@ -149,7 +156,7 @@ const SearchDrawer: React.FC = () => {
       <div className={styles.header}>
         <div className={styles.headerContentContainer}>
           <div className={styles.headerContent}>
-            <DrawerSearchButton disabled={!searchQuery} href={searchUrl} />
+            <DrawerSearchIcon />
             <div
               className={classNames(styles.searchInputContainer, {
                 [styles.searchInputContainerRTL]: isRTLInput,
@@ -193,7 +200,7 @@ const SearchDrawer: React.FC = () => {
                 {hasError && <div>Something went wrong, please try again!</div>}
                 {!hasError && searchResult && (
                   <>
-                    {searchResult.pagination.totalRecords === 0 ? (
+                    {isEmptyResponse ? (
                       <NoResults searchQuery={searchQuery} searchUrl={searchUrl} />
                     ) : (
                       <SearchResults

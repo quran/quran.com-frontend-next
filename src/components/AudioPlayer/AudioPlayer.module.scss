@@ -77,13 +77,14 @@
   }
 }
 
-.rightSection {
+.desktopRightActions {
   display: none;
   @include breakpoints.tablet {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: var(--space-small);
+    margin-left: var(--spacing-medium);
   }
 }
 
@@ -91,5 +92,13 @@
   width: 100%;
   @include breakpoints.tablet {
     width: 70%;
+  }
+}
+
+.mobileCloseButtonContainer {
+  display: flex;
+  align-items: center;
+  @include breakpoints.tablet {
+    display: none;
   }
 }

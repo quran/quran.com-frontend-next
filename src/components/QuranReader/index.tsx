@@ -15,16 +15,17 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import Verse from 'types/Verse';
 import clipboardCopy from 'clipboard-copy';
+import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
+import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreferences';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from '../../utils/apiPaths';
-import { QuranReaderStyles, selectQuranReaderStyles } from '../../redux/slices/QuranReader/styles';
-import { buildQCFFontFace, isQCFFont } from '../../utils/fontFaceHelper';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
+// import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -132,6 +133,7 @@ const QuranReader = ({
 
   return (
     <>
+      {/* <ContextMenu /> */}
       <div
         onCopy={onCopy}
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}

@@ -28,8 +28,9 @@ const LanguagesFilter: React.FC<Props> = memo(
 
     return (
       <Combobox
-        id="languages"
+        id="languagesFilter"
         value={selectedLanguage}
+        minimumRequiredItems={1}
         items={languagesItems}
         onChange={onLanguageChange}
         initialInputValue={initialInputValue}

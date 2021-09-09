@@ -1,6 +1,8 @@
 import capitalize from 'lodash/capitalize';
 import { RadioItem } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { SelectOption } from 'src/components/dls/Forms/Select';
+import AvailableTranslation from 'types/AvailableTranslation';
+import TafsirInfo from 'types/TafsirInfo';
 
 /**
  * Generate the select input options.
@@ -26,3 +28,12 @@ export const generateRadioItems = (items: string[]): RadioItem[] =>
     id: item,
     value: item,
   }));
+
+/**
+ * Get the translated name of an item along with the language of the item.
+ *
+ * @param {TafsirInfo | AvailableTranslation} item the item that we want to generate the label for.
+ * @returns {String}
+ */
+export const getTranslatedLabelWithLanguage = (item: TafsirInfo | AvailableTranslation): string =>
+  `${capitalize(item.languageName)} - ${item.translatedName.name}`;
