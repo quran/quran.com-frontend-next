@@ -33,7 +33,7 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
-  const isExpanded = visibility === Visibility.Expanded;
+  const isExpanded = visibility === Visibility.Expanded || visibility === Visibility.Minimized;
 
   const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;

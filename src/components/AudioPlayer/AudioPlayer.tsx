@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withStopPropagation } from 'src/utils/event';
+import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
   selectAudioPlayerState,
@@ -39,6 +40,19 @@ const AudioPlayer = () => {
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
   const reciterName = useSelector(selectReciter).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
+  const isExpanded = visibility === Visibility.Expanded || visibility === Visibility.Minimized;
+
+  const onDirectionChange = useCallback(
+    (direction: ScrollDirection) => {
+      if (direction === ScrollDirection.Down && visibility === Visibility.Expanded) {
+        dispatch({ type: setVisibility.type, payload: Visibility.Minimized });
+      } else if (direction === ScrollDirection.Up && visibility !== Visibility.Default) {
+        dispatch({ type: setVisibility.type, payload: Visibility.Default });
+      }
+    },
+    [dispatch, visibility],
+  );
+  useScrollDirection(onDirectionChange);
 
   const toggleVisibility = () => {
     const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
@@ -110,6 +124,7 @@ const AudioPlayer = () => {
         [styles.containerHidden]: isHidden,
         [styles.containerDefault]: visibility === Visibility.Default,
         [styles.containerExpanded]: visibility === Visibility.Expanded,
+        [styles.containerMinimized]: visibility === Visibility.Minimized,
       })}
     >
       <div
@@ -140,7 +155,7 @@ const AudioPlayer = () => {
         />
         <div
           className={classNames(styles.actionButtonsContainer, {
-            [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
+            [styles.actionButtonsContainerHidden]: isExpanded,
           })}
         >
           <div className={styles.mobileCloseButtonContainer}>
@@ -170,7 +185,7 @@ const AudioPlayer = () => {
           />
         </div>
         <div className={styles.desktopRightActions}>
-          {visibility === Visibility.Expanded && (
+          {isExpanded && (
             <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
               <UnfoldLessIcon />
             </Button>
@@ -183,7 +198,7 @@ const AudioPlayer = () => {
           <CloseButton />
         </div>
       </div>
-      {visibility === Visibility.Expanded && <PlaybackControls />}
+      {isExpanded && <PlaybackControls />}
     </div>
   );
 };

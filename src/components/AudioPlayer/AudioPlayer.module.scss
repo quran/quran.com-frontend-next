@@ -39,6 +39,13 @@
   height: constants.$audio-player-expanded-height;
 }
 
+.containerMinimized {
+  height: var(--spacing-mega);
+  @include breakpoints.tablet {
+    height: constants.$audio-player-expanded-height;
+  }
+}
+
 .innerContainer {
   @include utility.center-horizontally;
   display: flex;
