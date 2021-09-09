@@ -119,16 +119,17 @@ const QuranReader = ({
 
   const onCopy = () => {
     const selection = window.getSelection();
-    const textToCopy = Array.from(document.querySelectorAll(`[data-word-position]`))
+    const QuranWordsToCopy = Array.from(document.querySelectorAll(`[data-word-position]`))
       .filter((node) => selection.containsNode(node, true))
       .map((node) => {
         const wordLocation = node.getAttribute('data-word-position');
         return getUthmaniText(wordLocation, verses);
       });
 
-    console.log(textToCopy);
-
-    clipboardCopy(textToCopy.join(' '));
+    // only copy when there are quran words to copy
+    if (QuranWordsToCopy.length > 0) {
+      clipboardCopy(QuranWordsToCopy.join(' '));
+    }
   };
 
   return (
