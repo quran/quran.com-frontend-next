@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import * as RadixPopover from '@radix-ui/react-popover';
+import classNames from 'classnames';
 import styles from './Popover.module.scss';
 
 export enum ContentSide {
@@ -23,7 +24,9 @@ interface Props {
   isModal?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
+  tip?: boolean;
   avoidCollisions?: boolean;
+  contentClassName?: string;
 }
 
 const Popover: React.FC<Props> = ({
@@ -31,10 +34,12 @@ const Popover: React.FC<Props> = ({
   trigger,
   onOpenChange,
   open,
+  contentClassName,
   isModal = false,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
   avoidCollisions = true,
+  tip = false,
 }) => (
   <div className={styles.container}>
     <RadixPopover.Root
@@ -50,9 +55,10 @@ const Popover: React.FC<Props> = ({
         side={contentSide}
         align={contentAlign}
         avoidCollisions={avoidCollisions}
-        className={styles.content}
+        className={classNames({ [contentClassName]: contentClassName }, styles.content)}
       >
         {children}
+        {tip && <RadixPopover.Arrow />}
       </RadixPopover.Content>
     </RadixPopover.Root>
   </div>

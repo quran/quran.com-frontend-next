@@ -18,3 +18,14 @@
 .tooltipText {
   padding: var(--spacing-micro);
 }
+
+.popoverContent {
+  padding: var(--spacing-xxsmall) !important;
+  color: var(--color-text-inverse) !important;
+  background-color: var(--color-background-inverse) !important;
+  text-align: center;
+  box-shadow: none !important;
+  > span {
+    fill: var(--color-background-inverse) !important;
+  }
+}
