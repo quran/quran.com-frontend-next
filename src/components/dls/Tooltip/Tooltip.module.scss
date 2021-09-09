@@ -9,7 +9,7 @@
   background-color: var(--color-background-inverse);
   text-align: center;
   max-width: calc(8 * var(--spacing-mega));
-  > span {
+  & > span {
     fill: var(--color-background-inverse);
   }
 }
@@ -17,7 +17,7 @@
 .noInverse {
   color: var(--color-text-default);
   background-color: var(--color-background-default);
-  > span {
+  & > span {
     fill: var(--color-background-default);
   }
 }
@@ -26,25 +26,25 @@
 }
 .secondary {
   background-color: var(--color-secondary-medium);
-  > span {
+  & > span {
     fill: var(--color-secondary-medium);
   }
 }
 .success {
   background-color: var(--color-success-medium);
-  > span {
+  & > span {
     fill: var(--color-success-medium);
   }
 }
 .warning {
   background-color: var(--color-warning-medium);
-  > span {
+  & > span {
     fill: var(--color-warning-medium);
   }
 }
 .error {
   background-color: var(--color-error-medium);
-  > span {
+  & > span {
     fill: var(--color-error-medium);
   }
 }

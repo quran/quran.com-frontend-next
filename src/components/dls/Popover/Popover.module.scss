@@ -11,7 +11,7 @@
   padding: var(--spacing-xsmall);
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
-  > span {
+  & > span {
     fill: var(--color-background-default);
   }
 }
@@ -22,7 +22,7 @@
   background-color: var(--color-background-inverse);
   text-align: center;
   box-shadow: none;
-  > span {
+  & > span {
     fill: var(--color-background-inverse);
   }
 }
