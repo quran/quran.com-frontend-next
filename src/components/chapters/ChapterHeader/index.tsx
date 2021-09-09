@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
@@ -27,9 +27,10 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, nameSimple, translatedName 
         <div className={styles.infoContainer}>
           <Button
             size={ButtonSize.Small}
-            type={ButtonType.Secondary}
+            variant={ButtonVariant.Ghost}
             prefix={<InfoIcon />}
             href={getChapterInfoUrl(chapterId)}
+            noSidePadding
           >
             Surah Info
           </Button>

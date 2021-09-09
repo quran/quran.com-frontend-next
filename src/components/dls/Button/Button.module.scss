@@ -31,6 +31,14 @@
   }
 }
 
+.base.ghost > span > svg,
+.base.secondary > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
+
 // type
 .primary {
   background-color: var(--color-primary-medium);
@@ -64,6 +72,12 @@
     fill: var(--color-secondary-medium);
   }
 }
+.secondary.ghost > span > svg {
+  fill: var(--color-success-secondary);
+  & > path {
+    fill: var(--color-success-secondary);
+  }
+}
 
 .success {
   background-color: var(--color-success-medium);
@@ -81,6 +95,12 @@
   }
 }
 .success:hover > span > svg {
+  fill: var(--color-success-medium);
+  & > path {
+    fill: var(--color-success-medium);
+  }
+}
+.success.ghost > span > svg {
   fill: var(--color-success-medium);
   & > path {
     fill: var(--color-success-medium);
@@ -108,6 +128,12 @@
     fill: var(--color-warning-medium);
   }
 }
+.warning.ghost > span > svg {
+  fill: var(--color-warning-medium);
+  & > path {
+    fill: var(--color-warning-medium);
+  }
+}
 
 .error {
   background-color: var(--color-error-medium);
@@ -125,6 +151,12 @@
   }
 }
 .error:hover > span > svg {
+  fill: var(--color-error-medium);
+  & > path {
+    fill: var(--color-error-medium);
+  }
+}
+.error.ghost > span > svg {
   fill: var(--color-error-medium);
   & > path {
     fill: var(--color-error-medium);
@@ -256,10 +288,7 @@
   }
 }
 
-.base.ghost > span > svg,
-.base.secondary > span > svg {
-  fill: var(--color-text-default);
-  & > path {
-    fill: var(--color-text-default);
-  }
+.noSidePadding {
+  padding-left: 0;
+  padding-right: 0;
 }

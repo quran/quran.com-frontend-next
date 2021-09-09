@@ -11,12 +11,14 @@
   display: flex;
   flex-direction: column;
   text-align: left;
+  justify-content: space-between;
 }
 
 .right {
   display: flex;
   flex-direction: column;
   text-align: right;
+  justify-content: space-between;
 }
 
 .QOutlineWrapper {
@@ -54,7 +56,7 @@
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  padding-top: var(--spacing-xxsmall);
+  padding-top: var(--spacing-xsmall);
   margin-bottom: var(--spacing-xxsmall);
 }
 .nameSimple {
