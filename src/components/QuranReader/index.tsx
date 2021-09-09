@@ -117,8 +117,8 @@ const QuranReader = ({
     }
   };
 
-  const onCopy = () => {
-    const selection = window.getSelection();
+  const onCopy = (event) => {
+    const selection = document.getSelection();
     const QuranWordsToCopy = Array.from(document.querySelectorAll(`[data-word-position]`))
       .filter((node) => selection.containsNode(node, true))
       .map((node) => {
@@ -128,6 +128,7 @@ const QuranReader = ({
 
     // only copy when there are quran words to copy
     if (QuranWordsToCopy.length > 0) {
+      event.preventDefault();
       clipboardCopy(QuranWordsToCopy.join(' '));
     }
   };
