@@ -120,7 +120,7 @@ const QuranReader = ({
   const onCopy = () => {
     const selection = window.getSelection();
     const QuranWordsToCopy = Array.from(document.querySelectorAll(`[data-word-position]`))
-      .filter((node) => selection.containsNode(node, true))
+      .filter((node) => selection.containsNode(node, false))
       .map((node) => {
         const wordLocation = node.getAttribute('data-word-position');
         return getUthmaniText(wordLocation, verses);
