@@ -26,7 +26,7 @@ interface Props {
   contentAlign?: ContentAlign;
   tip?: boolean;
   avoidCollisions?: boolean;
-  contentClassName?: string;
+  useTooltipStyles?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -34,12 +34,12 @@ const Popover: React.FC<Props> = ({
   trigger,
   onOpenChange,
   open,
-  contentClassName,
   isModal = false,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
   avoidCollisions = true,
   tip = false,
+  useTooltipStyles = false,
 }) => (
   <div className={styles.container}>
     <RadixPopover.Root
@@ -55,7 +55,7 @@ const Popover: React.FC<Props> = ({
         side={contentSide}
         align={contentAlign}
         avoidCollisions={avoidCollisions}
-        className={classNames({ [contentClassName]: contentClassName }, styles.content)}
+        className={classNames(styles.content, { [styles.tooltipContent]: useTooltipStyles })}
       >
         {children}
         {tip && <RadixPopover.Arrow />}

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import MobilePopover from 'src/components/dls/Popover/MobilePopover';
+import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -61,11 +61,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
       <Wrapper
         shouldWrap={showTooltip}
         wrapper={(children) => (
-          <MobilePopover
-            contentClassName={styles.popoverContent}
-            content={tooltipContent}
-            onOpenChange={setIsTooltipOpened}
-          >
+          <MobilePopover content={tooltipContent} onOpenChange={setIsTooltipOpened}>
             {children}
           </MobilePopover>
         )}

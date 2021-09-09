@@ -15,3 +15,14 @@
     fill: var(--color-background-default);
   }
 }
+
+.tooltipContent {
+  padding: var(--spacing-xxsmall);
+  color: var(--color-text-inverse);
+  background-color: var(--color-background-inverse);
+  text-align: center;
+  box-shadow: none;
+  > span {
+    fill: var(--color-background-inverse);
+  }
+}

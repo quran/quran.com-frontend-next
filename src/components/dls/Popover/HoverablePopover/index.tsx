@@ -7,15 +7,21 @@ interface Props {
   children: ReactNode | ReactNode[];
   contentSide?: ContentSide;
   tip?: boolean;
-  contentClassName?: string;
   tooltipDelay?: number;
   onOpenChange?: (open: boolean) => void;
 }
 
-const MobilePopover: React.FC<Props> = ({
+/**
+ * A component that combines the functionality of a Popover and a Tooltip together.
+ * This is needed to handle the case when we want to show a Tooltip on mobile but
+ * since Tooltip is only hoverable and there is no hovering on mobile devices,
+ * we provide the same functionality by using a Popover which handles clicking.
+ *
+ * @param {Props} props
+ */
+const HoverablePopover: React.FC<Props> = ({
   content,
   children,
-  contentClassName,
   onOpenChange,
   contentSide = ContentSide.TOP,
   tip = true,
@@ -23,7 +29,7 @@ const MobilePopover: React.FC<Props> = ({
 }) => (
   <Popover
     contentSide={contentSide}
-    contentClassName={contentClassName}
+    useTooltipStyles
     {...(onOpenChange && { onOpenChange })}
     trigger={
       <Tooltip
@@ -42,4 +48,4 @@ const MobilePopover: React.FC<Props> = ({
   </Popover>
 );
 
-export default MobilePopover;
+export default HoverablePopover;
