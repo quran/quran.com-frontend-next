@@ -2,7 +2,7 @@ import React from 'react';
 import Popover, { ContentAlign, ContentSide } from '.';
 
 export default {
-  title: 'dls/Popover',
+  title: 'dls/Popover/Default',
   component: Popover,
   argTypes: {
     children: {
@@ -26,6 +26,25 @@ export default {
       table: {
         category: 'Optional',
       },
+    },
+    tip: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'Whether to show the tip arrow or not.',
+    },
+    useTooltipStyles: {
+      defaultValue: false,
+      options: [true, false],
+      control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+      description:
+        'Whether to set the styling of the content of the popover the same as the styling of the Tooltip or not.',
     },
     contentAlign: {
       defaultValue: ContentAlign.CENTER,
