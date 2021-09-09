@@ -49,5 +49,8 @@
   --shadow-hover: 0 30px 60px rgba(255, 255, 255, 0.12);
   --shadow-sticky: 0 12px 10px -10px rgba(255, 255, 255, 0.12);
 
+  // lighten color, can be used to lighten the color of a background-color
+  // example use case: `Button` component, with `ghost` variant
+  // check `background-image` properties
   --lighten-color: rgba(0, 0, 0, 0.75);
 }
