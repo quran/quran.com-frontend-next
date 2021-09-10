@@ -20,7 +20,7 @@ const PlayChapterAudioButton = (props: Props) => {
         size={ButtonSize.Small}
         prefix={<PlayIcon />}
         onClick={play}
-        noSidePadding
+        hasSidePadding={false}
       >
         Play Audio
       </Button>
