@@ -11,11 +11,13 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
-  selectVisibility,
   setVisibility,
   Visibility,
   selectReciter,
-} from '../../redux/slices/AudioPlayer/state';
+  setIsMinimized,
+  selectVisibility,
+  selectIsMinimized,
+} from 'src/redux/slices/AudioPlayer/state';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
@@ -35,22 +37,24 @@ const AudioPlayer = () => {
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
-  const visibility = useSelector(selectVisibility);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
   const reciterName = useSelector(selectReciter).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
-  const isExpanded = visibility === Visibility.Expanded || visibility === Visibility.Minimized;
-
+  const visibility = useSelector(selectVisibility);
+  const isMinimized = useSelector(selectIsMinimized);
+  const isExpanded = visibility === Visibility.Expanded;
+  const isDefault = visibility === Visibility.Default;
+  const isDefaultAndMinimized = isMinimized && isDefault;
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
-      if (direction === ScrollDirection.Down && visibility === Visibility.Expanded) {
-        dispatch({ type: setVisibility.type, payload: Visibility.Minimized });
-      } else if (direction === ScrollDirection.Up && visibility !== Visibility.Default) {
-        dispatch({ type: setVisibility.type, payload: Visibility.Default });
+      if (direction === ScrollDirection.Down && !isMinimized) {
+        dispatch({ type: setIsMinimized.type, payload: true });
+      } else if (direction === ScrollDirection.Up && isMinimized) {
+        dispatch({ type: setIsMinimized.type, payload: false });
       }
     },
-    [dispatch, visibility],
+    [dispatch, isMinimized],
   );
   useScrollDirection(onDirectionChange);
 
@@ -124,12 +128,12 @@ const AudioPlayer = () => {
         [styles.containerHidden]: isHidden,
         [styles.containerDefault]: visibility === Visibility.Default,
         [styles.containerExpanded]: visibility === Visibility.Expanded,
-        [styles.containerMinimized]: visibility === Visibility.Minimized,
+        [styles.containerMinimized]: isMinimized,
       })}
     >
       <div
         className={classNames(styles.innerContainer, {
-          [styles.innerContainerExpanded]: visibility === Visibility.Expanded,
+          [styles.innerContainerExpanded]: isExpanded,
         })}
       >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
@@ -156,6 +160,7 @@ const AudioPlayer = () => {
         <div
           className={classNames(styles.actionButtonsContainer, {
             [styles.actionButtonsContainerHidden]: isExpanded,
+            [styles.defaultAndMinimized]: isDefaultAndMinimized,
           })}
         >
           <div className={styles.mobileCloseButtonContainer}>
@@ -177,6 +182,7 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
+            isMinimized={isMinimized}
             visibility={visibility}
             currentTime={currentTime}
             audioDuration={durationInSeconds}

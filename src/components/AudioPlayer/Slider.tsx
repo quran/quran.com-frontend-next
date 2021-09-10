@@ -13,6 +13,7 @@ type SliderProps = {
   setTime: (number) => void;
   visibility: Visibility;
   reciterName: string;
+  isMinimized: boolean;
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
@@ -29,11 +30,19 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
  */
-const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }: SliderProps) => {
+const Slider = ({
+  currentTime,
+  audioDuration,
+  setTime,
+  visibility,
+  reciterName,
+  isMinimized,
+}: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
-  const isExpanded = visibility === Visibility.Expanded || visibility === Visibility.Minimized;
+  const isExpanded = visibility === Visibility.Expanded || isMinimized;
+  const isDefaultAndMinimized = isMinimized && visibility === Visibility.Default;
 
   const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;
@@ -56,7 +65,8 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }
     >
       <span
         className={classNames(styles.currentTime, {
-          [styles.currentTimeExpanded]: isExpanded,
+          [styles.currentTimeExpanded]: visibility === Visibility.Expanded,
+          [styles.defaultAndMinimized]: isDefaultAndMinimized,
         })}
       >
         {secondsFormatter(currentTime)}

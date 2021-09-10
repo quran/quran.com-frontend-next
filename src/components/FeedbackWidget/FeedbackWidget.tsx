@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   AudioFileStatus,
   selectAudioFileStatus,
+  selectIsMinimized,
   selectVisibility,
   Visibility,
 } from 'src/redux/slices/AudioPlayer/state';
@@ -14,14 +15,15 @@ import styles from './FeedbackWidget.module.scss';
 const FeedbackWidget = () => {
   const audioPlayerVisibility = useSelector(selectVisibility);
   const audioFileStatus = useSelector(selectAudioFileStatus);
+  const isMinimized = useSelector(selectIsMinimized);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
-
   const isAudioPlayerOpen = !isHidden && audioPlayerVisibility === Visibility.Default;
   const isAudioPlayerExpanded = !isHidden && audioPlayerVisibility === Visibility.Expanded;
 
   return (
     <div
       className={classNames(styles.container, {
+        [styles.isMinimized]: isMinimized,
         [styles.audioPlayerOpen]: isAudioPlayerOpen,
         [styles.audioPlayerExpanded]: isAudioPlayerExpanded,
       })}

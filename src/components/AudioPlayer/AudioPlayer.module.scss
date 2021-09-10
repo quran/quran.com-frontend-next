@@ -39,10 +39,16 @@
   height: constants.$audio-player-expanded-height;
 }
 
-.containerMinimized {
-  height: var(--spacing-mega);
+.containerMinimized.containerExpanded {
+  height: constants.$audio-player-minimized-height;
   @include breakpoints.tablet {
     height: constants.$audio-player-expanded-height;
+  }
+}
+.containerMinimized.containerDefault {
+  height: constants.$audio-player-minimized-height;
+  @include breakpoints.tablet {
+    height: constants.$audio-player-default-height;
   }
 }
 
@@ -70,6 +76,13 @@
 
   @include breakpoints.tablet {
     flex-direction: inherit;
+  }
+
+  &.defaultAndMinimized {
+    display: none;
+    @include breakpoints.tablet {
+      display: flex;
+    }
   }
 }
 .actionButtonsContainerHidden {

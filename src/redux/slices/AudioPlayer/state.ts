@@ -13,7 +13,6 @@ export enum AudioFileStatus {
 }
 
 export enum Visibility {
-  Minimized = 'Minimized',
   Default = 'Default',
   Expanded = 'Expanded',
 }
@@ -25,6 +24,7 @@ export type AudioState = {
   audioFile: AudioFile;
   audioFileStatus: AudioFileStatus;
   visibility: Visibility;
+  isMinimized: boolean;
 };
 
 const initialState: AudioState = {
@@ -34,16 +34,18 @@ const initialState: AudioState = {
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
   visibility: Visibility.Default,
+  isMinimized: false,
 };
 
-export const selectAudioPlayerState = (state) => state.audioPlayerState;
+export const selectAudioPlayerState = (state) => state.audioPlayerState as AudioState;
 export const selectReciter = (state) => state.audioPlayerState.reciter as Reciter;
 export const selectIsUsingDefaultReciter = (state) =>
   state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile as AudioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
-export const selectVisibility = (state) => state.audioPlayerState.visibility;
+export const selectVisibility = (state) => state.audioPlayerState.visibility as Visibility;
+export const selectIsMinimized = (state) => state.audioPlayerState.isMinimized as boolean;
 
 /**
  * get the audio file for the current reciter
@@ -113,6 +115,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       isPlaying: action.payload,
     }),
+    setIsMinimized: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isMinimized: action.payload,
+    }),
     setReciter: (state, action: PayloadAction<Reciter>) => ({
       ...state,
       reciter: action.payload,
@@ -157,6 +163,7 @@ export const {
   setAudioStatus,
   setVisibility,
   resetAudioFile,
+  setIsMinimized,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

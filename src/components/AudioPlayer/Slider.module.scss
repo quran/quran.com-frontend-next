@@ -91,6 +91,13 @@ $split-height: 2px;
   transition: var(--transition-regular);
 }
 
+.defaultAndMinimized {
+  display: inline-block;
+  @include breakpoints.tablet {
+    display: none;
+  }
+}
+
 .currentTimeExpanded {
   display: inline-block;
 }
