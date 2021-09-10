@@ -1,5 +1,5 @@
 import range from 'lodash/range';
-import * as chaptersData from '../../data/chapters.json';
+import * as chaptersData from '../../public/data/chapters/en.json';
 import * as sampleVerse from './sample-verse.json';
 
 const COLON_SPLITTER = ':';

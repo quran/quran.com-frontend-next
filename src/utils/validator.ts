@@ -1,4 +1,4 @@
-import * as chaptersData from '../../data/chapters.json';
+import * as chaptersData from '../../public/data/chapters/en.json';
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
