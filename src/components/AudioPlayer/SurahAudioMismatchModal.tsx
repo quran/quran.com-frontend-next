@@ -9,7 +9,7 @@ type Props = {
   onStartOver: () => void;
 };
 
-const AlertModal = ({ open, currentAudioChapter, currentReadingChapter }: Props) => (
+const SurahAudioMismatchModal = ({ open, currentAudioChapter, currentReadingChapter }: Props) => (
   <Modal open={open}>
     <Modal.Body>
       <Modal.Header>
@@ -29,4 +29,4 @@ const AlertModal = ({ open, currentAudioChapter, currentReadingChapter }: Props)
   </Modal>
 );
 
-export default AlertModal;
+export default SurahAudioMismatchModal;
