@@ -11,6 +11,8 @@ import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
 
+export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
+
 type QuranWordProps = {
   word: Word;
   font?: QuranFont;
@@ -47,9 +49,16 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
     word.charTypeName === CharType.Word && allowWordByWord && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = highlight || isTooltipOpened;
+
+  // creating wordLocation instead of using `word.location` because
+  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
+  const worldLocation = `${word.verseKey}:${word.position}`;
+
   return (
     <div
-      data-word-position={`${word.verseKey}:${word.position}`}
+      {...{
+        [DATA_ATTRIBUTE_WORD_LOCATION]: worldLocation,
+      }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,

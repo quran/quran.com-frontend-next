@@ -18,13 +18,15 @@ import clipboardCopy from 'clipboard-copy';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectReadingPreference } from '../../redux/slices/QuranReader/readingPreferences';
+import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import { getWordDataByLocation } from 'src/utils/verse';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
+import { DATA_ATTRIBUTE_WORD_LOCATION } from '../dls/QuranWord/QuranWord';
 // import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
@@ -119,17 +121,22 @@ const QuranReader = ({
 
   const onCopy = (event) => {
     const selection = document.getSelection();
-    const QuranWordsToCopy = Array.from(document.querySelectorAll(`[data-word-position]`))
+    const quranWordsToCopy = Array.from(
+      document.querySelectorAll(`[${DATA_ATTRIBUTE_WORD_LOCATION}]`),
+    )
       .filter((node) => selection.containsNode(node, true))
       .map((node) => {
-        const wordLocation = node.getAttribute('data-word-position');
+        const wordLocation = node.getAttribute(DATA_ATTRIBUTE_WORD_LOCATION);
+
+        // get the uthmani text, because sometime the user is using font madaniV1 and madaniV2
+        // and that those font are using unicode, so can't be copied properly
         return getUthmaniText(wordLocation, verses);
       });
 
     // only copy when there are quran words to copy
-    if (QuranWordsToCopy.length > 0) {
+    if (quranWordsToCopy.length > 0) {
       event.preventDefault();
-      clipboardCopy(QuranWordsToCopy.join(' '));
+      clipboardCopy(quranWordsToCopy.join(' '));
     }
   };
 
@@ -220,7 +227,7 @@ const getRequestKey = ({
       perPage: 1,
       translations: null,
       tafsirs: selectedTafsirs.join(','),
-      wordFields: `location, verse_key, location, text_uthmani, ${quranReaderStyles.quranFont}`,
+      wordFields: `location, verse_key, text_uthmani, ${quranReaderStyles.quranFont}`,
       tafsirFields: 'resource_name',
     });
   }
@@ -237,7 +244,7 @@ const getRequestKey = ({
 export default QuranReader;
 
 const getUthmaniText = (wordLocation: string, verses: Verse[]) => {
-  const [chapter, verse, location] = wordLocation.split(':');
+  const [chapter, verse, location] = getWordDataByLocation(wordLocation);
 
   // find by verseKey
   const selectedVerse = verses.find((v) => v.verseKey === `${chapter}:${verse}`);
