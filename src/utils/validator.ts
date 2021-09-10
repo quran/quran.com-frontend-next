@@ -1,4 +1,4 @@
-import * as chaptersData from '../../data/chapters.json';
+import { getChapterDataById } from './chapter';
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
@@ -35,7 +35,7 @@ export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
   if (
     Number.isNaN(verseIdNumber) ||
     verseIdNumber < 1 ||
-    verseIdNumber > chaptersData[chapterId].versesCount
+    verseIdNumber > getChapterDataById(chapterId).versesCount
   ) {
     return false;
   }

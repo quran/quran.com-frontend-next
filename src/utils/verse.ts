@@ -1,6 +1,6 @@
 import range from 'lodash/range';
-import * as chaptersData from '../../data/chapters.json';
 import * as sampleVerse from './sample-verse.json';
+import { getChaptersData } from './chapter';
 
 const COLON_SPLITTER = ':';
 
@@ -10,8 +10,11 @@ const COLON_SPLITTER = ':';
  * @param {string} chapterId
  * @returns {string[]}
  */
-export const generateChapterVersesKeys = (chapterId: string): string[] =>
-  range(chaptersData[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
+export const generateChapterVersesKeys = (chapterId: string): string[] => {
+  const data = getChaptersData();
+
+  return range(data[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
+};
 
 /**
  * Get the chapter number from its key. A key is the combination between the verse's chapter
