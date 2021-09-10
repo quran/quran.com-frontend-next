@@ -11,7 +11,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
 import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafField } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
@@ -183,6 +183,7 @@ const getRequestKey = ({
       page,
       reciter,
       translations: selectedTranslations.join(', '),
+      ...getMushafField(quranReaderStyles.quranFont),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
   }
@@ -191,6 +192,7 @@ const getRequestKey = ({
       page,
       reciter,
       translations: selectedTranslations.join(', '),
+      ...getMushafField(quranReaderStyles.quranFont),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
   }
@@ -210,6 +212,7 @@ const getRequestKey = ({
     reciter,
     page,
     translations: selectedTranslations.join(', '),
+    ...getMushafField(quranReaderStyles.quranFont),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
   });

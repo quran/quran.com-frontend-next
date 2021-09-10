@@ -8,7 +8,7 @@ import { VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import NextSeoHead from 'src/components/NextSeoHead';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafField } from 'src/utils/api';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const juzVersesResponse = await getJuzVerses(juzId, {
+    ...getMushafField(),
     ...getDefaultWordFields(),
   });
   // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.

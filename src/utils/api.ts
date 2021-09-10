@@ -1,4 +1,4 @@
-import { QuranFont } from 'src/components/QuranReader/types';
+import { QuranFont, QuranFontToMushaf } from 'src/components/QuranReader/types';
 import { stringify } from 'qs';
 
 export const ITEMS_PER_PAGE = 10;
@@ -36,4 +36,8 @@ export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string } => ({
   wordFields: `verse_key, verse_id, page_number, location, ${quranFont}`,
+});
+
+export const getMushafField = (quranfont: QuranFont = QuranFont.QPCHafs): { mushaf: number } => ({
+  mushaf: QuranFontToMushaf[quranfont],
 });
