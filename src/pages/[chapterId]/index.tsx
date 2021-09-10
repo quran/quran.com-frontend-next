@@ -45,7 +45,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const [chapterResponse, versesResponse] = await Promise.all([
     getChapter(chapterId, locale),
     getChapterVerses(chapterId, {
-      surahDetail: true,
       ...getDefaultWordFields(),
     }),
   ]);

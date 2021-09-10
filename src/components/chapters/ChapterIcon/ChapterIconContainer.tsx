@@ -12,13 +12,13 @@ export enum ChapterIconsSize {
 interface Props {
   chapterId: string;
   size?: ChapterIconsSize;
-  withSurahPrefix?: boolean;
+  hasSurahPrefix?: boolean;
 }
 
 const IconContainer: React.FC<Props> = ({
   chapterId,
   size = ChapterIconsSize.Medium,
-  withSurahPrefix = true,
+  hasSurahPrefix = true,
 }) => (
   <span
     className={classNames(styles.iconContainer, {
@@ -27,7 +27,7 @@ const IconContainer: React.FC<Props> = ({
     })}
   >
     <ChapterIcon id={chapterId} />
-    {withSurahPrefix && <ChapterIcon />}
+    {hasSurahPrefix && <ChapterIcon />}
   </span>
 );
 

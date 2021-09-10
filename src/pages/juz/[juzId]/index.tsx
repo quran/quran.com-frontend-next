@@ -48,7 +48,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const juzVersesResponse = await getJuzVerses(juzId, {
-    surahDetail: true,
     ...getDefaultWordFields(),
   });
   // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.

@@ -7,18 +7,15 @@ import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPr
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import Chapter from 'types/Chapter';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
 type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
-  chapters: Record<string, Chapter>;
 };
 
-const VerseText = ({ words, isReadingMode = false, chapters }: VerseTextProps) => {
-  console.log(chapters);
+const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const { lineNumber, pageNumber, location } = words[0];
@@ -33,17 +30,11 @@ const VerseText = ({ words, isReadingMode = false, chapters }: VerseTextProps) =
     isReadingMode &&
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
-  const { chapterId } = firstWordData;
+  const { chapterId, isFirstWordOfSurah } = firstWordData;
 
   return (
     <>
-      {isReadingMode && firstWordData.isFirstWordOfSurah && (
-        <ChapterHeader
-          translatedName={chapters[chapterId].translatedName.name}
-          nameSimple={chapters[chapterId].nameSimple}
-          chapterId={chapterId}
-        />
-      )}
+      {isReadingMode && isFirstWordOfSurah && <ChapterHeader chapterId={chapterId} />}
       <div
         className={classNames(
           styles.verseTextContainer,

@@ -4,7 +4,6 @@ import VerseActions from 'src/components/Verse/VerseActions';
 import classNames from 'classnames';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseLink from 'src/components/Verse/VerseLink';
-import Chapter from 'types/Chapter';
 import VerseText from 'src/components/Verse/VerseText';
 import Separator from 'src/components/dls/Separator/Separator';
 import Verse from '../../../../types/Verse';
@@ -16,20 +15,13 @@ import TranslationText from './TranslationText';
 type TranslationViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
-  chapters: Record<string, Chapter>;
 };
 
-const TranslationView = ({ verses, quranReaderStyles, chapters }: TranslationViewProps) => (
+const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => (
   <div className={styles.container}>
     {verses.map((verse) => (
       <div key={verse.id}>
-        {verse.verseNumber === 1 && (
-          <ChapterHeader
-            chapterId={String(verse.chapterId)}
-            nameSimple={chapters[verse.chapterId.toString()].nameSimple}
-            translatedName={chapters[verse.chapterId.toString()].translatedName.name}
-          />
-        )}
+        {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
         <div className={classNames(styles.cellContainer, { [styles.highlightedContainer]: false })}>
           <div className={styles.actionContainer}>
             <div className={styles.actionContainerLeft}>
@@ -49,7 +41,7 @@ const TranslationView = ({ verses, quranReaderStyles, chapters }: TranslationVie
 
           <div className={styles.contentContainer}>
             <div className={styles.verseContainer}>
-              <VerseText words={verse.words} chapters={chapters} />
+              <VerseText words={verse.words} />
             </div>
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id} className={styles.verseContainer}>
