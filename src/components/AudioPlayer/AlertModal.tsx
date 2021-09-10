@@ -17,10 +17,11 @@ const AlertModal = ({ open, currentChapterName, nextChapterName }: Props) => (
           {currentChapterName}
         </Modal.Title>
       </Modal.Header>
+      <p>Click on Start Over if you&rsquo;d like to play {nextChapterName} instead</p>
     </Modal.Body>
     <Modal.Footer>
-      <Modal.Action>Play {nextChapterName}</Modal.Action>
-      <Modal.Action>Continue {currentChapterName}</Modal.Action>
+      <Modal.Action>Start Over</Modal.Action>
+      <Modal.Action>Continue </Modal.Action>
     </Modal.Footer>
   </Modal>
 );
