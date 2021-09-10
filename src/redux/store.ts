@@ -7,6 +7,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
+  createMigrate,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
@@ -21,11 +22,15 @@ import navbar from './slices/navbar';
 import audioPlayerState from './slices/AudioPlayer/state';
 import theme from './slices/theme';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
+import migrations from './migrations';
 
 const persistConfig = {
   key: 'root',
-  version: 1,
+  version: 2,
   storage,
+  migrate: createMigrate(migrations, {
+    debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
+  }),
   whitelist: [
     'quranReaderStyles',
     'readingPreferences',
