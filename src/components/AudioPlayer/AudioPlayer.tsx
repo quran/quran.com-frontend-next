@@ -11,12 +11,11 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
-  setVisibility,
-  Visibility,
   selectReciter,
-  setIsMinimized,
-  selectVisibility,
-  selectIsMinimized,
+  setIsMobileMinimizedForScrolling,
+  setIsExpanded,
+  selectIsExpanded,
+  selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
@@ -41,26 +40,22 @@ const AudioPlayer = () => {
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
   const reciterName = useSelector(selectReciter).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
-  const visibility = useSelector(selectVisibility);
-  const isMinimized = useSelector(selectIsMinimized);
-  const isExpanded = visibility === Visibility.Expanded;
-  const isDefault = visibility === Visibility.Default;
-  const isDefaultAndMinimized = isMinimized && isDefault;
+  const isExpanded = useSelector(selectIsExpanded);
+  const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
-      if (direction === ScrollDirection.Down && !isMinimized) {
-        dispatch({ type: setIsMinimized.type, payload: true });
-      } else if (direction === ScrollDirection.Up && isMinimized) {
-        dispatch({ type: setIsMinimized.type, payload: false });
+      if (direction === ScrollDirection.Down && !isMobileMinimizedForScrolling) {
+        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: true });
+      } else if (direction === ScrollDirection.Up && isMobileMinimizedForScrolling) {
+        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: false });
       }
     },
-    [dispatch, isMinimized],
+    [dispatch, isMobileMinimizedForScrolling],
   );
   useScrollDirection(onDirectionChange);
 
-  const toggleVisibility = () => {
-    const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
-    dispatch({ type: setVisibility.type, payload: nextValue });
+  const toggleIsExpanded = () => {
+    dispatch({ type: setIsExpanded.type, payload: !isExpanded });
   };
 
   const onAudioPlay = useCallback(() => {
@@ -122,13 +117,13 @@ const AudioPlayer = () => {
     <div
       role="button"
       tabIndex={0}
-      onClick={toggleVisibility}
-      onKeyPress={toggleVisibility}
+      onClick={toggleIsExpanded}
+      onKeyPress={toggleIsExpanded}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
-        [styles.containerDefault]: visibility === Visibility.Default,
-        [styles.containerExpanded]: visibility === Visibility.Expanded,
-        [styles.containerMinimized]: isMinimized,
+        [styles.containerDefault]: !isExpanded,
+        [styles.containerExpanded]: isExpanded,
+        [styles.containerMinimized]: isMobileMinimizedForScrolling,
       })}
     >
       <div
@@ -160,7 +155,7 @@ const AudioPlayer = () => {
         <div
           className={classNames(styles.actionButtonsContainer, {
             [styles.actionButtonsContainerHidden]: isExpanded,
-            [styles.defaultAndMinimized]: isDefaultAndMinimized,
+            [styles.defaultAndMinimized]: isMobileMinimizedForScrolling && !isExpanded,
           })}
         >
           <div className={styles.mobileCloseButtonContainer}>
@@ -182,8 +177,8 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
-            isMinimized={isMinimized}
-            visibility={visibility}
+            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+            isExpanded={isExpanded}
             currentTime={currentTime}
             audioDuration={durationInSeconds}
             setTime={triggerSetCurrentTime}
@@ -191,12 +186,11 @@ const AudioPlayer = () => {
           />
         </div>
         <div className={styles.desktopRightActions}>
-          {isExpanded && (
+          {isExpanded ? (
             <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
               <UnfoldLessIcon />
             </Button>
-          )}
-          {visibility === Visibility.Default && (
+          ) : (
             <Button tooltip="Expand" variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
               <UnfoldMoreIcon />
             </Button>

@@ -11,16 +11,16 @@
     display: inherit;
     right: calc(var(--spacing-mega) + var(--spacing-medium));
   }
-  &.isMinimized {
+  &.isMobileMinimizedForScrolling {
     margin-bottom: constants.$audio-player-minimized-height;
     bottom: var(--spacing-medium);
   }
-  &.isMinimized.audioPlayerOpen {
+  &.isMobileMinimizedForScrolling.audioPlayerOpen {
     @include breakpoints.tablet {
       margin-bottom: constants.$audio-player-default-height;
     }
   }
-  &.isMinimized.audioPlayerExpanded {
+  &.isMobileMinimizedForScrolling.audioPlayerExpanded {
     @include breakpoints.tablet {
       margin-bottom: constants.$audio-player-expanded-height;
     }

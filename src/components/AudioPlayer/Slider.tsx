@@ -2,7 +2,6 @@ import React from 'react';
 import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { Visibility } from 'src/redux/slices/AudioPlayer/state';
 import styles from './Slider.module.scss';
 
 const NUMBER_OF_SPLITS = 100;
@@ -11,9 +10,9 @@ type SliderProps = {
   currentTime: number;
   audioDuration: number;
   setTime: (number) => void;
-  visibility: Visibility;
+  isExpanded: boolean;
   reciterName: string;
-  isMinimized: boolean;
+  isMobileMinimizedForScrolling: boolean;
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
@@ -34,15 +33,13 @@ const Slider = ({
   currentTime,
   audioDuration,
   setTime,
-  visibility,
+  isExpanded,
   reciterName,
-  isMinimized,
+  isMobileMinimizedForScrolling,
 }: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
-  const isExpanded = visibility === Visibility.Expanded || isMinimized;
-  const isDefaultAndMinimized = isMinimized && visibility === Visibility.Default;
 
   const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;
@@ -61,12 +58,13 @@ const Slider = ({
     <div
       className={classNames(styles.container, {
         [styles.containerExpanded]: isExpanded,
+        [styles.containerMinimized]: isMobileMinimizedForScrolling,
       })}
     >
       <span
         className={classNames(styles.currentTime, {
-          [styles.currentTimeExpanded]: visibility === Visibility.Expanded,
-          [styles.defaultAndMinimized]: isDefaultAndMinimized,
+          [styles.currentTimeExpanded]: isExpanded,
+          [styles.defaultAndMinimized]: isMobileMinimizedForScrolling && !isExpanded,
         })}
       >
         {secondsFormatter(currentTime)}
@@ -74,6 +72,7 @@ const Slider = ({
       <div
         className={classNames(styles.splitsContainer, {
           [styles.splitsContainerExpanded]: isExpanded,
+          [styles.splitsContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         {splits}
@@ -81,6 +80,7 @@ const Slider = ({
       <div
         className={classNames(styles.reciterNameContainer, {
           [styles.reciterNameContainerExpanded]: isExpanded,
+          [styles.reciterNameContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         {reciterName} <br />

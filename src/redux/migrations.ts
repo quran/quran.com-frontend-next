@@ -1,9 +1,11 @@
 export default {
-  2: (state) => ({
+  3: (state) => ({
     ...state,
     audioPlayerState: {
       ...state.audioPlayerState,
-      isMinimized: false,
+      visibility: undefined,
+      isExpanded: false,
+      isMobileMinimizedForScrolling: false,
     },
   }),
 };

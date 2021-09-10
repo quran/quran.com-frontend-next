@@ -26,7 +26,7 @@ import migrations from './migrations';
 
 const persistConfig = {
   key: 'root',
-  version: 2,
+  version: 3,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
