@@ -1,15 +1,15 @@
-import AlertModal from './AlertModal';
+import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 
 export default {
   title: 'AudioPlayer/Alert',
-  component: AlertModal,
+  component: SurahAudioMismatchModal,
 };
 
 export const Preview = () => (
-  <AlertModal
+  <SurahAudioMismatchModal
     open
-    currentChapterName="Al Baqarah"
-    nextChapterName="Ali Imran"
+    currentAudioChapter="Al-Baqarah"
+    currentReadingChapter="Ali 'Imran"
     onContinue={() => {
       // logic to continue Al Baqarah
     }}

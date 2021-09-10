@@ -1,23 +1,26 @@
 import Modal from '../dls/Modal/Modal';
+import styles from './SurahAudioMismatchModal.module.scss';
 
 type Props = {
   open: boolean;
-  currentChapterName: string;
+  currentAudioChapter: string;
   onContinue: () => void;
-  nextChapterName: string;
+  currentReadingChapter: string;
   onStartOver: () => void;
 };
 
-const AlertModal = ({ open, currentChapterName, nextChapterName }: Props) => (
+const AlertModal = ({ open, currentAudioChapter, currentReadingChapter }: Props) => (
   <Modal open={open}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>
           You are currently playing <br />
-          {currentChapterName}
+          {currentAudioChapter}
         </Modal.Title>
       </Modal.Header>
-      <p>Click on Start Over if you&rsquo;d like to play {nextChapterName} instead</p>
+      <p className={styles.bodyText}>
+        Click on Start Over if you&rsquo;d like to play {currentReadingChapter} instead
+      </p>
     </Modal.Body>
     <Modal.Footer>
       <Modal.Action>Start Over</Modal.Action>
