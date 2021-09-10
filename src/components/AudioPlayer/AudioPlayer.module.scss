@@ -77,7 +77,7 @@
   }
 }
 
-.rightSection {
+.desktopRightActions {
   display: none;
   @include breakpoints.tablet {
     display: flex;
@@ -92,5 +92,13 @@
   width: 100%;
   @include breakpoints.tablet {
     width: 70%;
+  }
+}
+
+.mobileCloseButtonContainer {
+  display: flex;
+  align-items: center;
+  @include breakpoints.tablet {
+    display: none;
   }
 }

@@ -133,6 +133,11 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       visibility: action.payload,
     }),
+    resetAudioFile: (state) => ({
+      ...state,
+      audioFile: initialState.audioFile,
+      audioFileStatus: initialState.audioFileStatus,
+    }),
   },
   // reset reciter to DEFAULT_RECITER
   // WHEN `reset` action is dispatched
@@ -151,6 +156,7 @@ export const {
   setAudioFile,
   setAudioStatus,
   setVisibility,
+  resetAudioFile,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

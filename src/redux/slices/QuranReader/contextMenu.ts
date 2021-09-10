@@ -19,6 +19,6 @@ export const contextMenuSlice = createSlice({
 
 export const { setIsExpanded } = contextMenuSlice.actions;
 
-export const selectContextMenu = (state) => state.contextMenu;
+export const selectContextMenu = (state) => state.contextMenu as ContextMenu;
 
 export default contextMenuSlice.reducer;

@@ -1,12 +1,12 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useMemo } from 'react';
 import Word, { CharType } from 'types/Word';
 import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
 import Wrapper from 'src/components/Wrapper/Wrapper';
+import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -47,6 +47,10 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
     word.charTypeName === CharType.Word && allowWordByWord && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = highlight || isTooltipOpened;
+  const tooltipContent = useMemo(
+    () => getTooltipText(showTooltipFor, word),
+    [showTooltipFor, word],
+  );
   return (
     <div
       className={classNames(styles.container, {
@@ -57,14 +61,9 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
       <Wrapper
         shouldWrap={showTooltip}
         wrapper={(children) => (
-          <Tooltip
-            text={getTooltipText(showTooltipFor, word)}
-            contentSide={ContentSide.TOP}
-            onOpenChange={setIsTooltipOpened}
-            delay={0}
-          >
+          <MobilePopover content={tooltipContent} onOpenChange={setIsTooltipOpened}>
             {children}
-          </Tooltip>
+          </MobilePopover>
         )}
       >
         {wordText}
