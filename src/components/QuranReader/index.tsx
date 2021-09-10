@@ -119,6 +119,16 @@ const QuranReader = ({
     }
   };
 
+  /**
+   * select all DOM node that contains data attribute `data-word-location`
+   * then see if that node is within `selection`
+   * then get the uthmani_text for those nodes
+   * then copy the uthmani_text to clipboard
+   *
+   * We need to use `uthmani_text` instead of the rendered text
+   * because sometime user is using code_v1 and code_v2 font,
+   * which uses unicode, so it can't be copied properly by user
+   */
   const onCopy = (event) => {
     const selection = document.getSelection();
     const quranWordsToCopy = Array.from(
@@ -127,14 +137,12 @@ const QuranReader = ({
       .filter((node) => selection.containsNode(node, true))
       .map((node) => {
         const wordLocation = node.getAttribute(DATA_ATTRIBUTE_WORD_LOCATION);
-
-        // get the uthmani text, because sometime the user is using font madaniV1 and madaniV2
-        // and that those font are using unicode, so can't be copied properly
         return getUthmaniText(wordLocation, verses);
       });
 
-    // only copy when there are quran words to copy
     if (quranWordsToCopy.length > 0) {
+      // only do prevent default, call clipboardCopy when there are quran words to copy
+      // otherwise, user can't copy the translation text
       event.preventDefault();
       clipboardCopy(quranWordsToCopy.join(' '));
     }
