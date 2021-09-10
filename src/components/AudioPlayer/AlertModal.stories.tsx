@@ -11,7 +11,7 @@ export const Preview = () => (
     currentChapterName="Al Baqarah"
     nextChapterName="Ali Imran"
     onContinue={() => {
-      // logic to continue Al Baqrah
+      // logic to continue Al Baqarah
     }}
     onStartOver={() => {
       // logic to play Ali Imran
