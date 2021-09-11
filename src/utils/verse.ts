@@ -86,6 +86,28 @@ export const getFirstWordOfSurah = (
 export const getSampleVerse = () => sampleVerse;
 
 /**
+ * Format chapter id, add prefix '0' if it's a single digit number
+ *
+ * @param {string} id chapter id
+ * @returns {string} formattedChapterId
+ *
+ * @example
+ * // returns '01'
+ * formatChapterId('1')
+ * @example
+ * // returns '102'
+ * formatChapterId('102')
+ */
+export const formatChapterId = (id: string) => `0${id}`.slice(-2);
+
+/**
+ * Given the chapterId, return the url for that chapter info
+ * @param {string} chapterId
+ * @returns {string} chapterUrl
+ */
+export const getChapterInfoUrl = (chapterId: string) => `/${chapterId}/info`;
+
+/**
  * Given the verseKey, return the verseUrl
  *
  * @param {string} verseKey, example: "1:5"
