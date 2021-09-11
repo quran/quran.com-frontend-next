@@ -1,6 +1,6 @@
 import range from 'lodash/range';
-import * as chaptersData from '../../data/chapters.json';
 import * as sampleVerse from './sample-verse.json';
+import { getChaptersData } from './chapter';
 
 const COLON_SPLITTER = ':';
 
@@ -10,8 +10,11 @@ const COLON_SPLITTER = ':';
  * @param {string} chapterId
  * @returns {string[]}
  */
-export const generateChapterVersesKeys = (chapterId: string): string[] =>
-  range(chaptersData[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
+export const generateChapterVersesKeys = (chapterId: string): string[] => {
+  const data = getChaptersData();
+
+  return range(data[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
+};
 
 /**
  * Get the chapter number from its key. A key is the combination between the verse's chapter
@@ -91,7 +94,7 @@ export const getSampleVerse = () => sampleVerse;
  * Reference: https://gomakethings.com/sorting-an-array-by-multiple-criteria-with-vanilla-javascript/
  */
 export const sortWordLocation = (locations: string[]) =>
-  positions.sort((a, b) => {
+  locations.sort((a, b) => {
     const [aChapter, aVerse, aWord] = a.split(':');
     const [bChapter, bVerse, bWord] = b.split(':');
 
@@ -106,6 +109,29 @@ export const sortWordLocation = (locations: string[]) =>
 
     return 0;
   });
+
+/**
+ * Format chapter id, add prefix '0' if it's a single digit number
+ *
+ * @param {string} id chapter id
+ * @returns {string} formattedChapterId
+ *
+ * @example
+ * // returns '01'
+ * formatChapterId('1')
+ * @example
+ * // returns '102'
+ * formatChapterId('102')
+ */
+export const formatChapterId = (id: string) => `0${id}`.slice(-2);
+
+/**
+ * Given the chapterId, return the url for that chapter info
+ * @param {string} chapterId
+ * @returns {string} chapterUrl
+ */
+export const getChapterInfoUrl = (chapterId: string) => `/${chapterId}/info`;
+
 /**
  * Given the verseKey, return the verseUrl
  *

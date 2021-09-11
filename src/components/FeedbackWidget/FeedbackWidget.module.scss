@@ -11,6 +11,20 @@
     display: inherit;
     right: calc(var(--spacing-mega) + var(--spacing-medium));
   }
+  &.isMobileMinimizedForScrolling {
+    margin-bottom: constants.$audio-player-minimized-height;
+    bottom: var(--spacing-medium);
+  }
+  &.isMobileMinimizedForScrolling.audioPlayerOpen {
+    @include breakpoints.tablet {
+      margin-bottom: constants.$audio-player-default-height;
+    }
+  }
+  &.isMobileMinimizedForScrolling.audioPlayerExpanded {
+    @include breakpoints.tablet {
+      margin-bottom: constants.$audio-player-expanded-height;
+    }
+  }
 }
 
 .audioPlayerOpen {

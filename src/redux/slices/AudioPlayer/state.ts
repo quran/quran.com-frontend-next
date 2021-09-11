@@ -12,19 +12,14 @@ export enum AudioFileStatus {
   NoFile = 'NoFile',
 }
 
-export enum Visibility {
-  Minimized = 'Minimized',
-  Default = 'Default',
-  Expanded = 'Expanded',
-}
-
 export type AudioState = {
   isPlaying: boolean;
   currentTime: number;
   reciter: Reciter;
   audioFile: AudioFile;
   audioFileStatus: AudioFileStatus;
-  visibility: Visibility;
+  isExpanded: boolean;
+  isMobileMinimizedForScrolling: boolean;
 };
 
 const initialState: AudioState = {
@@ -33,17 +28,20 @@ const initialState: AudioState = {
   audioFile: null,
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
-  visibility: Visibility.Default,
+  isExpanded: false,
+  isMobileMinimizedForScrolling: false,
 };
 
-export const selectAudioPlayerState = (state) => state.audioPlayerState;
+export const selectAudioPlayerState = (state) => state.audioPlayerState as AudioState;
 export const selectReciter = (state) => state.audioPlayerState.reciter as Reciter;
 export const selectIsUsingDefaultReciter = (state) =>
   state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
 export const selectAudioFile = (state) => state.audioPlayerState.audioFile as AudioFile;
 export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
 export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
-export const selectVisibility = (state) => state.audioPlayerState.visibility;
+export const selectIsExpanded = (state) => state.audioPlayerState.isExpanded as boolean;
+export const selectIsMobileMinimizedForScrolling = (state) =>
+  state.audioPlayerState.isMobileMinimizedForScrolling as boolean;
 
 /**
  * get the audio file for the current reciter
@@ -113,6 +111,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       isPlaying: action.payload,
     }),
+    setIsMobileMinimizedForScrolling: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isMobileMinimizedForScrolling: action.payload,
+    }),
     setReciter: (state, action: PayloadAction<Reciter>) => ({
       ...state,
       reciter: action.payload,
@@ -129,9 +131,9 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       audioFileStatus: action.payload,
     }),
-    setVisibility: (state, action: PayloadAction<Visibility>) => ({
+    setIsExpanded: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      visibility: action.payload,
+      isExpanded: action.payload,
     }),
     resetAudioFile: (state) => ({
       ...state,
@@ -155,8 +157,9 @@ export const {
   setReciter,
   setAudioFile,
   setAudioStatus,
-  setVisibility,
+  setIsExpanded,
   resetAudioFile,
+  setIsMobileMinimizedForScrolling,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

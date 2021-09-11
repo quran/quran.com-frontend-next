@@ -2,9 +2,10 @@ import { QuranFont } from 'src/components/QuranReader/types';
 import { stringify } from 'qs';
 
 export const ITEMS_PER_PAGE = 10;
+const DEFAULT_MUSHAF = 4; // King Fahad Quran Complex 15 Lines Hafs text.
 
 const STAGING_API_HOST = 'https://staging.quran.com/api/qdc';
-const PRODUCTION_API_HOST = 'https://staging.quran.com/api/qdc'; // placeholder until our production API is deployed.
+const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc';
 
 // env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
 export const API_HOST =
@@ -34,6 +35,7 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
  */
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
-): { wordFields: string } => ({
+): { wordFields: string; mushaf: number } => ({
+  mushaf: DEFAULT_MUSHAF, // TODO: In a follow, the Mushaf value will be retrieved from redux.
   wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}`,
 });

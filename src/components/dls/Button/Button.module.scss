@@ -1,3 +1,9 @@
+// TODO:
+// - generate css with SCSS
+// - use better pattern
+//    - https://cube.fyi/composition.html#examples (looks like vercel is using similar pattern like this)
+//    - https://cube.fyi/exception.html#why-data-attributes
+
 .base {
   border: none;
   display: flex;
@@ -10,6 +16,28 @@
 }
 .withIcon {
   justify-content: center;
+}
+
+// base svg color
+.base > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.base:hover > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
+
+.base.ghost > span > svg,
+.base.secondary > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
 }
 
 // type
@@ -33,6 +61,25 @@
   }
 }
 
+.secondary > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.secondary:hover > span > svg {
+  fill: var(--color-secondary-medium);
+  & > path {
+    fill: var(--color-secondary-medium);
+  }
+}
+.secondary.ghost > span > svg {
+  fill: var(--color-success-secondary);
+  & > path {
+    fill: var(--color-success-secondary);
+  }
+}
+
 .success {
   background-color: var(--color-success-medium);
   color: var(--color-text-inverse);
@@ -40,6 +87,24 @@
   &:hover {
     color: var(--color-success-medium);
     background-color: var(--color-text-inverse);
+  }
+}
+.success > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.success:hover > span > svg {
+  fill: var(--color-success-medium);
+  & > path {
+    fill: var(--color-success-medium);
+  }
+}
+.success.ghost > span > svg {
+  fill: var(--color-success-medium);
+  & > path {
+    fill: var(--color-success-medium);
   }
 }
 
@@ -52,6 +117,24 @@
     background-color: var(--color-text-inverse);
   }
 }
+.warning > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.warning:hover > span > svg {
+  fill: var(--color-warning-medium);
+  & > path {
+    fill: var(--color-warning-medium);
+  }
+}
+.warning.ghost > span > svg {
+  fill: var(--color-warning-medium);
+  & > path {
+    fill: var(--color-warning-medium);
+  }
+}
 
 .error {
   background-color: var(--color-error-medium);
@@ -60,6 +143,24 @@
   &:hover {
     color: var(--color-error-medium);
     background-color: var(--color-text-inverse);
+  }
+}
+.error > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.error:hover > span > svg {
+  fill: var(--color-error-medium);
+  & > path {
+    fill: var(--color-error-medium);
+  }
+}
+.error.ghost > span > svg {
+  fill: var(--color-error-medium);
+  & > path {
+    fill: var(--color-error-medium);
   }
 }
 
@@ -105,8 +206,8 @@
   &:hover {
     background-image: linear-gradient(
       to right,
-      var(--color-background-alternative),
-      var(--color-background-alternative)
+      var(--color-background-lighten),
+      var(--color-background-lighten)
     );
   }
 }
@@ -188,9 +289,7 @@
   }
 }
 
-.base > span > svg {
-  fill: var(--color-text-default);
-  & > path {
-    fill: var(--color-text-default);
-  }
+.noSidePadding {
+  padding-left: 0;
+  padding-right: 0;
 }

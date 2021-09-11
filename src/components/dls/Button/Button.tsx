@@ -43,6 +43,7 @@ export type ButtonProps = {
   onClick?: MouseEventHandler;
   tooltip?: string;
   className?: string;
+  hasSidePadding?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -59,6 +60,7 @@ const Button: React.FC<ButtonProps> = ({
   variant,
   tooltip,
   className,
+  hasSidePadding = true,
 }) => {
   const classes = classNames(styles.base, className, {
     [styles.withText]: typeof children === 'string',
@@ -84,6 +86,7 @@ const Button: React.FC<ButtonProps> = ({
     [styles.ghost]: variant === ButtonVariant.Ghost,
 
     [styles.disabled]: disabled || loading,
+    [styles.noSidePadding]: !hasSidePadding,
   });
 
   // when loading, replace the prefix icon with loading icon
@@ -95,9 +98,9 @@ const Button: React.FC<ButtonProps> = ({
     return (
       <Link href={href}>
         <a className={classes}>
-          {prefixFinal}
+          {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
           <span className={styles.content}>{children}</span>
-          {suffix}
+          {suffix && <span className={styles.suffix}>{suffix}</span>}
         </a>
       </Link>
     );

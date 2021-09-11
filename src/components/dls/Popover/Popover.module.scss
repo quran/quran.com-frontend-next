@@ -4,10 +4,6 @@
 
 .trigger {
   all: unset;
-  &:focus {
-    box-shadow: 0 0 0 2px var(--color-secondary-medium);
-    border-radius: var(--border-radius-circle);
-  }
 }
 
 .content {
@@ -15,7 +11,18 @@
   padding: var(--spacing-xsmall);
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
-  &:focus {
-    box-shadow: 0 0 0 2px var(--color-secondary-medium);
+  & > span {
+    fill: var(--color-background-default);
+  }
+}
+
+.tooltipContent {
+  padding: var(--spacing-xxsmall);
+  color: var(--color-text-inverse);
+  background-color: var(--color-background-inverse);
+  text-align: center;
+  box-shadow: none;
+  & > span {
+    fill: var(--color-background-inverse);
   }
 }

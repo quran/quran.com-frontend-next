@@ -1,12 +1,12 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useMemo } from 'react';
 import Word, { CharType } from 'types/Word';
 import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
 import Wrapper from 'src/components/Wrapper/Wrapper';
+import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -54,6 +54,11 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
   const worldLocation = `${word.verseKey}:${word.position}`;
 
+  const tooltipContent = useMemo(
+    () => getTooltipText(showTooltipFor, word),
+    [showTooltipFor, word],
+  );
+
   return (
     <div
       {...{
@@ -67,14 +72,9 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
       <Wrapper
         shouldWrap={showTooltip}
         wrapper={(children) => (
-          <Tooltip
-            text={getTooltipText(showTooltipFor, word)}
-            contentSide={ContentSide.TOP}
-            onOpenChange={setIsTooltipOpened}
-            delay={0}
-          >
+          <MobilePopover content={tooltipContent} onOpenChange={setIsTooltipOpened}>
             {children}
-          </Tooltip>
+          </MobilePopover>
         )}
       >
         {wordText}
