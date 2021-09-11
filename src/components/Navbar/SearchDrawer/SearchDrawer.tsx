@@ -15,7 +15,7 @@ import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import { selectTranslations } from 'src/redux/slices/QuranReader/translations';
-import { addRecentSearchQuery } from 'src/redux/slices/Search/search';
+import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import styles from './SearchDrawer.module.scss';
 import PreInput from './PreInput';
 import NoResults from './NoResults';
@@ -67,7 +67,7 @@ const SearchDrawer: React.FC = () => {
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
-      dispatch({ type: addRecentSearchQuery.type, payload: debouncedSearchQuery });
+      dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,
