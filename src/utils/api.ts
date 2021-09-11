@@ -5,7 +5,7 @@ export const ITEMS_PER_PAGE = 10;
 const DEFAULT_MUSHAF = 4; // King Fahad Quran Complex 15 Lines Hafs text.
 
 const STAGING_API_HOST = 'https://staging.quran.com/api/qdc';
-const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc'; // placeholder until our production API is deployed.
+const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc';
 // env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
 export const API_HOST =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
@@ -35,20 +35,6 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string; mushaf: number } => ({
-  mushaf: getMushafTypeForFont(quranFont),
+  mushaf: DEFAULT_MUSHAF, // TODO: In a follow, the Mushaf value will be retrieved from redux.
   wordFields: `verse_key, verse_id, page_number, location, ${quranFont}`,
 });
-
-const getMushafTypeForFont = (font: string) => {
-  if (font === QuranFont.MadaniV1) {
-    return 2;
-  }
-  if (font === QuranFont.MadaniV2) {
-    return 1;
-  }
-  if (font === QuranFont.IndoPak) {
-    return 3;
-  }
-
-  return DEFAULT_MUSHAF;
-};
