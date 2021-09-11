@@ -3,7 +3,7 @@ import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import AdvancedSearchLink from '../AdvancedSearchLink';
 import styles from './PreInput.module.scss';
-import RecentSearchQueries from '../RecentSearchQueries';
+import SearchHistory from '../SearchHistory';
 import Header from './Header';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
@@ -17,7 +17,6 @@ const SEARCH_FOR_KEYWORDS = ['Juz 1', 'Page 1', 'Surah Yasin', '36', '2:255'];
 const PreInput: React.FC<Props> = ({ onSearchKeywordClicked }) => (
   <div className={styles.container}>
     <div className={styles.mainBodyContainer}>
-      <RecentSearchQueries onSearchKeywordClicked={onSearchKeywordClicked} />
       <Header text="Popular searches" />
       <div className={styles.popularSearchesContainer}>
         {Object.keys(POPULAR_SEARCH_QUERIES).map((searchQuery) => {
@@ -34,6 +33,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked }) => (
           );
         })}
       </div>
+      <SearchHistory onSearchKeywordClicked={onSearchKeywordClicked} />
       <Header text="Try searching for" />
       {SEARCH_FOR_KEYWORDS.map((keyword) => (
         <SearchQuerySuggestion

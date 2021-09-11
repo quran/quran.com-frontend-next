@@ -11,7 +11,7 @@ export default {
   4: (state) => ({
     ...state,
     search: {
-      recentSearchQueries: [],
+      searchHistory: [],
     },
   }),
 };
