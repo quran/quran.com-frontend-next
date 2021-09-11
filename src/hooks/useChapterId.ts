@@ -2,12 +2,11 @@
 /* eslint-disable global-require */
 import { useRouter } from 'next/router';
 /**
- * Given a url path such as /chapter/1, return the chapter id
+ * Given a url path such as `/chapter/1`, return the chapter id
  * This will also handle case where chapterId is not specified in the url path
- * For example: /juz/1, /pages/323. We will get the data for those url path from json files
+ * For example: `/juz/1`, `/pages/323`. We will get the data for those url path from json files
  *
- * @param {string} urlPath
- * @returns {string[]} chapterIds
+ * @returns {string[]} chapterIds, example ['1', '2']
  */
 const useChapterIdByUrlPath = (): string[] => {
   const router = useRouter();
