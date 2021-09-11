@@ -30,11 +30,11 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
     isReadingMode &&
     (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
+  const { chapterId, isFirstWordOfSurah } = firstWordData;
+
   return (
     <>
-      {isReadingMode && firstWordData.isFirstWordOfSurah && (
-        <ChapterHeader chapterId={firstWordData.chapterId} />
-      )}
+      {isReadingMode && isFirstWordOfSurah && <ChapterHeader chapterId={chapterId} />}
       <div
         className={classNames(
           styles.verseTextContainer,

@@ -1,17 +1,73 @@
 .container {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
   padding: var(--spacing-xxsmall) 0;
   margin: var(--spacing-xxsmall) 0;
+  position: relative;
+  direction: ltr;
 }
 
-.item {
-  margin-bottom: var(--spacing-large);
-  color: var(--color-text-default);
-  opacity: var(--opacity-85);
-}
-
-.actionsContainer {
+.left {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-between;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  justify-content: space-between;
+}
+
+.QOutlineWrapper {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: var(--spacing-medium);
+
+  > svg {
+    height: 100%;
+  }
+}
+
+.chapterId {
+  text-align: right;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+  margin-bottom: var(--spacing-xxsmall);
+}
+
+.bismillahContainer {
+  display: flex;
   justify-content: center;
+  margin-top: var(--spacing-mega);
+}
+.translatedName {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+  margin-bottom: var(--spacing-xxsmall);
+}
+.arabicSurahNameContainer {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-xsmall);
+  margin-bottom: var(--spacing-xxsmall);
+}
+.nameSimple {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  font-size: var(--font-size-large);
+  margin-bottom: var(--spacing-xxsmall);
+}
+.actionContainer {
+  position: relative;
+  z-index: var(--z-index-default);
+}
+.infoContainer {
 }
