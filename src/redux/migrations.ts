@@ -8,4 +8,10 @@ export default {
       isMobileMinimizedForScrolling: false,
     },
   }),
+  4: (state) => ({
+    ...state,
+    search: {
+      searchHistory: [],
+    },
+  }),
 };

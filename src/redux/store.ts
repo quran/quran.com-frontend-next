@@ -17,6 +17,7 @@ import notes from './slices/QuranReader/notes';
 import translations from './slices/QuranReader/translations';
 import tafsirs from './slices/QuranReader/tafsirs';
 import contextMenu from './slices/QuranReader/contextMenu';
+import search from './slices/Search/search';
 import bookmarks from './slices/QuranReader/bookmarks';
 import navbar from './slices/navbar';
 import audioPlayerState from './slices/AudioPlayer/state';
@@ -26,7 +27,7 @@ import migrations from './migrations';
 
 const persistConfig = {
   key: 'root',
-  version: 3,
+  version: 4,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -38,6 +39,7 @@ const persistConfig = {
     'theme',
     'tafsirs',
     'bookmarks',
+    'search',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -52,6 +54,7 @@ const rootReducer = combineReducers({
   theme,
   tafsirs,
   bookmarks,
+  search,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

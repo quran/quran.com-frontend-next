@@ -1,8 +1,6 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
 
-$internal-container-height: 85vh;
-
 .container {
   background: var(--color-background-default);
   position: fixed;
@@ -107,6 +105,5 @@ $internal-container-height: 85vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: $internal-container-height;
   text-align: center;
 }

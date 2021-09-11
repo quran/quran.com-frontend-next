@@ -1,12 +1,13 @@
+$internal-container-height: 80vh;
+
 .container {
   margin: var(--spacing-large);
-  height: 100%;
+  min-height: $internal-container-height;
 }
 
 .mainBody {
   display: flex;
   flex-direction: column;
-  height: 90%;
   justify-content: center;
 }
 

@@ -3,6 +3,9 @@ import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import AdvancedSearchLink from '../AdvancedSearchLink';
 import styles from './PreInput.module.scss';
+import SearchHistory from '../SearchHistory';
+import Header from './Header';
+import SearchQuerySuggestion from './SearchQuerySuggestion';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;
@@ -14,7 +17,7 @@ const SEARCH_FOR_KEYWORDS = ['Juz 1', 'Page 1', 'Surah Yasin', '36', '2:255'];
 const PreInput: React.FC<Props> = ({ onSearchKeywordClicked }) => (
   <div className={styles.container}>
     <div className={styles.mainBodyContainer}>
-      <p className={styles.header}>Popular searches</p>
+      <Header text="Popular searches" />
       <div className={styles.popularSearchesContainer}>
         {Object.keys(POPULAR_SEARCH_QUERIES).map((searchQuery) => {
           const url = getSurahNavigationUrl(POPULAR_SEARCH_QUERIES[searchQuery]);
@@ -30,16 +33,14 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked }) => (
           );
         })}
       </div>
-      <p className={styles.header}>Try searching for</p>
+      <SearchHistory onSearchKeywordClicked={onSearchKeywordClicked} />
+      <Header text="Try searching for" />
       {SEARCH_FOR_KEYWORDS.map((keyword) => (
-        <button
-          type="button"
+        <SearchQuerySuggestion
+          searchQuery={keyword}
           key={keyword}
-          className={styles.keywordButton}
-          onClick={() => onSearchKeywordClicked(keyword)}
-        >
-          {keyword}
-        </button>
+          onSearchKeywordClicked={onSearchKeywordClicked}
+        />
       ))}
     </div>
     <AdvancedSearchLink />

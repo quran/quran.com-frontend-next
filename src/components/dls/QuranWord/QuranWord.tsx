@@ -48,8 +48,8 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = highlight || isTooltipOpened;
   const tooltipContent = useMemo(
-    () => getTooltipText(showTooltipFor, word),
-    [showTooltipFor, word],
+    () => (allowWordByWord ? getTooltipText(showTooltipFor, word) : null),
+    [allowWordByWord, showTooltipFor, word],
   );
   return (
     <div
