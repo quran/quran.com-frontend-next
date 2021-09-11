@@ -206,8 +206,8 @@
   &:hover {
     background-image: linear-gradient(
       to right,
-      var(--lighten-color),
-      var(--lighten-color)
+      var(--color-background-lighten),
+      var(--color-background-lighten)
     );
   }
 }

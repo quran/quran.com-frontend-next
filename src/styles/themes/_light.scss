@@ -36,6 +36,8 @@
   --color-background-alternative-deep: #999;
   --color-background-inverse: #000;
   --color-background-backdrop: rgba(0, 0, 0, 0.25);
+  --color-background-lighten: hsla(0, 0%, 100%, 0.8);
+  // lighten the `background-color` by using it in `background-image`. check Button's ghost variant for example
 
   --color-borders-hairline: rgb(235, 238, 240);
 
@@ -48,9 +50,4 @@
   --shadow-jumbo: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
-
-  // lighten color, can be used to lighten the color of a background-color
-  // example use case: `Button` component, with `ghost` variant
-  // check `background-image` properties
-  --lighten-color: hsla(0, 0%, 100%, 0.8);
 }
