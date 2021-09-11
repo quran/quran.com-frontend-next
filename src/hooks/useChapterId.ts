@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
 import { useRouter } from 'next/router';
 /**
  * Given a url path such as /chapter/1, return the chapter id
@@ -7,19 +9,20 @@ import { useRouter } from 'next/router';
  * @param {string} urlPath
  * @returns {string[]} chapterIds
  */
-const useChapterIdByUrlPath = (): [string] => {
+const useChapterIdByUrlPath = (): string[] => {
   const router = useRouter();
   const { chapterId, juzId, pageId } = router.query;
 
   if (chapterId) return [chapterId as string];
 
   if (juzId) {
-    // create json for juzId -> chapters
-    return null;
+    const juzsData = require('../../public/data/juzs.json');
+    return Object.keys(juzsData[juzId as string].verseMapping);
   }
 
   if (pageId) {
-    // create json for pages -> chapters
+    const juzsData = require('../../public/data/pages.json');
+    return Object.keys(juzsData[juzId as string].verseMapping);
   }
 
   return null;
