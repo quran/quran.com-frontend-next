@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { withStopPropagation } from 'src/utils/event';
+import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
   selectAudioPlayerState,
@@ -10,11 +11,12 @@ import {
   selectAudioFileStatus,
   setAudioStatus,
   AudioFileStatus,
-  selectVisibility,
-  setVisibility,
-  Visibility,
   selectReciter,
-} from '../../redux/slices/AudioPlayer/state';
+  setIsMobileMinimizedForScrolling,
+  setIsExpanded,
+  selectIsExpanded,
+  selectIsMobileMinimizedForScrolling,
+} from 'src/redux/slices/AudioPlayer/state';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
@@ -34,15 +36,26 @@ const AudioPlayer = () => {
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
-  const visibility = useSelector(selectVisibility);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
   const reciterName = useSelector(selectReciter).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
+  const isExpanded = useSelector(selectIsExpanded);
+  const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
+  const onDirectionChange = useCallback(
+    (direction: ScrollDirection) => {
+      if (direction === ScrollDirection.Down && !isMobileMinimizedForScrolling) {
+        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: true });
+      } else if (direction === ScrollDirection.Up && isMobileMinimizedForScrolling) {
+        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: false });
+      }
+    },
+    [dispatch, isMobileMinimizedForScrolling],
+  );
+  useScrollDirection(onDirectionChange);
 
-  const toggleVisibility = () => {
-    const nextValue = visibility === Visibility.Default ? Visibility.Expanded : Visibility.Default;
-    dispatch({ type: setVisibility.type, payload: nextValue });
+  const toggleIsExpanded = () => {
+    dispatch({ type: setIsExpanded.type, payload: !isExpanded });
   };
 
   const onAudioPlay = useCallback(() => {
@@ -104,17 +117,18 @@ const AudioPlayer = () => {
     <div
       role="button"
       tabIndex={0}
-      onClick={toggleVisibility}
-      onKeyPress={toggleVisibility}
+      onClick={toggleIsExpanded}
+      onKeyPress={toggleIsExpanded}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
-        [styles.containerDefault]: visibility === Visibility.Default,
-        [styles.containerExpanded]: visibility === Visibility.Expanded,
+        [styles.containerDefault]: !isExpanded,
+        [styles.containerExpanded]: isExpanded,
+        [styles.containerMinimized]: isMobileMinimizedForScrolling,
       })}
     >
       <div
         className={classNames(styles.innerContainer, {
-          [styles.innerContainerExpanded]: visibility === Visibility.Expanded,
+          [styles.innerContainerExpanded]: isExpanded,
         })}
       >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
@@ -140,7 +154,8 @@ const AudioPlayer = () => {
         />
         <div
           className={classNames(styles.actionButtonsContainer, {
-            [styles.actionButtonsContainerHidden]: visibility === Visibility.Expanded,
+            [styles.actionButtonsContainerHidden]: isExpanded,
+            [styles.defaultAndMinimized]: isMobileMinimizedForScrolling && !isExpanded,
           })}
         >
           <div className={styles.mobileCloseButtonContainer}>
@@ -162,7 +177,8 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
-            visibility={visibility}
+            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+            isExpanded={isExpanded}
             currentTime={currentTime}
             audioDuration={durationInSeconds}
             setTime={triggerSetCurrentTime}
@@ -170,12 +186,11 @@ const AudioPlayer = () => {
           />
         </div>
         <div className={styles.desktopRightActions}>
-          {visibility === Visibility.Expanded && (
+          {isExpanded ? (
             <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
               <UnfoldLessIcon />
             </Button>
-          )}
-          {visibility === Visibility.Default && (
+          ) : (
             <Button tooltip="Expand" variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
               <UnfoldMoreIcon />
             </Button>
@@ -183,7 +198,7 @@ const AudioPlayer = () => {
           <CloseButton />
         </div>
       </div>
-      {visibility === Visibility.Expanded && <PlaybackControls />}
+      {isExpanded && <PlaybackControls />}
     </div>
   );
 };

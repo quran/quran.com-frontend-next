@@ -11,6 +11,7 @@
   top: 0;
   height: var(--spacing-medium);
   @include breakpoints.tablet {
+    top: constants.$navbar-height;
     transition: var(--transition-regular);
     margin-right: 0;
   }

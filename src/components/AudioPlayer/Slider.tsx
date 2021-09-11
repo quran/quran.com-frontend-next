@@ -2,7 +2,6 @@ import React from 'react';
 import { secondsFormatter } from 'src/utils/datetime';
 import _ from 'lodash';
 import classNames from 'classnames';
-import { Visibility } from 'src/redux/slices/AudioPlayer/state';
 import styles from './Slider.module.scss';
 
 const NUMBER_OF_SPLITS = 100;
@@ -11,8 +10,9 @@ type SliderProps = {
   currentTime: number;
   audioDuration: number;
   setTime: (number) => void;
-  visibility: Visibility;
+  isExpanded: boolean;
   reciterName: string;
+  isMobileMinimizedForScrolling: boolean;
 };
 
 const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
@@ -29,11 +29,17 @@ const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
  */
-const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }: SliderProps) => {
+const Slider = ({
+  currentTime,
+  audioDuration,
+  setTime,
+  isExpanded,
+  reciterName,
+  isMobileMinimizedForScrolling,
+}: SliderProps) => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
-  const isExpanded = visibility === Visibility.Expanded;
 
   const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;
@@ -52,11 +58,13 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }
     <div
       className={classNames(styles.container, {
         [styles.containerExpanded]: isExpanded,
+        [styles.containerMinimized]: isMobileMinimizedForScrolling,
       })}
     >
       <span
         className={classNames(styles.currentTime, {
           [styles.currentTimeExpanded]: isExpanded,
+          [styles.defaultAndMinimized]: isMobileMinimizedForScrolling && !isExpanded,
         })}
       >
         {secondsFormatter(currentTime)}
@@ -64,6 +72,7 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }
       <div
         className={classNames(styles.splitsContainer, {
           [styles.splitsContainerExpanded]: isExpanded,
+          [styles.splitsContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         {splits}
@@ -71,6 +80,7 @@ const Slider = ({ currentTime, audioDuration, setTime, visibility, reciterName }
       <div
         className={classNames(styles.reciterNameContainer, {
           [styles.reciterNameContainerExpanded]: isExpanded,
+          [styles.reciterNameContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         {reciterName} <br />
