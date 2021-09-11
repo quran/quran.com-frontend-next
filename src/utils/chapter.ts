@@ -29,12 +29,22 @@ export const getChapterDataById = (id: string, lang = DEFAULT_LANGUAGE): Chapter
   return chapters[id];
 };
 
-export const getChapterIdsForPage = (pageId: string) => {
+/**
+ * Given a pageId, get chapter ids from a json file
+ * @param {string} pageId
+ * @returns {string[]} chapterIds
+ */
+export const getChapterIdsForPage = (pageId: string): string[] => {
   const pagesData = require('../../public/data/juzs.json');
   return Object.keys(pagesData[pageId].verseMapping);
 };
 
-export const getChapterIdsForJuz = (juzId: string) => {
+/**
+ * Given a juzId, get chapters ids from a json file
+ * @param {string} juzId
+ * @returns {string[]} chapterIds
+ */
+export const getChapterIdsForJuz = (juzId: string): string[] => {
   const juzsData = require('../../public/data/juzs.json');
   return Object.keys(juzsData[juzId].verseMapping);
 };
