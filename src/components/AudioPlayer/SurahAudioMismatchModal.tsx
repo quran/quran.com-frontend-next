@@ -19,8 +19,7 @@ const SurahAudioMismatchModal = ({ open, currentAudioChapter, currentReadingChap
         </Modal.Title>
       </Modal.Header>
       <p className={styles.bodyText}>
-        Click on `&quot;`Start Over`&quot;` if you&rsquo;d like to play {currentReadingChapter}{' '}
-        instead
+        Click on &quot;Start Over&quot; if you&rsquo;d like to play {currentReadingChapter} instead
       </p>
     </Modal.Body>
     <Modal.Footer>
