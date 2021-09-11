@@ -1,30 +1,26 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable global-require */
 import { useRouter } from 'next/router';
+import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
 /**
  * Given a url path such as `/chapter/1`, return the chapter id
  * This will also handle case where chapterId is not specified in the url path
  * For example: `/juz/1`, `/pages/323`. We will get the data for those url path from json files
  *
- * @returns {string[]} chapterIds, example ['1', '2']
+ * @returns {string[]} chapterIds
+ *
+ * example:
+ * - /juz/1 => ["1", "2"]
+ * - /page/2 => ["2"]
+ * - /chapter/1 => ["1"]
  */
 const useChapterIdByUrlPath = (): string[] => {
   const router = useRouter();
   const { chapterId, juzId, pageId } = router.query;
 
   if (chapterId) return [chapterId as string];
+  if (juzId) return getChapterIdsForJuz(juzId as string);
+  if (pageId) return getChapterIdsForPage(pageId as string);
 
-  if (juzId) {
-    const juzsData = require('../../public/data/juzs.json');
-    return Object.keys(juzsData[juzId as string].verseMapping);
-  }
-
-  if (pageId) {
-    const juzsData = require('../../public/data/pages.json');
-    return Object.keys(juzsData[juzId as string].verseMapping);
-  }
-
-  return null;
+  return [];
 };
 
 export default useChapterIdByUrlPath;

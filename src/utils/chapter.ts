@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable global-require */
 import Chapter from 'types/Chapter';
 
-/* eslint-disable global-require */
 const DEFAULT_LANGUAGE = 'en';
 
 /**
@@ -26,4 +27,14 @@ export const getChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chapter
 export const getChapterDataById = (id: string, lang = DEFAULT_LANGUAGE): Chapter => {
   const chapters = getChaptersData(lang);
   return chapters[id];
+};
+
+export const getChapterIdsForPage = (pageId: string) => {
+  const pagesData = require('../../public/data/juzs.json');
+  return Object.keys(pagesData[pageId].verseMapping);
+};
+
+export const getChapterIdsForJuz = (juzId: string) => {
+  const juzsData = require('../../public/data/juzs.json');
+  return Object.keys(juzsData[juzId].verseMapping);
 };
