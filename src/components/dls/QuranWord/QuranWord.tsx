@@ -52,7 +52,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
-  const worldLocation = `${word.verseKey}:${word.position}`;
+  const wordLocation = `${word.verseKey}:${word.position}`;
 
   const tooltipContent = useMemo(
     () => getTooltipText(showTooltipFor, word),
@@ -62,7 +62,7 @@ const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordP
   return (
     <div
       {...{
-        [DATA_ATTRIBUTE_WORD_LOCATION]: worldLocation,
+        [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
