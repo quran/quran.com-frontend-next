@@ -37,5 +37,5 @@ export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string; mushaf: number } => ({
   mushaf: DEFAULT_MUSHAF, // TODO: In a follow, the Mushaf value will be retrieved from redux.
-  wordFields: `verse_key, verse_id, page_number, location, ${quranFont}`,
+  wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}`,
 });

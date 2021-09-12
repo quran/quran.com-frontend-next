@@ -86,6 +86,31 @@ export const getFirstWordOfSurah = (
 export const getSampleVerse = () => sampleVerse;
 
 /**
+ * sort the the word location of the verses
+ *
+ * @param {string[]} locations , the location of the word, Example ['1:1:2', '1:1:1', '1:3:1]
+ * @returns {number} sortedLocations , Example ['1:1:1', '1:1:2', '1:3:1']
+ *
+ * Reference: https://gomakethings.com/sorting-an-array-by-multiple-criteria-with-vanilla-javascript/
+ */
+export const sortWordLocation = (locations: string[]) =>
+  locations.sort((a, b) => {
+    const [aChapter, aVerse, aWord] = a.split(':');
+    const [bChapter, bVerse, bWord] = b.split(':');
+
+    if (Number(aChapter) > Number(bChapter)) return 1;
+    if (Number(aChapter) < Number(bChapter)) return -1;
+
+    if (Number(aVerse) > Number(bVerse)) return 1;
+    if (Number(aVerse) < Number(bVerse)) return -1;
+
+    if (Number(aWord) > Number(bWord)) return 1;
+    if (Number(aWord) < Number(bWord)) return -1;
+
+    return 0;
+  });
+
+/**
  * Format chapter id, add prefix '0' if it's a single digit number
  *
  * @param {string} id chapter id

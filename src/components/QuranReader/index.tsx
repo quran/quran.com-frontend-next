@@ -15,14 +15,15 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
-import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
+import onCopyQuranWords from './onCopyQuranWords';
 // import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
@@ -119,6 +120,7 @@ const QuranReader = ({
     <>
       {/* <ContextMenu /> */}
       <div
+        onCopy={(event) => onCopyQuranWords(event, verses)}
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
         <div className={styles.infiniteScroll}>
@@ -201,7 +203,7 @@ const getRequestKey = ({
       perPage: 1,
       translations: null,
       tafsirs: selectedTafsirs.join(','),
-      wordFields: `location, ${quranReaderStyles.quranFont}`,
+      wordFields: `location, verse_key, text_uthmani, ${quranReaderStyles.quranFont}`,
       tafsirFields: 'resource_name',
     });
   }
