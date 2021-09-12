@@ -84,7 +84,7 @@ const ReadingExperienceSection = () => {
         />
       </Section.Row>
       <Section.Row>
-        <Section.Label>Show Tooltip For</Section.Label>
+        <Section.Label>Tooltip</Section.Label>
         <Select
           id="showToolTipFor"
           name="showToolTipFor"
