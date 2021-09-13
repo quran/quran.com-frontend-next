@@ -85,14 +85,14 @@ const PlayPauseButton = () => {
         open={isMismatchModalVisible}
         currentAudioChapter={getChapterData(currentAudioChapterId)?.nameSimple}
         currentReadingChapter={getChapterData(currentReadingChaptersId[0])?.nameSimple}
-        onContinue={withStopPropagation(() => {
+        onContinue={() => {
           triggerPlayAudio();
           setIsMismatchModalVisible(false);
-        })}
-        onStartOver={withStopPropagation(() => {
+        }}
+        onStartOver={() => {
           dispatch(loadAndPlayAudioFile(Number(currentReadingChaptersId[0])));
           setIsMismatchModalVisible(false);
-        })}
+        }}
       />
     </>
   );

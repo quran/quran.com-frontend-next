@@ -9,8 +9,16 @@ type ModalProps = {
   triggerClassName?: string;
   open?: boolean;
   onClickOutside?: () => void;
+  shouldStopPropagation?: boolean;
 };
-const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: ModalProps) => (
+const Modal = ({
+  children,
+  trigger,
+  open,
+  onClickOutside,
+  triggerClassName,
+  shouldStopPropagation = true,
+}: ModalProps) => (
   <DialogPrimitive.Root open={open}>
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger && (
@@ -21,12 +29,20 @@ const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: Mo
         {trigger}
       </DialogPrimitive.Trigger>
     )}
-    <Content onInteractOutside={onClickOutside}>{children}</Content>
+    <Content shouldStopPropagation={shouldStopPropagation} onInteractOutside={onClickOutside}>
+      {children}
+    </Content>
   </DialogPrimitive.Root>
 );
 
-const Content = ({ children, ...props }) => (
-  <DialogPrimitive.Content {...props} className={styles.content}>
+const Content = ({ children, shouldStopPropagation, ...props }) => (
+  <DialogPrimitive.Content
+    {...props}
+    className={styles.content}
+    onClick={(e) => {
+      if (shouldStopPropagation) e.stopPropagation();
+    }}
+  >
     {children}
   </DialogPrimitive.Content>
 );
