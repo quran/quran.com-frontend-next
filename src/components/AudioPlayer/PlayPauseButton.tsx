@@ -88,10 +88,10 @@ const PlayPauseButton = () => {
           triggerPlayAudio();
           setIsMismatchModalVisible(false);
         })}
-        onStartOver={() => {
+        onStartOver={withStopPropagation(() => {
           loadAndPlayAudioFile(Number(currentReadingChaptersId[0]));
           setIsMismatchModalVisible(false);
-        }}
+        })}
       />
     </>
   );
