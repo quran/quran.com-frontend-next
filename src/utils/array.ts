@@ -26,5 +26,5 @@ export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
  * @param {number[]} array2
  * @returns {boolean}
  */
-export const areArraysEquals = (array1: number[], array2: number[]): boolean =>
+export const areArraysEqual = (array1: number[], array2: number[]): boolean =>
   _.isEqual([...array1].sort(), [...array2].sort());

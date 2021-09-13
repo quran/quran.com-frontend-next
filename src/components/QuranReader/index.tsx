@@ -20,7 +20,7 @@ import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/ap
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
-import { areArraysEquals } from 'src/utils/array';
+import { areArraysEqual } from 'src/utils/array';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
@@ -57,10 +57,10 @@ const QuranReader = ({
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEquals);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEquals);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(

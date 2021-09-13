@@ -7,12 +7,12 @@ import {
   selectSelectedTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEquals, numbersToStringsArray } from 'src/utils/array';
+import { areArraysEqual, numbersToStringsArray } from 'src/utils/array';
 import styles from './TranslationsAdjustment.module.scss';
 
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEquals);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { lang } = useTranslation();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

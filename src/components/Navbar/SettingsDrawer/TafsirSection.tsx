@@ -6,7 +6,7 @@ import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
-import { areArraysEquals, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import {
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -36,7 +36,7 @@ const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
 
 const TafsirSection = () => {
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEquals);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const { lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { tafsirFontScale } = quranReaderStyles;

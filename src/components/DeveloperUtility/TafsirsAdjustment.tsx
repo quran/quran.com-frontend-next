@@ -5,12 +5,12 @@ import { getTafsirs } from 'src/api';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import TafsirInfo from 'types/TafsirInfo';
 import _ from 'lodash';
-import { areArraysEquals, numbersToStringsArray } from 'src/utils/array';
+import { areArraysEqual, numbersToStringsArray } from 'src/utils/array';
 import styles from './TafsirsAdjustment.module.scss';
 
 const TafsirsAdjustment = () => {
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEquals);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const { lang } = useTranslation();
   const [tafsirs, setTafsirs] = useState<TafsirInfo[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
