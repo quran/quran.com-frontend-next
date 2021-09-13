@@ -41,7 +41,7 @@ const translationsToComboboxItems = (translations: AvailableTranslation[]): Drop
 
 const TranslationSection = () => {
   const dispatch = useDispatch();
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const { selectedTranslations } = useSelector(selectTranslations, shallowEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { translationFontScale } = quranReaderStyles;
   const { lang } = useTranslation();

@@ -51,12 +51,15 @@ const QuranReader = ({
 }: QuranReaderProps) => {
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
-  const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
+  const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
     selectTranslations,
   ) as TranslationsSettings;
-  const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(
+    selectTafsirs,
+    shallowEqual,
+  ) as TafsirsSettings;
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(

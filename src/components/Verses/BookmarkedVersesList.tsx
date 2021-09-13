@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { Bookmarks, selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import VerseLink from '../Verse/VerseLink';
 import styles from './BookmarkedVersesList.module.scss';
 
 const BookmarkedVersesList: React.FC = () => {
-  const { bookmarkedVerses } = useSelector(selectBookmarks) as Bookmarks;
+  const { bookmarkedVerses } = useSelector(selectBookmarks, shallowEqual) as Bookmarks;
   const verseKeys = Object.keys(bookmarkedVerses);
   return (
     <>

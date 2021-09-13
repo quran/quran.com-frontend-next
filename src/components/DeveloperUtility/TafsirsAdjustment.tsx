@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useTranslation from 'next-translate/useTranslation';
 import { getTafsirs } from 'src/api';
 import {
@@ -14,7 +14,7 @@ import styles from './TafsirsAdjustment.module.scss';
 
 const TafsirsAdjustment = () => {
   const dispatch = useDispatch();
-  const { selectedTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const { selectedTafsirs } = useSelector(selectTafsirs, shallowEqual) as TafsirsSettings;
   const { lang } = useTranslation();
   const [tafsirs, setTafsirs] = useState<TafsirInfo[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

@@ -40,7 +40,7 @@ const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
 
 const TafsirSection = () => {
   const dispatch = useDispatch();
-  const { selectedTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const { selectedTafsirs } = useSelector(selectTafsirs, shallowEqual) as TafsirsSettings;
   const { lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { tafsirFontScale } = quranReaderStyles;

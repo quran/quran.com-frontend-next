@@ -12,7 +12,7 @@ interface Props {
 }
 
 const VerseActions: React.FC<Props> = ({ verse }) => (
-  // const reciter = useSelector(selectReciter);
+  // const reciter = useSelector(selectReciter, shallowEqual);
 
   <>
     <div>

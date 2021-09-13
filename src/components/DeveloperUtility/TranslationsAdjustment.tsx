@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getAvailableTranslations } from 'src/api';
 import AvailableTranslation from 'types/AvailableTranslation';
 import useTranslation from 'next-translate/useTranslation';
@@ -12,7 +12,7 @@ import styles from './TranslationsAdjustment.module.scss';
 
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const { selectedTranslations } = useSelector(selectTranslations, shallowEqual);
   const { lang } = useTranslation();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

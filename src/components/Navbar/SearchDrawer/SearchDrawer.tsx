@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, RefObject, useRef } from 'react';
 import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
@@ -25,11 +25,11 @@ import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const { selectedTranslations } = useSelector(selectTranslations, shallowEqual);
   const drawerRef = useRef(null);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const isOpen = useSelector(selectNavbar).isSearchDrawerOpen;
+  const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
   const { lang } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();

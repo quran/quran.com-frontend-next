@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import Verse from 'types/Verse';
@@ -65,7 +65,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   const { chapterId } = router.query;
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const { selectedTranslations } = useSelector(selectTranslations, shallowEqual);
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
   // the items that will be passed to the range start and end dropdown selectors. The value will be populated only once the user chooses the verses range option.

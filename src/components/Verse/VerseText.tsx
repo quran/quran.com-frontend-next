@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import Word from 'types/Word';
 import classNames from 'classnames';
 import { getFirstWordOfSurah } from 'src/utils/verse';
@@ -16,11 +16,13 @@ type VerseTextProps = {
 };
 
 const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const { lineNumber, pageNumber, location } = words[0];
-  const { showWordByWordTranslation, showWordByWordTransliteration } =
-    useSelector(selectReadingPreferences);
+  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
+    selectReadingPreferences,
+    shallowEqual,
+  );
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber),
     [pageNumber, lineNumber],

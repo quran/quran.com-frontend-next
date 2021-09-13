@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import classNames from 'classnames';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import VerseText from 'src/components/Verse/VerseText';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from 'types/Verse';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const TafsirView: React.FC<Props> = ({ verse }) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   return (
     <div className={styles.container}>
       <VerseText words={verse.words} />
