@@ -114,7 +114,7 @@ export const getToAndFromFromRange = (range: string): string[] => range.split('-
  * @param {String} range
  * @returns {Boolean}
  */
-export const isValidRange = (chapterId: string, range: string): boolean => {
+export const isValidVerseRange = (chapterId: string, range: string): boolean => {
   const rangeSplits = getToAndFromFromRange(range);
   // if the splits are not 2, it means it's not in the right format.
   if (rangeSplits.length !== 2) {
@@ -131,7 +131,7 @@ export const isValidRange = (chapterId: string, range: string): boolean => {
   if (fromNumber > toNumber) {
     return false;
   }
-  const chapterVersesCount = getChapterDataById(chapterId).versesCount;
+  const chapterVersesCount = getChapterData(chapterId).versesCount;
   // if either the from verse number of to verse number exceeds the chapter's total number.
   if (fromNumber > chapterVersesCount || toNumber > chapterVersesCount) {
     return false;

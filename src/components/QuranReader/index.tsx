@@ -21,7 +21,7 @@ import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
 import onCopyQuranWords from './onCopyQuranWords';
-import ControlButtons from './ControlButtons';
+import EndOfScrollingControls from './EndOfScrollingControls';
 import { getPageLimit, getRequestKey, verseFetcher } from './api';
 // import ContextMenu from './ContextMenu';
 
@@ -131,7 +131,10 @@ const QuranReader = ({
             )}
             {view}
           </InfiniteScroll>
-          <ControlButtons quranReaderDataType={quranReaderDataType} initialData={initialData} />
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            initialData={initialData}
+          />
         </div>
       </div>
       <Notes />

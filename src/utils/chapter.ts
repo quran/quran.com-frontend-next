@@ -24,7 +24,7 @@ export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chap
  * @param {string} lang language
  * @returns {Chapter} chapter
  */
-export const getChapterData = (id: string, lang = DEFAULT_LANGUAGE): Chapter => {
+export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Chapter => {
   const chapters = getAllChaptersData(lang);
   return chapters[id];
 };

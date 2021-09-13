@@ -1,23 +1,23 @@
 import React from 'react';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import { getChapterDataById, isFirstSurah, isLastSurah } from 'src/utils/chapter';
+import { getChapterData, isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { VersesResponse } from 'types/APIResponses';
 import { QuranReaderDataType } from '../types';
-import styles from './ControlButtons.module.scss';
+import styles from './EndOfScrollingControls.module.scss';
 
 interface Props {
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
 }
 
-const ControlButtons: React.FC<Props> = ({ quranReaderDataType, initialData }) => {
+const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, initialData }) => {
   const isVerse = quranReaderDataType === QuranReaderDataType.Verse;
   // only show the controls for the verse for now.
   if (!isVerse) {
     return <></>;
   }
   const { chapterId, verseNumber } = initialData.verses[0];
-  const { versesCount } = getChapterDataById(String(chapterId));
+  const { versesCount } = getChapterData(String(chapterId));
   const chapterNumber = Number(chapterId);
   const isLastVerseOfSurah = verseNumber === versesCount;
 
@@ -57,4 +57,4 @@ const ControlButtons: React.FC<Props> = ({ quranReaderDataType, initialData }) =
   );
 };
 
-export default ControlButtons;
+export default EndOfScrollingControls;

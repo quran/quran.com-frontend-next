@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import {
   getToAndFromFromRange,
   isValidChapterId,
-  isValidRange,
+  isValidVerseRange,
   isValidVerseId,
   isValidVerseNumber,
 } from 'src/utils/validator';
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   */
   if (
     !isValidChapterId(chapterId) ||
-    (!isValidVerseId(chapterId, verseIdOrRange) && !isValidRange(chapterId, verseIdOrRange))
+    (!isValidVerseId(chapterId, verseIdOrRange) && !isValidVerseRange(chapterId, verseIdOrRange))
   ) {
     return {
       notFound: true,

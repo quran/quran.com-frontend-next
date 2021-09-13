@@ -13,12 +13,10 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  @include breakpoints.tablet {
-    width: 40%;
-    justify-content: space-between;
-  }
-
   > a {
     margin: var(--spacing-xxsmall);
+    @include breakpoints.tablet {
+      margin: 0 var(--spacing-xsmall);
+    }
   }
 }
