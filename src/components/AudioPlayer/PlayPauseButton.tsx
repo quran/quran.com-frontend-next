@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useChaptersIdsByUrlPath from 'src/hooks/useChapterId';
 import {
   AudioFileStatus,
@@ -19,6 +19,7 @@ import { triggerPauseAudio, triggerPlayAudio } from './EventTriggers';
 import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 
 const PlayPauseButton = () => {
+  const dispatch = useDispatch();
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const audioFile = useSelector(selectAudioFile);
@@ -89,7 +90,7 @@ const PlayPauseButton = () => {
           setIsMismatchModalVisible(false);
         })}
         onStartOver={withStopPropagation(() => {
-          loadAndPlayAudioFile(Number(currentReadingChaptersId[0]));
+          dispatch(loadAndPlayAudioFile(Number(currentReadingChaptersId[0])));
           setIsMismatchModalVisible(false);
         })}
       />
