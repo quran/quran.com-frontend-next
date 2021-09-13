@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 import * as sampleVerse from './sample-verse.json';
-import { getChaptersData } from './chapter';
+import { getAllChaptersData } from './chapter';
 
 const COLON_SPLITTER = ':';
 
@@ -11,7 +11,7 @@ const COLON_SPLITTER = ':';
  * @returns {string[]}
  */
 export const generateChapterVersesKeys = (chapterId: string): string[] => {
-  const data = getChaptersData();
+  const data = getAllChaptersData();
 
   return range(data[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
 };

@@ -5,11 +5,11 @@ import Chapter from 'types/Chapter';
 const DEFAULT_LANGUAGE = 'en';
 
 /**
- * Get chapters data from json file, by language
+ * Get chapters data from the json file, by language
  * @param {string} lang
  * @returns {Chapter} chapter
  */
-export const getChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chapter> => {
+export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chapter> => {
   switch (lang) {
     case 'en':
       return require('../../public/data/chapters/en.json');
@@ -19,13 +19,13 @@ export const getChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chapter
 };
 
 /**
- * Get chapter data by id from json file
+ * Get chapter data by id from the json file
  * @param {string} id  chapterId
  * @param {string} lang language
  * @returns {Chapter} chapter
  */
 export const getChapterDataById = (id: string, lang = DEFAULT_LANGUAGE): Chapter => {
-  const chapters = getChaptersData(lang);
+  const chapters = getAllChaptersData(lang);
   return chapters[id];
 };
 
@@ -34,9 +34,9 @@ export const getChapterDataById = (id: string, lang = DEFAULT_LANGUAGE): Chapter
  * @param {string} pageId
  * @returns {string[]} chapterIds
  */
-export const getChapterIdsForPage = (pageId: string): string[] => {
-  const pagesData = require('../../public/data/juzs.json');
-  return Object.keys(pagesData[pageId].verseMapping);
+export const getChaptersIdForPage = (pageId: string): string[] => {
+  const pagesData = require('../../public/data/page-to-chapter-mappings.json');
+  return Object.keys(pagesData[pageId]);
 };
 
 /**
@@ -44,7 +44,7 @@ export const getChapterIdsForPage = (pageId: string): string[] => {
  * @param {string} juzId
  * @returns {string[]} chapterIds
  */
-export const getChapterIdsForJuz = (juzId: string): string[] => {
-  const juzsData = require('../../public/data/juzs.json');
-  return Object.keys(juzsData[juzId].verseMapping);
+export const getChaptersIdForJuz = (juzId: string): string[] => {
+  const juzsData = require('../../public/data/juz-to-chapter-mappings.json');
+  return Object.keys(juzsData[juzId]);
 };

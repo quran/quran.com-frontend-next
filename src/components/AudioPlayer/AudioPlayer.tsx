@@ -17,6 +17,7 @@ import {
   selectIsExpanded,
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
+import useChaptersIdByUrlPath from 'src/hooks/useChapterId';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
@@ -31,6 +32,9 @@ import PlayPauseButton from './PlayPauseButton';
 import CloseButton from './CloseButton';
 
 const AudioPlayer = () => {
+  const a = useChaptersIdByUrlPath();
+  console.log(a, 'is the chapter id');
+
   const dispatch = useDispatch();
   const { currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioPlayerEl = useRef(null);
