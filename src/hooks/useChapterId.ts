@@ -12,7 +12,7 @@ import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
  * - /page/2 => ["2"]
  * - /chapter/1 => ["1"]
  */
-const useChaptersIdByUrlPath = (): string[] => {
+const useChaptersIdsByUrlPath = (): string[] => {
   const router = useRouter();
   const { chapterId, juzId, pageId } = router.query;
 
@@ -23,4 +23,4 @@ const useChaptersIdByUrlPath = (): string[] => {
   return [];
 };
 
-export default useChaptersIdByUrlPath;
+export default useChaptersIdsByUrlPath;
