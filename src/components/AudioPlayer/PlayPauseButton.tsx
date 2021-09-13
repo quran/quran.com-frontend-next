@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
+import useChaptersIdsByUrlPath from 'src/hooks/useChapterId';
 import {
   AudioFileStatus,
   loadAndPlayAudioFile,
@@ -7,7 +8,7 @@ import {
   selectAudioFileStatus,
   selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
-import { getChapterDataById } from 'src/utils/chapter';
+import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -17,14 +18,12 @@ import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
 import { triggerPauseAudio, triggerPlayAudio } from './EventTriggers';
 import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 
-const getDummyChaptersId = () => ['1', '2'];
-
 const PlayPauseButton = () => {
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const audioFile = useSelector(selectAudioFile);
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
-  const currentReadingChaptersId = getDummyChaptersId();
+  const currentReadingChaptersId = useChaptersIdsByUrlPath();
   const currentAudioChapterId = audioFile?.chapterId?.toString();
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
@@ -83,8 +82,8 @@ const PlayPauseButton = () => {
       {button}
       <SurahAudioMismatchModal
         open={isMismatchModalVisible}
-        currentAudioChapter={getChapterDataById(currentAudioChapterId)?.nameSimple}
-        currentReadingChapter={getChapterDataById(currentReadingChaptersId[0])?.nameSimple}
+        currentAudioChapter={getChapterData(currentAudioChapterId)?.nameSimple}
+        currentReadingChapter={getChapterData(currentReadingChaptersId[0])?.nameSimple}
         onContinue={withStopPropagation(() => {
           triggerPlayAudio();
           setIsMismatchModalVisible(false);
