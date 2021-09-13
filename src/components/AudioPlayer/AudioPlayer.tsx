@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { shallowEqual } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import { withStopPropagation } from 'src/utils/event';
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
@@ -17,7 +17,7 @@ import {
   selectIsExpanded,
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import useTypedSelector from 'src/hooks/useTypedSelector';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
@@ -32,17 +32,17 @@ import PlayPauseButton from './PlayPauseButton';
 import CloseButton from './CloseButton';
 
 const AudioPlayer = () => {
-  const dispatch = useAppDispatch();
-  const { currentTime } = useAppSelector(selectAudioPlayerState, shallowEqual);
+  const dispatch = useDispatch();
+  const { currentTime } = useTypedSelector(selectAudioPlayerState, shallowEqual);
   const audioPlayerEl = useRef(null);
-  const audioFile = useAppSelector(selectAudioFile, shallowEqual);
-  const audioFileStatus = useAppSelector(selectAudioFileStatus);
+  const audioFile = useTypedSelector(selectAudioFile, shallowEqual);
+  const audioFileStatus = useTypedSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
-  const reciterName = useAppSelector(selectReciter).name;
+  const reciterName = useTypedSelector(selectReciter).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
-  const isExpanded = useAppSelector(selectIsExpanded);
-  const isMobileMinimizedForScrolling = useAppSelector(selectIsMobileMinimizedForScrolling);
+  const isExpanded = useTypedSelector(selectIsExpanded);
+  const isMobileMinimizedForScrolling = useTypedSelector(selectIsMobileMinimizedForScrolling);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Down && !isMobileMinimizedForScrolling) {
