@@ -5,7 +5,7 @@ import resetSettings from '../reset-settings';
 // English Mokhtasar and Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = [171, 169];
 
-export type TafsirsSettings = {
+type TafsirsSettings = {
   selectedTafsirs: number[];
   isUsingDefaultTafsirs: boolean;
 };
@@ -35,6 +35,7 @@ export const tafsirsSlice = createSlice({
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
-export const selectTafsirs = (state) => state.tafsirs.selectedTafsirs;
+export const selectSelectedTafsirs = (state) => state.tafsirs.selectedTafsirs;
+export const selectIsUsingDefaultTafsirs = (state) => state.tafsirs.isUsingDefaultTafsirs;
 
 export default tafsirsSlice.reducer;

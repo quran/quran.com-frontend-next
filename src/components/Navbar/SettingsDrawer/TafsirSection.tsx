@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getTafsirs } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
-import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 import { areArraysEquals, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
@@ -36,7 +36,7 @@ const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
 
 const TafsirSection = () => {
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectTafsirs, areArraysEquals);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEquals);
   const { lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { tafsirFontScale } = quranReaderStyles;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useTranslation from 'next-translate/useTranslation';
 import { getTafsirs } from 'src/api';
-import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import TafsirInfo from 'types/TafsirInfo';
 import _ from 'lodash';
 import { areArraysEquals, numbersToStringsArray } from 'src/utils/array';
@@ -10,7 +10,7 @@ import styles from './TafsirsAdjustment.module.scss';
 
 const TafsirsAdjustment = () => {
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectTafsirs, areArraysEquals);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEquals);
   const { lang } = useTranslation();
   const [tafsirs, setTafsirs] = useState<TafsirInfo[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

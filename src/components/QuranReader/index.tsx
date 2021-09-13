@@ -8,10 +8,12 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
   selectIsUsingDefaultTranslations,
   selectSelectedTranslations,
-  TranslationsSettings,
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
-import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
+import {
+  selectIsUsingDefaultTafsirs,
+  selectSelectedTafsirs,
+} from 'src/redux/slices/QuranReader/tafsirs';
 import { getDefaultWordFields } from 'src/utils/api';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
@@ -56,13 +58,9 @@ const QuranReader = ({
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEquals);
-  const isUsingDefaultTranslations = useSelector(
-    selectIsUsingDefaultTranslations,
-  ) as TranslationsSettings;
-  const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(
-    selectTafsirs,
-    shallowEqual,
-  ) as TafsirsSettings;
+  const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
+  const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEquals);
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(

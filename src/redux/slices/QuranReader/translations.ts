@@ -4,7 +4,7 @@ import resetSettings from '../reset-settings';
 
 export const DEFAULT_TRANSLATIONS = [20, 131];
 
-export type TranslationsSettings = {
+type TranslationsSettings = {
   selectedTranslations: number[];
   isUsingDefaultTranslations: boolean;
 };
