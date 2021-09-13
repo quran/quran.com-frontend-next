@@ -33,7 +33,6 @@ export default {
       description: 'The name of the radio input.',
     },
     disabled: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'boolean' },
       table: {

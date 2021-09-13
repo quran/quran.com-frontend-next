@@ -5,7 +5,6 @@ export default {
   component: Spinner,
   argTypes: {
     size: {
-      defaultValue: SpinnerSize.Medium,
       description: `[OPTIONAL] The size of the button`,
       options: Object.values(SpinnerSize),
       control: { type: 'radio' },

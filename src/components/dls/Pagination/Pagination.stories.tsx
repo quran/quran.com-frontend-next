@@ -28,7 +28,6 @@ export default {
         'A function that will handle once a page navigation action is trigger, either to a specific page number, the previous page or the next page.',
     },
     pageSize: {
-      defaultValue: 20,
       description: `The number of items for each page. Defaults to 20.`,
       table: {
         category: 'Optional',
@@ -36,7 +35,6 @@ export default {
       control: { type: 'number' },
     },
     siblingsCount: {
-      defaultValue: 1,
       description: `The maximum number of pages to be shown to the right and the left of the current active page.`,
       table: {
         category: 'Optional',
@@ -44,7 +42,6 @@ export default {
       control: { type: 'number' },
     },
     showSummary: {
-      defaultValue: true,
       description: `Whether we should show the summary of the pagination like which range are we currently showing and the total.`,
       table: {
         category: 'Optional',

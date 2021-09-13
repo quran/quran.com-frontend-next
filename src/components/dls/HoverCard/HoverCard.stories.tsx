@@ -18,7 +18,6 @@ export default {
       },
     },
     contentSide: {
-      defaultValue: ContentSide.BOTTOM,
       description: `The preferred side of the anchor to render against when open.`,
       options: Object.values(ContentSide).map((side) => side),
       control: { type: 'radio' },
@@ -27,7 +26,6 @@ export default {
       },
     },
     contentAlign: {
-      defaultValue: ContentAlign.CENTER,
       description: `The preferred alignment against the anchor.`,
       options: Object.values(ContentAlign).map((align) => align),
       control: { type: 'radio' },
@@ -36,7 +34,6 @@ export default {
       },
     },
     avoidCollisions: {
-      defaultValue: true,
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
       options: [true, false],
       control: { type: 'radio' },
@@ -45,7 +42,6 @@ export default {
       },
     },
     open: {
-      defaultValue: undefined,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -55,7 +51,6 @@ export default {
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
     tip: {
-      defaultValue: true,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -64,7 +59,6 @@ export default {
       description: 'Whether to show the tip arrow or not.',
     },
     openDelay: {
-      defaultValue: 400,
       control: { type: 'number' },
       table: {
         category: 'Optional',
@@ -73,7 +67,6 @@ export default {
         'The duration in milliseconds from when the mouse enters the trigger until the hover card opens.',
     },
     closeDelay: {
-      defaultValue: 300,
       control: { type: 'number' },
       table: {
         category: 'Optional',

@@ -19,7 +19,6 @@ export default {
       description: 'The label that will be used inside aria-label',
     },
     disabled: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'boolean' },
       table: {
@@ -60,7 +59,6 @@ export default {
         'When true, indicates that the user must check a radio item before the owning form can be submitted.',
     },
     orientation: {
-      defaultValue: RadioGroupOrientation.Vertical,
       table: {
         category: 'Optional',
       },
