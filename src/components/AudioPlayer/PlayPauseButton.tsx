@@ -20,10 +20,11 @@ import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 
 const PlayPauseButton = () => {
   const dispatch = useDispatch();
+
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
-  const audioFileStatus = useSelector(selectAudioFileStatus);
+  const isLoading = useSelector(selectAudioFileStatus) === AudioFileStatus.Loading;
+
   const audioFile = useSelector(selectAudioFile);
-  const isLoading = audioFileStatus === AudioFileStatus.Loading;
   const currentReadingChaptersId = useChaptersIdsByUrlPath();
   const currentAudioChapterId = audioFile?.chapterId?.toString();
 
