@@ -55,10 +55,7 @@ const QuranReader = ({
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
-  const selectedTranslations = useSelector(
-    selectSelectedTranslations,
-    areArraysEquals,
-  ) as TranslationsSettings;
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEquals);
   const isUsingDefaultTranslations = useSelector(
     selectIsUsingDefaultTranslations,
   ) as TranslationsSettings;
