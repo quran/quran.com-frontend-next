@@ -1,5 +1,7 @@
 .container {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
   background-color: var(--color-secondary-medium);
@@ -10,5 +12,12 @@
   color: var(--color-text-default);
   &:hover {
     background-color: var(--color-background-alternative-deep);
+  }
+}
+
+.removeIcon {
+  > svg {
+    height: var(--spacing-small);
+    width: var(--spacing-small);
   }
 }
