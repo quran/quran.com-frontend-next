@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import {
   AudioFileStatus,
+  loadAndPlayAudioFile,
+  selectAudioFile,
   selectAudioFileStatus,
   selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
+import { getChapterDataById } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -11,14 +15,32 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
 import { triggerPauseAudio, triggerPlayAudio } from './EventTriggers';
+import SurahAudioMismatchModal from './SurahAudioMismatchModal';
+
+const getDummyChaptersId = () => ['1', '2'];
 
 const PlayPauseButton = () => {
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
+  const audioFile = useSelector(selectAudioFile);
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
+  const currentReadingChaptersId = getDummyChaptersId();
+  const currentAudioChapterId = audioFile?.chapterId?.toString();
+
+  const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
+
+  const onClickPlay = () => {
+    if (currentReadingChaptersId.includes(currentAudioChapterId)) {
+      triggerPlayAudio();
+    } else {
+      setIsMismatchModalVisible(true);
+    }
+  };
+
+  let button;
 
   if (isLoading)
-    return (
+    button = (
       <Button
         tooltip="Loading ..."
         size={ButtonSize.Large}
@@ -31,7 +53,7 @@ const PlayPauseButton = () => {
     );
 
   if (isPlaying) {
-    return (
+    button = (
       <Button
         tooltip="Pause"
         size={ButtonSize.Large}
@@ -43,16 +65,36 @@ const PlayPauseButton = () => {
       </Button>
     );
   }
+  if (!isPlaying)
+    button = (
+      <Button
+        tooltip="Play"
+        shape={ButtonShape.Circle}
+        size={ButtonSize.Large}
+        variant={ButtonVariant.Ghost}
+        onClick={withStopPropagation(onClickPlay)}
+      >
+        <PlayIcon />
+      </Button>
+    );
+
   return (
-    <Button
-      tooltip="Play"
-      shape={ButtonShape.Circle}
-      size={ButtonSize.Large}
-      variant={ButtonVariant.Ghost}
-      onClick={withStopPropagation(triggerPlayAudio)}
-    >
-      <PlayIcon />
-    </Button>
+    <>
+      {button}
+      <SurahAudioMismatchModal
+        open={isMismatchModalVisible}
+        currentAudioChapter={getChapterDataById(currentAudioChapterId)?.nameSimple}
+        currentReadingChapter={getChapterDataById(currentReadingChaptersId[0])?.nameSimple}
+        onContinue={withStopPropagation(() => {
+          triggerPlayAudio();
+          setIsMismatchModalVisible(false);
+        })}
+        onStartOver={() => {
+          loadAndPlayAudioFile(Number(currentReadingChaptersId[0]));
+          setIsMismatchModalVisible(false);
+        }}
+      />
+    </>
   );
 };
 

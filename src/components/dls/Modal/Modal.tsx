@@ -43,7 +43,7 @@ const Subtitle = ({ children }) => (
 const Footer = ({ children }) => <div className={styles.footer}>{children}</div>;
 type ActionProps = {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e) => void;
   disabled?: boolean;
 };
 
