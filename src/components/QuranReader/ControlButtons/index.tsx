@@ -1,6 +1,6 @@
 import React from 'react';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import { getChapterDataById } from 'src/utils/chapter';
+import { getChapterDataById, isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { VersesResponse } from 'types/APIResponses';
 import { QuranReaderDataType } from '../types';
 import styles from './ControlButtons.module.scss';
@@ -19,14 +19,12 @@ const ControlButtons: React.FC<Props> = ({ quranReaderDataType, initialData }) =
   const { chapterId, verseNumber } = initialData.verses[0];
   const { versesCount } = getChapterDataById(String(chapterId));
   const chapterNumber = Number(chapterId);
-  const isFirstSurah = chapterNumber === 1;
-  const isLastSurah = chapterNumber === 114;
   const isLastVerseOfSurah = verseNumber === versesCount;
 
   return (
     <div className={styles.container}>
       <div className={styles.buttonsContainer}>
-        {isLastVerseOfSurah && !isFirstSurah && (
+        {isLastVerseOfSurah && !isFirstSurah(chapterNumber) && (
           <Button type={ButtonType.Secondary} href={`/${chapterNumber - 1}`}>
             Previous Surah
           </Button>
@@ -49,7 +47,7 @@ const ControlButtons: React.FC<Props> = ({ quranReaderDataType, initialData }) =
             Beginning of Surah
           </Button>
         )}
-        {isLastVerseOfSurah && !isLastSurah && (
+        {isLastVerseOfSurah && !isLastSurah(chapterNumber) && (
           <Button type={ButtonType.Secondary} href={`/${chapterNumber + 1}`}>
             Next Surah
           </Button>
