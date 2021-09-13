@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import groupBy from 'lodash/groupBy';
 import Verse from 'types/Verse';
 
 /**
@@ -22,7 +22,7 @@ const groupLinesByVerses = (verses: Verse[]) => {
   });
 
   // Groups the words based on their (page and) line number
-  const lines = _.groupBy(words, (word) => `Page${word.pageNumber}-Line${word.lineNumber}`);
+  const lines = groupBy(words, (word) => `Page${word.pageNumber}-Line${word.lineNumber}`);
 
   return lines;
 };

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 /**
  * Convert an array of numbers to an array of strings.
@@ -27,4 +27,4 @@ export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
  * @returns {boolean}
  */
 export const areArraysEquals = (array1: number[], array2: number[]): boolean =>
-  _.isEqual([...array1].sort(), [...array2].sort());
+  isEqual([...array1].sort(), [...array2].sort());

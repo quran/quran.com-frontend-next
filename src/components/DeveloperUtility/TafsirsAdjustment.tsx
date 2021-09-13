@@ -8,7 +8,7 @@ import {
   TafsirsSettings,
 } from 'src/redux/slices/QuranReader/tafsirs';
 import TafsirInfo from 'types/TafsirInfo';
-import _ from 'lodash';
+import capitalize from 'lodash/capitalize';
 import { numbersToStringsArray } from 'src/utils/array';
 import styles from './TafsirsAdjustment.module.scss';
 
@@ -68,7 +68,7 @@ const TafsirsAdjustment = () => {
         >
           {tafsirs.map((tafsir) => (
             <option key={tafsir.id} value={tafsir.id}>
-              {_.capitalize(tafsir.languageName)} - {tafsir.translatedName.name}
+              {capitalize(tafsir.languageName)} - {tafsir.translatedName.name}
             </option>
           ))}
         </select>
