@@ -7,7 +7,7 @@ const DEFAULT_LANGUAGE = 'en';
 /**
  * Get chapters data from the json file, by language
  * @param {string} lang
- * @returns {Chapter} chapter
+ * @returns {Record<string, Chapter>} chapter
  */
 export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chapter> => {
   switch (lang) {
@@ -24,7 +24,7 @@ export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chap
  * @param {string} lang language
  * @returns {Chapter} chapter
  */
-export const getChapterDataById = (id: string, lang = DEFAULT_LANGUAGE): Chapter => {
+export const getChapterData = (id: string, lang = DEFAULT_LANGUAGE): Chapter => {
   const chapters = getAllChaptersData(lang);
   return chapters[id];
 };
@@ -34,7 +34,7 @@ export const getChapterDataById = (id: string, lang = DEFAULT_LANGUAGE): Chapter
  * @param {string} pageId
  * @returns {string[]} chapterIds
  */
-export const getChaptersIdForPage = (pageId: string): string[] => {
+export const getChapterIdsForPage = (pageId: string): string[] => {
   const pagesData = require('../../public/data/page-to-chapter-mappings.json');
   return Object.keys(pagesData[pageId]);
 };
@@ -44,7 +44,7 @@ export const getChaptersIdForPage = (pageId: string): string[] => {
  * @param {string} juzId
  * @returns {string[]} chapterIds
  */
-export const getChaptersIdForJuz = (juzId: string): string[] => {
+export const getChapterIdsForJuz = (juzId: string): string[] => {
   const juzsData = require('../../public/data/juz-to-chapter-mappings.json');
   return Object.keys(juzsData[juzId]);
 };
