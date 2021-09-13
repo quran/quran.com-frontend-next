@@ -1,10 +1,11 @@
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { areArraysEqual } from 'src/utils/array';
 import StarIcon from '../../../../public/icons/star.svg';
 
 const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
-  const { bookmarkedVerses } = useSelector(selectBookmarks, shallowEqual);
+  const bookmarkedVerses = useSelector(selectBookmarks, areArraysEqual);
   const isVerseBookmarked = !!bookmarkedVerses[verseKey];
 
   if (!isVerseBookmarked) return null;
