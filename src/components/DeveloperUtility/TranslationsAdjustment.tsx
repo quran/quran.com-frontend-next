@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAvailableTranslations } from 'src/api';
 import AvailableTranslation from 'types/AvailableTranslation';
 import useTranslation from 'next-translate/useTranslation';
 import {
-  selectTranslations,
+  selectSelectedTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { numbersToStringsArray } from 'src/utils/array';
+import { areArraysEquals, numbersToStringsArray } from 'src/utils/array';
 import styles from './TranslationsAdjustment.module.scss';
 
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
-  const { selectedTranslations } = useSelector(selectTranslations, shallowEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEquals);
   const { lang } = useTranslation();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

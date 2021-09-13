@@ -14,8 +14,9 @@ import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import { selectTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
+import { areArraysEquals } from 'src/utils/array';
 import styles from './SearchDrawer.module.scss';
 import PreInput from './PreInput';
 import NoResults from './NoResults';
@@ -25,7 +26,7 @@ import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const { selectedTranslations } = useSelector(selectTranslations, shallowEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEquals);
   const drawerRef = useRef(null);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');

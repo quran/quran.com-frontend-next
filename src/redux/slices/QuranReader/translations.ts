@@ -34,6 +34,8 @@ export const translationsSlice = createSlice({
 
 export const { setSelectedTranslations } = translationsSlice.actions;
 
-export const selectTranslations = (state) => state.translations as TranslationsSettings;
+export const selectSelectedTranslations = (state) => state.translations.selectedTranslations;
+export const selectIsUsingDefaultTranslations = (state) =>
+  state.translations.isUsingDefaultTranslations;
 
 export default translationsSlice.reducer;

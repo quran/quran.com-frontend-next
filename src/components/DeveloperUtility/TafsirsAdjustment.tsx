@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useTranslation from 'next-translate/useTranslation';
 import { getTafsirs } from 'src/api';
-import {
-  selectTafsirs,
-  setSelectedTafsirs,
-  TafsirsSettings,
-} from 'src/redux/slices/QuranReader/tafsirs';
+import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import TafsirInfo from 'types/TafsirInfo';
 import _ from 'lodash';
-import { numbersToStringsArray } from 'src/utils/array';
+import { areArraysEquals, numbersToStringsArray } from 'src/utils/array';
 import styles from './TafsirsAdjustment.module.scss';
 
 const TafsirsAdjustment = () => {
   const dispatch = useDispatch();
-  const { selectedTafsirs } = useSelector(selectTafsirs, shallowEqual) as TafsirsSettings;
+  const selectedTafsirs = useSelector(selectTafsirs, areArraysEquals);
   const { lang } = useTranslation();
   const [tafsirs, setTafsirs] = useState<TafsirInfo[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);

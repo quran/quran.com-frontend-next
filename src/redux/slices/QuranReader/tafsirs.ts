@@ -35,6 +35,6 @@ export const tafsirsSlice = createSlice({
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
-export const selectTafsirs = (state) => state.tafsirs;
+export const selectTafsirs = (state) => state.tafsirs.selectedTafsirs;
 
 export default tafsirsSlice.reducer;
