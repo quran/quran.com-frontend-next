@@ -3,11 +3,7 @@ import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import { getWindowOrigin } from 'src/utils/url';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Bookmarks,
-  selectBookmarks,
-  toggleVerseBookmark,
-} from 'src/redux/slices/QuranReader/bookmarks';
+import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getVerseUrl } from 'src/utils/verse';
 import { areArraysEqual } from 'src/utils/array';
 import Verse from '../../../types/Verse';
