@@ -43,7 +43,7 @@ const persistConfig = {
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   audioPlayerState: persistReducer(audioPlayerPersistConfig, audioPlayerState),
   contextMenu,
   navbar,
@@ -69,10 +69,6 @@ const store = configureStore({
   }),
   devTools: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development', // disables the devtools in production
 });
-
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);
 

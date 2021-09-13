@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'src/redux/RootState';
 import { areArraysEquals } from 'src/utils/array';
 import resetSettings from '../reset-settings';
 
@@ -35,6 +36,6 @@ export const tafsirsSlice = createSlice({
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
-export const selectTafsirs = (state) => state.tafsirs;
+export const selectTafsirs = (state: RootState) => state.tafsirs;
 
 export default tafsirsSlice.reducer;
