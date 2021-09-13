@@ -24,7 +24,7 @@ export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chap
  * @param {string} lang language
  * @returns {Chapter} chapter
  */
-export const getChapterData = (id: string, lang = DEFAULT_LANGUAGE): Chapter => {
+export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Chapter => {
   const chapters = getAllChaptersData(lang);
   return chapters[id];
 };
@@ -48,3 +48,19 @@ export const getChapterIdsForJuz = (juzId: string): string[] => {
   const juzsData = require('../../public/data/juz-to-chapter-mappings.json');
   return Object.keys(juzsData[juzId]);
 };
+
+/**
+ * Whether the current surah is the first surah.
+ *
+ * @param {Number} chapterNumber
+ * @returns  {Boolean}
+ */
+export const isFirstSurah = (surahNumber: number): boolean => surahNumber === 1;
+
+/**
+ * Whether the current surah is the last surah.
+ *
+ * @param {Number} chapterNumber
+ * @returns  {Boolean}
+ */
+export const isLastSurah = (surahNumber: number): boolean => surahNumber === 114;
