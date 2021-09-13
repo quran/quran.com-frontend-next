@@ -25,13 +25,13 @@ const PlayPauseButton = () => {
   const isLoading = useSelector(selectAudioFileStatus) === AudioFileStatus.Loading;
 
   const audioFile = useSelector(selectAudioFile);
-  const currentReadingChaptersId = useChaptersIdsByUrlPath();
+  const currentReadingChapterIds = useChaptersIdsByUrlPath();
   const currentAudioChapterId = audioFile?.chapterId?.toString();
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
 
   const onClickPlay = () => {
-    if (currentReadingChaptersId.includes(currentAudioChapterId)) {
+    if (currentReadingChapterIds.includes(currentAudioChapterId)) {
       triggerPlayAudio();
     } else {
       setIsMismatchModalVisible(true);
@@ -79,19 +79,20 @@ const PlayPauseButton = () => {
       </Button>
     );
 
+  const firstCurrentReadingChapterId = currentReadingChapterIds[0]; // get the first chapter in this page
   return (
     <>
       {button}
       <SurahAudioMismatchModal
         open={isMismatchModalVisible}
         currentAudioChapter={getChapterData(currentAudioChapterId)?.nameSimple}
-        currentReadingChapter={getChapterData(currentReadingChaptersId[0])?.nameSimple}
+        currentReadingChapter={getChapterData(firstCurrentReadingChapterId)?.nameSimple}
         onContinue={() => {
           triggerPlayAudio();
           setIsMismatchModalVisible(false);
         }}
         onStartOver={() => {
-          dispatch(loadAndPlayAudioFile(Number(currentReadingChaptersId[0])));
+          dispatch(loadAndPlayAudioFile(Number(firstCurrentReadingChapterId)));
           setIsMismatchModalVisible(false);
         }}
       />
