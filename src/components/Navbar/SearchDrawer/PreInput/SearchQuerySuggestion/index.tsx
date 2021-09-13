@@ -1,6 +1,5 @@
 import React, { MouseEvent, KeyboardEvent } from 'react';
 import styles from './SearchQuerySuggestion.module.scss';
-import IconClose from '../../../../../../public/icons/close.svg';
 
 interface Props {
   searchQuery: string;
@@ -28,16 +27,15 @@ const SearchQuerySuggestion: React.FC<Props> = ({
       onClick={() => onSearchKeywordClicked(searchQuery)}
     >
       <p>{searchQuery}</p>
+
       {onRemoveSearchQueryClicked && (
-        <div
-          role="button"
-          tabIndex={0}
-          className={styles.removeIcon}
-          onKeyPress={(event) => onRemoveClicked(event, searchQuery)}
+        <button
+          type="button"
+          className={styles.removeButton}
           onClick={(event) => onRemoveClicked(event, searchQuery)}
         >
-          <IconClose />
-        </div>
+          Remove
+        </button>
       )}
     </button>
   );

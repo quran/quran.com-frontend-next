@@ -15,9 +15,13 @@
   }
 }
 
-.removeIcon {
-  > svg {
-    height: var(--spacing-small);
-    width: var(--spacing-small);
+.removeButton {
+  background: none;
+  border: none;
+  color: var(--color-primary-medium);
+  font-size: var(--font-size-small);
+  &:hover {
+    color: var(--color-text-link);
+    text-decoration: underline;
   }
 }
