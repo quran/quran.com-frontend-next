@@ -1,8 +1,14 @@
 import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
-import { getChapter, getChapterVerses } from 'src/api';
+import {
+  getToAndFromFromRange,
+  isValidChapterId,
+  isValidVerseRange,
+  isValidVerseId,
+  isValidVerseNumber,
+} from 'src/utils/validator';
+import { getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
@@ -12,14 +18,16 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { getChapterData } from 'src/utils/chapter';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;
   versesResponse?: VersesResponse;
+  isVerse?: boolean;
   hasError?: boolean;
 };
 
-const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError }) => {
+const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
   const {
     query: { verseId },
   } = useRouter();
@@ -32,7 +40,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={QuranReaderDataType.Verse}
+        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.Range}
       />
     </>
   );
@@ -40,25 +48,43 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const chapterId = String(params.chapterId);
-  const verseId = String(params.verseId);
-  // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidChapterId(chapterId) || !isValidVerseId(chapterId, verseId)) {
+  const verseIdOrRange = String(params.verseId);
+  /*
+    we need to validate the chapterId and verseId and range first to save
+    calling BE since we haven't set the valid paths inside getStaticPaths
+    to avoid pre-rendering them at build time.
+  */
+  if (
+    !isValidChapterId(chapterId) ||
+    (!isValidVerseId(chapterId, verseIdOrRange) && !isValidVerseRange(chapterId, verseIdOrRange))
+  ) {
     return {
       notFound: true,
     };
   }
 
-  const [chapterResponse, versesResponse] = await Promise.all([
-    getChapter(chapterId, locale),
-    getChapterVerses(chapterId, {
-      page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
-      perPage: 1, // only 1 verse per page
-      ...getDefaultWordFields(),
-    }),
-  ]);
-
+  /*
+    Since we already validated the value, if the verseIdOrRange is a number it means we are
+    viewing the verse's page otherwise it's a range page.
+  */
+  const isVerse = isValidVerseNumber(verseIdOrRange);
+  // common API params between a single verse and range of verses.
+  let apiParams = {
+    ...getDefaultWordFields(),
+  };
+  let [from, to] = [null, null];
+  if (isVerse) {
+    apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };
+  } else {
+    [from, to] = getToAndFromFromRange(verseIdOrRange);
+    apiParams = { ...apiParams, ...{ from, to } };
+  }
+  const versesResponse = await getChapterVerses(chapterId, apiParams);
   // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (chapterResponse.status === 500 || versesResponse.status === 500) {
+
+  const chapterData = getChapterData(chapterId, locale);
+
+  if (versesResponse.status === 500 || !chapterData) {
     return {
       props: {
         hasError: true,
@@ -69,8 +95,20 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
-      chapterResponse,
-      versesResponse,
+      chapterResponse: {
+        chapter: chapterData,
+      },
+      versesResponse: {
+        ...versesResponse,
+        ...(!isVerse && {
+          // when it's range, attach metaData so that it can be used inside the QuranReader's useSWRInfinite fetcher.
+          metaData: {
+            from,
+            to,
+          },
+        }),
+      },
+      isVerse,
     },
     revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };

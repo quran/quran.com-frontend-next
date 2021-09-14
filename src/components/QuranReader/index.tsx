@@ -1,22 +1,23 @@
 import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
-import { camelizeKeys } from 'humps';
 import InfiniteScroll from 'react-infinite-scroller';
-import { useSWRInfinite } from 'swr';
+import useSWRInfinite from 'swr/infinite';
 import { VersesResponse } from 'types/APIResponses';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
-  selectTranslations,
-  TranslationsSettings,
+  selectIsUsingDefaultTranslations,
+  selectSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
-import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
-import { getDefaultWordFields } from 'src/utils/api';
+import {
+  selectIsUsingDefaultTafsirs,
+  selectSelectedTafsirs,
+} from 'src/redux/slices/QuranReader/tafsirs';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import { areArraysEqual } from 'src/utils/array';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
@@ -24,6 +25,8 @@ import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import TafsirView from './TafsirView';
 import onCopyQuranWords from './onCopyQuranWords';
+import EndOfScrollingControls from './EndOfScrollingControls';
+import { getPageLimit, getRequestKey, verseFetcher } from './api';
 // import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
@@ -34,16 +37,6 @@ type QuranReaderProps = {
 
 const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
 
-/**
- * A custom fetcher that returns the verses array from the api result.
- * We need this workaround as useSWRInfinite requires the data from the api
- * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
- */
-const verseFetcher = async (input: RequestInfo, init?: RequestInit) => {
-  const res = await fetch(input, init);
-  return res.json().then((data) => camelizeKeys(data.verses));
-};
-
 const QuranReader = ({
   initialData,
   id,
@@ -51,12 +44,12 @@ const QuranReader = ({
 }: QuranReaderProps) => {
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
-  const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
-  const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
-    selectTranslations,
-  ) as TranslationsSettings;
-  const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
+  const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(
@@ -75,7 +68,7 @@ const QuranReader = ({
       }),
     verseFetcher,
     {
-      initialData:
+      fallbackData:
         isUsingDefaultTranslations && isUsingDefaultTafsirs && isUsingDefaultReciter
           ? initialData.verses
           : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
@@ -100,7 +93,7 @@ const QuranReader = ({
     );
   }
   let view;
-  const pageLimit = isVerseData || isTafsirData ? 1 : initialData.pagination.totalPages;
+  const pageLimit = getPageLimit(isVerseData, isTafsirData, initialData);
   const verses = data.flat(1);
   if (quranReaderDataType === QuranReaderDataType.Tafsir) {
     view = <TafsirView verse={verses[0]} />;
@@ -142,79 +135,15 @@ const QuranReader = ({
             )}
             {view}
           </InfiniteScroll>
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            initialData={initialData}
+          />
         </div>
       </div>
       <Notes />
     </>
   );
-};
-
-interface RequestKeyInput {
-  quranReaderDataType: QuranReaderDataType;
-  index: number;
-  initialData: VersesResponse;
-  quranReaderStyles: QuranReaderStyles;
-  selectedTranslations: number[];
-  selectedTafsirs: number[];
-  isVerseData: boolean;
-  isTafsirData: boolean;
-  id: string | number;
-  reciter: number;
-}
-/**
- * Generate the request key (the API url based on the params)
- * which will be used by useSwr to determine whether to call BE
- * again or return the cached response.
- */
-const getRequestKey = ({
-  id,
-  isVerseData,
-  isTafsirData,
-  initialData,
-  index,
-  quranReaderStyles,
-  quranReaderDataType,
-  selectedTranslations,
-  selectedTafsirs,
-  reciter,
-}: RequestKeyInput): string => {
-  // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
-  if (quranReaderDataType === QuranReaderDataType.Juz) {
-    return makeJuzVersesUrl(id, {
-      page,
-      reciter,
-      translations: selectedTranslations.join(', '),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-    });
-  }
-  if (quranReaderDataType === QuranReaderDataType.Page) {
-    return makePageVersesUrl(id, {
-      page,
-      reciter,
-      translations: selectedTranslations.join(', '),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-    });
-  }
-
-  if (isTafsirData) {
-    return makeVersesUrl(id, {
-      page,
-      perPage: 1,
-      translations: null,
-      tafsirs: selectedTafsirs.join(','),
-      wordFields: `location, verse_key, text_uthmani, ${quranReaderStyles.quranFont}`,
-      tafsirFields: 'resource_name',
-    });
-  }
-
-  return makeVersesUrl(id, {
-    reciter,
-    page,
-    translations: selectedTranslations.join(', '),
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
-  });
 };
 
 export default QuranReader;

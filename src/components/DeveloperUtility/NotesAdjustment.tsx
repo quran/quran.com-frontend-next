@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { selectNotes, setIsVisible } from 'src/redux/slices/QuranReader/notes';
 
 const NotesAdjustment = () => {
   const dispatch = useDispatch();
-  const { isVisible } = useSelector(selectNotes);
+  const { isVisible } = useSelector(selectNotes, shallowEqual);
   return (
     <div>
       Notes{' '}

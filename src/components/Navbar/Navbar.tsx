@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import {
   selectNavbar,
   setIsSearchDrawerOpen,
@@ -22,7 +22,7 @@ import styles from './Navbar.module.scss';
 import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
 const Navbar = () => {
-  const { isVisible } = useSelector(selectNavbar);
+  const { isVisible } = useSelector(selectNavbar, shallowEqual);
   const dispatch = useDispatch();
 
   const onDirectionChange = useCallback(

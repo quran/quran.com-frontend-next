@@ -1,7 +1,7 @@
-/* eslint-disable react/no-array-index-key */
-import React from 'react';
-import { selectSearchHistory } from 'src/redux/slices/Search/search';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { removeSearchHistoryRecord, selectSearchHistory } from 'src/redux/slices/Search/search';
+import { useDispatch, useSelector } from 'react-redux';
+import { areArraysEqual } from 'src/utils/array';
 import styles from './SearchHistory.module.scss';
 import Header from '../PreInput/Header';
 import SearchQuerySuggestion from '../PreInput/SearchQuerySuggestion';
@@ -11,7 +11,16 @@ interface Props {
 }
 
 const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked }) => {
-  const searchHistory = useSelector(selectSearchHistory);
+  const searchHistory = useSelector(selectSearchHistory, areArraysEqual);
+  const dispatch = useDispatch();
+
+  const onRemoveSearchQueryClicked = useCallback(
+    (searchQuery: string) => {
+      dispatch({ type: removeSearchHistoryRecord.type, payload: searchQuery });
+    },
+    [dispatch],
+  );
+
   // if there are no recent search queries.
   if (!searchHistory.length) {
     return <></>;
@@ -24,6 +33,7 @@ const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked }) => {
           searchQuery={recentSearchQuery}
           key={`${recentSearchQuery}`}
           onSearchKeywordClicked={onSearchKeywordClicked}
+          onRemoveSearchQueryClicked={onRemoveSearchQueryClicked}
         />
       ))}
     </div>

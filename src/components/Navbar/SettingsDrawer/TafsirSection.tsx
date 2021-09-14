@@ -3,14 +3,10 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getTafsirs } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
-import {
-  selectTafsirs,
-  setSelectedTafsirs,
-  TafsirsSettings,
-} from 'src/redux/slices/QuranReader/tafsirs';
+import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { throwIfError } from 'src/utils/error';
-import useSWR from 'swr';
-import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+import useSWRImmutable from 'swr/immutable';
+import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import {
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -40,7 +36,7 @@ const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
 
 const TafsirSection = () => {
   const dispatch = useDispatch();
-  const { selectedTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const { lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { tafsirFontScale } = quranReaderStyles;
@@ -50,7 +46,7 @@ const TafsirSection = () => {
     [dispatch],
   );
 
-  const { data: tafsirs, error } = useSWR(`/tafsirs/${lang}`, () =>
+  const { data: tafsirs, error } = useSWRImmutable(`/tafsirs/${lang}`, () =>
     getTafsirs(lang).then((res) => {
       throwIfError(res);
       return res.tafsirs;

@@ -32,10 +32,20 @@ export const searchSlice = createSlice({
         searchHistory: newSearchHistory,
       };
     },
+    removeSearchHistoryRecord: (state: Search, action: PayloadAction<string>) => {
+      // filter out the search queries from the current search queries array.
+      const newSearchHistory = [...state.searchHistory].filter(
+        (currentSearchQuery) => currentSearchQuery !== action.payload,
+      );
+      return {
+        ...state,
+        searchHistory: newSearchHistory,
+      };
+    },
   },
 });
 
-export const { addSearchHistoryRecord } = searchSlice.actions;
+export const { addSearchHistoryRecord, removeSearchHistoryRecord } = searchSlice.actions;
 
 export const selectSearchHistory = (state: RootState) => state.search.searchHistory;
 

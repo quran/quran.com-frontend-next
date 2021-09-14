@@ -2,12 +2,8 @@ import { useState, useEffect } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import { getWindowOrigin } from 'src/utils/url';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Bookmarks,
-  selectBookmarks,
-  toggleVerseBookmark,
-} from 'src/redux/slices/QuranReader/bookmarks';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from '../../../types/Verse';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
@@ -31,7 +27,7 @@ const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 
 const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const dispatch = useDispatch();
-  const { bookmarkedVerses } = useSelector(selectBookmarks) as Bookmarks;
+  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();

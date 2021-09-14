@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import groupBy from 'lodash/groupBy';
 import Verse from 'types/Verse';
 
 /**
@@ -13,7 +13,7 @@ import Verse from 'types/Verse';
  */
 const groupPagesByVerses = (verses: Verse[]) => {
   // Groups the verses based on their page number
-  const pages = _.groupBy(verses, (verse) => verse.pageNumber);
+  const pages = groupBy(verses, (verse) => verse.pageNumber);
 
   return pages;
 };

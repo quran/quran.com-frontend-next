@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectNavbar } from 'src/redux/slices/navbar';
@@ -9,9 +9,9 @@ import styles from './ContextMenu.module.scss';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();
-  const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const { isExpanded } = useSelector(selectContextMenu);
-  const isNavbarVisible = useSelector(selectNavbar).isVisible;
+  const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
+  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
+  const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Up && !isExpanded) {
