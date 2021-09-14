@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import classNames from 'classnames';
-import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import Verse from '../../../../types/Verse';
 import Line from './Line';
 import groupLinesByVerses from './groupLinesByVerses';
@@ -21,7 +21,7 @@ const Page = ({ verses, page }: PageProps) => {
     shallowEqual,
   ) as QuranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectReadingPreferences,
+    selectWordByWordByWordPreferences,
     shallowEqual,
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;

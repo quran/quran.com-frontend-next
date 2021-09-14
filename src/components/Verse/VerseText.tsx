@@ -3,7 +3,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import Word from 'types/Word';
 import classNames from 'classnames';
 import { getFirstWordOfSurah } from 'src/utils/verse';
-import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
@@ -20,7 +20,7 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
   const { quranTextFontScale } = quranReaderStyles;
   const { lineNumber, pageNumber, location } = words[0];
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectReadingPreferences,
+    selectWordByWordByWordPreferences,
     shallowEqual,
   );
   const centerAlignPage = useMemo(

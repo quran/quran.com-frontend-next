@@ -4,23 +4,26 @@ import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/Radi
 import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
 import {
   selectReadingPreference,
-  selectReadingPreferences,
   setReadingPreference,
   setShowWordByWordTranslation,
   setShowWordByWordTransliteration,
   setShowTooltipFor,
+  selectShowTooltipFor,
+  selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import Select from 'src/components/dls/Forms/Select';
 import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
+import { areArraysEqual } from 'src/utils/array';
 import Section from './Section';
 
 const ReadingExperienceSection = () => {
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
-  const { showWordByWordTranslation, showWordByWordTransliteration, showTooltipFor } = useSelector(
-    selectReadingPreferences,
+  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
+    selectWordByWordByWordPreferences,
     shallowEqual,
   );
+  const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
 
   const wordByWordValue = getWordByWordValue(
     showWordByWordTranslation,

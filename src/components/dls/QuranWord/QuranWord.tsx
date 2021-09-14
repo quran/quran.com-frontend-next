@@ -4,9 +4,13 @@ import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
-import { selectReadingPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import {
+  selectShowTooltipFor,
+  selectWordByWordByWordPreferences,
+} from 'src/redux/slices/QuranReader/readingPreferences';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import { areArraysEqual } from 'src/utils/array';
 import TextWord from './TextWord';
 import GlyphWord from './GlyphWord';
 import styles from './QuranWord.module.scss';
@@ -27,10 +31,11 @@ const getGlyph = (word: Word, font: QuranFont) => {
 
 const QuranWord = ({ word, font, highlight, allowWordByWord = true }: QuranWordProps) => {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
-  const { showWordByWordTranslation, showWordByWordTransliteration, showTooltipFor } = useSelector(
-    selectReadingPreferences,
+  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
+    selectWordByWordByWordPreferences,
     shallowEqual,
   );
+  const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
 
