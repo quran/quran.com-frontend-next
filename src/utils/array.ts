@@ -22,9 +22,9 @@ export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
  * their order. We need to create a copy of both arrays first
  * since sort() overwrites the original array.
  *
- * @param {number[]} array1
- * @param {number[]} array2
+ * @param {T[]} array1
+ * @param {T[]} array2
  * @returns {boolean}
  */
-export const areArraysEquals = (array1: number[], array2: number[]): boolean =>
+export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean =>
   _.isEqual([...array1].sort(), [...array2].sort());

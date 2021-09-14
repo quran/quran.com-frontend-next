@@ -5,15 +5,19 @@ import { useSWRInfinite } from 'swr';
 import { VersesResponse } from 'types/APIResponses';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
-  selectTranslations,
-  TranslationsSettings,
+  selectIsUsingDefaultTranslations,
+  selectSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
 import classNames from 'classnames';
-import { selectTafsirs, TafsirsSettings } from 'src/redux/slices/QuranReader/tafsirs';
+import {
+  selectIsUsingDefaultTafsirs,
+  selectSelectedTafsirs,
+} from 'src/redux/slices/QuranReader/tafsirs';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import { areArraysEqual } from 'src/utils/array';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
@@ -40,12 +44,12 @@ const QuranReader = ({
 }: QuranReaderProps) => {
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
-  const isSideBarVisible = useSelector(selectNotes).isVisible;
-  const quranReaderStyles = useSelector(selectQuranReaderStyles) as QuranReaderStyles;
-  const { selectedTranslations, isUsingDefaultTranslations } = useSelector(
-    selectTranslations,
-  ) as TranslationsSettings;
-  const { selectedTafsirs, isUsingDefaultTafsirs } = useSelector(selectTafsirs) as TafsirsSettings;
+  const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
+  const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { areArraysEquals } from 'src/utils/array';
+import { areArraysEqual } from 'src/utils/array';
 import resetSettings from '../reset-settings';
 
 export const DEFAULT_TRANSLATIONS = [20, 131];
 
-export type TranslationsSettings = {
+type TranslationsSettings = {
   selectedTranslations: number[];
   isUsingDefaultTranslations: boolean;
 };
@@ -21,7 +21,7 @@ export const translationsSlice = createSlice({
     setSelectedTranslations: (state, action: PayloadAction<number[]>) => ({
       ...state,
       // we need to before we compare because there is a corner case when the user changes the default translations then re-selects them which results in the same array as the default one but reversed e.g. instead of [20, 131] it becomes [131, 20].
-      isUsingDefaultTranslations: areArraysEquals(DEFAULT_TRANSLATIONS, action.payload), // check if the user is using the default translations on each translation change.
+      isUsingDefaultTranslations: areArraysEqual(DEFAULT_TRANSLATIONS, action.payload), // check if the user is using the default translations on each translation change.
       selectedTranslations: action.payload,
     }),
   },
@@ -34,6 +34,8 @@ export const translationsSlice = createSlice({
 
 export const { setSelectedTranslations } = translationsSlice.actions;
 
-export const selectTranslations = (state) => state.translations as TranslationsSettings;
+export const selectSelectedTranslations = (state) => state.translations.selectedTranslations;
+export const selectIsUsingDefaultTranslations = (state) =>
+  state.translations.isUsingDefaultTranslations;
 
 export default translationsSlice.reducer;

@@ -14,10 +14,10 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import {
-  selectTranslations,
+  selectSelectedTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
 import useSWR from 'swr';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
@@ -41,7 +41,7 @@ const translationsToComboboxItems = (translations: AvailableTranslation[]): Drop
 
 const TranslationSection = () => {
   const dispatch = useDispatch();
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { translationFontScale } = quranReaderStyles;
   const { lang } = useTranslation();

@@ -1,10 +1,10 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ThemeType, selectTheme, setTheme } from 'src/redux/slices/theme';
 
 const ThemeAdjustment = () => {
   const dispatch = useDispatch();
-  const theme = useSelector(selectTheme);
+  const theme = useSelector(selectTheme, shallowEqual);
   const availableThemes = [];
 
   Object.values(ThemeType).forEach((type) => availableThemes.push(type));

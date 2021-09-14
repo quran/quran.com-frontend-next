@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { removeSearchHistoryRecord, selectSearchHistory } from 'src/redux/slices/Search/search';
 import { useDispatch, useSelector } from 'react-redux';
+import { areArraysEqual } from 'src/utils/array';
 import styles from './SearchHistory.module.scss';
 import Header from '../PreInput/Header';
 import SearchQuerySuggestion from '../PreInput/SearchQuerySuggestion';
@@ -10,7 +11,7 @@ interface Props {
 }
 
 const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked }) => {
-  const searchHistory = useSelector(selectSearchHistory);
+  const searchHistory = useSelector(selectSearchHistory, areArraysEqual);
   const dispatch = useDispatch();
 
   const onRemoveSearchQueryClicked = useCallback(
