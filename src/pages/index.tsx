@@ -5,9 +5,9 @@ import { ChaptersResponse } from 'types/APIResponses';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
 import homepageImage from 'public/images/homepage.png';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
+import { getAllChaptersData } from 'src/utils/chapter';
 import ChaptersList from '../components/chapters/ChaptersList';
 import QuickLinks from '../components/HomePage/QuickLinks';
-import { getChapters } from '../api';
 import styles from './index.module.scss';
 
 type IndexProps = {
@@ -33,10 +33,14 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const chaptersResponse = await getChapters();
+  const allChaptersData = getAllChaptersData();
 
   return {
-    props: { chaptersResponse },
+    props: {
+      chaptersResponse: {
+        chapters: Object.values(allChaptersData),
+      },
+    },
   };
 };
 

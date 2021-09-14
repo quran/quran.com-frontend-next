@@ -9,8 +9,9 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { getChapterData } from 'src/utils/chapter';
 import { isValidChapterId } from '../../utils/validator';
-import { getChapter, getChapterVerses } from '../../api';
+import { getChapterVerses } from '../../api';
 import QuranReader from '../../components/QuranReader';
 
 type ChapterProps = {
@@ -42,14 +43,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       notFound: true,
     };
   }
-  const [chapterResponse, versesResponse] = await Promise.all([
-    getChapter(chapterId, locale),
-    getChapterVerses(chapterId, {
-      ...getDefaultWordFields(),
-    }),
-  ]);
+  const versesResponse = await getChapterVerses(chapterId, {
+    ...getDefaultWordFields(),
+  });
   // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (chapterResponse.status === 500 || versesResponse.status === 500) {
+  if (versesResponse.status === 500) {
     return {
       props: {
         hasError: true,
@@ -59,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   return {
     props: {
-      chapterResponse,
+      chapterResponse: { chapter: getChapterData(chapterId, locale) },
       versesResponse,
     },
     revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
