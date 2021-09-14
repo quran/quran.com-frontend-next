@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { selectNavbar, setIsSettingsDrawerOpen } from 'src/redux/slices/navbar';
 import { useCallback, useRef, useEffect } from 'react';
@@ -11,7 +11,7 @@ import SettingsBody from './SettingsBody';
 
 const SettingsDrawer = () => {
   const drawerRef = useRef(null);
-  const isOpen = useSelector(selectNavbar).isSettingsDrawerOpen;
+  const isOpen = useSelector(selectNavbar, shallowEqual).isSettingsDrawerOpen;
   const dispatch = useDispatch();
   const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
 

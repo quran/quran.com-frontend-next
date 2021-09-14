@@ -35,7 +35,7 @@ export const bookmarksSlice = createSlice({
 
 export const { toggleVerseBookmark } = bookmarksSlice.actions;
 
-export const selectBookmarks = (state) => state.bookmarks;
+export const selectBookmarks = (state) => state.bookmarks.bookmarkedVerses;
 export const selectOrderedBookmarkedVerses = (state) =>
   // sort the bookmarked verses by the order they appear in the Mushaf.
   Object.fromEntries(Object.entries(state.bookmarks.bookmarkedVerses).sort());

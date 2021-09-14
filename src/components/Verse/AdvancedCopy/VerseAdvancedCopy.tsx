@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import Verse from 'types/Verse';
-import { selectTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import useTranslation from 'next-translate/useTranslation';
 import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
 import { getAdvancedCopyRawResult, getAvailableTranslations } from 'src/api';
@@ -12,6 +12,7 @@ import useSWR from 'swr';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { throwIfError } from 'src/utils/error';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { areArraysEqual } from 'src/utils/array';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
@@ -65,7 +66,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   const { chapterId } = router.query;
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
   // the items that will be passed to the range start and end dropdown selectors. The value will be populated only once the user chooses the verses range option.

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 import DownloadIcon from '../../../public/icons/download.svg';
@@ -24,7 +24,7 @@ const download = (url: string, onDone: () => void) => {
 };
 
 const DownloadAudioButton = () => {
-  const audioFile = useSelector(selectAudioFile);
+  const audioFile = useSelector(selectAudioFile, shallowEqual);
   const [loading, setLoading] = React.useState(false);
 
   const onClick = withStopPropagation(() => {

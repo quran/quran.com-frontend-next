@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import classNames from 'classnames';
@@ -25,7 +25,7 @@ import MobileApps from './MobileApps';
 
 const NavigationDrawer = () => {
   const drawerRef = useRef(null);
-  const isOpen = useSelector(selectNavbar).isNavigationDrawerOpen;
+  const isOpen = useSelector(selectNavbar, shallowEqual).isNavigationDrawerOpen;
   const dispatch = useDispatch();
   const router = useRouter();
   const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);

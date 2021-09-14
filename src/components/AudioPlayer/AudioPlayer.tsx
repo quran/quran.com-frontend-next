@@ -38,7 +38,7 @@ const AudioPlayer = () => {
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
-  const reciterName = useSelector(selectReciter).name;
+  const reciterName = useSelector(selectReciter, shallowEqual).name;
   const durationInSeconds = audioFile?.duration / 1000 || 0;
   const isExpanded = useSelector(selectIsExpanded);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);

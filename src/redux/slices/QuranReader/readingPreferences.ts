@@ -68,7 +68,13 @@ export const {
   setShowTooltipFor,
 } = readingPreferencesSlice.actions;
 
-export const selectReadingPreferences = (state) => state.readingPreferences as ReadingPreferences;
+export const selectWordByWordByWordPreferences = (state) => ({
+  showWordByWordTranslation: state.readingPreferences.showWordByWordTranslation,
+  selectedWordByWordTranslation: state.readingPreferences.selectedWordByWordTranslation,
+  showWordByWordTransliteration: state.readingPreferences.showWordByWordTransliteration,
+  selectedWordByWordTransliteration: state.readingPreferences.selectedWordByWordTransliteration,
+});
+export const selectShowTooltipFor = (state) => state.readingPreferences.showTooltipFor;
 export const selectReadingPreference = (state) => state.readingPreferences.readingPreference;
 
 export default readingPreferencesSlice.reducer;

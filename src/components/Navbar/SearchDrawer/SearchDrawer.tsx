@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, RefObject, useRef } from 'react';
 import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
@@ -14,8 +14,9 @@ import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import { selectTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
+import { areArraysEqual } from 'src/utils/array';
 import styles from './SearchDrawer.module.scss';
 import PreInput from './PreInput';
 import NoResults from './NoResults';
@@ -25,11 +26,11 @@ import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const { selectedTranslations } = useSelector(selectTranslations);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const drawerRef = useRef(null);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const isOpen = useSelector(selectNavbar).isSearchDrawerOpen;
+  const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
   const { lang } = useTranslation();
   const dispatch = useDispatch();
   const router = useRouter();

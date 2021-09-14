@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { areArraysEquals } from 'src/utils/array';
+import { areArraysEqual } from 'src/utils/array';
 import resetSettings from '../reset-settings';
 
 // English Mokhtasar and Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = [171, 169];
 
-export type TafsirsSettings = {
+type TafsirsSettings = {
   selectedTafsirs: number[];
   isUsingDefaultTafsirs: boolean;
 };
@@ -22,7 +22,7 @@ export const tafsirsSlice = createSlice({
     setSelectedTafsirs: (state, action: PayloadAction<number[]>) => ({
       ...state,
       // we need to before we compare because there is a corner case when the user changes the default tafsirs then re-selects them which results in the same array as the default one but reversed e.g. instead of [20, 131] it becomes [131, 20].
-      isUsingDefaultTafsirs: areArraysEquals(DEFAULT_TAFSIRS, action.payload), // check if the user is using the default tafsirs on each tafsir change.
+      isUsingDefaultTafsirs: areArraysEqual(DEFAULT_TAFSIRS, action.payload), // check if the user is using the default tafsirs on each tafsir change.
       selectedTafsirs: action.payload,
     }),
   },
@@ -35,6 +35,7 @@ export const tafsirsSlice = createSlice({
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
-export const selectTafsirs = (state) => state.tafsirs;
+export const selectSelectedTafsirs = (state) => state.tafsirs.selectedTafsirs;
+export const selectIsUsingDefaultTafsirs = (state) => state.tafsirs.isUsingDefaultTafsirs;
 
 export default tafsirsSlice.reducer;
