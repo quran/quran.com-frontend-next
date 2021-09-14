@@ -11,6 +11,7 @@ export default {
     type: ButtonType.Primary,
     disabled: false,
     loading: false,
+    hasSidePadding: false,
   },
   argTypes: {
     size: {
