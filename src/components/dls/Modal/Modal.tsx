@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import classNames from 'classnames';
 import styles from './Modal.module.scss';
@@ -70,7 +70,7 @@ const Subtitle = ({ children }) => (
 const Footer = ({ children }) => <div className={styles.footer}>{children}</div>;
 type ActionProps = {
   children: React.ReactNode;
-  onClick?: (e) => void;
+  onClick?: (e: MouseEvent) => void;
   disabled?: boolean;
 };
 

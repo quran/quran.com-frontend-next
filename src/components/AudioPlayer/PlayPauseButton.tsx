@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useChaptersIdsByUrlPath from 'src/hooks/useChapterId';
+import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import {
   AudioFileStatus,
   loadAndPlayAudioFile,
@@ -24,8 +24,8 @@ const PlayPauseButton = () => {
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioFileStatus) === AudioFileStatus.Loading;
 
-  const audioFile = useSelector(selectAudioFile);
-  const currentReadingChapterIds = useChaptersIdsByUrlPath();
+  const audioFile = useSelector(selectAudioFile, shallowEqual);
+  const currentReadingChapterIds = useChapterIdsByUrlPath();
   const currentAudioChapterId = audioFile?.chapterId?.toString();
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
