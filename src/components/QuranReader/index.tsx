@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
-import { useSWRInfinite } from 'swr';
+import useSWRInfinite from 'swr/infinite';
 import { VersesResponse } from 'types/APIResponses';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
@@ -68,7 +68,7 @@ const QuranReader = ({
       }),
     verseFetcher,
     {
-      initialData:
+      fallbackData:
         isUsingDefaultTranslations && isUsingDefaultTafsirs && isUsingDefaultReciter
           ? initialData.verses
           : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
