@@ -1,7 +1,7 @@
 import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { isValidChapterId } from 'src/utils/validator';
-import { getChapter, getChapterInfo } from 'src/api';
+import { getChapterInfo } from 'src/api';
 import { ChapterInfoResponse, ChapterResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
 import Info from 'src/components/chapters/Info';
@@ -9,6 +9,7 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { getChapterData } from 'src/utils/chapter';
 
 interface Props {
   chapterResponse?: ChapterResponse;
@@ -39,13 +40,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     };
   }
 
-  const [chapterInfoResponse, chapterResponse] = await Promise.all([
-    getChapterInfo(chapterId, locale),
-    getChapter(chapterId, locale),
-  ]);
+  const chapterInfoResponse = await getChapterInfo(chapterId, locale);
+  const chapterData = getChapterData(chapterId, locale);
 
   // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (chapterInfoResponse.status === 500 || chapterResponse.status === 500) {
+  if (chapterInfoResponse.status === 500 || !chapterData) {
     return {
       props: {
         hasError: true,
@@ -57,7 +56,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       chapterInfoResponse,
-      chapterResponse,
+      chapterResponse: { chapter: chapterData },
     },
     revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
   };

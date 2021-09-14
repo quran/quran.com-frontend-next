@@ -8,8 +8,6 @@ import {
   AudioFilesResponse,
   AudioTimestampsResponse,
   TafsirsResponse,
-  ChapterResponse,
-  ChaptersResponse,
   VersesResponse,
   BaseResponse,
   ChapterInfoResponse,
@@ -17,7 +15,6 @@ import {
 } from 'types/APIResponses';
 import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
 import { AudioFile } from 'types/AudioFile';
-import { makeUrl } from './utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -41,21 +38,6 @@ export const fetcher = async function fetcher(
 ): Promise<BaseResponse> {
   const res = await fetch(input, init);
   return res.json();
-};
-
-export const getChapters = async (): Promise<ChaptersResponse> => {
-  const payload = await fetcher(makeUrl(`/chapters`));
-
-  return camelizeKeys(payload);
-};
-
-export const getChapter = async (
-  id: string | number,
-  language: string,
-): Promise<ChapterResponse> => {
-  const payload = await fetcher(makeUrl(`/chapters/${id}`, { language }));
-
-  return camelizeKeys(payload);
 };
 
 export const getChapterVerses = async (

@@ -2,7 +2,7 @@ import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
-import { getChapter, getChapterVerses } from 'src/api';
+import { getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
 import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
@@ -12,6 +12,7 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { getChapterData } from 'src/utils/chapter';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -48,19 +49,19 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     };
   }
 
-  const [chapterResponse, versesResponse] = await Promise.all([
-    getChapter(chapterId, locale),
-    getChapterVerses(chapterId, {
-      page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
-      perPage: 1, // only 1 verse per page
-      translations: null,
-      tafsirs: DEFAULT_TAFSIRS,
-      wordFields: 'location, verse_key, text_uthmani',
-      tafsirFields: 'resource_name',
-    }),
-  ]);
+  const versesResponse = await getChapterVerses(chapterId, {
+    page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
+    perPage: 1, // only 1 verse per page
+    translations: null,
+    tafsirs: DEFAULT_TAFSIRS,
+    wordFields: 'location, verse_key, text_uthmani',
+    tafsirFields: 'resource_name',
+  });
   // if the chapter or verses APIs failed
-  if (chapterResponse.status === 500 || versesResponse.status === 500) {
+
+  const chapterData = getChapterData(chapterId, locale);
+
+  if (versesResponse.status === 500 || !chapterData) {
     return {
       props: {
         hasError: true,
@@ -70,7 +71,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   return {
     props: {
-      chapter: chapterResponse,
+      chapter: {
+        chapter: chapterData,
+      },
       verses: versesResponse,
     },
     revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.

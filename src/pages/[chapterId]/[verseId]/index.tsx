@@ -8,7 +8,7 @@ import {
   isValidVerseId,
   isValidVerseNumber,
 } from 'src/utils/validator';
-import { getChapter, getChapterVerses } from 'src/api';
+import { getChapterVerses } from 'src/api';
 import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
@@ -18,6 +18,7 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { getChapterData } from 'src/utils/chapter';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;
@@ -78,13 +79,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     [from, to] = getToAndFromFromRange(verseIdOrRange);
     apiParams = { ...apiParams, ...{ from, to } };
   }
-  const [chapterResponse, versesResponse] = await Promise.all([
-    getChapter(chapterId, locale),
-    getChapterVerses(chapterId, apiParams),
-  ]);
-
+  const versesResponse = await getChapterVerses(chapterId, apiParams);
   // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (chapterResponse.status === 500 || versesResponse.status === 500) {
+
+  const chapterData = getChapterData(chapterId, locale);
+
+  if (versesResponse.status === 500 || !chapterData) {
     return {
       props: {
         hasError: true,
@@ -95,7 +95,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   return {
     props: {
-      chapterResponse,
+      chapterResponse: {
+        chapter: chapterData,
+      },
       versesResponse: {
         ...versesResponse,
         ...(!isVerse && {
