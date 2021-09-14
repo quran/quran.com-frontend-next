@@ -67,9 +67,7 @@ const ReadingExperienceSection = () => {
       <Section.Row>
         <Section.Label>View</Section.Label>
         <RadioGroup
-          onChange={(value) =>
-            dispatch(setReadingPreference(value as unknown as ReadingPreference))
-          }
+          onChange={(value) => dispatch(setReadingPreference(value as ReadingPreference))}
           value={readingPreference}
           label="view"
           items={preferences}
