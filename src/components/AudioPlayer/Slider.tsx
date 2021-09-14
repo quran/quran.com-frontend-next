@@ -1,6 +1,6 @@
 import React from 'react';
 import { secondsFormatter } from 'src/utils/datetime';
-import _ from 'lodash';
+import range from 'lodash/range';
 import classNames from 'classnames';
 import styles from './Slider.module.scss';
 
@@ -41,7 +41,7 @@ const Slider = ({
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
 
-  const splits = _.range(0, NUMBER_OF_SPLITS).map((index) => {
+  const splits = range(0, NUMBER_OF_SPLITS).map((index) => {
     const splitStartTime = splitDuration * index;
     const isComplete = isAudioLoaded && currentTime >= splitStartTime;
     return (

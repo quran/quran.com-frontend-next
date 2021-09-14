@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import _ from 'lodash';
 
 export type Bookmarks = {
   bookmarkedVerses: Record<string, number>;
@@ -39,6 +38,6 @@ export const { toggleVerseBookmark } = bookmarksSlice.actions;
 export const selectBookmarks = (state) => state.bookmarks.bookmarkedVerses;
 export const selectOrderedBookmarkedVerses = (state) =>
   // sort the bookmarked verses by the order they appear in the Mushaf.
-  _(state.bookmarks.bookmarkedVerses).toPairs().sortBy(0).fromPairs().value();
+  Object.fromEntries(Object.entries(state.bookmarks.bookmarkedVerses).sort());
 
 export default bookmarksSlice.reducer;
