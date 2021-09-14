@@ -5,6 +5,10 @@ import RadioGroup, { RadioGroupOrientation } from './RadioGroup';
 export default {
   title: 'dls/RadioGroup',
   component: RadioGroup,
+  args: {
+    disabled: false,
+    orientation: RadioGroupOrientation.Vertical,
+  },
   argTypes: {
     items: {
       table: {

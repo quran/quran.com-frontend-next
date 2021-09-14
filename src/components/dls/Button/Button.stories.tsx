@@ -5,6 +5,13 @@ import SettingIcon from '../../../../public/icons/settings.svg';
 export default {
   title: 'dls/Button',
   component: Button,
+  args: {
+    size: ButtonSize.Medium,
+    shape: ButtonShape.Square,
+    type: ButtonType.Primary,
+    disabled: false,
+    loading: false,
+  },
   argTypes: {
     size: {
       description: `[OPTIONAL] The size of the button`,
@@ -27,11 +34,13 @@ export default {
       control: { type: 'select' },
     },
     disabled: {
+      defaultValue: false,
       description: `[OPTIONAL] indicate whether the button is disabled or not`,
       options: [true, false],
       control: { type: 'radio' },
     },
     loading: {
+      defaultValue: false,
       description: `[OPTIONAL] indicate whether the button is in loading state or not`,
       options: [true, false],
       control: { type: 'radio' },
@@ -41,6 +50,10 @@ export default {
     },
     suffix: {
       description: `[OPTIONAL] icon suffix`,
+    },
+    hasSidePadding: {
+      options: [true, false],
+      control: { type: 'radio' },
     },
   },
 };

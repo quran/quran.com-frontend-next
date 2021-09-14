@@ -4,6 +4,12 @@ import Select, { SelectSize } from '.';
 export default {
   title: 'dls/Select',
   component: Select,
+  args: {
+    disabled: false,
+    required: false,
+    size: SelectSize.Medium,
+    placeholder: 'Select an option',
+  },
   argTypes: {
     id: {
       table: {

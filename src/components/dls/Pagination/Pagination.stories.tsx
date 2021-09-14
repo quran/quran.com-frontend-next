@@ -5,6 +5,11 @@ import Pagination from './Pagination';
 export default {
   title: 'dls/Pagination',
   component: Pagination,
+  args: {
+    pageSize: 20,
+    siblingsCount: 1,
+    showSummary: true,
+  },
   argTypes: {
     totalCount: {
       description: `The total number of items for all pages.`,

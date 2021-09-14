@@ -4,6 +4,16 @@ import Tooltip, { ContentAlign, ContentSide, TooltipType } from '.';
 export default {
   title: 'dls/Tooltip',
   component: Tooltip,
+  args: {
+    contentSide: ContentSide.BOTTOM,
+    contentAlign: ContentAlign.CENTER,
+    avoidCollisions: true,
+    invertColor: true,
+    centerText: true,
+    open: undefined,
+    tip: true,
+    delay: 400,
+  },
   argTypes: {
     children: {
       description:

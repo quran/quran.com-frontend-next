@@ -4,6 +4,15 @@ import HoverCard, { ContentAlign, ContentSide } from '.';
 export default {
   title: 'dls/HoverCard',
   component: HoverCard,
+  args: {
+    contentSide: ContentSide.BOTTOM,
+    contentAlign: ContentAlign.CENTER,
+    avoidCollision: true,
+    open: undefined,
+    tip: true,
+    openDelay: 400,
+    closeDelay: 300,
+  },
   argTypes: {
     children: {
       description: 'This is the ReactNode that when hovered over, we open the card.',

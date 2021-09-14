@@ -53,7 +53,7 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   loading,
   type = ButtonType.Primary,
-  size = ButtonSize.Medium,
+  size = 'medium',
   shape = ButtonShape.Square,
   prefix,
   suffix,

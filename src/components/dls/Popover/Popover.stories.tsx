@@ -4,6 +4,15 @@ import Popover, { ContentAlign, ContentSide } from '.';
 export default {
   title: 'dls/Popover/Default',
   component: Popover,
+  args: {
+    contentSide: ContentSide.BOTTOM,
+    tip: false,
+    useTooltipStyles: false,
+    contentAlign: ContentAlign.CENTER,
+    avoidCollisions: true,
+    open: undefined,
+    isModal: false,
+  },
   argTypes: {
     children: {
       description:

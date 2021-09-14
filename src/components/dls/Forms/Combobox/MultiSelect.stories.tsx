@@ -7,6 +7,16 @@ import ComboboxSize from './types/ComboboxSize';
 export default {
   title: 'dls/Combobox/MultiSelect',
   component: Combobox,
+  args: {
+    size: ComboboxSize.Medium,
+    clearable: true,
+    disabled: false,
+    isMultiSelect: true,
+    hasError: false,
+    minimumRequiredItems: 0,
+    emptyMessage: 'No results',
+    placeholder: 'Search...',
+  },
   argTypes: {
     id: {
       table: {

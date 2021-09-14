@@ -7,6 +7,16 @@ import ComboboxSize from './types/ComboboxSize';
 export default {
   title: 'dls/Combobox/SingleSelect',
   component: Combobox,
+  args: {
+    size: ComboboxSize.Medium,
+    clearable: true,
+    disabled: false,
+    isMulti: false,
+    hasError: false,
+    minimumRequiredItems: 0,
+    emptyMessage: 'No results',
+    placeholder: 'Search...',
+  },
   argTypes: {
     id: {
       table: {

@@ -5,6 +5,11 @@ import { ContentSide } from '..';
 export default {
   title: 'dls/Popover/Hoverable',
   component: HoverablePopover,
+  args: {
+    defaultValue: ContentSide.TOP,
+    tip: true,
+    tooltipDelay: 0,
+  },
   argTypes: {
     content: {
       description: 'This is the content that will show inside the Tooltip and the Popover.',

@@ -3,6 +3,9 @@ import Spinner, { SpinnerSize } from './Spinner';
 export default {
   title: 'dls/Spinner',
   component: Spinner,
+  args: {
+    size: SpinnerSize.Medium,
+  },
   argTypes: {
     size: {
       description: `[OPTIONAL] The size of the button`,
