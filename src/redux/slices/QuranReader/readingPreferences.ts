@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
+import { RootState } from 'src/redux/RootState';
 import resetSettings from '../reset-settings';
 
 const DEFAULT_TRANSLATION = 20; // just a placeholder.
@@ -68,7 +69,8 @@ export const {
   setShowTooltipFor,
 } = readingPreferencesSlice.actions;
 
-export const selectReadingPreferences = (state) => state.readingPreferences as ReadingPreferences;
-export const selectReadingPreference = (state) => state.readingPreferences.readingPreference;
+export const selectReadingPreferences = (state: RootState) => state.readingPreferences;
+export const selectReadingPreference = (state: RootState) =>
+  state.readingPreferences.readingPreference;
 
 export default readingPreferencesSlice.reducer;

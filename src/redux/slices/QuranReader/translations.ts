@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'src/redux/RootState';
 import { areArraysEquals } from 'src/utils/array';
 import resetSettings from '../reset-settings';
 
@@ -34,6 +35,6 @@ export const translationsSlice = createSlice({
 
 export const { setSelectedTranslations } = translationsSlice.actions;
 
-export const selectTranslations = (state) => state.translations as TranslationsSettings;
+export const selectTranslations = (state: RootState) => state.translations;
 
 export default translationsSlice.reducer;
