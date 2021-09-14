@@ -19,7 +19,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
 import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
@@ -51,7 +51,7 @@ const TranslationSection = () => {
     [dispatch],
   );
 
-  const { data: translations, error } = useSWR(makeTranslationsUrl(lang), () =>
+  const { data: translations, error } = useSWRImmutable(makeTranslationsUrl(lang), () =>
     getAvailableTranslations(lang).then((res) => {
       throwIfError(res);
       return res.translations;

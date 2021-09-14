@@ -5,7 +5,7 @@ import { getTafsirs } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { throwIfError } from 'src/utils/error';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import {
   MAXIMUM_FONT_STEP,
@@ -46,7 +46,7 @@ const TafsirSection = () => {
     [dispatch],
   );
 
-  const { data: tafsirs, error } = useSWR(`/tafsirs/${lang}`, () =>
+  const { data: tafsirs, error } = useSWRImmutable(`/tafsirs/${lang}`, () =>
     getTafsirs(lang).then((res) => {
       throwIfError(res);
       return res.tafsirs;

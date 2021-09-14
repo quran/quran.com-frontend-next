@@ -3,7 +3,7 @@ import { getAvailableReciters } from 'src/api';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 import Reciter from 'types/Reciter';
 import Section from './Section';
 
@@ -19,13 +19,10 @@ const recitersToComboboxItems = (reciters) =>
 
 const AudioSection = () => {
   const dispatch = useDispatch();
-  const { data, error } = useSWR(
-    makeRecitersUrl(),
-    () =>
-      getAvailableReciters().then((res) =>
-        res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
-      ),
-    { revalidateOnFocus: false, revalidateOnReconnect: true },
+  const { data, error } = useSWRImmutable(makeRecitersUrl(), () =>
+    getAvailableReciters().then((res) =>
+      res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
+    ),
   );
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const reciters = data || [];
