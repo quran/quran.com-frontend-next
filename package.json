@@ -17,7 +17,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "analyze": "ANALYZE=true yarn build"
+    "analyze": "ANALYZE_BUNDLE=true yarn build"
   },
   "jest-runner-eslint": {
     "cliOptions": {
