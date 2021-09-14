@@ -1,0 +1,22 @@
+@use "src/styles/breakpoints";
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonsContainer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  > a {
+    margin: var(--spacing-xxsmall);
+    @include breakpoints.tablet {
+      margin: 0 var(--spacing-xsmall);
+    }
+  }
+}

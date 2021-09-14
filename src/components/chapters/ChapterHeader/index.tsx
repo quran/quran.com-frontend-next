@@ -3,7 +3,7 @@ import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/But
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
-import { getChapterDataById } from 'src/utils/chapter';
+import { getChapterData } from 'src/utils/chapter';
 import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 import styles from './ChapterHeader.module.scss';
 import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
@@ -16,7 +16,7 @@ interface Props {
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
 const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
-  const chapterData = getChapterDataById(chapterId);
+  const chapterData = getChapterData(chapterId);
 
   const translatedName = chapterData.translatedName.name;
   const { nameSimple } = chapterData;
