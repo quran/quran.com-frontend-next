@@ -9,7 +9,7 @@ type Reducer<TState, TAction extends Action> = (
 ) => TState;
 
 /**
- * Typescript typing helper to infer RootState from reducer
+ * Typescript type helper to infer RootState from reducer
  */
 export type StateType<TReducerOrMap extends any> = TReducerOrMap extends Reducer<any, any>
   ? ReturnType<TReducerOrMap>
