@@ -1,32 +1,20 @@
 import React, { MouseEvent } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import classNames from 'classnames';
 import styles from './Modal.module.scss';
 
 type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
-  triggerClassName?: string;
   open?: boolean;
   onClickOutside?: () => void;
   shouldStopPropagation?: boolean;
 };
-const Modal = ({
-  children,
-  trigger,
-  open,
-  onClickOutside,
-  triggerClassName,
-  shouldStopPropagation = true,
-}: ModalProps) => (
+const Modal = ({ children, trigger, open, onClickOutside, shouldStopPropagation }: ModalProps) => (
   <DialogPrimitive.Root open={open}>
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger && (
-      <DialogPrimitive.Trigger
-        as="div"
-        className={classNames(styles.trigger, { [triggerClassName]: triggerClassName })}
-      >
-        {trigger}
+      <DialogPrimitive.Trigger asChild>
+        <div>{trigger}</div>
       </DialogPrimitive.Trigger>
     )}
     <Content shouldStopPropagation={shouldStopPropagation} onInteractOutside={onClickOutside}>
