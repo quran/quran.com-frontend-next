@@ -92,10 +92,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
         onClick={onCopyClicked}
       />
 
-      <Modal
-        triggerClassName={styles.container}
-        trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}
-      >
+      <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
         <VerseAdvancedCopy verse={verse}>
           {({ ayahSelectionComponent, actionText, onCopy }) => (
             <>

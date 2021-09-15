@@ -1,26 +1,17 @@
 import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import classNames from 'classnames';
 import styles from './Modal.module.scss';
 
 type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
-  triggerClassName?: string;
   open?: boolean;
   onClickOutside?: () => void;
 };
-const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: ModalProps) => (
+const Modal = ({ children, trigger, open, onClickOutside }: ModalProps) => (
   <DialogPrimitive.Root open={open}>
     <DialogPrimitive.Overlay className={styles.overlay} />
-    {trigger && (
-      <DialogPrimitive.Trigger
-        asChild
-        className={classNames(styles.trigger, { [triggerClassName]: triggerClassName })}
-      >
-        <div>{trigger}</div>
-      </DialogPrimitive.Trigger>
-    )}
+    {trigger && <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>}
     <Content onInteractOutside={onClickOutside}>{children}</Content>
   </DialogPrimitive.Root>
 );
