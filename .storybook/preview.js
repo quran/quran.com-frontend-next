@@ -1,5 +1,3 @@
-import { addDecorator, addParameters } from '@storybook/react';
-
 import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
