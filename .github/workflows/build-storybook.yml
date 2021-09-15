@@ -1,6 +1,6 @@
 name: Build Storybook
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build-storybook:
@@ -57,5 +57,5 @@ jobs:
         with:
           issue-number: 438
           body: |
-            Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/${{ github.ref }}/
+            Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/${GITHUB_REF##*/}/
           reactions: '+1'
