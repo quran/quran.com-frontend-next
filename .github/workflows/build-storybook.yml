@@ -50,7 +50,7 @@ jobs:
   
   comment-storybook-url:
     runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request }}
+    # if: ${{ github.event.issue.pull_request }}
     steps:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
@@ -58,8 +58,4 @@ jobs:
           issue-number: 438
           body: |
             Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/{{ github.ref }}/
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-            [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
