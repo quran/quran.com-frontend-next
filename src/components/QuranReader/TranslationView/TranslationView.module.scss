@@ -22,18 +22,22 @@
   flex-direction: column;
   justify-content: space-between;
   padding: var(--spacing-medium) 0;
+  padding-bottom: 0;
 }
 .contentContainer {
   flex: 1;
-  padding-top: var(--spacing-mega);
+  padding-top: var(--spacing-medium);
   position: relative;
 }
 .actionContainer {
   display: flex;
   justify-content: space-between;
 }
-.verseContainer {
+.arabicVerseContainer {
   padding-bottom: var(--spacing-medium);
+}
+.verseTranslationContainer {
+  padding-bottom: var(--spacing-xsmall);
 }
 .translationContainer {
   padding-bottom: var(--spacing-xsmall);

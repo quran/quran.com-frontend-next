@@ -27,9 +27,9 @@
   top: 0;
   bottom: 0;
   right: var(--spacing-medium);
-
   > svg {
     height: 100%;
+    z-index: var(--z-index-min);
   }
 }
 
@@ -39,18 +39,21 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
   margin-bottom: var(--spacing-xxsmall);
+  z-index: var(--z-index-default);
 }
 
 .bismillahContainer {
   display: flex;
   justify-content: center;
   margin-top: var(--spacing-mega);
+  margin-bottom: var(--spacing-mega);
 }
 .translatedName {
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
   font-size: var(--font-size-small);
   margin-bottom: var(--spacing-xxsmall);
+  z-index: var(--z-index-default);
 }
 .arabicSurahNameContainer {
   box-sizing: border-box;
@@ -58,12 +61,14 @@
   justify-content: flex-end;
   padding-top: var(--spacing-xsmall);
   margin-bottom: var(--spacing-xxsmall);
+  z-index: var(--z-index-default);
 }
 .nameSimple {
   font-weight: var(--font-weight-bold);
   color: var(--color-text-default);
   font-size: var(--font-size-large);
   margin-bottom: var(--spacing-xxsmall);
+  z-index: var(--z-index-default);
 }
 .actionContainer {
   position: relative;
