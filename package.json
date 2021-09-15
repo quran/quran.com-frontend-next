@@ -55,8 +55,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-redux": "^7.2.4",
     "redux-persist": "^6.0.0",
-    "swr": "^1.0.1",
-    "typesafe-actions": "^5.1.0"
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.4",
