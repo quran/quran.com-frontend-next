@@ -4,16 +4,21 @@ import Combobox from '../dls/Forms/Combobox';
 import styles from './Filter.module.scss';
 
 interface Props {
-  onLanguageChange: (languageIsoCode: string) => void;
-  selectedLanguage: string;
+  onLanguageChange: (languageIsoCode: string[]) => void;
+  selectedLanguages: string;
   languages: AvailableLanguage[];
 }
 
 const LanguagesFilter: React.FC<Props> = memo(
-  ({ languages, selectedLanguage, onLanguageChange }) => {
-    // we need to match the selectedLanguage because if it comes from the URL's query param and the user had entered an invalid languageCode in the url, we should set a different text
-    const matchedLanguage = languages.find((language) => language.isoCode === selectedLanguage);
-    const initialInputValue = matchedLanguage ? matchedLanguage.translatedName.name : '';
+  ({ languages, selectedLanguages, onLanguageChange }) => {
+    /*
+      We need to only pick the languages that exist in the list of available languages
+      to avoid selecting non-existent items since the languages can come from the URL path
+      which the user can edit to enter invalid values.
+    */
+    const matchedLanguages = languages
+      .filter((language) => selectedLanguages.split(',').includes(language.isoCode))
+      .map((language) => language.isoCode);
 
     const languagesItems = useMemo(
       () =>
@@ -28,12 +33,12 @@ const LanguagesFilter: React.FC<Props> = memo(
 
     return (
       <Combobox
+        isMultiSelect
         id="languagesFilter"
-        value={selectedLanguage}
+        value={matchedLanguages}
         minimumRequiredItems={1}
         items={languagesItems}
         onChange={onLanguageChange}
-        initialInputValue={initialInputValue}
         placeholder="Select a language"
         label={<div className={styles.dropdownLabel}>Language</div>}
       />

@@ -15,6 +15,9 @@ import AvailableTranslation from 'types/AvailableTranslation';
 import AvailableLanguage from 'types/AvailableLanguage';
 import NextSeoHead from 'src/components/NextSeoHead';
 import SearchResults from 'src/components/Search/SearchResults';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { areArraysEqual } from 'src/utils/array';
+import { useSelector } from 'react-redux';
 import IconClose from '../../public/icons/close.svg';
 import styles from './search.module.scss';
 
@@ -30,10 +33,13 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { lang } = useTranslation();
+  const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>(lang);
-  const [selectedTranslation, setSelectedTranslation] = useState<string>(null);
+  const [selectedLanguages, setSelectedLanguages] = useState<string>(lang);
+  const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
+    userTranslations.join(','),
+  );
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
@@ -45,11 +51,11 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   const queryParams = useMemo(
     () => ({
       page: currentPage,
-      language: selectedLanguage,
+      languages: selectedLanguages,
       query: debouncedSearchQuery,
-      translations: selectedTranslation,
+      translations: selectedTranslations,
     }),
-    [currentPage, debouncedSearchQuery, selectedLanguage, selectedTranslation],
+    [currentPage, debouncedSearchQuery, selectedLanguages, selectedTranslations],
   );
   useAddQueryParamsToUrl('/search', queryParams);
 
@@ -65,11 +71,11 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
       if (router.query.page) {
         setCurrentPage(Number(router.query.page));
       }
-      if (router.query.language) {
-        setSelectedLanguage(router.query.language as string);
+      if (router.query.languages) {
+        setSelectedLanguages(router.query.languages as string);
       }
-      if (router.query.translation) {
-        setSelectedTranslation(router.query.translation as string);
+      if (router.query.translations) {
+        setSelectedTranslations(router.query.translations as string);
       }
     }
   }, [router]);
@@ -132,9 +138,9 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
-      getResults(debouncedSearchQuery, currentPage, selectedTranslation, selectedLanguage);
+      getResults(debouncedSearchQuery, currentPage, selectedTranslations, selectedLanguages);
     }
-  }, [currentPage, debouncedSearchQuery, getResults, selectedLanguage, selectedTranslation]);
+  }, [currentPage, debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
@@ -145,12 +151,14 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
    *
    * @param {string} languageIsoCode
    */
-  const onLanguageChange = useCallback((languageIsoCode: string) => {
-    setSelectedLanguage(languageIsoCode);
+  const onLanguageChange = useCallback((languageIsoCodes: string[]) => {
+    // convert the array into a string
+    setSelectedLanguages(languageIsoCodes.join(','));
   }, []);
 
-  const onTranslationChange = useCallback((translationId: string) => {
-    setSelectedTranslation(translationId);
+  const onTranslationChange = useCallback((translationIds: string[]) => {
+    // convert the array into a string
+    setSelectedTranslations(translationIds.join(','));
     // reset the current page since most probable the results will change.
     setCurrentPage(1);
   }, []);
@@ -196,12 +204,12 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             <p className={styles.boldHeader}>Filters</p>
             <LanguagesFilter
               languages={languages}
-              selectedLanguage={selectedLanguage}
+              selectedLanguages={selectedLanguages}
               onLanguageChange={onLanguageChange}
             />
             <TranslationsFilter
               translations={translations}
-              selectedTranslation={selectedTranslation}
+              selectedTranslations={selectedTranslations}
               onTranslationChange={onTranslationChange}
             />
           </div>
