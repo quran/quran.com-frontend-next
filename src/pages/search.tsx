@@ -15,6 +15,9 @@ import AvailableTranslation from 'types/AvailableTranslation';
 import AvailableLanguage from 'types/AvailableLanguage';
 import NextSeoHead from 'src/components/NextSeoHead';
 import SearchResults from 'src/components/Search/SearchResults';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { areArraysEqual } from 'src/utils/array';
+import { useSelector } from 'react-redux';
 import IconClose from '../../public/icons/close.svg';
 import styles from './search.module.scss';
 
@@ -30,10 +33,13 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const { lang } = useTranslation();
+  const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedLanguages, setSelectedLanguages] = useState<string>(lang);
-  const [selectedTranslations, setSelectedTranslations] = useState<string>(null);
+  const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
+    userTranslations.join(','),
+  );
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
