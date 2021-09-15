@@ -56,7 +56,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             github.issues.createComment({
-              issue_number: context.pull_request.number,
+              issue_number: 438,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/{{ github.ref }}/'
