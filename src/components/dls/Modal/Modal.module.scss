@@ -76,7 +76,7 @@ $mobileWidth: 100vw;
 }
 
 .content {
-  background-color: white;
+  background-color: var(--color-background-default);
   border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
   overflow: hidden;
   box-shadow: var(--shadow-jumbo);
@@ -122,6 +122,7 @@ $mobileWidth: 100vw;
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-xlarge);
   line-height: var(--line-height-jumbo);
+  color: var(--color-text-default);
 }
 .subtitle {
   text-align: center;
