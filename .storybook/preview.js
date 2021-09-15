@@ -4,20 +4,37 @@ import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 
-const themeDecorator = (storyFn) => (
-  <>
-    <link rel="stylesheet" href={GlobalFonts} />
-    <link rel="stylesheet" href={ResetCSS} />
-    <link rel="stylesheet" href={Theme} />
-    <div data-theme="light">
-      {storyFn()}
-    </div>
-  </>
-);
+const themeDecorator = (Story, context) => {
+  const theme = context.globals.theme;
+  return (
+    <>
+      <link rel="stylesheet" href={GlobalFonts} />
+      <link rel="stylesheet" href={ResetCSS} />
+      <link rel="stylesheet" href={Theme} />
+      <div data-theme={theme}>
+        <Story />
+      </div>
+    </>
+  );
+};
 
-// V6
-// export const decorators = [themeDecorator];
-addDecorator(themeDecorator);
+
+export const decorators = [themeDecorator];
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'dark',
+    toolbar: {
+      icon: 'circlehollow',
+      // Array of plain string values or MenuItem shape (see below)
+      items: ['light', 'dark'],
+      // Property that specifies if the name of the item will be displayed
+      showName: true,
+    },
+  },
+};
+
 
 const viewports = {
   mobileS: {
