@@ -10,7 +10,14 @@ const themeDecorator = (Story, context) => {
       <link rel="stylesheet" href={ResetCSS} />
       <link rel="stylesheet" href={Theme} />
       <div data-theme={theme}>
-        <Story />
+        <div style={{
+           backgroundColor: 'var(--color-background-default)',
+           width: '100vw',
+           height: '100vh',
+           padding: '1rem',
+          }}>
+          <Story />
+        </div>
       </div>
     </>
   );
@@ -70,25 +77,8 @@ const viewports = {
   },
 };
 export const parameters = {
+  layout: 'fullscreen',
   viewport: {
     viewports,
-  },
-  backgrounds: {
-    default: 'light',
-    // the hex colors is taken from `--color-background-default` in _light.scss, _dark.scss and _sepia.scss
-    values: [
-      {
-        name: 'light',
-        value: '#fff',
-      },
-      {
-        name: 'dark',
-        value: '#1f2125',
-      },
-      {
-        name: 'sepia',
-        value: '#f4ecd8'
-      }
-    ],
   },
 }
