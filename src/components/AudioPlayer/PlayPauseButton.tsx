@@ -30,6 +30,9 @@ const PlayPauseButton = () => {
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
 
+  // check if the current audio file matches the current reading chapter
+  // continue playing if it matches
+  // otherwise, show the mismatch modal
   const onClickPlay = () => {
     if (currentReadingChapterIds.includes(currentAudioChapterId)) {
       triggerPlayAudio();
