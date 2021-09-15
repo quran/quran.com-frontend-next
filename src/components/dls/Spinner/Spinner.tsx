@@ -7,10 +7,10 @@ export enum SpinnerSize {
   Large = 'Large',
 }
 type SpinnerProps = {
-  size: SpinnerSize;
+  size?: SpinnerSize;
 };
 
-const Spinner = ({ size }: SpinnerProps) => (
+const Spinner = ({ size = SpinnerSize.Medium }: SpinnerProps) => (
   <div
     className={classNames(styles.spinner, {
       [styles.large]: size === SpinnerSize.Large,
