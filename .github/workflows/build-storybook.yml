@@ -51,13 +51,13 @@ jobs:
   comment-storybook-url:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v4
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.createComment({
-              issue_number: 438,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/{{ github.ref }}/'
-            })
+          issue-number: 438
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - Created by [create-or-update-comment][1]
+            [1]: https://github.com/peter-evans/create-or-update-comment
+          reactions: '+1'
