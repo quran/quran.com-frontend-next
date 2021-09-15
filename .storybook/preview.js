@@ -71,10 +71,25 @@ const viewports = {
     },
   },
 };
-addParameters({
+export const parameters = {
   viewport: {
-    viewports: {
-      ...viewports,
-    },
+    viewports,
   },
-});
+  backgrounds: {
+    default: 'light',
+    values: [
+      {
+        name: 'light',
+        value: '#fff',
+      },
+      {
+        name: 'dark',
+        value: '#1f2125',
+      },
+      {
+        name: 'sepia',
+        value: '#f4ecd8'
+      }
+    ],
+  },
+}
