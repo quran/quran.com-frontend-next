@@ -36,7 +36,7 @@ export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Cha
  */
 export const getChapterIdsForPage = (pageId: string): string[] => {
   const pagesData = require('../../public/data/page-to-chapter-mappings.json');
-  return Object.keys(pagesData[pageId]);
+  return pagesData[pageId];
 };
 
 /**
@@ -46,7 +46,7 @@ export const getChapterIdsForPage = (pageId: string): string[] => {
  */
 export const getChapterIdsForJuz = (juzId: string): string[] => {
   const juzsData = require('../../public/data/juz-to-chapter-mappings.json');
-  return Object.keys(juzsData[juzId]);
+  return juzsData[juzId];
 };
 
 /**

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import classNames from 'classnames';
 import styles from './Modal.module.scss';
@@ -9,8 +9,16 @@ type ModalProps = {
   triggerClassName?: string;
   open?: boolean;
   onClickOutside?: () => void;
+  shouldStopPropagation?: boolean;
 };
-const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: ModalProps) => (
+const Modal = ({
+  children,
+  trigger,
+  open,
+  onClickOutside,
+  triggerClassName,
+  shouldStopPropagation = true,
+}: ModalProps) => (
   <DialogPrimitive.Root open={open}>
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger && (
@@ -21,12 +29,31 @@ const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: Mo
         {trigger}
       </DialogPrimitive.Trigger>
     )}
-    <Content onInteractOutside={onClickOutside}>{children}</Content>
+    <Content shouldStopPropagation={shouldStopPropagation} onInteractOutside={onClickOutside}>
+      {children}
+    </Content>
   </DialogPrimitive.Root>
 );
 
-const Content = ({ children, ...props }) => (
-  <DialogPrimitive.Content {...props} className={styles.content}>
+const Content = ({ children, shouldStopPropagation, ...props }) => (
+  <DialogPrimitive.Content
+    {...props}
+    className={styles.content}
+    onClick={(e) => {
+      /**
+       * Radix is using react portal,
+       * React Portal bubble events events to the parent element,
+       * even if they are not in the same DOM Tree, for us this could
+       * cause problems. For example, calling Modal inside AudioPlayer
+       * could cause the AudioPlayer to `expand` / `minimize`
+       *
+       * References:
+       * - https://reactjs.org/docs/portals.html#event-bubbling-through-portals
+       * - https://jwwnz.medium.com/react-portals-and-event-bubbling-8df3e35ca3f1
+       */
+      if (shouldStopPropagation) e.stopPropagation();
+    }}
+  >
     {children}
   </DialogPrimitive.Content>
 );
@@ -43,7 +70,7 @@ const Subtitle = ({ children }) => (
 const Footer = ({ children }) => <div className={styles.footer}>{children}</div>;
 type ActionProps = {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent) => void;
   disabled?: boolean;
 };
 
