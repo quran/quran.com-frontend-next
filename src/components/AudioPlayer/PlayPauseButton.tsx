@@ -34,7 +34,8 @@ const PlayPauseButton = () => {
   // continue playing if it matches
   // otherwise, show the mismatch modal
   const onClickPlay = () => {
-    if (currentReadingChapterIds.includes(currentAudioChapterId)) {
+    const noReadingChapterIdsFound = currentReadingChapterIds.length === 0; // e.g : homepage
+    if (currentReadingChapterIds.includes(currentAudioChapterId) || noReadingChapterIdsFound) {
       triggerPlayAudio();
     } else {
       setIsMismatchModalVisible(true);
