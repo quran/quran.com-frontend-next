@@ -4,12 +4,18 @@ import styles from './SurahAudioMismatchModal.module.scss';
 type Props = {
   open: boolean;
   currentAudioChapter: string;
-  onContinue: () => void;
+  onContinue: (e) => void;
   currentReadingChapter: string;
-  onStartOver: () => void;
+  onStartOver: (e) => void;
 };
 
-const SurahAudioMismatchModal = ({ open, currentAudioChapter, currentReadingChapter }: Props) => (
+const SurahAudioMismatchModal = ({
+  open,
+  currentAudioChapter,
+  currentReadingChapter,
+  onContinue,
+  onStartOver,
+}: Props) => (
   <Modal open={open}>
     <Modal.Body>
       <Modal.Header>
@@ -23,8 +29,8 @@ const SurahAudioMismatchModal = ({ open, currentAudioChapter, currentReadingChap
       </p>
     </Modal.Body>
     <Modal.Footer>
-      <Modal.Action>Start Over</Modal.Action>
-      <Modal.Action>Continue </Modal.Action>
+      <Modal.Action onClick={onStartOver}>Start Over</Modal.Action>
+      <Modal.Action onClick={onContinue}>Continue </Modal.Action>
     </Modal.Footer>
   </Modal>
 );

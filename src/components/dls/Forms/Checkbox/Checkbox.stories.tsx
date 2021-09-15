@@ -4,6 +4,9 @@ import Checkbox from './Checkbox';
 export default {
   title: 'dls/Checkbox',
   component: Checkbox,
+  args: {
+    disabled: false,
+  },
   argTypes: {
     id: {
       table: {
@@ -33,7 +36,6 @@ export default {
       description: 'The name of the radio input.',
     },
     disabled: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'boolean' },
       table: {

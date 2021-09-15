@@ -5,21 +5,26 @@ import SettingIcon from '../../../../public/icons/settings.svg';
 export default {
   title: 'dls/Button',
   component: Button,
+  args: {
+    size: ButtonSize.Medium,
+    shape: ButtonShape.Square,
+    type: ButtonType.Primary,
+    disabled: false,
+    loading: false,
+    hasSidePadding: true,
+  },
   argTypes: {
     size: {
-      defaultValue: ButtonSize.Medium,
       description: `[OPTIONAL] The size of the button`,
       options: Object.values(ButtonSize),
       control: { type: 'radio' },
     },
     shape: {
-      defaultValue: ButtonShape.Square,
       description: `[OPTIONAL] The shape of the button. By default square`,
       options: Object.values(ButtonShape),
       control: { type: 'radio' },
     },
     type: {
-      defaultValue: ButtonType.Primary,
       description: `[OPTIONAL] The color of the button. by default primary`,
       options: Object.values(ButtonType),
       control: { type: 'select' },
@@ -46,6 +51,10 @@ export default {
     },
     suffix: {
       description: `[OPTIONAL] icon suffix`,
+    },
+    hasSidePadding: {
+      options: [true, false],
+      control: { type: 'radio' },
     },
   },
 };

@@ -18,6 +18,7 @@ import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
+import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import ReadingView from './ReadingView';
 import TranslationView from './TranslationView';
 import { QuranReaderDataType, ReadingPreference } from './types';
@@ -86,7 +87,9 @@ const QuranReader = ({
             [styles.withVisibleSideBar]: isSideBarVisible,
           })}
         >
-          <div className={styles.loading}>loading...</div>
+          <div className={styles.spinnerContainer}>
+            <Spinner size={SpinnerSize.Large} />
+          </div>
         </div>
         <Notes />
       </>
