@@ -24,10 +24,10 @@ module.exports = {
     // ideally we use `react-docgen-typescript`. But there's still some issue, related to webpack 5.
     // so we use `react-docgen` for now
     reactDocgen: 'react-docgen', 
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-    },
+    // reactDocgenTypescriptOptions: {
+    //   shouldExtractLiteralValuesFromEnum: true,
+    //   propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+    // },
   },
   "core": {
     "builder": "webpack5"
