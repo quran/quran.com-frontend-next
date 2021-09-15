@@ -1,23 +1,43 @@
-import { addDecorator, addParameters } from '@storybook/react';
-
 import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 
-const themeDecorator = (storyFn) => (
-  <>
-    <link rel="stylesheet" href={GlobalFonts} />
-    <link rel="stylesheet" href={ResetCSS} />
-    <link rel="stylesheet" href={Theme} />
-    <div data-theme="light">
-      {storyFn()}
-    </div>
-  </>
-);
+const themeDecorator = (Story, context) => {
+  const theme = context.globals.theme;
+  return (
+    <>
+      <link rel="stylesheet" href={GlobalFonts} />
+      <link rel="stylesheet" href={ResetCSS} />
+      <link rel="stylesheet" href={Theme} />
+      <div data-theme={theme}>
+        <div style={{
+           backgroundColor: 'var(--color-background-default)',
+           width: '100vw',
+           height: '100vh',
+           padding: '1rem',
+          }}>
+          <Story />
+        </div>
+      </div>
+    </>
+  );
+};
 
-// V6
-// export const decorators = [themeDecorator];
-addDecorator(themeDecorator);
+
+export const decorators = [themeDecorator];
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'circlehollow',
+      items: ['light', 'dark', 'sepia'],
+      showName: true,
+    },
+  },
+};
+
 
 const viewports = {
   mobileS: {
@@ -56,10 +76,9 @@ const viewports = {
     },
   },
 };
-addParameters({
+export const parameters = {
+  layout: 'fullscreen',
   viewport: {
-    viewports: {
-      ...viewports,
-    },
+    viewports,
   },
-});
+}
