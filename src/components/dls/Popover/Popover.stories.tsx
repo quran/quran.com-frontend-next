@@ -4,6 +4,15 @@ import Popover, { ContentAlign, ContentSide } from '.';
 export default {
   title: 'dls/Popover/Default',
   component: Popover,
+  args: {
+    contentSide: ContentSide.BOTTOM,
+    tip: false,
+    useTooltipStyles: false,
+    contentAlign: ContentAlign.CENTER,
+    avoidCollisions: true,
+    open: undefined,
+    isModal: false,
+  },
   argTypes: {
     children: {
       description:
@@ -19,7 +28,6 @@ export default {
       },
     },
     contentSide: {
-      defaultValue: ContentSide.BOTTOM,
       description: `The preferred side of the anchor to render against when open.`,
       options: Object.values(ContentSide).map((side) => side),
       control: { type: 'radio' },
@@ -28,7 +36,6 @@ export default {
       },
     },
     tip: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -37,7 +44,6 @@ export default {
       description: 'Whether to show the tip arrow or not.',
     },
     useTooltipStyles: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -47,7 +53,6 @@ export default {
         'Whether to set the styling of the content of the popover the same as the styling of the Tooltip or not.',
     },
     contentAlign: {
-      defaultValue: ContentAlign.CENTER,
       description: `The preferred alignment against the anchor.`,
       options: Object.values(ContentAlign).map((align) => align),
       control: { type: 'radio' },
@@ -56,7 +61,6 @@ export default {
       },
     },
     avoidCollisions: {
-      defaultValue: true,
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
       options: [true, false],
       control: { type: 'radio' },
@@ -65,7 +69,6 @@ export default {
       },
     },
     open: {
-      defaultValue: undefined,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -75,7 +78,6 @@ export default {
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
     isModal: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {

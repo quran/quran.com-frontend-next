@@ -7,6 +7,16 @@ import ComboboxSize from './types/ComboboxSize';
 export default {
   title: 'dls/Combobox/MultiSelect',
   component: Combobox,
+  args: {
+    size: ComboboxSize.Medium,
+    clearable: true,
+    disabled: false,
+    isMultiSelect: true,
+    hasError: false,
+    minimumRequiredItems: 0,
+    emptyMessage: 'No results',
+    placeholder: 'Search...',
+  },
   argTypes: {
     id: {
       table: {
@@ -44,7 +54,6 @@ export default {
       description: 'The value of "name" attribute of the selected item.',
     },
     size: {
-      defaultValue: ComboboxSize.Medium,
       description: `The size of the combobox.`,
       options: Object.values(ComboboxSize).map((size) => size),
       control: { type: 'radio' },
@@ -53,7 +62,6 @@ export default {
       },
     },
     clearable: {
-      defaultValue: true,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -62,7 +70,6 @@ export default {
       description: 'Whether we should show the clear icon or not when an input value is present.',
     },
     disabled: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -71,7 +78,6 @@ export default {
       description: 'Whether the combobox is disabled or not.',
     },
     isMultiSelect: {
-      defaultValue: true,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -87,7 +93,6 @@ export default {
       description: 'The maximum number of items allowed to be selected.',
     },
     hasError: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -96,7 +101,6 @@ export default {
       description: 'Whether the combobox has an error or not.',
     },
     minimumRequiredItems: {
-      defaultValue: 0,
       control: { type: 'number' },
       table: {
         category: 'Optional',
@@ -105,7 +109,6 @@ export default {
         'If above 0 will indicate the minimum number of items that should be present at any give time. This will be useful when controlling the component.',
     },
     emptyMessage: {
-      defaultValue: 'No results',
       control: { type: 'text' },
       table: {
         category: 'Optional',
@@ -120,7 +123,6 @@ export default {
       description: 'The label of the combobox.',
     },
     placeholder: {
-      defaultValue: 'Search...',
       control: { type: 'text' },
       table: {
         category: 'Optional',

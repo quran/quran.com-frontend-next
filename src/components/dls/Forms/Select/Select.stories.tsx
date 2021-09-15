@@ -4,6 +4,12 @@ import Select, { SelectSize } from '.';
 export default {
   title: 'dls/Select',
   component: Select,
+  args: {
+    disabled: false,
+    required: false,
+    size: SelectSize.Medium,
+    placeholder: 'Select an option',
+  },
   argTypes: {
     id: {
       table: {
@@ -32,7 +38,6 @@ export default {
         'A function that will be called when an option is selected. The function will pass value of the option selected.',
     },
     disabled: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -41,7 +46,6 @@ export default {
       description: 'Whether the select is disabled or not.',
     },
     required: {
-      defaultValue: false,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -50,7 +54,6 @@ export default {
       description: 'Whether the select is required or not for when submitting a form that has it.',
     },
     size: {
-      defaultValue: SelectSize.Medium,
       description: `The size of the select.`,
       options: Object.values(SelectSize).map((size) => size),
       control: { type: 'radio' },
@@ -66,7 +69,6 @@ export default {
       description: 'the value of the selected item.',
     },
     placeholder: {
-      defaultValue: 'Select an option',
       control: { type: 'text' },
       table: {
         category: 'Optional',

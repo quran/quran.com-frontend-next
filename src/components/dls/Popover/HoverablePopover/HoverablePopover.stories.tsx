@@ -5,6 +5,11 @@ import { ContentSide } from '..';
 export default {
   title: 'dls/Popover/Hoverable',
   component: HoverablePopover,
+  args: {
+    defaultValue: ContentSide.TOP,
+    tip: true,
+    tooltipDelay: 0,
+  },
   argTypes: {
     content: {
       description: 'This is the content that will show inside the Tooltip and the Popover.',
@@ -19,7 +24,6 @@ export default {
       },
     },
     contentSide: {
-      defaultValue: ContentSide.TOP,
       description: `The preferred side of the anchor to render against when open.`,
       options: Object.values(ContentSide).map((side) => side),
       control: { type: 'radio' },
@@ -34,7 +38,6 @@ export default {
       description: 'This is a callback to handle when the visibility changes.',
     },
     tip: {
-      defaultValue: true,
       options: [true, false],
       control: { type: 'radio' },
       table: {
@@ -43,7 +46,6 @@ export default {
       description: 'Whether to show the tip arrow or not.',
     },
     tooltipDelay: {
-      defaultValue: 0,
       control: { type: 'number' },
       table: {
         category: 'Optional',
