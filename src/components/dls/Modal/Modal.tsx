@@ -15,10 +15,10 @@ const Modal = ({ children, trigger, open, onClickOutside, triggerClassName }: Mo
     <DialogPrimitive.Overlay className={styles.overlay} />
     {trigger && (
       <DialogPrimitive.Trigger
-        as="div"
+        asChild
         className={classNames(styles.trigger, { [triggerClassName]: triggerClassName })}
       >
-        {trigger}
+        <div>{trigger}</div>
       </DialogPrimitive.Trigger>
     )}
     <Content onInteractOutside={onClickOutside}>{children}</Content>

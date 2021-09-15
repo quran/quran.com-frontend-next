@@ -46,8 +46,8 @@ const HoverCard: React.FC<Props> = ({
     {...(typeof open !== 'undefined' && { open })}
     {...(onOpenChange && { onOpenChange })}
   >
-    <RadixHoverCard.Trigger as="div" className={styles.trigger}>
-      {children}
+    <RadixHoverCard.Trigger asChild className={styles.trigger}>
+      <div>{children}</div>
     </RadixHoverCard.Trigger>
     <RadixHoverCard.Content
       sideOffset={2}
