@@ -12,7 +12,11 @@ type ModalProps = {
 const Modal = ({ children, trigger, open, onClickOutside, shouldStopPropagation }: ModalProps) => (
   <DialogPrimitive.Root open={open}>
     <DialogPrimitive.Overlay className={styles.overlay} />
-    {trigger && <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>}
+    {trigger && (
+      <DialogPrimitive.Trigger asChild>
+        <div>{trigger}</div>
+      </DialogPrimitive.Trigger>
+    )}
     <Content shouldStopPropagation={shouldStopPropagation} onInteractOutside={onClickOutside}>
       {children}
     </Content>
