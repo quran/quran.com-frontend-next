@@ -57,5 +57,5 @@ jobs:
         with:
           issue-number: 438
           body: |
-            Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/${GITHUB_REF##*/}/
+            Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/${{GITHUB_REF##*/}}/
           reactions: '+1'
