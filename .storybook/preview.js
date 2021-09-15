@@ -75,6 +75,7 @@ export const parameters = {
   },
   backgrounds: {
     default: 'light',
+    // the hex colors is taken from `--color-background-default` in _light.scss, _dark.scss and _sepia.scss
     values: [
       {
         name: 'light',
