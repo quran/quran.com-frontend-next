@@ -5,6 +5,7 @@
       "name": "The Opener"
     },
     "nameSimple": "Al-Fatihah",
+    "nameArabic": "الفاتحة",
     "versesCount": 7,
     "pages": [
       1,
@@ -18,6 +19,7 @@
       "name": "The Cow"
     },
     "nameSimple": "Al-Baqarah",
+    "nameArabic": "البقرة",
     "versesCount": 286,
     "pages": [
       2,
@@ -31,6 +33,7 @@
       "name": "Family of Imran"
     },
     "nameSimple": "Ali 'Imran",
+    "nameArabic": "آل عمران",
     "versesCount": 200,
     "pages": [
       50,
@@ -44,6 +47,7 @@
       "name": "The Women"
     },
     "nameSimple": "An-Nisa",
+    "nameArabic": "النساء",
     "versesCount": 176,
     "pages": [
       77,
@@ -57,6 +61,7 @@
       "name": "The Table Spread"
     },
     "nameSimple": "Al-Ma'idah",
+    "nameArabic": "المائدة",
     "versesCount": 120,
     "pages": [
       106,
@@ -70,6 +75,7 @@
       "name": "The Cattle"
     },
     "nameSimple": "Al-An'am",
+    "nameArabic": "الأنعام",
     "versesCount": 165,
     "pages": [
       128,
@@ -83,6 +89,7 @@
       "name": "The Heights"
     },
     "nameSimple": "Al-A'raf",
+    "nameArabic": "الأعراف",
     "versesCount": 206,
     "pages": [
       151,
@@ -96,6 +103,7 @@
       "name": "The Spoils of War"
     },
     "nameSimple": "Al-Anfal",
+    "nameArabic": "الأنفال",
     "versesCount": 75,
     "pages": [
       177,
@@ -109,6 +117,7 @@
       "name": "The Repentance"
     },
     "nameSimple": "At-Tawbah",
+    "nameArabic": "التوبة",
     "versesCount": 129,
     "pages": [
       187,
@@ -122,6 +131,7 @@
       "name": "Jonah"
     },
     "nameSimple": "Yunus",
+    "nameArabic": "يونس",
     "versesCount": 109,
     "pages": [
       208,
@@ -135,6 +145,7 @@
       "name": "Hud"
     },
     "nameSimple": "Hud",
+    "nameArabic": "هود",
     "versesCount": 123,
     "pages": [
       221,
@@ -148,6 +159,7 @@
       "name": "Joseph"
     },
     "nameSimple": "Yusuf",
+    "nameArabic": "يوسف",
     "versesCount": 111,
     "pages": [
       235,
@@ -161,6 +173,7 @@
       "name": "The Thunder"
     },
     "nameSimple": "Ar-Ra'd",
+    "nameArabic": "الرعد",
     "versesCount": 43,
     "pages": [
       249,
@@ -174,6 +187,7 @@
       "name": "Abraham"
     },
     "nameSimple": "Ibrahim",
+    "nameArabic": "ابراهيم",
     "versesCount": 52,
     "pages": [
       255,
@@ -187,6 +201,7 @@
       "name": "The Rocky Tract"
     },
     "nameSimple": "Al-Hijr",
+    "nameArabic": "الحجر",
     "versesCount": 99,
     "pages": [
       262,
@@ -200,6 +215,7 @@
       "name": "The Bee"
     },
     "nameSimple": "An-Nahl",
+    "nameArabic": "النحل",
     "versesCount": 128,
     "pages": [
       267,
@@ -213,6 +229,7 @@
       "name": "The Night Journey"
     },
     "nameSimple": "Al-Isra",
+    "nameArabic": "الإسراء",
     "versesCount": 111,
     "pages": [
       282,
@@ -226,6 +243,7 @@
       "name": "The Cave"
     },
     "nameSimple": "Al-Kahf",
+    "nameArabic": "الكهف",
     "versesCount": 110,
     "pages": [
       293,
@@ -239,6 +257,7 @@
       "name": "Mary"
     },
     "nameSimple": "Maryam",
+    "nameArabic": "مريم",
     "versesCount": 98,
     "pages": [
       305,
@@ -252,6 +271,7 @@
       "name": "Ta-Ha"
     },
     "nameSimple": "Taha",
+    "nameArabic": "طه",
     "versesCount": 135,
     "pages": [
       312,
@@ -265,6 +285,7 @@
       "name": "The Prophets"
     },
     "nameSimple": "Al-Anbya",
+    "nameArabic": "الأنبياء",
     "versesCount": 112,
     "pages": [
       322,
@@ -278,6 +299,7 @@
       "name": "The Pilgrimage"
     },
     "nameSimple": "Al-Hajj",
+    "nameArabic": "الحج",
     "versesCount": 78,
     "pages": [
       332,
@@ -291,6 +313,7 @@
       "name": "The Believers"
     },
     "nameSimple": "Al-Mu'minun",
+    "nameArabic": "المؤمنون",
     "versesCount": 118,
     "pages": [
       342,
@@ -304,6 +327,7 @@
       "name": "The Light"
     },
     "nameSimple": "An-Nur",
+    "nameArabic": "النور",
     "versesCount": 64,
     "pages": [
       350,
@@ -317,6 +341,7 @@
       "name": "The Criterion"
     },
     "nameSimple": "Al-Furqan",
+    "nameArabic": "الفرقان",
     "versesCount": 77,
     "pages": [
       359,
@@ -330,6 +355,7 @@
       "name": "The Poets"
     },
     "nameSimple": "Ash-Shu'ara",
+    "nameArabic": "الشعراء",
     "versesCount": 227,
     "pages": [
       367,
@@ -343,6 +369,7 @@
       "name": "The Ant"
     },
     "nameSimple": "An-Naml",
+    "nameArabic": "النمل",
     "versesCount": 93,
     "pages": [
       377,
@@ -356,6 +383,7 @@
       "name": "The Stories"
     },
     "nameSimple": "Al-Qasas",
+    "nameArabic": "القصص",
     "versesCount": 88,
     "pages": [
       385,
@@ -369,6 +397,7 @@
       "name": "The Spider"
     },
     "nameSimple": "Al-'Ankabut",
+    "nameArabic": "العنكبوت",
     "versesCount": 69,
     "pages": [
       396,
@@ -382,6 +411,7 @@
       "name": "The Romans"
     },
     "nameSimple": "Ar-Rum",
+    "nameArabic": "الروم",
     "versesCount": 60,
     "pages": [
       404,
@@ -395,6 +425,7 @@
       "name": "Luqman"
     },
     "nameSimple": "Luqman",
+    "nameArabic": "لقمان",
     "versesCount": 34,
     "pages": [
       411,
@@ -408,6 +439,7 @@
       "name": "The Prostration"
     },
     "nameSimple": "As-Sajdah",
+    "nameArabic": "السجدة",
     "versesCount": 30,
     "pages": [
       415,
@@ -421,6 +453,7 @@
       "name": "The Combined Forces"
     },
     "nameSimple": "Al-Ahzab",
+    "nameArabic": "الأحزاب",
     "versesCount": 73,
     "pages": [
       418,
@@ -434,6 +467,7 @@
       "name": "Sheba"
     },
     "nameSimple": "Saba",
+    "nameArabic": "سبإ",
     "versesCount": 54,
     "pages": [
       428,
@@ -447,6 +481,7 @@
       "name": "Originator"
     },
     "nameSimple": "Fatir",
+    "nameArabic": "فاطر",
     "versesCount": 45,
     "pages": [
       434,
@@ -460,6 +495,7 @@
       "name": "Ya Sin"
     },
     "nameSimple": "Ya-Sin",
+    "nameArabic": "يس",
     "versesCount": 83,
     "pages": [
       440,
@@ -473,6 +509,7 @@
       "name": "Those who set the Ranks"
     },
     "nameSimple": "As-Saffat",
+    "nameArabic": "الصافات",
     "versesCount": 182,
     "pages": [
       446,
@@ -486,6 +523,7 @@
       "name": "The Letter \"Saad\""
     },
     "nameSimple": "Sad",
+    "nameArabic": "ص",
     "versesCount": 88,
     "pages": [
       453,
@@ -499,6 +537,7 @@
       "name": "The Troops"
     },
     "nameSimple": "Az-Zumar",
+    "nameArabic": "الزمر",
     "versesCount": 75,
     "pages": [
       458,
@@ -512,6 +551,7 @@
       "name": "The Forgiver"
     },
     "nameSimple": "Ghafir",
+    "nameArabic": "غافر",
     "versesCount": 85,
     "pages": [
       467,
@@ -525,6 +565,7 @@
       "name": "Explained in Detail"
     },
     "nameSimple": "Fussilat",
+    "nameArabic": "فصلت",
     "versesCount": 54,
     "pages": [
       477,
@@ -538,6 +579,7 @@
       "name": "The Consultation"
     },
     "nameSimple": "Ash-Shuraa",
+    "nameArabic": "الشورى",
     "versesCount": 53,
     "pages": [
       483,
@@ -551,6 +593,7 @@
       "name": "The Ornaments of Gold"
     },
     "nameSimple": "Az-Zukhruf",
+    "nameArabic": "الزخرف",
     "versesCount": 89,
     "pages": [
       489,
@@ -564,6 +607,7 @@
       "name": "The Smoke"
     },
     "nameSimple": "Ad-Dukhan",
+    "nameArabic": "الدخان",
     "versesCount": 59,
     "pages": [
       496,
@@ -577,6 +621,7 @@
       "name": "The Crouching"
     },
     "nameSimple": "Al-Jathiyah",
+    "nameArabic": "الجاثية",
     "versesCount": 37,
     "pages": [
       499,
@@ -590,6 +635,7 @@
       "name": "The Wind-Curved Sandhills"
     },
     "nameSimple": "Al-Ahqaf",
+    "nameArabic": "الأحقاف",
     "versesCount": 35,
     "pages": [
       502,
@@ -603,6 +649,7 @@
       "name": "Muhammad"
     },
     "nameSimple": "Muhammad",
+    "nameArabic": "محمد",
     "versesCount": 38,
     "pages": [
       507,
@@ -616,6 +663,7 @@
       "name": "The Victory"
     },
     "nameSimple": "Al-Fath",
+    "nameArabic": "الفتح",
     "versesCount": 29,
     "pages": [
       511,
@@ -629,6 +677,7 @@
       "name": "The Rooms"
     },
     "nameSimple": "Al-Hujurat",
+    "nameArabic": "الحجرات",
     "versesCount": 18,
     "pages": [
       515,
@@ -642,6 +691,7 @@
       "name": "The Letter \"Qaf\""
     },
     "nameSimple": "Qaf",
+    "nameArabic": "ق",
     "versesCount": 45,
     "pages": [
       518,
@@ -655,6 +705,7 @@
       "name": "The Winnowing Winds"
     },
     "nameSimple": "Adh-Dhariyat",
+    "nameArabic": "الذاريات",
     "versesCount": 60,
     "pages": [
       520,
@@ -668,6 +719,7 @@
       "name": "The Mount"
     },
     "nameSimple": "At-Tur",
+    "nameArabic": "الطور",
     "versesCount": 49,
     "pages": [
       523,
@@ -681,6 +733,7 @@
       "name": "The Star"
     },
     "nameSimple": "An-Najm",
+    "nameArabic": "النجم",
     "versesCount": 62,
     "pages": [
       526,
@@ -694,6 +747,7 @@
       "name": "The Moon"
     },
     "nameSimple": "Al-Qamar",
+    "nameArabic": "القمر",
     "versesCount": 55,
     "pages": [
       528,
@@ -707,6 +761,7 @@
       "name": "The Beneficent"
     },
     "nameSimple": "Ar-Rahman",
+    "nameArabic": "الرحمن",
     "versesCount": 78,
     "pages": [
       531,
@@ -720,6 +775,7 @@
       "name": "The Inevitable"
     },
     "nameSimple": "Al-Waqi'ah",
+    "nameArabic": "الواقعة",
     "versesCount": 96,
     "pages": [
       534,
@@ -733,6 +789,7 @@
       "name": "The Iron"
     },
     "nameSimple": "Al-Hadid",
+    "nameArabic": "الحديد",
     "versesCount": 29,
     "pages": [
       537,
@@ -746,6 +803,7 @@
       "name": "The Pleading Woman"
     },
     "nameSimple": "Al-Mujadila",
+    "nameArabic": "المجادلة",
     "versesCount": 22,
     "pages": [
       542,
@@ -759,6 +817,7 @@
       "name": "The Exile"
     },
     "nameSimple": "Al-Hashr",
+    "nameArabic": "الحشر",
     "versesCount": 24,
     "pages": [
       545,
@@ -772,6 +831,7 @@
       "name": "She that is to be examined"
     },
     "nameSimple": "Al-Mumtahanah",
+    "nameArabic": "الممتحنة",
     "versesCount": 13,
     "pages": [
       549,
@@ -785,6 +845,7 @@
       "name": "The Ranks"
     },
     "nameSimple": "As-Saf",
+    "nameArabic": "الصف",
     "versesCount": 14,
     "pages": [
       551,
@@ -798,6 +859,7 @@
       "name": "The Congregation, Friday"
     },
     "nameSimple": "Al-Jumu'ah",
+    "nameArabic": "الجمعة",
     "versesCount": 11,
     "pages": [
       553,
@@ -811,6 +873,7 @@
       "name": "The Hypocrites"
     },
     "nameSimple": "Al-Munafiqun",
+    "nameArabic": "المنافقون",
     "versesCount": 11,
     "pages": [
       554,
@@ -824,6 +887,7 @@
       "name": "The Mutual Disillusion"
     },
     "nameSimple": "At-Taghabun",
+    "nameArabic": "التغابن",
     "versesCount": 18,
     "pages": [
       556,
@@ -837,6 +901,7 @@
       "name": "The Divorce"
     },
     "nameSimple": "At-Talaq",
+    "nameArabic": "الطلاق",
     "versesCount": 12,
     "pages": [
       558,
@@ -850,6 +915,7 @@
       "name": "The Prohibition"
     },
     "nameSimple": "At-Tahrim",
+    "nameArabic": "التحريم",
     "versesCount": 12,
     "pages": [
       560,
@@ -863,6 +929,7 @@
       "name": "The Sovereignty"
     },
     "nameSimple": "Al-Mulk",
+    "nameArabic": "الملك",
     "versesCount": 30,
     "pages": [
       562,
@@ -876,6 +943,7 @@
       "name": "The Pen"
     },
     "nameSimple": "Al-Qalam",
+    "nameArabic": "القلم",
     "versesCount": 52,
     "pages": [
       564,
@@ -889,6 +957,7 @@
       "name": "The Reality"
     },
     "nameSimple": "Al-Haqqah",
+    "nameArabic": "الحاقة",
     "versesCount": 52,
     "pages": [
       566,
@@ -902,6 +971,7 @@
       "name": "The Ascending Stairways"
     },
     "nameSimple": "Al-Ma'arij",
+    "nameArabic": "المعارج",
     "versesCount": 44,
     "pages": [
       568,
@@ -915,6 +985,7 @@
       "name": "Noah"
     },
     "nameSimple": "Nuh",
+    "nameArabic": "نوح",
     "versesCount": 28,
     "pages": [
       570,
@@ -928,6 +999,7 @@
       "name": "The Jinn"
     },
     "nameSimple": "Al-Jinn",
+    "nameArabic": "الجن",
     "versesCount": 28,
     "pages": [
       572,
@@ -941,6 +1013,7 @@
       "name": "The Enshrouded One"
     },
     "nameSimple": "Al-Muzzammil",
+    "nameArabic": "المزمل",
     "versesCount": 20,
     "pages": [
       574,
@@ -954,6 +1027,7 @@
       "name": "The Cloaked One"
     },
     "nameSimple": "Al-Muddaththir",
+    "nameArabic": "المدثر",
     "versesCount": 56,
     "pages": [
       575,
@@ -967,6 +1041,7 @@
       "name": "The Resurrection"
     },
     "nameSimple": "Al-Qiyamah",
+    "nameArabic": "القيامة",
     "versesCount": 40,
     "pages": [
       577,
@@ -980,6 +1055,7 @@
       "name": "The Man"
     },
     "nameSimple": "Al-Insan",
+    "nameArabic": "الانسان",
     "versesCount": 31,
     "pages": [
       578,
@@ -993,6 +1069,7 @@
       "name": "The Emissaries"
     },
     "nameSimple": "Al-Mursalat",
+    "nameArabic": "المرسلات",
     "versesCount": 50,
     "pages": [
       580,
@@ -1006,6 +1083,7 @@
       "name": "The Tidings"
     },
     "nameSimple": "An-Naba",
+    "nameArabic": "النبإ",
     "versesCount": 40,
     "pages": [
       582,
@@ -1019,6 +1097,7 @@
       "name": "Those who drag forth"
     },
     "nameSimple": "An-Nazi'at",
+    "nameArabic": "النازعات",
     "versesCount": 46,
     "pages": [
       583,
@@ -1032,6 +1111,7 @@
       "name": "He Frowned"
     },
     "nameSimple": "'Abasa",
+    "nameArabic": "عبس",
     "versesCount": 42,
     "pages": [
       585,
@@ -1045,6 +1125,7 @@
       "name": "The Overthrowing"
     },
     "nameSimple": "At-Takwir",
+    "nameArabic": "التكوير",
     "versesCount": 29,
     "pages": [
       586,
@@ -1058,6 +1139,7 @@
       "name": "The Cleaving"
     },
     "nameSimple": "Al-Infitar",
+    "nameArabic": "الإنفطار",
     "versesCount": 19,
     "pages": [
       587,
@@ -1071,6 +1153,7 @@
       "name": "The Defrauding"
     },
     "nameSimple": "Al-Mutaffifin",
+    "nameArabic": "المطففين",
     "versesCount": 36,
     "pages": [
       587,
@@ -1084,6 +1167,7 @@
       "name": "The Sundering"
     },
     "nameSimple": "Al-Inshiqaq",
+    "nameArabic": "الإنشقاق",
     "versesCount": 25,
     "pages": [
       589,
@@ -1097,6 +1181,7 @@
       "name": "The Mansions of the Stars"
     },
     "nameSimple": "Al-Buruj",
+    "nameArabic": "البروج",
     "versesCount": 22,
     "pages": [
       590,
@@ -1110,6 +1195,7 @@
       "name": "The Nightcommer"
     },
     "nameSimple": "At-Tariq",
+    "nameArabic": "الطارق",
     "versesCount": 17,
     "pages": [
       591,
@@ -1123,6 +1209,7 @@
       "name": "The Most High"
     },
     "nameSimple": "Al-A'la",
+    "nameArabic": "الأعلى",
     "versesCount": 19,
     "pages": [
       591,
@@ -1136,6 +1223,7 @@
       "name": "The Overwhelming"
     },
     "nameSimple": "Al-Ghashiyah",
+    "nameArabic": "الغاشية",
     "versesCount": 26,
     "pages": [
       592,
@@ -1149,6 +1237,7 @@
       "name": "The Dawn"
     },
     "nameSimple": "Al-Fajr",
+    "nameArabic": "الفجر",
     "versesCount": 30,
     "pages": [
       593,
@@ -1162,6 +1251,7 @@
       "name": "The City"
     },
     "nameSimple": "Al-Balad",
+    "nameArabic": "البلد",
     "versesCount": 20,
     "pages": [
       594,
@@ -1175,6 +1265,7 @@
       "name": "The Sun"
     },
     "nameSimple": "Ash-Shams",
+    "nameArabic": "الشمس",
     "versesCount": 15,
     "pages": [
       595,
@@ -1188,6 +1279,7 @@
       "name": "The Night"
     },
     "nameSimple": "Al-Layl",
+    "nameArabic": "الليل",
     "versesCount": 21,
     "pages": [
       595,
@@ -1201,6 +1293,7 @@
       "name": "The Morning Hours"
     },
     "nameSimple": "Ad-Duhaa",
+    "nameArabic": "الضحى",
     "versesCount": 11,
     "pages": [
       596,
@@ -1214,6 +1307,7 @@
       "name": "The Relief"
     },
     "nameSimple": "Ash-Sharh",
+    "nameArabic": "الشرح",
     "versesCount": 8,
     "pages": [
       596,
@@ -1227,6 +1321,7 @@
       "name": "The Fig"
     },
     "nameSimple": "At-Tin",
+    "nameArabic": "التين",
     "versesCount": 8,
     "pages": [
       597,
@@ -1240,6 +1335,7 @@
       "name": "The Clot"
     },
     "nameSimple": "Al-'Alaq",
+    "nameArabic": "العلق",
     "versesCount": 19,
     "pages": [
       597,
@@ -1253,6 +1349,7 @@
       "name": "The Power"
     },
     "nameSimple": "Al-Qadr",
+    "nameArabic": "القدر",
     "versesCount": 5,
     "pages": [
       598,
@@ -1266,6 +1363,7 @@
       "name": "The Clear Proof"
     },
     "nameSimple": "Al-Bayyinah",
+    "nameArabic": "البينة",
     "versesCount": 8,
     "pages": [
       598,
@@ -1279,6 +1377,7 @@
       "name": "The Earthquake"
     },
     "nameSimple": "Az-Zalzalah",
+    "nameArabic": "الزلزلة",
     "versesCount": 8,
     "pages": [
       599,
@@ -1292,6 +1391,7 @@
       "name": "The Courser"
     },
     "nameSimple": "Al-'Adiyat",
+    "nameArabic": "العاديات",
     "versesCount": 11,
     "pages": [
       599,
@@ -1305,6 +1405,7 @@
       "name": "The Calamity"
     },
     "nameSimple": "Al-Qari'ah",
+    "nameArabic": "القارعة",
     "versesCount": 11,
     "pages": [
       600,
@@ -1318,6 +1419,7 @@
       "name": "The Rivalry in world increase"
     },
     "nameSimple": "At-Takathur",
+    "nameArabic": "التكاثر",
     "versesCount": 8,
     "pages": [
       600,
@@ -1331,6 +1433,7 @@
       "name": "The Declining Day"
     },
     "nameSimple": "Al-'Asr",
+    "nameArabic": "العصر",
     "versesCount": 3,
     "pages": [
       601,
@@ -1344,6 +1447,7 @@
       "name": "The Traducer"
     },
     "nameSimple": "Al-Humazah",
+    "nameArabic": "الهمزة",
     "versesCount": 9,
     "pages": [
       601,
@@ -1357,6 +1461,7 @@
       "name": "The Elephant"
     },
     "nameSimple": "Al-Fil",
+    "nameArabic": "الفيل",
     "versesCount": 5,
     "pages": [
       601,
@@ -1370,6 +1475,7 @@
       "name": "Quraysh"
     },
     "nameSimple": "Quraysh",
+    "nameArabic": "قريش",
     "versesCount": 4,
     "pages": [
       602,
@@ -1383,6 +1489,7 @@
       "name": "The Small kindnesses"
     },
     "nameSimple": "Al-Ma'un",
+    "nameArabic": "الماعون",
     "versesCount": 7,
     "pages": [
       602,
@@ -1396,6 +1503,7 @@
       "name": "The Abundance"
     },
     "nameSimple": "Al-Kawthar",
+    "nameArabic": "الكوثر",
     "versesCount": 3,
     "pages": [
       602,
@@ -1409,6 +1517,7 @@
       "name": "The Disbelievers"
     },
     "nameSimple": "Al-Kafirun",
+    "nameArabic": "الكافرون",
     "versesCount": 6,
     "pages": [
       603,
@@ -1422,6 +1531,7 @@
       "name": "The Divine Support"
     },
     "nameSimple": "An-Nasr",
+    "nameArabic": "النصر",
     "versesCount": 3,
     "pages": [
       603,
@@ -1435,6 +1545,7 @@
       "name": "The Palm Fiber"
     },
     "nameSimple": "Al-Masad",
+    "nameArabic": "المسد",
     "versesCount": 5,
     "pages": [
       603,
@@ -1448,6 +1559,7 @@
       "name": "The Sincerity"
     },
     "nameSimple": "Al-Ikhlas",
+    "nameArabic": "الإخلاص",
     "versesCount": 4,
     "pages": [
       604,
@@ -1461,6 +1573,7 @@
       "name": "The Daybreak"
     },
     "nameSimple": "Al-Falaq",
+    "nameArabic": "الفلق",
     "versesCount": 5,
     "pages": [
       604,
@@ -1474,6 +1587,7 @@
       "name": "Mankind"
     },
     "nameSimple": "An-Nas",
+    "nameArabic": "الناس",
     "versesCount": 6,
     "pages": [
       604,
