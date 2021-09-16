@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from 'src/redux/RootState';
 
 export type Notes = {
   isVisible: boolean;
@@ -19,6 +20,6 @@ export const notesSlice = createSlice({
 
 export const { setIsVisible } = notesSlice.actions;
 
-export const selectNotes = (state) => state.notes;
+export const selectNotes = (state: RootState) => state.notes;
 
 export default notesSlice.reducer;

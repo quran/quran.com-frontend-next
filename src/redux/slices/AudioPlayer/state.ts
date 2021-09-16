@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
+import { RootState } from 'src/redux/RootState';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 import resetSettings from '../reset-settings';
@@ -32,16 +33,16 @@ const initialState: AudioState = {
   isMobileMinimizedForScrolling: false,
 };
 
-export const selectAudioPlayerState = (state) => state.audioPlayerState as AudioState;
-export const selectReciter = (state) => state.audioPlayerState.reciter as Reciter;
-export const selectIsUsingDefaultReciter = (state) =>
+export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
+export const selectReciter = (state: RootState) => state.audioPlayerState.reciter;
+export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
-export const selectAudioFile = (state) => state.audioPlayerState.audioFile as AudioFile;
-export const selectAudioFileStatus = (state) => state.audioPlayerState.audioFileStatus;
-export const selectIsPlaying = (state) => state.audioPlayerState.isPlaying;
-export const selectIsExpanded = (state) => state.audioPlayerState.isExpanded as boolean;
-export const selectIsMobileMinimizedForScrolling = (state) =>
-  state.audioPlayerState.isMobileMinimizedForScrolling as boolean;
+export const selectAudioFile = (state: RootState) => state.audioPlayerState.audioFile;
+export const selectAudioFileStatus = (state: RootState) => state.audioPlayerState.audioFileStatus;
+export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPlaying;
+export const selectIsExpanded = (state: RootState) => state.audioPlayerState.isExpanded;
+export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
+  state.audioPlayerState.isMobileMinimizedForScrolling;
 
 /**
  * get the audio file for the current reciter
@@ -51,7 +52,7 @@ export const selectIsMobileMinimizedForScrolling = (state) =>
  * @param {number} chapter the chapter id
  *
  */
-export const loadAndPlayAudioFile = createAsyncThunk<void, number>(
+export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: RootState }>(
   'audioPlayerState/loadAndPlayAudioFile',
   async (chapter, thunkAPI) => {
     // play directly the audio file for this chapter is already loaded.
@@ -83,7 +84,7 @@ interface PlayFromInput {
   chapterId: number;
   reciterId: number;
 }
-export const playFrom = createAsyncThunk<void, PlayFromInput>(
+export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
   async ({ timestamp, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();

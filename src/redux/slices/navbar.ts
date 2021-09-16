@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../RootState';
 
 export type Navbar = {
   isVisible: boolean;
@@ -44,6 +45,6 @@ export const {
   setIsSettingsDrawerOpen,
 } = navbarSlice.actions;
 
-export const selectNavbar = (state) => state.navbar;
+export const selectNavbar = (state: RootState) => state.navbar;
 
 export default navbarSlice.reducer;
