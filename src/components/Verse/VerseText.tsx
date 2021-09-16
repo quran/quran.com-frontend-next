@@ -36,7 +36,11 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
 
   return (
     <>
-      {isReadingMode && isFirstWordOfSurah && <ChapterHeader chapterId={chapterId} />}
+      {isReadingMode && isFirstWordOfSurah && (
+        <div className={styles.chapterHeaderContainer}>
+          <ChapterHeader chapterId={chapterId} />
+        </div>
+      )}
       <div
         className={classNames(
           styles.verseTextContainer,

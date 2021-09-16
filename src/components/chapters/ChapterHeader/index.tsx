@@ -22,7 +22,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
   const { nameSimple } = chapterData;
 
   return (
-    <div>
+    <>
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.translatedName}>{translatedName}</div>
@@ -63,7 +63,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
           <Bismillah size={BismillahSize.Large} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

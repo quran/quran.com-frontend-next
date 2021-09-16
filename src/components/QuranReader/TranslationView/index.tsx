@@ -40,11 +40,11 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
           </div>
 
           <div className={styles.contentContainer}>
-            <div className={styles.verseContainer}>
+            <div className={styles.arabicVerseContainer}>
               <VerseText words={verse.words} />
             </div>
             {verse.translations?.map((translation: Translation) => (
-              <div key={translation.id} className={styles.verseContainer}>
+              <div key={translation.id} className={styles.verseTranslationContainer}>
                 <TranslationText
                   translationFontScale={quranReaderStyles.translationFontScale}
                   text={translation.text}
