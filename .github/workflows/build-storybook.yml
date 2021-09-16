@@ -48,7 +48,7 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
 
-  update-storybook-status:
+  create-storybook-comment:
     runs-on: ubuntu-latest
     steps:
       - name: Create comment
@@ -58,8 +58,9 @@ jobs:
           body: |
             Storybook preview: *In-Progress*
 
-  update-storybook-url:
+  post-storybook-url:
     runs-on: ubuntu-latest
+    needs: deploy-storybook
     steps:
       - name: Find Comment
         uses: peter-evans/find-comment@v1
