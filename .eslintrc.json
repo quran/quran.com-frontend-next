@@ -11,7 +11,8 @@
     "plugins": [
         "prettier",
         "react",
-        "react-func"
+        "react-func",
+        "sonarjs"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
@@ -62,6 +63,9 @@
                 "tsx": "never"
             }
         ],
+        "sonarjs/no-inverted-boolean-check": "error",
+        "sonarjs/no-nested-switch": "error",
+        "sonarjs/no-redundant-boolean": "error",
         "prettier/prettier": [
             2,
             {
