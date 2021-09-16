@@ -1,6 +1,6 @@
 name: Build Storybook
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   build-storybook:
@@ -47,3 +47,32 @@ jobs:
           GIT_AUTHOR_NAME: ${{ github.actor }}
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
+
+  update-storybook-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Storybook preview: *In-Progress*
+
+  update-storybook-url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Storybook preview
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/${{ github.head_ref }}/
+          edit-mode: replace 
