@@ -74,7 +74,7 @@ jobs:
     needs: [deploy-storybook, create-storybook-comment]
     steps:
       - name: Update comment
-        if: steps.fc.outputs.comment-id != ''
+        if: needs.create-storybook-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ needs.create-storybook-comment.outputs.comment-id }}
