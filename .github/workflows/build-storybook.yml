@@ -79,7 +79,6 @@ jobs:
           comment-author: 'github-actions[bot]'
           body-includes: Storybook preview
       - name: Update comment
-        if: needs.create-storybook-comment.outputs.comment-id != ''
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
