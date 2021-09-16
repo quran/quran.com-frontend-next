@@ -54,6 +54,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [customMessageComponent, setCustomMessage] = useState(null);
   // whether the selection has been copied successfully to the clipboard or not.
   const [isCopied, setIsCopied] = useState(false);
+  // objectUrl will be used inside `<a> to download a txt file containing copied text.
   const [objectUrl, setObjectUrl] = useState(null);
 
   // listen to any changes to the value of isCopied.
