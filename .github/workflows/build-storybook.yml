@@ -48,16 +48,6 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ github.actor }}@users.noreply.github.com
           GIT_COMMITTER_NAME: ${{ github.actor }}
 
-  create-storybook-comment:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v1
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            Storybook preview: *In-Progress*
-
   post-storybook-url:
     runs-on: ubuntu-latest
     needs: deploy-storybook
