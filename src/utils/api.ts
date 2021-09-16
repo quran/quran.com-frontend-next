@@ -2,7 +2,7 @@ import { QuranFont } from 'src/components/QuranReader/types';
 import { stringify } from 'qs';
 
 export const ITEMS_PER_PAGE = 10;
-const DEFAULT_MUSHAF = 4; // King Fahad Quran Complex 15 Lines Hafs text.
+export const DEFAULT_MUSHAF = 4; // King Fahad Quran Complex 15 Lines Hafs text.
 
 const STAGING_API_HOST = 'https://staging.quran.com/api/qdc';
 const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc';
