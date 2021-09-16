@@ -74,9 +74,8 @@ jobs:
 
   post-storybook-url:
     runs-on: ubuntu-latest
-    needs: create-storybook-comment
+    needs: [create-storybook-comment, deploy-storybook]
     steps:
-      - run: echo ${{ needs.create-storybook-comment.outputs.comment-id }}
       - name: Update comment
         uses: peter-evans/create-or-update-comment@v1
         with:
