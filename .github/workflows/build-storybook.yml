@@ -62,7 +62,7 @@ jobs:
           body-includes: "Storybook preview:"
       - name: Save comment id
         id: comment-id
-        run: echo "::set-output name=comment-id::446"
+        run: echo "::set-output name=comment-id::${{ steps.find-comment.outputs.comment-id }}"
       - name: Create comment
         if: steps.find-comment.outputs.comment-id == '' # only create new comment, if no previous storybook comment found
         uses: peter-evans/create-or-update-comment@v1
