@@ -1,0 +1,31 @@
+@use "src/components/dls/Modal/constants";
+
+.action {
+  flex: 1;
+  border: none;
+  border-top: 1px solid var(--color-borders-hairline);
+  font-size: var(--font-size-normal);
+  background-color: inherit;
+  padding: var(--spacing-large);
+  color: var(--color-text-faded);
+  overflow: hidden;
+  transition: background-color constants.$animationDuration
+    constants.$animationEasing;
+  &:hover {
+    opacity: var(--opacity-75);
+    background-color: var(--color-background-alternative);
+    color: var(--color-text-default);
+  }
+}
+.action:not(:only-child):not(:last-child) {
+  border-right: 1px solid var(--color-borders-hairline);
+}
+.action:last-child {
+  color: var(--color-text-default);
+}
+.action[disabled] {
+  opacity: var(--opacity-75);
+  cursor: not-allowed;
+  background-color: var(--color-background-alternative);
+  color: var(--color-text-faded);
+}

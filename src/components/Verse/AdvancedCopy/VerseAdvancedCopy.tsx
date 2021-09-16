@@ -15,7 +15,8 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { areArraysEqual } from 'src/utils/array';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
-import VersesRangeSelector, { RangeSelectorType, RangeVerseItem } from './VersesRangeSelector';
+import VersesRangeSelector from './VersesRangeSelector';
+import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
 import styles from './VerseAdvancedCopy.module.scss';
 
 interface Props {

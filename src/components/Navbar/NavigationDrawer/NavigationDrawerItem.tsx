@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import Link from 'next/link';
 import React from 'react';
 import IconContainer, { IconColor, IconSize } from 'src/components/dls/IconContainer/IconContainer';
 import IconNorthEast from '../../../../public/icons/north_east.svg';
+import LinkContainer from './LinkContainer';
 import styles from './NavigationDrawerItem.module.scss';
 
 type NavigationDrawerItemProps = {
@@ -11,24 +11,6 @@ type NavigationDrawerItemProps = {
   isExternalLink?: boolean;
   href?: string;
   isStale?: boolean;
-};
-
-const LinkContainer = ({ href, isExternalLink, children }: LinkContainerProps) => {
-  if (!href) {
-    return <>{children}</>;
-  }
-  if (isExternalLink) {
-    return (
-      <a className={styles.anchor} href={href} target="_blank" rel="noreferrer">
-        {children}
-      </a>
-    );
-  }
-  return (
-    <Link href={href} passHref>
-      <a className={styles.anchor}>{children}</a>
-    </Link>
-  );
 };
 
 const NavigationDrawerItem = ({
@@ -58,11 +40,5 @@ const NavigationDrawerItem = ({
     </div>
   </LinkContainer>
 );
-
-type LinkContainerProps = {
-  href?: string;
-  isExternalLink?: boolean;
-  children: React.ReactNode;
-};
 
 export default NavigationDrawerItem;

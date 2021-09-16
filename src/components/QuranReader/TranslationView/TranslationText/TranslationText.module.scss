@@ -1,52 +1,12 @@
 @use "src/styles/utility";
-
-@mixin footnote-styling {
-  sup {
-    color: var(--color-text-link);
-    top: calc(-1 * var(--spacing-xsmall));
-    position: relative;
-    font-size: var(--font-size-small);
-    line-height: 0;
-    vertical-align: baseline;
-    padding: 0 var(--spacing-micro);
-    cursor: pointer;
-    padding-right: 0;
-  }
-  i {
-    font-size: var(--font-size-normal);
-  }
-  span,
-  b {
-    color: var(--color-text-warning);
-  }
-}
+@use "src/components/QuranReader/TranslationView/TranslationText/footnote";
 
 .text {
   letter-spacing: 0;
   line-height: normal;
   padding-bottom: var(--spacing-micro);
   color: var(--color-text-default);
-  @include footnote-styling;
-}
-
-.footnoteContainer {
-  padding: var(--spacing-small);
-  margin: var(--spacing-xxsmall) 0;
-  border: 1px solid var(--color-primary-medium);
-  border-radius: var(--border-radius-default);
-  background-color: var(--color-background-alternative);
-}
-
-.footnote {
-  @include footnote-styling;
-}
-
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: var(--spacing-xxsmall);
-  font-weight: var(--font-weight-bold);
+  @include footnote.footnote-styling;
 }
 
 @include utility.generate-font-sizes("translation");

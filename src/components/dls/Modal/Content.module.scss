@@ -1,0 +1,99 @@
+@use "src/styles/breakpoints";
+@use "src/components/dls/Modal/constants";
+
+@keyframes desktopContentIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -70%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes desktopContentOut {
+  0% {
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    transform: translate(-50%, -70%);
+  }
+}
+
+@keyframes mobileContentIn {
+  0% {
+    transform: translate(0%, 100%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes mobileContentOut {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(0%, 100%);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.content {
+  background-color: var(--color-background-default);
+  border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
+  overflow: hidden;
+  box-shadow: var(--shadow-jumbo);
+  position: fixed;
+  bottom: 0%;
+  width: constants.$mobileWidth;
+  &:focus {
+    outline: none;
+  }
+  @include breakpoints.desktop {
+    border-radius: var(--border-radius-default);
+    width: constants.$desktopWidth;
+    max-width: constants.$desktopMaxWidth;
+    bottom: inherit;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.content[data-state="open"] {
+  animation: mobileContentIn constants.$animationDuration
+      constants.$animationEasing,
+    fadeIn constants.$animationDuration constants.$animationEasing;
+  @include breakpoints.tablet {
+    animation: desktopContentIn constants.$animationDuration
+        constants.$animationEasing,
+      fadeIn constants.$animationDuration constants.$animationEasing;
+  }
+}
+.content[data-state="closed"] {
+  animation: mobileContentOut constants.$animationDuration
+      constants.$animationEasing,
+    fadeIn constants.$animationDuration constants.$animationEasing;
+  @include breakpoints.tablet {
+    animation: desktopContentOut constants.$animationDuration
+        constants.$animationEasing,
+      fadeOut constants.$animationDuration constants.$animationEasing;
+  }
+}

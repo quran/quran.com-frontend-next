@@ -25,16 +25,3 @@
   font-size: var(--font-size-normal);
   vertical-align: text-top;
 }
-
-.anchor {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  &:hover {
-    color: var(--color-text-default);
-
-    path {
-      fill: var(--color-primary-medium);
-    }
-  }
-}

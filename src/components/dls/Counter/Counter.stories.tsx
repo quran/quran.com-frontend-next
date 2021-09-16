@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { useState } from 'react';
 import Counter from './Counter';
 

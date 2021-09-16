@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 /* eslint-disable no-alert */
 import { useState } from 'react';
 import Button, { ButtonVariant, ButtonType } from '../Button/Button';
@@ -83,7 +84,7 @@ export const WithDisabledAction = () => (
     </Modal.Body>
     <Modal.Footer>
       <Modal.CloseAction>Cancel</Modal.CloseAction>
-      <Modal.Action disabled>Submit</Modal.Action>
+      <Modal.Action isDisabled>Submit</Modal.Action>
     </Modal.Footer>
   </Modal>
 );
@@ -94,7 +95,7 @@ export const WithControlledComponent = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>a trigger button</Button>
-      <Modal open={open} onClickOutside={() => setOpen(false)}>
+      <Modal isOpen={open} onClickOutside={() => setOpen(false)}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>MODAL</Modal.Title>
@@ -104,7 +105,7 @@ export const WithControlledComponent = () => {
         </Modal.Body>
         <Modal.Footer>
           <Modal.Action>Cancel</Modal.Action>
-          <Modal.Action disabled>Submit</Modal.Action>
+          <Modal.Action isDisabled>Submit</Modal.Action>
         </Modal.Footer>
       </Modal>
     </>
