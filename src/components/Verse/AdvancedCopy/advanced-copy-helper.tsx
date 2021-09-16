@@ -5,6 +5,7 @@ import { getVerseNumberFromKey } from 'src/utils/verse';
 import useSWRImmutable from 'swr/immutable';
 import clipboardCopy from 'clipboard-copy';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { makeAdvancedCopyUrl } from 'src/utils/apiPaths';
 
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
@@ -63,8 +64,8 @@ export const useTextToCopy = ({
   const toBeCopiedTranslations = Object.keys(translations).filter(
     (translationId) => translations[translationId].shouldBeCopied === true,
   );
-  const { data } = useSWRImmutable(`text-to-copy-${fromVerse}-${toVerse}`, () =>
-    getAdvancedCopyRawResult({
+  const { data } = useSWRImmutable(
+    makeAdvancedCopyUrl({
       raw: true,
       from: fromVerse,
       to: toVerse,
@@ -72,6 +73,17 @@ export const useTextToCopy = ({
       ...(toBeCopiedTranslations.length > 0 && { translations: toBeCopiedTranslations.join(', ') }), // only include the translations when at least 1 translation has been selected.
       ...(shouldCopyText && { mushaf: DEFAULT_MUSHAF }), // only include the Quranic text if the user chose to.
     }),
+    () =>
+      getAdvancedCopyRawResult({
+        raw: true,
+        from: fromVerse,
+        to: toVerse,
+        footnote: shouldCopyFootnotes,
+        ...(toBeCopiedTranslations.length > 0 && {
+          translations: toBeCopiedTranslations.join(', '),
+        }), // only include the translations when at least 1 translation has been selected.
+        ...(shouldCopyText && { mushaf: DEFAULT_MUSHAF }), // only include the Quranic text if the user chose to.
+      }),
   );
 
   return data?.result;
