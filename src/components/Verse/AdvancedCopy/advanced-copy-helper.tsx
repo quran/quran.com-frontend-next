@@ -1,10 +1,8 @@
-import React from 'react';
 import { getAdvancedCopyRawResult } from 'src/api';
 import { DEFAULT_MUSHAF } from 'src/utils/api';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 import useSWRImmutable from 'swr/immutable';
 import clipboardCopy from 'clipboard-copy';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { makeAdvancedCopyUrl } from 'src/utils/apiPaths';
 
 /**
@@ -115,16 +113,6 @@ export const copyText = ({
   }
 
   clipboardCopy(textToCopy).then(() => {
-    const objectUrl = window.URL.createObjectURL(new Blob([textToCopy], { type: 'text/plain' }));
     setIsCopied(true);
-    setCustomMessage(
-      <p>
-        Text is copied successfully in your clipboard.{' '}
-        <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
-          Click here
-        </Link>{' '}
-        if you want to download text file.
-      </p>,
-    );
   });
 };

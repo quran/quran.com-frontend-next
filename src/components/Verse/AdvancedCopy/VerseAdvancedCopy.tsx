@@ -10,6 +10,7 @@ import useSWRImmutable from 'swr/immutable';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { throwIfError } from 'src/utils/error';
 import { areArraysEqual } from 'src/utils/array';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector from './VersesRangeSelector';
@@ -53,6 +54,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [customMessageComponent, setCustomMessage] = useState(null);
   // whether the selection has been copied successfully to the clipboard or not.
   const [isCopied, setIsCopied] = useState(false);
+  const [objectUrl, setObjectUrl] = useState(null);
 
   // listen to any changes to the value of isCopied.
   useEffect(() => {
@@ -162,6 +164,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       showRangeOfVerses,
       textToCopy,
     });
+    setObjectUrl(window.URL.createObjectURL(new Blob([textToCopy], { type: 'text/plain' })));
   };
 
   const onShouldCopyTextChange = () => {
@@ -268,6 +271,15 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       />
       {customMessageComponent && (
         <div className={styles.customMessage}>{customMessageComponent}</div>
+      )}
+      {objectUrl && (
+        <p className={styles.customMessage}>
+          Text is copied successfully in your clipboard.{' '}
+          <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
+            Click here
+          </Link>{' '}
+          if you want to download text file.
+        </p>
       )}
     </>
   );

@@ -1,5 +1,7 @@
+/* eslint-disable react/jsx-no-target-blank */ // eslint failed to lint properly
 import NextLink from 'next/link';
 import classNames from 'classnames';
+import Wrapper from 'src/components/Wrapper/Wrapper';
 import styles from './Link.module.scss';
 
 export enum LinkVariant {
@@ -17,21 +19,24 @@ type LinkProps = {
 };
 
 const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
-  <NextLink href={href}>
-    <a
-      download={download}
-      target={newTab ? '_blank' : undefined}
-      rel={newTab ? 'noreferrer' : undefined}
-      className={classNames(styles.base, {
-        [styles.highlight]: variant === LinkVariant.Highlight,
-        [styles.primary]: variant === LinkVariant.Primary,
-        [styles.secondary]: variant === LinkVariant.Secondary,
-        [styles.blend]: variant === LinkVariant.Blend,
-      })}
-    >
-      {children}
-    </a>
-  </NextLink>
+  <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
+    <NextLink href={href}>
+      <a
+        href={download ? href : undefined}
+        download={download}
+        target={newTab ? '_blank' : undefined}
+        rel={newTab ? 'noreferrer' : undefined}
+        className={classNames(styles.base, {
+          [styles.highlight]: variant === LinkVariant.Highlight,
+          [styles.primary]: variant === LinkVariant.Primary,
+          [styles.secondary]: variant === LinkVariant.Secondary,
+          [styles.blend]: variant === LinkVariant.Blend,
+        })}
+      >
+        {children}
+      </a>
+    </NextLink>
+  </Wrapper>
 );
 
 export default Link;
