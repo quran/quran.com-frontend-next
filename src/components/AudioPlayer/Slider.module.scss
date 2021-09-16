@@ -1,8 +1,6 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
 
-$split-height: 2px;
-
 .container {
   text-align: left;
   margin-top: var(--spacing-xxsmall);
@@ -88,18 +86,6 @@ $split-height: 2px;
     width: 70%;
     position: inherit;
   }
-}
-
-.split {
-  height: $split-height;
-  cursor: pointer;
-  display: inline-block;
-  margin-bottom: calc(1.5 * var(--spacing-micro));
-  background-color: var(--color-secondary-medium);
-}
-
-.splitCompleted {
-  background-color: var(--color-primary-medium);
 }
 
 .reciterNameContainer {

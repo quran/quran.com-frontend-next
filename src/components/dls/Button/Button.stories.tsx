@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
 import SettingIcon from '../../../../public/icons/settings.svg';

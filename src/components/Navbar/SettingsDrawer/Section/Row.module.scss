@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.row > *:first-child {
+  max-width: calc(3 * var(--spacing-mega));
+}
+.row > * {
+  flex: 1;
+}
+.row + .row {
+  margin-top: var(--spacing-xsmall);
+}

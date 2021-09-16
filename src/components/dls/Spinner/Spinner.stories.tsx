@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import Spinner, { SpinnerSize } from './Spinner';
 
 export default {

@@ -2,7 +2,7 @@ import Modal from '../dls/Modal/Modal';
 import styles from './SurahAudioMismatchModal.module.scss';
 
 type Props = {
-  open: boolean;
+  isOpen: boolean;
   currentAudioChapter: string;
   onContinue: (e) => void;
   currentReadingChapter: string;
@@ -10,13 +10,13 @@ type Props = {
 };
 
 const SurahAudioMismatchModal = ({
-  open,
+  isOpen,
   currentAudioChapter,
   currentReadingChapter,
   onContinue,
   onStartOver,
 }: Props) => (
-  <Modal open={open}>
+  <Modal isOpen={isOpen}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>

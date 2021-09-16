@@ -3,27 +3,16 @@ import { secondsFormatter } from 'src/utils/datetime';
 import range from 'lodash/range';
 import classNames from 'classnames';
 import styles from './Slider.module.scss';
-
-const NUMBER_OF_SPLITS = 100;
+import Split, { NUMBER_OF_SPLITS } from './SliderSplit';
 
 type SliderProps = {
   currentTime: number;
   audioDuration: number;
-  setTime: (number) => void;
+  setTime: (number: number) => void;
   isExpanded: boolean;
   reciterName: string;
   isMobileMinimizedForScrolling: boolean;
 };
-
-const Split = ({ isComplete, startTime, onClick }: SplitProps) => (
-  /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
-  <span
-    className={classNames(styles.split, { [styles.splitCompleted]: isComplete })}
-    title={secondsFormatter(startTime)}
-    onClick={() => onClick()}
-    style={{ width: `${100 / NUMBER_OF_SPLITS}%` }}
-  />
-);
 
 /**
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
@@ -88,12 +77,6 @@ const Slider = ({
       <span className={styles.remainingTime}>{secondsFormatter(remainingTime)}</span>
     </div>
   );
-};
-
-type SplitProps = {
-  isComplete: boolean;
-  startTime: number;
-  onClick: () => void;
 };
 
 export default Slider;

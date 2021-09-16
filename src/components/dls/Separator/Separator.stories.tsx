@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import Separator from './Separator';
 import styles from './Separator.stories.module.scss';
 
@@ -20,7 +21,7 @@ export const Vertical = () => (
   <div style={{ display: 'flex', height: '30px', alignItems: 'center' }}>
     <h1>aa</h1>
     <div className={styles.verticalSeparator}>
-      <Separator vertical />
+      <Separator isVertical />
     </div>
     <h1>aa</h1>
   </div>

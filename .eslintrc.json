@@ -2,13 +2,15 @@
     "extends": [
         "airbnb",
         "airbnb/hooks",
+        "plugin:import/recommended",
         "plugin:import/typescript",
         "prettier",
         "plugin:@next/next/recommended"
     ],
     "parser": "babel-eslint",
     "plugins": [
-        "prettier"
+        "prettier",
+        "react"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
@@ -17,6 +19,14 @@
         "@typescript-eslint/no-shadow": ["error"],
         "react/jsx-filename-extension": 0,
         "react/jsx-props-no-spreading": 0,
+        "react/boolean-prop-naming": 2,
+        "react/destructuring-assignment": 2,
+        "react/no-children-prop": 2,
+        "react/no-deprecated": 2,
+        "react/no-multi-comp": 2,
+        "react/jsx-fragments": 2,
+        "react/jsx-handler-names": 2,
+        "react/jsx-sort-default-props": 2,
         "import/extensions": [
             2,
             "ignorePackages",

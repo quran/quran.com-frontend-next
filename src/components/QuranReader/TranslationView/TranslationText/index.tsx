@@ -4,20 +4,13 @@
 import classNames from 'classnames';
 import React, { MouseEvent, useState } from 'react';
 import { getFootnote } from 'src/api';
-import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import Footnote from 'types/Footnote';
-import CloseIcon from '../../../../../public/icons/close.svg';
+import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
 interface Props {
   translationFontScale: number;
   text: string;
-}
-
-interface FootnoteTextProps {
-  text: string;
-  onCloseClicked: () => void;
-  onTextClicked?: (event: MouseEvent, isSubFootnote?: boolean) => void;
 }
 
 const PRE_DEFINED_FOOTNOTES = {
@@ -129,26 +122,5 @@ const TranslationText: React.FC<Props> = ({ translationFontScale, text }) => {
     </>
   );
 };
-
-const FootnoteText: React.FC<FootnoteTextProps> = ({ text, onCloseClicked, onTextClicked }) => (
-  <div className={styles.footnoteContainer}>
-    <div className={styles.header}>
-      <p>Footnote</p>
-      <Button
-        size={ButtonSize.Small}
-        shape={ButtonShape.Circle}
-        type={ButtonType.Secondary}
-        onClick={onCloseClicked}
-      >
-        <CloseIcon />
-      </Button>
-    </div>
-    <div
-      className={styles.footnote}
-      dangerouslySetInnerHTML={{ __html: text }}
-      {...(onTextClicked && { onClick: onTextClicked })}
-    />
-  </div>
-);
 
 export default TranslationText;

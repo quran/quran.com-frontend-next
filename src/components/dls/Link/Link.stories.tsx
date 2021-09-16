@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import Link, { LinkVariant } from './Link';
 
 export default {
@@ -36,7 +37,7 @@ export const Primary = () => (
 
 export const Secondary = () => (
   <Link variant={LinkVariant.Secondary} href="/test">
-    Secondary vaiant
+    Secondary variant
   </Link>
 );
 

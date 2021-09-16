@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
 import Combobox from './index';
 import SettingIcon from '../../../../../public/icons/settings.svg';

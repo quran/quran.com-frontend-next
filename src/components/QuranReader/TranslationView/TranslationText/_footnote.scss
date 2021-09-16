@@ -1,0 +1,20 @@
+@mixin footnote-styling {
+  sup {
+    color: var(--color-text-link);
+    top: calc(-1 * var(--spacing-xsmall));
+    position: relative;
+    font-size: var(--font-size-small);
+    line-height: 0;
+    vertical-align: baseline;
+    padding: 0 var(--spacing-micro);
+    cursor: pointer;
+    padding-right: 0;
+  }
+  i {
+    font-size: var(--font-size-normal);
+  }
+  span,
+  b {
+    color: var(--color-text-warning);
+  }
+}

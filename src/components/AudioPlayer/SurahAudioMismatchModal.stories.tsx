@@ -7,7 +7,7 @@ export default {
 
 export const Preview = () => (
   <SurahAudioMismatchModal
-    open
+    isOpen
     currentAudioChapter="Al-Baqarah"
     currentReadingChapter="Ali 'Imran"
     onContinue={() => {

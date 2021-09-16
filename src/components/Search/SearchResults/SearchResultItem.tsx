@@ -19,10 +19,10 @@ const SearchResultItem: React.FC<Props> = ({ result }) => (
           <div className={styles.quranTextResult}>
             {result.words.map((word, index) => (
               <QuranWord
-                highlight={!!word.highlight}
+                isHighlighted={!!word.highlight}
                 key={`${result.verseKey}:${index + 1}`}
                 word={word}
-                allowWordByWord={false}
+                isWordByWordAllowed={false}
               />
             ))}
           </div>
