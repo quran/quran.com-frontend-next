@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './IndoPakWordText.module.scss';
 
 type IndoPakWordTextProps = {

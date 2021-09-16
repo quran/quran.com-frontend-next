@@ -1,6 +1,9 @@
 import React from 'react';
+
 import classNames from 'classnames';
+
 import CaretIcon from '../../../../../../public/icons/caret-down.svg';
+
 import styles from './CaretInputIcon.module.scss';
 
 interface Props {

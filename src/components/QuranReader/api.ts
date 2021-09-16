@@ -1,10 +1,12 @@
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
-import { getDefaultWordFields } from 'src/utils/api';
-import { VersesResponse } from 'types/APIResponses';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { camelizeKeys } from 'humps';
-import Verse from 'types/Verse';
+
 import { QuranReaderDataType } from './types';
+
+import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getDefaultWordFields } from 'src/utils/api';
+import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
+import { VersesResponse } from 'types/APIResponses';
+import Verse from 'types/Verse';
 
 interface RequestKeyInput {
   quranReaderDataType: QuranReaderDataType;

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import classNames from 'classnames';
-import styles from './VersesRangeSelector.module.scss';
+
 import SelectorContainer, { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
+import styles from './VersesRangeSelector.module.scss';
 
 interface Props {
   dropdownItems: RangeVerseItem[];

@@ -1,5 +1,7 @@
 import React, { MouseEvent } from 'react';
+
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+
 import styles from './Action.module.scss';
 
 type CloseActionProps = {

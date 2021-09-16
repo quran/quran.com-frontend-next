@@ -1,9 +1,12 @@
 import React from 'react';
+
+import { QuranReaderDataType } from '../types';
+
+import styles from './EndOfScrollingControls.module.scss';
+
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import { getChapterData, isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { VersesResponse } from 'types/APIResponses';
-import { QuranReaderDataType } from '../types';
-import styles from './EndOfScrollingControls.module.scss';
 
 interface Props {
   quranReaderDataType: QuranReaderDataType;

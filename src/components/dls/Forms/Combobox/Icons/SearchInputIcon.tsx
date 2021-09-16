@@ -1,6 +1,9 @@
 import React from 'react';
+
 import classNames from 'classnames';
+
 import IconSearch from '../../../../../../public/icons/search.svg';
+
 import styles from './SearchInputIcon.module.scss';
 
 const SearchInputIcon: React.FC = () => (

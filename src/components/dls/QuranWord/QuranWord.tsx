@@ -1,19 +1,22 @@
 import React, { ReactNode, useState, useMemo } from 'react';
-import Word, { CharType } from 'types/Word';
-import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
+
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
+
+import GlyphWord from './GlyphWord';
+import styles from './QuranWord.module.scss';
+import TextWord from './TextWord';
+
+import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
+import Wrapper from 'src/components/Wrapper/Wrapper';
 import {
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import Wrapper from 'src/components/Wrapper/Wrapper';
-import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import { areArraysEqual } from 'src/utils/array';
-import TextWord from './TextWord';
-import GlyphWord from './GlyphWord';
-import styles from './QuranWord.module.scss';
+import { isQCFFont } from 'src/utils/fontFaceHelper';
+import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 

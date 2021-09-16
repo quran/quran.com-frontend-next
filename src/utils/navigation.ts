@@ -1,5 +1,6 @@
-import { SearchNavigationType } from 'types/SearchNavigationResult';
 import { getVerseAndChapterNumbersFromKey } from './verse';
+
+import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 /**
  * Get the href link to a verse.

@@ -3,10 +3,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
 const withFonts = require('next-fonts');
-const nextTranslate = require('next-translate');
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
+const nextTranslate = require('next-translate');
 const { withSentryConfig } = require('@sentry/nextjs');
+
 const securityHeaders = require('./configs/SecurityHeaders.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';

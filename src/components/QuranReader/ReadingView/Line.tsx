@@ -1,8 +1,11 @@
 import React from 'react';
-import Word from 'types/Word';
-import VerseText from 'src/components/Verse/VerseText';
+
 import classNames from 'classnames';
+
 import styles from './Line.module.scss';
+
+import VerseText from 'src/components/Verse/VerseText';
+import Word from 'types/Word';
 
 type LineProps = {
   words: Word[];

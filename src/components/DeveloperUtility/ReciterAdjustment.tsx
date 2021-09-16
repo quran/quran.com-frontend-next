@@ -1,11 +1,14 @@
 import React from 'react';
+
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
+
+import styles from './ReciterAdjustment.module.scss';
+
 import { getAvailableReciters } from 'src/api';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
-import useSWRImmutable from 'swr/immutable';
 import Reciter from 'types/Reciter';
-import styles from './ReciterAdjustment.module.scss';
 
 const ReciterAdjustment: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,11 @@
 import React from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import Section from './Section';
+
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import Select from 'src/components/dls/Forms/Select';
 import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
 import {
   selectReadingPreference,
@@ -11,10 +16,8 @@ import {
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import Select from 'src/components/dls/Forms/Select';
-import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
 import { areArraysEqual } from 'src/utils/array';
-import Section from './Section';
+import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
 
 const ReadingExperienceSection = () => {
   const dispatch = useDispatch();

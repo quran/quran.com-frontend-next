@@ -1,8 +1,11 @@
 import React, { memo, useMemo } from 'react';
+
+import Combobox from '../dls/Forms/Combobox';
+
+import styles from './Filter.module.scss';
+
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
 import AvailableTranslation from 'types/AvailableTranslation';
-import Combobox from '../dls/Forms/Combobox';
-import styles from './Filter.module.scss';
 
 interface Props {
   onTranslationChange: (translationId: string[]) => void;

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 
 const ContextMenuAdjustment = () => {

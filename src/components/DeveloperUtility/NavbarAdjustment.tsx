@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import { selectNavbar, setIsVisible } from 'src/redux/slices/navbar';
 
 const NavbarAdjustment = () => {

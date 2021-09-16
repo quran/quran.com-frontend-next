@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import resetSettings from '../reset-settings';
+
 import { RootState } from 'src/redux/RootState';
 import { areArraysEqual } from 'src/utils/array';
-import resetSettings from '../reset-settings';
 
 // English Mokhtasar and Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = [171, 169];

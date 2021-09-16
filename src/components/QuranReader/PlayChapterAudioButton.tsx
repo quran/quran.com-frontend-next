@@ -1,8 +1,11 @@
 import { useDispatch } from 'react-redux';
-import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
-import styles from './PlayButton.module.scss';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
+
 import PlayIcon from '../../../public/icons/play-arrow.svg';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
+
+import styles from './PlayButton.module.scss';
+
+import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
 
 interface Props {
   chapterId: number;

@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-danger */
-import classNames from 'classnames';
+
 import React, { MouseEvent, useState } from 'react';
-import { getFootnote } from 'src/api';
-import Footnote from 'types/Footnote';
+
+import classNames from 'classnames';
+
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
+
+import { getFootnote } from 'src/api';
+import Footnote from 'types/Footnote';
 
 interface Props {
   translationFontScale: number;

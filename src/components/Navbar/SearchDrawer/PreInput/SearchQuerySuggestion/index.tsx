@@ -1,4 +1,5 @@
 import React, { MouseEvent, KeyboardEvent } from 'react';
+
 import styles from './SearchQuerySuggestion.module.scss';
 
 interface Props {

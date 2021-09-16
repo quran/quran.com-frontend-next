@@ -1,7 +1,10 @@
 import React from 'react';
-import { secondsFormatter } from 'src/utils/datetime';
+
 import classNames from 'classnames';
+
 import styles from './SliderSplit.module.scss';
+
+import { secondsFormatter } from 'src/utils/datetime';
 
 type SplitProps = {
   isComplete: boolean;

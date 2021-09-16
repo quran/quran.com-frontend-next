@@ -1,7 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
-import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
+
 import SettingIcon from '../../../../public/icons/settings.svg';
+
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
 
 export default {
   title: 'dls/Button',

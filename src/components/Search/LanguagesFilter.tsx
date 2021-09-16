@@ -1,7 +1,10 @@
 import React, { memo, useMemo } from 'react';
-import AvailableLanguage from 'types/AvailableLanguage';
+
 import Combobox from '../dls/Forms/Combobox';
+
 import styles from './Filter.module.scss';
+
+import AvailableLanguage from 'types/AvailableLanguage';
 
 interface Props {
   onLanguageChange: (languageIsoCode: string[]) => void;

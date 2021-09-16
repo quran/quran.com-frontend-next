@@ -1,5 +1,22 @@
 import React, { useCallback } from 'react';
+
+import classNames from 'classnames';
+import Link from 'next/link';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
+import IconMenu from '../../../public/icons/menu.svg';
+import IconQ from '../../../public/icons/Q.svg';
+import IconSearch from '../../../public/icons/search.svg';
+import IconSettings from '../../../public/icons/settings.svg';
+import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
+
+import LanguageSelector from './LanguageSelector';
+import styles from './Navbar.module.scss';
+import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
+import SearchDrawer from './SearchDrawer/SearchDrawer';
+import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
+
+import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   selectNavbar,
   setIsSearchDrawerOpen,
@@ -7,19 +24,6 @@ import {
   setIsSettingsDrawerOpen,
   setIsVisible,
 } from 'src/redux/slices/navbar';
-import Link from 'next/link';
-import classNames from 'classnames';
-import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
-import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
-import LanguageSelector from './LanguageSelector';
-import IconSettings from '../../../public/icons/settings.svg';
-import IconSearch from '../../../public/icons/search.svg';
-import IconMenu from '../../../public/icons/menu.svg';
-import IconQ from '../../../public/icons/Q.svg';
-import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
-import SearchDrawer from './SearchDrawer/SearchDrawer';
-import styles from './Navbar.module.scss';
-import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar, shallowEqual);

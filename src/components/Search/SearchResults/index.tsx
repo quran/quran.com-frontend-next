@@ -1,10 +1,14 @@
-import Link from 'next/link';
 import React from 'react';
-import Pagination from 'src/components/dls/Pagination/Pagination';
-import { SearchResponse } from 'types/APIResponses';
+
+import Link from 'next/link';
+
 import NavigationItem from '../NavigationItem';
+
 import SearchResultItem from './SearchResultItem';
 import styles from './SearchResults.module.scss';
+
+import Pagination from 'src/components/dls/Pagination/Pagination';
+import { SearchResponse } from 'types/APIResponses';
 
 interface Props {
   searchResult: SearchResponse;

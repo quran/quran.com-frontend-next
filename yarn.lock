@@ -7588,6 +7588,13 @@ eslint-plugin-prettier@^4.0.0:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
+eslint-plugin-react-func@^0.1.17:
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-func/-/eslint-plugin-react-func-0.1.17.tgz#56ba57486dc539b752816c6aee5f50ebf9b3bc1f"
+  integrity sha512-UDZEiTN9qlHeDm402x6WOCEoo6xUmcF38TAsHUgqJKP0CPOUpnUh9KmsC9BUNqBF5AmBHjozvq7ElsbQKd/KOg==
+  dependencies:
+    requireindex "~1.1.0"
+
 eslint-plugin-react-hooks@^4.0.4, eslint-plugin-react-hooks@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.2.0.tgz#8c229c268d468956334c943bb45fc860280f5556"
@@ -13374,6 +13381,11 @@ require-from-string@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
   integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
+
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+  integrity sha1-5UBLgVV+91225JxacgBIk/4D4WI=
 
 reselect@^4.0.0:
   version "4.0.0"

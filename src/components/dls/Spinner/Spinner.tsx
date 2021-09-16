@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import styles from './Spinner.module.scss';
 
 export enum SpinnerSize {

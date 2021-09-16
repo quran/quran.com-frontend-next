@@ -1,5 +1,9 @@
 import React from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import Section from './Section';
+
 import Counter from 'src/components/dls/Counter/Counter';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
@@ -15,11 +19,10 @@ import {
   setQuranFont,
   initialState as QuranReaderStylesInitialState,
 } from 'src/redux/slices/QuranReader/styles';
+
 // import { getSampleVerse } from 'src/utils/verse';
 // import Word from 'types/Word';
 // import styles from './QuranFontSection.module.scss';
-
-import Section from './Section';
 
 // in the UI, we have two view / font categories, indopak and uthmani.
 const type = [

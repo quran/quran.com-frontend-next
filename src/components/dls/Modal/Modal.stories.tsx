@@ -1,7 +1,9 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable no-alert */
 import { useState } from 'react';
+
 import Button, { ButtonVariant, ButtonType } from '../Button/Button';
+
 import Modal from './Modal';
 
 export default {

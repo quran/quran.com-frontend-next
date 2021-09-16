@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
+import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
+
+import styles from './TafsirsAdjustment.module.scss';
+
 import { getTafsirs } from 'src/api';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import TafsirInfo from 'types/TafsirInfo';
-import capitalize from 'lodash/capitalize';
 import { areArraysEqual, numbersToStringsArray } from 'src/utils/array';
-import styles from './TafsirsAdjustment.module.scss';
+import TafsirInfo from 'types/TafsirInfo';
 
 const TafsirsAdjustment = () => {
   const dispatch = useDispatch();

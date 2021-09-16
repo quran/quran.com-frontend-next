@@ -1,20 +1,5 @@
 import { camelizeKeys } from 'humps';
-import {
-  TranslationsResponse,
-  SearchResponse,
-  AdvancedCopyRawResultResponse,
-  LanguagesResponse,
-  RecitersResponse,
-  AudioFilesResponse,
-  AudioTimestampsResponse,
-  TafsirsResponse,
-  VersesResponse,
-  BaseResponse,
-  ChapterInfoResponse,
-  FootnoteResponse,
-} from 'types/APIResponses';
-import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
-import { AudioFile } from 'types/AudioFile';
+
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -31,6 +16,23 @@ import {
   makePageVersesUrl,
   makeFootnoteUrl,
 } from './utils/apiPaths';
+
+import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
+import {
+  TranslationsResponse,
+  SearchResponse,
+  AdvancedCopyRawResultResponse,
+  LanguagesResponse,
+  RecitersResponse,
+  AudioFilesResponse,
+  AudioTimestampsResponse,
+  TafsirsResponse,
+  VersesResponse,
+  BaseResponse,
+  ChapterInfoResponse,
+  FootnoteResponse,
+} from 'types/APIResponses';
+import { AudioFile } from 'types/AudioFile';
 
 export const fetcher = async function fetcher(
   input: RequestInfo,

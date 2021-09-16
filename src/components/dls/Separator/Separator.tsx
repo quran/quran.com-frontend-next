@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
+import classNames from 'classnames';
+
 import styles from './Separator.module.scss';
 
 type SeparatorProps = {

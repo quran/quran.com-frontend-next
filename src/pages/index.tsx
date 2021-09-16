@@ -1,14 +1,18 @@
 import React from 'react';
-import Image from 'next/image';
+
 import { NextPage, GetStaticProps } from 'next';
-import { ChaptersResponse } from 'types/APIResponses';
-import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
-import homepageImage from 'public/images/homepage.png';
-import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
-import { getAllChaptersData } from 'src/utils/chapter';
+import Image from 'next/image';
+
 import ChaptersList from '../components/chapters/ChaptersList';
 import QuickLinks from '../components/HomePage/QuickLinks';
+
 import styles from './index.module.scss';
+
+import homepageImage from 'public/images/homepage.png';
+import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
+import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
+import { getAllChaptersData } from 'src/utils/chapter';
+import { ChaptersResponse } from 'types/APIResponses';
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;

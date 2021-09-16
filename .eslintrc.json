@@ -10,7 +10,8 @@
     "parser": "babel-eslint",
     "plugins": [
         "prettier",
-        "react"
+        "react",
+        "react-func"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
@@ -27,6 +28,19 @@
         "react/jsx-fragments": 2,
         "react/jsx-handler-names": 2,
         "react/jsx-sort-default-props": 2,
+        "react-func/max-lines-per-function": ["error", {
+            "max": 30,
+            "skipBlankLines": true,
+            "skipComments": true
+        }],
+        "import/order": ["error", {"newlines-between": "always", "alphabetize": {"order": "asc", "caseInsensitive": true}, "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "builtin",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": ["react"]}],
         "import/extensions": [
             2,
             "ignorePackages",

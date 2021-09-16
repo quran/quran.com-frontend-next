@@ -1,33 +1,37 @@
 import React from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
-import InfiniteScroll from 'react-infinite-scroller';
-import useSWRInfinite from 'swr/infinite';
-import { VersesResponse } from 'types/APIResponses';
-import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import {
-  selectIsUsingDefaultTranslations,
-  selectSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
+
 import classNames from 'classnames';
+import InfiniteScroll from 'react-infinite-scroller';
+import { shallowEqual, useSelector } from 'react-redux';
+import useSWRInfinite from 'swr/infinite';
+
+import { getPageLimit, getRequestKey, verseFetcher } from './api';
+import EndOfScrollingControls from './EndOfScrollingControls';
+import Notes from './Notes/Notes';
+import onCopyQuranWords from './onCopyQuranWords';
+import styles from './QuranReader.module.scss';
+import ReadingView from './ReadingView';
+import TafsirView from './TafsirView';
+import TranslationView from './TranslationView';
+import { QuranReaderDataType, ReadingPreference } from './types';
+
+import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectNotes } from 'src/redux/slices/QuranReader/notes';
+import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {
   selectIsUsingDefaultTafsirs,
   selectSelectedTafsirs,
 } from 'src/redux/slices/QuranReader/tafsirs';
-import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
-import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import {
+  selectIsUsingDefaultTranslations,
+  selectSelectedTranslations,
+} from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import ReadingView from './ReadingView';
-import TranslationView from './TranslationView';
-import { QuranReaderDataType, ReadingPreference } from './types';
-import Notes from './Notes/Notes';
-import styles from './QuranReader.module.scss';
-import TafsirView from './TafsirView';
-import onCopyQuranWords from './onCopyQuranWords';
-import EndOfScrollingControls from './EndOfScrollingControls';
-import { getPageLimit, getRequestKey, verseFetcher } from './api';
+import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
+import { VersesResponse } from 'types/APIResponses';
+
 // import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {

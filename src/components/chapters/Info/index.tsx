@@ -1,13 +1,18 @@
 /* eslint-disable react/no-danger */
+
 import React from 'react';
-import Chapter from 'types/Chapter';
+
 import capitalize from 'lodash/capitalize';
-import ChapterInfo from 'types/ChapterInfo';
 import Image from 'next/image';
-import { getBlurDataUrl } from 'src/utils/image';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+
 import BackIcon from '../../../../public/icons/west.svg';
+
 import styles from './Info.module.scss';
+
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { getBlurDataUrl } from 'src/utils/image';
+import Chapter from 'types/Chapter';
+import ChapterInfo from 'types/ChapterInfo';
 
 interface Props {
   chapter?: Chapter;

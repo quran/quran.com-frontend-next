@@ -1,10 +1,13 @@
 import React from 'react';
+
 import { shallowEqual, useSelector } from 'react-redux';
-import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
-import { withStopPropagation } from 'src/utils/event';
+
 import DownloadIcon from '../../../public/icons/download.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
+
+import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { withStopPropagation } from 'src/utils/event';
 
 const download = (url: string, onDone: () => void) => {
   const filename = url.substring(url.lastIndexOf('/') + 1).split('?')[0];

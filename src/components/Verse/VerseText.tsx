@@ -1,14 +1,17 @@
 import React, { useMemo } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
-import Word from 'types/Word';
+
 import classNames from 'classnames';
-import { getFirstWordOfSurah } from 'src/utils/verse';
-import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import { shallowEqual, useSelector } from 'react-redux';
+
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
+
+import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getFirstWordOfSurah } from 'src/utils/verse';
+import Word from 'types/Word';
 
 type VerseTextProps = {
   words: Word[];

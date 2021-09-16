@@ -1,15 +1,17 @@
 import { useSelector } from 'react-redux';
-import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
-import { withStopPropagation } from 'src/utils/event';
 
 import ForwardIcon from '../../../public/icons/forward_10.svg';
 import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
 import ReplayIcon from '../../../public/icons/replay_10.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
+
 import DownloadAudioButton from './DownloadAudioButton';
 import { triggerSeek } from './EventTriggers';
 import styles from './PlaybackControls.module.scss';
 import PlayPauseButton from './PlayPauseButton';
+
+import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
+import { withStopPropagation } from 'src/utils/event';
 
 const PlaybackControls = () => {
   const audioFileStatus = useSelector(selectAudioFileStatus);

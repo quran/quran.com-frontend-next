@@ -1,8 +1,11 @@
 import React from 'react';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+
 import Link from 'next/link';
-import { resolveUrlBySearchNavigationType } from 'src/utils/navigation';
+
 import styles from './NavigationItem.module.scss';
+
+import { resolveUrlBySearchNavigationType } from 'src/utils/navigation';
+import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 interface Props {
   navigation: SearchNavigationResult;

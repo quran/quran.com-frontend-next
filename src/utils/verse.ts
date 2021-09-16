@@ -1,6 +1,7 @@
 import range from 'lodash/range';
-import * as sampleVerse from './sample-verse.json';
+
 import { getAllChaptersData } from './chapter';
+import * as sampleVerse from './sample-verse.json';
 
 const COLON_SPLITTER = ':';
 

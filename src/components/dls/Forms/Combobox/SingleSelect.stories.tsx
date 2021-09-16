@@ -1,9 +1,12 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
-import Combobox from './index';
-import SettingIcon from '../../../../../public/icons/settings.svg';
+
 import SearchIcon from '../../../../../public/icons/search.svg';
+import SettingIcon from '../../../../../public/icons/settings.svg';
+
 import ComboboxSize from './types/ComboboxSize';
+
+import Combobox from './index';
 
 export default {
   title: 'dls/Combobox/SingleSelect',

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import { selectNotes, setIsVisible } from 'src/redux/slices/QuranReader/notes';
 
 const NotesAdjustment = () => {

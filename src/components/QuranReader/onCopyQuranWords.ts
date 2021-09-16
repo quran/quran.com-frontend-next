@@ -1,8 +1,9 @@
 import clipboardCopy from 'clipboard-copy';
-import Verse from 'types/Verse';
-import { getWordDataByLocation } from 'src/utils/verse';
 
 import { DATA_ATTRIBUTE_WORD_LOCATION } from '../dls/QuranWord/QuranWord';
+
+import { getWordDataByLocation } from 'src/utils/verse';
+import Verse from 'types/Verse';
 
 /**
  * 1) select all DOM nodes that contain data attribute `data-word-location`

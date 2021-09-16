@@ -1,9 +1,11 @@
 import { decamelizeKeys } from 'humps';
+
+import { ITEMS_PER_PAGE, makeUrl } from './api';
+
 import { QuranFont } from 'src/components/QuranReader/types';
 import { DEFAULT_RECITER } from 'src/redux/slices/AudioPlayer/defaultData';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
 import { AdvancedCopyRequest, SearchRequest } from 'types/APIRequests';
-import { ITEMS_PER_PAGE, makeUrl } from './api';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,

@@ -1,13 +1,16 @@
 import React from 'react';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
-import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
-import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
-import { getChapterData } from 'src/utils/chapter';
-import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
-import styles from './ChapterHeader.module.scss';
-import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
+
 import InfoIcon from '../../../../public/icons/info.svg';
+import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
+import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
+
+import styles from './ChapterHeader.module.scss';
+
+import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
+import { getChapterData } from 'src/utils/chapter';
+import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 
 interface Props {
   chapterId: string;

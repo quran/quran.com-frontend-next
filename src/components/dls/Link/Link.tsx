@@ -1,5 +1,6 @@
-import NextLink from 'next/link';
 import classNames from 'classnames';
+import NextLink from 'next/link';
+
 import styles from './Link.module.scss';
 
 export enum LinkVariant {

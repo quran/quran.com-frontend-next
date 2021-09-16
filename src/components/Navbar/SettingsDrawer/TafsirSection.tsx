@@ -1,12 +1,15 @@
 import { useCallback } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { getTafsirs } from 'src/api';
-import Combobox from 'src/components/dls/Forms/Combobox';
-import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { throwIfError } from 'src/utils/error';
 import useSWRImmutable from 'swr/immutable';
-import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+
+import Section from './Section';
+
+import { getTafsirs } from 'src/api';
+import Counter from 'src/components/dls/Counter/Counter';
+import Combobox from 'src/components/dls/Forms/Combobox';
+import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
 import {
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -15,11 +18,11 @@ import {
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
-import Counter from 'src/components/dls/Counter/Counter';
+import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
+import { throwIfError } from 'src/utils/error';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
 import TafsirInfo from 'types/TafsirInfo';
-import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
-import Section from './Section';
 
 // convert tafsir data (from API) to combobox items structure
 // so use it with Combobox component

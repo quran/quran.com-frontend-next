@@ -1,7 +1,9 @@
 import { useDispatch } from 'react-redux';
-import resetSettings from 'src/redux/slices/reset-settings';
-import Button from 'src/components/dls/Button/Button';
+
 import styles from './ResetButton.module.scss';
+
+import Button from 'src/components/dls/Button/Button';
+import resetSettings from 'src/redux/slices/reset-settings';
 
 // reset button will dispatch a `reset` action
 // reducers will listen to this action

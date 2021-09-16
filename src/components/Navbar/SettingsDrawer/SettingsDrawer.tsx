@@ -1,13 +1,17 @@
+import { useCallback, useRef, useEffect } from 'react';
+
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { selectNavbar, setIsSettingsDrawerOpen } from 'src/redux/slices/navbar';
-import { useCallback, useRef, useEffect } from 'react';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+
 import IconClose from '../../../../public/icons/close.svg';
-import styles from './SettingsDrawer.module.scss';
+
 import SettingsBody from './SettingsBody';
+import styles from './SettingsDrawer.module.scss';
+
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import { selectNavbar, setIsSettingsDrawerOpen } from 'src/redux/slices/navbar';
 
 const SettingsDrawer = () => {
   const drawerRef = useRef(null);

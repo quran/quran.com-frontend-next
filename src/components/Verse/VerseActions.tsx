@@ -1,11 +1,15 @@
-import Verse from 'types/Verse';
 // import { useSelector } from 'react-redux';
 // import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import Popover from '../dls/Popover';
+
 import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
-import VerseActionsMenu from './VerseActionsMenu';
-// import PlayVerseAudioButton from './PlayVerseAudioButton';
 import Button, { ButtonType } from '../dls/Button/Button';
+import Popover from '../dls/Popover';
+
+import VerseActionsMenu from './VerseActionsMenu';
+
+import Verse from 'types/Verse';
+
+// import PlayVerseAudioButton from './PlayVerseAudioButton';
 
 interface Props {
   verse: Verse;

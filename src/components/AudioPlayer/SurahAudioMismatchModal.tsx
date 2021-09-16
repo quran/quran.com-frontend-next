@@ -1,4 +1,5 @@
 import Modal from '../dls/Modal/Modal';
+
 import styles from './SurahAudioMismatchModal.module.scss';
 
 type Props = {

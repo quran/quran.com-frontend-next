@@ -1,9 +1,12 @@
 import React, { useMemo } from 'react';
-import range from 'lodash/range';
+
 import classNames from 'classnames';
-import Button, { ButtonVariant } from '../Button/Button';
-import NextIcon from '../../../../public/icons/caret-forward.svg';
+import range from 'lodash/range';
+
 import PreviousIcon from '../../../../public/icons/caret-back.svg';
+import NextIcon from '../../../../public/icons/caret-forward.svg';
+import Button, { ButtonVariant } from '../Button/Button';
+
 import styles from './Pagination.module.scss';
 
 interface Props {

@@ -1,18 +1,20 @@
-import Error from 'next/error';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import React from 'react';
-import { getJuzVerses } from 'src/api';
+
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
-import { isValidJuzId } from 'src/utils/validator';
-import { VersesResponse } from 'types/APIResponses';
+
+import { getJuzVerses } from 'src/api';
+import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
-import NextSeoHead from 'src/components/NextSeoHead';
 import { getDefaultWordFields } from 'src/utils/api';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { isValidJuzId } from 'src/utils/validator';
+import { VersesResponse } from 'types/APIResponses';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;

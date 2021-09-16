@@ -1,7 +1,8 @@
-import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
-import styles from './Counter.module.scss';
-import PlusIcon from '../../../../public/icons/plus.svg';
 import MinusIcon from '../../../../public/icons/minus.svg';
+import PlusIcon from '../../../../public/icons/plus.svg';
+import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
+
+import styles from './Counter.module.scss';
 
 type CounterProps = {
   count: number;

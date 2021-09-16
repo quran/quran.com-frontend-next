@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/role-has-required-aria-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+
 import React, {
   ChangeEvent,
   useState,
@@ -11,19 +12,22 @@ import React, {
   useRef,
   useMemo,
 } from 'react';
+
 import classNames from 'classnames';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useFocus from 'src/hooks/useFocusElement';
-import { DropdownItem } from './ComboboxItem';
+
 import styles from './Combobox.module.scss';
+import { DropdownItem } from './ComboboxItem';
+import ComboboxItems from './ComboboxItems';
+import CaretInputIcon from './Icons/CaretInputIcon';
+import ClearInputIcon from './Icons/ClearInputIcon';
+import SearchInputIcon from './Icons/SearchInputIcon';
 import Tag from './Tag';
 import ComboboxSize from './types/ComboboxSize';
-import ClearInputIcon from './Icons/ClearInputIcon';
-import CaretInputIcon from './Icons/CaretInputIcon';
-import SearchInputIcon from './Icons/SearchInputIcon';
-import ComboboxItems from './ComboboxItems';
 import { InitialValue, Value, MultiSelectValue, InitialSelectedItems } from './types/Values';
+
+import useFocus from 'src/hooks/useFocusElement';
+import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 
 interface Props {
   id: string;

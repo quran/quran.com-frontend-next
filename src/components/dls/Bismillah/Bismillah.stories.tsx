@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Bismillah from './Bismillah';
 
 export default {
