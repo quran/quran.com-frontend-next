@@ -19,7 +19,8 @@ const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, initialD
   if (!isVerse) {
     return <></>;
   }
-  const { chapterId, verseNumber } = initialData.verses[0];
+  const [firstVerse] = initialData.verses;
+  const { chapterId, verseNumber } = firstVerse;
   const { versesCount } = getChapterData(String(chapterId));
   const chapterNumber = Number(chapterId);
   const isLastVerseOfSurah = verseNumber === versesCount;

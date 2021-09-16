@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -252,10 +253,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   let translations = [];
   let languages = [];
   if (availableLanguagesResponse.status !== 500) {
-    languages = availableLanguagesResponse.languages;
+    const { languages: responseLanguages } = availableLanguagesResponse;
+    languages = responseLanguages;
   }
   if (availableTranslationsResponse.status !== 500) {
-    translations = availableTranslationsResponse.translations;
+    const { translations: responseTranslations } = availableTranslationsResponse;
+    translations = responseTranslations;
   }
 
   return {

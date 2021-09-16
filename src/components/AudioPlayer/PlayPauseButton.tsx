@@ -86,7 +86,7 @@ const PlayPauseButton = () => {
       </Button>
     );
 
-  const firstCurrentReadingChapterId = currentReadingChapterIds[0]; // get the first chapter in this page
+  const [firstCurrentReadingChapterId] = currentReadingChapterIds; // get the first chapter in this page
   return (
     <>
       {button}

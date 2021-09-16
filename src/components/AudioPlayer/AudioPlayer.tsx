@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';

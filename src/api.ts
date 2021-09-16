@@ -106,8 +106,8 @@ export const getAudioFile = async (reciterId: number, chapter: number): Promise<
   if (res.status === 500) {
     throw new Error('server error: fail to get audio file');
   }
-
-  const firstAudio = res.audioFiles[0];
+  const { audioFiles } = res;
+  const [firstAudio] = audioFiles;
   if (!firstAudio) {
     throw new Error('No audio file found');
   }

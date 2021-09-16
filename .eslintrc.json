@@ -41,6 +41,19 @@
             }
           ],
           "pathGroupsExcludedImportTypes": ["react"]}],
+        "max-lines":[2, {"max": 150,"skipBlankLines": true,"skipComments": true}],
+        "prefer-destructuring": ["error", {
+            "VariableDeclarator": {
+              "array": true,
+              "object": true
+            },
+            "AssignmentExpression": {
+              "array": true,
+              "object": true
+            }
+          }, {
+            "enforceForRenamedProperties": false
+          }],
         "import/extensions": [
             2,
             "ignorePackages",

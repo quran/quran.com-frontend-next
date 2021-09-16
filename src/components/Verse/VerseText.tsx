@@ -21,7 +21,8 @@ type VerseTextProps = {
 const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
-  const { lineNumber, pageNumber, location } = words[0];
+  const [firstWord] = words;
+  const { lineNumber, pageNumber, location } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
     shallowEqual,

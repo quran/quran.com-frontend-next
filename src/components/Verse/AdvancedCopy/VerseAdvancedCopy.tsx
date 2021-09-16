@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useEffect, useCallback } from 'react';
 
 import clipboardCopy from 'clipboard-copy';

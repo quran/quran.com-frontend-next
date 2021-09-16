@@ -63,7 +63,7 @@ const getSelectedType = (font: QuranFont) => {
     values.some((v) => v.id === font),
   );
   if (selectedViewEntry) {
-    const view = selectedViewEntry[0];
+    const [view] = selectedViewEntry;
     return view;
   }
   // if no font is given, or invalid font is given, get type for default font
@@ -73,7 +73,7 @@ const getSelectedType = (font: QuranFont) => {
 // get default font for selected type. We take the first font in this case
 // for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
 const getDefaultFont = (selectedType) => {
-  const font = fonts[selectedType][0];
+  const [font] = fonts[selectedType];
   return font.value;
 };
 
