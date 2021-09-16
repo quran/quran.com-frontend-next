@@ -86,7 +86,8 @@ export const useTextToCopy = ({
       }),
   );
 
-  return data?.result;
+  const result = data?.result;
+  return result || ''; // return empty text if the result is null.
 };
 
 /**
