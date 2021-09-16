@@ -56,8 +56,7 @@ const PlayPauseButton = () => {
         <Spinner size={SpinnerSize.Large} />
       </Button>
     );
-
-  if (isPlaying) {
+  else if (isPlaying)
     button = (
       <Button
         tooltip="Pause"
@@ -69,8 +68,7 @@ const PlayPauseButton = () => {
         <PauseIcon />
       </Button>
     );
-  }
-  if (!isPlaying)
+  else if (!isPlaying)
     button = (
       <Button
         tooltip="Play"
