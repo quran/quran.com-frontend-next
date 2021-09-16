@@ -30,7 +30,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
-import { VersesResponse } from 'types/APIResponses';
+import { VersesResponse } from 'types/ApiResponses';
 
 // import ContextMenu from './ContextMenu';
 

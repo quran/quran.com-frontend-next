@@ -20,7 +20,7 @@ import {
   isValidVerseId,
   isValidVerseNumber,
 } from 'src/utils/validator';
-import { ChapterResponse, VersesResponse } from 'types/APIResponses';
+import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;

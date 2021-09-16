@@ -12,7 +12,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Bu
 import styles from './AudioPlayer.module.scss';
 import CloseButton from './CloseButton';
 import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
-import MediaSessionApiListeners from './MediaSessionAPIListeners';
+import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';

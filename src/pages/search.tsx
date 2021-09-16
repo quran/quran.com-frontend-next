@@ -22,7 +22,7 @@ import useDebounce from 'src/hooks/useDebounce';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
-import { SearchResponse } from 'types/APIResponses';
+import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 

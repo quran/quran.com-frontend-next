@@ -14,7 +14,7 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidJuzId } from 'src/utils/validator';
-import { VersesResponse } from 'types/APIResponses';
+import { VersesResponse } from 'types/ApiResponses';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;

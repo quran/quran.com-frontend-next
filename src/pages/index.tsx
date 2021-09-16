@@ -12,7 +12,7 @@ import homepageImage from 'public/images/homepage.png';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
 import { getAllChaptersData } from 'src/utils/chapter';
-import { ChaptersResponse } from 'types/APIResponses';
+import { ChaptersResponse } from 'types/ApiResponses';
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;

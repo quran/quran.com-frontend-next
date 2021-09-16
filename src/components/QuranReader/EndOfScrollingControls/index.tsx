@@ -6,7 +6,7 @@ import styles from './EndOfScrollingControls.module.scss';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import { getChapterData, isFirstSurah, isLastSurah } from 'src/utils/chapter';
-import { VersesResponse } from 'types/APIResponses';
+import { VersesResponse } from 'types/ApiResponses';
 
 interface Props {
   quranReaderDataType: QuranReaderDataType;

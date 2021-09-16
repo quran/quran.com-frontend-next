@@ -8,7 +8,7 @@ import SearchResultItem from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
 import Pagination from 'src/components/dls/Pagination/Pagination';
-import { SearchResponse } from 'types/APIResponses';
+import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {
   searchResult: SearchResponse;

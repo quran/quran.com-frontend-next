@@ -10,7 +10,7 @@ import {
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId } from 'src/utils/validator';
-import { ChapterInfoResponse, ChapterResponse } from 'types/APIResponses';
+import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {
   chapterResponse?: ChapterResponse;

@@ -96,6 +96,7 @@
     "eslint-plugin-react-func": "^0.1.17",
     "eslint-plugin-react-hooks": "^4.0.4",
     "eslint-plugin-sonarjs": "^0.10.0",
+    "eslint-plugin-unicorn": "^36.0.0",
     "husky": "^7.0.2",
     "jest": "^27.1.0",
     "jest-runner-eslint": "^0.10.1",

@@ -14,7 +14,7 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
-import { ChapterResponse, VersesResponse } from 'types/APIResponses';
+import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;

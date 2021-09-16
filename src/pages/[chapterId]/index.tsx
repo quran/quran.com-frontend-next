@@ -14,7 +14,7 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
-import { ChapterResponse, VersesResponse } from 'types/APIResponses';
+import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;

@@ -12,7 +12,8 @@
         "prettier",
         "react",
         "react-func",
-        "sonarjs"
+        "sonarjs",
+        "unicorn"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
@@ -66,6 +67,18 @@
         "sonarjs/no-inverted-boolean-check": "error",
         "sonarjs/no-nested-switch": "error",
         "sonarjs/no-redundant-boolean": "error",
+        "unicorn/no-abusive-eslint-disable": "error",
+        "unicorn/no-array-reduce": "error",
+        "unicorn/filename-case": [
+            "error",
+            {
+                "cases": {
+                    "kebabCase": true,
+                    "camelCase": true,
+                    "pascalCase": true
+                }
+            }
+        ],
         "prettier/prettier": [
             2,
             {

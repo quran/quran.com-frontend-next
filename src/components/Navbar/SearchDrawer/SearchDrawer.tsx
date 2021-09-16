@@ -25,7 +25,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
 import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
-import { SearchResponse } from 'types/APIResponses';
+import { SearchResponse } from 'types/ApiResponses';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 

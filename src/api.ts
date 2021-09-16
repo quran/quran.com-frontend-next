@@ -17,7 +17,7 @@ import {
   makeFootnoteUrl,
 } from './utils/apiPaths';
 
-import { SearchRequest, AdvancedCopyRequest } from 'types/APIRequests';
+import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
   SearchResponse,
@@ -31,7 +31,7 @@ import {
   BaseResponse,
   ChapterInfoResponse,
   FootnoteResponse,
-} from 'types/APIResponses';
+} from 'types/ApiResponses';
 import { AudioFile } from 'types/AudioFile';
 
 export const fetcher = async function fetcher(

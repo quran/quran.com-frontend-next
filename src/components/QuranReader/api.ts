@@ -6,7 +6,7 @@ import { QuranReaderDataType } from './types';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
-import { VersesResponse } from 'types/APIResponses';
+import { VersesResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
 interface RequestKeyInput {
