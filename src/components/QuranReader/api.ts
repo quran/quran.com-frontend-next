@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { camelizeKeys } from 'humps';
 
 import { QuranReaderDataType } from './types';

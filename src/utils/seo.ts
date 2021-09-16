@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { NextSeoProps } from 'next-seo';
 
 export const config = {

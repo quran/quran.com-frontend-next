@@ -1,3 +1,5 @@
+import React, { useCallback, useEffect, useRef } from 'react';
+
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -14,7 +16,6 @@ import MediaSessionApiListeners from './MediaSessionAPIListeners';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
 import Slider from './Slider';
-import React, { useCallback, useEffect, useRef } from 'react';
 
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {

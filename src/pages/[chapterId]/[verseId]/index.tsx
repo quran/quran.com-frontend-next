@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Error from 'next/error';
 import { useRouter } from 'next/router';

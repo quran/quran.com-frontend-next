@@ -1,12 +1,12 @@
-const withPlugins = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
+const { withSentryConfig } = require('@sentry/nextjs');
+const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 const nextTranslate = require('next-translate');
-const { withSentryConfig } = require('@sentry/nextjs');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
 
