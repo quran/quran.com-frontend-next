@@ -1,14 +1,17 @@
 import React, { useMemo } from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
-import Word from 'types/Word';
+
 import classNames from 'classnames';
-import { getFirstWordOfSurah } from 'src/utils/verse';
-import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import { shallowEqual, useSelector } from 'react-redux';
+
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
+
+import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getFirstWordOfSurah } from 'src/utils/verse';
+import Word from 'types/Word';
 
 type VerseTextProps = {
   words: Word[];
@@ -18,7 +21,8 @@ type VerseTextProps = {
 const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
-  const { lineNumber, pageNumber, location } = words[0];
+  const [firstWord] = words;
+  const { lineNumber, pageNumber, location } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
     shallowEqual,

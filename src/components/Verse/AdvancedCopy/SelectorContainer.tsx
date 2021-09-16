@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
-import Combobox from 'src/components/dls/Forms/Combobox';
+
 import styles from './SelectorContainer.module.scss';
+
+import Combobox from 'src/components/dls/Forms/Combobox';
 
 export interface RangeVerseItem {
   id: string;

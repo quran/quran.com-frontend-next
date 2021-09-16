@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Link from '../dls/Link/Link';
+
 import styles from './HomePageWelcomeMessage.module.scss';
 
 const HomePageWelcomeMessage = () => (

@@ -1,13 +1,13 @@
-import Verse from './Verse';
-import Chapter from './Chapter';
-import AvailableTranslation from './AvailableTranslation';
-import TafsirInfo from './TafsirInfo';
-import AvailableLanguage from './AvailableLanguage';
-import Reciter from './Reciter';
 import { AudioFile } from './AudioFile';
+import AvailableLanguage from './AvailableLanguage';
+import AvailableTranslation from './AvailableTranslation';
+import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
-import { SearchNavigationResult } from './SearchNavigationResult';
 import Footnote from './Footnote';
+import Reciter from './Reciter';
+import { SearchNavigationResult } from './SearchNavigationResult';
+import TafsirInfo from './TafsirInfo';
+import Verse from './Verse';
 
 export interface BaseResponse {
   status?: number;

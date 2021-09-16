@@ -1,5 +1,15 @@
 import { useState } from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import PauseIcon from '../../../public/icons/pause.svg';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
+import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
+
+import { triggerPauseAudio, triggerPlayAudio } from './EventTriggers';
+import SurahAudioMismatchModal from './SurahAudioMismatchModal';
+
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import {
   AudioFileStatus,
@@ -10,13 +20,6 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
-
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
-import { triggerPauseAudio, triggerPlayAudio } from './EventTriggers';
-import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 
 const PlayPauseButton = () => {
   const dispatch = useDispatch();
@@ -81,7 +84,7 @@ const PlayPauseButton = () => {
       </Button>
     );
 
-  const firstCurrentReadingChapterId = currentReadingChapterIds[0]; // get the first chapter in this page
+  const [firstCurrentReadingChapterId] = currentReadingChapterIds; // get the first chapter in this page
   return (
     <>
       {button}

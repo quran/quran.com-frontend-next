@@ -1,5 +1,6 @@
-const sitemap = require('nextjs-sitemap-generator');
 const range = require('lodash/range');
+const sitemap = require('nextjs-sitemap-generator');
+
 const chaptersData = require('./public/data/chapters/en.json');
 
 const chapters = range(1, 115);

@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
+
 import * as RadixPopover from '@radix-ui/react-popover';
 import classNames from 'classnames';
+
 import styles from './Popover.module.scss';
 
 export enum ContentSide {

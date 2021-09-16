@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Popover, { ContentAlign, ContentSide } from '.';
 
 export default {

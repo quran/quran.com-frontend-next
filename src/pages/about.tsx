@@ -1,7 +1,9 @@
 import React from 'react';
-import useTranslation from 'next-translate/useTranslation';
-import NextSeoHead from 'src/components/NextSeoHead';
+
 import { GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+
+import NextSeoHead from 'src/components/NextSeoHead';
 
 const About = () => {
   const { t } = useTranslation();

@@ -1,8 +1,12 @@
 /* eslint-disable react/no-danger */
+
 import React, { MouseEvent } from 'react';
-import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
+
 import CloseIcon from '../../../../../public/icons/close.svg';
+
 import styles from './FootnoteText.module.scss';
+
+import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 
 interface FootnoteTextProps {
   text: string;

@@ -1,7 +1,7 @@
 import React from 'react';
+
 import AudioSection from './AudioSection';
 import QuranFontSection from './QuranFontSection';
-
 import ReadingExperienceSection from './ReadingExperienceSection';
 import ResetButton from './ResetButton';
 import styles from './SettingsBody.module.scss';

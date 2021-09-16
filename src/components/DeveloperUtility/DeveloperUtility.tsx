@@ -1,8 +1,10 @@
-import classNames from 'classnames';
 import React, { useState } from 'react';
+
+import classNames from 'classnames';
 
 import WrenchIcon from '../../../public/icons/wrench.svg';
 import Separator from '../dls/Separator/Separator';
+
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';

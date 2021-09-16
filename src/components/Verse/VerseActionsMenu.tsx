@@ -1,23 +1,27 @@
 import { useState, useEffect } from 'react';
+
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
-import { getWindowOrigin } from 'src/utils/url';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { getVerseUrl } from 'src/utils/verse';
-import Verse from '../../../types/Verse';
-import VerseActionsMenuItem from './VerseActionsMenuItem';
-import CopyIcon from '../../../public/icons/copy.svg';
-import TafsirIcon from '../../../public/icons/tafsir.svg';
-import ShareIcon from '../../../public/icons/share.svg';
-import BookmarkedIcon from '../../../public/icons/bookmark.svg';
-import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+
 import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
-import styles from './VerseActionsMenu.module.scss';
-import Modal from '../dls/Modal/Modal';
-import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
-import Link from '../dls/Link/Link';
+import BookmarkedIcon from '../../../public/icons/bookmark.svg';
+import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
+import ShareIcon from '../../../public/icons/share.svg';
+import TafsirIcon from '../../../public/icons/tafsir.svg';
+import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+import Verse from '../../../types/Verse';
+import Link from '../dls/Link/Link';
+import Modal from '../dls/Modal/Modal';
+
+import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+import styles from './VerseActionsMenu.module.scss';
+import VerseActionsMenuItem from './VerseActionsMenuItem';
+
+import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
+import { getWindowOrigin } from 'src/utils/url';
+import { getVerseUrl } from 'src/utils/verse';
 
 interface Props {
   verse: Verse;

@@ -1,9 +1,12 @@
 import React from 'react';
-import Link from 'next/link';
-import Chapter from 'types/Chapter';
+
 import classNames from 'classnames';
-import ChapterIconContainer from './ChapterIcon/ChapterIconContainer';
+import Link from 'next/link';
+
 import styles from './ChapterBlock.module.scss';
+import ChapterIconContainer from './ChapterIcon/ChapterIconContainer';
+
+import Chapter from 'types/Chapter';
 
 type Props = {
   chapter: Chapter;

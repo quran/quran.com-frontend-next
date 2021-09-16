@@ -1,10 +1,14 @@
-import classNames from 'classnames';
 import React, { ChangeEvent, useEffect, RefObject } from 'react';
-import useScroll from 'src/hooks/useScrollToElement';
+
+import classNames from 'classnames';
+
 import ComboboxItem, { DropdownItem } from '../ComboboxItem';
 import ComboboxSize from '../types/ComboboxSize';
 import { Value } from '../types/Values';
+
 import styles from './ComboboxItems.module.scss';
+
+import useScroll from 'src/hooks/useScrollToElement';
 
 interface Props {
   isOpened: boolean;

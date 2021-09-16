@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Link from 'next/link';
+
 import styles from './LinkContainer.module.scss';
 
 type LinkContainerProps = {

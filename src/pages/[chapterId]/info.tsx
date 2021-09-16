@@ -1,15 +1,16 @@
-import Error from 'next/error';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import { isValidChapterId } from 'src/utils/validator';
+import Error from 'next/error';
+
 import { getChapterInfo } from 'src/api';
-import { ChapterInfoResponse, ChapterResponse } from 'types/APIResponses';
-import NextSeoHead from 'src/components/NextSeoHead';
 import Info from 'src/components/chapters/Info';
+import NextSeoHead from 'src/components/NextSeoHead';
+import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
-import { getChapterData } from 'src/utils/chapter';
+import { isValidChapterId } from 'src/utils/validator';
+import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {
   chapterResponse?: ChapterResponse;

@@ -1,5 +1,7 @@
 import React, { RefObject, ChangeEvent, memo, ReactNode } from 'react';
+
 import classNames from 'classnames';
+
 import styles from './ComboboxItem.module.scss';
 
 export interface DropdownItem {

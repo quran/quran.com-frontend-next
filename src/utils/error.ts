@@ -1,4 +1,4 @@
-import { BaseResponse } from 'types/APIResponses';
+import { BaseResponse } from 'types/ApiResponses';
 
 // eslint-disable-next-line import/prefer-default-export
 export const throwIfError = (res: BaseResponse) => {

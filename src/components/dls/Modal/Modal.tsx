@@ -1,14 +1,16 @@
 import React from 'react';
+
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import styles from './Modal.module.scss';
-import Content from './Content';
-import Body from './Body';
-import Header from './Header';
-import Footer from './Footer';
+
 import Action from './Action';
-import Title from './Title';
-import Subtitle from './Subtitle';
+import Body from './Body';
 import CloseAction from './CloseAction';
+import Content from './Content';
+import Footer from './Footer';
+import Header from './Header';
+import styles from './Modal.module.scss';
+import Subtitle from './Subtitle';
+import Title from './Title';
 
 type ModalProps = {
   children: React.ReactNode;

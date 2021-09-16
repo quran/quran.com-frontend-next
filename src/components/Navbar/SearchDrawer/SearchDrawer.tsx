@@ -1,27 +1,31 @@
+/* eslint-disable max-lines */
 import React, { useCallback, useEffect, useState, RefObject, useRef } from 'react';
-import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
-import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
-import { getSearchResults } from 'src/api';
-import { SearchResponse } from 'types/APIResponses';
-import useDebounce from 'src/hooks/useDebounce';
+
 import classNames from 'classnames';
-import SearchResults from 'src/components/Search/SearchResults';
-import useFocus from 'src/hooks/useFocusElement';
-import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import DrawerCloseButton from './Buttons/DrawerCloseButton';
+import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
+import NoResults from './NoResults';
+import PreInput from './PreInput';
+import styles from './SearchDrawer.module.scss';
+
+import { getSearchResults } from 'src/api';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import SearchResults from 'src/components/Search/SearchResults';
+import useDebounce from 'src/hooks/useDebounce';
+import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
+import useFocus from 'src/hooks/useFocusElement';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
-import styles from './SearchDrawer.module.scss';
-import PreInput from './PreInput';
-import NoResults from './NoResults';
-import DrawerCloseButton from './Buttons/DrawerCloseButton';
-import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
+import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import { SearchResponse } from 'types/ApiResponses';
 
 const DEBOUNCING_PERIOD_MS = 1000;
 

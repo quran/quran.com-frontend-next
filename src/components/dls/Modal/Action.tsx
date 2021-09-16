@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from 'react';
+
 import styles from './Action.module.scss';
 
 type ActionProps = {

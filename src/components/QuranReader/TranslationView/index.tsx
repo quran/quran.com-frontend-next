@@ -1,16 +1,20 @@
 import React from 'react';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import VerseActions from 'src/components/Verse/VerseActions';
+
 import classNames from 'classnames';
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import VerseLink from 'src/components/Verse/VerseLink';
-import VerseText from 'src/components/Verse/VerseText';
-import Separator from 'src/components/dls/Separator/Separator';
-import Verse from '../../../../types/Verse';
+
 import Translation from '../../../../types/Translation';
-import styles from './TranslationView.module.scss';
+import Verse from '../../../../types/Verse';
+
 import BookmarkIcon from './BookmarkIcon';
 import TranslationText from './TranslationText';
+import styles from './TranslationView.module.scss';
+
+import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import Separator from 'src/components/dls/Separator/Separator';
+import VerseActions from 'src/components/Verse/VerseActions';
+import VerseLink from 'src/components/Verse/VerseLink';
+import VerseText from 'src/components/Verse/VerseText';
+import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 
 type TranslationViewProps = {
   verses: Verse[];

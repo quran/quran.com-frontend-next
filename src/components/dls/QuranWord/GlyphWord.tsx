@@ -1,6 +1,8 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
+
 import classNames from 'classnames';
+
 import styles from './GlyphWord.module.scss';
 
 type UthmaniWordTextProps = {

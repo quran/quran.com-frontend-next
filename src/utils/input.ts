@@ -1,4 +1,5 @@
 import capitalize from 'lodash/capitalize';
+
 import { RadioItem } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { SelectOption } from 'src/components/dls/Forms/Select';
 import AvailableTranslation from 'types/AvailableTranslation';

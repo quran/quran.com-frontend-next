@@ -1,25 +1,30 @@
+/* eslint-disable max-lines */
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import { GetStaticProps, NextPage } from 'next';
+
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+
+import IconClose from '../../public/icons/close.svg';
+
+import styles from './search.module.scss';
+
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import { SearchResponse } from 'types/APIResponses';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import NextSeoHead from 'src/components/NextSeoHead';
+import LanguagesFilter from 'src/components/Search/LanguagesFilter';
+import SearchResults from 'src/components/Search/SearchResults';
+import TranslationsFilter from 'src/components/Search/TranslationsFilter';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
-import TranslationsFilter from 'src/components/Search/TranslationsFilter';
-import LanguagesFilter from 'src/components/Search/LanguagesFilter';
-import AvailableTranslation from 'types/AvailableTranslation';
-import AvailableLanguage from 'types/AvailableLanguage';
-import NextSeoHead from 'src/components/NextSeoHead';
-import SearchResults from 'src/components/Search/SearchResults';
+import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
-import { useSelector } from 'react-redux';
-import IconClose from '../../public/icons/close.svg';
-import styles from './search.module.scss';
+import { SearchResponse } from 'types/ApiResponses';
+import AvailableLanguage from 'types/AvailableLanguage';
+import AvailableTranslation from 'types/AvailableTranslation';
 
 const PAGE_SIZE = 20;
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -248,10 +253,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   let translations = [];
   let languages = [];
   if (availableLanguagesResponse.status !== 500) {
-    languages = availableLanguagesResponse.languages;
+    const { languages: responseLanguages } = availableLanguagesResponse;
+    languages = responseLanguages;
   }
   if (availableTranslationsResponse.status !== 500) {
-    translations = availableTranslationsResponse.translations;
+    const { translations: responseTranslations } = availableTranslationsResponse;
+    translations = responseTranslations;
   }
 
   return {

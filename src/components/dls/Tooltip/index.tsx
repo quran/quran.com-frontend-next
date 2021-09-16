@@ -1,6 +1,8 @@
 import React, { ReactNode } from 'react';
+
 import * as RadixTooltip from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
+
 import styles from './Tooltip.module.scss';
 
 export enum TooltipType {

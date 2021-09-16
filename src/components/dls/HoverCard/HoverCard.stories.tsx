@@ -1,4 +1,5 @@
 import React from 'react';
+
 import HoverCard, { ContentAlign, ContentSide } from '.';
 
 export default {

@@ -1,6 +1,18 @@
-import Error from 'next/error';
+/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
+
+import { getChapterVerses } from 'src/api';
+import NextSeoHead from 'src/components/NextSeoHead';
+import QuranReader from 'src/components/QuranReader';
+import { QuranReaderDataType } from 'src/components/QuranReader/types';
+import { getDefaultWordFields } from 'src/utils/api';
+import { getChapterData } from 'src/utils/chapter';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from 'src/utils/staticPageGeneration';
 import {
   getToAndFromFromRange,
   isValidChapterId,
@@ -8,17 +20,7 @@ import {
   isValidVerseId,
   isValidVerseNumber,
 } from 'src/utils/validator';
-import { getChapterVerses } from 'src/api';
-import { ChapterResponse, VersesResponse } from 'types/APIResponses';
-import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
-import NextSeoHead from 'src/components/NextSeoHead';
-import { getDefaultWordFields } from 'src/utils/api';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from 'src/utils/staticPageGeneration';
-import { getChapterData } from 'src/utils/chapter';
+import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;

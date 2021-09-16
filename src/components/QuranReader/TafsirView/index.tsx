@@ -1,11 +1,15 @@
 /* eslint-disable react/no-danger */
-import classNames from 'classnames';
+
 import React from 'react';
+
+import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
+
+import styles from './TafsirView.module.scss';
+
 import VerseText from 'src/components/Verse/VerseText';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from 'types/Verse';
-import styles from './TafsirView.module.scss';
 
 interface Props {
   verse: Verse;
