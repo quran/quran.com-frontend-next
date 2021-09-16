@@ -51,7 +51,7 @@ jobs:
   create-storybook-comment:
     runs-on: ubuntu-latest
     outputs:
-      comment-id: ${{ steps.step1.outputs.test }}
+      comment-id: ${{ steps.comment-id.outputs.comment-id }}
     steps:
       - name: Find Comment
         uses: peter-evans/find-comment@v1
