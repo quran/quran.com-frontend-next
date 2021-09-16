@@ -2,6 +2,7 @@
     "extends": [
         "airbnb",
         "airbnb/hooks",
+        "plugin:import/recommended",
         "plugin:import/typescript",
         "prettier",
         "plugin:@next/next/recommended"
@@ -9,8 +10,7 @@
     "parser": "babel-eslint",
     "plugins": [
         "prettier",
-        "react",
-        "import"
+        "react"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
