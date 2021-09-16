@@ -5,11 +5,21 @@ on: [pull_request]
 jobs:
   comment-storybook-url:
     runs-on: ubuntu-latest
-    # if: ${{ github.event.issue.pull_request }}
     steps:
-      - name: Create comment
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Storybook preview
+
+      - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: 438
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
           body: |
             Storybook preview: https://quran.github.io/quran.com-frontend-next/storybook/${{ github.head_ref }}/
+            ${{ steps.build.outputs.build-log }}
+          edit-mode: replace
