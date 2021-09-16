@@ -6,7 +6,7 @@ $quran-reader-padding-mobile: 4rem;
 $quran-reader-padding-tablet: 5rem;
 
 .infiniteScroll {
-  @include utility.container();
+  @include utility.container;
   margin: 0 auto;
 }
 
