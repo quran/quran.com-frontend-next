@@ -47,10 +47,10 @@ export const makeLanguagesUrl = (language: string): string =>
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
 export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
-  makeUrl(`/audio/reciter/${reciterId}`, decamelizeKeys({ chapter }));
+  makeUrl(`/audio/reciters/${reciterId}`, decamelizeKeys({ chapter }));
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
-  makeUrl(`/audio/reciter/${reciterId}/timestamp?verse_key=${verseKey}`);
+  makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);
 
 /**
  * Compose the url for the translations' filter API.
