@@ -20,7 +20,7 @@ export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 type QuranWordProps = {
   word: Word;
   font?: QuranFont;
-  isHighlight?: boolean;
+  isHighlighted?: boolean;
   isWordByWordAllowed?: boolean;
 };
 
@@ -29,7 +29,7 @@ const getGlyph = (word: Word, font: QuranFont) => {
   return word.codeV2;
 };
 
-const QuranWord = ({ word, font, isHighlight, isWordByWordAllowed = true }: QuranWordProps) => {
+const QuranWord = ({ word, font, isHighlighted, isWordByWordAllowed = true }: QuranWordProps) => {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
@@ -55,7 +55,7 @@ const QuranWord = ({ word, font, isHighlight, isWordByWordAllowed = true }: Qura
   const showTooltip =
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
-  const shouldBeHighLighted = isHighlight || isTooltipOpened;
+  const shouldBeHighLighted = isHighlighted || isTooltipOpened;
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
