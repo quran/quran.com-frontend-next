@@ -4,12 +4,12 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
 
 import { triggerPauseAudio, triggerPlayAudio } from './EventTriggers';
 import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import {
   AudioFileStatus,

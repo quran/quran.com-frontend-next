@@ -11,8 +11,10 @@ import Verse from 'types/Verse';
  *  2: [verses]
  *  ...
  * }
+ *
+ * @returns {Record<number, Verse[]>}
  */
-const groupPagesByVerses = (verses: Verse[]) => {
+const groupPagesByVerses = (verses: Verse[]): Record<number, Verse[]> => {
   // Groups the verses based on their page number
   const pages = groupBy(verses, (verse) => verse.pageNumber);
 

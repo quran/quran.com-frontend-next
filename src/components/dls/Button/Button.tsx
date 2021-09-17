@@ -3,10 +3,9 @@ import React, { MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 
-import Spinner, { SpinnerSize } from '../Spinner/Spinner';
-
 import styles from './Button.module.scss';
 
+import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import Tooltip from 'src/components/dls/Tooltip';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 

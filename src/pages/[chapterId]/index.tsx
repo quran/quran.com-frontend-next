@@ -3,17 +3,16 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Error from 'next/error';
 
-import { getChapterVerses } from '../../api';
-import QuranReader from '../../components/QuranReader';
-import { isValidChapterId } from '../../utils/validator';
-
+import { getChapterVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
+import QuranReader from 'src/components/QuranReader';
 import { getDefaultWordFields } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { isValidChapterId } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type ChapterProps = {

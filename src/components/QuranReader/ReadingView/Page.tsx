@@ -3,8 +3,6 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import Verse from '../../../../types/Verse';
-
 import groupLinesByVerses from './groupLinesByVerses';
 import Line from './Line';
 import styles from './Page.module.scss';
@@ -12,6 +10,7 @@ import PageFooter from './PageFooter';
 
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import Verse from 'types/Verse';
 
 type PageProps = {
   verses: Verse[];

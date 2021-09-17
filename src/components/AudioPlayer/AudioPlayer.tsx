@@ -7,7 +7,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import MinusTenIcon from '../../../public/icons/minus-ten.svg';
 import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './AudioPlayer.module.scss';
 import CloseButton from './CloseButton';
@@ -18,6 +17,7 @@ import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
 import Slider from './Slider';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,

@@ -8,7 +8,6 @@ import IconMenu from '../../../public/icons/menu.svg';
 import IconQ from '../../../public/icons/Q.svg';
 import IconSearch from '../../../public/icons/search.svg';
 import IconSettings from '../../../public/icons/settings.svg';
-import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 
 import LanguageSelector from './LanguageSelector';
 import styles from './Navbar.module.scss';
@@ -16,6 +15,7 @@ import NavigationDrawer from './NavigationDrawer/NavigationDrawer';
 import SearchDrawer from './SearchDrawer/SearchDrawer';
 import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   selectNavbar,

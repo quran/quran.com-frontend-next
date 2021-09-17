@@ -22,7 +22,7 @@ export const generateChapterVersesKeys = (chapterId: string): string[] => {
  * and its number separated by ":" e.g. 1:5.
  *
  * @param {string} verseKey
- * @returns {Number} The verse number extracted from the key.
+ * @returns {number} The verse number extracted from the key.
  */
 export const getChapterNumberFromKey = (verseKey: string): number =>
   Number(verseKey.split(COLON_SPLITTER)[0]);
@@ -32,7 +32,7 @@ export const getChapterNumberFromKey = (verseKey: string): number =>
  * and its number separated by ":" e.g. 1:5.
  *
  * @param {string} verseKey
- * @returns {Number} The verse number extracted from the key.
+ * @returns {number} The verse number extracted from the key.
  */
 export const getVerseNumberFromKey = (verseKey: string): number =>
   Number(verseKey.split(COLON_SPLITTER)[1]);
@@ -41,7 +41,7 @@ export const getVerseNumberFromKey = (verseKey: string): number =>
  * Get the chapter and verse number of a verse from its key.
  *
  * @param {string} verseKey
- * @returns {[String, String]} The verse number extracted from the key.
+ * @returns {[string, string]} The verse number extracted from the key.
  */
 export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, string] => {
   const splits = verseKey.split(COLON_SPLITTER);
@@ -51,8 +51,8 @@ export const getVerseAndChapterNumbersFromKey = (verseKey: string): [string, str
 /**
  * Split the word's location and get the surahNumber, verseNumber and wordNumber.
  *
- * @param {String} wordLocation the word location {surahNumber}:{verseNumber}:{wordNumber}
- * @returns {[String, String, String]}
+ * @param {string} wordLocation the word location {surahNumber}:{verseNumber}:{wordNumber}
+ * @returns {[string, string, string]}
  */
 export const getWordDataByLocation = (wordLocation: string): [string, string, string] => {
   const locationSplits = wordLocation.split(COLON_SPLITTER);
@@ -68,6 +68,7 @@ export const getWordDataByLocation = (wordLocation: string): [string, string, st
  * 1:1.
  *
  * @param {string} wordLocation whose format is {surahNumber}:{verseNumber}:{wordNumber} e.g. "112:1:1"
+ * @returns {{ chapterId: string; isFirstWordOfSurah: boolean }}
  */
 export const getFirstWordOfSurah = (
   wordLocation: string,
@@ -82,6 +83,7 @@ export const getFirstWordOfSurah = (
 /**
  * get sample verse data
  * it currently return 2:5 (Al baqarah verse 5)
+ *
  * @returns {Verse} verse
  */
 export const getSampleVerse = () => sampleVerse;
@@ -128,6 +130,7 @@ export const formatChapterId = (id: string) => `0${id}`.slice(-2);
 
 /**
  * Given the chapterId, return the url for that chapter info
+ *
  * @param {string} chapterId
  * @returns {string} chapterUrl
  */
@@ -136,7 +139,7 @@ export const getChapterInfoUrl = (chapterId: string) => `/${chapterId}/info`;
 /**
  * Given the verseKey, return the verseUrl
  *
- * @param {string} verseKey, example: "1:5"
+ * @param {string} verseKey example: "1:5"
  * @returns {string} verseUrl , example "/1/5";
  */
 export const getVerseUrl = (verseKey: string): string => {

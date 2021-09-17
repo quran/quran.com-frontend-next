@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { mockWord } from '../../../../tests/mocks/words';
-
 import QuranWord from './QuranWord';
 
 import { QuranFont } from 'src/components/QuranReader/types';
+import { mockWord } from 'tests/mocks/words';
 
 export default {
   title: 'dls/QuranWord',

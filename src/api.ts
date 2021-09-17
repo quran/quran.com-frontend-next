@@ -91,6 +91,7 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> => {
 
 /**
  * Get audio file for a specific reciter and chapter.
+ *
  * @param {number} reciterId
  * @param {number} chapter the id of the chapter
  */
@@ -116,11 +117,12 @@ export const getAudioFile = async (reciterId: number, chapter: number): Promise<
 };
 
 /**
- * Get the timestamps for a specific verseKey. 
+ * Get the timestamps for a specific verseKey.
  * We need this to select to move the cursor in the audio player when we click "play" in a specific verse.
-
- * @param {number} reciterId 
+ *
+ * @param {number} reciterId
  * @param {number} verseKey example "1:1", meaning chapter 1, verse 1
+ * @returns {Promise<AudioTimestampsResponse>}
  */
 export const getVerseTimestamps = async (
   reciterId: number,

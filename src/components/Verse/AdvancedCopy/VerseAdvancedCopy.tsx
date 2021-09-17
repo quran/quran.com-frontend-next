@@ -7,14 +7,13 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
-import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
-
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
 import styles from './VerseAdvancedCopy.module.scss';
 import VersesRangeSelector from './VersesRangeSelector';
 
 import { getAdvancedCopyRawResult, getAvailableTranslations } from 'src/api';
+import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
+import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { QuranFont } from 'src/components/QuranReader/types';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';

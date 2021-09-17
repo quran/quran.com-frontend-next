@@ -11,17 +11,17 @@ import LinkIcon from '../../../public/icons/east.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
-import Verse from '../../../types/Verse';
-import Link from '../dls/Link/Link';
-import Modal from '../dls/Modal/Modal';
 
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 import styles from './VerseActionsMenu.module.scss';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 
+import Link from 'src/components/dls/Link/Link';
+import Modal from 'src/components/dls/Modal/Modal';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
+import Verse from 'types/Verse';
 
 interface Props {
   verse: Verse;

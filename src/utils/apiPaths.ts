@@ -44,8 +44,7 @@ export const makeLanguagesUrl = (language: string): string =>
 /**
  * Compose the url for reciters API.
  *
- * @param {string} language
- * @returns {string
+ * @returns {string}
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
 export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>

@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import resetSettings from '../reset-settings';
-
 import { QuranFont } from 'src/components/QuranReader/types';
 import { RootState } from 'src/redux/RootState';
+import resetSettings from 'src/redux/slices/reset-settings';
 
 export const MAXIMUM_FONT_STEP = 5;
 export const MINIMUM_FONT_STEP = 1;

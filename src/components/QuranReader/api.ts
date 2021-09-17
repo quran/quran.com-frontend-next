@@ -25,6 +25,8 @@ interface RequestKeyInput {
  * Generate the request key (the API url based on the params)
  * which will be used by useSwr to determine whether to call BE
  * again or return the cached response.
+ *
+ * @returns {string}
  */
 export const getRequestKey = ({
   id,
@@ -92,6 +94,8 @@ export const getRequestKey = ({
  * A custom fetcher that returns the verses array from the api result.
  * We need this workaround as useSWRInfinite requires the data from the api
  * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
+ *
+ * @returns {Promise<Verse>}
  */
 export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse> => {
   const res = await fetch(input, init);
@@ -108,7 +112,7 @@ export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Prom
  * @param {boolean} isVerseData
  * @param {boolean} isTafsirData
  * @param {VersesResponse} initialData
- * @returns {Number}
+ * @returns {number}
  */
 export const getPageLimit = (
   isVerseData: boolean,
