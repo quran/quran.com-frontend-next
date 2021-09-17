@@ -14,10 +14,12 @@ export const API_HOST =
 
 /**
  * Generates a url to make an api call to our backend
- * @param path the path for the call
- * @param parameters optional query params, {a: 1, b: 2} is parsed to "?a=1&b=2"
+ *
+ * @param {string} path the path for the call
+ * @param {Record<string, unknown>} parameters optional query params, {a: 1, b: 2} is parsed to "?a=1&b=2"
+ * @returns {string}
  */
-export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
+export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
     return `${API_HOST}${path}`;
   }
@@ -32,6 +34,7 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
  * Get the default word fields that should exist in the response.
  *
  * @param {QuranFont} quranFont the selected quran font since.
+ * @returns {{ wordFields: string; mushaf: number }}
  *
  */
 export const getDefaultWordFields = (

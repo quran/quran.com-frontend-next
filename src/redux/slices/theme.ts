@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '../RootState';
-
 import resetSettings from './reset-settings';
+
+import { RootState } from 'src/redux/RootState';
 
 export enum ThemeType {
   System = 'system',

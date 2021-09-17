@@ -20,6 +20,7 @@ interface Props {
  * we provide the same functionality by using a Popover which handles clicking.
  *
  * @param {Props} props
+ * @returns {JSX.Element}
  */
 const HoverablePopover: React.FC<Props> = ({
   content,
@@ -28,7 +29,7 @@ const HoverablePopover: React.FC<Props> = ({
   contentSide = ContentSide.TOP,
   tip = true,
   tooltipDelay = 0,
-}) => (
+}: Props): JSX.Element => (
   <Popover
     contentSide={contentSide}
     useTooltipStyles

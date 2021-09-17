@@ -22,8 +22,9 @@ const CENTER_ALIGNED_PAGE_LINES = {
  *
  * @param {number} pageNumber
  * @param {number} lineNumber
+ * @returns {boolean}
  */
-const isCenterAlignedPage = (pageNumber: number, lineNumber: number) => {
+const isCenterAlignedPage = (pageNumber: number, lineNumber: number): boolean => {
   const centerAlignedLines = CENTER_ALIGNED_PAGE_LINES[pageNumber] || [];
   return CENTER_ALIGNED_PAGES.includes(pageNumber) || centerAlignedLines.includes(lineNumber);
 };

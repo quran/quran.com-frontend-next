@@ -2,12 +2,11 @@ import React, { ChangeEvent, useEffect, RefObject } from 'react';
 
 import classNames from 'classnames';
 
-import ComboboxItem, { DropdownItem } from '../ComboboxItem';
-import ComboboxSize from '../types/ComboboxSize';
-import { Value } from '../types/Values';
-
 import styles from './ComboboxItems.module.scss';
 
+import ComboboxItem, { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
+import ComboboxSize from 'src/components/dls/Forms/Combobox/types/ComboboxSize';
+import { Value } from 'src/components/dls/Forms/Combobox/types/Values';
 import useScroll from 'src/hooks/useScrollToElement';
 
 interface Props {

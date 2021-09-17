@@ -6,8 +6,9 @@ import { useState, useEffect } from 'react';
  * for the specified time period.
  * Code inspiration from https://github.com/xnimorz/use-debounce.
  *
- * @param value the value that will be debounced.
+ * @param {T} value the value that will be debounced.
  * @param {number} delay the value of delay in milliseconds before we set the new value as the debounced value.
+ * @returns {T}
  */
 const useDebounce = <T>(value: T, delay: number): T => {
   // State and setters for debounced value

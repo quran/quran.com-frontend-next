@@ -3,13 +3,12 @@ import React from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import Image from 'next/image';
 
-import ChaptersList from '../components/chapters/ChaptersList';
-import QuickLinks from '../components/HomePage/QuickLinks';
-
 import styles from './index.module.scss';
 
 import homepageImage from 'public/images/homepage.png';
+import ChaptersList from 'src/components/chapters/ChaptersList';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
+import QuickLinks from 'src/components/HomePage/QuickLinks';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { ChaptersResponse } from 'types/ApiResponses';

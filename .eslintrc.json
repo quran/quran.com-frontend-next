@@ -13,7 +13,8 @@
         "react",
         "react-func",
         "sonarjs",
-        "unicorn"
+        "unicorn",
+        "jsdoc"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
@@ -79,6 +80,18 @@
                 }
             }
         ],
+        "jsdoc/check-alignment": 2,
+        "jsdoc/check-param-names": 2,
+        "jsdoc/check-tag-names": 2,
+        "jsdoc/check-types": 2,
+        "jsdoc/newline-after-description": 2,
+        "jsdoc/no-bad-blocks": 2,
+        "jsdoc/no-multi-asterisks": 2,
+        "jsdoc/require-asterisk-prefix": 2,
+        "jsdoc/require-param-type": 2,
+        "jsdoc/require-param-name": 2,
+        "jsdoc/require-returns": 2,
+        "jsdoc/require-returns-type": 2,
         "prettier/prettier": [
             2,
             {

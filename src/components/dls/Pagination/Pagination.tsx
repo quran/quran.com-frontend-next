@@ -25,7 +25,7 @@ const DEFAULT_SIBLINGS_COUNT = 1;
 /**
  * @param {number} start
  * @param {number} end
- * @returns {Number[]}
+ * @returns {number[]}
  */
 const generateRange = (start: number, end: number): number[] => range(start, end + 1);
 const Pagination: React.FC<Props> = ({

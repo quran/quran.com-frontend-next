@@ -13,10 +13,10 @@ import Verse from 'types/Verse';
  *
  * We need to use uthmani_text instead of the rendered text to support unicode based fonts like v1 and v2.
  *
- * @param event
- * @param verses all verses to scan for `data-word-location`
+ * @param {React.ClipboardEvent<HTMLDivElement>} event
+ * @param {Verse[]} verses all verses to scan for `data-word-location`
  */
-const onCopyQuranWords = (event, verses: Verse[]) => {
+const onCopyQuranWords = (event: React.ClipboardEvent<HTMLDivElement>, verses: Verse[]) => {
   const selection = document.getSelection();
   const quranWordsToCopy = Array.from(
     document.querySelectorAll(`[${DATA_ATTRIBUTE_WORD_LOCATION}]`),

@@ -13,8 +13,10 @@ import NotesAdjustment from './NotesAdjustment';
 
 /**
  * A set of developer utilities only availble on development environments
+ *
+ * @returns {JSX.Element}
  */
-const DeveloperUtility = () => {
+const DeveloperUtility = (): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // only show the developer utilities if we're in development mode

@@ -19,8 +19,10 @@ import {
 
 /**
  * Adjusts the font type and styles
+ *
+ * @returns {JSX.Element}
  */
-const FontAdjustment = () => {
+const FontAdjustment = (): JSX.Element => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale, quranFont, translationFontScale, tafsirFontScale } =

@@ -18,8 +18,9 @@ type CounterProps = {
  * Button is disabled when  the value is `undefined` or `null`
  * @param {() => void} props.onDecrement - the function to call when the decrement button is clicked.
  * Button is disabled when  the value is `undefined` or `null`
+ * @returns {JSX.Element}
  */
-const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
+const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element => (
   <div className={styles.container}>
     <Button
       tooltip="Decrease"
