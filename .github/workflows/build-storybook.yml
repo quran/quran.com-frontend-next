@@ -81,6 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [create-storybook-comment]
     steps:
+      - run: echo "${{ needs.create-storybook-comment.outputs.comment-id }}"
       - name: Update comment
         uses: peter-evans/create-or-update-comment@v1
         with:
