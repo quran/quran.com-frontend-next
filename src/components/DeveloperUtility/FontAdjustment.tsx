@@ -2,8 +2,7 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { QuranFont } from '../QuranReader/types';
-
+import { QuranFont } from 'src/components/QuranReader/types';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,

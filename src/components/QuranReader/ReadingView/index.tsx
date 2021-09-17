@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 
-import Verse from '../../../../types/Verse';
-
 import groupPagesByVerses from './groupPagesByVerses';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
+
+import Verse from 'types/Verse';
 
 type ReadingViewProps = {
   verses: Verse[];

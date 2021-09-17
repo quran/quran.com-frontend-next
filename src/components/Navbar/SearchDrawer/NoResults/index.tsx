@@ -1,9 +1,10 @@
 import React from 'react';
 
 import IconSearch from '../../../../../public/icons/search.svg';
-import AdvancedSearchLink from '../AdvancedSearchLink';
 
 import styles from './NoResults.module.scss';
+
+import AdvancedSearchLink from 'src/components/Navbar/SearchDrawer/AdvancedSearchLink';
 
 interface Props {
   searchUrl: string;

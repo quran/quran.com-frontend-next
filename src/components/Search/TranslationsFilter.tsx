@@ -1,9 +1,8 @@
 import React, { memo, useMemo } from 'react';
 
-import Combobox from '../dls/Forms/Combobox';
-
 import styles from './Filter.module.scss';
 
+import Combobox from 'src/components/dls/Forms/Combobox';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
 import AvailableTranslation from 'types/AvailableTranslation';
 

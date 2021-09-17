@@ -3,11 +3,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import Button from '../dls/Button/Button';
-import Link from '../dls/Link/Link';
-
 import styles from './FeedbackWidget.module.scss';
 
+import Button from 'src/components/dls/Button/Button';
+import Link from 'src/components/dls/Link/Link';
 import {
   AudioFileStatus,
   selectAudioFileStatus,

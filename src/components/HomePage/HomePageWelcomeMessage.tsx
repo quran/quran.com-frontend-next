@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Link from '../dls/Link/Link';
-
 import styles from './HomePageWelcomeMessage.module.scss';
+
+import Link from 'src/components/dls/Link/Link';
 
 const HomePageWelcomeMessage = () => (
   <div className={styles.container}>

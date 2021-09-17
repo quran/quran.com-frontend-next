@@ -198,6 +198,7 @@
     }],
     "settings": {
         "import/resolver": {
+            "typescript": {}, // this loads tsconfig.json to eslint
             "node": {
                 "paths": [
                     "."

@@ -2,11 +2,10 @@ import React, { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Header from '../PreInput/Header';
-import SearchQuerySuggestion from '../PreInput/SearchQuerySuggestion';
-
 import styles from './SearchHistory.module.scss';
 
+import Header from 'src/components/Navbar/SearchDrawer/PreInput/Header';
+import SearchQuerySuggestion from 'src/components/Navbar/SearchDrawer/PreInput/SearchQuerySuggestion';
 import { removeSearchHistoryRecord, selectSearchHistory } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
 

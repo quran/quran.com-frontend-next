@@ -13,9 +13,9 @@ import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { createSEOConfig } from 'src/utils/seo';
 
-import '../styles/reset.scss';
-import '../styles/fonts.scss';
-import '../styles/theme.scss';
+import 'src/styles/reset.scss';
+import 'src/styles/fonts.scss';
+import 'src/styles/theme.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (

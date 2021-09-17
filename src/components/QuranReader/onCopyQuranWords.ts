@@ -1,7 +1,6 @@
 import clipboardCopy from 'clipboard-copy';
 
-import { DATA_ATTRIBUTE_WORD_LOCATION } from '../dls/QuranWord/QuranWord';
-
+import { DATA_ATTRIBUTE_WORD_LOCATION } from 'src/components/dls/QuranWord/QuranWord';
 import { getWordDataByLocation } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
