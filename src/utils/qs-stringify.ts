@@ -1,7 +1,6 @@
 // Reference: https://github.com/billjs/query-string/blob/master/src/index.ts
 
-type Primitive = string | number | boolean;
-type QueryObject = Record<string, Primitive | undefined | null>;
+type QueryObject = Record<string, any>;
 
 function isObject(obj: QueryObject) {
   const type = typeof obj;
