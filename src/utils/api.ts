@@ -1,4 +1,4 @@
-import { stringify } from 'qs';
+import stringify from './qs-stringify';
 
 import { QuranFont } from 'src/components/QuranReader/types';
 
