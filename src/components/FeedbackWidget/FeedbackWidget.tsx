@@ -1,15 +1,19 @@
-import classNames from 'classnames';
 import React from 'react';
+
+import classNames from 'classnames';
 import { useSelector } from 'react-redux';
+
+import Button from '../dls/Button/Button';
+import Link from '../dls/Link/Link';
+
+import styles from './FeedbackWidget.module.scss';
+
 import {
   AudioFileStatus,
   selectAudioFileStatus,
   selectIsMobileMinimizedForScrolling,
   selectIsExpanded,
 } from 'src/redux/slices/AudioPlayer/state';
-import Button from '../dls/Button/Button';
-import Link from '../dls/Link/Link';
-import styles from './FeedbackWidget.module.scss';
 
 const FeedbackWidget = () => {
   const audioPlayerIsExpanded = useSelector(selectIsExpanded);

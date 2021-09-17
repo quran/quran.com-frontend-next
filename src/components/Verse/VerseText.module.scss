@@ -12,6 +12,11 @@
   direction: rtl;
 }
 
+.chapterHeaderContainer {
+  margin-left: var(--spacing-medium);
+  margin-right: var(--spacing-medium);
+}
+
 .largeQuranTextLayoutContainer {
   display: inline;
   @include breakpoints.tablet {

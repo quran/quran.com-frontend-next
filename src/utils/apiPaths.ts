@@ -1,9 +1,11 @@
 import { decamelizeKeys } from 'humps';
+
+import { ITEMS_PER_PAGE, makeUrl } from './api';
+
 import { QuranFont } from 'src/components/QuranReader/types';
 import { DEFAULT_RECITER } from 'src/redux/slices/AudioPlayer/defaultData';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
-import { AdvancedCopyRequest, SearchRequest } from 'types/APIRequests';
-import { ITEMS_PER_PAGE, makeUrl } from './api';
+import { AdvancedCopyRequest, SearchRequest } from 'types/ApiRequests';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
@@ -47,10 +49,10 @@ export const makeLanguagesUrl = (language: string): string =>
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
 export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
-  makeUrl(`/audio/reciter/${reciterId}`, decamelizeKeys({ chapter }));
+  makeUrl(`/audio/reciters/${reciterId}`, decamelizeKeys({ chapter }));
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
-  makeUrl(`/audio/reciter/${reciterId}/timestamp?verse_key=${verseKey}`);
+  makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);
 
 /**
  * Compose the url for the translations' filter API.

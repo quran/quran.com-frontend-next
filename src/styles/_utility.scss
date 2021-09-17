@@ -82,3 +82,15 @@ $scales-map: (
     }
   }
 }
+
+// Sets a max-width based on the device width. Inspired by the bootstrap container (https://getbootstrap.com/docs/5.0/layout/containers/).
+$large-device-width-ratio: 95%;
+$max-container-width: 112rem;
+@mixin container() {
+  width: 100%;
+
+  @include breakpoints.tablet {
+    width: $large-device-width-ratio;
+    max-width: $max-container-width;
+  }
+}

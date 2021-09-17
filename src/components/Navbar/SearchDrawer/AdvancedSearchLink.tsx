@@ -1,7 +1,10 @@
-import Link from 'next/link';
 import React from 'react';
-import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+
+import Link from 'next/link';
+
 import styles from './AdvancedSearchLink.module.scss';
+
+import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 
 interface Props {
   searchUrl?: string;

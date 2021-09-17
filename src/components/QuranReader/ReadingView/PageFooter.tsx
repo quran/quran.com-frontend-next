@@ -1,7 +1,10 @@
 import React from 'react';
+
 import Link from 'next/link';
-import { getPageNavigationUrl } from 'src/utils/navigation';
+
 import styles from './PageFooter.module.scss';
+
+import { getPageNavigationUrl } from 'src/utils/navigation';
 
 interface Props {
   page: number;

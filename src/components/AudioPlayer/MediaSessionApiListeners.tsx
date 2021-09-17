@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const SEEK_DURATION_SECONDS = 5;
 
-type MediaSessionAPIListenersProps = {
+type MediaSessionApiListenersProps = {
   play: () => void;
   pause: () => void;
   seek: (duration: number) => void;
@@ -16,7 +16,7 @@ const MediaSessionApiListeners = ({
   seek,
   playPreviousTrack,
   playNextTrack,
-}: MediaSessionAPIListenersProps) => {
+}: MediaSessionApiListenersProps) => {
   useEffect(() => {
     if ('mediaSession' in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({

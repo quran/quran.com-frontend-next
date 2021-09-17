@@ -1,7 +1,8 @@
-import { getAdvancedCopyRawResult } from 'src/api';
 import useSWRImmutable from 'swr/immutable';
-import { makeAdvancedCopyUrl } from 'src/utils/apiPaths';
+
+import { getAdvancedCopyRawResult } from 'src/api';
 import { DEFAULT_MUSHAF } from 'src/utils/api';
+import { makeAdvancedCopyUrl } from 'src/utils/apiPaths';
 
 /**
  * Given these parameters, get the `text to be copied` from API

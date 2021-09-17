@@ -1,4 +1,6 @@
+/* eslint-disable max-lines */
 import React from 'react';
+
 import Tooltip, { ContentAlign, ContentSide, TooltipType } from '.';
 
 export default {

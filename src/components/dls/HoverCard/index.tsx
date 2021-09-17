@@ -1,5 +1,7 @@
 import React, { ReactNode } from 'react';
+
 import * as RadixHoverCard from '@radix-ui/react-hover-card';
+
 import styles from './HoverCard.module.scss';
 
 export enum ContentSide {

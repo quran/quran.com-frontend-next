@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useMemo } from 'react';
+
 import throttle from 'lodash/throttle';
 
 export enum ScrollDirection {

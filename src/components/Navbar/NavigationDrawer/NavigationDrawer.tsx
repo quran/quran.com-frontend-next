@@ -1,16 +1,26 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+
 import classNames from 'classnames';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import IconClose from '../../../../public/icons/close.svg';
+import IconQ from '../../../../public/icons/Q.svg';
+import LanguageSelector from '../LanguageSelector';
+
+import MobileApps from './MobileApps';
+import styles from './NavigationDrawer.module.scss';
+import NavigationDrawerItem from './NavigationDrawerItem';
+
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
+import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
+
 // import IconHome from '../../../../public/icons/home.svg';
 // import IconCollection from '../../../../public/icons/collection.svg';
-import IconQ from '../../../../public/icons/Q.svg';
+
 // import IconInfo from '../../../../public/icons/info.svg';
 // import IconUpdates from '../../../../public/icons/updates.svg';
 // import IconDevelopers from '../../../../public/icons/developers.svg';
@@ -18,10 +28,6 @@ import IconQ from '../../../../public/icons/Q.svg';
 // import IconLock from '../../../../public/icons/lock.svg';
 // import IconFeedback from '../../../../public/icons/feedback.svg';
 // import IconRadio2 from '../../../../public/icons/radio-2.svg';
-import styles from './NavigationDrawer.module.scss';
-import LanguageSelector from '../LanguageSelector';
-import NavigationDrawerItem from './NavigationDrawerItem';
-import MobileApps from './MobileApps';
 
 const NavigationDrawer = () => {
   const drawerRef = useRef(null);

@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
+
 /**
  * Given a url path such as `/chapter/1`, return the chapters id
  * This will also handle case where chapterId is not specified in the url path

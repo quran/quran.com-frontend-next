@@ -1,18 +1,20 @@
-import Error from 'next/error';
+/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
-import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
+
 import { getChapterVerses } from 'src/api';
-import { ChapterResponse, VersesResponse } from 'types/APIResponses';
 import NextSeoHead from 'src/components/NextSeoHead';
-import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
+import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
+import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
-import { getChapterData } from 'src/utils/chapter';
+import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
+import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;

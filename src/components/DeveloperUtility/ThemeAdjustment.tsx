@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import { ThemeType, selectTheme, setTheme } from 'src/redux/slices/theme';
 
 const ThemeAdjustment = () => {

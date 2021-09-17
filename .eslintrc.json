@@ -10,7 +10,10 @@
     "parser": "babel-eslint",
     "plugins": [
         "prettier",
-        "react"
+        "react",
+        "react-func",
+        "sonarjs",
+        "unicorn"
     ],
     "rules": {
         "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
@@ -27,12 +30,53 @@
         "react/jsx-fragments": 2,
         "react/jsx-handler-names": 2,
         "react/jsx-sort-default-props": 2,
+        "react-func/max-lines-per-function": ["error", {
+            "max": 30,
+            "skipBlankLines": true,
+            "skipComments": true
+        }],
+        "import/order": ["error", {"newlines-between": "always", "alphabetize": {"order": "asc", "caseInsensitive": true}, "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "builtin",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": ["react"]}],
+        "max-lines":[2, {"max": 150,"skipBlankLines": true,"skipComments": true}],
+        "prefer-destructuring": ["error", {
+            "VariableDeclarator": {
+              "array": true,
+              "object": true
+            },
+            "AssignmentExpression": {
+              "array": true,
+              "object": true
+            }
+          }, {
+            "enforceForRenamedProperties": false
+          }],
         "import/extensions": [
             2,
             "ignorePackages",
             {
                 "ts": "never",
                 "tsx": "never"
+            }
+        ],
+        "sonarjs/no-inverted-boolean-check": "error",
+        "sonarjs/no-nested-switch": "error",
+        "sonarjs/no-redundant-boolean": "error",
+        "unicorn/no-abusive-eslint-disable": "error",
+        "unicorn/no-array-reduce": "error",
+        "unicorn/filename-case": [
+            "error",
+            {
+                "cases": {
+                    "kebabCase": true,
+                    "camelCase": true,
+                    "pascalCase": true
+                }
             }
         ],
         "prettier/prettier": [

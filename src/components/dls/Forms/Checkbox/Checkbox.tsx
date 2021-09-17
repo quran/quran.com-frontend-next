@@ -1,8 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
+
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
-import TickIcon from '../../../../../public/icons/tick.svg';
+import classNames from 'classnames';
+
 import DividerHorizontalIcon from '../../../../../public/icons/divider-horizontal.svg';
+import TickIcon from '../../../../../public/icons/tick.svg';
+
 import styles from './Checkbox.module.scss';
 
 const INDETERMINATE = 'indeterminate';

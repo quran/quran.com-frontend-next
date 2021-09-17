@@ -1,9 +1,15 @@
 import { useCallback } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
+
+import Section from './Section';
+
 import { getAvailableTranslations } from 'src/api';
 import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
+import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
 import ComboboxSize from 'src/components/dls/Forms/Combobox/types/ComboboxSize';
 import {
   decreaseTranslationFontScale,
@@ -17,14 +23,11 @@ import {
   selectSelectedTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
-import useSWRImmutable from 'swr/immutable';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
-import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
 import AvailableTranslation from 'types/AvailableTranslation';
-import Section from './Section';
 
 // convert translations data (from API) to combobox items
 // so we can use Combobox component

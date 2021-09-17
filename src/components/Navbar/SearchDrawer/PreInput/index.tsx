@@ -1,11 +1,14 @@
 import React from 'react';
+
+import AdvancedSearchLink from '../AdvancedSearchLink';
+import SearchHistory from '../SearchHistory';
+
+import Header from './Header';
+import styles from './PreInput.module.scss';
+import SearchQuerySuggestion from './SearchQuerySuggestion';
+
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
-import AdvancedSearchLink from '../AdvancedSearchLink';
-import styles from './PreInput.module.scss';
-import SearchHistory from '../SearchHistory';
-import Header from './Header';
-import SearchQuerySuggestion from './SearchQuerySuggestion';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;

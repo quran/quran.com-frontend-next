@@ -1,3 +1,4 @@
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -10,20 +11,20 @@ import {
   createMigrate,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import quranReaderStyles from './slices/QuranReader/styles';
-import readingPreferences from './slices/QuranReader/readingPreferences';
-import notes from './slices/QuranReader/notes';
-import translations from './slices/QuranReader/translations';
-import tafsirs from './slices/QuranReader/tafsirs';
-import contextMenu from './slices/QuranReader/contextMenu';
-import search from './slices/Search/search';
-import bookmarks from './slices/QuranReader/bookmarks';
-import navbar from './slices/navbar';
-import audioPlayerState from './slices/AudioPlayer/state';
-import theme from './slices/theme';
-import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
+
 import migrations from './migrations';
+import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
+import audioPlayerState from './slices/AudioPlayer/state';
+import navbar from './slices/navbar';
+import bookmarks from './slices/QuranReader/bookmarks';
+import contextMenu from './slices/QuranReader/contextMenu';
+import notes from './slices/QuranReader/notes';
+import readingPreferences from './slices/QuranReader/readingPreferences';
+import quranReaderStyles from './slices/QuranReader/styles';
+import tafsirs from './slices/QuranReader/tafsirs';
+import translations from './slices/QuranReader/translations';
+import search from './slices/Search/search';
+import theme from './slices/theme';
 
 const persistConfig = {
   key: 'root',

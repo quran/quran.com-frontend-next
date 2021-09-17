@@ -1,23 +1,28 @@
+/* eslint-disable max-lines */
 import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import Verse from 'types/Verse';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+
 import useTranslation from 'next-translate/useTranslation';
-import { generateChapterVersesKeys } from 'src/utils/verse';
-import { getAvailableTranslations } from 'src/api';
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import { throwIfError } from 'src/utils/error';
-import { areArraysEqual } from 'src/utils/array';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
+
 import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
-import VersesRangeSelector from './VersesRangeSelector';
+import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/RadioGroup';
+
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
-import styles from './VerseAdvancedCopy.module.scss';
 import copyText from './utils/copyText';
 import useTextToCopy from './utils/useTextCopy';
+import styles from './VerseAdvancedCopy.module.scss';
+import VersesRangeSelector from './VersesRangeSelector';
+
+import { getAvailableTranslations } from 'src/api';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from 'src/utils/apiPaths';
+import { areArraysEqual } from 'src/utils/array';
+import { throwIfError } from 'src/utils/error';
+import { generateChapterVersesKeys } from 'src/utils/verse';
+import Verse from 'types/Verse';
 
 interface Props {
   verse: Verse;

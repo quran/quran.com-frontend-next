@@ -1,7 +1,10 @@
-import classNames from 'classnames';
 import React from 'react';
-import ChapterIcon from 'src/components/chapters/ChapterIcon';
+
+import classNames from 'classnames';
+
 import styles from './ChapterIconContainer.module.scss';
+
+import ChapterIcon from 'src/components/chapters/ChapterIcon';
 
 export enum ChapterIconsSize {
   Small = 'small',

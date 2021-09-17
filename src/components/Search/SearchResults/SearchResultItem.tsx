@@ -1,10 +1,14 @@
 /* eslint-disable react/no-danger */
-import Link from 'next/link';
+
 import React from 'react';
+
+import Link from 'next/link';
+
+import styles from './SearchResultItem.module.scss';
+
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import { getVerseNavigationUrl } from 'src/utils/navigation';
 import Verse from 'types/Verse';
-import styles from './SearchResultItem.module.scss';
 
 interface Props {
   result: Verse;

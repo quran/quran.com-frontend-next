@@ -1,6 +1,8 @@
 import React from 'react';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+
 import IconClose from '../../../../../public/icons/close.svg';
+
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 
 interface Props {
   onClick: () => void;

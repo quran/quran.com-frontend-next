@@ -1,6 +1,8 @@
 import React from 'react';
-import classNames from 'classnames';
+
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
+import classNames from 'classnames';
+
 import styles from './RadioGroup.module.scss';
 
 export interface RadioItem {

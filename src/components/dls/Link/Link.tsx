@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-no-target-blank */ // eslint failed to lint properly
-import NextLink from 'next/link';
 import classNames from 'classnames';
-import Wrapper from 'src/components/Wrapper/Wrapper';
+import NextLink from 'next/link';
+
 import styles from './Link.module.scss';
+
+import Wrapper from 'src/components/Wrapper/Wrapper';
 
 export enum LinkVariant {
   Highlight = 'highlight',

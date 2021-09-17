@@ -1,7 +1,23 @@
+/* eslint-disable max-lines */
 import React, { useCallback, useEffect, useRef } from 'react';
+
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { withStopPropagation } from 'src/utils/event';
+
+import MinusTenIcon from '../../../public/icons/minus-ten.svg';
+import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
+import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
+
+import styles from './AudioPlayer.module.scss';
+import CloseButton from './CloseButton';
+import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
+import MediaSessionApiListeners from './MediaSessionApiListeners';
+// import AudioKeyBoardListeners from './AudioKeyboardListeners';
+import PlaybackControls from './PlaybackControls';
+import PlayPauseButton from './PlayPauseButton';
+import Slider from './Slider';
+
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
@@ -17,18 +33,7 @@ import {
   selectIsExpanded,
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
-import MinusTenIcon from '../../../public/icons/minus-ten.svg';
-import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
-import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-import Slider from './Slider';
-// import AudioKeyBoardListeners from './AudioKeyboardListeners';
-import MediaSessionApiListeners from './MediaSessionAPIListeners';
-import styles from './AudioPlayer.module.scss';
-import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
-import PlaybackControls from './PlaybackControls';
-import PlayPauseButton from './PlayPauseButton';
-import CloseButton from './CloseButton';
+import { withStopPropagation } from 'src/utils/event';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();

@@ -1,11 +1,14 @@
 import React, { useCallback } from 'react';
+
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import styles from './ContextMenu.module.scss';
+
+import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
+import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectNavbar } from 'src/redux/slices/navbar';
-import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
-import styles from './ContextMenu.module.scss';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();

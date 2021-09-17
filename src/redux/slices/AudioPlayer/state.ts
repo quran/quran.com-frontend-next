@@ -1,11 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import resetSettings from '../reset-settings';
+
+import { DEFAULT_RECITER } from './defaultData';
+
 import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import { AudioFile } from 'types/AudioFile';
 import Reciter from 'types/Reciter';
-import resetSettings from '../reset-settings';
-import { DEFAULT_RECITER } from './defaultData';
 
 export enum AudioFileStatus {
   Ready = 'Ready',

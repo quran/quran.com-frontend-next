@@ -1,9 +1,12 @@
 import React from 'react';
-import { secondsFormatter } from 'src/utils/datetime';
-import range from 'lodash/range';
+
 import classNames from 'classnames';
+import range from 'lodash/range';
+
 import styles from './Slider.module.scss';
 import Split, { NUMBER_OF_SPLITS } from './SliderSplit';
+
+import { secondsFormatter } from 'src/utils/datetime';
 
 type SliderProps = {
   currentTime: number;

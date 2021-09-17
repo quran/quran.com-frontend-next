@@ -1,8 +1,12 @@
 @use "src/styles/constants";
 @use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+$quran-reader-padding-mobile: 4rem;
+$quran-reader-padding-tablet: 5rem;
 
 .infiniteScroll {
-  max-width: 95%;
+  @include utility.container;
   margin: 0 auto;
 }
 
@@ -13,9 +17,10 @@
 }
 
 .container {
-  padding: calc(3 * var(--spacing-mega)) 0;
+  padding: $quran-reader-padding-mobile 0;
   background: var(--color-background-default);
   @include breakpoints.tablet {
+    padding: $quran-reader-padding-tablet 0;
     transition: var(--transition-regular);
     margin-right: 0;
   }
