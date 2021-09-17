@@ -1,6 +1,6 @@
 name: Build Storybook
 
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
   build-storybook:
@@ -50,6 +50,7 @@ jobs:
 
   create-storybook-comment:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     outputs:
       comment-id: ${{ steps.comment-id.outputs.comment-id }}
     steps:
@@ -71,6 +72,7 @@ jobs:
             
   post-storybook-url:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     needs: [create-storybook-comment, deploy-storybook]
     steps:
       - name: Find Comment
