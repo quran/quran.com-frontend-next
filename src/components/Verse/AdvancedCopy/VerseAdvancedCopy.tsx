@@ -16,7 +16,8 @@ import Checkbox from '../../dls/Forms/Checkbox/Checkbox';
 import VersesRangeSelector from './VersesRangeSelector';
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
 import styles from './VerseAdvancedCopy.module.scss';
-import { copyText, useTextToCopy } from './advanced-copy-helper';
+import copyText from './utils/copyText';
+import useTextToCopy from './utils/useTextCopy';
 
 interface Props {
   verse: Verse;
@@ -145,7 +146,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     }
   };
 
-  const textToCopy = useTextToCopy({
+  const { loading, textToCopy } = useTextToCopy({
     rangeEndVerse,
     rangeStartVerse,
     shouldCopyFootnotes,
@@ -290,7 +291,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   return children({
     ayahSelectionComponent,
     actionText,
-    onCopy: onCopyTextClicked,
+    onCopy: loading ? null : onCopyTextClicked,
   });
 };
 

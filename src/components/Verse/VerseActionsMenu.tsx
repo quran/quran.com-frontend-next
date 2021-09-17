@@ -18,6 +18,7 @@ import Modal from '../dls/Modal/Modal';
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 import Link from '../dls/Link/Link';
 import LinkIcon from '../../../public/icons/east.svg';
+import Spinner from '../dls/Spinner/Spinner';
 
 interface Props {
   verse: Verse;
@@ -103,7 +104,9 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
                 {ayahSelectionComponent}
               </Modal.Body>
               <Modal.Footer>
-                <Modal.Action onClick={onCopy}>{actionText}</Modal.Action>
+                <Modal.Action isDisabled={!onCopy} onClick={onCopy}>
+                  {onCopy ? actionText : <Spinner />}
+                </Modal.Action>
               </Modal.Footer>
             </>
           )}
