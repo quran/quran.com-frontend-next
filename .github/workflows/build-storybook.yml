@@ -1,6 +1,10 @@
 name: Build Storybook
 
-on: [pull_request, push]
+on: 
+  push:
+      branches:
+        - master
+  pull_request:
 
 jobs:
   build-storybook:
