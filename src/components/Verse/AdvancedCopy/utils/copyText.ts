@@ -1,5 +1,6 @@
-import { getVerseNumberFromKey } from 'src/utils/verse';
 import clipboardCopy from 'clipboard-copy';
+
+import { getVerseNumberFromKey } from 'src/utils/verse';
 
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
