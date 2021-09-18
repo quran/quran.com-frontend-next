@@ -21,3 +21,59 @@ it('can stringify object', () => {
 
   expect(result).toBe(expected);
 });
+
+it('should stringify one pair key-value', () => {
+  expect(stringify({ a: '1' })).toBe('a=1');
+});
+
+it('should stringify two pairs key-value', () => {
+  expect(stringify({ a: '1', b: 's' })).toBe('a=1&b=s');
+});
+
+it('should stringify the array to same name key', () => {
+  expect(stringify({ a: '1', b: ['s', 's2'] })).toBe('a=1&b=s&b=s2');
+});
+
+it('should stringify the boolean value', () => {
+  expect(stringify({ a: '1', b: 's', c: false })).toBe('a=1&b=s&c=false');
+});
+
+it('should stringify it when if the value need to encoded', () => {
+  const str = 'test=test%20%26*%20test';
+  expect(stringify({ test: 'test &* test' })).toBe(str);
+});
+
+it('should stringify it when if the key and value need to encoded', () => {
+  const str = 'test%3D=test%20%26*%20test';
+  expect(stringify({ 'test=': 'test &* test' })).toBe(str);
+});
+
+it('can stringify with custom eq and sep', () => {
+  const str = 'a#1|b#s|b#s2';
+  expect(stringify({ a: '1', b: ['s', 's2'] }, { eq: '#', sep: '|' })).toBe(str);
+});
+
+it('should stringify it for customize value', () => {
+  const fn = (key, value) => {
+    if (key === 'c') return value ? 'on' : 'off';
+    return value;
+  };
+  const obj = { a: 'test', b: 1, c: true };
+  const str = 'a=test&b=1&c=on';
+  expect(stringify(obj, { fn })).toBe(str);
+});
+
+it('can stringify nested value', () => {
+  const str = 'foo[bar]=baz';
+  expect(stringify({ foo: { bar: 'baz' } })).toBe(str);
+});
+
+it('can stringify deep nested value', () => {
+  const str = 'foo[bar][waw]=baz';
+  expect(stringify({ foo: { bar: { waw: 'baz' } } })).toBe(str);
+});
+
+it('can stringify deep nested encoded value', () => {
+  const str = 'foo[%25aw][%25aw]=baz';
+  expect(stringify({ foo: { '%aw': { '%aw': 'baz' } } })).toBe(str);
+});
