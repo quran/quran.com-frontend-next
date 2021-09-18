@@ -87,6 +87,9 @@
 }
 .actionButtonsContainerHidden {
   visibility: hidden;
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
 }
 
 .seekBackwardsContainer {

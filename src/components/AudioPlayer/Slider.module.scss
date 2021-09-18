@@ -106,12 +106,15 @@
 .currentTime {
   visibility: hidden;
   transition: var(--transition-regular);
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
 }
 
 .defaultAndMinimized {
   display: inline-block;
   @include breakpoints.tablet {
-    display: none;
+    visibility: hidden;
   }
 }
 
