@@ -10,7 +10,6 @@ import validateRangeSelection from './validateRangeSelection';
  * - set the error message if there's an error
  */
 
-// eslint-disable-next-line react-func/max-lines-per-function
 const copyText = async ({
   showRangeOfVerses,
   rangeEndVerse,
