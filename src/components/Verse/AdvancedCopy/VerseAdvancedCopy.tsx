@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
-import copyText from './utils/copyText';
+import copyVerse from './utils/copyVerse';
+import validateRangeSelection from './utils/validateRangeSelection';
 import styles from './VerseAdvancedCopy.module.scss';
 import VersesRangeSelector from './VersesRangeSelector';
 
@@ -153,7 +154,16 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
 
   const onCopyTextClicked = () => {
     setIsLoadingData(true);
-    copyText({
+    // if a range is selected, we need to validate it first
+    if (showRangeOfVerses) {
+      const validationError = validateRangeSelection(rangeStartVerse, rangeEndVerse);
+      // if the validation fails
+      if (validationError) {
+        setCustomMessage(validationError);
+      }
+    }
+
+    copyVerse({
       showRangeOfVerses,
       rangeEndVerse,
       rangeStartVerse,
@@ -165,9 +175,9 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       .then((blob) => {
         setIsLoadingData(false);
         setObjectUrl(window.URL.createObjectURL(blob));
+        setIsCopied(true);
       })
-      .catch((error) => {
-        setCustomMessage(error);
+      .catch(() => {
         setIsLoadingData(false);
       });
   };
