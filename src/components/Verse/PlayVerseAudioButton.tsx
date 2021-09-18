@@ -3,8 +3,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 
 interface PlayVerseAudioProps {

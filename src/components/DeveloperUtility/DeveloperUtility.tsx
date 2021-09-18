@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import WrenchIcon from '../../../public/icons/wrench.svg';
-import Separator from '../dls/Separator/Separator';
 
 import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
@@ -11,10 +10,14 @@ import styles from './DeveloperUtility.module.scss';
 import NavbarAdjustment from './NavbarAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 
+import Separator from 'src/components/dls/Separator/Separator';
+
 /**
  * A set of developer utilities only availble on development environments
+ *
+ * @returns {JSX.Element}
  */
-const DeveloperUtility = () => {
+const DeveloperUtility = (): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // only show the developer utilities if we're in development mode

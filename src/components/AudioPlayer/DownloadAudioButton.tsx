@@ -3,9 +3,9 @@ import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import DownloadIcon from '../../../public/icons/download.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 

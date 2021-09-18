@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './PlayButton.module.scss';
 
+import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
 
 interface Props {

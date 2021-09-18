@@ -32,7 +32,7 @@ const Checkbox: React.FC<Props> = ({
   /**
    * Handle when the value of the checkbox input changes.
    *
-   * @param {Boolean} newChecked
+   * @param {boolean} newChecked
    * @returns {void}
    */
   const handleChange = (newChecked: boolean): void => {

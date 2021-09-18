@@ -2,10 +2,12 @@ import React from 'react';
 
 import InfoIcon from '../../../../public/icons/info.svg';
 import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
-import ChapterIconContainer, { ChapterIconsSize } from '../ChapterIcon/ChapterIconContainer';
 
 import styles from './ChapterHeader.module.scss';
 
+import ChapterIconContainer, {
+  ChapterIconsSize,
+} from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';

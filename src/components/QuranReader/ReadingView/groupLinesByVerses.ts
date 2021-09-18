@@ -1,6 +1,7 @@
 import groupBy from 'lodash/groupBy';
 
 import Verse from 'types/Verse';
+import Word from 'types/Word';
 
 /**
  * Groups verses into lines to match the Quran Page (Madani Mushaf) layout
@@ -11,8 +12,10 @@ import Verse from 'types/Verse';
  *  Page1-Line3: [words]
  *  ...
  * }
+ *
+ * @returns {Record<string, Word[]}
  */
-const groupLinesByVerses = (verses: Verse[]) => {
+const groupLinesByVerses = (verses: Verse[]): Record<string, Word[]> => {
   const words = [];
 
   // Flattens the verses into an array of words

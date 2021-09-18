@@ -2,9 +2,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import Translation from '../../../../types/Translation';
-import Verse from '../../../../types/Verse';
-
 import BookmarkIcon from './BookmarkIcon';
 import TranslationText from './TranslationText';
 import styles from './TranslationView.module.scss';
@@ -15,6 +12,8 @@ import VerseActions from 'src/components/Verse/VerseActions';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import Translation from 'types/Translation';
+import Verse from 'types/Verse';
 
 type TranslationViewProps = {
   verses: Verse[];

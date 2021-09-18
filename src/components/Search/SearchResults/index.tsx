@@ -2,12 +2,11 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import NavigationItem from '../NavigationItem';
-
 import SearchResultItem from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
 import Pagination from 'src/components/dls/Pagination/Pagination';
+import NavigationItem from 'src/components/Search/NavigationItem';
 import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {

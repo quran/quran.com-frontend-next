@@ -5,9 +5,10 @@ import range from 'lodash/range';
 
 import PreviousIcon from '../../../../public/icons/caret-back.svg';
 import NextIcon from '../../../../public/icons/caret-forward.svg';
-import Button, { ButtonVariant } from '../Button/Button';
 
 import styles from './Pagination.module.scss';
+
+import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 
 interface Props {
   currentPage: number;
@@ -25,7 +26,7 @@ const DEFAULT_SIBLINGS_COUNT = 1;
 /**
  * @param {number} start
  * @param {number} end
- * @returns {Number[]}
+ * @returns {number[]}
  */
 const generateRange = (start: number, end: number): number[] => range(start, end + 1);
 const Pagination: React.FC<Props> = ({

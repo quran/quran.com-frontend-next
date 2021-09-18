@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { chapter } from '../../../tests/mocks/chapters';
-
 import ChapterBlock from './ChapterBlock';
+
+import { chapter } from 'tests/mocks/chapters';
 
 export default {
   title: 'chapters/ChapterBlock',

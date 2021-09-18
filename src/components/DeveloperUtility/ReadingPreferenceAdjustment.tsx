@@ -2,8 +2,7 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReadingPreference } from '../QuranReader/types';
-
+import { ReadingPreference } from 'src/components/QuranReader/types';
 import {
   selectReadingPreference,
   setReadingPreference,

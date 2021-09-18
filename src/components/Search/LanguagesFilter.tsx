@@ -1,9 +1,8 @@
 import React, { memo, useMemo } from 'react';
 
-import Combobox from '../dls/Forms/Combobox';
-
 import styles from './Filter.module.scss';
 
+import Combobox from 'src/components/dls/Forms/Combobox';
 import AvailableLanguage from 'types/AvailableLanguage';
 
 interface Props {

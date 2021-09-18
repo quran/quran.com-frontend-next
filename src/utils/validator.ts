@@ -23,7 +23,7 @@ export const isValidChapterId = (chapterId: string): boolean => {
  * into a number.
  *
  * @param {string} verseId
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export const isValidVerseNumber = (verseId: string): boolean => {
   const verseIdNumber = Number(verseId);
@@ -60,7 +60,7 @@ export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
  * 1. if it's a string that is not numeric e.g. "test".
  * 2. if it's a numeric string but lies outside the range 1->30.
  *
- * @param {string} chapterId
+ * @param {string} juzId
  * @returns {boolean}
  */
 export const isValidJuzId = (juzId: string): boolean => {
@@ -78,7 +78,7 @@ export const isValidJuzId = (juzId: string): boolean => {
  * 1. if it's a string that is not numeric e.g. "test".
  * 2. if it's a numeric string but lies outside the range 1->604.
  *
- * @param {string} chapterId
+ * @param {string} juzId
  * @returns {boolean}
  */
 export const isValidPageId = (juzId: string): boolean => {
@@ -94,7 +94,7 @@ export const isValidPageId = (juzId: string): boolean => {
  * Extract the to and from verse by splitting the range by '-'.
  *
  * @param {string} range
- * @returns {String[]}
+ * @returns {string[]}
  */
 export const getToAndFromFromRange = (range: string): string[] => range.split('-');
 
@@ -110,9 +110,9 @@ export const getToAndFromFromRange = (range: string): string[] => range.split('-
  * 4. If either the from verse number of to verse number exceeds the total number of verses
  *    for the current chapter e.g. for chapter 1: '7-8' or '8-8'.
  *
- * @param {String} chapterId
- * @param {String} range
- * @returns {Boolean}
+ * @param {string} chapterId
+ * @param {string} range
+ * @returns {boolean}
  */
 export const isValidVerseRange = (chapterId: string, range: string): boolean => {
   const rangeSplits = getToAndFromFromRange(range);
