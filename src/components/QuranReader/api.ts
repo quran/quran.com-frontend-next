@@ -96,8 +96,9 @@ export const getRequestKey = ({
  *
  * @returns {Promise<Verse>}
  */
-export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse[]> => {
+export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse> => {
   const res = await fetcher<VersesResponse>(input, init);
+  // @ts-ignore ignore this typing for now, we'll get back into this when we fix the "initial data not being used" issue
   return res.verses;
 };
 

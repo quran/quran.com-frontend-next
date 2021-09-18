@@ -75,12 +75,13 @@ const QuranReader = ({
     {
       fallbackData:
         isUsingDefaultTranslations && isUsingDefaultTafsirs && isUsingDefaultReciter
-          ? [initialData.verses]
+          ? initialData.verses
           : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
       revalidateOnFocus: false, // disable auto revalidation when window gets focused
       revalidateOnMount: true, // enable automatic revalidation when component is mounted. This is needed when the translations inside initialData don't match with the user preferences and would result in inconsistency either when we first load the QuranReader with pre-saved translations from the persistent store or when we change the translations' preferences after initial load.
     },
   );
+
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
   if (!data) {
