@@ -1,6 +1,6 @@
-@use './themes/light';
-@use './themes/dark';
-@use './themes/sepia';
+@use "./themes/light";
+@use "./themes/dark";
+@use "./themes/sepia";
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
