@@ -18,6 +18,7 @@ import VerseActionsMenuItem from './VerseActionsMenuItem';
 
 import Link from 'src/components/dls/Link/Link';
 import Modal from 'src/components/dls/Modal/Modal';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
@@ -98,7 +99,7 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
 
       <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
         <VerseAdvancedCopy verse={verse}>
-          {({ ayahSelectionComponent, actionText, onCopy }) => (
+          {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
             <>
               <Modal.Body>
                 <Modal.Header>
@@ -107,7 +108,9 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
                 {ayahSelectionComponent}
               </Modal.Body>
               <Modal.Footer>
-                <Modal.Action onClick={onCopy}>{actionText}</Modal.Action>
+                <Modal.Action isDisabled={loading} onClick={onCopy}>
+                  {loading ? <Spinner /> : actionText}
+                </Modal.Action>
               </Modal.Footer>
             </>
           )}

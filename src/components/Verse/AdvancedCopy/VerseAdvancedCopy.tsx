@@ -1,66 +1,33 @@
 /* eslint-disable max-lines */
 import React, { useState, useEffect, useCallback } from 'react';
 
-import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
+import copyVerse from './utils/copyVerse';
+import validateRangeSelection from './utils/validateRangeSelection';
 import styles from './VerseAdvancedCopy.module.scss';
 import VersesRangeSelector from './VersesRangeSelector';
 
-import { getAdvancedCopyRawResult, getAvailableTranslations } from 'src/api';
+import { getAvailableTranslations } from 'src/api';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import { QuranFont } from 'src/components/QuranReader/types';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
-import { getVerseNumberFromKey, generateChapterVersesKeys } from 'src/utils/verse';
+import { generateChapterVersesKeys } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
 interface Props {
   verse: Verse;
-  children({ onCopy, actionText, ayahSelectionComponent }): React.ReactElement;
+  children({ onCopy, actionText, ayahSelectionComponent, loading }): React.ReactElement;
 }
 const RESET_BUTTON_TIMEOUT_MS = 5 * 1000;
-
-/**
- * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
- *
- * 1. One of the two ranges have been cleared and don't have a value.
- * 2. The range start and end verses are the same which is not a valid range. The user should have selected current verse option instead.
- * 3. The range end verse is before the range start verse e.g. from verse 6 -> verse 4.
- *
- * @param {string} selectedRangeStartVerseKey
- * @param {string} selectedRangeEndVerseKey
- * @returns {string|null} if it's null it means the validation passed.
- */
-const validateRangeSelection = (
-  selectedRangeStartVerseKey: string,
-  selectedRangeEndVerseKey: string,
-): string | null => {
-  // if one of them is empty.
-  if (!selectedRangeStartVerseKey || !selectedRangeEndVerseKey) {
-    return 'Range start and end must have a value.';
-  }
-  // if both keys are the same.
-  if (selectedRangeStartVerseKey === selectedRangeEndVerseKey) {
-    return 'Range start and end should be different.';
-  }
-  // if the selected from verse number is higher than the selected to verse number.
-  if (
-    getVerseNumberFromKey(selectedRangeStartVerseKey) >
-    getVerseNumberFromKey(selectedRangeEndVerseKey)
-  ) {
-    return 'The starting verse has to be before the ending verse.';
-  }
-  return null;
-};
 
 const SINGLE_VERSE = 'single';
 const MULTIPLE_VERSES = 'multiple';
@@ -92,6 +59,10 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [customMessageComponent, setCustomMessage] = useState(null);
   // whether the selection has been copied successfully to the clipboard or not.
   const [isCopied, setIsCopied] = useState(false);
+  // objectUrl will be as href `<a> to download a txt file containing copied text.
+  const [objectUrl, setObjectUrl] = useState(null);
+
+  const [isLoadingData, setIsLoadingData] = useState(false);
 
   // listen to any changes to the value of isCopied.
   useEffect(() => {
@@ -182,6 +153,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   };
 
   const onCopyTextClicked = () => {
+    setIsLoadingData(true);
     // if a range is selected, we need to validate it first
     if (showRangeOfVerses) {
       const validationError = validateRangeSelection(rangeStartVerse, rangeEndVerse);
@@ -191,47 +163,24 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         return;
       }
     }
-    // by default the from and to will be the current verse.
-    let fromVerse = verse.verseKey;
-    let toVerse = verse.verseKey;
-    // if range of verse was selected
-    if (showRangeOfVerses) {
-      fromVerse = rangeStartVerse;
-      toVerse = rangeEndVerse;
-    }
-    // filter the translations
-    const toBeCopiedTranslations = Object.keys(translations).filter(
-      (translationId) => translations[translationId].shouldBeCopied === true,
-    );
-    getAdvancedCopyRawResult({
-      raw: true,
-      from: fromVerse,
-      to: toVerse,
-      footnote: shouldCopyFootnotes,
-      ...(toBeCopiedTranslations.length > 0 && { translations: toBeCopiedTranslations.join(', ') }), // only include the translations when at least 1 translation has been selected.
-      ...(shouldCopyText && { fields: QuranFont.Uthmani }), // only include the Quranic text if the user chose to.
-    }).then((response) => {
-      // if there is an error
-      if (response.status === 500) {
-        setCustomMessage('Something went wrong, please try again!');
-      } else {
-        clipboardCopy(response.result).then(() => {
-          const objectUrl = window.URL.createObjectURL(
-            new Blob([response.result], { type: 'text/plain' }),
-          );
-          setIsCopied(true);
-          setCustomMessage(
-            <p>
-              Text is copied successfully in your clipboard.{' '}
-              <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
-                Click here
-              </Link>{' '}
-              if you want to download text file.
-            </p>,
-          );
-        });
-      }
-    });
+
+    copyVerse({
+      showRangeOfVerses,
+      rangeEndVerse,
+      rangeStartVerse,
+      shouldCopyFootnotes,
+      shouldCopyText,
+      translations,
+      verseKey: verse.verseKey,
+    })
+      .then((blob) => {
+        setIsLoadingData(false);
+        setObjectUrl(window.URL.createObjectURL(blob));
+        setIsCopied(true);
+      })
+      .catch(() => {
+        setIsLoadingData(false);
+      });
   };
 
   const onShouldCopyTextChange = () => {
@@ -339,6 +288,15 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       {customMessageComponent && (
         <div className={styles.customMessage}>{customMessageComponent}</div>
       )}
+      {objectUrl && (
+        <p className={styles.customMessage}>
+          Text is copied successfully in your clipboard.{' '}
+          <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
+            Click here
+          </Link>{' '}
+          if you want to download text file.
+        </p>
+      )}
     </>
   );
 
@@ -347,6 +305,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   return children({
     ayahSelectionComponent,
     actionText,
+    loading: isLoadingData,
     onCopy: onCopyTextClicked,
   });
 };
