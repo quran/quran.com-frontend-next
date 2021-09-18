@@ -22,6 +22,7 @@ const defaultConfig: Config = {
 /**
  * Given a query object, return the query string
  * See qs-stringify.test.ts for examples
+ *
  * @param {QueryObject} obj a query object to be converted to a query string
  * @param {Config} config optional configuration
  * @returns {string} query string
