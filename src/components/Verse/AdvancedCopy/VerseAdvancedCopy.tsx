@@ -11,7 +11,6 @@ import RadioGroup, { RadioGroupOrientation } from '../../dls/Forms/RadioGroup/Ra
 
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
 import copyText from './utils/copyText';
-import useTextToCopy from './utils/useTextCopy';
 import styles from './VerseAdvancedCopy.module.scss';
 import VersesRangeSelector from './VersesRangeSelector';
 
@@ -26,7 +25,7 @@ import Verse from 'types/Verse';
 
 interface Props {
   verse: Verse;
-  children({ onCopy, actionText, ayahSelectionComponent }): React.ReactElement;
+  children({ onCopy, actionText, ayahSelectionComponent, loading }): React.ReactElement;
 }
 const RESET_BUTTON_TIMEOUT_MS = 5 * 1000;
 
@@ -62,6 +61,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [isCopied, setIsCopied] = useState(false);
   // objectUrl will be as href `<a> to download a txt file containing copied text.
   const [objectUrl, setObjectUrl] = useState(null);
+
+  const [isLoadingData, setIsLoadingData] = useState(false);
 
   // listen to any changes to the value of isCopied.
   useEffect(() => {
@@ -151,27 +152,25 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     }
   };
 
-  const { loading, textToCopy } = useTextToCopy({
-    rangeEndVerse,
-    rangeStartVerse,
-    shouldCopyFootnotes,
-    shouldCopyText,
-    showRangeOfVerses,
-    translations,
-    verseKey: verse.verseKey,
-  });
-
-  const onCopyTextClicked = (e) => {
-    e.preventDefault();
+  const onCopyTextClicked = () => {
+    setIsLoadingData(true);
     copyText({
+      showRangeOfVerses,
       rangeEndVerse,
       rangeStartVerse,
-      setCustomMessage,
-      setIsCopied,
-      showRangeOfVerses,
-      textToCopy,
-    });
-    setObjectUrl(window.URL.createObjectURL(new Blob([textToCopy], { type: 'text/plain' })));
+      shouldCopyFootnotes,
+      shouldCopyText,
+      translations,
+      verseKey: verse.verseKey,
+    })
+      .then((blob) => {
+        setIsLoadingData(false);
+        setObjectUrl(window.URL.createObjectURL(blob));
+      })
+      .catch((error) => {
+        setCustomMessage(error);
+        setIsLoadingData(false);
+      });
   };
 
   const onShouldCopyTextChange = () => {
@@ -296,7 +295,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   return children({
     ayahSelectionComponent,
     actionText,
-    onCopy: loading ? null : onCopyTextClicked,
+    loading: isLoadingData,
+    onCopy: onCopyTextClicked,
   });
 };
 
