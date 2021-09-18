@@ -104,7 +104,7 @@
 }
 
 .currentTime {
-  display: none;
+  visibility: hidden;
   transition: var(--transition-regular);
 }
 
