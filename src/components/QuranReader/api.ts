@@ -1,8 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { camelizeKeys } from 'humps';
-
 import { QuranReaderDataType } from './types';
 
+import { fetcher } from 'src/api';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
@@ -97,9 +96,9 @@ export const getRequestKey = ({
  *
  * @returns {Promise<Verse>}
  */
-export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse> => {
-  const res = await fetch(input, init);
-  return res.json().then((data: VersesResponse) => camelizeKeys(data.verses));
+export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse[]> => {
+  const res = await fetcher<VersesResponse>(input, init);
+  return res.verses;
 };
 
 /**

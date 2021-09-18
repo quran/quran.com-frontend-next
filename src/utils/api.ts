@@ -1,3 +1,4 @@
+import { decamelizeKeys } from 'humps';
 import { stringify } from 'qs';
 
 import { QuranFont } from 'src/components/QuranReader/types';
@@ -24,9 +25,11 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
     return `${API_HOST}${path}`;
   }
 
+  const decamelizedParams = decamelizeKeys(parameters);
+
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
-  const queryParameters = `?${stringify(parameters)}`;
+  const queryParameters = `?${stringify(decamelizedParams)}`;
   return `${API_HOST}${path}${queryParameters}`;
 };
 

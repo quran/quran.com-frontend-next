@@ -47,6 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const versesResponse = await getChapterVerses(chapterId, {
     ...getDefaultWordFields(),
   });
+
   // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
   if (versesResponse.status === 500) {
     return {
