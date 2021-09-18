@@ -3,6 +3,7 @@ import { DEFAULT_MUSHAF } from 'src/utils/api';
 
 /**
  * Given these parameters, get the `text to be copied` from API
+ *
  * @returns {string} textToCopy
  */
 const getTextToCopy = ({
