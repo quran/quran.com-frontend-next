@@ -45,11 +45,11 @@ const copyText = async ({
    * Safari supports `text/plain` : promise
    * Chrome doesn't support it.
    *
-   * Safari needs `navigator.clipboard` to be called immediately without waiting
+   * Safari needs `navigator.clipboard.write` to be called immediately without waiting
    * Chrome can wait
    *
    * So, for safari we call it navigator.clipboard immediately and give it a promise
-   * for chrome we wait for the promise to resolve, the we call navigator.clipboard
+   * for chrome we wait for the promise to resolve, the wen call navigator.clipboard.write
    */
 
   try {
