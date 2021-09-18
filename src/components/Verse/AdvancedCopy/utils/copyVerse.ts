@@ -19,18 +19,16 @@ const copyVerse = async ({
   translations,
   verseKey,
 }) => {
-  const getTextBlobPromise = () =>
-    getTextToCopy({
-      rangeEndVerse,
-      rangeStartVerse,
-      shouldCopyFootnotes,
-      shouldCopyText,
-      showRangeOfVerses,
-      translations,
-      verseKey,
-    }).then(textToBlob);
+  const textBlobPromise = getTextToCopy({
+    rangeEndVerse,
+    rangeStartVerse,
+    shouldCopyFootnotes,
+    shouldCopyText,
+    showRangeOfVerses,
+    translations,
+    verseKey,
+  }).then(textToBlob);
 
-  const textBlobPromise = getTextBlobPromise();
   copyText(textBlobPromise);
   return textBlobPromise;
 };
