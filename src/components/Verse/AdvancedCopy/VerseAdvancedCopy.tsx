@@ -160,6 +160,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       // if the validation fails
       if (validationError) {
         setCustomMessage(validationError);
+        return;
       }
     }
 
