@@ -35,7 +35,14 @@ jobs:
         with:
           name: storybook-files
           path: storybook-static
-      - uses: nelonoel/branch-name@v1.0.1
+      - name: Extract branch name on push
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Print branch name on pull request
+        if: github.event_name == 'pull_request'
+        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
       - name: Commit updates
         run: |
           mkdir -p storybook
