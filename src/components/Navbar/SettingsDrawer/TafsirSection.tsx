@@ -6,7 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
-import DataFetcher from 'src/components/Api/DataFetcher';
+import DataFetcher from 'src/components/DataFetcher';
 import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';

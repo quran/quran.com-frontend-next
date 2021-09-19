@@ -4,7 +4,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import ErrorMessage from './ErrorMessage';
 
-import { fetcher, OFFLINE_ERROR } from 'src/api';
+import { fetcher } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { BaseResponse } from 'types/ApiResponses';
 
@@ -14,7 +14,19 @@ interface Props {
   initialData?: BaseResponse;
 }
 
-const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }) => {
+/**
+ * Data fetcher is a dynamic component that serves as a container for a component
+ * that depends on data from a remote API to render. This component handles:
+ * 1. Calling the API.
+ * 2. Caching the response (due to using useSwr).
+ * 3. Handling errors if any by showing an error message.
+ * 4. Handling when the user is offline while trying to fetch the API response.
+ * 5. Dynamically passing the response data through render-props to the parent.
+ *
+ * @param {Props} props
+ * @returns {JSX.Element}
+ */
+const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
     queryKey,
     () =>
@@ -39,8 +51,7 @@ const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }) => {
    * or if we had an error when calling the API.
    */
   if (error) {
-    const isOffline = error.message === OFFLINE_ERROR;
-    return <ErrorMessage onRetryClicked={onRetryClicked} isError={!isOffline} />;
+    return <ErrorMessage onRetryClicked={onRetryClicked} error={error} />;
   }
 
   return render(data);
