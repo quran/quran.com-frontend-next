@@ -12,7 +12,7 @@ type SpinnerProps = {
   isCentered?: boolean;
 };
 
-const Spinner = ({ size = SpinnerSize.Medium, isCentered = false }: SpinnerProps) => (
+const Spinner = ({ size = SpinnerSize.Medium, isCentered = true }: SpinnerProps) => (
   <div
     className={classNames(styles.spinner, {
       [styles.large]: size === SpinnerSize.Large,

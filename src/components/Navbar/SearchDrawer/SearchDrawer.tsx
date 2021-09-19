@@ -199,9 +199,7 @@ const SearchDrawer: React.FC = () => {
         ) : (
           <>
             {isSearching ? (
-              <div className={styles.spinnerContainer}>
-                <Spinner size={SpinnerSize.Large} />
-              </div>
+              <Spinner size={SpinnerSize.Large} />
             ) : (
               <>
                 {hasError && <div>Something went wrong, please try again!</div>}

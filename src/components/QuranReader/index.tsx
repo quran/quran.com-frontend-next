@@ -130,9 +130,13 @@ const QuranReader = ({
             loadMore={loadMore}
             loader={
               <div className={styles.loadMoreContainer} key={0}>
-                <button type="button" onClick={loadMore} disabled={isValidating}>
-                  {isValidating ? <Spinner size={SpinnerSize.Large} isCentered /> : 'Load More ...'}
-                </button>
+                {isValidating ? (
+                  <Spinner size={SpinnerSize.Large} />
+                ) : (
+                  <button type="button" onClick={loadMore} disabled={isValidating}>
+                    Load More...
+                  </button>
+                )}
               </div>
             }
           >
