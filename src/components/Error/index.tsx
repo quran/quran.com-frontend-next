@@ -2,7 +2,7 @@ import React from 'react';
 
 import RetryIcon from '../../../public/icons/retry.svg';
 
-import styles from './ErrorMessage.module.scss';
+import styles from './Error.module.scss';
 
 import { OFFLINE_ERROR } from 'src/api';
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
@@ -12,7 +12,7 @@ interface Props {
   error: Error;
 }
 
-const ErrorMessage: React.FC<Props> = ({ onRetryClicked, error }) => (
+const Error: React.FC<Props> = ({ onRetryClicked, error }) => (
   <div className={styles.container}>
     <p className={styles.text}>
       {error.message !== OFFLINE_ERROR
@@ -30,4 +30,4 @@ const ErrorMessage: React.FC<Props> = ({ onRetryClicked, error }) => (
   </div>
 );
 
-export default ErrorMessage;
+export default Error;
