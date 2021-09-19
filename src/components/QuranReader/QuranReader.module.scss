@@ -26,12 +26,6 @@ $quran-reader-padding-tablet: 5rem;
   }
 }
 
-.spinnerContainer {
-  > div {
-    margin: 0 auto;
-  }
-}
-
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-right: constants.$notes-side-bar-desktop-width;
