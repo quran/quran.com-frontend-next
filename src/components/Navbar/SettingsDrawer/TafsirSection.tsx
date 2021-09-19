@@ -2,11 +2,11 @@ import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
 
 import Section from './Section';
+import styles from './TafsirSection.module.scss';
 
-import { getTafsirs } from 'src/api';
+import DataFetcher from 'src/components/Api/DataFetcher';
 import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
@@ -19,9 +19,10 @@ import {
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
-import { throwIfError } from 'src/utils/error';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
+import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 
 // convert tafsir data (from API) to combobox items structure
@@ -49,46 +50,46 @@ const TafsirSection = () => {
     [dispatch],
   );
 
-  const { data: tafsirs, error } = useSWRImmutable(`/tafsirs/${lang}`, () =>
-    getTafsirs(lang).then((res) => {
-      throwIfError(res);
-      return res.tafsirs;
-    }),
-  );
-
-  if (!tafsirs || error) return null;
-
-  const items = tafsirsToComboboxItems(tafsirs);
-
   return (
-    <Section>
-      <Section.Title>Tafsir</Section.Title>
-      <Section.Row>
-        <Section.Label>Tafsir</Section.Label>
-        <div>
-          <Combobox
-            minimumRequiredItems={1}
-            id="tafsir"
-            isMultiSelect
-            items={items}
-            onChange={onTafsirsChange}
-            value={numbersToStringsArray(selectedTafsirs)}
-          />
-        </div>
-      </Section.Row>
-      <Section.Row>
-        <Section.Label>Tafsir font size</Section.Label>
-        <Counter
-          count={tafsirFontScale}
-          onDecrement={
-            tafsirFontScale === MINIMUM_FONT_STEP ? null : () => dispatch(decreaseTafsirFontScale())
-          }
-          onIncrement={
-            tafsirFontScale === MAXIMUM_FONT_STEP ? null : () => dispatch(increaseTafsirFontScale())
-          }
-        />
-      </Section.Row>
-    </Section>
+    <div className={styles.container}>
+      <DataFetcher
+        queryKey={makeTafsirsUrl(lang)}
+        render={(data: TafsirsResponse) => (
+          <Section>
+            <Section.Title>Tafsir</Section.Title>
+            <Section.Row>
+              <Section.Label>Tafsir</Section.Label>
+              <div>
+                <Combobox
+                  minimumRequiredItems={1}
+                  id="tafsir"
+                  isMultiSelect
+                  items={data ? tafsirsToComboboxItems(data.tafsirs) : []}
+                  onChange={onTafsirsChange}
+                  value={numbersToStringsArray(selectedTafsirs)}
+                />
+              </div>
+            </Section.Row>
+            <Section.Row>
+              <Section.Label>Tafsir font size</Section.Label>
+              <Counter
+                count={tafsirFontScale}
+                onDecrement={
+                  tafsirFontScale === MINIMUM_FONT_STEP
+                    ? null
+                    : () => dispatch(decreaseTafsirFontScale())
+                }
+                onIncrement={
+                  tafsirFontScale === MAXIMUM_FONT_STEP
+                    ? null
+                    : () => dispatch(increaseTafsirFontScale())
+                }
+              />
+            </Section.Row>
+          </Section>
+        )}
+      />
+    </div>
   );
 };
 

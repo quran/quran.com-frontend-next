@@ -1,12 +1,13 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
 
+import styles from './AudioSection.module.scss';
 import Section from './Section';
 
-import { getAvailableReciters } from 'src/api';
+import DataFetcher from 'src/components/Api/DataFetcher';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
 // convert the reciter's data from API to combobox items
@@ -21,42 +22,42 @@ const recitersToComboboxItems = (reciters) =>
 
 const AudioSection = () => {
   const dispatch = useDispatch();
-  const { data, error } = useSWRImmutable(makeRecitersUrl(), () =>
-    getAvailableReciters().then((res) =>
-      res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
-    ),
-  );
   const selectedReciter = useSelector(selectReciter, shallowEqual);
-  const reciters = data || [];
 
   // given the reciterId, get the full reciter object.
   // and setReciter in redux
-  const onSelectedReciterChange = (reciterId: string) => {
+  const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
     dispatch(setReciter(reciter));
   };
 
-  if (error) return null;
-
-  const items = recitersToComboboxItems(reciters);
   return (
-    <Section>
-      <Section.Title>Audio</Section.Title>
-      <Section.Row>
-        <Section.Label>Reciter</Section.Label>
-        <div>
-          <Combobox
-            id="audio-reciter"
-            minimumRequiredItems={1}
-            items={items}
-            initialInputValue={selectedReciter.name}
-            value={selectedReciter.id.toString()}
-            onChange={onSelectedReciterChange}
-          />
-        </div>
-      </Section.Row>
-    </Section>
+    <div className={styles.container}>
+      <DataFetcher
+        queryKey={makeRecitersUrl()}
+        render={(data: RecitersResponse) => (
+          <Section>
+            <Section.Title>Audio</Section.Title>
+            <Section.Row>
+              <Section.Label>Reciter</Section.Label>
+              <div>
+                <Combobox
+                  id="audio-reciter"
+                  minimumRequiredItems={1}
+                  items={data ? recitersToComboboxItems(data.reciters) : []}
+                  initialInputValue={selectedReciter.name}
+                  value={selectedReciter.id.toString()}
+                  onChange={(reciterId: string) => {
+                    onSelectedReciterChange(reciterId, data.reciters);
+                  }}
+                />
+              </div>
+            </Section.Row>
+          </Section>
+        )}
+      />
+    </div>
   );
 };
 
