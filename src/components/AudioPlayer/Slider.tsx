@@ -20,6 +20,9 @@ type SliderProps = {
 /**
  * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
  * the audio playback completion and are used for seeking audio at a particular time.
+ *
+ * @param {SliderProps} props
+ * @returns {JSX.Element}
  */
 const Slider = ({
   currentTime,
@@ -28,7 +31,7 @@ const Slider = ({
   isExpanded,
   reciterName,
   isMobileMinimizedForScrolling,
-}: SliderProps) => {
+}: SliderProps): JSX.Element => {
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux

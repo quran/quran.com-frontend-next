@@ -11,8 +11,9 @@ export const numbersToStringsArray = (numbersArray: number[]): string[] =>
 
 /**
  * Convert an array of strings to an array of numbers.
- * @param stringsArray
- * @returns
+ *
+ * @param {string[]} stringsArray
+ * @returns {number[]}
  */
 export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
   stringsArray.map((string) => Number(string));

@@ -1,9 +1,11 @@
+import { decamelizeKeys } from 'humps';
+
 import stringify from './qs-stringify';
 
 import { QuranFont } from 'src/components/QuranReader/types';
 
 export const ITEMS_PER_PAGE = 10;
-const DEFAULT_MUSHAF = 4; // King Fahad Quran Complex 15 Lines Hafs text.
+export const DEFAULT_MUSHAF = 5; // KFGQPC HAFS Text
 
 const STAGING_API_HOST = 'https://staging.quran.com/api/qdc';
 const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc';
@@ -14,17 +16,21 @@ export const API_HOST =
 
 /**
  * Generates a url to make an api call to our backend
- * @param path the path for the call
- * @param parameters optional query params, {a: 1, b: 2} is parsed to "?a=1&b=2"
+ *
+ * @param {string} path the path for the call
+ * @param {Record<string, unknown>} parameters optional query params, {a: 1, b: 2} is parsed to "?a=1&b=2"
+ * @returns {string}
  */
-export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
+export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
     return `${API_HOST}${path}`;
   }
 
+  const decamelizedParams = decamelizeKeys(parameters);
+
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
-  const queryParameters = `?${stringify(parameters)}`;
+  const queryParameters = `?${stringify(decamelizedParams)}`;
   return `${API_HOST}${path}${queryParameters}`;
 };
 
@@ -32,6 +38,7 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>) => {
  * Get the default word fields that should exist in the response.
  *
  * @param {QuranFont} quranFont the selected quran font since.
+ * @returns {{ wordFields: string; mushaf: number }}
  *
  */
 export const getDefaultWordFields = (

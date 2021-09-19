@@ -17,7 +17,7 @@
 
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
-    right: calc(0 - constants.$side-menu-desktop-width);
+    right: calc(-1 * constants.$side-menu-desktop-width);
   }
 }
 

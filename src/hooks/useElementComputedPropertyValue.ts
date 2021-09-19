@@ -5,8 +5,12 @@ import React from 'react';
  *
  * @param {React.RefObject<HTMLElement>} ref
  * @param {string} property
+ * @returns {string|null}
  */
-const useElementComputedPropertyValue = (ref: React.RefObject<HTMLElement>, property: string) => {
+const useElementComputedPropertyValue = (
+  ref: React.RefObject<HTMLElement>,
+  property: string,
+): string | null => {
   if (typeof window !== 'undefined' && ref.current) {
     return window.getComputedStyle(ref.current).getPropertyValue(property);
   }

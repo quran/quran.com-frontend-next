@@ -1,5 +1,3 @@
-import { decamelizeKeys } from 'humps';
-
 import { ITEMS_PER_PAGE, makeUrl } from './api';
 
 import { QuranFont } from 'src/components/QuranReader/types';
@@ -20,7 +18,7 @@ export const makeVersesUrl = (id: string | number, params?: Record<string, unkno
   // allow overriding the default values e.g. translations
   const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
 
-  return makeUrl(`/verses/by_chapter/${id}`, decamelizeKeys(apiParams));
+  return makeUrl(`/verses/by_chapter/${id}`, apiParams);
 };
 
 /**
@@ -30,7 +28,7 @@ export const makeVersesUrl = (id: string | number, params?: Record<string, unkno
  * @returns {string}
  */
 export const makeTranslationsUrl = (language: string): string =>
-  makeUrl('/resources/translations', decamelizeKeys({ language }));
+  makeUrl('/resources/translations', { language });
 
 /**
  * Compose the url for the languages API.
@@ -39,17 +37,16 @@ export const makeTranslationsUrl = (language: string): string =>
  * @returns {string}
  */
 export const makeLanguagesUrl = (language: string): string =>
-  makeUrl('/resources/languages', decamelizeKeys({ language }));
+  makeUrl('/resources/languages', { language });
 
 /**
  * Compose the url for reciters API.
  *
- * @param {string} language
- * @returns {string
+ * @returns {string}
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
 export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
-  makeUrl(`/audio/reciters/${reciterId}`, decamelizeKeys({ chapter }));
+  makeUrl(`/audio/reciters/${reciterId}`, { chapter });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
   makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);
@@ -62,10 +59,7 @@ export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
  * @returns {string}
  */
 export const makeTranslationsInfoUrl = (locale: string, translations: number[]): string =>
-  makeUrl(
-    '/resources/translations/filter',
-    decamelizeKeys({ locale, translations: translations.join(', ') }),
-  );
+  makeUrl('/resources/translations/filter', { locale, translations: translations.join(', ') });
 
 /**
  * Compose the url for the advanced copy API.
@@ -74,7 +68,7 @@ export const makeTranslationsInfoUrl = (locale: string, translations: number[]):
  * @returns {string}
  */
 export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
-  makeUrl('/verses/advanced_copy', decamelizeKeys(params));
+  makeUrl('/verses/advanced_copy', params as Record<string, unknown>);
 
 /**
  * Compose the url for search API.
@@ -82,8 +76,7 @@ export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
  * @param {SearchRequest} params the request params.
  * @returns {string}
  */
-export const makeSearchResultsUrl = (params: SearchRequest): string =>
-  makeUrl('/search', decamelizeKeys(params));
+export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('/search', params);
 
 /**
  * Compose the url for the tafsirs API.
@@ -92,7 +85,7 @@ export const makeSearchResultsUrl = (params: SearchRequest): string =>
  * @returns {string}
  */
 export const makeTafsirsUrl = (language: string): string =>
-  makeUrl('/resources/tafsirs', decamelizeKeys({ language }));
+  makeUrl('/resources/tafsirs', { language });
 
 /**
  * Compose the url for the chapter's info API.
@@ -102,7 +95,7 @@ export const makeTafsirsUrl = (language: string): string =>
  * @returns {string}
  */
 export const makeChapterInfoUrl = (chapterId: string, language: string): string =>
-  makeUrl(`/chapters/${chapterId}/info`, decamelizeKeys({ language }));
+  makeUrl(`/chapters/${chapterId}/info`, { language });
 
 /**
  * Compose the url for Juz's verses API.
@@ -115,7 +108,7 @@ export const makeJuzVersesUrl = (id: string | number, params?: Record<string, un
   // allow overriding the default values e.g. translations
   const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
 
-  return makeUrl(`/verses/by_juz/${id}`, decamelizeKeys(apiParams));
+  return makeUrl(`/verses/by_juz/${id}`, apiParams);
 };
 
 /**
@@ -132,7 +125,7 @@ export const makePageVersesUrl = (
   // allow overriding the default values e.g. translations
   const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
 
-  return makeUrl(`/verses/by_page/${id}`, decamelizeKeys(apiParams));
+  return makeUrl(`/verses/by_page/${id}`, apiParams);
 };
 
 /**

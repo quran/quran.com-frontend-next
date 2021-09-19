@@ -1,6 +1,6 @@
-import Modal from '../dls/Modal/Modal';
-
 import styles from './SurahAudioMismatchModal.module.scss';
+
+import Modal from 'src/components/dls/Modal/Modal';
 
 type Props = {
   isOpen: boolean;

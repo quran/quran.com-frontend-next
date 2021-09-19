@@ -6,6 +6,7 @@ const DEFAULT_LANGUAGE = 'en';
 
 /**
  * Get chapters data from the json file, by language
+ *
  * @param {string} lang
  * @returns {Record<string, Chapter>} chapter
  */
@@ -20,6 +21,7 @@ export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chap
 
 /**
  * Get chapter data by id from the json file
+ *
  * @param {string} id  chapterId
  * @param {string} lang language
  * @returns {Chapter} chapter
@@ -31,6 +33,7 @@ export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Cha
 
 /**
  * Given a pageId, get chapter ids from a json file
+ *
  * @param {string} pageId
  * @returns {string[]} chapterIds
  */
@@ -41,6 +44,7 @@ export const getChapterIdsForPage = (pageId: string): string[] => {
 
 /**
  * Given a juzId, get chapters ids from a json file
+ *
  * @param {string} juzId
  * @returns {string[]} chapterIds
  */
@@ -52,15 +56,15 @@ export const getChapterIdsForJuz = (juzId: string): string[] => {
 /**
  * Whether the current surah is the first surah.
  *
- * @param {Number} chapterNumber
- * @returns  {Boolean}
+ * @param {number} surahNumber
+ * @returns  {boolean}
  */
 export const isFirstSurah = (surahNumber: number): boolean => surahNumber === 1;
 
 /**
  * Whether the current surah is the last surah.
  *
- * @param {Number} chapterNumber
- * @returns  {Boolean}
+ * @param {number} surahNumber
+ * @returns  {boolean}
  */
 export const isLastSurah = (surahNumber: number): boolean => surahNumber === 114;

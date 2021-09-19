@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '../RootState';
+import { RootState } from 'src/redux/RootState';
 
 export type Navbar = {
   isVisible: boolean;

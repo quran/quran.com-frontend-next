@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Chapter from '../../../types/Chapter';
-
 import ChapterBlock from './ChapterBlock';
 import styles from './ChaptersList.module.scss';
+
+import Chapter from 'types/Chapter';
 
 type Props = {
   chapters: Chapter[];

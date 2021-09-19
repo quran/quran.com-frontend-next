@@ -28,29 +28,24 @@ import {
   AudioTimestampsResponse,
   TafsirsResponse,
   VersesResponse,
-  BaseResponse,
   ChapterInfoResponse,
   FootnoteResponse,
 } from 'types/ApiResponses';
 import { AudioFile } from 'types/AudioFile';
 
-export const fetcher = async function fetcher(
+export const fetcher = async function fetcher<T>(
   input: RequestInfo,
   init?: RequestInit,
-): Promise<BaseResponse> {
+): Promise<T> {
   const res = await fetch(input, init);
-  return res.json();
+  const json = await res.json();
+  return camelizeKeys(json);
 };
 
 export const getChapterVerses = async (
   id: string | number,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => {
-  const payload = await fetcher(makeVersesUrl(id, params));
-  // TODO (@abdellatif): parameterize the default translation
-
-  return camelizeKeys(payload);
-};
+): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
@@ -59,11 +54,8 @@ export const getChapterVerses = async (
  *
  * @returns {Promise<TranslationsResponse>}
  */
-export const getAvailableTranslations = async (language: string): Promise<TranslationsResponse> => {
-  const payload = await fetcher(makeTranslationsUrl(language));
-
-  return camelizeKeys(payload);
-};
+export const getAvailableTranslations = async (language: string): Promise<TranslationsResponse> =>
+  fetcher(makeTranslationsUrl(language));
 
 /**
  * Get the current available languages with the name translated in the current language.
@@ -72,33 +64,26 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
  *
  * @returns {Promise<LanguagesResponse>}
  */
-export const getAvailableLanguages = async (language: string): Promise<LanguagesResponse> => {
-  const payload = await fetcher(makeLanguagesUrl(language));
-
-  return camelizeKeys(payload);
-};
+export const getAvailableLanguages = async (language: string): Promise<LanguagesResponse> =>
+  fetcher(makeLanguagesUrl(language));
 
 /**
  * Get list of available reciters.
  *
  * @returns {Promise<RecitersResponse>}
  */
-export const getAvailableReciters = async (): Promise<RecitersResponse> => {
-  const payload = await fetcher(makeRecitersUrl());
-
-  return camelizeKeys(payload);
-};
+export const getAvailableReciters = async (): Promise<RecitersResponse> =>
+  fetcher(makeRecitersUrl());
 
 /**
  * Get audio file for a specific reciter and chapter.
+ *
  * @param {number} reciterId
  * @param {number} chapter the id of the chapter
  */
 
 export const getAudioFile = async (reciterId: number, chapter: number): Promise<AudioFile> => {
-  const payload = await fetcher(makeAudioFilesUrl(reciterId, chapter));
-
-  const res = camelizeKeys(payload) as AudioFilesResponse;
+  const res = await fetcher<AudioFilesResponse>(makeAudioFilesUrl(reciterId, chapter));
 
   if (res.error) {
     throw new Error(res.error);
@@ -116,19 +101,17 @@ export const getAudioFile = async (reciterId: number, chapter: number): Promise<
 };
 
 /**
- * Get the timestamps for a specific verseKey. 
+ * Get the timestamps for a specific verseKey.
  * We need this to select to move the cursor in the audio player when we click "play" in a specific verse.
-
- * @param {number} reciterId 
+ *
+ * @param {number} reciterId
  * @param {number} verseKey example "1:1", meaning chapter 1, verse 1
+ * @returns {Promise<AudioTimestampsResponse>}
  */
 export const getVerseTimestamps = async (
   reciterId: number,
   verseKey: string,
-): Promise<AudioTimestampsResponse> => {
-  const payload = await fetcher(makeAudioTimestampsUrl(reciterId, verseKey));
-  return camelizeKeys(payload);
-};
+): Promise<AudioTimestampsResponse> => fetcher(makeAudioTimestampsUrl(reciterId, verseKey));
 
 /**
  * Get the information of translations by their IDs.
@@ -140,11 +123,7 @@ export const getVerseTimestamps = async (
 export const getTranslationsInfo = async (
   locale: string,
   translations: number[],
-): Promise<TranslationsResponse> => {
-  const payload = await fetcher(makeTranslationsInfoUrl(locale, translations));
-
-  return camelizeKeys(payload);
-};
+): Promise<TranslationsResponse> => fetcher(makeTranslationsInfoUrl(locale, translations));
 
 /**
  * Get the advanced copy content that will be copied to clipboard and put in a file.
@@ -154,11 +133,7 @@ export const getTranslationsInfo = async (
  */
 export const getAdvancedCopyRawResult = async (
   params: AdvancedCopyRequest,
-): Promise<AdvancedCopyRawResultResponse> => {
-  const payload = await fetcher(makeAdvancedCopyUrl(params));
-
-  return camelizeKeys(payload);
-};
+): Promise<AdvancedCopyRawResultResponse> => fetcher(makeAdvancedCopyUrl(params));
 
 /**
  * Get the search results of a query.
@@ -166,11 +141,8 @@ export const getAdvancedCopyRawResult = async (
  * @param {SearchRequest} params
  * @returns  {Promise<SearchResponse>}
  */
-export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> => {
-  const payload = await fetcher(makeSearchResultsUrl(params));
-
-  return camelizeKeys(payload);
-};
+export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> =>
+  fetcher(makeSearchResultsUrl(params));
 
 /**
  * Get the list of tafsirs.
@@ -178,11 +150,8 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
  * @param {string} language
  * @returns {Promise<TafsirsResponse>}
  */
-export const getTafsirs = async (language: string): Promise<TafsirsResponse> => {
-  const payload = await fetcher(makeTafsirsUrl(language));
-
-  return camelizeKeys(payload);
-};
+export const getTafsirs = async (language: string): Promise<TafsirsResponse> =>
+  fetcher(makeTafsirsUrl(language));
 
 /**
  * Get a chapter's info
@@ -194,11 +163,7 @@ export const getTafsirs = async (language: string): Promise<TafsirsResponse> => 
 export const getChapterInfo = async (
   chapterId: string,
   language: string,
-): Promise<ChapterInfoResponse> => {
-  const payload = await fetcher(makeChapterInfoUrl(chapterId, language));
-
-  return camelizeKeys(payload);
-};
+): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language));
 
 /**
  * Get the verses of a specific Juz.
@@ -211,10 +176,7 @@ export const getChapterInfo = async (
 export const getJuzVerses = async (
   id: string,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => {
-  const payload = await fetcher(makeJuzVersesUrl(id, params));
-  return camelizeKeys(payload);
-};
+): Promise<VersesResponse> => fetcher(makeJuzVersesUrl(id, params));
 
 /**
  * Get the verses of a specific page.
@@ -227,10 +189,7 @@ export const getJuzVerses = async (
 export const getPageVerses = async (
   id: string,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => {
-  const payload = await fetcher(makePageVersesUrl(id, params));
-  return camelizeKeys(payload);
-};
+): Promise<VersesResponse> => fetcher(makePageVersesUrl(id, params));
 
 /**
  * Get the footnote details.
@@ -239,7 +198,5 @@ export const getPageVerses = async (
  *
  * @returns {Promise<FootnoteResponse>}
  */
-export const getFootnote = async (footnoteId: string): Promise<FootnoteResponse> => {
-  const payload = await fetcher(makeFootnoteUrl(footnoteId));
-  return camelizeKeys(payload);
-};
+export const getFootnote = async (footnoteId: string): Promise<FootnoteResponse> =>
+  fetcher(makeFootnoteUrl(footnoteId));

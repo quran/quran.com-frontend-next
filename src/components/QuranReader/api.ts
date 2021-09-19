@@ -1,8 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { camelizeKeys } from 'humps';
-
 import { QuranReaderDataType } from './types';
 
+import { fetcher } from 'src/api';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
@@ -25,6 +24,8 @@ interface RequestKeyInput {
  * Generate the request key (the API url based on the params)
  * which will be used by useSwr to determine whether to call BE
  * again or return the cached response.
+ *
+ * @returns {string}
  */
 export const getRequestKey = ({
   id,
@@ -92,10 +93,13 @@ export const getRequestKey = ({
  * A custom fetcher that returns the verses array from the api result.
  * We need this workaround as useSWRInfinite requires the data from the api
  * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
+ *
+ * @returns {Promise<Verse>}
  */
 export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse> => {
-  const res = await fetch(input, init);
-  return res.json().then((data: VersesResponse) => camelizeKeys(data.verses));
+  const res = await fetcher<VersesResponse>(input, init);
+  // @ts-ignore ignore this typing for now, we'll get back into this when we fix the "initial data not being used" issue
+  return res.verses;
 };
 
 /**
@@ -108,7 +112,7 @@ export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Prom
  * @param {boolean} isVerseData
  * @param {boolean} isTafsirData
  * @param {VersesResponse} initialData
- * @returns {Number}
+ * @returns {number}
  */
 export const getPageLimit = (
   isVerseData: boolean,

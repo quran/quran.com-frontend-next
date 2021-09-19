@@ -7,13 +7,13 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import IconClose from '../../../../public/icons/close.svg';
 import IconQ from '../../../../public/icons/Q.svg';
-import LanguageSelector from '../LanguageSelector';
 
 import MobileApps from './MobileApps';
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import LanguageSelector from 'src/components/Navbar/LanguageSelector';
 import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';

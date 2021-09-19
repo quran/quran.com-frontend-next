@@ -1,8 +1,9 @@
 import MinusIcon from '../../../../public/icons/minus.svg';
 import PlusIcon from '../../../../public/icons/plus.svg';
-import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './Counter.module.scss';
+
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 
 type CounterProps = {
   count: number;
@@ -18,8 +19,9 @@ type CounterProps = {
  * Button is disabled when  the value is `undefined` or `null`
  * @param {() => void} props.onDecrement - the function to call when the decrement button is clicked.
  * Button is disabled when  the value is `undefined` or `null`
+ * @returns {JSX.Element}
  */
-const Counter = ({ count, onIncrement, onDecrement }: CounterProps) => (
+const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element => (
   <div className={styles.container}>
     <Button
       tooltip="Decrease"

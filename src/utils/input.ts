@@ -20,7 +20,7 @@ export const generateSelectOptions = (options: string[]): SelectOption[] =>
 /**
  * Generate the radio items.
  *
- * @param {string[]} options
+ * @param {string[]} items
  * @returns {RadioItem[]}
  */
 export const generateRadioItems = (items: string[]): RadioItem[] =>
@@ -34,7 +34,7 @@ export const generateRadioItems = (items: string[]): RadioItem[] =>
  * Get the translated name of an item along with the language of the item.
  *
  * @param {TafsirInfo | AvailableTranslation} item the item that we want to generate the label for.
- * @returns {String}
+ * @returns {string}
  */
 export const getTranslatedLabelWithLanguage = (item: TafsirInfo | AvailableTranslation): string =>
   `${capitalize(item.languageName)} - ${item.translatedName.name}`;

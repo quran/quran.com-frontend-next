@@ -1,7 +1,10 @@
+/* eslint-disable react/jsx-no-target-blank */ // eslint failed to lint properly
 import classNames from 'classnames';
 import NextLink from 'next/link';
 
 import styles from './Link.module.scss';
+
+import Wrapper from 'src/components/Wrapper/Wrapper';
 
 export enum LinkVariant {
   Highlight = 'highlight',
@@ -18,8 +21,9 @@ type LinkProps = {
 };
 
 const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
-  <NextLink href={href}>
+  <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
     <a
+      href={download ? href : undefined}
       download={download}
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noreferrer' : undefined}
@@ -32,7 +36,7 @@ const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, do
     >
       {children}
     </a>
-  </NextLink>
+  </Wrapper>
 );
 
 export default Link;

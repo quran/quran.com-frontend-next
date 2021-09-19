@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import resetSettings from '../reset-settings';
-
 import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
 import { RootState } from 'src/redux/RootState';
+import resetSettings from 'src/redux/slices/reset-settings';
 
 const DEFAULT_TRANSLATION = 20; // just a placeholder.
 const DEFAULT_TRANSLITERATION = 12; // just a placeholder.
