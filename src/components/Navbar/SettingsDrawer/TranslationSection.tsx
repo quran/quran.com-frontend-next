@@ -2,11 +2,11 @@ import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
 
 import Section from './Section';
+import styles from './TranslationSection.module.scss';
 
-import { getAvailableTranslations } from 'src/api';
+import DataFetcher from 'src/components/DataFetcher';
 import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
@@ -25,8 +25,8 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
-import { throwIfError } from 'src/utils/error';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
+import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
 // convert translations data (from API) to combobox items
@@ -54,56 +54,50 @@ const TranslationSection = () => {
     [dispatch],
   );
 
-  const { data: translations, error } = useSWRImmutable(makeTranslationsUrl(lang), () =>
-    getAvailableTranslations(lang).then((res) => {
-      throwIfError(res);
-      return res.translations;
-    }),
-  );
-
-  if (error || !translations) {
-    return null;
-  }
-
-  const items = translationsToComboboxItems(translations);
-
   return (
-    <Section>
-      <Section.Title>Translation</Section.Title>
-      <Section.Row>
-        <Section.Label>Translation</Section.Label>
-        <div>
-          <Combobox
-            id="translations"
-            items={items || []}
-            isMultiSelect
-            size={ComboboxSize.Medium}
-            value={numbersToStringsArray(selectedTranslations)}
-            onChange={onTranslationsChange}
-          />
-        </div>
-      </Section.Row>
-      <Section.Row>
-        <Section.Label>Font size</Section.Label>
+    <div className={styles.container}>
+      <DataFetcher
+        queryKey={makeTranslationsUrl(lang)}
+        render={(data: TranslationsResponse) => (
+          <Section>
+            <Section.Title>Translation</Section.Title>
+            <Section.Row>
+              <Section.Label>Translation</Section.Label>
+              <div>
+                <Combobox
+                  id="translations"
+                  items={data ? translationsToComboboxItems(data.translations) : []}
+                  isMultiSelect
+                  size={ComboboxSize.Medium}
+                  value={numbersToStringsArray(selectedTranslations)}
+                  onChange={onTranslationsChange}
+                />
+              </div>
+            </Section.Row>
+            <Section.Row>
+              <Section.Label>Font size</Section.Label>
 
-        {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
+              {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop
             same applies to `onDecrement` */}
-        <Counter
-          count={translationFontScale}
-          onIncrement={
-            MAXIMUM_FONT_STEP === translationFontScale
-              ? null
-              : () => dispatch(increaseTranslationFontScale())
-          }
-          onDecrement={
-            MINIMUM_FONT_STEP === translationFontScale
-              ? null
-              : () => dispatch(decreaseTranslationFontScale())
-          }
-        />
-      </Section.Row>
-    </Section>
+              <Counter
+                count={translationFontScale}
+                onIncrement={
+                  MAXIMUM_FONT_STEP === translationFontScale
+                    ? null
+                    : () => dispatch(increaseTranslationFontScale())
+                }
+                onDecrement={
+                  MINIMUM_FONT_STEP === translationFontScale
+                    ? null
+                    : () => dispatch(decreaseTranslationFontScale())
+                }
+              />
+            </Section.Row>
+          </Section>
+        )}
+      />
+    </div>
   );
 };
 export default TranslationSection;

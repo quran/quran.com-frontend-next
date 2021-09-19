@@ -1,0 +1,11 @@
+.container {
+  padding: var(--spacing-xsmall);
+  > button {
+    margin: 0 auto;
+  }
+}
+
+.text {
+  text-align: center;
+  padding-bottom: var(--spacing-xsmall);
+}
