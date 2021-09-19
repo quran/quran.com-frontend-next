@@ -40,6 +40,7 @@ jobs:
           mkdir -p storybook
           rm -rf storybook/${GITHUB_REF##*/}
           mv storybook-static storybook/${GITHUB_REF##*/}
+          echo ${GITHUB_REF##*/}
           git add .
           git status
           git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
