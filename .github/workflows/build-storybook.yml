@@ -36,15 +36,15 @@ jobs:
           name: storybook-files
           path: storybook-static
       - name: Commit updates
+        uses: nelonoel/branch-name@v1.0.1
         run: |
           mkdir -p storybook
-          rm -rf storybook/${GITHUB_REF##*/}
-          mv storybook-static storybook/${GITHUB_REF##*/}
-          echo ${GITHUB_REF##*/}
+          rm -rf storybook/${BRANCH_NAME}
+          mv storybook-static storybook/${BRANCH_NAME}
           git add .
           git status
           git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
-          git commit -m "Deploy storybook for ${GITHUB_REF##*/}."
+          git commit -m "Deploy storybook for ${BRANCH_NAME}"
           git pull --no-edit --quiet
           git push origin gh-pages
         env:
