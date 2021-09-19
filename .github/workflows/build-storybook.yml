@@ -35,8 +35,8 @@ jobs:
         with:
           name: storybook-files
           path: storybook-static
+      - uses: nelonoel/branch-name@v1.0.1
       - name: Commit updates
-        uses: nelonoel/branch-name@v1.0.1
         run: |
           mkdir -p storybook
           rm -rf storybook/${BRANCH_NAME}
