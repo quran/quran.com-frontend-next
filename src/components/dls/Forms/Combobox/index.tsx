@@ -154,7 +154,7 @@ const Combobox: React.FC<Props> = ({
    */
   const shouldDeleteLastTag = useKeyPressedDetector(
     'Backspace',
-    isMultiSelect && !inputValue && !!tags.length && !preventUnselectingItems,
+    isOpened && isMultiSelect && !inputValue && !!tags.length && !preventUnselectingItems,
   );
 
   const invokeOnChangeCallback = useCallback(
