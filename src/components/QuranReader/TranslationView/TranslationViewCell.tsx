@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import BookmarkIcon from './BookmarkIcon';
-import styles from './TranslationCell.module.scss';
 import TranslationText from './TranslationText';
+import styles from './TranslationViewCell.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Separator from 'src/components/dls/Separator/Separator';
@@ -14,12 +14,12 @@ import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
-type TranslationCellProps = {
+type TranslationViewCellProps = {
   verse: Verse;
   isHighlighted: boolean;
 };
 
-const TranslationCell = ({ verse, isHighlighted }: TranslationCellProps) => {
+const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   return (
     <div key={verse.id}>
@@ -65,4 +65,4 @@ const TranslationCell = ({ verse, isHighlighted }: TranslationCellProps) => {
   );
 };
 
-export default TranslationCell;
+export default TranslationViewCell;
