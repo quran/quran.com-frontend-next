@@ -4,7 +4,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import { fetcher } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import ErrorMessage from 'src/components/Error';
+import Error from 'src/components/Error';
 import { BaseResponse } from 'types/ApiResponses';
 
 interface Props {
@@ -50,7 +50,7 @@ const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }: Props):
    * or if we had an error when calling the API.
    */
   if (error) {
-    return <ErrorMessage onRetryClicked={onRetryClicked} error={error} />;
+    return <Error onRetryClicked={onRetryClicked} error={error} />;
   }
 
   return render(data);
