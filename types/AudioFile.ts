@@ -1,11 +1,6 @@
-export interface VerseTiming {
-  verseKey: string;
-  timestampFrom: number;
-  timestampTo: number;
-  duration: number;
-  segments: [number, number, number][];
-}
-export interface AudioFile {
+import VerseTiming from './VerseTiming';
+
+interface AudioFile {
   id: number;
   chapterId: number;
   fileSize: number;
@@ -14,3 +9,5 @@ export interface AudioFile {
   duration: number;
   verseTimings?: VerseTiming[];
 }
+
+export default AudioFile;

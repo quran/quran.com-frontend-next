@@ -1,4 +1,4 @@
-import { AudioFile } from './AudioFile';
+import AudioFile from './AudioFile';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
@@ -83,8 +83,4 @@ export interface ChapterInfoResponse extends BaseResponse {
 
 export interface FootnoteResponse extends BaseResponse {
   footNote?: Footnote;
-}
-
-export interface ChapterTimestampsResponse extends BaseResponse {
-  audioFiles: AudioFile[];
 }

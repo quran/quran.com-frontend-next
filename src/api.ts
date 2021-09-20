@@ -31,7 +31,7 @@ import {
   ChapterInfoResponse,
   FootnoteResponse,
 } from 'types/ApiResponses';
-import { AudioFile } from 'types/AudioFile';
+import AudioFile from 'types/AudioFile';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 

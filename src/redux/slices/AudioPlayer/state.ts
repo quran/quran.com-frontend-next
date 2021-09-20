@@ -6,7 +6,7 @@ import { getAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
-import { AudioFile } from 'types/AudioFile';
+import AudioFile from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
 export enum AudioFileStatus {

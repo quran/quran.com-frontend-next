@@ -136,13 +136,3 @@ export const makePageVersesUrl = (
  * @returns {string}
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
-
-/**
- * Compose the url for chapter timestamps API
- *
- * @param {number} reciterId
- * @param {number} chapter
- * @returns {string} url
- */
-export const makeChapterTimestampsUrl = (reciterId: number, chapter: number) =>
-  makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments: true });
