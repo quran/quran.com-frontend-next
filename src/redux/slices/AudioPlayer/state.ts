@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DEFAULT_RECITER } from './defaultData';
 
-import { getAudioFile } from 'src/api';
+import { getChapterAudioFile } from 'src/api';
 import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
@@ -67,7 +67,7 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
     thunkAPI.dispatch(setAudioStatus(AudioFileStatus.Loading));
 
     const reciter = selectReciter(thunkAPI.getState());
-    const audioFile = await getAudioFile(reciter.id, chapter);
+    const audioFile = await getChapterAudioFile(reciter.id, chapter);
 
     thunkAPI.dispatch(setAudioFile(audioFile));
     triggerPlayAudio();
@@ -94,7 +94,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     let audioFile = selectAudioFile(state);
     if (!audioFile || audioFile.chapterId !== chapterId || reciter.id !== reciterId) {
       thunkApi.dispatch(setAudioStatus(AudioFileStatus.Loading));
-      audioFile = await getAudioFile(reciter.id, chapterId);
+      audioFile = await getChapterAudioFile(reciter.id, chapterId);
       thunkApi.dispatch(setAudioFile(audioFile));
     }
 

@@ -5,13 +5,13 @@ import useSWRImmutable from 'swr/immutable';
 
 import getHighlightedLocation from './getHighlightedLocation';
 
-import { getAudioFile } from 'src/api';
+import { getChapterAudioFile } from 'src/api';
 import { selectAudioPlayerState } from 'src/redux/slices/AudioPlayer/state';
 import {
   initialState as defaultHighlightStatus,
   setHighlightedLocation,
 } from 'src/redux/slices/QuranReader/highlightedLocation';
-import { makeAudioFilesUrl } from 'src/utils/apiPaths';
+import { makeChapterAudioFiles } from 'src/utils/apiPaths';
 
 type AudioTimestampsHighlightListenerProps = {
   reciterId: number;
@@ -28,8 +28,8 @@ const HighlightedLocationUpdater = ({
   chapterId,
 }: AudioTimestampsHighlightListenerProps) => {
   const dispatch = useDispatch();
-  const { data } = useSWRImmutable(makeAudioFilesUrl(reciterId, chapterId, true), () =>
-    getAudioFile(reciterId, chapterId, true),
+  const { data } = useSWRImmutable(makeChapterAudioFiles(reciterId, chapterId, true), () =>
+    getChapterAudioFile(reciterId, chapterId, true),
   );
   const { currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
 
