@@ -16,6 +16,7 @@ export const useScrollToElement = <T extends HTMLElement>(
   const executeScroll = (): void => {
     // only scroll when the ref has a value
     if (elementRef.current) {
+      console.log('scrolling to element', elementRef.current);
       elementRef.current.scrollIntoView(options);
     }
   };
