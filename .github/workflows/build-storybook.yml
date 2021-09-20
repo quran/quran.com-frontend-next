@@ -19,11 +19,11 @@ jobs:
         with:
           name: storybook-files
           path: storybook-static
-
+  
   deploy-storybook:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     needs: build-storybook
-    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -33,19 +33,15 @@ jobs:
         with:
           name: storybook-files
           path: storybook-static
-      - name: Extract branch name on push
-        shell: bash
-        run: echo "echo BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-        id: extract_branch
       - name: Commit updates
         run: |
           mkdir -p storybook
-          rm -rf storybook/${{ env.BRANCH_NAME }}
-          mv storybook-static storybook/${{ env.BRANCH_NAME}}
+          rm -rf storybook/${GITHUB_REF##*/}
+          mv storybook-static storybook/${GITHUB_REF##*/}
           git add .
           git status
           git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
-          git commit -m "Deploy storybook for ${{ env.BRANCH_NAME }}"
+          git commit -m "Deploy storybook for ${GITHUB_REF##*/}."
           git pull --no-edit --quiet
           git push origin gh-pages
         env:
