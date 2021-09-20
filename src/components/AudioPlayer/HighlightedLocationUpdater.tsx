@@ -7,7 +7,7 @@ import getHighlightedLocation from './getHighlightedLocation';
 
 import { getChapterAudioFile } from 'src/api';
 import {
-  initialState as defaultHighlightStatus,
+  initialState as defaultHighlightedLocation,
   setHighlightedLocation,
 } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { makeChapterAudioFiles } from 'src/utils/apiPaths';
@@ -33,20 +33,21 @@ const HighlightedLocationUpdater = ({
     getChapterAudioFile(reciterId, chapterId, true),
   );
 
-  const lastHighlightStatus = useRef(defaultHighlightStatus);
+  const lastHighlightedLocation = useRef(defaultHighlightedLocation);
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (!data) return null;
+    if (!data) return;
+
     const highlightStatus = getHighlightedLocation(
       window.audioPlayerEl.currentTime * 1000, // convert currentTime to milliseconds
       data.verseTimings,
     );
 
     // only update redux value if current highlight value does not equal prev value
-    if (!shallowEqual(highlightStatus, lastHighlightStatus.current)) {
+    if (!shallowEqual(highlightStatus, lastHighlightedLocation.current)) {
       dispatch(setHighlightedLocation(highlightStatus));
-      lastHighlightStatus.current = highlightStatus;
+      lastHighlightedLocation.current = highlightStatus;
     }
   }, [data, dispatch, currentTime]);
 
