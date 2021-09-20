@@ -9,9 +9,9 @@ import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 
 import styles from './AudioPlayer.module.scss';
-import HighlightedLocationUpdater from './AudioTimestampsHighlightListener';
 import CloseButton from './CloseButton';
 import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
+import HighlightedLocationUpdater from './HighlightedLocationUpdater';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
