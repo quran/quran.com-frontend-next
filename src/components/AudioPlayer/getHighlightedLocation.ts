@@ -11,7 +11,7 @@ import VerseTiming from 'types/VerseTiming';
  *
  * @param {number} currentTime
  * @param {VerseTiming[]} verseTimings
- * @returns {HighlightedLocationState} highlightStatus
+ * @returns {HighlightedLocationState} highlightedLocation
  */
 const getHighlightedLocation = (
   currentTime: number,
