@@ -86,6 +86,8 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> =>
 
 /**
  * Get audio file for a specific reciter and chapter.
+ * additionally you can pass `segment: true` to get the timestamps
+ * for each verse and words
  *
  * @param {number} reciterId
  * @param {number} chapter the id of the chapter
