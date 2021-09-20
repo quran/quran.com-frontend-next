@@ -1,3 +1,5 @@
+import React from 'react';
+
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -19,50 +21,52 @@ type TranslationViewCellProps = {
   isHighlighted: boolean;
 };
 
-const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  return (
-    <div key={verse.id}>
-      {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
-      <div
-        className={classNames(styles.cellContainer, {
-          [styles.highlightedContainer]: isHighlighted,
-        })}
-      >
-        <div className={styles.actionContainer}>
-          <div className={styles.actionContainerLeft}>
-            <div className={styles.actionItem}>
-              <VerseLink verseKey={verse.verseKey} />
+const TranslationViewCell = React.forwardRef<HTMLDivElement, TranslationViewCellProps>(
+  ({ verse, isHighlighted }, ref) => {
+    const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+    return (
+      <div key={verse.id} ref={ref}>
+        {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
+        <div
+          className={classNames(styles.cellContainer, {
+            [styles.highlightedContainer]: isHighlighted,
+          })}
+        >
+          <div className={styles.actionContainer}>
+            <div className={styles.actionContainerLeft}>
+              <div className={styles.actionItem}>
+                <VerseLink verseKey={verse.verseKey} />
+              </div>
+              <div className={styles.actionItem}>
+                <BookmarkIcon verseKey={verse.verseKey} />
+              </div>
             </div>
-            <div className={styles.actionItem}>
-              <BookmarkIcon verseKey={verse.verseKey} />
+            <div className={styles.actionContainerRight}>
+              <div className={styles.actionItem}>
+                <VerseActions verse={verse} />
+              </div>
             </div>
           </div>
-          <div className={styles.actionContainerRight}>
-            <div className={styles.actionItem}>
-              <VerseActions verse={verse} />
-            </div>
-          </div>
-        </div>
 
-        <div className={styles.contentContainer}>
-          <div className={styles.arabicVerseContainer}>
-            <VerseText words={verse.words} />
-          </div>
-          {verse.translations?.map((translation: Translation) => (
-            <div key={translation.id} className={styles.verseTranslationContainer}>
-              <TranslationText
-                translationFontScale={quranReaderStyles.translationFontScale}
-                text={translation.text}
-              />
-              <p className={styles.translationName}>— {translation.resourceName}</p>
+          <div className={styles.contentContainer}>
+            <div className={styles.arabicVerseContainer}>
+              <VerseText words={verse.words} />
             </div>
-          ))}
+            {verse.translations?.map((translation: Translation) => (
+              <div key={translation.id} className={styles.verseTranslationContainer}>
+                <TranslationText
+                  translationFontScale={quranReaderStyles.translationFontScale}
+                  text={translation.text}
+                />
+                <p className={styles.translationName}>— {translation.resourceName}</p>
+              </div>
+            ))}
+          </div>
         </div>
+        <Separator />
       </div>
-      <Separator />
-    </div>
-  );
-};
+    );
+  },
+);
 
 export default TranslationViewCell;
