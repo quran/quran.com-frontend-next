@@ -13,8 +13,8 @@ type TranslationViewProps = {
 
 const TranslationView = ({ verses }: TranslationViewProps) => (
   <div className={styles.container}>
-    {verses.map((verse, index) => (
-      <TranslationViewCell verse={verse} isHighlighted={index === 2} />
+    {verses.map((verse) => (
+      <TranslationViewCell verse={verse} isHighlighted={false} />
     ))}
   </div>
 );
