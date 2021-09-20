@@ -91,8 +91,12 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> =>
  * @param {number} chapter the id of the chapter
  */
 
-export const getAudioFile = async (reciterId: number, chapter: number): Promise<AudioFile> => {
-  const res = await fetcher<AudioFilesResponse>(makeAudioFilesUrl(reciterId, chapter));
+export const getAudioFile = async (
+  reciterId: number,
+  chapter: number,
+  segments = false,
+): Promise<AudioFile> => {
+  const res = await fetcher<AudioFilesResponse>(makeAudioFilesUrl(reciterId, chapter, segments));
 
   if (res.error) {
     throw new Error(res.error);

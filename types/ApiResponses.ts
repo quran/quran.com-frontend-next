@@ -84,3 +84,7 @@ export interface ChapterInfoResponse extends BaseResponse {
 export interface FootnoteResponse extends BaseResponse {
   footNote?: Footnote;
 }
+
+export interface ChapterTimestampsResponse extends BaseResponse {
+  audioFiles: AudioFile[];
+}

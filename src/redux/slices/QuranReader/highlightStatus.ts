@@ -8,7 +8,7 @@ export type HighlightStatusState = {
   word: number | null;
 };
 
-const initialState: HighlightStatusState = {
+export const initialState: HighlightStatusState = {
   chapter: null,
   verse: null,
   word: null,

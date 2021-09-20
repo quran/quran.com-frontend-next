@@ -45,8 +45,9 @@ export const makeLanguagesUrl = (language: string): string =>
  * @returns {string}
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
-export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
-  makeUrl(`/audio/reciters/${reciterId}`, { chapter });
+
+export const makeAudioFilesUrl = (reciterId: number, chapter: number, segments: boolean) =>
+  makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
   makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);
@@ -135,3 +136,13 @@ export const makePageVersesUrl = (
  * @returns {string}
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
+
+/**
+ * Compose the url for chapter timestamps API
+ *
+ * @param {number} reciterId
+ * @param {number} chapter
+ * @returns {string} url
+ */
+export const makeChapterTimestampsUrl = (reciterId: number, chapter: number) =>
+  makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments: true });
