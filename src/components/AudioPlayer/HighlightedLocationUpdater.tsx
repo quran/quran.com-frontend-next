@@ -1,12 +1,11 @@
 import { useEffect, useRef } from 'react';
 
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import getHighlightedLocation from './getHighlightedLocation';
 
 import { getChapterAudioFile } from 'src/api';
-import { selectAudioPlayerState } from 'src/redux/slices/AudioPlayer/state';
 import {
   initialState as defaultHighlightStatus,
   setHighlightedLocation,
@@ -16,6 +15,7 @@ import { makeChapterAudioFiles } from 'src/utils/apiPaths';
 type AudioTimestampsHighlightListenerProps = {
   reciterId: number;
   chapterId: number;
+  currentTime: number;
 };
 
 /**
@@ -26,12 +26,12 @@ type AudioTimestampsHighlightListenerProps = {
 const HighlightedLocationUpdater = ({
   reciterId,
   chapterId,
+  currentTime,
 }: AudioTimestampsHighlightListenerProps) => {
   const dispatch = useDispatch();
   const { data } = useSWRImmutable(makeChapterAudioFiles(reciterId, chapterId, true), () =>
     getChapterAudioFile(reciterId, chapterId, true),
   );
-  const { currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
 
   const lastHighlightStatus = useRef(defaultHighlightStatus);
 

@@ -149,7 +149,13 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
-        <HighlightedLocationUpdater reciterId={reciterId} chapterId={audioFile?.chapterId} />
+
+        {/* Listen to currentT */}
+        <HighlightedLocationUpdater
+          currentTime={currentTime}
+          reciterId={reciterId}
+          chapterId={audioFile?.chapterId}
+        />
         <MediaSessionApiListeners
           play={triggerPauseAudio}
           pause={triggerPauseAudio}
