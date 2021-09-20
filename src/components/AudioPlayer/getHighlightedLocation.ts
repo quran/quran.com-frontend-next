@@ -1,6 +1,6 @@
 import {
   HighlightedLocationState,
-  initialState as defaultHighlightStatus,
+  initialState as defaultHighlightedLocation,
 } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import VerseTiming from 'types/VerseTiming';
@@ -21,13 +21,13 @@ const getHighlightedLocation = (
     (verse) => currentTime >= verse.timestampFrom && currentTime <= verse.timestampTo,
   );
 
-  if (!selectedVerse) return defaultHighlightStatus;
+  if (!selectedVerse) return defaultHighlightedLocation;
   const selectedWord = selectedVerse.segments.find((segment) => {
     const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
     return currentTime >= timestampFrom && currentTime <= timestampTo;
   });
 
-  if (!selectedWord) return defaultHighlightStatus;
+  if (!selectedWord) return defaultHighlightedLocation;
 
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(selectedVerse.verseKey);
   const word = selectedWord[0] + 1; // word location starts at 1 instead of 0, while the the data from API starts at 0

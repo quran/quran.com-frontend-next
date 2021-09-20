@@ -39,15 +39,15 @@ const HighlightedLocationUpdater = ({
   useEffect(() => {
     if (!data) return;
 
-    const highlightStatus = getHighlightedLocation(
+    const highlightedLocation = getHighlightedLocation(
       window.audioPlayerEl.currentTime * 1000, // convert currentTime to milliseconds
       data.verseTimings,
     );
 
     // only update redux value if current highlight value does not equal prev value
-    if (!shallowEqual(highlightStatus, lastHighlightedLocation.current)) {
-      dispatch(setHighlightedLocation(highlightStatus));
-      lastHighlightedLocation.current = highlightStatus;
+    if (!shallowEqual(highlightedLocation, lastHighlightedLocation.current)) {
+      dispatch(setHighlightedLocation(highlightedLocation));
+      lastHighlightedLocation.current = highlightedLocation;
     }
   }, [data, dispatch, currentTime]);
 
