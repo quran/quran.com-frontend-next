@@ -46,7 +46,7 @@ jobs:
       - name: Commit updates
         run: |
           mkdir -p storybook
-          rm -rf storybook/${{venv.BRANCH_NAME }}
+          rm -rf storybook/${{ env.BRANCH_NAME }}
           mv storybook-static storybook/${{ env.BRANCH_NAME}}
           git add .
           git status
