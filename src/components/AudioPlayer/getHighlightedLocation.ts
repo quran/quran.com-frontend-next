@@ -23,14 +23,14 @@ const getHighlightedLocation = (
 
   if (!selectedVerse) return defaultHighlightStatus;
   const selectedWord = selectedVerse.segments.find((segment) => {
-    const [, timestampFrom, timestampTo] = segment;
+    const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
     return currentTime >= timestampFrom && currentTime <= timestampTo;
   });
 
   if (!selectedWord) return defaultHighlightStatus;
 
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(selectedVerse.verseKey);
-  const [word] = selectedWord;
+  const word = selectedWord[0] + 1; // word location starts at 1 instead of 0, while the the data from API starts at 0
   return {
     chapter: Number(chapter),
     verse: Number(verse),
