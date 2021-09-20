@@ -18,6 +18,7 @@ import audioPlayerState from './slices/AudioPlayer/state';
 import navbar from './slices/navbar';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
+import highlightStatus from './slices/QuranReader/highlightStatus';
 import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import quranReaderStyles from './slices/QuranReader/styles';
@@ -56,6 +57,7 @@ export const rootReducer = combineReducers({
   tafsirs,
   bookmarks,
   search,
+  highlightStatus,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
