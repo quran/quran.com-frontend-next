@@ -16,9 +16,10 @@ import Word from 'types/Word';
 type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
+  isHighlighted?: boolean;
 };
 
-const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
+const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const [firstWord] = words;
@@ -49,7 +50,10 @@ const VerseText = ({ words, isReadingMode = false }: VerseTextProps) => {
         className={classNames(
           styles.verseTextContainer,
           styles[`quran-font-size-${quranTextFontScale}`],
-          { [styles.largeQuranTextLayoutContainer]: isBigTextLayout },
+          {
+            [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
+            [styles.highlighted]: isHighlighted,
+          },
         )}
       >
         <div
