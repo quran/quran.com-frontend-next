@@ -9,7 +9,7 @@ import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 
 import styles from './AudioPlayer.module.scss';
-import AudioTimestampsHighlightListener from './AudioTimestampsHighlightListener';
+import HighlightedLocationUpdater from './AudioTimestampsHighlightListener';
 import CloseButton from './CloseButton';
 import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
@@ -149,7 +149,7 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
-        <AudioTimestampsHighlightListener reciterId={reciterId} chapterId={audioFile?.chapterId} />
+        <HighlightedLocationUpdater reciterId={reciterId} chapterId={audioFile?.chapterId} />
         <MediaSessionApiListeners
           play={triggerPauseAudio}
           pause={triggerPauseAudio}
