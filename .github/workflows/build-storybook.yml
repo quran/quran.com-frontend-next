@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build-storybook:
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
