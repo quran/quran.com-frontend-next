@@ -12,7 +12,7 @@ import {
 } from 'src/redux/slices/QuranReader/highlightStatus';
 import { makeAudioFilesUrl } from 'src/utils/apiPaths';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
-import { VerseTiming } from 'types/AudioFile';
+import VerseTiming from 'types/VerseTiming';
 
 type AudioTimestampsHighlightListenerProps = {
   reciterId: number;
@@ -35,7 +35,7 @@ const AudioTimestampsHighlightListener = ({
   useEffect(() => {
     if (!data) return null;
     const highlightStatus = getHighlightStatus(
-      window.audioPlayerEl.currentTime * 1000,
+      window.audioPlayerEl.currentTime * 1000, // convert currentTime to milliseconds
       data.verseTimings,
     );
 
@@ -49,6 +49,14 @@ const AudioTimestampsHighlightListener = ({
   return null;
 };
 
+/**
+ * given the current time of the audio player and the verse timings,
+ * determine which `chapter`, `verse`, and `word` should currently be highlighted
+ *
+ * @param {number} currentTime
+ * @param {VerseTiming[]} verseTimings
+ * @returns {HighlightStatusState} highlightStatus
+ */
 const getHighlightStatus = (
   currentTime: number,
   verseTimings: VerseTiming[],
