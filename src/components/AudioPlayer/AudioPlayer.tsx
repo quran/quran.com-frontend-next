@@ -149,8 +149,6 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
-
-        {/* Listen to currentT */}
         <HighlightedLocationUpdater
           currentTime={currentTime}
           reciterId={reciterId}
