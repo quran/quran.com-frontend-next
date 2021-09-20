@@ -146,3 +146,41 @@ export const getVerseUrl = (verseKey: string): string => {
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterNumber}/${verseNumber}`;
 };
+
+/**
+ * This is a sorting function that is meant to be user with array.sort() function
+ * to sort a list of verse keys to match their appearance in the Mushaf.
+ *
+ * @param {string} verseKey1
+ * @param {string} verseKey2
+ * @returns {number}
+ */
+export const sortByVerseKey = (verseKey1: string, verseKey2: string): number => {
+  const [chapterId1, verseId1] = getVerseAndChapterNumbersFromKey(verseKey1);
+  const [chapterId2, verseId2] = getVerseAndChapterNumbersFromKey(verseKey2);
+  const chapterId1Number = Number(chapterId1);
+  const chapterId2Number = Number(chapterId2);
+  const verseId1Number = Number(verseId1);
+  const verseId2Number = Number(verseId2);
+  if (chapterId1Number > chapterId2Number) {
+    return 1;
+  }
+  return verseId1Number > verseId2Number ? 1 : -1;
+};
+
+/**
+ * Sort an object by keys whose keys are verse keys.
+ *
+ * @param {Record<string, unknown>} object
+ * @returns {Record<string, unknown>}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record<string, any> => {
+  const sortedObject = {};
+  Object.keys(object)
+    .sort((verseKey1, verseKey2) => sortByVerseKey(verseKey1, verseKey2))
+    .forEach((verseKey) => {
+      sortedObject[verseKey] = object[verseKey];
+    });
+  return sortedObject;
+};

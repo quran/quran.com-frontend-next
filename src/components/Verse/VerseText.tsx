@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 
 import classNames from 'classnames';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
+import { updateVerseVisibility } from 'src/redux/slices/QuranReader/ReadingContext/readingContext';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
@@ -20,10 +22,26 @@ type VerseTextProps = {
 };
 
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
+  const textRef = useRef(null);
+  const dispatch = useDispatch();
+  const entry = useIntersectionObserver(textRef, {
+    rootMargin: '1%',
+  });
+  useEffect(() => {
+    if (entry) {
+      dispatch({
+        type: updateVerseVisibility.type,
+        payload: {
+          verseKey: entry.target.getAttribute('data-verse-key'),
+          isVisible: entry.isIntersecting,
+        },
+      });
+    }
+  }, [dispatch, entry]);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const [firstWord] = words;
-  const { lineNumber, pageNumber, location } = firstWord;
+  const { lineNumber, pageNumber, location, verseKey } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
     shallowEqual,
@@ -47,6 +65,8 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
         </div>
       )}
       <div
+        ref={textRef}
+        data-verse-key={verseKey}
         className={classNames(
           styles.verseTextContainer,
           styles[`quran-font-size-${quranTextFontScale}`],

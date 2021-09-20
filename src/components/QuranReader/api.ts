@@ -64,7 +64,7 @@ export const getRequestKey = ({
       perPage: 1,
       translations: null,
       tafsirs: selectedTafsirs.join(','),
-      wordFields: `location, ${quranReaderStyles.quranFont}`,
+      wordFields: `location, verse_key, ${quranReaderStyles.quranFont}`,
       tafsirFields: 'resource_name',
     });
   }
