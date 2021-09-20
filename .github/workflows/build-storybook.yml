@@ -46,12 +46,12 @@ jobs:
       - name: Commit updates
         run: |
           mkdir -p storybook
-          rm -rf storybook/${BRANCH_NAME}
-          mv storybook-static storybook/${BRANCH_NAME}
+          rm -rf storybook/${{venv.BRANCH_NAME }}
+          mv storybook-static storybook/${{ env.BRANCH_NAME}}
           git add .
           git status
           git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
-          git commit -m "Deploy storybook for ${BRANCH_NAME}"
+          git commit -m "Deploy storybook for ${{ env.BRANCH_NAME }}"
           git pull --no-edit --quiet
           git push origin gh-pages
         env:
