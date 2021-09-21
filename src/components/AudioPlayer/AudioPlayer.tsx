@@ -15,6 +15,7 @@ import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
+import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
 import Slider from './Slider';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -40,7 +41,7 @@ const AudioPlayer = () => {
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
-  const reciterName = useSelector(selectReciter, shallowEqual).name;
+  const { name: reciterName, id: reciterId } = useSelector(selectReciter, shallowEqual);
   const durationInSeconds = audioFile?.duration / 1000 || 0;
   const isExpanded = useSelector(selectIsExpanded);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
@@ -130,6 +131,13 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
+        {reciterId && audioFile?.chapterId && (
+          <QuranReaderHighlightDispatcher
+            audioPlayerElRef={audioPlayerElRef}
+            reciterId={reciterId}
+            chapterId={audioFile?.chapterId}
+          />
+        )}
         <MediaSessionApiListeners
           play={triggerPauseAudio}
           pause={triggerPauseAudio}

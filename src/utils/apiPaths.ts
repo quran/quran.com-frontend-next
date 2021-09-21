@@ -45,8 +45,9 @@ export const makeLanguagesUrl = (language: string): string =>
  * @returns {string}
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
-export const makeAudioFilesUrl = (reciterId: number, chapter: number) =>
-  makeUrl(`/audio/reciters/${reciterId}`, { chapter });
+
+export const makeChapterAudioFilesUrl = (reciterId: number, chapter: number, segments: boolean) =>
+  makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
   makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);

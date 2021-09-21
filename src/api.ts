@@ -5,7 +5,7 @@ import {
   makeTafsirsUrl,
   makeLanguagesUrl,
   makeAudioTimestampsUrl,
-  makeAudioFilesUrl,
+  makeChapterAudioFilesUrl,
   makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
@@ -31,7 +31,7 @@ import {
   ChapterInfoResponse,
   FootnoteResponse,
 } from 'types/ApiResponses';
-import { AudioFile } from 'types/AudioFile';
+import AudioFile from 'types/AudioFile';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
@@ -86,13 +86,21 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> =>
 
 /**
  * Get audio file for a specific reciter and chapter.
+ * additionally you can pass `segment: true` to get the timestamps
+ * for each verse and words
  *
  * @param {number} reciterId
  * @param {number} chapter the id of the chapter
  */
 
-export const getAudioFile = async (reciterId: number, chapter: number): Promise<AudioFile> => {
-  const res = await fetcher<AudioFilesResponse>(makeAudioFilesUrl(reciterId, chapter));
+export const getChapterAudioFile = async (
+  reciterId: number,
+  chapter: number,
+  segments = false,
+): Promise<AudioFile> => {
+  const res = await fetcher<AudioFilesResponse>(
+    makeChapterAudioFilesUrl(reciterId, chapter, segments),
+  );
 
   if (res.error) {
     throw new Error(res.error);

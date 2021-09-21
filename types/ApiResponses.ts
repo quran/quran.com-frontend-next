@@ -1,4 +1,4 @@
-import { AudioFile } from './AudioFile';
+import AudioFile from './AudioFile';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
