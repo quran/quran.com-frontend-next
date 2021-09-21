@@ -3,15 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from 'src/redux/RootState';
 
 export type HighlightedLocationState = {
-  chapter: number | null;
-  verse: number | null;
-  word: number | null;
+  highlightedChapter: number | null;
+  highlightedVerse: number | null;
+  highlightedWord: number | null;
 };
 
 export const initialState: HighlightedLocationState = {
-  chapter: null,
-  verse: null,
-  word: null,
+  highlightedChapter: null,
+  highlightedVerse: null,
+  highlightedWord: null,
 };
 
 /**
@@ -25,9 +25,9 @@ const highlightedLocation = createSlice({
   reducers: {
     setHighlightedLocation: (state, { payload }: PayloadAction<HighlightedLocationState>) => {
       return {
-        chapter: payload.chapter,
-        verse: payload.verse,
-        word: payload.word,
+        highlightedChapter: payload.highlightedChapter,
+        highlightedVerse: payload.highlightedVerse,
+        highlightedWord: payload.highlightedWord,
       };
     },
   },

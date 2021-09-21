@@ -32,9 +32,9 @@ const getHighlightedLocation = (
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(selectedVerse.verseKey);
   const word = selectedWord[0] + 1; // word location starts at 1 instead of 0, while the the data from API starts at 0
   return {
-    chapter: Number(chapter),
-    verse: Number(verse),
-    word,
+    highlightedChapter: Number(chapter),
+    highlightedVerse: Number(verse),
+    highlightedWord: word,
   };
 };
 

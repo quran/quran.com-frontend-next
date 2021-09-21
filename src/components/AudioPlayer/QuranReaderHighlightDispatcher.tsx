@@ -132,12 +132,12 @@ const getHighlightedLocation = (
   const highlightedLocation = { ...defaultHighlightedLocation };
   if (highlightedVerseKey) {
     const [chapter, verse] = getVerseAndChapterNumbersFromKey(highlightedVerseKey);
-    highlightedLocation.chapter = Number(chapter);
-    highlightedLocation.verse = Number(verse);
+    highlightedLocation.highlightedChapter = Number(chapter);
+    highlightedLocation.highlightedVerse = Number(verse);
   }
   if (currentHighlightedWordLocation) {
     const word = currentHighlightedWordLocation[0] + 1; // word location starts at 1 instead of 0, while the the data from API starts at 0
-    highlightedLocation.word = word;
+    highlightedLocation.highlightedWord = word;
   }
 
   return highlightedLocation;
