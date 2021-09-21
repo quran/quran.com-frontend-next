@@ -17,7 +17,6 @@ export enum AudioFileStatus {
 
 export type AudioState = {
   isPlaying: boolean;
-  currentTime: number;
   reciter: Reciter;
   audioFile: AudioFile;
   audioFileStatus: AudioFileStatus;
@@ -27,7 +26,6 @@ export type AudioState = {
 
 const initialState: AudioState = {
   isPlaying: false,
-  currentTime: 0,
   audioFile: null,
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
@@ -99,7 +97,6 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     }
 
     const timestampInSeconds = timestamp / 1000;
-    thunkApi.dispatch(setCurrentTime(timestampInSeconds));
     triggerSetCurrentTime(timestampInSeconds);
 
     triggerPlayAudio();
@@ -121,10 +118,6 @@ export const audioPlayerStateSlice = createSlice({
     setReciter: (state, action: PayloadAction<Reciter>) => ({
       ...state,
       reciter: action.payload,
-    }),
-    setCurrentTime: (state: AudioState, action: PayloadAction<number>) => ({
-      ...state,
-      currentTime: action.payload,
     }),
     setAudioFile: (state: AudioState, action: PayloadAction<AudioFile>) => ({
       ...state,
@@ -156,7 +149,6 @@ export const audioPlayerStateSlice = createSlice({
 
 export const {
   setIsPlaying,
-  setCurrentTime,
   setReciter,
   setAudioFile,
   setAudioStatus,
