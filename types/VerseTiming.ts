@@ -1,9 +1,11 @@
+import Segment from './Segment';
+
 interface VerseTiming {
   verseKey: string;
   timestampFrom: number;
   timestampTo: number;
   duration: number;
-  segments: [number, number, number][];
+  segments: Segment[];
 }
 
 export default VerseTiming;

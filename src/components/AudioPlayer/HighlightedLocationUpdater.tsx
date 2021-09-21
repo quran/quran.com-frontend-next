@@ -11,6 +11,7 @@ import {
 import { makeChapterAudioFiles } from 'src/utils/apiPaths';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import AudioFile from 'types/AudioFile';
+import Segment from 'types/Segment';
 import VerseTiming from 'types/VerseTiming';
 
 type AudioTimestampsHighlightListenerProps = {
@@ -62,6 +63,10 @@ const HighlightedLocationUpdater = ({
   return null;
 };
 
+/**
+ *
+ * @returns
+ */
 const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: AudioFile) => {
   const lastHighlightedVerse = useRef<VerseTiming>(null);
   if (!audioFileData) return null;
@@ -78,7 +83,6 @@ const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: A
   );
 };
 
-type Segment = [number, number, number];
 const useMemoizedHighlightedWordLocation = (
   currentTime: number,
   currentHighlightedVerseTiming: VerseTiming,
