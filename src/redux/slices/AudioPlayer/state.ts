@@ -74,6 +74,20 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
   },
 );
 
+export const setReciterAndPlayAudio = createAsyncThunk<void, Reciter, { state: RootState }>(
+  'audioPlayerState/setReciterAndPlayAudio',
+  async (reciter, thunkAPI) => {
+    thunkAPI.dispatch(setReciter(reciter));
+
+    const audioFile = await getAudioFile(
+      reciter.id,
+      selectAudioFile(thunkAPI.getState()).chapterId,
+    );
+    thunkAPI.dispatch(setAudioFile(audioFile));
+    triggerPlayAudio();
+  },
+);
+
 /**
  * get the timestamp for the the verseKey
  * and then play it and update the redux state
