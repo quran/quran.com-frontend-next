@@ -11,11 +11,11 @@ import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 import styles from './AudioPlayer.module.scss';
 import CloseButton from './CloseButton';
 import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
-import HighlightedLocationUpdater from './HighlightedLocationUpdater';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
+import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
 import Slider from './Slider';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -149,7 +149,7 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
-        <HighlightedLocationUpdater
+        <QuranReaderHighlightDispatcher
           currentTime={currentTime}
           reciterId={reciterId}
           chapterId={audioFile?.chapterId}

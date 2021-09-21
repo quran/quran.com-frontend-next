@@ -26,7 +26,7 @@ type AudioTimestampsHighlightListenerProps = {
  *
  * @returns {void}
  */
-const HighlightedLocationUpdater = ({
+const QuranReaderHighlightDispatcher = ({
   reciterId,
   chapterId,
   currentTime,
@@ -143,4 +143,4 @@ const getHighlightedLocation = (
   return highlightedLocation;
 };
 
-export default HighlightedLocationUpdater;
+export default QuranReaderHighlightDispatcher;
