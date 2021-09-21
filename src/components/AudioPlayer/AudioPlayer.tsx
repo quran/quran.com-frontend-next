@@ -132,7 +132,7 @@ const AudioPlayer = () => {
           togglePlaying={() => togglePlaying()}
         /> */}
         <QuranReaderHighlightDispatcher
-          currentTime={currentTime}
+          audioPlayerElRef={audioPlayerElRef}
           reciterId={reciterId}
           chapterId={audioFile?.chapterId}
         />

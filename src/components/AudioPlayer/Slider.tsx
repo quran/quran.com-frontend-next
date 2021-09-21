@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
 
 import { triggerSetCurrentTime } from './EventTriggers';
+import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 import styles from './Slider.module.scss';
 import Split, { NUMBER_OF_SPLITS } from './SliderSplit';
 
@@ -31,19 +32,7 @@ const Slider = ({
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
-  const [currentTime, setCurrentTime] = useState(0); // TODO: get current time from last session
-
-  useEffect(() => {
-    const audioPlayerEl = audioPlayerElRef.current;
-    if (!audioPlayerEl) return null;
-
-    const updateCurrentTime = () => {
-      setCurrentTime(audioPlayerEl.currentTime);
-    };
-
-    audioPlayerEl.addEventListener('timeupdate', updateCurrentTime);
-    return () => audioPlayerEl.removeEventListener('timeupdate', updateCurrentTime);
-  }, [audioPlayerElRef]);
+  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
 
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;

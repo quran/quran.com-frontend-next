@@ -3,6 +3,8 @@ import { useRef, useEffect } from 'react';
 import { shallowEqual, useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
+
 import { getChapterAudioFile } from 'src/api';
 import {
   HighlightedLocationState,
@@ -18,7 +20,7 @@ import VerseTiming from 'types/VerseTiming';
 type AudioTimestampsHighlightListenerProps = {
   reciterId: number;
   chapterId: number;
-  currentTime: number;
+  audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
 
 /**
@@ -29,13 +31,14 @@ type AudioTimestampsHighlightListenerProps = {
 const QuranReaderHighlightDispatcher = ({
   reciterId,
   chapterId,
-  currentTime,
+  audioPlayerElRef,
 }: AudioTimestampsHighlightListenerProps) => {
   const dispatch = useDispatch();
   const { data: audioFileData } = useSWRImmutable(
     makeChapterAudioFilesUrl(reciterId, chapterId, true),
     () => getChapterAudioFile(reciterId, chapterId, true),
   );
+  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
   const currentTimeInMs = currentTime * 1000;
 
   const lastHighlightedLocation = useRef(defaultHighlightedLocation);
