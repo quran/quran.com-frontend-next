@@ -5,7 +5,7 @@ import {
   makeTafsirsUrl,
   makeLanguagesUrl,
   makeAudioTimestampsUrl,
-  makeChapterAudioFiles,
+  makeChapterAudioFilesUrl,
   makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
@@ -99,7 +99,7 @@ export const getChapterAudioFile = async (
   segments = false,
 ): Promise<AudioFile> => {
   const res = await fetcher<AudioFilesResponse>(
-    makeChapterAudioFiles(reciterId, chapter, segments),
+    makeChapterAudioFilesUrl(reciterId, chapter, segments),
   );
 
   if (res.error) {

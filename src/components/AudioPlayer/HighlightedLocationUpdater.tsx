@@ -9,7 +9,7 @@ import {
   initialState as defaultHighlightedLocation,
   setHighlightedLocation,
 } from 'src/redux/slices/QuranReader/highlightedLocation';
-import { makeChapterAudioFiles } from 'src/utils/apiPaths';
+import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import AudioFile from 'types/AudioFile';
 import Segment from 'types/Segment';
@@ -33,7 +33,7 @@ const HighlightedLocationUpdater = ({
 }: AudioTimestampsHighlightListenerProps) => {
   const dispatch = useDispatch();
   const { data: audioFileData } = useSWRImmutable(
-    makeChapterAudioFiles(reciterId, chapterId, true),
+    makeChapterAudioFilesUrl(reciterId, chapterId, true),
     () => getChapterAudioFile(reciterId, chapterId, true),
   );
   const currentTimeInMs = currentTime * 1000;
