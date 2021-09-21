@@ -56,6 +56,7 @@ const HighlightedLocationUpdater = ({
     );
     // only update redux value if current highlight value does not equal prev value
     if (!shallowEqual(highlightedLocation, lastHighlightedLocation.current)) {
+      console.log('scanning verses');
       dispatch(setHighlightedLocation(highlightedLocation));
       lastHighlightedLocation.current = highlightedLocation;
     }
@@ -81,9 +82,12 @@ const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: A
   )
     return lastHighlightedVerse.current;
 
-  return audioFileData.verseTimings.find(
+  console.log('scanning verses');
+  const highlightedVerseTiming = audioFileData.verseTimings.find(
     (verse) => currentTime >= verse.timestampFrom && currentTime <= verse.timestampTo,
   );
+  lastHighlightedVerse.current = highlightedVerseTiming;
+  return highlightedVerseTiming;
 };
 
 /**
@@ -105,10 +109,14 @@ const useMemoizedHighlightedWordLocation = (
       return lastHighlightedWordLocation.current;
   }
 
-  return currentHighlightedVerseTiming.segments.find((segment) => {
+  console.log('scanning segments');
+  const highlightedWordLocation = currentHighlightedVerseTiming.segments.find((segment) => {
     const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
     return currentTime >= timestampFrom && currentTime <= timestampTo;
   });
+  lastHighlightedWordLocation.current = highlightedWordLocation;
+
+  return highlightedWordLocation;
 };
 
 /**
