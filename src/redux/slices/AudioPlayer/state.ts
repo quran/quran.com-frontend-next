@@ -57,6 +57,7 @@ export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
 export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: RootState }>(
   'audioPlayerState/loadAndPlayAudioFile',
   async (chapter, thunkAPI) => {
+    const state = thunkAPI.getState();
     // play directly the audio file for this chapter is already loaded.
     const currentAudioFile = selectAudioFile(thunkAPI.getState());
     if (currentAudioFile && currentAudioFile.chapterId === chapter) {
@@ -66,11 +67,16 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
 
     thunkAPI.dispatch(setAudioStatus(AudioFileStatus.Loading));
 
-    const reciter = selectReciter(thunkAPI.getState());
+    const reciter = selectReciter(state);
     const audioFile = await getAudioFile(reciter.id, chapter);
 
     thunkAPI.dispatch(setAudioFile(audioFile));
-    triggerPlayAudio();
+    const isPlaying = selectIsPlaying(state);
+
+    // restart the audio, if it is already playing
+    if (isPlaying) {
+      triggerPlayAudio();
+    }
   },
 );
 
