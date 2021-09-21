@@ -75,7 +75,15 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
   },
 );
 
-export const setReciterAndPlayAudio = createAsyncThunk<void, Reciter, { state: RootState }>(
+/**
+ * 1) set reciter
+ * 2) get the audio file for the current reciter + current chapter from API
+ * 3) set the audio file to redux state
+ * 4) restart the audio if it is currently playing
+ *
+ * @param {Reciter} reciter
+ */
+export const setReciterAndAudioFile = createAsyncThunk<void, Reciter, { state: RootState }>(
   'audioPlayerState/setReciterAndPlayAudio',
   async (reciter, thunkAPI) => {
     thunkAPI.dispatch(setReciter(reciter));
