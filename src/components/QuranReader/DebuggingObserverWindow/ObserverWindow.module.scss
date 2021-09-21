@@ -1,0 +1,13 @@
+.container {
+  position: fixed;
+  top: 23vh;
+  bottom: 72vh;
+  z-index: var(--z-index-sticky);
+  width: 100%;
+  border: 1px solid var(--color-background-inverse);
+}
+
+.readingMode {
+  top: 10vh;
+  bottom: 85vh;
+}

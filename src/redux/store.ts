@@ -20,6 +20,7 @@ import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
+import readingTracker from './slices/QuranReader/readingTracker';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
@@ -41,6 +42,7 @@ const persistConfig = {
     'tafsirs',
     'bookmarks',
     'search',
+    'readingTracker',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -56,6 +58,7 @@ export const rootReducer = combineReducers({
   tafsirs,
   bookmarks,
   search,
+  readingTracker,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
