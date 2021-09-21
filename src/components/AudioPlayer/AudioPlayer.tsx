@@ -35,7 +35,7 @@ import { withStopPropagation } from 'src/utils/event';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const audioPlayerEl = useRef<HTMLAudioElement>(null);
+  const audioPlayerElRef = useRef<HTMLAudioElement>(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
@@ -76,15 +76,15 @@ const AudioPlayer = () => {
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
     if (process.browser && window) {
-      window.audioPlayerEl = audioPlayerEl.current;
+      window.audioPlayerEl = audioPlayerElRef.current;
     }
-  }, [audioPlayerEl]);
+  }, [audioPlayerElRef]);
 
   // eventListeners useEffect
   useEffect(() => {
     let currentRef = null;
-    if (audioPlayerEl && audioPlayerEl.current) {
-      currentRef = audioPlayerEl.current;
+    if (audioPlayerElRef && audioPlayerElRef.current) {
+      currentRef = audioPlayerElRef.current;
       currentRef.addEventListener('play', onAudioPlay);
       currentRef.addEventListener('pause', onAudioPause);
       currentRef.addEventListener('ended', onAudioEnded);
@@ -99,7 +99,7 @@ const AudioPlayer = () => {
         currentRef.removeEventListener('canplaythrough', onAudioLoaded);
       }
     };
-  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
+  }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
   return (
     <div
@@ -124,7 +124,7 @@ const AudioPlayer = () => {
           src={audioFile?.audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
-          ref={audioPlayerEl}
+          ref={audioPlayerElRef}
         />
         {/* <AudioKeyBoardListeners
           seek={(seekDuration) => seek(seekDuration)}
@@ -164,7 +164,7 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
-            audioPlayerEl={audioPlayerEl}
+            audioPlayerElRef={audioPlayerElRef}
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
             isExpanded={isExpanded}
             audioDuration={durationInSeconds}

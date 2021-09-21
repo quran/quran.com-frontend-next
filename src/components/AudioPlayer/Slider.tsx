@@ -14,7 +14,7 @@ type SliderProps = {
   isExpanded: boolean;
   reciterName: string;
   isMobileMinimizedForScrolling: boolean;
-  audioPlayerEl: React.MutableRefObject<HTMLAudioElement>;
+  audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
 
 /**
@@ -29,21 +29,21 @@ const Slider = ({
   isExpanded,
   reciterName,
   isMobileMinimizedForScrolling,
-  audioPlayerEl,
+  audioPlayerElRef,
 }: SliderProps): JSX.Element => {
   const [currentTime, setCurrentTime] = useState(0); // TODO: get current time from last session
 
   useEffect(() => {
-    if (!audioPlayerEl.current) return null;
+    const audioPlayerEl = audioPlayerElRef.current;
+    if (!audioPlayerEl) return null;
 
-    const audioPlayer = audioPlayerEl.current;
     const updateCurrentTime = () => {
-      setCurrentTime(audioPlayer.currentTime);
+      setCurrentTime(audioPlayerEl.currentTime);
     };
 
-    audioPlayerEl.current.addEventListener('timeupdate', updateCurrentTime);
-    return () => audioPlayer.removeEventListener('timeupdate', updateCurrentTime);
-  }, [audioPlayerEl]);
+    audioPlayerEl.addEventListener('timeupdate', updateCurrentTime);
+    return () => audioPlayerEl.removeEventListener('timeupdate', updateCurrentTime);
+  }, [audioPlayerElRef]);
 
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
