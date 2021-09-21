@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 
 import styles from './AudioPlayer.module.scss';
 import CloseButton from './CloseButton';
-import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
+import { triggerPauseAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
@@ -44,7 +44,6 @@ const AudioPlayer = () => {
   const durationInSeconds = audioFile?.duration / 1000 || 0;
   const isExpanded = useSelector(selectIsExpanded);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
-  const [currentTime, setCurrentTime] = useState(0); // TODO: get current time from last session
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Down && !isMobileMinimizedForScrolling) {
@@ -102,11 +101,6 @@ const AudioPlayer = () => {
     };
   }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
-  // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
-  const onTimeUpdate = () => {
-    setCurrentTime(audioPlayerEl.current.currentTime);
-  };
-
   return (
     <div
       role="button"
@@ -131,7 +125,6 @@ const AudioPlayer = () => {
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerEl}
-          onTimeUpdate={onTimeUpdate}
         />
         {/* <AudioKeyBoardListeners
           seek={(seekDuration) => seek(seekDuration)}
@@ -173,9 +166,7 @@ const AudioPlayer = () => {
           <Slider
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
             isExpanded={isExpanded}
-            currentTime={currentTime}
             audioDuration={durationInSeconds}
-            setTime={triggerSetCurrentTime}
             reciterName={reciterName}
           />
         </div>
