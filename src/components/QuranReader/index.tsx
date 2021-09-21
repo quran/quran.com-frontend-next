@@ -6,6 +6,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWRInfinite from 'swr/infinite';
 
 import { getPageLimit, getRequestKey, verseFetcher } from './api';
+// import ContextMenu from './ContextMenu';
+import DebuggingObserverWindow from './DebuggingObserverWindow';
 import EndOfScrollingControls from './EndOfScrollingControls';
 import Notes from './Notes/Notes';
 import onCopyQuranWords from './onCopyQuranWords';
@@ -31,8 +33,6 @@ import {
 import { areArraysEqual } from 'src/utils/array';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { VersesResponse } from 'types/ApiResponses';
-
-// import ContextMenu from './ContextMenu';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -118,6 +118,7 @@ const QuranReader = ({
   return (
     <>
       {/* <ContextMenu /> */}
+      <DebuggingObserverWindow isReadingMode={readingPreference === ReadingPreference.Reading} />
       <div
         onCopy={(event) => onCopyQuranWords(event, verses)}
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
