@@ -5,6 +5,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import { getChapterAudioFile } from 'src/api';
 import {
+  HighlightedLocationState,
   initialState as defaultHighlightedLocation,
   setHighlightedLocation,
 } from 'src/redux/slices/QuranReader/highlightedLocation';
@@ -64,8 +65,10 @@ const HighlightedLocationUpdater = ({
 };
 
 /**
+ * given a current time, return the verse that the timestamp matches currentTime
+ * it will also optimize for performance, only scan the whole verses when necessary
  *
- * @returns
+ * @returns {VerseTiming} currentHighlightedVerseTiming
  */
 const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: AudioFile) => {
   const lastHighlightedVerse = useRef<VerseTiming>(null);
@@ -83,6 +86,12 @@ const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: A
   );
 };
 
+/**
+ * given currentTime and currentHighlightedVerseTiming, return the word location that the timestamp matches currentTime
+ * it will also optimize for performance, only scan the whole segment when necessary
+ *
+ * @returns {Segment} currentHighlightedWordLocation
+ */
 const useMemoizedHighlightedWordLocation = (
   currentTime: number,
   currentHighlightedVerseTiming: VerseTiming,
@@ -102,10 +111,18 @@ const useMemoizedHighlightedWordLocation = (
   });
 };
 
+/**
+ * given a verseTiming and a Segment, combine them together to produce
+ * a HighlightedLocationState that can be dispatched into redux
+ *
+ * @param {VerseTiming} currentHighlightedVerseTiming
+ * @param {Segment} currentHighlightedWordLocation
+ * @returns {HighlightedLocationState} highlightedLocation
+ */
 const getHighlightedLocation = (
   currentHighlightedVerseTiming: VerseTiming,
   currentHighlightedWordLocation: Segment,
-) => {
+): HighlightedLocationState => {
   const highlightedVerseKey = currentHighlightedVerseTiming?.verseKey;
   const highlightedLocation = { ...defaultHighlightedLocation };
   if (highlightedVerseKey) {
