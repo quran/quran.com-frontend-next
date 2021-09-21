@@ -148,7 +148,7 @@ export const getVerseUrl = (verseKey: string): string => {
 };
 
 /**
- * This is a sorting function that is meant to be user with array.sort() function
+ * This is a sorting function that is meant to be used with array.sort() function
  * to sort a list of verse keys to match their appearance in the Mushaf.
  *
  * @param {string} verseKey1
@@ -164,6 +164,9 @@ export const sortByVerseKey = (verseKey1: string, verseKey2: string): number => 
   const verseId2Number = Number(verseId2);
   if (chapterId1Number > chapterId2Number) {
     return 1;
+  }
+  if (chapterId1Number < chapterId2Number) {
+    return -1;
   }
   return verseId1Number > verseId2Number ? 1 : -1;
 };

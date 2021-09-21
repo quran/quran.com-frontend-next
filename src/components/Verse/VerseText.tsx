@@ -9,7 +9,7 @@ import styles from './VerseText.module.scss';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
-import { updateVerseVisibility } from 'src/redux/slices/QuranReader/ReadingContext/readingContext';
+import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingContext';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
@@ -21,23 +21,23 @@ type VerseTextProps = {
   isHighlighted?: boolean;
 };
 
+const ROOT_MARGIN_READING = '-5% 0px -50% 0px';
+const ROOT_MARGIN_DEFAULT = '-5% 0px -30% 0px';
+
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const textRef = useRef(null);
   const dispatch = useDispatch();
-  const entry = useIntersectionObserver(textRef, {
-    rootMargin: '1%',
+  const intersectionObserverEntry = useIntersectionObserver(textRef, {
+    rootMargin: isReadingMode ? ROOT_MARGIN_READING : ROOT_MARGIN_DEFAULT,
   });
   useEffect(() => {
-    if (entry) {
+    if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
       dispatch({
         type: updateVerseVisibility.type,
-        payload: {
-          verseKey: entry.target.getAttribute('data-verse-key'),
-          isVisible: entry.isIntersecting,
-        },
+        payload: intersectionObserverEntry.target.getAttribute('data-verse-key'),
       });
     }
-  }, [dispatch, entry]);
+  }, [dispatch, intersectionObserverEntry]);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranTextFontScale } = quranReaderStyles;
   const [firstWord] = words;

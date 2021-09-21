@@ -9,7 +9,7 @@ import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirectio
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectCurrentlyReadingVerseKey } from 'src/redux/slices/QuranReader/ReadingContext/readingContext';
+import { selectCurrentlyReadingVerseKey } from 'src/redux/slices/QuranReader/readingContext';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();
