@@ -12,7 +12,7 @@ export const readingTrackerSlice = createSlice({
   name: 'readingTracker',
   initialState,
   reducers: {
-    updateVerseVisibility: (state: ReadingTracker, action: PayloadAction<string>) => {
+    setLastReadVerse: (state: ReadingTracker, action: PayloadAction<string>) => {
       return {
         ...state,
         lastReadVerseKey: action.payload,
@@ -21,7 +21,7 @@ export const readingTrackerSlice = createSlice({
   },
 });
 
-export const { updateVerseVisibility } = readingTrackerSlice.actions;
+export const { setLastReadVerse } = readingTrackerSlice.actions;
 
 export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerseKey;
 

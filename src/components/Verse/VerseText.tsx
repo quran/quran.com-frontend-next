@@ -10,7 +10,7 @@ import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingTracker';
+import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import Word from 'types/Word';
@@ -35,7 +35,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
       dispatch({
-        type: updateVerseVisibility.type,
+        type: setLastReadVerse.type,
         payload: intersectionObserverEntry.target.getAttribute('data-verse-key'),
       });
     }

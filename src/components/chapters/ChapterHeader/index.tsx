@@ -14,7 +14,7 @@ import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
-import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingTracker';
+import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
 import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 
@@ -41,7 +41,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
       dispatch({
-        type: updateVerseVisibility.type,
+        type: setLastReadVerse.type,
         payload: intersectionObserverEntry.target.getAttribute('data-verse-key'),
       });
     }
