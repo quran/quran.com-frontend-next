@@ -35,7 +35,7 @@ import { withStopPropagation } from 'src/utils/event';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const audioPlayerEl = useRef(null);
+  const audioPlayerEl = useRef<HTMLAudioElement>(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
@@ -164,6 +164,7 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
+            audioPlayerEl={audioPlayerEl}
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
             isExpanded={isExpanded}
             audioDuration={durationInSeconds}
