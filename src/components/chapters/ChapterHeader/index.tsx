@@ -14,7 +14,7 @@ import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
-import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingContext';
+import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
 import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 
@@ -23,13 +23,20 @@ interface Props {
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
+const ROOT_MARGIN = '-10% 0px -85% 0px';
+const OBSERVER_THRESHOLD = 0.01;
 
 const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
   const headerRef = useRef(null);
   const dispatch = useDispatch();
+  /**
+   * the intersection observer is needed so that we know that the first verse
+   * of the current chapter is being read when the ChapterHeader appears within
+   * the intersection observer root's borders.
+   */
   const intersectionObserverEntry = useIntersectionObserver(headerRef, {
-    rootMargin: '-10% 0px -85% 0px',
-    threshold: 0.01,
+    rootMargin: ROOT_MARGIN,
+    threshold: OBSERVER_THRESHOLD,
   });
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {

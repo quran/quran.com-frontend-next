@@ -9,8 +9,8 @@ import styles from './VerseText.module.scss';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
-import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingContext';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingTracker';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import Word from 'types/Word';
@@ -23,13 +23,14 @@ type VerseTextProps = {
 
 const READING_MODE_ROOT_MARGIN = '-10% 0px -85% 0px';
 const DEFAULT_ROOT_MARGIN = '-23% 0px -72% 0px';
+const OBSERVER_THRESHOLD = 0.01;
 
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const textRef = useRef(null);
   const dispatch = useDispatch();
   const intersectionObserverEntry = useIntersectionObserver(textRef, {
     rootMargin: isReadingMode ? READING_MODE_ROOT_MARGIN : DEFAULT_ROOT_MARGIN,
-    threshold: 0.01,
+    threshold: OBSERVER_THRESHOLD,
   });
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {

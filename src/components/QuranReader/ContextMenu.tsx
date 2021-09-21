@@ -9,14 +9,14 @@ import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirectio
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectCurrentlyReadingVerseKey } from 'src/redux/slices/QuranReader/readingContext';
+import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
-  const verseKey = useSelector(selectCurrentlyReadingVerseKey, shallowEqual);
+  const verseKey = useSelector(selectLastReadVerseKey, shallowEqual);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Up && !isExpanded) {
