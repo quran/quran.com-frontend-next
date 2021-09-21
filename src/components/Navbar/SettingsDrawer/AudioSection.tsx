@@ -5,7 +5,7 @@ import Section from './Section';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Combobox from 'src/components/dls/Forms/Combobox';
-import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
@@ -29,7 +29,7 @@ const AudioSection = () => {
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
-    dispatch(setReciter(reciter));
+    dispatch(setReciterAndPauseAudio(reciter));
   };
 
   return (

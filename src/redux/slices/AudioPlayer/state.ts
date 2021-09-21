@@ -3,7 +3,11 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DEFAULT_RECITER } from './defaultData';
 
 import { getChapterAudioFile } from 'src/api';
-import { triggerPlayAudio, triggerSetCurrentTime } from 'src/components/AudioPlayer/EventTriggers';
+import {
+  triggerPlayAudio,
+  triggerSetCurrentTime,
+  triggerPauseAudio,
+} from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
 import AudioFile from 'types/AudioFile';
@@ -17,7 +21,6 @@ export enum AudioFileStatus {
 
 export type AudioState = {
   isPlaying: boolean;
-  currentTime: number;
   reciter: Reciter;
   audioFile: AudioFile;
   audioFileStatus: AudioFileStatus;
@@ -27,7 +30,6 @@ export type AudioState = {
 
 const initialState: AudioState = {
   isPlaying: false,
-  currentTime: 0,
   audioFile: null,
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
@@ -70,7 +72,28 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
     const audioFile = await getChapterAudioFile(reciter.id, chapter);
 
     thunkAPI.dispatch(setAudioFile(audioFile));
+
     triggerPlayAudio();
+  },
+);
+
+/**
+ * 1) pause the audio player
+ * 2) get the audio file based on current reciter + chapter
+ * 3) set the audio file to redux state
+ *
+ * @param {Reciter} reciter
+ */
+export const setReciterAndPauseAudio = createAsyncThunk<void, Reciter, { state: RootState }>(
+  'audioPlayerState/setReciterAndPlayAudio',
+  async (reciter, thunkAPI) => {
+    triggerPauseAudio();
+
+    thunkAPI.dispatch(setReciter(reciter));
+
+    const state = thunkAPI.getState();
+    const audioFile = await getChapterAudioFile(reciter.id, selectAudioFile(state).chapterId);
+    thunkAPI.dispatch(setAudioFile(audioFile));
   },
 );
 
@@ -99,7 +122,6 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     }
 
     const timestampInSeconds = timestamp / 1000;
-    thunkApi.dispatch(setCurrentTime(timestampInSeconds));
     triggerSetCurrentTime(timestampInSeconds);
 
     triggerPlayAudio();
@@ -121,10 +143,6 @@ export const audioPlayerStateSlice = createSlice({
     setReciter: (state, action: PayloadAction<Reciter>) => ({
       ...state,
       reciter: action.payload,
-    }),
-    setCurrentTime: (state: AudioState, action: PayloadAction<number>) => ({
-      ...state,
-      currentTime: action.payload,
     }),
     setAudioFile: (state: AudioState, action: PayloadAction<AudioFile>) => ({
       ...state,
@@ -156,7 +174,6 @@ export const audioPlayerStateSlice = createSlice({
 
 export const {
   setIsPlaying,
-  setCurrentTime,
   setReciter,
   setAudioFile,
   setAudioStatus,

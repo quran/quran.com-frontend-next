@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
 
+import { triggerSetCurrentTime } from './EventTriggers';
 import styles from './Slider.module.scss';
 import Split, { NUMBER_OF_SPLITS } from './SliderSplit';
 
 import { secondsFormatter } from 'src/utils/datetime';
 
 type SliderProps = {
-  currentTime: number;
   audioDuration: number;
-  setTime: (number: number) => void;
   isExpanded: boolean;
   reciterName: string;
   isMobileMinimizedForScrolling: boolean;
+  audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
 
 /**
@@ -25,13 +25,26 @@ type SliderProps = {
  * @returns {JSX.Element}
  */
 const Slider = ({
-  currentTime,
   audioDuration,
-  setTime,
   isExpanded,
   reciterName,
   isMobileMinimizedForScrolling,
+  audioPlayerElRef,
 }: SliderProps): JSX.Element => {
+  const [currentTime, setCurrentTime] = useState(0); // TODO: get current time from last session
+
+  useEffect(() => {
+    const audioPlayerEl = audioPlayerElRef.current;
+    if (!audioPlayerEl) return null;
+
+    const updateCurrentTime = () => {
+      setCurrentTime(audioPlayerEl.currentTime);
+    };
+
+    audioPlayerEl.addEventListener('timeupdate', updateCurrentTime);
+    return () => audioPlayerEl.removeEventListener('timeupdate', updateCurrentTime);
+  }, [audioPlayerElRef]);
+
   const splitDuration = audioDuration / NUMBER_OF_SPLITS;
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
@@ -44,7 +57,7 @@ const Slider = ({
         isComplete={isComplete}
         key={index}
         startTime={splitStartTime}
-        onClick={() => setTime(splitStartTime)}
+        onClick={() => triggerSetCurrentTime(splitStartTime)}
       />
     );
   });

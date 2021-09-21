@@ -10,7 +10,7 @@ import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 
 import styles from './AudioPlayer.module.scss';
 import CloseButton from './CloseButton';
-import { triggerPauseAudio, triggerSeek, triggerSetCurrentTime } from './EventTriggers';
+import { triggerPauseAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
@@ -22,8 +22,6 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/d
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
-  selectAudioPlayerState,
-  setCurrentTime,
   selectAudioFile,
   selectAudioFileStatus,
   setAudioStatus,
@@ -38,8 +36,7 @@ import { withStopPropagation } from 'src/utils/event';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const { currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
-  const audioPlayerEl = useRef(null);
+  const audioPlayerElRef = useRef<HTMLAudioElement>(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
@@ -80,15 +77,15 @@ const AudioPlayer = () => {
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
     if (process.browser && window) {
-      window.audioPlayerEl = audioPlayerEl.current;
+      window.audioPlayerEl = audioPlayerElRef.current;
     }
-  }, [audioPlayerEl]);
+  }, [audioPlayerElRef]);
 
   // eventListeners useEffect
   useEffect(() => {
     let currentRef = null;
-    if (audioPlayerEl && audioPlayerEl.current) {
-      currentRef = audioPlayerEl.current;
+    if (audioPlayerElRef && audioPlayerElRef.current) {
+      currentRef = audioPlayerElRef.current;
       currentRef.addEventListener('play', onAudioPlay);
       currentRef.addEventListener('pause', onAudioPause);
       currentRef.addEventListener('ended', onAudioEnded);
@@ -103,21 +100,7 @@ const AudioPlayer = () => {
         currentRef.removeEventListener('canplaythrough', onAudioLoaded);
       }
     };
-  }, [audioPlayerEl, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
-
-  // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
-  const onTimeUpdate = () => {
-    // update the current audio time in redux
-    dispatch({
-      type: setCurrentTime.type,
-      payload: audioPlayerEl.current.currentTime,
-    });
-  };
-
-  useEffect(() => {
-    triggerSetCurrentTime(currentTime);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
   return (
     <div
@@ -142,8 +125,7 @@ const AudioPlayer = () => {
           src={audioFile?.audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
-          ref={audioPlayerEl}
-          onTimeUpdate={onTimeUpdate}
+          ref={audioPlayerElRef}
         />
         {/* <AudioKeyBoardListeners
           seek={(seekDuration) => seek(seekDuration)}
@@ -188,11 +170,10 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.sliderContainer}>
           <Slider
+            audioPlayerElRef={audioPlayerElRef}
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
             isExpanded={isExpanded}
-            currentTime={currentTime}
             audioDuration={durationInSeconds}
-            setTime={triggerSetCurrentTime}
             reciterName={reciterName}
           />
         </div>
