@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -21,8 +21,6 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/d
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
-  selectAudioPlayerState,
-  setCurrentTime,
   selectAudioFile,
   selectAudioFileStatus,
   setAudioStatus,
@@ -37,7 +35,6 @@ import { withStopPropagation } from 'src/utils/event';
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
-  const { currentTime } = useSelector(selectAudioPlayerState, shallowEqual);
   const audioPlayerEl = useRef(null);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
@@ -47,6 +44,7 @@ const AudioPlayer = () => {
   const durationInSeconds = audioFile?.duration / 1000 || 0;
   const isExpanded = useSelector(selectIsExpanded);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
+  const [currentTime, setCurrentTime] = useState(0); // TODO: get current time from last session
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Down && !isMobileMinimizedForScrolling) {
@@ -106,17 +104,8 @@ const AudioPlayer = () => {
 
   // No need to debounce. The frequency is funciton is set by the browser based on the system it's running on
   const onTimeUpdate = () => {
-    // update the current audio time in redux
-    dispatch({
-      type: setCurrentTime.type,
-      payload: audioPlayerEl.current.currentTime,
-    });
+    setCurrentTime(audioPlayerEl.current.currentTime);
   };
-
-  useEffect(() => {
-    triggerSetCurrentTime(currentTime);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div
