@@ -22,7 +22,7 @@ type TranslationViewCellProps = {
 const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   return (
-    <div key={verse.id}>
+    <div>
       {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
       <div
         className={classNames(styles.cellContainer, {
