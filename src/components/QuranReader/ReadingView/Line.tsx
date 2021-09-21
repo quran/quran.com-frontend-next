@@ -11,15 +11,19 @@ type LineProps = {
   words: Word[];
   lineKey: string;
   isBigTextLayout: boolean;
+  isHighlighted?: boolean;
 };
 
-const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => (
+const Line = ({ lineKey, words, isBigTextLayout, isHighlighted }: LineProps) => (
   <div
     id={lineKey}
-    className={classNames(styles.container, { [styles.mobileInline]: isBigTextLayout })}
+    className={classNames(styles.container, {
+      [styles.highlighted]: isHighlighted,
+      [styles.mobileInline]: isBigTextLayout,
+    })}
   >
     <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
-      <VerseText words={words} isReadingMode />
+      <VerseText words={words} isReadingMode isHighlighted={isHighlighted} />
     </div>
   </div>
 );

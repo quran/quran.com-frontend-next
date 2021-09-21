@@ -42,3 +42,7 @@
 }
 
 @include utility.generate-font-sizes();
+
+.highlighted {
+  background-color: var(--color-background-alternative);
+}
