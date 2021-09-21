@@ -35,6 +35,7 @@ jobs:
           path: storybook-static
       - name: Commit updates
         run: |
+          git checkout gh-pages
           git pull --no-edit
           mkdir -p storybook
           rm -rf storybook/${GITHUB_REF##*/}
