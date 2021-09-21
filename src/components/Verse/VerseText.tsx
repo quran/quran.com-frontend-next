@@ -21,14 +21,15 @@ type VerseTextProps = {
   isHighlighted?: boolean;
 };
 
-const ROOT_MARGIN_READING = '-5% 0px -50% 0px';
-const ROOT_MARGIN_DEFAULT = '-5% 0px -30% 0px';
+const READING_MODE_ROOT_MARGIN = '-10% 0px -85% 0px';
+const DEFAULT_ROOT_MARGIN = '-23% 0px -72% 0px';
 
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const textRef = useRef(null);
   const dispatch = useDispatch();
   const intersectionObserverEntry = useIntersectionObserver(textRef, {
-    rootMargin: isReadingMode ? ROOT_MARGIN_READING : ROOT_MARGIN_DEFAULT,
+    rootMargin: isReadingMode ? READING_MODE_ROOT_MARGIN : DEFAULT_ROOT_MARGIN,
+    threshold: 0.01,
   });
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {

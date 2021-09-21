@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+
+import { useDispatch } from 'react-redux';
 
 import InfoIcon from '../../../../public/icons/info.svg';
 import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
@@ -11,6 +13,8 @@ import ChapterIconContainer, {
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
+import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
+import { updateVerseVisibility } from 'src/redux/slices/QuranReader/readingContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 
@@ -21,13 +25,27 @@ interface Props {
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
 const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
+  const headerRef = useRef(null);
+  const dispatch = useDispatch();
+  const intersectionObserverEntry = useIntersectionObserver(headerRef, {
+    rootMargin: '-10% 0px -85% 0px',
+    threshold: 0.01,
+  });
+  useEffect(() => {
+    if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
+      dispatch({
+        type: updateVerseVisibility.type,
+        payload: intersectionObserverEntry.target.getAttribute('data-verse-key'),
+      });
+    }
+  }, [dispatch, intersectionObserverEntry]);
   const chapterData = getChapterData(chapterId);
 
   const translatedName = chapterData.translatedName.name;
   const { nameSimple } = chapterData;
 
   return (
-    <>
+    <div ref={headerRef} data-verse-key={`${chapterId}:1`}>
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.translatedName}>{translatedName}</div>
@@ -68,7 +86,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
           <Bismillah size={BismillahSize.Large} />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
