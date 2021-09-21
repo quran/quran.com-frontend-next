@@ -131,11 +131,13 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
-        <QuranReaderHighlightDispatcher
-          audioPlayerElRef={audioPlayerElRef}
-          reciterId={reciterId}
-          chapterId={audioFile?.chapterId}
-        />
+        {reciterId && audioFile?.chapterId && (
+          <QuranReaderHighlightDispatcher
+            audioPlayerElRef={audioPlayerElRef}
+            reciterId={reciterId}
+            chapterId={audioFile?.chapterId}
+          />
+        )}
         <MediaSessionApiListeners
           play={triggerPauseAudio}
           pause={triggerPauseAudio}
