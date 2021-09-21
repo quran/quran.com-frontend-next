@@ -79,7 +79,7 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
  * 1) set reciter
  * 2) get the audio file for the current reciter + current chapter from API
  * 3) set the audio file to redux state
- * 4) restart the audio if it is currently playing
+ * 4) restart the audio player if it is currently playing
  *
  * @param {Reciter} reciter
  */
