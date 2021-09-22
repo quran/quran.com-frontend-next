@@ -34,9 +34,14 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
   });
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
+      const verseTextNode = intersectionObserverEntry.target;
       dispatch({
         type: setLastReadVerse.type,
-        payload: intersectionObserverEntry.target.getAttribute('data-verse-key'),
+        payload: {
+          verseKey: verseTextNode.getAttribute('data-verse-key'),
+          chapterId: verseTextNode.getAttribute('data-chapter-id'),
+          page: verseTextNode.getAttribute('data-page'),
+        },
       });
     }
   }, [dispatch, intersectionObserverEntry]);
@@ -63,12 +68,14 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
     <>
       {isReadingMode && isFirstWordOfSurah && (
         <div className={styles.chapterHeaderContainer}>
-          <ChapterHeader chapterId={chapterId} />
+          <ChapterHeader chapterId={chapterId} pageNumber={pageNumber} />
         </div>
       )}
       <div
         ref={textRef}
         data-verse-key={verseKey}
+        data-page={pageNumber}
+        data-chapter-id={chapterId}
         className={classNames(
           styles.verseTextContainer,
           styles[`quran-font-size-${quranTextFontScale}`],

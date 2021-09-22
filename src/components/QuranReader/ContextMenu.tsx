@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,15 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
+import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
-  const verseKey = useSelector(selectLastReadVerseKey, shallowEqual);
+  const { verseKey, chapterId, page } = useSelector(selectLastReadVerseKey, shallowEqual);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Up && !isExpanded) {
@@ -28,6 +30,15 @@ const ContextMenu = () => {
     [dispatch, isExpanded],
   );
   useScrollDirection(onDirectionChange);
+  const chapterData = useMemo(() => {
+    return chapterId ? getChapterData(chapterId) : null;
+  }, [chapterId]);
+  // if it's SSR or the first time we render this
+  if (!verseKey) {
+    return <></>;
+  }
+  const verse = getVerseNumberFromKey(verseKey);
+  const progress = getChapterReadingProgress(verse, chapterData.versesCount);
 
   return (
     <div
@@ -36,8 +47,23 @@ const ContextMenu = () => {
         [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}
+      style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
-      {verseKey}
+      <div className={styles.sectionsContainer}>
+        <div className={styles.leftSection}>
+          <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
+          <div className={styles.rowsContainer}>
+            <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
+              <p className={styles.col}>{chapterData.translatedName.name}</p>
+              <p className={styles.col}>Page {page}</p>
+            </div>
+            <div className={styles.row}>
+              <p className={classNames(styles.col, styles.bold)}>{chapterData.nameSimple}</p>
+              <p className={classNames(styles.col, styles.bold)}>Verse {verse}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

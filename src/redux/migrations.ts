@@ -14,4 +14,10 @@ export default {
       searchHistory: [],
     },
   }),
+  5: (state) => ({
+    ...state,
+    readingTracker: {
+      lastReadVerse: { verseKey: null, chapterId: null, page: null },
+    },
+  }),
 };

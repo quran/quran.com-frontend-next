@@ -20,13 +20,14 @@ import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 
 interface Props {
   chapterId: string;
+  pageNumber: number;
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 const ROOT_MARGIN = '-10% 0px -85% 0px';
 const OBSERVER_THRESHOLD = 0.01;
 
-const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
+const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber }) => {
   const headerRef = useRef(null);
   const dispatch = useDispatch();
   /**
@@ -40,9 +41,14 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
   });
   useEffect(() => {
     if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
+      const verseTextNode = intersectionObserverEntry.target;
       dispatch({
         type: setLastReadVerse.type,
-        payload: intersectionObserverEntry.target.getAttribute('data-verse-key'),
+        payload: {
+          verseKey: verseTextNode.getAttribute('data-verse-key'),
+          chapterId: verseTextNode.getAttribute('data-chapter-id'),
+          page: verseTextNode.getAttribute('data-page'),
+        },
       });
     }
   }, [dispatch, intersectionObserverEntry]);
@@ -52,7 +58,12 @@ const ChapterHeader: React.FC<Props> = ({ chapterId }) => {
   const { nameSimple } = chapterData;
 
   return (
-    <div ref={headerRef} data-verse-key={`${chapterId}:1`}>
+    <div
+      ref={headerRef}
+      data-verse-key={`${chapterId}:1`}
+      data-page={pageNumber}
+      data-chapter-id={chapterId}
+    >
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.translatedName}>{translatedName}</div>

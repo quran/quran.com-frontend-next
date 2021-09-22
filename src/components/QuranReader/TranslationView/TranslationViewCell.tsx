@@ -23,7 +23,9 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   return (
     <div>
-      {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
+      {verse.verseNumber === 1 && (
+        <ChapterHeader chapterId={String(verse.chapterId)} pageNumber={verse.pageNumber} />
+      )}
       <div
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,

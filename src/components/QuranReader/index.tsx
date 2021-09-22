@@ -6,7 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWRInfinite from 'swr/infinite';
 
 import { getPageLimit, getRequestKey, verseFetcher } from './api';
-// import ContextMenu from './ContextMenu';
+import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import EndOfScrollingControls from './EndOfScrollingControls';
 import Notes from './Notes/Notes';
@@ -117,7 +117,7 @@ const QuranReader = ({
 
   return (
     <>
-      {/* <ContextMenu /> */}
+      <ContextMenu />
       <DebuggingObserverWindow isReadingMode={readingPreference === ReadingPreference.Reading} />
       <div
         onCopy={(event) => onCopyQuranWords(event, verses)}
