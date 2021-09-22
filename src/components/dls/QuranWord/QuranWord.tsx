@@ -10,6 +10,7 @@ import TextWord from './TextWord';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import Wrapper from 'src/components/Wrapper/Wrapper';
+import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
@@ -26,6 +27,7 @@ export type QuranWordProps = {
   font?: QuranFont;
   isHighlighted?: boolean;
   isWordByWordAllowed?: boolean;
+  isAudioHighlightingAllowed?: boolean;
 };
 
 const getGlyph = (word: Word, font: QuranFont) => {
@@ -33,13 +35,27 @@ const getGlyph = (word: Word, font: QuranFont) => {
   return word.codeV2;
 };
 
-const QuranWord = ({ word, font, isWordByWordAllowed = true, isHighlighted }: QuranWordProps) => {
+const QuranWord = ({
+  word,
+  font,
+  isWordByWordAllowed = true,
+  isAudioHighlightingAllowed = true,
+  isHighlighted,
+}: QuranWordProps) => {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
     shallowEqual,
   );
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
+
+  // creating wordLocation instead of using `word.location` because
+  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
+  const wordLocation = makeWordLocation(word.verseKey, word.position);
+
+  // Determine if the audio player is currently playing the word
+  const isAudioPlayingWord = useSelector(selectIsWordHighlighted(wordLocation));
+
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
 
@@ -58,12 +74,9 @@ const QuranWord = ({ word, font, isWordByWordAllowed = true, isHighlighted }: Qu
   */
   const showTooltip =
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
-  // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
-  const shouldBeHighLighted = isHighlighted || isTooltipOpened;
 
-  // creating wordLocation instead of using `word.location` because
-  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
-  const wordLocation = makeWordLocation(word.verseKey, word.position);
+  const shouldBeHighLighted =
+    isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
 
   const tooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
