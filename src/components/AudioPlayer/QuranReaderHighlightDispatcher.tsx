@@ -79,13 +79,16 @@ const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: A
 
   if (
     lastHighlightedVerse.current &&
-    currentTime > lastHighlightedVerse.current.timestampFrom &&
-    currentTime <= lastHighlightedVerse.current.timestampTo
+    isCurrentTimeInRange(
+      currentTime,
+      lastHighlightedVerse.current.timestampFrom,
+      lastHighlightedVerse.current.timestampTo,
+    )
   )
     return lastHighlightedVerse.current;
 
-  const highlightedVerseTiming = audioFileData.verseTimings.find(
-    (verse) => currentTime > verse.timestampFrom && currentTime <= verse.timestampTo,
+  const highlightedVerseTiming = audioFileData.verseTimings.find((verse) =>
+    isCurrentTimeInRange(currentTime, verse.timestampFrom, verse.timestampTo),
   );
   lastHighlightedVerse.current = highlightedVerseTiming;
   return highlightedVerseTiming;
@@ -106,13 +109,13 @@ const useMemoizedHighlightedWordLocation = (
 
   if (lastHighlightedWordLocation.current) {
     const [, timestampFrom, timestampTo] = lastHighlightedWordLocation.current;
-    if (currentTime > timestampFrom && currentTime <= timestampTo)
+    if (isCurrentTimeInRange(currentTime, timestampFrom, timestampTo))
       return lastHighlightedWordLocation.current;
   }
 
   const highlightedWordLocation = currentHighlightedVerseTiming.segments.find((segment) => {
     const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
-    return currentTime > timestampFrom && currentTime <= timestampTo;
+    return isCurrentTimeInRange(currentTime, timestampFrom, timestampTo);
   });
   lastHighlightedWordLocation.current = highlightedWordLocation;
 
@@ -145,5 +148,21 @@ const getHighlightedLocation = (
 
   return highlightedLocation;
 };
+
+/**
+ * check if currentTime is within range timestampFrom and timestampTo
+ *
+ * example:
+ * - timestampFrom = 0, timestampTo = 10, currentTime = 0 should return false
+ * - timestampFrom = 0, timestampTo = 10, currentTime = 1 should return true
+ * - timestampFrom = 0, timestampTo = 10, currentTime = 10 should return true
+ *
+ * @param {number} currentTime
+ * @param {number} timestampFrom
+ * @param {number} timestampTo
+ * @returns {boolean} isWithinRange
+ */
+const isCurrentTimeInRange = (currentTime: number, timestampFrom: number, timestampTo: number) =>
+  currentTime > timestampFrom && currentTime <= timestampTo;
 
 export default QuranReaderHighlightDispatcher;
