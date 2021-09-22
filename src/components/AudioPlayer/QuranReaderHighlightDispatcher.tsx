@@ -79,13 +79,13 @@ const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: A
 
   if (
     lastHighlightedVerse.current &&
-    currentTime >= lastHighlightedVerse.current.timestampFrom &&
+    currentTime > lastHighlightedVerse.current.timestampFrom &&
     currentTime <= lastHighlightedVerse.current.timestampTo
   )
     return lastHighlightedVerse.current;
 
   const highlightedVerseTiming = audioFileData.verseTimings.find(
-    (verse) => currentTime >= verse.timestampFrom && currentTime <= verse.timestampTo,
+    (verse) => currentTime > verse.timestampFrom && currentTime <= verse.timestampTo,
   );
   lastHighlightedVerse.current = highlightedVerseTiming;
   return highlightedVerseTiming;
@@ -106,13 +106,13 @@ const useMemoizedHighlightedWordLocation = (
 
   if (lastHighlightedWordLocation.current) {
     const [, timestampFrom, timestampTo] = lastHighlightedWordLocation.current;
-    if (currentTime >= timestampFrom && currentTime <= timestampTo)
+    if (currentTime > timestampFrom && currentTime <= timestampTo)
       return lastHighlightedWordLocation.current;
   }
 
   const highlightedWordLocation = currentHighlightedVerseTiming.segments.find((segment) => {
     const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
-    return currentTime >= timestampFrom && currentTime <= timestampTo;
+    return currentTime > timestampFrom && currentTime <= timestampTo;
   });
   lastHighlightedWordLocation.current = highlightedWordLocation;
 
