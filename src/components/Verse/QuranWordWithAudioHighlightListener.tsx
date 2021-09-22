@@ -6,6 +6,7 @@ import QuranWord, { QuranWordProps } from 'src/components/dls/QuranWord/QuranWor
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { makeWordLocation } from 'src/utils/verse';
 
+// listen to selectIsWordHighlighted and render QuranWord with it value
 const QuranWordWithAudioHighlightListener = ({
   word,
   font,
