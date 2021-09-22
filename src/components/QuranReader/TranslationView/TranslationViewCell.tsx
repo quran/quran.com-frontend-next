@@ -7,9 +7,11 @@ import styles from './TranslationViewCell.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Separator from 'src/components/dls/Separator/Separator';
+import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseActions from 'src/components/Verse/VerseActions';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
+import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -21,6 +23,8 @@ type TranslationViewCellProps = {
 
 const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const reciter = useSelector(selectReciter, shallowEqual);
+
   return (
     <div>
       {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
@@ -39,6 +43,13 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
             </div>
           </div>
           <div className={styles.actionContainerRight}>
+            <div className={styles.actionItem}>
+              <PlayVerseAudioButton
+                timestamp={verse.timestamps.timestampFrom}
+                chapterId={Number(verse.chapterId)}
+                reciterId={reciter.id}
+              />
+            </div>
             <div className={styles.actionItem}>
               <VerseActions verse={verse} />
             </div>
