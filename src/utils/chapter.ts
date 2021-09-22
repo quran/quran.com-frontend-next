@@ -68,3 +68,15 @@ export const isFirstSurah = (surahNumber: number): boolean => surahNumber === 1;
  * @returns  {boolean}
  */
 export const isLastSurah = (surahNumber: number): boolean => surahNumber === 114;
+
+/**
+ * Get how much percentage of the chapter has been read.
+ *
+ * @param {number} currentVerse
+ * @param {number} totalNumberOfVerses
+ * @returns {number}
+ */
+export const getChapterReadingProgress = (
+  currentVerse: number,
+  totalNumberOfVerses: number,
+): number => Math.ceil((currentVerse * 100) / totalNumberOfVerses);
