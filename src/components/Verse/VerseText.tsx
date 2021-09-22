@@ -6,8 +6,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
-import QuranWord from 'build/lib/src/components/dls/QuranWord/QuranWord';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
+import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
