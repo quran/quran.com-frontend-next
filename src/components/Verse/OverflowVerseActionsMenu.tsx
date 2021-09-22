@@ -8,7 +8,7 @@ import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
-import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
+import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
@@ -96,7 +96,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
     <Popover
       trigger={
         <Button tooltip="Actions menu" type={ButtonType.Secondary}>
-          <OverflowMenu />
+          <OverflowMenuIcon />
         </Button>
       }
     >
