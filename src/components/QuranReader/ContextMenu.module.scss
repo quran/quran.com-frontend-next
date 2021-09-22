@@ -20,7 +20,8 @@
     display: block;
     content: "";
     width: var(--progress);
-    transition: var(--transition-regular);
+    transition: var(--transition-fast);
+    transition-timing-function: linear;
     height: var(--spacing-micro);
     background: var(--color-success-deep);
     position: absolute;

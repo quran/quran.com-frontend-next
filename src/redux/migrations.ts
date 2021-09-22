@@ -17,7 +17,7 @@ export default {
   5: (state) => ({
     ...state,
     readingTracker: {
-      lastReadVerse: { verseKey: null, chapterId: null, page: null },
+      lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
     },
   }),
 };

@@ -21,13 +21,14 @@ import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
 interface Props {
   chapterId: string;
   pageNumber: number;
+  hizbNumber: number;
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 const ROOT_MARGIN = '-10% 0px -85% 0px';
 const OBSERVER_THRESHOLD = 0.01;
 
-const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber }) => {
+const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) => {
   const headerRef = useRef(null);
   const dispatch = useDispatch();
   /**
@@ -48,6 +49,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber }) => {
           verseKey: verseTextNode.getAttribute('data-verse-key'),
           chapterId: verseTextNode.getAttribute('data-chapter-id'),
           page: verseTextNode.getAttribute('data-page'),
+          hizb: verseTextNode.getAttribute('data-hizb'),
         },
       });
     }
@@ -63,6 +65,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber }) => {
       data-verse-key={`${chapterId}:1`}
       data-page={pageNumber}
       data-chapter-id={chapterId}
+      data-hizb={hizbNumber}
     >
       <div className={styles.container}>
         <div className={styles.left}>

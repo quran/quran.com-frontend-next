@@ -10,7 +10,7 @@ export const DEFAULT_VERSES_PARAMS = {
   translations: DEFAULT_TRANSLATIONS.join(', '),
   translationFields: 'resource_name', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
-  fields: `${QuranFont.Uthmani},chapter_id`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir.
+  fields: `${QuranFont.Uthmani},chapter_id,hizb_number`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir.
   reciter: DEFAULT_RECITER.id,
 };
 

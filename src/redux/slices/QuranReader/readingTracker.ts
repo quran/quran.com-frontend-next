@@ -6,6 +6,7 @@ interface LastReadVerse {
   verseKey: string;
   chapterId: string;
   page: string;
+  hizb: string;
 }
 
 export type ReadingTracker = {
@@ -13,7 +14,7 @@ export type ReadingTracker = {
 };
 
 const initialState: ReadingTracker = {
-  lastReadVerse: { verseKey: null, chapterId: null, page: null },
+  lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
 };
 
 export const readingTrackerSlice = createSlice({

@@ -11,6 +11,7 @@ import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/c
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
+import { getJuzNumberByHizb } from 'src/utils/juz';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
@@ -18,7 +19,7 @@ const ContextMenu = () => {
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
-  const { verseKey, chapterId, page } = useSelector(selectLastReadVerseKey, shallowEqual);
+  const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
       if (direction === ScrollDirection.Up && !isExpanded) {
@@ -33,6 +34,9 @@ const ContextMenu = () => {
   const chapterData = useMemo(() => {
     return chapterId ? getChapterData(chapterId) : null;
   }, [chapterId]);
+  const juzNumber = useMemo(() => {
+    return hizb ? getJuzNumberByHizb(Number(hizb)) : null;
+  }, [hizb]);
   // if it's SSR or the first time we render this
   if (!verseKey) {
     return <></>;
@@ -56,11 +60,13 @@ const ContextMenu = () => {
           <div className={styles.rowsContainer}>
             <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
               <p className={styles.col}>{chapterData.translatedName.name}</p>
-              <p className={styles.col}>Page {page}</p>
+              <p className={styles.col}>
+                Hizb {hizb} - Juz {juzNumber}
+              </p>
             </div>
             <div className={styles.row}>
               <p className={classNames(styles.col, styles.bold)}>{chapterData.nameSimple}</p>
-              <p className={classNames(styles.col, styles.bold)}>Verse {verse}</p>
+              <p className={styles.col}>Page {page}</p>
             </div>
           </div>
         </div>

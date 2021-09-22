@@ -9,6 +9,7 @@ import styles from './TafsirView.module.scss';
 
 import VerseText from 'src/components/Verse/VerseText';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getVerseWords } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -19,7 +20,7 @@ const TafsirView: React.FC<Props> = ({ verse }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   return (
     <div className={styles.container}>
-      <VerseText words={verse.words} />
+      <VerseText words={getVerseWords(verse)} />
       {verse.tafsirs?.map((tafsir) => (
         <div key={tafsir.id}>
           {tafsir.resourceName && <p className={styles.tafsirName}>{tafsir.resourceName}</p>}
