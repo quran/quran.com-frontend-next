@@ -61,7 +61,7 @@ const ContextMenu = () => {
             <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
               <p className={styles.col}>{chapterData.translatedName.name}</p>
               <p className={styles.col}>
-                Hizb {hizb} - Juz {juzNumber}
+                Juz {juzNumber} - Hizb {hizb}
               </p>
             </div>
             <div className={styles.row}>
