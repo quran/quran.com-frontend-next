@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import groupLinesByVerses from './groupLinesByVerses';
-import LineWithHighlight from './LineWithHighlight';
+import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
@@ -36,12 +36,7 @@ const Page = ({ verses, page }: PageProps) => {
       className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
       {Object.keys(lines).map((key) => (
-        <LineWithHighlight
-          lineKey={key}
-          words={lines[key]}
-          key={key}
-          isBigTextLayout={isBigTextLayout}
-        />
+        <Line lineKey={key} words={lines[key]} key={key} isBigTextLayout={isBigTextLayout} />
       ))}
       <PageFooter page={page} />
     </div>
