@@ -13,7 +13,11 @@ const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
   if (!isVerseBookmarked) return null;
 
   return (
-    <Button type={ButtonType.Secondary} onClick={() => dispatch(toggleVerseBookmark(verseKey))}>
+    <Button
+      type={ButtonType.Secondary}
+      onClick={() => dispatch(toggleVerseBookmark(verseKey))}
+      tooltip="Remove bookmark"
+    >
       <StarIcon />
     </Button>
   );
