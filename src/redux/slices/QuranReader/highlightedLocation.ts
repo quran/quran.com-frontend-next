@@ -39,6 +39,11 @@ export const selectIsWordHighlighted = (wordLocation: string) => (state: RootSta
     selectHighlightedLocation(state);
   return `${highlightedChapter}:${highlightedVerse}:${highlightedWord}` === wordLocation;
 };
+export const selectIsLineHighlighted = (verseKeys: string[]) => (state: RootState) => {
+  const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
+
+  return verseKeys.includes(`${highlightedChapter}:${highlightedVerse}`);
+};
 
 export const { setHighlightedLocation } = highlightedLocation.actions;
 export default highlightedLocation.reducer;

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useSelector } from 'react-redux';
 
 import QuranWord, { QuranWordProps } from 'src/components/dls/QuranWord/QuranWord';
@@ -18,4 +20,4 @@ const QuranWordWithHighlight = ({ word, font, isWordByWordAllowed }: QuranWordPr
   );
 };
 
-export default QuranWordWithHighlight;
+export default React.memo(QuranWordWithHighlight);

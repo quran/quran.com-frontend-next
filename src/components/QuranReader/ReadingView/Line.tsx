@@ -7,7 +7,7 @@ import styles from './Line.module.scss';
 import VerseText from 'src/components/Verse/VerseText';
 import Word from 'types/Word';
 
-type LineProps = {
+export type LineProps = {
   words: Word[];
   lineKey: string;
   isBigTextLayout: boolean;

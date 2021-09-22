@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import isCenterAlignedPage from './pageUtils';
-import QuranReaderWithHighlight from './QuranReaderWithHighlight';
+import QuranReaderWithHighlight from './QuranWordWithHighlight';
 import styles from './VerseText.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
