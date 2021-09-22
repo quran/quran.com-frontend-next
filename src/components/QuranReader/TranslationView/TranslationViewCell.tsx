@@ -7,7 +7,7 @@ import styles from './TranslationViewCell.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Separator from 'src/components/dls/Separator/Separator';
-import OverflowVerseActions from 'src/components/Verse/OverflowVerseActions';
+import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
@@ -48,7 +48,7 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
               />
             </div>
             <div className={styles.actionItem}>
-              <OverflowVerseActions verse={verse} />
+              <OverflowVerseActionsMenu verse={verse} />
             </div>
           </div>
         </div>

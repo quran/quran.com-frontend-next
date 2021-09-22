@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
@@ -8,6 +8,7 @@ import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
+import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
@@ -16,8 +17,10 @@ import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 import styles from './VerseActionsMenu.module.scss';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 
+import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Link from 'src/components/dls/Link/Link';
 import Modal from 'src/components/dls/Modal/Modal';
+import Popover from 'src/components/dls/Popover';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getWindowOrigin } from 'src/utils/url';
@@ -90,51 +93,59 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const shouldShowGoToAyah = router.asPath !== verseUrl;
 
   return (
-    <div className={styles.container}>
-      <VerseActionsMenuItem
-        title={isCopied ? 'Copied!' : 'Copy'}
-        icon={<CopyIcon />}
-        onClick={onCopyClicked}
-      />
+    <Popover
+      trigger={
+        <Button tooltip="Actions menu" type={ButtonType.Secondary}>
+          <OverflowMenu />
+        </Button>
+      }
+    >
+      <div className={styles.container}>
+        <VerseActionsMenuItem
+          title={isCopied ? 'Copied!' : 'Copy'}
+          icon={<CopyIcon />}
+          onClick={onCopyClicked}
+        />
 
-      <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
-        <VerseAdvancedCopy verse={verse}>
-          {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
-            <>
-              <Modal.Body>
-                <Modal.Header>
-                  <Modal.Title>Advanced Copy</Modal.Title>
-                </Modal.Header>
-                {ayahSelectionComponent}
-              </Modal.Body>
-              <Modal.Footer>
-                <Modal.Action isDisabled={loading} onClick={onCopy}>
-                  {loading ? <Spinner /> : actionText}
-                </Modal.Action>
-              </Modal.Footer>
-            </>
-          )}
-        </VerseAdvancedCopy>
-      </Modal>
+        <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
+          <VerseAdvancedCopy verse={verse}>
+            {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
+              <>
+                <Modal.Body>
+                  <Modal.Header>
+                    <Modal.Title>Advanced Copy</Modal.Title>
+                  </Modal.Header>
+                  {ayahSelectionComponent}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Modal.Action isDisabled={loading} onClick={onCopy}>
+                    {loading ? <Spinner /> : actionText}
+                  </Modal.Action>
+                </Modal.Footer>
+              </>
+            )}
+          </VerseAdvancedCopy>
+        </Modal>
 
-      <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
-      <VerseActionsMenuItem
-        title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
-        icon={<ShareIcon />}
-        onClick={onShareClicked}
-      />
-      <VerseActionsMenuItem
-        title={isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
-        icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
-        onClick={onToggleBookmarkClicked}
-      />
+        <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
+        <VerseActionsMenuItem
+          title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
+          icon={<ShareIcon />}
+          onClick={onShareClicked}
+        />
+        <VerseActionsMenuItem
+          title={isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
+          icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
+          onClick={onToggleBookmarkClicked}
+        />
 
-      {shouldShowGoToAyah && (
-        <Link href={verseUrl}>
-          <VerseActionsMenuItem title="Go to Ayah" icon={<LinkIcon />} />
-        </Link>
-      )}
-    </div>
+        {shouldShowGoToAyah && (
+          <Link href={verseUrl}>
+            <VerseActionsMenuItem title="Go to Ayah" icon={<LinkIcon />} />
+          </Link>
+        )}
+      </div>
+    </Popover>
   );
 };
 
