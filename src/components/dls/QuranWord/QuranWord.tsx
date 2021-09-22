@@ -10,6 +10,7 @@ import TextWord from './TextWord';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import Wrapper from 'src/components/Wrapper/Wrapper';
+import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
@@ -32,7 +33,7 @@ const getGlyph = (word: Word, font: QuranFont) => {
   return word.codeV2;
 };
 
-const QuranWord = ({ word, font, isHighlighted, isWordByWordAllowed = true }: QuranWordProps) => {
+const QuranWord = ({ word, font, isWordByWordAllowed = true }: QuranWordProps) => {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
@@ -41,6 +42,11 @@ const QuranWord = ({ word, font, isHighlighted, isWordByWordAllowed = true }: Qu
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
+  // creating wordLocation instead of using `word.location` because
+  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
+  const wordLocation = `${word.verseKey}:${word.position}`;
+
+  const isHighlighted = useSelector(selectIsWordHighlighted(wordLocation));
 
   if (isQCFFont(font)) {
     wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
@@ -59,10 +65,6 @@ const QuranWord = ({ word, font, isHighlighted, isWordByWordAllowed = true }: Qu
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = isHighlighted || isTooltipOpened;
-
-  // creating wordLocation instead of using `word.location` because
-  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
-  const wordLocation = `${word.verseKey}:${word.position}`;
 
   const tooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),

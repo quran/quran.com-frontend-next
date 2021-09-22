@@ -8,6 +8,7 @@ import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
+import { selectHighlightedLocation } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from 'types/Verse';
@@ -29,6 +30,7 @@ const Page = ({ verses, page }: PageProps) => {
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   const isBigTextLayout = isWordByWordLayout || quranTextFontScale > 3;
+  const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
 
   return (
     <div
@@ -36,7 +38,15 @@ const Page = ({ verses, page }: PageProps) => {
       className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
       {Object.keys(lines).map((key) => (
-        <Line lineKey={key} words={lines[key]} key={key} isBigTextLayout={isBigTextLayout} />
+        <Line
+          lineKey={key}
+          words={lines[key]}
+          key={key}
+          isBigTextLayout={isBigTextLayout}
+          isHighlighted={lines[key].some(
+            (word) => word.verseKey === `${highlightedChapter}:${highlightedVerse}`,
+          )}
+        />
       ))}
       <PageFooter page={page} />
     </div>
