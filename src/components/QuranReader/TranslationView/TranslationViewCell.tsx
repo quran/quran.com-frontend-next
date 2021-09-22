@@ -11,7 +11,6 @@ import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseActions from 'src/components/Verse/VerseActions';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -23,7 +22,6 @@ type TranslationViewCellProps = {
 
 const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const reciter = useSelector(selectReciter, shallowEqual);
 
   return (
     <div>
@@ -47,7 +45,6 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
               <PlayVerseAudioButton
                 timestamp={verse.timestamps.timestampFrom}
                 chapterId={Number(verse.chapterId)}
-                reciterId={reciter.id}
               />
             </div>
             <div className={styles.actionItem}>
