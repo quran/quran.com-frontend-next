@@ -10,7 +10,6 @@ import TextWord from './TextWord';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
@@ -21,7 +20,7 @@ import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 
-type QuranWordProps = {
+export type QuranWordProps = {
   word: Word;
   font?: QuranFont;
   isHighlighted?: boolean;
@@ -33,7 +32,7 @@ const getGlyph = (word: Word, font: QuranFont) => {
   return word.codeV2;
 };
 
-const QuranWord = ({ word, font, isWordByWordAllowed = true }: QuranWordProps) => {
+const QuranWord = ({ word, font, isWordByWordAllowed = true, isHighlighted }: QuranWordProps) => {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
@@ -42,11 +41,10 @@ const QuranWord = ({ word, font, isWordByWordAllowed = true }: QuranWordProps) =
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
+
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
   const wordLocation = `${word.verseKey}:${word.position}`;
-
-  const isHighlighted = useSelector(selectIsWordHighlighted(wordLocation));
 
   if (isQCFFont(font)) {
     wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
