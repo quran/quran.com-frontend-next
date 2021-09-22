@@ -7,7 +7,8 @@ import styles from './TranslationViewCell.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Separator from 'src/components/dls/Separator/Separator';
-import VerseActions from 'src/components/Verse/VerseActions';
+import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
+import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -22,6 +23,7 @@ type TranslationViewCellProps = {
 
 const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+
   return (
     <div>
       {verse.verseNumber === 1 && (
@@ -47,7 +49,13 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
           </div>
           <div className={styles.actionContainerRight}>
             <div className={styles.actionItem}>
-              <VerseActions verse={verse} />
+              <PlayVerseAudioButton
+                timestamp={verse.timestamps.timestampFrom}
+                chapterId={Number(verse.chapterId)}
+              />
+            </div>
+            <div className={styles.actionItem}>
+              <OverflowVerseActionsMenu verse={verse} />
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .highlightedContainer {
   background: var(--color-background-alternative);
 }
@@ -45,10 +47,10 @@
   justify-content: flex-end;
 }
 
-.actionContainerLeft > .actionItem + .actionItem {
-  margin-left: var(--spacing-small);
-}
-
+.actionContainerLeft > .actionItem + .actionItem,
 .actionContainerRight > .actionItem + .actionItem {
-  margin-right: var(--spacing-small);
+  margin-left: var(--spacing-small);
+  @include breakpoints.tablet {
+    margin-left: var(--spacing-medium);
+  }
 }
