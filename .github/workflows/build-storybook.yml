@@ -35,6 +35,8 @@ jobs:
           path: storybook-static
       - name: Commit updates
         run: |
+          git checkout gh-pages
+          git pull --no-edit
           mkdir -p storybook
           rm -rf storybook/${GITHUB_REF##*/}
           mv storybook-static storybook/${GITHUB_REF##*/}
@@ -42,7 +44,6 @@ jobs:
           git status
           git diff --cached --quiet && echo 'No changes. Exiting!' && exit 0
           git commit -m "Deploy storybook for ${GITHUB_REF##*/}."
-          git pull --no-edit --quiet
           git push origin gh-pages
         env:
           GIT_AUTHOR_EMAIL: ${{ github.actor }}@users.noreply.github.com

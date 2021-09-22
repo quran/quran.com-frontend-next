@@ -2,20 +2,29 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
 
+interface LastReadVerse {
+  verseKey: string;
+  chapterId: string;
+  page: string;
+  hizb: string;
+}
+
 export type ReadingTracker = {
-  lastReadVerseKey: string;
+  lastReadVerse: LastReadVerse;
 };
 
-const initialState: ReadingTracker = { lastReadVerseKey: null };
+const initialState: ReadingTracker = {
+  lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
+};
 
 export const readingTrackerSlice = createSlice({
   name: 'readingTracker',
   initialState,
   reducers: {
-    setLastReadVerse: (state: ReadingTracker, action: PayloadAction<string>) => {
+    setLastReadVerse: (state: ReadingTracker, action: PayloadAction<LastReadVerse>) => {
       return {
         ...state,
-        lastReadVerseKey: action.payload,
+        lastReadVerse: action.payload,
       };
     },
   },
@@ -23,6 +32,6 @@ export const readingTrackerSlice = createSlice({
 
 export const { setLastReadVerse } = readingTrackerSlice.actions;
 
-export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerseKey;
+export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerse;
 
 export default readingTrackerSlice.reducer;

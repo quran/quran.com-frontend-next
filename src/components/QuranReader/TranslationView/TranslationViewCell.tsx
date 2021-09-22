@@ -13,6 +13,7 @@ import VerseActions from 'src/components/Verse/VerseActions';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getVerseWords } from 'src/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
@@ -25,7 +26,13 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   return (
     <div>
-      {verse.verseNumber === 1 && <ChapterHeader chapterId={String(verse.chapterId)} />}
+      {verse.verseNumber === 1 && (
+        <ChapterHeader
+          chapterId={String(verse.chapterId)}
+          pageNumber={verse.pageNumber}
+          hizbNumber={verse.hizbNumber}
+        />
+      )}
       <div
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
@@ -49,7 +56,7 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
 
         <div className={styles.contentContainer}>
           <div className={styles.arabicVerseContainer}>
-            <VerseText words={verse.words} />
+            <VerseText words={getVerseWords(verse)} />
           </div>
           {verse.translations?.map((translation: Translation) => (
             <div key={translation.id} className={styles.verseTranslationContainer}>

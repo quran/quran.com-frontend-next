@@ -1,5 +1,6 @@
 import groupBy from 'lodash/groupBy';
 
+import { getVerseWords } from 'src/utils/verse';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
 
@@ -16,13 +17,11 @@ import Word from 'types/Word';
  * @returns {Record<string, Word[]}
  */
 const groupLinesByVerses = (verses: Verse[]): Record<string, Word[]> => {
-  const words = [];
+  let words = [];
 
   // Flattens the verses into an array of words
   verses.forEach((verse) => {
-    verse.words.forEach((word) => {
-      words.push(word);
-    });
+    words = [...words, ...getVerseWords(verse)];
   });
 
   // Groups the words based on their (page and) line number

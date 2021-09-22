@@ -3,6 +3,9 @@ import range from 'lodash/range';
 import { getAllChaptersData } from './chapter';
 import * as sampleVerse from './sample-verse.json';
 
+import Verse from 'types/Verse';
+import Word from 'types/Word';
+
 const COLON_SPLITTER = ':';
 
 /**
@@ -188,10 +191,40 @@ export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record
   return sortedObject;
 };
 
+/**
+ * make verseKey from chapterNumber and verseNumber, example "1:5"
+ *
+ * @param {number} chapterNumber
+ * @param {number} verseNumber
+ * @returns
+ */
+
 export const makeVerseKey = (chapterNumber: number, verseNumber: number): string => {
   return `${chapterNumber}:${verseNumber}`;
 };
 
+/**
+ * make wordLocation from verseKey and wordPosition, example "1:1:2"
+ *
+ * @param {string} verseKey
+ * @param {string} wordPosition
+ * @returns {string} wordLocation
+ */
 export const makeWordLocation = (verseKey: string, wordPosition: number): string => {
   return `${verseKey}:${wordPosition}`;
+};
+
+/**
+ * Get the words of each verse. This can be used to extend
+ * the BE response of each word to add custom fields.
+ *
+ * @param {Verse} verse
+ * @returns {Word[]}
+ */
+export const getVerseWords = (verse: Verse): Word[] => {
+  const words = [];
+  verse.words.forEach((word) => {
+    words.push({ ...word, hizbNumber: verse.hizbNumber });
+  });
+  return words;
 };

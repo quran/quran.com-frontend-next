@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -80,11 +80,16 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // because we already have call the API in settings menu. useSWR will save it to cache.
   // in this component, we will get the data from the cache.
   // so, no rerender, no layout shift.
-  const { data: availableTranslations } = useSWRImmutable(makeTranslationsUrl(lang), () =>
+  const { data: translationsResponse } = useSWRImmutable(makeTranslationsUrl(lang), () =>
     getAvailableTranslations(lang).then((res) => {
       throwIfError(res);
-      return res.translations;
+      return res;
     }),
+  );
+
+  const availableTranslations = useMemo(
+    () => translationsResponse?.translations ?? [],
+    [translationsResponse],
   );
 
   useEffect(() => {

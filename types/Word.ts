@@ -15,6 +15,7 @@ interface Word {
   codeV1?: string;
   codeV2?: string;
   pageNumber?: number;
+  hizbNumber?: number;
   lineNumber?: number;
   position: number;
   location?: string;

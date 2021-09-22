@@ -2,19 +2,36 @@
 @use "src/styles/breakpoints";
 
 .container {
-  background: #ffb800;
+  background: var(--color-background-alternative);
+  color: var(--color-text-default);
   text-align: center;
   position: fixed;
-  z-index: var(--z-index-default);
+  z-index: var(--z-index-sticky);
   transition: var(--transition-regular);
   width: 100%;
   top: 0;
-  height: var(--spacing-medium);
+  min-height: var(--spacing-medium);
   @include breakpoints.tablet {
     top: constants.$navbar-height;
     transition: var(--transition-regular);
     margin-right: 0;
   }
+  &:after {
+    display: block;
+    content: "";
+    width: var(--progress);
+    transition: var(--transition-fast);
+    transition-timing-function: linear;
+    height: var(--spacing-micro);
+    background: var(--color-success-deep);
+    position: absolute;
+    bottom: calc(-1 * var(--spacing-micro));
+  }
+}
+
+.hide {
+  height: 0;
+  visibility: hidden;
 }
 
 .visibleContainer {
@@ -22,7 +39,7 @@
 }
 
 .expandedContainer {
-  height: var(--spacing-mega);
+  min-height: var(--spacing-mega);
 }
 
 .withVisibleSideBar {
@@ -30,4 +47,46 @@
     margin-right: constants.$notes-side-bar-desktop-width;
     width: calc(100% - #{constants.$notes-side-bar-desktop-width});
   }
+}
+
+.sectionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-micro);
+}
+
+.leftSection {
+  width: 80%;
+  @include breakpoints.tablet {
+    width: 50%;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chapter {
+  font-size: var(--font-size-large);
+  width: 20%;
+  @include breakpoints.tablet {
+    width: 10%;
+  }
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.rowsContainer {
+  width: 90%;
+}
+
+.row {
+  display: flex;
+  text-align: left;
+}
+
+.col {
+  flex: 1;
 }
