@@ -30,7 +30,7 @@ interface Props {
 
 const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 
-const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
+const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const dispatch = useDispatch();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const [isCopied, setIsCopied] = useState(false);
@@ -138,4 +138,4 @@ const VerseActionsMenu: React.FC<Props> = ({ verse }) => {
   );
 };
 
-export default VerseActionsMenu;
+export default OverflowVerseActionsMenu;

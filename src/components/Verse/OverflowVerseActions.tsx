@@ -3,7 +3,7 @@
 
 import OverflowMenu from '../../../public/icons/menu_more_horiz.svg';
 
-import VerseActionsMenu from './VerseActionsMenu';
+import OverflowVerseActionsMenu from './OverflowVerseActionsMenu';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Popover from 'src/components/dls/Popover';
@@ -15,7 +15,7 @@ interface Props {
   verse: Verse;
 }
 
-const VerseActions: React.FC<Props> = ({ verse }) => (
+const OverflowVerseActions: React.FC<Props> = ({ verse }) => (
   <>
     <Popover
       trigger={
@@ -24,8 +24,8 @@ const VerseActions: React.FC<Props> = ({ verse }) => (
         </Button>
       }
     >
-      <VerseActionsMenu verse={verse} />
+      <OverflowVerseActionsMenu verse={verse} />
     </Popover>
   </>
 );
-export default VerseActions;
+export default OverflowVerseActions;
