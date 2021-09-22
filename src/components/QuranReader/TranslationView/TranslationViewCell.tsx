@@ -1,3 +1,5 @@
+import React from 'react';
+
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -80,4 +82,4 @@ const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps)
   );
 };
 
-export default TranslationViewCell;
+export default React.memo(TranslationViewCell);

@@ -34,5 +34,16 @@ const highlightedLocation = createSlice({
 });
 
 export const selectHighlightedLocation = (state: RootState) => state.highlightedLocation;
+export const selectIsWordHighlighted = (wordLocation: string) => (state: RootState) => {
+  const { highlightedChapter, highlightedVerse, highlightedWord } =
+    selectHighlightedLocation(state);
+  return `${highlightedChapter}:${highlightedVerse}:${highlightedWord}` === wordLocation;
+};
+export const selectIsLineHighlighted = (verseKeys: string[]) => (state: RootState) => {
+  const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
+
+  return verseKeys.includes(`${highlightedChapter}:${highlightedVerse}`);
+};
+
 export const { setHighlightedLocation } = highlightedLocation.actions;
 export default highlightedLocation.reducer;

@@ -27,6 +27,7 @@ const SearchResultItem: React.FC<Props> = ({ result }) => (
                 key={`${result.verseKey}:${index + 1}`}
                 word={word}
                 isWordByWordAllowed={false}
+                isAudioHighlightingAllowed={false}
               />
             ))}
           </div>

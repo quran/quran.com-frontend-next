@@ -192,6 +192,29 @@ export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record
 };
 
 /**
+ * make verseKey from chapterNumber and verseNumber, example "1:5"
+ *
+ * @param {number} chapterNumber
+ * @param {number} verseNumber
+ * @returns
+ */
+
+export const makeVerseKey = (chapterNumber: number, verseNumber: number): string => {
+  return `${chapterNumber}:${verseNumber}`;
+};
+
+/**
+ * make wordLocation from verseKey and wordPosition, example "1:1:2"
+ *
+ * @param {string} verseKey
+ * @param {string} wordPosition
+ * @returns {string} wordLocation
+ */
+export const makeWordLocation = (verseKey: string, wordPosition: number): string => {
+  return `${verseKey}:${wordPosition}`;
+};
+
+/**
  * Get the words of each verse. This can be used to extend
  * the BE response of each word to add custom fields.
  *
