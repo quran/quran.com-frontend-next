@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 
 import QuranWord, { QuranWordProps } from 'src/components/dls/QuranWord/QuranWord';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
+import { makeWordLocation } from 'src/utils/verse';
 
 const QuranWordWithHighlight = ({ word, font, isWordByWordAllowed }: QuranWordProps) => {
-  const wordLocation = `${word.verseKey}:${word.position}`;
+  const wordLocation = makeWordLocation(word.verseKey, word.position);
   const isHighlighted = useSelector(selectIsWordHighlighted(wordLocation));
 
   return (

@@ -7,6 +7,7 @@ import TranslationViewCell from './TranslationViewCell';
 
 import { selectHighlightedLocation } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { makeVerseKey } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
 type TranslationViewProps = {
@@ -15,16 +16,16 @@ type TranslationViewProps = {
 };
 
 const TranslationView = ({ verses }: TranslationViewProps) => {
-  const highlightedLocation = useSelector(selectHighlightedLocation, shallowEqual);
+  const { highlightedChapter, highlightedVerse } = useSelector(
+    selectHighlightedLocation,
+    shallowEqual,
+  );
   return (
     <div className={styles.container}>
       {verses.map((verse) => (
         <TranslationViewCell
           verse={verse}
-          isHighlighted={
-            verse.verseKey ===
-            `${highlightedLocation.highlightedChapter}:${highlightedLocation.highlightedVerse}`
-          }
+          isHighlighted={verse.verseKey === makeVerseKey(highlightedChapter, highlightedVerse)}
           key={verse.id}
         />
       ))}

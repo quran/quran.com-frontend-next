@@ -16,6 +16,7 @@ import {
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
+import { makeWordLocation } from 'src/utils/verse';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -42,10 +43,6 @@ const QuranWord = ({ word, font, isWordByWordAllowed = true, isHighlighted }: Qu
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
 
-  // creating wordLocation instead of using `word.location` because
-  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
-  const wordLocation = `${word.verseKey}:${word.position}`;
-
   if (isQCFFont(font)) {
     wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
   } else if (word.charTypeName !== CharType.Pause) {
@@ -63,6 +60,10 @@ const QuranWord = ({ word, font, isWordByWordAllowed = true, isHighlighted }: Qu
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
   // will be highlighted either if it's explicitly set to be so or when the tooltip is open.
   const shouldBeHighLighted = isHighlighted || isTooltipOpened;
+
+  // creating wordLocation instead of using `word.location` because
+  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
+  const wordLocation = makeWordLocation(word.verseKey, word.position);
 
   const tooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),

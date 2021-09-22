@@ -187,3 +187,11 @@ export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record
     });
   return sortedObject;
 };
+
+export const makeVerseKey = (chapterNumber: number, verseNumber: number): string => {
+  return `${chapterNumber}:${verseNumber}`;
+};
+
+export const makeWordLocation = (verseKey: string, wordPosition: number): string => {
+  return `${verseKey}:${wordPosition}`;
+};
