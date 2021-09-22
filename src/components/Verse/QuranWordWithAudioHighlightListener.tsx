@@ -6,7 +6,11 @@ import QuranWord, { QuranWordProps } from 'src/components/dls/QuranWord/QuranWor
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { makeWordLocation } from 'src/utils/verse';
 
-const QuranWordWithHighlight = ({ word, font, isWordByWordAllowed }: QuranWordProps) => {
+const QuranWordWithAudioHighlightListener = ({
+  word,
+  font,
+  isWordByWordAllowed,
+}: QuranWordProps) => {
   const wordLocation = makeWordLocation(word.verseKey, word.position);
   const isHighlighted = useSelector(selectIsWordHighlighted(wordLocation));
 
@@ -21,4 +25,4 @@ const QuranWordWithHighlight = ({ word, font, isWordByWordAllowed }: QuranWordPr
   );
 };
 
-export default React.memo(QuranWordWithHighlight);
+export default React.memo(QuranWordWithAudioHighlightListener);
