@@ -54,7 +54,7 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
             <div className={styles.actionItem}>
               <PlayVerseAudioButton
                 timestamp={verse.timestamps.timestampFrom}
-                chapterId={Number(verse.chapterId)}
+                verseKey={verse.verseKey}
               />
             </div>
             <div className={styles.actionItem}>
