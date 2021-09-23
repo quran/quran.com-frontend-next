@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { RefObject, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsM
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
+import useScroll, { SCROLL_TO_NEAREST_ELEMENT } from 'src/hooks/useScrollToElement';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getVerseWords } from 'src/utils/verse';
@@ -27,8 +28,17 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
 
+  const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
+    useScroll(SCROLL_TO_NEAREST_ELEMENT);
+
+  useEffect(() => {
+    if (isHighlighted) {
+      scrollToSelectedItem();
+    }
+  }, [isHighlighted, scrollToSelectedItem]);
+
   return (
-    <div>
+    <div ref={selectedItemRef}>
       {verse.verseNumber === 1 && (
         <ChapterHeader
           chapterId={String(verse.chapterId)}
