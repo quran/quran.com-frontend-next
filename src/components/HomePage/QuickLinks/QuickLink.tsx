@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonType } from 'src/components/dls/Button/Button';
 
 interface Props {
   slug: string;
@@ -9,12 +9,7 @@ interface Props {
 }
 
 const QuickLink: React.FC<Props> = ({ text, slug, className }) => (
-  <Button
-    className={className}
-    href={`/${slug}`}
-    variant={ButtonVariant.Shadow}
-    type={ButtonType.Secondary}
-  >
+  <Button className={className} href={`/${slug}`} type={ButtonType.Secondary}>
     {text}
   </Button>
 );

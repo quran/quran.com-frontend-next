@@ -1,14 +1,12 @@
-@use "src/styles/breakpoints";
-
-.container {
-  padding-bottom: var(--spacing-large);
+.sessionsContainer {
+  padding: var(--spacing-large) 0;
 }
 
-.header {
+.sessionsHeader {
   margin-bottom: var(--spacing-xsmall);
 }
 
-.quickLinksContainer {
+.verseLinksContainer {
   display: flex;
   align-items: center;
   overflow-y: scroll;
@@ -19,9 +17,7 @@
 
 .button {
   margin: 0 var(--spacing-micro);
-  @include breakpoints.smallerThanTablet {
-    > span {
-      width: max-content;
-    }
+  > span {
+    width: max-content;
   }
 }
