@@ -20,4 +20,11 @@ export default {
       lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
     },
   }),
+  6: (state) => ({
+    ...state,
+    readingTracker: {
+      ...state.readingTracker,
+      recentReadingSessions: {},
+    },
+  }),
 };

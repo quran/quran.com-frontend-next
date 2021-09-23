@@ -43,7 +43,7 @@ const QuickLinks: React.FC = () => (
           key={quickLink.slug}
           slug={quickLink.slug}
           text={quickLink.text}
-          className={styles.quickLink}
+          className={styles.button}
         />
       ))}
     </div>
