@@ -13,6 +13,7 @@ import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsM
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
+import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getVerseWords } from 'src/utils/verse';
 import Translation from 'types/Translation';
@@ -20,11 +21,11 @@ import Verse from 'types/Verse';
 
 type TranslationViewCellProps = {
   verse: Verse;
-  isHighlighted: boolean;
 };
 
-const TranslationViewCell = ({ verse, isHighlighted }: TranslationViewCellProps) => {
+const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
 
   return (
     <div>
