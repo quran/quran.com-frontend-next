@@ -107,6 +107,9 @@ const useMemoizedHighlightedWordLocation = (
   const lastHighlightedWordLocation = useRef<Segment>(null);
   if (!currentHighlightedVerseTiming) return null;
 
+  // do not highlight verse when currentTime is 0
+  if (currentTime === 0) return null;
+
   if (lastHighlightedWordLocation.current) {
     const [, timestampFrom, timestampTo] = lastHighlightedWordLocation.current;
     if (isCurrentTimeInRange(currentTime, timestampFrom, timestampTo))
@@ -153,9 +156,9 @@ const getHighlightedLocation = (
  * check if currentTime is within range timestampFrom and timestampTo
  *
  * example:
- * - timestampFrom = 0, timestampTo = 10, currentTime = 0 should return false
- * - timestampFrom = 0, timestampTo = 10, currentTime = 1 should return true
- * - timestampFrom = 0, timestampTo = 10, currentTime = 10 should return true
+ * - timestampFrom = 10, timestampTo = 20, currentTime = 10 should return true
+ * - timestampFrom = 10, timestampTo = 20, currentTime = 11 should return true
+ * - timestampFrom = 10, timestampTo = 20, currentTime = 20 should return false
  *
  * @param {number} currentTime
  * @param {number} timestampFrom
@@ -163,6 +166,6 @@ const getHighlightedLocation = (
  * @returns {boolean} isWithinRange
  */
 const isCurrentTimeInRange = (currentTime: number, timestampFrom: number, timestampTo: number) =>
-  currentTime > timestampFrom && currentTime <= timestampTo;
+  currentTime >= timestampFrom && currentTime < timestampTo;
 
 export default QuranReaderHighlightDispatcher;
