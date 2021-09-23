@@ -4,16 +4,11 @@ import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import Spinner from '../dls/Spinner/Spinner';
 
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import {
-  selectReciter,
-  playFrom,
-  selectVerseAudioStatus,
-  VerseAudioStatus,
-} from 'src/redux/slices/AudioPlayer/state';
+import { selectReciter, playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
@@ -23,17 +18,10 @@ interface PlayVerseAudioProps {
 const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
-  const verseAudioStatus = useSelector(selectVerseAudioStatus(verseKey));
+  const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
 
-  if (verseAudioStatus === VerseAudioStatus.Loading)
-    return (
-      <Button tooltip="Pause" type={ButtonType.Secondary} onClick={triggerPauseAudio}>
-        <Spinner />
-      </Button>
-    );
-
-  if (verseAudioStatus === VerseAudioStatus.Playing)
+  if (isVerseBeingPlayed)
     return (
       <Button tooltip="Pause" type={ButtonType.Secondary} onClick={triggerPauseAudio}>
         <PauseIcon />
