@@ -25,7 +25,6 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const verseAudioStatus = useSelector(selectVerseAudioStatus(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
-  console.log(verseAudioStatus, verseKey);
 
   if (verseAudioStatus === VerseAudioStatus.Loading)
     return (
