@@ -10,6 +10,7 @@ import ChaptersList from 'src/components/chapters/ChaptersList';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import QuickLinks from 'src/components/HomePage/QuickLinks';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
+import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { ChaptersResponse } from 'types/ApiResponses';
 
@@ -30,6 +31,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
       <HomePageWelcomeMessage />
       <QuickLinks />
       <BookmarkedVersesList />
+      <RecentReadingSessions />
       <ChaptersList chapters={chapters} />
     </div>
   </div>

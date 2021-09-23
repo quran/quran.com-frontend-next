@@ -1,0 +1,19 @@
+@use "src/styles/breakpoints";
+
+.sessionsContainer {
+  padding: var(--spacing-large) 0;
+}
+
+.sessionsHeader {
+  margin-bottom: var(--spacing-xsmall);
+}
+
+.verseLinksContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--spacing-small);
+  @include breakpoints.tablet {
+    display: flex;
+    align-items: center;
+  }
+}

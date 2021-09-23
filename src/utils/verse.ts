@@ -1,6 +1,7 @@
+/* eslint-disable react-func/max-lines-per-function */
 import range from 'lodash/range';
 
-import { getAllChaptersData } from './chapter';
+import { getAllChaptersData, getChapterData } from './chapter';
 import * as sampleVerse from './sample-verse.json';
 
 import Verse from 'types/Verse';
@@ -227,4 +228,65 @@ export const getVerseWords = (verse: Verse): Word[] => {
     words.push({ ...word, hizbNumber: verse.hizbNumber });
   });
   return words;
+};
+
+/**
+ * Calculate how far apart 2 verses are from each other. The order of the verses
+ * won't matter as we swap them if they are not in the same order of the Mushaf.
+ *
+ * @param {string} firstVerseKey
+ * @param {string} secondVerseKey
+ *
+ * @returns {number}
+ */
+export const getDistanceBetweenVerses = (firstVerseKey: string, secondVerseKey: string): number => {
+  // eslint-disable-next-line prefer-const
+  let [firstChapterString, firstVerseNumberString] =
+    getVerseAndChapterNumbersFromKey(firstVerseKey);
+  const [secondChapterString, secondVerseNumberString] =
+    getVerseAndChapterNumbersFromKey(secondVerseKey);
+  let firstChapterNumber = Number(firstChapterString);
+  let secondChapterNumber = Number(secondChapterString);
+  let firstVerseNumber = Number(firstVerseNumberString);
+  let secondVerseNumber = Number(secondVerseNumberString);
+  // if they are within the same chapter
+  if (firstChapterNumber === secondChapterNumber) {
+    if (firstVerseNumber > secondVerseNumber) {
+      return firstVerseNumber - secondVerseNumber;
+    }
+    return secondVerseNumber - firstVerseNumber;
+  }
+  // if the first verse chapter is after the second, we swap them to match the same order in the Mushaf
+  if (firstChapterNumber > secondChapterNumber) {
+    [
+      firstVerseNumber,
+      secondVerseNumber,
+      firstChapterNumber,
+      secondChapterNumber,
+      firstChapterString,
+    ] = [
+      secondVerseNumber,
+      firstVerseNumber,
+      secondChapterNumber,
+      firstChapterNumber,
+      secondChapterString,
+    ];
+  }
+  let distance = 0;
+  // if there is more than 1 full chapter in between the verses' chapters being checked, we sum the number of verses in each chapter.
+  if (secondChapterNumber - firstChapterNumber > 1) {
+    for (
+      let currentChapterId = firstChapterNumber + 1;
+      currentChapterId < secondChapterNumber;
+      currentChapterId += 1
+    ) {
+      distance += getChapterData(String(currentChapterId)).versesCount;
+    }
+  }
+  /*
+    1. we add the number of verses from beginning of the second verse's chapter -> the verse itself.
+    2. we add the difference between the last verse of the first verse's chapter and the first verse itself.
+  */
+  distance += secondVerseNumber + getChapterData(firstChapterString).versesCount - firstVerseNumber;
+  return distance;
 };

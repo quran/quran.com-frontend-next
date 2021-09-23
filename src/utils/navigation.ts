@@ -1,3 +1,4 @@
+import { getChapterData } from './chapter';
 import { getVerseAndChapterNumbersFromKey } from './verse';
 
 import { SearchNavigationType } from 'types/SearchNavigationResult';
@@ -11,6 +12,19 @@ import { SearchNavigationType } from 'types/SearchNavigationResult';
 export const getVerseNavigationUrl = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterId}/${verseNumber}`;
+};
+
+/**
+ * Get the href link to a the range of verses from a specific verse
+ * to the end of the chapter.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getFromVerseToEndOfChapterNavigationUrl = (verseKey: string): string => {
+  const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const lastVerseOfChapter = getChapterData(chapterId).versesCount;
+  return `/${chapterId}/${verseNumber}-${lastVerseOfChapter}`;
 };
 
 /**
