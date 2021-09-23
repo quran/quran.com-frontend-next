@@ -107,7 +107,7 @@ const useMemoizedHighlightedWordLocation = (
   const lastHighlightedWordLocation = useRef<Segment>(null);
   if (!currentHighlightedVerseTiming) return null;
 
-  // do not highlight verse when currentTime is 0
+  // Do not highlight the verse when the audio hasn't started playing
   if (currentTime === 0) return null;
 
   if (lastHighlightedWordLocation.current) {
