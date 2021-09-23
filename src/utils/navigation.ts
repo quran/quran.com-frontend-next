@@ -21,7 +21,7 @@ export const getVerseNavigationUrl = (verseKey: string): string => {
  * @param {string} verseKey
  * @returns {string}
  */
-export const getFromVerseToEndOfChapterNavigationUrl = (verseKey: string): string => {
+export const getVerseToEndOfChapterNavigationUrl = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const lastVerseOfChapter = getChapterData(chapterId).versesCount;
   return `/${chapterId}/${verseNumber}-${lastVerseOfChapter}`;

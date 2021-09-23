@@ -7,7 +7,7 @@ import styles from './RecentReadingSessions.module.scss';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
-import { getFromVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
+import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 const RecentReadingSessions = () => {
@@ -24,7 +24,7 @@ const RecentReadingSessions = () => {
               const surahName = getChapterData(chapterId).nameSimple;
               return (
                 <Button
-                  href={getFromVerseToEndOfChapterNavigationUrl(verseKey)}
+                  href={getVerseToEndOfChapterNavigationUrl(verseKey)}
                   type={index === 0 ? ButtonType.Primary : ButtonType.Secondary}
                   key={verseKey}
                   className={styles.button}
