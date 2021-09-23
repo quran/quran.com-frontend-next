@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DEFAULT_RECITER } from './defaultData';
@@ -9,7 +10,9 @@ import {
   triggerPauseAudio,
 } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
+import { selectHighlightedLocation } from 'src/redux/slices/QuranReader/highlightedLocation';
 import resetSettings from 'src/redux/slices/reset-settings';
+import { makeVerseKey } from 'src/utils/verse';
 import AudioFile from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
@@ -17,6 +20,12 @@ export enum AudioFileStatus {
   Ready = 'Ready',
   Loading = 'Loading',
   NoFile = 'NoFile',
+}
+
+export enum VerseAudioStatus {
+  Playing = 'playing',
+  Paused = 'paused',
+  Loading = 'loading',
 }
 
 export type AudioState = {
@@ -47,6 +56,21 @@ export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPl
 export const selectIsExpanded = (state: RootState) => state.audioPlayerState.isExpanded;
 export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
   state.audioPlayerState.isMobileMinimizedForScrolling;
+export const selectVerseAudioStatus =
+  (verseKey: string) =>
+  (state: RootState): VerseAudioStatus => {
+    const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
+    const audioFileStatus = selectAudioFileStatus(state);
+    const isAudioPlaying = selectIsPlaying(state);
+
+    const isVerseHighlighted = makeVerseKey(highlightedChapter, highlightedVerse) === verseKey;
+
+    if (isVerseHighlighted && audioFileStatus === AudioFileStatus.Loading)
+      return VerseAudioStatus.Loading;
+    if (isVerseHighlighted && isAudioPlaying) return VerseAudioStatus.Playing;
+
+    return VerseAudioStatus.Paused;
+  };
 
 /**
  * get the audio file for the current reciter

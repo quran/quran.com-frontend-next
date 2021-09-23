@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
-import { selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { makeVerseKey } from 'src/utils/verse';
 
 export type HighlightedLocationState = {
@@ -49,12 +48,6 @@ export const selectIsLineHighlighted = (verseKeys: string[]) => (state: RootStat
 export const selectIsVerseHighlighted = (verseKey: string) => (state: RootState) => {
   const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
   return verseKey === makeVerseKey(highlightedChapter, highlightedVerse);
-};
-export const selectIsVerseBeingPlayed = (verseKey: string) => (state: RootState) => {
-  const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
-  const isAudioPlaying = selectIsPlaying(state);
-
-  return isAudioPlaying && makeVerseKey(highlightedChapter, highlightedVerse) === verseKey;
 };
 
 export const { setHighlightedLocation } = highlightedLocation.actions;
