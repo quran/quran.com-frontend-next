@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import { makeVerseKey } from 'src/utils/verse';
 
 export type HighlightedLocationState = {
   highlightedChapter: number | null;
@@ -43,6 +44,10 @@ export const selectIsLineHighlighted = (verseKeys: string[]) => (state: RootStat
   const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
 
   return verseKeys.includes(`${highlightedChapter}:${highlightedVerse}`);
+};
+export const selectIsVerseHighlighted = (verseKey: string) => (state: RootState) => {
+  const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
+  return verseKey === makeVerseKey(highlightedChapter, highlightedVerse);
 };
 
 export const { setHighlightedLocation } = highlightedLocation.actions;
