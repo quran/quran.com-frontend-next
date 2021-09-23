@@ -30,8 +30,8 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
     <div className={styles.listContainer}>
       <HomePageWelcomeMessage />
       <QuickLinks />
-      <BookmarkedVersesList />
       <RecentReadingSessions />
+      <BookmarkedVersesList />
       <ChaptersList chapters={chapters} />
     </div>
   </div>

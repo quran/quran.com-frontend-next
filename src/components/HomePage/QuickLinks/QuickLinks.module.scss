@@ -9,18 +9,19 @@
 }
 
 .quickLinksContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-small);
-  @include breakpoints.tablet {
-    display: flex;
-    align-items: center;
-    gap: inherit;
+  display: flex;
+  align-items: center;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
   }
 }
 
-.quickLinksContainer > .quickLink + .quickLink {
-  @include breakpoints.tablet {
-    margin-left: var(--spacing-small);
+.button {
+  margin: 0 var(--spacing-micro);
+  @include breakpoints.smallerThanTablet {
+    > span {
+      width: max-content;
+    }
   }
 }

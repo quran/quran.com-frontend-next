@@ -231,6 +231,21 @@ export const getVerseWords = (verse: Verse): Word[] => {
 };
 
 /**
+ * Calculate the number of verses in a range of chapters.
+ *
+ * @param {number} startChapter
+ * @param {number} endChapter
+ * @returns {number}
+ */
+const getNumberOfVersesInRangeOfChapters = (startChapter: number, endChapter: number): number => {
+  let total = 0;
+  for (let currentChapterId = startChapter; currentChapterId < endChapter; currentChapterId += 1) {
+    total += getChapterData(String(currentChapterId)).versesCount;
+  }
+  return total;
+};
+
+/**
  * Calculate how far apart 2 verses are from each other. The order of the verses
  * won't matter as we swap them if they are not in the same order of the Mushaf.
  *
@@ -275,18 +290,13 @@ export const getDistanceBetweenVerses = (firstVerseKey: string, secondVerseKey: 
   let distance = 0;
   // if there is more than 1 full chapter in between the verses' chapters being checked, we sum the number of verses in each chapter.
   if (secondChapterNumber - firstChapterNumber > 1) {
-    for (
-      let currentChapterId = firstChapterNumber + 1;
-      currentChapterId < secondChapterNumber;
-      currentChapterId += 1
-    ) {
-      distance += getChapterData(String(currentChapterId)).versesCount;
-    }
+    distance += getNumberOfVersesInRangeOfChapters(firstChapterNumber + 1, secondChapterNumber);
   }
   /*
     1. we add the number of verses from beginning of the second verse's chapter -> the verse itself.
     2. we add the difference between the last verse of the first verse's chapter and the first verse itself.
   */
-  distance += secondVerseNumber + getChapterData(firstChapterString).versesCount - firstVerseNumber;
-  return distance;
+  return (
+    distance + secondVerseNumber + getChapterData(firstChapterString).versesCount - firstVerseNumber
+  );
 };
