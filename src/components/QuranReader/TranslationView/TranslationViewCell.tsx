@@ -14,7 +14,7 @@ import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SCROLL_TO_CENTER_SCREEN } from 'src/hooks/useScrollToElement';
-import { selectIsAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
+import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getVerseWords } from 'src/utils/verse';
@@ -28,7 +28,7 @@ type TranslationViewCellProps = {
 const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
-  const isAutoScrolling = useSelector(selectIsAutoScrolling);
+  const isAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_CENTER_SCREEN);
