@@ -7,6 +7,7 @@ import styles from './Line.module.scss';
 
 import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SCROLL_TO_CENTER_SCREEN } from 'src/hooks/useScrollToElement';
+import { selectIsAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import Word from 'types/Word';
 
@@ -20,12 +21,13 @@ const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => {
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_CENTER_SCREEN);
+  const isAutoScrolling = useSelector(selectIsAutoScrolling);
 
   useEffect(() => {
-    if (isHighlighted) {
+    if (isHighlighted && isAutoScrolling) {
       scrollToSelectedItem();
     }
-  }, [isHighlighted, scrollToSelectedItem]);
+  }, [isHighlighted, scrollToSelectedItem, isAutoScrolling]);
 
   return (
     <div
