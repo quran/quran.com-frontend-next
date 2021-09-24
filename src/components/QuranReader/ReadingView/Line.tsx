@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import styles from './Line.module.scss';
 
 import VerseText from 'src/components/Verse/VerseText';
-import useScroll, { SCROLL_TO_NEAREST_ELEMENT } from 'src/hooks/useScrollToElement';
+import useScroll, { SCROLL_TO_CENTER_SCREEN } from 'src/hooks/useScrollToElement';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import Word from 'types/Word';
 
@@ -19,7 +19,7 @@ export type LineProps = {
 const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => {
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SCROLL_TO_NEAREST_ELEMENT);
+    useScroll(SCROLL_TO_CENTER_SCREEN);
 
   useEffect(() => {
     if (isHighlighted) {

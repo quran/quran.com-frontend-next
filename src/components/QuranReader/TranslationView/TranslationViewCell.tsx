@@ -13,7 +13,7 @@ import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsM
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
-import useScroll, { SCROLL_TO_NEAREST_ELEMENT } from 'src/hooks/useScrollToElement';
+import useScroll, { SCROLL_TO_CENTER_SCREEN } from 'src/hooks/useScrollToElement';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getVerseWords } from 'src/utils/verse';
@@ -29,7 +29,7 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SCROLL_TO_NEAREST_ELEMENT);
+    useScroll(SCROLL_TO_CENTER_SCREEN);
 
   useEffect(() => {
     if (isHighlighted) {

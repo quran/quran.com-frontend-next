@@ -23,8 +23,8 @@ export const useScrollToElement = <T extends HTMLElement>(
   return [executeScroll, elementRef];
 };
 
-export const SCROLL_TO_NEAREST_ELEMENT = {
-  block: 'nearest', // 'block' relates to vertical alignment. see: https://stackoverflow.com/a/48635751/1931451 for nearest.
+export const SCROLL_TO_CENTER_SCREEN = {
+  block: 'center', // 'block' relates to vertical alignment. see: https://stackoverflow.com/a/48635751/1931451 for nearest.
 } as ScrollIntoViewOptions;
 
 export default useScrollToElement;
