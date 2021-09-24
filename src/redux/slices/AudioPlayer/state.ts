@@ -26,9 +26,11 @@ export type AudioState = {
   audioFileStatus: AudioFileStatus;
   isExpanded: boolean;
   isMobileMinimizedForScrolling: boolean;
+  enableAutoScrolling: boolean;
 };
 
 const initialState: AudioState = {
+  enableAutoScrolling: true,
   isPlaying: false,
   audioFile: null,
   reciter: DEFAULT_RECITER,
@@ -47,6 +49,8 @@ export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPl
 export const selectIsExpanded = (state: RootState) => state.audioPlayerState.isExpanded;
 export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
   state.audioPlayerState.isMobileMinimizedForScrolling;
+export const selectEnableAutoScrolling = (state: RootState) =>
+  state.audioPlayerState.enableAutoScrolling;
 
 /**
  * get the audio file for the current reciter
@@ -156,6 +160,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       isExpanded: action.payload,
     }),
+    setEnableAutoScrolling: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      enableAutoScrolling: action.payload,
+    }),
     resetAudioFile: (state) => ({
       ...state,
       audioFile: initialState.audioFile,
@@ -180,6 +188,7 @@ export const {
   setIsExpanded,
   resetAudioFile,
   setIsMobileMinimizedForScrolling,
+  setEnableAutoScrolling,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;
