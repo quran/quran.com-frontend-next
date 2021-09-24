@@ -9,9 +9,9 @@ import DataFetcher from 'src/components/DataFetcher';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import {
-  selectIsAutoScrolling,
+  selectEnableAutoScrolling,
   selectReciter,
-  setIsAutoScrolling,
+  setEnableAutoScrolling,
   setReciterAndPauseAudio,
 } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
@@ -34,7 +34,7 @@ const autoScrollingOptions = generateRadioItems(['On', 'Off']);
 const AudioSection = () => {
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
-  const isAutoScrolling = useSelector(selectIsAutoScrolling);
+  const isAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   // given the reciterId, get the full reciter object.
   // and setReciter in redux
@@ -67,9 +67,9 @@ const AudioSection = () => {
               </div>
             </Section.Row>
             <Section.Row>
-              <Section.Label>Auto Scrolling</Section.Label>
+              <Section.Label>Auto Scroll</Section.Label>
               <RadioGroup
-                onChange={(value) => dispatch(setIsAutoScrolling(value === 'On'))}
+                onChange={(value) => dispatch(setEnableAutoScrolling(value === 'On'))}
                 value={isAutoScrolling ? 'On' : 'Off'}
                 label="view"
                 items={autoScrollingOptions}
