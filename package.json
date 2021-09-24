@@ -34,6 +34,7 @@
     "@radix-ui/react-popover": "^0.1.0",
     "@radix-ui/react-radio-group": "^0.1.0",
     "@radix-ui/react-separator": "^0.1.0",
+    "@radix-ui/react-slider": "^0.1.0",
     "@radix-ui/react-tooltip": "^0.1.0",
     "@radix-ui/react-visually-hidden": "^0.1.0",
     "@reduxjs/toolkit": "^1.6.1",
