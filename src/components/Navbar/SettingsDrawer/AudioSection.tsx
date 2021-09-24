@@ -34,7 +34,7 @@ const autoScrollingOptions = generateRadioItems(['On', 'Off']);
 const AudioSection = () => {
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
-  const isAutoScrolling = useSelector(selectEnableAutoScrolling);
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   // given the reciterId, get the full reciter object.
   // and setReciter in redux
@@ -70,7 +70,7 @@ const AudioSection = () => {
               <Section.Label>Auto Scroll</Section.Label>
               <RadioGroup
                 onChange={(value) => dispatch(setEnableAutoScrolling(value === 'On'))}
-                value={isAutoScrolling ? 'On' : 'Off'}
+                value={enableAutoScrolling ? 'On' : 'Off'}
                 label="view"
                 items={autoScrollingOptions}
                 orientation={RadioGroupOrientation.Horizontal}

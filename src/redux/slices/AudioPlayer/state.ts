@@ -162,7 +162,7 @@ export const audioPlayerStateSlice = createSlice({
     }),
     setEnableAutoScrolling: (state, action: PayloadAction<boolean>) => ({
       ...state,
-      isAutoScrolling: action.payload,
+      enableAutoScrolling: action.payload,
     }),
     resetAudioFile: (state) => ({
       ...state,

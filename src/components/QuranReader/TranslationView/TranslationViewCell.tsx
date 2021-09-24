@@ -28,16 +28,16 @@ type TranslationViewCellProps = {
 const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
-  const isAutoScrolling = useSelector(selectEnableAutoScrolling);
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_CENTER_SCREEN);
 
   useEffect(() => {
-    if (isHighlighted && isAutoScrolling) {
+    if (isHighlighted && enableAutoScrolling) {
       scrollToSelectedItem();
     }
-  }, [isHighlighted, scrollToSelectedItem, isAutoScrolling]);
+  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
 
   return (
     <div ref={selectedItemRef}>

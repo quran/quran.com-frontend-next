@@ -21,13 +21,13 @@ const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => {
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_CENTER_SCREEN);
-  const isAutoScrolling = useSelector(selectEnableAutoScrolling);
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   useEffect(() => {
-    if (isHighlighted && isAutoScrolling) {
+    if (isHighlighted && enableAutoScrolling) {
       scrollToSelectedItem();
     }
-  }, [isHighlighted, scrollToSelectedItem, isAutoScrolling]);
+  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
 
   return (
     <div
