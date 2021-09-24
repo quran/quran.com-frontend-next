@@ -118,3 +118,11 @@
 .currentTimeExpanded {
   display: inline-block;
 }
+
+.hideThumb {
+  span[role="slider"] {
+    @include breakpoints.smallerThanTablet {
+      display: none;
+    }
+  }
+}

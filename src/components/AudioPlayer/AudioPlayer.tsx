@@ -9,6 +9,7 @@ import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 
 import styles from './AudioPlayer.module.scss';
+import AudioPlayerSlider from './AudioPlayerSlider';
 import CloseButton from './CloseButton';
 import { triggerPauseAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
@@ -16,7 +17,6 @@ import MediaSessionApiListeners from './MediaSessionApiListeners';
 import PlaybackControls from './PlaybackControls';
 import PlayPauseButton from './PlayPauseButton';
 import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
-import Slider from './Slider';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
@@ -104,10 +104,6 @@ const AudioPlayer = () => {
 
   return (
     <div
-      role="button"
-      tabIndex={0}
-      onClick={toggleIsExpanded}
-      onKeyPress={toggleIsExpanded}
       className={classNames(styles.container, {
         [styles.containerHidden]: isHidden,
         [styles.containerDefault]: !isExpanded,
@@ -171,7 +167,7 @@ const AudioPlayer = () => {
           </div>
         </div>
         <div className={styles.sliderContainer}>
-          <Slider
+          <AudioPlayerSlider
             audioPlayerElRef={audioPlayerElRef}
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
             isExpanded={isExpanded}
@@ -181,11 +177,21 @@ const AudioPlayer = () => {
         </div>
         <div className={styles.desktopRightActions}>
           {isExpanded ? (
-            <Button tooltip="Minimize" shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+            <Button
+              tooltip="Minimize"
+              shape={ButtonShape.Circle}
+              variant={ButtonVariant.Ghost}
+              onClick={toggleIsExpanded}
+            >
               <UnfoldLessIcon />
             </Button>
           ) : (
-            <Button tooltip="Expand" variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+            <Button
+              tooltip="Expand"
+              variant={ButtonVariant.Ghost}
+              shape={ButtonShape.Circle}
+              onClick={toggleIsExpanded}
+            >
               <UnfoldMoreIcon />
             </Button>
           )}

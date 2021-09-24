@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import * as SliderPrimitive from '@radix-ui/react-slider';
 
@@ -73,4 +73,4 @@ const Slider: React.FC<Props> = ({
     </SliderPrimitive.Slider>
   );
 };
-export default Slider;
+export default memo(Slider);
