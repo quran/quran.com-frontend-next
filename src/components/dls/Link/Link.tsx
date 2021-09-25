@@ -23,7 +23,7 @@ type LinkProps = {
 const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
   <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
     <a
-      href={download ? href : undefined}
+      href={href}
       download={download}
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noreferrer' : undefined}
