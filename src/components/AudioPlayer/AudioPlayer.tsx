@@ -9,6 +9,7 @@ import UnfoldLessIcon from '../../../public/icons/unfold_less.svg';
 import UnfoldMoreIcon from '../../../public/icons/unfold_more.svg';
 
 import styles from './AudioPlayer.module.scss';
+import FindAGoodName from './AudioRepeatManager';
 import CloseButton from './CloseButton';
 import { triggerPauseAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
@@ -133,6 +134,13 @@ const AudioPlayer = () => {
         /> */}
         {reciterId && audioFile?.chapterId && (
           <QuranReaderHighlightDispatcher
+            audioPlayerElRef={audioPlayerElRef}
+            reciterId={reciterId}
+            chapterId={audioFile?.chapterId}
+          />
+        )}
+        {reciterId && audioFile?.chapterId && (
+          <FindAGoodName
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
             chapterId={audioFile?.chapterId}
