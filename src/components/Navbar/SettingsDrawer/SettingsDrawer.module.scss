@@ -10,6 +10,7 @@
   bottom: 0;
   z-index: var(--z-index-header);
   transition: var(--transition-regular);
+  transition-timing-function: ease-in;
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior-y: contain;
@@ -23,6 +24,7 @@
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
+  transition-timing-function: ease-out;
   right: 0;
 }
 

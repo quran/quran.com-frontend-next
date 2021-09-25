@@ -11,6 +11,7 @@
   z-index: var(--z-index-header);
 
   transition: var(--transition-regular);
+  transition-timing-function: ease-in;
 
   overflow-y: auto;
   overflow-x: hidden;
@@ -27,6 +28,7 @@
   box-shadow: var(--shadow-normal);
   background: var(--color-background-default);
   left: 0;
+  transition-timing-function: ease-out;
 
   @include breakpoints.tablet {
     left: 0;
