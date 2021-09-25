@@ -13,4 +13,12 @@ export const secondsFormatter = (seconds: number) => {
   return formattedTime;
 };
 
+/**
+ * Convert milliseconds to seconds.
+ *
+ * @param {number} milliSeconds
+ * @returns  {number}
+ */
+export const milliSecondsToSeconds = (milliSeconds: number): number => milliSeconds / 1000;
+
 export default secondsFormatter;

@@ -67,6 +67,11 @@
     width: 70%;
     position: inherit;
   }
+  span[role="slider"] {
+    @include breakpoints.smallerThanTablet {
+      display: none;
+    }
+  }
 }
 
 .splitsContainerExpanded {
