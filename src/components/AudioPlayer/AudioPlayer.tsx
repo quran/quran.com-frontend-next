@@ -6,8 +6,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioPlayer.module.scss';
 import AudioPlayerSlider from './AudioPlayerSlider';
-import CloseButton from './Buttons/CloseButton';
-import PlayPauseButton from './Buttons/PlayPauseButton';
 import { triggerPauseAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
@@ -32,7 +30,7 @@ const AudioPlayer = () => {
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
-  const { name: reciterName, id: reciterId } = useSelector(selectReciter, shallowEqual);
+  const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const durationInSeconds = audioFile?.duration / 1000 || 0;
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const onDirectionChange = useCallback(
@@ -123,22 +121,11 @@ const AudioPlayer = () => {
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <div
-          className={classNames(styles.actionButtonsContainer, {
-            [styles.defaultAndMinimized]: isMobileMinimizedForScrolling,
-          })}
-        >
-          <div className={styles.mobileCloseButtonContainer}>
-            <PlayPauseButton />
-            <CloseButton />
-          </div>
-        </div>
         <div className={styles.sliderContainer}>
           <AudioPlayerSlider
             audioPlayerElRef={audioPlayerElRef}
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
             audioDuration={durationInSeconds}
-            reciterName={reciterName}
           />
         </div>
       </div>

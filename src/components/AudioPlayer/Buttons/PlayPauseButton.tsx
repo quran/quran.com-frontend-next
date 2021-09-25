@@ -7,7 +7,7 @@ import PlayIcon from '../../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../EventTriggers';
 import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import {
@@ -50,7 +50,6 @@ const PlayPauseButton = () => {
     button = (
       <Button
         tooltip="Loading ..."
-        size={ButtonSize.Large}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(triggerPauseAudio)}
@@ -62,7 +61,6 @@ const PlayPauseButton = () => {
     button = (
       <Button
         tooltip="Pause"
-        size={ButtonSize.Large}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(triggerPauseAudio)}
@@ -75,7 +73,6 @@ const PlayPauseButton = () => {
       <Button
         tooltip="Play"
         shape={ButtonShape.Circle}
-        size={ButtonSize.Large}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(onClickPlay)}
       >

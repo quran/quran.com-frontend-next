@@ -9,7 +9,7 @@ import PlayPauseButton from './Buttons/PlayPauseButton';
 import { triggerSeek } from './EventTriggers';
 import styles from './PlaybackControls.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 
@@ -23,7 +23,6 @@ const PlaybackControls = () => {
         tooltip="Feature coming soon"
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
-        size={ButtonSize.Large}
         disabled
       >
         <RepeatIcon />
@@ -32,7 +31,6 @@ const PlaybackControls = () => {
         tooltip="Rewind 10 seconds"
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
-        size={ButtonSize.Large}
         disabled={isLoading}
         onClick={withStopPropagation(() => triggerSeek(-10))}
       >
@@ -43,7 +41,6 @@ const PlaybackControls = () => {
         tooltip="Fast-forward 10 seconds"
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
-        size={ButtonSize.Large}
         disabled={isLoading}
         onClick={withStopPropagation(() => triggerSeek(10))}
       >

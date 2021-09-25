@@ -4,9 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @include breakpoints.smallerThanTablet {
-    display: none;
-  }
 }
 .container > button + button {
   margin-left: var(--spacing-xsmall);

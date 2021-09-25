@@ -21,7 +21,7 @@
 }
 
 .audioPlayerOpen {
-  margin-bottom: constants.$audio-player-default-height-mobile;
+  margin-bottom: constants.$audio-player-default-height;
   @include breakpoints.tablet {
     margin-bottom: constants.$audio-player-default-height;
   }
