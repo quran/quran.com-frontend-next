@@ -13,8 +13,6 @@ const NUMBER_OF_STEPS = 100;
 
 type SliderProps = {
   audioDuration: number;
-  isExpanded: boolean;
-  reciterName: string;
   isMobileMinimizedForScrolling: boolean;
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
@@ -30,8 +28,6 @@ const AUDIO_THROTTLE_DURATION = 1000;
  */
 const AudioPlayerSlider = ({
   audioDuration,
-  isExpanded,
-  reciterName,
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
@@ -57,23 +53,10 @@ const AudioPlayerSlider = ({
   );
 
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.containerExpanded]: isExpanded,
-        [styles.containerMinimized]: isMobileMinimizedForScrolling,
-      })}
-    >
-      <span
-        className={classNames(styles.currentTime, {
-          [styles.currentTimeExpanded]: isExpanded,
-          [styles.defaultAndMinimized]: isMobileMinimizedForScrolling && !isExpanded,
-        })}
-      >
-        {secondsFormatter(currentTime)}
-      </span>
+    <div className={styles.container}>
+      <span className={styles.currentTime}>{secondsFormatter(currentTime)}</span>
       <div
         className={classNames(styles.splitsContainer, {
-          [styles.splitsContainerExpanded]: isExpanded,
           [styles.splitsContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
@@ -83,14 +66,6 @@ const AudioPlayerSlider = ({
           onValueChange={handleOnValueChange}
           max={NUMBER_OF_STEPS}
         />
-      </div>
-      <div
-        className={classNames(styles.reciterNameContainer, {
-          [styles.reciterNameContainerExpanded]: isExpanded,
-          [styles.reciterNameContainerMinimized]: isMobileMinimizedForScrolling,
-        })}
-      >
-        {reciterName} <br />
       </div>
       <span className={styles.remainingTime}>{secondsFormatter(remainingTime)}</span>
     </div>
