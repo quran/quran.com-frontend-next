@@ -4,10 +4,10 @@ import ForwardIcon from '../../../public/icons/forward_10.svg';
 import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
 import ReplayIcon from '../../../public/icons/replay_10.svg';
 
-import DownloadAudioButton from './DownloadAudioButton';
+import CloseButton from './Buttons/CloseButton';
+import PlayPauseButton from './Buttons/PlayPauseButton';
 import { triggerSeek } from './EventTriggers';
 import styles from './PlaybackControls.module.scss';
-import PlayPauseButton from './PlayPauseButton';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
@@ -49,7 +49,7 @@ const PlaybackControls = () => {
       >
         <ForwardIcon />
       </Button>
-      <DownloadAudioButton />
+      <CloseButton />
     </div>
   );
 };

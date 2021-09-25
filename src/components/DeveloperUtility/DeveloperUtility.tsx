@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import WrenchIcon from '../../../public/icons/wrench.svg';
 
-import AudioPlayerAdjustment from './AudioPlayerAdjustment';
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';
 import NavbarAdjustment from './NavbarAdjustment';
@@ -50,7 +49,6 @@ const DeveloperUtility = (): JSX.Element => {
       </div>
       <NotesAdjustment />
       <NavbarAdjustment />
-      <AudioPlayerAdjustment />
       <ContextMenuAdjustment />
       <div>
         <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>

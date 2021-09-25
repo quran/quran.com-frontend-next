@@ -7,89 +7,50 @@
   display: flex;
   flex-direction: column;
   @include breakpoints.tablet {
-    display: inherit;
     text-align: inherit;
     margin-top: var(--spacing-medium);
-  }
-}
-.containerExpanded {
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: var(--spacing-xxsmall);
-  @include breakpoints.tablet {
+    flex-direction: row;
+    justify-content: space-between;
     padding-bottom: 0;
   }
 }
 
 .containerMinimized {
-  flex-direction: row;
-  justify-content: space-between;
-  padding-bottom: var(--spacing-xxsmall);
-  @include breakpoints.tablet {
-    padding-bottom: 0;
+  @include breakpoints.smallerThanTablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: var(--spacing-xxsmall);
   }
 }
 
 .splitsContainer {
   display: inline-block;
   position: fixed;
-  bottom: constants.$audio-player-default-height;
   left: 50%;
   transform: translate(-50%, 0);
   margin: 0;
   width: 100%;
   height: calc(1.25 * var(--spacing-xxsmall));
   transition: var(--transition-regular);
+  bottom: constants.$audio-player-default-height-mobile;
   @include breakpoints.tablet {
-    left: 0;
-    transform: none;
-    width: 70%;
-    position: inherit;
-    bottom: inherit;
-    margin-left: var(--spacing-medium);
-    margin-right: var(--spacing-medium);
+    bottom: constants.$audio-player-default-height;
   }
 }
 
 .splitsContainerMinimized {
-  left: 50%;
-  margin: 0 auto;
-  width: 100%;
-  transform: translate(-50%, 0);
-  position: fixed;
-  bottom: constants.$audio-player-minimized-height;
-  @include breakpoints.tablet {
-    bottom: inherit;
-    margin-left: var(--spacing-medium);
-    margin-right: var(--spacing-medium);
-    transform: translate(0, 0);
-    position: inherit;
-    width: 70%;
-    position: inherit;
-  }
-  span[role="slider"] {
-    @include breakpoints.smallerThanTablet {
-      display: none;
+  @include breakpoints.smallerThanTablet {
+    left: 50%;
+    margin: 0 auto;
+    width: 100%;
+    transform: translate(-50%, 0);
+    position: fixed;
+    bottom: constants.$audio-player-minimized-height;
+    span[role="slider"] {
+      @include breakpoints.smallerThanTablet {
+        display: none;
+      }
     }
-  }
-}
-
-.splitsContainerExpanded {
-  left: 50%;
-  margin: 0 auto;
-  width: 60%;
-  transform: translate(-50%, 0);
-  margin-bottom: var(--spacing-medium);
-  position: fixed;
-  bottom: inherit;
-
-  @include breakpoints.tablet {
-    margin-left: var(--spacing-medium);
-    margin-right: var(--spacing-medium);
-    transform: translate(0, 0);
-    position: inherit;
-    width: 70%;
-    position: inherit;
   }
 }
 
@@ -100,26 +61,19 @@
   }
 }
 
-.reciterNameContainerExpanded {
-  display: none;
-}
-
 .reciterNameContainerMinimized {
   display: none;
 }
 
 .currentTime {
-  display: none;
-  transition: var(--transition-regular);
-}
-
-.defaultAndMinimized {
-  display: inline-block;
-  @include breakpoints.tablet {
+  @include breakpoints.smallerThanTablet {
     display: none;
+    transition: var(--transition-regular);
   }
 }
 
-.currentTimeExpanded {
-  display: inline-block;
+.defaultAndMinimized {
+  @include breakpoints.smallerThanTablet {
+    display: inline-block;
+  }
 }

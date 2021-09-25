@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
-import DownloadIcon from '../../../public/icons/download.svg';
+import DownloadIcon from '../../../../public/icons/download.svg';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
