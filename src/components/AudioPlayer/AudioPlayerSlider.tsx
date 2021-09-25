@@ -2,9 +2,9 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import classNames from 'classnames';
 
+import styles from './AudioPlayerSlider.module.scss';
 import { triggerSetCurrentTime } from './EventTriggers';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
-import styles from './Slider.module.scss';
 
 import Slider from 'src/components/dls/Slider';
 import { secondsFormatter, milliSecondsToSeconds } from 'src/utils/datetime';
@@ -32,7 +32,6 @@ const AudioPlayerSlider = ({
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
-  const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0;
   const [currentStep, setCurrentStep] = useState(0);
   const audioDurationMilliSeconds = useMemo(
@@ -53,11 +52,15 @@ const AudioPlayerSlider = ({
   );
 
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.containerMinimized]: isMobileMinimizedForScrolling,
+      })}
+    >
       <span className={styles.currentTime}>{secondsFormatter(currentTime)}</span>
       <div
-        className={classNames(styles.splitsContainer, {
-          [styles.splitsContainerMinimized]: isMobileMinimizedForScrolling,
+        className={classNames(styles.sliderContainer, {
+          [styles.sliderContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         <Slider
@@ -67,7 +70,7 @@ const AudioPlayerSlider = ({
           max={NUMBER_OF_STEPS}
         />
       </div>
-      <span className={styles.remainingTime}>{secondsFormatter(remainingTime)}</span>
+      <span className={styles.remainingTime}>{secondsFormatter(audioDuration)}</span>
     </div>
   );
 };
