@@ -47,7 +47,9 @@ const AudioPlayerSlider = ({
   const currentSteps = useMemo(() => [currentStep], [currentStep]);
   const handleOnValueChange = useCallback(
     (newValue: number[]) => {
-      triggerSetCurrentTime(getNewCurrentTime(newValue[0], audioDurationMilliSeconds));
+      const [newStep] = newValue;
+      setCurrentStep(newStep);
+      triggerSetCurrentTime(getNewCurrentTime(newStep, audioDurationMilliSeconds));
     },
     [audioDurationMilliSeconds],
   );
