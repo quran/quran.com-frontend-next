@@ -17,6 +17,11 @@
   &[data-disabled] {
     cursor: not-allowed;
   }
+
+  // target each thumb since the first child is the track itself
+  span:not(:first-child) {
+    transition: var(--transition);
+  }
 }
 
 .track {
@@ -37,6 +42,7 @@
   position: absolute;
   background-color: var(--color-background-inverse);
   height: 100%;
+  transition: var(--transition);
 }
 
 .thumb {

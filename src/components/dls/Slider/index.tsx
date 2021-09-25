@@ -28,6 +28,7 @@ interface Props {
   minStepsBetweenThumbs?: number;
   onValueChange?: (value: number[]) => void;
   showThumbs?: boolean;
+  transitionDuration?: number;
 }
 
 const Slider: React.FC<Props> = ({
@@ -44,11 +45,14 @@ const Slider: React.FC<Props> = ({
   defaultValue,
   value,
   showThumbs = true,
+  transitionDuration = 0,
 }) => {
   const values = value || defaultValue;
 
   return (
     <SliderPrimitive.Slider
+      // @ts-ignore
+      style={{ '--transition': `all ${transitionDuration}s ease` }} // this is to pass the value to css so it can be used to show the progress bar.
       className={styles.slider}
       min={min}
       max={max}

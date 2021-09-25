@@ -39,23 +39,24 @@ const AudioPlayerSlider = ({
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0;
   const [currentStep, setCurrentStep] = useState(0);
-  const audioDurationMilliSeconds = useMemo(
-    () => milliSecondsToSeconds(audioDuration),
-    [audioDuration],
-  );
+  const audioDurationSeconds = useMemo(() => milliSecondsToSeconds(audioDuration), [audioDuration]);
   useEffect(() => {
-    setCurrentStep(getCurrentStep(currentTime, isAudioLoaded, audioDurationMilliSeconds));
-  }, [currentTime, isAudioLoaded, audioDurationMilliSeconds]);
+    setCurrentStep(getCurrentStep(currentTime, isAudioLoaded, audioDurationSeconds));
+  }, [currentTime, isAudioLoaded, audioDurationSeconds]);
   const currentSteps = useMemo(() => [currentStep], [currentStep]);
   const handleOnValueChange = useCallback(
     (newValue: number[]) => {
       const [newStep] = newValue;
       setCurrentStep(newStep);
-      triggerSetCurrentTime(getNewCurrentTime(newStep, audioDurationMilliSeconds));
+      triggerSetCurrentTime(getNewCurrentTime(newStep, audioDurationSeconds));
     },
-    [audioDurationMilliSeconds],
+    [audioDurationSeconds],
   );
 
+  const transitionDuration = useMemo(
+    () => Number(getTransitionDuration(audioDurationSeconds)),
+    [audioDurationSeconds],
+  );
   return (
     <div
       className={classNames(styles.container, {
@@ -78,6 +79,7 @@ const AudioPlayerSlider = ({
         })}
       >
         <Slider
+          transitionDuration={transitionDuration}
           label="audio-player"
           value={currentSteps}
           onValueChange={handleOnValueChange}
@@ -96,6 +98,15 @@ const AudioPlayerSlider = ({
     </div>
   );
 };
+
+/**
+ * Get the transition duration of the thumb and the track of the Slider.
+ *
+ * @param {number} audioDurationSeconds
+ * @returns {string}
+ */
+const getTransitionDuration = (audioDurationSeconds: number): string =>
+  (audioDurationSeconds / NUMBER_OF_STEPS).toFixed(1);
 
 /**
  * Get the current step that the slider needs to be set to.

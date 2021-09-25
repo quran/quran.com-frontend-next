@@ -16,6 +16,7 @@ export default {
     orientation: Orientation.Horizontal,
     disabled: false,
     showThumbs: true,
+    transitionDuration: 1,
   },
 
   argTypes: {
@@ -86,6 +87,13 @@ export default {
       description: 'Whether we should show any thumbs or not.',
       options: [true, false],
       control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+    },
+    transitionDuration: {
+      description: 'The transition duration of the thumb and track of the slider.',
+      control: { type: 'number' },
       table: {
         category: 'Optional',
       },
