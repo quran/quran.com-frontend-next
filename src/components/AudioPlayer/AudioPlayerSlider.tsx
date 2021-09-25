@@ -1,16 +1,15 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import classNames from 'classnames';
-import range from 'lodash/range';
 
 import { triggerSetCurrentTime } from './EventTriggers';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 import styles from './Slider.module.scss';
 
 import Slider from 'src/components/dls/Slider';
-import { secondsFormatter } from 'src/utils/datetime';
+import { secondsFormatter, milliSecondsToSeconds } from 'src/utils/datetime';
 
-const NUMBER_OF_SPLITS = 100;
+const NUMBER_OF_STEPS = 100;
 
 type SliderProps = {
   audioDuration: number;
@@ -21,8 +20,8 @@ type SliderProps = {
 };
 
 /**
- * The slider is divided into {NUMBER_OF_SPLITS} splits. These splits represent
- * the audio playback completion and are used for seeking audio at a particular time.
+ * The slider is divided into {NUMBER_OF_STEPS} steps. These steps represent
+ * the audio slider's steps that the user can slide through.
  *
  * @param {SliderProps} props
  * @returns {JSX.Element}
@@ -34,31 +33,23 @@ const AudioPlayerSlider = ({
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
-  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
+  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, 1000);
   const remainingTime = audioDuration - currentTime;
-  const isAudioLoaded = audioDuration !== 0; // placeholder check until we're able to retrieve the value from redux
-  const [currentSplits, setCurrentSplits] = useState<number[]>([0]);
-
-  const splitsStartTime = useMemo(
-    () =>
-      range(0, NUMBER_OF_SPLITS).map((index) => (audioDuration / NUMBER_OF_SPLITS / 1000) * index),
+  const isAudioLoaded = audioDuration !== 0;
+  const [currentStep, setCurrentStep] = useState(0);
+  const audioDurationMilliSeconds = useMemo(
+    () => milliSecondsToSeconds(audioDuration),
     [audioDuration],
   );
-
   useEffect(() => {
-    setCurrentSplits((prevSplits) =>
-      getCurrentSplit(splitsStartTime, isAudioLoaded, currentTime, prevSplits),
-    );
-  }, [splitsStartTime, isAudioLoaded, currentTime]);
-
+    setCurrentStep(getCurrentStep(currentTime, isAudioLoaded, audioDurationMilliSeconds));
+  }, [currentTime, isAudioLoaded, audioDurationMilliSeconds]);
+  const currentSteps = useMemo(() => [currentStep], [currentStep]);
   const handleOnValueChange = useCallback(
     (newValue: number[]) => {
-      const [newSplit] = newValue;
-      if (newSplit !== currentSplits[0]) {
-        triggerSetCurrentTime(splitsStartTime[newValue[0]]);
-      }
+      triggerSetCurrentTime(getNewCurrentTime(newValue[0], audioDurationMilliSeconds));
     },
-    [currentSplits, splitsStartTime],
+    [audioDurationMilliSeconds],
   );
 
   return (
@@ -79,15 +70,14 @@ const AudioPlayerSlider = ({
       <div
         className={classNames(styles.splitsContainer, {
           [styles.splitsContainerExpanded]: isExpanded,
-          [styles.hideThumb]: !isExpanded,
           [styles.splitsContainerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         <Slider
           label="audio-player"
-          value={currentSplits}
+          value={currentSteps}
           onValueChange={handleOnValueChange}
-          max={NUMBER_OF_SPLITS}
+          max={NUMBER_OF_STEPS}
         />
       </div>
       <div
@@ -104,51 +94,28 @@ const AudioPlayerSlider = ({
 };
 
 /**
- * Detect which split we should pick by looping through each split and
- * checking which 2 consecutive splits the currentTime lies between (inclusive)
- * and picking the first of the two. e.g. :
+ * Get the current step that the slider needs to be set to.
  *
- * - currentTime = 5.3 seconds
- * - splitsStartTime = [1, 3.5, 5.6, 7.2]
- *
- * since 5.3 lies between 3.5 and 5.6 then the current split should be the one that is
- * represented by 3.5 which in this case 2 (index+1).
- *
- * This is needed when the currentTime changes not in the order of the startTime of the splits
- * for example when:
- *
- * - Seeking forward or backwards.
- * - Re-playing the current Surah.
- * - Changing the Surah entirely.
- *
- * @param {number[]} splitsStartTime the startTime of the splits
- * @param {boolean} isAudioLoaded whether the audio has been loaded or not.
- * @param {number} currentTime the current playing time.
- * @param {number[]} prevSplits the previous value of the `currentSplits` state
- * @returns {number[]}
+ * @param {number} currentTime
+ * @param {boolean} isAudioLoaded
+ * @param {number} audioDurationMilliSeconds
+ * @returns {number}
  */
-const getCurrentSplit = (
-  splitsStartTime: number[],
-  isAudioLoaded: boolean,
+const getCurrentStep = (
   currentTime: number,
-  prevSplits: number[],
-): number[] => {
-  const [currentSplit] = prevSplits;
-  // if the audio didn't load yet
-  if (!isAudioLoaded) {
-    // bail out of a state update by passing the previous array so that the Slider only re-renders on split change and not on currentTime change
-    return currentSplit === 0 ? prevSplits : [0];
-  }
-  let newSplit = 0;
-  for (let index = 0; index < splitsStartTime.length - 1; index += 1) {
-    // if the current time lies between the current iteration's split and the next one, then pick the current iteration's split
-    if (currentTime >= splitsStartTime[index] && currentTime <= splitsStartTime[index + 1]) {
-      newSplit = index + 1;
-      break;
-    }
-  }
-  // bail out of a state update by passing the previous array so that the Slider only re-renders on split change and not on currentTime change
-  return currentSplit === newSplit ? prevSplits : [newSplit];
-};
+  isAudioLoaded: boolean,
+  audioDurationMilliSeconds: number,
+): number =>
+  isAudioLoaded ? Math.floor((currentTime * NUMBER_OF_STEPS) / audioDurationMilliSeconds) : 0;
+
+/**
+ * Calculate the new current time the needs the audioPlayer needs to be set to.
+ *
+ * @param {number} newStep
+ * @param {number} audioDurationMilliSeconds
+ * @returns {number}
+ */
+const getNewCurrentTime = (newStep: number, audioDurationMilliSeconds: number): number =>
+  (newStep * audioDurationMilliSeconds) / NUMBER_OF_STEPS;
 
 export default AudioPlayerSlider;
