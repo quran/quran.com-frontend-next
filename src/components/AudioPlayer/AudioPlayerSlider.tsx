@@ -19,6 +19,8 @@ type SliderProps = {
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
 
+const AUDIO_THROTTLE_DURATION = 1000;
+
 /**
  * The slider is divided into {NUMBER_OF_STEPS} steps. These steps represent
  * the audio slider's steps that the user can slide through.
@@ -33,7 +35,7 @@ const AudioPlayerSlider = ({
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
-  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, 1000);
+  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
   const remainingTime = audioDuration - currentTime;
   const isAudioLoaded = audioDuration !== 0;
   const [currentStep, setCurrentStep] = useState(0);

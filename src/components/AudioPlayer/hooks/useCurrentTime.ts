@@ -4,7 +4,7 @@ import throttle from 'lodash/throttle';
 
 const useAudioPlayerCurrentTime = (
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>,
-  throttlingWaitTime = 0,
+  throttlingTime = 0,
 ) => {
   const [currentTime, setCurrentTime] = useState(0); // TODO: get current time from last session
 
@@ -15,16 +15,21 @@ const useAudioPlayerCurrentTime = (
   }, [audioPlayerElRef]);
 
   const updateCurrentTimeThrottled = useMemo(
-    () => throttle(updateCurrentTime, throttlingWaitTime),
-    [updateCurrentTime, throttlingWaitTime],
+    () => throttle(updateCurrentTime, throttlingTime),
+    [updateCurrentTime, throttlingTime],
   );
+
+  const onTimeUpdate = useCallback(() => {
+    return throttlingTime === 0 ? updateCurrentTime() : updateCurrentTimeThrottled();
+  }, [throttlingTime, updateCurrentTime, updateCurrentTimeThrottled]);
+
   useEffect(() => {
     const audioPlayerEl = audioPlayerElRef.current;
     if (!audioPlayerEl) return null;
 
-    audioPlayerEl.addEventListener('timeupdate', updateCurrentTimeThrottled);
-    return () => audioPlayerEl.removeEventListener('timeupdate', updateCurrentTimeThrottled);
-  }, [audioPlayerElRef, updateCurrentTimeThrottled]);
+    audioPlayerEl.addEventListener('timeupdate', onTimeUpdate);
+    return () => audioPlayerEl.removeEventListener('timeupdate', onTimeUpdate);
+  }, [audioPlayerElRef, onTimeUpdate]);
 
   return currentTime;
 };
