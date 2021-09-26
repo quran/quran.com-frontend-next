@@ -77,24 +77,23 @@ const AudioPlayerSlider = ({
  *
  * @param {number} currentTime
  * @param {boolean} isAudioLoaded
- * @param {number} audioDurationMilliSeconds
+ * @param {number} audioDuration
  * @returns {number}
  */
 const getCurrentStep = (
   currentTime: number,
   isAudioLoaded: boolean,
-  audioDurationMilliSeconds: number,
-): number =>
-  isAudioLoaded ? Math.floor((currentTime * NUMBER_OF_STEPS) / audioDurationMilliSeconds) : 0;
+  audioDuration: number,
+): number => (isAudioLoaded ? Math.floor((currentTime * NUMBER_OF_STEPS) / audioDuration) : 0);
 
 /**
  * Calculate the new current time the needs the audioPlayer needs to be set to.
  *
  * @param {number} newStep
- * @param {number} audioDurationMilliSeconds
+ * @param {number} audioDuration
  * @returns {number}
  */
-const getNewCurrentTime = (newStep: number, audioDurationMilliSeconds: number): number =>
-  (newStep * audioDurationMilliSeconds) / NUMBER_OF_STEPS;
+const getNewCurrentTime = (newStep: number, audioDuration: number): number =>
+  (newStep * audioDuration) / NUMBER_OF_STEPS;
 
 export default AudioPlayerSlider;
