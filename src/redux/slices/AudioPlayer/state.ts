@@ -87,6 +87,7 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
 export const setReciterAndPauseAudio = createAsyncThunk<void, Reciter, { state: RootState }>(
   'audioPlayerState/setReciterAndPlayAudio',
   async (reciter, thunkAPI) => {
+    thunkAPI.dispatch(setAudioStatus(AudioFileStatus.Loading));
     triggerPauseAudio();
 
     thunkAPI.dispatch(setReciter(reciter));
