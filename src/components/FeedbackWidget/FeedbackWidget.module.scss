@@ -15,7 +15,7 @@
     margin-bottom: constants.$audio-player-minimized-height;
     bottom: var(--spacing-medium);
     @include breakpoints.tablet {
-      margin-bottom: constants.$audio-player-default-height;
+      margin-bottom: constants.$audio-player-default-desktop-height;
     }
   }
 }
@@ -23,7 +23,7 @@
 .audioPlayerOpen {
   margin-bottom: constants.$audio-player-default-height;
   @include breakpoints.tablet {
-    margin-bottom: constants.$audio-player-default-height;
+    margin-bottom: constants.$audio-player-default-desktop-height;
   }
   bottom: var(--spacing-medium);
 }

@@ -2,15 +2,34 @@
 @use "src/styles/constants";
 
 .container {
-  margin-top: var(--spacing-xsmall);
+  margin-top: var(--spacing-xxsmall);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   color: var(--color-text-faded);
   font-size: var(--font-size-small);
+  min-height: var(
+    --font-size-small
+  ); // prevents CLS when the current/total time are not loaded yet
+  margin-bottom: calc(-1 * var(--spacing-xsmall));
+  transition: var(--transition-regular);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal);
+    min-height: var(
+      --font-size-normal
+    ); // prevents CLS when the current/total time are not loaded yet
+    margin-top: var(--spacing-medium);
+    margin-bottom: calc(-2 * var(--spacing-small));
+  }
 }
 
-.splitsContainer {
+.containerMinimized {
+  @include breakpoints.smallerThanTablet {
+    margin-bottom: 0;
+  }
+}
+
+.sliderContainer {
   display: inline-block;
   position: fixed;
   left: 50%;
@@ -21,11 +40,11 @@
   transition: var(--transition-regular);
   bottom: constants.$audio-player-default-height;
   @include breakpoints.tablet {
-    bottom: constants.$audio-player-default-height;
+    bottom: constants.$audio-player-default-desktop-height;
   }
 }
 
-.splitsContainerMinimized {
+.sliderContainerMinimized {
   @include breakpoints.smallerThanTablet {
     left: 50%;
     margin: 0 auto;
