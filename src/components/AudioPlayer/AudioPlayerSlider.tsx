@@ -30,9 +30,10 @@ const AudioPlayerSlider = ({
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
-  const audioDuration = audioPlayerElRef.current?.duration;
+  const audioDuration = audioPlayerElRef?.current?.duration || 0;
 
   const isAudioLoaded = audioDuration !== 0;
+
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
