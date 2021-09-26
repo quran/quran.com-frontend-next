@@ -1,8 +1,7 @@
 import { useDispatch } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
-
-import { triggerPauseAudio } from './EventTriggers';
+import CloseIcon from '../../../../public/icons/close.svg';
+import { triggerPauseAudio } from '../EventTriggers';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { resetAudioFile } from 'src/redux/slices/AudioPlayer/state';

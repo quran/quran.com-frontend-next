@@ -14,30 +14,19 @@
   z-index: var(--z-index-sticky);
   box-shadow: var(--shadow-large);
   border-top: 1px solid var(--color-borders-hairline);
+  height: constants.$audio-player-default-height;
+  @include breakpoints.tablet {
+    height: constants.$audio-player-default-desktop-height;
+  }
 }
 
 .containerHidden {
   display: none;
 }
 
-.containerDefault {
-  height: constants.$audio-player-default-height;
-}
-
-.containerExpanded {
-  height: constants.$audio-player-expanded-height;
-}
-
-.containerMinimized.containerExpanded {
-  height: constants.$audio-player-minimized-height;
-  @include breakpoints.tablet {
-    height: constants.$audio-player-expanded-height;
-  }
-}
 .containerMinimized.containerDefault {
-  height: constants.$audio-player-minimized-height;
-  @include breakpoints.tablet {
-    height: constants.$audio-player-default-height;
+  @include breakpoints.smallerThanTablet {
+    height: constants.$audio-player-minimized-height;
   }
 }
 
@@ -46,68 +35,8 @@
   display: flex;
   padding-left: var(--spacing-xsmall);
   padding-right: var(--spacing-xsmall);
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  @include breakpoints.tablet {
-    flex-direction: inherit;
-    justify-content: center;
-  }
-}
-
-.innerContainerExpanded {
-  margin-top: var(--spacing-micro);
-}
-
-.actionButtonsContainer {
-  margin-top: var(--spacing-micro);
-  display: flex;
-  flex-direction: row-reverse;
-
-  @include breakpoints.tablet {
-    flex-direction: inherit;
-  }
-
-  &.defaultAndMinimized {
-    display: none;
-    @include breakpoints.tablet {
-      display: flex;
-    }
-  }
-}
-.actionButtonsContainerHidden {
-  display: none;
-}
-
-.seekBackwardsContainer {
-  display: none;
-
-  @include breakpoints.tablet {
-    display: inherit;
-  }
-}
-
-.desktopRightActions {
-  display: none;
-  @include breakpoints.tablet {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: var(--space-small);
-    margin-left: var(--spacing-medium);
-  }
 }
 
 .sliderContainer {
   width: 100%;
-  @include breakpoints.tablet {
-    width: 70%;
-  }
-}
-
-.mobileCloseButtonContainer {
-  display: flex;
-  align-items: center;
-  @include breakpoints.tablet {
-    display: none;
-  }
 }

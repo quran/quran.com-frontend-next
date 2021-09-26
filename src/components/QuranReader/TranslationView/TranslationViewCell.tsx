@@ -13,7 +13,7 @@ import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsM
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
-import useScroll, { SCROLL_TO_CENTER_SCREEN } from 'src/hooks/useScrollToElement';
+import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -31,7 +31,7 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SCROLL_TO_CENTER_SCREEN);
+    useScroll(SMOOTH_SCROLL_TO_CENTER);
 
   useEffect(() => {
     if (isHighlighted && enableAutoScrolling) {
@@ -66,7 +66,7 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
             <div className={styles.actionItem}>
               <PlayVerseAudioButton
                 timestamp={verse.timestamps.timestampFrom}
-                chapterId={Number(verse.chapterId)}
+                verseKey={verse.verseKey}
               />
             </div>
             <div className={styles.actionItem}>
