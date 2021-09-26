@@ -300,3 +300,23 @@ export const getDistanceBetweenVerses = (firstVerseKey: string, secondVerseKey: 
     distance + secondVerseNumber + getChapterData(firstChapterString).versesCount - firstVerseNumber
   );
 };
+
+/**
+ * Whether the current verse is the first in surah.
+ *
+ * @param {number} verseNumber
+ * @returns {boolean}
+ */
+export const isFirstVerseOfSurah = (verseNumber: number): boolean => verseNumber === 1;
+
+/**
+ * Whether the current verse is the last in surah.
+ *
+ * @param {string} chapterNumber
+ * @param {number} verseNumber
+ * @returns {boolean}
+ */
+export const isLastVerseOfSurah = (chapterNumber: string, verseNumber: number): boolean => {
+  const { versesCount } = getChapterData(chapterNumber);
+  return verseNumber === versesCount;
+};

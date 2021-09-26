@@ -13,6 +13,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-top: var(--spacing-xsmall);
   > a {
     margin: var(--spacing-xxsmall);
     @include breakpoints.tablet {
