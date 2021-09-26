@@ -31,7 +31,6 @@ const AudioPlayer = () => {
   const audioFileStatus = useSelector(selectAudioFileStatus);
   const isHidden = audioFileStatus === AudioFileStatus.NoFile;
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
-  const durationInSeconds = audioFile?.duration / 1000 || 0;
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const onDirectionChange = useCallback(
     (direction: ScrollDirection) => {
@@ -125,7 +124,6 @@ const AudioPlayer = () => {
           <AudioPlayerSlider
             audioPlayerElRef={audioPlayerElRef}
             isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-            audioDuration={durationInSeconds}
           />
         </div>
       </div>

@@ -8,10 +8,16 @@
   justify-content: space-between;
   color: var(--color-text-faded);
   font-size: var(--font-size-small);
+  min-height: var(
+    --font-size-small
+  ); // prevents CLS when the current/total time are not loaded yet
   margin-bottom: calc(-1 * var(--spacing-xsmall));
   transition: var(--transition-regular);
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
+    min-height: var(
+      --font-size-normal
+    ); // prevents CLS when the current/total time are not loaded yet
     margin-top: var(--spacing-medium);
     margin-bottom: calc(-2 * var(--spacing-small));
   }

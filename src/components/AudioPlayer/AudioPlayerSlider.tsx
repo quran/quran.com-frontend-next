@@ -7,12 +7,11 @@ import { triggerSetCurrentTime } from './EventTriggers';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 
 import Slider from 'src/components/dls/Slider';
-import { secondsFormatter, milliSecondsToSeconds } from 'src/utils/datetime';
+import { secondsFormatter } from 'src/utils/datetime';
 
 const NUMBER_OF_STEPS = 100;
 
 type SliderProps = {
-  audioDuration: number;
   isMobileMinimizedForScrolling: boolean;
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
@@ -27,28 +26,26 @@ const AUDIO_THROTTLE_DURATION = 1000;
  * @returns {JSX.Element}
  */
 const AudioPlayerSlider = ({
-  audioDuration,
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
+  const audioDuration = audioPlayerElRef.current?.duration;
+
   const isAudioLoaded = audioDuration !== 0;
   const [currentStep, setCurrentStep] = useState(0);
-  const audioDurationMilliSeconds = useMemo(
-    () => milliSecondsToSeconds(audioDuration),
-    [audioDuration],
-  );
+
   useEffect(() => {
-    setCurrentStep(getCurrentStep(currentTime, isAudioLoaded, audioDurationMilliSeconds));
-  }, [currentTime, isAudioLoaded, audioDurationMilliSeconds]);
+    setCurrentStep(getCurrentStep(currentTime, isAudioLoaded, audioDuration));
+  }, [currentTime, isAudioLoaded, audioDuration]);
   const currentSteps = useMemo(() => [currentStep], [currentStep]);
   const handleOnValueChange = useCallback(
     (newValue: number[]) => {
       const [newStep] = newValue;
       setCurrentStep(newStep);
-      triggerSetCurrentTime(getNewCurrentTime(newStep, audioDurationMilliSeconds));
+      triggerSetCurrentTime(getNewCurrentTime(newStep, audioDuration));
     },
-    [audioDurationMilliSeconds],
+    [audioDuration],
   );
 
   return (
