@@ -47,6 +47,7 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
     from: firstVersesRangeItems.value, // first verseKey in the current chapter
     to: lastVersesRangeItems.value, // last verseKey in the current chapter
   });
+  const [delayBetweenVerse, setDelayBetweeVerse] = useState(0);
 
   // reset repeatVerseRange's `to` and `from`, when chapter changed
   useEffect(() => {
@@ -94,10 +95,11 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
                 onIncrement={() => {
                   setRepeatVerse({ ...repeatVerse, total: repeatVerse.total + 1 });
                 }}
-                onDecrement={() => {
-                  if (repeatVerse.total >= 0)
-                    setRepeatVerse({ ...repeatVerse, total: repeatVerse.total - 1 });
-                }}
+                onDecrement={
+                  repeatVerse.total >= 0
+                    ? () => setRepeatVerse({ ...repeatVerse, total: repeatVerse.total - 1 })
+                    : null
+                }
                 count={repeatVerse.total}
               />{' '}
               times
@@ -110,11 +112,31 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
                 onIncrement={() => {
                   setRepeatVerseRange({ ...repeatVerseRange, total: repeatVerseRange.total + 1 });
                 }}
-                onDecrement={() => {
-                  if (repeatVerseRange.total >= 0)
-                    setRepeatVerseRange({ ...repeatVerseRange, total: repeatVerseRange.total - 1 });
-                }}
+                onDecrement={
+                  repeatVerseRange.total > 1
+                    ? () =>
+                        setRepeatVerseRange({
+                          ...repeatVerseRange,
+                          total: repeatVerseRange.total - 1,
+                        })
+                    : null
+                }
                 count={repeatVerseRange.total}
+              />{' '}
+              times
+            </span>
+          </div>
+          <div className={styles.inputContainer}>
+            <span className={styles.label}>Delay between verse:</span>{' '}
+            <span className={styles.input}>
+              <Counter
+                onIncrement={() => {
+                  setDelayBetweeVerse(delayBetweenVerse + 0.5);
+                }}
+                onDecrement={() => {
+                  if (delayBetweenVerse >= 0) setDelayBetweeVerse(delayBetweenVerse - 0.5);
+                }}
+                count={delayBetweenVerse.toFixed(1)}
               />{' '}
               times
             </span>
