@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useMemo, useState, useEffect } from 'react';
 
 import { RangeSelectorType, RangeVerseItem } from '../Verse/AdvancedCopy/SelectorContainer';
@@ -5,6 +6,7 @@ import { RangeSelectorType, RangeVerseItem } from '../Verse/AdvancedCopy/Selecto
 import styles from './RepeatButton.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
+import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Modal from 'src/components/dls/Modal/Modal';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
 import { getChapterData } from 'src/utils/chapter';
@@ -15,6 +17,23 @@ type RepeatAudioModalProps = {
   isOpen: boolean;
   onClose: () => void;
 };
+
+enum RepeatType {
+  Single = 'single',
+  Range = 'range',
+}
+const repeatTypeRadioGroupItems = [
+  {
+    value: RepeatType.Single,
+    id: RepeatType.Range,
+    label: 'Single Verse',
+  },
+  {
+    value: RepeatType.Range,
+    id: RepeatType.Range,
+    label: 'Range of verses',
+  },
+];
 
 const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps) => {
   const chapterName = useMemo(() => {
@@ -48,6 +67,7 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
     to: lastVersesRangeItems.value, // last verseKey in the current chapter
   });
   const [delayBetweenVerse, setDelayBetweeVerse] = useState(0);
+  const [repeatType, setRepeatType] = useState(RepeatType.Single);
 
   // reset repeatVerseRange's `to` and `from`, when chapter changed
   useEffect(() => {
@@ -65,6 +85,10 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
     onClose();
   };
 
+  const onRangeTypeChange = (val) => {
+    setRepeatType(val);
+  };
+
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
@@ -73,21 +97,31 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
           <Modal.Subtitle>Surah {chapterName}</Modal.Subtitle>
         </Modal.Header>
         <div>
-          <div className={styles.inputContainer}>
-            <VerseRangeSelector
-              onChange={(value, dropdownId) => {
-                if (dropdownId === RangeSelectorType.END) {
-                  setRepeatVerseRange({ ...repeatVerseRange, to: value });
-                } else {
-                  setRepeatVerseRange({ ...repeatVerseRange, from: value });
-                }
-              }}
-              dropdownItems={rangeVersesItems}
-              isVisible
-              rangeStartVerse={firstVersesRangeItems.value}
-              rangeEndVerse={lastVersesRangeItems.value}
-            />
-          </div>
+          <RadioGroup
+            label="Select verses range"
+            orientation={RadioGroupOrientation.Horizontal}
+            onChange={onRangeTypeChange}
+            value={repeatType}
+            items={repeatTypeRadioGroupItems}
+          />
+          {repeatType === RepeatType.Single && <div>a</div>}
+          {repeatType === RepeatType.Range && (
+            <div className={styles.inputContainer}>
+              <VerseRangeSelector
+                onChange={(value, dropdownId) => {
+                  if (dropdownId === RangeSelectorType.END) {
+                    setRepeatVerseRange({ ...repeatVerseRange, to: value });
+                  } else {
+                    setRepeatVerseRange({ ...repeatVerseRange, from: value });
+                  }
+                }}
+                dropdownItems={rangeVersesItems}
+                isVisible
+                rangeStartVerse={firstVersesRangeItems.value}
+                rangeEndVerse={lastVersesRangeItems.value}
+              />
+            </div>
+          )}
           <div className={styles.inputContainer}>
             <span className={styles.label}>Play each verse:</span>{' '}
             <span className={styles.input}>
