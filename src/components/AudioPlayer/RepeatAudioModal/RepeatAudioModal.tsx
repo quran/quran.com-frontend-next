@@ -46,7 +46,7 @@ const RepeatAudioModal = ({
   const firstVerseKeyInThisChapter = comboboxVerseItems[0].value;
   const lastVerseKeyInThisChapter = comboboxVerseItems[comboboxVerseItems.length - 1].value;
 
-  const [repeatVerseRange, setRepeatVerseRange] = useState({
+  const [verseRepetition, setVerseRepetition] = useState({
     repeatRange: 1,
     repeatEachVerse: 1,
     from: defaultSelectedVerse || firstVerseKeyInThisChapter,
@@ -54,10 +54,10 @@ const RepeatAudioModal = ({
   });
   const [delayMultiplierBetweenVerse, setDelayMultiplierBetweenVerse] = useState(0);
 
-  // reset repeatVerseRange's `to` and `from`, when chapter changed
+  // reset verseRepetition's `to` and `from`, when chapter changed
   useEffect(() => {
-    setRepeatVerseRange((prevRepeatVerseRange) => ({
-      ...prevRepeatVerseRange,
+    setVerseRepetition((prevVerseRepetition) => ({
+      ...prevVerseRepetition,
       from: defaultSelectedVerse || firstVerseKeyInThisChapter,
       to: lastVerseKeyInThisChapter,
     }));
@@ -69,7 +69,6 @@ const RepeatAudioModal = ({
   const onCancelClick = () => {
     onClose();
   };
-  console.log(repeatVerseRange);
 
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>
@@ -81,30 +80,30 @@ const RepeatAudioModal = ({
         <div>
           <SelectType
             defaultRepeatType={defaultRepeatType}
-            rangeEndVerse={repeatVerseRange.to}
-            rangeStartVerse={repeatVerseRange.from}
+            rangeEndVerse={verseRepetition.to}
+            rangeStartVerse={verseRepetition.from}
             comboboxVerseItems={comboboxVerseItems}
             onSingleVerseChange={(val) =>
-              setRepeatVerseRange({ ...repeatVerseRange, from: val, to: val })
+              setVerseRepetition({ ...verseRepetition, from: val, to: val })
             }
-            onRangeChange={(val) => setRepeatVerseRange({ ...repeatVerseRange, ...val })}
-            verseKey={repeatVerseRange.from}
+            onRangeChange={(val) => setVerseRepetition({ ...verseRepetition, ...val })}
+            verseKey={verseRepetition.from}
           />
           <div className={styles.separator}>
             <Separator />
           </div>
           <RepeatSetting
             label="Repeat each verse"
-            value={repeatVerseRange.repeatEachVerse}
+            value={verseRepetition.repeatEachVerse}
             minValue={1}
-            onChange={(val) => setRepeatVerseRange({ ...repeatVerseRange, repeatEachVerse: val })}
+            onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatEachVerse: val })}
             suffix="times"
           />
           <RepeatSetting
             label="Repeat each range"
-            value={repeatVerseRange.repeatRange}
+            value={verseRepetition.repeatRange}
             minValue={1}
-            onChange={(val) => setRepeatVerseRange({ ...repeatVerseRange, repeatRange: val })}
+            onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatRange: val })}
             suffix="times"
           />
           <RepeatSetting
