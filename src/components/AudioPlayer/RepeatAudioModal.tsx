@@ -118,6 +118,7 @@ const RepeatAudioModal = ({
           />
           {repeatType === RepeatType.Single && (
             <Combobox
+              clearable={false}
               id={RepeatType.Single}
               value={repeatVerse.verse}
               items={rangeVersesItems}
