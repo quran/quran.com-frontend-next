@@ -48,7 +48,7 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
     to: lastVersesRangeItems.value, // last verseKey in the current chapter
   });
 
-  // reset default verse range, when chapter changed
+  // reset repeatVerseRange's `to` and `from`, when chapter changed
   useEffect(() => {
     setRepeatVerseRange((prevRepeatVerseRange) => ({
       ...prevRepeatVerseRange,
