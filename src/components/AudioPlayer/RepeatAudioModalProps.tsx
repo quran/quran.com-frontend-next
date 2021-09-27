@@ -13,10 +13,10 @@ import { generateChapterVersesKeys } from 'src/utils/verse';
 type RepeatAudioModalProps = {
   chapterId: string;
   isOpen: boolean;
-  onClickOutside: () => void;
+  onClose: () => void;
 };
 
-const RepeatAudioModal = ({ chapterId, isOpen, onClickOutside }: RepeatAudioModalProps) => {
+const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps) => {
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId);
     return chapterData?.nameSimple;
@@ -57,8 +57,15 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClickOutside }: RepeatAudioModa
     }));
   }, [chapterId, firstVersesRangeItems.value, lastVersesRangeItems.value]);
 
+  const onClickPlay = () => {
+    onClose();
+  };
+  const onClickCancel = () => {
+    onClose();
+  };
+
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClickOutside}>
+    <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>Repeat Settings</Modal.Title>
@@ -114,6 +121,10 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClickOutside }: RepeatAudioModa
           </div>
         </div>
       </Modal.Body>
+      <Modal.Footer>
+        <Modal.Action onClick={onClickCancel}>Cancel</Modal.Action>
+        <Modal.Action onClick={onClickPlay}>Start Playing</Modal.Action>
+      </Modal.Footer>
     </Modal>
   );
 };

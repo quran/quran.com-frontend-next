@@ -19,7 +19,7 @@ const RepeatAudioButton = () => {
         <RepeatAudioModal
           chapterId={audioFile?.chapterId.toString()}
           isOpen={isModalOpen}
-          onClickOutside={() => setIsModalOpen(false)}
+          onClose={() => setIsModalOpen(false)}
         />
       )}
       <Button
