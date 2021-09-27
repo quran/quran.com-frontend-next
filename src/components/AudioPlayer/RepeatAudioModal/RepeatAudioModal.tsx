@@ -43,17 +43,17 @@ const RepeatAudioModal = ({
     return initialState;
   }, [chapterId]);
 
-  const firstVersesRangeItems = comboboxVersesItems[0];
-  const lastVersesRangeItems = comboboxVersesItems[comboboxVersesItems.length - 1];
+  const firstVerseKeyInThisChapter = comboboxVersesItems[0].value;
+  const lastVerseKeyInThisChapter = comboboxVersesItems[comboboxVersesItems.length - 1].value;
 
   // TODO: connect to redux when the data flow is ready
   const [repeatVerse, setRepeatVerse] = useState(() => {
-    return { total: 1, verseKey: defaultSelectedVerse || firstVersesRangeItems.value };
+    return { total: 1, verseKey: defaultSelectedVerse || firstVerseKeyInThisChapter };
   });
   const [repeatVerseRange, setRepeatVerseRange] = useState({
     total: 1,
-    from: firstVersesRangeItems.value, // first verseKey in the current chapter
-    to: lastVersesRangeItems.value, // last verseKey in the current chapter
+    from: firstVerseKeyInThisChapter,
+    to: lastVerseKeyInThisChapter,
   });
   const [delayBetweenVerse, setDelayBetweenVerse] = useState(0);
 
@@ -61,10 +61,10 @@ const RepeatAudioModal = ({
   useEffect(() => {
     setRepeatVerseRange((prevRepeatVerseRange) => ({
       ...prevRepeatVerseRange,
-      from: firstVersesRangeItems.value,
-      to: lastVersesRangeItems.value,
+      from: firstVerseKeyInThisChapter,
+      to: lastVerseKeyInThisChapter,
     }));
-  }, [chapterId, firstVersesRangeItems.value, lastVersesRangeItems.value]);
+  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter]);
 
   const onClickPlay = () => {
     onClose();
@@ -83,8 +83,8 @@ const RepeatAudioModal = ({
         <div>
           <SelectType
             defaultRepeatType={defaultRepeatType}
-            rangeEndVerse={lastVersesRangeItems.value}
-            rangeStartVerse={firstVersesRangeItems.value}
+            rangeEndVerse={firstVerseKeyInThisChapter}
+            rangeStartVerse={lastVerseKeyInThisChapter}
             comboboxVersesItems={comboboxVersesItems}
             onSingleVerseChange={(val) =>
               setRepeatVerse({ ...repeatVerse, verseKey: val as string })
