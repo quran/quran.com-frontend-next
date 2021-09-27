@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from 'react';
 
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
-import SelectType, { RepeatType } from './SelectType';
+import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 
 import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
@@ -14,7 +14,7 @@ type RepeatAudioModalProps = {
   chapterId: string;
   isOpen: boolean;
   onClose: () => void;
-  defaultRepeatType: RepeatType;
+  defaultRepetitionMode: RepetitionMode;
   defaultSelectedVerse?: string;
 };
 
@@ -22,7 +22,7 @@ const RepeatAudioModal = ({
   chapterId,
   isOpen,
   onClose,
-  defaultRepeatType,
+  defaultRepetitionMode,
   defaultSelectedVerse,
 }: RepeatAudioModalProps) => {
   const chapterName = useMemo(() => {
@@ -78,8 +78,8 @@ const RepeatAudioModal = ({
           <Modal.Subtitle>Surah {chapterName}</Modal.Subtitle>
         </Modal.Header>
         <div>
-          <SelectType
-            defaultRepeatType={defaultRepeatType}
+          <SelectRepetitionMode
+            defaultRepetitionMode={defaultRepetitionMode}
             rangeEndVerse={verseRepetition.to}
             rangeStartVerse={verseRepetition.from}
             comboboxVerseItems={comboboxVerseItems}

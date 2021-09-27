@@ -5,37 +5,37 @@ import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/Radi
 import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
 
-export enum RepeatType {
+export enum RepetitionMode {
   Single = 'single',
   Range = 'range',
 }
 
-const repeatTypeRadioGroupItems = [
+const repetitionModeRadioGroupItems = [
   {
-    value: RepeatType.Single,
-    id: RepeatType.Single,
+    value: RepetitionMode.Single,
+    id: RepetitionMode.Single,
     label: 'Single Verse',
   },
   {
-    value: RepeatType.Range,
-    id: RepeatType.Range,
+    value: RepetitionMode.Range,
+    id: RepetitionMode.Range,
     label: 'Range of verses',
   },
 ];
 
-const SelectType = ({
+const SelectRepetitionMode = ({
   comboboxVerseItems,
   rangeStartVerse,
   rangeEndVerse,
-  defaultRepeatType,
+  defaultRepetitionMode,
   onSingleVerseChange,
   onRangeChange,
   verseKey,
 }) => {
-  const [repeatType, setRepeatType] = useState(defaultRepeatType);
+  const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
 
   const onRangeTypeChange = (val) => {
-    setRepeatType(val);
+    setRepetitionMode(val);
   };
 
   return (
@@ -44,13 +44,13 @@ const SelectType = ({
         label="Select verses range"
         orientation={RadioGroupOrientation.Horizontal}
         onChange={onRangeTypeChange}
-        value={repeatType}
-        items={repeatTypeRadioGroupItems}
+        value={repetitionMode}
+        items={repetitionModeRadioGroupItems}
       />
-      {repeatType === RepeatType.Single && (
+      {repetitionMode === RepetitionMode.Single && (
         <Combobox
           clearable={false}
-          id={RepeatType.Single}
+          id={RepetitionMode.Single}
           value={verseKey}
           items={comboboxVerseItems}
           onChange={(val) => onSingleVerseChange(val)}
@@ -58,7 +58,7 @@ const SelectType = ({
           initialInputValue={verseKey}
         />
       )}
-      {repeatType === RepeatType.Range && (
+      {repetitionMode === RepetitionMode.Range && (
         <div>
           <VerseRangeSelector
             onChange={(value, dropdownId) => {
@@ -76,4 +76,4 @@ const SelectType = ({
   );
 };
 
-export default SelectType;
+export default SelectRepetitionMode;

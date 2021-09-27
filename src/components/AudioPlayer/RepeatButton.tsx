@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
-import { RepeatType } from './RepeatAudioModal/SelectType';
+import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
 import Button, { ButtonVariant, ButtonShape } from 'src/components/dls/Button/Button';
 import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
@@ -18,7 +18,7 @@ const RepeatAudioButton = () => {
     <>
       {audioFile && (
         <RepeatAudioModal
-          defaultRepeatType={RepeatType.Range}
+          defaultRepetitionMode={RepetitionMode.Range}
           chapterId={audioFile?.chapterId.toString()}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}

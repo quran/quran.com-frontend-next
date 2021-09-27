@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
-import { RepeatType } from '../AudioPlayer/RepeatAudioModal/SelectType';
+import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
 
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 
@@ -18,7 +18,7 @@ const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
   return (
     <>
       <RepeatAudioModal
-        defaultRepeatType={RepeatType.Single}
+        defaultRepetitionMode={RepetitionMode.Single}
         defaultSelectedVerse={verseKey}
         chapterId={chapterId.toString()}
         isOpen={isModalOpen}
