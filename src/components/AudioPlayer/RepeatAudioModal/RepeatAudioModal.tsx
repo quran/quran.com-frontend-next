@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { useMemo, useState, useEffect } from 'react';
 
 import styles from './RepeatAudioModal.module.scss';
@@ -18,30 +17,6 @@ type RepeatAudioModalProps = {
   defaultRepeatType: RepeatType;
   defaultSelectedVerse?: string;
 };
-
-//   const inputs = [
-//     {
-//       label: 'Repeat each verse',
-//       value: repeatVerse.total,
-//       setValue: setRepeatVerse,
-//       suffix: 'times',
-//       minimumValue: 1,
-//     },
-//     {
-//       label: 'Repeat each verse',
-//       value: repeatVerseRange.total,
-//       setValue: setRepeatVerseRange,
-//       suffix: 'times',
-//       minimumValue: 1,
-//     },
-//     {
-//       label: 'Delay between each verse',
-//       value: delayBetweenVerse,
-//       setValue: setDelayBetweenVerse,
-//       suffix: 'times',
-//       minimumValue: 0,
-//     },
-//   ];
 
 const RepeatAudioModal = ({
   chapterId,
@@ -68,7 +43,6 @@ const RepeatAudioModal = ({
     return initialState;
   }, [chapterId]);
 
-  // eslint-disable-next-line prefer-destructuring
   const firstVersesRangeItems = comboboxVersesItems[0];
   const lastVersesRangeItems = comboboxVersesItems[comboboxVersesItems.length - 1];
 
