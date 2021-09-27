@@ -12,10 +12,10 @@ import Verse from 'types/Verse';
 
 interface Props {
   lastVerse: Verse;
-  isSelectedTafsir: boolean;
+  isTafsirIdSetFromUrl: boolean;
 }
 
-const TafsirControls: React.FC<Props> = ({ lastVerse, isSelectedTafsir }) => {
+const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSelectedTafsir }) => {
   const tafsirId = lastVerse?.tafsirs?.[0]?.resourceId;
   // if the id in the url is a non-existent tafsir id.
   if (isSelectedTafsir && !tafsirId) {

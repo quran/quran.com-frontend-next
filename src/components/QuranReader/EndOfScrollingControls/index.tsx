@@ -16,7 +16,7 @@ interface Props {
 }
 
 const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVerse }) => {
-  const isSelectedTafsir = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
+  const isTafsirIdSetFromUrl = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   return (
     <div className={styles.container}>
       <div className={styles.buttonsContainer}>
@@ -29,8 +29,8 @@ const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVers
         )}
         {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
         {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
-        {(quranReaderDataType === QuranReaderDataType.Tafsir || isSelectedTafsir) && (
-          <TafsirControls lastVerse={lastVerse} isSelectedTafsir={isSelectedTafsir} />
+        {(quranReaderDataType === QuranReaderDataType.Tafsir || isTafsirIdSetFromUrl) && (
+          <TafsirControls lastVerse={lastVerse} isTafsirIdSetFromUrl={isTafsirIdSetFromUrl} />
         )}
       </div>
     </div>

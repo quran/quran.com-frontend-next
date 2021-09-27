@@ -9,12 +9,12 @@ import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import { getDefaultWordFields } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
-import { getVerseNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
+import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 
 type ChapterProps = {
@@ -24,7 +24,12 @@ type ChapterProps = {
   isChapter?: boolean;
 };
 
-const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasError }) => {
+const Chapter: NextPage<ChapterProps> = ({
+  chapterResponse,
+  versesResponse,
+  hasError,
+  isChapter,
+}) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -36,7 +41,7 @@ const Chapter: NextPage<ChapterProps> = ({ chapterResponse, versesResponse, hasE
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={QuranReaderDataType.Chapter}
+        quranReaderDataType={isChapter ? QuranReaderDataType.Chapter : QuranReaderDataType.Verse}
       />
     </>
   );
@@ -49,20 +54,24 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   if (!isChapter && !isValidVerseKey(chapterIdOrVerseKey)) {
     return { notFound: true };
   }
-  // if it's a verseKey, we redirect to the url of the verse
+  // common API params between a chapter and the verse key.
+  let apiParams = { ...getDefaultWordFields() };
+  // initialize the value as if it's chapter
+  let chapterId = chapterIdOrVerseKey;
+  // if it's a verseKey
   if (!isChapter) {
-    return {
-      redirect: { destination: getVerseNavigationUrl(chapterIdOrVerseKey), permanent: true },
-    };
+    const [extractedChapterId, verseNumber] = getVerseAndChapterNumbersFromKey(chapterIdOrVerseKey);
+    chapterId = extractedChapterId;
+    // only get 1 verse
+    apiParams = { ...apiParams, ...{ page: verseNumber, perPage: 1 } };
   }
   try {
-    const versesResponse = await getChapterVerses(chapterIdOrVerseKey, {
-      ...getDefaultWordFields(),
-    });
+    const versesResponse = await getChapterVerses(chapterIdOrVerseKey, apiParams);
     return {
       props: {
-        chapterResponse: { chapter: getChapterData(chapterIdOrVerseKey, locale) },
+        chapterResponse: { chapter: getChapterData(chapterId, locale) },
         versesResponse,
+        isChapter,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
