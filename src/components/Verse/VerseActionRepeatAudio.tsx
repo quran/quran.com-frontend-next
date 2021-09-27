@@ -4,12 +4,15 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
-import RepeatAudioModal, { RepeatType } from './RepeatAudioModal';
+import VerseActionsMenuItem from './VerseActionsMenuItem';
 
-import Button, { ButtonVariant, ButtonShape } from 'src/components/dls/Button/Button';
+import RepeatAudioModal, { RepeatType } from 'src/components/AudioPlayer/RepeatAudioModal';
 import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
 
-const RepeatAudioButton = () => {
+type VerseActionRepeatAudioProps = {
+  verseKey: string;
+};
+const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
 
@@ -17,22 +20,20 @@ const RepeatAudioButton = () => {
     <>
       {audioFile && (
         <RepeatAudioModal
-          defaultRepeatType={RepeatType.Range}
+          defaultRepeatType={RepeatType.Single}
+          defaultSelectedVerse={verseKey}
           chapterId={audioFile?.chapterId.toString()}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
       )}
-      <Button
-        disabled={!audioFile}
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
+      <VerseActionsMenuItem
+        title="Repeat Verse"
+        icon={<RepeatIcon />}
         onClick={() => setIsModalOpen(true)}
-      >
-        <RepeatIcon />
-      </Button>
+      />
     </>
   );
 };
 
-export default RepeatAudioButton;
+export default VerseActionRepeatAudio;

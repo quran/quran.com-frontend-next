@@ -17,16 +17,18 @@ type RepeatAudioModalProps = {
   chapterId: string;
   isOpen: boolean;
   onClose: () => void;
+  defaultRepeatType: RepeatType;
+  defaultSelectedVerse?: string;
 };
 
-enum RepeatType {
+export enum RepeatType {
   Single = 'single',
   Range = 'range',
 }
 const repeatTypeRadioGroupItems = [
   {
     value: RepeatType.Single,
-    id: RepeatType.Range,
+    id: RepeatType.Single,
     label: 'Single Verse',
   },
   {
@@ -36,7 +38,13 @@ const repeatTypeRadioGroupItems = [
   },
 ];
 
-const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps) => {
+const RepeatAudioModal = ({
+  chapterId,
+  isOpen,
+  onClose,
+  defaultRepeatType,
+  defaultSelectedVerse,
+}: RepeatAudioModalProps) => {
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId);
     return chapterData?.nameSimple;
@@ -60,7 +68,9 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
   const lastVersesRangeItems = rangeVersesItems[rangeVersesItems.length - 1];
 
   // TODO: connect to redux when the data flow is ready
-  const [repeatVerse, setRepeatVerse] = useState({ total: 1, progress: 0, verse: null });
+  const [repeatVerse, setRepeatVerse] = useState(() => {
+    return { total: 1, progress: 0, verse: defaultSelectedVerse };
+  });
   const [repeatVerseRange, setRepeatVerseRange] = useState({
     total: 1,
     progress: 0,
@@ -68,7 +78,7 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
     to: lastVersesRangeItems.value, // last verseKey in the current chapter
   });
   const [delayBetweenVerse, setDelayBetweeVerse] = useState(0);
-  const [repeatType, setRepeatType] = useState(RepeatType.Single);
+  const [repeatType, setRepeatType] = useState(defaultRepeatType);
 
   // reset repeatVerseRange's `to` and `from`, when chapter changed
   useEffect(() => {
@@ -110,7 +120,7 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
               id={RepeatType.Single}
               value={repeatVerse.verse}
               items={rangeVersesItems}
-              onChange={(val) => setRepeatVerse({ ...repeatVerse, verse: val })}
+              onChange={(val) => setRepeatVerse({ ...repeatVerse, verse: val as string })}
               placeholder="Search for a verse"
               initialInputValue={repeatVerse.verse}
             />
