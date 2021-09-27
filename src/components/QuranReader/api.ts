@@ -17,6 +17,7 @@ interface RequestKeyInput {
   selectedTafsirs: number[];
   isVerseData: boolean;
   isTafsirData: boolean;
+  isSelectedTafsirData: boolean;
   id: string | number;
   reciter: number;
 }
@@ -31,6 +32,7 @@ export const getRequestKey = ({
   id,
   isVerseData,
   isTafsirData,
+  isSelectedTafsirData,
   initialData,
   index,
   quranReaderStyles,
@@ -40,7 +42,10 @@ export const getRequestKey = ({
   reciter,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
+  const page =
+    isVerseData || isTafsirData || isSelectedTafsirData
+      ? initialData.verses[0].verseNumber
+      : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, {
       page,
@@ -57,19 +62,17 @@ export const getRequestKey = ({
       ...getDefaultWordFields(quranReaderStyles.quranFont),
     });
   }
-
-  if (isTafsirData) {
-    return makeVersesUrl(id, {
+  if (isSelectedTafsirData || isTafsirData) {
+    return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, {
       page,
       perPage: 1,
       translations: null,
-      tafsirs: selectedTafsirs.join(','),
+      tafsirs: isTafsirData ? selectedTafsirs.join(',') : id,
       wordFields: `location, verse_key, ${quranReaderStyles.quranFont}`,
       tafsirFields: 'resource_name',
     });
   }
-
-  if (quranReaderDataType === QuranReaderDataType.Range) {
+  if (quranReaderDataType === QuranReaderDataType.VerseRange) {
     return makeVersesUrl(id, {
       reciter,
       page,
