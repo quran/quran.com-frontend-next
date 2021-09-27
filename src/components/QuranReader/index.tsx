@@ -146,7 +146,10 @@ const QuranReader = ({
             )}
             {view}
           </InfiniteScroll>
-          <EndOfScrollingControls quranReaderDataType={quranReaderDataType} verses={verses} />
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            lastVerse={verses[verses.length - 1]}
+          />
         </div>
       </div>
       <Notes />
