@@ -35,14 +35,20 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
     return initialState;
   }, [chapterId]);
 
+  // eslint-disable-next-line prefer-destructuring
+  const firstVersesRangeItems = rangeVersesItems[0];
+  const lastVersesRangeItems = rangeVersesItems[rangeVersesItems.length - 1];
+
   // TODO: connect to redux when the data flow is ready
   const [repeatVerse, setRepeatVerse] = useState({ total: 1, progress: 0 });
   const [repeatVerseRange, setRepeatVerseRange] = useState({
     total: 1,
     progress: 0,
-    from: rangeVersesItems[0].value, // first verseKey in the current chapter
-    to: rangeVersesItems[rangeVersesItems.length - 1].value, // last verseKey in the current chapter
+    from: firstVersesRangeItems.value, // first verseKey in the current chapter
+    to: lastVersesRangeItems.value, // last verseKey in the current chapter
   });
+
+  console.log(repeatVerse, repeatVerseRange);
 
   return (
     <Modal
@@ -75,8 +81,8 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
               }}
               dropdownItems={rangeVersesItems}
               isVisible
-              rangeStartVerse={repeatVerseRange.from}
-              rangeEndVerse={repeatVerseRange.to}
+              rangeStartVerse={firstVersesRangeItems.value}
+              rangeEndVerse={lastVersesRangeItems.value}
             />
           </div>
           <div className={styles.inputContainer}>
