@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
-import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
+import RepeatIcon from '../../../public/icons/repeat.svg';
 
-import RepeatAudioModal from './RepeatAudioModalProps';
+import RepeatAudioModal from './RepeatAudioModal';
 
 import Button, { ButtonVariant, ButtonShape } from 'src/components/dls/Button/Button';
 import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
