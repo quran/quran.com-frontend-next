@@ -10,21 +10,16 @@ import styles from './PlaybackControls.module.scss';
 import RepeatButton from './RepeatButton';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import {
-  AudioFileStatus,
-  selectAudioFile,
-  selectAudioFileStatus,
-} from 'src/redux/slices/AudioPlayer/state';
+import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 
 const PlaybackControls = () => {
   const audioFileStatus = useSelector(selectAudioFileStatus);
-  const audioFile = useSelector(selectAudioFile);
   const isLoading = audioFileStatus === AudioFileStatus.Loading;
 
   return (
     <div className={styles.container}>
-      {audioFile?.chapterId && <RepeatButton chapterId={audioFile?.chapterId?.toString()} />}
+      <RepeatButton />
       <Button
         tooltip="Rewind 10 seconds"
         variant={ButtonVariant.Ghost}

@@ -1,7 +1,20 @@
+@use "src/styles/breakpoints";
+
 .inputContainer {
   display: flex;
   align-items: center;
 }
 .inputContainer + .inputContainer {
   margin-top: var(--spacing-small);
+}
+
+.label {
+  font-weight: var(--font-weight-bold);
+  @include breakpoints.tablet {
+    min-width: calc(7 * var(--spacing-large));
+  }
+}
+.input {
+  display: flex;
+  align-items: center;
 }
