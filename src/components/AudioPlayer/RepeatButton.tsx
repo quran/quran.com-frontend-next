@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
 import { RangeSelectorType, RangeVerseItem } from '../Verse/AdvancedCopy/SelectorContainer';
@@ -48,7 +48,16 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
     to: lastVersesRangeItems.value, // last verseKey in the current chapter
   });
 
-  console.log(repeatVerse, repeatVerseRange);
+  // reset default verse range, when chapter changed
+  useEffect(() => {
+    setRepeatVerseRange((prevRepeatVerseRange) => ({
+      ...prevRepeatVerseRange,
+      from: firstVersesRangeItems.value,
+      to: lastVersesRangeItems.value,
+    }));
+  }, [chapterId, firstVersesRangeItems.value, lastVersesRangeItems.value]);
+
+  console.log(repeatVerse, repeatVerseRange); // for testing, remove before merging PR
 
   return (
     <Modal
