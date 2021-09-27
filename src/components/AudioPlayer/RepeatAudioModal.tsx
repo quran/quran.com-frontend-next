@@ -3,12 +3,13 @@ import { useMemo, useState, useEffect } from 'react';
 
 import { RangeSelectorType, RangeVerseItem } from '../Verse/AdvancedCopy/SelectorContainer';
 
-import styles from './RepeatButton.module.scss';
+import styles from './RepeatAudioModal.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Modal from 'src/components/dls/Modal/Modal';
+import Separator from 'src/components/dls/Separator/Separator';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
 import { getChapterData } from 'src/utils/chapter';
 import { generateChapterVersesKeys } from 'src/utils/verse';
@@ -126,7 +127,7 @@ const RepeatAudioModal = ({
             />
           )}
           {repeatType === RepeatType.Range && (
-            <div className={styles.inputContainer}>
+            <div>
               <VerseRangeSelector
                 onChange={(value, dropdownId) => {
                   if (dropdownId === RangeSelectorType.END) {
@@ -142,6 +143,9 @@ const RepeatAudioModal = ({
               />
             </div>
           )}
+          <div className={styles.separator}>
+            <Separator />
+          </div>
           <div className={styles.inputContainer}>
             <span className={styles.label}>Play each verse:</span>{' '}
             <span className={styles.input}>
