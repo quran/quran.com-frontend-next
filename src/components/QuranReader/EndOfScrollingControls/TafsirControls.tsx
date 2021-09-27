@@ -2,22 +2,36 @@ import React from 'react';
 
 import EndOfScrollingButton from './EndOfScrollingButton';
 
-import { getVerseNavigationUrl, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
+import {
+  getVerseNavigationUrl,
+  getVerseSelectedTafsirNavigationUrl,
+  getVerseTafsirNavigationUrl,
+} from 'src/utils/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
 interface Props {
   lastVerse: Verse;
+  isSelectedTafsir: boolean;
 }
 
-const TafsirControls: React.FC<Props> = ({ lastVerse }) => {
+const TafsirControls: React.FC<Props> = ({ lastVerse, isSelectedTafsir }) => {
+  const tafsirId = lastVerse?.tafsirs?.[0]?.resourceId;
+  // if the id in the url is a non-existent tafsir id.
+  if (isSelectedTafsir && !tafsirId) {
+    return <></>;
+  }
   const { chapterId, verseNumber } = lastVerse;
   return (
     <>
       {!isFirstVerseOfSurah(verseNumber) && (
         <EndOfScrollingButton
           text="Previous Ayah"
-          href={getVerseTafsirNavigationUrl(chapterId, verseNumber - 1)}
+          href={
+            isSelectedTafsir
+              ? getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber - 1, tafsirId)
+              : getVerseTafsirNavigationUrl(chapterId, verseNumber - 1)
+          }
         />
       )}
       <EndOfScrollingButton
@@ -27,7 +41,11 @@ const TafsirControls: React.FC<Props> = ({ lastVerse }) => {
       {!isLastVerseOfSurah(String(chapterId), verseNumber) && (
         <EndOfScrollingButton
           text="Next Ayah"
-          href={getVerseTafsirNavigationUrl(chapterId, verseNumber + 1)}
+          href={
+            isSelectedTafsir
+              ? getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber + 1, tafsirId)
+              : getVerseTafsirNavigationUrl(chapterId, verseNumber + 1)
+          }
         />
       )}
     </>

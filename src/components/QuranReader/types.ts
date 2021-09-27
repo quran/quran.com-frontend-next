@@ -11,8 +11,9 @@ export enum ReadingPreference {
 export enum QuranReaderDataType {
   Chapter = 'chapter',
   Verse = 'verse',
-  Range = 'range',
+  VerseRange = 'range',
   Tafsir = 'tafsir',
+  SelectedTafsir = 'selectedTafsir',
   Hizb = 'hizb',
   Juz = 'juz',
   Rub = 'rub',

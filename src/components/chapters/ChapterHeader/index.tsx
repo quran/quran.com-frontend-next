@@ -16,7 +16,8 @@ import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioB
 import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
-import { formatChapterId, getChapterInfoUrl } from 'src/utils/verse';
+import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
+import { formatChapterId } from 'src/utils/verse';
 
 interface Props {
   chapterId: string;
@@ -78,7 +79,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
               size={ButtonSize.Small}
               variant={ButtonVariant.Ghost}
               prefix={<InfoIcon />}
-              href={getChapterInfoUrl(chapterId)}
+              href={getSurahInfoNavigationUrl(chapterId)}
               hasSidePadding={false}
             >
               Surah Info

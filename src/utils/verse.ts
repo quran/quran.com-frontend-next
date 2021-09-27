@@ -133,14 +133,6 @@ export const sortWordLocation = (locations: string[]) =>
 export const formatChapterId = (id: string) => `0${id}`.slice(-2);
 
 /**
- * Given the chapterId, return the url for that chapter info
- *
- * @param {string} chapterId
- * @returns {string} chapterUrl
- */
-export const getChapterInfoUrl = (chapterId: string) => `/${chapterId}/info`;
-
-/**
  * Given the verseKey, return the verseUrl
  *
  * @param {string} verseKey example: "1:5"

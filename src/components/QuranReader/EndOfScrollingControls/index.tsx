@@ -15,23 +15,26 @@ interface Props {
   lastVerse: Verse;
 }
 
-const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVerse }) => (
-  <div className={styles.container}>
-    <div className={styles.buttonsContainer}>
-      {quranReaderDataType === QuranReaderDataType.Chapter && (
-        <ChapterControls lastVerse={lastVerse} />
-      )}
-      {(quranReaderDataType === QuranReaderDataType.Verse ||
-        quranReaderDataType === QuranReaderDataType.Range) && (
-        <VerseControls lastVerse={lastVerse} />
-      )}
-      {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
-      {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
-      {quranReaderDataType === QuranReaderDataType.Tafsir && (
-        <TafsirControls lastVerse={lastVerse} />
-      )}
+const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVerse }) => {
+  const isSelectedTafsir = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
+  return (
+    <div className={styles.container}>
+      <div className={styles.buttonsContainer}>
+        {quranReaderDataType === QuranReaderDataType.Chapter && (
+          <ChapterControls lastVerse={lastVerse} />
+        )}
+        {(quranReaderDataType === QuranReaderDataType.Verse ||
+          quranReaderDataType === QuranReaderDataType.VerseRange) && (
+          <VerseControls lastVerse={lastVerse} />
+        )}
+        {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
+        {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
+        {(quranReaderDataType === QuranReaderDataType.Tafsir || isSelectedTafsir) && (
+          <TafsirControls lastVerse={lastVerse} isSelectedTafsir={isSelectedTafsir} />
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default EndOfScrollingControls;
