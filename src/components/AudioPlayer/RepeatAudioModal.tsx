@@ -70,7 +70,7 @@ const RepeatAudioModal = ({
 
   // TODO: connect to redux when the data flow is ready
   const [repeatVerse, setRepeatVerse] = useState(() => {
-    return { total: 1, progress: 0, verse: defaultSelectedVerse };
+    return { total: 1, progress: 0, verse: defaultSelectedVerse || firstVersesRangeItems.value };
   });
   const [repeatVerseRange, setRepeatVerseRange] = useState({
     total: 1,
