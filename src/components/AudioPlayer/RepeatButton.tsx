@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import RepeatIcon from '../../../public/icons/ic_repeat_24px 1.svg';
-import { RangeVerseItem } from '../Verse/AdvancedCopy/SelectorContainer';
+import { RangeSelectorType, RangeVerseItem } from '../Verse/AdvancedCopy/SelectorContainer';
 
 import styles from './RepeatButton.module.scss';
 
@@ -67,7 +67,7 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
           <div className={styles.inputContainer}>
             <VerseRangeSelector
               onChange={(value, dropdownId) => {
-                if (dropdownId === 'end') {
+                if (dropdownId === RangeSelectorType.END) {
                   setRepeatVerseRange({ ...repeatVerseRange, to: value });
                 } else {
                   setRepeatVerseRange({ ...repeatVerseRange, from: value });
