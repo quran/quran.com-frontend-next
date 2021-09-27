@@ -24,7 +24,7 @@ const repeatTypeRadioGroupItems = [
 ];
 
 const SelectType = ({
-  comboboxVersesItems,
+  comboboxVerseItems,
   rangeStartVerse,
   rangeEndVerse,
   defaultRepeatType,
@@ -52,7 +52,7 @@ const SelectType = ({
           clearable={false}
           id={RepeatType.Single}
           value={verseKey}
-          items={comboboxVersesItems}
+          items={comboboxVerseItems}
           onChange={(val) => onSingleVerseChange(val)}
           placeholder="Search for a verse"
           initialInputValue={verseKey}
@@ -65,7 +65,7 @@ const SelectType = ({
               if (dropdownId === RangeSelectorType.END) onRangeChange({ to: value });
               else onRangeChange({ from: value });
             }}
-            dropdownItems={comboboxVersesItems}
+            dropdownItems={comboboxVerseItems}
             isVisible
             rangeStartVerse={rangeStartVerse}
             rangeEndVerse={rangeEndVerse}

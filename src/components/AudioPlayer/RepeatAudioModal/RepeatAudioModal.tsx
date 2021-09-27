@@ -30,7 +30,7 @@ const RepeatAudioModal = ({
     return chapterData?.nameSimple;
   }, [chapterId]);
 
-  const comboboxVersesItems = useMemo<RangeVerseItem[]>(() => {
+  const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
     const keys = generateChapterVersesKeys(chapterId);
 
     const initialState = keys.map((chapterVersesKey) => ({
@@ -43,8 +43,8 @@ const RepeatAudioModal = ({
     return initialState;
   }, [chapterId]);
 
-  const firstVerseKeyInThisChapter = comboboxVersesItems[0].value;
-  const lastVerseKeyInThisChapter = comboboxVersesItems[comboboxVersesItems.length - 1].value;
+  const firstVerseKeyInThisChapter = comboboxVerseItems[0].value;
+  const lastVerseKeyInThisChapter = comboboxVerseItems[comboboxVerseItems.length - 1].value;
 
   // TODO: connect to redux when the data flow is ready
   const [repeatVerse, setRepeatVerse] = useState(() => {
@@ -55,7 +55,7 @@ const RepeatAudioModal = ({
     from: firstVerseKeyInThisChapter,
     to: lastVerseKeyInThisChapter,
   });
-  const [delayBetweenVerse, setDelayBetweenVerse] = useState(0);
+  const [delayMultiplierBetweenVerse, setDelayMultiplierBetweenVerse] = useState(0);
 
   // reset repeatVerseRange's `to` and `from`, when chapter changed
   useEffect(() => {
@@ -66,10 +66,10 @@ const RepeatAudioModal = ({
     }));
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter]);
 
-  const onClickPlay = () => {
+  const onPlayClick = () => {
     onClose();
   };
-  const onClickCancel = () => {
+  const onCancelClick = () => {
     onClose();
   };
 
@@ -85,7 +85,7 @@ const RepeatAudioModal = ({
             defaultRepeatType={defaultRepeatType}
             rangeEndVerse={firstVerseKeyInThisChapter}
             rangeStartVerse={lastVerseKeyInThisChapter}
-            comboboxVersesItems={comboboxVersesItems}
+            comboboxVerseItems={comboboxVerseItems}
             onSingleVerseChange={(val) =>
               setRepeatVerse({ ...repeatVerse, verseKey: val as string })
             }
@@ -111,17 +111,17 @@ const RepeatAudioModal = ({
           />
           <RepeatSetting
             label="Delay between verse"
-            value={delayBetweenVerse}
+            value={delayMultiplierBetweenVerse}
             minValue={0}
-            onChange={(val) => setDelayBetweenVerse(val)}
+            onChange={(val) => setDelayMultiplierBetweenVerse(val)}
             suffix="times"
             step={0.5}
           />
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Action onClick={onClickCancel}>Cancel</Modal.Action>
-        <Modal.Action onClick={onClickPlay}>Start Playing</Modal.Action>
+        <Modal.Action onClick={onCancelClick}>Cancel</Modal.Action>
+        <Modal.Action onClick={onPlayClick}>Start Playing</Modal.Action>
       </Modal.Footer>
     </Modal>
   );
