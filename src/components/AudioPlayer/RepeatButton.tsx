@@ -9,6 +9,7 @@ import Button, { ButtonVariant, ButtonShape } from 'src/components/dls/Button/Bu
 import Counter from 'src/components/dls/Counter/Counter';
 import Modal from 'src/components/dls/Modal/Modal';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
+import { getChapterData } from 'src/utils/chapter';
 import { generateChapterVersesKeys } from 'src/utils/verse';
 
 type RepeatButtonProps = {
@@ -16,6 +17,11 @@ type RepeatButtonProps = {
 };
 
 const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
+  const chapterName = useMemo(() => {
+    const chapterData = getChapterData(chapterId);
+    return chapterData?.nameSimple;
+  }, [chapterId]);
+
   const rangeVersesItems = useMemo<RangeVerseItem[]>(() => {
     const keys = generateChapterVersesKeys(chapterId);
 
@@ -55,7 +61,7 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>Verse Repeat settings</Modal.Title>
-          <Modal.Subtitle>Surah Al Baqarah</Modal.Subtitle>
+          <Modal.Subtitle>Surah {chapterName}</Modal.Subtitle>
         </Modal.Header>
         <div>
           <div className={styles.inputContainer}>
