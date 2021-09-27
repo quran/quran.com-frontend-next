@@ -148,7 +148,7 @@ const QuranReader = ({
           </InfiniteScroll>
           <EndOfScrollingControls
             quranReaderDataType={quranReaderDataType}
-            initialData={initialData}
+            lastVerse={verses[verses.length - 1]}
           />
         </div>
       </div>

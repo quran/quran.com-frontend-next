@@ -44,6 +44,18 @@ export const getJuzNavigationUrl = (juzNumber: string | number): string => `/juz
 export const getPageNavigationUrl = (pageNumber: string | number): string => `/page/${pageNumber}`;
 
 /**
+ * Get the href link to tafsir for Ayah.
+ *
+ * @param {string | number} chapterId
+ * @param {number} verseNumber
+ * @returns {string}
+ */
+export const getVerseTafsirNavigationUrl = (
+  chapterId: string | number,
+  verseNumber: number,
+): string => `/${chapterId}/${verseNumber}/tafsirs`;
+
+/**
  * Get the href link to a surah.
  *
  * @param {string | number} surahNumber
