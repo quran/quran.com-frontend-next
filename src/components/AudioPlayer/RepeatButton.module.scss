@@ -1,0 +1,7 @@
+.inputContainer {
+  display: flex;
+  align-items: center;
+}
+.inputContainer + .inputContainer {
+  margin-top: var(--spacing-small);
+}
