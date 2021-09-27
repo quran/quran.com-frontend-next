@@ -4,7 +4,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
-import RepeatAudioModal, { RepeatType } from './RepeatAudioModal';
+import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
+import { RepeatType } from './RepeatAudioModal/SelectType';
 
 import Button, { ButtonVariant, ButtonShape } from 'src/components/dls/Button/Button';
 import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';

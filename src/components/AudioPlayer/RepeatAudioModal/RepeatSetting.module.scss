@@ -1,4 +1,4 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 .inputContainer {
   display: flex;
@@ -20,7 +20,4 @@
 .input {
   display: flex;
   align-items: center;
-}
-.separator {
-  margin: var(--spacing-medium) 0;
 }

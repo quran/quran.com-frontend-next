@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
+import { RepeatType } from '../AudioPlayer/RepeatAudioModal/SelectType';
 
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 
-import RepeatAudioModal, { RepeatType } from 'src/components/AudioPlayer/RepeatAudioModal';
+import RepeatAudioModal from 'src/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 type VerseActionRepeatAudioProps = {
