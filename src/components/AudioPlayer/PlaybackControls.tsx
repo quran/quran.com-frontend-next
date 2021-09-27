@@ -24,7 +24,7 @@ const PlaybackControls = () => {
 
   return (
     <div className={styles.container}>
-      {audioFile?.chapterId && <RepeatButton chapterId={audioFile?.chapterId} />}
+      {audioFile?.chapterId && <RepeatButton chapterId={audioFile?.chapterId?.toString()} />}
       <Button
         tooltip="Rewind 10 seconds"
         variant={ButtonVariant.Ghost}
