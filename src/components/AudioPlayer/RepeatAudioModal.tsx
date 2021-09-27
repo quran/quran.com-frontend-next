@@ -6,6 +6,7 @@ import { RangeSelectorType, RangeVerseItem } from '../Verse/AdvancedCopy/Selecto
 import styles from './RepeatButton.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
+import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Modal from 'src/components/dls/Modal/Modal';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
@@ -59,7 +60,7 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
   const lastVersesRangeItems = rangeVersesItems[rangeVersesItems.length - 1];
 
   // TODO: connect to redux when the data flow is ready
-  const [repeatVerse, setRepeatVerse] = useState({ total: 1, progress: 0 });
+  const [repeatVerse, setRepeatVerse] = useState({ total: 1, progress: 0, verse: null });
   const [repeatVerseRange, setRepeatVerseRange] = useState({
     total: 1,
     progress: 0,
@@ -104,7 +105,16 @@ const RepeatAudioModal = ({ chapterId, isOpen, onClose }: RepeatAudioModalProps)
             value={repeatType}
             items={repeatTypeRadioGroupItems}
           />
-          {repeatType === RepeatType.Single && <div>a</div>}
+          {repeatType === RepeatType.Single && (
+            <Combobox
+              id={RepeatType.Single}
+              value={repeatVerse.verse}
+              items={rangeVersesItems}
+              onChange={(val) => setRepeatVerse({ ...repeatVerse, verse: val })}
+              placeholder="Search for a verse"
+              initialInputValue={repeatVerse.verse}
+            />
+          )}
           {repeatType === RepeatType.Range && (
             <div className={styles.inputContainer}>
               <VerseRangeSelector
