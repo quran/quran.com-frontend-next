@@ -60,7 +60,7 @@ const RepeatButton = ({ chapterId }: RepeatButtonProps) => {
     >
       <Modal.Body>
         <Modal.Header>
-          <Modal.Title>Verse Repeat settings</Modal.Title>
+          <Modal.Title>Repeat Settings</Modal.Title>
           <Modal.Subtitle>Surah {chapterName}</Modal.Subtitle>
         </Modal.Header>
         <div>
