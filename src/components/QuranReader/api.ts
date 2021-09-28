@@ -3,7 +3,7 @@ import { QuranReaderDataType } from './types';
 
 import { fetcher } from 'src/api';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
@@ -52,6 +52,7 @@ export const getRequestKey = ({
       reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
@@ -60,6 +61,7 @@ export const getRequestKey = ({
       reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
   if (isSelectedTafsirData || isTafsirData) {
@@ -80,6 +82,7 @@ export const getRequestKey = ({
       to: initialData.metaData.to,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
 
@@ -88,6 +91,7 @@ export const getRequestKey = ({
     page,
     translations: selectedTranslations.join(', '),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
   });
 };

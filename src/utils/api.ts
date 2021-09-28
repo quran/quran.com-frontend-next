@@ -2,10 +2,9 @@ import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
 
-import { QuranFont } from 'src/components/QuranReader/types';
+import { Mushaf, MushafLine, QuranFont, QuranFontMushaf } from 'src/components/QuranReader/types';
 
 export const ITEMS_PER_PAGE = 10;
-export const DEFAULT_MUSHAF = 5; // KFGQPC HAFS Text
 
 const STAGING_API_HOST = 'https://staging.quran.com/api/qdc';
 const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc';
@@ -38,12 +37,31 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
  * Get the default word fields that should exist in the response.
  *
  * @param {QuranFont} quranFont the selected quran font since.
- * @returns {{ wordFields: string; mushaf: number }}
+ * @returns {{ wordFields: string}}
  *
  */
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
-): { wordFields: string; mushaf: number } => ({
-  mushaf: DEFAULT_MUSHAF, // TODO: In a follow, the Mushaf value will be retrieved from redux.
+): { wordFields: string } => ({
   wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}`,
 });
+
+/**
+ * Get the mushaf id based on the value inside redux (if it's not SSR).
+ *
+ * @param {QuranFont} quranFont
+ * @param {MushafLine} mushafLines
+ * @returns {{mushaf: number}}
+ */
+export const getMushafId = (
+  quranFont: QuranFont = QuranFont.QPCHafs,
+  mushafLines?: MushafLine,
+): { mushaf: number } => {
+  let mushaf = QuranFontMushaf[quranFont];
+  // convert the Indopak mushaf to either 15 or 16 lines Mushaf
+  if (quranFont === QuranFont.IndoPak && mushafLines) {
+    mushaf =
+      mushafLines === MushafLine.FifteenLines ? Mushaf.Indopak15Lines : Mushaf.Indopak16Lines;
+  }
+  return { mushaf };
+};

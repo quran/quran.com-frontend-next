@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { QuranFont } from 'src/components/QuranReader/types';
+import { MushafLine, QuranFont } from 'src/components/QuranReader/types';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
 
@@ -12,6 +12,7 @@ export type QuranReaderStyles = {
   translationFontScale: number;
   quranTextFontScale: number;
   quranFont: QuranFont;
+  mushafLines: MushafLine;
 };
 
 export const initialState: QuranReaderStyles = {
@@ -20,6 +21,7 @@ export const initialState: QuranReaderStyles = {
   quranTextFontScale: 3,
   translationFontScale: 3,
   quranFont: QuranFont.QPCHafs,
+  mushafLines: MushafLine.SixteenLines,
 };
 
 export const quranReaderStylesSlice = createSlice({
@@ -49,6 +51,10 @@ export const quranReaderStylesSlice = createSlice({
     decreaseTafsirFontScale: (state) => ({
       ...state,
       tafsirFontScale: state.tafsirFontScale - 1,
+    }),
+    setMushafLines: (state, action: PayloadAction<MushafLine>) => ({
+      ...state,
+      mushafLines: action.payload,
     }),
     setQuranFont: (state: QuranReaderStyles, action: PayloadAction<QuranFont>) => {
       switch (action.payload) {
@@ -85,8 +91,10 @@ export const {
   decreaseQuranTextFontScale,
   increaseTranslationFontScale,
   decreaseTranslationFontScale,
+  setMushafLines,
 } = quranReaderStylesSlice.actions;
 
 export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
+export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
 
 export default quranReaderStylesSlice.reducer;

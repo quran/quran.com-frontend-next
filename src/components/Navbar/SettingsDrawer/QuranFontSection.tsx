@@ -7,7 +7,7 @@ import Section from './Section';
 import Counter from 'src/components/dls/Counter/Counter';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
-import { QuranFont } from 'src/components/QuranReader/types';
+import { MushafLine, QuranFont } from 'src/components/QuranReader/types';
 // import VerseText from 'src/components/Verse/VerseText';
 import {
   decreaseQuranTextFontScale,
@@ -18,6 +18,7 @@ import {
   selectQuranReaderStyles,
   setQuranFont,
   initialState as QuranReaderStylesInitialState,
+  setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
 
 // import { getSampleVerse } from 'src/utils/verse';
@@ -28,6 +29,21 @@ import {
 const type = [
   { id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak, name: QuranFont.IndoPak },
   { id: QuranFont.Uthmani, label: 'Uthmani', value: QuranFont.Uthmani, name: QuranFont.Uthmani },
+];
+
+const lines = [
+  {
+    id: MushafLine.FifteenLines,
+    label: '15 Lines',
+    value: MushafLine.FifteenLines,
+    name: MushafLine.FifteenLines,
+  },
+  {
+    id: MushafLine.SixteenLines,
+    label: '16 Lines',
+    value: MushafLine.SixteenLines,
+    name: MushafLine.SixteenLines,
+  },
 ];
 
 // when one of the view is selected, user can choose which font they want to use
@@ -80,7 +96,7 @@ const getDefaultFont = (selectedType) => {
 const QuranFontSection = () => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
-  const { quranFont, quranTextFontScale } = quranReaderStyles;
+  const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   const selectedType = getSelectedType(quranFont);
 
   return (
@@ -106,6 +122,18 @@ const QuranFontSection = () => {
           onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
         />
       </Section.Row>
+      {selectedType === QuranFont.IndoPak && (
+        <Section.Row>
+          <Section.Label>Mushaf lines</Section.Label>
+          <RadioGroup
+            onChange={(value: MushafLine) => dispatch(setMushafLines(value))}
+            value={mushafLines}
+            label="lines"
+            items={lines}
+            orientation={RadioGroupOrientation.Horizontal}
+          />
+        </Section.Row>
+      )}
       <Section.Row>
         <Section.Label>Font size</Section.Label>
         <Counter

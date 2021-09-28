@@ -8,7 +8,7 @@ import { getPageVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
 import { QuranReaderDataType } from 'src/components/QuranReader/types';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -48,12 +48,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       notFound: true,
     };
   }
-
-  const pageVersesResponse = await getPageVerses(pageId, {
-    ...getDefaultWordFields(),
-  });
-  // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (pageVersesResponse.status === 500) {
+  try {
+    const pageVersesResponse = await getPageVerses(pageId, {
+      ...getDefaultWordFields(),
+      ...getMushafId(),
+    });
+    return {
+      props: {
+        pageVerses: pageVersesResponse,
+      },
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    };
+  } catch (error) {
     return {
       props: {
         hasError: true,
@@ -61,13 +67,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
-
-  return {
-    props: {
-      pageVerses: pageVersesResponse,
-    },
-    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
