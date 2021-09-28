@@ -7,14 +7,14 @@ import { useRouter } from 'next/router';
 import { getJuzVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidJuzId } from 'src/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;
@@ -48,12 +48,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       notFound: true,
     };
   }
-
-  const juzVersesResponse = await getJuzVerses(juzId, {
-    ...getDefaultWordFields(),
-  });
-  // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (juzVersesResponse.status === 500) {
+  try {
+    const juzVersesResponse = await getJuzVerses(juzId, {
+      ...getDefaultWordFields(),
+      ...getMushafId(),
+    });
+    return {
+      props: {
+        juzVerses: juzVersesResponse,
+      },
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    };
+  } catch (error) {
     return {
       props: {
         hasError: true,
@@ -61,13 +67,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
-
-  return {
-    props: {
-      juzVerses: juzVersesResponse,
-    },
-    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({

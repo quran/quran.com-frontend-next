@@ -1,3 +1,5 @@
+import { MushafLines } from 'types/QuranReader';
+
 export default {
   3: (state) => ({
     ...state,
@@ -25,6 +27,13 @@ export default {
     readingTracker: {
       ...state.readingTracker,
       recentReadingSessions: {},
+    },
+  }),
+  7: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      mushafLines: MushafLines.SixteenLines,
     },
   }),
 };

@@ -30,7 +30,7 @@ import theme from './slices/theme';
 
 const persistConfig = {
   key: 'root',
-  version: 6,
+  version: 7,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',

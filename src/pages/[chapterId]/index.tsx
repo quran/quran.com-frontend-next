@@ -6,8 +6,7 @@ import Error from 'next/error';
 import { getChapterVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -16,6 +15,7 @@ import {
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return { notFound: true };
   }
   // common API params between a chapter and the verse key.
-  let apiParams = { ...getDefaultWordFields() };
+  let apiParams = { ...getDefaultWordFields(), ...getMushafId() };
   // initialize the value as if it's chapter
   let chapterId = chapterIdOrVerseKey;
   // if it's a verseKey
