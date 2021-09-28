@@ -1,12 +1,14 @@
 import { useEffect, useRef } from 'react';
 
+import { shallowEqual, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import { triggerPauseAudio, triggerSetCurrentTime } from './EventTriggers';
+import { triggerPauseAudio, triggerPlayAudio, triggerSetCurrentTime } from './EventTriggers';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 import useMemoizedHighlightedVerseTiming from './hooks/useMemoizedHighlightedVerseTiming';
 
 import { getChapterAudioFile } from 'src/api';
+import { getVerseTimingByVerseKey, selectRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { makeVerseKey } from 'src/utils/verse';
@@ -19,19 +21,21 @@ type FindAGoodNameProps = {
 };
 // eslint-disable-next-line react-func/max-lines-per-function
 const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodNameProps) => {
+  const repeatSettings = useSelector(selectRepeatSettings, shallowEqual);
   const chapterData = getChapterData(chapterId.toString());
   const repeatVerse = useRef({
-    total: 0,
-    progress: 0,
+    total: 1,
+    progress: 1,
   });
   const repeatVerseRange = useRef({
     total: 1,
-    progress: 0,
+    progress: 1,
     range: {
       from: makeVerseKey(Number(chapterData.id), 1),
-      to: makeVerseKey(Number(chapterData.id), 2), // test repeat verse 1 - 2
+      to: makeVerseKey(Number(chapterData.id), chapterData.versesCount), // test repeat verse 1 - 2
     },
   });
+  const delayMultiplierBetweenVerse = useRef(0);
   const { data: audioFileData } = useSWRImmutable(
     makeChapterAudioFilesUrl(reciterId, chapterId, true),
     () => getChapterAudioFile(reciterId, chapterId, true),
@@ -45,38 +49,82 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     audioFileData,
   );
 
+  useEffect(() => {
+    if (!repeatSettings.from || !repeatSettings.to) return null;
+
+    // reset the progress
+    repeatVerse.current.progress = 1;
+    repeatVerseRange.current.progress = 1;
+
+    // set the setting
+    repeatVerse.current.total = repeatSettings.repeatEachVerse;
+    repeatVerseRange.current.total = repeatSettings.repeatRange;
+    repeatVerseRange.current.range.from = repeatSettings.from;
+    repeatVerseRange.current.range.to = repeatSettings.to;
+    delayMultiplierBetweenVerse.current = repeatSettings.delayMultiplierBetweenVerse;
+
+    return null;
+  }, [
+    repeatSettings.from,
+    repeatSettings.to,
+    repeatSettings.repeatEachVerse,
+    repeatSettings.repeatRange,
+    repeatSettings.delayMultiplierBetweenVerse,
+  ]);
+
   // eslint-disable-next-line react-func/max-lines-per-function
   useEffect(() => {
     if (!lastHighlightedVerseTiming.current) return null;
     if (!audioFileData) return null;
-    if (currentTimeInMs >= lastHighlightedVerseTiming.current.timestampTo) {
-      // triggerPauseAudio();
-      // setTimeout(() => triggerPlayAudio(), 1000); // TODO: use real value for `3000`
 
-      if (repeatVerse.current.progress < repeatVerse.current.total) {
-        repeatVerse.current.progress += 1;
-        triggerSetCurrentTime(lastHighlightedVerseTiming.current.timestampFrom / 1000); // audioPlayerEl operates in second not ms
-      } else {
-        repeatVerse.current.progress = 0;
-      }
+    const verseRangeTo = getVerseTimingByVerseKey(
+      repeatVerseRange.current.range.to,
+      audioFileData.verseTimings,
+    );
+    const verseRangeFrom = getVerseTimingByVerseKey(
+      repeatVerseRange.current.range.from,
+      audioFileData.verseTimings,
+    );
 
-      const verseRangeTo = getVerseTimingByVerseKey(
-        repeatVerseRange.current.range.to,
-        audioFileData.verseTimings,
-      );
-      const verseRangeFrom = getVerseTimingByVerseKey(
-        repeatVerseRange.current.range.from,
-        audioFileData.verseTimings,
-      );
-      if (currentTimeInMs >= verseRangeTo.timestampTo) {
-        if (repeatVerseRange.current.progress < repeatVerseRange.current.total) {
-          repeatVerseRange.current.progress += 1;
-          triggerSetCurrentTime(verseRangeFrom.timestampFrom / 1000);
-        } else {
-          repeatVerseRange.current.progress = 0;
-          triggerPauseAudio();
-        }
-      }
+    const shouldRepeatVerse =
+      currentTimeInMs >= lastHighlightedVerseTiming.current.timestampTo &&
+      repeatVerse.current.progress < repeatVerse.current.total;
+    const shouldResetVerseProgress =
+      currentTimeInMs >= lastHighlightedVerseTiming.current.timestampTo &&
+      repeatVerse.current.progress >= repeatVerse.current.total;
+
+    const shouldRepeatRange =
+      currentTimeInMs >= verseRangeTo.timestampTo &&
+      repeatVerseRange.current.progress < repeatVerseRange.current.total;
+
+    const shouldStop =
+      currentTimeInMs >= verseRangeTo.timestampTo &&
+      repeatVerseRange.current.progress >= repeatVerseRange.current.total;
+
+    const getNewTime = (): number => {
+      if (shouldRepeatVerse) return lastHighlightedVerseTiming.current.timestampFrom / 1000;
+      if (shouldRepeatRange) return verseRangeFrom.timestampFrom / 1000;
+      return null;
+    };
+
+    const shouldDelayAudio =
+      !shouldStop &&
+      delayMultiplierBetweenVerse.current > 0 &&
+      (shouldRepeatVerse || shouldRepeatRange || shouldResetVerseProgress);
+
+    const newtime = getNewTime();
+    if (typeof newtime === 'number') triggerSetCurrentTime(newtime);
+    if (shouldRepeatVerse) repeatVerse.current.progress += 1;
+    if (shouldResetVerseProgress) repeatVerse.current.progress = 1;
+    if (shouldRepeatRange) repeatVerseRange.current.progress += 1;
+    if (shouldStop) triggerPauseAudio();
+    if (shouldDelayAudio) {
+      triggerPauseAudio();
+      const delay =
+        delayMultiplierBetweenVerse.current *
+        (lastHighlightedVerseTiming.current.timestampTo -
+          lastHighlightedVerseTiming.current.timestampFrom);
+      setTimeout(triggerPlayAudio, delay);
     }
 
     return null;
@@ -87,10 +135,6 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
   }, [currentHighlightedVerseTiming]);
 
   return null;
-};
-
-const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {
-  return verseTimings.find((verseTiming) => verseTiming.verseKey === verseKey);
 };
 
 export default FindAGoodName;

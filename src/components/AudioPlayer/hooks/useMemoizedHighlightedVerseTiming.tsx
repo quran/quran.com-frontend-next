@@ -15,6 +15,9 @@ const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: A
   const lastHighlightedVerse = useRef<VerseTiming>(null);
   if (!audioFileData) return null;
 
+  // Do not highlight the verse when the audio hasn't started playing
+  if (currentTime === 0) return null;
+
   if (
     lastHighlightedVerse.current &&
     isCurrentTimeInRange(

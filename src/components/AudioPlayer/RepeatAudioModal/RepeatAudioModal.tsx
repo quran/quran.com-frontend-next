@@ -1,5 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
@@ -7,6 +9,7 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
+import { playFrom, selectReciter, setRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { generateChapterVersesKeys } from 'src/utils/verse';
 
@@ -25,6 +28,8 @@ const RepeatAudioModal = ({
   defaultRepetitionMode,
   defaultSelectedVerse,
 }: RepeatAudioModalProps) => {
+  const dispatch = useDispatch();
+  const reciter = useSelector(selectReciter, shallowEqual);
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId);
     return chapterData?.nameSimple;
@@ -51,8 +56,8 @@ const RepeatAudioModal = ({
     repeatEachVerse: 1,
     from: defaultSelectedVerse || firstVerseKeyInThisChapter,
     to: lastVerseKeyInThisChapter,
+    delayMultiplierBetweenVerse: 0,
   });
-  const [delayMultiplierBetweenVerse, setDelayMultiplierBetweenVerse] = useState(0);
 
   // reset verseRepetition's `to` and `from`, when chapter changed
   useEffect(() => {
@@ -64,6 +69,14 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, defaultSelectedVerse]);
 
   const onPlayClick = () => {
+    dispatch(
+      playFrom({
+        chapterId: Number(chapterId),
+        reciterId: reciter.id,
+        verseKey: verseRepetition.from,
+      }),
+    );
+    dispatch(setRepeatSettings(verseRepetition));
     onClose();
   };
   const onCancelClick = () => {
@@ -108,9 +121,11 @@ const RepeatAudioModal = ({
           />
           <RepeatSetting
             label="Delay between verse"
-            value={delayMultiplierBetweenVerse}
+            value={verseRepetition.delayMultiplierBetweenVerse}
             minValue={0}
-            onChange={(val) => setDelayMultiplierBetweenVerse(val)}
+            onChange={(val) =>
+              setVerseRepetition({ ...verseRepetition, delayMultiplierBetweenVerse: val })
+            }
             suffix="times"
             step={0.5}
           />

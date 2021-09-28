@@ -18,10 +18,9 @@ import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlight
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
-  timestamp: number;
   verseKey: string;
 }
-const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
+const PlayVerseAudioButton = ({ verseKey }: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
@@ -40,7 +39,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
       playFrom({
         chapterId,
         reciterId,
-        timestamp,
+        verseKey,
       }),
     );
 

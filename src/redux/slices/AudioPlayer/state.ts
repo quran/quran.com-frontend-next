@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+// TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DEFAULT_RECITER } from './defaultData';
@@ -12,6 +14,7 @@ import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
 import AudioFile from 'types/AudioFile';
 import Reciter from 'types/Reciter';
+import VerseTiming from 'types/VerseTiming';
 
 export enum AudioFileStatus {
   Ready = 'Ready',
@@ -26,6 +29,14 @@ export type AudioState = {
   audioFileStatus: AudioFileStatus;
   isMobileMinimizedForScrolling: boolean;
   enableAutoScrolling: boolean;
+  repeatSettings: {
+    // TODO: add typing
+    repeatRange: number;
+    repeatEachVerse: number;
+    from: string;
+    to: string;
+    delayMultiplierBetweenVerse: number;
+  };
 };
 
 const initialState: AudioState = {
@@ -35,6 +46,13 @@ const initialState: AudioState = {
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
   isMobileMinimizedForScrolling: false,
+  repeatSettings: {
+    delayMultiplierBetweenVerse: 0,
+    repeatRange: 1,
+    repeatEachVerse: 1,
+    from: null,
+    to: null,
+  },
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -48,6 +66,7 @@ export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
   state.audioPlayerState.isMobileMinimizedForScrolling;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
+export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
 
 /**
  * get the audio file for the current reciter
@@ -106,13 +125,13 @@ export const setReciterAndPauseAudio = createAsyncThunk<void, Reciter, { state: 
  *
  */
 interface PlayFromInput {
-  timestamp: number;
+  verseKey: string;
   chapterId: number;
   reciterId: number;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
-  async ({ timestamp, chapterId, reciterId }, thunkApi) => {
+  async ({ verseKey, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
     let audioFile = selectAudioFile(state);
@@ -122,7 +141,10 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       thunkApi.dispatch(setAudioFile(audioFile));
     }
 
-    const timestampInSeconds = timestamp / 1000;
+    const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
+    const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
+
+    const timestampInSeconds = verseTiming.timestampFrom / 1000;
     triggerSetCurrentTime(timestampInSeconds);
 
     triggerPlayAudio();
@@ -162,6 +184,10 @@ export const audioPlayerStateSlice = createSlice({
       audioFile: initialState.audioFile,
       audioFileStatus: initialState.audioFileStatus,
     }),
+    setRepeatSettings: (state, action) => ({
+      ...state,
+      repeatSettings: action.payload,
+    }),
   },
   // reset reciter to DEFAULT_RECITER
   // WHEN `reset` action is dispatched
@@ -181,6 +207,11 @@ export const {
   resetAudioFile,
   setIsMobileMinimizedForScrolling,
   setEnableAutoScrolling,
+  setRepeatSettings,
 } = audioPlayerStateSlice.actions;
+
+export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {
+  return verseTimings.find((verseTiming) => verseTiming.verseKey === verseKey);
+};
 
 export default audioPlayerStateSlice.reducer;
