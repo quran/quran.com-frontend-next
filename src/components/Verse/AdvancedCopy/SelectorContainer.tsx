@@ -38,6 +38,7 @@ const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems
     <Combobox
       id={type}
       value={value}
+      clearable={false}
       items={dropdownItems}
       onChange={onChange}
       placeholder="Search for a verse"

@@ -9,6 +9,7 @@ import { getPageLimit, getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import EndOfScrollingControls from './EndOfScrollingControls';
+import Loader from './Loader';
 import Notes from './Notes/Notes';
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
@@ -49,6 +50,7 @@ const QuranReader = ({
 }: QuranReaderProps) => {
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
+  const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -68,6 +70,7 @@ const QuranReader = ({
         selectedTafsirs,
         isVerseData,
         isTafsirData,
+        isSelectedTafsirData,
         id,
         reciter: reciter.id,
       }),
@@ -99,9 +102,9 @@ const QuranReader = ({
     );
   }
   let view;
-  const pageLimit = getPageLimit(isVerseData, isTafsirData, initialData);
+  const pageLimit = getPageLimit(isVerseData, isTafsirData || isSelectedTafsirData, initialData);
   const verses = data.flat(1);
-  if (quranReaderDataType === QuranReaderDataType.Tafsir) {
+  if (isTafsirData || isSelectedTafsirData) {
     view = <TafsirView verse={verses[0]} />;
   } else if (readingPreference === ReadingPreference.Reading) {
     view = <ReadingView verses={verses} />;
@@ -129,17 +132,7 @@ const QuranReader = ({
             threshold={INFINITE_SCROLLER_THRESHOLD}
             hasMore={size < pageLimit}
             loadMore={loadMore}
-            loader={
-              <div className={styles.loadMoreContainer} key={0}>
-                {isValidating ? (
-                  <Spinner size={SpinnerSize.Large} />
-                ) : (
-                  <button type="button" onClick={loadMore} disabled={isValidating}>
-                    Load More...
-                  </button>
-                )}
-              </div>
-            }
+            loader={<Loader isValidating={isValidating} loadMore={loadMore} />}
           >
             {isQCFFont(quranReaderStyles.quranFont) && (
               <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
@@ -148,7 +141,7 @@ const QuranReader = ({
           </InfiniteScroll>
           <EndOfScrollingControls
             quranReaderDataType={quranReaderDataType}
-            initialData={initialData}
+            lastVerse={verses[verses.length - 1]}
           />
         </div>
       </div>

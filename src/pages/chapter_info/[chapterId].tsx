@@ -1,9 +1,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import Error from 'next/error';
 
 import { getChapterInfo } from 'src/api';
-import Info from 'src/components/chapters/Info';
-import NextSeoHead from 'src/components/NextSeoHead';
+import InfoPage from 'src/components/chapters/Info/InfoPage';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -18,18 +16,8 @@ interface Props {
   hasError?: boolean;
 }
 
-const ChapterInfo: NextPage<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
-  return (
-    <>
-      <NextSeoHead
-        title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
-      />
-      <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
-    </>
-  );
+const ChapterInfo: NextPage<Props> = (props) => {
+  return <InfoPage {...props} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
@@ -40,27 +28,21 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       notFound: true,
     };
   }
-
-  const chapterInfoResponse = await getChapterInfo(chapterId, locale);
-  const chapterData = getChapterData(chapterId, locale);
-
-  // if the API failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-  if (chapterInfoResponse.status === 500 || !chapterData) {
+  try {
+    const chapterInfoResponse = await getChapterInfo(chapterId, locale);
     return {
       props: {
-        hasError: true,
+        chapterInfoResponse,
+        chapterResponse: { chapter: getChapterData(chapterId, locale) },
       },
+      revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
+    };
+  } catch (error) {
+    return {
+      props: { hasError: true },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
-
-  return {
-    props: {
-      chapterInfoResponse,
-      chapterResponse: { chapter: chapterData },
-    },
-    revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({

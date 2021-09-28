@@ -14,6 +14,7 @@ import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 import styles from './VerseActionsMenu.module.scss';
 import VerseActionsMenuItem from './VerseActionsMenuItem';
 
@@ -138,6 +139,8 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
           icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
           onClick={onToggleBookmarkClicked}
         />
+
+        <VerseActionRepeatAudio verseKey={verse.verseKey} />
 
         {shouldShowGoToAyah && (
           <Link href={verseUrl}>

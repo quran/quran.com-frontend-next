@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 /**
  * Get the juz number by the hiz number. One hizb is half a Juz.
  *
@@ -7,3 +5,19 @@
  * @returns {number}
  */
 export const getJuzNumberByHizb = (hizb: number): number => Math.ceil(hizb / 2);
+
+/**
+ * Whether the current juz is the first surah.
+ *
+ * @param {number} juzNumber
+ * @returns  {boolean}
+ */
+export const isFirstJuz = (juzNumber: number): boolean => juzNumber === 1;
+
+/**
+ * Whether the current juz is the last surah.
+ *
+ * @param {number} juzNumber
+ * @returns  {boolean}
+ */
+export const isLastJuz = (juzNumber: number): boolean => juzNumber === 30;
