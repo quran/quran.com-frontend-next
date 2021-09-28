@@ -32,7 +32,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     progress: 1,
     range: {
       from: makeVerseKey(Number(chapterData.id), 1),
-      to: makeVerseKey(Number(chapterData.id), chapterData.versesCount), // test repeat verse 1 - 2
+      to: makeVerseKey(Number(chapterData.id), chapterData.versesCount),
     },
   });
   const delayMultiplierBetweenVerse = useRef(0);
@@ -76,6 +76,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
   useEffect(() => {
     if (!lastHighlightedVerseTiming.current) return null;
     if (!audioFileData) return null;
+    if (!repeatVerseRange.current.range.from || !repeatVerseRange.current.range.to) return null;
 
     const verseRangeTo = getVerseTimingByVerseKey(
       repeatVerseRange.current.range.to,
@@ -117,7 +118,14 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     if (shouldRepeatVerse) repeatVerse.current.progress += 1;
     if (shouldResetVerseProgress) repeatVerse.current.progress = 1;
     if (shouldRepeatRange) repeatVerseRange.current.progress += 1;
-    if (shouldStop) triggerPauseAudio();
+    if (shouldStop) {
+      repeatVerseRange.current.range.from = makeVerseKey(Number(chapterData.id), 1);
+      repeatVerseRange.current.range.to = makeVerseKey(
+        Number(chapterData.id),
+        chapterData.versesCount,
+      );
+      triggerPauseAudio();
+    }
     if (shouldDelayAudio) {
       triggerPauseAudio();
       const delay =
@@ -128,7 +136,13 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     }
 
     return null;
-  }, [currentTimeInMs, currentHighlightedVerseTiming, currentTime, audioFileData]);
+  }, [
+    currentTimeInMs,
+    currentHighlightedVerseTiming,
+    audioFileData,
+    chapterData.id,
+    chapterData.versesCount,
+  ]);
 
   useEffect(() => {
     lastHighlightedVerseTiming.current = currentHighlightedVerseTiming;
