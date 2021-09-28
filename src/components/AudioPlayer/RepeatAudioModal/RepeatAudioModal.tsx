@@ -52,7 +52,7 @@ const RepeatAudioModal = ({
   const lastVerseKeyInThisChapter = comboboxVerseItems[comboboxVerseItems.length - 1].value;
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: 1,
+    repeatRange: 3,
     repeatEachVerse: 1,
     from: defaultSelectedVerse || firstVerseKeyInThisChapter,
     to: defaultSelectedVerse || lastVerseKeyInThisChapter,
@@ -106,17 +106,17 @@ const RepeatAudioModal = ({
             <Separator />
           </div>
           <RepeatSetting
+            label="Play range"
+            value={verseRepetition.repeatRange}
+            minValue={1}
+            onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatRange: val })}
+            suffix="times"
+          />
+          <RepeatSetting
             label="Repeat each verse"
             value={verseRepetition.repeatEachVerse}
             minValue={1}
             onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatEachVerse: val })}
-            suffix="times"
-          />
-          <RepeatSetting
-            label="Repeat each range"
-            value={verseRepetition.repeatRange}
-            minValue={1}
-            onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatRange: val })}
             suffix="times"
           />
           <RepeatSetting
