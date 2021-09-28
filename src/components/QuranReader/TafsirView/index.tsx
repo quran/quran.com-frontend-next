@@ -16,23 +16,43 @@ interface Props {
   verse: Verse;
 }
 
+const RTL_LANGUAGES = [
+  'urdu',
+  'persian',
+  'hebrew',
+  'pashto',
+  'arabic',
+  'divehi',
+  'dhivehi',
+  'uyghur',
+  'uighur',
+];
+
 const TafsirView: React.FC<Props> = ({ verse }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   return (
     <div className={styles.container}>
       <VerseText words={getVerseWords(verse)} />
-      {verse.tafsirs?.map((tafsir) => (
-        <div key={tafsir.id}>
-          {tafsir.resourceName && <p className={styles.tafsirName}>{tafsir.resourceName}</p>}
-          <div
-            className={classNames(
-              styles.tafsirContainer,
-              styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
+      {verse.tafsirs?.map((tafsir) => {
+        const isRtl = RTL_LANGUAGES.includes(tafsir.languageName);
+        return (
+          <div key={tafsir.id}>
+            {tafsir.resourceName && (
+              <p className={classNames(styles.tafsirName, { [styles.rtl]: isRtl })}>
+                {tafsir.resourceName}
+              </p>
             )}
-            dangerouslySetInnerHTML={{ __html: tafsir.text }}
-          />
-        </div>
-      ))}
+            <div
+              className={classNames(
+                styles.tafsirContainer,
+                styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
+                { [styles.rtl]: isRtl },
+              )}
+              dangerouslySetInnerHTML={{ __html: tafsir.text }}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

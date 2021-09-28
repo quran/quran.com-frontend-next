@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     translations: null,
     tafsirs: DEFAULT_TAFSIRS,
     wordFields: 'location, verse_key, text_uthmani',
-    tafsirFields: 'resource_name',
+    tafsirFields: 'resource_name,language_name',
   });
   // if the chapter or verses APIs failed
 
