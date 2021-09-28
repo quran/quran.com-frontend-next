@@ -55,7 +55,7 @@ const RepeatAudioModal = ({
     repeatRange: 1,
     repeatEachVerse: 1,
     from: defaultSelectedVerse || firstVerseKeyInThisChapter,
-    to: lastVerseKeyInThisChapter,
+    to: defaultSelectedVerse || lastVerseKeyInThisChapter,
     delayMultiplierBetweenVerse: 0,
   });
 
@@ -64,7 +64,7 @@ const RepeatAudioModal = ({
     setVerseRepetition((prevVerseRepetition) => ({
       ...prevVerseRepetition,
       from: defaultSelectedVerse || firstVerseKeyInThisChapter,
-      to: lastVerseKeyInThisChapter,
+      to: defaultSelectedVerse || lastVerseKeyInThisChapter,
     }));
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, defaultSelectedVerse]);
 
