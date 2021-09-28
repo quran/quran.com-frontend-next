@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       translations: null,
       tafsirs: tafsirId,
       wordFields: 'location, verse_key, text_uthmani',
-      tafsirFields: 'resource_name',
+      tafsirFields: 'resource_name,language_name',
     });
     return {
       props: {

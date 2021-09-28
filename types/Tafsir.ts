@@ -3,6 +3,7 @@ interface Tafsir {
   resourceId?: number;
   text?: string;
   resourceName?: string;
+  languageName?: string;
 }
 
 export default Tafsir;
