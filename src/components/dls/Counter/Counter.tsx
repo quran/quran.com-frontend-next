@@ -6,7 +6,7 @@ import styles from './Counter.module.scss';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 
 type CounterProps = {
-  count: number;
+  count: number | string;
   onIncrement?: () => void;
   onDecrement?: () => void;
 };
