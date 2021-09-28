@@ -7,8 +7,6 @@ import Section from './Section';
 import Counter from 'src/components/dls/Counter/Counter';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
-import { MushafLine, QuranFont } from 'src/components/QuranReader/types';
-// import VerseText from 'src/components/Verse/VerseText';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
@@ -20,6 +18,8 @@ import {
   initialState as QuranReaderStylesInitialState,
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
+import { MushafLines, QuranFont } from 'types/QuranReader';
+// import VerseText from 'src/components/Verse/VerseText';
 
 // import { getSampleVerse } from 'src/utils/verse';
 // import Word from 'types/Word';
@@ -33,16 +33,16 @@ const type = [
 
 const lines = [
   {
-    id: MushafLine.FifteenLines,
+    id: MushafLines.FifteenLines,
     label: '15 Lines',
-    value: MushafLine.FifteenLines,
-    name: MushafLine.FifteenLines,
+    value: MushafLines.FifteenLines,
+    name: MushafLines.FifteenLines,
   },
   {
-    id: MushafLine.SixteenLines,
+    id: MushafLines.SixteenLines,
     label: '16 Lines',
-    value: MushafLine.SixteenLines,
-    name: MushafLine.SixteenLines,
+    value: MushafLines.SixteenLines,
+    name: MushafLines.SixteenLines,
   },
 ];
 
@@ -124,13 +124,13 @@ const QuranFontSection = () => {
       </Section.Row>
       {selectedType === QuranFont.IndoPak && (
         <Section.Row>
-          <Section.Label>Mushaf lines</Section.Label>
-          <RadioGroup
-            onChange={(value: MushafLine) => dispatch(setMushafLines(value))}
+          <Section.Label>Lines</Section.Label>
+          <Select
+            id="lines"
+            name="lines"
+            options={lines}
             value={mushafLines}
-            label="lines"
-            items={lines}
-            orientation={RadioGroupOrientation.Horizontal}
+            onChange={(value: MushafLines) => dispatch(setMushafLines(value))}
           />
         </Section.Row>
       )}

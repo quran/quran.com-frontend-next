@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { getJuzVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -15,6 +14,7 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { isValidJuzId } from 'src/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;

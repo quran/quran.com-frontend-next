@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { getChapterVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
 import { getChapterData } from 'src/utils/chapter';
 import {
@@ -15,6 +14,7 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;

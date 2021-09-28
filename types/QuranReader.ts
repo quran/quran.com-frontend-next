@@ -28,7 +28,7 @@ export enum QuranFont {
   QPCHafs = 'qpc_uthmani_hafs',
 }
 
-export enum MushafLine {
+export enum MushafLines {
   FifteenLines = '15_lines',
   SixteenLines = '16_lines',
 }

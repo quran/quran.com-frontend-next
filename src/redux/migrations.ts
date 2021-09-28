@@ -1,4 +1,4 @@
-import { MushafLine } from 'src/components/QuranReader/types';
+import { MushafLines } from 'types/QuranReader';
 
 export default {
   3: (state) => ({
@@ -33,7 +33,7 @@ export default {
     ...state,
     quranReaderStyles: {
       ...state.quranReaderStyles,
-      mushafLines: MushafLine.SixteenLines,
+      mushafLines: MushafLines.SixteenLines,
     },
   }),
 };

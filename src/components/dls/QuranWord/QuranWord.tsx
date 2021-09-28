@@ -8,7 +8,6 @@ import styles from './QuranWord.module.scss';
 import TextWord from './TextWord';
 
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
-import { QuranFont, WordByWordType } from 'src/components/QuranReader/types';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
@@ -18,6 +17,7 @@ import {
 import { areArraysEqual } from 'src/utils/array';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { makeWordLocation } from 'src/utils/verse';
+import { QuranFont, WordByWordType } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';

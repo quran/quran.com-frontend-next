@@ -5,8 +5,8 @@
 
 @font-face {
   font-family: "IndoPak";
-  src: url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff"),
-    url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff2");
+  src: url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff") format("woff2"),
+    url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff2") format("woff");
 }
 
 @font-face {

@@ -1,11 +1,11 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { QuranReaderDataType } from './types';
 
 import { fetcher } from 'src/api';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface RequestKeyInput {

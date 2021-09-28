@@ -7,7 +7,7 @@ import PageControls from './PageControls';
 import TafsirControls from './TafsirControls';
 import VerseControls from './VerseControls';
 
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {

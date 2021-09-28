@@ -6,7 +6,6 @@ import Error from 'next/error';
 import { getChapterVerses } from 'src/api';
 import NextSeoHead from 'src/components/NextSeoHead';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -15,6 +14,7 @@ import {
 import { isValidTafsirId, isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;

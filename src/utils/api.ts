@@ -2,7 +2,7 @@ import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
 
-import { Mushaf, MushafLine, QuranFont, QuranFontMushaf } from 'src/components/QuranReader/types';
+import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -50,18 +50,18 @@ export const getDefaultWordFields = (
  * Get the mushaf id based on the value inside redux (if it's not SSR).
  *
  * @param {QuranFont} quranFont
- * @param {MushafLine} mushafLines
+ * @param {MushafLines} mushafLines
  * @returns {{mushaf: number}}
  */
 export const getMushafId = (
   quranFont: QuranFont = QuranFont.QPCHafs,
-  mushafLines?: MushafLine,
+  mushafLines?: MushafLines,
 ): { mushaf: number } => {
   let mushaf = QuranFontMushaf[quranFont];
   // convert the Indopak mushaf to either 15 or 16 lines Mushaf
   if (quranFont === QuranFont.IndoPak && mushafLines) {
     mushaf =
-      mushafLines === MushafLine.FifteenLines ? Mushaf.Indopak15Lines : Mushaf.Indopak16Lines;
+      mushafLines === MushafLines.FifteenLines ? Mushaf.Indopak15Lines : Mushaf.Indopak16Lines;
   }
   return { mushaf };
 };

@@ -16,7 +16,6 @@ import styles from './QuranReader.module.scss';
 import ReadingView from './ReadingView';
 import TafsirView from './TafsirView';
 import TranslationView from './TranslationView';
-import { QuranReaderDataType, ReadingPreference } from './types';
 
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
@@ -34,6 +33,7 @@ import {
 import { areArraysEqual } from 'src/utils/array';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
 type QuranReaderProps = {
   initialData: VersesResponse;

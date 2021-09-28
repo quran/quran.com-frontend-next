@@ -6,7 +6,6 @@ import Section from './Section';
 
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
-import { ReadingPreference, WordByWordType } from 'src/components/QuranReader/types';
 import {
   selectReadingPreference,
   setReadingPreference,
@@ -18,6 +17,7 @@ import {
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
 import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
+import { ReadingPreference, WordByWordType } from 'types/QuranReader';
 
 const ReadingExperienceSection = () => {
   const dispatch = useDispatch();
