@@ -143,11 +143,14 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
     const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
+    const playWhenReady = () => {
+      const timestampInSeconds = verseTiming.timestampFrom / 1000;
+      triggerSetCurrentTime(timestampInSeconds);
+      triggerPlayAudio();
+      window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
+    };
 
-    const timestampInSeconds = verseTiming.timestampFrom / 1000;
-    triggerSetCurrentTime(timestampInSeconds);
-
-    triggerPlayAudio();
+    window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
   },
 );
 
