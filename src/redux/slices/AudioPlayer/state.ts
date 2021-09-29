@@ -131,6 +131,7 @@ interface PlayFromInput {
   chapterId: number;
   reciterId: number;
 }
+const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
   async ({ verseKey, chapterId, reciterId }, thunkApi) => {
@@ -147,7 +148,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
     const timestampInSeconds = verseTiming.timestampFrom / 1000;
 
-    if (window.audioPlayerEl.readyState === 4) {
+    if (window.audioPlayerEl.readyState === AUDIO_PLAYER_STATE_READY) {
       triggerSetCurrentTime(timestampInSeconds);
       triggerPlayAudio();
     } else {
