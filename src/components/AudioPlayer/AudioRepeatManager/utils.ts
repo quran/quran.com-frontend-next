@@ -1,13 +1,12 @@
 import { triggerPauseAudio, triggerPlayAudio } from '../EventTriggers';
 
-import { getChapterData } from 'src/utils/chapter';
-import { makeVerseKey } from 'src/utils/verse';
-
+// calculate the duration between timestampFrom and timestampTo * delayMultiplierBetweenVerse
 const getDelay = ({ delayMultiplierBetweenVerse, verseTiming }) => {
   const { timestampTo, timestampFrom } = verseTiming;
   return delayMultiplierBetweenVerse * (timestampTo - timestampFrom);
 };
 
+// based on given conditions, decide when to stop the audio and when to delay the audio
 export const stopOrDelayAudio = ({
   shouldStopAudio,
   shouldDelayAudio,
@@ -22,6 +21,7 @@ export const stopOrDelayAudio = ({
   }
 };
 
+// based on given data, returns a map of action -> boolean
 export const getNextActions = ({
   repeatRange,
   currentTimeInMs,
@@ -59,6 +59,7 @@ export const getNextActions = ({
   };
 };
 
+// get new time for audio player based on given data
 export const getNewTime = ({
   shouldRepeatVerse,
   shouldRepeatRange,
@@ -68,12 +69,4 @@ export const getNewTime = ({
   if (shouldRepeatVerse) return lastActiveVerseTiming.current.timestampFrom / 1000;
   if (shouldRepeatRange) return verseRangeFrom.timestampFrom / 1000;
   return null;
-};
-
-export const getChapterFirstAndLastVerseKey = (chapterId) => {
-  const chapterData = getChapterData(chapterId.toString());
-  return {
-    first: makeVerseKey(Number(chapterData.id), 1),
-    last: makeVerseKey(Number(chapterData.id), chapterData.versesCount),
-  };
 };

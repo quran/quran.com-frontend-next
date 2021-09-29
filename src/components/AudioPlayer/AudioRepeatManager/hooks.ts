@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { getVerseTimingByVerseKey } from 'src/redux/slices/AudioPlayer/state';
 import VerseTiming from 'types/VerseTiming';
 
+// given a verse key, return the timing of the verse
 export const useMemoizedVerseTiming = ({ verseKey, verseTimingsData }) => {
   const verseTiming = useRef<VerseTiming>(null);
   if (!verseTimingsData || !verseKey) return null;
@@ -11,6 +12,8 @@ export const useMemoizedVerseTiming = ({ verseKey, verseTimingsData }) => {
   return getVerseTimingByVerseKey(verseKey, verseTimingsData);
 };
 
+// save the repeatVerse data to the `ref`
+// and reset the data when new data is received from redux
 export const useRepeatVerse = (repeatSettings) => {
   const repeatVerse = useRef({
     total: 1,
@@ -24,14 +27,11 @@ export const useRepeatVerse = (repeatSettings) => {
     return null;
   }, [repeatSettings.from, repeatSettings.repeatEachVerse, repeatSettings.to]);
 
-  return {
-    current: repeatVerse.current,
-    resetProgress: () => {
-      repeatVerse.current.progress = 1;
-    },
-  };
+  return repeatVerse;
 };
 
+// save the delayMultiplier data to the `ref`
+// and reset the data when new data is received from redux
 export const useDelayMultiplier = (repeatSettings) => {
   const delayMultiplierBetweenVerse = useRef(0);
 
@@ -44,6 +44,8 @@ export const useDelayMultiplier = (repeatSettings) => {
   return delayMultiplierBetweenVerse.current;
 };
 
+// save the repeatRange data to the `ref`
+// and reset the data when new data is received from redux
 export const useRepeatRange = (repeatSettings) => {
   const repeatRange = useRef({
     total: 1,
@@ -67,10 +69,5 @@ export const useRepeatRange = (repeatSettings) => {
     return null;
   }, [repeatSettings.from, repeatSettings.repeatRange, repeatSettings.to]);
 
-  return {
-    current: repeatRange.current,
-    resetProgress: () => {
-      repeatRange.current.progress = 1;
-    },
-  };
+  return repeatRange;
 };

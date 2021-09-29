@@ -13,16 +13,12 @@ import {
   useRepeatRange,
   useRepeatVerse,
 } from './hooks';
-import {
-  getChapterFirstAndLastVerseKey,
-  getNewTime,
-  getNextActions,
-  stopOrDelayAudio,
-} from './utils';
+import { getNewTime, getNextActions, stopOrDelayAudio } from './utils';
 
 import { getChapterAudioFile } from 'src/api';
 import { selectIsInRepeatMode, selectRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
+import { getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 import VerseTiming from 'types/VerseTiming';
 
 type AudioRepeatManagerProps = {
