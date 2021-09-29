@@ -142,6 +142,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       thunkApi.dispatch(setAudioStatus(AudioFileStatus.Loading));
       audioFile = await getChapterAudioFile(reciter.id, chapterId);
       thunkApi.dispatch(setAudioFile(audioFile));
+      window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
     }
 
     const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
