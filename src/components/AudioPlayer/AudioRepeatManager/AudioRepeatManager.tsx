@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { useEffect, useRef } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
