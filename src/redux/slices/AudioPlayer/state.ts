@@ -159,17 +159,9 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       triggerPlayAudio();
     } else {
       const playWhenReady = () => {
-        Promise.resolve()
-          .then(() => {
-            triggerSetCurrentTime(timestampInSeconds);
-          })
-          .then(() => {
-            console.log(window.audioPlayerEl.readyState);
-            triggerPlayAudio();
-          })
-          .then(() => {
-            window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
-          });
+        triggerSetCurrentTime(timestampInSeconds);
+        triggerPlayAudio();
+        window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
       };
       window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
     }
