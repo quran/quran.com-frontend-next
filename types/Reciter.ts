@@ -3,15 +3,15 @@ interface Reciter {
   name: string;
   recitationStyle: string;
   relativePath: string;
-  qirat: {
+  qirat?: {
     languageName: string;
     name: string;
   };
-  style: {
+  style?: {
     languageName: string;
     name: string;
   };
-  translatedName: {
+  translatedName?: {
     languageName: string;
     name: string;
   };
