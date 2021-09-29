@@ -45,6 +45,32 @@
   }
 }
 
+.textBody {
+  p {
+    margin-bottom: var(--spacing-small);
+  }
+  h2,
+  h3 {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-small);
+  }
+  em {
+    font-style: italic;
+  }
+  ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: var(--spacing-medium);
+    margin-block-end: var(--spacing-medium);
+    padding-inline-start: calc(2 * var(--spacing-large));
+    margin-bottom: var(--spacing-small);
+  }
+  li {
+    display: list-item;
+    line-height: normal;
+  }
+}
+
 .infoTextContainer {
   width: auto;
   @include breakpoints.tablet {
@@ -62,7 +88,7 @@
 }
 
 .surahName {
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-bold);
   line-height: normal;
   width: 100%;
