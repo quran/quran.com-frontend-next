@@ -30,6 +30,8 @@ const RepeatAudioModal = ({
 }: RepeatAudioModalProps) => {
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
+  const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
+
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId);
     return chapterData?.nameSimple;
@@ -83,6 +85,23 @@ const RepeatAudioModal = ({
     onClose();
   };
 
+  const onRepetitionModeChange = (val) => {
+    if (val === RepetitionMode.Single) {
+      setVerseRepetition((prevVerseRepetition) => ({
+        ...prevVerseRepetition,
+        from: defaultSelectedVerse,
+        to: defaultSelectedVerse,
+      }));
+    } else {
+      setVerseRepetition((prevVerseRepetition) => ({
+        ...prevVerseRepetition,
+        from: firstVerseKeyInThisChapter,
+        to: lastVerseKeyInThisChapter,
+      }));
+    }
+    setRepetitionMode(val);
+  };
+
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
@@ -92,10 +111,11 @@ const RepeatAudioModal = ({
         </Modal.Header>
         <div>
           <SelectRepetitionMode
-            defaultRepetitionMode={defaultRepetitionMode}
+            repetitionMode={repetitionMode}
             rangeEndVerse={verseRepetition.to}
             rangeStartVerse={verseRepetition.from}
             comboboxVerseItems={comboboxVerseItems}
+            onRepetitionModeChange={onRepetitionModeChange}
             onSingleVerseChange={(val) =>
               setVerseRepetition({ ...verseRepetition, from: val, to: val })
             }

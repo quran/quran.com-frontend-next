@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
@@ -27,23 +25,18 @@ const SelectRepetitionMode = ({
   comboboxVerseItems,
   rangeStartVerse,
   rangeEndVerse,
-  defaultRepetitionMode,
   onSingleVerseChange,
+  repetitionMode,
   onRangeChange,
+  onRepetitionModeChange,
   verseKey,
 }) => {
-  const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
-
-  const onRangeTypeChange = (val) => {
-    setRepetitionMode(val);
-  };
-
   return (
     <>
       <RadioGroup
         label="Select verses range"
         orientation={RadioGroupOrientation.Horizontal}
-        onChange={onRangeTypeChange}
+        onChange={onRepetitionModeChange}
         value={repetitionMode}
         items={repetitionModeRadioGroupItems}
       />
