@@ -5,18 +5,21 @@
  */
 
 export const triggerPlayAudio = () => {
+  console.log('playing the audio');
   if (process.browser && window) {
     window.audioPlayerEl.play();
   }
 };
 
 export const triggerPauseAudio = () => {
+  console.log('audio paused');
   if (process.browser && window) {
     window.audioPlayerEl.pause();
   }
 };
 
 export const triggerSetCurrentTime = (newTime: number) => {
+  console.log('setting new time to', newTime);
   if (process.browser && window) {
     let currentTime = newTime;
     if (newTime < 0) currentTime = 0;
@@ -25,6 +28,7 @@ export const triggerSetCurrentTime = (newTime: number) => {
     if (newTime > duration) currentTime = duration;
 
     window.audioPlayerEl.currentTime = currentTime;
+    console.log('the new currentime is', window.audioPlayerEl.currentTime);
   }
 };
 

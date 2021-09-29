@@ -138,6 +138,7 @@ interface PlayFromInput {
 const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
+  // eslint-disable-next-line react-func/max-lines-per-function
   async ({ verseKey, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
@@ -158,9 +159,17 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       triggerPlayAudio();
     } else {
       const playWhenReady = () => {
-        triggerSetCurrentTime(timestampInSeconds);
-        triggerPlayAudio();
-        window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
+        Promise.resolve()
+          .then(() => {
+            triggerSetCurrentTime(timestampInSeconds);
+          })
+          .then(() => {
+            console.log(window.audioPlayerEl.readyState);
+            triggerPlayAudio();
+          })
+          .then(() => {
+            window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
+          });
       };
       window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
     }
