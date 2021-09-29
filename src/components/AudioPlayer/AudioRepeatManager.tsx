@@ -31,12 +31,12 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     total: 1,
     progress: 1,
     range: {
-      from: makeVerseKey(Number(chapterData.id), 1),
-      to: makeVerseKey(Number(chapterData.id), chapterData.versesCount),
+      from: null,
+      to: null,
     },
   });
   const delayMultiplierBetweenVerse = useRef(0);
-  const { data: audioFileData } = useSWRImmutable(
+  const { data: audioFileData, isValidating } = useSWRImmutable(
     makeChapterAudioFilesUrl(reciterId, chapterId, true),
     () => getChapterAudioFile(reciterId, chapterId, true),
   );
@@ -75,7 +75,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
   // eslint-disable-next-line react-func/max-lines-per-function
   useEffect(() => {
     if (!lastHighlightedVerseTiming.current) return null;
-    if (!audioFileData) return null;
+    if (!audioFileData || isValidating) return null;
     if (!repeatVerseRange.current.range.from || !repeatVerseRange.current.range.to) return null;
 
     const verseRangeTo = getVerseTimingByVerseKey(
@@ -118,6 +118,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     if (shouldRepeatVerse) repeatVerse.current.progress += 1;
     if (shouldResetVerseProgress) repeatVerse.current.progress = 1;
     if (shouldRepeatRange) repeatVerseRange.current.progress += 1;
+    console.log(shouldStop);
     if (shouldStop) {
       repeatVerseRange.current.range.from = makeVerseKey(Number(chapterData.id), 1);
       repeatVerseRange.current.range.to = makeVerseKey(
@@ -142,6 +143,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     audioFileData,
     chapterData.id,
     chapterData.versesCount,
+    isValidating,
   ]);
 
   useEffect(() => {

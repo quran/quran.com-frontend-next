@@ -11,7 +11,6 @@ export const triggerPlayAudio = () => {
 };
 
 export const triggerPauseAudio = () => {
-  console.log('pausing the audio');
   if (process.browser && window) {
     window.audioPlayerEl.pause();
   }

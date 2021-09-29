@@ -39,6 +39,14 @@ export type AudioState = {
   };
 };
 
+export const defaultRepeatSettings = {
+  delayMultiplierBetweenVerse: 0,
+  repeatRange: 1,
+  repeatEachVerse: 1,
+  from: null,
+  to: null,
+};
+
 const initialState: AudioState = {
   enableAutoScrolling: true,
   isPlaying: false,
@@ -46,13 +54,7 @@ const initialState: AudioState = {
   reciter: DEFAULT_RECITER,
   audioFileStatus: AudioFileStatus.NoFile,
   isMobileMinimizedForScrolling: false,
-  repeatSettings: {
-    delayMultiplierBetweenVerse: 0,
-    repeatRange: 1,
-    repeatEachVerse: 1,
-    from: null,
-    to: null,
-  },
+  repeatSettings: defaultRepeatSettings,
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -143,14 +145,19 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
     const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
-    const playWhenReady = () => {
-      const timestampInSeconds = verseTiming.timestampFrom / 1000;
+    const timestampInSeconds = verseTiming.timestampFrom / 1000;
+
+    if (window.audioPlayerEl.readyState === 4) {
       triggerSetCurrentTime(timestampInSeconds);
       triggerPlayAudio();
-      window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
-    };
-
-    window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
+    } else {
+      const playWhenReady = () => {
+        triggerSetCurrentTime(timestampInSeconds);
+        triggerPlayAudio();
+        window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
+      };
+      window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
+    }
   },
 );
 
