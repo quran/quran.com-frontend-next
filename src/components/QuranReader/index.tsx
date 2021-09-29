@@ -118,6 +118,7 @@ const QuranReader = ({
     }
   };
 
+  const hasMore = size < pageLimit;
   return (
     <>
       <ContextMenu />
@@ -130,7 +131,7 @@ const QuranReader = ({
           <InfiniteScroll
             initialLoad={false}
             threshold={INFINITE_SCROLLER_THRESHOLD}
-            hasMore={size < pageLimit}
+            hasMore={hasMore}
             loadMore={loadMore}
             loader={<Loader isValidating={isValidating} loadMore={loadMore} />}
           >
@@ -139,10 +140,12 @@ const QuranReader = ({
             )}
             {view}
           </InfiniteScroll>
-          <EndOfScrollingControls
-            quranReaderDataType={quranReaderDataType}
-            lastVerse={verses[verses.length - 1]}
-          />
+          {!hasMore && !isValidating && (
+            <EndOfScrollingControls
+              quranReaderDataType={quranReaderDataType}
+              lastVerse={verses[verses.length - 1]}
+            />
+          )}
         </div>
       </div>
       <Notes />
