@@ -22,39 +22,6 @@ export const stopOrDelayAudio = ({
   }
 };
 
-export const getNextAudioRepeatState = ({
-  shouldRepeatVerse,
-  shouldResetVerseProgress,
-  shouldRepeatRange,
-  shouldStopAudio,
-  repeatVerseProgress,
-  repeatRangeProgress,
-  range: { from, to },
-  chapterId,
-}) => {
-  const chapterData = getChapterData(chapterId.toString());
-
-  let nextRepeatVerseProgress = repeatVerseProgress;
-  if (shouldRepeatVerse) nextRepeatVerseProgress += 1;
-  if (shouldResetVerseProgress) nextRepeatVerseProgress = 1;
-
-  let nextRepeatRangeProgress = repeatRangeProgress;
-  if (shouldRepeatRange) nextRepeatRangeProgress += 1;
-
-  const range = { from, to };
-  if (shouldStopAudio) {
-    range.from = makeVerseKey(Number(chapterData.id), 1);
-    range.to = makeVerseKey(Number(chapterData.id), chapterData.versesCount);
-  }
-
-  return {
-    repeatVerseProgress: nextRepeatVerseProgress,
-    repeatRangeProgress: nextRepeatRangeProgress,
-    from: range.from,
-    to: range.to,
-  };
-};
-
 export const getNextAction = ({
   repeatRange,
   currentTimeInMs,
@@ -101,4 +68,12 @@ export const getNewTime = ({
   if (shouldRepeatVerse) return lastHighlightedVerseTiming.current.timestampFrom / 1000;
   if (shouldRepeatRange) return verseRangeFrom.timestampFrom / 1000;
   return null;
+};
+
+export const getChapterFirstAndLastVerseKey = (chapterId) => {
+  const chapterData = getChapterData(chapterId.toString());
+  return {
+    first: makeVerseKey(Number(chapterData.id), 1),
+    last: makeVerseKey(Number(chapterData.id), chapterData.versesCount),
+  };
 };

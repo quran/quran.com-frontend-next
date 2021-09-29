@@ -9,7 +9,12 @@ import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
 import useMemoizedHighlightedVerseTiming from '../hooks/useMemoizedHighlightedVerseTiming';
 
 import { useDelayMultiplier, useMemoizedVerseTiming, useRepeatRange, useRepeatVerse } from './hook';
-import { getNewTime, getNextAction, getNextAudioRepeatState, stopOrDelayAudio } from './utils';
+import {
+  getChapterFirstAndLastVerseKey,
+  getNewTime,
+  getNextAction,
+  stopOrDelayAudio,
+} from './utils';
 
 import { getChapterAudioFile } from 'src/api';
 import { selectIsInRepeatMode, selectRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
@@ -85,19 +90,16 @@ const AudioRepeatManager = ({
     });
     if (typeof newtime === 'number') triggerSetCurrentTime(newtime);
 
-    const { from, to, repeatRangeProgress, repeatVerseProgress } = getNextAudioRepeatState({
-      chapterId,
-      range: repeatRange.current.range,
-      repeatRangeProgress: repeatRange.current.progress,
-      repeatVerseProgress: repeatVerse.current.progress,
-      shouldRepeatRange,
-      shouldRepeatVerse,
-      shouldResetVerseProgress,
-      shouldStopAudio,
-    });
-    repeatRange.current.progress = repeatRangeProgress;
-    repeatRange.current.range = { from, to };
-    repeatVerse.current.progress = repeatVerseProgress;
+    if (shouldRepeatVerse) repeatVerse.current.progress += 1;
+    if (shouldResetVerseProgress) repeatVerse.current.progress = 1;
+    if (shouldRepeatRange) repeatRange.current.progress += 1;
+    if (shouldStopAudio) {
+      const { first, last } = getChapterFirstAndLastVerseKey(chapterId);
+      repeatRange.current.range = {
+        from: first,
+        to: last,
+      };
+    }
 
     stopOrDelayAudio({
       delayMultiplierBetweenVerse,
