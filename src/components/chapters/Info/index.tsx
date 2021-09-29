@@ -64,7 +64,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => (
             </div>
           </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: chapterInfo.text }} />
+        <div dangerouslySetInnerHTML={{ __html: chapterInfo.text }} className={styles.textBody} />
       </div>
     </div>
   </div>
