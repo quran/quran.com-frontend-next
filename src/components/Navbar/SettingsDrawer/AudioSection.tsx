@@ -21,13 +21,15 @@ import Reciter from 'types/Reciter';
 
 // convert the reciter's data from API to combobox items
 // so we can use it with Combobox component
-const recitersToComboboxItems = (reciters) =>
-  reciters.map((item: Reciter) => ({
-    id: item.id.toString(),
-    value: item.id,
-    label: item.name.toString(),
-    name: item.id.toString(),
-  }));
+const recitersToComboboxItems = (reciters: Reciter[]) =>
+  reciters
+    .sort((a, b) => a.translatedName.name.localeCompare(b.translatedName.name))
+    .map((item) => ({
+      id: item.id.toString(),
+      value: item.id.toString(),
+      label: item.translatedName.name,
+      name: item.id.toString(),
+    }));
 
 const autoScrollingOptions = generateRadioItems(['On', 'Off']);
 
