@@ -118,7 +118,6 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     if (shouldRepeatVerse) repeatVerse.current.progress += 1;
     if (shouldResetVerseProgress) repeatVerse.current.progress = 1;
     if (shouldRepeatRange) repeatVerseRange.current.progress += 1;
-    console.log(shouldStop);
     if (shouldStop) {
       repeatVerseRange.current.range.from = makeVerseKey(Number(chapterData.id), 1);
       repeatVerseRange.current.range.to = makeVerseKey(
