@@ -7,8 +7,8 @@ import { DEFAULT_RECITER } from './defaultData';
 import { getChapterAudioFile } from 'src/api';
 import {
   triggerPlayAudio,
-  triggerSetCurrentTime,
   triggerPauseAudio,
+  playFromTimestamp,
 } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
@@ -135,7 +135,6 @@ interface PlayFromInput {
   chapterId: number;
   reciterId: number;
 }
-const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
   // eslint-disable-next-line react-func/max-lines-per-function
@@ -153,18 +152,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
     const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
     const timestampInSeconds = verseTiming.timestampFrom / 1000;
-
-    if (window.audioPlayerEl.readyState === AUDIO_PLAYER_STATE_READY) {
-      triggerSetCurrentTime(timestampInSeconds);
-      triggerPlayAudio();
-    } else {
-      const playWhenReady = () => {
-        triggerSetCurrentTime(timestampInSeconds);
-        triggerPlayAudio();
-        window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
-      };
-      window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
-    }
+    playFromTimestamp(timestampInSeconds);
   },
 );
 

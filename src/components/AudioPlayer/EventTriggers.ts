@@ -34,4 +34,26 @@ export const triggerSeek = (duration) => {
   }
 };
 
+/**
+ * given a timestamp, either
+ * - set the time + play the audio directly
+ * - or wait until the audio player is ready before set time + play audio
+ *
+ * @param timestamp timestamp in seconds
+ */
+const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
+export const playFromTimestamp = (timestamp: number) => {
+  if (window.audioPlayerEl.readyState === AUDIO_PLAYER_STATE_READY) {
+    triggerSetCurrentTime(timestamp);
+    triggerPlayAudio();
+  } else {
+    const playWhenReady = () => {
+      triggerSetCurrentTime(timestamp);
+      triggerPlayAudio();
+      window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
+    };
+    window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
+  }
+};
+
 export default { triggerPlayAudio, triggerPauseAudio, triggerSetCurrentTime };
