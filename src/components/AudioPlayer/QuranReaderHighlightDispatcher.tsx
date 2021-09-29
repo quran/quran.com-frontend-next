@@ -3,8 +3,8 @@ import { useRef, useEffect } from 'react';
 import { shallowEqual, useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import useActiveVerseTiming from './hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
-import useMemoizedHighlightedVerseTiming from './hooks/useMemoizedHighlightedVerseTiming';
 import useMemoizedHighlightedWordLocation from './hooks/useMemoizedHighlightedWordLocation';
 
 import { getChapterAudioFile } from 'src/api';
@@ -44,10 +44,7 @@ const QuranReaderHighlightDispatcher = ({
 
   const lastHighlightedLocation = useRef(defaultHighlightedLocation);
 
-  const currentHighlightedVerseTiming = useMemoizedHighlightedVerseTiming(
-    currentTimeInMs,
-    audioFileData,
-  );
+  const currentHighlightedVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
   const currentHighlightedWordLocation = useMemoizedHighlightedWordLocation(
     currentTimeInMs,
     currentHighlightedVerseTiming,

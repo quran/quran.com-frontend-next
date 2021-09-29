@@ -5,14 +5,19 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { triggerSetCurrentTime } from '../EventTriggers';
+import useActiveVerseTiming from '../hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
-import useMemoizedHighlightedVerseTiming from '../hooks/useMemoizedHighlightedVerseTiming';
 
-import { useDelayMultiplier, useMemoizedVerseTiming, useRepeatRange, useRepeatVerse } from './hook';
+import {
+  useDelayMultiplier,
+  useMemoizedVerseTiming,
+  useRepeatRange,
+  useRepeatVerse,
+} from './hooks';
 import {
   getChapterFirstAndLastVerseKey,
   getNewTime,
-  getNextAction,
+  getNextActions,
   stopOrDelayAudio,
 } from './utils';
 
@@ -45,11 +50,10 @@ const AudioRepeatManager = ({
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
   const currentTimeInMs = Math.floor(currentTime * 1000);
 
-  const lastHighlightedVerseTiming = useRef<VerseTiming>(null);
-  const currentHighlightedVerseTiming = useMemoizedHighlightedVerseTiming(
-    currentTimeInMs,
-    audioFileData,
-  );
+  // we need to save lastActiveVerseTiming, because when the verse ended,
+  // the currentActiveVerseTiming, is already updated to the next verse, so we need a reference to the last verse
+  const lastActiveVerseTiming = useRef<VerseTiming>(null);
+  const currentActiveVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
 
   const verseRangeTo = useMemoizedVerseTiming({
     verseKey: repeatRange.current.range.to,
@@ -63,7 +67,7 @@ const AudioRepeatManager = ({
 
   // eslint-disable-next-line react-func/max-lines-per-function
   useEffect(() => {
-    if (!lastHighlightedVerseTiming.current) return null;
+    if (!lastActiveVerseTiming.current) return null;
     if (!audioFileData || isValidating) return null;
     if (!isInRepeatMode) return null;
 
@@ -73,17 +77,17 @@ const AudioRepeatManager = ({
       shouldRepeatVerse,
       shouldResetVerseProgress,
       shouldStopAudio,
-    } = getNextAction({
+    } = getNextActions({
       currentTimeInMs,
       delayMultiplierBetweenVerse,
-      lastHighlightedVerseTiming,
+      activeVerseTiming: lastActiveVerseTiming.current,
       repeatRange,
       repeatVerse,
       verseRangeTo,
     });
 
     const newtime = getNewTime({
-      lastHighlightedVerseTiming,
+      lastActiveVerseTiming,
       shouldRepeatRange,
       shouldRepeatVerse,
       verseRangeFrom,
@@ -103,7 +107,7 @@ const AudioRepeatManager = ({
 
     stopOrDelayAudio({
       delayMultiplierBetweenVerse,
-      lastHighlightedVerseTiming,
+      verseTiming: lastActiveVerseTiming.current,
       shouldDelayAudio,
       shouldStopAudio,
     });
@@ -123,8 +127,8 @@ const AudioRepeatManager = ({
   ]);
 
   useEffect(() => {
-    lastHighlightedVerseTiming.current = currentHighlightedVerseTiming;
-  }, [currentHighlightedVerseTiming]);
+    lastActiveVerseTiming.current = currentActiveVerseTiming;
+  }, [currentActiveVerseTiming]);
 
   return null;
 };

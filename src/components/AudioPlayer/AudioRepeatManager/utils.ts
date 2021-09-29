@@ -3,8 +3,8 @@ import { triggerPauseAudio, triggerPlayAudio } from '../EventTriggers';
 import { getChapterData } from 'src/utils/chapter';
 import { makeVerseKey } from 'src/utils/verse';
 
-const getDelay = ({ delayMultiplierBetweenVerse, lastHighlightedVerseTiming }) => {
-  const { timestampTo, timestampFrom } = lastHighlightedVerseTiming.current;
+const getDelay = ({ delayMultiplierBetweenVerse, verseTiming }) => {
+  const { timestampTo, timestampFrom } = verseTiming;
   return delayMultiplierBetweenVerse * (timestampTo - timestampFrom);
 };
 
@@ -12,29 +12,29 @@ export const stopOrDelayAudio = ({
   shouldStopAudio,
   shouldDelayAudio,
   delayMultiplierBetweenVerse,
-  lastHighlightedVerseTiming,
+  verseTiming,
 }) => {
   if (shouldStopAudio) triggerPauseAudio();
   if (shouldDelayAudio) {
     triggerPauseAudio();
-    const delay = getDelay({ delayMultiplierBetweenVerse, lastHighlightedVerseTiming });
+    const delay = getDelay({ delayMultiplierBetweenVerse, verseTiming });
     setTimeout(triggerPlayAudio, delay);
   }
 };
 
-export const getNextAction = ({
+export const getNextActions = ({
   repeatRange,
   currentTimeInMs,
-  lastHighlightedVerseTiming,
+  activeVerseTiming,
   repeatVerse,
   verseRangeTo,
   delayMultiplierBetweenVerse,
 }) => {
   const shouldRepeatVerse =
-    currentTimeInMs >= lastHighlightedVerseTiming.current.timestampTo &&
+    currentTimeInMs >= activeVerseTiming.timestampTo &&
     repeatVerse.current.progress < repeatVerse.current.total;
   const shouldResetVerseProgress =
-    currentTimeInMs >= lastHighlightedVerseTiming.current.timestampTo &&
+    currentTimeInMs >= activeVerseTiming.timestampTo &&
     repeatVerse.current.progress >= repeatVerse.current.total;
 
   const shouldRepeatRange =
@@ -62,10 +62,10 @@ export const getNextAction = ({
 export const getNewTime = ({
   shouldRepeatVerse,
   shouldRepeatRange,
-  lastHighlightedVerseTiming,
+  lastActiveVerseTiming,
   verseRangeFrom,
 }): number => {
-  if (shouldRepeatVerse) return lastHighlightedVerseTiming.current.timestampFrom / 1000;
+  if (shouldRepeatVerse) return lastActiveVerseTiming.current.timestampFrom / 1000;
   if (shouldRepeatRange) return verseRangeFrom.timestampFrom / 1000;
   return null;
 };
