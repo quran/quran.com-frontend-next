@@ -39,7 +39,7 @@ export type AudioState = {
   };
 };
 
-export const defaultRepeatSettings = {
+const defaultRepeatSettings = {
   delayMultiplierBetweenVerse: 0,
   repeatRange: 1,
   repeatEachVerse: 1,
@@ -69,6 +69,10 @@ export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
+export const selectIsInRepeatMode = (state: RootState) => {
+  const { repeatSettings } = state.audioPlayerState;
+  return !!repeatSettings.from && !!repeatSettings.to;
+};
 
 /**
  * get the audio file for the current reciter
@@ -200,6 +204,14 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       repeatSettings: action.payload,
     }),
+    disableRepeatMode: (state) => ({
+      ...state,
+      repeatSettings: {
+        ...state.repeatSettings,
+        from: null,
+        to: null,
+      },
+    }),
   },
   // reset reciter to DEFAULT_RECITER
   // WHEN `reset` action is dispatched
@@ -220,6 +232,7 @@ export const {
   setIsMobileMinimizedForScrolling,
   setEnableAutoScrolling,
   setRepeatSettings,
+  disableRepeatMode,
 } = audioPlayerStateSlice.actions;
 
 export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {

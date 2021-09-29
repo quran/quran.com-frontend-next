@@ -8,7 +8,11 @@ import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 import useMemoizedHighlightedVerseTiming from './hooks/useMemoizedHighlightedVerseTiming';
 
 import { getChapterAudioFile } from 'src/api';
-import { getVerseTimingByVerseKey, selectRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
+import {
+  getVerseTimingByVerseKey,
+  selectIsInRepeatMode,
+  selectRepeatSettings,
+} from 'src/redux/slices/AudioPlayer/state';
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { makeVerseKey } from 'src/utils/verse';
@@ -23,6 +27,7 @@ type FindAGoodNameProps = {
 const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodNameProps) => {
   const repeatSettings = useSelector(selectRepeatSettings, shallowEqual);
   const chapterData = getChapterData(chapterId.toString());
+  const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const repeatVerse = useRef({
     total: 1,
     progress: 1,
@@ -76,7 +81,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
   useEffect(() => {
     if (!lastHighlightedVerseTiming.current) return null;
     if (!audioFileData || isValidating) return null;
-    if (!repeatVerseRange.current.range.from || !repeatVerseRange.current.range.to) return null;
+    if (!isInRepeatMode) return null;
 
     const verseRangeTo = getVerseTimingByVerseKey(
       repeatVerseRange.current.range.to,
@@ -143,6 +148,7 @@ const FindAGoodName = ({ audioPlayerElRef, reciterId, chapterId }: FindAGoodName
     chapterData.id,
     chapterData.versesCount,
     isValidating,
+    isInRepeatMode,
   ]);
 
   useEffect(() => {
