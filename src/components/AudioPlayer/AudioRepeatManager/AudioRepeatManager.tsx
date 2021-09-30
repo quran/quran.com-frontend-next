@@ -119,7 +119,8 @@ const AudioRepeatManager = ({
 
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
 
-    // When verse ended, repeatEachVerse progress === expected repeatEachProgress. reset the value
+    // When we're done repeating this verse. Reset the progress state so it can be used for the next verse repetition
+    // also delay the audio when the verse changed to the next verse
     if (isVerseEnded && repeatProgress.repeatEachVerse === repeatSettings.repeatEachVerse) {
       dispatch(setRepeatProgress({ repeatEachVerse: 1 }));
       if (!isRangeEnded) delayAudioWhenNeeded();
