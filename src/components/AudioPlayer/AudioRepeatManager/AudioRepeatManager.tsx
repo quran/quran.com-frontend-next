@@ -43,7 +43,7 @@ const AudioRepeatManager = ({
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
   const currentTimeInMs = Math.floor(currentTime * 1000);
 
-  // we need to save lastActiveVerseTiming, because when the verse ended,
+  // We need to save lastActiveVerseTiming, because when the verse ended,
   // the currentActiveVerseTiming, is already updated to the next verse, but we need a reference to the last verse
   const lastActiveVerseTiming = useRef<VerseTiming>(null);
   const currentActiveVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
@@ -74,7 +74,7 @@ const AudioRepeatManager = ({
     if (!isInRepeatMode) return null;
 
     const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
-    // when verses ended, and current repeatEachVerse progress < expected repeatEachProgress
+    // When verses ended, and current repeatEachVerse progress < expected repeatEachProgress
     // 1) set the current time to the beginning of the verse
     // 2) pause the audio when delayMultiplier is set
     // 3) update repeatEachVerse progress + 1
@@ -85,7 +85,7 @@ const AudioRepeatManager = ({
       return null;
     }
 
-    // when verse ended, repeatEachVerse progress === expected repeatEachProgress. reset the value
+    // When verse ended, repeatEachVerse progress === expected repeatEachProgress. reset the value
     if (isVerseEnded && repeatProgress.repeatEachVerse === repeatSettings.repeatEachVerse) {
       dispatch(setRepeatProgress({ repeatEachVerse: 1 }));
     }
@@ -111,7 +111,7 @@ const AudioRepeatManager = ({
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTimeInMs]);
-  // only use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
+  // Wnly use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
   // it will cause hooks to be dispatch, setCurrentTime, etc to be executed multiples times, which is unintended
 
   useEffect(() => {
