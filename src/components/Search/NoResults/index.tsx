@@ -1,6 +1,8 @@
 import React from 'react';
 
-import IconSearch from '../../../../../public/icons/search.svg';
+import classNames from 'classnames';
+
+import IconSearch from '../../../../public/icons/search.svg';
 
 import styles from './NoResults.module.scss';
 
@@ -9,11 +11,12 @@ import AdvancedSearchLink from 'src/components/Navbar/SearchDrawer/AdvancedSearc
 interface Props {
   searchUrl: string;
   searchQuery: string;
+  isSearchDrawer: boolean;
 }
 
-const NoResults: React.FC<Props> = ({ searchQuery, searchUrl }) => (
+const NoResults: React.FC<Props> = ({ searchQuery, searchUrl, isSearchDrawer }) => (
   <>
-    <div className={styles.container}>
+    <div className={classNames(styles.container, { [styles.searchDrawer]: isSearchDrawer })}>
       <div className={styles.mainBody}>
         <div className={styles.iconContainer}>
           <IconSearch />
@@ -25,7 +28,7 @@ const NoResults: React.FC<Props> = ({ searchQuery, searchUrl }) => (
         </p>
       </div>
     </div>
-    <AdvancedSearchLink searchUrl={searchUrl} />
+    {isSearchDrawer && <AdvancedSearchLink searchUrl={searchUrl} />}
   </>
 );
 

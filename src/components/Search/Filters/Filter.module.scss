@@ -1,0 +1,15 @@
+@use "src/styles/breakpoints";
+
+.dropdownLabel {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-small);
+}
+
+.comboboxItems {
+  div[role="dialog"] {
+    width: 82%;
+    @include breakpoints.tablet {
+      width: 43%;
+    }
+  }
+}

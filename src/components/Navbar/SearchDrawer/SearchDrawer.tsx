@@ -8,13 +8,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import DrawerCloseButton from './Buttons/DrawerCloseButton';
 import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
-import NoResults from './NoResults';
-import PreInput from './PreInput';
 import styles from './SearchDrawer.module.scss';
 
 import { getSearchResults } from 'src/api';
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import SearchResults from 'src/components/Search/SearchResults';
+import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import useDebounce from 'src/hooks/useDebounce';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import useFocus from 'src/hooks/useFocusElement';
@@ -24,7 +21,6 @@ import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
-import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -134,14 +130,6 @@ const SearchDrawer: React.FC = () => {
     });
   }, [closeSearchDrawer, router.events, isOpen]);
 
-  const isEmptyResponse =
-    searchResult &&
-    searchResult.pagination.totalRecords === 0 &&
-    !searchResult.result.navigation.length;
-  const isPreInputLayout =
-    !searchQuery || isSearching || hasError || (!isSearching && !hasError && isEmptyResponse);
-  const searchUrl = getSearchQueryNavigationUrl(searchQuery);
-
   /**
    * When the keyword is clicked, we move the cursor to the end of
    * the input field after setting its value.
@@ -189,37 +177,13 @@ const SearchDrawer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div
-        className={classNames(styles.bodyContainer, {
-          [styles.internalContainer]: isPreInputLayout,
-        })}
-      >
-        {!searchQuery ? (
-          <PreInput onSearchKeywordClicked={onSearchKeywordClicked} />
-        ) : (
-          <>
-            {isSearching ? (
-              <Spinner size={SpinnerSize.Large} />
-            ) : (
-              <>
-                {hasError && <div>Something went wrong, please try again!</div>}
-                {!hasError && searchResult && (
-                  <>
-                    {isEmptyResponse ? (
-                      <NoResults searchQuery={searchQuery} searchUrl={searchUrl} />
-                    ) : (
-                      <SearchResults
-                        searchResult={searchResult}
-                        searchQuery={debouncedSearchQuery}
-                      />
-                    )}
-                  </>
-                )}
-              </>
-            )}
-          </>
-        )}
-      </div>
+      <SearchBodyContainer
+        onSearchKeywordClicked={onSearchKeywordClicked}
+        searchQuery={searchQuery}
+        searchResult={searchResult}
+        isSearching={isSearching}
+        hasError={hasError}
+      />
     </div>
   );
 };

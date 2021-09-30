@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchHistory.module.scss';
 
-import Header from 'src/components/Navbar/SearchDrawer/PreInput/Header';
-import SearchQuerySuggestion from 'src/components/Navbar/SearchDrawer/PreInput/SearchQuerySuggestion';
+import Header from 'src/components/Search/PreInput/Header';
+import SearchQuerySuggestion from 'src/components/Search/PreInput/SearchQuerySuggestion';
 import { removeSearchHistoryRecord, selectSearchHistory } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
 

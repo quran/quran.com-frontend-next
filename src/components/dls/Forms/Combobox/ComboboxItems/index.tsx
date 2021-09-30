@@ -13,6 +13,7 @@ interface Props {
   isOpened: boolean;
   isMultiSelect: boolean;
   disabled: boolean;
+  fixedWidth: boolean;
   preventSelecting: boolean;
   size: ComboboxSize;
   id: string;
@@ -37,6 +38,7 @@ const ComboboxItems: React.FC<Props> = ({
   id,
   onItemSelectedChange,
   selectedValue,
+  fixedWidth,
 }) => {
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
@@ -52,6 +54,7 @@ const ComboboxItems: React.FC<Props> = ({
       className={classNames(styles.comboboxBodyContainer, {
         [styles.openedComboboxBodyContainer]: isOpened,
         [styles.largeComboboxBodyContainer]: size === ComboboxSize.Large,
+        [styles.fixedWidth]: fixedWidth,
       })}
       aria-modal="true"
       role="dialog"

@@ -34,16 +34,18 @@ const LanguagesFilter: React.FC<Props> = memo(
     );
 
     return (
-      <Combobox
-        isMultiSelect
-        id="languagesFilter"
-        value={matchedLanguages}
-        minimumRequiredItems={1}
-        items={languagesItems}
-        onChange={onLanguageChange}
-        placeholder="Select a language"
-        label={<div className={styles.dropdownLabel}>Language</div>}
-      />
+      <div className={styles.comboboxItems}>
+        <Combobox
+          fixedWidth={false}
+          isMultiSelect
+          id="languagesFilter"
+          value={matchedLanguages}
+          items={languagesItems}
+          onChange={onLanguageChange}
+          placeholder="Select a language"
+          label={<div className={styles.dropdownLabel}>Search all translations of a language</div>}
+        />
+      </div>
     );
   },
 );
