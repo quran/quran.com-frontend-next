@@ -74,7 +74,7 @@ const AudioRepeatManager = ({
    *   - otherwise continue to the next verse
    * 2) When the current range ended,
    *   - if the current repeatRange progress < expected repetition, repeat the range
-   *   - otherwise continue
+   *   - otherwise stop the audio
    *   example of `range` is "1:3" - "1:5". So when current verse is "1:5" and it is ended. We will play "1:3"
    *
    * the progress is tracked in redux (`repeatProgress`), and the repetition settings is stored in redux too as `repeatSettings`
