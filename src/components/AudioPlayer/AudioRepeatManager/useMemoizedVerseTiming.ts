@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { getVerseTimingByVerseKey } from 'src/redux/slices/AudioPlayer/state';
+import { getVerseTimingByVerseKey } from 'src/utils/verse';
 import VerseTiming from 'types/VerseTiming';
 
 // given a verse key, return the timing of the verse

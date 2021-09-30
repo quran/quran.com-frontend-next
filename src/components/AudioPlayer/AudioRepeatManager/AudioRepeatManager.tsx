@@ -3,28 +3,23 @@ import { useEffect, useRef } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import { triggerPauseAudio } from '../EventTriggers';
+import { triggerSetCurrentTime } from '../EventTriggers';
 import useActiveVerseTiming from '../hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
 
 import useMemoizedVerseTiming from './useMemoizedVerseTiming';
-import {
-  checkShouldStopAudio,
-  delayAudioWhenVerseChanged,
-  getDelay,
-  getNextProgressState,
-  repeatVerseOrRange,
-} from './utils';
+import { getConditions, getNewTime, stopOrDelayAudio } from './utils';
 
 import { getChapterAudioFile } from 'src/api';
 import {
-  exitRepeatMode,
   selectIsInRepeatMode,
   selectRepeatProgress,
   selectRepeatSettings,
   setRepeatProgress,
+  setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
+import { getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 import VerseTiming from 'types/VerseTiming';
 
 type AudioRepeatManagerProps = {
@@ -71,49 +66,71 @@ const AudioRepeatManager = ({
     if (!audioFileData || isValidating) return null;
     if (!isInRepeatMode) return null;
 
-    const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
-    const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
-
-    // get next state and dispatch it to redux
-    const nextRepeatProgress = getNextProgressState({
-      isRangeEnded,
-      isVerseEnded,
+    const {
+      shouldDelayAudio,
+      shouldRepeatRange,
+      shouldRepeatVerse,
+      shouldResetVerseProgress,
+      shouldStopAudio,
+    } = getConditions({
+      activeVerseTiming: lastActiveVerseTiming.current,
+      currentTimeInMs,
+      delayMultiplier: repeatSettings.delayMultiplier,
       repeatProgress,
       repeatSettings,
+      verseRangeTo,
     });
-    if (!shallowEqual(repeatProgress, nextRepeatProgress))
-      dispatch(setRepeatProgress(nextRepeatProgress));
 
-    // when delayMultiplier is > 0, and repeat is not done, pause the audio then play again
-    const delayInMs = getDelay({
+    const newtime = getNewTime({
+      verseTiming: lastActiveVerseTiming.current,
+      shouldRepeatRange,
+      shouldRepeatVerse,
+      verseRangeFrom,
+    });
+    if (typeof newtime === 'number') triggerSetCurrentTime(newtime);
+
+    let nextRepeatEachVerseProgress = repeatProgress.repeatEachVerse;
+    if (shouldRepeatVerse) nextRepeatEachVerseProgress += 1;
+    if (shouldResetVerseProgress) nextRepeatEachVerseProgress = 1;
+
+    let nextRepeatRangeProgress = repeatProgress.repeatRange;
+    if (shouldRepeatRange) nextRepeatRangeProgress += 1;
+    if (shouldStopAudio) nextRepeatRangeProgress = 1;
+
+    // dispatch when the value is different
+    if (
+      repeatProgress.repeatEachVerse !== nextRepeatEachVerseProgress ||
+      repeatProgress.repeatRange !== nextRepeatRangeProgress
+    ) {
+      dispatch(
+        setRepeatProgress({
+          repeatEachVerse: nextRepeatEachVerseProgress,
+          repeatRange: nextRepeatRangeProgress,
+        }),
+      );
+    }
+
+    let nextRange = { from: repeatSettings.from, to: repeatSettings.to };
+
+    if (shouldStopAudio) {
+      const { first, last } = getChapterFirstAndLastVerseKey(chapterId);
+      nextRange = {
+        from: first,
+        to: last,
+      };
+    }
+
+    if (nextRange.from !== repeatSettings.from || nextRange.to !== repeatSettings.to) {
+      dispatch(setRepeatSettings({ from: nextRange.from, to: nextRange.to }));
+    }
+
+    stopOrDelayAudio({
       delayMultiplier: repeatSettings.delayMultiplier,
       verseTiming: lastActiveVerseTiming.current,
-    });
-    delayAudioWhenVerseChanged({
-      duration: delayInMs,
-      delayMultiplier: repeatSettings.delayMultiplier,
-      isRangeEnded,
-      isVerseEnded,
-      repeatProgress,
-      repeatSettings,
+      shouldDelayAudio,
+      shouldStopAudio,
     });
 
-    // When the verse ended, repeat the verse itself or repeat the range
-    // depending on current repeatProgress
-    repeatVerseOrRange({
-      isRangeEnded,
-      isVerseEnded,
-      verseTimestampFrom: lastActiveVerseTiming.current.timestampFrom,
-      rangeTimestampFrom: verseRangeFrom.timestampFrom,
-      repeatProgress,
-      repeatSettings,
-    });
-
-    // when all repeat is done, stop the audio
-    if (checkShouldStopAudio({ isRangeEnded, repeatProgress, repeatSettings })) {
-      dispatch(exitRepeatMode());
-      triggerPauseAudio();
-    }
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTimeInMs]); // only check for currentTime, because it always re render when currentTimeMs change, and we don't need to listen to other changes

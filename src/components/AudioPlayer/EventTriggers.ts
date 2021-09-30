@@ -35,9 +35,9 @@ export const triggerSeek = (duration) => {
 };
 
 /**
- * given a timestamp, either
+ * Given a timestamp, check if the audio player is ready. If it is
  * - set the time + play the audio directly
- * - or wait until the audio player is ready before set time + play audio
+ * - otherwise wait until the audio player is ready before set time + play audio
  *
  * @param timestamp timestamp in seconds
  */

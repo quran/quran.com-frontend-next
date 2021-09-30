@@ -9,7 +9,12 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
-import { playFrom, selectReciter, setRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
+import {
+  defaultRepeatSettings,
+  playFrom,
+  selectReciter,
+  setRepeatSettings,
+} from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { generateChapterVersesKeys } from 'src/utils/verse';
 
@@ -54,11 +59,11 @@ const RepeatAudioModal = ({
   const lastVerseKeyInThisChapter = comboboxVerseItems[comboboxVerseItems.length - 1].value;
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: 3,
-    repeatEachVerse: 1,
+    repeatRange: defaultRepeatSettings.repeatRange,
+    repeatEachVerse: defaultRepeatSettings.repeatEachVerse,
     from: defaultSelectedVerse || firstVerseKeyInThisChapter,
     to: defaultSelectedVerse || lastVerseKeyInThisChapter,
-    delayMultiplierBetweenVerse: 0,
+    delayMultiplier: defaultRepeatSettings.delayMultiplier,
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
@@ -85,8 +90,8 @@ const RepeatAudioModal = ({
     onClose();
   };
 
-  const onRepetitionModeChange = (val) => {
-    if (val === RepetitionMode.Single) {
+  const onRepetitionModeChange = (mode) => {
+    if (mode === RepetitionMode.Single) {
       setVerseRepetition((prevVerseRepetition) => ({
         ...prevVerseRepetition,
         from: defaultSelectedVerse,
@@ -99,7 +104,7 @@ const RepeatAudioModal = ({
         to: lastVerseKeyInThisChapter,
       }));
     }
-    setRepetitionMode(val);
+    setRepetitionMode(mode);
   };
 
   return (
@@ -116,10 +121,10 @@ const RepeatAudioModal = ({
             rangeStartVerse={verseRepetition.from}
             comboboxVerseItems={comboboxVerseItems}
             onRepetitionModeChange={onRepetitionModeChange}
-            onSingleVerseChange={(val) =>
-              setVerseRepetition({ ...verseRepetition, from: val, to: val })
+            onSingleVerseChange={(verseKey) =>
+              setVerseRepetition({ ...verseRepetition, from: verseKey, to: verseKey })
             }
-            onRangeChange={(val) => setVerseRepetition({ ...verseRepetition, ...val })}
+            onRangeChange={(range) => setVerseRepetition({ ...verseRepetition, ...range })}
             verseKey={verseRepetition.from}
           />
           <div className={styles.separator}>
@@ -141,11 +146,9 @@ const RepeatAudioModal = ({
           />
           <RepeatSetting
             label="Delay between verse"
-            value={verseRepetition.delayMultiplierBetweenVerse}
+            value={verseRepetition.delayMultiplier}
             minValue={0}
-            onChange={(val) =>
-              setVerseRepetition({ ...verseRepetition, delayMultiplierBetweenVerse: val })
-            }
+            onChange={(val) => setVerseRepetition({ ...verseRepetition, delayMultiplier: val })}
             suffix="times"
             step={0.5}
           />

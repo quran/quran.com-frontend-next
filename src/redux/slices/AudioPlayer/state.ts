@@ -12,9 +12,9 @@ import {
 } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
+import { getVerseTimingByVerseKey } from 'src/utils/verse';
 import AudioFile from 'types/AudioFile';
 import Reciter from 'types/Reciter';
-import VerseTiming from 'types/VerseTiming';
 
 export enum AudioFileStatus {
   Ready = 'Ready',
@@ -46,7 +46,7 @@ export type AudioState = {
   repeatProgress: RepeatProgress;
 };
 
-const defaultRepeatSettings = {
+export const defaultRepeatSettings = {
   delayMultiplier: 0,
   repeatRange: 1,
   repeatEachVerse: 1,
@@ -239,9 +239,5 @@ export const {
   setRepeatProgress,
   exitRepeatMode,
 } = audioPlayerStateSlice.actions;
-
-export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {
-  return verseTimings.find((verseTiming) => verseTiming.verseKey === verseKey);
-};
 
 export default audioPlayerStateSlice.reducer;

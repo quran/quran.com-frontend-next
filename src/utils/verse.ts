@@ -320,3 +320,7 @@ export const getChapterFirstAndLastVerseKey = (chapterId) => {
     last: makeVerseKey(Number(chapterData.id), chapterData.versesCount),
   };
 };
+
+export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {
+  return verseTimings.find((verseTiming) => verseTiming.verseKey === verseKey);
+};
