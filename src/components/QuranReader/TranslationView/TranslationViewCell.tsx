@@ -64,10 +64,7 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
           </div>
           <div className={styles.actionContainerRight}>
             <div className={styles.actionItem}>
-              <PlayVerseAudioButton
-                timestamp={verse.timestamps.timestampFrom}
-                verseKey={verse.verseKey}
-              />
+              <PlayVerseAudioButton verseKey={verse.verseKey} />
             </div>
             <div className={styles.actionItem}>
               <OverflowVerseActionsMenu verse={verse} />
