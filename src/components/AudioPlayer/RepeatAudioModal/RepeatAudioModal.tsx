@@ -76,6 +76,7 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, defaultSelectedVerse]);
 
   const onPlayClick = () => {
+    dispatch(setRepeatSettings(verseRepetition));
     dispatch(
       playFrom({
         chapterId: Number(chapterId),
@@ -83,7 +84,6 @@ const RepeatAudioModal = ({
         verseKey: verseRepetition.from,
       }),
     );
-    dispatch(setRepeatSettings(verseRepetition));
     onClose();
   };
   const onCancelClick = () => {
