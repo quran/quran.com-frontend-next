@@ -19,7 +19,7 @@ const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
     <>
       <RepeatAudioModal
         defaultRepetitionMode={RepetitionMode.Single}
-        defaultSelectedVerse={verseKey}
+        selectedVerseKey={verseKey}
         chapterId={chapterId.toString()}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

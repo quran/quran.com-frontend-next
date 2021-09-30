@@ -314,12 +314,12 @@ export const isLastVerseOfSurah = (chapterNumber: string, verseNumber: number): 
   return verseNumber === versesCount;
 };
 
-export const getChapterFirstAndLastVerseKey = (chapterId) => {
-  const chapterData = getChapterData(chapterId.toString());
-  return {
-    first: makeVerseKey(Number(chapterData.id), 1),
-    last: makeVerseKey(Number(chapterData.id), chapterData.versesCount),
-  };
+export const getChapterFirstAndLastVerseKey = (chapterId: string) => {
+  const chapterData = getChapterData(chapterId);
+  return [
+    makeVerseKey(Number(chapterData.id), 1),
+    makeVerseKey(Number(chapterData.id), chapterData.versesCount),
+  ];
 };
 
 export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {

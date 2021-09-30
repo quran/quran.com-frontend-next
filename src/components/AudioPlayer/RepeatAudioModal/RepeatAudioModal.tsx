@@ -16,14 +16,14 @@ import {
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
-import { generateChapterVersesKeys } from 'src/utils/verse';
+import { generateChapterVersesKeys, getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 
 type RepeatAudioModalProps = {
   chapterId: string;
   isOpen: boolean;
   onClose: () => void;
   defaultRepetitionMode: RepetitionMode;
-  defaultSelectedVerse?: string;
+  selectedVerseKey?: string;
 };
 
 const RepeatAudioModal = ({
@@ -31,7 +31,7 @@ const RepeatAudioModal = ({
   isOpen,
   onClose,
   defaultRepetitionMode,
-  defaultSelectedVerse,
+  selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
@@ -45,24 +45,24 @@ const RepeatAudioModal = ({
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
     const keys = generateChapterVersesKeys(chapterId);
 
-    const initialState = keys.map((chapterVersesKey) => ({
-      id: chapterVersesKey,
-      name: chapterVersesKey,
-      value: chapterVersesKey,
-      label: chapterVersesKey,
+    const initialState = keys.map((chapterVerseKeys) => ({
+      id: chapterVerseKeys,
+      name: chapterVerseKeys,
+      value: chapterVerseKeys,
+      label: chapterVerseKeys,
     }));
 
     return initialState;
   }, [chapterId]);
 
-  const firstVerseKeyInThisChapter = comboboxVerseItems[0].value;
-  const lastVerseKeyInThisChapter = comboboxVerseItems[comboboxVerseItems.length - 1].value;
+  const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] =
+    getChapterFirstAndLastVerseKey(chapterId);
 
   const [verseRepetition, setVerseRepetition] = useState({
     repeatRange: defaultRepeatSettings.repeatRange,
     repeatEachVerse: defaultRepeatSettings.repeatEachVerse,
-    from: defaultSelectedVerse || firstVerseKeyInThisChapter,
-    to: defaultSelectedVerse || lastVerseKeyInThisChapter,
+    from: selectedVerseKey || firstVerseKeyInThisChapter,
+    to: selectedVerseKey || lastVerseKeyInThisChapter,
     delayMultiplier: defaultRepeatSettings.delayMultiplier,
   });
 
@@ -70,10 +70,10 @@ const RepeatAudioModal = ({
   useEffect(() => {
     setVerseRepetition((prevVerseRepetition) => ({
       ...prevVerseRepetition,
-      from: defaultSelectedVerse || firstVerseKeyInThisChapter,
-      to: defaultSelectedVerse || lastVerseKeyInThisChapter,
+      from: selectedVerseKey || firstVerseKeyInThisChapter,
+      to: selectedVerseKey || lastVerseKeyInThisChapter,
     }));
-  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, defaultSelectedVerse]);
+  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const onPlayClick = () => {
     dispatch(setRepeatSettings(verseRepetition));
@@ -94,8 +94,8 @@ const RepeatAudioModal = ({
     if (mode === RepetitionMode.Single) {
       setVerseRepetition((prevVerseRepetition) => ({
         ...prevVerseRepetition,
-        from: defaultSelectedVerse,
-        to: defaultSelectedVerse,
+        from: selectedVerseKey,
+        to: selectedVerseKey,
       }));
     } else {
       setVerseRepetition((prevVerseRepetition) => ({
