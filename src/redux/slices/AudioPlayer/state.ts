@@ -22,6 +22,19 @@ export enum AudioFileStatus {
   NoFile = 'NoFile',
 }
 
+export type RepeatSettings = {
+  repeatRange: number;
+  repeatEachVerse: number;
+  from: string;
+  to: string;
+  delayMultiplier: number;
+};
+
+export type RepeatProgress = {
+  repeatEachVerse: number;
+  repeatRange: number;
+};
+
 export type AudioState = {
   isPlaying: boolean;
   reciter: Reciter;
@@ -29,18 +42,12 @@ export type AudioState = {
   audioFileStatus: AudioFileStatus;
   isMobileMinimizedForScrolling: boolean;
   enableAutoScrolling: boolean;
-  repeatSettings: {
-    // TODO: add typing
-    repeatRange: number;
-    repeatEachVerse: number;
-    from: string;
-    to: string;
-    delayMultiplierBetweenVerse: number;
-  };
+  repeatSettings: RepeatSettings;
+  repeatProgress: RepeatProgress;
 };
 
 const defaultRepeatSettings = {
-  delayMultiplierBetweenVerse: 0,
+  delayMultiplier: 0,
   repeatRange: 1,
   repeatEachVerse: 1,
   from: null,
@@ -55,6 +62,10 @@ const initialState: AudioState = {
   audioFileStatus: AudioFileStatus.NoFile,
   isMobileMinimizedForScrolling: false,
   repeatSettings: defaultRepeatSettings,
+  repeatProgress: {
+    repeatEachVerse: 1,
+    repeatRange: 1,
+  },
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -69,6 +80,7 @@ export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
+export const selectRepeatProgress = (state: RootState) => state.audioPlayerState.repeatProgress;
 export const selectIsInRepeatMode = (state: RootState) => {
   const { repeatSettings } = state.audioPlayerState;
   return !!repeatSettings.from && !!repeatSettings.to;
@@ -137,7 +149,6 @@ interface PlayFromInput {
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
-  // eslint-disable-next-line react-func/max-lines-per-function
   async ({ verseKey, chapterId, reciterId }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
@@ -191,9 +202,13 @@ export const audioPlayerStateSlice = createSlice({
     }),
     setRepeatSettings: (state, action) => ({
       ...state,
-      repeatSettings: action.payload,
+      repeatSettings: { ...action.payload },
     }),
-    disableRepeatMode: (state) => ({
+    setRepeatProgress: (state, action) => ({
+      ...state,
+      repeatProgress: action.payload,
+    }),
+    exitRepeatMode: (state) => ({
       ...state,
       repeatSettings: {
         ...state.repeatSettings,
@@ -221,7 +236,8 @@ export const {
   setIsMobileMinimizedForScrolling,
   setEnableAutoScrolling,
   setRepeatSettings,
-  disableRepeatMode,
+  setRepeatProgress,
+  exitRepeatMode,
 } = audioPlayerStateSlice.actions;
 
 export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {

@@ -1,24 +1,30 @@
 import { useEffect, useRef } from 'react';
 
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import { triggerSetCurrentTime } from '../EventTriggers';
+import { triggerPauseAudio } from '../EventTriggers';
 import useActiveVerseTiming from '../hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
 
+import useMemoizedVerseTiming from './useMemoizedVerseTiming';
 import {
-  useDelayMultiplier,
-  useMemoizedVerseTiming,
-  useRepeatRange,
-  useRepeatVerse,
-} from './hooks';
-import { getNewTime, getNextActions, stopOrDelayAudio } from './utils';
+  checkShouldStopAudio,
+  delayAudioWhenVerseChanged,
+  getDelay,
+  getNextProgressState,
+  repeatVerseOrRange,
+} from './utils';
 
 import { getChapterAudioFile } from 'src/api';
-import { selectIsInRepeatMode, selectRepeatSettings } from 'src/redux/slices/AudioPlayer/state';
+import {
+  exitRepeatMode,
+  selectIsInRepeatMode,
+  selectRepeatProgress,
+  selectRepeatSettings,
+  setRepeatProgress,
+} from 'src/redux/slices/AudioPlayer/state';
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
-import { getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 import VerseTiming from 'types/VerseTiming';
 
 type AudioRepeatManagerProps = {
@@ -33,10 +39,9 @@ const AudioRepeatManager = ({
   chapterId,
 }: AudioRepeatManagerProps) => {
   const repeatSettings = useSelector(selectRepeatSettings, shallowEqual);
+  const repeatProgress = useSelector(selectRepeatProgress, shallowEqual);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const repeatVerse = useRepeatVerse(repeatSettings);
-  const repeatRange = useRepeatRange(repeatSettings);
-  const delayMultiplierBetweenVerse = useDelayMultiplier(repeatSettings);
+  const dispatch = useDispatch();
 
   const { data: audioFileData, isValidating } = useSWRImmutable(
     makeChapterAudioFilesUrl(reciterId, chapterId, true),
@@ -50,13 +55,13 @@ const AudioRepeatManager = ({
   const lastActiveVerseTiming = useRef<VerseTiming>(null);
   const currentActiveVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
 
-  const verseRangeTo = useMemoizedVerseTiming({
-    verseKey: repeatRange.current.range.to,
+  const verseRangeFrom = useMemoizedVerseTiming({
+    verseKey: repeatSettings.from,
     verseTimingsData: audioFileData?.verseTimings,
   });
 
-  const verseRangeFrom = useMemoizedVerseTiming({
-    verseKey: repeatRange.current.range.to,
+  const verseRangeTo = useMemoizedVerseTiming({
+    verseKey: repeatSettings.to,
     verseTimingsData: audioFileData?.verseTimings,
   });
 
@@ -66,60 +71,52 @@ const AudioRepeatManager = ({
     if (!audioFileData || isValidating) return null;
     if (!isInRepeatMode) return null;
 
-    const {
-      shouldDelayAudio,
-      shouldRepeatRange,
-      shouldRepeatVerse,
-      shouldResetVerseProgress,
-      shouldStopAudio,
-    } = getNextActions({
-      currentTimeInMs,
-      delayMultiplierBetweenVerse,
-      activeVerseTiming: lastActiveVerseTiming.current,
-      repeatRange,
-      repeatVerse,
-      verseRangeTo,
+    const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
+    const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
+
+    // get next state and dispatch it to redux
+    const nextRepeatProgress = getNextProgressState({
+      isRangeEnded,
+      isVerseEnded,
+      repeatProgress,
+      repeatSettings,
     });
+    if (!shallowEqual(repeatProgress, nextRepeatProgress))
+      dispatch(setRepeatProgress(nextRepeatProgress));
 
-    const newtime = getNewTime({
-      lastActiveVerseTiming,
-      shouldRepeatRange,
-      shouldRepeatVerse,
-      verseRangeFrom,
-    });
-    if (typeof newtime === 'number') triggerSetCurrentTime(newtime);
-
-    if (shouldRepeatVerse) repeatVerse.current.progress += 1;
-    if (shouldResetVerseProgress) repeatVerse.current.progress = 1;
-    if (shouldRepeatRange) repeatRange.current.progress += 1;
-    if (shouldStopAudio) {
-      const { first, last } = getChapterFirstAndLastVerseKey(chapterId);
-      repeatRange.current.range = {
-        from: first,
-        to: last,
-      };
-    }
-
-    stopOrDelayAudio({
-      delayMultiplierBetweenVerse,
+    // when delayMultiplier is > 0, and repeat is not done, pause the audio then play again
+    const delayInMs = getDelay({
+      delayMultiplier: repeatSettings.delayMultiplier,
       verseTiming: lastActiveVerseTiming.current,
-      shouldDelayAudio,
-      shouldStopAudio,
+    });
+    delayAudioWhenVerseChanged({
+      duration: delayInMs,
+      delayMultiplier: repeatSettings.delayMultiplier,
+      isRangeEnded,
+      isVerseEnded,
+      repeatProgress,
+      repeatSettings,
     });
 
+    // When the verse ended, repeat the verse itself or repeat the range
+    // depending on current repeatProgress
+    repeatVerseOrRange({
+      isRangeEnded,
+      isVerseEnded,
+      verseTimestampFrom: lastActiveVerseTiming.current.timestampFrom,
+      rangeTimestampFrom: verseRangeFrom.timestampFrom,
+      repeatProgress,
+      repeatSettings,
+    });
+
+    // when all repeat is done, stop the audio
+    if (checkShouldStopAudio({ isRangeEnded, repeatProgress, repeatSettings })) {
+      dispatch(exitRepeatMode());
+      triggerPauseAudio();
+    }
     return null;
-  }, [
-    audioFileData,
-    chapterId,
-    currentTimeInMs,
-    delayMultiplierBetweenVerse,
-    isInRepeatMode,
-    isValidating,
-    repeatRange,
-    repeatVerse,
-    verseRangeFrom,
-    verseRangeTo,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTimeInMs]); // only check for currentTime, because it always re render when currentTimeMs change, and we don't need to listen to other changes
 
   useEffect(() => {
     lastActiveVerseTiming.current = currentActiveVerseTiming;

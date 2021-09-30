@@ -13,7 +13,7 @@ import {
   playFrom,
   selectAudioFileStatus,
   AudioFileStatus,
-  disableRepeatMode,
+  exitRepeatMode,
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { getChapterNumberFromKey } from 'src/utils/verse';
@@ -36,7 +36,7 @@ const PlayVerseAudioButton = ({ verseKey }: PlayVerseAudioProps) => {
   }, [audioFileStatus]);
 
   const onPlayClicked = () => {
-    dispatch(disableRepeatMode());
+    dispatch(exitRepeatMode());
     dispatch(
       playFrom({
         chapterId,

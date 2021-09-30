@@ -1,72 +1,74 @@
-import { triggerPauseAudio, triggerPlayAudio } from '../EventTriggers';
+import { triggerPauseAudio, triggerPlayAudio, triggerSetCurrentTime } from '../EventTriggers';
 
-// calculate the duration between timestampFrom and timestampTo * delayMultiplierBetweenVerse
-const getDelay = ({ delayMultiplierBetweenVerse, verseTiming }) => {
-  const { timestampTo, timestampFrom } = verseTiming;
-  return delayMultiplierBetweenVerse * (timestampTo - timestampFrom);
-};
+const checkShouldRepeatVerse = ({ isVerseEnded, repeatProgress, repeatSettings }) =>
+  isVerseEnded && repeatProgress.repeatEachVerse < repeatSettings.repeatEachVerse;
+export const checkShouldStopAudio = ({ isRangeEnded, repeatProgress, repeatSettings }) =>
+  isRangeEnded && repeatProgress.repeatRange >= repeatSettings.repeatRange;
+const checkShouldResetVerseProgress = ({ isVerseEnded, repeatProgress, repeatSettings }) =>
+  isVerseEnded && repeatProgress.repeatEachVerse >= repeatSettings.repeatEachVerse;
+const checkShouldRepeatRange = ({ isRangeEnded, repeatProgress, repeatSettings }) =>
+  isRangeEnded && repeatProgress.repeatRange < repeatSettings.repeatRange;
 
-// based on given conditions, decide when to stop the audio and when to delay the audio
-export const stopOrDelayAudio = ({
-  shouldStopAudio,
-  shouldDelayAudio,
-  delayMultiplierBetweenVerse,
-  verseTiming,
+export const getNextProgressState = ({
+  isVerseEnded,
+  isRangeEnded,
+  repeatProgress,
+  repeatSettings,
 }) => {
-  if (shouldStopAudio) triggerPauseAudio();
-  if (shouldDelayAudio) {
-    triggerPauseAudio();
-    const delay = getDelay({ delayMultiplierBetweenVerse, verseTiming });
-    setTimeout(triggerPlayAudio, delay);
-  }
-};
+  let nextRepeatEachVerseProgress = repeatProgress.repeatEachVerse;
+  if (checkShouldRepeatVerse({ isVerseEnded, repeatProgress, repeatSettings }))
+    nextRepeatEachVerseProgress += 1;
+  if (checkShouldResetVerseProgress({ isVerseEnded, repeatProgress, repeatSettings }))
+    nextRepeatEachVerseProgress = 1;
 
-// based on given data, returns a map of action -> boolean
-export const getNextActions = ({
-  repeatRange,
-  currentTimeInMs,
-  activeVerseTiming,
-  repeatVerse,
-  verseRangeTo,
-  delayMultiplierBetweenVerse,
-}) => {
-  const shouldRepeatVerse =
-    currentTimeInMs >= activeVerseTiming.timestampTo &&
-    repeatVerse.current.progress < repeatVerse.current.total;
-  const shouldResetVerseProgress =
-    currentTimeInMs >= activeVerseTiming.timestampTo &&
-    repeatVerse.current.progress >= repeatVerse.current.total;
-
-  const shouldRepeatRange =
-    currentTimeInMs >= verseRangeTo.timestampTo &&
-    repeatRange.current.progress < repeatRange.current.total;
-
-  const shouldStopAudio =
-    currentTimeInMs >= verseRangeTo.timestampTo &&
-    repeatRange.current.progress >= repeatRange.current.total;
-
-  const shouldDelayAudio =
-    !shouldStopAudio &&
-    delayMultiplierBetweenVerse > 0 &&
-    (shouldRepeatVerse || shouldRepeatRange || shouldResetVerseProgress);
+  let nextRepeatRangeProgress = repeatProgress.repeatRange;
+  if (checkShouldRepeatRange({ isRangeEnded, repeatProgress, repeatSettings }))
+    nextRepeatRangeProgress += 1;
+  if (checkShouldStopAudio({ isRangeEnded, repeatProgress, repeatSettings }))
+    nextRepeatRangeProgress = 1;
 
   return {
-    shouldRepeatVerse,
-    shouldResetVerseProgress,
-    shouldRepeatRange,
-    shouldStopAudio,
-    shouldDelayAudio,
+    repeatEachVerse: nextRepeatEachVerseProgress,
+    repeatRange: nextRepeatRangeProgress,
   };
 };
 
+// when delayMultiplier > 0, and range not ended. Delay the audio
+export const delayAudioWhenVerseChanged = ({
+  delayMultiplier,
+  isVerseEnded,
+  isRangeEnded,
+  repeatProgress,
+  repeatSettings,
+  duration,
+}) => {
+  if (delayMultiplier <= 0) return;
+  const shouldStopAudio = checkShouldStopAudio({ isRangeEnded, repeatProgress, repeatSettings });
+  const shouldDelayAudio = !shouldStopAudio && (isVerseEnded || isRangeEnded);
+  if (shouldDelayAudio) {
+    triggerPauseAudio();
+    setTimeout(triggerPlayAudio, duration);
+  }
+};
+
+// calculate the duration between timestampFrom and timestampTo * delayMultiplierBetweenVerse
+export const getDelay = ({ delayMultiplier, verseTiming }) => {
+  const { timestampTo, timestampFrom } = verseTiming;
+  return delayMultiplier * (timestampTo - timestampFrom);
+};
+
 // get new time for audio player based on given data
-export const getNewTime = ({
-  shouldRepeatVerse,
-  shouldRepeatRange,
-  lastActiveVerseTiming,
-  verseRangeFrom,
+export const repeatVerseOrRange = ({
+  isVerseEnded,
+  isRangeEnded,
+  rangeTimestampFrom,
+  verseTimestampFrom,
+  repeatProgress,
+  repeatSettings,
 }): number => {
-  if (shouldRepeatVerse) return lastActiveVerseTiming.current.timestampFrom / 1000;
-  if (shouldRepeatRange) return verseRangeFrom.timestampFrom / 1000;
+  if (checkShouldRepeatVerse({ isVerseEnded, repeatProgress, repeatSettings }))
+    triggerSetCurrentTime(verseTimestampFrom / 1000);
+  if (checkShouldRepeatRange({ isRangeEnded, repeatProgress, repeatSettings }))
+    triggerSetCurrentTime(rangeTimestampFrom / 1000);
   return null;
 };
