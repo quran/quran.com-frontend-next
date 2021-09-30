@@ -77,6 +77,7 @@ const AudioRepeatManager = ({
     verseTimingsData: audioFileData?.verseTimings,
   });
 
+  // when delayMultiplier is set, delay the audio after the verse ended
   const delayAudioWhenNeeded = useCallback(() => {
     const delayInMs =
       (lastActiveVerseTiming.current.timestampTo - lastActiveVerseTiming.current.timestampFrom) *
