@@ -48,7 +48,7 @@ export type AudioState = {
 
 export const defaultRepeatSettings = {
   delayMultiplier: 0,
-  repeatRange: 1,
+  repeatRange: 3,
   repeatEachVerse: 1,
   from: null,
   to: null,
@@ -206,7 +206,10 @@ export const audioPlayerStateSlice = createSlice({
     }),
     setRepeatProgress: (state, action) => ({
       ...state,
-      repeatProgress: action.payload,
+      repeatProgress: {
+        ...state.repeatProgress,
+        ...action.payload,
+      },
     }),
     exitRepeatMode: (state) => ({
       ...state,

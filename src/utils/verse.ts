@@ -5,6 +5,7 @@ import { getAllChaptersData, getChapterData } from './chapter';
 import * as sampleVerse from './sample-verse.json';
 
 import Verse from 'types/Verse';
+import VerseTiming from 'types/VerseTiming';
 import Word from 'types/Word';
 
 const COLON_SPLITTER = ':';
