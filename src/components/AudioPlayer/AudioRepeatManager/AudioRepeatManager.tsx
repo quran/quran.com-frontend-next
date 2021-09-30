@@ -88,7 +88,7 @@ const AudioRepeatManager = ({
     // When verses ended, and current repeatEachVerse progress < expected repetition
     // 1) set the current time to the beginning of the verse
     // 2) pause the audio when delayMultiplier is set
-    // 3) update repeatEachVerse progress + 1
+    // 3) increment repeatEachVerse progress by 1
     if (isVerseEnded && repeatProgress.repeatEachVerse < repeatSettings.repeatEachVerse) {
       triggerSetCurrentTime(lastActiveVerseTiming.current.timestampFrom / 1000);
       delayAudioWhenNeeded();
@@ -104,8 +104,8 @@ const AudioRepeatManager = ({
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
     // When the range ended, and repeatRange progress < expected repetition
     // 1) set the current time to the beginning of the range
-    // 2) pause the audio when the delay Multiplier is set
-    // 3) update repeatRange progress + 1
+    // 2) pause the audio when the delayMultiplier is set
+    // 3) increment repeatRange progress by 1
     if (isRangeEnded && repeatProgress.repeatRange < repeatSettings.repeatRange) {
       triggerSetCurrentTime(verseRangeFrom.timestampFrom / 1000);
       delayAudioWhenNeeded();
@@ -122,7 +122,7 @@ const AudioRepeatManager = ({
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTimeInMs]);
-  // Wnly use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
+  // We only use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
   // it will cause hooks to be dispatch, setCurrentTime, etc to be executed multiples times, which is unintended
 
   useEffect(() => {
