@@ -3,7 +3,13 @@ import { useRef } from 'react';
 import { getVerseTimingByVerseKey } from 'src/utils/verse';
 import VerseTiming from 'types/VerseTiming';
 
-// given a verse key, return the timing of the verse
+/**
+ * Given a verseKey and verseTimingsData, check if it's already memoized, if it is.
+ * - return the memoized value
+ * - otherwise scan the VerseTimingsData and get a verseTiming for the given verseKey
+ *
+ * @returns {VerseTiming}
+ */
 const useMemoizedVerseTiming = ({ verseKey, verseTimingsData }) => {
   const verseTiming = useRef<VerseTiming>(null);
   if (!verseTimingsData || !verseKey) return null;
