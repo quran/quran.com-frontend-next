@@ -1,0 +1,16 @@
+.container {
+  position: relative;
+}
+.content {
+  position: absolute;
+  color: var(--color-text-inverse);
+  height: var(--spacing-small);
+  width: var(--spacing-small);
+  background-color: var(--color-success-deep);
+  border-radius: var(--border-radius-circle);
+  font-size: var(--font-size-small);
+}
+.positionBottomRight {
+  bottom: var(--spacing-xxsmall);
+  right: var(--spacing-xxsmall);
+}
