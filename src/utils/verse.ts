@@ -5,7 +5,6 @@ import { getAllChaptersData, getChapterData } from './chapter';
 import * as sampleVerse from './sample-verse.json';
 
 import Verse from 'types/Verse';
-import VerseTiming from 'types/VerseTiming';
 import Word from 'types/Word';
 
 const COLON_SPLITTER = ':';
@@ -320,8 +319,4 @@ export const getChapterFirstAndLastVerseKey = (chapterId: string) => {
     makeVerseKey(Number(chapterData.id), 1),
     makeVerseKey(Number(chapterData.id), chapterData.versesCount),
   ];
-};
-
-export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTiming[]) => {
-  return verseTimings.find((verseTiming) => verseTiming.verseKey === verseKey);
 };

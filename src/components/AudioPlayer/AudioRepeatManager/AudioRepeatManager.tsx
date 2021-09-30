@@ -26,10 +26,10 @@ import VerseTiming from 'types/VerseTiming';
  * it can:
  * - set the audio current time,
  * - delay the audio
- * - and stopped the audio
+ * - and stop the audio
  *
  * If the user is in repeat mode, the behavior of this component is as follow:
- * when the verse ended
+ * when the verse ends,
  * - repeat the verse if the repeatProgress.repeatEachVerse < repeatSettings.repeatEachVerse
  * - repeat the range if the repeatProgress.repeatRange < repeatSettings.repeatRange
  * - it will also delay the audio before continuing the next verse.
@@ -117,12 +117,13 @@ const AudioRepeatManager = ({
       return null;
     }
 
+    const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
+
     // When verse ended, repeatEachVerse progress === expected repeatEachProgress. reset the value
     if (isVerseEnded && repeatProgress.repeatEachVerse === repeatSettings.repeatEachVerse) {
       dispatch(setRepeatProgress({ repeatEachVerse: 1 }));
+      if (!isRangeEnded) delayAudioWhenNeeded();
     }
-
-    const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
 
     // When the range ended, and repeatRange progress < expected repetition
     // 1) set the current time to the beginning of the range

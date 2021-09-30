@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { getVerseTimingByVerseKey } from 'src/utils/verse';
+import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import VerseTiming from 'types/VerseTiming';
 
 /**

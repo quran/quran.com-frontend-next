@@ -12,7 +12,7 @@ import {
 } from 'src/components/AudioPlayer/EventTriggers';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
-import { getVerseTimingByVerseKey } from 'src/utils/verse';
+import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import AudioFile from 'types/AudioFile';
 import Reciter from 'types/Reciter';
 
