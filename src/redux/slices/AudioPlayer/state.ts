@@ -81,6 +81,10 @@ export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
 export const selectRepeatProgress = (state: RootState) => state.audioPlayerState.repeatProgress;
+export const selectRemainingRepeatRangeCycle = (state: RootState) => {
+  const { repeatProgress, repeatSettings } = state.audioPlayerState;
+  return repeatSettings.repeatRange - repeatProgress.repeatRange;
+};
 export const selectIsInRepeatMode = (state: RootState) => {
   const { repeatSettings } = state.audioPlayerState;
   return !!repeatSettings.from && !!repeatSettings.to;
