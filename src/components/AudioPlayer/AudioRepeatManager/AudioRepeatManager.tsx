@@ -85,6 +85,7 @@ const AudioRepeatManager = ({
     if (!isInRepeatMode) return null;
 
     const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
+
     // When verses ended, and current repeatEachVerse progress < expected repetition
     // 1) set the current time to the beginning of the verse
     // 2) pause the audio when delayMultiplier is set
@@ -102,6 +103,7 @@ const AudioRepeatManager = ({
     }
 
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
+
     // When the range ended, and repeatRange progress < expected repetition
     // 1) set the current time to the beginning of the range
     // 2) pause the audio when the delayMultiplier is set
