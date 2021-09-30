@@ -46,8 +46,10 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
       });
     }
   }, [dispatch, intersectionObserverEntry]);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
-  const { quranTextFontScale } = quranReaderStyles;
+  const { quranFont, quranTextFontScale } = useSelector(
+    selectQuranReaderStyles,
+    shallowEqual,
+  ) as QuranReaderStyles;
   const [firstWord] = words;
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -55,8 +57,8 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
     shallowEqual,
   );
   const centerAlignPage = useMemo(
-    () => isCenterAlignedPage(pageNumber, lineNumber),
-    [pageNumber, lineNumber],
+    () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
+    [pageNumber, lineNumber, quranFont],
   );
   const firstWordData = getFirstWordOfSurah(location);
   const isBigTextLayout =
@@ -96,7 +98,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
           })}
         >
           {words?.map((word) => (
-            <QuranWord key={word.location} word={word} font={quranReaderStyles.quranFont} />
+            <QuranWord key={word.location} word={word} font={quranFont} />
           ))}
         </div>
       </div>
