@@ -68,13 +68,24 @@ const AudioRepeatManager = ({
     }
   }, [repeatSettings.delayMultiplier]);
 
+  /**
+   * 1) When the current verse ended,
+   *   - if current repeatEachVerse progress < expected repetition, repeat current verse
+   *   - otherwise continue to the next verse
+   * 2) When the current range ended,
+   *   - if the current repeatRange progress < expected repetition, repeat the range
+   *   - otherwise continue
+   *   example of `range` is "1:3" - "1:5". So when current verse is "1:5" and it is ended. We will play "1:3"
+   *
+   * the progress is tracked in redux (`repeatProgress`), and the repetition settings is stored in redux too as `repeatSettings`
+   */
   useEffect(() => {
     if (!lastActiveVerseTiming.current) return null;
     if (!audioFileData || isValidating) return null;
     if (!isInRepeatMode) return null;
 
     const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
-    // When verses ended, and current repeatEachVerse progress < expected repeatEachProgress
+    // When verses ended, and current repeatEachVerse progress < expected repetition
     // 1) set the current time to the beginning of the verse
     // 2) pause the audio when delayMultiplier is set
     // 3) update repeatEachVerse progress + 1
@@ -91,7 +102,7 @@ const AudioRepeatManager = ({
     }
 
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
-    // When the range ended, and repeatRange progress < expected repeatRange
+    // When the range ended, and repeatRange progress < expected repetition
     // 1) set the current time to the beginning of the range
     // 2) pause the audio when the delay Multiplier is set
     // 3) update repeatRange progress + 1
