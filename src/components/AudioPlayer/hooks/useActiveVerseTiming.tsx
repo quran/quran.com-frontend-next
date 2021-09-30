@@ -6,12 +6,14 @@ import AudioFile from 'types/AudioFile';
 import VerseTiming from 'types/VerseTiming';
 
 /**
- * given the current audio time, return the verse that the timestamp matches current audio time
- * it will also optimize for performance, only scan the whole verses when necessary
+ * Given the current audio time and audioFileDAta
+ * - Find the verseTiming that the timing matches the current audio time, from audioFileData
+ * - if a memoized verseTiming is found, return it if the timing matches current audio time. So we don't need to re scan the audioFileData
+ * - special case: if the currentTime is 0, return null
  *
  * @returns {VerseTiming} active verse timing
  */
-const useActiveVerseTiming = (currentTime: number, audioFileData: AudioFile) => {
+const useActiveVerseTiming = (currentTime: number, audioFileData: AudioFile): VerseTiming => {
   const lastActiveVerse = useRef<VerseTiming>(null);
   if (!audioFileData) return null;
 
