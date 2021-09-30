@@ -20,6 +20,25 @@ import {
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
 import VerseTiming from 'types/VerseTiming';
 
+/**
+ * AudioRepeatManger
+ * This component manage the repeat mode of the audio player.
+ * it can:
+ * - set the audio current time,
+ * - delay the audio
+ * - and stopped the audio
+ *
+ * If the user is in repeat mode, the behavior of this component is as follow:
+ * when the verse ended
+ * - repeat the verse if the repeatProgress.repeatEachVerse < repeatSettings.repeatEachVerse
+ * - repeat the range if the repeatProgress.repeatRange < repeatSettings.repeatRange
+ * - it will also delay the audio before continuing the next verse.
+ *   the duration of the delay is based on duration of previous verse * delayMultiplier
+ *
+ *
+ * This component consumes value from redux (repeatSettings, repeatProgress), which is set by RepeatAudioModal.tsx
+ */
+
 type AudioRepeatManagerProps = {
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
   reciterId: number;
