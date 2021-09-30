@@ -44,7 +44,7 @@ type AudioRepeatManagerProps = {
   reciterId: number;
   chapterId: number;
 };
-// eslint-disable-next-line react-func/max-lines-per-function
+
 const AudioRepeatManager = ({
   audioPlayerElRef,
   reciterId,
@@ -150,7 +150,7 @@ const AudioRepeatManager = ({
     lastActiveVerseTiming.current = currentActiveVerseTiming;
   }, [currentActiveVerseTiming]);
 
-  return null;
+  return <></>;
 };
 
 export default AudioRepeatManager;
