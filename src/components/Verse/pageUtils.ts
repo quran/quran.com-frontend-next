@@ -1,3 +1,5 @@
+import { QuranFont } from 'types/QuranReader';
+
 // Pages where we want to have center align text to resemble the Madani Mushaf
 const CENTER_ALIGNED_PAGES = [1, 2];
 
@@ -22,9 +24,17 @@ const CENTER_ALIGNED_PAGE_LINES = {
  *
  * @param {number} pageNumber
  * @param {number} lineNumber
+ * @param {QuranFont} quranFont
  * @returns {boolean}
  */
-const isCenterAlignedPage = (pageNumber: number, lineNumber: number): boolean => {
+const isCenterAlignedPage = (
+  pageNumber: number,
+  lineNumber: number,
+  quranFont: QuranFont,
+): boolean => {
+  if (quranFont === QuranFont.IndoPak) {
+    return false;
+  }
   const centerAlignedLines = CENTER_ALIGNED_PAGE_LINES[pageNumber] || [];
   return CENTER_ALIGNED_PAGES.includes(pageNumber) || centerAlignedLines.includes(lineNumber);
 };
