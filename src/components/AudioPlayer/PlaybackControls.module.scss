@@ -1,11 +1,11 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.container > * + * {
+.container > .actionItem + .actionItem {
   margin-left: var(--spacing-xsmall);
   @include breakpoints.desktop {
     margin-left: var(--spacing-medium);

@@ -19,27 +19,37 @@ const PlaybackControls = () => {
 
   return (
     <div className={styles.container}>
-      <RepeatButton />
-      <Button
-        tooltip="Rewind 10 seconds"
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        disabled={isLoading}
-        onClick={withStopPropagation(() => triggerSeek(-10))}
-      >
-        <ReplayIcon />
-      </Button>
-      <PlayPauseButton />
-      <Button
-        tooltip="Fast-forward 10 seconds"
-        variant={ButtonVariant.Ghost}
-        shape={ButtonShape.Circle}
-        disabled={isLoading}
-        onClick={withStopPropagation(() => triggerSeek(10))}
-      >
-        <ForwardIcon />
-      </Button>
-      <CloseButton />
+      <div className={styles.actionItem}>
+        <RepeatButton />
+      </div>
+      <div className={styles.actionItem}>
+        <Button
+          tooltip="Rewind 10 seconds"
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          disabled={isLoading}
+          onClick={withStopPropagation(() => triggerSeek(-10))}
+        >
+          <ReplayIcon />
+        </Button>
+      </div>
+      <div className={styles.actionItem}>
+        <PlayPauseButton />
+      </div>
+      <div className={styles.actionItem}>
+        <Button
+          tooltip="Fast-forward 10 seconds"
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          disabled={isLoading}
+          onClick={withStopPropagation(() => triggerSeek(10))}
+        >
+          <ForwardIcon />
+        </Button>
+      </div>
+      <div className={styles.actionItem}>
+        <CloseButton />
+      </div>
     </div>
   );
 };
