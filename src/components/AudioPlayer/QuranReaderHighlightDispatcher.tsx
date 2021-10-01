@@ -3,7 +3,9 @@ import { useRef, useEffect } from 'react';
 import { shallowEqual, useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import useActiveVerseTiming from './hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
+import useMemoizedHighlightedWordLocation from './hooks/useMemoizedHighlightedWordLocation';
 
 import { getChapterAudioFile } from 'src/api';
 import {
@@ -13,7 +15,6 @@ import {
 } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
-import AudioFile from 'types/AudioFile';
 import Segment from 'types/Segment';
 import VerseTiming from 'types/VerseTiming';
 
@@ -43,10 +44,7 @@ const QuranReaderHighlightDispatcher = ({
 
   const lastHighlightedLocation = useRef(defaultHighlightedLocation);
 
-  const currentHighlightedVerseTiming = useMemoizedHighlightedVerseTiming(
-    currentTimeInMs,
-    audioFileData,
-  );
+  const currentHighlightedVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
   const currentHighlightedWordLocation = useMemoizedHighlightedWordLocation(
     currentTimeInMs,
     currentHighlightedVerseTiming,
@@ -65,64 +63,6 @@ const QuranReaderHighlightDispatcher = ({
   }, [currentHighlightedVerseTiming, currentHighlightedWordLocation, dispatch]);
 
   return null;
-};
-
-/**
- * given a current time, return the verse that the timestamp matches currentTime
- * it will also optimize for performance, only scan the whole verses when necessary
- *
- * @returns {VerseTiming} currentHighlightedVerseTiming
- */
-const useMemoizedHighlightedVerseTiming = (currentTime: number, audioFileData: AudioFile) => {
-  const lastHighlightedVerse = useRef<VerseTiming>(null);
-  if (!audioFileData) return null;
-
-  if (
-    lastHighlightedVerse.current &&
-    isCurrentTimeInRange(
-      currentTime,
-      lastHighlightedVerse.current.timestampFrom,
-      lastHighlightedVerse.current.timestampTo,
-    )
-  )
-    return lastHighlightedVerse.current;
-
-  const highlightedVerseTiming = audioFileData.verseTimings.find((verse) =>
-    isCurrentTimeInRange(currentTime, verse.timestampFrom, verse.timestampTo),
-  );
-  lastHighlightedVerse.current = highlightedVerseTiming;
-  return highlightedVerseTiming;
-};
-
-/**
- * given currentTime and currentHighlightedVerseTiming, return the word location that the timestamp matches currentTime
- * it will also optimize for performance, only scan the whole segment when necessary
- *
- * @returns {Segment} currentHighlightedWordLocation
- */
-const useMemoizedHighlightedWordLocation = (
-  currentTime: number,
-  currentHighlightedVerseTiming: VerseTiming,
-) => {
-  const lastHighlightedWordLocation = useRef<Segment>(null);
-  if (!currentHighlightedVerseTiming) return null;
-
-  // Do not highlight the verse when the audio hasn't started playing
-  if (currentTime === 0) return null;
-
-  if (lastHighlightedWordLocation.current) {
-    const [, timestampFrom, timestampTo] = lastHighlightedWordLocation.current;
-    if (isCurrentTimeInRange(currentTime, timestampFrom, timestampTo))
-      return lastHighlightedWordLocation.current;
-  }
-
-  const highlightedWordLocation = currentHighlightedVerseTiming.segments.find((segment) => {
-    const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
-    return isCurrentTimeInRange(currentTime, timestampFrom, timestampTo);
-  });
-  lastHighlightedWordLocation.current = highlightedWordLocation;
-
-  return highlightedWordLocation;
 };
 
 /**
@@ -151,21 +91,5 @@ const getHighlightedLocation = (
 
   return highlightedLocation;
 };
-
-/**
- * check if currentTime is within range timestampFrom and timestampTo
- *
- * example:
- * - timestampFrom = 10, timestampTo = 20, currentTime = 10 should return true
- * - timestampFrom = 10, timestampTo = 20, currentTime = 11 should return true
- * - timestampFrom = 10, timestampTo = 20, currentTime = 20 should return false
- *
- * @param {number} currentTime
- * @param {number} timestampFrom
- * @param {number} timestampTo
- * @returns {boolean} isWithinRange
- */
-const isCurrentTimeInRange = (currentTime: number, timestampFrom: number, timestampTo: number) =>
-  currentTime >= timestampFrom && currentTime < timestampTo;
 
 export default QuranReaderHighlightDispatcher;

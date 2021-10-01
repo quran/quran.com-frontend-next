@@ -13,15 +13,15 @@ import {
   playFrom,
   selectAudioFileStatus,
   AudioFileStatus,
+  exitRepeatMode,
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
-  timestamp: number;
   verseKey: string;
 }
-const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
+const PlayVerseAudioButton = ({ verseKey }: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
@@ -36,11 +36,12 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   }, [audioFileStatus]);
 
   const onPlayClicked = () => {
+    dispatch(exitRepeatMode());
     dispatch(
       playFrom({
         chapterId,
         reciterId,
-        timestamp,
+        verseKey,
       }),
     );
 

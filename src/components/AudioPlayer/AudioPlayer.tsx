@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
@@ -6,6 +5,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioPlayer.module.scss';
 import AudioPlayerSlider from './AudioPlayerSlider';
+import AudioRepeatManager from './AudioRepeatManager/AudioRepeatManager';
 import { triggerPauseAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
 // import AudioKeyBoardListeners from './AudioKeyboardListeners';
@@ -106,6 +106,13 @@ const AudioPlayer = () => {
         /> */}
         {reciterId && audioFile?.chapterId && (
           <QuranReaderHighlightDispatcher
+            audioPlayerElRef={audioPlayerElRef}
+            reciterId={reciterId}
+            chapterId={audioFile?.chapterId}
+          />
+        )}
+        {reciterId && audioFile?.chapterId && (
+          <AudioRepeatManager
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
             chapterId={audioFile?.chapterId}

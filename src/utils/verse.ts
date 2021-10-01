@@ -312,3 +312,11 @@ export const isLastVerseOfSurah = (chapterNumber: string, verseNumber: number): 
   const { versesCount } = getChapterData(chapterNumber);
   return verseNumber === versesCount;
 };
+
+export const getChapterFirstAndLastVerseKey = (chapterId: string) => {
+  const chapterData = getChapterData(chapterId);
+  return [
+    makeVerseKey(Number(chapterData.id), 1),
+    makeVerseKey(Number(chapterData.id), chapterData.versesCount),
+  ];
+};
