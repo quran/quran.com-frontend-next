@@ -143,13 +143,14 @@ export const setReciterAndPauseAudio = createAsyncThunk<void, Reciter, { state: 
  *
  */
 interface PlayFromInput {
-  verseKey: string;
+  verseKey?: string;
   chapterId: number;
   reciterId: number;
+  timestamp?: number;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
-  async ({ verseKey, chapterId, reciterId }, thunkApi) => {
+  async ({ verseKey, chapterId, reciterId, timestamp }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
     let audioFile = selectAudioFile(state);
@@ -160,10 +161,13 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
     }
 
-    const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
-    const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
-    const timestampInSeconds = verseTiming.timestampFrom / 1000;
-    playFromTimestamp(timestampInSeconds);
+    if (!timestamp) {
+      const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
+      const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
+      playFromTimestamp(verseTiming.timestampFrom / 1000);
+      return;
+    }
+    playFromTimestamp(timestamp / 1000);
   },
 );
 

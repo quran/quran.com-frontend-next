@@ -20,8 +20,9 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
   verseKey: string;
+  timestamp: number;
 }
-const PlayVerseAudioButton = ({ verseKey }: PlayVerseAudioProps) => {
+const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
@@ -41,7 +42,7 @@ const PlayVerseAudioButton = ({ verseKey }: PlayVerseAudioProps) => {
       playFrom({
         chapterId,
         reciterId,
-        verseKey,
+        timestamp,
       }),
     );
 
