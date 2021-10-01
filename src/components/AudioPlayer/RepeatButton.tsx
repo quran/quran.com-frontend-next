@@ -12,7 +12,7 @@ import Button, { ButtonVariant, ButtonShape, ButtonType } from 'src/components/d
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import {
   selectAudioFile,
-  selectRemainingRepeatRangeCycle,
+  selectRemainingRangeRepeatCount,
   selectIsInRepeatMode,
 } from 'src/redux/slices/AudioPlayer/state';
 
@@ -20,7 +20,7 @@ const RepeatAudioButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const audioFile = useSelector(selectAudioFile, shallowEqual);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const remainingRepeatRangeCycle = useSelector(selectRemainingRepeatRangeCycle);
+  const remainingRangeRepeatCount = useSelector(selectRemainingRangeRepeatCount);
 
   return (
     <>
@@ -34,7 +34,7 @@ const RepeatAudioButton = () => {
       )}
       <Wrapper
         shouldWrap={isInRepeatMode}
-        wrapper={(children) => <Badge content={remainingRepeatRangeCycle}>{children}</Badge>}
+        wrapper={(children) => <Badge content={remainingRangeRepeatCount}>{children}</Badge>}
       >
         <Button
           type={isInRepeatMode ? ButtonType.Success : ButtonType.Secondary}

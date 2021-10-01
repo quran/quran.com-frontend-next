@@ -85,7 +85,7 @@ export const selectIsInRepeatMode = (state: RootState) => {
   const { repeatSettings } = state.audioPlayerState;
   return !!repeatSettings.from && !!repeatSettings.to;
 };
-export const selectRemainingRepeatRangeCycle = (state: RootState) => {
+export const selectRemainingRangeRepeatCount = (state: RootState) => {
   const { repeatProgress, repeatSettings } = state.audioPlayerState;
   return 1 + (repeatSettings.repeatRange - repeatProgress.repeatRange);
   // +1 to account for the current cycle, current implementation doesn't account for the current cycle
