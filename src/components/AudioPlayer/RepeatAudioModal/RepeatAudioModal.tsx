@@ -10,9 +10,9 @@ import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import {
-  defaultRepeatSettings,
   playFrom,
   selectReciter,
+  selectRepeatSettings,
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
@@ -35,6 +35,7 @@ const RepeatAudioModal = ({
 }: RepeatAudioModalProps) => {
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
+  const repeatSettings = useSelector(selectRepeatSettings);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
 
   const chapterName = useMemo(() => {
@@ -59,11 +60,11 @@ const RepeatAudioModal = ({
     getChapterFirstAndLastVerseKey(chapterId);
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: defaultRepeatSettings.repeatRange,
-    repeatEachVerse: defaultRepeatSettings.repeatEachVerse,
+    repeatRange: repeatSettings.repeatRange,
+    repeatEachVerse: repeatSettings.repeatEachVerse,
     from: selectedVerseKey || firstVerseKeyInThisChapter,
     to: selectedVerseKey || lastVerseKeyInThisChapter,
-    delayMultiplier: defaultRepeatSettings.delayMultiplier,
+    delayMultiplier: repeatSettings.delayMultiplier,
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
