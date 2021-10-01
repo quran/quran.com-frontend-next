@@ -45,6 +45,7 @@ interface Props {
   tagsLimit?: number;
   disabled?: boolean;
   hasError?: boolean;
+  fixedWidth?: boolean;
   minimumRequiredItems?: number;
 }
 
@@ -64,6 +65,7 @@ const Combobox: React.FC<Props> = ({
   size = ComboboxSize.Medium,
   minimumRequiredItems = 0,
   onChange,
+  fixedWidth = true,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState<string>(initialInputValue || '');
@@ -316,7 +318,10 @@ const Combobox: React.FC<Props> = ({
       {label && <p className={styles.label}>{label}</p>}
       <div
         ref={comboBoxRef}
-        className={classNames(styles.comboboxContainer, { [styles.enabled]: !disabled })}
+        className={classNames(styles.comboboxContainer, {
+          [styles.enabled]: !disabled,
+          [styles.fixedWidth]: fixedWidth,
+        })}
       >
         <div
           onClick={onSelectorClicked}
@@ -396,6 +401,7 @@ const Combobox: React.FC<Props> = ({
           selectedValue={selectedValue}
           id={id}
           emptyMessage={emptyMessage}
+          fixedWidth={fixedWidth}
         />
       </div>
     </>

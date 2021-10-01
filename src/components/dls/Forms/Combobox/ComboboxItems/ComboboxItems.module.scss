@@ -5,7 +5,9 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
   margin-top: var(--spacing-micro);
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-large);
-  width: calc(8 * var(--spacing-mega));
+  &.fixedWidth {
+    width: calc(8 * var(--spacing-mega));
+  }
   z-index: var(--z-index-dropdown);
   transition: var(--transition-fast);
   background-color: var(--color-background-default);
