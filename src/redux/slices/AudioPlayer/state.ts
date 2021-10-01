@@ -161,6 +161,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
     }
 
+    // `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
     if (!timestamp) {
       const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
