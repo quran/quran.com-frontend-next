@@ -2,6 +2,8 @@ import { useMemo, useState, useEffect } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import { triggerPauseAudio } from '../EventTriggers';
+
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
@@ -11,7 +13,9 @@ import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import {
   defaultRepeatSettings,
+  exitRepeatMode,
   playFrom,
+  selectIsInRepeatMode,
   selectReciter,
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
@@ -36,6 +40,7 @@ const RepeatAudioModal = ({
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
+  const isInRepeatMode = useSelector(selectIsInRepeatMode);
 
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId);
@@ -86,24 +91,19 @@ const RepeatAudioModal = ({
     );
     onClose();
   };
-  const onCancelClick = () => {
+  const onCancelClick = () => onClose();
+  const onExitRepeatMode = () => {
+    dispatch(exitRepeatMode());
+    triggerPauseAudio();
     onClose();
   };
 
   const onRepetitionModeChange = (mode) => {
-    if (mode === RepetitionMode.Single) {
-      setVerseRepetition((prevVerseRepetition) => ({
-        ...prevVerseRepetition,
-        from: selectedVerseKey,
-        to: selectedVerseKey,
-      }));
-    } else {
-      setVerseRepetition((prevVerseRepetition) => ({
-        ...prevVerseRepetition,
-        from: firstVerseKeyInThisChapter,
-        to: lastVerseKeyInThisChapter,
-      }));
-    }
+    setVerseRepetition((prevVerseRepetition) => ({
+      ...prevVerseRepetition,
+      from: mode === RepetitionMode.Single ? selectedVerseKey : firstVerseKeyInThisChapter,
+      to: mode === RepetitionMode.Single ? selectedVerseKey : lastVerseKeyInThisChapter,
+    }));
     setRepetitionMode(mode);
   };
 
@@ -155,7 +155,9 @@ const RepeatAudioModal = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Action onClick={onCancelClick}>Cancel</Modal.Action>
+        <Modal.Action onClick={isInRepeatMode ? onExitRepeatMode : onCancelClick}>
+          {isInRepeatMode ? 'Exit Repeat Mode' : 'Cancel'}
+        </Modal.Action>
         <Modal.Action onClick={onPlayClick}>Start Playing</Modal.Action>
       </Modal.Footer>
     </Modal>
