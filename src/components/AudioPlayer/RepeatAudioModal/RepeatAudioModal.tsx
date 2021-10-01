@@ -92,7 +92,7 @@ const RepeatAudioModal = ({
     onClose();
   };
   const onCancelClick = () => onClose();
-  const onExitRepeatMode = () => {
+  const onStopRepeating = () => {
     dispatch(exitRepeatMode());
     triggerPauseAudio();
     onClose();
@@ -155,8 +155,8 @@ const RepeatAudioModal = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Action onClick={isInRepeatMode ? onExitRepeatMode : onCancelClick}>
-          {isInRepeatMode ? 'Exit Repeat Mode' : 'Cancel'}
+        <Modal.Action onClick={isInRepeatMode ? onStopRepeating : onCancelClick}>
+          {isInRepeatMode ? 'Stop Repeating' : 'Cancel'}
         </Modal.Action>
         <Modal.Action onClick={onPlayClick}>Start Playing</Modal.Action>
       </Modal.Footer>
