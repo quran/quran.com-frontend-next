@@ -1,8 +1,13 @@
 .container {
   position: relative;
+  display: inline-block;
 }
 .content {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   color: var(--color-text-inverse);
   height: var(--spacing-small);
   width: var(--spacing-small);
