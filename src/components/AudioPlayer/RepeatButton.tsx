@@ -8,24 +8,24 @@ import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
 import Button, { ButtonVariant, ButtonShape } from 'src/components/dls/Button/Button';
-import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { selectAudioData } from 'src/redux/slices/AudioPlayer/state';
 
 const RepeatAudioButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const audioFile = useSelector(selectAudioFile, shallowEqual);
+  const audioData = useSelector(selectAudioData, shallowEqual);
 
   return (
     <>
-      {audioFile && (
+      {audioData && (
         <RepeatAudioModal
           defaultRepetitionMode={RepetitionMode.Range}
-          chapterId={audioFile?.chapterId.toString()}
+          chapterId={audioData?.chapterId.toString()}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
       )}
       <Button
-        disabled={!audioFile}
+        disabled={!audioData}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         onClick={() => setIsModalOpen(true)}

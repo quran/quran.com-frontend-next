@@ -9,7 +9,7 @@ import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
 
 import useMemoizedVerseTiming from './useMemoizedVerseTiming';
 
-import { getChapterAudioFile } from 'src/api';
+import { getChapterAudioData } from 'src/api';
 import {
   exitRepeatMode,
   selectIsInRepeatMode,
@@ -17,7 +17,7 @@ import {
   selectRepeatSettings,
   setRepeatProgress,
 } from 'src/redux/slices/AudioPlayer/state';
-import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
+import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import VerseTiming from 'types/VerseTiming';
 
 /**
@@ -55,9 +55,9 @@ const AudioRepeatManager = ({
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const dispatch = useDispatch();
 
-  const { data: audioFileData, isValidating } = useSWRImmutable(
-    makeChapterAudioFilesUrl(reciterId, chapterId, true),
-    () => getChapterAudioFile(reciterId, chapterId, true),
+  const { data: audioData, isValidating } = useSWRImmutable(
+    makeChapterAudioDataUrl(reciterId, chapterId, true),
+    () => getChapterAudioData(reciterId, chapterId, true),
   );
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
   const currentTimeInMs = Math.floor(currentTime * 1000);
@@ -65,16 +65,16 @@ const AudioRepeatManager = ({
   // We need to save lastActiveVerseTiming, because when the verse ended,
   // the currentActiveVerseTiming, is already updated to the next verse, but we need a reference to the last verse
   const lastActiveVerseTiming = useRef<VerseTiming>(null);
-  const currentActiveVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
+  const currentActiveVerseTiming = useActiveVerseTiming(currentTimeInMs, audioData);
 
   const verseRangeFrom = useMemoizedVerseTiming({
     verseKey: repeatSettings.from,
-    verseTimingsData: audioFileData?.verseTimings,
+    verseTimingsData: audioData?.verseTimings,
   });
 
   const verseRangeTo = useMemoizedVerseTiming({
     verseKey: repeatSettings.to,
-    verseTimingsData: audioFileData?.verseTimings,
+    verseTimingsData: audioData?.verseTimings,
   });
 
   // when delayMultiplier is set, delay the audio after the verse ended
@@ -101,7 +101,7 @@ const AudioRepeatManager = ({
    */
   useEffect(() => {
     if (!lastActiveVerseTiming.current) return null;
-    if (!audioFileData || isValidating) return null;
+    if (!audioData || isValidating) return null;
     if (!isInRepeatMode) return null;
 
     const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;

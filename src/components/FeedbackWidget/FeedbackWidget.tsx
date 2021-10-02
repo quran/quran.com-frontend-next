@@ -8,15 +8,15 @@ import styles from './FeedbackWidget.module.scss';
 import Button from 'src/components/dls/Button/Button';
 import Link from 'src/components/dls/Link/Link';
 import {
-  AudioFileStatus,
-  selectAudioFileStatus,
+  AudioDataStatus,
+  selectAudioDataStatus,
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
 
 const FeedbackWidget = () => {
-  const audioFileStatus = useSelector(selectAudioFileStatus);
+  const audioDataStatus = useSelector(selectAudioDataStatus);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
-  const isHidden = audioFileStatus === AudioFileStatus.NoFile;
+  const isHidden = audioDataStatus === AudioDataStatus.NoFile;
 
   return (
     <div

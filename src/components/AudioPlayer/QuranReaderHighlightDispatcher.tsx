@@ -7,13 +7,13 @@ import useActiveVerseTiming from './hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 import useMemoizedHighlightedWordLocation from './hooks/useMemoizedHighlightedWordLocation';
 
-import { getChapterAudioFile } from 'src/api';
+import { getChapterAudioData } from 'src/api';
 import {
   HighlightedLocationState,
   initialState as defaultHighlightedLocation,
   setHighlightedLocation,
 } from 'src/redux/slices/QuranReader/highlightedLocation';
-import { makeChapterAudioFilesUrl } from 'src/utils/apiPaths';
+import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import Segment from 'types/Segment';
 import VerseTiming from 'types/VerseTiming';
@@ -35,16 +35,16 @@ const QuranReaderHighlightDispatcher = ({
   audioPlayerElRef,
 }: AudioTimestampsHighlightListenerProps) => {
   const dispatch = useDispatch();
-  const { data: audioFileData } = useSWRImmutable(
-    makeChapterAudioFilesUrl(reciterId, chapterId, true),
-    () => getChapterAudioFile(reciterId, chapterId, true),
+  const { data: audioData } = useSWRImmutable(
+    makeChapterAudioDataUrl(reciterId, chapterId, true),
+    () => getChapterAudioData(reciterId, chapterId, true),
   );
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef);
   const currentTimeInMs = currentTime * 1000;
 
   const lastHighlightedLocation = useRef(defaultHighlightedLocation);
 
-  const currentHighlightedVerseTiming = useActiveVerseTiming(currentTimeInMs, audioFileData);
+  const currentHighlightedVerseTiming = useActiveVerseTiming(currentTimeInMs, audioData);
   const currentHighlightedWordLocation = useMemoizedHighlightedWordLocation(
     currentTimeInMs,
     currentHighlightedVerseTiming,

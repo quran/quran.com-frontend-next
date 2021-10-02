@@ -5,7 +5,7 @@ import {
   makeTafsirsUrl,
   makeLanguagesUrl,
   makeAudioTimestampsUrl,
-  makeChapterAudioFilesUrl,
+  makeChapterAudioDataUrl,
   makeRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
@@ -24,14 +24,14 @@ import {
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
   RecitersResponse,
-  AudioFilesResponse,
+  AudioDataResponse,
   AudioTimestampsResponse,
   TafsirsResponse,
   VersesResponse,
   ChapterInfoResponse,
   FootnoteResponse,
 } from 'types/ApiResponses';
-import AudioFile from 'types/AudioFile';
+import AudioData from 'types/AudioData';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
@@ -93,13 +93,13 @@ export const getAvailableReciters = async (): Promise<RecitersResponse> =>
  * @param {number} chapter the id of the chapter
  */
 
-export const getChapterAudioFile = async (
+export const getChapterAudioData = async (
   reciterId: number,
   chapter: number,
   segments = false,
-): Promise<AudioFile> => {
-  const res = await fetcher<AudioFilesResponse>(
-    makeChapterAudioFilesUrl(reciterId, chapter, segments),
+): Promise<AudioData> => {
+  const res = await fetcher<AudioDataResponse>(
+    makeChapterAudioDataUrl(reciterId, chapter, segments),
   );
 
   if (res.error) {
@@ -108,8 +108,8 @@ export const getChapterAudioFile = async (
   if (res.status === 500) {
     throw new Error('server error: fail to get audio file');
   }
-  const { audioFiles } = res;
-  const [firstAudio] = audioFiles;
+  const { audioData } = res;
+  const [firstAudio] = audioData;
   if (!firstAudio) {
     throw new Error('No audio file found');
   }

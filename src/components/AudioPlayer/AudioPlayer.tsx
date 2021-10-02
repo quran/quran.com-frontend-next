@@ -15,10 +15,10 @@ import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
-  selectAudioFile,
-  selectAudioFileStatus,
+  selectAudioData,
+  selectAudioDataStatus,
   setAudioStatus,
-  AudioFileStatus,
+  AudioDataStatus,
   selectReciter,
   setIsMobileMinimizedForScrolling,
   selectIsMobileMinimizedForScrolling,
@@ -27,9 +27,9 @@ import {
 const AudioPlayer = () => {
   const dispatch = useDispatch();
   const audioPlayerElRef = useRef<HTMLAudioElement>(null);
-  const audioFile = useSelector(selectAudioFile, shallowEqual);
-  const audioFileStatus = useSelector(selectAudioFileStatus);
-  const isHidden = audioFileStatus === AudioFileStatus.NoFile;
+  const audioData = useSelector(selectAudioData, shallowEqual);
+  const audioDataStatus = useSelector(selectAudioDataStatus);
+  const isHidden = audioDataStatus === AudioDataStatus.NoFile;
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const onDirectionChange = useCallback(
@@ -54,7 +54,7 @@ const AudioPlayer = () => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
   const onAudioLoaded = useCallback(() => {
-    dispatch({ type: setAudioStatus.type, payload: AudioFileStatus.Ready });
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
   }, [dispatch]);
 
   // Sync the global audio player element reference with the AudioPlayer component.
@@ -95,7 +95,7 @@ const AudioPlayer = () => {
       <div className={styles.innerContainer}>
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
-          src={audioFile?.audioUrl}
+          src={audioData?.audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerElRef}
@@ -104,18 +104,18 @@ const AudioPlayer = () => {
           seek={(seekDuration) => seek(seekDuration)}
           togglePlaying={() => togglePlaying()}
         /> */}
-        {reciterId && audioFile?.chapterId && (
+        {reciterId && audioData?.chapterId && (
           <QuranReaderHighlightDispatcher
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
-            chapterId={audioFile?.chapterId}
+            chapterId={audioData?.chapterId}
           />
         )}
-        {reciterId && audioFile?.chapterId && (
+        {reciterId && audioData?.chapterId && (
           <AudioRepeatManager
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
-            chapterId={audioFile?.chapterId}
+            chapterId={audioData?.chapterId}
           />
         )}
         <MediaSessionApiListeners

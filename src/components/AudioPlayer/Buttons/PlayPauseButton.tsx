@@ -11,10 +11,10 @@ import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Bu
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import {
-  AudioFileStatus,
-  loadAndPlayAudioFile,
-  selectAudioFile,
-  selectAudioFileStatus,
+  AudioDataStatus,
+  loadAndPlayAudioData,
+  selectAudioData,
+  selectAudioDataStatus,
   selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
@@ -24,11 +24,11 @@ const PlayPauseButton = () => {
   const dispatch = useDispatch();
 
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
-  const isLoading = useSelector(selectAudioFileStatus) === AudioFileStatus.Loading;
+  const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
 
-  const audioFile = useSelector(selectAudioFile, shallowEqual);
+  const audioData = useSelector(selectAudioData, shallowEqual);
   const currentReadingChapterIds = useChapterIdsByUrlPath();
-  const currentAudioChapterId = audioFile?.chapterId?.toString();
+  const currentAudioChapterId = audioData?.chapterId?.toString();
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
 
@@ -93,7 +93,7 @@ const PlayPauseButton = () => {
           setIsMismatchModalVisible(false);
         }}
         onStartOver={() => {
-          dispatch(loadAndPlayAudioFile(Number(firstCurrentReadingChapterId)));
+          dispatch(loadAndPlayAudioData(Number(firstCurrentReadingChapterId)));
           setIsMismatchModalVisible(false);
         }}
       />
