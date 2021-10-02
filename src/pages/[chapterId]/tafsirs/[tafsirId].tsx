@@ -4,7 +4,7 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import Error from 'next/error';
 
 import { getChapterVerses } from 'src/api';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import { getChapterData } from 'src/utils/chapter';
 import {
@@ -36,7 +36,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   }
   return (
     <>
-      <NextSeoHead title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseNumber}`} />
+      <NextSeoWrapper title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseNumber}`} />
       <QuranReader
         initialData={verses}
         id={tafsirId}

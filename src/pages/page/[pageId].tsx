@@ -5,7 +5,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 
 import { getPageVerses } from 'src/api';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import {
@@ -30,7 +30,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   }
   return (
     <>
-      <NextSeoHead title={`Page ${pageId}`} />
+      <NextSeoWrapper title={`Page ${pageId}`} />
       <QuranReader
         initialData={pageVerses}
         id={String(pageId)}
