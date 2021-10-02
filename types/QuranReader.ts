@@ -39,7 +39,7 @@ export enum Mushaf {
   Indopak = 3,
   UthmaniHafs = 4,
   KFGQPCHAFS = 5,
-  Indopak15Lines = 6,
+  Indopak15Lines = 9,
   Indopak16Lines = 7,
 }
 
