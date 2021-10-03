@@ -12,7 +12,11 @@ type PopoverMenuProps = {
 const PopoverMenu = ({ children, isOpen, trigger }: PopoverMenuProps) => {
   return (
     <PrimitiveDropdownMenu.Root open={isOpen}>
-      {trigger && <PrimitiveDropdownMenu.Trigger asChild>{trigger}</PrimitiveDropdownMenu.Trigger>}
+      {trigger && (
+        <PrimitiveDropdownMenu.Trigger asChild>
+          <span>{trigger}</span>
+        </PrimitiveDropdownMenu.Trigger>
+      )}
       <PrimitiveDropdownMenu.Content className={styles.content}>
         {children}
       </PrimitiveDropdownMenu.Content>
