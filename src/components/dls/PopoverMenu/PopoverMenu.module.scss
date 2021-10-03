@@ -1,7 +1,7 @@
 $animationDuration: 0.35s;
 $animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
 
-$min-width: calc(9 * var(--spacing-large));
+$min-width: calc(11 * var(--spacing-large));
 $separator-size: 1px;
 
 @keyframes slideUpAndFade {
@@ -48,7 +48,7 @@ $separator-size: 1px;
 }
 
 .content {
-  padding: var(--spacing-xsmall) 0;
+  padding: var(--spacing-small) 0;
   min-width: $min-width;
   background-color: white;
   border-radius: var(--border-radius-default);
@@ -79,7 +79,7 @@ $separator-size: 1px;
   color: var(--color-text-default);
   display: flex;
   align-items: center;
-  padding: var(--spacing-small) var(--spacing-medium);
+  padding: var(--spacing-xxsmall) var(--spacing-medium);
   position: relative;
   cursor: pointer;
 
@@ -98,7 +98,7 @@ $separator-size: 1px;
   }
 
   & .iconWrapper {
-    margin-right: var(--spacing-xsmall);
+    margin-right: var(--spacing-medium);
     display: flex;
     align-items: center;
     height: var(--spacing-medium);
