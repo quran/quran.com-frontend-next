@@ -45,7 +45,6 @@ const SearchBodyContainer: React.FC<Props> = ({
     <div
       className={classNames({
         [styles.internalContainer]: isPreInputLayout,
-        [styles.bodyContainer]: isSearchDrawer,
       })}
     >
       {!searchQuery ? (
