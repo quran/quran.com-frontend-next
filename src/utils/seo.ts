@@ -70,9 +70,6 @@ export function createSEOConfig({
       site: config.twitterHandle,
       cardType: config.twitterCardType,
     },
-    robotsProps: {
-      notranslate: true,
-    },
     additionalMetaTags: [
       {
         name: 'fb:pages',
