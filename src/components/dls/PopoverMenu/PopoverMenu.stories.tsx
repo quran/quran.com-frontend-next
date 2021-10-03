@@ -13,6 +13,8 @@ export default {
 export const unTriggered = () => {
   return (
     <PopoverMenu trigger={<button type="button">Trigger</button>}>
+      <PopoverMenu.Item>Dashboard</PopoverMenu.Item>
+
       <PopoverMenu.Divider />
 
       <PopoverMenu.Item>My Teams</PopoverMenu.Item>
