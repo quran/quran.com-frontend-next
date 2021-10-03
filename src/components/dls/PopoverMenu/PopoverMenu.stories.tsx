@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import LinkIcon from '../../../../public/icons/east.svg';
 import RepeatIcon from '../../../../public/icons/repeat.svg';
 import ShareIcon from '../../../../public/icons/share.svg';
