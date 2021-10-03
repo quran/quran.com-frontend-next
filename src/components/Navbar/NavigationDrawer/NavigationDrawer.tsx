@@ -1,12 +1,9 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React from 'react';
 
-import classNames from 'classnames';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import IconClose from '../../../../public/icons/close.svg';
 import IconQ from '../../../../public/icons/Q.svg';
+import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 
 import MobileApps from './MobileApps';
 import styles from './NavigationDrawer.module.scss';
@@ -14,9 +11,6 @@ import NavigationDrawerItem from './NavigationDrawerItem';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import LanguageSelector from 'src/components/Navbar/LanguageSelector';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar';
 
 // import IconHome from '../../../../public/icons/home.svg';
 // import IconCollection from '../../../../public/icons/collection.svg';
@@ -29,116 +23,74 @@ import { selectNavbar, setIsNavigationDrawerOpen } from 'src/redux/slices/navbar
 // import IconFeedback from '../../../../public/icons/feedback.svg';
 // import IconRadio2 from '../../../../public/icons/radio-2.svg';
 
-const NavigationDrawer = () => {
-  const drawerRef = useRef(null);
-  const isOpen = useSelector(selectNavbar, shallowEqual).isNavigationDrawerOpen;
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
-
-  const closeNavigationDrawer = useCallback(() => {
-    dispatch({ type: setIsNavigationDrawerOpen.type, payload: false });
-  }, [dispatch]);
-
-  // listen to any changes of escape key being pressed.
-  useEffect(() => {
-    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
-    if (isEscapeKeyPressed === true) {
-      closeNavigationDrawer();
+const NavigationDrawer = () => (
+  <Drawer
+    type={DrawerType.Navigation}
+    side={DrawerSide.Left}
+    header={
+      <div className={styles.centerVertically}>
+        <div className={styles.leftCTA}>
+          <Link href="/">
+            <a>
+              <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+                <IconQ />
+              </Button>
+            </a>
+          </Link>
+          <LanguageSelector />
+        </div>
+      </div>
     }
-  }, [closeNavigationDrawer, isEscapeKeyPressed]);
-
-  useOutsideClickDetector(drawerRef, closeNavigationDrawer, isOpen);
-
-  // Hide navbar after succesful navigation
-  useEffect(() => {
-    router.events.on('routeChangeComplete', () => {
-      if (isOpen) {
-        closeNavigationDrawer();
-      }
-    });
-  }, [closeNavigationDrawer, router.events, isOpen]);
-
-  return (
-    <div
-      className={classNames(styles.container, { [styles.containerOpen]: isOpen })}
-      ref={drawerRef}
-    >
-      <div className={styles.header}>
-        <div className={styles.centerVertically}>
-          <div className={styles.leftCTA}>
-            <Link href="/">
-              <a>
-                <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-                  <IconQ />
-                </Button>
-              </a>
-            </Link>
-            <LanguageSelector />
-          </div>
-        </div>
-        <div className={styles.centerVertically}>
-          <div className={styles.rightCTA}>
-            <Button
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={closeNavigationDrawer}
-            >
-              <IconClose />
-            </Button>
-          </div>
-        </div>
-      </div>
-      <div className={styles.listItemsContainer}>
-        {/* <h3 className={styles.subtitle}>Menu</h3>
-         <NavigationDrawerItem title="Home" icon={<IconHome />} href="/" />
-        <NavigationDrawerItem title="About us" icon={<IconInfo />} href="/about" />
-        <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" />
-        <NavigationDrawerItem title="Developers" icon={<IconDevelopers />} href="/developers" />
-        <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" />
-        <NavigationDrawerItem title="Privacy" icon={<IconLock />} href="/privacy" />
-        <NavigationDrawerItem title="Help & Feedback" icon={<IconFeedback />} href="/help" />
-        <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} />
-        <h3 className={styles.subtitle}>Selected Collections</h3>
-        <NavigationDrawerItem title="Duaas" icon={<IconCollection />} />
-        <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} />
-        <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} />
-        <NavigationDrawerItem title="Revelation" icon={<IconCollection />} /> */}
-        <h3 className={styles.subtitle}>Network</h3>
-        <NavigationDrawerItem
-          title="Quranicaudio.com"
-          icon={<IconQ />}
-          href="https://quranicaudio.com"
-          isExternalLink
-        />
-        <NavigationDrawerItem
-          title="Salah.com"
-          icon={<IconQ />}
-          href="https://salah.com"
-          isExternalLink
-        />
-        <NavigationDrawerItem
-          title="Sunnah.com"
-          icon={<IconQ />}
-          href="https://sunnah.com"
-          isExternalLink
-        />
-        <NavigationDrawerItem
-          title="Legacy.quran.com"
-          icon={<IconQ />}
-          href="https://legacy.quran.com"
-          isExternalLink
-        />
-        <NavigationDrawerItem
-          title="Corpus.quran.com"
-          icon={<IconQ />}
-          href="https://corpus.quran.com"
-          isExternalLink
-        />
-        <MobileApps />
-      </div>
+  >
+    <div className={styles.listItemsContainer}>
+      {/* <h3 className={styles.subtitle}>Menu</h3>
+   <NavigationDrawerItem title="Home" icon={<IconHome />} href="/" />
+  <NavigationDrawerItem title="About us" icon={<IconInfo />} href="/about" />
+  <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" />
+  <NavigationDrawerItem title="Developers" icon={<IconDevelopers />} href="/developers" />
+  <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" />
+  <NavigationDrawerItem title="Privacy" icon={<IconLock />} href="/privacy" />
+  <NavigationDrawerItem title="Help & Feedback" icon={<IconFeedback />} href="/help" />
+  <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} />
+  <h3 className={styles.subtitle}>Selected Collections</h3>
+  <NavigationDrawerItem title="Duaas" icon={<IconCollection />} />
+  <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} />
+  <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} />
+  <NavigationDrawerItem title="Revelation" icon={<IconCollection />} /> */}
+      <h3 className={styles.subtitle}>Network</h3>
+      <NavigationDrawerItem
+        title="Quranicaudio.com"
+        icon={<IconQ />}
+        href="https://quranicaudio.com"
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Salah.com"
+        icon={<IconQ />}
+        href="https://salah.com"
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Sunnah.com"
+        icon={<IconQ />}
+        href="https://sunnah.com"
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Legacy.quran.com"
+        icon={<IconQ />}
+        href="https://legacy.quran.com"
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Corpus.quran.com"
+        icon={<IconQ />}
+        href="https://corpus.quran.com"
+        isExternalLink
+      />
+      <MobileApps />
     </div>
-  );
-};
+  </Drawer>
+);
 
 export default NavigationDrawer;

@@ -1,62 +1,11 @@
-import { useCallback, useRef, useEffect } from 'react';
-
-import classNames from 'classnames';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-import IconClose from '../../../../public/icons/close.svg';
-
 import SettingsBody from './SettingsBody';
-import styles from './SettingsDrawer.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import { selectNavbar, setIsSettingsDrawerOpen } from 'src/redux/slices/navbar';
+import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 
-const SettingsDrawer = () => {
-  const drawerRef = useRef(null);
-  const isOpen = useSelector(selectNavbar, shallowEqual).isSettingsDrawerOpen;
-  const dispatch = useDispatch();
-  const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
-
-  const closeSettingsDrawer = useCallback(() => {
-    dispatch({ type: setIsSettingsDrawerOpen.type, payload: false });
-  }, [dispatch]);
-
-  // listen to any changes of escape key being pressed.
-  useEffect(() => {
-    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
-    if (isEscapeKeyPressed === true) {
-      closeSettingsDrawer();
-    }
-  }, [closeSettingsDrawer, isEscapeKeyPressed]);
-
-  useOutsideClickDetector(drawerRef, closeSettingsDrawer, isOpen);
-
-  return (
-    <div
-      className={classNames(styles.container, { [styles.containerOpen]: isOpen })}
-      ref={drawerRef}
-    >
-      <div className={styles.header}>
-        <div className={styles.headerContentContainer}>
-          <div className={styles.headerContent}>
-            <div className={styles.headerTitle}>Settings</div>
-            <Button
-              tooltip="Close"
-              className={styles.closeIcon}
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={closeSettingsDrawer}
-            >
-              <IconClose />
-            </Button>
-          </div>
-        </div>
-      </div>
-      <SettingsBody />
-    </div>
-  );
-};
+const SettingsDrawer = () => (
+  <Drawer type={DrawerType.Settings} header={<div>Settings</div>}>
+    <SettingsBody />
+  </Drawer>
+);
 
 export default SettingsDrawer;

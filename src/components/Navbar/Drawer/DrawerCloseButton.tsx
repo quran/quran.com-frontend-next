@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconClose from '../../../../../public/icons/close.svg';
+import IconClose from '../../../../public/icons/close.svg';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 
