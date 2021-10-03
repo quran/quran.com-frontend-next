@@ -2,9 +2,9 @@ import React from 'react';
 
 import { NextSeo } from 'next-seo';
 
-interface Props {
-  title?: string;
-  description?: string;
+import { SEOProps } from 'src/utils/seo';
+
+interface Props extends SEOProps {
   url?: string;
   image?: string;
   imageAlt?: string;
@@ -13,9 +13,9 @@ interface Props {
 }
 
 const NextSeoWrapper: React.FC<Props> = (props) => {
-  const { url, image, imageAlt, imageHeight, imageWidth, ...rest } = props;
-  const openGraph = {
-    ...rest,
+  const { url, image, imageAlt, imageHeight, imageWidth, openGraph, ...rest } = props;
+  const openGraphParams = {
+    ...(openGraph && { openGraph }),
     ...(url && { url }),
     ...(image && {
       images: [{ url: image, width: imageWidth, height: imageHeight, alt: imageAlt }],
@@ -25,7 +25,7 @@ const NextSeoWrapper: React.FC<Props> = (props) => {
     ...rest,
     ...(url && { canonical: url }),
   };
-  return <NextSeo {...params} openGraph={openGraph} />;
+  return <NextSeo {...params} openGraph={openGraphParams} />;
 };
 
 export default NextSeoWrapper;

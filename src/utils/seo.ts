@@ -4,8 +4,7 @@ import { NextSeoProps } from 'next-seo';
 export const config = {
   siteName: 'Quran.com',
   defaultDescription: 'The Quran translated into many languages in a simple and easy interface',
-  websiteLogo:
-    'https://next.quran.com/_next/image?url=%2F_next%2Fstatic%2Fimage%2Fpublic%2Fimages%2Fhomepage.fc81275bf7bb6c6f87926191c70c3a94.png&q=75&w=640',
+  websiteLogo: 'https://next.quran.com/images/homepage.png',
   twitterHandle: '@app_quran',
   twitterCardType: 'summary_large_image',
   facebookApp: '342185219529773',
@@ -24,7 +23,7 @@ type SeoConfigType = {
   canonicalUrl?: string;
 };
 
-interface SEOProps extends NextSeoProps {
+export interface SEOProps extends NextSeoProps {
   dangerouslySetAllPagesToNoFollow?: boolean;
   dangerouslySetAllPagesToNoIndex?: boolean;
 }
