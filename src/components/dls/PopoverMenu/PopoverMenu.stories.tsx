@@ -10,9 +10,25 @@ export default {
   component: PopoverMenu,
 };
 
-export const Normal = () => {
+export const unTriggered = () => {
   return (
-    <PopoverMenu isOpen>
+    <PopoverMenu trigger={<button type="button">Trigger</button>}>
+      <PopoverMenu.Divider />
+
+      <PopoverMenu.Item>My Teams</PopoverMenu.Item>
+
+      <PopoverMenu.Item icon={<RepeatIcon size={18} />}>Repeat</PopoverMenu.Item>
+
+      <PopoverMenu.Divider />
+
+      <PopoverMenu.Item>Logout</PopoverMenu.Item>
+    </PopoverMenu>
+  );
+};
+
+export const triggered = () => {
+  return (
+    <PopoverMenu isOpen trigger={<button type="button">Trigger</button>}>
       <PopoverMenu.Item>Dashboard</PopoverMenu.Item>
 
       <PopoverMenu.Divider />
@@ -30,7 +46,7 @@ export const Normal = () => {
 
 export const withIcon = () => {
   return (
-    <PopoverMenu isOpen>
+    <PopoverMenu isOpen trigger={<button type="button">test</button>}>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
 
       <PopoverMenu.Divider />
@@ -48,7 +64,7 @@ export const withIcon = () => {
 
 export const withIconDisabled = () => {
   return (
-    <PopoverMenu isOpen>
+    <PopoverMenu isOpen trigger={<button type="button">test</button>}>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
 
       <PopoverMenu.Divider />

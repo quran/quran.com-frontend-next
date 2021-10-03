@@ -7,11 +7,12 @@ import styles from './PopoverMenu.module.scss';
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
+  trigger?: React.ReactNode;
 };
-const PopoverMenu = ({ children, isOpen }: PopoverMenuProps) => {
+const PopoverMenu = ({ children, isOpen, trigger }: PopoverMenuProps) => {
   return (
     <PrimitiveDropdownMenu.Root open={isOpen}>
-      <PrimitiveDropdownMenu.Trigger>test</PrimitiveDropdownMenu.Trigger>
+      {trigger && <PrimitiveDropdownMenu.Trigger asChild>{trigger}</PrimitiveDropdownMenu.Trigger>}
       <PrimitiveDropdownMenu.Content className={styles.content}>
         {children}
       </PrimitiveDropdownMenu.Content>
