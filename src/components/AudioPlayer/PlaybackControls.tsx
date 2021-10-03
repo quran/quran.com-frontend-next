@@ -10,12 +10,12 @@ import styles from './PlaybackControls.module.scss';
 import RepeatButton from './RepeatButton';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { AudioFileStatus, selectAudioFileStatus } from 'src/redux/slices/AudioPlayer/state';
+import { AudioDataStatus, selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 
 const PlaybackControls = () => {
-  const audioFileStatus = useSelector(selectAudioFileStatus);
-  const isLoading = audioFileStatus === AudioFileStatus.Loading;
+  const audioDataStatus = useSelector(selectAudioDataStatus);
+  const isLoading = audioDataStatus === AudioDataStatus.Loading;
 
   return (
     <div className={styles.container}>

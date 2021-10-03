@@ -1,4 +1,4 @@
-import AudioFile from './AudioFile';
+import AudioData from './AudioData';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
@@ -51,8 +51,8 @@ export interface RecitersResponse extends BaseResponse {
   reciters?: Reciter[];
 }
 
-export interface AudioFilesResponse extends BaseResponse {
-  audioFiles: AudioFile[];
+export interface AudioDataResponse extends BaseResponse {
+  audioData: AudioData[];
 }
 
 export interface AudioTimestampsResponse extends BaseResponse {

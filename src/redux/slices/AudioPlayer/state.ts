@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DEFAULT_RECITER } from './defaultData';
 
-import { getChapterAudioFile } from 'src/api';
+import { getChapterAudioData } from 'src/api';
 import {
   triggerPlayAudio,
   triggerPauseAudio,
@@ -13,10 +13,10 @@ import {
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
-import AudioFile from 'types/AudioFile';
+import AudioData from 'types/AudioData';
 import Reciter from 'types/Reciter';
 
-export enum AudioFileStatus {
+export enum AudioDataStatus {
   Ready = 'Ready',
   Loading = 'Loading',
   NoFile = 'NoFile',
@@ -38,8 +38,8 @@ export type RepeatProgress = {
 export type AudioState = {
   isPlaying: boolean;
   reciter: Reciter;
-  audioFile: AudioFile;
-  audioFileStatus: AudioFileStatus;
+  audioData: AudioData;
+  audioDataStatus: AudioDataStatus;
   isMobileMinimizedForScrolling: boolean;
   enableAutoScrolling: boolean;
   repeatSettings: RepeatSettings;
@@ -57,9 +57,9 @@ export const defaultRepeatSettings = {
 const initialState: AudioState = {
   enableAutoScrolling: true,
   isPlaying: false,
-  audioFile: null,
+  audioData: null,
   reciter: DEFAULT_RECITER,
-  audioFileStatus: AudioFileStatus.NoFile,
+  audioDataStatus: AudioDataStatus.NoFile,
   isMobileMinimizedForScrolling: false,
   repeatSettings: defaultRepeatSettings,
   repeatProgress: {
@@ -72,8 +72,8 @@ export const selectAudioPlayerState = (state: RootState) => state.audioPlayerSta
 export const selectReciter = (state: RootState) => state.audioPlayerState.reciter;
 export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
-export const selectAudioFile = (state: RootState) => state.audioPlayerState.audioFile;
-export const selectAudioFileStatus = (state: RootState) => state.audioPlayerState.audioFileStatus;
+export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
+export const selectAudioDataStatus = (state: RootState) => state.audioPlayerState.audioDataStatus;
 export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPlaying;
 export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
   state.audioPlayerState.isMobileMinimizedForScrolling;
@@ -94,22 +94,22 @@ export const selectIsInRepeatMode = (state: RootState) => {
  * @param {number} chapter the chapter id
  *
  */
-export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: RootState }>(
-  'audioPlayerState/loadAndPlayAudioFile',
+export const loadAndPlayAudioData = createAsyncThunk<void, number, { state: RootState }>(
+  'audioPlayerState/loadAndPlayAudioData',
   async (chapter, thunkAPI) => {
     // play directly the audio file for this chapter is already loaded.
-    const currentAudioFile = selectAudioFile(thunkAPI.getState());
-    if (currentAudioFile && currentAudioFile.chapterId === chapter) {
+    const currentAudioData = selectAudioData(thunkAPI.getState());
+    if (currentAudioData && currentAudioData.chapterId === chapter) {
       triggerPlayAudio();
       return;
     }
 
-    thunkAPI.dispatch(setAudioStatus(AudioFileStatus.Loading));
+    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
 
     const reciter = selectReciter(thunkAPI.getState());
-    const audioFile = await getChapterAudioFile(reciter.id, chapter);
+    const audioData = await getChapterAudioData(reciter.id, chapter);
 
-    thunkAPI.dispatch(setAudioFile(audioFile));
+    thunkAPI.dispatch(setAudioData(audioData));
 
     triggerPlayAudio();
   },
@@ -125,13 +125,13 @@ export const loadAndPlayAudioFile = createAsyncThunk<void, number, { state: Root
 export const setReciterAndPauseAudio = createAsyncThunk<void, Reciter, { state: RootState }>(
   'audioPlayerState/setReciterAndPlayAudio',
   async (reciter, thunkAPI) => {
-    thunkAPI.dispatch(setAudioStatus(AudioFileStatus.Loading));
+    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
     triggerPauseAudio();
     thunkAPI.dispatch(setReciter(reciter));
 
     const state = thunkAPI.getState();
-    const audioFile = await getChapterAudioFile(reciter.id, selectAudioFile(state).chapterId);
-    thunkAPI.dispatch(setAudioFile(audioFile));
+    const audioData = await getChapterAudioData(reciter.id, selectAudioData(state).chapterId);
+    thunkAPI.dispatch(setAudioData(audioData));
   },
 );
 
@@ -153,17 +153,17 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
   async ({ verseKey, chapterId, reciterId, timestamp }, thunkApi) => {
     const state = thunkApi.getState();
     const reciter = selectReciter(state);
-    let audioFile = selectAudioFile(state);
-    if (!audioFile || audioFile.chapterId !== chapterId || reciter.id !== reciterId) {
-      thunkApi.dispatch(setAudioStatus(AudioFileStatus.Loading));
-      audioFile = await getChapterAudioFile(reciter.id, chapterId);
-      thunkApi.dispatch(setAudioFile(audioFile));
+    let audioData = selectAudioData(state);
+    if (!audioData || audioData.chapterId !== chapterId || reciter.id !== reciterId) {
+      thunkApi.dispatch(setAudioStatus(AudioDataStatus.Loading));
+      audioData = await getChapterAudioData(reciter.id, chapterId);
+      thunkApi.dispatch(setAudioData(audioData));
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
     }
 
     // `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
     if (!timestamp) {
-      const timestampsData = await getChapterAudioFile(reciterId, chapterId, true);
+      const timestampsData = await getChapterAudioData(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
       playFromTimestamp(verseTiming.timestampFrom / 1000);
       return;
@@ -188,22 +188,22 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       reciter: action.payload,
     }),
-    setAudioFile: (state: AudioState, action: PayloadAction<AudioFile>) => ({
+    setAudioData: (state: AudioState, action: PayloadAction<AudioData>) => ({
       ...state,
-      audioFile: action.payload,
+      audioData: action.payload,
     }),
-    setAudioStatus: (state, action: PayloadAction<AudioFileStatus>) => ({
+    setAudioStatus: (state, action: PayloadAction<AudioDataStatus>) => ({
       ...state,
-      audioFileStatus: action.payload,
+      audioDataStatus: action.payload,
     }),
     setEnableAutoScrolling: (state, action: PayloadAction<boolean>) => ({
       ...state,
       enableAutoScrolling: action.payload,
     }),
-    resetAudioFile: (state) => ({
+    resetAudioData: (state) => ({
       ...state,
-      audioFile: initialState.audioFile,
-      audioFileStatus: initialState.audioFileStatus,
+      audioData: initialState.audioData,
+      audioDataStatus: initialState.audioDataStatus,
     }),
     setRepeatSettings: (state, action) => ({
       ...state,
@@ -238,9 +238,9 @@ export const audioPlayerStateSlice = createSlice({
 export const {
   setIsPlaying,
   setReciter,
-  setAudioFile,
+  setAudioData,
   setAudioStatus,
-  resetAudioFile,
+  resetAudioData,
   setIsMobileMinimizedForScrolling,
   setEnableAutoScrolling,
   setRepeatSettings,

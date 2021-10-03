@@ -5,7 +5,7 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import { loadAndPlayAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { loadAndPlayAudioData } from 'src/redux/slices/AudioPlayer/state';
 
 interface Props {
   chapterId: number;
@@ -13,7 +13,7 @@ interface Props {
 const PlayChapterAudioButton = (props: Props) => {
   const dispatch = useDispatch();
   const play = () => {
-    dispatch(loadAndPlayAudioFile(props.chapterId));
+    dispatch(loadAndPlayAudioData(props.chapterId));
   };
   return (
     <div className={styles.container}>
