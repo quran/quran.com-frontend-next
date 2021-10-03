@@ -1,4 +1,5 @@
-@use "src/styles/constants";
+$animationDuration: 0.35s;
+$animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
 
 $min-width: calc(9 * var(--spacing-large));
 $separator-size: 1px;
@@ -52,8 +53,8 @@ $separator-size: 1px;
   background-color: white;
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-large);
-  animation-duration: constants.$animationDuration;
-  animation-timing-function: constants.$animationEasing;
+  animation-duration: $animationDuration;
+  animation-timing-function: $animationEasing;
   will-change: transform, opacity;
 
   &[data-state="open"] {
