@@ -32,7 +32,16 @@ type PopoverMenuItemProps = {
 };
 PopoverMenu.Item = ({ children, icon, onClick, isDisabled }: PopoverMenuItemProps) => {
   return (
-    <PrimitiveDropdownMenu.Item className={styles.item} onClick={onClick} disabled={isDisabled}>
+    <PrimitiveDropdownMenu.Item
+      className={styles.item}
+      onClick={(e) => {
+        // PopoverMenu automatically close it self when one of item is clicked
+        // this code prevent that, so it only close when user click outside of the PopoverMenu
+        e.preventDefault();
+        if (onClick) onClick();
+      }}
+      disabled={isDisabled}
+    >
       {icon && <span className={styles.iconWrapper}>{icon}</span>}
       {children}
     </PrimitiveDropdownMenu.Item>
