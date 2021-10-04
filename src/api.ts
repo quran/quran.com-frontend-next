@@ -108,7 +108,7 @@ export const getChapterAudioData = async (
   if (res.status === 500) {
     throw new Error('server error: fail to get audio file');
   }
-  const { audioData } = res;
+  const { audioFiles: audioData } = res;
   const [firstAudio] = audioData;
   if (!firstAudio) {
     throw new Error('No audio file found');
