@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+}
+
+.actions {
+  display: flex;
+  margin-top: var(--spacing-large);
+}
+
+.actionItem + .actionItem {
+  margin-left: var(--spacing-medium);
+}
