@@ -4,7 +4,7 @@ import Error from 'next/error';
 
 import Info from '.';
 
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {
@@ -18,7 +18,7 @@ const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterRespo
   }
   return (
     <>
-      <NextSeoHead
+      <NextSeoWrapper
         title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
