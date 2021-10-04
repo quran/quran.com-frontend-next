@@ -16,13 +16,9 @@ import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
-import styles from './VerseActionsMenu.module.scss';
-import VerseActionsMenuItem from './VerseActionsMenuItem';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import Link from 'src/components/dls/Link/Link';
 import Modal from 'src/components/dls/Modal/Modal';
-import Popover from 'src/components/dls/Popover';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getWindowOrigin } from 'src/utils/url';
