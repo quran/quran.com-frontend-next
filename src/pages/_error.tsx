@@ -17,7 +17,7 @@ const Error = ({ statusCode }) => {
         </div>
         <div className={styles.actionItem}>
           <Button href="https://discord.gg/ZHcFfEHs" type={ButtonType.Secondary}>
-            Join Discord Server
+            Join Discord server
           </Button>
         </div>
       </div>
