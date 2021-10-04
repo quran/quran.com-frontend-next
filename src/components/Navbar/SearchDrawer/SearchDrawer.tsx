@@ -1,23 +1,19 @@
-/* eslint-disable max-lines */
-import React, { useCallback, useEffect, useState, RefObject, useRef } from 'react';
+import React, { useEffect, useState, RefObject } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import DrawerCloseButton from './Buttons/DrawerCloseButton';
 import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 import styles from './SearchDrawer.module.scss';
 
 import { getSearchResults } from 'src/api';
+import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import useDebounce from 'src/hooks/useDebounce';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import useFocus from 'src/hooks/useFocusElement';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import { selectNavbar, setIsSearchDrawerOpen } from 'src/redux/slices/navbar';
+import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
@@ -27,13 +23,11 @@ const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const drawerRef = useRef(null);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
   const { lang } = useTranslation();
   const dispatch = useDispatch();
-  const router = useRouter();
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
@@ -41,22 +35,6 @@ const SearchDrawer: React.FC = () => {
   const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
-  const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
-
-  const closeSearchDrawer = useCallback(() => {
-    dispatch({ type: setIsSearchDrawerOpen.type, payload: false });
-  }, [dispatch]);
-
-  // listen to any changes of escape key being pressed.
-  useEffect(() => {
-    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
-    if (isEscapeKeyPressed === true) {
-      closeSearchDrawer();
-    }
-  }, [closeSearchDrawer, isEscapeKeyPressed]);
-
-  useOutsideClickDetector(drawerRef, closeSearchDrawer, isOpen);
-
   // once the drawer is open, focus the input field
   useEffect(() => {
     if (isOpen) {
@@ -121,15 +99,6 @@ const SearchDrawer: React.FC = () => {
     }
   };
 
-  // Hide navbar after successful navigation
-  useEffect(() => {
-    router.events.on('routeChangeComplete', () => {
-      if (isOpen) {
-        closeSearchDrawer();
-      }
-    });
-  }, [closeSearchDrawer, router.events, isOpen]);
-
   /**
    * When the keyword is clicked, we move the cursor to the end of
    * the input field after setting its value.
@@ -144,39 +113,35 @@ const SearchDrawer: React.FC = () => {
   };
 
   return (
-    <div
-      className={classNames(styles.container, { [styles.containerOpen]: isOpen })}
-      ref={drawerRef}
-    >
-      <div className={styles.header}>
-        <div className={styles.headerContentContainer}>
-          <div className={styles.headerContent}>
-            <DrawerSearchIcon />
-            <div
-              className={classNames(styles.searchInputContainer, {
-                [styles.searchInputContainerRTL]: isRTLInput,
-              })}
-            >
-              <input
-                className={styles.searchInput}
-                type="text"
-                ref={searchInputRef}
-                dir="auto"
-                placeholder="Search"
-                onChange={onSearchQueryChange}
-                value={searchQuery}
-                disabled={isSearching}
-              />
-              {searchQuery && (
-                <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
-                  Clear
-                </button>
-              )}
-            </div>
-            <DrawerCloseButton onClick={closeSearchDrawer} />
+    <Drawer
+      type={DrawerType.Search}
+      header={
+        <>
+          <DrawerSearchIcon />
+          <div
+            className={classNames(styles.searchInputContainer, {
+              [styles.searchInputContainerRTL]: isRTLInput,
+            })}
+          >
+            <input
+              className={styles.searchInput}
+              type="text"
+              ref={searchInputRef}
+              dir="auto"
+              placeholder="Search"
+              onChange={onSearchQueryChange}
+              value={searchQuery}
+              disabled={isSearching}
+            />
+            {searchQuery && (
+              <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
+                Clear
+              </button>
+            )}
           </div>
-        </div>
-      </div>
+        </>
+      }
+    >
       <SearchBodyContainer
         onSearchKeywordClicked={onSearchKeywordClicked}
         searchQuery={searchQuery}
@@ -184,7 +149,7 @@ const SearchDrawer: React.FC = () => {
         isSearching={isSearching}
         hasError={hasError}
       />
-    </div>
+    </Drawer>
   );
 };
 
