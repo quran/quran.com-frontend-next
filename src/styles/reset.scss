@@ -114,7 +114,6 @@ section {
 
 body {
   line-height: 1;
-  background: var(--color-background-default);
   overscroll-behavior-y: none;
 }
 
@@ -406,14 +405,6 @@ textarea {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-html,
-button,
-input,
-select,
-textarea {
-  color: #222;
 }
 
 ::-moz-selection {
