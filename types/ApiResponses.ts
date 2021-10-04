@@ -52,7 +52,7 @@ export interface RecitersResponse extends BaseResponse {
 }
 
 export interface AudioDataResponse extends BaseResponse {
-  audioData: AudioData[];
+  audioFiles: AudioData[];
 }
 
 export interface AudioTimestampsResponse extends BaseResponse {
