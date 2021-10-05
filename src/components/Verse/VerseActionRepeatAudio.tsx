@@ -26,7 +26,6 @@ const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
       <PopoverMenu.Item
         icon={<RepeatIcon />}
         onClick={() => {
-          console.log('test');
           setIsModalOpen(true);
         }}
       >
