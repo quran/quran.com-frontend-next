@@ -105,7 +105,7 @@ const AudioPlayer = () => {
             triggerSeek(seekDuration);
           }}
           togglePlaying={() => togglePlaying()}
-          isHidden={isHidden}
+          isAudioPlayerHidden={isHidden}
         />
         {reciterId && audioData?.chapterId && (
           <QuranReaderHighlightDispatcher
