@@ -1,6 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 
+import classNames from 'classnames';
+
+import styles from './Tabs.module.scss';
+
 type Tab = {
   title: string;
   value: string;
@@ -14,14 +18,11 @@ type TabsProps = {
 
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
   return (
-    <div style={{ display: 'flex' }}>
+    <div className={styles.container}>
       {tabs.map((tab) => (
         <div
-          style={{
-            background: selected === tab.value ? 'red' : 'white',
-            cursor: 'pointer',
-            padding: '1rem',
-          }}
+          className={classNames(styles.tabItem, selected === tab.value && styles.tabItemSelected)}
+          key={tab.value}
           role="tab"
           onClick={() => onSelect(tab.value)}
         >
