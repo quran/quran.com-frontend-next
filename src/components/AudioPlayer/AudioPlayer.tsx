@@ -3,12 +3,12 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import styles from './AudioPlayer.module.scss';
 import AudioPlayerSlider from './AudioPlayerSlider';
 import AudioRepeatManager from './AudioRepeatManager/AudioRepeatManager';
-import { triggerPauseAudio, triggerSeek } from './EventTriggers';
+import { togglePlaying, triggerPauseAudio, triggerPlayAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
-// import AudioKeyBoardListeners from './AudioKeyboardListeners';
 import PlaybackControls from './PlaybackControls';
 import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
 
@@ -100,10 +100,13 @@ const AudioPlayer = () => {
           id="audio-player"
           ref={audioPlayerElRef}
         />
-        {/* <AudioKeyBoardListeners
-          seek={(seekDuration) => seek(seekDuration)}
+        <AudioKeyBoardListeners
+          seek={(seekDuration) => {
+            triggerSeek(seekDuration);
+          }}
           togglePlaying={() => togglePlaying()}
-        /> */}
+          isAudioPlayerHidden={isHidden}
+        />
         {reciterId && audioData?.chapterId && (
           <QuranReaderHighlightDispatcher
             audioPlayerElRef={audioPlayerElRef}
@@ -119,7 +122,7 @@ const AudioPlayer = () => {
           />
         )}
         <MediaSessionApiListeners
-          play={triggerPauseAudio}
+          play={triggerPlayAudio}
           pause={triggerPauseAudio}
           seek={(seekDuration) => {
             triggerSeek(seekDuration);

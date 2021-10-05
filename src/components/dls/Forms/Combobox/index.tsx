@@ -15,6 +15,7 @@ import React, {
 } from 'react';
 
 import classNames from 'classnames';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 import styles from './Combobox.module.scss';
 import { DropdownItem } from './ComboboxItem';
@@ -27,7 +28,6 @@ import ComboboxSize from './types/ComboboxSize';
 import { InitialValue, Value, MultiSelectValue, InitialSelectedItems } from './types/Values';
 
 import useFocus from 'src/hooks/useFocusElement';
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 
 interface Props {
@@ -84,15 +84,8 @@ const Combobox: React.FC<Props> = ({
   const closeCombobox = useCallback(() => {
     setIsOpened(false);
   }, []);
-  useOutsideClickDetector(comboBoxRef, closeCombobox, true);
-  const isEscapeKeyPressed = useKeyPressedDetector('Escape', true);
-  // listen to any changes of escape key being pressed.
-  useEffect(() => {
-    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
-    if (isEscapeKeyPressed === true) {
-      closeCombobox();
-    }
-  }, [closeCombobox, isEscapeKeyPressed]);
+  useOutsideClickDetector(comboBoxRef, closeCombobox, isOpened);
+  useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnTags: ['INPUT'] });
 
   // if there are any changes in the items, we should update the filteredItems.
   // this is necessary when the parent items are have initial empty value and
@@ -145,20 +138,6 @@ const Combobox: React.FC<Props> = ({
     hasMinimumRequiredItems &&
     ((tags && tags.length <= minimumRequiredItems) || (!isMultiSelect && selectedValue));
 
-  /**
-   * We detect whether we should allow to delete the last selected tag when clicking
-   * the backspace key based on the following conditions:
-   *
-   * 1. it it's multiSelect.
-   * 2. The input value doesn't have a value otherwise, backspace key should be used to remove the input value and not the present tags.
-   * 3. We at least have 1 tag present.
-   * 4. We allow un-selecting items.
-   */
-  const shouldDeleteLastTag = useKeyPressedDetector(
-    'Backspace',
-    isOpened && isMultiSelect && !inputValue && !!tags.length && !preventUnselectingItems,
-  );
-
   const invokeOnChangeCallback = useCallback(
     (newValue) => {
       if (onChange) {
@@ -168,9 +147,18 @@ const Combobox: React.FC<Props> = ({
     [id, isMultiSelect, onChange],
   );
 
-  // listener for when the backspace is clicked.
-  useEffect(() => {
-    if (shouldDeleteLastTag) {
+  /**
+   * We detect whether we should allow to delete the last selected tag when clicking
+   * the backspace key based on the following conditions:
+   *
+   * 1. it it's multiSelect.
+   * 2. The input value doesn't have a value otherwise, backspace key should be used to remove the input value and not the present tags.
+   * 3. We at least have 1 tag present.
+   * 4. We allow un-selecting items.
+   */
+  useHotkeys(
+    'Backspace',
+    () => {
       setSelectedValue((prevSelectedValue: MultiSelectValue) => {
         const newSelectedValues = { ...prevSelectedValue };
         const lastTag = Object.keys(newSelectedValues).pop();
@@ -178,8 +166,14 @@ const Combobox: React.FC<Props> = ({
         invokeOnChangeCallback(newSelectedValues);
         return newSelectedValues;
       });
-    }
-  }, [id, invokeOnChangeCallback, shouldDeleteLastTag]);
+    },
+    {
+      enabled:
+        isOpened && isMultiSelect && !inputValue && !!tags.length && !preventUnselectingItems,
+      enableOnTags: ['INPUT'],
+    },
+    [invokeOnChangeCallback],
+  );
 
   const onSelectorClicked = () => {
     setIsOpened((prevIsOpened) => !prevIsOpened);
