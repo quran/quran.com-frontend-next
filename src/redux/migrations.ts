@@ -1,3 +1,5 @@
+import { defaultRepeatProgress, defaultRepeatSettings } from './slices/AudioPlayer/state';
+
 import { MushafLines } from 'types/QuranReader';
 
 export default {
@@ -34,6 +36,14 @@ export default {
     quranReaderStyles: {
       ...state.quranReaderStyles,
       mushafLines: MushafLines.SixteenLines,
+    },
+  }),
+  8: (state) => ({
+    ...state,
+    audioPlayerState: {
+      ...state.audioPlayerState,
+      repeatSettings: defaultRepeatSettings,
+      repeatProgress: defaultRepeatProgress,
     },
   }),
 };
