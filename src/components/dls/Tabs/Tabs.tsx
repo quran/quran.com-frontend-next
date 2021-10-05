@@ -13,7 +13,6 @@ type TabsProps = {
   tabs: Tab[];
   selected: string;
   onSelect: (value: string) => void;
-  isDisabled?: boolean;
 };
 
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
