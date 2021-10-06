@@ -85,11 +85,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   line-height: 1rem;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 /* make sure to set some focus styles for accessibility */
@@ -110,11 +106,6 @@ menu,
 nav,
 section {
   display: block;
-}
-
-body {
-  line-height: 1;
-  overscroll-behavior-y: none;
 }
 
 ol,
