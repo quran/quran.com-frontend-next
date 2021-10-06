@@ -6,7 +6,7 @@
   min-height: calc(4 * var(--spacing-medium));
   margin-bottom: var(--spacing-small);
   &:hover {
-    background: var(--color-background-alternative);
+    background: var(--color-background-alternative-medium);
     box-shadow: var(--shadow-normal);
     border-color: var(--color-background-inverse);
   }

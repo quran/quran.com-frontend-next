@@ -272,12 +272,12 @@
 
 .base.disabled {
   cursor: not-allowed;
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
   border: 1px solid var(--color-secondary-medium);
   color: var(--color-text-default);
   opacity: 0.7;
   &:hover {
-    background-color: var(--color-background-alternative);
+    background-color: var(--color-background-alternative-medium);
     opacity: 0.7;
   }
 }

@@ -62,7 +62,7 @@
 .filtersContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
   padding: var(--spacing-small);
   margin-top: var(--spacing-small);
   @include breakpoints.tablet {
