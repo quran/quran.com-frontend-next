@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  border-bottom: 1px solid var(--color-borders-hairline);
+}
+
+.tabItem {
+  cursor: pointer;
+  padding: var(--spacing-xxsmall);
+  background-color: var(--color-background-default);
+}
+.tabItem + .tabItem {
+  margin-left: var(--spacing-xxsmall);
+}
+
+.tabItemSelected {
+  border-bottom: 2px solid var(--color-text-default);
+}
