@@ -113,6 +113,10 @@ ul {
   list-style: none;
 }
 
+body {
+  line-height: 1;
+}
+
 blockquote,
 q {
   quotes: none;
@@ -406,6 +410,14 @@ table {
 ::selection {
   background: #b3d4fc;
   text-shadow: none;
+}
+
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
 }
 
 img {
