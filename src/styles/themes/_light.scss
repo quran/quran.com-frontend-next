@@ -35,10 +35,10 @@
 
   --color-background-default: #fff;
 
-  --color-background-alternative-faded: #f8f9fa;
-  --color-background-alternative-faint: #f4f5f6;
-  --color-background-alternative-medium: #e9ecef;
-  --color-background-alternative-deep: #868e96;
+  --color-background-alternative-faded: var(--gray-0);
+  --color-background-alternative-faint: var(--gray-1);
+  --color-background-alternative-medium: var(--gray-2);
+  --color-background-alternative-deep: var(--gray-6);
 
   --color-background-inverse: #000;
   --color-background-backdrop: rgba(0, 0, 0, 0.25);

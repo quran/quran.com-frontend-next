@@ -1,6 +1,7 @@
 @use "./themes/light";
 @use "./themes/dark";
 @use "./themes/sepia";
+@use "./shades";
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
@@ -52,6 +53,7 @@
   --transition-regular: 0.6s;
   --transition-slow: 0.9s;
 
+  @include shades.shades-dangerous;
   @include light.mode;
 
   // Detect OS dark mode
