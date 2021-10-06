@@ -15,5 +15,9 @@
 .goBack {
   display: flex;
   justify-content: center;
+  margin-top: var(--spacing-medium);
+}
+
+.reportBug {
   margin-top: var(--spacing-large);
 }
