@@ -9,11 +9,7 @@
 
 .title {
   font-size: var(--font-size-jumbo);
-}
-
-.actions {
-  display: flex;
-  margin-top: var(--spacing-large);
+  margin-bottom: var(--spacing-medium);
 }
 
 .actionItem + .actionItem {
