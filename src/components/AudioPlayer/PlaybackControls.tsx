@@ -6,8 +6,8 @@ import ReplayIcon from '../../../public/icons/replay_10.svg';
 import CloseButton from './Buttons/CloseButton';
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import { triggerSeek } from './EventTriggers';
+import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
-import RepeatButton from './RepeatButton';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { AudioDataStatus, selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
@@ -19,7 +19,7 @@ const PlaybackControls = () => {
 
   return (
     <div className={styles.container}>
-      <RepeatButton />
+      <OverflowAudioPlayerActionsMenu />
       <Button
         tooltip="Rewind 10 seconds"
         variant={ButtonVariant.Ghost}

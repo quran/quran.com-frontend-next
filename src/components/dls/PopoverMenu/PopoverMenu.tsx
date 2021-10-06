@@ -29,10 +29,28 @@ type PopoverMenuItemProps = {
   icon?: React.ReactNode;
   onClick?: () => void;
   isDisabled?: boolean;
+  shouldCloseMenuAfterClick?: boolean;
 };
-PopoverMenu.Item = ({ children, icon, onClick, isDisabled }: PopoverMenuItemProps) => {
+PopoverMenu.Item = ({
+  children,
+  icon,
+  onClick,
+  isDisabled,
+  shouldCloseMenuAfterClick = false,
+}: PopoverMenuItemProps) => {
   return (
-    <PrimitiveDropdownMenu.Item className={styles.item} onClick={onClick} disabled={isDisabled}>
+    <PrimitiveDropdownMenu.Item
+      className={styles.item}
+      onClick={(e) => {
+        if (!shouldCloseMenuAfterClick) {
+          // PopoverMenu automatically close itself when one of item is clicked
+          // this code prevent that, so it only close when user click outside of the PopoverMenu
+          e.preventDefault();
+        }
+        if (onClick) onClick();
+      }}
+      disabled={isDisabled}
+    >
       {icon && <span className={styles.iconWrapper}>{icon}</span>}
       {children}
     </PrimitiveDropdownMenu.Item>

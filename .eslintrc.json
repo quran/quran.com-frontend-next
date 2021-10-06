@@ -23,7 +23,7 @@
         "@typescript-eslint/no-shadow": ["error"],
         "react/jsx-filename-extension": 0,
         "react/jsx-props-no-spreading": 0,
-        "react/boolean-prop-naming": 2,
+        "react/boolean-prop-naming": ["error", { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }],
         "react/destructuring-assignment": 2,
         "react/no-children-prop": 2,
         "react/no-deprecated": 2,
