@@ -17,7 +17,6 @@
   text-transform: uppercase;
   text-decoration: underline;
   cursor: pointer;
-  color: var(--color-text-default);
   font-size: var(--font-size-small);
 }
 
@@ -25,7 +24,6 @@
   width: 100%;
   border: 0;
   background: var(--color-background-default);
-  color: var(--color-text-default);
   &:focus {
     outline: none;
   }

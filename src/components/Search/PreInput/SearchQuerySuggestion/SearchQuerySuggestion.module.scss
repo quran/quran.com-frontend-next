@@ -9,7 +9,6 @@
   margin: var(--spacing-micro) 0;
   width: 100%;
   text-align: left;
-  color: var(--color-text-default);
   &:hover {
     background-color: var(--color-background-alternative-deep);
   }
@@ -18,7 +17,6 @@
 .removeButton {
   background: none;
   border: none;
-  color: var(--color-text-default);
   font-size: var(--font-size-small);
   &:hover {
     color: var(--color-text-link);

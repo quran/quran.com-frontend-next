@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 .inputContainer {
-  color: var(--color-text-default);
   display: flex;
   align-items: center;
   @include breakpoints.smallerThanMobileM {
