@@ -13,7 +13,7 @@
 .enabledItem {
   cursor: pointer;
   &:hover {
-    background: var(--color-background-alternative);
+    background: var(--color-background-alternative-medium);
   }
 }
 .disabledItem {
@@ -22,7 +22,7 @@
 
 .checkedItem {
   font-weight: var(--font-weight-bold);
-  background: var(--color-background-alternative);
+  background: var(--color-background-alternative-medium);
 }
 
 .prefix {

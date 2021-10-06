@@ -2,7 +2,8 @@
 @use "src/styles/breakpoints";
 
 .container {
-  background: var(--color-background-alternative);
+  background: var(--color-background-alternative-medium);
+  color: var(--color-text-default);
   text-align: center;
   position: fixed;
   z-index: var(--z-index-sticky);

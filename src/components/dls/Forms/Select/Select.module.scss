@@ -25,7 +25,7 @@
 }
 
 .disabledContainer {
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
 }
 
 .arrow {
@@ -48,7 +48,7 @@
 
 .disabledArrow {
   box-shadow: none;
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
 }
 
 .select {
@@ -65,7 +65,7 @@
 }
 
 .disabledSelect {
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
   cursor: not-allowed;
   color: var(--color-primary-default);
 }
