@@ -1,7 +1,7 @@
 import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
-import GlobalFonts from '../src/styles/global.scss';
+import GlobalStyles from '../src/styles/global.scss';
 
 const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
