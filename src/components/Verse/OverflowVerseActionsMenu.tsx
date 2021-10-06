@@ -4,7 +4,6 @@ import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
@@ -12,17 +11,12 @@ import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
-import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
-import styles from './VerseActionsMenu.module.scss';
-import VerseActionsMenuItem from './VerseActionsMenuItem';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import Link from 'src/components/dls/Link/Link';
-import Modal from 'src/components/dls/Modal/Modal';
-import Popover from 'src/components/dls/Popover';
-import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
@@ -94,61 +88,42 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const shouldShowGoToAyah = router.asPath !== verseUrl;
 
   return (
-    <Popover
+    <PopoverMenu
       trigger={
         <Button tooltip="Actions menu" type={ButtonType.Secondary}>
           <OverflowMenuIcon />
         </Button>
       }
     >
-      <div className={styles.container}>
-        <VerseActionsMenuItem
-          title={isCopied ? 'Copied!' : 'Copy'}
-          icon={<CopyIcon />}
-          onClick={onCopyClicked}
-        />
+      <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
+        {isCopied ? 'Copied!' : 'Copy'}
+      </PopoverMenu.Item>
 
-        <Modal trigger={<VerseActionsMenuItem title="Advanced Copy" icon={<AdvancedCopyIcon />} />}>
-          <VerseAdvancedCopy verse={verse}>
-            {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
-              <>
-                <Modal.Body>
-                  <Modal.Header>
-                    <Modal.Title>Advanced Copy</Modal.Title>
-                  </Modal.Header>
-                  {ayahSelectionComponent}
-                </Modal.Body>
-                <Modal.Footer>
-                  <Modal.Action isDisabled={loading} onClick={onCopy}>
-                    {loading ? <Spinner /> : actionText}
-                  </Modal.Action>
-                </Modal.Footer>
-              </>
-            )}
-          </VerseAdvancedCopy>
-        </Modal>
+      <VerseActionAdvancedCopy verse={verse} />
 
-        <VerseActionsMenuItem title="Tafsirs" icon={<TafsirIcon />} onClick={onTafsirsClicked} />
-        <VerseActionsMenuItem
-          title={isShared ? 'Link has been copied to the clipboard!' : 'Share'}
-          icon={<ShareIcon />}
-          onClick={onShareClicked}
-        />
-        <VerseActionsMenuItem
-          title={isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
-          icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
-          onClick={onToggleBookmarkClicked}
-        />
+      <PopoverMenu.Item onClick={onTafsirsClicked} icon={<TafsirIcon />}>
+        Tafsirs
+      </PopoverMenu.Item>
 
-        <VerseActionRepeatAudio verseKey={verse.verseKey} />
+      <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
+        {isShared ? 'Link has been copied to the clipboard!' : 'Share'}
+      </PopoverMenu.Item>
 
-        {shouldShowGoToAyah && (
-          <Link href={verseUrl}>
-            <VerseActionsMenuItem title="Go to Ayah" icon={<LinkIcon />} />
-          </Link>
-        )}
-      </div>
-    </Popover>
+      <PopoverMenu.Item
+        onClick={onToggleBookmarkClicked}
+        icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
+      >
+        {isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
+      </PopoverMenu.Item>
+
+      <VerseActionRepeatAudio verseKey={verse.verseKey} />
+
+      {shouldShowGoToAyah && (
+        <PopoverMenu.Item onClick={() => router.push(verseUrl)} icon={<LinkIcon />}>
+          Go to Ayah
+        </PopoverMenu.Item>
+      )}
+    </PopoverMenu>
   );
 };
 

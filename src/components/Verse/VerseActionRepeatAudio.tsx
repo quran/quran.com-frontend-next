@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
-
-import VerseActionsMenuItem from './VerseActionsMenuItem';
+import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import RepeatAudioModal from 'src/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
 import { getChapterNumberFromKey } from 'src/utils/verse';
@@ -24,11 +23,14 @@ const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-      <VerseActionsMenuItem
-        title="Repeat Verse"
+      <PopoverMenu.Item
         icon={<RepeatIcon />}
-        onClick={() => setIsModalOpen(true)}
-      />
+        onClick={() => {
+          setIsModalOpen(true);
+        }}
+      >
+        Repeat Verse
+      </PopoverMenu.Item>
     </>
   );
 };
