@@ -12,6 +12,8 @@
   margin-bottom: var(--spacing-medium);
 }
 
-.actionItem + .actionItem {
-  margin-left: var(--spacing-medium);
+.goBack {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-large);
 }
