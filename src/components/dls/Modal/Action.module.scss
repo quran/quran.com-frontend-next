@@ -15,7 +15,7 @@
     constants.$animationEasing;
   &:hover {
     opacity: var(--opacity-75);
-    background-color: var(--color-background-alternative);
+    background-color: var(--color-background-alternative-medium);
     color: var(--color-text-default);
   }
 }
@@ -28,6 +28,6 @@
 .action[disabled] {
   opacity: var(--opacity-75);
   cursor: not-allowed;
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
   color: var(--color-text-faded);
 }

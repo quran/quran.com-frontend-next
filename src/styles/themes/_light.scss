@@ -1,3 +1,5 @@
+@use "src/styles/shades";
+
 @mixin mode {
   --color-primary-faded: #fff;
   --color-primary-faint: #fff;
@@ -32,8 +34,12 @@
   --color-text-error: #c50000;
 
   --color-background-default: #fff;
-  --color-background-alternative: #eaeaea;
-  --color-background-alternative-deep: #999;
+
+  --color-background-alternative-faded: #f8f9fa;
+  --color-background-alternative-faint: #f4f5f6;
+  --color-background-alternative-medium: #e9ecef;
+  --color-background-alternative-deep: #868e96;
+
   --color-background-inverse: #000;
   --color-background-backdrop: rgba(0, 0, 0, 0.25);
   --color-background-lighten: hsla(0, 0%, 100%, 0.8);
