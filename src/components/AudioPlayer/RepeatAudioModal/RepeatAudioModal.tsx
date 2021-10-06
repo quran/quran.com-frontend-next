@@ -2,6 +2,8 @@ import { useMemo, useState, useEffect } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import { triggerPauseAudio } from '../EventTriggers';
+
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
@@ -10,9 +12,11 @@ import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import {
-  defaultRepeatSettings,
+  exitRepeatMode,
   playFrom,
+  selectIsInRepeatMode,
   selectReciter,
+  selectRepeatSettings,
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
@@ -35,7 +39,9 @@ const RepeatAudioModal = ({
 }: RepeatAudioModalProps) => {
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
+  const repeatSettings = useSelector(selectRepeatSettings);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
+  const isInRepeatMode = useSelector(selectIsInRepeatMode);
 
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId);
@@ -59,11 +65,11 @@ const RepeatAudioModal = ({
     getChapterFirstAndLastVerseKey(chapterId);
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: defaultRepeatSettings.repeatRange,
-    repeatEachVerse: defaultRepeatSettings.repeatEachVerse,
+    repeatRange: repeatSettings.repeatRange,
+    repeatEachVerse: repeatSettings.repeatEachVerse,
     from: selectedVerseKey || firstVerseKeyInThisChapter,
     to: selectedVerseKey || lastVerseKeyInThisChapter,
-    delayMultiplier: defaultRepeatSettings.delayMultiplier,
+    delayMultiplier: repeatSettings.delayMultiplier,
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
@@ -86,24 +92,19 @@ const RepeatAudioModal = ({
     );
     onClose();
   };
-  const onCancelClick = () => {
+  const onCancelClick = () => onClose();
+  const onStopRepeating = () => {
+    dispatch(exitRepeatMode());
+    triggerPauseAudio();
     onClose();
   };
 
   const onRepetitionModeChange = (mode) => {
-    if (mode === RepetitionMode.Single) {
-      setVerseRepetition((prevVerseRepetition) => ({
-        ...prevVerseRepetition,
-        from: selectedVerseKey,
-        to: selectedVerseKey,
-      }));
-    } else {
-      setVerseRepetition((prevVerseRepetition) => ({
-        ...prevVerseRepetition,
-        from: firstVerseKeyInThisChapter,
-        to: lastVerseKeyInThisChapter,
-      }));
-    }
+    setVerseRepetition((prevVerseRepetition) => ({
+      ...prevVerseRepetition,
+      from: mode === RepetitionMode.Single ? selectedVerseKey : firstVerseKeyInThisChapter,
+      to: mode === RepetitionMode.Single ? selectedVerseKey : lastVerseKeyInThisChapter,
+    }));
     setRepetitionMode(mode);
   };
 
@@ -155,7 +156,9 @@ const RepeatAudioModal = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Action onClick={onCancelClick}>Cancel</Modal.Action>
+        <Modal.Action onClick={isInRepeatMode ? onStopRepeating : onCancelClick}>
+          {isInRepeatMode ? 'Stop Repeating' : 'Cancel'}
+        </Modal.Action>
         <Modal.Action onClick={onPlayClick}>Start Playing</Modal.Action>
       </Modal.Footer>
     </Modal>

@@ -1,0 +1,113 @@
+$animationDuration: 0.35s;
+$animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
+
+$min-width: calc(11 * var(--spacing-large));
+$separator-size: 1px;
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.content {
+  padding: var(--spacing-small) 0;
+  min-width: $min-width;
+  background-color: white;
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--shadow-large);
+  animation-duration: $animationDuration;
+  animation-timing-function: $animationEasing;
+  will-change: transform, opacity;
+
+  &[data-state="open"] {
+    &[data-side="top"] {
+      animation-name: slideDownAndFade;
+    }
+    &[data-side="right"] {
+      animation-name: slideLeftAndFade;
+    }
+    &[data-side="bottom"] {
+      animation-name: slideUpAndFade;
+    }
+    &[data-side="left"] {
+      animation-name: slideRightAndFade;
+    }
+  }
+}
+
+.item {
+  font-size: var(--font-size-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-default);
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-xxsmall) var(--spacing-medium);
+  position: relative;
+  cursor: pointer;
+
+  &[data-disabled] {
+    color: var(--color-text-faded);
+    pointer-events: none;
+
+    & .iconWrapper {
+      opacity: var(--opacity-50);
+    }
+  }
+
+  &:focus {
+    background-color: var(--color-background-alternative);
+    color: var(--color-text-default);
+  }
+
+  & .iconWrapper {
+    margin-right: var(--spacing-medium);
+    display: flex;
+    align-items: center;
+    height: var(--spacing-medium);
+    width: var(--spacing-medium);
+  }
+}
+
+.separator {
+  height: $separator-size;
+  background-color: var(--color-secondary-faded);
+  margin: var(--spacing-xxsmall);
+}

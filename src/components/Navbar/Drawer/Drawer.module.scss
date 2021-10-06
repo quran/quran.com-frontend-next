@@ -14,36 +14,62 @@
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior-y: contain;
-  right: -100%;
-
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
-    right: calc(-1 * constants.$side-menu-desktop-width);
+  }
+  &.left {
+    left: -100%;
+    @include breakpoints.tablet {
+      left: calc(-1 * constants.$side-menu-desktop-width);
+    }
+  }
+  &.right {
+    right: -100%;
+    @include breakpoints.tablet {
+      right: calc(-1 * constants.$side-menu-desktop-width);
+    }
+  }
+  &.hiddenNavbar {
+    @include breakpoints.smallerThanTablet {
+      transform: translateY(constants.$navbar-height);
+    }
   }
 }
 
 .containerOpen {
   box-shadow: var(--shadow-normal);
   transition-timing-function: ease-out;
-  right: 0;
+  &.left {
+    left: 0;
+  }
+  &.right {
+    right: 0;
+  }
+}
+
+.bodyContainer {
+  margin-top: constants.$navbar-height;
+  padding: var(--spacing-small);
+}
+
+.navigationBodyContainer {
+  padding: 0;
 }
 
 .header {
-  z-index: inherit;
+  font-size: var(--font-size-large);
   width: 100%;
   background-color: var(--color-background-default);
   position: fixed;
   height: constants.$navbar-height;
-  box-sizing: border-box;
+  border-bottom: 1px var(--color-borders-hairline) solid;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
   }
-}
-.headerTitle {
-  font-size: var(--font-size-large);
+  z-index: var(--z-index-header);
 }
 
 .headerContentContainer {
@@ -51,17 +77,11 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding-left: var(--spacing-medium);
-  padding-right: var(--spacing-medium);
-}
-
-.closeIcon {
-  // aligning the close icon with the rest of components
-  margin-right: calc(-1 * var(--spacing-xxsmall));
 }
 
 .headerContent {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 var(--spacing-xsmall);
 }

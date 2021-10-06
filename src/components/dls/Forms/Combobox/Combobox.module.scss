@@ -10,7 +10,9 @@
 
 .comboboxContainer {
   max-width: 100%;
-  width: calc(8 * var(--spacing-mega));
+  &.fixedWidth {
+    width: calc(8 * var(--spacing-mega));
+  }
 }
 
 .enabled {

@@ -21,6 +21,19 @@ it('can stringify object', () => {
 
   expect(result).toBe(expected);
 });
+it('ignore null values', () => {
+  const input = { translations: null, fields: 'text_uthmani,chapter_id' };
+
+  const result = stringify(decamelizeKeys(input));
+  expect(result).toBe('fields=text_uthmani%2Cchapter_id');
+});
+
+it('does not split array values', () => {
+  const input = { tafsirs: [171, 169], fields: 'text_uthmani,chapter_id' };
+
+  const result = stringify(decamelizeKeys(input));
+  expect(result).toBe('tafsirs=171%2C169&fields=text_uthmani%2Cchapter_id');
+});
 
 it('should stringify one pair key-value', () => {
   expect(stringify({ a: '1' })).toBe('a=1');
@@ -31,7 +44,7 @@ it('should stringify two pairs key-value', () => {
 });
 
 it('should stringify the array to same name key', () => {
-  expect(stringify({ a: '1', b: ['s', 's2'] })).toBe('a=1&b=s&b=s2');
+  expect(stringify({ a: '1', b: ['s', 's2'] })).toBe('a=1&b=s%2Cs2');
 });
 
 it('should stringify the boolean value', () => {
@@ -49,7 +62,7 @@ it('should stringify it when if the key and value need to encoded', () => {
 });
 
 it('can stringify with custom eq and sep', () => {
-  const str = 'a#1|b#s|b#s2';
+  const str = 'a#1|b#s%2Cs2';
   expect(stringify({ a: '1', b: ['s', 's2'] }, { eq: '#', sep: '|' })).toBe(str);
 });
 

@@ -1,32 +1,27 @@
 /* eslint-disable max-lines */
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-
-import IconClose from '../../public/icons/close.svg';
 
 import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import NextSeoHead from 'src/components/NextSeoHead';
-import LanguagesFilter from 'src/components/Search/LanguagesFilter';
-import SearchResults from 'src/components/Search/SearchResults';
-import TranslationsFilter from 'src/components/Search/TranslationsFilter';
+import Input from 'src/components/dls/Forms/Input';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
+import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
+import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
-import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
 
 type SearchProps = {
@@ -35,21 +30,17 @@ type SearchProps = {
 };
 
 const Search: NextPage<SearchProps> = ({ languages, translations }) => {
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { lang } = useTranslation();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [selectedLanguages, setSelectedLanguages] = useState<string>(lang);
+  const [selectedLanguages, setSelectedLanguages] = useState<string>('');
   const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
     userTranslations.join(','),
   );
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
-  // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
-  const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   // the query params that we want added to the url
@@ -88,16 +79,11 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   /**
    * Handle when the search query is changed.
    *
-   * @param {React.FormEvent<HTMLInputElement>} event
+   * @param {string} newSearchQuery
    * @returns {void}
    */
-  const onSearchQueryChange = (event: React.FormEvent<HTMLInputElement>): void => {
-    const newSearchQuery = event.currentTarget.value;
-    if (!newSearchQuery) {
-      setSearchQuery('');
-    } else {
-      setSearchQuery(newSearchQuery);
-    }
+  const onSearchQueryChange = (newSearchQuery: string): void => {
+    setSearchQuery(newSearchQuery || '');
   };
 
   const onClearClicked = () => {
@@ -168,76 +154,50 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     setCurrentPage(1);
   }, []);
 
-  const isEmptyResponse =
-    searchResult &&
-    searchResult.pagination.totalRecords === 0 &&
-    !searchResult.result.navigation.length;
+  const onSearchKeywordClicked = useCallback((keyword: string) => {
+    setSearchQuery(keyword);
+  }, []);
+
   return (
     <>
-      <NextSeoHead title={debouncedSearchQuery} />
+      <NextSeoWrapper title={debouncedSearchQuery} />
       <div className={styles.pageContainer}>
         <p className={styles.header}>Search</p>
-        <div
-          className={classNames(styles.searchInputContainer, {
-            [styles.rtlFlexDirection]: isRTLInput,
-          })}
-        >
-          <input
-            className={styles.searchInput}
-            type="text"
-            ref={searchInputRef}
-            dir="auto"
-            placeholder="Search"
-            onChange={onSearchQueryChange}
-            value={searchQuery}
-            disabled={isSearching}
+        <Input
+          id="searchQuery"
+          onChange={onSearchQueryChange}
+          onClearClicked={onClearClicked}
+          clearable
+          value={searchQuery}
+          disabled={isSearching}
+          placeholder="Search"
+          fixedWidth={false}
+        />
+        <p className={styles.filtersHeader}>Filters</p>
+        <div className={styles.filtersContainer}>
+          <LanguagesFilter
+            languages={languages}
+            selectedLanguages={selectedLanguages}
+            onLanguageChange={onLanguageChange}
           />
-          {searchQuery && (
-            <Button
-              tooltip="Clear"
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              size={ButtonSize.Small}
-              onClick={onClearClicked}
-            >
-              <IconClose />
-            </Button>
-          )}
+          <TranslationsFilter
+            translations={translations}
+            selectedTranslations={selectedTranslations}
+            onTranslationChange={onTranslationChange}
+          />
         </div>
         <div className={styles.pageBody}>
-          <div className={styles.filtersContainer}>
-            <p className={styles.boldHeader}>Filters</p>
-            <LanguagesFilter
-              languages={languages}
-              selectedLanguages={selectedLanguages}
-              onLanguageChange={onLanguageChange}
-            />
-            <TranslationsFilter
-              translations={translations}
-              selectedTranslations={selectedTranslations}
-              onTranslationChange={onTranslationChange}
-            />
-          </div>
-          <div className={styles.bodyContainer}>
-            {isSearching && <div>Searching...</div>}
-            {!isSearching && hasError && <div>Something went wrong, please try again!</div>}
-            {!isSearching && !hasError && searchResult && (
-              <>
-                {isEmptyResponse ? (
-                  <p>No results found!</p>
-                ) : (
-                  <SearchResults
-                    searchResult={searchResult}
-                    searchQuery={debouncedSearchQuery}
-                    isSearchDrawer={false}
-                    currentPage={currentPage}
-                    onPageChange={onPageChange}
-                    pageSize={PAGE_SIZE}
-                  />
-                )}
-              </>
-            )}
-          </div>
+          <SearchBodyContainer
+            onSearchKeywordClicked={onSearchKeywordClicked}
+            isSearchDrawer={false}
+            searchQuery={debouncedSearchQuery}
+            searchResult={searchResult}
+            currentPage={currentPage}
+            onPageChange={onPageChange}
+            pageSize={PAGE_SIZE}
+            isSearching={isSearching}
+            hasError={hasError}
+          />
         </div>
       </div>
     </>

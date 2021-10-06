@@ -32,13 +32,20 @@ const defaultConfig: Config = {
  */
 function stringify(obj: QueryObject, config = defaultConfig): string {
   const { eq, sep, fn, prefix } = { ...defaultConfig, ...config };
-  if (obj == null || !isObject(obj)) return '';
+  if (obj == null || !isObject(obj)) {
+    return '';
+  }
 
   return Object.entries(obj)
+    .filter(([, value]) => value !== null) // filter out null values
     .map(([key, value]) => {
-      if (Array.isArray(value))
-        return value.map((val) => encode(key, val, { eq, fn, prefix })).join(sep);
-      if (isObject(value)) return stringify(value, { eq, sep, fn, prefix: getKey(key, prefix) });
+      if (Array.isArray(value)) {
+        return encode(key, value.join(','), { eq, fn, prefix });
+      }
+
+      if (isObject(value)) {
+        return stringify(value, { eq, sep, fn, prefix: getKey(key, prefix) });
+      }
       return encode(key, value, { eq, fn, prefix });
     })
     .join(sep);

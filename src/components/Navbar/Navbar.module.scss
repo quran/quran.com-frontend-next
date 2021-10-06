@@ -2,7 +2,7 @@
 @use "src/styles/utility";
 @use "src/styles/breakpoints";
 
-.styledNav {
+.container {
   position: fixed;
   height: constants.$navbar-height;
   width: 100%;
@@ -12,7 +12,7 @@
   border-bottom: 1px var(--color-borders-hairline) solid;
 }
 
-.styledNavHidden {
+.hiddenNav {
   transform: translateY(0 - constants.$navbar-height);
   @include breakpoints.tablet {
     transform: none;

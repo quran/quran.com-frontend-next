@@ -4,7 +4,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 
 import { getChapterVerses } from 'src/api';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
 import { getChapterData } from 'src/utils/chapter';
@@ -31,7 +31,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
   }
   return (
     <>
-      <NextSeoHead title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={verses}
         id={chapter.chapter.id}

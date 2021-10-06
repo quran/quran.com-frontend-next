@@ -1,6 +1,6 @@
 import VerseTiming from './VerseTiming';
 
-interface AudioFile {
+interface AudioData {
   id: number;
   chapterId: number;
   fileSize: number;
@@ -10,4 +10,4 @@ interface AudioFile {
   verseTimings?: VerseTiming[];
 }
 
-export default AudioFile;
+export default AudioData;

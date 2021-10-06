@@ -54,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={classNames(styles.styledNav, { [styles.styledNavHidden]: !isVisible })}>
+    <nav className={classNames(styles.container, { [styles.hiddenNav]: !isVisible })}>
       <div className={styles.itemsContainer}>
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
