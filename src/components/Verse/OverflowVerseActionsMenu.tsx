@@ -4,7 +4,6 @@ import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
@@ -14,12 +13,10 @@ import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
-import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
+import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import Modal from 'src/components/dls/Modal/Modal';
-import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
@@ -102,27 +99,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
         {isCopied ? 'Copied!' : 'Copy'}
       </PopoverMenu.Item>
 
-      <Modal
-        trigger={<PopoverMenu.Item icon={<AdvancedCopyIcon />}>Advanced Copy</PopoverMenu.Item>}
-      >
-        <VerseAdvancedCopy verse={verse}>
-          {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
-            <>
-              <Modal.Body>
-                <Modal.Header>
-                  <Modal.Title>Advanced Copy</Modal.Title>
-                </Modal.Header>
-                {ayahSelectionComponent}
-              </Modal.Body>
-              <Modal.Footer>
-                <Modal.Action isDisabled={loading} onClick={onCopy}>
-                  {loading ? <Spinner /> : actionText}
-                </Modal.Action>
-              </Modal.Footer>
-            </>
-          )}
-        </VerseAdvancedCopy>
-      </Modal>
+      <VerseActionAdvancedCopy verse={verse} />
 
       <PopoverMenu.Item onClick={onTafsirsClicked} icon={<TafsirIcon />}>
         Tafsirs
