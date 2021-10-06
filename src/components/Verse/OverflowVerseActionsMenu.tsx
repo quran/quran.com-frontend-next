@@ -90,7 +90,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
   return (
     <PopoverMenu
       trigger={
-        <Button tooltip="Actions menu" type={ButtonType.Secondary}>
+        <Button tooltip="More" type={ButtonType.Secondary}>
           <OverflowMenuIcon />
         </Button>
       }
