@@ -1,6 +1,7 @@
 import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
+import GlobalStyles from '../src/styles/global.scss';
 
 const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
@@ -9,6 +10,7 @@ const themeDecorator = (Story, context) => {
       <link rel="stylesheet" href={GlobalFonts} />
       <link rel="stylesheet" href={ResetCSS} />
       <link rel="stylesheet" href={Theme} />
+      <link rel="stylesheet" href={GlobalStyles} />
       <div data-theme={theme}>
         <div style={{
            backgroundColor: 'var(--color-background-default)',

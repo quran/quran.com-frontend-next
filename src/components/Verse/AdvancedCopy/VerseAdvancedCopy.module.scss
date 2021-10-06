@@ -6,7 +6,6 @@
 }
 
 .customMessage {
-  color: var(--color-text-default);
   padding: var(--spacing-xxsmall);
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(var(--border-radius-default));
@@ -15,7 +14,6 @@
 .label {
   margin-top: var(--spacing-xsmall);
   margin-bottom: var(--spacing-xsmall);
-  color: var(--color-text-default);
 }
 
 // clone of checkbox properties
