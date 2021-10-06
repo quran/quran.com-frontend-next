@@ -54,6 +54,11 @@ export const defaultRepeatSettings = {
   to: null,
 };
 
+export const defaultRepeatProgress = {
+  repeatEachVerse: 1,
+  repeatRange: 1,
+};
+
 const initialState: AudioState = {
   enableAutoScrolling: true,
   isPlaying: false,
@@ -62,10 +67,7 @@ const initialState: AudioState = {
   audioDataStatus: AudioDataStatus.NoFile,
   isMobileMinimizedForScrolling: false,
   repeatSettings: defaultRepeatSettings,
-  repeatProgress: {
-    repeatEachVerse: 1,
-    repeatRange: 1,
-  },
+  repeatProgress: defaultRepeatProgress,
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;

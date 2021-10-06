@@ -9,7 +9,7 @@ import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import Input from 'src/components/dls/Forms/Input';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
@@ -160,7 +160,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
 
   return (
     <>
-      <NextSeoHead title={debouncedSearchQuery} />
+      <NextSeoWrapper title={debouncedSearchQuery} />
       <div className={styles.pageContainer}>
         <p className={styles.header}>Search</p>
         <Input

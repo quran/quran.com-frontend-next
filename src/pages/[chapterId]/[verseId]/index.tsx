@@ -4,7 +4,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 
 import { getChapterVerses } from 'src/api';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
@@ -38,7 +38,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   return (
     <>
-      <NextSeoHead title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}

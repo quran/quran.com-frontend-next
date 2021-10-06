@@ -3,7 +3,7 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 
 const About = () => {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ const About = () => {
 
   return (
     <>
-      <NextSeoHead title={t('about:title')} />
+      <NextSeoWrapper title={t('about:title')} />
       <span>{quranCom}</span>
       <span>{description}</span>
     </>
