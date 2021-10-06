@@ -1,0 +1,15 @@
+.container {
+  color: var(--color-text-faded);
+  background: var(--color-background-alternative);
+  border: 1px solid var(--color-borders-hairline);
+  display: inline-block;
+  text-align: center;
+  min-width: calc(0.5 * var(--spacing-medium));
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-large);
+  padding: 0 var(--spacing-xsmall);
+  border-radius: var(--border-radius-default);
+  > span + span {
+    margin-left: var(--spacing-xsmall);
+  }
+}

@@ -34,7 +34,7 @@ const themes = generateSelectOptions([
   ThemeType.System,
   ThemeType.Light,
   ThemeType.Dark,
-  ThemeType.Sepia,
+  // ThemeType.Sepia,
 ]);
 
 export default ThemeSection;

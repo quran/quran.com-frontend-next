@@ -2,12 +2,12 @@ import React, { useRef, useEffect, useCallback, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
-import useKeyPressedDetector from 'src/hooks/useKeyPressedDetector';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import {
   Navbar,
@@ -71,18 +71,10 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
   const isOpen = getIsOpen(type, navbar);
   const router = useRouter();
 
-  const isEscapeKeyPressed = useKeyPressedDetector('Escape', isOpen);
   const closeDrawer = useCallback(() => {
     dispatch({ type: getActionCreator(type), payload: false });
   }, [dispatch, type]);
-
-  // listen to any changes of escape key being pressed.
-  useEffect(() => {
-    // if we allow closing the modal by keyboard and also ESCAPE key has been pressed, we close the modal.
-    if (isEscapeKeyPressed === true) {
-      closeDrawer();
-    }
-  }, [closeDrawer, isEscapeKeyPressed]);
+  useHotkeys('Escape', closeDrawer, { enabled: isOpen });
 
   // Hide navbar after successful navigation
   useEffect(() => {

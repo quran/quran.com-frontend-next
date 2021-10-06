@@ -1,43 +1,45 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
-const SEEK_DURATION = 5;
+import { useHotkeys, Options } from 'react-hotkeys-hook';
+
+const SEEK_DURATION = 10;
 type AudioKeyBoardListenersProps = {
   togglePlaying: () => void;
+  isAudioPlayerHidden: boolean;
   seek: (seekDuration: number) => void;
 };
 
-const AudioKeyBoardListeners = ({ seek, togglePlaying }: AudioKeyBoardListenersProps) => {
-  const spaceKeyHandler = useCallback(
-    (event) => {
-      if (event.code === 'Space') {
-        togglePlaying();
-        event.preventDefault();
-      }
+const AudioKeyBoardListeners = ({
+  seek,
+  togglePlaying,
+  isAudioPlayerHidden,
+}: AudioKeyBoardListenersProps) => {
+  const toggleAudioPlayer = useCallback(
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      togglePlaying();
     },
     [togglePlaying],
   );
-
-  const arrowKeyHandler = useCallback(
-    (event) => {
-      if (event.code === 'ArrowRight') {
-        seek(SEEK_DURATION);
-        event.preventDefault();
-      } else if (event.code === 'ArrowLeft') {
-        seek(-SEEK_DURATION);
-        event.preventDefault();
-      }
+  const seekForward = useCallback(
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      seek(SEEK_DURATION);
+    },
+    [seek],
+  );
+  const seekBackwards = useCallback(
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      seek(-SEEK_DURATION);
     },
     [seek],
   );
 
-  useEffect(() => {
-    window.addEventListener('keypress', spaceKeyHandler);
-    window.addEventListener('keydown', arrowKeyHandler);
-    return () => {
-      window.removeEventListener('keypress', spaceKeyHandler);
-      window.removeEventListener('keydown', arrowKeyHandler);
-    };
-  }, [spaceKeyHandler, arrowKeyHandler]);
+  const options = { enabled: !isAudioPlayerHidden } as Options;
+  useHotkeys('space', toggleAudioPlayer, options, [togglePlaying]);
+  useHotkeys('right', seekForward, options, [seek]);
+  useHotkeys('left', seekBackwards, options, [seek]);
   return <></>;
 };
 

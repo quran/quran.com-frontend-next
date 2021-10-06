@@ -16,6 +16,16 @@ export const triggerPauseAudio = () => {
   }
 };
 
+export const togglePlaying = () => {
+  if (process.browser && window) {
+    if (window.audioPlayerEl.paused) {
+      window.audioPlayerEl.play();
+    } else {
+      window.audioPlayerEl.pause();
+    }
+  }
+};
+
 export const triggerSetCurrentTime = (newTime: number) => {
   if (process.browser && window) {
     let currentTime = newTime;
@@ -28,7 +38,7 @@ export const triggerSetCurrentTime = (newTime: number) => {
   }
 };
 
-export const triggerSeek = (duration) => {
+export const triggerSeek = (duration: number) => {
   if (process.browser && window) {
     triggerSetCurrentTime(window.audioPlayerEl.currentTime + duration);
   }
