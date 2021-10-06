@@ -10,6 +10,7 @@ const themeDecorator = (Story, context) => {
       <link rel="stylesheet" href={GlobalFonts} />
       <link rel="stylesheet" href={ResetCSS} />
       <link rel="stylesheet" href={Theme} />
+      <link rel="stylesheet" href={GlobalStyles} />
       <div data-theme={theme}>
         <div style={{
            backgroundColor: 'var(--color-background-default)',
