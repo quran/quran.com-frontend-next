@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-
 import classNames from 'classnames';
 
 import styles from './Tabs.module.scss';
@@ -18,11 +15,13 @@ type TabsProps = {
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
   return (
     <div className={styles.container}>
-      {tabs.map((tab) => (
+      {tabs.map((tab, index) => (
         <div
           className={classNames(styles.tabItem, selected === tab.value && styles.tabItemSelected)}
           key={tab.value}
           role="tab"
+          tabIndex={index}
+          onKeyDown={() => onSelect(tab.value)}
           onClick={() => onSelect(tab.value)}
         >
           {tab.title}
