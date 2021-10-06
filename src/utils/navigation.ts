@@ -44,6 +44,32 @@ export const getJuzNavigationUrl = (juzNumber: string | number): string => `/juz
 export const getPageNavigationUrl = (pageNumber: string | number): string => `/page/${pageNumber}`;
 
 /**
+ * Get the href link to tafsir for Ayah.
+ *
+ * @param {string | number} chapterId
+ * @param {number} verseNumber
+ * @returns {string}
+ */
+export const getVerseTafsirNavigationUrl = (
+  chapterId: string | number,
+  verseNumber: number,
+): string => `/${chapterId}/${verseNumber}/tafsirs`;
+
+/**
+ * Get the href link to selected tafsir for Ayah.
+ *
+ * @param {string | number} chapterId
+ * @param {number} verseNumber
+ * @param {number} tafsirId
+ * @returns {string}
+ */
+export const getVerseSelectedTafsirNavigationUrl = (
+  chapterId: string | number,
+  verseNumber: number,
+  tafsirId: number,
+): string => `/${chapterId}:${verseNumber}/tafsirs/${tafsirId}`;
+
+/**
  * Get the href link to a surah.
  *
  * @param {string | number} surahNumber
@@ -84,3 +110,11 @@ export const resolveUrlBySearchNavigationType = (
  */
 export const getSearchQueryNavigationUrl = (query?: string): string =>
   `/search${query ? `?query=${query}` : ''}`;
+
+/**
+ * Get the href link to the info page of a Surah.
+ *
+ * @param {string} chapterId
+ * @returns {string} chapterUrl
+ */
+export const getSurahInfoNavigationUrl = (chapterId: string): string => `/surah/${chapterId}/info`;

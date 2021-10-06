@@ -4,9 +4,8 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 
 import { getChapterVerses } from 'src/api';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
 import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
 import { getChapterData } from 'src/utils/chapter';
 import {
@@ -15,6 +14,7 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -31,7 +31,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
   }
   return (
     <>
-      <NextSeoHead title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={verses}
         id={chapter.chapter.id}
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     translations: null,
     tafsirs: DEFAULT_TAFSIRS,
     wordFields: 'location, verse_key, text_uthmani',
-    tafsirFields: 'resource_name',
+    tafsirFields: 'resource_name,language_name',
   });
   // if the chapter or verses APIs failed
 

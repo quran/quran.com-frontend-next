@@ -1,11 +1,11 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { QuranReaderDataType } from './types';
 
 import { fetcher } from 'src/api';
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface RequestKeyInput {
@@ -17,6 +17,7 @@ interface RequestKeyInput {
   selectedTafsirs: number[];
   isVerseData: boolean;
   isTafsirData: boolean;
+  isSelectedTafsirData: boolean;
   id: string | number;
   reciter: number;
 }
@@ -31,6 +32,7 @@ export const getRequestKey = ({
   id,
   isVerseData,
   isTafsirData,
+  isSelectedTafsirData,
   initialData,
   index,
   quranReaderStyles,
@@ -40,13 +42,17 @@ export const getRequestKey = ({
   reciter,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page = isVerseData || isTafsirData ? initialData.verses[0].verseNumber : index + 1;
+  const page =
+    isVerseData || isTafsirData || isSelectedTafsirData
+      ? initialData.verses[0].verseNumber
+      : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, {
       page,
       reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
@@ -55,21 +61,20 @@ export const getRequestKey = ({
       reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
-
-  if (isTafsirData) {
-    return makeVersesUrl(id, {
+  if (isSelectedTafsirData || isTafsirData) {
+    return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, {
       page,
       perPage: 1,
       translations: null,
-      tafsirs: selectedTafsirs.join(','),
+      tafsirs: isTafsirData ? selectedTafsirs.join(',') : id,
       wordFields: `location, verse_key, ${quranReaderStyles.quranFont}`,
-      tafsirFields: 'resource_name',
+      tafsirFields: 'resource_name,language_name',
     });
   }
-
-  if (quranReaderDataType === QuranReaderDataType.Range) {
+  if (quranReaderDataType === QuranReaderDataType.VerseRange) {
     return makeVersesUrl(id, {
       reciter,
       page,
@@ -77,6 +82,7 @@ export const getRequestKey = ({
       to: initialData.metaData.to,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
 
@@ -85,6 +91,7 @@ export const getRequestKey = ({
     page,
     translations: selectedTranslations.join(', '),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
   });
 };

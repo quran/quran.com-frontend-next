@@ -1,5 +1,5 @@
 import { getAdvancedCopyRawResult } from 'src/api';
-import { DEFAULT_MUSHAF } from 'src/utils/api';
+import { getMushafId } from 'src/utils/api';
 
 /**
  * Given these parameters, get the `text to be copied` from API
@@ -35,7 +35,7 @@ const getTextToCopy = ({
     ...(toBeCopiedTranslations.length > 0 && {
       translations: toBeCopiedTranslations.join(', '),
     }), // only include the translations when at least 1 translation has been selected.
-    ...(shouldCopyText && { mushaf: DEFAULT_MUSHAF }), // only include the Quranic text if the user chose to.
+    ...(shouldCopyText && { ...getMushafId() }), // only include the Quranic text if the user chose to.
   }).then((res) => res.result);
 };
 

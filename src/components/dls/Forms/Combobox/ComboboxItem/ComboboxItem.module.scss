@@ -14,8 +14,7 @@
 .enabledItem {
   cursor: pointer;
   &:hover {
-    background: var(--color-background-alternative-medium);
-    font-weight: var(--font-weight-bold);
+    background: var(--color-background-alternative);
   }
 }
 .disabledItem {

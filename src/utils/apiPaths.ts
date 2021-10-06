@@ -1,16 +1,16 @@
 import { ITEMS_PER_PAGE, makeUrl } from './api';
 
-import { QuranFont } from 'src/components/QuranReader/types';
 import { DEFAULT_RECITER } from 'src/redux/slices/AudioPlayer/defaultData';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
 import { AdvancedCopyRequest, SearchRequest } from 'types/ApiRequests';
+import { QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
   translations: DEFAULT_TRANSLATIONS.join(', '),
   translationFields: 'resource_name', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
-  fields: `${QuranFont.Uthmani},chapter_id,hizb_number`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir.
+  fields: `${QuranFont.Uthmani},chapter_id,hizb_number`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
   reciter: DEFAULT_RECITER.id,
 };
 
@@ -46,7 +46,7 @@ export const makeLanguagesUrl = (language: string): string =>
  */
 export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
 
-export const makeChapterAudioFilesUrl = (reciterId: number, chapter: number, segments: boolean) =>
+export const makeChapterAudioDataUrl = (reciterId: number, chapter: number, segments: boolean) =>
   makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>

@@ -4,7 +4,7 @@ import CloseIcon from '../../../../public/icons/close.svg';
 import { triggerPauseAudio } from '../EventTriggers';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { resetAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { resetAudioData } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 
 const CloseButton = () => {
@@ -16,7 +16,7 @@ const CloseButton = () => {
       variant={ButtonVariant.Ghost}
       onClick={withStopPropagation(() => {
         triggerPauseAudio();
-        dispatch(resetAudioFile());
+        dispatch(resetAudioData());
       })}
     >
       <CloseIcon />

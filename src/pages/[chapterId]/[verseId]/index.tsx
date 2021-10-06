@@ -4,10 +4,9 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 
 import { getChapterVerses } from 'src/api';
-import NextSeoHead from 'src/components/NextSeoHead';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
-import { QuranReaderDataType } from 'src/components/QuranReader/types';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -21,6 +20,7 @@ import {
   isValidVerseNumber,
 } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;
@@ -38,11 +38,11 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   return (
     <>
-      <NextSeoHead title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper title={`Surah ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.Range}
+        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
       />
     </>
   );
@@ -71,9 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   */
   const isVerse = isValidVerseNumber(verseIdOrRange);
   // common API params between a single verse and range of verses.
-  let apiParams = {
-    ...getDefaultWordFields(),
-  };
+  let apiParams = { ...getDefaultWordFields(), ...getMushafId() };
   let [from, to] = [null, null];
   if (isVerse) {
     apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };
@@ -81,12 +79,38 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     [from, to] = getToAndFromFromRange(verseIdOrRange);
     apiParams = { ...apiParams, ...{ from, to } };
   }
-  const versesResponse = await getChapterVerses(chapterId, apiParams);
-  // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-
-  const chapterData = getChapterData(chapterId, locale);
-
-  if (versesResponse.status === 500 || !chapterData) {
+  try {
+    const versesResponse = await getChapterVerses(chapterId, apiParams);
+    // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
+    const chapterData = getChapterData(chapterId, locale);
+    if (!chapterData) {
+      return {
+        props: {
+          hasError: true,
+        },
+        revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      };
+    }
+    return {
+      props: {
+        chapterResponse: {
+          chapter: chapterData,
+        },
+        versesResponse: {
+          ...versesResponse,
+          ...(!isVerse && {
+            // when it's range, attach metaData so that it can be used inside the QuranReader's useSWRInfinite fetcher.
+            metaData: {
+              from,
+              to,
+            },
+          }),
+        },
+        isVerse,
+      },
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+    };
+  } catch (error) {
     return {
       props: {
         hasError: true,
@@ -94,26 +118,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
     };
   }
-
-  return {
-    props: {
-      chapterResponse: {
-        chapter: chapterData,
-      },
-      versesResponse: {
-        ...versesResponse,
-        ...(!isVerse && {
-          // when it's range, attach metaData so that it can be used inside the QuranReader's useSWRInfinite fetcher.
-          metaData: {
-            from,
-            to,
-          },
-        }),
-      },
-      isVerse,
-    },
-    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
-  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({

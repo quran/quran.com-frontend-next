@@ -2,11 +2,11 @@ import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ReadingPreference } from 'src/components/QuranReader/types';
 import {
   selectReadingPreference,
   setReadingPreference,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { ReadingPreference } from 'types/QuranReader';
 
 const ReadingPreferenceAdjustment = () => {
   const dispatch = useDispatch();

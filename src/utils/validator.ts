@@ -139,3 +139,46 @@ export const isValidVerseRange = (chapterId: string, range: string): boolean => 
 
   return true;
 };
+
+/**
+ * Check if a verse key is valid. An invalid verse key can be:
+ *
+ * 1. it's in a wrong format e.g. "verseKey"
+ * 2. if the number of parts is bigger than 2 e.g. "1:2:3"
+ * 3. if it's not a valid chapter id {@see isValidChapterId}
+ * 4. if it's not a valid verse ID {@see isValidVerseId}
+ *
+ * @param {string} verseKey
+ * @returns {boolean}
+ */
+export const isValidVerseKey = (verseKey: string): boolean => {
+  const splits = verseKey.split(':');
+  // if the splits are not 2, it means it's not in the right format.
+  if (splits.length !== 2) {
+    return false;
+  }
+  const [chapterId, verseId] = splits;
+  // if either value is not a number e.g. 'one:2' or if the verseNumber is below 0
+  if (!isValidChapterId(chapterId) || !isValidVerseId(chapterId, verseId)) {
+    return false;
+  }
+
+  return true;
+};
+
+/**
+ * Check whether a tafsir id is valid or not. An invalid tafsirId can be:
+ * 1. A non numeric value.
+ * 2. A numeric value that is less than 0.
+ *
+ * @param {string} tafsirId
+ * @returns {boolean}
+ */
+export const isValidTafsirId = (tafsirId: string): boolean => {
+  const tafsirIdNumber = Number(tafsirId);
+  // if the tafsir Id is not a number of if it's below 1
+  if (Number.isNaN(tafsirIdNumber) || tafsirIdNumber < 1) {
+    return false;
+  }
+  return true;
+};

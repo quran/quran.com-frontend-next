@@ -4,22 +4,13 @@
   padding: calc(2 * var(--spacing-mega)) 0;
   margin: 0 auto;
   width: 90%;
-  @include breakpoints.tablet {
-    width: 70%;
-  }
 }
 
 .header {
   margin: var(--spacing-medium) 0;
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-}
-
-.bodyContainer {
-  width: auto;
-  @include breakpoints.tablet {
-    width: 70%;
-  }
+  text-align: center;
 }
 
 .paginationContainer {
@@ -58,24 +49,27 @@
 
 .pageBody {
   width: 100%;
-  display: block;
-  @include breakpoints.tablet {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-  }
+  padding-top: var(--spacing-small);
+}
+
+.filtersHeader {
+  font-weight: var(--font-weight-bold);
+  padding-top: var(--spacing-small);
+  width: 100%;
+  text-align: left;
 }
 
 .filtersContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
-  background-color: var(--color-background-alternative-medium);
-  min-height: calc(6 * var(--spacing-mega));
+  background-color: var(--color-background-alternative);
   padding: var(--spacing-small);
-  width: auto;
-  margin: var(--spacing-xsmall) 0;
+  margin-top: var(--spacing-small);
   @include breakpoints.tablet {
-    margin-right: var(--spacing-xsmall);
-    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    > div {
+      width: 49%;
+    }
   }
 }

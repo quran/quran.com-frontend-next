@@ -3,27 +3,55 @@
 
 .container {
   max-width: 80%;
-  margin: var(--spacing-medium) auto;
+  margin: var(--spacing-small) auto;
+  border-bottom: 1px solid var(--color-primary-medium);
 }
 .tafsirName {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-  padding-bottom: var(--spacing-xxsmall);
+  padding: var(--spacing-xxsmall) 0;
   margin: var(--spacing-xxsmall) 0;
+  border-top: 1px solid var(--color-primary-medium);
   border-bottom: 1px solid var(--color-primary-medium);
   color: var(--color-text-default);
 }
 
 .tafsirContainer {
   color: var(--color-text-default);
-  border-bottom: 1px solid var(--color-primary-medium);
   padding: var(--spacing-large) 0;
   letter-spacing: 0;
   line-height: normal;
+  p {
+    margin-bottom: var(--spacing-small);
+  }
+  br {
+    content: "";
+    margin: var(--spacing-small);
+    display: block;
+  }
+  h2 {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-small);
+  }
   * {
     letter-spacing: 0;
     line-height: normal;
   }
+  // target any item which has a class that contains arabic
+  *[class~="arabic"] {
+    direction: rtl;
+    text-align: right;
+    margin-bottom: var(--spacing-small);
+  }
+  // target any item which has a class that contains uthmani
+  *[class~="uthmani"] {
+    font-family: meQuran;
+  }
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
 }
 
 @include utility.generate-font-sizes("tafsir");

@@ -16,6 +16,16 @@ export const triggerPauseAudio = () => {
   }
 };
 
+export const togglePlaying = () => {
+  if (process.browser && window) {
+    if (window.audioPlayerEl.paused) {
+      window.audioPlayerEl.play();
+    } else {
+      window.audioPlayerEl.pause();
+    }
+  }
+};
+
 export const triggerSetCurrentTime = (newTime: number) => {
   if (process.browser && window) {
     let currentTime = newTime;
@@ -28,9 +38,31 @@ export const triggerSetCurrentTime = (newTime: number) => {
   }
 };
 
-export const triggerSeek = (duration) => {
+export const triggerSeek = (duration: number) => {
   if (process.browser && window) {
     triggerSetCurrentTime(window.audioPlayerEl.currentTime + duration);
+  }
+};
+
+/**
+ * Given a timestamp, check if the audio player is ready. If it is
+ * - set the time + play the audio directly
+ * - otherwise wait until the audio player is ready before set time + play audio
+ *
+ * @param timestamp timestamp in seconds
+ */
+const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
+export const playFromTimestamp = (timestamp: number) => {
+  if (window.audioPlayerEl.readyState === AUDIO_PLAYER_STATE_READY) {
+    triggerSetCurrentTime(timestamp);
+    triggerPlayAudio();
+  } else {
+    const playWhenReady = () => {
+      triggerSetCurrentTime(timestamp);
+      triggerPlayAudio();
+      window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
+    };
+    window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
   }
 };
 

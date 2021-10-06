@@ -1,0 +1,24 @@
+@use "src/styles/breakpoints";
+
+.inputContainer {
+  color: var(--color-text-default);
+  display: flex;
+  align-items: center;
+  @include breakpoints.smallerThanMobileM {
+    justify-content: space-between;
+  }
+}
+.inputContainer + .inputContainer {
+  margin-top: var(--spacing-small);
+}
+
+.label {
+  font-weight: var(--font-weight-bold);
+  @include breakpoints.tablet {
+    min-width: calc(8.5 * var(--spacing-large));
+  }
+}
+.input {
+  display: flex;
+  align-items: center;
+}

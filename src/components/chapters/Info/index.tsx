@@ -11,6 +11,7 @@ import styles from './Info.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { getBlurDataUrl } from 'src/utils/image';
+import { getSurahNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 import ChapterInfo from 'types/ChapterInfo';
 
@@ -26,7 +27,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => (
         <div className={styles.backContainer}>
           <Button
             variant={ButtonVariant.Ghost}
-            href={`/${chapterInfo.chapterId}`}
+            href={getSurahNavigationUrl(chapterInfo.chapterId)}
             className={styles.backIcon}
             prefix={<BackIcon />}
             size={ButtonSize.Small}
@@ -63,7 +64,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => (
             </div>
           </div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: chapterInfo.text }} />
+        <div dangerouslySetInnerHTML={{ __html: chapterInfo.text }} className={styles.textBody} />
       </div>
     </div>
   </div>

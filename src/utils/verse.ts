@@ -133,14 +133,6 @@ export const sortWordLocation = (locations: string[]) =>
 export const formatChapterId = (id: string) => `0${id}`.slice(-2);
 
 /**
- * Given the chapterId, return the url for that chapter info
- *
- * @param {string} chapterId
- * @returns {string} chapterUrl
- */
-export const getChapterInfoUrl = (chapterId: string) => `/${chapterId}/info`;
-
-/**
  * Given the verseKey, return the verseUrl
  *
  * @param {string} verseKey example: "1:5"
@@ -299,4 +291,32 @@ export const getDistanceBetweenVerses = (firstVerseKey: string, secondVerseKey: 
   return (
     distance + secondVerseNumber + getChapterData(firstChapterString).versesCount - firstVerseNumber
   );
+};
+
+/**
+ * Whether the current verse is the first in surah.
+ *
+ * @param {number} verseNumber
+ * @returns {boolean}
+ */
+export const isFirstVerseOfSurah = (verseNumber: number): boolean => verseNumber === 1;
+
+/**
+ * Whether the current verse is the last in surah.
+ *
+ * @param {string} chapterNumber
+ * @param {number} verseNumber
+ * @returns {boolean}
+ */
+export const isLastVerseOfSurah = (chapterNumber: string, verseNumber: number): boolean => {
+  const { versesCount } = getChapterData(chapterNumber);
+  return verseNumber === versesCount;
+};
+
+export const getChapterFirstAndLastVerseKey = (chapterId: string) => {
+  const chapterData = getChapterData(chapterId);
+  return [
+    makeVerseKey(Number(chapterData.id), 1),
+    makeVerseKey(Number(chapterData.id), chapterData.versesCount),
+  ];
 };

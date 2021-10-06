@@ -11,15 +11,16 @@ import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import {
   selectReciter,
   playFrom,
-  selectAudioFileStatus,
-  AudioFileStatus,
+  selectAudioDataStatus,
+  AudioDataStatus,
+  exitRepeatMode,
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
-  timestamp: number;
   verseKey: string;
+  timestamp: number;
 }
 const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   const dispatch = useDispatch();
@@ -27,15 +28,16 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
-  const audioFileStatus = useSelector(selectAudioFileStatus);
+  const audioDataStatus = useSelector(selectAudioDataStatus);
 
   useEffect(() => {
-    if (audioFileStatus === AudioFileStatus.Ready) {
+    if (audioDataStatus === AudioDataStatus.Ready) {
       setIsLoading(false);
     }
-  }, [audioFileStatus]);
+  }, [audioDataStatus]);
 
   const onPlayClicked = () => {
+    dispatch(exitRepeatMode());
     dispatch(
       playFrom({
         chapterId,
@@ -44,7 +46,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
       }),
     );
 
-    if (audioFileStatus !== AudioFileStatus.Ready) {
+    if (audioDataStatus !== AudioDataStatus.Ready) {
       setIsLoading(true);
     }
   };

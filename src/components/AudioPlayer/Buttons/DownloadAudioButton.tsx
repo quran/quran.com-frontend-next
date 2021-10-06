@@ -6,7 +6,7 @@ import DownloadIcon from '../../../../public/icons/download.svg';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import { selectAudioFile } from 'src/redux/slices/AudioPlayer/state';
+import { selectAudioData } from 'src/redux/slices/AudioPlayer/state';
 import { withStopPropagation } from 'src/utils/event';
 
 const download = (url: string, onDone: () => void) => {
@@ -28,12 +28,12 @@ const download = (url: string, onDone: () => void) => {
 };
 
 const DownloadAudioButton = () => {
-  const audioFile = useSelector(selectAudioFile, shallowEqual);
+  const audioData = useSelector(selectAudioData, shallowEqual);
   const [loading, setLoading] = React.useState(false);
 
   const onClick = withStopPropagation(() => {
     setLoading(true);
-    download(audioFile.audioUrl, () => {
+    download(audioData.audioUrl, () => {
       setLoading(false);
     });
     setLoading(true);
