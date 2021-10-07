@@ -1,0 +1,49 @@
+.noResult {
+  text-align: center;
+  font-size: var(--font-size-large);
+  color: var(--color-text-faded);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  height: var(--spacing-mega);
+  font-size: var(--font-size-small);
+  padding: 0 var(--spacing-micro);
+  color: var(--color-text-faded);
+}
+
+.commandItem {
+  display: flex;
+  align-items: center;
+  height: calc(1.5 * var(--spacing-mega));
+  font-size: var(--font-size-normal);
+  padding: 0 var(--spacing-xsmall);
+  cursor: pointer;
+  color: var(--color-text-faded);
+  white-space: nowrap;
+  &.selected {
+    border-radius: var(--border-radius-default);
+    background: var(--color-background-alternative-faded);
+  }
+}
+
+.commandItemBody {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.commandPrefix {
+  margin-right: var(--spacing-small);
+  > svg {
+    width: var(--spacing-large);
+    height: var(--spacing-large);
+  }
+}
+
+.keyboardInputContainer {
+  flex-direction: row;
+  display: flex;
+}

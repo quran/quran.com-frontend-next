@@ -1,0 +1,20 @@
+@use "src/styles/breakpoints";
+
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-medium) 0;
+  color: var(--color-text-faded);
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  &:hover {
+    color: var(--color-text-default);
+  }
+  @include breakpoints.tablet {
+    justify-content: space-between;
+    width: 40%;
+  }
+}

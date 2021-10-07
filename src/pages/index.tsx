@@ -7,6 +7,7 @@ import styles from './index.module.scss';
 
 import homepageImage from 'public/images/homepage.png';
 import ChaptersList from 'src/components/chapters/ChaptersList';
+import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import QuickLinks from 'src/components/HomePage/QuickLinks';
 import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
@@ -32,6 +33,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
       <QuickLinks />
       <RecentReadingSessions />
       <BookmarkedVersesList />
+      <CommandBarTrigger />
       <ChaptersList chapters={chapters} />
     </div>
   </div>

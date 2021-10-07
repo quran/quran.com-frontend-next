@@ -46,4 +46,11 @@ export default {
       repeatProgress: defaultRepeatProgress,
     },
   }),
+  9: (state) => ({
+    ...state,
+    commandBar: {
+      isOpen: false,
+      recentNavigations: [],
+    },
+  }),
 };
