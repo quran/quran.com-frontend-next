@@ -24,7 +24,7 @@ const PlaybackControls = () => {
         <PlayPauseButton />
       </div>
       <div className={styles.actionItem}>
-        <SeekButton type={SeekButtonType.Rewind} isLoading={isLoading} />
+        <SeekButton type={SeekButtonType.FastForward} isLoading={isLoading} />
       </div>
       <div className={styles.actionItem}>
         <OverflowAudioPlayerActionsMenu />
