@@ -10,6 +10,7 @@ const CloseButton = () => {
   const dispatch = useDispatch();
   return (
     <PopoverMenu.Item
+      shouldCloseMenuAfterClick
       onClick={() => {
         triggerPauseAudio();
         dispatch(resetAudioData());
