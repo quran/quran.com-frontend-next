@@ -1,5 +1,7 @@
 @use "src/styles/breakpoints";
 
+$width: calc(11 * var(--spacing-mega));
+
 .container {
   width: 100%;
   display: flex;
@@ -15,6 +17,6 @@
   }
   @include breakpoints.tablet {
     justify-content: space-between;
-    width: 40%;
+    width: $width;
   }
 }

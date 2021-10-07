@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDispatch } from 'react-redux';
 
+import CloseIcon from '../../../../public/icons/close.svg';
 import NavigateIcon from '../../../../public/icons/east.svg';
 
 import styles from './CommandList.module.scss';
@@ -103,7 +104,7 @@ const CommandsList: React.FC<Props> = ({ navigationItems, isPreInput = false }) 
     );
   }
 
-  const onItemHover = (itemIndex: number) => {
+  const onItemSelected = (itemIndex: number) => {
     setSelectedItemIndex(itemIndex);
   };
 
@@ -124,7 +125,7 @@ const CommandsList: React.FC<Props> = ({ navigationItems, isPreInput = false }) 
                 [styles.selected]: selectedItemIndex === index,
               })}
               onClick={() => navigateToItem(navigationItem)}
-              onMouseOver={() => onItemHover(index)}
+              onMouseOver={() => onItemSelected(index)}
             >
               <div className={styles.commandItemBody}>
                 <span className={styles.commandPrefix}>
@@ -139,7 +140,7 @@ const CommandsList: React.FC<Props> = ({ navigationItems, isPreInput = false }) 
                     size={ButtonSize.Small}
                     onClick={(e) => onRemoveItemClicked(e, navigationItem.key)}
                   >
-                    X
+                    <CloseIcon />
                   </Button>
                 ) : (
                   <KeyboardInput keyboardKey="enter" />

@@ -17,7 +17,7 @@ const CommandBar: React.FC = () => {
   const closeCommandBar = useCallback(() => {
     dispatch({ type: setIsOpen.type, payload: false });
   }, [dispatch]);
-  useHotkeys('cmd+k', toggleShowCommandBar, [dispatch]);
+  useHotkeys('cmd+k, ctrl+k', toggleShowCommandBar, [dispatch]);
   useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnTags: ['INPUT'] }, [dispatch]);
 
   return (

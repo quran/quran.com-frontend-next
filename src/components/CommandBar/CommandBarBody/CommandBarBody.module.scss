@@ -1,3 +1,5 @@
+$height: calc(8 * var(--spacing-mega));
+
 .container {
   padding: var(--spacing-small);
 }
@@ -22,5 +24,5 @@
   padding: var(--spacing-xsmall) 0;
   overflow-y: auto;
   position: relative;
-  height: calc(8 * var(--spacing-mega));
+  height: $height;
 }
