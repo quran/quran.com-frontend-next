@@ -15,7 +15,7 @@ import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { SearchResponse } from 'types/ApiResponses';
 
-const DEBOUNCING_PERIOD_MS = 500;
+const DEBOUNCING_PERIOD_MS = 100;
 
 const CommandBarBody: React.FC = () => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
