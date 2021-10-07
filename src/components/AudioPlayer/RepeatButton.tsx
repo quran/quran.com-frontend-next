@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { selectAudioData } from 'src/redux/slices/AudioPlayer/state';
 
 const RepeatAudioButton = () => {
@@ -24,13 +24,14 @@ const RepeatAudioButton = () => {
           onClose={() => setIsModalOpen(false)}
         />
       )}
-      <PopoverMenu.Item
+      <Button
+        disabled={!audioData}
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
         onClick={() => setIsModalOpen(true)}
-        icon={<RepeatIcon />}
-        isDisabled={!audioData}
       >
-        Repeat settings
-      </PopoverMenu.Item>
+        <RepeatIcon />
+      </Button>
     </>
   );
 };

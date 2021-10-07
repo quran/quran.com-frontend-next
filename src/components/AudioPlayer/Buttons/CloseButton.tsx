@@ -3,24 +3,21 @@ import { useDispatch } from 'react-redux';
 import CloseIcon from '../../../../public/icons/close.svg';
 import { triggerPauseAudio } from '../EventTriggers';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { resetAudioData } from 'src/redux/slices/AudioPlayer/state';
-import { withStopPropagation } from 'src/utils/event';
 
 const CloseButton = () => {
   const dispatch = useDispatch();
   return (
-    <Button
-      tooltip="Close"
-      shape={ButtonShape.Circle}
-      variant={ButtonVariant.Ghost}
-      onClick={withStopPropagation(() => {
+    <PopoverMenu.Item
+      onClick={() => {
         triggerPauseAudio();
         dispatch(resetAudioData());
-      })}
+      }}
+      icon={<CloseIcon />}
     >
-      <CloseIcon />
-    </Button>
+      Close Audio Player
+    </PopoverMenu.Item>
   );
 };
 
