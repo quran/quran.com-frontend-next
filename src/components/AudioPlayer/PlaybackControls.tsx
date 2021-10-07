@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import ForwardIcon from '../../../public/icons/forward_10.svg';
 import ReplayIcon from '../../../public/icons/replay_10.svg';
 
-import CloseButton from './Buttons/CloseButton';
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import { triggerSeek } from './EventTriggers';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
+import RepeatAudioButton from './RepeatButton';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { AudioDataStatus, selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
@@ -19,7 +19,7 @@ const PlaybackControls = () => {
 
   return (
     <div className={styles.container}>
-      <OverflowAudioPlayerActionsMenu />
+      <RepeatAudioButton />
       <Button
         tooltip="Rewind 10 seconds"
         variant={ButtonVariant.Ghost}
@@ -39,7 +39,7 @@ const PlaybackControls = () => {
       >
         <ForwardIcon />
       </Button>
-      <CloseButton />
+      <OverflowAudioPlayerActionsMenu />
     </div>
   );
 };
