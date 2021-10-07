@@ -16,6 +16,7 @@ import { createSEOConfig } from 'src/utils/seo';
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
+import 'src/styles/global.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   return (

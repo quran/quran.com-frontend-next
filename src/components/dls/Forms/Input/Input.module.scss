@@ -14,7 +14,7 @@
   }
   &.disabled,
   &.disabled * {
-    background: var(--color-background-alternative);
+    background: var(--color-background-alternative-medium);
     pointer-events: none;
     cursor: not-allowed;
   }
@@ -50,7 +50,6 @@
   width: 100%;
   font-size: var(--font-size-normal);
   background: var(--color-background-default);
-  color: var(--color-text-default);
   &:focus {
     outline: none;
   }
@@ -93,12 +92,12 @@
   border-right: 1px solid var(--color-background-alternative-deep);
   border-top-left-radius: var(--border-radius-default);
   border-bottom-left-radius: var(--border-radius-default);
-  background: var(--color-background-alternative);
+  background: var(--color-background-alternative-medium);
 }
 
 .suffix {
   border-left: 1px solid var(--color-background-alternative-deep);
   border-top-right-radius: var(--border-radius-default);
   border-bottom-right-radius: var(--border-radius-default);
-  background: var(--color-background-alternative);
+  background: var(--color-background-alternative-medium);
 }

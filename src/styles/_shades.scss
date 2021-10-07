@@ -1,0 +1,16 @@
+/** 
+  Important note: these shades are meant to be used in the theme file, and not accessed directly. If you are looking to use a shade of grey, please search for the corresponding token in the theme file.
+*/
+
+@mixin shades-dangerous() {
+  --shade-0: #f8f9fa;
+  --shade-1: #f4f5f6;
+  --shade-2: #e9ecef;
+  --shade-3: #dee2e6;
+  --shade-4: #ced4da;
+  --shade-5: #adb5bd;
+  --shade-6: #868e96;
+  --shade-7: #495057;
+  --shade-8: #343a40;
+  --shade-9: #212529;
+}

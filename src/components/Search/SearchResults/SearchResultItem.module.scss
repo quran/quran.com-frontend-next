@@ -1,5 +1,4 @@
 .translationName {
-  color: var(--color-text-default);
   font-size: var(--font-size-small);
 }
 
@@ -12,13 +11,12 @@
 
 .link {
   text-decoration: none;
-  color: var(--color-text-default);
 }
 
 .itemContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-medium);
   padding: var(--spacing-xsmall);
   margin: var(--spacing-xsmall) 0;
 }

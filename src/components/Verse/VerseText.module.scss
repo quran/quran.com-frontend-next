@@ -4,7 +4,6 @@
 
 .verseText {
   display: flex;
-  color: var(--color-text-default);
   align-items: center;
 }
 .verseTextContainer {
@@ -44,5 +43,5 @@
 @include utility.generate-font-sizes();
 
 .highlighted {
-  background-color: var(--color-background-alternative);
+  background-color: var(--color-background-alternative-faded);
 }

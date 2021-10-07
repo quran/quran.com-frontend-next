@@ -1,4 +1,4 @@
-.container {
+body {
   min-height: 100vh;
   background: var(--color-background-default);
   color: var(--color-text-default);
@@ -10,4 +10,13 @@
   ::-moz-selection {
     background: var(--color-highlight);
   }
+
+  overscroll-behavior-y: none;
+  font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-text-default);
 }
