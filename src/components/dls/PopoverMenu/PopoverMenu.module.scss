@@ -50,7 +50,7 @@ $separator-size: 1px;
 .content {
   padding: var(--spacing-small) 0;
   min-width: $min-width;
-  background-color: white;
+  background-color: var(--color-background-default);
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-large);
   animation-duration: $animationDuration;
@@ -76,6 +76,7 @@ $separator-size: 1px;
 .item {
   font-size: var(--font-size-normal);
   line-height: var(--line-height-normal);
+  color: var(--color-text-default);
   display: flex;
   align-items: center;
   padding: var(--spacing-xxsmall) var(--spacing-medium);
@@ -97,6 +98,9 @@ $separator-size: 1px;
   }
 
   & .iconWrapper {
+    & > svg > path {
+      fill: var(--color-text-default);
+    }
     margin-right: var(--spacing-medium);
     display: flex;
     align-items: center;
