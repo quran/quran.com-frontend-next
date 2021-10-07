@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import useSWRImmutable from 'swr/immutable';
 
@@ -56,4 +56,4 @@ const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }: Props):
   return render(data);
 };
 
-export default DataFetcher;
+export default memo(DataFetcher);

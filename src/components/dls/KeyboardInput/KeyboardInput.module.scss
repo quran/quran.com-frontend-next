@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .container {
   color: var(--color-text-faded);
   background: var(--color-background-alternative-medium);
@@ -11,5 +13,8 @@
   border-radius: var(--border-radius-default);
   > span + span {
     margin-left: var(--spacing-xsmall);
+  }
+  @include breakpoints.smallerThanTablet {
+    display: none;
   }
 }
