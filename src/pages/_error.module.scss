@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+  margin-bottom: var(--spacing-medium);
+}
+
+.goBack {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-medium);
+}
+
+.reportBug {
+  margin-top: var(--spacing-mega);
+}
