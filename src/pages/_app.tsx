@@ -12,6 +12,7 @@ import Navbar from 'src/components/Navbar/Navbar';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
+import { API_HOST } from 'src/utils/api';
 import { createSEOConfig } from 'src/utils/seo';
 
 import 'src/styles/reset.scss';
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
     <>
       <Head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href={API_HOST} />
       </Head>
       <ReduxProvider>
         <ThemeProvider>
