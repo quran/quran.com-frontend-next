@@ -52,9 +52,11 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
     triggerSetCurrentTime(selectedVerseTiming.timestampFrom / 1000); // AudioPlayer accept 'seconds' instead of 'ms'
   };
 
-  // disable the button if loading, or first verse, or last verse
+  // disable the button if loading, or chapterAudioData not available
+  // or currently playing first verse or last verse
   const isDisabled =
     isLoading ||
+    !chapterAudioData ||
     (type === SeekButtonType.PrevAyah && highlightedVerse <= 1) ||
     (type === SeekButtonType.NextAyah && highlightedVerse >= chapterData?.versesCount);
 
