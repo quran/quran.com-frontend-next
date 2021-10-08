@@ -6,8 +6,10 @@ import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranRead
 
 export const ITEMS_PER_PAGE = 10;
 
-const STAGING_API_HOST = 'https://staging.quran.com/api/qdc';
-const PRODUCTION_API_HOST = 'https://api.quran.com/api/qdc';
+const STAGING_API_HOST = 'https://staging.quran.com';
+const PRODUCTION_API_HOST = 'https://api.qurancdn.com';
+
+const API_ROOT_PATH = '/api/qdc/';
 
 // env variables in Vercel can't be dynamic, we have to hardcode the urls here. https://stackoverflow.com/questions/44342226/next-js-error-only-absolute-urls-are-supported
 export const API_HOST =
@@ -22,7 +24,7 @@ export const API_HOST =
  */
 export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
-    return `${API_HOST}${path}`;
+    return `${API_HOST}${API_ROOT_PATH}${path}`;
   }
 
   const decamelizedParams = decamelizeKeys(parameters);
@@ -30,7 +32,7 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
   const queryParameters = `?${stringify(decamelizedParams)}`;
-  return `${API_HOST}${path}${queryParameters}`;
+  return `${API_HOST}${API_ROOT_PATH}${path}${queryParameters}`;
 };
 
 /**
