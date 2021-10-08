@@ -10,7 +10,7 @@ import styles from './CommandBarBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import useDebounce from 'src/hooks/useDebounce';
-import { selectRecentNavigations } from 'src/redux/slices/commandBar';
+import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeNavigationSearchUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';

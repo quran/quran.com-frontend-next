@@ -6,7 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import CommandBarBody from './CommandBarBody';
 
 import Modal from 'src/components/dls/Modal/Modal';
-import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/commandBar';
+import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 
 const CommandBar: React.FC = () => {
   const dispatch = useDispatch();

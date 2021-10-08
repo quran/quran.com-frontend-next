@@ -7,7 +7,7 @@ import IconSearch from '../../../../public/icons/search.svg';
 import styles from './CommandBarTrigger.module.scss';
 
 import KeyboardInput from 'src/components/dls/KeyboardInput';
-import { toggleIsOpen } from 'src/redux/slices/commandBar';
+import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 
 const CommandBarTrigger: React.FC = () => {
   const dispatch = useDispatch();
