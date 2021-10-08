@@ -87,6 +87,11 @@ export const selectIsInRepeatMode = (state: RootState) => {
   const { repeatSettings } = state.audioPlayerState;
   return !!repeatSettings.from && !!repeatSettings.to;
 };
+export const selectRemainingRangeRepeatCount = (state: RootState) => {
+  const { repeatProgress, repeatSettings } = state.audioPlayerState;
+  return 1 + (repeatSettings.repeatRange - repeatProgress.repeatRange);
+  // +1 to account for the current cycle, current implementation doesn't account for the current cycle
+};
 
 /**
  * get the audio file for the current reciter
@@ -210,6 +215,8 @@ export const audioPlayerStateSlice = createSlice({
     setRepeatSettings: (state, action) => ({
       ...state,
       repeatSettings: { ...action.payload },
+      // reset the repeat progress when we set the new repeat settings
+      repeatProgress: { ...initialState.repeatProgress },
     }),
     setRepeatProgress: (state, action) => ({
       ...state,

@@ -1,17 +1,12 @@
 import { useSelector } from 'react-redux';
 
-import ForwardIcon from '../../../public/icons/forward_10.svg';
-import ReplayIcon from '../../../public/icons/replay_10.svg';
-
 import PlayPauseButton from './Buttons/PlayPauseButton';
-import { triggerSeek } from './EventTriggers';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
 import RepeatAudioButton from './RepeatButton';
+import SeekButton, { SeekButtonType } from './SeekButton';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import { AudioDataStatus, selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
-import { withStopPropagation } from 'src/utils/event';
 
 const PlaybackControls = () => {
   const audioDataStatus = useSelector(selectAudioDataStatus);
@@ -23,32 +18,14 @@ const PlaybackControls = () => {
         <RepeatAudioButton />
       </div>
       <div className={styles.actionItem}>
-        <Button
-          tooltip="Rewind 10 seconds"
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          disabled={isLoading}
-          onClick={withStopPropagation(() => triggerSeek(-10))}
-        >
-          <ReplayIcon />
-        </Button>
+        <SeekButton type={SeekButtonType.Rewind} isLoading={isLoading} />
       </div>
       <div className={styles.actionItem}>
         <PlayPauseButton />
       </div>
-
       <div className={styles.actionItem}>
-        <Button
-          tooltip="Fast-forward 10 seconds"
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          disabled={isLoading}
-          onClick={withStopPropagation(() => triggerSeek(10))}
-        >
-          <ForwardIcon />
-        </Button>
+        <SeekButton type={SeekButtonType.FastForward} isLoading={isLoading} />
       </div>
-
       <div className={styles.actionItem}>
         <OverflowAudioPlayerActionsMenu />
       </div>
