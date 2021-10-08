@@ -169,7 +169,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     }
 
     // `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
-    if (typeof timestamp !== 'number') {
+    if (Number.isNaN(timestamp)) {
       const timestampsData = await getChapterAudioData(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
       playFromTimestamp(verseTiming.timestampFrom / 1000);
