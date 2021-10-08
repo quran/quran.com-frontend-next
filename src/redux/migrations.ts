@@ -53,4 +53,11 @@ export default {
       recentNavigations: [],
     },
   }),
+  10: (state) => ({
+    ...state,
+    commandBar: {
+      isOpen: undefined,
+      recentNavigations: [],
+    },
+  }),
 };

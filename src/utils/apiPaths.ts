@@ -80,6 +80,15 @@ export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
 export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('/search', params);
 
 /**
+ * Compose the url for the navigation search API that is used to show results inside the command bar.
+ *
+ * @param {SearchRequest} params the request params.
+ * @returns {string}
+ */
+export const makeNavigationSearchUrl = (params: SearchRequest): string =>
+  makeUrl('/navigate', params);
+
+/**
  * Compose the url for the tafsirs API.
  *
  * @param {string} language the user's language code.

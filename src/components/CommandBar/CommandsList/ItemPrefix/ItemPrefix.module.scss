@@ -1,0 +1,13 @@
+.commandPrefix {
+  margin-right: var(--spacing-small);
+  > svg {
+    width: var(--spacing-large);
+    height: var(--spacing-large);
+  }
+}
+
+.commandItemBody {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
