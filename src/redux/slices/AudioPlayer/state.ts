@@ -44,6 +44,7 @@ export type AudioState = {
   enableAutoScrolling: boolean;
   repeatSettings: RepeatSettings;
   repeatProgress: RepeatProgress;
+  isDownloadingAudio: boolean;
 };
 
 export const defaultRepeatSettings = {
@@ -68,6 +69,7 @@ const initialState: AudioState = {
   isMobileMinimizedForScrolling: false,
   repeatSettings: defaultRepeatSettings,
   repeatProgress: defaultRepeatProgress,
+  isDownloadingAudio: false,
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -87,6 +89,8 @@ export const selectIsInRepeatMode = (state: RootState) => {
   const { repeatSettings } = state.audioPlayerState;
   return !!repeatSettings.from && !!repeatSettings.to;
 };
+export const selectIsDownloadingAudio = (state: RootState) =>
+  state.audioPlayerState.isDownloadingAudio;
 export const selectRemainingRangeRepeatCount = (state: RootState) => {
   const { repeatProgress, repeatSettings } = state.audioPlayerState;
   return 1 + (repeatSettings.repeatRange - repeatProgress.repeatRange);
@@ -233,6 +237,10 @@ export const audioPlayerStateSlice = createSlice({
         to: null,
       },
     }),
+    setIsDownloadingAudio: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isDownloadingAudio: action.payload,
+    }),
   },
   // reset reciter to DEFAULT_RECITER
   // WHEN `reset` action is dispatched
@@ -255,6 +263,7 @@ export const {
   setRepeatSettings,
   setRepeatProgress,
   exitRepeatMode,
+  setIsDownloadingAudio,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;
