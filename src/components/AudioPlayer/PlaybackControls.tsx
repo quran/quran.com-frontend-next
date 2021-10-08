@@ -18,13 +18,13 @@ const PlaybackControls = () => {
         <RepeatAudioButton />
       </div>
       <div className={styles.actionItem}>
-        <SeekButton type={SeekButtonType.Rewind} isLoading={isLoading} />
+        <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />
       </div>
       <div className={styles.actionItem}>
         <PlayPauseButton />
       </div>
       <div className={styles.actionItem}>
-        <SeekButton type={SeekButtonType.FastForward} isLoading={isLoading} />
+        <SeekButton type={SeekButtonType.NextAyah} isLoading={isLoading} />
       </div>
       <div className={styles.actionItem}>
         <OverflowAudioPlayerActionsMenu />
