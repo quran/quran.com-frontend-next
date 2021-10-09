@@ -20,7 +20,7 @@ export const Normal = () => {
 
 const threeItems = [
   { name: 'Translation', value: 'translation', width: 120 },
-  { name: 'Reading', value: 'reading', width: 120, disabled: true },
+  { name: 'Reading', value: 'reading', width: 120 },
   { name: 'Tafsir', value: 'tafsir', width: 120 },
 ];
 
