@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
-import Error from 'next/error';
 
 import { getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
+import Error from 'src/pages/_error';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -32,7 +32,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   tafsirId,
 }) => {
   if (hasError) {
-    return <Error statusCode={500} />;
+    return <Error />;
   }
   return (
     <>

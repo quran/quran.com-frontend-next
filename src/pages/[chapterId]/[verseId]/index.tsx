@@ -1,11 +1,11 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import Error from 'next/error';
 import { useRouter } from 'next/router';
 
 import { getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
+import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import {
@@ -34,7 +34,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
     query: { verseId },
   } = useRouter();
   if (hasError) {
-    return <Error statusCode={500} />;
+    return <Error />;
   }
   return (
     <>
