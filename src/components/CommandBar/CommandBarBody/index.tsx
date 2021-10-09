@@ -48,8 +48,9 @@ const CommandBarBody: React.FC = () => {
           placeholder="Search"
           className={styles.input}
           type="text"
-          spellCheck="false"
-          autoComplete="off"
+          inputMode="text"
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus
         />
       </div>
       <div className={styles.bodyContainer}>
