@@ -54,59 +54,62 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={classNames(styles.container, { [styles.hiddenNav]: !isVisible })}>
-      <div className={styles.itemsContainer}>
-        <div className={styles.centerVertically}>
-          <div className={styles.leftCTA}>
-            <>
-              <Button
-                tooltip="Menu"
-                variant={ButtonVariant.Ghost}
-                shape={ButtonShape.Circle}
-                onClick={openNavigationDrawer}
-              >
-                <IconMenu />
-              </Button>
-              <NavigationDrawer />
-            </>
-            <Link href="/">
-              <a>
-                <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-                  <IconQ />
+    <>
+      <div className={styles.emptySpacePlaceholder} />
+      <nav className={classNames(styles.container, { [styles.hiddenNav]: !isVisible })}>
+        <div className={styles.itemsContainer}>
+          <div className={styles.centerVertically}>
+            <div className={styles.leftCTA}>
+              <>
+                <Button
+                  tooltip="Menu"
+                  variant={ButtonVariant.Ghost}
+                  shape={ButtonShape.Circle}
+                  onClick={openNavigationDrawer}
+                >
+                  <IconMenu />
                 </Button>
-              </a>
-            </Link>
-            <LanguageSelector />
+                <NavigationDrawer />
+              </>
+              <Link href="/">
+                <a>
+                  <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+                    <IconQ />
+                  </Button>
+                </a>
+              </Link>
+              <LanguageSelector />
+            </div>
+          </div>
+          <div className={styles.centerVertically}>
+            <div className={styles.rightCTA}>
+              <>
+                <Button
+                  tooltip="Settings"
+                  shape={ButtonShape.Circle}
+                  variant={ButtonVariant.Ghost}
+                  onClick={openSettingsDrawer}
+                >
+                  <IconSettings />
+                </Button>
+                <SettingsDrawer />
+              </>
+              <>
+                <Button
+                  tooltip="Search"
+                  variant={ButtonVariant.Ghost}
+                  onClick={openSearchDrawer}
+                  shape={ButtonShape.Circle}
+                >
+                  <IconSearch />
+                </Button>
+                <SearchDrawer />
+              </>
+            </div>
           </div>
         </div>
-        <div className={styles.centerVertically}>
-          <div className={styles.rightCTA}>
-            <>
-              <Button
-                tooltip="Settings"
-                shape={ButtonShape.Circle}
-                variant={ButtonVariant.Ghost}
-                onClick={openSettingsDrawer}
-              >
-                <IconSettings />
-              </Button>
-              <SettingsDrawer />
-            </>
-            <>
-              <Button
-                tooltip="Search"
-                variant={ButtonVariant.Ghost}
-                onClick={openSearchDrawer}
-                shape={ButtonShape.Circle}
-              >
-                <IconSearch />
-              </Button>
-              <SearchDrawer />
-            </>
-          </div>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 
