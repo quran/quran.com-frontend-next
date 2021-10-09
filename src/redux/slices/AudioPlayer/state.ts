@@ -44,6 +44,7 @@ export type AudioState = {
   enableAutoScrolling: boolean;
   repeatSettings: RepeatSettings;
   repeatProgress: RepeatProgress;
+  isDownloadingAudio: boolean;
 };
 
 export const defaultRepeatSettings = {
@@ -68,6 +69,7 @@ const initialState: AudioState = {
   isMobileMinimizedForScrolling: false,
   repeatSettings: defaultRepeatSettings,
   repeatProgress: defaultRepeatProgress,
+  isDownloadingAudio: false,
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -86,6 +88,13 @@ export const selectRepeatProgress = (state: RootState) => state.audioPlayerState
 export const selectIsInRepeatMode = (state: RootState) => {
   const { repeatSettings } = state.audioPlayerState;
   return !!repeatSettings.from && !!repeatSettings.to;
+};
+export const selectIsDownloadingAudio = (state: RootState) =>
+  state.audioPlayerState.isDownloadingAudio;
+export const selectRemainingRangeRepeatCount = (state: RootState) => {
+  const { repeatProgress, repeatSettings } = state.audioPlayerState;
+  return 1 + (repeatSettings.repeatRange - repeatProgress.repeatRange);
+  // +1 to account for the current cycle, current implementation doesn't account for the current cycle
 };
 
 /**
@@ -163,8 +172,8 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
     }
 
-    // `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
-    if (!timestamp) {
+    // if `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
+    if (timestamp === undefined || timestamp === null) {
       const timestampsData = await getChapterAudioData(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
       playFromTimestamp(verseTiming.timestampFrom / 1000);
@@ -210,6 +219,8 @@ export const audioPlayerStateSlice = createSlice({
     setRepeatSettings: (state, action) => ({
       ...state,
       repeatSettings: { ...action.payload },
+      // reset the repeat progress when we set the new repeat settings
+      repeatProgress: { ...initialState.repeatProgress },
     }),
     setRepeatProgress: (state, action) => ({
       ...state,
@@ -225,6 +236,10 @@ export const audioPlayerStateSlice = createSlice({
         from: null,
         to: null,
       },
+    }),
+    setIsDownloadingAudio: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isDownloadingAudio: action.payload,
     }),
   },
   // reset reciter to DEFAULT_RECITER
@@ -248,6 +263,7 @@ export const {
   setRepeatSettings,
   setRepeatProgress,
   exitRepeatMode,
+  setIsDownloadingAudio,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

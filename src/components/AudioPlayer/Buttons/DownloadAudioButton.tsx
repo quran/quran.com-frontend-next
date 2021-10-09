@@ -1,12 +1,16 @@
 import React from 'react';
 
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import DownloadIcon from '../../../../public/icons/download.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import { selectAudioData } from 'src/redux/slices/AudioPlayer/state';
+import {
+  selectAudioData,
+  selectIsDownloadingAudio,
+  setIsDownloadingAudio,
+} from 'src/redux/slices/AudioPlayer/state';
 
 const download = (url: string, onDone: () => void) => {
   const splits = url.substring(url.lastIndexOf('/') + 1).split('?');
@@ -28,14 +32,14 @@ const download = (url: string, onDone: () => void) => {
 
 const DownloadAudioButton = () => {
   const audioData = useSelector(selectAudioData, shallowEqual);
-  const [loading, setLoading] = React.useState(false);
+  const loading = useSelector(selectIsDownloadingAudio);
+  const dispatch = useDispatch();
 
   const onClick = () => {
-    setLoading(true);
+    dispatch(setIsDownloadingAudio(true));
     download(audioData.audioUrl, () => {
-      setLoading(false);
+      dispatch(setIsDownloadingAudio(false));
     });
-    setLoading(true);
   };
 
   return (
