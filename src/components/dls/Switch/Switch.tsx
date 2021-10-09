@@ -8,6 +8,7 @@ type Item = {
   name: string;
   value: string;
   width: number;
+  disabled?: boolean;
 };
 type SwitchProps = {
   items: Item[];
@@ -20,6 +21,7 @@ const Switch = ({ items, onSelect, selected }: SwitchProps) => {
     <div className={styles.container}>
       {items.map((item) => (
         <button
+          disabled={item.disabled}
           type="button"
           className={classNames(styles.item, selected === item.value && styles.itemSelected)}
           key={item.value}

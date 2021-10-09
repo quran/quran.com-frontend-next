@@ -25,3 +25,8 @@
   font-weight: var(--font-weight-bold);
   background-color: var(--color-background-alternative-faded);
 }
+
+.item[disabled] {
+  cursor: not-allowed;
+  opacity: var(--opacity-50);
+}
