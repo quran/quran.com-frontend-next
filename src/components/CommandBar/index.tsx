@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import styles from './CommandBar.module.scss';
 import CommandBarBody from './CommandBarBody';
 
 import Modal from 'src/components/dls/Modal/Modal';
@@ -27,7 +28,13 @@ const CommandBar: React.FC = () => {
   useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnTags: ['INPUT'] }, [dispatch]);
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={closeCommandBar} isBottomSheetOnMobile={false}>
+    <Modal
+      isOpen={isOpen}
+      onClickOutside={closeCommandBar}
+      isBottomSheetOnMobile={false}
+      isInvertedOverlay
+      contentClassName={styles.modalContent}
+    >
       <CommandBarBody />
     </Modal>
   );

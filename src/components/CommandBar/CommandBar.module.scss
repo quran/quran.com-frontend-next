@@ -1,0 +1,9 @@
+@use "src/styles/breakpoints";
+
+$desktopMaxWidth: calc(18 * var(--spacing-mega));
+
+.modalContent {
+  @include breakpoints.desktop {
+    max-width: $desktopMaxWidth;
+  }
+}
