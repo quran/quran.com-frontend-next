@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
 import groupBy from 'lodash/groupBy';
-import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import CommandsList, { Command } from '../CommandsList';
@@ -11,7 +10,6 @@ import styles from './CommandBarBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import useDebounce from 'src/hooks/useDebounce';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeNavigationSearchUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { SearchResponse } from 'types/ApiResponses';
@@ -43,10 +41,8 @@ const NAVIGATE_TO = [
 const DEBOUNCING_PERIOD_MS = 100;
 
 const CommandBarBody: React.FC = () => {
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
-  const { lang } = useTranslation();
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   /**
@@ -117,18 +113,7 @@ const CommandBarBody: React.FC = () => {
       </div>
       <div className={styles.bodyContainer}>
         <DataFetcher
-          queryKey={
-            debouncedSearchQuery
-              ? makeNavigationSearchUrl({
-                  query: debouncedSearchQuery,
-                  filterLanguages: lang,
-                  ...(selectedTranslations &&
-                    !!selectedTranslations.length && {
-                      filterTranslations: selectedTranslations.join(','),
-                    }),
-                })
-              : null
-          }
+          queryKey={debouncedSearchQuery ? makeNavigationSearchUrl(debouncedSearchQuery) : null}
           render={dataFetcherRender}
         />
       </div>

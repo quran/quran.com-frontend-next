@@ -9,12 +9,12 @@ interface Props {
   isClearable: boolean;
   isSelected: boolean;
   commandKey: number | string;
-  onRemoveItemClicked: (event: MouseEvent<Element>, key: number | string) => void;
+  onRemoveCommandClicked: (event: MouseEvent<Element>, key: number | string) => void;
 }
 
-const ItemControl: React.FC<Props> = ({
+const CommandControl: React.FC<Props> = ({
   isClearable,
-  onRemoveItemClicked,
+  onRemoveCommandClicked,
   commandKey,
   isSelected,
 }) => {
@@ -23,7 +23,7 @@ const ItemControl: React.FC<Props> = ({
       <Button
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
-        onClick={(e) => onRemoveItemClicked(e, commandKey)}
+        onClick={(e) => onRemoveCommandClicked(e, commandKey)}
       >
         <CloseIcon />
       </Button>
@@ -35,4 +35,4 @@ const ItemControl: React.FC<Props> = ({
   return null;
 };
 
-export default ItemControl;
+export default CommandControl;

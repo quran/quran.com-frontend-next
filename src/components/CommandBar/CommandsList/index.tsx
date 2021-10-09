@@ -7,9 +7,9 @@ import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDispatch } from 'react-redux';
 
+import CommandControl from './CommandControl';
 import styles from './CommandList.module.scss';
-import ItemControl from './ItemControl';
-import ItemPrefix from './ItemPrefix';
+import CommandPrefix from './CommandPrefix';
 
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import {
@@ -60,7 +60,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     },
     [scrollToSelectedCommand],
   );
-  const navigateToItem = useCallback(
+  const navigateToLink = useCallback(
     (command: Command) => {
       const { name, resultType, key } = command;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
@@ -100,19 +100,18 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
           navigateTo = selectedCommand;
         }
       });
-      navigateToItem(navigateTo);
+      navigateToLink(navigateTo);
     },
     { enabled: selectedCommandIndex !== null, enableOnTags: ['INPUT'] },
-    [selectedCommandIndex, groups, navigateToItem],
+    [selectedCommandIndex, groups, navigateToLink],
   );
-  const onRemoveItemClicked = (event: MouseEvent<Element>, navigationItemKey: number | string) => {
+  const onRemoveCommandClicked = (
+    event: MouseEvent<Element>,
+    navigationItemKey: number | string,
+  ) => {
     // to not allow the event to bubble up to the parent container
     event.stopPropagation();
     dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
-  };
-
-  const onItemSelected = (itemIndex: number) => {
-    setSelectedCommandIndex(itemIndex);
   };
 
   if (numberOfCommands === 0) {
@@ -136,19 +135,19 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
                       role="option"
                       aria-selected={isSelected}
                       key={command.index}
-                      className={classNames(styles.commandItem, {
+                      className={classNames(styles.command, {
                         [styles.selected]: isSelected,
                       })}
-                      onClick={() => navigateToItem(command)}
-                      onMouseOver={() => onItemSelected(command.index)}
+                      onClick={() => navigateToLink(command)}
+                      onMouseOver={() => setSelectedCommandIndex(command.index)}
                     >
-                      <ItemPrefix name={command.name} />
+                      <CommandPrefix name={command.name} />
                       <div className={styles.keyboardInputContainer}>
-                        <ItemControl
+                        <CommandControl
                           isClearable={command.isClearable}
                           isSelected={isSelected}
                           commandKey={command.key}
-                          onRemoveItemClicked={onRemoveItemClicked}
+                          onRemoveCommandClicked={onRemoveCommandClicked}
                         />
                       </div>
                     </li>

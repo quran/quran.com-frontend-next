@@ -2,15 +2,15 @@ import React from 'react';
 
 import NavigateIcon from '../../../../../public/icons/east.svg';
 
-import styles from './ItemPrefix.module.scss';
+import styles from './CommandPrefix.module.scss';
 
 interface Props {
   name: string;
 }
 
-const ItemPrefix: React.FC<Props> = ({ name }) => {
+const CommandPrefix: React.FC<Props> = ({ name }) => {
   return (
-    <div className={styles.commandItemBody}>
+    <div className={styles.container}>
       <span className={styles.commandPrefix}>
         <NavigateIcon />
       </span>
@@ -19,4 +19,4 @@ const ItemPrefix: React.FC<Props> = ({ name }) => {
   );
 };
 
-export default ItemPrefix;
+export default CommandPrefix;

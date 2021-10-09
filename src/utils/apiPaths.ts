@@ -82,11 +82,10 @@ export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('
 /**
  * Compose the url for the navigation search API that is used to show results inside the command bar.
  *
- * @param {SearchRequest} params the request params.
+ * @param {string} query the request params.
  * @returns {string}
  */
-export const makeNavigationSearchUrl = (params: SearchRequest): string =>
-  makeUrl('/navigate', params);
+export const makeNavigationSearchUrl = (query: string): string => makeUrl('/navigate', { query });
 
 /**
  * Compose the url for the tafsirs API.
