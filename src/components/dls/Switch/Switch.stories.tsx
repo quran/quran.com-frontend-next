@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { useState } from 'react';
 
-import Switch from './Switch';
+import Switch, { SwitchSize } from './Switch';
 
 export default {
   title: 'dls/Switch',
@@ -37,4 +37,18 @@ const disabledItems = [
 export const WithDisabled = () => {
   const [selected, setSelected] = useState('translation');
   return <Switch items={disabledItems} selected={selected} onSelect={setSelected} />;
+};
+
+export const Small = () => {
+  const [selected, setSelected] = useState('translation');
+  return (
+    <Switch items={items} selected={selected} onSelect={setSelected} size={SwitchSize.Small} />
+  );
+};
+
+export const Large = () => {
+  const [selected, setSelected] = useState('translation');
+  return (
+    <Switch items={items} selected={selected} onSelect={setSelected} size={SwitchSize.Large} />
+  );
 };

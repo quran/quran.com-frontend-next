@@ -30,3 +30,13 @@
   cursor: not-allowed;
   opacity: var(--opacity-50);
 }
+
+// sizing
+.itemLarge {
+  padding: var(--spacing-small) var(--spacing-small);
+}
+
+.itemSmall {
+  font-size: var(--font-size-small);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+}
