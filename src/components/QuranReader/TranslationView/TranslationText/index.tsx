@@ -16,6 +16,8 @@ import Footnote from 'types/Footnote';
 interface Props {
   translationFontScale: number;
   text: string;
+  resourceName: string;
+  languageId: number;
 }
 
 const PRE_DEFINED_FOOTNOTES = {
@@ -24,7 +26,12 @@ const PRE_DEFINED_FOOTNOTES = {
   dl: '<b>Dual</b> <br/> A form for verbs and pronouns in Arabic language when addressing two people',
 };
 
-const TranslationText: React.FC<Props> = ({ translationFontScale, text }) => {
+const TranslationText: React.FC<Props> = ({
+  translationFontScale,
+  text,
+  languageId,
+  resourceName,
+}) => {
   const [footnote, setFootnote] = useState<Footnote>(null);
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
 
@@ -109,11 +116,24 @@ const TranslationText: React.FC<Props> = ({ translationFontScale, text }) => {
       }
     }
   };
+  const isDivehi = languageId === 34;
+  const isUrdu = languageId === 174;
+  const isKurdish = languageId === 89;
+  const isRtl = isDivehi || isUrdu || isKurdish;
   return (
     <>
       <div
         onClick={(event) => onTextClicked(event)}
-        className={classNames(styles.text, styles[`translation-font-size-${translationFontScale}`])}
+        className={classNames(
+          styles.text,
+          styles[`translation-font-size-${translationFontScale}`],
+          {
+            [styles.rtl]: isRtl,
+            [styles.urdu]: isUrdu,
+            [styles.kudish]: isKurdish,
+            [styles.divehi]: isDivehi,
+          },
+        )}
         dangerouslySetInnerHTML={{ __html: text }}
       />
       {footnote && (
@@ -124,6 +144,9 @@ const TranslationText: React.FC<Props> = ({ translationFontScale, text }) => {
         />
       )}
       {subFootnote && <FootnoteText text={subFootnote.text} onCloseClicked={resetSubFootnote} />}
+      <p className={classNames(styles.translationName, { [styles.rtl]: isRtl })}>
+        — {resourceName}
+      </p>
     </>
   );
 };

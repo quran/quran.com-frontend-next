@@ -84,8 +84,9 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
               <TranslationText
                 translationFontScale={quranReaderStyles.translationFontScale}
                 text={translation.text}
+                languageId={translation.languageId}
+                resourceName={translation.resourceName}
               />
-              <p className={styles.translationName}>— {translation.resourceName}</p>
             </div>
           ))}
         </div>
