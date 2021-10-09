@@ -16,7 +16,7 @@ type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
   isOpen?: boolean;
-  isNormalMobileLayout?: boolean;
+  isBottomSheetOnMobile?: boolean;
   onClickOutside?: () => void;
   isPropagationStopped?: boolean;
 };
@@ -26,7 +26,7 @@ const Modal = ({
   isOpen,
   onClickOutside,
   isPropagationStopped,
-  isNormalMobileLayout = false,
+  isBottomSheetOnMobile = true,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     <DialogPrimitive.Overlay className={styles.overlay} />
@@ -38,7 +38,7 @@ const Modal = ({
     <Content
       isPropagationStopped={isPropagationStopped}
       onInteractOutside={onClickOutside}
-      isNormalMobileLayout={isNormalMobileLayout}
+      isBottomSheetOnMobile={isBottomSheetOnMobile}
     >
       {children}
     </Content>

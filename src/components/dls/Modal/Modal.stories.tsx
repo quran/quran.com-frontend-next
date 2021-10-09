@@ -22,8 +22,11 @@ export const Default = () => (
   </Modal>
 );
 
-export const WithNormalMobileLayout = () => (
-  <Modal trigger={<Button>This is a regular button component</Button>} isNormalMobileLayout>
+export const WithoutBottomSheetOnMobile = () => (
+  <Modal
+    trigger={<Button>This is a regular button component</Button>}
+    isBottomSheetOnMobile={false}
+  >
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>

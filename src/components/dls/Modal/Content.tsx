@@ -5,10 +5,10 @@ import classNames from 'classnames';
 
 import styles from './Content.module.scss';
 
-const Content = ({ children, isPropagationStopped, isNormalMobileLayout, ...props }) => (
+const Content = ({ children, isPropagationStopped, isBottomSheetOnMobile, ...props }) => (
   <DialogPrimitive.Content
     {...props}
-    className={classNames(styles.content, { [styles.normalMobileLayout]: isNormalMobileLayout })}
+    className={classNames(styles.content, { [styles.topSheetOnMobile]: !isBottomSheetOnMobile })}
     onClick={(e) => {
       /**
        * Radix is using react portal,

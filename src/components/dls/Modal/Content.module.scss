@@ -21,7 +21,7 @@
   }
 }
 
-@keyframes defaultMobileContentIn {
+@keyframes topSheetOnMobileIn {
   0% {
     opacity: 0;
     transform: translate(0%, -90%);
@@ -32,7 +32,7 @@
   }
 }
 
-@keyframes defaultMobileContentOut {
+@keyframes topSheetOnMobileOut {
   0% {
     transform: translate(0%, 0%);
   }
@@ -96,7 +96,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
-  &.normalMobileLayout {
+  &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
       top: 10%;
       bottom: unset;
@@ -107,9 +107,9 @@
   animation: mobileContentIn constants.$animationDuration
       constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
-  &.normalMobileLayout {
+  &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
-      animation: defaultMobileContentIn constants.$animationDuration
+      animation: topSheetOnMobileIn constants.$animationDuration
           constants.$animationEasing,
         fadeIn constants.$animationDuration constants.$animationEasing;
     }
@@ -124,9 +124,9 @@
   animation: mobileContentOut constants.$animationDuration
       constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
-  &.normalMobileLayout {
+  &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
-      animation: defaultMobileContentOut constants.$animationDuration
+      animation: topSheetOnMobileOut constants.$animationDuration
           constants.$animationEasing,
         fadeOut constants.$animationDuration constants.$animationEasing;
     }

@@ -21,7 +21,7 @@ const CommandBar: React.FC = () => {
   useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnTags: ['INPUT'] }, [dispatch]);
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={closeCommandBar} isNormalMobileLayout>
+    <Modal isOpen={isOpen} onClickOutside={closeCommandBar} isBottomSheetOnMobile={false}>
       <CommandBarBody />
     </Modal>
   );
