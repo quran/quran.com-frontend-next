@@ -1,0 +1,13 @@
+// This is a hack to use popover menu with a fixed element
+// Reference: https://github.com/radix-ui/primitives/issues/781
+.manualPopoverMenuContentPositioning {
+  position: relative;
+}
+
+.manualPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
+  top: initial !important;
+  left: 50% !important;
+  transform: translate3d(-50%, 0, 0) !important;
+  bottom: calc(1.5 * var(--spacing-mega)) !important;
+  position: absolute !important;
+}
