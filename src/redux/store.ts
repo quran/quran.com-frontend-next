@@ -15,7 +15,8 @@ import storage from 'redux-persist/lib/storage';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
-import commandBar from './slices/commandBar';
+import commandBarPersistConfig from './slices/CommandBar/persistConfig';
+import commandBar from './slices/CommandBar/state';
 import navbar from './slices/navbar';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
@@ -31,7 +32,7 @@ import theme from './slices/theme';
 
 const persistConfig = {
   key: 'root',
-  version: 9,
+  version: 10,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -45,7 +46,6 @@ const persistConfig = {
     'bookmarks',
     'search',
     'readingTracker',
-    'commandBar',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -63,7 +63,7 @@ export const rootReducer = combineReducers({
   search,
   highlightedLocation,
   readingTracker,
-  commandBar,
+  commandBar: persistReducer(commandBarPersistConfig, commandBar),
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

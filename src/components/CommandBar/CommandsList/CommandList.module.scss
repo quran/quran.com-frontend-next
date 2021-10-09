@@ -14,7 +14,7 @@
   color: var(--color-text-faded);
 }
 
-.commandItem {
+.command {
   display: flex;
   align-items: center;
   height: calc(1.5 * var(--spacing-mega));
@@ -26,20 +26,6 @@
   &.selected {
     border-radius: var(--border-radius-default);
     background: var(--color-background-alternative-faded);
-  }
-}
-
-.commandItemBody {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.commandPrefix {
-  margin-right: var(--spacing-small);
-  > svg {
-    width: var(--spacing-large);
-    height: var(--spacing-large);
   }
 }
 
