@@ -22,6 +22,18 @@ export const Default = () => (
   </Modal>
 );
 
+export const WithNormalMobileLayout = () => (
+  <Modal trigger={<Button>This is a regular button component</Button>} isNormalMobileLayout>
+    <Modal.Body>
+      <Modal.Header>
+        <Modal.Title>MODAL</Modal.Title>
+        <Modal.Subtitle>THIS IS A MODAL</Modal.Subtitle>
+      </Modal.Header>
+      <p>Some content contained within this modal</p>
+    </Modal.Body>
+  </Modal>
+);
+
 export const WithGhostButtonTrigger = () => (
   <Modal
     trigger={

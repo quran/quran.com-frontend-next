@@ -21,6 +21,26 @@
   }
 }
 
+@keyframes defaultMobileContentIn {
+  0% {
+    opacity: 0;
+    transform: translate(0%, -90%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes defaultMobileContentOut {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(0%, -90%);
+  }
+}
+
 @keyframes mobileContentIn {
   0% {
     transform: translate(0%, 100%);
@@ -76,11 +96,24 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  &.normalMobileLayout {
+    @include breakpoints.smallerThanTablet {
+      top: 10%;
+      bottom: unset;
+    }
+  }
 }
 .content[data-state="open"] {
   animation: mobileContentIn constants.$animationDuration
       constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
+  &.normalMobileLayout {
+    @include breakpoints.smallerThanTablet {
+      animation: defaultMobileContentIn constants.$animationDuration
+          constants.$animationEasing,
+        fadeIn constants.$animationDuration constants.$animationEasing;
+    }
+  }
   @include breakpoints.tablet {
     animation: desktopContentIn constants.$animationDuration
         constants.$animationEasing,
@@ -91,6 +124,13 @@
   animation: mobileContentOut constants.$animationDuration
       constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
+  &.normalMobileLayout {
+    @include breakpoints.smallerThanTablet {
+      animation: defaultMobileContentOut constants.$animationDuration
+          constants.$animationEasing,
+        fadeOut constants.$animationDuration constants.$animationEasing;
+    }
+  }
   @include breakpoints.tablet {
     animation: desktopContentOut constants.$animationDuration
         constants.$animationEasing,

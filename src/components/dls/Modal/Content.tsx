@@ -1,13 +1,14 @@
 import React from 'react';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import classNames from 'classnames';
 
 import styles from './Content.module.scss';
 
-const Content = ({ children, isPropagationStopped, ...props }) => (
+const Content = ({ children, isPropagationStopped, isNormalMobileLayout, ...props }) => (
   <DialogPrimitive.Content
     {...props}
-    className={styles.content}
+    className={classNames(styles.content, { [styles.normalMobileLayout]: isNormalMobileLayout })}
     onClick={(e) => {
       /**
        * Radix is using react portal,
