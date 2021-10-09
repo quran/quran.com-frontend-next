@@ -1,21 +1,33 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-type SwitchItem = {
+import classNames from 'classnames';
+
+import styles from './Switch.module.scss';
+
+// reference: https://vercel.com/design/switch
+
+type Item = {
   name: string;
   value: string;
+  width: number;
 };
-
 type SwitchProps = {
-  items: SwitchItem[];
-  onChange: (value: string) => void;
+  items: Item[];
   selected: string;
+  onSelect: (value: string) => void;
 };
 
-const Switch = ({ items, onChange }: SwitchProps) => {
+const Switch = ({ items, onSelect, selected }: SwitchProps) => {
   return (
-    <div>
+    <div className={styles.container}>
       {items.map((item) => (
-        <div onClick={() => onChange(item.value)}>{item.name}</div>
+        <button
+          type="button"
+          className={classNames(styles.item, selected === item.value && styles.itemSelected)}
+          key={item.value}
+          onClick={() => onSelect(item.value)}
+          style={{ width: item.width }}
+        >
+          {item.name}
+        </button>
       ))}
     </div>
   );

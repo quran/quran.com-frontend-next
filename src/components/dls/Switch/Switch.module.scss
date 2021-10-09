@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+
+.item {
+  cursor: pointer;
+  padding: var(--spacing-xsmall) var(--spacing-small);
+  background-color: var(--color-background-default);
+  border: 1px solid var(--color-borders-hairline);
+  font-size: var(--font-size-normal);
+}
+.item:first-child {
+  border-top-left-radius: var(--border-radius-default);
+  border-bottom-left-radius: var(--border-radius-default);
+  border-right: none;
+}
+.item:last-child {
+  border-top-right-radius: var(--border-radius-default);
+  border-bottom-right-radius: var(--border-radius-default);
+}
+
+.itemSelected {
+  font-weight: var(--font-weight-bold);
+  background-color: var(--color-background-alternative-faded);
+}
