@@ -9,3 +9,25 @@
 }
 
 @include utility.generate-font-sizes("translation");
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.urdu {
+  font-family: "nafees";
+}
+
+.kudish {
+  font-family: "DroidArabicNaskh";
+}
+
+.divehi {
+  font-family: "divehi";
+}
+
+.translationName {
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+}

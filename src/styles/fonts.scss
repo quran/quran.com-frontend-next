@@ -5,8 +5,36 @@
 
 @font-face {
   font-family: "IndoPak";
-  src: url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff") format("woff2"),
-    url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff2") format("woff");
+  src: url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff") format("woff"),
+    url("/fonts/indoPak/Naskh-Nastaleeq-IndoPak.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "divehi";
+  src: url("/fonts/dhivehi/DhivehiAkuru.woff") format("woff"),
+    url("/fonts/dhivehi/DhivehiAkuru.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "nafees";
+  src: local("Nafees"), local("Nafees Regular"),
+    url("/fonts/urdu/nafees-nastaleeq-webfont.woff2") format("woff"),
+    url("/fonts/urdu/nafees-nastaleeq-webfont.woff") format("woff2"),
+    url("/fonts/urdu/nafees-nastaleeq-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/urdu/nafees-nastaleeq-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DroidArabicNaskh";
+  src: url("/fonts/kurdish/droid-naskh-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
