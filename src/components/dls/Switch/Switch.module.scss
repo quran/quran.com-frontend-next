@@ -12,11 +12,13 @@
 .item:first-child {
   border-top-left-radius: var(--border-radius-default);
   border-bottom-left-radius: var(--border-radius-default);
-  border-right: none;
 }
 .item:last-child {
   border-top-right-radius: var(--border-radius-default);
   border-bottom-right-radius: var(--border-radius-default);
+}
+.item + .item {
+  border-left: none;
 }
 
 .itemSelected {
