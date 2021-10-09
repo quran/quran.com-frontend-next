@@ -6,17 +6,19 @@ $width: calc(11 * var(--spacing-mega));
   width: 100%;
   display: flex;
   align-items: center;
-  padding: var(--spacing-medium) 0;
+  padding: var(--spacing-small);
   color: var(--color-text-faded);
   background: none;
-  border: none;
+  border: 1px solid var(--color-background-alternative-deep);
+  border-radius: var(--border-radius-default);
   cursor: pointer;
   outline: inherit;
   &:hover {
     color: var(--color-text-default);
+    box-shadow: var(--shadow-normal);
+    border-color: var(--color-background-inverse);
   }
   @include breakpoints.tablet {
     justify-content: space-between;
-    width: $width;
   }
 }

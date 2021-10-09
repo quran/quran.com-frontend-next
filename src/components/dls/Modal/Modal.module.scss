@@ -21,6 +21,9 @@
 
 .overlay {
   background-color: var(--color-background-backdrop);
+  &.invertedOverlay {
+    background-color: var(--color-background-lighten);
+  }
   position: fixed;
   inset: 0;
 }

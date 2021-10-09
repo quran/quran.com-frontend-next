@@ -1,6 +1,7 @@
 import React from 'react';
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import classNames from 'classnames';
 
 import Action from './Action';
 import Body from './Body';
@@ -16,9 +17,11 @@ type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
   isOpen?: boolean;
+  isInvertedOverlay?: boolean;
   isBottomSheetOnMobile?: boolean;
   onClickOutside?: () => void;
   isPropagationStopped?: boolean;
+  contentClassName?: string;
 };
 const Modal = ({
   children,
@@ -26,10 +29,14 @@ const Modal = ({
   isOpen,
   onClickOutside,
   isPropagationStopped,
+  contentClassName,
   isBottomSheetOnMobile = true,
+  isInvertedOverlay = false,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
-    <DialogPrimitive.Overlay className={styles.overlay} />
+    <DialogPrimitive.Overlay
+      className={classNames(styles.overlay, { [styles.invertedOverlay]: isInvertedOverlay })}
+    />
     {trigger && (
       <DialogPrimitive.Trigger asChild>
         <div>{trigger}</div>
@@ -39,6 +46,7 @@ const Modal = ({
       isPropagationStopped={isPropagationStopped}
       onInteractOutside={onClickOutside}
       isBottomSheetOnMobile={isBottomSheetOnMobile}
+      contentClassName={contentClassName}
     >
       {children}
     </Content>
