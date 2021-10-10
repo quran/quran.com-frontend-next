@@ -1,16 +1,21 @@
 import { useMemo } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import NextIcon from '../../../public/icons/skip_next.svg';
-import PrevIcon from '../../../public/icons/skip_previous.svg';
+import BackwardIcon from '../../../public/icons/backward.svg';
+import ForwardIcon from '../../../public/icons/forward.svg';
 
 import { triggerSetCurrentTime } from './EventTriggers';
 
 import { getChapterAudioData } from 'src/api';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { selectAudioData, selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import {
+  finishRepeatEachVerseProgress,
+  selectAudioData,
+  selectIsInRepeatMode,
+  selectReciter,
+} from 'src/redux/slices/AudioPlayer/state';
 import { selectHighlightedLocation } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
@@ -27,9 +32,11 @@ type SeekButtonProps = {
   isLoading: boolean;
 };
 const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
+  const dispatch = useDispatch();
   const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
   const reciter = useSelector(selectReciter);
   const audioData = useSelector(selectAudioData);
+  const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chapterData = useMemo(
     () => getChapterData(highlightedChapter?.toString()),
     [highlightedChapter],
@@ -45,8 +52,13 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const verseTimingData = chapterAudioData?.verseTimings || [];
 
   const onSeek = () => {
-    const verse = type === SeekButtonType.PrevAyah ? highlightedVerse - 1 : highlightedVerse + 1;
-    const verseKey = makeVerseKey(highlightedChapter, verse);
+    if (isInRepeatMode) {
+      // when in repeatMode, finish the repeat progress for current ayah
+      // otherwise the AudioRepeatManager will replay the current Ayah when we set the new timestamp
+      dispatch(finishRepeatEachVerseProgress());
+    }
+    const newVerse = type === SeekButtonType.PrevAyah ? highlightedVerse - 1 : highlightedVerse + 1;
+    const verseKey = makeVerseKey(highlightedChapter, newVerse);
 
     const selectedVerseTiming = getVerseTimingByVerseKey(verseKey, verseTimingData);
     triggerSetCurrentTime(selectedVerseTiming.timestampFrom / 1000); // AudioPlayer accept 'seconds' instead of 'ms'
@@ -70,7 +82,7 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
       disabled={isDisabled}
       onClick={onSeek}
     >
-      {type === SeekButtonType.PrevAyah ? <PrevIcon /> : <NextIcon />}
+      {type === SeekButtonType.PrevAyah ? <BackwardIcon /> : <ForwardIcon />}
     </Button>
   );
 };

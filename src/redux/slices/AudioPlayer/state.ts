@@ -229,6 +229,13 @@ export const audioPlayerStateSlice = createSlice({
         ...action.payload,
       },
     }),
+    finishRepeatEachVerseProgress: (state) => ({
+      ...state,
+      repeatProgress: {
+        ...state.repeatProgress,
+        repeatEachVerse: state.repeatSettings.repeatEachVerse,
+      },
+    }),
     exitRepeatMode: (state) => ({
       ...state,
       repeatSettings: {
@@ -264,6 +271,7 @@ export const {
   setRepeatProgress,
   exitRepeatMode,
   setIsDownloadingAudio,
+  finishRepeatEachVerseProgress,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;
