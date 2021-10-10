@@ -7,7 +7,7 @@ import Head from 'next/head';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
-import GlobalKeyboardListeners from 'src/components/GlobalKeyboardListeners';
+import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import ReduxProvider from 'src/redux/Provider';
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <ThemeProvider>
           <IdProvider>
             <DefaultSeo {...createSEOConfig({})} />
-            <GlobalKeyboardListeners />
+            <GlobalListeners />
             <Navbar />
             <DeveloperUtility />
             <Component {...pageProps} />

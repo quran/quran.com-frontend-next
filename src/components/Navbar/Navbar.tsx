@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import Link from 'next/link';
@@ -16,31 +16,16 @@ import SearchDrawer from './SearchDrawer/SearchDrawer';
 import SettingsDrawer from './SettingsDrawer/SettingsDrawer';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   selectNavbar,
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
-  setIsVisible,
 } from 'src/redux/slices/navbar';
 
 const Navbar = () => {
   const { isVisible } = useSelector(selectNavbar, shallowEqual);
   const dispatch = useDispatch();
-
-  const onDirectionChange = useCallback(
-    (direction: ScrollDirection) => {
-      if (direction === ScrollDirection.Up && !isVisible) {
-        dispatch({ type: setIsVisible.type, payload: true });
-      } else if (direction === ScrollDirection.Down && isVisible) {
-        dispatch({ type: setIsVisible.type, payload: false });
-      }
-    },
-    [dispatch, isVisible],
-  );
-  useScrollDirection(onDirectionChange);
-
   const openNavigationDrawer = () => {
     dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
   };
