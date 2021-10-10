@@ -1,7 +1,7 @@
-/* eslint-disable react/no-multi-comp */
 import { useState } from 'react';
 
 import Switch, { SwitchSize } from './Switch';
+import styles from './Switch.stories.module.scss';
 
 export default {
   title: 'dls/Switch',
@@ -12,43 +12,41 @@ const items = [
   { name: 'Translation', value: 'translation' },
   { name: 'Reading', value: 'reading' },
 ];
-
-export const Normal = () => {
-  const [selected, setSelected] = useState('translation');
-  return <Switch items={items} selected={selected} onSelect={setSelected} />;
-};
-
-const threeItems = [
-  { name: 'Translation', value: 'translation' },
-  { name: 'Reading', value: 'reading' },
-  { name: 'Tafsir', value: 'tafsir' },
-];
-
-export const WithThreeItems = () => {
-  const [selected, setSelected] = useState('reading');
-  return <Switch items={threeItems} selected={selected} onSelect={setSelected} />;
-};
-
-const disabledItems = [
-  { name: 'Translation', value: 'translation' },
-  { name: 'Reading', value: 'reading', disabled: true },
-];
-
-export const WithDisabled = () => {
-  const [selected, setSelected] = useState('translation');
-  return <Switch items={disabledItems} selected={selected} onSelect={setSelected} />;
-};
-
-export const Small = () => {
+const Template = (args) => {
   const [selected, setSelected] = useState('translation');
   return (
-    <Switch items={items} selected={selected} onSelect={setSelected} size={SwitchSize.Small} />
+    <div className={styles.switchContainer}>
+      <Switch selected={selected} onSelect={setSelected} items={items} {...args} />;
+    </div>
   );
 };
 
-export const Large = () => {
-  const [selected, setSelected] = useState('translation');
-  return (
-    <Switch items={items} selected={selected} onSelect={setSelected} size={SwitchSize.Large} />
-  );
+export const Medium = Template.bind({});
+Medium.args = {};
+
+export const Small = Template.bind({});
+Small.args = {
+  size: SwitchSize.Small,
+};
+
+export const Large = Template.bind({});
+Large.args = {
+  size: SwitchSize.Large,
+};
+
+export const WithThreeItems = Template.bind({});
+WithThreeItems.args = {
+  items: [
+    { name: 'Translation', value: 'translation' },
+    { name: 'Reading', value: 'reading' },
+    { name: 'Tafsir', value: 'tafsir' },
+  ],
+};
+
+export const WithDisabledItem = Template.bind({});
+WithDisabledItem.args = {
+  items: [
+    { name: 'Translation', value: 'translation' },
+    { name: 'Reading', value: 'reading', disabled: true },
+  ],
 };
