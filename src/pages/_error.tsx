@@ -8,7 +8,7 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 
 // reference: https://nextjs.org/docs/advanced-features/custom-error-page#more-advanced-error-page-customizing
 type ErrorProps = {
-  statusCode: number;
+  statusCode?: number;
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Error = ({ statusCode }: ErrorProps) => {
