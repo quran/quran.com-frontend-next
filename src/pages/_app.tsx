@@ -35,8 +35,8 @@ function MyApp({ Component, pageProps }): JSX.Element {
             <Navbar />
             <DeveloperUtility />
             <Component {...pageProps} />
-            <AudioPlayer />
             <FeedbackWidget />
+            <AudioPlayer />
           </IdProvider>
         </ThemeProvider>
       </ReduxProvider>
