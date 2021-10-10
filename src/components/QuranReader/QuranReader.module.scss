@@ -2,8 +2,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
 
-$quran-reader-padding-mobile: 4rem;
-$quran-reader-padding-tablet: 5rem;
+$quran-reader-padding-mobile: 2rem;
+$quran-reader-padding-tablet: 3rem;
 
 .infiniteScroll {
   @include utility.container;

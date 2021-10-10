@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 .pageContainer {
-  padding: calc(2 * var(--spacing-mega)) 0;
   margin: 0 auto;
   width: 90%;
 }

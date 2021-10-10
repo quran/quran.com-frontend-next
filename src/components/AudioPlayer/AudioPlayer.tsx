@@ -86,59 +86,62 @@ const AudioPlayer = () => {
   }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
   return (
-    <div
-      className={classNames(styles.container, styles.containerDefault, {
-        [styles.containerHidden]: isHidden,
-        [styles.containerMinimized]: isMobileMinimizedForScrolling,
-      })}
-    >
-      <div className={styles.innerContainer}>
-        {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
-        <audio
-          src={audioData?.audioUrl}
-          style={{ display: 'none' }}
-          id="audio-player"
-          ref={audioPlayerElRef}
-        />
-        <AudioKeyBoardListeners
-          seek={(seekDuration) => {
-            triggerSeek(seekDuration);
-          }}
-          togglePlaying={() => togglePlaying()}
-          isAudioPlayerHidden={isHidden}
-        />
-        {reciterId && audioData?.chapterId && (
-          <QuranReaderHighlightDispatcher
-            audioPlayerElRef={audioPlayerElRef}
-            reciterId={reciterId}
-            chapterId={audioData?.chapterId}
+    <>
+      <div className={styles.emptySpacePlaceholder} />
+      <div
+        className={classNames(styles.container, styles.containerDefault, {
+          [styles.containerHidden]: isHidden,
+          [styles.containerMinimized]: isMobileMinimizedForScrolling,
+        })}
+      >
+        <div className={styles.innerContainer}>
+          {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
+          <audio
+            src={audioData?.audioUrl}
+            style={{ display: 'none' }}
+            id="audio-player"
+            ref={audioPlayerElRef}
           />
-        )}
-        {reciterId && audioData?.chapterId && (
-          <AudioRepeatManager
-            audioPlayerElRef={audioPlayerElRef}
-            reciterId={reciterId}
-            chapterId={audioData?.chapterId}
+          <AudioKeyBoardListeners
+            seek={(seekDuration) => {
+              triggerSeek(seekDuration);
+            }}
+            togglePlaying={() => togglePlaying()}
+            isAudioPlayerHidden={isHidden}
           />
-        )}
-        <MediaSessionApiListeners
-          play={triggerPlayAudio}
-          pause={triggerPauseAudio}
-          seek={(seekDuration) => {
-            triggerSeek(seekDuration);
-          }}
-          playNextTrack={null}
-          playPreviousTrack={null}
-        />
-        <div className={styles.sliderContainer}>
-          <AudioPlayerSlider
-            audioPlayerElRef={audioPlayerElRef}
-            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+          {reciterId && audioData?.chapterId && (
+            <QuranReaderHighlightDispatcher
+              audioPlayerElRef={audioPlayerElRef}
+              reciterId={reciterId}
+              chapterId={audioData?.chapterId}
+            />
+          )}
+          {reciterId && audioData?.chapterId && (
+            <AudioRepeatManager
+              audioPlayerElRef={audioPlayerElRef}
+              reciterId={reciterId}
+              chapterId={audioData?.chapterId}
+            />
+          )}
+          <MediaSessionApiListeners
+            play={triggerPlayAudio}
+            pause={triggerPauseAudio}
+            seek={(seekDuration) => {
+              triggerSeek(seekDuration);
+            }}
+            playNextTrack={null}
+            playPreviousTrack={null}
           />
+          <div className={styles.sliderContainer}>
+            <AudioPlayerSlider
+              audioPlayerElRef={audioPlayerElRef}
+              isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+            />
+          </div>
         </div>
+        <PlaybackControls />
       </div>
-      <PlaybackControls />
-    </div>
+    </>
   );
 };
 

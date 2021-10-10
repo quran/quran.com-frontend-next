@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .container {
-  padding: calc(2 * var(--spacing-mega)) 0;
+  padding: calc(var(--spacing-xsmall)) 0;
   margin: 0 auto;
   max-width: 90%;
   @include breakpoints.tablet {
