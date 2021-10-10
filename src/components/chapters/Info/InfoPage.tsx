@@ -1,10 +1,9 @@
 import React from 'react';
 
-import Error from 'next/error';
-
 import Info from '.';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import Error from 'src/pages/_error';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {
