@@ -2,8 +2,11 @@
 @use "src/styles/constants";
 @use "src/styles/utility";
 
+// https://github.com/quran/quran.com-frontend-next/issues/560
+// our AudioPlayer is has "position: fixed", so its position is removed from the normal flow
+// we need to add an empty space placeholder, so the AudioPlayer doesn't cover the other elements in the page
 .emptySpacePlaceholder {
-  height: calc(1 * constants.$audio-player-default-height);
+  height: constants.$audio-player-default-height;
 }
 
 .container {
