@@ -1,11 +1,11 @@
 @use "src/styles/breakpoints";
 // This is a hack to use popover menu with a fixed element
 // Reference: https://github.com/radix-ui/primitives/issues/781
-.manualPopoverMenuContentPositioning {
+.overriddenPopoverMenuContentPositioning {
   position: relative;
 }
 
-.manualPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
+.overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
   top: initial !important;
   bottom: calc(1.5 * var(--spacing-mega)) !important;
   position: absolute !important;
