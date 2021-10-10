@@ -16,7 +16,7 @@ const Template = (args) => {
   const [selected, setSelected] = useState('translation');
   return (
     <div className={styles.switchContainer}>
-      <Switch selected={selected} onSelect={setSelected} items={items} {...args} />;
+      <Switch selected={selected} onSelect={setSelected} items={items} {...args} />
     </div>
   );
 };
