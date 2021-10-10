@@ -31,7 +31,7 @@ const Chapter: NextPage<ChapterProps> = ({
   isChapter,
 }) => {
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>

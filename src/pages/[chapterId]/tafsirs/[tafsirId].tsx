@@ -32,7 +32,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   tafsirId,
 }) => {
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>

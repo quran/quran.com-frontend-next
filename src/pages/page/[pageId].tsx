@@ -26,7 +26,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
     query: { pageId },
   } = useRouter();
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>

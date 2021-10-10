@@ -34,7 +34,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
     query: { verseId },
   } = useRouter();
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>

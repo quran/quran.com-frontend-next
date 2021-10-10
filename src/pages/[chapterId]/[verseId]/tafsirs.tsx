@@ -27,7 +27,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
     query: { verseId },
   } = useRouter();
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>

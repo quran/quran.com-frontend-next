@@ -13,7 +13,7 @@ interface Props {
 }
 const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>

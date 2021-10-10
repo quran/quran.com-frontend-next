@@ -26,7 +26,7 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
     query: { juzId },
   } = useRouter();
   if (hasError) {
-    return <Error />;
+    return <Error statusCode={500} />;
   }
   return (
     <>
