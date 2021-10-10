@@ -44,6 +44,12 @@ export const triggerSeek = (duration: number) => {
   }
 };
 
+export const setPlaybackRate = (playbackRate: number) => {
+  if (process.browser && window) {
+    window.audioPlayerEl.playbackRate = playbackRate;
+  }
+};
+
 /**
  * Given a timestamp, check if the audio player is ready. If it is
  * - set the time + play the audio directly
