@@ -1,10 +1,15 @@
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(0, 1fr)
+  ); // use grid to prevent layout shift when `font-family: bold` on item selected https://css-tricks.com/bold-on-hover-without-the-layout-shift/
 }
 
 .item {
   cursor: pointer;
   background-color: var(--color-background-default);
+  color: var(--color-text-default);
   border: 1px solid var(--color-borders-hairline);
 }
 .item:first-child {

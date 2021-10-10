@@ -9,8 +9,8 @@ export default {
 };
 
 const items = [
-  { name: 'Translation', value: 'translation', width: 120 },
-  { name: 'Reading', value: 'reading', width: 120 },
+  { name: 'Translation', value: 'translation' },
+  { name: 'Reading', value: 'reading' },
 ];
 
 export const Normal = () => {
@@ -19,9 +19,9 @@ export const Normal = () => {
 };
 
 const threeItems = [
-  { name: 'Translation', value: 'translation', width: 120 },
-  { name: 'Reading', value: 'reading', width: 120 },
-  { name: 'Tafsir', value: 'tafsir', width: 120 },
+  { name: 'Translation', value: 'translation' },
+  { name: 'Reading', value: 'reading' },
+  { name: 'Tafsir', value: 'tafsir' },
 ];
 
 export const WithThreeItems = () => {
@@ -30,8 +30,8 @@ export const WithThreeItems = () => {
 };
 
 const disabledItems = [
-  { name: 'Translation', value: 'translation', width: 120 },
-  { name: 'Reading', value: 'reading', width: 120, disabled: true },
+  { name: 'Translation', value: 'translation' },
+  { name: 'Reading', value: 'reading', disabled: true },
 ];
 
 export const WithDisabled = () => {

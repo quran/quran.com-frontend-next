@@ -7,7 +7,6 @@ import styles from './Switch.module.scss';
 type Item = {
   name: string;
   value: string;
-  width: number;
   disabled?: boolean;
 };
 export enum SwitchSize {
@@ -36,7 +35,6 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
           })}
           key={item.value}
           onClick={() => onSelect(item.value)}
-          style={{ width: item.width }}
         >
           {item.name}
         </button>
