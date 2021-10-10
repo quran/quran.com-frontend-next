@@ -1,4 +1,5 @@
 import { defaultRepeatProgress, defaultRepeatSettings } from './slices/AudioPlayer/state';
+import { DEFAULT_TAFSIRS } from './slices/QuranReader/tafsirs';
 
 import { MushafLines } from 'types/QuranReader';
 
@@ -58,6 +59,13 @@ export default {
     commandBar: {
       isOpen: undefined,
       recentNavigations: [],
+    },
+  }),
+  11: (state) => ({
+    ...state,
+    tafsirs: {
+      ...state.tafsirs,
+      selectedTafsirs: DEFAULT_TAFSIRS, // over-ride the current value to only include 169 ID and remove 171
     },
   }),
 };
