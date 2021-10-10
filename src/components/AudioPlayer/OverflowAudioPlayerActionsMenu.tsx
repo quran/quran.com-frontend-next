@@ -9,7 +9,7 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 const OverflowAudioPlayerActionsMenu = () => {
   return (
-    <div className={styles.manualPopoverMenuContentPositioning}>
+    <div className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
         isPortalled={false}
         trigger={
