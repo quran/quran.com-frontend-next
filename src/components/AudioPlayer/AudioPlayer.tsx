@@ -12,7 +12,6 @@ import MediaSessionApiListeners from './MediaSessionApiListeners';
 import PlaybackControls from './PlaybackControls';
 import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
 
-import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
 import {
   setIsPlaying,
   selectAudioData,
@@ -20,7 +19,6 @@ import {
   setAudioStatus,
   AudioDataStatus,
   selectReciter,
-  setIsMobileMinimizedForScrolling,
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
 
@@ -32,18 +30,6 @@ const AudioPlayer = () => {
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
-  const onDirectionChange = useCallback(
-    (direction: ScrollDirection) => {
-      if (direction === ScrollDirection.Down && !isMobileMinimizedForScrolling) {
-        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: true });
-      } else if (direction === ScrollDirection.Up && isMobileMinimizedForScrolling) {
-        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: false });
-      }
-    },
-    [dispatch, isMobileMinimizedForScrolling],
-  );
-  useScrollDirection(onDirectionChange);
-
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
   }, [dispatch]);
