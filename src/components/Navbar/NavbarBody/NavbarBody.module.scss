@@ -1,0 +1,39 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.itemsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.centerVertically {
+  @include utility.center-vertically;
+}
+
+.leftCTA {
+  display: flex;
+  margin-left: var(--spacing-medium);
+
+  @include breakpoints.tablet {
+    margin-left: var(--spacing-mega);
+  }
+}
+
+.rightCTA {
+  display: flex;
+  margin-right: var(--spacing-medium);
+
+  > button {
+    margin-left: var(--spacing-micro);
+  }
+
+  @include breakpoints.tablet {
+    margin-right: var(--spacing-mega);
+
+    > button {
+      margin-left: var(--spacing-xsmall);
+    }
+  }
+}
