@@ -45,6 +45,7 @@ export type AudioState = {
   repeatSettings: RepeatSettings;
   repeatProgress: RepeatProgress;
   isDownloadingAudio: boolean;
+  playbackRate: number;
 };
 
 export const defaultRepeatSettings = {
@@ -60,6 +61,8 @@ export const defaultRepeatProgress = {
   repeatRange: 1,
 };
 
+const DEFAULT_PLAYBACK_RATE = 1;
+
 const initialState: AudioState = {
   enableAutoScrolling: true,
   isPlaying: false,
@@ -70,6 +73,7 @@ const initialState: AudioState = {
   repeatSettings: defaultRepeatSettings,
   repeatProgress: defaultRepeatProgress,
   isDownloadingAudio: false,
+  playbackRate: DEFAULT_PLAYBACK_RATE,
 };
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -83,6 +87,7 @@ export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
   state.audioPlayerState.isMobileMinimizedForScrolling;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
+export const selectPlaybackRate = (state: RootState) => state.audioPlayerState.playbackRate;
 export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
 export const selectRepeatProgress = (state: RootState) => state.audioPlayerState.repeatProgress;
 export const selectIsInRepeatMode = (state: RootState) => {
@@ -255,6 +260,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       isDownloadingAudio: action.payload,
     }),
+    setPlaybackRate: (state, action: PayloadAction<number>) => ({
+      ...state,
+      playbackRate: action.payload,
+    }),
   },
   // reset reciter to DEFAULT_RECITER
   // WHEN `reset` action is dispatched
@@ -280,6 +289,7 @@ export const {
   setIsDownloadingAudio,
   finishRepeatEachVerseProgress,
   resetRepeatEachVerseProgress,
+  setPlaybackRate,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

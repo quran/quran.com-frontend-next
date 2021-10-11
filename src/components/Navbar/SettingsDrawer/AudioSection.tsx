@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
-import { setPlaybackRate as setAudioPlayerElPlaybackRate } from 'src/components/AudioPlayer/EventTriggers';
 import DataFetcher from 'src/components/DataFetcher';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
@@ -15,6 +14,8 @@ import {
   selectReciter,
   setEnableAutoScrolling,
   setReciterAndPauseAudio,
+  selectPlaybackRate,
+  setPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
@@ -39,7 +40,7 @@ const AudioSection = () => {
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
-  const [playbackRate, setPlayBackRateState] = useState(DEFAULT_PLAYBACK_RATE);
+  const playbackRate = useSelector(selectPlaybackRate);
 
   // given the reciterId, get the full reciter object.
   // and setReciter in redux
@@ -49,9 +50,8 @@ const AudioSection = () => {
     dispatch(setReciterAndPauseAudio(reciter));
   };
 
-  const setPlaybackRate = (value) => {
-    setPlayBackRateState(value as string);
-    setAudioPlayerElPlaybackRate(Number(value));
+  const onPlaybackRateChanged = (value) => {
+    dispatch(setPlaybackRate(Number(value)));
   };
 
   return (
@@ -92,8 +92,8 @@ const AudioSection = () => {
                 id="theme-section"
                 name="theme"
                 options={playbackRates}
-                value={playbackRate}
-                onChange={setPlaybackRate}
+                value={playbackRate.toString()}
+                onChange={onPlaybackRateChanged}
               />
             </Section.Row>
           </Section>
@@ -103,7 +103,15 @@ const AudioSection = () => {
   );
 };
 
-const DEFAULT_PLAYBACK_RATE = '1';
-const playbackRates = generateSelectOptions(['0.5', '1', '1.5', '2']);
+const playbackRates = generateSelectOptions([
+  '0.25',
+  '0.5',
+  '0.75',
+  '1',
+  '1.25',
+  '1.5',
+  '1.75',
+  '2',
+]);
 
 export default AudioSection;
