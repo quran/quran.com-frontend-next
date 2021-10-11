@@ -12,6 +12,7 @@ import { getChapterAudioData } from 'src/api';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
   finishRepeatEachVerseProgress,
+  resetRepeatEachVerseProgress,
   selectAudioData,
   selectIsInRepeatMode,
   selectReciter,
@@ -55,7 +56,8 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
     if (isInRepeatMode) {
       // when in repeatMode, finish the repeat progress for current ayah
       // otherwise the AudioRepeatManager will replay the current Ayah when we set the new timestamp
-      dispatch(finishRepeatEachVerseProgress());
+      if (type === SeekButtonType.NextAyah) dispatch(finishRepeatEachVerseProgress());
+      else dispatch(resetRepeatEachVerseProgress());
     }
     const newVerse = type === SeekButtonType.PrevAyah ? highlightedVerse - 1 : highlightedVerse + 1;
     const verseKey = makeVerseKey(highlightedChapter, newVerse);
