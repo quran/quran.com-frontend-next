@@ -8,14 +8,17 @@ import Section from './Section';
 import DataFetcher from 'src/components/DataFetcher';
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import Select from 'src/components/dls/Forms/Select';
 import {
   selectEnableAutoScrolling,
   selectReciter,
   setEnableAutoScrolling,
   setReciterAndPauseAudio,
+  selectPlaybackRate,
+  setPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
-import { generateRadioItems } from 'src/utils/input';
+import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
@@ -37,6 +40,7 @@ const AudioSection = () => {
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
+  const playbackRate = useSelector(selectPlaybackRate);
 
   // given the reciterId, get the full reciter object.
   // and setReciter in redux
@@ -44,6 +48,10 @@ const AudioSection = () => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
     dispatch(setReciterAndPauseAudio(reciter));
+  };
+
+  const onPlaybackRateChanged = (value) => {
+    dispatch(setPlaybackRate(Number(value)));
   };
 
   return (
@@ -78,11 +86,32 @@ const AudioSection = () => {
                 orientation={RadioGroupOrientation.Horizontal}
               />
             </Section.Row>
+            <Section.Row>
+              <Section.Label>Playback Speed</Section.Label>
+              <Select
+                id="theme-section"
+                name="theme"
+                options={playbackRates}
+                value={playbackRate.toString()}
+                onChange={onPlaybackRateChanged}
+              />
+            </Section.Row>
           </Section>
         )}
       />
     </div>
   );
 };
+
+const playbackRates = generateSelectOptions([
+  '0.25',
+  '0.5',
+  '0.75',
+  '1',
+  '1.25',
+  '1.5',
+  '1.75',
+  '2',
+]);
 
 export default AudioSection;

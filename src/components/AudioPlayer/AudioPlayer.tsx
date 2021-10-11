@@ -20,6 +20,7 @@ import {
   AudioDataStatus,
   selectReciter,
   selectIsMobileMinimizedForScrolling,
+  selectPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 
 const AudioPlayer = () => {
@@ -30,6 +31,7 @@ const AudioPlayer = () => {
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
+  const playbackRate = useSelector(selectPlaybackRate);
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
   }, [dispatch]);
@@ -49,6 +51,18 @@ const AudioPlayer = () => {
       window.audioPlayerEl = audioPlayerElRef.current;
     }
   }, [audioPlayerElRef]);
+
+  // sync playback rate from redux to audioplayer
+  useEffect(() => {
+    if (
+      process.browser &&
+      window &&
+      window.audioPlayerEl &&
+      window.audioPlayerEl.playbackRate !== playbackRate
+    ) {
+      window.audioPlayerEl.playbackRate = playbackRate;
+    }
+  }, [audioPlayerElRef, playbackRate]);
 
   // eventListeners useEffect
   useEffect(() => {
