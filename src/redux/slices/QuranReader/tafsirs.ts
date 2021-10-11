@@ -4,8 +4,8 @@ import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
 import { areArraysEqual } from 'src/utils/array';
 
-// English Mokhtasar and Tafsir Ibn Kathir in English
-export const DEFAULT_TAFSIRS = [171, 169];
+// Tafsir Ibn Kathir in English
+export const DEFAULT_TAFSIRS = [169];
 
 type TafsirsSettings = {
   selectedTafsirs: number[];
