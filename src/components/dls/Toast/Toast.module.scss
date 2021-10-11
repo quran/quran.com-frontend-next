@@ -1,0 +1,17 @@
+.toast {
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--shadow-xlarge);
+}
+.toastContainer {
+  box-shadow: none;
+  --toastify-toast-width: 480px;
+}
+.toastBody {
+  padding: var(--spacing-small);
+  color: var(--color-text-default);
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+}
