@@ -68,7 +68,12 @@ const AudioPlayer = () => {
 
   // sync playback rate from redux to audioplayer
   useEffect(() => {
-    if (process.browser && window && window.audioPlayerEl) {
+    if (
+      process.browser &&
+      window &&
+      window.audioPlayerEl &&
+      window.audioPlayerEl.playbackRate !== playbackRate
+    ) {
       window.audioPlayerEl.playbackRate = playbackRate;
     }
   }, [audioPlayerElRef, playbackRate]);
