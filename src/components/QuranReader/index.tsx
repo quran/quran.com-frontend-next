@@ -13,6 +13,7 @@ import Loader from './Loader';
 import Notes from './Notes/Notes';
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
+import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import ReadingView from './ReadingView';
 import TafsirView from './TafsirView';
 import TranslationView from './TranslationView';
@@ -127,6 +128,7 @@ const QuranReader = ({
         onCopy={(event) => onCopyQuranWords(event, verses)}
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
+        <ReadingPreferenceSwitcher />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}
