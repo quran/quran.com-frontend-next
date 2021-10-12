@@ -2,8 +2,6 @@ import React from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
-import HelperTooltip from '../dls/HelperTooltip/HelperTooltip';
-
 import styles from './RecentReadingSessions.module.scss';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
@@ -21,7 +19,6 @@ const RecentReadingSessions = () => {
         <div className={styles.sessionsContainer}>
           <p className={styles.sessionsHeader}>
             <span>Continue Reading </span>
-            <HelperTooltip>The last verses you read will be saved here</HelperTooltip>
           </p>
           <div className={styles.verseLinksContainer}>
             {verseKeys.map((verseKey, index) => {
