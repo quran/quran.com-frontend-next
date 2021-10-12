@@ -2,7 +2,7 @@
 import {
   ToastContainer as PrimitiveToastContainer,
   toast as primitiveToast,
-  Slide,
+  cssTransition,
 } from 'react-toastify';
 
 import styles from './Toast.module.scss';
@@ -20,19 +20,22 @@ type Options = {
 };
 export const toast = (content: React.ReactNode, options: Options = {}) => {
   primitiveToast(content, {
-    autoClose: false,
     closeButton: options.withCloseButton ? CloseButton : false,
   });
 };
 export const ToastContainer = () => {
   return (
     <PrimitiveToastContainer
-      transition={Slide}
+      transition={cssTransition({
+        enter: `${styles.animate} ${styles.enter}`,
+        exit: `${styles.animate} ${styles.exit}`,
+      })}
       className={styles.toastContainer}
       bodyClassName={styles.toastBody}
       toastClassName={styles.toast}
       position="bottom-right"
       hideProgressBar
+      draggableDirection="y"
     />
   );
 };
