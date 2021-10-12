@@ -4,6 +4,11 @@
 
 .sessionsHeader {
   margin-bottom: var(--spacing-xsmall);
+  display: flex;
+  align-items: center;
+  & > span {
+    margin-right: var(--spacing-xxsmall);
+  }
 }
 
 .verseLinksContainer {

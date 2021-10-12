@@ -17,7 +17,9 @@ const RecentReadingSessions = () => {
     <>
       {verseKeys.length > 0 && (
         <div className={styles.sessionsContainer}>
-          <p className={styles.sessionsHeader}>Continue Reading</p>
+          <p className={styles.sessionsHeader}>
+            <span>Continue Reading </span>
+          </p>
           <div className={styles.verseLinksContainer}>
             {verseKeys.map((verseKey, index) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
