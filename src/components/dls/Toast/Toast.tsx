@@ -7,24 +7,45 @@ import {
 
 import styles from './Toast.module.scss';
 
-import Button from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
-const CloseButton = ({ closeToast }) => (
-  <div className={styles.closeButton}>
-    <Button onClick={closeToast}>Close</Button>
-  </div>
-);
-
+type Action = {
+  text: string;
+  onClick?: () => void;
+  primary?: boolean;
+};
 type Options = {
-  withCloseButton?: boolean;
   preserve?: boolean;
+  actions?: Action[];
 };
 const TOAST_DELAY = 3000; // 3 second
 export const toast = (content: React.ReactNode, options: Options = {}) => {
-  primitiveToast(content, {
-    autoClose: options.preserve ? false : TOAST_DELAY,
-    closeButton: options.withCloseButton ? CloseButton : false,
-  });
+  const toastId = primitiveToast(
+    <div className={styles.contentContainer}>
+      {content}
+      {options.actions && (
+        <div className={styles.actionsContainer}>
+          {options.actions.map((action) => (
+            <Button
+              type={action.primary ? ButtonType.Primary : ButtonType.Secondary}
+              className={styles.action}
+              size={ButtonSize.Small}
+              onClick={() => {
+                primitiveToast.dismiss(toastId);
+                action.onClick?.();
+              }}
+            >
+              {action.text}
+            </Button>
+          ))}
+        </div>
+      )}
+    </div>,
+    {
+      autoClose: options.preserve ? false : TOAST_DELAY,
+      closeButton: false,
+    },
+  );
 };
 export const ToastContainer = () => {
   return (

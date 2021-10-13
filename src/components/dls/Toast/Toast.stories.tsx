@@ -28,7 +28,55 @@ export const Preserve = () => {
 };
 
 export const WithCloseButton = () => {
-  const notify = () => toast('The Evil Rabbit jumped over the fence.', { withCloseButton: true });
+  const notify = () =>
+    toast('The Evil Rabbit jumped over the fence.', {
+      actions: [{ text: 'close' }],
+    });
+  return (
+    <div>
+      <Button onClick={notify}>Notify!</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export const WithAction = () => {
+  const notify = () =>
+    toast('The Evil Rabbit jumped over the fence.', {
+      actions: [
+        {
+          text: 'undo',
+          primary: true,
+          onClick: () => {
+            // do nothing
+          },
+        },
+      ],
+    });
+  return (
+    <div>
+      <Button onClick={notify}>Notify!</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export const WithActionAndCloseButton = () => {
+  const notify = () =>
+    toast('The Evil Rabbit jumped over the fence.', {
+      actions: [
+        {
+          text: 'undo',
+          onClick: () => {
+            // do nothing
+          },
+          primary: true,
+        },
+        {
+          text: 'close',
+        },
+      ],
+    });
   return (
     <div>
       <Button onClick={notify}>Notify!</Button>
