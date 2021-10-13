@@ -20,6 +20,7 @@ type Options = {
 };
 export const toast = (content: React.ReactNode, options: Options = {}) => {
   primitiveToast(content, {
+    autoClose: false,
     closeButton: options.withCloseButton ? CloseButton : false,
   });
 };

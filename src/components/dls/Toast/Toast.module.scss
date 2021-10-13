@@ -44,20 +44,10 @@
   left: 0;
   right: 0;
 
-  &:nth-last-child(2) {
-    transform: translate3d(0, -14px, 0) scale(0.95);
-  }
-
-  &:nth-last-child(3) {
-    transform: translate3d(0, -28px, 0) scale(0.9);
-  }
-
-  &:nth-last-child(4) {
-    transform: translate3d(0, -36px, 0) scale(0.85);
-  }
-
-  &:nth-last-child(5) {
-    transform: translate3d(0, -46px, 0) scale(0.8);
+  @for $i from 2 through 5 {
+    &:nth-last-child(#{$i}) {
+      transform: translate3d(0, #{$i * -7}px, 0) scale(#{(100 - $i) / 100});
+    }
   }
 
   &:nth-last-child(n + 4) {
@@ -69,12 +59,10 @@
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
 
-  &:nth-last-child(2) {
-    transform: translate3d(0, -80px, 0) scale(1);
-  }
-
-  &:nth-last-child(3) {
-    transform: translate3d(0, -160px, 0) scale(1);
+  @for $i from 2 through 3 {
+    &:nth-last-child(#{$i}) {
+      transform: translate3d(0, #{($i - 1) * -80}px, 0) scale(1);
+    }
   }
 }
 
