@@ -17,10 +17,12 @@ const CloseButton = ({ closeToast }) => (
 
 type Options = {
   withCloseButton?: boolean;
+  preserve?: boolean;
 };
+const TOAST_DELAY = 3000; // 3 second
 export const toast = (content: React.ReactNode, options: Options = {}) => {
   primitiveToast(content, {
-    autoClose: false,
+    autoClose: options.preserve ? false : TOAST_DELAY,
     closeButton: options.withCloseButton ? CloseButton : false,
   });
 };

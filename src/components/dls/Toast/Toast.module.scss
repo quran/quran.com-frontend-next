@@ -36,6 +36,7 @@
 
 // toast hover transition
 .toast {
+  margin: 0 var(--spacing-xxsmall);
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-xlarge);
   transition: transform 0.4s, opacity 0.4s ease;
