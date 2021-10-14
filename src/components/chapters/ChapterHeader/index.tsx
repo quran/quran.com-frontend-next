@@ -10,6 +10,7 @@ import ChapterIconContainer, {
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
 import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { getChapterData } from 'src/utils/chapter';
@@ -23,7 +24,6 @@ interface Props {
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
-const OBSERVER_NAME = 'quranReaderObserver';
 
 const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) => {
   const headerRef = useRef(null);
@@ -32,7 +32,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
    * of the current chapter is being read when the ChapterHeader appears within
    * the intersection observer root's borders.
    */
-  useIntersectionObserver(headerRef, OBSERVER_NAME);
+  useIntersectionObserver(headerRef, QURAN_READER_OBSERVER_ID);
   const chapterData = getChapterData(chapterId);
 
   const translatedName = chapterData.translatedName.name;

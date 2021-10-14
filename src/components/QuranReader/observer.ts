@@ -10,6 +10,7 @@
  */
 const DEFAULT_ROOT_MARGIN = '-131.6px 0px -68% 0px';
 const OBSERVER_THRESHOLD = 0.1;
+export const QURAN_READER_OBSERVER_ID = 'quranReaderObserver';
 /**
  * the top -115.6px was calculated based on:
  *

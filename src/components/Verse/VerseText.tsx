@@ -3,6 +3,8 @@ import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
+
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
@@ -20,10 +22,9 @@ type VerseTextProps = {
   isHighlighted?: boolean;
 };
 
-const OBSERVER_NAME = 'quranReaderObserver';
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const textRef = useRef(null);
-  useIntersectionObserver(textRef, OBSERVER_NAME);
+  useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,

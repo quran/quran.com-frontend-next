@@ -5,24 +5,24 @@ import { RefObject, useEffect } from 'react';
  * that will use the global observer that had been created by the above hook to observe an element.
  *
  * @param {RefObject<Element>} elementRef the ref of the object that will be observed.
- * @param {string} observerName the name of the global observer that the element wants to use.
+ * @param {string} observerId the name of the global observer that the element wants to use.
  */
-const useObserveElement = (elementRef: RefObject<Element>, observerName: string) => {
+const useObserveElement = (elementRef: RefObject<Element>, observerId: string) => {
   useEffect(() => {
     const node = elementRef?.current; // DOM Ref
     const hasIOSupport = !!window.IntersectionObserver;
     if (!hasIOSupport || !node) return undefined;
 
     // in-case useGlobalIntersectionObserver hasn't been used.
-    if (window[observerName]) {
-      window[observerName].observe(node);
+    if (window[observerId]) {
+      window[observerId].observe(node);
     }
     return () => {
-      if (window[observerName]) {
-        window[observerName].unobserve(node);
+      if (window[observerId]) {
+        window[observerId].unobserve(node);
       }
     };
-  }, [elementRef, observerName]);
+  }, [elementRef, observerId]);
 };
 
 export default useObserveElement;

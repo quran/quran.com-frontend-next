@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -12,7 +13,7 @@ import EndOfScrollingControls from './EndOfScrollingControls';
 import Loader from './Loader';
 import Loading from './Loading';
 import Notes from './Notes/Notes';
-import { getObservedVersePayload, getOptions } from './observer';
+import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
@@ -43,7 +44,6 @@ type QuranReaderProps = {
 };
 
 const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
-const OBSERVER_NAME = 'quranReaderObserver';
 const QuranReader = ({
   initialData,
   id,
@@ -97,7 +97,11 @@ const QuranReader = ({
     },
     [dispatch],
   );
-  useGlobalIntersectionObserver(getOptions(isReadingPreference), onElementVisible, OBSERVER_NAME);
+  useGlobalIntersectionObserver(
+    getOptions(isReadingPreference),
+    onElementVisible,
+    QURAN_READER_OBSERVER_ID,
+  );
   // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
   if (!data) {
     return (

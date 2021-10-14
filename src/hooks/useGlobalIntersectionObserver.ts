@@ -9,12 +9,12 @@ import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
  *
  * @param {IntersectionObserverInit} options
  * @param {(element:Element)=>void} onElementVisible
- * @param {string} observerName the name of the observer
+ * @param {string} observerId the name of the observer
  */
 const useGlobalIntersectionObserver = (
   { threshold = 1, root = null, rootMargin = '0%' }: IntersectionObserverInit,
   onElementVisible: (element: Element) => void,
-  observerName: string,
+  observerId: string,
 ) => {
   const updateEntry = useCallback(
     (entries: IntersectionObserverEntry[]): void => {
@@ -36,18 +36,18 @@ const useGlobalIntersectionObserver = (
     if (!hasIOSupport) return undefined;
 
     // no need to create a new observer if it already exists.
-    if (!window[observerName]) {
-      window[observerName] = new IntersectionObserver(updateEntry, {
+    if (!window[observerId]) {
+      window[observerId] = new IntersectionObserver(updateEntry, {
         threshold,
         root,
         rootMargin,
       });
     }
     return () => {
-      window[observerName].disconnect();
-      window[observerName] = undefined;
+      window[observerId].disconnect();
+      window[observerId] = undefined;
     };
-  }, [root, rootMargin, threshold, updateEntry, observerName]);
+  }, [root, rootMargin, threshold, updateEntry, observerId]);
 };
 
 export default useGlobalIntersectionObserver;
