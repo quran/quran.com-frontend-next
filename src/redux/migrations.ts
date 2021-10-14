@@ -1,5 +1,6 @@
 import { defaultRepeatProgress, defaultRepeatSettings } from './slices/AudioPlayer/state';
 import { DEFAULT_TAFSIRS } from './slices/QuranReader/tafsirs';
+import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { MushafLines } from 'types/QuranReader';
 
@@ -67,5 +68,9 @@ export default {
       ...state.tafsirs,
       selectedTafsirs: DEFAULT_TAFSIRS, // over-ride the current value to only include 169 ID and remove 171
     },
+  }),
+  12: (state) => ({
+    ...state,
+    welcomeMessage: welcomeMessageInitialState,
   }),
 };
