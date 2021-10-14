@@ -16,7 +16,6 @@ import {
 
 const HomePageWelcomeMessage = () => {
   const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
-  console.log(isVisible);
   const dispatch = useDispatch();
 
   if (!isVisible) return null;
@@ -37,7 +36,7 @@ const HomePageWelcomeMessage = () => {
         </Link>
       </p>
       <p className={styles.link}>
-        <Link variant={LinkVariant.Blend} href="https://discord.gg/H62eG8ss">
+        <Link variant={LinkVariant.Blend} href="https://discord.gg/FxRWSBfWxn">
           Join Discord Community
         </Link>
       </p>
