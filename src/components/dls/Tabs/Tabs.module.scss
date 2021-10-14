@@ -1,5 +1,7 @@
 .container {
   display: flex;
+}
+.hasBorderBottom {
   border-bottom: 1px solid var(--color-borders-hairline);
 }
 
@@ -13,6 +15,6 @@
 }
 
 .tabItemSelected {
-  border-bottom: 2px solid var(--color-text-default);
+  border-bottom: 2px solid var(--color-success-medium);
   position: relative;
 }

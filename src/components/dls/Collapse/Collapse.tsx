@@ -20,7 +20,7 @@ type ItemProps = {
 const Item = ({ title, children, id, headerAction }: ItemProps) => (
   <Accordion.Item value={id} className={styles.item}>
     <Accordion.Header className={styles.header}>
-      {headerAction}
+      {headerAction && <div className={styles.headerActionContainer}>{headerAction}</div>}
       <Accordion.Trigger className={styles.trigger}>
         <span className={styles.chevronIconWrapper}>
           <ChevronDownIcon />

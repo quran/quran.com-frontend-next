@@ -16,6 +16,7 @@ export const Preview = () => {
         <Collapse.Item
           headerAction={
             <Tabs
+              hasBorderBottom={false}
               tabs={[
                 { title: 'Surah', value: 'surah' },
                 { title: 'Juz', value: 'juz' },
@@ -26,6 +27,7 @@ export const Preview = () => {
             />
           }
           id="test1"
+          title="Surah"
         >
           test
         </Collapse.Item>
