@@ -1,16 +1,17 @@
-import React, { useMemo, useRef, useEffect } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
+
+import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import useIntersectionObserver from 'src/hooks/useIntersectionObserver';
+import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import Word from 'types/Word';
@@ -21,31 +22,9 @@ type VerseTextProps = {
   isHighlighted?: boolean;
 };
 
-const READING_MODE_ROOT_MARGIN = '-10% 0px -85% 0px';
-const DEFAULT_ROOT_MARGIN = '-23% 0px -72% 0px';
-const OBSERVER_THRESHOLD = 0.01;
-
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const textRef = useRef(null);
-  const dispatch = useDispatch();
-  const intersectionObserverEntry = useIntersectionObserver(textRef, {
-    rootMargin: isReadingMode ? READING_MODE_ROOT_MARGIN : DEFAULT_ROOT_MARGIN,
-    threshold: OBSERVER_THRESHOLD,
-  });
-  useEffect(() => {
-    if (intersectionObserverEntry && intersectionObserverEntry.isIntersecting) {
-      const verseTextNode = intersectionObserverEntry.target;
-      dispatch({
-        type: setLastReadVerse.type,
-        payload: {
-          verseKey: verseTextNode.getAttribute('data-verse-key'),
-          chapterId: verseTextNode.getAttribute('data-chapter-id'),
-          page: verseTextNode.getAttribute('data-page'),
-          hizb: verseTextNode.getAttribute('data-hizb'),
-        },
-      });
-    }
-  }, [dispatch, intersectionObserverEntry]);
+  useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
