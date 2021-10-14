@@ -1,0 +1,89 @@
+// animations
+@mixin transform {
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes slideOutDown {
+  from {
+    @include transform;
+  }
+  to {
+    visibility: hidden;
+    transform: translate3d(0, 500px, 0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 110%, 0);
+    visibility: visible;
+  }
+  to {
+    @include transform;
+  }
+}
+
+.animate {
+  animation-fill-mode: both;
+  animation-duration: 0.3s;
+}
+.enter {
+  animation-name: slideInUp;
+}
+.exit {
+  animation-name: slideOutDown;
+}
+
+// toast hover transition
+.toast {
+  margin: 0 var(--spacing-xxsmall);
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--shadow-xlarge);
+  transition: transform 0.4s, opacity 0.4s ease;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @for $i from 2 through 5 {
+    &:nth-last-child(#{$i}) {
+      transform: translate3d(0, #{$i * -7}px, 0) scale(#{(100 - $i) / 100});
+    }
+  }
+
+  &:nth-last-child(n + 4) {
+    visibility: hidden;
+  }
+}
+
+.toastContainer:hover > .toast {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+
+  @for $i from 2 through 3 {
+    &:nth-last-child(#{$i}) {
+      transform: translate3d(0, #{($i - 1) * -80}px, 0) scale(1);
+    }
+  }
+}
+
+// toast style
+.toastContainer {
+  box-shadow: none;
+  --toastify-toast-width: 480px;
+  min-height: calc(10 * var(--spacing-large));
+}
+
+.contentContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionsContainer {
+  display: flex;
+}
+
+.actionsContainer > .action + .action {
+  margin-left: var(--spacing-xxsmall);
+}

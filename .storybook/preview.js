@@ -1,3 +1,4 @@
+import ReactToastifyCSS from 'react-toastify/dist/ReactToastify.css';
 import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
@@ -7,6 +8,7 @@ const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
   return (
     <>
+      <link rel="stylesheet" href={ReactToastifyCSS} />
       <link rel="stylesheet" href={GlobalFonts} />
       <link rel="stylesheet" href={ResetCSS} />
       <link rel="stylesheet" href={Theme} />
