@@ -4,5 +4,6 @@ export {};
 declare global {
   interface Window {
     audioPlayerEl: HTMLAudioElement; // Global audio player element reference
+    quranReaderObserver: IntersectionObserver;
   }
 }
