@@ -1,6 +1,24 @@
 .container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--color-borders-hairline);
+  padding: var(--spacing-medium) var(--spacing-large);
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
+
+  &:hover {
+    .surahNumber {
+      background-color: var(--color-success-medium);
+      color: var(--color-text-inverse);
+    }
+    .translatedSurahName {
+      color: var(--color-success-medium);
+    }
+    .verseCount {
+      color: var(--color-success-medium);
+    }
+  }
 }
 
 .surahNumber {
@@ -8,10 +26,44 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(1.5 * var(--spacing-mega));
-  height: calc(1.5 * var(--spacing-mega));
+  width: calc(2.5 * var(--spacing-medium));
+  height: calc(2.5 * var(--spacing-medium));
+  border-radius: var(--border-radius-default);
+  transform: rotate(45deg);
+  margin-right: var(--spacing-large);
+  & > span {
+    transform: rotate(-45deg);
+    font-weight: var(--font-weight-bold);
+  }
 }
 .surahNameContainer {
   display: flex;
   flex-direction: column;
+}
+.translatedSurahName {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+}
+
+.surahName {
+  font-weight: var(--font-weight-bold);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.verseCount {
+  text-align: right;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-text-faded);
 }

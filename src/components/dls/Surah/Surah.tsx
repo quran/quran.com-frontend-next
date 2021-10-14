@@ -1,4 +1,7 @@
 import styles from './Surah.module.scss';
+
+import ChapterIconContainer from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
+
 // TODO: find a better naming
 type SurahProps = {
   surahNumber: number;
@@ -16,14 +19,20 @@ const Surah = ({
 }: SurahProps) => {
   return (
     <div className={styles.container}>
-      <div className={styles.surahNumber}>{surahNumber}</div>
-      <div className={styles.surahNameContainer}>
-        <div className={styles.surahName}>{surahName}</div>
-        <div className={styles.translatedSurahName}>{translatedSurahName}</div>
+      <div className={styles.left}>
+        <div className={styles.surahNumber}>
+          <span>{surahNumber}</span>
+        </div>
+        <div className={styles.surahNameContainer}>
+          <div className={styles.surahName}>{surahName}</div>
+          <div className={styles.translatedSurahName}>{translatedSurahName}</div>
+        </div>
       </div>
-      <div>
-        <div>{chapterId} logo</div>
-        <div>{verseCount}</div>
+      <div className={styles.right}>
+        <div>
+          <ChapterIconContainer chapterId={chapterId.toString()} hasSurahPrefix={false} />
+        </div>
+        <div className={styles.verseCount}>{verseCount} Ayahs</div>
       </div>
     </div>
   );
