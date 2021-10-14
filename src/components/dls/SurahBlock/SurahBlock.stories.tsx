@@ -12,7 +12,6 @@ export const Example = () => (
       translatedSurahName="Mankind"
       chapterId={114}
       surahNumber={114}
-      verseCount={4}
     />
   </div>
 );
