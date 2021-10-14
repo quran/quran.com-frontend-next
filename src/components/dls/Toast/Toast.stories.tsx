@@ -8,7 +8,7 @@ export default {
 };
 
 export const Normal = () => {
-  const notify = () => toast('The Evil Rabbit jumped over the fence.');
+  const notify = () => toast('This is a toast message');
   return (
     <div>
       <Button onClick={notify}>Notify!</Button>
@@ -18,7 +18,7 @@ export const Normal = () => {
 };
 
 export const Preserve = () => {
-  const notify = () => toast('The Evil Rabbit jumped over the fence.', { preserve: true });
+  const notify = () => toast('This is a toast message', { preserve: true });
   return (
     <div>
       <Button onClick={notify}>Notify!</Button>
@@ -29,7 +29,7 @@ export const Preserve = () => {
 
 export const WithCloseButton = () => {
   const notify = () =>
-    toast('The Evil Rabbit jumped over the fence.', {
+    toast('This is a toast message', {
       actions: [{ text: 'close' }],
     });
   return (
@@ -42,7 +42,7 @@ export const WithCloseButton = () => {
 
 export const WithAction = () => {
   const notify = () =>
-    toast('The Evil Rabbit jumped over the fence.', {
+    toast('This is a toast message', {
       actions: [
         {
           text: 'undo',
@@ -63,7 +63,7 @@ export const WithAction = () => {
 
 export const WithActionAndCloseButton = () => {
   const notify = () =>
-    toast('The Evil Rabbit jumped over the fence.', {
+    toast('This is a toast message', {
       actions: [
         {
           text: 'undo',

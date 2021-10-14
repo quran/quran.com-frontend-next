@@ -18,7 +18,7 @@ type Options = {
   preserve?: boolean;
   actions?: Action[];
 };
-const TOAST_DELAY = 3000; // 3 second
+const TOAST_DURATION = 3000; // 3 second
 export const toast = (content: React.ReactNode, options: Options = {}) => {
   const toastId = primitiveToast(
     <div className={styles.contentContainer}>
@@ -42,7 +42,7 @@ export const toast = (content: React.ReactNode, options: Options = {}) => {
       )}
     </div>,
     {
-      autoClose: options.preserve ? false : TOAST_DELAY,
+      autoClose: options.preserve ? false : TOAST_DURATION,
       closeButton: false,
     },
   );
