@@ -9,6 +9,7 @@ import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import usePreventBodyScrolling from 'src/hooks/usePreventBodyScrolling';
 import {
   Navbar,
   selectNavbar,
@@ -67,8 +68,8 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
-  const { isVisible } = navbar;
   const isOpen = getIsOpen(type, navbar);
+  usePreventBodyScrolling(isOpen);
   const router = useRouter();
 
   const closeDrawer = useCallback(() => {
@@ -90,7 +91,6 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
     <div
       className={classNames(styles.container, {
         [styles.containerOpen]: isOpen,
-        [styles.hiddenNavbar]: !isVisible,
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
       })}
