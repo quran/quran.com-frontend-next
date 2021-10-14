@@ -33,7 +33,13 @@ const Footer = () => (
           </Link>
         </div>
       </div>
-      <div className={styles.copyright}>© 2021 Quran.com. All Rights Reserved</div>
+      <div className={styles.copyright}>
+        © 2021{' '}
+        <Link href="https://quran.com" variant={LinkVariant.Highlight}>
+          Quran.com
+        </Link>
+        . All Rights Reserved
+      </div>
     </div>
   </div>
 );
