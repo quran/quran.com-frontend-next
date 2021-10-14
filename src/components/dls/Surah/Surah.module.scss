@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.surahNumber {
+  background-color: var(--color-background-alternative-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(1.5 * var(--spacing-mega));
+  height: calc(1.5 * var(--spacing-mega));
+}
+.surahNameContainer {
+  display: flex;
+  flex-direction: column;
+}
