@@ -9,17 +9,10 @@ type SurahProps = {
   surahNumber: number;
   surahName: string;
   translatedSurahName: string;
-  verseCount: number;
   chapterId: number;
 };
 
-const SurahBlock = ({
-  chapterId,
-  surahName,
-  surahNumber,
-  translatedSurahName,
-  verseCount,
-}: SurahProps) => {
+const SurahBlock = ({ chapterId, surahName, surahNumber, translatedSurahName }: SurahProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
