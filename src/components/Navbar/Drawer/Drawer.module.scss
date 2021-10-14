@@ -29,11 +29,6 @@
       right: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
-  &.hiddenNavbar {
-    @include breakpoints.smallerThanTablet {
-      transform: translateY(constants.$navbar-height);
-    }
-  }
 }
 
 .containerOpen {
