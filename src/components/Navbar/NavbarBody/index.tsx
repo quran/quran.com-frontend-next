@@ -50,12 +50,11 @@ const NavbarBody: React.FC = () => {
             <NavigationDrawer />
           </>
           <Link href="/">
-            <a>
-              <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-                <IconQ />
-              </Button>
+            <a className={styles.logoWrapper}>
+              <IconQ />
             </a>
           </Link>
+          <div className={styles.betaLabel}>BETA</div>
           <LanguageSelector />
         </div>
       </div>

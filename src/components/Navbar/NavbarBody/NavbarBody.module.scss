@@ -15,6 +15,7 @@
 .leftCTA {
   display: flex;
   margin-left: var(--spacing-medium);
+  align-items: center;
 
   @include breakpoints.tablet {
     margin-left: var(--spacing-mega);
@@ -35,5 +36,25 @@
     > button {
       margin-left: var(--spacing-xsmall);
     }
+  }
+}
+
+.betaLabel {
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-medium);
+  color: var(--color-success-medium);
+  font-size: var(--font-size-small);
+  padding: calc(2 / 3 * var(--spacing-xxsmall))
+    calc(3 / 2 * var(--spacing-xxsmall));
+  font-weight: var(--font-weight-bold);
+  margin-left: var(--spacing-xsmall);
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  & > svg {
+    width: calc(1.5 * var(--spacing-medium));
+    height: calc(1.5 * var(--spacing-medium));
   }
 }
