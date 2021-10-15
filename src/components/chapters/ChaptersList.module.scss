@@ -48,7 +48,12 @@
 }
 
 .masonry {
-  column-count: 4;
+  @include breakpoints.tablet {
+    column-count: 2;
+  }
+  @include breakpoints.desktop {
+    column-count: 3;
+  }
   column-gap: 1em;
 }
 
