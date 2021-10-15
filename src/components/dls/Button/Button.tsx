@@ -18,6 +18,7 @@ export enum ButtonSize {
 export enum ButtonShape {
   Square = 'square',
   Circle = 'circle',
+  Pill = 'pill',
 }
 
 export enum ButtonType {
@@ -83,6 +84,7 @@ const Button: React.FC<ButtonProps> = ({
     // shape
     [styles.square]: shape === ButtonShape.Square,
     [styles.circle]: shape === ButtonShape.Circle,
+    [styles.pill]: shape === ButtonShape.Pill,
 
     // variant
     [styles.shadow]: variant === ButtonVariant.Shadow,
