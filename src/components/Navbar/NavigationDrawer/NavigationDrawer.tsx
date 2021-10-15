@@ -2,7 +2,7 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import IconQ from '../../../../public/icons/Q.svg';
+import IconQ from '../../../../public/icons/Q_simple.svg';
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 
 import MobileApps from './MobileApps';

@@ -12,8 +12,7 @@ import ChaptersAndJuzsList from 'src/components/chapters/ChaptersList';
 import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 import Footer from 'src/components/dls/Footer/Footer';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
-import QuickLinks from 'src/components/HomePage/QuickLinks';
-import BookmarkedVersesList from 'src/components/Verses/BookmarkedVersesList';
+import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { ChaptersResponse } from 'types/ApiResponses';
@@ -42,10 +41,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
         <RecentReadingSessions />
       </div>
       <div className={styles.flowItem} data-mobile-view="full">
-        <QuickLinks />
-      </div>
-      <div className={styles.flowItem}>
-        <BookmarkedVersesList />
+        <BookmarksAndQuickLinks />
       </div>
       <div className={styles.flowItem}>
         <ChaptersAndJuzsList chapters={chapters} />
