@@ -25,7 +25,7 @@ $list-max-width: 80rem;
   margin: 0 auto;
 
   @include breakpoints.tablet {
-    max-width: 80%;
+    width: 80%;
   }
 
   --flow-side-spacing: var(--spacing-small);
