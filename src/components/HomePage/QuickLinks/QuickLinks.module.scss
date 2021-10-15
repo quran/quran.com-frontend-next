@@ -19,9 +19,7 @@
 
 .button {
   margin: 0 var(--spacing-micro);
-  @include breakpoints.smallerThanTablet {
-    > span {
-      width: max-content;
-    }
+  > span {
+    width: max-content;
   }
 }
