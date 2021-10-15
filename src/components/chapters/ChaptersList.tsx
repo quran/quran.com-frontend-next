@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import Link from '../dls/Link/Link';
+import Link, { LinkVariant } from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
 
@@ -56,7 +56,9 @@ const ChaptersAndJuzsList: React.FC<Props> = ({ chapters }: Props) => {
             const chapterIds = getChapterIdsForJuz(juzId);
             return (
               <div className={styles.juzContainer}>
-                <div className={styles.juzTitle}>Juz {juzId}</div>
+                <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
+                  <div className={styles.juzTitle}>Juz {juzId}</div>
+                </Link>
                 {chapterIds.map((chapterId) => {
                   const chapter = getChapterData(chapterId);
                   return (
