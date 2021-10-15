@@ -1,9 +1,11 @@
 @use "src/styles/utility";
+$surahIconHeight: calc(6 * var(--spacing-medium));
+$containerMaxWidth: calc(5 * var(--spacing-mega));
 
 .container {
   display: flex;
   flex-direction: column;
-  max-width: calc(5 * var(--spacing-mega));
+  max-width: $containerMaxWidth;
   border: 1px solid var(--color-borders-hairline);
   padding: var(--spacing-medium);
   border-radius: var(--border-radius-default);
@@ -21,7 +23,7 @@
 }
 
 .surahIcon {
-  height: calc(6 * var(--spacing-medium));
+  height: $surahIconHeight;
   display: flex;
   flex-direction: column;
   justify-content: center;
