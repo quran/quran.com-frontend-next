@@ -59,8 +59,8 @@ const Page = ({ verses, page }: PageProps) => {
  * @param {PageProps} nextProps
  * @returns {boolean}
  */
-const areEqual = (prevProps: PageProps, nextProps: PageProps): boolean => {
+const arePagesEqual = (prevProps: PageProps, nextProps: PageProps): boolean => {
   return prevProps.page === nextProps.page && prevProps.verses.length === nextProps.verses.length;
 };
 
-export default memo(Page, areEqual);
+export default memo(Page, arePagesEqual);

@@ -62,7 +62,7 @@ const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => {
  * @param {LineProps} nextProps
  * @returns {boolean}
  */
-const areEqual = (prevProps: LineProps, nextProps: LineProps): boolean => {
+const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean => {
   return (
     prevProps.lineKey === nextProps.lineKey &&
     prevProps.words.length === nextProps.words.length &&
@@ -70,4 +70,4 @@ const areEqual = (prevProps: LineProps, nextProps: LineProps): boolean => {
   );
 };
 
-export default memo(Line, areEqual);
+export default memo(Line, areLinesEqual);

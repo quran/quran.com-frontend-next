@@ -111,11 +111,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse }) => {
  * @param {TranslationViewCellProps} nextProps
  * @returns {boolean}
  */
-const areEqual = (
+const areVersesEqual = (
   prevProps: TranslationViewCellProps,
   nextProps: TranslationViewCellProps,
 ): boolean => {
   return prevProps.verse.id === nextProps.verse.id;
 };
 
-export default memo(TranslationViewCell, areEqual);
+export default memo(TranslationViewCell, areVersesEqual);

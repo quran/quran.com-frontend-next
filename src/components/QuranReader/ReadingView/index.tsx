@@ -37,7 +37,7 @@ const ReadingView = ({ verses }: ReadingViewProps) => {
  * @param {ReadingViewProps} nextProps
  * @returns {boolean}
  */
-const areEqual = (prevProps: ReadingViewProps, nextProps: ReadingViewProps): boolean => {
+const areVersesEqual = (prevProps: ReadingViewProps, nextProps: ReadingViewProps): boolean => {
   return prevProps.verses.length === nextProps.verses.length;
 };
-export default memo(ReadingView, areEqual);
+export default memo(ReadingView, areVersesEqual);
