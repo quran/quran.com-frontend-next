@@ -1,13 +1,18 @@
 .group {
 }
 .header {
+  &:hover {
+    background-color: var(--color-background-alternative-faded);
+  }
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: calc(3 * var(--spacing-medium));
 }
 
 .chevronIconWrapper {
+  color: var(--color-text-faded);
   transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
   [data-state="open"] > & {
     transform: rotate(180deg);
@@ -33,7 +38,7 @@
 
 .content {
   overflow: hidden;
-  height: var(--spacing-mega);
+  padding: var(--spacing-xsmall) var(--spacing-xxsmall);
   &[data-state="open"] {
     animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
   }
