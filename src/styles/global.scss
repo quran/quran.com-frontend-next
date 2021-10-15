@@ -17,6 +17,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// https://github.com/twbs/bootstrap/blob/b991a6b8510216ba25cff02e0cc6c338f9f76113/scss/_reboot.scss#L420
+// inherit font-family in these elements
+input,
+button,
+select,
+optgroup,
+textarea {
+  font-family: inherit;
+}
+
 a {
   color: var(--color-text-default);
 }

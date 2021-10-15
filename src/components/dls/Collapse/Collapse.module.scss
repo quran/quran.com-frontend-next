@@ -38,7 +38,7 @@
 
 .content {
   overflow: hidden;
-  padding: var(--spacing-xsmall) var(--spacing-xxsmall);
+  padding: var(--spacing-xsmall) 0;
   &[data-state="open"] {
     animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
   }
@@ -60,4 +60,5 @@
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }

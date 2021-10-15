@@ -7,7 +7,7 @@
 
 .tabItem {
   cursor: pointer;
-  padding: var(--spacing-xxsmall);
+  padding: var(--spacing-xxsmall) 0;
 }
 .tabItem + .tabItem {
   margin-left: var(--spacing-xxsmall);

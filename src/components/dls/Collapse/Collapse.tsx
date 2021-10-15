@@ -19,13 +19,17 @@ type ItemProps = {
 };
 const Item = ({ title, children, id, headerAction }: ItemProps) => (
   <Accordion.Item value={id} className={styles.item}>
-    <Accordion.Header className={styles.header}>
-      {headerAction && <div className={styles.headerActionContainer}>{headerAction}</div>}
-      <Accordion.Trigger className={styles.trigger}>
-        <span className={styles.chevronIconWrapper}>
-          <ChevronDownIcon />
-        </span>
-        {title}
+    <Accordion.Header>
+      <Accordion.Trigger asChild>
+        <div className={styles.header}>
+          {headerAction && <div className={styles.headerActionContainer}>{headerAction}</div>}
+          <div className={styles.trigger}>
+            <span className={styles.chevronIconWrapper}>
+              <ChevronDownIcon />
+            </span>
+            {title}
+          </div>
+        </div>
       </Accordion.Trigger>
     </Accordion.Header>
     <Accordion.Content className={styles.content}>{children}</Accordion.Content>
