@@ -4,6 +4,8 @@
 //    - https://cube.fyi/composition.html#examples (looks like vercel is using similar pattern like this)
 //    - https://cube.fyi/exception.html#why-data-attributes
 
+@use "src/styles/utility";
+
 .base {
   border: none;
   display: flex;
@@ -207,11 +209,7 @@
   background-color: transparent;
   border: none;
   &:hover {
-    background-image: linear-gradient(
-      to right,
-      var(--color-background-lighten),
-      var(--color-background-lighten)
-    );
+    @include utility.lighten-background-color;
   }
 }
 .ghost.primary {
