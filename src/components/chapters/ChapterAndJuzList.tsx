@@ -2,43 +2,76 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
+import CaretDownIcon from '../../../public/icons/caret-down.svg';
 import Link, { LinkVariant } from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
 
-import styles from './ChaptersList.module.scss';
+import styles from './ChapterAndJuzList.module.scss';
 
 import { getChapterData, getChapterIdsForJuz } from 'src/utils/chapter';
+import { getJuzIds } from 'src/utils/juz';
 import Chapter from 'types/Chapter';
 
 type Props = {
   chapters: Chapter[];
 };
 
+const juzIds = getJuzIds();
+
+enum Sort {
+  ASC = 'ascending',
+  DESC = 'descending',
+}
+enum View {
+  Surah = 'surah',
+  juz = 'juz',
+}
+
 const tabs = [
-  { title: 'Surah', value: 'chapter' },
-  { title: 'Juz', value: 'juz' },
+  { title: 'Surah', value: View.Surah },
+  { title: 'Juz', value: View.juz },
 ];
 
-// @ts-ignore
-const juzs = [...Array(30).keys()].map((n) => n + 1);
+const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
+  const [view, setView] = useState(View.Surah);
+  const [sortBy, setSortBy] = useState(Sort.ASC);
 
-const ChaptersAndJuzsList: React.FC<Props> = ({ chapters }: Props) => {
-  const [view, setView] = useState('juz');
+  const onSort = () => {
+    setSortBy((prevValue) => (prevValue === Sort.DESC ? Sort.ASC : Sort.DESC));
+  };
+
+  const sortedChapters =
+    sortBy === Sort.DESC ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id)) : chapters;
 
   return (
     <>
       <div className={styles.tabsContainer}>
-        <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView)} />
+        <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView as View)} />
+        <div className={styles.sorter}>
+          <div>SORT BY:</div>
+          <div
+            className={styles.sortByValue}
+            onClick={onSort}
+            role="button"
+            onKeyPress={onSort}
+            tabIndex={0}
+          >
+            <span>{sortBy}</span>
+            <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
+              <CaretDownIcon />
+            </span>
+          </div>
+        </div>
       </div>
       <div
         className={classNames({
-          [styles.container]: view === 'chapter',
-          [styles.masonry]: view === 'juz',
+          [styles.gridLayout]: view === View.Surah,
+          [styles.masonryLayout]: view === View.juz,
         })}
       >
-        {view === 'chapter' &&
-          chapters.map((chapter) => (
+        {view === View.Surah &&
+          sortedChapters.map((chapter) => (
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link href={`/${chapter.id}`}>
                 <SurahPreviewRow
@@ -51,9 +84,9 @@ const ChaptersAndJuzsList: React.FC<Props> = ({ chapters }: Props) => {
               </Link>
             </div>
           ))}
-        {view === 'juz' &&
-          juzs.map((juzId) => {
-            const chapterIds = getChapterIdsForJuz(juzId);
+        {view === View.juz &&
+          juzIds.map((juzId) => {
+            const chapterIds = getChapterIdsForJuz(juzId.toString());
             return (
               <div className={styles.juzContainer}>
                 <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
@@ -83,4 +116,4 @@ const ChaptersAndJuzsList: React.FC<Props> = ({ chapters }: Props) => {
   );
 };
 
-export default ChaptersAndJuzsList;
+export default ChapterAndJuzList;

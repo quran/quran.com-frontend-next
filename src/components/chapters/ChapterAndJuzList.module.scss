@@ -1,6 +1,6 @@
 @use "src/styles/breakpoints";
 
-.container {
+.gridLayout {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
   padding-bottom: var(--spacing-medium);
 }
 
-.masonry {
+.masonryLayout {
   @include breakpoints.tablet {
     column-count: 2;
   }

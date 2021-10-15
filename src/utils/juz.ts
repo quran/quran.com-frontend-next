@@ -21,3 +21,7 @@ export const isFirstJuz = (juzNumber: number): boolean => juzNumber === 1;
  * @returns  {boolean}
  */
 export const isLastJuz = (juzNumber: number): boolean => juzNumber === 30;
+
+export const getJuzIds = () => {
+  return [...Array(30)].map((n, index) => index + 1);
+};
