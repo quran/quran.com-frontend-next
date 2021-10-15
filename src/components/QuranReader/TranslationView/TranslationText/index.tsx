@@ -32,12 +32,15 @@ const TranslationText: React.FC<Props> = ({
   languageId,
   resourceName,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
 
   const resetFootnote = () => {
     setFootnote(null);
     setSubFootnote(null);
+    setIsLoading(false);
   };
 
   const resetSubFootnote = () => {
@@ -79,15 +82,21 @@ const TranslationText: React.FC<Props> = ({
         // if it's the normal case that needs us to call BE and not a fixed footnote like the ones found for Bridge's translation.
         if (footNoteId) {
           // if this is the second time to click the footnote, close it
-          if (footnote && footnote.id === Number(footNoteId)) {
+          if (showFootnote && footnote && footnote.id === Number(footNoteId)) {
             resetFootnote();
           } else {
             resetSubFootnote();
-            getFootnote(footNoteId).then((res) => {
-              if (res.status !== 500) {
-                setFootnote(res.footNote);
-              }
-            });
+            setShowFootnote(true);
+            setIsLoading(true);
+            getFootnote(footNoteId)
+              .then((res) => {
+                if (res.status !== 500) {
+                  setFootnote(res.footNote);
+                }
+              })
+              .finally(() => {
+                setIsLoading(false);
+              });
           }
         } else {
           // we get the text inside the sup element and trim the extra spaces.
@@ -116,10 +125,12 @@ const TranslationText: React.FC<Props> = ({
       }
     }
   };
+  const hideFootnote = () => setShowFootnote(false);
   const isDivehi = languageId === 34;
   const isUrdu = languageId === 174;
   const isKurdish = languageId === 89;
   const isRtl = isDivehi || isUrdu || isKurdish;
+  const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
     <>
       <div
@@ -130,16 +141,17 @@ const TranslationText: React.FC<Props> = ({
           {
             [styles.rtl]: isRtl,
             [styles.urdu]: isUrdu,
-            [styles.kudish]: isKurdish,
+            [styles.kurdish]: isKurdish,
             [styles.divehi]: isDivehi,
           },
         )}
         dangerouslySetInnerHTML={{ __html: text }}
       />
-      {footnote && (
+      {shouldShowFootnote && (
         <FootnoteText
-          text={footnote.text}
-          onCloseClicked={resetFootnote}
+          text={isLoading ? null : footnote.text}
+          isLoading={isLoading}
+          onCloseClicked={isLoading ? hideFootnote : resetFootnote}
           onTextClicked={(event) => onTextClicked(event, true)}
         />
       )}
