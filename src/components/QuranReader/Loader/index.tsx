@@ -13,7 +13,7 @@ interface Props {
 
 const Loader: React.FC<Props> = ({ isValidating, loadMore }) => {
   return (
-    <div className={styles.loadMoreContainer} key={0}>
+    <div className={styles.loadMoreContainer}>
       {isValidating ? (
         <Spinner size={SpinnerSize.Large} />
       ) : (

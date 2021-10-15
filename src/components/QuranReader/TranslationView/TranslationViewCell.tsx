@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect } from 'react';
+import React, { RefObject, useEffect, memo } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -25,7 +25,7 @@ type TranslationViewCellProps = {
   verse: Verse;
 };
 
-const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
+const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
@@ -96,4 +96,26 @@ const TranslationViewCell = ({ verse }: TranslationViewCellProps) => {
   );
 };
 
-export default React.memo(TranslationViewCell);
+/**
+ * Since we are passing verse and it's an object
+ * even if the same verse is passed, its reference will change
+ * on fetching a new page and since Memo only does shallow comparison,
+ * we need to use custom comparing logic:
+ *
+ *  1. Check if the verse id is the same
+ *
+ * If the above condition is met, it's safe to assume that the result
+ * of both renders are the same.
+ *
+ * @param {TranslationViewCellProps} prevProps
+ * @param {TranslationViewCellProps} nextProps
+ * @returns {boolean}
+ */
+const areVersesEqual = (
+  prevProps: TranslationViewCellProps,
+  nextProps: TranslationViewCellProps,
+): boolean => {
+  return prevProps.verse.id === nextProps.verse.id;
+};
+
+export default memo(TranslationViewCell, areVersesEqual);

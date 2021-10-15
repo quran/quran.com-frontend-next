@@ -24,7 +24,7 @@ import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/Aud
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
-import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {
   selectIsUsingDefaultTafsirs,
   selectSelectedTafsirs,
@@ -53,7 +53,7 @@ const QuranReader = ({
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
@@ -135,7 +135,11 @@ const QuranReader = ({
             threshold={INFINITE_SCROLLER_THRESHOLD}
             hasMore={hasMore}
             loadMore={loadMore}
-            loader={<Loader isValidating={isValidating} loadMore={loadMore} />}
+            loader={
+              <div key={0}>
+                <Loader isValidating={isValidating} loadMore={loadMore} />
+              </div>
+            }
           >
             <QuranReaderBody
               isTafsirData={isTafsirData}
