@@ -33,6 +33,9 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
     </div> */}
     <div className={classNames(styles.listContainer, styles.flow)}>
       <div className={styles.flowItem}>
+        <CommandBarTrigger />
+      </div>
+      <div className={styles.flowItem}>
         <HomePageWelcomeMessage />
       </div>
       <div className={styles.flowItem} data-mobile-view="full">
@@ -43,9 +46,6 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
       </div>
       <div className={styles.flowItem}>
         <BookmarkedVersesList />
-      </div>
-      <div className={styles.flowItem}>
-        <CommandBarTrigger />
       </div>
       <div className={styles.flowItem}>
         <ChaptersList chapters={chapters} />
