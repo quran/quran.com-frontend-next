@@ -33,7 +33,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
               key={searchQuery}
               href={url}
             >
-              <p>{searchQuery}</p>
+              {searchQuery}
             </Button>
           );
         })}
