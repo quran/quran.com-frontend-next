@@ -1,3 +1,4 @@
+$verseLinkMinWidth: calc(6 * var(--spacing-mega));
 .sessionsContainer {
   padding: 0;
 }
@@ -21,7 +22,7 @@
     -webkit-appearance: none;
   }
   & > .verseLink {
-    min-width: calc(6 * var(--spacing-mega));
+    min-width: $verseLinkMinWidth;
   }
 
   & > .verseLink:first-child {

@@ -1,6 +1,7 @@
 @use "src/styles/breakpoints";
 
-.gridLayout {
+// surah layout (grid layout)
+.surahLayout {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,7 +25,29 @@
   }
 }
 
+// juz layout (masonry layout)
+.juzLayout {
+  @include breakpoints.tablet {
+    column-count: 2;
+  }
+  @include breakpoints.desktop {
+    column-count: 3;
+  }
+  column-gap: 1em;
+}
+
+.juzContainer + .juzContainer {
+  margin-top: var(--spacing-small);
+  @include breakpoints.tablet {
+    margin-top: 0;
+  }
+}
+
 .juzContainer {
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+
   border-radius: var(--border-radius-default);
 
   .chapterContainer + .chapterContainer {
@@ -36,33 +59,12 @@
   margin-bottom: var(--spacing-xsmall);
 }
 
-.juzContainer + .juzContainer {
-  margin-top: var(--spacing-small);
-  @include breakpoints.tablet {
-    margin-top: 0;
-  }
-}
-
+// tabs
 .tabsContainer {
   padding-bottom: var(--spacing-medium);
 }
 
-.masonryLayout {
-  @include breakpoints.tablet {
-    column-count: 2;
-  }
-  @include breakpoints.desktop {
-    column-count: 3;
-  }
-  column-gap: 1em;
-}
-
-.juzContainer {
-  display: inline-block;
-  margin: 0 0 1em;
-  width: 100%;
-}
-
+// sorter
 .sorter {
   display: flex;
   margin-top: var(--spacing-xsmall);

@@ -7,22 +7,27 @@ import styles from './BookmarksAndQuickLinks.module.scss';
 
 import Tabs from 'src/components/dls/Tabs/Tabs';
 
+enum View {
+  Bookmarks = 'bookmarks',
+  Popular = 'popular',
+}
+
 const tabs = [
-  { title: 'Popular', value: 'popular' },
-  { title: 'Bookmarks', value: 'bookmarks' },
+  { title: 'Popular', value: View.Bookmarks },
+  { title: 'Bookmarks', value: View.Popular },
 ];
 
 const BookmarksAndQuickLinks = () => {
-  const [view, setView] = useState('popular');
+  const [view, setView] = useState(View.Popular);
 
   return (
     <div>
       <div className={styles.tabsContainer}>
-        <Tabs tabs={tabs} selected={view} onSelect={setView} />
+        <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView as View)} />
       </div>
       <div>
-        {view === 'bookmarks' && <BookmarkedVersesList />}
-        {view === 'popular' && <QuickLinks />}
+        {view === View.Bookmarks && <BookmarkedVersesList />}
+        {view === View.Popular && <QuickLinks />}
       </div>
     </div>
   );

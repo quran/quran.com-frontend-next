@@ -76,8 +76,8 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
       </div>
       <div
         className={classNames({
-          [styles.gridLayout]: view === View.Surah,
-          [styles.masonryLayout]: view === View.juz,
+          [styles.surahLayout]: view === View.Surah,
+          [styles.juzLayout]: view === View.juz,
         })}
       >
         {view === View.Surah &&

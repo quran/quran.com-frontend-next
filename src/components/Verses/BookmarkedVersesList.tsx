@@ -2,10 +2,9 @@ import React from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
-import Button, { ButtonShape, ButtonType } from '../dls/Button/Button';
-
 import styles from './BookmarkedVersesList.module.scss';
 
+import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 
 const BookmarkedVersesList: React.FC = () => {
