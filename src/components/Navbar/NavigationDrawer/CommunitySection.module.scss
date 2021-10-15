@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  padding: var(--spacing-medium) 0;
+
+  & > div + div {
+    margin-left: var(--spacing-small);
+  }
+}
+
+.flow > div {
+  margin-bottom: var(--spacing-medium);
+}
+.platformLogo {
+  width: var(--spacing-medium);
+}
+.title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+}

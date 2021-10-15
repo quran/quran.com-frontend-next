@@ -5,6 +5,7 @@ import Link from 'next/link';
 import IconQ from '../../../../public/icons/Q.svg';
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 
+import CommunitySection from './CommunitySection';
 import MobileApps from './MobileApps';
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
@@ -88,6 +89,7 @@ const NavigationDrawer = () => (
         href="https://corpus.quran.com"
         isExternalLink
       />
+      <CommunitySection />
       <MobileApps />
     </div>
   </Drawer>
