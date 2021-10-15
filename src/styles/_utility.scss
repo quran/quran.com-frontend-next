@@ -13,6 +13,14 @@
   justify-content: center;
 }
 
+@mixin lighten-background-color {
+  background-image: linear-gradient(
+    to right,
+    var(--color-background-lighten),
+    var(--color-background-lighten)
+  );
+}
+
 $scales-map: (
   default: (
     desktop: (

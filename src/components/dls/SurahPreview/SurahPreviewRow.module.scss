@@ -1,3 +1,4 @@
+@use "src/styles/utility";
 .container {
   display: flex;
   justify-content: space-between;
@@ -10,11 +11,7 @@
   &:hover {
     border: 1px solid var(--color-success-medium);
     background-color: var(--color-success-faded);
-    background-image: linear-gradient(
-      to right,
-      var(--color-background-lighten),
-      var(--color-background-lighten)
-    );
+    @include utility.lighten-background-color;
 
     .surahNumber {
       background-color: var(--color-success-medium);
