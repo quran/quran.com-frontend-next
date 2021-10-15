@@ -1,22 +1,21 @@
-import styles from './Surah.module.scss';
+import styles from './SurahPreviewRow.module.scss';
 
 import ChapterIconContainer from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
 
-// TODO: find a better naming
-type SurahProps = {
+type SurahPreviewRowProps = {
   surahNumber: number;
   surahName: string;
   translatedSurahName: string;
-  verseCount: number;
+  description: string;
   chapterId: number;
 };
-const Surah = ({
+const SurahPreviewRow = ({
   surahName,
   surahNumber,
   translatedSurahName,
-  verseCount,
+  description,
   chapterId,
-}: SurahProps) => {
+}: SurahPreviewRowProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -32,10 +31,10 @@ const Surah = ({
         <div>
           <ChapterIconContainer chapterId={chapterId.toString()} hasSurahPrefix={false} />
         </div>
-        <div className={styles.verseCount}>{verseCount} Ayahs</div>
+        <div className={styles.description}>{description}</div>
       </div>
     </div>
   );
 };
 
-export default Surah;
+export default SurahPreviewRow;

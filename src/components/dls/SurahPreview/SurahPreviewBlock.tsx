@@ -1,18 +1,24 @@
-import styles from './SurahBlock.module.scss';
+import styles from './SurahPreviewBlock.module.scss';
 
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
 
-// TODO: find a better naming
-type SurahProps = {
+type SurahPreviewBlockProps = {
   surahNumber: number;
   surahName: string;
   translatedSurahName: string;
   chapterId: number;
+  description?: string;
 };
 
-const SurahBlock = ({ chapterId, surahName, surahNumber, translatedSurahName }: SurahProps) => {
+const SurahPreviewBlock = ({
+  chapterId,
+  surahName,
+  surahNumber,
+  translatedSurahName,
+  description,
+}: SurahPreviewBlockProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -31,9 +37,10 @@ const SurahBlock = ({ chapterId, surahName, surahNumber, translatedSurahName }: 
           hasSurahPrefix={false}
           size={ChapterIconsSize.Large}
         />
+        <div className={styles.description}>{description}</div>
       </div>
     </div>
   );
 };
 
-export default SurahBlock;
+export default SurahPreviewBlock;

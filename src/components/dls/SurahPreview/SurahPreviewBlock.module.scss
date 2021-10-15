@@ -5,6 +5,16 @@
   border: 1px solid var(--color-borders-hairline);
   padding: var(--spacing-medium);
   border-radius: var(--border-radius-default);
+  cursor: pointer;
+  &:hover {
+    border: 1px solid var(--color-success-medium);
+    background-color: var(--color-success-faded);
+    background-image: linear-gradient(
+      to right,
+      var(--color-background-lighten),
+      var(--color-background-lighten)
+    );
+  }
 }
 
 .header {
@@ -13,10 +23,11 @@
 }
 
 .surahIcon {
-  padding: calc(2.5 * var(--spacing-medium)) 0;
+  padding: calc(2 * var(--spacing-medium)) 0;
   display: flex;
-  background-color: red;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-default);
 }
@@ -36,4 +47,9 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-xsmall);
+}
+
+.description {
+  margin-top: var(--spacing-xsmall);
+  font-size: var(--font-size-small);
 }

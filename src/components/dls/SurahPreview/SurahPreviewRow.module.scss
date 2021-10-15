@@ -8,6 +8,14 @@
   cursor: pointer;
 
   &:hover {
+    border: 1px solid var(--color-success-medium);
+    background-color: var(--color-success-faded);
+    background-image: linear-gradient(
+      to right,
+      var(--color-background-lighten),
+      var(--color-background-lighten)
+    );
+
     .surahNumber {
       background-color: var(--color-success-medium);
       color: var(--color-text-inverse);
@@ -15,7 +23,7 @@
     .translatedSurahName {
       color: var(--color-success-medium);
     }
-    .verseCount {
+    .description {
       color: var(--color-success-medium);
     }
   }
@@ -60,7 +68,7 @@
   align-items: center;
 }
 
-.verseCount {
+.description {
   text-align: right;
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-bold);
