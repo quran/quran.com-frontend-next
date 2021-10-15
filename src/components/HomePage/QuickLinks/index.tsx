@@ -35,7 +35,7 @@ const QUICK_LINKS = [
 ];
 
 const QuickLinks: React.FC = () => (
-  <div className={styles.container}>
+  <div>
     <p className={styles.header}>Quick Links</p>
     <div className={styles.quickLinksContainer}>
       {QUICK_LINKS.map((quickLink) => (
@@ -43,7 +43,7 @@ const QuickLinks: React.FC = () => (
           key={quickLink.slug}
           slug={quickLink.slug}
           text={quickLink.text}
-          className={styles.button}
+          className={styles.link}
         />
       ))}
     </div>

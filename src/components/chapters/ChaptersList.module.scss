@@ -4,7 +4,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: var(--spacing-large);
   @include breakpoints.tablet {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -14,5 +13,12 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-small);
+  }
+}
+
+.chapterContainer + .chapterContainer {
+  margin-top: var(--spacing-small);
+  @include breakpoints.tablet {
+    margin-top: 0;
   }
 }

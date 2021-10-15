@@ -1,6 +1,7 @@
 import React from 'react';
 
-import ChapterBlock from './ChapterBlock';
+import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
+
 import styles from './ChaptersList.module.scss';
 
 import Chapter from 'types/Chapter';
@@ -12,7 +13,15 @@ type Props = {
 const ChaptersList: React.FC<Props> = ({ chapters }: Props) => (
   <div className={styles.container}>
     {chapters.map((chapter) => (
-      <ChapterBlock key={chapter.id} chapter={chapter} />
+      <div className={styles.chapterContainer} key={chapter.id}>
+        <SurahPreviewRow
+          chapterId={Number(chapter.id)}
+          description={`${chapter.versesCount} Ayahs`}
+          surahName={chapter.nameSimple}
+          surahNumber={Number(chapter.id)}
+          translatedSurahName={chapter.translatedName.name}
+        />
+      </div>
     ))}
   </div>
 );
