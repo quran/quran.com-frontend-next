@@ -88,6 +88,12 @@ const NavigationDrawer = () => (
         href="https://corpus.quran.com"
         isExternalLink
       />
+      <NavigationDrawerItem
+        title="QuranReflect.com"
+        icon={<IconQ />}
+        href="https://quranreflect.com/"
+        isExternalLink
+      />
       <MobileApps />
     </div>
   </Drawer>
