@@ -13,7 +13,7 @@ const BookmarkedVersesList: React.FC = () => {
   const verseKeys = Object.keys(bookmarkedVerses);
   return (
     <>
-      {verseKeys.length > 0 && (
+      {verseKeys.length > 0 ? (
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
             {verseKeys.slice(0, 10).map((verseKey) => (
@@ -23,6 +23,8 @@ const BookmarkedVersesList: React.FC = () => {
             ))}
           </div>
         </div>
+      ) : (
+        <div>You do not have any bookmark yet</div>
       )}
     </>
   );
