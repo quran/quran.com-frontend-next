@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
@@ -14,7 +13,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
 import styles from './NavbarBody.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
@@ -49,11 +48,15 @@ const NavbarBody: React.FC = () => {
             </Button>
             <NavigationDrawer />
           </>
-          <Link href="/">
-            <a className={styles.logoWrapper}>
-              <IconQ />
-            </a>
-          </Link>
+          <Button
+            href="/"
+            shape={ButtonShape.Circle}
+            variant={ButtonVariant.Ghost}
+            className={styles.logoWrapper}
+            size={ButtonSize.Large}
+          >
+            <IconQ />
+          </Button>
           <div className={styles.betaLabel}>BETA</div>
           <LanguageSelector />
         </div>

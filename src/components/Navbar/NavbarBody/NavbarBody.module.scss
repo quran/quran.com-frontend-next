@@ -49,12 +49,3 @@
   font-weight: var(--font-weight-bold);
   margin-left: var(--spacing-xsmall);
 }
-
-.logoWrapper {
-  display: flex;
-  align-items: center;
-  & > svg {
-    width: calc(1.5 * var(--spacing-medium));
-    height: calc(1.5 * var(--spacing-medium));
-  }
-}
