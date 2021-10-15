@@ -15,7 +15,6 @@ import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
 import { createSEOConfig } from 'src/utils/seo';
 
-import 'react-toastify/dist/ReactToastify.css';
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
