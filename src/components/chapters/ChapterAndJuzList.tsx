@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -41,8 +41,18 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
     setSortBy((prevValue) => (prevValue === Sort.DESC ? Sort.ASC : Sort.DESC));
   };
 
-  const sortedChapters =
-    sortBy === Sort.DESC ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id)) : chapters;
+  const sortedChapters = useMemo(
+    () =>
+      sortBy === Sort.DESC
+        ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id))
+        : chapters,
+    [sortBy, chapters],
+  );
+
+  const sortedJuzIds = useMemo(
+    () => (sortBy === Sort.DESC ? juzIds.slice().sort((a, b) => Number(b) - Number(a)) : juzIds),
+    [sortBy],
+  );
 
   return (
     <>
@@ -85,7 +95,7 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
             </div>
           ))}
         {view === View.juz &&
-          juzIds.map((juzId) => {
+          sortedJuzIds.map((juzId) => {
             const chapterIds = getChapterIdsForJuz(juzId.toString());
             return (
               <div className={styles.juzContainer}>
