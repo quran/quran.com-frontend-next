@@ -14,7 +14,7 @@
 .chevronIconWrapper {
   color: var(--color-text-faded);
   transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
-  [data-state="open"] > & {
+  [data-state="open"] & {
     transform: rotate(180deg);
   }
 }
@@ -39,12 +39,12 @@
 .content {
   overflow: hidden;
   padding: var(--spacing-xsmall) 0;
-  &[data-state="open"] {
-    animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
-  }
-  &[data-state="closed"] {
-    animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
-  }
+  // &[data-state="open"] {
+  //   animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  // }
+  // &[data-state="closed"] {
+  //   animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  // }
 }
 
 .item {
