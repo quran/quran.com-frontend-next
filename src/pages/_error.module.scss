@@ -5,6 +5,8 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  padding: 0 var(--spacing-small);
+  box-sizing: border-box;
 }
 
 .title {
