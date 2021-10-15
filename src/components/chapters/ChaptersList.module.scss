@@ -62,3 +62,28 @@
   margin: 0 0 1em;
   width: 100%;
 }
+
+.sorter {
+  display: flex;
+  margin-top: var(--spacing-xsmall);
+  justify-content: space-between;
+  font-size: var(--font-size-small);
+}
+.sortByValue {
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  cursor: pointer;
+  & > span {
+    display: flex;
+    align-items: center;
+  }
+  & > .rotate180 > svg {
+    transform: rotate(180deg);
+  }
+  & > span > svg {
+    width: var(--spacing-small);
+    margin-left: var(--spacing-xxsmall);
+  }
+}
