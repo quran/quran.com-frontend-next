@@ -5,6 +5,7 @@ import {
   cssTransition,
 } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './Toast.module.scss';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
