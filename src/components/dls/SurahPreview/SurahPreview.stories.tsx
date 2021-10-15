@@ -23,6 +23,11 @@ const Template = (args) => {
 export const Block = Template.bind({});
 Block.args = {
   display: SurahPreviewDisplay.Block,
+};
+
+export const BlockWithAyah = Template.bind({});
+BlockWithAyah.args = {
+  display: SurahPreviewDisplay.Block,
   description: 'Ayah 3',
 };
 

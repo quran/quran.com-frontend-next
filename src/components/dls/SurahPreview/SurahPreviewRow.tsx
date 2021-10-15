@@ -31,7 +31,7 @@ const SurahPreviewRow = ({
         <div>
           <ChapterIconContainer chapterId={chapterId.toString()} hasSurahPrefix={false} />
         </div>
-        <div className={styles.description}>{description}</div>
+        {description && <div className={styles.description}>{description}</div>}
       </div>
     </div>
   );

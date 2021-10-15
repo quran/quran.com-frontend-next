@@ -21,7 +21,7 @@
 }
 
 .surahIcon {
-  padding: calc(2 * var(--spacing-medium)) 0;
+  height: calc(6 * var(--spacing-medium));
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,6 +48,5 @@
 }
 
 .description {
-  margin-top: var(--spacing-xsmall);
   font-size: var(--font-size-small);
 }

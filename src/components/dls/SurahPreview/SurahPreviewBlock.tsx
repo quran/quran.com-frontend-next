@@ -37,7 +37,7 @@ const SurahPreviewBlock = ({
           hasSurahPrefix={false}
           size={ChapterIconsSize.Large}
         />
-        <div className={styles.description}>{description}</div>
+        {description && <div className={styles.description}>{description}</div>}
       </div>
     </div>
   );
