@@ -11,7 +11,7 @@ const BookmarkedVersesList: React.FC = () => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const verseKeys = Object.keys(bookmarkedVerses);
   return (
-    <>
+    <div className={styles.container}>
       {verseKeys.length > 0 ? (
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
@@ -25,7 +25,7 @@ const BookmarkedVersesList: React.FC = () => {
       ) : (
         <div>You do not have any bookmarks yet</div>
       )}
-    </>
+    </div>
   );
 };
 

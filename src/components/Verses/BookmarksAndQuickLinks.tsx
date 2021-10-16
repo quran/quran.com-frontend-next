@@ -25,7 +25,7 @@ const BookmarksAndQuickLinks = () => {
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView as View)} />
       </div>
-      <div>
+      <div className={styles.contentContainer}>
         {view === View.Bookmarks && <BookmarkedVersesList />}
         {view === View.Popular && <QuickLinks />}
       </div>
