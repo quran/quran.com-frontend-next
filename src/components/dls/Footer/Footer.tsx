@@ -18,7 +18,7 @@ const Footer = () => (
           </Link>
         </div>
         <div>
-          <Link variant={LinkVariant.Primary} href="/about">
+          <Link variant={LinkVariant.Primary} href="/about-us">
             About Us
           </Link>
         </div>

@@ -45,7 +45,7 @@ const NavigationDrawer = () => (
     <div className={styles.listItemsContainer}>
       <h3 className={styles.subtitle}>Menu</h3>
       <NavigationDrawerItem title="Home" icon={<IconHome />} href="/" />
-      <NavigationDrawerItem title="About us" icon={<IconInfo />} href="/about" />
+      <NavigationDrawerItem title="About us" icon={<IconInfo />} href="/about-us" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
       <NavigationDrawerItem title="Developers" icon={<IconDevelopers />} href="/developers" />
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
