@@ -41,7 +41,7 @@ $list-max-width: 80rem;
   *
   * For now we only want this to be implemented on mobile, so we make `--flow-side-padding: 0` on tablet and above
   **/
-  &[data-mobile-view="full"] {
+  &.fullWidth {
     padding-right: 0;
     padding-left: 0;
 

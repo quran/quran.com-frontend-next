@@ -37,10 +37,10 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
       <div className={styles.flowItem}>
         <HomePageWelcomeMessage />
       </div>
-      <div className={styles.flowItem} data-mobile-view="full">
+      <div className={classNames(styles.flowItem, styles.fullWidth)}>
         <RecentReadingSessions />
       </div>
-      <div className={styles.flowItem} data-mobile-view="full">
+      <div className={classNames(styles.flowItem, styles.fullWidth)}>
         <BookmarksAndQuickLinks />
       </div>
       <div className={styles.flowItem}>

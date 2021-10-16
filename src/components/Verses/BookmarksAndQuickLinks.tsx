@@ -13,8 +13,8 @@ enum View {
 }
 
 const tabs = [
-  { title: 'Popular', value: View.Bookmarks },
-  { title: 'Bookmarks', value: View.Popular },
+  { title: 'Popular', value: View.Popular },
+  { title: 'Bookmarks', value: View.Bookmarks },
 ];
 
 const BookmarksAndQuickLinks = () => {

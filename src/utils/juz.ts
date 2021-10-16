@@ -22,6 +22,7 @@ export const isFirstJuz = (juzNumber: number): boolean => juzNumber === 1;
  */
 export const isLastJuz = (juzNumber: number): boolean => juzNumber === 30;
 
+const TOTAL_QURAN_JUZ = 30;
 export const getJuzIds = () => {
-  return [...Array(30)].map((n, index) => index + 1);
+  return [...Array(TOTAL_QURAN_JUZ)].map((n, index) => index + 1);
 };

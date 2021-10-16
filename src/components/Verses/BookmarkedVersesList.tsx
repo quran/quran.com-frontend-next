@@ -23,7 +23,7 @@ const BookmarkedVersesList: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div>You do not have any bookmark yet</div>
+        <div>You do not have any bookmarks yet</div>
       )}
     </>
   );
