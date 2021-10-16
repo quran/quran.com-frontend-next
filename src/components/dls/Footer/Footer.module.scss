@@ -15,6 +15,7 @@
 .itemsContainer {
   display: flex;
   margin-bottom: var(--spacing-xxsmall);
+  flex-wrap: wrap;
 }
 .itemsContainer > div {
   font-size: var(--font-size-small);
