@@ -8,6 +8,7 @@ import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
+import QuranReflectIcon from '../../../public/icons/old-Q.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
@@ -18,7 +19,7 @@ import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { getWindowOrigin } from 'src/utils/url';
+import { getWindowOrigin, navigateToExternalUrl } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -69,6 +70,13 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
     });
   };
 
+  // we do navigation programmatically because using <a> or <Link> doesn't work with PopOver.Item.
+  const onQuranReflectClicked = () => {
+    navigateToExternalUrl(
+      `https://quranreflect.com/${verse.chapterId}/${verse.verseNumber}?feed=true`,
+    );
+  };
+
   const onShareClicked = () => {
     const origin = getWindowOrigin();
     if (origin) {
@@ -107,6 +115,10 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
 
       <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
         {isShared ? 'Link has been copied to the clipboard!' : 'Share'}
+      </PopoverMenu.Item>
+
+      <PopoverMenu.Item onClick={onQuranReflectClicked} icon={<QuranReflectIcon />}>
+        QuranReflect
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
