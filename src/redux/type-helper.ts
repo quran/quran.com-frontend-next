@@ -12,7 +12,7 @@ type Reducer<TState, TAction extends Action> = (
  * Typescript type helper to infer RootState from reducer
  * https://github.com/piotrwitek/typesafe-actions#statetype
  */
-export type StateType<TReducerOrMap extends any> = TReducerOrMap extends Reducer<any, any>
+export type StateType<TReducerOrMap> = TReducerOrMap extends Reducer<any, any>
   ? ReturnType<TReducerOrMap>
   : TReducerOrMap extends Record<any, any>
   ? { [K in keyof TReducerOrMap]: StateType<TReducerOrMap[K]> }
