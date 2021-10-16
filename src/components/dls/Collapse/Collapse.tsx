@@ -13,23 +13,16 @@ const Collapse = ({ children }) => (
 
 type ItemProps = {
   title?: string;
-  id: string;
-  headerAction?: React.ReactNode;
   children: React.ReactNode;
 };
-const Item = ({ title, children, id, headerAction }: ItemProps) => (
-  <Accordion.Item value={id} className={styles.item}>
-    <Accordion.Header>
-      <Accordion.Trigger asChild>
-        <div className={styles.header}>
-          {headerAction && <div className={styles.headerActionContainer}>{headerAction}</div>}
-          <div className={styles.trigger}>
-            <span className={styles.chevronIconWrapper}>
-              <ChevronDownIcon />
-            </span>
-            {title}
-          </div>
-        </div>
+const Item = ({ title, children }: ItemProps) => (
+  <Accordion.Item value={title} className={styles.item}>
+    <Accordion.Header className={styles.header}>
+      <Accordion.Trigger className={styles.trigger}>
+        {title}
+        <span className={styles.chevronIconWrapper}>
+          <ChevronDownIcon />
+        </span>
       </Accordion.Trigger>
     </Accordion.Header>
     <Accordion.Content className={styles.content}>{children}</Accordion.Content>

@@ -1,7 +1,3 @@
-import { useState } from 'react';
-
-import Tabs from '../Tabs/Tabs';
-
 import Collapse from './Collapse';
 
 export default {
@@ -9,38 +5,17 @@ export default {
 };
 
 export const Preview = () => {
-  const [selected, setSelected] = useState('trending');
   return (
-    <div style={{ maxWidth: 400 }}>
+    <div style={{ maxWidth: 800 }}>
       <Collapse>
-        <Collapse.Item id="recently-read" title="Recently Read">
-          test
+        <Collapse.Item title="Question A">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </Collapse.Item>
-        <Collapse.Item id="Collections" title="Collections">
-          test
-        </Collapse.Item>
-        <Collapse.Item
-          id="popular-trending-bookmarks"
-          headerAction={
-            <Tabs
-              hasBorderBottom={false}
-              tabs={[
-                { title: 'Popular', value: 'popular' },
-                { title: 'Trending', value: 'trending' },
-                { title: 'Bookmarks', value: 'Bookmarks' },
-              ]}
-              selected={selected}
-              onSelect={(value) => setSelected(value)}
-            />
-          }
-        >
-          test
-        </Collapse.Item>
-
-        <Collapse.Item id="faq-question" title="Some FAQ Question ?">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat voluptatem beatae aliquam
-          nostrum dolorum facere repudiandae accusamus, hic dolore id harum assumenda quas obcaecati
-          suscipit voluptatum inventore cum quod accusantium.
+        <Collapse.Item title="Question B">
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+          nulla pariatur.
         </Collapse.Item>
       </Collapse>
     </div>

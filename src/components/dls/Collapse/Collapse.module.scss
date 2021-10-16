@@ -1,14 +1,11 @@
-.group {
-}
 .header {
-  &:hover {
-    background-color: var(--color-background-alternative-faded);
-  }
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: calc(3 * var(--spacing-medium));
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
 }
 
 .chevronIconWrapper {
@@ -53,11 +50,11 @@
 }
 
 .trigger {
+  padding: 0;
   border: none;
   background: none;
   flex: 1;
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
