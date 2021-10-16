@@ -58,6 +58,8 @@ const NavigationDrawer = () => (
   <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} />
   <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} />
   <NavigationDrawerItem title="Revelation" icon={<IconCollection />} /> */}
+      <h3 className={styles.subtitle}>Community</h3>
+      <CommunitySection />
       <h3 className={styles.subtitle}>Network</h3>
       <NavigationDrawerItem
         title="Quranicaudio.com"
@@ -89,7 +91,6 @@ const NavigationDrawer = () => (
         href="https://corpus.quran.com"
         isExternalLink
       />
-      <CommunitySection />
       <MobileApps />
     </div>
   </Drawer>
