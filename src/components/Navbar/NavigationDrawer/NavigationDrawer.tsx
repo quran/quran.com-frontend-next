@@ -5,6 +5,7 @@ import Link from 'next/link';
 import IconQ from '../../../../public/icons/Q_simple.svg';
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 
+import CommunitySection from './CommunitySection';
 import MobileApps from './MobileApps';
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
@@ -57,6 +58,8 @@ const NavigationDrawer = () => (
   <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} />
   <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} />
   <NavigationDrawerItem title="Revelation" icon={<IconCollection />} /> */}
+      <h3 className={styles.subtitle}>Community</h3>
+      <CommunitySection />
       <h3 className={styles.subtitle}>Network</h3>
       <NavigationDrawerItem
         title="Quranicaudio.com"
