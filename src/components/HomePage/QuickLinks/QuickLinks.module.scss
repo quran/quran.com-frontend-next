@@ -1,25 +1,32 @@
 @use "src/styles/breakpoints";
 
-.container {
-  padding-bottom: var(--spacing-large);
-}
-
 .header {
   margin-bottom: var(--spacing-xsmall);
+  padding-left: var(--flow-side-spacing, var(--spacing-small));
 }
 
 .quickLinksContainer {
   display: flex;
   align-items: center;
-  overflow-y: scroll;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
   }
 }
 
-.button {
-  margin: 0 var(--spacing-micro);
+.link {
   > span {
     width: max-content;
+  }
+
+  &:first-child {
+    margin-left: var(--flow-side-spacing, var(--spacing-small));
+  }
+  &:last-child {
+    margin-right: var(--flow-side-spacing, var(--spacing-small));
+  }
+
+  & + & {
+    margin-left: var(--spacing-small);
   }
 }

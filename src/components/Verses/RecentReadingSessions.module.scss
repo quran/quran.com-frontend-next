@@ -1,11 +1,14 @@
+$verseLinkMinWidth: calc(6 * var(--spacing-mega));
 .sessionsContainer {
-  padding: var(--spacing-large) 0;
+  padding: 0;
 }
 
 .sessionsHeader {
   margin-bottom: var(--spacing-xsmall);
+  padding: 0 var(--flow-side-spacing, 0);
   display: flex;
   align-items: center;
+  font-size: var(--font-size-large);
   & > span {
     margin-right: var(--spacing-xxsmall);
   }
@@ -13,10 +16,23 @@
 
 .verseLinksContainer {
   display: flex;
-  align-items: center;
-  overflow-y: scroll;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
+  }
+  & > .verseLink {
+    min-width: $verseLinkMinWidth;
+  }
+
+  & > .verseLink:first-child {
+    margin-left: var(--flow-side-spacing, 0);
+  }
+  & > .verseLink:last-child {
+    margin-right: var(--flow-side-spacing, 0);
+  }
+  & > .verseLink + .verseLink {
+    margin-left: var(--spacing-small);
   }
 }
 

@@ -1,9 +1,5 @@
 @use "src/styles/breakpoints";
 
-.bookmarksContainer {
-  padding: var(--spacing-large) 0;
-}
-
 .bookmarksHeader {
   margin-bottom: var(--spacing-xsmall);
 }
@@ -16,4 +12,8 @@
     display: flex;
     align-items: center;
   }
+}
+
+.container {
+  padding: 0 var(--flow-side-spacing);
 }

@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
-import IconQ from '../../../../public/icons/Q.svg';
+import IconQ from '../../../../public/icons/Q_simple.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';

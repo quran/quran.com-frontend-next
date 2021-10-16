@@ -2,9 +2,11 @@ import React from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
+import Link from '../dls/Link/Link';
+
 import styles from './RecentReadingSessions.module.scss';
 
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPreview/SurahPreview';
 import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
 import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
@@ -17,22 +19,25 @@ const RecentReadingSessions = () => {
     <>
       {verseKeys.length > 0 && (
         <div className={styles.sessionsContainer}>
-          <p className={styles.sessionsHeader}>
-            <span>Continue Reading </span>
-          </p>
+          <p className={styles.sessionsHeader}>Recently Read</p>
           <div className={styles.verseLinksContainer}>
-            {verseKeys.map((verseKey, index) => {
+            {verseKeys.map((verseKey) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-              const surahName = getChapterData(chapterId).nameSimple;
+              const surah = getChapterData(chapterId);
               return (
-                <Button
-                  href={getVerseToEndOfChapterNavigationUrl(verseKey)}
-                  type={index === 0 ? ButtonType.Primary : ButtonType.Secondary}
-                  key={verseKey}
-                  className={styles.button}
-                >
-                  {`Surah ${surahName} - ${verseNumber}`}
-                </Button>
+                <div className={styles.verseLink} key={verseKey}>
+                  <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
+                    <SurahPreview
+                      display={SurahPreviewDisplay.Block}
+                      chapterId={Number(surah.id)}
+                      surahNumber={Number(surah.id)}
+                      translatedSurahName={surah.translatedName.name}
+                      surahName={surah.nameSimple}
+                      description={`Ayah ${verseNumber}`}
+                      verseCount={surah.versesCount}
+                    />
+                  </Link>
+                </div>
               );
             })}
           </div>
