@@ -1,27 +1,38 @@
 import React, { memo } from 'react';
 
-import { useDispatch } from 'react-redux';
+import dynamic from 'next/dynamic';
+import { useDispatch, useSelector } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
-import IconQ from '../../../../public/icons/Q_simple.svg';
+import IconQ from '../../../../public/icons/Q.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';
-import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
-import SearchDrawer from '../SearchDrawer/SearchDrawer';
-import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
 import styles from './NavbarBody.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
+  selectNavbar,
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
 
+const SearchDrawer = dynamic(() => import('../SearchDrawer/SearchDrawer'), {
+  ssr: false,
+});
+const SettingsDrawer = dynamic(() => import('../SettingsDrawer/SettingsDrawer'), {
+  ssr: false,
+});
+const NavigationDrawer = dynamic(() => import('../NavigationDrawer/NavigationDrawer'), {
+  ssr: false,
+});
+
 const NavbarBody: React.FC = () => {
   const dispatch = useDispatch();
+  const { isNavigationDrawerOpen, isSettingsDrawerOpen, isSearchDrawerOpen } =
+    useSelector(selectNavbar);
   const openNavigationDrawer = () => {
     dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
   };
@@ -46,7 +57,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconMenu />
             </Button>
-            <NavigationDrawer />
+            {isNavigationDrawerOpen && <NavigationDrawer />}
           </>
           <Button
             href="/"
@@ -72,7 +83,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconSettings />
             </Button>
-            <SettingsDrawer />
+            {isSettingsDrawerOpen && <SettingsDrawer />}
           </>
           <>
             <Button
@@ -83,7 +94,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconSearch />
             </Button>
-            <SearchDrawer />
+            {isSearchDrawerOpen && <SearchDrawer />}
           </>
         </div>
       </div>
