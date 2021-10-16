@@ -2,17 +2,17 @@ import React from 'react';
 
 import Link from 'next/link';
 
-import IconCollection from '../../../../public/icons/collection.svg';
+// import IconCollection from '../../../../public/icons/collection.svg';
 import IconDevelopers from '../../../../public/icons/developers.svg';
-import IconDonate from '../../../../public/icons/donate.svg';
+// import IconDonate from '../../../../public/icons/donate.svg';
 import IconFeedback from '../../../../public/icons/feedback.svg';
 import IconHome from '../../../../public/icons/home.svg';
 import IconInfo from '../../../../public/icons/info.svg';
 import IconLock from '../../../../public/icons/lock.svg';
 import IconQ from '../../../../public/icons/Q_simple.svg';
 import IconQuestionMark from '../../../../public/icons/question-mark.svg';
-import IconRadio2 from '../../../../public/icons/radio-2.svg';
-import IconUpdates from '../../../../public/icons/updates.svg';
+// import IconRadio2 from '../../../../public/icons/radio-2.svg';
+// import IconUpdates from '../../../../public/icons/updates.svg';
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 
 import CommunitySection from './CommunitySection';
