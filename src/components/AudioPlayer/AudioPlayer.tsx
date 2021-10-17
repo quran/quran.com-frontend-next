@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import AudioKeyBoardListeners from './AudioKeyboardListeners';
@@ -9,7 +10,6 @@ import AudioPlayerSlider from './AudioPlayerSlider';
 import AudioRepeatManager from './AudioRepeatManager/AudioRepeatManager';
 import { togglePlaying, triggerPauseAudio, triggerPlayAudio, triggerSeek } from './EventTriggers';
 import MediaSessionApiListeners from './MediaSessionApiListeners';
-import PlaybackControls from './PlaybackControls';
 import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
 
 import {
@@ -22,6 +22,10 @@ import {
   selectIsMobileMinimizedForScrolling,
   selectPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
+
+const PlaybackControls = dynamic(() => import('./PlaybackControls'), {
+  ssr: false,
+});
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
@@ -84,6 +88,11 @@ const AudioPlayer = () => {
       }
     };
   }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
+
+  // don't put the audio player in the DOM if it's not open.
+  if (isHidden) {
+    return <></>;
+  }
 
   return (
     <>

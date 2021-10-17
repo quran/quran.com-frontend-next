@@ -1,13 +1,17 @@
 import React, { useCallback } from 'react';
 
+import dynamic from 'next/dynamic';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './CommandBar.module.scss';
-import CommandBarBody from './CommandBarBody';
 
 import Modal from 'src/components/dls/Modal/Modal';
 import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
+
+const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
+  ssr: false,
+});
 
 const CommandBar: React.FC = () => {
   const dispatch = useDispatch();
