@@ -44,7 +44,10 @@
 
 .bodyContainer {
   margin-top: constants.$navbar-height;
-  padding: var(--spacing-small);
+  padding-top: var(--spacing-small);
+  padding-bottom: calc(2 * var(--spacing-large));
+  padding-left: var(--spacing-small);
+  padding-right: var(--spacing-small);
 }
 
 .navigationBodyContainer {
