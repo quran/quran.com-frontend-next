@@ -1,0 +1,12 @@
+@use "src/styles/utility";
+
+.innerContainer {
+  @include utility.center-horizontally;
+  display: flex;
+  padding-left: var(--spacing-xsmall);
+  padding-right: var(--spacing-xsmall);
+}
+
+.sliderContainer {
+  width: 100%;
+}

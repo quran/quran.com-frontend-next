@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
+import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
+
+import styles from './AudioPlayer.module.scss';
 
 import {
   setIsPlaying,
@@ -9,6 +12,7 @@ import {
   setAudioStatus,
   AudioDataStatus,
   selectPlaybackRate,
+  selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
@@ -20,6 +24,7 @@ const AudioPlayer = () => {
   const audioPlayerElRef = useRef<HTMLAudioElement>(null);
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
+  const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const playbackRate = useSelector(selectPlaybackRate);
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
@@ -74,12 +79,25 @@ const AudioPlayer = () => {
     };
   }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
-  // don't put the audio player in the DOM if it's not open.
-  if (isHidden) {
-    return <></>;
-  }
-
-  return <AudioPlayerBody isHidden={isHidden} audioPlayerElRef={audioPlayerElRef} />;
+  return (
+    <>
+      <div className={styles.emptySpacePlaceholder} />
+      <div
+        className={classNames(styles.container, styles.containerDefault, {
+          [styles.containerHidden]: isHidden,
+          [styles.containerMinimized]: isMobileMinimizedForScrolling,
+        })}
+      >
+        {!isHidden && (
+          <AudioPlayerBody
+            isHidden={isHidden}
+            audioPlayerElRef={audioPlayerElRef}
+            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+          />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default AudioPlayer;
