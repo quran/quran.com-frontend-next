@@ -19,6 +19,7 @@ const DevelopersPage = () => (
     <p>
       We have a number of projects all hosted on Github. You can find them all
       <a href="http://github.com/quran" target="_blank" rel="noreferrer">
+        {' '}
         here
       </a>
       . But to outline them:
@@ -53,7 +54,7 @@ const DevelopersPage = () => (
         <a href="https://github.com/quran/audio.quran.com" target="_blank" rel="noreferrer">
           Quranic Audio
         </a>{' '}
-        and
+        and{' '}
         <a href="https://github.com/quran/quranicaudio-app" target="_blank" rel="noreferrer">
           Quranic Audio mobile apps
         </a>
@@ -68,7 +69,7 @@ const DevelopersPage = () => (
 
     <p>
       Typically we use Github issues as the source for what to work on next, what&apos;s coming up
-      and what bugs exist that need to be solved. For example
+      and what bugs exist that need to be solved. For example{' '}
       <a
         href="https://github.com/quran/quran.com-frontend-v2/issues"
         target="_blank"
