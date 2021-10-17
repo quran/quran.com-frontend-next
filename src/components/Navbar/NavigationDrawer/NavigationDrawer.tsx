@@ -10,6 +10,7 @@ import IconHome from '../../../../public/icons/home.svg';
 import IconInfo from '../../../../public/icons/info.svg';
 import IconLock from '../../../../public/icons/lock.svg';
 import IconQ from '../../../../public/icons/Q_simple.svg';
+import QuranReflect from '../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../public/icons/question-mark.svg';
 // import IconRadio2 from '../../../../public/icons/radio-2.svg';
 // import IconUpdates from '../../../../public/icons/updates.svg';
@@ -54,6 +55,7 @@ const NavigationDrawer = () => (
         title="Feedback"
         icon={<IconFeedback />}
         href="https://feedback.quran.com/"
+        isExternalLink
       />
       <NavigationDrawerItem title="Help" icon={<IconQuestionMark />} href="/support" />
       {/* <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} /> */}
@@ -97,7 +99,7 @@ const NavigationDrawer = () => (
       />
       <NavigationDrawerItem
         title="QuranReflect.com"
-        icon={<IconQ />}
+        icon={<QuranReflect />}
         href="https://quranreflect.com/"
         isExternalLink
       />
