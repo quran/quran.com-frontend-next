@@ -1,40 +1,25 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 
-import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-import AudioKeyBoardListeners from './AudioKeyboardListeners';
-import styles from './AudioPlayer.module.scss';
-import AudioPlayerSlider from './AudioPlayerSlider';
-import AudioRepeatManager from './AudioRepeatManager/AudioRepeatManager';
-import { togglePlaying, triggerPauseAudio, triggerPlayAudio, triggerSeek } from './EventTriggers';
-import MediaSessionApiListeners from './MediaSessionApiListeners';
-import QuranReaderHighlightDispatcher from './QuranReaderHighlightDispatcher';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   setIsPlaying,
-  selectAudioData,
   selectAudioDataStatus,
   setAudioStatus,
   AudioDataStatus,
-  selectReciter,
-  selectIsMobileMinimizedForScrolling,
   selectPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 
-const PlaybackControls = dynamic(() => import('./PlaybackControls'), {
+const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ssr: false,
 });
 
 const AudioPlayer = () => {
   const dispatch = useDispatch();
   const audioPlayerElRef = useRef<HTMLAudioElement>(null);
-  const audioData = useSelector(selectAudioData, shallowEqual);
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
-  const { id: reciterId } = useSelector(selectReciter, shallowEqual);
-  const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const playbackRate = useSelector(selectPlaybackRate);
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
@@ -94,64 +79,7 @@ const AudioPlayer = () => {
     return <></>;
   }
 
-  return (
-    <>
-      <div className={styles.emptySpacePlaceholder} />
-      <div
-        className={classNames(styles.container, styles.containerDefault, {
-          [styles.containerHidden]: isHidden,
-          [styles.containerMinimized]: isMobileMinimizedForScrolling,
-        })}
-      >
-        <div className={styles.innerContainer}>
-          {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
-          <audio
-            src={audioData?.audioUrl}
-            style={{ display: 'none' }}
-            id="audio-player"
-            ref={audioPlayerElRef}
-          />
-          <AudioKeyBoardListeners
-            seek={(seekDuration) => {
-              triggerSeek(seekDuration);
-            }}
-            togglePlaying={() => togglePlaying()}
-            isAudioPlayerHidden={isHidden}
-          />
-          {reciterId && audioData?.chapterId && (
-            <QuranReaderHighlightDispatcher
-              audioPlayerElRef={audioPlayerElRef}
-              reciterId={reciterId}
-              chapterId={audioData?.chapterId}
-            />
-          )}
-          {reciterId && audioData?.chapterId && (
-            <AudioRepeatManager
-              audioPlayerElRef={audioPlayerElRef}
-              reciterId={reciterId}
-              chapterId={audioData?.chapterId}
-            />
-          )}
-          <MediaSessionApiListeners
-            play={triggerPlayAudio}
-            pause={triggerPauseAudio}
-            seek={(seekDuration) => {
-              triggerSeek(seekDuration);
-            }}
-            playNextTrack={null}
-            playPreviousTrack={null}
-          />
-          <div className={styles.sliderContainer}>
-            <AudioPlayerSlider
-              audioPlayerElRef={audioPlayerElRef}
-              isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-            />
-          </div>
-        </div>
-        <PlaybackControls />
-      </div>
-    </>
-  );
+  return <AudioPlayerBody isHidden={isHidden} audioPlayerElRef={audioPlayerElRef} />;
 };
 
 export default AudioPlayer;
