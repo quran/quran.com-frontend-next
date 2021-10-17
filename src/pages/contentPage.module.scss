@@ -1,0 +1,21 @@
+.contentPage {
+  padding-top: var(--spacing-mega);
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--spacing-mega) var(--spacing-medium);
+  h1 {
+    font-size: var(--font-size-xlarge);
+    line-height: var(--line-height-jumbo);
+    margin-bottom: var(--spacing-xsmall);
+    font-weight: var(--font-weight-bold);
+  }
+  h2 {
+    font-size: var(--font-size-large);
+    margin-bottom: var(--spacing-xsmall);
+    font-weight: var(--font-weight-semibold);
+  }
+  p {
+    line-height: var(--line-height-large);
+    margin-bottom: var(--spacing-medium);
+  }
+}

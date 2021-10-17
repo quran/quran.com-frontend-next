@@ -18,18 +18,35 @@ const Footer = () => (
           </Link>
         </div>
         <div>
+          <Link variant={LinkVariant.Primary} href="/about-us">
+            About Us
+          </Link>
+        </div>
+        <div>
+          <Link variant={LinkVariant.Primary} href="/developers">
+            Developers
+          </Link>
+        </div>
+        {/* <div>
           <Link variant={LinkVariant.Primary} href="/terms">
             Terms
           </Link>
-        </div>
+        </div> */}
+      </div>
+      <div className={styles.itemsContainer}>
         <div>
-          <Link variant={LinkVariant.Primary} href="/sitemap">
-            Sitemap
+          <Link variant={LinkVariant.Primary} href="https://feedback.quran.com">
+            Feedback
           </Link>
         </div>
         <div>
-          <Link variant={LinkVariant.Primary} href="https://feedback.quran.com">
-            Provide Feedback
+          <Link variant={LinkVariant.Primary} href="/support">
+            Help
+          </Link>
+        </div>
+        <div>
+          <Link variant={LinkVariant.Primary} href="/sitemap.xml">
+            Sitemap
           </Link>
         </div>
       </div>
