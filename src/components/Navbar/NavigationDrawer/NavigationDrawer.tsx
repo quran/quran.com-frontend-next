@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import IconQ from '../../../../public/icons/Q_simple.svg';
+import QuranReflect from '../../../../public/icons/QR.svg';
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
 
 import CommunitySection from './CommunitySection';
@@ -93,7 +94,7 @@ const NavigationDrawer = () => (
       />
       <NavigationDrawerItem
         title="QuranReflect.com"
-        icon={<IconQ />}
+        icon={<QuranReflect />}
         href="https://quranreflect.com/"
         isExternalLink
       />
