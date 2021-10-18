@@ -69,6 +69,14 @@
 }
 
 @font-face {
+  font-family: "ProximaVara";
+  src: url("/fonts/ProximaVara/proxima_vara_semibold.woff2"),
+    url("/fonts/ProximaVara/proxima_vara_semibold.woff");
+  font-weight: 600;
+  font-display: optional;
+}
+
+@font-face {
   font-family: "bismillah";
   src: url("/fonts/bismillah/bismillah.woff2"),
     url("/fonts/bismillah/bismillah.eot?#iefix") format("embedded-opentype"),
