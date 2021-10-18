@@ -56,7 +56,7 @@
   src: url("/fonts/ProximaVara/proxima_vara_regular.woff2"),
     url("/fonts/ProximaVara/proxima_vara_regular.woff");
   font-weight: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 // Fallback for browsers that don't support variable fonts
@@ -65,7 +65,7 @@
   src: url("/fonts/ProximaVara/proxima_vara_bold.woff2"),
     url("/fonts/ProximaVara/proxima_vara_bold.woff");
   font-weight: bold;
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
