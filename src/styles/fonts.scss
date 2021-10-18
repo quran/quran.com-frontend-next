@@ -68,19 +68,6 @@
   font-display: swap;
 }
 
-// Variable font for modern browser
-@supports (font-variation-settings: normal) {
-  @font-face {
-    font-family: "ProximaVara";
-    src: url("/fonts/ProximaVara/proxima_vara_variable.woff2")
-        format("woff2 supports variations"),
-      url("/fonts/ProximaVara/proxima_vara_variable.woff2")
-        format("woff2-variations");
-    font-display: swap;
-    font-weight: 100 900;
-  }
-}
-
 @font-face {
   font-family: "bismillah";
   src: url("/fonts/bismillah/bismillah.woff2"),
