@@ -18,25 +18,10 @@ type LinkProps = {
   variant?: LinkVariant;
   newTab?: boolean;
   download?: string;
-  prefetch?: boolean;
 };
 
-const Link: React.FC<LinkProps> = ({
-  href,
-  children,
-  newTab = false,
-  variant,
-  download,
-  prefetch = true,
-}) => (
-  <Wrapper
-    shouldWrap={!download}
-    wrapper={(node) => (
-      <NextLink href={href} prefetch={prefetch}>
-        {node}
-      </NextLink>
-    )}
-  >
+const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
+  <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
     <a
       href={href}
       download={download}
