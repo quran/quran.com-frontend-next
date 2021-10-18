@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import { useRouter } from 'next/router';
 
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
@@ -17,12 +19,24 @@ import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
 const useChapterIdsByUrlPath = (): string[] => {
   const router = useRouter();
   const { chapterId, juzId, pageId } = router.query;
+  const [chapterIds, setChapterIds] = useState([]);
 
-  if (chapterId) return [chapterId as string];
-  if (juzId) return getChapterIdsForJuz(juzId as string);
-  if (pageId) return getChapterIdsForPage(pageId as string);
+  useEffect(() => {
+    (async () => {
+      if (chapterId) {
+        setChapterIds([chapterId as string]);
+      }
+      if (pageId) {
+        const chapterIdsForPage = await getChapterIdsForPage(pageId as string);
+        setChapterIds(chapterIdsForPage);
+      }
+      if (juzId) {
+        setChapterIds(getChapterIdsForJuz(juzId as string));
+      }
+    })();
+  }, [pageId, juzId, chapterId]);
 
-  return [];
+  return chapterIds;
 };
 
 export default useChapterIdsByUrlPath;
