@@ -1,7 +1,9 @@
+/* eslint-disable react/no-multi-comp */
 /* eslint-disable max-lines */
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import InfiniteScroll from 'react-infinite-scroller';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,7 +12,6 @@ import useSWRInfinite from 'swr/infinite';
 import { getPageLimit, getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
-import EndOfScrollingControls from './EndOfScrollingControls';
 import Loader from './Loader';
 import Loading from './Loading';
 import Notes from './Notes/Notes';
@@ -20,6 +21,7 @@ import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
@@ -37,6 +39,11 @@ import {
 import { areArraysEqual } from 'src/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
+
+const EndOfScrollingControls = dynamic(() => import('./EndOfScrollingControls'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 type QuranReaderProps = {
   initialData: VersesResponse;

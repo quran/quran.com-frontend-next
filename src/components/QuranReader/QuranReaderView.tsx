@@ -1,11 +1,19 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 
-import ReadingView from './ReadingView';
+import dynamic from 'next/dynamic';
+
+import Spinner from '../dls/Spinner/Spinner';
+
 import TafsirView from './TafsirView';
 import TranslationView from './TranslationView';
 
 import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from 'types/Verse';
+
+const ReadingView = dynamic(() => import('./ReadingView'), {
+  loading: () => <Spinner />,
+});
 
 interface Props {
   isTafsirData: boolean;
