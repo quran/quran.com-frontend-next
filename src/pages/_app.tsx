@@ -24,6 +24,27 @@ function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <>
       <Head>
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="/fonts/ProximaVara/proxima_vara_regular.woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="/fonts/ProximaVara/proxima_vara_semibold.woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          as="font"
+          type="font/woff2"
+          href="/fonts/ProximaVara/proxima_vara_bold.woff2"
+          crossOrigin="anonymous"
+        />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
       </Head>

@@ -35,11 +35,14 @@ export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Cha
  * Given a pageId, get chapter ids from a json file
  *
  * @param {string} pageId
- * @returns {string[]} chapterIds
+ * @returns {Promise<string[]>} chapterIds
  */
-export const getChapterIdsForPage = (pageId: string): string[] => {
-  const pagesData = require('../../public/data/page-to-chapter-mappings.json');
-  return pagesData[pageId];
+export const getChapterIdsForPage = (pageId: string): Promise<string[]> => {
+  return new Promise((res) => {
+    import(`../../public/data/page-to-chapter-mappings.json`).then((data) => {
+      res(data.default[pageId]);
+    });
+  });
 };
 
 /**

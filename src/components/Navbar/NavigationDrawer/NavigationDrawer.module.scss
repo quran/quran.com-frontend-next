@@ -26,17 +26,3 @@
 .centerVertically {
   @include utility.center-vertically;
 }
-
-.listItemsContainer {
-  padding-left: var(--spacing-medium);
-  padding-right: var(--spacing-medium);
-}
-
-.subtitle {
-  @include utility.center-vertically;
-  font-size: var(--font-size-small);
-  text-transform: uppercase;
-  font-weight: var(--font-weight-bold);
-  border-bottom: 1px var(--color-borders-hairline) solid;
-  min-height: calc(var(--spacing-mega) + var(--spacing-small));
-}

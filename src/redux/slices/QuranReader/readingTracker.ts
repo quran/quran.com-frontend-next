@@ -21,7 +21,7 @@ const initialState: ReadingTracker = {
 };
 
 const NEW_SESSION_BOUNDARY = 20;
-const MAXIMUM_NUMBER_OF_SESSIONS = 5;
+const MAXIMUM_NUMBER_OF_SESSIONS = 10;
 
 export const readingTrackerSlice = createSlice({
   name: 'readingTracker',

@@ -2,7 +2,6 @@
 import range from 'lodash/range';
 
 import { getAllChaptersData, getChapterData } from './chapter';
-import * as sampleVerse from './sample-verse.json';
 
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -83,14 +82,6 @@ export const getFirstWordOfSurah = (
     isFirstWordOfSurah: locationSplits[1] === '1' && locationSplits[2] === '1',
   };
 };
-
-/**
- * get sample verse data
- * it currently return 2:5 (Al baqarah verse 5)
- *
- * @returns {Verse} verse
- */
-export const getSampleVerse = () => sampleVerse;
 
 /**
  * sort the the word location of the verses

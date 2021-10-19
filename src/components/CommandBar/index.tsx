@@ -1,13 +1,20 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useCallback } from 'react';
 
+import dynamic from 'next/dynamic';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './CommandBar.module.scss';
-import CommandBarBody from './CommandBarBody';
 
 import Modal from 'src/components/dls/Modal/Modal';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
+
+const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 const CommandBar: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,15 +1,17 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState, RefObject } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
 import styles from './SearchDrawer.module.scss';
 
 import { getSearchResults } from 'src/api';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
-import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import useDebounce from 'src/hooks/useDebounce';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import useFocus from 'src/hooks/useFocusElement';
@@ -18,6 +20,11 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { areArraysEqual } from 'src/utils/array';
 import { SearchResponse } from 'types/ApiResponses';
+
+const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -142,13 +149,15 @@ const SearchDrawer: React.FC = () => {
         </>
       }
     >
-      <SearchBodyContainer
-        onSearchKeywordClicked={onSearchKeywordClicked}
-        searchQuery={searchQuery}
-        searchResult={searchResult}
-        isSearching={isSearching}
-        hasError={hasError}
-      />
+      {isOpen && (
+        <SearchBodyContainer
+          onSearchKeywordClicked={onSearchKeywordClicked}
+          searchQuery={searchQuery}
+          searchResult={searchResult}
+          isSearching={isSearching}
+          hasError={hasError}
+        />
+      )}
     </Drawer>
   );
 };
