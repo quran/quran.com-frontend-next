@@ -4,7 +4,6 @@ import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import InfiniteScroll from 'react-infinite-scroller';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWRInfinite from 'swr/infinite';
@@ -130,15 +129,6 @@ const QuranReader = ({
     size < getPageLimit(isVerseData, isTafsirData || isSelectedTafsirData, initialData);
   return (
     <>
-      <Head>
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="/fonts/uthmanic_hafs/UthmanicHafs1-Ver17.woff2"
-          crossOrigin="anonymous"
-        />
-      </Head>
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div
