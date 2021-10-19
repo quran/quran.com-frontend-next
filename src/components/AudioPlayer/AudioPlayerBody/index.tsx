@@ -12,37 +12,30 @@ import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
 
 import styles from './AudioPlayerBody.module.scss';
 
-import { selectAudioData, selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import AudioData from 'types/AudioData';
 
 interface Props {
-  isHidden: boolean;
   audioPlayerElRef: MutableRefObject<HTMLAudioElement>;
   isMobileMinimizedForScrolling: boolean;
+  audioData: AudioData;
 }
 
 const AudioPlayerBody: React.FC<Props> = ({
-  isHidden,
   audioPlayerElRef,
   isMobileMinimizedForScrolling,
+  audioData,
 }) => {
-  const audioData = useSelector(selectAudioData, shallowEqual);
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   return (
     <>
       <div className={styles.innerContainer}>
-        {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
-        <audio
-          src={audioData?.audioUrl}
-          style={{ display: 'none' }}
-          id="audio-player"
-          ref={audioPlayerElRef}
-        />
         <AudioKeyBoardListeners
           seek={(seekDuration) => {
             triggerSeek(seekDuration);
           }}
           togglePlaying={() => togglePlaying()}
-          isAudioPlayerHidden={isHidden}
+          isAudioPlayerHidden={false}
         />
         {reciterId && audioData?.chapterId && (
           <QuranReaderHighlightDispatcher

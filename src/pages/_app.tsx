@@ -20,8 +20,6 @@ import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 
-const VERCEL_INSIGHTS_URL = 'https://vitals.vercel-insights.com';
-
 function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <>
@@ -49,7 +47,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
         />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
-        <link rel="preconnect" href={VERCEL_INSIGHTS_URL} />
       </Head>
       <ReduxProvider>
         <ThemeProvider>
