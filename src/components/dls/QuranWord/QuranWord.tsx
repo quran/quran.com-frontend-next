@@ -16,9 +16,9 @@ import {
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
-import { getWordByWordAudioUrl } from 'src/utils/audio';
+import { QURANCDN_AUDIO_BASE_URL } from 'src/utils/audio';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
-import { getVerseAndChapterNumbersFromKey, makeWordLocation } from 'src/utils/verse';
+import { makeWordLocation } from 'src/utils/verse';
 import { QuranFont, WordByWordType } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
@@ -86,9 +86,7 @@ const QuranWord = ({
   );
 
   const onClick = () => {
-    const [chapter, verse] = getVerseAndChapterNumbersFromKey(word.verseKey);
-    const { position } = word;
-    playWordByWordAudio(Number(chapter), Number(verse), position);
+    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
   };
 
   return (
@@ -157,12 +155,9 @@ export default QuranWord;
  * - main audio player refer to the audio player in the bottom navbar, this audio player plays the entire chapter
  * - word by word audio player refer to the audio player that play the clicked word
  *
- *
- * @param {number} chapter
- * @param {number} verse
- * @param {number} location
+ * @param {string} url
  */
-const playWordByWordAudio = (chapter: number, verse: number, location: number) => {
+const playWordByWordAudio = (url: string) => {
   // stop the audio and remove the DOM if it exists
   if (window.wordByWordAudioPlayerEl) {
     window.wordByWordAudioPlayerEl.pause();
@@ -179,7 +174,6 @@ const playWordByWordAudio = (chapter: number, verse: number, location: number) =
     if (isMainAudioPlayerPlaying) triggerPlayAudio();
   };
 
-  const url = getWordByWordAudioUrl(chapter, verse, location);
   window.wordByWordAudioPlayerEl = new Audio(url);
   if (isMainAudioPlayerPlaying) triggerPauseAudio();
 

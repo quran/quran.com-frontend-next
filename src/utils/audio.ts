@@ -8,7 +8,7 @@ export const getVerseTimingByVerseKey = (verseKey: string, verseTimings: VerseTi
 // e.g formatNumber(3) => '003'
 //     formatNumber(10) => '010'
 const formatNumber = (num: number) => num.toString().padStart(3, '0');
-const BASE_URL = 'https://audio.qurancdn.com/wbw';
+export const QURANCDN_AUDIO_BASE_URL = 'https://audio.qurancdn.com/';
 
 /**
  * Given chapter, verse, and wordLocation. Get the mp3 audio url
@@ -25,5 +25,5 @@ export const getWordByWordAudioUrl = (chapter: number, verse: number, wordLocati
   const formattedVerse = formatNumber(verse);
   const formattedWordLocation = formatNumber(wordLocation);
 
-  return `${BASE_URL}/${formattedChapter}_${formattedVerse}_${formattedWordLocation}.mp3`;
+  return `${QURANCDN_AUDIO_BASE_URL}/${formattedChapter}_${formattedVerse}_${formattedWordLocation}.mp3`;
 };
