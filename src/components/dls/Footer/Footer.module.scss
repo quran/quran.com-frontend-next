@@ -18,14 +18,17 @@
   flex-wrap: wrap;
 }
 .itemsContainer > div {
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
 }
 
-.itemsContainer > div + div {
-  margin-left: var(--spacing-xsmall);
-  &::before {
+.itemsContainer > div {
+  margin-bottom: var(--spacing-xxsmall);
+  &::after {
     content: "·";
-    margin-right: calc(0.5 * var(--spacing-xxsmall));
+    margin: 0 var(--spacing-xsmall);
+  }
+  &:last-child::after {
+    content: "";
   }
 }
 
@@ -34,5 +37,5 @@
 }
 
 .copyright {
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
 }
