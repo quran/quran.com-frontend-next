@@ -32,8 +32,6 @@ const Footer = () => (
             Terms
           </Link>
         </div> */}
-      </div>
-      <div className={styles.itemsContainer}>
         <div>
           <Link variant={LinkVariant.Primary} href="https://feedback.quran.com">
             Feedback
