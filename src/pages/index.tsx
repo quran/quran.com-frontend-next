@@ -36,13 +36,22 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
         <CommandBarTrigger />
       </div>
       <div className={styles.flowItem}>
+        <Separator />
+      </div>
+      <div className={styles.flowItem}>
         <HomePageWelcomeMessage />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth)}>
         <RecentReadingSessions />
       </div>
+      <div className={styles.flowItem}>
+        <Separator />
+      </div>
       <div className={classNames(styles.flowItem, styles.fullWidth)}>
         <BookmarksAndQuickLinks />
+      </div>
+      <div className={styles.flowItem}>
+        <Separator />
       </div>
       <div className={styles.flowItem}>
         <ChapterAndJuzList chapters={chapters} />
