@@ -145,7 +145,7 @@ const getTooltipText = (showTooltipFor: WordByWordType[], word: Word): ReactNode
 export default QuranWord;
 
 /**
- * Given chapter, verse and word location
+ * Given an audio url
  * 1) stop the word by word audio player if it's currently playing
  * 2) pause the main audio player if it's currently playing
  * 3) play the word by word audio
