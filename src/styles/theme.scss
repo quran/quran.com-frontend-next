@@ -1,7 +1,7 @@
-@use './themes/light';
-@use './themes/dark';
-@use './themes/sepia';
-@use './shades';
+@use "./themes/light";
+@use "./themes/dark";
+@use "./themes/sepia";
+@use "./shades";
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
@@ -49,9 +49,9 @@
   --z-index-modal: 800;
   --z-index-max: 999;
 
-  --transition-fast: 0.1s;
-  --transition-regular: 0.3s;
-  --transition-slow: 0.45s;
+  --transition-fast: 0.2s;
+  --transition-regular: 0.6s;
+  --transition-slow: 0.9s;
 
   @include shades.shades-dangerous;
   @include light.mode;
@@ -63,16 +63,16 @@
 }
 
 /** Light Theme */
-[data-theme='light'] {
+[data-theme="light"] {
   @include light.mode;
 }
 
 /** Dark Theme */
-[data-theme='dark'] {
+[data-theme="dark"] {
   @include dark.mode;
 }
 
 /** Sepia Theme */
-[data-theme='sepia'] {
+[data-theme="sepia"] {
   @include sepia.mode;
 }
