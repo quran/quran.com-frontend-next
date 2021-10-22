@@ -9,15 +9,14 @@ import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
 
-import { getChapterData, getChapterIdsForJuz } from 'src/utils/chapter';
-import { getJuzIds } from 'src/utils/juz';
+import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
 import Chapter from 'types/Chapter';
 
 type Props = {
   chapters: Chapter[];
 };
 
-const juzIds = getJuzIds();
+const juzMappings = Object.entries(getAllJuzMappings());
 
 enum Sort {
   ASC = 'ascending',
@@ -50,7 +49,10 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
   );
 
   const sortedJuzIds = useMemo(
-    () => (sortBy === Sort.DESC ? juzIds.slice().sort((a, b) => Number(b) - Number(a)) : juzIds),
+    () =>
+      sortBy === Sort.DESC
+        ? juzMappings.slice().sort(([a], [b]) => Number(b) - Number(a))
+        : juzMappings,
     [sortBy],
   );
 
@@ -95,8 +97,9 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
             </div>
           ))}
         {view === View.juz &&
-          sortedJuzIds.map((juzId) => {
-            const chapterIds = getChapterIdsForJuz(juzId.toString());
+          sortedJuzIds.map((juzEntry) => {
+            const [juzId, chapterAndVerseMappings] = juzEntry;
+            const chapterIds = Object.keys(chapterAndVerseMappings);
             return (
               <div className={styles.juzContainer}>
                 <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
@@ -106,7 +109,7 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
                   const chapter = getChapterData(chapterId);
                   return (
                     <div className={styles.chapterContainer} key={chapter.id}>
-                      <Link href={`/${chapter.id}`}>
+                      <Link href={`/${chapterAndVerseMappings[chapterId]}`}>
                         <SurahPreviewRow
                           chapterId={Number(chapter.id)}
                           description={`${chapter.versesCount} Ayahs`}
