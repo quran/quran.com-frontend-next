@@ -109,7 +109,7 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
                   const chapter = getChapterData(chapterId);
                   return (
                     <div className={styles.chapterContainer} key={chapter.id}>
-                      <Link href={`/${chapterAndVerseMappings[chapterId]}`}>
+                      <Link href={`/${chapter.id}/${chapterAndVerseMappings[chapterId]}`}>
                         <SurahPreviewRow
                           chapterId={Number(chapter.id)}
                           description={`${chapter.versesCount} Ayahs`}
