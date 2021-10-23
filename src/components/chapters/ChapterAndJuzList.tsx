@@ -17,7 +17,7 @@ import Chapter from 'types/Chapter';
 const JuzView = dynamic(() => import('./JuzView'), {
   loading: () => (
     <div className={styles.loadingContainer}>
-      <Spinner />,
+      <Spinner />
     </div>
   ),
 });

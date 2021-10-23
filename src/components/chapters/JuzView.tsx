@@ -26,6 +26,10 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
     [isDescending, juzMappings],
   );
 
+  if (juzMappings.length === 0) {
+    return <div className={styles.loadingContainer} />;
+  }
+
   return (
     <>
       {sortedJuzIds.map((juzEntry) => {

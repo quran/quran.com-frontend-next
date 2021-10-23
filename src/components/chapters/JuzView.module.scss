@@ -29,3 +29,7 @@
 .juzTitle {
   margin-bottom: var(--spacing-xsmall);
 }
+
+.loadingContainer {
+  min-height: 100vh; // reduce layout shift
+}
