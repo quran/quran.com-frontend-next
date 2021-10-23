@@ -62,8 +62,10 @@ type ChapterAndVerseMapping = { [chapter: string]: string };
  *
  * @returns {[juz: string]: ChapterAndVerseMapping}
  */
-export const getAllJuzMappings = (): { [juz: string]: ChapterAndVerseMapping } => {
-  return require('../../public/data/juz-to-chapter-verse-mappings.json');
+export const getAllJuzMappings = (): Promise<{ [juz: string]: ChapterAndVerseMapping }> => {
+  return import('../../public/data/juz-to-chapter-verse-mappings.json').then(
+    (data) => data.default,
+  );
 };
 
 /**
@@ -79,8 +81,10 @@ export const getAllJuzMappings = (): { [juz: string]: ChapterAndVerseMapping } =
  * -> juz "1" contains chapter "1" with verse "1-7" and chapter "2" with verse "1-141"
  *
  */
-export const getChapterAndVerseMappingForJuz = (juzId: string): { [chapter: string]: string } => {
-  const juzVerseMapping = getAllJuzMappings();
+export const getChapterAndVerseMappingForJuz = async (
+  juzId: string,
+): Promise<{ [chapter: string]: string }> => {
+  const juzVerseMapping = await getAllJuzMappings();
   return juzVerseMapping[juzId];
 };
 

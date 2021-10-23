@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 
 import classNames from 'classnames';
 
@@ -15,8 +15,6 @@ import Chapter from 'types/Chapter';
 type Props = {
   chapters: Chapter[];
 };
-
-const juzMappings = Object.entries(getAllJuzMappings());
 
 enum Sort {
   ASC = 'ascending',
@@ -36,6 +34,16 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
   const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
+  const [juzMappings, setJuzMappings] = useState([]);
+
+  useEffect(() => {
+    if (view === View.juz) {
+      getAllJuzMappings()
+        .then((data) => Object.entries(data))
+        .then(setJuzMappings);
+    }
+  }, [view]);
+
   const onSort = () => {
     setSortBy((prevValue) => (prevValue === Sort.DESC ? Sort.ASC : Sort.DESC));
   };
@@ -53,7 +61,7 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
       sortBy === Sort.DESC
         ? juzMappings.slice().sort(([a], [b]) => Number(b) - Number(a))
         : juzMappings,
-    [sortBy],
+    [juzMappings, sortBy],
   );
 
   return (
