@@ -1,18 +1,33 @@
-import React, { useState, useMemo, useEffect } from 'react';
+/* eslint-disable react/no-multi-comp */
+import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 
 import CaretDownIcon from '../../../public/icons/caret-down.svg';
-import Link, { LinkVariant } from '../dls/Link/Link';
+import Link from '../dls/Link/Link';
+import Spinner from '../dls/Spinner/Spinner';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
 
-import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
 import Chapter from 'types/Chapter';
 
-type Props = {
+const JuzView = dynamic(() => import('./JuzView'), {
+  loading: () => (
+    <div className={styles.loadingContainer}>
+      <Spinner />,
+    </div>
+  ),
+});
+
+enum View {
+  Surah = 'surah',
+  Juz = 'juz',
+}
+
+type ChapterAndJuzListProps = {
   chapters: Chapter[];
 };
 
@@ -20,29 +35,17 @@ enum Sort {
   ASC = 'ascending',
   DESC = 'descending',
 }
-enum View {
-  Surah = 'surah',
-  juz = 'juz',
-}
 
 const tabs = [
   { title: 'Surah', value: View.Surah },
-  { title: 'Juz', value: View.juz },
+  { title: 'Juz', value: View.Juz },
 ];
 
-const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
+const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
+  chapters,
+}: ChapterAndJuzListProps) => {
   const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
-
-  const [juzMappings, setJuzMappings] = useState([]);
-
-  useEffect(() => {
-    if (view === View.juz) {
-      getAllJuzMappings()
-        .then((data) => Object.entries(data))
-        .then(setJuzMappings);
-    }
-  }, [view]);
 
   const onSort = () => {
     setSortBy((prevValue) => (prevValue === Sort.DESC ? Sort.ASC : Sort.DESC));
@@ -54,14 +57,6 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
         ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id))
         : chapters,
     [sortBy, chapters],
-  );
-
-  const sortedJuzIds = useMemo(
-    () =>
-      sortBy === Sort.DESC
-        ? juzMappings.slice().sort(([a], [b]) => Number(b) - Number(a))
-        : juzMappings,
-    [juzMappings, sortBy],
   );
 
   return (
@@ -87,7 +82,7 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
       <div
         className={classNames({
           [styles.surahLayout]: view === View.Surah,
-          [styles.juzLayout]: view === View.juz,
+          [styles.juzLayout]: view === View.Juz,
         })}
       >
         {view === View.Surah &&
@@ -104,34 +99,7 @@ const ChapterAndJuzList: React.FC<Props> = ({ chapters }: Props) => {
               </Link>
             </div>
           ))}
-        {view === View.juz &&
-          sortedJuzIds.map((juzEntry) => {
-            const [juzId, chapterAndVerseMappings] = juzEntry;
-            const chapterIds = Object.keys(chapterAndVerseMappings);
-            return (
-              <div className={styles.juzContainer}>
-                <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
-                  <div className={styles.juzTitle}>Juz {juzId}</div>
-                </Link>
-                {chapterIds.map((chapterId) => {
-                  const chapter = getChapterData(chapterId);
-                  return (
-                    <div className={styles.chapterContainer} key={chapter.id}>
-                      <Link href={`/${chapter.id}/${chapterAndVerseMappings[chapterId]}`}>
-                        <SurahPreviewRow
-                          chapterId={Number(chapter.id)}
-                          description={`${chapter.versesCount} Ayahs`}
-                          surahName={chapter.nameSimple}
-                          surahNumber={Number(chapter.id)}
-                          translatedSurahName={chapter.translatedName.name}
-                        />
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          })}
+        {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
       </div>
     </>
   );
