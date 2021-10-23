@@ -11,6 +11,7 @@
   overflow-x: auto;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
+    height: 0;
   }
 }
 
