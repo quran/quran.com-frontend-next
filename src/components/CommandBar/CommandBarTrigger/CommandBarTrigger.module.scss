@@ -6,9 +6,10 @@ $width: calc(11 * var(--spacing-mega));
   width: 100%;
   display: flex;
   align-items: center;
-  padding: var(--spacing-small);
+  padding: var(--spacing-xxsmall);
   color: var(--color-text-faded);
   background: none;
+  min-height: calc(3 * var(--spacing-large));
   border: 1px solid var(--color-background-alternative-deep);
   border-radius: var(--border-radius-default);
   cursor: pointer;
@@ -18,7 +19,11 @@ $width: calc(11 * var(--spacing-mega));
     box-shadow: var(--shadow-normal);
     border-color: var(--color-background-inverse);
   }
-  @include breakpoints.tablet {
-    justify-content: space-between;
-  }
+  justify-content: space-between;
+}
+
+.actionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,0 +1,54 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: calc(2 * var(--spacing-mega));
+}
+
+.transcriptText {
+  text-align: right;
+  min-height: var(--spacing-large);
+}
+
+.speakMessage {
+  width: 75%;
+  text-align: left;
+}
+
+.micCircle {
+  background-color: var(--color-success-medium);
+  border-radius: var(--border-radius-circle);
+  width: calc(4 * var(--spacing-large));
+  height: calc(4 * var(--spacing-large));
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > svg {
+    width: 100%;
+    & > path {
+      fill: var(--color-background-default);
+    }
+  }
+}
+
+.circlesContainer {
+  width: 20%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    position: absolute;
+  }
+}
+
+.volumeCircle {
+  background-color: var(--color-secondary-faint);
+  border-radius: var(--border-radius-circle);
+  width: calc(var(--volume) * 4 * var(--spacing-large));
+  height: calc(var(--volume) * 4 * var(--spacing-large));
+  transition: width var(--transition-fast) ease,
+    height var(--transition-fast) ease;
+}

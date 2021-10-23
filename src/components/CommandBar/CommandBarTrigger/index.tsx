@@ -7,6 +7,7 @@ import IconSearch from '../../../../public/icons/search.svg';
 import styles from './CommandBarTrigger.module.scss';
 
 import KeyboardInput from 'src/components/dls/KeyboardInput';
+import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 
 const CommandBarTrigger: React.FC = () => {
@@ -17,8 +18,11 @@ const CommandBarTrigger: React.FC = () => {
   return (
     <button className={styles.container} type="button" onClick={onClick}>
       <IconSearch />
-      <span className={styles.text}>Quick access to anything</span>
-      <KeyboardInput meta keyboardKey="K" />
+      <span>Quick access to anything</span>
+      <div className={styles.actionsContainer}>
+        <KeyboardInput meta keyboardKey="K" />
+        <TarteelVoiceSearchTrigger isCommandBar />
+      </div>
     </button>
   );
 };

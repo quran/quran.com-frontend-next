@@ -1,0 +1,11 @@
+.container {
+  min-height: 78vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+.commandBarContainer {
+  margin: var(--spacing-medium) var(--spacing-medium) 0 0;
+}
