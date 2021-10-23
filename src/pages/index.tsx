@@ -11,7 +11,6 @@ import styles from './index.module.scss';
 import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
 import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 import Footer from 'src/components/dls/Footer/Footer';
-import Separator from 'src/components/dls/Separator/Separator';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -36,28 +35,16 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
         <CommandBarTrigger />
       </div>
       <div className={styles.flowItem}>
-        <Separator />
-      </div>
-      <div className={styles.flowItem}>
         <HomePageWelcomeMessage />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth)}>
         <RecentReadingSessions />
       </div>
-      <div className={styles.flowItem}>
-        <Separator />
-      </div>
       <div className={classNames(styles.flowItem, styles.fullWidth)}>
         <BookmarksAndQuickLinks />
       </div>
       <div className={styles.flowItem}>
-        <Separator />
-      </div>
-      <div className={styles.flowItem}>
         <ChapterAndJuzList chapters={chapters} />
-      </div>
-      <div className={styles.flowItem}>
-        <Separator />
       </div>
       <div className={styles.flowItem}>
         <Footer />
