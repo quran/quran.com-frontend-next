@@ -56,6 +56,38 @@ export const getChapterIdsForJuz = (juzId: string): string[] => {
   return juzsData[juzId];
 };
 
+type ChapterAndVerseMapping = { [chapter: string]: string };
+/**
+ * get ChapterAndVerseMapping for all juzs
+ *
+ * @returns {[juz: string]: ChapterAndVerseMapping}
+ */
+export const getAllJuzMappings = (): Promise<{ [juz: string]: ChapterAndVerseMapping }> => {
+  return import('../../public/data/juz-to-chapter-verse-mappings.json').then(
+    (data) => data.default,
+  );
+};
+
+/**
+ * Given a juzId get a chapter + verse mapping for this juz
+ *
+ * @param {string} juzId
+ * @returns {[chapter: string]: string}
+ *
+ * original data source: https://api.quran.com/api/v4/juzs
+ *
+ * Example:
+ * getChapterAndVerseMappingForJuz("1") // { "1": "1-7", "2" : "1-141"}
+ * -> juz "1" contains chapter "1" with verse "1-7" and chapter "2" with verse "1-141"
+ *
+ */
+export const getChapterAndVerseMappingForJuz = async (
+  juzId: string,
+): Promise<{ [chapter: string]: string }> => {
+  const juzVerseMapping = await getAllJuzMappings();
+  return juzVerseMapping[juzId];
+};
+
 /**
  * Whether the current surah is the first surah.
  *

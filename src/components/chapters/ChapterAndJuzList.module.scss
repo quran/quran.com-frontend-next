@@ -41,32 +41,6 @@
   column-gap: 1em;
 }
 
-.juzContainer + .juzContainer {
-  margin-top: var(--spacing-small);
-  @include breakpoints.tablet {
-    margin-top: 0;
-  }
-}
-
-.juzContainer {
-  display: inline-block;
-  width: 100%;
-  margin-bottom: var(--spacing-small);
-  box-sizing: border-box;
-  padding: var(--spacing-small);
-
-  background-color: var(--color-background-alternative-faint);
-  border-radius: var(--border-radius-default);
-
-  .chapterContainer + .chapterContainer {
-    margin-top: var(--spacing-small);
-  }
-}
-
-.juzTitle {
-  margin-bottom: var(--spacing-xsmall);
-}
-
 // tabs
 .tabsContainer {
   padding-bottom: var(--spacing-medium);
@@ -96,4 +70,8 @@
     width: var(--spacing-small);
     margin-left: var(--spacing-xxsmall);
   }
+}
+
+.loadingContainer {
+  min-height: 100vh; // reduce layout shift
 }
