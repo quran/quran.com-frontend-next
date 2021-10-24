@@ -12,11 +12,12 @@ export const getAverageVolume = (analyser: AnalyserNode, volumes: Uint8Array) =>
 };
 
 /**
- * Get the volume multiplier.
+ * Get the value that will be used inside css as a multiplier of the base width
+ * and height of the audio visualizer circle.
  *
  * @param {number} volume
  * @returns {number}
  */
-export const getVolumeCircleMultiplier = (volume: number): number => {
-  return Math.max(volume / 100) + 1;
+export const getVolumeLevelMultiplier = (volume: number): number => {
+  return Math.max((volume * 1.5) / 100) + 1;
 };

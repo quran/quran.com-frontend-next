@@ -16,7 +16,7 @@ interface Props {
 }
 
 const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => {
-  const { isLoading, partialTranscriptText, searchResult, error, volume, isWaitingForPermission } =
+  const { isLoading, partialTranscript, searchResult, error, volume, isWaitingForPermission } =
     useTarteelVoiceSearch();
 
   if (isLoading) {
@@ -45,7 +45,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
           [styles.noResultContainer]: isCommandBar,
         })}
       >
-        <NoResults searchQuery={partialTranscriptText} isSearchDrawer={false} />
+        <NoResults searchQuery={partialTranscript} isSearchDrawer={false} />
       </div>
     );
   }
@@ -61,7 +61,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
             [styles.commandBarContainer]: isCommandBar,
           })}
         >
-          <PartialResult partialTranscriptText={partialTranscriptText} volume={volume} />
+          <PartialResult partialTranscript={partialTranscript} volume={volume} />
         </div>
       )}
     </>

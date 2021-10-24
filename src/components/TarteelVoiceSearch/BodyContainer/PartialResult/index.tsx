@@ -4,14 +4,14 @@ import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
 
 import styles from './PartialResult.module.scss';
 
-import { getVolumeCircleMultiplier } from 'src/utils/voice';
+import { getVolumeLevelMultiplier } from 'src/audioInput/voice';
 
 interface Props {
-  partialTranscriptText: string;
+  partialTranscript: string;
   volume: number;
 }
 
-const PartialResult: React.FC<Props> = ({ partialTranscriptText, volume }) => {
+const PartialResult: React.FC<Props> = ({ partialTranscript, volume }) => {
   return (
     <div>
       <div className={styles.container}>
@@ -20,14 +20,14 @@ const PartialResult: React.FC<Props> = ({ partialTranscriptText, volume }) => {
           <div
             className={styles.volumeCircle}
             // @ts-ignore
-            style={{ '--volume': getVolumeCircleMultiplier(volume) }}
+            style={{ '--volume': getVolumeLevelMultiplier(volume) }}
           />
           <div className={styles.micCircle}>
             <MicrophoneIcon />
           </div>
         </div>
       </div>
-      <p className={styles.transcriptText}>{partialTranscriptText}</p>
+      <p className={styles.transcript}>{partialTranscript}</p>
     </div>
   );
 };

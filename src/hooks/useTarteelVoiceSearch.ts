@@ -6,8 +6,8 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 // @ts-ignore
 import { AudioWorklet } from 'audio-worklet';
 
+import { getAverageVolume } from 'src/audioInput/voice';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
-import { getAverageVolume } from 'src/utils/voice';
 import Event from 'types/Tarteel/Event';
 import Result from 'types/Tarteel/Result';
 import SearchResult from 'types/Tarteel/SearchResult';
@@ -35,13 +35,15 @@ const AUDIO_CONSTRAINTS = {
 };
 
 const USER_MEDIA_NOT_SUPPORTED_ERROR = 'USER_MEDIA_NOT_SUPPORTED';
+const ANALYSER_SMOOTHING_CONSTANT = 0.8;
+const FAST_FOURIER_TRANSFORM_SIZE = 1024;
 
 const useTarteelVoiceSearch = (startRecording = true) => {
   const [volume, setVolume] = useState<number>(0);
   const mediaStream = useRef<MediaStream>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<VoiceError>(null);
-  const [partialTranscriptText, setPartialTranscriptText] = useState<string>(null);
+  const [partialTranscript, setPartialTranscript] = useState<string>(null);
   const [searchResult, setSearchResult] = useState<SearchResult>(null);
   const [isWaitingForPermission, setIsWaitingForPermission] = useState(false);
 
@@ -110,7 +112,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
           break;
         case Event.PARTIAL_TRANSCRIPT:
           setIsLoading(false);
-          setPartialTranscriptText(data.queryText);
+          setPartialTranscript(data.queryText);
           break;
         case Event.ERROR:
           setIsLoading(false);
@@ -160,7 +162,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     }
     // re-set fields in-case this is not the first time we are running the voice search
     setError(null);
-    setPartialTranscriptText(null);
+    setPartialTranscript(null);
     setSearchResult(null);
     setIsWaitingForPermission(true);
     const audioContext = new window.AudioContext();
@@ -174,7 +176,9 @@ const useTarteelVoiceSearch = (startRecording = true) => {
       .then((stream) => {
         // 2. Add the MicInputProcessor to the audioContext
         audioContext.audioWorklet
-          .addModule(new AudioWorklet(new URL('src/audio/MicInputProcessor.ts', import.meta.url)))
+          .addModule(
+            new AudioWorklet(new URL('src/audioInput/MicInputProcessor.ts', import.meta.url)),
+          )
           .then(() => {
             setIsLoading(true);
             // 3. Start a new websocket
@@ -184,8 +188,8 @@ const useTarteelVoiceSearch = (startRecording = true) => {
               mediaStream.current = stream;
               micSourceNode = audioContext.createMediaStreamSource(stream);
               analyser = audioContext.createAnalyser();
-              analyser.smoothingTimeConstant = 0.8;
-              analyser.fftSize = 1024;
+              analyser.smoothingTimeConstant = ANALYSER_SMOOTHING_CONSTANT;
+              analyser.fftSize = FAST_FOURIER_TRANSFORM_SIZE;
               const volumes = new Uint8Array(analyser.frequencyBinCount);
               micWorkletNode = new AudioWorkletNode(audioContext, 'MicInputProcessor');
               webSocket.send(JSON.stringify(START_STREAM_DATA));
@@ -240,7 +244,14 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     };
   }, [isWebSocketOpen, onWebsocketMessage, stopFlow, startRecording]);
 
-  return { isLoading, error, partialTranscriptText, searchResult, volume, isWaitingForPermission };
+  return {
+    isLoading,
+    error,
+    partialTranscript,
+    searchResult,
+    volume,
+    isWaitingForPermission,
+  };
 };
 
 export default useTarteelVoiceSearch;
