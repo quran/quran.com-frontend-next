@@ -29,6 +29,7 @@ import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
 import search from './slices/Search/search';
 import theme from './slices/theme';
+import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
 
 const persistConfig = {
@@ -67,6 +68,7 @@ export const rootReducer = combineReducers({
   readingTracker,
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
+  voiceSearch,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

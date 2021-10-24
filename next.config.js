@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+const path = require('path');
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
@@ -20,6 +23,23 @@ const config = {
     dest: 'public',
     runtimeCaching,
     publicExcludes: ['!fonts/v1/**/*', '!fonts/v2/**/*'],
+  },
+  // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
+  webpack: (webpackConfig) => {
+    webpackConfig.resolve = {
+      ...webpackConfig.resolve,
+      alias: {
+        ...webpackConfig.resolve.alias,
+        'audio-worklet': path.resolve(__dirname, 'src/audioInput/audio-worklet.ts'),
+      },
+    };
+    webpackConfig.module.parser = {
+      ...webpackConfig.module.parser,
+      javascript: {
+        worker: ['AudioWorklet from audio-worklet'],
+      },
+    };
+    return webpackConfig;
   },
   SentryWebpackPluginOptions: {
     // Additional config options for the Sentry Webpack plugin. Keep in mind that

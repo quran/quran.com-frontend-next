@@ -12,12 +12,14 @@ import styles from './SearchDrawer.module.scss';
 import { getSearchResults } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
+import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import useDebounce from 'src/hooks/useDebounce';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import useFocus from 'src/hooks/useFocusElement';
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
+import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { areArraysEqual } from 'src/utils/array';
 import { SearchResponse } from 'types/ApiResponses';
 
@@ -25,6 +27,13 @@ const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBo
   ssr: false,
   loading: () => <Spinner />,
 });
+const VoiceSearchBodyContainer = dynamic(
+  () => import('src/components/TarteelVoiceSearch/BodyContainer'),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  },
+);
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -38,6 +47,7 @@ const SearchDrawer: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
+  const isVoiceSearchFlowStarted = useSelector(selectIsSearchDrawerVoiceFlowStarted, shallowEqual);
   // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
   const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
@@ -138,8 +148,9 @@ const SearchDrawer: React.FC = () => {
               placeholder="Search"
               onChange={onSearchQueryChange}
               value={searchQuery}
-              disabled={isSearching}
+              disabled={isVoiceSearchFlowStarted || isSearching}
             />
+            <TarteelVoiceSearchTrigger />
             {searchQuery && (
               <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
                 Clear
@@ -150,13 +161,19 @@ const SearchDrawer: React.FC = () => {
       }
     >
       {isOpen && (
-        <SearchBodyContainer
-          onSearchKeywordClicked={onSearchKeywordClicked}
-          searchQuery={searchQuery}
-          searchResult={searchResult}
-          isSearching={isSearching}
-          hasError={hasError}
-        />
+        <>
+          {isVoiceSearchFlowStarted ? (
+            <VoiceSearchBodyContainer />
+          ) : (
+            <SearchBodyContainer
+              onSearchKeywordClicked={onSearchKeywordClicked}
+              searchQuery={searchQuery}
+              searchResult={searchResult}
+              isSearching={isSearching}
+              hasError={hasError}
+            />
+          )}
+        </>
       )}
     </Drawer>
   );

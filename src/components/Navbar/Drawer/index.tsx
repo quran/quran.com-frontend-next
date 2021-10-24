@@ -17,6 +17,7 @@ import {
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
+import { stopSearchDrawerVoiceFlow } from 'src/redux/slices/voiceSearch';
 
 export enum DrawerType {
   Navigation = 'navigation',
@@ -74,8 +75,12 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
 
   const closeDrawer = useCallback(() => {
     dispatch({ type: getActionCreator(type), payload: false });
+    if (type === DrawerType.Search) {
+      dispatch({ type: stopSearchDrawerVoiceFlow.type });
+    }
   }, [dispatch, type]);
-  useHotkeys('Escape', closeDrawer, { enabled: isOpen });
+  // enableOnTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
+  useHotkeys('Escape', closeDrawer, { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] });
 
   // Hide navbar after successful navigation
   useEffect(() => {

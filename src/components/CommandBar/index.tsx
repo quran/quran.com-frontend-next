@@ -10,6 +10,7 @@ import styles from './CommandBar.module.scss';
 import Modal from 'src/components/dls/Modal/Modal';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
+import { stopCommandBarVoiceFlow } from 'src/redux/slices/voiceSearch';
 
 const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
   ssr: false,
@@ -28,6 +29,7 @@ const CommandBar: React.FC = () => {
   );
   const closeCommandBar = useCallback(() => {
     dispatch({ type: setIsOpen.type, payload: false });
+    dispatch({ type: stopCommandBarVoiceFlow.type });
   }, [dispatch]);
   useHotkeys('cmd+k, ctrl+k, cmd+p, ctrl+p', toggleShowCommandBar, { enableOnTags: ['INPUT'] }, [
     dispatch,

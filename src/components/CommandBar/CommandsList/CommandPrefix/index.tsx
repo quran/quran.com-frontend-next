@@ -14,7 +14,7 @@ const CommandPrefix: React.FC<Props> = ({ name }) => {
       <span className={styles.commandPrefix}>
         <NavigateIcon />
       </span>
-      {name}
+      <p className={styles.name}>{name}</p>
     </div>
   );
 };

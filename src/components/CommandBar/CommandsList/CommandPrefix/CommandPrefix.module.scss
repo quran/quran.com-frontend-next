@@ -9,5 +9,11 @@
 .container {
   display: flex;
   align-items: center;
-  width: 100%;
+  max-width: 90%;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

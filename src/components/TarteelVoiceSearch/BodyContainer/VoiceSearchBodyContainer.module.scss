@@ -1,0 +1,17 @@
+$min-height: 78vh;
+
+.container {
+  min-height: $min-height;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+.noResultContainer {
+  text-align: center;
+}
+
+.commandBarContainer {
+  margin: var(--spacing-medium) var(--spacing-medium) 0 0;
+}
