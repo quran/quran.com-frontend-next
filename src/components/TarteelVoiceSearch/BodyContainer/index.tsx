@@ -8,6 +8,7 @@ import SearchResults from './SearchResults';
 import styles from './VoiceSearchBodyContainer.module.scss';
 
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import NoResults from 'src/components/Search/NoResults';
 import useTarteelVoiceSearch from 'src/hooks/useTarteelVoiceSearch';
 
 interface Props {
@@ -21,6 +22,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
   if (isLoading) {
     return <Spinner size={SpinnerSize.Large} />;
   }
+  // if there is an error or we are waiting for the permission from the user
   if (error || isWaitingForPermission) {
     return (
       <div
@@ -34,10 +36,24 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
     );
   }
 
+  // if we received the result but no matches
+  if (searchResult && !searchResult.matches.length) {
+    return (
+      <div
+        className={classNames({
+          [styles.container]: !isCommandBar,
+          [styles.noResultContainer]: isCommandBar,
+        })}
+      >
+        <NoResults searchQuery={partialTranscriptText} isSearchDrawer={false} />
+      </div>
+    );
+  }
+
   return (
     <>
       {searchResult ? (
-        <SearchResults searchResult={searchResult} />
+        <SearchResults searchResult={searchResult} isCommandBar={isCommandBar} />
       ) : (
         <div
           className={classNames({

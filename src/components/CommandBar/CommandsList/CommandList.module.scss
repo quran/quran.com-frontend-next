@@ -17,6 +17,7 @@
 .command {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: calc(1.5 * var(--spacing-mega));
   font-size: var(--font-size-normal);
   padding: 0 var(--spacing-xsmall);

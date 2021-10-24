@@ -2,6 +2,7 @@ import React from 'react';
 
 import ErrorIcon from '../../../../../public/icons/info.svg';
 import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
+import NoMicrophoneIcon from '../../../../../public/icons/no-mic.svg';
 
 import styles from './Error.module.scss';
 
@@ -25,12 +26,12 @@ const Error: React.FC<Props> = ({ error, isWaitingForPermission }) => {
       case VoiceError.NO_PERMISSION:
         errorText =
           'It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ';
-        icon = <MicrophoneIcon />;
+        icon = <NoMicrophoneIcon />;
         break;
       case VoiceError.NOT_SUPPORTED:
         errorText =
           'It looks like your browser does not support microphone. Please try a different browser or download the ';
-        icon = <MicrophoneIcon />;
+        icon = <NoMicrophoneIcon />;
         break;
       default:
         errorText = 'An error has occurred, please try again later. Or download the ';
