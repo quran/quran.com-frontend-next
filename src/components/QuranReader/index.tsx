@@ -18,7 +18,6 @@ import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '.
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
-import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -135,7 +134,6 @@ const QuranReader = ({
         onCopy={(event) => onCopyQuranWords(event, verses)}
         className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
       >
-        <ReadingPreferenceSwitcher />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}
