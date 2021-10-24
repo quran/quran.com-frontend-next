@@ -3,6 +3,7 @@ import React from 'react';
 
 import dynamic from 'next/dynamic';
 
+import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TafsirView from './TafsirView';
 import TranslationView from './TranslationView';
 
@@ -30,9 +31,19 @@ const QuranReaderView: React.FC<Props> = ({
     return <TafsirView verse={verses[0]} />;
   }
   if (isReadingPreference) {
-    return <ReadingView verses={verses} />;
+    return (
+      <>
+        <ReadingPreferenceSwitcher />
+        <ReadingView verses={verses} />;
+      </>
+    );
   }
-  return <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
+  return (
+    <>
+      <ReadingPreferenceSwitcher />
+      <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
+    </>
+  );
 };
 
 export default QuranReaderView;
