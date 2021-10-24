@@ -6,6 +6,7 @@ import styles from './BookmarkedVersesList.module.scss';
 
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { getVerseNavigationUrl } from 'src/utils/navigation';
 
 const BookmarkedVersesList: React.FC = () => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
@@ -16,7 +17,11 @@ const BookmarkedVersesList: React.FC = () => {
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
             {verseKeys.slice(0, 10).map((verseKey) => (
-              <Button type={ButtonType.Success} shape={ButtonShape.Pill}>
+              <Button
+                href={getVerseNavigationUrl(verseKey)}
+                type={ButtonType.Success}
+                shape={ButtonShape.Pill}
+              >
                 {verseKey}
               </Button>
             ))}
