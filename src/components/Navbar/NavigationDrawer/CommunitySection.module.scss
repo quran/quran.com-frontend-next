@@ -23,6 +23,10 @@
   position: absolute;
   z-index: -1;
   right: 0;
+
+  [data-theme="dark"] & {
+    opacity: var(--opacity-10);
+  }
 }
 
 .title {
