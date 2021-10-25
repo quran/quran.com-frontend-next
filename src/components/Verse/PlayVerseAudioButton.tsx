@@ -7,7 +7,7 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Spinner from '../dls/Spinner/Spinner';
 
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import {
   selectReciter,
   playFrom,
@@ -53,20 +53,30 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
 
   if (isLoading)
     return (
-      <Button tooltip="Loading" type={ButtonType.Secondary}>
+      <Button size={ButtonSize.Small} tooltip="Loading" type={ButtonType.Secondary}>
         <Spinner />
       </Button>
     );
 
   if (isVerseBeingPlayed)
     return (
-      <Button tooltip="Pause" type={ButtonType.Secondary} onClick={triggerPauseAudio}>
+      <Button
+        size={ButtonSize.Small}
+        tooltip="Pause"
+        type={ButtonType.Secondary}
+        onClick={triggerPauseAudio}
+      >
         <PauseIcon />
       </Button>
     );
 
   return (
-    <Button tooltip="Play" type={ButtonType.Secondary} onClick={onPlayClicked}>
+    <Button
+      size={ButtonSize.Small}
+      tooltip="Play"
+      type={ButtonType.Secondary}
+      onClick={onPlayClicked}
+    >
       <PlayIcon />
     </Button>
   );

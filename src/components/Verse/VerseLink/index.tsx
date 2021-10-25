@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { getVerseNavigationUrl } from 'src/utils/navigation';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 const VerseLink: React.FC<Props> = ({ verseKey }) => {
   const url = getVerseNavigationUrl(verseKey);
   return (
-    <Button href={url} type={ButtonType.Secondary}>
+    <Button size={ButtonSize.Small} href={url} type={ButtonType.Secondary}>
       {verseKey}
     </Button>
   );

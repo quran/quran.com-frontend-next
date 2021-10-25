@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import Verse from 'types/Verse';
@@ -23,7 +23,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
   return (
     <PopoverMenu
       trigger={
-        <Button tooltip="More" type={ButtonType.Secondary}>
+        <Button size={ButtonSize.Small} tooltip="More" type={ButtonType.Secondary}>
           <OverflowMenuIcon />
         </Button>
       }
