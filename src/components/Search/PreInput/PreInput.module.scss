@@ -1,13 +1,7 @@
-$internal-container-height: 85vh;
-
 .container {
   width: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.mainBodyContainer {
-  min-height: $internal-container-height;
 }
 
 .popularSearchesContainer {

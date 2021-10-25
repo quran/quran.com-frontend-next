@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-xsmall);
+}
+
+.betaContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.separatorContainer {
+  margin: var(--spacing-small) 0;
+}
+
+.beta {
+  padding: var(--spacing-micro);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-success-medium);
+  color: var(--color-background-default);
+}

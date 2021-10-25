@@ -1,7 +1,5 @@
 import React from 'react';
 
-import classNames from 'classnames';
-
 import IconSearch from '../../../../public/icons/search.svg';
 
 import styles from './NoResults.module.scss';
@@ -16,7 +14,7 @@ interface Props {
 
 const NoResults: React.FC<Props> = ({ searchQuery, searchUrl = '', isSearchDrawer }) => (
   <>
-    <div className={classNames(styles.container, { [styles.searchDrawer]: isSearchDrawer })}>
+    <div className={styles.container}>
       <div className={styles.mainBody}>
         <div className={styles.iconContainer}>
           <IconSearch />

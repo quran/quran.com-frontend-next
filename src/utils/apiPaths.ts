@@ -21,6 +21,9 @@ export const makeVersesUrl = (id: string | number, params?: Record<string, unkno
   return makeUrl(`/verses/by_chapter/${id}`, apiParams);
 };
 
+export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
+  makeUrl(`/verses/filter`, { ...params });
+
 /**
  * Compose the url for the translations API.
  *

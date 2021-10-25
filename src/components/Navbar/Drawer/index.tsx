@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import SearchDrawerFooter from '../SearchDrawer/Footer';
+
 import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
@@ -34,6 +36,7 @@ interface Props {
   type: DrawerType;
   side?: DrawerSide;
   header: ReactNode;
+  hideCloseButton?: boolean;
   children: ReactNode;
 }
 
@@ -65,7 +68,13 @@ const getActionCreator = (type: DrawerType) => {
   return setIsSearchDrawerOpen.type;
 };
 
-const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, children }) => {
+const Drawer: React.FC<Props> = ({
+  type,
+  side = DrawerSide.Right,
+  header,
+  children,
+  hideCloseButton = false,
+}) => {
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
@@ -102,19 +111,25 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
       ref={drawerRef}
     >
       <div className={styles.header}>
-        <div className={styles.headerContentContainer}>
+        <div
+          className={classNames(styles.headerContentContainer, {
+            [styles.voiceSearchHeader]: hideCloseButton,
+          })}
+        >
           <div className={styles.headerContent}>
             {header}
-            <DrawerCloseButton onClick={closeDrawer} />
+            {!hideCloseButton && <DrawerCloseButton onClick={closeDrawer} />}
           </div>
         </div>
       </div>
       <div
         className={classNames(styles.bodyContainer, {
           [styles.navigationBodyContainer]: type === DrawerType.Navigation,
+          [styles.bodyWithBottomPadding]: type !== DrawerType.Search,
         })}
       >
         {children}
+        {type === DrawerType.Search && <SearchDrawerFooter />}
       </div>
     </div>
   );

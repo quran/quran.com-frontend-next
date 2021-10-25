@@ -1,5 +1,5 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { getDistanceBetweenVerses, sortWordLocation } from './verse';
+import { getDistanceBetweenVerses, sortWordLocation, shortenVerseText } from './verse';
 
 describe('sort verse word position', () => {
   it('should sort based on chapter', () => {
@@ -146,5 +146,27 @@ describe('get the distance between 2 verses', () => {
     const result = getDistanceBetweenVerses(firstVerseKey, secondVerseKey);
 
     expect(result).toEqual(expected);
+  });
+});
+
+describe('Test shortenVerseText', () => {
+  it('should shorten english text correctly', () => {
+    const verseText = 'test';
+    const result = shortenVerseText(verseText, 1);
+
+    expect(result).toEqual('t...');
+  });
+  it('should shorten arabic text correctly', () => {
+    const verseText =
+      'ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيُّومُ ۚ لَا تَأْخُذُهُۥ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُۥ مَا فِى ٱلسَّمَـٰوَٰتِ وَمَا فِى ٱلْأَرْضِ ۗ مَن ذَا ٱلَّذِى يَشْفَعُ عِندَهُۥٓ إِلَّا بِإِذْنِهِۦ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَىْءٍ مِّنْ عِلْمِهِۦٓ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ ٱلسَّمَـٰوَٰتِ وَٱلْأَرْضَ ۖ وَلَا يَـُٔودُهُۥ حِفْظُهُمَا ۚ وَهُوَ ٱلْعَلِىُّ ٱلْعَظِيمُ';
+    const result = shortenVerseText(verseText, 50);
+
+    expect(result).toEqual('ٱللَّهُ لَآ إِلَـٰهَ إِلَّا هُوَ ٱلْحَىُّ ٱلْقَيّ...');
+  });
+  it('should not shorten when text is below the limit', () => {
+    const verseText = 'test';
+    const result = shortenVerseText(verseText, 10);
+
+    expect(result).toEqual('test');
   });
 });

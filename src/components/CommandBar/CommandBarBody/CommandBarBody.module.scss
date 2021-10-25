@@ -10,6 +10,10 @@ $height: calc(8 * var(--spacing-mega));
   display: flex;
 }
 
+.voiceFlowContainer {
+  justify-content: flex-end;
+}
+
 .input {
   appearance: none;
   border-radius: 0;
