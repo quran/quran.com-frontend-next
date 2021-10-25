@@ -1,3 +1,4 @@
+$selectedItemShadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 .container {
   display: grid;
   background-color: var(--color-background-alternative-faint);
@@ -20,7 +21,7 @@
 .itemSelected {
   font-weight: var(--font-weight-bold);
   background-color: var(--color-background-default);
-  box-shadow: var(--shadow-small);
+  box-shadow: $selectedItemShadow;
 }
 
 .item[disabled] {
