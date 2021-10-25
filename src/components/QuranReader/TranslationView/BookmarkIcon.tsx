@@ -2,7 +2,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
 
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 
 const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
@@ -17,6 +17,7 @@ const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
       type={ButtonType.Secondary}
       onClick={() => dispatch(toggleVerseBookmark(verseKey))}
       tooltip="Remove bookmark"
+      size={ButtonSize.Small}
     >
       <BookmarkedIcon />
     </Button>
