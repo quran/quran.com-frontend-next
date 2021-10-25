@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .highlightedContainer {
   background: var(--color-background-alternative-faded);
@@ -44,8 +44,5 @@
 
 .actionContainerLeft > .actionItem + .actionItem,
 .actionContainerRight > .actionItem + .actionItem {
-  margin-left: var(--spacing-small);
-  @include breakpoints.tablet {
-    margin-left: var(--spacing-medium);
-  }
+  margin-left: var(--spacing-xsmall);
 }
