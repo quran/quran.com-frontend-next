@@ -49,3 +49,19 @@
   font-weight: var(--font-weight-bold);
   margin-left: var(--spacing-xsmall);
 }
+
+.logoWrapper.QIcon {
+  > span > svg {
+    fill: unset;
+    & > path {
+      fill: unset;
+    }
+  }
+
+  &:hover > span > svg {
+    fill: unset;
+    & > path {
+      fill: unset;
+    }
+  }
+}

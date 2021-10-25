@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
@@ -52,7 +53,7 @@ const NavbarBody: React.FC = () => {
             href="/"
             shape={ButtonShape.Circle}
             variant={ButtonVariant.Ghost}
-            className={styles.logoWrapper}
+            className={classNames(styles.logoWrapper, styles.QIcon)}
             size={ButtonSize.Large}
           >
             <IconQ />
