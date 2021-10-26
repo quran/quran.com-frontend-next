@@ -111,10 +111,10 @@ const Drawer: React.FC<Props> = ({
       })}
       ref={drawerRef}
     >
-      <div className={styles.header}>
+      <div className={classNames(styles.header, { [styles.hiddenButtonHeader]: hideCloseButton })}>
         <div
           className={classNames(styles.headerContentContainer, {
-            [styles.voiceSearchHeader]: hideCloseButton,
+            [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
           })}
         >
           <div className={styles.headerContent}>

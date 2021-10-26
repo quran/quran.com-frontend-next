@@ -12,7 +12,7 @@
 }
 
 .commandBarContainer {
-  margin: var(--spacing-medium) var(--spacing-medium) 0 0;
+  margin: calc(2 * var(--spacing-mega)) calc(2 * var(--spacing-mega)) 0 0;
 }
 
 $body-min-height: 80vh;

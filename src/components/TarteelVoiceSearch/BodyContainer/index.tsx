@@ -29,7 +29,6 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
         className={classNames({
           [styles.container]: !isCommandBar,
           [styles.bodyContainer]: !isCommandBar,
-          [styles.commandBarContainer]: isCommandBar,
         })}
       >
         <Error error={error} isWaitingForPermission={isWaitingForPermission} />

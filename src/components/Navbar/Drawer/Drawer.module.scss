@@ -101,6 +101,10 @@
   margin: 0 var(--spacing-xsmall);
 }
 
-.voiceSearchHeader {
+.hiddenButtonHeader {
+  border-bottom: 0;
+}
+
+.hiddenButtonHeaderContentContainer {
   align-items: flex-end;
 }
