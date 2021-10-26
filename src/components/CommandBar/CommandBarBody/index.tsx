@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 
+import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -104,17 +105,22 @@ const CommandBarBody: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.inputContainer}>
-        <input
-          onChange={onSearchQueryChange}
-          placeholder="Search"
-          className={styles.input}
-          type="text"
-          inputMode="text"
-          disabled={isVoiceSearchFlowStarted}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
-        />
+      <div
+        className={classNames(styles.inputContainer, {
+          [styles.voiceFlowContainer]: isVoiceSearchFlowStarted,
+        })}
+      >
+        {!isVoiceSearchFlowStarted && (
+          <input
+            onChange={onSearchQueryChange}
+            placeholder="Search"
+            className={styles.input}
+            type="text"
+            inputMode="text"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+          />
+        )}
         <TarteelVoiceSearchTrigger isCommandBar />
       </div>
       <div className={styles.bodyContainer}>

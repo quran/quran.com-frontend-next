@@ -11,15 +11,6 @@
   flex-direction: row-reverse;
 }
 
-.clear {
-  background: none;
-  border: none;
-  text-transform: uppercase;
-  text-decoration: underline;
-  cursor: pointer;
-  font-size: var(--font-size-small);
-}
-
 .searchInput {
   width: 100%;
   border: 0;
@@ -30,4 +21,13 @@
   &:disabled {
     background: none;
   }
+}
+
+.clear {
+  background: none;
+  border: none;
+  text-transform: uppercase;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: var(--font-size-small);
 }

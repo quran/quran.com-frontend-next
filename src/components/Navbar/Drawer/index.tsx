@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import SearchDrawerFooter from '../SearchDrawer/Footer';
+
 import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
@@ -34,6 +36,7 @@ interface Props {
   type: DrawerType;
   side?: DrawerSide;
   header: ReactNode;
+  hideCloseButton?: boolean;
   children: ReactNode;
 }
 
@@ -65,7 +68,13 @@ const getActionCreator = (type: DrawerType) => {
   return setIsSearchDrawerOpen.type;
 };
 
-const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, children }) => {
+const Drawer: React.FC<Props> = ({
+  type,
+  side = DrawerSide.Right,
+  header,
+  children,
+  hideCloseButton = false,
+}) => {
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
@@ -92,6 +101,7 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
   }, [closeDrawer, router.events, isOpen]);
 
   useOutsideClickDetector(drawerRef, closeDrawer, isOpen);
+  const isSearchDrawer = type === DrawerType.Search;
   return (
     <div
       className={classNames(styles.container, {
@@ -101,20 +111,27 @@ const Drawer: React.FC<Props> = ({ type, side = DrawerSide.Right, header, childr
       })}
       ref={drawerRef}
     >
-      <div className={styles.header}>
-        <div className={styles.headerContentContainer}>
+      <div className={classNames(styles.header, { [styles.hiddenButtonHeader]: hideCloseButton })}>
+        <div
+          className={classNames(styles.headerContentContainer, {
+            [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,
+          })}
+        >
           <div className={styles.headerContent}>
             {header}
-            <DrawerCloseButton onClick={closeDrawer} />
+            {!hideCloseButton && <DrawerCloseButton onClick={closeDrawer} />}
           </div>
         </div>
       </div>
       <div
         className={classNames(styles.bodyContainer, {
           [styles.navigationBodyContainer]: type === DrawerType.Navigation,
+          [styles.bodyWithBottomPadding]: !isSearchDrawer,
+          [styles.searchContainer]: isSearchDrawer,
         })}
       >
         {children}
+        {isSearchDrawer && <SearchDrawerFooter />}
       </div>
     </div>
   );
