@@ -28,7 +28,6 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
       <div
         className={classNames({
           [styles.container]: !isCommandBar,
-          [styles.bodyContainer]: !isCommandBar,
         })}
       >
         <Error error={error} isWaitingForPermission={isWaitingForPermission} />
@@ -42,7 +41,6 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
       <div
         className={classNames({
           [styles.container]: !isCommandBar,
-          [styles.bodyContainer]: !isCommandBar,
           [styles.noResultContainer]: isCommandBar,
         })}
       >
@@ -59,7 +57,6 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
         <div
           className={classNames({
             [styles.container]: !isCommandBar,
-            [styles.bodyContainer]: !isCommandBar,
             [styles.commandBarContainer]: isCommandBar,
           })}
         >

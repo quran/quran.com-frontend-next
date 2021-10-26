@@ -1,10 +1,17 @@
 @use "src/styles/breakpoints";
 
+$body-min-height: 80vh;
+$body-min-height-mobile: 65vh;
+
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
   text-align: center;
+  min-height: $body-min-height-mobile;
+  @include breakpoints.tablet {
+    min-height: $body-min-height;
+  }
 }
 
 .noResultContainer {
@@ -13,14 +20,4 @@
 
 .commandBarContainer {
   margin-top: calc(2 * var(--spacing-mega));
-}
-
-$body-min-height: 80vh;
-$body-min-height-mobile: 65vh;
-
-.bodyContainer {
-  min-height: $body-min-height-mobile;
-  @include breakpoints.tablet {
-    min-height: $body-min-height;
-  }
 }
