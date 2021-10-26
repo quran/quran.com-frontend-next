@@ -7,7 +7,7 @@ import Separator from 'src/components/dls/Separator/Separator';
 
 const Footer: React.FC = () => {
   return (
-    <>
+    <div>
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
           LEARN HOW TO USE VOICE SEARCH
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 

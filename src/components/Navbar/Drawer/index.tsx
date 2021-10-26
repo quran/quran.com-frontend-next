@@ -101,6 +101,7 @@ const Drawer: React.FC<Props> = ({
   }, [closeDrawer, router.events, isOpen]);
 
   useOutsideClickDetector(drawerRef, closeDrawer, isOpen);
+  const isSearchDrawer = type === DrawerType.Search;
   return (
     <div
       className={classNames(styles.container, {
@@ -125,11 +126,12 @@ const Drawer: React.FC<Props> = ({
       <div
         className={classNames(styles.bodyContainer, {
           [styles.navigationBodyContainer]: type === DrawerType.Navigation,
-          [styles.bodyWithBottomPadding]: type !== DrawerType.Search,
+          [styles.bodyWithBottomPadding]: !isSearchDrawer,
+          [styles.searchContainer]: isSearchDrawer,
         })}
       >
         {children}
-        {type === DrawerType.Search && <SearchDrawerFooter />}
+        {isSearchDrawer && <SearchDrawerFooter />}
       </div>
     </div>
   );

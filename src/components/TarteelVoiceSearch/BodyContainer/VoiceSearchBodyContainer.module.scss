@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .container {
   display: flex;
   flex-direction: row;
@@ -11,4 +13,14 @@
 
 .commandBarContainer {
   margin: var(--spacing-medium) var(--spacing-medium) 0 0;
+}
+
+$body-min-height: 80vh;
+$body-min-height-mobile: 65vh;
+
+.bodyContainer {
+  min-height: $body-min-height-mobile;
+  @include breakpoints.tablet {
+    min-height: $body-min-height;
+  }
 }

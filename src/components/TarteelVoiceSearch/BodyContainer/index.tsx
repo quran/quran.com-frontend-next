@@ -28,6 +28,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
       <div
         className={classNames({
           [styles.container]: !isCommandBar,
+          [styles.bodyContainer]: !isCommandBar,
           [styles.commandBarContainer]: isCommandBar,
         })}
       >
@@ -42,6 +43,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
       <div
         className={classNames({
           [styles.container]: !isCommandBar,
+          [styles.bodyContainer]: !isCommandBar,
           [styles.noResultContainer]: isCommandBar,
         })}
       >
@@ -58,6 +60,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
         <div
           className={classNames({
             [styles.container]: !isCommandBar,
+            [styles.bodyContainer]: !isCommandBar,
             [styles.commandBarContainer]: isCommandBar,
           })}
         >

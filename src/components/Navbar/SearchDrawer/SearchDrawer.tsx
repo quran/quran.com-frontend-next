@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
-import styles from './SearchDrawer.module.scss';
 
 import { getSearchResults } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
@@ -139,7 +138,7 @@ const SearchDrawer: React.FC = () => {
         />
       }
     >
-      <div className={styles.bodyContainer}>
+      <div>
         {isOpen && (
           <>
             {isVoiceSearchFlowStarted ? (

@@ -42,6 +42,20 @@
   }
 }
 
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(
+    100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega)))
+  );
+  @include breakpoints.tablet {
+    min-height: calc(
+      100% - calc(constants.$navbar-height + var(--spacing-small))
+    );
+  }
+  justify-content: space-between;
+}
+
 .bodyContainer {
   margin-top: constants.$navbar-height;
   padding-top: var(--spacing-small);
