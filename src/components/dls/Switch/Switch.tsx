@@ -22,6 +22,7 @@ type SwitchProps = {
 };
 
 const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchProps) => {
+  const selectedIndex = items.findIndex((item) => item.value === selected);
   return (
     <div className={styles.container}>
       {items.map((item) => (
@@ -39,6 +40,15 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
           {item.name}
         </button>
       ))}
+      <div
+        className={styles.selectedItemBackgroundContainer}
+        style={{
+          width: `${(1 / items.length) * 100}%`,
+          transform: `translateX(${selectedIndex * 100}%)`,
+        }}
+      >
+        <div className={styles.selectedItemBackground} />
+      </div>
     </div>
   );
 };

@@ -1,5 +1,7 @@
-$selectedItemShadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+$selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+
 .container {
+  position: relative;
   display: grid;
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-default);
@@ -13,20 +15,38 @@ $selectedItemShadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 .item {
   cursor: pointer;
   color: var(--color-text-default);
-  background-color: var(--color-background-alternative-faint);
+  background-color: transparent;
   border-radius: var(--border-radius-default);
   border: none;
+  z-index: 1;
 }
 
 .itemSelected {
   font-weight: var(--font-weight-bold);
-  background-color: var(--color-background-default);
-  box-shadow: $selectedItemShadow;
 }
 
 .item[disabled] {
   cursor: not-allowed;
   opacity: var(--opacity-50);
+}
+
+.selectedItemBackgroundContainer {
+  position: absolute;
+  transition: transform var(--transition-regular);
+  // width: 50%;
+  height: 100%;
+  z-index: 0;
+  padding: calc(0.5 * var(--spacing-xxsmall));
+  box-sizing: border-box;
+  // transform: translateX(200%);
+
+  .selectedItemBackground {
+    border-radius: var(--border-radius-default);
+    box-shadow: $selectedItemShadow;
+    background-color: var(--color-background-default);
+    width: 100%;
+    height: 100%;
+  }
 }
 
 // sizing
