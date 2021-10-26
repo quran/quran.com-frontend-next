@@ -21,24 +21,20 @@ $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 
-.itemSelected {
-  font-weight: var(--font-weight-bold);
-}
-
 .item[disabled] {
   cursor: not-allowed;
   opacity: var(--opacity-50);
 }
 
 .selectedItemBackgroundContainer {
-  position: absolute;
   transition: transform var(--transition-regular);
-  // width: 50%;
+  // the `width` and the `transform` is controlled dynamically in React component. Check Switch.tsx
+
+  position: absolute;
   height: 100%;
   z-index: 0;
   padding: calc(0.5 * var(--spacing-xxsmall));
   box-sizing: border-box;
-  // transform: translateX(200%);
 
   .selectedItemBackground {
     border-radius: var(--border-radius-default);
