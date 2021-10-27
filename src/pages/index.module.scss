@@ -1,8 +1,10 @@
 @use 'src/styles/breakpoints';
 @use 'src/styles/utility';
 
-$image-max-width: 100rem;
+
+
 $list-max-width: 80rem;
+$homepage-image-height: 300px;
 
 .pageContainer {
   padding: var(--spacing-small) 0;
@@ -10,6 +12,10 @@ $list-max-width: 80rem;
 
 .homepageImage {
   border-radius: var(--border-radius-default);
+}
+.homepageImageContainer {
+  position: relative;
+  height: $homepage-image-height;
 }
 
 .flow > .flowItem + .flowItem {
