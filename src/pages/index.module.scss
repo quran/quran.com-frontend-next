@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 $image-max-width: 100rem;
 $list-max-width: 80rem;
@@ -9,10 +9,13 @@ $list-max-width: 80rem;
 }
 
 .imageContainer {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--spacing-xxsmall);
+
   @include breakpoints.tablet {
     width: 90%;
     max-width: $image-max-width;
-    margin: 0 auto;
   }
 }
 
