@@ -1,10 +1,12 @@
 import styles from './contentPage.module.scss';
 
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+
 const SupportPage = () => (
   <div className={styles.contentPage}>
     <h1>Help and Feedback</h1>
     <p>
-      Please check the FAQ to see if your question has been already answered. If needed you can
+      Please check the FAQ to see if your question has been already answered. If needed you can{' '}
       <a data-controller="ajax-modal" data-url="/popups/feedback">
         contact us
       </a>{' '}
@@ -48,7 +50,11 @@ const SupportPage = () => (
 
     <h2>I&apos;m a developer. How can I contribute?</h2>
     <p>
-      Please see <a href="/developers">developers page</a> for more info.
+      Please see{' '}
+      <Link href="/developers" variant={LinkVariant.Blend}>
+        developers page
+      </Link>{' '}
+      for more info.
     </p>
 
     <h2>Islamic/ Fiqh / Fatwa related questions</h2>
