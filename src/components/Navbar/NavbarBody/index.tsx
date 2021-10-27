@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
@@ -22,6 +23,7 @@ import {
 } from 'src/redux/slices/navbar';
 
 const NavbarBody: React.FC = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
     dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
@@ -40,7 +42,7 @@ const NavbarBody: React.FC = () => {
         <div className={styles.leftCTA}>
           <>
             <Button
-              tooltip="Menu"
+              tooltip={t('menu')}
               variant={ButtonVariant.Ghost}
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
@@ -58,7 +60,7 @@ const NavbarBody: React.FC = () => {
           >
             <IconQ />
           </Button>
-          <div className={styles.betaLabel}>BETA</div>
+          <div className={styles.betaLabel}>{t('beta')}</div>
           <LanguageSelector />
         </div>
       </div>
@@ -66,7 +68,7 @@ const NavbarBody: React.FC = () => {
         <div className={styles.rightCTA}>
           <>
             <Button
-              tooltip="Settings"
+              tooltip={t('settings.title')}
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               onClick={openSettingsDrawer}
@@ -77,7 +79,7 @@ const NavbarBody: React.FC = () => {
           </>
           <>
             <Button
-              tooltip="Search"
+              tooltip={t('search')}
               variant={ButtonVariant.Ghost}
               onClick={openSearchDrawer}
               shape={ButtonShape.Circle}

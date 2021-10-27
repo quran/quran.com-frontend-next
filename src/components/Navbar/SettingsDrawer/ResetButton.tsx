@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import styles from './ResetButton.module.scss';
@@ -10,9 +11,10 @@ import resetSettings from 'src/redux/slices/reset-settings';
 // for example, check slices/theme.ts. it has extra reducer that listens to `reset` action
 const ResetButton = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   return (
     <div className={styles.resetButtonContainer}>
-      <Button onClick={() => dispatch(resetSettings())}>Reset Settings</Button>
+      <Button onClick={() => dispatch(resetSettings())}>{t('settings.reset-cta')}</Button>
     </div>
   );
 };

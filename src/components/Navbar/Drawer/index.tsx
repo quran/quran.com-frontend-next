@@ -24,7 +24,7 @@ import { stopSearchDrawerVoiceFlow } from 'src/redux/slices/voiceSearch';
 export enum DrawerType {
   Navigation = 'navigation',
   Search = 'search',
-  Settings = 'settings',
+  Settings = 'settings.title',
 }
 
 export enum DrawerSide {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
@@ -95,6 +96,7 @@ const getDefaultFont = (selectedType) => {
 
 const QuranFontSection = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   const selectedType = getSelectedType(quranFont);
@@ -103,7 +105,7 @@ const QuranFontSection = () => {
     <Section>
       <Section.Title>Quran Font</Section.Title>
       <Section.Row>
-        <Section.Label>Type</Section.Label>
+        <Section.Label>{t('type')}</Section.Label>
         <RadioGroup
           onChange={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
           value={selectedType}

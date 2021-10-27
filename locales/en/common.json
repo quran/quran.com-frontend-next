@@ -1,5 +1,48 @@
 {
-  "Quran-com": "Quran.com",
-  "Salah": "Salah",
-  "Sunnah": "Sunnah"
+    "about": "About us",
+    "beta": "Beta",
+    "close": "Close",
+    "community": {
+        "cta": "Join Community",
+        "header": "Join the QDC Community of Muslim builders and technologists.",
+        "sub-header": "Sign up for the Quran.com Discord to participate and collaborate with the leading community building Islamic tech.",
+        "title": "Community"
+    },
+    "developers": "Developers",
+    "feedback": "Feedback",
+    "help": "Help",
+    "home": "Home",
+    "menu": "Menu",
+    "audio": "Audio",
+    "reciter": "Reciter",
+    "type": "Type",
+    "mobile-apps": "Mobile Apps",
+    "mode": "Mode",
+    "network": "Network",
+    "privacy": "Privacy",
+    "search": "Search",
+    "none": "None",
+    "both": "Both",
+    "transliteration": "Transliteration",
+    "translation": "Translation",
+    "tooltip": "Tooltip",
+    "wbw": "Word By Word",
+    "settings": {
+        "reading-experience": "Reading Experience",
+        "title": "Settings",
+        "reset-cta": "Reset Settings"
+    },
+    "theme": "Theme",
+    "themes": {
+        "dark": "Dark",
+        "light": "Light",
+        "sepia": "Sepia",
+        "system": "System",
+        "system-desc": "The system theme automatically adopts to your light\/dark mode settings"
+    },
+    "reading-preference": {
+        "translation": "Translation",
+        "reading": "Reading"
+    },
+    "view": "View"
 }

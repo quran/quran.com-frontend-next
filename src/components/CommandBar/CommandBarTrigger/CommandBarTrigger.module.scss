@@ -7,7 +7,9 @@ $width: calc(11 * var(--spacing-mega));
   display: flex;
   align-items: center;
   padding-left: var(--spacing-medium);
-  padding-right: var(--spacing-xxsmall); // icon on the right side already has some padding
+  padding-right: var(
+    --spacing-xxsmall
+  ); // icon on the right side already has some padding
   color: var(--color-text-faded);
   background: none;
   min-height: calc(3 * var(--spacing-large));

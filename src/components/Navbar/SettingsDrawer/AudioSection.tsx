@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
@@ -37,6 +38,7 @@ const recitersToComboboxItems = (reciters: Reciter[]) =>
 const autoScrollingOptions = generateRadioItems(['On', 'Off']);
 
 const AudioSection = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
@@ -60,9 +62,9 @@ const AudioSection = () => {
         queryKey={makeRecitersUrl()}
         render={(data: RecitersResponse) => (
           <Section>
-            <Section.Title>Audio</Section.Title>
+            <Section.Title>{t('audio')}</Section.Title>
             <Section.Row>
-              <Section.Label>Reciter</Section.Label>
+              <Section.Label>{t('reciter')}</Section.Label>
               <div>
                 <Combobox
                   id="audio-reciter"
