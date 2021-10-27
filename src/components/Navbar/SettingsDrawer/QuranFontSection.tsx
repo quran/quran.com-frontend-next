@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -19,103 +19,103 @@ import {
   initialState as QuranReaderStylesInitialState,
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
+import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { MushafLines, QuranFont } from 'types/QuranReader';
-// import VerseText from 'src/components/Verse/VerseText';
-
-// import { getSampleVerse } from 'src/utils/verse';
-// import Word from 'types/Word';
-// import styles from './QuranFontSection.module.scss';
-
-// in the UI, we have two view / font categories, indopak and uthmani.
-const type = [
-  { id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak, name: QuranFont.IndoPak },
-  { id: QuranFont.Uthmani, label: 'Uthmani', value: QuranFont.Uthmani, name: QuranFont.Uthmani },
-];
-
-const lines = [
-  {
-    id: MushafLines.FifteenLines,
-    label: '15 Lines',
-    value: MushafLines.FifteenLines,
-    name: MushafLines.FifteenLines,
-  },
-  {
-    id: MushafLines.SixteenLines,
-    label: '16 Lines',
-    value: MushafLines.SixteenLines,
-    name: MushafLines.SixteenLines,
-  },
-];
-
-// when one of the view is selected, user can choose which font they want to use
-const fonts = {
-  [QuranFont.IndoPak]: [{ id: QuranFont.IndoPak, label: 'IndoPak', value: QuranFont.IndoPak }],
-  [QuranFont.Uthmani]: [
-    {
-      id: QuranFont.QPCHafs,
-      label: 'QPC Uthmani Hafs',
-      value: QuranFont.QPCHafs,
-      name: QuranFont.QPCHafs,
-    },
-    {
-      id: QuranFont.MadaniV1,
-      label: 'King Fahad Complex V1',
-      value: QuranFont.MadaniV1,
-      name: QuranFont.MadaniV1,
-    },
-    {
-      id: QuranFont.MadaniV2,
-      label: 'King Fahad Complex V2',
-      value: QuranFont.MadaniV2,
-      name: QuranFont.MadaniV2,
-    },
-  ],
-};
-
-// given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
-// for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
-// if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
-const getSelectedType = (font: QuranFont) => {
-  const selectedViewEntry = Object.entries(fonts).find(([, values]) =>
-    values.some((v) => v.id === font),
-  );
-  if (selectedViewEntry) {
-    const [view] = selectedViewEntry;
-    return view;
-  }
-  // if no font is given, or invalid font is given, get type for default font
-  return getSelectedType(QuranReaderStylesInitialState.quranFont);
-};
-
-// get default font for selected type. We take the first font in this case
-// for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
-const getDefaultFont = (selectedType) => {
-  const [font] = fonts[selectedType];
-  return font.value;
-};
 
 const QuranFontSection = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
+  // when one of the view is selected, user can choose which font they want to use
+  const fonts = useMemo(
+    () => ({
+      [QuranFont.IndoPak]: [
+        { id: QuranFont.IndoPak, label: t(`fonts.${QuranFont.IndoPak}`), value: QuranFont.IndoPak },
+      ],
+      [QuranFont.Uthmani]: [
+        {
+          id: QuranFont.QPCHafs,
+          label: t(`fonts.${QuranFont.QPCHafs}`),
+          value: QuranFont.QPCHafs,
+          name: QuranFont.QPCHafs,
+        },
+        {
+          id: QuranFont.MadaniV1,
+          label: t(`fonts.${QuranFont.MadaniV1}`),
+          value: QuranFont.MadaniV1,
+          name: QuranFont.MadaniV1,
+        },
+        {
+          id: QuranFont.MadaniV2,
+          label: t(`fonts.${QuranFont.MadaniV2}`),
+          value: QuranFont.MadaniV2,
+          name: QuranFont.MadaniV2,
+        },
+      ],
+    }),
+    [t],
+  );
+
+  // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
+  // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
+  // if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
+  const getSelectedType = (font: QuranFont) => {
+    const selectedViewEntry = Object.entries(fonts).find(([, values]) =>
+      values.some((v) => v.id === font),
+    );
+    if (selectedViewEntry) {
+      const [view] = selectedViewEntry;
+      return view;
+    }
+    // if no font is given, or invalid font is given, get type for default font
+    return getSelectedType(QuranReaderStylesInitialState.quranFont);
+  };
+
+  // get default font for selected type. We take the first font in this case
+  // for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
+  const getDefaultFont = (selectedType: string) => {
+    const [font] = fonts[selectedType];
+    return font.value;
+  };
   const selectedType = getSelectedType(quranFont);
+  const lines = useMemo(
+    () =>
+      Object.values(MushafLines).map((line) => ({
+        id: line,
+        label: t(`fonts.${line}`),
+        value: line,
+        name: line,
+      })),
+    [t],
+  );
+  // in the UI, we have two view / font categories, indopak and uthmani.
+  const types = useMemo(
+    () =>
+      [QuranFont.IndoPak, QuranFont.Uthmani].map((font) => ({
+        id: font,
+        label: t(`fonts.${font}`),
+        value: font,
+        name: font,
+      })),
+    [t],
+  );
 
   return (
     <Section>
-      <Section.Title>Quran Font</Section.Title>
+      <Section.Title>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
         <Section.Label>{t('type')}</Section.Label>
         <RadioGroup
           onChange={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
           value={selectedType}
           label="type"
-          items={type}
+          items={types}
           orientation={RadioGroupOrientation.Horizontal}
         />
       </Section.Row>
       <Section.Row>
-        <Section.Label>Style</Section.Label>
+        <Section.Label>{t('style')}</Section.Label>
         <Select
           id="quranFontStyles"
           name="quranFontStyles"
@@ -126,7 +126,7 @@ const QuranFontSection = () => {
       </Section.Row>
       {selectedType === QuranFont.IndoPak && (
         <Section.Row>
-          <Section.Label>Lines</Section.Label>
+          <Section.Label>{t('fonts.lines')}</Section.Label>
           <Select
             id="lines"
             name="lines"
@@ -137,7 +137,7 @@ const QuranFontSection = () => {
         </Section.Row>
       )}
       <Section.Row>
-        <Section.Label>Font size</Section.Label>
+        <Section.Label>{t('fonts.font-size')}</Section.Label>
         <Counter
           count={quranTextFontScale}
           onDecrement={
@@ -152,15 +152,7 @@ const QuranFontSection = () => {
           }
         />
       </Section.Row>
-      {/* <div className={styles.verseSampleContainer}>
-        <VerseText words={getSampleVerse().words as Word[]} />
-      </div> */}
-      <Section.Footer
-        visible={quranFont === QuranFont.MadaniV1 || quranFont === QuranFont.MadaniV2}
-      >
-        KPFG Fonts provide higher quality but take longer to load and cannot be copied through the
-        browser.
-      </Section.Footer>
+      <Section.Footer visible={isQCFFont(quranFont)}>{t('fonts.qcf-desc')}</Section.Footer>
     </Section>
   );
 };

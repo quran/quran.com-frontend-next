@@ -51,4 +51,9 @@ export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
   [QuranFont.QPCHafs]: Mushaf.KFGQPCHAFS,
 };
 
+export enum AutoScroll {
+  ON = 'on',
+  OFF = 'off',
+}
+
 export default { ReadingPreference, QuranFont };

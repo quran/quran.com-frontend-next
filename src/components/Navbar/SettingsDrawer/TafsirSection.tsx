@@ -39,6 +39,7 @@ const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
   });
 
 const TafsirSection = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const { lang } = useTranslation();
@@ -56,9 +57,9 @@ const TafsirSection = () => {
         queryKey={makeTafsirsUrl(lang)}
         render={(data: TafsirsResponse) => (
           <Section>
-            <Section.Title>Tafsir</Section.Title>
+            <Section.Title>{t('tafsir.title')}</Section.Title>
             <Section.Row>
-              <Section.Label>Tafsir</Section.Label>
+              <Section.Label>{t('tafsir.title')}</Section.Label>
               <div>
                 <Combobox
                   minimumRequiredItems={1}
@@ -71,7 +72,7 @@ const TafsirSection = () => {
               </div>
             </Section.Row>
             <Section.Row>
-              <Section.Label>Tafsir font size</Section.Label>
+              <Section.Label>{t('tafsir.font-size')}</Section.Label>
               <Counter
                 count={tafsirFontScale}
                 onDecrement={
