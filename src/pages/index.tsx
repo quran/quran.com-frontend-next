@@ -22,15 +22,16 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.pageContainer}>
-    <div className={styles.imageContainer}>
-      <Image
-        src={homepageImage}
-        objectFit="cover"
-        layout="responsive" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
-        placeholder="blur" // to have a blur effect while loading.
-      />
-    </div>
     <div className={classNames(styles.listContainer, styles.flow)}>
+      <div className={classNames(styles.flowItem)}>
+        <Image
+          className={styles.homepageImage}
+          src={homepageImage}
+          objectFit="cover"
+          layout="responsive" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
+          placeholder="blur" // to have a blur effect while loading.
+        />
+      </div>
       <div className={styles.flowItem}>
         <CommandBarTrigger />
       </div>

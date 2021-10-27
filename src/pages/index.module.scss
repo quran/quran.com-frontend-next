@@ -8,15 +8,8 @@ $list-max-width: 80rem;
   padding: var(--spacing-small) 0;
 }
 
-.imageContainer {
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--spacing-xxsmall);
-
-  @include breakpoints.tablet {
-    width: 90%;
-    max-width: $image-max-width;
-  }
+.homepageImage {
+  border-radius: var(--border-radius-default);
 }
 
 .flow > .flowItem + .flowItem {
