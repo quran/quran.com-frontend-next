@@ -4,7 +4,7 @@ const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
-const { withSentryConfig } = require('@sentry/nextjs');
+// const { withSentryConfig } = require('@sentry/nextjs'); // disabled temporarily until next 12 supports it: https://github.com/vercel/next.js/discussions/30137#discussioncomment-1538436
 const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
@@ -73,7 +73,4 @@ const config = {
   },
 };
 
-module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
-  config,
-);
+module.exports = withPlugins([withBundleAnalyzer, withPWA, withFonts, nextTranslate], config);
