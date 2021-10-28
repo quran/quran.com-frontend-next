@@ -7,29 +7,14 @@ type SkeletonProps = {
   className?: string;
   isRounded?: boolean;
   isSquared?: boolean;
-  width?: number | string;
-  height?: number | string;
   isActive?: boolean;
 };
 
-const defaultHeight = 40;
-const defaultWidth = 40;
-const Skeleton = ({
-  children,
-  isRounded,
-  isSquared,
-  width,
-  height,
-  isActive = true,
-}: SkeletonProps) => {
+const Skeleton = ({ children, isRounded, isSquared, isActive = true }: SkeletonProps) => {
   return (
     <span
-      style={{
-        // use default width and height if (no children && no specified height)
-        width: !children && !width ? defaultWidth : null,
-        height: !children && !height ? defaultHeight : null,
-      }}
       className={classNames(styles.skeleton, {
+        [styles.baseSize]: !children,
         [styles.active]: isActive,
         [styles.rounded]: isRounded,
         [styles.squared]: isSquared,

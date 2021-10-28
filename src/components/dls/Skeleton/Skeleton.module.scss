@@ -1,3 +1,6 @@
+$baseSize: var(--spacing-mega);
+$animationDuration: 8s;
+
 @keyframes loading {
   from {
     background-position: 200% 0;
@@ -7,24 +10,17 @@
   }
 }
 
+.baseSize {
+  height: $baseSize;
+  width: $baseSize;
+}
+
 .skeleton {
   position: relative;
   display: block;
   border-radius: var(--border-radius-default);
 }
 
-// .active {
-//     background-image: linear-gradient(
-//         270deg,
-//         var(--shade-0),
-//         var(--shade-1),
-//         var(--shade-2),
-//         var(--shade-1),
-//         var(--shade-0)
-//     );
-//     background-size: 400% 100%;
-//     animation: loading 8s ease-in-out infinite;
-// }
 .active::before {
   border-radius: var(--border-radius-default);
   background-image: linear-gradient(
@@ -35,8 +31,8 @@
     var(--shade-1),
     var(--shade-0)
   );
-  background-size: 400% 100%;
-  animation: loading 8s ease-in-out infinite;
+  background-size: 400% 100%; // increase background size's width to 4x to make background animate-able
+  animation: loading $animationDuration ease-in-out infinite;
 
   content: "";
   position: absolute;
