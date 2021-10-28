@@ -29,8 +29,8 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
             className={styles.homepageImage}
             src={homepageImage}
             objectFit="cover"
-            sizes="70vw"
-            quality={30}
+            sizes="(max-width: 425px) 95vw, 80vw"
+            quality={70}
             priority
             layout="fill" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
             placeholder="blur" // to have a blur effect while loading.
