@@ -50,7 +50,10 @@
     "q-reflect": "QuranReflect",
     "no": "No",
     "yes": "Yes",
+    "next": "Next",
+    "prev": "Previous",
     "click-here": "Click here",
+    "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "community": {
         "cta": "Join Community",
         "header": "Join the QDC Community of Muslim builders and technologists.",

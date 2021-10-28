@@ -5,6 +5,10 @@
   flex-wrap: wrap;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .buttonContainer {
   margin: var(--spacing-micro);
 }
