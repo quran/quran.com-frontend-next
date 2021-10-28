@@ -1,4 +1,5 @@
 /* eslint-disable react/no-multi-comp */
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
@@ -12,9 +13,10 @@ const SettingsBody = dynamic(() => import('./SettingsBody'), {
 });
 
 const SettingsDrawer = () => {
+  const { t } = useTranslation('common');
   const { isSettingsDrawerOpen } = useSelector(selectNavbar);
   return (
-    <Drawer type={DrawerType.Settings} header={<div>Settings</div>}>
+    <Drawer type={DrawerType.Settings} header={<div>{t('settings.title')}</div>}>
       {isSettingsDrawerOpen && <SettingsBody />}
     </Drawer>
   );

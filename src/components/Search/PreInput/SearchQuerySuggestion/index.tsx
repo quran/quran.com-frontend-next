@@ -1,5 +1,7 @@
 import React, { MouseEvent, KeyboardEvent } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './SearchQuerySuggestion.module.scss';
 
 interface Props {
@@ -13,6 +15,7 @@ const SearchQuerySuggestion: React.FC<Props> = ({
   onSearchKeywordClicked,
   onRemoveSearchQueryClicked,
 }) => {
+  const { t } = useTranslation('common');
   const onRemoveClicked = (
     event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
     toBeDeletedSearchQuery: string,
@@ -28,14 +31,13 @@ const SearchQuerySuggestion: React.FC<Props> = ({
       onClick={() => onSearchKeywordClicked(searchQuery)}
     >
       <p>{searchQuery}</p>
-
       {onRemoveSearchQueryClicked && (
         <button
           type="button"
           className={styles.removeButton}
           onClick={(event) => onRemoveClicked(event, searchQuery)}
         >
-          Remove
+          {t('remove')}
         </button>
       )}
     </button>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 
 import SearchResultItem from './SearchResultItem';
@@ -25,48 +26,53 @@ const SearchResults: React.FC<Props> = ({
   currentPage,
   onPageChange,
   pageSize,
-}) => (
-  <>
-    <div>
-      {!!searchResult.result.navigation?.length && (
-        <>
-          <p className={styles.boldHeader}>Jump To</p>
-          {searchResult.result.navigation.map((navigationResult) => (
-            <NavigationItem key={navigationResult.key} navigation={navigationResult} />
-          ))}
-        </>
-      )}
-      <p className={styles.boldHeader}>Results</p>
-      <>
-        {searchResult.result.verses.map((result) => (
-          <SearchResultItem key={result.verseKey} result={result} />
-        ))}
-        {isSearchDrawer ? (
-          <div className={styles.resultsSummaryContainer}>
-            <p>{searchResult.pagination.totalRecords} results</p>
-            {searchResult.pagination.totalRecords > 0 && (
-              <Link href={`/search?query=${searchQuery}`} passHref>
-                <a>
-                  <p>Show all results</p>
-                </a>
-              </Link>
-            )}
-          </div>
-        ) : (
+}) => {
+  const { t } = useTranslation('common');
+  return (
+    <>
+      <div>
+        {!!searchResult.result.navigation?.length && (
           <>
-            {searchQuery && (
-              <Pagination
-                currentPage={currentPage}
-                totalCount={searchResult.pagination.totalRecords}
-                onPageChange={onPageChange}
-                pageSize={pageSize}
-              />
-            )}
+            <p className={styles.boldHeader}>{t('search.jump-to')}</p>
+            {searchResult.result.navigation.map((navigationResult) => (
+              <NavigationItem key={navigationResult.key} navigation={navigationResult} />
+            ))}
           </>
         )}
-      </>
-    </div>
-  </>
-);
+        <p className={styles.boldHeader}>{t('search.results')}</p>
+        <>
+          {searchResult.result.verses.map((result) => (
+            <SearchResultItem key={result.verseKey} result={result} />
+          ))}
+          {isSearchDrawer ? (
+            <div className={styles.resultsSummaryContainer}>
+              <p>
+                {searchResult.pagination.totalRecords} {t('search.results')}
+              </p>
+              {searchResult.pagination.totalRecords > 0 && (
+                <Link href={`/search?query=${searchQuery}`} passHref>
+                  <a>
+                    <p>{t('search.show-all')}</p>
+                  </a>
+                </Link>
+              )}
+            </div>
+          ) : (
+            <>
+              {searchQuery && (
+                <Pagination
+                  currentPage={currentPage}
+                  totalCount={searchResult.pagination.totalRecords}
+                  onPageChange={onPageChange}
+                  pageSize={pageSize}
+                />
+              )}
+            </>
+          )}
+        </>
+      </div>
+    </>
+  );
+};
 
 export default SearchResults;

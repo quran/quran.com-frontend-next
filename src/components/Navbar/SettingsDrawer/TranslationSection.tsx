@@ -43,6 +43,7 @@ const translationsToComboboxItems = (translations: AvailableTranslation[]): Drop
   });
 
 const TranslationSection = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -60,9 +61,9 @@ const TranslationSection = () => {
         queryKey={makeTranslationsUrl(lang)}
         render={(data: TranslationsResponse) => (
           <Section>
-            <Section.Title>Translation</Section.Title>
+            <Section.Title>{t('translation')}</Section.Title>
             <Section.Row>
-              <Section.Label>Translation</Section.Label>
+              <Section.Label>{t('translation')}</Section.Label>
               <div>
                 <Combobox
                   id="translations"
@@ -75,7 +76,7 @@ const TranslationSection = () => {
               </div>
             </Section.Row>
             <Section.Row>
-              <Section.Label>Font size</Section.Label>
+              <Section.Label>{t('fonts.font-size')}</Section.Label>
 
               {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
             we do this by giving null to `onIncrement` prop

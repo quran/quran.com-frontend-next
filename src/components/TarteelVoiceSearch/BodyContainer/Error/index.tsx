@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import ErrorIcon from '../../../../../public/icons/info.svg';
 import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
 import NoMicrophoneIcon from '../../../../../public/icons/no-mic.svg';
@@ -15,26 +17,25 @@ interface Props {
 }
 
 const Error: React.FC<Props> = ({ error, isWaitingForPermission }) => {
+  const { t } = useTranslation('common');
   let icon = null;
   let errorBody = null;
   if (isWaitingForPermission) {
-    errorBody = <p>Please enable microphone permission to start using Voice Search</p>;
+    errorBody = <p>{t('voice.ask-permission')}</p>;
     icon = <MicrophoneIcon />;
   } else {
     let errorText = '';
     switch (error) {
       case VoiceError.NO_PERMISSION:
-        errorText =
-          'It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ';
+        errorText = t('voice.no-permission');
         icon = <NoMicrophoneIcon />;
         break;
       case VoiceError.NOT_SUPPORTED:
-        errorText =
-          'It looks like your browser does not support microphone. Please try a different browser or download the ';
+        errorText = t('voice.not-supported');
         icon = <NoMicrophoneIcon />;
         break;
       default:
-        errorText = 'An error has occurred, please try again later. Or download the ';
+        errorText = t('voice.error');
         icon = <ErrorIcon />;
         break;
     }
@@ -42,7 +43,7 @@ const Error: React.FC<Props> = ({ error, isWaitingForPermission }) => {
       <div>
         <span>{errorText}</span>
         <Link href="https://download.tarteel.ai" newTab variant={LinkVariant.Highlight}>
-          Tarteel app
+          {t('tarteel.app')}
         </Link>
       </div>
     );

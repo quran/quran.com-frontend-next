@@ -2,10 +2,6 @@
   "locales": ["en", "ar"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common"],
-    "/": ["home"],
-    "/about": ["about"],
-    "/[chapterId]": ["common"],
-    "/[chapterId]/[verseId]": ["common"]
+    "*": ["common"]
   }
 }

@@ -4,6 +4,8 @@ import React from 'react';
 // import IconDonate from '../../../../../public/icons/donate.svg';
 // import IconRadio2 from '../../../../../public/icons/radio-2.svg';
 // import IconUpdates from '../../../../../public/icons/updates.svg';
+import useTranslation from 'next-translate/useTranslation';
+
 import IconDevelopers from '../../../../../public/icons/developers.svg';
 import IconFeedback from '../../../../../public/icons/feedback.svg';
 import IconHome from '../../../../../public/icons/home.svg';
@@ -19,31 +21,32 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 import styles from './NavigationDrawerBody.module.scss';
 
 const NavigationDrawerBody = () => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.listItemsContainer}>
-      <h3 className={styles.subtitle}>Menu</h3>
-      <NavigationDrawerItem title="Home" icon={<IconHome />} href="/" />
-      <NavigationDrawerItem title="About us" icon={<IconInfo />} href="/about-us" />
+      <h3 className={styles.subtitle}>{t('menu')}</h3>
+      <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
+      <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
-      <NavigationDrawerItem title="Developers" icon={<IconDevelopers />} href="/developers" />
+      <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
-      <NavigationDrawerItem title="Privacy" icon={<IconLock />} href="/privacy" />
+      <NavigationDrawerItem title={t('privacy')} icon={<IconLock />} href="/privacy" />
       <NavigationDrawerItem
-        title="Feedback"
+        title={t('feedback')}
         icon={<IconFeedback />}
         href="https://feedback.quran.com/"
         isExternalLink
       />
-      <NavigationDrawerItem title="Help" icon={<IconQuestionMark />} href="/support" />
+      <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
       {/* <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} /> */}
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
       {/* <NavigationDrawerItem title="Duaas" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Revelation" icon={<IconCollection />} />  */}
-      <h3 className={styles.subtitle}>Community</h3>
+      <h3 className={styles.subtitle}>{t('community.title')}</h3>
       <CommunitySection />
-      <h3 className={styles.subtitle}>Network</h3>
+      <h3 className={styles.subtitle}>{t('network')}</h3>
       <NavigationDrawerItem
         title="Quranicaudio.com"
         icon={<IconQ />}

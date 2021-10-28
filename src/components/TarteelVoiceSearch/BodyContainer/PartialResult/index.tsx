@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
 
 import styles from './PartialResult.module.scss';
@@ -12,10 +14,11 @@ interface Props {
 }
 
 const PartialResult: React.FC<Props> = ({ partialTranscript, volume }) => {
+  const { t } = useTranslation('common');
   return (
     <div>
       <div className={styles.container}>
-        <p className={styles.speakMessage}>Please begin reciting and your verse will appear.</p>
+        <p className={styles.speakMessage}>{t('voice.suggest')}</p>
         <div className={styles.circlesContainer}>
           <div
             className={styles.volumeCircle}

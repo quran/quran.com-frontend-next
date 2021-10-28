@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
@@ -18,8 +19,9 @@ import {
   setPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
-import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
+import { generateSelectOptions } from 'src/utils/input';
 import { RecitersResponse } from 'types/ApiResponses';
+import { AutoScroll } from 'types/QuranReader';
 import Reciter from 'types/Reciter';
 
 // convert the reciter's data from API to combobox items
@@ -34,9 +36,8 @@ const recitersToComboboxItems = (reciters: Reciter[]) =>
       name: item.id.toString(),
     }));
 
-const autoScrollingOptions = generateRadioItems(['On', 'Off']);
-
 const AudioSection = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
@@ -54,15 +55,25 @@ const AudioSection = () => {
     dispatch(setPlaybackRate(Number(value)));
   };
 
+  const autoScrollingOptions = useMemo(
+    () =>
+      Object.values(AutoScroll).map((item) => ({
+        label: t(`audio.auto-scroll.${item}`),
+        id: item,
+        value: item,
+      })),
+    [t],
+  );
+
   return (
     <div className={styles.container}>
       <DataFetcher
         queryKey={makeRecitersUrl()}
         render={(data: RecitersResponse) => (
           <Section>
-            <Section.Title>Audio</Section.Title>
+            <Section.Title>{t('audio.title')}</Section.Title>
             <Section.Row>
-              <Section.Label>Reciter</Section.Label>
+              <Section.Label>{t('reciter')}</Section.Label>
               <div>
                 <Combobox
                   id="audio-reciter"
@@ -77,17 +88,17 @@ const AudioSection = () => {
               </div>
             </Section.Row>
             <Section.Row>
-              <Section.Label>Auto Scroll</Section.Label>
+              <Section.Label>{t('audio.auto-scroll.title')}</Section.Label>
               <RadioGroup
-                onChange={(value) => dispatch(setEnableAutoScrolling(value === 'On'))}
-                value={enableAutoScrolling ? 'On' : 'Off'}
+                onChange={(value) => dispatch(setEnableAutoScrolling(value === AutoScroll.ON))}
+                value={enableAutoScrolling ? AutoScroll.ON : AutoScroll.OFF}
                 label="view"
                 items={autoScrollingOptions}
                 orientation={RadioGroupOrientation.Horizontal}
               />
             </Section.Row>
             <Section.Row>
-              <Section.Label>Playback Speed</Section.Label>
+              <Section.Label>{t('audio.playback-speed')}</Section.Label>
               <Select
                 id="theme-section"
                 name="theme"

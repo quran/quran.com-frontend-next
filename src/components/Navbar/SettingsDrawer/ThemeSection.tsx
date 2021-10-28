@@ -1,19 +1,30 @@
+import React, { useMemo } from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
 
 import Select from 'src/components/dls/Forms/Select';
 import { selectTheme, setTheme, ThemeType } from 'src/redux/slices/theme';
-import { generateSelectOptions } from 'src/utils/input';
 
 const ThemeSection = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('common');
   const theme = useSelector(selectTheme, shallowEqual);
+  const themes = useMemo(
+    () =>
+      Object.values(ThemeType).map((themeValue) => ({
+        label: t(`themes.${themeValue}`),
+        value: themeValue,
+      })),
+    [t],
+  );
   return (
     <Section>
-      <Section.Title>Theme</Section.Title>
+      <Section.Title>{t('theme')}</Section.Title>
       <Section.Row>
-        <Section.Label>Mode</Section.Label>
+        <Section.Label>{t('mode')}</Section.Label>
         <Select
           id="theme-section"
           name="theme"
@@ -23,18 +34,10 @@ const ThemeSection = () => {
         />
       </Section.Row>
       <Section.Footer visible={theme.type === ThemeType.System}>
-        The system theme automatically adopts to your light/dark mode settings
+        {t('themes.system-desc')}
       </Section.Footer>
     </Section>
   );
 };
-
-// TODO: internationalize label
-const themes = generateSelectOptions([
-  ThemeType.System,
-  ThemeType.Light,
-  ThemeType.Dark,
-  // ThemeType.Sepia,
-]);
 
 export default ThemeSection;

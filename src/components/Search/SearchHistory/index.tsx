@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchHistory.module.scss';
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked }) => {
+  const { t } = useTranslation('common');
   const searchHistory = useSelector(selectSearchHistory, areArraysEqual);
   const dispatch = useDispatch();
 
@@ -30,7 +32,7 @@ const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked }) => {
   }
   return (
     <div className={styles.container}>
-      <Header text="Recent searches" />
+      <Header text={t('search.recent')} />
       {searchHistory.map((recentSearchQuery) => (
         <SearchQuerySuggestion
           searchQuery={recentSearchQuery}

@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import CommandsList, { Command } from '../CommandsList';
@@ -45,6 +46,7 @@ const NAVIGATE_TO = [
 const DEBOUNCING_PERIOD_MS = 100;
 
 const CommandBarBody: React.FC = () => {
+  const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -113,7 +115,7 @@ const CommandBarBody: React.FC = () => {
         {!isVoiceSearchFlowStarted && (
           <input
             onChange={onSearchQueryChange}
-            placeholder="Search"
+            placeholder={t('search.title')}
             className={styles.input}
             type="text"
             inputMode="text"

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
@@ -16,10 +17,10 @@ import {
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
-import { generateRadioItems, generateSelectOptions } from 'src/utils/input';
 import { ReadingPreference, WordByWordType } from 'types/QuranReader';
 
 const ReadingExperienceSection = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -64,11 +65,30 @@ const ReadingExperienceSection = () => {
     }
   };
 
+  const wordByWordOptions = useMemo(
+    () =>
+      [NONE, WordByWordType.Translation, WordByWordType.Transliteration, BOTH].map((option) => ({
+        label: t(option),
+        value: option,
+      })),
+    [t],
+  );
+
+  const preferences = useMemo(
+    () =>
+      Object.values(ReadingPreference).map((item) => ({
+        label: t(`reading-preference.${item}`),
+        id: item,
+        value: item,
+      })),
+    [t],
+  );
+
   return (
     <Section>
-      <Section.Title>Reading Experience</Section.Title>
+      <Section.Title>{t('settings.reading-experience')}</Section.Title>
       <Section.Row>
-        <Section.Label>View</Section.Label>
+        <Section.Label>{t('view')}</Section.Label>
         <RadioGroup
           onChange={(value) => dispatch(setReadingPreference(value as ReadingPreference))}
           value={readingPreference}
@@ -78,7 +98,7 @@ const ReadingExperienceSection = () => {
         />
       </Section.Row>
       <Section.Row>
-        <Section.Label>Word By Word</Section.Label>
+        <Section.Label>{t('wbw')}</Section.Label>
         <Select
           id="wordByWord"
           name="wordByWord"
@@ -88,7 +108,7 @@ const ReadingExperienceSection = () => {
         />
       </Section.Row>
       <Section.Row>
-        <Section.Label>Tooltip</Section.Label>
+        <Section.Label>{t('tooltip')}</Section.Label>
         <Select
           id="showToolTipFor"
           name="showToolTipFor"
@@ -103,18 +123,6 @@ const ReadingExperienceSection = () => {
 
 const NONE = 'none';
 const BOTH = 'both';
-
-// TODO: internationalize labels
-const preferences = generateRadioItems([ReadingPreference.Reading, ReadingPreference.Translation]);
-
-// wordByWordOptions will be used as items in select component
-// TODO: internationalize labels
-const wordByWordOptions = generateSelectOptions([
-  NONE,
-  WordByWordType.Translation,
-  WordByWordType.Transliteration,
-  BOTH,
-]);
 
 type WordByWordValue = typeof BOTH | typeof NONE | WordByWordType;
 

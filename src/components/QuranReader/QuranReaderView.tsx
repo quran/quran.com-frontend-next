@@ -34,14 +34,14 @@ const QuranReaderView: React.FC<Props> = ({
     return (
       <>
         <ReadingPreferenceSwitcher />
-        <ReadingView verses={verses} />;
+        <ReadingView verses={verses} />
       </>
     );
   }
   return (
     <>
       <ReadingPreferenceSwitcher />
-      <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />;
+      <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />
     </>
   );
 };

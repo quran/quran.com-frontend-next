@@ -8,7 +8,7 @@ export enum ThemeType {
   System = 'system',
   Light = 'light',
   Dark = 'dark',
-  Sepia = 'sepia',
+  // Sepia = 'sepia',
 }
 
 export type Theme = {
