@@ -4,7 +4,7 @@ import Skeleton from './Skeleton';
 import Button from 'src/components/dls/Button/Button';
 
 export default {
-  title: 'dls/skeleton',
+  title: 'dls/Skeleton',
   component: Skeleton,
 };
 
