@@ -9,7 +9,7 @@ const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
-const nextTranslate = require('next-translate');
+// const nextTranslate = require('next-translate');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
 
@@ -73,4 +73,4 @@ const config = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withPWA, withFonts, nextTranslate], config);
+module.exports = withPlugins([withBundleAnalyzer, withPWA, withFonts], config);
