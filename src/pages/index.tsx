@@ -31,6 +31,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
             objectFit="cover"
             sizes="(max-width: 425px) 95vw, 80vw"
             priority
+            quality={20}
             layout="fill" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
             placeholder="blur" // to have a blur effect while loading.
           />
