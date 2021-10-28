@@ -18,4 +18,11 @@
     line-height: var(--line-height-large);
     margin-bottom: var(--spacing-medium);
   }
+  a {
+    text-decoration: underline;
+    font-weight: var(--font-weight-semibold);
+    &:hover {
+      opacity: var(--opacity-50);
+    }
+  }
 }
