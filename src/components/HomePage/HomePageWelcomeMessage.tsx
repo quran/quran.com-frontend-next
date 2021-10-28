@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import CloseIcon from '../../../public/icons/close.svg';
@@ -15,6 +16,7 @@ import {
 } from 'src/redux/slices/welcomeMessage';
 
 const HomePageWelcomeMessage = () => {
+  const { t } = useTranslation('home');
   const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
   const dispatch = useDispatch();
 
@@ -25,19 +27,16 @@ const HomePageWelcomeMessage = () => {
         <span>QDC BETA v.1.10</span>
         <InfoIcon />
       </p> */}
-      <h3 className={styles.title}>Welcome to the Pre-Release Beta of the new Quran.com!</h3>
-      <p className={styles.description}>
-        We are actively adding new features and pushing changes. If you run into any issues please
-        do provide feedback.
-      </p>
+      <h3 className={styles.title}>{t('welcome.title')}</h3>
+      <p className={styles.description}>{t('welcome.desc')}</p>
       <p className={styles.link}>
         <Link variant={LinkVariant.Blend} href="https://feedback.quran.com/">
-          Provide Feedback
+          {t('welcome.feedback-cta')}
         </Link>
       </p>
       <p className={styles.link}>
         <Link variant={LinkVariant.Blend} href="https://discord.gg/FxRWSBfWxn">
-          Join Discord Community
+          {t('welcome.join-cta')}
         </Link>
       </p>
       <div className={styles.closeIcon}>

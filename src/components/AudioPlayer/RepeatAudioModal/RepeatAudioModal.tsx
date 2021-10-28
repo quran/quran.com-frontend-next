@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
 import { useMemo, useState, useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { triggerPauseAudio } from '../EventTriggers';
@@ -37,6 +39,7 @@ const RepeatAudioModal = ({
   defaultRepetitionMode,
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
   const repeatSettings = useSelector(selectRepeatSettings);
@@ -99,7 +102,7 @@ const RepeatAudioModal = ({
     onClose();
   };
 
-  const onRepetitionModeChange = (mode) => {
+  const onRepetitionModeChange = (mode: RepetitionMode) => {
     setVerseRepetition((prevVerseRepetition) => ({
       ...prevVerseRepetition,
       from: mode === RepetitionMode.Single ? selectedVerseKey : firstVerseKeyInThisChapter,
@@ -112,8 +115,8 @@ const RepeatAudioModal = ({
     <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
         <Modal.Header>
-          <Modal.Title>Repeat Settings</Modal.Title>
-          <Modal.Subtitle>Surah {chapterName}</Modal.Subtitle>
+          <Modal.Title>{t('audio.player.repeat-settings')}</Modal.Title>
+          <Modal.Subtitle>{`${t('surah')} ${chapterName}`}</Modal.Subtitle>
         </Modal.Header>
         <div>
           <SelectRepetitionMode
@@ -132,34 +135,34 @@ const RepeatAudioModal = ({
             <Separator />
           </div>
           <RepeatSetting
-            label="Play range"
+            label={t('audio.player.play-range')}
             value={verseRepetition.repeatRange}
             minValue={1}
             onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatRange: val })}
-            suffix="times"
+            suffix={t('audio.player.times')}
           />
           <RepeatSetting
-            label="Repeat each verse"
+            label={t('audio.player.repeat-verse')}
             value={verseRepetition.repeatEachVerse}
             minValue={1}
             onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatEachVerse: val })}
-            suffix="times"
+            suffix={t('audio.player.times')}
           />
           <RepeatSetting
-            label="Delay between verse"
+            label={t('audio.player.delay-verse')}
             value={verseRepetition.delayMultiplier}
             minValue={0}
             onChange={(val) => setVerseRepetition({ ...verseRepetition, delayMultiplier: val })}
-            suffix="times"
+            suffix={t('audio.player.times')}
             step={0.5}
           />
         </div>
       </Modal.Body>
       <Modal.Footer>
         <Modal.Action onClick={isInRepeatMode ? onStopRepeating : onCancelClick}>
-          {isInRepeatMode ? 'Stop Repeating' : 'Cancel'}
+          {isInRepeatMode ? t('audio.player.stop-repeating') : t('cancel')}
         </Modal.Action>
-        <Modal.Action onClick={onPlayClick}>Start Playing</Modal.Action>
+        <Modal.Action onClick={onPlayClick}>{t('audio.player.start-playing')}</Modal.Action>
       </Modal.Footer>
     </Modal>
   );

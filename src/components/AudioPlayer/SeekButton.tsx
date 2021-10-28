@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -33,6 +34,7 @@ type SeekButtonProps = {
   isLoading: boolean;
 };
 const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
   const reciter = useSelector(selectReciter);
@@ -78,7 +80,11 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
 
   return (
     <Button
-      tooltip={type === SeekButtonType.PrevAyah ? 'Previous Ayah' : 'Next Ayah'}
+      tooltip={
+        type === SeekButtonType.PrevAyah
+          ? t('audio.player.previous-ayah')
+          : t('audio.player.next-ayah')
+      }
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
       disabled={isDisabled}

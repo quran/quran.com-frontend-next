@@ -1,0 +1,19 @@
+{
+    "recently-read": "Recently Read",
+    "voice": {
+        "trigger": "Quick access to anything"
+    },
+    "footer": {
+        "rights": "All Rights Reserved"
+    },
+    "tab": {
+        "popular": "Popular",
+        "bookmarks": "Bookmarks"
+    },
+    "welcome": {
+        "title": "Welcome to the Pre-Release Beta of the new Quran.com!",
+        "desc": "We are actively adding new features and pushing changes. If you run into any issues please do provide feedback.",
+        "feedback-cta": "Provide Feedback",
+        "join-cta": "Join Discord Community"
+    }
+}

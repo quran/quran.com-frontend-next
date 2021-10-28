@@ -1,8 +1,9 @@
 {
-    "about": "About us",
+    "about": "About Us",
     "beta": "Beta",
     "close": "Close",
     "developers": "Developers",
+    "sitemap": "Sitemap",
     "feedback": "Feedback",
     "help": "Help",
     "home": "Home",
@@ -10,6 +11,7 @@
     "reciter": "Reciter",
     "type": "Type",
     "style": "Style",
+    "cancel": "Cancel",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "network": "Network",
@@ -24,7 +26,17 @@
     "tooltip": "Tooltip",
     "wbw": "Word By Word",
     "theme": "Theme",
+    "surah": "Surah",
+    "juz": "Juz",
     "powered-by": "Powered by",
+    "from": "From",
+    "to": "To",
+    "verse": "Verse",
+    "ayah": "Ayah",
+    "ayahs": "Ayahs",
+    "loading": "Loading",
+    "continue": "Continue",
+    "more": "More",
     "community": {
         "cta": "Join Community",
         "header": "Join the QDC Community of Muslim builders and technologists.",
@@ -75,7 +87,28 @@
             "on": "On",
             "off": "Off"
         },
-        "playback-speed": "Playback Speed"
+        "playback-speed": "Playback Speed",
+        "player": {
+            "repeat-settings": "Repeat Settings",
+            "play-range": "Play range",
+            "times": "times",
+            "repeat-verse": "Repeat each verse",
+            "delay-verse": "Delay between verse",
+            "stop-repeating": "Stop Repeating",
+            "start-playing": "Start Playing",
+            "single-verse": "Single Verse",
+            "verses-range": "Range of verses",
+            "search-verse": "Search for a verse",
+            "previous-ayah": "Previous Ayah",
+            "next-ayah": "Next Ayah",
+            "pause": "Pause",
+            "play": "Play",
+            "start-over": "Start Over",
+            "download": "Download",
+            "close": "Close Audio Player",
+            "currently-playing": "You are currently playing",
+            "mismatch": "Click on \"Start Over\" if you would like to play {{currentReadingChapter}} instead"
+        }
     },
     "error": {
         "general": "Something went wrong. Please try again.",
@@ -108,5 +141,15 @@
     },
     "input": {
         "clear": "Clear"
+    },
+    "command-bar": {
+        "navigations": "Navigations",
+        "try-navigating": "Try navigating to",
+        "recent-navigations": "Recent navigations"
+    },
+    "sort": {
+        "by": "Sort by",
+        "ascending": "Ascending",
+        "descending": "Descending"
     }
 }

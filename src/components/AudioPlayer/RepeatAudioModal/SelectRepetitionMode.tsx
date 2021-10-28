@@ -1,3 +1,7 @@
+import { useMemo } from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
+
 import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
@@ -7,19 +11,6 @@ export enum RepetitionMode {
   Single = 'single',
   Range = 'range',
 }
-
-const repetitionModeRadioGroupItems = [
-  {
-    value: RepetitionMode.Single,
-    id: RepetitionMode.Single,
-    label: 'Single Verse',
-  },
-  {
-    value: RepetitionMode.Range,
-    id: RepetitionMode.Range,
-    label: 'Range of verses',
-  },
-];
 
 const SelectRepetitionMode = ({
   comboboxVerseItems,
@@ -31,10 +22,26 @@ const SelectRepetitionMode = ({
   onRepetitionModeChange,
   verseKey,
 }) => {
+  const { t } = useTranslation('common');
+  const repetitionModeRadioGroupItems = useMemo(
+    () => [
+      {
+        value: RepetitionMode.Single,
+        id: RepetitionMode.Single,
+        label: t('audio.player.single-verse'),
+      },
+      {
+        value: RepetitionMode.Range,
+        id: RepetitionMode.Range,
+        label: t('audio.player.verses-range'),
+      },
+    ],
+    [t],
+  );
   return (
     <>
       <RadioGroup
-        label="Select verses range"
+        label="range"
         orientation={RadioGroupOrientation.Horizontal}
         onChange={onRepetitionModeChange}
         value={repetitionMode}
@@ -47,7 +54,7 @@ const SelectRepetitionMode = ({
           value={verseKey}
           items={comboboxVerseItems}
           onChange={(val) => onSingleVerseChange(val)}
-          placeholder="Search for a verse"
+          placeholder={t('audio.player.search-verse')}
           initialInputValue={verseKey}
         />
       )}

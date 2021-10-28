@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import Link, { LinkVariant } from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
@@ -12,6 +14,7 @@ type JuzViewProps = {
 };
 
 const JuzView = ({ isDescending }: JuzViewProps) => {
+  const { t } = useTranslation('common');
   const [juzMappings, setJuzMappings] = useState([]);
 
   useEffect(() => {
@@ -38,7 +41,9 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
         return (
           <div className={styles.juzContainer}>
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
-              <div className={styles.juzTitle}>Juz {juzId}</div>
+              <div className={styles.juzTitle}>
+                {t('juz')} {juzId}
+              </div>
             </Link>
             {chapterIds.map((chapterId) => {
               const chapter = getChapterData(chapterId);
@@ -47,7 +52,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                   <Link href={`/${chapter.id}/${chapterAndVerseMappings[chapterId]}`}>
                     <SurahPreviewRow
                       chapterId={Number(chapter.id)}
-                      description={`${chapter.versesCount} Ayahs`}
+                      description={`${chapter.versesCount} ${t('ayahs')}`}
                       surahName={chapter.nameSimple}
                       surahNumber={Number(chapter.id)}
                       translatedSurahName={chapter.translatedName.name}

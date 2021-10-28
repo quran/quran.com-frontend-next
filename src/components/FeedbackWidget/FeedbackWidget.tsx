@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import styles from './FeedbackWidget.module.scss';
@@ -14,6 +15,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 
 const FeedbackWidget = () => {
+  const { t } = useTranslation('common');
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
@@ -26,7 +28,7 @@ const FeedbackWidget = () => {
       })}
     >
       <Link href="https://feedback.quran.com" newTab>
-        <Button>Feedback</Button>
+        <Button>{t('feedback')}</Button>
       </Link>
     </div>
   );

@@ -1,3 +1,5 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 
 import CloseButton from './Buttons/CloseButton';
@@ -8,12 +10,13 @@ import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Bu
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 const OverflowAudioPlayerActionsMenu = () => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
         isPortalled={false}
         trigger={
-          <Button tooltip="More" variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+          <Button tooltip={t('more')} variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
             <OverflowMenuIcon />
           </Button>
         }

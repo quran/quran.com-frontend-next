@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './SelectorContainer.module.scss';
 
 import Combobox from 'src/components/dls/Forms/Combobox';
@@ -33,23 +35,26 @@ Memoizing the selector will save re-renders to each selector and its items when:
 [NOTE] The more the verses of a chapter the more beneficial the memoization will be 
         since we will have higher number items which will be re-rendering un-necessarily.
 */
-const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems, onChange }) => (
-  <div className={styles.selectedContainer}>
-    <Combobox
-      id={type}
-      value={value}
-      clearable={false}
-      items={dropdownItems}
-      onChange={onChange}
-      placeholder="Search for a verse"
-      initialInputValue={value}
-      label={
-        <span className={styles.comboboxLabel}>
-          {type === RangeSelectorType.START ? 'From' : 'To'} Verse:
-        </span>
-      }
-    />
-  </div>
-);
+const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems, onChange }) => {
+  const { t } = useTranslation('common');
+  return (
+    <div className={styles.selectedContainer}>
+      <Combobox
+        id={type}
+        value={value}
+        clearable={false}
+        items={dropdownItems}
+        onChange={onChange}
+        placeholder={t('audio.player.search-verse')}
+        initialInputValue={value}
+        label={
+          <span className={styles.comboboxLabel}>
+            {`${type === RangeSelectorType.START ? t('from') : t('to')} ${t('verse')}:`}
+          </span>
+        }
+      />
+    </div>
+  );
+};
 
 export default memo(SelectorContainer);

@@ -19,6 +19,7 @@ const RepeatSetting = ({
   minValue = 0,
   maxValue = Infinity,
   step = 1,
+  suffix,
   format = (val: number) => val.toString(),
 }: RepeatSettingProps) => {
   return (
@@ -30,7 +31,7 @@ const RepeatSetting = ({
           onDecrement={value > minValue ? () => onChange(value - step) : null}
           count={format(value)}
         />{' '}
-        times
+        {suffix}
       </span>
     </div>
   );
