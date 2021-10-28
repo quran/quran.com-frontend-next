@@ -59,7 +59,8 @@
     },
     "tafsir": {
         "title": "Tafsir",
-        "font-size": "Tafsir font size"
+        "font-size": "Tafsir font size",
+        "surah": "Tafsir Surah"
     },
     "settings": {
         "reading-experience": "Reading Experience",
@@ -140,7 +141,8 @@
         "recent": "Recent searches",
         "show-all": "Show all results",
         "jump-to": "Jump To",
-        "results": "results"
+        "results": "results",
+        "filters": "Filters"
     },
     "voice": {
         "ask-permission": "Please enable microphone permission to start using Voice Search",

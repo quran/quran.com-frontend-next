@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 import { getPageVerses } from 'src/api';
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
+  const { t } = useTranslation('common');
   const {
     query: { pageId },
   } = useRouter();
@@ -30,7 +32,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   }
   return (
     <>
-      <NextSeoWrapper title={`Page ${pageId}`} />
+      <NextSeoWrapper title={`${t('page')} ${pageId}`} />
       <QuranReader
         initialData={pageVerses}
         id={String(pageId)}

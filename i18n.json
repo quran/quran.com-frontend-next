@@ -9,6 +9,7 @@
     "/[chapterId]/[verseId]": ["quran-reader"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],
     "/page/[pageId]": ["quran-reader"],
-    "/juz/[juzId]": ["quran-reader"]
+    "/juz/[juzId]": ["quran-reader"],
+    "/search": ["search"]
   }
 }

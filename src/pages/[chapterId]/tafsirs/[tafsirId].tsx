@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
 import { getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
@@ -31,12 +32,15 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   verseNumber,
   tafsirId,
 }) => {
+  const { t } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
   return (
     <>
-      <NextSeoWrapper title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseNumber}`} />
+      <NextSeoWrapper
+        title={`${t('tafsir.surah')} ${chapter.chapter.nameSimple} - ${verseNumber}`}
+      />
       <QuranReader
         initialData={verses}
         id={tafsirId}
