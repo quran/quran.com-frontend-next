@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
@@ -11,6 +12,7 @@ interface Props {
   chapterId: number;
 }
 const PlayChapterAudioButton = (props: Props) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const play = () => {
     dispatch(loadAndPlayAudioData(props.chapterId));
@@ -25,7 +27,7 @@ const PlayChapterAudioButton = (props: Props) => {
         onClick={play}
         hasSidePadding={false}
       >
-        Play Audio
+        {t('audio.play')}
       </Button>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import EndOfScrollingButton from './EndOfScrollingButton';
@@ -14,16 +15,17 @@ interface Props {
 }
 
 const PageControls: React.FC<Props> = ({ lastVerse }) => {
+  const { t } = useTranslation('quran-reader');
   const { pageNumber } = lastVerse;
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles);
   const page = Number(pageNumber);
   return (
     <>
       {!isFirstPage(page) && (
-        <EndOfScrollingButton text="Previous Page" href={getPageNavigationUrl(page - 1)} />
+        <EndOfScrollingButton text={t('prev-page')} href={getPageNavigationUrl(page - 1)} />
       )}
       {!isLastPage(page, quranFont, mushafLines) && (
-        <EndOfScrollingButton text="Next Page" href={getPageNavigationUrl(page + 1)} />
+        <EndOfScrollingButton text={t('next-page')} href={getPageNavigationUrl(page + 1)} />
       )}
     </>
   );

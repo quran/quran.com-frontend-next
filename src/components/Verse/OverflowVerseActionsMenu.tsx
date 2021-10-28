@@ -1,6 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
@@ -20,10 +21,11 @@ interface Props {
 }
 
 const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
+  const { t } = useTranslation('common');
   return (
     <PopoverMenu
       trigger={
-        <Button size={ButtonSize.Small} tooltip="More" type={ButtonType.Secondary}>
+        <Button size={ButtonSize.Small} tooltip={t('more')} type={ButtonType.Secondary}>
           <OverflowMenuIcon />
         </Button>
       }

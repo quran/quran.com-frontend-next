@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
 
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
@@ -14,12 +16,13 @@ type VerseActionAdvancedCopyProps = {
 };
 
 const VerseActionAdvancedCopy = ({ verse }: VerseActionAdvancedCopyProps) => {
+  const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
       <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={() => setIsModalOpen(true)}>
-        Advanced Copy
+        {t('advanced-copy')}
       </PopoverMenu.Item>
       <Modal isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)}>
         <VerseAdvancedCopy verse={verse}>
@@ -27,7 +30,7 @@ const VerseActionAdvancedCopy = ({ verse }: VerseActionAdvancedCopyProps) => {
             <>
               <Modal.Body>
                 <Modal.Header>
-                  <Modal.Title>Advanced Copy</Modal.Title>
+                  <Modal.Title>{t('advanced-copy')}</Modal.Title>
                 </Modal.Header>
                 {ayahSelectionComponent}
               </Modal.Body>

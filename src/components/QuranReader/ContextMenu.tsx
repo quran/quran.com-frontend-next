@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './ContextMenu.module.scss';
@@ -14,6 +15,7 @@ import { getJuzNumberByHizb } from 'src/utils/juz';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
+  const { t } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
@@ -48,12 +50,14 @@ const ContextMenu = () => {
             <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
               <p className={styles.col}>{chapterData.translatedName.name}</p>
               <p className={styles.col}>
-                Juz {juzNumber} / Hizb {hizb}
+                {t('juz')} {juzNumber} / {t('hizb')} {hizb}
               </p>
             </div>
             <div className={styles.row}>
               <p className={classNames(styles.col, styles.bold)}>{chapterData.nameSimple}</p>
-              <p className={styles.col}>Page {page}</p>
+              <p className={styles.col}>
+                {t('page')} {page}
+              </p>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 import { getChapterVerses } from 'src/api';
@@ -23,6 +24,7 @@ type AyahTafsirProp = {
 };
 
 const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => {
+  const { t } = useTranslation('common');
   const {
     query: { verseId },
   } = useRouter();
@@ -31,7 +33,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
   }
   return (
     <>
-      <NextSeoWrapper title={`Tafsir Surah ${chapter.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper title={`${t('tafsir.surah')} ${chapter.chapter.nameSimple} - ${verseId}`} />
       <QuranReader
         initialData={verses}
         id={chapter.chapter.id}

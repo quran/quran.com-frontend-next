@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -30,6 +31,7 @@ type SearchProps = {
 };
 
 const Search: NextPage<SearchProps> = ({ languages, translations }) => {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -162,7 +164,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     <>
       <NextSeoWrapper title={debouncedSearchQuery} />
       <div className={styles.pageContainer}>
-        <p className={styles.header}>Search</p>
+        <p className={styles.header}>{t('search.title')}</p>
         <Input
           id="searchQuery"
           onChange={onSearchQueryChange}
@@ -170,10 +172,10 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
           clearable
           value={searchQuery}
           disabled={isSearching}
-          placeholder="Search"
+          placeholder={t('search.title')}
           fixedWidth={false}
         />
-        <p className={styles.filtersHeader}>Filters</p>
+        <p className={styles.filtersHeader}>{t('search.filters')}</p>
         <div className={styles.filtersContainer}>
           <LanguagesFilter
             languages={languages}

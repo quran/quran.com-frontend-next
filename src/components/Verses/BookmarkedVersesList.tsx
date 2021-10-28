@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './BookmarkedVersesList.module.scss';
@@ -9,6 +10,7 @@ import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import { getVerseNavigationUrl } from 'src/utils/navigation';
 
 const BookmarkedVersesList: React.FC = () => {
+  const { t } = useTranslation('home');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const verseKeys = Object.keys(bookmarkedVerses);
   return (
@@ -28,7 +30,7 @@ const BookmarkedVersesList: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div>You do not have any bookmarks yet</div>
+        <div>{t('no-bookmarks')}</div>
       )}
     </div>
   );

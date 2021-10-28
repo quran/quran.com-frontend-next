@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
@@ -28,6 +29,7 @@ interface Props {
 const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
+  const { t } = useTranslation('common');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
@@ -94,35 +96,35 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   return (
     <>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
-        {isCopied ? 'Copied!' : 'Copy'}
+        {isCopied ? `${t('copied')}!` : `${t('copy')}`}
       </PopoverMenu.Item>
 
       <VerseActionAdvancedCopy verse={verse} />
 
       <PopoverMenu.Item onClick={onTafsirsClicked} icon={<TafsirIcon />}>
-        Tafsirs
+        {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
 
       <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
-        {isShared ? 'Link has been copied to the clipboard!' : 'Share'}
+        {isShared ? `${t('shared')}` : `${t('share')}`}
       </PopoverMenu.Item>
 
       <PopoverMenu.Item onClick={onQuranReflectClicked} icon={<QuranReflectIcon />}>
-        QuranReflect
+        {t('q-reflect')}
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
         onClick={onToggleBookmarkClicked}
         icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
       >
-        {isVerseBookmarked ? 'Bookmarked!' : 'Bookmark'}
+        {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
       </PopoverMenu.Item>
 
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
 
       {shouldShowGoToAyah && (
         <PopoverMenu.Item onClick={() => router.push(verseUrl)} icon={<LinkIcon />}>
-          Go to Ayah
+          {t('quran-reader:go-ayah')}
         </PopoverMenu.Item>
       )}
     </>

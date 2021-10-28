@@ -20,6 +20,7 @@
     "both": "Both",
     "transliteration": "Transliteration",
     "translation": "Translation",
+    "translations": "Translations",
     "view": "View",
     "retry": "Retry",
     "remove": "Remove",
@@ -28,6 +29,8 @@
     "theme": "Theme",
     "surah": "Surah",
     "juz": "Juz",
+    "hizb": "Hizb",
+    "page": "Page",
     "powered-by": "Powered by",
     "from": "From",
     "to": "To",
@@ -37,6 +40,20 @@
     "loading": "Loading",
     "continue": "Continue",
     "more": "More",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copied-to-clipboard": "Copied to clipboard",
+    "share": "Share",
+    "bookmark": "Bookmark",
+    "bookmarked": "Bookmarked",
+    "shared": "Link has been copied to the clipboard!",
+    "q-reflect": "QuranReflect",
+    "no": "No",
+    "yes": "Yes",
+    "next": "Next",
+    "prev": "Previous",
+    "click-here": "Click here",
+    "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "community": {
         "cta": "Join Community",
         "header": "Join the QDC Community of Muslim builders and technologists.",
@@ -45,7 +62,8 @@
     },
     "tafsir": {
         "title": "Tafsir",
-        "font-size": "Tafsir font size"
+        "font-size": "Tafsir font size",
+        "surah": "Tafsir Surah"
     },
     "settings": {
         "reading-experience": "Reading Experience",
@@ -82,6 +100,7 @@
     },
     "audio": {
         "title": "Audio",
+        "play": "Play Audio",
         "auto-scroll": {
             "title":  "Auto Scroll",
             "on": "On",
@@ -94,6 +113,7 @@
             "times": "times",
             "repeat-verse": "Repeat each verse",
             "delay-verse": "Delay between verse",
+            "repeat-1-verse": "Repeat Verse",
             "stop-repeating": "Stop Repeating",
             "start-playing": "Start Playing",
             "single-verse": "Single Verse",
@@ -124,7 +144,8 @@
         "recent": "Recent searches",
         "show-all": "Show all results",
         "jump-to": "Jump To",
-        "results": "results"
+        "results": "results",
+        "filters": "Filters"
     },
     "voice": {
         "ask-permission": "Please enable microphone permission to start using Voice Search",

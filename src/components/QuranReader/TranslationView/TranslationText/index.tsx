@@ -6,6 +6,7 @@
 import React, { MouseEvent, useState } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
@@ -20,22 +21,23 @@ interface Props {
   languageId: number;
 }
 
-const PRE_DEFINED_FOOTNOTES = {
-  sg: 'Singular',
-  pl: 'Plural',
-  dl: '<b>Dual</b> <br/> A form for verbs and pronouns in Arabic language when addressing two people',
-};
-
 const TranslationText: React.FC<Props> = ({
   translationFontScale,
   text,
   languageId,
   resourceName,
 }) => {
+  const { t } = useTranslation('quran-reader');
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
+
+  const PRE_DEFINED_FOOTNOTES = {
+    sg: t('footnote-sg'),
+    pl: t('footnote-pl'),
+    dl: t('footnote-dl'),
+  };
 
   const resetFootnote = () => {
     setFootnote(null);

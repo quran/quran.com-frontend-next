@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import RepeatIcon from '../../../public/icons/repeat.svg';
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
@@ -11,6 +13,7 @@ type VerseActionRepeatAudioProps = {
   verseKey: string;
 };
 const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
+  const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
 
@@ -29,7 +32,7 @@ const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
           setIsModalOpen(true);
         }}
       >
-        Repeat Verse
+        {t('audio.player.repeat-1-verse')}
       </PopoverMenu.Item>
     </>
   );

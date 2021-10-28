@@ -2,6 +2,8 @@
 
 import React, { MouseEvent } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import CloseIcon from '../../../../../public/icons/close.svg';
 
 import styles from './FootnoteText.module.scss';
@@ -21,29 +23,32 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   onCloseClicked,
   onTextClicked,
   isLoading,
-}) => (
-  <div className={styles.footnoteContainer}>
-    <div className={styles.header}>
-      <p>Footnote</p>
-      <Button
-        size={ButtonSize.Small}
-        shape={ButtonShape.Circle}
-        type={ButtonType.Secondary}
-        onClick={onCloseClicked}
-      >
-        <CloseIcon />
-      </Button>
+}) => {
+  const { t } = useTranslation('quran-reader');
+  return (
+    <div className={styles.footnoteContainer}>
+      <div className={styles.header}>
+        <p>{t('footnote')}</p>
+        <Button
+          size={ButtonSize.Small}
+          shape={ButtonShape.Circle}
+          type={ButtonType.Secondary}
+          onClick={onCloseClicked}
+        >
+          <CloseIcon />
+        </Button>
+      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div
+          className={styles.footnote}
+          dangerouslySetInnerHTML={{ __html: text }}
+          {...(onTextClicked && { onClick: onTextClicked })}
+        />
+      )}
     </div>
-    {isLoading ? (
-      <Spinner />
-    ) : (
-      <div
-        className={styles.footnote}
-        dangerouslySetInnerHTML={{ __html: text }}
-        {...(onTextClicked && { onClick: onTextClicked })}
-      />
-    )}
-  </div>
-);
+  );
+};
 
 export default FootnoteText;

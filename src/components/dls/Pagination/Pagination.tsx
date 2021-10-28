@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
+import useTranslation from 'next-translate/useTranslation';
 
 import PreviousIcon from '../../../../public/icons/caret-back.svg';
 import NextIcon from '../../../../public/icons/caret-forward.svg';
@@ -37,6 +38,7 @@ const Pagination: React.FC<Props> = ({
   siblingsCount = DEFAULT_SIBLINGS_COUNT,
   showSummary = true,
 }) => {
+  const { t } = useTranslation('common');
   const paginationRange = useMemo(() => {
     // Math.ceil is used to round the number to the next higher integer value e.g. 0.7 gets rounded to 1, 1.1 gets rounded to 2. This ensures that we are reserving an extra page for the remaining data.
     const totalPageCount = Math.ceil(totalCount / pageSize);
@@ -92,7 +94,7 @@ const Pagination: React.FC<Props> = ({
     <div className={styles.container}>
       <div className={styles.buttonContainer}>
         <Button
-          tooltip="Previous"
+          tooltip={t('prev')}
           variant={ButtonVariant.Ghost}
           disabled={currentPage === 1}
           onClick={onPrevious}
@@ -123,7 +125,7 @@ const Pagination: React.FC<Props> = ({
       })}
       <div className={styles.buttonContainer}>
         <Button
-          tooltip="Next"
+          tooltip={t('next')}
           variant={ButtonVariant.Ghost}
           disabled={currentPage === paginationRange[paginationRange.length - 1]}
           onClick={onNext}
@@ -132,10 +134,12 @@ const Pagination: React.FC<Props> = ({
         </Button>
       </div>
       {showSummary && (
-        <p>
-          {showingUntilItem - (pageSize - 1)}-
-          {totalCount < showingUntilItem ? totalCount : showingUntilItem} OF {totalCount} SEARCH
-          RESULTS
+        <p className={styles.uppercase}>
+          {t('pagination-summary', {
+            currentResultNumber: showingUntilItem - (pageSize - 1),
+            endOfResultNumber: totalCount < showingUntilItem ? totalCount : showingUntilItem,
+            totalNumberOfResults: totalCount,
+          })}
         </p>
       )}
     </div>

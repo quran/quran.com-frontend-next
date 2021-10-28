@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import EndOfScrollingButton from './EndOfScrollingButton';
 
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const VerseControls: React.FC<Props> = ({ lastVerse }) => {
+  const { t } = useTranslation('quran-reader');
   const { chapterId, verseNumber } = lastVerse;
   const chapterNumber = Number(chapterId);
   const isLastVerseOfSurah = isLastVerse(String(chapterId), verseNumber);
@@ -19,30 +22,33 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
     <>
       {isLastVerseOfSurah && !isFirstSurah(chapterNumber) && (
         <EndOfScrollingButton
-          text="Previous Surah"
+          text={t('prev-surah')}
           href={getSurahNavigationUrl(chapterNumber - 1)}
         />
       )}
       {!isLastVerseOfSurah && (
         <>
           <EndOfScrollingButton
-            text="Read full surah"
+            text={t('full-surah-cta')}
             href={getSurahNavigationUrl(chapterNumber)}
           />
           <EndOfScrollingButton
-            text="Continue"
+            text={t('common:continue')}
             href={getVerseToEndOfChapterNavigationUrl(`${chapterId}:${verseNumber}`)}
           />
         </>
       )}
       {isLastVerseOfSurah && (
         <EndOfScrollingButton
-          text="Beginning of Surah"
+          text={t('surah-beginning')}
           href={getSurahNavigationUrl(chapterNumber)}
         />
       )}
       {isLastVerseOfSurah && !isLastSurah(chapterNumber) && (
-        <EndOfScrollingButton text="Next Surah" href={getSurahNavigationUrl(chapterNumber + 1)} />
+        <EndOfScrollingButton
+          text={t('next-surah')}
+          href={getSurahNavigationUrl(chapterNumber + 1)}
+        />
       )}
     </>
   );

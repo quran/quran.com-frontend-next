@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import InfoIcon from '../../../../public/icons/info.svg';
 import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
 
@@ -26,6 +28,7 @@ interface Props {
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
 const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) => {
+  const { t } = useTranslation('common');
   const headerRef = useRef(null);
   /**
    * the intersection observer is needed so that we know that the first verse
@@ -50,7 +53,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
         <div className={styles.left}>
           <div className={styles.translatedName}>{translatedName}</div>
           <div className={styles.nameSimple}>
-            Surah <br /> {nameSimple}
+            {t('surah')} <br /> {nameSimple}
           </div>
           <div className={styles.infoContainer}>
             <Button
@@ -60,7 +63,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
               href={getSurahInfoNavigationUrl(chapterId)}
               hasSidePadding={false}
             >
-              Surah Info
+              {t('quran-reader:surah-info')}
             </Button>
           </div>
         </div>

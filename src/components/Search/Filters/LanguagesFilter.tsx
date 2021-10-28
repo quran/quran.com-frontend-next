@@ -1,5 +1,7 @@
 import React, { memo, useMemo } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './Filter.module.scss';
 
 import Combobox from 'src/components/dls/Forms/Combobox';
@@ -13,6 +15,7 @@ interface Props {
 
 const LanguagesFilter: React.FC<Props> = memo(
   ({ languages, selectedLanguages, onLanguageChange }) => {
+    const { t } = useTranslation('search');
     /*
       We need to only pick the languages that exist in the list of available languages
       to avoid selecting non-existent items since the languages can come from the URL path
@@ -42,8 +45,8 @@ const LanguagesFilter: React.FC<Props> = memo(
           value={matchedLanguages}
           items={languagesItems}
           onChange={onLanguageChange}
-          placeholder="Select a language"
-          label={<div className={styles.dropdownLabel}>Search all translations of a language</div>}
+          placeholder={t('language-select')}
+          label={<div className={styles.dropdownLabel}>{t('language-filter-label')}</div>}
         />
       </div>
     );
