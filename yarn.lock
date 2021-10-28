@@ -5040,6 +5040,11 @@ address@1.1.2, address@^1.0.1:
   resolved "https://registry.yarnpkg.com/address/-/address-1.1.2.tgz#bf1116c9c758c51b7a933d296b72c221ed9428b6"
   integrity sha512-aT6camzM4xEA54YVJYSqxz1kv4IHnQZRtThJJHhUMRExaU5spC7jX5ugSwTaTgJliIgs4VhZOk7htClvQ/LmRA==
 
+adhan@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/adhan/-/adhan-4.2.1.tgz#abb1fb5a34d1acde15db621baba1642ce6739053"
+  integrity sha512-R1mxk+5CFVI+yW9uoVkyfQjStdrPgjfBaVOzoybGjX6ViolDuAS3Uq5aLjs/lMOr53NH9pEKt2EH4ngxOOjuTA==
+
 agent-base@6:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
