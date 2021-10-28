@@ -79,7 +79,7 @@ const NavbarBody: React.FC = () => {
           </>
           <>
             <Button
-              tooltip={t('search')}
+              tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
               onClick={openSearchDrawer}
               shape={ButtonShape.Circle}

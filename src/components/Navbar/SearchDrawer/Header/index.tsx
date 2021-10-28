@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
 
@@ -26,6 +27,7 @@ const Header: React.FC<Props> = ({
   isSearching,
   searchQuery,
 }) => {
+  const { t } = useTranslation('common');
   // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
   const isRTLInput = useElementComputedPropertyValue(inputRef, 'direction') === 'rtl';
   return (
@@ -45,7 +47,7 @@ const Header: React.FC<Props> = ({
               type="text"
               ref={inputRef}
               dir="auto"
-              placeholder="Search"
+              placeholder={t('search.title')}
               onChange={onSearchQueryChange}
               value={searchQuery}
               disabled={isSearching}
@@ -53,7 +55,7 @@ const Header: React.FC<Props> = ({
             <TarteelVoiceSearchTrigger />
             {searchQuery && (
               <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
-                Clear
+                {t('input.clear')}
               </button>
             )}
           </div>

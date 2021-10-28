@@ -2,12 +2,6 @@
     "about": "About us",
     "beta": "Beta",
     "close": "Close",
-    "community": {
-        "cta": "Join Community",
-        "header": "Join the QDC Community of Muslim builders and technologists.",
-        "sub-header": "Sign up for the Quran.com Discord to participate and collaborate with the leading community building Islamic tech.",
-        "title": "Community"
-    },
     "developers": "Developers",
     "feedback": "Feedback",
     "help": "Help",
@@ -20,24 +14,32 @@
     "mode": "Mode",
     "network": "Network",
     "privacy": "Privacy",
-    "search": "Search",
     "none": "None",
     "both": "Both",
     "transliteration": "Transliteration",
     "translation": "Translation",
     "view": "View",
+    "retry": "Retry",
+    "remove": "Remove",
+    "tooltip": "Tooltip",
+    "wbw": "Word By Word",
+    "theme": "Theme",
+    "powered-by": "Powered by",
+    "community": {
+        "cta": "Join Community",
+        "header": "Join the QDC Community of Muslim builders and technologists.",
+        "sub-header": "Sign up for the Quran.com Discord to participate and collaborate with the leading community building Islamic tech.",
+        "title": "Community"
+    },
     "tafsir": {
         "title": "Tafsir",
         "font-size": "Tafsir font size"
     },
-    "tooltip": "Tooltip",
-    "wbw": "Word By Word",
     "settings": {
         "reading-experience": "Reading Experience",
         "title": "Settings",
         "reset-cta": "Reset Settings"
     },
-    "theme": "Theme",
     "themes": {
         "dark": "Dark",
         "light": "Light",
@@ -74,5 +76,37 @@
             "off": "Off"
         },
         "playback-speed": "Playback Speed"
+    },
+    "error": {
+        "general": "Something went wrong. Please try again.",
+        "offline": "Looks like you lost your connection. Please check it and try again."
+    },
+    "search": {
+        "title": "Search",
+        "no-results": "No results found",
+        "no-results-suggestion": "We could not find any matching search results for \"{{searchQuery}}\". try searching for a different keyword.",
+        "switch-mode": "Switch to Advanced Search",
+        "popular": "Popular searches",
+        "hint": "Try searching for",
+        "recent": "Recent searches",
+        "show-all": "Show all results",
+        "jump-to": "Jump To",
+        "results": "results"
+    },
+    "voice": {
+        "ask-permission": "Please enable microphone permission to start using Voice Search",
+        "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ",
+        "not-supported": "It looks like your browser does not support microphone. Please try a different browser or download the ",
+        "error": "An error has occurred, please try again later. Or download the ",
+        "suggest": "Please begin reciting and your verse will appear."
+    },
+    "tarteel": {
+        "name": "Tarteel.ai",
+        "app": "Tarteel app",
+        "learn": "learn how to use voice search",
+        "desc": "quranic voice search"
+    },
+    "input": {
+        "clear": "Clear"
     }
 }
