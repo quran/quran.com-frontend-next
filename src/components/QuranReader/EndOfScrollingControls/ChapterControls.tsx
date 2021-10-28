@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import EndOfScrollingButton from './EndOfScrollingButton';
 
 import useScrollToTop from 'src/hooks/useScrollToTop';
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
+  const { t } = useTranslation('quran-reader');
   const scrollToTop = useScrollToTop();
   const { chapterId } = lastVerse;
   const chapterNumber = Number(chapterId);
@@ -19,13 +22,16 @@ const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
     <>
       {!isFirstSurah(chapterNumber) && (
         <EndOfScrollingButton
-          text="Previous Surah"
+          text={t('prev-surah')}
           href={getSurahNavigationUrl(chapterNumber - 1)}
         />
       )}
-      <EndOfScrollingButton text="Beginning of Surah" onClick={scrollToTop} />
+      <EndOfScrollingButton text={t('surah-beginning')} onClick={scrollToTop} />
       {!isLastSurah(chapterNumber) && (
-        <EndOfScrollingButton text="Next Surah" href={getSurahNavigationUrl(chapterNumber + 1)} />
+        <EndOfScrollingButton
+          text={t('next-surah')}
+          href={getSurahNavigationUrl(chapterNumber + 1)}
+        />
       )}
     </>
   );

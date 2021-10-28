@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import EndOfScrollingButton from './EndOfScrollingButton';
 
 import {
@@ -16,6 +18,7 @@ interface Props {
 }
 
 const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSelectedTafsir }) => {
+  const { t } = useTranslation('quran-reader');
   const tafsirId = lastVerse?.tafsirs?.[0]?.resourceId;
   // if the id in the url is a non-existent tafsir id.
   if (isSelectedTafsir && !tafsirId) {
@@ -26,7 +29,7 @@ const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSe
     <>
       {!isFirstVerseOfSurah(verseNumber) && (
         <EndOfScrollingButton
-          text="Previous Ayah"
+          text={t('prev-ayah')}
           href={
             isSelectedTafsir
               ? getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber - 1, tafsirId)
@@ -35,12 +38,12 @@ const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSe
         />
       )}
       <EndOfScrollingButton
-        text="Back to Ayah"
+        text={t('back-to-ayah')}
         href={getVerseNavigationUrl(`${chapterId}:${verseNumber}`)}
       />
       {!isLastVerseOfSurah(String(chapterId), verseNumber) && (
         <EndOfScrollingButton
-          text="Next Ayah"
+          text={t('next-ayah')}
           href={
             isSelectedTafsir
               ? getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber + 1, tafsirId)

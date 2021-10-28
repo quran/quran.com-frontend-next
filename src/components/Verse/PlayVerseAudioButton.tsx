@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -23,6 +24,8 @@ interface PlayVerseAudioProps {
   timestamp: number;
 }
 const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
+  const { t } = useTranslation('common');
+
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
@@ -53,7 +56,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
 
   if (isLoading)
     return (
-      <Button size={ButtonSize.Small} tooltip="Loading" type={ButtonType.Secondary}>
+      <Button size={ButtonSize.Small} tooltip={t('loading')} type={ButtonType.Secondary}>
         <Spinner />
       </Button>
     );
@@ -62,7 +65,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
     return (
       <Button
         size={ButtonSize.Small}
-        tooltip="Pause"
+        tooltip={t('audio.player.pause')}
         type={ButtonType.Secondary}
         onClick={triggerPauseAudio}
       >
@@ -73,7 +76,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   return (
     <Button
       size={ButtonSize.Small}
-      tooltip="Play"
+      tooltip={t('audio.player.play')}
       type={ButtonType.Secondary}
       onClick={onPlayClicked}
     >

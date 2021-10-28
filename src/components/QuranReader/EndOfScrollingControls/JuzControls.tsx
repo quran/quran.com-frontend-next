@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import EndOfScrollingButton from './EndOfScrollingButton';
 
 import useScrollToTop from 'src/hooks/useScrollToTop';
@@ -12,16 +14,17 @@ interface Props {
 }
 
 const JuzControls: React.FC<Props> = ({ lastVerse }) => {
+  const { t } = useTranslation('quran-reader');
   const scrollToTop = useScrollToTop();
   const { juzNumber } = lastVerse;
   return (
     <>
       {!isFirstJuz(juzNumber) && (
-        <EndOfScrollingButton text="Previous Juz" href={getJuzNavigationUrl(juzNumber - 1)} />
+        <EndOfScrollingButton text={t('prev-juz')} href={getJuzNavigationUrl(juzNumber - 1)} />
       )}
-      <EndOfScrollingButton text="Beginning of Juz" onClick={scrollToTop} />
+      <EndOfScrollingButton text={t('juz-beginning')} onClick={scrollToTop} />
       {!isLastJuz(juzNumber) && (
-        <EndOfScrollingButton text="Next Juz" href={getJuzNavigationUrl(juzNumber + 1)} />
+        <EndOfScrollingButton text={t('next-juz')} href={getJuzNavigationUrl(juzNumber + 1)} />
       )}
     </>
   );

@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 import styles from './_error.module.scss';
@@ -12,6 +13,7 @@ type ErrorProps = {
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Error = ({ statusCode }: ErrorProps) => {
+  const { t } = useTranslation('error');
   const router = useRouter();
 
   // if previous page url exist, go back, otherwise go to home
@@ -24,14 +26,14 @@ const Error = ({ statusCode }: ErrorProps) => {
   };
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Sorry, something went wrong</h1>
+      <h1 className={styles.title}>{t('title')}</h1>
       <div className={styles.goBack}>
-        <Button onClick={onBackButtonClicked}>Go Back</Button>
+        <Button onClick={onBackButtonClicked}>{t('go-back')}</Button>
       </div>
       <p className={styles.reportBug}>
-        If the issue persists, please{' '}
+        {t('if-persist')}{' '}
         <Link href="https://feedback.quran.com/" variant={LinkVariant.Highlight}>
-          report a bug
+          {t('report-cta')}
         </Link>
       </p>
     </div>

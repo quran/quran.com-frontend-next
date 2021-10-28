@@ -35,7 +35,7 @@ const TRUE_STRING = String(true);
 const FALSE_STRING = String(false);
 
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('quran-reader');
   const router = useRouter();
   const { chapterId } = router.query;
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -219,9 +219,9 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
 
   const ayahSelectionComponent = (
     <>
-      <p className={styles.label}>Select ayah range</p>
+      <p className={styles.label}>{t('select-range')}</p>
       <RadioGroup
-        label="Select verses range"
+        label="verses_range"
         orientation={RadioGroupOrientation.Horizontal}
         onChange={onRangeTypeChange}
         value={showRangeOfVerses ? MULTIPLE_VERSES : SINGLE_VERSE}
@@ -229,12 +229,12 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           {
             value: SINGLE_VERSE,
             id: SINGLE_VERSE,
-            label: `Current verse ${verse.verseKey}`,
+            label: `${t('current-verse')} ${verse.verseKey}`,
           },
           {
             value: MULTIPLE_VERSES,
             id: MULTIPLE_VERSES,
-            label: 'Range of verses',
+            label: t('verses-range'),
           },
         ]}
       />
@@ -247,16 +247,16 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           onChange={onRangeBoundariesChange}
         />
       )}
-      <p className={styles.label}>What do you want to copy?</p>
+      <p className={styles.label}>{t('copy-what')}</p>
       <Checkbox
         onChange={onShouldCopyTextChange}
         checked={shouldCopyText}
         id="quranText"
-        label="Arabic text (Uthmani text)"
+        label={t('copy-arabic')}
       />
       {selectedTranslations.length !== 0 && (
         <>
-          <p className={styles.label}>Translations:</p>
+          <p className={styles.label}>{t('common:translations')}:</p>
           {selectedTranslations.map((translationId) =>
             translations[translationId] ? (
               <Checkbox
@@ -272,21 +272,21 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           )}
         </>
       )}
-      <p className={styles.label}>Also copy Footnote(s)?</p>
+      <p className={styles.label}>{t('copy-footnote-q')}</p>
       <RadioGroup
-        label="Should copy footnotes"
+        label="copy_footnotes"
         value={shouldCopyFootnotes ? TRUE_STRING : FALSE_STRING}
         onChange={onShouldCopyFootnoteChange}
         items={[
           {
             value: FALSE_STRING,
             id: FALSE_STRING,
-            label: 'No',
+            label: t('common:no'),
           },
           {
             value: TRUE_STRING,
             id: TRUE_STRING,
-            label: 'Yes',
+            label: t('common:yes'),
           },
         ]}
       />
@@ -295,21 +295,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       )}
       {objectUrl && (
         <p className={styles.customMessage}>
-          Text is copied successfully in your clipboard.{' '}
+          {t('copy-success')}{' '}
           <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
-            Click here
+            {t('common:click-here')}
           </Link>{' '}
-          if you want to download text file.
+          {t('download-copy')}
         </p>
       )}
     </>
   );
 
-  const actionText = isCopied ? 'Copied to clipboard' : 'Copy';
-
   return children({
     ayahSelectionComponent,
-    actionText,
+    actionText: isCopied ? t('common:copied-to-clipboard') : t('common:copy'),
     loading: isLoadingData,
     onCopy: onCopyTextClicked,
   });
