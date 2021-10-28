@@ -8,23 +8,9 @@ export default {
   component: Skeleton,
 };
 
-export const Normal = () => (
-  <div style={{ width: 160 }}>
-    <Skeleton />
-  </div>
-);
-
-export const Rounded = () => (
-  <div>
-    <Skeleton isRounded />
-  </div>
-);
-
-export const Squared = () => (
-  <div>
-    <Skeleton isSquared />
-  </div>
-);
+export const Normal = () => <Skeleton />;
+export const Rounded = () => <Skeleton isRounded />;
+export const Squared = () => <Skeleton isSquared />;
 
 export const WrappingAChildren = () => (
   <div style={{ display: 'flex' }}>
