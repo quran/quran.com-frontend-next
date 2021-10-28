@@ -52,8 +52,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <ThemeProvider>
           <IdProvider>
             <DefaultSeo {...createSEOConfig({})} />
-            <GlobalListeners />
-            <Navbar />
             <DeveloperUtility />
             <Component {...pageProps} />
             <FeedbackWidget />
