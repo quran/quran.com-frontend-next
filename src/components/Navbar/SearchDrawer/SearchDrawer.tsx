@@ -1,20 +1,16 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState, RefObject } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import DrawerSearchIcon from './Buttons/DrawerSearchIcon';
-import styles from './SearchDrawer.module.scss';
+import SearchDrawerHeader from './Header';
 
 import { getSearchResults } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
-import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import useDebounce from 'src/hooks/useDebounce';
-import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import useFocus from 'src/hooks/useFocusElement';
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
@@ -48,8 +44,6 @@ const SearchDrawer: React.FC = () => {
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
   const isVoiceSearchFlowStarted = useSelector(selectIsSearchDrawerVoiceFlowStarted, shallowEqual);
-  // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
-  const isRTLInput = useElementComputedPropertyValue(searchInputRef, 'direction') === 'rtl';
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   // once the drawer is open, focus the input field
@@ -131,50 +125,36 @@ const SearchDrawer: React.FC = () => {
 
   return (
     <Drawer
+      hideCloseButton={isVoiceSearchFlowStarted}
       type={DrawerType.Search}
       header={
-        <>
-          <DrawerSearchIcon />
-          <div
-            className={classNames(styles.searchInputContainer, {
-              [styles.searchInputContainerRTL]: isRTLInput,
-            })}
-          >
-            <input
-              className={styles.searchInput}
-              type="text"
-              ref={searchInputRef}
-              dir="auto"
-              placeholder="Search"
-              onChange={onSearchQueryChange}
-              value={searchQuery}
-              disabled={isVoiceSearchFlowStarted || isSearching}
-            />
-            <TarteelVoiceSearchTrigger />
-            {searchQuery && (
-              <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
-                Clear
-              </button>
-            )}
-          </div>
-        </>
+        <SearchDrawerHeader
+          isVoiceFlowStarted={isVoiceSearchFlowStarted}
+          onSearchQueryChange={onSearchQueryChange}
+          resetQueryAndResults={resetQueryAndResults}
+          inputRef={searchInputRef}
+          isSearching={isSearching}
+          searchQuery={searchQuery}
+        />
       }
     >
-      {isOpen && (
-        <>
-          {isVoiceSearchFlowStarted ? (
-            <VoiceSearchBodyContainer />
-          ) : (
-            <SearchBodyContainer
-              onSearchKeywordClicked={onSearchKeywordClicked}
-              searchQuery={searchQuery}
-              searchResult={searchResult}
-              isSearching={isSearching}
-              hasError={hasError}
-            />
-          )}
-        </>
-      )}
+      <div>
+        {isOpen && (
+          <>
+            {isVoiceSearchFlowStarted ? (
+              <VoiceSearchBodyContainer />
+            ) : (
+              <SearchBodyContainer
+                onSearchKeywordClicked={onSearchKeywordClicked}
+                searchQuery={searchQuery}
+                searchResult={searchResult}
+                isSearching={isSearching}
+                hasError={hasError}
+              />
+            )}
+          </>
+        )}
+      </div>
     </Drawer>
   );
 };

@@ -1,11 +1,5 @@
-$internal-container-height: 80vh;
-
 .container {
   margin: var(--spacing-large);
-}
-
-.searchDrawer {
-  min-height: $internal-container-height;
 }
 
 .mainBody {
