@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import DownloadIcon from '../../../../public/icons/download.svg';
@@ -31,6 +32,7 @@ const download = (url: string, onDone: () => void) => {
 };
 
 const DownloadAudioButton = () => {
+  const { t } = useTranslation('common');
   const audioData = useSelector(selectAudioData, shallowEqual);
   const loading = useSelector(selectIsDownloadingAudio);
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ const DownloadAudioButton = () => {
       onClick={onClick}
       icon={loading ? <Spinner size={SpinnerSize.Large} /> : <DownloadIcon />}
     >
-      Download
+      {t('audio.player.download')}
     </PopoverMenu.Item>
   );
 };

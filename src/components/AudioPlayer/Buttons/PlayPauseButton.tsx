@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../../public/icons/pause.svg';
@@ -21,6 +22,7 @@ import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 
 const PlayPauseButton = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
 
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
@@ -49,7 +51,7 @@ const PlayPauseButton = () => {
   if (isLoading)
     button = (
       <Button
-        tooltip="Loading ..."
+        tooltip={`${t('loading')}...`}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(triggerPauseAudio)}
@@ -60,7 +62,7 @@ const PlayPauseButton = () => {
   else if (isPlaying)
     button = (
       <Button
-        tooltip="Pause"
+        tooltip={t('audio.player.pause')}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(triggerPauseAudio)}
@@ -71,7 +73,7 @@ const PlayPauseButton = () => {
   else if (!isPlaying)
     button = (
       <Button
-        tooltip="Play"
+        tooltip={t('audio.player.play')}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(onClickPlay)}

@@ -18,7 +18,7 @@ import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch
 import { makeNavigationSearchUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { SearchResponse } from 'types/ApiResponses';
-import { SearchNavigationResult, SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 const NAVIGATE_TO = [
   {
@@ -64,6 +64,33 @@ const CommandBarBody: React.FC = () => {
   }, []);
 
   /**
+   * Generate an array of commands that will show in the pre-input view.
+   * The function takes the original recentNavigations + NAVIGATE_TO and appends
+   * to each the group name + which command is clearable and which is not. The group
+   * will be used by {@see groupBy} to compose the list of commands for each group.
+   *
+   * @param {SearchNavigationResult[]} recentNavigations the history of the command bar navigations.
+   * @returns {Command[]}
+   */
+  const getPreInputCommands = useCallback(
+    (): Command[] =>
+      recentNavigations
+        .map((recentNavigation) => ({
+          ...recentNavigation,
+          group: t('command-bar.recent-navigations'),
+          isClearable: true,
+        }))
+        .concat(
+          NAVIGATE_TO.map((navigateToItem) => ({
+            ...navigateToItem,
+            group: t('command-bar.try-navigating'),
+            isClearable: false,
+          })),
+        ),
+    [recentNavigations, t],
+  );
+
+  /**
    * This function will be used by DataFetcher and will run only when there is no API error
    * or the connections is offline. When we receive the response from DataFetcher,
    * the data can be:
@@ -81,12 +108,12 @@ const CommandBarBody: React.FC = () => {
       let numberOfCommands = 0;
       // if it's pre-input
       if (!data) {
-        toBeGroupedCommands = getPreInputCommands(recentNavigations);
+        toBeGroupedCommands = getPreInputCommands();
         numberOfCommands = recentNavigations.length + NAVIGATE_TO.length;
       } else {
         toBeGroupedCommands = data.result.navigation.map((navigationItem) => ({
           ...navigationItem,
-          group: 'Navigations',
+          group: t('command-bar.navigations'),
         }));
         numberOfCommands = data.result.navigation.length;
       }
@@ -102,7 +129,7 @@ const CommandBarBody: React.FC = () => {
         />
       );
     },
-    [recentNavigations],
+    [getPreInputCommands, recentNavigations, t],
   );
 
   return (
@@ -138,29 +165,5 @@ const CommandBarBody: React.FC = () => {
     </div>
   );
 };
-
-/**
- * Generate an array of commands that will show in the pre-input view.
- * The function takes the original recentNavigations + NAVIGATE_TO and appends
- * to each the group name + which command is clearable and which is not. The group
- * will be used by {@see groupBy} to compose the list of commands for each group.
- *
- * @param {SearchNavigationResult[]} recentNavigations the history of the command bar navigations.
- * @returns {Command[]}
- */
-const getPreInputCommands = (recentNavigations: SearchNavigationResult[]): Command[] =>
-  recentNavigations
-    .map((recentNavigation) => ({
-      ...recentNavigation,
-      group: 'Recent navigations',
-      isClearable: true,
-    }))
-    .concat(
-      NAVIGATE_TO.map((navigateToItem) => ({
-        ...navigateToItem,
-        group: 'Try navigating to',
-        isClearable: false,
-      })),
-    );
 
 export default CommandBarBody;

@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
 import CaretDownIcon from '../../../public/icons/caret-down.svg';
@@ -36,20 +37,24 @@ enum Sort {
   DESC = 'descending',
 }
 
-const tabs = [
-  { title: 'Surah', value: View.Surah },
-  { title: 'Juz', value: View.Juz },
-];
-
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
+  const { t } = useTranslation('common');
   const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
   const onSort = () => {
     setSortBy((prevValue) => (prevValue === Sort.DESC ? Sort.ASC : Sort.DESC));
   };
+
+  const tabs = useMemo(
+    () => [
+      { title: t(`${View.Surah}`), value: View.Surah },
+      { title: t(`${View.Juz}`), value: View.Juz },
+    ],
+    [t],
+  );
 
   const sortedChapters = useMemo(
     () =>
@@ -64,7 +69,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView as View)} />
         <div className={styles.sorter}>
-          <div>SORT BY:</div>
+          <div className={styles.uppercase}>{t('sort.by')}:</div>
           <div
             className={styles.sortByValue}
             onClick={onSort}
@@ -72,7 +77,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             onKeyPress={onSort}
             tabIndex={0}
           >
-            <span>{sortBy}</span>
+            <span>{t(`sort.${sortBy}`)}</span>
             <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
               <CaretDownIcon />
             </span>
@@ -91,7 +96,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               <Link href={`/${chapter.id}`}>
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
-                  description={`${chapter.versesCount} Ayahs`}
+                  description={`${chapter.versesCount} ${t('ayahs')}`}
                   surahName={chapter.nameSimple}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName.name}
