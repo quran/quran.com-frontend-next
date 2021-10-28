@@ -14,7 +14,7 @@ const Footer = () => {
         <QSimpleIcon />
       </div>
       <div>
-        <div className={styles.title}>Read, study, and learn The Noble Quran.</div>
+        <div className={styles.title}>{t('home:footer.title')}</div>
         <div className={styles.itemsContainer}>
           <div>
             <Link variant={LinkVariant.Primary} href="/privacy">
