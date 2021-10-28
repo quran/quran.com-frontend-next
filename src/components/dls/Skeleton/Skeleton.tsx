@@ -4,7 +4,6 @@ import styles from './Skeleton.module.scss';
 
 type SkeletonProps = {
   children?: React.ReactNode;
-  className?: string;
   isRounded?: boolean;
   isSquared?: boolean;
   isActive?: boolean;
