@@ -32,6 +32,7 @@
     "juz": "Juz",
     "hizb": "Hizb",
     "page": "Page",
+    "pages": "Pages",
     "powered-by": "Powered by",
     "from": "From",
     "to": "To",
@@ -103,7 +104,7 @@
         "title": "Audio",
         "play": "Play Audio",
         "auto-scroll": {
-            "title":  "Auto Scroll",
+            "title": "Auto Scroll",
             "on": "On",
             "off": "Off"
         },
