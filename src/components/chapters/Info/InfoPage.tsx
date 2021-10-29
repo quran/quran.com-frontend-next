@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import Info from '.';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
@@ -12,13 +14,16 @@ interface Props {
   hasError?: boolean;
 }
 const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
+  const { t } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
   return (
     <>
       <NextSeoWrapper
-        title={`Surah ${chapterResponse.chapter.nameSimple} - 1-${chapterResponse.chapter.versesCount}`}
+        title={`${t('surah')} ${chapterResponse.chapter.nameSimple} - 1-${
+          chapterResponse.chapter.versesCount
+        }`}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
     </>
