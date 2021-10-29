@@ -41,16 +41,6 @@ const SettingsReciter = ({ onBack }) => {
                 <label htmlFor={reciter.id.toString()}>{reciter.name}</label>
               </div>
             ))}
-            {/* <Combobox
-              id="audio-reciter"
-              minimumRequiredItems={1}
-              items={data ? recitersToComboboxItems(data.reciters) : []}
-              initialInputValue={selectedReciter.name}
-              value={selectedReciter.id.toString()}
-              onChange={(reciterId: string) => {
-                onSelectedReciterChange(reciterId, data.reciters);
-              }}
-            /> */}
           </div>
         )}
       />
