@@ -10,6 +10,10 @@
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],
     "/page/[pageId]": ["quran-reader"],
     "/juz/[juzId]": ["quran-reader"],
-    "/search": ["search"]
+    "/search": ["search"],
+    "/about-us": ["about"],
+    "/developers": ["developers"],
+    "/privacy": ["privacy"],
+    "/support": ["support"]
   }
 }
