@@ -1,10 +1,6 @@
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
-import {
-  // shallowEqual,
-  useDispatch,
-  useSelector,
-} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import BackIcon from '../../../../public/icons/west.svg';
 
@@ -12,7 +8,6 @@ import styles from './SettingsTranslation.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
-// import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {
   selectSelectedTranslations,
   setSelectedTranslations,
@@ -22,19 +17,20 @@ import { areArraysEqual } from 'src/utils/array';
 import { TranslationsResponse } from 'types/ApiResponses';
 
 const SettingsTranslation = ({ onBack }) => {
-  // const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  // const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
-  // // const { translationFontScale } = quranReaderStyles;
   const { lang } = useTranslation();
 
   // TODO: there's a bug from previous version, where the TranslationView sometime not updated when selectedTranslations is updated
   const onTranslationsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const translationId = e.target.value;
+    const selectedTranslationId = e.target.value;
+
+    // when the checkbox is checked
+    // add the selectedTranslationId to redux
+    // if unchecked, remove it from redux
     const nextTranslations = e.target.checked
-      ? [...selectedTranslations, Number(translationId)]
-      : selectedTranslations.filter((id) => id !== Number(translationId)); // remove the id
+      ? [...selectedTranslations, Number(selectedTranslationId)]
+      : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
     dispatch(setSelectedTranslations(nextTranslations));
   };
