@@ -56,7 +56,7 @@ const TranslationSection = ({ onChooseTranslation }) => {
         </Section.Row>
         <div className={styles.chooseReciterButtonContainer}>
           <Button onClick={onChooseTranslation} suffix={<RightIcon />}>
-            Choose Translation
+            {t('settings.choose-translations')}
           </Button>
         </div>
       </Section>

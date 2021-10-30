@@ -72,7 +72,7 @@ const AudioSection = ({ onChooseReciter }) => {
         </Section.Row>
         <div className={styles.chooseAudioButtonContainer}>
           <Button onClick={onChooseReciter} suffix={<RightIcon />}>
-            Choose Reciter
+            {t('settings.choose-reciter')}
           </Button>
         </div>
       </Section>

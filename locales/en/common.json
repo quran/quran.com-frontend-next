@@ -53,6 +53,7 @@
     "next": "Next",
     "prev": "Previous",
     "click-here": "Click here",
+    "back": "Back",
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "community": {
         "cta": "Join Community",
@@ -68,7 +69,9 @@
     "settings": {
         "reading-experience": "Reading Experience",
         "title": "Settings",
-        "reset-cta": "Reset Settings"
+        "reset-cta": "Reset Settings",
+        "choose-reciter": "Choose Reciter",
+        "choose-translations": "Choose Translations"
     },
     "themes": {
         "dark": "Dark",
@@ -102,7 +105,7 @@
         "title": "Audio",
         "play": "Play Audio",
         "auto-scroll": {
-            "title":  "Auto Scroll",
+            "title": "Auto Scroll",
             "on": "On",
             "off": "Off"
         },

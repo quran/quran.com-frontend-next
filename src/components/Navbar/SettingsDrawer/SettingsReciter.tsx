@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import BackIcon from '../../../../public/icons/west.svg';
@@ -12,6 +13,7 @@ import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
 const SettingsReciter = ({ onBack }) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
 
@@ -26,7 +28,7 @@ const SettingsReciter = ({ onBack }) => {
   return (
     <div>
       <Button onClick={onBack} prefix={<BackIcon />}>
-        Back
+        {t('back')}
       </Button>
       <DataFetcher
         queryKey={makeRecitersUrl()}

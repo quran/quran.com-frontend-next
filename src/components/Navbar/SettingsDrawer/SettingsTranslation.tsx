@@ -17,6 +17,7 @@ import { areArraysEqual } from 'src/utils/array';
 import { TranslationsResponse } from 'types/ApiResponses';
 
 const SettingsTranslation = ({ onBack }) => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { lang } = useTranslation();
@@ -39,7 +40,7 @@ const SettingsTranslation = ({ onBack }) => {
     <div>
       <div className={styles.titleContainer}>
         <Button prefix={<BackIcon />} onClick={onBack}>
-          Back
+          {t('back')}
         </Button>
       </div>
 
