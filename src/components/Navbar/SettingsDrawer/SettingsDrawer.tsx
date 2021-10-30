@@ -22,27 +22,31 @@ const SettingsTranslation = dynamic(() => import('./SettingsTranslation'), {
   ssr: false,
 });
 
-type SettingView = 'setting-body' | 'setting-translation' | 'setting-reciter';
+enum SettingsView {
+  Body = 'body',
+  Translation = 'translation',
+  Reciter = 'reciter',
+}
 
 const SettingsDrawer = () => {
   const { t } = useTranslation('common');
   const { isSettingsDrawerOpen } = useSelector(selectNavbar);
-  const [view, setView] = useState<SettingView>('setting-body');
+  const [view, setView] = useState<SettingsView>(SettingsView.Body);
   return (
     <Drawer type={DrawerType.Settings} header={<div>{t('settings.title')}</div>}>
-      {isSettingsDrawerOpen && view === 'setting-body' && (
+      {isSettingsDrawerOpen && view === 'body' && (
         <SettingsBody
-          onChooseReciter={() => setView('setting-reciter')}
-          onChooseTranslation={() => setView('setting-translation')}
+          onChooseReciter={() => setView(SettingsView.Reciter)}
+          onChooseTranslation={() => setView(SettingsView.Translation)}
         />
       )}
-      {isSettingsDrawerOpen && view === 'setting-translation' && (
-        <SettingsTranslation onBack={() => setView('setting-body')} />
+      {isSettingsDrawerOpen && view === 'translation' && (
+        <SettingsTranslation onBack={() => setView(SettingsView.Body)} />
       )}
-      {isSettingsDrawerOpen && view === 'setting-reciter' && (
+      {isSettingsDrawerOpen && view === 'reciter' && (
         <SettingsReciter
           onBack={() => {
-            setView('setting-body');
+            setView(SettingsView.Body);
           }}
         />
       )}
