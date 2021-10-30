@@ -71,7 +71,8 @@
         "title": "Settings",
         "reset-cta": "Reset Settings",
         "choose-reciter": "Choose Reciter",
-        "choose-translations": "Choose Translations"
+        "choose-translations": "Choose Translations",
+        "showing-translations": "Showing {{count}} translations"
     },
     "themes": {
         "dark": "Dark",

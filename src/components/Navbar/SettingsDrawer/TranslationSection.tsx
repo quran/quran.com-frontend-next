@@ -52,7 +52,7 @@ const TranslationSection = ({ onChooseTranslation }) => {
         </Section.Row>
         <Section.Row>
           <Section.Label>Translations</Section.Label>
-          <div>Showing {selectedTranslations.length} translations</div>
+          <div>{t('settings.showing-translations', { count: selectedTranslations.length })}</div>
         </Section.Row>
         <div className={styles.chooseReciterButtonContainer}>
           <Button onClick={onChooseTranslation} suffix={<RightIcon />}>
