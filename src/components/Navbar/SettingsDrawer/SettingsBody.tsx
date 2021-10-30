@@ -8,18 +8,14 @@ import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
 import TranslationSection from './TranslationSection';
 
-import Button from 'src/components/dls/Button/Button';
-
-const SettingsBody = ({ onTranslationClicked, onReciterClicked }) => (
+const SettingsBody = ({ onChooseTranslation, onChooseReciter }) => (
   <>
-    <Button onClick={onTranslationClicked}>Choose Translation</Button>
-    <Button onClick={onReciterClicked}>Choose Reciter</Button>
     <ThemeSection />
     <ReadingExperienceSection />
     <QuranFontSection />
-    <TranslationSection />
+    <TranslationSection onChooseTranslation={onChooseTranslation} />
     <TafsirSection />
-    <AudioSection />
+    <AudioSection onChooseReciter={onChooseReciter} />
     <ResetButton />
   </>
 );

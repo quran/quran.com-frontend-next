@@ -27,8 +27,8 @@ const SettingsDrawer = () => {
     <Drawer type={DrawerType.Settings} header={<div>{t('settings.title')}</div>}>
       {isSettingsDrawerOpen && view === 'setting-body' && (
         <SettingsBody
-          onTranslationClicked={() => setView('setting-translation')}
-          onReciterClicked={() => setView('setting-reciter')}
+          onChooseReciter={() => setView('setting-reciter')}
+          onChooseTranslation={() => setView('setting-translation')}
         />
       )}
       {isSettingsDrawerOpen && view === 'setting-translation' && (

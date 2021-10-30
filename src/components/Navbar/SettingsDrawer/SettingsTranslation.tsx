@@ -6,6 +6,10 @@ import {
   useSelector,
 } from 'react-redux';
 
+import BackIcon from '../../../../public/icons/west.svg';
+
+import styles from './SettingsTranslation.module.scss';
+
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
 // import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -37,7 +41,11 @@ const SettingsTranslation = ({ onBack }) => {
 
   return (
     <div>
-      <Button onClick={onBack}>Back</Button>
+      <div className={styles.titleContainer}>
+        <Button prefix={<BackIcon />} onClick={onBack}>
+          Back
+        </Button>
+      </div>
 
       <DataFetcher
         queryKey={makeTranslationsUrl(lang)}
@@ -48,9 +56,9 @@ const SettingsTranslation = ({ onBack }) => {
               {Object.entries(translationByLanguages).map(([language, translations]) => {
                 return (
                   <div>
-                    <div style={{ textTransform: 'capitalize' }}>{language}</div>
+                    <div className={styles.language}>{language}</div>
                     {translations.map((translation) => (
-                      <div key={translation.id}>
+                      <div key={translation.id} className={styles.translation}>
                         <input
                           id={translation.id.toString()}
                           type="checkbox"

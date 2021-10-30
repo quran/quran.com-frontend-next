@@ -1,0 +1,21 @@
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.language {
+    margin-top: var(--spacing-large);
+    text-transform: capitalize;
+    margin-bottom: var(--spacing-xsmall);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semibold);
+}
+
+.translation {
+    font-size: var(--font-size-large);
+    margin-bottom: var(--spacing-xsmall);
+    & > input {
+        margin-right: var(--spacing-small);
+    }
+}

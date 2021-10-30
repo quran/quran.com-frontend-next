@@ -1,5 +1,9 @@
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
+import BackIcon from '../../../../public/icons/west.svg';
+
+import styles from './SettingsReciter.module.scss';
+
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
@@ -21,13 +25,15 @@ const SettingsReciter = ({ onBack }) => {
 
   return (
     <div>
-      <Button onClick={onBack}>Back</Button>
+      <Button onClick={onBack} prefix={<BackIcon />}>
+        Back
+      </Button>
       <DataFetcher
         queryKey={makeRecitersUrl()}
         render={(data: RecitersResponse) => (
           <div>
             {data.reciters.map((reciter) => (
-              <div>
+              <label className={styles.reciter} htmlFor={reciter.id.toString()}>
                 <input
                   id={reciter.id.toString()}
                   type="radio"
@@ -38,8 +44,9 @@ const SettingsReciter = ({ onBack }) => {
                     onSelectedReciterChange(e.target.value, data.reciters);
                   }}
                 />
-                <label htmlFor={reciter.id.toString()}>{reciter.name}</label>
-              </div>
+
+                {reciter.name}
+              </label>
             ))}
           </div>
         )}
