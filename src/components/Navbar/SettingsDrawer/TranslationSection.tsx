@@ -51,7 +51,7 @@ const TranslationSection = ({ onChooseTranslation }) => {
           />
         </Section.Row>
         <Section.Row>
-          <Section.Label>Translations</Section.Label>
+          <Section.Label>{t('translations')}</Section.Label>
           <div>{t('settings.showing-translations', { count: selectedTranslations.length })}</div>
         </Section.Row>
         <div className={styles.chooseReciterButtonContainer}>
