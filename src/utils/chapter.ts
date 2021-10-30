@@ -51,8 +51,8 @@ export const getChapterIdsForPage = (pageId: string): Promise<string[]> => {
  * @param {string} juzId
  * @returns {string[]} chapterIds
  */
-export const getChapterIdsForJuz = (juzId: string): string[] => {
-  const juzsData = require('../../public/data/juz-to-chapter-mappings.json');
+export const getChapterIdsForJuz = async (juzId: string): Promise<string[]> => {
+  const juzsData = await import('../../public/data/juz-to-chapter-mappings.json');
   return juzsData[juzId];
 };
 
