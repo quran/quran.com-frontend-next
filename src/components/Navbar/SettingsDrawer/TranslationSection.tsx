@@ -54,7 +54,7 @@ const TranslationSection = ({ onChooseTranslation }) => {
           <Section.Label>Translations</Section.Label>
           <div>Showing {selectedTranslations.length} translations</div>
         </Section.Row>
-        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '1rem' }}>
+        <div className={styles.chooseReciterButtonContainer}>
           <Button onClick={onChooseTranslation} suffix={<RightIcon />}>
             Choose Translation
           </Button>

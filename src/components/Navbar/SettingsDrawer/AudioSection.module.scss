@@ -1,3 +1,8 @@
 .container {
   min-height: calc(4 * var(--spacing-mega));
 }
+.chooseAudioButtonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacing-xxsmall);
+}

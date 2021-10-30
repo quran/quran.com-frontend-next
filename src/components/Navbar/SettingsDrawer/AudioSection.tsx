@@ -70,7 +70,7 @@ const AudioSection = ({ onChooseReciter }) => {
           <Section.Label>{t('reciter')}</Section.Label>
           <div>{selectedReciter.name}</div>
         </Section.Row>
-        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '0.5rem' }}>
+        <div className={styles.chooseAudioButtonContainer}>
           <Button onClick={onChooseReciter} suffix={<RightIcon />}>
             Choose Reciter
           </Button>
