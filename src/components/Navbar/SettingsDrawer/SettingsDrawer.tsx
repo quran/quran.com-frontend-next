@@ -5,9 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import SettingsReciter from './SettingsReciter';
-import SettingsTranslation from './SettingsTranslation';
-
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar } from 'src/redux/slices/navbar';
@@ -15,6 +12,14 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,
   loading: () => <Spinner />,
+});
+
+const SettingsReciter = dynamic(() => import('./SettingsReciter'), {
+  ssr: false,
+});
+
+const SettingsTranslation = dynamic(() => import('./SettingsTranslation'), {
+  ssr: false,
 });
 
 type SettingView = 'setting-body' | 'setting-translation' | 'setting-reciter';
