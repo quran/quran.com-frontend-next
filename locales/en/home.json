@@ -1,21 +1,21 @@
 {
-    "recently-read": "Recently Read",
+    "footer": {
+        "rights": "All Rights Reserved",
+        "title": "Read, study, and learn The Noble Quran."
+    },
     "no-bookmarks": "You do not have any bookmarks yet",
+    "recently-read": "Recently Read",
+    "tab": {
+        "bookmarks": "Bookmarks",
+        "popular": "Popular"
+    },
     "voice": {
         "trigger": "Quick access to anything"
     },
-    "footer": {
-        "title": "Read, study, and learn The Noble Quran.",
-        "rights": "All Rights Reserved"
-    },
-    "tab": {
-        "popular": "Popular",
-        "bookmarks": "Bookmarks"
-    },
     "welcome": {
-        "title": "Welcome to the Pre-Release Beta of the new Quran.com!",
         "desc": "We are actively adding new features and pushing changes. If you run into any issues please do provide feedback.",
         "feedback-cta": "Provide Feedback",
-        "join-cta": "Join Discord Community"
+        "join-cta": "Join Discord Community",
+        "title": "Welcome to the Pre-Release Beta of the new Quran.com!"
     }
 }

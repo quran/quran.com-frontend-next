@@ -1,0 +1,21 @@
+{
+    "footer": {
+        "rights": "Alle rechten voorbehouden",
+        "title": "Lees, bestudeer en leer de Edele Koran."
+    },
+    "no-bookmarks": "U heeft nog geen bladwijzers",
+    "recently-read": "Recent gelezen",
+    "tab": {
+        "bookmarks": "Bladwijzers",
+        "popular": "Populair"
+    },
+    "voice": {
+        "trigger": "Snelle toegang tot alles"
+    },
+    "welcome": {
+        "desc": "We zijn actief bezig met het toevoegen van nieuwe functies en het doorvoeren van veranderingen. Als u problemen ondervindt, geef dan alstublieft feedback.",
+        "feedback-cta": "Geef feedback",
+        "join-cta": "Word lid van de Discord-gemeenschap",
+        "title": "Welkom bij de Pre-Release Beta van de nieuwe Quran.com!"
+    }
+}

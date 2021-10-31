@@ -1,0 +1,17 @@
+{
+    "credits": {
+        "desc": "Questo sito è stato creato da alcuni volontari ed è stato reso possibile con la volontà di Allah (Gloria a Lui) e con l'aiuto della comunità musulmana open source online. Le fonti di dati includono <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> sui segmenti audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> e Progetto Corano online.",
+        "title": "Titoli di coda"
+    },
+    "main-desc": "Il Nobile Corano è il testo religioso centrale dell'Islam. I musulmani credono che il Corano sia il libro della guida e della direzione divina per l'umanità e considerano il testo arabo originale la rivelazione finale di Allah (Dio). Tutte le traduzioni del testo arabo originale sono quindi interpretazioni dei significati originali e dovrebbero essere accettate come tali.",
+    "meccan": {
+        "desc": "Le sure meccane sono i capitoli cronologicamente precedenti (sura) del Corano che furono, secondo la tradizione islamica, rivelati prima della migrazione del profeta islamico Muhammed e dei suoi seguaci dalla Mecca a Medina (Hijra). Le sure medinesi sono quelle rivelazioni avvenute dopo il trasferimento nella città omonima.",
+        "surahs": "Sura della Mecca"
+    },
+    "median": {
+        "desc": "Le sure medinesi o capitoli medinesi del Corano sono le ultime 24 sure che, secondo la tradizione islamica, furono rivelate a Medina dopo Muhammad &apos; s hijra dalla Mecca. Queste sure furono rivelate da Allah quando la comunità musulmana era più numerosa e sviluppata, in contrasto con la loro posizione di minoranza alla Mecca.",
+        "surahs": "Sura di Medinan"
+    },
+    "questions": "In caso di domande, puoi visitare la pagina <0> feedback <\/0> .",
+    "redesign": "Abbiamo ridisegnato il sito web con un approccio user friendly in mente. Per sfogliare le sure, fare clic sul pulsante (mostrato a sinistra) nella pagina LEGGI E ASCOLTA e navigare sura per titolo o per pagina. Nelle iterazioni future, integreremo più funzioni di ricerca e audio inshaAllah. Se hai suggerimenti su come migliorare l'esperienza del sito, non esitare a <0> inviarci un feedback <\/0> ."
+}

@@ -1,10 +1,9 @@
 {
-  "locales": ["en", "ar"],
+  "locales": ["en", "ar", "bn", "fa", "fr", "id", "it", "nl", "pt", "ru", "sq", "th", "tr", "ur", "zh"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common"],
+    "*": ["common", "error"],
     "/": ["home"],
-    "/_error": ["error"],
     "/[chapterId]": ["quran-reader"],
     "/[chapterId]/[verseId]": ["quran-reader"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],
