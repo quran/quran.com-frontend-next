@@ -1,3 +1,4 @@
+import { DEFAULT_RECITER } from './slices/AudioPlayer/defaultData';
 import { defaultRepeatProgress, defaultRepeatSettings } from './slices/AudioPlayer/state';
 import { DEFAULT_TAFSIRS } from './slices/QuranReader/tafsirs';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
@@ -72,5 +73,12 @@ export default {
   12: (state) => ({
     ...state,
     welcomeMessage: welcomeMessageInitialState,
+  }),
+  13: (state) => ({
+    ...state,
+    audioPlayerState: {
+      ...state.audioPlayerState,
+      reciter: DEFAULT_RECITER,
+    },
   }),
 };
