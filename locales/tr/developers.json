@@ -1,0 +1,18 @@
+{
+    "footer": "- Kuran.com ekibi",
+    "header": "Geliştirme yardımı",
+    "issues-cta": "Herhangi bir sorunuz varsa veya bakıcılarla iletişime geçmek isterseniz, sadece bir sorun yazın! Mümkün olan en kısa sürede size geri döneceğiz, inşaAllah.",
+    "issues-guide": "Tipik olarak, daha sonra ne üzerinde çalışılacağı, ne ' için kaynak olarak Github sorunlarını kullanırız &apos; geliyor ve çözülmesi gereken hatalar var. Örneğin <0> bu url <\/0> hataların listesi, yardıma ihtiyacımız olan şeyler ve gelecek özellikler içeriyor.",
+    "main-desc": "Asalamu Alykom, Öncelikle Kuran.com'u ve projelerini geliştirmemize yardımcı olmak için gösterdiğiniz ilgi için çok teşekkür ederiz. Sizinle çalışmaktan heyecan duyuyoruz!",
+    "projects": {
+        "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsini <0> burada <\/0> . Ama onları özetlemek gerekirse:",
+        "q-android": "<0> Kuran Android <\/0>",
+        "q-api": "<0> Kuran.com API'si <\/0> - Ruby on Rails ile yazılmıştır.",
+        "q-audio": "<0> Kuran Sesleri <\/0> ve <1> Kuran Sesleri mobil uygulamaları <\/1>",
+        "q-audio-segments": "<0> Kuran Ses Bölümleri <\/0>",
+        "q-ios": "<0> Kuran iOS <\/0>",
+        "q-v2": "<0> Kuran.com <\/0> - Ruby on Rails ile yazılmıştır."
+    },
+    "sub-main-desc": "Kuran.com'da gönüllü olarak çalışan geliştiriciler, tasarımcılar, ürün yöneticileri ve düşünürlerden oluşan bir ekibiz. Elhamdülillah Silikon Vadisi, Toronto ve BAE'deki bazı büyük şirketlerde çalışmaktan dolayı kutsandık - ve bunun Ümmetimizin dinlerini öğrenme ve çalışma konusunda ilerlemesine yardımcı olmak için yapabileceğimiz en az şey olduğunu düşünüyoruz. Kuran.com'da çalışmak çok sevindirici ve Allah hepimizi (ve sizi) çabalarımız için ödüllendirsin.",
+    "thanks": "Okuduğunuz için teşekkürler! Bazı kodlar işlediğinizi görmek için sabırsızlanıyorum!"
+}

@@ -1,17 +1,17 @@
 {
-    "main-desc": " The Noble Quran is the central religious text of Islam. Muslims believe the Qur’an is the book of Divine guidance and direction for mankind, and consider the original Arabic text the final revelation of Allah (God). All translations of the original Arabic text are thus interpretations of the original meanings and should be embraced as such.",
-    "redesign": "We have redesigned the website with a user friendly approach in mind. To browse through the surahs, click on the button (shown left) in the READ & LISTEN page and navigate surah by title or by page. In future iterations, we will be integrating more search and audio features inshaAllah. If you have any suggestions on how we can make the website a better experience please do not hesitate to <0>give us feedback</0>.",
-    "questions": "If you have any questions, you may visit the <0>feedback</0> page.",
+    "credits": {
+        "desc": "This website was created by a few volunteers and was made possible with the will of Allah (Glory be unto Him) and with the help of the open source Muslim community online. Data sources include <0>Tanzil<\/0>, <1>QuranComplex<\/1>, <2>Collin Fair<\/2>'s work on audio segments, <3>QuranEnc<\/3>, <4>Zekr<\/4> and Online Quran Project.",
+        "title": "Credits"
+    },
+    "main-desc": "The Noble Quran is the central religious text of Islam. Muslims believe the Qur’an is the book of Divine guidance and direction for mankind, and consider the original Arabic text the final revelation of Allah (God). All translations of the original Arabic text are thus interpretations of the original meanings and should be embraced as such.",
     "meccan": {
-        "surahs": "Meccan Surahs",
-        "desc": "The Meccan suras are the chronologically earlier chapters (suras) of the Quran that were, according to Islamic tradition, revealed anytime before the migration of the Islamic prophet Muhammed and his followers from Mecca to Medina (Hijra). The Medinan suras are those revelations that occurred after the move to the city of that name."
+        "desc": "The Meccan suras are the chronologically earlier chapters (suras) of the Quran that were, according to Islamic tradition, revealed anytime before the migration of the Islamic prophet Muhammed and his followers from Mecca to Medina (Hijra). The Medinan suras are those revelations that occurred after the move to the city of that name.",
+        "surahs": "Meccan Surahs"
     },
     "median": {
-        "surahs": "Medinan Surahs",
-        "desc": "The Medinan suras or Medinan chapters of the Quran are the latest 24 suras that, according to Islamic tradition, were revealed at Medina after Muhammad&apos;s hijra from Mecca. These suras were revealed by Allah when the Muslim community was larger and more developed, as opposed to their minority position in Mecca."
+        "desc": "The Medinan suras or Medinan chapters of the Quran are the latest 24 suras that, according to Islamic tradition, were revealed at Medina after Muhammad&apos;s hijra from Mecca. These suras were revealed by Allah when the Muslim community was larger and more developed, as opposed to their minority position in Mecca.",
+        "surahs": "Medinan Surahs"
     },
-    "credits": {
-        "title": "Credits",
-        "desc": "This website was created by a few volunteers and was made possible with the will of Allah (Glory be unto Him) and with the help of the open source Muslim community online. Data sources include <0>Tanzil</0>, <1>QuranComplex</1>, <2>Collin Fair</2>'s work on audio segments, <3>QuranEnc</3>, <4>Zekr</4> and Online Quran Project."
-    }
+    "questions": "If you have any questions, you may visit the <0>feedback<\/0> page.",
+    "redesign": "We have redesigned the website with a user friendly approach in mind. To browse through the surahs, click on the button (shown left) in the READ & LISTEN page and navigate surah by title or by page. In future iterations, we will be integrating more search and audio features inshaAllah. If you have any suggestions on how we can make the website a better experience please do not hesitate to <0>give us feedback<\/0>."
 }

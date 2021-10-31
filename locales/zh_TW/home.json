@@ -1,0 +1,21 @@
+{
+    "footer": {
+        "rights": "版權所有",
+        "title": "閱讀、學習和學習《高貴的古蘭經》。"
+    },
+    "no-bookmarks": "您還沒有任何書籤",
+    "recently-read": "最近閱讀",
+    "tab": {
+        "bookmarks": "書籤",
+        "popular": "受歡迎的"
+    },
+    "voice": {
+        "trigger": "快速訪問任何東西"
+    },
+    "welcome": {
+        "desc": "我們正在積極添加新功能並推動更改。如果您遇到任何問題，請提供反饋。",
+        "feedback-cta": "提供反饋信息",
+        "join-cta": "加入 Discord 社區",
+        "title": "歡迎來到新的 Quran.com 的預發布測試版！"
+    }
+}
