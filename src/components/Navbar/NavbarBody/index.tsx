@@ -60,7 +60,6 @@ const NavbarBody: React.FC = () => {
           >
             <IconQ />
           </Button>
-          <div className={styles.betaLabel}>{t('beta')}</div>
           <LanguageSelector />
         </div>
       </div>
