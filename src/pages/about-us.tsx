@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Trans from 'next-translate/Trans';
+import Image from 'next/image';
 
 import styles from './contentPage.module.scss';
+
+import { getBlurDataUrl } from 'src/utils/image';
 
 const AboutUsPage = () => (
   <div className={styles.contentPage}>
@@ -45,6 +48,22 @@ const AboutUsPage = () => (
         ]}
       />
     </p>
+    <div>
+      <Trans
+        i18nKey="about:credits.lokalize"
+        components={[<a target="_blank" href="https://lokalise.com/" rel="noreferrer" />]}
+      />
+      <div className={styles.lokalizeImage}>
+        <Image
+          src="/images/lokalize.png"
+          layout="fixed"
+          width={300}
+          height={70}
+          placeholder="blur"
+          blurDataURL={getBlurDataUrl(300, 70)}
+        />
+      </div>
+    </div>
     <p>
       <Trans
         i18nKey="about:questions"

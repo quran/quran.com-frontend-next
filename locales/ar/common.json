@@ -125,6 +125,8 @@
         "title": "بحث"
     },
     "settings": {
+        "change-reciter": "تغيير القارئ",
+        "change-translations": "تغيير الترجمات",
         "reading-experience": "تجربة القراءة",
         "reset-cta": "اعادة الضبط",
         "title": "إعدادات"

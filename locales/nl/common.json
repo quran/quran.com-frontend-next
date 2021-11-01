@@ -125,6 +125,8 @@
         "title": "Zoeken"
     },
     "settings": {
+        "change-reciter": "Voordrager wijzigen",
+        "change-translations": "Vertalingen wijzigen",
         "reading-experience": "Leeservaring",
         "reset-cta": "Reset instellingen",
         "title": "Instellingen"

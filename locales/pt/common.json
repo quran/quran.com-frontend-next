@@ -125,6 +125,8 @@
         "title": "Procurar"
     },
     "settings": {
+        "change-reciter": "Mudar recitador",
+        "change-translations": "Mudar as traduções",
         "reading-experience": "Experiência de Leitura",
         "reset-cta": "Redefinir as configurações",
         "title": "Definições"

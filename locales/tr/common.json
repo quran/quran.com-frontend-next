@@ -125,6 +125,8 @@
         "title": "Arama"
     },
     "settings": {
+        "change-reciter": "Okuyucuyu Değiştir",
+        "change-translations": "Çevirileri Değiştir",
         "reading-experience": "Okuma Deneyimi",
         "reset-cta": "Ayarları Sıfırla",
         "title": "Ayarlar"

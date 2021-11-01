@@ -125,6 +125,8 @@
         "title": "Mencari"
     },
     "settings": {
+        "change-reciter": "Ganti Pembaca",
+        "change-translations": "Ubah Terjemahan",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Ulang Pengaturan",
         "title": "Pengaturan"

@@ -125,6 +125,8 @@
         "title": "অনুসন্ধান করুন"
     },
     "settings": {
+        "change-reciter": "আবৃত্তিকারী পরিবর্তন করুন",
+        "change-translations": "অনুবাদ পরিবর্তন করুন",
         "reading-experience": "পড়ার অভিজ্ঞতা",
         "reset-cta": "রিসেট সেটিংস",
         "title": "সেটিংস"

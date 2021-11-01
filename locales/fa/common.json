@@ -125,6 +125,8 @@
         "title": "جستجو کردن"
     },
     "settings": {
+        "change-reciter": "تلاوت را تغییر دهید",
+        "change-translations": "تغییر ترجمه ها",
         "reading-experience": "تجربه خواندن",
         "reset-cta": "تنظیمات را بازنشانی کنید",
         "title": "تنظیمات"
