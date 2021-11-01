@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import BackIcon from '../../../../public/icons/west.svg';
 
-import styles from './SettingsTranslation.module.scss';
+import styles from './TranslationSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
@@ -16,7 +16,7 @@ import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { TranslationsResponse } from 'types/ApiResponses';
 
-const SettingsTranslation = ({ onBack }) => {
+const TranslationSelectionBody = ({ onBack }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -77,4 +77,4 @@ const SettingsTranslation = ({ onBack }) => {
   );
 };
 
-export default SettingsTranslation;
+export default TranslationSelectionBody;

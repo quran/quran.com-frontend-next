@@ -3,7 +3,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import BackIcon from '../../../../public/icons/west.svg';
 
-import styles from './SettingsReciter.module.scss';
+import styles from './ReciterSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';

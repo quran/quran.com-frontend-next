@@ -6,6 +6,7 @@ import RightIcon from '../../../../public/icons/east.svg';
 import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
+import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
@@ -18,10 +19,12 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { TranslationsResponse } from 'types/ApiResponses';
 
 const TranslationSection = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -53,14 +56,28 @@ const TranslationSection = () => {
         </Section.Row>
         <Section.Row>
           <Section.Label>{t('translations')}</Section.Label>
-          <div>{t('settings.showing-translations', { count: selectedTranslations.length })}</div>
+          <DataFetcher
+            queryKey={makeTranslationsUrl(lang)}
+            render={(data: TranslationsResponse) => {
+              return (
+                <div>
+                  {selectedTranslations.map((translationId) => {
+                    const selectedTranslation = data.translations.find(
+                      (translation) => translation.id === translationId,
+                    );
+                    return <div>{selectedTranslation.name}</div>;
+                  })}
+                </div>
+              );
+            }}
+          />
         </Section.Row>
         <div className={styles.chooseReciterButtonContainer}>
           <Button
             onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
             suffix={<RightIcon />}
           >
-            {t('settings.choose-translations')}
+            {t('settings.change-translations')}
           </Button>
         </div>
       </Section>

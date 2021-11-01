@@ -14,11 +14,11 @@ const SettingsBody = dynamic(() => import('./SettingsBody'), {
   loading: () => <Spinner />,
 });
 
-const SettingsReciter = dynamic(() => import('./SettingsReciter'), {
+const ReciterSelectionBody = dynamic(() => import('./ReciterSelectionBody'), {
   ssr: false,
 });
 
-const SettingsTranslation = dynamic(() => import('./SettingsTranslation'), {
+const TranslationSelectionBody = dynamic(() => import('./TranslationSelectionBody'), {
   ssr: false,
 });
 
@@ -30,10 +30,10 @@ const SettingsDrawer = () => {
     <Drawer type={DrawerType.Settings} header={<div>{t('settings.title')}</div>}>
       {isSettingsDrawerOpen && settingsView === 'body' && <SettingsBody />}
       {isSettingsDrawerOpen && settingsView === 'translation' && (
-        <SettingsTranslation onBack={() => dispatch(setSettingsView(SettingsView.Body))} />
+        <TranslationSelectionBody onBack={() => dispatch(setSettingsView(SettingsView.Body))} />
       )}
       {isSettingsDrawerOpen && settingsView === 'reciter' && (
-        <SettingsReciter onBack={() => dispatch(setSettingsView(SettingsView.Body))} />
+        <ReciterSelectionBody onBack={() => dispatch(setSettingsView(SettingsView.Body))} />
       )}
     </Drawer>
   );
