@@ -9,6 +9,7 @@ import styles from './TranslationSection.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
+import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
@@ -57,6 +58,15 @@ const TranslationSection = () => {
         <Section.Row>
           <Section.Label>{t('translations')}</Section.Label>
           <DataFetcher
+            loading={() => (
+              <div>
+                {selectedTranslations.map((id) => (
+                  <Skeleton key={id}>
+                    <div>{id}</div>
+                  </Skeleton>
+                ))}
+              </div>
+            )}
             queryKey={makeTranslationsUrl(lang)}
             render={(data: TranslationsResponse) => {
               return (
