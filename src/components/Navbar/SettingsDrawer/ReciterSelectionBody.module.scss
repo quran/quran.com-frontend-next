@@ -1,9 +1,18 @@
 .reciter {
-  margin-top: var(--spacing-small);
+  margin-bottom: var(--spacing-small);
   display: flex;
   align-items: center;
   font-size: var(--font-size-large);
   & > input {
     margin-right: var(--spacing-small);
   }
+}
+
+.recitationStyle {
+  background-color: var(--color-background-alternative-faint);
+  margin-left: var(--spacing-xsmall);
+  border-radius: var(--border-radius-pill);
+  color: var(--color-text-default);
+  font-size: var(--font-size-normal);
+  padding: calc(0.5 * var(--spacing-xxsmall)) var(--spacing-xsmall);
 }

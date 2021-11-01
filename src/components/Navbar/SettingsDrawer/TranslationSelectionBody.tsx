@@ -2,12 +2,9 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BackIcon from '../../../../public/icons/west.svg';
-
 import styles from './TranslationSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
-import Button from 'src/components/dls/Button/Button';
 import {
   selectSelectedTranslations,
   setSelectedTranslations,
@@ -16,8 +13,7 @@ import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { TranslationsResponse } from 'types/ApiResponses';
 
-const TranslationSelectionBody = ({ onBack }) => {
-  const { t } = useTranslation('common');
+const TranslationSelectionBody = () => {
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { lang } = useTranslation();
@@ -38,12 +34,6 @@ const TranslationSelectionBody = ({ onBack }) => {
 
   return (
     <div>
-      <div className={styles.titleContainer}>
-        <Button prefix={<BackIcon />} onClick={onBack}>
-          {t('back')}
-        </Button>
-      </div>
-
       <DataFetcher
         queryKey={makeTranslationsUrl(lang)}
         render={(data: TranslationsResponse) => {
@@ -52,7 +42,7 @@ const TranslationSelectionBody = ({ onBack }) => {
             <div>
               {Object.entries(translationByLanguages).map(([language, translations]) => {
                 return (
-                  <div>
+                  <div className={styles.translationGroup}>
                     <div className={styles.language}>{language}</div>
                     {translations.map((translation) => (
                       <div key={translation.id} className={styles.translation}>
