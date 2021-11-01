@@ -1,13 +1,13 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
-import { selectNavbar } from 'src/redux/slices/navbar';
+import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,
@@ -22,33 +22,18 @@ const SettingsTranslation = dynamic(() => import('./SettingsTranslation'), {
   ssr: false,
 });
 
-enum SettingsView {
-  Body = 'body',
-  Translation = 'translation',
-  Reciter = 'reciter',
-}
-
 const SettingsDrawer = () => {
   const { t } = useTranslation('common');
-  const { isSettingsDrawerOpen } = useSelector(selectNavbar);
-  const [view, setView] = useState<SettingsView>(SettingsView.Body);
+  const dispatch = useDispatch();
+  const { isSettingsDrawerOpen, settingsView } = useSelector(selectNavbar);
   return (
     <Drawer type={DrawerType.Settings} header={<div>{t('settings.title')}</div>}>
-      {isSettingsDrawerOpen && view === 'body' && (
-        <SettingsBody
-          onChooseReciter={() => setView(SettingsView.Reciter)}
-          onChooseTranslation={() => setView(SettingsView.Translation)}
-        />
+      {isSettingsDrawerOpen && settingsView === 'body' && <SettingsBody />}
+      {isSettingsDrawerOpen && settingsView === 'translation' && (
+        <SettingsTranslation onBack={() => dispatch(setSettingsView(SettingsView.Body))} />
       )}
-      {isSettingsDrawerOpen && view === 'translation' && (
-        <SettingsTranslation onBack={() => setView(SettingsView.Body)} />
-      )}
-      {isSettingsDrawerOpen && view === 'reciter' && (
-        <SettingsReciter
-          onBack={() => {
-            setView(SettingsView.Body);
-          }}
-        />
+      {isSettingsDrawerOpen && settingsView === 'reciter' && (
+        <SettingsReciter onBack={() => dispatch(setSettingsView(SettingsView.Body))} />
       )}
     </Drawer>
   );

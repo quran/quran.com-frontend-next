@@ -18,10 +18,11 @@ import {
   selectPlaybackRate,
   setPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
+import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import { generateSelectOptions } from 'src/utils/input';
 import { AutoScroll } from 'types/QuranReader';
 
-const AudioSection = ({ onChooseReciter }) => {
+const AudioSection = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
@@ -71,7 +72,10 @@ const AudioSection = ({ onChooseReciter }) => {
           <div>{selectedReciter.name}</div>
         </Section.Row>
         <div className={styles.chooseAudioButtonContainer}>
-          <Button onClick={onChooseReciter} suffix={<RightIcon />}>
+          <Button
+            onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}
+            suffix={<RightIcon />}
+          >
             {t('settings.choose-reciter')}
           </Button>
         </div>

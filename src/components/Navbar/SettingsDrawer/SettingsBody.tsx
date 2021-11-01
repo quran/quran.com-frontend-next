@@ -8,14 +8,14 @@ import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
 import TranslationSection from './TranslationSection';
 
-const SettingsBody = ({ onChooseTranslation, onChooseReciter }) => (
+const SettingsBody = () => (
   <>
     <ThemeSection />
     <ReadingExperienceSection />
     <QuranFontSection />
-    <TranslationSection onChooseTranslation={onChooseTranslation} />
+    <TranslationSection />
     <TafsirSection />
-    <AudioSection onChooseReciter={onChooseReciter} />
+    <AudioSection />
     <ResetButton />
   </>
 );

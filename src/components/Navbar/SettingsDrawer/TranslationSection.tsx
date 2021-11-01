@@ -8,6 +8,7 @@ import styles from './TranslationSection.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
+import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
@@ -19,7 +20,7 @@ import {
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 
-const TranslationSection = ({ onChooseTranslation }) => {
+const TranslationSection = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -55,7 +56,10 @@ const TranslationSection = ({ onChooseTranslation }) => {
           <div>{t('settings.showing-translations', { count: selectedTranslations.length })}</div>
         </Section.Row>
         <div className={styles.chooseReciterButtonContainer}>
-          <Button onClick={onChooseTranslation} suffix={<RightIcon />}>
+          <Button
+            onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
+            suffix={<RightIcon />}
+          >
             {t('settings.choose-translations')}
           </Button>
         </div>
