@@ -31,7 +31,7 @@ const useChapterIdsByUrlPath = (): string[] => {
         setChapterIds(chapterIdsForPage);
       }
       if (juzId) {
-        setChapterIds(getChapterIdsForJuz(juzId as string));
+        setChapterIds(await getChapterIdsForJuz(juzId as string));
       }
     })();
   }, [pageId, juzId, chapterId]);
