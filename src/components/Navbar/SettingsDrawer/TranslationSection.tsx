@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -31,6 +33,37 @@ const TranslationSection = () => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { translationFontScale } = quranReaderStyles;
 
+  const translationLoading = useCallback(
+    () => (
+      <div>
+        {selectedTranslations.map((id) => (
+          <Skeleton key={id}>
+            <div>{id}</div>
+          </Skeleton>
+        ))}
+      </div>
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedTranslations.length],
+  );
+
+  const renderTranslations = useCallback(
+    (data: TranslationsResponse) => {
+      return (
+        <div>
+          {selectedTranslations.map((translationId) => {
+            const selectedTranslation = data.translations.find(
+              (translation) => translation.id === translationId,
+            );
+            return <div>{selectedTranslation.name}</div>;
+          })}
+        </div>
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectSelectedTranslations.length],
+  );
+
   return (
     <div className={styles.container}>
       <Section>
@@ -58,28 +91,9 @@ const TranslationSection = () => {
         <Section.Row>
           <Section.Label>{t('translations')}</Section.Label>
           <DataFetcher
-            loading={() => (
-              <div>
-                {selectedTranslations.map((id) => (
-                  <Skeleton key={id}>
-                    <div>{id}</div>
-                  </Skeleton>
-                ))}
-              </div>
-            )}
+            loading={translationLoading}
             queryKey={makeTranslationsUrl(lang)}
-            render={(data: TranslationsResponse) => {
-              return (
-                <div>
-                  {selectedTranslations.map((translationId) => {
-                    const selectedTranslation = data.translations.find(
-                      (translation) => translation.id === translationId,
-                    );
-                    return <div>{selectedTranslation.name}</div>;
-                  })}
-                </div>
-              );
-            }}
+            render={renderTranslations}
           />
         </Section.Row>
         <div className={styles.changeReciterButtonContainer}>
