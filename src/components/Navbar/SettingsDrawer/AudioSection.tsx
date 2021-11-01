@@ -76,7 +76,7 @@ const AudioSection = () => {
             onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}
             suffix={<RightIcon />}
           >
-            {t('settings.choose-reciter')}
+            {t('settings.change-reciter')}
           </Button>
         </div>
       </Section>

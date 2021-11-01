@@ -128,8 +128,8 @@
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
         "title": "Settings",
-        "choose-reciter": "Choose Reciter",
-        "choose-translations": "Choose Translations",
+        "change-reciter": "Change Reciter",
+        "change-translations": "Change Translations",
         "showing-translations": "Showing {{count}} translations"
     },
     "share": "Share",
