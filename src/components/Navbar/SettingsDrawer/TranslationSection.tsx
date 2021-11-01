@@ -72,7 +72,7 @@ const TranslationSection = () => {
             }}
           />
         </Section.Row>
-        <div className={styles.chooseReciterButtonContainer}>
+        <div className={styles.changeReciterButtonContainer}>
           <Button
             onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
             suffix={<RightIcon />}

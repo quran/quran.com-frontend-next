@@ -71,7 +71,7 @@ const AudioSection = () => {
           <Section.Label>{t('reciter')}</Section.Label>
           <div>{selectedReciter.name}</div>
         </Section.Row>
-        <div className={styles.chooseAudioButtonContainer}>
+        <div className={styles.changeAudioButtonContainer}>
           <Button
             onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}
             suffix={<RightIcon />}
