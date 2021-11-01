@@ -1,0 +1,178 @@
+{
+    "about": "Sobre nós",
+    "audio": {
+        "auto-scroll": {
+            "off": "Desligado",
+            "on": "Sobre",
+            "title": "Auto rolagem"
+        },
+        "play": "Tocar áudio",
+        "playback-speed": "Velocidade de reprodução",
+        "player": {
+            "close": "Fechar o reprodutor de áudio",
+            "currently-playing": "Você está jogando atualmente",
+            "delay-verse": "Atraso entre os versos",
+            "download": "Download",
+            "mismatch": "Clique em \"Recomeçar\" se preferir jogar {{currentReadingChapter}}",
+            "next-ayah": "Próxima Ayah",
+            "pause": "Pausa",
+            "play": "Toque",
+            "play-range": "Alcance de jogo",
+            "previous-ayah": "Ayah anterior",
+            "repeat-1-verse": "Repita o verso",
+            "repeat-settings": "Repetir configurações",
+            "repeat-verse": "Repita cada verso",
+            "search-verse": "Procure por um versículo",
+            "single-verse": "Verso Único",
+            "start-over": "Recomeçar",
+            "start-playing": "Começa a jogar",
+            "stop-repeating": "Pare de Repetir",
+            "times": "vezes",
+            "verses-range": "Variedade de versos"
+        },
+        "title": "Áudio"
+    },
+    "ayah": "Ayah",
+    "ayahs": "Ayahs",
+    "beta": "Beta",
+    "bookmark": "marca páginas",
+    "bookmarked": "Favorito",
+    "both": "Ambos",
+    "cancel": "Cancelar",
+    "click-here": "Clique aqui",
+    "close": "Fechar",
+    "command-bar": {
+        "navigations": "Navegações",
+        "recent-navigations": "Navegações recentes",
+        "try-navigating": "Tente navegar para"
+    },
+    "community": {
+        "cta": "Junte-se à comunidade",
+        "header": "Junte-se à Comunidade QDC de construtores e tecnólogos muçulmanos.",
+        "sub-header": "Inscreva-se no Discord do Quran.com para participar e colaborar com a tecnologia islâmica líder na construção de comunidades.",
+        "title": "Comunidade"
+    },
+    "continue": "Prosseguir",
+    "copied": "Copiado",
+    "copied-to-clipboard": "Copiado para a área de transferência",
+    "copy": "cópia de",
+    "counter": {
+        "decrease": "Diminuir",
+        "increase": "Aumentar"
+    },
+    "developers": "Desenvolvedores",
+    "error": {
+        "general": "Algo deu errado. Por favor, tente novamente.",
+        "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente."
+    },
+    "feedback": "Comentários",
+    "fonts": {
+        "15_lines": "15 linhas",
+        "16_lines": "16 linhas",
+        "code_v1": "Complexo King Fahad V1",
+        "code_v2": "Complexo King Fahad V2",
+        "font-size": "Tamanho da fonte",
+        "lines": "Linhas",
+        "qcf-desc": "As fontes KPFG fornecem qualidade superior, mas demoram mais para carregar e não podem ser copiadas pelo navegador.",
+        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+        "quran-font": "Fonte do Alcorão",
+        "text_indopak": "IndoPak",
+        "text_uthmani": "Uthmani"
+    },
+    "from": "A partir de",
+    "help": "Ajuda",
+    "hizb": "Hizb",
+    "home": "Casa",
+    "input": {
+        "clear": "Claro"
+    },
+    "juz": "Juz",
+    "loading": "Carregando",
+    "menu": "Cardápio",
+    "mobile-apps": "Aplicativos móveis",
+    "mode": "Modo",
+    "more": "Mais",
+    "network": "Rede",
+    "next": "Próximo",
+    "no": "Não",
+    "none": "Nenhum",
+    "page": "Página",
+    "pages": "Páginas",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
+    "powered-by": "Distribuído por",
+    "prev": "Anterior",
+    "privacy": "Privacidade",
+    "q-reflect": "QuranReflect",
+    "quran-com": "Quran.com",
+    "reading-preference": {
+        "reading": "Lendo",
+        "translation": "Tradução"
+    },
+    "reciter": "Recitador",
+    "remove": "Retirar",
+    "retry": "Tentar novamente",
+    "search": {
+        "filters": "Filtros",
+        "hint": "Tente pesquisar por",
+        "jump-to": "Pule para",
+        "no-results": "Nenhum resultado encontrado",
+        "no-results-suggestion": "Não foi possível encontrar resultados de pesquisa correspondentes para \" {{searchQuery}} \". tente pesquisar por uma palavra-chave diferente.",
+        "popular": "Pesquisas populares",
+        "recent": "Pesquisas recentes",
+        "results": "resultados",
+        "show-all": "Mostrar todos os resultados",
+        "switch-mode": "Mudar para pesquisa avançada",
+        "title": "Procurar"
+    },
+    "settings": {
+        "reading-experience": "Experiência de Leitura",
+        "reset-cta": "Redefinir as configurações",
+        "title": "Definições"
+    },
+    "share": "Compartilhado",
+    "shared": "O link foi copiado para a área de transferência!",
+    "sitemap": "Mapa do site",
+    "sort": {
+        "ascending": "Ascendente",
+        "by": "Ordenar por",
+        "descending": "descendente"
+    },
+    "style": "Estilo",
+    "surah": "Surah",
+    "tafsir": {
+        "font-size": "Tamanho da fonte Tafsir",
+        "surah": "Tafsir Surah",
+        "title": "Tafsir"
+    },
+    "tarteel": {
+        "app": "App Tarteel",
+        "desc": "busca por voz do Alcorão",
+        "learn": "aprenda a usar a pesquisa por voz",
+        "name": "Tarteel.ai"
+    },
+    "theme": "Tema",
+    "themes": {
+        "dark": "Escuro",
+        "light": "Luz",
+        "sepia": "Sépia",
+        "system": "Sistema",
+        "system-desc": "O tema do sistema adota automaticamente as configurações do modo claro \/ escuro"
+    },
+    "to": "Para",
+    "tooltip": "Dica de ferramenta",
+    "translation": "Tradução",
+    "translations": "Traduções",
+    "transliteration": "Transliteração",
+    "type": "Modelo",
+    "verse": "Versículo",
+    "view": "Visualizar",
+    "voice": {
+        "ask-permission": "Ative a permissão do microfone para começar a usar a Pesquisa por voz",
+        "error": "Ocorreu um erro, tente novamente mais tarde. Ou baixe o",
+        "no-permission": "Parece que você não tem as permissões de microfone ativadas. Ative as permissões do microfone e tente novamente ou baixe o",
+        "not-supported": "Parece que seu navegador não oferece suporte a microfone. Tente um navegador diferente ou baixe o",
+        "suggest": "Por favor, comece a recitar e seu verso aparecerá."
+    },
+    "wbw": "Palavra por palavra",
+    "yes": "sim"
+}

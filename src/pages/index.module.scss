@@ -1,19 +1,19 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
 
-$image-max-width: 100rem;
 $list-max-width: 80rem;
+$homepage-image-height: 409px;
 
 .pageContainer {
   padding: var(--spacing-small) 0;
 }
 
-.imageContainer {
-  @include breakpoints.tablet {
-    width: 90%;
-    max-width: $image-max-width;
-    margin: 0 auto;
-  }
+.homepageImage {
+  border-radius: var(--border-radius-default);
+}
+.homepageImageContainer {
+  position: relative;
+  height: $homepage-image-height;
 }
 
 .flow > .flowItem + .flowItem {

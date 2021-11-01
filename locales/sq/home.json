@@ -1,0 +1,21 @@
+{
+    "footer": {
+        "rights": "Të gjitha të drejtat e rezervuara",
+        "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
+    },
+    "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
+    "recently-read": "Lexuar së fundmi",
+    "tab": {
+        "bookmarks": "Faqerojtësit",
+        "popular": "Popullore"
+    },
+    "voice": {
+        "trigger": "Qasje e shpejtë në çdo gjë"
+    },
+    "welcome": {
+        "desc": "Ne po shtojmë në mënyrë aktive veçori të reja dhe po bëjmë ndryshime. Nëse hasni në ndonjë problem, ju lutemi jepni komente.",
+        "feedback-cta": "Jepni komente",
+        "join-cta": "Bashkohuni me komunitetin Discord",
+        "title": "Mirë se vini në Beta para-publikimit të Quran.com të ri!"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "footer": {
+        "rights": "Tutti i diritti riservati",
+        "title": "Leggi, studia e impara il Nobile Corano."
+    },
+    "no-bookmarks": "Non hai ancora nessun segnalibro",
+    "recently-read": "Letto di recente",
+    "tab": {
+        "bookmarks": "segnalibri",
+        "popular": "Popolare"
+    },
+    "voice": {
+        "trigger": "Accesso rapido a qualsiasi cosa"
+    },
+    "welcome": {
+        "desc": "Stiamo attivamente aggiungendo nuove funzionalità e spingendo le modifiche. In caso di problemi, fornire un feedback.",
+        "feedback-cta": "Fornire un feedback",
+        "join-cta": "Unisciti alla community di Discord",
+        "title": "Benvenuto nella versione beta di pre-rilascio del nuovo Quran.com!"
+    }
+}

@@ -1,15 +1,21 @@
 {
-  "locales": ["en", "ar"],
+  "locales": ["en", "ar", "bn", "fa", "fr", "id", "it", "nl", "pt", "ru", "sq", "th", "tr", "ur", "zh"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common"],
+    "*": ["common", "error"],
     "/": ["home"],
-    "/_error": ["error"],
     "/[chapterId]": ["quran-reader"],
     "/[chapterId]/[verseId]": ["quran-reader"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],
     "/page/[pageId]": ["quran-reader"],
     "/juz/[juzId]": ["quran-reader"],
-    "/search": ["search"]
+    "/surah/[chapterId]/info": ["surah-info"],
+    "/chapter_info/[chapterId]": ["surah-info"],
+    "/surah-info/[chapterId]": ["surah-info"],
+    "/search": ["search"],
+    "/about-us": ["about"],
+    "/developers": ["developers"],
+    "/privacy": ["privacy"],
+    "/support": ["support"]
   }
 }

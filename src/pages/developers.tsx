@@ -1,91 +1,102 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import Trans from 'next-translate/Trans';
+
 import styles from './contentPage.module.scss';
 
 const DevelopersPage = () => (
   <div className={styles.contentPage}>
-    <h1>Development help</h1>
+    <h1>
+      <Trans i18nKey="developers:header" />
+    </h1>
     <p>
-      Asalamu Alykom, Firstly, thank you very much for your interest to help us develop Quran.com
-      and its projects. We are excited to work with you!
+      <Trans i18nKey="developers:main-desc" />
     </p>
-
     <p>
-      We are a team of developers, designers, product managers and thinkers working on Quran.com on
-      a volunteer basis. Alhamdulilah we have been blessed to work for some great companies in
-      Silicon Valley, Toronto and UAE - and we feel that this is the least we can do to help our
-      Ummah move forward in learning and studying their religion. Working on Quran.com is very
-      gratifying and may Allah reward us all (and reward you) for our efforts.
+      <Trans i18nKey="developers:sub-main-desc" />
     </p>
-
     <p>
-      We have a number of projects all hosted on Github. You can find them all
-      <a href="http://github.com/quran" target="_blank" rel="noreferrer">
-        {' '}
-        here
-      </a>
-      . But to outline them:
+      <Trans
+        i18nKey="developers:projects.all"
+        components={[<a href="http://github.com/quran" target="_blank" rel="noreferrer" />]}
+      />
     </p>
-
-    <div className="developers-link">
+    <div>
       <p>
-        <a href="https://github.com/quran/quran.com-frontend-v2" target="_blank" rel="noreferrer">
-          Quran.com
-        </a>
-        - written in Ruby on Rails.
-      </p>
-
-      <p>
-        <a href="https://github.com/quran/quran.com-frontend-v2" target="_blank" rel="noreferrer">
-          Quran.com API
-        </a>
-        - written in Ruby on Rails.
-      </p>
-
-      <p>
-        <a href="https://github.com/quran/quran_android" target="_blank" rel="noreferrer">
-          Quran Android
-        </a>
+        <Trans
+          i18nKey="developers:projects.q-v2"
+          components={[
+            <a
+              href="https://github.com/quran/quran.com-frontend-v2"
+              target="_blank"
+              rel="noreferrer"
+            />,
+          ]}
+        />
       </p>
       <p>
-        <a href="https://github.com/quran/quran-ios" target="_blank" rel="noreferrer">
-          Quran iOS
-        </a>
+        <Trans
+          i18nKey="developers:projects.q-api"
+          components={[
+            <a href="https://github.com/quran/quran.com-api" target="_blank" rel="noreferrer" />,
+          ]}
+        />
       </p>
       <p>
-        <a href="https://github.com/quran/audio.quran.com" target="_blank" rel="noreferrer">
-          Quranic Audio
-        </a>{' '}
-        and{' '}
-        <a href="https://github.com/quran/quranicaudio-app" target="_blank" rel="noreferrer">
-          Quranic Audio mobile apps
-        </a>
+        <Trans
+          i18nKey="developers:projects.q-android"
+          components={[
+            <a href="https://github.com/quran/quran_android" target="_blank" rel="noreferrer" />,
+          ]}
+        />
+      </p>
+      <p>
+        <Trans
+          i18nKey="developers:projects.q-ios"
+          components={[
+            <a href="https://github.com/quran/quran-ios" target="_blank" rel="noreferrer" />,
+          ]}
+        />
+      </p>
+      <p>
+        <Trans
+          i18nKey="developers:projects.q-audio"
+          components={[
+            <a href="https://github.com/quran/audio.quran.com" target="_blank" rel="noreferrer" />,
+            <a href="https://github.com/quran/quranicaudio-app" target="_blank" rel="noreferrer" />,
+          ]}
+        />
       </p>
     </div>
-
     <p>
-      <a href="https://github.com/cpfair/quran-align" target="_blank" rel="noreferrer">
-        Quran Audio Segments
-      </a>
+      <Trans
+        i18nKey="developers:projects.q-audio-segments"
+        components={[
+          <a href="https://github.com/cpfair/quran-align" target="_blank" rel="noreferrer" />,
+        ]}
+      />
     </p>
-
     <p>
-      Typically we use Github issues as the source for what to work on next, what&apos;s coming up
-      and what bugs exist that need to be solved. For example{' '}
-      <a
-        href="https://github.com/quran/quran.com-frontend-v2/issues"
-        target="_blank"
-        rel="noreferrer"
-      >
-        this url
-      </a>
-      has list of bugs, things we need help with, and upcoming features.
+      <Trans
+        i18nKey="developers:issues-guide"
+        components={[
+          <a
+            href="https://github.com/quran/quran.com-frontend-v2/issues"
+            target="_blank"
+            rel="noreferrer"
+          />,
+        ]}
+      />
     </p>
-
     <p>
-      Should you have any questions or want to contact maintainers, just write an issue! We will get
-      back to you as soon as we can, inshAllah.
+      <Trans i18nKey="developers:issues-cta" />
     </p>
-    <p>Thanks for reading! Looking forward to seeing you commit some code!</p>
-    <p>- Quran.com team</p>
+    <p>
+      <Trans i18nKey="developers:thanks" />
+    </p>
+    <p>
+      <Trans i18nKey="developers:footer" />
+    </p>
   </div>
 );
 

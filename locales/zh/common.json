@@ -1,0 +1,178 @@
+{
+    "about": "关于我们",
+    "audio": {
+        "auto-scroll": {
+            "off": "离开",
+            "on": "在",
+            "title": "自动滚屏"
+        },
+        "play": "播放音频",
+        "playback-speed": "播放速度",
+        "player": {
+            "close": "关闭音频播放器",
+            "currently-playing": "您目前正在玩",
+            "delay-verse": "诗歌之间的延迟",
+            "download": "下载",
+            "mismatch": "{{currentReadingChapter}}单击“重新开始”",
+            "next-ayah": "下一个阿亚",
+            "pause": "暂停",
+            "play": "玩",
+            "play-range": "播放范围",
+            "previous-ayah": "以前的阿亚",
+            "repeat-1-verse": "重复经文",
+            "repeat-settings": "重复设置",
+            "repeat-verse": "重复每一节",
+            "search-verse": "寻找诗句",
+            "single-verse": "单节",
+            "start-over": "重来",
+            "start-playing": "开始播放",
+            "stop-repeating": "停止重复",
+            "times": "次",
+            "verses-range": "诗句范围"
+        },
+        "title": "声音的"
+    },
+    "ayah": "阿亚",
+    "ayahs": "阿亚斯",
+    "beta": "测试版",
+    "bookmark": "书签",
+    "bookmarked": "书签",
+    "both": "两个都",
+    "cancel": "取消",
+    "click-here": "点击这里",
+    "close": "关闭",
+    "command-bar": {
+        "navigations": "导航",
+        "recent-navigations": "最近的导航",
+        "try-navigating": "尝试导航到"
+    },
+    "community": {
+        "cta": "加入社区",
+        "header": "加入由穆斯林建设者和技术人员组成的 QDC 社区。",
+        "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
+        "title": "社区"
+    },
+    "continue": "继续",
+    "copied": "已复制",
+    "copied-to-clipboard": "复制到剪贴板",
+    "copy": "复制",
+    "counter": {
+        "decrease": "减少",
+        "increase": "增加"
+    },
+    "developers": "开发商",
+    "error": {
+        "general": "出了些问题。请再试一次。",
+        "offline": "看起来你失去了连接。请检查并重试。"
+    },
+    "feedback": "回馈",
+    "fonts": {
+        "15_lines": "15行",
+        "16_lines": "16 行",
+        "code_v1": "法赫德国王综合大楼 V1",
+        "code_v2": "法赫德国王复合体 V2",
+        "font-size": "字体大小",
+        "lines": "线",
+        "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长，并且无法通过浏览器复制。",
+        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+        "quran-font": "古兰经字体",
+        "text_indopak": "印巴",
+        "text_uthmani": "奥斯曼尼"
+    },
+    "from": "从",
+    "help": "帮助",
+    "hizb": "希兹",
+    "home": "家",
+    "input": {
+        "clear": "清除"
+    },
+    "juz": "朱兹",
+    "loading": "加载中",
+    "menu": "菜单",
+    "mobile-apps": "移动应用程序",
+    "mode": "模式",
+    "more": "更多的",
+    "network": "网络",
+    "next": "下一个",
+    "no": "不",
+    "none": "没有任何",
+    "page": "页",
+    "pages": "页面",
+    "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
+    "powered-by": "供电",
+    "prev": "以前的",
+    "privacy": "隐私",
+    "q-reflect": "古兰经反射",
+    "quran-com": "古兰经网",
+    "reading-preference": {
+        "reading": "读",
+        "translation": "翻译"
+    },
+    "reciter": "朗诵者",
+    "remove": "消除",
+    "retry": "重试",
+    "search": {
+        "filters": "过滤器",
+        "hint": "尝试搜索",
+        "jump-to": "跳到",
+        "no-results": "未找到结果",
+        "no-results-suggestion": "{{searchQuery}} ”的任何匹配搜索结果。尝试搜索不同的关键字。",
+        "popular": "热门搜索",
+        "recent": "最近的搜索",
+        "results": "结果",
+        "show-all": "显示所有结果",
+        "switch-mode": "切换到高级搜索",
+        "title": "搜索"
+    },
+    "settings": {
+        "reading-experience": "阅读体验",
+        "reset-cta": "重新设置",
+        "title": "设置"
+    },
+    "share": "分享",
+    "shared": "链接已复制到剪贴板！",
+    "sitemap": "网站地图",
+    "sort": {
+        "ascending": "上升",
+        "by": "排序方式",
+        "descending": "降序"
+    },
+    "style": "风格",
+    "surah": "古兰经",
+    "tafsir": {
+        "font-size": "Tafsir 字体大小",
+        "surah": "Tafsir Surah",
+        "title": "塔夫西尔"
+    },
+    "tarteel": {
+        "app": "Tarteel 应用程序",
+        "desc": "古兰经语音搜索",
+        "learn": "学习如何使用语音搜索",
+        "name": "Tarteel.ai"
+    },
+    "theme": "主题",
+    "themes": {
+        "dark": "黑暗的",
+        "light": "光",
+        "sepia": "棕褐色",
+        "system": "系统",
+        "system-desc": "系统主题自动采用您的明\/暗模式设置"
+    },
+    "to": "到",
+    "tooltip": "工具提示",
+    "translation": "翻译",
+    "translations": "翻译",
+    "transliteration": "音译",
+    "type": "类型",
+    "verse": "诗",
+    "view": "看法",
+    "voice": {
+        "ask-permission": "请启用麦克风权限以开始使用语音搜索",
+        "error": "发生错误，请稍后重试。或下载",
+        "no-permission": "您似乎没有启用麦克风权限。请启用麦克风权限并重试或下载",
+        "not-supported": "您的浏览器似乎不支持麦克风。请尝试不同的浏览器或下载",
+        "suggest": "请开始背诵，你的诗句就会出现。"
+    },
+    "wbw": "逐词地",
+    "yes": "是的"
+}
