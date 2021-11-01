@@ -60,6 +60,8 @@
   }
 }
 
-.currentTime {
+.currentTime,
+.remainingTime {
   display: inline-block;
+  line-height: var(--line-height-normal);
 }
