@@ -28,7 +28,8 @@ interface Props {
   value?: string;
   placeholder?: string;
   onChange?: (value: string | number) => void;
-  shouldApplyStyles?: boolean;
+  defaultStyle?: boolean;
+  className?: string;
 }
 
 const Select: React.FC<Props> = ({
@@ -41,7 +42,8 @@ const Select: React.FC<Props> = ({
   required = false,
   size = SelectSize.Medium,
   placeholder = 'Select an option',
-  shouldApplyStyles = true,
+  defaultStyle = true,
+  className,
 }) => {
   const onSelectChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -55,7 +57,8 @@ const Select: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.container, {
-        [styles.styledContainer]: shouldApplyStyles,
+        [styles.defaultStyledContainer]: defaultStyle,
+        [className]: className,
         [styles.disabledContainer]: disabled,
         [styles.smallContainer]: size === SelectSize.Small,
         [styles.mediumContainer]: size === SelectSize.Medium,
@@ -64,6 +67,7 @@ const Select: React.FC<Props> = ({
     >
       <select
         className={classNames(styles.select, {
+          [styles.defaultStyledSelect]: defaultStyle,
           [styles.disabledSelect]: disabled,
         })}
         name={name}

@@ -3,7 +3,6 @@
   background: var(--color-background-default);
   display: inline-flex;
   outline: none;
-
   text-transform: uppercase;
   user-select: none;
   position: relative;
@@ -13,7 +12,7 @@
   line-height: 0;
 }
 
-.styledContainer {
+.defaultStyledContainer {
   width: calc(8 * var(--spacing-mega));
   border: 1px solid var(--color-background-inverse);
 }
@@ -64,9 +63,12 @@
   background: var(--color-background-default);
   font-size: var(--font-size-normal);
   width: calc(100% + var(--spacing-mega));
-  padding: 0 var(--spacing-xxsmall);
   text-transform: none;
   text-rendering: initial;
+}
+
+.defaultStyledSelect {
+  padding: 0 var(--spacing-xxsmall);
 }
 
 .disabledSelect {

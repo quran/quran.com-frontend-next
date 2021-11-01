@@ -47,7 +47,8 @@ const LanguageSelector = () => {
         options={options}
         value={lang}
         onChange={onChange}
-        shouldApplyStyles={false}
+        defaultStyle={false}
+        className={styles.select}
       />
     </div>
   );
