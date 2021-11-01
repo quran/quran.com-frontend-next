@@ -40,6 +40,7 @@
     "both": "Both",
     "cancel": "Cancel",
     "click-here": "Click here",
+    "back": "Back",
     "close": "Close",
     "command-bar": {
         "navigations": "Navigations",
@@ -127,7 +128,10 @@
     "settings": {
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
-        "title": "Settings"
+        "title": "Settings",
+        "change-reciter": "Change Reciter",
+        "change-translations": "Change Translations",
+        "showing-translations": "Showing {{count}} translations"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",

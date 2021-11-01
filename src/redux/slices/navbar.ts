@@ -2,11 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
 
+export enum SettingsView {
+  Body = 'body',
+  Translation = 'translation',
+  Reciter = 'reciter',
+}
+
 export type Navbar = {
   isVisible: boolean;
   isNavigationDrawerOpen: boolean;
   isSearchDrawerOpen: boolean;
   isSettingsDrawerOpen: boolean;
+  settingsView: SettingsView;
 };
 
 const initialState: Navbar = {
@@ -14,6 +21,7 @@ const initialState: Navbar = {
   isNavigationDrawerOpen: false,
   isSearchDrawerOpen: false,
   isSettingsDrawerOpen: false,
+  settingsView: SettingsView.Body,
 };
 
 export const navbarSlice = createSlice({
@@ -36,6 +44,10 @@ export const navbarSlice = createSlice({
       ...state,
       isSettingsDrawerOpen: action.payload,
     }),
+    setSettingsView: (state: Navbar, action: PayloadAction<SettingsView>) => ({
+      ...state,
+      settingsView: action.payload,
+    }),
   },
 });
 
@@ -44,6 +56,7 @@ export const {
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
+  setSettingsView,
 } = navbarSlice.actions;
 
 export const selectNavbar = (state: RootState) => state.navbar;

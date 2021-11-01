@@ -11,6 +11,7 @@ interface Props {
   queryKey: string;
   render: (data: BaseResponse) => JSX.Element;
   initialData?: BaseResponse;
+  loading?: () => JSX.Element;
 }
 
 /**
@@ -25,7 +26,12 @@ interface Props {
  * @param {Props} props
  * @returns {JSX.Element}
  */
-const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }: Props): JSX.Element => {
+const DataFetcher: React.FC<Props> = ({
+  queryKey,
+  render,
+  initialData,
+  loading = () => <Spinner />,
+}: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
     queryKey,
     () =>
@@ -38,7 +44,7 @@ const DataFetcher: React.FC<Props> = ({ queryKey, render, initialData }: Props):
   );
 
   if (isValidating) {
-    return <Spinner />;
+    return loading();
   }
 
   const onRetryClicked = () => {
