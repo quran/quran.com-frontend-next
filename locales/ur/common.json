@@ -125,6 +125,8 @@
         "title": "تلاش کریں۔"
     },
     "settings": {
+        "change-reciter": "تلاوت کرنے والے کو تبدیل کریں۔",
+        "change-translations": "ترجمہ تبدیل کریں۔",
         "reading-experience": "پڑھنے کا تجربہ",
         "reset-cta": "ترتیبات کو دوبارہ ترتیب دیں۔",
         "title": "ترتیبات"

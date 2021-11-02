@@ -104,3 +104,11 @@ Thank you for taking time to file a bug! We'd appreciate your help on fixing it 
 [license-shield]: https://img.shields.io/github/license/quran/quran.com-frontend-next?style=for-the-badge
 [license-url]: https://github.com/quran/quran.com-frontend-next/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
+
+### Credits
+
+- Localization was made possible by the help of [Lokalise](https://lokalise.com/) which is a computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/15169499/139687128-15ed6189-6be2-44bf-9173-75cce317d546.png" width="400">
+</p>

@@ -26,3 +26,10 @@
     }
   }
 }
+
+.lokalizeImage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: var(--spacing-medium) 0;
+}

@@ -125,6 +125,8 @@
         "title": "Kërko"
     },
     "settings": {
+        "change-reciter": "Ndrysho recituesin",
+        "change-translations": "Ndrysho përkthimet",
         "reading-experience": "Përvoja e të lexuarit",
         "reset-cta": "Rivendos cilësimet",
         "title": "Cilësimet"

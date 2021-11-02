@@ -125,6 +125,8 @@
         "title": "Поиск"
     },
     "settings": {
+        "change-reciter": "Изменить чтец",
+        "change-translations": "Изменить перевод",
         "reading-experience": "Опыт чтения",
         "reset-cta": "Сбросить настройки",
         "title": "Настройки"
