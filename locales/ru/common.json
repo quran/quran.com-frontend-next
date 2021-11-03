@@ -43,6 +43,7 @@
     "close": "Закрывать",
     "command-bar": {
         "navigations": "Навигация",
+        "no-nav-results": "Нет результатов навигации",
         "recent-navigations": "Недавние переходы",
         "try-navigating": "Попробуйте перейти к"
     },

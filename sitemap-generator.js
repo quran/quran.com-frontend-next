@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 const range = require('lodash/range');
 const sitemap = require('nextjs-sitemap-generator');
 

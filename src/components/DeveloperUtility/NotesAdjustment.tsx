@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';

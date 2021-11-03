@@ -43,6 +43,7 @@
     "close": "بند کریں",
     "command-bar": {
         "navigations": "نیویگیشن",
+        "no-nav-results": "کوئی نیویگیشن نتائج نہیں ہیں۔",
         "recent-navigations": "حالیہ نیویگیشنز",
         "try-navigating": "تک نیویگیٹ کرنے کی کوشش کریں۔"
     },

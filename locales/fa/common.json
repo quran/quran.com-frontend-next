@@ -43,6 +43,7 @@
     "close": "نزدیک",
     "command-bar": {
         "navigations": "ناوبری ها",
+        "no-nav-results": "هیچ نتیجه ناوبری وجود ندارد",
         "recent-navigations": "پیمایش های اخیر",
         "try-navigating": "سعی کنید به"
     },

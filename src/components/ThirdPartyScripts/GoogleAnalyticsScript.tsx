@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import Script from 'next/script';
 
 const ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;

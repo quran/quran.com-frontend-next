@@ -43,6 +43,7 @@
     "close": "Menutup",
     "command-bar": {
         "navigations": "Navigasi",
+        "no-nav-results": "Tidak ada hasil navigasi",
         "recent-navigations": "Navigasi terbaru",
         "try-navigating": "Coba navigasikan ke"
     },

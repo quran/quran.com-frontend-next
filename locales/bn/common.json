@@ -43,6 +43,7 @@
     "close": "বন্ধ",
     "command-bar": {
         "navigations": "নেভিগেশন",
+        "no-nav-results": "কোন নেভিগেশন ফলাফল",
         "recent-navigations": "সাম্প্রতিক নেভিগেশন",
         "try-navigating": "নেভিগেট করার চেষ্টা করুন"
     },

@@ -43,6 +43,7 @@
     "close": "Close",
     "command-bar": {
         "navigations": "Navigations",
+        "no-nav-results": "No navigation results",
         "recent-navigations": "Recent navigations",
         "try-navigating": "Try navigating to"
     },

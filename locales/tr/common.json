@@ -43,6 +43,7 @@
     "close": "Kapat",
     "command-bar": {
         "navigations": "Navigasyonlar",
+        "no-nav-results": "Navigasyon sonucu yok",
         "recent-navigations": "Son gezinmeler",
         "try-navigating": "gezinmeyi deneyin"
     },

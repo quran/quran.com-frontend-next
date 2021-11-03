@@ -43,6 +43,7 @@
     "close": "关闭",
     "command-bar": {
         "navigations": "导航",
+        "no-nav-results": "没有导航结果",
         "recent-navigations": "最近的导航",
         "try-navigating": "尝试导航到"
     },

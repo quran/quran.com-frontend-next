@@ -43,6 +43,7 @@
     "close": "ปิด I",
     "command-bar": {
         "navigations": "การนำทาง",
+        "no-nav-results": "ไม่มีผลการนำทาง",
         "recent-navigations": "การนำทางล่าสุด",
         "try-navigating": "ลองไปที่"
     },
