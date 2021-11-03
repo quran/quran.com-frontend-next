@@ -34,7 +34,7 @@ const QuranReaderView: React.FC<Props> = ({
     return (
       <>
         <ReadingPreferenceSwitcher />
-        <ReadingView verses={verses} />
+        <ReadingView verses={verses} quranReaderStyles={quranReaderStyles} />
       </>
     );
   }

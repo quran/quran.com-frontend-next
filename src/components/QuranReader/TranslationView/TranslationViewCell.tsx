@@ -1,7 +1,9 @@
 import React, { RefObject, useEffect, memo } from 'react';
 
 import classNames from 'classnames';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import { verseFontChanged, verseTranslationChanged } from '../utils/memoization';
 
 import BookmarkIcon from './BookmarkIcon';
 import TranslationText from './TranslationText';
@@ -16,17 +18,17 @@ import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getVerseWords } from 'src/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
 type TranslationViewCellProps = {
   verse: Verse;
+  quranReaderStyles: QuranReaderStyles;
 };
 
-const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse }) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranReaderStyles }) => {
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
@@ -102,7 +104,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse }) => {
  * on fetching a new page and since Memo only does shallow comparison,
  * we need to use custom comparing logic:
  *
- *  1. Check if the verse id is the same
+ *  1. Check if the verse id is the same.
+ *  2. Check if the font changed.
+ *  3. Check if number of translations are the same since on translation change, it should change.
  *
  * If the above condition is met, it's safe to assume that the result
  * of both renders are the same.
@@ -114,8 +118,14 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse }) => {
 const areVersesEqual = (
   prevProps: TranslationViewCellProps,
   nextProps: TranslationViewCellProps,
-): boolean => {
-  return prevProps.verse.id === nextProps.verse.id;
-};
+): boolean =>
+  prevProps.verse.id === nextProps.verse.id &&
+  !verseFontChanged(
+    prevProps.quranReaderStyles,
+    nextProps.quranReaderStyles,
+    prevProps.verse.words,
+    nextProps.verse.words,
+  ) &&
+  !verseTranslationChanged(prevProps.verse, nextProps.verse);
 
 export default memo(TranslationViewCell, areVersesEqual);

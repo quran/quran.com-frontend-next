@@ -1,22 +1,31 @@
 import React, { useMemo, memo } from 'react';
 
+import { verseFontChanged } from '../utils/memoization';
+
 import groupPagesByVerses from './groupPagesByVerses';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
 
+import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from 'types/Verse';
 
 type ReadingViewProps = {
   verses: Verse[];
+  quranReaderStyles: QuranReaderStyles;
 };
 
-const ReadingView = ({ verses }: ReadingViewProps) => {
+const ReadingView = ({ verses, quranReaderStyles }: ReadingViewProps) => {
   const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
 
   return (
     <div className={styles.container}>
       {Object.keys(pages).map((pageNumber) => (
-        <Page verses={pages[pageNumber]} key={`page-${pageNumber}`} page={Number(pageNumber)} />
+        <Page
+          verses={pages[pageNumber]}
+          key={`page-${pageNumber}`}
+          page={Number(pageNumber)}
+          quranReaderStyles={quranReaderStyles}
+        />
       ))}
     </div>
   );
@@ -29,6 +38,7 @@ const ReadingView = ({ verses }: ReadingViewProps) => {
  * we need to use custom comparing logic:
  *
  *  1. Check if the number of verses are the same.
+ *  2. Check if the fonts changed.
  *
  * If the above condition is met, it's safe to assume that the result
  * of both renders are the same.
@@ -37,7 +47,12 @@ const ReadingView = ({ verses }: ReadingViewProps) => {
  * @param {ReadingViewProps} nextProps
  * @returns {boolean}
  */
-const areVersesEqual = (prevProps: ReadingViewProps, nextProps: ReadingViewProps): boolean => {
-  return prevProps.verses.length === nextProps.verses.length;
-};
+const areVersesEqual = (prevProps: ReadingViewProps, nextProps: ReadingViewProps): boolean =>
+  prevProps.verses.length === nextProps.verses.length &&
+  !verseFontChanged(
+    prevProps.quranReaderStyles,
+    nextProps.quranReaderStyles,
+    prevProps.verses[0].words,
+    nextProps.verses[0].words,
+  );
 export default memo(ReadingView, areVersesEqual);
