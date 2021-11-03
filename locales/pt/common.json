@@ -43,6 +43,7 @@
     "close": "Fechar",
     "command-bar": {
         "navigations": "Navegações",
+        "no-nav-results": "Sem resultados de navegação",
         "recent-navigations": "Navegações recentes",
         "try-navigating": "Tente navegar para"
     },

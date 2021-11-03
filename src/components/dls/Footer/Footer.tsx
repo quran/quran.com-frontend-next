@@ -8,6 +8,7 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 
 const Footer = () => {
   const { t } = useTranslation('common');
+  const currentYear = new Date().getFullYear();
   return (
     <div className={styles.container}>
       <div className={styles.iconContainer}>
@@ -53,9 +54,9 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.copyright}>
-          © 2021{' '}
+          © {currentYear}{' '}
           <Link href="https://quran.com" variant={LinkVariant.Highlight}>
-            Quran.com
+            {t('quran-com')}
           </Link>
           . {t('home:footer.rights')}
         </div>

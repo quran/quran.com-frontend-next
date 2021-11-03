@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import NoResults from './NoResults';
 import PreInput from './PreInput';
@@ -34,6 +35,7 @@ const SearchBodyContainer: React.FC<Props> = ({
   pageSize,
   onPageChange,
 }) => {
+  const { t } = useTranslation('common');
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
   const isEmptyResponse =
     searchResult &&
@@ -55,7 +57,7 @@ const SearchBodyContainer: React.FC<Props> = ({
             <Spinner size={SpinnerSize.Large} />
           ) : (
             <>
-              {hasError && <div>Something went wrong, please try again!</div>}
+              {hasError && <div>{t('error.general')}</div>}
               {!hasError && searchResult && (
                 <>
                   {isEmptyResponse ? (

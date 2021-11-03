@@ -1,3 +1,5 @@
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './SurahPreviewBlock.module.scss';
 
 import ChapterIconContainer, {
@@ -19,13 +21,14 @@ const SurahPreviewBlock = ({
   translatedSurahName,
   description,
 }: SurahPreviewBlockProps) => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
           <div className={styles.translatedSurahName}>{translatedSurahName}</div>
           <div className={styles.surahName}>
-            Surah <br />
+            {t('surah')} <br />
             {surahName}
           </div>
         </div>

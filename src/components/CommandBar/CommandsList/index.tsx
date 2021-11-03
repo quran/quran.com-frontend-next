@@ -3,6 +3,7 @@
 import React, { MouseEvent, useState, useCallback, RefObject, useEffect } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDispatch } from 'react-redux';
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfCommands } }) => {
+  const { t } = useTranslation('common');
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const [selectedCommandIndex, setSelectedCommandIndex] = useState(numberOfCommands ? 0 : null);
@@ -115,7 +117,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   };
 
   if (numberOfCommands === 0) {
-    return <p className={styles.noResult}>No navigation results</p>;
+    return <p className={styles.noResult}>{t('command-bar.no-nav-results')}</p>;
   }
   return (
     <ul role="listbox">
@@ -135,9 +137,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
                       role="option"
                       aria-selected={isSelected}
                       key={command.index}
-                      className={classNames(styles.command, {
-                        [styles.selected]: isSelected,
-                      })}
+                      className={classNames(styles.command, { [styles.selected]: isSelected })}
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(command.index)}
                     >

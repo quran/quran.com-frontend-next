@@ -43,6 +43,7 @@
     "close": "Dichtbij",
     "command-bar": {
         "navigations": "Navigatie",
+        "no-nav-results": "Geen navigatieresultaten",
         "recent-navigations": "Recente navigatie",
         "try-navigating": "Probeer te navigeren naar"
     },

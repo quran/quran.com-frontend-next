@@ -72,6 +72,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   // we do navigation programmatically because using <a> or <Link> doesn't work with PopOver.Item.
   const onQuranReflectClicked = () => {
     navigateToExternalUrl(
+      // eslint-disable-next-line i18next/no-literal-string
       `https://quranreflect.com/${verse.chapterId}/${verse.verseNumber}?feed=true`,
     );
   };

@@ -43,6 +43,7 @@
     "close": "Mbylle",
     "command-bar": {
         "navigations": "Lundrimet",
+        "no-nav-results": "Nuk ka rezultate navigimi",
         "recent-navigations": "Lundrimet e fundit",
         "try-navigating": "Provoni të lundroni në"
     },

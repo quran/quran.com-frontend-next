@@ -43,6 +43,7 @@
     "close": "قريب",
     "command-bar": {
         "navigations": "الملاحة",
+        "no-nav-results": "لا توجد نتائج تنقل",
         "recent-navigations": "التنقلات الأخيرة",
         "try-navigating": "حاول الانتقال إلى"
     },
