@@ -11,11 +11,11 @@ type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
 };
 
-const TranslationView = ({ verses }: TranslationViewProps) => {
+const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => {
   return (
     <div className={styles.container}>
       {verses.map((verse) => (
-        <TranslationViewCell verse={verse} key={verse.id} />
+        <TranslationViewCell verse={verse} key={verse.id} quranReaderStyles={quranReaderStyles} />
       ))}
     </div>
   );
