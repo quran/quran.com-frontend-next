@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 // surah layout (grid layout)
 .surahLayout {
@@ -50,8 +50,10 @@
 .sorter {
   display: flex;
   margin-top: var(--spacing-xsmall);
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: baseline;
   font-size: var(--font-size-small);
+  letter-spacing: 0.5px;
 }
 .sortByValue {
   display: flex;
@@ -59,6 +61,7 @@
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   cursor: pointer;
+  margin-left: var(--spacing-xxsmall);
   & > span {
     display: flex;
     align-items: center;
@@ -69,6 +72,7 @@
   & > span > svg {
     width: var(--spacing-small);
     margin-left: var(--spacing-xxsmall);
+    transition: transform 0.3s;
   }
 }
 
