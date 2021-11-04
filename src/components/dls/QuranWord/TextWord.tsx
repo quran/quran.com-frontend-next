@@ -31,7 +31,7 @@ const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => (
         !UTHMANI_HAFS_FONTS[font] ||
         UTHMANI_HAFS_FONTS[font] === DEFAULT_FONT_FAMILY,
       [styles[ME_QURAN]]: charType !== CharType.End && UTHMANI_HAFS_FONTS[font] === ME_QURAN,
-      [styles[INDO_PAK]]: charType !== CharType.End && UTHMANI_HAFS_FONTS[font] === INDO_PAK,
+      [styles[INDO_PAK]]: UTHMANI_HAFS_FONTS[font] === INDO_PAK,
     })}
   >
     {text}
