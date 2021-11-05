@@ -2,18 +2,9 @@
 @use "src/styles/utility";
 
 $list-max-width: 80rem;
-$homepage-image-height: 409px;
 
 .pageContainer {
   padding: var(--spacing-small) 0;
-}
-
-.homepageImage {
-  border-radius: var(--border-radius-default);
-}
-.homepageImageContainer {
-  position: relative;
-  height: $homepage-image-height;
 }
 
 .flow > .flowItem + .flowItem {

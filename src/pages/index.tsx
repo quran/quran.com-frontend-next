@@ -1,18 +1,15 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import Image from 'next/image';
 
 import styles from './index.module.scss';
 
-import homepageImage from 'public/images/homepage.png';
 import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
 import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 import Footer from 'src/components/dls/Footer/Footer';
+import HomePageImage from 'src/components/HomePage/HomePageImage';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
-import PrayerTimes from 'src/components/HomePage/PrayerTimes';
 import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -20,24 +17,6 @@ import { ChaptersResponse } from 'types/ApiResponses';
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
-};
-
-const HomePageImage = () => {
-  return (
-    <div className={styles.homepageImageContainer}>
-      <Image
-        className={styles.homepageImage}
-        src={homepageImage}
-        objectFit="cover"
-        sizes="(max-width: 425px) 95vw, 80vw"
-        quality={10}
-        priority
-        layout="fill" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
-        placeholder="blur" // to have a blur effect while loading.
-      />
-      <PrayerTimes />
-    </div>
-  );
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
