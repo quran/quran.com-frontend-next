@@ -78,19 +78,21 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
         </div>
 
         <div className={styles.contentContainer}>
-          <div className={styles.arabicVerseContainer}>
+          <div className={classNames(styles.arabicVerseContainer, styles.content)}>
             <VerseText words={getVerseWords(verse)} />
           </div>
-          {verse.translations?.map((translation: Translation) => (
-            <div key={translation.id} className={styles.verseTranslationContainer}>
-              <TranslationText
-                translationFontScale={quranReaderStyles.translationFontScale}
-                text={translation.text}
-                languageId={translation.languageId}
-                resourceName={translation.resourceName}
-              />
-            </div>
-          ))}
+          <div className={styles.content}>
+            {verse.translations?.map((translation: Translation) => (
+              <div key={translation.id} className={styles.verseTranslationContainer}>
+                <TranslationText
+                  translationFontScale={quranReaderStyles.translationFontScale}
+                  text={translation.text}
+                  languageId={translation.languageId}
+                  resourceName={translation.resourceName}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Separator />
