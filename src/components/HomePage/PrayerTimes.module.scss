@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    right: 0;
+    left: 0;
+    box-sizing: border-box;
+    padding: var(--spacing-medium);
+    position: absolute;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(179deg, #000000a6, transparent);
+    font-weight: var(--font-weight-semibold);
+}
+
+.prayerName {
+    text-transform: capitalize;
+}
+
+.prayerTimesContainer {
+    text-align: right;
+}

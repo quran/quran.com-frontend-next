@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 
 import classNames from 'classnames';
@@ -11,6 +12,7 @@ import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
 import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 import Footer from 'src/components/dls/Footer/Footer';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
+import PrayerTimes from 'src/components/HomePage/PrayerTimes';
 import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -20,22 +22,29 @@ type IndexProps = {
   chaptersResponse: ChaptersResponse;
 };
 
+const HomePageImage = () => {
+  return (
+    <div className={styles.homepageImageContainer}>
+      <Image
+        className={styles.homepageImage}
+        src={homepageImage}
+        objectFit="cover"
+        sizes="(max-width: 425px) 95vw, 80vw"
+        quality={10}
+        priority
+        layout="fill" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
+        placeholder="blur" // to have a blur effect while loading.
+      />
+      <PrayerTimes />
+    </div>
+  );
+};
+
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.pageContainer}>
     <div className={classNames(styles.listContainer, styles.flow)}>
       <div className={classNames(styles.flowItem)}>
-        <div className={styles.homepageImageContainer}>
-          <Image
-            className={styles.homepageImage}
-            src={homepageImage}
-            objectFit="cover"
-            sizes="(max-width: 425px) 95vw, 80vw"
-            quality={10}
-            priority
-            layout="fill" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
-            placeholder="blur" // to have a blur effect while loading.
-          />
-        </div>
+        <HomePageImage />
       </div>
       <div className={styles.flowItem}>
         <CommandBarTrigger />
