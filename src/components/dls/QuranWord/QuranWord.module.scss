@@ -2,6 +2,9 @@
   display: inline-block;
   cursor: pointer;
 }
+.moreSpaceBetweenWord + .moreSpaceBetweenWord {
+  margin-right: calc(0.5 * var(--spacing-xxsmall));
+}
 
 .wbwContainer {
   text-align: center;
