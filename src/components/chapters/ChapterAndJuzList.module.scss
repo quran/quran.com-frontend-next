@@ -71,7 +71,7 @@
   & > span > svg {
     width: var(--spacing-small);
     margin-left: var(--spacing-xxsmall);
-    transition: var(--transition-regular);
+    transition: transform var(--transition-regular);
   }
 }
 
