@@ -1,4 +1,4 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 
 // surah layout (grid layout)
 .surahLayout {
@@ -71,7 +71,7 @@
   & > span > svg {
     width: var(--spacing-small);
     margin-left: var(--spacing-xxsmall);
-    transition: transform 0.3s;
+    transition: var(--transition-regular);
   }
 }
 
