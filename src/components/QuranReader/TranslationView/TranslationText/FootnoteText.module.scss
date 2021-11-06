@@ -17,6 +17,16 @@ $container-min-height: calc(3 * var(--spacing-large));
   min-height: $container-min-height;
 }
 
+.rtl {
+  text-align: right;
+  direction: rtl;
+}
+
+.ltr {
+  text-align: left;
+  direction: ltr;
+}
+
 .footnote {
   @include footnote.footnote-styling;
 }
