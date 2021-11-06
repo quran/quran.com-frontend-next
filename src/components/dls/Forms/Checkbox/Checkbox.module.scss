@@ -2,7 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: var(--spacing-micro);
+  margin-block-start: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: var(--spacing-micro);
 }
 
 .checkbox {
@@ -35,7 +38,7 @@
 }
 
 .label {
-  padding-left: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
   font-size: var(--font-size-normal);
   line-height: var(--line-height-normal);
   user-select: none;

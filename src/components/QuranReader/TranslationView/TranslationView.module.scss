@@ -6,5 +6,8 @@
   @include breakpoints.tablet {
     max-width: 80%;
   }
-  margin: var(--spacing-medium) auto;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }

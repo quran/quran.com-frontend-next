@@ -17,14 +17,17 @@
 }
 
 .centered {
-  margin: 0 auto;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }
 
 .container {
   width: 100%;
   height: 100%;
   position: relative;
-  left: 50%;
+  inset-inline-start: 50%;
   top: 50%;
 }
 
@@ -43,7 +46,7 @@
   top: -3.9%;
   width: 24%;
   height: 8%;
-  left: -10%;
+  inset-inline-start: -10%;
   border-radius: var(--border-radius-default);
   animation: spinner 1.2s linear 0s infinite normal none running;
 }

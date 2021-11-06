@@ -8,7 +8,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--spacing-medium) 0;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   padding-bottom: 0;
 }
 .contentContainer {
@@ -44,5 +47,5 @@
 
 .actionContainerLeft > .actionItem + .actionItem,
 .actionContainerRight > .actionItem + .actionItem {
-  margin-left: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
 }

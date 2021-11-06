@@ -48,7 +48,10 @@ $separator-size: 1px;
 }
 
 .content {
-  padding: var(--spacing-small) 0;
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   min-width: $min-width;
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-default);
@@ -79,7 +82,10 @@ $separator-size: 1px;
   color: var(--color-text-default);
   display: flex;
   align-items: center;
-  padding: var(--spacing-xxsmall) var(--spacing-medium);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   position: relative;
   cursor: pointer;
 
@@ -101,7 +107,7 @@ $separator-size: 1px;
     & > svg > path {
       fill: var(--color-text-default);
     }
-    margin-right: var(--spacing-medium);
+    margin-inline-end: var(--spacing-medium);
     display: flex;
     align-items: center;
     height: var(--spacing-medium);
@@ -112,5 +118,8 @@ $separator-size: 1px;
 .separator {
   height: $separator-size;
   background-color: var(--color-secondary-faded);
-  margin: var(--spacing-xxsmall);
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
+  margin-inline-start: var(--spacing-xxsmall);
+  margin-inline-end: var(--spacing-xxsmall);
 }

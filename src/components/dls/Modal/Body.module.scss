@@ -1,3 +1,6 @@
 .body {
-  padding: var(--spacing-mega);
+  padding-block-start: var(--spacing-mega);
+  padding-block-end: var(--spacing-mega);
+  padding-inline-start: var(--spacing-mega);
+  padding-inline-end: var(--spacing-mega);
 }

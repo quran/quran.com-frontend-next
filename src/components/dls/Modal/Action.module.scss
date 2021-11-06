@@ -8,7 +8,10 @@
   border-top: 1px solid var(--color-borders-hairline);
   font-size: var(--font-size-normal);
   background-color: inherit;
-  padding: var(--spacing-large);
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: var(--spacing-large);
+  padding-inline-end: var(--spacing-large);
   color: var(--color-text-faded);
   overflow: hidden;
   transition: background-color constants.$animationDuration
@@ -20,9 +23,7 @@
   }
 }
 .action:not(:only-child):not(:last-child) {
-  border-right: 1px solid var(--color-borders-hairline);
-}
-.action:last-child {
+  border-inline-end: 1px solid var(--color-borders-hairline);
 }
 .action[disabled] {
   opacity: var(--opacity-75);

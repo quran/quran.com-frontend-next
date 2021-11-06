@@ -1,5 +1,8 @@
 .container {
-  margin: var(--spacing-large);
+  margin-block-start: var(--spacing-large);
+  margin-inline-end: var(--spacing-large);
+  margin-block-end: var(--spacing-large);
+  margin-inline-start: var(--spacing-large);
 }
 
 .mainBody {
@@ -9,7 +12,10 @@
 }
 
 .iconContainer {
-  padding: var(--spacing-large);
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: var(--spacing-large);
+  padding-inline-end: var(--spacing-large);
   color: var(--color-secondary-medium);
 }
 
@@ -19,7 +25,10 @@
 }
 
 .mainMessage {
-  padding: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   line-height: normal;

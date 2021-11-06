@@ -1,5 +1,8 @@
 .container {
-  margin: var(--spacing-micro);
+  margin-block-start: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: var(--spacing-micro);
 }
 .container[data-orientation="horizontal"] {
   align-items: center;
@@ -33,7 +36,10 @@
 .radioItemContainer {
   display: flex;
   align-items: center;
-  margin: var(--spacing-micro) 0;
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 .radioItem {
@@ -66,7 +72,7 @@
   font-size: var(--font-size-normal);
   line-height: var(--line-height-normal);
   user-select: none;
-  padding-left: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
 }
 
 .disabled {

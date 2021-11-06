@@ -1,3 +1,9 @@
+.container[dir="rtl"] {
+  > svg {
+    transform: scaleX(-1);
+  }
+}
+
 .defaultColor {
   > svg path {
     fill: var(--color-primary-medium);

@@ -1,4 +1,8 @@
-.container {
+.outerContainer {
+  width: 100%;
+}
+
+.innerContainer {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -8,13 +12,13 @@
 }
 
 .transcript {
-  text-align: right;
+  text-align: end;
   min-height: var(--spacing-large);
 }
 
 .speakMessage {
   width: 75%;
-  text-align: left;
+  text-align: start;
 }
 
 .micCircle {

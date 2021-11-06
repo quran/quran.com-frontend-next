@@ -17,5 +17,5 @@
 }
 .positionBottomRight {
   bottom: var(--spacing-xxsmall);
-  right: var(--spacing-xxsmall);
+  inset-inline-end: var(--spacing-xxsmall);
 }

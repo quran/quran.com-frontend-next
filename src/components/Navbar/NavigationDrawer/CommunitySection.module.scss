@@ -1,9 +1,12 @@
 .container {
   display: flex;
-  padding: var(--spacing-medium) 0;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 
   & > div + div {
-    margin-left: var(--spacing-small);
+    margin-inline-start: var(--spacing-small);
   }
 }
 
@@ -22,7 +25,7 @@
 .platformLogoBackground {
   position: absolute;
   z-index: -1;
-  right: 0;
+  inset-inline-end: 0;
 
   [data-theme="dark"] & {
     opacity: var(--opacity-10);

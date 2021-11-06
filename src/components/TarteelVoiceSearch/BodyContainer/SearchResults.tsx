@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 
 import groupBy from 'lodash/groupBy';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import CommandsList from 'src/components/CommandBar/CommandsList';
@@ -21,6 +22,7 @@ interface Props {
 
 const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const { t } = useTranslation('common');
   const params = {
     filters: searchResult.matches.map((match) => `${match.surahNum}:${match.ayahNum}`).join(','),
     fields: 'text_uthmani',
@@ -43,7 +45,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
             key: verse.verseKey,
             resultType: SearchNavigationType.AYAH,
             name: `[${verse.verseKey}] ${shortenVerseText(verse.textUthmani, 80)}`,
-            group: 'Navigations',
+            group: t('command-bar.navigations'),
           };
         });
 
@@ -67,7 +69,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
         </>
       );
     },
-    [isCommandBar],
+    [isCommandBar, t],
   );
 
   return <DataFetcher queryKey={makeVersesFilterUrl(params)} render={responseRender} />;

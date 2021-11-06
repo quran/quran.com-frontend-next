@@ -3,28 +3,45 @@
 
 .container {
   max-width: 80%;
-  margin: var(--spacing-small) auto;
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
   border-bottom: 1px solid var(--color-primary-medium);
 }
 .tafsirName {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-  padding: var(--spacing-xxsmall) 0;
-  margin: var(--spacing-xxsmall) 0;
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   border-top: 1px solid var(--color-primary-medium);
   border-bottom: 1px solid var(--color-primary-medium);
 }
 
 .tafsirContainer {
-  padding: var(--spacing-large) 0;
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   letter-spacing: 0;
   line-height: normal;
+  direction: ltr;
+  text-align: left;
   p {
     margin-bottom: var(--spacing-small);
   }
   br {
     content: "";
-    margin: var(--spacing-small);
+    margin-block-start: var(--spacing-small);
+    margin-inline-end: var(--spacing-small);
+    margin-block-end: var(--spacing-small);
+    margin-inline-start: var(--spacing-small);
     display: block;
   }
   h2 {

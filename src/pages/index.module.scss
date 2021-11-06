@@ -4,7 +4,10 @@
 $list-max-width: 80rem;
 
 .pageContainer {
-  padding: var(--spacing-small) 0;
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }
 
 .flow > .flowItem + .flowItem {
@@ -13,15 +16,18 @@ $list-max-width: 80rem;
 
 .flowItem {
   max-width: $list-max-width;
-  margin: 0 auto;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 
   @include breakpoints.tablet {
     width: 80%;
   }
 
   --flow-side-spacing: var(--spacing-small);
-  padding-left: var(--flow-side-spacing);
-  padding-right: var(--flow-side-spacing);
+  padding-inline-start: var(--flow-side-spacing);
+  padding-inline-end: var(--flow-side-spacing);
 
   /**
   * On mobile, a few components can't have padding at parent level.
@@ -33,8 +39,8 @@ $list-max-width: 80rem;
   * For now we only want this to be implemented on mobile, so we make `--flow-side-padding: 0` on tablet and above
   **/
   &.fullWidth {
-    padding-right: 0;
-    padding-left: 0;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
 
     @include breakpoints.tablet {
       --flow-side-spacing: 0;

@@ -5,16 +5,24 @@
   position: relative;
 }
 
+[dir="rtl"].overriddenPopoverMenuContentPositioning
+  [data-radix-popper-content-wrapper] {
+  transform: translate3d(100%, 0, 0) !important;
+  @include breakpoints.tablet {
+    transform: translate3d(50%, 0, 0) !important;
+  }
+}
+
 .overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
   top: initial !important;
   bottom: calc(1.5 * var(--spacing-mega)) !important;
   position: absolute !important;
   z-index: var(--z-index-max);
-  left: 100% !important;
+  inset-inline-start: 100% !important;
   transform: translate3d(-100%, 0, 0) !important;
 
   @include breakpoints.tablet {
-    left: 50% !important;
+    inset-inline-start: 50% !important;
     transform: translate3d(-50%, 0, 0) !important;
   }
 }

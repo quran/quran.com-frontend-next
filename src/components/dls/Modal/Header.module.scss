@@ -2,5 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-large);
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: var(--spacing-large);
+  padding-inline-end: var(--spacing-large);
 }

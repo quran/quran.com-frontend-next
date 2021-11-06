@@ -15,5 +15,8 @@
 }
 
 .container {
-  padding: 0 var(--flow-side-spacing);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--flow-side-spacing);
+  padding-inline-end: var(--flow-side-spacing);
 }

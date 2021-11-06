@@ -6,7 +6,10 @@
   align-items: center;
   box-sizing: border-box;
   max-width: 100%;
-  margin: var(--spacing-micro) 0;
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   background: var(--color-background-alternative-medium);
   border-radius: var(--border-radius-default);
   user-select: none;
@@ -25,11 +28,14 @@
 
 .itemContent {
   display: inline-block;
-  margin-right: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
   overflow: hidden;
   white-space: pre;
   text-overflow: ellipsis;
-  padding: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
 }
 
 .itemRemove {

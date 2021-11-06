@@ -1,7 +1,10 @@
 $height: calc(8 * var(--spacing-mega));
 
 .container {
-  padding: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }
 
 .inputContainer {
@@ -27,7 +30,10 @@ $height: calc(8 * var(--spacing-mega));
 }
 
 .bodyContainer {
-  padding: var(--spacing-xsmall) 0;
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   overflow-y: auto;
   position: relative;
   height: $height;

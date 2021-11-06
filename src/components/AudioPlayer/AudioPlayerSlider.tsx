@@ -1,13 +1,15 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
 import { triggerSetCurrentTime } from './EventTriggers';
 import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 
-import Slider from 'src/components/dls/Slider';
+import Slider, { Direction } from 'src/components/dls/Slider';
 import { secondsFormatter } from 'src/utils/datetime';
+import { getDir } from 'src/utils/locale';
 
 const NUMBER_OF_STEPS = 100;
 
@@ -29,6 +31,7 @@ const AudioPlayerSlider = ({
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
+  const { locale } = useRouter();
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
   const audioDuration = audioPlayerElRef?.current?.duration || 0;
 
@@ -66,6 +69,7 @@ const AudioPlayerSlider = ({
           value={currentSteps}
           onValueChange={handleOnValueChange}
           max={NUMBER_OF_STEPS}
+          direction={getDir(locale) as Direction}
         />
       </div>
       <span className={styles.remainingTime}>{secondsFormatter(audioDuration)}</span>

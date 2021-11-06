@@ -5,11 +5,14 @@
 
 .tabItem {
   cursor: pointer;
-  padding: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
   background-color: var(--color-background-default);
 }
 .tabItem + .tabItem {
-  margin-left: var(--spacing-xxsmall);
+  margin-inline-start: var(--spacing-xxsmall);
 }
 
 .tabItemSelected {

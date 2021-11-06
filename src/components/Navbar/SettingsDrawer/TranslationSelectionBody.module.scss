@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   & > input {
-    margin-right: var(--spacing-small);
+    margin-inline-end: var(--spacing-small);
   }
 }
 

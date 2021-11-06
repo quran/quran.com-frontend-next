@@ -2,8 +2,11 @@ import React from 'react';
 
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import styles from './RadioGroup.module.scss';
+
+import { getDir } from 'src/utils/locale';
 
 export interface RadioItem {
   value: string;
@@ -13,6 +16,7 @@ export interface RadioItem {
   required?: boolean;
 }
 
+type Direction = 'ltr' | 'rtl';
 export enum RadioGroupOrientation {
   Horizontal = 'horizontal',
   Vertical = 'vertical',
@@ -41,40 +45,45 @@ const RadioGroup: React.FC<Props> = ({
   required,
   disabled = false,
   orientation = RadioGroupOrientation.Vertical,
-}) => (
-  <RadioGroupPrimitive.Root
-    className={styles.container}
-    aria-label={label}
-    orientation={orientation}
-    {...(onChange && { onValueChange: onChange })}
-    {...(defaultValue && { defaultValue })}
-    {...(value && { value })}
-    {...(name && { name })}
-    {...(required && { required })}
-  >
-    {items.map((item) => {
-      const isDisabled = disabled === true || item.disabled === true;
-      return (
-        <div className={styles.radioItemContainer} key={item.id}>
-          <RadioGroupPrimitive.Item
-            value={item.value}
-            id={item.id}
-            className={styles.radioItem}
-            disabled={isDisabled}
-            required={item.required || false}
-          >
-            <RadioGroupPrimitive.Indicator className={styles.indicator} />
-          </RadioGroupPrimitive.Item>
-          <label
-            htmlFor={item.id}
-            className={classNames(styles.label, { [styles.disabled]: isDisabled })}
-          >
-            {item.label}
-          </label>
-        </div>
-      );
-    })}
-  </RadioGroupPrimitive.Root>
-);
+}) => {
+  const { locale } = useRouter();
+
+  return (
+    <RadioGroupPrimitive.Root
+      className={styles.container}
+      dir={getDir(locale) as Direction}
+      aria-label={label}
+      orientation={orientation}
+      {...(onChange && { onValueChange: onChange })}
+      {...(defaultValue && { defaultValue })}
+      {...(value && { value })}
+      {...(name && { name })}
+      {...(required && { required })}
+    >
+      {items.map((item) => {
+        const isDisabled = disabled === true || item.disabled === true;
+        return (
+          <div className={styles.radioItemContainer} key={item.id}>
+            <RadioGroupPrimitive.Item
+              value={item.value}
+              id={item.id}
+              className={styles.radioItem}
+              disabled={isDisabled}
+              required={item.required || false}
+            >
+              <RadioGroupPrimitive.Indicator className={styles.indicator} />
+            </RadioGroupPrimitive.Item>
+            <label
+              htmlFor={item.id}
+              className={classNames(styles.label, { [styles.disabled]: isDisabled })}
+            >
+              {item.label}
+            </label>
+          </div>
+        );
+      })}
+    </RadioGroupPrimitive.Root>
+  );
+};
 
 export default RadioGroup;

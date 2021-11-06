@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { IdProvider } from '@radix-ui/react-id';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
@@ -13,6 +14,7 @@ import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScript
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
+import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
 
 import 'src/styles/reset.scss';
@@ -21,6 +23,11 @@ import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
+  const { locale } = useRouter();
+  // listen to in-app changes of the locale and update the HTML dir accordingly.
+  useEffect(() => {
+    document.documentElement.dir = getDir(locale);
+  }, [locale]);
   return (
     <>
       <Head>

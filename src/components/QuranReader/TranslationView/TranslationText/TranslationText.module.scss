@@ -10,6 +10,11 @@
 
 @include utility.generate-font-sizes("translation");
 
+.ltr {
+  text-align: left;
+  direction: ltr;
+}
+
 .rtl {
   direction: rtl;
   text-align: right;
