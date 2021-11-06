@@ -1,3 +1,4 @@
+$shadow-background: linear-gradient(180deg, #000000a6, transparent);
 .container {
   width: 100%;
   right: 0;
@@ -8,7 +9,7 @@
   color: white;
   display: flex;
   justify-content: space-between;
-  background: linear-gradient(180deg, #000000a6, transparent);
+  background: $shadow-background;
   font-weight: var(--font-weight-semibold);
 }
 
