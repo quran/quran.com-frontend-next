@@ -13,20 +13,20 @@ const PrayerTimes = () => {
   if (!data) return null;
 
   const { prayerTimes } = data;
-  const nextPrayerTime = getNextPrayerTime(prayerTimes);
+  const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;
 
   return (
     <div className={styles.container}>
       <div>{formatHijriDate(data.hijriDate)}</div>
       <div className={styles.prayerTimesContainer}>
         <div>
-          {data.geo.city}, {data.geo.country}
+          {data.geo?.city}, {data.geo?.country}
         </div>
         <div>
-          <span className={styles.prayerName}>{nextPrayerTime.prayerName}</span>{' '}
+          <span className={styles.prayerName}>{nextPrayerTime?.prayerName}</span>{' '}
           <span>
-            {formatTime(nextPrayerTime.time.getHours())}:
-            {formatTime(nextPrayerTime.time.getMinutes())}
+            {formatTime(nextPrayerTime?.time?.getHours())}:
+            {formatTime(nextPrayerTime?.time?.getMinutes())}
           </span>
         </div>
       </div>
