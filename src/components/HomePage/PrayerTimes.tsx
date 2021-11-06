@@ -81,7 +81,7 @@ const getNextPrayerTime = (
     return now < date;
   });
 
-  // if nextPrayerTime is not found, this means isha is done. So we use fajr as nextPrayerTime
+  // if nextPrayerTime is not found for this day, this means isha is done. So we use fajr as nextPrayerTime
   nextPrayerTime = prayerTimeEntries[0];
 
   const [prayerName, time] = nextPrayerTime;
