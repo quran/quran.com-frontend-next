@@ -21,13 +21,15 @@ const PrayerTimes = () => {
       <div>{formatHijriDate(data.hijriDate)}</div>
       <div className={styles.prayerTimesContainer}>
         {location && <div>{location}</div>}
-        <div>
-          <span className={styles.prayerName}>{nextPrayerTime?.prayerName}</span>{' '}
-          <span>
-            {formatTime(nextPrayerTime?.time?.getHours())}:
-            {formatTime(nextPrayerTime?.time?.getMinutes())}
-          </span>
-        </div>
+        {nextPrayerTime && (
+          <div>
+            <span className={styles.prayerName}>{nextPrayerTime.prayerName}</span>{' '}
+            <span>
+              {formatTime(nextPrayerTime.time.getHours())}:
+              {formatTime(nextPrayerTime.time.getMinutes())}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
