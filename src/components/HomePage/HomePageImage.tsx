@@ -12,7 +12,7 @@ const HomePageImage = () => {
         className={styles.homepageImage}
         src={homepageImage}
         objectFit="cover"
-        sizes="(max-width: 425px) 95vw, 80vw"
+        sizes="(max-width: 425px) 300vw, 80vw"
         quality={10}
         priority
         layout="fill" // the image will scale the dimensions down for smaller viewports and scale up for larger viewports
