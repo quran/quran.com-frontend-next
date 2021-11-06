@@ -13,19 +13,20 @@ const PrayerTimes = () => {
   if (!data) return null;
 
   const { prayerTimes } = data;
-  const nextPrayerTimes = getNextPrayerTimes(prayerTimes);
+  const nextPrayerTime = getNextPrayerTimes(prayerTimes);
 
   return (
     <div className={styles.container}>
-      <div>{getFormattedHijriDate()}</div>
+      <div>{formatHijriDate(data.hijriDate)}</div>
       <div className={styles.prayerTimesContainer}>
         <div>
           {data.geo.city}, {data.geo.country}
         </div>
         <div>
-          <span className={styles.prayerName}>{nextPrayerTimes.prayerName}</span>{' '}
+          <span className={styles.prayerName}>{nextPrayerTime.prayerName}</span>{' '}
           <span>
-            {nextPrayerTimes.time.getHours()}:{nextPrayerTimes.time.getMinutes()}
+            {formatTime(nextPrayerTime.time.getHours())}:
+            {formatTime(nextPrayerTime.time.getMinutes())}
           </span>
         </div>
       </div>
@@ -51,21 +52,14 @@ type Data = {
     longitude: string;
   };
   prayerTimes: PrayerTimes;
+  hijriDate: string;
 };
 
-const getFormattedHijriDate = () => {
-  return new Intl.DateTimeFormat('en-TN-u-ca-islamic', {
-    day: 'numeric',
-    month: 'long',
-    weekday: 'long',
-    year: 'numeric',
-  })
-    .format(Date.now())
-    .split(',')
-    .slice(1)
-    .join(',')
-    .trim();
+const formatHijriDate = (hijriDate: string) => {
+  return hijriDate.split(',').slice(1).join(',').trim();
 };
+
+const formatTime = (time: number) => time.toString().padStart(2, '0');
 
 const getNextPrayerTimes = (
   prayerTimes: PrayerTimes,
