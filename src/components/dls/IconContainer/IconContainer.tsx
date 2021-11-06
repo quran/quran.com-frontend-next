@@ -1,11 +1,10 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 
 import styles from './IconContainer.module.scss';
 
-import { getDir } from 'src/utils/locale';
+import useDirection from 'src/hooks/useDirection';
 
 export enum IconColor {
   default = 'default',
@@ -29,8 +28,7 @@ const IconContainer = ({
   size = IconSize.Medium,
   color = IconColor.default,
 }: IconContainerProps) => {
-  const { locale } = useRouter();
-  const dir = getDir(locale);
+  const dir = useDirection();
   return (
     <span
       className={classNames(styles.container, {

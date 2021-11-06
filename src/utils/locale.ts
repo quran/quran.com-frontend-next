@@ -1,7 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
-const RTL = 'rtl';
-const LTR = 'ltr';
+
+export enum Direction {
+  LTR = 'ltr',
+  RTL = 'rtl',
+}
 
 /**
  * Check whether the current locale is RTL.
@@ -17,4 +20,5 @@ export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(loc
  * @param {string} locale
  * @returns {string}
  */
-export const getDir = (locale: string): string => (isRTLLocale(locale) ? RTL : LTR);
+export const getDir = (locale: string): Direction =>
+  isRTLLocale(locale) ? Direction.RTL : Direction.LTR;

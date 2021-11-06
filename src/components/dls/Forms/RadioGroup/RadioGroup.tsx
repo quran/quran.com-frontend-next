@@ -2,11 +2,11 @@ import React from 'react';
 
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 
 import styles from './RadioGroup.module.scss';
 
-import { getDir } from 'src/utils/locale';
+import useDirection from 'src/hooks/useDirection';
+import { Direction } from 'src/utils/locale';
 
 export interface RadioItem {
   value: string;
@@ -16,7 +16,6 @@ export interface RadioItem {
   required?: boolean;
 }
 
-type Direction = 'ltr' | 'rtl';
 export enum RadioGroupOrientation {
   Horizontal = 'horizontal',
   Vertical = 'vertical',
@@ -46,12 +45,12 @@ const RadioGroup: React.FC<Props> = ({
   disabled = false,
   orientation = RadioGroupOrientation.Vertical,
 }) => {
-  const { locale } = useRouter();
+  const direction = useDirection();
 
   return (
     <RadioGroupPrimitive.Root
       className={styles.container}
-      dir={getDir(locale) as Direction}
+      dir={direction as Direction}
       aria-label={label}
       orientation={orientation}
       {...(onChange && { onValueChange: onChange })}

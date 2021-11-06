@@ -2,13 +2,12 @@
 
 import * as PrimitiveDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 
 import styles from './PopoverMenu.module.scss';
 
-import { getDir } from 'src/utils/locale';
+import useDirection from 'src/hooks/useDirection';
+import { Direction } from 'src/utils/locale';
 
-type Direction = 'ltr' | 'rtl';
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
@@ -16,9 +15,9 @@ type PopoverMenuProps = {
   isPortalled?: boolean;
 };
 const PopoverMenu = ({ children, isOpen, trigger, isPortalled = true }: PopoverMenuProps) => {
-  const { locale } = useRouter();
+  const direction = useDirection();
   return (
-    <PrimitiveDropdownMenu.Root dir={getDir(locale) as Direction} open={isOpen}>
+    <PrimitiveDropdownMenu.Root dir={direction as Direction} open={isOpen}>
       {trigger && (
         <PrimitiveDropdownMenu.Trigger asChild>
           <span>{trigger}</span>
