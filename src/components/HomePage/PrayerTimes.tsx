@@ -13,7 +13,7 @@ const PrayerTimes = () => {
   if (!data) return null;
 
   const { prayerTimes } = data;
-  const nextPrayerTime = getNextPrayerTimes(prayerTimes);
+  const nextPrayerTime = getNextPrayerTime(prayerTimes);
 
   return (
     <div className={styles.container}>
@@ -61,7 +61,7 @@ const formatHijriDate = (hijriDate: string) => {
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
 
-const getNextPrayerTimes = (
+const getNextPrayerTime = (
   prayerTimes: PrayerTimes,
 ): {
   prayerName: string;
@@ -69,15 +69,22 @@ const getNextPrayerTimes = (
 } => {
   const now = new Date();
 
-  const nextPrayerTimes = Object.entries(prayerTimes).find((prayerTime) => {
+  const prayerTimeEntries = Object.entries(prayerTimes).sort((a, b) => {
+    const timeA = new Date(a[1]);
+    const timeB = new Date(b[1]);
+    return timeA.getTime() - timeB.getTime();
+  });
+
+  let nextPrayerTime = prayerTimeEntries.find((prayerTime) => {
     const [, time] = prayerTime;
     const date = new Date(time);
     return now < date;
   });
 
-  if (!nextPrayerTimes) return null;
+  // if nextPrayerTime is not found, this means isha is done. So we use fajr as nextPrayerTime
+  nextPrayerTime = prayerTimeEntries[0];
 
-  const [prayerName, time] = nextPrayerTimes;
+  const [prayerName, time] = nextPrayerTime;
   return {
     prayerName,
     time: new Date(time),
