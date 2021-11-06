@@ -14,7 +14,7 @@ import SearchResult from 'types/Tarteel/SearchResult';
 import VoiceError from 'types/Tarteel/VoiceError';
 
 const AUDIO_CONFIG = {
-  sampleRate: 44100,
+  sampleRate: 16000,
   fileFormat: 'WAV',
   channels: 1,
 };
