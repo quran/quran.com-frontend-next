@@ -77,11 +77,15 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
           </div>
         </div>
 
-        <div className={styles.contentContainer}>
-          <div className={classNames(styles.arabicVerseContainer, styles.content)}>
+        <div
+          className={classNames(styles.contentContainer, {
+            [styles.splitView]: verse.translations.length === 1,
+          })}
+        >
+          <div className={styles.arabicVerseContainer}>
             <VerseText words={getVerseWords(verse)} />
           </div>
-          <div className={styles.content}>
+          <div className={styles.verseTranslationsContainer}>
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id} className={styles.verseTranslationContainer}>
                 <TranslationText
