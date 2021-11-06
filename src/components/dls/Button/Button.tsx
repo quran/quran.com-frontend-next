@@ -8,6 +8,7 @@ import styles from './Button.module.scss';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import Tooltip from 'src/components/dls/Tooltip';
 import Wrapper from 'src/components/Wrapper/Wrapper';
+import useDirection from 'src/hooks/useDirection';
 
 export enum ButtonSize {
   Small = 'small',
@@ -66,6 +67,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   hasSidePadding = true,
 }) => {
+  const direction = useDirection();
   const classes = classNames(styles.base, className, {
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',
@@ -102,10 +104,18 @@ const Button: React.FC<ButtonProps> = ({
   if (href && !disabled)
     return (
       <Link href={href}>
-        <a className={classes}>
-          {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
+        <a dir={direction} className={classes}>
+          {prefixFinal && (
+            <span dir={direction} className={styles.prefix}>
+              {prefixFinal}
+            </span>
+          )}
           <span className={styles.content}>{children}</span>
-          {suffix && <span className={styles.suffix}>{suffix}</span>}
+          {suffix && (
+            <span dir={direction} className={styles.suffix}>
+              {suffix}
+            </span>
+          )}
         </a>
       </Link>
     );
@@ -115,10 +125,24 @@ const Button: React.FC<ButtonProps> = ({
       shouldWrap={!!tooltip}
       wrapper={(tooltipChildren) => <Tooltip text={tooltip}>{tooltipChildren}</Tooltip>}
     >
-      <button type="button" className={classes} disabled={disabled} onClick={onClick}>
-        {prefixFinal && <span className={styles.prefix}>{prefixFinal}</span>}
+      <button
+        type="button"
+        dir={direction}
+        className={classes}
+        disabled={disabled}
+        onClick={onClick}
+      >
+        {prefixFinal && (
+          <span dir={direction} className={styles.prefix}>
+            {prefixFinal}
+          </span>
+        )}
         <span className={styles.content}>{children}</span>
-        {suffix && <span className={styles.suffix}>{suffix}</span>}
+        {suffix && (
+          <span dir={direction} className={styles.suffix}>
+            {suffix}
+          </span>
+        )}
       </button>
     </Wrapper>
   );

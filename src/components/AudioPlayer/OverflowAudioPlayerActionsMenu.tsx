@@ -8,11 +8,13 @@ import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import useDirection from 'src/hooks/useDirection';
 
 const OverflowAudioPlayerActionsMenu = () => {
   const { t } = useTranslation('common');
+  const direction = useDirection();
   return (
-    <div className={styles.overriddenPopoverMenuContentPositioning}>
+    <div dir={direction} className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
         isPortalled={false}
         trigger={

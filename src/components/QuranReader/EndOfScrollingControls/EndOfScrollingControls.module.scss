@@ -15,9 +15,15 @@
   align-items: center;
   margin-top: var(--spacing-xsmall);
   > a {
-    margin: var(--spacing-xxsmall);
+    margin-block-start: var(--spacing-xxsmall);
+    margin-inline-end: var(--spacing-xxsmall);
+    margin-block-end: var(--spacing-xxsmall);
+    margin-inline-start: var(--spacing-xxsmall);
     @include breakpoints.tablet {
-      margin: 0 var(--spacing-xsmall);
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-inline-start: var(--spacing-xsmall);
+      margin-inline-end: var(--spacing-xsmall);
     }
   }
 }

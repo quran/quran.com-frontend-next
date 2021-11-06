@@ -5,7 +5,7 @@
   height: 100%;
   position: fixed;
   top: 0;
-  right: 0;
+  inset-inline-end: 0;
   background-color: #2e75ff;
   overflow-x: hidden;
   padding-top: constants.$navbar-height;

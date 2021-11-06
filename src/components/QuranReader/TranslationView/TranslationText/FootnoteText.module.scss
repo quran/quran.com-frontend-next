@@ -3,12 +3,28 @@
 $container-min-height: calc(3 * var(--spacing-large));
 
 .footnoteContainer {
-  padding: var(--spacing-small);
-  margin: var(--spacing-xxsmall) 0;
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   border: 1px solid var(--color-primary-medium);
   border-radius: var(--border-radius-default);
   background-color: var(--color-background-alternative-medium);
   min-height: $container-min-height;
+}
+
+.rtl {
+  text-align: right;
+  direction: rtl;
+}
+
+.ltr {
+  text-align: left;
+  direction: ltr;
 }
 
 .footnote {

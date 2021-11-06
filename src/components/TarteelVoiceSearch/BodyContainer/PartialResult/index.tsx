@@ -16,8 +16,8 @@ interface Props {
 const PartialResult: React.FC<Props> = ({ partialTranscript, volume }) => {
   const { t } = useTranslation('common');
   return (
-    <div>
-      <div className={styles.container}>
+    <div className={styles.outerContainer}>
+      <div className={styles.innerContainer}>
         <p className={styles.speakMessage}>{t('voice.suggest')}</p>
         <div className={styles.circlesContainer}>
           <div

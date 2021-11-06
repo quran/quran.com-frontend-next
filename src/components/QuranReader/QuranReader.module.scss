@@ -6,27 +6,36 @@ $quran-reader-padding: 3rem;
 
 .infiniteScroll {
   @include utility.container;
-  margin: 0 auto;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }
 
 .loading {
   text-align: center;
   max-width: 80%;
-  margin: var(--spacing-medium) auto;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }
 
 .container {
-  padding: $quran-reader-padding 0;
+  padding-block-start: $quran-reader-padding;
+  padding-block-end: $quran-reader-padding;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   background: var(--color-background-default);
   @include breakpoints.tablet {
     transition: var(--transition-regular);
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 }
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
-    margin-right: constants.$notes-side-bar-desktop-width;
+    margin-inline-end: constants.$notes-side-bar-desktop-width;
   }
 }
 

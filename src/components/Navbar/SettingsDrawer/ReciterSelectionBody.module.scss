@@ -4,15 +4,20 @@
   align-items: center;
   font-size: var(--font-size-large);
   & > input {
-    margin-right: var(--spacing-small);
+    margin-inline-end: var(--spacing-small);
   }
 }
 
+$recitation-padding: calc(0.5 * var(--spacing-xxsmall));
+
 .recitationStyle {
   background-color: var(--color-background-alternative-faint);
-  margin-left: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
   border-radius: var(--border-radius-pill);
   color: var(--color-text-default);
   font-size: var(--font-size-normal);
-  padding: calc(0.5 * var(--spacing-xxsmall)) var(--spacing-xsmall);
+  padding-block-start: $recitation-padding;
+  padding-block-end: $recitation-padding;
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
 }

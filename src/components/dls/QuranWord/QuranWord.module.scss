@@ -5,7 +5,10 @@
 
 .wbwContainer {
   text-align: center;
-  padding: var(--spacing-micro);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
 }
 
 .highlighted {
@@ -17,5 +20,8 @@
 }
 
 .tooltipText {
-  padding: var(--spacing-micro);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
 }

@@ -83,6 +83,7 @@
   box-shadow: var(--shadow-jumbo);
   position: fixed;
   bottom: 0%;
+  left: 0%;
   width: constants.$mobileWidth;
   &:focus {
     outline: none;

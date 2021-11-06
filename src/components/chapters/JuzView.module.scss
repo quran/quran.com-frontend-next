@@ -12,7 +12,10 @@
   width: 100%;
   margin-bottom: var(--spacing-small);
   box-sizing: border-box;
-  padding: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-default);

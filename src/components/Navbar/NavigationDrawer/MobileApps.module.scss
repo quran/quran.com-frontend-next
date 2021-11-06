@@ -15,7 +15,10 @@ $images-container-width: 17.5rem;
   display: flex;
   max-width: $images-container-width;
   justify-content: space-between;
-  margin: auto;
+  margin-block-start: auto;
+  margin-inline-end: auto;
+  margin-block-end: auto;
+  margin-inline-start: auto;
   padding-top: var(--spacing-xxsmall);
   padding-bottom: var(--spacing-mega);
 }

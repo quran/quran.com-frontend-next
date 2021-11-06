@@ -4,7 +4,10 @@
 
 .content {
   border-radius: var(--border-radius-default);
-  padding: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
   color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
   text-align: center;

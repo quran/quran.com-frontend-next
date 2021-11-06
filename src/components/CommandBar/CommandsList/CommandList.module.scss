@@ -10,7 +10,10 @@
   background: transparent;
   height: var(--spacing-mega);
   font-size: var(--font-size-small);
-  padding: 0 var(--spacing-micro);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
   color: var(--color-text-faded);
 }
 
@@ -20,7 +23,10 @@
   justify-content: space-between;
   height: calc(1.5 * var(--spacing-mega));
   font-size: var(--font-size-normal);
-  padding: 0 var(--spacing-xsmall);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
   cursor: pointer;
   color: var(--color-text-faded);
   white-space: nowrap;

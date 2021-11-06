@@ -2,7 +2,7 @@
   width: var(--spacing-medium);
   height: var(--spacing-medium);
   position: absolute;
-  right: var(--spacing-medium);
+  inset-inline-end: var(--spacing-medium);
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-background-alternative-deep);

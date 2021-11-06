@@ -2,7 +2,7 @@
 
 .header {
   margin-bottom: var(--spacing-xsmall);
-  padding-left: var(--flow-side-spacing, var(--spacing-small));
+  padding-inline-start: var(--flow-side-spacing, var(--spacing-small));
 }
 
 .quickLinksContainer {
@@ -21,13 +21,13 @@
   }
 
   &:first-child {
-    margin-left: var(--flow-side-spacing, var(--spacing-small));
+    margin-inline-start: var(--flow-side-spacing, var(--spacing-small));
   }
   &:last-child {
-    margin-right: var(--flow-side-spacing, var(--spacing-small));
+    margin-inline-end: var(--flow-side-spacing, var(--spacing-small));
   }
 
   & + & {
-    margin-left: var(--spacing-small);
+    margin-inline-start: var(--spacing-small);
   }
 }

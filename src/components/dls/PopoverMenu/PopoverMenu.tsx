@@ -5,6 +5,9 @@ import classNames from 'classnames';
 
 import styles from './PopoverMenu.module.scss';
 
+import useDirection from 'src/hooks/useDirection';
+import { Direction } from 'src/utils/locale';
+
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
@@ -12,8 +15,9 @@ type PopoverMenuProps = {
   isPortalled?: boolean;
 };
 const PopoverMenu = ({ children, isOpen, trigger, isPortalled = true }: PopoverMenuProps) => {
+  const direction = useDirection();
   return (
-    <PrimitiveDropdownMenu.Root open={isOpen}>
+    <PrimitiveDropdownMenu.Root dir={direction as Direction} open={isOpen}>
       {trigger && (
         <PrimitiveDropdownMenu.Trigger asChild>
           <span>{trigger}</span>

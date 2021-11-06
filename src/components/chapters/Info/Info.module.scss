@@ -1,8 +1,14 @@
 @use "src/styles/breakpoints";
 
 .container {
-  padding: calc(var(--spacing-xsmall)) 0;
-  margin: 0 auto;
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
   max-width: 90%;
   @include breakpoints.tablet {
     max-width: 75%;
@@ -20,16 +26,25 @@
 
 .backContainer {
   width: fit-content;
-  margin: var(--spacing-small) 0;
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 .backIcon {
-  margin: var(--spacing-micro) 0;
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   @include breakpoints.tablet {
-    margin: 0 var(--spacing-micro);
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: var(--spacing-micro);
+    margin-inline-end: var(--spacing-micro);
   }
   > svg {
-    margin-right: var(--spacing-xxsmall);
+    margin-inline-end: var(--spacing-xxsmall);
   }
 }
 
@@ -40,7 +55,7 @@
   width: 250px;
   position: relative;
   @include breakpoints.tablet {
-    margin-right: var(--spacing-large);
+    margin-inline-end: var(--spacing-large);
   }
 }
 
@@ -78,7 +93,10 @@
 }
 
 .headerContainer {
-  margin: var(--spacing-xsmall) 0;
+  margin-block-start: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   padding-bottom: var(--spacing-xsmall);
   border-bottom: 1px solid var(--color-borders-hairline);
   @include breakpoints.tablet {

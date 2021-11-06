@@ -1,6 +1,9 @@
 .container {
   position: relative;
-  padding: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   background: var(--color-success-faded);
   border-radius: var(--border-radius-default);
   border: 1px solid var(--color-success-faint);
@@ -43,5 +46,5 @@
 .closeIcon {
   position: absolute;
   top: var(--spacing-xxsmall);
-  right: var(--spacing-xxsmall);
+  inset-inline-end: var(--spacing-xxsmall);
 }

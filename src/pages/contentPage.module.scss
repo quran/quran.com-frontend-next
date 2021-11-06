@@ -1,8 +1,14 @@
 .contentPage {
   padding-top: var(--spacing-mega);
   max-width: 40rem;
-  margin: 0 auto;
-  padding: var(--spacing-mega) var(--spacing-medium);
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  padding-block-start: var(--spacing-mega);
+  padding-block-end: var(--spacing-mega);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   h1 {
     font-size: var(--font-size-xlarge);
     line-height: var(--line-height-jumbo);
@@ -31,5 +37,8 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: var(--spacing-medium) 0;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }

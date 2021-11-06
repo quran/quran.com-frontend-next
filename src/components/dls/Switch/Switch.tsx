@@ -1,6 +1,9 @@
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import styles from './Switch.module.scss';
+
+import { isRTLLocale } from 'src/utils/locale';
 
 // reference: https://vercel.com/design/switch
 
@@ -23,6 +26,7 @@ type SwitchProps = {
 
 const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchProps) => {
   const selectedIndex = items.findIndex((item) => item.value === selected);
+  const { locale } = useRouter();
   return (
     <div className={styles.container}>
       {items.map((item) => (
@@ -44,7 +48,7 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
         className={styles.selectedItemBackgroundContainer}
         style={{
           width: `${(1 / items.length) * 100}%`,
-          transform: `translateX(${selectedIndex * 100}%)`,
+          transform: `translateX(${isRTLLocale(locale) ? '-' : ''}${selectedIndex * 100}%)`,
         }}
       >
         <div className={styles.selectedItemBackground} />

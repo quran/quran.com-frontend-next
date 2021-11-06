@@ -40,11 +40,17 @@
 }
 
 .label {
-  padding: var(--spacing-micro) 0;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }
 
 .input {
-  margin: var(--spacing-micro);
+  margin-block-start: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: var(--spacing-micro);
   border: 0;
   height: 80%;
   width: 100%;
@@ -77,27 +83,33 @@
 
 .clearContainer {
   @include prefixSuffixContainer;
-  padding: 0 var(--spacing-micro);
-  border-top-right-radius: var(--border-radius-default);
-  border-bottom-right-radius: var(--border-radius-default);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  border-start-end-radius: var(--border-radius-default);
+  border-end-end-radius: var(--border-radius-default);
 }
 
 .prefixSuffixContainer {
   @include prefixSuffixContainer;
-  padding: 0 var(--spacing-xsmall);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
   color: var(--color-text-faded);
 }
 
 .prefix {
-  border-right: 1px solid var(--color-background-alternative-deep);
-  border-top-left-radius: var(--border-radius-default);
-  border-bottom-left-radius: var(--border-radius-default);
+  border-inline-end: 1px solid var(--color-background-alternative-deep);
+  border-start-start-radius: var(--border-radius-default);
+  border-end-start-radius: var(--border-radius-default);
   background: var(--color-background-alternative-medium);
 }
 
 .suffix {
-  border-left: 1px solid var(--color-background-alternative-deep);
-  border-top-right-radius: var(--border-radius-default);
-  border-bottom-right-radius: var(--border-radius-default);
+  border-inline-start: 1px solid var(--color-background-alternative-deep);
+  border-start-end-radius: var(--border-radius-default);
+  border-end-end-radius: var(--border-radius-default);
   background: var(--color-background-alternative-medium);
 }

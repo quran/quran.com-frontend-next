@@ -36,14 +36,17 @@
 
 // toast hover transition
 .toast {
-  margin: 0 var(--spacing-xxsmall);
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: var(--spacing-xxsmall);
+  margin-inline-end: var(--spacing-xxsmall);
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-xlarge);
   transition: transform 0.4s, opacity 0.4s ease;
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
 
   @for $i from 2 through 5 {
     &:nth-last-child(#{$i}) {
@@ -85,5 +88,5 @@
 }
 
 .actionsContainer > .action + .action {
-  margin-left: var(--spacing-xxsmall);
+  margin-inline-start: var(--spacing-xxsmall);
 }

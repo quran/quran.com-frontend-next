@@ -63,5 +63,7 @@
 .currentTime,
 .remainingTime {
   display: inline-block;
-  line-height: var(--line-height-normal); // reset line height to normal, otherwise it will push the buttons in the audioplayer to the bottom
+  line-height: var(
+    --line-height-normal
+  ); // reset line height to normal, otherwise it will push the buttons in the audioplayer to the bottom
 }

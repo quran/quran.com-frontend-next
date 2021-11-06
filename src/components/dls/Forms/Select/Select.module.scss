@@ -36,7 +36,7 @@
   width: var(--spacing-mega);
   height: 100%;
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   pointer-events: none;
   display: flex;
   -webkit-box-align: center;
@@ -68,7 +68,10 @@
 }
 
 .defaultStyledSelect {
-  padding: 0 var(--spacing-xxsmall);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
 }
 
 .disabledSelect {

@@ -1,6 +1,6 @@
 export type SearchRequest = {
   query: string;
-  filterLanguages: string;
+  filterLanguages?: string;
   filterTranslations?: string;
   size?: number;
   page?: number;

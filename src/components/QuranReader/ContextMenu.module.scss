@@ -14,7 +14,7 @@
   @include breakpoints.tablet {
     top: constants.$navbar-height;
     transition: var(--transition-regular);
-    margin-right: 0;
+    margin-inline-end: 0;
   }
   &:after {
     display: block;
@@ -44,7 +44,7 @@
 
 .withVisibleSideBar {
   @include breakpoints.tablet {
-    margin-right: constants.$notes-side-bar-desktop-width;
+    margin-inline-end: constants.$notes-side-bar-desktop-width;
     width: calc(100% - #{constants.$notes-side-bar-desktop-width});
   }
 }
@@ -53,7 +53,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-micro);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
 }
 
 .leftSection {
@@ -84,7 +87,7 @@
 
 .row {
   display: flex;
-  text-align: left;
+  text-align: start;
 }
 
 .col {

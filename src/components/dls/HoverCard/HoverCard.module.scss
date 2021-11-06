@@ -4,7 +4,10 @@
 
 .content {
   border-radius: var(--border-radius-default);
-  padding: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-normal);
   & > span {

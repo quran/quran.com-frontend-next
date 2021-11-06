@@ -2,7 +2,7 @@
   display: flex;
 }
 .container > div + div {
-  margin-left: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
 }
 
 .title {
@@ -25,7 +25,10 @@
   margin-bottom: var(--spacing-xxsmall);
   &::after {
     content: "·";
-    margin: 0 var(--spacing-xsmall);
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: var(--spacing-xsmall);
+    margin-inline-end: var(--spacing-xsmall);
   }
   &:last-child::after {
     content: "";
