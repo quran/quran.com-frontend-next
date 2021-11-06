@@ -14,13 +14,12 @@ const PrayerTimes = () => {
 
   const { prayerTimes } = data;
   const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;
-  const location = data.geo ? `${data.geo.city}, ${data.geo.country}` : null;
 
   return (
     <div className={styles.container}>
       <div>{formatHijriDate(data.hijriDate)}</div>
       <div className={styles.prayerTimesContainer}>
-        {location && <div>{location}</div>}
+        <div>{formatLocation(data.geo)}</div>
         {nextPrayerTime && (
           <div>
             <span className={styles.prayerName}>{nextPrayerTime.prayerName}</span>{' '}
@@ -44,14 +43,16 @@ type PrayerTimes = {
   isha: string;
 };
 
+type Geo = {
+  city?: string;
+  country?: string;
+  region?: string;
+  latitude?: string;
+  longitude?: string;
+};
+
 type Data = {
-  geo: {
-    city: string;
-    country: string;
-    region: string;
-    latitude: string;
-    longitude: string;
-  };
+  geo: Geo;
   prayerTimes: PrayerTimes;
   hijriDate: string;
 };
@@ -61,6 +62,17 @@ const formatHijriDate = (hijriDate: string) => {
 };
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
+const formatLocation = (geo: Geo) => {
+  const location = [];
+  if (geo.city) {
+    location.push(geo.city);
+  }
+  if (geo.country) {
+    location.push(geo.country);
+  }
+
+  return location.join(', ');
+};
 
 const getNextPrayerTime = (
   prayerTimes: PrayerTimes,
