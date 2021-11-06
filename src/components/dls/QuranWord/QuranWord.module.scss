@@ -2,7 +2,7 @@
   display: inline-block;
   cursor: pointer;
 }
-.moreSpaceBetweenWord + .moreSpaceBetweenWord {
+.moreSpace + .moreSpace {
   margin-right: calc(0.5 * var(--spacing-xxsmall));
 }
 

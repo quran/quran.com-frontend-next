@@ -101,7 +101,7 @@ const QuranWord = ({
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,
-        [styles.moreSpaceBetweenWord]: !isQCFFont(font),
+        [styles.moreSpace]: !isQCFFont(font),
       })}
     >
       <Wrapper
