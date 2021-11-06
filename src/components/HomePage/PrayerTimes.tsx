@@ -14,14 +14,13 @@ const PrayerTimes = () => {
 
   const { prayerTimes } = data;
   const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;
+  const location = data.geo ? `${data.geo.city}, ${data.geo.country}` : null;
 
   return (
     <div className={styles.container}>
       <div>{formatHijriDate(data.hijriDate)}</div>
       <div className={styles.prayerTimesContainer}>
-        <div>
-          {data.geo?.city}, {data.geo?.country}
-        </div>
+        {location && <div>{location}</div>}
         <div>
           <span className={styles.prayerName}>{nextPrayerTime?.prayerName}</span>{' '}
           <span>
