@@ -79,7 +79,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
 
         <div
           className={classNames(styles.contentContainer, {
-            [styles.splitView]: verse.translations.length === 1,
+            [styles.splitView]: verse.translations?.length === 1,
           })}
         >
           <div className={styles.arabicVerseContainer}>
