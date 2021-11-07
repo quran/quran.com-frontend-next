@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
 import styles from './PrayerTimes.module.scss';
@@ -8,6 +9,7 @@ import { fetcher } from 'src/api';
 const URL = 'https://quran-prayer-times-api-abdellatif-io-qurancom.vercel.app/api/prayer-times';
 
 const PrayerTimes = () => {
+  const { t } = useTranslation('home');
   const { data } = useSWR<Data>(URL, (url) => fetcher(url));
 
   if (!data) return null;
@@ -22,7 +24,9 @@ const PrayerTimes = () => {
         <div>{formatLocation(data.geo)}</div>
         {nextPrayerTime && (
           <div>
-            <span className={styles.prayerName}>{nextPrayerTime.prayerName}</span>{' '}
+            <span className={styles.prayerName}>
+              {t(`prayerNames.${nextPrayerTime.prayerName}`)}
+            </span>{' '}
             <span>
               {formatTime(nextPrayerTime.time.getHours())}:
               {formatTime(nextPrayerTime.time.getMinutes())}
@@ -95,7 +99,7 @@ const getNextPrayerTime = (
   });
 
   // if nextPrayerTime is not found for this day, this means isha is done. So we use fajr as nextPrayerTime
-  nextPrayerTime = prayerTimeEntries[0];
+  if (!nextPrayerTime) nextPrayerTime = prayerTimeEntries[0];
 
   const [prayerName, time] = nextPrayerTime;
   return {
