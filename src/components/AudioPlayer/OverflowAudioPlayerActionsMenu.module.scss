@@ -14,7 +14,9 @@
 }
 
 .overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
+  /* stylelint-disable-next-line csstools/use-logical */
   top: initial !important;
+  /* stylelint-disable-next-line csstools/use-logical */
   bottom: calc(1.5 * var(--spacing-mega)) !important;
   position: absolute !important;
   z-index: var(--z-index-max);

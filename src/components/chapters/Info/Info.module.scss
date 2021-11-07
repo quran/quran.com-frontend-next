@@ -61,12 +61,12 @@
 
 .textBody {
   p {
-    margin-bottom: var(--spacing-small);
+    margin-block-end: var(--spacing-small);
   }
   h2,
   h3 {
     font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-small);
+    margin-block-end: var(--spacing-small);
   }
   em {
     font-style: italic;
@@ -77,7 +77,7 @@
     margin-block-start: var(--spacing-medium);
     margin-block-end: var(--spacing-medium);
     padding-inline-start: calc(2 * var(--spacing-large));
-    margin-bottom: var(--spacing-small);
+    margin-block-end: var(--spacing-small);
   }
   li {
     display: list-item;
@@ -97,7 +97,7 @@
   margin-block-end: var(--spacing-xsmall);
   margin-inline-start: 0;
   margin-inline-end: 0;
-  padding-bottom: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
   border-bottom: 1px solid var(--color-borders-hairline);
   @include breakpoints.tablet {
     display: flex;
@@ -118,15 +118,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: var(--spacing-xsmall);
+  padding-block-start: var(--spacing-xsmall);
   width: 100%;
   @include breakpoints.tablet {
-    padding-top: 0;
+    padding-block-start: 0;
     width: 50%;
   }
 }
 
 .detailHeader {
   font-weight: var(--font-weight-bold);
-  padding-bottom: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
 }

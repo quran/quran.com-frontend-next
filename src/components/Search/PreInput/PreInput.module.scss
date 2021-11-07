@@ -8,6 +8,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-micro);
-  padding-bottom: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
   width: 100%;
 }

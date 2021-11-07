@@ -74,7 +74,7 @@
 
 .placeholder {
   position: absolute;
-  top: 50%;
+  inset-block-start: 50%;
   transform: translateY(-50%);
   flex: 1;
   overflow: hidden;

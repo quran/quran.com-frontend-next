@@ -28,7 +28,7 @@
   height: 100%;
   position: relative;
   inset-inline-start: 50%;
-  top: 50%;
+  inset-block-start: 50%;
 }
 
 @keyframes spinner {
@@ -43,7 +43,7 @@
 .span {
   background-color: var(--color-text-default);
   position: absolute;
-  top: -3.9%;
+  inset-block-start: -3.9%;
   width: 24%;
   height: 8%;
   inset-inline-start: -10%;

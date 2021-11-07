@@ -8,7 +8,7 @@
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: calc(2 * var(--spacing-mega));
+  margin-block-end: calc(2 * var(--spacing-mega));
 }
 
 .transcript {

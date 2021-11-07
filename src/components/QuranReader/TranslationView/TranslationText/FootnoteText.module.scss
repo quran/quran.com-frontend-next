@@ -18,11 +18,13 @@ $container-min-height: calc(3 * var(--spacing-large));
 }
 
 .rtl {
+  /* stylelint-disable-next-line csstools/use-logical */
   text-align: right;
   direction: rtl;
 }
 
 .ltr {
+  /* stylelint-disable-next-line csstools/use-logical */
   text-align: left;
   direction: ltr;
 }
@@ -35,6 +37,6 @@ $container-min-height: calc(3 * var(--spacing-large));
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-bottom: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
   font-weight: var(--font-weight-bold);
 }

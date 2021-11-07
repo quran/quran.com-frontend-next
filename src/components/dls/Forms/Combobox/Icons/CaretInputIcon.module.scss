@@ -3,7 +3,7 @@
   height: var(--spacing-medium);
   position: absolute;
   inset-inline-end: var(--spacing-medium);
-  top: 50%;
+  inset-block-start: 50%;
   transform: translateY(-50%);
   color: var(--color-background-alternative-deep);
   svg {

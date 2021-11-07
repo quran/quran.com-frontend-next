@@ -16,6 +16,6 @@
   font-size: var(--font-size-small);
 }
 .positionBottomRight {
-  bottom: var(--spacing-xxsmall);
+  inset-block-end: var(--spacing-xxsmall);
   inset-inline-end: var(--spacing-xxsmall);
 }

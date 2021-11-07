@@ -1,7 +1,7 @@
 @mixin footnote-styling {
   sup {
     color: var(--color-text-link);
-    top: calc(-1 * var(--spacing-xsmall));
+    inset-block-start: calc(-1 * var(--spacing-xsmall));
     position: relative;
     font-size: var(--font-size-small);
     line-height: 0;

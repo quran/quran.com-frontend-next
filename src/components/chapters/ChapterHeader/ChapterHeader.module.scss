@@ -30,8 +30,7 @@
 .QOutlineWrapper {
   height: 100%;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  inset-block: 0;
   inset-inline-end: var(--spacing-medium);
   > svg {
     height: 100%;
@@ -44,35 +43,34 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
-  margin-bottom: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 
 .bismillahContainer {
   display: flex;
   justify-content: center;
-  margin-top: var(--spacing-mega);
-  margin-bottom: var(--spacing-mega);
+  margin-block: var(--spacing-mega);
 }
 .translatedName {
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
   font-size: var(--font-size-small);
-  margin-bottom: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 .arabicSurahNameContainer {
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
-  padding-top: var(--spacing-xsmall);
-  margin-bottom: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 .nameSimple {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-large);
-  margin-bottom: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 .actionContainer {

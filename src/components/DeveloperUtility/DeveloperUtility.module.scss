@@ -3,8 +3,8 @@
   border: 1px solid rgba(0, 0, 0, 0.13);
   color: black;
   position: fixed;
-  top: calc(var(--spacing-mega) + var(--spacing-mega));
-  right: calc(var(--spacing-mega) + var(--spacing-medium));
+  inset-block-start: calc(var(--spacing-mega) + var(--spacing-mega));
+  inset-inline-end: calc(var(--spacing-mega) + var(--spacing-medium));
   height: calc(2 * var(--spacing-mega));
   width: calc(2 * var(--spacing-mega));
 
@@ -33,7 +33,7 @@
 
 .separator {
   width: 100%;
-  margin-bottom: var(--spacing-xxxsmall);
+  margin-block-end: var(--spacing-xxxsmall);
 }
 
 .closeButton {

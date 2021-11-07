@@ -1,5 +1,5 @@
 .contentPage {
-  padding-top: var(--spacing-mega);
+  padding-block-start: var(--spacing-mega);
   max-width: 40rem;
   margin-block-start: 0;
   margin-block-end: 0;
@@ -12,17 +12,17 @@
   h1 {
     font-size: var(--font-size-xlarge);
     line-height: var(--line-height-jumbo);
-    margin-bottom: var(--spacing-xsmall);
+    margin-block-end: var(--spacing-xsmall);
     font-weight: var(--font-weight-bold);
   }
   h2 {
     font-size: var(--font-size-large);
-    margin-bottom: var(--spacing-xsmall);
+    margin-block-end: var(--spacing-xsmall);
     font-weight: var(--font-weight-semibold);
   }
   p {
     line-height: var(--line-height-large);
-    margin-bottom: var(--spacing-medium);
+    margin-block-end: var(--spacing-medium);
   }
   a {
     text-decoration: underline;

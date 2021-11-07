@@ -3,27 +3,29 @@
 
 .container {
   position: fixed;
+  /* stylelint-disable-next-line csstools/use-logical */
   bottom: var(--spacing-mega);
+  /* stylelint-disable-next-line csstools/use-logical */
   right: calc(1 * var(--spacing-medium));
   transition: var(--transition-regular);
   z-index: var(--z-index-sticky);
   @include breakpoints.tablet {
     display: inherit;
-    right: calc(var(--spacing-mega) + var(--spacing-medium));
+    inset-inline-end: calc(var(--spacing-mega) + var(--spacing-medium));
   }
   &.isMobileMinimizedForScrolling.audioPlayerOpen {
-    margin-bottom: constants.$audio-player-minimized-height;
-    bottom: var(--spacing-medium);
+    margin-block-end: constants.$audio-player-minimized-height;
+    inset-block-end: var(--spacing-medium);
     @include breakpoints.tablet {
-      margin-bottom: constants.$audio-player-default-desktop-height;
+      margin-block-end: constants.$audio-player-default-desktop-height;
     }
   }
 }
 
 .audioPlayerOpen {
-  margin-bottom: constants.$audio-player-default-height;
+  margin-block-end: constants.$audio-player-default-height;
   @include breakpoints.tablet {
-    margin-bottom: constants.$audio-player-default-desktop-height;
+    margin-block-end: constants.$audio-player-default-desktop-height;
   }
-  bottom: var(--spacing-medium);
+  inset-block-end: var(--spacing-medium);
 }

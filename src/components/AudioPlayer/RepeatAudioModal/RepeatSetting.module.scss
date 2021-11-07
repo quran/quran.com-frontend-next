@@ -8,7 +8,7 @@
   }
 }
 .inputContainer + .inputContainer {
-  margin-top: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
 }
 
 .label {

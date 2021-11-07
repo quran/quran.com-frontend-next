@@ -44,7 +44,7 @@
   box-shadow: var(--shadow-xlarge);
   transition: transform 0.4s, opacity 0.4s ease;
   position: absolute;
-  bottom: 0;
+  inset-block-end: 0;
   inset-inline-start: 0;
   inset-inline-end: 0;
 

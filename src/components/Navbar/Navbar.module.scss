@@ -6,7 +6,7 @@
 }
 
 .container {
-  top: 0;
+  inset-block-start: 0;
   position: fixed;
   height: constants.$navbar-height;
   width: 100%;
