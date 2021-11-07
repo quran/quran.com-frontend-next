@@ -3,10 +3,8 @@
 
 .container {
   position: fixed;
-  /* stylelint-disable-next-line csstools/use-logical */
-  bottom: var(--spacing-mega);
-  /* stylelint-disable-next-line csstools/use-logical */
-  right: calc(1 * var(--spacing-medium));
+  inset-block-end: var(--spacing-mega);
+  inset-inline-end: calc(1 * var(--spacing-medium));
   transition: var(--transition-regular);
   z-index: var(--z-index-sticky);
   @include breakpoints.tablet {
