@@ -1,16 +1,16 @@
 @use "src/styles/breakpoints";
 
 .juzContainer + .juzContainer {
-  margin-top: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
   @include breakpoints.tablet {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }
 
 .juzContainer {
   display: inline-block;
   width: 100%;
-  margin-bottom: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
   box-sizing: border-box;
   padding-block-start: var(--spacing-small);
   padding-block-end: var(--spacing-small);
@@ -21,7 +21,7 @@
   border-radius: var(--border-radius-default);
 
   .chapterContainer + .chapterContainer {
-    margin-top: var(--spacing-small);
+    margin-block-start: var(--spacing-small);
   }
 }
 
@@ -30,7 +30,7 @@
 }
 
 .juzTitle {
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .loadingContainer {

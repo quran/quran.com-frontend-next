@@ -1,8 +1,7 @@
 $shadow-background: linear-gradient(180deg, #000000a6, transparent);
 .container {
   width: 100%;
-  right: 0;
-  left: 0;
+  inset-inline: 0;
   box-sizing: border-box;
   padding: var(--spacing-medium);
   position: absolute;
@@ -18,5 +17,5 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
 }
 
 .prayerTimesContainer {
-  text-align: right;
+  text-align: end;
 }

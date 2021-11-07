@@ -5,7 +5,7 @@
   align-items: center;
   text-align: center;
   & > svg {
-    margin-bottom: var(--spacing-mega);
+    margin-block-end: var(--spacing-mega);
     width: calc(2 * var(--spacing-mega));
     height: calc(2 * var(--spacing-mega));
     & > path {

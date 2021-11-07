@@ -1,9 +1,7 @@
 .comboboxLabel {
-  margin-top: var(--spacing-xsmall);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block: var(--spacing-xsmall);
   font-weight: var(--font-weight-bold);
 }
 .selectedContainer {
-  margin-top: var(--spacing-micro);
-  margin-bottom: var(--spacing-micro);
+  margin-block: var(--spacing-micro);
 }

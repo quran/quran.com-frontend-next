@@ -7,7 +7,7 @@ $verseLinkMinWidth: calc(6 * var(--spacing-mega));
 }
 
 .sessionsHeader {
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
   padding-block-start: 0;
   padding-block-end: 0;
   padding-inline-start: var(--flow-side-spacing, 0);

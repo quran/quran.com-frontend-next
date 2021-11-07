@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .header {
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
   padding-inline-start: var(--flow-side-spacing, var(--spacing-small));
 }
 

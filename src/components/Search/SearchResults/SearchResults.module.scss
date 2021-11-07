@@ -1,5 +1,5 @@
 .resultsSummaryContainer {
-  margin-top: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -7,6 +7,6 @@
 
 .boldHeader {
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
   text-transform: capitalize;
 }

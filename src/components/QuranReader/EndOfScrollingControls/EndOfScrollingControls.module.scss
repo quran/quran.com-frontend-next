@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
   > a {
     margin-block-start: var(--spacing-xxsmall);
     margin-inline-end: var(--spacing-xxsmall);

@@ -4,11 +4,11 @@
 .container {
   height: 100%;
   position: fixed;
-  top: 0;
+  inset-block-start: 0;
   inset-inline-end: 0;
   background-color: #2e75ff;
   overflow-x: hidden;
-  padding-top: constants.$navbar-height;
+  padding-block-start: constants.$navbar-height;
   z-index: var(--z-index-default);
   transition: var(--transition-regular);
   width: 0;

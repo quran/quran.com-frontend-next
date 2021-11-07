@@ -12,11 +12,11 @@
   padding-block-end: var(--spacing-medium);
   padding-inline-start: 0;
   padding-inline-end: 0;
-  padding-bottom: 0;
+  padding-block-end: 0;
 }
 .contentContainer {
   flex: 1;
-  padding-top: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
   position: relative;
 }
 .actionContainer {
@@ -24,13 +24,13 @@
   justify-content: space-between;
 }
 .arabicVerseContainer {
-  padding-bottom: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
 }
 .verseTranslationContainer {
-  padding-bottom: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
 }
 .translationContainer {
-  padding-bottom: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
 }
 
 .actionContainerLeft,

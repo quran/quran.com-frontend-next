@@ -11,7 +11,7 @@ $list-max-width: 80rem;
 }
 
 .flow > .flowItem + .flowItem {
-  margin-top: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
 }
 
 .flowItem {

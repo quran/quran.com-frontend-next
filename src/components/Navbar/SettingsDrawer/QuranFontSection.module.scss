@@ -1,8 +1,7 @@
 @use "src/styles/breakpoints";
 
 .verseSampleContainer {
-  margin-top: var(--spacing-medium);
-  margin-bottom: var(--spacing-medium);
+  margin-block: var(--spacing-medium);
   border-radius: var(--border-radius-default);
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-medium);

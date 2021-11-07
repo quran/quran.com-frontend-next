@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .bookmarksHeader {
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .verseLinksContainer {

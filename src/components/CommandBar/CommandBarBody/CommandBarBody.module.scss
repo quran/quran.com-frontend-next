@@ -9,7 +9,7 @@ $height: calc(8 * var(--spacing-mega));
 
 .inputContainer {
   border-bottom: 1px solid var(--color-borders-hairline);
-  padding-bottom: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
   display: flex;
 }
 

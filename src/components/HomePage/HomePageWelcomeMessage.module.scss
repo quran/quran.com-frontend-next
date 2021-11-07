@@ -17,15 +17,15 @@
   color: var(--color-success-deep);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
-  margin-bottom: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
   line-height: var(--line-height-large);
 }
 
 .link {
-  margin-top: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
 }
 .description {
-  margin-bottom: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
 }
 .version {
   font-weight: var(--font-weight-bold);
@@ -33,7 +33,7 @@
   color: var(--color-text-faded);
   display: flex;
   align-items: center;
-  margin-bottom: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
 
   & > svg {
     height: var(--spacing-small);
@@ -45,6 +45,6 @@
 
 .closeIcon {
   position: absolute;
-  top: var(--spacing-xxsmall);
+  inset-block-start: var(--spacing-xxsmall);
   inset-inline-end: var(--spacing-xxsmall);
 }

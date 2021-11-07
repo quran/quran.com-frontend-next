@@ -19,5 +19,5 @@ $body-min-height-mobile: 65vh;
 }
 
 .commandBarContainer {
-  margin-top: calc(2 * var(--spacing-mega));
+  margin-block-start: calc(2 * var(--spacing-mega));
 }

@@ -43,13 +43,13 @@ $containerMaxWidth: calc(5 * var(--spacing-mega));
 .translatedSurahName {
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .surahName {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .description {

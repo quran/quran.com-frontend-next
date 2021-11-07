@@ -59,12 +59,12 @@
 
 .pageBody {
   width: 100%;
-  padding-top: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
 }
 
 .filtersHeader {
   font-weight: var(--font-weight-bold);
-  padding-top: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
   width: 100%;
   text-align: start;
 }
@@ -77,7 +77,7 @@
   padding-block-end: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
-  margin-top: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
   @include breakpoints.tablet {
     display: flex;
     justify-content: space-between;

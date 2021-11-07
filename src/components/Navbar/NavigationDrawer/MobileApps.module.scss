@@ -19,6 +19,5 @@ $images-container-width: 17.5rem;
   margin-inline-end: auto;
   margin-block-end: auto;
   margin-inline-start: auto;
-  padding-top: var(--spacing-xxsmall);
-  padding-bottom: var(--spacing-mega);
+  padding-block: var(--spacing-xxsmall) var(--spacing-mega);
 }

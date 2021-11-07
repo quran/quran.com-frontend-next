@@ -115,6 +115,7 @@
     "stylelint": "^13.13.1",
     "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.21.0",
+    "stylelint-use-logical": "^1.1.0",
     "typescript": "^4.4.4"
   },
   "husky": {

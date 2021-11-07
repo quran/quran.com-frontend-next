@@ -10,5 +10,5 @@
   flex: 1;
 }
 .row + .row {
-  margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
 }

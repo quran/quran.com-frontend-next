@@ -6,8 +6,7 @@
   position: fixed;
   height: 100vh;
   width: 100%;
-  top: 0;
-  bottom: 0;
+  inset-block: 0;
   z-index: var(--z-index-header);
   transition: var(--transition-regular);
   transition-timing-function: ease-in;
@@ -57,14 +56,14 @@
 }
 
 .bodyContainer {
-  margin-top: constants.$navbar-height;
-  padding-top: var(--spacing-small);
+  margin-block-start: constants.$navbar-height;
+  padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
 }
 
 .bodyWithBottomPadding {
-  padding-bottom: calc(4 * var(--spacing-large));
+  padding-block-end: calc(4 * var(--spacing-large));
 }
 
 .navigationBodyContainer {

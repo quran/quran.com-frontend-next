@@ -2,7 +2,7 @@
 @use "src/styles/constants";
 
 .container {
-  margin-top: var(--spacing-xxsmall);
+  margin-block: var(--spacing-xxsmall) calc(-1 * var(--spacing-xsmall));
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -11,47 +11,47 @@
   min-height: var(
     --font-size-small
   ); // prevents CLS when the current/total time are not loaded yet
-  margin-bottom: calc(-1 * var(--spacing-xsmall));
   transition: var(--transition-regular);
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
     min-height: var(
       --font-size-normal
     ); // prevents CLS when the current/total time are not loaded yet
-    margin-top: var(--spacing-medium);
-    margin-bottom: calc(-2 * var(--spacing-small));
+    margin-block: var(--spacing-medium) calc(-2 * var(--spacing-small));
   }
 }
 
 .containerMinimized {
   @include breakpoints.smallerThanTablet {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
 .sliderContainer {
   display: inline-block;
   position: fixed;
+  /* stylelint-disable-next-line csstools/use-logical */
   left: 50%;
   transform: translate(-50%, 0);
   margin: 0;
   width: 100%;
   height: calc(1.25 * var(--spacing-xxsmall));
   transition: var(--transition-regular);
-  bottom: constants.$audio-player-default-height;
+  inset-block-end: constants.$audio-player-default-height;
   @include breakpoints.tablet {
-    bottom: constants.$audio-player-default-desktop-height;
+    inset-block-end: constants.$audio-player-default-desktop-height;
   }
 }
 
 .sliderContainerMinimized {
   @include breakpoints.smallerThanTablet {
+    /* stylelint-disable-next-line csstools/use-logical */
     left: 50%;
     margin: 0 auto;
     width: 100%;
     transform: translate(-50%, 0);
     position: fixed;
-    bottom: constants.$audio-player-minimized-height;
+    inset-block-end: constants.$audio-player-minimized-height;
     span[role="slider"] {
       @include breakpoints.smallerThanTablet {
         display: none;
