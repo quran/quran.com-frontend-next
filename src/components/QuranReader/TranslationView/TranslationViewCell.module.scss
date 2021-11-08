@@ -22,11 +22,6 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
-
-    // & > .verseTranslationsContainer {
-    //   margin-block-start: calc(1.2 * var(--spacing-medium));
-    // }
-
     & > .verseTranslationsContainer,
     & > .arabicVerseContainer {
       flex: 1;
