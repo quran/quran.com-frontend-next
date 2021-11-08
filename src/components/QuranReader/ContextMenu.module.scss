@@ -76,7 +76,16 @@
 }
 
 .rowsContainer {
-  width: 90%;
+  width: 80%;
+  margin-inline-end: 5%;
+}
+
+.alignStart {
+  text-align: start;
+}
+
+.alignEnd {
+  text-align: end;
 }
 
 .row {

@@ -48,14 +48,18 @@ const ContextMenu = () => {
           <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
           <div className={styles.rowsContainer}>
             <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
-              <p className={styles.col}>{chapterData.translatedName.name}</p>
-              <p className={styles.col}>
+              <p className={classNames(styles.col, styles.alignStart)}>
+                {chapterData.translatedName.name}
+              </p>
+              <p className={classNames(styles.col, styles.alignEnd)}>
                 {t('juz')} {juzNumber} / {t('hizb')} {hizb}
               </p>
             </div>
             <div className={styles.row}>
-              <p className={classNames(styles.col, styles.bold)}>{chapterData.nameSimple}</p>
-              <p className={styles.col}>
+              <p className={classNames(styles.col, styles.bold, styles.alignStart)}>
+                {chapterData.nameSimple}
+              </p>
+              <p className={classNames(styles.col, styles.alignEnd)}>
                 {t('page')} {page}
               </p>
             </div>
