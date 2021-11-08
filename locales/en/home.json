@@ -17,5 +17,13 @@
         "feedback-cta": "Provide Feedback",
         "join-cta": "Join Discord Community",
         "title": "Welcome to the Pre-Release Beta of the new Quran.com!"
+    },
+    "prayerNames": {
+        "fajr": "Fajr",
+        "sunrise": "Sunrise",
+        "dhuhr": "Dhuhr",
+        "asr": "Asr",
+        "maghrib": "Maghrib",
+        "isha": "Isha"
     }
 }
