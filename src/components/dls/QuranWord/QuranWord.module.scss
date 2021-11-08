@@ -3,7 +3,7 @@
   cursor: pointer;
 }
 .moreSpace + .moreSpace {
-  margin-right: calc(0.5 * var(--spacing-xxsmall));
+  margin-right: var(--spacing-xxsmall);
 }
 
 .wbwContainer {

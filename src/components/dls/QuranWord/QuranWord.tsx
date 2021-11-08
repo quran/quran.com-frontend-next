@@ -12,6 +12,7 @@ import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
+  selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
@@ -19,7 +20,7 @@ import { areArraysEqual } from 'src/utils/array';
 import { QURANCDN_AUDIO_BASE_URL } from 'src/utils/audio';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { makeWordLocation } from 'src/utils/verse';
-import { QuranFont, WordByWordType } from 'types/QuranReader';
+import { QuranFont, ReadingPreference, WordByWordType } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -49,6 +50,7 @@ const QuranWord = ({
     selectWordByWordByWordPreferences,
     shallowEqual,
   );
+  const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
 
   // creating wordLocation instead of using `word.location` because
@@ -101,7 +103,7 @@ const QuranWord = ({
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,
-        [styles.moreSpace]: !isQCFFont(font),
+        [styles.moreSpace]: readingPreference === ReadingPreference.Translation,
       })}
     >
       <Wrapper
