@@ -6,6 +6,19 @@ export enum Direction {
   RTL = 'rtl',
 }
 
+export const Languages = {
+  174: {
+    font: 'urdu',
+    dir: Direction.RTL,
+  },
+  34: {
+    font: 'divehi',
+  },
+  89: {
+    font: 'kurdish',
+  },
+};
+
 /**
  * Check whether the current locale is RTL.
  *
@@ -22,3 +35,26 @@ export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(loc
  */
 export const getDir = (locale: string): Direction =>
   isRTLLocale(locale) ? Direction.RTL : Direction.LTR;
+
+/**
+ * Get direction of language by language id
+ *
+ * @param {number} languageId
+ * @returns {string}
+ */
+export const getLanguageDirectionById = (languageId: number): string => {
+  const mapping = Languages[languageId];
+
+  return mapping?.dir || Direction.LTR;
+};
+
+/**
+ * Get font face name of language by language id
+ *
+ * @param {number} languageId
+ * @returns {string}
+ */
+export const getLanguageFontById = (languageId: number): string => {
+  const mapping = Languages[languageId];
+  return mapping?.font;
+};

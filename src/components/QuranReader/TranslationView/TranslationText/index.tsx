@@ -8,6 +8,8 @@ import React, { MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import { getLanguageDirectionById, getLanguageFontById } from '../../../../utils/locale';
+
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
@@ -132,10 +134,9 @@ const TranslationText: React.FC<Props> = ({
     }
   };
   const hideFootnote = () => setShowFootnote(false);
-  const isDivehi = languageId === 34;
-  const isUrdu = languageId === 174;
-  const isKurdish = languageId === 89;
-  const isRtl = isDivehi || isUrdu || isKurdish;
+  const direction = getLanguageDirectionById(languageId);
+  const langFont = getLanguageFontById(languageId);
+
   const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
     <>
@@ -144,32 +145,21 @@ const TranslationText: React.FC<Props> = ({
         className={classNames(
           styles.text,
           styles[`translation-font-size-${translationFontScale}`],
-          {
-            [styles.ltr]: !isRtl,
-            [styles.rtl]: isRtl,
-            [styles.urdu]: isUrdu,
-            [styles.kurdish]: isKurdish,
-            [styles.divehi]: isDivehi,
-          },
+          styles[direction],
+          styles[langFont],
         )}
         dangerouslySetInnerHTML={{ __html: text }}
       />
       {shouldShowFootnote && (
         <FootnoteText
-          isStaticContent={(footnote && footnote.isStaticContent) || false}
-          text={isLoading ? null : footnote.text}
+          footnote={footnote}
           isLoading={isLoading}
           onCloseClicked={isLoading ? hideFootnote : resetFootnote}
           onTextClicked={(event) => onTextClicked(event, true)}
         />
       )}
-      {subFootnote && <FootnoteText text={subFootnote.text} onCloseClicked={resetSubFootnote} />}
-      <p
-        className={classNames(styles.translationName, {
-          [styles.rtl]: isRtl,
-          [styles.ltr]: !isRtl,
-        })}
-      >
+      {subFootnote && <FootnoteText footnote={subFootnote} onCloseClicked={resetSubFootnote} />}
+      <p className={classNames(styles.translationName, styles[direction], styles[langFont])}>
         — {resourceName}
       </p>
     </>
