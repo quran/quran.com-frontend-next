@@ -26,6 +26,7 @@ const LANGUAGE_NAMES = {
   tr: 'Türkçe',
   ur: 'اردو',
   zh: '简体中文',
+  ms: 'bahasa Melayu',
 };
 const options = locales.map((lng) => ({
   label: LANGUAGE_NAMES[lng],
