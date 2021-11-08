@@ -15,7 +15,7 @@ type NavigationDrawerItemProps = {
   isExternalLink?: boolean;
   href?: string;
   isStale?: boolean;
-  shouldAutoFlipIcon?: boolean;
+  shouldFlipOnRTL?: boolean;
 };
 
 const NavigationDrawerItem = ({
@@ -33,7 +33,7 @@ const NavigationDrawerItem = ({
             icon={icon}
             size={IconSize.Xsmall}
             color={IconColor.secondary}
-            shouldAutoFlipIcon={false}
+            shouldFlipOnRTL={false}
           />
           <span className={styles.titleContainer}>{title}</span>
         </div>

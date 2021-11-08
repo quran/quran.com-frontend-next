@@ -49,7 +49,7 @@ export type ButtonProps = {
   tooltip?: string;
   className?: string;
   hasSidePadding?: boolean;
-  shouldAutoFlipIcon?: boolean;
+  shouldFlipOnRTL?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -67,7 +67,7 @@ const Button: React.FC<ButtonProps> = ({
   tooltip,
   className,
   hasSidePadding = true,
-  shouldAutoFlipIcon = true,
+  shouldFlipOnRTL = true,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -106,23 +106,15 @@ const Button: React.FC<ButtonProps> = ({
   if (href && !disabled)
     return (
       <Link href={href}>
-        <a dir={direction} className={classes} data-auto-flip-icon={shouldAutoFlipIcon}>
+        <a dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
           {prefixFinal && (
-            <span
-              dir={direction}
-              className={styles.prefix}
-              data-auto-flip-icon={shouldAutoFlipIcon}
-            >
+            <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
             </span>
           )}
           <span className={styles.content}>{children}</span>
           {suffix && (
-            <span
-              dir={direction}
-              className={styles.suffix}
-              data-auto-flip-icon={shouldAutoFlipIcon}
-            >
+            <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldFlipOnRTL}>
               {suffix}
             </span>
           )}
@@ -141,16 +133,16 @@ const Button: React.FC<ButtonProps> = ({
         className={classes}
         disabled={disabled}
         onClick={onClick}
-        data-auto-flip-icon={shouldAutoFlipIcon}
+        data-auto-flip-icon={shouldFlipOnRTL}
       >
         {prefixFinal && (
-          <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldAutoFlipIcon}>
+          <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
             {prefixFinal}
           </span>
         )}
         <span className={styles.content}>{children}</span>
         {suffix && (
-          <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldAutoFlipIcon}>
+          <span dir={direction} className={styles.suffix} data-auto-flip-icon={shouldFlipOnRTL}>
             {suffix}
           </span>
         )}

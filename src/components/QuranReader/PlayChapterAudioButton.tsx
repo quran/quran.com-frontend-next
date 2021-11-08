@@ -26,7 +26,7 @@ const PlayChapterAudioButton = (props: Props) => {
         prefix={<PlayIcon />}
         onClick={play}
         hasSidePadding={false}
-        shouldAutoFlipIcon={false}
+        shouldFlipOnRTL={false}
       >
         {t('audio.play')}
       </Button>

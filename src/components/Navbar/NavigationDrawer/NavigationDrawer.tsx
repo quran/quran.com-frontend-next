@@ -34,7 +34,7 @@ const NavigationDrawer = () => {
                 <Button
                   shape={ButtonShape.Circle}
                   variant={ButtonVariant.Ghost}
-                  shouldAutoFlipIcon={false}
+                  shouldFlipOnRTL={false}
                 >
                   <IconQ />
                 </Button>

@@ -79,7 +79,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
       tooltip={t('audio.player.play')}
       type={ButtonType.Secondary}
       onClick={onPlayClicked}
-      shouldAutoFlipIcon={false}
+      shouldFlipOnRTL={false}
     >
       <PlayIcon />
     </Button>
