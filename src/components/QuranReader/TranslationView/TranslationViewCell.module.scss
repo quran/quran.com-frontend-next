@@ -23,9 +23,9 @@
     justify-content: space-between;
     flex-direction: row-reverse;
 
-    & > .verseTranslationsContainer {
-      margin-top: calc(1.2 * var(--spacing-medium));
-    }
+    // & > .verseTranslationsContainer {
+    //   margin-block-start: calc(1.2 * var(--spacing-medium));
+    // }
 
     & > .verseTranslationsContainer,
     & > .arabicVerseContainer {

@@ -85,7 +85,14 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
           <div className={styles.arabicVerseContainer}>
             <VerseText words={getVerseWords(verse)} />
           </div>
-          <div className={styles.verseTranslationsContainer}>
+          <div
+            className={styles.verseTranslationsContainer}
+            style={{
+              marginBlockStart: `calc(${
+                quranReaderStyles.quranTextFontScale / 3
+              } * var(--spacing-medium))`,
+            }}
+          >
             {verse.translations?.map((translation: Translation) => (
               <div key={translation.id} className={styles.verseTranslationContainer}>
                 <TranslationText
