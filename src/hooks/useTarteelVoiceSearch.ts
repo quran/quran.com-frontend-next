@@ -14,7 +14,7 @@ import SearchResult from 'types/Tarteel/SearchResult';
 import VoiceError from 'types/Tarteel/VoiceError';
 
 const AUDIO_CONFIG = {
-  sampleRate: 44100,
+  sampleRate: 16000,
   fileFormat: 'WAV',
   channels: 1,
 };
@@ -32,7 +32,8 @@ const START_STREAM_DATA = {
 const AUDIO_CONSTRAINTS = {
   sampleRate: AUDIO_CONFIG.sampleRate,
   channelCount: AUDIO_CONFIG.channels,
-};
+  sampleSize: 4096,
+} as MediaTrackConstraints;
 
 const USER_MEDIA_NOT_SUPPORTED_ERROR = 'USER_MEDIA_NOT_SUPPORTED';
 const ANALYSER_SMOOTHING_CONSTANT = 0.8;
@@ -165,7 +166,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     setPartialTranscript(null);
     setSearchResult(null);
     setIsWaitingForPermission(true);
-    const audioContext = new window.AudioContext();
+    const audioContext = new window.AudioContext({ sampleRate: AUDIO_CONFIG.sampleRate });
     let micSourceNode = null as MediaStreamAudioSourceNode;
     let micWorkletNode = null as AudioWorkletNode;
     let webSocket = null as WebSocket;
