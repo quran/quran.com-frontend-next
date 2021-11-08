@@ -2,21 +2,46 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
+enum CalculationMethod {
+  MuslimWorldLeague = 'MuslimWorldLeague',
+  Egyptian = 'Egyptian',
+  Karachi = 'Karachi',
+  UmmAlQura = 'UmmAlQura',
+  Dubai = 'Dubai',
+  Qatar = 'Qatark',
+  Kuwait = 'Kuwait',
+  MoonsightingCommittee = 'MoonsightingCommittee',
+  Singapore = 'Singapore',
+  Turkey = 'Turkey',
+  Tehran = 'Tehran',
+  NorthAmerica = 'NorthAmerica',
+}
+
+enum Madhab {
+  Shafi = 'Shafi',
+  Hanafi = 'Hanafi',
+}
+
 export const initialState = {
-  isVisible: true,
+  calculationMethod: CalculationMethod.MuslimWorldLeague,
+  madhab: Madhab.Shafi,
 };
 
 export const prayerTimes = createSlice({
   name: 'prayerTimes',
   initialState,
   reducers: {
-    setCalculationMethod: (state, action: PayloadAction<boolean>) => ({
+    setCalculationMethod: (state, action: PayloadAction<CalculationMethod>) => ({
       ...state,
-      isVisible: action.payload,
+      calculationMethod: action.payload,
+    }),
+    setMadhab: (state, action: PayloadAction<Madhab>) => ({
+      ...state,
+      madhab: action.payload,
     }),
   },
 });
 
 export const selectWelcomeMessage = (state: RootState) => state.welcomeMessage;
-export const { setCalculationMethod: setIsVisible } = prayerTimes.actions;
+export const { setCalculationMethod, setMadhab } = prayerTimes.actions;
 export default prayerTimes.reducer;
