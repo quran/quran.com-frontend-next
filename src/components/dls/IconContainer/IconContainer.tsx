@@ -22,11 +22,13 @@ type IconContainerProps = {
   icon: React.ReactNode;
   size?: IconSize;
   color?: IconColor;
+  shouldAutoFlipIcon?: boolean;
 };
 const IconContainer = ({
   icon,
   size = IconSize.Medium,
   color = IconColor.default,
+  shouldAutoFlipIcon = true,
 }: IconContainerProps) => {
   const dir = useDirection();
   return (
@@ -39,6 +41,7 @@ const IconContainer = ({
         [styles.mediumIcon]: size === IconSize.Medium,
         [styles.largeIcon]: size === IconSize.Large,
       })}
+      data-auto-flip-icon={shouldAutoFlipIcon}
       dir={dir}
     >
       {icon}

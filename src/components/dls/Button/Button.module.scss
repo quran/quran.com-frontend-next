@@ -22,7 +22,7 @@
 }
 .withIcon {
   justify-content: center;
-  &[dir="rtl"] {
+  &[dir="rtl"][data-auto-flip-icon="true"] {
     transform: scaleX(-1);
   }
 }
@@ -255,14 +255,14 @@
 .suffix {
   display: flex;
   margin-inline-start: calc(0.5 * var(--spacing-medium));
-  &[dir="rtl"] svg {
+  &[dir="rtl"][data-auto-flip-icon="true"] svg {
     transform: scaleX(-1);
   }
 }
 .prefix {
   display: flex;
   margin-inline-end: calc(0.5 * var(--spacing-medium));
-  &[dir="rtl"] svg {
+  &[dir="rtl"][data-auto-flip-icon="true"] svg {
     transform: scaleX(-1);
   }
 }

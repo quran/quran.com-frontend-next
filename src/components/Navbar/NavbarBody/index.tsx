@@ -57,6 +57,7 @@ const NavbarBody: React.FC = () => {
             variant={ButtonVariant.Ghost}
             className={classNames(styles.logoWrapper, styles.QIcon)}
             size={ButtonSize.Large}
+            shouldAutoFlipIcon={false}
           >
             <IconQ />
           </Button>
@@ -82,6 +83,7 @@ const NavbarBody: React.FC = () => {
               variant={ButtonVariant.Ghost}
               onClick={openSearchDrawer}
               shape={ButtonShape.Circle}
+              shouldAutoFlipIcon={false}
             >
               <IconSearch />
             </Button>

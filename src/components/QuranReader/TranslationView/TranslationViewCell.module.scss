@@ -22,6 +22,7 @@
 .actionContainer {
   display: flex;
   justify-content: space-between;
+  direction: ltr;
 }
 .arabicVerseContainer {
   padding-block-end: var(--spacing-medium);
