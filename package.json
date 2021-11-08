@@ -117,6 +117,7 @@
     "react-docgen-typescript-loader": "^3.7.2",
     "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
+    "storybook-addon-next-router": "^3.0.8",
     "stylelint": "^13.13.1",
     "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.21.0",
