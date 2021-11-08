@@ -68,7 +68,7 @@
 
 .chapter {
   font-size: var(--font-size-large);
-  width: 10%;
+  width: 5%;
 }
 
 .bold {
@@ -76,7 +76,10 @@
 }
 
 .rowsContainer {
-  width: 80%;
+  width: 85%;
+  @include breakpoints.tablet {
+    width: 90%;
+  }
   margin-inline-end: 5%;
 }
 
