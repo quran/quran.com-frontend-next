@@ -89,7 +89,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
             className={styles.verseTranslationsContainer}
             style={{
               marginBlockStart: `calc(${
-                quranReaderStyles.quranTextFontScale / 3
+                quranReaderStyles.quranTextFontScale / 2.5
               } * var(--spacing-medium))`,
             }}
           >
