@@ -16,7 +16,8 @@ module.exports = {
     },
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-a11y"
+    "@storybook/addon-a11y",
+    "storybook-addon-next-router",
   ],
   typescript: {
     check: false,

@@ -1,4 +1,4 @@
-.container[dir="rtl"] {
+.container[dir="rtl"][data-auto-flip-icon="true"] {
   > svg {
     transform: scaleX(-1);
   }

@@ -77,6 +77,7 @@ const PlayPauseButton = () => {
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(onClickPlay)}
+        shouldFlipOnRTL={false}
       >
         <PlayIcon />
       </Button>

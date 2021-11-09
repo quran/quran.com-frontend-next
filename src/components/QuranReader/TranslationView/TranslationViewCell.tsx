@@ -77,20 +77,33 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
           </div>
         </div>
 
-        <div className={styles.contentContainer}>
+        <div
+          className={classNames(styles.contentContainer, {
+            [styles.splitView]: verse.translations?.length === 1,
+          })}
+        >
           <div className={styles.arabicVerseContainer}>
             <VerseText words={getVerseWords(verse)} />
           </div>
-          {verse.translations?.map((translation: Translation) => (
-            <div key={translation.id} className={styles.verseTranslationContainer}>
-              <TranslationText
-                translationFontScale={quranReaderStyles.translationFontScale}
-                text={translation.text}
-                languageId={translation.languageId}
-                resourceName={translation.resourceName}
-              />
-            </div>
-          ))}
+          <div
+            className={styles.verseTranslationsContainer}
+            style={{
+              marginBlockStart: `calc(${
+                quranReaderStyles.quranTextFontScale / 2.5
+              } * var(--spacing-medium))`,
+            }}
+          >
+            {verse.translations?.map((translation: Translation) => (
+              <div key={translation.id} className={styles.verseTranslationContainer}>
+                <TranslationText
+                  translationFontScale={quranReaderStyles.translationFontScale}
+                  text={translation.text}
+                  languageId={translation.languageId}
+                  resourceName={translation.resourceName}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Separator />
