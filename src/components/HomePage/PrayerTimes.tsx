@@ -14,6 +14,7 @@ const PrayerTimes = () => {
   const calculationMethod = useSelector(selectCalculationMethod);
   const madhab = useSelector(selectMadhab);
   const { data } = useSWR<Data>(makePrayerTimesUrl({ calculationMethod, madhab }), fetcher);
+  const hijriDate = useHijriDateFormatter(data?.hijriDateData);
 
   if (!data) return null;
 
@@ -22,13 +23,13 @@ const PrayerTimes = () => {
 
   return (
     <div className={styles.container}>
-      <div>{formatHijriDate(data.hijriDate)}</div>
+      <div>{hijriDate}</div>
       <div className={styles.prayerTimesContainer}>
         <div>{formatLocation(data.geo)}</div>
         {nextPrayerTime && (
           <div>
             <span className={styles.prayerName}>
-              {t(`prayerNames.${nextPrayerTime.prayerName}`)}
+              {t(`prayer-names.${nextPrayerTime.prayerName}`)}
             </span>{' '}
             <span>
               {formatTime(nextPrayerTime.time.getHours())}:
@@ -58,14 +59,33 @@ type Geo = {
   longitude?: string;
 };
 
+type HijriDateData = {
+  dayName: string;
+  month: number;
+  date: number;
+  year: number;
+};
+
 type Data = {
   geo: Geo;
   prayerTimes: PrayerTimes;
   hijriDate: string;
+  hijriDateData: HijriDateData;
 };
 
-const formatHijriDate = (hijriDate: string) => {
-  return hijriDate.split(',').slice(1).join(',').trim();
+const useHijriDateFormatter = (hijriDate?: HijriDateData) => {
+  const { t } = useTranslation('home');
+  if (!hijriDate) return null;
+
+  const month = t(`hijri-date.month.${hijriDate.month}`);
+
+  // Different language have different format to show the date, so we need to "format" it.
+  // For example in Indonesia we say "12 Muharram 1443" instead of "Muharram 12, 1443"
+  return t('hijri-date.format', {
+    date: hijriDate.date,
+    month,
+    year: hijriDate.year,
+  });
 };
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
