@@ -12,7 +12,6 @@ import styles from './CommandBarBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import useDebounce from 'src/hooks/useDebounce';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { makeNavigationSearchUrl } from 'src/utils/apiPaths';
@@ -43,15 +42,11 @@ const NAVIGATE_TO = [
   },
 ];
 
-const DEBOUNCING_PERIOD_MS = 100;
-
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
-  // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
-  const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   /**
    * Handle when the search query is changed.
    *
@@ -157,7 +152,7 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={debouncedSearchQuery ? makeNavigationSearchUrl(debouncedSearchQuery) : null}
+            queryKey={searchQuery ? makeNavigationSearchUrl(searchQuery) : null}
             render={dataFetcherRender}
           />
         )}
