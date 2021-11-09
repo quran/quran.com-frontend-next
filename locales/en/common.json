@@ -114,6 +114,11 @@
         "reading": "Reading",
         "translation": "Translation"
     },
+    "word-click": {
+        "title": "Word Click",
+        "play-audio": "Play Audio",
+        "no-audio": "No Audio"
+    },
     "reciter": "Reciter",
     "remove": "Remove",
     "retry": "Retry",
