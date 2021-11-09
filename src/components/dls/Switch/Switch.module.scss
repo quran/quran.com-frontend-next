@@ -1,11 +1,16 @@
 $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 
+$container-padding: calc(0.5 * var(--spacing-xxsmall));
+
 .container {
   position: relative;
   display: grid;
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-default);
-  padding: calc(0.5 * var(--spacing-xxsmall));
+  padding-block-start: $container-padding;
+  padding-block-end: $container-padding;
+  padding-inline-start: $container-padding;
+  padding-inline-end: $container-padding;
   grid-template-columns: repeat(
     auto-fit,
     minmax(0, 1fr)
@@ -26,6 +31,7 @@ $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   opacity: var(--opacity-50);
 }
 
+$background-container: calc(0.5 * var(--spacing-xxsmall));
 .selectedItemBackgroundContainer {
   transition: transform var(--transition-regular);
   // the `width` and the `transform` is controlled dynamically in React component. Check Switch.tsx
@@ -33,7 +39,11 @@ $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   position: absolute;
   height: 100%;
   z-index: 0;
-  padding: calc(0.5 * var(--spacing-xxsmall));
+  padding-block-start: $background-container;
+  padding-block-end: $background-container;
+  padding-inline-start: $background-container;
+  padding-inline-end: $background-container;
+
   box-sizing: border-box;
 
   .selectedItemBackground {
@@ -47,15 +57,24 @@ $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 
 // sizing
 .itemNormal {
-  padding: var(--spacing-xsmall) var(--spacing-small);
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
   font-size: var(--font-size-normal);
 }
 
 .itemLarge {
-  padding: var(--spacing-small) var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }
 
 .itemSmall {
   font-size: var(--font-size-small);
-  padding: var(--spacing-xxsmall) var(--spacing-small);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }

@@ -7,7 +7,10 @@ $containerMaxWidth: calc(5 * var(--spacing-mega));
   flex-direction: column;
   max-width: $containerMaxWidth;
   border: 1px solid var(--color-borders-hairline);
-  padding: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   border-radius: var(--border-radius-default);
   cursor: pointer;
   &:hover {
@@ -40,13 +43,13 @@ $containerMaxWidth: calc(5 * var(--spacing-mega));
 .translatedSurahName {
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .surahName {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .description {

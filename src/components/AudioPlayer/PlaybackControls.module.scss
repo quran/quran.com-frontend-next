@@ -7,8 +7,8 @@
 }
 
 .actionItem + .actionItem {
-  margin-left: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
   @include breakpoints.desktop {
-    margin-left: var(--spacing-medium);
+    margin-inline-start: var(--spacing-medium);
   }
 }

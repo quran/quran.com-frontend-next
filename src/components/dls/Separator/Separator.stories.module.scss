@@ -1,10 +1,9 @@
 .horizontalSeparator {
-  margin-top: var(--spacing-medium);
-  margin-bottom: var(--spacing-medium);
+  margin-block: var(--spacing-medium);
 }
 
 .verticalSeparator {
-  margin-left: var(--spacing-medium);
-  margin-right: var(--spacing-medium);
+  margin-inline-start: var(--spacing-medium);
+  margin-inline-end: var(--spacing-medium);
   height: 100%;
 }

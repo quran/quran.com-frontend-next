@@ -1,12 +1,18 @@
 @use "src/styles/breakpoints";
 
 .pageContainer {
-  margin: 0 auto;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
   width: 90%;
 }
 
 .header {
-  margin: var(--spacing-medium) 0;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   text-align: center;
@@ -19,13 +25,19 @@
 .searchInputContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-pill);
-  padding: var(--spacing-xxsmall) var(--spacing-xsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   height: var(--spacing-large);
-  margin: var(--spacing-medium) 0;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }
 
 .rtlFlexDirection {
@@ -47,22 +59,25 @@
 
 .pageBody {
   width: 100%;
-  padding-top: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
 }
 
 .filtersHeader {
   font-weight: var(--font-weight-bold);
-  padding-top: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
   width: 100%;
-  text-align: left;
+  text-align: start;
 }
 
 .filtersContainer {
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
   background-color: var(--color-background-alternative-medium);
-  padding: var(--spacing-small);
-  margin-top: var(--spacing-small);
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
   @include breakpoints.tablet {
     display: flex;
     justify-content: space-between;

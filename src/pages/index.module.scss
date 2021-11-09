@@ -2,35 +2,32 @@
 @use "src/styles/utility";
 
 $list-max-width: 80rem;
-$homepage-image-height: 409px;
 
 .pageContainer {
-  padding: var(--spacing-small) 0;
-}
-
-.homepageImage {
-  border-radius: var(--border-radius-default);
-}
-.homepageImageContainer {
-  position: relative;
-  height: $homepage-image-height;
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }
 
 .flow > .flowItem + .flowItem {
-  margin-top: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
 }
 
 .flowItem {
   max-width: $list-max-width;
-  margin: 0 auto;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 
   @include breakpoints.tablet {
     width: 80%;
   }
 
   --flow-side-spacing: var(--spacing-small);
-  padding-left: var(--flow-side-spacing);
-  padding-right: var(--flow-side-spacing);
+  padding-inline-start: var(--flow-side-spacing);
+  padding-inline-end: var(--flow-side-spacing);
 
   /**
   * On mobile, a few components can't have padding at parent level.
@@ -42,8 +39,8 @@ $homepage-image-height: 409px;
   * For now we only want this to be implemented on mobile, so we make `--flow-side-padding: 0` on tablet and above
   **/
   &.fullWidth {
-    padding-right: 0;
-    padding-left: 0;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
 
     @include breakpoints.tablet {
       --flow-side-spacing: 0;

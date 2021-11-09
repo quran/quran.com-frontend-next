@@ -1,7 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState, RefObject } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -38,7 +37,6 @@ const SearchDrawer: React.FC = () => {
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
-  const { lang } = useTranslation();
   const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -61,7 +59,6 @@ const SearchDrawer: React.FC = () => {
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,
-        filterLanguages: lang,
         ...(selectedTranslations &&
           !!selectedTranslations.length && {
             filterTranslations: selectedTranslations.join(','),
@@ -84,7 +81,7 @@ const SearchDrawer: React.FC = () => {
       // reset the result
       setSearchResult(null);
     }
-  }, [lang, debouncedSearchQuery, selectedTranslations, dispatch]);
+  }, [debouncedSearchQuery, selectedTranslations, dispatch]);
 
   const resetQueryAndResults = () => {
     // reset the search query

@@ -101,6 +101,11 @@
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "powered-by": "Powered by",
+    "prayer-times": {
+        "title": "Prayer Times",
+        "madhab": "Madhab",
+        "calculation-method": "Calculation Method"
+    },
     "prev": "Previous",
     "privacy": "Privacy",
     "q-reflect": "QuranReflect",

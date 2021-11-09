@@ -1,3 +1,4 @@
+/* stylelint-disable csstools/use-logical */
 @use "src/styles/breakpoints";
 @use "src/components/dls/Modal/constants";
 
@@ -83,6 +84,7 @@
   box-shadow: var(--shadow-jumbo);
   position: fixed;
   bottom: 0%;
+  left: 0%;
   width: constants.$mobileWidth;
   &:focus {
     outline: none;

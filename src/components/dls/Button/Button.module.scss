@@ -14,11 +14,17 @@
   box-sizing: border-box;
 }
 .withText {
-  padding: 0 var(--spacing-small);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
   justify-content: center;
 }
 .withIcon {
   justify-content: center;
+  &[dir="rtl"][data-auto-flip-icon="true"] {
+    transform: scaleX(-1);
+  }
 }
 
 // base svg color
@@ -248,11 +254,17 @@
 // suffix and prefix container
 .suffix {
   display: flex;
-  margin-left: calc(0.5 * var(--spacing-medium));
+  margin-inline-start: calc(0.5 * var(--spacing-medium));
+  &[dir="rtl"][data-auto-flip-icon="true"] svg {
+    transform: scaleX(-1);
+  }
 }
 .prefix {
   display: flex;
-  margin-right: calc(0.5 * var(--spacing-medium));
+  margin-inline-end: calc(0.5 * var(--spacing-medium));
+  &[dir="rtl"][data-auto-flip-icon="true"] svg {
+    transform: scaleX(-1);
+  }
 }
 .content {
   display: flex;
@@ -292,6 +304,6 @@
 }
 
 .noSidePadding {
-  padding-left: 0;
-  padding-right: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }

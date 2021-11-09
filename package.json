@@ -17,7 +17,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "analyze": "ANALYZE_BUNDLE=true yarn build"
+    "analyze": "ANALYZE_BUNDLE=true yarn build",
+    "lokalise:pull": "node scripts/lokalise.js",
+    "lokalise:push": "node scripts/lokalise.js push"
   },
   "jest-runner-eslint": {
     "cliOptions": {
@@ -62,6 +64,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@lokalise/node-api": "^7.0.0",
     "@next/eslint-plugin-next": "^12.0.0",
     "@storybook/addon-a11y": "^6.3.12",
     "@storybook/addon-actions": "^6.3.12",
@@ -82,12 +85,14 @@
     "@types/react-redux": "^7.1.19",
     "@types/wicg-mediasession": "^1.1.3",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "adm-zip": "^0.5.9",
     "awesome-typescript-loader": "^5.2.1",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-inline-react-svg": "^1.1.2",
     "babel-plugin-polyfill-corejs2": "^0.2.2",
     "babel-plugin-polyfill-regenerator": "^0.2.2",
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-next": "^12.0.0",
@@ -112,9 +117,12 @@
     "react-docgen-typescript-loader": "^3.7.2",
     "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
+    "storybook-addon-next-router": "^3.0.8",
     "stylelint": "^13.13.1",
     "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.21.0",
+    "stylelint-use-logical": "^1.1.0",
+    "superagent": "^6.1.0",
     "typescript": "^4.4.4"
   },
   "husky": {

@@ -21,11 +21,17 @@
 }
 
 .separatorContainer {
-  margin: var(--spacing-xxsmall) 0;
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 .beta {
-  padding: var(--spacing-micro);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
   border-radius: var(--border-radius-default);
   background-color: var(--color-success-medium);
   color: var(--color-background-default);

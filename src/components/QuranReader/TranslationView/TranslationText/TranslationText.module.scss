@@ -4,14 +4,21 @@
 .text {
   letter-spacing: 0;
   line-height: normal;
-  padding-bottom: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
   @include footnote.footnote-styling;
 }
 
 @include utility.generate-font-sizes("translation");
 
+.ltr {
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: left;
+  direction: ltr;
+}
+
 .rtl {
   direction: rtl;
+  /* stylelint-disable-next-line csstools/use-logical */
   text-align: right;
 }
 

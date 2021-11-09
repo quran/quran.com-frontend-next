@@ -5,10 +5,16 @@
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
   background-color: var(--color-secondary-medium);
-  padding: var(--spacing-xsmall);
-  margin: var(--spacing-micro) 0;
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   width: 100%;
-  text-align: left;
+  text-align: start;
   &:hover {
     background-color: var(--color-background-alternative-deep);
   }

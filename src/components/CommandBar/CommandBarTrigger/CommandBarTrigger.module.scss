@@ -6,8 +6,8 @@ $width: calc(11 * var(--spacing-mega));
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: var(--spacing-medium);
-  padding-right: var(
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(
     --spacing-xxsmall
   ); // icon on the right side already has some padding
   color: var(--color-text-faded);

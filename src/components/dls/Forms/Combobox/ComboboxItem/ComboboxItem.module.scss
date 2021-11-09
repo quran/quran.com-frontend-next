@@ -8,7 +8,10 @@
 
 .itemContainer {
   color: var(--color-text-default);
-  padding: var(--spacing-xsmall) var(--spacing-small);
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }
 
 .enabledItem {
@@ -30,7 +33,7 @@
   pointer-events: none;
   display: flex;
   align-items: center;
-  padding-right: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
   > svg {
     width: var(--spacing-small);
     height: var(--spacing-small);
@@ -52,7 +55,10 @@
 .suffixContainer {
   background: var(--color-primary-medium);
   border-radius: var(--border-radius-pill);
-  padding: var(--spacing-micro);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
   color: var(--color-primary-deep);
   text-transform: uppercase;
   font-size: var(--font-size-small);

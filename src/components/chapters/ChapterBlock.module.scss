@@ -4,14 +4,14 @@
   border: 1px solid var(--color-background-alternative-deep);
   border-radius: var(--border-radius-default);
   min-height: calc(4 * var(--spacing-medium));
-  margin-bottom: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
   &:hover {
     background: var(--color-background-alternative-medium);
     box-shadow: var(--shadow-normal);
     border-color: var(--color-background-inverse);
   }
   @include breakpoints.tablet {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
@@ -27,7 +27,10 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
 }
 
 .leftContainer {
@@ -37,7 +40,10 @@
 
 .number {
   min-width: calc(2 * var(--spacing-large));
-  margin: 0;
+  margin-block-start: 0;
+  margin-inline-end: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
 }
 
 .detailsContainer {
@@ -57,7 +63,7 @@
 }
 
 .numberOfVerses {
-  text-align: right;
+  text-align: end;
   font-size: var(--font-size-small);
   color: var(--color-text-faded);
 }

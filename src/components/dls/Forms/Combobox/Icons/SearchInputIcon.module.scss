@@ -1,6 +1,6 @@
 .iconContainer {
   position: absolute;
-  top: 50%;
+  inset-block-start: 50%;
   transform: translateY(-50%);
   z-index: 1;
   display: inline-block;
@@ -18,5 +18,5 @@
 }
 
 .selectSearch {
-  left: var(--spacing-medium);
+  inset-inline-start: var(--spacing-medium);
 }

@@ -24,9 +24,9 @@
 }
 
 .chapterContainer + .chapterContainer {
-  margin-top: var(--spacing-small);
+  margin-block-start: var(--spacing-small);
   @include breakpoints.tablet {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }
 
@@ -43,14 +43,15 @@
 
 // tabs
 .tabsContainer {
-  padding-bottom: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
 }
 
 // sorter
 .sorter {
   display: flex;
-  margin-top: var(--spacing-xsmall);
-  justify-content: space-between;
+  margin-block-start: var(--spacing-xsmall);
+  justify-content: flex-end;
+  align-items: baseline;
   font-size: var(--font-size-small);
 }
 .sortByValue {
@@ -59,6 +60,7 @@
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   cursor: pointer;
+  margin-inline-start: var(--spacing-xxsmall);
   & > span {
     display: flex;
     align-items: center;
@@ -68,7 +70,8 @@
   }
   & > span > svg {
     width: var(--spacing-small);
-    margin-left: var(--spacing-xxsmall);
+    margin-inline-start: var(--spacing-xxsmall);
+    transition: transform var(--transition-regular);
   }
 }
 

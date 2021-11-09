@@ -21,9 +21,9 @@ const DeveloperUtility = (): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // only show the developer utilities if we're in development mode
-  if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
-    return <></>;
-  }
+  // if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
+  return <></>;
+  // }
 
   if (!isExpanded) {
     return (

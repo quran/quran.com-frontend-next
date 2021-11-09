@@ -108,7 +108,11 @@ const TranslationText: React.FC<Props> = ({
             resetFootnote();
           } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
             resetSubFootnote();
-            setFootnote({ id: footnoteText, text: PRE_DEFINED_FOOTNOTES[footnoteText] });
+            setFootnote({
+              id: footnoteText,
+              text: PRE_DEFINED_FOOTNOTES[footnoteText],
+              isStaticContent: true,
+            });
           }
         }
       } else {
@@ -141,6 +145,7 @@ const TranslationText: React.FC<Props> = ({
           styles.text,
           styles[`translation-font-size-${translationFontScale}`],
           {
+            [styles.ltr]: !isRtl,
             [styles.rtl]: isRtl,
             [styles.urdu]: isUrdu,
             [styles.kurdish]: isKurdish,
@@ -151,6 +156,7 @@ const TranslationText: React.FC<Props> = ({
       />
       {shouldShowFootnote && (
         <FootnoteText
+          isStaticContent={(footnote && footnote.isStaticContent) || false}
           text={isLoading ? null : footnote.text}
           isLoading={isLoading}
           onCloseClicked={isLoading ? hideFootnote : resetFootnote}
@@ -158,7 +164,12 @@ const TranslationText: React.FC<Props> = ({
         />
       )}
       {subFootnote && <FootnoteText text={subFootnote.text} onCloseClicked={resetSubFootnote} />}
-      <p className={classNames(styles.translationName, { [styles.rtl]: isRtl })}>
+      <p
+        className={classNames(styles.translationName, {
+          [styles.rtl]: isRtl,
+          [styles.ltr]: !isRtl,
+        })}
+      >
         — {resourceName}
       </p>
     </>

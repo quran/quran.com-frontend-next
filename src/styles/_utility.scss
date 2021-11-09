@@ -4,7 +4,10 @@
 
 @mixin center-horizontally {
   display: inline-block;
-  margin: auto;
+  margin-block-start: auto;
+  margin-inline-end: auto;
+  margin-block-end: auto;
+  margin-inline-start: auto;
 }
 
 @mixin center-vertically {

@@ -1,7 +1,13 @@
+import { RouterContext } from "next/dist/shared/lib/router-context";
+
 import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 import GlobalStyles from '../src/styles/global.scss';
+import I18nProvider from 'next-translate/I18nProvider';
+
+import commonEn from '../locales/en/common.json';
+import homeEn from '../locales/en/home.json';
 
 const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
@@ -18,7 +24,9 @@ const themeDecorator = (Story, context) => {
            height: '100vh',
            padding: '1rem',
           }}>
-          <Story />
+          <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
+            <Story />
+          </I18nProvider>
         </div>
       </div>
     </>
@@ -82,5 +90,8 @@ export const parameters = {
   layout: 'fullscreen',
   viewport: {
     viewports,
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 }

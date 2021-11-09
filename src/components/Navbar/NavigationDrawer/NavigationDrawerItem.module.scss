@@ -4,8 +4,8 @@
   @include utility.center-vertically;
 
   min-height: calc(var(--spacing-mega) + var(--spacing-small));
-  padding-left: var(--spacing-micro);
-  padding-right: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
   border-bottom: 1px var(--color-borders-hairline) solid;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .titleContainer {
-  margin-left: var(--spacing-medium);
+  margin-inline-start: var(--spacing-medium);
   font-size: var(--font-size-normal);
   vertical-align: text-top;
 }

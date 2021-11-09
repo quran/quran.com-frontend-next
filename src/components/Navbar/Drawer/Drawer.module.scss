@@ -6,8 +6,7 @@
   position: fixed;
   height: 100vh;
   width: 100%;
-  top: 0;
-  bottom: 0;
+  inset-block: 0;
   z-index: var(--z-index-header);
   transition: var(--transition-regular);
   transition-timing-function: ease-in;
@@ -18,15 +17,15 @@
     width: constants.$side-menu-desktop-width;
   }
   &.left {
-    left: -100%;
+    inset-inline-start: -100%;
     @include breakpoints.tablet {
-      left: calc(-1 * constants.$side-menu-desktop-width);
+      inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
   &.right {
-    right: -100%;
+    inset-inline-end: -100%;
     @include breakpoints.tablet {
-      right: calc(-1 * constants.$side-menu-desktop-width);
+      inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
 }
@@ -35,10 +34,10 @@
   box-shadow: var(--shadow-normal);
   transition-timing-function: ease-out;
   &.left {
-    left: 0;
+    inset-inline-start: 0;
   }
   &.right {
-    right: 0;
+    inset-inline-end: 0;
   }
 }
 
@@ -57,18 +56,21 @@
 }
 
 .bodyContainer {
-  margin-top: constants.$navbar-height;
-  padding-top: var(--spacing-small);
-  padding-left: var(--spacing-small);
-  padding-right: var(--spacing-small);
+  margin-block-start: constants.$navbar-height;
+  padding-block-start: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }
 
 .bodyWithBottomPadding {
-  padding-bottom: calc(4 * var(--spacing-large));
+  padding-block-end: calc(4 * var(--spacing-large));
 }
 
 .navigationBodyContainer {
-  padding: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 }
 
 .header {
@@ -98,7 +100,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 var(--spacing-xsmall);
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: var(--spacing-xsmall);
+  margin-inline-end: var(--spacing-xsmall);
 }
 
 .hiddenButtonHeader {

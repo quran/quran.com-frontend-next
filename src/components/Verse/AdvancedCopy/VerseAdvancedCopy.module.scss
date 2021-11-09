@@ -6,20 +6,22 @@
 }
 
 .customMessage {
-  padding: var(--spacing-xxsmall);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
   border: 1px solid var(--color-borders-hairline);
-  border-radius: var(var(--border-radius-default));
+  border-radius: var(--border-radius-default);
+  margin-block-start: var(--spacing-medium);
 }
 
 .label {
-  margin-top: var(--spacing-xsmall);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block: var(--spacing-xsmall);
 }
 
 // clone of checkbox properties
 .emptyCheckbox {
   min-height: var(--spacing-medium);
   border: 1px solid transparent;
-  margin-top: var(--spacing-micro);
-  margin-bottom: var(--spacing-micro);
+  margin-block: var(--spacing-micro);
 }

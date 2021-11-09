@@ -1,0 +1,9 @@
+$homepage-image-height: 409px;
+
+.homepageImage {
+  border-radius: var(--border-radius-default);
+}
+.homepageImageContainer {
+  position: relative;
+  height: $homepage-image-height;
+}

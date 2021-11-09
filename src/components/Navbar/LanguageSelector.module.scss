@@ -7,10 +7,10 @@ $select-width-mobile: calc(7 * var(--spacing-small));
 .container {
   @include utility.center-vertically;
 
-  margin-left: var(--spacing-xxsmall);
+  margin-inline-start: var(--spacing-xxsmall);
 
   @include breakpoints.tablet {
-    margin-left: var(--spacing-medium);
+    margin-inline-start: var(--spacing-medium);
   }
 }
 

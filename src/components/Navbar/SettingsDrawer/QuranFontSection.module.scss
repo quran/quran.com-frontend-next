@@ -1,9 +1,11 @@
 @use "src/styles/breakpoints";
 
 .verseSampleContainer {
-  margin-top: var(--spacing-medium);
-  margin-bottom: var(--spacing-medium);
+  margin-block: var(--spacing-medium);
   border-radius: var(--border-radius-default);
-  padding: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   background-color: var(--color-background-alternative-medium);
 }

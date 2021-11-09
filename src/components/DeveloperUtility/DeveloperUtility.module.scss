@@ -3,8 +3,8 @@
   border: 1px solid rgba(0, 0, 0, 0.13);
   color: black;
   position: fixed;
-  top: calc(var(--spacing-mega) + var(--spacing-mega));
-  right: calc(var(--spacing-mega) + var(--spacing-medium));
+  inset-block-start: calc(var(--spacing-mega) + var(--spacing-mega));
+  inset-inline-end: calc(var(--spacing-mega) + var(--spacing-medium));
   height: calc(2 * var(--spacing-mega));
   width: calc(2 * var(--spacing-mega));
 
@@ -20,7 +20,10 @@
   cursor: unset;
   height: auto;
   width: auto;
-  padding: var(--spacing-xsmall);
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
   border-radius: var(--spacing-small);
   display: flex;
   flex-direction: column;
@@ -30,7 +33,7 @@
 
 .separator {
   width: 100%;
-  margin-bottom: var(--spacing-xxxsmall);
+  margin-block-end: var(--spacing-xxxsmall);
 }
 
 .closeButton {
@@ -38,7 +41,10 @@
   border: none;
   border-radius: var(--spacing-xsmall);
   color: white;
-  padding: var(--spacing-micro) var(--spacing-small);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
   box-shadow: var(--shadow-normal);
   color: var(--color-text-inverse);
 }

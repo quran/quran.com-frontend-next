@@ -8,26 +8,43 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--spacing-medium) 0;
-  padding-bottom: 0;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-block-end: 0;
 }
 .contentContainer {
   flex: 1;
-  padding-top: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
   position: relative;
 }
+
+.splitView {
+  @include breakpoints.tablet {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    & > .verseTranslationsContainer,
+    & > .arabicVerseContainer {
+      flex: 1;
+    }
+  }
+}
+
 .actionContainer {
   display: flex;
   justify-content: space-between;
+  direction: ltr;
 }
 .arabicVerseContainer {
-  padding-bottom: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
 }
 .verseTranslationContainer {
-  padding-bottom: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
 }
 .translationContainer {
-  padding-bottom: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
 }
 
 .actionContainerLeft,
@@ -44,5 +61,5 @@
 
 .actionContainerLeft > .actionItem + .actionItem,
 .actionContainerRight > .actionItem + .actionItem {
-  margin-left: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xsmall);
 }
