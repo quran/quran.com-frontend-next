@@ -11,6 +11,7 @@ const URL = 'https://quran-prayer-times-api-abdellatif-io-qurancom.vercel.app/ap
 const PrayerTimes = () => {
   const { t } = useTranslation('home');
   const { data } = useSWR<Data>(URL, (url) => fetcher(url));
+  const hijriDate = useHijriDateFormatter(data?.hijriDateData);
 
   if (!data) return null;
 
@@ -19,13 +20,13 @@ const PrayerTimes = () => {
 
   return (
     <div className={styles.container}>
-      <div>{formatHijriDate(data.hijriDate)}</div>
+      <div>{hijriDate}</div>
       <div className={styles.prayerTimesContainer}>
         <div>{formatLocation(data.geo)}</div>
         {nextPrayerTime && (
           <div>
             <span className={styles.prayerName}>
-              {t(`prayerNames.${nextPrayerTime.prayerName}`)}
+              {t(`prayer-names.${nextPrayerTime.prayerName}`)}
             </span>{' '}
             <span>
               {formatTime(nextPrayerTime.time.getHours())}:
@@ -55,14 +56,28 @@ type Geo = {
   longitude?: string;
 };
 
+type HijriDateData = {
+  dayName: string;
+  month: number;
+  date: number;
+  year: number;
+};
+
 type Data = {
   geo: Geo;
   prayerTimes: PrayerTimes;
   hijriDate: string;
+  hijriDateData: HijriDateData;
 };
 
-const formatHijriDate = (hijriDate: string) => {
-  return hijriDate.split(',').slice(1).join(',').trim();
+const useHijriDateFormatter = (hijriDate?: HijriDateData) => {
+  const { t } = useTranslation('home');
+  if (!hijriDate) return null;
+
+  const month = t(`hijri-date.month.${hijriDate.month}`);
+
+  // eslint-disable-next-line i18next/no-literal-string
+  return `${month} ${hijriDate.date}, ${hijriDate.year} AH`;
 };
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
