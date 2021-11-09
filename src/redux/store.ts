@@ -18,6 +18,7 @@ import audioPlayerState from './slices/AudioPlayer/state';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import navbar from './slices/navbar';
+import prayerTimes from './slices/prayerTimes';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import highlightedLocation from './slices/QuranReader/highlightedLocation';
@@ -69,6 +70,7 @@ export const rootReducer = combineReducers({
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
   voiceSearch,
+  prayerTimes,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,4 +1,5 @@
 import capitalize from 'lodash/capitalize';
+import startCase from 'lodash/startCase';
 
 import { RadioItem } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { SelectOption } from 'src/components/dls/Forms/Select';
@@ -13,7 +14,7 @@ import TafsirInfo from 'types/TafsirInfo';
  */
 export const generateSelectOptions = (options: string[]): SelectOption[] =>
   options.map((option) => ({
-    label: capitalize(option),
+    label: startCase(option),
     value: option,
   }));
 
@@ -25,7 +26,7 @@ export const generateSelectOptions = (options: string[]): SelectOption[] =>
  */
 export const generateRadioItems = (items: string[]): RadioItem[] =>
   items.map((item) => ({
-    label: capitalize(item),
+    label: startCase(item),
     id: item,
     value: item,
   }));

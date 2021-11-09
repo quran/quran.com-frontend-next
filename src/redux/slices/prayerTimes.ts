@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
-enum CalculationMethod {
+export enum CalculationMethod {
   MuslimWorldLeague = 'MuslimWorldLeague',
   Egyptian = 'Egyptian',
   Karachi = 'Karachi',
@@ -17,7 +17,7 @@ enum CalculationMethod {
   NorthAmerica = 'NorthAmerica',
 }
 
-enum Madhab {
+export enum Madhab {
   Shafi = 'Shafi',
   Hanafi = 'Hanafi',
 }
@@ -42,6 +42,7 @@ export const prayerTimes = createSlice({
   },
 });
 
-export const selectWelcomeMessage = (state: RootState) => state.welcomeMessage;
+export const selectCalculationMethod = (state: RootState) => state.prayerTimes.calculationMethod;
+export const selectMadhab = (state: RootState) => state.prayerTimes.madhab;
 export const { setCalculationMethod, setMadhab } = prayerTimes.actions;
 export default prayerTimes.reducer;

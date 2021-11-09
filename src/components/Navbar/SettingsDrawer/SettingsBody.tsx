@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AudioSection from './AudioSection';
+import PrayerTimesSection from './PrayerTimesSection';
 import QuranFontSection from './QuranFontSection';
 import ReadingExperienceSection from './ReadingExperienceSection';
 import ResetButton from './ResetButton';
@@ -16,6 +17,7 @@ const SettingsBody = () => (
     <TranslationSection />
     <TafsirSection />
     <AudioSection />
+    <PrayerTimesSection />
     <ResetButton />
   </>
 );
