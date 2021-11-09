@@ -27,7 +27,7 @@ export const initialState = {
   madhab: Madhab.Shafi,
 };
 
-export const prayerTimes = createSlice({
+const prayerTimes = createSlice({
   name: 'prayerTimes',
   initialState,
   reducers: {

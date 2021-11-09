@@ -1,3 +1,4 @@
+import startCase from 'lodash/startCase';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,20 +15,9 @@ import {
 } from 'src/redux/slices/prayerTimes';
 import { generateSelectOptions } from 'src/utils/input';
 
-const calculationMethodOptions = generateSelectOptions([
-  CalculationMethod.MuslimWorldLeague,
-  CalculationMethod.Egyptian,
-  CalculationMethod.Karachi,
-  CalculationMethod.UmmAlQura,
-  CalculationMethod.Dubai,
-  CalculationMethod.Qatar,
-  CalculationMethod.Kuwait,
-  CalculationMethod.MoonsightingCommittee,
-  CalculationMethod.Singapore,
-  CalculationMethod.Turkey,
-  CalculationMethod.Tehran,
-  CalculationMethod.NorthAmerica,
-]);
+const calculationMethodOptions = generateSelectOptions(
+  Object.values(CalculationMethod).map(startCase),
+);
 
 const madhabOptions = generateSelectOptions([Madhab.Hanafi, Madhab.Shafi]);
 
