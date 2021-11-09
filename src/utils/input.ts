@@ -13,7 +13,7 @@ import TafsirInfo from 'types/TafsirInfo';
  */
 export const generateSelectOptions = (options: string[]): SelectOption[] =>
   options.map((option) => ({
-    label: capitalize(option),
+    label: option,
     value: option,
   }));
 
@@ -25,7 +25,7 @@ export const generateSelectOptions = (options: string[]): SelectOption[] =>
  */
 export const generateRadioItems = (items: string[]): RadioItem[] =>
   items.map((item) => ({
-    label: capitalize(item),
+    label: item,
     id: item,
     value: item,
   }));
