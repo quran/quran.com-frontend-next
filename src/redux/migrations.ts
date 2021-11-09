@@ -1,5 +1,6 @@
 import { DEFAULT_RECITER } from './slices/AudioPlayer/defaultData';
 import { defaultRepeatProgress, defaultRepeatSettings } from './slices/AudioPlayer/state';
+import { initialState as readingPreferencesInitialState } from './slices/QuranReader/readingPreferences';
 import { DEFAULT_TAFSIRS } from './slices/QuranReader/tafsirs';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
@@ -79,6 +80,13 @@ export default {
     audioPlayerState: {
       ...state.audioPlayerState,
       reciter: DEFAULT_RECITER,
+    },
+  }),
+  14: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      onWordClick: readingPreferencesInitialState.onWordClick,
     },
   }),
 };

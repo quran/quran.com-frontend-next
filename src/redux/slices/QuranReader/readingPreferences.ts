@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
-import { ReadingPreference, WordByWordType } from 'types/QuranReader';
+import { ReadingPreference, WordByWordType, OnWordClick } from 'types/QuranReader';
 
 const DEFAULT_TRANSLATION = 20; // just a placeholder.
 const DEFAULT_TRANSLITERATION = 12; // just a placeholder.
@@ -14,15 +14,17 @@ export type ReadingPreferences = {
   showWordByWordTransliteration: boolean;
   selectedWordByWordTransliteration: number;
   showTooltipFor: WordByWordType[];
+  onWordClick: OnWordClick;
 };
 
-const initialState: ReadingPreferences = {
+export const initialState: ReadingPreferences = {
   readingPreference: ReadingPreference.Translation,
   showWordByWordTranslation: false,
   selectedWordByWordTranslation: DEFAULT_TRANSLATION,
   showWordByWordTransliteration: false,
   selectedWordByWordTransliteration: DEFAULT_TRANSLITERATION,
   showTooltipFor: [WordByWordType.Translation],
+  onWordClick: OnWordClick.PlayAudio,
 };
 
 export const readingPreferencesSlice = createSlice({
@@ -53,6 +55,10 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       showTooltipFor: action.payload,
     }),
+    setOnWordClick: (state, action: PayloadAction<OnWordClick>) => ({
+      ...state,
+      onWordClick: action.payload,
+    }),
   },
   // reset the state to initial state
   // when `reset` action is dispatched
@@ -68,6 +74,7 @@ export const {
   setSelectedWordByWordTranslation,
   setSelectedWordByWordTransliteration,
   setShowTooltipFor,
+  setOnWordClick,
 } = readingPreferencesSlice.actions;
 
 export const selectWordByWordByWordPreferences = (state: RootState) => ({
@@ -79,5 +86,6 @@ export const selectWordByWordByWordPreferences = (state: RootState) => ({
 export const selectShowTooltipFor = (state: RootState) => state.readingPreferences.showTooltipFor;
 export const selectReadingPreference = (state: RootState) =>
   state.readingPreferences.readingPreference;
+export const selectOnWordClick = (state: RootState) => state.readingPreferences.onWordClick;
 
 export default readingPreferencesSlice.reducer;

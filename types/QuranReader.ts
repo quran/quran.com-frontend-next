@@ -8,6 +8,11 @@ export enum ReadingPreference {
   Reading = 'reading', // Displays the Quran text only similar to a physical Quran page without any translations.
 }
 
+export enum OnWordClick {
+  PlayAudio = 'play-audio',
+  NoAudio = 'no-audio',
+}
+
 export enum QuranReaderDataType {
   Chapter = 'chapter',
   Verse = 'verse',
