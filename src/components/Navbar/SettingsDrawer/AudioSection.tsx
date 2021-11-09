@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import capitalize from 'lodash/lodash';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -84,15 +85,8 @@ const AudioSection = () => {
   );
 };
 
-const playbackRates = generateSelectOptions([
-  '0.25',
-  '0.5',
-  '0.75',
-  '1',
-  '1.25',
-  '1.5',
-  '1.75',
-  '2',
-]);
+const playbackRates = generateSelectOptions(
+  ['0.25', '0.5', '0.75', '1', '1.25', '1.5', '1.75', '2'].map(capitalize),
+);
 
 export default AudioSection;
