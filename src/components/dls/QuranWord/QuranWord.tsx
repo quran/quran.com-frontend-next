@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import GlyphWord from './GlyphWord';
-import onClickQuranWord from './onClickQuranWord';
+import onQuranWordClick from './onQuranWordClick';
 import styles from './QuranWord.module.scss';
 import TextWord from './TextWord';
 
@@ -95,7 +95,7 @@ const QuranWord = ({
     [isWordByWordAllowed, showTooltipFor, word],
   );
 
-  const onClick = useCallback(() => onClickQuranWord(word, audioData), [audioData, word]);
+  const onClick = useCallback(() => onQuranWordClick(word, audioData), [audioData, word]);
   return (
     <div
       onClick={onClick}

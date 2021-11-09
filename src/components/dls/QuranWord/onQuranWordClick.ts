@@ -52,7 +52,7 @@ const playWordByWordAudio = (url: string) => {
  * @param {Word} word
  * @param {AudioData} audioData
  */
-const onClickQuranWord = (word: Word, audioData?: AudioData) => {
+const onQuranWordClick = (word: Word, audioData?: AudioData) => {
   if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
     const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
     const segment = verseTiming.segments.find(
@@ -66,4 +66,4 @@ const onClickQuranWord = (word: Word, audioData?: AudioData) => {
   }
 };
 
-export default onClickQuranWord;
+export default onQuranWordClick;
