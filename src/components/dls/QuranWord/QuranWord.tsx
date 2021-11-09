@@ -15,6 +15,7 @@ import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
+  selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
@@ -22,7 +23,7 @@ import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
-import { QuranFont, WordByWordType } from 'types/QuranReader';
+import { ReadingPreference, QuranFont, WordByWordType } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -59,6 +60,7 @@ const QuranWord = ({
     selectWordByWordByWordPreferences,
     shallowEqual,
   );
+  const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
 
   // creating wordLocation instead of using `word.location` because
@@ -108,6 +110,7 @@ const QuranWord = ({
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,
+        [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
       })}
     >
       <Wrapper
