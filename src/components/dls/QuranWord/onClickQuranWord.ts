@@ -44,8 +44,16 @@ const playWordByWordAudio = (url: string) => {
   window.wordByWordAudioPlayerEl.addEventListener('ended', removeDOMAndResumeMainAudioPlayer);
 };
 
+/**
+ * When user click QuranWord, check if the audio is currently playing, if it is
+ * - play the audio from that word's timestamp
+ * - otherwise, play the 'word by word audio'
+ *
+ * @param {Word} word
+ * @param {AudioData} audioData
+ */
 const onClickQuranWord = (word: Word, audioData?: AudioData) => {
-  if (window.audioPlayerEl && !window.audioPlayerEl.paused) {
+  if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
     const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
     const segment = verseTiming.segments.find(
       ([location]) => word.position === location + 1, // segment location start at 0, while word.position starts at 1
