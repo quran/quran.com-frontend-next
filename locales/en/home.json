@@ -27,6 +27,7 @@
         "isha": "Isha"
     },
     "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
         "month": {
             "1": "Muharram",
             "2": "Safar",

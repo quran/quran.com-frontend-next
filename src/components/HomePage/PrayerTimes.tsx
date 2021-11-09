@@ -76,8 +76,13 @@ const useHijriDateFormatter = (hijriDate?: HijriDateData) => {
 
   const month = t(`hijri-date.month.${hijriDate.month}`);
 
-  // eslint-disable-next-line i18next/no-literal-string
-  return `${month} ${hijriDate.date}, ${hijriDate.year} AH`;
+  // Different language have different format to show the date, so we need to "format" it.
+  // For example in Indonesia we say "12 Muharram 1443" instead of "Muharram 12, 1443"
+  return t('hijri-date.format', {
+    date: hijriDate.date,
+    month,
+    year: hijriDate.year,
+  });
 };
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
