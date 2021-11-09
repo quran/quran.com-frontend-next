@@ -40,15 +40,6 @@
             "9": "Ramadan",
             "10": "Shawwal",
             "11": "Dhu Al-Qida"
-        },
-        "day-name": {
-            "sunday": "Ahad",
-            "monday": "Ithnin",
-            "tuesday": "Thulatha",
-            "wednesday": "Arbaa",
-            "thursday": "Khams",
-            "fruday": "Jumuah",
-            "saturday": "Sabt"
         }
     }
 }
