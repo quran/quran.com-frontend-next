@@ -1,16 +1,19 @@
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './PrayerTimes.module.scss';
 
 import { fetcher } from 'src/api';
-
-// TODO: replace this url
-const URL = 'https://quran-prayer-times-api-abdellatif-io-qurancom.vercel.app/api/prayer-times';
+import { selectCalculationMethod, selectMadhab } from 'src/redux/slices/prayerTimes';
+import { makePrayerTimesUrl } from 'src/utils/apiPaths';
 
 const PrayerTimes = () => {
   const { t } = useTranslation('home');
-  const { data } = useSWR<Data>(URL, (url) => fetcher(url));
+
+  const calculationMethod = useSelector(selectCalculationMethod);
+  const madhab = useSelector(selectMadhab);
+  const { data } = useSWR<Data>(makePrayerTimesUrl({ calculationMethod, madhab }), fetcher);
   const hijriDate = useHijriDateFormatter(data?.hijriDateData);
 
   if (!data) return null;

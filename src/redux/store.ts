@@ -18,6 +18,7 @@ import audioPlayerState from './slices/AudioPlayer/state';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import navbar from './slices/navbar';
+import prayerTimes from './slices/prayerTimes';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import highlightedLocation from './slices/QuranReader/highlightedLocation';
@@ -49,6 +50,7 @@ const persistConfig = {
     'search',
     'readingTracker',
     'welcomeMessage',
+    'prayerTimes',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -69,6 +71,7 @@ export const rootReducer = combineReducers({
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
   voiceSearch,
+  prayerTimes,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,6 +1,8 @@
 import { ITEMS_PER_PAGE, makeUrl } from './api';
+import stringify from './qs-stringify';
 
 import { DEFAULT_RECITER } from 'src/redux/slices/AudioPlayer/defaultData';
+import { CalculationMethod, Madhab } from 'src/redux/slices/prayerTimes';
 import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
 import { AdvancedCopyRequest, SearchRequest } from 'types/ApiRequests';
 import { QuranFont } from 'types/QuranReader';
@@ -147,3 +149,23 @@ export const makePageVersesUrl = (
  * @returns {string}
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
+
+// TODO: replace this url
+const PRAYER_TIMES_URL =
+  'https://quran-prayer-times-api-abdellatif-io-qurancom.vercel.app/api/prayer-times';
+
+/**
+ * Compose the url for prayer times API
+ *
+ * @param {Object} query
+ * @param {CalculationMethod} query.calculationMethod
+ * @param {Madhab} query.madhab
+ * @returns {string}
+ */
+export const makePrayerTimesUrl = (query: {
+  calculationMethod: CalculationMethod;
+  madhab: Madhab;
+}) => {
+  const queryParameters = `?${stringify(query)}`;
+  return `${PRAYER_TIMES_URL}${queryParameters}`;
+};
