@@ -44,25 +44,23 @@ const ContextMenu = () => {
       style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
       <div className={styles.sectionsContainer}>
-        <div className={styles.leftSection}>
+        <div className={styles.section}>
           <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
-          <div className={styles.rowsContainer}>
-            <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
-              <p className={classNames(styles.col, styles.alignStart)}>
-                {chapterData.translatedName.name}
-              </p>
-              <p className={classNames(styles.col, styles.alignEnd)}>
-                {t('juz')} {juzNumber} / {t('hizb')} {hizb}
-              </p>
-            </div>
-            <div className={styles.row}>
-              <p className={classNames(styles.col, styles.bold, styles.alignStart)}>
-                {chapterData.nameSimple}
-              </p>
-              <p className={classNames(styles.col, styles.alignEnd)}>
-                {t('page')} {page}
-              </p>
-            </div>
+          <div className={classNames(styles.row)}>
+            <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
+              {chapterData.translatedName.name}
+            </p>
+            <p className={classNames(styles.bold, styles.alignStart)}>{chapterData.nameSimple}</p>
+          </div>
+        </div>
+        <div className={classNames(styles.section, styles.leftSection)}>
+          <div className={classNames(styles.row)}>
+            <p className={classNames(styles.alignEnd, { [styles.hide]: !isExpanded })}>
+              {t('juz')} {juzNumber} / {t('hizb')} {hizb}
+            </p>
+            <p className={classNames(styles.alignEnd)}>
+              {t('page')} {page}
+            </p>
           </div>
         </div>
       </div>
