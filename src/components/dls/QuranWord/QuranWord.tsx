@@ -103,7 +103,7 @@ const QuranWord = ({
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,
-        [styles.moreSpace]: readingPreference === ReadingPreference.Translation,
+        [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
       })}
     >
       <Wrapper

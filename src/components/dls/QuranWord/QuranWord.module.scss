@@ -2,7 +2,7 @@
   display: inline-block;
   cursor: pointer;
 }
-.moreSpace + .moreSpace {
+.additionalWordGap + .additionalWordGap {
   margin-right: var(--spacing-xxsmall);
 }
 
