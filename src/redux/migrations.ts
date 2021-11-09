@@ -86,7 +86,7 @@ export default {
     ...state,
     readingPreferences: {
       ...state.readingPreferences,
-      onWordClick: readingPreferencesInitialState.onWordClick,
+      wordClickFunctionality: readingPreferencesInitialState.wordClickFunctionality,
     },
   }),
 };

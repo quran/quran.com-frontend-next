@@ -15,11 +15,11 @@ import {
   setShowTooltipFor,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
-  selectOnWordClick,
-  setOnWordClick,
+  selectWordClickFunctionality,
+  setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
-import { ReadingPreference, WordByWordType, OnWordClick } from 'types/QuranReader';
+import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
 
 const ReadingExperienceSection = () => {
   const { t } = useTranslation('common');
@@ -30,7 +30,7 @@ const ReadingExperienceSection = () => {
     shallowEqual,
   );
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-  const onWordClick = useSelector(selectOnWordClick);
+  const wordClickFunctionality = useSelector(selectWordClickFunctionality);
 
   const wordByWordValue = getWordByWordValue(
     showWordByWordTranslation,
@@ -89,7 +89,7 @@ const ReadingExperienceSection = () => {
 
   const wordClickOptions = useMemo(
     () =>
-      Object.values(OnWordClick).map((item) => ({
+      Object.values(WordClickFunctionality).map((item) => ({
         label: t(`word-click.${item}`),
         id: item,
         value: item,
@@ -133,8 +133,8 @@ const ReadingExperienceSection = () => {
       <Section.Row>
         <Section.Label>{t('word-click.title')}</Section.Label>
         <RadioGroup
-          onChange={(value) => dispatch(setOnWordClick(value as OnWordClick))}
-          value={onWordClick}
+          onChange={(value) => dispatch(setWordClickFunctionality(value as WordClickFunctionality))}
+          value={wordClickFunctionality}
           label="Word Click"
           items={wordClickOptions}
           orientation={RadioGroupOrientation.Horizontal}

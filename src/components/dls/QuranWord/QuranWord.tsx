@@ -15,7 +15,7 @@ import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
-  selectOnWordClick,
+  selectWordClickFunctionality,
   selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
@@ -24,7 +24,12 @@ import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
-import { ReadingPreference, QuranFont, WordByWordType, OnWordClick } from 'types/QuranReader';
+import {
+  ReadingPreference,
+  QuranFont,
+  WordByWordType,
+  WordClickFunctionality,
+} from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -49,7 +54,7 @@ const QuranWord = ({
   isAudioHighlightingAllowed = true,
   isHighlighted,
 }: QuranWordProps) => {
-  const onWordClick = useSelector(selectOnWordClick);
+  const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const reciter = useSelector(selectReciter, shallowEqual);
   const chapterId = getChapterNumberFromKey(word.verseKey);
   const { data: audioData } = useSWRImmutable(
@@ -100,8 +105,9 @@ const QuranWord = ({
   );
 
   const onClick = useCallback(() => {
-    if (onWordClick === OnWordClick.PlayAudio) onQuranWordClick(word, audioData);
-  }, [audioData, word, onWordClick]);
+    if (wordClickFunctionality === WordClickFunctionality.PlayAudio)
+      onQuranWordClick(word, audioData);
+  }, [audioData, word, wordClickFunctionality]);
   return (
     <div
       onClick={onClick}

@@ -8,7 +8,7 @@ export enum ReadingPreference {
   Reading = 'reading', // Displays the Quran text only similar to a physical Quran page without any translations.
 }
 
-export enum OnWordClick {
+export enum WordClickFunctionality {
   PlayAudio = 'play-audio',
   NoAudio = 'no-audio',
 }
