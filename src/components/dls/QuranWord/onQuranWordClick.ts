@@ -8,6 +8,31 @@ import AudioData from 'types/AudioData';
 import Word from 'types/Word';
 
 /**
+ * When user click QuranWord, check if the audio is currently playing, if it is
+ * - play the audio from that word's timestamp
+ * - otherwise, play the 'word by word audio'
+ *
+ * @param {Word} word
+ * @param {AudioData} audioData
+ */
+const onQuranWordClick = (word: Word, audioData?: AudioData) => {
+  if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
+    const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
+    const segment = verseTiming.segments.find(
+      ([location]) => word.position === location + 1, // segment location start at 0, while word.position starts at 1
+    );
+    if (!segment) {
+      playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
+      return;
+    }
+    const [, startTime] = segment;
+    triggerSetCurrentTime(startTime / 1000);
+  } else {
+    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
+  }
+};
+
+/**
  * Given an audio url
  * 1) stop the word by word audio player if it's currently playing
  * 2) pause the main audio player if it's currently playing
@@ -42,28 +67,6 @@ const playWordByWordAudio = (url: string) => {
 
   window.wordByWordAudioPlayerEl.play();
   window.wordByWordAudioPlayerEl.addEventListener('ended', removeDOMAndResumeMainAudioPlayer);
-};
-
-/**
- * When user click QuranWord, check if the audio is currently playing, if it is
- * - play the audio from that word's timestamp
- * - otherwise, play the 'word by word audio'
- *
- * @param {Word} word
- * @param {AudioData} audioData
- */
-const onQuranWordClick = (word: Word, audioData?: AudioData) => {
-  if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
-    const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
-    const segment = verseTiming.segments.find(
-      ([location]) => word.position === location + 1, // segment location start at 0, while word.position starts at 1
-    );
-    if (!segment) return;
-    const [, startTime] = segment;
-    triggerSetCurrentTime(startTime / 1000);
-  } else {
-    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
-  }
 };
 
 export default onQuranWordClick;
