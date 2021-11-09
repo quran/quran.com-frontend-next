@@ -166,6 +166,11 @@ export const makePrayerTimesUrl = (query: {
   calculationMethod: CalculationMethod;
   madhab: Madhab;
 }) => {
-  const queryParameters = `?${stringify(query)}`;
+  const today = new Date();
+  const date = today.getDate();
+  const month = today.getMonth();
+  const year = today.getFullYear();
+
+  const queryParameters = `?${stringify({ ...query, date, month, year })}`;
   return `${PRAYER_TIMES_URL}${queryParameters}`;
 };
