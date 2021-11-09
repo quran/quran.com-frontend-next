@@ -21,6 +21,7 @@ export const Languages = {
   34: {
     font: 'divehi',
     locale: 'dv',
+    dir: Direction.RTL,
   },
   38: {
     // English
@@ -51,6 +52,7 @@ export const Languages = {
   89: {
     font: 'kurdish',
     locale: 'ku',
+    dir: Direction.RTL,
   },
   133: {
     // Portuguese
