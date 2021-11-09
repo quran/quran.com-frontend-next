@@ -175,6 +175,13 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     navigator.mediaDevices
       .getUserMedia({ audio: AUDIO_CONSTRAINTS })
       .then((stream) => {
+        try {
+          micSourceNode = audioContext.createMediaStreamSource(stream);
+        } catch (err) {
+          // this will happen for Firefox users due to FF not accepting to change the sampleRate {@see https://bugzilla.mozilla.org/show_bug.cgi?id=1607781}
+          stopFlow(webSocket, analyser, micWorkletNode, micSourceNode, audioContext);
+          throw new Error(USER_MEDIA_NOT_SUPPORTED_ERROR);
+        }
         // 2. Add the MicInputProcessor to the audioContext
         audioContext.audioWorklet
           .addModule(
@@ -187,7 +194,6 @@ const useTarteelVoiceSearch = (startRecording = true) => {
             webSocket.onopen = () => {
               setIsLoading(false);
               mediaStream.current = stream;
-              micSourceNode = audioContext.createMediaStreamSource(stream);
               analyser = audioContext.createAnalyser();
               analyser.smoothingTimeConstant = ANALYSER_SMOOTHING_CONSTANT;
               analyser.fftSize = FAST_FOURIER_TRANSFORM_SIZE;
