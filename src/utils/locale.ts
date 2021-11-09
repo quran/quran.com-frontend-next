@@ -1,4 +1,6 @@
 /* eslint-disable import/prefer-default-export */
+import findKey from 'lodash/findKey';
+
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
 
 export enum Direction {
@@ -7,15 +9,82 @@ export enum Direction {
 }
 
 export const Languages = {
-  174: {
-    font: 'urdu',
+  9: {
+    // Arabic,
     dir: Direction.RTL,
+    locale: 'ar',
+  },
+  20: {
+    // Bengali
+    locale: 'bn',
   },
   34: {
     font: 'divehi',
+    locale: 'dv',
+  },
+  38: {
+    // English
+    locale: 'en',
+  },
+  43: {
+    // Persian/Farsi
+    dir: Direction.RTL,
+    locale: 'fa',
+  },
+  49: {
+    // French
+    locale: 'fr',
+  },
+  59: {
+    // Hebrew
+    dir: Direction.RTL,
+    locale: 'he',
+  },
+  67: {
+    // Indonesian
+    locale: 'id',
+  },
+  74: {
+    // Italian
+    locale: 'it',
   },
   89: {
     font: 'kurdish',
+    locale: 'ku',
+  },
+  133: {
+    // Portuguese
+    locale: 'pt',
+  },
+  118: {
+    // Dutch
+    locale: 'nl',
+  },
+  138: {
+    // Russian
+    locle: 'ru',
+  },
+  151: {
+    // Albanian
+    locale: 'sq',
+  },
+  161: {
+    // Thai
+    locale: 'th',
+  },
+  172: {
+    // Uyghur/Uighur
+    dir: Direction.RTL,
+    locale: 'ug',
+  },
+  174: {
+    font: 'urdu',
+    dir: Direction.RTL,
+    locale: 'ur',
+  },
+  185: {
+    // Chinese
+    locale: 'zh',
   },
 };
 
@@ -57,4 +126,14 @@ export const getLanguageDirectionById = (languageId: number): string => {
 export const getLanguageFontById = (languageId: number): string => {
   const mapping = Languages[languageId];
   return mapping?.font;
+};
+
+/**
+ * Find language Id by its locale
+ *
+ * @param {string} locale
+ * @returns {number} language id
+ */
+export const findLanguageIdByLocale = (locale: string): number => {
+  return Number(findKey(Languages, { locale }));
 };

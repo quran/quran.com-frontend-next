@@ -4,9 +4,14 @@ import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../../public/icons/close.svg';
-import { getLanguageDirectionById, getLanguageFontById } from '../../../../utils/locale';
+import {
+  getLanguageDirectionById,
+  getLanguageFontById,
+  findLanguageIdByLocale,
+} from '../../../../utils/locale';
 
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
@@ -28,10 +33,13 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   onTextClicked,
   isLoading,
 }) => {
+  const { locale } = useRouter();
   const { t } = useTranslation('quran-reader');
-  // if the current locale is rtl and we have set-up the Footnote manually like in the case of Fadel Soliman, Bridges’ translation Tafsir "PL" or "SG".
-  const direction = getLanguageDirectionById(footnote?.languageId);
-  const langFont = getLanguageFontById(footnote?.languageId);
+
+  const languageId = footnote?.languageId || findLanguageIdByLocale(locale);
+
+  const direction = getLanguageDirectionById(languageId);
+  const langFont = getLanguageFontById(languageId);
 
   return (
     <div className={styles.footnoteContainer}>

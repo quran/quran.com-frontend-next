@@ -128,6 +128,7 @@ const TranslationText: React.FC<Props> = ({
           setSubFootnote({
             id: subFootnoteId,
             text: PRE_DEFINED_FOOTNOTES[footnoteText],
+            isStaticContent: true,
           });
         }
       }
