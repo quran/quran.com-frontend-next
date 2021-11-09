@@ -1,24 +1,27 @@
-import React, { ReactNode, useState, useMemo } from 'react';
+import React, { ReactNode, useState, useMemo, useCallback } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
 
 import GlyphWord from './GlyphWord';
+import onClickQuranWord from './onClickQuranWord';
 import styles from './QuranWord.module.scss';
 import TextWord from './TextWord';
 
-import { triggerPauseAudio, triggerPlayAudio } from 'src/components/AudioPlayer/EventTriggers';
+import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
+import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { QURANCDN_AUDIO_BASE_URL } from 'src/utils/audio';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
-import { makeWordLocation } from 'src/utils/verse';
+import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
 import { QuranFont, WordByWordType } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
@@ -44,6 +47,13 @@ const QuranWord = ({
   isAudioHighlightingAllowed = true,
   isHighlighted,
 }: QuranWordProps) => {
+  const reciter = useSelector(selectReciter, shallowEqual);
+  const chapterId = getChapterNumberFromKey(word.verseKey);
+  const { data: audioData } = useSWRImmutable(
+    makeChapterAudioDataUrl(reciter.id, chapterId, true),
+    () => getChapterAudioData(reciter.id, chapterId, true),
+  );
+
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
@@ -85,10 +95,7 @@ const QuranWord = ({
     [isWordByWordAllowed, showTooltipFor, word],
   );
 
-  const onClick = () => {
-    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
-  };
-
+  const onClick = useCallback(() => onClickQuranWord(word, audioData), [audioData, word]);
   return (
     <div
       onClick={onClick}
@@ -143,40 +150,3 @@ const getTooltipText = (showTooltipFor: WordByWordType[], word: Word): ReactNode
 );
 
 export default QuranWord;
-
-/**
- * Given an audio url
- * 1) stop the word by word audio player if it's currently playing
- * 2) pause the main audio player if it's currently playing
- * 3) play the word by word audio
- * 4) resume the main audio player it it's previously was playing
- *
- * Terms
- * - main audio player refer to the audio player in the bottom navbar, this audio player plays the entire chapter
- * - word by word audio player refer to the audio player that play the clicked word
- *
- * @param {string} url
- */
-const playWordByWordAudio = (url: string) => {
-  // stop the audio and remove the DOM if it exists
-  if (window.wordByWordAudioPlayerEl) {
-    window.wordByWordAudioPlayerEl.pause();
-    window.wordByWordAudioPlayerEl.remove();
-    window.wordByWordAudioPlayerEl = null;
-  }
-
-  const isMainAudioPlayerPlaying = window.audioPlayerEl && !window.audioPlayerEl.paused;
-
-  const removeDOMAndResumeMainAudioPlayer = () => {
-    window.wordByWordAudioPlayerEl.removeEventListener('ended', removeDOMAndResumeMainAudioPlayer);
-    window.wordByWordAudioPlayerEl.remove();
-
-    if (isMainAudioPlayerPlaying) triggerPlayAudio();
-  };
-
-  window.wordByWordAudioPlayerEl = new Audio(url);
-  if (isMainAudioPlayerPlaying) triggerPauseAudio();
-
-  window.wordByWordAudioPlayerEl.play();
-  window.wordByWordAudioPlayerEl.addEventListener('ended', removeDOMAndResumeMainAudioPlayer);
-};
