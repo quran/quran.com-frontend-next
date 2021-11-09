@@ -154,12 +154,18 @@ export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_no
 const PRAYER_TIMES_URL =
   'https://quran-prayer-times-api-abdellatif-io-qurancom.vercel.app/api/prayer-times';
 
+/**
+ * Compose the url for prayer times API
+ *
+ * @param {Object} query
+ * @param {CalculationMethod} query.calculationMethod
+ * @param {Madhab} query.madhab
+ * @returns {string}
+ */
 export const makePrayerTimesUrl = (query: {
   calculationMethod: CalculationMethod;
   madhab: Madhab;
 }) => {
-  // The following section parses the query params for convenience
-  // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
   const queryParameters = `?${stringify(query)}`;
   return `${PRAYER_TIMES_URL}${queryParameters}`;
 };
