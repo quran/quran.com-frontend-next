@@ -3,7 +3,6 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import InfoIcon from '../../../../public/icons/info.svg';
-import QOutlineIcon from '../../../../public/icons/Q-outline.svg';
 
 import styles from './ChapterHeader.module.scss';
 
@@ -78,9 +77,6 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
           </div>
           <div className={styles.actionContainer}>
             <PlayChapterAudioButton chapterId={Number(chapterId)} />
-          </div>
-          <div className={styles.QOutlineWrapper}>
-            <QOutlineIcon />
           </div>
         </div>
       </div>
