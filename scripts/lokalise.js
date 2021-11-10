@@ -1,3 +1,10 @@
+/**
+ * A script that syncs the local codebase with Lokalize. The script support two commands:
+ *
+ * 1. Pulling all translation files from Lokalize by using the syntax `yarn run lokalise:pull`.
+ * 2. Pushing a specific file for a specific locale to Lokalise by using the syntax `yarn run lokalise:push {filename} {locale}` e.g. `yarn run lokalise:push common.json en`.
+ */
+
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 const fs = require('fs');
