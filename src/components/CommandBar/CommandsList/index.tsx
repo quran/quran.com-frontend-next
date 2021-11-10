@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { MouseEvent, useState, useCallback, RefObject, useEffect } from 'react';
@@ -36,6 +37,13 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const [selectedCommandIndex, setSelectedCommandIndex] = useState(numberOfCommands ? 0 : null);
+
+  const [highlightOffset, setHighlightOffset] = useState<number>(null);
+  useEffect(() => {
+    if (selectedItemRef.current) {
+      setHighlightOffset(selectedItemRef.current.offsetTop);
+    }
+  }, [selectedCommandIndex, selectedItemRef]);
 
   // when the value of numberOfCommands changes, it would be due to change of the query string so we need to reset the selected command
   useEffect(() => {
@@ -121,6 +129,12 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   }
   return (
     <ul role="listbox">
+      <div
+        className={styles.highlight}
+        style={{
+          transform: highlightOffset ? `translateY(${highlightOffset}px)` : `translateY(100%)`,
+        }}
+      />
       <li role="presentation">
         {Object.keys(groups).map((commandGroup) => {
           return (

@@ -5,11 +5,13 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import IconSearch from '../../../../public/icons/search.svg';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
@@ -135,15 +137,18 @@ const CommandBarBody: React.FC = () => {
         })}
       >
         {!isVoiceSearchFlowStarted && (
-          <input
-            onChange={onSearchQueryChange}
-            placeholder={t('search.title')}
-            className={styles.input}
-            type="text"
-            inputMode="text"
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus
-          />
+          <div className={styles.textInputContainer}>
+            <IconSearch />
+            <input
+              onChange={onSearchQueryChange}
+              placeholder={t('command-bar.placeholder')}
+              className={styles.input}
+              type="text"
+              inputMode="text"
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+            />
+          </div>
         )}
         <TarteelVoiceSearchTrigger isCommandBar />
       </div>
@@ -156,6 +161,12 @@ const CommandBarBody: React.FC = () => {
             render={dataFetcherRender}
           />
         )}
+      </div>
+
+      <div className={styles.poweredBy}>
+        <Link variant={LinkVariant.Primary} newTab href="https://download.tarteel.ai/">{`${t(
+          'command-bar.powered-by',
+        )} `}</Link>
       </div>
     </div>
   );
