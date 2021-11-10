@@ -14,8 +14,21 @@
   padding-inline-start: var(--spacing-xsmall);
   padding-inline-end: var(--spacing-xsmall);
   border-radius: var(--border-radius-default);
+
+  // vercel style
+  color: rgb(102, 102, 102);
+  background: rgb(250, 250, 250);
+  border: 1px solid rgb(234, 234, 234);
+  display: inline-block;
+  text-align: center;
+  min-width: 24px;
+  font-size: 14px;
+  line-height: 28px;
+  padding: 0 8px;
+  font-family: var(--font-sans);
+
   > span + span {
-    margin-inline-start: var(--spacing-xsmall);
+    margin-inline-start: 8px;
   }
   @include breakpoints.smallerThanTablet {
     display: none;
