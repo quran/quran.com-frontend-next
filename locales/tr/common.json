@@ -101,6 +101,11 @@
     "pages": "Sayfalar",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "powered-by": "Tarafından desteklenmektedir",
+    "prayer-times": {
+        "calculation-method": "Hesaplama yöntemi",
+        "madhab": "mezheb",
+        "title": "İbadet zamanları"
+    },
     "prev": "Öncesi",
     "privacy": "Mahremiyet",
     "q-reflect": "KuranYansıtmak",
@@ -177,5 +182,10 @@
         "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir."
     },
     "wbw": "Kelime kelime",
+    "word-click": {
+        "no-audio": "Ses yok",
+        "play-audio": "Ses Çal",
+        "title": "Kelime Tıklaması"
+    },
     "yes": "Evet"
 }

@@ -101,6 +101,11 @@
     "pages": "Страницы",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} из {{totalNumberOfResults}} результатов поиска",
     "powered-by": "Питаться от",
+    "prayer-times": {
+        "calculation-method": "Метод расчета",
+        "madhab": "Мазхаб",
+        "title": "Время молитв"
+    },
     "prev": "Предыдущий",
     "privacy": "Конфиденциальность",
     "q-reflect": "Коран",
@@ -177,5 +182,10 @@
         "suggest": "Пожалуйста, начните читать, и ваш стих появится."
     },
     "wbw": "Слово за слово",
+    "word-click": {
+        "no-audio": "Нет звука",
+        "play-audio": "Воспроизвести аудио",
+        "title": "Слово нажмите"
+    },
     "yes": "да"
 }

@@ -101,6 +101,11 @@
     "pages": "পাতা",
     "pagination-summary": "{{currentResultNumber}} totalNumberOfResults}}টি ফলাফলের মধ্যে {{totalNumberOfResults}} - {{endOfResultNumber}}",
     "powered-by": "দ্বারা চালিত",
+    "prayer-times": {
+        "calculation-method": "হিসাব পদ্ধতি",
+        "madhab": "মাধব",
+        "title": "নামাজের সময়"
+    },
     "prev": "আগে",
     "privacy": "গোপনীয়তা",
     "q-reflect": "কুরআন প্রতিফলন",
@@ -177,5 +182,10 @@
         "suggest": "আবৃত্তি শুরু করুন এবং আপনার আয়াত প্রদর্শিত হবে."
     },
     "wbw": "শব্দ দ্বারা শব্দ",
+    "word-click": {
+        "no-audio": "অডিও নেই",
+        "play-audio": "অডিও চালান",
+        "title": "শব্দ ক্লিক"
+    },
     "yes": "হ্যাঁ"
 }

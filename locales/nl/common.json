@@ -101,6 +101,11 @@
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "powered-by": "Aangedreven door",
+    "prayer-times": {
+        "calculation-method": "Rekenmethode",
+        "madhab": "Madhab",
+        "title": "Gebedstijden"
+    },
     "prev": "Vorig",
     "privacy": "Privacy",
     "q-reflect": "KoranReflect",
@@ -177,5 +182,10 @@
         "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen."
     },
     "wbw": "Woord voor woord",
+    "word-click": {
+        "no-audio": "Geen geluid",
+        "play-audio": "Audio afspelen",
+        "title": "Woordklik"
+    },
     "yes": "Ja"
 }

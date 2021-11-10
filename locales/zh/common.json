@@ -101,6 +101,11 @@
     "pages": "页面",
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
     "powered-by": "供电",
+    "prayer-times": {
+        "calculation-method": "计算方法",
+        "madhab": "马达卜",
+        "title": "祷告时间"
+    },
     "prev": "以前的",
     "privacy": "隐私",
     "q-reflect": "古兰经反射",
@@ -177,5 +182,10 @@
         "suggest": "请开始背诵，你的诗句就会出现。"
     },
     "wbw": "逐词地",
+    "word-click": {
+        "no-audio": "无音频",
+        "play-audio": "播放音频",
+        "title": "字点击"
+    },
     "yes": "是的"
 }

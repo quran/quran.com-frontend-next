@@ -3,7 +3,31 @@
         "rights": "Tous les droits sont réservés",
         "title": "Lisez, étudiez et apprenez le Noble Coran."
     },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Mouharram",
+            "10": "Shawwal",
+            "11": "Dhu Al Qida",
+            "2": "Safar",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Jumada I",
+            "6": "Joumada Akhira",
+            "7": "Rajab",
+            "8": "Cha'ban",
+            "9": "Ramadan"
+        }
+    },
     "no-bookmarks": "Vous n'avez pas encore de favoris",
+    "prayer-names": {
+        "asr": "Asr",
+        "dhuhr": "Dhuhr",
+        "fajr": "Fajr",
+        "isha": "Isha",
+        "maghrib": "Maghreb",
+        "sunrise": "lever du soleil"
+    },
     "recently-read": "Lu récemment",
     "tab": {
         "bookmarks": "Signets",
