@@ -1,3 +1,4 @@
+$itemHeight: calc(1.5 * var(--spacing-mega));
 .noResult {
   text-align: center;
   font-size: var(--font-size-large);
@@ -21,7 +22,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: calc(1.5 * var(--spacing-mega));
+  height: $itemHeight;
   font-size: var(--font-size-normal);
   padding-block-start: 0;
   padding-block-end: 0;
@@ -31,7 +32,7 @@
   color: var(--color-text-faded);
   white-space: nowrap;
   position: relative;
-  z-index: 2;
+  z-index: var(--z-index-default);
   &.selected {
     color: var(--color-text-default);
   }
@@ -40,7 +41,7 @@
 .highlight {
   transition: transform var(--transition-fast);
   margin-block-start: calc(-1 * var(--spacing-xsmall));
-  height: calc(1.5 * var(--spacing-mega));
+  height: $itemHeight;
   width: 100%;
   position: absolute;
   border-radius: var(--border-radius-rounded);
