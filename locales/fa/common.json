@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "ناوبری ها",
         "no-nav-results": "هیچ نتیجه ناوبری وجود ندارد",
+        "placeholder": "میخواهی چی بخوانی؟",
+        "powered-by": "جستجوی صوتی ارائه شده توسط Tarteel.ai",
         "recent-navigations": "پیمایش های اخیر",
         "try-navigating": "سعی کنید به"
     },

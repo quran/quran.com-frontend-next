@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "Navigasyonlar",
         "no-nav-results": "Navigasyon sonucu yok",
+        "placeholder": "Ne okumak istiyorsun?",
+        "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
         "recent-navigations": "Son gezinmeler",
         "try-navigating": "gezinmeyi deneyin"
     },

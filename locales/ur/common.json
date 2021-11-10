@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "نیویگیشن",
         "no-nav-results": "کوئی نیویگیشن نتائج نہیں ہیں۔",
+        "placeholder": "آپ کیا پڑھنا چاہتے ہیں؟",
+        "powered-by": "Tarteel.ai کے ذریعے تقویت یافتہ صوتی تلاش",
         "recent-navigations": "حالیہ نیویگیشنز",
         "try-navigating": "تک نیویگیٹ کرنے کی کوشش کریں۔"
     },

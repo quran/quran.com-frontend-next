@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "Lundrimet",
         "no-nav-results": "Nuk ka rezultate navigimi",
+        "placeholder": "Çfarë doni të lexoni?",
+        "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
         "recent-navigations": "Lundrimet e fundit",
         "try-navigating": "Provoni të lundroni në"
     },

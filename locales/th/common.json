@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "การนำทาง",
         "no-nav-results": "ไม่มีผลการนำทาง",
+        "placeholder": "อยากอ่านอะไร?",
+        "powered-by": "ค้นหาด้วยเสียงขับเคลื่อนโดย Tarteel.ai",
         "recent-navigations": "การนำทางล่าสุด",
         "try-navigating": "ลองไปที่"
     },

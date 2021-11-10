@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "Навигация",
         "no-nav-results": "Нет результатов навигации",
+        "placeholder": "Что ты хочешь прочитать?",
+        "powered-by": "Голосовой поиск на платформе Tarteel.ai",
         "recent-navigations": "Недавние переходы",
         "try-navigating": "Попробуйте перейти к"
     },
