@@ -2,13 +2,13 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import styles from './CommandBarBase.module.scss';
 
-type CommandBaseProps = {
+type CommandBarBaseProps = {
   onClickOutside: () => void;
   children: React.ReactNode;
   isOpen: boolean;
 };
 
-const CommandBarBase = ({ onClickOutside, children, isOpen }: CommandBaseProps) => {
+const CommandBarBase = ({ onClickOutside, children, isOpen }: CommandBarBaseProps) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Overlay className={styles.overlay} />

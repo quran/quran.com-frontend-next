@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import styles from './CommandBar.module.scss';
 import CommandBarBase from './CommandBarBase/CommandBarBase';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
@@ -13,7 +14,11 @@ import { stopCommandBarVoiceFlow } from 'src/redux/slices/voiceSearch';
 
 const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => (
+    <div className={styles.loadingContainer}>
+      <Spinner />,
+    </div>
+  ),
 });
 
 const CommandBar: React.FC = () => {

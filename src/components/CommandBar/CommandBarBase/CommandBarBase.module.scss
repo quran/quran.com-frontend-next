@@ -5,6 +5,7 @@ $shadow: 0 16px 70px rgb(0 0 0 / 20%); // using custom shadow for now until we f
 $width: 95vw;
 $max-width: calc(20 * var(--spacing-mega));
 $max-height: 85vh;
+$min-height: calc(9 * var(--spacing-mega));
 
 @keyframes contentShow {
   0% {
@@ -39,6 +40,9 @@ $max-height: 85vh;
   width: $width;
   max-width: $max-width;
   max-height: $max-height;
+  min-height: $min-height;
+  display: flex;
+  flex-direction: column;
   @media (prefers-reduced-motion: no-preference) {
     &[data-state="open"] {
       animation: contentShow var(--transition-fast) $content-animation-easing;
