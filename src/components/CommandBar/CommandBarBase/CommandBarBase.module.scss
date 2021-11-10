@@ -1,6 +1,7 @@
 $content-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 $overlay-background-light: hsla(0, 0%, 100%, 0.8);
 $overlay-background-dark: rgba(0, 0, 0, 0.8);
+$shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 
 @keyframes contentShow {
   0% {
@@ -27,7 +28,7 @@ $overlay-background-dark: rgba(0, 0, 0, 0.8);
 .content {
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-rounded);
-  box-shadow: var(--shadow-xlarge);
+  box-shadow: $shadow;
   position: fixed;
   inset-block-start: 50%;
   inset-inline-start: 50%;
