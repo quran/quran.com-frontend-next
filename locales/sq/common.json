@@ -101,6 +101,11 @@
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "powered-by": "Mundësuar nga",
+    "prayer-times": {
+        "calculation-method": "Mënyra e Llogaritjes",
+        "madhab": "medhhebi",
+        "title": "Kohët e lutjes"
+    },
     "prev": "E mëparshme",
     "privacy": "Privatësia",
     "q-reflect": "Kurani Reflekto",
@@ -177,5 +182,10 @@
         "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet."
     },
     "wbw": "Fjalë Për Fjalë",
+    "word-click": {
+        "no-audio": "Nuk ka audio",
+        "play-audio": "Luaj Audio",
+        "title": "Klikoni në fjalë"
+    },
     "yes": "po"
 }

@@ -101,6 +101,11 @@
     "pages": "Páginas",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "powered-by": "Distribuído por",
+    "prayer-times": {
+        "calculation-method": "Método de cálculo",
+        "madhab": "Madhab",
+        "title": "Momentos de Oração"
+    },
     "prev": "Anterior",
     "privacy": "Privacidade",
     "q-reflect": "QuranReflect",
@@ -177,5 +182,10 @@
         "suggest": "Por favor, comece a recitar e seu verso aparecerá."
     },
     "wbw": "Palavra por palavra",
+    "word-click": {
+        "no-audio": "Sem áudio",
+        "play-audio": "Tocar áudio",
+        "title": "Clique da palavra"
+    },
     "yes": "sim"
 }

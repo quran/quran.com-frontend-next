@@ -101,6 +101,11 @@
     "pages": "Pagine",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
     "powered-by": "Offerto da",
+    "prayer-times": {
+        "calculation-method": "Metodo di calcolo",
+        "madhab": "Madhab",
+        "title": "Tempi di preghiera"
+    },
     "prev": "Precedente",
     "privacy": "Privacy",
     "q-reflect": "CoranoRiflesso",
@@ -177,5 +182,10 @@
         "suggest": "Per favore inizia a recitare e il tuo verso apparirà."
     },
     "wbw": "Parola per parola",
+    "word-click": {
+        "no-audio": "Nessun audio",
+        "play-audio": "Riproduci audio",
+        "title": "Clic sulla parola"
+    },
     "yes": "sì"
 }

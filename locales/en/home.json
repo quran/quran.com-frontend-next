@@ -3,7 +3,31 @@
         "rights": "All Rights Reserved",
         "title": "Read, study, and learn The Noble Quran."
     },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharram",
+            "10": "Shawwal",
+            "11": "Dhu Al-Qida",
+            "2": "Safar",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Jumada I",
+            "6": "Jumada Akhira",
+            "7": "Rajab",
+            "8": "Sha'ban",
+            "9": "Ramadan"
+        }
+    },
     "no-bookmarks": "You do not have any bookmarks yet",
+    "prayer-names": {
+        "asr": "Asr",
+        "dhuhr": "Dhuhr",
+        "fajr": "Fajr",
+        "isha": "Isha",
+        "maghrib": "Maghrib",
+        "sunrise": "Sunrise"
+    },
     "recently-read": "Recently Read",
     "tab": {
         "bookmarks": "Bookmarks",
@@ -17,29 +41,5 @@
         "feedback-cta": "Provide Feedback",
         "join-cta": "Join Discord Community",
         "title": "Welcome to the Pre-Release Beta of the new Quran.com!"
-    },
-    "prayer-names": {
-        "fajr": "Fajr",
-        "sunrise": "Sunrise",
-        "dhuhr": "Dhuhr",
-        "asr": "Asr",
-        "maghrib": "Maghrib",
-        "isha": "Isha"
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharram",
-            "2": "Safar",
-            "3": "Rabi' I",
-            "4": "Rabi' II",
-            "5": "Jumada I",
-            "6": "Jumada Akhira",
-            "7": "Rajab",
-            "8": "Sha'ban",
-            "9": "Ramadan",
-            "10": "Shawwal",
-            "11": "Dhu Al-Qida"
-        }
     }
 }

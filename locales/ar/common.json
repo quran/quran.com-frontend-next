@@ -101,6 +101,11 @@
     "pages": "الصفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتائج البحث",
     "powered-by": "مشغل بواسطة",
+    "prayer-times": {
+        "calculation-method": "طريقة حساب",
+        "madhab": "مدهب",
+        "title": "أوقات الصلاة"
+    },
     "prev": "سابق",
     "privacy": "خصوصية",
     "q-reflect": "عكس القرآن",
@@ -177,5 +182,10 @@
         "suggest": "يرجى البدء في التلاوة وستظهر آياتك."
     },
     "wbw": "كلمة بكلمة",
+    "word-click": {
+        "no-audio": "لا صوت",
+        "play-audio": "تشغيل الصوت",
+        "title": "انقر كلمة"
+    },
     "yes": "نعم"
 }

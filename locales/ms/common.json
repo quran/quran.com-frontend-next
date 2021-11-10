@@ -101,6 +101,11 @@
     "pages": "muka surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
     "powered-by": "Dikuasai oleh",
+    "prayer-times": {
+        "calculation-method": "Kaedah Pengiraan",
+        "madhab": "Mazhab",
+        "title": "Waktu Solat"
+    },
     "prev": "Sebelumnya",
     "privacy": "Privasi",
     "q-reflect": "QuranReflect",
@@ -177,5 +182,10 @@
         "suggest": "Sila mulakan membaca dan ayat anda akan muncul."
     },
     "wbw": "Perkataan demi perkataan",
+    "word-click": {
+        "no-audio": "Tiada Audio",
+        "play-audio": "Mainkan Audio",
+        "title": "Klik Perkataan"
+    },
     "yes": "ya"
 }

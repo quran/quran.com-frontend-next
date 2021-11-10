@@ -3,7 +3,31 @@
         "rights": "Seluruh hak cipta",
         "title": "Baca, pelajari, dan pelajari The Noble Quran."
     },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharram",
+            "10": "Syawal",
+            "11": "Dzulqidah",
+            "2": "Safari",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Jumada I",
+            "6": "Jumada Akhira",
+            "7": "Rajab",
+            "8": "Sya'ban",
+            "9": "Ramadan"
+        }
+    },
     "no-bookmarks": "Anda belum memiliki bookmark apa pun",
+    "prayer-names": {
+        "asr": "Ashar",
+        "dhuhr": "Dhuhr",
+        "fajr": "Fajar",
+        "isha": "isya",
+        "maghrib": "Maghrib",
+        "sunrise": "matahari terbit"
+    },
     "recently-read": "Baru-baru ini Baca",
     "tab": {
         "bookmarks": "Bookmark",

@@ -101,6 +101,11 @@
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} کی {{totalNumberOfResults}} تلاش کے نتائج",
     "powered-by": "کی طرف سے طاقت",
+    "prayer-times": {
+        "calculation-method": "حساب کتاب کا طریقہ",
+        "madhab": "مادھب",
+        "title": "نماز کے اوقات"
+    },
     "prev": "پچھلا",
     "privacy": "رازداری",
     "q-reflect": "قرآن کی عکاسی",
@@ -177,5 +182,10 @@
         "suggest": "براہ کرم تلاوت شروع کریں اور آپ کی آیت ظاہر ہوگی۔"
     },
     "wbw": "لفظ بہ لفظ",
+    "word-click": {
+        "no-audio": "کوئی آڈیو نہیں۔",
+        "play-audio": "آڈیو چلائیں۔",
+        "title": "ورڈ کلک"
+    },
     "yes": "جی ہاں"
 }

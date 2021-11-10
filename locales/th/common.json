@@ -101,6 +101,11 @@
     "pages": "หน้า",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
     "powered-by": "ขับเคลื่อนโดย",
+    "prayer-times": {
+        "calculation-method": "วิธีการคำนวณ",
+        "madhab": "Madhab",
+        "title": "เวลาละหมาด"
+    },
     "prev": "ก่อนหน้า",
     "privacy": "ความเป็นส่วนตัว",
     "q-reflect": "คัมภีร์กุรอานสะท้อน",
@@ -177,5 +182,10 @@
         "suggest": "โปรดเริ่มท่องและกลอนของคุณจะปรากฏขึ้น"
     },
     "wbw": "คำต่อคำ",
+    "word-click": {
+        "no-audio": "ไม่มีเสียง",
+        "play-audio": "เล่นเสียง",
+        "title": "คำคลิก"
+    },
     "yes": "ใช่"
 }

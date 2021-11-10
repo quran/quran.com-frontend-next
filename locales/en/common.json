@@ -102,9 +102,9 @@
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "powered-by": "Powered by",
     "prayer-times": {
-        "title": "Prayer Times",
+        "calculation-method": "Calculation Method",
         "madhab": "Madhab",
-        "calculation-method": "Calculation Method"
+        "title": "Prayer Times"
     },
     "prev": "Previous",
     "privacy": "Privacy",
@@ -113,11 +113,6 @@
     "reading-preference": {
         "reading": "Reading",
         "translation": "Translation"
-    },
-    "word-click": {
-        "title": "Word Click",
-        "play-audio": "Play Audio",
-        "no-audio": "No Audio"
     },
     "reciter": "Reciter",
     "remove": "Remove",
@@ -187,5 +182,10 @@
         "suggest": "Please begin reciting and your verse will appear."
     },
     "wbw": "Word By Word",
+    "word-click": {
+        "no-audio": "No Audio",
+        "play-audio": "Play Audio",
+        "title": "Word Click"
+    },
     "yes": "Yes"
 }

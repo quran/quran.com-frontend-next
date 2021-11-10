@@ -101,6 +101,11 @@
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} از {{totalNumberOfResults}} نتایج جستجو",
     "powered-by": "پشتیبانی شده توسط",
+    "prayer-times": {
+        "calculation-method": "روش محاسبه",
+        "madhab": "مداح",
+        "title": "اوقات نماز"
+    },
     "prev": "قبلی",
     "privacy": "حریم خصوصی",
     "q-reflect": "قرآن انعکاس",
@@ -177,5 +182,10 @@
         "suggest": "لطفا شروع به تلاوت کنید و آیه شما ظاهر می شود."
     },
     "wbw": "کلمه به کلمه",
+    "word-click": {
+        "no-audio": "بی صدا",
+        "play-audio": "پخش صدا",
+        "title": "کلمه کلیک کنید"
+    },
     "yes": "آره"
 }
