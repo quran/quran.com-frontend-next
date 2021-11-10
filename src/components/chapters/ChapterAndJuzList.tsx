@@ -13,7 +13,7 @@ import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
 
-import { isMinimalLayoutLocale } from 'src/utils/locale';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 import Chapter from 'types/Chapter';
 
 const JuzView = dynamic(() => import('./JuzView'), {
@@ -101,7 +101,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}
-                  isMinimalLayout={isMinimalLayoutLocale(lang)}
+                  isMinimalLayout={shouldUseMinimalLayout(lang)}
                 />
               </Link>
             </div>

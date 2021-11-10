@@ -8,12 +8,14 @@ export enum Direction {
 
 /**
  * Check whether the locale should have a minimalLayout. This will be reflect in
- * certain components like ChapterHeader or SurahPreviewRow.
+ * certain components like ChapterHeader or SurahPreviewRow and the reason we need
+ * this is that for Arabic for example, we the transliteratedName and translatedName
+ * have the same value which will result in redundant UI.
  *
  * @param {string} lang
  * @returns {boolean}
  */
-export const isMinimalLayoutLocale = (lang: string): boolean => {
+export const shouldUseMinimalLayout = (lang: string): boolean => {
   return lang === 'ar';
 };
 

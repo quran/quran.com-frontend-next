@@ -8,7 +8,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import styles from './JuzView.module.scss';
 
 import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
-import { isMinimalLayoutLocale } from 'src/utils/locale';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 
 type JuzViewProps = {
   isDescending: boolean;
@@ -57,7 +57,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                       surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={chapter.translatedName as string}
-                      isMinimalLayout={isMinimalLayoutLocale(lang)}
+                      isMinimalLayout={shouldUseMinimalLayout(lang)}
                     />
                   </Link>
                 </div>

@@ -12,7 +12,7 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
-import { isMinimalLayoutLocale } from 'src/utils/locale';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
@@ -33,7 +33,7 @@ const ContextMenu = () => {
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
-  const isMinimalLayout = isMinimalLayoutLocale(lang);
+  const isMinimalLayout = shouldUseMinimalLayout(lang);
 
   return (
     <div
