@@ -17,7 +17,7 @@ $height: calc(9 * var(--spacing-mega));
   }
 
   & > .input {
-    margin-left: var(--spacing-xsmall);
+    margin-inline-start: var(--spacing-xsmall);
   }
 }
 
@@ -65,7 +65,7 @@ $height: calc(9 * var(--spacing-mega));
 }
 
 .poweredBy {
-  text-align: right;
+  text-align: end;
   font-size: var(--font-size-small);
   color: var(--color-text-faded);
   padding-inline-end: var(--spacing-xxsmall);

@@ -71,11 +71,12 @@ $max-height: 85vh;
 }
 
 .overlay {
-  [data-theme="dark"] & {
+  background-color: $overlay-background-light;
+  @media (prefers-color-scheme: dark) {
     background-color: $overlay-background-dark;
   }
-  [data-theme="light"] & {
-    background-color: $overlay-background-light;
+  [data-theme="dark"] & {
+    background-color: $overlay-background-dark;
   }
   backdrop-filter: blur(6px);
   position: fixed;
