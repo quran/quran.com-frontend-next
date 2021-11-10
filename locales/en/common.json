@@ -46,7 +46,8 @@
         "navigations": "Navigations",
         "no-nav-results": "No navigation results",
         "recent-navigations": "Recent navigations",
-        "try-navigating": "Try navigating to"
+        "try-navigating": "Try navigating to",
+        "powered-by": "Voice search powered by Tarteel.ai"
     },
     "community": {
         "cta": "Join Community",

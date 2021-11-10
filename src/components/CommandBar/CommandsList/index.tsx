@@ -132,7 +132,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
       <div
         className={styles.highlight}
         style={{
-          transform: highlightOffset ? `translateY(${highlightOffset}px)` : null,
+          transform: highlightOffset ? `translateY(${highlightOffset}px)` : `translateY(100%)`,
         }}
       />
       <li role="presentation">

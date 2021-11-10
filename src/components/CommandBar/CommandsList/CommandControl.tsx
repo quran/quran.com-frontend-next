@@ -30,7 +30,8 @@ const CommandControl: React.FC<Props> = ({
     );
   }
   if (isSelected) {
-    return <KeyboardInput keyboardKey="enter" />;
+    // return <KeyboardInput keyboardKey="Enter" />;
+    return null;
   }
   return null;
 };

@@ -33,7 +33,7 @@
   position: relative;
   z-index: 2;
   &.selected {
-    border-radius: var(--border-radius-default);
+    color: var(--color-text-default);
   }
 }
 
@@ -44,7 +44,7 @@
   width: 100%;
   position: absolute;
   border-radius: var(--border-radius-rounded);
-  background: var(--color-background-alternative-faded);
+  background: var(--color-background-alternative-faint);
   z-index: var(--z-index-default);
 }
 

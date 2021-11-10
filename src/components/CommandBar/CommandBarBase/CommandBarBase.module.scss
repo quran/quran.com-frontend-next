@@ -1,7 +1,11 @@
+$content-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
+$overlay-background-light: hsla(0, 0%, 100%, 0.8);
+$overlay-background-dark: rgba(0, 0, 0, 0.8);
+
 @keyframes contentShow {
   0% {
     opacity: 0;
-    transform: translate(-50%, -48%) scale(0.96);
+    transform: translate(-50%, -50%) scale(0.96);
   }
   100% {
     opacity: 1;
@@ -9,8 +13,19 @@
   }
 }
 
+@keyframes contentHide {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+}
+
 .content {
-  background-color: white;
+  background-color: var(--color-background-default);
   border-radius: var(--border-radius-rounded);
   box-shadow: var(--shadow-xlarge);
   position: fixed;
@@ -22,7 +37,12 @@
   max-height: 85vh;
   padding: 25;
   @media (prefers-reduced-motion: no-preference) {
-    animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    &[data-state="open"] {
+      animation: contentShow var(--transition-fast) $content-animation-easing;
+    }
+    &[data-state="closed"] {
+      animation: contentHide var(--transition-fast) $content-animation-easing;
+    }
   }
   &:focus {
     outline: none;
@@ -38,11 +58,34 @@
   }
 }
 
+@keyframes overlayHide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .overlay {
-  background-color: var(--color-background-backdrop);
+  [data-theme="dark"] & {
+    background-color: $overlay-background-dark;
+  }
+
+  [data-theme="light"] & {
+    background-color: $overlay-background-light;
+  }
+
+  backdrop-filter: blur(6px);
   position: fixed;
   inset: 0;
+
   @media (prefers-reduced-motion: no-preference) {
-    animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    &[data-state="open"] {
+      animation: overlayShow var(--transition-fast) ease;
+    }
+    &[data-state="closed"] {
+      animation: overlayHide var(--transition-fast) ease;
+    }
   }
 }

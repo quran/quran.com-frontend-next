@@ -1,14 +1,31 @@
-$height: calc(8 * var(--spacing-mega));
+$height: calc(9 * var(--spacing-mega));
 
 .container {
-  padding: var(--spacing-medium) var(--spacing-large);
+  padding: 0 var(--spacing-large);
+  box-sizing: border-box;
+}
+
+.textInputContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+
+  & > svg {
+    fill: var(--color-text-faded);
+    opacity: var(--opacity-50);
+  }
+
+  & > .input {
+    margin-left: var(--spacing-xsmall);
+  }
 }
 
 .inputContainer {
   border-bottom: 1px solid var(--color-borders-hairline);
-  padding-block-end: var(--spacing-small);
+  padding-block: var(--spacing-small);
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .voiceFlowContainer {
@@ -24,8 +41,12 @@ $height: calc(8 * var(--spacing-mega));
   border: 0;
   outline: 0;
   font-size: var(--font-size-xlarge);
-  color: var(--color-text-faded);
   padding: var(--spacing-small) 0;
+  color: var(--color-text-faded);
+  &::placeholder {
+    color: var(--color-text-faded);
+    opacity: var(--opacity-50);
+  }
 }
 
 .bodyContainer {
@@ -37,4 +58,12 @@ $height: calc(8 * var(--spacing-mega));
   position: relative;
   height: $height;
   box-sizing: border-box;
+}
+
+.poweredBy {
+  text-align: right;
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  padding-inline-end: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xsmall);
 }
