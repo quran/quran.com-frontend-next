@@ -2,7 +2,7 @@ $content-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 $overlay-background-light: hsla(0, 0%, 100%, 0.8);
 $overlay-background-dark: rgba(0, 0, 0, 0.8);
 $shadow: 0 16px 70px rgb(0 0 0 / 20%); // using custom shadow for now until we fix our token and design in dark theme;
-$width: 90vw;
+$width: 95vw;
 $max-width: calc(20 * var(--spacing-mega));
 $max-height: 85vh;
 

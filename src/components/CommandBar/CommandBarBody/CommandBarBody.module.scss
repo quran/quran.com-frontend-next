@@ -1,3 +1,4 @@
+@use "src/styles/breakpoints";
 $height: calc(9 * var(--spacing-mega));
 
 .container {
@@ -40,7 +41,10 @@ $height: calc(9 * var(--spacing-mega));
   background: transparent;
   border: 0;
   outline: 0;
-  font-size: var(--font-size-xlarge);
+  font-size: var(--font-size-normal);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-xlarge);
+  }
   padding: var(--spacing-small) 0;
   color: var(--color-text-faded);
   &::placeholder {
