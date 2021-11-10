@@ -1,686 +1,686 @@
 {
     "1": {
-        "translatedName": "The Opener",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Fatihah",
         "versesCount": 7,
-        "revelationPlace": "makkah"
+        "translatedName": "الفاتحة"
     },
     "2": {
-        "translatedName": "The Cow",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Baqarah",
         "versesCount": 286,
-        "revelationPlace": "madinah"
+        "translatedName": "البقرة"
     },
     "3": {
-        "translatedName": "Family of Imran",
+        "revelationPlace": "madinah",
         "nameSimple": "Ali 'Imran",
         "versesCount": 200,
-        "revelationPlace": "madinah"
+        "translatedName": "آل عمران"
     },
     "4": {
-        "translatedName": "The Women",
+        "revelationPlace": "madinah",
         "nameSimple": "An-Nisa",
         "versesCount": 176,
-        "revelationPlace": "madinah"
+        "translatedName": "النساء"
     },
     "5": {
-        "translatedName": "The Table Spread",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Ma'idah",
         "versesCount": 120,
-        "revelationPlace": "madinah"
+        "translatedName": "المائدة"
     },
     "6": {
-        "translatedName": "The Cattle",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-An'am",
         "versesCount": 165,
-        "revelationPlace": "makkah"
+        "translatedName": "الأنعام"
     },
     "7": {
-        "translatedName": "The Heights",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-A'raf",
         "versesCount": 206,
-        "revelationPlace": "makkah"
+        "translatedName": "الأعراف"
     },
     "8": {
-        "translatedName": "The Spoils of War",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Anfal",
         "versesCount": 75,
-        "revelationPlace": "madinah"
+        "translatedName": "الأنفال"
     },
     "9": {
-        "translatedName": "The Repentance",
+        "revelationPlace": "madinah",
         "nameSimple": "At-Tawbah",
         "versesCount": 129,
-        "revelationPlace": "madinah"
+        "translatedName": "التوبة"
     },
     "10": {
-        "translatedName": "Jonah",
+        "revelationPlace": "makkah",
         "nameSimple": "Yunus",
         "versesCount": 109,
-        "revelationPlace": "makkah"
+        "translatedName": "يونس"
     },
     "11": {
-        "translatedName": "Hud",
+        "revelationPlace": "makkah",
         "nameSimple": "Hud",
         "versesCount": 123,
-        "revelationPlace": "makkah"
+        "translatedName": "هود"
     },
     "12": {
-        "translatedName": "Joseph",
+        "revelationPlace": "makkah",
         "nameSimple": "Yusuf",
         "versesCount": 111,
-        "revelationPlace": "makkah"
+        "translatedName": "يوسف"
     },
     "13": {
-        "translatedName": "The Thunder",
+        "revelationPlace": "madinah",
         "nameSimple": "Ar-Ra'd",
         "versesCount": 43,
-        "revelationPlace": "madinah"
+        "translatedName": "الرعد"
     },
     "14": {
-        "translatedName": "Abraham",
+        "revelationPlace": "makkah",
         "nameSimple": "Ibrahim",
         "versesCount": 52,
-        "revelationPlace": "makkah"
+        "translatedName": "ابراهيم"
     },
     "15": {
-        "translatedName": "The Rocky Tract",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Hijr",
         "versesCount": 99,
-        "revelationPlace": "makkah"
+        "translatedName": "الحجر"
     },
     "16": {
-        "translatedName": "The Bee",
+        "revelationPlace": "makkah",
         "nameSimple": "An-Nahl",
         "versesCount": 128,
-        "revelationPlace": "makkah"
+        "translatedName": "النحل"
     },
     "17": {
-        "translatedName": "The Night Journey",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Isra",
         "versesCount": 111,
-        "revelationPlace": "makkah"
+        "translatedName": "الإسراء"
     },
     "18": {
-        "translatedName": "The Cave",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Kahf",
         "versesCount": 110,
-        "revelationPlace": "makkah"
+        "translatedName": "الكهف"
     },
     "19": {
-        "translatedName": "Mary",
+        "revelationPlace": "makkah",
         "nameSimple": "Maryam",
         "versesCount": 98,
-        "revelationPlace": "makkah"
+        "translatedName": "مريم"
     },
     "20": {
-        "translatedName": "Ta-Ha",
+        "revelationPlace": "makkah",
         "nameSimple": "Taha",
         "versesCount": 135,
-        "revelationPlace": "makkah"
+        "translatedName": "طه"
     },
     "21": {
-        "translatedName": "The Prophets",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Anbya",
         "versesCount": 112,
-        "revelationPlace": "makkah"
+        "translatedName": "الأنبياء"
     },
     "22": {
-        "translatedName": "The Pilgrimage",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Hajj",
         "versesCount": 78,
-        "revelationPlace": "madinah"
+        "translatedName": "الحج"
     },
     "23": {
-        "translatedName": "The Believers",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Mu'minun",
         "versesCount": 118,
-        "revelationPlace": "makkah"
+        "translatedName": "المؤمنون"
     },
     "24": {
-        "translatedName": "The Light",
+        "revelationPlace": "madinah",
         "nameSimple": "An-Nur",
         "versesCount": 64,
-        "revelationPlace": "madinah"
+        "translatedName": "النور"
     },
     "25": {
-        "translatedName": "The Criterion",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Furqan",
         "versesCount": 77,
-        "revelationPlace": "makkah"
+        "translatedName": "الفرقان"
     },
     "26": {
-        "translatedName": "The Poets",
+        "revelationPlace": "makkah",
         "nameSimple": "Ash-Shu'ara",
         "versesCount": 227,
-        "revelationPlace": "makkah"
+        "translatedName": "الشعراء"
     },
     "27": {
-        "translatedName": "The Ant",
+        "revelationPlace": "makkah",
         "nameSimple": "An-Naml",
         "versesCount": 93,
-        "revelationPlace": "makkah"
+        "translatedName": "النمل"
     },
     "28": {
-        "translatedName": "The Stories",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Qasas",
         "versesCount": 88,
-        "revelationPlace": "makkah"
+        "translatedName": "القصص"
     },
     "29": {
-        "translatedName": "The Spider",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-'Ankabut",
         "versesCount": 69,
-        "revelationPlace": "makkah"
+        "translatedName": "العنكبوت"
     },
     "30": {
-        "translatedName": "The Romans",
+        "revelationPlace": "makkah",
         "nameSimple": "Ar-Rum",
         "versesCount": 60,
-        "revelationPlace": "makkah"
+        "translatedName": "الروم"
     },
     "31": {
-        "translatedName": "Luqman",
+        "revelationPlace": "makkah",
         "nameSimple": "Luqman",
         "versesCount": 34,
-        "revelationPlace": "makkah"
+        "translatedName": "لقمان"
     },
     "32": {
-        "translatedName": "The Prostration",
+        "revelationPlace": "makkah",
         "nameSimple": "As-Sajdah",
         "versesCount": 30,
-        "revelationPlace": "makkah"
+        "translatedName": "السجدة"
     },
     "33": {
-        "translatedName": "The Combined Forces",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Ahzab",
         "versesCount": 73,
-        "revelationPlace": "madinah"
+        "translatedName": "الأحزاب"
     },
     "34": {
-        "translatedName": "Sheba",
+        "revelationPlace": "makkah",
         "nameSimple": "Saba",
         "versesCount": 54,
-        "revelationPlace": "makkah"
+        "translatedName": "سبإ"
     },
     "35": {
-        "translatedName": "Originator",
+        "revelationPlace": "makkah",
         "nameSimple": "Fatir",
         "versesCount": 45,
-        "revelationPlace": "makkah"
+        "translatedName": "فاطر"
     },
     "36": {
-        "translatedName": "Ya Sin",
+        "revelationPlace": "makkah",
         "nameSimple": "Ya-Sin",
         "versesCount": 83,
-        "revelationPlace": "makkah"
+        "translatedName": "يس"
     },
     "37": {
-        "translatedName": "Those who set the Ranks",
+        "revelationPlace": "makkah",
         "nameSimple": "As-Saffat",
         "versesCount": 182,
-        "revelationPlace": "makkah"
+        "translatedName": "الصافات"
     },
     "38": {
-        "translatedName": "The Letter \"Saad\"",
+        "revelationPlace": "makkah",
         "nameSimple": "Sad",
         "versesCount": 88,
-        "revelationPlace": "makkah"
+        "translatedName": "ص"
     },
     "39": {
-        "translatedName": "The Troops",
+        "revelationPlace": "makkah",
         "nameSimple": "Az-Zumar",
         "versesCount": 75,
-        "revelationPlace": "makkah"
+        "translatedName": "الزمر"
     },
     "40": {
-        "translatedName": "The Forgiver",
+        "revelationPlace": "makkah",
         "nameSimple": "Ghafir",
         "versesCount": 85,
-        "revelationPlace": "makkah"
+        "translatedName": "غافر"
     },
     "41": {
-        "translatedName": "Explained in Detail",
+        "revelationPlace": "makkah",
         "nameSimple": "Fussilat",
         "versesCount": 54,
-        "revelationPlace": "makkah"
+        "translatedName": "فصلت"
     },
     "42": {
-        "translatedName": "The Consultation",
+        "revelationPlace": "makkah",
         "nameSimple": "Ash-Shuraa",
         "versesCount": 53,
-        "revelationPlace": "makkah"
+        "translatedName": "الشورى"
     },
     "43": {
-        "translatedName": "The Ornaments of Gold",
+        "revelationPlace": "makkah",
         "nameSimple": "Az-Zukhruf",
         "versesCount": 89,
-        "revelationPlace": "makkah"
+        "translatedName": "الزخرف"
     },
     "44": {
-        "translatedName": "The Smoke",
+        "revelationPlace": "makkah",
         "nameSimple": "Ad-Dukhan",
         "versesCount": 59,
-        "revelationPlace": "makkah"
+        "translatedName": "الدخان"
     },
     "45": {
-        "translatedName": "The Crouching",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Jathiyah",
         "versesCount": 37,
-        "revelationPlace": "makkah"
+        "translatedName": "الجاثية"
     },
     "46": {
-        "translatedName": "The Wind-Curved Sandhills",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Ahqaf",
         "versesCount": 35,
-        "revelationPlace": "makkah"
+        "translatedName": "الأحقاف"
     },
     "47": {
-        "translatedName": "Muhammad",
+        "revelationPlace": "madinah",
         "nameSimple": "Muhammad",
         "versesCount": 38,
-        "revelationPlace": "madinah"
+        "translatedName": "محمد"
     },
     "48": {
-        "translatedName": "The Victory",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Fath",
         "versesCount": 29,
-        "revelationPlace": "madinah"
+        "translatedName": "الفتح"
     },
     "49": {
-        "translatedName": "The Rooms",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Hujurat",
         "versesCount": 18,
-        "revelationPlace": "madinah"
+        "translatedName": "الحجرات"
     },
     "50": {
-        "translatedName": "The Letter \"Qaf\"",
+        "revelationPlace": "makkah",
         "nameSimple": "Qaf",
         "versesCount": 45,
-        "revelationPlace": "makkah"
+        "translatedName": "ق"
     },
     "51": {
-        "translatedName": "The Winnowing Winds",
+        "revelationPlace": "makkah",
         "nameSimple": "Adh-Dhariyat",
         "versesCount": 60,
-        "revelationPlace": "makkah"
+        "translatedName": "الذاريات"
     },
     "52": {
-        "translatedName": "The Mount",
+        "revelationPlace": "makkah",
         "nameSimple": "At-Tur",
         "versesCount": 49,
-        "revelationPlace": "makkah"
+        "translatedName": "الطور"
     },
     "53": {
-        "translatedName": "The Star",
+        "revelationPlace": "makkah",
         "nameSimple": "An-Najm",
         "versesCount": 62,
-        "revelationPlace": "makkah"
+        "translatedName": "النجم"
     },
     "54": {
-        "translatedName": "The Moon",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Qamar",
         "versesCount": 55,
-        "revelationPlace": "makkah"
+        "translatedName": "القمر"
     },
     "55": {
-        "translatedName": "The Beneficent",
+        "revelationPlace": "madinah",
         "nameSimple": "Ar-Rahman",
         "versesCount": 78,
-        "revelationPlace": "madinah"
+        "translatedName": "الرحمن"
     },
     "56": {
-        "translatedName": "The Inevitable",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Waqi'ah",
         "versesCount": 96,
-        "revelationPlace": "makkah"
+        "translatedName": "الواقعة"
     },
     "57": {
-        "translatedName": "The Iron",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Hadid",
         "versesCount": 29,
-        "revelationPlace": "madinah"
+        "translatedName": "الحديد"
     },
     "58": {
-        "translatedName": "The Pleading Woman",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Mujadila",
         "versesCount": 22,
-        "revelationPlace": "madinah"
+        "translatedName": "المجادلة"
     },
     "59": {
-        "translatedName": "The Exile",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Hashr",
         "versesCount": 24,
-        "revelationPlace": "madinah"
+        "translatedName": "الحشر"
     },
     "60": {
-        "translatedName": "She that is to be examined",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Mumtahanah",
         "versesCount": 13,
-        "revelationPlace": "madinah"
+        "translatedName": "الممتحنة"
     },
     "61": {
-        "translatedName": "The Ranks",
+        "revelationPlace": "madinah",
         "nameSimple": "As-Saf",
         "versesCount": 14,
-        "revelationPlace": "madinah"
+        "translatedName": "الصف"
     },
     "62": {
-        "translatedName": "The Congregation, Friday",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Jumu'ah",
         "versesCount": 11,
-        "revelationPlace": "madinah"
+        "translatedName": "الجمعة"
     },
     "63": {
-        "translatedName": "The Hypocrites",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Munafiqun",
         "versesCount": 11,
-        "revelationPlace": "madinah"
+        "translatedName": "المنافقون"
     },
     "64": {
-        "translatedName": "The Mutual Disillusion",
+        "revelationPlace": "madinah",
         "nameSimple": "At-Taghabun",
         "versesCount": 18,
-        "revelationPlace": "madinah"
+        "translatedName": "التغابن"
     },
     "65": {
-        "translatedName": "The Divorce",
+        "revelationPlace": "madinah",
         "nameSimple": "At-Talaq",
         "versesCount": 12,
-        "revelationPlace": "madinah"
+        "translatedName": "الطلاق"
     },
     "66": {
-        "translatedName": "The Prohibition",
+        "revelationPlace": "madinah",
         "nameSimple": "At-Tahrim",
         "versesCount": 12,
-        "revelationPlace": "madinah"
+        "translatedName": "التحريم"
     },
     "67": {
-        "translatedName": "The Sovereignty",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Mulk",
         "versesCount": 30,
-        "revelationPlace": "makkah"
+        "translatedName": "الملك"
     },
     "68": {
-        "translatedName": "The Pen",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Qalam",
         "versesCount": 52,
-        "revelationPlace": "makkah"
+        "translatedName": "القلم"
     },
     "69": {
-        "translatedName": "The Reality",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Haqqah",
         "versesCount": 52,
-        "revelationPlace": "makkah"
+        "translatedName": "الحاقة"
     },
     "70": {
-        "translatedName": "The Ascending Stairways",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Ma'arij",
         "versesCount": 44,
-        "revelationPlace": "makkah"
+        "translatedName": "المعارج"
     },
     "71": {
-        "translatedName": "Noah",
+        "revelationPlace": "makkah",
         "nameSimple": "Nuh",
         "versesCount": 28,
-        "revelationPlace": "makkah"
+        "translatedName": "نوح"
     },
     "72": {
-        "translatedName": "The Jinn",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Jinn",
         "versesCount": 28,
-        "revelationPlace": "makkah"
+        "translatedName": "الجن"
     },
     "73": {
-        "translatedName": "The Enshrouded One",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Muzzammil",
         "versesCount": 20,
-        "revelationPlace": "makkah"
+        "translatedName": "المزمل"
     },
     "74": {
-        "translatedName": "The Cloaked One",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Muddaththir",
         "versesCount": 56,
-        "revelationPlace": "makkah"
+        "translatedName": "المدثر"
     },
     "75": {
-        "translatedName": "The Resurrection",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Qiyamah",
         "versesCount": 40,
-        "revelationPlace": "makkah"
+        "translatedName": "القيامة"
     },
     "76": {
-        "translatedName": "The Man",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Insan",
         "versesCount": 31,
-        "revelationPlace": "madinah"
+        "translatedName": "الانسان"
     },
     "77": {
-        "translatedName": "The Emissaries",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Mursalat",
         "versesCount": 50,
-        "revelationPlace": "makkah"
+        "translatedName": "المرسلات"
     },
     "78": {
-        "translatedName": "The Tidings",
+        "revelationPlace": "makkah",
         "nameSimple": "An-Naba",
         "versesCount": 40,
-        "revelationPlace": "makkah"
+        "translatedName": "النبإ"
     },
     "79": {
-        "translatedName": "Those who drag forth",
+        "revelationPlace": "makkah",
         "nameSimple": "An-Nazi'at",
         "versesCount": 46,
-        "revelationPlace": "makkah"
+        "translatedName": "النازعات"
     },
     "80": {
-        "translatedName": "He Frowned",
+        "revelationPlace": "makkah",
         "nameSimple": "'Abasa",
         "versesCount": 42,
-        "revelationPlace": "makkah"
+        "translatedName": "عبس"
     },
     "81": {
-        "translatedName": "The Overthrowing",
+        "revelationPlace": "makkah",
         "nameSimple": "At-Takwir",
         "versesCount": 29,
-        "revelationPlace": "makkah"
+        "translatedName": "التكوير"
     },
     "82": {
-        "translatedName": "The Cleaving",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Infitar",
         "versesCount": 19,
-        "revelationPlace": "makkah"
+        "translatedName": "الإنفطار"
     },
     "83": {
-        "translatedName": "The Defrauding",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Mutaffifin",
         "versesCount": 36,
-        "revelationPlace": "makkah"
+        "translatedName": "المطففين"
     },
     "84": {
-        "translatedName": "The Sundering",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Inshiqaq",
         "versesCount": 25,
-        "revelationPlace": "makkah"
+        "translatedName": "الإنشقاق"
     },
     "85": {
-        "translatedName": "The Mansions of the Stars",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Buruj",
         "versesCount": 22,
-        "revelationPlace": "makkah"
+        "translatedName": "البروج"
     },
     "86": {
-        "translatedName": "The Nightcommer",
+        "revelationPlace": "makkah",
         "nameSimple": "At-Tariq",
         "versesCount": 17,
-        "revelationPlace": "makkah"
+        "translatedName": "الطارق"
     },
     "87": {
-        "translatedName": "The Most High",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-A'la",
         "versesCount": 19,
-        "revelationPlace": "makkah"
+        "translatedName": "الأعلى"
     },
     "88": {
-        "translatedName": "The Overwhelming",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Ghashiyah",
         "versesCount": 26,
-        "revelationPlace": "makkah"
+        "translatedName": "الغاشية"
     },
     "89": {
-        "translatedName": "The Dawn",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Fajr",
         "versesCount": 30,
-        "revelationPlace": "makkah"
+        "translatedName": "الفجر"
     },
     "90": {
-        "translatedName": "The City",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Balad",
         "versesCount": 20,
-        "revelationPlace": "makkah"
+        "translatedName": "البلد"
     },
     "91": {
-        "translatedName": "The Sun",
+        "revelationPlace": "makkah",
         "nameSimple": "Ash-Shams",
         "versesCount": 15,
-        "revelationPlace": "makkah"
+        "translatedName": "الشمس"
     },
     "92": {
-        "translatedName": "The Night",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Layl",
         "versesCount": 21,
-        "revelationPlace": "makkah"
+        "translatedName": "الليل"
     },
     "93": {
-        "translatedName": "The Morning Hours",
+        "revelationPlace": "makkah",
         "nameSimple": "Ad-Duhaa",
         "versesCount": 11,
-        "revelationPlace": "makkah"
+        "translatedName": "الضحى"
     },
     "94": {
-        "translatedName": "The Relief",
+        "revelationPlace": "makkah",
         "nameSimple": "Ash-Sharh",
         "versesCount": 8,
-        "revelationPlace": "makkah"
+        "translatedName": "الشرح"
     },
     "95": {
-        "translatedName": "The Fig",
+        "revelationPlace": "makkah",
         "nameSimple": "At-Tin",
         "versesCount": 8,
-        "revelationPlace": "makkah"
+        "translatedName": "التين"
     },
     "96": {
-        "translatedName": "The Clot",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-'Alaq",
         "versesCount": 19,
-        "revelationPlace": "makkah"
+        "translatedName": "العلق"
     },
     "97": {
-        "translatedName": "The Power",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Qadr",
         "versesCount": 5,
-        "revelationPlace": "makkah"
+        "translatedName": "القدر"
     },
     "98": {
-        "translatedName": "The Clear Proof",
+        "revelationPlace": "madinah",
         "nameSimple": "Al-Bayyinah",
         "versesCount": 8,
-        "revelationPlace": "madinah"
+        "translatedName": "البينة"
     },
     "99": {
-        "translatedName": "The Earthquake",
+        "revelationPlace": "madinah",
         "nameSimple": "Az-Zalzalah",
         "versesCount": 8,
-        "revelationPlace": "madinah"
+        "translatedName": "الزلزلة"
     },
     "100": {
-        "translatedName": "The Courser",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-'Adiyat",
         "versesCount": 11,
-        "revelationPlace": "makkah"
+        "translatedName": "العاديات"
     },
     "101": {
-        "translatedName": "The Calamity",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Qari'ah",
         "versesCount": 11,
-        "revelationPlace": "makkah"
+        "translatedName": "القارعة"
     },
     "102": {
-        "translatedName": "The Rivalry in world increase",
+        "revelationPlace": "makkah",
         "nameSimple": "At-Takathur",
         "versesCount": 8,
-        "revelationPlace": "makkah"
+        "translatedName": "التكاثر"
     },
     "103": {
-        "translatedName": "The Declining Day",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-'Asr",
         "versesCount": 3,
-        "revelationPlace": "makkah"
+        "translatedName": "العصر"
     },
     "104": {
-        "translatedName": "The Traducer",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Humazah",
         "versesCount": 9,
-        "revelationPlace": "makkah"
+        "translatedName": "الهمزة"
     },
     "105": {
-        "translatedName": "The Elephant",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Fil",
         "versesCount": 5,
-        "revelationPlace": "makkah"
+        "translatedName": "الفيل"
     },
     "106": {
-        "translatedName": "Quraysh",
+        "revelationPlace": "makkah",
         "nameSimple": "Quraysh",
         "versesCount": 4,
-        "revelationPlace": "makkah"
+        "translatedName": "قريش"
     },
     "107": {
-        "translatedName": "The Small kindnesses",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Ma'un",
         "versesCount": 7,
-        "revelationPlace": "makkah"
+        "translatedName": "الماعون"
     },
     "108": {
-        "translatedName": "The Abundance",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Kawthar",
         "versesCount": 3,
-        "revelationPlace": "makkah"
+        "translatedName": "الكوثر"
     },
     "109": {
-        "translatedName": "The Disbelievers",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Kafirun",
         "versesCount": 6,
-        "revelationPlace": "makkah"
+        "translatedName": "الكافرون"
     },
     "110": {
-        "translatedName": "The Divine Support",
+        "revelationPlace": "madinah",
         "nameSimple": "An-Nasr",
         "versesCount": 3,
-        "revelationPlace": "madinah"
+        "translatedName": "النصر"
     },
     "111": {
-        "translatedName": "The Palm Fiber",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Masad",
         "versesCount": 5,
-        "revelationPlace": "makkah"
+        "translatedName": "المسد"
     },
     "112": {
-        "translatedName": "The Sincerity",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Ikhlas",
         "versesCount": 4,
-        "revelationPlace": "makkah"
+        "translatedName": "الإخلاص"
     },
     "113": {
-        "translatedName": "The Daybreak",
+        "revelationPlace": "makkah",
         "nameSimple": "Al-Falaq",
         "versesCount": 5,
-        "revelationPlace": "makkah"
+        "translatedName": "الفلق"
     },
     "114": {
-        "translatedName": "Mankind",
+        "revelationPlace": "makkah",
         "nameSimple": "An-Nas",
         "versesCount": 6,
-        "revelationPlace": "makkah"
+        "translatedName": "الناس"
     }
 }

@@ -22,7 +22,7 @@ import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 
 const PlayPauseButton = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
 
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
@@ -89,8 +89,8 @@ const PlayPauseButton = () => {
       {button}
       <SurahAudioMismatchModal
         isOpen={isMismatchModalVisible}
-        currentAudioChapter={getChapterData(currentAudioChapterId)?.nameSimple}
-        currentReadingChapter={getChapterData(firstCurrentReadingChapterId)?.nameSimple}
+        currentAudioChapter={getChapterData(currentAudioChapterId, lang)?.nameSimple}
+        currentReadingChapter={getChapterData(firstCurrentReadingChapterId, lang)?.nameSimple}
         onContinue={() => {
           triggerPlayAudio();
           setIsMismatchModalVisible(false);

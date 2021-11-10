@@ -58,12 +58,6 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
                 <p>{chapter.versesCount}</p>
               </div>
               <div>
-                <p className={styles.detailHeader}>{t('common:pages')}</p>
-                <p>
-                  {chapter.pages[0]}-{chapter.pages[1]}
-                </p>
-              </div>
-              <div>
                 <p className={styles.detailHeader}>{t('surah-info:revelation-place')}</p>
                 <p>{capitalize(chapter.revelationPlace)}</p>
               </div>

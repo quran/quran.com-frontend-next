@@ -3,6 +3,19 @@
 import Chapter from 'types/Chapter';
 
 const DEFAULT_LANGUAGE = 'en';
+const SUPPORTED_CHAPTER_LOCALES = [
+  'en',
+  'ar',
+  'bn',
+  'fr',
+  'id',
+  'it',
+  'nl',
+  'ru',
+  'tr',
+  'ur',
+  'zh',
+];
 
 /**
  * Get chapters data from the json file, by language
@@ -10,13 +23,12 @@ const DEFAULT_LANGUAGE = 'en';
  * @param {string} lang
  * @returns {Record<string, Chapter>} chapter
  */
-export const getAllChaptersData = (lang = DEFAULT_LANGUAGE): Record<string, Chapter> => {
-  switch (lang) {
-    case 'en':
-      return require('../../public/data/chapters/en.json');
-    default:
-      return require('../../public/data/chapters/en.json');
+export const getAllChaptersData = (lang: string = DEFAULT_LANGUAGE): Record<string, Chapter> => {
+  if (SUPPORTED_CHAPTER_LOCALES.includes(lang)) {
+    // eslint-disable-next-line import/no-dynamic-require
+    return require(`../../public/data/chapters/${lang}.json`);
   }
+  return require('../../public/data/chapters/en.json');
 };
 
 /**

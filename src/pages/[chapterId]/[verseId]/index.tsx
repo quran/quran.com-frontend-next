@@ -40,7 +40,9 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   return (
     <>
-      <NextSeoWrapper title={`${t('surah')} ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper
+        title={`${t('surah')} ${chapterResponse.chapter.translatedName} - ${verseId}`}
+      />
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
@@ -96,7 +98,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         chapterResponse: {
-          chapter: chapterData,
+          chapter: { ...chapterData, id: chapterId },
         },
         versesResponse: {
           ...versesResponse,

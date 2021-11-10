@@ -19,7 +19,8 @@
     "test:watch": "jest --watch",
     "analyze": "ANALYZE_BUNDLE=true yarn build",
     "lokalise:pull": "node scripts/lokalise.js",
-    "lokalise:push": "node scripts/lokalise.js push"
+    "lokalise:push": "node scripts/lokalise.js push",
+    "chapter-data:format": "node scripts/format-chapter-data-json.js"
   },
   "jest-runner-eslint": {
     "cliOptions": {
