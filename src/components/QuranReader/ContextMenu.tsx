@@ -50,7 +50,9 @@ const ContextMenu = () => {
             <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
               {chapterData.translatedName}
             </p>
-            <p className={classNames(styles.bold, styles.alignStart)}>{chapterData.nameSimple}</p>
+            <p className={classNames(styles.bold, styles.alignStart)}>
+              {chapterData.transliteratedName}
+            </p>
           </div>
         </div>
         <div className={classNames(styles.section, styles.leftSection)}>

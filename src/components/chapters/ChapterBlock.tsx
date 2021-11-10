@@ -23,7 +23,7 @@ const ChapterBlock: React.FC<Props> = ({ chapter }: Props) => {
             <div className={classNames(styles.leftContainer, styles.sectionContainer)}>
               <p className={styles.number}>{chapter.id}</p>
               <div className={styles.detailsContainer}>
-                <div className={styles.nameArabic}>{chapter.nameSimple}</div>
+                <div className={styles.nameArabic}>{chapter.transliteratedName}</div>
                 <div className={styles.nameTranslated}>{chapter.translatedName}</div>
               </div>
             </div>

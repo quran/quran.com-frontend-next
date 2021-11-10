@@ -53,7 +53,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
                       description={`${chapter.versesCount} ${t('ayahs')}`}
-                      surahName={chapter.nameSimple}
+                      surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={chapter.translatedName as string}
                     />

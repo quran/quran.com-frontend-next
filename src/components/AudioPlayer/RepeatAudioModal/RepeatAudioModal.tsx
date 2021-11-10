@@ -48,7 +48,7 @@ const RepeatAudioModal = ({
 
   const chapterName = useMemo(() => {
     const chapterData = getChapterData(chapterId, lang);
-    return chapterData?.nameSimple;
+    return chapterData?.transliteratedName;
   }, [chapterId, lang]);
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {

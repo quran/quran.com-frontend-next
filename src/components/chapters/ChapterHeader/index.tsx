@@ -38,7 +38,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
   const chapterData = getChapterData(chapterId, lang);
 
   const { translatedName } = chapterData;
-  const { nameSimple } = chapterData;
+  const { transliteratedName } = chapterData;
 
   return (
     <div
@@ -51,8 +51,8 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.translatedName}>{translatedName}</div>
-          <div className={styles.nameSimple}>
-            {t('surah')} <br /> {nameSimple}
+          <div className={styles.transliteratedName}>
+            {t('surah')} <br /> {transliteratedName}
           </div>
           <div className={styles.infoContainer}>
             <Button

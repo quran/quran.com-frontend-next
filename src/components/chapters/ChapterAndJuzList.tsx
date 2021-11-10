@@ -97,7 +97,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
                   description={`${chapter.versesCount} ${t('ayahs')}`}
-                  surahName={chapter.nameSimple}
+                  surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}
                 />

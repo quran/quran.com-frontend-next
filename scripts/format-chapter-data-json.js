@@ -32,7 +32,7 @@ if (fs.existsSync(path)) {
     chaptersData.forEach((chapterData) => {
       const newChapterData = {};
       newChapterData.revelationPlace = chapterData.revelation_place;
-      newChapterData.nameSimple = chapterData.name_simple;
+      newChapterData.transliteratedName = chapterData.name_simple;
       newChapterData.versesCount = chapterData.verses_count;
       newChapterData.translatedName = chapterData.translated_name.name;
       newFileContent[chapterData.id] = newChapterData;
