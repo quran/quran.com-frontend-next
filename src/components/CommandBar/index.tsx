@@ -5,9 +5,8 @@ import dynamic from 'next/dynamic';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import styles from './CommandBar.module.scss';
+import CommandBarBase from './CommandBarBase/CommandBarBase';
 
-import Modal from 'src/components/dls/Modal/Modal';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 import { stopCommandBarVoiceFlow } from 'src/redux/slices/voiceSearch';
@@ -37,15 +36,9 @@ const CommandBar: React.FC = () => {
   useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnTags: ['INPUT'] }, [dispatch]);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClickOutside={closeCommandBar}
-      isBottomSheetOnMobile={false}
-      isInvertedOverlay
-      contentClassName={styles.modalContent}
-    >
+    <CommandBarBase isOpen={isOpen} onClickOutside={closeCommandBar}>
       <CommandBarBody />
-    </Modal>
+    </CommandBarBase>
   );
 };
 

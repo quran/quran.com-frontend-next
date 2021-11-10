@@ -42,6 +42,7 @@
     "click-here": "Click here",
     "close": "Close",
     "command-bar": {
+        "placeholder": "What do you want to read?",
         "navigations": "Navigations",
         "no-nav-results": "No navigation results",
         "recent-navigations": "Recent navigations",

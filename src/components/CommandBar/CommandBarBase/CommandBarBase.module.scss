@@ -1,0 +1,48 @@
+@keyframes contentShow {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -48%) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.content {
+    background-color: white;
+    border-radius: var(--border-radius-rounded);
+    box-shadow: var(--shadow-xlarge);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: calc(20 * var(--spacing-mega));
+    max-height: 85vh;
+    padding: 25;
+    @media (prefers-reduced-motion: no-preference) {
+        animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+@keyframes overlayShow {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.overlay {
+    background-color: var(--color-background-backdrop);
+    position: fixed;
+    inset: 0;
+    @media (prefers-reduced-motion: no-preference) {
+        animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}

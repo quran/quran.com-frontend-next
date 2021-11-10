@@ -1,16 +1,14 @@
 $height: calc(8 * var(--spacing-mega));
 
 .container {
-  padding-block-start: var(--spacing-small);
-  padding-block-end: var(--spacing-small);
-  padding-inline-start: var(--spacing-small);
-  padding-inline-end: var(--spacing-small);
+  padding: var(--spacing-medium) var(--spacing-large);
 }
 
 .inputContainer {
   border-bottom: 1px solid var(--color-borders-hairline);
   padding-block-end: var(--spacing-small);
   display: flex;
+  align-items: center;
 }
 
 .voiceFlowContainer {
@@ -25,8 +23,9 @@ $height: calc(8 * var(--spacing-mega));
   background: transparent;
   border: 0;
   outline: 0;
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-xlarge);
   color: var(--color-text-faded);
+  padding: var(--spacing-small) 0;
 }
 
 .bodyContainer {

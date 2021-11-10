@@ -137,7 +137,7 @@ const CommandBarBody: React.FC = () => {
         {!isVoiceSearchFlowStarted && (
           <input
             onChange={onSearchQueryChange}
-            placeholder={t('search.title')}
+            placeholder={t('command-bar.placeholder')}
             className={styles.input}
             type="text"
             inputMode="text"
