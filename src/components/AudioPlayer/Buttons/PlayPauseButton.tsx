@@ -89,8 +89,10 @@ const PlayPauseButton = () => {
       {button}
       <SurahAudioMismatchModal
         isOpen={isMismatchModalVisible}
-        currentAudioChapter={getChapterData(currentAudioChapterId, lang)?.nameSimple}
-        currentReadingChapter={getChapterData(firstCurrentReadingChapterId, lang)?.nameSimple}
+        currentAudioChapter={getChapterData(currentAudioChapterId, lang)?.transliteratedName}
+        currentReadingChapter={
+          getChapterData(firstCurrentReadingChapterId, lang)?.transliteratedName
+        }
         onContinue={() => {
           triggerPlayAudio();
           setIsMismatchModalVisible(false);

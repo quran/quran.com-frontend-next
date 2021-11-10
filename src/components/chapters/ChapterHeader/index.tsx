@@ -15,6 +15,7 @@ import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { getChapterData } from 'src/utils/chapter';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
 import { formatChapterId } from 'src/utils/verse';
 
@@ -29,6 +30,7 @@ const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) => {
   const { t, lang } = useTranslation('common');
   const headerRef = useRef(null);
+  const isMinimalLayout = shouldUseMinimalLayout(lang);
   /**
    * the intersection observer is needed so that we know that the first verse
    * of the current chapter is being read when the ChapterHeader appears within
@@ -38,7 +40,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
   const chapterData = getChapterData(chapterId, lang);
 
   const { translatedName } = chapterData;
-  const { nameSimple } = chapterData;
+  const { transliteratedName } = chapterData;
 
   return (
     <div
@@ -50,9 +52,9 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
     >
       <div className={styles.container}>
         <div className={styles.left}>
-          <div className={styles.translatedName}>{translatedName}</div>
-          <div className={styles.nameSimple}>
-            {t('surah')} <br /> {nameSimple}
+          {!isMinimalLayout && <div className={styles.translatedName}>{translatedName}</div>}
+          <div className={styles.transliteratedName}>
+            {t('surah')} <br /> {transliteratedName}
           </div>
           <div className={styles.infoContainer}>
             <Button

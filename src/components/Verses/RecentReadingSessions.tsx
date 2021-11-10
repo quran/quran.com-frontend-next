@@ -34,7 +34,7 @@ const RecentReadingSessions = () => {
                       chapterId={Number(chapterId)}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={surah.translatedName as string}
-                      surahName={surah.nameSimple}
+                      surahName={surah.transliteratedName}
                       description={`${t('common:ayah')} ${verseNumber}`}
                       verseCount={surah.versesCount}
                     />

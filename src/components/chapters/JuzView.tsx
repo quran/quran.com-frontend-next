@@ -8,6 +8,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import styles from './JuzView.module.scss';
 
 import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 
 type JuzViewProps = {
   isDescending: boolean;
@@ -53,9 +54,10 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
                       description={`${chapter.versesCount} ${t('ayahs')}`}
-                      surahName={chapter.nameSimple}
+                      surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={chapter.translatedName as string}
+                      isMinimalLayout={shouldUseMinimalLayout(lang)}
                     />
                   </Link>
                 </div>

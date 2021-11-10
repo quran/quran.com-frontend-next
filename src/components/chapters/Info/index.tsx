@@ -50,7 +50,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
         <div className={styles.infoTextContainer}>
           <div className={styles.headerContainer}>
             <div className={styles.surahName}>
-              {t('common:surah')} {chapter.nameSimple}
+              {t('common:surah')} {chapter.transliteratedName}
             </div>
             <div className={styles.detailsContainer}>
               <div>

@@ -12,6 +12,7 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
@@ -32,6 +33,7 @@ const ContextMenu = () => {
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
+  const isMinimalLayout = shouldUseMinimalLayout(lang);
 
   return (
     <div
@@ -47,10 +49,14 @@ const ContextMenu = () => {
         <div className={styles.section}>
           <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
           <div className={classNames(styles.row)}>
-            <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
-              {chapterData.translatedName}
+            {!isMinimalLayout && (
+              <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
+                {chapterData.translatedName}
+              </p>
+            )}
+            <p className={classNames(styles.bold, styles.alignStart)}>
+              {chapterData.transliteratedName}
             </p>
-            <p className={classNames(styles.bold, styles.alignStart)}>{chapterData.nameSimple}</p>
           </div>
         </div>
         <div className={classNames(styles.section, styles.leftSection)}>
