@@ -3,7 +3,7 @@ import React, { MouseEvent } from 'react';
 import CloseIcon from '../../../../public/icons/close.svg';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import KeyboardInput from 'src/components/dls/KeyboardInput';
+// import KeyboardInput from 'src/components/dls/KeyboardInput';
 
 interface Props {
   isClearable: boolean;
