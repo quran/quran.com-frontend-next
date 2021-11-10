@@ -5,6 +5,7 @@ import styles from './SurahPreviewBlock.module.scss';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
+import { isMinimalLayoutLocale } from 'src/utils/locale';
 
 type SurahPreviewBlockProps = {
   surahNumber: number;
@@ -21,16 +22,22 @@ const SurahPreviewBlock = ({
   translatedSurahName,
   description,
 }: SurahPreviewBlockProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const isMinimalLayout = isMinimalLayoutLocale(lang);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <div className={styles.translatedSurahName}>{translatedSurahName}</div>
-          <div className={styles.surahName}>
-            {t('surah')} <br />
-            {surahName}
+          <div className={styles.translatedSurahName}>
+            {isMinimalLayout && <>{t('surah')} </>}
+            {translatedSurahName}
           </div>
+          {!isMinimalLayout && (
+            <div className={styles.surahName}>
+              {t('surah')} <br />
+              {surahName}
+            </div>
+          )}
         </div>
         <div className={styles.surahNumber}>{surahNumber}</div>
       </div>

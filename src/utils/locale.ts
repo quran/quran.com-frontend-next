@@ -7,6 +7,17 @@ export enum Direction {
 }
 
 /**
+ * Check whether the locale should have a minimalLayout. This will be reflect in
+ * certain components like ChapterHeader or SurahPreviewRow.
+ *
+ * @param {string} lang
+ * @returns {boolean}
+ */
+export const isMinimalLayoutLocale = (lang: string): boolean => {
+  return lang === 'ar';
+};
+
+/**
  * Check whether the current locale is RTL.
  *
  * @param {string} locale
