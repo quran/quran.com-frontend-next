@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "Navegações",
         "no-nav-results": "Sem resultados de navegação",
+        "placeholder": "O que voce quer ler",
+        "powered-by": "Pesquisa por voz com tecnologia Tarteel.ai",
         "recent-navigations": "Navegações recentes",
         "try-navigating": "Tente navegar para"
     },

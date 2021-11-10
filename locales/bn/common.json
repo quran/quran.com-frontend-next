@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "নেভিগেশন",
         "no-nav-results": "কোন নেভিগেশন ফলাফল",
+        "placeholder": "কি আপনি পড়তে চান?",
+        "powered-by": "Tarteel.ai দ্বারা চালিত ভয়েস অনুসন্ধান",
         "recent-navigations": "সাম্প্রতিক নেভিগেশন",
         "try-navigating": "নেভিগেট করার চেষ্টা করুন"
     },

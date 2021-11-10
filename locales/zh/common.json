@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "导航",
         "no-nav-results": "没有导航结果",
+        "placeholder": "你想读什么？",
+        "powered-by": "由 Tarteel.ai 提供支持的语音搜索",
         "recent-navigations": "最近的导航",
         "try-navigating": "尝试导航到"
     },

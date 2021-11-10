@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "Navigatie",
         "no-nav-results": "Geen navigatieresultaten",
+        "placeholder": "Wat wil je lezen?",
+        "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
         "recent-navigations": "Recente navigatie",
         "try-navigating": "Probeer te navigeren naar"
     },

@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "Navigasi",
         "no-nav-results": "Tidak ada hasil navigasi",
+        "placeholder": "Apa yang ingin Anda baca?",
+        "powered-by": "Pencarian suara diberdayakan oleh Tarteel.ai",
         "recent-navigations": "Navigasi terbaru",
         "try-navigating": "Coba navigasikan ke"
     },

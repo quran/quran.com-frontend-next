@@ -44,6 +44,8 @@
     "command-bar": {
         "navigations": "الملاحة",
         "no-nav-results": "لا توجد نتائج تنقل",
+        "placeholder": "ماذا تريد أن تقرأ؟",
+        "powered-by": "البحث الصوتي بدعم من Tarteel.ai",
         "recent-navigations": "التنقلات الأخيرة",
         "try-navigating": "حاول الانتقال إلى"
     },
