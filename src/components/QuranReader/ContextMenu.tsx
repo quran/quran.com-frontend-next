@@ -15,14 +15,14 @@ import { getJuzNumberByHizb } from 'src/utils/juz';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
-    return chapterId ? getChapterData(chapterId) : null;
-  }, [chapterId]);
+    return chapterId ? getChapterData(chapterId, lang) : null;
+  }, [chapterId, lang]);
   const juzNumber = useMemo(() => {
     return hizb ? getJuzNumberByHizb(Number(hizb)) : null;
   }, [hizb]);
@@ -48,7 +48,7 @@ const ContextMenu = () => {
           <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
           <div className={classNames(styles.row)}>
             <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
-              {chapterData.translatedName.name}
+              {chapterData.translatedName}
             </p>
             <p className={classNames(styles.bold, styles.alignStart)}>{chapterData.nameSimple}</p>
           </div>

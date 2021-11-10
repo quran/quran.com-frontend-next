@@ -99,7 +99,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                   description={`${chapter.versesCount} ${t('ayahs')}`}
                   surahName={chapter.nameSimple}
                   surahNumber={Number(chapter.id)}
-                  translatedSurahName={chapter.translatedName.name}
+                  translatedSurahName={chapter.translatedName as string}
                 />
               </Link>
             </div>

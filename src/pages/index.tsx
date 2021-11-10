@@ -47,13 +47,16 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   </div>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allChaptersData = getAllChaptersData();
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = getAllChaptersData(locale);
 
   return {
     props: {
       chaptersResponse: {
-        chapters: Object.values(allChaptersData),
+        chapters: Object.keys(allChaptersData).map((chapterId) => {
+          const chapterData = allChaptersData[chapterId];
+          return { ...chapterData, id: Number(chapterId) };
+        }),
       },
     },
   };

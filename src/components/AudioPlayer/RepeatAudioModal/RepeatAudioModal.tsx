@@ -39,7 +39,7 @@ const RepeatAudioModal = ({
   defaultRepetitionMode,
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const reciter = useSelector(selectReciter, shallowEqual);
   const repeatSettings = useSelector(selectRepeatSettings);
@@ -47,9 +47,9 @@ const RepeatAudioModal = ({
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
 
   const chapterName = useMemo(() => {
-    const chapterData = getChapterData(chapterId);
+    const chapterData = getChapterData(chapterId, lang);
     return chapterData?.nameSimple;
-  }, [chapterId]);
+  }, [chapterId, lang]);
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
     const keys = generateChapterVersesKeys(chapterId);

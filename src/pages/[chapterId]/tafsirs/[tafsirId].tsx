@@ -39,7 +39,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.nameSimple} - ${verseNumber}`}
+        title={`${t('tafsir.surah')} ${chapter.chapter.translatedName} - ${verseNumber}`}
       />
       <QuranReader
         initialData={verses}

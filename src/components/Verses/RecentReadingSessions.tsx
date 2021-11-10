@@ -14,7 +14,7 @@ import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 const RecentReadingSessions = () => {
-  const { t } = useTranslation('home');
+  const { t, lang } = useTranslation('home');
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const verseKeys = Object.keys(recentReadingSessions);
   return (
@@ -25,15 +25,15 @@ const RecentReadingSessions = () => {
           <div className={styles.verseLinksContainer}>
             {verseKeys.map((verseKey) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-              const surah = getChapterData(chapterId);
+              const surah = getChapterData(chapterId, lang);
               return (
                 <div className={styles.verseLink} key={verseKey}>
                   <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
                     <SurahPreview
                       display={SurahPreviewDisplay.Block}
-                      chapterId={Number(surah.id)}
-                      surahNumber={Number(surah.id)}
-                      translatedSurahName={surah.translatedName.name}
+                      chapterId={Number(chapterId)}
+                      surahNumber={Number(chapterId)}
+                      translatedSurahName={surah.translatedName as string}
                       surahName={surah.nameSimple}
                       description={`${t('common:ayah')} ${verseNumber}`}
                       verseCount={surah.versesCount}

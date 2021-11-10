@@ -38,7 +38,7 @@ const Chapter: NextPage<ChapterProps> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.nameSimple} - 1-${
+        title={`${t('surah')} ${chapterResponse.chapter.translatedName} - 1-${
           chapterResponse.chapter.versesCount
         }`}
       />
@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const versesResponse = await getChapterVerses(chapterIdOrVerseKey, apiParams);
     return {
       props: {
-        chapterResponse: { chapter: getChapterData(chapterId, locale) },
+        chapterResponse: { chapter: { ...getChapterData(chapterId, locale), id: chapterId } },
         versesResponse,
         isChapter,
       },

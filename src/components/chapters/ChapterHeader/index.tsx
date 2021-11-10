@@ -27,7 +27,7 @@ interface Props {
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
 const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const headerRef = useRef(null);
   /**
    * the intersection observer is needed so that we know that the first verse
@@ -35,9 +35,9 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
    * the intersection observer root's borders.
    */
   useIntersectionObserver(headerRef, QURAN_READER_OBSERVER_ID);
-  const chapterData = getChapterData(chapterId);
+  const chapterData = getChapterData(chapterId, lang);
 
-  const translatedName = chapterData.translatedName.name;
+  const { translatedName } = chapterData;
   const { nameSimple } = chapterData;
 
   return (
