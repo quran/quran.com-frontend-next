@@ -14,7 +14,8 @@
   border-radius: var(--border-radius-rounded);
   box-shadow: var(--shadow-xlarge);
   position: fixed;
-  inset-start: 50%;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
   width: 90vw;
   max-width: calc(20 * var(--spacing-mega));
