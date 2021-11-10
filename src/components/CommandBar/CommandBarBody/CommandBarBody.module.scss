@@ -36,4 +36,5 @@ $height: calc(8 * var(--spacing-mega));
   overflow-y: auto;
   position: relative;
   height: $height;
+  box-sizing: border-box;
 }

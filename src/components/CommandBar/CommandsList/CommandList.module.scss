@@ -30,10 +30,22 @@
   cursor: pointer;
   color: var(--color-text-faded);
   white-space: nowrap;
+  position: relative;
+  z-index: 2;
   &.selected {
     border-radius: var(--border-radius-default);
-    background: var(--color-background-alternative-faded);
   }
+}
+
+.highlight {
+  transition: transform var(--transition-fast);
+  margin-block-start: calc(-1 * var(--spacing-xsmall));
+  height: calc(1.5 * var(--spacing-mega));
+  width: 100%;
+  position: absolute;
+  border-radius: var(--border-radius-rounded);
+  background: var(--color-background-alternative-faded);
+  z-index: var(--z-index-default);
 }
 
 .keyboardInputContainer {
