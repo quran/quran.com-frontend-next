@@ -12,18 +12,22 @@ import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 
 const CommandBarTrigger: React.FC = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const onClick = useCallback(() => {
     dispatch({ type: toggleIsOpen.type });
   }, [dispatch]);
   return (
     <button className={styles.container} type="button" onClick={onClick}>
-      <IconSearch />
-      <span>{t('voice.trigger')}</span>
+      <div className={styles.leftSection}>
+        <IconSearch />
+        <span className={styles.placeholder}>{t('command-bar.placeholder')}</span>
+      </div>
       <div className={styles.actionsContainer}>
         <KeyboardInput meta keyboardKey="K" />
-        <TarteelVoiceSearchTrigger isCommandBar />
+        <div className={styles.searchButtonWrapper}>
+          <TarteelVoiceSearchTrigger isCommandBar />
+        </div>
       </div>
     </button>
   );

@@ -25,7 +25,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
       <div className={classNames(styles.flowItem)}>
         <HomePageImage />
       </div>
-      <div className={styles.flowItem}>
+      <div className={classNames(styles.flowItem, styles.additionalVerticalGap)}>
         <CommandBarTrigger />
       </div>
       <div className={styles.flowItem}>

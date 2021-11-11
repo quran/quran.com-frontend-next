@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import CloseIcon from '../../../public/icons/close.svg';
@@ -7,7 +8,7 @@ import MicrophoneIcon from '../../../public/icons/microphone.svg';
 
 import styles from './Trigger.module.scss';
 
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import {
   toggleIsSearchDrawerVoiceFlowStarted,
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false }) => {
+  const { t } = useTranslation('common');
   const isSupported = useRef(true);
   const dispatch = useDispatch();
   const isCommandBarVoiceFlowStarted = useSelector(
@@ -62,7 +64,14 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false }) =>
     (!isCommandBar && isSearchDrawerVoiceFlowStarted);
 
   return (
-    <Button onClick={onMicClicked} variant={ButtonVariant.Ghost} className={styles.button}>
+    <Button
+      onClick={onMicClicked}
+      shape={ButtonShape.Circle}
+      variant={ButtonVariant.Ghost}
+      className={styles.button}
+      tooltip={t('command-bar.search-by-voice')}
+      hasSidePadding={false}
+    >
       {showCloseIcon ? <CloseIcon /> : <MicrophoneIcon />}
     </Button>
   );

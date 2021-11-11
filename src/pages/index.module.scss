@@ -14,6 +14,10 @@ $list-max-width: 80rem;
   margin-block-start: var(--spacing-medium);
 }
 
+.additionalVerticalGap {
+  padding-block: var(--spacing-medium);
+}
+
 .flowItem {
   max-width: $list-max-width;
   margin-block-start: 0;
