@@ -21,6 +21,7 @@ $width: calc(11 * var(--spacing-mega));
   position: relative;
   transition: box-shadow var(--transition-fast) ease,
     top var(--transition-fast) ease;
+  box-sizing: border-box;
 
   background: var(--color-background-default);
 

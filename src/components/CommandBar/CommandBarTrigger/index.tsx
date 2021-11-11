@@ -18,7 +18,15 @@ const CommandBarTrigger: React.FC = () => {
     dispatch({ type: toggleIsOpen.type });
   }, [dispatch]);
   return (
-    <button className={styles.container} type="button" onClick={onClick}>
+    <div
+      role="button"
+      onKeyPress={onClick}
+      tabIndex={0}
+      className={styles.container}
+      onClick={onClick}
+      key="commandbar-trigger"
+      id="command-bar"
+    >
       <div className={styles.leftSection}>
         <IconSearch />
         <span className={styles.placeholder}>{t('command-bar.placeholder')}</span>
@@ -29,7 +37,7 @@ const CommandBarTrigger: React.FC = () => {
           <TarteelVoiceSearchTrigger isCommandBar />
         </div>
       </div>
-    </button>
+    </div>
   );
 };
 
