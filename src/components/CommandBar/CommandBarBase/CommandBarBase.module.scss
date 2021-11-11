@@ -21,11 +21,11 @@ $min-height: calc(9 * var(--spacing-mega));
 @keyframes contentHide {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: var(--content-translate-position) scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.96);
+    transform: var(--content-translate-position) scale(0.96);
   }
 }
 
