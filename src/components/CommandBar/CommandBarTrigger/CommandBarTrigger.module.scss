@@ -23,20 +23,6 @@ $width: calc(11 * var(--spacing-mega));
     top var(--transition-fast) ease;
 
   background: var(--color-background-default);
-  @media (prefers-color-scheme: dark) {
-    background-color: var(--color-background-alternative-deep);
-    box-shadow: none;
-    &:hover {
-      box-shadow: none;
-    }
-  }
-  [data-theme="dark"] & {
-    background-color: var(--color-background-alternative-faded);
-    box-shadow: none;
-    &:hover {
-      box-shadow: none;
-    }
-  }
 
   width: 100%;
   display: flex;
@@ -58,6 +44,21 @@ $width: calc(11 * var(--spacing-mega));
     box-shadow: var(--shadow-large);
   }
   justify-content: space-between;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--color-background-alternative-faded);
+    box-shadow: none;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+  [data-theme="dark"] & {
+    background-color: var(--color-background-alternative-faded);
+    box-shadow: none;
+    &:hover {
+      box-shadow: none;
+    }
+  }
 }
 
 .actionsContainer {
