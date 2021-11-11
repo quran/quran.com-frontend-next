@@ -33,7 +33,7 @@ const options = locales.map((lng) => ({
   value: lng,
 }));
 
-const COOKIE_PERSISTENCE_PERIOD_MS = 100 * 24 * 60 * 60 * 1000; // 100 days
+const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
 const LanguageSelector = () => {
   const { lang } = useTranslation();
@@ -54,7 +54,7 @@ const LanguageSelector = () => {
   const onChange = async (newLocale: string) => {
     await setLanguage(newLocale);
     const date = new Date();
-    date.setTime(date.getTime() + COOKIE_PERSISTENCE_PERIOD_MS);
+    date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
     // eslint-disable-next-line i18next/no-literal-string
     document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
   };
