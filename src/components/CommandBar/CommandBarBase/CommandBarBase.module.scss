@@ -10,11 +10,11 @@ $min-height: calc(9 * var(--spacing-mega));
 @keyframes contentShow {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.96);
+    transform: var(--content-translate-position) scale(0.96);
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: var(--content-translate-position) scale(1);
   }
 }
 
@@ -30,13 +30,18 @@ $min-height: calc(9 * var(--spacing-mega));
 }
 
 .content {
+  --content-translate-position: translate(-50%, -50%);
+  [dir="rtl"] & {
+    --content-translate-position: translate(50%, -50%);
+  }
+
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-rounded);
   box-shadow: $shadow;
   position: fixed;
   inset-block-start: 50%;
   inset-inline-start: 50%;
-  transform: translate(-50%, -50%);
+  transform: var(--content-translate-position);
   width: $width;
   max-width: $max-width;
   max-height: $max-height;
