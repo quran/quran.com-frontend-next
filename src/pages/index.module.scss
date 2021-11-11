@@ -4,14 +4,16 @@
 $list-max-width: 80rem;
 
 .pageContainer {
-  padding-block-start: var(--spacing-small);
   padding-block-end: var(--spacing-small);
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
 
-.flow > .flowItem + .flowItem {
-  margin-block-start: var(--spacing-medium);
+.flow > .flowItem {
+  margin-block-start: calc(1.5 * var(--spacing-medium));
+  @include breakpoints.tablet {
+    margin-block-start: calc(2 * var(--spacing-medium));
+  }
 }
 
 .additionalVerticalGap {
