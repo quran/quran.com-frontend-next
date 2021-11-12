@@ -21,15 +21,17 @@ const SearchResultItem: React.FC<Props> = ({ result }) => (
         <div className={styles.quranTextContainer}>
           <p className={styles.verseKey}>{result.verseKey}</p>
           <div className={styles.quranTextResult}>
-            {result.words.map((word, index) => (
-              <QuranWord
-                isHighlighted={!!word.highlight}
-                key={`${result.verseKey}:${index + 1}`}
-                word={word}
-                isWordByWordAllowed={false}
-                isAudioHighlightingAllowed={false}
-              />
-            ))}
+            {result.words.map((word, index) => {
+              return (
+                <QuranWord
+                  isHighlighted={!!word.highlight}
+                  key={`${result.verseKey}:${index + 1}`}
+                  word={word}
+                  isWordByWordAllowed={false}
+                  isAudioHighlightingAllowed={false}
+                />
+              );
+            })}
           </div>
         </div>
         {result.translations?.map((translation) => (

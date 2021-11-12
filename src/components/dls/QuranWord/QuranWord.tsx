@@ -56,9 +56,9 @@ const QuranWord = ({
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const reciter = useSelector(selectReciter, shallowEqual);
-  const chapterId = getChapterNumberFromKey(word.verseKey);
+  const chapterId = word.verseKey ? getChapterNumberFromKey(word.verseKey) : null;
   const { data: audioData } = useSWRImmutable(
-    makeChapterAudioDataUrl(reciter.id, chapterId, true),
+    chapterId ? makeChapterAudioDataUrl(reciter.id, chapterId, true) : null,
     () => getChapterAudioData(reciter.id, chapterId, true),
   );
 
@@ -105,7 +105,7 @@ const QuranWord = ({
   );
 
   const onClick = useCallback(() => {
-    if (wordClickFunctionality === WordClickFunctionality.PlayAudio)
+    if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData)
       onQuranWordClick(word, audioData);
   }, [audioData, word, wordClickFunctionality]);
   return (
