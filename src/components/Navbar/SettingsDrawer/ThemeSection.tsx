@@ -6,7 +6,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 
 import Select from 'src/components/dls/Forms/Select';
-import { selectTheme, setTheme, ThemeType } from 'src/redux/slices/theme';
+import { selectTheme, setTheme } from 'src/redux/slices/theme';
+import ThemeType from 'src/redux/types/ThemeType';
 
 const ThemeSection = () => {
   const dispatch = useDispatch();

@@ -2,84 +2,25 @@
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { DEFAULT_RECITER } from './defaultData';
-
 import { getChapterAudioData } from 'src/api';
 import {
   triggerPlayAudio,
   triggerPauseAudio,
   playFromTimestamp,
 } from 'src/components/AudioPlayer/EventTriggers';
+import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
+import AudioState from 'src/redux/types/AudioState';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import AudioData from 'types/AudioData';
 import Reciter from 'types/Reciter';
 
-export enum AudioDataStatus {
-  Ready = 'Ready',
-  Loading = 'Loading',
-  NoFile = 'NoFile',
-}
-
-export type RepeatSettings = {
-  repeatRange: number;
-  repeatEachVerse: number;
-  from: string;
-  to: string;
-  delayMultiplier: number;
-};
-
-export type RepeatProgress = {
-  repeatEachVerse: number;
-  repeatRange: number;
-};
-
-export type AudioState = {
-  isPlaying: boolean;
-  reciter: Reciter;
-  audioData: AudioData;
-  audioDataStatus: AudioDataStatus;
-  isMobileMinimizedForScrolling: boolean;
-  enableAutoScrolling: boolean;
-  repeatSettings: RepeatSettings;
-  repeatProgress: RepeatProgress;
-  isDownloadingAudio: boolean;
-  playbackRate: number;
-};
-
-export const defaultRepeatSettings = {
-  delayMultiplier: 0,
-  repeatRange: 3,
-  repeatEachVerse: 1,
-  from: null,
-  to: null,
-};
-
-export const defaultRepeatProgress = {
-  repeatEachVerse: 1,
-  repeatRange: 1,
-};
-
-const DEFAULT_PLAYBACK_RATE = 1;
-
-const initialState: AudioState = {
-  enableAutoScrolling: true,
-  isPlaying: false,
-  audioData: null,
-  reciter: DEFAULT_RECITER,
-  audioDataStatus: AudioDataStatus.NoFile,
-  isMobileMinimizedForScrolling: false,
-  repeatSettings: defaultRepeatSettings,
-  repeatProgress: defaultRepeatProgress,
-  isDownloadingAudio: false,
-  playbackRate: DEFAULT_PLAYBACK_RATE,
-};
-
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
 export const selectReciter = (state: RootState) => state.audioPlayerState.reciter;
 export const selectIsUsingDefaultReciter = (state: RootState) =>
-  state.audioPlayerState.reciter.id === DEFAULT_RECITER.id;
+  state.audioPlayerState.isUsingDefaultReciter;
 export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
 export const selectAudioDataStatus = (state: RootState) => state.audioPlayerState.audioDataStatus;
 export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPlaying;
@@ -138,18 +79,19 @@ export const loadAndPlayAudioData = createAsyncThunk<void, number, { state: Root
  *
  * @param {Reciter} reciter
  */
-export const setReciterAndPauseAudio = createAsyncThunk<void, Reciter, { state: RootState }>(
-  'audioPlayerState/setReciterAndPlayAudio',
-  async (reciter, thunkAPI) => {
-    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
-    triggerPauseAudio();
-    thunkAPI.dispatch(setReciter(reciter));
+export const setReciterAndPauseAudio = createAsyncThunk<
+  void,
+  { reciter: Reciter; locale: string },
+  { state: RootState }
+>('audioPlayerState/setReciterAndPlayAudio', async ({ reciter, locale }, thunkAPI) => {
+  thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
+  triggerPauseAudio();
+  thunkAPI.dispatch(setReciter({ reciter, locale }));
 
-    const state = thunkAPI.getState();
-    const audioData = await getChapterAudioData(reciter.id, selectAudioData(state).chapterId);
-    thunkAPI.dispatch(setAudioData(audioData));
-  },
-);
+  const state = thunkAPI.getState();
+  const audioData = await getChapterAudioData(reciter.id, selectAudioData(state).chapterId);
+  thunkAPI.dispatch(setAudioData(audioData));
+});
 
 /**
  * get the timestamp for the the verseKey
@@ -190,7 +132,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
 export const audioPlayerStateSlice = createSlice({
   name: 'audioPlayerState',
-  initialState,
+  initialState: getAudioPlayerStateInitialState(),
   reducers: {
     setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => ({
       ...state,
@@ -200,9 +142,12 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       isMobileMinimizedForScrolling: action.payload,
     }),
-    setReciter: (state, action: PayloadAction<Reciter>) => ({
+    setReciter: (state, action: PayloadAction<{ reciter: Reciter; locale: string }>) => ({
       ...state,
-      reciter: action.payload,
+      isUsingDefaultReciter:
+        getAudioPlayerStateInitialState(action.payload.locale).reciter.id ===
+        action.payload.reciter.id,
+      reciter: action.payload.reciter,
     }),
     setAudioData: (state: AudioState, action: PayloadAction<AudioData>) => ({
       ...state,
@@ -216,16 +161,16 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       enableAutoScrolling: action.payload,
     }),
-    resetAudioData: (state) => ({
+    resetAudioData: (state, action: PayloadAction<string>) => ({
       ...state,
-      audioData: initialState.audioData,
-      audioDataStatus: initialState.audioDataStatus,
+      audioData: getAudioPlayerStateInitialState(action.payload).audioData,
+      audioDataStatus: getAudioPlayerStateInitialState(action.payload).audioDataStatus,
     }),
     setRepeatSettings: (state, action) => ({
       ...state,
-      repeatSettings: { ...action.payload },
+      repeatSettings: { ...action.payload.verseRepetition },
       // reset the repeat progress when we set the new repeat settings
-      repeatProgress: { ...initialState.repeatProgress },
+      repeatProgress: { ...getAudioPlayerStateInitialState(action.payload.locale).repeatProgress },
     }),
     setRepeatProgress: (state, action) => ({
       ...state,
@@ -241,11 +186,12 @@ export const audioPlayerStateSlice = createSlice({
         repeatEachVerse: state.repeatSettings.repeatEachVerse,
       },
     }),
-    resetRepeatEachVerseProgress: (state) => ({
+    resetRepeatEachVerseProgress: (state, action: PayloadAction<string>) => ({
       ...state,
       repeatProgress: {
         ...state.repeatProgress,
-        repeatEachVerse: defaultRepeatProgress.repeatEachVerse,
+        repeatEachVerse: getAudioPlayerStateInitialState(action.payload).repeatSettings
+          .repeatEachVerse,
       },
     }),
     exitRepeatMode: (state) => ({
@@ -265,12 +211,13 @@ export const audioPlayerStateSlice = createSlice({
       playbackRate: action.payload,
     }),
   },
-  // reset reciter to DEFAULT_RECITER
+  // reset reciter to the default based on the locale
   // WHEN `reset` action is dispatched
   extraReducers: (builder) => {
-    builder.addCase(resetSettings, (state) => ({
+    builder.addCase(resetSettings, (state, action) => ({
       ...state,
-      reciter: DEFAULT_RECITER,
+      isUsingDefaultReciter: true,
+      reciter: getAudioPlayerStateInitialState(action.payload.locale).reciter,
     }));
   },
 });

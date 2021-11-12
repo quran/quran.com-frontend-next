@@ -1,6 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
-  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -12,11 +11,14 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+import { getStoreInitialState } from './defaultSettings/util';
+import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
+import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
 import prayerTimes from './slices/prayerTimes';
 import bookmarks from './slices/QuranReader/bookmarks';
@@ -35,7 +37,7 @@ import welcomeMessage from './slices/welcomeMessage';
 
 const persistConfig = {
   key: 'root',
-  version: 14,
+  version: 15,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -51,6 +53,7 @@ const persistConfig = {
     'readingTracker',
     'welcomeMessage',
     'prayerTimes',
+    'defaultSettings',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -72,22 +75,25 @@ export const rootReducer = combineReducers({
   welcomeMessage,
   voiceSearch,
   prayerTimes,
+  defaultSettings,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        // Used for Redux-persist, see:https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  devTools: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development', // disables the devtools in production
-});
+const getStore = (locale: string) =>
+  configureStore({
+    reducer: persistedReducer,
+    // @ts-ignore
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          // Used for Redux-persist, see:https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }).concat(DefaultSettingsMiddleware),
+    devTools: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development', // disables the devtools in production
+    // @ts-ignore
+    preloadedState: getStoreInitialState(locale),
+  });
 
-export const persistor = persistStore(store);
-
-export default store;
+export default getStore;

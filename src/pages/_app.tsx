@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
       </Head>
-      <ReduxProvider>
+      <ReduxProvider locale={locale}>
         <ThemeProvider>
           <IdProvider>
             <DefaultSeo {...createSEOConfig({})} />

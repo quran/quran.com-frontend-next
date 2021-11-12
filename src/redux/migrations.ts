@@ -1,7 +1,5 @@
-import { DEFAULT_RECITER } from './slices/AudioPlayer/defaultData';
-import { defaultRepeatProgress, defaultRepeatSettings } from './slices/AudioPlayer/state';
-import { initialState as readingPreferencesInitialState } from './slices/QuranReader/readingPreferences';
-import { DEFAULT_TAFSIRS } from './slices/QuranReader/tafsirs';
+import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
+import { getAudioPlayerStateInitialState } from './defaultSettings/util';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { MushafLines } from 'types/QuranReader';
@@ -46,8 +44,8 @@ export default {
     ...state,
     audioPlayerState: {
       ...state.audioPlayerState,
-      repeatSettings: defaultRepeatSettings,
-      repeatProgress: defaultRepeatProgress,
+      repeatSettings: getAudioPlayerStateInitialState().repeatSettings,
+      repeatProgress: getAudioPlayerStateInitialState().repeatProgress,
     },
   }),
   9: (state) => ({
@@ -79,14 +77,24 @@ export default {
     ...state,
     audioPlayerState: {
       ...state.audioPlayerState,
-      reciter: DEFAULT_RECITER,
+      reciter: getAudioPlayerStateInitialState().reciter.id,
     },
   }),
   14: (state) => ({
     ...state,
     readingPreferences: {
       ...state.readingPreferences,
-      wordClickFunctionality: readingPreferencesInitialState.wordClickFunctionality,
+      wordClickFunctionality: initialState.readingPreferences.wordClickFunctionality,
+    },
+  }),
+  15: (state) => ({
+    ...state,
+    defaultSettings: {
+      isUsingDefaultSettings: true,
+    },
+    audioPlayerState: {
+      ...state.audioPlayerState,
+      isUsingDefaultReciter: true,
     },
   }),
 };

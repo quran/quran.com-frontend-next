@@ -9,10 +9,10 @@ import styles from './FeedbackWidget.module.scss';
 import Button from 'src/components/dls/Button/Button';
 import Link from 'src/components/dls/Link/Link';
 import {
-  AudioDataStatus,
   selectAudioDataStatus,
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 const FeedbackWidget = () => {
   const { t } = useTranslation('common');

@@ -3,6 +3,7 @@
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import InfiniteScroll from 'react-infinite-scroller';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -55,6 +56,7 @@ const QuranReader = ({
   id,
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
+  const { lang } = useTranslation();
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
@@ -80,6 +82,7 @@ const QuranReader = ({
         isSelectedTafsirData,
         id,
         reciter: reciter.id,
+        locale: lang,
       }),
     verseFetcher,
     {

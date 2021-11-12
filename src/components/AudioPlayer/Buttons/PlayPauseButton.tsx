@@ -12,12 +12,12 @@ import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Bu
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import {
-  AudioDataStatus,
   loadAndPlayAudioData,
   selectAudioData,
   selectAudioDataStatus,
   selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 

@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux';
+import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import store, { persistor } from './store';
+import getStore from './store';
 
 /**
  * A wrapper around the Provider component to skip rendering <PersistGate />
@@ -12,8 +13,9 @@ import store, { persistor } from './store';
  * @param {any} props
  * @returns {Provider}
  */
-const ReduxProvider = (props) => {
-  const { children } = props;
+const ReduxProvider = ({ children, locale }) => {
+  const store = getStore(locale);
+  const persistor = persistStore(store);
 
   const isClient = !!(
     typeof window !== 'undefined' &&

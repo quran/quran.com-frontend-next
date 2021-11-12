@@ -85,7 +85,7 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const onPlayClick = () => {
-    dispatch(setRepeatSettings(verseRepetition));
+    dispatch(setRepeatSettings({ verseRepetition, locale: lang }));
     dispatch(
       playFrom({
         chapterId: Number(chapterId),

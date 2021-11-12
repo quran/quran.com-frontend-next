@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   try {
-    const versesResponse = await getChapterVerses(chapterNumber, {
+    const versesResponse = await getChapterVerses(chapterNumber, locale, {
       page: verseNumber, // we pass the verse id as a the page and then fetch only 1 verse per page.
       perPage: 1, // only 1 verse per page
       translations: null,

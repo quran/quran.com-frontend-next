@@ -2,11 +2,14 @@ import React from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './LanguageSelector.module.scss';
 
 import i18nConfig from 'i18n.json';
 import Select from 'src/components/dls/Forms/Select';
+import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
+import resetSettings from 'src/redux/slices/reset-settings';
 
 const { locales } = i18nConfig;
 
@@ -36,6 +39,8 @@ const options = locales.map((lng) => ({
 const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
 const LanguageSelector = () => {
+  const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
+  const dispatch = useDispatch();
   const { lang } = useTranslation();
 
   /**
@@ -52,6 +57,10 @@ const LanguageSelector = () => {
    * @param {string} newLocale
    */
   const onChange = async (newLocale: string) => {
+    // if the user hadn't changed the setting and he is transitioning to a new locale, we want to apply the default settings of the new locale
+    if (isUsingDefaultSettings) {
+      dispatch(resetSettings(newLocale));
+    }
     await setLanguage(newLocale);
     const date = new Date();
     date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);

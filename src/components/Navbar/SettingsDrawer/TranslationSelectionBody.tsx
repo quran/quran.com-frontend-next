@@ -29,7 +29,7 @@ const TranslationSelectionBody = () => {
       ? [...selectedTranslations, Number(selectedTranslationId)]
       : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
-    dispatch(setSelectedTranslations(nextTranslations));
+    dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
   };
 
   return (

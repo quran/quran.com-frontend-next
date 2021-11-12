@@ -11,10 +11,10 @@ import resetSettings from 'src/redux/slices/reset-settings';
 // for example, check slices/theme.ts. it has extra reducer that listens to `reset` action
 const ResetButton = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   return (
     <div className={styles.resetButtonContainer}>
-      <Button onClick={() => dispatch(resetSettings())}>{t('settings.reset-cta')}</Button>
+      <Button onClick={() => dispatch(resetSettings(lang))}>{t('settings.reset-cta')}</Button>
     </div>
   );
 };

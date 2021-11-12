@@ -53,8 +53,9 @@ export const fetcher = async function fetcher<T>(
 
 export const getChapterVerses = async (
   id: string | number,
+  locale: string,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, params));
+): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, locale, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
@@ -186,27 +187,31 @@ export const getChapterInfo = async (
  * Get the verses of a specific Juz.
  *
  * @param {string} id the ID of the Juz.
+ * @param {string} locale  the locale.
  * @param {string} params the params that we might need to include that differs from the default ones.
  *
  * @returns {Promise<VersesResponse>}
  */
 export const getJuzVerses = async (
   id: string,
+  locale: string,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => fetcher(makeJuzVersesUrl(id, params));
+): Promise<VersesResponse> => fetcher(makeJuzVersesUrl(id, locale, params));
 
 /**
  * Get the verses of a specific page.
  *
  * @param {string} id the ID of the page.
+ * @param {string} locale  the locale.
  * @param {string} params the params that we might need to include that differs from the default ones.
  *
  * @returns {Promise<VersesResponse>}
  */
 export const getPageVerses = async (
   id: string,
+  locale: string,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => fetcher(makePageVersesUrl(id, params));
+): Promise<VersesResponse> => fetcher(makePageVersesUrl(id, locale, params));
 
 /**
  * Get the footnote details.
