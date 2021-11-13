@@ -40,7 +40,25 @@ module.exports = {
       path.resolve('./'),
     ];
 
-    // Return the altered config
+    const fileLoaderRule = config.module.rules.find(rule => rule.test.test('.svg'));
+    fileLoaderRule.exclude = /\.svg$/;
+
+    // This is needed for inline svg imports
+    config.module.rules.push({
+      test: /\.svg$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            prettier: false,
+            svgo: true,
+            svgoConfig: { plugins: [{ removeViewBox: false }] },
+            titleProp: true,
+          },
+        },
+      ],
+    });
     return config;
   },
 }
