@@ -51,7 +51,6 @@ const config = {
             prettier: false,
             svgo: true,
             svgoConfig: { plugins: [{ removeViewBox: false }] },
-            titleProp: true,
           },
         },
       ],
