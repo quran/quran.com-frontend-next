@@ -18,7 +18,7 @@ import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getVerseWords } from 'src/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';

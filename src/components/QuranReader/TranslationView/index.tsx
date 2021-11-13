@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';
 
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 
 type TranslationViewProps = {

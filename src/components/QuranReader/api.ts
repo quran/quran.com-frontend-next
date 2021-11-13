@@ -1,7 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 
 import { fetcher } from 'src/api';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
@@ -20,6 +20,7 @@ interface RequestKeyInput {
   isSelectedTafsirData: boolean;
   id: string | number;
   reciter: number;
+  locale: string;
 }
 /**
  * Generate the request key (the API url based on the params)
@@ -40,6 +41,7 @@ export const getRequestKey = ({
   selectedTranslations,
   selectedTafsirs,
   reciter,
+  locale,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page =
@@ -47,7 +49,7 @@ export const getRequestKey = ({
       ? initialData.verses[0].verseNumber
       : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
-    return makeJuzVersesUrl(id, {
+    return makeJuzVersesUrl(id, locale, {
       page,
       reciter,
       translations: selectedTranslations.join(', '),
@@ -56,7 +58,7 @@ export const getRequestKey = ({
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
-    return makePageVersesUrl(id, {
+    return makePageVersesUrl(id, locale, {
       page,
       reciter,
       translations: selectedTranslations.join(', '),
@@ -65,7 +67,7 @@ export const getRequestKey = ({
     });
   }
   if (isSelectedTafsirData || isTafsirData) {
-    return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, {
+    return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, locale, {
       page,
       perPage: 1,
       translations: null,
@@ -75,7 +77,7 @@ export const getRequestKey = ({
     });
   }
   if (quranReaderDataType === QuranReaderDataType.VerseRange) {
-    return makeVersesUrl(id, {
+    return makeVersesUrl(id, locale, {
       reciter,
       page,
       from: initialData.metaData.from,
@@ -86,7 +88,7 @@ export const getRequestKey = ({
     });
   }
 
-  return makeVersesUrl(id, {
+  return makeVersesUrl(id, locale, {
     reciter,
     page,
     translations: selectedTranslations.join(', '),

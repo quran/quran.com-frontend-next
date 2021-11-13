@@ -1,4 +1,4 @@
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
 

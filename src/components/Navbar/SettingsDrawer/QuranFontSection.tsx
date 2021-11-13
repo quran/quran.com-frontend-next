@@ -8,23 +8,23 @@ import Section from './Section';
 import Counter from 'src/components/dls/Counter/Counter';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
-  QuranReaderStyles,
   selectQuranReaderStyles,
   setQuranFont,
-  initialState as QuranReaderStylesInitialState,
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const dispatch = useDispatch();
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
@@ -60,7 +60,7 @@ const QuranFontSection = () => {
   // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
   // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
   // if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
-  const getSelectedType = (font: QuranFont) => {
+  const getSelectedType = (font: QuranFont, locale: string) => {
     const selectedViewEntry = Object.entries(fonts).find(([, values]) =>
       values.some((v) => v.id === font),
     );
@@ -69,7 +69,7 @@ const QuranFontSection = () => {
       return view;
     }
     // if no font is given, or invalid font is given, get type for default font
-    return getSelectedType(QuranReaderStylesInitialState.quranFont);
+    return getSelectedType(getQuranReaderStylesInitialState(locale).quranFont, locale);
   };
 
   // get default font for selected type. We take the first font in this case
@@ -78,7 +78,7 @@ const QuranFontSection = () => {
     const [font] = fonts[selectedType];
     return font.value;
   };
-  const selectedType = getSelectedType(quranFont);
+  const selectedType = getSelectedType(quranFont, lang);
   const lines = useMemo(
     () =>
       Object.values(MushafLines).map((line) => ({

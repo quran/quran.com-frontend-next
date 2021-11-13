@@ -7,7 +7,7 @@ import { getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
-import { DEFAULT_TAFSIRS } from 'src/redux/slices/QuranReader/tafsirs';
+import { DEFAULT_TAFSIRS } from 'src/redux/defaultSettings/defaultSettings';
 import { getChapterData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     };
   }
 
-  const versesResponse = await getChapterVerses(chapterId, {
+  const versesResponse = await getChapterVerses(chapterId, locale, {
     page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
     perPage: 1, // only 1 verse per page
     translations: null,

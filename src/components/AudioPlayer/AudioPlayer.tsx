@@ -10,11 +10,11 @@ import {
   setIsPlaying,
   selectAudioDataStatus,
   setAudioStatus,
-  AudioDataStatus,
   selectPlaybackRate,
   selectIsMobileMinimizedForScrolling,
   selectAudioData,
 } from 'src/redux/slices/AudioPlayer/state';
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ssr: false,

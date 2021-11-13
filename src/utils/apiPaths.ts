@@ -1,27 +1,45 @@
 import { ITEMS_PER_PAGE, makeUrl } from './api';
 import stringify from './qs-stringify';
 
-import { DEFAULT_RECITER } from 'src/redux/slices/AudioPlayer/defaultData';
+import {
+  getAudioPlayerStateInitialState,
+  getTranslationsInitialState,
+} from 'src/redux/defaultSettings/util';
 import { CalculationMethod, Madhab } from 'src/redux/slices/prayerTimes';
-import { DEFAULT_TRANSLATIONS } from 'src/redux/slices/QuranReader/translations';
 import { AdvancedCopyRequest, SearchRequest } from 'types/ApiRequests';
 import { QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
-  translations: DEFAULT_TRANSLATIONS.join(', '),
   translationFields: 'resource_name,language_id', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
   fields: `${QuranFont.Uthmani},chapter_id,hizb_number`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
-  reciter: DEFAULT_RECITER.id,
 };
 
-export const makeVersesUrl = (id: string | number, params?: Record<string, unknown>) => {
-  // allow overriding the default values e.g. translations
-  const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
+/**
+ * Use the default params and allow overriding the default values e.g. translations.
+ *
+ * @param {string} locale
+ * @param {Record<string, unknown>} params
+ * @returns {Record<string, unknown>}
+ */
+const getVersesParams = (
+  locale: string,
+  params?: Record<string, unknown>,
+): Record<string, unknown> => ({
+  ...{
+    ...DEFAULT_VERSES_PARAMS,
+    translations: getTranslationsInitialState(locale).selectedTranslations.join(', '),
+    reciter: getAudioPlayerStateInitialState(locale).reciter.id,
+  },
+  ...params,
+});
 
-  return makeUrl(`/verses/by_chapter/${id}`, apiParams);
-};
+export const makeVersesUrl = (
+  id: string | number,
+  locale: string,
+  params?: Record<string, unknown>,
+) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(locale, params));
 
 export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
   makeUrl(`/verses/filter`, { ...params });
@@ -115,32 +133,29 @@ export const makeChapterInfoUrl = (chapterId: string, language: string): string 
  * Compose the url for Juz's verses API.
  *
  * @param {string} id  the Id of the juz.
+ * @param {string} locale  the locale.
  * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
  * @returns {string}
  */
-export const makeJuzVersesUrl = (id: string | number, params?: Record<string, unknown>): string => {
-  // allow overriding the default values e.g. translations
-  const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
-
-  return makeUrl(`/verses/by_juz/${id}`, apiParams);
-};
+export const makeJuzVersesUrl = (
+  id: string | number,
+  locale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(locale, params));
 
 /**
  * Compose the url for page's verses API.
  *
  * @param {string} id  the Id of the page.
+ * @param {string} locale  the locale.
  * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
  * @returns {string}
  */
 export const makePageVersesUrl = (
   id: string | number,
+  locale: string,
   params?: Record<string, unknown>,
-): string => {
-  // allow overriding the default values e.g. translations
-  const apiParams = { ...DEFAULT_VERSES_PARAMS, ...params };
-
-  return makeUrl(`/verses/by_page/${id}`, apiParams);
-};
+): string => makeUrl(`/verses/by_page/${id}`, getVersesParams(locale, params));
 
 /**
  * Compose the url for footnote's API.

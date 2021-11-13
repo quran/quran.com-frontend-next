@@ -8,14 +8,14 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { resetAudioData } from 'src/redux/slices/AudioPlayer/state';
 
 const CloseButton = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   return (
     <PopoverMenu.Item
       shouldCloseMenuAfterClick
       onClick={() => {
         triggerPauseAudio();
-        dispatch(resetAudioData());
+        dispatch(resetAudioData(lang));
       }}
       icon={<CloseIcon />}
     >

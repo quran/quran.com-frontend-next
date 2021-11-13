@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     apiParams = { ...apiParams, ...{ page: verseNumber, perPage: 1 } };
   }
   try {
-    const versesResponse = await getChapterVerses(chapterIdOrVerseKey, apiParams);
+    const versesResponse = await getChapterVerses(chapterIdOrVerseKey, locale, apiParams);
     return {
       props: {
         chapterResponse: { chapter: { ...getChapterData(chapterId, locale), id: chapterId } },

@@ -13,12 +13,12 @@ import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
 import {
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
-  QuranReaderStyles,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
 import { getTranslatedLabelWithLanguage } from 'src/utils/input';
@@ -47,8 +47,11 @@ const TafsirSection = () => {
   const { tafsirFontScale } = quranReaderStyles;
 
   const onTafsirsChange = useCallback(
-    (values) => dispatch(setSelectedTafsirs(stringsToNumbersArray(values as string[]))),
-    [dispatch],
+    (values) =>
+      dispatch(
+        setSelectedTafsirs({ tafsirs: stringsToNumbersArray(values as string[]), locale: lang }),
+      ),
+    [dispatch, lang],
   );
 
   return (

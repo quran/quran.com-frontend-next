@@ -49,7 +49,10 @@ const TafsirsAdjustment = () => {
     const selectedTafsirsIDs = Array.from(e.target.selectedOptions, (option) =>
       Number(option.value),
     );
-    dispatch({ type: setSelectedTafsirs.type, payload: selectedTafsirsIDs });
+    dispatch({
+      type: setSelectedTafsirs.type,
+      payload: { tafsirs: selectedTafsirsIDs, locale: lang },
+    });
   };
 
   return (

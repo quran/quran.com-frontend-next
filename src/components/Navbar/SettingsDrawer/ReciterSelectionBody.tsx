@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import styles from './ReciterSelectionBody.module.scss';
@@ -9,6 +10,7 @@ import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
 const SettingsReciter = () => {
+  const { lang } = useTranslation();
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
 
@@ -17,7 +19,7 @@ const SettingsReciter = () => {
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
-    dispatch(setReciterAndPauseAudio(reciter));
+    dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
   };
 
   return (

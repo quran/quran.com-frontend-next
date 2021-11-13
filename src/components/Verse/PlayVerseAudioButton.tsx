@@ -13,10 +13,10 @@ import {
   selectReciter,
   playFrom,
   selectAudioDataStatus,
-  AudioDataStatus,
   exitRepeatMode,
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
