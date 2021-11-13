@@ -1,11 +1,13 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
 
 import styles from './index.module.scss';
 
-import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
+import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzListSkeleton';
 import Footer from 'src/components/dls/Footer/Footer';
 import Separator from 'src/components/dls/Separator/Separator';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
@@ -14,6 +16,14 @@ import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { ChaptersResponse } from 'types/ApiResponses';
+
+const ChapterAndJuzListWrapper = dynamic(
+  () => import('src/components/chapters/ChapterAndJuzList'),
+  {
+    ssr: false,
+    loading: () => <ChapterAndJuzListSkeleton />,
+  },
+);
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
@@ -33,7 +43,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
         <BookmarksSection />
       </div>
       <div className={styles.flowItem}>
-        <ChapterAndJuzList chapters={chapters} />
+        <ChapterAndJuzListWrapper chapters={chapters} />
       </div>
       <div className={styles.flowItem}>
         <Separator />

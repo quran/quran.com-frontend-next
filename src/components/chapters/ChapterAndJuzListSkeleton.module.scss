@@ -1,0 +1,33 @@
+@use "src/styles/breakpoints";
+.skeletonContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.skeletonItem {
+  margin: 8px;
+  display: flex;
+  flex: 1 0 30%;
+  height: 74px;
+  @include breakpoints.smallerThanDesktop {
+    flex: 1 0 42%;
+  }
+  @include breakpoints.smallerThanMobileL {
+    margin: 8px 2px;
+    flex: 1 0 100%;
+  }
+}
+
+.tabSkeleton {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 8px;
+}
+
+.tabSkeletonItem {
+  width: 100px;
+  margin-inline-end: 12px;
+  margin-bottom: 8px;
+}

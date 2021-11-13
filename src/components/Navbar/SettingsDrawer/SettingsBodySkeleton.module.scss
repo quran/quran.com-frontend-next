@@ -1,0 +1,47 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 8px;
+}
+
+.titleSkeleton {
+  width: 100px;
+  height: 16px;
+}
+
+.rowSkeleton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inputRow {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid;
+  [data-theme="dark"] & {
+    border-color: rgba(255, 255, 255, 0.13);
+  }
+  [data-theme="light"] & {
+    border-color: rgba(0, 0, 0, 0.11);
+  }
+}
+
+.label {
+  margin: 8px;
+  margin-inline-end: auto;
+  width: 20%;
+  height: 16px;
+}
+
+.input {
+  margin: 8px;
+  width: 60%;
+  height: 28px;
+}
