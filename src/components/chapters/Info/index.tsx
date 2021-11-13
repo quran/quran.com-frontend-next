@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
@@ -59,7 +58,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
               </div>
               <div>
                 <p className={styles.detailHeader}>{t('surah-info:revelation-place')}</p>
-                <p>{capitalize(chapter.revelationPlace)}</p>
+                <p>{t(`surah-info:${chapter.revelationPlace}`)}</p>
               </div>
             </div>
           </div>
