@@ -40,6 +40,23 @@ const config = {
         worker: ['AudioWorklet from audio-worklet'],
       },
     };
+
+    webpackConfig.module.rules.push({
+      test: /\.svg$/i,
+      issuer: { and: [/\.(js|ts)x?$/] },
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            prettier: false,
+            svgo: true,
+            svgoConfig: { plugins: [{ removeViewBox: false }] },
+            titleProp: true,
+          },
+        },
+      ],
+    });
+
     return webpackConfig;
   },
   SentryWebpackPluginOptions: {
