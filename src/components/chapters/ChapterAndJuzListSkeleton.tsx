@@ -9,8 +9,8 @@ const ChapterAndJuzListSkeleton = () => {
   return (
     <span className={styles.skeletonContainer}>
       <div className={styles.tabSkeleton}>
-        <Skeleton isActive isSquared className={styles.tabSkeletonItem} />
-        <Skeleton isActive isSquared style={{ width: '100px' }} />
+        <Skeleton isActive isSquared className={styles.firstTabSkeleton} />
+        <Skeleton isActive isSquared className={styles.secondTabSkeleton} />
       </div>
       {chaptersArr.map((k, i) => (
         <Skeleton

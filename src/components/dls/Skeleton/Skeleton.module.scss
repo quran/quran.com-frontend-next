@@ -16,10 +16,10 @@ $animationDuration: 8s;
   border-radius: var(--border-radius-default);
 
   [data-theme="dark"] & {
-    background-color: rgba(255, 255, 255, 0.13);
+    background-color: var(--color-background-alternative-faint);
   }
   [data-theme="light"] & {
-    background-color: rgba(0, 0, 0, 0.11);
+    background-color: var(--color-secondary-faded);
   }
   animation: 1.5s ease-in-out 0.5s infinite normal none running loading;
 

@@ -6,15 +6,16 @@
 }
 
 .skeletonItem {
-  margin: 8px;
   display: flex;
   flex: 1 0 30%;
-  height: 74px;
+  margin: var(--spacing-xsmall);
+  padding: var(--spacing-xsmall) 0;
+  height: calc(2 * var(--spacing-mega));
   @include breakpoints.smallerThanDesktop {
     flex: 1 0 42%;
   }
   @include breakpoints.smallerThanMobileL {
-    margin: 8px 2px;
+    margin: var(--spacing-xsmall) var(--spacing-micro);
     flex: 1 0 100%;
   }
 }
@@ -23,11 +24,18 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 8px;
+  margin: var(--spacing-xsmall);
+  @include breakpoints.smallerThanMobileL {
+    margin-inline-start: var(--spacing-micro);
+  }
 }
 
-.tabSkeletonItem {
-  width: 100px;
-  margin-inline-end: 12px;
-  margin-bottom: 8px;
+.firstTabSkeleton {
+  width: calc(3 * var(--spacing-mega));
+  margin-inline-end: var(--spacing-small);
+  margin-bottom: var(--spacing-xsmall);
+}
+
+.secondTabSkeleton {
+  width: calc(3 * var(--spacing-mega));
 }
