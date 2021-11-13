@@ -91,7 +91,7 @@ const getStore = (locale: string) =>
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
       }).concat(DefaultSettingsMiddleware),
-    devTools: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development', // disables the devtools in production
+    devTools: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production', // disables the devtools in production
     // @ts-ignore
     preloadedState: getStoreInitialState(locale),
   });

@@ -59,8 +59,8 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   mushafLines: MushafLines.SixteenLines,
 };
 
-const DEFAULT_TRANSLATION = 20; // just a placeholder.
-const DEFAULT_TRANSLITERATION = 12; // just a placeholder.
+const DEFAULT_TRANSLATION = 20;
+const DEFAULT_TRANSLITERATION = 12;
 
 const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   readingPreference: ReadingPreference.Translation,

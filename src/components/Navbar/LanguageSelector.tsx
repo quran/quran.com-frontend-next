@@ -57,7 +57,7 @@ const LanguageSelector = () => {
    * @param {string} newLocale
    */
   const onChange = async (newLocale: string) => {
-    // if the user hadn't changed the setting and he is transitioning to a new locale, we want to apply the default settings of the new locale
+    // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
     if (isUsingDefaultSettings) {
       dispatch(resetSettings(newLocale));
     }
