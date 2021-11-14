@@ -9,7 +9,7 @@ export enum Direction {
   RTL = 'rtl',
 }
 
-interface LanguageAlternate {
+interface LinkLanguageAlternate {
   hrefLang: string;
   href: string;
 }
@@ -46,13 +46,13 @@ export const getDir = (locale: string): Direction =>
 
 /**
  * Generate the language alternates of a given path so that Search Engines can
- * recommend the alternate page to the user based on his region/locale.
+ * recommend the alternate page to the users based on their region/locale.
  *
  * @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
  * @param {string} path
- * @returns {LanguageAlternate[]}
+ * @returns {LinkLanguageAlternate[]}
  */
-export const getLanguageAlternates = (path: string): LanguageAlternate[] => {
+export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => {
   const { locales } = i18nConfig;
   const basePath = getBasePath();
   return locales
