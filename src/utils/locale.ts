@@ -1,3 +1,5 @@
+import { getBasePath } from './url';
+
 import i18nConfig from 'i18n.json';
 
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
@@ -52,9 +54,7 @@ export const getDir = (locale: string): Direction =>
  */
 export const getLanguageAlternates = (path: string): LanguageAlternate[] => {
   const { locales } = i18nConfig;
-  const basePath = `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
-    process.env.NEXT_PUBLIC_VERCEL_URL
-  }`;
+  const basePath = getBasePath();
   return locales
     .map((locale) => ({
       hrefLang: locale,
@@ -62,6 +62,6 @@ export const getLanguageAlternates = (path: string): LanguageAlternate[] => {
     }))
     .concat({
       hrefLang: 'x-default', // used when no other language/region matches the user's browser setting @see https://developers.google.com/search/docs/advanced/crawling/localized-versions#xdefault
-      href: `${path}/${path}`,
+      href: `${basePath}${path}`,
     });
 };
