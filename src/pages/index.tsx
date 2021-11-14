@@ -23,10 +23,10 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.pageContainer}>
     <div className={classNames(styles.listContainer, styles.flow)}>
       <div className={classNames(styles.flowItem)}>
-        <HomePageImage />
-      </div>
-      <div className={styles.flowItem}>
         <CommandBarTrigger />
+      </div>
+      <div className={classNames(styles.flowItem)}>
+        <HomePageImage />
       </div>
       <div className={styles.flowItem}>
         <HomePageWelcomeMessage />

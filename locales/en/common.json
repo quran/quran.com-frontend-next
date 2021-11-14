@@ -47,7 +47,8 @@
         "placeholder": "What do you want to read?",
         "powered-by": "Voice search powered by Tarteel.ai",
         "recent-navigations": "Recent navigations",
-        "try-navigating": "Try navigating to"
+        "try-navigating": "Try navigating to",
+        "search-by-voice": "Search by voice"
     },
     "community": {
         "cta": "Join Community",
