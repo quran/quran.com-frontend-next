@@ -29,3 +29,18 @@ export const navigateToExternalUrl = (url: string) => {
     }
   }
 };
+
+/**
+ * Get the base path of the current deployment on Vercel/local machine
+ * e.g. http://localhost
+ * or https://quran-com-ebqc5a2d5-qurancom.vercel.app this is needed
+ * if we want to construct a full path e.g. when we add alternate languages
+ * meta tags.
+ *
+ * @see https://vercel.com/docs/concepts/projects/environment-variables
+ * @returns {string}
+ */
+export const getBasePath = (): string =>
+  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
+    process.env.NEXT_PUBLIC_VERCEL_URL
+  }`;

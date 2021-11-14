@@ -1,10 +1,12 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { NextSeoProps } from 'next-seo';
 
+import { getLanguageAlternates } from './locale';
+
 export const config = {
   siteName: 'Quran.com',
-  defaultDescription: 'The Quran translated into many languages in a simple and easy interface',
-  websiteLogo: 'https://next.quran.com/images/homepage.png',
+  defaultDescription: 'The Quran translated into many languages in a simple and easy interface', // TODO: this needs localization
+  websiteLogo: 'https://next.quran.com/images/homepage.png', // TODO: update this once we are live
   twitterHandle: '@app_quran',
   twitterCardType: 'summary_large_image',
   facebookApp: '342185219529773',
@@ -18,6 +20,8 @@ export const config = {
 };
 
 type SeoConfigType = {
+  path?: string;
+  locale?: string;
   title?: string;
   description?: string;
   canonicalUrl?: string;
@@ -32,6 +36,8 @@ export function createSEOConfig({
   title,
   description,
   canonicalUrl,
+  path,
+  locale,
 }: SeoConfigType = {}): SEOProps {
   const seoTitle = title || '';
   const siteDescription = description || config.defaultDescription;
@@ -44,9 +50,10 @@ export function createSEOConfig({
     dangerouslySetAllPagesToNoFollow: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow // TODO: remove this once we are ready to index the site
     dangerouslySetAllPagesToNoIndex: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex // TODO: remove this once we are ready to index the site
     canonical: canonicalUrl,
+    languageAlternates: getLanguageAlternates(path), // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
     openGraph: {
       type: 'website',
-      locale: 'en_US', // TODO: (@abdellatif): adjust this based on the next-translate locale
+      locale,
       url: canonicalUrl,
       title: seoTitle,
       description: siteDescription,
