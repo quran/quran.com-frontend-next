@@ -47,6 +47,7 @@
         "placeholder": "Apa yang ingin Anda baca?",
         "powered-by": "Pencarian suara diberdayakan oleh Tarteel.ai",
         "recent-navigations": "Navigasi terbaru",
+        "search-by-voice": "Cari dengan suara",
         "try-navigating": "Coba navigasikan ke"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "Mengurangi",
         "increase": "Meningkatkan"
     },
+    "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dalam antarmuka yang sederhana dan mudah",
     "developers": "Pengembang",
     "error": {
         "general": "Ada yang salah. Silakan coba lagi.",

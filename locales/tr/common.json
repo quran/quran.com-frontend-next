@@ -47,6 +47,7 @@
         "placeholder": "Ne okumak istiyorsun?",
         "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
         "recent-navigations": "Son gezinmeler",
+        "search-by-voice": "Sesle ara",
         "try-navigating": "gezinmeyi deneyin"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "Azalmak",
         "increase": "Arttırmak"
     },
+    "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "geliştiriciler",
     "error": {
         "general": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",

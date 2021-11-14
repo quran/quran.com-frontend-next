@@ -5,7 +5,6 @@ import { getLanguageAlternates } from './locale';
 
 export const config = {
   siteName: 'Quran.com',
-  defaultDescription: 'The Quran translated into many languages in a simple and easy interface', // TODO: this needs localization
   websiteLogo: 'https://next.quran.com/images/homepage.png', // TODO: update this once we are live
   twitterHandle: '@app_quran',
   twitterCardType: 'summary_large_image',
@@ -40,11 +39,10 @@ export function createSEOConfig({
   locale,
 }: SeoConfigType = {}): SEOProps {
   const seoTitle = title || '';
-  const siteDescription = description || config.defaultDescription;
 
   return {
     title: seoTitle,
-    description: siteDescription,
+    description,
     titleTemplate: '%s - Quran.com',
     defaultTitle: config.siteName,
     dangerouslySetAllPagesToNoFollow: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow // TODO: remove this once we are ready to index the site
@@ -56,7 +54,7 @@ export function createSEOConfig({
       locale,
       url: canonicalUrl,
       title: seoTitle,
-      description: siteDescription,
+      description,
       images: [
         {
           url: config.websiteLogo,

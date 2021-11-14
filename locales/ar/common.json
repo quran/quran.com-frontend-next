@@ -47,6 +47,7 @@
         "placeholder": "ماذا تريد أن تقرأ؟",
         "powered-by": "البحث الصوتي بدعم من Tarteel.ai",
         "recent-navigations": "التنقلات الأخيرة",
+        "search-by-voice": "البحث عن طريق الصوت",
         "try-navigating": "حاول الانتقال إلى"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "انقُصْ",
         "increase": "زِدْ"
     },
+    "default-description": "القرآن مترجم إلى العديد من اللغات في واجهة بسيطة وسهلة",
     "developers": "المطورون",
     "error": {
         "general": "هناك خطأ ما. حاول مرة أخرى.",
