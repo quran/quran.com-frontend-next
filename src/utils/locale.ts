@@ -52,7 +52,9 @@ export const getDir = (locale: string): Direction =>
  */
 export const getLanguageAlternates = (path: string): LanguageAlternate[] => {
   const { locales } = i18nConfig;
-  const basePath = process.env.NEXT_PUBLIC_VERCEL_URL;
+  const basePath = `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
+    process.env.NEXT_PUBLIC_VERCEL_URL
+  }`;
   return locales
     .map((locale) => ({
       hrefLang: locale,
