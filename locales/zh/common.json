@@ -47,6 +47,7 @@
         "placeholder": "你想读什么？",
         "powered-by": "由 Tarteel.ai 提供支持的语音搜索",
         "recent-navigations": "最近的导航",
+        "search-by-voice": "语音搜索",
         "try-navigating": "尝试导航到"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "减少",
         "increase": "增加"
     },
+    "default-description": "古兰经翻译成多种语言，界面简单易用",
     "developers": "开发商",
     "error": {
         "general": "出了些问题。请再试一次。",

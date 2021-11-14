@@ -47,6 +47,7 @@
         "placeholder": "อยากอ่านอะไร?",
         "powered-by": "ค้นหาด้วยเสียงขับเคลื่อนโดย Tarteel.ai",
         "recent-navigations": "การนำทางล่าสุด",
+        "search-by-voice": "ค้นหาด้วยเสียง",
         "try-navigating": "ลองไปที่"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "ลด",
         "increase": "เพิ่มขึ้น"
     },
+    "default-description": "คัมภีร์กุรอานแปลเป็นหลายภาษาในอินเทอร์เฟซที่ง่ายและสะดวก",
     "developers": "นักพัฒนา",
     "error": {
         "general": "อะไรบางอย่างผิดปกติ. กรุณาลองอีกครั้ง.",

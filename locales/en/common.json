@@ -47,8 +47,8 @@
         "placeholder": "What do you want to read?",
         "powered-by": "Voice search powered by Tarteel.ai",
         "recent-navigations": "Recent navigations",
-        "try-navigating": "Try navigating to",
-        "search-by-voice": "Search by voice"
+        "search-by-voice": "Search by voice",
+        "try-navigating": "Try navigating to"
     },
     "community": {
         "cta": "Join Community",
@@ -64,6 +64,7 @@
         "decrease": "Decrease",
         "increase": "Increase"
     },
+    "default-description": "The Quran translated into many languages in a simple and easy interface",
     "developers": "Developers",
     "error": {
         "general": "Something went wrong. Please try again.",

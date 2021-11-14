@@ -47,6 +47,7 @@
         "placeholder": "میخواهی چی بخوانی؟",
         "powered-by": "جستجوی صوتی ارائه شده توسط Tarteel.ai",
         "recent-navigations": "پیمایش های اخیر",
+        "search-by-voice": "جستجوی صوتی",
         "try-navigating": "سعی کنید به"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "نزول کردن",
         "increase": "افزایش دادن"
     },
+    "default-description": "قرآن در یک رابط کاربری ساده و آسان به بسیاری از زبان ها ترجمه شده است",
     "developers": "توسعه دهندگان",
     "error": {
         "general": "مشکلی پیش آمد. لطفا دوباره تلاش کنید.",

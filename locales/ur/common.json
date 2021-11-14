@@ -47,6 +47,7 @@
         "placeholder": "آپ کیا پڑھنا چاہتے ہیں؟",
         "powered-by": "Tarteel.ai کے ذریعے تقویت یافتہ صوتی تلاش",
         "recent-navigations": "حالیہ نیویگیشنز",
+        "search-by-voice": "آواز کے ذریعے تلاش کریں۔",
         "try-navigating": "تک نیویگیٹ کرنے کی کوشش کریں۔"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "کمی",
         "increase": "اضافہ"
     },
+    "default-description": "قرآن مجید کا ایک سادہ اور آسان انٹرفیس میں متعدد زبانوں میں ترجمہ کیا گیا ہے۔",
     "developers": "ڈویلپرز",
     "error": {
         "general": "کچھ غلط ہو گیا. دوبارہ کوشش کریں.",

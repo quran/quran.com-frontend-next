@@ -47,6 +47,7 @@
         "placeholder": "Que veux-tu lire ?",
         "powered-by": "Recherche vocale optimisée par Tarteel.ai",
         "recent-navigations": "Navigations récentes",
+        "search-by-voice": "Recherche vocale",
         "try-navigating": "Essayez de naviguer vers"
     },
     "community": {
@@ -63,6 +64,7 @@
         "decrease": "Diminuer",
         "increase": "Augmenter"
     },
+    "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
     "developers": "Développeurs",
     "error": {
         "general": "Quelque chose s'est mal passé. Veuillez réessayer.",

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { IdProvider } from '@radix-ui/react-id';
 import { DefaultSeo } from 'next-seo';
+import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -24,6 +25,7 @@ import 'src/styles/global.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const { locale, asPath } = useRouter();
+  const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
@@ -58,7 +60,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
       <ReduxProvider locale={locale}>
         <ThemeProvider>
           <IdProvider>
-            <DefaultSeo {...createSEOConfig({ path: asPath, locale })} />
+            <DefaultSeo
+              {...createSEOConfig({ path: asPath, locale, description: t('default-description') })}
+            />
             <GlobalListeners />
             <Navbar />
             <DeveloperUtility />
