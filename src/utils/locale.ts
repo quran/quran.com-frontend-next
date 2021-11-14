@@ -1,9 +1,15 @@
-/* eslint-disable import/prefer-default-export */
+import i18nConfig from 'i18n.json';
+
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
 
 export enum Direction {
   LTR = 'ltr',
   RTL = 'rtl',
+}
+
+interface LanguageAlternate {
+  hrefLang: string;
+  href: string;
 }
 
 /**
@@ -35,3 +41,25 @@ export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(loc
  */
 export const getDir = (locale: string): Direction =>
   isRTLLocale(locale) ? Direction.RTL : Direction.LTR;
+
+/**
+ * Generate the language alternates of a given path so that Search Engines can
+ * recommend the alternate page to the user based on his region/locale.
+ *
+ * @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
+ * @param {string} path
+ * @returns {LanguageAlternate[]}
+ */
+export const getLanguageAlternates = (path: string): LanguageAlternate[] => {
+  const { locales } = i18nConfig;
+  const basePath = process.env.NEXT_PUBLIC_VERCEL_URL;
+  return locales
+    .map((locale) => ({
+      hrefLang: locale,
+      href: `${basePath}/${locale}${path === '/' ? '' : path}`,
+    }))
+    .concat({
+      hrefLang: 'x-default', // used when no other language/region matches the user's browser setting @see https://developers.google.com/search/docs/advanced/crawling/localized-versions#xdefault
+      href: `${path}/${path}`,
+    });
+};
