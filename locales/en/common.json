@@ -109,7 +109,9 @@
         "calculation-method": "Calculation Method",
         "madhab": "Madhab",
         "title": "Prayer Times",
-        "find-accurate-location": "Find Accurate Location"
+        "find-accurate-location": "Find Accurate Location",
+        "access-denied": "Access to location denied",
+        "allow-access": "Please allow location access and click \"Find Accurate Location \" to get accurate prayer times"
     },
     "prev": "Previous",
     "privacy": "Privacy",
