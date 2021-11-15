@@ -28,7 +28,7 @@ const calculationMethodOptions = generateSelectOptions(
 
 const madhabOptions = generateSelectOptions([Madhab.Hanafi, Madhab.Shafi]);
 
-export const setAccurateLocation = (dispatch) => {
+export const setAccurateLocation = (dispatch, onSuccess?: () => void) => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (data) => {
@@ -38,7 +38,7 @@ export const setAccurateLocation = (dispatch) => {
             longitude: data.coords.longitude,
           }),
         );
-        toast('Prayer times location updated');
+        if (onSuccess) onSuccess();
       },
       () => {
         dispatch(setGeoPermission(GeoPermission.Denied));
@@ -80,7 +80,13 @@ const PrayerTimesSection = () => {
           />
         </Section.Row>
         <div className={styles.findLocationContainer}>
-          <Button onClick={() => setAccurateLocation(dispatch)}>
+          <Button
+            onClick={() =>
+              setAccurateLocation(dispatch, () => {
+                toast(t('prayer-times.location-updated'));
+              })
+            }
+          >
             {t('prayer-times.find-accurate-location')}
           </Button>
           {geoPermission === GeoPermission.Denied && (

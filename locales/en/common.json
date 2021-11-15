@@ -111,7 +111,8 @@
         "title": "Prayer Times",
         "find-accurate-location": "Find Accurate Location",
         "access-denied": "Access to location denied",
-        "allow-access": "Please allow location access and click \"Find Accurate Location \" to get accurate prayer times"
+        "allow-access": "Please allow location access and click \"Find Accurate Location \" to get accurate prayer times",
+        "location-updated": "Prayer times location updated"
     },
     "prev": "Previous",
     "privacy": "Privacy",
