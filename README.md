@@ -8,25 +8,25 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://quran.com">
+  <a href="https://alshaafy.com">
     <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h1 align="center">The Noble Quran</h1>
+  <h1 align="center">ALSHAAFY</h1>
 
   <p align="center">
     The official source code repository for Quran.com
     <br />
-    <a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>
+    <a href="https://NBK.NET/"><strong>Join ALSHAAFY community »</strong></a>
     <br />
     <br />
-    <a href="https://quran.com">Visit Quran.com</a>
+    <a href="https://quran.com">Visit ALSHAAFY.COM</a>
     ·
-    <a href="https://github.com/quran/quran.com-frontend-next/issues">Report Bug</a>
+    <a href="https://github.com/odin-code/quran.black/issues">Report Bug</a>
     ·
-    <a href="https://github.com/quran/quran.com-frontend-next/issues">Request Feature</a>
+    <a href="https://github.com/odin-code/quran.black/issues">Request Feature</a>
     •
-    <a href="https://quran.github.io/quran.com-frontend-next/storybook/master">Storybook</a>
+    <a href="https://quran.github.io/odin-code/quran.black/storybook/master">Storybook</a>
   </p>
 </p>
 
