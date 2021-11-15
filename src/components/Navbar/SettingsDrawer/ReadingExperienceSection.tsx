@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -17,12 +18,21 @@ import {
   selectWordByWordByWordPreferences,
   selectWordClickFunctionality,
   setWordClickFunctionality,
+  selectWordByWordLocale,
+  setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
+import { getLocaleName } from 'src/utils/locale';
 import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
 
+const WBW_LOCALES = ['en', 'ur', 'id', 'bn'];
+const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
+  label: getLocaleName(locale),
+  value: locale,
+}));
+
 const ReadingExperienceSection = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -31,6 +41,7 @@ const ReadingExperienceSection = () => {
   );
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const wordByWordValue = getWordByWordValue(
     showWordByWordTranslation,
@@ -66,6 +77,15 @@ const ReadingExperienceSection = () => {
     } else {
       dispatch(setShowTooltipFor([value] as WordByWordType[]));
     }
+  };
+
+  /**
+   * Handle when the word by word locale changes.
+   *
+   * @param {string} value
+   */
+  const onWordByWordLocaleChange = (value: string) => {
+    dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
   };
 
   const wordByWordOptions = useMemo(
@@ -118,6 +138,16 @@ const ReadingExperienceSection = () => {
           options={wordByWordOptions}
           value={wordByWordValue}
           onChange={onWordByWordChange}
+        />
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>{t('wbw-trans-lang')}</Section.Label>
+        <Select
+          id="wordByWord"
+          name="wordByWord"
+          options={WORD_BY_WORD_LOCALES_OPTIONS}
+          value={wordByWordLocale}
+          onChange={onWordByWordLocaleChange}
         />
       </Section.Row>
       <Section.Row>

@@ -186,6 +186,7 @@
         "suggest": "Please begin reciting and your verse will appear."
     },
     "wbw": "Word By Word",
+    "wbw-trans-lang": "Word By Word Language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",

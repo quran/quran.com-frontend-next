@@ -10,29 +10,12 @@ import i18nConfig from 'i18n.json';
 import Select from 'src/components/dls/Forms/Select';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
+import { getLocaleName } from 'src/utils/locale';
 
 const { locales } = i18nConfig;
 
-const LANGUAGE_NAMES = {
-  en: 'English',
-  ar: 'العربية',
-  bn: 'বাংলা',
-  fa: 'فارسی',
-  fr: 'Français',
-  id: 'Indonesia',
-  it: 'Inglese',
-  nl: 'Dutch',
-  pt: 'Português',
-  ru: 'русский',
-  sq: 'Shqip',
-  th: 'ภาษาไทย',
-  tr: 'Türkçe',
-  ur: 'اردو',
-  zh: '简体中文',
-  ms: 'bahasa Melayu',
-};
 const options = locales.map((lng) => ({
-  label: LANGUAGE_NAMES[lng],
+  label: getLocaleName(lng),
   value: lng,
 }));
 
