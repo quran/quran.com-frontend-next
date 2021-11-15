@@ -21,7 +21,7 @@ const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterRespo
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.translatedName} - 1-${
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - 1-${
           chapterResponse.chapter.versesCount
         }`}
       />

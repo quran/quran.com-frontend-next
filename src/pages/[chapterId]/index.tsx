@@ -38,7 +38,7 @@ const Chapter: NextPage<ChapterProps> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.translatedName} - 1-${
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - 1-${
           chapterResponse.chapter.versesCount
         }`}
       />
