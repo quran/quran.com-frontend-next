@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://quran.com">
+  <a href="https://alshaafy.com">
     <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -17,7 +17,7 @@
   <p align="center">
     The official source code repository for Quran.com
     <br />
-    <a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>
+    <a href="https://NBK.NET/"><strong>Join ALSHAAFY community »</strong></a>
     <br />
     <br />
     <a href="https://quran.com">Visit ALSHAAFY.COM</a>
