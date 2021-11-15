@@ -47,6 +47,7 @@
 }
 
 .input {
+  padding: 0;
   margin-block-start: var(--spacing-micro);
   margin-inline-end: var(--spacing-micro);
   margin-block-end: var(--spacing-micro);
@@ -95,16 +96,18 @@
   @include prefixSuffixContainer;
   padding-block-start: 0;
   padding-block-end: 0;
-  padding-inline-start: var(--spacing-xsmall);
-  padding-inline-end: var(--spacing-xsmall);
   color: var(--color-text-faded);
+
+  > svg {
+    width: var(--spacing-large);
+  }
 }
 
 .prefix {
-  border-inline-end: 1px solid var(--color-background-alternative-deep);
   border-start-start-radius: var(--border-radius-default);
   border-end-start-radius: var(--border-radius-default);
-  background: var(--color-background-alternative-medium);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xxsmall);
 }
 
 .suffix {
@@ -112,4 +115,7 @@
   border-start-end-radius: var(--border-radius-default);
   border-end-end-radius: var(--border-radius-default);
   background: var(--color-background-alternative-medium);
+
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xsmall);
 }

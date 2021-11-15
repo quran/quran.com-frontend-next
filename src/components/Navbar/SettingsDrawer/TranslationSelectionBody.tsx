@@ -1,10 +1,16 @@
+import { useState } from 'react';
+
+import Fuse from 'fuse.js';
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import IconSearch from '../../../../public/icons/search.svg';
+
 import styles from './TranslationSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Input from 'src/components/dls/Forms/Input';
 import {
   selectSelectedTranslations,
   setSelectedTranslations,
@@ -12,13 +18,23 @@ import {
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { TranslationsResponse } from 'types/ApiResponses';
+import AvailableTranslation from 'types/AvailableTranslation';
+
+const filterTranslations = (translations, searchQuery: string): AvailableTranslation[] => {
+  const fuse = new Fuse(translations, {
+    keys: ['name', 'languageName'],
+  });
+
+  const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
+  return filteredTranslations;
+};
 
 const TranslationSelectionBody = () => {
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { lang } = useTranslation();
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // TODO: there's a bug from previous version, where the TranslationView sometime not updated when selectedTranslations is updated
   const onTranslationsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTranslationId = e.target.value;
 
@@ -34,10 +50,23 @@ const TranslationSelectionBody = () => {
 
   return (
     <div>
+      <div className={styles.searchInputContainer}>
+        <Input
+          prefix={<IconSearch />}
+          id="translations-search"
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder="Search Translations"
+          fixedWidth={false}
+        />
+      </div>
       <DataFetcher
         queryKey={makeTranslationsUrl(lang)}
         render={(data: TranslationsResponse) => {
-          const translationByLanguages = groupBy(data.translations, 'languageName');
+          const filteredTranslations = searchQuery
+            ? filterTranslations(data.translations, searchQuery)
+            : data.translations;
+          const translationByLanguages = groupBy(filteredTranslations, 'languageName');
           return (
             <div>
               {Object.entries(translationByLanguages).map(([language, translations]) => {
