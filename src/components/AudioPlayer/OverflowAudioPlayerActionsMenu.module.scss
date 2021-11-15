@@ -5,7 +5,8 @@
   position: relative;
 }
 
-[dir="rtl"].overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
+[dir="rtl"].overriddenPopoverMenuContentPositioning
+  [data-radix-popper-content-wrapper] {
   transform: translate3d(100%, 0, 0) !important;
   @include breakpoints.tablet {
     transform: translate3d(50%, 0, 0) !important;
@@ -13,10 +14,8 @@
 }
 
 .overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
-  /* stylelint-disable-next-line csstools/use-logical */
-  top: initial !important;
-  /* stylelint-disable-next-line csstools/use-logical */
-  bottom: calc(1.5 * var(--spacing-mega)) !important;
+  inset-block-start: initial !important;
+  inset-block-end: calc(1.5 * var(--spacing-mega)) !important;
   position: absolute !important;
   z-index: var(--z-index-max);
   inset-inline-start: 100% !important;
