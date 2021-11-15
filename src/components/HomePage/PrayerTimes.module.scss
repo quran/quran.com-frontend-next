@@ -19,3 +19,16 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
 .prayerTimesContainer {
   text-align: end;
 }
+
+.locationContainer {
+  display: flex;
+  align-items: center;
+}
+
+.findLocationButton {
+  fill: white; // using white because the background is always dark
+  &:hover {
+    fill: var(--color-text-default);
+  }
+  margin-inline-end: var(--spacing-xxsmall);
+}

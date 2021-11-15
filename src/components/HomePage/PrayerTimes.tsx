@@ -1,19 +1,46 @@
+import { useEffect } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
+
+import FindLocationIcon from '../../../public/icons/find-location.svg';
+import { setAccurateLocation } from '../Navbar/SettingsDrawer/PrayerTimesSection';
 
 import styles from './PrayerTimes.module.scss';
 
 import { fetcher } from 'src/api';
-import { selectCalculationMethod, selectMadhab } from 'src/redux/slices/prayerTimes';
+import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import {
+  GeoPermission,
+  selectCalculationMethod,
+  selectGeoLocation,
+  selectGeoPermission,
+  selectMadhab,
+} from 'src/redux/slices/prayerTimes';
 import { makePrayerTimesUrl } from 'src/utils/apiPaths';
 
 const PrayerTimes = () => {
   const { t } = useTranslation('home');
+  const geoLocation = useSelector(selectGeoLocation, shallowEqual);
+  const geoPermission = useSelector(selectGeoPermission);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // get the location every time the user refresh the page if we already have the permission
+    if (geoPermission === GeoPermission.Granted) setAccurateLocation(dispatch);
+  }, [dispatch, geoPermission]);
 
   const calculationMethod = useSelector(selectCalculationMethod);
   const madhab = useSelector(selectMadhab);
-  const { data } = useSWR<Data>(makePrayerTimesUrl({ calculationMethod, madhab }), fetcher);
+  const { data } = useSWR<Data>(
+    makePrayerTimesUrl({
+      calculationMethod,
+      madhab,
+      ...geoLocation,
+    }),
+    fetcher,
+  );
   const hijriDate = useHijriDateFormatter(data?.hijriDateData);
 
   if (!data) return null;
@@ -25,7 +52,17 @@ const PrayerTimes = () => {
     <div className={styles.container}>
       <div>{hijriDate}</div>
       <div className={styles.prayerTimesContainer}>
-        <div>{formatLocation(data.geo)}</div>
+        <div className={styles.locationContainer}>
+          <Button
+            onClick={() => setAccurateLocation(dispatch)}
+            type={ButtonType.Secondary}
+            className={styles.findLocationButton}
+            variant={ButtonVariant.Ghost}
+          >
+            <FindLocationIcon />
+          </Button>
+          <span>{formatLocation(data.geo)}</span>
+        </div>
         {nextPrayerTime && (
           <div>
             <span className={styles.prayerName}>

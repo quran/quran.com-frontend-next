@@ -22,15 +22,37 @@ export enum Madhab {
   Hanafi = 'Hanafi',
 }
 
+type GeoLocation = {
+  latitude: number;
+  longitude: number;
+};
+
+export enum GeoPermission {
+  Granted = 'granted',
+  Denied = 'denied',
+  Undetermined = 'Undetermined',
+}
+
 export const initialState = {
   calculationMethod: CalculationMethod.MuslimWorldLeague,
   madhab: Madhab.Shafi,
+  geoLocation: null as GeoLocation,
+  geoPermission: GeoPermission.Undetermined,
 };
 
 const prayerTimes = createSlice({
   name: 'prayerTimes',
   initialState,
   reducers: {
+    setGeoLocation: (state, action: PayloadAction<GeoLocation>) => ({
+      ...state,
+      geoLocation: action.payload,
+      geoPermission: GeoPermission.Granted,
+    }),
+    setGeoPermission: (state, action: PayloadAction<GeoPermission>) => ({
+      ...state,
+      geoPermission: action.payload,
+    }),
     setCalculationMethod: (state, action: PayloadAction<CalculationMethod>) => ({
       ...state,
       calculationMethod: action.payload,
@@ -44,5 +66,8 @@ const prayerTimes = createSlice({
 
 export const selectCalculationMethod = (state: RootState) => state.prayerTimes.calculationMethod;
 export const selectMadhab = (state: RootState) => state.prayerTimes.madhab;
-export const { setCalculationMethod, setMadhab } = prayerTimes.actions;
+export const selectGeoLocation = (state: RootState) => state.prayerTimes.geoLocation;
+export const selectGeoPermission = (state: RootState) => state.prayerTimes.geoPermission;
+export const { setCalculationMethod, setMadhab, setGeoLocation, setGeoPermission } =
+  prayerTimes.actions;
 export default prayerTimes.reducer;

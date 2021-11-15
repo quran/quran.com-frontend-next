@@ -108,7 +108,8 @@
     "prayer-times": {
         "calculation-method": "Calculation Method",
         "madhab": "Madhab",
-        "title": "Prayer Times"
+        "title": "Prayer Times",
+        "find-accurate-location": "Find Accurate Location"
     },
     "prev": "Previous",
     "privacy": "Privacy",
