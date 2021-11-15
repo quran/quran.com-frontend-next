@@ -23,7 +23,7 @@ import AvailableTranslation from 'types/AvailableTranslation';
 const filterTranslations = (translations, searchQuery: string): AvailableTranslation[] => {
   const fuse = new Fuse(translations, {
     keys: ['name', 'languageName', 'authorName'],
-    threshold: 0.4,
+    threshold: 0.3,
   });
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
