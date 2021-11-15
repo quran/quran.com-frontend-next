@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import BackIcon from '../../../../public/icons/west.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import { setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 
 const getPlaybackRateLabel = (playbackRate) => (playbackRate === 1 ? 'Normal' : playbackRate);
-const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
-const AudioSpeedMenu = ({ onBack }) => {
+const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
 
@@ -28,9 +28,10 @@ const AudioSpeedMenu = ({ onBack }) => {
       <PopoverMenu.Item icon={<BackIcon />} onClick={onBack}>
         {t('audio.playback-speed')}
       </PopoverMenu.Item>
+      <PopoverMenu.Divider />
       {rates}
     </>
   );
 };
 
-export default AudioSpeedMenu;
+export default AudioPlaybackRateMenu;

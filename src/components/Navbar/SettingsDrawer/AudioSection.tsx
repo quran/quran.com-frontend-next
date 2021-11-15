@@ -62,7 +62,7 @@ const AudioSection = () => {
           <Select
             id="theme-section"
             name="theme"
-            options={playbackRates}
+            options={playbackRatesOptions}
             value={playbackRate.toString()}
             onChange={onPlaybackRateChanged}
           />
@@ -84,15 +84,10 @@ const AudioSection = () => {
   );
 };
 
-const playbackRates = generateSelectOptions([
-  '0.25',
-  '0.5',
-  '0.75',
-  '1',
-  '1.25',
-  '1.5',
-  '1.75',
-  '2',
-]);
+export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+
+const playbackRatesOptions = generateSelectOptions(
+  playbackRates.map((playbackRate) => playbackRate.toString()),
+);
 
 export default AudioSection;
