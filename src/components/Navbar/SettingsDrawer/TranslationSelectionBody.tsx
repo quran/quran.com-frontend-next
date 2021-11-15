@@ -22,7 +22,8 @@ import AvailableTranslation from 'types/AvailableTranslation';
 
 const filterTranslations = (translations, searchQuery: string): AvailableTranslation[] => {
   const fuse = new Fuse(translations, {
-    keys: ['name', 'languageName'],
+    keys: ['name', 'languageName', 'authorName'],
+    threshold: 0.4,
   });
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
@@ -30,6 +31,7 @@ const filterTranslations = (translations, searchQuery: string): AvailableTransla
 };
 
 const TranslationSelectionBody = () => {
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { lang } = useTranslation();
@@ -56,7 +58,7 @@ const TranslationSelectionBody = () => {
           id="translations-search"
           value={searchQuery}
           onChange={setSearchQuery}
-          placeholder="Search Translations"
+          placeholder={t('settings.search-translations')}
           fixedWidth={false}
         />
       </div>
