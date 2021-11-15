@@ -5,6 +5,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import FindLocationIcon from '../../../public/icons/find-location.svg';
+import { ToastContainer } from '../dls/Toast/Toast';
 import { setAccurateLocation } from '../Navbar/SettingsDrawer/PrayerTimesSection';
 
 import styles from './PrayerTimes.module.scss';
@@ -49,33 +50,36 @@ const PrayerTimes = () => {
   const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;
 
   return (
-    <div className={styles.container}>
-      <div>{hijriDate}</div>
-      <div className={styles.prayerTimesContainer}>
-        <div className={styles.locationContainer}>
-          <Button
-            onClick={() => setAccurateLocation(dispatch)}
-            type={ButtonType.Secondary}
-            className={styles.findLocationButton}
-            variant={ButtonVariant.Ghost}
-          >
-            <FindLocationIcon />
-          </Button>
-          <span>{formatLocation(data.geo)}</span>
-        </div>
-        {nextPrayerTime && (
-          <div>
-            <span className={styles.prayerName}>
-              {t(`prayer-names.${nextPrayerTime.prayerName}`)}
-            </span>{' '}
-            <span>
-              {formatTime(nextPrayerTime.time.getHours())}:
-              {formatTime(nextPrayerTime.time.getMinutes())}
-            </span>
+    <>
+      <div className={styles.container}>
+        <div>{hijriDate}</div>
+        <div className={styles.prayerTimesContainer}>
+          <div className={styles.locationContainer}>
+            <Button
+              onClick={() => setAccurateLocation(dispatch)}
+              type={ButtonType.Secondary}
+              className={styles.findLocationButton}
+              variant={ButtonVariant.Ghost}
+            >
+              <FindLocationIcon />
+            </Button>
+            <span>{formatLocation(data.geo)}</span>
           </div>
-        )}
+          {nextPrayerTime && (
+            <div>
+              <span className={styles.prayerName}>
+                {t(`prayer-names.${nextPrayerTime.prayerName}`)}
+              </span>{' '}
+              <span>
+                {formatTime(nextPrayerTime.time.getHours())}:
+                {formatTime(nextPrayerTime.time.getMinutes())}
+              </span>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+      <ToastContainer />
+    </>
   );
 };
 

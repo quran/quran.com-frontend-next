@@ -3,3 +3,10 @@
   flex-direction: column;
   margin-block-start: var(--spacing-xsmall);
 }
+
+.accessDeniedContainer {
+  margin-block-start: var(--spacing-small);
+}
+.accessDenied {
+  font-weight: var(--font-weight-bold);
+}
