@@ -5,8 +5,7 @@
   position: relative;
 }
 
-[dir="rtl"].overriddenPopoverMenuContentPositioning
-  [data-radix-popper-content-wrapper] {
+[dir="rtl"].overriddenPopoverMenuContentPositioning [data-radix-popper-content-wrapper] {
   transform: translate3d(100%, 0, 0) !important;
   @include breakpoints.tablet {
     transform: translate3d(50%, 0, 0) !important;
@@ -27,4 +26,8 @@
     inset-inline-start: 50% !important;
     transform: translate3d(-50%, 0, 0) !important;
   }
+}
+
+.audioSpeedText {
+  font-size: 10px;
 }
