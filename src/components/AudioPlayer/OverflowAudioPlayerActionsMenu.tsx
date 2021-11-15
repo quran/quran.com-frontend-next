@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { useState, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -20,12 +21,10 @@ enum AudioPlayerMenu {
   AudioSpeed = 'audio-speed',
 }
 
-const OverflowAudioPlayerActionsMenu = () => {
-  const { t } = useTranslation('common');
-  const direction = useDirection();
-  const playbackRate = useSelector(selectPlaybackRate);
-
+const OverflowMenuBody = () => {
   const [selectedMenu, setSelectedMenu] = useState<AudioPlayerMenu>(AudioPlayerMenu.Main);
+  const { t } = useTranslation('common');
+  const playbackRate = useSelector(selectPlaybackRate);
 
   const menus = useMemo(
     () => ({
@@ -52,6 +51,13 @@ const OverflowAudioPlayerActionsMenu = () => {
     [t, playbackRate],
   );
 
+  return <>{menus[selectedMenu]}</>;
+};
+
+const OverflowAudioPlayerActionsMenu = () => {
+  const { t } = useTranslation('common');
+  const direction = useDirection();
+
   return (
     <div dir={direction} className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
@@ -62,7 +68,7 @@ const OverflowAudioPlayerActionsMenu = () => {
           </Button>
         }
       >
-        {menus[selectedMenu]}
+        <OverflowMenuBody />
       </PopoverMenu>
     </div>
   );
