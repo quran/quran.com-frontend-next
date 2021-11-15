@@ -186,6 +186,7 @@
         "suggest": "请开始背诵，你的诗句就会出现。"
     },
     "wbw": "逐词地",
+    "wbw-trans-lang": "逐字语言",
     "word-click": {
         "no-audio": "无音频",
         "play-audio": "播放音频",

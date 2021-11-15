@@ -61,6 +61,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
 
 const DEFAULT_TRANSLATION = 20;
 const DEFAULT_TRANSLITERATION = 12;
+const DEFAULT_WBW_LOCALE = 'en';
 
 const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   readingPreference: ReadingPreference.Translation,
@@ -68,6 +69,8 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   selectedWordByWordTranslation: DEFAULT_TRANSLATION,
   showWordByWordTransliteration: false,
   selectedWordByWordTransliteration: DEFAULT_TRANSLITERATION,
+  selectedWordByWordLocale: DEFAULT_WBW_LOCALE,
+  isUsingDefaultWordByWordLocale: true,
   showTooltipFor: [WordByWordType.Translation],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
 };

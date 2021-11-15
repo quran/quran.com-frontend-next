@@ -3,6 +3,7 @@ import stringify from './qs-stringify';
 
 import {
   getAudioPlayerStateInitialState,
+  getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
 import { CalculationMethod, Madhab } from 'src/redux/slices/prayerTimes';
@@ -19,27 +20,28 @@ export const DEFAULT_VERSES_PARAMS = {
 /**
  * Use the default params and allow overriding the default values e.g. translations.
  *
- * @param {string} locale
+ * @param {string} currentLocale
  * @param {Record<string, unknown>} params
  * @returns {Record<string, unknown>}
  */
 const getVersesParams = (
-  locale: string,
+  currentLocale: string,
   params?: Record<string, unknown>,
 ): Record<string, unknown> => ({
   ...{
     ...DEFAULT_VERSES_PARAMS,
-    translations: getTranslationsInitialState(locale).selectedTranslations.join(', '),
-    reciter: getAudioPlayerStateInitialState(locale).reciter.id,
+    translations: getTranslationsInitialState(currentLocale).selectedTranslations.join(', '),
+    reciter: getAudioPlayerStateInitialState(currentLocale).reciter.id,
+    locale: getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
   },
   ...params,
 });
 
 export const makeVersesUrl = (
   id: string | number,
-  locale: string,
+  currentLocale: string,
   params?: Record<string, unknown>,
-) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(locale, params));
+) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(currentLocale, params));
 
 export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
   makeUrl(`/verses/filter`, { ...params });
@@ -133,29 +135,29 @@ export const makeChapterInfoUrl = (chapterId: string, language: string): string 
  * Compose the url for Juz's verses API.
  *
  * @param {string} id  the Id of the juz.
- * @param {string} locale  the locale.
+ * @param {string} currentLocale  the locale.
  * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
  * @returns {string}
  */
 export const makeJuzVersesUrl = (
   id: string | number,
-  locale: string,
+  currentLocale: string,
   params?: Record<string, unknown>,
-): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(locale, params));
+): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(currentLocale, params));
 
 /**
  * Compose the url for page's verses API.
  *
  * @param {string} id  the Id of the page.
- * @param {string} locale  the locale.
+ * @param {string} currentLocale  the locale.
  * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
  * @returns {string}
  */
 export const makePageVersesUrl = (
   id: string | number,
-  locale: string,
+  currentLocale: string,
   params?: Record<string, unknown>,
-): string => makeUrl(`/verses/by_page/${id}`, getVersesParams(locale, params));
+): string => makeUrl(`/verses/by_page/${id}`, getVersesParams(currentLocale, params));
 
 /**
  * Compose the url for footnote's API.

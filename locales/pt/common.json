@@ -186,6 +186,7 @@
         "suggest": "Por favor, comece a recitar e seu verso aparecerá."
     },
     "wbw": "Palavra por palavra",
+    "wbw-trans-lang": "Linguagem palavra por palavra",
     "word-click": {
         "no-audio": "Sem áudio",
         "play-audio": "Tocar áudio",

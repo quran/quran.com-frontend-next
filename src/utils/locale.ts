@@ -3,6 +3,24 @@ import { getBasePath } from './url';
 import i18nConfig from 'i18n.json';
 
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
+const LOCALE_NAME = {
+  en: 'English',
+  ar: 'العربية',
+  bn: 'বাংলা',
+  fa: 'فارسی',
+  fr: 'Français',
+  id: 'Indonesia',
+  it: 'Inglese',
+  nl: 'Dutch',
+  pt: 'Português',
+  ru: 'русский',
+  sq: 'Shqip',
+  th: 'ภาษาไทย',
+  tr: 'Türkçe',
+  ur: 'اردو',
+  zh: '简体中文',
+  ms: 'bahasa Melayu',
+};
 
 export enum Direction {
   LTR = 'ltr',
@@ -65,3 +83,11 @@ export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => 
       href: `${basePath}${path}`,
     });
 };
+
+/**
+ * Get the locale name.
+ *
+ * @param {string} locale
+ * @returns {string}
+ */
+export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];

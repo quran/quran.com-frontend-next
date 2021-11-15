@@ -186,6 +186,7 @@
         "suggest": "Veuillez commencer à réciter et votre vers apparaîtra."
     },
     "wbw": "Mot par mot",
+    "wbw-trans-lang": "Langage mot à mot",
     "word-click": {
         "no-audio": "Pas de son",
         "play-audio": "Lire le son",

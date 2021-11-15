@@ -29,6 +29,16 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       selectedWordByWordTransliteration: action.payload,
     }),
+    setSelectedWordByWordLocale: (
+      state,
+      action: PayloadAction<{ value: string; locale: string }>,
+    ) => ({
+      ...state,
+      selectedWordByWordLocale: action.payload.value,
+      isUsingDefaultWordByWordLocale:
+        action.payload.value ===
+        getReadingPreferencesInitialState(action.payload.locale).selectedWordByWordLocale,
+    }),
     setShowTooltipFor: (state, action: PayloadAction<WordByWordType[]>) => ({
       ...state,
       showTooltipFor: action.payload,
@@ -53,6 +63,7 @@ export const {
   setShowWordByWordTransliteration,
   setSelectedWordByWordTranslation,
   setSelectedWordByWordTransliteration,
+  setSelectedWordByWordLocale,
   setShowTooltipFor,
   setWordClickFunctionality,
 } = readingPreferencesSlice.actions;
@@ -62,11 +73,16 @@ export const selectWordByWordByWordPreferences = (state: RootState) => ({
   selectedWordByWordTranslation: state.readingPreferences.selectedWordByWordTranslation,
   showWordByWordTransliteration: state.readingPreferences.showWordByWordTransliteration,
   selectedWordByWordTransliteration: state.readingPreferences.selectedWordByWordTransliteration,
+  selectedWordByWordLocale: state.readingPreferences.selectedWordByWordLocale,
 });
 export const selectShowTooltipFor = (state: RootState) => state.readingPreferences.showTooltipFor;
 export const selectReadingPreference = (state: RootState) =>
   state.readingPreferences.readingPreference;
 export const selectWordClickFunctionality = (state: RootState) =>
   state.readingPreferences.wordClickFunctionality;
+export const selectWordByWordLocale = (state: RootState) =>
+  state.readingPreferences.selectedWordByWordLocale;
+export const selectIsUsingDefaultWordByWordLocale = (state: RootState) =>
+  state.readingPreferences.isUsingDefaultWordByWordLocale;
 
 export default readingPreferencesSlice.reducer;
