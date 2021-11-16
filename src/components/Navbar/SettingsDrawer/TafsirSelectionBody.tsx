@@ -11,29 +11,26 @@ import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
-import {
-  selectSelectedTranslations,
-  setSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
+import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { TranslationsResponse } from 'types/ApiResponses';
-import AvailableTranslation from 'types/AvailableTranslation';
+import { TafsirsResponse } from 'types/ApiResponses';
+import TafsirInfo from 'types/TafsirInfo';
 
-const filterTranslations = (translations, searchQuery: string): AvailableTranslation[] => {
+const filterTafsirs = (translations, searchQuery: string): TafsirInfo[] => {
   const fuse = new Fuse(translations, {
     keys: ['name', 'languageName', 'authorName'],
     threshold: 0.3,
   });
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
-  return filteredTranslations;
+  return filteredTranslations as TafsirInfo[];
 };
 
-const TranslationSelectionBody = () => {
+const TafsirsSelectionBody = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const { lang } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -43,11 +40,11 @@ const TranslationSelectionBody = () => {
     // when the checkbox is checked
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
-    const nextTranslations = e.target.checked
-      ? [...selectedTranslations, Number(selectedTranslationId)]
-      : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
+    const nextTafsirs = e.target.checked
+      ? [...selectedTafsirs, Number(selectedTranslationId)]
+      : selectedTafsirs.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
-    dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
+    dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
   };
 
   return (
@@ -63,28 +60,31 @@ const TranslationSelectionBody = () => {
         />
       </div>
       <DataFetcher
-        queryKey={makeTranslationsUrl(lang)}
-        render={(data: TranslationsResponse) => {
-          const filteredTranslations = searchQuery
-            ? filterTranslations(data.translations, searchQuery)
-            : data.translations;
-          const translationByLanguages = groupBy(filteredTranslations, 'languageName');
+        queryKey={makeTafsirsUrl(lang)}
+        render={(data: TafsirsResponse) => {
+          const filteredTafsirs = searchQuery
+            ? filterTafsirs(data.tafsirs, searchQuery)
+            : data.tafsirs;
+          const tafsirsByLanguages = groupBy(filteredTafsirs, 'languageName');
           return (
             <div>
-              {Object.entries(translationByLanguages).map(([language, translations]) => {
+              {Object.entries(tafsirsByLanguages).map(([language, tafsirs]) => {
                 return (
                   <div className={styles.group}>
                     <div className={styles.language}>{language}</div>
-                    {translations.map((translation) => (
-                      <div key={translation.id} className={styles.item}>
+                    {tafsirs.map((tafsir) => (
+                      <div key={tafsir.id} className={styles.item}>
                         <input
-                          id={translation.id.toString()}
+                          id={tafsir.id.toString()}
                           type="checkbox"
-                          value={translation.id}
-                          checked={selectedTranslations.includes(translation.id)}
+                          value={tafsir.id}
+                          checked={selectedTafsirs.includes(tafsir.id)}
                           onChange={onTranslationsChange}
                         />
-                        <label htmlFor={translation.id.toString()}>{translation.authorName}</label>
+                        <label className={styles.label} htmlFor={tafsir.id.toString()}>
+                          <span>{tafsir.name}</span>{' '}
+                          <span className={styles.author}>{tafsir.authorName}</span>
+                        </label>
                       </div>
                     ))}
                   </div>
@@ -98,4 +98,4 @@ const TranslationSelectionBody = () => {
   );
 };
 
-export default TranslationSelectionBody;
+export default TafsirsSelectionBody;

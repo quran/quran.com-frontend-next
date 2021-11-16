@@ -155,6 +155,7 @@
     },
     "settings": {
         "change-reciter": "Change Reciter",
+        "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
