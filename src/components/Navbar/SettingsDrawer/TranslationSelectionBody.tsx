@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
 
-import styles from './TranslationSelectionBody.module.scss';
+import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
@@ -73,10 +73,10 @@ const TranslationSelectionBody = () => {
             <div>
               {Object.entries(translationByLanguages).map(([language, translations]) => {
                 return (
-                  <div className={styles.translationGroup}>
+                  <div className={styles.group}>
                     <div className={styles.language}>{language}</div>
                     {translations.map((translation) => (
-                      <div key={translation.id} className={styles.translation}>
+                      <div key={translation.id} className={styles.item}>
                         <input
                           id={translation.id.toString()}
                           type="checkbox"

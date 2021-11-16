@@ -1,3 +1,15 @@
 import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
-export default DEFAULT_SETTINGS as DefaultSettings;
+import { QuranFont } from 'types/QuranReader';
+
+export default {
+  ...DEFAULT_SETTINGS,
+  quranReaderStyles: {
+    ...DEFAULT_SETTINGS.quranReaderStyles,
+    quranFont: QuranFont.IndoPak,
+  },
+  readingPreferences: {
+    ...DEFAULT_SETTINGS.readingPreferences,
+    selectedWordByWordLocale: 'bn',
+  },
+} as DefaultSettings;

@@ -1,3 +1,9 @@
 .container {
   min-height: calc(4 * var(--spacing-mega));
 }
+
+.changeTafsirsButtonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: var(--spacing-xsmall);
+}
