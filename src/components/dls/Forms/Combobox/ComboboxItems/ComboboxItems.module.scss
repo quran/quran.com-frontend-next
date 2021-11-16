@@ -2,6 +2,9 @@ $webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
 
 .comboboxBodyContainer {
   position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
   margin-block-start: var(--spacing-micro);
   border-radius: var(--border-radius-default);
   box-shadow: var(--shadow-large);

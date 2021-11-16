@@ -16,11 +16,12 @@ export default {
     size: ComboboxSize.Medium,
     clearable: true,
     disabled: false,
-    isMulti: false,
+    isMultiSelect: false,
     hasError: false,
     minimumRequiredItems: 0,
     emptyMessage: 'No results',
     placeholder: 'Search...',
+    fixedWidth: true,
   },
   argTypes: {
     id: {
@@ -134,6 +135,14 @@ export default {
       },
       description: 'The placeholder of the search input.',
     },
+    fixedWidth: {
+      options: [true, false],
+      control: { type: 'radio' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'Whether the combobox should support multi-select.',
+    },
   },
 };
 
@@ -183,7 +192,9 @@ const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false)
       value: `Item${index}`,
       label: `Item ${index}`,
       ...(hasSuffix && { suffix: index % 2 ? `Item` : 'Another-Item' }),
-      ...(hasPrefix && { prefix: index % 2 ? <SettingIcon /> : <SearchIcon /> }),
+      ...(hasPrefix && {
+        prefix: index % 2 ? <SettingIcon /> : <SearchIcon />,
+      }),
     });
   }
   return items;
