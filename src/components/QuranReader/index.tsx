@@ -22,6 +22,7 @@ import QuranReaderBody from './QuranReaderBody';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
+import Error from 'src/pages/_error';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
@@ -132,6 +133,9 @@ const QuranReader = ({
     );
   }
   const verses = data.flat(1);
+  if (!verses.length) {
+    return <Error />;
+  }
   const loadMore = () => {
     if (!isValidating) {
       setSize(size + 1);
