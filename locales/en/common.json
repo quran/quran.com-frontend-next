@@ -179,6 +179,7 @@
     "transliteration": "Transliteration",
     "type": "Type",
     "verse": "Verse",
+    "verses": "Verses",
     "view": "View",
     "voice": {
         "ask-permission": "Please enable microphone permission to start using Voice Search",
