@@ -159,8 +159,9 @@
         "change-translations": "Change Translations",
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
-        "search-translations": "Search Translations",
         "search-reciter": "Search Reciter",
+        "search-tafsirs": "Search Tafsirs",
+        "search-translations": "Search Translations",
         "title": "Settings"
     },
     "share": "Share",
