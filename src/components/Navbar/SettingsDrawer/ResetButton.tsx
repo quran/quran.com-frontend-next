@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import styles from './ResetButton.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
+import { toast, ToastContainer } from 'src/components/dls/Toast/Toast';
 import resetSettings from 'src/redux/slices/reset-settings';
 
 // reset button will dispatch a `reset` action
@@ -13,9 +14,19 @@ const ResetButton = () => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
   return (
-    <div className={styles.resetButtonContainer}>
-      <Button onClick={() => dispatch(resetSettings(lang))}>{t('settings.reset-cta')}</Button>
-    </div>
+    <>
+      <ToastContainer />
+      <div className={styles.resetButtonContainer}>
+        <Button
+          onClick={() => {
+            dispatch(resetSettings(lang));
+            toast(t('settings.reset-notif'));
+          }}
+        >
+          {t('settings.reset-cta')}
+        </Button>
+      </div>
+    </>
   );
 };
 
