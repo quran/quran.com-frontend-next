@@ -1,13 +1,10 @@
-import { useEffect } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 
 import FindLocationIcon from '../../../../public/icons/find-location.svg';
 import { ToastContainer } from '../../dls/Toast/Toast';
-import { setAccurateLocation } from '../../Navbar/SettingsDrawer/PrayerTimesSection';
 
 import styles from './PrayerTimes.module.scss';
 import { formatLocation, formatTime, getNextPrayerTime } from './PrayerTimesHelper';
@@ -16,40 +13,63 @@ import { PrayerTimesData, HijriDateData } from './PrayerTimesTypes';
 import { fetcher } from 'src/api';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
-  GeoPermission,
+  LocationAccess,
   selectCalculationMethod,
-  selectGeoLocation,
-  selectGeoPermission,
+  selectLocationAccess,
   selectMadhab,
+  setLocationAccess,
 } from 'src/redux/slices/prayerTimes';
 import { makePrayerTimesUrl } from 'src/utils/apiPaths';
 
+const getCoordinates = (): Promise<{
+  latitude: number;
+  longitude: number;
+}> => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (err) => reject(err),
+    );
+  });
+};
+
+const usePrayerTimesData = () => {
+  const calculationMethod = useSelector(selectCalculationMethod);
+  const locationAccess = useSelector(selectLocationAccess);
+  const madhab = useSelector(selectMadhab);
+
+  const { data } = useSWR<PrayerTimesData>(
+    [makePrayerTimesUrl({ calculationMethod, madhab }), locationAccess],
+    async (url, withLocationAccess) => {
+      if (withLocationAccess === LocationAccess.On) {
+        const coordinates = await getCoordinates().catch(() => {
+          return {}; // fallback: return empty object if browser fail to get coordinates
+        });
+        return fetcher(makePrayerTimesUrl({ calculationMethod, madhab, ...coordinates }));
+      }
+
+      return fetcher(makePrayerTimesUrl({ calculationMethod, madhab }));
+    },
+  );
+
+  return data;
+};
+
 const PrayerTimes = () => {
   const { t } = useTranslation('');
-  const geoLocation = useSelector(selectGeoLocation, shallowEqual);
-  const geoPermission = useSelector(selectGeoPermission);
   const dispatch = useDispatch();
+  const prayerTimesData = usePrayerTimesData();
 
-  useEffect(() => {
-    // get the location every time the user refresh the page if we already have the permission
-    if (geoPermission === GeoPermission.Granted) setAccurateLocation(dispatch);
-  }, [dispatch, geoPermission, t]);
+  const hijriDate = useHijriDateFormatter(prayerTimesData?.hijriDateData);
 
-  const calculationMethod = useSelector(selectCalculationMethod);
-  const madhab = useSelector(selectMadhab);
-  const { data } = useSWR<PrayerTimesData>(
-    makePrayerTimesUrl({
-      calculationMethod,
-      madhab,
-      ...geoLocation,
-    }),
-    fetcher,
-  );
-  const hijriDate = useHijriDateFormatter(data?.hijriDateData);
+  if (!prayerTimesData) return null;
 
-  if (!data) return null;
-
-  const { prayerTimes } = data;
+  const { prayerTimes } = prayerTimesData;
   const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;
 
   return (
@@ -59,18 +79,18 @@ const PrayerTimes = () => {
         <div className={styles.prayerTimesContainer}>
           <div className={styles.locationContainer}>
             <Button
-              onClick={() =>
-                setAccurateLocation(dispatch, () =>
-                  toast(t('common:prayer-times.location-updated')),
-                )
-              }
+              tooltip={t('home:prayer-times.use-location')}
+              onClick={() => {
+                dispatch(setLocationAccess(LocationAccess.On));
+                toast(t('common:prayer-times.location-updated'));
+              }}
               type={ButtonType.Secondary}
               className={styles.findLocationButton}
               variant={ButtonVariant.Ghost}
             >
               <FindLocationIcon />
             </Button>
-            <span>{formatLocation(data.geo)}</span>
+            <span>{formatLocation(prayerTimesData.geo)}</span>
           </div>
           {nextPrayerTime && (
             <div>
