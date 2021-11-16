@@ -17,14 +17,14 @@ import { areArraysEqual } from 'src/utils/array';
 import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 
-const filterTafsirs = (translations, searchQuery: string): TafsirInfo[] => {
-  const fuse = new Fuse(translations, {
+const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
+  const fuse = new Fuse(tafsirs, {
     keys: ['name', 'languageName', 'authorName'],
     threshold: 0.3,
   });
 
-  const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
-  return filteredTranslations as TafsirInfo[];
+  const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
+  return filteredTafsirs as TafsirInfo[];
 };
 
 const TafsirsSelectionBody = () => {
@@ -34,7 +34,7 @@ const TafsirsSelectionBody = () => {
   const { lang } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
-  const onTranslationsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onTafsirsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTranslationId = e.target.value;
 
     // when the checkbox is checked
@@ -52,10 +52,10 @@ const TafsirsSelectionBody = () => {
       <div className={styles.searchInputContainer}>
         <Input
           prefix={<IconSearch />}
-          id="translations-search"
+          id="tafsirs-search"
           value={searchQuery}
           onChange={setSearchQuery}
-          placeholder={t('settings.search-translations')}
+          placeholder={t('settings.search-tafsirs')}
           fixedWidth={false}
         />
       </div>
@@ -79,7 +79,7 @@ const TafsirsSelectionBody = () => {
                           type="checkbox"
                           value={tafsir.id}
                           checked={selectedTafsirs.includes(tafsir.id)}
-                          onChange={onTranslationsChange}
+                          onChange={onTafsirsChange}
                         />
                         <label className={styles.label} htmlFor={tafsir.id.toString()}>
                           <span>{tafsir.name}</span>{' '}
