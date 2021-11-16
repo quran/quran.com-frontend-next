@@ -2,8 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 
-import CloseButton from './Buttons/CloseButton';
-import DownloadAudioButton from './Buttons/DownloadAudioButton';
+import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -13,6 +12,7 @@ import useDirection from 'src/hooks/useDirection';
 const OverflowAudioPlayerActionsMenu = () => {
   const { t } = useTranslation('common');
   const direction = useDirection();
+
   return (
     <div dir={direction} className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
@@ -23,8 +23,7 @@ const OverflowAudioPlayerActionsMenu = () => {
           </Button>
         }
       >
-        <DownloadAudioButton />
-        <CloseButton />
+        <OverflowAudioPlayActionsMenuBody />
       </PopoverMenu>
     </div>
   );

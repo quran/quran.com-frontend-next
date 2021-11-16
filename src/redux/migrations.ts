@@ -97,4 +97,13 @@ export default {
       isUsingDefaultReciter: true,
     },
   }),
+  16: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      selectedWordByWordLocale: initialState.readingPreferences.selectedWordByWordLocale,
+      isUsingDefaultWordByWordLocale:
+        initialState.readingPreferences.isUsingDefaultWordByWordLocale,
+    },
+  }),
 };

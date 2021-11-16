@@ -8,6 +8,7 @@
         },
         "play": "Putar Audio",
         "playback-speed": "Kecepatan Pemutaran",
+        
         "player": {
             "close": "Tutup Pemutar Audio",
             "currently-playing": "Anda sedang bermain",
@@ -139,6 +140,7 @@
         "change-translations": "Ubah Terjemahan",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Ulang Pengaturan",
+        
         "title": "Pengaturan"
     },
     "share": "Membagikan",
@@ -177,6 +179,7 @@
     "transliteration": "Transliterasi",
     "type": "Jenis",
     "verse": "Ayat",
+    "verses": "Ayat",
     "view": "Melihat",
     "voice": {
         "ask-permission": "Harap aktifkan izin mikrofon untuk mulai menggunakan Penelusuran Suara",
@@ -186,6 +189,7 @@
         "suggest": "Silakan mulai membaca dan ayat Anda akan muncul."
     },
     "wbw": "Kata demi kata",
+    "wbw-trans-lang": "Bahasa Kata demi Kata",
     "word-click": {
         "no-audio": "Tidak ada suara",
         "play-audio": "Putar Audio",

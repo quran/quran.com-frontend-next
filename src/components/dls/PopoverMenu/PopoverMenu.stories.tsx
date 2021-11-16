@@ -1,8 +1,11 @@
+import { useState, useMemo } from 'react';
+
 import LinkIcon from '../../../../public/icons/east.svg';
 import RepeatIcon from '../../../../public/icons/repeat.svg';
 import ShareIcon from '../../../../public/icons/share.svg';
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../../public/icons/unbookmarked.svg';
+import BackIcon from '../../../../public/icons/west.svg';
 
 import PopoverMenu from './PopoverMenu';
 
@@ -65,5 +68,33 @@ export const withIconDisabled = () => {
       <PopoverMenu.Divider />
       <PopoverMenu.Item isDisabled>Logout</PopoverMenu.Item>
     </PopoverMenu>
+  );
+};
+
+export const WithSubMenu = () => {
+  const [selection, setSelection] = useState<'parent' | 'speed'>('parent');
+
+  const menus = useMemo(() => {
+    return {
+      parent: [
+        <PopoverMenu.Item>Download Audio</PopoverMenu.Item>,
+        <PopoverMenu.Item onClick={() => setSelection('speed')} icon={<RepeatIcon size={18} />}>
+          Audio speed
+        </PopoverMenu.Item>,
+        <PopoverMenu.Divider />,
+        <PopoverMenu.Item>Close Audio Player</PopoverMenu.Item>,
+      ],
+      speed: [
+        <PopoverMenu.Item icon={<BackIcon />} onClick={() => setSelection('parent')}>
+          Audio Speed
+        </PopoverMenu.Item>,
+        <PopoverMenu.Divider />,
+        <PopoverMenu.Item>Logout</PopoverMenu.Item>,
+      ],
+    };
+  }, []);
+
+  return (
+    <PopoverMenu trigger={<button type="button">Trigger</button>}>{menus[selection]}</PopoverMenu>
   );
 };

@@ -27,13 +27,17 @@ const TranslationSelectionBody = dynamic(() => import('./TranslationSelectionBod
   ssr: false,
 });
 
+const TafisrSelectionBody = dynamic(() => import('./TafsirSelectionBody'), {
+  ssr: false,
+});
+
 const SettingsDrawer = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const { isSettingsDrawerOpen, settingsView } = useSelector(selectNavbar);
   let header;
   if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;
-  if (settingsView === 'translation' || settingsView === 'reciter')
+  if (settingsView !== SettingsView.Body)
     header = (
       <div className={styles.headerContainer}>
         <Button
@@ -44,6 +48,7 @@ const SettingsDrawer = () => {
         </Button>
         {settingsView === SettingsView.Translation && t('translations')}
         {settingsView === SettingsView.Reciter && t('reciter')}
+        {settingsView === SettingsView.Tafsir && t('tafsir.title')}
       </div>
     );
 
@@ -54,6 +59,7 @@ const SettingsDrawer = () => {
         <TranslationSelectionBody />
       )}
       {isSettingsDrawerOpen && settingsView === SettingsView.Reciter && <ReciterSelectionBody />}
+      {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafisrSelectionBody />}
     </Drawer>
   );
 };

@@ -177,6 +177,7 @@
     "transliteration": "Transliterimi",
     "type": "Lloji",
     "verse": "Ajeti",
+    "verses": "Vargjet",
     "view": "Pamje",
     "voice": {
         "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
@@ -186,6 +187,7 @@
         "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet."
     },
     "wbw": "Fjalë Për Fjalë",
+    "wbw-trans-lang": "Fjalë për fjalë Gjuha",
     "word-click": {
         "no-audio": "Nuk ka audio",
         "play-audio": "Luaj Audio",

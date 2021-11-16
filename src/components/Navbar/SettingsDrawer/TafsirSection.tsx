@@ -1,15 +1,14 @@
-import { useCallback } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import RightIcon from '../../../../public/icons/east.svg';
 
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
+import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
-import Combobox from 'src/components/dls/Forms/Combobox';
-import { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
+import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -17,82 +16,43 @@ import {
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual, numbersToStringsArray, stringsToNumbersArray } from 'src/utils/array';
-import { getTranslatedLabelWithLanguage } from 'src/utils/input';
-import { TafsirsResponse } from 'types/ApiResponses';
-import TafsirInfo from 'types/TafsirInfo';
-
-// convert tafsir data (from API) to combobox items structure
-// so use it with Combobox component
-const tafsirsToComboboxItems = (tafsirs: TafsirInfo[]): DropdownItem[] =>
-  tafsirs.map((item) => {
-    const stringId = item.id.toString();
-    return {
-      id: stringId,
-      value: stringId,
-      label: getTranslatedLabelWithLanguage(item),
-      name: stringId,
-    };
-  });
 
 const TafsirSection = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
-  const { lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { tafsirFontScale } = quranReaderStyles;
 
-  const onTafsirsChange = useCallback(
-    (values) =>
-      dispatch(
-        setSelectedTafsirs({ tafsirs: stringsToNumbersArray(values as string[]), locale: lang }),
-      ),
-    [dispatch, lang],
-  );
-
   return (
     <div className={styles.container}>
-      <DataFetcher
-        queryKey={makeTafsirsUrl(lang)}
-        render={(data: TafsirsResponse) => (
-          <Section>
-            <Section.Title>{t('tafsir.title')}</Section.Title>
-            <Section.Row>
-              <Section.Label>{t('tafsir.title')}</Section.Label>
-              <div>
-                <Combobox
-                  minimumRequiredItems={1}
-                  id="tafsir"
-                  isMultiSelect
-                  items={data ? tafsirsToComboboxItems(data.tafsirs) : []}
-                  onChange={onTafsirsChange}
-                  value={numbersToStringsArray(selectedTafsirs)}
-                />
-              </div>
-            </Section.Row>
-            <Section.Row>
-              <Section.Label>{t('tafsir.font-size')}</Section.Label>
-              <Counter
-                count={tafsirFontScale}
-                onDecrement={
-                  tafsirFontScale === MINIMUM_FONT_STEP
-                    ? null
-                    : () => dispatch(decreaseTafsirFontScale())
-                }
-                onIncrement={
-                  tafsirFontScale === MAXIMUM_FONT_STEP
-                    ? null
-                    : () => dispatch(increaseTafsirFontScale())
-                }
-              />
-            </Section.Row>
-          </Section>
-        )}
-      />
+      <Section>
+        <Section.Title>{t('tafsir.title')}</Section.Title>
+        <Section.Row>
+          <Section.Label>{t('tafsir.font-size')}</Section.Label>
+          <Counter
+            count={tafsirFontScale}
+            onDecrement={
+              tafsirFontScale === MINIMUM_FONT_STEP
+                ? null
+                : () => dispatch(decreaseTafsirFontScale())
+            }
+            onIncrement={
+              tafsirFontScale === MAXIMUM_FONT_STEP
+                ? null
+                : () => dispatch(increaseTafsirFontScale())
+            }
+          />
+        </Section.Row>
+        <div className={styles.changeTafsirsButtonContainer}>
+          <Button
+            onClick={() => dispatch(setSettingsView(SettingsView.Tafsir))}
+            suffix={<RightIcon />}
+          >
+            {t('settings.change-tafsirs')}
+          </Button>
+        </div>
+      </Section>
     </div>
   );
 };

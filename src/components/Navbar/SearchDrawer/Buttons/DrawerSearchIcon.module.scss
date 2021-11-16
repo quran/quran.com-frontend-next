@@ -4,6 +4,7 @@
   margin-block-end: var(--spacing-small);
   margin-inline-start: var(--spacing-small);
   opacity: var(--opacity-75);
+  display: flex;
   > svg {
     height: calc(1.25 * var(--spacing-medium));
     width: calc(1.25 * var(--spacing-medium));

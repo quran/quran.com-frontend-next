@@ -16,8 +16,10 @@ import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyCont
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { makeNavigationSearchUrl } from 'src/utils/apiPaths';
+import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { shortenVerseText } from 'src/utils/verse';
+import { getVerseTextByWords } from 'src/utils/word';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -108,11 +110,21 @@ const CommandBarBody: React.FC = () => {
         toBeGroupedCommands = getPreInputCommands();
         numberOfCommands = recentNavigations.length + NAVIGATE_TO.length;
       } else {
-        toBeGroupedCommands = data.result.navigation.map((navigationItem) => ({
-          ...navigationItem,
-          group: t('command-bar.navigations'),
-        }));
-        numberOfCommands = data.result.navigation.length;
+        toBeGroupedCommands = [
+          ...data.result.navigation.map((navigationItem) => ({
+            ...navigationItem,
+            group: t('command-bar.navigations'),
+          })),
+          ...data.result.verses.map((verse) => {
+            return {
+              key: verse.verseKey,
+              resultType: SearchNavigationType.AYAH,
+              name: `[${verse.verseKey}] ${shortenVerseText(getVerseTextByWords(verse))}`,
+              group: t('verses'),
+            };
+          }),
+        ];
+        numberOfCommands = data.result.navigation.length + data.result.verses.length;
       }
       return (
         <CommandsList
@@ -157,7 +169,7 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={searchQuery ? makeNavigationSearchUrl(searchQuery) : null}
+            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
             render={dataFetcherRender}
           />
         )}

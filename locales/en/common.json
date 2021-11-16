@@ -10,6 +10,7 @@
         },
         "play": "Play Audio",
         "playback-speed": "Playback Speed",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Close Audio Player",
             "currently-playing": "You are currently playing",
@@ -109,6 +110,24 @@
     "powered-by": "Powered by",
     "prayer-times": {
         "calculation-method": "Calculation Method",
+        "madhabs": {
+            "Shafi": "Shafi",
+            "Hanafi": "Hanafi"
+        },
+        "calculation-methods": {
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "Egyptian": "Egyptian",
+            "Karachi": "Karachi",
+            "UmmAlQura": "UmmAlQura",
+            "Dubai": "Dubai",
+            "Qatark": "Qatark",
+            "Kuwait": "Kuwait",
+            "MoonsightingCommittee": "MoonsightingCommittee",
+            "Singapore": "Singapore",
+            "Turkey": "Turkey",
+            "Tehran": "Tehran",
+            "NorthAmerica": "NorthAmerica"
+        },
         "madhab": "Madhab",
         "title": "Prayer Times",
         "find-accurate-location": "Find Accurate Location",
@@ -143,9 +162,12 @@
     },
     "settings": {
         "change-reciter": "Change Reciter",
+        "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
+        "search-translations": "Search Translations",
+        "search-reciter": "Search Reciter",
         "title": "Settings"
     },
     "share": "Share",
@@ -184,6 +206,7 @@
     "transliteration": "Transliteration",
     "type": "Type",
     "verse": "Verse",
+    "verses": "Verses",
     "view": "View",
     "voice": {
         "ask-permission": "Please enable microphone permission to start using Voice Search",
@@ -193,6 +216,7 @@
         "suggest": "Please begin reciting and your verse will appear."
     },
     "wbw": "Word By Word",
+    "wbw-trans-lang": "Word By Word Language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",

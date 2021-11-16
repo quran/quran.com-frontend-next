@@ -177,6 +177,7 @@
     "transliteration": "音译",
     "type": "类型",
     "verse": "诗",
+    "verses": "诗句",
     "view": "看法",
     "voice": {
         "ask-permission": "请启用麦克风权限以开始使用语音搜索",
@@ -186,6 +187,7 @@
         "suggest": "请开始背诵，你的诗句就会出现。"
     },
     "wbw": "逐词地",
+    "wbw-trans-lang": "逐字语言",
     "word-click": {
         "no-audio": "无音频",
         "play-audio": "播放音频",

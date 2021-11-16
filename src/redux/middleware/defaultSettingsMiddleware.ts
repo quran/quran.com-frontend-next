@@ -8,6 +8,9 @@ import { RESET_SETTINGS_EVENT } from '../slices/reset-settings';
 const OBSERVED_ACTIONS = [
   'theme/setTheme',
   'readingPreferences/setReadingPreference',
+  'readingPreferences/setSelectedWordByWordLocale',
+  'readingPreferences/setSelectedWordByWordTransliteration',
+  'readingPreferences/setSelectedWordByWordTranslation',
   'readingPreferences/setShowWordByWordTranslation',
   'readingPreferences/setShowWordByWordTransliteration',
   'readingPreferences/setShowTooltipFor',

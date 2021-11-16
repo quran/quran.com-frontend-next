@@ -36,6 +36,7 @@ type PopoverMenuItemProps = {
   onClick?: () => void;
   isDisabled?: boolean;
   shouldCloseMenuAfterClick?: boolean;
+  className?: string;
 };
 PopoverMenu.Item = ({
   children,
@@ -43,10 +44,11 @@ PopoverMenu.Item = ({
   onClick,
   isDisabled,
   shouldCloseMenuAfterClick = false,
+  className,
 }: PopoverMenuItemProps) => {
   return (
     <PrimitiveDropdownMenu.Item
-      className={styles.item}
+      className={classNames(styles.item, className)}
       onClick={(e) => {
         if (!shouldCloseMenuAfterClick) {
           // PopoverMenu automatically close itself when one of item is clicked

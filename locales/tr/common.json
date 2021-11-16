@@ -177,6 +177,7 @@
     "transliteration": "Harf çevirisi",
     "type": "Tip",
     "verse": "ayet",
+    "verses": "ayetler",
     "view": "görüş",
     "voice": {
         "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
@@ -186,6 +187,7 @@
         "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir."
     },
     "wbw": "Kelime kelime",
+    "wbw-trans-lang": "Kelime Dilinden Kelime",
     "word-click": {
         "no-audio": "Ses yok",
         "play-audio": "Ses Çal",

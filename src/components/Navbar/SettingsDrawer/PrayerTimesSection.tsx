@@ -18,16 +18,10 @@ import {
   setLocationAccess,
   setMadhab,
 } from 'src/redux/slices/prayerTimes';
-import { generateSelectOptions } from 'src/utils/input';
-
-const calculationMethodOptions = generateSelectOptions(Object.values(CalculationMethod));
-const madhabOptions = generateSelectOptions(Object.values(Madhab));
 
 const PrayerTimesSection = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const calculationMethod = useSelector(selectCalculationMethod);
-  const madhab = useSelector(selectMadhab);
   const locationAccess = useSelector(selectLocationAccess);
 
   const onLocationAccessChange = (value: string) => {
@@ -44,6 +38,26 @@ const PrayerTimesSection = () => {
       })),
     [t],
   );
+  const selectedCalculationMethod = useSelector(selectCalculationMethod);
+  const selectedMadhab = useSelector(selectMadhab);
+
+  const calculationMethodOptions = useMemo(
+    () =>
+      Object.values(CalculationMethod).map((calculationMethod) => ({
+        label: t(`prayer-times.calculation-methods.${calculationMethod}`),
+        value: calculationMethod,
+      })),
+    [t],
+  );
+
+  const madhabOptions = useMemo(
+    () =>
+      Object.values(Madhab).map((madhab) => ({
+        value: madhab,
+        label: t(`prayer-times.madhabs.${madhab}`),
+      })),
+    [t],
+  );
 
   return (
     <Section>
@@ -54,7 +68,7 @@ const PrayerTimesSection = () => {
           id="prayer-times-calculation-method"
           name="calculation-method"
           options={calculationMethodOptions}
-          value={calculationMethod}
+          value={selectedCalculationMethod}
           onChange={(value) => dispatch(setCalculationMethod(value as CalculationMethod))}
         />
       </Section.Row>
@@ -64,7 +78,7 @@ const PrayerTimesSection = () => {
           id="prayer-times-madhab"
           name="madhab"
           options={madhabOptions}
-          value={madhab}
+          value={selectedMadhab}
           onChange={(value) => dispatch(setMadhab(value as Madhab))}
         />
       </Section.Row>

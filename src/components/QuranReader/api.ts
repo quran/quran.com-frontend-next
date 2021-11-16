@@ -21,6 +21,7 @@ interface RequestKeyInput {
   id: string | number;
   reciter: number;
   locale: string;
+  wordByWordLocale: string;
 }
 /**
  * Generate the request key (the API url based on the params)
@@ -42,6 +43,7 @@ export const getRequestKey = ({
   selectedTafsirs,
   reciter,
   locale,
+  wordByWordLocale,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page =
@@ -50,6 +52,7 @@ export const getRequestKey = ({
       : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
+      locale: wordByWordLocale,
       page,
       reciter,
       translations: selectedTranslations.join(', '),
@@ -59,6 +62,7 @@ export const getRequestKey = ({
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, locale, {
+      locale: wordByWordLocale,
       page,
       reciter,
       translations: selectedTranslations.join(', '),
@@ -68,6 +72,7 @@ export const getRequestKey = ({
   }
   if (isSelectedTafsirData || isTafsirData) {
     return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, locale, {
+      locale: wordByWordLocale,
       page,
       perPage: 1,
       translations: null,
@@ -78,6 +83,7 @@ export const getRequestKey = ({
   }
   if (quranReaderDataType === QuranReaderDataType.VerseRange) {
     return makeVersesUrl(id, locale, {
+      locale: wordByWordLocale,
       reciter,
       page,
       from: initialData.metaData.from,
@@ -89,6 +95,7 @@ export const getRequestKey = ({
   }
 
   return makeVersesUrl(id, locale, {
+    locale: wordByWordLocale,
     reciter,
     page,
     translations: selectedTranslations.join(', '),

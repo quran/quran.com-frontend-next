@@ -6,6 +6,7 @@ export enum SettingsView {
   Body = 'body',
   Translation = 'translation',
   Reciter = 'reciter',
+  Tafsir = 'tafsir',
 }
 
 export type Navbar = {

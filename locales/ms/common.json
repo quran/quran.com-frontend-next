@@ -177,6 +177,7 @@
     "transliteration": "Alih huruf",
     "type": "taip",
     "verse": "Ayat",
+    "verses": "ayat-ayat",
     "view": "Lihat",
     "voice": {
         "ask-permission": "Sila dayakan kebenaran mikrofon untuk mula menggunakan Carian Suara",
@@ -186,6 +187,7 @@
         "suggest": "Sila mulakan membaca dan ayat anda akan muncul."
     },
     "wbw": "Perkataan demi perkataan",
+    "wbw-trans-lang": "Perkataan Demi Bahasa Perkataan",
     "word-click": {
         "no-audio": "Tiada Audio",
         "play-audio": "Mainkan Audio",

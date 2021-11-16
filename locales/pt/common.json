@@ -177,6 +177,7 @@
     "transliteration": "Transliteração",
     "type": "Modelo",
     "verse": "Versículo",
+    "verses": "Versos",
     "view": "Visualizar",
     "voice": {
         "ask-permission": "Ative a permissão do microfone para começar a usar a Pesquisa por voz",
@@ -186,6 +187,7 @@
         "suggest": "Por favor, comece a recitar e seu verso aparecerá."
     },
     "wbw": "Palavra por palavra",
+    "wbw-trans-lang": "Linguagem palavra por palavra",
     "word-click": {
         "no-audio": "Sem áudio",
         "play-audio": "Tocar áudio",

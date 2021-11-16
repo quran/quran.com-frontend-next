@@ -11,7 +11,7 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.translation {
+.item {
   font-size: var(--font-size-large);
   margin-block-end: var(--spacing-xsmall);
   display: flex;
@@ -21,6 +21,20 @@
   }
 }
 
-.translationGroup {
+.group {
   margin-block-end: var(--spacing-large);
+}
+
+.searchInputContainer {
+  margin-block-end: var(--spacing-small);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.author {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
 }

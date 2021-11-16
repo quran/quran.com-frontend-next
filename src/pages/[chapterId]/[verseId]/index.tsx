@@ -41,7 +41,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.translatedName} - ${verseId}`}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${verseId}`}
       />
       <QuranReader
         initialData={versesResponse}
