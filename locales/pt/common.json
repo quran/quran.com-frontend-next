@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "Navegações",
         "no-nav-results": "Sem resultados de navegação",
+        "placeholder": "O que voce quer ler",
+        "powered-by": "Pesquisa por voz com tecnologia Tarteel.ai",
         "recent-navigations": "Navegações recentes",
+        "search-by-voice": "Pesquisa por voz",
         "try-navigating": "Tente navegar para"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "Diminuir",
         "increase": "Aumentar"
     },
+    "default-description": "O Alcorão traduzido para vários idiomas em uma interface simples e fácil",
     "developers": "Desenvolvedores",
     "error": {
         "general": "Algo deu errado. Por favor, tente novamente.",
@@ -101,6 +105,11 @@
     "pages": "Páginas",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "powered-by": "Distribuído por",
+    "prayer-times": {
+        "calculation-method": "Método de cálculo",
+        "madhab": "Madhab",
+        "title": "Momentos de Oração"
+    },
     "prev": "Anterior",
     "privacy": "Privacidade",
     "q-reflect": "QuranReflect",
@@ -168,6 +177,7 @@
     "transliteration": "Transliteração",
     "type": "Modelo",
     "verse": "Versículo",
+    "verses": "Versos",
     "view": "Visualizar",
     "voice": {
         "ask-permission": "Ative a permissão do microfone para começar a usar a Pesquisa por voz",
@@ -177,5 +187,11 @@
         "suggest": "Por favor, comece a recitar e seu verso aparecerá."
     },
     "wbw": "Palavra por palavra",
+    "wbw-trans-lang": "Linguagem palavra por palavra",
+    "word-click": {
+        "no-audio": "Sem áudio",
+        "play-audio": "Tocar áudio",
+        "title": "Clique da palavra"
+    },
     "yes": "sim"
 }

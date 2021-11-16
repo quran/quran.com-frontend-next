@@ -27,17 +27,6 @@
   justify-content: space-between;
 }
 
-.QOutlineWrapper {
-  height: 100%;
-  position: absolute;
-  inset-block: 0;
-  inset-inline-end: var(--spacing-medium);
-  > svg {
-    height: 100%;
-    z-index: var(--z-index-min);
-  }
-}
-
 .chapterId {
   text-align: end;
   font-size: var(--font-size-large);
@@ -67,7 +56,7 @@
   margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
-.nameSimple {
+.transliteratedName {
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-large);
   margin-block-end: var(--spacing-xxsmall);

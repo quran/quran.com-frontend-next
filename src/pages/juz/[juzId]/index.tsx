@@ -42,7 +42,7 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const juzId = String(params.juzId);
   // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
   if (!isValidJuzId(juzId)) {
@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
   try {
-    const juzVersesResponse = await getJuzVerses(juzId, {
+    const juzVersesResponse = await getJuzVerses(juzId, locale, {
       ...getDefaultWordFields(),
       ...getMushafId(),
     });

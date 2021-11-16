@@ -1,0 +1,45 @@
+{
+    "footer": {
+        "rights": "Hak cipta terpelihara",
+        "title": "Baca, pelajari, dan pelajari Al-Quran."
+    },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharram",
+            "10": "Syawal",
+            "11": "Dhu Al-Qida",
+            "2": "Safar",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Jumada I",
+            "6": "Jumada Akhira",
+            "7": "Rajab",
+            "8": "Sya'ban",
+            "9": "Ramadhan"
+        }
+    },
+    "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
+    "prayer-names": {
+        "asr": "Asar",
+        "dhuhr": "Dzuhur",
+        "fajr": "Subuh",
+        "isha": "Isha",
+        "maghrib": "Maghrib",
+        "sunrise": "matahari terbit"
+    },
+    "recently-read": "Baru-baru Baca",
+    "tab": {
+        "bookmarks": "Penanda buku",
+        "popular": "Popular"
+    },
+    "voice": {
+        "trigger": "Akses pantas kepada apa sahaja"
+    },
+    "welcome": {
+        "desc": "Kami secara aktif menambah ciri baharu dan mendorong perubahan. Jika anda menghadapi sebarang masalah, sila berikan maklum balas.",
+        "feedback-cta": "Memberikan maklum balas",
+        "join-cta": "Sertai Komuniti Discord",
+        "title": "Selamat datang ke Beta Pra-Keluaran Quran.com baharu!"
+    }
+}

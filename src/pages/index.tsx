@@ -23,10 +23,10 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.pageContainer}>
     <div className={classNames(styles.listContainer, styles.flow)}>
       <div className={classNames(styles.flowItem)}>
-        <HomePageImage />
-      </div>
-      <div className={styles.flowItem}>
         <CommandBarTrigger />
+      </div>
+      <div className={classNames(styles.flowItem)}>
+        <HomePageImage />
       </div>
       <div className={styles.flowItem}>
         <HomePageWelcomeMessage />
@@ -47,13 +47,16 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   </div>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allChaptersData = getAllChaptersData();
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = getAllChaptersData(locale);
 
   return {
     props: {
       chaptersResponse: {
-        chapters: Object.values(allChaptersData),
+        chapters: Object.keys(allChaptersData).map((chapterId) => {
+          const chapterData = allChaptersData[chapterId];
+          return { ...chapterData, id: Number(chapterId) };
+        }),
       },
     },
   };

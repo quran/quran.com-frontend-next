@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
@@ -50,7 +49,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
         <div className={styles.infoTextContainer}>
           <div className={styles.headerContainer}>
             <div className={styles.surahName}>
-              {t('common:surah')} {chapter.nameSimple}
+              {t('common:surah')} {chapter.transliteratedName}
             </div>
             <div className={styles.detailsContainer}>
               <div>
@@ -58,14 +57,8 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
                 <p>{chapter.versesCount}</p>
               </div>
               <div>
-                <p className={styles.detailHeader}>{t('common:pages')}</p>
-                <p>
-                  {chapter.pages[0]}-{chapter.pages[1]}
-                </p>
-              </div>
-              <div>
                 <p className={styles.detailHeader}>{t('surah-info:revelation-place')}</p>
-                <p>{capitalize(chapter.revelationPlace)}</p>
+                <p>{t(`surah-info:${chapter.revelationPlace}`)}</p>
               </div>
             </div>
           </div>

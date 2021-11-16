@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "নেভিগেশন",
         "no-nav-results": "কোন নেভিগেশন ফলাফল",
+        "placeholder": "কি আপনি পড়তে চান?",
+        "powered-by": "Tarteel.ai দ্বারা চালিত ভয়েস অনুসন্ধান",
         "recent-navigations": "সাম্প্রতিক নেভিগেশন",
+        "search-by-voice": "ভয়েস দ্বারা অনুসন্ধান করুন",
         "try-navigating": "নেভিগেট করার চেষ্টা করুন"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "হ্রাস",
         "increase": "বৃদ্ধি"
     },
+    "default-description": "একটি সহজ এবং সহজ ইন্টারফেসে কুরআন বহু ভাষায় অনুবাদ করা হয়েছে",
     "developers": "বিকাশকারীরা",
     "error": {
         "general": "কিছু ভুল হয়েছে. অনুগ্রহপূর্বক আবার চেষ্টা করুন.",
@@ -101,6 +105,11 @@
     "pages": "পাতা",
     "pagination-summary": "{{currentResultNumber}} totalNumberOfResults}}টি ফলাফলের মধ্যে {{totalNumberOfResults}} - {{endOfResultNumber}}",
     "powered-by": "দ্বারা চালিত",
+    "prayer-times": {
+        "calculation-method": "হিসাব পদ্ধতি",
+        "madhab": "মাধব",
+        "title": "নামাজের সময়"
+    },
     "prev": "আগে",
     "privacy": "গোপনীয়তা",
     "q-reflect": "কুরআন প্রতিফলন",
@@ -168,6 +177,7 @@
     "transliteration": "ট্রান্সলিটারেশন",
     "type": "টাইপ",
     "verse": "আয়াত",
+    "verses": "আয়াত",
     "view": "দেখুন",
     "voice": {
         "ask-permission": "ভয়েস অনুসন্ধান ব্যবহার শুরু করতে অনুগ্রহ করে মাইক্রোফোন অনুমতি সক্ষম করুন৷",
@@ -177,5 +187,11 @@
         "suggest": "আবৃত্তি শুরু করুন এবং আপনার আয়াত প্রদর্শিত হবে."
     },
     "wbw": "শব্দ দ্বারা শব্দ",
+    "wbw-trans-lang": "শব্দ দ্বারা শব্দ ভাষা",
+    "word-click": {
+        "no-audio": "অডিও নেই",
+        "play-audio": "অডিও চালান",
+        "title": "শব্দ ক্লিক"
+    },
     "yes": "হ্যাঁ"
 }

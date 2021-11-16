@@ -6,7 +6,8 @@ import styles from './PlaybackControls.module.scss';
 import RepeatAudioButton from './RepeatButton';
 import SeekButton, { SeekButtonType } from './SeekButton';
 
-import { AudioDataStatus, selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
+import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 const PlaybackControls = () => {
   const audioDataStatus = useSelector(selectAudioDataStatus);

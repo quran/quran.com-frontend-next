@@ -1,7 +1,29 @@
 /* eslint-disable import/prefer-default-export */
 import findKey from 'lodash/findKey';
 
+import { getBasePath } from './url';
+
+import i18nConfig from 'i18n.json';
+
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
+const LOCALE_NAME = {
+  en: 'English',
+  ar: 'العربية',
+  bn: 'বাংলা',
+  fa: 'فارسی',
+  fr: 'Français',
+  id: 'Indonesia',
+  it: 'Inglese',
+  nl: 'Dutch',
+  pt: 'Português',
+  ru: 'русский',
+  sq: 'Shqip',
+  th: 'ภาษาไทย',
+  tr: 'Türkçe',
+  ur: 'اردو',
+  zh: '简体中文',
+  ms: 'bahasa Melayu',
+};
 
 export enum Direction {
   LTR = 'ltr',
@@ -90,6 +112,24 @@ export const Languages = {
   },
 };
 
+interface LinkLanguageAlternate {
+  hrefLang: string;
+  href: string;
+}
+
+/**
+ * Check whether the locale should have a minimalLayout. This will be reflect in
+ * certain components like ChapterHeader or SurahPreviewRow and the reason we need
+ * this is that for Arabic for example, we the transliteratedName and translatedName
+ * have the same value which will result in redundant UI.
+ *
+ * @param {string} lang
+ * @returns {boolean}
+ */
+export const shouldUseMinimalLayout = (lang: string): boolean => {
+  return lang === 'ar';
+};
+
 /**
  * Check whether the current locale is RTL.
  *
@@ -139,3 +179,33 @@ export const getLanguageFontById = (languageId: number): string => {
 export const findLanguageIdByLocale = (locale: string): number => {
   return Number(findKey(Languages, { locale }));
 };
+
+/**
+ * Generate the language alternates of a given path so that Search Engines can
+ * recommend the alternate page to the users based on their region/locale.
+ *
+ * @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
+ * @param {string} path
+ * @returns {LinkLanguageAlternate[]}
+ */
+export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => {
+  const { locales } = i18nConfig;
+  const basePath = getBasePath();
+  return locales
+    .map((locale) => ({
+      hrefLang: locale,
+      href: `${basePath}/${locale}${path === '/' ? '' : path}`,
+    }))
+    .concat({
+      hrefLang: 'x-default', // used when no other language/region matches the user's browser setting @see https://developers.google.com/search/docs/advanced/crawling/localized-versions#xdefault
+      href: `${basePath}${path}`,
+    });
+};
+
+/**
+ * Get the locale name.
+ *
+ * @param {string} locale
+ * @returns {string}
+ */
+export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];

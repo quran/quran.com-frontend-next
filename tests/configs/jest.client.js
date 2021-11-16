@@ -6,4 +6,5 @@ module.exports = {
   displayName: 'client',
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['<rootDir>/src/**/*.test.(js|jsx|ts|tsx)'],
+  preset: 'ts-jest',
 };

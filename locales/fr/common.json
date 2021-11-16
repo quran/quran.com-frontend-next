@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "Navigation",
         "no-nav-results": "Aucun résultat de navigation",
+        "placeholder": "Que veux-tu lire ?",
+        "powered-by": "Recherche vocale optimisée par Tarteel.ai",
         "recent-navigations": "Navigations récentes",
+        "search-by-voice": "Recherche vocale",
         "try-navigating": "Essayez de naviguer vers"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "Diminuer",
         "increase": "Augmenter"
     },
+    "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
     "developers": "Développeurs",
     "error": {
         "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
@@ -101,6 +105,11 @@
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "powered-by": "Alimenté par",
+    "prayer-times": {
+        "calculation-method": "Méthode de calcul",
+        "madhab": "Madhab",
+        "title": "Horaires de prière"
+    },
     "prev": "Précédent",
     "privacy": "Intimité",
     "q-reflect": "CoranRéfléchir",
@@ -168,6 +177,7 @@
     "transliteration": "Translitération",
     "type": "Taper",
     "verse": "Verset",
+    "verses": "Versets",
     "view": "Vue",
     "voice": {
         "ask-permission": "Veuillez activer l'autorisation du microphone pour commencer à utiliser la recherche vocale",
@@ -177,5 +187,11 @@
         "suggest": "Veuillez commencer à réciter et votre vers apparaîtra."
     },
     "wbw": "Mot par mot",
+    "wbw-trans-lang": "Langage mot à mot",
+    "word-click": {
+        "no-audio": "Pas de son",
+        "play-audio": "Lire le son",
+        "title": "Clic sur mot"
+    },
     "yes": "Oui"
 }

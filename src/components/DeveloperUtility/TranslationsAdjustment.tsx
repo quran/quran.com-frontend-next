@@ -51,7 +51,10 @@ const TranslationsAdjustment = () => {
     const selectedTranslationsIDs = Array.from(e.target.selectedOptions, (option) =>
       Number(option.value),
     );
-    dispatch({ type: setSelectedTranslations.type, payload: selectedTranslationsIDs });
+    dispatch({
+      type: setSelectedTranslations.type,
+      payload: { translations: selectedTranslationsIDs, locale: lang },
+    });
   };
 
   return (

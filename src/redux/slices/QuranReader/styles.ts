@@ -1,32 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import resetSettings from 'src/redux/slices/reset-settings';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const MAXIMUM_FONT_STEP = 5;
 export const MINIMUM_FONT_STEP = 1;
 
-export type QuranReaderStyles = {
-  tafsirFontScale: number;
-  translationFontScale: number;
-  quranTextFontScale: number;
-  quranFont: QuranFont;
-  mushafLines: MushafLines;
-};
-
-export const initialState: QuranReaderStyles = {
-  // the base sizes in rem
-  tafsirFontScale: 3,
-  quranTextFontScale: 3,
-  translationFontScale: 3,
-  quranFont: QuranFont.QPCHafs,
-  mushafLines: MushafLines.SixteenLines,
-};
-
 export const quranReaderStylesSlice = createSlice({
   name: 'quranReaderStyles',
-  initialState,
+  initialState: getQuranReaderStylesInitialState(),
   reducers: {
     increaseQuranTextFontScale: (state) => ({
       ...state,
@@ -79,7 +64,9 @@ export const quranReaderStylesSlice = createSlice({
   // reset the state to the initial state
   // when `reset` action is dispatched
   extraReducers: (builder) => {
-    builder.addCase(resetSettings, () => initialState);
+    builder.addCase(resetSettings, (state, action) => {
+      return getQuranReaderStylesInitialState(action.payload.locale);
+    });
   },
 });
 

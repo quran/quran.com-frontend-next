@@ -1,4 +1,4 @@
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
 
@@ -15,7 +15,8 @@ export const verseTranslationChanged = (prevVerse: Verse, nextVerse: Verse): boo
 
 /**
  * Check whether the font has changed or not between 2 renders. We consider the font
- * has changed also when the number of lines in indopak has changed.
+ * has changed also when the number of lines in indopak has changed or when the word
+ * by word tooltip locale has changed.
  *
  * @param {QuranReaderStyles} prevQuranStyles
  * @param {QuranReaderStyles} nextQuranStyles
@@ -31,4 +32,5 @@ export const verseFontChanged = (
 ): boolean =>
   prevQuranStyles.mushafLines !== nextQuranStyles.mushafLines ||
   prevWords.length !== nextWords.length ||
-  prevWords[0].text !== nextWords[0].text;
+  prevWords[0].text !== nextWords[0].text ||
+  prevWords[0].translation.languageName !== nextWords[0].translation.languageName;

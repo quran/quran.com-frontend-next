@@ -8,6 +8,7 @@
         },
         "play": "Putar Audio",
         "playback-speed": "Kecepatan Pemutaran",
+        
         "player": {
             "close": "Tutup Pemutar Audio",
             "currently-playing": "Anda sedang bermain",
@@ -44,7 +45,10 @@
     "command-bar": {
         "navigations": "Navigasi",
         "no-nav-results": "Tidak ada hasil navigasi",
+        "placeholder": "Apa yang ingin Anda baca?",
+        "powered-by": "Pencarian suara diberdayakan oleh Tarteel.ai",
         "recent-navigations": "Navigasi terbaru",
+        "search-by-voice": "Cari dengan suara",
         "try-navigating": "Coba navigasikan ke"
     },
     "community": {
@@ -61,6 +65,7 @@
         "decrease": "Mengurangi",
         "increase": "Meningkatkan"
     },
+    "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dalam antarmuka yang sederhana dan mudah",
     "developers": "Pengembang",
     "error": {
         "general": "Ada yang salah. Silakan coba lagi.",
@@ -101,6 +106,11 @@
     "pages": "halaman",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil penelusuran",
     "powered-by": "Dipersembahkan oleh",
+    "prayer-times": {
+        "calculation-method": "Metode kalkulasi",
+        "madhab": "madhab",
+        "title": "Waktu Sholat"
+    },
     "prev": "Sebelumnya",
     "privacy": "Pribadi",
     "q-reflect": "QuranReflect",
@@ -130,6 +140,7 @@
         "change-translations": "Ubah Terjemahan",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Ulang Pengaturan",
+        
         "title": "Pengaturan"
     },
     "share": "Membagikan",
@@ -168,6 +179,7 @@
     "transliteration": "Transliterasi",
     "type": "Jenis",
     "verse": "Ayat",
+    "verses": "Ayat",
     "view": "Melihat",
     "voice": {
         "ask-permission": "Harap aktifkan izin mikrofon untuk mulai menggunakan Penelusuran Suara",
@@ -177,5 +189,11 @@
         "suggest": "Silakan mulai membaca dan ayat Anda akan muncul."
     },
     "wbw": "Kata demi kata",
+    "wbw-trans-lang": "Bahasa Kata demi Kata",
+    "word-click": {
+        "no-audio": "Tidak ada suara",
+        "play-audio": "Putar Audio",
+        "title": "Klik Kata"
+    },
     "yes": "Ya"
 }

@@ -107,9 +107,10 @@ $separator-size: 1px;
     & > svg > path {
       fill: var(--color-text-default);
     }
-    margin-inline-end: var(--spacing-medium);
+    margin-inline-end: var(--spacing-small);
     display: flex;
     align-items: center;
+    justify-content: center;
     height: var(--spacing-medium);
     width: var(--spacing-medium);
   }

@@ -5,18 +5,21 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import IconSearch from '../../../../public/icons/search.svg';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import useDebounce from 'src/hooks/useDebounce';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { makeNavigationSearchUrl } from 'src/utils/apiPaths';
+import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { shortenVerseText } from 'src/utils/verse';
+import { getVerseTextByWords } from 'src/utils/word';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -43,15 +46,11 @@ const NAVIGATE_TO = [
   },
 ];
 
-const DEBOUNCING_PERIOD_MS = 100;
-
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
-  // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
-  const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   /**
    * Handle when the search query is changed.
    *
@@ -111,11 +110,21 @@ const CommandBarBody: React.FC = () => {
         toBeGroupedCommands = getPreInputCommands();
         numberOfCommands = recentNavigations.length + NAVIGATE_TO.length;
       } else {
-        toBeGroupedCommands = data.result.navigation.map((navigationItem) => ({
-          ...navigationItem,
-          group: t('command-bar.navigations'),
-        }));
-        numberOfCommands = data.result.navigation.length;
+        toBeGroupedCommands = [
+          ...data.result.navigation.map((navigationItem) => ({
+            ...navigationItem,
+            group: t('command-bar.navigations'),
+          })),
+          ...data.result.verses.map((verse) => {
+            return {
+              key: verse.verseKey,
+              resultType: SearchNavigationType.AYAH,
+              name: `[${verse.verseKey}] ${shortenVerseText(getVerseTextByWords(verse))}`,
+              group: t('verses'),
+            };
+          }),
+        ];
+        numberOfCommands = data.result.navigation.length + data.result.verses.length;
       }
       return (
         <CommandsList
@@ -140,15 +149,18 @@ const CommandBarBody: React.FC = () => {
         })}
       >
         {!isVoiceSearchFlowStarted && (
-          <input
-            onChange={onSearchQueryChange}
-            placeholder={t('search.title')}
-            className={styles.input}
-            type="text"
-            inputMode="text"
-            // eslint-disable-next-line jsx-a11y/no-autofocus
-            autoFocus
-          />
+          <div className={styles.textInputContainer}>
+            <IconSearch />
+            <input
+              onChange={onSearchQueryChange}
+              placeholder={t('command-bar.placeholder')}
+              className={styles.input}
+              type="text"
+              inputMode="text"
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+            />
+          </div>
         )}
         <TarteelVoiceSearchTrigger isCommandBar />
       </div>
@@ -157,10 +169,16 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={debouncedSearchQuery ? makeNavigationSearchUrl(debouncedSearchQuery) : null}
+            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
             render={dataFetcherRender}
           />
         )}
+      </div>
+
+      <div className={styles.poweredBy}>
+        <Link variant={LinkVariant.Primary} newTab href="https://download.tarteel.ai/">{`${t(
+          'command-bar.powered-by',
+        )} `}</Link>
       </div>
     </div>
   );

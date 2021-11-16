@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "Lundrimet",
         "no-nav-results": "Nuk ka rezultate navigimi",
+        "placeholder": "Çfarë doni të lexoni?",
+        "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
         "recent-navigations": "Lundrimet e fundit",
+        "search-by-voice": "Kërko me zë",
         "try-navigating": "Provoni të lundroni në"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "Ulje",
         "increase": "Rrit"
     },
+    "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
     "developers": "Zhvilluesit",
     "error": {
         "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
@@ -101,6 +105,11 @@
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "powered-by": "Mundësuar nga",
+    "prayer-times": {
+        "calculation-method": "Mënyra e Llogaritjes",
+        "madhab": "medhhebi",
+        "title": "Kohët e lutjes"
+    },
     "prev": "E mëparshme",
     "privacy": "Privatësia",
     "q-reflect": "Kurani Reflekto",
@@ -168,6 +177,7 @@
     "transliteration": "Transliterimi",
     "type": "Lloji",
     "verse": "Ajeti",
+    "verses": "Vargjet",
     "view": "Pamje",
     "voice": {
         "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
@@ -177,5 +187,11 @@
         "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet."
     },
     "wbw": "Fjalë Për Fjalë",
+    "wbw-trans-lang": "Fjalë për fjalë Gjuha",
+    "word-click": {
+        "no-audio": "Nuk ka audio",
+        "play-audio": "Luaj Audio",
+        "title": "Klikoni në fjalë"
+    },
     "yes": "po"
 }

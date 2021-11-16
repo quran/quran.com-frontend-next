@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "Navigasyonlar",
         "no-nav-results": "Navigasyon sonucu yok",
+        "placeholder": "Ne okumak istiyorsun?",
+        "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
         "recent-navigations": "Son gezinmeler",
+        "search-by-voice": "Sesle ara",
         "try-navigating": "gezinmeyi deneyin"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "Azalmak",
         "increase": "Arttırmak"
     },
+    "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "geliştiriciler",
     "error": {
         "general": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
@@ -101,6 +105,11 @@
     "pages": "Sayfalar",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "powered-by": "Tarafından desteklenmektedir",
+    "prayer-times": {
+        "calculation-method": "Hesaplama yöntemi",
+        "madhab": "mezheb",
+        "title": "İbadet zamanları"
+    },
     "prev": "Öncesi",
     "privacy": "Mahremiyet",
     "q-reflect": "KuranYansıtmak",
@@ -168,6 +177,7 @@
     "transliteration": "Harf çevirisi",
     "type": "Tip",
     "verse": "ayet",
+    "verses": "ayetler",
     "view": "görüş",
     "voice": {
         "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
@@ -177,5 +187,11 @@
         "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir."
     },
     "wbw": "Kelime kelime",
+    "wbw-trans-lang": "Kelime Dilinden Kelime",
+    "word-click": {
+        "no-audio": "Ses yok",
+        "play-audio": "Ses Çal",
+        "title": "Kelime Tıklaması"
+    },
     "yes": "Evet"
 }

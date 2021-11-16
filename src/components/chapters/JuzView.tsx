@@ -8,13 +8,14 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import styles from './JuzView.module.scss';
 
 import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 
 type JuzViewProps = {
   isDescending: boolean;
 };
 
 const JuzView = ({ isDescending }: JuzViewProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const [juzMappings, setJuzMappings] = useState([]);
 
   useEffect(() => {
@@ -46,16 +47,17 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
               </div>
             </Link>
             {chapterIds.map((chapterId) => {
-              const chapter = getChapterData(chapterId);
+              const chapter = getChapterData(chapterId, lang);
               return (
-                <div className={styles.chapterContainer} key={chapter.id}>
-                  <Link href={`/${chapter.id}/${chapterAndVerseMappings[chapterId]}`}>
+                <div className={styles.chapterContainer} key={chapterId}>
+                  <Link href={`/${chapterId}/${chapterAndVerseMappings[chapterId]}`}>
                     <SurahPreviewRow
-                      chapterId={Number(chapter.id)}
+                      chapterId={Number(chapterId)}
                       description={`${chapter.versesCount} ${t('ayahs')}`}
-                      surahName={chapter.nameSimple}
-                      surahNumber={Number(chapter.id)}
-                      translatedSurahName={chapter.translatedName.name}
+                      surahName={chapter.transliteratedName}
+                      surahNumber={Number(chapterId)}
+                      translatedSurahName={chapter.translatedName as string}
+                      isMinimalLayout={shouldUseMinimalLayout(lang)}
                     />
                   </Link>
                 </div>

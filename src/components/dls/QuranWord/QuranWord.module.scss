@@ -2,6 +2,9 @@
   display: inline-block;
   cursor: pointer;
 }
+.additionalWordGap + .additionalWordGap {
+  margin-inline-end: var(--spacing-xxsmall);
+}
 
 .wbwContainer {
   text-align: center;

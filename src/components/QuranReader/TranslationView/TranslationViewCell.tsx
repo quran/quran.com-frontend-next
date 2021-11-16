@@ -18,7 +18,7 @@ import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getVerseWords } from 'src/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -77,20 +77,33 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
           </div>
         </div>
 
-        <div className={styles.contentContainer}>
+        <div
+          className={classNames(styles.contentContainer, {
+            [styles.splitView]: verse.translations?.length === 1,
+          })}
+        >
           <div className={styles.arabicVerseContainer}>
             <VerseText words={getVerseWords(verse)} />
           </div>
-          {verse.translations?.map((translation: Translation) => (
-            <div key={translation.id} className={styles.verseTranslationContainer}>
-              <TranslationText
-                translationFontScale={quranReaderStyles.translationFontScale}
-                text={translation.text}
-                languageId={translation.languageId}
-                resourceName={translation.resourceName}
-              />
-            </div>
-          ))}
+          <div
+            className={styles.verseTranslationsContainer}
+            style={{
+              marginBlockStart: `calc(${
+                quranReaderStyles.quranTextFontScale / 2.5
+              } * var(--spacing-medium))`,
+            }}
+          >
+            {verse.translations?.map((translation: Translation) => (
+              <div key={translation.id} className={styles.verseTranslationContainer}>
+                <TranslationText
+                  translationFontScale={quranReaderStyles.translationFontScale}
+                  text={translation.text}
+                  languageId={translation.languageId}
+                  resourceName={translation.resourceName}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Separator />

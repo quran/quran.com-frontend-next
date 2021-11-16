@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "Навигация",
         "no-nav-results": "Нет результатов навигации",
+        "placeholder": "Что ты хочешь прочитать?",
+        "powered-by": "Голосовой поиск на платформе Tarteel.ai",
         "recent-navigations": "Недавние переходы",
+        "search-by-voice": "Голосовой поиск",
         "try-navigating": "Попробуйте перейти к"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "Снижаться",
         "increase": "Увеличивать"
     },
+    "default-description": "Коран переведен на многие языки в простом и удобном интерфейсе.",
     "developers": "Разработчики",
     "error": {
         "general": "Что-то пошло не так. Пожалуйста, попробуйте еще раз.",
@@ -101,6 +105,11 @@
     "pages": "Страницы",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} из {{totalNumberOfResults}} результатов поиска",
     "powered-by": "Питаться от",
+    "prayer-times": {
+        "calculation-method": "Метод расчета",
+        "madhab": "Мазхаб",
+        "title": "Время молитв"
+    },
     "prev": "Предыдущий",
     "privacy": "Конфиденциальность",
     "q-reflect": "Коран",
@@ -168,6 +177,7 @@
     "transliteration": "Транслитерация",
     "type": "Тип",
     "verse": "Стих",
+    "verses": "Стихи",
     "view": "Вид",
     "voice": {
         "ask-permission": "Пожалуйста, разрешите микрофону, чтобы начать использовать голосовой поиск",
@@ -177,5 +187,11 @@
         "suggest": "Пожалуйста, начните читать, и ваш стих появится."
     },
     "wbw": "Слово за слово",
+    "wbw-trans-lang": "Слово за словом язык",
+    "word-click": {
+        "no-audio": "Нет звука",
+        "play-audio": "Воспроизвести аудио",
+        "title": "Слово нажмите"
+    },
     "yes": "да"
 }

@@ -13,6 +13,7 @@ import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
 
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 import Chapter from 'types/Chapter';
 
 const JuzView = dynamic(() => import('./JuzView'), {
@@ -40,7 +41,7 @@ enum Sort {
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
@@ -97,9 +98,10 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
                   description={`${chapter.versesCount} ${t('ayahs')}`}
-                  surahName={chapter.nameSimple}
+                  surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
-                  translatedSurahName={chapter.translatedName.name}
+                  translatedSurahName={chapter.translatedName as string}
+                  isMinimalLayout={shouldUseMinimalLayout(lang)}
                 />
               </Link>
             </div>

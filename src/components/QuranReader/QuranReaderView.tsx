@@ -7,7 +7,7 @@ import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TafsirView from './TafsirView';
 import TranslationView from './TranslationView';
 
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 
 const ReadingView = dynamic(() => import('./ReadingView'));

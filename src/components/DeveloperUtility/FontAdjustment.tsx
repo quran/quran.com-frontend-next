@@ -10,11 +10,11 @@ import {
   decreaseTafsirFontScale,
   selectQuranReaderStyles,
   setQuranFont,
-  QuranReaderStyles,
   MAXIMUM_FONT_STEP,
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
 } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { QuranFont } from 'types/QuranReader';
 
 /**

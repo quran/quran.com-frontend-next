@@ -11,7 +11,7 @@ import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 
 type PageProps = {

@@ -40,7 +40,9 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   return (
     <>
-      <NextSeoWrapper title={`${t('surah')} ${chapterResponse.chapter.nameSimple} - ${verseId}`} />
+      <NextSeoWrapper
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${verseId}`}
+      />
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
@@ -82,7 +84,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     apiParams = { ...apiParams, ...{ from, to } };
   }
   try {
-    const versesResponse = await getChapterVerses(chapterId, apiParams);
+    const versesResponse = await getChapterVerses(chapterId, locale, apiParams);
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
     const chapterData = getChapterData(chapterId, locale);
     if (!chapterData) {
@@ -96,7 +98,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         chapterResponse: {
-          chapter: chapterData,
+          chapter: { ...chapterData, id: chapterId },
         },
         versesResponse: {
           ...versesResponse,

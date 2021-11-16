@@ -2,7 +2,7 @@ import React from 'react';
 
 import QuranReaderView from './QuranReaderView';
 
-import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import Verse from 'types/Verse';
 

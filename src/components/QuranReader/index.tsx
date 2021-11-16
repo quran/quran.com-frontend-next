@@ -3,6 +3,7 @@
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import InfiniteScroll from 'react-infinite-scroller';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -21,9 +22,14 @@ import QuranReaderBody from './QuranReaderBody';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
+import Error from 'src/pages/_error';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
+import {
+  selectIsUsingDefaultWordByWordLocale,
+  selectReadingPreference,
+  selectWordByWordLocale,
+} from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {
@@ -55,6 +61,7 @@ const QuranReader = ({
   id,
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
+  const { lang } = useTranslation();
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
@@ -64,6 +71,8 @@ const QuranReader = ({
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const { data, size, setSize, isValidating } = useSWRInfinite(
@@ -80,11 +89,16 @@ const QuranReader = ({
         isSelectedTafsirData,
         id,
         reciter: reciter.id,
+        locale: lang,
+        wordByWordLocale,
       }),
     verseFetcher,
     {
       fallbackData:
-        isUsingDefaultTranslations && isUsingDefaultTafsirs && isUsingDefaultReciter
+        isUsingDefaultTranslations &&
+        isUsingDefaultTafsirs &&
+        isUsingDefaultReciter &&
+        isUsingDefaultWordByWordLocale
           ? initialData.verses
           : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
       revalidateOnFocus: false, // disable auto revalidation when window gets focused
@@ -119,6 +133,9 @@ const QuranReader = ({
     );
   }
   const verses = data.flat(1);
+  if (!verses.length) {
+    return <Error />;
+  }
   const loadMore = () => {
     if (!isValidating) {
       setSize(size + 1);

@@ -3,7 +3,8 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { ThemeType, selectTheme, setTheme } from 'src/redux/slices/theme';
+import { selectTheme, setTheme } from 'src/redux/slices/theme';
+import ThemeType from 'src/redux/types/ThemeType';
 
 const ThemeAdjustment = () => {
   const dispatch = useDispatch();

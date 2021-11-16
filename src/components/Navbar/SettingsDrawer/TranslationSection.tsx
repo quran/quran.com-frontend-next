@@ -18,10 +18,10 @@ import {
   increaseTranslationFontScale,
   MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
-  QuranReaderStyles,
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { TranslationsResponse } from 'types/ApiResponses';

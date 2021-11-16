@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "ناوبری ها",
         "no-nav-results": "هیچ نتیجه ناوبری وجود ندارد",
+        "placeholder": "میخواهی چی بخوانی؟",
+        "powered-by": "جستجوی صوتی ارائه شده توسط Tarteel.ai",
         "recent-navigations": "پیمایش های اخیر",
+        "search-by-voice": "جستجوی صوتی",
         "try-navigating": "سعی کنید به"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "نزول کردن",
         "increase": "افزایش دادن"
     },
+    "default-description": "قرآن در یک رابط کاربری ساده و آسان به بسیاری از زبان ها ترجمه شده است",
     "developers": "توسعه دهندگان",
     "error": {
         "general": "مشکلی پیش آمد. لطفا دوباره تلاش کنید.",
@@ -101,6 +105,11 @@
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} از {{totalNumberOfResults}} نتایج جستجو",
     "powered-by": "پشتیبانی شده توسط",
+    "prayer-times": {
+        "calculation-method": "روش محاسبه",
+        "madhab": "مداح",
+        "title": "اوقات نماز"
+    },
     "prev": "قبلی",
     "privacy": "حریم خصوصی",
     "q-reflect": "قرآن انعکاس",
@@ -168,6 +177,7 @@
     "transliteration": "نویسه گردانی",
     "type": "تایپ کنید",
     "verse": "آیه",
+    "verses": "آیات",
     "view": "چشم انداز",
     "voice": {
         "ask-permission": "لطفاً مجوز میکروفون را برای شروع استفاده از جستجوی صوتی فعال کنید",
@@ -177,5 +187,11 @@
         "suggest": "لطفا شروع به تلاوت کنید و آیه شما ظاهر می شود."
     },
     "wbw": "کلمه به کلمه",
+    "wbw-trans-lang": "زبان کلمه به کلمه",
+    "word-click": {
+        "no-audio": "بی صدا",
+        "play-audio": "پخش صدا",
+        "title": "کلمه کلیک کنید"
+    },
     "yes": "آره"
 }

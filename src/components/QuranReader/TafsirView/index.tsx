@@ -8,7 +8,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './TafsirView.module.scss';
 
 import VerseText from 'src/components/Verse/VerseText';
-import { QuranReaderStyles, selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getVerseWords } from 'src/utils/verse';
 import Verse from 'types/Verse';
 

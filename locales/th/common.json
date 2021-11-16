@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "การนำทาง",
         "no-nav-results": "ไม่มีผลการนำทาง",
+        "placeholder": "อยากอ่านอะไร?",
+        "powered-by": "ค้นหาด้วยเสียงขับเคลื่อนโดย Tarteel.ai",
         "recent-navigations": "การนำทางล่าสุด",
+        "search-by-voice": "ค้นหาด้วยเสียง",
         "try-navigating": "ลองไปที่"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "ลด",
         "increase": "เพิ่มขึ้น"
     },
+    "default-description": "คัมภีร์กุรอานแปลเป็นหลายภาษาในอินเทอร์เฟซที่ง่ายและสะดวก",
     "developers": "นักพัฒนา",
     "error": {
         "general": "อะไรบางอย่างผิดปกติ. กรุณาลองอีกครั้ง.",
@@ -101,6 +105,11 @@
     "pages": "หน้า",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
     "powered-by": "ขับเคลื่อนโดย",
+    "prayer-times": {
+        "calculation-method": "วิธีการคำนวณ",
+        "madhab": "Madhab",
+        "title": "เวลาละหมาด"
+    },
     "prev": "ก่อนหน้า",
     "privacy": "ความเป็นส่วนตัว",
     "q-reflect": "คัมภีร์กุรอานสะท้อน",
@@ -168,6 +177,7 @@
     "transliteration": "การทับศัพท์",
     "type": "พิมพ์",
     "verse": "กลอน",
+    "verses": "โองการ",
     "view": "ดู",
     "voice": {
         "ask-permission": "โปรดเปิดใช้งานการอนุญาตไมโครโฟนเพื่อเริ่มใช้การค้นหาด้วยเสียง",
@@ -177,5 +187,11 @@
         "suggest": "โปรดเริ่มท่องและกลอนของคุณจะปรากฏขึ้น"
     },
     "wbw": "คำต่อคำ",
+    "wbw-trans-lang": "คำต่อคำ ภาษา",
+    "word-click": {
+        "no-audio": "ไม่มีเสียง",
+        "play-audio": "เล่นเสียง",
+        "title": "คำคลิก"
+    },
     "yes": "ใช่"
 }

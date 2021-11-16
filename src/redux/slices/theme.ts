@@ -1,27 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { getThemeInitialState } from '../defaultSettings/util';
+
 import resetSettings from './reset-settings';
 
 import { RootState } from 'src/redux/RootState';
-
-export enum ThemeType {
-  System = 'system',
-  Light = 'light',
-  Dark = 'dark',
-  // Sepia = 'sepia',
-}
-
-export type Theme = {
-  type: ThemeType;
-};
-
-const initialState: Theme = {
-  type: ThemeType.System,
-};
+import Theme from 'src/redux/types/Theme';
+import ThemeType from 'src/redux/types/ThemeType';
 
 export const themeSlice = createSlice({
   name: 'theme',
-  initialState,
+  initialState: getThemeInitialState(),
   reducers: {
     setTheme: (state: Theme, action: PayloadAction<ThemeType>) => ({
       ...state,
@@ -29,7 +18,9 @@ export const themeSlice = createSlice({
     }),
   },
   extraReducers: (builder) => {
-    builder.addCase(resetSettings, () => initialState);
+    builder.addCase(resetSettings, (state, action) => {
+      return getThemeInitialState(action.payload.locale);
+    });
   },
 });
 

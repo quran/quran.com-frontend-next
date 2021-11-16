@@ -34,7 +34,7 @@ type SeekButtonProps = {
   isLoading: boolean;
 };
 const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
   const reciter = useSelector(selectReciter);
@@ -59,7 +59,7 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
       // when in repeatMode, finish the repeat progress for current ayah
       // otherwise the AudioRepeatManager will replay the current Ayah when we set the new timestamp
       if (type === SeekButtonType.NextAyah) dispatch(finishRepeatEachVerseProgress());
-      else dispatch(resetRepeatEachVerseProgress());
+      else dispatch(resetRepeatEachVerseProgress(lang));
     }
     const newVerse = type === SeekButtonType.PrevAyah ? highlightedVerse - 1 : highlightedVerse + 1;
     const verseKey = makeVerseKey(highlightedChapter, newVerse);

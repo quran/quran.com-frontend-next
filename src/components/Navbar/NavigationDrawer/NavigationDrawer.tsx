@@ -31,7 +31,11 @@ const NavigationDrawer = () => {
           <div className={styles.leftCTA}>
             <Link href="/">
               <a>
-                <Button shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+                <Button
+                  shape={ButtonShape.Circle}
+                  variant={ButtonVariant.Ghost}
+                  shouldFlipOnRTL={false}
+                >
                   <IconQ />
                 </Button>
               </a>

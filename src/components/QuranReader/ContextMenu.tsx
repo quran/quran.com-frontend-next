@@ -12,17 +12,18 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
+import { shouldUseMinimalLayout } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
-    return chapterId ? getChapterData(chapterId) : null;
-  }, [chapterId]);
+    return chapterId ? getChapterData(chapterId, lang) : null;
+  }, [chapterId, lang]);
   const juzNumber = useMemo(() => {
     return hizb ? getJuzNumberByHizb(Number(hizb)) : null;
   }, [hizb]);
@@ -32,6 +33,7 @@ const ContextMenu = () => {
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
+  const isMinimalLayout = shouldUseMinimalLayout(lang);
 
   return (
     <div
@@ -44,21 +46,27 @@ const ContextMenu = () => {
       style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
       <div className={styles.sectionsContainer}>
-        <div className={styles.leftSection}>
+        <div className={styles.section}>
           <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
-          <div className={styles.rowsContainer}>
-            <div className={classNames({ [styles.hide]: !isExpanded }, styles.row)}>
-              <p className={styles.col}>{chapterData.translatedName.name}</p>
-              <p className={styles.col}>
-                {t('juz')} {juzNumber} / {t('hizb')} {hizb}
+          <div className={classNames(styles.row)}>
+            {!isMinimalLayout && (
+              <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
+                {chapterData.translatedName}
               </p>
-            </div>
-            <div className={styles.row}>
-              <p className={classNames(styles.col, styles.bold)}>{chapterData.nameSimple}</p>
-              <p className={styles.col}>
-                {t('page')} {page}
-              </p>
-            </div>
+            )}
+            <p className={classNames(styles.bold, styles.alignStart)}>
+              {chapterData.transliteratedName}
+            </p>
+          </div>
+        </div>
+        <div className={classNames(styles.section, styles.leftSection)}>
+          <div className={classNames(styles.row)}>
+            <p className={classNames(styles.alignEnd, { [styles.hide]: !isExpanded })}>
+              {t('juz')} {juzNumber} / {t('hizb')} {hizb}
+            </p>
+            <p className={classNames(styles.alignEnd)}>
+              {t('page')} {page}
+            </p>
           </div>
         </div>
       </div>

@@ -1,14 +1,20 @@
+import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './PrayerTimes.module.scss';
 
 import { fetcher } from 'src/api';
-
-// TODO: replace this url
-const URL = 'https://quran-prayer-times-api-abdellatif-io-qurancom.vercel.app/api/prayer-times';
+import { selectCalculationMethod, selectMadhab } from 'src/redux/slices/prayerTimes';
+import { makePrayerTimesUrl } from 'src/utils/apiPaths';
 
 const PrayerTimes = () => {
-  const { data } = useSWR<Data>(URL, (url) => fetcher(url));
+  const { t } = useTranslation('home');
+
+  const calculationMethod = useSelector(selectCalculationMethod);
+  const madhab = useSelector(selectMadhab);
+  const { data } = useSWR<Data>(makePrayerTimesUrl({ calculationMethod, madhab }), fetcher);
+  const hijriDate = useHijriDateFormatter(data?.hijriDateData);
 
   if (!data) return null;
 
@@ -17,12 +23,14 @@ const PrayerTimes = () => {
 
   return (
     <div className={styles.container}>
-      <div>{formatHijriDate(data.hijriDate)}</div>
+      <div>{hijriDate}</div>
       <div className={styles.prayerTimesContainer}>
         <div>{formatLocation(data.geo)}</div>
         {nextPrayerTime && (
           <div>
-            <span className={styles.prayerName}>{nextPrayerTime.prayerName}</span>{' '}
+            <span className={styles.prayerName}>
+              {t(`prayer-names.${nextPrayerTime.prayerName}`)}
+            </span>{' '}
             <span>
               {formatTime(nextPrayerTime.time.getHours())}:
               {formatTime(nextPrayerTime.time.getMinutes())}
@@ -51,14 +59,33 @@ type Geo = {
   longitude?: string;
 };
 
+type HijriDateData = {
+  dayName: string;
+  month: number;
+  date: number;
+  year: number;
+};
+
 type Data = {
   geo: Geo;
   prayerTimes: PrayerTimes;
   hijriDate: string;
+  hijriDateData: HijriDateData;
 };
 
-const formatHijriDate = (hijriDate: string) => {
-  return hijriDate.split(',').slice(1).join(',').trim();
+const useHijriDateFormatter = (hijriDate?: HijriDateData) => {
+  const { t } = useTranslation('home');
+  if (!hijriDate) return null;
+
+  const month = t(`hijri-date.month.${hijriDate.month}`);
+
+  // Different language have different format to show the date, so we need to "format" it.
+  // For example in Indonesia we say "12 Muharram 1443" instead of "Muharram 12, 1443"
+  return t('hijri-date.format', {
+    date: hijriDate.date,
+    month,
+    year: hijriDate.year,
+  });
 };
 
 const formatTime = (time: number) => time.toString().padStart(2, '0');
@@ -95,7 +122,7 @@ const getNextPrayerTime = (
   });
 
   // if nextPrayerTime is not found for this day, this means isha is done. So we use fajr as nextPrayerTime
-  nextPrayerTime = prayerTimeEntries[0];
+  if (!nextPrayerTime) nextPrayerTime = prayerTimeEntries[0];
 
   const [prayerName, time] = nextPrayerTime;
   return {

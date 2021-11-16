@@ -6,6 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import IconSearch from '../../public/icons/search.svg';
+
 import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
@@ -167,6 +169,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
         <p className={styles.header}>{t('search.title')}</p>
         <Input
           id="searchQuery"
+          prefix={<IconSearch />}
           onChange={onSearchQueryChange}
           onClearClicked={onClearClicked}
           clearable

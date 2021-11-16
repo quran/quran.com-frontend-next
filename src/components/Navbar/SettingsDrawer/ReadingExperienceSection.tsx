@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -15,12 +16,23 @@ import {
   setShowTooltipFor,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
+  selectWordClickFunctionality,
+  setWordClickFunctionality,
+  selectWordByWordLocale,
+  setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
-import { ReadingPreference, WordByWordType } from 'types/QuranReader';
+import { getLocaleName } from 'src/utils/locale';
+import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
+
+const WBW_LOCALES = ['en', 'ur', 'id', 'bn'];
+const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
+  label: getLocaleName(locale),
+  value: locale,
+}));
 
 const ReadingExperienceSection = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -28,6 +40,8 @@ const ReadingExperienceSection = () => {
     shallowEqual,
   );
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
+  const wordClickFunctionality = useSelector(selectWordClickFunctionality);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const wordByWordValue = getWordByWordValue(
     showWordByWordTranslation,
@@ -65,6 +79,15 @@ const ReadingExperienceSection = () => {
     }
   };
 
+  /**
+   * Handle when the word by word locale changes.
+   *
+   * @param {string} value
+   */
+  const onWordByWordLocaleChange = (value: string) => {
+    dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
+  };
+
   const wordByWordOptions = useMemo(
     () =>
       [NONE, WordByWordType.Translation, WordByWordType.Transliteration, BOTH].map((option) => ({
@@ -78,6 +101,16 @@ const ReadingExperienceSection = () => {
     () =>
       Object.values(ReadingPreference).map((item) => ({
         label: t(`reading-preference.${item}`),
+        id: item,
+        value: item,
+      })),
+    [t],
+  );
+
+  const wordClickOptions = useMemo(
+    () =>
+      Object.values(WordClickFunctionality).map((item) => ({
+        label: t(`word-click.${item}`),
         id: item,
         value: item,
       })),
@@ -108,6 +141,16 @@ const ReadingExperienceSection = () => {
         />
       </Section.Row>
       <Section.Row>
+        <Section.Label>{t('wbw-trans-lang')}</Section.Label>
+        <Select
+          id="wordByWord"
+          name="wordByWord"
+          options={WORD_BY_WORD_LOCALES_OPTIONS}
+          value={wordByWordLocale}
+          onChange={onWordByWordLocaleChange}
+        />
+      </Section.Row>
+      <Section.Row>
         <Section.Label>{t('tooltip')}</Section.Label>
         <Select
           id="showToolTipFor"
@@ -115,6 +158,16 @@ const ReadingExperienceSection = () => {
           options={wordByWordOptions}
           value={tooltipWordByWordValue}
           onChange={onTooltipWordByWordChange}
+        />
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>{t('word-click.title')}</Section.Label>
+        <RadioGroup
+          onChange={(value) => dispatch(setWordClickFunctionality(value as WordClickFunctionality))}
+          value={wordClickFunctionality}
+          label="Word Click"
+          items={wordClickOptions}
+          orientation={RadioGroupOrientation.Horizontal}
         />
       </Section.Row>
     </Section>

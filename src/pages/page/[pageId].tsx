@@ -42,7 +42,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const pageId = String(params.pageId);
   // we need to validate the pageId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
   if (!isValidPageId(pageId)) {
@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
   try {
-    const pageVersesResponse = await getPageVerses(pageId, {
+    const pageVersesResponse = await getPageVerses(pageId, locale, {
       ...getDefaultWordFields(),
       ...getMushafId(),
     });

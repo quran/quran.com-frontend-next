@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "Navigatie",
         "no-nav-results": "Geen navigatieresultaten",
+        "placeholder": "Wat wil je lezen?",
+        "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
         "recent-navigations": "Recente navigatie",
+        "search-by-voice": "Zoek bij stem",
         "try-navigating": "Probeer te navigeren naar"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "Verminderen",
         "increase": "Toename"
     },
+    "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
     "developers": "ontwikkelaars",
     "error": {
         "general": "Er is iets fout gegaan. Probeer het opnieuw.",
@@ -101,6 +105,11 @@
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "powered-by": "Aangedreven door",
+    "prayer-times": {
+        "calculation-method": "Rekenmethode",
+        "madhab": "Madhab",
+        "title": "Gebedstijden"
+    },
     "prev": "Vorig",
     "privacy": "Privacy",
     "q-reflect": "KoranReflect",
@@ -168,6 +177,7 @@
     "transliteration": "Transliteratie",
     "type": "Type",
     "verse": "Vers",
+    "verses": "verzen",
     "view": "Weergave",
     "voice": {
         "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
@@ -177,5 +187,11 @@
         "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen."
     },
     "wbw": "Woord voor woord",
+    "wbw-trans-lang": "Woord voor woord taal",
+    "word-click": {
+        "no-audio": "Geen geluid",
+        "play-audio": "Audio afspelen",
+        "title": "Woordklik"
+    },
     "yes": "Ja"
 }

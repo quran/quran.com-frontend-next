@@ -8,6 +8,7 @@
         },
         "play": "Riproduci audio",
         "playback-speed": "Velocità di riproduzione",
+        
         "player": {
             "close": "Chiudi lettore audio",
             "currently-playing": "Stai giocando attualmente",
@@ -44,7 +45,10 @@
     "command-bar": {
         "navigations": "Navigazioni",
         "no-nav-results": "Nessun risultato di navigazione",
+        "placeholder": "Cosa vuoi leggere?",
+        "powered-by": "Ricerca vocale fornita da Tarteel.ai",
         "recent-navigations": "Navigazioni recenti",
+        "search-by-voice": "Ricerca vocale",
         "try-navigating": "Prova a navigare in"
     },
     "community": {
@@ -61,6 +65,7 @@
         "decrease": "Diminuire",
         "increase": "Aumento"
     },
+    "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
     "developers": "Sviluppatori",
     "error": {
         "general": "Qualcosa è andato storto. Per favore riprova.",
@@ -101,6 +106,11 @@
     "pages": "Pagine",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
     "powered-by": "Offerto da",
+    "prayer-times": {
+        "calculation-method": "Metodo di calcolo",
+        "madhab": "Madhab",
+        "title": "Tempi di preghiera"
+    },
     "prev": "Precedente",
     "privacy": "Privacy",
     "q-reflect": "CoranoRiflesso",
@@ -130,6 +140,7 @@
         "change-translations": "Cambia traduzioni",
         "reading-experience": "Esperienza di lettura",
         "reset-cta": "Ripristina le impostazioni",
+        
         "title": "Impostazioni"
     },
     "share": "Condividere",
@@ -168,6 +179,7 @@
     "transliteration": "Traslitterazione",
     "type": "Tipo",
     "verse": "Versetto",
+    "verses": "versi",
     "view": "Visualizzazione",
     "voice": {
         "ask-permission": "Abilita l'autorizzazione del microfono per iniziare a utilizzare Ricerca vocale",
@@ -177,5 +189,11 @@
         "suggest": "Per favore inizia a recitare e il tuo verso apparirà."
     },
     "wbw": "Parola per parola",
+    "wbw-trans-lang": "Parola per parola lingua",
+    "word-click": {
+        "no-audio": "Nessun audio",
+        "play-audio": "Riproduci audio",
+        "title": "Clic sulla parola"
+    },
     "yes": "sì"
 }

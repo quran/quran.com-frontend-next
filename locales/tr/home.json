@@ -3,7 +3,31 @@
         "rights": "Her hakkı saklıdır",
         "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
     },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharrem",
+            "10": "Şevval",
+            "11": "Zil Kaide",
+            "2": "Safar",
+            "3": "Rabi' ben",
+            "4": "Rabi' II",
+            "5": "Cumada ben",
+            "6": "Cumada Ahira",
+            "7": "Recep",
+            "8": "Şaban",
+            "9": "Ramazan"
+        }
+    },
     "no-bookmarks": "Henüz yer işaretiniz yok",
+    "prayer-names": {
+        "asr": "ikindi",
+        "dhuhr": "öğle",
+        "fajr": "sabah namazı",
+        "isha": "yatsı",
+        "maghrib": "akşam yemeği",
+        "sunrise": "gündoğumu"
+    },
     "recently-read": "Son Okunan",
     "tab": {
         "bookmarks": "Yer imleri",

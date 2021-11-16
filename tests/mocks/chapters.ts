@@ -6,12 +6,9 @@ export const chapter = {
   revelationPlace: 'makkah',
   nameComplex: 'Al-Fātiĥah',
   nameArabic: 'الفاتحة',
-  nameSimple: 'Al-Fatihah',
+  transliteratedName: 'Al-Fatihah',
   versesCount: 7,
-  translatedName: {
-    languageName: 'english',
-    name: 'The Opener',
-  },
+  translatedName: 'The Opener',
   defaultSlug: { slug: 'al-fatihah', locale: 'english' },
   languageName: 'english',
   pages: [1, 2],
@@ -25,11 +22,11 @@ export const chapter2 = {
   revelationPlace: 'madinah',
   nameComplex: 'Al-Baqarah',
   nameArabic: 'البقرة',
-  nameSimple: 'Al-Baqarah',
+  transliteratedName: 'Al-Baqarah',
   versesCount: 286,
   pages: [2, 49],
   defaultSlug: { slug: 'al-baqarah', locale: 'english' },
-  translatedName: { languageName: 'english', name: 'The Cow' },
+  translatedName: 'The Cow',
 };
 
 export const chapter3 = {
@@ -40,11 +37,11 @@ export const chapter3 = {
   revelationPlace: 'madinah',
   nameComplex: 'Āli `Imrān',
   nameArabic: 'آل عمران',
-  nameSimple: "Ali 'Imran",
+  transliteratedName: "Ali 'Imran",
   versesCount: 200,
   pages: [50, 76],
   defaultSlug: { slug: 'ali-imran', locale: 'english' },
-  translatedName: { languageName: 'english', name: 'Family of Imran' },
+  translatedName: 'Family of Imran',
 };
 
 export const chapters = [chapter, chapter2, chapter3];

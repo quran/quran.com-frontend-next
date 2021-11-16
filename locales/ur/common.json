@@ -44,7 +44,10 @@
     "command-bar": {
         "navigations": "نیویگیشن",
         "no-nav-results": "کوئی نیویگیشن نتائج نہیں ہیں۔",
+        "placeholder": "آپ کیا پڑھنا چاہتے ہیں؟",
+        "powered-by": "Tarteel.ai کے ذریعے تقویت یافتہ صوتی تلاش",
         "recent-navigations": "حالیہ نیویگیشنز",
+        "search-by-voice": "آواز کے ذریعے تلاش کریں۔",
         "try-navigating": "تک نیویگیٹ کرنے کی کوشش کریں۔"
     },
     "community": {
@@ -61,6 +64,7 @@
         "decrease": "کمی",
         "increase": "اضافہ"
     },
+    "default-description": "قرآن مجید کا ایک سادہ اور آسان انٹرفیس میں متعدد زبانوں میں ترجمہ کیا گیا ہے۔",
     "developers": "ڈویلپرز",
     "error": {
         "general": "کچھ غلط ہو گیا. دوبارہ کوشش کریں.",
@@ -101,6 +105,11 @@
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} کی {{totalNumberOfResults}} تلاش کے نتائج",
     "powered-by": "کی طرف سے طاقت",
+    "prayer-times": {
+        "calculation-method": "حساب کتاب کا طریقہ",
+        "madhab": "مادھب",
+        "title": "نماز کے اوقات"
+    },
     "prev": "پچھلا",
     "privacy": "رازداری",
     "q-reflect": "قرآن کی عکاسی",
@@ -168,6 +177,7 @@
     "transliteration": "نقل حرفی",
     "type": "قسم",
     "verse": "آیت",
+    "verses": "آیات",
     "view": "دیکھیں",
     "voice": {
         "ask-permission": "براہ کرم صوتی تلاش کا استعمال شروع کرنے کے لیے مائیکروفون کی اجازت کو فعال کریں۔",
@@ -177,5 +187,11 @@
         "suggest": "براہ کرم تلاوت شروع کریں اور آپ کی آیت ظاہر ہوگی۔"
     },
     "wbw": "لفظ بہ لفظ",
+    "wbw-trans-lang": "لفظ بہ لفظ زبان",
+    "word-click": {
+        "no-audio": "کوئی آڈیو نہیں۔",
+        "play-audio": "آڈیو چلائیں۔",
+        "title": "ورڈ کلک"
+    },
     "yes": "جی ہاں"
 }
