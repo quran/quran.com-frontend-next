@@ -3,11 +3,13 @@ import { useState, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
-import AudioPlaybackRatemenu from './Buttons/AudioPlaybackRateMenu';
+import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
 import CloseButton from './Buttons/CloseButton';
 import DownloadAudioButton from './Buttons/DownloadAudioButton';
+import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
 import { selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 
@@ -48,13 +50,16 @@ const OverflowAudioPlayActionsMenuBody = () => {
           }
           onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.AudioSpeed)}
         >
-          {t('audio.playback-speed')}
+          <div className={styles.audioPlaybackRateMenuContainer}>
+            {t('audio.playback-speed')}
+            <ChevronRightIcon />
+          </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Divider />,
         <CloseButton />,
       ],
       [AudioPlayerOverflowMenu.AudioSpeed]: (
-        <AudioPlaybackRatemenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
+        <AudioPlaybackRateMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
     }),
     [t, playbackRate],

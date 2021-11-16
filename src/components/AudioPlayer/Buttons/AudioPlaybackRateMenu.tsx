@@ -1,20 +1,23 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import BackIcon from '../../../../public/icons/west.svg';
+import CheckIcon from '../../../../public/icons/check.svg';
+import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
-import { setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import { selectPlaybackRate, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 
 const getPlaybackRateLabel = (playbackRate) => (playbackRate === 1 ? 'Normal' : playbackRate);
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const currentPlaybackRate = useSelector(selectPlaybackRate);
 
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item
+      icon={playbackRate === currentPlaybackRate ? <CheckIcon /> : <span />}
       onClick={() => {
         dispatch(setPlaybackRate(playbackRate));
         onBack();
@@ -25,7 +28,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
   ));
   return (
     <>
-      <PopoverMenu.Item icon={<BackIcon />} onClick={onBack}>
+      <PopoverMenu.Item icon={<ChevronLeftIcon />} onClick={onBack}>
         {t('audio.playback-speed')}
       </PopoverMenu.Item>
       <PopoverMenu.Divider />
