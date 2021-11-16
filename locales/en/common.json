@@ -8,6 +8,7 @@
         },
         "play": "Play Audio",
         "playback-speed": "Playback Speed",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Close Audio Player",
             "currently-playing": "You are currently playing",
