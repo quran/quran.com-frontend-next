@@ -1,3 +1,5 @@
+import { useRef, useEffect } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -57,7 +59,15 @@ const usePrayerTimesData = () => {
     },
   );
 
-  return data;
+  // Keep previous data point to avoid UI glitch https://swr.vercel.app/docs/middleware#keep-previous-result
+  const laggyDataRef = useRef<PrayerTimesData>();
+  useEffect(() => {
+    if (data !== undefined) {
+      laggyDataRef.current = data;
+    }
+  }, [data]);
+
+  return laggyDataRef.current || data;
 };
 
 const PrayerTimes = () => {
