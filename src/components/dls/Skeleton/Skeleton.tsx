@@ -7,9 +7,18 @@ type SkeletonProps = {
   isRounded?: boolean;
   isSquared?: boolean;
   isActive?: boolean;
+  style?: React.CSSProperties;
+  className?: string;
 };
 
-const Skeleton = ({ children, isRounded, isSquared, isActive = true }: SkeletonProps) => {
+const Skeleton = ({
+  children,
+  isRounded,
+  isSquared,
+  isActive = true,
+  style,
+  className,
+}: SkeletonProps) => {
   return (
     <span
       className={classNames(styles.skeleton, {
@@ -17,7 +26,9 @@ const Skeleton = ({ children, isRounded, isSquared, isActive = true }: SkeletonP
         [styles.active]: isActive,
         [styles.rounded]: isRounded,
         [styles.squared]: isSquared,
+        [className]: className,
       })}
+      style={style}
     >
       {children}
     </span>

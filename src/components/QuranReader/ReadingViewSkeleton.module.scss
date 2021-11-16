@@ -1,0 +1,15 @@
+@use "src/styles/breakpoints";
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 100vw;
+}
+
+.verseRow {
+  display: flex;
+  margin: var(--spacing-xxsmall) 0;
+  height: calc(var(--spacing-medium));
+  width: 100%;
+}
+
