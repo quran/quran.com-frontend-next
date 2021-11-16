@@ -8,6 +8,7 @@
         },
         "play": "Riproduci audio",
         "playback-speed": "Velocità di riproduzione",
+        
         "player": {
             "close": "Chiudi lettore audio",
             "currently-playing": "Stai giocando attualmente",
@@ -139,6 +140,7 @@
         "change-translations": "Cambia traduzioni",
         "reading-experience": "Esperienza di lettura",
         "reset-cta": "Ripristina le impostazioni",
+        
         "title": "Impostazioni"
     },
     "share": "Condividere",
@@ -177,6 +179,7 @@
     "transliteration": "Traslitterazione",
     "type": "Tipo",
     "verse": "Versetto",
+    "verses": "versi",
     "view": "Visualizzazione",
     "voice": {
         "ask-permission": "Abilita l'autorizzazione del microfono per iniziare a utilizzare Ricerca vocale",
