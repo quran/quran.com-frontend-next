@@ -13,13 +13,15 @@ import { getPageLimit, getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Loader from './Loader';
-import Loading from './Loading';
 import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
+import QuranReaderHeaderSkeleton from './QuranReaderHeaderSkeleton';
+import ReadingViewSkeleton from './ReadingViewSkeleton';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
+import TranslationViewSkeleton from './TranslationViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -42,6 +44,7 @@ import {
   selectIsUsingDefaultTranslations,
   selectSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { areArraysEqual } from 'src/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranFont, QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
@@ -64,6 +67,10 @@ const QuranReader = ({
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
+  const { quranTextFontScale } = useSelector(
+    selectQuranReaderStyles,
+    shallowEqual,
+  ) as QuranReaderStyles;
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
@@ -129,11 +136,10 @@ const QuranReader = ({
   // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
   if (!data) {
     return (
-      <Loading
-        containerClassName={styles.container}
-        visibleSideBarClassName={styles.withVisibleSideBar}
-        isSideBarVisible={isSideBarVisible}
-      />
+      <>
+        <QuranReaderHeaderSkeleton />
+        <TranslationViewSkeleton />
+      </>
     );
   }
   const verses = data.flat(1);
@@ -166,7 +172,17 @@ const QuranReader = ({
             loadMore={loadMore}
             loader={
               <div key={0}>
-                <Loader isValidating={isValidating} loadMore={loadMore} />
+                <Loader
+                  isValidating={isValidating}
+                  loadMore={loadMore}
+                  renderSkeletonComponent={() =>
+                    isReadingPreference ? (
+                      <ReadingViewSkeleton fontSize={quranTextFontScale} />
+                    ) : (
+                      <TranslationViewSkeleton verseCount={verses[0]?.translations?.length} />
+                    )
+                  }
+                />
               </div>
             }
           >

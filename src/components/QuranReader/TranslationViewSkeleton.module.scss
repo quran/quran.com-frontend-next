@@ -1,0 +1,55 @@
+@use "src/styles/breakpoints";
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  @include breakpoints.tablet {
+    max-width: 80%;
+  }
+  margin: 0 auto;
+}
+
+.actionsRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  :last-child {
+    margin-inline-end: 0;
+  }
+}
+.countActionItem {
+  width: calc(var(--spacing-mega) + var(--spacing-small));
+  height: var(--spacing-mega);
+  margin-inline-end: auto;
+}
+.anotherActionItem {
+  width: calc(var(--spacing-mega) + var(--spacing-small));
+  height: var(--spacing-mega);
+  margin: 0 var(--spacing-xxsmall);
+}
+.verseRow {
+  display: flex;
+  flex-direction: row;
+  margin: var(--spacing-medium) 0;
+  justify-content: flex-end;
+}
+.verseItem {
+  width: calc(var(--spacing-mega) * 8);
+  height: calc(var(--spacing-medium) + var(--spacing-xsmall));
+}
+.translationRows {
+  display: flex;
+  flex-direction: column;
+}
+.translationItem {
+  width: calc(var(--spacing-mega) * 10);
+  height: calc(var(--spacing-medium) + var(--spacing-xsmall));
+  margin: var(--spacing-xxsmall) 0;
+  max-width: calc(100vw - var(--spacing-mega));
+}
+
+.subTranslationItem {
+  width: calc(var(--spacing-mega) * 8);
+  height: var(--spacing-xxsmall);
+  margin-block: var(--spacing-micro) var(--spacing-xsmall);
+}

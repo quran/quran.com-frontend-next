@@ -1,0 +1,83 @@
+@use "src/styles/breakpoints";
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-block-end: calc(3 * var(--spacing-large));
+  max-width: 100vw;
+}
+.contextMenu {
+  width: auto;
+  height: calc(var(--spacing-mega) + var(--spacing-small));
+  margin: var(--spacing-small);
+}
+.readingSwitch {
+  display: flex;
+  width: calc(20 * var(--spacing-large));
+  margin: 0 auto;
+  margin-block-end: var(--spacing-small);
+  height: calc(var(--spacing-mega) + var(--spacing-xsmall));
+}
+.chapterHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  margin-block-end: calc(2 * var(--spacing-large));
+}
+.surahNameEnContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.surahNameEnSmall {
+  display: flex;
+  width: calc(2 * var(--spacing-mega));
+  height: var(--spacing-medium);
+  margin: var(--spacing-xxsmall) 0;
+}
+.surahNameEn {
+  display: flex;
+  width: calc(4 * var(--spacing-mega));
+  height: calc(var(--spacing-mega) + var(--spacing-xsmall));
+  margin: var(--spacing-xxsmall) 0;
+}
+.surahInfo {
+  display: flex;
+  width: calc(3 * var(--spacing-mega));
+  height: var(--spacing-small);
+  margin: var(--spacing-xxsmall) 0;
+}
+.surahNameArContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.surahNnumber {
+  display: flex;
+  width: var(--spacing-mega);
+  height: var(--spacing-medium);
+  margin: var(--spacing-xxsmall) 0;
+}
+.surahNameAr {
+  display: flex;
+  width: calc(3 * var(--spacing-mega));
+  height: calc(var(--spacing-mega) + var(--spacing-xsmall));
+  margin: var(--spacing-xxsmall) 0;
+}
+.surahAction {
+  display: flex;
+  width: calc(2 * var(--spacing-mega));
+  height: var(--spacing-small);
+  margin: var(--spacing-xxsmall) 0;
+}
+.bismillah {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: var(--spacing-xsmall) auto;
+  height: var(--spacing-mega);
+  width: calc(20 * var(--spacing-large));
+}
