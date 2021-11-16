@@ -108,6 +108,24 @@
     "powered-by": "Powered by",
     "prayer-times": {
         "calculation-method": "Calculation Method",
+        "madhabs": {
+            "Shafi": "Shafi",
+            "Hanafi": "Hanafi"
+        },
+        "calculation-methods": {
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "Egyptian": "Egyptian",
+            "Karachi": "Karachi",
+            "UmmAlQura": "UmmAlQura",
+            "Dubai": "Dubai",
+            "Qatark": "Qatark",
+            "Kuwait": "Kuwait",
+            "MoonsightingCommittee": "MoonsightingCommittee",
+            "Singapore": "Singapore",
+            "Turkey": "Turkey",
+            "Tehran": "Tehran",
+            "NorthAmerica": "NorthAmerica"
+        },
         "madhab": "Madhab",
         "title": "Prayer Times"
     },
