@@ -15,16 +15,16 @@ import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/Qura
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { TafsirsResponse } from 'types/ApiResponses';
-import AvailableTranslation from 'types/AvailableTranslation';
+import TafsirInfo from 'types/TafsirInfo';
 
-const filterTranslations = (translations, searchQuery: string): AvailableTranslation[] => {
+const filterTafsirs = (translations, searchQuery: string): TafsirInfo[] => {
   const fuse = new Fuse(translations, {
     keys: ['name', 'languageName', 'authorName'],
     threshold: 0.3,
   });
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
-  return filteredTranslations;
+  return filteredTranslations as TafsirInfo[];
 };
 
 const TafsirsSelectionBody = () => {
@@ -63,7 +63,7 @@ const TafsirsSelectionBody = () => {
         queryKey={makeTafsirsUrl(lang)}
         render={(data: TafsirsResponse) => {
           const filteredTafsirs = searchQuery
-            ? filterTranslations(data.tafsirs, searchQuery)
+            ? filterTafsirs(data.tafsirs, searchQuery)
             : data.tafsirs;
           const tafsirsByLanguages = groupBy(filteredTafsirs, 'languageName');
           return (
