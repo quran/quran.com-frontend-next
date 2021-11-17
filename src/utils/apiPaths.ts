@@ -175,6 +175,8 @@ const PRAYER_TIMES_URL =
  * Compose the url for prayer times API
  *
  * @param {Object} query
+ * @param {number} query.latitude
+ * @param {number} query.longtitude
  * @param {CalculationMethod} query.calculationMethod
  * @param {Madhab} query.madhab
  * @returns {string}
@@ -182,6 +184,8 @@ const PRAYER_TIMES_URL =
 export const makePrayerTimesUrl = (query: {
   calculationMethod: CalculationMethod;
   madhab: Madhab;
+  latitude?: number;
+  longtitude?: number;
 }) => {
   const today = new Date();
   const date = today.getDate();
