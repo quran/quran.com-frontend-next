@@ -141,7 +141,7 @@ export default {
       table: {
         category: 'Optional',
       },
-      description: 'Whether the combobox should support multi-select.',
+      description: "Whether the combobox width should be fixed or equal to container's width",
     },
   },
 };
