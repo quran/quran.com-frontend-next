@@ -12,11 +12,7 @@ import transStyles from './TranslationText.module.scss';
 
 import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import {
-  getLanguageDirectionById,
-  getLanguageFontById,
-  findLanguageIdByLocale,
-} from 'src/utils/locale';
+import { getLanguageDataById, findLanguageIdByLocale } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -35,9 +31,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   const { t, lang } = useTranslation('quran-reader');
 
   const languageId = footnote?.languageId || findLanguageIdByLocale(lang);
-
-  const direction = getLanguageDirectionById(languageId);
-  const langFont = getLanguageFontById(languageId);
+  const landData = getLanguageDataById(languageId);
 
   return (
     <div className={styles.footnoteContainer}>
@@ -56,7 +50,11 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <Spinner />
       ) : (
         <div
-          className={classNames(styles.text, transStyles[direction], transStyles[langFont])}
+          className={classNames(
+            styles.text,
+            transStyles[landData.direction],
+            transStyles[landData.font],
+          )}
           dangerouslySetInnerHTML={{ __html: footnote.text }}
           {...(onTextClicked && { onClick: onTextClicked })}
         />
