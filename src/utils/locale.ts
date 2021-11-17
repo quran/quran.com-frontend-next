@@ -6,6 +6,7 @@ import { getBasePath } from './url';
 import i18nConfig from 'i18n.json';
 
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
+// TODO: move locale names to lokalise
 const LOCALE_NAME = {
   en: 'English',
   ar: 'العربية',
@@ -13,7 +14,7 @@ const LOCALE_NAME = {
   fa: 'فارسی',
   fr: 'Français',
   id: 'Indonesia',
-  it: 'Inglese',
+  it: 'Italiano',
   nl: 'Dutch',
   pt: 'Português',
   ru: 'русский',
@@ -23,6 +24,10 @@ const LOCALE_NAME = {
   ur: 'اردو',
   zh: '简体中文',
   ms: 'bahasa Melayu',
+  de: 'Deutsch',
+  inh: 'ʁəlʁɑj mot',
+  ta: 'தமிழ்', // tamil
+  hi: 'हिन्दी',
 };
 
 export enum Direction {

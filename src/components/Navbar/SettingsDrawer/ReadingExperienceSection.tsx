@@ -25,7 +25,7 @@ import { areArraysEqual } from 'src/utils/array';
 import { getLocaleName } from 'src/utils/locale';
 import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
 
-const WBW_LOCALES = ['en', 'ur', 'id', 'bn'];
+const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
 const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
   label: getLocaleName(locale),
   value: locale,
