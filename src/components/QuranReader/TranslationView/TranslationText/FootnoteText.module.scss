@@ -17,19 +17,7 @@ $container-min-height: calc(3 * var(--spacing-large));
   min-height: $container-min-height;
 }
 
-.rtl {
-  /* stylelint-disable-next-line csstools/use-logical */
-  text-align: right;
-  direction: rtl;
-}
-
-.ltr {
-  /* stylelint-disable-next-line csstools/use-logical */
-  text-align: left;
-  direction: ltr;
-}
-
-.footnote {
+.text {
   @include footnote.footnote-styling;
 }
 

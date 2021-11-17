@@ -18,12 +18,11 @@
 
 @font-face {
   font-family: "nafees";
-  src: local("Nafees"), local("Nafees Regular"),
-    url("/fonts/urdu/nafees-nastaleeq-webfont.woff2") format("woff"),
-    url("/fonts/urdu/nafees-nastaleeq-webfont.woff") format("woff2"),
-    url("/fonts/urdu/nafees-nastaleeq-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("/fonts/urdu/nafees-nastaleeq-webfont.ttf") format("truetype");
+  src: local("Noto Naskh Arabic"), local("Nafees Regular"),
+    url("/fonts/urdu/NotoNaskhArabic-Regular.eot"),
+    url("/fonts/urdu/NotoNaskhArabic-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/urdu/NotoNaskhArabic-Regular.woff") format("woff"),
+    url("/fonts/urdu/NotoNaskhArabic-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
