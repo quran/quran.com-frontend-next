@@ -11,6 +11,7 @@ import TextWord from './TextWord';
 
 import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import textStyles from 'src/components/QuranReader/TextStyles.module.scss';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
@@ -18,12 +19,13 @@ import {
   selectWordClickFunctionality,
   selectReadingPreference,
   selectShowTooltipFor,
-  selectWordByWordByWordPreferences,
+  selectWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
-import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
+import { getLanguageDataById } from 'src/utils/locale';
+import { getChapterNumberFromKey } from 'src/utils/verse';
 import {
   ReadingPreference,
   QuranFont,
@@ -64,15 +66,12 @@ const QuranWord = ({
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-
-  // creating wordLocation instead of using `word.location` because
-  // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
-  const wordLocation = makeWordLocation(word.verseKey, word.position);
+  const wordLocation = word.location;
 
   // Determine if the audio player is currently playing the word
   const isAudioPlayingWord = useSelector(selectIsWordHighlighted(wordLocation));
@@ -136,9 +135,25 @@ const QuranWord = ({
       {isWordByWordAllowed && (
         <>
           {showWordByWordTransliteration && (
-            <p className={styles.wbwText}>{word.transliteration?.text}</p>
+            <p
+              className={classNames(
+                styles.wbwText,
+                textStyles[getLanguageDataById(word.transliteration?.languageId)?.font],
+              )}
+            >
+              {word.transliteration?.text}
+            </p>
           )}
-          {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
+          {showWordByWordTranslation && (
+            <p
+              className={classNames(
+                styles.wbwText,
+                textStyles[getLanguageDataById(word.translation?.languageId)?.font],
+              )}
+            >
+              {word.translation?.text}
+            </p>
+          )}
         </>
       )}
     </div>
@@ -155,7 +170,13 @@ const QuranWord = ({
 const getTooltipText = (showTooltipFor: WordByWordType[], word: Word): ReactNode => (
   <>
     {showTooltipFor.map((tooltipTextType) => (
-      <p key={tooltipTextType} className={styles.tooltipText}>
+      <p
+        key={tooltipTextType}
+        className={classNames(
+          styles.tooltipText,
+          textStyles[getLanguageDataById(word[tooltipTextType]?.languageId)?.font],
+        )}
+      >
         {word[tooltipTextType].text}
       </p>
     ))}

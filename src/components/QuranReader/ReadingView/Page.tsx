@@ -10,7 +10,7 @@ import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
-import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 
@@ -24,7 +24,7 @@ const Page = ({ verses, page, quranReaderStyles }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
   const { quranTextFontScale } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;

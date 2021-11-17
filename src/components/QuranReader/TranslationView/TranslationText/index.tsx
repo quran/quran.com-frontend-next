@@ -12,6 +12,7 @@ import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
 import { getFootnote } from 'src/api';
+import textStyles from 'src/components/QuranReader/TextStyles.module.scss';
 import { getLanguageDataById } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
@@ -142,8 +143,8 @@ const TranslationText: React.FC<Props> = ({
         className={classNames(
           styles.text,
           styles[`translation-font-size-${translationFontScale}`],
-          styles[langData.direction],
-          styles[langData.font],
+          textStyles[langData.direction],
+          textStyles[langData.font],
         )}
         dangerouslySetInnerHTML={{ __html: text }}
       />
@@ -159,8 +160,8 @@ const TranslationText: React.FC<Props> = ({
       <p
         className={classNames(
           styles.translationName,
-          styles[langData.direction],
-          styles[langData.font],
+          textStyles[langData.direction],
+          textStyles[langData.font],
         )}
       >
         — {resourceName}

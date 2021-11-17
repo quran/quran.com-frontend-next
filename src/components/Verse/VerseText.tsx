@@ -11,7 +11,7 @@ import styles from './VerseText.module.scss';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
-import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
@@ -33,7 +33,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
   const [firstWord] = words;
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const centerAlignPage = useMemo(

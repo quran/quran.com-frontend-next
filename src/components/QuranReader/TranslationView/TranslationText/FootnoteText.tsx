@@ -8,10 +8,10 @@ import useTranslation from 'next-translate/useTranslation';
 import CloseIcon from '../../../../../public/icons/close.svg';
 
 import styles from './FootnoteText.module.scss';
-import transStyles from './TranslationText.module.scss';
 
 import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import textStyles from 'src/components/QuranReader/TextStyles.module.scss';
 import { getLanguageDataById, findLanguageIdByLocale } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
@@ -52,8 +52,8 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <div
           className={classNames(
             styles.text,
-            transStyles[landData.direction],
-            transStyles[landData.font],
+            textStyles[landData.direction],
+            textStyles[landData.font],
           )}
           dangerouslySetInnerHTML={{ __html: footnote.text }}
           {...(onTextClicked && { onClick: onTextClicked })}

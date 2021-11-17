@@ -15,7 +15,7 @@ import {
   setShowWordByWordTransliteration,
   setShowTooltipFor,
   selectShowTooltipFor,
-  selectWordByWordByWordPreferences,
+  selectWordByWordPreferences,
   selectWordClickFunctionality,
   setWordClickFunctionality,
   selectWordByWordLocale,
@@ -36,7 +36,7 @@ const ReadingExperienceSection = () => {
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
