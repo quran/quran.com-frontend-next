@@ -3,7 +3,6 @@ interface Footnote {
   text: string;
   languageName?: string;
   languageId?: number;
-  isStaticContent?: boolean;
 }
 
 export default Footnote;
