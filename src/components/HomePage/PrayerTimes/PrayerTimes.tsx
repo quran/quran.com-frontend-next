@@ -82,6 +82,30 @@ const PrayerTimes = () => {
   const { prayerTimes } = prayerTimesData;
   const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;
 
+  /**
+   * - If permission query API is supported in current browser
+   *    - if permission is granted or not asked yet. Get the location data
+   *    - if permission is denied. Do not try to get the location data
+   * - if the browser does not support the API. Optimistically get the location data. (This is better for UX)
+   */
+  const onFindLocationClick = () => {
+    const permissionQuerySupported = navigator?.permissions?.query;
+    if (permissionQuerySupported)
+      navigator?.permissions?.query({ name: 'geolocation' }).then((permissionStatus) => {
+        if (permissionStatus.state === 'granted' || permissionStatus.state === 'prompt') {
+          dispatch(setLocationAccess(LocationAccess.On));
+          toast(t('common:prayer-times.location-updated'));
+        } else {
+          dispatch(setLocationAccess(LocationAccess.Off));
+          toast(t('common:prayer-times.access-denied'));
+        }
+      });
+    else {
+      dispatch(setLocationAccess(LocationAccess.On));
+      toast(t('common:prayer-times.location-updated'));
+    }
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -90,10 +114,7 @@ const PrayerTimes = () => {
           <div className={styles.locationContainer}>
             <Button
               tooltip={t('home:prayer-times.use-location')}
-              onClick={() => {
-                dispatch(setLocationAccess(LocationAccess.On));
-                toast(t('common:prayer-times.location-updated'));
-              }}
+              onClick={onFindLocationClick}
               type={ButtonType.Secondary}
               className={styles.findLocationButton}
               variant={ButtonVariant.Ghost}
