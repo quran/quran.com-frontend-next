@@ -1,0 +1,26 @@
+.ltr {
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: left;
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: right;
+}
+
+/**
+ * Custom font for languages
+ */
+.urdu {
+  font-family: "nafees";
+}
+
+.kurdish {
+  font-family: "DroidArabicNaskh";
+}
+
+.divehi {
+  font-family: "divehi";
+}
