@@ -31,7 +31,5 @@
 }
 
 .containerMinimized.containerDefault {
-  @include breakpoints.smallerThanTablet {
-    height: constants.$audio-player-minimized-height;
-  }
+  height: constants.$audio-player-minimized-height;
 }

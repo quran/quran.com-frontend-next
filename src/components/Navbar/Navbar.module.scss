@@ -18,7 +18,4 @@
 
 .hiddenNav {
   transform: translateY(0 - constants.$navbar-height);
-  @include breakpoints.tablet {
-    transform: none;
-  }
 }

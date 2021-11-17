@@ -11,11 +11,6 @@
   width: 100%;
   inset-block-start: 0;
   min-height: var(--spacing-medium);
-  @include breakpoints.tablet {
-    inset-block-start: constants.$navbar-height;
-    transition: var(--transition-regular);
-    margin-inline-end: 0;
-  }
   &:after {
     display: block;
     content: "";
