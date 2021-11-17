@@ -3,5 +3,10 @@
   font-weight: var(--font-weight-bold);
 }
 .selectedContainer {
+  flex: 1;
   margin-block: var(--spacing-micro);
+}
+
+.selectedContainer + .selectedContainer {
+  margin-inline-start: var(--spacing-xsmall);
 }

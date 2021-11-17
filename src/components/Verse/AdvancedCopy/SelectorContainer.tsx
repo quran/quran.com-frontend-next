@@ -26,13 +26,13 @@ interface SelectorProps {
 }
 
 /*
-Memoizing the selector will save re-renders to each selector and its items when: 
-1. The state of the parent component changes because of a change in the value of any other field 
+Memoizing the selector will save re-renders to each selector and its items when:
+1. The state of the parent component changes because of a change in the value of any other field
     that is not related to the range e.g. which translations to include in the copying.
-2. A change that happens to one of the two selectors in which the other selector and its items 
+2. A change that happens to one of the two selectors in which the other selector and its items
     will be saved from having to re-render.
 
-[NOTE] The more the verses of a chapter the more beneficial the memoization will be 
+[NOTE] The more the verses of a chapter the more beneficial the memoization will be
         since we will have higher number items which will be re-rendering un-necessarily.
 */
 const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems, onChange }) => {
@@ -47,6 +47,7 @@ const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems
         onChange={onChange}
         placeholder={t('audio.player.search-verse')}
         initialInputValue={value}
+        fixedWidth={false}
         label={
           <span className={styles.comboboxLabel}>
             {`${type === RangeSelectorType.START ? t('from') : t('to')} ${t('verse')}:`}
