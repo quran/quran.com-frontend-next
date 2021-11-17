@@ -6,7 +6,6 @@ import { getBasePath } from './url';
 import i18nConfig from 'i18n.json';
 
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
-// TODO: move locale names to lokalise
 const LOCALE_NAME = {
   en: 'English',
   ar: 'العربية',
