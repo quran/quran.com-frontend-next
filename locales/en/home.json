@@ -20,6 +20,9 @@
         }
     },
     "no-bookmarks": "You do not have any bookmarks yet",
+    "prayer-times": {
+        "use-location": "Use accurate location"
+    },
     "prayer-names": {
         "asr": "Asr",
         "dhuhr": "Dhuhr",

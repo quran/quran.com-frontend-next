@@ -1,50 +1,56 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import QuickLink from './QuickLink';
 import styles from './QuickLinks.module.scss';
 
 const QUICK_LINKS = [
   {
     slug: '2/255',
-    text: 'Ayatul Kursi',
+    key: 'ayat-ul-kursi',
   },
   {
     slug: '36',
-    text: 'Surah Yaseen',
+    key: 'yaseen',
   },
   {
     slug: '67',
-    text: 'Surah Al Mulk',
+    key: 'mulk',
   },
   {
     slug: '55',
-    text: 'Surah Ar-Rahman',
+    key: 'rahman',
   },
   {
     slug: '56',
-    text: "Surah Al Waqi'ah",
+    key: 'waqiah',
   },
   {
     slug: '18',
-    text: 'Surah Al Kahf',
+    key: 'kahf',
   },
   {
     slug: '73',
-    text: 'Surah Al Muzzammil',
+    key: 'muzzammil',
   },
 ];
 
-const QuickLinks: React.FC = () => (
-  <div className={styles.quickLinksContainer}>
-    {QUICK_LINKS.map((quickLink) => (
-      <QuickLink
-        key={quickLink.slug}
-        slug={quickLink.slug}
-        text={quickLink.text}
-        className={styles.link}
-      />
-    ))}
-  </div>
-);
+const QuickLinks: React.FC = () => {
+  const { t } = useTranslation('quick-links');
+
+  return (
+    <div className={styles.quickLinksContainer}>
+      {QUICK_LINKS.map((quickLink) => (
+        <QuickLink
+          key={quickLink.slug}
+          slug={quickLink.slug}
+          text={t(quickLink.key)}
+          className={styles.link}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default QuickLinks;

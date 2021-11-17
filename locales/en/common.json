@@ -1,5 +1,7 @@
 {
     "about": "About Us",
+    "on": "On",
+    "off": "Off",
     "audio": {
         "auto-scroll": {
             "off": "Off",
@@ -127,7 +129,11 @@
             "NorthAmerica": "NorthAmerica"
         },
         "madhab": "Madhab",
-        "title": "Prayer Times"
+        "title": "Prayer Times",
+        "find-accurate-location": "Find Accurate Location",
+        "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
+        "location-updated": "Prayer times location updated",
+        "location-access": "Location Access"
     },
     "prev": "Previous",
     "privacy": "Privacy",

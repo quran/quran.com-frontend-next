@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // animations
 @mixin transform {
   transform: translate3d(0, 0, 0);
@@ -50,7 +52,8 @@
 
   @for $i from 2 through 5 {
     &:nth-last-child(#{$i}) {
-      transform: translate3d(0, #{$i * -7}px, 0) scale(#{(100 - $i) / 100});
+      transform: translate3d(0, #{$i * -7}px, 0)
+        scale(#{math.div(100 - $i, 100)});
     }
   }
 

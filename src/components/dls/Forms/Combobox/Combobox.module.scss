@@ -12,6 +12,7 @@
 }
 
 .comboboxContainer {
+  position: relative;
   max-width: 100%;
   &.fixedWidth {
     width: calc(8 * var(--spacing-mega));
