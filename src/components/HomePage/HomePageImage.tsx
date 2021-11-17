@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import styles from './HomePageImage.module.scss';
-import PrayerTimes from './PrayerTimes';
+import PrayerTimes from './PrayerTimes/PrayerTimes';
 
 import homepageImage from 'public/images/homepage.png';
 
