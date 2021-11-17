@@ -4,20 +4,19 @@ import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../../public/icons/close.svg';
-import {
-  getLanguageDirectionById,
-  getLanguageFontById,
-  findLanguageIdByLocale,
-} from '../../../../utils/locale';
 
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
 
 import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import {
+  getLanguageDirectionById,
+  getLanguageFontById,
+  findLanguageIdByLocale,
+} from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -33,10 +32,9 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   onTextClicked,
   isLoading,
 }) => {
-  const { locale } = useRouter();
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
 
-  const languageId = footnote?.languageId || findLanguageIdByLocale(locale);
+  const languageId = footnote?.languageId || findLanguageIdByLocale(lang);
 
   const direction = getLanguageDirectionById(languageId);
   const langFont = getLanguageFontById(languageId);

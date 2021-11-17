@@ -8,12 +8,11 @@ import React, { MouseEvent, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getLanguageDirectionById, getLanguageFontById } from '../../../../utils/locale';
-
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
 import { getFootnote } from 'src/api';
+import { getLanguageDataById } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface Props {
@@ -135,8 +134,7 @@ const TranslationText: React.FC<Props> = ({
     }
   };
   const hideFootnote = () => setShowFootnote(false);
-  const direction = getLanguageDirectionById(languageId);
-  const langFont = getLanguageFontById(languageId);
+  const langData = getLanguageDataById(languageId);
 
   const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
@@ -146,8 +144,8 @@ const TranslationText: React.FC<Props> = ({
         className={classNames(
           styles.text,
           styles[`translation-font-size-${translationFontScale}`],
-          styles[direction],
-          styles[langFont],
+          styles[langData.direction],
+          styles[langData.font],
         )}
         dangerouslySetInnerHTML={{ __html: text }}
       />
@@ -160,7 +158,13 @@ const TranslationText: React.FC<Props> = ({
         />
       )}
       {subFootnote && <FootnoteText footnote={subFootnote} onCloseClicked={resetSubFootnote} />}
-      <p className={classNames(styles.translationName, styles[direction], styles[langFont])}>
+      <p
+        className={classNames(
+          styles.translationName,
+          styles[langData.direction],
+          styles[langData.font],
+        )}
+      >
         — {resourceName}
       </p>
     </>

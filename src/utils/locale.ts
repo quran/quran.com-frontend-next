@@ -117,6 +117,11 @@ interface LinkLanguageAlternate {
   href: string;
 }
 
+interface LanguageData {
+  direction: string;
+  font: string;
+}
+
 /**
  * Check whether the locale should have a minimalLayout. This will be reflect in
  * certain components like ChapterHeader or SurahPreviewRow and the reason we need
@@ -146,6 +151,19 @@ export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(loc
  */
 export const getDir = (locale: string): Direction =>
   isRTLLocale(locale) ? Direction.RTL : Direction.LTR;
+
+/**
+ * Get direction and font name of language by language id
+ *
+ * @param {number} languageId
+ * @returns {LanguageData}
+ */
+export const getLanguageDataById = (languageId: number): LanguageData => {
+  return {
+    font: getLanguageFontById(languageId),
+    direction: getLanguageDirectionById(languageId),
+  };
+};
 
 /**
  * Get direction of language by language id
