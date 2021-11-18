@@ -1,6 +1,5 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 
 import styles from './PageFooter.module.scss';
@@ -12,12 +11,11 @@ interface Props {
 }
 
 const PageFooter: React.FC<Props> = ({ page }) => {
-  const { t } = useTranslation('common');
   const pageUrl = getPageNavigationUrl(page);
   return (
     <div className={styles.pageText}>
       <Link href={pageUrl} passHref>
-        <p className={styles.pageLink}>{`${t('page')} ${page}`}</p>
+        <p className={styles.pageLink}>{page}</p>
       </Link>
     </div>
   );
