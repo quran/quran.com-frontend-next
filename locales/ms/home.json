@@ -1,20 +1,20 @@
 {
     "footer": {
-        "rights": "Hak cipta terpelihara",
-        "title": "Baca, pelajari, dan pelajari Al-Quran."
+        "rights": "Hak Cipta Terpelihara",
+        "title": "Baca, telaah, dan pelajari Al-Quran."
     },
     "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
+        "format": "{{month}} {{date}}, {{year}} H",
         "month": {
-            "1": "Muharram",
+            "1": "Muharam",
             "10": "Syawal",
             "11": "Dhu Al-Qida",
             "2": "Safar",
-            "3": "Rabi' I",
-            "4": "Rabi' II",
-            "5": "Jumada I",
-            "6": "Jumada Akhira",
-            "7": "Rajab",
+            "3": "Rabiul Awal",
+            "4": "Rabiul Akhir",
+            "5": "Jamadil Awal",
+            "6": "Jamadil Akhir",
+            "7": "Rejab",
             "8": "Sya'ban",
             "9": "Ramadhan"
         }
@@ -22,11 +22,14 @@
     "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
     "prayer-names": {
         "asr": "Asar",
-        "dhuhr": "Dzuhur",
+        "dhuhr": "Zuhur",
         "fajr": "Subuh",
-        "isha": "Isha",
+        "isha": "Isyak",
         "maghrib": "Maghrib",
-        "sunrise": "matahari terbit"
+        "sunrise": "Terbit Matahari"
+    },
+    "prayer-times": {
+        "use-location": "Gunakan lokasi yang tepat"
     },
     "recently-read": "Baru-baru Baca",
     "tab": {

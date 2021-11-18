@@ -28,6 +28,9 @@
         "maghrib": "Maghreb",
         "sunrise": "lever du soleil"
     },
+    "prayer-times": {
+        "use-location": "Utiliser un emplacement précis"
+    },
     "recently-read": "Lu récemment",
     "tab": {
         "bookmarks": "Signets",

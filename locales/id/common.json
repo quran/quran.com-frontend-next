@@ -8,7 +8,7 @@
         },
         "play": "Putar Audio",
         "playback-speed": "Kecepatan Pemutaran",
-        
+        "playback-speed-unit": "x",
         "player": {
             "close": "Tutup Pemutar Audio",
             "currently-playing": "Anda sedang bermain",
@@ -102,13 +102,37 @@
     "next": "Lanjut",
     "no": "Tidak",
     "none": "Tidak ada",
+    "off": "Mati",
+    "on": "Pada",
     "page": "Halaman",
     "pages": "halaman",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil penelusuran",
     "powered-by": "Dipersembahkan oleh",
     "prayer-times": {
+        "access-denied": "Akses ke lokasi ditolak. Harap aktifkan akses lokasi untuk mendapatkan waktu sholat yang akurat",
         "calculation-method": "Metode kalkulasi",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "Mesir",
+            "Karachi": "Karachi",
+            "Kuwait": "Kuwait",
+            "MoonsightingCommittee": "Komite Penampakan Bulan",
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "NorthAmerica": "Amerika Utara",
+            "Qatark": "Qatar",
+            "Singapore": "Singapura",
+            "Tehran": "Teheran",
+            "Turkey": "Turki",
+            "UmmAlQura": "Ummu AlQura"
+        },
+        "find-accurate-location": "Temukan Lokasi Akurat",
+        "location-access": "Akses Lokasi",
+        "location-updated": "Lokasi waktu sholat diperbarui",
         "madhab": "madhab",
+        "madhabs": {
+            "Hanafi": "Hanafi",
+            "Shafi": "Syafii"
+        },
         "title": "Waktu Sholat"
     },
     "prev": "Sebelumnya",
@@ -137,10 +161,14 @@
     },
     "settings": {
         "change-reciter": "Ganti Pembaca",
+        "change-tafsirs": "Ubah Tafsir",
         "change-translations": "Ubah Terjemahan",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Ulang Pengaturan",
-        
+        "reset-notif": "Pengaturan Anda telah diatur ulang ke default",
+        "search-reciter": "Cari Pembaca",
+        "search-tafsirs": "Cari Tafsir",
+        "search-translations": "Cari Terjemahan",
         "title": "Pengaturan"
     },
     "share": "Membagikan",

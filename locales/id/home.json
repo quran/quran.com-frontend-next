@@ -28,6 +28,9 @@
         "maghrib": "Maghrib",
         "sunrise": "matahari terbit"
     },
+    "prayer-times": {
+        "use-location": "Gunakan lokasi yang akurat"
+    },
     "recently-read": "Baru-baru ini Baca",
     "tab": {
         "bookmarks": "Bookmark",
