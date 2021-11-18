@@ -8,6 +8,7 @@
         },
         "play": "অডিও চালান",
         "playback-speed": "প্লেব্যাক গতি",
+        "playback-speed-unit": "এক্স",
         "player": {
             "close": "অডিও প্লেয়ার বন্ধ করুন",
             "currently-playing": "আপনি বর্তমানে খেলছেন",
@@ -101,13 +102,37 @@
     "next": "পরবর্তী",
     "no": "না",
     "none": "কোনোটিই নয়",
+    "off": "বন্ধ",
+    "on": "চালু",
     "page": "পাতা",
     "pages": "পাতা",
     "pagination-summary": "{{currentResultNumber}} totalNumberOfResults}}টি ফলাফলের মধ্যে {{totalNumberOfResults}} - {{endOfResultNumber}}",
     "powered-by": "দ্বারা চালিত",
     "prayer-times": {
+        "access-denied": "অবস্থানে অ্যাক্সেস অস্বীকার করা হয়েছে৷ সঠিক প্রার্থনার সময় পেতে অনুগ্রহ করে অবস্থান অ্যাক্সেস সক্ষম করুন",
         "calculation-method": "হিসাব পদ্ধতি",
+        "calculation-methods": {
+            "Dubai": "দুবাই",
+            "Egyptian": "মিশরীয়",
+            "Karachi": "করাচি",
+            "Kuwait": "কুয়েত",
+            "MoonsightingCommittee": "চাঁদ দেখা কমিটি",
+            "MuslimWorldLeague": "মুসলিম ওয়ার্ল্ড লিগ",
+            "NorthAmerica": "উত্তর আমেরিকা",
+            "Qatark": "কাতার্ক",
+            "Singapore": "সিঙ্গাপুর",
+            "Tehran": "তেহরান",
+            "Turkey": "তুরস্ক",
+            "UmmAlQura": "উম্মুল কুরা"
+        },
+        "find-accurate-location": "সঠিক অবস্থান খুঁজুন",
+        "location-access": "অবস্থান অ্যাক্সেস",
+        "location-updated": "নামাজের সময় অবস্থান আপডেট করা হয়েছে",
         "madhab": "মাধব",
+        "madhabs": {
+            "Hanafi": "হানাফী",
+            "Shafi": "শফি"
+        },
         "title": "নামাজের সময়"
     },
     "prev": "আগে",
@@ -136,9 +161,14 @@
     },
     "settings": {
         "change-reciter": "আবৃত্তিকারী পরিবর্তন করুন",
+        "change-tafsirs": "তাফসির পরিবর্তন করুন",
         "change-translations": "অনুবাদ পরিবর্তন করুন",
         "reading-experience": "পড়ার অভিজ্ঞতা",
         "reset-cta": "রিসেট সেটিংস",
+        "reset-notif": "আপনার সেটিংস ডিফল্টে রিসেট করা হয়েছে",
+        "search-reciter": "আবৃত্তিকারী অনুসন্ধান করুন",
+        "search-tafsirs": "তাফসির অনুসন্ধান করুন",
+        "search-translations": "অনুসন্ধান অনুবাদ",
         "title": "সেটিংস"
     },
     "share": "শেয়ার করুন",

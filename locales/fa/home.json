@@ -28,6 +28,9 @@
         "maghrib": "مغرب",
         "sunrise": "طلوع خورشید"
     },
+    "prayer-times": {
+        "use-location": "از مکان دقیق استفاده کنید"
+    },
     "recently-read": "اخیرا خوانده شده است",
     "tab": {
         "bookmarks": "نشانک ها",

@@ -28,6 +28,9 @@
         "maghrib": "Maghreb",
         "sunrise": "zonsopkomst"
     },
+    "prayer-times": {
+        "use-location": "Nauwkeurige locatie gebruiken"
+    },
     "recently-read": "Recent gelezen",
     "tab": {
         "bookmarks": "Bladwijzers",

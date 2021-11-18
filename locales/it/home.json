@@ -28,6 +28,9 @@
         "maghrib": "Maghrib",
         "sunrise": "Alba"
     },
+    "prayer-times": {
+        "use-location": "Usa posizione precisa"
+    },
     "recently-read": "Letto di recente",
     "tab": {
         "bookmarks": "segnalibri",

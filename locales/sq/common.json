@@ -8,6 +8,7 @@
         },
         "play": "Luaj Audio",
         "playback-speed": "Shpejtësia e riprodhimit",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Mbyll luajtësin e audios",
             "currently-playing": "Aktualisht jeni duke luajtur",
@@ -101,13 +102,37 @@
     "next": "Tjetra",
     "no": "Nr",
     "none": "Asnje",
+    "off": "Joaktiv",
+    "on": "Aktiv",
     "page": "Faqe",
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "powered-by": "Mundësuar nga",
     "prayer-times": {
+        "access-denied": "Qasja në vendndodhje u refuzua. Ju lutemi aktivizoni qasjen në vendndodhje për të marrë kohët e sakta të lutjes",
         "calculation-method": "Mënyra e Llogaritjes",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "Egjiptiane",
+            "Karachi": "Karaçi",
+            "Kuwait": "Kuvajti",
+            "MoonsightingCommittee": "Komiteti i shikimit të hënës",
+            "MuslimWorldLeague": "Lidhja Botërore Muslimane",
+            "NorthAmerica": "Amerika e Veriut",
+            "Qatark": "Katark",
+            "Singapore": "Singapor",
+            "Tehran": "Teherani",
+            "Turkey": "Turqia",
+            "UmmAlQura": "UmmAlQura"
+        },
+        "find-accurate-location": "Gjeni vendndodhjen e saktë",
+        "location-access": "Qasja në vendndodhje",
+        "location-updated": "Vendndodhja e kohës së namazit u përditësua",
         "madhab": "medhhebi",
+        "madhabs": {
+            "Hanafi": "Hanefi",
+            "Shafi": "Shafi"
+        },
         "title": "Kohët e lutjes"
     },
     "prev": "E mëparshme",
@@ -136,9 +161,14 @@
     },
     "settings": {
         "change-reciter": "Ndrysho recituesin",
+        "change-tafsirs": "Ndrysho Tefsire",
         "change-translations": "Ndrysho përkthimet",
         "reading-experience": "Përvoja e të lexuarit",
         "reset-cta": "Rivendos cilësimet",
+        "reset-notif": "Cilësimet tuaja janë rivendosur në ato të paracaktuara",
+        "search-reciter": "Kërko Recitues",
+        "search-tafsirs": "Kërkoni tefsirë",
+        "search-translations": "Kërko Përkthime",
         "title": "Cilësimet"
     },
     "share": "Shpërndaje",

@@ -28,6 +28,9 @@
         "maghrib": "المغرب",
         "sunrise": "شروق الشمس"
     },
+    "prayer-times": {
+        "use-location": "استخدم الموقع الدقيق"
+    },
     "recently-read": "قرئ مؤخرًا",
     "tab": {
         "bookmarks": "إشارات مرجعية",

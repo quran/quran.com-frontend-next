@@ -8,6 +8,7 @@
         },
         "play": "เล่นเสียง",
         "playback-speed": "ความเร็วในการเล่น",
+        "playback-speed-unit": "NS",
         "player": {
             "close": "ปิดเครื่องเล่นเสียง",
             "currently-playing": "คุณกำลังเล่น",
@@ -101,13 +102,37 @@
     "next": "ต่อไป",
     "no": "เลขที่",
     "none": "ไม่มี",
+    "off": "ปิด",
+    "on": "บน",
     "page": "หน้าหนังสือ",
     "pages": "หน้า",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
     "powered-by": "ขับเคลื่อนโดย",
     "prayer-times": {
+        "access-denied": "การเข้าถึงตำแหน่งถูกปฏิเสธ โปรดเปิดใช้งานการเข้าถึงตำแหน่งเพื่อรับเวลาละหมาดที่ถูกต้อง",
         "calculation-method": "วิธีการคำนวณ",
+        "calculation-methods": {
+            "Dubai": "ดูไบ",
+            "Egyptian": "ชาวอียิปต์",
+            "Karachi": "การาจี",
+            "Kuwait": "คูเวต",
+            "MoonsightingCommittee": "คณะกรรมการ Moonsighting",
+            "MuslimWorldLeague": "มุสลิมเวิลด์ลีก",
+            "NorthAmerica": "อเมริกาเหนือ",
+            "Qatark": "กาตาร์",
+            "Singapore": "สิงคโปร์",
+            "Tehran": "เตหะราน",
+            "Turkey": "ไก่งวง",
+            "UmmAlQura": "UmmAlQura"
+        },
+        "find-accurate-location": "ค้นหาตำแหน่งที่ถูกต้อง",
+        "location-access": "การเข้าถึงตำแหน่ง",
+        "location-updated": "อัปเดตสถานที่เวลาละหมาด",
         "madhab": "Madhab",
+        "madhabs": {
+            "Hanafi": "ฮานาฟี",
+            "Shafi": "ชาฟี"
+        },
         "title": "เวลาละหมาด"
     },
     "prev": "ก่อนหน้า",
@@ -136,9 +161,14 @@
     },
     "settings": {
         "change-reciter": "เปลี่ยนผู้เล่า",
+        "change-tafsirs": "เปลี่ยนตัฟซีร์",
         "change-translations": "เปลี่ยนการแปล",
         "reading-experience": "ประสบการณ์การอ่าน",
         "reset-cta": "คืนค่าการตั้งค่า",
+        "reset-notif": "การตั้งค่าของคุณถูกรีเซ็ตเป็นค่าเริ่มต้น",
+        "search-reciter": "ค้นหาผู้อ่าน",
+        "search-tafsirs": "ค้นหา Tafsirs",
+        "search-translations": "ค้นหาคำแปล",
         "title": "การตั้งค่า"
     },
     "share": "แบ่งปัน",

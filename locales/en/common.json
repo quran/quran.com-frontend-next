@@ -1,7 +1,5 @@
 {
     "about": "About Us",
-    "on": "On",
-    "off": "Off",
     "audio": {
         "auto-scroll": {
             "off": "Off",
@@ -104,36 +102,38 @@
     "next": "Next",
     "no": "No",
     "none": "None",
+    "off": "Off",
+    "on": "On",
     "page": "Page",
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "powered-by": "Powered by",
     "prayer-times": {
+        "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
         "calculation-method": "Calculation Method",
-        "madhabs": {
-            "Shafi": "Shafi",
-            "Hanafi": "Hanafi"
-        },
         "calculation-methods": {
-            "MuslimWorldLeague": "MuslimWorldLeague",
+            "Dubai": "Dubai",
             "Egyptian": "Egyptian",
             "Karachi": "Karachi",
-            "UmmAlQura": "UmmAlQura",
-            "Dubai": "Dubai",
-            "Qatark": "Qatark",
             "Kuwait": "Kuwait",
             "MoonsightingCommittee": "MoonsightingCommittee",
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "NorthAmerica": "NorthAmerica",
+            "Qatark": "Qatark",
             "Singapore": "Singapore",
-            "Turkey": "Turkey",
             "Tehran": "Tehran",
-            "NorthAmerica": "NorthAmerica"
+            "Turkey": "Turkey",
+            "UmmAlQura": "UmmAlQura"
         },
-        "madhab": "Madhab",
-        "title": "Prayer Times",
         "find-accurate-location": "Find Accurate Location",
-        "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
+        "location-access": "Location Access",
         "location-updated": "Prayer times location updated",
-        "location-access": "Location Access"
+        "madhab": "Madhab",
+        "madhabs": {
+            "Hanafi": "Hanafi",
+            "Shafi": "Shafi"
+        },
+        "title": "Prayer Times"
     },
     "prev": "Previous",
     "privacy": "Privacy",

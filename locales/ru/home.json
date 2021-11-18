@@ -28,6 +28,9 @@
         "maghrib": "Магриб",
         "sunrise": "Восход"
     },
+    "prayer-times": {
+        "use-location": "Используйте точное местоположение"
+    },
     "recently-read": "Недавно прочитал",
     "tab": {
         "bookmarks": "Закладки",

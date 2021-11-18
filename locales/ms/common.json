@@ -8,6 +8,7 @@
         },
         "play": "Mainkan Audio",
         "playback-speed": "Kelajuan Main Semula",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Tutup Pemain Audio",
             "currently-playing": "Anda sedang bermain",
@@ -64,7 +65,7 @@
         "decrease": "Kurangkan",
         "increase": "Meningkat"
     },
-    "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dalam antara muka yang ringkas dan mudah",
+    "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
     "developers": "pemaju",
     "error": {
         "general": "Sesuatu telah berlaku. Sila cuba lagi.",
@@ -101,13 +102,37 @@
     "next": "Seterusnya",
     "no": "Tidak",
     "none": "tiada",
+    "off": "Mati",
+    "on": "hidup",
     "page": "Halaman",
     "pages": "muka surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
     "powered-by": "Dikuasai oleh",
     "prayer-times": {
+        "access-denied": "Akses ke lokasi dinafikan. Sila dayakan akses lokasi untuk mendapatkan waktu solat yang tepat",
         "calculation-method": "Kaedah Pengiraan",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "orang Mesir",
+            "Karachi": "Karachi",
+            "Kuwait": "Kuwait",
+            "MoonsightingCommittee": "Jawatankuasa Pandangan Bulan",
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "NorthAmerica": "Amerika Utara",
+            "Qatark": "Qatark",
+            "Singapore": "Singapura",
+            "Tehran": "Tehran",
+            "Turkey": "Turki",
+            "UmmAlQura": "UmmAlQura"
+        },
+        "find-accurate-location": "Cari Lokasi Tepat",
+        "location-access": "Akses Lokasi",
+        "location-updated": "Lokasi waktu solat dikemas kini",
         "madhab": "Mazhab",
+        "madhabs": {
+            "Hanafi": "Hanafi",
+            "Shafi": "Syafii"
+        },
         "title": "Waktu Solat"
     },
     "prev": "Sebelumnya",
@@ -135,10 +160,15 @@
         "title": "Cari"
     },
     "settings": {
-        "change-reciter": "Tukar qari",
+        "change-reciter": "Tukar Qari",
+        "change-tafsirs": "Tukar Tafsir",
         "change-translations": "Tukar Terjemahan",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Aturan semula",
+        "reset-notif": "Tetapan anda telah ditetapkan semula kepada tetapan lalai",
+        "search-reciter": "Cari qari",
+        "search-tafsirs": "Cari Tafsir",
+        "search-translations": "Cari Terjemahan",
         "title": "tetapan"
     },
     "share": "Kongsi",
@@ -177,7 +207,7 @@
     "transliteration": "Alih huruf",
     "type": "taip",
     "verse": "Ayat",
-    "verses": "ayat-ayat",
+    "verses": "Ayat-ayat",
     "view": "Lihat",
     "voice": {
         "ask-permission": "Sila dayakan kebenaran mikrofon untuk mula menggunakan Carian Suara",
@@ -187,7 +217,7 @@
         "suggest": "Sila mulakan membaca dan ayat anda akan muncul."
     },
     "wbw": "Perkataan demi perkataan",
-    "wbw-trans-lang": "Perkataan Demi Bahasa Perkataan",
+    "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
     "word-click": {
         "no-audio": "Tiada Audio",
         "play-audio": "Mainkan Audio",

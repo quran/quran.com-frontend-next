@@ -8,6 +8,7 @@
         },
         "play": "Tocar áudio",
         "playback-speed": "Velocidade de reprodução",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Fechar o reprodutor de áudio",
             "currently-playing": "Você está jogando atualmente",
@@ -101,13 +102,37 @@
     "next": "Próximo",
     "no": "Não",
     "none": "Nenhum",
+    "off": "Desligado",
+    "on": "Sobre",
     "page": "Página",
     "pages": "Páginas",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "powered-by": "Distribuído por",
     "prayer-times": {
+        "access-denied": "Acesso ao local negado. Ative o acesso à localização para obter horários de oração precisos",
         "calculation-method": "Método de cálculo",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "egípcio",
+            "Karachi": "Carachi",
+            "Kuwait": "Kuwait",
+            "MoonsightingCommittee": "Comitê de Moonsighting",
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "NorthAmerica": "América do Norte",
+            "Qatark": "Qatark",
+            "Singapore": "Cingapura",
+            "Tehran": "Teerã",
+            "Turkey": "Turquia",
+            "UmmAlQura": "UmmAlQura"
+        },
+        "find-accurate-location": "Encontre a localização exata",
+        "location-access": "Acesso de localização",
+        "location-updated": "Localização dos horários de oração atualizada",
         "madhab": "Madhab",
+        "madhabs": {
+            "Hanafi": "Hanafi",
+            "Shafi": "Shafi"
+        },
         "title": "Momentos de Oração"
     },
     "prev": "Anterior",
@@ -136,9 +161,14 @@
     },
     "settings": {
         "change-reciter": "Mudar recitador",
+        "change-tafsirs": "Mudar Tafsirs",
         "change-translations": "Mudar as traduções",
         "reading-experience": "Experiência de Leitura",
         "reset-cta": "Redefinir as configurações",
+        "reset-notif": "Suas configurações foram redefinidas para os padrões",
+        "search-reciter": "Recitador de pesquisa",
+        "search-tafsirs": "Pesquisar Tafsirs",
+        "search-translations": "Pesquisar traduções",
         "title": "Definições"
     },
     "share": "Compartilhado",

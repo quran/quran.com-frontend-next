@@ -28,6 +28,9 @@
         "maghrib": "মাগরিব",
         "sunrise": "সূর্যোদয়"
     },
+    "prayer-times": {
+        "use-location": "সঠিক অবস্থান ব্যবহার করুন"
+    },
     "recently-read": "সম্প্রতি পঠিত",
     "tab": {
         "bookmarks": "বুকমার্ক",

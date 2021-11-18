@@ -28,6 +28,9 @@
         "maghrib": "مغرب",
         "sunrise": "طلوع آفتاب"
     },
+    "prayer-times": {
+        "use-location": "درست مقام کا استعمال کریں۔"
+    },
     "recently-read": "حال ہی میں پڑھا۔",
     "tab": {
         "bookmarks": "بک مارکس",

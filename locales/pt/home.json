@@ -28,6 +28,9 @@
         "maghrib": "Magreb",
         "sunrise": "nascer do sol"
     },
+    "prayer-times": {
+        "use-location": "Use localização precisa"
+    },
     "recently-read": "Lidos recentemente",
     "tab": {
         "bookmarks": "Favoritos",
