@@ -7,6 +7,7 @@
     max-width: 80%;
   }
   margin: 0 auto;
+  direction: ltr;
 }
 
 .actionsRow {
@@ -51,6 +52,5 @@
 .subTranslationItem {
   width: calc(var(--spacing-mega) * 8);
   height: var(--spacing-xxsmall);
-  margin-top: var(--spacing-micro);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block: var(--spacing-micro) var(--spacing-xsmall);
 }

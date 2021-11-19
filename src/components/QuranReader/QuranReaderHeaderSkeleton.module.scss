@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-bottom: calc(3 * var(--spacing-large));
+  margin-block-end: calc(3 * var(--spacing-large));
   max-width: 100vw;
 }
 .contextMenu {
@@ -15,7 +15,7 @@
   display: flex;
   width: calc(20 * var(--spacing-large));
   margin: 0 auto;
-  margin-bottom: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
   height: calc(var(--spacing-mega) + var(--spacing-xsmall));
 }
 .chapterHeaderContainer {
@@ -25,7 +25,7 @@
   justify-content: space-between;
   width: 80%;
   margin: 0 auto;
-  margin-bottom: calc(2 * var(--spacing-large));
+  margin-block-end: calc(2 * var(--spacing-large));
 }
 .surahNameEnContainer {
   display: flex;

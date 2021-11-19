@@ -41,7 +41,6 @@ const config = {
         worker: ['AudioWorklet from audio-worklet'],
       },
     };
-
     webpackConfig.module.rules.push({
       test: /\.svg$/i,
       issuer: {
@@ -64,7 +63,6 @@ const config = {
         },
       ],
     });
-
     return webpackConfig;
   },
   SentryWebpackPluginOptions: {

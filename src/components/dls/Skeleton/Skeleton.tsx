@@ -22,7 +22,7 @@ const Skeleton = ({
   return (
     <span
       className={classNames(styles.skeleton, {
-        [styles.baseSize]: !children,
+        [styles.baseSize]: !children && !className,
         [styles.active]: isActive,
         [styles.rounded]: isRounded,
         [styles.squared]: isSquared,
