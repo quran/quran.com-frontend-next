@@ -1,3 +1,5 @@
+import isEqual from 'lodash/isEqual';
+
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -30,7 +32,7 @@ export const verseFontChanged = (
   prevWords: Word[],
   nextWords: Word[],
 ): boolean =>
-  prevQuranStyles.mushafLines !== nextQuranStyles.mushafLines ||
+  !isEqual(prevQuranStyles, nextQuranStyles) ||
   prevWords.length !== nextWords.length ||
   prevWords[0].text !== nextWords[0].text ||
   prevWords[0].translation.languageName !== nextWords[0].translation.languageName;
