@@ -72,7 +72,7 @@ export const getRequestKey = ({
   }
   if (isSelectedTafsirData || isTafsirData) {
     return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, locale, {
-      locale: wordByWordLocale,
+      wordTranslationLanguage: wordByWordLocale,
       page,
       perPage: 1,
       translations: null,
@@ -84,7 +84,7 @@ export const getRequestKey = ({
   }
   if (quranReaderDataType === QuranReaderDataType.VerseRange) {
     return makeVersesUrl(id, locale, {
-      locale: wordByWordLocale,
+      wordTranslationLanguage: wordByWordLocale,
       reciter,
       page,
       from: initialData.metaData.from,
@@ -96,7 +96,7 @@ export const getRequestKey = ({
   }
 
   return makeVersesUrl(id, locale, {
-    locale: wordByWordLocale,
+    wordTranslationLanguage: wordByWordLocale,
     reciter,
     page,
     translations: selectedTranslations.join(', '),
