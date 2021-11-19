@@ -1,25 +1,25 @@
 {
     "footer": {
         "rights": "Seluruh hak cipta",
-        "title": "Baca, pelajari, dan pelajari The Noble Quran."
+        "title": "Baca, belajar, dan pelajari Al-Quran yang mulia."
     },
     "hijri-date": {
         "format": "{{month}} {{date}}, {{year}} AH",
         "month": {
             "1": "Muharram",
             "10": "Syawal",
-            "11": "Dzulqidah",
-            "2": "Safari",
-            "3": "Rabi' I",
-            "4": "Rabi' II",
-            "5": "Jumada I",
-            "6": "Jumada Akhira",
-            "7": "Rajab",
+            "11": "Dzulqaidah",
+            "2": "Safar",
+            "3": "Rabi' awal",
+            "4": "Rabi'  akhir",
+            "5": "Jamadil awal",
+            "6": "Jamadil Akhir",
+            "7": "Rejab",
             "8": "Sya'ban",
             "9": "Ramadan"
         }
     },
-    "no-bookmarks": "Anda belum memiliki bookmark apa pun",
+    "no-bookmarks": "Anda belum memiliki penanda buku apa pun",
     "prayer-names": {
         "asr": "Ashar",
         "dhuhr": "Dhuhr",
@@ -31,18 +31,18 @@
     "prayer-times": {
         "use-location": "Gunakan lokasi yang akurat"
     },
-    "recently-read": "Baru-baru ini Baca",
+    "recently-read": "Baru-baru ini dibaca",
     "tab": {
-        "bookmarks": "Bookmark",
+        "bookmarks": "penanda buku",
         "popular": "Populer"
     },
     "voice": {
-        "trigger": "Akses cepat ke apa pun"
+        "trigger": "Akses cepat ke semuanya"
     },
     "welcome": {
-        "desc": "Kami secara aktif menambahkan fitur baru dan mendorong perubahan. Jika Anda mengalami masalah, harap berikan umpan balik.",
-        "feedback-cta": "Berikan umpan balik",
-        "join-cta": "Bergabunglah dengan Komunitas Perselisihan",
+        "desc": "Kami secara aktif menambahkan fitur baru dan mendorong perubahan. Jika Anda mengalami masalah, harap berikan maklum balik.",
+        "feedback-cta": "Berikan maklum balik",
+        "join-cta": "Bergabunglah dengan Komunitas Discord",
         "title": "Selamat datang di Beta Pra-Rilis dari Quran.com baru!"
     }
 }
