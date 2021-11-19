@@ -34,6 +34,7 @@
 }
 
 .popoverTrigger {
+  // important is needed to over-ride the values of the popover
   margin-block-start: 0 !important;
   margin-block-end: 0 !important;
   margin-inline-start: 0 !important;
