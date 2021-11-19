@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { ReactNode, useState, useMemo, useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -71,10 +72,9 @@ const QuranWord = ({
   );
   const readingPreference = useSelector(selectReadingPreference);
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-  const wordLocation = word.location;
 
   // Determine if the audio player is currently playing the word
-  const isAudioPlayingWord = useSelector(selectIsWordHighlighted(wordLocation));
+  const isAudioPlayingWord = useSelector(selectIsWordHighlighted(word.location));
 
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
@@ -114,7 +114,7 @@ const QuranWord = ({
       role="button"
       tabIndex={0}
       {...{
-        [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
+        [DATA_ATTRIBUTE_WORD_LOCATION]: word.location,
       }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
