@@ -3,10 +3,10 @@ import Skeleton from '../dls/Skeleton/Skeleton';
 import styles from './TranslationViewSkeleton.module.scss';
 
 type Props = {
-  verseCount?: number;
+  translationsCount?: number;
 };
 
-const TranslationViewSkeleton = ({ verseCount = 2 }: Props) => {
+const TranslationViewSkeleton = ({ translationsCount = 2 }: Props) => {
   return (
     <span className={styles.skeletonContainer}>
       <div className={styles.actionsRow}>
@@ -18,19 +18,14 @@ const TranslationViewSkeleton = ({ verseCount = 2 }: Props) => {
         <Skeleton isActive isSquared className={styles.verseItem} />
       </div>
       <div className={styles.translationRows}>
-        {Array(verseCount)
+        {Array(translationsCount)
           .fill(null)
           .map((k, i) => (
-            <>
-              <Skeleton
-                // eslint-disable-next-line react/no-array-index-key
-                key={`skeleton_${i}`}
-                isActive
-                isSquared
-                className={styles.translationItem}
-              />
+            // eslint-disable-next-line react/no-array-index-key
+            <span key={`skeleton_${i}`}>
+              <Skeleton isActive isSquared className={styles.translationItem} />
               <Skeleton isActive isSquared className={styles.subTranslationItem} />
-            </>
+            </span>
           ))}
       </div>
     </span>

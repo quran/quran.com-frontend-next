@@ -138,7 +138,11 @@ const QuranReader = ({
     return (
       <>
         <QuranReaderHeaderSkeleton />
-        <TranslationViewSkeleton />
+        {isReadingPreference ? (
+          <ReadingViewSkeleton fontSize={quranTextFontScale} />
+        ) : (
+          <TranslationViewSkeleton />
+        )}
       </>
     );
   }
@@ -179,7 +183,9 @@ const QuranReader = ({
                     isReadingPreference ? (
                       <ReadingViewSkeleton fontSize={quranTextFontScale} />
                     ) : (
-                      <TranslationViewSkeleton verseCount={verses[0]?.translations?.length} />
+                      <TranslationViewSkeleton
+                        translationsCount={verses[0]?.translations?.length}
+                      />
                     )
                   }
                 />

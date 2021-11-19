@@ -1,6 +1,7 @@
 @use "src/styles/theme";
 $baseSize: var(--spacing-mega);
 $animationDuration: 8s;
+$transition-duration: 1.5s;
 
 .baseSize {
   height: $baseSize;
@@ -15,7 +16,6 @@ $animationDuration: 8s;
 
 .active::before {
   border-radius: var(--border-radius-default);
-
   @include theme.light {
     background-color: var(--color-secondary-faded);
   }
