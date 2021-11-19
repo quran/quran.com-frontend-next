@@ -15,6 +15,7 @@ import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getFirstWordOfSurah } from 'src/utils/verse';
+import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type VerseTextProps = {
@@ -41,9 +42,11 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
     [pageNumber, lineNumber, quranFont],
   );
   const firstWordData = getFirstWordOfSurah(location);
+  const isTajweedFont = quranFont === QuranFont.Tajweed;
   const isBigTextLayout =
-    isReadingMode &&
-    (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
+    (isReadingMode &&
+      (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration)) ||
+    isTajweedFont;
 
   const { chapterId, isFirstWordOfSurah } = firstWordData;
 
@@ -60,14 +63,11 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
         data-page={pageNumber}
         data-chapter-id={chapterId}
         data-hizb={hizbNumber}
-        className={classNames(
-          styles.verseTextContainer,
-          styles[`quran-font-size-${quranTextFontScale}`],
-          {
-            [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
-            [styles.highlighted]: isHighlighted,
-          },
-        )}
+        className={classNames(styles.verseTextContainer, {
+          [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
+          [styles.highlighted]: isHighlighted,
+          [styles[`quran-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+        })}
       >
         <div
           className={classNames(styles.verseText, {

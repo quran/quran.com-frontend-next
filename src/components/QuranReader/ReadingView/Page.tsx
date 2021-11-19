@@ -12,6 +12,7 @@ import PageFooter from './PageFooter';
 
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type PageProps = {
@@ -22,13 +23,14 @@ type PageProps = {
 
 const Page = ({ verses, page, quranReaderStyles }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
-  const { quranTextFontScale } = quranReaderStyles;
+  const { quranTextFontScale, quranFont } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
     shallowEqual,
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const isBigTextLayout = isWordByWordLayout || quranTextFontScale > 3;
+  const isBigTextLayout =
+    isWordByWordLayout || quranTextFontScale > 3 || quranFont === QuranFont.Tajweed;
 
   return (
     <div

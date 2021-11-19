@@ -17,7 +17,7 @@ const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const config = {
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['cdn.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
+    domains: ['cdn.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com', 'static.quran.com'],
   },
   pwa: {
     disable: isDev,

@@ -11,6 +11,7 @@ import TextWord from './TextWord';
 
 import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import TajweedWord from 'src/components/QuranReader/TajweedWord';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
@@ -82,6 +83,8 @@ const QuranWord = ({
 
   if (isQCFFont(font)) {
     wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
+  } else if (font === QuranFont.Tajweed) {
+    wordText = <TajweedWord path={word.text} location={word.location} />;
   } else if (word.charTypeName !== CharType.Pause) {
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
@@ -121,6 +124,7 @@ const QuranWord = ({
         [styles.highlighted]: shouldBeHighLighted,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
+        [styles.hoveredTajweedWord]: font === QuranFont.Tajweed && isTooltipOpened,
       })}
     >
       <Wrapper

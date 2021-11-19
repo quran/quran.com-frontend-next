@@ -42,7 +42,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
+import { QuranFont, QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
 const EndOfScrollingControls = dynamic(() => import('./EndOfScrollingControls'), {
   ssr: false,
@@ -98,7 +98,8 @@ const QuranReader = ({
         isUsingDefaultTranslations &&
         isUsingDefaultTafsirs &&
         isUsingDefaultReciter &&
-        isUsingDefaultWordByWordLocale
+        isUsingDefaultWordByWordLocale &&
+        quranReaderStyles.quranFont !== QuranFont.Tajweed // this is because we render TajweedText that is not expecting text.
           ? initialData.verses
           : null, // initialData is set to null if the user changes/has changed the default translations/tafsirs so that we can prevent the UI from falling back to the default translations while fetching the verses with the translations/tafsirs the user had selected and we will show a loading indicator instead.
       revalidateOnFocus: false, // disable auto revalidation when window gets focused
