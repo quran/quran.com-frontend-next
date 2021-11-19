@@ -3,7 +3,7 @@
     "back-to-ayah": "Kembali ke Ayah",
     "copy-arabic": "Teks Arab (teks Utsmani)",
     "copy-footnote-q": "Salin juga Catatan Kaki?",
-    "copy-success": "Teks berhasil disalin di clipboard Anda.",
+    "copy-success": "Teks berhasil disalin di papan klip Anda.",
     "copy-what": "Apa yang ingin Anda salin?",
     "current-verse": "Ayat saat ini",
     "download-copy": "jika Anda ingin mengunduh file teks.",
@@ -23,10 +23,10 @@
     "prev-juz": "Juz Sebelumnya",
     "prev-page": "Halaman sebelumnya",
     "prev-surah": "Surah sebelumnya",
-    "remove-bookmark": "Hapus bookmark",
-    "select-range": "Pilih rentang ayat",
+    "remove-bookmark": "Hapus penanda buku",
+    "select-range": "Pilih jangkauan ayat",
     "surah-beginning": "Awal dari Surah",
-    "surah-info": "Surah Info",
+    "surah-info": "info surah",
     "tafsirs": "Tafsir",
     "verses-range": "Jangkauan ayat"
 }

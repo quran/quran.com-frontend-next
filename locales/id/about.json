@@ -1,18 +1,18 @@
 {
     "credits": {
-        "desc": "Situs web ini dibuat oleh beberapa sukarelawan dan dimungkinkan dengan kehendak Allah (Maha Suci Allah) dan dengan bantuan komunitas Muslim open source online. Sumber data meliputi <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> karya pada segmen audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> dan Proyek Quran Online.",
-        "lokalize": "Pelokalan dimungkinkan dengan bantuan <0> Lokalise <\/0>yang merupakan sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
+        "desc": "Situs web ini dibuat oleh beberapa sukarelawan dan dijayakan dengan kehendak Allah (Maha Suci Allah) dan dengan bantuan komunitas Muslim open source online. Sumber data meliputi <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> karya pada segmen audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> dan Projek Quran Online.",
+        "lokalize": "Pelokalan dilakukan dengan bantuan <0> Lokalise <\/0>yang merupakan sistem terjemahan berbantuan komputer yang memfokuskan pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
         "title": "Kredit"
     },
-    "main-desc": "The Noble Quran adalah teks agama utama Islam. Muslim percaya bahwa Al-Qur'an adalah kitab petunjuk dan petunjuk Ilahi bagi umat manusia, dan menganggap teks asli bahasa Arab sebagai wahyu terakhir dari Allah (Tuhan). Semua terjemahan teks Arab asli dengan demikian merupakan interpretasi dari makna aslinya dan harus dianut seperti itu.",
+    "main-desc": "Al-Quran suci adalah teks agama utama Islam. Muslim- dan muslimat percaya bahwa Al-Qur'an adalah kitab petunjuk dan petunjuk Ilahi bagi umat manusia, dan menganggap teks asli bahasa Arab sebagai wahyu terakhir dari Allah (Tuhan). Semua terjemahan teks Arab asli dengan demikian merupakan interpretasi dari makna aslinya dan harus dianut seperti itu.",
     "meccan": {
-        "desc": "Surat-surat Mekah adalah bab-bab (surah) Al-Qur'an yang secara kronologis lebih awal, menurut tradisi Islam, diturunkan kapan saja sebelum migrasi nabi Islam Muhammad dan para pengikutnya dari Mekah ke Madinah (Hijrah). Surat-surat Medina adalah wahyu yang terjadi setelah pindah ke kota dengan nama itu.",
-        "surahs": "Surat Mekah"
+        "desc": "Surah-surah Mekah adalah bab-bab (surah) Al-Qur'an yang secara kronologis lebih awal, menurut tradisi Islam, diturunkan kapan saja sebelum migrasi nabi Islam Muhammad dan para pengikutnya dari Mekah ke Madinah (Hijrah). Surah-surah Medina adalah wahyu yang terjadi setelah pindah ke kota dengan nama itu.",
+        "surahs": "Surah Mekah"
     },
     "median": {
-        "desc": "Surat Medina atau surat Medina dari Quran adalah 24 surat terbaru yang menurut tradisi Islam diturunkan di Medina setelah Muhammad &apos; Hijrah dari Mekah. Surat-surat ini diturunkan oleh Allah ketika komunitas Muslim lebih besar dan lebih berkembang, berlawanan dengan posisi minoritas mereka di Mekah.",
-        "surahs": "Surat Madinah"
+        "desc": "Surah Medina atau Bagian Medina dari Quran adalah 24 surah terbaru yang menurut tradisi Islam diturunkan di Medina setelah Muhammad &apos; Hijrah dari Mekah. Surat-surat ini diturunkan oleh Allah ketika komunitas Muslim lebih besar dan lebih berkembang, berlawanan dengan posisi minoritas mereka di Mekah.",
+        "surahs": "Surah Madinah"
     },
-    "questions": "Jika Anda memiliki pertanyaan, Anda dapat mengunjungi halaman <0> umpan balik <\/0> .",
-    "redesign": "Kami telah mendesain ulang situs web dengan pendekatan yang ramah pengguna. Untuk menelusuri surah, klik tombol (ditampilkan di kiri) di halaman BACA & DENGARKAN dan navigasi surah berdasarkan judul atau halaman. Di iterasi mendatang, kami akan mengintegrasikan lebih banyak fitur pencarian dan audio insyaAllah. Jika Anda memiliki saran tentang bagaimana kami dapat membuat situs web menjadi pengalaman yang lebih baik, jangan ragu untuk <0> memberi kami umpan balik <\/0> ."
+    "questions": "Jika Anda memiliki pertanyaan, Anda dapat mengunjungi halaman <0> maklum balik <\/0> .",
+    "redesign": "Kami telah mendesain semula situs web dengan pendekatan yang ramah pengguna. Untuk menelusuri surah, klik tombol (ditampilkan di kiri) di halaman BACA & DENGARKAN dan navigasi surah berdasarkan judul atau halaman. Pada mendatangnya, kami akan mengintegrasikan lebih banyak fitur pencarian dan audio insyaAllah. Jika Anda memiliki saran tentang bagaimana kami dapat membuat situs web menjadi pengalaman yang lebih baik, jangan ragu untuk <0> memberi kami maklum balik <\/0> ."
 }
