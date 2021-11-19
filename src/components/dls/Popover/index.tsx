@@ -29,6 +29,7 @@ interface Props {
   tip?: boolean;
   avoidCollisions?: boolean;
   useTooltipStyles?: boolean;
+  defaultStyling?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -42,8 +43,9 @@ const Popover: React.FC<Props> = ({
   avoidCollisions = true,
   tip = false,
   useTooltipStyles = false,
+  defaultStyling = true,
 }) => (
-  <div className={styles.container}>
+  <div className={classNames({ [styles.container]: defaultStyling })}>
     <RadixPopover.Root
       modal={isModal}
       {...(typeof open !== 'undefined' && { open })}

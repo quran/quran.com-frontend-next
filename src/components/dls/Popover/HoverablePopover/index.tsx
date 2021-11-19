@@ -10,6 +10,7 @@ interface Props {
   tip?: boolean;
   tooltipDelay?: number;
   onOpenChange?: (open: boolean) => void;
+  defaultStyling?: boolean;
 }
 
 /**
@@ -28,11 +29,13 @@ const HoverablePopover: React.FC<Props> = ({
   contentSide = ContentSide.TOP,
   tip = true,
   tooltipDelay = 0,
+  defaultStyling = true,
 }: Props): JSX.Element => (
   <Popover
     contentSide={contentSide}
     useTooltipStyles
     {...(onOpenChange && { onOpenChange })}
+    defaultStyling={defaultStyling}
     trigger={
       <Tooltip
         tip={tip}

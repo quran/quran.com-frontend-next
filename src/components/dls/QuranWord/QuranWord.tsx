@@ -130,7 +130,11 @@ const QuranWord = ({
       <Wrapper
         shouldWrap={showTooltip}
         wrapper={(children) => (
-          <MobilePopover content={tooltipContent} onOpenChange={setIsTooltipOpened}>
+          <MobilePopover
+            defaultStyling={false}
+            content={tooltipContent}
+            onOpenChange={setIsTooltipOpened}
+          >
             {children}
           </MobilePopover>
         )}
