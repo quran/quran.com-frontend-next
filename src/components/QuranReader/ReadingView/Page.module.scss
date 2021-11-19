@@ -3,7 +3,8 @@
 
 .container {
   border-bottom: 1px var(--color-borders-hairline) solid;
-  margin-block: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-mega);
   max-width: 100%;
 }
 
