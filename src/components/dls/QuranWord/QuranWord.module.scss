@@ -6,6 +6,10 @@
   margin-inline-end: var(--spacing-xxsmall);
 }
 
+.hoveredTajweedWord {
+  background-color: var(--color-background-backdrop);
+}
+
 .wbwContainer {
   text-align: center;
   padding-block-start: var(--spacing-micro);

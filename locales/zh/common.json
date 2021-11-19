@@ -8,6 +8,7 @@
         },
         "play": "播放音频",
         "playback-speed": "播放速度",
+        "playback-speed-unit": "X",
         "player": {
             "close": "关闭音频播放器",
             "currently-playing": "您目前正在玩",
@@ -81,6 +82,7 @@
         "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长，并且无法通过浏览器复制。",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "古兰经字体",
+        "tajweed": "泰姬草",
         "text_indopak": "印巴",
         "text_uthmani": "奥斯曼尼"
     },
@@ -101,13 +103,37 @@
     "next": "下一个",
     "no": "不",
     "none": "没有任何",
+    "off": "离开",
+    "on": "在",
     "page": "页",
     "pages": "页面",
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
     "powered-by": "供电",
     "prayer-times": {
+        "access-denied": "拒绝访问位置。请启用位置访问以获取准确的祈祷时间",
         "calculation-method": "计算方法",
+        "calculation-methods": {
+            "Dubai": "迪拜",
+            "Egyptian": "埃及人",
+            "Karachi": "卡拉奇",
+            "Kuwait": "科威特",
+            "MoonsightingCommittee": "探月委员会",
+            "MuslimWorldLeague": "穆斯林世界联盟",
+            "NorthAmerica": "北美",
+            "Qatark": "卡塔尔语",
+            "Singapore": "新加坡",
+            "Tehran": "德黑兰",
+            "Turkey": "火鸡",
+            "UmmAlQura": "乌玛库拉"
+        },
+        "find-accurate-location": "查找准确位置",
+        "location-access": "定位访问",
+        "location-updated": "祈祷时间地点更新",
         "madhab": "马达卜",
+        "madhabs": {
+            "Hanafi": "哈纳菲",
+            "Shafi": "沙菲"
+        },
         "title": "祷告时间"
     },
     "prev": "以前的",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "更改朗诵者",
+        "change-tafsirs": "更改 Tafsir",
         "change-translations": "更改翻译",
         "reading-experience": "阅读体验",
         "reset-cta": "重新设置",
+        "reset-notif": "您的设置已重置为默认设置",
+        "search-reciter": "搜索朗诵者",
+        "search-tafsirs": "搜索 Tafsirs",
+        "search-translations": "搜索翻译",
         "title": "设置"
     },
     "share": "分享",

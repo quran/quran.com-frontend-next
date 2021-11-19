@@ -28,6 +28,9 @@
         "maghrib": "Akshami",
         "sunrise": "Lindja e diellit"
     },
+    "prayer-times": {
+        "use-location": "Përdor vendndodhjen e saktë"
+    },
     "recently-read": "Lexuar së fundmi",
     "tab": {
         "bookmarks": "Faqerojtësit",

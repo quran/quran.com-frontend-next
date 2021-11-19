@@ -52,6 +52,12 @@ const QuranFontSection = () => {
           value: QuranFont.MadaniV2,
           name: QuranFont.MadaniV2,
         },
+        {
+          id: QuranFont.Tajweed,
+          label: t(`fonts.${QuranFont.Tajweed}`),
+          value: QuranFont.Tajweed,
+          name: QuranFont.Tajweed,
+        },
       ],
     }),
     [t],

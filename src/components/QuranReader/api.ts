@@ -79,6 +79,7 @@ export const getRequestKey = ({
       tafsirs: isTafsirData ? selectedTafsirs.join(',') : id,
       wordFields: `location, verse_key, ${quranReaderStyles.quranFont}`,
       tafsirFields: 'resource_name,language_name',
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
   if (quranReaderDataType === QuranReaderDataType.VerseRange) {

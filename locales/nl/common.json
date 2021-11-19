@@ -8,6 +8,7 @@
         },
         "play": "Audio afspelen",
         "playback-speed": "Afspeelsnelheid",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Sluit audiospeler",
             "currently-playing": "Je speelt momenteel",
@@ -81,6 +82,7 @@
         "qcf-desc": "KPFG-lettertypen bieden een hogere kwaliteit, maar duren langer om te laden en kunnen niet via de browser worden gekopieerd.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Koran lettertype",
+        "tajweed": "Tajweed",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
@@ -101,13 +103,37 @@
     "next": "Volgende",
     "no": "Nee",
     "none": "Geen",
+    "off": "Uit",
+    "on": "Op",
     "page": "Bladzijde",
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "powered-by": "Aangedreven door",
     "prayer-times": {
+        "access-denied": "Toegang tot locatie geweigerd. Schakel locatietoegang in om nauwkeurige gebedstijden te krijgen",
         "calculation-method": "Rekenmethode",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "Egyptische",
+            "Karachi": "Karachi",
+            "Kuwait": "Koeweit",
+            "MoonsightingCommittee": "MoonsightingComité",
+            "MuslimWorldLeague": "MoslimWereldLeague",
+            "NorthAmerica": "Noord Amerika",
+            "Qatark": "Qatark",
+            "Singapore": "Singapore",
+            "Tehran": "Teheran",
+            "Turkey": "kalkoen",
+            "UmmAlQura": "UmmAlQura"
+        },
+        "find-accurate-location": "Vind nauwkeurige locatie",
+        "location-access": "Locatietoegang",
+        "location-updated": "Locatie gebedstijden bijgewerkt",
         "madhab": "Madhab",
+        "madhabs": {
+            "Hanafi": "Hanafi",
+            "Shafi": "Shafi"
+        },
         "title": "Gebedstijden"
     },
     "prev": "Vorig",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "Voordrager wijzigen",
+        "change-tafsirs": "Tafsir wijzigen",
         "change-translations": "Vertalingen wijzigen",
         "reading-experience": "Leeservaring",
         "reset-cta": "Reset instellingen",
+        "reset-notif": "Je instellingen zijn teruggezet naar de standaardinstellingen",
+        "search-reciter": "Zoek voordrager",
+        "search-tafsirs": "Tafsir zoeken",
+        "search-translations": "Vertalingen zoeken",
         "title": "Instellingen"
     },
     "share": "Deel",

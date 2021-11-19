@@ -8,6 +8,7 @@
         },
         "play": "Ses Çal",
         "playback-speed": "Oynatma Hızı",
+        "playback-speed-unit": "x",
         "player": {
             "close": "Ses Oynatıcıyı Kapat",
             "currently-playing": "şu anda oynuyorsun",
@@ -81,6 +82,7 @@
         "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer ve tarayıcı aracılığıyla kopyalanamaz.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Kuran Yazı Tipi",
+        "tajweed": "tecvid",
         "text_indopak": "Hint Paketi",
         "text_uthmani": "Osmanca"
     },
@@ -101,13 +103,37 @@
     "next": "Sonraki",
     "no": "Numara",
     "none": "Hiçbiri",
+    "off": "Kapalı",
+    "on": "Açık",
     "page": "Sayfa",
     "pages": "Sayfalar",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "powered-by": "Tarafından desteklenmektedir",
     "prayer-times": {
+        "access-denied": "Konum erişimi reddedildi. Doğru namaz vakitlerini almak için lütfen konum erişimini etkinleştirin",
         "calculation-method": "Hesaplama yöntemi",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "Mısırlı",
+            "Karachi": "Karaçi",
+            "Kuwait": "Kuveyt",
+            "MoonsightingCommittee": "Mehtap Komitesi",
+            "MuslimWorldLeague": "Müslüman Dünya Ligi",
+            "NorthAmerica": "Kuzey Amerika",
+            "Qatark": "Katar",
+            "Singapore": "Singapur",
+            "Tehran": "Tahran",
+            "Turkey": "Türkiye",
+            "UmmAlQura": "Ümmü Kura"
+        },
+        "find-accurate-location": "Doğru Konum Bul",
+        "location-access": "Konum Erişimi",
+        "location-updated": "Namaz vakitleri konumu güncellendi",
         "madhab": "mezheb",
+        "madhabs": {
+            "Hanafi": "Hanefi",
+            "Shafi": "Şafii"
+        },
         "title": "İbadet zamanları"
     },
     "prev": "Öncesi",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "Okuyucuyu Değiştir",
+        "change-tafsirs": "Tefsirleri Değiştir",
         "change-translations": "Çevirileri Değiştir",
         "reading-experience": "Okuma Deneyimi",
         "reset-cta": "Ayarları Sıfırla",
+        "reset-notif": "Ayarlarınız varsayılanlara sıfırlandı",
+        "search-reciter": "Okuyucu Ara",
+        "search-tafsirs": "tefsir ara",
+        "search-translations": "Çevirileri Ara",
         "title": "Ayarlar"
     },
     "share": "Paylaş",

@@ -28,6 +28,9 @@
         "maghrib": "akşam yemeği",
         "sunrise": "gündoğumu"
     },
+    "prayer-times": {
+        "use-location": "Doğru konumu kullan"
+    },
     "recently-read": "Son Okunan",
     "tab": {
         "bookmarks": "Yer imleri",

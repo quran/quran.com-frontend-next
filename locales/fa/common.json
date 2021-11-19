@@ -8,6 +8,7 @@
         },
         "play": "پخش صدا",
         "playback-speed": "سرعت پخش",
+        "playback-speed-unit": "ایکس",
         "player": {
             "close": "پخش کننده صوتی را ببندید",
             "currently-playing": "شما در حال حاضر در حال بازی هستید",
@@ -81,6 +82,7 @@
         "qcf-desc": "فونت‌های KPFG کیفیت بالاتری را ارائه می‌دهند، اما بارگذاری طولانی‌تر طول می‌کشد و نمی‌توان از طریق مرورگر کپی کرد.",
         "qpc_uthmani_hafs": "QPC عثمانی حفص",
         "quran-font": "فونت قرآن",
+        "tajweed": "تجوید",
         "text_indopak": "IndoPak",
         "text_uthmani": "عثمانی"
     },
@@ -101,13 +103,37 @@
     "next": "بعد",
     "no": "خیر",
     "none": "هیچ یک",
+    "off": "خاموش",
+    "on": "بر",
     "page": "صفحه",
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} از {{totalNumberOfResults}} نتایج جستجو",
     "powered-by": "پشتیبانی شده توسط",
     "prayer-times": {
+        "access-denied": "دسترسی به مکان ممنوع شد. لطفاً دسترسی به مکان را فعال کنید تا اوقات دقیق نماز را دریافت کنید",
         "calculation-method": "روش محاسبه",
+        "calculation-methods": {
+            "Dubai": "دبی",
+            "Egyptian": "مصری",
+            "Karachi": "کراچی",
+            "Kuwait": "کویت",
+            "MoonsightingCommittee": "کمیته مهتاب",
+            "MuslimWorldLeague": "لیگ جهانی مسلمانان",
+            "NorthAmerica": "آمریکای شمالی",
+            "Qatark": "قطر",
+            "Singapore": "سنگاپور",
+            "Tehran": "تهران",
+            "Turkey": "بوقلمون",
+            "UmmAlQura": "ام القری"
+        },
+        "find-accurate-location": "مکان دقیق را پیدا کنید",
+        "location-access": "دسترسی به موقعیت مکانی",
+        "location-updated": "مکان اوقات نماز به روز شد",
         "madhab": "مداح",
+        "madhabs": {
+            "Hanafi": "حنفی",
+            "Shafi": "شفیع"
+        },
         "title": "اوقات نماز"
     },
     "prev": "قبلی",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "تلاوت را تغییر دهید",
+        "change-tafsirs": "تغییر تفاسیر",
         "change-translations": "تغییر ترجمه ها",
         "reading-experience": "تجربه خواندن",
         "reset-cta": "تنظیمات را بازنشانی کنید",
+        "reset-notif": "تنظیمات شما به تنظیمات پیش فرض بازنشانی شده است",
+        "search-reciter": "جستجوی قاری",
+        "search-tafsirs": "جستجو در تفاسیر",
+        "search-translations": "جستجوی ترجمه ها",
         "title": "تنظیمات"
     },
     "share": "اشتراک گذاری",

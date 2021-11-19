@@ -8,6 +8,7 @@
         },
         "play": "Lire le son",
         "playback-speed": "Vitesse de lecture",
+        "playback-speed-unit": "X",
         "player": {
             "close": "Fermer le lecteur audio",
             "currently-playing": "Vous jouez actuellement",
@@ -81,6 +82,7 @@
         "qcf-desc": "Les polices KPFG offrent une qualité supérieure mais prennent plus de temps à charger et ne peuvent pas être copiées via le navigateur.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Police du Coran",
+        "tajweed": "Tajweed",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
@@ -101,13 +103,37 @@
     "next": "Prochain",
     "no": "Non",
     "none": "Rien",
+    "off": "Désactivé",
+    "on": "Au",
     "page": "Page",
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "powered-by": "Alimenté par",
     "prayer-times": {
+        "access-denied": "Accès à l'emplacement refusé. Veuillez activer l'accès à la localisation pour obtenir des heures de prière précises",
         "calculation-method": "Méthode de calcul",
+        "calculation-methods": {
+            "Dubai": "Dubai",
+            "Egyptian": "égyptien",
+            "Karachi": "Karachi",
+            "Kuwait": "Koweit",
+            "MoonsightingCommittee": "Comité d'observation de la lune",
+            "MuslimWorldLeague": "MuslimWorldLeague",
+            "NorthAmerica": "Amérique du Nord",
+            "Qatark": "qatarien",
+            "Singapore": "Singapour",
+            "Tehran": "Téhéran",
+            "Turkey": "Turquie",
+            "UmmAlQura": "UmmAlQura"
+        },
+        "find-accurate-location": "Trouver un emplacement précis",
+        "location-access": "Accès à l'emplacement",
+        "location-updated": "Emplacement des heures de prière mis à jour",
         "madhab": "Madhab",
+        "madhabs": {
+            "Hanafi": "Hanafi",
+            "Shafi": "Shafi"
+        },
         "title": "Horaires de prière"
     },
     "prev": "Précédent",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "Changer de récitant",
+        "change-tafsirs": "Changer de Tafsir",
         "change-translations": "Modifier les traductions",
         "reading-experience": "Expérience de lecture",
         "reset-cta": "Réinitialiser les options",
+        "reset-notif": "Vos paramètres ont été réinitialisés à ceux par défaut",
+        "search-reciter": "Recherche de récitant",
+        "search-tafsirs": "Rechercher des Tafsirs",
+        "search-translations": "Rechercher des traductions",
         "title": "Paramètres"
     },
     "share": "Partager",

@@ -28,6 +28,9 @@
         "maghrib": "马格里布",
         "sunrise": "日出"
     },
+    "prayer-times": {
+        "use-location": "使用准确的位置"
+    },
     "recently-read": "最近阅读",
     "tab": {
         "bookmarks": "书签",

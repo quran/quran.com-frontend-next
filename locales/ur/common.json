@@ -8,6 +8,7 @@
         },
         "play": "آڈیو چلائیں۔",
         "playback-speed": "پلے بیک کی رفتار",
+        "playback-speed-unit": "ایکس",
         "player": {
             "close": "آڈیو پلیئر بند کریں۔",
             "currently-playing": "آپ فی الحال کھیل رہے ہیں۔",
@@ -81,6 +82,7 @@
         "qcf-desc": "KPFG فونٹس اعلیٰ معیار فراہم کرتے ہیں لیکن لوڈ ہونے میں زیادہ وقت لگتا ہے اور براؤزر کے ذریعے کاپی نہیں کیا جا سکتا۔",
         "qpc_uthmani_hafs": "QPC عثمانی حفص",
         "quran-font": "قرآن کا فونٹ",
+        "tajweed": "تجوید",
         "text_indopak": "انڈو پاک",
         "text_uthmani": "عثمانی"
     },
@@ -101,13 +103,37 @@
     "next": "اگلے",
     "no": "نہیں",
     "none": "کوئی نہیں۔",
+    "off": "بند",
+    "on": "پر",
     "page": "صفحہ",
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} کی {{totalNumberOfResults}} تلاش کے نتائج",
     "powered-by": "کی طرف سے طاقت",
     "prayer-times": {
+        "access-denied": "مقام تک رسائی سے انکار کر دیا گیا۔ نماز کے درست اوقات جاننے کے لیے براہ کرم مقام تک رسائی کو فعال کریں۔",
         "calculation-method": "حساب کتاب کا طریقہ",
+        "calculation-methods": {
+            "Dubai": "دبئی",
+            "Egyptian": "مصری",
+            "Karachi": "کراچی",
+            "Kuwait": "کویت",
+            "MoonsightingCommittee": "چاند دیکھنے والی کمیٹی",
+            "MuslimWorldLeague": "مسلم ورلڈ لیگ",
+            "NorthAmerica": "شمالی امریکہ",
+            "Qatark": "قطر",
+            "Singapore": "سنگاپور",
+            "Tehran": "تہران",
+            "Turkey": "ترکی",
+            "UmmAlQura": "ام القریٰ"
+        },
+        "find-accurate-location": "درست مقام تلاش کریں۔",
+        "location-access": "مقام تک رسائی",
+        "location-updated": "نماز کے اوقات کا مقام اپ ڈیٹ ہو گیا۔",
         "madhab": "مادھب",
+        "madhabs": {
+            "Hanafi": "حنفی",
+            "Shafi": "شفیع"
+        },
         "title": "نماز کے اوقات"
     },
     "prev": "پچھلا",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "تلاوت کرنے والے کو تبدیل کریں۔",
+        "change-tafsirs": "تفسیر کو تبدیل کریں۔",
         "change-translations": "ترجمہ تبدیل کریں۔",
         "reading-experience": "پڑھنے کا تجربہ",
         "reset-cta": "ترتیبات کو دوبارہ ترتیب دیں۔",
+        "reset-notif": "آپ کی ترتیبات کو ڈیفالٹ پر دوبارہ ترتیب دیا گیا ہے۔",
+        "search-reciter": "تلاوت کرنے والے کو تلاش کریں۔",
+        "search-tafsirs": "تفسیریں تلاش کریں۔",
+        "search-translations": "ترجمہ تلاش کریں۔",
         "title": "ترتیبات"
     },
     "share": "بانٹیں",

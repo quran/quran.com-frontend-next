@@ -37,6 +37,10 @@
   justify-content: space-between;
   direction: ltr;
 }
+.arabicVerseContainer {
+  direction: rtl;
+  padding-block-end: var(--spacing-medium);
+}
 .verseTranslationContainer {
   padding-block-end: var(--spacing-xsmall);
 }

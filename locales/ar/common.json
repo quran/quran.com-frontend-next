@@ -8,6 +8,7 @@
         },
         "play": "تشغيل الصوت",
         "playback-speed": "سرعة التشغيل",
+        "playback-speed-unit": "x",
         "player": {
             "close": "أغلق مشغل الصوت",
             "currently-playing": "أنت تستمع حاليا",
@@ -81,6 +82,7 @@
         "qcf-desc": "توفر خطوط مجمع الملك فهد الإصدارين 1 و 2 جودة أعلى ولكنها تستغرق وقتًا أطول للتحميل ولا يمكن نسخها من خلال المتصفح.",
         "qpc_uthmani_hafs": "خط الرسم العثماني - حفص - مجمع الملك فهد",
         "quran-font": "خط القرآن",
+        "tajweed": "التجويد",
         "text_indopak": "نستعليق",
         "text_uthmani": "نسخ"
     },
@@ -101,13 +103,37 @@
     "next": "التالي",
     "no": "لا",
     "none": "لا شيء",
+    "off": "اطفء",
+    "on": "تشغيل",
     "page": "صفحة",
     "pages": "الصفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتائج البحث",
     "powered-by": "مشغل بواسطة",
     "prayer-times": {
+        "access-denied": "تم رفض الوصول إلى الموقع. يرجى تمكين الوصول إلى الموقع للحصول على أوقات صلاة دقيقة",
         "calculation-method": "طريقة الحساب",
+        "calculation-methods": {
+            "Dubai": "دبي",
+            "Egyptian": "مصري",
+            "Karachi": "كراتشي",
+            "Kuwait": "الكويت",
+            "MoonsightingCommittee": "لجنة الهلال",
+            "MuslimWorldLeague": "MuslimWorldLeague. عالم المسلم",
+            "NorthAmerica": "أمريكا الشمالية",
+            "Qatark": "قطارك",
+            "Singapore": "سنغافورة",
+            "Tehran": "طهران",
+            "Turkey": "ديك رومى",
+            "UmmAlQura": "أم القرى"
+        },
+        "find-accurate-location": "البحث عن موقع دقيق",
+        "location-access": "الوصول إلى الموقع",
+        "location-updated": "تم تحديث موقع مواقيت الصلاة",
         "madhab": "المذهب",
+        "madhabs": {
+            "Hanafi": "حنفي",
+            "Shafi": "شافي"
+        },
         "title": "أوقات الصلاة"
     },
     "prev": "سابق",
@@ -136,9 +162,14 @@
     },
     "settings": {
         "change-reciter": "تغيير القارئ",
+        "change-tafsirs": "تغيير التفسير",
         "change-translations": "تغيير الترجمات",
         "reading-experience": "تجربة القراءة",
         "reset-cta": "استعادة الإعدادات الافتراضية",
+        "reset-notif": "تمت إعادة تعيين إعداداتك إلى الإعدادات الافتراضية",
+        "search-reciter": "البحث عن القارئ",
+        "search-tafsirs": "بحث في تفسير",
+        "search-translations": "البحث في الترجمات",
         "title": "الإعدادات"
     },
     "share": "شارك",
