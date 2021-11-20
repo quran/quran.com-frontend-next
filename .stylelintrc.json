@@ -1,0 +1,13 @@
+{
+    "plugins": [
+        "stylelint-scss",
+        "stylelint-prettier",
+        "stylelint-use-logical"
+    ],
+    "rules": {
+        "prettier/prettier": true,
+        "at-rule-no-unknown": null,
+        "scss/at-rule-no-unknown": true,
+        "csstools/use-logical": true
+    }
+}

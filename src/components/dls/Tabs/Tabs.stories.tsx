@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import Tabs from './Tabs';
-import Card from '../Cards/Card';
-import image from '../../../../public/images/sunnah.png';
 
 export default {
-  title: 'dls|Tabs',
+  title: 'dls/Tabs',
+  component: Tabs,
 };
 
-export const normal = () => (
-  <Tabs>
-    <Card title="Title1" subtitle="Subtitle" image={image} />
-    <Card title="Title2" subtitle="Subtitle" image={image} />
-    <Card title="Title3" subtitle="Subtitle" image={image} />
-  </Tabs>
-);
+const tabs = [
+  { title: 'Translation', value: 'translation' },
+  { title: 'Reading', value: 'reading' },
+];
+
+const Template = (args) => {
+  const [selected, setSelected] = useState('translation');
+
+  return <Tabs tabs={tabs} selected={selected} onSelect={setSelected} {...args} />;
+};
+
+export const Default = Template.bind({});
+Default.args = {};

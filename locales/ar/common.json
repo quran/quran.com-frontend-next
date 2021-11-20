@@ -1,5 +1,193 @@
 {
-  "Quran-com": "Quran.com",
-  "Salah": "صلاة",
-  "Sunnah": "سنة"
+    "about": "معلومات عنا",
+    "audio": {
+        "auto-scroll": {
+            "off": "اطفء",
+            "on": "تشغيل",
+            "title": "لف تلقائي"
+        },
+        "play": "تشغيل الصوت",
+        "playback-speed": "سرعة التشغيل",
+        "player": {
+            "close": "أغلق مشغل الصوت",
+            "currently-playing": "انت تلعب حاليا",
+            "delay-verse": "التأخير بين الآية",
+            "download": "تحميل",
+            "mismatch": "انقر فوق \"البدء من جديد\" إذا كنت ترغب في تشغيل {{currentReadingChapter}} بدلاً من ذلك",
+            "next-ayah": "الآية التالية",
+            "pause": "يوقف",
+            "play": "يلعب",
+            "play-range": "نطاق اللعب",
+            "previous-ayah": "الآية السابقة",
+            "repeat-1-verse": "كرر الآية",
+            "repeat-settings": "كرر الإعدادات",
+            "repeat-verse": "كرر كل آية",
+            "search-verse": "ابحث عن آية",
+            "single-verse": "آية واحدة",
+            "start-over": "ابدأ من جديد",
+            "start-playing": "ابدا اللعب",
+            "stop-repeating": "توقف عن التكرار",
+            "times": "مرات",
+            "verses-range": "مجموعة الآيات"
+        },
+        "title": "صوتي"
+    },
+    "ayah": "آية",
+    "ayahs": "آيات",
+    "beta": "بيتا",
+    "bookmark": "المرجعية",
+    "bookmarked": "مرجعية",
+    "both": "على حد سواء",
+    "cancel": "يلغي",
+    "click-here": "انقر هنا",
+    "close": "قريب",
+    "command-bar": {
+        "navigations": "الملاحة",
+        "no-nav-results": "لا توجد نتائج تنقل",
+        "placeholder": "ماذا تريد أن تقرأ؟",
+        "powered-by": "البحث الصوتي بدعم من Tarteel.ai",
+        "recent-navigations": "التنقلات الأخيرة",
+        "try-navigating": "حاول الانتقال إلى"
+    },
+    "community": {
+        "cta": "الانضمام إلى المجتمع",
+        "header": "انضم إلى مجتمع QDC للبناة والتقنيين المسلمين.",
+        "sub-header": "اشترك في Quran.com Discord للمشاركة والتعاون مع المجتمع الرائد في بناء التكنولوجيا الإسلامية.",
+        "title": "تواصل اجتماعي"
+    },
+    "continue": "يكمل",
+    "copied": "نسخ",
+    "copied-to-clipboard": "نسخ إلى الحافظة",
+    "copy": "ينسخ",
+    "counter": {
+        "decrease": "ينقص",
+        "increase": "يزيد"
+    },
+    "developers": "المطورين",
+    "error": {
+        "general": "هناك خطأ ما. حاول مرة اخرى.",
+        "offline": "يبدو أنك فقدت الاتصال. يرجى التحقق من ذلك وحاول مرة أخرى."
+    },
+    "feedback": "استجابة",
+    "fonts": {
+        "15_lines": "15 سطرًا",
+        "16_lines": "16 خطوط",
+        "code_v1": "مجمع الملك فهد V1",
+        "code_v2": "مجمع الملك فهد V2",
+        "font-size": "حجم الخط",
+        "lines": "خطوط",
+        "qcf-desc": "توفر خطوط KPFG جودة أعلى ولكنها تستغرق وقتًا أطول للتحميل ولا يمكن نسخها من خلال المتصفح.",
+        "qpc_uthmani_hafs": "QPC عثمان حفص",
+        "quran-font": "خط القرآن",
+        "text_indopak": "IndoPak",
+        "text_uthmani": "العثماني"
+    },
+    "from": "من عند",
+    "help": "يساعد",
+    "hizb": "حزب",
+    "home": "الصفحة الرئيسية",
+    "input": {
+        "clear": "واضح"
+    },
+    "juz": "جز",
+    "loading": "تحميل",
+    "menu": "قائمة طعام",
+    "mobile-apps": "تطبيقات الموبايل",
+    "mode": "الوضع",
+    "more": "أكثر",
+    "network": "شبكة الاتصال",
+    "next": "التالي",
+    "no": "لا",
+    "none": "لا أحد",
+    "page": "صفحة",
+    "pages": "الصفحات",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتائج البحث",
+    "powered-by": "مشغل بواسطة",
+    "prayer-times": {
+        "calculation-method": "طريقة حساب",
+        "madhab": "مدهب",
+        "title": "أوقات الصلاة"
+    },
+    "prev": "سابق",
+    "privacy": "خصوصية",
+    "q-reflect": "عكس القرآن",
+    "quran-com": "Quran.com",
+    "reading-preference": {
+        "reading": "قراءة",
+        "translation": "ترجمة"
+    },
+    "reciter": "القارئ",
+    "remove": "يزيل",
+    "retry": "أعد المحاولة",
+    "search": {
+        "filters": "المرشحات",
+        "hint": "حاول البحث عن",
+        "jump-to": "اقفز إلى",
+        "no-results": "لم يتم العثور على نتائج",
+        "no-results-suggestion": "لم نتمكن من العثور على أي نتائج بحث مطابقة لـ \" {{searchQuery}} \". حاول البحث عن كلمة رئيسية مختلفة.",
+        "popular": "عمليات البحث الشعبية",
+        "recent": "عمليات البحث الأخيرة",
+        "results": "النتائج",
+        "show-all": "عرض كل النتائج",
+        "switch-mode": "قم بالتبديل إلى البحث المتقدم",
+        "title": "بحث"
+    },
+    "settings": {
+        "change-reciter": "تغيير القارئ",
+        "change-translations": "تغيير الترجمات",
+        "reading-experience": "تجربة القراءة",
+        "reset-cta": "اعادة الضبط",
+        "title": "إعدادات"
+    },
+    "share": "يشارك",
+    "shared": "تم نسخ الرابط إلى الحافظة!",
+    "sitemap": "خريطة الموقع",
+    "sort": {
+        "ascending": "تصاعدي",
+        "by": "صنف حسب",
+        "descending": "تنازلي"
+    },
+    "style": "أسلوب",
+    "surah": "سورة",
+    "tafsir": {
+        "font-size": "حجم خط التفسير",
+        "surah": "سورة التفسير",
+        "title": "التفسير"
+    },
+    "tarteel": {
+        "app": "تطبيق ترتيل",
+        "desc": "البحث الصوتي القرآني",
+        "learn": "تعلم كيفية استخدام البحث الصوتي",
+        "name": "ترتيل"
+    },
+    "theme": "سمة",
+    "themes": {
+        "dark": "داكن",
+        "light": "ضوء",
+        "sepia": "بني داكن",
+        "system": "نظام",
+        "system-desc": "يعتمد سمة النظام تلقائيًا على إعدادات الوضع الفاتح \/ الداكن"
+    },
+    "to": "إلى",
+    "tooltip": "تلميح",
+    "translation": "ترجمة",
+    "translations": "الترجمات",
+    "transliteration": "حرفي",
+    "type": "نوع",
+    "verse": "بيت شعر",
+    "view": "رأي",
+    "voice": {
+        "ask-permission": "الرجاء تمكين إذن الميكروفون لبدء استخدام البحث الصوتي",
+        "error": "حصل خطأ. الرجاء المحاوله مرة اخرى. أو قم بتنزيل ملف",
+        "no-permission": "يبدو أنه ليس لديك أذونات الميكروفون ممكّنة. يرجى تمكين أذونات الميكروفون والمحاولة مرة أخرى أو تنزيل ملف",
+        "not-supported": "يبدو أن متصفحك لا يدعم الميكروفون. يرجى تجربة متصفح مختلف أو تنزيل ملف",
+        "suggest": "يرجى البدء في التلاوة وستظهر آياتك."
+    },
+    "wbw": "كلمة بكلمة",
+    "word-click": {
+        "no-audio": "لا صوت",
+        "play-audio": "تشغيل الصوت",
+        "title": "انقر كلمة"
+    },
+    "yes": "نعم"
 }

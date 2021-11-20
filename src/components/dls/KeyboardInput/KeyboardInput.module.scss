@@ -1,0 +1,21 @@
+@use "src/styles/breakpoints";
+
+.container {
+  direction: ltr;
+  color: var(--color-text-default);
+  border: 1px solid var(--color-borders-hairline);
+  display: inline-block;
+  text-align: center;
+  min-width: calc(0.5 * var(--spacing-medium));
+  border-radius: var(--border-radius-default);
+  font-size: 14px;
+  line-height: 28px;
+  padding: 0 8px;
+
+  > span + span {
+    margin-inline-start: 8px;
+  }
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}

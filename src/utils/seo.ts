@@ -1,14 +1,20 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { NextSeoProps } from 'next-seo';
-import { theme } from '../styles/theme';
 
 export const config = {
-  siteName: "Al-Qur'an al-Kareem - القرآن الكريم",
-  siteDescription: 'The Quran translated into many languages in a simple and easy interface',
-  defaultPageTitle: 'Quran.com',
-  baseUrl: 'twitter.com',
-  websiteLogo: '/logo.png',
-  twitterHandle: '@twitter',
-  twitterCardType: 'twitter',
+  siteName: 'Quran.com',
+  defaultDescription: 'The Quran translated into many languages in a simple and easy interface',
+  websiteLogo: 'https://next.quran.com/images/homepage.png',
+  twitterHandle: '@app_quran',
+  twitterCardType: 'summary_large_image',
+  facebookApp: '342185219529773',
+  facebookPage: '603289706669016',
+  appleAppName: 'Quran - by Quran.com - قرآن',
+  appleAppId: '1118663303',
+  appleAppUrl: 'https://apps.apple.com/us/app/quran-by-quran-com-qran/id1118663303',
+  androidAppName: 'Quran for Android',
+  androidPackage: 'com.quran.labs.androidquran',
+  androidAppUrl: 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran',
 };
 
 type SeoConfigType = {
@@ -17,34 +23,46 @@ type SeoConfigType = {
   canonicalUrl?: string;
 };
 
+export interface SEOProps extends NextSeoProps {
+  dangerouslySetAllPagesToNoFollow?: boolean;
+  dangerouslySetAllPagesToNoIndex?: boolean;
+}
+
 export function createSEOConfig({
   title,
   description,
   canonicalUrl,
-}: SeoConfigType = {}): NextSeoProps {
-  const seoTitle = title || config.defaultPageTitle;
-  const setDescription = description ?? config.siteDescription;
+}: SeoConfigType = {}): SEOProps {
+  const seoTitle = title || '';
+  const siteDescription = description || config.defaultDescription;
 
   return {
     title: seoTitle,
-    description: setDescription,
+    description: siteDescription,
     titleTemplate: '%s - Quran.com',
+    defaultTitle: config.siteName,
+    dangerouslySetAllPagesToNoFollow: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow // TODO: remove this once we are ready to index the site
+    dangerouslySetAllPagesToNoIndex: true, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex // TODO: remove this once we are ready to index the site
+    canonical: canonicalUrl,
     openGraph: {
       type: 'website',
       locale: 'en_US', // TODO: (@abdellatif): adjust this based on the next-translate locale
       url: canonicalUrl,
       title: seoTitle,
-      description: setDescription,
+      description: siteDescription,
       images: [
         {
           url: config.websiteLogo,
-          width: 280,
-          height: 280,
+          width: 640,
+          height: 217,
           alt: config.siteName,
         },
       ],
       // eslint-disable-next-line @typescript-eslint/naming-convention
       site_name: config.siteName,
+    },
+    facebook: {
+      appId: config.facebookApp,
     },
     twitter: {
       handle: config.twitterHandle,
@@ -53,21 +71,57 @@ export function createSEOConfig({
     },
     additionalMetaTags: [
       {
+        name: 'fb:pages',
+        content: `app-id=${config.facebookPage}`,
+      },
+      {
+        name: 'al:ios:url',
+        content: config.appleAppUrl,
+      },
+      {
+        name: 'al:ios:app_name',
+        content: config.appleAppName,
+      },
+      {
+        name: 'al:ios:app_store_id',
+        content: config.appleAppId,
+      },
+      {
+        name: 'al:android:url',
+        content: config.androidAppUrl,
+      },
+      {
+        name: 'al:android:app_name',
+        content: config.androidAppName,
+      },
+      {
+        name: 'al:android:package',
+        content: config.androidPackage,
+      },
+      {
+        name: 'apple-itunes-app',
+        content: `app-id=${config.appleAppId}`,
+      },
+      {
         name: 'Charset',
         content: 'UTF-8',
       },
       {
         name: 'Distribution',
-        content: 'Global',
+        content: 'Global', // indicates that your webpage is intended for everyone
       },
       {
         name: 'Rating',
-        content: 'General',
+        content: 'General', // lets the younger web-surfers know the content is appropriate
       },
       {
         name: 'theme-color',
-        content: theme.colors.primary.medium,
+        content: '#fff', // placeholder
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
       },
     ],
-  }; // defaultImageHeight: 500, // defaultImageWidth: 500,
+  };
 }

@@ -1,0 +1,21 @@
+.commandPrefix {
+  margin-inline-end: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  > svg {
+    width: var(--spacing-large);
+    height: var(--spacing-large);
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  max-width: 90%;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

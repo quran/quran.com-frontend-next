@@ -1,0 +1,59 @@
+@use "src/styles/shades";
+
+@mixin mode {
+  --color-primary-faded: #fff;
+  --color-primary-faint: #fff;
+  --color-primary-medium: #000;
+  --color-primary-deep: #fff;
+
+  --color-secondary-faded: #eaeaea;
+  --color-secondary-faint: #999;
+  --color-secondary-medium: #666;
+  --color-secondary-deep: #333;
+
+  --color-success-faded: #d3e5ff;
+  --color-success-faint: #3291ff;
+  --color-success-medium: #0070f3;
+  --color-success-deep: #0761d1;
+
+  --color-error-faded: #f7d4d6;
+  --color-error-faint: #ff1a1a;
+  --color-error-medium: #ee0102;
+  --color-error-deep: #c50000;
+
+  --color-warning-faded: #ffefcf;
+  --color-warning-faint: #f7b955;
+  --color-warning-medium: #f5a623;
+  --color-warning-deep: #ab570a;
+
+  --color-text-default: #000;
+  --color-text-faded: #666;
+  --color-text-inverse: #fff;
+  --color-text-link: #0070f3;
+  --color-text-warning: #ab570a;
+  --color-text-error: #c50000;
+
+  --color-background-default: #f4ecd8;
+
+  --color-background-alternative-faded: var(--shade-0);
+  --color-background-alternative-faint: var(--shade-1);
+  --color-background-alternative-medium: var(--shade-2);
+  --color-background-alternative-deep: var(--shade-6);
+
+  --color-background-inverse: #000;
+  --color-background-backdrop: rgba(0, 0, 0, 0.25);
+  --color-background-lighten: hsla(0, 0%, 100%, 0.8);
+  // lighten the `background-color` by using it in `background-image`. check Button's ghost variant for example
+
+  --color-borders-hairline: rgb(235, 238, 240);
+
+  --color-highlight: #50e3c2;
+
+  --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-large: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-xlarge: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-jumbo: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
+}

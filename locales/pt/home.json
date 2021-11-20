@@ -1,0 +1,45 @@
+{
+    "footer": {
+        "rights": "Todos os direitos reservados",
+        "title": "Leia, estude e aprenda O Nobre Alcorão."
+    },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharram",
+            "10": "Shawwal",
+            "11": "Dhu Al-Qida",
+            "2": "Safar",
+            "3": "Rabi 'I",
+            "4": "Rabi 'II",
+            "5": "Jumada I",
+            "6": "Jumada Akhira",
+            "7": "Rajab",
+            "8": "Sha'ban",
+            "9": "Ramadã"
+        }
+    },
+    "no-bookmarks": "Você ainda não tem favoritos",
+    "prayer-names": {
+        "asr": "Asr",
+        "dhuhr": "Dhuhr",
+        "fajr": "Fajr",
+        "isha": "Isha",
+        "maghrib": "Magreb",
+        "sunrise": "nascer do sol"
+    },
+    "recently-read": "Lidos recentemente",
+    "tab": {
+        "bookmarks": "Favoritos",
+        "popular": "Popular"
+    },
+    "voice": {
+        "trigger": "Acesso rápido a qualquer coisa"
+    },
+    "welcome": {
+        "desc": "Estamos ativamente adicionando novos recursos e promovendo mudanças. Se você tiver algum problema, forneça feedback.",
+        "feedback-cta": "Dar uma resposta",
+        "join-cta": "Junte-se à comunidade Discord",
+        "title": "Bem-vindo ao Pré-lançamento Beta do novo Quran.com!"
+    }
+}

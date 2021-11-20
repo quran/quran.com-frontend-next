@@ -1,0 +1,57 @@
+.translationName {
+  font-size: var(--font-size-small);
+}
+
+.translationContainer {
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  em {
+    color: var(--color-success-medium);
+  }
+}
+
+.link {
+  text-decoration: none;
+}
+
+.itemContainer {
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  background-color: var(--color-background-alternative-medium);
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.quranTextContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: ltr;
+}
+
+.quranTextResult {
+  font-size: var(--font-size-xlarge);
+  line-height: var(--line-height-large);
+  direction: rtl;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+}
+
+.verseKey {
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-background-alternative-deep);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+}

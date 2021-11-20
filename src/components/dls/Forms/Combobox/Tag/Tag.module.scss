@@ -1,0 +1,47 @@
+.item {
+  position: relative;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  background: var(--color-background-alternative-medium);
+  border-radius: var(--border-radius-default);
+  user-select: none;
+  margin-inline-end: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: var(--font-size-normal);
+}
+
+.largeItem {
+  font-size: var(--font-size-large);
+}
+
+.itemContent {
+  display: inline-block;
+  margin-inline-end: var(--spacing-micro);
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
+}
+
+.itemRemove {
+  cursor: pointer;
+  svg {
+    width: var(--spacing-xsmall);
+    height: var(--spacing-xsmall);
+  }
+}

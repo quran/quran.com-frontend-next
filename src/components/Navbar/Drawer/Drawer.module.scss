@@ -1,0 +1,115 @@
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+
+.container {
+  background: var(--color-background-default);
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  inset-block: 0;
+  z-index: var(--z-index-header);
+  transition: var(--transition-regular);
+  transition-timing-function: ease-in;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  @include breakpoints.tablet {
+    width: constants.$side-menu-desktop-width;
+  }
+  &.left {
+    inset-inline-start: -100%;
+    @include breakpoints.tablet {
+      inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
+    }
+  }
+  &.right {
+    inset-inline-end: -100%;
+    @include breakpoints.tablet {
+      inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
+    }
+  }
+}
+
+.containerOpen {
+  box-shadow: var(--shadow-normal);
+  transition-timing-function: ease-out;
+  &.left {
+    inset-inline-start: 0;
+  }
+  &.right {
+    inset-inline-end: 0;
+  }
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(
+    100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega)))
+  );
+  @include breakpoints.tablet {
+    min-height: calc(
+      100% - calc(constants.$navbar-height + var(--spacing-small))
+    );
+  }
+  justify-content: space-between;
+}
+
+.bodyContainer {
+  margin-block-start: constants.$navbar-height;
+  padding-block-start: var(--spacing-small);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+}
+
+.bodyWithBottomPadding {
+  padding-block-end: calc(4 * var(--spacing-large));
+}
+
+.navigationBodyContainer {
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+.header {
+  font-size: var(--font-size-large);
+  width: 100%;
+  background-color: var(--color-background-default);
+  position: fixed;
+  height: constants.$navbar-height;
+  border-bottom: 1px var(--color-borders-hairline) solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include breakpoints.tablet {
+    width: constants.$side-menu-desktop-width;
+  }
+  z-index: var(--z-index-header);
+}
+
+.headerContentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: var(--spacing-xsmall);
+  margin-inline-end: var(--spacing-xsmall);
+}
+
+.hiddenButtonHeader {
+  border-bottom: 0;
+}
+
+.hiddenButtonHeaderContentContainer {
+  align-items: flex-end;
+}

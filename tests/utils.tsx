@@ -1,11 +1,10 @@
 import React from 'react';
-import { render as rtlRender } from '@testing-library/react';
-import { ThemeProvider } from 'styled-components';
-import { theme as themeObj } from '../src/styles/theme';
 
-function render(ui, { theme = themeObj, ...options } = {}) {
+import { render as rtlRender } from '@testing-library/react';
+
+function render(ui, { ...options } = {}) {
   function Wrapper({ children }) {
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+    return <>{children}</>;
   }
 
   return rtlRender(ui, { wrapper: Wrapper, ...options });

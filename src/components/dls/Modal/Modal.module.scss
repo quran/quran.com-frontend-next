@@ -1,0 +1,35 @@
+@use "src/styles/breakpoints";
+@use "src/components/dls/Modal/constants";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.overlay {
+  background-color: var(--color-background-backdrop);
+  &.invertedOverlay {
+    background-color: var(--color-background-lighten);
+  }
+  position: fixed;
+  inset: 0;
+}
+.overlay[data-state="open"] {
+  animation: fadeIn constants.$animationDuration constants.$animationEasing;
+}
+.overlay[data-state="closed"] {
+  animation: fadeOut constants.$animationDuration constants.$animationEasing;
+}

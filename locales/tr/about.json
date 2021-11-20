@@ -1,0 +1,18 @@
+{
+    "credits": {
+        "desc": "Bu web sitesi birkaç gönüllü tarafından oluşturuldu ve Allah'ın izniyle (O'na hamd olsun) ve çevrimiçi açık kaynak Müslüman topluluğunun yardımıyla mümkün oldu. Veri kaynakları arasında <0> Tanzil <\/0> , <1> KuranComplex <\/1> , <2> Collin Fair <\/2> 'nin ses segmentleri üzerindeki çalışmaları, <3> KuranEnc <\/3> , <4> Zekr <\/4> ve Çevrimiçi Kuran Projesi.",
+        "lokalize": "Yerelleştirme, üretkenlik ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemi <0> Lokalise <\/0>sayesinde mümkün oldu.",
+        "title": "Kredi"
+    },
+    "main-desc": "Kur'an-ı Kerim, İslam'ın merkezi dini metnidir. Müslümanlar, Kuran'ın insanlık için ilahi rehberlik ve yönlendirme kitabı olduğuna inanırlar ve orijinal Arapça metni Allah'ın (Tanrı) son vahyi olarak kabul ederler. Orijinal Arapça metnin tüm çevirileri bu nedenle orijinal anlamların yorumlarıdır ve bu şekilde benimsenmelidir.",
+    "meccan": {
+        "desc": "Mekke sureleri, İslam geleneğine göre, İslam peygamberi Muhammed ve takipçilerinin Mekke'den Medine'ye (Hicret) hicretinden önce herhangi bir zamanda vahyedilen Kuran'ın kronolojik olarak daha önceki bölümleridir (süreler). Medine sureleri, bu ismin şehrine taşınmasından sonra meydana gelen vahiylerdir.",
+        "surahs": "Mekke Sureleri"
+    },
+    "median": {
+        "desc": "Kuran'ın Medine sureleri veya Medine sureleri, İslami geleneğe göre Muhammed'den sonra Medine'de vahyedilen en son 24 suredir &apos; Mekke'den hicret. Bu sureler, Mekke'deki azınlık konumlarının aksine, Müslüman topluluk daha büyük ve daha gelişmiş olduğunda Allah tarafından nazil olmuştur.",
+        "surahs": "Medine Sureleri"
+    },
+    "questions": "Herhangi bir sorunuz varsa, <0> geri bildirim <\/0> sayfasını ziyaret edebilirsiniz.",
+    "redesign": "Web sitesini kullanıcı dostu bir yaklaşımla yeniden tasarladık. Sureleri taramak için, OKU ve DİNLE sayfasındaki (solda gösterilen) düğmesine tıklayın ve sûreleri başlığa veya sayfaya göre gezinin. İlerleyen sürümlerde daha fazla arama ve ses özelliğini entegre edeceğiz inşaAllah. Web sitesini nasıl daha iyi bir deneyim haline getirebileceğimize dair herhangi bir öneriniz varsa, lütfen <0> bize geri bildirimde bulunmaktan <\/0> çekinmeyin."
+}

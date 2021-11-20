@@ -8,25 +8,25 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://quran.com">
+  <a href="https://alshaafy.com">
     <img src="public/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h1 align="center">The Noble Quran</h1>
+  <h1 align="center">ALSHAAFY</h1>
 
   <p align="center">
     The official source code repository for Quran.com
     <br />
-    <a href="https://join.slack.com/t/quran/shared_invite/zt-fepnm2rp-TDTHcUpmgXQ2lt207pd9MA"><strong>Join the Slack Channel »</strong></a>
+    <a href="https://NBK.NET/"><strong>Join ALSHAAFY community »</strong></a>
     <br />
     <br />
-    <a href="https://quran.com">Visit Quran.com</a>
+    <a href="https://quran.com">Visit ALSHAAFY.COM</a>
     ·
-    <a href="https://github.com/quran/quran.com-frontend-next/issues">Report Bug</a>
+    <a href="https://github.com/odin-code/quran.black/issues">Report Bug</a>
     ·
-    <a href="https://github.com/quran/quran.com-frontend-next/issues">Request Feature</a>
+    <a href="https://github.com/odin-code/quran.black/issues">Request Feature</a>
     •
-    <a href="https://quran.github.io/quran.com-frontend-next/storybook/master">Storybook</a>
+    <a href="https://quran.github.io/odin-code/quran.black/storybook/master">Storybook</a>
   </p>
 </p>
 
@@ -57,9 +57,9 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 The app runs on next.js and will automatically hot reload when you make changes.
 
-### Styling
+### Environment variables
 
-We use `styled-components` as our styling library. When adding a new library (for example, for tooltips), please ensure it uses `styled-components` as the styling library. We want to avoid sending large JS files to our users, so having a mix of styling solutions will not be good. `styled-components` also allows us to code-split and send JS + CSS for what is needed.
+If you have access to a Quran.com associated vercel account, run `vercel env pull`. Otherwise, rename the `env.example` file to  `env.local` and you should be good to go. 
 
 ### DLS (design language system)
 
@@ -71,6 +71,9 @@ Our components are built within Storybook.js. See files with name `.stories.tsx`
 
 [We also display all our components here](https://quran.github.io/quran.com-frontend-next/storybook/master).
 
+### Recommended Extensions
+
+Check `.vscode/extensions.json` for recommended VSCode Extensions
 ### Typescript
 
 We chose typescript as the language of choice of it's ease of type-safety. Please create types where you see fit.
@@ -82,6 +85,9 @@ If you are interested to help out, please look at issues on the Github repo. Thi
 ### Filing bugs
 
 Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new).
+
+### Community 
+<a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -97,3 +103,11 @@ Thank you for taking time to file a bug! We'd appreciate your help on fixing it 
 [license-shield]: https://img.shields.io/github/license/quran/quran.com-frontend-next?style=for-the-badge
 [license-url]: https://github.com/quran/quran.com-frontend-next/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
+
+### Credits
+
+- Localization was made possible by the help of [Lokalise](https://lokalise.com/) which is a computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/15169499/139687128-15ed6189-6be2-44bf-9173-75cce317d546.png" width="400">
+</p>

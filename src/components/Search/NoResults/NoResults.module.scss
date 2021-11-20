@@ -1,0 +1,39 @@
+.container {
+  margin-block-start: var(--spacing-large);
+  margin-inline-end: var(--spacing-large);
+  margin-block-end: var(--spacing-large);
+  margin-inline-start: var(--spacing-large);
+}
+
+.mainBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.iconContainer {
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: var(--spacing-large);
+  padding-inline-end: var(--spacing-large);
+  color: var(--color-secondary-medium);
+}
+
+.iconContainer svg {
+  width: calc(2 * var(--spacing-large));
+  height: calc(2 * var(--spacing-large));
+}
+
+.mainMessage {
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  line-height: normal;
+}
+
+.secondaryMessage {
+  font-size: var(--font-size-normal);
+}

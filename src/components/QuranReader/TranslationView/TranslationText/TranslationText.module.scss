@@ -1,0 +1,40 @@
+@use "src/styles/utility";
+@use "src/components/QuranReader/TranslationView/TranslationText/footnote";
+
+.text {
+  letter-spacing: 0;
+  line-height: normal;
+  padding-block-end: var(--spacing-micro);
+  @include footnote.footnote-styling;
+}
+
+@include utility.generate-font-sizes("translation");
+
+.ltr {
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: left;
+  direction: ltr;
+}
+
+.rtl {
+  direction: rtl;
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: right;
+}
+
+.urdu {
+  font-family: "nafees";
+}
+
+.kurdish {
+  font-family: "DroidArabicNaskh";
+}
+
+.divehi {
+  font-family: "divehi";
+}
+
+.translationName {
+  color: var(--color-text-faded);
+  font-size: var(--font-size-small);
+}

@@ -1,0 +1,75 @@
+@use "src/styles/constants";
+@use "src/styles/utility";
+
+.container {
+  max-width: 80%;
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-small);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  border-bottom: 1px solid var(--color-primary-medium);
+}
+.tafsirName {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xxsmall);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  border-top: 1px solid var(--color-primary-medium);
+  border-bottom: 1px solid var(--color-primary-medium);
+}
+
+.tafsirContainer {
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  letter-spacing: 0;
+  line-height: normal;
+  direction: ltr;
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: left;
+  p {
+    margin-block-end: var(--spacing-small);
+  }
+  br {
+    content: "";
+    margin-block-start: var(--spacing-small);
+    margin-inline-end: var(--spacing-small);
+    margin-block-end: var(--spacing-small);
+    margin-inline-start: var(--spacing-small);
+    display: block;
+  }
+  h2 {
+    font-weight: var(--font-weight-bold);
+    margin-block-end: var(--spacing-small);
+  }
+  * {
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  // target any item which has a class that contains arabic
+  *[class~="arabic"] {
+    direction: rtl;
+    /* stylelint-disable-next-line csstools/use-logical */
+    text-align: right;
+    margin-block-end: var(--spacing-small);
+  }
+  // target any item which has a class that contains uthmani
+  *[class~="uthmani"] {
+    font-family: meQuran;
+  }
+}
+
+.rtl {
+  direction: rtl;
+  /* stylelint-disable-next-line csstools/use-logical */
+  text-align: right;
+}
+
+@include utility.generate-font-sizes("tafsir");

@@ -1,0 +1,45 @@
+{
+    "footer": {
+        "rights": "Alle rechten voorbehouden",
+        "title": "Lees, bestudeer en leer de Edele Koran."
+    },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharram",
+            "10": "Shawwal",
+            "11": "Dhu al-Qida",
+            "2": "Safari",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Jumada I",
+            "6": "Jumada Akhira",
+            "7": "Rajab",
+            "8": "Sha'ban",
+            "9": "Ramadan"
+        }
+    },
+    "no-bookmarks": "U heeft nog geen bladwijzers",
+    "prayer-names": {
+        "asr": "asr",
+        "dhuhr": "Dhuhr",
+        "fajr": "Fajr",
+        "isha": "Isha",
+        "maghrib": "Maghreb",
+        "sunrise": "zonsopkomst"
+    },
+    "recently-read": "Recent gelezen",
+    "tab": {
+        "bookmarks": "Bladwijzers",
+        "popular": "Populair"
+    },
+    "voice": {
+        "trigger": "Snelle toegang tot alles"
+    },
+    "welcome": {
+        "desc": "We zijn actief bezig met het toevoegen van nieuwe functies en het doorvoeren van veranderingen. Als u problemen ondervindt, geef dan alstublieft feedback.",
+        "feedback-cta": "Geef feedback",
+        "join-cta": "Word lid van de Discord-gemeenschap",
+        "title": "Welkom bij de Pre-Release Beta van de nieuwe Quran.com!"
+    }
+}

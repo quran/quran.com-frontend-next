@@ -1,0 +1,44 @@
+.container[dir="rtl"][data-auto-flip-icon="true"] {
+  > svg {
+    transform: scaleX(-1);
+  }
+}
+
+.defaultColor {
+  > svg path {
+    fill: var(--color-primary-medium);
+  }
+}
+.secondaryColor {
+  > svg path {
+    fill: var(--color-secondary-medium);
+  }
+}
+
+.xsmallIcon {
+  > svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.smallIcon {
+  > svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.mediumIcon {
+  > svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.largeIcon {
+  > svg {
+    width: 36px;
+    height: 36px;
+  }
+}

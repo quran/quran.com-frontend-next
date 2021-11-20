@@ -1,0 +1,55 @@
+$verseLinkMinWidth: calc(6 * var(--spacing-mega));
+.sessionsContainer {
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+.sessionsHeader {
+  margin-block-end: var(--spacing-xsmall);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--flow-side-spacing, 0);
+  padding-inline-end: var(--flow-side-spacing, 0);
+
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-large);
+  & > span {
+    margin-inline-end: var(--spacing-xxsmall);
+  }
+}
+
+.verseLinksContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 0;
+  }
+  & > .verseLink {
+    min-width: $verseLinkMinWidth;
+  }
+
+  & > .verseLink:first-child {
+    margin-inline-start: var(--flow-side-spacing, 0);
+  }
+  & > .verseLink:last-child {
+    margin-inline-end: var(--flow-side-spacing, 0);
+  }
+  & > .verseLink + .verseLink {
+    margin-inline-start: var(--spacing-small);
+  }
+}
+
+.button {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
+  > span {
+    width: max-content;
+  }
+}

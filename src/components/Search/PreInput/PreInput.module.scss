@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.popularSearchesContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-micro);
+  padding-block-end: var(--spacing-large);
+  width: 100%;
+}

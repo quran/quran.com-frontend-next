@@ -1,0 +1,686 @@
+{
+    "1": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Fatihah",
+        "versesCount": 7,
+        "translatedName": "সূচনা"
+    },
+    "2": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Baqarah",
+        "versesCount": 286,
+        "translatedName": "বকনা-বাছুর"
+    },
+    "3": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Ali 'Imran",
+        "versesCount": 200,
+        "translatedName": "ইমরানের পরিবার"
+    },
+    "4": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "An-Nisa",
+        "versesCount": 176,
+        "translatedName": "নারী"
+    },
+    "5": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Ma'idah",
+        "versesCount": 120,
+        "translatedName": "খাদ্য পরিবেশিত টেবিল"
+    },
+    "6": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-An'am",
+        "versesCount": 165,
+        "translatedName": "গৃহপালিত পশু"
+    },
+    "7": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-A'raf",
+        "versesCount": 206,
+        "translatedName": "উচু স্থান"
+    },
+    "8": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Anfal",
+        "versesCount": 75,
+        "translatedName": "যুদ্ধ-লব্ধ ধনসম্পদ"
+    },
+    "9": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Tawbah",
+        "versesCount": 129,
+        "translatedName": "অনুশোচনা"
+    },
+    "10": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Yunus",
+        "versesCount": 109,
+        "translatedName": "নবী ইউনুস"
+    },
+    "11": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Hud",
+        "versesCount": 123,
+        "translatedName": "নবী হুদ"
+    },
+    "12": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Yusuf",
+        "versesCount": 111,
+        "translatedName": "নবী ইউসুফ"
+    },
+    "13": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Ar-Ra'd",
+        "versesCount": 43,
+        "translatedName": "বজ্রপাত"
+    },
+    "14": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ibrahim",
+        "versesCount": 52,
+        "translatedName": "নবী ইবরাহীম"
+    },
+    "15": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Hijr",
+        "versesCount": 99,
+        "translatedName": "পাথুরে পাহাড়"
+    },
+    "16": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Nahl",
+        "versesCount": 128,
+        "translatedName": "মৌমাছি"
+    },
+    "17": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Isra",
+        "versesCount": 111,
+        "translatedName": "ইহুদি জাতি"
+    },
+    "18": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Kahf",
+        "versesCount": 110,
+        "translatedName": "গুহা"
+    },
+    "19": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Maryam",
+        "versesCount": 98,
+        "translatedName": "মারইয়াম (ঈসা নবীর মা)"
+    },
+    "20": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Taha",
+        "versesCount": 135,
+        "translatedName": "ত়া হা"
+    },
+    "21": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Anbya",
+        "versesCount": 112,
+        "translatedName": "নবীগণ"
+    },
+    "22": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hajj",
+        "versesCount": 78,
+        "translatedName": "হ়াজ্জ"
+    },
+    "23": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mu'minun",
+        "versesCount": 118,
+        "translatedName": "বিশ্বাসী"
+    },
+    "24": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "An-Nur",
+        "versesCount": 64,
+        "translatedName": "আলো"
+    },
+    "25": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Furqan",
+        "versesCount": 77,
+        "translatedName": "মানদণ্ড"
+    },
+    "26": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Shu'ara",
+        "versesCount": 227,
+        "translatedName": "কবি"
+    },
+    "27": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Naml",
+        "versesCount": 93,
+        "translatedName": "পিঁপড়া"
+    },
+    "28": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qasas",
+        "versesCount": 88,
+        "translatedName": "কাহিনি"
+    },
+    "29": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Ankabut",
+        "versesCount": 69,
+        "translatedName": "মাকড়শা"
+    },
+    "30": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ar-Rum",
+        "versesCount": 60,
+        "translatedName": "রোমান জাতি"
+    },
+    "31": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Luqman",
+        "versesCount": 34,
+        "translatedName": "এক জ্ঞানী ব্যাক্তি"
+    },
+    "32": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "As-Sajdah",
+        "versesCount": 30,
+        "translatedName": "সিজদা"
+    },
+    "33": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Ahzab",
+        "versesCount": 73,
+        "translatedName": "জোট"
+    },
+    "34": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Saba",
+        "versesCount": 54,
+        "translatedName": "রানী সাবা/শেবা"
+    },
+    "35": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Fatir",
+        "versesCount": 45,
+        "translatedName": "আদি স্রষ্টা"
+    },
+    "36": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ya-Sin",
+        "versesCount": 83,
+        "translatedName": "ইয়াসীন"
+    },
+    "37": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "As-Saffat",
+        "versesCount": 182,
+        "translatedName": "সারিবদ্ধভাবে দাঁড়ানো"
+    },
+    "38": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Sad",
+        "versesCount": 88,
+        "translatedName": "আরবি বর্ণ সাদ"
+    },
+    "39": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Az-Zumar",
+        "versesCount": 75,
+        "translatedName": "দলবদ্ধ জনতা"
+    },
+    "40": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ghafir",
+        "versesCount": 85,
+        "translatedName": "ক্ষমাকারী"
+    },
+    "41": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Fussilat",
+        "versesCount": 54,
+        "translatedName": "সুস্পষ্ট বিবরণ"
+    },
+    "42": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Shuraa",
+        "versesCount": 53,
+        "translatedName": "পরামর্শ"
+    },
+    "43": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Az-Zukhruf",
+        "versesCount": 89,
+        "translatedName": "সোনাদানা"
+    },
+    "44": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ad-Dukhan",
+        "versesCount": 59,
+        "translatedName": "ধোঁয়া"
+    },
+    "45": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Jathiyah",
+        "versesCount": 37,
+        "translatedName": "নতজানু"
+    },
+    "46": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ahqaf",
+        "versesCount": 35,
+        "translatedName": "বালুর পাহাড়"
+    },
+    "47": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Muhammad",
+        "versesCount": 38,
+        "translatedName": "নবী মুহাম্মদ"
+    },
+    "48": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Fath",
+        "versesCount": 29,
+        "translatedName": "বিজয়"
+    },
+    "49": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hujurat",
+        "versesCount": 18,
+        "translatedName": "আবাস"
+    },
+    "50": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Qaf",
+        "versesCount": 45,
+        "translatedName": "কাফ"
+    },
+    "51": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Adh-Dhariyat",
+        "versesCount": 60,
+        "translatedName": "বিক্ষেপকারী বাতাস"
+    },
+    "52": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Tur",
+        "versesCount": 49,
+        "translatedName": "পাহাড়"
+    },
+    "53": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Najm",
+        "versesCount": 62,
+        "translatedName": "তারা"
+    },
+    "54": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qamar",
+        "versesCount": 55,
+        "translatedName": "চাঁদ"
+    },
+    "55": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Ar-Rahman",
+        "versesCount": 78,
+        "translatedName": "পরম করুণাময়"
+    },
+    "56": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Waqi'ah",
+        "versesCount": 96,
+        "translatedName": "নিশ্চিত ঘটনা"
+    },
+    "57": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hadid",
+        "versesCount": 29,
+        "translatedName": "লোহা"
+    },
+    "58": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Mujadila",
+        "versesCount": 22,
+        "translatedName": "অনুযোগকারিণী"
+    },
+    "59": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hashr",
+        "versesCount": 24,
+        "translatedName": "সমাবেশ"
+    },
+    "60": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Mumtahanah",
+        "versesCount": 13,
+        "translatedName": "নারী, যাকে পরীক্ষা করা হবে"
+    },
+    "61": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "As-Saf",
+        "versesCount": 14,
+        "translatedName": "সারিবদ্ধ সৈন্যদল"
+    },
+    "62": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Jumu'ah",
+        "versesCount": 11,
+        "translatedName": "সম্মেলন/শুক্রবার"
+    },
+    "63": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Munafiqun",
+        "versesCount": 11,
+        "translatedName": "ভণ্ড বিশ্বাসী"
+    },
+    "64": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Taghabun",
+        "versesCount": 18,
+        "translatedName": "মোহ অপসারণ"
+    },
+    "65": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Talaq",
+        "versesCount": 12,
+        "translatedName": "তালাক"
+    },
+    "66": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Tahrim",
+        "versesCount": 12,
+        "translatedName": "নিষিদ্ধকরণ"
+    },
+    "67": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mulk",
+        "versesCount": 30,
+        "translatedName": "সার্বভৌম কর্তৃত্ব"
+    },
+    "68": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qalam",
+        "versesCount": 52,
+        "translatedName": "কলম"
+    },
+    "69": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Haqqah",
+        "versesCount": 52,
+        "translatedName": "নিশ্চিত সত্য"
+    },
+    "70": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ma'arij",
+        "versesCount": 44,
+        "translatedName": "উন্নয়নের সোপান"
+    },
+    "71": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Nuh",
+        "versesCount": 28,
+        "translatedName": "নবী নূহ"
+    },
+    "72": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Jinn",
+        "versesCount": 28,
+        "translatedName": "জিন সম্প্রদায়"
+    },
+    "73": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Muzzammil",
+        "versesCount": 20,
+        "translatedName": "বস্ত্রাচ্ছাদনকারী"
+    },
+    "74": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Muddaththir",
+        "versesCount": 56,
+        "translatedName": "পোশাক পরিহিত"
+    },
+    "75": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qiyamah",
+        "versesCount": 40,
+        "translatedName": "পুনরুত্থান"
+    },
+    "76": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Insan",
+        "versesCount": 31,
+        "translatedName": "মানবজাতি"
+    },
+    "77": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mursalat",
+        "versesCount": 50,
+        "translatedName": "প্রেরিত পুরুষ"
+    },
+    "78": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Naba",
+        "versesCount": 40,
+        "translatedName": "মহাসংবাদ"
+    },
+    "79": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Nazi'at",
+        "versesCount": 46,
+        "translatedName": "প্রচেষ্টাকারী"
+    },
+    "80": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "'Abasa",
+        "versesCount": 42,
+        "translatedName": "সে ভ্রু কুঁচকালো"
+    },
+    "81": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Takwir",
+        "versesCount": 29,
+        "translatedName": "অন্ধকারাচ্ছন্ন"
+    },
+    "82": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Infitar",
+        "versesCount": 19,
+        "translatedName": "বিদীর্ণ করা"
+    },
+    "83": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mutaffifin",
+        "versesCount": 36,
+        "translatedName": "প্রতারণা করা"
+    },
+    "84": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Inshiqaq",
+        "versesCount": 25,
+        "translatedName": "খণ্ড-বিখণ্ডকরণ"
+    },
+    "85": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Buruj",
+        "versesCount": 22,
+        "translatedName": "নক্ষত্রপুঞ্জ"
+    },
+    "86": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Tariq",
+        "versesCount": 17,
+        "translatedName": "রাতের আগন্তুক"
+    },
+    "87": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-A'la",
+        "versesCount": 19,
+        "translatedName": "সর্বোন্নত"
+    },
+    "88": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ghashiyah",
+        "versesCount": 26,
+        "translatedName": "বিহ্বলকর ঘটনা"
+    },
+    "89": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Fajr",
+        "versesCount": 30,
+        "translatedName": "ভোরবেলা"
+    },
+    "90": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Balad",
+        "versesCount": 20,
+        "translatedName": "নগর"
+    },
+    "91": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Shams",
+        "versesCount": 15,
+        "translatedName": "সূর্য"
+    },
+    "92": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Layl",
+        "versesCount": 21,
+        "translatedName": "রাত"
+    },
+    "93": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ad-Duhaa",
+        "versesCount": 11,
+        "translatedName": "পূর্বাহ্নের সুর্যকিরণ"
+    },
+    "94": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Sharh",
+        "versesCount": 8,
+        "translatedName": "বক্ষ প্রশস্তকরণ"
+    },
+    "95": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Tin",
+        "versesCount": 8,
+        "translatedName": "ডুমুর"
+    },
+    "96": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Alaq",
+        "versesCount": 19,
+        "translatedName": "রক্তপিণ্ড"
+    },
+    "97": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qadr",
+        "versesCount": 5,
+        "translatedName": "মহিমান্বিত"
+    },
+    "98": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Bayyinah",
+        "versesCount": 8,
+        "translatedName": "প্রমাণ"
+    },
+    "99": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Az-Zalzalah",
+        "versesCount": 8,
+        "translatedName": "ভূমিকম্প"
+    },
+    "100": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Adiyat",
+        "versesCount": 11,
+        "translatedName": "অভিযানকারী"
+    },
+    "101": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qari'ah",
+        "versesCount": 11,
+        "translatedName": "মহাসংকট"
+    },
+    "102": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Takathur",
+        "versesCount": 8,
+        "translatedName": "প্রাচুর্যের প্রতিযোগিতা"
+    },
+    "103": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Asr",
+        "versesCount": 3,
+        "translatedName": "সময়"
+    },
+    "104": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Humazah",
+        "versesCount": 9,
+        "translatedName": "পরনিন্দাকারী"
+    },
+    "105": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Fil",
+        "versesCount": 5,
+        "translatedName": "হাতি"
+    },
+    "106": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Quraysh",
+        "versesCount": 4,
+        "translatedName": "কুরাইশ গোত্র"
+    },
+    "107": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ma'un",
+        "versesCount": 7,
+        "translatedName": "সাহায্য সহায়তা"
+    },
+    "108": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Kawthar",
+        "versesCount": 3,
+        "translatedName": "কাউসার/প্রাচুর্য"
+    },
+    "109": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Kafirun",
+        "versesCount": 6,
+        "translatedName": "অবিশ্বাসী"
+    },
+    "110": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "An-Nasr",
+        "versesCount": 3,
+        "translatedName": "সাহায্য"
+    },
+    "111": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Masad",
+        "versesCount": 5,
+        "translatedName": "খেজুরের পাকানো (রশি)"
+    },
+    "112": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ikhlas",
+        "versesCount": 4,
+        "translatedName": "আন্তরিকতা"
+    },
+    "113": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Falaq",
+        "versesCount": 5,
+        "translatedName": "নিশিভোর"
+    },
+    "114": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Nas",
+        "versesCount": 6,
+        "translatedName": "মানুষ জাতি"
+    }
+}

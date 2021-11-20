@@ -1,0 +1,193 @@
+{
+    "about": "Rreth Nesh",
+    "audio": {
+        "auto-scroll": {
+            "off": "Joaktiv",
+            "on": "Aktiv",
+            "title": "Lëvizja automatike"
+        },
+        "play": "Luaj Audio",
+        "playback-speed": "Shpejtësia e riprodhimit",
+        "player": {
+            "close": "Mbyll luajtësin e audios",
+            "currently-playing": "Aktualisht jeni duke luajtur",
+            "delay-verse": "Vonesa mes vargjeve",
+            "download": "Shkarko",
+            "mismatch": "Klikoni në \"Start Over\" nëse dëshironi të luani {{currentReadingChapter}} në vend të kësaj",
+            "next-ayah": "Ajeti tjetër",
+            "pause": "Ndalo",
+            "play": "Luaj",
+            "play-range": "Gama e luajtjes",
+            "previous-ayah": "Ajeti i mëparshëm",
+            "repeat-1-verse": "Përsëritni vargun",
+            "repeat-settings": "Përsëritni Cilësimet",
+            "repeat-verse": "Përsëritni çdo varg",
+            "search-verse": "Kërkoni për një varg",
+            "single-verse": "Një varg",
+            "start-over": "Filloje nga e para",
+            "start-playing": "Filloni të luani",
+            "stop-repeating": "Ndalo përsëritjen",
+            "times": "herë",
+            "verses-range": "Gama e vargjeve"
+        },
+        "title": "Audio"
+    },
+    "ayah": "Ajah",
+    "ayahs": "Ajetet",
+    "beta": "Beta",
+    "bookmark": "Shënoni faqeshënues",
+    "bookmarked": "Shënuar si faqeshënues",
+    "both": "te dyja",
+    "cancel": "Anulo",
+    "click-here": "Kliko këtu",
+    "close": "Mbylle",
+    "command-bar": {
+        "navigations": "Lundrimet",
+        "no-nav-results": "Nuk ka rezultate navigimi",
+        "placeholder": "Çfarë doni të lexoni?",
+        "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
+        "recent-navigations": "Lundrimet e fundit",
+        "try-navigating": "Provoni të lundroni në"
+    },
+    "community": {
+        "cta": "Bashkohuni me komunitetin",
+        "header": "Bashkohuni me Komunitetin QDC të ndërtuesve dhe teknologëve muslimanë.",
+        "sub-header": "Regjistrohu për Quran.com Discord për të marrë pjesë dhe për të bashkëpunuar me komunitetin kryesor që ndërton teknologjinë islame.",
+        "title": "Komuniteti"
+    },
+    "continue": "Vazhdoni",
+    "copied": "E kopjuar",
+    "copied-to-clipboard": "Kopjuar në kujtesën e fragmenteve",
+    "copy": "Kopjo",
+    "counter": {
+        "decrease": "Ulje",
+        "increase": "Rrit"
+    },
+    "developers": "Zhvilluesit",
+    "error": {
+        "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
+        "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri."
+    },
+    "feedback": "Feedback",
+    "fonts": {
+        "15_lines": "15 rreshta",
+        "16_lines": "16 rreshta",
+        "code_v1": "Kompleksi Mbreti Fahad V1",
+        "code_v2": "Kompleksi King Fahad V2",
+        "font-size": "Përmasa e germave",
+        "lines": "Linjat",
+        "qcf-desc": "Fontet KPFG ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar dhe nuk mund të kopjohen përmes shfletuesit.",
+        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+        "quran-font": "Fonti i Kuranit",
+        "text_indopak": "IndoPak",
+        "text_uthmani": "Osmani"
+    },
+    "from": "Nga",
+    "help": "Ndihmë",
+    "hizb": "Hizb",
+    "home": "Shtëpi",
+    "input": {
+        "clear": "Qartë"
+    },
+    "juz": "Juz",
+    "loading": "Po ngarkohet",
+    "menu": "Menu",
+    "mobile-apps": "Aplikacionet celulare",
+    "mode": "Modaliteti",
+    "more": "Më shumë",
+    "network": "Rrjeti",
+    "next": "Tjetra",
+    "no": "Nr",
+    "none": "Asnje",
+    "page": "Faqe",
+    "pages": "Faqet",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
+    "powered-by": "Mundësuar nga",
+    "prayer-times": {
+        "calculation-method": "Mënyra e Llogaritjes",
+        "madhab": "medhhebi",
+        "title": "Kohët e lutjes"
+    },
+    "prev": "E mëparshme",
+    "privacy": "Privatësia",
+    "q-reflect": "Kurani Reflekto",
+    "quran-com": "Kurani.com",
+    "reading-preference": {
+        "reading": "Leximi",
+        "translation": "Përkthimi"
+    },
+    "reciter": "Recitues",
+    "remove": "Hiq",
+    "retry": "Provo sërish",
+    "search": {
+        "filters": "Filtrat",
+        "hint": "Provoni të kërkoni për",
+        "jump-to": "Kërce Te",
+        "no-results": "Nuk u gjet asnjë rezultat",
+        "no-results-suggestion": "Nuk gjetëm asnjë rezultat kërkimi që përputhej për \" {{searchQuery}} \". provoni të kërkoni për një fjalë kyçe të ndryshme.",
+        "popular": "Kërkimet popullore",
+        "recent": "Kërkimet e fundit",
+        "results": "rezultatet",
+        "show-all": "Shfaq të gjitha rezultatet",
+        "switch-mode": "Kalo te Kërkimi i Avancuar",
+        "title": "Kërko"
+    },
+    "settings": {
+        "change-reciter": "Ndrysho recituesin",
+        "change-translations": "Ndrysho përkthimet",
+        "reading-experience": "Përvoja e të lexuarit",
+        "reset-cta": "Rivendos cilësimet",
+        "title": "Cilësimet"
+    },
+    "share": "Shpërndaje",
+    "shared": "Lidhja është kopjuar në kujtesën e fragmenteve!",
+    "sitemap": "Harta e faqes",
+    "sort": {
+        "ascending": "Në ngjitje",
+        "by": "Ndaj sipas",
+        "descending": "Duke zbritur"
+    },
+    "style": "Stili",
+    "surah": "Surja",
+    "tafsir": {
+        "font-size": "Madhësia e shkronjave Tafsir",
+        "surah": "Surja Tefsir",
+        "title": "Tefsir"
+    },
+    "tarteel": {
+        "app": "Aplikacioni Tarteel",
+        "desc": "kërkimi me zë kuranor",
+        "learn": "mësoni se si të përdorni kërkimin me zë",
+        "name": "Tarteel.ai"
+    },
+    "theme": "Tema",
+    "themes": {
+        "dark": "E errët",
+        "light": "Drita",
+        "sepia": "Sepia",
+        "system": "Sistemi",
+        "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë\/errësirë"
+    },
+    "to": "te",
+    "tooltip": "Këshillë mjeti",
+    "translation": "Përkthimi",
+    "translations": "Përkthime",
+    "transliteration": "Transliterimi",
+    "type": "Lloji",
+    "verse": "Ajeti",
+    "view": "Pamje",
+    "voice": {
+        "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
+        "error": "Nje gabim ka ndodhur.Ju lutemi, provojeni perseri me vone. Ose shkarkoni",
+        "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
+        "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
+        "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet."
+    },
+    "wbw": "Fjalë Për Fjalë",
+    "word-click": {
+        "no-audio": "Nuk ka audio",
+        "play-audio": "Luaj Audio",
+        "title": "Klikoni në fjalë"
+    },
+    "yes": "po"
+}

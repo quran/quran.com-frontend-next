@@ -1,74 +1,100 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { QuranFont } from 'src/components/QuranReader/types';
 
-const FONT_SCALING_FACTOR = 1.1;
+import { RootState } from 'src/redux/RootState';
+import resetSettings from 'src/redux/slices/reset-settings';
+import { MushafLines, QuranFont } from 'types/QuranReader';
+
+export const MAXIMUM_FONT_STEP = 5;
+export const MINIMUM_FONT_STEP = 1;
 
 export type QuranReaderStyles = {
-  translationFontSize: number;
-  quranTextFontSize: number;
-  quranTextLineHeight: number;
-  quranTextLetterSpacing: number;
+  tafsirFontScale: number;
+  translationFontScale: number;
+  quranTextFontScale: number;
   quranFont: QuranFont;
+  mushafLines: MushafLines;
 };
 
-const initialState: QuranReaderStyles = {
+export const initialState: QuranReaderStyles = {
   // the base sizes in rem
-  translationFontSize: 1,
-  quranTextFontSize: 2,
-  quranTextLineHeight: 3,
-  quranTextLetterSpacing: 0,
-  quranFont: QuranFont.Uthmani,
+  tafsirFontScale: 3,
+  quranTextFontScale: 3,
+  translationFontScale: 3,
+  quranFont: QuranFont.QPCHafs,
+  mushafLines: MushafLines.SixteenLines,
 };
 
 export const quranReaderStylesSlice = createSlice({
   name: 'quranReaderStyles',
   initialState,
   reducers: {
-    increaseTranslationTextSize: (state) => {
-      return {
-        ...state,
-        translationFontSize: state.translationFontSize * FONT_SCALING_FACTOR,
-      };
-    },
-    increaseQuranTextSize: (state) => {
-      return {
-        ...state,
-        quranTextFontSize: state.quranTextFontSize * FONT_SCALING_FACTOR,
-        quranTextLineHeight: state.quranTextLineHeight * FONT_SCALING_FACTOR,
-        quranTextLetterSpacing: state.quranTextLetterSpacing * FONT_SCALING_FACTOR,
-      };
-    },
-    decreaseTranslationTextSize: (state) => {
-      return {
-        ...state,
-        translationFontSize: state.translationFontSize / FONT_SCALING_FACTOR,
-      };
-    },
-    decreaseQuranTextSize: (state) => {
-      return {
-        ...state,
-        quranTextFontSize: state.quranTextFontSize / FONT_SCALING_FACTOR,
-        quranTextLineHeight: state.quranTextLineHeight / FONT_SCALING_FACTOR,
-        quranTextLetterSpacing: state.quranTextLetterSpacing / FONT_SCALING_FACTOR,
-      };
-    },
+    increaseQuranTextFontScale: (state) => ({
+      ...state,
+      quranTextFontScale: state.quranTextFontScale + 1,
+    }),
+    decreaseQuranTextFontScale: (state) => ({
+      ...state,
+      quranTextFontScale: state.quranTextFontScale - 1,
+    }),
+    increaseTranslationFontScale: (state) => ({
+      ...state,
+      translationFontScale: state.translationFontScale + 1,
+    }),
+    decreaseTranslationFontScale: (state) => ({
+      ...state,
+      translationFontScale: state.translationFontScale - 1,
+    }),
+    increaseTafsirFontScale: (state) => ({
+      ...state,
+      tafsirFontScale: state.tafsirFontScale + 1,
+    }),
+    decreaseTafsirFontScale: (state) => ({
+      ...state,
+      tafsirFontScale: state.tafsirFontScale - 1,
+    }),
+    setMushafLines: (state, action: PayloadAction<MushafLines>) => ({
+      ...state,
+      mushafLines: action.payload,
+    }),
     setQuranFont: (state: QuranReaderStyles, action: PayloadAction<QuranFont>) => {
-      return {
-        ...state,
-        quranFont: action.payload,
-      };
+      switch (action.payload) {
+        case QuranFont.MadaniV1:
+          return {
+            ...state,
+            quranFont: action.payload,
+          };
+        case QuranFont.IndoPak:
+          return {
+            ...state,
+            quranFont: action.payload,
+          };
+        default:
+          return {
+            ...state,
+            quranFont: action.payload,
+          };
+      }
     },
+  },
+  // reset the state to the initial state
+  // when `reset` action is dispatched
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => initialState);
   },
 });
 
 export const {
-  decreaseQuranTextSize,
-  decreaseTranslationTextSize,
-  increaseQuranTextSize,
-  increaseTranslationTextSize,
+  increaseTafsirFontScale,
+  decreaseTafsirFontScale,
   setQuranFont,
+  increaseQuranTextFontScale,
+  decreaseQuranTextFontScale,
+  increaseTranslationFontScale,
+  decreaseTranslationFontScale,
+  setMushafLines,
 } = quranReaderStylesSlice.actions;
 
-export const selectQuranReaderStyles = (state) => state.quranReaderStyles;
+export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
+export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
 
 export default quranReaderStylesSlice.reducer;

@@ -1,0 +1,20 @@
+.caretIconButton {
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
+  position: absolute;
+  inset-inline-end: var(--spacing-medium);
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  color: var(--color-background-alternative-deep);
+  svg {
+    transition: var(--transition-fast);
+  }
+  cursor: pointer;
+}
+
+.openedCaretIconButton {
+  svg {
+    transform: rotate(180deg);
+    transition: var(--transition-fast);
+  }
+}

@@ -1,0 +1,23 @@
+@use "src/styles/utility";
+
+$images-container-width: 17.5rem;
+
+.container {
+  background: var(--color-background-alternative-medium);
+}
+
+.centerHorizontally {
+  @include utility.center-horizontally;
+  width: 100%;
+}
+
+.imagesContainer {
+  display: flex;
+  max-width: $images-container-width;
+  justify-content: space-between;
+  margin-block-start: auto;
+  margin-inline-end: auto;
+  margin-block-end: auto;
+  margin-inline-start: auto;
+  padding-block: var(--spacing-xxsmall) var(--spacing-mega);
+}

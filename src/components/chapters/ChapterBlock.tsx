@@ -1,72 +1,43 @@
 import React from 'react';
-import styled from 'styled-components';
-import Link from 'next-translate/Link';
-import ChapterType from 'types/ChapterType';
-import ChapterIcon from './ChapterIcon';
 
-const Item = styled.li`
-  list-style: none;
-  margin-bottom: ${({ theme }) => theme.spacing.large};
+import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 
-  &:hover {
-    background: #f1f1f1;
-  }
-`;
+import styles from './ChapterBlock.module.scss';
+import ChapterIconContainer from './ChapterIcon/ChapterIconContainer';
 
-const NameArabic = styled.div`
-  font-size: ${(props) => props.theme.fontSizes.jumbo};
-  margin-bottom: ${({ theme }) => theme.spacing.medium};
-  color: ${({ theme }) => theme.colors.text.default};
-`;
-
-const Number = styled.p`
-  margin: 0;
-  color: ${({ theme }) => theme.colors.primary.medium};
-`;
-
-const NameContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding-left: ${(props) => props.theme.spacing.small};
-`;
-
-const NameEnglish = styled.div`
-  font-size: ${(props) => props.theme.fontSizes.normal};
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.colors.primary.medium};
-`;
-
-const StyledLink = styled.a`
-  display: block;
-  padding: ${(props) => props.theme.spacing.xsmall} ${(props) => props.theme.spacing.xsmall};
-  text-decoration: none;
-`;
-
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-`;
+import Chapter from 'types/Chapter';
 
 type Props = {
-  chapter: ChapterType;
+  chapter: Chapter;
 };
 
-const ChapterBlock: React.SFC<Props> = ({ chapter }: Props) => (
-  <Item key={chapter.id}>
-    <Link as={`/${chapter.id}`} href="/[chapterId]" passHref>
-      <StyledLink>
-        <Container>
-          <Number>{chapter.chapterNumber}</Number>
-          <NameContainer>
-            <NameArabic>{chapter.nameSimple}</NameArabic>
-            <NameEnglish>{chapter.translatedName.name}</NameEnglish>
-          </NameContainer>
-          <ChapterIcon id={String(chapter.id)} />
-        </Container>
-      </StyledLink>
-    </Link>
-  </Item>
-);
+const ChapterBlock: React.FC<Props> = ({ chapter }: Props) => {
+  const { t } = useTranslation('common');
+  return (
+    <div key={chapter.id} className={styles.item}>
+      <Link as={`/${chapter.id}`} href="/[chapterId]" passHref>
+        <a className={styles.link}>
+          <div className={styles.container}>
+            <div className={classNames(styles.leftContainer, styles.sectionContainer)}>
+              <p className={styles.number}>{chapter.id}</p>
+              <div className={styles.detailsContainer}>
+                <div className={styles.nameArabic}>{chapter.transliteratedName}</div>
+                <div className={styles.nameTranslated}>{chapter.translatedName}</div>
+              </div>
+            </div>
+            <div className={classNames(styles.detailsContainer, styles.sectionContainer)}>
+              <ChapterIconContainer chapterId={String(chapter.id)} />
+              <p className={styles.numberOfVerses}>
+                {chapter.versesCount} {t('ayahs')}
+              </p>
+            </div>
+          </div>
+        </a>
+      </Link>
+    </div>
+  );
+};
 
 export default ChapterBlock;

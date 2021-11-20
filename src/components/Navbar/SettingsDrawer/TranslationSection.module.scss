@@ -1,0 +1,8 @@
+.container {
+  min-height: calc(4 * var(--spacing-mega));
+}
+.changeReciterButtonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: var(--spacing-xsmall);
+}

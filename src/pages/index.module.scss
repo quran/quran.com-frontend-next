@@ -1,0 +1,49 @@
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+$list-max-width: 80rem;
+
+.pageContainer {
+  padding-block-start: var(--spacing-small);
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+.flow > .flowItem + .flowItem {
+  margin-block-start: var(--spacing-medium);
+}
+
+.flowItem {
+  max-width: $list-max-width;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+
+  @include breakpoints.tablet {
+    width: 80%;
+  }
+
+  --flow-side-spacing: var(--spacing-small);
+  padding-inline-start: var(--flow-side-spacing);
+  padding-inline-end: var(--flow-side-spacing);
+
+  /**
+  * On mobile, a few components can't have padding at parent level.
+  * For example the QuickLinks, Recently Read, etc. Because they are horizontally scrollable
+  * So, we make padding horizontal 0 the parent level, and pass the `--flow-side-spacing` down to children
+  * Those components, will implement their own space/padding based on `--flow-side-padding` value
+  * See RecentReadingSession.module.scss for an implementation example
+  *
+  * For now we only want this to be implemented on mobile, so we make `--flow-side-padding: 0` on tablet and above
+  **/
+  &.fullWidth {
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+
+    @include breakpoints.tablet {
+      --flow-side-spacing: 0;
+    }
+  }
+}

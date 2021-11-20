@@ -1,0 +1,18 @@
+.container {
+  text-align: center;
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  > button {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+  }
+}
+
+.text {
+  text-align: center;
+  padding-block-end: var(--spacing-xsmall);
+}

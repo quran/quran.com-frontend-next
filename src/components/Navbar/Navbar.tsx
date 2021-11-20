@@ -1,23 +1,23 @@
 import React from 'react';
-import { NAVBAR_HEIGHT } from 'src/styles/constants';
-import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+
+import classNames from 'classnames';
+import { useSelector, shallowEqual } from 'react-redux';
+
+import styles from './Navbar.module.scss';
+import NavbarBody from './NavbarBody';
+
 import { selectNavbar } from 'src/redux/slices/navbar';
 
 const Navbar = () => {
-  const { isVisible } = useSelector(selectNavbar);
-  return <StyledNav isVisible={isVisible}>[Placeholder Navbar]</StyledNav>;
+  const { isVisible } = useSelector(selectNavbar, shallowEqual);
+  return (
+    <>
+      <div className={styles.emptySpacePlaceholder} />
+      <nav className={classNames(styles.container, { [styles.hiddenNav]: !isVisible })}>
+        <NavbarBody />
+      </nav>
+    </>
+  );
 };
 
-const StyledNav = styled.nav<{ isVisible: boolean }>`
-  position: relative;
-  height: ${(props) => (props.isVisible ? NAVBAR_HEIGHT : '0')};
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  width: 100%;
-  text-align: center;
-  transition: ${(props) => props.theme.transitions.regular};
-  background: ${(props) => props.theme.colors.background.default};
-  z-index: ${(props) => props.theme.zIndexes.header};
-  border-bottom: 1px black solid;
-`;
 export default Navbar;

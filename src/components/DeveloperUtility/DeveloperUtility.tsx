@@ -1,65 +1,63 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useState } from 'react';
-import { IS_DEVELOPMENT } from 'src/utils/environment';
-import styled from 'styled-components';
-import { BsWrench } from 'react-icons/bs';
-import FontAdjustment from './FontAdjustment';
-import ReadingViewAdjustment from './ReadingViewAdjustment';
-import NotesAdjustment from './NotesAdjustment';
-import AudioPlayerAdjustment from './AudioPlayerAdjustment';
-import NavbarAdjustment from './NavbarAdjustment';
+
+import classNames from 'classnames';
+
+import WrenchIcon from '../../../public/icons/wrench.svg';
+
 import ContextMenuAdjustment from './ContextMenuAdjustment';
+import styles from './DeveloperUtility.module.scss';
+import NavbarAdjustment from './NavbarAdjustment';
+import NotesAdjustment from './NotesAdjustment';
+
+import Separator from 'src/components/dls/Separator/Separator';
 
 /**
  * A set of developer utilities only availble on development environments
+ *
+ * @returns {JSX.Element}
  */
-const DeveloperUtility = () => {
+const DeveloperUtility = (): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  if (!IS_DEVELOPMENT) {
-    return <></>;
-  }
+  // only show the developer utilities if we're in development mode
+  // if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
+  return <></>;
+  // }
 
   if (!isExpanded) {
     return (
-      <Container expanded={false} type="button" onClick={() => setIsExpanded(true)}>
-        <StyledWrench />
-      </Container>
+      <button
+        className={classNames(styles.container)}
+        aria-label="developer-utility"
+        type="button"
+        onClick={() => setIsExpanded(true)}
+      >
+        <WrenchIcon className={styles.wrench} />
+      </button>
     );
   }
 
   return (
-    <Container expanded>
-      <FontAdjustment />
-      <ReadingViewAdjustment />
+    <button
+      className={classNames(styles.container, styles.containerExpanded)}
+      aria-label="developer-utility"
+      type="button"
+    >
+      Developer Utility
+      <div className={styles.separator}>
+        <Separator />
+      </div>
       <NotesAdjustment />
       <NavbarAdjustment />
-      <AudioPlayerAdjustment />
       <ContextMenuAdjustment />
       <div>
-        <button type="button" onClick={() => setIsExpanded(false)}>
+        <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close
         </button>
       </div>
-    </Container>
+    </button>
   );
 };
 
-const Container = styled.button<{ expanded: boolean }>`
-  background: black;
-  color: white;
-  position: fixed;
-  top: calc(${(props) => props.theme.spacing.mega} + ${(props) => props.theme.spacing.medium});
-  right: calc(${(props) => props.theme.spacing.mega} + ${(props) => props.theme.spacing.medium});
-  height: ${(props) => (props.expanded ? 'auto' : `calc(2 *${props.theme.spacing.mega})`)};
-  width: ${(props) => (props.expanded ? 'auto' : `calc(2 *${props.theme.spacing.mega})`)};
-  z-index: 100;
-  border-radius: ${(props) => (props.expanded ? '10%' : ' 100%')};
-  box-shadow: ${(props) => props.theme.shadows.regular};
-  text-align: center;
-`;
-
-const StyledWrench = styled(BsWrench)`
-  height: calc(2 * ${(props) => props.theme.spacing.mega});
-  width: calc(${(props) => props.theme.spacing.large} + ${(props) => props.theme.spacing.xxsmall});
-`;
 export default DeveloperUtility;

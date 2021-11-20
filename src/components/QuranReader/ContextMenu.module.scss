@@ -1,0 +1,95 @@
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+
+.container {
+  background: var(--color-background-alternative-medium);
+  color: var(--color-text-default);
+  text-align: center;
+  position: fixed;
+  z-index: var(--z-index-sticky);
+  transition: var(--transition-regular);
+  width: 100%;
+  inset-block-start: 0;
+  min-height: var(--spacing-medium);
+  @include breakpoints.tablet {
+    inset-block-start: constants.$navbar-height;
+    transition: var(--transition-regular);
+    margin-inline-end: 0;
+  }
+  &:after {
+    display: block;
+    content: "";
+    width: var(--progress);
+    transition: var(--transition-fast);
+    transition-timing-function: linear;
+    height: var(--spacing-micro);
+    background: var(--color-success-deep);
+    position: absolute;
+    inset-block-end: calc(-1 * var(--spacing-micro));
+  }
+}
+
+.hide {
+  display: none;
+  height: 0;
+  visibility: hidden;
+}
+
+.visibleContainer {
+  inset-block-start: constants.$navbar-height;
+}
+
+.expandedContainer {
+  min-height: var(--spacing-mega);
+}
+
+.withVisibleSideBar {
+  @include breakpoints.tablet {
+    margin-inline-end: constants.$notes-side-bar-desktop-width;
+    width: calc(100% - #{constants.$notes-side-bar-desktop-width});
+  }
+}
+
+.chapter {
+  font-size: var(--font-size-large);
+  margin-inline: var(--spacing-large);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.sectionsContainer {
+  width: 100%;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  display: flex;
+  align-items: center;
+}
+
+.section {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.leftSection {
+  margin-inline-end: var(--spacing-mega);
+}
+
+.alignStart {
+  text-align: start;
+}
+
+.alignEnd {
+  text-align: end;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+}

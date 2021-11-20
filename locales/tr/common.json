@@ -1,0 +1,193 @@
+{
+    "about": "Hakkımızda",
+    "audio": {
+        "auto-scroll": {
+            "off": "Kapalı",
+            "on": "Açık",
+            "title": "Otomatik kaydırma"
+        },
+        "play": "Ses Çal",
+        "playback-speed": "Oynatma Hızı",
+        "player": {
+            "close": "Ses Oynatıcıyı Kapat",
+            "currently-playing": "şu anda oynuyorsun",
+            "delay-verse": "Ayet arası gecikme",
+            "download": "İndirmek",
+            "mismatch": "Bunun yerine {{currentReadingChapter}} oynamak istiyorsanız \"Baştan Başla\"yı tıklayın.",
+            "next-ayah": "Sonraki Ayah",
+            "pause": "Duraklat",
+            "play": "Oynamak",
+            "play-range": "oyun aralığı",
+            "previous-ayah": "Önceki Ayet",
+            "repeat-1-verse": "Ayeti Tekrarla",
+            "repeat-settings": "Ayarları Tekrarla",
+            "repeat-verse": "Her ayeti tekrarla",
+            "search-verse": "Bir ayet ara",
+            "single-verse": "Tek Ayet",
+            "start-over": "Baştan başlamak",
+            "start-playing": "Oyuna başla",
+            "stop-repeating": "Tekrarlamayı Durdur",
+            "times": "zamanlar",
+            "verses-range": "ayet aralığı"
+        },
+        "title": "Ses"
+    },
+    "ayah": "Aya",
+    "ayahs": "ayetler",
+    "beta": "Beta",
+    "bookmark": "Yer imi",
+    "bookmarked": "İşaretli",
+    "both": "Her ikisi de",
+    "cancel": "İptal",
+    "click-here": "Buraya Tıkla",
+    "close": "Kapat",
+    "command-bar": {
+        "navigations": "Navigasyonlar",
+        "no-nav-results": "Navigasyon sonucu yok",
+        "placeholder": "Ne okumak istiyorsun?",
+        "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
+        "recent-navigations": "Son gezinmeler",
+        "try-navigating": "gezinmeyi deneyin"
+    },
+    "community": {
+        "cta": "Topluluğa Katılın",
+        "header": "Müslüman inşaatçılar ve teknoloji uzmanlarından oluşan QDC Topluluğuna katılın.",
+        "sub-header": "İslami teknoloji inşa eden önde gelen toplulukla işbirliği yapmak ve katılmak için Kuran.com Discord'a kaydolun.",
+        "title": "Toplum"
+    },
+    "continue": "Devam et",
+    "copied": "kopyalandı",
+    "copied-to-clipboard": "Panoya kopyalandı",
+    "copy": "kopyala",
+    "counter": {
+        "decrease": "Azalmak",
+        "increase": "Arttırmak"
+    },
+    "developers": "geliştiriciler",
+    "error": {
+        "general": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
+        "offline": "Bağlantınızı kaybettiniz gibi görünüyor. Lütfen kontrol edip tekrar deneyin."
+    },
+    "feedback": "Geri bildirim",
+    "fonts": {
+        "15_lines": "15 satır",
+        "16_lines": "16 satır",
+        "code_v1": "Kral Fahd Kompleksi V1",
+        "code_v2": "Kral Fahd Kompleksi V2",
+        "font-size": "Yazı Boyutu",
+        "lines": "çizgiler",
+        "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer ve tarayıcı aracılığıyla kopyalanamaz.",
+        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+        "quran-font": "Kuran Yazı Tipi",
+        "text_indopak": "Hint Paketi",
+        "text_uthmani": "Osmanca"
+    },
+    "from": "İtibaren",
+    "help": "Yardım",
+    "hizb": "Hizb",
+    "home": "Ev",
+    "input": {
+        "clear": "Açık"
+    },
+    "juz": "cüz",
+    "loading": "Yükleniyor",
+    "menu": "Menü",
+    "mobile-apps": "Mobil uygulamalar",
+    "mode": "mod",
+    "more": "Daha",
+    "network": "Ağ",
+    "next": "Sonraki",
+    "no": "Numara",
+    "none": "Hiçbiri",
+    "page": "Sayfa",
+    "pages": "Sayfalar",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
+    "powered-by": "Tarafından desteklenmektedir",
+    "prayer-times": {
+        "calculation-method": "Hesaplama yöntemi",
+        "madhab": "mezheb",
+        "title": "İbadet zamanları"
+    },
+    "prev": "Öncesi",
+    "privacy": "Mahremiyet",
+    "q-reflect": "KuranYansıtmak",
+    "quran-com": "Kuran.com",
+    "reading-preference": {
+        "reading": "Okuma",
+        "translation": "Tercüme"
+    },
+    "reciter": "okuyucu",
+    "remove": "Kaldırmak",
+    "retry": "yeniden dene",
+    "search": {
+        "filters": "Filtreler",
+        "hint": "Aramayı deneyin",
+        "jump-to": "Atlamak",
+        "no-results": "Sonuç bulunamadı",
+        "no-results-suggestion": "{{searchQuery}} \" için eşleşen bir arama sonucu bulamadık. farklı bir anahtar kelime aramayı deneyin.",
+        "popular": "Popüler aramalar",
+        "recent": "Son aramalar",
+        "results": "Sonuçlar",
+        "show-all": "Tüm sonuçları göster",
+        "switch-mode": "Gelişmiş Aramaya Geç",
+        "title": "Arama"
+    },
+    "settings": {
+        "change-reciter": "Okuyucuyu Değiştir",
+        "change-translations": "Çevirileri Değiştir",
+        "reading-experience": "Okuma Deneyimi",
+        "reset-cta": "Ayarları Sıfırla",
+        "title": "Ayarlar"
+    },
+    "share": "Paylaş",
+    "shared": "Bağlantı panoya kopyalandı!",
+    "sitemap": "Site Haritası",
+    "sort": {
+        "ascending": "artan",
+        "by": "Göre sırala",
+        "descending": "Azalan"
+    },
+    "style": "stil",
+    "surah": "sure",
+    "tafsir": {
+        "font-size": "tefsir yazı tipi boyutu",
+        "surah": "Tefsir Suresi",
+        "title": "tefsir"
+    },
+    "tarteel": {
+        "app": "Tarteel uygulaması",
+        "desc": "kuran sesli arama",
+        "learn": "sesli aramayı nasıl kullanacağınızı öğrenin",
+        "name": "Tarteel.ai"
+    },
+    "theme": "Tema",
+    "themes": {
+        "dark": "Karanlık",
+        "light": "Işık",
+        "sepia": "Sepya",
+        "system": "sistem",
+        "system-desc": "Sistem teması, aydınlık\/karanlık modu ayarlarınıza otomatik olarak uyar"
+    },
+    "to": "NS",
+    "tooltip": "Araç ipucu",
+    "translation": "Tercüme",
+    "translations": "Çeviriler",
+    "transliteration": "Harf çevirisi",
+    "type": "Tip",
+    "verse": "ayet",
+    "view": "görüş",
+    "voice": {
+        "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
+        "error": "Bir hata oluştu, lütfen tekrar deneyin. Ya da indirin",
+        "no-permission": "Mikrofon izinlerini etkinleştirmemişsiniz gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin veya",
+        "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin veya",
+        "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir."
+    },
+    "wbw": "Kelime kelime",
+    "word-click": {
+        "no-audio": "Ses yok",
+        "play-audio": "Ses Çal",
+        "title": "Kelime Tıklaması"
+    },
+    "yes": "Evet"
+}

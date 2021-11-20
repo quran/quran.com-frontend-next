@@ -1,10 +1,13 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import { selectContextMenu, setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 
 const ContextMenuAdjustment = () => {
   const dispatch = useDispatch();
-  const { isExpanded } = useSelector(selectContextMenu);
+  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   return (
     <div>
       Context Menu{' '}

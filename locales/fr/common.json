@@ -1,0 +1,193 @@
+{
+    "about": "À propos de nous",
+    "audio": {
+        "auto-scroll": {
+            "off": "Désactivé",
+            "on": "Au",
+            "title": "Défilement automatique"
+        },
+        "play": "Lire le son",
+        "playback-speed": "Vitesse de lecture",
+        "player": {
+            "close": "Fermer le lecteur audio",
+            "currently-playing": "Vous jouez actuellement",
+            "delay-verse": "Délai entre le verset",
+            "download": "Télécharger",
+            "mismatch": "Cliquez sur « Recommencer » si vous souhaitez plutôt {{currentReadingChapter}}",
+            "next-ayah": "Suivant Ayah",
+            "pause": "Pause",
+            "play": "Jouer",
+            "play-range": "Plage de jeu",
+            "previous-ayah": "Précédent Ayah",
+            "repeat-1-verse": "Répéter le verset",
+            "repeat-settings": "Paramètres de répétition",
+            "repeat-verse": "Répétez chaque verset",
+            "search-verse": "Rechercher un verset",
+            "single-verse": "Verset unique",
+            "start-over": "Recommencer",
+            "start-playing": "Commencer à jouer",
+            "stop-repeating": "Arrêter de répéter",
+            "times": "fois",
+            "verses-range": "Gamme de vers"
+        },
+        "title": "l'audio"
+    },
+    "ayah": "Ayah",
+    "ayahs": "Ayahs",
+    "beta": "Bêta",
+    "bookmark": "Signet",
+    "bookmarked": "Marque-page",
+    "both": "Les deux",
+    "cancel": "Annuler",
+    "click-here": "Cliquez ici",
+    "close": "proche",
+    "command-bar": {
+        "navigations": "Navigation",
+        "no-nav-results": "Aucun résultat de navigation",
+        "placeholder": "Que veux-tu lire ?",
+        "powered-by": "Recherche vocale optimisée par Tarteel.ai",
+        "recent-navigations": "Navigations récentes",
+        "try-navigating": "Essayez de naviguer vers"
+    },
+    "community": {
+        "cta": "Rejoindre la communauté",
+        "header": "Rejoignez la communauté QDC de constructeurs et de technologues musulmans.",
+        "sub-header": "Inscrivez-vous sur Quran.com Discord pour participer et collaborer avec la principale technologie islamique de construction de communauté.",
+        "title": "Communauté"
+    },
+    "continue": "Continuer",
+    "copied": "Copié",
+    "copied-to-clipboard": "Copié dans le presse-papier",
+    "copy": "Copie",
+    "counter": {
+        "decrease": "Diminuer",
+        "increase": "Augmenter"
+    },
+    "developers": "Développeurs",
+    "error": {
+        "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
+        "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer."
+    },
+    "feedback": "Retour d'information",
+    "fonts": {
+        "15_lines": "15 lignes",
+        "16_lines": "16 lignes",
+        "code_v1": "Complexe Roi Fahad V1",
+        "code_v2": "Complexe King Fahad V2",
+        "font-size": "Taille de police",
+        "lines": "Lignes",
+        "qcf-desc": "Les polices KPFG offrent une qualité supérieure mais prennent plus de temps à charger et ne peuvent pas être copiées via le navigateur.",
+        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+        "quran-font": "Police du Coran",
+        "text_indopak": "IndoPak",
+        "text_uthmani": "Uthmani"
+    },
+    "from": "De",
+    "help": "Aider",
+    "hizb": "Hizb",
+    "home": "Accueil",
+    "input": {
+        "clear": "Dégager"
+    },
+    "juz": "Juz",
+    "loading": "Chargement",
+    "menu": "Menu",
+    "mobile-apps": "Application mobile",
+    "mode": "Mode",
+    "more": "Suite",
+    "network": "Réseau",
+    "next": "Prochain",
+    "no": "Non",
+    "none": "Rien",
+    "page": "Page",
+    "pages": "Pages",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
+    "powered-by": "Alimenté par",
+    "prayer-times": {
+        "calculation-method": "Méthode de calcul",
+        "madhab": "Madhab",
+        "title": "Horaires de prière"
+    },
+    "prev": "Précédent",
+    "privacy": "Intimité",
+    "q-reflect": "CoranRéfléchir",
+    "quran-com": "Coran.com",
+    "reading-preference": {
+        "reading": "En train de lire",
+        "translation": "Traduction"
+    },
+    "reciter": "Récitant",
+    "remove": "Supprimer",
+    "retry": "Réessayez",
+    "search": {
+        "filters": "Filtres",
+        "hint": "Essayez de rechercher",
+        "jump-to": "Sauter à",
+        "no-results": "Aucun résultat trouvé",
+        "no-results-suggestion": "Nous n'avons trouvé aucun résultat de recherche correspondant pour \" {{searchQuery}} \". essayez de rechercher un mot-clé différent.",
+        "popular": "Recherches populaires",
+        "recent": "Recherches récentes",
+        "results": "résultats",
+        "show-all": "Afficher tous les résultats",
+        "switch-mode": "Passer à la recherche avancée",
+        "title": "Chercher"
+    },
+    "settings": {
+        "change-reciter": "Changer de récitant",
+        "change-translations": "Modifier les traductions",
+        "reading-experience": "Expérience de lecture",
+        "reset-cta": "Réinitialiser les options",
+        "title": "Paramètres"
+    },
+    "share": "Partager",
+    "shared": "Le lien a été copié dans le presse-papiers !",
+    "sitemap": "Plan du site",
+    "sort": {
+        "ascending": "Ascendant",
+        "by": "Trier par",
+        "descending": "Descendant"
+    },
+    "style": "Style",
+    "surah": "Sourate",
+    "tafsir": {
+        "font-size": "Taille de la police Tafsir",
+        "surah": "Sourate Tafsir",
+        "title": "Tafsir"
+    },
+    "tarteel": {
+        "app": "Application Tarteel",
+        "desc": "recherche vocale coranique",
+        "learn": "apprendre à utiliser la recherche vocale",
+        "name": "Tarteel.ai"
+    },
+    "theme": "Thème",
+    "themes": {
+        "dark": "Sombre",
+        "light": "Léger",
+        "sepia": "Sépia",
+        "system": "Système",
+        "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair\/sombre"
+    },
+    "to": "À",
+    "tooltip": "Info-bulle",
+    "translation": "Traduction",
+    "translations": "Traductions",
+    "transliteration": "Translitération",
+    "type": "Taper",
+    "verse": "Verset",
+    "view": "Vue",
+    "voice": {
+        "ask-permission": "Veuillez activer l'autorisation du microphone pour commencer à utiliser la recherche vocale",
+        "error": "Un erreur est survenue, veuillez réessayer plus tard. Ou téléchargez le",
+        "no-permission": "Il semble que vous n'ayez pas activé les autorisations de microphone. Veuillez activer les autorisations du microphone et réessayer ou télécharger le",
+        "not-supported": "Il semble que votre navigateur ne supporte pas le microphone. Veuillez essayer un autre navigateur ou télécharger le",
+        "suggest": "Veuillez commencer à réciter et votre vers apparaîtra."
+    },
+    "wbw": "Mot par mot",
+    "word-click": {
+        "no-audio": "Pas de son",
+        "play-audio": "Lire le son",
+        "title": "Clic sur mot"
+    },
+    "yes": "Oui"
+}

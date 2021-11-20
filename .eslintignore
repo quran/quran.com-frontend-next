@@ -1,2 +1,8 @@
-src/pages/
 build
+storybook-static
+
+# Service Worker Artifacts
+public/workbox-*.js
+public/workbox-*.js.map
+public/sw.js
+public/sw.js.map

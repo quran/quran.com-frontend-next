@@ -1,0 +1,45 @@
+{
+    "footer": {
+        "rights": "Tous les droits sont réservés",
+        "title": "Lisez, étudiez et apprenez le Noble Coran."
+    },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Mouharram",
+            "10": "Shawwal",
+            "11": "Dhu Al Qida",
+            "2": "Safar",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Jumada I",
+            "6": "Joumada Akhira",
+            "7": "Rajab",
+            "8": "Cha'ban",
+            "9": "Ramadan"
+        }
+    },
+    "no-bookmarks": "Vous n'avez pas encore de favoris",
+    "prayer-names": {
+        "asr": "Asr",
+        "dhuhr": "Dhuhr",
+        "fajr": "Fajr",
+        "isha": "Isha",
+        "maghrib": "Maghreb",
+        "sunrise": "lever du soleil"
+    },
+    "recently-read": "Lu récemment",
+    "tab": {
+        "bookmarks": "Signets",
+        "popular": "Populaire"
+    },
+    "voice": {
+        "trigger": "Accès rapide à tout"
+    },
+    "welcome": {
+        "desc": "Nous ajoutons activement de nouvelles fonctionnalités et poussons des changements. Si vous rencontrez des problèmes, merci de nous faire part de vos commentaires.",
+        "feedback-cta": "Fournir une réponse",
+        "join-cta": "Rejoignez la communauté Discord",
+        "title": "Bienvenue dans la bêta de pré-version du nouveau Quran.com !"
+    }
+}

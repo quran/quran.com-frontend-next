@@ -1,0 +1,56 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.itemsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.centerVertically {
+  @include utility.center-vertically;
+}
+
+.leftCTA {
+  display: flex;
+  margin-inline-start: var(--spacing-medium);
+  align-items: center;
+
+  @include breakpoints.tablet {
+    margin-inline-start: var(--spacing-mega);
+  }
+}
+
+.rightCTA {
+  display: flex;
+  margin-inline-end: var(--spacing-medium);
+
+  > button {
+    margin-inline-start: var(--spacing-micro);
+  }
+
+  @include breakpoints.tablet {
+    margin-inline-end: var(--spacing-mega);
+
+    > button {
+      margin-inline-start: var(--spacing-xsmall);
+    }
+  }
+}
+
+.logoWrapper.QIcon {
+  > span > svg {
+    fill: unset;
+    & > path {
+      fill: unset;
+    }
+  }
+
+  &:hover > span > svg {
+    fill: unset;
+    & > path {
+      fill: unset;
+    }
+  }
+}

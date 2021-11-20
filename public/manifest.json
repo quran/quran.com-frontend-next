@@ -1,0 +1,73 @@
+{
+  "name": "Quran.com",
+  "short_name": "Quran.com",
+  "icons": [
+    {
+      "src": "/images/logo/Logo@192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo/Logo@256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/logo/Logo@384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/logo/Logo@512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts" : [
+    {
+      "name": "Surah Al-Mulk",
+      "url": "/67",
+      "description": "Read Surah Al-Mulk",
+      "icons": [{ "src": "/images/logo/Logo@96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Surah Noah",
+      "url": "/71",
+      "description": "Read Surah Noah",
+      "icons": [{ "src": "/images/logo/Logo@96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Surah Al-Kahf",
+      "url": "/18",
+      "description": "Read Surah Al-Kahf",
+      "icons": [{ "src": "/images/logo/Logo@96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Surah Yaseen",
+      "url": "/36",
+      "description": "Read Surah Yaseen",
+      "icons": [{ "src": "/images/logo/Logo@96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.quran.labs.androidquran",
+      "id": "com.quran.labs.androidquran"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/us/app/quran-by-quran-com-qran/id1118663303"
+    }
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["books", "education"],
+  "description": "Quran.com is an open source, un-biased, and non-sectarian source of Quranic study that uncovers the beauty of the Quran for Muslims and Non-Muslims."
+}

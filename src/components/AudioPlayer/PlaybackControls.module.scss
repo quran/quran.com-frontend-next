@@ -1,0 +1,14 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionItem + .actionItem {
+  margin-inline-start: var(--spacing-xsmall);
+  @include breakpoints.desktop {
+    margin-inline-start: var(--spacing-medium);
+  }
+}

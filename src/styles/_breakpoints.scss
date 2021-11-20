@@ -1,0 +1,66 @@
+// For usage see: https://medium.com/codeartisan/breakpoints-and-media-queries-in-scss-46e8f551e2f2
+$breakpoints-mobileS: 320px;
+$breakpoints-mobileM: 375px;
+$breakpoints-mobileL: 425px;
+$breakpoints-tablet: 768px;
+$breakpoints-desktop: 1024px;
+
+@mixin mobileS {
+  @media only screen and (min-width: $breakpoints-mobileS) {
+    @content;
+  }
+}
+
+@mixin smallerThanMobileS {
+  @media only screen and (max-width: $breakpoints-mobileS) {
+    @content;
+  }
+}
+
+@mixin mobileM {
+  @media only screen and (min-width: $breakpoints-mobileM) {
+    @content;
+  }
+}
+
+@mixin smallerThanMobileM {
+  @media only screen and (max-width: $breakpoints-mobileM) {
+    @content;
+  }
+}
+
+@mixin mobileL {
+  @media only screen and (min-width: $breakpoints-mobileL) {
+    @content;
+  }
+}
+
+@mixin smallerThanMobileL {
+  @media only screen and (max-width: $breakpoints-mobileL) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: $breakpoints-tablet) {
+    @content;
+  }
+}
+
+@mixin smallerThanTablet {
+  @media only screen and (max-width: $breakpoints-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $breakpoints-desktop) {
+    @content;
+  }
+}
+
+@mixin smallerThanDesktop {
+  @media only screen and (max-width: $breakpoints-desktop) {
+    @content;
+  }
+}

@@ -1,38 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
-import VerseType from '../../../../types/VerseType';
-import VerseText from '../../Verse/VerseText';
-import Text from '../../dls/Text/Text';
+
+import styles from './TranslationView.module.scss';
+import TranslationViewCell from './TranslationViewCell';
+
+import { QuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import Verse from 'types/Verse';
 
 type TranslationViewProps = {
-  verses: VerseType[];
+  verses: Verse[];
+  quranReaderStyles: QuranReaderStyles;
 };
 
-const TranslationView = ({ verses }: TranslationViewProps) => {
+const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => {
   return (
-    <StyledTranslationView>
+    <div className={styles.container}>
       {verses.map((verse) => (
-        <VerseTextContainer highlight={false} key={verse.id}>
-          <VerseText words={verse.words} />
-          <StyledText>{verse.translations && verse.translations[0]?.text}</StyledText>
-          <hr />
-        </VerseTextContainer>
+        <TranslationViewCell verse={verse} key={verse.id} quranReaderStyles={quranReaderStyles} />
       ))}
-    </StyledTranslationView>
+    </div>
   );
 };
-
-const VerseTextContainer = styled.div<{ highlight: boolean }>`
-  background: ${({ highlight, theme }) => highlight && theme.colors.primary.medium};
-`;
-
-const StyledTranslationView = styled.div`
-  max-width: 100%;
-  margin: ${(props) => props.theme.spacing.medium} auto;
-`;
-
-const StyledText = styled(Text)`
-  letter-spacing: 0;
-`;
 
 export default TranslationView;

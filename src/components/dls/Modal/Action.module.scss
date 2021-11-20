@@ -1,0 +1,33 @@
+@use "src/components/dls/Modal/constants";
+
+.action {
+  flex: 1;
+  border: none;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--color-borders-hairline);
+  font-size: var(--font-size-normal);
+  background-color: inherit;
+  padding-block-start: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  padding-inline-start: var(--spacing-large);
+  padding-inline-end: var(--spacing-large);
+  color: var(--color-text-faded);
+  overflow: hidden;
+  transition: background-color constants.$animationDuration
+    constants.$animationEasing;
+  &:hover {
+    opacity: var(--opacity-75);
+    background-color: var(--color-background-alternative-medium);
+    color: var(--color-text-default);
+  }
+}
+.action:not(:only-child):not(:last-child) {
+  border-inline-end: 1px solid var(--color-borders-hairline);
+}
+.action[disabled] {
+  opacity: var(--opacity-75);
+  cursor: not-allowed;
+  background-color: var(--color-background-alternative-medium);
+  color: var(--color-text-faded);
+}

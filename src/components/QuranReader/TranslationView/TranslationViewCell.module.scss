@@ -1,0 +1,65 @@
+@use "src/styles/breakpoints";
+
+.highlightedContainer {
+  background: var(--color-background-alternative-faded);
+}
+
+.cellContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-block-end: 0;
+}
+.contentContainer {
+  flex: 1;
+  padding-block-start: var(--spacing-medium);
+  position: relative;
+}
+
+.splitView {
+  @include breakpoints.tablet {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    & > .verseTranslationsContainer,
+    & > .arabicVerseContainer {
+      flex: 1;
+    }
+  }
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: space-between;
+  direction: ltr;
+}
+.arabicVerseContainer {
+  padding-block-end: var(--spacing-medium);
+}
+.verseTranslationContainer {
+  padding-block-end: var(--spacing-xsmall);
+}
+.translationContainer {
+  padding-block-end: var(--spacing-xsmall);
+}
+
+.actionContainerLeft,
+.actionContainerRight {
+  display: flex;
+  align-items: center;
+}
+.actionContainerLeft {
+  justify-content: flex-start;
+}
+.actionContainerRight {
+  justify-content: flex-end;
+}
+
+.actionContainerLeft > .actionItem + .actionItem,
+.actionContainerRight > .actionItem + .actionItem {
+  margin-inline-start: var(--spacing-xsmall);
+}

@@ -1,0 +1,18 @@
+{
+    "credits": {
+        "desc": "Kjo faqe interneti u krijua nga disa vullnetarë dhe u bë e mundur me vullnetin e Allahut (Lavdia qoftë mbi të) dhe me ndihmën e komunitetit mysliman me burim të hapur në internet. Burimet e të dhënave përfshijnë <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Puna e Collin Fair <\/2> në segmentet audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> dhe Projekti i Kuranit në internet.",
+        "lokalize": "Lokalizimi u bë i mundur me ndihmën e <0> Lokalise <\/0>cili është një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune të pandërprerë të lokalizimit.",
+        "title": "Kreditë"
+    },
+    "main-desc": "Kurani Fisnik është teksti qendror fetar i Islamit. Myslimanët besojnë se Kur'ani është libri i udhëzimit dhe drejtimit hyjnor për njerëzimin dhe e konsiderojnë tekstin origjinal arab si shpalljen përfundimtare të Allahut (Perëndisë). Kështu, të gjitha përkthimet e tekstit origjinal arab janë interpretime të kuptimeve origjinale dhe duhet të përqafohen si të tilla.",
+    "meccan": {
+        "desc": "Suret mekase janë kapitujt (suret) kronologjikisht të hershëm të Kuranit që, sipas traditës islame, janë shpallur në çdo kohë përpara migrimit të profetit islam Muhamed dhe pasuesve të tij nga Meka në Medine (hixhra). Suret medinase janë ato shpallje që kanë ndodhur pas zhvendosjes në qytetin me atë emër.",
+        "surahs": "Suret mekase"
+    },
+    "median": {
+        "desc": "Suret medinase ose kapitujt medinas të Kuranit janë 24 suret e fundit që, sipas traditës islame, u shpallën në Medine pas Muhamedit &apos; s hixhre nga Meka. Këto sure u shpallën nga Allahu kur komuniteti mysliman ishte më i madh dhe më i zhvilluar, në krahasim me pozitën e tyre pakicë në Mekë.",
+        "surahs": "Suret medinase"
+    },
+    "questions": "Nëse keni ndonjë pyetje, mund të vizitoni faqen <0> komente <\/0> .",
+    "redesign": "Ne kemi ridizajnuar faqen e internetit me një qasje miqësore për përdoruesit. Për të shfletuar suret, klikoni në butonin (tregohet majtas) në faqen LEXO & LISTEN dhe lundroni suren sipas titullit ose faqes. Në përsëritjet e ardhshme, ne do të integrojmë më shumë veçori kërkimi dhe audio inshaAllah. Nëse keni ndonjë sugjerim se si mund ta bëjmë faqen e internetit një përvojë më të mirë, ju lutemi mos hezitoni të <0> na jepni komente <\/0> ."
+}

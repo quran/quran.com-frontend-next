@@ -1,0 +1,24 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+$select-width: calc(6.3 * var(--spacing-small));
+$select-width-mobile: calc(7 * var(--spacing-small));
+
+.container {
+  @include utility.center-vertically;
+
+  margin-inline-start: var(--spacing-xxsmall);
+
+  @include breakpoints.tablet {
+    margin-inline-start: var(--spacing-medium);
+  }
+}
+
+.select {
+  & > select {
+    width: $select-width-mobile;
+    @include breakpoints.tablet {
+      width: $select-width;
+    }
+  }
+}

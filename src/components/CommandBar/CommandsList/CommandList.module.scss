@@ -1,0 +1,55 @@
+$itemHeight: calc(1.5 * var(--spacing-mega));
+.noResult {
+  text-align: center;
+  font-size: var(--font-size-large);
+  color: var(--color-text-faded);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  height: var(--spacing-mega);
+  font-size: var(--font-size-small);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  color: var(--color-text-faded);
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $itemHeight;
+  font-size: var(--font-size-normal);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  cursor: pointer;
+  color: var(--color-text-faded);
+  white-space: nowrap;
+  position: relative;
+  z-index: var(--z-index-default);
+  &.selected {
+    color: var(--color-text-default);
+  }
+}
+
+.highlight {
+  transition: transform var(--transition-fast);
+  margin-block-start: calc(-1 * var(--spacing-xsmall));
+  height: $itemHeight;
+  width: 100%;
+  position: absolute;
+  border-radius: var(--border-radius-rounded);
+  background: var(--color-background-alternative-faint);
+  z-index: var(--z-index-default);
+}
+
+.keyboardInputContainer {
+  flex-direction: row;
+  display: flex;
+}

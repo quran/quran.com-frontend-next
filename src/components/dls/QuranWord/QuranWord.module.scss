@@ -1,0 +1,30 @@
+.container {
+  display: inline-block;
+  cursor: pointer;
+}
+.additionalWordGap + .additionalWordGap {
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.wbwContainer {
+  text-align: center;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+}
+
+.highlighted {
+  color: var(--color-success-medium);
+}
+
+.wbwText {
+  font-size: var(--font-size-small);
+}
+
+.tooltipText {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+}

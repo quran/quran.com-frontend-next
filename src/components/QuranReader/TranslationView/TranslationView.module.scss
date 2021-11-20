@@ -1,0 +1,13 @@
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+
+.container {
+  max-width: 90%;
+  @include breakpoints.tablet {
+    max-width: 80%;
+  }
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}

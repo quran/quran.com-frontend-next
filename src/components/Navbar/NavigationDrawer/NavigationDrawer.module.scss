@@ -1,0 +1,28 @@
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+.leftCTA {
+  display: flex;
+  margin-inline-start: var(--spacing-xsmall);
+}
+
+.rightCTA {
+  display: flex;
+  margin-inline-end: var(--spacing-medium);
+
+  > button {
+    margin-inline-start: var(--spacing-micro);
+  }
+
+  @include breakpoints.tablet {
+    margin-inline-end: var(--spacing-mega);
+
+    > button {
+      margin-inline-start: var(--spacing-xsmall);
+    }
+  }
+}
+
+.centerVertically {
+  @include utility.center-vertically;
+}

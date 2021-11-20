@@ -1,0 +1,81 @@
+@use "./themes/light";
+@use "./themes/dark";
+@use "./themes/sepia";
+@use "./shades";
+
+/** System theme (auto-detects OS light/dark mode), other themes extend this one */
+:root {
+  --spacing-micro: 0.1875rem;
+  --spacing-xxsmall: 0.375rem;
+  --spacing-xsmall: 0.625rem;
+  --spacing-small: 0.8125rem;
+  --spacing-medium: 1rem;
+  --spacing-large: 1.1875rem;
+  --spacing-mega: 2rem;
+
+  --font-size-xsmall-dangerous: 0.6rem;
+  --font-size-small: 0.75rem;
+  --font-size-normal: 1rem;
+  --font-size-large: 1.125rem;
+  --font-size-xlarge: 1.5rem;
+  --font-size-jumbo: 2rem;
+
+  --line-height-small: 0.8125rem;
+  --line-height-normal: 1rem;
+  --line-height-large: 1.1875rem;
+  --line-height-xlarge: 1.375rem;
+  --line-height-jumbo: 2.25rem;
+
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --border-radius-sharp: 0;
+  --border-radius-pill: 20rem;
+  --border-radius-default: 0.25rem;
+  --border-radius-rounded: 0.5rem;
+  --border-radius-circle: 50%;
+
+  --opacity-10: 10%;
+  --opacity-30: 30%;
+  --opacity-50: 50%;
+  --opacity-75: 75%;
+  --opacity-85: 85%;
+
+  --z-index-min: -999;
+  --z-index-default: 1;
+  --z-index-sticky: 300;
+  --z-index-header: 400;
+  --z-index-toast: 500;
+  --z-index-dropdown: 600;
+  --z-index-spinner: 700;
+  --z-index-modal: 800;
+  --z-index-max: 999;
+
+  --transition-fast: 0.16s;
+  --transition-regular: 0.4s;
+  --transition-slow: 0.6s;
+
+  @include shades.shades-dangerous;
+  @include light.mode;
+
+  // Detect OS dark mode
+  @media (prefers-color-scheme: dark) {
+    @include dark.mode;
+  }
+}
+
+/** Light Theme */
+[data-theme="light"] {
+  @include light.mode;
+}
+
+/** Dark Theme */
+[data-theme="dark"] {
+  @include dark.mode;
+}
+
+/** Sepia Theme */
+[data-theme="sepia"] {
+  @include sepia.mode;
+}

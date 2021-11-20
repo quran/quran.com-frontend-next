@@ -1,0 +1,47 @@
+@use "src/styles/constants";
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.verseText {
+  display: flex;
+  align-items: center;
+}
+.verseTextContainer {
+  display: block;
+  direction: rtl;
+}
+
+.chapterHeaderContainer {
+  margin-inline-start: var(--spacing-medium);
+  margin-inline-end: var(--spacing-medium);
+}
+
+.largeQuranTextLayoutContainer {
+  display: inline;
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+
+.largeQuranTextLayout {
+  display: inline;
+  @include breakpoints.tablet {
+    display: flex;
+  }
+}
+
+.verseTextCenterAlign {
+  justify-content: center;
+}
+.verseTextSpaceBetween {
+  justify-content: space-between;
+}
+.verseTextWrap {
+  flex-wrap: wrap;
+}
+
+@include utility.generate-font-sizes();
+
+.highlighted {
+  background-color: var(--color-background-alternative-faded);
+}

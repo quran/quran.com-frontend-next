@@ -1,0 +1,18 @@
+{
+    "credits": {
+        "desc": "Ce site Web a été créé par quelques bénévoles et a été rendu possible grâce à la volonté d'Allah (Gloire à Lui) et avec l'aide de la communauté musulmane open source en ligne. Les sources de données incluent <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> travail sur les segments audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> et projet de coran en ligne.",
+        "lokalize": "La localisation a été rendue possible grâce à l'aide de <0> Lokalise <\/0>qui est un système de traduction assistée par ordinateur qui met l'accent sur la productivité et l'assurance qualité et fournit un flux de travail de localisation transparent.",
+        "title": "Crédits"
+    },
+    "main-desc": "Le Noble Coran est le texte religieux central de l'Islam. Les musulmans croient que le Coran est le livre de la direction et de la direction divines pour l'humanité, et considèrent le texte arabe original comme la révélation finale d'Allah (Dieu). Toutes les traductions du texte arabe original sont donc des interprétations des significations originales et doivent être acceptées comme telles.",
+    "meccan": {
+        "desc": "Les sourates mecquoises sont les chapitres (sourates) chronologiquement antérieurs du Coran qui, selon la tradition islamique, ont été révélés à tout moment avant la migration du prophète islamique Muhammed et de ses disciples de La Mecque à Médine (Hijra). Les sourates médinoises sont ces révélations qui se sont produites après le déménagement dans la ville de ce nom.",
+        "surahs": "Sourates mecquoises"
+    },
+    "median": {
+        "desc": "Les sourates médinoises ou chapitres médinois du Coran sont les 24 dernières sourates qui, selon la tradition islamique, ont été révélées à Médine après Mahomet &apos; s hijra de La Mecque. Ces sourates ont été révélées par Allah lorsque la communauté musulmane était plus nombreuse et plus développée, par opposition à leur position minoritaire à La Mecque.",
+        "surahs": "Sourates de Médine"
+    },
+    "questions": "Si vous avez des questions, vous pouvez visiter la page <0> commentaires <\/0> .",
+    "redesign": "Nous avons repensé le site Web avec une approche conviviale à l'esprit. Pour parcourir les sourates, cliquez sur le bouton (illustré à gauche) dans la page LIRE ET ÉCOUTER et parcourir la sourate par titre ou par page. Dans les prochaines itérations, nous intégrerons plus de fonctionnalités de recherche et audio inchaAllah. Si vous avez des suggestions sur la façon dont nous pouvons améliorer l'expérience du site Web, n'hésitez pas à <0> nous faire part de vos commentaires <\/0> ."
+}

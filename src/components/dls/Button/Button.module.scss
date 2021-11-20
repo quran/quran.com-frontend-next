@@ -1,0 +1,309 @@
+// TODO:
+// - generate css with SCSS
+// - use better pattern
+//    - https://cube.fyi/composition.html#examples (looks like vercel is using similar pattern like this)
+//    - https://cube.fyi/exception.html#why-data-attributes
+
+@use "src/styles/utility";
+
+.base {
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.withText {
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+  justify-content: center;
+}
+.withIcon {
+  justify-content: center;
+  &[dir="rtl"][data-auto-flip-icon="true"] {
+    transform: scaleX(-1);
+  }
+}
+
+// base svg color
+.base > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.base:hover > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
+
+.base.ghost > span > svg,
+.base.secondary > span > svg {
+  fill: var(--color-text-default);
+  & > path {
+    fill: var(--color-text-default);
+  }
+}
+
+// type
+.primary {
+  background-color: var(--color-primary-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-primary-medium);
+  &:hover {
+    color: var(--color-text-default);
+    background-color: var(--color-text-inverse);
+  }
+}
+
+.secondary {
+  background-color: var(--color-secondary-medium);
+  color: var(--color-text-default);
+  border: 1px solid var(--color-secondary-medium);
+  &:hover {
+    color: var(--color-text-default);
+    background-color: var(--color-background-alternative-deep);
+  }
+}
+
+.secondary > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.secondary:hover > span > svg {
+  fill: var(--color-secondary-medium);
+  & > path {
+    fill: var(--color-secondary-medium);
+  }
+}
+.secondary.ghost > span > svg {
+  fill: var(--color-success-secondary);
+  & > path {
+    fill: var(--color-success-secondary);
+  }
+}
+
+.success {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-success-medium);
+  &:hover {
+    color: var(--color-success-medium);
+    background-color: var(--color-text-inverse);
+  }
+}
+.success > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.success:hover > span > svg {
+  fill: var(--color-success-medium);
+  & > path {
+    fill: var(--color-success-medium);
+  }
+}
+.success.ghost > span > svg {
+  fill: var(--color-success-medium);
+  & > path {
+    fill: var(--color-success-medium);
+  }
+}
+
+.warning {
+  background-color: var(--color-warning-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-warning-medium);
+  &:hover {
+    color: var(--color-warning-medium);
+    background-color: var(--color-text-inverse);
+  }
+}
+.warning > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.warning:hover > span > svg {
+  fill: var(--color-warning-medium);
+  & > path {
+    fill: var(--color-warning-medium);
+  }
+}
+.warning.ghost > span > svg {
+  fill: var(--color-warning-medium);
+  & > path {
+    fill: var(--color-warning-medium);
+  }
+}
+
+.error {
+  background-color: var(--color-error-medium);
+  color: var(--color-text-inverse);
+  border: 1px solid var(--color-error-medium);
+  &:hover {
+    color: var(--color-error-medium);
+    background-color: var(--color-text-inverse);
+  }
+}
+.error > span > svg {
+  fill: var(--color-text-inverse);
+  & > path {
+    fill: var(--color-text-inverse);
+  }
+}
+.error:hover > span > svg {
+  fill: var(--color-error-medium);
+  & > path {
+    fill: var(--color-error-medium);
+  }
+}
+.error.ghost > span > svg {
+  fill: var(--color-error-medium);
+  & > path {
+    fill: var(--color-error-medium);
+  }
+}
+
+// size
+.large {
+  font-size: var(--font-size-large);
+  height: calc(3 * var(--spacing-medium));
+}
+.withIcon.large {
+  width: calc(3 * var(--spacing-medium));
+}
+.normal {
+  font-size: var(--font-size-normal);
+  height: calc(2.5 * var(--spacing-medium));
+}
+.withIcon.normal {
+  width: calc(2.5 * var(--spacing-medium));
+}
+.small {
+  font-size: var(--font-size-normal);
+  height: calc(2 * var(--spacing-medium));
+}
+.withIcon.small {
+  width: calc(2 * var(--spacing-medium));
+}
+
+// shape
+.square {
+  border-radius: var(--border-radius-default);
+}
+.circle {
+  border-radius: var(--border-radius-circle);
+}
+.pill {
+  border-radius: var(--border-radius-pill);
+}
+
+// variant
+.shadow {
+  box-shadow: var(--shadow-large);
+}
+
+.ghost {
+  background-color: transparent;
+  border: none;
+  &:hover {
+    @include utility.lighten-background-color;
+  }
+}
+.ghost.primary {
+  color: var(--color-text-default);
+  &:hover {
+    background-color: var(--color-primary-medium);
+  }
+}
+.ghost.secondary {
+  color: var(--color-secondary-medium);
+  &:hover {
+    background-color: var(--color-secondary-medium);
+  }
+}
+.ghost.warning {
+  color: var(--color-warning-medium);
+  &:hover {
+    background-color: var(--color-warning-medium);
+  }
+}
+
+.ghost.success {
+  color: var(--color-success-medium);
+  &:hover {
+    background-color: var(--color-success-medium);
+  }
+}
+.ghost.error {
+  color: var(--color-error-medium);
+  &:hover {
+    background-color: var(--color-error-medium);
+  }
+}
+
+// suffix and prefix container
+.suffix {
+  display: flex;
+  margin-inline-start: calc(0.5 * var(--spacing-medium));
+  &[dir="rtl"][data-auto-flip-icon="true"] svg {
+    transform: scaleX(-1);
+  }
+}
+.prefix {
+  display: flex;
+  margin-inline-end: calc(0.5 * var(--spacing-medium));
+  &[dir="rtl"][data-auto-flip-icon="true"] svg {
+    transform: scaleX(-1);
+  }
+}
+.content {
+  display: flex;
+}
+
+// svg sizes
+.large > span > svg {
+  height: calc(1.5 * var(--spacing-medium));
+  width: calc(1.5 * var(--spacing-medium));
+}
+.normal > span > svg {
+  height: calc(1.25 * var(--spacing-medium));
+  width: calc(1.25 * var(--spacing-medium));
+}
+.small > span > svg {
+  height: calc(1 * var(--spacing-medium));
+  width: calc(1 * var(--spacing-medium));
+}
+
+.base.disabled {
+  cursor: not-allowed;
+  background-color: var(--color-background-alternative-medium);
+  border: 1px solid var(--color-secondary-medium);
+  color: var(--color-text-default);
+  opacity: 0.7;
+  &:hover {
+    background-color: var(--color-background-alternative-medium);
+    opacity: 0.7;
+  }
+}
+.ghost.disabled {
+  border: none;
+  background: inherit;
+  &:hover {
+    background: inherit;
+  }
+}
+
+.noSidePadding {
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}

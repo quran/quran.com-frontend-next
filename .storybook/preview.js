@@ -1,79 +1,97 @@
-import { addDecorator, addParameters } from '@storybook/react';
-import { withA11y } from '@storybook/addon-a11y';
-import { withKnobs } from '@storybook/addon-knobs';
-import styled, { ThemeProvider } from 'styled-components';
+import { RouterContext } from "next/dist/shared/lib/router-context";
 
-import { theme, darkTheme } from '../src/styles/theme';
-import makeFonts from '../src/styles/fonts';
-import { makeGlobalCss } from '../src/styles/GlobalStyles';
+import ResetCSS from '../src/styles/reset.scss';
+import Theme from '../src/styles/theme.scss'
+import GlobalFonts from '../src/styles/fonts.scss';
+import GlobalStyles from '../src/styles/global.scss';
+import I18nProvider from 'next-translate/I18nProvider';
 
-const themes = [theme, darkTheme];
-const Wrapper = styled.div`
-  background-color: ${({ theme }) => theme.backgroundColor};
-  min-height: 100vh;
-`;
+import commonEn from '../locales/en/common.json';
+import homeEn from '../locales/en/home.json';
 
-const themeDecorator = (storyFn) => (
-  <ThemeProvider theme={themes[0]}>
-    <Wrapper>
-      <style dangerouslySetInnerHTML={{ __html: makeFonts() }} />
-      <style dangerouslySetInnerHTML={{ __html: makeGlobalCss(16) }} />
-      {storyFn()}
-    </Wrapper>
-  </ThemeProvider>
-);
+const themeDecorator = (Story, context) => {
+  const theme = context.globals.theme;
+  return (
+    <>
+      <link rel="stylesheet" href={GlobalFonts} />
+      <link rel="stylesheet" href={ResetCSS} />
+      <link rel="stylesheet" href={Theme} />
+      <link rel="stylesheet" href={GlobalStyles} />
+      <div data-theme={theme}>
+        <div style={{
+           backgroundColor: 'var(--color-background-default)',
+           width: '100vw',
+           height: '100vh',
+           padding: '1rem',
+          }}>
+          <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
+            <Story />
+          </I18nProvider>
+        </div>
+      </div>
+    </>
+  );
+};
 
-// V6
-// export const decorators = [themeDecorator];
-addDecorator(themeDecorator);
+
+export const decorators = [themeDecorator];
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'circlehollow',
+      items: ['light', 'dark', 'sepia'],
+      showName: true,
+    },
+  },
+};
+
 
 const viewports = {
-  xsmall: {
-    name: 'X Small',
+  mobileS: {
+    name: 'MobileS',
     styles: {
       width: `320px`,
       height: '100%',
     },
   },
-  small: {
-    name: 'Small',
+  mobileM: {
+    name: 'MobileM',
     styles: {
-      width: `${theme.breakpoints.sm - 1}px`,
+      width: `375px`,
       height: '100%',
     },
   },
-  medium: {
-    name: 'Medium',
+  mobileL: {
+    name: 'MobileL',
     styles: {
-      width: `${theme.breakpoints.md}px`,
+      width: `425px`,
       height: '100%',
     },
   },
-  large: {
-    name: 'Large',
+  tablet: {
+    name: 'Tablet',
     styles: {
-      width: `${theme.breakpoints.lg}px`,
+      width: `768px`,
       height: '100%',
     },
   },
-  xlarge: {
-    name: 'X Large',
+  desktop: {
+    name: 'Desktop',
     styles: {
-      width: `${theme.breakpoints.xl}px`,
+      width: `1024px`,
       height: '100%',
     },
   },
 };
-addParameters({
+export const parameters = {
+  layout: 'fullscreen',
   viewport: {
-    viewports: {
-      ...viewports,
-    },
+    viewports,
   },
-});
-addDecorator(withA11y);
-addDecorator(
-  withKnobs({
-    escapeHTML: false,
-  }),
-);
+  nextRouter: {
+    Provider: RouterContext.Provider,
+  },
+}

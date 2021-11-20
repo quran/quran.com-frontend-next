@@ -1,0 +1,52 @@
+$baseSize: var(--spacing-mega);
+$animationDuration: 8s;
+
+@keyframes loading {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.baseSize {
+  height: $baseSize;
+  width: $baseSize;
+}
+
+.skeleton {
+  position: relative;
+  display: block;
+  border-radius: var(--border-radius-default);
+}
+
+.active::before {
+  border-radius: var(--border-radius-default);
+  background-image: linear-gradient(
+    270deg,
+    var(--shade-0),
+    var(--shade-1),
+    var(--shade-2),
+    var(--shade-1),
+    var(--shade-0)
+  );
+  background-size: 400% 100%; // increase background size's width to 4x to make background animate-able
+  animation: loading $animationDuration ease-in-out infinite;
+
+  content: "";
+  position: absolute;
+
+  // using -1px to avoid some part of children border leaking outside
+  inset-block: -1px;
+  inset-inline-start: -1px;
+  inset-inline-end: -1px;
+}
+
+.rounded::before {
+  border-radius: var(--border-radius-circle);
+}
+
+.squared::before {
+  border-radius: var(--border-radius-sharp);
+}

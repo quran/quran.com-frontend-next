@@ -1,0 +1,33 @@
+@use "src/styles/breakpoints";
+
+.header {
+  margin-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--flow-side-spacing, var(--spacing-small));
+}
+
+.quickLinksContainer {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 0;
+  }
+}
+
+.link {
+  > span {
+    width: max-content;
+  }
+
+  &:first-child {
+    margin-inline-start: var(--flow-side-spacing, var(--spacing-small));
+  }
+  &:last-child {
+    margin-inline-end: var(--flow-side-spacing, var(--spacing-small));
+  }
+
+  & + & {
+    margin-inline-start: var(--spacing-small);
+  }
+}

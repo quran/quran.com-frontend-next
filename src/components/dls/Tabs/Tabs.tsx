@@ -1,61 +1,34 @@
-import React, { useState, ReactElement, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
+import classNames from 'classnames';
 
-const TabNavList = styled.ul`
-  padding: 0;
-`;
+import styles from './Tabs.module.scss';
 
-const selectedCss = css<{ selected: boolean }>`
-  color: ${({ theme }) => theme.colors.primary.medium};
-  border-bottom: ${(props) => props.theme.spacing.micro} solid
-    ${({ theme }) => theme.colors.primary.medium};
-`;
-
-const TabNavItem = styled.li<{ selected: boolean }>`
-  color: ${({ theme }) => theme.colors.text.default};
-  font-size: ${({ theme }) => theme.spacing.large};
-  display: inline-block;
-  margin-right: ${({ theme }) => theme.spacing.mega};
-  cursor: pointer;
-  ${(props) => props.selected && selectedCss}
-`;
-
+type Tab = {
+  title: string;
+  value: string;
+};
 type TabsProps = {
-  initial?: number;
-  children: ReactElement[];
+  tabs: Tab[];
+  selected: string;
+  onSelect: (value: string) => void;
 };
 
-const Tabs = ({ initial = 0, children }: TabsProps) => {
-  const [currentTab, setCurrentTab] = useState(initial);
-
+const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
   return (
-    <div>
-      <section role="tabpanel">
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role */}
-        <nav role="tablist">
-          <TabNavList>
-            {React.Children.map(children, (child, i) => {
-              const selected = currentTab === i;
-
-              return (
-                <TabNavItem selected={selected} onClick={() => setCurrentTab(i)}>
-                  {child.props.title}
-                </TabNavItem>
-              );
-            })}
-          </TabNavList>
-        </nav>
-        {children[currentTab]}
-      </section>
+    <div className={styles.container}>
+      {tabs.map((tab, index) => (
+        <div
+          className={classNames(styles.tabItem, selected === tab.value && styles.tabItemSelected)}
+          key={tab.value}
+          role="tab"
+          tabIndex={index}
+          onKeyDown={() => onSelect(tab.value)}
+          onClick={() => onSelect(tab.value)}
+        >
+          {tab.title}
+        </div>
+      ))}
     </div>
   );
 };
-
-type TabProps = {
-  title: string;
-  children: ReactNode;
-};
-
-export const Tab = ({ children }: TabProps) => <>{children}</>;
 
 export default Tabs;

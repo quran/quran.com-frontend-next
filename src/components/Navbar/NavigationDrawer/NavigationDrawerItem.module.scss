@@ -1,0 +1,27 @@
+@use "src/styles/utility";
+
+.container {
+  @include utility.center-vertically;
+
+  min-height: calc(var(--spacing-mega) + var(--spacing-small));
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  border-bottom: 1px var(--color-borders-hairline) solid;
+}
+
+.containerStale {
+  &:hover {
+    background: var(--color-background-alternative-medium);
+  }
+}
+
+.innerContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleContainer {
+  margin-inline-start: var(--spacing-medium);
+  font-size: var(--font-size-normal);
+  vertical-align: text-top;
+}

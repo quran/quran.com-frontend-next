@@ -1,0 +1,8 @@
+@use "src/styles/breakpoints";
+
+.loadingContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

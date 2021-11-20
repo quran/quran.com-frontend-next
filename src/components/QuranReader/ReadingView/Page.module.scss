@@ -1,0 +1,15 @@
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+
+.container {
+  border-bottom: 1px var(--color-borders-hairline) solid;
+  margin-block-end: var(--spacing-xsmall);
+  max-width: 100%;
+}
+
+.mobileCenterText {
+  text-align: center;
+  @include breakpoints.tablet {
+    text-align: start;
+  }
+}

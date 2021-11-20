@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+
+  & > div + div {
+    margin-inline-start: var(--spacing-small);
+  }
+}
+
+.flow > div {
+  margin-block-end: var(--spacing-medium);
+}
+.platformLogo {
+  width: var(--spacing-medium);
+  &:hover {
+    path {
+      fill: var(--color-primary-medium);
+    }
+  }
+}
+
+.platformLogoBackground {
+  position: absolute;
+  z-index: -1;
+  inset-inline-end: 0;
+
+  [data-theme="dark"] & {
+    opacity: var(--opacity-10);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    opacity: var(--opacity-10);
+  }
+}
+
+.title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+}

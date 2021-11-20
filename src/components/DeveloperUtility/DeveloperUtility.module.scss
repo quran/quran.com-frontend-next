@@ -1,0 +1,55 @@
+.container {
+  background: var(--color-background-alternative-medium);
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  color: black;
+  position: fixed;
+  inset-block-start: calc(var(--spacing-mega) + var(--spacing-mega));
+  inset-inline-end: calc(var(--spacing-mega) + var(--spacing-medium));
+  height: calc(2 * var(--spacing-mega));
+  width: calc(2 * var(--spacing-mega));
+
+  z-index: var(--z-index-sticky);
+  border-radius: 100%;
+  box-shadow: var(--shadow-small);
+  text-align: center;
+  cursor: pointer;
+  padding: unset;
+}
+
+.containerExpanded {
+  cursor: unset;
+  height: auto;
+  width: auto;
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  border-radius: var(--spacing-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xsmall);
+  align-items: flex-start;
+}
+
+.separator {
+  width: 100%;
+  margin-block-end: var(--spacing-xxxsmall);
+}
+
+.closeButton {
+  background: var(--color-primary-medium);
+  border: none;
+  border-radius: var(--spacing-xsmall);
+  color: white;
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+  box-shadow: var(--shadow-normal);
+  color: var(--color-text-inverse);
+}
+
+.wrench {
+  height: calc(2 * var(--spacing-mega));
+  width: calc(var(--spacing-large) + var(--spacing-xxsmall));
+}

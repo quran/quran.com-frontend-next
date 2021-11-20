@@ -1,0 +1,45 @@
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+$quran-reader-padding: 3rem;
+
+.infiniteScroll {
+  @include utility.container;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.loading {
+  text-align: center;
+  max-width: 80%;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.container {
+  padding-block-start: $quran-reader-padding;
+  padding-block-end: $quran-reader-padding;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  background: var(--color-background-default);
+  @include breakpoints.tablet {
+    transition: var(--transition-regular);
+    margin-inline-end: 0;
+  }
+}
+
+.withVisibleSideBar {
+  @include breakpoints.tablet {
+    margin-inline-end: constants.$notes-side-bar-desktop-width;
+  }
+}
+
+.playButton {
+  display: flex;
+  justify-content: center;
+}

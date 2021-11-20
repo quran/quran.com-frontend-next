@@ -1,0 +1,37 @@
+.container {
+  margin-block-start: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.trigger {
+  all: unset;
+}
+
+.content {
+  border-radius: var(--border-radius-default);
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  background-color: var(--color-background-default);
+  box-shadow: var(--shadow-normal);
+  & > span {
+    fill: var(--color-background-default);
+  }
+}
+
+.tooltipContent {
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
+  color: var(--color-text-inverse);
+  background-color: var(--color-background-inverse);
+  text-align: center;
+  box-shadow: none;
+  & > span {
+    fill: var(--color-background-inverse);
+  }
+}

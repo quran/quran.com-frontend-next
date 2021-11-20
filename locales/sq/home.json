@@ -1,0 +1,45 @@
+{
+    "footer": {
+        "rights": "Të gjitha të drejtat e rezervuara",
+        "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
+    },
+    "hijri-date": {
+        "format": "{{month}} {{date}}, {{year}} AH",
+        "month": {
+            "1": "Muharrem",
+            "10": "Shevali",
+            "11": "Dhu Al-Kida",
+            "2": "Safar",
+            "3": "Rabi' I",
+            "4": "Rabi' II",
+            "5": "Xhumada I",
+            "6": "Jumada Akhira",
+            "7": "Rexheb",
+            "8": "Shaban",
+            "9": "Ramazani"
+        }
+    },
+    "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
+    "prayer-names": {
+        "asr": "Asr",
+        "dhuhr": "Dhuhr",
+        "fajr": "sabahun",
+        "isha": "Isha",
+        "maghrib": "Akshami",
+        "sunrise": "Lindja e diellit"
+    },
+    "recently-read": "Lexuar së fundmi",
+    "tab": {
+        "bookmarks": "Faqerojtësit",
+        "popular": "Popullore"
+    },
+    "voice": {
+        "trigger": "Qasje e shpejtë në çdo gjë"
+    },
+    "welcome": {
+        "desc": "Ne po shtojmë në mënyrë aktive veçori të reja dhe po bëjmë ndryshime. Nëse hasni në ndonjë problem, ju lutemi jepni komente.",
+        "feedback-cta": "Jepni komente",
+        "join-cta": "Bashkohuni me komunitetin Discord",
+        "title": "Mirë se vini në Beta para-publikimit të Quran.com të ri!"
+    }
+}

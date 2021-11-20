@@ -1,0 +1,24 @@
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+
+.emptySpacePlaceholder {
+  height: constants.$navbar-height;
+}
+
+.container {
+  inset-block-start: 0;
+  position: fixed;
+  height: constants.$navbar-height;
+  width: 100%;
+  transition: var(--transition-regular);
+  background: var(--color-background-default);
+  z-index: var(--z-index-header);
+  border-bottom: 1px var(--color-borders-hairline) solid;
+}
+
+.hiddenNav {
+  transform: translateY(0 - constants.$navbar-height);
+  @include breakpoints.tablet {
+    transform: none;
+  }
+}

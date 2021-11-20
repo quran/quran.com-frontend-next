@@ -1,0 +1,100 @@
+.large {
+  height: calc(1.5 * var(--spacing-medium));
+  width: calc(1.5 * var(--spacing-medium));
+}
+.normal {
+  height: calc(1.25 * var(--spacing-medium));
+  width: calc(1.25 * var(--spacing-medium));
+}
+.small {
+  height: calc(1 * var(--spacing-medium));
+  width: calc(1 * var(--spacing-medium));
+}
+
+.spinner {
+  display: block;
+  box-sizing: border-box;
+}
+
+.centered {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+}
+
+@keyframes spinner {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.15;
+  }
+}
+
+.span {
+  background-color: var(--color-text-default);
+  position: absolute;
+  inset-block-start: -3.9%;
+  width: 24%;
+  height: 8%;
+  inset-inline-start: -10%;
+  border-radius: var(--border-radius-default);
+  animation: spinner 1.2s linear 0s infinite normal none running;
+}
+.span:nth-child(1) {
+  animation-delay: -1.2s;
+  transform: rotate(0deg) translate(146%);
+}
+.span:nth-child(2) {
+  animation-delay: -1.1s;
+  transform: rotate(30deg) translate(146%);
+}
+.span:nth-child(3) {
+  animation-delay: -1s;
+  transform: rotate(60deg) translate(146%);
+}
+.span:nth-child(4) {
+  animation-delay: -0.9s;
+  transform: rotate(90deg) translate(146%);
+}
+.span:nth-child(5) {
+  animation-delay: -0.8s;
+  transform: rotate(120deg) translate(146%);
+}
+.span:nth-child(6) {
+  animation-delay: -0.7s;
+  transform: rotate(150deg) translate(146%);
+}
+.span:nth-child(7) {
+  animation-delay: -0.6s;
+  transform: rotate(180deg) translate(146%);
+}
+.span:nth-child(8) {
+  animation-delay: -0.5s;
+  transform: rotate(210deg) translate(146%);
+}
+.span:nth-child(9) {
+  animation-delay: -0.4s;
+  transform: rotate(240deg) translate(146%);
+}
+.span:nth-child(10) {
+  animation-delay: -0.3s;
+  transform: rotate(270deg) translate(146%);
+}
+.span:nth-child(11) {
+  animation-delay: -0.2s;
+  transform: rotate(300deg) translate(146%);
+}
+.span:nth-child(12) {
+  animation-delay: -0.1s;
+  transform: rotate(330deg) translate(146%);
+}

@@ -1,48 +1,46 @@
 const path = require('path');
 
 module.exports = {
-  stories: ['../src/**/*.stories.tsx'],
-  addons: [
-    '@storybook/addon-actions',
-    '@storybook/addon-links',
-    '@storybook/addon-knobs/register',
-    '@storybook/addon-actions/register',
-    '@storybook/addon-storysource',
-    '@storybook/addon-viewport/register',
-    '@storybook/addon-a11y/register',
+  "stories": [
+    "../src/**/*.stories.tsx"
   ],
+  "addons": [{
+      name: '@storybook/preset-scss',
+      options: {
+        cssLoaderOptions: {
+          modules: {
+            auto: true
+          }
+        }
+      }
+    },
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-a11y",
+    "storybook-addon-next-router",
+  ],
+  typescript: {
+    check: false,
+    checkOptions: {},
+    // ideally we use `react-docgen-typescript`. But there's still some issue, related to webpack 5.
+    // so we use `react-docgen` for now
+    reactDocgen: 'react-docgen', 
+    // reactDocgenTypescriptOptions: {
+    //   shouldExtractLiteralValuesFromEnum: true,
+    //   propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+    // },
+  },
+  "core": {
+    "builder": "webpack5"
+  },
   webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      use: [
-        // {
-        //   loader: require.resolve('awesome-typescript-loader'),
-        //   options: {
-        //     configFileName: path.resolve(__dirname, '../tsconfig.storybook.json'),
-        //   },
-        // },
-        {
-          loader: require.resolve('ts-loader'),
-          options: {
-            configFile: path.resolve(__dirname, '../tsconfig.storybook.json'),
-          },
-        },
-
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-          options: {
-            tsconfigPath: path.resolve(__dirname, '../tsconfig.storybook.json'),
-          },
-        },
-      ],
-    });
-    config.resolve.extensions.push('.ts', '.tsx');
-
     // Add support for absolute paths
-     config.resolve.modules = [
-    ...(config.resolve.modules || []),
-    path.resolve('./'),
-  ];
+    config.resolve.modules = [
+      ...(config.resolve.modules || []),
+      path.resolve('./'),
+    ];
+
+    // Return the altered config
     return config;
   },
-};
+}

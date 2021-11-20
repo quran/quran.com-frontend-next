@@ -1,0 +1,65 @@
+.input {
+  display: none;
+}
+
+.itemLabel {
+  cursor: pointer;
+}
+
+.itemContainer {
+  color: var(--color-text-default);
+  padding-block-start: var(--spacing-xsmall);
+  padding-block-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
+}
+
+.enabledItem {
+  cursor: pointer;
+  &:hover {
+    background: var(--color-background-alternative-medium);
+  }
+}
+.disabledItem {
+  color: var(--color-secondary-medium);
+}
+
+.checkedItem {
+  font-weight: var(--font-weight-bold);
+  background: var(--color-background-alternative-medium);
+}
+
+.prefix {
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  padding-inline-end: var(--spacing-xsmall);
+  > svg {
+    width: var(--spacing-small);
+    height: var(--spacing-small);
+  }
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.prefixContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.suffixContainer {
+  background: var(--color-primary-medium);
+  border-radius: var(--border-radius-pill);
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  color: var(--color-primary-deep);
+  text-transform: uppercase;
+  font-size: var(--font-size-small);
+}

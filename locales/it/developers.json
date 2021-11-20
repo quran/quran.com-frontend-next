@@ -1,0 +1,18 @@
+{
+    "footer": "- Corano.com squadra",
+    "header": "Aiuto allo sviluppo",
+    "issues-cta": "Se hai domande o vuoi contattare i manutentori, scrivi un problema! Ti risponderemo il prima possibile, inshAllah.",
+    "issues-guide": "In genere utilizziamo i problemi di Github come fonte per su cosa lavorare dopo, cosa &apos; stanno arrivando e quali bug esistono che devono essere risolti. Ad esempio <0> questo URL <\/0> contiene un elenco di bug, cose per cui abbiamo bisogno di aiuto e funzionalità imminenti.",
+    "main-desc": "Asalamu Alykom, In primo luogo, grazie mille per il tuo interesse ad aiutarci a sviluppare Quran.com e i suoi progetti. Siamo entusiasti di lavorare con te!",
+    "projects": {
+        "all": "Abbiamo un numero di progetti tutti ospitati su Github. Li trovate tutti <0> qui <\/0> . Ma per delinearli:",
+        "q-android": "<0> Corano Android <\/0>",
+        "q-api": "<0> API Quran.com <\/0> - scritto in Ruby on Rails.",
+        "q-audio": "<0> Quranic Audio <\/0> e <1> App mobile Quranic Audio <\/1>",
+        "q-audio-segments": "<0> Segmenti audio del Corano <\/0>",
+        "q-ios": "<0> Corano iOS <\/0>",
+        "q-v2": "<0> Quran.com <\/0> - scritto in Ruby on Rails."
+    },
+    "sub-main-desc": "Siamo un team di sviluppatori, designer, product manager e pensatori che lavorano su Quran.com su base volontaria. Alhamdulilah abbiamo avuto la fortuna di lavorare per alcune grandi aziende nella Silicon Valley, Toronto e negli Emirati Arabi Uniti - e riteniamo che questo sia il minimo che possiamo fare per aiutare la nostra Ummah ad andare avanti nell'apprendimento e nello studio della loro religione. Lavorare su Quran.com è molto gratificante e che Allah ci ricompensi tutti (e ti ricompensi) per i nostri sforzi.",
+    "thanks": "Grazie per aver letto! Non vedo l'ora di vederti commettere del codice!"
+}

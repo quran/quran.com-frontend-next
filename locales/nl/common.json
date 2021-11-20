@@ -1,0 +1,193 @@
+{
+    "about": "Over ons",
+    "audio": {
+        "auto-scroll": {
+            "off": "Uit",
+            "on": "Op",
+            "title": "Automatisch scrollen"
+        },
+        "play": "Audio afspelen",
+        "playback-speed": "Afspeelsnelheid",
+        "player": {
+            "close": "Sluit audiospeler",
+            "currently-playing": "Je speelt momenteel",
+            "delay-verse": "Vertraging tussen vers",
+            "download": "Downloaden",
+            "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
+            "next-ayah": "Volgende Aya",
+            "pause": "Pauze",
+            "play": "Toneelstuk",
+            "play-range": "Speelbereik",
+            "previous-ayah": "Vorige Aya",
+            "repeat-1-verse": "Herhaal vers",
+            "repeat-settings": "Instellingen herhalen",
+            "repeat-verse": "Herhaal elk vers",
+            "search-verse": "Zoek naar een vers",
+            "single-verse": "Enkel Vers",
+            "start-over": "Begin opnieuw",
+            "start-playing": "Begin met spelen",
+            "stop-repeating": "Stop met herhalen",
+            "times": "keer",
+            "verses-range": "Bereik van verzen"
+        },
+        "title": "Audio"
+    },
+    "ayah": "Aya",
+    "ayahs": "Ayahs",
+    "beta": "bèta",
+    "bookmark": "Bladwijzer",
+    "bookmarked": "Bladwijzer",
+    "both": "Beide",
+    "cancel": "Annuleren",
+    "click-here": "Klik hier",
+    "close": "Dichtbij",
+    "command-bar": {
+        "navigations": "Navigatie",
+        "no-nav-results": "Geen navigatieresultaten",
+        "placeholder": "Wat wil je lezen?",
+        "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
+        "recent-navigations": "Recente navigatie",
+        "try-navigating": "Probeer te navigeren naar"
+    },
+    "community": {
+        "cta": "Word lid van de community",
+        "header": "Word lid van de QDC-gemeenschap van moslimbouwers en technologen.",
+        "sub-header": "Meld u aan voor de Quran.com Discord om deel te nemen en samen te werken met de toonaangevende islamitische technologie voor gemeenschapsopbouw.",
+        "title": "Gemeenschap"
+    },
+    "continue": "Doorgaan met",
+    "copied": "gekopieerd",
+    "copied-to-clipboard": "Gekopieerd naar het klembord",
+    "copy": "Kopiëren",
+    "counter": {
+        "decrease": "Verminderen",
+        "increase": "Toename"
+    },
+    "developers": "ontwikkelaars",
+    "error": {
+        "general": "Er is iets fout gegaan. Probeer het opnieuw.",
+        "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw."
+    },
+    "feedback": "Feedback",
+    "fonts": {
+        "15_lines": "15 lijnen",
+        "16_lines": "16 lijnen",
+        "code_v1": "King Fahad Complex V1",
+        "code_v2": "King Fahad Complex V2",
+        "font-size": "Lettertypegrootte",
+        "lines": "lijnen",
+        "qcf-desc": "KPFG-lettertypen bieden een hogere kwaliteit, maar duren langer om te laden en kunnen niet via de browser worden gekopieerd.",
+        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+        "quran-font": "Koran lettertype",
+        "text_indopak": "IndoPak",
+        "text_uthmani": "Uthmani"
+    },
+    "from": "Van",
+    "help": "Helpen",
+    "hizb": "Hizb",
+    "home": "Huis",
+    "input": {
+        "clear": "Duidelijk"
+    },
+    "juz": "Juz",
+    "loading": "Bezig met laden",
+    "menu": "Menu",
+    "mobile-apps": "Mobiele apps",
+    "mode": "Modus",
+    "more": "Meer",
+    "network": "Netwerk",
+    "next": "Volgende",
+    "no": "Nee",
+    "none": "Geen",
+    "page": "Bladzijde",
+    "pages": "Pagina's",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
+    "powered-by": "Aangedreven door",
+    "prayer-times": {
+        "calculation-method": "Rekenmethode",
+        "madhab": "Madhab",
+        "title": "Gebedstijden"
+    },
+    "prev": "Vorig",
+    "privacy": "Privacy",
+    "q-reflect": "KoranReflect",
+    "quran-com": "koran.com",
+    "reading-preference": {
+        "reading": "Lezing",
+        "translation": "Vertaling"
+    },
+    "reciter": "Voordrager",
+    "remove": "Verwijderen",
+    "retry": "Opnieuw proberen",
+    "search": {
+        "filters": "Filters",
+        "hint": "Probeer te zoeken naar",
+        "jump-to": "Spring naar",
+        "no-results": "geen resultaten gevonden",
+        "no-results-suggestion": "We konden geen overeenkomende zoekresultaten vinden voor \" {{searchQuery}} \". probeer een ander trefwoord te zoeken.",
+        "popular": "Populaire zoekopdrachten",
+        "recent": "Recente zoekopdrachten",
+        "results": "resultaten",
+        "show-all": "Toon alle resultaten",
+        "switch-mode": "Overschakelen naar Geavanceerd zoeken",
+        "title": "Zoeken"
+    },
+    "settings": {
+        "change-reciter": "Voordrager wijzigen",
+        "change-translations": "Vertalingen wijzigen",
+        "reading-experience": "Leeservaring",
+        "reset-cta": "Reset instellingen",
+        "title": "Instellingen"
+    },
+    "share": "Deel",
+    "shared": "Link is gekopieerd naar het klembord!",
+    "sitemap": "Sitemap",
+    "sort": {
+        "ascending": "Oplopend",
+        "by": "Sorteer op",
+        "descending": "Aflopend"
+    },
+    "style": "Stijl",
+    "surah": "Surah",
+    "tafsir": {
+        "font-size": "Tafsir-lettergrootte",
+        "surah": "Tafsir Surah",
+        "title": "Tafsir"
+    },
+    "tarteel": {
+        "app": "Tarteel-app",
+        "desc": "koran spraakgestuurd zoeken",
+        "learn": "leren hoe u gesproken zoekopdrachten kunt gebruiken",
+        "name": "Tarteel.ai"
+    },
+    "theme": "Thema",
+    "themes": {
+        "dark": "Donker",
+        "light": "Licht",
+        "sepia": "Sepia",
+        "system": "Systeem",
+        "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht\/donkermodus aan"
+    },
+    "to": "Tot",
+    "tooltip": "Knopinfo",
+    "translation": "Vertaling",
+    "translations": "Vertalingen",
+    "transliteration": "Transliteratie",
+    "type": "Type",
+    "verse": "Vers",
+    "view": "Weergave",
+    "voice": {
+        "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
+        "error": "Er is een fout opgetreden, probeer het later opnieuw. Of download de",
+        "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw of download de",
+        "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser of download de",
+        "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen."
+    },
+    "wbw": "Woord voor woord",
+    "word-click": {
+        "no-audio": "Geen geluid",
+        "play-audio": "Audio afspelen",
+        "title": "Woordklik"
+    },
+    "yes": "Ja"
+}

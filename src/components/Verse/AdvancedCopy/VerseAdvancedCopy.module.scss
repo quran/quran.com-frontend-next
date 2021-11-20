@@ -1,0 +1,27 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.customMessage {
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xxsmall);
+  padding-inline-end: var(--spacing-xxsmall);
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  margin-block-start: var(--spacing-medium);
+}
+
+.label {
+  margin-block: var(--spacing-xsmall);
+}
+
+// clone of checkbox properties
+.emptyCheckbox {
+  min-height: var(--spacing-medium);
+  border: 1px solid transparent;
+  margin-block: var(--spacing-micro);
+}

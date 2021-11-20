@@ -1,0 +1,57 @@
+@use "src/styles/utility";
+$surahIconHeight: calc(6 * var(--spacing-medium));
+$containerMaxWidth: calc(5 * var(--spacing-mega));
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: $containerMaxWidth;
+  border: 1px solid var(--color-borders-hairline);
+  padding-block-start: var(--spacing-medium);
+  padding-block-end: var(--spacing-medium);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
+  border-radius: var(--border-radius-default);
+  cursor: pointer;
+  &:hover {
+    border: 1px solid var(--color-success-medium);
+    background-color: var(--color-success-faded);
+    @include utility.lighten-background-color;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.surahIcon {
+  height: $surahIconHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background-alternative-faint);
+  border-radius: var(--border-radius-default);
+}
+
+.surahNumber {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-large);
+}
+
+.translatedSurahName {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-faded);
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.surahName {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.description {
+  font-size: var(--font-size-small);
+}

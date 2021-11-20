@@ -1,0 +1,84 @@
+@use "src/styles/breakpoints";
+
+// surah layout (grid layout)
+.surahLayout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include breakpoints.tablet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-small);
+  }
+  @include breakpoints.desktop {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-small);
+    grid-template-rows: masonry;
+  }
+}
+
+.chapterContainer {
+  background-color: var(--color-background-default);
+  border-radius: var(--border-radius-default);
+}
+
+.chapterContainer + .chapterContainer {
+  margin-block-start: var(--spacing-small);
+  @include breakpoints.tablet {
+    margin-block-start: 0;
+  }
+}
+
+// juz layout (masonry layout)
+.juzLayout {
+  @include breakpoints.tablet {
+    column-count: 2;
+  }
+  @include breakpoints.desktop {
+    column-count: 3;
+  }
+  column-gap: 1em;
+}
+
+// tabs
+.tabsContainer {
+  padding-block-end: var(--spacing-medium);
+}
+
+// sorter
+.sorter {
+  display: flex;
+  margin-block-start: var(--spacing-xsmall);
+  justify-content: flex-end;
+  align-items: baseline;
+  font-size: var(--font-size-small);
+}
+.sortByValue {
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-inline-start: var(--spacing-xxsmall);
+  & > span {
+    display: flex;
+    align-items: center;
+  }
+  & > .rotate180 > svg {
+    transform: rotate(180deg);
+  }
+  & > span > svg {
+    width: var(--spacing-small);
+    margin-inline-start: var(--spacing-xxsmall);
+    transition: transform var(--transition-regular);
+  }
+}
+
+.loadingContainer {
+  min-height: 100vh; // reduce layout shift
+}
+
+.uppercase {
+  text-transform: uppercase;
+}

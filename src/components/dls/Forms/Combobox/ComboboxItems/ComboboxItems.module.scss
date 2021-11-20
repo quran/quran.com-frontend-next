@@ -1,0 +1,47 @@
+$webkit-thumb-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+
+.comboboxBodyContainer {
+  position: absolute;
+  margin-block-start: var(--spacing-micro);
+  border-radius: var(--border-radius-default);
+  box-shadow: var(--shadow-large);
+  &.fixedWidth {
+    width: calc(8 * var(--spacing-mega));
+  }
+  z-index: var(--z-index-dropdown);
+  transition: var(--transition-fast);
+  background-color: var(--color-background-default);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  font-size: var(--font-size-normal);
+}
+
+.largeComboboxBodyContainer {
+  font-size: var(--font-size-large);
+}
+
+.openedComboboxBodyContainer {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.itemsContainer {
+  border-radius: var(--border-radius-default);
+  overflow: hidden;
+  max-height: calc(5 * var(--spacing-mega));
+  overflow-y: scroll;
+
+  // Hack to show the scrollbar on OSX, otherwise the scrollbar is hidden and the component does not indicate scrollability
+  &::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: var(--spacing-xxsmall);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: var(--border-radius-default);
+    background-color: var(--color-background-backdrop);
+    box-shadow: $webkit-thumb-shadow;
+  }
+}

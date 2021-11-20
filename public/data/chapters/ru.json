@@ -1,0 +1,686 @@
+{
+    "1": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Fatihah",
+        "versesCount": 7,
+        "translatedName": "Открывающая Коран"
+    },
+    "2": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Baqarah",
+        "versesCount": 286,
+        "translatedName": "Корова"
+    },
+    "3": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Ali 'Imran",
+        "versesCount": 200,
+        "translatedName": "Семейство Имрана"
+    },
+    "4": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "An-Nisa",
+        "versesCount": 176,
+        "translatedName": "Женщины"
+    },
+    "5": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Ma'idah",
+        "versesCount": 120,
+        "translatedName": "Трапеза"
+    },
+    "6": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-An'am",
+        "versesCount": 165,
+        "translatedName": "Скот"
+    },
+    "7": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-A'raf",
+        "versesCount": 206,
+        "translatedName": "Ограды"
+    },
+    "8": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Anfal",
+        "versesCount": 75,
+        "translatedName": "Трофеи"
+    },
+    "9": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Tawbah",
+        "versesCount": 129,
+        "translatedName": "Покаяние"
+    },
+    "10": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Yunus",
+        "versesCount": 109,
+        "translatedName": "Йунус"
+    },
+    "11": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Hud",
+        "versesCount": 123,
+        "translatedName": "Худ"
+    },
+    "12": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Yusuf",
+        "versesCount": 111,
+        "translatedName": "Йусуф"
+    },
+    "13": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Ar-Ra'd",
+        "versesCount": 43,
+        "translatedName": "Гром"
+    },
+    "14": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ibrahim",
+        "versesCount": 52,
+        "translatedName": "Ибрахим"
+    },
+    "15": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Hijr",
+        "versesCount": 99,
+        "translatedName": "Хиджр "
+    },
+    "16": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Nahl",
+        "versesCount": 128,
+        "translatedName": "Пчелы"
+    },
+    "17": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Isra",
+        "versesCount": 111,
+        "translatedName": "Ночной перенос"
+    },
+    "18": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Kahf",
+        "versesCount": 110,
+        "translatedName": "Пещера"
+    },
+    "19": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Maryam",
+        "versesCount": 98,
+        "translatedName": "Марьям"
+    },
+    "20": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Taha",
+        "versesCount": 135,
+        "translatedName": "Та Ха "
+    },
+    "21": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Anbya",
+        "versesCount": 112,
+        "translatedName": "Пророки"
+    },
+    "22": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hajj",
+        "versesCount": 78,
+        "translatedName": "Паломничество"
+    },
+    "23": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mu'minun",
+        "versesCount": 118,
+        "translatedName": "Верующие"
+    },
+    "24": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "An-Nur",
+        "versesCount": 64,
+        "translatedName": "Свет"
+    },
+    "25": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Furqan",
+        "versesCount": 77,
+        "translatedName": "аль-Фуркан"
+    },
+    "26": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Shu'ara",
+        "versesCount": 227,
+        "translatedName": "Поэты"
+    },
+    "27": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Naml",
+        "versesCount": 93,
+        "translatedName": "Муравьи"
+    },
+    "28": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qasas",
+        "versesCount": 88,
+        "translatedName": "Рассказ"
+    },
+    "29": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Ankabut",
+        "versesCount": 69,
+        "translatedName": "Паук"
+    },
+    "30": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ar-Rum",
+        "versesCount": 60,
+        "translatedName": "Римляне"
+    },
+    "31": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Luqman",
+        "versesCount": 34,
+        "translatedName": "Лукман"
+    },
+    "32": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "As-Sajdah",
+        "versesCount": 30,
+        "translatedName": "Земной поклон"
+    },
+    "33": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Ahzab",
+        "versesCount": 73,
+        "translatedName": "Союзники"
+    },
+    "34": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Saba",
+        "versesCount": 54,
+        "translatedName": "Сава"
+    },
+    "35": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Fatir",
+        "versesCount": 45,
+        "translatedName": "Творец"
+    },
+    "36": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ya-Sin",
+        "versesCount": 83,
+        "translatedName": "Йа Син"
+    },
+    "37": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "As-Saffat",
+        "versesCount": 182,
+        "translatedName": "Выстроившиеся в ряды"
+    },
+    "38": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Sad",
+        "versesCount": 88,
+        "translatedName": "Сод"
+    },
+    "39": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Az-Zumar",
+        "versesCount": 75,
+        "translatedName": "Толпы"
+    },
+    "40": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ghafir",
+        "versesCount": 85,
+        "translatedName": "Прощающий"
+    },
+    "41": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Fussilat",
+        "versesCount": 54,
+        "translatedName": "Разъяснены"
+    },
+    "42": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Shuraa",
+        "versesCount": 53,
+        "translatedName": "Совет"
+    },
+    "43": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Az-Zukhruf",
+        "versesCount": 89,
+        "translatedName": "Украшения"
+    },
+    "44": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ad-Dukhan",
+        "versesCount": 59,
+        "translatedName": "Дым"
+    },
+    "45": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Jathiyah",
+        "versesCount": 37,
+        "translatedName": "Коленопреклоненные"
+    },
+    "46": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ahqaf",
+        "versesCount": 35,
+        "translatedName": "Барханы"
+    },
+    "47": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Muhammad",
+        "versesCount": 38,
+        "translatedName": "Мухаммад"
+    },
+    "48": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Fath",
+        "versesCount": 29,
+        "translatedName": "Победа"
+    },
+    "49": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hujurat",
+        "versesCount": 18,
+        "translatedName": "Комнаты"
+    },
+    "50": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Qaf",
+        "versesCount": 45,
+        "translatedName": "Каф"
+    },
+    "51": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Adh-Dhariyat",
+        "versesCount": 60,
+        "translatedName": "Рассеивающие прах"
+    },
+    "52": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Tur",
+        "versesCount": 49,
+        "translatedName": "Гора"
+    },
+    "53": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Najm",
+        "versesCount": 62,
+        "translatedName": "Звезда"
+    },
+    "54": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qamar",
+        "versesCount": 55,
+        "translatedName": "Месяц"
+    },
+    "55": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Ar-Rahman",
+        "versesCount": 78,
+        "translatedName": "Милостивый"
+    },
+    "56": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Waqi'ah",
+        "versesCount": 96,
+        "translatedName": "Событие"
+    },
+    "57": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hadid",
+        "versesCount": 29,
+        "translatedName": "Железо"
+    },
+    "58": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Mujadila",
+        "versesCount": 22,
+        "translatedName": "Препирающаяся"
+    },
+    "59": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Hashr",
+        "versesCount": 24,
+        "translatedName": "Сбор"
+    },
+    "60": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Mumtahanah",
+        "versesCount": 13,
+        "translatedName": "Испытуемая"
+    },
+    "61": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "As-Saf",
+        "versesCount": 14,
+        "translatedName": "Ряды"
+    },
+    "62": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Jumu'ah",
+        "versesCount": 11,
+        "translatedName": "Собрание"
+    },
+    "63": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Munafiqun",
+        "versesCount": 11,
+        "translatedName": "Лицемеры"
+    },
+    "64": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Taghabun",
+        "versesCount": 18,
+        "translatedName": "Взаимное обделение"
+    },
+    "65": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Talaq",
+        "versesCount": 12,
+        "translatedName": "Развод"
+    },
+    "66": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "At-Tahrim",
+        "versesCount": 12,
+        "translatedName": "Запрещение"
+    },
+    "67": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mulk",
+        "versesCount": 30,
+        "translatedName": "Власть"
+    },
+    "68": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qalam",
+        "versesCount": 52,
+        "translatedName": "Письменная трость"
+    },
+    "69": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Haqqah",
+        "versesCount": 52,
+        "translatedName": "Неминуемое"
+    },
+    "70": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ma'arij",
+        "versesCount": 44,
+        "translatedName": "Ступени"
+    },
+    "71": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Nuh",
+        "versesCount": 28,
+        "translatedName": "Нух"
+    },
+    "72": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Jinn",
+        "versesCount": 28,
+        "translatedName": "Джинны"
+    },
+    "73": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Muzzammil",
+        "versesCount": 20,
+        "translatedName": "Закутавшийся"
+    },
+    "74": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Muddaththir",
+        "versesCount": 56,
+        "translatedName": "Завернувшийся"
+    },
+    "75": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qiyamah",
+        "versesCount": 40,
+        "translatedName": "Воскресение"
+    },
+    "76": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Insan",
+        "versesCount": 31,
+        "translatedName": "Человек"
+    },
+    "77": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mursalat",
+        "versesCount": 50,
+        "translatedName": "Посылаемые"
+    },
+    "78": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Naba",
+        "versesCount": 40,
+        "translatedName": "Весть"
+    },
+    "79": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Nazi'at",
+        "versesCount": 46,
+        "translatedName": "Исторгающие"
+    },
+    "80": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "'Abasa",
+        "versesCount": 42,
+        "translatedName": "Нахмурился"
+    },
+    "81": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Takwir",
+        "versesCount": 29,
+        "translatedName": "Скручивание"
+    },
+    "82": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Infitar",
+        "versesCount": 19,
+        "translatedName": "Раскалывание"
+    },
+    "83": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Mutaffifin",
+        "versesCount": 36,
+        "translatedName": "Обвешивающие"
+    },
+    "84": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Inshiqaq",
+        "versesCount": 25,
+        "translatedName": "Разверзнется"
+    },
+    "85": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Buruj",
+        "versesCount": 22,
+        "translatedName": "Созвездия Зодиака"
+    },
+    "86": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Tariq",
+        "versesCount": 17,
+        "translatedName": "Ночной путник"
+    },
+    "87": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-A'la",
+        "versesCount": 19,
+        "translatedName": "Всевышний"
+    },
+    "88": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ghashiyah",
+        "versesCount": 26,
+        "translatedName": "Покрывающее"
+    },
+    "89": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Fajr",
+        "versesCount": 30,
+        "translatedName": "Заря"
+    },
+    "90": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Balad",
+        "versesCount": 20,
+        "translatedName": "Город"
+    },
+    "91": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Shams",
+        "versesCount": 15,
+        "translatedName": "Солнце"
+    },
+    "92": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Layl",
+        "versesCount": 21,
+        "translatedName": "Ночь"
+    },
+    "93": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ad-Duhaa",
+        "versesCount": 11,
+        "translatedName": "Утро"
+    },
+    "94": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Ash-Sharh",
+        "versesCount": 8,
+        "translatedName": "Раскрытие"
+    },
+    "95": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Tin",
+        "versesCount": 8,
+        "translatedName": "Смоковница"
+    },
+    "96": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Alaq",
+        "versesCount": 19,
+        "translatedName": "Сгусток крови"
+    },
+    "97": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qadr",
+        "versesCount": 5,
+        "translatedName": "Предопределение"
+    },
+    "98": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Al-Bayyinah",
+        "versesCount": 8,
+        "translatedName": "Ясное знамение"
+    },
+    "99": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "Az-Zalzalah",
+        "versesCount": 8,
+        "translatedName": "Сотрясение"
+    },
+    "100": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Adiyat",
+        "versesCount": 11,
+        "translatedName": "Скачущие"
+    },
+    "101": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Qari'ah",
+        "versesCount": 11,
+        "translatedName": "Великое бедствие"
+    },
+    "102": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "At-Takathur",
+        "versesCount": 8,
+        "translatedName": "Страсть к приумножению"
+    },
+    "103": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-'Asr",
+        "versesCount": 3,
+        "translatedName": "Предвечернее время"
+    },
+    "104": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Humazah",
+        "versesCount": 9,
+        "translatedName": "Хулитель"
+    },
+    "105": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Fil",
+        "versesCount": 5,
+        "translatedName": "Слон"
+    },
+    "106": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Quraysh",
+        "versesCount": 4,
+        "translatedName": "Курейшиты"
+    },
+    "107": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ma'un",
+        "versesCount": 7,
+        "translatedName": "Мелочь"
+    },
+    "108": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Kawthar",
+        "versesCount": 3,
+        "translatedName": "Изобилие"
+    },
+    "109": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Kafirun",
+        "versesCount": 6,
+        "translatedName": "Неверующие"
+    },
+    "110": {
+        "revelationPlace": "madinah",
+        "transliteratedName": "An-Nasr",
+        "versesCount": 3,
+        "translatedName": "Помощь"
+    },
+    "111": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Masad",
+        "versesCount": 5,
+        "translatedName": "Пальмовые волокна"
+    },
+    "112": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Ikhlas",
+        "versesCount": 4,
+        "translatedName": "Очищение веры"
+    },
+    "113": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "Al-Falaq",
+        "versesCount": 5,
+        "translatedName": "Рассвет"
+    },
+    "114": {
+        "revelationPlace": "makkah",
+        "transliteratedName": "An-Nas",
+        "versesCount": 6,
+        "translatedName": "Люди"
+    }
+}

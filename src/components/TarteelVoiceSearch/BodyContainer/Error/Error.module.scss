@@ -1,0 +1,15 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  & > svg {
+    margin-block-end: var(--spacing-mega);
+    width: calc(2 * var(--spacing-mega));
+    height: calc(2 * var(--spacing-mega));
+    & > path {
+      fill: var(--color-background-inverse);
+    }
+  }
+}

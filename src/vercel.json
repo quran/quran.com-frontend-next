@@ -1,0 +1,8 @@
+{
+    "headers": [
+        {
+            "key": "x-robots-tag",
+            "value": "noindex"
+        }
+    ]
+}

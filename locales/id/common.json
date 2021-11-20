@@ -1,0 +1,193 @@
+{
+    "about": "Tentang kami",
+    "audio": {
+        "auto-scroll": {
+            "off": "Mati",
+            "on": "Pada",
+            "title": "Gulir Otomatis"
+        },
+        "play": "Putar Audio",
+        "playback-speed": "Kecepatan Pemutaran",
+        "player": {
+            "close": "Tutup Pemutar Audio",
+            "currently-playing": "Anda sedang bermain",
+            "delay-verse": "Keterlambatan antar ayat",
+            "download": "Unduh",
+            "mismatch": "Klik \"Mulai Ulang\" jika Anda ingin memainkan {{currentReadingChapter}} sebagai gantinya",
+            "next-ayah": "Ayah Berikutnya",
+            "pause": "Berhenti sebentar",
+            "play": "Bermain",
+            "play-range": "Rentang bermain",
+            "previous-ayah": "Ayah sebelumnya",
+            "repeat-1-verse": "Ulangi Ayat",
+            "repeat-settings": "Ulangi Pengaturan",
+            "repeat-verse": "Ulangi setiap ayat",
+            "search-verse": "Cari sebuah ayat",
+            "single-verse": "Ayat tunggal",
+            "start-over": "Mulai lagi",
+            "start-playing": "Mulai bermain",
+            "stop-repeating": "Berhenti Mengulang",
+            "times": "waktu",
+            "verses-range": "Jangkauan ayat"
+        },
+        "title": "audio"
+    },
+    "ayah": "Ayah",
+    "ayahs": "Ayah",
+    "beta": "Beta",
+    "bookmark": "Penanda buku",
+    "bookmarked": "Ditandai",
+    "both": "Keduanya",
+    "cancel": "Membatalkan",
+    "click-here": "Klik disini",
+    "close": "Menutup",
+    "command-bar": {
+        "navigations": "Navigasi",
+        "no-nav-results": "Tidak ada hasil navigasi",
+        "placeholder": "Apa yang ingin Anda baca?",
+        "powered-by": "Pencarian suara diberdayakan oleh Tarteel.ai",
+        "recent-navigations": "Navigasi terbaru",
+        "try-navigating": "Coba navigasikan ke"
+    },
+    "community": {
+        "cta": "Bergabunglah dengan Komunitas",
+        "header": "Bergabunglah dengan Komunitas QDC pembangun dan teknolog Muslim.",
+        "sub-header": "Daftar ke Quran.com Discord untuk berpartisipasi dan berkolaborasi dengan komunitas terkemuka yang membangun teknologi Islami.",
+        "title": "Masyarakat"
+    },
+    "continue": "Melanjutkan",
+    "copied": "disalin",
+    "copied-to-clipboard": "Disalin ke papan klip",
+    "copy": "Salinan",
+    "counter": {
+        "decrease": "Mengurangi",
+        "increase": "Meningkatkan"
+    },
+    "developers": "Pengembang",
+    "error": {
+        "general": "Ada yang salah. Silakan coba lagi.",
+        "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi."
+    },
+    "feedback": "Masukan",
+    "fonts": {
+        "15_lines": "15 Baris",
+        "16_lines": "16 Baris",
+        "code_v1": "Kompleks Raja Fahad V1",
+        "code_v2": "Kompleks Raja Fahad V2",
+        "font-size": "Ukuran huruf",
+        "lines": "Garis",
+        "qcf-desc": "Font KPFG memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk memuat dan tidak dapat disalin melalui browser.",
+        "qpc_uthmani_hafs": "QPC Utsmani Hafs",
+        "quran-font": "Huruf Quran",
+        "text_indopak": "IndoPak",
+        "text_uthmani": "Usmani"
+    },
+    "from": "Dari",
+    "help": "Membantu",
+    "hizb": "Hizbut Tahrir",
+    "home": "Rumah",
+    "input": {
+        "clear": "Jernih"
+    },
+    "juz": "Juzu",
+    "loading": "Memuat",
+    "menu": "Tidak bisa",
+    "mobile-apps": "Aplikasi Seluler",
+    "mode": "Mode",
+    "more": "Lagi",
+    "network": "Jaringan",
+    "next": "Lanjut",
+    "no": "Tidak",
+    "none": "Tidak ada",
+    "page": "Halaman",
+    "pages": "halaman",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil penelusuran",
+    "powered-by": "Dipersembahkan oleh",
+    "prayer-times": {
+        "calculation-method": "Metode kalkulasi",
+        "madhab": "madhab",
+        "title": "Waktu Sholat"
+    },
+    "prev": "Sebelumnya",
+    "privacy": "Pribadi",
+    "q-reflect": "QuranReflect",
+    "quran-com": "Quran.com",
+    "reading-preference": {
+        "reading": "Membaca",
+        "translation": "Terjemahan"
+    },
+    "reciter": "Tukang deklamasi",
+    "remove": "Menghapus",
+    "retry": "Mencoba kembali",
+    "search": {
+        "filters": "Filter",
+        "hint": "Coba cari",
+        "jump-to": "Langsung Ke",
+        "no-results": "Tidak ada hasil yang ditemukan",
+        "no-results-suggestion": "Kami tidak dapat menemukan hasil pencarian yang cocok untuk \" {{searchQuery}} \". coba cari kata kunci lain.",
+        "popular": "Pencarian Populer",
+        "recent": "Pencarian terkini",
+        "results": "hasil",
+        "show-all": "Tampilkan semua hasil",
+        "switch-mode": "Beralih ke Pencarian Lanjutan",
+        "title": "Mencari"
+    },
+    "settings": {
+        "change-reciter": "Ganti Pembaca",
+        "change-translations": "Ubah Terjemahan",
+        "reading-experience": "Pengalaman Membaca",
+        "reset-cta": "Atur Ulang Pengaturan",
+        "title": "Pengaturan"
+    },
+    "share": "Membagikan",
+    "shared": "Tautan telah disalin ke papan klip!",
+    "sitemap": "Peta Situs",
+    "sort": {
+        "ascending": "naik",
+        "by": "Sortir dengan",
+        "descending": "Menurun"
+    },
+    "style": "Gaya",
+    "surah": "surah",
+    "tafsir": {
+        "font-size": "Ukuran font tafsir",
+        "surah": "Surat Tafsir",
+        "title": "tafsir"
+    },
+    "tarteel": {
+        "app": "aplikasi tarteel",
+        "desc": "pencarian suara quran",
+        "learn": "pelajari cara menggunakan pencarian suara",
+        "name": "Tarteel.ai"
+    },
+    "theme": "Tema",
+    "themes": {
+        "dark": "Gelap",
+        "light": "Lampu",
+        "sepia": "Warna coklat tua",
+        "system": "Sistem",
+        "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang\/gelap Anda"
+    },
+    "to": "Ke",
+    "tooltip": "Keterangan alat",
+    "translation": "Terjemahan",
+    "translations": "Terjemahan",
+    "transliteration": "Transliterasi",
+    "type": "Jenis",
+    "verse": "Ayat",
+    "view": "Melihat",
+    "voice": {
+        "ask-permission": "Harap aktifkan izin mikrofon untuk mulai menggunakan Penelusuran Suara",
+        "error": "Terjadi kesalahan, coba lagi nanti. Atau unduh",
+        "no-permission": "Sepertinya Anda tidak mengaktifkan izin mikrofon. Harap aktifkan izin mikrofon dan coba lagi atau unduh",
+        "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Silakan coba browser lain atau unduh",
+        "suggest": "Silakan mulai membaca dan ayat Anda akan muncul."
+    },
+    "wbw": "Kata demi kata",
+    "word-click": {
+        "no-audio": "Tidak ada suara",
+        "play-audio": "Putar Audio",
+        "title": "Klik Kata"
+    },
+    "yes": "Ya"
+}

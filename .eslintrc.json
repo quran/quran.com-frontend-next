@@ -1,0 +1,226 @@
+{
+    "extends": [
+        "airbnb",
+        "airbnb/hooks",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "prettier",
+        "plugin:@next/next/recommended",
+        "plugin:i18next/recommended"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+        "prettier",
+        "react",
+        "react-func",
+        "sonarjs",
+        "unicorn",
+        "jsdoc"
+    ],
+    "rules": {
+        "i18next/no-literal-string": ["error", { "ignoreCallee": ["t"], "markupOnly": true, "onlyAttribute": [""], "validateTemplate": true, "ignore": ["—", "⇧", "⌥", "⌃", "©"] }],
+        "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
+        "@typescript-eslint/no-use-before-define": "off",
+        "no-shadow": "off", // we need to disable this @see https://stackoverflow.com/a/63961972/1931451
+        "@typescript-eslint/no-shadow": ["error"],
+        "react/jsx-filename-extension": 0,
+        "react/jsx-props-no-spreading": 0,
+        "react/boolean-prop-naming": ["error", { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }],
+        "react/destructuring-assignment": 2,
+        "react/no-children-prop": 2,
+        "react/no-deprecated": 2,
+        "react/no-multi-comp": 2,
+        "react/jsx-fragments": 2,
+        "react/jsx-handler-names": 2,
+        "react/jsx-sort-default-props": 2,
+        "react-func/max-lines-per-function": ["error", {
+            "max": 30,
+            "skipBlankLines": true,
+            "skipComments": true
+        }],
+        "import/order": ["error", {"newlines-between": "always", "alphabetize": {"order": "asc", "caseInsensitive": true}, "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "builtin",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": ["react"]}],
+        "max-lines":[2, {"max": 150,"skipBlankLines": true,"skipComments": true}],
+        "prefer-destructuring": ["error", {
+            "VariableDeclarator": {
+              "array": false,
+              "object": true
+            },
+            "AssignmentExpression": {
+              "array": false,
+              "object": true
+            }
+          }, {
+            "enforceForRenamedProperties": false
+          }],
+        "import/extensions": [
+            2,
+            "ignorePackages",
+            {
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "sonarjs/no-inverted-boolean-check": "error",
+        "sonarjs/no-nested-switch": "error",
+        "sonarjs/no-redundant-boolean": "error",
+        "unicorn/no-abusive-eslint-disable": "error",
+        "unicorn/no-array-reduce": "error",
+        "unicorn/filename-case": [
+            "error",
+            {
+                "cases": {
+                    "kebabCase": true,
+                    "camelCase": true,
+                    "pascalCase": true
+                }
+            }
+        ],
+        "jsdoc/check-alignment": 2,
+        "jsdoc/check-param-names": 2,
+        "jsdoc/check-tag-names": 2,
+        "jsdoc/check-types": 2,
+        "jsdoc/newline-after-description": 2,
+        "jsdoc/no-bad-blocks": 2,
+        "jsdoc/no-multi-asterisks": 2,
+        "jsdoc/require-asterisk-prefix": 2,
+        "jsdoc/require-param-type": 2,
+        "jsdoc/require-param-name": 2,
+        "jsdoc/require-returns": 2,
+        "jsdoc/require-returns-type": 2,
+        "arrow-body-style": 0,
+        "prettier/prettier": [
+            2,
+            {
+                "arrowParens": "always",
+                "bracketSpacing": true,
+                "jsxBracketSameLine": false,
+                "printWidth": 100,
+                "proseWrap": "always",
+                "requirePragma": false,
+                "semi": true,
+                "singleQuote": true,
+                "tabWidth": 2,
+                "trailingComma": "all",
+                "useTabs": false
+            }
+        ]
+    },
+    "overrides": [{
+        "extends": [
+            "plugin:@typescript-eslint/recommended",
+            "prettier"
+        ],
+        "files": [
+            "*.ts",
+            "*.tsx",
+            "*.scss"
+        ],
+        "rules": {
+            "@typescript-eslint/no-unused-vars": 2,
+            "@typescript-eslint/explicit-module-boundary-types": "off",
+            "react/require-default-props": "off",
+            "jsx-a11y/media-has-caption": "off",
+            "no-param-reassign": [
+                "error",
+                {
+                    "props": true,
+                    "ignorePropertyModificationsFor": [
+                        "draft"
+                    ]
+                }
+            ],
+            "react/forbid-prop-types": 0,
+            "react/jsx-no-undef": 0,
+            "react/no-unused-prop-types": 0,
+            "react/prop-types": 0,
+            "react/react-in-jsx-scope": 0,
+            "import/no-extraneous-dependencies": [
+                "error",
+                {
+                    "devDependencies": [
+                        "**/*.test.ts",
+                        "**/*.test.tsx",
+                        "tests/**/*"
+                    ]
+                }
+            ],
+            "@typescript-eslint/ban-ts-comment": 0,
+            "jsx-a11y/anchor-is-valid": [
+                "error",
+                {
+                    "components": [
+                        "Link"
+                    ],
+                    "specialLink": [
+                        "hrefLeft",
+                        "hrefRight"
+                    ],
+                    "aspects": [
+                        "invalidHref",
+                        "preferButton"
+                    ]
+                }
+            ],
+            "@typescript-eslint/naming-convention": [
+                2,
+                {
+                    "selector": "variableLike",
+                    "format": [
+                        "camelCase",
+                        "UPPER_CASE",
+                        "PascalCase"
+                    ]
+                },
+                {
+                    "selector": "memberLike",
+                    "filter": {
+                        "regex": "^__",
+                        "match": false
+                    },
+                    "format": [
+                        "camelCase",
+                        "UPPER_CASE",
+                        "PascalCase"
+                    ]
+                },
+                {
+                    "selector": "typeLike",
+                    "format": [
+                        "PascalCase"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "files": [ "**/*.ts", "*.stories.tsx", "*.js" ],
+        "rules": {
+          "i18next/no-literal-string": 0
+        }
+    }],
+    "settings": {
+        "import/resolver": {
+            "typescript": {}, // this loads tsconfig.json to eslint
+            "node": {
+                "paths": [
+                    "."
+                ],
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx",
+                    ".d.ts",
+                    ".svg"
+                ]
+            }
+        }
+    }
+}

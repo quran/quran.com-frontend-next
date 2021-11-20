@@ -1,0 +1,16 @@
+$default-mode-top: 131.6px;
+$default-mode-bottom: 68vh;
+$reading-mode-top: 115.6px;
+$reading-mode-bottom: 70vh;
+
+.container {
+  position: fixed;
+  inset-block: $default-mode-top $default-mode-bottom;
+  z-index: var(--z-index-sticky);
+  width: 100%;
+  border: 1px solid var(--color-background-inverse);
+}
+
+.readingMode {
+  inset-block: $reading-mode-top $reading-mode-bottom;
+}

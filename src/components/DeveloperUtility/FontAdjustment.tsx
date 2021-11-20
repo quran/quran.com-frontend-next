@@ -1,21 +1,32 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
 import {
-  decreaseQuranTextSize,
-  decreaseTranslationTextSize,
-  increaseQuranTextSize,
-  increaseTranslationTextSize,
+  decreaseQuranTextFontScale,
+  increaseQuranTextFontScale,
+  increaseTafsirFontScale,
+  decreaseTafsirFontScale,
   selectQuranReaderStyles,
   setQuranFont,
+  QuranReaderStyles,
+  MAXIMUM_FONT_STEP,
+  decreaseTranslationFontScale,
+  increaseTranslationFontScale,
 } from 'src/redux/slices/QuranReader/styles';
-import { QuranFont } from '../QuranReader/types';
+import { QuranFont } from 'types/QuranReader';
 
 /**
  * Adjusts the font type and styles
+ *
+ * @returns {JSX.Element}
  */
-const FontAdjustment = () => {
+const FontAdjustment = (): JSX.Element => {
   const dispatch = useDispatch();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const { quranTextFontScale, quranFont, translationFontScale, tafsirFontScale } =
+    quranReaderStyles;
   const availableFonts = [];
 
   Object.values(QuranFont).forEach((font) => availableFonts.push(font));
@@ -28,7 +39,7 @@ const FontAdjustment = () => {
         <select
           name="font-styles"
           onChange={(event) => dispatch({ type: setQuranFont.type, payload: event.target.value })}
-          value={quranReaderStyles.quranFont}
+          value={quranFont}
         >
           {availableFonts.map((font) => (
             <option key={font} value={font}>
@@ -39,21 +50,55 @@ const FontAdjustment = () => {
       </label>
       {/* Quran Font size */}
       <div>
-        Quran font size{' '}
-        <button onClick={() => dispatch({ type: decreaseQuranTextSize.type })} type="button">
+        Quran font size ({quranTextFontScale}){' '}
+        <button
+          onClick={() => dispatch({ type: decreaseQuranTextFontScale.type })}
+          type="button"
+          disabled={quranTextFontScale === 1}
+        >
           -
         </button>{' '}
-        <button onClick={() => dispatch({ type: increaseQuranTextSize.type })} type="button">
+        <button
+          onClick={() => dispatch({ type: increaseQuranTextFontScale.type })}
+          type="button"
+          disabled={quranTextFontScale === MAXIMUM_FONT_STEP}
+        >
           +
         </button>
       </div>
       {/* Translation Font size */}
       <div>
-        Translation font size{' '}
-        <button onClick={() => dispatch({ type: decreaseTranslationTextSize.type })} type="button">
+        Translation font size ({translationFontScale}){' '}
+        <button
+          onClick={() => dispatch({ type: decreaseTranslationFontScale.type })}
+          type="button"
+          disabled={translationFontScale === 1}
+        >
           -
         </button>{' '}
-        <button onClick={() => dispatch({ type: increaseTranslationTextSize.type })} type="button">
+        <button
+          onClick={() => dispatch({ type: increaseTranslationFontScale.type })}
+          type="button"
+          disabled={translationFontScale === MAXIMUM_FONT_STEP}
+        >
+          +
+        </button>
+      </div>
+      {/* Tafsir Font size */}
+      <div>
+        Tafsir font size ({tafsirFontScale}){' '}
+        <button
+          onClick={() => dispatch({ type: decreaseTafsirFontScale.type })}
+          type="button"
+          disabled={tafsirFontScale === 1}
+        >
+          -
+        </button>{' '}
+        <button
+          onClick={() => dispatch({ type: increaseTafsirFontScale.type })}
+          type="button"
+          disabled={tafsirFontScale === MAXIMUM_FONT_STEP}
+        >
           +
         </button>
       </div>
