@@ -88,6 +88,30 @@ const config = {
           },
         ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/:surah/:from/:to', // 1/2/3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah/:from\\::to', // 1/2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah\\::from\\::to', // 1:2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah-:from\\::to', // 1-2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = withPlugins([withBundleAnalyzer, withPWA, withFonts, nextTranslate], config);
