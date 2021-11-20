@@ -52,7 +52,7 @@ export const getRequestKey = ({
       : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
-      locale: wordByWordLocale,
+      wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
       translations: selectedTranslations.join(', '),
@@ -62,7 +62,7 @@ export const getRequestKey = ({
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, locale, {
-      locale: wordByWordLocale,
+      wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
       translations: selectedTranslations.join(', '),
