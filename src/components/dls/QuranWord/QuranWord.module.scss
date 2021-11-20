@@ -6,8 +6,21 @@
   margin-inline-end: var(--spacing-xxsmall);
 }
 
-.hoveredTajweedWord {
-  background-color: var(--color-background-backdrop);
+.tajweedWord {
+  @media (prefers-color-scheme: dark) {
+    --tajweed-image-bg: rgba(255, 255, 255, 0.25);
+  }
+  @media (prefers-color-scheme: light) {
+    --tajweed-image-bg: rgba(31, 189, 233, 0.15);
+  }
+
+  &:hover {
+    background-color: var(--tajweed-image-bg);
+  }
+
+  @at-root .highlighted {
+    background-color: var(--tajweed-image-bg);
+  }
 }
 
 .wbwContainer {

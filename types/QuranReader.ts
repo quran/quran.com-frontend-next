@@ -47,7 +47,7 @@ export enum Mushaf {
   KFGQPCHAFS = 5,
   Indopak15Lines = 6,
   Indopak16Lines = 7,
-  Tajweeed = 10,
+  Tajweeed = 11,
 }
 
 export const QuranFontMushaf: Record<QuranFont, Mushaf> = {

@@ -4,13 +4,13 @@ import React from 'react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import styles from './TajweedWord.module.scss';
+import styles from './TajweedWordImage.module.scss';
 
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 
 interface Props {
   path: string;
-  location: string;
+  alt: string;
 }
 
 const FONT_SIZE_CLASS_MAP = {
@@ -21,13 +21,13 @@ const FONT_SIZE_CLASS_MAP = {
   5: styles.xl,
 };
 
-const STATIC_QURAN_PATH = 'https://static.quran.com';
+const IMAGE_BASE_PATH = 'https://static.quran.com';
 
-const TajweedWord: React.FC<Props> = ({ path, location }) => {
+const TajweedWord: React.FC<Props> = ({ path, alt }) => {
   const { quranTextFontScale } = useSelector(selectQuranReaderStyles);
   return (
     <span className={classNames(styles.imageContainer, FONT_SIZE_CLASS_MAP[quranTextFontScale])}>
-      <img src={`${STATIC_QURAN_PATH}/${path}`} alt={location} />
+      <img src={`${IMAGE_BASE_PATH}/${path}`} alt={alt} />
     </span>
   );
 };
