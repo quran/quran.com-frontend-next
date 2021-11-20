@@ -32,7 +32,8 @@ const getVersesParams = (
     ...DEFAULT_VERSES_PARAMS,
     translations: getTranslationsInitialState(currentLocale).selectedTranslations.join(', '),
     reciter: getAudioPlayerStateInitialState(currentLocale).reciter.id,
-    locale: getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
+    wordTranslationLanguage:
+      getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
   },
   ...params,
 });
