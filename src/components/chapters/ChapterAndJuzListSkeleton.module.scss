@@ -33,7 +33,7 @@
 .firstTabSkeleton {
   width: calc(3 * var(--spacing-mega));
   margin-inline-end: var(--spacing-small);
-  margin-bottom: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .secondTabSkeleton {

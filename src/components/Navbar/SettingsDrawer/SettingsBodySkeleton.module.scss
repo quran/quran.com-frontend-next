@@ -22,8 +22,8 @@
 }
 
 .inputRow {
-  margin-bottom: var(--spacing-large);
-  padding-bottom: var(--spacing-large);
+  margin-block-end: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
   border-bottom: 1px solid;
   border-color: var(--color-secondary-faded);
 }

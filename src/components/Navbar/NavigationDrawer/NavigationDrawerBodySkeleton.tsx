@@ -1,22 +1,28 @@
-import Skeleton from '../../dls/Skeleton/Skeleton';
+import Skeleton from "../../dls/Skeleton/Skeleton";
 
-import styles from './NavigationDrawerBodySkeleton.module.scss';
+import styles from "./NavigationDrawerBodySkeleton.module.scss";
 
 const NAV_ROW_COUNT = 6;
 const rowsArr = Array(NAV_ROW_COUNT).fill(null);
 
+const renderLinesSkeleton = (index) => {
+  return rowsArr.map((k, i) => (
+    // eslint-disable-next-line react/no-array-index-key
+    <Skeleton
+      key={`skeleton_${index}_${i}`}
+      isActive
+      isSquared
+      className={styles.navRow}
+    />
+  ));
+};
+
 const NavigationDrawerBodySkeleton = () => {
   return (
     <span className={styles.skeletonContainer}>
-      {rowsArr.map((k, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Skeleton key={`skeleton_${i}`} isActive isSquared className={styles.navRow} />
-      ))}
+      {renderLinesSkeleton(1)}
       <Skeleton isActive isSquared className={styles.blockRow} />
-      {rowsArr.map((k, i) => (
-        // eslint-disable-next-line react/no-array-index-key
-        <Skeleton key={`skeleton_${i}`} isActive isSquared className={styles.navRow} />
-      ))}
+      {renderLinesSkeleton(2)}
     </span>
   );
 };
