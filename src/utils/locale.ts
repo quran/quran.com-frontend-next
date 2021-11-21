@@ -22,7 +22,7 @@ const LOCALE_NAME = {
   tr: 'Türkçe',
   ur: 'اردو',
   zh: '简体中文',
-  ms: 'bahasa Melayu',
+  ms: 'Melayu',
   de: 'Deutsch',
   inh: 'ʁəlʁɑj mot',
   ta: 'தமிழ்', // tamil
