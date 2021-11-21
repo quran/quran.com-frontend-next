@@ -83,6 +83,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "古兰经字体",
         "tajweed": "泰姬草",
+        "tajweed-desc": "Tajweed 字体显示 Tajweed 色的 Mushaf。 <0>此处阅读有关 Tajweed 颜色规则的更多信息<\/0>",
         "text_indopak": "印巴",
         "text_uthmani": "奥斯曼尼"
     },

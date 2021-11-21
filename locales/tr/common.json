@@ -83,6 +83,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Kuran Yazı Tipi",
         "tajweed": "tecvid",
+        "tajweed-desc": "Tajweed yazı tipi, Tajweed renkli bir Mushaf gösterir. Tajweed renk kuralları hakkında daha fazla bilgiyi <0> buradan <\/0>",
         "text_indopak": "Hint Paketi",
         "text_uthmani": "Osmanca"
     },
