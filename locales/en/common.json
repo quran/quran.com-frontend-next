@@ -83,6 +83,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Quran Font",
         "tajweed": "Tajweed",
+        "tajweed-desc": "Tajweed font shows a Tajweed colored Mushaf. You can read more about the Tajweed color rules <0> here <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },

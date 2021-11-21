@@ -16,6 +16,7 @@
     "/about-us": ["about"],
     "/developers": ["developers"],
     "/privacy": ["privacy"],
-    "/support": ["support"]
+    "/support": ["support"],
+    "/tajweed-colors": ["tajweed"]
   }
 }

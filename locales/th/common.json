@@ -83,6 +83,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "คัมภีร์กุรอานอักษร",
         "tajweed": "ทัชวีด",
+        "tajweed-desc": "แบบอักษร Tajweed แสดง Mushaf สี Tajweed คุณสามารถอ่านเพิ่มเติมเกี่ยวกับกฎสี Tajweed <0> ที่นี่ <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "อุทุมณี"
     },

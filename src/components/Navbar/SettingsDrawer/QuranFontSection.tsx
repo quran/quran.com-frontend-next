@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
 
 import Counter from 'src/components/dls/Counter/Counter';
@@ -19,7 +20,6 @@ import {
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
@@ -158,7 +158,7 @@ const QuranFontSection = () => {
           }
         />
       </Section.Row>
-      <Section.Footer visible={isQCFFont(quranFont)}>{t('fonts.qcf-desc')}</Section.Footer>
+      <QuranFontSectionFooter quranFont={quranFont} />
     </Section>
   );
 };

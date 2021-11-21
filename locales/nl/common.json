@@ -83,6 +83,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Koran lettertype",
         "tajweed": "Tajweed",
+        "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
