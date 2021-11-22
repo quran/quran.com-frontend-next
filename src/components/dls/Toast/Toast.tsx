@@ -1,4 +1,5 @@
 /* eslint-disable react/no-multi-comp */
+import classNames from 'classnames';
 import {
   ToastContainer as PrimitiveToastContainer,
   toast as primitiveToast,
@@ -18,6 +19,7 @@ type Action = {
 type Options = {
   preserve?: boolean;
   actions?: Action[];
+  status?: 'success' | 'error' | 'warning';
 };
 const TOAST_DURATION = 3000; // 3 second
 export const toast = (content: React.ReactNode, options: Options = {}) => {
@@ -45,6 +47,11 @@ export const toast = (content: React.ReactNode, options: Options = {}) => {
     {
       autoClose: options.preserve ? false : TOAST_DURATION,
       closeButton: false,
+      className: classNames(styles.toast, {
+        [styles.errorBody]: options.status === 'error',
+        [styles.successBody]: options.status === 'success',
+        [styles.warningBody]: options.status === 'warning',
+      }),
     },
   );
 };
