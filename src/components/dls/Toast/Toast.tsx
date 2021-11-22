@@ -11,6 +11,12 @@ import styles from './Toast.module.scss';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
+enum ToastStatus {
+  Success = 'success',
+  Error = 'error',
+  Info = 'info',
+  Warning = 'warning',
+}
 type Action = {
   text: string;
   onClick?: () => void;
@@ -19,7 +25,7 @@ type Action = {
 type Options = {
   preserve?: boolean;
   actions?: Action[];
-  status?: 'success' | 'error' | 'warning';
+  status?: ToastStatus;
 };
 const TOAST_DURATION = 3000; // 3 second
 export const toast = (content: React.ReactNode, options: Options = {}) => {
