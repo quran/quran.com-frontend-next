@@ -1,13 +1,10 @@
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import RightIcon from '../../../../public/icons/east.svg';
-
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
 import BigSelect from 'src/components/dls/BigSelect/BigSelect';
-import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {

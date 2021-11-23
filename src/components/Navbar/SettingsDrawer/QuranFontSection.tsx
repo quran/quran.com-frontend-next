@@ -7,7 +7,6 @@ import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
 
 import Counter from 'src/components/dls/Counter/Counter';
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
 import Switch from 'src/components/dls/Switch/Switch';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';

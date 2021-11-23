@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
 
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
 import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
