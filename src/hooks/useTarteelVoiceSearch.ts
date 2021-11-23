@@ -224,6 +224,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
               );
             };
             webSocket.onerror = () => {
+              setIsLoading(false);
               setError(VoiceError.SOCKET_ERROR);
             };
           })
