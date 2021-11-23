@@ -2,7 +2,7 @@
 @use "src/styles/constants";
 
 .container {
-  background: var(--color-background-default);
+  background: var(--color-background-elevated);
   position: fixed;
   height: 100vh;
   width: 100%;
@@ -44,13 +44,9 @@
 .searchContainer {
   display: flex;
   flex-direction: column;
-  min-height: calc(
-    100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega)))
-  );
+  min-height: calc(100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega))));
   @include breakpoints.tablet {
-    min-height: calc(
-      100% - calc(constants.$navbar-height + var(--spacing-small))
-    );
+    min-height: calc(100% - calc(constants.$navbar-height + var(--spacing-small)));
   }
   justify-content: space-between;
 }
@@ -76,7 +72,6 @@
 .header {
   font-size: var(--font-size-large);
   width: 100%;
-  background-color: var(--color-background-default);
   position: fixed;
   height: constants.$navbar-height;
   border-bottom: 1px var(--color-borders-hairline) solid;
