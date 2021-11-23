@@ -4,7 +4,7 @@
         "auto-scroll": {
             "off": "Off",
             "on": "On",
-            "title": "Auto Scroll"
+            "title": "Scroll page to follow audio"
         },
         "play": "Play Audio",
         "playback-speed": "Playback Speed",
@@ -223,7 +223,7 @@
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",
-        "title": "Word Click"
+        "title": "Play audio when word clicked"
     },
     "yes": "Yes"
 }

@@ -6,18 +6,15 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
 
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
-import Select from 'src/components/dls/Forms/Select';
+import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import {
   selectReadingPreference,
-  setReadingPreference,
   setShowWordByWordTranslation,
   setShowWordByWordTransliteration,
   setShowTooltipFor,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
   selectWordClickFunctionality,
-  setWordClickFunctionality,
   selectWordByWordLocale,
   setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
@@ -34,13 +31,11 @@ const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
 const ReadingExperienceSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const readingPreference = useSelector(selectReadingPreference);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
     shallowEqual,
   );
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-  const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const wordByWordValue = getWordByWordValue(
@@ -97,42 +92,13 @@ const ReadingExperienceSection = () => {
     [t],
   );
 
-  const preferences = useMemo(
-    () =>
-      Object.values(ReadingPreference).map((item) => ({
-        label: t(`reading-preference.${item}`),
-        id: item,
-        value: item,
-      })),
-    [t],
-  );
-
-  const wordClickOptions = useMemo(
-    () =>
-      Object.values(WordClickFunctionality).map((item) => ({
-        label: t(`word-click.${item}`),
-        id: item,
-        value: item,
-      })),
-    [t],
-  );
-
   return (
     <Section>
       <Section.Title>{t('settings.reading-experience')}</Section.Title>
       <Section.Row>
-        <Section.Label>{t('view')}</Section.Label>
-        <RadioGroup
-          onChange={(value) => dispatch(setReadingPreference(value as ReadingPreference))}
-          value={readingPreference}
-          label="view"
-          items={preferences}
-          orientation={RadioGroupOrientation.Horizontal}
-        />
-      </Section.Row>
-      <Section.Row>
         <Section.Label>{t('wbw')}</Section.Label>
         <Select
+          size={SelectSize.Small}
           id="wordByWord"
           name="wordByWord"
           options={wordByWordOptions}
@@ -143,6 +109,7 @@ const ReadingExperienceSection = () => {
       <Section.Row>
         <Section.Label>{t('wbw-trans-lang')}</Section.Label>
         <Select
+          size={SelectSize.Small}
           id="wordByWord"
           name="wordByWord"
           options={WORD_BY_WORD_LOCALES_OPTIONS}
@@ -153,21 +120,12 @@ const ReadingExperienceSection = () => {
       <Section.Row>
         <Section.Label>{t('tooltip')}</Section.Label>
         <Select
+          size={SelectSize.Small}
           id="showToolTipFor"
           name="showToolTipFor"
           options={wordByWordOptions}
           value={tooltipWordByWordValue}
           onChange={onTooltipWordByWordChange}
-        />
-      </Section.Row>
-      <Section.Row>
-        <Section.Label>{t('word-click.title')}</Section.Label>
-        <RadioGroup
-          onChange={(value) => dispatch(setWordClickFunctionality(value as WordClickFunctionality))}
-          value={wordClickFunctionality}
-          label="Word Click"
-          items={wordClickOptions}
-          orientation={RadioGroupOrientation.Horizontal}
         />
       </Section.Row>
     </Section>

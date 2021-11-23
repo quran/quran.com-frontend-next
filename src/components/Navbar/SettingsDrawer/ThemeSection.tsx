@@ -3,11 +3,20 @@ import React, { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import Section from './Section';
+import MoonIcon from '../../../../public/icons/moon-outline.svg';
+import SunIcon from '../../../../public/icons/sun-outline.svg';
 
-import Select from 'src/components/dls/Forms/Select';
+import Section from './Section';
+import styles from './ThemeSection.module.scss';
+
+import Switch from 'src/components/dls/Switch/Switch';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
+
+const icons = {
+  [ThemeType.Dark]: <MoonIcon />,
+  [ThemeType.Light]: <SunIcon />,
+};
 
 const ThemeSection = () => {
   const dispatch = useDispatch();
@@ -16,7 +25,12 @@ const ThemeSection = () => {
   const themes = useMemo(
     () =>
       Object.values(ThemeType).map((themeValue) => ({
-        label: t(`themes.${themeValue}`),
+        name: (
+          <span className={styles.container}>
+            {icons[themeValue]}
+            {t(`themes.${themeValue}`)}
+          </span>
+        ),
         value: themeValue,
       })),
     [t],
@@ -25,13 +39,10 @@ const ThemeSection = () => {
     <Section>
       <Section.Title>{t('theme')}</Section.Title>
       <Section.Row>
-        <Section.Label>{t('mode')}</Section.Label>
-        <Select
-          id="theme-section"
-          name="theme"
-          options={themes}
-          value={theme.type}
-          onChange={(value) => dispatch({ type: setTheme.type, payload: value })}
+        <Switch
+          items={themes}
+          selected={theme.type}
+          onSelect={(value) => dispatch({ type: setTheme.type, payload: value })}
         />
       </Section.Row>
       <Section.Footer visible={theme.type === ThemeType.System}>

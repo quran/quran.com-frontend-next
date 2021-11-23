@@ -9,6 +9,7 @@ import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import BigSelect from 'src/components/dls/BigSelect/BigSelect';
 import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
@@ -49,15 +50,21 @@ const TranslationSection = () => {
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
+      const firstValue = data.translations.find(
+        (translation) => translation.id === selectedTranslations[0],
+      );
+
+      const valueString =
+        selectedTranslations.length > 1
+          ? `${firstValue.name}, and ${selectedTranslations.length - 1} others`
+          : firstValue.name;
+
       return (
-        <div>
-          {selectedTranslations.map((translationId) => {
-            const selectedTranslation = data.translations.find(
-              (translation) => translation.id === translationId,
-            );
-            return <div>{selectedTranslation.name}</div>;
-          })}
-        </div>
+        <BigSelect
+          label="Selected Translations"
+          value={valueString}
+          onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
+        />
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -68,6 +75,13 @@ const TranslationSection = () => {
     <div className={styles.container}>
       <Section>
         <Section.Title>{t('translation')}</Section.Title>
+        <Section.Row>
+          <DataFetcher
+            loading={translationLoading}
+            queryKey={makeTranslationsUrl(lang)}
+            render={renderTranslations}
+          />
+        </Section.Row>
         <Section.Row>
           <Section.Label>{t('fonts.font-size')}</Section.Label>
 
@@ -88,22 +102,6 @@ const TranslationSection = () => {
             }
           />
         </Section.Row>
-        <Section.Row>
-          <Section.Label>{t('translations')}</Section.Label>
-          <DataFetcher
-            loading={translationLoading}
-            queryKey={makeTranslationsUrl(lang)}
-            render={renderTranslations}
-          />
-        </Section.Row>
-        <div className={styles.changeReciterButtonContainer}>
-          <Button
-            onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
-            suffix={<RightIcon />}
-          >
-            {t('settings.change-translations')}
-          </Button>
-        </div>
       </Section>
     </div>
   );

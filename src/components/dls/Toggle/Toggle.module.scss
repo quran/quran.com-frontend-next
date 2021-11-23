@@ -1,6 +1,7 @@
-}
+@use "src/styles/theme";
 
 .toggle {
+    cursor: pointer;
     height: var(--spacing-medium);
     width: calc(3 * var(--spacing-medium));
 
@@ -15,6 +16,10 @@
 
 .handle {
     background-color: var(--color-background-default);
+    @include theme.dark {
+        background-color: var(--color-background-inverse);
+    }
+
     border-radius: 50%;
 
     display: inline-block;
