@@ -1,0 +1,31 @@
+}
+
+.toggle {
+    height: var(--spacing-medium);
+    width: calc(3 * var(--spacing-medium));
+
+    padding: calc(0.5 * var(--spacing-xxsmall));
+
+    transition: 100ms linear;
+    border-radius: var(--border-radius-pill);
+    display: flex;
+    align-items: center;
+    background-color: var(--color-text-faded);
+}
+
+.handle {
+    background-color: var(--color-background-default);
+    border-radius: 50%;
+
+    display: inline-block;
+    height: var(--spacing-medium);
+    width: var(--spacing-medium);
+    transition: transform var(--transition-fast) ease;
+}
+
+.checked > .handleOn {
+    transform: translateX(200%);
+}
+.checked.toggle {
+    background-color: var(--color-success-medium);
+}
