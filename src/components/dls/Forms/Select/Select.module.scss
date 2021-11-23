@@ -1,6 +1,6 @@
 .container {
   appearance: none;
-  background: var(--color-background-default);
+  background: var(--color-background-alternative-faded);
   display: inline-flex;
   align-items: center;
   outline: none;
@@ -35,7 +35,6 @@
 }
 
 .arrow {
-  background-color: var(--color-background-default);
   width: var(--spacing-mega);
   height: 100%;
   position: absolute;
@@ -63,9 +62,8 @@
   border: none;
   box-shadow: none;
   color: var(--color-text-default);
-  background: var(--color-background-default);
+  background: transparent;
   font-size: var(--font-size-normal);
-  // width: calc(100% + var(--spacing-mega));
   text-transform: none;
   text-rendering: initial;
 }

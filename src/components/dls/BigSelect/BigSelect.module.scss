@@ -8,6 +8,7 @@
     border-radius: var(--border-radius-rounded);
     box-sizing: border-box;
     padding: var(--spacing-medium);
+    background-color: var(--color-background-alternative-faded);
 
     @include theme.dark {
         background-color: #555559; // TODO: we need new token for this

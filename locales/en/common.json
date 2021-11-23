@@ -184,7 +184,7 @@
     "style": "Style",
     "surah": "Surah",
     "tafsir": {
-        "font-size": "Tafsir font size",
+        "font-size": "Font size",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },

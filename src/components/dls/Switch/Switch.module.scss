@@ -31,7 +31,7 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
   opacity: var(--opacity-50);
 }
 
-$background-container: calc(0.5 * var(--spacing-xxsmall));
+$background-container: calc(0.8 * var(--spacing-xxsmall));
 .selectedItemBackgroundContainer {
   transition: transform var(--transition-regular) ease-in-out;
   // the `width` and the `transform` is controlled dynamically in React component. Check Switch.tsx

@@ -7,6 +7,7 @@ import Section from './Section';
 
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
+import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
   CalculationMethod,
   LocationAccess,
@@ -24,20 +25,6 @@ const PrayerTimesSection = () => {
   const dispatch = useDispatch();
   const locationAccess = useSelector(selectLocationAccess);
 
-  const onLocationAccessChange = (value: string) => {
-    if (value === LocationAccess.On) dispatch(setLocationAccess(LocationAccess.On));
-    if (value === LocationAccess.Off) dispatch(setLocationAccess(LocationAccess.Off));
-  };
-
-  const locationAccessOptions = useMemo(
-    () =>
-      Object.values(LocationAccess).map((item) => ({
-        label: t(item), // 'On' or 'Off'
-        id: item,
-        value: item,
-      })),
-    [t],
-  );
   const selectedCalculationMethod = useSelector(selectCalculationMethod);
   const selectedMadhab = useSelector(selectMadhab);
 
@@ -84,13 +71,12 @@ const PrayerTimesSection = () => {
       </Section.Row>
       <Section.Row>
         <Section.Label>{t('prayer-times.location-access')}</Section.Label>
-        <RadioGroup
-          orientation={RadioGroupOrientation.Horizontal}
-          label="location access"
-          name="location-access"
-          items={locationAccessOptions}
-          value={locationAccess}
-          onChange={onLocationAccessChange}
+        <Toggle
+          isChecked={locationAccess === LocationAccess.On}
+          onClick={() => {
+            const isOn = locationAccess === LocationAccess.On;
+            dispatch(setLocationAccess(isOn ? LocationAccess.Off : LocationAccess.On));
+          }}
         />
       </Section.Row>
     </Section>
