@@ -1,11 +1,15 @@
+import { useCallback } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
+import DataFetcher from 'src/components/DataFetcher';
 import BigSelect from 'src/components/dls/BigSelect/BigSelect';
 import Counter from 'src/components/dls/Counter/Counter';
+import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   MAXIMUM_FONT_STEP,
@@ -14,13 +18,53 @@ import {
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
+import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { makeTafsirsUrl } from 'src/utils/apiPaths';
+import { areArraysEqual } from 'src/utils/array';
+import { TafsirsResponse } from 'types/ApiResponses';
 
 const TafsirSection = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { tafsirFontScale } = quranReaderStyles;
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
+
+  const tafsirLoading = useCallback(
+    () => (
+      <div>
+        {selectedTafsirs.map((id) => (
+          <Skeleton key={id}>
+            <div>{id}</div>
+          </Skeleton>
+        ))}
+      </div>
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedTafsirs.length],
+  );
+
+  const renderTafsirs = useCallback(
+    (data: TafsirsResponse) => {
+      const firstValue = data.tafsirs.find((tafsir) => tafsir.id === selectedTafsirs[0]);
+
+      const valueString =
+        selectedTafsirs.length > 1
+          ? `${firstValue.name}, and ${selectedTafsirs.length - 1} others`
+          : firstValue.name;
+
+      return (
+        <BigSelect
+          label="Selected Translations"
+          value={valueString}
+          onClick={() => dispatch(setSettingsView(SettingsView.Tafsir))}
+        />
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [selectedTafsirs.length],
+  );
 
   return (
     <div className={styles.container}>
@@ -43,10 +87,10 @@ const TafsirSection = () => {
           />
         </Section.Row>
         <Section.Row>
-          <BigSelect
-            value="mam"
-            label="Selected Tafsir"
-            onClick={() => dispatch(setSettingsView(SettingsView.Tafsir))}
+          <DataFetcher
+            loading={tafsirLoading}
+            queryKey={makeTafsirsUrl(lang)}
+            render={renderTafsirs}
           />
         </Section.Row>
       </Section>

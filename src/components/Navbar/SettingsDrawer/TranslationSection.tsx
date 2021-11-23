@@ -65,7 +65,7 @@ const TranslationSection = () => {
       );
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectSelectedTranslations.length],
+    [selectedTranslations.length],
   );
 
   return (
