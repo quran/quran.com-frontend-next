@@ -199,8 +199,8 @@
         "dark": "Dark",
         "light": "Light",
         "sepia": "Sepia",
-        "system": "System",
-        "system-desc": "The system theme automatically adopts to your light\/dark mode settings"
+        "auto": "Auto",
+        "system-desc": "The auto theme automatically adopts to your light\/dark mode settings"
     },
     "to": "To",
     "tooltip": "Tooltip",

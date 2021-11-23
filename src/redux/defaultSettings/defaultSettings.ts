@@ -76,7 +76,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
 };
 
 const THEME_INITIAL_STATE: Theme = {
-  type: ThemeType.System,
+  type: ThemeType.Auto,
 };
 
 const DEFAULT_PLAYBACK_RATE = 1;

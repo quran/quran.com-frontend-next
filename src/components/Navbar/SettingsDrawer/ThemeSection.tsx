@@ -45,7 +45,7 @@ const ThemeSection = () => {
           onSelect={(value) => dispatch({ type: setTheme.type, payload: value })}
         />
       </Section.Row>
-      <Section.Footer visible={theme.type === ThemeType.System}>
+      <Section.Footer visible={theme.type === ThemeType.Auto}>
         {t('themes.system-desc')}
       </Section.Footer>
     </Section>

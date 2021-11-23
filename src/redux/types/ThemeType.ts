@@ -1,5 +1,5 @@
 enum ThemeType {
-  System = 'system',
+  Auto = 'auto',
   Light = 'light',
   Dark = 'dark',
   // Sepia = 'sepia',
