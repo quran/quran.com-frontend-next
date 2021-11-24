@@ -74,6 +74,13 @@ const TafsirSection = () => {
       <Section>
         <Section.Title>{t('tafsir.title')}</Section.Title>
         <Section.Row>
+          <DataFetcher
+            loading={tafsirLoading}
+            queryKey={makeTafsirsUrl(lang)}
+            render={renderTafsirs}
+          />
+        </Section.Row>
+        <Section.Row>
           <Section.Label>{t('tafsir.font-size')}</Section.Label>
           <Counter
             count={tafsirFontScale}
@@ -87,13 +94,6 @@ const TafsirSection = () => {
                 ? null
                 : () => dispatch(increaseTafsirFontScale())
             }
-          />
-        </Section.Row>
-        <Section.Row>
-          <DataFetcher
-            loading={tafsirLoading}
-            queryKey={makeTafsirsUrl(lang)}
-            render={renderTafsirs}
           />
         </Section.Row>
       </Section>
