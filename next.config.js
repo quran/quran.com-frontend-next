@@ -43,17 +43,21 @@ const config = {
 
     webpackConfig.module.rules.push({
       test: /\.svg$/i,
-      issuer: { and: [/\.(js|ts)x?$/] },
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            prettier: false,
-            svgo: true,
-            svgoConfig: { plugins: [{ removeViewBox: false }] },
+      issuer: {
+        and: [/\.(js|ts)x?$/]
+      },
+      use: [{
+        loader: '@svgr/webpack',
+        options: {
+          prettier: false,
+          svgo: true,
+          svgoConfig: {
+            plugins: [{
+              removeViewBox: false
+            }]
           },
         },
-      ],
+      }, ],
     });
 
     return webpackConfig;
@@ -70,23 +74,46 @@ const config = {
     // https://github.com/getsentry/sentry-webpack-plugin#options.
   },
   async headers() {
-    return isDev
-      ? []
-      : [
-          {
-            source: '/:route*', // apply security rules to all routes.
-            headers: securityHeaders,
-          },
-          {
-            source: '/fonts/:font*', // match wildcard fonts' path which will match any font file on any level under /fonts.
-            headers: [
-              {
-                key: 'cache-control',
-                value: 'public, max-age=31536000, immutable', // Max-age is 1 year. immutable indicates that the font will not change over the expiry time.
-              },
-            ],
-          },
-        ];
+    return isDev ? [] : [{
+        source: '/:route*', // apply security rules to all routes.
+        headers: securityHeaders,
+      },
+      {
+        source: '/fonts/:font*', // match wildcard fonts' path which will match any font file on any level under /fonts.
+        headers: [{
+          key: 'cache-control',
+          value: 'public, max-age=31536000, immutable', // Max-age is 1 year. immutable indicates that the font will not change over the expiry time.
+        }, ],
+      },
+    ];
+  },
+  async redirects() {
+    return [{
+        source: '/:surah/:from(\\d{1,})/:to(\\d{1,})', // 1/2/3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah/:from(\\d{1,})\\::to(\\d{1,})', // 1/2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah\\::from(\\d{1,})\\::to(\\d{1,})', // 1:2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})-:from\\::to', // 1-2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})-:from(\\d{1,})-:to(\\d{1,})', // 1-2-3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+    ];
   },
 };
 
