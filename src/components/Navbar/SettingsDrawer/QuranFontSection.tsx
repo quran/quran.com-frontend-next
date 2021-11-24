@@ -114,13 +114,6 @@ const QuranFontSection = () => {
           selected={selectedType}
           onSelect={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
         />
-        {/* <RadioGroup
-          onChange={}
-          value={selectedType}
-          label="type"
-          items={types}
-          orientation={RadioGroupOrientation.Horizontal}
-        /> */}
       </Section.Row>
       <Section.Row>
         <Section.Label>{t('style')}</Section.Label>
