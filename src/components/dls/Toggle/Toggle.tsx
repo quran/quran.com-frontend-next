@@ -7,7 +7,6 @@ import styles from './Toggle.module.scss';
 type ToggleProps = {
   isChecked: boolean;
   onClick: () => void;
-  isDisabled?: boolean;
 };
 
 const Toggle = ({ isChecked, onClick }: ToggleProps) => {

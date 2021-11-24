@@ -1,11 +1,13 @@
 @use "src/styles/theme";
 
+$size: var(--spacing-medium);
+
 .toggle {
   cursor: pointer;
-  height: var(--spacing-medium);
-  width: calc(3 * var(--spacing-medium));
+  height: $size;
+  width: calc(2.5 * $size);
 
-  padding: calc(0.5 * var(--spacing-xxsmall));
+  padding: calc(0.3 * var(--spacing-xsmall));
 
   transition: 100ms linear;
   border-radius: var(--border-radius-pill);
@@ -23,15 +25,15 @@
   border-radius: 50%;
 
   display: inline-block;
-  height: var(--spacing-medium);
-  width: var(--spacing-medium);
+  height: $size;
+  width: $size;
   transition: transform var(--transition-fast) ease;
 }
 
 .checked > .handleOn {
-  transform: translateX(200%);
+  transform: translateX(150%);
   [dir="rtl"] & {
-    transform: translateX(-200%);
+    transform: translateX(-150%);
   }
 }
 
