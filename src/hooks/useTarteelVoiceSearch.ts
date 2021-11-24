@@ -190,7 +190,9 @@ const useTarteelVoiceSearch = (startRecording = true) => {
           .then(() => {
             setIsLoading(true);
             // 3. Start a new websocket
-            webSocket = new WebSocket('wss://voice-v2.tarteel.io/search/');
+            webSocket = new WebSocket(
+              `wss://voice-v2.tarteel.io/search/?Authorization=${process.env.NEXT_PUBLIC_TARTEEL_VS_API_KEY}`,
+            );
             webSocket.onopen = () => {
               setIsLoading(false);
               mediaStream.current = stream;
@@ -223,6 +225,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
               );
             };
             webSocket.onerror = () => {
+              setIsLoading(false);
               setError(VoiceError.SOCKET_ERROR);
             };
           })
