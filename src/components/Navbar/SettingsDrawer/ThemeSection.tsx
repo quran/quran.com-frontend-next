@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import CircleIcon from '../../../../public/icons/circle.svg';
 import MoonIcon from '../../../../public/icons/moon-outline.svg';
 import SunIcon from '../../../../public/icons/sun-outline.svg';
 
@@ -16,25 +17,23 @@ import ThemeType from 'src/redux/types/ThemeType';
 const icons = {
   [ThemeType.Dark]: <MoonIcon />,
   [ThemeType.Light]: <SunIcon />,
+  [ThemeType.Auto]: <CircleIcon />,
 };
 
 const ThemeSection = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const theme = useSelector(selectTheme, shallowEqual);
-  const themes = useMemo(
-    () =>
-      Object.values(ThemeType).map((themeValue) => ({
-        name: (
-          <span className={styles.container}>
-            {icons[themeValue]}
-            {t(`themes.${themeValue}`)}
-          </span>
-        ),
-        value: themeValue,
-      })),
-    [t],
-  );
+  const themes = Object.values(ThemeType).map((themeValue) => ({
+    name: (
+      <span className={styles.container}>
+        {theme.type === themeValue && icons[themeValue]}
+        {t(`themes.${themeValue}`)}
+      </span>
+    ),
+    value: themeValue,
+  }));
+
   return (
     <Section>
       <Section.Title>{t('theme')}</Section.Title>
