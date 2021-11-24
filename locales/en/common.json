@@ -162,6 +162,7 @@
         "title": "Search"
     },
     "settings": {
+        "wbw-tooltip": "Display the translation or transliteration directly under the word",
         "change-reciter": "Change Reciter",
         "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",
@@ -219,7 +220,8 @@
         "suggest": "Please begin reciting and your verse will appear."
     },
     "wbw": "Word By Word",
-    "wbw-trans-lang": "Word By Word Language",
+    "word-tooltip": "Word Tooltip",
+    "wbw-trans-lang": "Translation language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",

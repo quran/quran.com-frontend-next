@@ -16,9 +16,9 @@ $select-width-mobile: calc(7 * var(--spacing-small));
 
 .select {
   & > select {
-    width: $select-width-mobile;
+    // width: $select-width-mobile;
     @include breakpoints.tablet {
-      width: $select-width;
+      // width: $select-width;
     }
   }
 }

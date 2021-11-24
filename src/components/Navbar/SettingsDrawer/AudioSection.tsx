@@ -3,13 +3,10 @@ import React, { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import RightIcon from '../../../../public/icons/east.svg';
-
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
 import BigSelect from 'src/components/dls/BigSelect/BigSelect';
-import Button from 'src/components/dls/Button/Button';
 import Select from 'src/components/dls/Forms/Select';
 import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
@@ -38,16 +35,6 @@ const AudioSection = () => {
   const onPlaybackRateChanged = (value) => {
     dispatch(setPlaybackRate(Number(value)));
   };
-
-  const autoScrollingOptions = useMemo(
-    () =>
-      Object.values(AutoScroll).map((item) => ({
-        label: t(`audio.auto-scroll.${item}`),
-        id: item,
-        value: item,
-      })),
-    [t],
-  );
 
   return (
     <div className={styles.container}>
