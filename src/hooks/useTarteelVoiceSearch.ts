@@ -38,8 +38,6 @@ const AUDIO_CONSTRAINTS = {
 const USER_MEDIA_NOT_SUPPORTED_ERROR = 'USER_MEDIA_NOT_SUPPORTED';
 const ANALYSER_SMOOTHING_CONSTANT = 0.8;
 const FAST_FOURIER_TRANSFORM_SIZE = 1024;
-// eslint-disable-next-line prefer-destructuring
-const TARTEEL_VS_API_KEY = process.env.TARTEEL_VS_API_KEY;
 
 const useTarteelVoiceSearch = (startRecording = true) => {
   const [volume, setVolume] = useState<number>(0);
@@ -193,7 +191,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
             setIsLoading(true);
             // 3. Start a new websocket
             webSocket = new WebSocket(
-              `wss://voice-v2.tarteel.io/search/?Authorization=${TARTEEL_VS_API_KEY}`,
+              `wss://voice-v2.tarteel.io/search/?Authorization=${process.env.NEXT_PUBLIC_TARTEEL_VS_API_KEY}`,
             );
             webSocket.onopen = () => {
               setIsLoading(false);
