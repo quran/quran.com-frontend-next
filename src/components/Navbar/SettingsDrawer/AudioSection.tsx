@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -22,7 +22,7 @@ import {
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { generateSelectOptions } from 'src/utils/input';
-import { AutoScroll, WordClickFunctionality } from 'types/QuranReader';
+import { WordClickFunctionality } from 'types/QuranReader';
 
 const AudioSection = () => {
   const { t } = useTranslation('common');

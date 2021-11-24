@@ -51,7 +51,10 @@ const TafsirSection = () => {
 
       const valueString =
         selectedTafsirs.length > 1
-          ? `${firstValue.name}, and ${selectedTafsirs.length - 1} others`
+          ? t('settings.value-and-others', {
+              value: firstValue.name,
+              othersCount: selectedTafsirs.length - 1,
+            })
           : firstValue.name;
 
       return (

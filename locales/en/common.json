@@ -172,7 +172,8 @@
         "search-reciter": "Search Reciter",
         "search-tafsirs": "Search Tafsirs",
         "search-translations": "Search Translations",
-        "title": "Settings"
+        "title": "Settings",
+        "value-and-others": "{{value}}, and {{othersCount}} others"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",

@@ -53,7 +53,10 @@ const TranslationSection = () => {
 
       const valueString =
         selectedTranslations.length > 1
-          ? `${firstValue.name}, and ${selectedTranslations.length - 1} others`
+          ? t('settings.value-and-others', {
+              value: firstValue.name,
+              othersCount: selectedTranslations.length - 1,
+            })
           : firstValue.name;
 
       return (
