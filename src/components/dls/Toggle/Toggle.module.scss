@@ -17,9 +17,11 @@ $size: var(--spacing-medium);
 }
 
 .handle {
-  background-color: var(--color-background-default);
   @include theme.dark {
     background-color: var(--color-background-inverse);
+  }
+  @include theme.light {
+    background-color: var(--color-background-default);
   }
 
   border-radius: 50%;
