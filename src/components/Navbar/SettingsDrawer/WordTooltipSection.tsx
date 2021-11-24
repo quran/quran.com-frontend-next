@@ -12,13 +12,20 @@ import {
   setShowTooltipFor,
   selectShowTooltipFor,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { areArraysEqual } from 'src/utils/array';
+import { removeItemFromArray, areArraysEqual } from 'src/utils/array';
 import { WordByWordType } from 'types/QuranReader';
 
 const WordTooltipSection = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
+
+  const onChange = (type: WordByWordType) => (checked: boolean) => {
+    const nexShowTooltipFor = checked
+      ? [...showTooltipFor, type]
+      : removeItemFromArray(type, showTooltipFor);
+    dispatch(setShowTooltipFor(nexShowTooltipFor));
+  };
 
   return (
     <Section>
@@ -34,12 +41,7 @@ const WordTooltipSection = () => {
               id="word-tooltip-translation"
               name="word-tooltip-translation"
               label="Translation"
-              onChange={(checked) => {
-                const nexShowTooltipFortValue = new Set(showTooltipFor);
-                if (!checked) nexShowTooltipFortValue.delete(WordByWordType.Translation);
-                else nexShowTooltipFortValue.add(WordByWordType.Translation);
-                dispatch(setShowTooltipFor(Array.from(nexShowTooltipFortValue)));
-              }}
+              onChange={onChange(WordByWordType.Translation)}
             />
           </div>
           <div>
@@ -48,12 +50,7 @@ const WordTooltipSection = () => {
               id="word-tooltip-transliteration"
               name="word-tooltip-transliteration"
               label="Transliteration"
-              onChange={(checked) => {
-                const nexShowTooltipFortValue = new Set(showTooltipFor);
-                if (!checked) nexShowTooltipFortValue.delete(WordByWordType.Transliteration);
-                else nexShowTooltipFortValue.add(WordByWordType.Transliteration);
-                dispatch(setShowTooltipFor(Array.from(nexShowTooltipFortValue)));
-              }}
+              onChange={onChange(WordByWordType.Transliteration)}
             />
           </div>
         </div>

@@ -1,6 +1,5 @@
 .container {
   appearance: none;
-  background: var(--color-background-alternative-faded);
   display: inline-flex;
   align-items: center;
   outline: none;
@@ -11,6 +10,10 @@
   border-radius: var(--border-radius-default);
   white-space: nowrap;
   line-height: 0;
+}
+
+.withBackground {
+  background: var(--color-background-alternative-faded);
 }
 
 .defaultStyledContainer {

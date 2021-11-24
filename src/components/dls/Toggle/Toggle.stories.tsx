@@ -14,7 +14,7 @@ const Template = () => {
     <Toggle
       isChecked={isChecked}
       onClick={() => {
-        setIsChecked(!isChecked);
+        setIsChecked((prevIsChecked) => !prevIsChecked);
       }}
     />
   );

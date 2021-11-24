@@ -7,8 +7,8 @@ import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
-import BigSelect from 'src/components/dls/BigSelect/BigSelect';
 import Counter from 'src/components/dls/Counter/Counter';
+import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
@@ -47,22 +47,22 @@ const TranslationSection = () => {
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
-      const firstValue = data.translations.find(
+      const firstSelectedTranslation = data.translations.find(
         (translation) => translation.id === selectedTranslations[0],
       );
 
-      const valueString =
-        selectedTranslations.length > 1
-          ? t('settings.value-and-others', {
-              value: firstValue.name,
-              othersCount: selectedTranslations.length - 1,
-            })
-          : firstValue.name;
+      let selectedValueString = t('settings.no-tafsir-selected');
+      if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation.name;
+      if (selectedTranslations.length >= 1)
+        selectedValueString = t('settings.value-and-others', {
+          value: firstSelectedTranslation.name,
+          othersCount: selectedTranslations.length - 1,
+        });
 
       return (
-        <BigSelect
+        <SelectionCard
           label="Selected Translations"
-          value={valueString}
+          value={selectedValueString}
           onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
         />
       );

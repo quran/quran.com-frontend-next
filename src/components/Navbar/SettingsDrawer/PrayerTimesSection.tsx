@@ -23,6 +23,7 @@ const PrayerTimesSection = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const locationAccess = useSelector(selectLocationAccess);
+  const isLocationAccessEnabled = locationAccess === LocationAccess.On;
 
   const selectedCalculationMethod = useSelector(selectCalculationMethod);
   const selectedMadhab = useSelector(selectMadhab);
@@ -71,10 +72,11 @@ const PrayerTimesSection = () => {
       <Section.Row>
         <Section.Label>{t('prayer-times.location-access')}</Section.Label>
         <Toggle
-          isChecked={locationAccess === LocationAccess.On}
+          isChecked={isLocationAccessEnabled}
           onClick={() => {
-            const isOn = locationAccess === LocationAccess.On;
-            dispatch(setLocationAccess(isOn ? LocationAccess.Off : LocationAccess.On));
+            dispatch(
+              setLocationAccess(isLocationAccessEnabled ? LocationAccess.Off : LocationAccess.On),
+            );
           }}
         />
       </Section.Row>

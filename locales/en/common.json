@@ -173,7 +173,9 @@
         "search-tafsirs": "Search Tafsirs",
         "search-translations": "Search Translations",
         "title": "Settings",
-        "value-and-others": "{{value}}, and {{othersCount}} others"
+        "value-and-others": "{{value}}, and {{othersCount}} others",
+        "no-tafsir-selected": "No tafsir selected",
+        "no-translation-selected": "No translation selected"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",

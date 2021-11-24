@@ -8,7 +8,7 @@ import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
 import TranslationSection from './TranslationSection';
 import WordByWordSection from './WordByWordSection';
-import WordTooltipSection from './WordTooltipSection.module.scss';
+import WordTooltipSection from './WordTooltipSection';
 
 const SettingsBody = () => (
   <>

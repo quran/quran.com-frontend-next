@@ -6,8 +6,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
-import BigSelect from 'src/components/dls/BigSelect/BigSelect';
 import Select from 'src/components/dls/Forms/Select';
+import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
   selectEnableAutoScrolling,
@@ -41,7 +41,7 @@ const AudioSection = () => {
       <Section>
         <Section.Title>{t('audio.title')}</Section.Title>
         <Section.Row>
-          <BigSelect
+          <SelectionCard
             label="Selected Reciter"
             value={selectedReciter.name}
             onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}

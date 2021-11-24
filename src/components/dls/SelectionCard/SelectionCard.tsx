@@ -2,15 +2,15 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 
-import styles from './BigSelect.module.scss';
+import styles from './SelectionCard.module.scss';
 
-type BigSelectProps = {
+type SelectionCard = {
   label: string;
   value: string;
   onClick?: () => void;
 };
 
-const BigSelect = ({ label, value, onClick }: BigSelectProps) => {
+const SelectionCard = ({ label, value, onClick }: SelectionCard) => {
   return (
     <div className={styles.container} onClick={onClick}>
       <div className={styles.labelContainer}>
@@ -24,4 +24,4 @@ const BigSelect = ({ label, value, onClick }: BigSelectProps) => {
   );
 };
 
-export default BigSelect;
+export default SelectionCard;

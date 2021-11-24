@@ -7,8 +7,8 @@ import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
-import BigSelect from 'src/components/dls/BigSelect/BigSelect';
 import Counter from 'src/components/dls/Counter/Counter';
+import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
@@ -47,20 +47,20 @@ const TafsirSection = () => {
 
   const renderTafsirs = useCallback(
     (data: TafsirsResponse) => {
-      const firstValue = data.tafsirs.find((tafsir) => tafsir.id === selectedTafsirs[0]);
+      const firstSelectedTafsir = data.tafsirs.find((tafsir) => tafsir.id === selectedTafsirs[0]);
 
-      const valueString =
-        selectedTafsirs.length > 1
-          ? t('settings.value-and-others', {
-              value: firstValue.name,
-              othersCount: selectedTafsirs.length - 1,
-            })
-          : firstValue.name;
+      let selectedValueString = t('settings.no-tafsir-selected');
+      if (selectedTafsirs.length === 1) selectedValueString = firstSelectedTafsir.name;
+      if (selectedTafsirs.length > 1)
+        selectedValueString = t('settings.value-and-others', {
+          value: firstSelectedTafsir.name,
+          othersCount: selectedTafsirs.length - 1,
+        });
 
       return (
-        <BigSelect
+        <SelectionCard
           label="Selected Translations"
-          value={valueString}
+          value={selectedValueString}
           onClick={() => dispatch(setSettingsView(SettingsView.Tafsir))}
         />
       );
