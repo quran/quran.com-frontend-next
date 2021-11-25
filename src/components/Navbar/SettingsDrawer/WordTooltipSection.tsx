@@ -21,10 +21,10 @@ const WordTooltipSection = () => {
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
 
   const onChange = (type: WordByWordType) => (checked: boolean) => {
-    const nexShowTooltipFor = checked
+    const nextShowTooltipFor = checked
       ? [...showTooltipFor, type]
       : removeItemFromArray(type, showTooltipFor);
-    dispatch(setShowTooltipFor(nexShowTooltipFor));
+    dispatch(setShowTooltipFor(nextShowTooltipFor));
   };
 
   return (
@@ -40,7 +40,7 @@ const WordTooltipSection = () => {
               checked={showTooltipFor.includes(WordByWordType.Translation)}
               id="word-tooltip-translation"
               name="word-tooltip-translation"
-              label="Translation"
+              label={t('translation')}
               onChange={onChange(WordByWordType.Translation)}
             />
           </div>
@@ -49,7 +49,7 @@ const WordTooltipSection = () => {
               checked={showTooltipFor.includes(WordByWordType.Transliteration)}
               id="word-tooltip-transliteration"
               name="word-tooltip-transliteration"
-              label="Transliteration"
+              label={t('transliteration')}
               onChange={onChange(WordByWordType.Transliteration)}
             />
           </div>

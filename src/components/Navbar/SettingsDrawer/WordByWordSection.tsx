@@ -55,7 +55,7 @@ const WordByWordSection = () => {
               checked={showWordByWordTranslation}
               id="wbw-translation"
               name="wbw-translation"
-              label="Translation"
+              label={t('translation')}
               onChange={(checked) => dispatch(setShowWordByWordTranslation(checked))}
             />
           </div>
@@ -64,7 +64,7 @@ const WordByWordSection = () => {
               checked={showWordByWordTransliteration}
               id="wbw-transliteration"
               name="wbw-transliteration"
-              label="Transliteration"
+              label={t('transliteration')}
               onChange={(checked) => dispatch(setShowWordByWordTransliteration(checked))}
             />
           </div>

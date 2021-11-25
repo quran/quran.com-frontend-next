@@ -41,8 +41,7 @@ const TranslationSection = () => {
         ))}
       </div>
     ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedTranslations.length],
+    [selectedTranslations],
   );
 
   const renderTranslations = useCallback(
@@ -51,7 +50,7 @@ const TranslationSection = () => {
         (translation) => translation.id === selectedTranslations[0],
       );
 
-      let selectedValueString = t('settings.no-tafsir-selected');
+      let selectedValueString = t('settings.no-translation-selected');
       if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation.name;
       if (selectedTranslations.length >= 1)
         selectedValueString = t('settings.value-and-others', {
@@ -67,8 +66,7 @@ const TranslationSection = () => {
         />
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedTranslations.length],
+    [dispatch, selectedTranslations, t],
   );
 
   return (
