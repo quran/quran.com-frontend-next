@@ -11,10 +11,9 @@ import styles from './Toast.module.scss';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
-enum ToastStatus {
+export enum ToastStatus {
   Success = 'success',
   Error = 'error',
-  Info = 'info',
   Warning = 'warning',
 }
 type Action = {
