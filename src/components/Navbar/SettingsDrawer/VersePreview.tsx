@@ -45,14 +45,14 @@ const VersePreview = () => {
   else verse = sampleVerse;
 
   return (
-    <>
+    <div dir="rtl">
       {/* Load the the required font face for QCFFont. Similar behavior also implemented in QuranReaderBody  */}
       {isQCFFont && (
         // @ts-ignore
         <style>{buildQCFFontFace([verse], quranReaderStyles.quranFont)}</style>
       )}
       <VerseText words={verse.words as Word[]} />
-    </>
+    </div>
   );
 };
 
