@@ -11,9 +11,10 @@ import styles from './Toast.module.scss';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
-export enum ToastStatus {
+enum ToastStatus {
   Success = 'success',
   Error = 'error',
+  Info = 'info',
   Warning = 'warning',
 }
 type Action = {
@@ -50,7 +51,7 @@ export const toast = (content: React.ReactNode, options: Options = {}) => {
       )}
     </div>,
     {
-      autoClose: false,
+      autoClose: options.preserve ? false : TOAST_DURATION,
       closeButton: false,
       className: classNames(styles.toast, {
         [styles.errorBody]: options.status === 'error',

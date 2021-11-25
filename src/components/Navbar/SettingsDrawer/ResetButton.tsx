@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styles from './ResetButton.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
-import { toast, ToastContainer, ToastStatus } from 'src/components/dls/Toast/Toast';
+import { toast, ToastContainer } from 'src/components/dls/Toast/Toast';
 import resetSettings from 'src/redux/slices/reset-settings';
 
 // reset button will dispatch a `reset` action
@@ -20,7 +20,7 @@ const ResetButton = () => {
         <Button
           onClick={() => {
             dispatch(resetSettings(lang));
-            toast(t('settings.reset-notif'), { status: ToastStatus.Success });
+            toast(t('settings.reset-notif'));
           }}
         >
           {t('settings.reset-cta')}

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { ToastContainer, toast, ToastStatus } from './Toast';
+import { ToastContainer, toast } from './Toast';
 import styles from './Toast.stories.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
@@ -22,13 +22,13 @@ export const Status = () => {
   const notify = (status) => toast(`This is ${status} toast message`, { status });
   return (
     <div>
-      <Button className={styles.toastBtn} onClick={() => notify(ToastStatus.Error)}>
+      <Button className={styles.toastBtn} onClick={() => notify('error')}>
         Error!
       </Button>
-      <Button className={styles.toastBtn} onClick={() => notify(ToastStatus.Warning)}>
+      <Button className={styles.toastBtn} onClick={() => notify('warning')}>
         Warning!
       </Button>
-      <Button className={styles.toastBtn} onClick={() => notify(ToastStatus.Success)}>
+      <Button className={styles.toastBtn} onClick={() => notify('success')}>
         Success!
       </Button>
       <ToastContainer />
