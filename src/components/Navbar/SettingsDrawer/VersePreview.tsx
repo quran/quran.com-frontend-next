@@ -34,7 +34,7 @@ const VersePreview = () => {
       </>
     );
 
-  // BE return the path to the png image of each, instead of returning the text. So we're mocking the same behavior here
+  // BE return the path to the png image of each word, instead of returning the text. So we're mocking the same behavior here
   let verse;
   if (isTajweed)
     verse = {
