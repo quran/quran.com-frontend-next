@@ -52,8 +52,7 @@
 
   @for $i from 2 through 5 {
     &:nth-last-child(#{$i}) {
-      transform: translate3d(0, #{$i * -7}px, 0)
-        scale(#{math.div(100 - $i, 100)});
+      transform: translate3d(0, #{$i * -7}px, 0) scale(#{math.div(100 - $i, 100)});
     }
   }
 
@@ -99,6 +98,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  [dir="rtl"] & {
+    flex-direction: row-reverse;
+  }
 }
 
 .actionsContainer {
