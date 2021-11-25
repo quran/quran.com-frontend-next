@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import range from 'lodash/range';
 
