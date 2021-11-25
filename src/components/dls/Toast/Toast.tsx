@@ -50,7 +50,7 @@ export const toast = (content: React.ReactNode, options: Options = {}) => {
       )}
     </div>,
     {
-      autoClose: options.preserve ? false : TOAST_DURATION,
+      autoClose: false,
       closeButton: false,
       className: classNames(styles.toast, {
         [styles.errorBody]: options.status === 'error',
