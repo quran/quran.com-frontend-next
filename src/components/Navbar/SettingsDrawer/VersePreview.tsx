@@ -6,15 +6,14 @@ import styles from './VersePreview.module.scss';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { buildQCFFontFace, isQCFFont as checkIsQCFFont } from 'src/utils/fontFaceHelper';
-import { getSampleVerse } from 'src/utils/verse';
+import getSampleVerse from 'src/utils/sampleVerse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const VersePreview = () => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isQCFFont = checkIsQCFFont(quranReaderStyles.quranFont);
   const isTajweed = quranReaderStyles.quranFont === QuranFont.Tajweed;
   const { data: sampleVerse } = useSWR(SWR_SAMPLE_VERSE_KEY, () => getSampleVerse());
@@ -35,7 +34,7 @@ const VersePreview = () => {
       </>
     );
 
-  // backend return path image image (png), instead of text in Word.text. So we're mocking the same behavior here
+  // BE return the path to the png image of each, instead of returning the text. So we're mocking the same behavior here
   let verse;
   if (isTajweed)
     verse = {
