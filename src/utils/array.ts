@@ -29,3 +29,16 @@ export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
  */
 export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean =>
   isEqual([...array1].sort(), [...array2].sort());
+
+/**
+ * Remove `itemToRemove` from `array`
+ *
+ * @example
+ * removeItemFromArray(1, [1,2,3]) // returns [2,3]
+ *
+ * @param {T} itemToRemove
+ * @param {T[]} array
+ * @returns {boolean}j
+ */
+export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
+  array.filter((item) => item !== itemToRemove);

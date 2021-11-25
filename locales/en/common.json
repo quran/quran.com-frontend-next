@@ -4,7 +4,7 @@
         "auto-scroll": {
             "off": "Off",
             "on": "On",
-            "title": "Auto Scroll"
+            "title": "Scroll page to follow audio"
         },
         "play": "Play Audio",
         "playback-speed": "Playback Speed",
@@ -162,6 +162,7 @@
         "title": "Search"
     },
     "settings": {
+        "wbw-tooltip": "Display the translation or transliteration directly under the word",
         "change-reciter": "Change Reciter",
         "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",
@@ -171,7 +172,10 @@
         "search-reciter": "Search Reciter",
         "search-tafsirs": "Search Tafsirs",
         "search-translations": "Search Translations",
-        "title": "Settings"
+        "title": "Settings",
+        "value-and-others": "{{value}}, and {{othersCount}} others",
+        "no-tafsir-selected": "No tafsir selected",
+        "no-translation-selected": "No translation selected"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
@@ -184,7 +188,7 @@
     "style": "Style",
     "surah": "Surah",
     "tafsir": {
-        "font-size": "Tafsir font size",
+        "font-size": "Font size",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },
@@ -199,8 +203,8 @@
         "dark": "Dark",
         "light": "Light",
         "sepia": "Sepia",
-        "system": "System",
-        "system-desc": "The system theme automatically adopts to your light\/dark mode settings"
+        "auto": "Auto",
+        "system-desc": "The auto theme automatically adopts to your light\/dark mode settings"
     },
     "to": "To",
     "tooltip": "Tooltip",
@@ -219,11 +223,12 @@
         "suggest": "Please begin reciting and your verse will appear."
     },
     "wbw": "Word By Word",
-    "wbw-trans-lang": "Word By Word Language",
+    "word-tooltip": "Word Tooltip",
+    "wbw-trans-lang": "Translation language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",
-        "title": "Word Click"
+        "title": "Play audio when word clicked"
     },
     "yes": "Yes"
 }

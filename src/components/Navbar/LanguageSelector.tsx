@@ -61,6 +61,7 @@ const LanguageSelector = () => {
         onChange={onChange}
         defaultStyle={false}
         className={styles.select}
+        withBackground={false}
       />
     </div>
   );

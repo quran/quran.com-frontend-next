@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+
+  & > svg {
+    width: var(--spacing-medium);
+    margin-inline-end: var(--spacing-small);
+  }
+}

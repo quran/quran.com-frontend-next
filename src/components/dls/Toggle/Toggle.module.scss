@@ -1,0 +1,45 @@
+@use "src/styles/theme";
+$handleTranslateX: 150%;
+
+$size: var(--spacing-medium);
+
+.toggle {
+  cursor: pointer;
+  height: $size;
+  width: calc(2.5 * $size);
+
+  padding: calc(0.3 * var(--spacing-xsmall));
+
+  transition: var(--transition-regular) linear;
+  border-radius: var(--border-radius-pill);
+  display: flex;
+  align-items: center;
+  background-color: var(--color-text-faded);
+}
+
+.handle {
+  @include theme.dark {
+    background-color: var(--color-background-inverse);
+  }
+  @include theme.light {
+    background-color: var(--color-background-default);
+  }
+
+  border-radius: 50%;
+
+  display: inline-block;
+  height: $size;
+  width: $size;
+  transition: transform var(--transition-fast) ease;
+}
+
+.checked > .handleOn {
+  transform: translateX($handleTranslateX);
+  [dir="rtl"] & {
+    transform: translateX(-$handleTranslateX);
+  }
+}
+
+.checked.toggle {
+  background-color: var(--color-success-medium);
+}

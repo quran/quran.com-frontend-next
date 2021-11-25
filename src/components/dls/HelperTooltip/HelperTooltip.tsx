@@ -1,4 +1,4 @@
-import QuestionMarkIcon from '../../../../public/icons/question-mark.svg';
+import QuestionMarkIcon from '../../../../public/icons/help-circle.svg';
 
 import styles from './HelperTooltip.module.scss';
 

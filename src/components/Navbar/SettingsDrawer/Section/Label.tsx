@@ -1,5 +1,7 @@
 import React from 'react';
 
-const Label = ({ children }) => <div>{children}</div>;
+import styles from './Label.module.scss';
+
+const Label = ({ children }) => <div className={styles.label}>{children}</div>;
 
 export default Label;

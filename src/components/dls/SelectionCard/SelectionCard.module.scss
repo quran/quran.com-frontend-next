@@ -1,0 +1,41 @@
+@use "src/styles/theme";
+$iconSize: calc(1.5 * var(--spacing-medium));
+
+.container {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--border-radius-rounded);
+    box-sizing: border-box;
+    padding: var(--spacing-medium);
+
+    @include theme.dark {
+        background-color: #555559; // TODO: we need new token for this
+    }
+    @include theme.light {
+        background-color: var(--color-background-alternative-faded);
+    }
+}
+
+.label {
+    opacity: var(--opacity-85);
+    font-size: 13px; // TODO: we need a better font size token
+}
+
+.value {
+    font-weight: var(--font-weight-bold);
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+
+    & > svg {
+        height: $iconSize;
+        width: $iconSize;
+        [dir="rtl"] & {
+            transform: scaleX(-1);
+        }
+    }
+}

@@ -30,6 +30,7 @@ interface Props {
   onChange?: (value: string | number) => void;
   defaultStyle?: boolean;
   className?: string;
+  withBackground?: boolean;
 }
 
 const Select: React.FC<Props> = ({
@@ -44,6 +45,7 @@ const Select: React.FC<Props> = ({
   placeholder = 'Select an option',
   defaultStyle = true,
   className,
+  withBackground = true,
 }) => {
   const onSelectChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -63,6 +65,7 @@ const Select: React.FC<Props> = ({
         [styles.smallContainer]: size === SelectSize.Small,
         [styles.mediumContainer]: size === SelectSize.Medium,
         [styles.largeContainer]: size === SelectSize.Large,
+        [styles.withBackground]: withBackground,
       })}
     >
       <select
