@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
