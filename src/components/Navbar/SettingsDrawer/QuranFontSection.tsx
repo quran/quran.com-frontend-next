@@ -3,8 +3,10 @@ import React, { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
+import VersePreview from './VersePreview';
 
 import Counter from 'src/components/dls/Counter/Counter';
 import Select from 'src/components/dls/Forms/Select';
@@ -108,6 +110,11 @@ const QuranFontSection = () => {
   return (
     <Section>
       <Section.Title>{t('fonts.quran-font')}</Section.Title>
+      <Section.Row>
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+      </Section.Row>
       <Section.Row>
         <Switch
           items={types}
