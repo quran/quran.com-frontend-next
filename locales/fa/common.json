@@ -162,9 +162,6 @@
         "title": "جستجو کردن"
     },
     "settings": {
-        "change-reciter": "تلاوت را تغییر دهید",
-        "change-tafsirs": "تغییر تفاسیر",
-        "change-translations": "تغییر ترجمه ها",
         "no-tafsir-selected": "هیچ تفسیری انتخاب نشده است",
         "no-translation-selected": "ترجمه ای انتخاب نشده است",
         "reading-experience": "تجربه خواندن",
@@ -173,6 +170,9 @@
         "search-reciter": "جستجوی قاری",
         "search-tafsirs": "جستجو در تفاسیر",
         "search-translations": "جستجوی ترجمه ها",
+        "selected-reciter": "قاری برگزیده",
+        "selected-tafsirs": "منتخب تفاسیر",
+        "selected-translations": "ترجمه های برگزیده",
         "title": "تنظیمات",
         "tooltip-desc": "روی هر کلمه قرآن کلیک کنید تا راهنمای ابزار را ببینید",
         "value-and-others": "{{value}} و {{othersCount}} دیگر",

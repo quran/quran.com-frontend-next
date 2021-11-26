@@ -162,9 +162,6 @@
         "title": "ค้นหา"
     },
     "settings": {
-        "change-reciter": "เปลี่ยนผู้เล่า",
-        "change-tafsirs": "เปลี่ยนตัฟซีร์",
-        "change-translations": "เปลี่ยนการแปล",
         "no-tafsir-selected": "ไม่ได้เลือก tafsir",
         "no-translation-selected": "ไม่ได้เลือกคำแปล",
         "reading-experience": "ประสบการณ์การอ่าน",
@@ -173,6 +170,9 @@
         "search-reciter": "ค้นหาผู้อ่าน",
         "search-tafsirs": "ค้นหา Tafsirs",
         "search-translations": "ค้นหาคำแปล",
+        "selected-reciter": "ผู้อ่านที่เลือก",
+        "selected-tafsirs": "Tafsirs ที่เลือก",
+        "selected-translations": "การแปลที่เลือก",
         "title": "การตั้งค่า",
         "tooltip-desc": "คลิกที่คำอัลกุรอานเพื่อดูคำแนะนำเครื่องมือ",
         "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",

@@ -162,9 +162,6 @@
         "title": "অনুসন্ধান করুন"
     },
     "settings": {
-        "change-reciter": "আবৃত্তিকারী পরিবর্তন করুন",
-        "change-tafsirs": "তাফসির পরিবর্তন করুন",
-        "change-translations": "অনুবাদ পরিবর্তন করুন",
         "no-tafsir-selected": "কোন তাফসির নির্বাচিত নয়",
         "no-translation-selected": "কোনো অনুবাদ নির্বাচন করা হয়নি",
         "reading-experience": "পড়ার অভিজ্ঞতা",
@@ -173,6 +170,9 @@
         "search-reciter": "আবৃত্তিকারী অনুসন্ধান করুন",
         "search-tafsirs": "তাফসির অনুসন্ধান করুন",
         "search-translations": "অনুসন্ধান অনুবাদ",
+        "selected-reciter": "নির্বাচিত আবৃত্তিকার",
+        "selected-tafsirs": "নির্বাচিত তাফসির",
+        "selected-translations": "নির্বাচিত অনুবাদ",
         "title": "সেটিংস",
         "tooltip-desc": "টুলটিপ দেখতে কুরআনের যেকোনো শব্দে ক্লিক করুন",
         "value-and-others": "{{value}} , এবং {{othersCount}} অন্যান্য",

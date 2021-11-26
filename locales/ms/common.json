@@ -162,9 +162,6 @@
         "title": "Cari"
     },
     "settings": {
-        "change-reciter": "Tukar Qari",
-        "change-tafsirs": "Tukar Tafsir",
-        "change-translations": "Tukar Terjemahan",
         "no-tafsir-selected": "Tiada tafsir dipilih",
         "no-translation-selected": "Tiada terjemahan dipilih",
         "reading-experience": "Pengalaman Membaca",
@@ -173,6 +170,9 @@
         "search-reciter": "Cari Qari",
         "search-tafsirs": "Cari Tafsir",
         "search-translations": "Cari Terjemahan",
+        "selected-reciter": "qari yang terpilih",
+        "selected-tafsirs": "Tafsir Terpilih",
+        "selected-translations": "Terjemahan Terpilih",
         "title": "Tetapan",
         "tooltip-desc": "Klik pada mana-mana Perkataan Al-Quran untuk melihat petua alat",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",

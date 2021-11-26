@@ -59,7 +59,7 @@ const TafsirSection = () => {
 
       return (
         <SelectionCard
-          label="Selected Translations"
+          label={t('settings.selected-tafsirs')}
           value={selectedValueString}
           onClick={() => dispatch(setSettingsView(SettingsView.Tafsir))}
         />

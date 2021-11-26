@@ -162,9 +162,6 @@
         "title": "تلاش کریں۔"
     },
     "settings": {
-        "change-reciter": "تلاوت کرنے والے کو تبدیل کریں۔",
-        "change-tafsirs": "تفسیر کو تبدیل کریں۔",
-        "change-translations": "ترجمہ تبدیل کریں۔",
         "no-tafsir-selected": "کوئی تفسیر منتخب نہیں ہے۔",
         "no-translation-selected": "کوئی ترجمہ منتخب نہیں کیا گیا۔",
         "reading-experience": "پڑھنے کا تجربہ",
@@ -173,6 +170,9 @@
         "search-reciter": "تلاوت کرنے والے کو تلاش کریں۔",
         "search-tafsirs": "تفسیریں تلاش کریں۔",
         "search-translations": "ترجمہ تلاش کریں۔",
+        "selected-reciter": "منتخب قاری",
+        "selected-tafsirs": "منتخب تفسیر",
+        "selected-translations": "منتخب ترجمہ",
         "title": "ترتیبات",
         "tooltip-desc": "ٹول ٹپ دیکھنے کے لیے کسی بھی قرآنی کلام پر کلک کریں۔",
         "value-and-others": "{{value}} ، اور {{othersCount}} دیگر",
