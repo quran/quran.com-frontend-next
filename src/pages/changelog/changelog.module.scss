@@ -1,0 +1,62 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+.container {
+  padding-block-start: var(--spacing-mega);
+  width: 95%;
+  margin: 0 auto;
+  @include breakpoints.tablet {
+    width: 50%;
+  }
+  direction: ltr;
+}
+
+.pageContainer {
+  padding-block-end: var(--spacing-medium);
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+}
+
+.headerSection {
+  padding-block: var(--spacing-medium);
+}
+
+.caption {
+  color: var(--color-text-faded);
+}
+.date {
+  font-size: var(--font-size-large);
+  color: var(--color-text-faded);
+}
+
+.image {
+  max-width: 100%;
+  @include breakpoints.tablet {
+    max-width: 70%;
+  }
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  padding-block: var(--spacing-small);
+}
+
+.h1 {
+  font-size: var(--font-size-xlarge);
+}
+
+.h2 {
+  font-size: var(--font-size-large);
+}
