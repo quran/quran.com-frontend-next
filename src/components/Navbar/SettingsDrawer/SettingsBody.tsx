@@ -14,10 +14,10 @@ const SettingsBody = () => (
   <>
     <ThemeSection />
     <QuranFontSection />
-    <TranslationSection />
-    <TafsirSection />
     <WordByWordSection />
     <WordTooltipSection />
+    <TranslationSection />
+    <TafsirSection />
     <AudioSection />
     <PrayerTimesSection />
     <ResetButton />

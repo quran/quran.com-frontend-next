@@ -164,6 +164,7 @@
     "settings": {
         "wbw-helper": "Display the translation or transliteration directly under the word",
         "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word",
+        "tooltip-desc": "Click on any Quran Word to see the tooltip",
         "change-reciter": "Change Reciter",
         "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",
