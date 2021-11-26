@@ -165,13 +165,19 @@
         "change-reciter": "เปลี่ยนผู้เล่า",
         "change-tafsirs": "เปลี่ยนตัฟซีร์",
         "change-translations": "เปลี่ยนการแปล",
+        "no-tafsir-selected": "ไม่ได้เลือก tafsir",
+        "no-translation-selected": "ไม่ได้เลือกคำแปล",
         "reading-experience": "ประสบการณ์การอ่าน",
         "reset-cta": "คืนค่าการตั้งค่า",
         "reset-notif": "การตั้งค่าของคุณถูกรีเซ็ตเป็นค่าเริ่มต้น",
         "search-reciter": "ค้นหาผู้อ่าน",
         "search-tafsirs": "ค้นหา Tafsirs",
         "search-translations": "ค้นหาคำแปล",
-        "title": "การตั้งค่า"
+        "title": "การตั้งค่า",
+        "tooltip-desc": "คลิกที่คำอัลกุรอานเพื่อดูคำแนะนำเครื่องมือ",
+        "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
+        "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
+        "word-tooltip-helper": "แสดงการแปลหรือการทับศัพท์เมื่อวางเมาส์เหนือหรือคลิกที่คำ"
     },
     "share": "แบ่งปัน",
     "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
@@ -196,6 +202,7 @@
     },
     "theme": "ธีม",
     "themes": {
+        "auto": "รถยนต์",
         "dark": "มืด",
         "light": "แสงสว่าง",
         "sepia": "ซีเปีย",
@@ -225,5 +232,6 @@
         "play-audio": "เล่นเสียง",
         "title": "คำคลิก"
     },
+    "word-tooltip": "Word Tooltip",
     "yes": "ใช่"
 }

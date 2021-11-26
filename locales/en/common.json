@@ -4,7 +4,7 @@
         "auto-scroll": {
             "off": "Off",
             "on": "On",
-            "title": "Scroll page to follow audio"
+            "title": "Auto Scroll"
         },
         "play": "Play Audio",
         "playback-speed": "Playback Speed",
@@ -162,12 +162,11 @@
         "title": "Search"
     },
     "settings": {
-        "wbw-helper": "Display the translation or transliteration directly under the word",
-        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word",
-        "tooltip-desc": "Click on any Quran Word to see the tooltip",
         "change-reciter": "Change Reciter",
         "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",
+        "no-tafsir-selected": "No tafsir selected",
+        "no-translation-selected": "No translation selected",
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
         "reset-notif": "Your settings have been reset to the default ones",
@@ -175,9 +174,10 @@
         "search-tafsirs": "Search Tafsirs",
         "search-translations": "Search Translations",
         "title": "Settings",
+        "tooltip-desc": "Click on any Quran Word to see the tooltip",
         "value-and-others": "{{value}}, and {{othersCount}} others",
-        "no-tafsir-selected": "No tafsir selected",
-        "no-translation-selected": "No translation selected"
+        "wbw-helper": "Display the translation or transliteration directly under the word",
+        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
@@ -190,7 +190,7 @@
     "style": "Style",
     "surah": "Surah",
     "tafsir": {
-        "font-size": "Font size",
+        "font-size": "Tafsir font size",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },
@@ -202,11 +202,12 @@
     },
     "theme": "Theme",
     "themes": {
+        "auto": "Auto",
         "dark": "Dark",
         "light": "Light",
         "sepia": "Sepia",
-        "auto": "Auto",
-        "system-desc": "The auto theme automatically adopts to your light\/dark mode settings"
+        "system": "System",
+        "system-desc": "The system theme automatically adopts to your light\/dark mode settings"
     },
     "to": "To",
     "tooltip": "Tooltip",
@@ -225,12 +226,12 @@
         "suggest": "Please begin reciting and your verse will appear."
     },
     "wbw": "Word By Word",
-    "word-tooltip": "Word Tooltip",
-    "wbw-trans-lang": "Translation language",
+    "wbw-trans-lang": "Word By Word Language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",
-        "title": "Play audio when word clicked"
+        "title": "Word Click"
     },
+    "word-tooltip": "Word Tooltip",
     "yes": "Yes"
 }

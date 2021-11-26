@@ -165,13 +165,19 @@
         "change-reciter": "Voordrager wijzigen",
         "change-tafsirs": "Tafsir wijzigen",
         "change-translations": "Vertalingen wijzigen",
+        "no-tafsir-selected": "Geen tafsir geselecteerd",
+        "no-translation-selected": "Geen vertaling geselecteerd",
         "reading-experience": "Leeservaring",
         "reset-cta": "Reset instellingen",
         "reset-notif": "Je instellingen zijn teruggezet naar de standaardinstellingen",
         "search-reciter": "Zoek voordrager",
         "search-tafsirs": "Tafsir zoeken",
         "search-translations": "Vertalingen zoeken",
-        "title": "Instellingen"
+        "title": "Instellingen",
+        "tooltip-desc": "Klik op een koranwoord om de tooltip te zien",
+        "value-and-others": "{{value}} en {{othersCount}} anderen",
+        "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
+        "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
     },
     "share": "Deel",
     "shared": "Link is gekopieerd naar het klembord!",
@@ -196,6 +202,7 @@
     },
     "theme": "Thema",
     "themes": {
+        "auto": "Auto",
         "dark": "Donker",
         "light": "Licht",
         "sepia": "Sepia",
@@ -225,5 +232,6 @@
         "play-audio": "Audio afspelen",
         "title": "Woordklik"
     },
+    "word-tooltip": "Knopinfo voor woorden",
     "yes": "Ja"
 }
