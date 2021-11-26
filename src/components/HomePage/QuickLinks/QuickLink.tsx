@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
 interface Props {
   slug: string;
@@ -10,9 +10,10 @@ interface Props {
 
 const QuickLink: React.FC<Props> = ({ text, slug, className }) => (
   <Button
+    size={ButtonSize.Small}
     className={className}
     href={`/${slug}`}
-    type={ButtonType.Success}
+    type={ButtonType.Secondary}
     shape={ButtonShape.Pill}
   >
     {text}

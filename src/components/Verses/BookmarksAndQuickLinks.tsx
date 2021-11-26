@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import QuickLinks from '../HomePage/QuickLinks';
-
 import BookmarkedVersesList from './BookmarkedVersesList';
 import styles from './BookmarksAndQuickLinks.module.scss';
 
@@ -16,12 +14,9 @@ enum View {
 
 const BookmarksAndQuickLinks = () => {
   const { t } = useTranslation('home');
-  const [view, setView] = useState(View.Popular);
+  const [view, setView] = useState(View.Bookmarks);
 
-  const tabs = [
-    { title: t('tab.popular'), value: View.Popular },
-    { title: t('tab.bookmarks'), value: View.Bookmarks },
-  ];
+  const tabs = [{ title: t('tab.bookmarks'), value: View.Bookmarks }];
 
   return (
     <div>
@@ -30,7 +25,6 @@ const BookmarksAndQuickLinks = () => {
       </div>
       <div className={styles.contentContainer}>
         {view === View.Bookmarks && <BookmarkedVersesList />}
-        {view === View.Popular && <QuickLinks />}
       </div>
     </div>
   );

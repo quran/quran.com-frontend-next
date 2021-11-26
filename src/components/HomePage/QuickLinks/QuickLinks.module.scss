@@ -1,4 +1,7 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+$link-shadow: 0px 3px 11px 1px rgb(0 0 0 / 3%);
 
 .header {
   margin-block-end: var(--spacing-xsmall);
@@ -7,8 +10,11 @@
 
 .quickLinksContainer {
   display: flex;
-  align-items: center;
-  overflow-x: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-x: scroll;
+  margin-inline: auto;
+  // max-width: 100%;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     height: 0;
@@ -16,8 +22,17 @@
 }
 
 .link {
+  margin-block-end: var(--spacing-small);
+  border: none;
+  box-shadow: $link-shadow;
+  background-color: var(--color-background-elevated);
+  &:hover {
+    background-color: var(--color-background-elevated);
+  }
+
   > span {
     width: max-content;
+    opacity: var(--opacity-75);
   }
 
   &:first-child {

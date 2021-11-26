@@ -22,18 +22,18 @@ const QUICK_LINKS = [
     slug: '55',
     key: 'rahman',
   },
-  {
-    slug: '56',
-    key: 'waqiah',
-  },
+  // {
+  //   slug: '56',
+  //   key: 'waqiah',
+  // },
   {
     slug: '18',
     key: 'kahf',
   },
-  {
-    slug: '73',
-    key: 'muzzammil',
-  },
+  // {
+  //   slug: '73',
+  //   key: 'muzzammil',
+  // },
 ];
 
 const QuickLinks: React.FC = () => {

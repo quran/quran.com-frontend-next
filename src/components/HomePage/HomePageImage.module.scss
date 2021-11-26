@@ -23,4 +23,9 @@
   width: 100%;
   max-width: calc(8 * var(--spacing-mega));
   margin-block-end: var(--spacing-medium);
+  margin-block-start: calc(2 * var(--spacing-mega));
+}
+
+.quickLinksContainer {
+  margin-top: var(--spacing-large);
 }
