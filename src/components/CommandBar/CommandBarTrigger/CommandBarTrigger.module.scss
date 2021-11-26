@@ -40,7 +40,6 @@ $width: calc(11 * var(--spacing-mega));
   @include theme.light {
     box-shadow: var(--shadow-small);
     &:hover {
-      inset-block-start: calc(-0.1 * var(--spacing-micro));
       color: var(--color-text-default);
       box-shadow: var(--shadow-large);
     }

@@ -1,14 +1,29 @@
+@use "src/styles/breakpoints";
+
 $shadow-background: linear-gradient(180deg, #000000a6, transparent);
+$max-width: 95rem;
+
 .container {
   width: 100%;
   inset-inline: 0;
+  max-width: $max-width;
+  margin-inline: auto;
   box-sizing: border-box;
-  padding: var(--spacing-mega);
+  padding: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding: var(--spacing-mega);
+  }
+
   position: absolute;
   color: var(--color-text-default);
   display: flex;
   justify-content: space-between;
   font-weight: var(--font-weight-semibold);
+}
+
+.hijriDate {
+  box-sizing: border-box;
+  padding-block: var(--spacing-xsmall);
 }
 
 .prayerName {
