@@ -162,7 +162,8 @@
         "title": "Search"
     },
     "settings": {
-        "wbw-tooltip": "Display the translation or transliteration directly under the word",
+        "wbw-helper": "Display the translation or transliteration directly under the word",
+        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word",
         "change-reciter": "Change Reciter",
         "change-tafsirs": "Change Tafsirs",
         "change-translations": "Change Translations",

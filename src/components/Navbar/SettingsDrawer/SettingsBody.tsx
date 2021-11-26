@@ -16,9 +16,9 @@ const SettingsBody = () => (
     <QuranFontSection />
     <TranslationSection />
     <TafsirSection />
-    <AudioSection />
     <WordByWordSection />
     <WordTooltipSection />
+    <AudioSection />
     <PrayerTimesSection />
     <ResetButton />
   </>
