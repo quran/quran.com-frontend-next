@@ -165,13 +165,19 @@
         "change-reciter": "Cambia Recitatore",
         "change-tafsirs": "Cambia Tafsir",
         "change-translations": "Cambia traduzioni",
+        "no-tafsir-selected": "Nessun tafsir selezionato",
+        "no-translation-selected": "Nessuna traduzione selezionata",
         "reading-experience": "Esperienza di lettura",
         "reset-cta": "Ripristina le impostazioni",
         "reset-notif": "Le tue impostazioni sono state ripristinate a quelle predefinite",
         "search-reciter": "Cerca Relatore",
         "search-tafsirs": "Cerca Tafsir",
         "search-translations": "Cerca traduzioni",
-        "title": "Impostazioni"
+        "title": "Impostazioni",
+        "tooltip-desc": "Fare clic su qualsiasi parola del Corano per visualizzare il suggerimento",
+        "value-and-others": "{{value}} e {{othersCount}} altri",
+        "wbw-helper": "Visualizza la traduzione o la traslitterazione direttamente sotto la parola",
+        "word-tooltip-helper": "Visualizza la traduzione o la traslitterazione quando si passa con il mouse o si fa clic sulla parola"
     },
     "share": "Condividere",
     "shared": "Il link è stato copiato negli appunti!",
@@ -196,6 +202,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Auto",
         "dark": "Buio",
         "light": "Leggero",
         "sepia": "Seppia",
@@ -225,5 +232,6 @@
         "play-audio": "Riproduci audio",
         "title": "Clic sulla parola"
     },
+    "word-tooltip": "Descrizione comando parola",
     "yes": "sì"
 }
