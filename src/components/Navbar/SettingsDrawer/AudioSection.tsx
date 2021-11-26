@@ -42,7 +42,7 @@ const AudioSection = () => {
         <Section.Title>{t('audio.title')}</Section.Title>
         <Section.Row>
           <SelectionCard
-            label="Selected Reciter"
+            label={t('settings.selected-reciter')}
             value={selectedReciter.name}
             onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}
           />

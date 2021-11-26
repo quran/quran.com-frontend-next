@@ -60,7 +60,7 @@ const TranslationSection = () => {
 
       return (
         <SelectionCard
-          label="Selected Translations"
+          label={t('settings.selected-translations')}
           value={selectedValueString}
           onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
         />

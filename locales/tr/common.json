@@ -162,16 +162,22 @@
         "title": "Arama"
     },
     "settings": {
-        "change-reciter": "Okuyucuyu Değiştir",
-        "change-tafsirs": "Tefsirleri Değiştir",
-        "change-translations": "Çevirileri Değiştir",
+        "no-tafsir-selected": "Tefsir seçilmedi",
+        "no-translation-selected": "Çeviri seçilmedi",
         "reading-experience": "Okuma Deneyimi",
         "reset-cta": "Ayarları Sıfırla",
         "reset-notif": "Ayarlarınız varsayılanlara sıfırlandı",
         "search-reciter": "Okuyucu Ara",
         "search-tafsirs": "tefsir ara",
         "search-translations": "Çevirileri Ara",
-        "title": "Ayarlar"
+        "selected-reciter": "Seçilmiş Okur",
+        "selected-tafsirs": "Seçilmiş Tefsirler",
+        "selected-translations": "Seçilmiş Çeviriler",
+        "title": "Ayarlar",
+        "tooltip-desc": "Araç ipucunu görmek için herhangi bir Kuran Kelimesine tıklayın",
+        "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
+        "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
+        "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
     },
     "share": "Paylaş",
     "shared": "Bağlantı panoya kopyalandı!",
@@ -196,6 +202,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Oto",
         "dark": "Karanlık",
         "light": "Işık",
         "sepia": "Sepya",
@@ -225,5 +232,6 @@
         "play-audio": "Ses Çal",
         "title": "Kelime Tıklaması"
     },
+    "word-tooltip": "Kelime İpucu",
     "yes": "Evet"
 }

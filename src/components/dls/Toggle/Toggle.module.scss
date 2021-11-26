@@ -10,7 +10,7 @@ $size: var(--spacing-medium);
 
   padding: calc(0.3 * var(--spacing-xsmall));
 
-  transition: var(--transition-regular) linear;
+  transition: var(--transition-fast) ease;
   border-radius: var(--border-radius-pill);
   display: flex;
   align-items: center;

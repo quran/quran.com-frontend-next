@@ -13,9 +13,9 @@ import WordTooltipSection from './WordTooltipSection';
 const SettingsBody = () => (
   <>
     <ThemeSection />
+    <QuranFontSection />
     <WordByWordSection />
     <WordTooltipSection />
-    <QuranFontSection />
     <TranslationSection />
     <TafsirSection />
     <AudioSection />

@@ -162,16 +162,22 @@
         "title": "Kërko"
     },
     "settings": {
-        "change-reciter": "Ndrysho recituesin",
-        "change-tafsirs": "Ndrysho Tefsire",
-        "change-translations": "Ndrysho përkthimet",
+        "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
+        "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
         "reading-experience": "Përvoja e të lexuarit",
         "reset-cta": "Rivendos cilësimet",
         "reset-notif": "Cilësimet tuaja janë rivendosur në ato të paracaktuara",
         "search-reciter": "Kërko Recitues",
         "search-tafsirs": "Kërkoni tefsirë",
         "search-translations": "Kërko Përkthime",
-        "title": "Cilësimet"
+        "selected-reciter": "Recitues i zgjedhur",
+        "selected-tafsirs": "Tefsire të zgjedhura",
+        "selected-translations": "Përkthime të zgjedhura",
+        "title": "Cilësimet",
+        "tooltip-desc": "Klikoni në çdo fjalë të Kuranit për të parë këshillën e veglave",
+        "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
+        "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
+        "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
     },
     "share": "Shpërndaje",
     "shared": "Lidhja është kopjuar në kujtesën e fragmenteve!",
@@ -196,6 +202,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Auto",
         "dark": "E errët",
         "light": "Drita",
         "sepia": "Sepia",
@@ -225,5 +232,6 @@
         "play-audio": "Luaj Audio",
         "title": "Klikoni në fjalë"
     },
+    "word-tooltip": "Këshillë për veglat e fjalës",
     "yes": "po"
 }
