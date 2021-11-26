@@ -13,12 +13,12 @@ import WordTooltipSection from './WordTooltipSection';
 const SettingsBody = () => (
   <>
     <ThemeSection />
-    <WordByWordSection />
-    <WordTooltipSection />
     <QuranFontSection />
     <TranslationSection />
     <TafsirSection />
     <AudioSection />
+    <WordByWordSection />
+    <WordTooltipSection />
     <PrayerTimesSection />
     <ResetButton />
   </>

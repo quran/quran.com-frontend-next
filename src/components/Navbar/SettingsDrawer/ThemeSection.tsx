@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -26,10 +27,17 @@ const ThemeSection = () => {
   const theme = useSelector(selectTheme, shallowEqual);
   const themes = Object.values(ThemeType).map((themeValue) => ({
     name: (
-      <span className={styles.container}>
-        {theme.type === themeValue && icons[themeValue]}
-        {t(`themes.${themeValue}`)}
-      </span>
+      <div className={styles.container}>
+        <span
+          className={classNames(
+            styles.iconContainer,
+            theme.type === themeValue && styles.iconActive,
+          )}
+        >
+          {icons[themeValue]}
+        </span>
+        <span className={styles.themeNameContainer}>{t(`themes.${themeValue}`)}</span>
+      </div>
     ),
     value: themeValue,
   }));
