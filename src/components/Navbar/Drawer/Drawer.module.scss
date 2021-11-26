@@ -1,5 +1,6 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
+@use "src/styles/theme";
 
 .container {
   background: var(--color-background-elevated);
@@ -31,7 +32,9 @@
 }
 
 .containerOpen {
+  // @include theme.light {
   box-shadow: var(--shadow-normal);
+  // }
   transition-timing-function: ease-out;
   &.left {
     inset-inline-start: 0;
@@ -44,13 +47,9 @@
 .searchContainer {
   display: flex;
   flex-direction: column;
-  min-height: calc(
-    100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega)))
-  );
+  min-height: calc(100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega))));
   @include breakpoints.tablet {
-    min-height: calc(
-      100% - calc(constants.$navbar-height + var(--spacing-small))
-    );
+    min-height: calc(100% - calc(constants.$navbar-height + var(--spacing-small)));
   }
   justify-content: space-between;
 }
