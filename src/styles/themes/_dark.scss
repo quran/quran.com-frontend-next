@@ -50,11 +50,11 @@
 
   --color-highlight: #f81ce5;
 
-  --shadow-small: 0px 2px 4px rgba(255, 255, 255, 0.1);
-  --shadow-normal: 0px 4px 8px rgba(255, 255, 255, 0.12);
-  --shadow-large: 0 5px 10px rgba(255, 255, 255, 0.12);
-  --shadow-xlarge: 0 8px 30px rgba(255, 255, 255, 0.12);
-  --shadow-jumbo: 0 30px 60px rgba(255, 255, 255, 0.12);
-  --shadow-hover: 0 30px 60px rgba(255, 255, 255, 0.12);
-  --shadow-sticky: 0 12px 10px -10px rgba(255, 255, 255, 0.12);
+  --shadow-small: 0px 2px 4px var(--shade-9);
+  --shadow-normal: 0px 4px 8px var(--shade-9);
+  --shadow-large: 0 5px 10px var(--shade-9);
+  --shadow-xlarge: 0 8px 30px var(--shade-9);
+  --shadow-jumbo: 0 30px 60px var(--shade-9);
+  --shadow-hover: 0 30px 60px var(--shade-9);
+  --shadow-sticky: 0 12px 10px -10px var(--shade-9);
 }
