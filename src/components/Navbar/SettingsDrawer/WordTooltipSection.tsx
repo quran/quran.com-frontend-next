@@ -31,7 +31,7 @@ const WordTooltipSection = () => {
     <Section>
       <Section.Title>
         {t('word-tooltip')}
-        <HelperTooltip>{t('settings.wbw-tooltip')}</HelperTooltip>
+        <HelperTooltip>{t('settings.word-tooltip-helper')}</HelperTooltip>
       </Section.Title>
       <Section.Row>
         <div className={styles.checkboxContainer}>
@@ -55,6 +55,9 @@ const WordTooltipSection = () => {
           </div>
         </div>
       </Section.Row>
+      <Section.Footer visible={showTooltipFor.length > 0}>
+        {t('settings.tooltip-desc')}
+      </Section.Footer>
     </Section>
   );
 };

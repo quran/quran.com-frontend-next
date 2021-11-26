@@ -46,7 +46,7 @@ const WordByWordSection = () => {
     <Section>
       <Section.Title>
         {t('wbw')}
-        <HelperTooltip>{t('settings.wbw-tooltip')}</HelperTooltip>
+        <HelperTooltip>{t('settings.wbw-helper')}</HelperTooltip>
       </Section.Title>
       <Section.Row>
         <div className={styles.checkboxContainer}>
