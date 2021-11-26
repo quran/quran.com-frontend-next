@@ -80,7 +80,7 @@ const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
       <div className={styles.container}>
         {pages.map((page, index) => {
           const pageBlocks = pagesBlocks[index];
-          const date = new Date(page.last_edited_time).toLocaleString('en-US', {
+          const date = new Date(page.properties.Date.date.start).toLocaleString('en-US', {
             month: 'long',
             day: '2-digit',
             year: 'numeric',
@@ -88,8 +88,7 @@ const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
           return (
             <div key={page.id} className={styles.pageContainer}>
               <div className={styles.headerSection}>
-                {/* eslint-disable-next-line i18next/no-literal-string */}
-                <p className={styles.date}>Last edited: {date}</p>
+                <p className={styles.date}>{date}</p>
                 <p className={classNames(styles.title, styles.bold)}>
                   {page.properties.Name.title[0].plain_text}
                 </p>

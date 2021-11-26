@@ -10,9 +10,8 @@ export const retrieveDatabase = async (databaseId: string) => {
     database_id: databaseId,
     sorts: [
       {
-        property: 'Name',
-        timestamp: 'created_time',
-        direction: 'ascending',
+        property: 'Date',
+        direction: 'descending',
       },
     ],
   });
