@@ -6,9 +6,8 @@ import { NextPage, GetStaticProps } from 'next';
 import styles from './index.module.scss';
 
 import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
-import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 import Footer from 'src/components/dls/Footer/Footer';
-import HomePageImage from 'src/components/HomePage/HomePageImage';
+import HomepageHero from 'src/components/HomePage/HomePageImage';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -22,12 +21,7 @@ type IndexProps = {
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
   <div className={styles.pageContainer}>
     <div className={classNames(styles.listContainer, styles.flow)}>
-      <div className={classNames(styles.flowItem)}>
-        <CommandBarTrigger />
-      </div>
-      <div className={classNames(styles.flowItem)}>
-        <HomePageImage />
-      </div>
+      <HomepageHero />
       <div className={styles.flowItem}>
         <HomePageWelcomeMessage />
       </div>

@@ -3,12 +3,11 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
   width: 100%;
   inset-inline: 0;
   box-sizing: border-box;
-  padding: var(--spacing-medium);
+  padding: var(--spacing-mega);
   position: absolute;
-  color: white;
+  color: var(--color-text-default);
   display: flex;
   justify-content: space-between;
-  background: $shadow-background;
   font-weight: var(--font-weight-semibold);
 }
 
@@ -26,7 +25,7 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
 }
 
 .findLocationButton {
-  fill: white; // using white because the background is always dark
+  fill: var(--color-text-default);
   &:hover {
     fill: var(--color-text-default);
   }
