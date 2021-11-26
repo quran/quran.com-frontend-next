@@ -162,9 +162,6 @@
         "title": "بحث"
     },
     "settings": {
-        "change-reciter": "تغيير القارئ",
-        "change-tafsirs": "تغيير التفسير",
-        "change-translations": "تغيير الترجمات",
         "no-tafsir-selected": "لم يتم اختيار التفسير",
         "no-translation-selected": "لم يتم تحديد ترجمة",
         "reading-experience": "تجربة القراءة",
@@ -173,6 +170,9 @@
         "search-reciter": "البحث عن القارئ",
         "search-tafsirs": "بحث في تفسير",
         "search-translations": "البحث في الترجمات",
+        "selected-reciter": "القارئ المختار",
+        "selected-tafsirs": "تفسير مختار",
+        "selected-translations": "ترجمات مختارة",
         "title": "الإعدادات",
         "tooltip-desc": "انقر فوق أي كلمة من كلمات القرآن لرؤية التلميح",
         "value-and-others": "{{value}} و {{othersCount}} أخرى",

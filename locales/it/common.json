@@ -162,9 +162,6 @@
         "title": "Ricerca"
     },
     "settings": {
-        "change-reciter": "Cambia Recitatore",
-        "change-tafsirs": "Cambia Tafsir",
-        "change-translations": "Cambia traduzioni",
         "no-tafsir-selected": "Nessun tafsir selezionato",
         "no-translation-selected": "Nessuna traduzione selezionata",
         "reading-experience": "Esperienza di lettura",
@@ -173,6 +170,9 @@
         "search-reciter": "Cerca Relatore",
         "search-tafsirs": "Cerca Tafsir",
         "search-translations": "Cerca traduzioni",
+        "selected-reciter": "Recitatore selezionato",
+        "selected-tafsirs": "Tafsir selezionati",
+        "selected-translations": "Traduzioni selezionate",
         "title": "Impostazioni",
         "tooltip-desc": "Fare clic su qualsiasi parola del Corano per visualizzare il suggerimento",
         "value-and-others": "{{value}} e {{othersCount}} altri",

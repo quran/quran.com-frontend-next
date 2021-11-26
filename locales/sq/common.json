@@ -162,9 +162,6 @@
         "title": "Kërko"
     },
     "settings": {
-        "change-reciter": "Ndrysho recituesin",
-        "change-tafsirs": "Ndrysho Tefsire",
-        "change-translations": "Ndrysho përkthimet",
         "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
         "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
         "reading-experience": "Përvoja e të lexuarit",
@@ -173,6 +170,9 @@
         "search-reciter": "Kërko Recitues",
         "search-tafsirs": "Kërkoni tefsirë",
         "search-translations": "Kërko Përkthime",
+        "selected-reciter": "Recitues i zgjedhur",
+        "selected-tafsirs": "Tefsire të zgjedhura",
+        "selected-translations": "Përkthime të zgjedhura",
         "title": "Cilësimet",
         "tooltip-desc": "Klikoni në çdo fjalë të Kuranit për të parë këshillën e veglave",
         "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",

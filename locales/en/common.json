@@ -162,9 +162,6 @@
         "title": "Search"
     },
     "settings": {
-        "change-reciter": "Change Reciter",
-        "change-tafsirs": "Change Tafsirs",
-        "change-translations": "Change Translations",
         "no-tafsir-selected": "No tafsir selected",
         "no-translation-selected": "No translation selected",
         "reading-experience": "Reading Experience",
@@ -173,6 +170,9 @@
         "search-reciter": "Search Reciter",
         "search-tafsirs": "Search Tafsirs",
         "search-translations": "Search Translations",
+        "selected-reciter": "Selected Reciter",
+        "selected-tafsirs": "Selected Tafsirs",
+        "selected-translations": "Selected Translations",
         "title": "Settings",
         "tooltip-desc": "Click on any Quran Word to see the tooltip",
         "value-and-others": "{{value}}, and {{othersCount}} others",

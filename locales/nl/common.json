@@ -162,9 +162,6 @@
         "title": "Zoeken"
     },
     "settings": {
-        "change-reciter": "Voordrager wijzigen",
-        "change-tafsirs": "Tafsir wijzigen",
-        "change-translations": "Vertalingen wijzigen",
         "no-tafsir-selected": "Geen tafsir geselecteerd",
         "no-translation-selected": "Geen vertaling geselecteerd",
         "reading-experience": "Leeservaring",
@@ -173,6 +170,9 @@
         "search-reciter": "Zoek voordrager",
         "search-tafsirs": "Tafsir zoeken",
         "search-translations": "Vertalingen zoeken",
+        "selected-reciter": "Geselecteerde voordrager",
+        "selected-tafsirs": "Geselecteerde Tafsirs",
+        "selected-translations": "Geselecteerde vertalingen",
         "title": "Instellingen",
         "tooltip-desc": "Klik op een koranwoord om de tooltip te zien",
         "value-and-others": "{{value}} en {{othersCount}} anderen",

@@ -162,9 +162,6 @@
         "title": "Поиск"
     },
     "settings": {
-        "change-reciter": "Изменить чтец",
-        "change-tafsirs": "Смена тафсиров",
-        "change-translations": "Изменить перевод",
         "no-tafsir-selected": "Тафсир не выбран",
         "no-translation-selected": "Перевод не выбран",
         "reading-experience": "Опыт чтения",
@@ -173,6 +170,9 @@
         "search-reciter": "Поиск чтеца",
         "search-tafsirs": "Поиск Тафсиров",
         "search-translations": "Поиск переводов",
+        "selected-reciter": "Избранный чтец",
+        "selected-tafsirs": "Избранные тафсиры",
+        "selected-translations": "Избранные переводы",
         "title": "Настройки",
         "tooltip-desc": "Щелкните любое слово Корана, чтобы увидеть всплывающую подсказку.",
         "value-and-others": "{{value}} и {{othersCount}} другие",

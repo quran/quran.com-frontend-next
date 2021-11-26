@@ -162,9 +162,6 @@
         "title": "Arama"
     },
     "settings": {
-        "change-reciter": "Okuyucuyu Değiştir",
-        "change-tafsirs": "Tefsirleri Değiştir",
-        "change-translations": "Çevirileri Değiştir",
         "no-tafsir-selected": "Tefsir seçilmedi",
         "no-translation-selected": "Çeviri seçilmedi",
         "reading-experience": "Okuma Deneyimi",
@@ -173,6 +170,9 @@
         "search-reciter": "Okuyucu Ara",
         "search-tafsirs": "tefsir ara",
         "search-translations": "Çevirileri Ara",
+        "selected-reciter": "Seçilmiş Okur",
+        "selected-tafsirs": "Seçilmiş Tefsirler",
+        "selected-translations": "Seçilmiş Çeviriler",
         "title": "Ayarlar",
         "tooltip-desc": "Araç ipucunu görmek için herhangi bir Kuran Kelimesine tıklayın",
         "value-and-others": "{{value}} ve {{othersCount}} diğerleri",

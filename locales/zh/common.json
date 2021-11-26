@@ -162,9 +162,6 @@
         "title": "搜索"
     },
     "settings": {
-        "change-reciter": "更改朗诵者",
-        "change-tafsirs": "更改 Tafsir",
-        "change-translations": "更改翻译",
         "no-tafsir-selected": "未选择 tafsir",
         "no-translation-selected": "未选择翻译",
         "reading-experience": "阅读体验",
@@ -173,6 +170,9 @@
         "search-reciter": "搜索朗诵者",
         "search-tafsirs": "搜索 Tafsirs",
         "search-translations": "搜索翻译",
+        "selected-reciter": "精选朗诵者",
+        "selected-tafsirs": "精选 Tafsir",
+        "selected-translations": "精选译文",
         "title": "设置",
         "tooltip-desc": "单击任何古兰经单词以查看工具提示",
         "value-and-others": "{{value}}和{{othersCount}}其他",
