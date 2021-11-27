@@ -32,9 +32,7 @@
 }
 
 .containerOpen {
-  // @include theme.light {
   box-shadow: var(--shadow-normal);
-  // }
   transition-timing-function: ease-out;
   &.left {
     inset-inline-start: 0;
