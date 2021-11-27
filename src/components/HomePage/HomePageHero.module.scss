@@ -2,15 +2,15 @@
 
 .outerContainer {
   background-color: var(--color-background-alternative-faded);
-  height: calc(15 * var(--spacing-mega));
 }
 
 .innerContainer {
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: center;
   align-items: center;
+  padding-block-start: calc(2 * var(--spacing-mega));
+  padding-block-end: calc(1 * var(--spacing-mega));
   padding-inline: var(--spacing-small);
   @include breakpoints.tablet {
     max-width: calc(25 * var(--spacing-mega));
@@ -23,9 +23,9 @@
   width: 100%;
   max-width: calc(8 * var(--spacing-mega));
   margin-block-end: var(--spacing-medium);
-  margin-block-start: calc(2 * var(--spacing-mega));
+  margin-block-start: var(--spacing-mega);
 }
 
 .quickLinksContainer {
-  margin-top: var(--spacing-large);
+  margin-top: var(--spacing-mega);
 }

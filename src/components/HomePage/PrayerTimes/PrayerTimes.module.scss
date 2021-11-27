@@ -10,9 +10,6 @@ $max-width: 95rem;
   margin-inline: auto;
   box-sizing: border-box;
   padding: var(--spacing-medium);
-  @include breakpoints.tablet {
-    padding: var(--spacing-mega);
-  }
 
   position: absolute;
   color: var(--color-text-default);
