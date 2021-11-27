@@ -36,7 +36,6 @@ $width: calc(11 * var(--spacing-mega));
   outline: inherit;
   font-size: var(--font-size-large);
   inset-block-start: 0;
-  // box-shadow: var(--shadow-small); // TODO: fix shadow color on dark theme
   @include theme.light {
     box-shadow: var(--shadow-small);
     &:hover {
