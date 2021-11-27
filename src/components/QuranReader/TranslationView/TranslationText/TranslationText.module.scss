@@ -23,15 +23,15 @@
 }
 
 .urdu {
-  font-family: "nafees";
+  font-family: "nafees" !important; // important is needed to over-ride the language specific font-family
 }
 
 .kurdish {
-  font-family: "DroidArabicNaskh";
+  font-family: "DroidArabicNaskh" !important; // important is needed to over-ride the language specific font-family
 }
 
 .divehi {
-  font-family: "divehi";
+  font-family: "divehi" !important; // important is needed to over-ride the language specific font-family
 }
 
 .translationName {
