@@ -6,6 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import FontPreLoader from './FontPreLoader';
+
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
@@ -33,30 +35,10 @@ function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <>
       <Head>
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="/fonts/ProximaVara/proxima_vara_regular.woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="/fonts/ProximaVara/proxima_vara_semibold.woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          as="font"
-          type="font/woff2"
-          href="/fonts/ProximaVara/proxima_vara_bold.woff2"
-          crossOrigin="anonymous"
-        />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
       </Head>
+      <FontPreLoader locale={locale} />
       <ReduxProvider locale={locale}>
         <ThemeProvider>
           <IdProvider>
