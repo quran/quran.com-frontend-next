@@ -9,7 +9,7 @@ import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
 import Footer from 'src/components/dls/Footer/Footer';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
-import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
+import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { ChaptersResponse } from 'types/ApiResponses';
@@ -29,7 +29,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
         <RecentReadingSessions />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth)}>
-        <BookmarksAndQuickLinks />
+        <BookmarksSection />
       </div>
       <div className={styles.flowItem}>
         <ChapterAndJuzList chapters={chapters} />

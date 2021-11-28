@@ -14,7 +14,7 @@ const HomePageHero = () => {
       <PrayerTimes />
       <div className={styles.innerContainer}>
         <div className={styles.imageContainer}>
-          <Image className={styles.homepageImage} src={quranKarimLogo} objectFit="cover" priority />
+          <Image className={styles.homepageImage} src={quranKarimLogo} priority />
         </div>
 
         <CommandBarTrigger />

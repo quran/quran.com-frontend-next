@@ -30,7 +30,10 @@ $width: calc(11 * var(--spacing-mega));
   align-items: center;
   padding: 0 calc(1.5 * var(--spacing-medium));
   color: var(--color-text-faded);
-  min-height: calc(3.5 * var(--spacing-large));
+  min-height: calc(3 * var(--spacing-large));
+  @include breakpoints.tablet {
+    min-height: calc(3.5 * var(--spacing-large));
+  }
   border-radius: var(--border-radius-pill);
   cursor: pointer;
   outline: inherit;

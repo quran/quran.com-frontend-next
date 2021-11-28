@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 
 import BookmarkedVersesList from './BookmarkedVersesList';
@@ -12,22 +10,28 @@ enum View {
   Popular = 'popular',
 }
 
-const BookmarksAndQuickLinks = () => {
+const BookmarksSection = () => {
   const { t } = useTranslation('home');
-  const [view, setView] = useState(View.Bookmarks);
 
   const tabs = [{ title: t('tab.bookmarks'), value: View.Bookmarks }];
 
   return (
     <div>
       <div className={styles.tabsContainer}>
-        <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView as View)} />
+        <Tabs
+          tabs={tabs}
+          selected={View.Bookmarks}
+          onSelect={() => {
+            // do nothing, we're only using the UI of the Tab for now, and not using the functionality
+            // TODO: design a more proper UI for this section, and remove Tabs usage here
+          }}
+        />
       </div>
       <div className={styles.contentContainer}>
-        {view === View.Bookmarks && <BookmarkedVersesList />}
+        <BookmarkedVersesList />
       </div>
     </div>
   );
 };
 
-export default BookmarksAndQuickLinks;
+export default BookmarksSection;
