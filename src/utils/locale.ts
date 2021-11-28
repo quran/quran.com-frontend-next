@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable import/prefer-default-export */
 import findKey from 'lodash/findKey';
 
@@ -27,6 +28,25 @@ const LOCALE_NAME = {
   inh: 'ʁəlʁɑj mot',
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
+};
+
+export const LANG_LOCALE_MAP = {
+  en: 'en-US',
+  ar: 'ar-SA',
+  bn: 'bn-BD',
+  fa: 'fa-IR',
+  fr: 'fr-FR',
+  id: 'id-ID',
+  it: 'it-IT',
+  nl: 'nl-NL',
+  pt: 'pt-BR',
+  ru: 'ru-RU',
+  sq: 'sq-AL',
+  th: 'th-TH',
+  tr: 'tr-TR',
+  ur: 'ur-PK',
+  zh: 'zh-CN',
+  ms: 'ms-MY',
 };
 
 export enum Direction {
@@ -231,3 +251,8 @@ export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => 
  * @returns {string}
  */
 export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];
+
+export const toLocalizedNumber = (value: number, locale: string) => {
+  const fullLocale = LANG_LOCALE_MAP[locale];
+  return new Intl.NumberFormat(fullLocale).format(value);
+};
