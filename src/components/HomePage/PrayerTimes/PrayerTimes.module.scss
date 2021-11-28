@@ -40,3 +40,17 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
   }
   margin-inline-end: var(--spacing-xxsmall);
 }
+
+.hijriDatePlaceholder {
+  width: calc(5 * var(--spacing-mega));
+  height: calc(1.5 * var(--spacing-medium));
+}
+
+.prayerTimesPlaceholder {
+  width: calc(5 * var(--spacing-mega));
+  height: calc(3 * var(--spacing-medium));
+}
+.hijriDatePlaceholder,
+.prayerTimesPlaceholder {
+  margin-block-start: var(--spacing-xsmall);
+}
