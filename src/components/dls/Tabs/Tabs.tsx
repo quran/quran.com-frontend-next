@@ -9,7 +9,7 @@ type Tab = {
 type TabsProps = {
   tabs: Tab[];
   selected: string;
-  onSelect: (value: string) => void;
+  onSelect?: (value: string) => void;
 };
 
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
@@ -21,8 +21,10 @@ const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
           key={tab.value}
           role="tab"
           tabIndex={index}
-          onKeyDown={() => onSelect(tab.value)}
-          onClick={() => onSelect(tab.value)}
+          {...(onSelect && {
+            onKeyDown: () => onSelect(tab.value),
+            onClick: () => onSelect(tab.value),
+          })}
         >
           {tab.title}
         </div>

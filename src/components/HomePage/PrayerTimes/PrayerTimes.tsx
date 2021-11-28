@@ -109,7 +109,7 @@ const PrayerTimes = () => {
   return (
     <>
       <div className={styles.container}>
-        <div>{hijriDate}</div>
+        <div className={styles.hijriDate}>{hijriDate}</div>
         <div className={styles.prayerTimesContainer}>
           <div className={styles.locationContainer}>
             <Button

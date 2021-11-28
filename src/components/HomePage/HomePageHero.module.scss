@@ -1,0 +1,35 @@
+@use "src/styles/breakpoints";
+
+.outerContainer {
+  background-color: var(--color-background-alternative-faded);
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  padding-block-start: calc(2 * var(--spacing-mega));
+  padding-block-end: calc(1 * var(--spacing-mega));
+  padding-inline: var(--spacing-small);
+  @include breakpoints.tablet {
+    max-width: calc(25 * var(--spacing-mega));
+  }
+  margin-inline: auto;
+}
+
+.imageContainer {
+  height: calc(5 * var(--spacing-mega));
+  width: 100%;
+  max-width: calc(8 * var(--spacing-mega));
+  margin-block-end: var(--spacing-medium);
+  margin-block-start: var(--spacing-mega);
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-mega);
+    margin-block-start: var(--spacing-xxsmall);
+  }
+}
+
+.quickLinksContainer {
+  margin-block-start: var(--spacing-mega);
+}
