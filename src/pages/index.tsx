@@ -7,6 +7,7 @@ import styles from './index.module.scss';
 
 import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
 import Footer from 'src/components/dls/Footer/Footer';
+import Separator from 'src/components/dls/Separator/Separator';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
@@ -33,6 +34,9 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
       </div>
       <div className={styles.flowItem}>
         <ChapterAndJuzList chapters={chapters} />
+      </div>
+      <div className={styles.flowItem}>
+        <Separator />
       </div>
       <div className={styles.flowItem}>
         <Footer />

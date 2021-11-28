@@ -11,15 +11,18 @@ import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 const HomePageHero = () => {
   return (
     <div className={styles.outerContainer}>
-      <PrayerTimes />
-      <div className={styles.innerContainer}>
-        <div className={styles.imageContainer}>
-          <Image className={styles.homepageImage} src={quranKarimLogo} priority />
-        </div>
+      <div className={styles.backgroundImage} />
+      <div data-theme="light">
+        <PrayerTimes />
+        <div className={styles.innerContainer}>
+          <div className={styles.imageContainer}>
+            <Image className={styles.homepageImage} src={quranKarimLogo} priority />
+          </div>
 
-        <CommandBarTrigger />
-        <div className={styles.quickLinksContainer}>
-          <QuickLinks />
+          <CommandBarTrigger />
+          <div className={styles.quickLinksContainer}>
+            <QuickLinks />
+          </div>
         </div>
       </div>
     </div>
