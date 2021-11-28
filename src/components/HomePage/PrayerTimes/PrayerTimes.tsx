@@ -14,7 +14,7 @@ import { PrayerTimesData, HijriDateData } from './PrayerTimesTypes';
 
 import { fetcher } from 'src/api';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+// import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import {
   LocationAccess,
   selectCalculationMethod,
@@ -78,21 +78,23 @@ const PrayerTimes = () => {
 
   const hijriDate = useHijriDateFormatter(prayerTimesData?.hijriDateData);
 
-  if (!prayerTimesData)
-    return (
-      <div className={styles.container}>
-        <div>
-          <Skeleton>
-            <div className={styles.hijriDatePlaceholder} />
-          </Skeleton>
-        </div>
-        <div>
-          <Skeleton>
-            <div className={styles.prayerTimesPlaceholder} />
-          </Skeleton>
-        </div>
-      </div>
-    );
+  if (!prayerTimesData) return null;
+
+  // TODO: update skeleton style and bring it in prayer times's loading state
+  // return (
+  //   <div className={styles.container}>
+  //     <div>
+  //       <Skeleton>
+  //         <div className={styles.hijriDatePlaceholder} />
+  //       </Skeleton>
+  //     </div>
+  //     <div>
+  //       <Skeleton>
+  //         <div className={styles.prayerTimesPlaceholder} />
+  //       </Skeleton>
+  //     </div>
+  //   </div>
+  // );
 
   const { prayerTimes } = prayerTimesData;
   const nextPrayerTime = prayerTimes ? getNextPrayerTime(prayerTimes) : null;

@@ -46,11 +46,12 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
   height: calc(1.5 * var(--spacing-medium));
 }
 
-.prayerTimesPlaceholder {
-  width: calc(5 * var(--spacing-mega));
-  height: calc(3 * var(--spacing-medium));
-}
-.hijriDatePlaceholder,
-.prayerTimesPlaceholder {
-  margin-block-start: var(--spacing-xsmall);
-}
+// TODO: bring back the skeleton in prayer times
+// .prayerTimesPlaceholder {
+//   width: calc(5 * var(--spacing-mega));
+//   height: calc(3 * var(--spacing-medium));
+// }
+// .hijriDatePlaceholder,
+// .prayerTimesPlaceholder {
+//   margin-block-start: var(--spacing-xsmall);
+// }
