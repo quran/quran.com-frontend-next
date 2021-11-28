@@ -10,7 +10,7 @@ import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 
 const HomePageHero = () => {
   return (
-    <div className={styles.outerContainer}>
+    <div className={styles.outerContainer} data-theme="light">
       <PrayerTimes />
       <div className={styles.innerContainer}>
         <div className={styles.imageContainer}>

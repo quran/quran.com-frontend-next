@@ -1,7 +1,8 @@
 @use "src/styles/breakpoints";
 
 .outerContainer {
-  background-color: var(--color-background-alternative-faded);
+  background-image: url(../../../public/images/background.jpeg);
+  background-size: cover;
 }
 
 .innerContainer {
@@ -24,6 +25,7 @@
   max-width: calc(8 * var(--spacing-mega));
   margin-block-end: var(--spacing-medium);
   margin-block-start: var(--spacing-mega);
+  filter: brightness(100);
   @include breakpoints.tablet {
     margin-block-end: var(--spacing-mega);
     margin-block-start: var(--spacing-xxsmall);
