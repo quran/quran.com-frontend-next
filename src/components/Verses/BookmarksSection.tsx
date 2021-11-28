@@ -18,14 +18,7 @@ const BookmarksSection = () => {
   return (
     <div>
       <div className={styles.tabsContainer}>
-        <Tabs
-          tabs={tabs}
-          selected={View.Bookmarks}
-          onSelect={() => {
-            // do nothing, we're only using the UI of the Tab for now, and not using the functionality
-            // TODO: design a more proper UI for this section, and remove Tabs usage here
-          }}
-        />
+        <Tabs tabs={tabs} selected={View.Bookmarks} />
       </div>
       <div className={styles.contentContainer}>
         <BookmarkedVersesList />
