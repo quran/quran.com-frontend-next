@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -15,7 +15,7 @@ import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { getChapterData } from 'src/utils/chapter';
-import { shouldUseMinimalLayout } from 'src/utils/locale';
+import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
 import { formatChapterId } from 'src/utils/verse';
 
@@ -41,6 +41,10 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
 
   const { translatedName } = chapterData;
   const { transliteratedName } = chapterData;
+
+  const localizedChapterId = useMemo(() => {
+    return toLocalizedNumber(Number(formatChapterId(chapterId)), lang);
+  }, [chapterId, lang]);
 
   return (
     <div
@@ -69,7 +73,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
           </div>
         </div>
         <div className={styles.right}>
-          <div className={styles.chapterId}>{formatChapterId(chapterId)}</div>
+          <div className={styles.chapterId}>{localizedChapterId}</div>
           <div className={styles.arabicSurahNameContainer}>
             <ChapterIconContainer
               chapterId={chapterId}

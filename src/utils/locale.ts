@@ -252,7 +252,47 @@ export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => 
  */
 export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];
 
+/**
+ * Get the full locale name with lang + country e.g. ar-SA or en-US.
+ *
+ * @param {string} locale
+ * @returns {string}
+ */
+export const getLangFullLocale = (locale: string): string => LANG_LOCALE_MAP[locale];
+
+/**
+ * Takes a number and returns a localized string based on the provided locale.
+ *
+ * @param {number} value
+ * @param {string} locale
+ * @returns {string}
+ */
+// Intl.NumberFormat is performance heavy so we are caching the formatter.
+let numberFormatter: Intl.NumberFormat = null;
+let currentLanguageLocale: string = null;
 export const toLocalizedNumber = (value: number, locale: string) => {
+  if (numberFormatter && currentLanguageLocale === locale) {
+    return numberFormatter.format(value);
+  }
+  currentLanguageLocale = locale;
   const fullLocale = LANG_LOCALE_MAP[locale];
-  return new Intl.NumberFormat(fullLocale).format(value);
+  numberFormatter = new Intl.NumberFormat(fullLocale);
+  return numberFormatter.format(value);
+};
+
+/**
+ * Takes a date and returns a localized string based on the provided locale and options.
+ *
+ * @param {number} value
+ * @param {string} locale
+ * @param {Intl.DateTimeFormatOptions} options
+ * @returns {string}
+ */
+export const toLocalizedDate = (
+  value: number | Date,
+  locale: string,
+  options: Intl.DateTimeFormatOptions = {},
+) => {
+  const fullLocale = LANG_LOCALE_MAP[locale];
+  return new Intl.DateTimeFormat(fullLocale, options).format(value);
 };

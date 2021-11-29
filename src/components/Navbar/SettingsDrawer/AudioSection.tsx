@@ -22,10 +22,13 @@ import {
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { generateSelectOptions } from 'src/utils/input';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { WordClickFunctionality } from 'types/QuranReader';
 
+export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+
 const AudioSection = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
@@ -35,6 +38,10 @@ const AudioSection = () => {
   const onPlaybackRateChanged = (value) => {
     dispatch(setPlaybackRate(Number(value)));
   };
+
+  const playbackRatesOptions = generateSelectOptions(
+    playbackRates.map((rate) => ({ label: toLocalizedNumber(rate, lang), value: rate })),
+  );
 
   return (
     <div className={styles.container}>
@@ -85,11 +92,5 @@ const AudioSection = () => {
     </div>
   );
 };
-
-export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
-
-const playbackRatesOptions = generateSelectOptions(
-  playbackRates.map((playbackRate) => playbackRate.toString()),
-);
 
 export default AudioSection;

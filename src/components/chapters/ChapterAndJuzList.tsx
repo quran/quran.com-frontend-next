@@ -13,7 +13,7 @@ import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
 
-import { shouldUseMinimalLayout } from 'src/utils/locale';
+import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import Chapter from 'types/Chapter';
 
 const JuzView = dynamic(() => import('./JuzView'), {
@@ -97,7 +97,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               <Link href={`/${chapter.id}`}>
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
-                  description={`${chapter.versesCount} ${t('ayahs')}`}
+                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}

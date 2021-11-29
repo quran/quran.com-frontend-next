@@ -11,6 +11,7 @@ import styles from './Info.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { getBlurDataUrl } from 'src/utils/image';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 import ChapterInfo from 'types/ChapterInfo';
@@ -21,7 +22,7 @@ interface Props {
 }
 
 const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   return (
     <div className={styles.container}>
       <div className={styles.infoBody}>
@@ -54,7 +55,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
             <div className={styles.detailsContainer}>
               <div>
                 <p className={styles.detailHeader}>{t('common:ayahs')}</p>
-                <p>{chapter.versesCount}</p>
+                <p>{toLocalizedNumber(chapter.versesCount, lang)}</p>
               </div>
               <div>
                 <p className={styles.detailHeader}>{t('surah-info:revelation-place')}</p>

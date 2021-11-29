@@ -9,6 +9,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -31,7 +32,7 @@ type VerseProps = {
 };
 
 const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
   } = useRouter();
@@ -41,7 +42,10 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${verseId}`}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
+          Number(verseId),
+          lang,
+        )}`}
       />
       <QuranReader
         initialData={versesResponse}

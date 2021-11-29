@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -22,6 +22,7 @@ import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 const TafsirSection = () => {
@@ -45,6 +46,11 @@ const TafsirSection = () => {
     [selectedTafsirs.length],
   );
 
+  const localizedSelectedTafsirs = useMemo(
+    () => toLocalizedNumber(selectedTafsirs.length - 1, lang),
+    [selectedTafsirs, lang],
+  );
+
   const renderTafsirs = useCallback(
     (data: TafsirsResponse) => {
       const firstSelectedTafsir = data.tafsirs.find((tafsir) => tafsir.id === selectedTafsirs[0]);
@@ -54,7 +60,7 @@ const TafsirSection = () => {
       if (selectedTafsirs.length > 1)
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTafsir.name,
-          othersCount: selectedTafsirs.length - 1,
+          othersCount: localizedSelectedTafsirs,
         });
 
       return (

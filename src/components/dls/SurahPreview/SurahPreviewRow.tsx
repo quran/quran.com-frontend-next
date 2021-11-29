@@ -1,10 +1,14 @@
+import { useMemo } from 'react';
+
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SurahPreviewRow.module.scss';
 
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
+import { toLocalizedNumber } from 'src/utils/locale';
 
 type SurahPreviewRowProps = {
   surahNumber: number;
@@ -22,12 +26,17 @@ const SurahPreviewRow = ({
   chapterId,
   isMinimalLayout = false,
 }: SurahPreviewRowProps) => {
+  const { lang } = useTranslation('home');
+  const localizedSurahNumber = useMemo(
+    () => toLocalizedNumber(surahNumber, lang),
+    [surahNumber, lang],
+  );
   if (isMinimalLayout) {
     return (
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.surahNumber}>
-            <span>{surahNumber}</span>
+            <span>{localizedSurahNumber}</span>
           </div>
           <ChapterIconContainer
             chapterId={chapterId.toString()}

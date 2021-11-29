@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import QSimpleIcon from '../../../../public/icons/Q_simple.svg';
@@ -5,10 +7,14 @@ import QSimpleIcon from '../../../../public/icons/Q_simple.svg';
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { toLocalizedDate } from 'src/utils/locale';
 
 const Footer = () => {
-  const { t } = useTranslation('common');
-  const currentYear = new Date().getFullYear();
+  const { t, lang } = useTranslation('common');
+  const localizedCurrentYear = useMemo(
+    () => toLocalizedDate(new Date(), lang, { year: 'numeric', calendar: 'gregory' }),
+    [lang],
+  );
   return (
     <div className={styles.container}>
       <div className={styles.iconContainer}>
@@ -54,7 +60,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={styles.copyright}>
-          © {currentYear}{' '}
+          © {localizedCurrentYear}{' '}
           <Link href="https://quran.com" variant={LinkVariant.Highlight}>
             {t('quran-com')}
           </Link>
