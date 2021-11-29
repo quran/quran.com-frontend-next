@@ -23,6 +23,7 @@ import navbar from './slices/navbar';
 import prayerTimes from './slices/prayerTimes';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
+import fontFaces from './slices/QuranReader/font-faces';
 import highlightedLocation from './slices/QuranReader/highlightedLocation';
 import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
@@ -37,7 +38,7 @@ import welcomeMessage from './slices/welcomeMessage';
 
 const persistConfig = {
   key: 'root',
-  version: 16,
+  version: 17,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -76,6 +77,7 @@ export const rootReducer = combineReducers({
   voiceSearch,
   prayerTimes,
   defaultSettings,
+  fontFaces,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

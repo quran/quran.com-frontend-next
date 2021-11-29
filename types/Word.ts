@@ -26,6 +26,7 @@ interface Word {
   textIndopak?: string;
   highlight?: string | boolean;
   text?: string;
+  pageFontLoaded?: boolean;
   audioUrl: $TsFixMe;
   [key: string]: $TsFixMe;
 }
