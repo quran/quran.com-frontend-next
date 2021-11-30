@@ -55,7 +55,7 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
           </Button>
         </div>
         <LocalizationMessage />
-        <NotionPage key={page.id} page={page} blocks={blocks} isPageLayout />
+        <NotionPage page={page} blocks={blocks} isPageLayout />
       </div>
     </>
   );
