@@ -40,6 +40,7 @@
         "trigger": "Accesso rapido a qualsiasi cosa"
     },
     "welcome": {
+        "changes-cta": "Visualizza le modifiche recenti",
         "desc": "Stiamo attivamente aggiungendo nuove funzionalità e spingendo le modifiche. In caso di problemi, fornire un feedback.",
         "feedback-cta": "Fornire un feedback",
         "join-cta": "Unisciti alla community di Discord",

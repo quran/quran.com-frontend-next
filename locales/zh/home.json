@@ -40,6 +40,7 @@
         "trigger": "快速访问任何东西"
     },
     "welcome": {
+        "changes-cta": "查看最近的更改",
         "desc": "我们正在积极添加新功能并推动更改。如果您遇到任何问题，请提供反馈。",
         "feedback-cta": "提供反馈信息",
         "join-cta": "加入 Discord 社区",

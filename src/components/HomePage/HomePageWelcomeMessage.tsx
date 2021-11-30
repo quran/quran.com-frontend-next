@@ -35,13 +35,13 @@ const HomePageWelcomeMessage = () => {
         </Link>
       </p>
       <p className={styles.link}>
-        <Link variant={LinkVariant.Blend} href="https://discord.gg/FxRWSBfWxn">
-          {t('welcome.join-cta')}
+        <Link variant={LinkVariant.Blend} href="/product-updates">
+          {t('welcome.changes-cta')}
         </Link>
       </p>
       <p className={styles.link}>
-        <Link variant={LinkVariant.Blend} href="/product-updates">
-          {t('common:product-updates')}
+        <Link variant={LinkVariant.Blend} href="https://discord.gg/FxRWSBfWxn">
+          {t('welcome.join-cta')}
         </Link>
       </p>
       <div className={styles.closeIcon}>
