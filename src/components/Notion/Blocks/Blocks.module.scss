@@ -1,21 +1,6 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
-.container {
-  padding-block-start: var(--spacing-mega);
-  width: 95%;
-  margin: 0 auto;
-  @include breakpoints.tablet {
-    width: 50%;
-  }
-  direction: ltr;
-}
-
-.pageContainer {
-  padding-block-end: var(--spacing-medium);
-  border-block-end: 1px solid var(--color-borders-hairline);
-}
-
 .bold {
   font-weight: var(--font-weight-bold);
 }
@@ -29,10 +14,6 @@
 }
 
 .caption {
-  color: var(--color-text-faded);
-}
-.date {
-  font-size: var(--font-size-large);
   color: var(--color-text-faded);
 }
 

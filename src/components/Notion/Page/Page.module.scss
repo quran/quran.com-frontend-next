@@ -1,0 +1,23 @@
+@use "src/styles/breakpoints";
+
+.pageContainer {
+  padding-block-end: var(--spacing-medium);
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+}
+
+.headerSection {
+  padding-block: var(--spacing-medium);
+}
+
+.date {
+  font-size: var(--font-size-large);
+  color: var(--color-text-faded);
+}

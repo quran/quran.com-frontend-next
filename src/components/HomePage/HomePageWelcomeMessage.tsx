@@ -39,6 +39,11 @@ const HomePageWelcomeMessage = () => {
           {t('welcome.join-cta')}
         </Link>
       </p>
+      <p className={styles.link}>
+        <Link variant={LinkVariant.Blend} href="/product-updates">
+          {t('common:product-updates')}
+        </Link>
+      </p>
       <div className={styles.closeIcon}>
         <Button
           size={ButtonSize.Small}
