@@ -42,10 +42,12 @@
   max-width: calc(8 * var(--spacing-mega));
   margin-block-end: var(--spacing-medium);
   margin-block-start: var(--spacing-mega);
-  filter: brightness(1);
   @include breakpoints.tablet {
     margin-block-end: var(--spacing-mega);
     margin-block-start: var(--spacing-xxsmall);
+  }
+  & > svg {
+    fill: var(--color-text-inverse);
   }
 }
 
