@@ -4,11 +4,13 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
+import SpeakerIcon from '../../../public/icons/speaker-moderate.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
 import CloseButton from './Buttons/CloseButton';
 import DownloadAudioButton from './Buttons/DownloadAudioButton';
+import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
 import { selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
@@ -28,6 +30,7 @@ const getPlaybackRateLabelFontSize = (playbackRates: number) => {
 enum AudioPlayerOverflowMenu {
   Main = 'main',
   AudioSpeed = 'audio-speed',
+  Reciter = 'reciter',
 }
 
 const OverflowAudioPlayActionsMenuBody = () => {
@@ -55,11 +58,23 @@ const OverflowAudioPlayActionsMenuBody = () => {
             <ChevronRightIcon />
           </div>
         </PopoverMenu.Item>,
+        <PopoverMenu.Item
+          icon={<SpeakerIcon />}
+          onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.Reciter)}
+        >
+          <div className={styles.audioPlaybackRateMenuContainer}>
+            {t('audio.select-reciter')}
+            <ChevronRightIcon />
+          </div>
+        </PopoverMenu.Item>,
         <PopoverMenu.Divider />,
         <CloseButton />,
       ],
       [AudioPlayerOverflowMenu.AudioSpeed]: (
         <AudioPlaybackRateMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
+      ),
+      [AudioPlayerOverflowMenu.Reciter]: (
+        <SelectReciterMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
     }),
     [t, playbackRate],
