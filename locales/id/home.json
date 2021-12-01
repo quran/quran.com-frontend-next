@@ -40,6 +40,7 @@
         "trigger": "Akses cepat ke semuanya"
     },
     "welcome": {
+        "changes-cta": "Lihat Perubahan Terbaru",
         "desc": "Kami secara aktif menambahkan fitur baru dan mendorong perubahan. Jika Anda mengalami masalah, harap berikan maklum balik.",
         "feedback-cta": "Berikan maklum balik",
         "join-cta": "Bergabunglah dengan Komunitas Discord",

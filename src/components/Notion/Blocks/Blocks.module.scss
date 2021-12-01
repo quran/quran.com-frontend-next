@@ -1,20 +1,7 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
-.container {
-  padding-block-start: var(--spacing-mega);
-  width: 95%;
-  margin: 0 auto;
-  @include breakpoints.tablet {
-    width: 50%;
-  }
-  direction: ltr;
-}
-
-.pageContainer {
-  padding-block-end: var(--spacing-medium);
-  border-block-end: 1px solid var(--color-borders-hairline);
-}
+$paragraph-line-height: 1.75rem;
 
 .bold {
   font-weight: var(--font-weight-bold);
@@ -31,16 +18,11 @@
 .caption {
   color: var(--color-text-faded);
 }
-.date {
-  font-size: var(--font-size-large);
-  color: var(--color-text-faded);
-}
 
 .image {
   max-width: 100%;
-  @include breakpoints.tablet {
-    max-width: 70%;
-  }
+  border-radius: var(--border-radius-rounded);
+  margin: var(--spacing-large) 0;
 }
 
 .imageContainer {
@@ -59,4 +41,18 @@
 
 .h2 {
   font-size: var(--font-size-large);
+}
+
+.paragraph {
+  padding-block-end: var(--spacing-small);
+  font-size: var(--font-size-large);
+  opacity: var(--opacity-85);
+  line-height: $paragraph-line-height;
+}
+
+.list {
+  font-size: var(--font-size-large);
+  opacity: var(--opacity-85);
+  padding-block-end: calc(0.5 * var(--spacing-xxsmall));
+  padding-inline-start: 1rem;
 }

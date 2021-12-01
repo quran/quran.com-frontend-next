@@ -1,0 +1,29 @@
+@use "src/styles/breakpoints";
+
+$container-max-width: calc(35 * var(--spacing-mega));
+
+.container {
+  padding-block-start: var(--spacing-medium);
+  width: 95%;
+  margin: 0 auto;
+  @include breakpoints.tablet {
+    max-width: $container-max-width;
+  }
+  direction: ltr;
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+  text-align: center;
+  font-weight: var(--font-weight-bold);
+}
+
+.backIconContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  [dir="rtl"] & {
+    justify-content: flex-end;
+  }
+}
