@@ -82,7 +82,7 @@ const QuranWord = ({
     wordText = (
       <GlyphWord
         font={font}
-        textUthmani={word.textUthmani}
+        qpcUthmaniHafs={word.qpcUthmaniHafs}
         pageNumber={word.pageNumber}
         textCodeV1={word.codeV1}
         textCodeV2={word.codeV2}
