@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+  padding: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-faint);
+
+  text-align: start;
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}

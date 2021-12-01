@@ -24,3 +24,8 @@ export const retrieveBlockChildren = async (blockId: string) => {
   });
   return response.results;
 };
+
+export const retrievePage = async (pageId: string) => {
+  const response = await notion.pages.retrieve({ page_id: pageId });
+  return response;
+};
