@@ -85,8 +85,10 @@ const QuranWord = ({
     wordText = <GlyphWord font={font} text={getGlyph(word, font)} pageNumber={word.pageNumber} />;
   } else if (font === QuranFont.Tajweed) {
     wordText = <TajweedWord path={word.text} alt={word.textUthmani} />;
-  } else if (word.charTypeName !== CharType.Pause) {
-    wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
+  } else {
+    wordText = (
+      <TextWord font={font} text={word.text} charType={word.charType} cssClass={word.cssClass} />
+    );
   }
 
   /*
@@ -97,7 +99,7 @@ const QuranWord = ({
     3. When the tooltip settings are set to either translation or transliteration or both.
   */
   const showTooltip =
-    word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
+    word.charType === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
 
   const shouldBeHighLighted =
     isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);

@@ -6,7 +6,8 @@ import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranRead
 
 export const ITEMS_PER_PAGE = 10;
 
-const STAGING_API_HOST = 'https://staging.quran.com';
+const STAGING_API_HOST = 'http://localhost:3001';
+// 'https://staging.quran.com';
 const PRODUCTION_API_HOST = 'https://api.qurancdn.com';
 
 const API_ROOT_PATH = '/api/qdc';
