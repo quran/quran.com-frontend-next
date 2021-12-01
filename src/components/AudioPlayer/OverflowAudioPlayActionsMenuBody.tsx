@@ -53,7 +53,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           }
           onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.AudioSpeed)}
         >
-          <div className={styles.audioPlaybackRateMenuContainer}>
+          <div className={styles.menuWithNestedItems}>
             {t('audio.playback-speed')}
             <ChevronRightIcon />
           </div>
@@ -62,7 +62,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           icon={<SpeakerIcon />}
           onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.Reciter)}
         >
-          <div className={styles.audioPlaybackRateMenuContainer}>
+          <div className={styles.menuWithNestedItems}>
             {t('audio.select-reciter')}
             <ChevronRightIcon />
           </div>
