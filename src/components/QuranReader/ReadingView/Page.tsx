@@ -30,7 +30,7 @@ const Page = ({ verses, page, quranReaderStyles }: PageProps) => {
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   const isBigTextLayout =
-    isWordByWordLayout || quranTextFontScale > 3 || quranFont === QuranFont.Tajweed;
+    isWordByWordLayout || quranTextFontScale >= 5 || quranFont === QuranFont.Tajweed;
 
   return (
     <div

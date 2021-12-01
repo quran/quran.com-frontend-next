@@ -1,6 +1,7 @@
 @use "src/styles/breakpoints";
 
 $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg);
+
 .imageContainer {
   // Detect OS dark mode
   @media (prefers-color-scheme: dark) {
@@ -54,6 +55,48 @@ $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg)
     zoom: 1.2;
     @include breakpoints.tablet {
       zoom: 1;
+    }
+  }
+}
+
+// extra large sizes
+.xl1 {
+  img {
+    zoom: 1.2;
+    @include breakpoints.tablet {
+      zoom: 1;
+    }
+  }
+}
+.xl2 {
+  img {
+    zoom: 1.5;
+    @include breakpoints.tablet {
+      zoom: 1.3;
+    }
+  }
+}
+.xl3 {
+  img {
+    zoom: 1.8;
+    @include breakpoints.tablet {
+      zoom: 1.5;
+    }
+  }
+}
+.xl4 {
+  img {
+    zoom: 2.2;
+    @include breakpoints.tablet {
+      zoom: 1.8;
+    }
+  }
+}
+.xl5 {
+  img {
+    zoom: 2.5;
+    @include breakpoints.tablet {
+      zoom: 2;
     }
   }
 }

@@ -19,7 +19,7 @@ const DevelopersPage = () => {
         <p>
           <Trans
             i18nKey="developers:projects.all"
-            components={[<a href="http://github.com/quran" target="_blank" rel="noreferrer" />]}
+            components={[<a href="https://github.com/quran" target="_blank" rel="noreferrer" />]}
           />
         </p>
         <div>

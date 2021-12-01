@@ -19,6 +19,11 @@ const FONT_SIZE_CLASS_MAP = {
   3: styles.md,
   4: styles.lg,
   5: styles.xl,
+  6: styles.xl1,
+  7: styles.xl2,
+  8: styles.xl3,
+  9: styles.xl4,
+  10: styles.xl5,
 };
 
 const IMAGE_BASE_PATH = 'https://static.quran.com';

@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
 }
+
 .verseTextContainer {
   display: block;
   direction: rtl;
@@ -33,9 +34,11 @@
 .verseTextCenterAlign {
   justify-content: center;
 }
+
 .verseTextSpaceBetween {
   justify-content: space-between;
 }
+
 .verseTextWrap {
   flex-wrap: wrap;
 }

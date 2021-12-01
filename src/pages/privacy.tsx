@@ -17,7 +17,7 @@ const PrivacyPage = () => {
         <p>
           <Trans
             i18nKey="privacy:main-desc"
-            components={[<a href="salah.com" target="_blank" />]}
+            components={[<a href="https://salah.com" target="_blank" rel="noreferrer" />]}
           />
         </p>
         <p>

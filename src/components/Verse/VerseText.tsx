@@ -45,7 +45,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
   const isTajweedFont = quranFont === QuranFont.Tajweed;
   const isBigTextLayout =
     (isReadingMode &&
-      (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration)) ||
+      (quranTextFontScale >= 5 || showWordByWordTranslation || showWordByWordTransliteration)) ||
     isTajweedFont;
 
   const { chapterId, isFirstWordOfSurah } = firstWordData;
