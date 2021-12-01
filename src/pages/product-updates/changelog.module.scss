@@ -5,7 +5,7 @@
   width: 95%;
   margin: 0 auto;
   @include breakpoints.tablet {
-    width: 50%;
+    max-width: calc(25 * var(--spacing-mega));
   }
   direction: ltr;
 }

@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .pageContainer {
+  padding-block-start: var(--spacing-mega);
   padding-block-end: var(--spacing-medium);
   border-block-end: 1px solid var(--color-borders-hairline);
 }
@@ -10,14 +12,24 @@
 }
 
 .title {
-  font-size: var(--font-size-jumbo);
+  font-size: calc(1.15 * var(--font-size-jumbo));
+  font-weight: var(--font-weight-bold);
 }
 
 .headerSection {
-  padding-block: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
 }
 
 .date {
-  font-size: var(--font-size-large);
   color: var(--color-text-faded);
+  @include theme.light {
+    opacity: var(--opacity-75);
+  }
+  @include theme.dark {
+    opacity: 1;
+  }
+  font-weight: var(--font-weight-semibold);
+  font-size: calc(0.85 * var(--font-size-normal));
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }

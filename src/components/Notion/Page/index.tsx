@@ -27,7 +27,9 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
         <p className={styles.date}>{date}</p>
         {isPageLayout ? pageTitle : <Link href={`/product-updates/${page.id}`}>{pageTitle}</Link>}
       </div>
-      <Blocks blocks={blocks} />
+      <div className={styles.blockContainer}>
+        <Blocks blocks={blocks} />
+      </div>
     </div>
   );
 };
