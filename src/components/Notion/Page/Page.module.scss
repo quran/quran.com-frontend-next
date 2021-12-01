@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
+$blocks-container-max-width: calc(25 * var(--spacing-mega));
+
 .pageContainer {
   padding-block-start: var(--spacing-mega);
   padding-block-end: var(--spacing-medium);
@@ -41,7 +43,7 @@
 }
 
 .blocksContainer {
-  max-width: calc(25 * var(--spacing-mega));
+  max-width: $blocks-container-max-width;
 }
 
 .backLink {
