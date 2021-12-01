@@ -34,6 +34,9 @@ a {
 // names of these spacer classes is coming from the api.
 // One sample usage is for Indopak words, some words need extra space at the end(see 2:2:4)
 // detecting these spaces in FE is hard, and will slow down the app
+.mr-10 {
+  margin-inline-end: 10px;
+}
 .mr-15 {
   margin-inline-end: 15px;
 }
