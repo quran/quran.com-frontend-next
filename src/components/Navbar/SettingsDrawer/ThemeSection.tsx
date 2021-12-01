@@ -1,40 +1,58 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import Section from './Section';
+import CircleIcon from '../../../../public/icons/circle.svg';
+import MoonIcon from '../../../../public/icons/moon-outline.svg';
+import SunIcon from '../../../../public/icons/sun-outline.svg';
 
-import Select from 'src/components/dls/Forms/Select';
+import Section from './Section';
+import styles from './ThemeSection.module.scss';
+
+import Switch from 'src/components/dls/Switch/Switch';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
+
+const icons = {
+  [ThemeType.Dark]: <MoonIcon />,
+  [ThemeType.Light]: <SunIcon />,
+  [ThemeType.Auto]: <CircleIcon />,
+};
 
 const ThemeSection = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const theme = useSelector(selectTheme, shallowEqual);
-  const themes = useMemo(
-    () =>
-      Object.values(ThemeType).map((themeValue) => ({
-        label: t(`themes.${themeValue}`),
-        value: themeValue,
-      })),
-    [t],
-  );
+  const themes = Object.values(ThemeType).map((themeValue) => ({
+    name: (
+      <div className={styles.container}>
+        <span
+          className={classNames(
+            styles.iconContainer,
+            theme.type === themeValue && styles.iconActive,
+          )}
+        >
+          {icons[themeValue]}
+        </span>
+        <span className={styles.themeNameContainer}>{t(`themes.${themeValue}`)}</span>
+      </div>
+    ),
+    value: themeValue,
+  }));
+
   return (
     <Section>
       <Section.Title>{t('theme')}</Section.Title>
       <Section.Row>
-        <Section.Label>{t('mode')}</Section.Label>
-        <Select
-          id="theme-section"
-          name="theme"
-          options={themes}
-          value={theme.type}
-          onChange={(value) => dispatch({ type: setTheme.type, payload: value })}
+        <Switch
+          items={themes}
+          selected={theme.type}
+          onSelect={(value) => dispatch({ type: setTheme.type, payload: value })}
         />
       </Section.Row>
-      <Section.Footer visible={theme.type === ThemeType.System}>
+      <Section.Footer visible={theme.type === ThemeType.Auto}>
         {t('themes.system-desc')}
       </Section.Footer>
     </Section>

@@ -1,7 +1,7 @@
 {
   "id": 12,
   "verseNumber": 5,
-  "verseKey": "2: 5",
+  "verseKey": "2:5",
   "juzNumber": 1,
   "hizbNumber": 1,
   "rubNumber": 1,
@@ -17,15 +17,16 @@
       "position": 1,
       "audioUrl": "wbw/002_005_001.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 1",
+      "location": "2:5:1",
       "codeV1": "ﭳ",
       "codeV2": "ﱣ",
       "pageNumber": 2,
       "lineNumber": 7,
       "qpcUthmaniHafs": "أُوْلَٰٓئِكَ",
       "text": "أُوْلَٰٓئِكَ",
+      "textImage": "w/rq-color/2/5/1.png",
       "translation": {
         "text": "Those",
         "languageName": "english"
@@ -40,15 +41,16 @@
       "position": 2,
       "audioUrl": "wbw/002_005_002.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 2",
+      "location": "2:5:2",
       "codeV1": "ﭴ",
       "codeV2": "ﱤ",
       "pageNumber": 2,
       "lineNumber": 7,
       "qpcUthmaniHafs": "عَلَىٰ",
       "text": "عَلَىٰ",
+      "textImage": "w/rq-color/2/5/2.png",
       "translation": {
         "text": "(are) on",
         "languageName": "english"
@@ -63,15 +65,16 @@
       "position": 3,
       "audioUrl": "wbw/002_005_003.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 3",
+      "location": "2:5:3",
       "codeV1": "ﭵ",
       "codeV2": "ﱥ",
       "pageNumber": 2,
       "lineNumber": 7,
       "qpcUthmaniHafs": "هُدٗى",
       "text": "هُدٗى",
+      "textImage": "w/rq-color/2/5/3.png",
       "translation": {
         "text": "Guidance",
         "languageName": "english"
@@ -86,15 +89,16 @@
       "position": 4,
       "audioUrl": "wbw/002_005_004.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 4",
+      "location": "2:5:4",
       "codeV1": "ﭶ",
       "codeV2": "ﱦ",
       "pageNumber": 2,
       "lineNumber": 7,
       "qpcUthmaniHafs": "مِّن",
       "text": "مِّن",
+      "textImage": "w/rq-color/2/5/4.png",
       "translation": {
         "text": "from",
         "languageName": "english"
@@ -109,15 +113,16 @@
       "position": 5,
       "audioUrl": "wbw/002_005_005.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 5",
+      "location": "2:5:5",
       "codeV1": "ﭷ",
       "codeV2": "ﱧ",
       "pageNumber": 2,
       "lineNumber": 7,
       "qpcUthmaniHafs": "رَّبِّهِمۡۖ",
       "text": "رَّبِّهِمۡۖ",
+      "textImage": "w/rq-color/2/5/5.png",
       "translation": {
         "text": "their Lord",
         "languageName": "english"
@@ -128,44 +133,22 @@
       }
     },
     {
-      "id": 5549,
-      "position": 6,
-      "audioUrl": null,
-      "charType": "pause",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 6-2",
-      "codeV1": "ﭸ",
-      "codeV2": "ﱨ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": null,
-      "text": null,
-      "translation": {
-        "text": null,
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": null,
-        "languageName": "english"
-      }
-    },
-    {
       "id": 5550,
-      "position": 7,
-      "audioUrl": "wbw/002_005_007.mp3",
+      "position": 6,
+      "audioUrl": "wbw/002_005_006.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 6",
+      "location": "2:5:6",
       "codeV1": "ﭹ",
       "codeV2": "ﱩ",
       "pageNumber": 2,
       "lineNumber": 7,
       "qpcUthmaniHafs": "وَأُوْلَٰٓئِكَ",
       "text": "وَأُوْلَٰٓئِكَ",
+      "textImage": "w/rq-color/2/5/6.png",
       "translation": {
-        "text": "and those ",
+        "text": "and those",
         "languageName": "english"
       },
       "transliteration": {
@@ -175,18 +158,19 @@
     },
     {
       "id": 5551,
-      "position": 8,
-      "audioUrl": "wbw/002_005_008.mp3",
+      "position": 7,
+      "audioUrl": "wbw/002_005_007.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 7",
+      "location": "2:5:7",
       "codeV1": "ﭺ",
       "codeV2": "ﱪ",
       "pageNumber": 2,
       "lineNumber": 8,
       "qpcUthmaniHafs": "هُمُ",
       "text": "هُمُ",
+      "textImage": "w/rq-color/2/5/7.png",
       "translation": {
         "text": "they",
         "languageName": "english"
@@ -198,18 +182,19 @@
     },
     {
       "id": 5552,
-      "position": 9,
-      "audioUrl": "wbw/002_005_009.mp3",
+      "position": 8,
+      "audioUrl": "wbw/002_005_008.mp3",
       "charType": "word",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 8",
+      "location": "2:5:8",
       "codeV1": "ﭻ",
       "codeV2": "ﱫ",
       "pageNumber": 2,
       "lineNumber": 8,
       "qpcUthmaniHafs": "ٱلۡمُفۡلِحُونَ",
       "text": "ٱلۡمُفۡلِحُونَ",
+      "textImage": "w/rq-color/2/5/8.png",
       "translation": {
         "text": "(are) the successful ones",
         "languageName": "english"
@@ -221,18 +206,19 @@
     },
     {
       "id": 5553,
-      "position": 10,
+      "position": 9,
       "audioUrl": null,
       "charType": "end",
-      "verseKey": "2: 5",
+      "verseKey": "2:5",
       "verseId": 12,
-      "location": "2: 5: 10",
+      "location": "2:5:10",
       "codeV1": "ﭼ",
       "codeV2": "ﱬ",
       "pageNumber": 2,
       "lineNumber": 8,
       "qpcUthmaniHafs": "٥",
       "text": "٥",
+      "textImage": "w/common/5.png",
       "translation": {
         "text": "Ayah 5",
         "languageName": "english"
@@ -244,6 +230,7 @@
     }
   ],
   "timestamps": {
+    "verseKey": "2:5",
     "timestampFrom": 48564,
     "timestampTo": 61064,
     "duration": 13000,
@@ -295,13 +282,15 @@
       "id": 903969,
       "resourceId": 131,
       "text": "It is they who are ˹truly˺ guided by their Lord, and it is they who will be successful.",
-      "resourceName": "Dr. Mustafa Khattab, the Clear Quran"
+      "resourceName": "Dr. Mustafa Khattab, the Clear Quran",
+      "languageName": "english"
     },
     {
       "id": 97997,
       "resourceId": 20,
       "text": "Those are upon [right] guidance from their Lord, and it is those who are the successful.",
-      "resourceName": "Saheeh International"
+      "resourceName": "Saheeh International",
+      "languageName": "english"
     }
   ]
 }

@@ -139,6 +139,7 @@
     },
     "prev": "Précédent",
     "privacy": "Intimité",
+    "product-updates": "Mises à jour du produit",
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
     "reading-preference": {
@@ -162,16 +163,22 @@
         "title": "Chercher"
     },
     "settings": {
-        "change-reciter": "Changer de récitant",
-        "change-tafsirs": "Changer de Tafsir",
-        "change-translations": "Modifier les traductions",
+        "no-tafsir-selected": "Aucun tafsir sélectionné",
+        "no-translation-selected": "Aucune traduction sélectionnée",
         "reading-experience": "Expérience de lecture",
         "reset-cta": "Réinitialiser les options",
         "reset-notif": "Vos paramètres ont été réinitialisés à ceux par défaut",
         "search-reciter": "Recherche de récitant",
         "search-tafsirs": "Rechercher des Tafsirs",
         "search-translations": "Rechercher des traductions",
-        "title": "Paramètres"
+        "selected-reciter": "Réciteur sélectionné",
+        "selected-tafsirs": "Tafsirs sélectionnés",
+        "selected-translations": "Traductions sélectionnées",
+        "title": "Paramètres",
+        "tooltip-desc": "Cliquez sur n'importe quel mot du Coran pour voir l'info-bulle",
+        "value-and-others": "{{value}} , et {{othersCount}} autres",
+        "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
+        "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
     },
     "share": "Partager",
     "shared": "Le lien a été copié dans le presse-papiers !",
@@ -196,6 +203,7 @@
     },
     "theme": "Thème",
     "themes": {
+        "auto": "Auto",
         "dark": "Sombre",
         "light": "Léger",
         "sepia": "Sépia",
@@ -225,5 +233,6 @@
         "play-audio": "Lire le son",
         "title": "Clic sur mot"
     },
+    "word-tooltip": "Info-bulle Word",
     "yes": "Oui"
 }

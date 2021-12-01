@@ -1,0 +1,8 @@
+.skeletonPlaceholder {
+  height: calc(1.5 * var(--spacing-mega));
+  width: 100%;
+}
+
+.skeletonContainer + .skeletonContainer {
+  margin-block-start: var(--spacing-large);
+}

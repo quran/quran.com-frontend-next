@@ -1,6 +1,6 @@
 {
-    "go-back": "Pergi balik",
+    "go-back": "Patah balik",
     "if-persist": "Jika masalah berterusan, sila",
-    "report-cta": "melaporkan pepijat",
-    "title": "Maaf, sesuatu telah berlaku"
+    "report-cta": "laporkan bug",
+    "title": "Maaf, ada masalah berlaku"
 }
