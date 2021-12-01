@@ -12,7 +12,7 @@ export const renderBlock = (block) => {
   switch (type) {
     case 'paragraph':
       return (
-        <p>
+        <p className={styles.paragraph}>
           <Text text={value.text} />
         </p>
       );
@@ -29,7 +29,7 @@ export const renderBlock = (block) => {
     case 'bulleted_list_item':
     case 'numbered_list_item':
       return (
-        <li>
+        <li className={styles.list}>
           <Text text={value.text} />
         </li>
       );
