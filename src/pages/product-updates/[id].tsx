@@ -1,12 +1,8 @@
 import { NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-
-import BackIcon from '../../../public/icons/west.svg';
 
 import styles from './changelog.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { getPageTitle } from 'src/components/Notion/Blocks';
@@ -26,7 +22,6 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
-  const { t } = useTranslation('error');
   const router = useRouter();
   if (router.isFallback) {
     return (
@@ -43,17 +38,7 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
     <>
       <NextSeoWrapper title={pageTitle} />
       <div className={styles.container}>
-        <div className={styles.backIconContainer}>
-          <Button
-            variant={ButtonVariant.Ghost}
-            href="/product-updates"
-            className={styles.backIcon}
-            prefix={<BackIcon />}
-            size={ButtonSize.Small}
-          >
-            {t('go-back')}
-          </Button>
-        </div>
+        <div className={styles.backIconContainer} />
         <LocalizationMessage />
         <NotionPage page={page} blocks={blocks} isPageLayout />
       </div>
