@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
-import SpeakerIcon from '../../../public/icons/speaker-moderate.svg';
+import PersonIcon from '../../../public/icons/person.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
@@ -59,7 +59,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
-          icon={<SpeakerIcon />}
+          icon={<PersonIcon />}
           onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.Reciter)}
         >
           <div className={styles.menuWithNestedItems}>
