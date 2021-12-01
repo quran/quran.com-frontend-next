@@ -5,6 +5,11 @@
   padding-block-start: var(--spacing-mega);
   padding-block-end: var(--spacing-medium);
   border-block-end: 1px solid var(--color-borders-hairline);
+  @include breakpoints.desktop {
+    display: flex;
+    justify-content: center;
+  }
+  width: 100%;
 }
 
 .bold {
@@ -17,7 +22,8 @@
 }
 
 .headerSection {
-  padding-inline-end: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+  padding-inline-end: calc(1.5 * var(--spacing-mega));
 }
 
 .date {
@@ -32,4 +38,8 @@
   font-size: calc(0.85 * var(--font-size-normal));
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+.blocksContainer {
+  max-width: calc(25 * var(--spacing-mega));
 }

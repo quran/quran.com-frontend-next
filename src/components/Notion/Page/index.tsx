@@ -25,9 +25,9 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
     <div key={page.id} className={styles.pageContainer}>
       <div className={styles.headerSection}>
         <p className={styles.date}>{date}</p>
-        {isPageLayout ? pageTitle : <Link href={`/product-updates/${page.id}`}>{pageTitle}</Link>}
       </div>
-      <div className={styles.blockContainer}>
+      <div className={styles.blocksContainer}>
+        {isPageLayout ? pageTitle : <Link href={`/product-updates/${page.id}`}>{pageTitle}</Link>}
         <Blocks blocks={blocks} />
       </div>
     </div>
