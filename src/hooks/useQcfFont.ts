@@ -9,9 +9,9 @@ import {
 } from 'src/redux/slices/QuranReader/font-faces';
 import { removeItemFromArray } from 'src/utils/array';
 import {
-  getFontFaceName,
-  getFontFaceSource,
-  getVersesPages,
+  getFontFaceNameForPage,
+  getV1OrV2FontFaceSource,
+  getPagesByVerses,
   isQCFFont,
 } from 'src/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
@@ -47,10 +47,10 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
   useEffect(() => {
     if (isFontQCF) {
       // loop through unique page numbers of the current verses
-      getVersesPages(verses).forEach((pageNumber) => {
+      getPagesByVerses(verses).forEach((pageNumber) => {
         const isV1 = quranFont === QuranFont.MadaniV1;
-        const fontFaceName = getFontFaceName(isV1, pageNumber);
-        const fontFace = new FontFace(fontFaceName, getFontFaceSource(isV1, pageNumber));
+        const fontFaceName = getFontFaceNameForPage(isV1, pageNumber);
+        const fontFace = new FontFace(fontFaceName, getV1OrV2FontFaceSource(isV1, pageNumber));
         // we only want to load fonts that were not loaded and also are not currently being loaded
         if (
           !currentlyFetchingFonts.current.includes(fontFaceName) &&

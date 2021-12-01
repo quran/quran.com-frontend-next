@@ -29,7 +29,6 @@ const SearchResultItem: React.FC<Props> = ({ result }) => (
                   word={word}
                   isWordByWordAllowed={false}
                   isAudioHighlightingAllowed={false}
-                  isFontLoaded
                 />
               );
             })}

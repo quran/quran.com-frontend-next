@@ -35,12 +35,12 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
     shallowEqual,
   ) as QuranReaderStyles;
   const [firstWord] = words;
-  let isFontLoaded = true;
-  if (isQCFFont(quranFont)) {
-    isFontLoaded = loadedFonts.includes(
-      `p${firstWord.pageNumber}-${quranFont.replace('code_', '')}`,
-    );
-  }
+  const isFontLoaded = useMemo(() => {
+    if (!isQCFFont(quranFont)) {
+      return true;
+    }
+    return loadedFonts.includes(`p${firstWord.pageNumber}-${quranFont.replace('code_', '')}`);
+  }, [firstWord.pageNumber, loadedFonts, quranFont]);
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,

@@ -41,7 +41,7 @@ export type QuranWordProps = {
   isHighlighted?: boolean;
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
-  isFontLoaded: boolean;
+  isFontLoaded?: boolean;
 };
 
 const QuranWord = ({
@@ -50,7 +50,7 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
-  isFontLoaded,
+  isFontLoaded = true,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const reciter = useSelector(selectReciter, shallowEqual);
@@ -79,7 +79,16 @@ const QuranWord = ({
   let wordText = null;
 
   if (isQCFFont(font)) {
-    wordText = <GlyphWord font={font} word={word} isFontLoaded={isFontLoaded} />;
+    wordText = (
+      <GlyphWord
+        font={font}
+        textUthmani={word.textUthmani}
+        pageNumber={word.pageNumber}
+        textCodeV1={word.codeV1}
+        textCodeV2={word.codeV2}
+        isFontLoaded={isFontLoaded}
+      />
+    );
   } else if (font === QuranFont.Tajweed) {
     wordText = <TajweedWord path={word.text} alt={word.textUthmani} />;
   } else if (word.charTypeName !== CharType.Pause) {
