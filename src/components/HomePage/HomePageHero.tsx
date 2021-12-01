@@ -1,6 +1,4 @@
-import Image from 'next/image';
-
-import quranKarimLogo from '../../../public/images/quran-karim-logo.png';
+import AlQuranulKarimSVG from '../../../public/images/alquranul-karim.svg';
 
 import styles from './HomePageHero.module.scss';
 import PrayerTimes from './PrayerTimes/PrayerTimes';
@@ -16,9 +14,8 @@ const HomePageHero = () => {
         <PrayerTimes />
         <div className={styles.innerContainer}>
           <div className={styles.imageContainer}>
-            <Image className={styles.homepageImage} src={quranKarimLogo} priority />
+            <AlQuranulKarimSVG />
           </div>
-
           <CommandBarTrigger />
           <div className={styles.quickLinksContainer}>
             <QuickLinks />
