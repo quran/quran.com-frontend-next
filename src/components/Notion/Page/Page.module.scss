@@ -10,6 +10,9 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
   @include breakpoints.desktop {
     display: flex;
     justify-content: center;
+    [dir="rtl"] & {
+      flex-direction: row-reverse;
+    }
   }
   width: 100%;
 }
@@ -26,6 +29,10 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
 .headerSection {
   padding-block-start: var(--spacing-medium);
   padding-inline-end: calc(1.5 * var(--spacing-mega));
+  [dir="rtl"] & {
+    padding-inline-start: calc(1.5 * var(--spacing-mega));
+    padding-inline-end: 0;
+  }
 }
 
 .date {
@@ -51,6 +58,14 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
   align-items: center;
   margin-block-end: calc(1.5 * var(--spacing-medium));
   line-height: normal;
+  [dir="rtl"] & {
+    flex-direction: row-reverse;
+    & > svg {
+      transform: scaleX(-1);
+      margin-inline-start: var(--spacing-xxsmall);
+      margin-inline-end: 0;
+    }
+  }
   & > svg {
     width: var(--spacing-medium);
     margin-inline-end: var(--spacing-xxsmall);
