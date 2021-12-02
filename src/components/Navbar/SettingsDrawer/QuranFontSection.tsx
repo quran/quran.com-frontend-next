@@ -98,7 +98,7 @@ const QuranFontSection = () => {
   // in the UI, we have two view / font categories, indopak and uthmani.
   const types = useMemo(
     () =>
-      [QuranFont.IndoPak, QuranFont.Uthmani, QuranFont.Tajweed].map((font) => ({
+      [QuranFont.Uthmani, QuranFont.IndoPak, QuranFont.Tajweed].map((font) => ({
         name: t(`fonts.${font}`),
         value: font,
       })),
