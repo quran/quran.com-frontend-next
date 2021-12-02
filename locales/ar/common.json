@@ -31,6 +31,7 @@
             "times": "مرات",
             "verses-range": "مجموعة الآيات"
         },
+        "select-reciter": "حدد القارئ",
         "title": "الصوت"
     },
     "ayah": "آية",
@@ -65,7 +66,7 @@
         "decrease": "انقُصْ",
         "increase": "زِدْ"
     },
-    "default-description": "القرآن مترجم إلى العديد من اللغات في واجهة بسيطة وسهلة",
+    "default-description": "القرآن وترجمة معانيه إلى العديد من اللغات في واجهة بسيطة وسهلة",
     "developers": "المطورون",
     "error": {
         "general": "هناك خطأ ما. حاول مرة أخرى.",
@@ -115,12 +116,12 @@
         "calculation-method": "طريقة الحساب",
         "calculation-methods": {
             "Dubai": "دبي",
-            "Egyptian": "مصري",
-            "Karachi": "كراتشي",
+            "Egyptian": "الهيئة المصرية العامة للمساحة",
+            "Karachi": "جامعة العلوم الإسلامية - كراتشي",
             "Kuwait": "الكويت",
             "MoonsightingCommittee": "لجنة الهلال",
-            "MuslimWorldLeague": "MuslimWorldLeague. عالم المسلم",
-            "NorthAmerica": "أمريكا الشمالية",
+            "MuslimWorldLeague": "رابطة العالم الإسلامي",
+            "NorthAmerica": "الجمعية الإسلامية بأمريكا الشمالية",
             "Qatark": "قطارك",
             "Singapore": "سنغافورة",
             "Tehran": "طهران",
@@ -163,22 +164,22 @@
         "title": "بحث"
     },
     "settings": {
-        "no-tafsir-selected": "لم يتم اختيار التفسير",
-        "no-translation-selected": "لم يتم تحديد ترجمة",
+        "no-tafsir-selected": "لم يتم اختيار تفسير",
+        "no-translation-selected": "لم يتم اختيار ترجمة",
         "reading-experience": "تجربة القراءة",
         "reset-cta": "استعادة الإعدادات الافتراضية",
         "reset-notif": "تمت إعادة تعيين إعداداتك إلى الإعدادات الافتراضية",
-        "search-reciter": "البحث عن القارئ",
-        "search-tafsirs": "بحث في تفسير",
-        "search-translations": "البحث في الترجمات",
+        "search-reciter": "ابحث عن قارئ",
+        "search-tafsirs": "ابحث عن تفسير",
+        "search-translations": "ابحث عن ترجمة",
         "selected-reciter": "القارئ المختار",
-        "selected-tafsirs": "تفسير مختار",
-        "selected-translations": "ترجمات مختارة",
+        "selected-tafsirs": "التفاسير المختارة",
+        "selected-translations": "الترجمات المختارة",
         "title": "الإعدادات",
         "tooltip-desc": "انقر فوق أي كلمة من كلمات القرآن لرؤية التلميح",
         "value-and-others": "{{value}} و {{othersCount}} أخرى",
-        "wbw-helper": "اعرض الترجمة أو التحويل الصوتي مباشرة تحت الكلمة",
-        "word-tooltip-helper": "اعرض الترجمة أو التحويل الصوتي عند التمرير أو النقر فوق الكلمة"
+        "wbw-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) مباشرة تحت الكلمة",
+        "word-tooltip-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) عند التمرير أو النقر فوق الكلمة"
     },
     "share": "شارك",
     "shared": "تم نسخ الرابط إلى الحافظة!",
@@ -192,7 +193,7 @@
     "surah": "سورة",
     "tafsir": {
         "font-size": "حجم خط التفسير",
-        "surah": "سورة التفسير",
+        "surah": "تفسير السورة",
         "title": "التفسير"
     },
     "tarteel": {
@@ -227,11 +228,11 @@
         "suggest": "يرجى البدء في التلاوة وستظهر آياتك."
     },
     "wbw": "كلمة بكلمة",
-    "wbw-trans-lang": "كلمة بكلمة لغة",
+    "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
     "word-click": {
         "no-audio": "لا صوت",
         "play-audio": "تشغيل الصوت",
-        "title": "انقر كلمة"
+        "title": "نطق الكلمة عند النقر عليها"
     },
     "word-tooltip": "تلميح أداة الكلمات",
     "yes": "نعم"
