@@ -12,7 +12,6 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
-import { shouldUseMinimalLayout } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
@@ -33,7 +32,6 @@ const ContextMenu = () => {
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
-  const isMinimalLayout = shouldUseMinimalLayout(lang);
 
   return (
     <div
@@ -47,13 +45,7 @@ const ContextMenu = () => {
     >
       <div className={styles.sectionsContainer}>
         <div className={styles.section}>
-          <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
           <div className={classNames(styles.row)}>
-            {!isMinimalLayout && (
-              <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
-                {chapterData.translatedName}
-              </p>
-            )}
             <p className={classNames(styles.bold, styles.alignStart)}>
               {chapterData.transliteratedName}
             </p>
@@ -61,11 +53,16 @@ const ContextMenu = () => {
         </div>
         <div className={classNames(styles.section, styles.leftSection)}>
           <div className={classNames(styles.row)}>
-            <p className={classNames(styles.alignEnd, { [styles.hide]: !isExpanded })}>
-              {t('juz')} {juzNumber} / {t('hizb')} {hizb}
-            </p>
+            <p className={classNames(styles.alignEnd, { [styles.hide]: !isExpanded })} />
             <p className={classNames(styles.alignEnd)}>
-              {t('page')} {page}
+              {isExpanded && (
+                <span className={styles.secondaryInfo}>
+                  {t('juz')} {juzNumber} / {t('hizb')} {hizb} -{' '}
+                </span>
+              )}
+              <span className={styles.primaryInfo}>
+                {t('page')} {page}
+              </span>
             </p>
           </div>
         </div>
