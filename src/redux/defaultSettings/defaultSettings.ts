@@ -43,7 +43,7 @@ const TAFSIRS_INITIAL_STATE: TafsirsSettings = {
   isUsingDefaultTafsirs: true,
 };
 
-export const DEFAULT_TRANSLATIONS = [20, 131];
+export const DEFAULT_TRANSLATIONS = [131]; // Dr. Mustafa Khattab, the Clear Quran
 
 const TRANSLATIONS_INITIAL_STATE: TranslationsSettings = {
   selectedTranslations: DEFAULT_TRANSLATIONS,
@@ -55,20 +55,20 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   tafsirFontScale: 3,
   quranTextFontScale: 3,
   translationFontScale: 3,
-  quranFont: QuranFont.QPCHafs,
+  quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
 };
 
-const DEFAULT_TRANSLATION = 20;
-const DEFAULT_TRANSLITERATION = 12;
+const DEFAULT_WBW_TRANSLATION = 20;
+const DEFAULT_WBW_TRANSLITERATION = 12;
 const DEFAULT_WBW_LOCALE = 'en';
 
 const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   readingPreference: ReadingPreference.Translation,
   showWordByWordTranslation: false,
-  selectedWordByWordTranslation: DEFAULT_TRANSLATION,
+  selectedWordByWordTranslation: DEFAULT_WBW_TRANSLATION,
   showWordByWordTransliteration: false,
-  selectedWordByWordTransliteration: DEFAULT_TRANSLITERATION,
+  selectedWordByWordTransliteration: DEFAULT_WBW_TRANSLITERATION,
   selectedWordByWordLocale: DEFAULT_WBW_LOCALE,
   isUsingDefaultWordByWordLocale: true,
   showTooltipFor: [WordByWordType.Translation],
