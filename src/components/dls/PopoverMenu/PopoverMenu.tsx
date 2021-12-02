@@ -36,6 +36,7 @@ type PopoverMenuItemProps = {
   onClick?: () => void;
   isDisabled?: boolean;
   shouldCloseMenuAfterClick?: boolean;
+  shouldFlipOnRTL?: boolean;
   className?: string;
 };
 PopoverMenu.Item = ({
@@ -44,6 +45,7 @@ PopoverMenu.Item = ({
   onClick,
   isDisabled,
   shouldCloseMenuAfterClick = false,
+  shouldFlipOnRTL = false,
   className,
 }: PopoverMenuItemProps) => {
   return (
@@ -59,7 +61,15 @@ PopoverMenu.Item = ({
       }}
       disabled={isDisabled}
     >
-      {icon && <span className={styles.iconWrapper}>{icon}</span>}
+      {icon && (
+        <span
+          className={classNames(styles.iconWrapper, {
+            [styles.shouldFlipOnRTL]: shouldFlipOnRTL,
+          })}
+        >
+          {icon}
+        </span>
+      )}
       {children}
     </PrimitiveDropdownMenu.Item>
   );

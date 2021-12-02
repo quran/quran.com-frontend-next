@@ -28,7 +28,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
   ));
   return (
     <>
-      <PopoverMenu.Item icon={<ChevronLeftIcon />} onClick={onBack}>
+      <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBack}>
         {t('audio.playback-speed')}
       </PopoverMenu.Item>
       <PopoverMenu.Divider />
