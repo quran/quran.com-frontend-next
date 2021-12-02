@@ -36,7 +36,7 @@ type PopoverMenuItemProps = {
   onClick?: () => void;
   isDisabled?: boolean;
   shouldCloseMenuAfterClick?: boolean;
-  shouldFlipIconRTL?: boolean;
+  shouldFlipOnRTL?: boolean;
   className?: string;
 };
 PopoverMenu.Item = ({
@@ -45,7 +45,7 @@ PopoverMenu.Item = ({
   onClick,
   isDisabled,
   shouldCloseMenuAfterClick = false,
-  shouldFlipIconRTL = false,
+  shouldFlipOnRTL = false,
   className,
 }: PopoverMenuItemProps) => {
   return (
@@ -64,7 +64,7 @@ PopoverMenu.Item = ({
       {icon && (
         <span
           className={classNames(styles.iconWrapper, {
-            [styles.shouldFlipIconRTL]: shouldFlipIconRTL,
+            [styles.shouldFlipIconRTL]: shouldFlipOnRTL,
           })}
         >
           {icon}
