@@ -60,7 +60,9 @@ const ContextMenu = () => {
                   {t('juz')} {juzNumber} / {t('hizb')} {hizb} -{' '}
                 </span>
               )}
-              {t('page')} {page}
+              <span className={styles.primaryInfo}>
+                {t('page')} {page}
+              </span>
             </p>
           </div>
         </div>

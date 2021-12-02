@@ -90,6 +90,9 @@
   width: 100%;
 }
 
+.primaryInfo {
+  font-weight: var(--font-weight-semibold);
+}
 .secondaryInfo {
-  color: var(--color-text-faded);
+  font-weight: lighter;
 }
