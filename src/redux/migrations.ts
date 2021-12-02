@@ -106,4 +106,10 @@ export default {
         initialState.readingPreferences.isUsingDefaultWordByWordLocale,
     },
   }),
+  17: (state) => ({
+    ...state,
+    fontFaces: {
+      loadedFontFaces: [],
+    },
+  }),
 };

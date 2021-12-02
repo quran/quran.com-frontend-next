@@ -3,17 +3,19 @@ import React from 'react';
 import AudioSection from './AudioSection';
 import PrayerTimesSection from './PrayerTimesSection';
 import QuranFontSection from './QuranFontSection';
-import ReadingExperienceSection from './ReadingExperienceSection';
 import ResetButton from './ResetButton';
 import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
 import TranslationSection from './TranslationSection';
+import WordByWordSection from './WordByWordSection';
+import WordTooltipSection from './WordTooltipSection';
 
 const SettingsBody = () => (
   <>
     <ThemeSection />
-    <ReadingExperienceSection />
     <QuranFontSection />
+    <WordByWordSection />
+    <WordTooltipSection />
     <TranslationSection />
     <TafsirSection />
     <AudioSection />

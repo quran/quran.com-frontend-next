@@ -11,6 +11,7 @@ import IconFeedback from '../../../../../public/icons/feedback.svg';
 import IconHome from '../../../../../public/icons/home.svg';
 import IconInfo from '../../../../../public/icons/info.svg';
 import IconLock from '../../../../../public/icons/lock.svg';
+import IconProductUpdates from '../../../../../public/icons/product-updates.svg';
 import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
@@ -31,6 +32,11 @@ const NavigationDrawerBody = () => {
       <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
       <NavigationDrawerItem title={t('privacy')} icon={<IconLock />} href="/privacy" />
+      <NavigationDrawerItem
+        title={t('product-updates')}
+        icon={<IconProductUpdates />}
+        href="/product-updates"
+      />
       <NavigationDrawerItem
         title={t('feedback')}
         icon={<IconFeedback />}

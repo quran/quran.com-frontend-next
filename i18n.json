@@ -17,6 +17,8 @@
     "/developers": ["developers"],
     "/privacy": ["privacy"],
     "/support": ["support"],
-    "/tajweed-colors": ["tajweed"]
+    "/tajweed-colors": ["tajweed"],
+    "/product-updates": ["product-updates"],
+    "/product-updates/[id]": ["product-updates"]
   }
 }

@@ -2,4 +2,8 @@
   display: flex;
   align-items: center;
   color: var(--color-background-alternative-deep);
+  margin-inline: var(--spacing-xsmall);
+  & > svg {
+    width: var(--spacing-large);
+  }
 }

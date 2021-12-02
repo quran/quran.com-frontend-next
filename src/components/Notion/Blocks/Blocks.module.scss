@@ -1,0 +1,58 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+$paragraph-line-height: 1.75rem;
+
+.bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+}
+
+.headerSection {
+  padding-block: var(--spacing-medium);
+}
+
+.caption {
+  color: var(--color-text-faded);
+}
+
+.image {
+  max-width: 100%;
+  border-radius: var(--border-radius-rounded);
+  margin: var(--spacing-large) 0;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  padding-block: var(--spacing-small);
+}
+
+.h1 {
+  font-size: var(--font-size-xlarge);
+}
+
+.h2 {
+  font-size: var(--font-size-large);
+}
+
+.paragraph {
+  padding-block-end: var(--spacing-small);
+  font-size: var(--font-size-large);
+  opacity: var(--opacity-85);
+  line-height: $paragraph-line-height;
+}
+
+.list {
+  font-size: var(--font-size-large);
+  opacity: var(--opacity-85);
+  padding-block-end: calc(0.5 * var(--spacing-xxsmall));
+  padding-inline-start: 1rem;
+}

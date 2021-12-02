@@ -139,6 +139,7 @@
     },
     "prev": "Anterior",
     "privacy": "Privacidade",
+    "product-updates": "Atualizações de produtos",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "reading-preference": {
@@ -162,16 +163,22 @@
         "title": "Procurar"
     },
     "settings": {
-        "change-reciter": "Mudar recitador",
-        "change-tafsirs": "Mudar Tafsirs",
-        "change-translations": "Mudar as traduções",
+        "no-tafsir-selected": "Nenhum tafsir selecionado",
+        "no-translation-selected": "Nenhuma tradução selecionada",
         "reading-experience": "Experiência de Leitura",
         "reset-cta": "Redefinir as configurações",
         "reset-notif": "Suas configurações foram redefinidas para os padrões",
         "search-reciter": "Recitador de pesquisa",
         "search-tafsirs": "Pesquisar Tafsirs",
         "search-translations": "Pesquisar traduções",
-        "title": "Definições"
+        "selected-reciter": "Recitador selecionado",
+        "selected-tafsirs": "Tafsirs selecionados",
+        "selected-translations": "Traduções selecionadas",
+        "title": "Definições",
+        "tooltip-desc": "Clique em qualquer palavra do Alcorão para ver a dica de ferramenta",
+        "value-and-others": "{{value}} e {{othersCount}} outros",
+        "wbw-helper": "Exibir a tradução ou transliteração diretamente abaixo da palavra",
+        "word-tooltip-helper": "Exibir a tradução ou transliteração ao passar o mouse ou clicar na palavra"
     },
     "share": "Compartilhado",
     "shared": "O link foi copiado para a área de transferência!",
@@ -196,6 +203,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Auto",
         "dark": "Escuro",
         "light": "Luz",
         "sepia": "Sépia",
@@ -225,5 +233,6 @@
         "play-audio": "Tocar áudio",
         "title": "Clique da palavra"
     },
+    "word-tooltip": "Dica de ferramenta do Word",
     "yes": "sim"
 }

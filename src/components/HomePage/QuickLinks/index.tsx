@@ -7,33 +7,33 @@ import styles from './QuickLinks.module.scss';
 
 const QUICK_LINKS = [
   {
-    slug: '2/255',
-    key: 'ayat-ul-kursi',
+    slug: '67',
+    key: 'mulk',
   },
   {
     slug: '36',
     key: 'yaseen',
   },
   {
-    slug: '67',
-    key: 'mulk',
-  },
-  {
-    slug: '55',
-    key: 'rahman',
-  },
-  {
-    slug: '56',
-    key: 'waqiah',
+    slug: '2/255',
+    key: 'ayat-ul-kursi',
   },
   {
     slug: '18',
     key: 'kahf',
   },
   {
-    slug: '73',
-    key: 'muzzammil',
+    slug: '56',
+    key: 'waqiah',
   },
+  // {
+  //   slug: '55',
+  //   key: 'rahman',
+  // },
+  // {
+  //   slug: '73',
+  //   key: 'muzzammil',
+  // },
 ];
 
 const QuickLinks: React.FC = () => {

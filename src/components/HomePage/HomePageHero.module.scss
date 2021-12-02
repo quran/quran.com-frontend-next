@@ -1,0 +1,53 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+.outerContainer {
+  position: relative;
+}
+
+.backgroundImage {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: url(../../../public/images/background.jpg);
+  background-size: cover;
+  @include theme.dark {
+    filter: saturate(0.5) brightness(0.4);
+  }
+  @include theme.light {
+    filter: none;
+  }
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  padding-block-start: calc(2 * var(--spacing-mega));
+  padding-block-end: calc(1 * var(--spacing-mega));
+  padding-inline: var(--spacing-small);
+  @include breakpoints.tablet {
+    max-width: calc(25 * var(--spacing-mega));
+  }
+  margin-inline: auto;
+}
+
+.imageContainer {
+  height: calc(5 * var(--spacing-mega));
+  width: 100%;
+  max-width: calc(8 * var(--spacing-mega));
+  margin-block-end: var(--spacing-medium);
+  margin-block-start: var(--spacing-mega);
+  @include breakpoints.tablet {
+    margin-block-end: var(--spacing-mega);
+    margin-block-start: var(--spacing-xxsmall);
+  }
+  & > svg {
+    fill: var(--color-text-inverse);
+  }
+}
+
+.quickLinksContainer {
+  margin-block-start: var(--spacing-mega);
+}

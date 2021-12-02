@@ -2,8 +2,8 @@ import React from 'react';
 
 import QuranReaderView from './QuranReaderView';
 
+import useQcfFont from 'src/hooks/useQcfFont';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { buildQCFFontFace, isQCFFont } from 'src/utils/fontFaceHelper';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -21,11 +21,9 @@ const QuranReaderBody: React.FC<Props> = ({
   isSelectedTafsirData,
   isReadingPreference,
 }) => {
+  useQcfFont(quranReaderStyles.quranFont, verses);
   return (
     <>
-      {isQCFFont(quranReaderStyles.quranFont) && (
-        <style>{buildQCFFontFace(verses, quranReaderStyles.quranFont)}</style>
-      )}
       <QuranReaderView
         verses={verses}
         isTafsirData={isTafsirData}

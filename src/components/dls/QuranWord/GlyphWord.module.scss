@@ -1,3 +1,68 @@
+@use "src/styles/breakpoints";
+
 .styledWord {
   line-height: normal;
+}
+
+// this is needed to reduce CLS when we are displaying the fallback text by trying to make the font-sizes of the original text and the fallback text as close as possible so that once the original font loads, there will be as little visible CLS as possible.
+.fallbackText {
+  font-family: UthmanicHafs1Ver17;
+  &[data-font-scale="1"] {
+    &[data-font="code_v2"] {
+      font-size: calc(0.95 * var(--font-size-normal));
+    }
+    &[data-font="code_v1"] {
+      font-size: var(--font-size-small);
+      @include breakpoints.tablet {
+        font-size: calc(0.9 * var(--font-size-small));
+      }
+    }
+  }
+  &[data-font-scale="2"] {
+    &[data-font="code_v2"] {
+      font-size: calc(1.4 * var(--font-size-small));
+      @include breakpoints.tablet {
+        font-size: calc(1.32 * var(--font-size-large));
+      }
+    }
+    &[data-font="code_v1"] {
+      font-size: calc(1.1 * var(--font-size-small));
+      @include breakpoints.tablet {
+        font-size: calc(1.2 * var(--font-size-normal));
+      }
+    }
+  }
+  &[data-font-scale="3"] {
+    &[data-font="code_v2"] {
+      font-size: var(--font-size-large);
+      @include breakpoints.tablet {
+        font-size: calc(1.8 * var(--font-size-large));
+      }
+    }
+    &[data-font="code_v1"] {
+      font-size: calc(1.3 * var(--font-size-small));
+      @include breakpoints.tablet {
+        font-size: calc(1.45 * var(--font-size-large));
+      }
+    }
+  }
+  &[data-font-scale="4"] {
+    &[data-font="code_v2"] {
+      font-size: calc(1.2 * var(--font-size-jumbo));
+    }
+    &[data-font="code_v1"] {
+      font-size: var(--font-size-jumbo);
+    }
+  }
+  &[data-font-scale="5"] {
+    &[data-font="code_v2"] {
+      font-size: calc(1.65 * var(--font-size-jumbo));
+      @include breakpoints.tablet {
+        font-size: calc(1.4 * var(--font-size-jumbo));
+      }
+    }
+    &[data-font="code_v1"] {
+      font-size: calc(1.2 * var(--font-size-jumbo));
+    }
+  }
 }

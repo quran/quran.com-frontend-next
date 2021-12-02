@@ -1,14 +1,17 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
+import VersePreview from './VersePreview';
 
 import Counter from 'src/components/dls/Counter/Counter';
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
+import Switch from 'src/components/dls/Switch/Switch';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import {
   decreaseQuranTextFontScale,
@@ -99,10 +102,8 @@ const QuranFontSection = () => {
   const types = useMemo(
     () =>
       [QuranFont.IndoPak, QuranFont.Uthmani].map((font) => ({
-        id: font,
-        label: t(`fonts.${font}`),
+        name: t(`fonts.${font}`),
         value: font,
-        name: font,
       })),
     [t],
   );
@@ -111,13 +112,15 @@ const QuranFontSection = () => {
     <Section>
       <Section.Title>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
-        <Section.Label>{t('type')}</Section.Label>
-        <RadioGroup
-          onChange={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
-          value={selectedType}
-          label="type"
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+      </Section.Row>
+      <Section.Row>
+        <Switch
           items={types}
-          orientation={RadioGroupOrientation.Horizontal}
+          selected={selectedType}
+          onSelect={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
         />
       </Section.Row>
       <Section.Row>

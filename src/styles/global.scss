@@ -15,6 +15,17 @@ body {
   font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  :lang(ar) {
+    font-family: "Al-Jazeera", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  }
+  :lang(bn) {
+    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
+      Arial;
+  }
+  :lang(ur) {
+    font-family: "nafees", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  }
 }
 
 // reference: https://github.com/necolas/normalize.css/blob/fc091cce1534909334c1911709a39c22d406977b/normalize.css#L165

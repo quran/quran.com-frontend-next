@@ -139,6 +139,7 @@
     },
     "prev": "Sebelumnya",
     "privacy": "Pribadi",
+    "product-updates": "Pembaruan produk",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "reading-preference": {
@@ -162,16 +163,22 @@
         "title": "Mencari"
     },
     "settings": {
-        "change-reciter": "Ganti Qari",
-        "change-tafsirs": "Ubah Tafsir",
-        "change-translations": "Ubah Terjemahan",
+        "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
+        "no-translation-selected": "Tidak ada terjemahan yang dipilih",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Semula Pengaturan",
         "reset-notif": "Pengaturan Anda telah diatur semula ke default",
         "search-reciter": "Cari Pembaca",
         "search-tafsirs": "Cari Tafsir",
         "search-translations": "Cari Terjemahan",
-        "title": "Pengaturan"
+        "selected-reciter": "Pembaca terpilih",
+        "selected-tafsirs": "Tafsir Terpilih",
+        "selected-translations": "Terjemahan yang Dipilih",
+        "title": "Pengaturan",
+        "tooltip-desc": "Klik pada setiap Kata Quran untuk melihat tooltip",
+        "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
+        "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
+        "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan atau mengklik kata"
     },
     "share": "Membagikan",
     "shared": "Tautan telah disalin ke papan klip!",
@@ -196,6 +203,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Mobil",
         "dark": "Gelap",
         "light": "Terang",
         "sepia": "sepia",
@@ -225,5 +233,6 @@
         "play-audio": "Putar Audio",
         "title": "Klik Kata"
     },
+    "word-tooltip": "Keterangan Alat Kata",
     "yes": "Ya"
 }

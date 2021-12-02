@@ -1,16 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import RightIcon from '../../../../public/icons/east.svg';
-
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
-import Button from 'src/components/dls/Button/Button';
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
+import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
+import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
   selectEnableAutoScrolling,
   selectReciter,
@@ -19,8 +17,12 @@ import {
   setPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import {
+  selectWordClickFunctionality,
+  setWordClickFunctionality,
+} from 'src/redux/slices/QuranReader/readingPreferences';
 import { generateSelectOptions } from 'src/utils/input';
-import { AutoScroll } from 'types/QuranReader';
+import { WordClickFunctionality } from 'types/QuranReader';
 
 const AudioSection = () => {
   const { t } = useTranslation('common');
@@ -28,33 +30,45 @@ const AudioSection = () => {
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
   const playbackRate = useSelector(selectPlaybackRate);
+  const wordClickFunctionality = useSelector(selectWordClickFunctionality);
 
   const onPlaybackRateChanged = (value) => {
     dispatch(setPlaybackRate(Number(value)));
   };
-
-  const autoScrollingOptions = useMemo(
-    () =>
-      Object.values(AutoScroll).map((item) => ({
-        label: t(`audio.auto-scroll.${item}`),
-        id: item,
-        value: item,
-      })),
-    [t],
-  );
 
   return (
     <div className={styles.container}>
       <Section>
         <Section.Title>{t('audio.title')}</Section.Title>
         <Section.Row>
+          <SelectionCard
+            label={t('settings.selected-reciter')}
+            value={selectedReciter.name}
+            onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}
+          />
+        </Section.Row>
+        <Section.Row>
           <Section.Label>{t('audio.auto-scroll.title')}</Section.Label>
-          <RadioGroup
-            onChange={(value) => dispatch(setEnableAutoScrolling(value === AutoScroll.ON))}
-            value={enableAutoScrolling ? AutoScroll.ON : AutoScroll.OFF}
-            label="view"
-            items={autoScrollingOptions}
-            orientation={RadioGroupOrientation.Horizontal}
+          <Toggle
+            isChecked={enableAutoScrolling}
+            onClick={() => {
+              dispatch(setEnableAutoScrolling(!enableAutoScrolling));
+            }}
+          />
+        </Section.Row>
+        <Section.Row>
+          <Section.Label>{t('word-click.title')}</Section.Label>
+          <Toggle
+            isChecked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
+            onClick={() => {
+              dispatch(
+                setWordClickFunctionality(
+                  wordClickFunctionality === WordClickFunctionality.PlayAudio
+                    ? WordClickFunctionality.NoAudio
+                    : WordClickFunctionality.PlayAudio,
+                ),
+              );
+            }}
           />
         </Section.Row>
         <Section.Row>
@@ -67,18 +81,6 @@ const AudioSection = () => {
             onChange={onPlaybackRateChanged}
           />
         </Section.Row>
-        <Section.Row>
-          <Section.Label>{t('reciter')}</Section.Label>
-          <div>{selectedReciter.name}</div>
-        </Section.Row>
-        <div className={styles.changeAudioButtonContainer}>
-          <Button
-            onClick={() => dispatch(setSettingsView(SettingsView.Reciter))}
-            suffix={<RightIcon />}
-          >
-            {t('settings.change-reciter')}
-          </Button>
-        </div>
       </Section>
     </div>
   );

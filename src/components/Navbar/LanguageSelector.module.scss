@@ -1,9 +1,6 @@
 @use "src/styles/utility";
 @use "src/styles/breakpoints";
 
-$select-width: calc(10 * var(--spacing-medium));
-$select-width-mobile: calc(8 * var(--spacing-medium));
-
 .container {
   @include utility.center-vertically;
 
@@ -11,15 +8,5 @@ $select-width-mobile: calc(8 * var(--spacing-medium));
 
   @include breakpoints.tablet {
     margin-inline-start: var(--spacing-medium);
-  }
-}
-
-.select {
-  & > select {
-    width: $select-width;
-
-    @include breakpoints.smallerThanMobileM {
-      width: $select-width-mobile;
-    }
   }
 }

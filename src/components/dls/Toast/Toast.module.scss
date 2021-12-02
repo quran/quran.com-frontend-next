@@ -99,6 +99,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  [dir="rtl"] & {
+    flex-direction: row-reverse;
+  }
 }
 
 .actionsContainer {
