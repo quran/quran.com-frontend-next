@@ -11,9 +11,8 @@
   height: constants.$navbar-height;
   width: 100%;
   transition: var(--transition-regular);
-  background: var(--color-background-default);
+  background: var(--color-background-elevated);
   z-index: var(--z-index-header);
-  border-bottom: 1px var(--color-borders-hairline) solid;
 }
 
 .hiddenNav {
