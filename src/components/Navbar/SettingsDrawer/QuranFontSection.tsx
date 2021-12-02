@@ -36,6 +36,9 @@ const QuranFontSection = () => {
       [QuranFont.IndoPak]: [
         { id: QuranFont.IndoPak, label: t(`fonts.${QuranFont.IndoPak}`), value: QuranFont.IndoPak },
       ],
+      [QuranFont.Tajweed]: [
+        { id: QuranFont.Tajweed, label: t(`fonts.${QuranFont.Tajweed}`), value: QuranFont.Tajweed },
+      ],
       [QuranFont.Uthmani]: [
         {
           id: QuranFont.QPCHafs,
@@ -54,12 +57,6 @@ const QuranFontSection = () => {
           label: t(`fonts.${QuranFont.MadaniV2}`),
           value: QuranFont.MadaniV2,
           name: QuranFont.MadaniV2,
-        },
-        {
-          id: QuranFont.Tajweed,
-          label: t(`fonts.${QuranFont.Tajweed}`),
-          value: QuranFont.Tajweed,
-          name: QuranFont.Tajweed,
         },
       ],
     }),
@@ -98,10 +95,10 @@ const QuranFontSection = () => {
       })),
     [t],
   );
-  // in the UI, we have two view / font categories, indopak and uthmani.
+
   const types = useMemo(
     () =>
-      [QuranFont.IndoPak, QuranFont.Uthmani].map((font) => ({
+      [QuranFont.Uthmani, QuranFont.IndoPak, QuranFont.Tajweed].map((font) => ({
         name: t(`fonts.${font}`),
         value: font,
       })),
