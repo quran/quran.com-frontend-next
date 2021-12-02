@@ -103,7 +103,7 @@ $separator-size: 1px;
     color: var(--color-text-default);
   }
 
-  [dir="rtl"] & .iconWrapper.shouldFlipIconRTL {
+  [dir="rtl"] & .iconWrapper.shouldFlipOnRTL {
     transform: scaleX(-1);
   }
   & .iconWrapper {

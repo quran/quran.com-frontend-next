@@ -64,7 +64,7 @@ PopoverMenu.Item = ({
       {icon && (
         <span
           className={classNames(styles.iconWrapper, {
-            [styles.shouldFlipIconRTL]: shouldFlipOnRTL,
+            [styles.shouldFlipOnRTL]: shouldFlipOnRTL,
           })}
         >
           {icon}
