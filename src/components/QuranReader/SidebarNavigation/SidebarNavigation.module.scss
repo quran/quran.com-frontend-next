@@ -15,12 +15,12 @@ $tablet-size: calc(10 * var(--spacing-mega));
     transition: var(--transition-regular);
     width: 0;
     display: flex;
-    padding-block-start: calc(3.5 * var(--spacing-mega));
-    padding-inline: var(--spacing-mega);
     box-sizing: border-box;
 }
 
 .visibleContainer {
+    padding-block-start: calc(3.5 * var(--spacing-mega));
+    padding-inline: var(--spacing-mega);
     width: calc(100% - (2 * var(--spacing-mega)));
     @include breakpoints.tablet {
         width: $tablet-size;
