@@ -1,16 +1,16 @@
 /* eslint-disable i18next/no-literal-string */
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import WrenchIcon from '../../../public/icons/wrench.svg'
+import WrenchIcon from '../../../public/icons/wrench.svg';
 
-import ContextMenuAdjustment from './ContextMenuAdjustment'
-import styles from './DeveloperUtility.module.scss'
-import NavbarAdjustment from './NavbarAdjustment'
-import NotesAdjustment from './NotesAdjustment'
+import ContextMenuAdjustment from './ContextMenuAdjustment';
+import styles from './DeveloperUtility.module.scss';
+import NavbarAdjustment from './NavbarAdjustment';
+import NotesAdjustment from './NotesAdjustment';
 
-import Separator from 'src/components/dls/Separator/Separator'
+import Separator from 'src/components/dls/Separator/Separator';
 
 /**
  * A set of developer utilities only availble on development environments
@@ -18,11 +18,11 @@ import Separator from 'src/components/dls/Separator/Separator'
  * @returns {JSX.Element}
  */
 const DeveloperUtility = (): JSX.Element => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // only show the developer utilities if we're in development mode
   // if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production') {
-  // return <></>;
+  return <></>;
   // }
 
   if (!isExpanded) {
@@ -35,7 +35,7 @@ const DeveloperUtility = (): JSX.Element => {
       >
         <WrenchIcon className={styles.wrench} />
       </button>
-    )
+    );
   }
 
   return (
@@ -52,16 +52,12 @@ const DeveloperUtility = (): JSX.Element => {
       <NavbarAdjustment />
       <ContextMenuAdjustment />
       <div>
-        <button
-          clasjksName={styles.closeButton}
-          type="button"
-          onClick={() => setIsExpanded(false)}
-        >
+        <button className={styles.closeButton} type="button" onClick={() => setIsExpanded(false)}>
           close
         </button>
       </div>
     </button>
-  )
-}
+  );
+};
 
-export default DeveloperUtility
+export default DeveloperUtility;
