@@ -41,6 +41,12 @@ $quran-reader-padding: 3rem;
   }
 }
 
+.withSidebarNavigationOpen {
+  @include breakpoints.tablet {
+    margin-inline-start: calc(10 * var(--spacing-mega));
+  }
+}
+
 .playButton {
   display: flex;
   justify-content: center;
