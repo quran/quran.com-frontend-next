@@ -1,12 +1,8 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './ContextMenu.module.scss';
 
@@ -14,17 +10,11 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
-import {
-  selectIsSidebarNavigationVisible,
-  setIsVisible,
-} from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
-  const dispatch = useDispatch();
-  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
@@ -56,13 +46,8 @@ const ContextMenu = () => {
       <div className={styles.sectionsContainer}>
         <div className={styles.section}>
           <div className={classNames(styles.row)}>
-            <p
-              className={classNames(styles.bold, styles.alignStart)}
-              onClick={() => {
-                dispatch(setIsVisible(!isSidebarNavigationVisible));
-              }}
-            >
-              {chapterData.transliteratedName} <ChevronDownIcon />
+            <p className={classNames(styles.bold, styles.alignStart)}>
+              {chapterData.transliteratedName}
             </p>
           </div>
         </div>
