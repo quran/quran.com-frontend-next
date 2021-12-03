@@ -56,6 +56,7 @@ const persistConfig = {
     'welcomeMessage',
     'prayerTimes',
     'defaultSettings',
+    'sidebarNavigation',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
