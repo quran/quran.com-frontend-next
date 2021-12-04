@@ -4,7 +4,6 @@
 .container {
   background: var(--color-background-elevated);
   position: fixed;
-  height: 100vh;
   width: 100%;
   inset-block: 0;
   z-index: var(--z-index-header);
@@ -13,17 +12,19 @@
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior-y: contain;
+  top: 0;
+  bottom: 0;
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
   }
   &.left {
-    inset-inline-start: -100%;
+    left: -100%;
     @include breakpoints.tablet {
       inset-inline-start: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
   &.right {
-    inset-inline-end: -100%;
+    right: -100%;
     @include breakpoints.tablet {
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
@@ -34,10 +35,10 @@
   box-shadow: var(--shadow-normal);
   transition-timing-function: ease-out;
   &.left {
-    inset-inline-start: 0;
+    left: 0;
   }
   &.right {
-    inset-inline-end: 0;
+    right: 0;
   }
 }
 
