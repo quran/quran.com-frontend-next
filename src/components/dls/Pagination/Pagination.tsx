@@ -119,7 +119,7 @@ const Pagination: React.FC<Props> = ({
               variant={ButtonVariant.Ghost}
               onClick={() => onPageChange(pageNumber as number)}
             >
-              {toLocalizedNumber(pageNumber.toString(), lang)}
+              {toLocalizedNumber(Number(pageNumber), lang)}
             </Button>
           </div>
         );
