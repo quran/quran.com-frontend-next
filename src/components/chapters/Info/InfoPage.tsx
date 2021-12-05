@@ -22,10 +22,10 @@ const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterRespo
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - 1-${toLocalizedNumber(
-          chapterResponse.chapter.versesCount,
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
+          1,
           lang,
-        )}`}
+        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
     </>

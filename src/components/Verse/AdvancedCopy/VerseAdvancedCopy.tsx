@@ -20,7 +20,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 import { generateChapterVersesKeys } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -64,16 +64,6 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [objectUrl, setObjectUrl] = useState(null);
 
   const [isLoadingData, setIsLoadingData] = useState(false);
-
-  const localizedVerseKey = useCallback(
-    (key) => {
-      return key
-        .split(':')
-        .map((value) => toLocalizedNumber(Number(value), lang))
-        .join(':');
-    },
-    [lang],
-  );
 
   // listen to any changes to the value of isCopied.
   useEffect(() => {
@@ -145,7 +135,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           id: chapterVersesKey,
           name: chapterVersesKey,
           value: chapterVersesKey,
-          label: localizedVerseKey(chapterVersesKey),
+          label: toLocalizedVerseKey(chapterVersesKey, lang),
         })),
       );
       // set the first verse's key as the default range's start verse.
@@ -241,7 +231,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           {
             value: SINGLE_VERSE,
             id: SINGLE_VERSE,
-            label: `${t('current-verse')} ${localizedVerseKey(verse.verseKey)}`,
+            label: `${t('current-verse')} ${toLocalizedVerseKey(verse.verseKey, lang)}`,
           },
           {
             value: MULTIPLE_VERSES,
@@ -254,8 +244,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         <VersesRangeSelector
           isVisible={showRangeOfVerses}
           dropdownItems={rangeVersesItems}
-          rangeStartVerse={localizedVerseKey(rangeStartVerse)}
-          rangeEndVerse={localizedVerseKey(rangeEndVerse)}
+          rangeStartVerse={toLocalizedVerseKey(rangeStartVerse, lang)}
+          rangeEndVerse={toLocalizedVerseKey(rangeEndVerse, lang)}
           onChange={onRangeBoundariesChange}
         />
       )}

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import styles from './SearchResultItem.module.scss';
 
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrl } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
@@ -18,12 +18,10 @@ interface Props {
 
 const SearchResultItem: React.FC<Props> = ({ result }) => {
   const { lang } = useTranslation('quran-reader');
-  const localizedVerseKey = useMemo(() => {
-    return result.verseKey
-      .split(':')
-      .map((value) => toLocalizedNumber(Number(value), lang))
-      .join(':');
-  }, [lang, result.verseKey]);
+  const localizedVerseKey = useMemo(
+    () => toLocalizedVerseKey(result.verseKey, lang),
+    [lang, result.verseKey],
+  );
   return (
     <Link href={getVerseNavigationUrl(result.verseKey)} passHref>
       <a className={styles.link}>

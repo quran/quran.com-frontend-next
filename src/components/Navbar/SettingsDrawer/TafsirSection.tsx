@@ -71,8 +71,7 @@ const TafsirSection = () => {
         />
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedTafsirs.length],
+    [t, selectedTafsirs, localizedSelectedTafsirs, dispatch],
   );
 
   return (

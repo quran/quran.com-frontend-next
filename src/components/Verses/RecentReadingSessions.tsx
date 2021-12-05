@@ -26,7 +26,6 @@ const RecentReadingSessions = () => {
           <div className={styles.verseLinksContainer}>
             {verseKeys.map((verseKey) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-              const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
               const surah = getChapterData(chapterId, lang);
               return (
                 <div className={styles.verseLink} key={verseKey}>
@@ -37,7 +36,10 @@ const RecentReadingSessions = () => {
                       surahNumber={Number(chapterId)}
                       translatedSurahName={surah.translatedName as string}
                       surahName={surah.transliteratedName}
-                      description={`${t('common:ayah')} ${localizedVerseNumber}`}
+                      description={`${t('common:ayah')} ${toLocalizedNumber(
+                        Number(verseNumber),
+                        lang,
+                      )}`}
                       verseCount={surah.versesCount}
                     />
                   </Link>

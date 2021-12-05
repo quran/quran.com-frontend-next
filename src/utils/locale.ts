@@ -253,14 +253,6 @@ export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => 
 export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];
 
 /**
- * Get the full locale name with lang + country e.g. ar-SA or en-US.
- *
- * @param {string} locale
- * @returns {string}
- */
-export const getLangFullLocale = (locale: string): string => LANG_LOCALE_MAP[locale];
-
-/**
  * Takes a number and returns a localized string based on the provided locale.
  *
  * @param {number} value
@@ -292,7 +284,46 @@ export const toLocalizedDate = (
   value: number | Date,
   locale: string,
   options: Intl.DateTimeFormatOptions = {},
-) => {
+): string => {
   const fullLocale = LANG_LOCALE_MAP[locale];
   return new Intl.DateTimeFormat(fullLocale, options).format(value);
 };
+
+/**
+ * Localize a string that contains 2 numbers with a splitter in between
+ * e.g. "2:55" or "2-5".
+ *
+ * @param {string} string
+ * @param {string} lang
+ * @param {string} splitter
+ * @returns  {string}
+ */
+export const localizeNumericalStringWithSplitter = (
+  string: string,
+  lang: string,
+  splitter = ':',
+): string =>
+  string
+    .split(splitter)
+    .map((value: string) => toLocalizedNumber(Number(value), lang))
+    .join(splitter);
+
+/**
+ * Get the localized value of the verse key.
+ *
+ * @param {string} verseKey
+ * @param {string} lang
+ * @returns {string}
+ */
+export const toLocalizedVerseKey = (verseKey: string, lang: string): string =>
+  localizeNumericalStringWithSplitter(verseKey, lang);
+
+/**
+ * Get the localized value of a range e.g. "1-20"
+ *
+ * @param {string} range
+ * @param {string} lang
+ * @returns {string}
+ */
+export const toLocalizedVersesRange = (range: string, lang: string): string =>
+  localizeNumericalStringWithSplitter(range, lang, '-');

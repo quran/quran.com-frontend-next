@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -42,10 +42,6 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
   const { translatedName } = chapterData;
   const { transliteratedName } = chapterData;
 
-  const localizedChapterId = useMemo(() => {
-    return toLocalizedNumber(Number(formatChapterId(chapterId)), lang);
-  }, [chapterId, lang]);
-
   return (
     <div
       ref={headerRef}
@@ -73,7 +69,9 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
           </div>
         </div>
         <div className={styles.right}>
-          <div className={styles.chapterId}>{localizedChapterId}</div>
+          <div className={styles.chapterId}>
+            {toLocalizedNumber(Number(formatChapterId(chapterId)), lang)}
+          </div>
           <div className={styles.arabicSurahNameContainer}>
             <ChapterIconContainer
               chapterId={chapterId}

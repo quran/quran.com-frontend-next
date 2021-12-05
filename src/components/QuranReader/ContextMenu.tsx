@@ -30,7 +30,6 @@ const ContextMenu = () => {
   const localizedHizb = useMemo(() => {
     return toLocalizedNumber(Number(hizb), lang);
   }, [hizb, lang]);
-
   const localizedPageNumber = useMemo(() => {
     return toLocalizedNumber(Number(page), lang);
   }, [page, lang]);

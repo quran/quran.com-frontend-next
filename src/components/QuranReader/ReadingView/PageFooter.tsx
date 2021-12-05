@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
@@ -15,12 +15,11 @@ interface Props {
 const PageFooter: React.FC<Props> = ({ page }) => {
   const { lang } = useTranslation('quran-reader');
   const pageUrl = getPageNavigationUrl(page);
-  const localizedPage = useMemo(() => toLocalizedNumber(page, lang), [page, lang]);
 
   return (
     <div className={styles.pageText}>
       <Link href={pageUrl} passHref>
-        <p className={styles.pageLink}>{localizedPage}</p>
+        <p className={styles.pageLink}>{toLocalizedNumber(page, lang)}</p>
       </Link>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -39,8 +39,12 @@ const AudioSection = () => {
     dispatch(setPlaybackRate(Number(value)));
   };
 
-  const playbackRatesOptions = generateSelectOptions(
-    playbackRates.map((rate) => ({ label: toLocalizedNumber(rate, lang), value: rate })),
+  const playbackRatesOptions = useMemo(
+    () =>
+      generateSelectOptions(
+        playbackRates.map((rate) => ({ label: toLocalizedNumber(rate, lang), value: rate })),
+      ),
+    [lang],
   );
 
   return (

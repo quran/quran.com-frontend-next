@@ -39,10 +39,10 @@ const Chapter: NextPage<ChapterProps> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - 1-${toLocalizedNumber(
-          chapterResponse.chapter.versesCount,
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
+          1,
           lang,
-        )}`}
+        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
       />
       <QuranReader
         initialData={versesResponse}
