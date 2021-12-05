@@ -32,7 +32,7 @@ const LOCALE_NAME = {
 
 export const LANG_LOCALE_MAP = {
   en: 'en-US',
-  ar: 'ar-SA',
+  ar: 'ar-EG',
   bn: 'bn-BD',
   fa: 'fa-IR',
   fr: 'fr-FR',
@@ -271,6 +271,14 @@ export const toLocalizedNumber = (value: number, locale: string) => {
   numberFormatter = new Intl.NumberFormat(fullLocale);
   return numberFormatter.format(value);
 };
+
+/**
+ * Get the full locale name with lang + country e.g. ar-SA or en-US.
+ *
+ * @param {string} locale
+ * @returns {string}
+ */
+export const getLangFullLocale = (locale: string): string => LANG_LOCALE_MAP[locale];
 
 /**
  * Takes a date and returns a localized string based on the provided locale and options.
