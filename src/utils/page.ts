@@ -46,3 +46,13 @@ export const isLastPage = (
   }
   return pageNumber === mushafTotalPages;
 };
+
+/**
+ * Return array of 604 pages
+ * TODO: return the number of pages based on mushaf type
+ *
+ * @returns {number[]}
+ */
+export const getPageIds = () => {
+  return [...Array(DEFAULT_NUMBER_OF_PAGES)].map((n, index) => index + 1);
+};

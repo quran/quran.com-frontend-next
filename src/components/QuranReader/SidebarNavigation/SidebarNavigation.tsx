@@ -1,19 +1,29 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
+import Switch from 'src/components/dls/Switch/Switch';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
+import {
+  navigationItems,
+  selectIsSidebarNavigationVisible,
+  selectNavigationItem,
+  selectSelectedNavigationItem,
+  NavigationItem,
+} from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { getJuzIds } from 'src/utils/juz';
+import { getJuzNavigationUrl, getPageNavigationUrl } from 'src/utils/navigation';
+import { getPageIds } from 'src/utils/page';
 import { generateChapterVersesKeys, getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 const SurahList = () => {
   const chaptersData = getAllChaptersData();
   return (
-    <div>
+    <div className={styles.SurahListContainer}>
       {Object.entries(chaptersData).map(([id, chapter]) => (
         <div>
           <Link href={`/${id}`}>{chapter.transliteratedName}</Link>
@@ -37,7 +47,7 @@ export const VerseList = () => {
         const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
         return (
           <div>
-            <Link href={`/${chapter}/${verse}`}>{verseKey}</Link>
+            <Link href={`/${chapter}/${verse}`}>{verse}</Link>
           </div>
         );
       })}
@@ -45,12 +55,58 @@ export const VerseList = () => {
   );
 };
 
-const SidebarNavigation = () => {
-  const isVisible = useSelector(selectIsSidebarNavigationVisible);
+const SurahSelection = () => {
   return (
-    <div className={classNames(styles.container, { [styles.visibleContainer]: isVisible })}>
+    <div className={styles.contentContainer}>
       <SurahList />
       <VerseList />
+    </div>
+  );
+};
+
+const JuzSelection = () => {
+  const juzIds = getJuzIds();
+  return (
+    <div>
+      {juzIds.map((juzId) => (
+        <Link href={getJuzNavigationUrl(juzId)}>
+          <div>{juzId}</div>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+const PageSelection = () => {
+  const pageIds = getPageIds();
+  return (
+    <div>
+      {pageIds.map((pageId) => (
+        <Link href={getPageNavigationUrl(pageId)}>
+          <div>{pageId}</div>
+        </Link>
+      ))}
+    </div>
+  );
+};
+
+const SidebarNavigation = () => {
+  const isVisible = useSelector(selectIsSidebarNavigationVisible);
+  const selectedNavigationItem = useSelector(selectSelectedNavigationItem);
+  const dispatch = useDispatch();
+
+  return (
+    <div className={classNames(styles.container, { [styles.visibleContainer]: isVisible })}>
+      <Switch
+        items={navigationItems}
+        selected={selectedNavigationItem}
+        onSelect={(value) => {
+          dispatch(selectNavigationItem(value));
+        }}
+      />
+      {selectedNavigationItem === NavigationItem.Surah && <SurahSelection />}
+      {selectedNavigationItem === NavigationItem.Juz && <JuzSelection />}
+      {selectedNavigationItem === NavigationItem.Page && <PageSelection />}
     </div>
   );
 };
