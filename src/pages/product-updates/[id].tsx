@@ -5,15 +5,12 @@ import styles from './changelog.module.scss';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import { getPageTitle } from 'src/components/Notion/Blocks';
 import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import NotionPage from 'src/components/Notion/Page';
 import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
-import {
-  ONE_DAY_REVALIDATION_PERIOD_SECONDS,
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-} from 'src/utils/staticPageGeneration';
+import { getPageTitle, getRevalidationTime } from 'src/utils/notion';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from 'src/utils/staticPageGeneration';
 
 interface Props {
   hasError?: boolean;
@@ -55,7 +52,7 @@ export const getStaticProps = async (context) => {
         page: response[0],
         blocks: response[1],
       },
-      revalidate: ONE_DAY_REVALIDATION_PERIOD_SECONDS,
+      revalidate: getRevalidationTime(response[1], true),
     };
   } catch (error) {
     return {
