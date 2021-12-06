@@ -16,7 +16,6 @@ const Skeleton = ({
   isRounded,
   isSquared,
   isActive = true,
-  style,
   className,
 }: SkeletonProps) => {
   return (
@@ -28,7 +27,6 @@ const Skeleton = ({
         [styles.squared]: isSquared,
         [className]: className,
       })}
-      style={style}
     >
       {children}
     </span>

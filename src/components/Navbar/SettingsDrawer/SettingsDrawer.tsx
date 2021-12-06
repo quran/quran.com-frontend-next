@@ -27,7 +27,7 @@ const TranslationSelectionBody = dynamic(() => import('./TranslationSelectionBod
   ssr: false,
 });
 
-const TafisrSelectionBody = dynamic(() => import('./TafsirSelectionBody'), {
+const TafsirSelectionBody = dynamic(() => import('./TafsirSelectionBody'), {
   ssr: false,
 });
 
@@ -59,7 +59,7 @@ const SettingsDrawer = () => {
         <TranslationSelectionBody />
       )}
       {isSettingsDrawerOpen && settingsView === SettingsView.Reciter && <ReciterSelectionBody />}
-      {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafisrSelectionBody />}
+      {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafsirSelectionBody />}
     </Drawer>
   );
 };
