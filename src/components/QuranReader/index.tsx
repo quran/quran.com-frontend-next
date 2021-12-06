@@ -42,7 +42,6 @@ import {
   selectIsUsingDefaultTranslations,
   selectSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { areArraysEqual } from 'src/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranFont, QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
@@ -65,10 +64,7 @@ const QuranReader = ({
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
-  const { quranTextFontScale } = useSelector(
-    selectQuranReaderStyles,
-    shallowEqual,
-  ) as QuranReaderStyles;
+  const { quranTextFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;

@@ -14,15 +14,13 @@ const ReadingViewSkeleton = ({ fontSize }: Props) => {
   return (
     <span className={styles.skeletonContainer} style={{ width: estimatedWidth }}>
       {rowsArr.map((k, i) => (
-        <>
-          <Skeleton
-            // eslint-disable-next-line react/no-array-index-key
-            key={`skeleton_${i}`}
-            isActive
-            isSquared
-            className={styles.verseRow}
-          />
-        </>
+        <Skeleton
+          // eslint-disable-next-line react/no-array-index-key
+          key={`skeleton_${i}`}
+          isActive
+          isSquared
+          className={styles.verseRow}
+        />
       ))}
     </span>
   );
