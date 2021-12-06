@@ -23,19 +23,13 @@ export const getPageTitle = (page) => {
  *    to be statically generated and the soonest time an image will expire.
  *
  * @param {any[]} pagesBlocks
- * @param {boolean} isSinglePage this is to indicate whether we are getting the revalidation time for a single page or all pages.
  * @returns {number}
  */
-export const getRevalidationTime = (pagesBlocks, isSinglePage = false): number => {
+export const getRevalidationTime = (pagesBlocks): number => {
   let filesExpiryTime = [];
-  // if it's a Next.js page of all notion pages
-  if (!isSinglePage) {
-    pagesBlocks.forEach((pageBlocks) => {
-      filesExpiryTime = [...filesExpiryTime, ...getPageBlocksImageExpiryTime(pageBlocks)];
-    });
-  } else {
-    filesExpiryTime = getPageBlocksImageExpiryTime(pagesBlocks);
-  }
+  pagesBlocks.forEach((pageBlocks) => {
+    filesExpiryTime = [...filesExpiryTime, ...getPageBlocksImageExpiryTime(pageBlocks)];
+  });
   // if the are no image block, we use the default value
   if (!filesExpiryTime.length) {
     return ONE_DAY_REVALIDATION_PERIOD_SECONDS;

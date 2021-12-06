@@ -47,12 +47,13 @@ export const getStaticProps = async (context) => {
   const { id } = context.params;
   try {
     const response = await Promise.all([retrievePage(id), retrieveBlockChildren(id)]);
+    const blocks = response[1];
     return {
       props: {
         page: response[0],
-        blocks: response[1],
+        blocks,
       },
-      revalidate: getRevalidationTime(response[1], true),
+      revalidate: getRevalidationTime([blocks]),
     };
   } catch (error) {
     return {
