@@ -1,0 +1,41 @@
+@use "src/styles/breakpoints";
+.skeletonContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.skeletonItem {
+  display: flex;
+  flex: 1 0 30%;
+  margin: var(--spacing-xsmall);
+  padding: var(--spacing-xsmall) 0;
+  height: calc(2 * var(--spacing-mega));
+  @include breakpoints.smallerThanDesktop {
+    flex: 1 0 42%;
+  }
+  @include breakpoints.smallerThanMobileL {
+    margin: var(--spacing-xsmall) var(--spacing-micro);
+    flex: 1 0 100%;
+  }
+}
+
+.tabSkeleton {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: var(--spacing-xsmall);
+  @include breakpoints.smallerThanMobileL {
+    margin-inline-start: var(--spacing-micro);
+  }
+}
+
+.firstTabSkeleton {
+  width: calc(3 * var(--spacing-mega));
+  margin-inline-end: var(--spacing-small);
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.secondTabSkeleton {
+  width: calc(3 * var(--spacing-mega));
+}

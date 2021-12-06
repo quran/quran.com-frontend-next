@@ -1,7 +1,5 @@
 @use "src/styles/theme";
 $baseSize: var(--spacing-mega);
-$animationDuration: 8s;
-$transition-duration: 1.5s;
 
 .baseSize {
   height: $baseSize;
@@ -16,15 +14,15 @@ $transition-duration: 1.5s;
 
 .active::before {
   border-radius: var(--border-radius-default);
+
   @include theme.light {
     background-color: var(--color-secondary-faded);
   }
   @include theme.dark {
-    background-color: var(--color-background-alternative-faint);
+    background-color: var(--color-background-alternative-faded);
   }
 
-  animation: $transition-duration ease-in-out var(--transition-fast) infinite
-    normal none running loading;
+  animation: 1.5s ease-in-out 0.5s infinite normal none running loading;
 
   content: " ";
   position: absolute;
@@ -39,17 +37,6 @@ $transition-duration: 1.5s;
   border-radius: var(--border-radius-circle);
 }
 
-@-webkit-keyframes loading {
-  0% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 @keyframes loading {
   0% {
     opacity: 1;
