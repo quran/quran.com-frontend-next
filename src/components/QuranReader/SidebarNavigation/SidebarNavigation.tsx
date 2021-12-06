@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -116,26 +117,52 @@ const SurahSelection = () => {
 
 const JuzSelection = () => {
   const juzIds = getJuzIds();
+  const [searchQuery, setSearchQuery] = useState('');
   return (
     <div>
-      {juzIds.map((juzId) => (
-        <Link href={getJuzNavigationUrl(juzId)}>
-          <div>{juzId}</div>
-        </Link>
-      ))}
+      <Input
+        prefix={<IconSearch />}
+        id="translations-search"
+        value={searchQuery}
+        onChange={setSearchQuery}
+        placeholder="search surah"
+        fixedWidth={false}
+      />
+      <div>
+        {juzIds.map((juzId) =>
+          juzId.toString().startsWith(searchQuery) ? (
+            <Link href={getJuzNavigationUrl(juzId)}>
+              <div>{juzId}</div>
+            </Link>
+          ) : null,
+        )}
+      </div>
     </div>
   );
 };
 
 const PageSelection = () => {
   const pageIds = getPageIds();
+  const [searchQuery, setSearchQuery] = useState('');
   return (
     <div>
-      {pageIds.map((pageId) => (
-        <Link href={getPageNavigationUrl(pageId)}>
-          <div>{pageId}</div>
-        </Link>
-      ))}
+      <Input
+        prefix={<IconSearch />}
+        id="translations-search"
+        value={searchQuery}
+        onChange={setSearchQuery}
+        placeholder="search page"
+        fixedWidth={false}
+      />
+      <div>
+        {pageIds.map((pageId) =>
+          pageId.toString().startsWith(searchQuery) ? (
+            <Link href={getPageNavigationUrl(pageId)}>
+              <div>{pageId}</div>
+            </Link>
+          ) : null,
+        )}
+      </div>
     </div>
   );
 };
