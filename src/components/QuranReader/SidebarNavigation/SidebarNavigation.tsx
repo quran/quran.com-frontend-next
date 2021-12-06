@@ -1,9 +1,15 @@
-/* eslint-disable react/no-multi-comp */
+import { useState } from 'react';
+
 import classNames from 'classnames';
+import Fuse from 'fuse.js';
+/* eslint-disable react/no-multi-comp */
 import { useDispatch, useSelector } from 'react-redux';
+
+import IconSearch from '../../../../public/icons/search.svg';
 
 import styles from './SidebarNavigation.module.scss';
 
+import Input from 'src/components/dls/Forms/Input';
 import Link from 'src/components/dls/Link/Link';
 import Switch from 'src/components/dls/Switch/Switch';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
@@ -19,21 +25,52 @@ import { getJuzIds } from 'src/utils/juz';
 import { getJuzNavigationUrl, getPageNavigationUrl } from 'src/utils/navigation';
 import { getPageIds } from 'src/utils/page';
 import { generateChapterVersesKeys, getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import Chapter from 'types/Chapter';
+
+const filterSurah = (surah, searchQuery: string) => {
+  const fuse = new Fuse(surah, {
+    threshold: 0.3,
+    keys: ['id', 'transliteratedName'],
+  });
+
+  const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
+  return filteredSurah as Chapter[];
+};
 
 const SurahList = () => {
   const chaptersData = getAllChaptersData();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const chapterDataArray = Object.entries(chaptersData).map(([id, chapter]) => ({
+    ...chapter,
+    id,
+  }));
+  const filteredChapters = searchQuery
+    ? filterSurah(chapterDataArray, searchQuery)
+    : chapterDataArray;
   return (
-    <div className={styles.surahList}>
-      {Object.entries(chaptersData).map(([id, chapter]) => (
-        <div>
-          <Link href={`/${id}`}>{chapter.transliteratedName}</Link>
-        </div>
-      ))}
+    <div>
+      <Input
+        prefix={<IconSearch />}
+        id="translations-search"
+        value={searchQuery}
+        onChange={setSearchQuery}
+        placeholder="search surah"
+        fixedWidth={false}
+      />
+      <div className={styles.surahList}>
+        {filteredChapters.map((chapter) => (
+          <div>
+            <Link href={`/${chapter.id}`}>{chapter.transliteratedName}</Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export const VerseList = () => {
+  const [searchQuery, setSearchQuery] = useState('');
   const chapterIds = useChapterIdsByUrlPath();
   if (!chapterIds || chapterIds.length === 0) return null;
 
@@ -42,24 +79,37 @@ export const VerseList = () => {
   const verseKeys = generateChapterVersesKeys(chapterId[0]);
 
   return (
-    <div className={styles.verseList}>
-      {verseKeys.map((verseKey) => {
-        const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
-        return (
-          <div>
-            <Link href={`/${chapter}/${verse}`}>{verse}</Link>
-          </div>
-        );
-      })}
+    <div>
+      <Input
+        prefix={<IconSearch />}
+        id="translations-search"
+        value={searchQuery}
+        onChange={setSearchQuery}
+        placeholder="verse"
+        fixedWidth={false}
+      />
+      <div className={styles.verseList}>
+        {verseKeys.map((verseKey) => {
+          const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
+          if (!verse.startsWith(searchQuery)) return null;
+          return (
+            <div>
+              <Link href={`/${chapter}/${verse}`}>{verse}</Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
 const SurahSelection = () => {
   return (
-    <div className={styles.contentContainer}>
-      <SurahList />
-      <VerseList />
+    <div>
+      <div className={styles.contentContainer}>
+        <SurahList />
+        <VerseList />
+      </div>
     </div>
   );
 };
