@@ -23,7 +23,7 @@ import { generateChapterVersesKeys, getVerseAndChapterNumbersFromKey } from 'src
 const SurahList = () => {
   const chaptersData = getAllChaptersData();
   return (
-    <div className={styles.SurahListContainer}>
+    <div className={styles.surahList}>
       {Object.entries(chaptersData).map(([id, chapter]) => (
         <div>
           <Link href={`/${id}`}>{chapter.transliteratedName}</Link>
@@ -42,7 +42,7 @@ export const VerseList = () => {
   const verseKeys = generateChapterVersesKeys(chapterId[0]);
 
   return (
-    <div>
+    <div className={styles.verseList}>
       {verseKeys.map((verseKey) => {
         const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
         return (
