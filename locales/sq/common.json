@@ -7,6 +7,7 @@
             "title": "Lëvizja automatike"
         },
         "play": "Luaj Audio",
+        "playback-normal": "Normale",
         "playback-speed": "Shpejtësia e riprodhimit",
         "playback-speed-unit": "x",
         "player": {

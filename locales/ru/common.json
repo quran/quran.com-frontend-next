@@ -7,6 +7,7 @@
             "title": "Автопрокрутка"
         },
         "play": "Воспроизвести аудио",
+        "playback-normal": "Обычный",
         "playback-speed": "Скорость воспроизведения",
         "playback-speed-unit": "Икс",
         "player": {

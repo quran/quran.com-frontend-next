@@ -7,6 +7,7 @@
             "title": "Scorrimento automatico"
         },
         "play": "Riproduci audio",
+        "playback-normal": "Normale",
         "playback-speed": "Velocità di riproduzione",
         "playback-speed-unit": "X",
         "player": {
