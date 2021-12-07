@@ -16,12 +16,7 @@ $tablet-size: calc(10 * var(--spacing-mega));
   transition: var(--transition-regular);
   width: 0;
   box-sizing: border-box;
-  @include theme.light {
-    box-shadow: var(--shadow-large);
-  }
-  @include theme.dark {
-    box-shadow: none;
-  }
+  border-inline-end: 1px solid var(--color-borders-hairline);
   overflow: hidden;
 }
 .header {

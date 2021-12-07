@@ -96,3 +96,19 @@
 .secondaryInfo {
   font-weight: lighter;
 }
+
+.surahName {
+  display: flex;
+  align-items: center;
+}
+.chevronIconContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: var(--spacing-xxsmall);
+  box-sizing: border-box;
+}
+.rotate180 {
+  transition: var(--transition-fast);
+  transform: rotate(180deg);
+}

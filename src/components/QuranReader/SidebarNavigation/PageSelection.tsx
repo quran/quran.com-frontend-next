@@ -24,7 +24,9 @@ const PageSelection = () => {
         {pageIds.map((pageId) =>
           pageId.toString().startsWith(searchQuery) ? (
             <Link href={getPageNavigationUrl(pageId)}>
-              <div className={styles.listItem}>{pageId}</div>
+              <div className={styles.listItem}>
+                {t('page')} {pageId}
+              </div>
             </Link>
           ) : null,
         )}

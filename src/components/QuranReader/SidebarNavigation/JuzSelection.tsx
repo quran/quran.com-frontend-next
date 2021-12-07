@@ -24,7 +24,9 @@ const JuzSelection = () => {
         {juzIds.map((juzId) =>
           juzId.toString().startsWith(searchQuery) ? (
             <Link href={getJuzNavigationUrl(juzId)}>
-              <div className={styles.listItem}>{juzId}</div>
+              <div className={styles.listItem}>
+                {t('juz')} {juzId}
+              </div>
             </Link>
           ) : null,
         )}

@@ -57,13 +57,19 @@ const ContextMenu = () => {
         <div className={styles.section}>
           <div className={classNames(styles.row)}>
             <p
-              className={classNames(styles.bold, styles.alignStart)}
-              style={{ pointerEvents: isSidebarNavigationVisible ? 'none' : 'auto' }}
+              className={classNames(styles.bold, styles.alignStart, styles.surahName)}
               onClick={() => {
-                if (!isSidebarNavigationVisible) dispatch(setIsVisible(true));
+                dispatch(setIsVisible(!isSidebarNavigationVisible));
               }}
             >
-              {chapterData.transliteratedName} <ChevronDownIcon />
+              {chapterData.transliteratedName}
+              <span
+                className={classNames(styles.chevronIconContainer, {
+                  [styles.rotate180]: !isSidebarNavigationVisible,
+                })}
+              >
+                <ChevronDownIcon />
+              </span>
             </p>
           </div>
         </div>
