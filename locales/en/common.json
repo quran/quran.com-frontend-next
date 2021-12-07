@@ -183,6 +183,11 @@
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
+    "sidebar": {
+        "search-surah": "Search surah",
+        "search-juz": "Search Juz",
+        "search-page": "Search Page"
+    },
     "sitemap": "Sitemap",
     "sort": {
         "ascending": "Ascending",

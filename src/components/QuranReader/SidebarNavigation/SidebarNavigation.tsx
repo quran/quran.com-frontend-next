@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
+/* eslint-disable react/no-multi-comp */
 import { useState, useRef } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
-/* eslint-disable react/no-multi-comp */
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
@@ -49,6 +49,7 @@ const filterSurah = (surah, searchQuery: string) => {
 const SurahList = () => {
   const chapterIds = useChapterIdsByUrlPath();
   const currentChapterId = chapterIds[0];
+  const { t } = useTranslation('common');
 
   const chaptersData = getAllChaptersData();
   const [searchQuery, setSearchQuery] = useState('');
@@ -64,10 +65,9 @@ const SurahList = () => {
     <div className={styles.surahListContainer}>
       <input
         className={styles.searchInput}
-        id="translations-search"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search Surah" // TODO: localize
+        placeholder={t('sidebar.search-surah')}
       />
       <div className={styles.list}>
         {filteredChapters.map((chapter) => (
@@ -92,6 +92,7 @@ const SurahList = () => {
 export const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const chapterIds = useChapterIdsByUrlPath();
+  const { t } = useTranslation('common');
   if (!chapterIds || chapterIds.length === 0) return null;
 
   const currentChapterId = chapterIds[0];
@@ -104,7 +105,7 @@ export const VerseList = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         className={styles.searchInput}
-        placeholder="Verse" // TODO: localize
+        placeholder={t('verse')}
       />
       <div className={styles.list}>
         {verseKeys.map((verseKey) => {
@@ -133,14 +134,14 @@ const SurahSelection = () => {
 const JuzSelection = () => {
   const juzIds = getJuzIds();
   const [searchQuery, setSearchQuery] = useState('');
+  const { t } = useTranslation('common');
   return (
     <div>
       <input
         className={styles.searchInput}
-        id="translations-search"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search Juz" // TODO: localize
+        placeholder={t('sidebar.search-juz')}
       />
       <div>
         {juzIds.map((juzId) =>
@@ -158,13 +159,14 @@ const JuzSelection = () => {
 const PageSelection = () => {
   const pageIds = getPageIds();
   const [searchQuery, setSearchQuery] = useState('');
+  const { t } = useTranslation('common');
   return (
     <div>
       <input
         className={styles.searchInput}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search Page" // TODO: localize
+        placeholder={t('sidebar.search-page')}
       />
       <div className={styles.list}>
         {pageIds.map((pageId) =>
