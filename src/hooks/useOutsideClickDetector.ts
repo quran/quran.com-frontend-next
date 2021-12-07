@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 
+type Options = {
+  maxWidth?: number;
+};
+
 /**
  * A hook that detects clicking outside an element.
  *
@@ -11,14 +15,16 @@ const useOutsideClickDetector = (
   ref: React.RefObject<HTMLElement>,
   onClickOutsideDetected: () => void,
   enableDetection: boolean,
-  maxWidth?: number,
+  options?: Options,
 ) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // do not trigger, if maxWidth is specificed
+      if (options?.maxWidth && document.documentElement.clientWidth > options.maxWidth) return;
+
       // if we click on an element inside the document that is not an inclusive descendant of the ref node.
       if (ref.current && !ref.current.contains(event.target)) {
-        if (!maxWidth) onClickOutsideDetected();
-        if (maxWidth && document.documentElement.clientWidth < maxWidth) onClickOutsideDetected();
+        onClickOutsideDetected();
       }
     };
     // no need to attach the listener if the parent component's visibility is controlled.
@@ -30,7 +36,7 @@ const useOutsideClickDetector = (
       // Unbind the event listener on clean up
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref, onClickOutsideDetected, enableDetection, maxWidth]);
+  }, [ref, onClickOutsideDetected, enableDetection, options?.maxWidth]);
 };
 
 export default useOutsideClickDetector;

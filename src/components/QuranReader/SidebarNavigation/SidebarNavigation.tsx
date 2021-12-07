@@ -27,6 +27,7 @@ const JuzSelection = dynamic(() => import('./JuzSelection'));
 const PageSelection = dynamic(() => import('./PageSelection'));
 const SurahSelection = dynamic(() => import('./SurahSelection'));
 
+const TABLET_WIDTH = 768;
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isVisible = useSelector(selectIsSidebarNavigationVisible);
@@ -41,7 +42,7 @@ const SidebarNavigation = () => {
       dispatch(setIsVisible(false));
     },
     true,
-    768,
+    { maxWidth: TABLET_WIDTH },
   );
 
   return (
