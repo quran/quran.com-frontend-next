@@ -21,15 +21,15 @@ const JuzSelection = () => {
         placeholder={t('sidebar.search-juz')}
       />
       <div>
-        {juzIds.map((juzId) =>
-          juzId.toString().startsWith(searchQuery) ? (
+        {juzIds
+          .filter((juzId) => juzId.toString().startsWith(searchQuery))
+          .map((juzId) => (
             <Link href={getJuzNavigationUrl(juzId)}>
               <div className={styles.listItem}>
                 {t('juz')} {juzId}
               </div>
             </Link>
-          ) : null,
-        )}
+          ))}
       </div>
     </div>
   );

@@ -21,15 +21,15 @@ const PageSelection = () => {
         placeholder={t('sidebar.search-page')}
       />
       <div className={styles.list}>
-        {pageIds.map((pageId) =>
-          pageId.toString().startsWith(searchQuery) ? (
+        {pageIds
+          .filter((pageId) => pageId.toString().startsWith(searchQuery))
+          .map((pageId) => (
             <Link href={getPageNavigationUrl(pageId)}>
               <div className={styles.listItem}>
                 {t('page')} {pageId}
               </div>
             </Link>
-          ) : null,
-        )}
+          ))}
       </div>
     </div>
   );
