@@ -65,7 +65,7 @@ const ContextMenu = () => {
               {chapterData.transliteratedName}
               <span
                 className={classNames(styles.chevronIconContainer, {
-                  [styles.rotate180]: !isSidebarNavigationVisible,
+                  [styles.rotate180]: isSidebarNavigationVisible,
                 })}
               >
                 <ChevronDownIcon />
