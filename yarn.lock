@@ -5602,6 +5602,18 @@
     "@typescript-eslint/types" "5.3.1"
     eslint-visitor-keys "^3.0.0"
 
+"@virtuoso.dev/react-urx@^0.2.8":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@virtuoso.dev/react-urx/-/react-urx-0.2.10.tgz#6d94c1ebd58d8c3a76284f2c04b0c2a14a8e6818"
+  integrity sha512-ihs17eovHF9ZZM3OoKm4anKp7XLcyLaz6+iNzchimCWBTNBvA/MF4wS8MtqYZlELPj+s4+1nzgNCWGW5dL+fxw==
+  dependencies:
+    "@virtuoso.dev/urx" "^0.2.10"
+
+"@virtuoso.dev/urx@^0.2.10", "@virtuoso.dev/urx@^0.2.8":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@virtuoso.dev/urx/-/urx-0.2.10.tgz#d05458ff4472960f390da0cb60cd82335d072a34"
+  integrity sha512-Eop6vdPnVomXi+uFF5Jz/I2/MTo3dZMm+XttV5yXNAKX0dYys2d3RctzJmONtOxc7kAaxnaKB8QYnMFN/mFITA==
+
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"
@@ -14814,6 +14826,14 @@ react-toastify@^8.0.3:
   integrity sha512-rv3koC7f9lKKSkdpYgo/TGzgWlrB/aaiUInF1DyV7BpiM4kyTs+uhu6/r8XDMtBY2FOIHK+FlK3Iv7OzpA/tCA==
   dependencies:
     clsx "^1.1.1"
+
+react-virtuoso@^2.2.8:
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-2.2.8.tgz#497e8853caf93820aac28bb871f682bbcb32ebb9"
+  integrity sha512-DArJ29ZrhdygdLKdXs/GB3VNDxaAF7YjdgIjlWPuK6UsV848hNmtw9px3LPdcQBErxaz7XCtHNfc7yInX+/M7g==
+  dependencies:
+    "@virtuoso.dev/react-urx" "^0.2.8"
+    "@virtuoso.dev/urx" "^0.2.8"
 
 react@^17.0.2:
   version "17.0.2"

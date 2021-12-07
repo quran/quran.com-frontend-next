@@ -15,6 +15,7 @@ export const DEFAULT_VERSES_PARAMS = {
   translationFields: 'resource_name,language_id', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
   fields: `${QuranFont.Uthmani},chapter_id,hizb_number`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
+  perPage: 'all', // will fetch all verses
 };
 
 /**

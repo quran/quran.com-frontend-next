@@ -1,16 +1,13 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
-
-import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -27,9 +24,7 @@ type VerseTextProps = {
 };
 
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
-  const textRef = useRef(null);
   const loadedFonts = useSelector(selectLoadedFontFaces);
-  useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
@@ -67,7 +62,6 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
         </div>
       )}
       <div
-        ref={textRef}
         data-verse-key={verseKey}
         data-page={pageNumber}
         data-chapter-id={chapterId}
