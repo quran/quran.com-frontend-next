@@ -58,8 +58,9 @@ const ContextMenu = () => {
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.bold, styles.alignStart)}
+              style={{ pointerEvents: isSidebarNavigationVisible ? 'none' : 'auto' }}
               onClick={() => {
-                dispatch(setIsVisible(!isSidebarNavigationVisible));
+                if (!isSidebarNavigationVisible) dispatch(setIsVisible(true));
               }}
             >
               {chapterData.transliteratedName} <ChevronDownIcon />

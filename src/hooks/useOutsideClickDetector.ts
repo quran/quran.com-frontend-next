@@ -11,12 +11,14 @@ const useOutsideClickDetector = (
   ref: React.RefObject<HTMLElement>,
   onClickOutsideDetected: () => void,
   enableDetection: boolean,
+  maxWidth?: number,
 ) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       // if we click on an element inside the document that is not an inclusive descendant of the ref node.
       if (ref.current && !ref.current.contains(event.target)) {
-        onClickOutsideDetected();
+        if (!maxWidth) onClickOutsideDetected();
+        if (maxWidth && document.documentElement.clientWidth < maxWidth) onClickOutsideDetected();
       }
     };
     // no need to attach the listener if the parent component's visibility is controlled.
@@ -28,7 +30,7 @@ const useOutsideClickDetector = (
       // Unbind the event listener on clean up
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref, onClickOutsideDetected, enableDetection]);
+  }, [ref, onClickOutsideDetected, enableDetection, maxWidth]);
 };
 
 export default useOutsideClickDetector;
