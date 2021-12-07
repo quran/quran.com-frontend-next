@@ -1,10 +1,9 @@
 /* eslint-disable max-lines */
-/* eslint-disable react/no-multi-comp */
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 
 import classNames from 'classnames';
-import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import IconClose from '../../../../public/icons/close.svg';
@@ -12,9 +11,7 @@ import IconClose from '../../../../public/icons/close.svg';
 import styles from './SidebarNavigation.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import Link from 'src/components/dls/Link/Link';
 import Switch from 'src/components/dls/Switch/Switch';
-import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import {
@@ -25,161 +22,10 @@ import {
   NavigationItem,
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
-import { getAllChaptersData } from 'src/utils/chapter';
-import { getJuzIds } from 'src/utils/juz';
-import {
-  getJuzNavigationUrl,
-  getPageNavigationUrl,
-  getVerseToEndOfChapterNavigationUrl,
-} from 'src/utils/navigation';
-import { getPageIds } from 'src/utils/page';
-import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
-import Chapter from 'types/Chapter';
 
-const filterSurah = (surah, searchQuery: string) => {
-  const fuse = new Fuse(surah, {
-    threshold: 0.3,
-    keys: ['id', 'transliteratedName'],
-  });
-
-  const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
-  return filteredSurah as Chapter[];
-};
-
-const SurahList = () => {
-  const chapterIds = useChapterIdsByUrlPath();
-  const currentChapterId = chapterIds[0];
-  const { t } = useTranslation('common');
-
-  const chaptersData = getAllChaptersData();
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const chapterDataArray = Object.entries(chaptersData).map(([id, chapter]) => ({
-    ...chapter,
-    id,
-  }));
-  const filteredChapters = searchQuery
-    ? filterSurah(chapterDataArray, searchQuery)
-    : chapterDataArray;
-  return (
-    <div className={styles.surahListContainer}>
-      <input
-        className={styles.searchInput}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={t('sidebar.search-surah')}
-      />
-      <div className={styles.list}>
-        {filteredChapters.map((chapter) => (
-          <Link href={`/${chapter.id}`}>
-            <div
-              className={classNames(styles.listItem, {
-                [styles.selectedItem]: chapter.id.toString() === currentChapterId,
-              })}
-            >
-              {chapter.transliteratedName}
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// by default, verse showing current surah
-// if changed, show verse of the selected surah
-
-export const VerseList = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const chapterIds = useChapterIdsByUrlPath();
-  const { t } = useTranslation('common');
-  if (!chapterIds || chapterIds.length === 0) return null;
-
-  const currentChapterId = chapterIds[0];
-
-  const verseKeys = generateChapterVersesKeys(currentChapterId);
-
-  return (
-    <div className={styles.verseListContainer}>
-      <input
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className={styles.searchInput}
-        placeholder={t('verse')}
-      />
-      <div className={styles.list}>
-        {verseKeys.map((verseKey) => {
-          const verse = getVerseNumberFromKey(verseKey);
-          if (!verse.toString().startsWith(searchQuery)) return null;
-          return (
-            <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
-              <div className={styles.listItem}>{verse}</div>
-            </Link>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
-
-const SurahSelection = () => {
-  return (
-    <div className={styles.surahBodyContainer}>
-      <SurahList />
-      <VerseList />
-    </div>
-  );
-};
-
-const JuzSelection = () => {
-  const juzIds = getJuzIds();
-  const [searchQuery, setSearchQuery] = useState('');
-  const { t } = useTranslation('common');
-  return (
-    <div>
-      <input
-        className={styles.searchInput}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={t('sidebar.search-juz')}
-      />
-      <div>
-        {juzIds.map((juzId) =>
-          juzId.toString().startsWith(searchQuery) ? (
-            <Link href={getJuzNavigationUrl(juzId)}>
-              <div className={styles.listItem}>{juzId}</div>
-            </Link>
-          ) : null,
-        )}
-      </div>
-    </div>
-  );
-};
-
-const PageSelection = () => {
-  const pageIds = getPageIds();
-  const [searchQuery, setSearchQuery] = useState('');
-  const { t } = useTranslation('common');
-  return (
-    <div>
-      <input
-        className={styles.searchInput}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={t('sidebar.search-page')}
-      />
-      <div className={styles.list}>
-        {pageIds.map((pageId) =>
-          pageId.toString().startsWith(searchQuery) ? (
-            <Link href={getPageNavigationUrl(pageId)}>
-              <div className={styles.listItem}>{pageId}</div>
-            </Link>
-          ) : null,
-        )}
-      </div>
-    </div>
-  );
-};
+const JuzSelection = dynamic(() => import('./JuzSelection'));
+const PageSelection = dynamic(() => import('./PageSelection'));
+const SurahSelection = dynamic(() => import('./SurahSelection'));
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
