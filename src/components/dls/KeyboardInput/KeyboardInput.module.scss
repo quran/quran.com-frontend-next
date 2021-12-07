@@ -1,9 +1,15 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .container {
   direction: ltr;
   color: var(--color-text-default);
-  border: 1px solid var(--color-borders-hairline);
+  @include theme.light {
+    border: 1px solid var(--color-borders-hairline);
+  }
+  @include theme.dark {
+    border: 1px solid var(--color-borders-hairline);
+  }
   display: inline-block;
   text-align: center;
   min-width: calc(0.5 * var(--spacing-medium));

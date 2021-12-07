@@ -52,7 +52,8 @@ const SurahList = () => {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,
               })}
             >
-              {chapter.transliteratedName}
+              <span className={styles.chapterNumber}>{chapter.id}</span>
+              <span>{chapter.transliteratedName}</span>
             </div>
           </Link>
         ))}

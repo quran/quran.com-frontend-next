@@ -2,9 +2,11 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
-$tablet-size: calc(10 * var(--spacing-mega));
-
 .container {
+  --sidebar-size: calc(100% - (2 * var(--spacing-mega)));
+  @include breakpoints.tablet {
+    --sidebar-size: calc(10 * var(--spacing-mega));
+  }
   height: 100%;
   position: fixed;
   inset-block-start: 0;
@@ -14,11 +16,18 @@ $tablet-size: calc(10 * var(--spacing-mega));
   overflow-x: hidden;
   z-index: var(--z-index-default);
   transition: var(--transition-regular);
-  width: 0;
   box-sizing: border-box;
   border-inline-end: 1px solid var(--color-borders-hairline);
   overflow: hidden;
+  width: var(--sidebar-size);
+  margin-inline-start: calc(-1 * var(--sidebar-size));
 }
+
+.visibleContainer {
+  margin-inline-start: 0;
+  padding-inline: var(--spacing-large);
+}
+
 .header {
   display: flex;
 }
@@ -37,14 +46,6 @@ $tablet-size: calc(10 * var(--spacing-mega));
   }
 }
 
-.visibleContainer {
-  padding-inline: var(--spacing-large);
-  width: calc(100% - (2 * var(--spacing-mega)));
-  @include breakpoints.tablet {
-    width: $tablet-size;
-  }
-}
-
 .list {
   height: 90vh;
   overflow-y: auto;
@@ -52,8 +53,7 @@ $tablet-size: calc(10 * var(--spacing-mega));
   padding-block-end: calc(6 * var(--spacing-mega));
 }
 .listItem {
-  padding-block: var(--spacing-xxsmall);
-  padding-inline: var(--spacing-xsmall);
+  padding: var(--spacing-xsmall);
   border-radius: var(--border-radius-rounded);
   &:hover {
     background-color: var(--color-background-alternative-faded);
@@ -68,6 +68,8 @@ $tablet-size: calc(10 * var(--spacing-mega));
   flex: 2;
 }
 .verseListContainer {
+  padding-inline-start: var(--spacing-xsmall);
+  border-inline-start: 1px solid var(--color-borders-hairline);
   flex: 1;
 }
 
@@ -88,4 +90,23 @@ $tablet-size: calc(10 * var(--spacing-mega));
 
 .spaceOnTop {
   padding-block-start: calc(3.5 * var(--spacing-mega));
+}
+
+.chapterNumber {
+  display: inline-block;
+  width: calc(2 * var(--spacing-medium));
+}
+
+.tip {
+  margin-block: var(--spacing-medium);
+  display: none;
+  @include breakpoints.tablet {
+    display: block;
+  }
+  & > span {
+    font-style: italic;
+    color: var(--color-text-default);
+    opacity: var(--opacity-50);
+    margin-inline-end: var(--spacing-xsmall);
+  }
 }

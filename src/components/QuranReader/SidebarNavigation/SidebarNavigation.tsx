@@ -10,7 +10,8 @@ import IconClose from '../../../../public/icons/close.svg';
 
 import styles from './SidebarNavigation.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import KeyboardInput from 'src/components/dls/KeyboardInput';
 import Switch from 'src/components/dls/Switch/Switch';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
@@ -66,6 +67,7 @@ const SidebarNavigation = () => {
         <Button
           tooltip={t('close')}
           shape={ButtonShape.Circle}
+          size={ButtonSize.Small}
           variant={ButtonVariant.Ghost}
           onClick={() => {
             dispatch(setIsVisible(false));
@@ -74,6 +76,10 @@ const SidebarNavigation = () => {
           <IconClose />
         </Button>
       </div>
+      <p className={styles.tip}>
+        <span>{t('sidebar.try-navigating-with')}</span>
+        <KeyboardInput meta keyboardKey="K" />
+      </p>
       <div className={styles.contentContainer}>
         {selectedNavigationItem === NavigationItem.Surah && <SurahSelection />}
         {selectedNavigationItem === NavigationItem.Juz && <JuzSelection />}
