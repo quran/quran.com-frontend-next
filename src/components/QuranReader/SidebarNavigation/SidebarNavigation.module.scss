@@ -51,7 +51,10 @@ $tablet-size: calc(10 * var(--spacing-mega));
 }
 
 .list {
-  height: 80vh;
+  height: 75vh;
+  @include breakpoints.tablet {
+    height: 80vh;
+  }
   overflow-y: auto;
   box-sizing: border-box;
   padding-block-end: calc(2 * var(--spacing-mega));
