@@ -19,7 +19,7 @@ const useOutsideClickDetector = (
 ) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // do not trigger, if maxWidth is specificed
+      // if maxWidth is specified and clientWidth is greater than maxWidth, do not trigger `onClickOutsideDetected`
       if (options?.maxWidth && document.documentElement.clientWidth > options.maxWidth) return;
 
       // if we click on an element inside the document that is not an inclusive descendant of the ref node.
