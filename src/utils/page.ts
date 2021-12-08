@@ -46,3 +46,12 @@ export const isLastPage = (
   }
   return pageNumber === mushafTotalPages;
 };
+
+/**
+ * Return array of page id
+ *
+ * @returns {number[]}
+ */
+export const getPageIdsByMushaf = (mushaf: Mushaf = Mushaf.KFGQPCHAFS) => {
+  return [...Array(PAGES_MUSHAF_MAP[mushaf])].map((n, index) => index + 1);
+};
