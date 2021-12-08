@@ -6,13 +6,14 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
 const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const chapterIds = useChapterIdsByUrlPath();
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
@@ -31,11 +32,16 @@ const VerseList = () => {
       />
       <div className={styles.list}>
         {verseKeys.map((verseKey) => {
-          const verse = getVerseNumberFromKey(verseKey);
-          if (!verse.toString().startsWith(searchQuery)) return null;
+          const verseNumber = getVerseNumberFromKey(verseKey);
+          const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
+          if (
+            !localizedVerseNumber.toString().startsWith(searchQuery) &&
+            !verseNumber.toString().startsWith(searchQuery)
+          )
+            return null;
           return (
             <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
-              <div className={styles.listItem}>{verse}</div>
+              <div className={styles.listItem}>{localizedVerseNumber}</div>
             </Link>
           );
         })}

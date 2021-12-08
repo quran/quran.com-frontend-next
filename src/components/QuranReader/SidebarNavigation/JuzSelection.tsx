@@ -6,15 +6,15 @@ import { getJuzIds } from 'src/utils/juz';
 import { getJuzNavigationUrl } from 'src/utils/navigation';
 
 const JuzSelection = () => {
-  const juzIds = getJuzIds();
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const juzIds = getJuzIds(lang);
 
   return (
     <ScrollableSelection
       items={juzIds}
       getHref={getJuzNavigationUrl}
       searchPlaceholder={t('sidebar.search-juz')}
-      renderItem={(juzId) => `${t('juz')} ${juzId}`}
+      renderItem={(juz) => `${t('juz')} ${juz.label}`}
     />
   );
 };

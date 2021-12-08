@@ -6,15 +6,15 @@ import { getPageNavigationUrl } from 'src/utils/navigation';
 import { getPageIdsByMushaf } from 'src/utils/page';
 
 const PageSelection = () => {
-  const { t } = useTranslation('common');
-  const pageIds = getPageIdsByMushaf();
+  const { t, lang } = useTranslation('common');
+  const pageIds = getPageIdsByMushaf(lang);
 
   return (
     <ScrollableSelection
       items={pageIds}
       getHref={getPageNavigationUrl}
       searchPlaceholder={t('sidebar.search-page')}
-      renderItem={(item) => `${t('page')} ${item}`}
+      renderItem={(page) => `${t('page')} ${page.label}`}
     />
   );
 };

@@ -3,6 +3,7 @@ import TranslatedName from './TranslatedName';
 
 interface Chapter {
   id: number | string;
+  localizedId?: string;
   versesCount: number;
   bismillahPre: boolean;
   revelationOrder: number;

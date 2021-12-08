@@ -9,13 +9,14 @@ import styles from './SidebarNavigation.module.scss';
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 
 const filterSurah = (surah, searchQuery: string) => {
   const fuse = new Fuse(surah, {
     threshold: 0.3,
-    keys: ['id', 'transliteratedName'],
+    keys: ['id', 'localizedId', 'transliteratedName'],
   });
 
   const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
@@ -32,11 +33,14 @@ const SurahList = () => {
 
   const chapterDataArray = useMemo(
     () =>
-      Object.entries(chaptersData).map(([id, chapter]) => ({
-        ...chapter,
-        id,
-      })),
-    [chaptersData],
+      Object.entries(chaptersData).map(([id, chapter]) => {
+        return {
+          ...chapter,
+          id,
+          localizedId: toLocalizedNumber(Number(id), lang),
+        };
+      }),
+    [chaptersData, lang],
   );
 
   const filteredChapters = searchQuery
@@ -58,7 +62,7 @@ const SurahList = () => {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,
               })}
             >
-              <span className={styles.chapterNumber}>{chapter.id}</span>
+              <span className={styles.chapterNumber}>{chapter.localizedId}</span>
               <span>{chapter.transliteratedName}</span>
             </div>
           </Link>
