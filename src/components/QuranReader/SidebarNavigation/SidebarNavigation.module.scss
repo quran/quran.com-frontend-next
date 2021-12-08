@@ -51,8 +51,14 @@
   overflow-y: auto;
   box-sizing: border-box;
   padding-block-end: calc(9 * var(--spacing-mega));
+  display: flex;
+  flex-direction: column;
+  direction: ltr;
 }
 .listItem {
+  [dir="rtl"] & {
+    direction: rtl;
+  }
   padding: var(--spacing-xsmall);
   border-radius: var(--border-radius-rounded);
   &:hover {
