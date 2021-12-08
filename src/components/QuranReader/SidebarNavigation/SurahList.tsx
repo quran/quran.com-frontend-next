@@ -33,11 +33,13 @@ const SurahList = () => {
 
   const chapterDataArray = useMemo(
     () =>
-      Object.entries(chaptersData).map(([id, chapter]) => ({
-        ...chapter,
-        id,
-      })),
-    [chaptersData],
+      Object.entries(chaptersData).map(([id, chapter]) => {
+        return {
+          ...chapter,
+          id: toLocalizedNumber(Number(id), lang),
+        };
+      }),
+    [chaptersData, lang],
   );
 
   const filteredChapters = searchQuery
@@ -59,9 +61,7 @@ const SurahList = () => {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,
               })}
             >
-              <span className={styles.chapterNumber}>
-                {toLocalizedNumber(chapter.id as number, lang)}
-              </span>
+              <span className={styles.chapterNumber}>{chapter.id}</span>
               <span>{chapter.transliteratedName}</span>
             </div>
           </Link>

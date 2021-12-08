@@ -32,11 +32,11 @@ const VerseList = () => {
       />
       <div className={styles.list}>
         {verseKeys.map((verseKey) => {
-          const verse = getVerseNumberFromKey(verseKey);
+          const verse = toLocalizedNumber(getVerseNumberFromKey(verseKey), lang);
           if (!verse.toString().startsWith(searchQuery)) return null;
           return (
             <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
-              <div className={styles.listItem}>{toLocalizedNumber(verse, lang)}</div>
+              <div className={styles.listItem}>{verse}</div>
             </Link>
           );
         })}
