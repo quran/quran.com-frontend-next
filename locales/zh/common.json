@@ -184,6 +184,12 @@
     },
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
+    "sidebar": {
+        "search-juz": "搜索 Juz",
+        "search-page": "搜索页面",
+        "search-surah": "搜索古兰经",
+        "try-navigating-with": "提示：尝试导航"
+    },
     "sitemap": "网站地图",
     "sort": {
         "ascending": "上升",

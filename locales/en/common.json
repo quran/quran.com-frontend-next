@@ -185,9 +185,9 @@
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
     "sidebar": {
-        "search-surah": "Search surah",
         "search-juz": "Search Juz",
         "search-page": "Search Page",
+        "search-surah": "Search surah",
         "try-navigating-with": "Tip: try navigating with"
     },
     "sitemap": "Sitemap",

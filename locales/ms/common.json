@@ -184,6 +184,12 @@
     },
     "share": "Kongsi",
     "shared": "Pautan telah disalin ke papan keratan!",
+    "sidebar": {
+        "search-juz": "Cari Juz",
+        "search-page": "Halaman Carian",
+        "search-surah": "Cari surah",
+        "try-navigating-with": "Petua: cuba menavigasi dengan"
+    },
     "sitemap": "Peta laman",
     "sort": {
         "ascending": "Menaik",
