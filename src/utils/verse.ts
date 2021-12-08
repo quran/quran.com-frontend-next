@@ -121,7 +121,7 @@ export const sortWordLocation = (locations: string[]) =>
  * // returns '102'
  * formatChapterId('102')
  */
-export const formatChapterId = (id: string) => `0${id}`.slice(-2);
+export const formatChapterId = (id: string) => (id.length <= 1 ? `0${id}` : id);
 
 /**
  * Given the verseKey, return the verseUrl
