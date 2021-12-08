@@ -8,6 +8,7 @@ import styles from './SearchResults.module.scss';
 
 import Pagination from 'src/components/dls/Pagination/Pagination';
 import NavigationItem from 'src/components/Search/NavigationItem';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {
@@ -27,7 +28,7 @@ const SearchResults: React.FC<Props> = ({
   onPageChange,
   pageSize,
 }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   return (
     <>
       <div>
@@ -47,7 +48,8 @@ const SearchResults: React.FC<Props> = ({
           {isSearchDrawer ? (
             <div className={styles.resultsSummaryContainer}>
               <p>
-                {searchResult.pagination.totalRecords} {t('search.results')}
+                {toLocalizedNumber(searchResult.pagination.totalRecords, lang)}{' '}
+                {t('search.results')}
               </p>
               {searchResult.pagination.totalRecords > 0 && (
                 <Link href={`/search?query=${searchQuery}`} passHref>

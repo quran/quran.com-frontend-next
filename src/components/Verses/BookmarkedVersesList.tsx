@@ -7,10 +7,11 @@ import styles from './BookmarkedVersesList.module.scss';
 
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrl } from 'src/utils/navigation';
 
 const BookmarkedVersesList: React.FC = () => {
-  const { t } = useTranslation('home');
+  const { t, lang } = useTranslation('home');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const verseKeys = Object.keys(bookmarkedVerses);
   return (
@@ -24,7 +25,7 @@ const BookmarkedVersesList: React.FC = () => {
                 type={ButtonType.Success}
                 shape={ButtonShape.Pill}
               >
-                {verseKey}
+                {toLocalizedVerseKey(verseKey, lang)}
               </Button>
             ))}
           </div>

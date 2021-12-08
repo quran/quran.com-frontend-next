@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -22,6 +22,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 
 const TranslationSection = () => {
@@ -44,6 +45,11 @@ const TranslationSection = () => {
     [selectedTranslations],
   );
 
+  const localizedSelectedTranslations = useMemo(
+    () => toLocalizedNumber(selectedTranslations.length - 1, lang),
+    [selectedTranslations, lang],
+  );
+
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
       const firstSelectedTranslation = data.translations.find(
@@ -55,7 +61,7 @@ const TranslationSection = () => {
       if (selectedTranslations.length > 1)
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTranslation.name,
-          othersCount: selectedTranslations.length - 1,
+          othersCount: localizedSelectedTranslations,
         });
 
       return (
@@ -66,7 +72,7 @@ const TranslationSection = () => {
         />
       );
     },
-    [dispatch, selectedTranslations, t],
+    [dispatch, localizedSelectedTranslations, selectedTranslations, t],
   );
 
   return (

@@ -9,8 +9,8 @@ import FindLocationIcon from '../../../../public/icons/find-location.svg';
 import { ToastContainer } from '../../dls/Toast/Toast';
 
 import styles from './PrayerTimes.module.scss';
-import { formatLocation, formatTime, getNextPrayerTime } from './PrayerTimesHelper';
-import { PrayerTimesData, HijriDateData } from './PrayerTimesTypes';
+import { formatLocation, getNextPrayerTime } from './PrayerTimesHelper';
+import { PrayerTimesData } from './PrayerTimesTypes';
 
 import { fetcher } from 'src/api';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -23,6 +23,7 @@ import {
   setLocationAccess,
 } from 'src/redux/slices/prayerTimes';
 import { makePrayerTimesUrl } from 'src/utils/apiPaths';
+import { toLocalizedDate } from 'src/utils/locale';
 
 const getCoordinates = (): Promise<{
   latitude: number;
@@ -72,11 +73,11 @@ const usePrayerTimesData = () => {
 };
 
 const PrayerTimes = () => {
-  const { t } = useTranslation('');
+  const { t, lang } = useTranslation('');
   const dispatch = useDispatch();
   const prayerTimesData = usePrayerTimesData();
 
-  const hijriDate = useHijriDateFormatter(prayerTimesData?.hijriDateData);
+  const hijriDate = useHijriDateFormatter();
 
   if (!prayerTimesData) return null;
 
@@ -145,10 +146,7 @@ const PrayerTimes = () => {
               <span className={styles.prayerName}>
                 {t(`home:prayer-names.${nextPrayerTime.prayerName}`)}
               </span>{' '}
-              <span>
-                {formatTime(nextPrayerTime.time.getHours())}:
-                {formatTime(nextPrayerTime.time.getMinutes())}
-              </span>
+              <span>{toLocalizedDate(nextPrayerTime.time, lang, { timeStyle: 'short' })}</span>
             </div>
           )}
         </div>
@@ -158,19 +156,9 @@ const PrayerTimes = () => {
   );
 };
 
-const useHijriDateFormatter = (hijriDate?: HijriDateData) => {
-  const { t } = useTranslation('home');
-  if (!hijriDate) return null;
-
-  const month = t(`hijri-date.month.${hijriDate.month}`);
-
-  // Different language have different format to show the date, so we need to "format" it.
-  // For example in Indonesia we say "12 Muharram 1443" instead of "Muharram 12, 1443"
-  return t('hijri-date.format', {
-    date: hijriDate.date,
-    month,
-    year: hijriDate.year,
-  });
+const useHijriDateFormatter = () => {
+  const { lang } = useTranslation('home');
+  return toLocalizedDate(new Date(), lang, { calendar: 'islamic', dateStyle: 'long' });
 };
 
 export default PrayerTimes;

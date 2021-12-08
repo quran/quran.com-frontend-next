@@ -10,6 +10,7 @@ import NextIcon from '../../../../public/icons/caret-forward.svg';
 import styles from './Pagination.module.scss';
 
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+import { toLocalizedNumber } from 'src/utils/locale';
 
 interface Props {
   currentPage: number;
@@ -38,7 +39,7 @@ const Pagination: React.FC<Props> = ({
   siblingsCount = DEFAULT_SIBLINGS_COUNT,
   showSummary = true,
 }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const paginationRange = useMemo(() => {
     // Math.ceil is used to round the number to the next higher integer value e.g. 0.7 gets rounded to 1, 1.1 gets rounded to 2. This ensures that we are reserving an extra page for the remaining data.
     const totalPageCount = Math.ceil(totalCount / pageSize);
@@ -118,7 +119,7 @@ const Pagination: React.FC<Props> = ({
               variant={ButtonVariant.Ghost}
               onClick={() => onPageChange(pageNumber as number)}
             >
-              {pageNumber.toString()}
+              {toLocalizedNumber(Number(pageNumber), lang)}
             </Button>
           </div>
         );
@@ -136,9 +137,12 @@ const Pagination: React.FC<Props> = ({
       {showSummary && (
         <p className={styles.uppercase}>
           {t('pagination-summary', {
-            currentResultNumber: showingUntilItem - (pageSize - 1),
-            endOfResultNumber: totalCount < showingUntilItem ? totalCount : showingUntilItem,
-            totalNumberOfResults: totalCount,
+            currentResultNumber: toLocalizedNumber(showingUntilItem - (pageSize - 1), lang),
+            endOfResultNumber: toLocalizedNumber(
+              totalCount < showingUntilItem ? totalCount : showingUntilItem,
+              lang,
+            ),
+            totalNumberOfResults: toLocalizedNumber(totalCount, lang),
           })}
         </p>
       )}

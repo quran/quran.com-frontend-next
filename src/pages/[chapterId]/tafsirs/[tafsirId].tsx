@@ -8,6 +8,7 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getChapterData } from 'src/utils/chapter';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -32,14 +33,17 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   verseNumber,
   tafsirId,
 }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
   return (
     <>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${verseNumber}`}
+        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
+          Number(verseNumber),
+          lang,
+        )}`}
       />
       <QuranReader
         initialData={verses}

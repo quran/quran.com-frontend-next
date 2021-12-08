@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import MinusIcon from '../../../../public/icons/minus.svg';
@@ -6,6 +8,7 @@ import PlusIcon from '../../../../public/icons/plus.svg';
 import styles from './Counter.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import { toLocalizedNumber } from 'src/utils/locale';
 
 type CounterProps = {
   count: number | string;
@@ -24,7 +27,8 @@ type CounterProps = {
  * @returns {JSX.Element}
  */
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const localizedCount = useMemo(() => toLocalizedNumber(Number(count), lang), [count, lang]);
   return (
     <div className={styles.container}>
       <Button
@@ -36,7 +40,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
       >
         <MinusIcon />
       </Button>
-      <span className={styles.count}>{count}</span>
+      <span className={styles.count}>{localizedCount}</span>
       <Button
         tooltip={t('counter.increase')}
         variant={ButtonVariant.Ghost}

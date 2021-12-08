@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
 import { triggerSetCurrentTime } from './EventTriggers';
@@ -30,6 +31,8 @@ const AudioPlayerSlider = ({
   isMobileMinimizedForScrolling,
   audioPlayerElRef,
 }: SliderProps): JSX.Element => {
+  const router = useRouter();
+  const { locale } = router;
   const direction = useDirection();
   const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
   const audioDuration = audioPlayerElRef?.current?.duration || 0;
@@ -57,7 +60,7 @@ const AudioPlayerSlider = ({
         [styles.containerMinimized]: isMobileMinimizedForScrolling,
       })}
     >
-      <span className={styles.currentTime}>{secondsFormatter(currentTime)}</span>
+      <span className={styles.currentTime}>{secondsFormatter(currentTime, locale)}</span>
       <div
         className={classNames(styles.sliderContainer, {
           [styles.sliderContainerMinimized]: isMobileMinimizedForScrolling,
@@ -71,7 +74,7 @@ const AudioPlayerSlider = ({
           direction={direction as Direction}
         />
       </div>
-      <span className={styles.remainingTime}>{secondsFormatter(audioDuration)}</span>
+      <span className={styles.remainingTime}>{secondsFormatter(audioDuration, locale)}</span>
     </div>
   );
 };

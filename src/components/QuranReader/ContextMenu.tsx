@@ -12,6 +12,7 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
@@ -24,8 +25,15 @@ const ContextMenu = () => {
     return chapterId ? getChapterData(chapterId, lang) : null;
   }, [chapterId, lang]);
   const juzNumber = useMemo(() => {
-    return hizb ? getJuzNumberByHizb(Number(hizb)) : null;
-  }, [hizb]);
+    return hizb ? toLocalizedNumber(getJuzNumberByHizb(Number(hizb)), lang) : null;
+  }, [hizb, lang]);
+  const localizedHizb = useMemo(() => {
+    return toLocalizedNumber(Number(hizb), lang);
+  }, [hizb, lang]);
+  const localizedPageNumber = useMemo(() => {
+    return toLocalizedNumber(Number(page), lang);
+  }, [page, lang]);
+
   // if it's SSR or the first time we render this
   if (!verseKey) {
     return <></>;
@@ -57,11 +65,11 @@ const ContextMenu = () => {
             <p className={classNames(styles.alignEnd)}>
               {isExpanded && (
                 <span className={styles.secondaryInfo}>
-                  {t('juz')} {juzNumber} / {t('hizb')} {hizb} -{' '}
+                  {t('juz')} {juzNumber} / {t('hizb')} {localizedHizb} -{' '}
                 </span>
               )}
               <span className={styles.primaryInfo}>
-                {t('page')} {page}
+                {t('page')} {localizedPageNumber}
               </span>
             </p>
           </div>

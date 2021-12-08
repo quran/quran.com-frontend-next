@@ -9,6 +9,7 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -23,7 +24,7 @@ interface Props {
 }
 
 const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const {
     query: { pageId },
   } = useRouter();
@@ -32,7 +33,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   }
   return (
     <>
-      <NextSeoWrapper title={`${t('page')} ${pageId}`} />
+      <NextSeoWrapper title={`${t('page')} ${toLocalizedNumber(Number(pageId), lang)}`} />
       <QuranReader
         initialData={pageVerses}
         id={String(pageId)}

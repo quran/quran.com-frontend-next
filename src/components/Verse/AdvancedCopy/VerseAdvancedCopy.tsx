@@ -20,6 +20,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 import { generateChapterVersesKeys } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -134,7 +135,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           id: chapterVersesKey,
           name: chapterVersesKey,
           value: chapterVersesKey,
-          label: chapterVersesKey,
+          label: toLocalizedVerseKey(chapterVersesKey, lang),
         })),
       );
       // set the first verse's key as the default range's start verse.
@@ -230,7 +231,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           {
             value: SINGLE_VERSE,
             id: SINGLE_VERSE,
-            label: `${t('current-verse')} ${verse.verseKey}`,
+            label: `${t('current-verse')} ${toLocalizedVerseKey(verse.verseKey, lang)}`,
           },
           {
             value: MULTIPLE_VERSES,
@@ -243,8 +244,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         <VersesRangeSelector
           isVisible={showRangeOfVerses}
           dropdownItems={rangeVersesItems}
-          rangeStartVerse={rangeStartVerse}
-          rangeEndVerse={rangeEndVerse}
+          rangeStartVerse={toLocalizedVerseKey(rangeStartVerse, lang)}
+          rangeEndVerse={toLocalizedVerseKey(rangeEndVerse, lang)}
           onChange={onRangeBoundariesChange}
         />
       )}

@@ -1,5 +1,6 @@
 .bismillah {
   font-size: var(--font-size-large);
+  font-family: initial !important; // to over-ride the arabic font NotoNaskhArabic which changes how it looks like
 }
 
 .bismillahSmall {

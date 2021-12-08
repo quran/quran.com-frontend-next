@@ -16,15 +16,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  :lang(ar) {
-    font-family: "Al-Jazeera", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  :lang(ar),
+  :lang(ur) {
+    font-family: "nafees", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
   :lang(bn) {
     font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
       Arial;
-  }
-  :lang(ur) {
-    font-family: "nafees", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 }
 

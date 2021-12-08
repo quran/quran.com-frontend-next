@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,14 +9,21 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import { selectPlaybackRate, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import { toLocalizedNumber } from 'src/utils/locale';
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const currentPlaybackRate = useSelector(selectPlaybackRate);
 
-  const getPlaybackRateLabel = (playbackRate) =>
-    playbackRate === 1 ? t('audio.playback-normal') : playbackRate;
+  const getPlaybackRateLabel = useCallback(
+    (playbackRate) => {
+      return playbackRate === 1
+        ? t('audio.playback-normal')
+        : toLocalizedNumber(playbackRate, lang);
+    },
+    [lang, t],
+  );
 
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item
