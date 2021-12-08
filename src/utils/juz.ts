@@ -26,5 +26,11 @@ export const isLastJuz = (juzNumber: number): boolean => juzNumber === 30;
 
 const TOTAL_QURAN_JUZ = 30;
 export const getJuzIds = (lang: string) => {
-  return [...Array(TOTAL_QURAN_JUZ)].map((n, index) => toLocalizedNumber(index + 1, lang));
+  return [...Array(TOTAL_QURAN_JUZ)].map((n, index) => {
+    const juz = index + 1;
+    return {
+      value: juz,
+      label: toLocalizedNumber(juz, lang),
+    };
+  });
 };

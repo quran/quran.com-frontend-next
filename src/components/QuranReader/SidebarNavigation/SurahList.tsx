@@ -16,7 +16,7 @@ import Chapter from 'types/Chapter';
 const filterSurah = (surah, searchQuery: string) => {
   const fuse = new Fuse(surah, {
     threshold: 0.3,
-    keys: ['id', 'transliteratedName'],
+    keys: ['id', 'localizedId', 'transliteratedName'],
   });
 
   const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
@@ -36,7 +36,8 @@ const SurahList = () => {
       Object.entries(chaptersData).map(([id, chapter]) => {
         return {
           ...chapter,
-          id: toLocalizedNumber(Number(id), lang),
+          id,
+          localizedId: toLocalizedNumber(Number(id), lang),
         };
       }),
     [chaptersData, lang],
@@ -61,7 +62,7 @@ const SurahList = () => {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,
               })}
             >
-              <span className={styles.chapterNumber}>{chapter.id}</span>
+              <span className={styles.chapterNumber}>{chapter.localizedId}</span>
               <span>{chapter.transliteratedName}</span>
             </div>
           </Link>

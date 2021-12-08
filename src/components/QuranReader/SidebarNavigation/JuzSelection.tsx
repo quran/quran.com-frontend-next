@@ -14,7 +14,7 @@ const JuzSelection = () => {
       items={juzIds}
       getHref={getJuzNavigationUrl}
       searchPlaceholder={t('sidebar.search-juz')}
-      renderItem={(juzId) => `${t('juz')} ${juzId}`}
+      renderItem={(juz) => `${t('juz')} ${juz.label}`}
     />
   );
 };

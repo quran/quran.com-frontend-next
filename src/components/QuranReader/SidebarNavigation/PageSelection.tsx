@@ -14,7 +14,7 @@ const PageSelection = () => {
       items={pageIds}
       getHref={getPageNavigationUrl}
       searchPlaceholder={t('sidebar.search-page')}
-      renderItem={(page) => `${t('page')} ${page}`}
+      renderItem={(page) => `${t('page')} ${page.label}`}
     />
   );
 };

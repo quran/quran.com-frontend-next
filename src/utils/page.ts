@@ -55,5 +55,8 @@ export const isLastPage = (
  * @returns {number[]}
  */
 export const getPageIdsByMushaf = (lang: string, mushaf: Mushaf = Mushaf.KFGQPCHAFS) => {
-  return [...Array(PAGES_MUSHAF_MAP[mushaf])].map((n, index) => toLocalizedNumber(index + 1, lang));
+  return [...Array(PAGES_MUSHAF_MAP[mushaf])].map((n, index) => {
+    const page = index + 1;
+    return { value: page, label: toLocalizedNumber(page, lang) };
+  });
 };

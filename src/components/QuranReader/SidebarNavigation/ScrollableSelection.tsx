@@ -17,7 +17,11 @@ const ScrollableSelection = ({ items, searchPlaceholder, renderItem, getHref }) 
       />
       <div className={styles.list}>
         {items
-          .filter((item) => item.toString().startsWith(searchQuery))
+          .filter(
+            (item) =>
+              item.value.toString().startsWith(searchQuery) ||
+              item.label.toString().startsWith(searchQuery),
+          )
           .map((item) => (
             <Link href={getHref(item)}>
               <div className={styles.listItem}>{renderItem(item)}</div>
