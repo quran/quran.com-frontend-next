@@ -2,9 +2,9 @@
 /* eslint-disable import/prefer-default-export */
 import findKey from 'lodash/findKey';
 
-import { getBasePath } from './url';
+import i18nConfig from '../../i18n.json';
 
-import i18nConfig from 'i18n.json';
+import { getBasePath } from './url';
 
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
 const LOCALE_NAME = {
