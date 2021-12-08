@@ -1,11 +1,8 @@
 import React from 'react';
 
-// import IconCollection from '../../../../../public/icons/collection.svg';
-// import IconDonate from '../../../../../public/icons/donate.svg';
-// import IconRadio2 from '../../../../../public/icons/radio-2.svg';
-// import IconUpdates from '../../../../../public/icons/updates.svg';
 import useTranslation from 'next-translate/useTranslation';
 
+import IconCollection from '../../../../../public/icons/collection.svg';
 import IconDevelopers from '../../../../../public/icons/developers.svg';
 import IconFeedback from '../../../../../public/icons/feedback.svg';
 import IconHome from '../../../../../public/icons/home.svg';
@@ -16,10 +13,14 @@ import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
 import CommunitySection from '../CommunitySection';
-import MobileApps from '../MobileApps';
+// import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
+
+// import IconDonate from '../../../../../public/icons/donate.svg';
+// import IconRadio2 from '../../../../../public/icons/radio-2.svg';
+// import IconUpdates from '../../../../../public/icons/updates.svg';
 
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
@@ -43,6 +44,8 @@ const NavigationDrawerBody = () => {
         href="https://feedback.quran.com/"
         isExternalLink
       />
+      <NavigationDrawerItem title={t('applications')} icon={<IconCollection />} href="/apps" />
+      <NavigationDrawerItem title={t('tarteel.name')} icon={<IconCollection />} href="/tarteel" />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
       {/* <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} /> */}
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
@@ -89,7 +92,6 @@ const NavigationDrawerBody = () => {
         href="https://quranreflect.com/"
         isExternalLink
       />
-      <MobileApps />
     </div>
   );
 };
