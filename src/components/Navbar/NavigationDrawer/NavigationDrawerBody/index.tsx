@@ -45,7 +45,12 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem title={t('applications')} icon={<IconCollection />} href="/apps" />
-      <NavigationDrawerItem title={t('tarteel.name')} icon={<IconCollection />} href="/tarteel" />
+      <NavigationDrawerItem
+        isExternalLink
+        title={t('tarteel.name')}
+        icon={<IconCollection />}
+        href="https://www.tarteel.ai/"
+      />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
       {/* <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} /> */}
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
