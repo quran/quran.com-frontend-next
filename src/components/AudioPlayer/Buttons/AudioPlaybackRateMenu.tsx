@@ -8,12 +8,13 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import { selectPlaybackRate, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 
-const getPlaybackRateLabel = (playbackRate) => (playbackRate === 1 ? 'Normal' : playbackRate);
-
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const currentPlaybackRate = useSelector(selectPlaybackRate);
+
+  const getPlaybackRateLabel = (playbackRate) =>
+    playbackRate === 1 ? t('audio.playback-normal') : playbackRate;
 
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item

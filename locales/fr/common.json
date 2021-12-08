@@ -7,6 +7,7 @@
             "title": "Défilement automatique"
         },
         "play": "Lire le son",
+        "playback-normal": "Normal",
         "playback-speed": "Vitesse de lecture",
         "playback-speed-unit": "X",
         "player": {
