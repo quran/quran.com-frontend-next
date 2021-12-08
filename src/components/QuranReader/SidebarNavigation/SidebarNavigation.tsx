@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import { useRef } from 'react';
 
 import classNames from 'classnames';
@@ -11,6 +12,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import Switch from 'src/components/dls/Switch/Switch';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
@@ -22,9 +24,17 @@ import {
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
 
-const JuzSelection = dynamic(() => import('./JuzSelection'));
-const PageSelection = dynamic(() => import('./PageSelection'));
-const SurahSelection = dynamic(() => import('./SurahSelection'));
+const Loading = () => (
+  <div className={styles.loadingContainer}>
+    <Spinner />
+  </div>
+);
+
+const PageSelection = dynamic(() => import('./PageSelection'), { loading: Loading });
+const SurahSelection = dynamic(() => import('./SurahSelection'), { loading: Loading });
+const JuzSelection = dynamic(() => import('./JuzSelection'), {
+  loading: Loading,
+});
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
