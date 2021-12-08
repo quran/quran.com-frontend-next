@@ -10,7 +10,7 @@ const LOCALE_PRELOADED_FONTS = {
     { type: 'font/woff2', location: 'ProximaVara/proxima_vara_semibold.woff2' },
     { type: 'font/woff2', location: 'ProximaVara/proxima_vara_bold.woff2' },
   ],
-  ar: [{ type: 'font/woff2', location: 'NotoNaskhArabic/NotoNaskhArabic-Regular.ttf' }],
+  ar: [{ type: 'font/woff2', location: 'urdu/NotoNaskhArabic-Regular.woff' }],
   bn: [{ type: 'font/ttf', location: 'NotoSerifBengali/NotoSerifBengali-Regular.ttf' }],
   ur: [{ type: 'font/woff2', location: 'urdu/NotoNaskhArabic-Regular.woff' }],
 } as Record<string, { type: string; location: string }[]>;

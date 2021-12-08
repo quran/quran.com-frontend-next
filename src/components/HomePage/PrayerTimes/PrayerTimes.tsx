@@ -158,7 +158,7 @@ const PrayerTimes = () => {
 
 const useHijriDateFormatter = () => {
   const { lang } = useTranslation('home');
-  return toLocalizedDate(new Date(), lang, { calendar: 'islamic', dateStyle: 'full' });
+  return toLocalizedDate(new Date(), lang, { calendar: 'islamic', dateStyle: 'long' });
 };
 
 export default PrayerTimes;
