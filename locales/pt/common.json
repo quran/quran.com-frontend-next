@@ -184,6 +184,12 @@
     },
     "share": "Compartilhado",
     "shared": "O link foi copiado para a área de transferência!",
+    "sidebar": {
+        "search-juz": "Pesquisar Juz",
+        "search-page": "Página de Pesquisa",
+        "search-surah": "Surata de pesquisa",
+        "try-navigating-with": "Dica: tente navegar com"
+    },
     "sitemap": "Mapa do site",
     "sort": {
         "ascending": "Ascendente",

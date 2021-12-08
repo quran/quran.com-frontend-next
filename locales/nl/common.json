@@ -184,6 +184,12 @@
     },
     "share": "Deel",
     "shared": "Link is gekopieerd naar het klembord!",
+    "sidebar": {
+        "search-juz": "Zoek Juz",
+        "search-page": "Zoekpagina",
+        "search-surah": "zoek soera",
+        "try-navigating-with": "Tip: probeer te navigeren met"
+    },
     "sitemap": "Sitemap",
     "sort": {
         "ascending": "Oplopend",
