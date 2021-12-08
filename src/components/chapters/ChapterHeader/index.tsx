@@ -17,7 +17,6 @@ import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { getChapterData } from 'src/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
-import { formatChapterId } from 'src/utils/verse';
 
 interface Props {
   chapterId: string;
@@ -69,9 +68,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
           </div>
         </div>
         <div className={styles.right}>
-          <div className={styles.chapterId}>
-            {toLocalizedNumber(Number(formatChapterId(chapterId)), lang)}
-          </div>
+          <div className={styles.chapterId}>{toLocalizedNumber(Number(chapterId), lang, true)}</div>
           <div className={styles.arabicSurahNameContainer}>
             <ChapterIconContainer
               chapterId={chapterId}

@@ -257,19 +257,48 @@ export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];
  *
  * @param {number} value
  * @param {string} locale
+ * @param {boolean} showLeadingZero
+ * @param {Intl.NumberFormatOptions} options
  * @returns {string}
  */
 // Intl.NumberFormat is performance heavy so we are caching the formatter.
 let numberFormatter: Intl.NumberFormat = null;
 let currentLanguageLocale: string = null;
-export const toLocalizedNumber = (value: number, locale: string) => {
+export const toLocalizedNumber = (
+  value: number,
+  locale: string,
+  showLeadingZero = false,
+  options: Intl.NumberFormatOptions = {},
+) => {
   if (numberFormatter && currentLanguageLocale === locale) {
-    return numberFormatter.format(value);
+    return getFormattedNumber(numberFormatter, value, showLeadingZero);
   }
   currentLanguageLocale = locale;
   const fullLocale = LANG_LOCALE_MAP[locale];
-  numberFormatter = new Intl.NumberFormat(fullLocale);
-  return numberFormatter.format(value);
+  numberFormatter = new Intl.NumberFormat(fullLocale, options);
+  return getFormattedNumber(numberFormatter, value, showLeadingZero);
+};
+
+/**
+ * Get the formatted localized number. This either returns
+ * the original value or prepends a leading 0 to the beginning
+ * of the string if it's allowed and the value is below 10.
+ *
+ * @param {Intl.NumberFormat} formatter
+ * @param {number} value
+ * @param {boolean} showLeadingZero
+ * @returns {string}
+ */
+const getFormattedNumber = (
+  formatter: Intl.NumberFormat,
+  value: number,
+  showLeadingZero: boolean,
+): string => {
+  const formattedNumber = formatter.format(value);
+  if (!showLeadingZero || value >= 10) {
+    return formattedNumber;
+  }
+  return `${formatter.format(0)}${formattedNumber}`;
 };
 
 /**
