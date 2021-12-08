@@ -7,16 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import BackIcon from '../../../../public/icons/west.svg';
 
+import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
 
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SettingsBodySkeleton />,
 });
 
 const ReciterSelectionBody = dynamic(() => import('./ReciterSelectionBody'), {
@@ -27,7 +27,7 @@ const TranslationSelectionBody = dynamic(() => import('./TranslationSelectionBod
   ssr: false,
 });
 
-const TafisrSelectionBody = dynamic(() => import('./TafsirSelectionBody'), {
+const TafsirSelectionBody = dynamic(() => import('./TafsirSelectionBody'), {
   ssr: false,
 });
 
@@ -59,7 +59,7 @@ const SettingsDrawer = () => {
         <TranslationSelectionBody />
       )}
       {isSettingsDrawerOpen && settingsView === SettingsView.Reciter && <ReciterSelectionBody />}
-      {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafisrSelectionBody />}
+      {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafsirSelectionBody />}
     </Drawer>
   );
 };

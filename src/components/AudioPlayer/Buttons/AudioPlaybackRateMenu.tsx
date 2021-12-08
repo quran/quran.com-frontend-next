@@ -14,11 +14,16 @@ import { toLocalizedNumber } from 'src/utils/locale';
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const getPlaybackRateLabel = useCallback(
-    (playbackRate) => (playbackRate === 1 ? 'Normal' : toLocalizedNumber(playbackRate, lang)),
-    [lang],
-  );
   const currentPlaybackRate = useSelector(selectPlaybackRate);
+
+  const getPlaybackRateLabel = useCallback(
+    (playbackRate) => {
+      return playbackRate === 1
+        ? t('audio.playback-normal')
+        : toLocalizedNumber(playbackRate, lang);
+    },
+    [lang, t],
+  );
 
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item

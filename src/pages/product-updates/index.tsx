@@ -10,10 +10,8 @@ import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import Page from 'src/components/Notion/Page';
 import { retrieveBlockChildren, retrieveDatabase } from 'src/lib/notion';
 import Error from 'src/pages/_error';
-import {
-  ONE_DAY_REVALIDATION_PERIOD_SECONDS,
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-} from 'src/utils/staticPageGeneration';
+import { getRevalidationTime } from 'src/utils/notion';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from 'src/utils/staticPageGeneration';
 
 interface Props {
   hasError?: boolean;
@@ -56,7 +54,7 @@ export const getStaticProps: GetStaticProps = async () => {
         pages,
         pagesBlocks,
       },
-      revalidate: ONE_DAY_REVALIDATION_PERIOD_SECONDS,
+      revalidate: getRevalidationTime(pagesBlocks),
     };
   } catch (error) {
     return {

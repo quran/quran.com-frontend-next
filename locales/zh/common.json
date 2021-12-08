@@ -7,6 +7,7 @@
             "title": "自动滚屏"
         },
         "play": "播放音频",
+        "playback-normal": "普通的",
         "playback-speed": "播放速度",
         "playback-speed-unit": "X",
         "player": {

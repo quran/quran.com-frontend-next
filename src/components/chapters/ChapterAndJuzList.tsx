@@ -3,26 +3,17 @@ import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
 
 import CaretDownIcon from '../../../public/icons/caret-down.svg';
 import Link from '../dls/Link/Link';
-import Spinner from '../dls/Spinner/Spinner';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
+import JuzView from './JuzView';
 
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import Chapter from 'types/Chapter';
-
-const JuzView = dynamic(() => import('./JuzView'), {
-  loading: () => (
-    <div className={styles.loadingContainer}>
-      <Spinner />
-    </div>
-  ),
-});
 
 enum View {
   Surah = 'surah',

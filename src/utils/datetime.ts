@@ -22,4 +22,19 @@ export const secondsFormatter = (seconds: number, locale: string) => {
  */
 export const milliSecondsToSeconds = (milliSeconds: number): number => milliSeconds / 1000;
 
-export default secondsFormatter;
+/**
+ * Get the earliest date of a groups of date string.
+ *
+ * @param {string[]} dates
+ * @returns {number}
+ */
+export const getEarliestDate = (dates: string[]): number =>
+  dates.map((dateString) => parseDate(dateString)).sort((a, b) => a - b)[0];
+
+/**
+ * Parse a date string.
+ *
+ * @param {string} date
+ * @returns {number}
+ */
+export const parseDate = (date: string): number => Date.parse(date);

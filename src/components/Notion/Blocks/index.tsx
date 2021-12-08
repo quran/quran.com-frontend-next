@@ -4,8 +4,6 @@ import styles from './Blocks.module.scss';
 
 import Text from 'src/components/Changelog/Text';
 
-export const getPageTitle = (page) => (!page ? null : page.properties.Name.title[0].plain_text);
-
 export const renderBlock = (block) => {
   const { type } = block;
   const value = block[type];

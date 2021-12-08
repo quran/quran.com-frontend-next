@@ -1,0 +1,42 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: var(--spacing-xxsmall);
+}
+
+.titleSkeleton {
+  width: calc(3 * var(--spacing-mega));
+  height: var(--spacing-medium);
+}
+
+.rowSkeleton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inputRow {
+  margin-block-end: var(--spacing-large);
+  padding-block-end: var(--spacing-large);
+  border-bottom: 1px solid;
+  border-color: var(--color-secondary-faded);
+}
+
+.label {
+  margin: var(--spacing-xxsmall);
+  margin-inline-end: auto;
+  width: 20%;
+  height: var(--spacing-large);
+}
+
+.input {
+  margin: var(--spacing-medium);
+  width: 60%;
+  height: calc(2 * var(--spacing-small));
+}

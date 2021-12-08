@@ -1,14 +1,6 @@
+@use "src/styles/theme";
 $baseSize: var(--spacing-mega);
 $animationDuration: 8s;
-
-@keyframes loading {
-  from {
-    background-position: 200% 0;
-  }
-  to {
-    background-position: -200% 0;
-  }
-}
 
 .baseSize {
   height: $baseSize;
@@ -23,18 +15,17 @@ $animationDuration: 8s;
 
 .active::before {
   border-radius: var(--border-radius-default);
-  background-image: linear-gradient(
-    270deg,
-    var(--shade-0),
-    var(--shade-1),
-    var(--shade-2),
-    var(--shade-1),
-    var(--shade-0)
-  );
-  background-size: 400% 100%; // increase background size's width to 4x to make background animate-able
-  animation: loading $animationDuration ease-in-out infinite;
 
-  content: "";
+  @include theme.light {
+    background-color: var(--color-secondary-faded);
+  }
+  @include theme.dark {
+    background-color: var(--color-background-alternative-faded);
+  }
+
+  animation: 1.5s ease-in-out 0.5s infinite normal none running loading;
+
+  content: " ";
   position: absolute;
 
   // using -1px to avoid some part of children border leaking outside
@@ -47,6 +38,14 @@ $animationDuration: 8s;
   border-radius: var(--border-radius-circle);
 }
 
-.squared::before {
-  border-radius: var(--border-radius-sharp);
+@keyframes loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
 }
