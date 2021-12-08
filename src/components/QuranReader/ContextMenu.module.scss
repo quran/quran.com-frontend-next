@@ -113,3 +113,9 @@
   transition: var(--transition-fast);
   transform: rotate(180deg);
 }
+.disabledOnMobile {
+  pointer-events: none;
+  @include breakpoints.tablet {
+    pointer-events: inherit;
+  }
+}

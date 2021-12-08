@@ -30,8 +30,12 @@ const Loading = () => (
   </div>
 );
 
-const PageSelection = dynamic(() => import('./PageSelection'), { loading: Loading });
-const SurahSelection = dynamic(() => import('./SurahSelection'), { loading: Loading });
+const PageSelection = dynamic(() => import('./PageSelection'), {
+  loading: Loading,
+});
+const SurahSelection = dynamic(() => import('./SurahSelection'), {
+  loading: Loading,
+});
 const JuzSelection = dynamic(() => import('./JuzSelection'), {
   loading: Loading,
 });

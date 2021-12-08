@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ScrollableSelection from './ScrollableSelection';
 
+import { getPageNavigationUrl } from 'src/utils/navigation';
 import { getPageIdsByMushaf } from 'src/utils/page';
 
 const PageSelection = () => {
@@ -11,6 +12,7 @@ const PageSelection = () => {
   return (
     <ScrollableSelection
       items={pageIds}
+      getHref={getPageNavigationUrl}
       searchPlaceholder={t('sidebar.search-page')}
       renderItem={(item) => `${t('page')} ${item}`}
     />

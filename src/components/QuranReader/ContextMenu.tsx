@@ -57,8 +57,13 @@ const ContextMenu = () => {
         <div className={styles.section}>
           <div className={classNames(styles.row)}>
             <p
-              className={classNames(styles.bold, styles.alignStart, styles.surahName)}
-              onClick={() => {
+              className={classNames(styles.bold, styles.alignStart, styles.surahName, {
+                [styles.disabledOnMobile]: isSidebarNavigationVisible,
+                // on mobile, the click event is conflicting with `onClickOutside`,
+                // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
+              })}
+              onClick={(e) => {
+                e.stopPropagation();
                 dispatch(setIsVisible(!isSidebarNavigationVisible));
               }}
             >
@@ -75,7 +80,11 @@ const ContextMenu = () => {
         </div>
         <div className={classNames(styles.section, styles.leftSection)}>
           <div className={classNames(styles.row)}>
-            <p className={classNames(styles.alignEnd, { [styles.hide]: !isExpanded })} />
+            <p
+              className={classNames(styles.alignEnd, {
+                [styles.hide]: !isExpanded,
+              })}
+            />
             <p className={classNames(styles.alignEnd)}>
               {isExpanded && (
                 <span className={styles.secondaryInfo}>
