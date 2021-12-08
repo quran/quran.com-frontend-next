@@ -52,6 +52,6 @@ export const isLastPage = (
  *
  * @returns {number[]}
  */
-export const getPageIds = (mushaf: Mushaf = Mushaf.KFGQPCHAFS) => {
+export const getPageIdsByMushaf = (mushaf: Mushaf = Mushaf.KFGQPCHAFS) => {
   return [...Array(PAGES_MUSHAF_MAP[mushaf])].map((n, index) => index + 1);
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,11 +13,13 @@ const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const chapterIds = useChapterIdsByUrlPath();
   const { t } = useTranslation('common');
-  if (!chapterIds || chapterIds.length === 0) return null;
 
-  const currentChapterId = chapterIds[0];
+  const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  const verseKeys = generateChapterVersesKeys(currentChapterId);
+  const verseKeys = useMemo(
+    () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),
+    [currentChapterId],
+  );
 
   return (
     <div className={styles.verseListContainer}>

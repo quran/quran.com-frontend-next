@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { useRef } from 'react';
 
 import classNames from 'classnames';
@@ -16,7 +15,6 @@ import Switch from 'src/components/dls/Switch/Switch';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import {
-  navigationItems,
   selectIsSidebarNavigationVisible,
   selectNavigationItem,
   selectSelectedNavigationItem,
@@ -28,7 +26,6 @@ const JuzSelection = dynamic(() => import('./JuzSelection'));
 const PageSelection = dynamic(() => import('./PageSelection'));
 const SurahSelection = dynamic(() => import('./SurahSelection'));
 
-const TABLET_WIDTH = 768;
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isVisible = useSelector(selectIsSidebarNavigationVisible);
@@ -42,9 +39,23 @@ const SidebarNavigation = () => {
     () => {
       dispatch(setIsVisible(false));
     },
-    true,
-    { maxWidth: TABLET_WIDTH },
+    isMobile(),
   );
+
+  const navigationItems = [
+    {
+      name: t('surah'),
+      value: NavigationItem.Surah,
+    },
+    {
+      name: t('juz'),
+      value: NavigationItem.Juz,
+    },
+    {
+      name: t('page'),
+      value: NavigationItem.Page,
+    },
+  ];
 
   return (
     <div
@@ -60,7 +71,7 @@ const SidebarNavigation = () => {
             items={navigationItems}
             selected={selectedNavigationItem}
             onSelect={(value) => {
-              dispatch(selectNavigationItem(value));
+              dispatch(selectNavigationItem(value as NavigationItem));
             }}
           />
         </div>
@@ -87,6 +98,12 @@ const SidebarNavigation = () => {
       </div>
     </div>
   );
+};
+
+const TABLET_WIDTH = 768;
+const isMobile = () => {
+  if (typeof document === 'undefined') return false;
+  return document.documentElement.clientWidth < TABLET_WIDTH;
 };
 
 export default SidebarNavigation;

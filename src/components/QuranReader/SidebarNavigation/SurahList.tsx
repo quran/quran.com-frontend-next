@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
@@ -9,6 +9,7 @@ import styles from './SidebarNavigation.module.scss';
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { getSurahNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 
 const filterSurah = (surah, searchQuery: string) => {
@@ -24,15 +25,20 @@ const filterSurah = (surah, searchQuery: string) => {
 const SurahList = () => {
   const chapterIds = useChapterIdsByUrlPath();
   const currentChapterId = chapterIds[0];
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
-  const chaptersData = getAllChaptersData();
+  const chaptersData = getAllChaptersData(lang);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const chapterDataArray = Object.entries(chaptersData).map(([id, chapter]) => ({
-    ...chapter,
-    id,
-  }));
+  const chapterDataArray = useMemo(
+    () =>
+      Object.entries(chaptersData).map(([id, chapter]) => ({
+        ...chapter,
+        id,
+      })),
+    [chaptersData],
+  );
+
   const filteredChapters = searchQuery
     ? filterSurah(chapterDataArray, searchQuery)
     : chapterDataArray;
@@ -46,7 +52,7 @@ const SurahList = () => {
       />
       <div className={styles.list}>
         {filteredChapters.map((chapter) => (
-          <Link href={`/${chapter.id}`}>
+          <Link href={getSurahNavigationUrl(chapter.id)}>
             <div
               className={classNames(styles.listItem, {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,

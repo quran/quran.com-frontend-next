@@ -13,21 +13,6 @@ export enum NavigationItem {
   Page = 'page',
 }
 
-export const navigationItems = [
-  {
-    name: 'Surah',
-    value: NavigationItem.Surah,
-  },
-  {
-    name: 'Juz',
-    value: NavigationItem.Juz,
-  },
-  {
-    name: 'Page',
-    value: NavigationItem.Page,
-  },
-];
-
 const initialState: SidebarNavigation = {
   isVisible: false,
   selectedNavigationItem: NavigationItem.Surah,
@@ -41,7 +26,7 @@ export const sidebarNavigationSlice = createSlice({
       ...state,
       isVisible: action.payload,
     }),
-    selectNavigationItem: (state: SidebarNavigation, action: PayloadAction<string>) => ({
+    selectNavigationItem: (state: SidebarNavigation, action: PayloadAction<NavigationItem>) => ({
       ...state,
       selectedNavigationItem: action.payload,
     }),
