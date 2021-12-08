@@ -184,6 +184,12 @@
     },
     "share": "Shpërndaje",
     "shared": "Lidhja është kopjuar në kujtesën e fragmenteve!",
+    "sidebar": {
+        "search-juz": "Kërko Juz",
+        "search-page": "Kërko Faqja",
+        "search-surah": "Kërko suren",
+        "try-navigating-with": "Këshillë: provoni të lundroni me"
+    },
     "sitemap": "Harta e faqes",
     "sort": {
         "ascending": "Në ngjitje",
