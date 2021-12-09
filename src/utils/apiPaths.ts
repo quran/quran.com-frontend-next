@@ -133,6 +133,16 @@ export const makeChapterInfoUrl = (chapterId: string, language: string): string 
   makeUrl(`/chapters/${chapterId}/info`, { language });
 
 /**
+ * Compose the url for the chapter's API.
+ *
+ * @param {string} chapterIdOrSlug the chapter Id or the slug.
+ * @param {string} language the user's language code.
+ * @returns {string}
+ */
+export const makeChapterUrl = (chapterIdOrSlug: string, language: string): string =>
+  makeUrl(`/chapters/${chapterIdOrSlug}`, { language });
+
+/**
  * Compose the url for Juz's verses API.
  *
  * @param {string} id  the Id of the juz.

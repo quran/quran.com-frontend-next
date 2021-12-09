@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -37,8 +36,6 @@ const FALSE_STRING = String(false);
 
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang, t } = useTranslation('quran-reader');
-  const router = useRouter();
-  const { chapterId } = router.query;
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
@@ -129,7 +126,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     setShowRangeOfVerses(true);
     // we only need to generate the verse keys + set the range start and end only when the user hadn't selected the range already to avoid re-calculating the keys and to avoid resetting his selected range boundaries when he switches back and forth between current verse/range of verses options.
     if (!rangeStartVerse || !rangeEndVerse) {
-      const keys = generateChapterVersesKeys(chapterId as string);
+      const keys = generateChapterVersesKeys(verse.chapterId as string);
       setRangeVersesItems(
         keys.map((chapterVersesKey) => ({
           id: chapterVersesKey,
