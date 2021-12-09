@@ -31,6 +31,7 @@ const NavigationDrawerBody = () => {
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
       <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
+      <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
       <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
@@ -46,7 +47,6 @@ const NavigationDrawerBody = () => {
         href="https://feedback.quran.com/"
         isExternalLink
       />
-      <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
       {/* <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} /> */}
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
