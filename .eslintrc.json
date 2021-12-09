@@ -33,6 +33,7 @@
         "react/jsx-fragments": 2,
         "react/jsx-handler-names": 2,
         "react/jsx-sort-default-props": 2,
+        "react/jsx-key": 1,
         "react-func/max-lines-per-function": ["error", {
             "max": 30,
             "skipBlankLines": true,
