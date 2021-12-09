@@ -1,9 +1,10 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getChapterVerses } from 'src/api';
+import { getChapterIdBySlug, getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
@@ -54,25 +55,32 @@ const Chapter: NextPage<ChapterProps> = ({
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const chapterIdOrVerseKey = String(params.chapterId);
-  const isChapter = isValidChapterId(chapterIdOrVerseKey);
+  const chapterIdOrVerseKeyOrSlug = String(params.chapterId);
+  let isChapter = isValidChapterId(chapterIdOrVerseKeyOrSlug);
+  // initialize the value as if it's chapter
+  let chapterId = chapterIdOrVerseKeyOrSlug;
   // if it's not a valid chapter id and it's not a valid verse key, we reject it.
-  if (!isChapter && !isValidVerseKey(chapterIdOrVerseKey)) {
-    return { notFound: true };
+  if (!isChapter && !isValidVerseKey(chapterIdOrVerseKeyOrSlug)) {
+    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrVerseKeyOrSlug, locale);
+    // if it's not a valid slug
+    if (!sluggedChapterId) {
+      return { notFound: true };
+    }
+    chapterId = sluggedChapterId;
+    isChapter = true;
   }
   // common API params between a chapter and the verse key.
   let apiParams = { ...getDefaultWordFields(), ...getMushafId() };
-  // initialize the value as if it's chapter
-  let chapterId = chapterIdOrVerseKey;
   // if it's a verseKey
   if (!isChapter) {
-    const [extractedChapterId, verseNumber] = getVerseAndChapterNumbersFromKey(chapterIdOrVerseKey);
+    const [extractedChapterId, verseNumber] =
+      getVerseAndChapterNumbersFromKey(chapterIdOrVerseKeyOrSlug);
     chapterId = extractedChapterId;
     // only get 1 verse
     apiParams = { ...apiParams, ...{ page: verseNumber, perPage: 1 } };
   }
   try {
-    const versesResponse = await getChapterVerses(chapterIdOrVerseKey, locale, apiParams);
+    const versesResponse = await getChapterVerses(chapterId, locale, apiParams);
     return {
       props: {
         chapterResponse: { chapter: { ...getChapterData(chapterId, locale), id: chapterId } },

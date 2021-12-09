@@ -2,6 +2,7 @@
 const range = require('lodash/range');
 const sitemap = require('nextjs-sitemap-generator');
 
+// TODO: we need to include the slugs
 const chaptersData = require('./public/data/chapters/en.json');
 
 const chapters = range(1, 115);

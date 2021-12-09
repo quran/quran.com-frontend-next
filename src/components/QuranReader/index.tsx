@@ -186,7 +186,7 @@ const QuranReader = ({
           )}
         </div>
       </div>
-      <SidebarNavigation />
+      <SidebarNavigation id={`${id}`} />
       <Notes />
     </>
   );

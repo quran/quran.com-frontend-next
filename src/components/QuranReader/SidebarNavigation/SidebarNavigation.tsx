@@ -40,7 +40,11 @@ const JuzSelection = dynamic(() => import('./JuzSelection'), {
   loading: Loading,
 });
 
-const SidebarNavigation = () => {
+interface Props {
+  id: string;
+}
+
+const SidebarNavigation: React.FC<Props> = ({ id }) => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isVisible = useSelector(selectIsSidebarNavigationVisible);
   const selectedNavigationItem = useSelector(selectSelectedNavigationItem);
@@ -106,7 +110,7 @@ const SidebarNavigation = () => {
         <KeyboardInput meta keyboardKey="K" />
       </p>
       <div className={styles.contentContainer}>
-        {selectedNavigationItem === NavigationItem.Surah && <SurahSelection />}
+        {selectedNavigationItem === NavigationItem.Surah && <SurahSelection id={id} />}
         {selectedNavigationItem === NavigationItem.Juz && <JuzSelection />}
         {selectedNavigationItem === NavigationItem.Page && <PageSelection />}
       </div>

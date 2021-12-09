@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getChapterVerses } from 'src/api';
+import { getChapterIdBySlug, getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
@@ -50,16 +50,19 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const chapterId = String(params.chapterId);
+  let chapterIdOrSlug = String(params.chapterId);
   const verseId = String(params.verseId);
   // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidChapterId(chapterId) || !isValidVerseId(chapterId, verseId)) {
-    return {
-      notFound: true,
-    };
+  if (!isValidChapterId(chapterIdOrSlug) || !isValidVerseId(chapterIdOrSlug, verseId)) {
+    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
+    // if it's not a valid slug
+    if (!sluggedChapterId) {
+      return { notFound: true };
+    }
+    chapterIdOrSlug = sluggedChapterId;
   }
 
-  const versesResponse = await getChapterVerses(chapterId, locale, {
+  const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, {
     page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
     perPage: 1, // only 1 verse per page
     translations: null,
@@ -69,7 +72,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   });
   // if the chapter or verses APIs failed
 
-  const chapterData = getChapterData(chapterId, locale);
+  const chapterData = getChapterData(chapterIdOrSlug, locale);
 
   if (versesResponse.status === 500 || !chapterData) {
     return {
@@ -82,7 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       chapter: {
-        chapter: { ...chapterData, id: chapterId },
+        chapter: { ...chapterData, id: chapterIdOrSlug },
       },
       verses: versesResponse,
     },

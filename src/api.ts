@@ -15,6 +15,7 @@ import {
   makeChapterInfoUrl,
   makePageVersesUrl,
   makeFootnoteUrl,
+  makeChapterUrl,
 } from './utils/apiPaths';
 
 import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
@@ -30,6 +31,7 @@ import {
   VersesResponse,
   ChapterInfoResponse,
   FootnoteResponse,
+  ChapterResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -184,6 +186,18 @@ export const getChapterInfo = async (
 ): Promise<ChapterInfoResponse> => fetcher(makeChapterInfoUrl(chapterId, language));
 
 /**
+ * Get a chapter's.
+ *
+ * @param {string} chapterIdOrSlug
+ * @param {string} language
+ * @returns {Promise<ChapterInfoResponse>}
+ */
+export const getChapter = async (
+  chapterIdOrSlug: string,
+  language: string,
+): Promise<ChapterResponse> => fetcher(makeChapterUrl(chapterIdOrSlug, language));
+
+/**
  * Get the verses of a specific Juz.
  *
  * @param {string} id the ID of the Juz.
@@ -222,3 +236,19 @@ export const getPageVerses = async (
  */
 export const getFootnote = async (footnoteId: string): Promise<FootnoteResponse> =>
   fetcher(makeFootnoteUrl(footnoteId));
+
+/**
+ * Get the chapter id by a slug.
+ *
+ * @param {string} slug
+ * @param {string} locale
+ * @returns {Promise<false|string>}
+ */
+export const getChapterIdBySlug = async (slug: string, locale: string): Promise<false | string> => {
+  try {
+    const chapterResponse = await getChapter(encodeURI(slug), locale);
+    return chapterResponse.chapter.id as string;
+  } catch (error) {
+    return false;
+  }
+};

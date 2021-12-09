@@ -2,11 +2,15 @@ import styles from './SidebarNavigation.module.scss';
 import SurahList from './SurahList';
 import VerseList from './VerseList';
 
-const SurahSelection = () => {
+interface Props {
+  id: string;
+}
+
+const SurahSelection: React.FC<Props> = ({ id }) => {
   return (
     <div className={styles.surahBodyContainer}>
-      <SurahList />
-      <VerseList />
+      <SurahList id={id} />
+      <VerseList id={id} />
     </div>
   );
 };
