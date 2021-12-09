@@ -1,3 +1,4 @@
+@use "src/styles/breakpoints";
 .container {
   padding-block-start: var(--spacing-mega);
   max-width: 45em;
@@ -28,11 +29,25 @@
 }
 .layoutFlipped {
   flex-direction: row-reverse;
+
   & > .texts {
     margin-inline-start: calc(1.2 * var(--spacing-mega));
     margin-inline-end: 0;
   }
 }
+
+@include breakpoints.smallerThanMobileL {
+  .sideBySideLayout {
+    flex-direction: column;
+  }
+
+  .layoutFlipped {
+    & > .texts {
+      margin-inline: 0;
+    }
+  }
+}
+
 .appImage {
   max-height: calc(13 * var(--spacing-mega));
 }
