@@ -25,10 +25,10 @@ const DevelopersPage = () => {
         <div>
           <p>
             <Trans
-              i18nKey="developers:projects.q-v2"
+              i18nKey="developers:projects.q-next"
               components={[
                 <a
-                  href="https://github.com/quran/quran.com-frontend-v2"
+                  href="https://github.com/quran/quran.com-frontend-next"
                   target="_blank"
                   rel="noreferrer"
                 />,
@@ -98,7 +98,7 @@ const DevelopersPage = () => {
             i18nKey="developers:issues-guide"
             components={[
               <a
-                href="https://github.com/quran/quran.com-frontend-v2/issues"
+                href="https://github.com/quran/quran.com-frontend-next/pulls"
                 target="_blank"
                 rel="noreferrer"
               />,

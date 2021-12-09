@@ -2,7 +2,7 @@
     "footer": "- Quran.com team",
     "header": "Development help",
     "issues-cta": "Should you have any questions or want to contact maintainers, just write an issue! We will get back to you as soon as we can, inshAllah.",
-    "issues-guide": "Typically we use Github issues as the source for what to work on next, what&apos;s coming up and what bugs exist that need to be solved. For example <0>this url<\/0> has list of bugs, things we need help with, and upcoming features.",
+    "issues-guide": "Typically we use Github issues as the source for what to work on next, what's coming up and what bugs exist that need to be solved. For example <0>this url<\/0> has list of bugs, things we need help with, and upcoming features.",
     "main-desc": "Asalamu Alykom, Firstly, thank you very much for your interest to help us develop Quran.com and its projects. We are excited to work with you!",
     "projects": {
         "all": "We have a number of projects all hosted on Github. You can find them all <0>here<\/0>. But to outline them:",
@@ -11,7 +11,8 @@
         "q-audio": "<0>Quranic Audio<\/0> and <1>Quranic Audio mobile apps<\/1>",
         "q-audio-segments": "<0>Quran Audio Segments<\/0>",
         "q-ios": "<0>Quran iOS<\/0>",
-        "q-v2": "<0>Quran.com<\/0> - written in Ruby on Rails."
+        "q-v2": "<0>Quran.com<\/0> - written in Ruby on Rails.",
+        "q-next": "<0>Quran.com<\/0> - written ReactJS and NextJS"
     },
     "sub-main-desc": "We are a team of developers, designers, product managers and thinkers working on Quran.com on a volunteer basis. Alhamdulilah we have been blessed to work for some great companies in Silicon Valley, Toronto and UAE - and we feel that this is the least we can do to help our Ummah move forward in learning and studying their religion. Working on Quran.com is very gratifying and may Allah reward us all (and reward you) for our efforts.",
     "thanks": "Thanks for reading! Looking forward to seeing you commit some code!"
