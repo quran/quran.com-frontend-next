@@ -35,28 +35,43 @@ export const isLastPage = (
   pageNumber: number,
   quranFont?: QuranFont,
   mushafLines?: MushafLines,
-): boolean => {
+): boolean => pageNumber === getMushafTotalPageNumber(quranFont, mushafLines);
+
+/**
+ * Get the number of pages of the current mushaf based on the selected font
+ * and the number of line (in the case of IndoPak).
+ *
+ * @param {QuranFont} quranFont
+ * @param {MushafLines} mushafLines
+ * @returns {number}
+ */
+const getMushafTotalPageNumber = (quranFont?: QuranFont, mushafLines?: MushafLines): number => {
+  let mushafTotalPages = 0;
+  // this is when we are SSR the page because those 2 values won't be there since they come from Redux
   if (!quranFont || !mushafLines) {
-    return pageNumber === DEFAULT_NUMBER_OF_PAGES;
-  }
-  let mushafTotalPages = PAGES_MUSHAF_MAP[QuranFontMushaf[quranFont]];
-  if (quranFont === QuranFont.IndoPak) {
+    mushafTotalPages = DEFAULT_NUMBER_OF_PAGES;
+  } else if (quranFont === QuranFont.IndoPak) {
     mushafTotalPages =
       mushafLines === MushafLines.SixteenLines
-        ? PAGES_MUSHAF_MAP[Mushaf.Indopak15Lines]
-        : PAGES_MUSHAF_MAP[Mushaf.Indopak16Lines];
+        ? PAGES_MUSHAF_MAP[Mushaf.Indopak16Lines]
+        : PAGES_MUSHAF_MAP[Mushaf.Indopak15Lines];
+  } else {
+    mushafTotalPages = PAGES_MUSHAF_MAP[QuranFontMushaf[quranFont]];
   }
-  return pageNumber === mushafTotalPages;
+  return mushafTotalPages;
 };
 
 /**
  * Return array of page id
  *
- * @returns {number[]}
+ * @returns {{value: number, label: string}[]}
  */
-export const getPageIdsByMushaf = (lang: string, mushaf: Mushaf = Mushaf.KFGQPCHAFS) => {
-  return [...Array(PAGES_MUSHAF_MAP[mushaf])].map((n, index) => {
+export const getPageIdsByMushaf = (
+  lang: string,
+  quranFont?: QuranFont,
+  mushafLines?: MushafLines,
+): { value: number; label: string }[] =>
+  [...Array(getMushafTotalPageNumber(quranFont, mushafLines))].map((n, index) => {
     const page = index + 1;
     return { value: page, label: toLocalizedNumber(page, lang) };
   });
-};
