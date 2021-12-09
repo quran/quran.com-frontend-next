@@ -15,17 +15,23 @@
   background-color: var(--color-background-elevated);
   overflow-x: hidden;
   z-index: var(--z-index-default);
-  transition: var(--transition-regular);
   box-sizing: border-box;
   border-inline-end: 1px solid var(--color-borders-hairline);
   overflow: hidden;
   width: var(--sidebar-size);
-  margin-inline-start: calc(-1 * var(--sidebar-size));
+  padding-inline: var(--spacing-large);
+  transform: translateX(-100%);
+  [dir="rtl"] & {
+    transform: translateX(100%);
+  }
+  transition: transform var(--transition-regular);
 }
 
 .visibleContainer {
-  margin-inline-start: 0;
-  padding-inline: var(--spacing-large);
+  transform: translateX(0%);
+  [dir="rtl"] & {
+    transform: translateX(0%); // need to duplicate for specificity
+  }
 }
 
 .header {
