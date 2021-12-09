@@ -23,7 +23,7 @@ const ScrollableSelection = ({ items, searchPlaceholder, renderItem, getHref }) 
               item.label.toString().startsWith(searchQuery),
           )
           .map((item) => (
-            <Link href={getHref(item.value)}>
+            <Link href={getHref(item.value)} key={item.value}>
               <div className={styles.listItem}>{renderItem(item)}</div>
             </Link>
           ))}

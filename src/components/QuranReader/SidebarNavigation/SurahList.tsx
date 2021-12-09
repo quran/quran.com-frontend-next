@@ -56,7 +56,7 @@ const SurahList = () => {
       />
       <div className={styles.list}>
         {filteredChapters.map((chapter) => (
-          <Link href={getSurahNavigationUrl(chapter.id)}>
+          <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)}>
             <div
               className={classNames(styles.listItem, {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,
