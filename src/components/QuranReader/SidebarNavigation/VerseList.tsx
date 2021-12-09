@@ -40,7 +40,7 @@ const VerseList = () => {
           )
             return null;
           return (
-            <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
+            <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)} key={verseKey}>
               <div className={styles.listItem}>{localizedVerseNumber}</div>
             </Link>
           );
