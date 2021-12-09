@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SurahPreviewBlock.module.scss';
@@ -5,7 +7,7 @@ import styles from './SurahPreviewBlock.module.scss';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import { shouldUseMinimalLayout } from 'src/utils/locale';
+import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 
 type SurahPreviewBlockProps = {
   surahNumber: number;
@@ -24,6 +26,9 @@ const SurahPreviewBlock = ({
 }: SurahPreviewBlockProps) => {
   const { t, lang } = useTranslation('common');
   const isMinimalLayout = shouldUseMinimalLayout(lang);
+  const localizedSurahNumber = useMemo(() => {
+    return toLocalizedNumber(surahNumber, lang);
+  }, [lang, surahNumber]);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -39,7 +44,7 @@ const SurahPreviewBlock = ({
             </div>
           )}
         </div>
-        <div className={styles.surahNumber}>{surahNumber}</div>
+        <div className={styles.surahNumber}>{localizedSurahNumber}</div>
       </div>
       <div className={styles.surahIcon}>
         <ChapterIconContainer

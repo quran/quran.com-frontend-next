@@ -9,6 +9,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { DEFAULT_TAFSIRS } from 'src/redux/defaultSettings/defaultSettings';
 import { getChapterData } from 'src/utils/chapter';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -24,7 +25,7 @@ type AyahTafsirProp = {
 };
 
 const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
   } = useRouter();
@@ -34,7 +35,10 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
   return (
     <>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${verseId}`}
+        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
+          Number(verseId),
+          lang,
+        )}`}
       />
       <QuranReader
         initialData={verses}

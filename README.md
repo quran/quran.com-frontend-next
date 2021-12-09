@@ -82,7 +82,7 @@ If you are interested to help out, please look at issues on the Github repo. Thi
 
 ### Filing bugs
 
-Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new).
+Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend-next/issues).
 
 ### Community 
 <a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>

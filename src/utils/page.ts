@@ -1,3 +1,5 @@
+import { toLocalizedNumber } from './locale';
+
 import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
 
 const DEFAULT_NUMBER_OF_PAGES = 604;
@@ -45,4 +47,16 @@ export const isLastPage = (
         : PAGES_MUSHAF_MAP[Mushaf.Indopak16Lines];
   }
   return pageNumber === mushafTotalPages;
+};
+
+/**
+ * Return array of page id
+ *
+ * @returns {number[]}
+ */
+export const getPageIdsByMushaf = (lang: string, mushaf: Mushaf = Mushaf.KFGQPCHAFS) => {
+  return [...Array(PAGES_MUSHAF_MAP[mushaf])].map((n, index) => {
+    const page = index + 1;
+    return { value: page, label: toLocalizedNumber(page, lang) };
+  });
 };

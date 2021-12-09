@@ -20,6 +20,7 @@ import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import QuranReaderHeaderSkeleton from './QuranReaderHeaderSkeleton';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
+import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 import TranslationViewSkeleton from './TranslationViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
@@ -33,6 +34,7 @@ import {
   selectWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {
   selectIsUsingDefaultTafsirs,
@@ -78,6 +80,7 @@ const QuranReader = ({
   const wordByWordLocale = useSelector(selectWordByWordLocale);
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
@@ -156,7 +159,10 @@ const QuranReader = ({
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div
         onCopy={(event) => onCopyQuranWords(event, verses)}
-        className={classNames(styles.container, { [styles.withVisibleSideBar]: isSideBarVisible })}
+        className={classNames(styles.container, {
+          [styles.withVisibleSideBar]: isSideBarVisible,
+          [styles.withSidebarNavigationOpen]: isSidebarNavigationVisible,
+        })}
       >
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
@@ -198,6 +204,7 @@ const QuranReader = ({
           )}
         </div>
       </div>
+      <SidebarNavigation />
       <Notes />
     </>
   );

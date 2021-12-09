@@ -7,6 +7,7 @@
             "title": "Gulir Otomatis"
         },
         "play": "Putar Audio",
+        "playback-normal": "Normal",
         "playback-speed": "Kecepatan Pemutaran",
         "playback-speed-unit": "x",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "Membagikan",
     "shared": "Tautan telah disalin ke papan klip!",
+    "sidebar": {
+        "search-juz": "Cari Juz",
+        "search-page": "Halaman Pencarian",
+        "search-surah": "Cari surah",
+        "try-navigating-with": "Kiat: coba navigasikan dengan"
+    },
     "sitemap": "Peta Situs",
     "sort": {
         "ascending": "menaik",

@@ -8,7 +8,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import styles from './JuzView.module.scss';
 
 import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
-import { shouldUseMinimalLayout } from 'src/utils/locale';
+import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 
 type JuzViewProps = {
   isDescending: boolean;
@@ -43,7 +43,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
           <div className={styles.juzContainer}>
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
               <div className={styles.juzTitle}>
-                {t('juz')} {juzId}
+                {t('juz')} {toLocalizedNumber(juzId, lang)}
               </div>
             </Link>
             {chapterIds.map((chapterId) => {
@@ -53,7 +53,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                   <Link href={`/${chapterId}/${chapterAndVerseMappings[chapterId]}`}>
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
-                      description={`${chapter.versesCount} ${t('ayahs')}`}
+                      description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}
                       surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={chapter.translatedName as string}

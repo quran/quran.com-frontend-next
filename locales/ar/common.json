@@ -7,6 +7,7 @@
             "title": "تحريك تلقائي"
         },
         "play": "تشغيل الصوت",
+        "playback-normal": "طبيعي",
         "playback-speed": "سرعة التشغيل",
         "playback-speed-unit": "x",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "شارك",
     "shared": "تم نسخ الرابط إلى الحافظة!",
+    "sidebar": {
+        "search-juz": "ابحث عن جزء",
+        "search-page": "ابحث عن صفحة",
+        "search-surah": "ابحث عن سورة",
+        "try-navigating-with": "نصيحة: حاول التنقل باستخدام"
+    },
     "sitemap": "خريطة الموقع",
     "sort": {
         "ascending": "تصاعديًا",

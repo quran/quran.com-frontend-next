@@ -7,6 +7,7 @@
             "title": "เลื่อนอัตโนมัติ"
         },
         "play": "เล่นเสียง",
+        "playback-normal": "ปกติ",
         "playback-speed": "ความเร็วในการเล่น",
         "playback-speed-unit": "NS",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "แบ่งปัน",
     "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
+    "sidebar": {
+        "search-juz": "ค้นหา Juz",
+        "search-page": "ค้นหาหน้า",
+        "search-surah": "ค้นหา Surah",
+        "try-navigating-with": "เคล็ดลับ: ลองนำทางด้วย"
+    },
     "sitemap": "แผนผังเว็บไซต์",
     "sort": {
         "ascending": "จากน้อยไปมาก",

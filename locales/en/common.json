@@ -7,6 +7,7 @@
             "title": "Auto Scroll"
         },
         "play": "Play Audio",
+        "playback-normal": "Normal",
         "playback-speed": "Playback Speed",
         "playback-speed-unit": "x",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
+    "sidebar": {
+        "search-juz": "Search Juz",
+        "search-page": "Search Page",
+        "search-surah": "Search surah",
+        "try-navigating-with": "Tip: try navigating with"
+    },
     "sitemap": "Sitemap",
     "sort": {
         "ascending": "Ascending",

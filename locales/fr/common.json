@@ -7,6 +7,7 @@
             "title": "Défilement automatique"
         },
         "play": "Lire le son",
+        "playback-normal": "Normal",
         "playback-speed": "Vitesse de lecture",
         "playback-speed-unit": "X",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "Partager",
     "shared": "Le lien a été copié dans le presse-papiers !",
+    "sidebar": {
+        "search-juz": "Rechercher Juz",
+        "search-page": "Page de recherche",
+        "search-surah": "Recherche sourate",
+        "try-navigating-with": "Astuce : essayez de naviguer avec"
+    },
     "sitemap": "Plan du site",
     "sort": {
         "ascending": "Ascendant",

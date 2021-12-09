@@ -7,6 +7,7 @@
             "title": "Scorrimento automatico"
         },
         "play": "Riproduci audio",
+        "playback-normal": "Normale",
         "playback-speed": "Velocità di riproduzione",
         "playback-speed-unit": "X",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "Condividere",
     "shared": "Il link è stato copiato negli appunti!",
+    "sidebar": {
+        "search-juz": "Cerca Juz",
+        "search-page": "Pagina di ricerca",
+        "search-surah": "Cerca sura",
+        "try-navigating-with": "Suggerimento: prova a navigare con"
+    },
     "sitemap": "Mappa del sito",
     "sort": {
         "ascending": "Ascendente",

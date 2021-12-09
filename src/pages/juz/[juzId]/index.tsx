@@ -9,6 +9,7 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -23,7 +24,7 @@ interface JuzPageProps {
 }
 
 const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const {
     query: { juzId },
   } = useRouter();
@@ -32,7 +33,7 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
   }
   return (
     <>
-      <NextSeoWrapper title={`${t('juz')} ${juzId}`} />
+      <NextSeoWrapper title={`${t('juz')} ${toLocalizedNumber(Number(juzId), lang)}`} />
       <QuranReader
         initialData={juzVerses}
         id={String(juzId)}

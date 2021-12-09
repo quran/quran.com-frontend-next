@@ -7,6 +7,7 @@
             "title": "Gelongsor secara Atomatik"
         },
         "play": "Mainkan Audio",
+        "playback-normal": "Biasalah",
         "playback-speed": "Kelajuan Pemain",
         "playback-speed-unit": "x",
         "player": {
@@ -183,6 +184,12 @@
     },
     "share": "Kongsi",
     "shared": "Pautan telah disalin ke papan keratan!",
+    "sidebar": {
+        "search-juz": "Cari Juz",
+        "search-page": "Halaman Carian",
+        "search-surah": "Cari surah",
+        "try-navigating-with": "Petua: cuba menavigasi dengan"
+    },
     "sitemap": "Peta laman",
     "sort": {
         "ascending": "Menaik",
