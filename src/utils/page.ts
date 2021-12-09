@@ -64,7 +64,7 @@ const getMushafTotalPageNumber = (quranFont?: QuranFont, mushafLines?: MushafLin
 /**
  * Return array of page id
  *
- * @returns {{value: number, label: string}}
+ * @returns {{value: number, label: string}[]}
  */
 export const getPageIdsByMushaf = (
   lang: string,
