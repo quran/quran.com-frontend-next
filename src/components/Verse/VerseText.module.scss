@@ -40,10 +40,8 @@
   flex-wrap: wrap;
 }
 
-@include utility.generate-font-sizes("quran"); // for reading mode, search, etc
-@include utility.generate-font-sizes(
-  "quran-translation"
-); // for translation mode
+@include utility.generate-font-sizes("quran-reading"); // reading mode
+@include utility.generate-font-sizes("quran-translation"); // translation mode
 
 .highlighted {
   background-color: var(--color-background-alternative-faded);
