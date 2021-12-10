@@ -76,6 +76,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
           [styles[`quran-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+          [styles[`quran-translation-font-size-${quranTextFontScale}`]]: !isReadingMode,
         })}
       >
         <div
