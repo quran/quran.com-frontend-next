@@ -9,7 +9,7 @@ import styles from './SearchResultItem.module.scss';
 
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { getVerseNavigationUrl } from 'src/utils/navigation';
+import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -23,7 +23,7 @@ const SearchResultItem: React.FC<Props> = ({ result }) => {
     [lang, result.verseKey],
   );
   return (
-    <Link href={getVerseNavigationUrl(result.verseKey)} passHref>
+    <Link href={getVerseNavigationUrlByVerseKey(result.verseKey)} passHref>
       <a className={styles.link}>
         <div className={styles.itemContainer}>
           <div className={styles.quranTextContainer}>

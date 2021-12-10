@@ -1,4 +1,5 @@
 import { getChapterData } from './chapter';
+import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey } from './verse';
 
 import { SearchNavigationType } from 'types/SearchNavigationResult';
@@ -9,10 +10,20 @@ import { SearchNavigationType } from 'types/SearchNavigationResult';
  * @param {string} verseKey
  * @returns {string}
  */
-export const getVerseNavigationUrl = (verseKey: string): string => {
+export const getVerseNavigationUrlByVerseKey = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterId}/${verseNumber}`;
 };
+
+/**
+ * Get the href link to a verse.
+ *
+ * @param {string} chapterIdOrSlug
+ * @param {string} verseNumber
+ * @returns {string}
+ */
+export const getVerseNavigationUrl = (chapterIdOrSlug: string, verseNumber: string): string =>
+  `/${chapterIdOrSlug}/${verseNumber}`;
 
 /**
  * Get the href link to a the range of verses from a specific verse
@@ -46,14 +57,14 @@ export const getPageNavigationUrl = (pageNumber: string | number): string => `/p
 /**
  * Get the href link to tafsir for Ayah.
  *
- * @param {string | number} chapterId
+ * @param {string | number} chapterIdOrSlug
  * @param {number} verseNumber
  * @returns {string}
  */
 export const getVerseTafsirNavigationUrl = (
-  chapterId: string | number,
+  chapterIdOrSlug: string | number,
   verseNumber: number,
-): string => `/${chapterId}/${verseNumber}/tafsirs`;
+): string => `/${chapterIdOrSlug}/${verseNumber}/tafsirs`;
 
 /**
  * Get the href link to selected tafsir for Ayah.
@@ -72,10 +83,11 @@ export const getVerseSelectedTafsirNavigationUrl = (
 /**
  * Get the href link to a surah.
  *
- * @param {string | number} surahNumber
+ * @param {string | number} surahIdOrSlug
  * @returns  {string}
  */
-export const getSurahNavigationUrl = (surahNumber: string | number): string => `/${surahNumber}`;
+export const getSurahNavigationUrl = (surahIdOrSlug: string | number): string =>
+  `/${surahIdOrSlug}`;
 
 /**
  * Generate the navigation url based on the type.
@@ -90,7 +102,7 @@ export const resolveUrlBySearchNavigationType = (
 ): string => {
   const stringKey = String(key);
   if (type === SearchNavigationType.AYAH) {
-    return getVerseNavigationUrl(stringKey);
+    return getVerseNavigationUrlByVerseKey(stringKey);
   }
   if (type === SearchNavigationType.JUZ) {
     return getJuzNavigationUrl(key);
@@ -114,7 +126,18 @@ export const getSearchQueryNavigationUrl = (query?: string): string =>
 /**
  * Get the href link to the info page of a Surah.
  *
- * @param {string} chapterId
+ * @param {string} chapterIdOrSlug
  * @returns {string} chapterUrl
  */
-export const getSurahInfoNavigationUrl = (chapterId: string): string => `/surah/${chapterId}/info`;
+export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
+  `/surah/${chapterIdOrSlug}/info`;
+
+/**
+ * Get the canonical url. Will include the language in the url except for English.
+ *
+ * @param {string} lang
+ * @param {string} path
+ * @returns {string}
+ */
+export const getCanonicalUrl = (lang: string, path: string): string =>
+  `${getBasePath()}${lang === 'en' ? '' : `/${lang}`}${path}`;

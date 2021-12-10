@@ -8,7 +8,7 @@ import styles from './BookmarkedVersesList.module.scss';
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { getVerseNavigationUrl } from 'src/utils/navigation';
+import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
 
 const BookmarkedVersesList: React.FC = () => {
   const { t, lang } = useTranslation('home');
@@ -21,7 +21,7 @@ const BookmarkedVersesList: React.FC = () => {
           <div className={styles.verseLinksContainer}>
             {verseKeys.slice(0, 10).map((verseKey) => (
               <Button
-                href={getVerseNavigationUrl(verseKey)}
+                href={getVerseNavigationUrlByVerseKey(verseKey)}
                 type={ButtonType.Success}
                 shape={ButtonShape.Pill}
               >

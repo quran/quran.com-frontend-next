@@ -12,12 +12,14 @@
 /* eslint-disable no-console */
 const fs = require('fs');
 
-if (!process.argv[2]) {
+const locale = process.argv[2];
+
+if (!locale) {
   console.log('Please enter the locale!');
   return;
 }
 
-const path = `./public/data/chapters/${process.argv[2]}.json`;
+const path = `./public/data/chapters/${locale}.json`;
 if (fs.existsSync(path)) {
   let fileContent;
   try {
@@ -32,9 +34,12 @@ if (fs.existsSync(path)) {
     chaptersData.forEach((chapterData) => {
       const newChapterData = {};
       newChapterData.revelationPlace = chapterData.revelation_place;
-      newChapterData.transliteratedName = chapterData.name_simple;
+      newChapterData.transliteratedName =
+        locale === 'ar' ? chapterData.name_arabic : chapterData.name_simple;
       newChapterData.versesCount = chapterData.verses_count;
-      newChapterData.translatedName = chapterData.translated_name.name;
+      newChapterData.translatedName =
+        locale === 'ar' ? chapterData.name_arabic : chapterData.translated_name.name;
+      newChapterData.slug = chapterData.slug.slug;
       newFileContent[chapterData.id] = newChapterData;
     });
     fs.writeFile(path, JSON.stringify(newFileContent), (err) => {
