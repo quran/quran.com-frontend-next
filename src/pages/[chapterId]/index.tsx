@@ -11,6 +11,7 @@ import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { getCanonicalUrl, getSurahNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -44,6 +45,7 @@ const Chapter: NextPage<ChapterProps> = ({
           1,
           lang,
         )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
+        canonical={getCanonicalUrl(lang, getSurahNavigationUrl(chapterResponse.chapter.slug))}
       />
       <QuranReader
         initialData={versesResponse}

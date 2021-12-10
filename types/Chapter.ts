@@ -14,6 +14,7 @@ interface Chapter {
   nameArabic: string;
   translatedName: TranslatedName | string;
   defaultSlug: Slug;
+  slug?: string;
   slugs?: Slug[];
 }
 

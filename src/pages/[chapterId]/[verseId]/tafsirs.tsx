@@ -10,6 +10,7 @@ import Error from 'src/pages/_error';
 import { DEFAULT_TAFSIRS } from 'src/redux/defaultSettings/defaultSettings';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { getCanonicalUrl, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -39,6 +40,10 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
           Number(verseId),
           lang,
         )}`}
+        canonical={getCanonicalUrl(
+          lang,
+          getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId)),
+        )}
       />
       <QuranReader
         initialData={verses}
