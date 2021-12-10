@@ -11,7 +11,6 @@ import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl, getSurahNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -38,14 +37,24 @@ const Chapter: NextPage<ChapterProps> = ({
   if (hasError) {
     return <Error statusCode={500} />;
   }
+  const getTitle = () => {
+    if (isChapter) {
+      return `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
+        chapterResponse.chapter.versesCount,
+        lang,
+      )}`;
+    }
+    // if it's Ayatul Kursi
+    if (chapterResponse.chapter.id === '2' && versesResponse.verses[0].verseNumber === 255) {
+      return t('quran-reader:ayatul-kursi');
+    }
+    return `${toLocalizedNumber(versesResponse.verses[0].verseNumber, lang)}`;
+  };
+
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
-          1,
-          lang,
-        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
-        canonical={getCanonicalUrl(lang, getSurahNavigationUrl(chapterResponse.chapter.slug))}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
       />
       <QuranReader
         initialData={versesResponse}
@@ -56,20 +65,27 @@ const Chapter: NextPage<ChapterProps> = ({
   );
 };
 
+const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی'];
+
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const chapterIdOrVerseKeyOrSlug = String(params.chapterId);
+  let chapterIdOrVerseKeyOrSlug = String(params.chapterId);
   let isChapter = isValidChapterId(chapterIdOrVerseKeyOrSlug);
   // initialize the value as if it's chapter
   let chapterId = chapterIdOrVerseKeyOrSlug;
-  // if it's not a valid chapter id and it's not a valid verse key, we reject it.
+  // if it's not a valid chapter id and it's not a valid verse key, will check if it's Ayat Al kursi or if it's a Surah slug
   if (!isChapter && !isValidVerseKey(chapterIdOrVerseKeyOrSlug)) {
-    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrVerseKeyOrSlug, locale);
-    // if it's not a valid slug
-    if (!sluggedChapterId) {
-      return { notFound: true };
+    // if the value is a slug of Ayatul Kursi
+    if (AYAH_KURSI_SLUGS.includes(chapterIdOrVerseKeyOrSlug.toLowerCase())) {
+      chapterIdOrVerseKeyOrSlug = '2:255';
+    } else {
+      const sluggedChapterId = await getChapterIdBySlug(chapterIdOrVerseKeyOrSlug, locale);
+      // if it's not a valid slug
+      if (!sluggedChapterId) {
+        return { notFound: true };
+      }
+      chapterId = sluggedChapterId;
+      isChapter = true;
     }
-    chapterId = sluggedChapterId;
-    isChapter = true;
   }
   // common API params between a chapter and the verse key.
   let apiParams = { ...getDefaultWordFields(), ...getMushafId() };
