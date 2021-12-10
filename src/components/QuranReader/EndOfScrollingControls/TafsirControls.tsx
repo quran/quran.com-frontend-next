@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import EndOfScrollingButton from './EndOfScrollingButton';
 
 import {
-  getVerseNavigationUrl,
+  getVerseNavigationUrlByVerseKey,
   getVerseSelectedTafsirNavigationUrl,
   getVerseTafsirNavigationUrl,
 } from 'src/utils/navigation';
@@ -39,7 +39,7 @@ const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSe
       )}
       <EndOfScrollingButton
         text={t('back-to-ayah')}
-        href={getVerseNavigationUrl(`${chapterId}:${verseNumber}`)}
+        href={getVerseNavigationUrlByVerseKey(`${chapterId}:${verseNumber}`)}
       />
       {!isLastVerseOfSurah(String(chapterId), verseNumber) && (
         <EndOfScrollingButton
