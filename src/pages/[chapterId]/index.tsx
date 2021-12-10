@@ -37,17 +37,24 @@ const Chapter: NextPage<ChapterProps> = ({
   if (hasError) {
     return <Error statusCode={500} />;
   }
+  const getTitle = () => {
+    if (isChapter) {
+      return `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
+        chapterResponse.chapter.versesCount,
+        lang,
+      )}`;
+    }
+    // if it's Ayatul Kursi
+    if (chapterResponse.chapter.id === '2' && versesResponse.verses[0].verseNumber === 255) {
+      return t('quran-reader:ayatul-kursi');
+    }
+    return `${toLocalizedNumber(versesResponse.verses[0].verseNumber, lang)}`;
+  };
+
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${
-          isChapter
-            ? `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
-                chapterResponse.chapter.versesCount,
-                lang,
-              )}`
-            : `${versesResponse.verses[0].verseNumber}`
-        }`}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
       />
       <QuranReader
         initialData={versesResponse}
