@@ -18,8 +18,8 @@ import {
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { getLocaleName } from 'src/utils/locale';
 
-const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
-const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
+export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
+export const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
   label: getLocaleName(locale),
   value: locale,
 }));

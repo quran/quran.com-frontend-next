@@ -236,6 +236,7 @@
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",
+    "tooltip-trans-lang": "Tooltip Language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",
