@@ -52,6 +52,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
           lang,
           getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string),
         )}
+        description={versesResponse.verses[0].textUthmaniSimple}
       />
       <QuranReader
         initialData={versesResponse}
