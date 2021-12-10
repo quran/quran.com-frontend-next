@@ -27,6 +27,121 @@
 // IMPORTANT NOTE: IF WE CHANGE ANY VALUE HERE, WE SHOULD ALSO ADAPT THE NEW VALUE TO THE FALLBACK TEXT INSIDE GLYPHWORD.MODULE.SCSS
 
 $scales-map: (
+  default: (
+    desktop: (
+      1: 1.5,
+      2: 2,
+      3: 2.25,
+      4: 2.5,
+      5: 3,
+    ),
+    tablet: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 6.7,
+      5: 6.85,
+    ),
+    mobile: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 10,
+      5: 12,
+    ),
+  ),
+  qpc_uthmani_hafs: (
+    desktop: (
+      1: 1.5,
+      2: 2,
+      3: 2.25,
+      4: 2.5,
+      5: 3,
+    ),
+    tablet: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 6.7,
+      5: 6.85,
+    ),
+    mobile: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 10,
+      5: 12,
+    ),
+  ),
+  text_indopak: (
+    desktop: (
+      1: 1.5,
+      2: 2,
+      3: 2.25,
+      4: 2.5,
+      5: 3,
+    ),
+    tablet: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 6.7,
+      5: 6.85,
+    ),
+    mobile: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 10,
+      5: 12,
+    ),
+  ),
+  code_v2: (
+    desktop: (
+      1: 1.5,
+      2: 2,
+      3: 2.25,
+      4: 2.5,
+      5: 3,
+    ),
+    tablet: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 6.7,
+      5: 6.85,
+    ),
+    mobile: (
+      1: 4,
+      2: 5,
+      3: 6,
+      4: 8.5,
+      5: 10,
+    ),
+  ),
+  code_v1: (
+    desktop: (
+      1: 1.5,
+      2: 2,
+      3: 2.25,
+      4: 2.5,
+      5: 3,
+    ),
+    tablet: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 6.7,
+      5: 6.85,
+    ),
+    mobile: (
+      1: 4,
+      2: 5,
+      3: 6.3,
+      4: 10,
+      5: 12,
+    ),
+  ),
   quran-reading: (
     desktop: (
       1: 1.5,
@@ -36,8 +151,6 @@ $scales-map: (
       5: 3,
     ),
     tablet: (
-      // note: on tablet (768px) we're not able to set more than 6.85,
-      // the layout and max-width is messy when we do it,,
       1: 4,
       2: 5,
       3: 6.3,
@@ -143,6 +256,10 @@ $scales-map: (
     $mobile-scales: get-scales($name, "mobile");
     $tablet-scales: get-scales($name, "tablet");
     $desktop-scales: get-scales($name, "desktop");
+  } @else {
+    $mobile-scales: get-scales("default", "mobile");
+    $tablet-scales: get-scales("default", "tablet");
+    $desktop-scales: get-scales("default", "desktop");
   }
 
   @for $i from 1 through constants.$maximum-font-step {
