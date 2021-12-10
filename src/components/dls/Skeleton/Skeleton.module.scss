@@ -1,6 +1,5 @@
 @use "src/styles/theme";
 $baseSize: var(--spacing-mega);
-$animationDuration: 8s;
 
 .baseSize {
   height: $baseSize;
