@@ -78,9 +78,6 @@ const WordTooltipSection = () => {
           />
         </Section.Row>
       )}
-      <Section.Footer visible={showTooltipFor.length > 0}>
-        {t('settings.tooltip-desc')}
-      </Section.Footer>
     </Section>
   );
 };

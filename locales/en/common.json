@@ -177,7 +177,6 @@
         "selected-tafsirs": "Selected Tafsirs",
         "selected-translations": "Selected Translations",
         "title": "Settings",
-        "tooltip-desc": "Click on any Quran Word to see the tooltip",
         "value-and-others": "{{value}}, and {{othersCount}} others",
         "wbw-helper": "Display the translation or transliteration directly under the word",
         "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
