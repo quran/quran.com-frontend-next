@@ -41,12 +41,6 @@ const QuranFontSection = () => {
       ],
       [QuranFont.Uthmani]: [
         {
-          id: QuranFont.QPCHafs,
-          label: t(`fonts.${QuranFont.QPCHafs}`),
-          value: QuranFont.QPCHafs,
-          name: QuranFont.QPCHafs,
-        },
-        {
           id: QuranFont.MadaniV1,
           label: t(`fonts.${QuranFont.MadaniV1}`),
           value: QuranFont.MadaniV1,
@@ -57,6 +51,12 @@ const QuranFontSection = () => {
           label: t(`fonts.${QuranFont.MadaniV2}`),
           value: QuranFont.MadaniV2,
           name: QuranFont.MadaniV2,
+        },
+        {
+          id: QuranFont.QPCHafs,
+          label: t(`fonts.${QuranFont.QPCHafs}`),
+          value: QuranFont.QPCHafs,
+          name: QuranFont.QPCHafs,
         },
       ],
     }),
