@@ -92,6 +92,12 @@ const AudioSection = () => {
             onChange={onPlaybackRateChanged}
           />
         </Section.Row>
+        <Section.Row>
+          <SelectionCard
+            value={t('audio.player.repeat-settings')}
+            onClick={() => dispatch(setSettingsView(SettingsView.RepeatSettings))}
+          />
+        </Section.Row>
       </Section>
     </div>
   );

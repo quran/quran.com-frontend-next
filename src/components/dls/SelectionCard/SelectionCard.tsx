@@ -5,8 +5,8 @@ import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 import styles from './SelectionCard.module.scss';
 
 type SelectionCard = {
-  label: string;
-  value: string;
+  label?: string;
+  value?: string;
   onClick?: () => void;
 };
 
