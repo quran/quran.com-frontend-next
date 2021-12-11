@@ -6,7 +6,10 @@ $shadow-background: linear-gradient(180deg, #000000a6, transparent);
   width: 100%;
   inset-inline: 0;
   box-sizing: border-box;
-  padding-inline: calc(1.3 * var(--spacing-mega));
+  padding-inline: calc(1.3 * var(--spacing-medium));
+  @include breakpoints.tablet {
+    padding-inline: calc(1.3 * var(--spacing-mega));
+  }
   padding-block: var(--spacing-medium);
   position: absolute;
   color: var(--color-text-inverse);
