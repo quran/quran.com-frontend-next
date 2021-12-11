@@ -118,3 +118,23 @@ export const getSearchQueryNavigationUrl = (query?: string): string =>
  * @returns {string} chapterUrl
  */
 export const getSurahInfoNavigationUrl = (chapterId: string): string => `/surah/${chapterId}/info`;
+
+/**
+ * Parse the page url and return true if it indicates a page starting with the first verse.
+ *
+ * @returns {boolean}
+ */
+export const isFirstVerseOfChapter = (): boolean => {
+  const url = new URL(window.location.href);
+  const urlParts = url.pathname.split('/').filter(Boolean);
+  // if the url is in the format of /chapter
+  if (urlParts.length === 1 && !Number.isNaN(urlParts[0])) {
+    return true;
+  }
+  // if the url is in the format of /chapter/verse, /chapter/verse-verse
+  if (urlParts.length === 2) {
+    return !!urlParts[1]?.startsWith('1');
+  }
+  // for any other url, return false e.g. /chapter/verse/tafsirs, /juz/juz-number etc.
+  return false;
+};

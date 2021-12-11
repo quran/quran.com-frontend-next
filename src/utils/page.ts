@@ -1,5 +1,6 @@
 import { toLocalizedNumber } from './locale';
 
+import { SkeletonMode } from 'src/components/QuranReader/QuranReaderHeaderSkeleton';
 import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
 
 const DEFAULT_NUMBER_OF_PAGES = 604;
@@ -75,3 +76,17 @@ export const getPageIdsByMushaf = (
     const page = index + 1;
     return { value: page, label: toLocalizedNumber(page, lang) };
   });
+
+/**
+ * Return mode of the skeleton for Quran Reader Pages
+ *
+ * @returns {SkeletonMode}
+ */
+export const getQuranReaderSkeletonMode = (): SkeletonMode => {
+  const url = new URL(window.location.href);
+  const urlParts = url.pathname.split('/').filter(Boolean);
+  if (urlParts.includes('tafsirs')) {
+    return SkeletonMode.Minimal;
+  }
+  return SkeletonMode.Full;
+};

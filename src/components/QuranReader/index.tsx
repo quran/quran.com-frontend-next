@@ -46,6 +46,8 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { areArraysEqual } from 'src/utils/array';
+import { isFirstVerseOfChapter } from 'src/utils/navigation';
+import { getQuranReaderSkeletonMode } from 'src/utils/page';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranFont, QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
@@ -137,11 +139,15 @@ const QuranReader = ({
   if (!data) {
     return (
       <>
-        <QuranReaderHeaderSkeleton />
+        <QuranReaderHeaderSkeleton
+          isFirstVerse={isFirstVerseOfChapter()}
+          mode={getQuranReaderSkeletonMode()}
+          isReadingPreference={isReadingPreference}
+        />
         {isReadingPreference ? (
           <ReadingViewSkeleton fontSize={quranTextFontScale} />
         ) : (
-          <TranslationViewSkeleton />
+          <TranslationViewSkeleton mode={getQuranReaderSkeletonMode()} />
         )}
       </>
     );

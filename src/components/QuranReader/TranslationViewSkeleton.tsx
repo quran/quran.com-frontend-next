@@ -1,19 +1,23 @@
 import Skeleton from '../dls/Skeleton/Skeleton';
 
+import { SkeletonMode } from './QuranReaderHeaderSkeleton';
 import styles from './TranslationViewSkeleton.module.scss';
 
 type Props = {
   translationsCount?: number;
+  mode?: SkeletonMode;
 };
 
-const TranslationViewSkeleton = ({ translationsCount = 2 }: Props) => {
+const TranslationViewSkeleton = ({ translationsCount = 2, mode = SkeletonMode.Full }: Props) => {
   return (
     <span className={styles.skeletonContainer}>
-      <div className={styles.actionsRow}>
-        <Skeleton isActive isSquared className={styles.countActionItem} />
-        <Skeleton isActive isSquared className={styles.anotherActionItem} />
-        <Skeleton isActive isSquared className={styles.anotherActionItem} />
-      </div>
+      {mode === SkeletonMode.Full && (
+        <div className={styles.actionsRow}>
+          <Skeleton isActive isSquared className={styles.countActionItem} />
+          <Skeleton isActive isSquared className={styles.anotherActionItem} />
+          <Skeleton isActive isSquared className={styles.anotherActionItem} />
+        </div>
+      )}
       <div className={styles.verseRow}>
         <Skeleton isActive isSquared className={styles.verseItem} />
       </div>
