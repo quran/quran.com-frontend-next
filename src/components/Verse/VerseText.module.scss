@@ -42,12 +42,18 @@
 
 @include utility.generate-font-sizes("code_v1");
 @include utility.generate-font-sizes("code_v2");
-@include utility.generate-font-sizes("text_uthmani");
 @include utility.generate-font-sizes("text_indopak");
 @include utility.generate-font-sizes("qpc_uthmani_hafs");
-@include utility.generate-font-sizes("tajweed");
-@include utility.generate-font-sizes("quran-translation");
 
 .highlighted {
   background-color: var(--color-background-alternative-faded);
+}
+
+// make the text slightly bigger on translation or tafsir mode
+.tafsirOrTranslationMode {
+  // --font-size is generate by `utility.genereate-font-sizes`
+  font-size: calc(1.2 * var(--font-size));
+  @include breakpoints.tablet {
+    font-size: calc(1 * var(--font-size));
+  }
 }

@@ -26,6 +26,28 @@
 
 // IMPORTANT NOTE: IF WE CHANGE ANY VALUE HERE, WE SHOULD ALSO ADAPT THE NEW VALUE TO THE FALLBACK TEXT INSIDE GLYPHWORD.MODULE.SCSS
 
+// TEST:
+// CODE V1
+// - mobile
+// CODE V2
+// - mobile
+// QPC
+// - mobile
+// Indopak
+// - mobile
+//  - 15 lines
+//  - 16 lines
+// Tajweed
+// - mobile
+//
+// mobile with translations
+// - code
+
+// On mobile, font size 1-3 will try to preserve the line, using flex
+// font 4-5 no longer using the flex. And not preserving the line
+// If you're updating font size, double check on font size 3.
+// It will not break the layout
+
 $scales-map: (
   default: (
     desktop: (
@@ -68,9 +90,9 @@ $scales-map: (
     mobile: (
       1: 4vw,
       2: 5vw,
-      3: 6.3vw,
-      4: 10vw,
-      5: 12vw,
+      3: 5.9vw,
+      4: 8.9vw,
+      5: 11vw,
     ),
   ),
   text_indopak: (
@@ -89,11 +111,11 @@ $scales-map: (
       5: 6.85vw,
     ),
     mobile: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 10vw,
-      5: 12vw,
+      1: 4.4vw,
+      2: 4.8vw,
+      3: 5.4vw,
+      4: 6vw,
+      5: 9.3vw,
     ),
   ),
   code_v2: (
@@ -114,8 +136,8 @@ $scales-map: (
     mobile: (
       1: 4vw,
       2: 5vw,
-      3: 6vw,
-      4: 8.5vw,
+      3: 5.9vw,
+      4: 8.4vw,
       5: 10vw,
     ),
   ),
@@ -264,13 +286,14 @@ $scales-map: (
 
   @for $i from 1 through constants.$maximum-font-step {
     .#{$name}-font-size-#{$i} {
-      font-size: #{map.get($mobile-scales, $i)};
+      --font-size: #{map.get($mobile-scales, $i)};
       @include breakpoints.tablet {
-        font-size: #{map.get($tablet-scales, $i)};
+        --font-size: #{map.get($tablet-scales, $i)};
       }
       @include breakpoints.desktop {
-        font-size: #{map.get($desktop-scales, $i)};
+        --font-size: #{map.get($desktop-scales, $i)};
       }
+      font-size: var(--font-size);
     }
   }
 }

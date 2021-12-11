@@ -6,10 +6,7 @@
   margin-block-start: var(--spacing-xsmall);
   margin-block-end: var(--spacing-mega);
   max-width: 100%;
-  min-width: 100%;
-  @include breakpoints.tablet {
-    min-width: calc(10 * var(--spacing-mega));
-  }
+  min-width: calc(9.5 * var(--spacing-mega));
 }
 
 .mobileCenterText {
