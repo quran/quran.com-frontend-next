@@ -29,16 +29,21 @@
 // TEST:
 // CODE V1
 // - mobile
+// - laptop
 // CODE V2
 // - mobile
+// - laptop
 // QPC
 // - mobile
+// - laptop
 // Indopak
 // - mobile
 //  - 15 lines
 //  - 16 lines
+// - laptop
 // Tajweed
 // - mobile
+// - laptop
 //
 // mobile with translations
 // - code
@@ -73,19 +78,12 @@ $scales-map: (
     ),
   ),
   qpc_uthmani_hafs: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
     tablet: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 6.7vw,
-      5: 6.85vw,
+      1: 1.5rem,
+      2: 1.8rem,
+      3: 2.15rem,
+      4: 2.65rem,
+      5: 3.5rem,
     ),
     mobile: (
       1: 4vw,
@@ -96,19 +94,12 @@ $scales-map: (
     ),
   ),
   text_indopak: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
     tablet: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 6.7vw,
-      5: 6.85vw,
+      1: 1.5rem,
+      2: 1.8rem,
+      3: 2.15rem,
+      4: 2.65rem,
+      5: 3.5rem,
     ),
     mobile: (
       1: 4.4vw,
@@ -119,19 +110,12 @@ $scales-map: (
     ),
   ),
   code_v2: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
     tablet: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 6.7vw,
-      5: 6.85vw,
+      1: 1.5rem,
+      2: 1.8rem,
+      3: 2.15rem,
+      4: 2.65rem,
+      5: 3.5rem,
     ),
     mobile: (
       1: 4vw,
@@ -142,19 +126,12 @@ $scales-map: (
     ),
   ),
   code_v1: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
     tablet: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 6.7vw,
-      5: 6.85vw,
+      1: 1.8rem,
+      2: 1.95rem,
+      3: 2.3rem,
+      4: 2.75rem,
+      5: 3.5rem,
     ),
     mobile: (
       1: 4vw,
@@ -289,9 +266,6 @@ $scales-map: (
       --font-size: #{map.get($mobile-scales, $i)};
       @include breakpoints.tablet {
         --font-size: #{map.get($tablet-scales, $i)};
-      }
-      @include breakpoints.desktop {
-        --font-size: #{map.get($desktop-scales, $i)};
       }
       font-size: var(--font-size);
     }
