@@ -12,12 +12,11 @@ const RepeatSettings = () => {
       <Trans
         i18nKey="common:audio.repeat-moved"
         components={[
-          <span className={styles.iconContainer}>
-            <IconContainer size={IconSize.Small} key="repeat-icon" icon={<RepeatIcon />} />
+          <span className={styles.iconContainer} key="repeat-settings">
+            <IconContainer size={IconSize.Small} icon={<RepeatIcon />} />
           </span>,
         ]}
       />
-      {/* The repeat settings have moved to the audio player. Click on the <RepeatIcon /> to access them */}
     </div>
   );
 };
