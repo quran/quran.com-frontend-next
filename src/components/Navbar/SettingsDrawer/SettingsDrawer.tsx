@@ -31,6 +31,10 @@ const TafsirSelectionBody = dynamic(() => import('./TafsirSelectionBody'), {
   ssr: false,
 });
 
+const RepeatSettings = dynamic(() => import('./RepeatSettings'), {
+  ssr: false,
+});
+
 const SettingsDrawer = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -49,6 +53,7 @@ const SettingsDrawer = () => {
         {settingsView === SettingsView.Translation && t('translations')}
         {settingsView === SettingsView.Reciter && t('reciter')}
         {settingsView === SettingsView.Tafsir && t('tafsir.title')}
+        {settingsView === SettingsView.RepeatSettings && t('audio.player.repeat-settings')}
       </div>
     );
 
@@ -60,6 +65,7 @@ const SettingsDrawer = () => {
       )}
       {isSettingsDrawerOpen && settingsView === SettingsView.Reciter && <ReciterSelectionBody />}
       {isSettingsDrawerOpen && settingsView === SettingsView.Tafsir && <TafsirSelectionBody />}
+      {isSettingsDrawerOpen && settingsView === SettingsView.RepeatSettings && <RepeatSettings />}
     </Drawer>
   );
 };

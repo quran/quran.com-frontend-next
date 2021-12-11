@@ -32,6 +32,7 @@
             "times": "times",
             "verses-range": "Range of verses"
         },
+        "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0></0> icon to access them",
         "select-reciter": "Select Reciter",
         "title": "Audio"
     },
