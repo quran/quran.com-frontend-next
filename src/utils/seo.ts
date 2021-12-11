@@ -78,7 +78,7 @@ export function createSEOConfig({
     },
     additionalMetaTags: [
       {
-        name: 'fb:pages',
+        property: 'fb:pages',
         content: config.facebookPage,
       },
       {
