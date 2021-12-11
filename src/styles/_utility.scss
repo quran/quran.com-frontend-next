@@ -54,29 +54,6 @@
 // It will not break the layout
 
 $scales-map: (
-  default: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
-    tablet: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 6.7vw,
-      5: 6.85vw,
-    ),
-    mobile: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 10vw,
-      5: 12vw,
-    ),
-  ),
   qpc_uthmani_hafs: (
     tablet: (
       1: 1.5rem,
@@ -141,60 +118,7 @@ $scales-map: (
       5: 12vw,
     ),
   ),
-  quran-reading: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
-    tablet: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 6.7vw,
-      5: 6.85vw,
-    ),
-    mobile: (
-      1: 4vw,
-      2: 5vw,
-      3: 6.3vw,
-      4: 10vw,
-      5: 12vw,
-    ),
-  ),
-  quran-translation: (
-    desktop: (
-      1: 1.5vw,
-      2: 2vw,
-      3: 2.25vw,
-      4: 2.5vw,
-      5: 3vw,
-    ),
-    tablet: (
-      1: 2.6vw,
-      2: 3.2vw,
-      3: 4vw,
-      4: 5vw,
-      5: 6vw,
-    ),
-    mobile: (
-      1: 4vw,
-      2: 6vw,
-      3: 7vw,
-      4: 9vw,
-      5: 11vw,
-    ),
-  ),
   translation: (
-    desktop: (
-      1: 0.9vw,
-      2: 1vw,
-      3: 1.15vw,
-      4: 1.5vw,
-      5: 2vw,
-    ),
     tablet: (
       1: 1.8vw,
       2: 2.1vw,
@@ -211,13 +135,6 @@ $scales-map: (
     ),
   ),
   tafsir: (
-    desktop: (
-      1: 1vw,
-      2: 1.2vw,
-      3: 1.4vw,
-      4: 1.8vw,
-      5: 2vw,
-    ),
     tablet: (
       1: 1.8vw,
       2: 2.1vw,
@@ -242,7 +159,7 @@ $scales-map: (
   @return $map;
 }
 
-@function get-scales($name, $device-type: "mobile") {
+@function get-scales($name, $device-type) {
   @return map-deep-get($scales-map, $name, $device-type);
 }
 
