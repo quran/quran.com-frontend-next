@@ -42,8 +42,6 @@ const getWordText = (
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
 };
 
-const fallbackFont = QuranFont.QPCHafs;
-
 const GlyphWord = ({
   qpcUthmaniHafs,
   textCodeV1,
