@@ -55,23 +55,21 @@ const GlyphWord = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranTextFontScale } = quranReaderStyles;
   return (
-    <>
-      <span
-        dangerouslySetInnerHTML={{
-          __html: getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded),
-        }}
-        data-font-scale={quranTextFontScale}
-        data-font={font}
-        className={classNames(styles.styledWord, {
-          [styles.fallbackText]: !isFontLoaded,
-          [styles[`${fallbackFont}-font-size-${quranTextFontScale}`]]: !isFontLoaded,
-        })}
-        {...(isFontLoaded && {
-          // eslint-disable-next-line i18next/no-literal-string
-          style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
-        })}
-      />
-    </>
+    <span
+      dangerouslySetInnerHTML={{
+        __html: getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded),
+      }}
+      data-font-scale={quranTextFontScale}
+      data-font={font}
+      className={classNames(styles.styledWord, {
+        [styles.fallbackText]: !isFontLoaded,
+        [styles[`${fallbackFont}-font-size-${quranTextFontScale}`]]: !isFontLoaded,
+      })}
+      {...(isFontLoaded && {
+        // eslint-disable-next-line i18next/no-literal-string
+        style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
+      })}
+    />
   );
 };
 export default GlyphWord;
