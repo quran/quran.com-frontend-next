@@ -42,6 +42,8 @@ const getWordText = (
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
 };
 
+const fallbackFont = QuranFont.QPCHafs;
+
 const GlyphWord = ({
   qpcUthmaniHafs,
   textCodeV1,
@@ -60,7 +62,10 @@ const GlyphWord = ({
         }}
         data-font-scale={quranTextFontScale}
         data-font={font}
-        className={classNames(styles.styledWord, { [styles.fallbackText]: !isFontLoaded })}
+        className={classNames(styles.styledWord, {
+          [styles.fallbackText]: !isFontLoaded,
+          [styles[`${fallbackFont}-font-size-${quranTextFontScale}`]]: !isFontLoaded,
+        })}
         {...(isFontLoaded && {
           // eslint-disable-next-line i18next/no-literal-string
           style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
