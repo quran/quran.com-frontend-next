@@ -24,39 +24,11 @@
   );
 }
 
-// IMPORTANT NOTE: IF WE CHANGE ANY VALUE HERE, WE SHOULD ALSO ADAPT THE NEW VALUE TO THE FALLBACK TEXT INSIDE GLYPHWORD.MODULE.SCSS
-
-// TEST:
-// CODE V1
-// - mobile
-// - laptop
-// CODE V2
-// - mobile
-// - laptop
-// QPC
-// - mobile
-// - laptop
-// Indopak
-// - mobile
-//  - 15 lines
-//  - 16 lines
-// - laptop
-// Tajweed
-// - mobile
-// - laptop
-//
-// mobile with translations
-// - code
-
-// translations
-// - laptop
-// tafsir
-// - laptop
-
 // On mobile, font size 1-3 will try to preserve the line, using flex
 // font 4-5 no longer using the flex. And not preserving the line
+
 // If you're updating font size, double check on font size 3.
-// It will not break the layout
+// make sure it will not break the layout
 
 $scales-map: (
   qpc_uthmani_hafs: (
