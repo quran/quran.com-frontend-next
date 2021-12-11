@@ -2,6 +2,8 @@
 @use "src/styles/utility";
 @use "src/styles/breakpoints";
 
+$container-max-width: calc(23 * var(--spacing-mega));
+
 .container {
   max-width: 90%;
   margin-block-start: var(--spacing-small);
@@ -10,7 +12,7 @@
   margin-inline-end: auto;
   border-bottom: 1px solid var(--color-primary-medium);
   @include breakpoints.tablet {
-    max-width: calc(23 * var(--spacing-mega));
+    max-width: $container-max-width;
   }
 }
 .tafsirName {
