@@ -48,6 +48,11 @@
 // mobile with translations
 // - code
 
+// translations
+// - laptop
+// tafsir
+// - laptop
+
 // On mobile, font size 1-3 will try to preserve the line, using flex
 // font 4-5 no longer using the flex. And not preserving the line
 // If you're updating font size, double check on font size 3.
@@ -120,11 +125,11 @@ $scales-map: (
   ),
   translation: (
     tablet: (
-      1: 1.8vw,
-      2: 2.1vw,
-      3: 2.5vw,
-      4: 3.2vw,
-      5: 4.2vw,
+      1: 0.85rem,
+      2: 1rem,
+      3: 1.18rem,
+      4: 1.4rem,
+      5: 2rem,
     ),
     mobile: (
       1: 2.5vw,
@@ -136,18 +141,18 @@ $scales-map: (
   ),
   tafsir: (
     tablet: (
-      1: 1.8vw,
-      2: 2.1vw,
-      3: 2.8vw,
-      4: 3.6vw,
-      5: 4.5vw,
+      1: 0.85rem,
+      2: 1.1rem,
+      3: 1.2rem,
+      4: 1.4rem,
+      5: 2rem,
     ),
     mobile: (
-      1: 3vw,
-      2: 3.5vw,
-      3: 4vw,
-      4: 5vw,
-      5: 6vw,
+      1: 0.8rem,
+      2: 0.9rem,
+      3: 1.35rem,
+      4: 1.1rem,
+      5: 1.35rem,
     ),
   ),
 );

@@ -1,13 +1,17 @@
 @use "src/styles/constants";
 @use "src/styles/utility";
+@use "src/styles/breakpoints";
 
 .container {
-  max-width: 80%;
+  max-width: 90%;
   margin-block-start: var(--spacing-small);
   margin-block-end: var(--spacing-small);
   margin-inline-start: auto;
   margin-inline-end: auto;
   border-bottom: 1px solid var(--color-primary-medium);
+  @include breakpoints.tablet {
+    max-width: calc(23 * var(--spacing-mega));
+  }
 }
 .tafsirName {
   font-size: var(--font-size-large);
