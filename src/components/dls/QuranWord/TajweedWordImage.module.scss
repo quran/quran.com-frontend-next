@@ -24,20 +24,23 @@ $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg)
   img {
     zoom: 0.4;
     @include breakpoints.tablet {
-      zoom: 0.3;
+      zoom: 0.5;
     }
   }
 }
 .sm {
   img {
     zoom: 0.5;
+    @include breakpoints.tablet {
+      zoom: 0.65;
+    }
   }
 }
 .md {
   img {
     zoom: 0.7;
     @include breakpoints.tablet {
-      zoom: 0.7;
+      zoom: 0.75;
     }
   }
 }
@@ -53,7 +56,7 @@ $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg)
   img {
     zoom: 1.2;
     @include breakpoints.tablet {
-      zoom: 1;
+      zoom: 1.25;
     }
   }
 }
