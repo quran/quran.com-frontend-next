@@ -10,6 +10,8 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { getCanonicalUrl, getJuzNavigationUrl } from 'src/utils/navigation';
+import { getPageOrJuzMetaDescription } from 'src/utils/seo';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -33,7 +35,11 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
   }
   return (
     <>
-      <NextSeoWrapper title={`${t('juz')} ${toLocalizedNumber(Number(juzId), lang)}`} />
+      <NextSeoWrapper
+        title={`${t('juz')} ${toLocalizedNumber(Number(juzId), lang)}`}
+        description={getPageOrJuzMetaDescription(juzVerses)}
+        canonical={getCanonicalUrl(lang, getJuzNavigationUrl(Number(juzId)))}
+      />
       <QuranReader
         initialData={juzVerses}
         id={String(juzId)}

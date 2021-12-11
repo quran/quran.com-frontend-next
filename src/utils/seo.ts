@@ -1,7 +1,9 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { NextSeoProps } from 'next-seo';
 
-import { getLanguageAlternates } from './locale';
+import { getLanguageAlternates, getOpenGraphLocale } from './locale';
+
+import { VersesResponse } from 'types/ApiResponses';
 
 export const config = {
   siteName: 'Quran.com',
@@ -51,7 +53,7 @@ export function createSEOConfig({
     languageAlternates: getLanguageAlternates(path), // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
     openGraph: {
       type: 'website',
-      locale,
+      locale: getOpenGraphLocale(locale),
       url: canonicalUrl,
       title: seoTitle,
       description,
@@ -77,7 +79,7 @@ export function createSEOConfig({
     additionalMetaTags: [
       {
         name: 'fb:pages',
-        content: `app-id=${config.facebookPage}`,
+        content: config.facebookPage,
       },
       {
         name: 'al:ios:url',
@@ -127,6 +129,20 @@ export function createSEOConfig({
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
       },
+      // ...getOpenGraphAlternateLocales(locale),
     ],
   };
 }
+
+/**
+ * Concatenate the first 4 verses of the Page/Juz.
+ *
+ * @param {VersesResponse} response
+ * @returns {string}
+ */
+export const getPageOrJuzMetaDescription = (response: VersesResponse): string => {
+  return response.verses
+    .slice(0, 4)
+    .map((verse) => verse.textUthmaniSimple)
+    .join(' - ');
+};
