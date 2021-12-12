@@ -13,6 +13,7 @@
   width: 100%;
   inset-block-start: -1px;
   min-height: var(--spacing-medium);
+  will-change: transform;
   &:after {
     display: block;
     content: "";

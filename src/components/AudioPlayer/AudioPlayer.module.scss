@@ -24,6 +24,7 @@
   @include breakpoints.tablet {
     height: constants.$audio-player-default-desktop-height;
   }
+  will-change: transform;
 }
 
 .containerHidden {

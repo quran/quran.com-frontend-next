@@ -13,6 +13,7 @@
   transition: var(--transition-regular);
   background: var(--color-background-elevated);
   z-index: var(--z-index-header);
+  will-change: transform;
 }
 
 .hiddenNav {
