@@ -11,7 +11,7 @@ $iconSize: calc(1.5 * var(--spacing-medium));
   padding: var(--spacing-medium);
 
   @include theme.dark {
-    background-color: #555559; // TODO: we need new token for this
+    background-color: var(--shade-7);
   }
   @include theme.light {
     background-color: var(--color-background-alternative-faded);
