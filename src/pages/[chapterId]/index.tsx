@@ -80,7 +80,6 @@ const Chapter: NextPage<ChapterProps> = ({
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
         {...(!isChapter && { description: versesResponse.verses[0].textImlaeiSimple })} // when it's a verseKey e.g. /2:255 or /ayatul-kursi
-        {...(!isChapter && { description: versesResponse.verses[0].textImlaeiSimple })} // when it's a verseKey e.g. /2:255 or /ayatul-kursi
         canonical={getCanonicalUrlValue()}
       />
       <QuranReader
