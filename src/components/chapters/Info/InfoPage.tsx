@@ -28,6 +28,7 @@ const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterRespo
           lang,
         )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
         canonical={getCanonicalUrl(lang, getSurahInfoNavigationUrl(chapterResponse.chapter.slug))}
+        description={chapterInfoResponse.chapterInfo.shortText}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
     </>
