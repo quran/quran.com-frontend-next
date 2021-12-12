@@ -31,5 +31,5 @@
 }
 
 .containerMinimized.containerDefault {
-  height: constants.$audio-player-minimized-height;
+  transform: translate3d(0, constants.$audio-player-minimized-height, 0);
 }

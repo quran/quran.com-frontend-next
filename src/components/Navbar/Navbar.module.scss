@@ -16,5 +16,5 @@
 }
 
 .hiddenNav {
-  transform: translateY(0 - constants.$navbar-height);
+  transform: translate3d(0, 0 - constants.$navbar-height, 0);
 }

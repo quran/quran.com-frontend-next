@@ -33,7 +33,7 @@
 }
 
 .visibleContainer {
-  transform: translateY(constants.$navbar-height);
+  transform: translate3d(0, constants.$navbar-height, 0);
 }
 
 .expandedContainer {
