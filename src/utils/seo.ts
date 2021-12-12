@@ -143,6 +143,6 @@ export function createSEOConfig({
 export const getPageOrJuzMetaDescription = (response: VersesResponse): string => {
   return response.verses
     .slice(0, 4)
-    .map((verse) => verse.textUthmaniSimple)
+    .map((verse) => verse.textImlaeiSimple)
     .join(' - ');
 };
