@@ -9,9 +9,9 @@
   text-align: center;
   position: fixed;
   z-index: var(--z-index-sticky);
-  transition: var(--transition-regular);
+  transition: transform var(--transition-regular);
   width: 100%;
-  inset-block-start: 0;
+  inset-block-start: -1px;
   min-height: var(--spacing-medium);
   &:after {
     display: block;
@@ -33,7 +33,7 @@
 }
 
 .visibleContainer {
-  inset-block-start: constants.$navbar-height;
+  transform: translateY(constants.$navbar-height);
 }
 
 .expandedContainer {
