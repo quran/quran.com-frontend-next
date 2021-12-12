@@ -12,6 +12,11 @@ import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import {
+  getCanonicalUrl,
+  getSurahNavigationUrl,
+  getVerseNavigationUrl,
+} from 'src/utils/navigation';
+import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
@@ -26,6 +31,9 @@ type ChapterProps = {
   hasError?: boolean;
   isChapter?: boolean;
 };
+
+const isAyatulKursi = (chapterId: string, verseNumber: number): boolean =>
+  chapterId === '2' && verseNumber === 255;
 
 const Chapter: NextPage<ChapterProps> = ({
   chapterResponse,
@@ -44,11 +52,27 @@ const Chapter: NextPage<ChapterProps> = ({
         lang,
       )}`;
     }
+    const { verseNumber } = versesResponse.verses[0];
     // if it's Ayatul Kursi
-    if (chapterResponse.chapter.id === '2' && versesResponse.verses[0].verseNumber === 255) {
+    if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
       return t('quran-reader:ayatul-kursi');
     }
-    return `${toLocalizedNumber(versesResponse.verses[0].verseNumber, lang)}`;
+    return `${toLocalizedNumber(verseNumber, lang)}`;
+  };
+
+  const getCanonicalUrlValue = () => {
+    if (isChapter) {
+      return getCanonicalUrl(lang, getSurahNavigationUrl(chapterResponse.chapter.slug));
+    }
+    const { verseNumber } = versesResponse.verses[0];
+    // if it's Ayatul Kursi
+    if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
+      return getCanonicalUrl(lang, '/ayatul-kursi');
+    }
+    return getCanonicalUrl(
+      lang,
+      getVerseNavigationUrl(chapterResponse.chapter.slug, verseNumber.toString()),
+    );
   };
 
   return (
@@ -56,6 +80,7 @@ const Chapter: NextPage<ChapterProps> = ({
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
         {...(!isChapter && { description: versesResponse.verses[0].textUthmaniSimple })} // when it's a verseKey e.g. /2:255 or /ayatul-kursi
+        canonical={getCanonicalUrlValue()}
       />
       <QuranReader
         initialData={versesResponse}

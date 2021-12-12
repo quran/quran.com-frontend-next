@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/prefer-default-export */
 import findKey from 'lodash/findKey';
+import { MetaTag } from 'next-seo/lib/types';
 
 import i18nConfig from '../../i18n.json';
 
@@ -364,3 +365,34 @@ export const toLocalizedVerseKey = (verseKey: string, lang: string): string =>
  */
 export const toLocalizedVersesRange = (range: string, lang: string): string =>
   localizeNumericalStringWithSplitter(range, lang, '-');
+
+/**
+ * Generate the locale by mapping the current iso language to
+ * the format that Facebook accepts @see https://developers.facebook.com/docs/javascript/internationalization#locales .
+ * Since LANG_LOCALE_MAP has the following format LL-CC, we need to convert it into LL_CC
+ * be replacing "-" with "_".
+ *
+ * @param {string} currentLocale
+ * @returns {string}
+ */
+export const getOpenGraphLocale = (currentLocale: string): string =>
+  `${LANG_LOCALE_MAP[currentLocale]}`.replace('-', '_');
+
+/**
+ * Generate the alternate locales that the current content can be served in.
+ * When Facebook needs to render an object in one of the specified locales,
+ * it will make a request to the URL with the fb_locale URL parameter.
+ *
+ * @see https://developers.facebook.com/blog/post/2013/11/11/605/
+ *
+ * @param {string} currentLocale
+ * @returns {MetaTag[]}
+ */
+export const getOpenGraphAlternateLocales = (currentLocale: string): MetaTag[] => {
+  return Object.keys(LANG_LOCALE_MAP)
+    .filter((languageCode) => languageCode !== currentLocale)
+    .map((languageCode) => ({
+      name: 'og:locale:alternate',
+      content: `${LANG_LOCALE_MAP[languageCode]}`.replace('-', '_'),
+    }));
+};
