@@ -12,7 +12,6 @@
   background-image: url(../../../public/images/background.jpg);
   background-size: cover;
   @include theme.dark {
-    // filter: saturate(0.5) brightness(0.4);
     filter: saturate(0.1) brightness(0.3) contrast(1.1);
   }
   @include theme.light {
