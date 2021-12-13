@@ -126,3 +126,7 @@ $separator-size: 1px;
   margin-inline-start: var(--spacing-xxsmall);
   margin-inline-end: var(--spacing-xxsmall);
 }
+
+.selected {
+  background-color: var(--color-background-alternative-medium);
+}

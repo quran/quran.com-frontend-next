@@ -27,7 +27,7 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 const LanguageSelector = () => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   /**
    * When the user changes the language, we will:
@@ -70,9 +70,10 @@ const LanguageSelector = () => {
     >
       {options.map((option) => (
         <PopoverMenu.Item
+          selected={option.value === lang}
           shouldCloseMenuAfterClick
-          onClick={() => onChange(option.value)}
           key={option.value}
+          onClick={() => onChange(option.value)}
         >
           {option.label}
         </PopoverMenu.Item>
