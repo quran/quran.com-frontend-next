@@ -12,6 +12,10 @@
   align-items: center;
   text-decoration: none;
   box-sizing: border-box;
+  transition: transform var(--transition-fast);
+  &:active {
+    transform: scale(0.92);
+  }
 }
 .withText {
   padding-block-start: 0;
