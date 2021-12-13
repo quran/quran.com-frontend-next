@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 /**
  * Shorten a text by setting the maximum number of characters
  * by the value of the parameter and adding "..." at the end.
@@ -20,3 +19,11 @@ export const truncateString = (rawString: string, length: number): string => {
   }
   return shortenedText;
 };
+
+/**
+ * Strip HTML tags from a string.
+ *
+ * @param {string} rawString
+ * @returns {string}
+ */
+export const stripHTMLTags = (rawString: string): string => rawString.replace(/(<([^>]+)>)/gi, '');
