@@ -50,6 +50,8 @@ export type ButtonProps = {
   className?: string;
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
+  hasBorder?: boolean;
+  fullWidth?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -68,6 +70,8 @@ const Button: React.FC<ButtonProps> = ({
   className,
   hasSidePadding = true,
   shouldFlipOnRTL = true,
+  hasBorder,
+  fullWidth,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -96,6 +100,9 @@ const Button: React.FC<ButtonProps> = ({
 
     [styles.disabled]: disabled || loading,
     [styles.noSidePadding]: !hasSidePadding,
+
+    [styles.hasBorder]: hasBorder,
+    [styles.fullWidth]: fullWidth,
   });
 
   // when loading, replace the prefix icon with loading icon

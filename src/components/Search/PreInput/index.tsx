@@ -6,7 +6,7 @@ import Header from './Header';
 import styles from './PreInput.module.scss';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import SearchHistory from 'src/components/Search/SearchHistory';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 
@@ -30,9 +30,10 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked }) => {
             return (
               <Button
                 size={ButtonSize.Small}
-                type={ButtonType.Secondary}
                 key={searchQuery}
                 href={url}
+                variant={ButtonVariant.Ghost}
+                hasBorder
               >
                 {searchQuery}
               </Button>
