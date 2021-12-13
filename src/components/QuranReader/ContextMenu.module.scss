@@ -35,6 +35,7 @@
 
 .visibleContainer {
   transform: translate3d(0, constants.$navbar-height, 0);
+  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
 }
 
 .expandedContainer {
