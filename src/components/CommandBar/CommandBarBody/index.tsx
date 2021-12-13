@@ -19,7 +19,7 @@ import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch
 import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { shortenString } from 'src/utils/string';
+import { truncateString } from 'src/utils/string';
 import { getVerseTextByWords } from 'src/utils/word';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
@@ -59,8 +59,7 @@ const CommandBarBody: React.FC = () => {
    * @returns {void}
    */
   const onSearchQueryChange = useCallback((event: React.FormEvent<HTMLInputElement>): void => {
-    const newSearchQuery = event.currentTarget.value;
-    setSearchQuery(newSearchQuery || null);
+    setSearchQuery(event.currentTarget.value || null);
   }, []);
 
   /**
@@ -120,8 +119,9 @@ const CommandBarBody: React.FC = () => {
             return {
               key: verse.verseKey,
               resultType: SearchNavigationType.AYAH,
-              name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${shortenString(
+              name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${truncateString(
                 getVerseTextByWords(verse),
+                150,
               )}`,
               group: t('verses'),
             };

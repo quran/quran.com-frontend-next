@@ -7,7 +7,7 @@
  * @param {number} length
  * @returns {string}
  */
-export const shortenString = (rawString: string, length = 150): string => {
+export const truncateString = (rawString: string, length: number): string => {
   const characters = rawString.split('', length);
   let shortenedText = '';
   for (let index = 0; index < characters.length; index += 1) {

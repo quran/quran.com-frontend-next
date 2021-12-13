@@ -3,7 +3,7 @@ import React from 'react';
 import { NextSeo } from 'next-seo';
 
 import { SEOProps } from 'src/utils/seo';
-import { shortenString } from 'src/utils/string';
+import { truncateString } from 'src/utils/string';
 
 interface Props extends SEOProps {
   url?: string;
@@ -25,7 +25,7 @@ const NextSeoWrapper: React.FC<Props> = (props) => {
   const params = {
     ...rest,
     ...(url && { canonical: url }),
-    ...(description && { description: shortenString(description) }),
+    ...(description && { description: truncateString(description, 150) }),
   };
   return <NextSeo {...params} openGraph={openGraphParams} />;
 };
