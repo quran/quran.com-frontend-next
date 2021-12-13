@@ -44,6 +44,7 @@
   align-self: center;
   justify-content: start;
   & > svg {
+    margin-block-start: 1px;
     height: var(--spacing-medium);
     width: auto;
     @include breakpoints.tablet {
