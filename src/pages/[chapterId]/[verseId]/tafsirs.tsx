@@ -7,7 +7,7 @@ import { getChapterIdBySlug, getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
-import { DEFAULT_TAFSIRS } from 'src/redux/defaultSettings/defaultSettings';
+import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
@@ -15,6 +15,7 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { stripHTMLTags } from 'src/utils/string';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -33,6 +34,10 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
   if (hasError) {
     return <Error statusCode={500} />;
   }
+  const description =
+    verses.verses[0].tafsirs && verses.verses[0].tafsirs.length
+      ? stripHTMLTags(verses.verses[0].tafsirs[0].text)
+      : null;
   return (
     <>
       <NextSeoWrapper
@@ -44,6 +49,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
           lang,
           getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId)),
         )}
+        {...(description && { description })} // some verses won't have Tafsirs so we cannot set the description in that case
       />
       <QuranReader
         initialData={verses}
@@ -71,7 +77,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
     perPage: 1, // only 1 verse per page
     translations: null,
-    tafsirs: DEFAULT_TAFSIRS,
+    tafsirs: getTafsirsInitialState(locale).selectedTafsirs,
     wordFields: 'location, verse_key, text_uthmani',
     tafsirFields: 'resource_name,language_name',
   });
