@@ -1,0 +1,61 @@
+@use "src/styles/breakpoints";
+.container {
+  padding-block-start: var(--spacing-mega);
+  max-width: 45em;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  padding-block-start: var(--spacing-mega);
+  padding-block-end: var(--spacing-mega);
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
+}
+
+.heading {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  margin-block-end: var(--spacing-small);
+}
+
+.sideBySideLayout {
+  display: flex;
+  align-items: center;
+  margin-block-end: calc(2 * var(--spacing-mega));
+  & > .texts {
+    margin-inline-end: calc(1.2 * var(--spacing-mega));
+    margin-inline-start: 0;
+  }
+}
+.layoutFlipped {
+  flex-direction: row-reverse;
+
+  & > .texts {
+    margin-inline-start: calc(1.2 * var(--spacing-mega));
+    margin-inline-end: 0;
+  }
+}
+
+@include breakpoints.smallerThanMobileL {
+  .sideBySideLayout {
+    flex-direction: column;
+  }
+
+  .layoutFlipped {
+    & > .texts {
+      margin-inline: 0;
+    }
+  }
+}
+
+.appImage {
+  max-height: calc(13 * var(--spacing-mega));
+}
+
+.downloadButtonsContainer {
+  display: flex;
+  margin-block-start: var(--spacing-medium);
+  & > a:first-child {
+    margin-inline-end: var(--spacing-xsmall);
+  }
+}
