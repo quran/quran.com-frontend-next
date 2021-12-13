@@ -39,18 +39,25 @@
   }
 }
 
-.logoWrapper.QIcon {
-  > span > svg {
-    fill: unset;
+.logoWrapper {
+  display: flex;
+  align-self: center;
+  justify-content: start;
+  & > svg {
+    height: var(--spacing-medium);
+    width: auto;
+    @include breakpoints.tablet {
+      height: var(--spacing-large);
+    }
     & > path {
-      fill: unset;
+      fill: var(--color-text-default);
     }
   }
+}
 
-  &:hover > span > svg {
-    fill: unset;
-    & > path {
-      fill: unset;
-    }
+.globeIconWrapper {
+  display: flex;
+  & > svg > path {
+    stroke: var(--color-text-default);
   }
 }
