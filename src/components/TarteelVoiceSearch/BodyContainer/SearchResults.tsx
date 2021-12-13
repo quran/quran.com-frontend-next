@@ -11,7 +11,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { makeVersesFilterUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { shortenVerseText } from 'src/utils/verse';
+import { truncateString } from 'src/utils/string';
 import { VersesResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';
@@ -45,7 +45,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
           return {
             key: verse.verseKey,
             resultType: SearchNavigationType.AYAH,
-            name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${shortenVerseText(
+            name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${truncateString(
               verse.textUthmani,
               80,
             )}`,
