@@ -19,7 +19,7 @@ import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch
 import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { shortenVerseText } from 'src/utils/verse';
+import { shortenString } from 'src/utils/string';
 import { getVerseTextByWords } from 'src/utils/word';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
@@ -120,7 +120,7 @@ const CommandBarBody: React.FC = () => {
             return {
               key: verse.verseKey,
               resultType: SearchNavigationType.AYAH,
-              name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${shortenVerseText(
+              name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${shortenString(
                 getVerseTextByWords(verse),
               )}`,
               group: t('verses'),
