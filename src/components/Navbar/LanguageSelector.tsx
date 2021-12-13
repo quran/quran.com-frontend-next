@@ -70,7 +70,7 @@ const LanguageSelector = () => {
     >
       {options.map((option) => (
         <PopoverMenu.Item
-          selected={option.value === lang}
+          isSelected={option.value === lang}
           shouldCloseMenuAfterClick
           key={option.value}
           onClick={() => onChange(option.value)}
