@@ -91,6 +91,7 @@ const Chapter: NextPage<ChapterProps> = ({
   );
 };
 
+// TODO: this needs to be localized and also reflected in next-sitemap.js
 const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی'];
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
