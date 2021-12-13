@@ -54,10 +54,3 @@
     }
   }
 }
-
-.globeIconWrapper {
-  display: flex;
-  & > svg > path {
-    stroke: var(--color-text-default);
-  }
-}

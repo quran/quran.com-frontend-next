@@ -4,7 +4,6 @@ import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
-import GlobeIcon from '../../../../public/icons/globe.svg';
 import IconMenu from '../../../../public/icons/menu.svg';
 import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
 import IconSearch from '../../../../public/icons/search.svg';
@@ -57,22 +56,12 @@ const NavbarBody: React.FC = () => {
               <QuranTextLogo />
             </a>
           </Link>
-          <LanguageSelector />
         </div>
       </div>
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
-          <Button
-            tooltip={t('settings.title')}
-            shape={ButtonShape.Circle}
-            variant={ButtonVariant.Ghost}
-            onClick={openSettingsDrawer}
-          >
-            <span className={styles.globeIconWrapper}>
-              <GlobeIcon />
-            </span>
-          </Button>
           <>
+            <LanguageSelector />
             <Button
               tooltip={t('settings.title')}
               shape={ButtonShape.Circle}
