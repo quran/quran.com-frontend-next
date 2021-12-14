@@ -57,11 +57,7 @@ const LanguageSelector = () => {
   return (
     <PopoverMenu
       trigger={
-        <Button
-          tooltip={t('settings.title')}
-          shape={ButtonShape.Circle}
-          variant={ButtonVariant.Ghost}
-        >
+        <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
           <span className={styles.globeIconWrapper}>
             <GlobeIcon />
           </span>
