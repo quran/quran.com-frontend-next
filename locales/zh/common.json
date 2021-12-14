@@ -32,6 +32,7 @@
             "times": "次",
             "verses-range": "诗句范围"
         },
+        "repeat-moved": "重复设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择朗诵者",
         "title": "声音的"
     },
@@ -97,6 +98,7 @@
         "clear": "清除"
     },
     "juz": "朱兹",
+    "languages": "语言",
     "loading": "加载中",
     "menu": "菜单",
     "mobile-apps": "移动应用程序",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "精选 Tafsir",
         "selected-translations": "精选译文",
         "title": "设置",
-        "tooltip-desc": "单击任何古兰经单词以查看工具提示",
         "value-and-others": "{{value}}和{{othersCount}}其他",
         "wbw-helper": "直接在单词下方显示翻译或音译",
         "word-tooltip-helper": "悬停或单击单词时显示翻译或音译"
@@ -220,6 +221,7 @@
     },
     "to": "到",
     "tooltip": "工具提示",
+    "tooltip-trans-lang": "工具提示语言",
     "translation": "翻译",
     "translations": "翻译",
     "transliteration": "音译",

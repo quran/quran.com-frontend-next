@@ -32,6 +32,7 @@
             "times": "zamanlar",
             "verses-range": "ayet aralığı"
         },
+        "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Bunlara <0> <\/0> simgesine tıklayın",
         "select-reciter": "Okuyucu Seçin",
         "title": "Ses"
     },
@@ -97,6 +98,7 @@
         "clear": "Açık"
     },
     "juz": "cüz",
+    "languages": "Diller",
     "loading": "Yükleniyor",
     "menu": "Menü",
     "mobile-apps": "Mobil uygulamalar",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "Seçilmiş Tefsirler",
         "selected-translations": "Seçilmiş Çeviriler",
         "title": "Ayarlar",
-        "tooltip-desc": "Araç ipucunu görmek için herhangi bir Kuran Kelimesine tıklayın",
         "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
         "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
         "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
@@ -220,6 +221,7 @@
     },
     "to": "NS",
     "tooltip": "Araç ipucu",
+    "tooltip-trans-lang": "Araç İpucu Dili",
     "translation": "Tercüme",
     "translations": "Çeviriler",
     "transliteration": "Harf çevirisi",

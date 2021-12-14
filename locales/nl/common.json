@@ -32,6 +32,7 @@
             "times": "keer",
             "verses-range": "Bereik van verzen"
         },
+        "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
         "select-reciter": "Selecteer voordrager",
         "title": "Audio"
     },
@@ -97,6 +98,7 @@
         "clear": "Duidelijk"
     },
     "juz": "Juz",
+    "languages": "Talen",
     "loading": "Bezig met laden",
     "menu": "Menu",
     "mobile-apps": "Mobiele apps",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "Geselecteerde Tafsirs",
         "selected-translations": "Geselecteerde vertalingen",
         "title": "Instellingen",
-        "tooltip-desc": "Klik op een koranwoord om de tooltip te zien",
         "value-and-others": "{{value}} en {{othersCount}} anderen",
         "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
         "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
@@ -220,6 +221,7 @@
     },
     "to": "Tot",
     "tooltip": "Knopinfo",
+    "tooltip-trans-lang": "Taal voor knopinfo",
     "translation": "Vertaling",
     "translations": "Vertalingen",
     "transliteration": "Transliteratie",

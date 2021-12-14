@@ -32,7 +32,7 @@
             "times": "times",
             "verses-range": "Range of verses"
         },
-        "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0></0> icon to access them",
+        "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
         "select-reciter": "Select Reciter",
         "title": "Audio"
     },
@@ -221,6 +221,7 @@
     },
     "to": "To",
     "tooltip": "Tooltip",
+    "tooltip-trans-lang": "Tooltip Language",
     "translation": "Translation",
     "translations": "Translations",
     "transliteration": "Transliteration",
@@ -237,7 +238,6 @@
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",
-    "tooltip-trans-lang": "Tooltip Language",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",

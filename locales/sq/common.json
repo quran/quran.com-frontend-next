@@ -32,6 +32,7 @@
             "times": "herë",
             "verses-range": "Gama e vargjeve"
         },
+        "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> <\/0> për t'iu qasur atyre",
         "select-reciter": "Zgjidhni Recitues",
         "title": "Audio"
     },
@@ -97,6 +98,7 @@
         "clear": "Qartë"
     },
     "juz": "Juz",
+    "languages": "Gjuhët",
     "loading": "Po ngarkohet",
     "menu": "Menu",
     "mobile-apps": "Aplikacionet celulare",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "Tefsire të zgjedhura",
         "selected-translations": "Përkthime të zgjedhura",
         "title": "Cilësimet",
-        "tooltip-desc": "Klikoni në çdo fjalë të Kuranit për të parë këshillën e veglave",
         "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
         "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
         "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
@@ -220,6 +221,7 @@
     },
     "to": "te",
     "tooltip": "Këshillë mjeti",
+    "tooltip-trans-lang": "Gjuha e këshillës së veglave",
     "translation": "Përkthimi",
     "translations": "Përkthime",
     "transliteration": "Transliterimi",

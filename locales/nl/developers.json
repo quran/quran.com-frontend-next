@@ -2,7 +2,7 @@
     "footer": "- Quran.com-team",
     "header": "Ontwikkelingshulp",
     "issues-cta": "Als je vragen hebt of contact wilt opnemen met de beheerders, schrijf dan gewoon een probleem! We komen zo snel mogelijk bij je terug, inshAllah.",
-    "issues-guide": "Meestal gebruiken we Github-problemen als bron voor waar we vervolgens aan moeten werken, wat &apos; s komen en welke bugs er zijn die moeten worden opgelost. Bijvoorbeeld <0> deze url <\/0> heeft een lijst met bugs, dingen waar we hulp bij nodig hebben en aankomende functies.",
+    "issues-guide": "Meestal gebruiken we <0> Github-projecten <\/0> als bron voor waar we nu aan moeten werken, wat er gaat gebeuren en welke bugs er zijn die moeten worden opgelost. Bijvoorbeeld <1> deze url <\/1> heeft een lijst met bugs, dingen waar we hulp bij nodig hebben en aankomende functies.",
     "main-desc": "Asalamu Alykom, Allereerst hartelijk dank voor uw interesse om ons te helpen Quran.com en zijn projecten te ontwikkelen. We werken graag met je samen!",
     "projects": {
         "all": "We hebben een aantal projecten die allemaal op Github worden gehost. Je vindt ze allemaal <0> hier <\/0> . Maar om ze te schetsen:",
@@ -11,6 +11,7 @@
         "q-audio": "<0> Quranic Audio <\/0> en <1> Quranic Audio mobiele apps <\/1>",
         "q-audio-segments": "<0> Koran Audio Segmenten <\/0>",
         "q-ios": "<0> Koran iOS <\/0>",
+        "q-next": "<0> Quran.com Frontend <\/0> - geschreven in Next.js.",
         "q-v2": "<0> Quran.com <\/0> - geschreven in Ruby on Rails."
     },
     "sub-main-desc": "Wij zijn een team van ontwikkelaars, ontwerpers, productmanagers en denkers die op vrijwillige basis aan Quran.com werken. Alhamdulilah, we zijn gezegend om voor een aantal geweldige bedrijven in Silicon Valley, Toronto en de VAE te werken - en we zijn van mening dat dit het minste is dat we kunnen doen om onze Ummah vooruit te helpen bij het leren en bestuderen van hun religie. Werken aan Quran.com geeft veel voldoening en moge Allah ons allemaal belonen (en jullie belonen) voor onze inspanningen.",

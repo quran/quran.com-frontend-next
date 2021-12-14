@@ -32,6 +32,7 @@
             "times": "fois",
             "verses-range": "Gamme de vers"
         },
+        "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> <\/0> pour y accéder",
         "select-reciter": "Sélectionnez le récitant",
         "title": "l'audio"
     },
@@ -97,6 +98,7 @@
         "clear": "Dégager"
     },
     "juz": "Juz",
+    "languages": "Langues",
     "loading": "Chargement",
     "menu": "Menu",
     "mobile-apps": "Application mobile",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "Tafsirs sélectionnés",
         "selected-translations": "Traductions sélectionnées",
         "title": "Paramètres",
-        "tooltip-desc": "Cliquez sur n'importe quel mot du Coran pour voir l'info-bulle",
         "value-and-others": "{{value}} , et {{othersCount}} autres",
         "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
         "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
@@ -220,6 +221,7 @@
     },
     "to": "À",
     "tooltip": "Info-bulle",
+    "tooltip-trans-lang": "Langue de l'info-bulle",
     "translation": "Traduction",
     "translations": "Traductions",
     "transliteration": "Translitération",
