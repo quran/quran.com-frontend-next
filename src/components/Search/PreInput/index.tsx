@@ -1,12 +1,15 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
+
+import TrendUpIcon from '../../../../public/icons/trend-up.svg';
 
 import Header from './Header';
 import styles from './PreInput.module.scss';
+import SearchItem from './SearchItem';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import SearchHistory from 'src/components/Search/SearchHistory';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 
@@ -24,18 +27,15 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked }) => {
     <div className={styles.container}>
       <div>
         <Header text={t('search.popular')} />
-        <div className={styles.popularSearchesContainer}>
+        <div>
           {Object.keys(POPULAR_SEARCH_QUERIES).map((searchQuery) => {
             const url = getSurahNavigationUrl(POPULAR_SEARCH_QUERIES[searchQuery]);
             return (
-              <Button
-                size={ButtonSize.Small}
-                type={ButtonType.Secondary}
-                key={searchQuery}
-                href={url}
-              >
-                {searchQuery}
-              </Button>
+              <Link href={url} key={url}>
+                <a className={styles.popularSearchItem}>
+                  <SearchItem prefix={<TrendUpIcon />} title={searchQuery} url={url} key={url} />
+                </a>
+              </Link>
             );
           })}
         </div>
