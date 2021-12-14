@@ -1,0 +1,3 @@
+{
+    "meta-description": "اقرأ واستمع إلى السورة {{transliteratedName}} التي نزلت في {{revelationPlace}} ، والتي تم طلبها {{chapterOrder}} في القرآن. عنوان السورة يعني \"{{translatedName}}\" في {{localeName}} ويتكون من {{versesCount}} آيات."
+}
