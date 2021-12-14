@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import QSimpleIcon from '../../../../public/icons/Q_simple.svg';
+import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
 
 import styles from './Footer.module.scss';
 
@@ -17,10 +17,10 @@ const Footer = () => {
   );
   return (
     <div className={styles.container}>
-      <div className={styles.iconContainer}>
-        <QSimpleIcon />
-      </div>
       <div>
+        <div className={styles.iconContainer}>
+          <QuranTextLogo />
+        </div>
         <div className={styles.title}>{t('home:footer.title')}</div>
         <div className={styles.itemsContainer}>
           <div>
