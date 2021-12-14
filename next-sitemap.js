@@ -8,10 +8,12 @@ const range = require('lodash/range');
 const { locales } = require('./i18n.json');
 const englishChaptersData = require('./public/data/chapters/en.json');
 
+const isDevelopment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
+const isPreview = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
+
 const BASE_PATH =
-  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
-    process.env.NEXT_PUBLIC_VERCEL_URL
-  }` || 'https://quran.com';
+  `${isDevelopment ? 'http' : 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}` ||
+  'https://quran.com';
 
 const chapters = range(1, 115);
 
@@ -55,7 +57,7 @@ const getAlternateRefs = (chapterId = null, appendSlug = true, prefix = '', suff
 module.exports = {
   siteUrl: BASE_PATH,
   sitemapSize: 30000,
-  generateRobotsTxt: false, // TODO: make this based on the env
+  generateRobotsTxt: isDevelopment || isPreview, // TODO: allow this once we are live
   exclude: [...locales.map((locale) => `/${locale}`), '/*/product-updates*', '/*/search'],
   alternateRefs: locales.map((locale) => ({
     href: `${BASE_PATH}/${locale}`,
