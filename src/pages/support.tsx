@@ -66,21 +66,7 @@ const SupportPage = () => {
         </p>
         <h2>{t('mobile-q')}</h2>
         <p>
-          <Trans
-            i18nKey="support:mobile-a"
-            components={[
-              <a
-                target="_blank"
-                href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&utm_source=quran-com&utm_campaign=download"
-                rel="noreferrer"
-              />,
-              <a
-                target="_blank"
-                href="https://apps.apple.com/us/app/quran-by-quran-com-qran/id1118663303"
-                rel="noreferrer"
-              />,
-            ]}
-          />
+          <Trans i18nKey="support:mobile-a" components={[<Link href="/apps" />]} />
         </p>
         {/* <h2>
         <Trans i18nKey="support:donate-q" />

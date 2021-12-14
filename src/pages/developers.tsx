@@ -15,7 +15,12 @@ const DevelopersPage = () => {
       <div className={styles.contentPage}>
         <h1>{t('header')}</h1>
         <p>{t('main-desc')}</p>
-        <p>{t('sub-main-desc')}</p>
+        <p>
+          <Trans
+            i18nKey="developers:sub-main-desc"
+            components={[<a href="https://tarteel.ai" target="_blank" rel="noreferrer" />]}
+          />
+        </p>
         <p>
           <Trans
             i18nKey="developers:projects.all"
@@ -87,16 +92,13 @@ const DevelopersPage = () => {
         </div>
         <p>
           <Trans
-            i18nKey="developers:projects.q-audio-segments"
-            components={[
-              <a href="https://github.com/cpfair/quran-align" target="_blank" rel="noreferrer" />,
-            ]}
-          />
-        </p>
-        <p>
-          <Trans
             i18nKey="developers:issues-guide"
             components={[
+              <a
+                href="https://github.com/quran/quran.com-frontend-next/pulls"
+                target="_blank"
+                rel="noreferrer"
+              />,
               <a
                 href="https://github.com/quran/quran.com-frontend-next/pulls"
                 target="_blank"
