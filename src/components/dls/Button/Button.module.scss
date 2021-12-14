@@ -313,7 +313,7 @@
 }
 
 // when button used as Popover's trigger, add style when Popover is open
-[data-state="open"] .base {
+[data-state="open"] > button > .base {
   background-color: var(--color-primary-medium);
   @include utility.lighten-background-color;
 }
