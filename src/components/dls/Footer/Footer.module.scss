@@ -36,7 +36,10 @@
 }
 
 .iconContainer {
-  margin-block-start: calc(0.2 * var(--spacing-xxsmall));
+  margin-block-end: var(--spacing-small);
+  & > svg > path {
+    fill: var(--color-text-default);
+  }
 }
 
 .copyright {

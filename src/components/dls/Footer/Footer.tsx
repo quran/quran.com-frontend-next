@@ -62,7 +62,11 @@ const Footer = () => {
         <div className={styles.copyright}>
           © {localizedCurrentYear}{' '}
           <Link href="https://quran.com" variant={LinkVariant.Highlight}>
-            {t('quran-com')}
+            {
+              // we don't want to localize Quran.com text
+              // eslint-disable-next-line i18next/no-literal-string
+              'Quran.com'
+            }
           </Link>
           . {t('home:footer.rights')}
         </div>
