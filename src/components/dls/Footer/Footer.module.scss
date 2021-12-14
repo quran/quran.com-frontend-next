@@ -37,6 +37,9 @@
 
 .iconContainer {
   margin-block-end: var(--spacing-small);
+  & > svg > path {
+    fill: var(--color-text-default);
+  }
 }
 
 .copyright {
