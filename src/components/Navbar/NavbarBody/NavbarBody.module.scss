@@ -42,7 +42,7 @@
 .logoWrapper {
   display: flex;
   align-self: center;
-  justify-content: start;
+  justify-content: flex-start;
   & > svg {
     margin-block-start: 1px;
     height: var(--spacing-medium);
