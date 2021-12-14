@@ -23,13 +23,12 @@ $container-max-width: calc(23 * var(--spacing-mega));
   padding-inline-start: 0;
   padding-inline-end: 0;
   margin-block-start: var(--spacing-xxsmall);
-  margin-block-end: var(--spacing-xxsmall);
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
 
 .tafsirContainer {
-  padding-block-start: var(--spacing-large);
+  padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-large);
   padding-inline-start: 0;
   padding-inline-end: 0;
