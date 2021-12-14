@@ -89,7 +89,7 @@ const Chapter: NextPage<ChapterProps> = ({
                 revelationPlace: t(`surah-info:${chapterResponse.chapter.revelationPlace}`),
                 chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), lang),
                 localeName: getLocaleName(lang),
-                versesCount: chapterResponse.chapter.versesCount,
+                versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
               })
         }
       />

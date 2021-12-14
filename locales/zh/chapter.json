@@ -1,3 +1,3 @@
 {
-    "meta-description": "阅读并聆听在{{revelationPlace}} {{transliteratedName}} ，在古兰经中订购了{{chapterOrder}} Surah 标题在{{localeName}}意思是\" {{translatedName}}\"，由{{versesCount}}节组成。"
+    "meta-description": "阅读和聆听 Surah {{transliteratedName}} 。 《古兰经》在{{revelationPlace}}了《古兰经》，在{{chapterOrder}}下令。 Surah 标题在{{localeName}}意思是\"{{translatedName}}\"，由{{versesCount}}节组成。"
 }

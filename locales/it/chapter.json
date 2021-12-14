@@ -1,3 +1,3 @@
 {
-    "meta-description": "Leggi e ascolta la Sura {{transliteratedName}} che è stata rivelata in {{revelationPlace}} , ordinata {{chapterOrder}} nel Corano. Il titolo della Sura significa \"{{translatedName}}\" in {{localeName}} e consiste di {{versesCount}} versi."
+    "meta-description": "Leggi e ascolta Sura {{transliteratedName}} . La Sura è stata rivelata in {{revelationPlace}} , ordinata {{chapterOrder}} nel Corano. Il titolo della Sura significa \"{{translatedName}}\" in {{localeName}} e consiste di {{versesCount}} versi."
 }
