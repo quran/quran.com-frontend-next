@@ -10,3 +10,14 @@
     margin-inline-start: var(--spacing-medium);
   }
 }
+
+.globeIconWrapper {
+  display: flex;
+  align-items: center;
+  & > svg {
+    height: calc(1.4 * var(--spacing-medium));
+  }
+  & > svg > path {
+    stroke: var(--color-text-default);
+  }
+}
