@@ -1,0 +1,28 @@
+.item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding-inline: var(--spacing-xxsmall);
+  padding-block: var(--spacing-xsmall);
+  &:hover {
+    path {
+      fill: var(--color-text-default);
+    }
+  }
+}
+.item > .itemContent {
+  margin-inline-start: var(--spacing-medium);
+  flex: 1;
+  text-align: start;
+  cursor: pointer;
+}
+
+.prefix {
+  display: flex;
+  align-items: center;
+  & > span {
+    display: flex;
+  }
+}
