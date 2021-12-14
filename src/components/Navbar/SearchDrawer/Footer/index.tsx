@@ -12,9 +12,7 @@ const Footer: React.FC = () => {
   const { t } = useTranslation('common');
   return (
     <div>
-      <div className={styles.separatorContainer}>
-        <Separator />
-      </div>
+      <Separator />
       <div className={styles.container}>
         <div className={styles.betaContainer}>
           <div>
