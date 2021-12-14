@@ -10,7 +10,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber, getLocaleName } from 'src/utils/locale';
 import {
   getCanonicalUrl,
   getSurahNavigationUrl,
@@ -79,8 +79,19 @@ const Chapter: NextPage<ChapterProps> = ({
     <>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
-        {...(!isChapter && { description: versesResponse.verses[0].textImlaeiSimple })} // when it's a verseKey e.g. /2:255 or /ayatul-kursi
         canonical={getCanonicalUrlValue()}
+        description={
+          !isChapter
+            ? versesResponse.verses[0].textImlaeiSimple
+            : t('chapter:meta-description', {
+                transliteratedName: chapterResponse.chapter.transliteratedName,
+                translatedName: chapterResponse.chapter.translatedName as string,
+                revelationPlace: t(`surah-info:${chapterResponse.chapter.revelationPlace}`),
+                chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), lang),
+                localeName: getLocaleName(lang),
+                versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
+              })
+        }
       />
       <QuranReader
         initialData={versesResponse}
