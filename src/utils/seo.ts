@@ -32,7 +32,10 @@ export interface SEOProps extends NextSeoProps {
   dangerouslySetAllPagesToNoFollow?: boolean;
   dangerouslySetAllPagesToNoIndex?: boolean;
 }
-const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+
+const isDevelopment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
+const isPreview = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
+const disabledIndexing = isDevelopment || isPreview;
 export function createSEOConfig({
   title,
   description,
@@ -47,8 +50,8 @@ export function createSEOConfig({
     description,
     titleTemplate: '%s - Quran.com',
     defaultTitle: config.siteName,
-    dangerouslySetAllPagesToNoFollow: isProduction, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow // TODO: allow this once we are live
-    dangerouslySetAllPagesToNoIndex: isProduction, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex // TODO: allow this once we are live
+    dangerouslySetAllPagesToNoFollow: disabledIndexing, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow
+    dangerouslySetAllPagesToNoIndex: disabledIndexing, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex
     canonical: canonicalUrl,
     languageAlternates: getLanguageAlternates(path), // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
     openGraph: {

@@ -8,8 +8,8 @@ const range = require('lodash/range');
 const { locales } = require('./i18n.json');
 const englishChaptersData = require('./public/data/chapters/en.json');
 
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const isDevelopment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
-const isPreview = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
 
 const BASE_PATH =
   `${isDevelopment ? 'http' : 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}` ||
@@ -57,7 +57,7 @@ const getAlternateRefs = (chapterId = null, appendSlug = true, prefix = '', suff
 module.exports = {
   siteUrl: BASE_PATH,
   sitemapSize: 30000,
-  generateRobotsTxt: isDevelopment || isPreview, // TODO: allow this once we are live
+  generateRobotsTxt: isProduction,
   exclude: [...locales.map((locale) => `/${locale}`), '/*/product-updates*', '/*/search'],
   alternateRefs: locales.map((locale) => ({
     href: `${BASE_PATH}/${locale}`,
