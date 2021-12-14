@@ -2,7 +2,7 @@
     "footer": "- Tim Quran.com",
     "header": "Bantuan pengembangan",
     "issues-cta": "Jika Anda memiliki pertanyaan atau ingin menghubungi pengelola, tulis saja masalah! Kami akan menghubungi Anda sesegera mungkin, insyaAllah.",
-    "issues-guide": "Biasanya kami menggunakan masalah Github sebagai sumber untuk apa yang harus dikerjakan selanjutnya, apa &apos; s datang dan bug apa yang ada perlu dipecahkan. Misalnya <0> url ini <\/0> memiliki daftar bug, hal-hal yang perlu kami bantu, dan fitur yang akan datang.",
+    "issues-guide": "Biasanya kami menggunakan <0> proyek Github <\/0> sebagai sumber untuk apa yang harus dikerjakan selanjutnya, apa yang akan datang dan bug apa yang ada yang perlu dipecahkan. Misalnya <1> url ini <\/1> memiliki daftar bug, hal-hal yang perlu kami bantu, dan fitur yang akan datang.",
     "main-desc": "Assalamu A'laikum, Pertama, terima kasih banyak atas minat Anda untuk membantu kami mengembangkan Quran.com dan projek-projeknya. Kami amat senang kerana dapat bekerja sama dengan Anda!",
     "projects": {
         "all": "Kami memiliki sejumlah projek yang semuanya dihosting di Github. Anda dapat menemukan semuanya <0> sini <\/0> . Tetapi untuk menguraikannya:",
@@ -11,6 +11,7 @@
         "q-audio": "<0> Audio Quran <\/0> dan <1> Aplikasi seluler Audio Quran <\/1>",
         "q-audio-segments": "<0> Segmen Audio Quran <\/0>",
         "q-ios": "<0> Quran iOS <\/0>",
+        "q-next": "<0> Frontend Quran.com <\/0> - ditulis di Next.js.",
         "q-v2": "<0> Quran.com <\/0> - ditulis di Ruby on Rails."
     },
     "sub-main-desc": "Kami adalah tim pengembang, desainer, manajer produk, dan pemikir yang bekerja di Quran.com secara sukarela. Alhamdulilah kami telah diberi peluang untuk bekerja di beberapa perusahaan besar di Silicon Valley, Toronto dan UEA - dan kami merasa bahwa ini adalah setidaknya yang dapat kami lakukan untuk membantu umat kami bergerak maju dalam belajar dan mempelajari agama mereka. Bekerja di Quran.com sangat memuaskan dan semoga Allah membalas kita semua (dan membalas Anda) atas usaha kita.",

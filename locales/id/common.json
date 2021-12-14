@@ -32,6 +32,7 @@
             "times": "waktu",
             "verses-range": "Jangkauan ayat"
         },
+        "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
         "select-reciter": "Pilih Pembaca",
         "title": "audio"
     },
@@ -97,6 +98,7 @@
         "clear": "Jernih"
     },
     "juz": "Juzu",
+    "languages": "Bahasa",
     "loading": "Memuat",
     "menu": "Menu",
     "mobile-apps": "Aplikasi Seluler",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "Tafsir Terpilih",
         "selected-translations": "Terjemahan yang Dipilih",
         "title": "Pengaturan",
-        "tooltip-desc": "Klik pada setiap Kata Quran untuk melihat tooltip",
         "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
         "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
         "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan atau mengklik kata"
@@ -220,6 +221,7 @@
     },
     "to": "Ke",
     "tooltip": "Keterangan alat",
+    "tooltip-trans-lang": "Bahasa Tooltip",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",

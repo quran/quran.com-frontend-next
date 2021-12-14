@@ -32,6 +32,7 @@
             "times": "kali",
             "verses-range": "Jangka rangka ayat"
         },
+        "repeat-moved": "Tetapan ulangan telah berpindah ke pemain audio. Klik pada <0> <\/0> untuk mengaksesnya",
         "select-reciter": "Pilih Qari",
         "title": "Audio"
     },
@@ -97,6 +98,7 @@
         "clear": "Hilangkan"
     },
     "juz": "Juz",
+    "languages": "Bahasa",
     "loading": "Sedang proses",
     "menu": "Menu",
     "mobile-apps": "Aplikasi Mudah Alih",
@@ -177,7 +179,6 @@
         "selected-tafsirs": "Tafsir Terpilih",
         "selected-translations": "Terjemahan Terpilih",
         "title": "Tetapan",
-        "tooltip-desc": "Klik pada mana-mana Perkataan Al-Quran untuk melihat petua alat",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",
         "wbw-helper": "Paparkan terjemahan atau transliterasi terus di bawah perkataan",
         "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila melayang atau mengklik perkataan"
@@ -220,6 +221,7 @@
     },
     "to": "Ke",
     "tooltip": "Alat",
+    "tooltip-trans-lang": "Bahasa Petua Alat",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",

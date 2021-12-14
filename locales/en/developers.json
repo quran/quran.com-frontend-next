@@ -9,9 +9,10 @@
         "q-android": "<0>Quran Android<\/0> - written in Kotlin and Java.",
         "q-api": "<0>Quran.com API<\/0> - written in Ruby on Rails.",
         "q-audio": "<0>Quranic Audio<\/0> and <1>Quranic Audio mobile apps<\/1>",
+        "q-audio-segments": "<0>Quran Audio Segments<\/0>",
         "q-ios": "<0>Quran iOS<\/0> - written in Swift.",
-        "q-v2": "<0>Quran.com<\/0> - written in Ruby on Rails.",
-        "q-next": "<0>Quran.com Frontend<\/0> - written in Next.js."
+        "q-next": "<0>Quran.com Frontend<\/0> - written in Next.js.",
+        "q-v2": "<0>Quran.com<\/0> - written in Ruby on Rails."
     },
     "sub-main-desc": "We are a team of developers, designers, product managers and thinkers working in collaboration with the <0>Tarteel<\/0> team to deliver the best online Quran reading experience. Alhamdulilah we have been blessed to work for some great companies around the world - and feel that this is the least we can do to help our Ummah move forward in learning and studying their religion. Working on Quran.com is very gratifying and may Allah reward us all (and reward you) for our efforts.",
     "thanks": "We look forward your contribution!"
