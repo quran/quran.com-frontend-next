@@ -11,7 +11,11 @@ import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber, getLocaleName } from 'src/utils/locale';
-import { getSEOUrl, getSurahNavigationUrl, getVerseNavigationUrl } from 'src/utils/navigation';
+import {
+  getCanonicalUrl,
+  getSurahNavigationUrl,
+  getVerseNavigationUrl,
+} from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -58,14 +62,14 @@ const Chapter: NextPage<ChapterProps> = ({
 
   const getCanonicalUrlValue = () => {
     if (isChapter) {
-      return getSEOUrl(lang, getSurahNavigationUrl(chapterResponse.chapter.slug));
+      return getCanonicalUrl(lang, getSurahNavigationUrl(chapterResponse.chapter.slug));
     }
     const { verseNumber } = versesResponse.verses[0];
     // if it's Ayatul Kursi
     if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
-      return getSEOUrl(lang, '/ayatul-kursi');
+      return getCanonicalUrl(lang, '/ayatul-kursi');
     }
-    return getSEOUrl(
+    return getCanonicalUrl(
       lang,
       getVerseNavigationUrl(chapterResponse.chapter.slug, verseNumber.toString()),
     );

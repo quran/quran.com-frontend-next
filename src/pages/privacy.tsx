@@ -6,13 +6,13 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import { getSEOUrl } from 'src/utils/navigation';
+import { getCanonicalUrl } from 'src/utils/navigation';
 
 const PrivacyPage = () => {
   const { t, lang } = useTranslation('privacy');
   return (
     <>
-      <NextSeoWrapper title={t('header')} url={getSEOUrl(lang, '/privacy')} />
+      <NextSeoWrapper title={t('header')} url={getCanonicalUrl(lang, '/privacy')} />
       <div className={styles.contentPage}>
         <h1>{t('header')}</h1>
         <p>

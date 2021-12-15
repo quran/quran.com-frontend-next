@@ -17,7 +17,7 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
-import { getSEOUrl } from 'src/utils/navigation';
+import { getCanonicalUrl } from 'src/utils/navigation';
 import { ChaptersResponse } from 'types/ApiResponses';
 
 const ChapterAndJuzListWrapper = dynamic(
@@ -36,7 +36,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   const { t, lang } = useTranslation('home');
   return (
     <>
-      <NextSeoWrapper title={t('noble-quran')} url={getSEOUrl(lang, '')} />
+      <NextSeoWrapper title={t('noble-quran')} url={getCanonicalUrl(lang, '')} />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.listContainer, styles.flow)}>
           <HomePageHero />

@@ -7,13 +7,13 @@ import styles from './contentPage.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import { getSEOUrl } from 'src/utils/navigation';
+import { getCanonicalUrl } from 'src/utils/navigation';
 
 const SupportPage = () => {
   const { t, lang } = useTranslation('support');
   return (
     <>
-      <NextSeoWrapper title={t('support')} url={getSEOUrl(lang, '/support')} />
+      <NextSeoWrapper title={t('support')} url={getCanonicalUrl(lang, '/support')} />
       <div className={styles.contentPage}>
         <h1>{t('header')}</h1>
         <p>

@@ -139,7 +139,7 @@ export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
  * @param {string} path
  * @returns {string}
  */
-export const getSEOUrl = (lang: string, path: string): string =>
+export const getCanonicalUrl = (lang: string, path: string): string =>
   `${getBasePath()}${lang === 'en' ? '' : `/${lang}`}${path}`;
 
 /**

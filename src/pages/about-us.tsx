@@ -8,13 +8,13 @@ import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { getBlurDataUrl } from 'src/utils/image';
-import { getSEOUrl } from 'src/utils/navigation';
+import { getCanonicalUrl } from 'src/utils/navigation';
 
 const AboutUsPage = () => {
   const { t, lang } = useTranslation('about');
   return (
     <>
-      <NextSeoWrapper title={t('common:about')} url={getSEOUrl(lang, '/about-us')} />
+      <NextSeoWrapper title={t('common:about')} url={getCanonicalUrl(lang, '/about-us')} />
       <div className={styles.contentPage}>
         <h1>
           <Trans i18nKey="common:quran-com" />

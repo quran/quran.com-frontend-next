@@ -10,7 +10,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getSEOUrl, getPageNavigationUrl } from 'src/utils/navigation';
+import { getCanonicalUrl, getPageNavigationUrl } from 'src/utils/navigation';
 import { getPageOrJuzMetaDescription } from 'src/utils/seo';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -38,7 +38,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
       <NextSeoWrapper
         title={`${t('page')} ${toLocalizedNumber(Number(pageId), lang)}`}
         description={getPageOrJuzMetaDescription(pageVerses)}
-        canonical={getSEOUrl(lang, getPageNavigationUrl(Number(pageId)))}
+        canonical={getCanonicalUrl(lang, getPageNavigationUrl(Number(pageId)))}
       />
       <QuranReader
         initialData={pageVerses}

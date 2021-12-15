@@ -8,7 +8,7 @@ import QuranAppPreviewImage from '../../public/images/quran-app-preview.png';
 import styles from './apps.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import { getSEOUrl } from 'src/utils/navigation';
+import { getCanonicalUrl } from 'src/utils/navigation';
 
 type AppProps = {
   app: any;
@@ -73,7 +73,7 @@ const AppsPage = () => {
 
   return (
     <>
-      <NextSeoWrapper title={t('common:mobile-apps')} url={getSEOUrl(lang, '/apps')} />
+      <NextSeoWrapper title={t('common:mobile-apps')} url={getCanonicalUrl(lang, '/apps')} />
       <div className={styles.container}>
         <App app={apps.quran} isMain />
         <App app={apps.tarteel} isFlipped />

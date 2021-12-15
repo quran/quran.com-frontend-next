@@ -10,7 +10,7 @@ import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import NotionPage from 'src/components/Notion/Page';
 import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
-import { getSEOUrl, getProductUpdatesUrl } from 'src/utils/navigation';
+import { getCanonicalUrl, getProductUpdatesUrl } from 'src/utils/navigation';
 import { getPageTitle, getRevalidationTime } from 'src/utils/notion';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from 'src/utils/staticPageGeneration';
 
@@ -38,7 +38,7 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
   const { id } = page;
   return (
     <>
-      <NextSeoWrapper title={pageTitle} url={getSEOUrl(lang, getProductUpdatesUrl(id))} />
+      <NextSeoWrapper title={pageTitle} url={getCanonicalUrl(lang, getProductUpdatesUrl(id))} />
       <div className={styles.container}>
         <div className={styles.backIconContainer} />
         <LocalizationMessage />
