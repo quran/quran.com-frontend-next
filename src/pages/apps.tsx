@@ -12,15 +12,20 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 type AppProps = {
   app: any;
   isFlipped?: boolean;
+  isMain?: boolean;
 };
-const App = ({ app, isFlipped }: AppProps) => {
+const App = ({ app, isFlipped, isMain }: AppProps) => {
   return (
     <div
       className={classNames(styles.sideBySideLayout, isFlipped && styles.layoutFlipped)}
       key={app.title}
     >
       <div className={styles.texts}>
-        <h1 className={styles.heading}>{app.title}</h1>
+        {isMain ? (
+          <h1 className={styles.heading}>{app.title}</h1>
+        ) : (
+          <p className={styles.heading}>{app.title}</p>
+        )}
         <p>{app.description}</p>
         <div className={styles.downloadButtonsContainer}>
           <a href={app.ios}>
@@ -63,7 +68,7 @@ const AppsPage = () => {
     <>
       <NextSeoWrapper title={t('common:mobile-apps')} />
       <div className={styles.container}>
-        <App app={apps.quran} />
+        <App app={apps.quran} isMain />
         <App app={apps.tarteel} isFlipped />
       </div>
     </>

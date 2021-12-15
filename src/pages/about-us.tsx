@@ -19,33 +19,42 @@ const AboutUsPage = () => {
           <Trans i18nKey="common:quran-com" />
         </h1>
         <p>{t('main-desc')}</p>
-        <h1>{t('meccan.surahs')}</h1>
+        <p className={styles.heading}>{t('meccan.surahs')}</p>
         <p>{t('meccan.desc')}</p>
-        <h1>{t('median.surahs')}</h1>
+        <p className={styles.heading}>{t('median.surahs')}</p>
         <p>{t('median.desc')}</p>
         <p>
           <Trans
             i18nKey="about:redesign"
-            components={[<a target="_blank" href="https://feedback.quran.com" rel="noreferrer" />]}
+            components={[
+              <a key={0} target="_blank" href="https://feedback.quran.com" rel="noreferrer" />,
+            ]}
           />
         </p>
-        <h1>{t('credits.title')}</h1>
+        <p className={styles.heading}>{t('credits.title')}</p>
         <p>
           <Trans
             i18nKey="about:credits.desc"
             components={[
-              <a target="_blank" href="https://tanzil.net/" rel="noreferrer" />,
-              <a target="_blank" href="https://qurancomplex.gov.sa/" rel="noreferrer" />,
-              <a target="_blank" href="https://github.com/cpfair/quran-align" rel="noreferrer" />,
-              <a target="_blank" href="https://quranenc.com/en/home" rel="noreferrer" />,
-              <a target="_blank" href="https://zekr.org" rel="noreferrer" />,
+              <a key={0} target="_blank" href="https://tanzil.net/" rel="noreferrer" />,
+              <a key={1} target="_blank" href="https://qurancomplex.gov.sa/" rel="noreferrer" />,
+              <a
+                key={2}
+                target="_blank"
+                href="https://github.com/cpfair/quran-align"
+                rel="noreferrer"
+              />,
+              <a key={3} target="_blank" href="https://quranenc.com/en/home" rel="noreferrer" />,
+              <a key={4} target="_blank" href="https://zekr.org" rel="noreferrer" />,
             ]}
           />
         </p>
         <div>
           <Trans
             i18nKey="about:credits.lokalize"
-            components={[<a target="_blank" href="https://lokalise.com/" rel="noreferrer" />]}
+            components={[
+              <a key={0} target="_blank" href="https://lokalise.com/" rel="noreferrer" />,
+            ]}
           />
           <div className={styles.lokalizeImage}>
             <Image
@@ -61,7 +70,9 @@ const AboutUsPage = () => {
         <p>
           <Trans
             i18nKey="about:questions"
-            components={[<a target="_blank" href="https://feedback.quran.com" rel="noreferrer" />]}
+            components={[
+              <a key={0} target="_blank" href="https://feedback.quran.com" rel="noreferrer" />,
+            ]}
           />
         </p>
       </div>
