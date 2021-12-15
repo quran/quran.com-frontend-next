@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 import styles from './changelog.module.scss';
@@ -9,6 +10,7 @@ import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import NotionPage from 'src/components/Notion/Page';
 import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
+import { getSEOUrl, getProductUpdatesUrl } from 'src/utils/navigation';
 import { getPageTitle, getRevalidationTime } from 'src/utils/notion';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from 'src/utils/staticPageGeneration';
 
@@ -19,6 +21,7 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
+  const { lang } = useTranslation();
   const router = useRouter();
   if (router.isFallback) {
     return (
@@ -31,9 +34,11 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
     return <Error statusCode={500} />;
   }
   const pageTitle = getPageTitle(page);
+  // @ts-ignore
+  const { id } = page;
   return (
     <>
-      <NextSeoWrapper title={pageTitle} />
+      <NextSeoWrapper title={pageTitle} url={getSEOUrl(lang, getProductUpdatesUrl(id))} />
       <div className={styles.container}>
         <div className={styles.backIconContainer} />
         <LocalizationMessage />

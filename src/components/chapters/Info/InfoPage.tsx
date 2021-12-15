@@ -7,7 +7,7 @@ import Info from '.';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import Error from 'src/pages/_error';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl, getSurahInfoNavigationUrl } from 'src/utils/navigation';
+import { getSEOUrl, getSurahInfoNavigationUrl } from 'src/utils/navigation';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {
@@ -27,7 +27,7 @@ const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterRespo
           1,
           lang,
         )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
-        canonical={getCanonicalUrl(lang, getSurahInfoNavigationUrl(chapterResponse.chapter.slug))}
+        canonical={getSEOUrl(lang, getSurahInfoNavigationUrl(chapterResponse.chapter.slug))}
         description={chapterInfoResponse.chapterInfo.shortText}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />

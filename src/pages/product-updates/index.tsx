@@ -10,6 +10,7 @@ import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import Page from 'src/components/Notion/Page';
 import { retrieveBlockChildren, retrieveDatabase } from 'src/lib/notion';
 import Error from 'src/pages/_error';
+import { getSEOUrl, getProductUpdatesUrl } from 'src/utils/navigation';
 import { getRevalidationTime } from 'src/utils/notion';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from 'src/utils/staticPageGeneration';
 
@@ -20,14 +21,14 @@ interface Props {
 }
 
 const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
 
   return (
     <>
-      <NextSeoWrapper title={t('product-updates')} />
+      <NextSeoWrapper title={t('product-updates')} url={getSEOUrl(lang, getProductUpdatesUrl())} />
       <div className={styles.container}>
         <LocalizationMessage />
         {pages.map((page, index) => (
