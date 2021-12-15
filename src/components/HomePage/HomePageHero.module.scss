@@ -5,11 +5,13 @@
   position: relative;
 }
 
+$fallbackColor: #22a5ad;
 .backgroundImage {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-image: url(../../../public/images/background.jpg);
+  background-color: $fallbackColor;
+  background-image: url("/images/background.jpg");
   background-size: cover;
   @include theme.dark {
     filter: saturate(0.1) brightness(0.3) contrast(1.1);

@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import AlQuranulKarimSVG from '../../../public/images/alquranul-karim.svg';
 
 import styles from './HomePageHero.module.scss';
@@ -9,6 +11,9 @@ import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
 const HomePageHero = () => {
   return (
     <div className={styles.outerContainer}>
+      <Head>
+        <link rel="preload" as="image" href="/images/background.jpg" />
+      </Head>
       <div className={styles.backgroundImage} />
       <div data-theme="light">
         <PrayerTimes />
