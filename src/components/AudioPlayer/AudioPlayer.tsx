@@ -11,7 +11,7 @@ import {
   selectAudioDataStatus,
   setAudioStatus,
   selectPlaybackRate,
-  selectIsMobileMinimizedForScrolling,
+  // selectIsMobileMinimizedForScrolling,
   selectAudioData,
 } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
@@ -26,7 +26,7 @@ const AudioPlayer = () => {
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const audioData = useSelector(selectAudioData, shallowEqual);
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
-  const isMobileMinimizedForScrolling = useSelector(selectIsMobileMinimizedForScrolling);
+  const isMobileMinimizedForScrolling = false;
   const playbackRate = useSelector(selectPlaybackRate);
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
