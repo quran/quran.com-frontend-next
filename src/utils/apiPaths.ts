@@ -14,7 +14,7 @@ export const DEFAULT_VERSES_PARAMS = {
   words: true,
   translationFields: 'resource_name,language_id', // needed to show the name of the translation
   limit: ITEMS_PER_PAGE,
-  fields: `${QuranFont.Uthmani},chapter_id,hizb_number`, // we need text_uthmani field when copying the verse. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
+  fields: `${QuranFont.Uthmani},chapter_id,hizb_number,text_imlaei_simple`, // we need text_uthmani field when copying the verse. text_imlaei_simple is for SEO description meta tag. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
 };
 
 /**
@@ -32,7 +32,8 @@ const getVersesParams = (
     ...DEFAULT_VERSES_PARAMS,
     translations: getTranslationsInitialState(currentLocale).selectedTranslations.join(', '),
     reciter: getAudioPlayerStateInitialState(currentLocale).reciter.id,
-    locale: getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
+    wordTranslationLanguage:
+      getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
   },
   ...params,
 });
@@ -130,6 +131,16 @@ export const makeTafsirsUrl = (language: string): string =>
  */
 export const makeChapterInfoUrl = (chapterId: string, language: string): string =>
   makeUrl(`/chapters/${chapterId}/info`, { language });
+
+/**
+ * Compose the url for the chapter's API.
+ *
+ * @param {string} chapterIdOrSlug the chapter Id or the slug.
+ * @param {string} language the user's language code.
+ * @returns {string}
+ */
+export const makeChapterUrl = (chapterIdOrSlug: string, language: string): string =>
+  makeUrl(`/chapters/${chapterIdOrSlug}`, { language });
 
 /**
  * Compose the url for Juz's verses API.

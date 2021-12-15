@@ -7,6 +7,7 @@
             "title": "تحريك تلقائي"
         },
         "play": "تشغيل الصوت",
+        "playback-normal": "طبيعي",
         "playback-speed": "سرعة التشغيل",
         "playback-speed-unit": "x",
         "player": {
@@ -31,6 +32,8 @@
             "times": "مرات",
             "verses-range": "مجموعة الآيات"
         },
+        "repeat-moved": "تم نقل إعدادات التكرار إلى مشغل الصوت. انقر فوق <0> <\/0> للوصول إليها",
+        "select-reciter": "حدد القارئ",
         "title": "الصوت"
     },
     "ayah": "آية",
@@ -65,7 +68,7 @@
         "decrease": "انقُصْ",
         "increase": "زِدْ"
     },
-    "default-description": "القرآن مترجم إلى العديد من اللغات في واجهة بسيطة وسهلة",
+    "default-description": "القرآن وترجمة معانيه إلى العديد من اللغات في واجهة بسيطة وسهلة",
     "developers": "المطورون",
     "error": {
         "general": "هناك خطأ ما. حاول مرة أخرى.",
@@ -79,10 +82,11 @@
         "code_v2": "مجمع الملك فهد الإصدار 2",
         "font-size": "حجم الخط",
         "lines": "الأسطر",
-        "qcf-desc": "توفر خطوط مجمع الملك فهد الإصدارين 1 و 2 جودة أعلى ولكنها تستغرق وقتًا أطول للتحميل ولا يمكن نسخها من خلال المتصفح.",
+        "qcf-desc": "توفر خطوط مجمع الملك فهد الإصدارين 1 و 2 جودة أعلى ولكنها تستغرق وقتًا أطول للتحميل.",
         "qpc_uthmani_hafs": "خط الرسم العثماني - حفص - مجمع الملك فهد",
         "quran-font": "خط القرآن",
         "tajweed": "التجويد",
+        "tajweed-desc": "يظهر خط التجويد مصحف التجويد الملون. يمكنك قراءة المزيد عن قواعد ألوان التجويد <0> هنا <\/0>",
         "text_indopak": "نستعليق",
         "text_uthmani": "نسخ"
     },
@@ -94,6 +98,7 @@
         "clear": "مسح"
     },
     "juz": "جزء",
+    "languages": "اللغات",
     "loading": "يُحَمِّل",
     "menu": "القائمة",
     "mobile-apps": "تطبيقات الموبايل",
@@ -114,12 +119,12 @@
         "calculation-method": "طريقة الحساب",
         "calculation-methods": {
             "Dubai": "دبي",
-            "Egyptian": "مصري",
-            "Karachi": "كراتشي",
+            "Egyptian": "الهيئة المصرية العامة للمساحة",
+            "Karachi": "جامعة العلوم الإسلامية - كراتشي",
             "Kuwait": "الكويت",
             "MoonsightingCommittee": "لجنة الهلال",
-            "MuslimWorldLeague": "MuslimWorldLeague. عالم المسلم",
-            "NorthAmerica": "أمريكا الشمالية",
+            "MuslimWorldLeague": "رابطة العالم الإسلامي",
+            "NorthAmerica": "الجمعية الإسلامية بأمريكا الشمالية",
             "Qatark": "قطارك",
             "Singapore": "سنغافورة",
             "Tehran": "طهران",
@@ -138,6 +143,7 @@
     },
     "prev": "سابق",
     "privacy": "الخصوصية",
+    "product-updates": "تحديثات المنتج",
     "q-reflect": "التفكر في القرآن",
     "quran-com": "قرآن دوت كوم",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "بحث"
     },
     "settings": {
-        "change-reciter": "تغيير القارئ",
-        "change-tafsirs": "تغيير التفسير",
-        "change-translations": "تغيير الترجمات",
+        "no-tafsir-selected": "لم يتم اختيار تفسير",
+        "no-translation-selected": "لم يتم اختيار ترجمة",
         "reading-experience": "تجربة القراءة",
         "reset-cta": "استعادة الإعدادات الافتراضية",
         "reset-notif": "تمت إعادة تعيين إعداداتك إلى الإعدادات الافتراضية",
-        "search-reciter": "البحث عن القارئ",
-        "search-tafsirs": "بحث في تفسير",
-        "search-translations": "البحث في الترجمات",
-        "title": "الإعدادات"
+        "search-reciter": "ابحث عن قارئ",
+        "search-tafsirs": "ابحث عن تفسير",
+        "search-translations": "ابحث عن ترجمة",
+        "selected-reciter": "القارئ المختار",
+        "selected-tafsirs": "التفاسير المختارة",
+        "selected-translations": "الترجمات المختارة",
+        "title": "الإعدادات",
+        "value-and-others": "{{value}} و {{othersCount}} أخرى",
+        "wbw-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) مباشرة تحت الكلمة",
+        "word-tooltip-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) عند التمرير أو النقر فوق الكلمة"
     },
     "share": "شارك",
     "shared": "تم نسخ الرابط إلى الحافظة!",
+    "sidebar": {
+        "search-juz": "ابحث عن جزء",
+        "search-page": "ابحث عن صفحة",
+        "search-surah": "ابحث عن سورة",
+        "try-navigating-with": "نصيحة: حاول التنقل باستخدام"
+    },
     "sitemap": "خريطة الموقع",
     "sort": {
         "ascending": "تصاعديًا",
@@ -184,7 +201,7 @@
     "surah": "سورة",
     "tafsir": {
         "font-size": "حجم خط التفسير",
-        "surah": "سورة التفسير",
+        "surah": "تفسير السورة",
         "title": "التفسير"
     },
     "tarteel": {
@@ -195,6 +212,7 @@
     },
     "theme": "السمة",
     "themes": {
+        "auto": "آلي",
         "dark": "داكن",
         "light": "فاتح",
         "sepia": "بني داكن",
@@ -203,6 +221,7 @@
     },
     "to": "إلى",
     "tooltip": "تلميح",
+    "tooltip-trans-lang": "لغة تلميح الأداة",
     "translation": "الترجمة",
     "translations": "الترجمات",
     "transliteration": "النقحرة",
@@ -218,11 +237,12 @@
         "suggest": "يرجى البدء في التلاوة وستظهر آياتك."
     },
     "wbw": "كلمة بكلمة",
-    "wbw-trans-lang": "كلمة بكلمة لغة",
+    "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
     "word-click": {
         "no-audio": "لا صوت",
         "play-audio": "تشغيل الصوت",
-        "title": "انقر كلمة"
+        "title": "نطق الكلمة عند النقر عليها"
     },
+    "word-tooltip": "تلميح أداة الكلمات",
     "yes": "نعم"
 }

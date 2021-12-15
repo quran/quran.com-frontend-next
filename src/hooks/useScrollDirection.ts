@@ -7,7 +7,7 @@ export enum ScrollDirection {
   Up = 'up',
 }
 
-const DEFAULT_THROTTLING_WAIT_TIME_MS = 300;
+const DEFAULT_THROTTLING_WAIT_TIME_MS = 80;
 
 /**
  * A hook that detects scrolling and determines whether

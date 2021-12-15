@@ -4,10 +4,13 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import GlobeIcon from '../../../public/icons/globe.svg';
+import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
+import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
+
 import styles from './LanguageSelector.module.scss';
 
 import i18nConfig from 'i18n.json';
-import Select from 'src/components/dls/Forms/Select';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
 import { getLocaleName } from 'src/utils/locale';
@@ -24,7 +27,7 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 const LanguageSelector = () => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation('common');
 
   /**
    * When the user changes the language, we will:
@@ -52,17 +55,26 @@ const LanguageSelector = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <Select
-        id="locale"
-        name="locale"
-        options={options}
-        value={lang}
-        onChange={onChange}
-        defaultStyle={false}
-        className={styles.select}
-      />
-    </div>
+    <PopoverMenu
+      trigger={
+        <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+          <span className={styles.globeIconWrapper}>
+            <GlobeIcon />
+          </span>
+        </Button>
+      }
+    >
+      {options.map((option) => (
+        <PopoverMenu.Item
+          isSelected={option.value === lang}
+          shouldCloseMenuAfterClick
+          key={option.value}
+          onClick={() => onChange(option.value)}
+        >
+          {option.label}
+        </PopoverMenu.Item>
+      ))}
+    </PopoverMenu>
   );
 };
 

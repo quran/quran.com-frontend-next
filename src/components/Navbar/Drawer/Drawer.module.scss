@@ -2,7 +2,7 @@
 @use "src/styles/constants";
 
 .container {
-  background: var(--color-background-default);
+  background: var(--color-background-elevated);
   position: fixed;
   height: 100vh;
   width: 100%;
@@ -76,7 +76,6 @@
 .header {
   font-size: var(--font-size-large);
   width: 100%;
-  background-color: var(--color-background-default);
   position: fixed;
   height: constants.$navbar-height;
   border-bottom: 1px var(--color-borders-hairline) solid;
@@ -94,6 +93,7 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  background-color: var(--color-background-elevated);
 }
 
 .headerContent {

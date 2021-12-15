@@ -7,6 +7,7 @@
             "title": "Auto Scroll"
         },
         "play": "Play Audio",
+        "playback-normal": "Normal",
         "playback-speed": "Playback Speed",
         "playback-speed-unit": "x",
         "player": {
@@ -31,6 +32,8 @@
             "times": "times",
             "verses-range": "Range of verses"
         },
+        "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
+        "select-reciter": "Select Reciter",
         "title": "Audio"
     },
     "ayah": "Ayah",
@@ -79,10 +82,11 @@
         "code_v2": "King Fahad Complex V2",
         "font-size": "Font size",
         "lines": "Lines",
-        "qcf-desc": "KPFG Fonts provide higher quality but take longer to load and cannot be copied through the browser.",
+        "qcf-desc": "KPFG Fonts provide higher quality but take longer to load.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Quran Font",
         "tajweed": "Tajweed",
+        "tajweed-desc": "Tajweed font shows a Tajweed colored Mushaf. You can read more about the Tajweed color rules <0> here <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
@@ -94,6 +98,7 @@
         "clear": "Clear"
     },
     "juz": "Juz",
+    "languages": "Languages",
     "loading": "Loading",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
@@ -138,6 +143,7 @@
     },
     "prev": "Previous",
     "privacy": "Privacy",
+    "product-updates": "Product Updates",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "Search"
     },
     "settings": {
-        "change-reciter": "Change Reciter",
-        "change-tafsirs": "Change Tafsirs",
-        "change-translations": "Change Translations",
+        "no-tafsir-selected": "No tafsir selected",
+        "no-translation-selected": "No translation selected",
         "reading-experience": "Reading Experience",
         "reset-cta": "Reset Settings",
         "reset-notif": "Your settings have been reset to the default ones",
         "search-reciter": "Search Reciter",
         "search-tafsirs": "Search Tafsirs",
         "search-translations": "Search Translations",
-        "title": "Settings"
+        "selected-reciter": "Selected Reciter",
+        "selected-tafsirs": "Selected Tafsirs",
+        "selected-translations": "Selected Translations",
+        "title": "Settings",
+        "value-and-others": "{{value}}, and {{othersCount}} others",
+        "wbw-helper": "Display the translation or transliteration directly under the word",
+        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
+    "sidebar": {
+        "search-juz": "Search Juz",
+        "search-page": "Search Page",
+        "search-surah": "Search surah",
+        "try-navigating-with": "Tip: try navigating with"
+    },
     "sitemap": "Sitemap",
     "sort": {
         "ascending": "Ascending",
@@ -195,6 +212,7 @@
     },
     "theme": "Theme",
     "themes": {
+        "auto": "Auto",
         "dark": "Dark",
         "light": "Light",
         "sepia": "Sepia",
@@ -203,6 +221,7 @@
     },
     "to": "To",
     "tooltip": "Tooltip",
+    "tooltip-trans-lang": "Tooltip Language",
     "translation": "Translation",
     "translations": "Translations",
     "transliteration": "Transliteration",
@@ -224,5 +243,6 @@
         "play-audio": "Play Audio",
         "title": "Word Click"
     },
+    "word-tooltip": "Word Tooltip",
     "yes": "Yes"
 }

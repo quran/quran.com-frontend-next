@@ -3,12 +3,14 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getChapterVerses } from 'src/api';
+import { getChapterIdBySlug, getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
+import { toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
+import { getCanonicalUrl, getVerseNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -31,7 +33,7 @@ type VerseProps = {
 };
 
 const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
   } = useRouter();
@@ -41,7 +43,16 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${verseId}`}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${
+          isVerse
+            ? toLocalizedNumber(Number(verseId), lang)
+            : toLocalizedVersesRange(verseId as string, lang)
+        }`}
+        canonical={getCanonicalUrl(
+          lang,
+          getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string),
+        )}
+        description={versesResponse.verses[0].textImlaeiSimple}
       />
       <QuranReader
         initialData={versesResponse}
@@ -53,7 +64,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const chapterId = String(params.chapterId);
+  let chapterIdOrSlug = String(params.chapterId);
   const verseIdOrRange = String(params.verseId);
   /*
     we need to validate the chapterId and verseId and range first to save
@@ -61,12 +72,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     to avoid pre-rendering them at build time.
   */
   if (
-    !isValidChapterId(chapterId) ||
-    (!isValidVerseId(chapterId, verseIdOrRange) && !isValidVerseRange(chapterId, verseIdOrRange))
+    !isValidChapterId(chapterIdOrSlug) ||
+    (!isValidVerseId(chapterIdOrSlug, verseIdOrRange) &&
+      !isValidVerseRange(chapterIdOrSlug, verseIdOrRange))
   ) {
-    return {
-      notFound: true,
-    };
+    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
+    // if it's not a valid slug
+    if (!sluggedChapterId) {
+      return { notFound: true };
+    }
+    chapterIdOrSlug = sluggedChapterId;
   }
 
   /*
@@ -84,9 +99,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     apiParams = { ...apiParams, ...{ from, to } };
   }
   try {
-    const versesResponse = await getChapterVerses(chapterId, locale, apiParams);
+    const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-    const chapterData = getChapterData(chapterId, locale);
+    const chapterData = getChapterData(chapterIdOrSlug, locale);
     if (!chapterData) {
       return {
         props: {
@@ -98,7 +113,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         chapterResponse: {
-          chapter: { ...chapterData, id: chapterId },
+          chapter: { ...chapterData, id: chapterIdOrSlug },
         },
         versesResponse: {
           ...versesResponse,

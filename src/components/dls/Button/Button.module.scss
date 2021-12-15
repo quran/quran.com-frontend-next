@@ -12,6 +12,10 @@
   align-items: center;
   text-decoration: none;
   box-sizing: border-box;
+  transition: transform var(--transition-fast);
+  &:active {
+    transform: scale(0.92);
+  }
 }
 .withText {
   padding-block-start: 0;
@@ -306,4 +310,10 @@
 .noSidePadding {
   padding-inline-start: 0;
   padding-inline-end: 0;
+}
+
+// when button used as Popover's trigger, add style when Popover is open
+[data-state="open"] > button > .base {
+  background-color: var(--color-primary-medium);
+  @include utility.lighten-background-color;
 }

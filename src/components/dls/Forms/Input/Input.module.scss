@@ -1,14 +1,12 @@
+@use "src/styles/theme";
+
 .container {
-  background: var(--color-background-default);
-  border: 1px solid var(--color-background-alternative-deep);
+  background: var(--color-background-alternative-faded);
   border-radius: var(--border-radius-default);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  &:hover {
-    border: 1px solid var(--color-primary-medium);
-  }
   &.fixedWidth {
     width: calc(8 * var(--spacing-mega));
   }
@@ -26,6 +24,12 @@
   }
   &.warning {
     border-color: var(--color-warning-medium);
+  }
+  @include theme.light {
+    border: 1px solid var(--color-borders-hairline);
+  }
+  @include theme.dark {
+    border: none;
   }
 }
 
@@ -56,7 +60,8 @@
   height: 80%;
   width: 100%;
   font-size: var(--font-size-normal);
-  background: var(--color-background-default);
+  color: var(--color-text-default);
+  background: var(--color-background-alternative-faded);
   &:focus {
     outline: none;
   }

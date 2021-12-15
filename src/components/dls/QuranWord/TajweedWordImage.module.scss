@@ -1,0 +1,62 @@
+@use "src/styles/breakpoints";
+
+$dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg);
+.imageContainer {
+  // Detect OS dark mode
+  @media (prefers-color-scheme: dark) {
+    img {
+      filter: $dark-theme-filter;
+    }
+  }
+  [data-theme="light"] & {
+    img {
+      filter: unset;
+    }
+  }
+  [data-theme="dark"] & {
+    img {
+      filter: $dark-theme-filter;
+    }
+  }
+}
+
+.xs {
+  img {
+    zoom: 0.4;
+    @include breakpoints.tablet {
+      zoom: 0.5;
+    }
+  }
+}
+.sm {
+  img {
+    zoom: 0.5;
+    @include breakpoints.tablet {
+      zoom: 0.65;
+    }
+  }
+}
+.md {
+  img {
+    zoom: 0.7;
+    @include breakpoints.tablet {
+      zoom: 0.75;
+    }
+  }
+}
+.lg {
+  img {
+    zoom: 1;
+    @include breakpoints.tablet {
+      zoom: 0.9;
+    }
+  }
+}
+.xl {
+  img {
+    zoom: 1.2;
+    @include breakpoints.tablet {
+      zoom: 1.25;
+    }
+  }
+}

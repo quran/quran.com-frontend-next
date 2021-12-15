@@ -1,9 +1,6 @@
 @use "src/styles/utility";
 @use "src/styles/breakpoints";
 
-$select-width: calc(6.3 * var(--spacing-small));
-$select-width-mobile: calc(7 * var(--spacing-small));
-
 .container {
   @include utility.center-vertically;
 
@@ -14,11 +11,13 @@ $select-width-mobile: calc(7 * var(--spacing-small));
   }
 }
 
-.select {
-  & > select {
-    width: $select-width-mobile;
-    @include breakpoints.tablet {
-      width: $select-width;
-    }
+.globeIconWrapper {
+  display: flex;
+  align-items: center;
+  & > svg {
+    height: calc(1.4 * var(--spacing-medium));
+  }
+  & > svg > path {
+    stroke: var(--color-text-default);
   }
 }

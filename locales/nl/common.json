@@ -7,6 +7,7 @@
             "title": "Automatisch scrollen"
         },
         "play": "Audio afspelen",
+        "playback-normal": "normaal",
         "playback-speed": "Afspeelsnelheid",
         "playback-speed-unit": "x",
         "player": {
@@ -31,6 +32,8 @@
             "times": "keer",
             "verses-range": "Bereik van verzen"
         },
+        "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
+        "select-reciter": "Selecteer voordrager",
         "title": "Audio"
     },
     "ayah": "Aya",
@@ -79,10 +82,11 @@
         "code_v2": "King Fahad Complex V2",
         "font-size": "Lettertypegrootte",
         "lines": "lijnen",
-        "qcf-desc": "KPFG-lettertypen bieden een hogere kwaliteit, maar duren langer om te laden en kunnen niet via de browser worden gekopieerd.",
+        "qcf-desc": "KPFG-lettertypen bieden een hogere kwaliteit, maar het laden duurt langer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Koran lettertype",
         "tajweed": "Tajweed",
+        "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
@@ -94,6 +98,7 @@
         "clear": "Duidelijk"
     },
     "juz": "Juz",
+    "languages": "Talen",
     "loading": "Bezig met laden",
     "menu": "Menu",
     "mobile-apps": "Mobiele apps",
@@ -138,6 +143,7 @@
     },
     "prev": "Vorig",
     "privacy": "Privacy",
+    "product-updates": "Productupdates",
     "q-reflect": "KoranReflect",
     "quran-com": "koran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "Zoeken"
     },
     "settings": {
-        "change-reciter": "Voordrager wijzigen",
-        "change-tafsirs": "Tafsir wijzigen",
-        "change-translations": "Vertalingen wijzigen",
+        "no-tafsir-selected": "Geen tafsir geselecteerd",
+        "no-translation-selected": "Geen vertaling geselecteerd",
         "reading-experience": "Leeservaring",
         "reset-cta": "Reset instellingen",
         "reset-notif": "Je instellingen zijn teruggezet naar de standaardinstellingen",
         "search-reciter": "Zoek voordrager",
         "search-tafsirs": "Tafsir zoeken",
         "search-translations": "Vertalingen zoeken",
-        "title": "Instellingen"
+        "selected-reciter": "Geselecteerde voordrager",
+        "selected-tafsirs": "Geselecteerde Tafsirs",
+        "selected-translations": "Geselecteerde vertalingen",
+        "title": "Instellingen",
+        "value-and-others": "{{value}} en {{othersCount}} anderen",
+        "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
+        "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
     },
     "share": "Deel",
     "shared": "Link is gekopieerd naar het klembord!",
+    "sidebar": {
+        "search-juz": "Zoek Juz",
+        "search-page": "Zoekpagina",
+        "search-surah": "zoek soera",
+        "try-navigating-with": "Tip: probeer te navigeren met"
+    },
     "sitemap": "Sitemap",
     "sort": {
         "ascending": "Oplopend",
@@ -195,6 +212,7 @@
     },
     "theme": "Thema",
     "themes": {
+        "auto": "Auto",
         "dark": "Donker",
         "light": "Licht",
         "sepia": "Sepia",
@@ -203,6 +221,7 @@
     },
     "to": "Tot",
     "tooltip": "Knopinfo",
+    "tooltip-trans-lang": "Taal voor knopinfo",
     "translation": "Vertaling",
     "translations": "Vertalingen",
     "transliteration": "Transliteratie",
@@ -224,5 +243,6 @@
         "play-audio": "Audio afspelen",
         "title": "Woordklik"
     },
+    "word-tooltip": "Knopinfo voor woorden",
     "yes": "Ja"
 }

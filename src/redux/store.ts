@@ -23,10 +23,12 @@ import navbar from './slices/navbar';
 import prayerTimes from './slices/prayerTimes';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
+import fontFaces from './slices/QuranReader/font-faces';
 import highlightedLocation from './slices/QuranReader/highlightedLocation';
 import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
+import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
@@ -37,7 +39,7 @@ import welcomeMessage from './slices/welcomeMessage';
 
 const persistConfig = {
   key: 'root',
-  version: 16,
+  version: 17,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -54,6 +56,7 @@ const persistConfig = {
     'welcomeMessage',
     'prayerTimes',
     'defaultSettings',
+    'sidebarNavigation',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -76,6 +79,8 @@ export const rootReducer = combineReducers({
   voiceSearch,
   prayerTimes,
   defaultSettings,
+  fontFaces,
+  sidebarNavigation,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

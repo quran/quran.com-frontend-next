@@ -7,6 +7,7 @@
             "title": "آٹو سکرول"
         },
         "play": "آڈیو چلائیں۔",
+        "playback-normal": "نارمل",
         "playback-speed": "پلے بیک کی رفتار",
         "playback-speed-unit": "ایکس",
         "player": {
@@ -31,6 +32,8 @@
             "times": "اوقات",
             "verses-range": "آیات کی حد"
         },
+        "repeat-moved": "دہرائی جانے والی ترتیبات آڈیو پلیئر میں منتقل ہو گئی ہیں۔ ان تک رسائی کے لیے <0> <\/0> آئیکن پر کلک کریں۔",
+        "select-reciter": "تلاوت کرنے والا منتخب کریں۔",
         "title": "آڈیو"
     },
     "ayah": "آیہ",
@@ -79,10 +82,11 @@
         "code_v2": "کنگ فہد کمپلیکس V2",
         "font-size": "حرف کا سائز",
         "lines": "لکیریں",
-        "qcf-desc": "KPFG فونٹس اعلیٰ معیار فراہم کرتے ہیں لیکن لوڈ ہونے میں زیادہ وقت لگتا ہے اور براؤزر کے ذریعے کاپی نہیں کیا جا سکتا۔",
+        "qcf-desc": "KPFG فونٹس اعلیٰ معیار فراہم کرتے ہیں لیکن لوڈ ہونے میں زیادہ وقت لیتے ہیں۔",
         "qpc_uthmani_hafs": "QPC عثمانی حفص",
         "quran-font": "قرآن کا فونٹ",
         "tajweed": "تجوید",
+        "tajweed-desc": "Tajweed فونٹ ایک تاجوید رنگ کا مصحف دکھاتا ہے۔ آپ تاجوید کے رنگ کے اصولوں کے بارے میں مزید پڑھ سکتے ہیں <0> یہاں <\/0>",
         "text_indopak": "انڈو پاک",
         "text_uthmani": "عثمانی"
     },
@@ -94,6 +98,7 @@
         "clear": "صاف"
     },
     "juz": "جوز",
+    "languages": "زبانیں",
     "loading": "لوڈ ہو رہا ہے۔",
     "menu": "مینو",
     "mobile-apps": "موبائل ایپس",
@@ -138,6 +143,7 @@
     },
     "prev": "پچھلا",
     "privacy": "رازداری",
+    "product-updates": "پروڈکٹ اپڈیٹس",
     "q-reflect": "قرآن کی عکاسی",
     "quran-com": "Quran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "تلاش کریں۔"
     },
     "settings": {
-        "change-reciter": "تلاوت کرنے والے کو تبدیل کریں۔",
-        "change-tafsirs": "تفسیر کو تبدیل کریں۔",
-        "change-translations": "ترجمہ تبدیل کریں۔",
+        "no-tafsir-selected": "کوئی تفسیر منتخب نہیں ہے۔",
+        "no-translation-selected": "کوئی ترجمہ منتخب نہیں کیا گیا۔",
         "reading-experience": "پڑھنے کا تجربہ",
         "reset-cta": "ترتیبات کو دوبارہ ترتیب دیں۔",
         "reset-notif": "آپ کی ترتیبات کو ڈیفالٹ پر دوبارہ ترتیب دیا گیا ہے۔",
         "search-reciter": "تلاوت کرنے والے کو تلاش کریں۔",
         "search-tafsirs": "تفسیریں تلاش کریں۔",
         "search-translations": "ترجمہ تلاش کریں۔",
-        "title": "ترتیبات"
+        "selected-reciter": "منتخب قاری",
+        "selected-tafsirs": "منتخب تفسیر",
+        "selected-translations": "منتخب ترجمہ",
+        "title": "ترتیبات",
+        "value-and-others": "{{value}} ، اور {{othersCount}} دیگر",
+        "wbw-helper": "ترجمہ یا نقل حرفی کو براہ راست لفظ کے نیچے دکھائیں۔",
+        "word-tooltip-helper": "لفظ کو ہوور کرتے یا کلک کرتے وقت ترجمہ یا نقل حرفی دکھائیں۔"
     },
     "share": "بانٹیں",
     "shared": "لنک کو کلپ بورڈ پر کاپی کر دیا گیا ہے!",
+    "sidebar": {
+        "search-juz": "Juz تلاش کریں۔",
+        "search-page": "صفحہ تلاش کریں۔",
+        "search-surah": "سورہ تلاش کریں۔",
+        "try-navigating-with": "ٹپ: اس کے ساتھ نیویگیٹ کرنے کی کوشش کریں۔"
+    },
     "sitemap": "سائٹ کا نقشہ",
     "sort": {
         "ascending": "صعودی",
@@ -195,6 +212,7 @@
     },
     "theme": "خیالیہ",
     "themes": {
+        "auto": "آٹو",
         "dark": "اندھیرا",
         "light": "روشنی",
         "sepia": "سیپیا",
@@ -203,6 +221,7 @@
     },
     "to": "کو",
     "tooltip": "ٹول ٹِپ",
+    "tooltip-trans-lang": "ٹول ٹپ کی زبان",
     "translation": "ترجمہ",
     "translations": "ترجمے",
     "transliteration": "نقل حرفی",
@@ -224,5 +243,6 @@
         "play-audio": "آڈیو چلائیں۔",
         "title": "ورڈ کلک"
     },
+    "word-tooltip": "ورڈ ٹول ٹِپ",
     "yes": "جی ہاں"
 }

@@ -1,6 +1,6 @@
 {
-    "footer": "Our code is open source, so the community can easily ensure that this stance on privacy is actually the case on the code level and not just a stated goal.",
-    "ga": "We do use <0>Google Analytics<\/0> for ensuring that the site continues to work as expected and for knowing which features to prioritize work on. This information is anonymous and we can’t trace it back to any particular individual.",
+    "footer": "Our code is open source, so the community can easily inspect and ensure that our stance on privacy is being held to its upmost level.",
+    "ga": "We do use <0>Google Analytics<\/0> for ensuring that the site continues to work as expected and for knowing which features to prioritize working on. This information is anonymous and we can’t trace it back to any particular individual.",
     "header": "Privacy policy",
-    "main-desc": "This project is run by a set of Muslims who do this work for the sake of Allah. We do not serve you ads, so we do not need to track you or use your personal data to provide you with better ads to increase our revenues. We don’t gather any information (there is no login, there is no request for location permissions (except optionally on <0>salah.com<\/0> for the purposes of computing more accurate Salah timings, and so on)."
+    "main-desc": "This project is run by a set of Muslims who do this work for the sake of Allah. We do not serve you ads, so we do not need to track you or use your personal data to provide you with better ads to increase our revenues. We don’t gather any personally identifiable information. There is no login, there is also no request for location permissions (except optionally on the home page for the purposes of computing more accurate Salah timings)."
 }

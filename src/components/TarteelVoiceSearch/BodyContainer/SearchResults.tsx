@@ -10,7 +10,8 @@ import SearchResultItem from 'src/components/Search/SearchResults/SearchResultIt
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeVersesFilterUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { shortenVerseText } from 'src/utils/verse';
+import { toLocalizedVerseKey } from 'src/utils/locale';
+import { truncateString } from 'src/utils/string';
 import { VersesResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';
@@ -22,7 +23,7 @@ interface Props {
 
 const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const params = {
     filters: searchResult.matches.map((match) => `${match.surahNum}:${match.ayahNum}`).join(','),
     fields: 'text_uthmani',
@@ -44,7 +45,10 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
           return {
             key: verse.verseKey,
             resultType: SearchNavigationType.AYAH,
-            name: `[${verse.verseKey}] ${shortenVerseText(verse.textUthmani, 80)}`,
+            name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${truncateString(
+              verse.textUthmani,
+              80,
+            )}`,
             group: t('command-bar.navigations'),
           };
         });
@@ -69,7 +73,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
         </>
       );
     },
-    [isCommandBar, t],
+    [isCommandBar, lang, t],
   );
 
   return <DataFetcher queryKey={makeVersesFilterUrl(params)} render={responseRender} />;

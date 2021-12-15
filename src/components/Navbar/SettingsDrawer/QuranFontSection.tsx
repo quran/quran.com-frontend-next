@@ -1,13 +1,17 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import styles from './QuranFontSection.module.scss';
+import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
+import VersePreview from './VersePreview';
 
 import Counter from 'src/components/dls/Counter/Counter';
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import Select from 'src/components/dls/Forms/Select';
+import Switch from 'src/components/dls/Switch/Switch';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import {
   decreaseQuranTextFontScale,
@@ -19,7 +23,6 @@ import {
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
@@ -33,13 +36,10 @@ const QuranFontSection = () => {
       [QuranFont.IndoPak]: [
         { id: QuranFont.IndoPak, label: t(`fonts.${QuranFont.IndoPak}`), value: QuranFont.IndoPak },
       ],
+      [QuranFont.Tajweed]: [
+        { id: QuranFont.Tajweed, label: t(`fonts.${QuranFont.Tajweed}`), value: QuranFont.Tajweed },
+      ],
       [QuranFont.Uthmani]: [
-        {
-          id: QuranFont.QPCHafs,
-          label: t(`fonts.${QuranFont.QPCHafs}`),
-          value: QuranFont.QPCHafs,
-          name: QuranFont.QPCHafs,
-        },
         {
           id: QuranFont.MadaniV1,
           label: t(`fonts.${QuranFont.MadaniV1}`),
@@ -53,10 +53,10 @@ const QuranFontSection = () => {
           name: QuranFont.MadaniV2,
         },
         {
-          id: QuranFont.Tajweed,
-          label: t(`fonts.${QuranFont.Tajweed}`),
-          value: QuranFont.Tajweed,
-          name: QuranFont.Tajweed,
+          id: QuranFont.QPCHafs,
+          label: t(`fonts.${QuranFont.QPCHafs}`),
+          value: QuranFont.QPCHafs,
+          name: QuranFont.QPCHafs,
         },
       ],
     }),
@@ -95,14 +95,12 @@ const QuranFontSection = () => {
       })),
     [t],
   );
-  // in the UI, we have two view / font categories, indopak and uthmani.
+
   const types = useMemo(
     () =>
-      [QuranFont.IndoPak, QuranFont.Uthmani].map((font) => ({
-        id: font,
-        label: t(`fonts.${font}`),
+      [QuranFont.Uthmani, QuranFont.IndoPak, QuranFont.Tajweed].map((font) => ({
+        name: t(`fonts.${font}`),
         value: font,
-        name: font,
       })),
     [t],
   );
@@ -111,13 +109,15 @@ const QuranFontSection = () => {
     <Section>
       <Section.Title>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
-        <Section.Label>{t('type')}</Section.Label>
-        <RadioGroup
-          onChange={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
-          value={selectedType}
-          label="type"
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+      </Section.Row>
+      <Section.Row>
+        <Switch
           items={types}
-          orientation={RadioGroupOrientation.Horizontal}
+          selected={selectedType}
+          onSelect={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
         />
       </Section.Row>
       <Section.Row>
@@ -158,7 +158,7 @@ const QuranFontSection = () => {
           }
         />
       </Section.Row>
-      <Section.Footer visible={isQCFFont(quranFont)}>{t('fonts.qcf-desc')}</Section.Footer>
+      <QuranFontSectionFooter quranFont={quranFont} />
     </Section>
   );
 };

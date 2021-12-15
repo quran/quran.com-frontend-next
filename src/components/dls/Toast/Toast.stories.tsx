@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
-import { ToastContainer, toast } from './Toast';
+import { ToastContainer, toast, ToastStatus } from './Toast';
+import styles from './Toast.stories.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
 
@@ -12,6 +13,24 @@ export const Normal = () => {
   return (
     <div>
       <Button onClick={notify}>Notify!</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export const Status = () => {
+  const notify = (status) => toast(`This is ${status} toast message`, { status });
+  return (
+    <div>
+      <Button className={styles.toastBtn} onClick={() => notify(ToastStatus.Error)}>
+        Error!
+      </Button>
+      <Button className={styles.toastBtn} onClick={() => notify(ToastStatus.Warning)}>
+        Warning!
+      </Button>
+      <Button className={styles.toastBtn} onClick={() => notify(ToastStatus.Success)}>
+        Success!
+      </Button>
       <ToastContainer />
     </div>
   );

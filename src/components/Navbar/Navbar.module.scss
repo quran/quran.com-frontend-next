@@ -11,11 +11,12 @@
   height: constants.$navbar-height;
   width: 100%;
   transition: var(--transition-regular);
-  background: var(--color-background-default);
+  background: var(--color-background-elevated);
   z-index: var(--z-index-header);
-  border-bottom: 1px var(--color-borders-hairline) solid;
+  will-change: transform;
 }
 
 .hiddenNav {
-  transform: translateY(0 - constants.$navbar-height);
+  transform: translate3d(0, 0 - constants.$navbar-height, 0);
+  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
 }

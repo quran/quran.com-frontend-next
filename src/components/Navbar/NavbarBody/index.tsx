@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
-import IconQ from '../../../../public/icons/Q.svg';
+import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';
@@ -15,7 +15,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
 import styles from './NavbarBody.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
@@ -51,22 +51,17 @@ const NavbarBody: React.FC = () => {
             </Button>
             <NavigationDrawer />
           </>
-          <Button
-            href="/"
-            shape={ButtonShape.Circle}
-            variant={ButtonVariant.Ghost}
-            className={classNames(styles.logoWrapper, styles.QIcon)}
-            size={ButtonSize.Large}
-            shouldFlipOnRTL={false}
-          >
-            <IconQ />
-          </Button>
-          <LanguageSelector />
+          <Link href="/">
+            <a className={styles.logoWrapper}>
+              <QuranTextLogo />
+            </a>
+          </Link>
         </div>
       </div>
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
           <>
+            <LanguageSelector />
             <Button
               tooltip={t('settings.title')}
               shape={ButtonShape.Circle}

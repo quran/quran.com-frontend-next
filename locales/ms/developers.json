@@ -1,18 +1,19 @@
 {
     "footer": "- Pasukan Quran.com",
     "header": "Bantuan pembangunan",
-    "issues-cta": "Sekiranya anda mempunyai sebarang soalan atau ingin menghubungi penyelenggara, tulis sahaja isu! Kami akan menghubungi anda secepat mungkin, insyaAllah.",
-    "issues-guide": "Biasanya kami menggunakan isu Github sebagai sumber untuk perkara yang perlu diusahakan seterusnya, perkara &apos; akan datang dan apakah pepijat yang wujud yang perlu diselesaikan. Contohnya <0> url ini <\/0> mempunyai senarai pepijat, perkara yang kami perlukan bantuan dan ciri yang akan datang.",
+    "issues-cta": "Sekiranya anda mempunyai sebarang soalan atau ingin menghubungi penyelenggara, tulis sahaja isu anda! Kami akan menghubungi anda secepat mungkin, insyaAllah.",
+    "issues-guide": "Biasanya kami menggunakan <0> projek Github <\/0> sebagai sumber untuk perkara yang perlu diusahakan seterusnya, perkara yang akan datang dan pepijat yang wujud yang perlu diselesaikan. Contohnya <1> url ini <\/1> mempunyai senarai pepijat, perkara yang kami perlukan bantuan dan ciri yang akan datang.",
     "main-desc": "Assalamualaikum, pertama sekali, jutaan terima kasih atas minat anda untuk membantu kami membangunkan Quran.com dan projek-projeknya. Kami teruja untuk bekerjasama dengan anda!",
     "projects": {
-        "all": "Kami mempunyai beberapa projek yang semuanya dihoskan di Github. Anda boleh menemui kesemuanya <0> di sini <\/0> . Tetapi untuk menggariskan mereka:",
+        "all": "Kami mempunyai beberapa projek yang dihoskan di Github. Anda boleh menemui kesemuanya <0> di sini <\/0> . Ianya adalah seperti berikut:",
         "q-android": "<0> Quran Android <\/0>",
         "q-api": "<0> API Quran.com <\/0> - ditulis dalam Ruby on Rails.",
-        "q-audio": "<0> Audio Al-Quran <\/0> dan <1> Apl mudah alih Audio Al-Quran <\/1>",
+        "q-audio": "<0> Audio Al-Quran <\/0> dan <1> Aplikasi mudah alih Audio Al-Quran <\/1>",
         "q-audio-segments": "<0> Segmen Audio Al-Quran <\/0>",
         "q-ios": "<0> Al-Quran iOS <\/0>",
+        "q-next": "<0> Quran.com Frontend <\/0> - ditulis dalam Next.js.",
         "q-v2": "<0> Quran.com <\/0> - ditulis dalam Ruby on Rails."
     },
-    "sub-main-desc": "Kami adalah pasukan pembangun, pereka bentuk, pengurus produk dan pemikir yang bekerja di Quran.com secara sukarela. Alhamdulilah kami telah diberkati untuk bekerja untuk beberapa syarikat hebat di Silicon Valley, Toronto dan UAE - dan kami merasakan bahawa ini adalah sekurang-kurangnya yang boleh kami lakukan untuk membantu Ummah kami bergerak ke hadapan dalam mempelajari dan mempelajari agama mereka. Bekerja di Quran.com adalah sangat menggembirakan dan semoga Allah memberi ganjaran kepada kita semua (dan memberi ganjaran kepada anda) atas usaha kami.",
-    "thanks": "Terima kasih untuk membaca! Tidak sabar-sabar untuk melihat anda melakukan beberapa kod!"
+    "sub-main-desc": "Kami adalah pasukan pembangun, pereka bentuk, pengurus produk dan pemikir yang bekerja di Quran.com secara sukarela. Alhamdulilah kami telah diberkati untuk bekerja untuk beberapa syarikat hebat di Silicon Valley, Toronto dan UAE - dan kami merasakan bahawa ini adalah sekurang-kurangnya yang boleh kami lakukan untuk membantu Ummah kita bergerak ke hadapan dalam menuntut ilmu agama. Bekerja untuk Quran.com adalah suautu usaha yang sangat menggembirakan dan semoga Allah memberi ganjaran kepada kita semua (dan memberi ganjaran kepada anda) atas usaha kita bersama.",
+    "thanks": "Terima kasih kerana membaca! Kami teruja untuk melihat anda menyampaikan beberapa kod!"
 }

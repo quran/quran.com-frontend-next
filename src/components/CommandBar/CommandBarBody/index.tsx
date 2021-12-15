@@ -18,7 +18,8 @@ import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { shortenVerseText } from 'src/utils/verse';
+import { toLocalizedVerseKey } from 'src/utils/locale';
+import { truncateString } from 'src/utils/string';
 import { getVerseTextByWords } from 'src/utils/word';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
@@ -47,7 +48,7 @@ const NAVIGATE_TO = [
 ];
 
 const CommandBarBody: React.FC = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -58,8 +59,7 @@ const CommandBarBody: React.FC = () => {
    * @returns {void}
    */
   const onSearchQueryChange = useCallback((event: React.FormEvent<HTMLInputElement>): void => {
-    const newSearchQuery = event.currentTarget.value;
-    setSearchQuery(newSearchQuery || null);
+    setSearchQuery(event.currentTarget.value || null);
   }, []);
 
   /**
@@ -119,7 +119,10 @@ const CommandBarBody: React.FC = () => {
             return {
               key: verse.verseKey,
               resultType: SearchNavigationType.AYAH,
-              name: `[${verse.verseKey}] ${shortenVerseText(getVerseTextByWords(verse))}`,
+              name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${truncateString(
+                getVerseTextByWords(verse),
+                150,
+              )}`,
               group: t('verses'),
             };
           }),
@@ -138,7 +141,7 @@ const CommandBarBody: React.FC = () => {
         />
       );
     },
-    [getPreInputCommands, recentNavigations, t],
+    [getPreInputCommands, lang, recentNavigations.length, t],
   );
 
   return (

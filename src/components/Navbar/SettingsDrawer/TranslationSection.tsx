@@ -1,16 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-import RightIcon from '../../../../public/icons/east.svg';
 
 import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
-import Button from 'src/components/dls/Button/Button';
 import Counter from 'src/components/dls/Counter/Counter';
+import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
@@ -24,6 +22,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 
 const TranslationSection = () => {
@@ -43,31 +42,50 @@ const TranslationSection = () => {
         ))}
       </div>
     ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedTranslations.length],
+    [selectedTranslations],
+  );
+
+  const localizedSelectedTranslations = useMemo(
+    () => toLocalizedNumber(selectedTranslations.length - 1, lang),
+    [selectedTranslations, lang],
   );
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
+      const firstSelectedTranslation = data.translations.find(
+        (translation) => translation.id === selectedTranslations[0],
+      );
+
+      let selectedValueString = t('settings.no-translation-selected');
+      if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation.name;
+      if (selectedTranslations.length > 1)
+        selectedValueString = t('settings.value-and-others', {
+          value: firstSelectedTranslation.name,
+          othersCount: localizedSelectedTranslations,
+        });
+
       return (
-        <div>
-          {selectedTranslations.map((translationId) => {
-            const selectedTranslation = data.translations.find(
-              (translation) => translation.id === translationId,
-            );
-            return <div>{selectedTranslation.name}</div>;
-          })}
-        </div>
+        <SelectionCard
+          label={t('settings.selected-translations')}
+          value={selectedValueString}
+          onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
+        />
       );
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectSelectedTranslations.length],
+    [dispatch, localizedSelectedTranslations, selectedTranslations, t],
   );
 
   return (
     <div className={styles.container}>
       <Section>
         <Section.Title>{t('translation')}</Section.Title>
+        <Section.Row>
+          <DataFetcher
+            loading={translationLoading}
+            queryKey={makeTranslationsUrl(lang)}
+            render={renderTranslations}
+          />
+        </Section.Row>
         <Section.Row>
           <Section.Label>{t('fonts.font-size')}</Section.Label>
 
@@ -88,22 +106,6 @@ const TranslationSection = () => {
             }
           />
         </Section.Row>
-        <Section.Row>
-          <Section.Label>{t('translations')}</Section.Label>
-          <DataFetcher
-            loading={translationLoading}
-            queryKey={makeTranslationsUrl(lang)}
-            render={renderTranslations}
-          />
-        </Section.Row>
-        <div className={styles.changeReciterButtonContainer}>
-          <Button
-            onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
-            suffix={<RightIcon />}
-          >
-            {t('settings.change-translations')}
-          </Button>
-        </div>
       </Section>
     </div>
   );

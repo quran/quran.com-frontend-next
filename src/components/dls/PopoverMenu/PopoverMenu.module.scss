@@ -1,7 +1,7 @@
 $animationDuration: 0.35s;
 $animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
 
-$min-width: calc(11 * var(--spacing-large));
+$min-width: calc(12 * var(--spacing-large));
 $separator-size: 1px;
 
 @keyframes slideUpAndFade {
@@ -53,8 +53,8 @@ $separator-size: 1px;
   padding-inline-start: 0;
   padding-inline-end: 0;
   min-width: $min-width;
-  background-color: var(--color-background-default);
-  border-radius: var(--border-radius-default);
+  background-color: var(--color-background-elevated);
+  border-radius: var(--border-radius-rounded);
   box-shadow: var(--shadow-large);
   animation-duration: $animationDuration;
   animation-timing-function: $animationEasing;
@@ -82,8 +82,7 @@ $separator-size: 1px;
   color: var(--color-text-default);
   display: flex;
   align-items: center;
-  padding-block-start: var(--spacing-xxsmall);
-  padding-block-end: var(--spacing-xxsmall);
+  padding-block: var(--spacing-xxsmall);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
   position: relative;
@@ -103,6 +102,9 @@ $separator-size: 1px;
     color: var(--color-text-default);
   }
 
+  [dir="rtl"] & .iconWrapper.shouldFlipOnRTL {
+    transform: scaleX(-1);
+  }
   & .iconWrapper {
     & > svg > path {
       fill: var(--color-text-default);
@@ -123,4 +125,8 @@ $separator-size: 1px;
   margin-block-end: var(--spacing-xxsmall);
   margin-inline-start: var(--spacing-xxsmall);
   margin-inline-end: var(--spacing-xxsmall);
+}
+
+.selected {
+  background-color: var(--color-background-alternative-medium);
 }

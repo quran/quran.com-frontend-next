@@ -60,7 +60,7 @@ const SettingsReciter = () => {
           return (
             <div>
               {filteredReciters.map((reciter) => (
-                <label className={styles.reciter} htmlFor={reciter.id.toString()}>
+                <label className={styles.reciter} htmlFor={reciter.id.toString()} key={reciter.id}>
                   <input
                     id={reciter.id.toString()}
                     type="radio"

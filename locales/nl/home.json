@@ -20,6 +20,7 @@
         }
     },
     "no-bookmarks": "U heeft nog geen bladwijzers",
+    "noble-quran": "De Edele Koran",
     "prayer-names": {
         "asr": "asr",
         "dhuhr": "Dhuhr",
@@ -40,6 +41,7 @@
         "trigger": "Snelle toegang tot alles"
     },
     "welcome": {
+        "changes-cta": "Recente wijzigingen bekijken",
         "desc": "We zijn actief bezig met het toevoegen van nieuwe functies en het doorvoeren van veranderingen. Als u problemen ondervindt, geef dan alstublieft feedback.",
         "feedback-cta": "Geef feedback",
         "join-cta": "Word lid van de Discord-gemeenschap",

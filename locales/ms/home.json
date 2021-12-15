@@ -20,6 +20,7 @@
         }
     },
     "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
+    "noble-quran": "Al-Quran yang mulia",
     "prayer-names": {
         "asr": "Asar",
         "dhuhr": "Zuhur",
@@ -31,7 +32,7 @@
     "prayer-times": {
         "use-location": "Gunakan lokasi yang tepat"
     },
-    "recently-read": "Baru-baru Baca",
+    "recently-read": "Bacaan Terkini",
     "tab": {
         "bookmarks": "Penanda buku",
         "popular": "Popular"
@@ -40,8 +41,9 @@
         "trigger": "Akses pantas kepada apa sahaja"
     },
     "welcome": {
+        "changes-cta": "Lihat Perubahan Terkini",
         "desc": "Kami secara aktif menambah ciri baharu dan mendorong perubahan. Jika anda menghadapi sebarang masalah, sila berikan maklum balas.",
-        "feedback-cta": "Memberikan maklum balas",
+        "feedback-cta": "Memberikan Maklum Balas",
         "join-cta": "Sertai Komuniti Discord",
         "title": "Selamat datang ke Beta Pra-Keluaran Quran.com baharu!"
     }

@@ -24,53 +24,107 @@
   );
 }
 
+// On mobile, font size 1-3 will try to preserve the line, using flex
+// font 4-5 no longer using the flex. And not preserving the line
+
+// If you're updating font size, double check on font size 3.
+// make sure it will not break the layout
+
 $scales-map: (
-  default: (
-    desktop: (
-      1: 1,
-      2: 1.5,
-      3: 2,
-      4: 2.5,
-      5: 3,
+  qpc_uthmani_hafs: (
+    tablet: (
+      1: 1.5rem,
+      2: 1.8rem,
+      3: 2.15rem,
+      4: 2.65rem,
+      5: 3.5rem,
     ),
     mobile: (
-      1: 1,
-      2: 1.1,
-      3: 1.2,
-      4: 2.5,
-      5: 3.3,
+      1: 4vw,
+      2: 5vw,
+      3: 5.4vw,
+      4: 8.9vw,
+      5: 11vw,
+    ),
+  ),
+  text_indopak: (
+    tablet: (
+      1: 1.5rem,
+      2: 1.8rem,
+      3: 2.15rem,
+      4: 2.65rem,
+      5: 3.5rem,
+    ),
+    mobile: (
+      1: 4.4vw,
+      2: 4.8vw,
+      3: 5.4vw,
+      4: 6vw,
+      5: 9.3vw,
+    ),
+  ),
+  code_v2: (
+    tablet: (
+      1: 1.5rem,
+      2: 1.8rem,
+      3: 2.15rem,
+      4: 2.65rem,
+      5: 3.5rem,
+    ),
+    mobile: (
+      1: 4vw,
+      2: 5vw,
+      3: 5.9vw,
+      4: 8.4vw,
+      5: 10vw,
+    ),
+  ),
+  code_v1: (
+    tablet: (
+      1: 1.8rem,
+      2: 1.95rem,
+      3: 2.3rem,
+      4: 2.75rem,
+      5: 3.5rem,
+    ),
+    mobile: (
+      1: 4vw,
+      2: 5vw,
+      3: 6.3vw,
+      4: 10vw,
+      5: 12vw,
     ),
   ),
   translation: (
-    desktop: (
-      1: 1,
-      2: 1.2,
-      3: 1.3,
-      4: 1.5,
-      5: 2,
+    tablet: (
+      1: 0.85rem,
+      2: 1rem,
+      3: 1.18rem,
+      4: 1.4rem,
+      5: 2rem,
     ),
     mobile: (
-      1: 1,
-      2: 1.1,
-      3: 1.2,
-      4: 1.4,
-      5: 1.8,
+      1: 0.85rem,
+      2: 0.95rem,
+      3: 1.05rem,
+      4: 1.2rem,
+      5: 1.5rem,
     ),
   ),
   tafsir: (
-    desktop: (
-      1: 1,
-      2: 1.2,
-      3: 1.4,
-      4: 1.8,
-      5: 2,
+    tablet: (
+      1: 0.85rem,
+      2: 1.1rem,
+      3: 1.2rem,
+      4: 1.4rem,
+      5: 2rem,
     ),
     mobile: (
-      1: 1,
-      2: 1.2,
-      3: 1.4,
-      4: 1.7,
-      5: 2,
+      1: 0.85rem,
+      2: 0.95rem,
+      3: 1.1rem,
+      4: 1.2rem,
+      5: 1.4rem,
     ),
   ),
 );
@@ -82,30 +136,32 @@ $scales-map: (
   @return $map;
 }
 
-@function get-scales($name, $device-type: "mobile") {
+@function get-scales($name, $device-type) {
   @return map-deep-get($scales-map, $name, $device-type);
 }
 
-@mixin generate-font-sizes($name: "quran") {
+@mixin generate-font-sizes($name) {
   $mobile-scales: null;
   $desktop-scales: null;
-  // if the current name has values other than the default ones
+  $tablet-scales: null;
+
   @if map.has-key($scales-map, $name) {
-    $mobile-scales: get-scales($name);
+    $mobile-scales: get-scales($name, "mobile");
+    $tablet-scales: get-scales($name, "tablet");
     $desktop-scales: get-scales($name, "desktop");
   } @else {
-    $mobile-scales: get-scales("default");
+    $mobile-scales: get-scales("default", "mobile");
+    $tablet-scales: get-scales("default", "tablet");
     $desktop-scales: get-scales("default", "desktop");
   }
 
   @for $i from 1 through constants.$maximum-font-step {
     .#{$name}-font-size-#{$i} {
-      font-size: calc(#{map.get($mobile-scales, $i)} * var(--font-size-normal));
+      --font-size: #{map.get($mobile-scales, $i)};
       @include breakpoints.tablet {
-        font-size: calc(
-          #{map.get($desktop-scales, $i)} * var(--font-size-normal)
-        );
+        --font-size: #{map.get($tablet-scales, $i)};
       }
+      font-size: var(--font-size);
     }
   }
 }

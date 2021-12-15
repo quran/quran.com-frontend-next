@@ -3,6 +3,7 @@ import TranslatedName from './TranslatedName';
 
 interface Chapter {
   id: number | string;
+  localizedId?: string;
   versesCount: number;
   bismillahPre: boolean;
   revelationOrder: number;
@@ -13,6 +14,7 @@ interface Chapter {
   nameArabic: string;
   translatedName: TranslatedName | string;
   defaultSlug: Slug;
+  slug?: string;
   slugs?: Slug[];
 }
 

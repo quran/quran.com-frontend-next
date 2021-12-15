@@ -2,7 +2,7 @@
     "footer": "- Ekipi i Quran.com",
     "header": "Ndihmë për zhvillimin",
     "issues-cta": "Nëse keni ndonjë pyetje ose dëshironi të kontaktoni mirëmbajtësit, thjesht shkruani një problem! Ne do të kthehemi tek ju sa më shpejt që të mundemi, inshAllah.",
-    "issues-guide": "Zakonisht ne përdorim çështjet e Github si burim për çfarë të punojmë më pas, çfarë &apos; po shfaqen dhe cilat defekte ekzistojnë që duhet të zgjidhen. Për shembull <0> kjo url <\/0> ka një listë të gabimeve, gjëra për të cilat kemi nevojë për ndihmë dhe veçori të ardhshme.",
+    "issues-guide": "Në mënyrë tipike ne përdorim <0> projektet Github <\/0> si burim për çfarë të punojmë më pas, çfarë do të ndodhë dhe çfarë gabimesh ekzistojnë që duhen zgjidhur. Për shembull <1> kjo url <\/1> ka një listë të gabimeve, gjëra për të cilat kemi nevojë për ndihmë dhe veçori të ardhshme.",
     "main-desc": "Asalamu Alykom, Së pari, ju falënderoj shumë për interesimin tuaj për të na ndihmuar të zhvillojmë Quran.com dhe projektet e tij. Ne jemi të ngazëllyer për të punuar me ju!",
     "projects": {
         "all": "Ne kemi një numër projektesh të gjitha të organizuara në Github. Mund t'i gjeni të gjitha <0> këtu <\/0> . Por për t'i përshkruar ato:",
@@ -11,6 +11,7 @@
         "q-audio": "<0> Audio Kur'anore <\/0> dhe <1> Aplikacionet celulare Audio Kur'anore <\/1>",
         "q-audio-segments": "<0> Segmentet audio të Kuranit <\/0>",
         "q-ios": "<0> Kurani iOS <\/0>",
+        "q-next": "<0> Quran.com Frontend <\/0> - shkruar në Next.js.",
         "q-v2": "<0> Quran.com <\/0> - shkruar në Ruby on Rails."
     },
     "sub-main-desc": "Ne jemi një ekip zhvilluesish, dizajnerësh, menaxherësh produktesh dhe mendimtarësh që punojnë në Quran.com mbi baza vullnetare. Elhamdulilah, ne kemi qenë të bekuar të punojmë për disa kompani të mëdha në Silicon Valley, Toronto dhe Emiratet e Bashkuara Arabe - dhe mendojmë se kjo është më e pakta që mund të bëjmë për të ndihmuar Umetin tonë të ecë përpara në mësimin dhe studimin e fesë së tyre. Puna në Quran.com është shumë kënaqësi dhe Allahu na shpërbleftë të gjithëve (dhe ju shpërbleftë) për përpjekjet tona.",

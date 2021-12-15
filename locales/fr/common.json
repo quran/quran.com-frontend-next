@@ -7,6 +7,7 @@
             "title": "Défilement automatique"
         },
         "play": "Lire le son",
+        "playback-normal": "Normal",
         "playback-speed": "Vitesse de lecture",
         "playback-speed-unit": "X",
         "player": {
@@ -31,6 +32,8 @@
             "times": "fois",
             "verses-range": "Gamme de vers"
         },
+        "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> <\/0> pour y accéder",
+        "select-reciter": "Sélectionnez le récitant",
         "title": "l'audio"
     },
     "ayah": "Ayah",
@@ -79,10 +82,11 @@
         "code_v2": "Complexe King Fahad V2",
         "font-size": "Taille de police",
         "lines": "Lignes",
-        "qcf-desc": "Les polices KPFG offrent une qualité supérieure mais prennent plus de temps à charger et ne peuvent pas être copiées via le navigateur.",
+        "qcf-desc": "Les polices KPFG offrent une qualité supérieure mais prennent plus de temps à charger.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Police du Coran",
         "tajweed": "Tajweed",
+        "tajweed-desc": "La police Tajweed montre un Mushaf de couleur Tajweed. Vous pouvez en savoir plus sur les règles de couleur Tajweed <0> ici <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
@@ -94,6 +98,7 @@
         "clear": "Dégager"
     },
     "juz": "Juz",
+    "languages": "Langues",
     "loading": "Chargement",
     "menu": "Menu",
     "mobile-apps": "Application mobile",
@@ -138,6 +143,7 @@
     },
     "prev": "Précédent",
     "privacy": "Intimité",
+    "product-updates": "Mises à jour du produit",
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "Chercher"
     },
     "settings": {
-        "change-reciter": "Changer de récitant",
-        "change-tafsirs": "Changer de Tafsir",
-        "change-translations": "Modifier les traductions",
+        "no-tafsir-selected": "Aucun tafsir sélectionné",
+        "no-translation-selected": "Aucune traduction sélectionnée",
         "reading-experience": "Expérience de lecture",
         "reset-cta": "Réinitialiser les options",
         "reset-notif": "Vos paramètres ont été réinitialisés à ceux par défaut",
         "search-reciter": "Recherche de récitant",
         "search-tafsirs": "Rechercher des Tafsirs",
         "search-translations": "Rechercher des traductions",
-        "title": "Paramètres"
+        "selected-reciter": "Réciteur sélectionné",
+        "selected-tafsirs": "Tafsirs sélectionnés",
+        "selected-translations": "Traductions sélectionnées",
+        "title": "Paramètres",
+        "value-and-others": "{{value}} , et {{othersCount}} autres",
+        "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
+        "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
     },
     "share": "Partager",
     "shared": "Le lien a été copié dans le presse-papiers !",
+    "sidebar": {
+        "search-juz": "Rechercher Juz",
+        "search-page": "Page de recherche",
+        "search-surah": "Recherche sourate",
+        "try-navigating-with": "Astuce : essayez de naviguer avec"
+    },
     "sitemap": "Plan du site",
     "sort": {
         "ascending": "Ascendant",
@@ -195,6 +212,7 @@
     },
     "theme": "Thème",
     "themes": {
+        "auto": "Auto",
         "dark": "Sombre",
         "light": "Léger",
         "sepia": "Sépia",
@@ -203,6 +221,7 @@
     },
     "to": "À",
     "tooltip": "Info-bulle",
+    "tooltip-trans-lang": "Langue de l'info-bulle",
     "translation": "Traduction",
     "translations": "Traductions",
     "transliteration": "Translitération",
@@ -224,5 +243,6 @@
         "play-audio": "Lire le son",
         "title": "Clic sur mot"
     },
+    "word-tooltip": "Info-bulle Word",
     "yes": "Oui"
 }

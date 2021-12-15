@@ -6,11 +6,11 @@
     },
     "main-desc": "Kur'an-ı Kerim, İslam'ın merkezi dini metnidir. Müslümanlar, Kuran'ın insanlık için ilahi rehberlik ve yönlendirme kitabı olduğuna inanırlar ve orijinal Arapça metni Allah'ın (Tanrı) son vahyi olarak kabul ederler. Orijinal Arapça metnin tüm çevirileri bu nedenle orijinal anlamların yorumlarıdır ve bu şekilde benimsenmelidir.",
     "meccan": {
-        "desc": "Mekke sureleri, İslam geleneğine göre, İslam peygamberi Muhammed ve takipçilerinin Mekke'den Medine'ye (Hicret) hicretinden önce herhangi bir zamanda vahyedilen Kuran'ın kronolojik olarak daha önceki bölümleridir (süreler). Medine sureleri, bu ismin şehrine taşınmasından sonra meydana gelen vahiylerdir.",
+        "desc": "Mekke sureleri, İslam geleneğine göre, İslam peygamberi Muhammed'in ve takipçilerinin Mekke'den Medine'ye (Hicret) hicretinden önce herhangi bir zamanda vahyedilmiş olan Kuran'ın kronolojik olarak daha önceki bölümleridir (süreler). Medine sureleri, bu isimle anılan şehre taşınmadan sonra meydana gelen vahiylerdir.",
         "surahs": "Mekke Sureleri"
     },
     "median": {
-        "desc": "Kuran'ın Medine sureleri veya Medine sureleri, İslami geleneğe göre Muhammed'den sonra Medine'de vahyedilen en son 24 suredir &apos; Mekke'den hicret. Bu sureler, Mekke'deki azınlık konumlarının aksine, Müslüman topluluk daha büyük ve daha gelişmiş olduğunda Allah tarafından nazil olmuştur.",
+        "desc": "Kuran'ın Medine sureleri veya Medine bölümleri, İslami geleneğe göre Muhammed'in Mekke'den hicretinden sonra Medine'de vahyedilen en son 24 suredir. Bu sureler, Mekke'deki azınlık konumlarının aksine, Müslüman topluluk daha geniş ve daha gelişmişken Allah tarafından indirilmiştir.",
         "surahs": "Medine Sureleri"
     },
     "questions": "Herhangi bir sorunuz varsa, <0> geri bildirim <\/0> sayfasını ziyaret edebilirsiniz.",

@@ -11,10 +11,12 @@ import TafsirInfo from 'types/TafsirInfo';
  * @param {string[]} options
  * @returns {SelectOption[]}
  */
-export const generateSelectOptions = (options: string[]): SelectOption[] =>
+export const generateSelectOptions = (
+  options: Array<{ label: string; value: string | number }>,
+): SelectOption[] =>
   options.map((option) => ({
-    label: option,
-    value: option,
+    label: option.label,
+    value: option.value,
   }));
 
 /**

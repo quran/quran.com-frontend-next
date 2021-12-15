@@ -9,16 +9,12 @@
   padding-block-end: var(--spacing-mega);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
-  h1 {
+  h1,
+  & .heading {
     font-size: var(--font-size-xlarge);
     line-height: var(--line-height-jumbo);
     margin-block-end: var(--spacing-xsmall);
     font-weight: var(--font-weight-bold);
-  }
-  h2 {
-    font-size: var(--font-size-large);
-    margin-block-end: var(--spacing-xsmall);
-    font-weight: var(--font-weight-semibold);
   }
   p {
     line-height: var(--line-height-large);

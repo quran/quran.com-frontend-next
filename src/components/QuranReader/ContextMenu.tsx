@@ -1,8 +1,12 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
 
 import styles from './ContextMenu.module.scss';
 
@@ -10,12 +14,18 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import {
+  selectIsSidebarNavigationVisible,
+  setIsVisible,
+} from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { getJuzNumberByHizb } from 'src/utils/juz';
-import { shouldUseMinimalLayout } from 'src/utils/locale';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
+  const dispatch = useDispatch();
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
@@ -25,15 +35,21 @@ const ContextMenu = () => {
     return chapterId ? getChapterData(chapterId, lang) : null;
   }, [chapterId, lang]);
   const juzNumber = useMemo(() => {
-    return hizb ? getJuzNumberByHizb(Number(hizb)) : null;
-  }, [hizb]);
+    return hizb ? toLocalizedNumber(getJuzNumberByHizb(Number(hizb)), lang) : null;
+  }, [hizb, lang]);
+  const localizedHizb = useMemo(() => {
+    return toLocalizedNumber(Number(hizb), lang);
+  }, [hizb, lang]);
+  const localizedPageNumber = useMemo(() => {
+    return toLocalizedNumber(Number(page), lang);
+  }, [page, lang]);
+
   // if it's SSR or the first time we render this
   if (!verseKey) {
     return <></>;
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
-  const isMinimalLayout = shouldUseMinimalLayout(lang);
 
   return (
     <div
@@ -47,25 +63,45 @@ const ContextMenu = () => {
     >
       <div className={styles.sectionsContainer}>
         <div className={styles.section}>
-          <p className={classNames(styles.chapter, styles.bold)}>{chapterId}</p>
           <div className={classNames(styles.row)}>
-            {!isMinimalLayout && (
-              <p className={classNames(styles.alignStart, { [styles.hide]: !isExpanded })}>
-                {chapterData.translatedName}
-              </p>
-            )}
-            <p className={classNames(styles.bold, styles.alignStart)}>
+            <p
+              className={classNames(styles.bold, styles.alignStart, styles.surahName, {
+                [styles.disabledOnMobile]: isSidebarNavigationVisible,
+                // on mobile, the click event is conflicting with `onClickOutside`,
+                // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
+              })}
+              onClick={(e) => {
+                e.stopPropagation();
+                dispatch(setIsVisible(!isSidebarNavigationVisible));
+              }}
+            >
               {chapterData.transliteratedName}
+              <span
+                className={classNames(styles.chevronIconContainer, {
+                  [styles.rotate180]: isSidebarNavigationVisible,
+                })}
+              >
+                <ChevronDownIcon />
+              </span>
             </p>
           </div>
         </div>
         <div className={classNames(styles.section, styles.leftSection)}>
           <div className={classNames(styles.row)}>
-            <p className={classNames(styles.alignEnd, { [styles.hide]: !isExpanded })}>
-              {t('juz')} {juzNumber} / {t('hizb')} {hizb}
-            </p>
+            <p
+              className={classNames(styles.alignEnd, {
+                [styles.hide]: !isExpanded,
+              })}
+            />
             <p className={classNames(styles.alignEnd)}>
-              {t('page')} {page}
+              {isExpanded && (
+                <span className={styles.secondaryInfo}>
+                  {t('juz')} {juzNumber} / {t('hizb')} {localizedHizb} -{' '}
+                </span>
+              )}
+              <span className={styles.primaryInfo}>
+                {t('page')} {localizedPageNumber}
+              </span>
             </p>
           </div>
         </div>

@@ -20,6 +20,7 @@
         }
     },
     "no-bookmarks": "You do not have any bookmarks yet",
+    "noble-quran": "The Noble Quran",
     "prayer-names": {
         "asr": "Asr",
         "dhuhr": "Dhuhr",
@@ -40,6 +41,7 @@
         "trigger": "Quick access to anything"
     },
     "welcome": {
+        "changes-cta": "View Recent Changes",
         "desc": "We are actively adding new features and pushing changes. If you run into any issues please do provide feedback.",
         "feedback-cta": "Provide Feedback",
         "join-cta": "Join Discord Community",

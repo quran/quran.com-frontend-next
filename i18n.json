@@ -4,7 +4,7 @@
   "pages": {
     "*": ["common", "error"],
     "/": ["home", "quick-links"],
-    "/[chapterId]": ["quran-reader"],
+    "/[chapterId]": ["quran-reader", "chapter", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],
     "/page/[pageId]": ["quran-reader"],
@@ -16,6 +16,10 @@
     "/about-us": ["about"],
     "/developers": ["developers"],
     "/privacy": ["privacy"],
-    "/support": ["support"]
+    "/support": ["support"],
+    "/tajweed-colors": ["tajweed"],
+    "/product-updates": ["product-updates"],
+    "/product-updates/[id]": ["product-updates"],
+    "/apps": ["apps"]
   }
 }

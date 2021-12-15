@@ -1,9 +1,11 @@
+/* eslint-disable max-lines */
 /* eslint-disable import/prefer-default-export */
 import findKey from 'lodash/findKey';
+import { MetaTag } from 'next-seo/lib/types';
+
+import i18nConfig from '../../i18n.json';
 
 import { getBasePath } from './url';
-
-import i18nConfig from 'i18n.json';
 
 const RTL_LOCALES = ['ar', 'fa', 'ur'];
 const LOCALE_NAME = {
@@ -22,11 +24,30 @@ const LOCALE_NAME = {
   tr: 'Türkçe',
   ur: 'اردو',
   zh: '简体中文',
-  ms: 'bahasa Melayu',
+  ms: 'Melayu',
   de: 'Deutsch',
   inh: 'ʁəlʁɑj mot',
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
+};
+
+export const LANG_LOCALE_MAP = {
+  en: 'en-US',
+  ar: 'ar-EG',
+  bn: 'bn-BD',
+  fa: 'fa-IR',
+  fr: 'fr-FR',
+  id: 'id-ID',
+  it: 'it-IT',
+  nl: 'nl-NL',
+  pt: 'pt-BR',
+  ru: 'ru-RU',
+  sq: 'sq-AL',
+  th: 'th-TH',
+  tr: 'tr-TR',
+  ur: 'ur-PK',
+  zh: 'zh-CN',
+  ms: 'ms-MY',
 };
 
 export enum Direction {
@@ -231,3 +252,147 @@ export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => 
  * @returns {string}
  */
 export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];
+
+/**
+ * Takes a number and returns a localized string based on the provided locale.
+ *
+ * @param {number} value
+ * @param {string} locale
+ * @param {boolean} showLeadingZero
+ * @param {Intl.NumberFormatOptions} options
+ * @returns {string}
+ */
+// Intl.NumberFormat is performance heavy so we are caching the formatter.
+let numberFormatter: Intl.NumberFormat = null;
+let currentLanguageLocale: string = null;
+export const toLocalizedNumber = (
+  value: number,
+  locale: string,
+  showLeadingZero = false,
+  options: Intl.NumberFormatOptions = {},
+) => {
+  if (numberFormatter && currentLanguageLocale === locale) {
+    return getFormattedNumber(numberFormatter, value, showLeadingZero);
+  }
+  currentLanguageLocale = locale;
+  const fullLocale = LANG_LOCALE_MAP[locale];
+  numberFormatter = new Intl.NumberFormat(fullLocale, options);
+  return getFormattedNumber(numberFormatter, value, showLeadingZero);
+};
+
+/**
+ * Get the formatted localized number. This either returns
+ * the original value or prepends a leading 0 to the beginning
+ * of the string if it's allowed and the value is below 10.
+ *
+ * @param {Intl.NumberFormat} formatter
+ * @param {number} value
+ * @param {boolean} showLeadingZero
+ * @returns {string}
+ */
+const getFormattedNumber = (
+  formatter: Intl.NumberFormat,
+  value: number,
+  showLeadingZero: boolean,
+): string => {
+  const formattedNumber = formatter.format(value);
+  if (!showLeadingZero || value >= 10) {
+    return formattedNumber;
+  }
+  return `${formatter.format(0)}${formattedNumber}`;
+};
+
+/**
+ * Get the full locale name with lang + country e.g. ar-SA or en-US.
+ *
+ * @param {string} locale
+ * @returns {string}
+ */
+export const getLangFullLocale = (locale: string): string => LANG_LOCALE_MAP[locale];
+
+/**
+ * Takes a date and returns a localized string based on the provided locale and options.
+ *
+ * @param {number} value
+ * @param {string} locale
+ * @param {Intl.DateTimeFormatOptions} options
+ * @returns {string}
+ */
+export const toLocalizedDate = (
+  value: number | Date,
+  locale: string,
+  options: Intl.DateTimeFormatOptions = {},
+): string => {
+  const fullLocale = LANG_LOCALE_MAP[locale];
+  return new Intl.DateTimeFormat(fullLocale, options).format(value);
+};
+
+/**
+ * Localize a string that contains 2 numbers with a splitter in between
+ * e.g. "2:55" or "2-5".
+ *
+ * @param {string} string
+ * @param {string} lang
+ * @param {string} splitter
+ * @returns  {string}
+ */
+export const localizeNumericalStringWithSplitter = (
+  string: string,
+  lang: string,
+  splitter = ':',
+): string =>
+  string
+    .split(splitter)
+    .map((value: string) => toLocalizedNumber(Number(value), lang))
+    .join(splitter);
+
+/**
+ * Get the localized value of the verse key.
+ *
+ * @param {string} verseKey
+ * @param {string} lang
+ * @returns {string}
+ */
+export const toLocalizedVerseKey = (verseKey: string, lang: string): string =>
+  localizeNumericalStringWithSplitter(verseKey, lang);
+
+/**
+ * Get the localized value of a range e.g. "1-20"
+ *
+ * @param {string} range
+ * @param {string} lang
+ * @returns {string}
+ */
+export const toLocalizedVersesRange = (range: string, lang: string): string =>
+  localizeNumericalStringWithSplitter(range, lang, '-');
+
+/**
+ * Generate the locale by mapping the current iso language to
+ * the format that Facebook accepts @see https://developers.facebook.com/docs/javascript/internationalization#locales .
+ * Since LANG_LOCALE_MAP has the following format LL-CC, we need to convert it into LL_CC
+ * be replacing "-" with "_".
+ *
+ * @param {string} currentLocale
+ * @returns {string}
+ */
+export const getOpenGraphLocale = (currentLocale: string): string =>
+  `${LANG_LOCALE_MAP[currentLocale]}`.replace('-', '_');
+
+/**
+ * Generate the alternate locales that the current content can be served in.
+ * When Facebook needs to render an object in one of the specified locales,
+ * it will make a request to the URL with the fb_locale URL parameter.
+ *
+ * @see https://developers.facebook.com/blog/post/2013/11/11/605/
+ *
+ * @param {string} currentLocale
+ * @returns {MetaTag[]}
+ */
+export const getOpenGraphAlternateLocales = (currentLocale: string): MetaTag[] => {
+  return Object.keys(LANG_LOCALE_MAP)
+    .filter((languageCode) => languageCode !== currentLocale)
+    .map((languageCode) => ({
+      name: 'og:locale:alternate',
+      content: `${LANG_LOCALE_MAP[languageCode]}`.replace('-', '_'),
+    }));
+};

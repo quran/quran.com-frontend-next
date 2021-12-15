@@ -7,6 +7,7 @@
             "title": "اسکرول خودکار"
         },
         "play": "پخش صدا",
+        "playback-normal": "طبیعی",
         "playback-speed": "سرعت پخش",
         "playback-speed-unit": "ایکس",
         "player": {
@@ -31,6 +32,8 @@
             "times": "بار",
             "verses-range": "طیف آیات"
         },
+        "repeat-moved": "تنظیمات تکرار به پخش کننده صدا منتقل شده است. برای دسترسی به آنها روی نماد <0> <\/0> کلیک کنید",
+        "select-reciter": "خواننده را انتخاب کنید",
         "title": "سمعی"
     },
     "ayah": "آیه",
@@ -79,10 +82,11 @@
         "code_v2": "مجتمع شاه فهد V2",
         "font-size": "اندازه فونت",
         "lines": "خطوط",
-        "qcf-desc": "فونت‌های KPFG کیفیت بالاتری را ارائه می‌دهند، اما بارگذاری طولانی‌تر طول می‌کشد و نمی‌توان از طریق مرورگر کپی کرد.",
+        "qcf-desc": "فونت‌های KPFG کیفیت بالاتری را ارائه می‌دهند، اما بارگذاری طولانی‌تر طول می‌کشد.",
         "qpc_uthmani_hafs": "QPC عثمانی حفص",
         "quran-font": "فونت قرآن",
         "tajweed": "تجوید",
+        "tajweed-desc": "فونت تجوید مصحف رنگی تجوید را نشان می دهد. می توانید اطلاعات بیشتری در مورد قوانین رنگ تجوید <0> در اینجا <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "عثمانی"
     },
@@ -94,6 +98,7 @@
         "clear": "پاک کردن"
     },
     "juz": "جوز",
+    "languages": "زبان ها",
     "loading": "بارگذاری",
     "menu": "منو",
     "mobile-apps": "برنامه های موبایل",
@@ -138,6 +143,7 @@
     },
     "prev": "قبلی",
     "privacy": "حریم خصوصی",
+    "product-updates": "به روز رسانی محصول",
     "q-reflect": "قرآن انعکاس",
     "quran-com": "قرآن دات کام",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "جستجو کردن"
     },
     "settings": {
-        "change-reciter": "تلاوت را تغییر دهید",
-        "change-tafsirs": "تغییر تفاسیر",
-        "change-translations": "تغییر ترجمه ها",
+        "no-tafsir-selected": "هیچ تفسیری انتخاب نشده است",
+        "no-translation-selected": "ترجمه ای انتخاب نشده است",
         "reading-experience": "تجربه خواندن",
         "reset-cta": "تنظیمات را بازنشانی کنید",
         "reset-notif": "تنظیمات شما به تنظیمات پیش فرض بازنشانی شده است",
         "search-reciter": "جستجوی قاری",
         "search-tafsirs": "جستجو در تفاسیر",
         "search-translations": "جستجوی ترجمه ها",
-        "title": "تنظیمات"
+        "selected-reciter": "قاری برگزیده",
+        "selected-tafsirs": "منتخب تفاسیر",
+        "selected-translations": "ترجمه های برگزیده",
+        "title": "تنظیمات",
+        "value-and-others": "{{value}} و {{othersCount}} دیگر",
+        "wbw-helper": "ترجمه یا نویسه‌گردانی را مستقیماً زیر کلمه نمایش دهید",
+        "word-tooltip-helper": "نمایش ترجمه یا نویسه‌گردانی هنگام نگه‌داشتن روی کلمه یا کلیک کردن روی آن"
     },
     "share": "اشتراک گذاری",
     "shared": "پیوند در کلیپ بورد کپی شده است!",
+    "sidebar": {
+        "search-juz": "جستجوی Juz",
+        "search-page": "صفحه جستجو",
+        "search-surah": "جستجو در سوره",
+        "try-navigating-with": "نکته: سعی کنید با آن پیمایش کنید"
+    },
     "sitemap": "نقشه سایت",
     "sort": {
         "ascending": "صعودی",
@@ -195,6 +212,7 @@
     },
     "theme": "موضوع",
     "themes": {
+        "auto": "خودکار",
         "dark": "تاریک",
         "light": "سبک",
         "sepia": "سپیا",
@@ -203,6 +221,7 @@
     },
     "to": "به",
     "tooltip": "راهنمای ابزار",
+    "tooltip-trans-lang": "زبان راهنمای ابزار",
     "translation": "ترجمه",
     "translations": "ترجمه ها",
     "transliteration": "نویسه گردانی",
@@ -224,5 +243,6 @@
         "play-audio": "پخش صدا",
         "title": "کلمه کلیک کنید"
     },
+    "word-tooltip": "نکته ابزار Word",
     "yes": "آره"
 }

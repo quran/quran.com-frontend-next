@@ -11,9 +11,11 @@ import styles from './VerseText.module.scss';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
+import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
@@ -26,12 +28,19 @@ type VerseTextProps = {
 
 const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
   const textRef = useRef(null);
+  const loadedFonts = useSelector(selectLoadedFontFaces);
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   ) as QuranReaderStyles;
   const [firstWord] = words;
+  const isFontLoaded = useMemo(() => {
+    if (!isQCFFont(quranFont)) {
+      return true;
+    }
+    return loadedFonts.includes(`p${firstWord.pageNumber}-${quranFont.replace('code_', '')}`);
+  }, [firstWord.pageNumber, loadedFonts, quranFont]);
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
@@ -66,7 +75,8 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
         className={classNames(styles.verseTextContainer, {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
-          [styles[`quran-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+          [styles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+          [styles.tafsirOrTranslationMode]: !isReadingMode,
         })}
       >
         <div
@@ -78,7 +88,12 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
           })}
         >
           {words?.map((word) => (
-            <QuranWord key={word.location} word={word} font={quranFont} />
+            <QuranWord
+              key={word.location}
+              word={word}
+              font={quranFont}
+              isFontLoaded={isFontLoaded}
+            />
           ))}
         </div>
       </div>

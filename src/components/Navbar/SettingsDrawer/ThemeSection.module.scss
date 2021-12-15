@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.themeNameContainer {
+  display: flex;
+  align-items: center;
+  line-height: normal;
+}
+
+.iconContainer {
+  display: flex;
+  & > svg {
+    transition: width var(--transition-fast) ease;
+    width: 0rem;
+  }
+}
+
+.iconActive {
+  & > svg {
+    width: var(--spacing-medium);
+    margin-inline-end: var(--spacing-small);
+  }
+}

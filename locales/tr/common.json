@@ -7,6 +7,7 @@
             "title": "Otomatik kaydırma"
         },
         "play": "Ses Çal",
+        "playback-normal": "Normal",
         "playback-speed": "Oynatma Hızı",
         "playback-speed-unit": "x",
         "player": {
@@ -31,6 +32,8 @@
             "times": "zamanlar",
             "verses-range": "ayet aralığı"
         },
+        "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Bunlara <0> <\/0> simgesine tıklayın",
+        "select-reciter": "Okuyucu Seçin",
         "title": "Ses"
     },
     "ayah": "Aya",
@@ -79,10 +82,11 @@
         "code_v2": "Kral Fahd Kompleksi V2",
         "font-size": "Yazı Boyutu",
         "lines": "çizgiler",
-        "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer ve tarayıcı aracılığıyla kopyalanamaz.",
+        "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Kuran Yazı Tipi",
         "tajweed": "tecvid",
+        "tajweed-desc": "Tajweed yazı tipi, Tajweed renkli bir Mushaf gösterir. Tajweed renk kuralları hakkında daha fazla bilgiyi <0> buradan <\/0>",
         "text_indopak": "Hint Paketi",
         "text_uthmani": "Osmanca"
     },
@@ -94,6 +98,7 @@
         "clear": "Açık"
     },
     "juz": "cüz",
+    "languages": "Diller",
     "loading": "Yükleniyor",
     "menu": "Menü",
     "mobile-apps": "Mobil uygulamalar",
@@ -138,6 +143,7 @@
     },
     "prev": "Öncesi",
     "privacy": "Mahremiyet",
+    "product-updates": "Ürün güncellemeleri",
     "q-reflect": "KuranYansıtmak",
     "quran-com": "Kuran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "Arama"
     },
     "settings": {
-        "change-reciter": "Okuyucuyu Değiştir",
-        "change-tafsirs": "Tefsirleri Değiştir",
-        "change-translations": "Çevirileri Değiştir",
+        "no-tafsir-selected": "Tefsir seçilmedi",
+        "no-translation-selected": "Çeviri seçilmedi",
         "reading-experience": "Okuma Deneyimi",
         "reset-cta": "Ayarları Sıfırla",
         "reset-notif": "Ayarlarınız varsayılanlara sıfırlandı",
         "search-reciter": "Okuyucu Ara",
         "search-tafsirs": "tefsir ara",
         "search-translations": "Çevirileri Ara",
-        "title": "Ayarlar"
+        "selected-reciter": "Seçilmiş Okur",
+        "selected-tafsirs": "Seçilmiş Tefsirler",
+        "selected-translations": "Seçilmiş Çeviriler",
+        "title": "Ayarlar",
+        "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
+        "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
+        "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
     },
     "share": "Paylaş",
     "shared": "Bağlantı panoya kopyalandı!",
+    "sidebar": {
+        "search-juz": "Cüz'de Ara",
+        "search-page": "Arama Sayfası",
+        "search-surah": "sure ara",
+        "try-navigating-with": "İpucu: ile gezinmeyi deneyin"
+    },
     "sitemap": "Site Haritası",
     "sort": {
         "ascending": "artan",
@@ -195,6 +212,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Oto",
         "dark": "Karanlık",
         "light": "Işık",
         "sepia": "Sepya",
@@ -203,6 +221,7 @@
     },
     "to": "NS",
     "tooltip": "Araç ipucu",
+    "tooltip-trans-lang": "Araç İpucu Dili",
     "translation": "Tercüme",
     "translations": "Çeviriler",
     "transliteration": "Harf çevirisi",
@@ -224,5 +243,6 @@
         "play-audio": "Ses Çal",
         "title": "Kelime Tıklaması"
     },
+    "word-tooltip": "Kelime İpucu",
     "yes": "Evet"
 }

@@ -27,7 +27,8 @@ $quran-reader-padding: 3rem;
   padding-block-end: $quran-reader-padding;
   padding-inline-start: 0;
   padding-inline-end: 0;
-  background: var(--color-background-default);
+  background-color: var(--color-background-default);
+  background-image: var(--color-background-lighten);
   @include breakpoints.tablet {
     transition: var(--transition-regular);
     margin-inline-end: 0;
@@ -37,6 +38,12 @@ $quran-reader-padding: 3rem;
 .withVisibleSideBar {
   @include breakpoints.tablet {
     margin-inline-end: constants.$notes-side-bar-desktop-width;
+  }
+}
+
+.withSidebarNavigationOpen {
+  @include breakpoints.tablet {
+    margin-inline-start: calc(10 * var(--spacing-mega));
   }
 }
 

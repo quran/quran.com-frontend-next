@@ -24,7 +24,9 @@
   @include breakpoints.tablet {
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
+    [dir="ltr"] & {
+      flex-direction: row-reverse;
+    }
     & > .verseTranslationsContainer,
     & > .arabicVerseContainer {
       flex: 1;

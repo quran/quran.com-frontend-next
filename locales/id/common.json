@@ -7,6 +7,7 @@
             "title": "Gulir Otomatis"
         },
         "play": "Putar Audio",
+        "playback-normal": "Normal",
         "playback-speed": "Kecepatan Pemutaran",
         "playback-speed-unit": "x",
         "player": {
@@ -31,6 +32,8 @@
             "times": "waktu",
             "verses-range": "Jangkauan ayat"
         },
+        "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
+        "select-reciter": "Pilih Pembaca",
         "title": "audio"
     },
     "ayah": "Ayah",
@@ -79,10 +82,11 @@
         "code_v2": "Kompleks Raja Fahad V2",
         "font-size": "Ukuran huruf",
         "lines": "Garis",
-        "qcf-desc": "Font KPFG memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk memuat dan tidak dapat disalin melalui browser.",
+        "qcf-desc": "Font KPFG memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk dimuat.",
         "qpc_uthmani_hafs": "QPC Utsmani Hafs",
         "quran-font": "Huruf Quran",
         "tajweed": "Tajwid",
+        "tajweed-desc": "Font Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Usmani"
     },
@@ -94,6 +98,7 @@
         "clear": "Jernih"
     },
     "juz": "Juzu",
+    "languages": "Bahasa",
     "loading": "Memuat",
     "menu": "Menu",
     "mobile-apps": "Aplikasi Seluler",
@@ -138,6 +143,7 @@
     },
     "prev": "Sebelumnya",
     "privacy": "Pribadi",
+    "product-updates": "Pembaruan produk",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "Mencari"
     },
     "settings": {
-        "change-reciter": "Ganti Qari",
-        "change-tafsirs": "Ubah Tafsir",
-        "change-translations": "Ubah Terjemahan",
+        "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
+        "no-translation-selected": "Tidak ada terjemahan yang dipilih",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Semula Pengaturan",
         "reset-notif": "Pengaturan Anda telah diatur semula ke default",
         "search-reciter": "Cari Pembaca",
         "search-tafsirs": "Cari Tafsir",
         "search-translations": "Cari Terjemahan",
-        "title": "Pengaturan"
+        "selected-reciter": "Pembaca terpilih",
+        "selected-tafsirs": "Tafsir Terpilih",
+        "selected-translations": "Terjemahan yang Dipilih",
+        "title": "Pengaturan",
+        "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
+        "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
+        "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan atau mengklik kata"
     },
     "share": "Membagikan",
     "shared": "Tautan telah disalin ke papan klip!",
+    "sidebar": {
+        "search-juz": "Cari Juz",
+        "search-page": "Halaman Pencarian",
+        "search-surah": "Cari surah",
+        "try-navigating-with": "Kiat: coba navigasikan dengan"
+    },
     "sitemap": "Peta Situs",
     "sort": {
         "ascending": "menaik",
@@ -195,6 +212,7 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Mobil",
         "dark": "Gelap",
         "light": "Terang",
         "sepia": "sepia",
@@ -203,6 +221,7 @@
     },
     "to": "Ke",
     "tooltip": "Keterangan alat",
+    "tooltip-trans-lang": "Bahasa Tooltip",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
@@ -224,5 +243,6 @@
         "play-audio": "Putar Audio",
         "title": "Klik Kata"
     },
+    "word-tooltip": "Keterangan Alat Kata",
     "yes": "Ya"
 }

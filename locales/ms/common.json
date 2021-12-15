@@ -1,47 +1,50 @@
 {
-    "about": "Tentang kita",
+    "about": "Tentang Kami",
     "audio": {
         "auto-scroll": {
-            "off": "Mati",
-            "on": "hidup",
-            "title": "Tatal Auto"
+            "off": "Tutup",
+            "on": "Pasang",
+            "title": "Gelongsor secara Atomatik"
         },
         "play": "Mainkan Audio",
-        "playback-speed": "Kelajuan Main Semula",
+        "playback-normal": "Biasalah",
+        "playback-speed": "Kelajuan Pemain",
         "playback-speed-unit": "x",
         "player": {
             "close": "Tutup Pemain Audio",
-            "currently-playing": "Anda sedang bermain",
+            "currently-playing": "Anda sedang memainkan",
             "delay-verse": "Kelewatan antara ayat",
             "download": "Muat turun",
-            "mismatch": "Klik pada \"Start Over\" jika anda mahu bermain {{currentReadingChapter}} sebaliknya",
-            "next-ayah": "Seterusnya Ayah",
-            "pause": "jeda",
-            "play": "Main",
-            "play-range": "Tempat bermain",
-            "previous-ayah": "Ayah sebelumnya",
+            "mismatch": "Klik pada \"Mula Semula\" jika anda mahu teruskan {{currentReadingChapter}} sebaliknya",
+            "next-ayah": "Ayat Seterusnya",
+            "pause": "Henti",
+            "play": "Mainkan",
+            "play-range": "Jangka Rangka Pemain",
+            "previous-ayah": "Ayat Sebelumnya",
             "repeat-1-verse": "Ulang Ayat",
             "repeat-settings": "Ulang Tetapan",
             "repeat-verse": "Ulang setiap ayat",
             "search-verse": "Cari ayat",
             "single-verse": "Ayat Tunggal",
-            "start-over": "Mula semula",
+            "start-over": "Mula Semula",
             "start-playing": "Mula Bermain",
-            "stop-repeating": "Berhenti Mengulang",
+            "stop-repeating": "Hentikan Ulangan",
             "times": "kali",
-            "verses-range": "Rangkaian ayat"
+            "verses-range": "Jangka rangka ayat"
         },
+        "repeat-moved": "Tetapan ulangan telah berpindah ke pemain audio. Klik pada <0> <\/0> untuk mengaksesnya",
+        "select-reciter": "Pilih Qari",
         "title": "Audio"
     },
-    "ayah": "Ayah",
-    "ayahs": "Ayah",
+    "ayah": "Ayat",
+    "ayahs": "Ayat-ayat",
     "beta": "Beta",
     "bookmark": "Penanda buku",
     "bookmarked": "Ditanda buku",
     "both": "Kedua-duanya",
     "cancel": "Batal",
     "click-here": "Tekan di sini",
-    "close": "tutup",
+    "close": "Tutup",
     "command-bar": {
         "navigations": "Navigasi",
         "no-nav-results": "Tiada hasil navigasi",
@@ -53,23 +56,23 @@
     },
     "community": {
         "cta": "Sertai Komuniti",
-        "header": "Sertai Komuniti QDC pembina dan ahli teknologi Islam.",
-        "sub-header": "Daftar untuk Perselisihan Quran.com untuk mengambil bahagian dan bekerjasama dengan teknologi Islam pembinaan komuniti terkemuka.",
+        "header": "Sertai Komuniti Muslim QDC pembina dan ahli teknologi.",
+        "sub-header": "Daftar untuk Discord Quran.com untuk mengambil bahagian dan bekerjasama dengan  pembinaan komuniti teknologi Islam.",
         "title": "Komuniti"
     },
-    "continue": "teruskan",
-    "copied": "disalin",
+    "continue": "Teruskan",
+    "copied": "Selesai salin",
     "copied-to-clipboard": "Disalin ke papan keratan",
-    "copy": "Salinan",
+    "copy": "Salin",
     "counter": {
-        "decrease": "Kurangkan",
+        "decrease": "Mengurang",
         "increase": "Meningkat"
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
-    "developers": "pemaju",
+    "developers": "Pemaju",
     "error": {
-        "general": "Sesuatu telah berlaku. Sila cuba lagi.",
-        "offline": "Nampaknya anda kehilangan sambungan anda. Sila semak dan cuba lagi."
+        "general": "Kesilapan telah berlaku. Sila cuba lagi.",
+        "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi."
     },
     "feedback": "Maklum balas",
     "fonts": {
@@ -77,36 +80,38 @@
         "16_lines": "16 Baris",
         "code_v1": "Kompleks Raja Fahad V1",
         "code_v2": "Kompleks Raja Fahad V2",
-        "font-size": "Saiz huruf",
-        "lines": "Garisan",
-        "qcf-desc": "Fon KPFG memberikan kualiti yang lebih tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan dan tidak boleh disalin melalui penyemak imbas.",
+        "font-size": "Saiz fon",
+        "lines": "Barisan",
+        "qcf-desc": "Fon KPFG memberikan kualiti yang lebih tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-        "quran-font": "Font Quran",
+        "quran-font": "Fon Quran",
         "tajweed": "Tajwid",
+        "tajweed-desc": "Fon Tajwid menunjukkan Mushaf berwarna Tajwid. Anda boleh membaca lebih lanjut tentang peraturan warna Tajwid <0> di sini <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
-    "from": "daripada",
-    "help": "Tolong",
+    "from": "Dari",
+    "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Rumah",
     "input": {
-        "clear": "Jelas"
+        "clear": "Hilangkan"
     },
     "juz": "Juz",
-    "loading": "Memuatkan",
+    "languages": "Bahasa",
+    "loading": "Sedang proses",
     "menu": "Menu",
-    "mobile-apps": "Apl Mudah Alih",
+    "mobile-apps": "Aplikasi Mudah Alih",
     "mode": "Mod",
     "more": "Lagi",
     "network": "Rangkaian",
     "next": "Seterusnya",
     "no": "Tidak",
-    "none": "tiada",
-    "off": "Mati",
-    "on": "hidup",
+    "none": "Tiada",
+    "off": "Tutup",
+    "on": "Pasang",
     "page": "Halaman",
-    "pages": "muka surat",
+    "pages": "Muka Surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
     "powered-by": "Dikuasai oleh",
     "prayer-times": {
@@ -114,13 +119,13 @@
         "calculation-method": "Kaedah Pengiraan",
         "calculation-methods": {
             "Dubai": "Dubai",
-            "Egyptian": "orang Mesir",
-            "Karachi": "Karachi",
+            "Egyptian": "Orang Mesir",
+            "Karachi": "Karaci",
             "Kuwait": "Kuwait",
             "MoonsightingCommittee": "Jawatankuasa Pandangan Bulan",
             "MuslimWorldLeague": "MuslimWorldLeague",
             "NorthAmerica": "Amerika Utara",
-            "Qatark": "Qatark",
+            "Qatark": "Qatar",
             "Singapore": "Singapura",
             "Tehran": "Tehran",
             "Turkey": "Turki",
@@ -132,19 +137,20 @@
         "madhab": "Mazhab",
         "madhabs": {
             "Hanafi": "Hanafi",
-            "Shafi": "Syafii"
+            "Shafi": "Syafie"
         },
         "title": "Waktu Solat"
     },
     "prev": "Sebelumnya",
     "privacy": "Privasi",
+    "product-updates": "Kemas kini produk",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"
     },
-    "reciter": "qari",
+    "reciter": "Qari",
     "remove": "Alih keluar",
     "retry": "Cuba semula",
     "search": {
@@ -161,19 +167,30 @@
         "title": "Cari"
     },
     "settings": {
-        "change-reciter": "Tukar Qari",
-        "change-tafsirs": "Tukar Tafsir",
-        "change-translations": "Tukar Terjemahan",
+        "no-tafsir-selected": "Tiada tafsir dipilih",
+        "no-translation-selected": "Tiada terjemahan dipilih",
         "reading-experience": "Pengalaman Membaca",
-        "reset-cta": "Aturan semula",
+        "reset-cta": "Tetapkan pada asal",
         "reset-notif": "Tetapan anda telah ditetapkan semula kepada tetapan lalai",
-        "search-reciter": "Cari qari",
+        "search-reciter": "Cari Qari",
         "search-tafsirs": "Cari Tafsir",
         "search-translations": "Cari Terjemahan",
-        "title": "tetapan"
+        "selected-reciter": "qari yang terpilih",
+        "selected-tafsirs": "Tafsir Terpilih",
+        "selected-translations": "Terjemahan Terpilih",
+        "title": "Tetapan",
+        "value-and-others": "{{value}} , dan {{othersCount}} lain",
+        "wbw-helper": "Paparkan terjemahan atau transliterasi terus di bawah perkataan",
+        "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila melayang atau mengklik perkataan"
     },
     "share": "Kongsi",
     "shared": "Pautan telah disalin ke papan keratan!",
+    "sidebar": {
+        "search-juz": "Cari Juz",
+        "search-page": "Halaman Carian",
+        "search-surah": "Cari surah",
+        "try-navigating-with": "Petua: cuba menavigasi dengan"
+    },
     "sitemap": "Peta laman",
     "sort": {
         "ascending": "Menaik",
@@ -195,27 +212,29 @@
     },
     "theme": "Tema",
     "themes": {
+        "auto": "Auto",
         "dark": "Gelap",
-        "light": "Cahaya",
+        "light": "Terang",
         "sepia": "Sepia",
         "system": "Sistem",
         "system-desc": "Tema sistem secara automatik digunakan pada tetapan mod terang\/gelap anda"
     },
-    "to": "Kepada",
-    "tooltip": "Petua alat",
+    "to": "Ke",
+    "tooltip": "Alat",
+    "tooltip-trans-lang": "Bahasa Petua Alat",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
-    "transliteration": "Alih huruf",
-    "type": "taip",
+    "transliteration": "Transliterasi",
+    "type": "Jenis",
     "verse": "Ayat",
     "verses": "Ayat-ayat",
     "view": "Lihat",
     "voice": {
-        "ask-permission": "Sila dayakan kebenaran mikrofon untuk mula menggunakan Carian Suara",
-        "error": "Kesilapan telah berlaku. Sila cuba lagi kemudian. Atau muat turun",
-        "no-permission": "Nampaknya anda tidak mempunyai kebenaran mikrofon didayakan. Sila dayakan kebenaran mikrofon dan cuba lagi atau muat turun",
-        "not-supported": "Nampaknya penyemak imbas anda tidak menyokong mikrofon. Sila cuba pelayar lain atau muat turun",
-        "suggest": "Sila mulakan membaca dan ayat anda akan muncul."
+        "ask-permission": "Sila benarkan pemasangan mikrofon untuk mula menggunakan Carian Suara",
+        "error": "Kesilapan telah berlaku. Sila cuba sebentar lagi. Atau muat turun",
+        "no-permission": "Nampaknya anda tidak memberi kebenaran kepada pemasangan mikrofon. Sila benarkan pemasangan mikrofon dan cuba lagi sekali atau muat turun",
+        "not-supported": "Nampaknya web anda tidak menyokong mikrofon. Sila cuba web lain atau muat turun",
+        "suggest": "Sila mula membaca dan ayat anda akan muncul."
     },
     "wbw": "Perkataan demi perkataan",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
@@ -224,5 +243,6 @@
         "play-audio": "Mainkan Audio",
         "title": "Klik Perkataan"
     },
-    "yes": "ya"
+    "word-tooltip": "Petua Alat Perkataan",
+    "yes": "Ya"
 }

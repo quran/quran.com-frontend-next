@@ -37,6 +37,8 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
 
 /**
  * Get the default word fields that should exist in the response.
+ * qpc_uthmani_hafs is added so that we can use it as a fallback
+ * text for QCF font V1 and V2.
  *
  * @param {QuranFont} quranFont the selected quran font since.
  * @returns {{ wordFields: string}}
@@ -45,7 +47,9 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string } => ({
-  wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}`,
+  wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}${
+    quranFont === QuranFont.QPCHafs ? '' : `, ${QuranFont.QPCHafs}`
+  }`,
 });
 
 /**

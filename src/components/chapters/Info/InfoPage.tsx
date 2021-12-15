@@ -6,6 +6,8 @@ import Info from '.';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import Error from 'src/pages/_error';
+import { toLocalizedNumber } from 'src/utils/locale';
+import { getCanonicalUrl, getSurahInfoNavigationUrl } from 'src/utils/navigation';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {
@@ -14,16 +16,19 @@ interface Props {
   hasError?: boolean;
 }
 const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - 1-${
-          chapterResponse.chapter.versesCount
-        }`}
+        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
+          1,
+          lang,
+        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
+        canonical={getCanonicalUrl(lang, getSurahInfoNavigationUrl(chapterResponse.chapter.slug))}
+        description={chapterInfoResponse.chapterInfo.shortText}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
     </>

@@ -40,8 +40,6 @@
 
 This project is the frontend for Quran.com. It is built on top of [next.js](https://nextjs.org/docs/getting-started), a popular framework that takes the trouble and setup of setting up an isomorphic react app. We deploy it on now.sh automatically with automatic generation of builds for PRs.
 
-Unlike the previous [Quran.com build](https://quran-com-frontend-next.mmahalwy.now.sh), we want this repo to focus on consistency and scale. We will document the process of setting this up on your local dev, making changes, picking up issues and finally getting work to deploy!
-
 ### How to contribute
 
 We trust that you will not copy this idea/project, this is at the end for the sake of Allah and we all have good intentions while working with this project. But we must stress that copying the code/project is unacceptable.
@@ -84,7 +82,7 @@ If you are interested to help out, please look at issues on the Github repo. Thi
 
 ### Filing bugs
 
-Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend/issues/new).
+Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend-next/issues).
 
 ### Community 
 <a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>

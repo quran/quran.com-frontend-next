@@ -24,6 +24,7 @@
   @include breakpoints.tablet {
     height: constants.$audio-player-default-desktop-height;
   }
+  will-change: transform;
 }
 
 .containerHidden {
@@ -31,5 +32,6 @@
 }
 
 .containerMinimized.containerDefault {
-  height: constants.$audio-player-minimized-height;
+  transform: translate3d(0, constants.$audio-player-minimized-height, 0);
+  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
 }

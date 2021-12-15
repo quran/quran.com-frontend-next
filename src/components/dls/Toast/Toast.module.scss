@@ -73,6 +73,21 @@
   }
 }
 
+.errorBody {
+  background-color: var(--color-error-medium);
+  color: var(--shade-0);
+}
+
+.warningBody {
+  background-color: var(--color-warning-medium);
+  color: var(--shade-0);
+}
+
+.successBody {
+  background-color: var(--color-success-medium);
+  color: var(--shade-0);
+}
+
 // toast style
 .toastContainer {
   box-shadow: none;
@@ -84,6 +99,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  [dir="rtl"] & {
+    flex-direction: row-reverse;
+  }
 }
 
 .actionsContainer {

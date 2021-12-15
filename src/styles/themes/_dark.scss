@@ -8,13 +8,13 @@
 
   --color-secondary-faded: #333;
   --color-secondary-faint: #444;
-  --color-secondary-medium: #888;
+  --color-secondary-medium: var(--shade-7);
   --color-secondary-deep: #eaeaea;
 
-  --color-success-faded: #012f69;
-  --color-success-faint: #0070f3;
-  --color-success-medium: #3291ff;
-  --color-success-deep: #d3e5ff;
+  --color-success-faded: #272f33;
+  --color-success-faint: #3d474d;
+  --color-success-medium: #2ca4ab;
+  --color-success-deep: #f1feff;
 
   --color-error-faded: #e60000;
   --color-error-faint: #f00;
@@ -29,11 +29,12 @@
   --color-text-default: #fff;
   --color-text-faded: #777;
   --color-text-inverse: #000;
-  --color-text-link: #3291ff;
+  --color-text-link: #2ca4ab;
   --color-text-warning: #f7b955;
   --color-text-error: #f33;
 
   --color-background-default: #1f2125;
+  --color-background-elevated: var(--shade-8);
 
   --color-background-alternative-faded: var(--shade-9);
   --color-background-alternative-faint: var(--shade-8);
@@ -45,15 +46,15 @@
   --color-background-lighten: rgba(0, 0, 0, 0.75);
   // lighten the `background-color` by using it in `background-image`. check Button's ghost variant for example
 
-  --color-borders-hairline: rgb(52, 53, 54);
+  --color-borders-hairline: rgb(70, 75, 80);
 
   --color-highlight: #f81ce5;
 
-  --shadow-small: 0px 2px 4px rgba(255, 255, 255, 0.1);
-  --shadow-normal: 0px 4px 8px rgba(255, 255, 255, 0.12);
-  --shadow-large: 0 5px 10px rgba(255, 255, 255, 0.12);
-  --shadow-xlarge: 0 8px 30px rgba(255, 255, 255, 0.12);
-  --shadow-jumbo: 0 30px 60px rgba(255, 255, 255, 0.12);
-  --shadow-hover: 0 30px 60px rgba(255, 255, 255, 0.12);
-  --shadow-sticky: 0 12px 10px -10px rgba(255, 255, 255, 0.12);
+  --shadow-small: 0px 2px 4px var(--shade-9);
+  --shadow-normal: 0px 4px 8px var(--shade-9);
+  --shadow-large: 0 5px 10px var(--shade-9);
+  --shadow-xlarge: 0 8px 30px var(--shade-9);
+  --shadow-jumbo: 0 30px 60px var(--shade-9);
+  --shadow-hover: 0 30px 60px var(--shade-9);
+  --shadow-sticky: 0 12px 10px -10px var(--shade-9);
 }

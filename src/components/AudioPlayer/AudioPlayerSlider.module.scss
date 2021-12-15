@@ -51,7 +51,6 @@
   width: 100%;
   transform: translate(-50%, 0);
   position: fixed;
-  inset-block-end: constants.$audio-player-minimized-height;
   span[role="slider"] {
     @include breakpoints.smallerThanTablet {
       display: none;

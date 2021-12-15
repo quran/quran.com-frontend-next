@@ -1,0 +1,50 @@
+import { useState, useMemo } from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
+
+import styles from './SidebarNavigation.module.scss';
+
+import Link from 'src/components/dls/Link/Link';
+import { toLocalizedNumber } from 'src/utils/locale';
+import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
+import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
+
+interface Props {
+  id: string;
+}
+
+const VerseList: React.FC<Props> = ({ id }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const { t, lang } = useTranslation('common');
+
+  const verseKeys = useMemo(() => generateChapterVersesKeys(id), [id]);
+
+  return (
+    <div className={styles.verseListContainer}>
+      <input
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className={styles.searchInput}
+        placeholder={t('verse')}
+      />
+      <div className={styles.list}>
+        {verseKeys.map((verseKey) => {
+          const verseNumber = getVerseNumberFromKey(verseKey);
+          const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
+          if (
+            !localizedVerseNumber.toString().startsWith(searchQuery) &&
+            !verseNumber.toString().startsWith(searchQuery)
+          )
+            return null;
+          return (
+            <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)} key={verseKey}>
+              <div className={styles.listItem}>{localizedVerseNumber}</div>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default VerseList;

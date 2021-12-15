@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
 const path = require('path');
 
@@ -43,14 +44,22 @@ const config = {
 
     webpackConfig.module.rules.push({
       test: /\.svg$/i,
-      issuer: { and: [/\.(js|ts)x?$/] },
+      issuer: {
+        and: [/\.(js|ts)x?$/],
+      },
       use: [
         {
           loader: '@svgr/webpack',
           options: {
             prettier: false,
             svgo: true,
-            svgoConfig: { plugins: [{ removeViewBox: false }] },
+            svgoConfig: {
+              plugins: [
+                {
+                  removeViewBox: false,
+                },
+              ],
+            },
           },
         },
       ],
@@ -87,6 +96,40 @@ const config = {
             ],
           },
         ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:surah/:from(\\d{1,})/:to(\\d{1,})', // 1/2/3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah/:from(\\d{1,})\\::to(\\d{1,})', // 1/2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah\\::from(\\d{1,})\\::to(\\d{1,})', // 1:2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})-:from\\::to', // 1-2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})-:from(\\d{1,})-:to(\\d{1,})', // 1-2-3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})\\::from(\\d{1,})-:to(\\d{1,})', // 1:2-3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+    ];
   },
 };
 

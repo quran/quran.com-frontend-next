@@ -1,9 +1,5 @@
 import React from 'react';
 
-// import IconCollection from '../../../../../public/icons/collection.svg';
-// import IconDonate from '../../../../../public/icons/donate.svg';
-// import IconRadio2 from '../../../../../public/icons/radio-2.svg';
-// import IconUpdates from '../../../../../public/icons/updates.svg';
 import useTranslation from 'next-translate/useTranslation';
 
 import IconDevelopers from '../../../../../public/icons/developers.svg';
@@ -11,14 +7,22 @@ import IconFeedback from '../../../../../public/icons/feedback.svg';
 import IconHome from '../../../../../public/icons/home.svg';
 import IconInfo from '../../../../../public/icons/info.svg';
 import IconLock from '../../../../../public/icons/lock.svg';
+import MobileIcon from '../../../../../public/icons/mobile.svg';
+import IconProductUpdates from '../../../../../public/icons/product-updates.svg';
 import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
+import Tarteel from '../../../../../public/icons/tarteel.svg';
 import CommunitySection from '../CommunitySection';
-import MobileApps from '../MobileApps';
+// import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
+
+// import IconDonate from '../../../../../public/icons/donate.svg';
+// import IconRadio2 from '../../../../../public/icons/radio-2.svg';
+// import IconUpdates from '../../../../../public/icons/updates.svg';
+// import IconCollection from '../../../../../public/icons/collection.svg';
 
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
@@ -27,10 +31,16 @@ const NavigationDrawerBody = () => {
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
       <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
+      <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
       <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
       <NavigationDrawerItem title={t('privacy')} icon={<IconLock />} href="/privacy" />
+      <NavigationDrawerItem
+        title={t('product-updates')}
+        icon={<IconProductUpdates />}
+        href="/product-updates"
+      />
       <NavigationDrawerItem
         title={t('feedback')}
         icon={<IconFeedback />}
@@ -83,7 +93,12 @@ const NavigationDrawerBody = () => {
         href="https://quranreflect.com/"
         isExternalLink
       />
-      <MobileApps />
+      <NavigationDrawerItem
+        isExternalLink
+        title={t('tarteel.name')}
+        icon={<Tarteel />}
+        href="https://download.tarteel.ai/"
+      />
     </div>
   );
 };

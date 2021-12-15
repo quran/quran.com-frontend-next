@@ -20,6 +20,7 @@
         }
     },
     "no-bookmarks": "Você ainda não tem favoritos",
+    "noble-quran": "O Nobre Alcorão",
     "prayer-names": {
         "asr": "Asr",
         "dhuhr": "Dhuhr",
@@ -40,6 +41,7 @@
         "trigger": "Acesso rápido a qualquer coisa"
     },
     "welcome": {
+        "changes-cta": "Ver Mudanças Recentes",
         "desc": "Estamos ativamente adicionando novos recursos e promovendo mudanças. Se você tiver algum problema, forneça feedback.",
         "feedback-cta": "Dar uma resposta",
         "join-cta": "Junte-se à comunidade Discord",

@@ -7,6 +7,7 @@
             "title": "自动滚屏"
         },
         "play": "播放音频",
+        "playback-normal": "普通的",
         "playback-speed": "播放速度",
         "playback-speed-unit": "X",
         "player": {
@@ -31,6 +32,8 @@
             "times": "次",
             "verses-range": "诗句范围"
         },
+        "repeat-moved": "重复设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
+        "select-reciter": "选择朗诵者",
         "title": "声音的"
     },
     "ayah": "阿亚",
@@ -79,10 +82,11 @@
         "code_v2": "法赫德国王复合体 V2",
         "font-size": "字体大小",
         "lines": "线",
-        "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长，并且无法通过浏览器复制。",
+        "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长。",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "古兰经字体",
         "tajweed": "泰姬草",
+        "tajweed-desc": "Tajweed 字体显示 Tajweed 色的 Mushaf。 <0>此处阅读有关 Tajweed 颜色规则的更多信息<\/0>",
         "text_indopak": "印巴",
         "text_uthmani": "奥斯曼尼"
     },
@@ -94,6 +98,7 @@
         "clear": "清除"
     },
     "juz": "朱兹",
+    "languages": "语言",
     "loading": "加载中",
     "menu": "菜单",
     "mobile-apps": "移动应用程序",
@@ -138,6 +143,7 @@
     },
     "prev": "以前的",
     "privacy": "隐私",
+    "product-updates": "产品更新",
     "q-reflect": "古兰经反射",
     "quran-com": "古兰经网",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "搜索"
     },
     "settings": {
-        "change-reciter": "更改朗诵者",
-        "change-tafsirs": "更改 Tafsir",
-        "change-translations": "更改翻译",
+        "no-tafsir-selected": "未选择 tafsir",
+        "no-translation-selected": "未选择翻译",
         "reading-experience": "阅读体验",
         "reset-cta": "重新设置",
         "reset-notif": "您的设置已重置为默认设置",
         "search-reciter": "搜索朗诵者",
         "search-tafsirs": "搜索 Tafsirs",
         "search-translations": "搜索翻译",
-        "title": "设置"
+        "selected-reciter": "精选朗诵者",
+        "selected-tafsirs": "精选 Tafsir",
+        "selected-translations": "精选译文",
+        "title": "设置",
+        "value-and-others": "{{value}}和{{othersCount}}其他",
+        "wbw-helper": "直接在单词下方显示翻译或音译",
+        "word-tooltip-helper": "悬停或单击单词时显示翻译或音译"
     },
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
+    "sidebar": {
+        "search-juz": "搜索 Juz",
+        "search-page": "搜索页面",
+        "search-surah": "搜索古兰经",
+        "try-navigating-with": "提示：尝试导航"
+    },
     "sitemap": "网站地图",
     "sort": {
         "ascending": "上升",
@@ -195,6 +212,7 @@
     },
     "theme": "主题",
     "themes": {
+        "auto": "汽车",
         "dark": "黑暗的",
         "light": "光",
         "sepia": "棕褐色",
@@ -203,6 +221,7 @@
     },
     "to": "到",
     "tooltip": "工具提示",
+    "tooltip-trans-lang": "工具提示语言",
     "translation": "翻译",
     "translations": "翻译",
     "transliteration": "音译",
@@ -224,5 +243,6 @@
         "play-audio": "播放音频",
         "title": "字点击"
     },
+    "word-tooltip": "文字工具提示",
     "yes": "是的"
 }

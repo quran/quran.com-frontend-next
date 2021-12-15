@@ -8,7 +8,7 @@ import { isRTLLocale } from 'src/utils/locale';
 // reference: https://vercel.com/design/switch
 
 type Item = {
-  name: string;
+  name: React.ReactNode;
   value: string;
   disabled?: boolean;
 };

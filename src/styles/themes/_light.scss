@@ -11,10 +11,10 @@
   --color-secondary-medium: #eaeaea; // temporary placeholder for the beta.
   --color-secondary-deep: #333;
 
-  --color-success-faded: #deecf9;
-  --color-success-faint: #3291ff;
-  --color-success-medium: #0070f3;
-  --color-success-deep: #0761d1;
+  --color-success-faded: #ebf9fa;
+  --color-success-faint: #c2edef;
+  --color-success-medium: #2ca4ab;
+  --color-success-deep: #258c91;
 
   --color-error-faded: #f7d4d6;
   --color-error-faint: #ff1a1a;
@@ -29,11 +29,12 @@
   --color-text-default: #272727;
   --color-text-faded: #666;
   --color-text-inverse: #fff;
-  --color-text-link: #0070f3;
+  --color-text-link: #2ca4ab;
   --color-text-warning: #ab570a;
   --color-text-error: #c50000;
 
   --color-background-default: #fff;
+  --color-background-elevated: #fff;
 
   --color-background-alternative-faded: var(--shade-0);
   --color-background-alternative-faint: var(--shade-1);

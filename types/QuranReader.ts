@@ -47,7 +47,7 @@ export enum Mushaf {
   KFGQPCHAFS = 5,
   Indopak15Lines = 6,
   Indopak16Lines = 7,
-  Tajweeed = 10,
+  Tajweeed = 11,
 }
 
 export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
@@ -58,10 +58,5 @@ export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
   [QuranFont.QPCHafs]: Mushaf.KFGQPCHAFS,
   [QuranFont.Tajweed]: Mushaf.Tajweeed,
 };
-
-export enum AutoScroll {
-  ON = 'on',
-  OFF = 'off',
-}
 
 export default { ReadingPreference, QuranFont };

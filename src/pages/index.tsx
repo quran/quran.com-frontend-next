@@ -1,51 +1,68 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 
 import styles from './index.module.scss';
 
-import ChapterAndJuzList from 'src/components/chapters/ChapterAndJuzList';
-import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
+import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzListSkeleton';
 import Footer from 'src/components/dls/Footer/Footer';
-import HomePageImage from 'src/components/HomePage/HomePageImage';
+import Separator from 'src/components/dls/Separator/Separator';
+import HomePageHero from 'src/components/HomePage/HomePageHero';
 import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
-import BookmarksAndQuickLinks from 'src/components/Verses/BookmarksAndQuickLinks';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { getCanonicalUrl } from 'src/utils/navigation';
 import { ChaptersResponse } from 'types/ApiResponses';
+
+const ChapterAndJuzListWrapper = dynamic(
+  () => import('src/components/chapters/ChapterAndJuzList'),
+  {
+    ssr: false,
+    loading: () => <ChapterAndJuzListSkeleton />,
+  },
+);
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => (
-  <div className={styles.pageContainer}>
-    <div className={classNames(styles.listContainer, styles.flow)}>
-      <div className={classNames(styles.flowItem)}>
-        <CommandBarTrigger />
+const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
+  const { t, lang } = useTranslation('home');
+  return (
+    <>
+      <NextSeoWrapper title={t('noble-quran')} url={getCanonicalUrl(lang, '')} />
+      <div className={styles.pageContainer}>
+        <div className={classNames(styles.listContainer, styles.flow)}>
+          <HomePageHero />
+          <div className={styles.flowItem}>
+            <HomePageWelcomeMessage />
+          </div>
+          <div className={classNames(styles.flowItem, styles.fullWidth)}>
+            <RecentReadingSessions />
+          </div>
+          <div className={classNames(styles.flowItem, styles.fullWidth)}>
+            <BookmarksSection />
+          </div>
+          <div className={styles.flowItem}>
+            <ChapterAndJuzListWrapper chapters={chapters} />
+          </div>
+          <div className={styles.flowItem}>
+            <Separator />
+          </div>
+          <div className={styles.flowItem}>
+            <Footer />
+          </div>
+        </div>
       </div>
-      <div className={classNames(styles.flowItem)}>
-        <HomePageImage />
-      </div>
-      <div className={styles.flowItem}>
-        <HomePageWelcomeMessage />
-      </div>
-      <div className={classNames(styles.flowItem, styles.fullWidth)}>
-        <RecentReadingSessions />
-      </div>
-      <div className={classNames(styles.flowItem, styles.fullWidth)}>
-        <BookmarksAndQuickLinks />
-      </div>
-      <div className={styles.flowItem}>
-        <ChapterAndJuzList chapters={chapters} />
-      </div>
-      <div className={styles.flowItem}>
-        <Footer />
-      </div>
-    </div>
-  </div>
-);
+    </>
+  );
+};
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const allChaptersData = getAllChaptersData(locale);

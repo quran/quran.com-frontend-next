@@ -3,6 +3,7 @@ import React from 'react';
 import { NextSeo } from 'next-seo';
 
 import { SEOProps } from 'src/utils/seo';
+import { truncateString } from 'src/utils/string';
 
 interface Props extends SEOProps {
   url?: string;
@@ -13,7 +14,7 @@ interface Props extends SEOProps {
 }
 
 const NextSeoWrapper: React.FC<Props> = (props) => {
-  const { url, image, imageAlt, imageHeight, imageWidth, openGraph, ...rest } = props;
+  const { url, image, imageAlt, imageHeight, imageWidth, openGraph, description, ...rest } = props;
   const openGraphParams = {
     ...(openGraph && { openGraph }),
     ...(url && { url }),
@@ -23,7 +24,7 @@ const NextSeoWrapper: React.FC<Props> = (props) => {
   };
   const params = {
     ...rest,
-    ...(url && { canonical: url }),
+    ...(description && { description: truncateString(description, 150) }),
   };
   return <NextSeo {...params} openGraph={openGraphParams} />;
 };

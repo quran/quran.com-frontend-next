@@ -2,4 +2,6 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-semibold);
   padding-block-end: var(--spacing-medium);
+  display: flex;
+  align-items: center;
 }

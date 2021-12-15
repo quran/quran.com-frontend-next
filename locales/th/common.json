@@ -7,6 +7,7 @@
             "title": "เลื่อนอัตโนมัติ"
         },
         "play": "เล่นเสียง",
+        "playback-normal": "ปกติ",
         "playback-speed": "ความเร็วในการเล่น",
         "playback-speed-unit": "NS",
         "player": {
@@ -31,6 +32,8 @@
             "times": "ครั้ง",
             "verses-range": "ช่วงของโองการ"
         },
+        "repeat-moved": "การตั้งค่าซ้ำได้ย้ายไปที่เครื่องเล่นเสียงแล้ว คลิกที่ <0> <\/0> เพื่อเข้าถึง",
+        "select-reciter": "เลือกผู้อ่าน",
         "title": "เครื่องเสียง"
     },
     "ayah": "อายา",
@@ -79,10 +82,11 @@
         "code_v2": "คิงฟาฮัดคอมเพล็กซ์ V2",
         "font-size": "ขนาดตัวอักษร",
         "lines": "เส้น",
-        "qcf-desc": "แบบอักษร KPFG ให้คุณภาพที่สูงกว่าแต่ใช้เวลาในการโหลดนานกว่าและไม่สามารถคัดลอกผ่านเบราว์เซอร์ได้",
+        "qcf-desc": "แบบอักษร KPFG ให้คุณภาพที่สูงกว่าแต่ใช้เวลาในการโหลดนานกว่า",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "คัมภีร์กุรอานอักษร",
         "tajweed": "ทัชวีด",
+        "tajweed-desc": "แบบอักษร Tajweed แสดง Mushaf สี Tajweed คุณสามารถอ่านเพิ่มเติมเกี่ยวกับกฎสี Tajweed <0> ที่นี่ <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "อุทุมณี"
     },
@@ -94,6 +98,7 @@
         "clear": "ชัดเจน"
     },
     "juz": "จูซ",
+    "languages": "ภาษา",
     "loading": "กำลังโหลด",
     "menu": "เมนู",
     "mobile-apps": "แอพมือถือ",
@@ -138,6 +143,7 @@
     },
     "prev": "ก่อนหน้า",
     "privacy": "ความเป็นส่วนตัว",
+    "product-updates": "อัพเดทสินค้า",
     "q-reflect": "คัมภีร์กุรอานสะท้อน",
     "quran-com": "Quran.com",
     "reading-preference": {
@@ -161,19 +167,30 @@
         "title": "ค้นหา"
     },
     "settings": {
-        "change-reciter": "เปลี่ยนผู้เล่า",
-        "change-tafsirs": "เปลี่ยนตัฟซีร์",
-        "change-translations": "เปลี่ยนการแปล",
+        "no-tafsir-selected": "ไม่ได้เลือก tafsir",
+        "no-translation-selected": "ไม่ได้เลือกคำแปล",
         "reading-experience": "ประสบการณ์การอ่าน",
         "reset-cta": "คืนค่าการตั้งค่า",
         "reset-notif": "การตั้งค่าของคุณถูกรีเซ็ตเป็นค่าเริ่มต้น",
         "search-reciter": "ค้นหาผู้อ่าน",
         "search-tafsirs": "ค้นหา Tafsirs",
         "search-translations": "ค้นหาคำแปล",
-        "title": "การตั้งค่า"
+        "selected-reciter": "ผู้อ่านที่เลือก",
+        "selected-tafsirs": "Tafsirs ที่เลือก",
+        "selected-translations": "การแปลที่เลือก",
+        "title": "การตั้งค่า",
+        "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
+        "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
+        "word-tooltip-helper": "แสดงการแปลหรือการทับศัพท์เมื่อวางเมาส์เหนือหรือคลิกที่คำ"
     },
     "share": "แบ่งปัน",
     "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
+    "sidebar": {
+        "search-juz": "ค้นหา Juz",
+        "search-page": "ค้นหาหน้า",
+        "search-surah": "ค้นหา Surah",
+        "try-navigating-with": "เคล็ดลับ: ลองนำทางด้วย"
+    },
     "sitemap": "แผนผังเว็บไซต์",
     "sort": {
         "ascending": "จากน้อยไปมาก",
@@ -195,6 +212,7 @@
     },
     "theme": "ธีม",
     "themes": {
+        "auto": "รถยนต์",
         "dark": "มืด",
         "light": "แสงสว่าง",
         "sepia": "ซีเปีย",
@@ -203,6 +221,7 @@
     },
     "to": "ถึง",
     "tooltip": "เคล็ดลับเครื่องมือ",
+    "tooltip-trans-lang": "ภาษาเคล็ดลับเครื่องมือ",
     "translation": "การแปล",
     "translations": "คำแปล",
     "transliteration": "การทับศัพท์",
@@ -224,5 +243,6 @@
         "play-audio": "เล่นเสียง",
         "title": "คำคลิก"
     },
+    "word-tooltip": "Word Tooltip",
     "yes": "ใช่"
 }
