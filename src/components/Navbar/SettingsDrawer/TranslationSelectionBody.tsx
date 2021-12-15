@@ -73,7 +73,7 @@ const TranslationSelectionBody = () => {
             <div>
               {Object.entries(translationByLanguages).map(([language, translations]) => {
                 return (
-                  <div className={styles.group}>
+                  <div className={styles.group} key={language}>
                     <div className={styles.language}>{language}</div>
                     {translations.map((translation) => (
                       <div key={translation.id} className={styles.item}>
