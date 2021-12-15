@@ -44,6 +44,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
               layout="fill"
               placeholder="blur"
               blurDataURL={getBlurDataUrl(200, 250)}
+              alt={t(`surah-info:${chapter.revelationPlace}`)}
             />
           </div>
         </div>

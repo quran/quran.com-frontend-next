@@ -24,7 +24,8 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
     day: '2-digit',
     year: 'numeric',
   });
-  const pageTitle = <p className={classNames(styles.title, styles.bold)}>{getPageTitle(page)}</p>;
+  const pageTitleString = getPageTitle(page);
+  const pageTitle = <p className={classNames(styles.title, styles.bold)}>{pageTitleString}</p>;
   return (
     <div key={page.id} className={styles.pageContainer}>
       <div className={styles.headerSection}>
@@ -40,7 +41,7 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
       </div>
       <div className={styles.blocksContainer}>
         {isPageLayout ? pageTitle : <Link href={`/product-updates/${page.id}`}>{pageTitle}</Link>}
-        <Blocks blocks={blocks} />
+        <Blocks blocks={blocks} pageTitle={pageTitleString} />
       </div>
     </div>
   );

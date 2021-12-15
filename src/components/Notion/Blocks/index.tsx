@@ -4,7 +4,7 @@ import styles from './Blocks.module.scss';
 
 import Text from 'src/components/Changelog/Text';
 
-export const renderBlock = (block) => {
+export const renderBlock = (block, pageTitle: string) => {
   const { type } = block;
   const value = block[type];
   switch (type) {
@@ -16,7 +16,7 @@ export const renderBlock = (block) => {
       );
     case 'image': {
       const src = value.type === 'external' ? value.external.url : value.file.url;
-      const caption = value.caption[0]?.plain_text || '';
+      const caption = value.caption[0]?.plain_text || pageTitle;
       return (
         <div className={styles.imageContainer}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -56,13 +56,14 @@ export const renderBlock = (block) => {
 
 interface Props {
   blocks: any[];
+  pageTitle: string;
 }
 
-const Blocks: React.FC<Props> = ({ blocks }) => {
+const Blocks: React.FC<Props> = ({ blocks, pageTitle }) => {
   return (
     <>
       {blocks.map((block) => (
-        <div key={block.id}>{renderBlock(block)}</div>
+        <div key={block.id}>{renderBlock(block, pageTitle)}</div>
       ))}
     </>
   );
