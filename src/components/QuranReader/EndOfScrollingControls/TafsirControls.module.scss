@@ -1,0 +1,13 @@
+@use "src/styles/breakpoints";
+
+$container-max-width: calc(23 * var(--spacing-mega));
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 90%;
+  @include breakpoints.tablet {
+    max-width: $container-max-width;
+  }
+}

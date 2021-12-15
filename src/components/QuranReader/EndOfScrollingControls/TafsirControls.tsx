@@ -2,7 +2,11 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import NextIcon from '../../../../public/icons/east.svg';
+import PrevIcon from '../../../../public/icons/west.svg';
+
 import EndOfScrollingButton from './EndOfScrollingButton';
+import styles from './TafsirControls.module.scss';
 
 import {
   getVerseNavigationUrlByVerseKey,
@@ -26,10 +30,10 @@ const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSe
   }
   const { chapterId, verseNumber } = lastVerse;
   return (
-    <>
+    <div className={styles.container}>
       {!isFirstVerseOfSurah(verseNumber) && (
         <EndOfScrollingButton
-          text={t('prev-ayah')}
+          text={<PrevIcon />}
           href={
             isSelectedTafsir
               ? getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber - 1, tafsirId)
@@ -38,12 +42,12 @@ const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSe
         />
       )}
       <EndOfScrollingButton
-        text={t('back-to-ayah')}
+        text={t('go-ayah')}
         href={getVerseNavigationUrlByVerseKey(`${chapterId}:${verseNumber}`)}
       />
       {!isLastVerseOfSurah(String(chapterId), verseNumber) && (
         <EndOfScrollingButton
-          text={t('next-ayah')}
+          text={<NextIcon />}
           href={
             isSelectedTafsir
               ? getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber + 1, tafsirId)
@@ -51,7 +55,7 @@ const TafsirControls: React.FC<Props> = ({ lastVerse, isTafsirIdSetFromUrl: isSe
           }
         />
       )}
-    </>
+    </div>
   );
 };
 

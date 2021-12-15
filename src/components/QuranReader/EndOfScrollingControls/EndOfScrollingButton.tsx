@@ -5,7 +5,7 @@ import Button, { ButtonType } from 'src/components/dls/Button/Button';
 interface Props {
   onClick?: () => void;
   href?: string;
-  text: string;
+  text: string | React.ReactNode;
 }
 
 const EndOfScrollingButton: React.FC<Props> = ({ text, href, onClick }) => {
