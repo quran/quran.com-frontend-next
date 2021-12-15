@@ -64,6 +64,7 @@ const AboutUsPage = () => {
               height={70}
               placeholder="blur"
               blurDataURL={getBlurDataUrl(300, 70)}
+              alt="Lokalise"
             />
           </div>
         </div>

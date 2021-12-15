@@ -29,15 +29,21 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         <p>{app.description}</p>
         <div className={styles.downloadButtonsContainer}>
           <a href={app.ios}>
-            <Image src="/images/app-store.svg" width={135} height={40} />
+            <Image src="/images/app-store.svg" width={135} height={40} alt="App Store" />
           </a>
           <a href={app.android}>
-            <Image src="/images/play-store.svg" width={135} height={40} />
+            <Image src="/images/play-store.svg" width={135} height={40} alt="Play Store" />
           </a>
         </div>
       </div>
       <div>
-        <Image className={styles.appImage} src={QuranAppPreviewImage} height={1396} width={1176} />
+        <Image
+          className={styles.appImage}
+          src={QuranAppPreviewImage}
+          height={1396}
+          width={1176}
+          alt={app.title}
+        />
       </div>
     </div>
   );
