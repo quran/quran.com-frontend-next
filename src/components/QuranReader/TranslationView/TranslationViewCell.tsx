@@ -3,7 +3,11 @@ import React, { RefObject, useEffect, memo } from 'react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import { verseFontChanged, verseTranslationChanged } from '../utils/memoization';
+import {
+  verseFontChanged,
+  verseTranslationChanged,
+  verseTranslationFontChanged,
+} from '../utils/memoization';
 
 import BookmarkIcon from './BookmarkIcon';
 import TranslationText from './TranslationText';
@@ -132,6 +136,7 @@ const areVersesEqual = (
     prevProps.verse.words,
     nextProps.verse.words,
   ) &&
-  !verseTranslationChanged(prevProps.verse, nextProps.verse);
+  !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
+  !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles);
 
 export default memo(TranslationViewCell, areVersesEqual);

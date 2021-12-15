@@ -1,5 +1,3 @@
-import isEqual from 'lodash/isEqual';
-
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -14,6 +12,18 @@ import Word from 'types/Word';
  */
 export const verseTranslationChanged = (prevVerse: Verse, nextVerse: Verse): boolean =>
   prevVerse?.translations?.length !== nextVerse?.translations?.length;
+
+/**
+ * Checks whether the translation font styles has changed between the re-renders
+ *
+ * @param {QuranReaderStyles} prevQuranStyles
+ * @param {QuranReaderStyles} nextQuranStyles
+ * @returns {boolean}
+ */
+export const verseTranslationFontChanged = (
+  prevQuranStyles: QuranReaderStyles,
+  nextQuranStyles: QuranReaderStyles,
+): boolean => prevQuranStyles.translationFontScale !== nextQuranStyles.translationFontScale;
 
 /**
  * Check whether the font has changed or not between 2 renders. We consider the font
@@ -32,7 +42,7 @@ export const verseFontChanged = (
   prevWords: Word[],
   nextWords: Word[],
 ): boolean =>
-  !isEqual(prevQuranStyles, nextQuranStyles) ||
+  prevQuranStyles.mushafLines !== nextQuranStyles.mushafLines ||
   prevWords.length !== nextWords.length ||
   prevWords[0].text !== nextWords[0].text ||
   prevWords[0].translation.languageName !== nextWords[0].translation.languageName;
