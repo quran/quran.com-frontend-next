@@ -8,6 +8,7 @@ import QuranAppPreviewImage from '../../public/images/quran-app-preview.png';
 import styles from './apps.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import { getCanonicalUrl } from 'src/utils/navigation';
 
 type AppProps = {
   app: any;
@@ -50,7 +51,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
 };
 
 const AppsPage = () => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const apps = {
     quran: {
@@ -72,7 +73,7 @@ const AppsPage = () => {
 
   return (
     <>
-      <NextSeoWrapper title={t('common:mobile-apps')} />
+      <NextSeoWrapper title={t('common:mobile-apps')} url={getCanonicalUrl(lang, '/apps')} />
       <div className={styles.container}>
         <App app={apps.quran} isMain />
         <App app={apps.tarteel} isFlipped />
