@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
+import CommunitySection from 'src/components/Navbar/NavigationDrawer/CommunitySection';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { getCanonicalUrl } from 'src/utils/navigation';
 
@@ -125,6 +126,7 @@ const DevelopersPage = () => {
         <p>{t('issues-cta')}</p>
         <p>{t('thanks')}</p>
         <p>{t('footer')}</p>
+        <CommunitySection />
       </div>
     </>
   );
