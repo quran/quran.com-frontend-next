@@ -16,28 +16,28 @@ const Links = () => {
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/' },
+        { text: t('help'), url: '/support' },
       ],
     },
     {
-      title: 'Useful sites',
+      title: 'Networks',
       links: [
-        { text: 'Quranicaudio.com', url: 'https://quranicaudio.com' },
+        { text: 'QuranicAudio.com', url: 'https://quranicaudio.com' },
         { text: 'Salah.com', url: 'https://salah.com' },
         { text: 'Sunnah.com', url: 'https://sunnah.com' },
         { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com' },
         { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com' },
         { text: 'QuranReflect.com', url: 'https://quranreflect.com' },
+        { text: 'Tarteel', url: 'https://www.tarteel.ai/' },
       ],
     },
     {
       title: 'Other links',
       links: [
-        { text: t('sitemap'), url: '/sitemap' },
-        { text: t('help'), url: '/support' },
-        { text: t('privacy'), url: '/privacy' },
         { text: t('surah-yaseen'), url: '/surah-ya-sin' },
         { text: t('ayat-al-kursi'), url: '/ayatul-kursi' },
         { text: t('surah-al-kahf'), url: '/surah-al-kahf' },
+        { text: t('surah-al-mulk'), url: '/surah-al-mulk' },
       ],
     },
   ];

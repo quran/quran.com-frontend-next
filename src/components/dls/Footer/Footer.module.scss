@@ -33,14 +33,13 @@
 }
 
 .copyright {
-  margin-block-start: var(--spacing-xsmall);
-  font-size: var(--font-size-normal);
-  opacity: var(--opacity-75);
+  margin-block-start: var(--spacing-xxsmall);
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-50);
 }
 
 .groupListContainer {
   display: flex;
-  margin-block-start: var(--spacing-medium);
   justify-content: space-between;
   flex-wrap: wrap;
   flex: 1;
@@ -75,4 +74,17 @@
 .titleAndDescriptionContainer {
   max-width: calc(12.5 * var(--spacing-mega));
   margin-inline-end: var(--spacing-medium);
+}
+
+.bottomSectionContainer {
+  display: flex;
+  padding-block-start: var(--spacing-medium);
+  justify-content: space-between;
+}
+
+.bottomLinks {
+  & > a {
+    margin-inline-end: var(--spacing-medium);
+    opacity: var(--opacity-75);
+  }
 }
