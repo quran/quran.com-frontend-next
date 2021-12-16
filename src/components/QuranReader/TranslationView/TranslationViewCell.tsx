@@ -31,9 +31,14 @@ import Verse from 'types/Verse';
 type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
+  verseIndex: number;
 };
 
-const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranReaderStyles }) => {
+const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
+  verse,
+  quranReaderStyles,
+  verseIndex,
+}) => {
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
@@ -91,7 +96,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
           })}
         >
           <div className={styles.arabicVerseContainer}>
-            <VerseText words={getVerseWords(verse)} />
+            <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={verseIndex === 0} />
           </div>
           <div className={styles.verseTranslationsContainer}>
             {verse.translations?.map((translation: Translation) => (
