@@ -24,7 +24,7 @@ const TitleAndDescription = () => {
         </div>
         <div className={styles.title}>{t('home:footer.title')}</div>
       </div>
-      <p className={styles.description}>{t('footer-description')}</p>
+      <p className={styles.description}>{t('footer.description')}</p>
       <div className={styles.copyright}>
         © {localizedCurrentYear}{' '}
         <Link href="https://quran.com" variant={LinkVariant.Highlight}>

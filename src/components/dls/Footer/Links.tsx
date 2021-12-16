@@ -32,12 +32,12 @@ const Links = () => {
     {
       title: 'Other links',
       links: [
-        { text: 'Sitemap', url: '/sitemap' },
+        { text: t('sitemap'), url: '/sitemap' },
         { text: t('help'), url: '/support' },
         { text: t('privacy'), url: '/privacy' },
-        { text: 'Surah Yaseeen', url: '/surah-ya-sin' },
-        { text: 'Ayat Al-kursi', url: '/ayatul-kursi' },
-        { text: 'Surah Al-kahf', url: '/surah-al-kahf' },
+        { text: t('surah-yaseen'), url: '/surah-ya-sin' },
+        { text: t('ayat-al-kursi'), url: '/ayatul-kursi' },
+        { text: t('surah-al-kahf'), url: '/surah-al-kahf' },
       ],
     },
   ];
