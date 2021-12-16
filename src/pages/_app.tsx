@@ -25,7 +25,7 @@ import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
-  const { locale, asPath } = useRouter();
+  const { locale } = useRouter();
   const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
@@ -45,9 +45,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
       <ReduxProvider locale={locale}>
         <ThemeProvider>
           <IdProvider>
-            <DefaultSeo
-              {...createSEOConfig({ path: asPath, locale, description: t('default-description') })}
-            />
+            <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
             <GlobalListeners />
             <Navbar />
             <DeveloperUtility />

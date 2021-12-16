@@ -10,7 +10,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber, getLocaleName } from 'src/utils/locale';
+import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from 'src/utils/locale';
 import {
   getCanonicalUrl,
   getSurahNavigationUrl,
@@ -60,19 +60,28 @@ const Chapter: NextPage<ChapterProps> = ({
     return `${toLocalizedNumber(verseNumber, lang)}`;
   };
 
-  const getCanonicalUrlValue = () => {
+  const getPath = () => {
     if (isChapter) {
-      return getCanonicalUrl(lang, getSurahNavigationUrl(chapterResponse.chapter.slug));
+      return getSurahNavigationUrl(chapterResponse.chapter.slug);
     }
     const { verseNumber } = versesResponse.verses[0];
     // if it's Ayatul Kursi
     if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
-      return getCanonicalUrl(lang, '/ayatul-kursi');
+      return '/ayatul-kursi';
     }
-    return getCanonicalUrl(
-      lang,
-      getVerseNavigationUrl(chapterResponse.chapter.slug, verseNumber.toString()),
-    );
+    return getVerseNavigationUrl(chapterResponse.chapter.slug, verseNumber.toString());
+  };
+  const path = getPath();
+  const getCanonicalUrlValue = () => {
+    if (isChapter) {
+      return getCanonicalUrl(lang, path);
+    }
+    const { verseNumber } = versesResponse.verses[0];
+    // if it's Ayatul Kursi
+    if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
+      return getCanonicalUrl(lang, path);
+    }
+    return getCanonicalUrl(lang, path);
   };
 
   return (
@@ -92,6 +101,7 @@ const Chapter: NextPage<ChapterProps> = ({
                 versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
               })
         }
+        languageAlternates={getLanguageAlternates(path)}
       />
       <QuranReader
         initialData={versesResponse}

@@ -9,7 +9,7 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from 'src/utils/navigation';
 import { getPageOrJuzMetaDescription } from 'src/utils/seo';
 import {
@@ -33,12 +33,14 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
+  const path = getPageNavigationUrl(Number(pageId));
   return (
     <>
       <NextSeoWrapper
         title={`${t('page')} ${toLocalizedNumber(Number(pageId), lang)}`}
         description={getPageOrJuzMetaDescription(pageVerses)}
-        canonical={getCanonicalUrl(lang, getPageNavigationUrl(Number(pageId)))}
+        canonical={getCanonicalUrl(lang, path)}
+        languageAlternates={getLanguageAlternates(path)}
       />
       <QuranReader
         initialData={pageVerses}

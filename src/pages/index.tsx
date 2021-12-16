@@ -17,6 +17,7 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import { ChaptersResponse } from 'types/ApiResponses';
 
@@ -36,7 +37,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
   const { t, lang } = useTranslation('home');
   return (
     <>
-      <NextSeoWrapper title={t('noble-quran')} url={getCanonicalUrl(lang, '')} />
+      <NextSeoWrapper
+        title={t('noble-quran')}
+        url={getCanonicalUrl(lang, '')}
+        languageAlternates={getLanguageAlternates('')}
+      />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.listContainer, styles.flow)}>
           <HomePageHero />
