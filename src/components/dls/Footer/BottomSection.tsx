@@ -33,7 +33,9 @@ const BottomSection = () => {
           . {t('home:footer.rights')}
         </div>
       </div>
-      <LanguageSelector shouldShowSelectedLang />
+      <div className={styles.languageSelectorContainer}>
+        <LanguageSelector shouldShowSelectedLang />
+      </div>
     </div>
   );
 };

@@ -62,6 +62,7 @@
   max-width: calc(15 * var(--spacing-mega));
   opacity: var(--opacity-75);
   margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-medium);
 }
 
 .linkContainer {
@@ -78,8 +79,15 @@
 
 .bottomSectionContainer {
   display: flex;
+  flex-direction: column-reverse;
+  @include breakpoints.tablet {
+    flex-direction: row;
+  }
   padding-block-start: var(--spacing-medium);
   justify-content: space-between;
+}
+.languageSelectorContainer {
+  margin-block-end: var(--spacing-small);
 }
 
 .bottomLinks {
