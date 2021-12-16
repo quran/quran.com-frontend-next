@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  @include breakpoints.tablet {
+  @include breakpoints.desktop {
     flex-direction: row;
   }
 }
@@ -23,10 +23,11 @@
 .headingContainer {
   display: flex;
   flex-direction: column;
-  @include breakpoints.tablet {
+  flex-wrap: wrap;
+  @include breakpoints.desktop {
     flex-direction: row;
-    .title {
-      margin-inline-start: var(--spacing-xsmall);
+    .iconContainer {
+      margin-inline-end: var(--spacing-xsmall);
     }
   }
 }
@@ -41,17 +42,15 @@
   display: flex;
   margin-block-start: var(--spacing-medium);
   justify-content: space-between;
-  @include breakpoints.tablet {
-    margin-block-start: 0;
-    & > .group + .group {
-      margin-inline-start: calc(2 * var(--spacing-mega));
-    }
-  }
+  flex-wrap: wrap;
+  flex: 1;
+  max-width: calc(15 * var(--spacing-mega));
 }
 
 .group {
   display: flex;
   flex-direction: column;
+  margin-block-end: var(--spacing-medium);
 }
 
 .groupTitle {
@@ -71,4 +70,9 @@
   & + & {
     margin-block-start: var(--spacing-xxsmall);
   }
+}
+
+.titleAndDescriptionContainer {
+  max-width: calc(12.5 * var(--spacing-mega));
+  margin-inline-end: var(--spacing-medium);
 }
