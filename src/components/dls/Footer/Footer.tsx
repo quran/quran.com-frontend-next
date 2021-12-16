@@ -11,7 +11,6 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { toLocalizedDate } from 'src/utils/locale';
 
 const Other = () => {
-  const description = `Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.`;
   const { t, lang } = useTranslation('common');
 
   const localizedCurrentYear = useMemo(
@@ -26,7 +25,7 @@ const Other = () => {
         </div>
         <div className={styles.title}>{t('home:footer.title')}</div>
       </div>
-      <p className={styles.description}>{description}</p>
+      <p className={styles.description}>{t('footer-description')}</p>
       <div className={styles.copyright}>
         © {localizedCurrentYear}{' '}
         <Link href="https://quran.com" variant={LinkVariant.Highlight}>

@@ -13,7 +13,6 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-xlarge);
-  margin-inline-start: var(--spacing-xsmall);
 }
 
 .iconContainer {
@@ -23,20 +22,30 @@
 }
 .headingContainer {
   display: flex;
+  flex-direction: column;
+  @include breakpoints.tablet {
+    flex-direction: row;
+    .title {
+      margin-inline-start: var(--spacing-xsmall);
+    }
+  }
 }
 
 .copyright {
+  margin-block-start: var(--spacing-xsmall);
   font-size: var(--font-size-normal);
+  opacity: var(--opacity-75);
 }
 
 .groupListContainer {
   display: flex;
   margin-block-start: var(--spacing-medium);
+  justify-content: space-between;
   @include breakpoints.tablet {
     margin-block-start: 0;
-  }
-  & > .group + .group {
-    margin-inline-start: calc(2 * var(--spacing-mega));
+    & > .group + .group {
+      margin-inline-start: calc(2 * var(--spacing-mega));
+    }
   }
 }
 
@@ -54,6 +63,7 @@
 .description {
   max-width: calc(15 * var(--spacing-mega));
   opacity: var(--opacity-75);
+  margin-block-start: var(--spacing-xxsmall);
 }
 
 .linkContainer {
