@@ -1,7 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { NextSeoProps } from 'next-seo';
 
-import { getLanguageAlternates, getOpenGraphLocale } from './locale';
+import { getOpenGraphLocale } from './locale';
 
 import { VersesResponse } from 'types/ApiResponses';
 
@@ -38,7 +38,6 @@ export function createSEOConfig({
   title,
   description,
   canonicalUrl,
-  path,
   locale,
 }: SeoConfigType = {}): SEOProps {
   const seoTitle = title || '';
@@ -51,7 +50,6 @@ export function createSEOConfig({
     dangerouslySetAllPagesToNoFollow: !isProduction, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow
     dangerouslySetAllPagesToNoIndex: !isProduction, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex
     canonical: canonicalUrl,
-    languageAlternates: getLanguageAlternates(path), // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
     openGraph: {
       type: 'website',
       locale: getOpenGraphLocale(locale),

@@ -9,7 +9,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
 import { getCanonicalUrl, getVerseNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -40,6 +40,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   if (hasError) {
     return <Error statusCode={500} />;
   }
+  const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
   return (
     <>
       <NextSeoWrapper
@@ -48,10 +49,8 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
             ? toLocalizedNumber(Number(verseId), lang)
             : toLocalizedVersesRange(verseId as string, lang)
         }`}
-        canonical={getCanonicalUrl(
-          lang,
-          getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string),
-        )}
+        canonical={getCanonicalUrl(lang, path)}
+        languageAlternates={getLanguageAlternates(path)}
         description={versesResponse.verses[0].textImlaeiSimple}
       />
       <QuranReader

@@ -6,13 +6,19 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 
+const path = '/developers';
 const DevelopersPage = () => {
   const { t, lang } = useTranslation('developers');
   return (
     <>
-      <NextSeoWrapper title={t('common:developers')} url={getCanonicalUrl(lang, '/developers')} />
+      <NextSeoWrapper
+        title={t('common:developers')}
+        url={getCanonicalUrl(lang, path)}
+        languageAlternates={getLanguageAlternates(path)}
+      />
       <div className={styles.contentPage}>
         <h1>{t('header')}</h1>
         <p>{t('main-desc')}</p>
