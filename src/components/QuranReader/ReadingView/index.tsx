@@ -19,12 +19,13 @@ const ReadingView = ({ verses, quranReaderStyles }: ReadingViewProps) => {
 
   return (
     <div className={styles.container}>
-      {Object.keys(pages).map((pageNumber) => (
+      {Object.keys(pages).map((pageNumber, index) => (
         <Page
           verses={pages[pageNumber]}
           key={`page-${pageNumber}`}
           page={Number(pageNumber)}
           quranReaderStyles={quranReaderStyles}
+          pageIndex={index}
         />
       ))}
     </div>
