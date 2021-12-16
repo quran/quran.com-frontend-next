@@ -5,19 +5,21 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
+import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
-interface Props {
-  id: string;
-}
-
-const VerseList: React.FC<Props> = ({ id }) => {
+const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
+  const chapterIds = useChapterIdsByUrlPath(lang);
+  const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  const verseKeys = useMemo(() => generateChapterVersesKeys(id), [id]);
+  const verseKeys = useMemo(
+    () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),
+    [currentChapterId],
+  );
 
   return (
     <div className={styles.verseListContainer}>
