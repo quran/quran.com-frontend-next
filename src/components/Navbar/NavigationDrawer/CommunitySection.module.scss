@@ -11,6 +11,10 @@
     margin-inline-start: var(--spacing-small);
   }
   margin-block-end: var(--spacing-mega);
+
+  & .joinCommunityLink {
+    text-decoration: none;
+  }
 }
 
 .flow > div {
@@ -34,8 +38,4 @@
 .title {
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
-}
-
-.noUnderline {
-  text-decoration: none !important;
 }
