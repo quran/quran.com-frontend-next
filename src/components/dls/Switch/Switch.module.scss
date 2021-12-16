@@ -21,7 +21,6 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
   cursor: pointer;
   color: var(--color-text-default);
   background-color: transparent;
-  border-radius: var(--border-radius-pill);
   border: none;
   z-index: 1;
 }
@@ -29,6 +28,22 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
 .item[disabled] {
   cursor: not-allowed;
   opacity: var(--opacity-50);
+}
+
+.floatingLine {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+}
+.floatingLineVisible {
+  &::before {
+    content: "";
+    position: absolute;
+    transform: translateY(50%);
+    width: 1px;
+    height: 50%;
+    border-left: 1px solid var(--color-borders-hairline);
+  }
 }
 
 $background-container: calc(0.8 * var(--spacing-xxsmall));
