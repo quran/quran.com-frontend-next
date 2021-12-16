@@ -150,3 +150,8 @@ export const getCanonicalUrl = (lang: string, path: string): string =>
  */
 export const getProductUpdatesUrl = (id = ''): string =>
   `/product-updates${`${id ? `/${id}` : ''}`}`;
+
+export const getQuranReflectVerseUrl = (verseKey: string) => {
+  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
+  return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+};

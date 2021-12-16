@@ -8,7 +8,6 @@ import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
-import QuranReflectIcon from '../../../public/icons/QR.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
@@ -18,7 +17,7 @@ import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { getWindowOrigin, navigateToExternalUrl } from 'src/utils/url';
+import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -69,14 +68,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
     });
   };
 
-  // we do navigation programmatically because using <a> or <Link> doesn't work with PopOver.Item.
-  const onQuranReflectClicked = () => {
-    navigateToExternalUrl(
-      // eslint-disable-next-line i18next/no-literal-string
-      `https://quranreflect.com/${verse.chapterId}/${verse.verseNumber}?feed=true`,
-    );
-  };
-
   const onShareClicked = () => {
     const origin = getWindowOrigin();
     if (origin) {
@@ -108,10 +99,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
 
       <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
         {isShared ? `${t('shared')}` : `${t('share')}`}
-      </PopoverMenu.Item>
-
-      <PopoverMenu.Item onClick={onQuranReflectClicked} icon={<QuranReflectIcon />}>
-        {t('q-reflect')}
       </PopoverMenu.Item>
 
       <PopoverMenu.Item

@@ -10,6 +10,7 @@ import {
 } from '../utils/memoization';
 
 import BookmarkIcon from './BookmarkIcon';
+import QuranReflectButton from './QuranReflectButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
@@ -74,6 +75,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
                 verseKey={verse.verseKey}
                 timestamp={verse.timestamps.timestampFrom}
               />
+            </div>
+            <div className={styles.actionItem}>
+              <QuranReflectButton verseKey={verse.verseKey} />
             </div>
             <div className={styles.actionItem}>
               <OverflowVerseActionsMenu verse={verse} />
