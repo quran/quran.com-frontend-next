@@ -16,6 +16,7 @@ const DevelopersPage = () => {
       <NextSeoWrapper title={t('common:developers')} url={getCanonicalUrl(lang, '/developers')} />
       <div className={styles.contentPage}>
         <h1>{t('header')}</h1>
+        <CommunitySection />
         <p>{t('main-desc')}</p>
         <p>
           <Trans
@@ -126,7 +127,6 @@ const DevelopersPage = () => {
         <p>{t('issues-cta')}</p>
         <p>{t('thanks')}</p>
         <p>{t('footer')}</p>
-        <CommunitySection />
       </div>
     </>
   );
