@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import QuranReflectIcon from '../../../../public/icons/QR.svg';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import { getQuranReflectVerseUrl } from 'src/utils/navigation';
 
 type QuranReflectButtonProps = {
   verseKey: string;
@@ -11,10 +11,9 @@ type QuranReflectButtonProps = {
 
 const QuranReflectButton = ({ verseKey }: QuranReflectButtonProps) => {
   const { t } = useTranslation('common');
-  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   return (
     <Button
-      href={`https://quranreflect.com/${chapter}/${verse}?feed=true`}
+      href={getQuranReflectVerseUrl(verseKey)}
       size={ButtonSize.Small}
       tooltip={t('q-reflect')}
       type={ButtonType.Secondary}
