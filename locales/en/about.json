@@ -6,11 +6,11 @@
     },
     "main-desc": "The Noble Quran is the central religious text of Islam. Muslims believe the Qur’an is the book of Divine guidance and direction for mankind, and consider the original Arabic text the final revelation of Allah (God). All translations of the original Arabic text are thus interpretations of the original meanings and should be embraced as such.",
     "meccan": {
-        "desc": "The Meccan surahs are the chronologically earlier chapters (suras) of the Quran that were, according to Islamic tradition, revealed anytime before the migration of the Islamic prophet Muhammed and his followers from Mecca to Medina (Hijra). The Medinan suras are those revelations that occurred after the move to the city of that name.",
+        "desc": "The Meccan surahs are the chronologically earlier chapters (suras) of the Quran that were, according to Islamic tradition, revealed anytime before the migration of the Islamic prophet Muhammad ﷺ  and his followers from Mecca to Medina (Hijra). The Medinan suras are those revelations that occurred after the move to the city of that name.",
         "surahs": "Meccan Surahs"
     },
     "median": {
-        "desc": "The Medinan suras or Medinan chapters of the Quran are the latest 24 suras that, according to Islamic tradition, were revealed at Medina after Muhammad's hijra from Mecca. These suras were revealed by Allah when the Muslim community was larger and more developed, as opposed to their minority position in Mecca.",
+        "desc": "The Medinan suras or Medinan chapters of the Quran are the latest 24 suras that, according to Islamic tradition, were revealed at Medina after Muhammad ﷺ's hijra from Mecca. These suras were revealed by Allah when the Muslim community was larger and more developed, as opposed to their minority position in Mecca.",
         "surahs": "Medinan Surahs"
     },
     "questions": "If you have any questions, you may visit the <0>feedback<\/0> page.",

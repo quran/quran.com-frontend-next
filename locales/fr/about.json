@@ -6,7 +6,7 @@
     },
     "main-desc": "Le Noble Coran est le texte religieux central de l'Islam. Les musulmans croient que le Coran est le livre de la direction et de la direction divines pour l'humanité, et considèrent le texte arabe original comme la révélation finale d'Allah (Dieu). Toutes les traductions du texte arabe original sont donc des interprétations des significations originales et doivent être acceptées comme telles.",
     "meccan": {
-        "desc": "Les sourates mecquoises sont les chapitres (sourates) chronologiquement antérieurs du Coran qui, selon la tradition islamique, ont été révélés à tout moment avant la migration du prophète islamique Muhammed et de ses disciples de La Mecque à Médine (Hijra). Les sourates médinoises sont ces révélations qui se sont produites après le déménagement dans la ville de ce nom.",
+        "desc": "Les sourates mecquoises sont les chapitres (sourates) chronologiquement antérieurs du Coran qui, selon la tradition islamique, ont été révélés à tout moment avant la migration du prophète islamique Muhammad ﷺ  et de ses disciples de La Mecque à Médine (Hijra). Les sourates médinoises sont ces révélations qui se sont produites après le déménagement dans la ville de ce nom.",
         "surahs": "Sourates mecquoises"
     },
     "median": {
