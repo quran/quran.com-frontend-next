@@ -19,9 +19,10 @@ type PageProps = {
   verses: Verse[];
   page: number;
   quranReaderStyles: QuranReaderStyles;
+  pageIndex: number;
 };
 
-const Page = ({ verses, page, quranReaderStyles }: PageProps) => {
+const Page = ({ verses, page, quranReaderStyles, pageIndex }: PageProps) => {
   const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
   const { quranTextFontScale, quranFont } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -37,8 +38,10 @@ const Page = ({ verses, page, quranReaderStyles }: PageProps) => {
       id={`page-${page}`}
       className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
-      {Object.keys(lines).map((key) => (
+      {Object.keys(lines).map((key, lineIndex) => (
         <Line
+          pageIndex={pageIndex}
+          lineIndex={lineIndex}
           lineKey={key}
           words={lines[key]}
           key={key}

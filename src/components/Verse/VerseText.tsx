@@ -24,9 +24,15 @@ type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
   isHighlighted?: boolean;
+  shouldShowH1ForSEO?: boolean;
 };
 
-const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextProps) => {
+const VerseText = ({
+  words,
+  isReadingMode = false,
+  isHighlighted,
+  shouldShowH1ForSEO = false,
+}: VerseTextProps) => {
   const textRef = useRef(null);
   const loadedFonts = useSelector(selectLoadedFontFaces);
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
@@ -59,6 +65,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
 
   const { chapterId, isFirstWordOfSurah } = firstWordData;
 
+  const VerseTextContainer = shouldShowH1ForSEO ? 'h1' : 'div';
   return (
     <>
       {isReadingMode && isFirstWordOfSurah && (
@@ -66,7 +73,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
           <ChapterHeader chapterId={chapterId} pageNumber={pageNumber} hizbNumber={hizbNumber} />
         </div>
       )}
-      <div
+      <VerseTextContainer
         ref={textRef}
         data-verse-key={verseKey}
         data-page={pageNumber}
@@ -96,7 +103,7 @@ const VerseText = ({ words, isReadingMode = false, isHighlighted }: VerseTextPro
             />
           ))}
         </div>
-      </div>
+      </VerseTextContainer>
     </>
   );
 };
