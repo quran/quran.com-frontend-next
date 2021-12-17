@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
+import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
@@ -22,23 +23,21 @@ const filterSurah = (surah, searchQuery: string) => {
   return filteredSurah as Chapter[];
 };
 
-interface Props {
-  id: string;
-}
-
-const SurahList: React.FC<Props> = ({ id }) => {
+const SurahList = () => {
   const { t, lang } = useTranslation('common');
+  const chapterIds = useChapterIdsByUrlPath(lang);
+  const currentChapterId = chapterIds[0];
 
   const chaptersData = getAllChaptersData(lang);
   const [searchQuery, setSearchQuery] = useState('');
 
   const chapterDataArray = useMemo(
     () =>
-      Object.entries(chaptersData).map(([index, chapter]) => {
+      Object.entries(chaptersData).map(([id, chapter]) => {
         return {
           ...chapter,
-          id: index,
-          localizedId: toLocalizedNumber(Number(index), lang),
+          id,
+          localizedId: toLocalizedNumber(Number(id), lang),
         };
       }),
     [chaptersData, lang],
@@ -60,7 +59,7 @@ const SurahList: React.FC<Props> = ({ id }) => {
           <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)}>
             <div
               className={classNames(styles.listItem, {
-                [styles.selectedItem]: chapter.id.toString() === id,
+                [styles.selectedItem]: chapter.id.toString() === currentChapterId,
               })}
             >
               <span className={styles.chapterNumber}>{chapter.localizedId}</span>
