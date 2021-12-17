@@ -18,16 +18,24 @@ type LinkProps = {
   variant?: LinkVariant;
   newTab?: boolean;
   download?: string;
+  className?: string;
 };
 
-const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
+const Link: React.FC<LinkProps> = ({
+  href,
+  children,
+  newTab = false,
+  variant,
+  download,
+  className,
+}) => (
   <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
     <a
       href={href}
       download={download}
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noreferrer' : undefined}
-      className={classNames(styles.base, {
+      className={classNames(styles.base, className, {
         [styles.highlight]: variant === LinkVariant.Highlight,
         [styles.primary]: variant === LinkVariant.Primary,
         [styles.secondary]: variant === LinkVariant.Secondary,

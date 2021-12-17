@@ -141,3 +141,17 @@ export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
  */
 export const getCanonicalUrl = (lang: string, path: string): string =>
   `${getBasePath()}${lang === 'en' ? '' : `/${lang}`}${path}`;
+
+/**
+ * Get the href link to the product updates page.
+ *
+ * @param {string} id
+ * @returns {string}
+ */
+export const getProductUpdatesUrl = (id = ''): string =>
+  `/product-updates${`${id ? `/${id}` : ''}`}`;
+
+export const getQuranReflectVerseUrl = (verseKey: string) => {
+  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
+  return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+};

@@ -24,7 +24,6 @@ const NextSeoWrapper: React.FC<Props> = (props) => {
   };
   const params = {
     ...rest,
-    ...(url && { canonical: url }),
     ...(description && { description: truncateString(description, 150) }),
   };
   return <NextSeo {...params} openGraph={openGraphParams} />;

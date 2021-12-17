@@ -8,38 +8,52 @@ import QuranAppPreviewImage from '../../public/images/quran-app-preview.png';
 import styles from './apps.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import { getLanguageAlternates } from 'src/utils/locale';
+import { getCanonicalUrl } from 'src/utils/navigation';
 
 type AppProps = {
   app: any;
   isFlipped?: boolean;
+  isMain?: boolean;
 };
-const App = ({ app, isFlipped }: AppProps) => {
+const App = ({ app, isFlipped, isMain }: AppProps) => {
   return (
     <div
       className={classNames(styles.sideBySideLayout, isFlipped && styles.layoutFlipped)}
       key={app.title}
     >
       <div className={styles.texts}>
-        <h1 className={styles.heading}>{app.title}</h1>
+        {isMain ? (
+          <h1 className={styles.heading}>{app.title}</h1>
+        ) : (
+          <p className={styles.heading}>{app.title}</p>
+        )}
         <p>{app.description}</p>
         <div className={styles.downloadButtonsContainer}>
           <a href={app.ios}>
-            <Image src="/images/app-store.svg" width={135} height={40} />
+            <Image src="/images/app-store.svg" width={135} height={40} alt="App Store" />
           </a>
           <a href={app.android}>
-            <Image src="/images/play-store.svg" width={135} height={40} />
+            <Image src="/images/play-store.svg" width={135} height={40} alt="Play Store" />
           </a>
         </div>
       </div>
       <div>
-        <Image className={styles.appImage} src={QuranAppPreviewImage} height={1396} width={1176} />
+        <Image
+          className={styles.appImage}
+          src={QuranAppPreviewImage}
+          height={1396}
+          width={1176}
+          alt={app.title}
+        />
       </div>
     </div>
   );
 };
 
+const path = '/apps';
 const AppsPage = () => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const apps = {
     quran: {
@@ -61,9 +75,13 @@ const AppsPage = () => {
 
   return (
     <>
-      <NextSeoWrapper title={t('common:mobile-apps')} />
+      <NextSeoWrapper
+        title={t('common:mobile-apps')}
+        url={getCanonicalUrl(lang, path)}
+        languageAlternates={getLanguageAlternates(path)}
+      />
       <div className={styles.container}>
-        <App app={apps.quran} />
+        <App app={apps.quran} isMain />
         <App app={apps.tarteel} isFlipped />
       </div>
     </>

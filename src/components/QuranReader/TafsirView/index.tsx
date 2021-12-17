@@ -34,14 +34,18 @@ const TafsirView: React.FC<Props> = ({ verse }) => {
   return (
     <div className={styles.container}>
       <VerseText words={getVerseWords(verse)} />
-      {verse.tafsirs?.map((tafsir) => {
+      {verse.tafsirs?.map((tafsir, index) => {
         const isRtl = RTL_LANGUAGES.includes(tafsir.languageName);
+        // Only add the first Tafsir's name as an h1
+        const TafsirNameContainer = index === 0 ? 'h1' : 'p';
         return (
           <div key={tafsir.id}>
             {tafsir.resourceName && (
-              <p className={classNames(styles.tafsirName, { [styles.rtl]: isRtl })}>
+              <TafsirNameContainer
+                className={classNames(styles.tafsirName, { [styles.rtl]: isRtl })}
+              >
                 {tafsir.resourceName}
-              </p>
+              </TafsirNameContainer>
             )}
             <div
               className={classNames(

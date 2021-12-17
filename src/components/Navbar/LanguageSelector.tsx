@@ -24,7 +24,10 @@ const options = locales.map((lng) => ({
 
 const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
-const LanguageSelector = () => {
+type LanguageSelectorProps = {
+  shouldShowSelectedLang?: boolean;
+};
+const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
@@ -57,11 +60,25 @@ const LanguageSelector = () => {
   return (
     <PopoverMenu
       trigger={
-        <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-          <span className={styles.globeIconWrapper}>
-            <GlobeIcon />
-          </span>
-        </Button>
+        shouldShowSelectedLang ? (
+          <Button
+            prefix={
+              <span className={styles.globeIconWrapper}>
+                <GlobeIcon />
+              </span>
+            }
+            tooltip={t('languages')}
+            variant={ButtonVariant.Ghost}
+          >
+            {getLocaleName(lang)}
+          </Button>
+        ) : (
+          <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+            <span className={styles.globeIconWrapper}>
+              <GlobeIcon />
+            </span>
+          </Button>
+        )
       }
     >
       {options.map((option) => (

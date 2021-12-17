@@ -9,7 +9,7 @@ import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -38,6 +38,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
     verses.verses[0].tafsirs && verses.verses[0].tafsirs.length
       ? stripHTMLTags(verses.verses[0].tafsirs[0].text)
       : null;
+  const path = getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId));
   return (
     <>
       <NextSeoWrapper
@@ -45,10 +46,8 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
           Number(verseId),
           lang,
         )}`}
-        canonical={getCanonicalUrl(
-          lang,
-          getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId)),
-        )}
+        canonical={getCanonicalUrl(lang, path)}
+        languageAlternates={getLanguageAlternates(path)}
         {...(description && { description })} // some verses won't have Tafsirs so we cannot set the description in that case
       />
       <QuranReader
