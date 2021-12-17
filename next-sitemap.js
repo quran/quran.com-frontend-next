@@ -4,6 +4,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 const range = require('lodash/range');
+const fetch = require('node-fetch');
 
 const { locales } = require('./i18n.json');
 const englishChaptersData = require('./public/data/chapters/en.json');
@@ -16,6 +17,19 @@ const BASE_PATH =
   'https://quran.com';
 
 const chapters = range(1, 115);
+
+const STAGING_API_HOST = 'https://staging.quran.com';
+const PRODUCTION_API_HOST = 'https://api.qurancdn.com';
+
+const API_HOST =
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
+const API_ROOT_PATH = '/api/qdc';
+
+const getTafsirsIds = async () => {
+  const res = await fetch(`${API_HOST}${API_ROOT_PATH}/resources/tafsirs`);
+  const data = await res.json();
+  return data;
+};
 
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
@@ -72,6 +86,10 @@ module.exports = {
   },
   additionalPaths: async (config) => {
     const result = [];
+    let tafsirIDs = [];
+    await getTafsirsIds().then((response) => {
+      tafsirIDs = response.tafsirs.map((tafsir) => tafsir.id);
+    });
     chapters.forEach((chapterId) => {
       // 1. add the chapter slugs in English along with the localized slugs in every locale
       const englishChapterSlug = englishChaptersData[chapterId].slug;
@@ -107,13 +125,21 @@ module.exports = {
           loc: `/${englishChapterSlug}/${verseIdValue}/tafsirs`,
           alternateRefs: getAlternateRefs(chapterId, true, '', `${verseIdValue}/tafsirs`),
         });
+        // 5. /[verseKey]/tafsirs/[tafsirId]
+        tafsirIDs.forEach((tafsirId) => {
+          const location = `${`${chapterId}:${verseIdValue}`}/tafsirs/${tafsirId}`;
+          result.push({
+            loc: location,
+            alternateRefs: getAlternateRefs(chapterId, false, '', location),
+          });
+        });
       });
     });
-    // 5. /juz/[juzId]
+    // 6. /juz/[juzId]
     range(1, 31).forEach(async (juzId) => {
       result.push(await config.transform(config, `/juz/${juzId}`));
     });
-    // 6. /page/[pageId]
+    // 7. /page/[pageId]
     range(1, 605).forEach(async (pageId) => {
       result.push(await config.transform(config, `/page/${pageId}`));
     });

@@ -118,6 +118,7 @@
     "jest-watch-typeahead": "^1.0.0",
     "lint-staged": "^11.2.3",
     "next-sitemap": "^1.6.203",
+    "node-fetch": "2",
     "prettier": "^2.4.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "replace-in-file": "^6.3.2",

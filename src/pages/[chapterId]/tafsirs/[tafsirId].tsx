@@ -8,11 +8,13 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+import { getCanonicalUrl, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
+import { stripHTMLTags } from 'src/utils/string';
 import { isValidTafsirId, isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
@@ -37,6 +39,15 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   if (hasError) {
     return <Error statusCode={500} />;
   }
+  const description =
+    verses.verses[0].tafsirs && verses.verses[0].tafsirs.length
+      ? stripHTMLTags(verses.verses[0].tafsirs[0].text)
+      : null;
+  const path = getVerseSelectedTafsirNavigationUrl(
+    chapter.chapter.id,
+    Number(verseNumber),
+    Number(tafsirId),
+  );
   return (
     <>
       <NextSeoWrapper
@@ -44,6 +55,9 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           Number(verseNumber),
           lang,
         )}`}
+        languageAlternates={getLanguageAlternates(path)}
+        url={getCanonicalUrl(lang, path)}
+        {...(description && { description })} // some verses won't have Tafsirs so we cannot set the description in that case
       />
       <QuranReader
         initialData={verses}
@@ -73,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     });
     return {
       props: {
-        chapter: { chapter: getChapterData(chapterNumber, locale) },
+        chapter: { chapter: { ...getChapterData(chapterNumber, locale), id: chapterNumber } },
         verses: versesResponse,
         verseNumber,
         tafsirId,
