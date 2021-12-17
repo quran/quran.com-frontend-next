@@ -24,8 +24,12 @@
   @include breakpoints.tablet {
     display: flex;
     justify-content: space-between;
+    padding-block: var(--spacing-small);
     [dir="ltr"] & {
       flex-direction: row-reverse;
+    }
+    & > .verseTranslationsContainer {
+      margin-block-start: var(--spacing-medium);
     }
     & > .verseTranslationsContainer,
     & > .arabicVerseContainer {
