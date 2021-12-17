@@ -30,12 +30,12 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
   opacity: var(--opacity-50);
 }
 
-.floatingLine {
+.separatorLine {
   position: absolute;
   height: 100%;
   width: 1px;
 }
-.floatingLineVisible {
+.separatorLineVisible {
   &::before {
     content: "";
     position: absolute;

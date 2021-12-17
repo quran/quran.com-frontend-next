@@ -45,18 +45,23 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
           {item.name}
         </button>
       ))}
-      {range(1, items.length).map((i) => {
-        return (
-          <div
-            key={i}
-            className={classNames(styles.floatingLine, styles.floatingLineVisible)}
-            style={{
-              width: `${100 / items.length}%`,
-              transform: `translateX(${100 * i}%)`,
-            }}
-          />
-        );
-      })}
+
+      {/* seprator  */}
+      {items.length > 2 &&
+        range(1, items.length).map((i) => {
+          return (
+            <div
+              key={i}
+              className={classNames(styles.separatorLine, {
+                [styles.separatorLineVisible]: selectedIndex !== i && selectedIndex !== i - 1,
+              })}
+              style={{
+                width: `${100 / items.length}%`,
+                transform: `translateX(${100 * i}%)`,
+              }}
+            />
+          );
+        })}
       <div
         className={styles.selectedItemBackgroundContainer}
         style={{
