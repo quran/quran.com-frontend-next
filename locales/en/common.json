@@ -104,6 +104,7 @@
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "more": "More",
+    "navigate": "Navigate",
     "network": "Network",
     "next": "Next",
     "no": "No",
@@ -113,6 +114,7 @@
     "page": "Page",
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
+    "popular-links": "Popular Links",
     "powered-by": "Powered by",
     "prayer-times": {
         "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
@@ -247,9 +249,5 @@
     "yes": "Yes",
     "footer": {
         "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor."
-    },
-    "surah-yaseen": "Surah Yaseen",
-    "ayat-al-kursi": "Ayat Al-Kursi",
-    "surah-al-kahf": "Surah Al-Kahf",
-    "surah-al-mulk": "Surah Al-Mulk"
+    }
 }

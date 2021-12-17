@@ -19,6 +19,7 @@
   & > svg > path {
     fill: var(--color-text-default);
   }
+  margin-block-end: var(--spacing-xxsmall);
 }
 .headingContainer {
   display: flex;
@@ -27,7 +28,7 @@
   @include breakpoints.desktop {
     flex-direction: row;
     .iconContainer {
-      margin-inline-end: var(--spacing-xsmall);
+      margin-inline-end: var(--spacing-medium);
     }
   }
 }
@@ -35,7 +36,7 @@
 .copyright {
   margin-block-start: var(--spacing-xxsmall);
   font-size: var(--font-size-small);
-  opacity: var(--opacity-50);
+  opacity: var(--opacity-85);
 }
 
 .groupListContainer {
@@ -50,6 +51,10 @@
   display: flex;
   flex-direction: column;
   margin-block-end: var(--spacing-medium);
+  width: 50%;
+  @include breakpoints.tablet {
+    width: auto;
+  }
 }
 
 .groupTitle {
@@ -93,6 +98,6 @@
 .bottomLinks {
   & > a {
     margin-inline-end: var(--spacing-medium);
-    opacity: var(--opacity-75);
+    opacity: var(--opacity-85);
   }
 }

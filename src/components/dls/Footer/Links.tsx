@@ -3,12 +3,17 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { getAllChaptersData } from 'src/utils/chapter';
 
 const Links = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const chaptersData = getAllChaptersData(lang);
+
+  const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
+
   const linksGroup = [
     {
-      title: 'Navigate',
+      title: t('navigate'),
       links: [
         { text: t('home'), url: '/' },
         { text: t('about'), url: '/about-us' },
@@ -20,7 +25,7 @@ const Links = () => {
       ],
     },
     {
-      title: 'Networks',
+      title: t('network'),
       links: [
         { text: 'QuranicAudio.com', url: 'https://quranicaudio.com' },
         { text: 'Salah.com', url: 'https://salah.com' },
@@ -28,16 +33,19 @@ const Links = () => {
         { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com' },
         { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com' },
         { text: 'QuranReflect.com', url: 'https://quranreflect.com' },
-        { text: 'Tarteel', url: 'https://www.tarteel.ai/' },
+        { text: 'Tarteel.ai', url: 'https://www.tarteel.ai/' },
       ],
     },
     {
-      title: 'Other links',
+      title: t('popular-links'),
       links: [
-        { text: t('surah-yaseen'), url: '/surah-ya-sin' },
-        { text: t('ayat-al-kursi'), url: '/ayatul-kursi' },
-        { text: t('surah-al-kahf'), url: '/surah-al-kahf' },
-        { text: t('surah-al-mulk'), url: '/surah-al-mulk' },
+        { text: t('quick-links:ayat-ul-kursi'), url: '/ayatul-kursi' },
+        { text: t('quick-links:yaseen'), url: getChapterSlug('36') },
+        { text: t('quick-links:mulk'), url: getChapterSlug('67') },
+        { text: t('quick-links:rahman'), url: getChapterSlug('55') },
+        { text: t('quick-links:waqiah'), url: getChapterSlug('56') },
+        { text: t('quick-links:kahf'), url: getChapterSlug('18') },
+        { text: t('quick-links:muzzammil'), url: getChapterSlug('73') },
       ],
     },
   ];
