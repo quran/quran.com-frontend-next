@@ -29,7 +29,7 @@ const PlayPauseButton = () => {
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
 
   const audioData = useSelector(selectAudioData, shallowEqual);
-  const currentReadingChapterIds = useChapterIdsByUrlPath();
+  const currentReadingChapterIds = useChapterIdsByUrlPath(lang);
   const currentAudioChapterId = audioData?.chapterId?.toString();
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
