@@ -17,7 +17,7 @@
   <p align="center">
     The official source code repository for Quran.com
     <br />
-    <a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>
+    <a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com community »</strong></a>
     <br />
     <br />
     <a href="https://quran.com">Visit Quran.com</a>
@@ -85,7 +85,7 @@ If you are interested to help out, please look at issues on the Github repo. Thi
 Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend-next/issues).
 
 ### Community 
-<a href="https://quran-community.herokuapp.com/"><strong>Join Quran.com community »</strong></a>
+<a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com Discord community »</strong></a>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
