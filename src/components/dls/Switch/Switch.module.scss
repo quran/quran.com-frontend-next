@@ -1,6 +1,6 @@
 $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-
 $container-padding: calc(0.5 * var(--spacing-xxsmall));
+$separatorOpacity: 0.35;
 
 .container {
   position: relative;
@@ -39,10 +39,11 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
   &::before {
     content: "";
     position: absolute;
-    transform: translateY(50%);
+    transform: translateY(75%);
     width: 1px;
-    height: 50%;
-    border-left: 1px solid var(--color-borders-hairline);
+    height: 40%;
+    border-left: 1px solid var(--color-text-default);
+    opacity: $separatorOpacity;
   }
 }
 
