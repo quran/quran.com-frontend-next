@@ -6,7 +6,8 @@
         "plugin:import/typescript",
         "prettier",
         "plugin:@next/next/recommended",
-        "plugin:i18next/recommended"
+        "plugin:i18next/recommended",
+        "plugin:storybook/recommended"
     ],
     "parser": "babel-eslint",
     "plugins": [
