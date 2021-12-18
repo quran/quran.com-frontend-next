@@ -14,3 +14,14 @@
 .IndoPak {
   font-family: IndoPak !important; // important is needed to over-ride the language specific font-family
 }
+
+// these spacer utilities are used to add hard coded spaces to components
+// names of these spacer classes is coming from the api.
+// WHY BE? some words need extra space at the end(see 2:2:4)
+// detecting these spaces in FE is hard, and will slow down the app.
+.mr10 {
+  margin-inline-end: 10px;
+}
+.mr15 {
+  margin-inline-end: 15px;
+}

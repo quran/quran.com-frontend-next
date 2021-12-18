@@ -11,7 +11,7 @@ import { CharType } from 'types/Word';
 export const getVerseTextByWords = (verse: Verse): string => {
   let verseText = '';
   verse.words.forEach((word) => {
-    if (word.charTypeName !== CharType.End) {
+    if (word.charType !== CharType.End) {
       verseText = `${verseText} ${word.text}`;
     }
   });

@@ -11,7 +11,7 @@ export enum CharType {
 
 interface Word {
   verseKey?: string;
-  charTypeName: CharType;
+  charType: CharType;
   codeV1?: string;
   codeV2?: string;
   pageNumber?: number;
@@ -26,6 +26,7 @@ interface Word {
   textIndopak?: string;
   highlight?: string | boolean;
   text?: string;
+  cssClass?: string;
   audioUrl: $TsFixMe;
   [key: string]: $TsFixMe;
 }

@@ -10,6 +10,7 @@ import { CharType } from 'types/Word';
 type MadaniWordTextProps = {
   text: string;
   font: string;
+  cssClass?: string;
   charType: CharType;
 };
 
@@ -23,9 +24,9 @@ const UTHMANI_HAFS_FONTS = decamelizeKeys({
   textIndopak: INDO_PAK,
 });
 
-const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, charType }) => (
+const TextWord: React.FC<MadaniWordTextProps> = ({ text, font, cssClass, charType }) => (
   <span
-    className={classNames(styles.word, {
+    className={classNames(styles.word, styles[cssClass], {
       [styles[DEFAULT_FONT_FAMILY]]:
         charType === CharType.End ||
         !UTHMANI_HAFS_FONTS[font] ||
