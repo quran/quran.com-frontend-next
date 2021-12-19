@@ -53,7 +53,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
         <div className={styles.left}>
           {!isMinimalLayout && <div className={styles.translatedName}>{translatedName}</div>}
           <div className={styles.transliteratedName}>
-            {t('surah')} <br /> {transliteratedName}
+            {transliteratedName}
           </div>
           <div className={styles.infoContainer}>
             <Button

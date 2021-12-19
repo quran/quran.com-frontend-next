@@ -5,12 +5,13 @@ import styles from './Separator.module.scss';
 
 type SeparatorProps = {
   isVertical?: boolean;
+  isTranslationView?: boolean;
 };
 
-const Separator = ({ isVertical = false }: SeparatorProps) => (
+const Separator = ({ isVertical = false, isTranslationView = false }: SeparatorProps) => (
   <SeparatorPrimitive.Separator
     orientation={isVertical ? 'vertical' : 'horizontal'}
-    className={classNames(styles.base)}
+    className={isTranslationView ? classNames(styles.soft) : classNames(styles.base)}
   />
 );
 

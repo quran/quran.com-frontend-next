@@ -5,6 +5,7 @@
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
+  --spacing-nano: 0.125rem;
   --spacing-micro: 0.1875rem;
   --spacing-xxsmall: 0.375rem;
   --spacing-xsmall: 0.625rem;
@@ -12,6 +13,10 @@
   --spacing-medium: 1rem;
   --spacing-large: 1.1875rem;
   --spacing-mega: 2rem;
+
+  --negative-margin-xsmall: -0.625rem;
+  --negative-margin-small: -0.8125rem;
+  --negative-margin-medium: -1rem;
 
   --font-size-xsmall-dangerous: 0.6rem;
   --font-size-small: 0.75rem;

@@ -2,8 +2,8 @@
   display: inline-block;
   cursor: pointer;
 }
-.additionalWordGap + .additionalWordGap {
-  margin-inline-end: var(--spacing-xxsmall);
+.additionalWordGap:first-child, .additionalWordGap + .additionalWordGap {
+  margin-inline-end: var(--spacing-nano);
 }
 
 .tajweedWord {

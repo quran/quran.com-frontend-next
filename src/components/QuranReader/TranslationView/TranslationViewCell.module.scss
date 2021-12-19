@@ -1,7 +1,12 @@
 @use "src/styles/breakpoints";
 
 .highlightedContainer {
-  background: var(--color-background-alternative-faded);
+  background: var(--gradient-background-highlighted-container);
+  background-color: var(--color-background-alternative-faded);
+  margin: 0 var(--negative-margin-medium);
+  padding-inline-start: var(--spacing-medium) !important;
+  padding-inline-end: var(--spacing-medium) !important;
+  border-radius: var(--spacing-xsmall);
 }
 
 .cellContainer {
