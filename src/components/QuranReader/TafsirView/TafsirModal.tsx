@@ -43,34 +43,37 @@ const TafsirModal = ({ verse }) => {
       {isModalOpen && (
         <Modal isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)}>
           <Modal.Body>
-            <DataFetcher
-              queryKey={queryKey}
-              render={(data) => {
-                console.log(data);
-                return (
-                  <div style={{ height: '50vh', overflowY: 'auto' }}>
-                    {
-                      //   JSON.stringify(data.verses[0].tafsirs.map((tafsir) => tafsir.text))
-                      // @ts-ignore
-                      //   data.verses[0].tafsirs.map((tafsir) => (
-                      // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-                      //   ))
-                    }
-                    {
-                      // @ts-ignore
-                      data?.verses[0].tafsirs.map((tafsir) => (
-                        <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-                      ))
-                      // @ts-ignore
-                      //   data.verses[0].tafsirs.map((tafsir) => (
-                      // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-                      //   ))
-                    }
-                  </div>
-                );
-                return <div>{JSON.stringify(data)}</div>;
-              }}
-            />
+            {tafsirs.length > 0 ? (
+              <DataFetcher
+                queryKey={queryKey}
+                render={(data) => {
+                  return (
+                    <div style={{ height: '50vh', overflowY: 'auto' }}>
+                      {
+                        //   JSON.stringify(data.verses[0].tafsirs.map((tafsir) => tafsir.text))
+                        // @ts-ignore
+                        //   data.verses[0].tafsirs.map((tafsir) => (
+                        // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
+                        //   ))
+                      }
+                      {
+                        // @ts-ignore
+                        data?.verses[0].tafsirs?.map((tafsir) => (
+                          <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
+                        ))
+                        // @ts-ignore
+                        //   data.verses[0].tafsirs.map((tafsir) => (
+                        // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
+                        //   ))
+                      }
+                    </div>
+                  );
+                  return <div>{JSON.stringify(data)}</div>;
+                }}
+              />
+            ) : (
+              <div>no tafsir selected, we should probably show default tafsir here</div>
+            )}
           </Modal.Body>
         </Modal>
       )}
