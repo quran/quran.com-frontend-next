@@ -1,12 +1,28 @@
 @use "src/styles/breakpoints";
 
 .highlightedContainer {
-  background: var(--gradient-background-highlighted-container);
+  --color-gradient-transition: 196, 196, 196;
+
+  [data-theme="dark"] & {
+    --color-borders-hairline-dark: 70, 75, 80;
+    --color-gradient-background-dark: 150, 125, 225;
+    background: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(var(--color-gradient-background-dark), 0.25) 50%, rgba(var(--color-gradient-transition), 0) 90%);
+  }
+
+  [data-theme="light"] & {
+    --color-borders-hairline-light: 235, 238, 240;
+    --color-gradient-background-light: 60, 120, 180;
+    background: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(var(--color-gradient-background-light), 0.45) 50%, rgba(var(--color-gradient-transition), 0) 90%);
+  }
+
   background-color: var(--color-background-alternative-faded);
-  margin: 0 var(--negative-margin-medium);
-  padding-inline-start: var(--spacing-medium) !important;
-  padding-inline-end: var(--spacing-medium) !important;
+  margin: 0 calc(var(--spacing-medium) * -1);
   border-radius: var(--spacing-xsmall);
+}
+
+.cellContainer.highlightedContainer {
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
 }
 
 .cellContainer {

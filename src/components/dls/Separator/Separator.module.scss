@@ -1,17 +1,41 @@
 $separator-size: 1px;
 
 .soft {
+  --color-gradient-transition: 196, 196, 196;
+
+  [data-theme="dark"] & {
+    --color-borders-hairline: 70, 75, 80;
+    --color-gradient-background: 150, 125, 225;
+    &[data-orientation="vertical"] {
+      --gradient-borders-hairline: linear-gradient(180deg, rgba(var(--color-gradient-transition), 0) -3%, rgba(var(--color-borders-hairline), 0.6) 10%, rgba(var(--color-borders-hairline), 0.6) 67%, rgba(var(--color-gradient-transition), 0) 110%);
+    }
+    &[data-orientation="horizontal"] {
+      --gradient-borders-hairline: linear-gradient(90deg, rgba(var(--color-gradient-transition), 0) -3%, rgba(var(--color-borders-hairline), 0.6) 10%, rgba(var(--color-borders-hairline), 0.6) 67%, rgba(var(--color-gradient-transition), 0) 110%);
+    }
+  }
+
+  [data-theme="light"] & {
+    --color-borders-hairline: calc(235 * 0.9), calc(238 * 0.9), calc(240 * 0.9);
+    --color-gradient-background: 60, 120, 180;
+    &[data-orientation="vertical"] {
+      --gradient-borders-hairline: linear-gradient(180deg, rgba(var(--color-gradient-transition), 0) -7%, rgba(var(--color-borders-hairline), 0.6) 7%, rgba(var(--color-borders-hairline), 0.6) 95%, rgba(var(--color-gradient-transition), 0) 105%);
+    }
+    &[data-orientation="horizontal"] {
+      --gradient-borders-hairline: linear-gradient(90deg, rgba(var(--color-gradient-transition), 0) -7%, rgba(var(--color-borders-hairline), 0.6) 7%, rgba(var(--color-borders-hairline), 0.6) 95%, rgba(var(--color-gradient-transition), 0) 105%);
+    }
+  }
+
   position: relative;
   top: 1px;
 
   &[data-orientation="horizontal"] {
-    background: var(--gradient-borders-horizontal-hairline);
+    background: var(--gradient-borders-hairline);
     height: $separator-size;
     width: 100%;
   }
 
   &[data-orientation="vertical"] {
-    background: var(--gradient-borders-vertical-hairline);
+    background: var(--gradient-borders-hairline);
     height: 100%;
     width: $separator-size;
   }

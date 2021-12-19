@@ -36,7 +36,6 @@
   --color-background-default: #fff;
   --color-background-elevated: #fff;
 
-  --gradient-background-highlighted-container: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(60, 120, 180, 0.45) 50%, rgba(196, 196, 196, 0) 90%);
   --color-background-alternative-faded: var(--shade-0);
   --color-background-alternative-faint: var(--shade-1);
   --color-background-alternative-medium: var(--shade-2);
@@ -48,8 +47,6 @@
   // lighten the `background-color` by using it in `background-image`. check Button's ghost variant for example
 
   --color-borders-hairline: rgb(235, 238, 240);
-  --gradient-borders-horizontal-hairline: linear-gradient(90deg, rgba(196, 196, 196, 0) -7%, rgba(225, 228, 230, 0.7) 7%, rgba(225, 228, 230, 0.7) 95%, rgba(196, 196, 196, 0) 103%);
-  --gradient-borders-vertical-hairline: linear-gradient(180deg, rgba(196, 196, 196, 0) -7%, rgba(225, 228, 230, 0.7) 7%, rgba(225, 228, 230, 0.7) 95%, rgba(196, 196, 196, 0) 103%);
 
   --color-highlight: #79ffe1;
 
