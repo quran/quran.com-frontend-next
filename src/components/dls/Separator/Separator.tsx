@@ -11,7 +11,7 @@ type SeparatorProps = {
 const Separator = ({ isVertical = false, isTranslationView = false }: SeparatorProps) => (
   <SeparatorPrimitive.Separator
     orientation={isVertical ? 'vertical' : 'horizontal'}
-    className={isTranslationView ? classNames(styles.soft) : classNames(styles.base)}
+    className={isTranslationView ? classNames(styles.faded) : classNames(styles.base)}
   />
 );
 

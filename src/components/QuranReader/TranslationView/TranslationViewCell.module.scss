@@ -4,13 +4,11 @@
   --color-gradient-transition: 196, 196, 196;
 
   [data-theme="dark"] & {
-    --color-borders-hairline-dark: 70, 75, 80;
     --color-gradient-background-dark: 150, 125, 225;
     background: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(var(--color-gradient-background-dark), 0.25) 50%, rgba(var(--color-gradient-transition), 0) 90%);
   }
 
   [data-theme="light"] & {
-    --color-borders-hairline-light: 235, 238, 240;
     --color-gradient-background-light: 60, 120, 180;
     background: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(var(--color-gradient-background-light), 0.45) 50%, rgba(var(--color-gradient-transition), 0) 90%);
   }
