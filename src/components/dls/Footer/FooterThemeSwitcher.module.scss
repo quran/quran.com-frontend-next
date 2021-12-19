@@ -8,4 +8,6 @@
 }
 .suffixContainer {
   display: flex;
+  position: relative;
+  inset-block-end: 1px;
 }
