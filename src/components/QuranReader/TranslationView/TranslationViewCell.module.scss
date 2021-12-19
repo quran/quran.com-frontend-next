@@ -20,20 +20,6 @@
   position: relative;
 }
 
-.splitView {
-  @include breakpoints.tablet {
-    display: flex;
-    justify-content: space-between;
-    [dir="ltr"] & {
-      flex-direction: row-reverse;
-    }
-    & > .verseTranslationsContainer,
-    & > .arabicVerseContainer {
-      flex: 1;
-    }
-  }
-}
-
 .actionContainer {
   display: flex;
   justify-content: space-between;
