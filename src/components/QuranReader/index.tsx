@@ -20,6 +20,7 @@ import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
+import TafsirModal, { useTafsirModalRoute } from './TafsirView/TafsirModal';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -78,6 +79,7 @@ const QuranReader = ({
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
+  const { shouldShowTafsirModal } = useTafsirModalRoute();
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
@@ -147,8 +149,10 @@ const QuranReader = ({
   };
   const hasMore =
     size < getPageLimit(isVerseData, isTafsirData || isSelectedTafsirData, initialData);
+
   return (
     <>
+      {shouldShowTafsirModal && <TafsirModal />}
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div

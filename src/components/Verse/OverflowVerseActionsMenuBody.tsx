@@ -11,12 +11,15 @@ import LinkIcon from '../../../public/icons/east.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+import { useTafsirModalRoute } from '../QuranReader/TafsirView/TafsirModal';
 
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
+import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { areArraysEqual } from 'src/utils/array';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
@@ -30,6 +33,7 @@ const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   const { t } = useTranslation('common');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
+  const tafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
@@ -61,10 +65,13 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
     });
   };
 
+  const { openModal } = useTafsirModalRoute();
+
   const onTafsirsClicked = () => {
-    router.push({
-      pathname: '/[chapterId]/[verseId]/tafsirs',
-      query: { chapterId: verse.chapterId, verseId: verse.verseNumber },
+    openModal({
+      chapterId: verse.chapterId,
+      verseNumber: verse.verseNumber,
+      tafsirId: tafsirIds[0],
     });
   };
 
