@@ -52,9 +52,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
       <div className={styles.container}>
         <div className={styles.left}>
           {!isMinimalLayout && <div className={styles.translatedName}>{translatedName}</div>}
-          <div className={styles.transliteratedName}>
-            {transliteratedName}
-          </div>
+          <div className={styles.transliteratedName}>{transliteratedName}</div>
           <div className={styles.infoContainer}>
             <Button
               size={ButtonSize.Small}
