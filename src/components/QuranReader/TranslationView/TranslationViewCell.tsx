@@ -90,11 +90,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           </div>
         </div>
 
-        <div
-          className={classNames(styles.contentContainer, {
-            [styles.splitView]: verse.translations?.length === 1,
-          })}
-        >
+        <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
             <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={verseIndex === 0} />
           </div>

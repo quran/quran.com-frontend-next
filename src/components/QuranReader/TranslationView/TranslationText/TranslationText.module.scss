@@ -5,6 +5,7 @@
   letter-spacing: 0;
   line-height: normal;
   padding-block-end: var(--spacing-micro);
+  opacity: var(--opacity-75);
   @include footnote.footnote-styling;
 }
 
