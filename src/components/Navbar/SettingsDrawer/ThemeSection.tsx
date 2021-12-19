@@ -15,7 +15,7 @@ import Switch from 'src/components/dls/Switch/Switch';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
 
-const icons = {
+export const themeIcons = {
   [ThemeType.Dark]: <MoonIcon />,
   [ThemeType.Light]: <SunIcon />,
   [ThemeType.Auto]: <CircleIcon />,
@@ -34,7 +34,7 @@ const ThemeSection = () => {
             theme.type === themeValue && styles.iconActive,
           )}
         >
-          {icons[themeValue]}
+          {themeIcons[themeValue]}
         </span>
         <span className={styles.themeNameContainer}>{t(`themes.${themeValue}`)}</span>
       </div>

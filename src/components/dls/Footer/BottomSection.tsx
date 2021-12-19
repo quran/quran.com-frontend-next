@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
+import FooterThemeSwitcher from './FooterThemeSwitcher';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import LanguageSelector from 'src/components/Navbar/LanguageSelector';
@@ -34,6 +35,7 @@ const BottomSection = () => {
         </div>
       </div>
       <div className={styles.languageSelectorContainer}>
+        <FooterThemeSwitcher />
         <LanguageSelector shouldShowSelectedLang />
       </div>
     </div>

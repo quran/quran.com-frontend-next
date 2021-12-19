@@ -71,7 +71,11 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
             }
             tooltip={t('languages')}
             variant={ButtonVariant.Ghost}
-            suffix={<ChevronDownIcon />}
+            suffix={
+              <span className={styles.triggerSuffixContainer}>
+                <ChevronDownIcon />
+              </span>
+            }
           >
             {getLocaleName(lang)}
           </Button>
