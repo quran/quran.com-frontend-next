@@ -58,7 +58,9 @@ const TafsirModal = ({ verse }) => {
                     }
                     {
                       // @ts-ignore
-                      data?.verses[0].tafsirs.map((tafsir) => tafsir.text)
+                      data?.verses[0].tafsirs.map((tafsir) => (
+                        <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
+                      ))
                       // @ts-ignore
                       //   data.verses[0].tafsirs.map((tafsir) => (
                       // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
