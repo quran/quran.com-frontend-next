@@ -4,6 +4,8 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import TafsirIcon from '../../../../public/icons/tafsir.svg';
+
 import DataFetcher from 'src/components/DataFetcher';
 import Modal from 'src/components/dls/Modal/Modal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -26,7 +28,7 @@ const TafsirModal = ({ verse }) => {
   return (
     <>
       <PopoverMenu.Item
-        icon="aa"
+        icon={<TafsirIcon />}
         onClick={() => {
           setIsModalOpen(true);
 
