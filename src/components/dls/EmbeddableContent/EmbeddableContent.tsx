@@ -1,5 +1,8 @@
 import * as Dialog from '@radix-ui/react-dialog';
 
+import CloseIcon from '../../../../public/icons/close.svg';
+import Button, { ButtonShape, ButtonType, ButtonVariant } from '../Button/Button';
+
 import styles from './EmbeddableContent.module.scss';
 
 type EmbeddableContentProps = {
@@ -13,6 +16,15 @@ const EmbeddableContent = ({ children, isOpen, onClickOutside }: EmbeddableConte
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay}>
           <Dialog.Content className={styles.content} onInteractOutside={onClickOutside}>
+            <Dialog.Close className={styles.closeIcon}>
+              <Button
+                variant={ButtonVariant.Ghost}
+                type={ButtonType.Secondary}
+                shape={ButtonShape.Circle}
+              >
+                <CloseIcon />
+              </Button>
+            </Dialog.Close>
             {children}
           </Dialog.Content>
         </Dialog.Overlay>

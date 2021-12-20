@@ -69,6 +69,7 @@
   box-sizing: border-box;
   border-radius: var(--border-radius-rounded);
   padding: var(--spacing-mega);
+  position: relative;
 
   width: 100%;
   @include breakpoints.tablet {
@@ -95,4 +96,16 @@
 .content[data-state="closed"] {
   animation: contentOut var(--transition-regular) ease,
     fadeOut var(--transition-regular) ease;
+}
+
+.closeIcon {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  background-color: transparent;
+  border: none;
+  @include breakpoints.tablet {
+    margin-block-start: var(--spacing-xxsmall);
+    margin-inline-end: var(--spacing-xxsmall);
+  }
 }
