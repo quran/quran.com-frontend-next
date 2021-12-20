@@ -12,7 +12,6 @@ import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 
 const TafsirModal = ({ verse }) => {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { lang, t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
@@ -31,10 +30,17 @@ const TafsirModal = ({ verse }) => {
         icon="aa"
         onClick={() => {
           setIsModalOpen(true);
-          router.push(
-            router,
-            `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs}`,
-            { shallow: true },
+
+          // It's possible to achieve the same thing with nextjs' router.push,
+          // but it will cause the page to be rerendered (not full reload)
+          // and since our QuranReader is quite heavy, the UI will be quite janky
+          // for example the navbar is expanded for a split second, the closed.
+          // with pushState, id does not cause nextjs to re-render the page, which is better for performance
+          // and not causing janky UI issues
+          window.history.pushState(
+            {},
+            '',
+            `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs.join(',')}`,
           );
         }}
       >
