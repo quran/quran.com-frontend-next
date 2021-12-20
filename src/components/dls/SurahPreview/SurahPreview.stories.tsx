@@ -3,11 +3,38 @@ import SurahPreview, { SurahPreviewDisplay } from './SurahPreview';
 export default {
   title: 'dls/SurahPreview',
   component: SurahPreview,
+  argTypes: {
+    display: {
+      control: {
+        type: 'select',
+      },
+      defaultValue: SurahPreviewDisplay.Block,
+      options: Object.values(SurahPreviewDisplay),
+    },
+    surahNumber: {
+      control: {
+        type: 'number',
+      },
+      defaultValue: 114,
+    },
+    surahName: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'An-Nas',
+    },
+    translatedSurahName: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Mankind',
+    },
+  },
 };
 
 const Template = (args) => {
   return (
-    <div style={{ maxWidth: 400 }}>
+    <div style={{ maxWidth: 400 }} className="previewWrapper">
       <SurahPreview
         verseCount={4}
         surahName="An-Nas"
@@ -20,19 +47,4 @@ const Template = (args) => {
   );
 };
 
-export const Block = Template.bind({});
-Block.args = {
-  display: SurahPreviewDisplay.Block,
-};
-
-export const BlockWithAyah = Template.bind({});
-BlockWithAyah.args = {
-  display: SurahPreviewDisplay.Block,
-  description: 'Ayah 3',
-};
-
-export const Row = Template.bind({});
-Row.args = {
-  display: SurahPreviewDisplay.Row,
-  description: '4 Ayahs',
-};
+export const Preview = Template.bind({});

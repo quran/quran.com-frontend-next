@@ -5,12 +5,21 @@ import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Bu
 
 export default {
   title: 'dls/Badge',
+  argTypes: {
+    content: {
+      defaultValue: '1',
+      options: ['2', '10', '123'],
+      control: { type: 'select' },
+    },
+  },
 };
 
-export const DefaultBadge = () => (
-  <Badge content="1">
+const Template = (args) => (
+  <Badge content="1" {...args}>
     <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
       <RepeatIcon />
     </Button>
   </Badge>
 );
+
+export const DefaultBadge = Template.bind({});

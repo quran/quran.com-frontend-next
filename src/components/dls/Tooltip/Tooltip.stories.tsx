@@ -10,7 +10,7 @@ export default {
     contentSide: ContentSide.BOTTOM,
     contentAlign: ContentAlign.CENTER,
     avoidCollisions: true,
-    invertColor: true,
+    invertColors: true,
     centerText: true,
     open: undefined,
     tip: true,
@@ -56,31 +56,31 @@ export default {
     },
     avoidCollisions: {
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
     invertColors: {
       description: `Whether we should invert background color or not.`,
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
     centerText: {
       description: `Whether we should center the tooltip text or not.`,
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
     open: {
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -88,8 +88,8 @@ export default {
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
     tip: {
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -112,7 +112,11 @@ export default {
   },
 };
 
-const Template = (args) => <Tooltip {...args} />;
+const Template = (args) => (
+  <span className="previewWrapper">
+    <Tooltip {...args} />
+  </span>
+);
 const LongText = 'This is a very very very very very very very very very long text';
 const Text = 'Tooltip!';
 const DefaultTrigger = <p>Hover to show</p>;

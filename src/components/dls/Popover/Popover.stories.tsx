@@ -37,16 +37,15 @@ export default {
       },
     },
     tip: {
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
       description: 'Whether to show the tip arrow or not.',
     },
     useTooltipStyles: {
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
+      defaultValue: false,
       table: {
         category: 'Optional',
       },
@@ -63,15 +62,15 @@ export default {
     },
     avoidCollisions: {
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
     open: {
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -79,8 +78,8 @@ export default {
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
     isModal: {
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },

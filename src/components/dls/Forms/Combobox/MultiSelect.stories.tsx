@@ -68,7 +68,8 @@ export default {
     },
     clearable: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -76,7 +77,8 @@ export default {
     },
     disabled: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -84,7 +86,8 @@ export default {
     },
     isMultiSelect: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -99,7 +102,8 @@ export default {
     },
     hasError: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -153,13 +157,15 @@ const ControlledRemoteTemplate = (args) => {
     setValue(newSelectedValues);
   }, []);
   return (
-    <Combobox
-      {...args}
-      value={value}
-      initialInputValue={isLoading ? 'Loading...' : ''}
-      isMultiSelect
-      onChange={onChange}
-    />
+    <span className="previewWrapper">
+      <Combobox
+        {...args}
+        value={value}
+        initialInputValue={isLoading ? 'Loading...' : ''}
+        isMultiSelect
+        onChange={onChange}
+      />
+    </span>
   );
 };
 
@@ -170,10 +176,18 @@ const ControlledLocalTemplate = (args) => {
   const onChange = useCallback((newSelectedValues: string[]) => {
     setValue(newSelectedValues);
   }, []);
-  return <Combobox {...args} value={value} isMultiSelect onChange={onChange} />;
+  return (
+    <span className="previewWrapper">
+      <Combobox {...args} value={value} isMultiSelect onChange={onChange} />
+    </span>
+  );
 };
 
-const Template = (args) => <Combobox isMultiSelect {...args} />;
+const Template = (args) => (
+  <span className="previewWrapper">
+    <Combobox isMultiSelect {...args} />
+  </span>
+);
 
 const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false) => {
   const items = [];

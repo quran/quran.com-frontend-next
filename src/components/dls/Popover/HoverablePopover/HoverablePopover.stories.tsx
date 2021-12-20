@@ -40,8 +40,7 @@ export default {
       description: 'This is a callback to handle when the visibility changes.',
     },
     tip: {
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -54,6 +53,12 @@ export default {
       },
       description:
         'The duration in milliseconds from when the mouse enters the trigger until the Tooltip opens.',
+    },
+    defaultStyling: {
+      control: { type: 'boolean' },
+      table: {
+        category: 'Optional',
+      },
     },
   },
 };

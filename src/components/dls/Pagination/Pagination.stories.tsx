@@ -51,7 +51,6 @@ export default {
       table: {
         category: 'Optional',
       },
-      options: [true, false],
       control: { type: 'boolean' },
     },
   },

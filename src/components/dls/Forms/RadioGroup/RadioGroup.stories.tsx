@@ -80,7 +80,11 @@ export default {
   },
 };
 
-const Template = (args) => <RadioGroup {...args} />;
+const Template = (args) => (
+  <span className="previewWrapper">
+    <RadioGroup {...args} />
+  </span>
+);
 
 export const DefaultRadioGroup = Template.bind({});
 DefaultRadioGroup.args = {
