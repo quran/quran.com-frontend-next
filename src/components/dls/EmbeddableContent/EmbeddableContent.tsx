@@ -1,23 +1,23 @@
 import * as Dialog from '@radix-ui/react-dialog';
 
 import CloseIcon from '../../../../public/icons/close.svg';
-import Button, { ButtonShape, ButtonType, ButtonVariant } from '../Button/Button';
+import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './EmbeddableContent.module.scss';
 
 type EmbeddableContentProps = {
   isOpen?: boolean;
-  onClickOutside?: () => void;
+  onClose?: () => void;
   children: React.ReactNode;
 };
-const EmbeddableContent = ({ children, isOpen, onClickOutside }: EmbeddableContentProps) => {
+const EmbeddableContent = ({ children, isOpen, onClose }: EmbeddableContentProps) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay}>
-          <Dialog.Content className={styles.content} onInteractOutside={onClickOutside}>
+          <Dialog.Content className={styles.content} onInteractOutside={onClose}>
             <Dialog.Close className={styles.closeIcon}>
-              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onClose}>
                 <CloseIcon />
               </Button>
             </Dialog.Close>

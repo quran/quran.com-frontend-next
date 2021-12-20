@@ -38,7 +38,7 @@ export const Normal = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClickOutside={() => setIsOpen(false)}>
+      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {content}
         {content}
         {content}
@@ -56,7 +56,7 @@ export const Loading = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClickOutside={() => setIsOpen(false)}>
+      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Spinner />
       </EmbeddableContent>
     </>
@@ -68,7 +68,7 @@ export const UnTriggered = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClickOutside={() => setIsOpen(false)}>
+      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {content}
         {content}
         {content}
