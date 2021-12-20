@@ -62,12 +62,13 @@
 
 .content {
   background: white;
-  padding: calc(1.5 * var(--spacing-mega));
   box-sizing: border-box;
   border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-mega);
 
   width: 100%;
   @include breakpoints.tablet {
+    padding: calc(1.5 * var(--spacing-mega));
     width: 85vw;
   }
   @include breakpoints.desktop {
