@@ -17,11 +17,7 @@ const EmbeddableContent = ({ children, isOpen, onClickOutside }: EmbeddableConte
         <Dialog.Overlay className={styles.overlay}>
           <Dialog.Content className={styles.content} onInteractOutside={onClickOutside}>
             <Dialog.Close className={styles.closeIcon}>
-              <Button
-                variant={ButtonVariant.Ghost}
-                type={ButtonType.Secondary}
-                shape={ButtonShape.Circle}
-              >
+              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
                 <CloseIcon />
               </Button>
             </Dialog.Close>
