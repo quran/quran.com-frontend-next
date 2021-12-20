@@ -2,7 +2,6 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import DataFetcher from 'src/components/DataFetcher';
@@ -35,7 +34,7 @@ const TafsirModal = ({ verse }) => {
           // but it will cause the page to be rerendered (not full reload)
           // and since our QuranReader is quite heavy, the UI will be quite janky
           // for example the navbar is expanded for a split second, the closed.
-          // with pushState, id does not cause nextjs to re-render the page, which is better for performance
+          // with pushState, it does not cause nextjs to re-render the page, which is better for performance
           // and not causing janky UI issues
           window.history.pushState(
             {},
