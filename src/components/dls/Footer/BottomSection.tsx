@@ -34,9 +34,15 @@ const BottomSection = () => {
           . {t('home:footer.rights')}
         </div>
       </div>
-      <div className={styles.languageSelectorContainer}>
-        <FooterThemeSwitcher />
-        <LanguageSelector shouldShowSelectedLang />
+      <div className={styles.actionsSections}>
+        <div className={styles.actionContainer}>
+          <span className={styles.actionLabel}>{t('theme')}</span>
+          <FooterThemeSwitcher />
+        </div>
+        <div className={styles.actionContainer}>
+          <span className={styles.actionLabel}>{t('language')}</span>
+          <LanguageSelector shouldShowSelectedLang />
+        </div>
       </div>
     </div>
   );
