@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import styles from './Content.module.scss';
 
 const Content = ({
+  isFullView,
   children,
   isPropagationStopped,
   isBottomSheetOnMobile,
@@ -16,7 +17,7 @@ const Content = ({
     {...props}
     className={classNames(
       styles.content,
-      { [styles.topSheetOnMobile]: !isBottomSheetOnMobile },
+      { [styles.topSheetOnMobile]: !isBottomSheetOnMobile, [styles.fullViewModal]: isFullView },
       contentClassName,
     )}
     onClick={(e) => {

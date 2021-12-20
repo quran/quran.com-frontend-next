@@ -22,6 +22,7 @@ type ModalProps = {
   onClickOutside?: () => void;
   isPropagationStopped?: boolean;
   contentClassName?: string;
+  isFullView?: boolean;
 };
 const Modal = ({
   children,
@@ -32,6 +33,7 @@ const Modal = ({
   contentClassName,
   isBottomSheetOnMobile = true,
   isInvertedOverlay = false,
+  isFullView,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     <DialogPrimitive.Overlay
@@ -43,6 +45,7 @@ const Modal = ({
       </DialogPrimitive.Trigger>
     )}
     <Content
+      isFullView={isFullView}
       isPropagationStopped={isPropagationStopped}
       onInteractOutside={onClickOutside}
       isBottomSheetOnMobile={isBottomSheetOnMobile}
