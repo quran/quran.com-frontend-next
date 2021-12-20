@@ -56,8 +56,9 @@
   place-items: center;
   overflow-y: auto;
   box-sizing: content-box;
-  padding-block-start: calc(3 * var(--spacing-mega));
+  padding-block-start: calc(2 * var(--spacing-mega));
   @include breakpoints.tablet {
+    padding-block-start: calc(3 * var(--spacing-mega));
     padding-block-end: calc(1.5 * var(--spacing-mega));
   }
   transition: opacity var(--transition-fast) ease;
