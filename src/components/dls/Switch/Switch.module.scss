@@ -1,6 +1,6 @@
 $selectedItemShadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-
 $container-padding: calc(0.5 * var(--spacing-xxsmall));
+$separatorOpacity: 0.2;
 
 .container {
   position: relative;
@@ -21,7 +21,6 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
   cursor: pointer;
   color: var(--color-text-default);
   background-color: transparent;
-  border-radius: var(--border-radius-pill);
   border: none;
   z-index: 1;
 }
@@ -29,6 +28,23 @@ $container-padding: calc(0.5 * var(--spacing-xxsmall));
 .item[disabled] {
   cursor: not-allowed;
   opacity: var(--opacity-50);
+}
+
+.separatorLine {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+}
+.separatorLineVisible {
+  &::before {
+    content: "";
+    position: absolute;
+    transform: translateY(75%);
+    width: 1px;
+    height: 40%;
+    border-left: 1px solid var(--color-text-default);
+    opacity: $separatorOpacity;
+  }
 }
 
 $background-container: calc(0.8 * var(--spacing-xxsmall));
