@@ -5,13 +5,13 @@ import { getAllChaptersData } from 'src/utils/chapter';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
 const SurahAndAyahSelection = ({
-  chapterId,
-  verseNumber,
+  selectedChapterId,
+  selectedVerseNumber,
   onChapterIdChange,
   onVerseNumberChange,
 }) => {
   const chapterData = getAllChaptersData();
-  const verses = generateChapterVersesKeys(chapterId);
+  const verses = generateChapterVersesKeys(selectedChapterId);
 
   return (
     <div className={styles.surahAndAyahSelectionContainer}>
@@ -19,24 +19,27 @@ const SurahAndAyahSelection = ({
         size={SelectSize.Small}
         id="surah-selection"
         name="surah-selection"
-        options={Object.values(chapterData).map((chapter) => ({
+        options={Object.entries(chapterData).map(([id, chapter]) => ({
           label: chapter.transliteratedName,
-          value: chapter.id,
+          value: id,
         }))}
         onChange={onChapterIdChange}
-        value={chapterId}
+        value={selectedChapterId}
       />
-      <div style={{ marginInlineStart: '1rem' }}>
+      <div className={styles.selectAyah}>
         <Select
           size={SelectSize.Small}
           id="ayah-selection"
           name="ayah-selection"
-          options={verses.map((verseKey) => ({
-            label: getVerseNumberFromKey(verseKey).toString(),
-            value: verseKey,
-          }))}
+          options={verses.map((verseKey) => {
+            const verseNumber = getVerseNumberFromKey(verseKey).toString();
+            return {
+              label: verseNumber,
+              value: verseNumber,
+            };
+          })}
           onChange={onVerseNumberChange}
-          value={verseNumber}
+          value={selectedVerseNumber}
         />
       </div>
     </div>

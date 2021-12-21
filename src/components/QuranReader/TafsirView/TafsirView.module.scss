@@ -126,5 +126,8 @@ $container-max-width: calc(23 * var(--spacing-mega));
 .verseTextContainer {
   margin-block-end: var(--spacing-mega);
 }
+.selectAyah {
+  margin-inline-start: var(--spacing-medium);
+}
 
 @include utility.generate-font-sizes("tafsir");

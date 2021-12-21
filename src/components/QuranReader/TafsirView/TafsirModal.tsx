@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
@@ -9,6 +10,7 @@ import TafsirBody from './TafsirBody';
 
 import EmbeddableContent from 'src/components/dls/EmbeddableContent/EmbeddableContent';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import Verse from 'types/Verse';
 
 type TafsirModalProps = {
@@ -18,6 +20,7 @@ type TafsirModalProps = {
 const TafsirModal = ({ verse }: TafsirModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
+  const tafsirs = useSelector(selectSelectedTafsirs);
 
   return (
     <>
@@ -32,11 +35,11 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
           // for example the navbar is expanded for a split second, the closed.
           // with pushState, it does not cause nextjs to re-render the page, which is better for performance
           // and not causing janky UI issues
-          // window.history.pushState(
-          //   {},
-          //   '',
-          //   `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs.join(',')}`,
-          // );
+          window.history.pushState(
+            {},
+            '',
+            `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs.join(',')}`,
+          );
         }}
       >
         {t('quran-reader:tafsirs')}

@@ -16,6 +16,7 @@ import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getDefaultWordFields } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { getVerseWords } from 'src/utils/verse';
@@ -31,23 +32,24 @@ const TafsirBody = ({ verse }: TafsirBodyProps) => {
   const { lang } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
 
-  const [selectedChapterId, setSelectedChapterId] = useState(verse.chapterId.toString());
+  const [selectedChapterId, setSelectedChapterId] = useState(verse.chapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(verse.verseNumber.toString());
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
-  const queryKey = makeVersesUrl(selectedChapterId as string, lang, {
+  const queryKey = makeVersesUrl(selectedChapterId, lang, {
     page: selectedVerseNumber, // we pass the verse id as a the page and then fetch only 1 verse per page.
     perPage: 1, // only 1 verse per page
     translations: null,
     tafsirs: [tafsirs],
     wordFields: 'location, verse_key, text_uthmani',
     tafsirFields: 'resource_name,language_name',
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
 
   return (
     <div>
       <SurahAndAyahSelection
-        chapterId={selectedChapterId}
-        verseNumber={selectedVerseNumber}
+        selectedChapterId={selectedChapterId}
+        selectedVerseNumber={selectedVerseNumber}
         onChapterIdChange={(val) => setSelectedChapterId(val.toString())}
         onVerseNumberChange={(val) => setSelectedVerseNumber(val)}
       />
@@ -62,12 +64,6 @@ const TafsirBody = ({ verse }: TafsirBodyProps) => {
           );
         }}
       />
-      <div className={styles.verseTextContainer}>
-        <VerseText words={getVerseWords(verse)} />
-      </div>
-      <div className={styles.separatorContainer}>
-        <Separator />
-      </div>
       <div
         className={classNames(
           styles.tafsirContainer,
@@ -78,12 +74,24 @@ const TafsirBody = ({ verse }: TafsirBodyProps) => {
           queryKey={queryKey}
           render={(data) => {
             // @ts-ignore
-            const tafsirsData = data?.verses[0].tafsirs;
+            const tafsirVerse = data?.verses[0];
+            const tafsirsData = tafsirVerse?.tafsirs;
 
             if (!tafsirsData) return <Spinner />;
-            return tafsirsData?.map((tafsir) => (
-              <div key={tafsir.id} dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-            ));
+            return (
+              <div>
+                <div className={styles.verseTextContainer}>
+                  <VerseText words={getVerseWords(tafsirVerse)} />
+                </div>
+                <div className={styles.separatorContainer}>
+                  <Separator />
+                </div>
+
+                {tafsirsData?.map((tafsir) => (
+                  <div key={tafsir.id} dangerouslySetInnerHTML={{ __html: tafsir.text }} />
+                ))}
+              </div>
+            );
           }}
         />
       </div>
