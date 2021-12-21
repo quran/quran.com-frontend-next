@@ -1,0 +1,111 @@
+@use "src/styles/breakpoints";
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes contentIn {
+  from {
+    transform: translate(0%, 100%);
+  }
+  to {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes contentOut {
+  from {
+    transform: translate(0%, 0%);
+  }
+  to {
+    transform: translate(0%, 100%);
+  }
+}
+
+.modalContainer {
+  @include breakpoints.desktop {
+    max-width: initial;
+    width: 60vw;
+  }
+}
+
+.contentContainer {
+  overflow-y: scroll;
+  height: 80vh;
+}
+
+.overlay {
+  background: rgba(0 0 0 / 0.5);
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  box-sizing: content-box;
+  padding-block-start: calc(2 * var(--spacing-mega));
+  @include breakpoints.tablet {
+    padding-block-start: calc(3 * var(--spacing-mega));
+    padding-block-end: calc(1.5 * var(--spacing-mega));
+  }
+  transition: opacity var(--transition-fast) ease;
+}
+
+.content {
+  background: white;
+  box-sizing: border-box;
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-mega);
+  position: relative;
+
+  width: 100%;
+  @include breakpoints.tablet {
+    padding: calc(1.5 * var(--spacing-mega));
+    width: 85vw;
+  }
+  @include breakpoints.desktop {
+    width: 60vw;
+  }
+}
+
+.overlay[data-state="open"] {
+  animation: fadeIn var(--transition-regular);
+}
+.overlay[data-state="closed"] {
+  animation: fadeOut var(--transition-regular);
+}
+
+.content[data-state="open"] {
+  animation: contentIn var(--transition-regular) ease,
+    fadeIn var(--transition-regular) ease;
+}
+
+.content[data-state="closed"] {
+  animation: contentOut var(--transition-regular) ease,
+    fadeOut var(--transition-regular) ease;
+}
+
+.closeIcon {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  background-color: transparent;
+  border: none;
+  @include breakpoints.tablet {
+    margin-block-start: var(--spacing-xxsmall);
+    margin-inline-end: var(--spacing-xxsmall);
+  }
+}
