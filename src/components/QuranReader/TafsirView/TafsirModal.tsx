@@ -52,7 +52,6 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
     <>
       <PopoverMenu.Item
         icon={<TafsirIcon />}
-        // shouldCloseMenuAfterClick
         onClick={() => {
           setIsModalOpen(true);
 
