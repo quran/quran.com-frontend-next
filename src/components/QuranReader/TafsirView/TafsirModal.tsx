@@ -7,15 +7,19 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
+import SurahAndAyahSelection from './SurahAndAyahSelection';
+import TafsirSelection from './TafsirSelection';
 import styles from './TafsirView.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import EmbeddableContent from 'src/components/dls/EmbeddableContent/EmbeddableContent';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import VerseText from 'src/components/Verse/VerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeVersesUrl } from 'src/utils/apiPaths';
+import { getVerseWords } from 'src/utils/verse';
 
 const TafsirModal = ({ verse }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,6 +59,9 @@ const TafsirModal = ({ verse }) => {
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <EmbeddableContent isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <SurahAndAyahSelection />
+        <TafsirSelection />
+        <VerseText words={getVerseWords(verse)} />
         <DataFetcher
           queryKey={queryKey}
           render={(data) => {

@@ -83,4 +83,13 @@ $container-max-width: calc(23 * var(--spacing-mega));
   text-align: right;
 }
 
+.surahAndAyahSelectionContainer {
+  display: flex;
+}
+.tafsirSelectionContainer {
+  display: flex;
+  margin-block-start: 1rem;
+  overflow-x: scroll;
+}
+
 @include utility.generate-font-sizes("tafsir");
