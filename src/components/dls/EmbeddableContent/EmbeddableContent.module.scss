@@ -20,19 +20,19 @@
 
 @keyframes contentIn {
   from {
-    transform: translate(0%, 100%);
+    transform: translate(0, 200px);
   }
   to {
-    transform: translate(0%, 0%);
+    transform: translate(0, 0px);
   }
 }
 
 @keyframes contentOut {
   from {
-    transform: translate(0%, 0%);
+    transform: translate(0%, 0px);
   }
   to {
-    transform: translate(0%, 100%);
+    transform: translate(0%, 200px);
   }
 }
 
