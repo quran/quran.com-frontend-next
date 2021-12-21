@@ -90,6 +90,41 @@ $container-max-width: calc(23 * var(--spacing-mega));
   display: flex;
   margin-block-start: 1rem;
   overflow-x: scroll;
+  width: 100%;
+  padding-block-end: var(--spacing-medium);
+}
+.tafsirSelectionItem {
+  text-transform: capitalize;
+  background-color: var(--color-background-alternative-faint);
+  border-radius: var(--border-radius-rounded);
+  white-space: nowrap;
+  height: auto;
+  padding-block: var(--spacing-xxsmall);
+  padding-inline: var(--spacing-small);
+  margin-inline-end: var(--spacing-medium);
+  border: none;
+  color: var(--color-text-default);
+  &:hover {
+    background-color: var(--color-background-alternative-faint);
+    opacity: var(--opacity-75);
+  }
+}
+
+.tafsirItemSelected {
+  background-color: var(--color-success-medium);
+  color: var(--color-text-inverse);
+  &:hover {
+    background-color: var(--color-success-medium);
+    color: var(--color-text-inverse);
+    opacity: var(--opacity-85);
+  }
+}
+
+.separatorContainer {
+  margin-block: var(--spacing-medium);
+}
+.verseTextContainer {
+  margin-block-end: var(--spacing-mega);
 }
 
 @include utility.generate-font-sizes("tafsir");

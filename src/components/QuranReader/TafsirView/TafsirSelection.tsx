@@ -1,28 +1,44 @@
+import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './TafsirView.module.scss';
 
-const TafsirSelection = () => {
+import DataFetcher from 'src/components/DataFetcher';
+import Button, { ButtonSize } from 'src/components/dls/Button/Button';
+import { makeTafsirsUrl } from 'src/utils/apiPaths';
+import { TafsirsResponse } from 'types/ApiResponses';
+
+type TafsirSelectionProps = {
+  selectedTafsirs: number[];
+  onTafsirSelected: (tafsirId: number) => void;
+};
+const TafsirSelection = ({ selectedTafsirs, onTafsirSelected }: TafsirSelectionProps) => {
+  const { lang } = useTranslation();
   return (
-    <div className={styles.tafsirSelectionContainer}>
-      {['a', 'b'].map((x) => {
-        const selected = x === 'persian';
+    <DataFetcher
+      queryKey={makeTafsirsUrl(lang)}
+      render={(data: TafsirsResponse) => {
         return (
-          <div
-            key={x}
-            style={{
-              textTransform: 'capitalize',
-              marginInlineEnd: '1rem',
-              paddingInline: '1rem',
-              paddingBlock: '0.5rem',
-              borderRadius: '0.5rem',
-              backgroundColor: selected ? 'var(--color-success-medium)' : '#F2F2F2',
-              color: selected ? '#fff' : null,
-            }}
-          >
-            {x}
+          <div className={styles.tafsirSelectionContainer}>
+            {data.tafsirs.map((tafsir) => {
+              const selected = selectedTafsirs.includes(tafsir.id);
+              return (
+                <Button
+                  onClick={() => onTafsirSelected(tafsir.id)}
+                  size={ButtonSize.Small}
+                  key={tafsir.id}
+                  className={classNames(styles.tafsirSelectionItem, {
+                    [styles.tafsirItemSelected]: selected,
+                  })}
+                >
+                  {tafsir.name}
+                </Button>
+              );
+            })}
           </div>
         );
-      })}
-    </div>
+      }}
+    />
   );
 };
 

@@ -50,7 +50,7 @@
 
 .overlay {
   z-index: 999999999999999999999; // TODO: this is dirty hack, need to find a better way to do this
-  background: rgba(0 0 0 / 0.5);
+  background: var(--color-background-backdrop);
   position: fixed;
   inset: 0;
   display: grid;
@@ -66,13 +66,13 @@
 }
 
 .content {
-  background: white;
+  background: var(--color-background-default);
   box-sizing: border-box;
   border-radius: var(--border-radius-rounded);
   padding: var(--spacing-mega);
   position: relative;
 
-  width: 100%;
+  width: 100vw;
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
     width: 85vw;
