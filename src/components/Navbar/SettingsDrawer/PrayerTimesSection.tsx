@@ -18,6 +18,7 @@ import {
   setLocationAccess,
   setMadhab,
 } from 'src/redux/slices/prayerTimes';
+import { logPrayerTimesSettingsChangeEvent } from 'src/utils/eventLogger';
 
 const PrayerTimesSection = () => {
   const { t } = useTranslation('common');
@@ -46,6 +47,22 @@ const PrayerTimesSection = () => {
     [t],
   );
 
+  const onCalculationMethodChange = (value) => {
+    logPrayerTimesSettingsChangeEvent('calculation_method', value);
+    dispatch(setCalculationMethod(value as CalculationMethod));
+  };
+
+  const onMadhabChange = (value) => {
+    logPrayerTimesSettingsChangeEvent('madhab', value);
+    dispatch(setMadhab(value as Madhab));
+  };
+
+  const onLocationAccessChange = () => {
+    const newValue = isLocationAccessEnabled ? LocationAccess.Off : LocationAccess.On;
+    logPrayerTimesSettingsChangeEvent('location_access', newValue);
+    dispatch(setLocationAccess(newValue));
+  };
+
   return (
     <Section>
       <Section.Title>{t('prayer-times.title')}</Section.Title>
@@ -56,7 +73,7 @@ const PrayerTimesSection = () => {
           name="calculation-method"
           options={calculationMethodOptions}
           value={selectedCalculationMethod}
-          onChange={(value) => dispatch(setCalculationMethod(value as CalculationMethod))}
+          onChange={onCalculationMethodChange}
         />
       </Section.Row>
       <Section.Row>
@@ -66,19 +83,12 @@ const PrayerTimesSection = () => {
           name="madhab"
           options={madhabOptions}
           value={selectedMadhab}
-          onChange={(value) => dispatch(setMadhab(value as Madhab))}
+          onChange={onMadhabChange}
         />
       </Section.Row>
       <Section.Row>
         <Section.Label>{t('prayer-times.location-access')}</Section.Label>
-        <Toggle
-          isChecked={isLocationAccessEnabled}
-          onClick={() => {
-            dispatch(
-              setLocationAccess(isLocationAccessEnabled ? LocationAccess.Off : LocationAccess.On),
-            );
-          }}
-        />
+        <Toggle isChecked={isLocationAccessEnabled} onClick={onLocationAccessChange} />
       </Section.Row>
     </Section>
   );

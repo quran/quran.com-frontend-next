@@ -68,6 +68,12 @@ const getActionCreator = (type: DrawerType) => {
   return setIsSearchDrawerOpen.type;
 };
 
+const logDrawerAction = (type: string, actionSource: string) => {
+  import('src/utils/eventLogger').then((eventLogger) => {
+    eventLogger.logDrawerEvent(type, false, actionSource);
+  });
+};
+
 const Drawer: React.FC<Props> = ({
   type,
   side = DrawerSide.Right,
@@ -82,25 +88,41 @@ const Drawer: React.FC<Props> = ({
   usePreventBodyScrolling(isOpen);
   const router = useRouter();
 
-  const closeDrawer = useCallback(() => {
-    dispatch({ type: getActionCreator(type), payload: false });
-    if (type === DrawerType.Search) {
-      dispatch({ type: stopSearchDrawerVoiceFlow.type });
-    }
-  }, [dispatch, type]);
+  const closeDrawer = useCallback(
+    (actionSource = 'click') => {
+      dispatch({ type: getActionCreator(type), payload: false });
+      if (type === DrawerType.Search) {
+        dispatch({ type: stopSearchDrawerVoiceFlow.type });
+      }
+      logDrawerAction(type, actionSource);
+    },
+    [dispatch, type],
+  );
   // enableOnTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
-  useHotkeys('Escape', closeDrawer, { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] });
+  useHotkeys(
+    'Escape',
+    () => {
+      closeDrawer('keyboard_shortcut');
+    },
+    { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
+  );
 
   // Hide navbar after successful navigation
   useEffect(() => {
     router.events.on('routeChangeComplete', () => {
       if (isOpen) {
-        closeDrawer();
+        closeDrawer('navigation');
       }
     });
   }, [closeDrawer, router.events, isOpen]);
 
-  useOutsideClickDetector(drawerRef, closeDrawer, isOpen);
+  useOutsideClickDetector(
+    drawerRef,
+    () => {
+      closeDrawer('outside_click');
+    },
+    isOpen,
+  );
   const isSearchDrawer = type === DrawerType.Search;
   return (
     <div
@@ -119,7 +141,7 @@ const Drawer: React.FC<Props> = ({
         >
           <div className={styles.headerContent}>
             {header}
-            {!hideCloseButton && <DrawerCloseButton onClick={closeDrawer} />}
+            {!hideCloseButton && <DrawerCloseButton onClick={() => closeDrawer()} />}
           </div>
         </div>
       </div>

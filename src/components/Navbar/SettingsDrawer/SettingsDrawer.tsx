@@ -13,6 +13,7 @@ import styles from './SettingsDrawer.module.scss';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import { logSettingsViewChangeEvent } from 'src/utils/eventLogger';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,
@@ -39,15 +40,17 @@ const SettingsDrawer = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const { isSettingsDrawerOpen, settingsView } = useSelector(selectNavbar);
+
+  const onGoBackClicked = () => {
+    dispatch(setSettingsView(SettingsView.Body));
+    logSettingsViewChangeEvent(SettingsView.Body, settingsView);
+  };
   let header;
   if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;
   if (settingsView !== SettingsView.Body)
     header = (
       <div className={styles.headerContainer}>
-        <Button
-          variant={ButtonVariant.Ghost}
-          onClick={() => dispatch(setSettingsView(SettingsView.Body))}
-        >
+        <Button variant={ButtonVariant.Ghost} onClick={onGoBackClicked}>
           <BackIcon />
         </Button>
         {settingsView === SettingsView.Translation && t('translations')}

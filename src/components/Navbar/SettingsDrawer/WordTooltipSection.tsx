@@ -17,6 +17,7 @@ import {
   setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { removeItemFromArray, areArraysEqual } from 'src/utils/array';
+import { logWordByWordTooltipSettingsChangeEvent } from 'src/utils/eventLogger';
 import { WordByWordType } from 'types/QuranReader';
 
 const WordTooltipSection = () => {
@@ -27,6 +28,7 @@ const WordTooltipSection = () => {
   const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const onWordByWordLocaleChange = (value: string) => {
+    logWordByWordTooltipSettingsChangeEvent('_locale', value);
     dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
   };
 
@@ -34,6 +36,7 @@ const WordTooltipSection = () => {
     const nextShowTooltipFor = checked
       ? [...showTooltipFor, type]
       : removeItemFromArray(type, showTooltipFor);
+    logWordByWordTooltipSettingsChangeEvent('', nextShowTooltipFor);
     dispatch(setShowTooltipFor(nextShowTooltipFor));
   };
 

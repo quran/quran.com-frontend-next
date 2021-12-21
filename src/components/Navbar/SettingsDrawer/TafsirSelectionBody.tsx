@@ -14,6 +14,7 @@ import Input from 'src/components/dls/Forms/Input';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logSearchQuery, logSettingsChangeEvent } from 'src/utils/eventLogger';
 import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 
@@ -24,6 +25,7 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
   });
 
   const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
+  logSearchQuery(searchQuery, 'settings drawer tafsir view', !!filteredTafsirs.length);
   return filteredTafsirs as TafsirInfo[];
 };
 
@@ -36,14 +38,20 @@ const TafsirsSelectionBody = () => {
 
   const onTafsirsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTranslationId = e.target.value;
+    const isSelecting = e.target.checked;
 
     // when the checkbox is checked
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
-    const nextTafsirs = e.target.checked
+    const nextTafsirs = isSelecting
       ? [...selectedTafsirs, Number(selectedTranslationId)]
       : selectedTafsirs.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
+    logSettingsChangeEvent(
+      isSelecting ? 'selected_tafsir' : 'unselected_tafsir',
+      selectedTranslationId,
+    );
+    logSettingsChangeEvent('selected_tafsirs', nextTafsirs);
     dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
   };
 
@@ -70,7 +78,7 @@ const TafsirsSelectionBody = () => {
             <div>
               {Object.entries(tafsirsByLanguages).map(([language, tafsirs]) => {
                 return (
-                  <div className={styles.group}>
+                  <div className={styles.group} key={language}>
                     <div className={styles.language}>{language}</div>
                     {tafsirs.map((tafsir) => (
                       <div key={tafsir.id} className={styles.item}>

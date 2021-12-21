@@ -22,6 +22,7 @@ import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logTafsirSettingsChangeEvent, logSettingsViewChangeEvent } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
@@ -51,6 +52,10 @@ const TafsirSection = () => {
     [selectedTafsirs, lang],
   );
 
+  const onSelectionCardClicked = useCallback(() => {
+    dispatch(setSettingsView(SettingsView.Tafsir));
+    logSettingsViewChangeEvent(SettingsView.Tafsir, SettingsView.Body);
+  }, [dispatch]);
   const renderTafsirs = useCallback(
     (data: TafsirsResponse) => {
       const firstSelectedTafsir = data.tafsirs.find((tafsir) => tafsir.id === selectedTafsirs[0]);
@@ -67,12 +72,22 @@ const TafsirSection = () => {
         <SelectionCard
           label={t('settings.selected-tafsirs')}
           value={selectedValueString}
-          onClick={() => dispatch(setSettingsView(SettingsView.Tafsir))}
+          onClick={onSelectionCardClicked}
         />
       );
     },
-    [t, selectedTafsirs, localizedSelectedTafsirs, dispatch],
+    [t, selectedTafsirs, localizedSelectedTafsirs, onSelectionCardClicked],
   );
+
+  const onFontScaleDecreaseClicked = () => {
+    logTafsirSettingsChangeEvent('font_scale', tafsirFontScale - 1);
+    dispatch(decreaseTafsirFontScale());
+  };
+
+  const onFontScaleIncreaseClicked = () => {
+    logTafsirSettingsChangeEvent('font_scale', tafsirFontScale + 1);
+    dispatch(increaseTafsirFontScale());
+  };
 
   return (
     <div className={styles.container}>
@@ -89,16 +104,8 @@ const TafsirSection = () => {
           <Section.Label>{t('tafsir.font-size')}</Section.Label>
           <Counter
             count={tafsirFontScale}
-            onDecrement={
-              tafsirFontScale === MINIMUM_FONT_STEP
-                ? null
-                : () => dispatch(decreaseTafsirFontScale())
-            }
-            onIncrement={
-              tafsirFontScale === MAXIMUM_FONT_STEP
-                ? null
-                : () => dispatch(increaseTafsirFontScale())
-            }
+            onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
+            onIncrement={tafsirFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
           />
         </Section.Row>
       </Section>
