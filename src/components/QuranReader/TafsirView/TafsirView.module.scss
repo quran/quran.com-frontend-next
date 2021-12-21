@@ -39,6 +39,9 @@ $container-max-width: calc(23 * var(--spacing-mega));
   text-align: left;
   p {
     margin-block-end: var(--spacing-small);
+    opacity: var(--opacity-85);
+    font-size: 1.15rem;
+    line-height: 1.5;
   }
   br {
     content: "";
@@ -50,6 +53,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   }
   h2 {
     font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-xlarge);
     margin-block-end: var(--spacing-small);
     margin-block-start: calc(1.5 * var(--spacing-medium));
     &:first-child {

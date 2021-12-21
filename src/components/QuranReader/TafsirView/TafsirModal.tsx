@@ -1,19 +1,25 @@
 /* eslint-disable i18next/no-literal-string */
 import { useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
+import styles from './TafsirView.module.scss';
+
 import DataFetcher from 'src/components/DataFetcher';
-import Modal from 'src/components/dls/Modal/Modal';
+import EmbeddableContent from 'src/components/dls/EmbeddableContent/EmbeddableContent';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 
 const TafsirModal = ({ verse }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { lang, t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const queryKey = makeVersesUrl(verse.chapterId as string, lang, {
@@ -29,6 +35,7 @@ const TafsirModal = ({ verse }) => {
     <>
       <PopoverMenu.Item
         icon={<TafsirIcon />}
+        // shouldCloseMenuAfterClick
         onClick={() => {
           setIsModalOpen(true);
 
@@ -38,52 +45,34 @@ const TafsirModal = ({ verse }) => {
           // for example the navbar is expanded for a split second, the closed.
           // with pushState, it does not cause nextjs to re-render the page, which is better for performance
           // and not causing janky UI issues
-          window.history.pushState(
-            {},
-            '',
-            `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs.join(',')}`,
-          );
+          // window.history.pushState(
+          //   {},
+          //   '',
+          //   `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs.join(',')}`,
+          // );
         }}
       >
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
-      {isModalOpen && (
-        <Modal isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)}>
-          <Modal.Body>
-            {tafsirs.length > 0 ? (
-              <DataFetcher
-                queryKey={queryKey}
-                render={(data) => {
-                  return (
-                    <div style={{ height: '50vh', overflowY: 'auto' }}>
-                      {
-                        //   JSON.stringify(data.verses[0].tafsirs.map((tafsir) => tafsir.text))
-                        // @ts-ignore
-                        //   data.verses[0].tafsirs.map((tafsir) => (
-                        // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-                        //   ))
-                      }
-                      {
-                        // @ts-ignore
-                        data?.verses[0].tafsirs?.map((tafsir) => (
-                          <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-                        ))
-                        // @ts-ignore
-                        //   data.verses[0].tafsirs.map((tafsir) => (
-                        // <div dangerouslySetInnerHTML={{ __html: tafsir.text }} />
-                        //   ))
-                      }
-                    </div>
-                  );
-                  return <div>{JSON.stringify(data)}</div>;
-                }}
+      <EmbeddableContent isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <DataFetcher
+          queryKey={queryKey}
+          render={(data) => {
+            // @ts-ignore
+            return data?.verses[0].tafsirs?.map((tafsir) => (
+              <div
+                key={tafsir.id}
+                className={classNames(
+                  styles.tafsirContainer,
+                  styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
+                )}
+                dangerouslySetInnerHTML={{ __html: tafsir.text }}
               />
-            ) : (
-              <div>no tafsir selected, we should probably show default tafsir here</div>
-            )}
-          </Modal.Body>
-        </Modal>
-      )}
+            ));
+            return <div>{JSON.stringify(data)}</div>;
+          }}
+        />
+      </EmbeddableContent>
     </>
   );
 };
