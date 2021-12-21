@@ -130,4 +130,42 @@ $container-max-width: calc(23 * var(--spacing-mega));
   margin-inline-start: var(--spacing-medium);
 }
 
+.tafsirSkeletonItem {
+  height: var(--spacing-mega);
+  margin-block-end: var(--spacing-medium);
+}
+.ayahSekletonItem {
+  margin-inline-end: auto;
+  height: calc(2.5 * var(--spacing-mega));
+  margin-block-end: var(--spacing-mega);
+
+  width: 100%;
+}
+.tafsirSkeletonItem1 {
+  width: 100%;
+}
+
+.tafsirSkeletonItem2 {
+  width: 80%;
+}
+
+.tafsirSkeletonItem3 {
+  width: 60%;
+}
+
+.tafsirGroupMessage {
+  position: relative;
+  padding: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-faint);
+  font-size: var(--font-size-normal);
+
+  text-align: start;
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
+
 @include utility.generate-font-sizes("tafsir");
