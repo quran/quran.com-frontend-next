@@ -9,18 +9,26 @@ type EmbeddableContentProps = {
   isOpen?: boolean;
   onClose?: () => void;
   children: React.ReactNode;
+  hasCloseButton?: boolean;
 };
-const EmbeddableContent = ({ children, isOpen, onClose }: EmbeddableContentProps) => {
+const EmbeddableContent = ({
+  children,
+  isOpen,
+  onClose,
+  hasCloseButton = true,
+}: EmbeddableContentProps) => {
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay}>
           <Dialog.Content className={styles.content} onInteractOutside={onClose}>
-            <Dialog.Close className={styles.closeIcon}>
-              <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onClose}>
-                <CloseIcon />
-              </Button>
-            </Dialog.Close>
+            {hasCloseButton && (
+              <Dialog.Close className={styles.closeIcon}>
+                <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onClose}>
+                  <CloseIcon />
+                </Button>
+              </Dialog.Close>
+            )}
             {children}
           </Dialog.Content>
         </Dialog.Overlay>

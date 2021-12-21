@@ -79,3 +79,20 @@ export const UnTriggered = () => {
     </>
   );
 };
+
+export const WithoutCloseIcon = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open</button>
+      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)} hasCloseButton={false}>
+        {content}
+        {content}
+        {content}
+        {content}
+        {content}
+        {content}
+      </EmbeddableContent>
+    </>
+  );
+};
