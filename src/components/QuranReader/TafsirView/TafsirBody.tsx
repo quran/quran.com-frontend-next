@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import uniq from 'lodash/uniq';
@@ -29,9 +29,16 @@ import { TafsirsResponse } from 'types/ApiResponses';
 type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
+  initialTafsirData?: TafsirsResponse;
+  initialTafsirIds?: number[];
 };
 
-const TafsirBody = ({ initialChapterId, initialVerseNumber }: TafsirBodyProps) => {
+const TafsirBody = ({
+  initialChapterId,
+  initialVerseNumber,
+  initialTafsirData,
+  initialTafsirIds,
+}: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { lang } = useTranslation();
@@ -42,7 +49,9 @@ const TafsirBody = ({ initialChapterId, initialVerseNumber }: TafsirBodyProps) =
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
-  const queryKey = makeTafsirContentUrl(tafsirs[0], selectedVerseKey, {
+  const [selectedTafsirId, setSelectedTafsirId] = useState(initialTafsirIds?.[0] || tafsirs?.[0]);
+
+  const queryKey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
     words: true,
     ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
@@ -60,6 +69,32 @@ const TafsirBody = ({ initialChapterId, initialVerseNumber }: TafsirBodyProps) =
   // TODO: update lanague options, to use the same options as our LanguageSelector
   const languageOptions = tafsirListData ? getTafsirsLanguageOptions(tafsirListData.tafsirs) : [];
 
+  const renderTafsir = useCallback((data: TafsirsResponse) => {
+    if (!data) return <TafsirSkeleton />;
+    // @ts-ignore
+    const tafsirVerses = data?.tafsir.verses;
+    // @ts-ignore
+    const htmlText = data?.tafsir.text;
+    const words = Object.values(tafsirVerses).map(getVerseWords).flat();
+
+    if (!htmlText) return <TafsirSkeleton />;
+
+    return (
+      <div>
+        {Object.values(tafsirVerses).length > 1 && (
+          <TafsirGroupMessage {...getFromAndToVerseKeys(tafsirVerses)} />
+        )}
+        <div className={styles.verseTextContainer}>
+          <VerseText words={words} />
+        </div>
+        <div className={styles.separatorContainer}>
+          <Separator />
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: htmlText }} />
+      </div>
+    );
+  }, []);
+
   return (
     <div>
       <SurahAndAyahLanguageSelection
@@ -75,6 +110,7 @@ const TafsirBody = ({ initialChapterId, initialVerseNumber }: TafsirBodyProps) =
         selectedTafsirs={selectedTafsirs}
         selectedLanguage={selectedLanguage}
         onTafsirSelected={(id) => {
+          setSelectedTafsirId(id);
           dispatch(
             setSelectedTafsirs({
               tafsirs: [id],
@@ -89,35 +125,15 @@ const TafsirBody = ({ initialChapterId, initialVerseNumber }: TafsirBodyProps) =
           styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
         )}
       >
-        <DataFetcher
-          loading={TafsirSkeleton}
-          queryKey={queryKey}
-          render={(data: TafsirsResponse) => {
-            if (!data) return <TafsirSkeleton />;
-            // @ts-ignore
-            const tafsirVerses = data?.tafsir.verses;
-            // @ts-ignore
-            const htmlText = data?.tafsir.text;
-            const words = Object.values(tafsirVerses).map(getVerseWords).flat();
-
-            if (!htmlText) return <TafsirSkeleton />;
-
-            return (
-              <div>
-                {Object.values(tafsirVerses).length > 1 && (
-                  <TafsirGroupMessage {...getFromAndToVerseKeys(tafsirVerses)} />
-                )}
-                <div className={styles.verseTextContainer}>
-                  <VerseText words={words} />
-                </div>
-                <div className={styles.separatorContainer}>
-                  <Separator />
-                </div>
-                <div dangerouslySetInnerHTML={{ __html: htmlText }} />
-              </div>
-            );
-          }}
-        />
+        {initialTafsirData &&
+        initialChapterId === selectedChapterId &&
+        initialVerseNumber === selectedVerseNumber &&
+        initialTafsirIds &&
+        areArraysEqual(initialTafsirIds, tafsirs) ? (
+          renderTafsir(initialTafsirData)
+        ) : (
+          <DataFetcher loading={TafsirSkeleton} queryKey={queryKey} render={renderTafsir} />
+        )}
       </div>
     </div>
   );

@@ -3,11 +3,16 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getChapterIdBySlug, getChapterVerses } from 'src/api';
+import styles from './tafsirs.module.scss';
+
+import { getChapterIdBySlug, getChapterVerses, fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import QuranReader from 'src/components/QuranReader';
+// import QuranReader from 'src/components/QuranReader';
+import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
 import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
+import { getDefaultWordFields } from 'src/utils/api';
+import { makeTafsirContentUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
@@ -17,20 +22,22 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { stripHTMLTags } from 'src/utils/string';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
-import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
+import { ChapterResponse, TafsirsResponse, VersesResponse } from 'types/ApiResponses';
+// import { QuranReaderDataType } from 'types/QuranReader';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
   verses?: VersesResponse;
+  tafsirData?: TafsirsResponse;
   hasError?: boolean;
 };
 
-const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => {
+const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses, tafsirData }) => {
   const { t, lang } = useTranslation('common');
+  const router = useRouter();
   const {
-    query: { verseId },
-  } = useRouter();
+    query: { verseId, chapterId },
+  } = router;
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -39,6 +46,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
       ? stripHTMLTags(verses.verses[0].tafsirs[0].text)
       : null;
   const path = getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId));
+
   return (
     <>
       <NextSeoWrapper
@@ -50,11 +58,19 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses }) => 
         languageAlternates={getLanguageAlternates(path)}
         {...(description && { description })} // some verses won't have Tafsirs so we cannot set the description in that case
       />
-      <QuranReader
+      <div className={styles.tafsirContainer}>
+        <TafsirBody
+          initialChapterId={chapterId.toString()}
+          initialVerseNumber={verseId.toString()}
+          initialTafsirData={tafsirData}
+          initialTafsirIds={router.query.tafsirId ? [Number(router.query.tafsiirId)] : undefined}
+        />
+      </div>
+      {/* <QuranReader
         initialData={verses}
         id={chapter.chapter.id}
         quranReaderDataType={QuranReaderDataType.Tafsir}
-      />
+      /> */}
     </>
   );
 };
@@ -76,13 +92,19 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
     perPage: 1, // only 1 verse per page
     translations: null,
-    tafsirs: getTafsirsInitialState(locale).selectedTafsirs,
     wordFields: 'location, verse_key, text_uthmani',
-    tafsirFields: 'resource_name,language_name',
   });
   // if the chapter or verses APIs failed
 
   const chapterData = getChapterData(chapterIdOrSlug, locale);
+
+  const tafsirData = await fetcher(
+    // @ts-ignore
+    makeTafsirContentUrl(getTafsirsInitialState(locale).selectedTafsirs[0], verseId, {
+      words: true,
+      ...getDefaultWordFields(),
+    }),
+  );
 
   if (versesResponse.status === 500 || !chapterData) {
     return {
@@ -94,6 +116,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   return {
     props: {
+      tafsirData,
       chapter: {
         chapter: { ...chapterData, id: chapterIdOrSlug },
       },

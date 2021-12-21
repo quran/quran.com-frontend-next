@@ -38,7 +38,7 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
           window.history.pushState(
             {},
             '',
-            `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsIds=${tafsirs.join(',')}`,
+            `/${verse.chapterId}/${verse.verseNumber}/tafsirs?tafsirsId=${tafsirs[0]}`,
           );
         }}
       >
