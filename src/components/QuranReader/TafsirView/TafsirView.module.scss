@@ -126,7 +126,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
 .verseTextContainer {
   margin-block-end: var(--spacing-mega);
 }
-.selectAyah {
+.selectionItem {
   margin-inline-start: var(--spacing-medium);
 }
 
@@ -156,16 +156,11 @@ $container-max-width: calc(23 * var(--spacing-mega));
 .tafsirGroupMessage {
   position: relative;
   padding: var(--spacing-medium);
-  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
   background: var(--color-success-faded);
   border-radius: var(--border-radius-default);
   border: 1px solid var(--color-success-faint);
   font-size: var(--font-size-normal);
-
-  text-align: start;
-  [dir="rtl"] & {
-    direction: rtl;
-  }
 }
 
 @include utility.generate-font-sizes("tafsir");

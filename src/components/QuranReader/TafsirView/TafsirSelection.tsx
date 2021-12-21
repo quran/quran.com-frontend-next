@@ -11,8 +11,13 @@ import { TafsirsResponse } from 'types/ApiResponses';
 type TafsirSelectionProps = {
   selectedTafsirs: number[];
   onTafsirSelected: (tafsirId: number) => void;
+  selectedLanguage: string;
 };
-const TafsirSelection = ({ selectedTafsirs, onTafsirSelected }: TafsirSelectionProps) => {
+const TafsirSelection = ({
+  selectedTafsirs,
+  onTafsirSelected,
+  selectedLanguage,
+}: TafsirSelectionProps) => {
   const { lang } = useTranslation();
   return (
     <DataFetcher
@@ -20,21 +25,25 @@ const TafsirSelection = ({ selectedTafsirs, onTafsirSelected }: TafsirSelectionP
       render={(data: TafsirsResponse) => {
         return (
           <div className={styles.tafsirSelectionContainer}>
-            {data.tafsirs.map((tafsir) => {
-              const selected = selectedTafsirs.includes(tafsir.id);
-              return (
-                <Button
-                  onClick={() => onTafsirSelected(tafsir.id)}
-                  size={ButtonSize.Small}
-                  key={tafsir.id}
-                  className={classNames(styles.tafsirSelectionItem, {
-                    [styles.tafsirItemSelected]: selected,
-                  })}
-                >
-                  {tafsir.name}
-                </Button>
-              );
-            })}
+            {data.tafsirs
+              .filter(
+                (tafsir) => tafsir.languageName.toLowerCase() === selectedLanguage.toLowerCase(),
+              )
+              .map((tafsir) => {
+                const selected = selectedTafsirs.includes(tafsir.id);
+                return (
+                  <Button
+                    onClick={() => onTafsirSelected(tafsir.id)}
+                    size={ButtonSize.Small}
+                    key={tafsir.id}
+                    className={classNames(styles.tafsirSelectionItem, {
+                      [styles.tafsirItemSelected]: selected,
+                    })}
+                  >
+                    {tafsir.name}
+                  </Button>
+                );
+              })}
           </div>
         );
       }}

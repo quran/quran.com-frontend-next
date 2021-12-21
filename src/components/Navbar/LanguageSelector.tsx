@@ -28,6 +28,19 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
 };
+
+export const changeLocale = async (newLocale: string, dispatch, isUsingDefaultSettings) => {
+  // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
+  if (isUsingDefaultSettings) {
+    dispatch(resetSettings(newLocale));
+  }
+  await setLanguage(newLocale);
+  const date = new Date();
+  date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
+  // eslint-disable-next-line i18next/no-literal-string
+  document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
+};
+
 const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
@@ -47,15 +60,7 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
    * @param {string} newLocale
    */
   const onChange = async (newLocale: string) => {
-    // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
-    if (isUsingDefaultSettings) {
-      dispatch(resetSettings(newLocale));
-    }
-    await setLanguage(newLocale);
-    const date = new Date();
-    date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
-    // eslint-disable-next-line i18next/no-literal-string
-    document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
+    changeLocale(newLocale, dispatch, isUsingDefaultSettings);
   };
 
   return (

@@ -1,3 +1,5 @@
+import capitalize from 'lodash/capitalize';
+
 import styles from './TafsirView.module.scss';
 
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
@@ -9,6 +11,9 @@ const SurahAndAyahSelection = ({
   selectedVerseNumber,
   onChapterIdChange,
   onVerseNumberChange,
+  onLanguageChange,
+  selectedLanguage,
+  languageOptions,
 }) => {
   const chapterData = getAllChaptersData();
   const verses = generateChapterVersesKeys(selectedChapterId);
@@ -26,7 +31,7 @@ const SurahAndAyahSelection = ({
         onChange={onChapterIdChange}
         value={selectedChapterId}
       />
-      <div className={styles.selectAyah}>
+      <div className={styles.selectionItem}>
         <Select
           size={SelectSize.Small}
           id="ayah-selection"
@@ -40,6 +45,20 @@ const SurahAndAyahSelection = ({
           })}
           onChange={onVerseNumberChange}
           value={selectedVerseNumber}
+        />
+      </div>
+
+      <div className={styles.selectionItem}>
+        <Select
+          size={SelectSize.Small}
+          id="lang-selection"
+          name="lang-selection"
+          options={languageOptions.map((lng) => ({
+            label: capitalize(lng),
+            value: lng,
+          }))}
+          onChange={onLanguageChange}
+          value={selectedLanguage}
         />
       </div>
     </div>

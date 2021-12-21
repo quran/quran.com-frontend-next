@@ -41,8 +41,8 @@ const TafsirsSelectionBody = () => {
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
     const nextTafsirs = e.target.checked
-      ? [...selectedTafsirs, Number(selectedTranslationId)]
-      : selectedTafsirs.filter((id) => id !== Number(selectedTranslationId)); // remove the id
+      ? [...selectedTafsirs, selectedTranslationId]
+      : selectedTafsirs.filter((id) => id !== selectedTranslationId); // remove the id
 
     dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
   };
@@ -78,7 +78,7 @@ const TafsirsSelectionBody = () => {
                           id={tafsir.id.toString()}
                           type="checkbox"
                           value={tafsir.id}
-                          checked={selectedTafsirs.includes(tafsir.id)}
+                          checked={selectedTafsirs.includes(tafsir.slug)}
                           onChange={onTafsirsChange}
                         />
                         <label className={styles.label} htmlFor={tafsir.id.toString()}>

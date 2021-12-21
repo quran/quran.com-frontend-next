@@ -1,16 +1,19 @@
 /* eslint-disable i18next/no-literal-string */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
+import uniq from 'lodash/uniq';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import useSWR from 'swr/immutable';
 
-import SurahAndAyahSelection from './SurahAndAyahSelection';
+import SurahAndAyahLanguageSelection from './SurahAyahLanguageSelection';
 import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirSelection from './TafsirSelection';
 import TafsirSkeleton from './TafsirSkeleton';
 import styles from './TafsirView.module.scss';
 
+import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
 import VerseText from 'src/components/Verse/VerseText';
@@ -18,9 +21,10 @@ import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
-import { makeTafsirContentUrl } from 'src/utils/apiPaths';
+import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { TafsirsResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
@@ -35,27 +39,41 @@ const TafsirBody = ({ verse }: TafsirBodyProps) => {
 
   const [selectedChapterId, setSelectedChapterId] = useState(verse.chapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(verse.verseNumber.toString());
+  const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
   const queryKey = makeTafsirContentUrl(tafsirs[0], selectedVerseKey, {
-    // perPage: 1, // only 1 verse per page
-    // translations: null,
-    // wordFields: 'location, verse_key, text_uthmani',
-    // tafsirFields: 'resource_name,language_name',
     words: true,
     ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
 
+  const { data: tafsirListData } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
+  useEffect(() => {
+    if (tafsirListData) {
+      const selectedTafsir = tafsirListData.tafsirs.find((tafsir) => tafsir.id === tafsirs[0]);
+      setSelectedLanguage(selectedTafsir.languageName);
+    }
+  }, [tafsirListData, tafsirs]);
+
+  // there's no 1:1 data that can map our locale options to the tafsir language options
+  // so we're using options that's availbe from tafsir for now
+  // TODO: update lanague options, to use the same options as our LanguageSelector
+  const languageOptions = tafsirListData ? getTafsirsLanguageOptions(tafsirListData.tafsirs) : [];
+
   return (
     <div>
-      <SurahAndAyahSelection
+      <SurahAndAyahLanguageSelection
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
+        selectedLanguage={selectedLanguage}
         onChapterIdChange={(val) => setSelectedChapterId(val.toString())}
         onVerseNumberChange={(val) => setSelectedVerseNumber(val)}
+        onLanguageChange={(newLang) => setSelectedLanguage(newLang)}
+        languageOptions={languageOptions}
       />
       <TafsirSelection
         selectedTafsirs={selectedTafsirs}
+        selectedLanguage={selectedLanguage}
         onTafsirSelected={(id) => {
           dispatch(
             setSelectedTafsirs({
@@ -74,7 +92,7 @@ const TafsirBody = ({ verse }: TafsirBodyProps) => {
         <DataFetcher
           loading={TafsirSkeleton}
           queryKey={queryKey}
-          render={(data) => {
+          render={(data: TafsirsResponse) => {
             if (!data) return <TafsirSkeleton />;
             // @ts-ignore
             const tafsirVerses = data?.tafsir.verses;
@@ -104,6 +122,8 @@ const TafsirBody = ({ verse }: TafsirBodyProps) => {
     </div>
   );
 };
+
+const getTafsirsLanguageOptions = (tafsirs) => uniq(tafsirs.map((tafsir) => tafsir.languageName));
 
 const getFromAndToVerseKeys = (verses) => {
   const verseKeys = Object.keys(verses);
