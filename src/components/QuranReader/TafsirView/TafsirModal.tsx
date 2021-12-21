@@ -45,7 +45,10 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <EmbeddableContent isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <TafsirBody verse={verse} />
+        <TafsirBody
+          initialChapterId={verse.chapterId.toString()}
+          initialVerseNumber={verse.verseNumber.toString()}
+        />
       </EmbeddableContent>
     </>
   );

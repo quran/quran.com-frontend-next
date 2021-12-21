@@ -27,7 +27,9 @@ const TafsirSelection = ({
           <div className={styles.tafsirSelectionContainer}>
             {data.tafsirs
               .filter(
-                (tafsir) => tafsir.languageName.toLowerCase() === selectedLanguage.toLowerCase(),
+                (tafsir) =>
+                  tafsir.languageName.toLowerCase() === selectedLanguage.toLowerCase() ||
+                  selectedTafsirs.includes(tafsir.id),
               )
               .map((tafsir) => {
                 const selected = selectedTafsirs.includes(tafsir.id);

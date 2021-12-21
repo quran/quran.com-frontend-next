@@ -25,20 +25,20 @@ import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirsResponse } from 'types/ApiResponses';
-import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
-  verse: Verse;
+  initialChapterId: string;
+  initialVerseNumber: string;
 };
 
-const TafsirBody = ({ verse }: TafsirBodyProps) => {
+const TafsirBody = ({ initialChapterId, initialVerseNumber }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { lang } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
 
-  const [selectedChapterId, setSelectedChapterId] = useState(verse.chapterId);
-  const [selectedVerseNumber, setSelectedVerseNumber] = useState(verse.verseNumber.toString());
+  const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
+  const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
