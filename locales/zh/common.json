@@ -90,6 +90,9 @@
         "text_indopak": "印巴",
         "text_uthmani": "奥斯曼尼"
     },
+    "footer": {
+        "description": "Quran.com 是 Sadaqah Jariyah。我们希望让每个人都能轻松阅读、学习和学习《高贵的古兰经》。高贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。"
+    },
     "from": "从",
     "help": "帮助",
     "hizb": "希兹",
@@ -104,6 +107,7 @@
     "mobile-apps": "移动应用程序",
     "mode": "模式",
     "more": "更多的",
+    "navigate": "导航",
     "network": "网络",
     "next": "下一个",
     "no": "不",
@@ -113,6 +117,7 @@
     "page": "页",
     "pages": "页面",
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
+    "popular-links": "热门链接",
     "powered-by": "供电",
     "prayer-times": {
         "access-denied": "拒绝访问位置。请启用位置访问以获取准确的祈祷时间",

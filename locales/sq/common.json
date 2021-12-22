@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Osmani"
     },
+    "footer": {
+        "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor."
+    },
     "from": "Nga",
     "help": "Ndihmë",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Aplikacionet celulare",
     "mode": "Modaliteti",
     "more": "Më shumë",
+    "navigate": "Navigoni",
     "network": "Rrjeti",
     "next": "Tjetra",
     "no": "Nr",
@@ -113,6 +117,7 @@
     "page": "Faqe",
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
+    "popular-links": "Lidhje popullore",
     "powered-by": "Mundësuar nga",
     "prayer-times": {
         "access-denied": "Qasja në vendndodhje u refuzua. Ju lutemi aktivizoni qasjen në vendndodhje për të marrë kohët e sakta të lutjes",

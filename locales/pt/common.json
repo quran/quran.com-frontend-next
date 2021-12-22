@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com é um Sadaqah Jariyah. Esperamos tornar mais fácil para todos ler, estudar e aprender o Nobre Alcorão. O Nobre Alcorão tem muitos nomes, incluindo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor."
+    },
     "from": "A partir de",
     "help": "Ajuda",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Aplicativos móveis",
     "mode": "Modo",
     "more": "Mais",
+    "navigate": "Navegar",
     "network": "Rede",
     "next": "Próximo",
     "no": "Não",
@@ -113,6 +117,7 @@
     "page": "Página",
     "pages": "Páginas",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
+    "popular-links": "Links populares",
     "powered-by": "Distribuído por",
     "prayer-times": {
         "access-denied": "Acesso ao local negado. Ative o acesso à localização para obter horários de oração precisos",
