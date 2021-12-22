@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor."
+    },
     "from": "From",
     "help": "Help",
     "hizb": "Hizb",
@@ -246,8 +249,5 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes",
-    "footer": {
-        "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor."
-    }
+    "yes": "Yes"
 }

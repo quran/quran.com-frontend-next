@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com ialah Sadaqah Jariyah. Kami berharap dapat memudahkan semua orang membaca, mempelajari dan mempelajari Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, dan Al-Noor."
+    },
     "from": "Dari",
     "help": "Bantuan",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Aplikasi Mudah Alih",
     "mode": "Mod",
     "more": "Lagi",
+    "navigate": "Navigasi",
     "network": "Rangkaian",
     "next": "Seterusnya",
     "no": "Tidak",
@@ -113,6 +117,7 @@
     "page": "Halaman",
     "pages": "Muka Surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
+    "popular-links": "Pautan Popular",
     "powered-by": "Dikuasai oleh",
     "prayer-times": {
         "access-denied": "Akses ke lokasi dinafikan. Sila dayakan akses lokasi untuk mendapatkan waktu solat yang tepat",

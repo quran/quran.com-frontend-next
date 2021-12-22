@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor."
+    },
     "from": "Van",
     "help": "Helpen",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
     "more": "Meer",
+    "navigate": "Navigeren",
     "network": "Netwerk",
     "next": "Volgende",
     "no": "Nee",
@@ -113,6 +117,7 @@
     "page": "Bladzijde",
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
+    "popular-links": "Populaire links",
     "powered-by": "Aangedreven door",
     "prayer-times": {
         "access-denied": "Toegang tot locatie geweigerd. Schakel locatietoegang in om nauwkeurige gebedstijden te krijgen",
