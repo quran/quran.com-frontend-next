@@ -14,7 +14,11 @@ import Input from 'src/components/dls/Forms/Input';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logSearchQuery, logOnValueChange, logOnItemSelectionChange } from 'src/utils/eventLogger';
+import {
+  logEmptySearchResults,
+  logValueChange,
+  logItemSelectionChange,
+} from 'src/utils/eventLogger';
 import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 
@@ -26,7 +30,7 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
 
   const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredTafsirs.length) {
-    logSearchQuery(searchQuery, 'settings_drawer_tafsir');
+    logEmptySearchResults(searchQuery, 'settings_drawer_tafsir');
   }
   return filteredTafsirs as TafsirInfo[];
 };
@@ -49,8 +53,8 @@ const TafsirsSelectionBody = () => {
       ? [...selectedTafsirs, Number(selectedTafsirId)]
       : selectedTafsirs.filter((id) => id !== Number(selectedTafsirId)); // remove the id
 
-    logOnItemSelectionChange('tafsir', selectedTafsirId, isChecked);
-    logOnValueChange('selected_tafsirs', selectedTafsirs, nextTafsirs);
+    logItemSelectionChange('tafsir', selectedTafsirId, isChecked);
+    logValueChange('selected_tafsirs', selectedTafsirs, nextTafsirs);
     dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
   };
 

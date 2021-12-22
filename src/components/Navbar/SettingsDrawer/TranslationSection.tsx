@@ -22,7 +22,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logOnValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 
@@ -53,7 +53,7 @@ const TranslationSection = () => {
 
   const onSelectionCardClicked = useCallback(() => {
     dispatch(setSettingsView(SettingsView.Translation));
-    logOnValueChange('settings_view', SettingsView.Translation, SettingsView.Body);
+    logValueChange('settings_view', SettingsView.Translation, SettingsView.Body);
   }, [dispatch]);
 
   const renderTranslations = useCallback(
@@ -82,12 +82,12 @@ const TranslationSection = () => {
   );
 
   const onFontScaleDecreaseClicked = () => {
-    logOnValueChange('translation_font_scale', translationFontScale, translationFontScale - 1);
+    logValueChange('translation_font_scale', translationFontScale, translationFontScale - 1);
     dispatch(decreaseTranslationFontScale());
   };
 
   const onFontScaleIncreaseClicked = () => {
-    logOnValueChange('translation_font_scale', translationFontScale, translationFontScale + 1);
+    logValueChange('translation_font_scale', translationFontScale, translationFontScale + 1);
     dispatch(increaseTranslationFontScale());
   };
 

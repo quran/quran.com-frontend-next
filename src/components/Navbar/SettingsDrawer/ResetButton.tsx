@@ -6,7 +6,7 @@ import styles from './ResetButton.module.scss';
 import Button from 'src/components/dls/Button/Button';
 import { toast, ToastContainer, ToastStatus } from 'src/components/dls/Toast/Toast';
 import resetSettings from 'src/redux/slices/reset-settings';
-import { logOnButtonClicked } from 'src/utils/eventLogger';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 // reset button will dispatch a `reset` action
 // reducers will listen to this action
@@ -16,7 +16,7 @@ const ResetButton = () => {
   const { t, lang } = useTranslation('common');
 
   const onResetSettingsClicked = () => {
-    logOnButtonClicked('reset_settings');
+    logButtonClick('reset_settings');
     dispatch(resetSettings(lang));
     toast(t('settings.reset-notif'), { status: ToastStatus.Success });
   };

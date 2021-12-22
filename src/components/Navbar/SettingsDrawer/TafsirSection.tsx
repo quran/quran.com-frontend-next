@@ -22,7 +22,7 @@ import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logOnValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
@@ -54,7 +54,7 @@ const TafsirSection = () => {
 
   const onSelectionCardClicked = useCallback(() => {
     dispatch(setSettingsView(SettingsView.Tafsir));
-    logOnValueChange('settings_view', SettingsView.Tafsir, SettingsView.Body);
+    logValueChange('settings_view', SettingsView.Tafsir, SettingsView.Body);
   }, [dispatch]);
   const renderTafsirs = useCallback(
     (data: TafsirsResponse) => {
@@ -80,12 +80,12 @@ const TafsirSection = () => {
   );
 
   const onFontScaleDecreaseClicked = () => {
-    logOnValueChange('tafsir_font_scale', tafsirFontScale, tafsirFontScale - 1);
+    logValueChange('tafsir_font_scale', tafsirFontScale, tafsirFontScale - 1);
     dispatch(decreaseTafsirFontScale());
   };
 
   const onFontScaleIncreaseClicked = () => {
-    logOnValueChange('tafsir_font_scale', tafsirFontScale, tafsirFontScale + 1);
+    logValueChange('tafsir_font_scale', tafsirFontScale, tafsirFontScale + 1);
     dispatch(increaseTafsirFontScale());
   };
 

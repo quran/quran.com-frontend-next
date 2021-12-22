@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
-const SEARCH_QUERY_EVENT = 'search_query';
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   import('src/lib/firebase').then((firebaseModule) => {
@@ -15,7 +13,7 @@ export const logEvent = async (eventName: string, params?: { [key: string]: any 
  *
  * @param {string} buttonName
  */
-export const logOnButtonClicked = (buttonName: string) => {
+export const logButtonClick = (buttonName: string) => {
   logEvent(`${buttonName}_clicked`);
 };
 
@@ -26,7 +24,7 @@ export const logOnButtonClicked = (buttonName: string) => {
  * @param {string | boolean | number | string[] | number[] | Record<string, string>} currentValue
  * @param {string | boolean | number | string[] | number[] | Record<string, string>} newValue
  */
-export const logOnValueChange = (
+export const logValueChange = (
   name: string,
   currentValue: string | number | boolean | string[] | number[] | Record<string, string>,
   newValue: string | number | boolean | string[] | number[] | Record<string, string>,
@@ -44,11 +42,10 @@ export const logOnValueChange = (
  * @param {string} source the source of the query e.g settings drawer translation view/command bar.
  * @param {string} type the type of the search query. can be voice or text.
  */
-export const logSearchQuery = (searchQuery: string, source: string, type = 'text') => {
-  logEvent(SEARCH_QUERY_EVENT, {
+export const logEmptySearchResults = (searchQuery: string, source: string, type = 'text') => {
+  logEvent(`${type}_search_query_with_no_result`, {
     query: searchQuery,
     source,
-    type,
   });
 };
 
@@ -59,6 +56,6 @@ export const logSearchQuery = (searchQuery: string, source: string, type = 'text
  * @param {string} itemId
  * @param {boolean} isSelected
  */
-export const logOnItemSelectionChange = (itemName: string, itemId: string, isSelected = true) => {
+export const logItemSelectionChange = (itemName: string, itemId: string, isSelected = true) => {
   logEvent(`${itemName}_${isSelected ? 'selected' : 'unselected'}`, { value: itemId });
 };

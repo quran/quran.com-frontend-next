@@ -14,7 +14,7 @@ import styles from './ThemeSection.module.scss';
 import Switch from 'src/components/dls/Switch/Switch';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
-import { logOnValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from 'src/utils/eventLogger';
 
 const icons = {
   [ThemeType.Dark]: <MoonIcon />,
@@ -44,7 +44,7 @@ const ThemeSection = () => {
   }));
 
   const onThemeSelected = (value) => {
-    logOnValueChange('theme', theme.type, value);
+    logValueChange('theme', theme.type, value);
     dispatch({ type: setTheme.type, payload: value });
   };
 

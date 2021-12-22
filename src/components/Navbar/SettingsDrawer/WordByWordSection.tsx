@@ -16,7 +16,7 @@ import {
   selectWordByWordLocale,
   setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { logOnValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 
 export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
@@ -40,17 +40,17 @@ const WordByWordSection = () => {
    * @param {string} value
    */
   const onWordByWordLocaleChange = (value: string) => {
-    logOnValueChange('wbw_locale', wordByWordLocale, value);
+    logValueChange('wbw_locale', wordByWordLocale, value);
     dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
   };
 
   const onShowWordByWordTranslationChange = (checked) => {
-    logOnValueChange('wbw_translation', !checked, checked);
+    logValueChange('wbw_translation', !checked, checked);
     dispatch(setShowWordByWordTranslation(checked));
   };
 
   const onShowWordByWordTransliterationChange = (checked) => {
-    logOnValueChange('wbw_transliteration', !checked, checked);
+    logValueChange('wbw_transliteration', !checked, checked);
     dispatch(setShowWordByWordTransliteration(checked));
   };
 

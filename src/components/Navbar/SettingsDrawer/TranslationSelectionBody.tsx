@@ -17,7 +17,11 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logSearchQuery, logOnValueChange, logOnItemSelectionChange } from 'src/utils/eventLogger';
+import {
+  logEmptySearchResults,
+  logValueChange,
+  logItemSelectionChange,
+} from 'src/utils/eventLogger';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
@@ -29,7 +33,7 @@ const filterTranslations = (translations, searchQuery: string): AvailableTransla
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredTranslations.length) {
-    logSearchQuery(searchQuery, 'settings_drawer_translation');
+    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
   }
   return filteredTranslations;
 };
@@ -52,8 +56,8 @@ const TranslationSelectionBody = () => {
       ? [...selectedTranslations, Number(selectedTranslationId)]
       : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
-    logOnItemSelectionChange('translation', selectedTranslationId, isChecked);
-    logOnValueChange('selected_translations', selectedTranslations, nextTranslations);
+    logItemSelectionChange('translation', selectedTranslationId, isChecked);
+    logValueChange('selected_translations', selectedTranslations, nextTranslations);
     dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
   };
 

@@ -21,7 +21,7 @@ import {
   selectWordClickFunctionality,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { logOnValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { WordClickFunctionality } from 'types/QuranReader';
@@ -37,7 +37,7 @@ const AudioSection = () => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
 
   const onPlaybackRateChanged = (value) => {
-    logOnValueChange('audio_playback_rate', playbackRate, value);
+    logValueChange('audio_playback_rate', playbackRate, value);
     dispatch(setPlaybackRate(Number(value)));
   };
 
@@ -51,16 +51,16 @@ const AudioSection = () => {
 
   const onSelectionCardClicked = () => {
     dispatch(setSettingsView(SettingsView.Reciter));
-    logOnValueChange('settings_view', SettingsView.Reciter, SettingsView.Body);
+    logValueChange('settings_view', SettingsView.Reciter, SettingsView.Body);
   };
 
   const onRepeatSettingsSelectionCardClicked = () => {
     dispatch(setSettingsView(SettingsView.RepeatSettings));
-    logOnValueChange('settings_view', SettingsView.RepeatSettings, SettingsView.Body);
+    logValueChange('settings_view', SettingsView.RepeatSettings, SettingsView.Body);
   };
   const onEnableAutoScrollingChange = () => {
     const newValue = !enableAutoScrolling;
-    logOnValueChange('audio_auto_scrolling', enableAutoScrolling, newValue);
+    logValueChange('audio_settings_auto_scrolling_enabled', enableAutoScrolling, newValue);
     dispatch(setEnableAutoScrolling(newValue));
   };
 
@@ -69,7 +69,7 @@ const AudioSection = () => {
       wordClickFunctionality === WordClickFunctionality.PlayAudio
         ? WordClickFunctionality.NoAudio
         : WordClickFunctionality.PlayAudio;
-    logOnValueChange('audio_word_click', wordClickFunctionality, newValue);
+    logValueChange('audio_settings_word_click_functionality', wordClickFunctionality, newValue);
     dispatch(setWordClickFunctionality(newValue));
   };
 

@@ -18,7 +18,7 @@ import {
   setLocationAccess,
   setMadhab,
 } from 'src/redux/slices/prayerTimes';
-import { logOnValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from 'src/utils/eventLogger';
 
 const PrayerTimesSection = () => {
   const { t } = useTranslation('common');
@@ -48,18 +48,18 @@ const PrayerTimesSection = () => {
   );
 
   const onCalculationMethodChange = (value) => {
-    logOnValueChange('prayer_times_calculation_method', selectedCalculationMethod, value);
+    logValueChange('prayer_times_calculation_method', selectedCalculationMethod, value);
     dispatch(setCalculationMethod(value as CalculationMethod));
   };
 
   const onMadhabChange = (value) => {
-    logOnValueChange('prayer_times_madhab', selectedMadhab, value);
+    logValueChange('prayer_times_madhab', selectedMadhab, value);
     dispatch(setMadhab(value as Madhab));
   };
 
   const onLocationAccessChange = () => {
     const newValue = isLocationAccessEnabled ? LocationAccess.Off : LocationAccess.On;
-    logOnValueChange(
+    logValueChange(
       'prayer_times_location_access',
       isLocationAccessEnabled,
       !isLocationAccessEnabled,
