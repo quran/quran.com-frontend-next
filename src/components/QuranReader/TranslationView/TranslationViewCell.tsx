@@ -108,7 +108,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           </div>
         </div>
       </div>
-      <Separator />
+      <Separator isTranslationView />
     </div>
   );
 };

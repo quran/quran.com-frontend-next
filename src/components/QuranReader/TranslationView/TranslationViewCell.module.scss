@@ -1,7 +1,26 @@
 @use "src/styles/breakpoints";
 
 .highlightedContainer {
-  background: var(--color-background-alternative-faded);
+  --color-gradient-transition: 196, 196, 196;
+
+  [data-theme="dark"] & {
+    --color-gradient-background-dark: 150, 125, 225;
+    background: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(var(--color-gradient-background-dark), 0.25) 50%, rgba(var(--color-gradient-transition), 0) 90%);
+  }
+
+  [data-theme="light"] & {
+    --color-gradient-background-light: 60, 120, 180;
+    background: radial-gradient(ellipse farthest-corner at -360% -360%, rgba(var(--color-gradient-background-light), 0.45) 50%, rgba(var(--color-gradient-transition), 0) 90%);
+  }
+
+  background-color: var(--color-background-alternative-faded);
+  margin: 0 calc(var(--spacing-medium) * -1);
+  border-radius: var(--spacing-xsmall);
+}
+
+.cellContainer.highlightedContainer {
+  padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
 }
 
 .cellContainer {
