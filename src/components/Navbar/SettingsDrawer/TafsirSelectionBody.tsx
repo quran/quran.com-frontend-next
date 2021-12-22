@@ -14,6 +14,11 @@ import Input from 'src/components/dls/Forms/Input';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import {
+  logEmptySearchResults,
+  logValueChange,
+  logItemSelectionChange,
+} from 'src/utils/eventLogger';
 import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 
@@ -24,6 +29,9 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
   });
 
   const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
+  if (!filteredTafsirs.length) {
+    logEmptySearchResults(searchQuery, 'settings_drawer_tafsir');
+  }
   return filteredTafsirs as TafsirInfo[];
 };
 
@@ -35,15 +43,18 @@ const TafsirsSelectionBody = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const onTafsirsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedTranslationId = e.target.value;
+    const selectedTafsirId = e.target.value;
+    const isChecked = e.target.checked;
 
     // when the checkbox is checked
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
-    const nextTafsirs = e.target.checked
-      ? [...selectedTafsirs, Number(selectedTranslationId)]
-      : selectedTafsirs.filter((id) => id !== Number(selectedTranslationId)); // remove the id
+    const nextTafsirs = isChecked
+      ? [...selectedTafsirs, Number(selectedTafsirId)]
+      : selectedTafsirs.filter((id) => id !== Number(selectedTafsirId)); // remove the id
 
+    logItemSelectionChange('tafsir', selectedTafsirId, isChecked);
+    logValueChange('selected_tafsirs', selectedTafsirs, nextTafsirs);
     dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
   };
 
@@ -70,7 +81,7 @@ const TafsirsSelectionBody = () => {
             <div>
               {Object.entries(tafsirsByLanguages).map(([language, tafsirs]) => {
                 return (
-                  <div className={styles.group}>
+                  <div className={styles.group} key={language}>
                     <div className={styles.language}>{language}</div>
                     {tafsirs.map((tafsir) => (
                       <div key={tafsir.id} className={styles.item}>

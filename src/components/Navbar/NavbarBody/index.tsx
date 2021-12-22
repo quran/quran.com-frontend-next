@@ -21,19 +21,33 @@ import {
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
+import { logEvent } from 'src/utils/eventLogger';
+
+/**
+ * Log drawer events.
+ *
+ * @param {string} drawerName
+ */
+const logDrawerOpenEvent = (drawerName: string) => {
+  // eslint-disable-next-line i18next/no-literal-string
+  logEvent(`drawer_${drawerName}_open`);
+};
 
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
+    logDrawerOpenEvent('navigation');
     dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
   };
 
   const openSearchDrawer = () => {
+    logDrawerOpenEvent('search');
     dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
   };
 
   const openSettingsDrawer = () => {
+    logDrawerOpenEvent('settings');
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
   return (
