@@ -13,7 +13,7 @@ import styles from './SettingsDrawer.module.scss';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
-import { logSettingsViewChangeEvent } from 'src/utils/eventLogger';
+import { logOnValueChange } from 'src/utils/eventLogger';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,
@@ -43,7 +43,7 @@ const SettingsDrawer = () => {
 
   const onGoBackClicked = () => {
     dispatch(setSettingsView(SettingsView.Body));
-    logSettingsViewChangeEvent(SettingsView.Body, settingsView);
+    logOnValueChange('settings_view', SettingsView.Body, settingsView);
   };
   let header;
   if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;

@@ -14,7 +14,7 @@ import styles from './LanguageSelector.module.scss';
 import i18nConfig from 'i18n.json';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
-import { logLocaleChangeEvent } from 'src/utils/eventLogger';
+import { logOnValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 
 const { locales } = i18nConfig;
@@ -52,7 +52,7 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
     if (isUsingDefaultSettings) {
       dispatch(resetSettings(newLocale));
     }
-    logLocaleChangeEvent(lang, newLocale);
+    logOnValueChange('locale', lang, newLocale);
     await setLanguage(newLocale);
     const date = new Date();
     date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);

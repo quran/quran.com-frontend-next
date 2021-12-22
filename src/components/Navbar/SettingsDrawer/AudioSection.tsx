@@ -21,7 +21,7 @@ import {
   selectWordClickFunctionality,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { logSettingsViewChangeEvent, logAudioSettingsChangeEvent } from 'src/utils/eventLogger';
+import { logOnValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { WordClickFunctionality } from 'types/QuranReader';
@@ -37,7 +37,7 @@ const AudioSection = () => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
 
   const onPlaybackRateChanged = (value) => {
-    logAudioSettingsChangeEvent('playback_rate', value);
+    logOnValueChange('audio_playback_rate', playbackRate, value);
     dispatch(setPlaybackRate(Number(value)));
   };
 
@@ -51,25 +51,25 @@ const AudioSection = () => {
 
   const onSelectionCardClicked = () => {
     dispatch(setSettingsView(SettingsView.Reciter));
-    logSettingsViewChangeEvent(SettingsView.Reciter, SettingsView.Body);
+    logOnValueChange('settings_view', SettingsView.Reciter, SettingsView.Body);
   };
 
   const onRepeatSettingsSelectionCardClicked = () => {
     dispatch(setSettingsView(SettingsView.RepeatSettings));
-    logSettingsViewChangeEvent(SettingsView.RepeatSettings, SettingsView.Body);
+    logOnValueChange('settings_view', SettingsView.RepeatSettings, SettingsView.Body);
   };
   const onEnableAutoScrollingChange = () => {
     const newValue = !enableAutoScrolling;
-    logAudioSettingsChangeEvent('auto_scrolling', newValue);
+    logOnValueChange('audio_auto_scrolling', enableAutoScrolling, newValue);
     dispatch(setEnableAutoScrolling(newValue));
   };
 
-  const onWorkClickChange = () => {
+  const onWordClickChange = () => {
     const newValue =
       wordClickFunctionality === WordClickFunctionality.PlayAudio
         ? WordClickFunctionality.NoAudio
         : WordClickFunctionality.PlayAudio;
-    logAudioSettingsChangeEvent('word_click', newValue);
+    logOnValueChange('audio_word_click', wordClickFunctionality, newValue);
     dispatch(setWordClickFunctionality(newValue));
   };
 
@@ -92,7 +92,7 @@ const AudioSection = () => {
           <Section.Label>{t('word-click.title')}</Section.Label>
           <Toggle
             isChecked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
-            onClick={onWorkClickChange}
+            onClick={onWordClickChange}
           />
         </Section.Row>
         <Section.Row>

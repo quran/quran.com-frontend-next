@@ -14,7 +14,7 @@ import Input from 'src/components/dls/Forms/Input';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logSearchQuery, logSettingsChangeEvent } from 'src/utils/eventLogger';
+import { logSearchQuery, logOnValueChange, logOnItemSelectionChange } from 'src/utils/eventLogger';
 import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 
@@ -25,7 +25,9 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
   });
 
   const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
-  logSearchQuery(searchQuery, 'settings drawer tafsir view', !!filteredTafsirs.length);
+  if (!filteredTafsirs.length) {
+    logSearchQuery(searchQuery, 'settings_drawer_tafsir');
+  }
   return filteredTafsirs as TafsirInfo[];
 };
 
@@ -37,21 +39,18 @@ const TafsirsSelectionBody = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const onTafsirsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedTranslationId = e.target.value;
-    const isSelecting = e.target.checked;
+    const selectedTafsirId = e.target.value;
+    const isChecked = e.target.checked;
 
     // when the checkbox is checked
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
-    const nextTafsirs = isSelecting
-      ? [...selectedTafsirs, Number(selectedTranslationId)]
-      : selectedTafsirs.filter((id) => id !== Number(selectedTranslationId)); // remove the id
+    const nextTafsirs = isChecked
+      ? [...selectedTafsirs, Number(selectedTafsirId)]
+      : selectedTafsirs.filter((id) => id !== Number(selectedTafsirId)); // remove the id
 
-    logSettingsChangeEvent(
-      isSelecting ? 'selected_tafsir' : 'unselected_tafsir',
-      selectedTranslationId,
-    );
-    logSettingsChangeEvent('selected_tafsirs', nextTafsirs);
+    logOnItemSelectionChange('tafsir', selectedTafsirId, isChecked);
+    logOnValueChange('selected_tafsirs', selectedTafsirs, nextTafsirs);
     dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
   };
 

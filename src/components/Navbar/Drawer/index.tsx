@@ -20,6 +20,7 @@ import {
   setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
 import { stopSearchDrawerVoiceFlow } from 'src/redux/slices/voiceSearch';
+import { logEvent } from 'src/utils/eventLogger';
 
 export enum DrawerType {
   Navigation = 'navigation',
@@ -68,10 +69,9 @@ const getActionCreator = (type: DrawerType) => {
   return setIsSearchDrawerOpen.type;
 };
 
-const logDrawerAction = (type: string, actionSource: string) => {
-  import('src/utils/eventLogger').then((eventLogger) => {
-    eventLogger.logDrawerEvent(type, false, actionSource);
-  });
+const logDrawerCloseEvent = (type: string, actionSource: string) => {
+  // eslint-disable-next-line i18next/no-literal-string
+  logEvent(`drawer_${type}_close_${actionSource}`);
 };
 
 const Drawer: React.FC<Props> = ({
@@ -94,7 +94,7 @@ const Drawer: React.FC<Props> = ({
       if (type === DrawerType.Search) {
         dispatch({ type: stopSearchDrawerVoiceFlow.type });
       }
-      logDrawerAction(type, actionSource);
+      logDrawerCloseEvent(type, actionSource);
     },
     [dispatch, type],
   );

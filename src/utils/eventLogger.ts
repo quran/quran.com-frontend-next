@@ -1,146 +1,64 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { analytics } from 'src/lib/firebase';
 
-const DRAWER_EVENT = 'drawer';
-const BUTTON_CLICK_EVENT = 'button_click';
-const LOCALE_CHANGE_EVENT = 'locale_change';
-const SETTINGS_CHANGE_EVENT = 'settings_change';
-const SETTINGS_VIEW_CHANGE_EVENT = 'settings_view_change';
 const SEARCH_QUERY_EVENT = 'search_query';
-const WBW = 'word_by_word';
-const TRANSLATION = 'translation';
-const TAFSIR = 'tafsir';
-const AUDIO = 'audio';
-const WBW_TOOLTIP = `${WBW}_tooltip`;
-const PRAYER_TIMES = 'prayer_times';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const logEvent = (eventName: string, params?: { [key: string]: any }) => {
-  analytics().logEvent(eventName, params);
-};
-
-/**
- * Log drawer events.
- *
- * @param {string} drawerName
- * @param {boolean} isOpenAction
- * @param {string} actionSource the source of the close/open action e.g. click/keyboard_shortcut/outside_click/navigation
- */
-export const logDrawerEvent = (drawerName: string, isOpenAction = true, actionSource = 'click') => {
-  logEvent(DRAWER_EVENT, {
-    drawer: drawerName,
-    action: isOpenAction ? 'open' : 'close',
-    action_source: actionSource,
+export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
+  import('src/lib/firebase').then((firebaseModule) => {
+    // eslint-disable-next-line i18next/no-literal-string
+    firebaseModule.analytics().logEvent(eventName, params);
   });
 };
 
 /**
- * Log button clicking events.
+ * Log when a button is clicked.
  *
  * @param {string} buttonName
  */
-export const logButtonClickEvent = (buttonName: string) => {
-  logEvent(BUTTON_CLICK_EVENT, {
-    button: buttonName,
-  });
+export const logOnButtonClicked = (buttonName: string) => {
+  logEvent(`${buttonName}_clicked`);
 };
 
 /**
- * log locale change events.
+ * Log when a value changes.
  *
- * @param {string} currentLocale
- * @param {string} newLocale
+ * @param {string} name
+ * @param {string | boolean | number | string[] | number[] | Record<string, string>} currentValue
+ * @param {string | boolean | number | string[] | number[] | Record<string, string>} newValue
  */
-export const logLocaleChangeEvent = (currentLocale: string, newLocale: string) => {
-  logEvent(LOCALE_CHANGE_EVENT, {
-    current_locale: currentLocale,
-    new_locale: newLocale,
+export const logOnValueChange = (
+  name: string,
+  currentValue: string | number | boolean | string[] | number[] | Record<string, string>,
+  newValue: string | number | boolean | string[] | number[] | Record<string, string>,
+) => {
+  logEvent(`${name}_change`, {
+    current_value: currentValue,
+    new_value: newValue,
   });
 };
 
 /**
- * Log settings change.
- *
- * @param {string} settingsName
- * @param {string | boolean | number | string[] | number[] | Record<string, string>} value
- */
-export const logSettingsChangeEvent = (
-  settingsName: string,
-  value: string | number | boolean | string[] | number[] | Record<string, string>,
-) => {
-  logEvent(SETTINGS_CHANGE_EVENT, {
-    name: settingsName,
-    value,
-  });
-};
-
-export const logAudioSettingsChangeEvent = (audioSettingsName: string, value: string | boolean) => {
-  logSettingsChangeEvent(`${AUDIO}_${audioSettingsName}`, value);
-};
-
-export const logTafsirSettingsChangeEvent = (tafsirSettingsName: string, value: number) => {
-  logSettingsChangeEvent(`${TAFSIR}_${tafsirSettingsName}`, value);
-};
-
-export const logTranslationSettingsChangeEvent = (
-  translationSettingsName: string,
-  value: number,
-) => {
-  logSettingsChangeEvent(`${TRANSLATION}_${translationSettingsName}`, value);
-};
-
-export const logWordByWordSettingsChangeEvent = (
-  wordByWordSettingsName: string,
-  value: boolean | string,
-) => {
-  logSettingsChangeEvent(`${WBW}_${wordByWordSettingsName}`, value);
-};
-
-export const logWordByWordTooltipSettingsChangeEvent = (
-  wordByWordTooltipSettingsName: string,
-  value: string | string[],
-) => {
-  logSettingsChangeEvent(`${WBW_TOOLTIP}${wordByWordTooltipSettingsName}`, value);
-};
-
-export const logPrayerTimesSettingsChangeEvent = (
-  prayerTimesSettingsName: string,
-  value: string | boolean,
-) => {
-  logSettingsChangeEvent(`${PRAYER_TIMES}_${prayerTimesSettingsName}`, value);
-};
-
-/**
- * Log when the settings view change e.g. the user opened the translation view.
- *
- * @param {string} newView
- * @param {string} currentView
- */
-export const logSettingsViewChangeEvent = (newView: string, currentView: string) => {
-  logEvent(SETTINGS_VIEW_CHANGE_EVENT, {
-    current_view: currentView,
-    new_view: newView,
-  });
-};
-
-/**
- * Log any search query the user makes from any text input/ using voice search.
+ * Log when the user makes a search query whether through typing or voice search when there are no results.
  *
  * @param {string} searchQuery
  * @param {string} source the source of the query e.g settings drawer translation view/command bar.
- * @param {boolean} hasResults
  * @param {string} type the type of the search query. can be voice or text.
  */
-export const logSearchQuery = (
-  searchQuery: string,
-  source: string,
-  hasResults = true,
-  type = 'text',
-) => {
+export const logSearchQuery = (searchQuery: string, source: string, type = 'text') => {
   logEvent(SEARCH_QUERY_EVENT, {
     query: searchQuery,
-    has_results: hasResults,
     source,
     type,
   });
+};
+
+/**
+ * Log when an item selection status change.
+ *
+ * @param {string} itemName
+ * @param {string} itemId
+ * @param {boolean} isSelected
+ */
+export const logOnItemSelectionChange = (itemName: string, itemId: string, isSelected = true) => {
+  logEvent(`${itemName}_${isSelected ? 'selected' : 'unselected'}`, { value: itemId });
 };

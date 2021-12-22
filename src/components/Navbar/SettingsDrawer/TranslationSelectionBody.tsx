@@ -17,7 +17,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logSearchQuery, logSettingsChangeEvent } from 'src/utils/eventLogger';
+import { logSearchQuery, logOnValueChange, logOnItemSelectionChange } from 'src/utils/eventLogger';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
@@ -28,7 +28,9 @@ const filterTranslations = (translations, searchQuery: string): AvailableTransla
   });
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
-  logSearchQuery(searchQuery, 'settings drawer translation view', !!filteredTranslations.length);
+  if (!filteredTranslations.length) {
+    logSearchQuery(searchQuery, 'settings_drawer_translation');
+  }
   return filteredTranslations;
 };
 
@@ -41,20 +43,17 @@ const TranslationSelectionBody = () => {
 
   const onTranslationsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTranslationId = e.target.value;
-    const isSelecting = e.target.checked;
+    const isChecked = e.target.checked;
 
     // when the checkbox is checked
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
-    const nextTranslations = isSelecting
+    const nextTranslations = isChecked
       ? [...selectedTranslations, Number(selectedTranslationId)]
       : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
-    logSettingsChangeEvent(
-      isSelecting ? 'selected_translation' : 'unselected_translation',
-      selectedTranslationId,
-    );
-    logSettingsChangeEvent('selected_translations', nextTranslations);
+    logOnItemSelectionChange('translation', selectedTranslationId, isChecked);
+    logOnValueChange('selected_translations', selectedTranslations, nextTranslations);
     dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
   };
 
