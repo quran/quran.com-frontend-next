@@ -85,7 +85,7 @@ const getHighlightedLocation = (
     highlightedLocation.highlightedVerse = Number(verse);
   }
   if (currentHighlightedWordLocation) {
-    const word = currentHighlightedWordLocation[0] + 1; // word location starts at 1 instead of 0, while the the data from API starts at 0
+    const word = currentHighlightedWordLocation[0];
     highlightedLocation.highlightedWord = word;
   }
 
