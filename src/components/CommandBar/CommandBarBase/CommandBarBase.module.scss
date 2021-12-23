@@ -59,6 +59,7 @@ $min-height: calc(9 * var(--spacing-mega));
   &:focus {
     outline: none;
   }
+  z-index: var(--z-index-modal);
 }
 
 @keyframes overlayShow {
@@ -99,4 +100,5 @@ $min-height: calc(9 * var(--spacing-mega));
       animation: overlayHide var(--transition-fast) ease;
     }
   }
+  z-index: var(--z-index-toast);
 }

@@ -34,22 +34,24 @@ const Modal = ({
   isInvertedOverlay = false,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
-    <DialogPrimitive.Overlay
-      className={classNames(styles.overlay, { [styles.invertedOverlay]: isInvertedOverlay })}
-    />
     {trigger && (
       <DialogPrimitive.Trigger asChild>
         <div>{trigger}</div>
       </DialogPrimitive.Trigger>
     )}
-    <Content
-      isPropagationStopped={isPropagationStopped}
-      onInteractOutside={onClickOutside}
-      isBottomSheetOnMobile={isBottomSheetOnMobile}
-      contentClassName={contentClassName}
-    >
-      {children}
-    </Content>
+    <DialogPrimitive.Portal>
+      <DialogPrimitive.Overlay
+        className={classNames(styles.overlay, { [styles.invertedOverlay]: isInvertedOverlay })}
+      />
+      <Content
+        isPropagationStopped={isPropagationStopped}
+        onInteractOutside={onClickOutside}
+        isBottomSheetOnMobile={isBottomSheetOnMobile}
+        contentClassName={contentClassName}
+      >
+        {children}
+      </Content>
+    </DialogPrimitive.Portal>
   </DialogPrimitive.Root>
 );
 

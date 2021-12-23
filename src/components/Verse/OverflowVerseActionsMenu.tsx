@@ -29,6 +29,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
           <OverflowMenuIcon />
         </Button>
       }
+      isModal={false}
     >
       <OverflowVerseActionsMenuBody verse={verse} />
     </PopoverMenu>

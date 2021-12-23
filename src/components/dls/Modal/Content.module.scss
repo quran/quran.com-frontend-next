@@ -104,6 +104,7 @@
       bottom: unset;
     }
   }
+  z-index: var(--z-index-modal);
 }
 .content[data-state="open"] {
   animation: mobileContentIn constants.$animationDuration
