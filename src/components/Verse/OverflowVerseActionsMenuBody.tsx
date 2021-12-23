@@ -6,18 +6,22 @@ import { useRouter } from 'next/router';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
+import ChatIcon from '../../../public/icons/chat.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+import { onShareClicked } from '../QuranReader/TranslationView/ShareVerseButton';
 
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { toast, ToastStatus } from 'src/components/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { getWindowOrigin } from 'src/utils/url';
+import { getQuranReflectVerseUrl } from 'src/utils/navigation';
+import { navigateToExternalUrl } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -68,15 +72,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
     });
   };
 
-  const onShareClicked = () => {
-    const origin = getWindowOrigin();
-    if (origin) {
-      clipboardCopy(`${origin}/${verse.chapterId}/${verse.verseNumber}`).then(() => {
-        setIsShared(true);
-      });
-    }
-  };
-
   const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
 
   const verseUrl = getVerseUrl(verse.verseKey);
@@ -97,7 +92,22 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
 
-      <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
+      <PopoverMenu.Item
+        onClick={() => navigateToExternalUrl(getQuranReflectVerseUrl(verse.verseKey))}
+        icon={<ChatIcon />}
+      >
+        {t('reflect-this-verse')}
+      </PopoverMenu.Item>
+
+      <PopoverMenu.Item
+        onClick={() =>
+          onShareClicked(verse.verseKey, () => {
+            setIsShared(true);
+            toast(t('shared'), { status: ToastStatus.Success });
+          })
+        }
+        icon={<ShareIcon />}
+      >
         {isShared ? `${t('shared')}` : `${t('share')}`}
       </PopoverMenu.Item>
 

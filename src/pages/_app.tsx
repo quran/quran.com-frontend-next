@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
+import { ToastContainer } from 'src/components/dls/Toast/Toast';
 import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
           </IdProvider>
         </ThemeProvider>
       </ReduxProvider>
+      <ToastContainer />
       <ThirdPartyScripts />
     </>
   );
