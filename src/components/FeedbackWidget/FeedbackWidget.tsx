@@ -13,6 +13,7 @@ import {
   selectIsMobileMinimizedForScrolling,
 } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const FeedbackWidget = () => {
   const { t } = useTranslation('common');
@@ -27,7 +28,13 @@ const FeedbackWidget = () => {
         [styles.audioPlayerOpen]: !isHidden,
       })}
     >
-      <Link href="https://feedback.quran.com" newTab>
+      <Link
+        href="https://feedback.quran.com"
+        newTab
+        onClick={() => {
+          logButtonClick('feedback');
+        }}
+      >
         <Button>{t('feedback')}</Button>
       </Link>
     </div>

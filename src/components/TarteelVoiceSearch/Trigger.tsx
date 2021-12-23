@@ -16,6 +16,7 @@ import {
   selectIsCommandBarVoiceFlowStarted,
   selectIsSearchDrawerVoiceFlowStarted,
 } from 'src/redux/slices/voiceSearch';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 interface Props {
   isCommandBar?: boolean;
@@ -35,6 +36,8 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false }) =>
   );
 
   const onMicClicked = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`voice_search_${isCommandBar ? 'command_bar' : 'search_drawer'}`);
     dispatch({
       type: isCommandBar
         ? toggleIsCommandBarVoiceFlowStarted.type

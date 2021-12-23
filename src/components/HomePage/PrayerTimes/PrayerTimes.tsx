@@ -23,6 +23,7 @@ import {
   setLocationAccess,
 } from 'src/redux/slices/prayerTimes';
 import { makePrayerTimesUrl } from 'src/utils/apiPaths';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedDate } from 'src/utils/locale';
 
 const getCoordinates = (): Promise<{
@@ -107,6 +108,7 @@ const PrayerTimes = () => {
    * - if the browser does not support the API. Optimistically get the location data. (This is better for UX)
    */
   const onFindLocationClick = () => {
+    logButtonClick('use_location');
     const permissionQuerySupported = navigator?.permissions?.query;
     if (permissionQuerySupported)
       navigator?.permissions?.query({ name: 'geolocation' }).then((permissionStatus) => {

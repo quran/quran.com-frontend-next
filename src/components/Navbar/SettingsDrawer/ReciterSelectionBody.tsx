@@ -12,6 +12,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
@@ -22,6 +23,9 @@ const filterReciters = (reciters, searchQuery: string): Reciter[] => {
   });
 
   const filteredReciter = fuse.search(searchQuery).map(({ item }) => item);
+  if (!filteredReciter.length) {
+    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+  }
   return filteredReciter as Reciter[];
 };
 

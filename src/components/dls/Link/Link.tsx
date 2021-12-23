@@ -19,6 +19,7 @@ type LinkProps = {
   newTab?: boolean;
   download?: string;
   className?: string;
+  onClick?: React.MouseEventHandler;
 };
 
 const Link: React.FC<LinkProps> = ({
@@ -28,6 +29,7 @@ const Link: React.FC<LinkProps> = ({
   variant,
   download,
   className,
+  onClick,
 }) => (
   <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
     <a
@@ -41,6 +43,7 @@ const Link: React.FC<LinkProps> = ({
         [styles.secondary]: variant === LinkVariant.Secondary,
         [styles.blend]: variant === LinkVariant.Blend,
       })}
+      {...(onClick && { onClick })}
     >
       {children}
     </a>

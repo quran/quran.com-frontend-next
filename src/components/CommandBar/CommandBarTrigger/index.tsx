@@ -10,11 +10,13 @@ import styles from './CommandBarTrigger.module.scss';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const CommandBarTrigger: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const onClick = useCallback(() => {
+    logButtonClick('command_bar_homepage_trigger');
     dispatch({ type: toggleIsOpen.type });
   }, [dispatch]);
   return (
