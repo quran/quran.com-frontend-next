@@ -39,7 +39,10 @@ const CommandBar: React.FC = () => {
     (event: KeyboardEvent) => {
       getPressedShortcut(event);
       // eslint-disable-next-line i18next/no-literal-string
-      logEvent(`command_bar_${isOpen ? 'close' : 'open'}_${getPressedShortcut(event)}`);
+      logEvent(`command_bar_${isOpen ? 'close' : 'open'}`, {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        keyboard_shortcut: getPressedShortcut(event),
+      });
       event.preventDefault();
       dispatch({ type: toggleIsOpen.type });
     },
