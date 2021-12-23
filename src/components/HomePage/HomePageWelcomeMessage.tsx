@@ -39,11 +39,6 @@ const HomePageWelcomeMessage = () => {
           {t('welcome.changes-cta')}
         </Link>
       </p>
-      <p className={styles.link}>
-        <Link variant={LinkVariant.Blend} href="https://discord.gg/FxRWSBfWxn">
-          {t('welcome.join-cta')}
-        </Link>
-      </p>
       <div className={styles.closeIcon}>
         <Button
           size={ButtonSize.Small}
