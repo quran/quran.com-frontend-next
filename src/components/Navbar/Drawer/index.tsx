@@ -102,7 +102,7 @@ const Drawer: React.FC<Props> = ({
   useHotkeys(
     'Escape',
     () => {
-      closeDrawer('keyboard_shortcut');
+      closeDrawer('esc_key');
     },
     { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
   );
