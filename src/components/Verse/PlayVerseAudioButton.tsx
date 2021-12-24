@@ -17,6 +17,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 interface PlayVerseAudioProps {
@@ -40,6 +41,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   }, [audioDataStatus]);
 
   const onPlayClicked = () => {
+    logButtonClick('translation_view_play_verse');
     dispatch(exitRepeatMode());
     dispatch(
       playFrom({
@@ -52,6 +54,11 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
     if (audioDataStatus !== AudioDataStatus.Ready) {
       setIsLoading(true);
     }
+  };
+
+  const onPauseClicked = () => {
+    logButtonClick('translation_view_pause_verse');
+    triggerPauseAudio();
   };
 
   if (isLoading)
@@ -67,7 +74,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
         size={ButtonSize.Small}
         tooltip={t('audio.player.pause')}
         type={ButtonType.Secondary}
-        onClick={triggerPauseAudio}
+        onClick={onPauseClicked}
       >
         <PauseIcon />
       </Button>

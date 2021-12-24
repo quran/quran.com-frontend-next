@@ -10,6 +10,7 @@ import {
   selectReadingPreference,
   setReadingPreference,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { logValueChange } from 'src/utils/eventLogger';
 import { ReadingPreference } from 'types/QuranReader';
 
 const ReadingPreferenceSwitcher = () => {
@@ -35,6 +36,7 @@ const ReadingPreferenceSwitcher = () => {
         items={readingPreferencesOptions}
         selected={readingPreference}
         onSelect={(view) => {
+          logValueChange('reading_preference', readingPreference, view);
           dispatch(setReadingPreference(view as ReadingPreference));
         }}
       />

@@ -6,6 +6,7 @@ import EndOfScrollingButton from './EndOfScrollingButton';
 
 import useScrollToTop from 'src/hooks/useScrollToTop';
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
@@ -24,13 +25,25 @@ const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
         <EndOfScrollingButton
           text={t('prev-surah')}
           href={getSurahNavigationUrl(chapterNumber - 1)}
+          onClick={() => {
+            logButtonClick('chapter_control_prev_chapter');
+          }}
         />
       )}
-      <EndOfScrollingButton text={t('surah-beginning')} onClick={scrollToTop} />
+      <EndOfScrollingButton
+        text={t('surah-beginning')}
+        onClick={() => {
+          logButtonClick('chapter_control_scroll_to_beginning');
+          scrollToTop();
+        }}
+      />
       {!isLastSurah(chapterNumber) && (
         <EndOfScrollingButton
           text={t('next-surah')}
           href={getSurahNavigationUrl(chapterNumber + 1)}
+          onClick={() => {
+            logButtonClick('chapter_control_next_chapter');
+          }}
         />
       )}
     </>
