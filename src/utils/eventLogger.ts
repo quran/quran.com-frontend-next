@@ -53,9 +53,13 @@ export const logEmptySearchResults = (searchQuery: string, source: string, type 
  * Log when an item selection status change.
  *
  * @param {string} itemName
- * @param {string} itemId
+ * @param {string | number} itemId
  * @param {boolean} isSelected
  */
-export const logItemSelectionChange = (itemName: string, itemId: string, isSelected = true) => {
+export const logItemSelectionChange = (
+  itemName: string,
+  itemId: string | number,
+  isSelected = true,
+) => {
   logEvent(`${itemName}_${isSelected ? 'selected' : 'unselected'}`, { value: itemId });
 };
