@@ -19,6 +19,12 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { throwIfError } from 'src/utils/error';
+import {
+  logButtonClick,
+  logEvent,
+  logItemSelectionChange,
+  logValueChange,
+} from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { generateChapterVersesKeys } from 'src/utils/verse';
 import Verse from 'types/Verse';
@@ -148,6 +154,11 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
    * @param {string} type
    */
   const onRangeTypeChange = (type: string) => {
+    logValueChange(
+      'advanced_copy_modal_range_type',
+      showRangeOfVerses ? MULTIPLE_VERSES : SINGLE_VERSE,
+      type,
+    );
     if (type === SINGLE_VERSE) {
       setShowRangeOfVerses(false);
     } else {
@@ -156,6 +167,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   };
 
   const onCopyTextClicked = () => {
+    logButtonClick('advanced_copy_modal_copy');
     setIsLoadingData(true);
     // if a range is selected, we need to validate it first
     if (showRangeOfVerses) {
@@ -188,7 +200,13 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   };
 
   const onShouldCopyTextChange = () => {
-    setShouldCopyText((prevShouldCopyText) => !prevShouldCopyText);
+    setShouldCopyText((prevShouldCopyText) => {
+      logEvent(
+        // eslint-disable-next-line i18next/no-literal-string
+        `advanced_copy_modal_copy_arabic_${prevShouldCopyText ? 'unselected' : 'selected'}`,
+      );
+      return !prevShouldCopyText;
+    });
   };
 
   /**
@@ -197,7 +215,12 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
    * @param {string} shouldCopyString
    */
   const onShouldCopyFootnoteChange = (shouldCopyString: string) => {
-    setShouldCopyFootnotes(shouldCopyString === TRUE_STRING);
+    const shouldCopy = shouldCopyString === TRUE_STRING;
+    logEvent(
+      // eslint-disable-next-line i18next/no-literal-string
+      `advanced_copy_modal_copy_footnote_${shouldCopy ? 'selected' : 'unselected'}`,
+    );
+    setShouldCopyFootnotes(shouldCopy);
   };
 
   /**
@@ -207,13 +230,17 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
    * @returns {void}
    */
   const onCopyTranslationChange = (translationId: string): void => {
-    setTranslations((prevTranslations) => ({
-      ...prevTranslations,
-      [translationId]: {
-        ...prevTranslations[translationId],
-        shouldBeCopied: !prevTranslations[translationId].shouldBeCopied,
-      },
-    }));
+    setTranslations((prevTranslations) => {
+      const shouldBeCopied = !prevTranslations[translationId].shouldBeCopied;
+      logItemSelectionChange('advanced_copy_modal_translation', translationId, shouldBeCopied);
+      return {
+        ...prevTranslations,
+        [translationId]: {
+          ...prevTranslations[translationId],
+          shouldBeCopied,
+        },
+      };
+    });
   };
 
   const ayahSelectionComponent = (
@@ -295,7 +322,14 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       {objectUrl && (
         <p className={styles.customMessage}>
           {t('copy-success')}{' '}
-          <Link href={objectUrl} download="quran.copy.txt" variant={LinkVariant.Highlight}>
+          <Link
+            href={objectUrl}
+            download="quran.copy.txt"
+            variant={LinkVariant.Highlight}
+            onClick={() => {
+              logButtonClick('advanced_copy_modal_download_file');
+            }}
+          >
             {t('common:click-here')}
           </Link>{' '}
           {t('download-copy')}
