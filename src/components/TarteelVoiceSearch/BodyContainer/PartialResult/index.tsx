@@ -18,7 +18,10 @@ const PartialResult: React.FC<Props> = ({ partialTranscript, volume }) => {
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
-        <p className={styles.speakMessage}>{t('voice.suggest')}</p>
+        <div>
+          <h3 className={styles.suggestTitle}>{t('voice.suggest-title')}</h3>
+          <p className={styles.suggestSubtitle}>{t('voice.suggest-subtitle')}</p>
+        </div>
         <div className={styles.circlesContainer}>
           <div
             className={styles.volumeCircle}
