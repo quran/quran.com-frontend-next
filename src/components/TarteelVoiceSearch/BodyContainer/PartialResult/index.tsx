@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
@@ -11,12 +12,13 @@ import { getVolumeLevelMultiplier } from 'src/audioInput/voice';
 interface Props {
   partialTranscript: string;
   volume: number;
+  verticalLayout?: boolean;
 }
 
-const PartialResult: React.FC<Props> = ({ partialTranscript, volume }) => {
+const PartialResult: React.FC<Props> = ({ partialTranscript, volume, verticalLayout }) => {
   const { t } = useTranslation('common');
   return (
-    <div className={styles.outerContainer}>
+    <div className={classNames(styles.outerContainer, verticalLayout && styles.verticalLyaout)}>
       <div className={styles.innerContainer}>
         <div>
           <h3 className={styles.suggestTitle}>{t('voice.suggest-title')}</h3>

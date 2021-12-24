@@ -54,8 +54,10 @@ $height: calc(9 * var(--spacing-mega));
 }
 
 .bodyContainer {
-  padding-block-start: var(--spacing-xsmall);
-  padding-block-end: var(--spacing-xsmall);
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-xsmall);
+    padding-block-end: var(--spacing-xsmall);
+  }
   padding-inline-start: 0;
   padding-inline-end: 0;
   overflow-y: auto;
