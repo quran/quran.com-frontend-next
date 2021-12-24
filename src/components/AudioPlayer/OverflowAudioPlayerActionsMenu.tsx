@@ -24,7 +24,7 @@ const OverflowAudioPlayerActionsMenu = () => {
           </Button>
         }
         onOpenChange={(open: boolean) => {
-          logEvent(`audio_player_menu_${open ? 'open' : 'close'}`);
+          logEvent(`audio_player_overflow_menu_${open ? 'open' : 'close'}`);
         }}
       >
         <OverflowAudioPlayActionsMenuBody />

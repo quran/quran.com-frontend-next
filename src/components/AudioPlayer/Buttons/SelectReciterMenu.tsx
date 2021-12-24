@@ -27,7 +27,7 @@ const SelectReciterMenu = ({ onBack }) => {
               key={reciter.id}
               icon={selectedReciter.id === reciter.id ? <CheckIcon /> : <span />}
               onClick={() => {
-                logButtonClick('audio_player_menu_reciter_item');
+                logButtonClick('audio_player_overflow_menu_reciter_item');
                 logValueChange('reciter', selectedReciter.id, reciter.id);
                 logItemSelectionChange('reciter', reciter.id);
                 dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));

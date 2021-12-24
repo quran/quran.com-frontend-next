@@ -54,7 +54,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
             </span>
           }
           onClick={() => {
-            logButtonClick(`audio_player_menu_playback`);
+            logButtonClick(`audio_player_overflow_menu_playback`);
             setSelectedMenu(AudioPlayerOverflowMenu.AudioSpeed);
           }}
         >
@@ -67,7 +67,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           key={2}
           icon={<PersonIcon />}
           onClick={() => {
-            logButtonClick(`audio_player_menu_reciter`);
+            logButtonClick(`audio_player_overflow_menu_reciter`);
             setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
           }}
         >

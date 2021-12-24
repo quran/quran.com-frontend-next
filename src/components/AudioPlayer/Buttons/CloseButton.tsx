@@ -15,7 +15,7 @@ const CloseButton = () => {
     <PopoverMenu.Item
       shouldCloseMenuAfterClick
       onClick={() => {
-        logButtonClick(`audio_player_menu_close`);
+        logButtonClick(`audio_player_overflow_menu_close`);
         triggerPauseAudio();
         dispatch(resetAudioData(lang));
       }}
