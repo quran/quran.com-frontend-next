@@ -21,9 +21,12 @@
 .suggestTitle {
   font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-semibold);
+  margin-block-end: var(--spacing-xxsmall);
 }
 .suggestSubtitle {
   opacity: var(--opacity-75);
+  max-width: 80%;
+  font-size: var(--font-size-large);
 }
 
 .micCircle {
