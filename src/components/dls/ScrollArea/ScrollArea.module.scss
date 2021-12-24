@@ -1,0 +1,21 @@
+.scrollArea {
+  position: relative;
+  overflow: scroll;
+}
+
+.horizontalScroll {
+  margin-inline-start: 1px;
+  --mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 1) 1%,
+    rgba(0, 0, 0, 1) 95%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
+}
+
+.verticalScroll {
+  // TODO: implement vertical scroll css
+}

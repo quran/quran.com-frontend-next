@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import Link from '../dls/Link/Link';
+import ScrollArea, { Orientation } from '../dls/ScrollArea/ScrollArea';
 
 import styles from './RecentReadingSessions.module.scss';
 
@@ -27,33 +28,35 @@ const RecentReadingSessions = () => {
       {verseKeys.length > 0 && (
         <div className={styles.sessionsContainer}>
           <p className={styles.sessionsHeader}>{t('recently-read')}</p>
-          <div className={styles.verseLinksContainer}>
-            {verseKeys.map((verseKey) => {
-              const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-              const surah = getChapterData(chapterId, lang);
-              return (
-                <div className={styles.verseLink} key={verseKey}>
-                  <Link
-                    href={getVerseToEndOfChapterNavigationUrl(verseKey)}
-                    onClick={onRecentReadingSessionClicked}
-                  >
-                    <SurahPreview
-                      display={SurahPreviewDisplay.Block}
-                      chapterId={Number(chapterId)}
-                      surahNumber={Number(chapterId)}
-                      translatedSurahName={surah.translatedName as string}
-                      surahName={surah.transliteratedName}
-                      description={`${t('common:ayah')} ${toLocalizedNumber(
-                        Number(verseNumber),
-                        lang,
-                      )}`}
-                      verseCount={surah.versesCount}
-                    />
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+          <ScrollArea orientation={Orientation.HORIZONTAL}>
+            <div className={styles.verseLinksContainer}>
+              {verseKeys.map((verseKey) => {
+                const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+                const surah = getChapterData(chapterId, lang);
+                return (
+                  <div className={styles.verseLink} key={verseKey}>
+                    <Link
+                      href={getVerseToEndOfChapterNavigationUrl(verseKey)}
+                      onClick={onRecentReadingSessionClicked}
+                    >
+                      <SurahPreview
+                        display={SurahPreviewDisplay.Block}
+                        chapterId={Number(chapterId)}
+                        surahNumber={Number(chapterId)}
+                        translatedSurahName={surah.translatedName as string}
+                        surahName={surah.transliteratedName}
+                        description={`${t('common:ayah')} ${toLocalizedNumber(
+                          Number(verseNumber),
+                          lang,
+                        )}`}
+                        verseCount={surah.versesCount}
+                      />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </ScrollArea>
         </div>
       )}
     </>
