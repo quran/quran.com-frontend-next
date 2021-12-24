@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 body {
   min-height: 100vh;
   background: var(--color-background-default);
@@ -36,5 +38,14 @@ textarea {
 }
 
 a {
+  color: var(--color-text-default);
+}
+
+select option {
+  background-color: var(--color-background-inverse);
+}
+
+select option {
+  background-color: var(--color-background-default);
   color: var(--color-text-default);
 }
