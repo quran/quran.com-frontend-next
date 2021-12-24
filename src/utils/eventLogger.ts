@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   import('src/lib/firebase').then((firebaseModule) => {
     // eslint-disable-next-line i18next/no-literal-string
@@ -26,8 +26,8 @@ export const logButtonClick = (buttonName: string) => {
  */
 export const logValueChange = (
   name: string,
-  currentValue: string | number | boolean | string[] | number[] | Record<string, string>,
-  newValue: string | number | boolean | string[] | number[] | Record<string, string>,
+  currentValue: string | number | boolean | string[] | number[] | Record<string, any>,
+  newValue: string | number | boolean | string[] | number[] | Record<string, any>,
 ) => {
   logEvent(`${name}_change`, {
     current_value: currentValue,
@@ -53,9 +53,13 @@ export const logEmptySearchResults = (searchQuery: string, source: string, type 
  * Log when an item selection status change.
  *
  * @param {string} itemName
- * @param {string} itemId
+ * @param {string | number} itemId
  * @param {boolean} isSelected
  */
-export const logItemSelectionChange = (itemName: string, itemId: string, isSelected = true) => {
+export const logItemSelectionChange = (
+  itemName: string,
+  itemId: string | number,
+  isSelected = true,
+) => {
   logEvent(`${itemName}_${isSelected ? 'selected' : 'unselected'}`, { value: itemId });
 };

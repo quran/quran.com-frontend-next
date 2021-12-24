@@ -12,6 +12,7 @@ import {
   selectIsDownloadingAudio,
   setIsDownloadingAudio,
 } from 'src/redux/slices/AudioPlayer/state';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const download = (url: string, onDone: () => void) => {
   const splits = url.substring(url.lastIndexOf('/') + 1).split('?');
@@ -38,6 +39,7 @@ const DownloadAudioButton = () => {
   const dispatch = useDispatch();
 
   const onClick = () => {
+    logButtonClick('audio_player_download');
     dispatch(setIsDownloadingAudio(true));
     download(audioData.audioUrl, () => {
       dispatch(setIsDownloadingAudio(false));

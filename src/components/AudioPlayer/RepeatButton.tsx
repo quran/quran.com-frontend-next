@@ -15,12 +15,18 @@ import {
   selectRemainingRangeRepeatCount,
   selectAudioData,
 } from 'src/redux/slices/AudioPlayer/state';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const RepeatAudioButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const audioData = useSelector(selectAudioData, shallowEqual);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const remainingRangeRepeatCount = useSelector(selectRemainingRangeRepeatCount);
+
+  const onButtonClicked = () => {
+    logButtonClick('audio_player_repeat');
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -41,7 +47,7 @@ const RepeatAudioButton = () => {
           disabled={!audioData}
           variant={ButtonVariant.Ghost}
           shape={ButtonShape.Circle}
-          onClick={() => setIsModalOpen(true)}
+          onClick={onButtonClicked}
         >
           <RepeatIcon />
         </Button>

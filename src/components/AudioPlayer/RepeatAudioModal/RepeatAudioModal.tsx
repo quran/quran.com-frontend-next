@@ -22,6 +22,7 @@ import {
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
+import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { generateChapterVersesKeys, getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 
 type RepeatAudioModalProps = {
@@ -85,6 +86,7 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const onPlayClick = () => {
+    logButtonClick('start_repeat_play');
     dispatch(setRepeatSettings({ verseRepetition, locale: lang }));
     dispatch(
       playFrom({
@@ -95,14 +97,19 @@ const RepeatAudioModal = ({
     );
     onClose();
   };
-  const onCancelClick = () => onClose();
+  const onCancelClick = () => {
+    logButtonClick('repeat_cancel');
+    onClose();
+  };
   const onStopRepeating = () => {
+    logButtonClick('stop_repeating');
     dispatch(exitRepeatMode());
     triggerPauseAudio();
     onClose();
   };
 
   const onRepetitionModeChange = (mode: RepetitionMode) => {
+    logValueChange('repitition_mode', repetitionMode, mode);
     setVerseRepetition((prevVerseRepetition) => ({
       ...prevVerseRepetition,
       from: mode === RepetitionMode.Single ? selectedVerseKey : firstVerseKeyInThisChapter,
@@ -138,21 +145,30 @@ const RepeatAudioModal = ({
             label={t('audio.player.play-range')}
             value={verseRepetition.repeatRange}
             minValue={1}
-            onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatRange: val })}
+            onChange={(val) => {
+              logValueChange('repeat_play_range', verseRepetition.repeatRange, val);
+              setVerseRepetition({ ...verseRepetition, repeatRange: val });
+            }}
             suffix={t('audio.player.times')}
           />
           <RepeatSetting
             label={t('audio.player.repeat-verse')}
             value={verseRepetition.repeatEachVerse}
             minValue={1}
-            onChange={(val) => setVerseRepetition({ ...verseRepetition, repeatEachVerse: val })}
+            onChange={(val) => {
+              logValueChange('repeat_verse', verseRepetition.repeatEachVerse, val);
+              setVerseRepetition({ ...verseRepetition, repeatEachVerse: val });
+            }}
             suffix={t('audio.player.times')}
           />
           <RepeatSetting
             label={t('audio.player.delay-verse')}
             value={verseRepetition.delayMultiplier}
             minValue={0}
-            onChange={(val) => setVerseRepetition({ ...verseRepetition, delayMultiplier: val })}
+            onChange={(val) => {
+              logValueChange('repeat_delay_multiplier', verseRepetition.delayMultiplier, val);
+              setVerseRepetition({ ...verseRepetition, delayMultiplier: val });
+            }}
             suffix={t('audio.player.times')}
             step={0.5}
           />

@@ -23,6 +23,7 @@ import {
   NavigationItem,
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
+import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
 
 const Loading = () => (
   <div className={styles.loadingContainer}>
@@ -51,6 +52,7 @@ const SidebarNavigation = () => {
   useOutsideClickDetector(
     sidebarRef,
     () => {
+      logEvent('sidebar_navigation_close_outside_click');
       dispatch(setIsVisible(false));
     },
     isMobile(),
@@ -85,6 +87,7 @@ const SidebarNavigation = () => {
             items={navigationItems}
             selected={selectedNavigationItem}
             onSelect={(value) => {
+              logValueChange('sidebar_navigation_view', selectedNavigationItem, value);
               dispatch(selectNavigationItem(value as NavigationItem));
             }}
           />
@@ -95,6 +98,7 @@ const SidebarNavigation = () => {
           size={ButtonSize.Small}
           variant={ButtonVariant.Ghost}
           onClick={() => {
+            logButtonClick('sidebar_navigation_close');
             dispatch(setIsVisible(false));
           }}
         >
