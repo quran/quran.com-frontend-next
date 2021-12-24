@@ -12,7 +12,11 @@ import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
-import { logEmptySearchResults } from 'src/utils/eventLogger';
+import {
+  logEmptySearchResults,
+  logItemSelectionChange,
+  logValueChange,
+} from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
@@ -40,6 +44,8 @@ const SettingsReciter = () => {
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
+    logValueChange('reciter', selectedReciter.id, reciter.id);
+    logItemSelectionChange('reciter', reciter.id);
     dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
   };
 
