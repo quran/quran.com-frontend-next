@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -6,6 +6,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
+import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
@@ -21,6 +22,21 @@ const VerseList = () => {
     [currentChapterId],
   );
 
+  const filteredVerseKeys = verseKeys.filter((verseKey) => {
+    const verseNumber = getVerseNumberFromKey(verseKey);
+    const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
+    return (
+      localizedVerseNumber.toString().startsWith(searchQuery) ||
+      verseNumber.toString().startsWith(searchQuery)
+    );
+  });
+
+  useEffect(() => {
+    if (!filteredVerseKeys.length) {
+      logEmptySearchResults(searchQuery, 'sidebar_navigation_verse_list');
+    }
+  }, [searchQuery, filteredVerseKeys]);
+
   return (
     <div className={styles.verseListContainer}>
       <input
@@ -30,14 +46,9 @@ const VerseList = () => {
         placeholder={t('verse')}
       />
       <div className={styles.list}>
-        {verseKeys.map((verseKey) => {
+        {filteredVerseKeys.map((verseKey) => {
           const verseNumber = getVerseNumberFromKey(verseKey);
           const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
-          if (
-            !localizedVerseNumber.toString().startsWith(searchQuery) &&
-            !verseNumber.toString().startsWith(searchQuery)
-          )
-            return null;
           return (
             <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)} key={verseKey}>
               <div className={styles.listItem}>{localizedVerseNumber}</div>
