@@ -10,6 +10,7 @@ import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 import Slider, { Direction } from 'src/components/dls/Slider';
 import useDirection from 'src/hooks/useDirection';
 import { secondsFormatter } from 'src/utils/datetime';
+import { logEvent } from 'src/utils/eventLogger';
 
 const NUMBER_OF_STEPS = 100;
 
@@ -47,6 +48,7 @@ const AudioPlayerSlider = ({
   const currentSteps = useMemo(() => [currentStep], [currentStep]);
   const handleOnValueChange = useCallback(
     (newValue: number[]) => {
+      logEvent('audio_player_slider_value_change');
       const [newStep] = newValue;
       setCurrentStep(newStep);
       triggerSetCurrentTime(getNewCurrentTime(newStep, audioDuration));

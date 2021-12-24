@@ -9,6 +9,7 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import { selectPlaybackRate, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
@@ -27,8 +28,11 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
 
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item
+      key={playbackRate}
       icon={playbackRate === currentPlaybackRate ? <CheckIcon /> : <span />}
       onClick={() => {
+        logButtonClick('audio_player_menu_playback_item');
+        logValueChange('audio_playback_rate', currentPlaybackRate, playbackRate);
         dispatch(setPlaybackRate(playbackRate));
         onBack();
       }}

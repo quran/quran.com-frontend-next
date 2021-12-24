@@ -12,6 +12,7 @@ import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
 import { getFootnote } from 'src/api';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
@@ -86,8 +87,10 @@ const TranslationText: React.FC<Props> = ({
         if (footNoteId) {
           // if this is the second time to click the footnote, close it
           if (showFootnote && footnote && footnote.id === Number(footNoteId)) {
+            logButtonClick('translation_footnote_double_click_to_close');
             resetFootnote();
           } else {
+            logButtonClick('translation_show_footnote');
             resetSubFootnote();
             setShowFootnote(true);
             setIsLoading(true);
@@ -106,8 +109,10 @@ const TranslationText: React.FC<Props> = ({
           const footnoteText = target.innerText.trim();
           // if this is the second time we are clicking on the footnote, we close it.
           if (footnote && footnote.id === footnoteText) {
+            logButtonClick('translation_pre_defined_footnote_double_click_to_close');
             resetFootnote();
           } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
+            logButtonClick('translation_pre_defined_footnote');
             resetSubFootnote();
             setFootnote({
               id: footnoteText,
@@ -121,8 +126,10 @@ const TranslationText: React.FC<Props> = ({
         const subFootnoteId = `${footnote.id} - ${footnoteText}`;
         // if this is the second time we are clicking on the sub footnote, we close it.
         if (subFootnote && subFootnote.id === subFootnoteId) {
+          logButtonClick('translation_sub_footnote_double_click_to_close');
           resetSubFootnote();
         } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
+          logButtonClick('translation_show_sub_footnote');
           setSubFootnote({
             id: subFootnoteId,
             text: PRE_DEFINED_FOOTNOTES[footnoteText],
@@ -151,7 +158,14 @@ const TranslationText: React.FC<Props> = ({
         <FootnoteText
           footnote={footnote}
           isLoading={isLoading}
-          onCloseClicked={isLoading ? hideFootnote : resetFootnote}
+          onCloseClicked={() => {
+            logButtonClick('translation_footnote_close');
+            if (isLoading) {
+              hideFootnote();
+            } else {
+              resetFootnote();
+            }
+          }}
           onTextClicked={(event) => onTextClicked(event, true)}
         />
       )}

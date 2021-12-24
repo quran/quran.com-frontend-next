@@ -9,6 +9,7 @@ import styles from './SidebarNavigation.module.scss';
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
@@ -20,6 +21,9 @@ const filterSurah = (surah, searchQuery: string) => {
   });
 
   const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
+  if (!filteredSurah.length) {
+    logEmptySearchResults(searchQuery, 'sidebar_navigation_chapter_list');
+  }
   return filteredSurah as Chapter[];
 };
 

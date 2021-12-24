@@ -34,15 +34,15 @@ const Modal = ({
   isInvertedOverlay = false,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
+    {trigger && (
+      <DialogPrimitive.Trigger asChild>
+        <div>{trigger}</div>
+      </DialogPrimitive.Trigger>
+    )}
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay
         className={classNames(styles.overlay, { [styles.invertedOverlay]: isInvertedOverlay })}
       />
-      {trigger && (
-        <DialogPrimitive.Trigger asChild>
-          <div>{trigger}</div>
-        </DialogPrimitive.Trigger>
-      )}
       <Content
         isPropagationStopped={isPropagationStopped}
         onInteractOutside={onClickOutside}

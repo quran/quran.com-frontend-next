@@ -3,6 +3,7 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
 
@@ -17,6 +18,9 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
       size={ButtonSize.Small}
       href={getVerseNavigationUrlByVerseKey(verseKey)}
       type={ButtonType.Secondary}
+      onClick={() => {
+        logButtonClick('translation_view_verse_link');
+      }}
     >
       {toLocalizedVerseKey(verseKey, lang)}
     </Button>

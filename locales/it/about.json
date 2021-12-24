@@ -6,11 +6,11 @@
     },
     "main-desc": "Il Nobile Corano è il testo religioso centrale dell'Islam. I musulmani credono che il Corano sia il libro della guida e della direzione divina per l'umanità e considerano il testo arabo originale la rivelazione finale di Allah (Dio). Tutte le traduzioni del testo arabo originale sono quindi interpretazioni dei significati originali e dovrebbero essere accettate come tali.",
     "meccan": {
-        "desc": "Le sure meccane sono i capitoli cronologicamente precedenti (sura) del Corano che furono, secondo la tradizione islamica, rivelati prima della migrazione del profeta islamico Muhammed e dei suoi seguaci dalla Mecca a Medina (Hijra). Le sure medinesi sono quelle rivelazioni avvenute dopo il trasferimento nella città omonima.",
+        "desc": "Le sure meccane sono i capitoli cronologicamente precedenti (sura) del Corano che furono, secondo la tradizione islamica, rivelati prima della migrazione del profeta islamico Muhammed (ﷺ) e dei suoi seguaci dalla Mecca a Medina (Hijra). Le sure medinesi sono quelle rivelazioni avvenute dopo il trasferimento nella città omonima.",
         "surahs": "Sura della Mecca"
     },
     "median": {
-        "desc": "Le sure medinesi o capitoli medinesi del Corano sono le ultime 24 sure che, secondo la tradizione islamica, furono rivelate a Medina dopo l'hijra di Maometto dalla Mecca. Queste sure furono rivelate da Allah quando la comunità musulmana era più numerosa e sviluppata, in contrasto con la loro posizione di minoranza alla Mecca.",
+        "desc": "Le sure medinesi o capitoli medinesi del Corano sono le ultime 24 sure che, secondo la tradizione islamica, furono rivelate a Medina dopo l'hijra di Maometto (ﷺ) dalla Mecca. Queste sure furono rivelate da Allah quando la comunità musulmana era più numerosa e sviluppata, in contrasto con la loro posizione di minoranza alla Mecca.",
         "surahs": "Sura di Medinan"
     },
     "questions": "In caso di domande, puoi visitare la pagina <0> feedback <\/0> .",

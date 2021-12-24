@@ -18,6 +18,7 @@ const PageSelection = () => {
       getHref={getPageNavigationUrl}
       searchPlaceholder={t('sidebar.search-page')}
       renderItem={(page) => `${t('page')} ${page.label}`}
+      isJuz={false}
     />
   );
 };

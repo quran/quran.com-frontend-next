@@ -49,7 +49,7 @@
 }
 
 .overlay {
-  z-index: 9999999999;
+  z-index: var(--z-index-overlay);
   background: var(--color-background-backdrop);
   position: fixed;
   inset: 0;

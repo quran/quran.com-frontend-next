@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "อุทุมณี"
     },
+    "footer": {
+        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor"
+    },
     "from": "จาก",
     "help": "ช่วย",
     "hizb": "ฮิซบี",
@@ -104,6 +107,7 @@
     "mobile-apps": "แอพมือถือ",
     "mode": "โหมด",
     "more": "มากกว่า",
+    "navigate": "นำทาง",
     "network": "เครือข่าย",
     "next": "ต่อไป",
     "no": "เลขที่",
@@ -113,6 +117,7 @@
     "page": "หน้าหนังสือ",
     "pages": "หน้า",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
+    "popular-links": "ลิงค์ยอดนิยม",
     "powered-by": "ขับเคลื่อนโดย",
     "prayer-times": {
         "access-denied": "การเข้าถึงตำแหน่งถูกปฏิเสธ โปรดเปิดใช้งานการเข้าถึงตำแหน่งเพื่อรับเวลาละหมาดที่ถูกต้อง",

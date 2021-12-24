@@ -14,6 +14,7 @@ import styles from './LanguageSelector.module.scss';
 import i18nConfig from 'i18n.json';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
+import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 
 const { locales } = i18nConfig;
@@ -27,18 +28,6 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
-};
-
-export const changeLocale = async (newLocale: string, dispatch, isUsingDefaultSettings) => {
-  // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
-  if (isUsingDefaultSettings) {
-    dispatch(resetSettings(newLocale));
-  }
-  await setLanguage(newLocale);
-  const date = new Date();
-  date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
-  // eslint-disable-next-line i18next/no-literal-string
-  document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
 };
 
 const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
@@ -60,7 +49,16 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
    * @param {string} newLocale
    */
   const onChange = async (newLocale: string) => {
-    changeLocale(newLocale, dispatch, isUsingDefaultSettings);
+    // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
+    if (isUsingDefaultSettings) {
+      dispatch(resetSettings(newLocale));
+    }
+    logValueChange('locale', lang, newLocale);
+    await setLanguage(newLocale);
+    const date = new Date();
+    date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
+    // eslint-disable-next-line i18next/no-literal-string
+    document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
   };
 
   return (
@@ -88,6 +86,13 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
           </Button>
         )
       }
+      onOpenChange={(open: boolean) => {
+        logEvent(
+          `${shouldShowSelectedLang ? 'footer' : 'navbar'}_language_selector_${
+            open ? 'open' : 'close'
+          }`,
+        );
+      }}
     >
       {options.map((option) => (
         <PopoverMenu.Item

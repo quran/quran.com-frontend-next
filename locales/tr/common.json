@@ -90,6 +90,9 @@
         "text_indopak": "Hint Paketi",
         "text_uthmani": "Osmanca"
     },
+    "footer": {
+        "description": "Kuran.com bir Sadaqah Jariyah'dır. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır."
+    },
     "from": "İtibaren",
     "help": "Yardım",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Mobil uygulamalar",
     "mode": "mod",
     "more": "Daha",
+    "navigate": "Gezin",
     "network": "Ağ",
     "next": "Sonraki",
     "no": "Numara",
@@ -113,6 +117,7 @@
     "page": "Sayfa",
     "pages": "Sayfalar",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
+    "popular-links": "Popüler Bağlantılar",
     "powered-by": "Tarafından desteklenmektedir",
     "prayer-times": {
         "access-denied": "Konum erişimi reddedildi. Doğru namaz vakitlerini almak için lütfen konum erişimini etkinleştirin",

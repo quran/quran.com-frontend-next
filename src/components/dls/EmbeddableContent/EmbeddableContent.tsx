@@ -11,11 +11,13 @@ type EmbeddableContentProps = {
   children: React.ReactNode;
   hasCloseButton?: boolean;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EmbeddableContent = ({
-  children,
   isOpen,
   onClose,
-  hasCloseButton = true,
+  hasCloseButton,
+  children,
 }: EmbeddableContentProps) => {
   return (
     <Dialog.Root open={isOpen}>
