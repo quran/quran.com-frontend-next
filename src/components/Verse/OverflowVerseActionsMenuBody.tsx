@@ -87,9 +87,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
       <VerseActionAdvancedCopy verse={verse} />
 
       <TafsirModal verse={verse} />
-      {/* <PopoverMenu.Item onClick={onTafsirsClicked} icon={<TafsirIcon />}>
-        {t('quran-reader:tafsirs')}
-      </PopoverMenu.Item> */}
 
       <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
         {isShared ? `${t('shared')}` : `${t('share')}`}

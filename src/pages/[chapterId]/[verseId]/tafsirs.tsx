@@ -7,7 +7,6 @@ import styles from './tafsirs.module.scss';
 
 import { getChapterIdBySlug, getChapterVerses, fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-// import QuranReader from 'src/components/QuranReader';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
 import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
@@ -23,7 +22,6 @@ import {
 import { stripHTMLTags } from 'src/utils/string';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
 import { ChapterResponse, TafsirsResponse, VersesResponse } from 'types/ApiResponses';
-// import { QuranReaderDataType } from 'types/QuranReader';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -66,11 +64,6 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses, tafsi
           initialTafsirIds={router.query.tafsirId ? [Number(router.query.tafsiirId)] : undefined}
         />
       </div>
-      {/* <QuranReader
-        initialData={verses}
-        id={chapter.chapter.id}
-        quranReaderDataType={QuranReaderDataType.Tafsir}
-      /> */}
     </>
   );
 };
@@ -99,7 +92,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const chapterData = getChapterData(chapterIdOrSlug, locale);
 
   const tafsirData = await fetcher(
-    // @ts-ignore
     makeTafsirContentUrl(getTafsirsInitialState(locale).selectedTafsirs[0], verseId, {
       words: true,
       ...getDefaultWordFields(),
