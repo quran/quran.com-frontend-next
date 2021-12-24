@@ -14,6 +14,7 @@ import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
 import { selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 /**
  * We're using (`1x` `1.25x`) as a replacement for `icon` in popover menu
@@ -43,15 +44,19 @@ const OverflowAudioPlayActionsMenuBody = () => {
   const menus = useMemo(
     () => ({
       [AudioPlayerOverflowMenu.Main]: [
-        <DownloadAudioButton />,
+        <DownloadAudioButton key={0} />,
         <PopoverMenu.Item
+          key={1}
           icon={
             <span style={{ fontSize: getPlaybackRateLabelFontSize(playbackRate) }}>
               {playbackRate}
               {t('audio.playback-speed-unit')}
             </span>
           }
-          onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.AudioSpeed)}
+          onClick={() => {
+            logButtonClick(`audio_player_menu_playback`);
+            setSelectedMenu(AudioPlayerOverflowMenu.AudioSpeed);
+          }}
         >
           <div className={styles.menuWithNestedItems}>
             {t('audio.playback-speed')}
@@ -59,16 +64,20 @@ const OverflowAudioPlayActionsMenuBody = () => {
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
+          key={2}
           icon={<PersonIcon />}
-          onClick={() => setSelectedMenu(AudioPlayerOverflowMenu.Reciter)}
+          onClick={() => {
+            logButtonClick(`audio_player_menu_reciter`);
+            setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
+          }}
         >
           <div className={styles.menuWithNestedItems}>
             {t('audio.select-reciter')}
             <ChevronRightIcon />
           </div>
         </PopoverMenu.Item>,
-        <PopoverMenu.Divider />,
-        <CloseButton />,
+        <PopoverMenu.Divider key={3} />,
+        <CloseButton key={4} />,
       ],
       [AudioPlayerOverflowMenu.AudioSpeed]: (
         <AudioPlaybackRateMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />

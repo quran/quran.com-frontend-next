@@ -13,11 +13,22 @@ type PopoverMenuProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
   isPortalled?: boolean;
+  onOpenChange?: (open: boolean) => void;
 };
-const PopoverMenu = ({ children, isOpen, trigger, isPortalled = true }: PopoverMenuProps) => {
+const PopoverMenu = ({
+  children,
+  isOpen,
+  trigger,
+  isPortalled = true,
+  onOpenChange,
+}: PopoverMenuProps) => {
   const direction = useDirection();
   return (
-    <PrimitiveDropdownMenu.Root dir={direction as Direction} open={isOpen}>
+    <PrimitiveDropdownMenu.Root
+      dir={direction as Direction}
+      open={isOpen}
+      {...(onOpenChange && { onOpenChange })}
+    >
       {trigger && (
         <PrimitiveDropdownMenu.Trigger asChild>
           <span>{trigger}</span>

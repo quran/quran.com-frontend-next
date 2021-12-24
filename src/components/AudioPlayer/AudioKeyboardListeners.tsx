@@ -2,6 +2,8 @@ import { useCallback } from 'react';
 
 import { useHotkeys, Options } from 'react-hotkeys-hook';
 
+import { logEvent } from 'src/utils/eventLogger';
+
 const SEEK_DURATION = 10;
 type AudioKeyBoardListenersProps = {
   togglePlaying: () => void;
@@ -16,6 +18,7 @@ const AudioKeyBoardListeners = ({
 }: AudioKeyBoardListenersProps) => {
   const toggleAudioPlayer = useCallback(
     (event: KeyboardEvent) => {
+      logEvent('audio_player_toggle_keyboard_shortcut');
       event.preventDefault();
       togglePlaying();
     },
@@ -23,6 +26,7 @@ const AudioKeyBoardListeners = ({
   );
   const seekForward = useCallback(
     (event: KeyboardEvent) => {
+      logEvent('audio_player_fwd_keyboard_shortcut');
       event.preventDefault();
       seek(SEEK_DURATION);
     },
@@ -30,6 +34,7 @@ const AudioKeyBoardListeners = ({
   );
   const seekBackwards = useCallback(
     (event: KeyboardEvent) => {
+      logEvent('audio_player_bwd_keyboard_shortcut');
       event.preventDefault();
       seek(-SEEK_DURATION);
     },
