@@ -23,6 +23,7 @@ const themeDecorator = (Story, context) => {
            width: '100vw',
            height: '100vh',
            padding: '1rem',
+           boxSizing: 'border-box',
           }}>
           <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
             <Story />

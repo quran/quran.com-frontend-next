@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-
 import classNames from 'classnames';
 
 import styles from './ScrollArea.module.scss';

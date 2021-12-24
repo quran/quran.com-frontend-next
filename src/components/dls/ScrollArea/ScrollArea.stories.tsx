@@ -5,7 +5,7 @@ export default {
   title: 'dls/ScrollArea',
 };
 
-const TAGS = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+const TAGS = Array.from({ length: 50 }).map((index, i, a) => `v1.2.0-beta.${a.length - i}`);
 const Tag = ({ children }) => {
   return (
     <div
