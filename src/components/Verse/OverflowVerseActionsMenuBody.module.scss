@@ -1,0 +1,5 @@
+.container {
+  [data-radix-popper-content-wrapper] {
+    z-index: var(--z-index-spinner);
+  }
+}
