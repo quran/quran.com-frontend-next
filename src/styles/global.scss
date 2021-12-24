@@ -42,10 +42,6 @@ a {
 }
 
 select option {
-  background-color: var(--color-background-inverse);
-}
-
-select option {
   background-color: var(--color-background-default);
   color: var(--color-text-default);
 }
