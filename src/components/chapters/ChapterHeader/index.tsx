@@ -15,6 +15,7 @@ import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { getChapterData } from 'src/utils/chapter';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
 
@@ -62,6 +63,9 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
               prefix={<InfoIcon />}
               href={getSurahInfoNavigationUrl(chapterId)}
               hasSidePadding={false}
+              onClick={() => {
+                logButtonClick('chapter_header_info');
+              }}
             >
               {t('quran-reader:surah-info')}
             </Button>
