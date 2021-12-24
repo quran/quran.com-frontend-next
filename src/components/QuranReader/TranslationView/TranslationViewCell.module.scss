@@ -50,19 +50,13 @@
 
 .actionContainerLeft > .actionItem + .actionItem,
 .actionContainerRight > .actionItem + .actionItem {
-  margin-inline-start: var(--spacing-xsmall);
+  margin-inline-start: var(--spacing-xxsmall);
 }
 
 .secondaryActionItem {
+  transition: opacity var(--transition-fast) ease-in-out;
+  display: none;
   @include breakpoints.tablet {
-    transition: opacity var(--transition-fast) ease-in-out;
-    opacity: 0;
-  }
-}
-.cellContainer:hover {
-  @include breakpoints.tablet {
-    .secondaryActionItem {
-      opacity: 1;
-    }
+    display: initial;
   }
 }

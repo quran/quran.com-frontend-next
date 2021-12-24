@@ -14,6 +14,7 @@ import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import { onShareClicked } from '../QuranReader/TranslationView/ShareVerseButton';
 
+import styles from './OverflowVerseActionsMenyBody.module.scss';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
@@ -93,13 +94,15 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
+        className={styles.hiddenOnDesktop}
         onClick={() => navigateToExternalUrl(getQuranReflectVerseUrl(verse.verseKey))}
         icon={<ChatIcon />}
       >
-        {t('reflect-this-verse')}
+        {t('reflect')}
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
+        className={styles.hiddenOnDesktop}
         onClick={() =>
           onShareClicked(verse.verseKey, () => {
             setIsShared(true);
