@@ -11,6 +11,7 @@ import styles from './OverflowVerseActionsMenuBody.module.scss';
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
 
 const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseActionsMenuBody'), {
@@ -34,6 +35,9 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
         }
         isModal={false}
         isPortalled={false}
+        onOpenChange={(open: boolean) => {
+          logEvent(`verse_actions_menu_${open ? 'open' : 'close'}`);
+        }}
       >
         <OverflowVerseActionsMenuBody verse={verse} />
       </PopoverMenu>

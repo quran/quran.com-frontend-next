@@ -17,6 +17,7 @@ import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
@@ -56,12 +57,14 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   }, [isShared]);
 
   const onCopyClicked = () => {
+    logButtonClick('verse_actions_menu_copy');
     clipboardCopy(verse.textUthmani).then(() => {
       setIsCopied(true);
     });
   };
 
   const onTafsirsClicked = () => {
+    logButtonClick('verse_actions_menu_tafsirs');
     router.push({
       pathname: '/[chapterId]/[verseId]/tafsirs',
       query: { chapterId: verse.chapterId, verseId: verse.verseNumber },
@@ -69,6 +72,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   };
 
   const onShareClicked = () => {
+    logButtonClick('verse_actions_menu_share');
     const origin = getWindowOrigin();
     if (origin) {
       clipboardCopy(`${origin}/${verse.chapterId}/${verse.verseNumber}`).then(() => {
@@ -83,8 +87,15 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   const shouldShowGoToAyah = router.asPath !== verseUrl;
   const dispatch = useDispatch();
   const onToggleBookmarkClicked = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`verse_actions_menu_${isVerseBookmarked ? 'un_bookmark' : 'bookmark'}`);
     dispatch({ type: toggleVerseBookmark.type, payload: verse.verseKey });
   };
+  const onGoToAyahClicked = () => {
+    logButtonClick('verse_actions_menu_go_to_verse');
+    router.push(verseUrl);
+  };
+
   return (
     <>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
@@ -111,7 +122,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
 
       {shouldShowGoToAyah && (
-        <PopoverMenu.Item onClick={() => router.push(verseUrl)} icon={<LinkIcon />}>
+        <PopoverMenu.Item onClick={onGoToAyahClicked} icon={<LinkIcon />}>
           {t('quran-reader:go-ayah')}
         </PopoverMenu.Item>
       )}
