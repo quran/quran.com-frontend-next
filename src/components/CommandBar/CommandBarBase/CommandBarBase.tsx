@@ -11,10 +11,12 @@ type CommandBarBaseProps = {
 const CommandBarBase = ({ onClickOutside, children, isOpen }: CommandBarBaseProps) => {
   return (
     <Dialog.Root open={isOpen}>
-      <Dialog.Overlay className={styles.overlay} />
-      <Dialog.Content className={styles.content} onInteractOutside={onClickOutside}>
-        {children}
-      </Dialog.Content>
+      <Dialog.Portal>
+        <Dialog.Overlay className={styles.overlay} />
+        <Dialog.Content className={styles.content} onInteractOutside={onClickOutside}>
+          {children}
+        </Dialog.Content>
+      </Dialog.Portal>
     </Dialog.Root>
   );
 };

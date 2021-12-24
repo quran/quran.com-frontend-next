@@ -18,6 +18,7 @@ const OverflowAudioPlayerActionsMenu = () => {
     <div dir={direction} className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
         isPortalled={false}
+        isModal={false}
         trigger={
           <Button tooltip={t('more')} variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
             <OverflowMenuIcon />
