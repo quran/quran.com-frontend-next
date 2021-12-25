@@ -50,21 +50,6 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
   }
 
   return (
-    <div
-      className={classNames({
-        [styles.container]: !isCommandBar,
-        // [styles.commandBarContainer]: isCommandBar,
-      })}
-    >
-      <PartialResult
-        verticalLayout={!isCommandBar}
-        partialTranscript={partialTranscript}
-        volume={volume}
-      />
-    </div>
-  );
-
-  return (
     <>
       {searchResult ? (
         <SearchResults searchResult={searchResult} isCommandBar={isCommandBar} />
