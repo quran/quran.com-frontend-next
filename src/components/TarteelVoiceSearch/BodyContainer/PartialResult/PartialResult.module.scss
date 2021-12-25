@@ -1,14 +1,17 @@
+@use "src/styles/breakpoints";
+
 .outerContainer {
   width: 100%;
+  box-sizing: border-box;
+  padding-inline: var(--spacing-medium);
 }
 
 .innerContainer {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
   justify-content: space-between;
   margin-block-end: calc(2 * var(--spacing-mega));
+  margin-block-start: calc(1.5 * var(--spacing-mega));
 }
 
 .transcript {
@@ -16,9 +19,15 @@
   min-height: var(--spacing-large);
 }
 
-.speakMessage {
-  width: 75%;
-  text-align: start;
+.suggestTitle {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibold);
+  margin-block-end: var(--spacing-xxsmall);
+}
+.suggestSubtitle {
+  opacity: var(--opacity-75);
+  max-width: 80%;
+  font-size: var(--font-size-large);
 }
 
 .micCircle {
@@ -55,4 +64,30 @@
   height: calc(var(--volume) * 4 * var(--spacing-large));
   transition: width var(--transition-fast) ease,
     height var(--transition-fast) ease;
+}
+
+@mixin verticalLayout {
+  .innerContainer {
+    flex-direction: column;
+    margin: 0;
+  }
+  .circlesContainer {
+    width: 100%;
+    height: calc(10 * var(--spacing-medium));
+  }
+  .suggestTitle {
+    text-align: center;
+  }
+  .suggestSubtitle {
+    max-width: 100%;
+    text-align: center;
+  }
+}
+
+.verticalLyaout {
+  @include verticalLayout;
+}
+
+@include breakpoints.smallerThanTablet {
+  @include verticalLayout();
 }
