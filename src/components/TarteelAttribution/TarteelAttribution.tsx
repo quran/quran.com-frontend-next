@@ -8,13 +8,13 @@ import styles from './TarteelAttribution.module.scss';
 const TarteelAttribution = () => {
   const { t } = useTranslation('common');
   return (
-    <div className={styles.container}>
+    <a href="https://download.tarteel.ai/" className={styles.container}>
       <span className={styles.poweredBy}>{t('voice.voice-search-powered-by')}</span>
       <TarteelLogo />
       <span className={styles.tarteelTextWrapper}>
         <TarteelText />
       </span>
-    </div>
+    </a>
   );
 };
 
