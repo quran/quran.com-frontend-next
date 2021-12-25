@@ -2,11 +2,9 @@ import { useRef, useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import useSWR from 'swr';
 
 import FindLocationIcon from '../../../../public/icons/find-location.svg';
-import { ToastContainer } from '../../dls/Toast/Toast';
 
 import styles from './PrayerTimes.module.scss';
 import { formatLocation, getNextPrayerTime } from './PrayerTimesHelper';
@@ -15,6 +13,7 @@ import { PrayerTimesData } from './PrayerTimesTypes';
 import { fetcher } from 'src/api';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 // import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import { useToast } from 'src/components/dls/Toast/Toast';
 import {
   LocationAccess,
   selectCalculationMethod,
@@ -77,6 +76,7 @@ const PrayerTimes = () => {
   const { t, lang } = useTranslation('');
   const dispatch = useDispatch();
   const prayerTimesData = usePrayerTimesData();
+  const toast = useToast();
 
   const hijriDate = useHijriDateFormatter();
 
@@ -153,7 +153,6 @@ const PrayerTimes = () => {
           )}
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

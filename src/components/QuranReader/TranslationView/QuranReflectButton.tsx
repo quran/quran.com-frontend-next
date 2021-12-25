@@ -16,7 +16,7 @@ const QuranReflectButton = ({ verseKey }: QuranReflectButtonProps) => {
     <Button
       onClick={() => navigateToExternalUrl(getQuranReflectVerseUrl(verseKey))}
       size={ButtonSize.Small}
-      tooltip={t('reflect-this-verse')}
+      tooltip={t('reflect')}
       type={ButtonType.Secondary}
       shouldFlipOnRTL={false}
     >

@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import ShareIcon from '../../../../public/icons/share.svg';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
-import { toast, ToastStatus } from 'src/components/dls/Toast/Toast';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
@@ -22,6 +22,7 @@ export const onShareClicked = (verseKey, callback: () => void) => {
 
 const ShareVerseButton = ({ verseKey }: ShareVerseButtonProps) => {
   const { t } = useTranslation('common');
+  const toast = useToast();
 
   return (
     <>
