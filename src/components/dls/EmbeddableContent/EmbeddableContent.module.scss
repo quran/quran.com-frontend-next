@@ -71,7 +71,10 @@ $translateYDistance: 200px;
   background: var(--color-background-default);
   box-sizing: border-box;
   border-radius: var(--border-radius-rounded);
-  padding: var(--spacing-mega);
+  padding: var(--spacing-small);
+  @include breakpoints.tablet {
+    padding: var(--spacing-mega);
+  }
   position: relative;
 
   width: 100vw;
