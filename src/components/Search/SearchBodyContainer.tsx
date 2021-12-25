@@ -50,7 +50,7 @@ const SearchBodyContainer: React.FC<Props> = ({
       })}
     >
       {!searchQuery ? (
-        <PreInput onSearchKeywordClicked={onSearchKeywordClicked} />
+        <PreInput onSearchKeywordClicked={onSearchKeywordClicked} isSearchDrawer={isSearchDrawer} />
       ) : (
         <>
           {isSearching ? (

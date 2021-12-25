@@ -36,7 +36,12 @@ const CommandBarTrigger: React.FC = () => {
       <div className={styles.actionsContainer}>
         <KeyboardInput meta keyboardKey="K" />
         <div className={styles.searchButtonWrapper}>
-          <TarteelVoiceSearchTrigger isCommandBar />
+          <TarteelVoiceSearchTrigger
+            isCommandBar
+            onClick={() => {
+              logButtonClick('command_bar_homepage_voice_search_trigger');
+            }}
+          />
         </div>
       </div>
     </div>

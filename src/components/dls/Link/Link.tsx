@@ -20,6 +20,7 @@ type LinkProps = {
   download?: string;
   className?: string;
   onClick?: React.MouseEventHandler;
+  passHref?: boolean;
 };
 
 const Link: React.FC<LinkProps> = ({
@@ -30,8 +31,16 @@ const Link: React.FC<LinkProps> = ({
   download,
   className,
   onClick,
+  passHref,
 }) => (
-  <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
+  <Wrapper
+    shouldWrap={!download}
+    wrapper={(node) => (
+      <NextLink href={href} {...(passHref && { passHref })}>
+        {node}
+      </NextLink>
+    )}
+  >
     <a
       href={href}
       download={download}
