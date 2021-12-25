@@ -6,6 +6,7 @@
 }
 .poweredBy {
   font-size: var(--font-size-small);
+  line-height: normal;
   color: var(--color-text-faded);
   display: flex;
   margin-inline-end: var(--spacing-xxsmall);
