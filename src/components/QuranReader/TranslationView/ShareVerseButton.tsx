@@ -5,6 +5,7 @@ import ShareIcon from '../../../../public/icons/share.svg';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
@@ -13,6 +14,7 @@ type ShareVerseButtonProps = {
 };
 
 export const onShareClicked = (verseKey, callback: () => void) => {
+  logButtonClick('verse_actions_menu_copy');
   const origin = getWindowOrigin();
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   if (origin) {

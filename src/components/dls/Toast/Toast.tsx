@@ -30,7 +30,7 @@ type Options = {
   status?: ToastStatus;
 };
 const TOAST_DURATION = 3000; // 3 second
-export const toast = (content: React.ReactNode, options: Options = {}) => {
+const toast = (content: React.ReactNode, options: Options = {}) => {
   const toastId = primitiveToast(
     <div className={styles.contentContainer}>
       {content}
