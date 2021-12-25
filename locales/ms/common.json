@@ -156,6 +156,7 @@
         "translation": "Terjemahan"
     },
     "reciter": "Qari",
+    "reflect": "Renungkan",
     "remove": "Alih keluar",
     "retry": "Cuba semula",
     "search": {
@@ -211,8 +212,6 @@
     },
     "tarteel": {
         "app": "Aplikasi Tarteel",
-        "desc": "carian suara al-quran",
-        "learn": "belajar cara menggunakan carian suara",
         "name": "Tarteel.ai"
     },
     "theme": "Tema",
@@ -239,7 +238,10 @@
         "error": "Kesilapan telah berlaku. Sila cuba sebentar lagi. Atau muat turun",
         "no-permission": "Nampaknya anda tidak memberi kebenaran kepada pemasangan mikrofon. Sila benarkan pemasangan mikrofon dan cuba lagi sekali atau muat turun",
         "not-supported": "Nampaknya web anda tidak menyokong mikrofon. Sila cuba web lain atau muat turun",
-        "suggest": "Sila mula membaca dan ayat anda akan muncul."
+        "suggest": "Sila mulakan membaca dan ayat anda akan muncul.",
+        "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab, dan ayat itu akan muncul",
+        "suggest-title": "Mengaji sekarang",
+        "voice-search-powered-by": "Carian Suara Dikuasakan oleh"
     },
     "wbw": "Perkataan demi perkataan",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",

@@ -156,6 +156,7 @@
         "translation": "Vertaling"
     },
     "reciter": "Voordrager",
+    "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
     "search": {
@@ -211,8 +212,6 @@
     },
     "tarteel": {
         "app": "Tarteel-app",
-        "desc": "koran spraakgestuurd zoeken",
-        "learn": "leren hoe u gesproken zoekopdrachten kunt gebruiken",
         "name": "Tarteel.ai"
     },
     "theme": "Thema",
@@ -239,7 +238,10 @@
         "error": "Er is een fout opgetreden, probeer het later opnieuw. Of download de",
         "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw of download de",
         "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser of download de",
-        "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen."
+        "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
+        "suggest-subtitle": "Reciteer een vers in het Arabisch, en het vers zal verschijnen",
+        "suggest-title": "Reciteer nu",
+        "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
     },
     "wbw": "Woord voor woord",
     "wbw-trans-lang": "Woord voor woord taal",

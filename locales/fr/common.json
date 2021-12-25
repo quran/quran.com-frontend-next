@@ -156,6 +156,7 @@
         "translation": "Traduction"
     },
     "reciter": "Récitant",
+    "reflect": "Réfléchir",
     "remove": "Supprimer",
     "retry": "Réessayez",
     "search": {
@@ -211,8 +212,6 @@
     },
     "tarteel": {
         "app": "Application Tarteel",
-        "desc": "recherche vocale coranique",
-        "learn": "apprendre à utiliser la recherche vocale",
         "name": "Tarteel.ai"
     },
     "theme": "Thème",
@@ -239,7 +238,10 @@
         "error": "Un erreur est survenue, veuillez réessayer plus tard. Ou téléchargez le",
         "no-permission": "Il semble que vous n'ayez pas activé les autorisations de microphone. Veuillez activer les autorisations du microphone et réessayer ou télécharger le",
         "not-supported": "Il semble que votre navigateur ne supporte pas le microphone. Veuillez essayer un autre navigateur ou télécharger le",
-        "suggest": "Veuillez commencer à réciter et votre vers apparaîtra."
+        "suggest": "Veuillez commencer à réciter et votre vers apparaîtra.",
+        "suggest-subtitle": "Récitez n'importe quel verset en arabe, et le verset apparaîtra",
+        "suggest-title": "Récitez maintenant",
+        "voice-search-powered-by": "Recherche vocale optimisée par"
     },
     "wbw": "Mot par mot",
     "wbw-trans-lang": "Langage mot à mot",
