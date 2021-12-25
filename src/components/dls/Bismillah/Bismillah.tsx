@@ -3,7 +3,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import styles from './Bismillah.module.scss';
+import BismillahSVG from '../../../../public/fonts/bismillah/bismillah.svg';
 
 export enum BismillahSize {
   Small = 'small',
@@ -15,15 +15,6 @@ type BismillahProps = {
   size?: BismillahSize;
 };
 
-const Bismillah = ({ size = BismillahSize.Medium }: BismillahProps) => (
-  <span
-    className={classNames(styles.bismillah, {
-      [styles.bismillahSmall]: size === BismillahSize.Small,
-      [styles.bismillahLarge]: size === BismillahSize.Large,
-    })}
-  >
-    ﷽
-  </span>
-);
+const Bismillah = ({ size = BismillahSize.Medium }: BismillahProps) => <BismillahSVG />;
 
 export default Bismillah;
