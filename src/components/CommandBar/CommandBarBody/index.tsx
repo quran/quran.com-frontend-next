@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -18,6 +19,7 @@ import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { truncateString } from 'src/utils/string';
 import { getVerseTextByWords } from 'src/utils/word';
@@ -165,7 +167,15 @@ const CommandBarBody: React.FC = () => {
             />
           </div>
         )}
-        <TarteelVoiceSearchTrigger isCommandBar />
+        <TarteelVoiceSearchTrigger
+          isCommandBar
+          onClick={(startFlow: boolean) => {
+            logButtonClick(
+              // eslint-disable-next-line i18next/no-literal-string
+              `command_bar_voice_search_${startFlow ? 'start' : 'stop'}_flow`,
+            );
+          }}
+        />
       </div>
       <div className={styles.bodyContainer}>
         {isVoiceSearchFlowStarted ? (
@@ -177,7 +187,6 @@ const CommandBarBody: React.FC = () => {
           />
         )}
       </div>
-
       <div className={styles.attribution}>
         <TarteelAttribution />
       </div>
