@@ -9,7 +9,7 @@ import styles from './ChapterHeader.module.scss';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
+import Bismillah from 'src/components/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
