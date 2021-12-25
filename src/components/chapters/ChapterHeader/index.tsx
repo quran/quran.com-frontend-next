@@ -86,9 +86,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
         </div>
       </div>
       <div className={styles.bismillahContainer}>
-        {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && (
-          <Bismillah size={BismillahSize.Large} />
-        )}
+        {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && <Bismillah />}
       </div>
     </div>
   );
