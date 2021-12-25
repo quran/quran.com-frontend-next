@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import CommandsList from 'src/components/CommandBar/CommandsList';
 import DataFetcher from 'src/components/DataFetcher';
-import SearchResultItem from 'src/components/Search/SearchResults/SearchResultItem';
+import SearchResultItem, { Source } from 'src/components/Search/SearchResults/SearchResultItem';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeVersesFilterUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
@@ -68,7 +68,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
       return (
         <>
           {data.verses.map((verse) => (
-            <SearchResultItem key={verse.verseKey} result={verse} />
+            <SearchResultItem key={verse.verseKey} result={verse} source={Source.Tarteel} />
           ))}
         </>
       );

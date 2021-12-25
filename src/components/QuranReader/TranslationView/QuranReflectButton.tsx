@@ -16,7 +16,7 @@ const QuranReflectButton = ({ verseKey }: QuranReflectButtonProps) => {
   return (
     <Button
       onClick={() => {
-        logButtonClick('verse_actions_menu_reflect');
+        logButtonClick('translation_view_reflect');
         navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
       }}
       size={ButtonSize.Small}

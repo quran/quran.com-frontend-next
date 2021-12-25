@@ -212,8 +212,6 @@
     },
     "tarteel": {
         "app": "Tarteel app",
-        "desc": "quranic voice search",
-        "learn": "learn how to use voice search",
         "name": "Tarteel.ai"
     },
     "theme": "Theme",
@@ -240,7 +238,10 @@
         "error": "An error has occurred, please try again later. Or download the ",
         "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ",
         "not-supported": "It looks like your browser does not support microphone. Please try a different browser or download the ",
-        "suggest": "Please begin reciting and your verse will appear."
+        "suggest": "Please begin reciting and your verse will appear.",
+        "voice-search-powered-by": "Voice Search Powered by",
+        "suggest-title": "Recite now",
+        "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear"
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",

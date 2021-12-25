@@ -22,6 +22,7 @@ import { selectHighlightedLocation } from 'src/redux/slices/QuranReader/highligh
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import { getChapterData } from 'src/utils/chapter';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { makeVerseKey } from 'src/utils/verse';
 
 export enum SeekButtonType {
@@ -55,6 +56,8 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const verseTimingData = chapterAudioData?.verseTimings || [];
 
   const onSeek = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`audio_player_${type}`);
     if (isInRepeatMode) {
       // when in repeatMode, finish the repeat progress for current ayah
       // otherwise the AudioRepeatManager will replay the current Ayah when we set the new timestamp

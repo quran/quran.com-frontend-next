@@ -1,13 +1,14 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 
-import SearchResultItem from './SearchResultItem';
+import SearchResultItem, { Source } from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
+import Link from 'src/components/dls/Link/Link';
 import Pagination from 'src/components/dls/Pagination/Pagination';
 import NavigationItem from 'src/components/Search/NavigationItem';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { SearchResponse } from 'types/ApiResponses';
 
@@ -36,14 +37,22 @@ const SearchResults: React.FC<Props> = ({
           <>
             <p className={styles.boldHeader}>{t('search.jump-to')}</p>
             {searchResult.result.navigation.map((navigationResult) => (
-              <NavigationItem key={navigationResult.key} navigation={navigationResult} />
+              <NavigationItem
+                isSearchDrawer={isSearchDrawer}
+                key={navigationResult.key}
+                navigation={navigationResult}
+              />
             ))}
           </>
         )}
         <p className={styles.boldHeader}>{t('search.results')}</p>
         <>
           {searchResult.result.verses.map((result) => (
-            <SearchResultItem key={result.verseKey} result={result} />
+            <SearchResultItem
+              key={result.verseKey}
+              result={result}
+              source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
+            />
           ))}
           {isSearchDrawer ? (
             <div className={styles.resultsSummaryContainer}>
@@ -52,9 +61,15 @@ const SearchResults: React.FC<Props> = ({
                 {t('search.results')}
               </p>
               {searchResult.pagination.totalRecords > 0 && (
-                <Link href={`/search?query=${searchQuery}`} passHref>
+                <Link
+                  href={`/search?query=${searchQuery}`}
+                  passHref
+                  onClick={() => {
+                    logButtonClick('search_drawer_show_all');
+                  }}
+                >
                   <a>
-                    <p>{t('search.show-all')}</p>
+                    <p className={styles.showAll}>{t('search.show-all')}</p>
                   </a>
                 </Link>
               )}
