@@ -1,13 +1,14 @@
-$bismillah-font-size: 3rem;
+$bismillah-font-size-large: 3rem;
+$bismillah-font-size-small: 2rem;
+
 .bismillah {
-  font-size: $bismillah-font-size;
   font-family: "bismillah";
 }
 
 .bismillahSmall {
-  font-size: var(--font-size-small);
+  font-size: $bismillah-font-size-small;
 }
 
 .bismillahLarge {
-  font-size: var(--font-size-jumbo);
+  font-size: $bismillah-font-size-large;
 }
