@@ -7,6 +7,7 @@ import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import Separator from 'src/components/dls/Separator/Separator';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation('common');
@@ -24,7 +25,14 @@ const Footer: React.FC = () => {
           </div>
           <div className={classNames(styles.beta, styles.uppercase)}>{t('beta')}</div>
         </div>
-        <Link href="https://download.tarteel.ai" newTab variant={LinkVariant.Highlight}>
+        <Link
+          href="https://download.tarteel.ai"
+          newTab
+          variant={LinkVariant.Highlight}
+          onClick={() => {
+            logButtonClick('search_drawer_footer_learn_tarteel');
+          }}
+        >
           <p className={styles.uppercase}>{t('tarteel.learn')}</p>
         </Link>
       </div>

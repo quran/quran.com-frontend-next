@@ -8,6 +8,7 @@ import { AudioWorklet } from 'audio-worklet';
 
 import { getAverageVolume } from 'src/audioInput/voice';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
+import { logEmptySearchResults, logEvent } from 'src/utils/eventLogger';
 import Event from 'types/Tarteel/Event';
 import Result from 'types/Tarteel/Result';
 import SearchResult from 'types/Tarteel/SearchResult';
@@ -71,6 +72,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     ) => {
       // if the websocket is still open, close it
       if (isWebSocketOpen(webSocket)) {
+        logEvent('tarteel_websocket_close');
         webSocket.send(JSON.stringify(END_STREAM_DATA));
         webSocket.close();
       }
@@ -109,6 +111,9 @@ const useTarteelVoiceSearch = (startRecording = true) => {
         case Event.SEARCH_RESULT:
           setIsLoading(false);
           setSearchResult(data as SearchResult);
+          if (!(data as SearchResult).matches.length) {
+            logEmptySearchResults(data.queryText, 'tarteel', 'voice');
+          }
           stopFlow(webSocket, analyser, micWorkletNode, micSourceNode, audioContext);
           break;
         case Event.PARTIAL_TRANSCRIPT:
@@ -117,6 +122,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
           break;
         case Event.ERROR:
           setIsLoading(false);
+          logEvent('tarteel_error', { error: event });
           setError(VoiceError.RESPONSE_ERROR);
           break;
         default:
@@ -178,6 +184,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
         try {
           micSourceNode = audioContext.createMediaStreamSource(stream);
         } catch (err) {
+          logEvent('voice_search_create_media_stream_error');
           // this will happen for Firefox users due to FF not accepting to change the sampleRate {@see https://bugzilla.mozilla.org/show_bug.cgi?id=1607781}
           stopFlow(webSocket, analyser, micWorkletNode, micSourceNode, audioContext);
           throw new Error(USER_MEDIA_NOT_SUPPORTED_ERROR);
@@ -188,12 +195,14 @@ const useTarteelVoiceSearch = (startRecording = true) => {
             new AudioWorklet(new URL('src/audioInput/MicInputProcessor.ts', import.meta.url)),
           )
           .then(() => {
+            logEvent('tarteel_websocket_initialize');
             setIsLoading(true);
             // 3. Start a new websocket
             webSocket = new WebSocket(
               `wss://voice-v2.tarteel.io/search/?Authorization=${process.env.NEXT_PUBLIC_TARTEEL_VS_API_KEY}`,
             );
             webSocket.onopen = () => {
+              logEvent('tarteel_websocket_open');
               setIsLoading(false);
               mediaStream.current = stream;
               analyser = audioContext.createAnalyser();
@@ -225,24 +234,27 @@ const useTarteelVoiceSearch = (startRecording = true) => {
               );
             };
             webSocket.onerror = () => {
+              logEvent('tarteel_websocket_error');
               setIsLoading(false);
               setError(VoiceError.SOCKET_ERROR);
             };
           })
           .catch(() => {
+            logEvent('voice_search_worklet_error');
             setError(VoiceError.WORKLET_ERROR);
           });
       })
       .catch((getUserMedia: Error) => {
         // if it's a custom thrown error when getUserMedia is not implemented in the browser
         if (getUserMedia.message === USER_MEDIA_NOT_SUPPORTED_ERROR) {
+          logEvent('voice_search_not_supported');
           setError(VoiceError.NOT_SUPPORTED);
         } else {
-          setError(
-            getUserMedia.name === 'NotAllowedError'
-              ? VoiceError.NO_PERMISSION
-              : VoiceError.GENERAL_ERROR,
-          );
+          const isPermissionDenied = getUserMedia.name === 'NotAllowedError';
+          if (isPermissionDenied) {
+            logEvent('voice_search_permission_denied');
+          }
+          setError(isPermissionDenied ? VoiceError.NO_PERMISSION : VoiceError.GENERAL_ERROR);
         }
       })
       .finally(() => {
