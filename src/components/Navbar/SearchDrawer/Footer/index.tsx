@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           newTab
           variant={LinkVariant.Highlight}
           onClick={() => {
-            logButtonClick('search_drawer_footer_learn_tarteel');
+            logButtonClick('search_drawer_footer_tarteel_attribution');
           }}
         >
           <p className={styles.uppercase}>{t('tarteel.learn')}</p>

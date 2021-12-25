@@ -72,7 +72,6 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     ) => {
       // if the websocket is still open, close it
       if (isWebSocketOpen(webSocket)) {
-        logEvent('tarteel_websocket_close');
         webSocket.send(JSON.stringify(END_STREAM_DATA));
         webSocket.close();
       }
