@@ -158,3 +158,14 @@ export const getQuranReflectVerseUrl = (verseKey: string) => {
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
 };
+
+/**
+ * Update the browser history with the new url.
+ * withohut actually navigating into that url.
+ * So it does not trigger re render or page visit on nextjs
+ *
+ * @param {string} url
+ */
+export const fakeNavigate = (url: string) => {
+  window.history.pushState({}, '', url);
+};
