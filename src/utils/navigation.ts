@@ -1,3 +1,5 @@
+import { stringify } from 'querystring';
+
 import { getChapterData } from './chapter';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey } from './verse';
@@ -64,7 +66,8 @@ export const getPageNavigationUrl = (pageNumber: string | number): string => `/p
 export const getVerseTafsirNavigationUrl = (
   chapterIdOrSlug: string | number,
   verseNumber: number,
-): string => `/${chapterIdOrSlug}/${verseNumber}/tafsirs`;
+  tafsirId?: string,
+): string => `/${chapterIdOrSlug}/${verseNumber}/tafsirs?${stringify({ tafsirId })}`;
 
 /**
  * Get the href link to selected tafsir for Ayah.

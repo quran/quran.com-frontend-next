@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import styles from './tafsirs.module.scss';
 
-import { getChapterIdBySlug, getChapterVerses, fetcher } from 'src/api';
+import { getChapterIdBySlug, fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
@@ -21,16 +21,16 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { stripHTMLTags } from 'src/utils/string';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
-import { ChapterResponse, TafsirsResponse, VersesResponse } from 'types/ApiResponses';
+import { ChapterResponse, TafsirContentResponse, VersesResponse } from 'types/ApiResponses';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
   verses?: VersesResponse;
-  tafsirData?: TafsirsResponse;
+  tafsirData?: any;
   hasError?: boolean;
 };
 
-const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses, tafsirData }) => {
+const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
@@ -39,10 +39,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses, tafsi
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const description =
-    verses.verses[0].tafsirs && verses.verses[0].tafsirs.length
-      ? stripHTMLTags(verses.verses[0].tafsirs[0].text)
-      : null;
+  const description = tafsirData?.tafsir.text ? stripHTMLTags(tafsirData.tafsir.text) : null;
   const path = getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId));
 
   return (
@@ -61,7 +58,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, verses, tafsi
           initialChapterId={chapterId.toString()}
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}
-          initialTafsirIds={router.query.tafsirId ? [Number(router.query.tafsiirId)] : undefined}
+          initialTafsirId={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
         />
       </div>
     </>
@@ -81,24 +78,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     chapterIdOrSlug = sluggedChapterId;
   }
 
-  const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, {
-    page: verseId, // we pass the verse id as a the page and then fetch only 1 verse per page.
-    perPage: 1, // only 1 verse per page
-    translations: null,
-    wordFields: 'location, verse_key, text_uthmani',
-  });
-  // if the chapter or verses APIs failed
-
   const chapterData = getChapterData(chapterIdOrSlug, locale);
 
-  const tafsirData = await fetcher(
+  const tafsirData = await fetcher<TafsirContentResponse>(
     makeTafsirContentUrl(getTafsirsInitialState(locale).selectedTafsirs[0], verseId, {
       words: true,
       ...getDefaultWordFields(),
     }),
   );
 
-  if (versesResponse.status === 500 || !chapterData) {
+  if (tafsirData.status === 500 || !chapterData) {
     return {
       props: {
         hasError: true,
@@ -112,7 +101,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chapter: {
         chapter: { ...chapterData, id: chapterIdOrSlug },
       },
-      verses: versesResponse,
     },
     revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
   };

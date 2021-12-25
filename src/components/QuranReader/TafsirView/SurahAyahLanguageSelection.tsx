@@ -6,7 +6,7 @@ import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
-const SurahAndAyahSelection = ({
+const SurahAyahLanguageSelection = ({
   selectedChapterId,
   selectedVerseNumber,
   onChapterIdChange,
@@ -19,7 +19,7 @@ const SurahAndAyahSelection = ({
   const verses = generateChapterVersesKeys(selectedChapterId);
 
   return (
-    <div className={styles.surahAndAyahSelectionContainer}>
+    <div className={styles.surahAyahLanguageSelectionContainer}>
       <Select
         size={SelectSize.Small}
         id="surah-selection"
@@ -65,4 +65,4 @@ const SurahAndAyahSelection = ({
   );
 };
 
-export default SurahAndAyahSelection;
+export default SurahAyahLanguageSelection;

@@ -23,21 +23,22 @@ import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { getVerseTafsirNavigationUrl } from 'src/utils/navigation';
+import { getVerseWords, makeVerseKey, sortByVerseKey } from 'src/utils/verse';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
   initialTafsirData?: TafsirsResponse;
-  initialTafsirIds?: number[];
+  initialTafsirId?: number;
 };
 
 const TafsirBody = ({
   initialChapterId,
   initialVerseNumber,
   initialTafsirData,
-  initialTafsirIds,
+  initialTafsirId,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -49,40 +50,70 @@ const TafsirBody = ({
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
-  const [selectedTafsirId, setSelectedTafsirId] = useState(initialTafsirIds?.[0] || tafsirs?.[0]);
+  const [selectedTafsirId, setSelectedTafsirId] = useState(tafsirs?.[0]);
+  useEffect(() => {
+    if (initialTafsirId) {
+      setSelectedTafsirId(initialTafsirId);
+    }
+  }, [initialTafsirId]);
 
   const queryKey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
     words: true,
     ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
 
+  const onTafsirSelected = useCallback(
+    (id: number) => {
+      setSelectedTafsirId(id);
+      window.history.pushState(
+        {},
+        '',
+        getVerseTafsirNavigationUrl(
+          Number(selectedChapterId),
+          Number(selectedVerseNumber),
+          id.toString(),
+        ),
+      );
+      dispatch(
+        setSelectedTafsirs({
+          tafsirs: [id],
+          locale: lang,
+        }),
+      );
+    },
+    [dispatch, lang, selectedChapterId, selectedVerseNumber],
+  );
+
   const { data: tafsirListData } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
+
   useEffect(() => {
     if (tafsirListData) {
-      const selectedTafsir = tafsirListData.tafsirs.find((tafsir) => tafsir.id === tafsirs[0]);
+      const selectedTafsir = tafsirListData.tafsirs.find(
+        (tafsir) => tafsir.id === selectedTafsirId,
+      );
       setSelectedLanguage(selectedTafsir.languageName);
+      onTafsirSelected(selectedTafsirId);
     }
-  }, [tafsirListData, tafsirs]);
+  }, [onTafsirSelected, selectedTafsirId, tafsirListData]);
 
   // there's no 1:1 data that can map our locale options to the tafsir language options
-  // so we're using options that's availbe from tafsir for now
+  // so we're using options that's available from tafsir for now
   // TODO: update lanague options, to use the same options as our LanguageSelector
   const languageOptions = tafsirListData ? getTafsirsLanguageOptions(tafsirListData.tafsirs) : [];
 
-  const renderTafsir = useCallback((data: TafsirsResponse) => {
+  const renderTafsir = useCallback((data) => {
     if (!data) return <TafsirSkeleton />;
-    // @ts-ignore
     const tafsirVerses = data?.tafsir.verses;
-    // @ts-ignore
     const htmlText = data?.tafsir.text;
     const words = Object.values(tafsirVerses).map(getVerseWords).flat();
 
     if (!htmlText) return <TafsirSkeleton />;
 
+    const [firstVerseKey, lastVerseKey] = getFirstAndLastFirstKeys(tafsirVerses);
     return (
       <div>
         {Object.values(tafsirVerses).length > 1 && (
-          <TafsirGroupMessage {...getFromAndToVerseKeys(tafsirVerses)} />
+          <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
         )}
         <div className={styles.verseTextContainer}>
           <VerseText words={words} />
@@ -109,15 +140,7 @@ const TafsirBody = ({
       <TafsirSelection
         selectedTafsirs={selectedTafsirs}
         selectedLanguage={selectedLanguage}
-        onTafsirSelected={(id) => {
-          setSelectedTafsirId(id);
-          dispatch(
-            setSelectedTafsirs({
-              tafsirs: [id],
-              locale: lang,
-            }),
-          );
-        }}
+        onTafsirSelected={onTafsirSelected}
       />
       <div
         className={classNames(
@@ -128,8 +151,7 @@ const TafsirBody = ({
         {initialTafsirData &&
         initialChapterId === selectedChapterId &&
         initialVerseNumber === selectedVerseNumber &&
-        initialTafsirIds &&
-        areArraysEqual(initialTafsirIds, tafsirs) ? (
+        initialTafsirId === tafsirs?.[0] ? (
           renderTafsir(initialTafsirData)
         ) : (
           <DataFetcher loading={TafsirSkeleton} queryKey={queryKey} render={renderTafsir} />
@@ -139,11 +161,23 @@ const TafsirBody = ({
   );
 };
 
+/**
+ * Given list of tafsirs, get all available language options
+ *
+ * @param {Tafsir[]} tafsirs
+ * @returns {string[]} list of available language options
+ */
 const getTafsirsLanguageOptions = (tafsirs) => uniq(tafsirs.map((tafsir) => tafsir.languageName));
 
-const getFromAndToVerseKeys = (verses) => {
-  const verseKeys = Object.keys(verses);
-  return { from: verseKeys[0], to: verseKeys[verseKeys.length - 1] };
+/**
+ * Given list of verses, get all the first and the last verseKeys
+ *
+ * @param {Verse[]} verses
+ * @returns {string[]} [firstVerseKey, lastVerseKey]
+ */
+const getFirstAndLastFirstKeys = (verses) => {
+  const verseKeys = Object.keys(verses).sort(sortByVerseKey);
+  return [verseKeys[0], verseKeys[verseKeys.length - 1]];
 };
 
 export default TafsirBody;

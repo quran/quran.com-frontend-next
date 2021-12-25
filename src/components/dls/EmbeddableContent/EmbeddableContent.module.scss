@@ -1,5 +1,7 @@
 @use "src/styles/breakpoints";
 
+$translateYDistance: 200px;
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -20,7 +22,7 @@
 
 @keyframes contentIn {
   from {
-    transform: translate(0, 200px);
+    transform: translate(0, $translateYDistance);
   }
   to {
     transform: translate(0, 0px);
@@ -32,7 +34,7 @@
     transform: translate(0%, 0px);
   }
   to {
-    transform: translate(0%, 200px);
+    transform: translate(0%, $translateYDistance);
   }
 }
 
