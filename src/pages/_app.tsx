@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
+import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
@@ -45,16 +46,19 @@ function MyApp({ Component, pageProps }): JSX.Element {
       <ReduxProvider locale={locale}>
         <ThemeProvider>
           <IdProvider>
-            <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
-            <GlobalListeners />
-            <Navbar />
-            <DeveloperUtility />
-            <Component {...pageProps} />
-            <FeedbackWidget />
-            <AudioPlayer />
+            <ToastContainerProvider>
+              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
+              <GlobalListeners />
+              <Navbar />
+              <DeveloperUtility />
+              <Component {...pageProps} />
+              <FeedbackWidget />
+              <AudioPlayer />
+            </ToastContainerProvider>
           </IdProvider>
         </ThemeProvider>
       </ReduxProvider>
+
       <ThirdPartyScripts />
     </>
   );
