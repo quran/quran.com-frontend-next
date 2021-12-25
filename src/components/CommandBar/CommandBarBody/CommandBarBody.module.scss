@@ -66,10 +66,7 @@ $height: calc(9 * var(--spacing-mega));
   box-sizing: border-box;
 }
 
-.poweredBy {
-  text-align: end;
-  font-size: var(--font-size-small);
-  color: var(--color-text-faded);
-  padding-inline-end: var(--spacing-xxsmall);
-  padding-block-end: var(--spacing-xsmall);
+.attribution {
+  display: flex;
+  justify-content: flex-end;
 }
