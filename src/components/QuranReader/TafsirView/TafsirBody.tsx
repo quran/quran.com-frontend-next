@@ -24,7 +24,7 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { getVerseTafsirNavigationUrl } from 'src/utils/navigation';
-import { getVerseWords, makeVerseKey, sortByVerseKey } from 'src/utils/verse';
+import { getFirstAndLastFirstKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 type TafsirBodyProps = {
@@ -132,7 +132,10 @@ const TafsirBody = ({
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
         selectedLanguage={selectedLanguage}
-        onChapterIdChange={(val) => setSelectedChapterId(val.toString())}
+        onChapterIdChange={(val) => {
+          setSelectedChapterId(val.toString());
+          setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
+        }}
         onVerseNumberChange={(val) => setSelectedVerseNumber(val)}
         onLanguageChange={(newLang) => setSelectedLanguage(newLang)}
         languageOptions={languageOptions}
@@ -168,16 +171,5 @@ const TafsirBody = ({
  * @returns {string[]} list of available language options
  */
 const getTafsirsLanguageOptions = (tafsirs) => uniq(tafsirs.map((tafsir) => tafsir.languageName));
-
-/**
- * Given list of verses, get all the first and the last verseKeys
- *
- * @param {Verse[]} verses
- * @returns {string[]} [firstVerseKey, lastVerseKey]
- */
-const getFirstAndLastFirstKeys = (verses) => {
-  const verseKeys = Object.keys(verses).sort(sortByVerseKey);
-  return [verseKeys[0], verseKeys[verseKeys.length - 1]];
-};
 
 export default TafsirBody;
