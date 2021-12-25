@@ -11,7 +11,7 @@ import CommandsList, { Command } from '../CommandsList';
 import styles from './CommandBarBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
@@ -178,10 +178,8 @@ const CommandBarBody: React.FC = () => {
         )}
       </div>
 
-      <div className={styles.poweredBy}>
-        <Link variant={LinkVariant.Primary} newTab href="https://download.tarteel.ai/">{`${t(
-          'command-bar.powered-by',
-        )} `}</Link>
+      <div className={styles.attribution}>
+        <TarteelAttribution />
       </div>
     </div>
   );

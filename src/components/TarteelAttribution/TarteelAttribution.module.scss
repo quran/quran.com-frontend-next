@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding-block: var(--spacing-small);
+}
+.poweredBy {
+  font-size: var(--font-size-small);
+  color: var(--color-text-faded);
+  display: flex;
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.tarteelTextWrapper {
+  display: flex;
+  align-items: center;
+  & > svg > path {
+    fill: var(--color-text-default);
+  }
+}
