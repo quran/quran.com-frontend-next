@@ -117,10 +117,12 @@ $translateYDistance: 200px;
   position: absolute;
   inset-block-start: 0;
   inset-inline-end: 0;
+  padding-block-start: var(--spacing-xsmall);
   background-color: transparent;
   border: none;
   @include breakpoints.tablet {
-    margin-block-start: var(--spacing-xxsmall);
-    margin-inline-end: var(--spacing-xxsmall);
+    padding-block-start: var(--spacing-small);
+    margin-block-start: var(--spacing-mega);
+    margin-inline-end: var(--spacing-mega);
   }
 }

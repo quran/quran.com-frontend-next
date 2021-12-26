@@ -31,6 +31,7 @@ const EmbeddableContent = ({
                 </Button>
               </Dialog.Close>
             )}
+
             <div className={styles.content}>{children}</div>
           </Dialog.Content>
         </Dialog.Overlay>

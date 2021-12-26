@@ -8,7 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import useSWR from 'swr/immutable';
 
-import SurahAndAyahLanguageSelection from './SurahAyahLanguageSelection';
+import SurahAndAyahLanguageSelection from './SurahAndAyahSelection';
 import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirAndLanguageSelection from './TafsirSelection';
 import TafsirSkeleton from './TafsirSkeleton';
@@ -24,7 +24,7 @@ import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { getVerseTafsirNavigationUrl } from 'src/utils/navigation';
+import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastFirstKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirsResponse } from 'types/ApiResponses';
 
@@ -44,31 +44,27 @@ const TafsirBody = ({
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { lang } = useTranslation();
-  const tafsirs = useSelector(selectSelectedTafsirs);
+  const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedLanguage, setSelectedLanguage] = useState(lang);
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
-  const [selectedTafsirId, setSelectedTafsirId] = useState(tafsirs?.[0]);
+  const [selectedTafsirId, setSelectedTafsirId] = useState(userPreferredTafsirIds?.[0]);
+
+  // if user opened tafsirBody via a url, we will have initialTafsirId
+  // we need to set this `initialTafsirId` as a selectedTafsirId
+  // we did not use `useState(initialTafsirId)` because `useRouter`'s query string is undefined on first render
   useEffect(() => {
     if (initialTafsirId) {
       setSelectedTafsirId(initialTafsirId);
     }
   }, [initialTafsirId]);
 
-  const queryKey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
-    words: true,
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-  });
-
   const onTafsirSelected = useCallback(
     (id: number) => {
       setSelectedTafsirId(id);
-      window.history.pushState(
-        {},
-        '',
+      fakeNavigate(
         getVerseTafsirNavigationUrl(
           Number(selectedChapterId),
           Number(selectedVerseNumber),
@@ -87,11 +83,13 @@ const TafsirBody = ({
 
   const { data: tafsirListData } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
 
+  // selectedLanguage is based on selectedTafir's language
+  // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirId`
+  // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
     if (tafsirListData) {
       const languageName = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
       setSelectedLanguage(languageName);
-      onTafsirSelected(selectedTafsirId);
     }
   }, [onTafsirSelected, selectedTafsirId, tafsirListData]);
 
@@ -127,6 +125,11 @@ const TafsirBody = ({
 
   const selectedTafsirLanguage = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
 
+  const tafsirContentQuerykey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
+    words: true,
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+  });
+
   return (
     <div dir={isRTLLanguage(selectedTafsirLanguage) ? 'rtl' : 'ltr'}>
       <SurahAndAyahLanguageSelection
@@ -139,7 +142,7 @@ const TafsirBody = ({
         onVerseNumberChange={(val) => setSelectedVerseNumber(val)}
       />
       <TafsirAndLanguageSelection
-        selectedTafsirs={selectedTafsirs}
+        selectedTafsirId={selectedTafsirId}
         selectedLanguage={selectedLanguage}
         onTafsirSelected={onTafsirSelected}
         onSelectLanguage={(newLang) => {
@@ -156,10 +159,14 @@ const TafsirBody = ({
         {initialTafsirData &&
         initialChapterId === selectedChapterId &&
         initialVerseNumber === selectedVerseNumber &&
-        initialTafsirId === tafsirs?.[0] ? (
+        initialTafsirId === selectedTafsirId ? (
           renderTafsir(initialTafsirData)
         ) : (
-          <DataFetcher loading={TafsirSkeleton} queryKey={queryKey} render={renderTafsir} />
+          <DataFetcher
+            loading={TafsirSkeleton}
+            queryKey={tafsirContentQuerykey}
+            render={renderTafsir}
+          />
         )}
       </div>
     </div>

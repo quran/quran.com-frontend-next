@@ -65,45 +65,50 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
   );
 };
 
+const notFoundResponse = {
+  props: {
+    hasError: true,
+  },
+  revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+};
+
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  let chapterIdOrSlug = String(params.chapterId);
-  const verseId = String(params.verseId);
-  // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidChapterId(chapterIdOrSlug) || !isValidVerseId(chapterIdOrSlug, verseId)) {
-    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
-    // if it's not a valid slug
-    if (!sluggedChapterId) {
-      return { notFound: true };
+  try {
+    let chapterIdOrSlug = String(params.chapterId);
+    const verseId = String(params.verseId);
+    // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
+    if (!isValidChapterId(chapterIdOrSlug) || !isValidVerseId(chapterIdOrSlug, verseId)) {
+      const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
+      // if it's not a valid slug
+      if (!sluggedChapterId) {
+        return { notFound: true };
+      }
+      chapterIdOrSlug = sluggedChapterId;
     }
-    chapterIdOrSlug = sluggedChapterId;
-  }
 
-  const chapterData = getChapterData(chapterIdOrSlug, locale);
+    const chapterData = getChapterData(chapterIdOrSlug, locale);
 
-  const tafsirData = await fetcher<TafsirContentResponse>(
-    makeTafsirContentUrl(getTafsirsInitialState(locale).selectedTafsirs[0], verseId, {
-      words: true,
-      ...getDefaultWordFields(),
-    }),
-  );
+    const tafsirData = await fetcher<TafsirContentResponse>(
+      makeTafsirContentUrl(getTafsirsInitialState(locale).selectedTafsirs[0], verseId, {
+        words: true,
+        ...getDefaultWordFields(),
+      }),
+    );
 
-  if (tafsirData.status === 500 || !chapterData) {
+    if (!chapterData) return notFoundResponse;
+
     return {
       props: {
-        hasError: true,
+        tafsirData,
+        chapter: {
+          chapter: { ...chapterData, id: chapterIdOrSlug },
+        },
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
+  } catch (error) {
+    return notFoundResponse;
   }
-  return {
-    props: {
-      tafsirData,
-      chapter: {
-        chapter: { ...chapterData, id: chapterIdOrSlug },
-      },
-    },
-    revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
-  };
 };
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [], // no pre-rendered chapters at build time.

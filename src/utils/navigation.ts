@@ -67,7 +67,8 @@ export const getVerseTafsirNavigationUrl = (
   chapterIdOrSlug: string | number,
   verseNumber: number,
   tafsirId?: string,
-): string => `/${chapterIdOrSlug}/${verseNumber}/tafsirs?${stringify({ tafsirId })}`;
+): string =>
+  `/${chapterIdOrSlug}/${verseNumber}/tafsirs${tafsirId ? `?${stringify({ tafsirId })}` : ''}`;
 
 /**
  * Get the href link to selected tafsir for Ayah.

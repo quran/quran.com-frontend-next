@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import styles from './TafsirView.module.scss';
 
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
@@ -12,17 +14,33 @@ const SurahAndAyahSelection = ({
 }) => {
   const chapterData = getAllChaptersData();
   const verses = generateChapterVersesKeys(selectedChapterId);
+  const surahOptions = useMemo(
+    () =>
+      Object.entries(chapterData).map(([id, chapter]) => ({
+        label: chapter.transliteratedName,
+        value: id,
+      })),
+    [chapterData],
+  );
+  const ayahOptions = useMemo(
+    () =>
+      verses.map((verseKey) => {
+        const verseNumber = getVerseNumberFromKey(verseKey).toString();
+        return {
+          label: verseNumber,
+          value: verseNumber,
+        };
+      }),
+    [verses],
+  );
 
   return (
-    <div className={styles.surahAyahLanguageSelectionContainer}>
+    <div className={styles.surahAndAyahSelectionContainer}>
       <Select
         size={SelectSize.Small}
         id="surah-selection"
         name="surah-selection"
-        options={Object.entries(chapterData).map(([id, chapter]) => ({
-          label: chapter.transliteratedName,
-          value: id,
-        }))}
+        options={surahOptions}
         onChange={onChapterIdChange}
         value={selectedChapterId}
       />
@@ -31,13 +49,7 @@ const SurahAndAyahSelection = ({
           size={SelectSize.Small}
           id="ayah-selection"
           name="ayah-selection"
-          options={verses.map((verseKey) => {
-            const verseNumber = getVerseNumberFromKey(verseKey).toString();
-            return {
-              label: verseNumber,
-              value: verseNumber,
-            };
-          })}
+          options={ayahOptions}
           onChange={onVerseNumberChange}
           value={selectedVerseNumber}
         />
