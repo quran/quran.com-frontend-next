@@ -135,11 +135,27 @@ const TafsirBody = ({
       <SurahAndAyahLanguageSelection
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
-        onChapterIdChange={(val) => {
-          setSelectedChapterId(val.toString());
+        onChapterIdChange={(newChapterId) => {
+          fakeNavigate(
+            getVerseTafsirNavigationUrl(
+              Number(newChapterId),
+              Number(1),
+              selectedTafsirId.toString(),
+            ),
+          );
+          setSelectedChapterId(newChapterId.toString());
           setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
         }}
-        onVerseNumberChange={(val) => setSelectedVerseNumber(val)}
+        onVerseNumberChange={(newVerseNumber) => {
+          setSelectedVerseNumber(newVerseNumber);
+          fakeNavigate(
+            getVerseTafsirNavigationUrl(
+              Number(selectedChapterId),
+              Number(newVerseNumber),
+              selectedTafsirId.toString(),
+            ),
+          );
+        }}
       />
       <TafsirAndLanguageSelection
         selectedTafsirId={selectedTafsirId}
