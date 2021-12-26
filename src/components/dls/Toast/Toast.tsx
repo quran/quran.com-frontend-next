@@ -1,4 +1,6 @@
 /* eslint-disable react/no-multi-comp */
+import { useContext } from 'react';
+
 import classNames from 'classnames';
 import {
   ToastContainer as PrimitiveToastContainer,
@@ -8,6 +10,7 @@ import {
 
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './Toast.module.scss';
+import ToastContext from './ToastContext';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
@@ -27,7 +30,7 @@ type Options = {
   status?: ToastStatus;
 };
 const TOAST_DURATION = 3000; // 3 second
-export const toast = (content: React.ReactNode, options: Options = {}) => {
+const toast = (content: React.ReactNode, options: Options = {}) => {
   const toastId = primitiveToast(
     <div className={styles.contentContainer}>
       {content}
@@ -60,6 +63,7 @@ export const toast = (content: React.ReactNode, options: Options = {}) => {
     },
   );
 };
+
 export const ToastContainer = () => {
   return (
     <PrimitiveToastContainer
@@ -75,4 +79,13 @@ export const ToastContainer = () => {
       draggableDirection="y"
     />
   );
+};
+
+export const useToast = () => {
+  const setShouldRenderTosat = useContext(ToastContext);
+
+  return (content: React.ReactNode, options: Options = {}) => {
+    setShouldRenderTosat(true);
+    toast(content, options);
+  };
 };

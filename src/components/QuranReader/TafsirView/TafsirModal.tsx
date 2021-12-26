@@ -11,6 +11,7 @@ import TafsirBody from './TafsirBody';
 import EmbeddableContent from 'src/components/dls/EmbeddableContent/EmbeddableContent';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
@@ -29,6 +30,7 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
       <PopoverMenu.Item
         icon={<TafsirIcon />}
         onClick={() => {
+          logButtonClick('verse_actions_menu_tafsir');
           setIsModalOpen(true);
           fakeNavigate(
             getVerseTafsirNavigationUrl(verse.chapterId, verse.verseNumber, tafsirs[0].toString()),

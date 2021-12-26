@@ -156,6 +156,7 @@
         "translation": "翻译"
     },
     "reciter": "朗诵者",
+    "reflect": "反映",
     "remove": "消除",
     "retry": "重试",
     "search": {
@@ -211,8 +212,6 @@
     },
     "tarteel": {
         "app": "Tarteel 应用程序",
-        "desc": "古兰经语音搜索",
-        "learn": "学习如何使用语音搜索",
         "name": "Tarteel.ai"
     },
     "theme": "主题",
@@ -239,7 +238,10 @@
         "error": "发生错误，请稍后重试。或下载",
         "no-permission": "您似乎没有启用麦克风权限。请启用麦克风权限并重试或下载",
         "not-supported": "您的浏览器似乎不支持麦克风。请尝试不同的浏览器或下载",
-        "suggest": "请开始背诵，你的诗句就会出现。"
+        "suggest": "请开始背诵，你的诗句就会出现。",
+        "suggest-subtitle": "用阿拉伯语背诵任何一节经文，这节经文就会出现",
+        "suggest-title": "现在背诵",
+        "voice-search-powered-by": "语音搜索 技术支持"
     },
     "wbw": "逐词地",
     "wbw-trans-lang": "逐字语言",

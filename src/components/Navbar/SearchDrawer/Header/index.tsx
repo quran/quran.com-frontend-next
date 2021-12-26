@@ -9,6 +9,7 @@ import styles from './Header.module.scss';
 
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 interface Props {
   isVoiceFlowStarted: boolean;
@@ -33,7 +34,11 @@ const Header: React.FC<Props> = ({
   return (
     <>
       {isVoiceFlowStarted ? (
-        <TarteelVoiceSearchTrigger />
+        <TarteelVoiceSearchTrigger
+          onClick={() => {
+            logButtonClick('search_drawer_voice_search_stop_flow');
+          }}
+        />
       ) : (
         <>
           <DrawerSearchIcon />
@@ -52,7 +57,11 @@ const Header: React.FC<Props> = ({
               value={searchQuery}
               disabled={isSearching}
             />
-            <TarteelVoiceSearchTrigger />
+            <TarteelVoiceSearchTrigger
+              onClick={() => {
+                logButtonClick('search_drawer_voice_search_start_flow');
+              }}
+            />
             {searchQuery && (
               <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
                 {t('input.clear')}

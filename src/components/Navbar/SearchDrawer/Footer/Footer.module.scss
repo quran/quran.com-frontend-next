@@ -1,9 +1,8 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   font-size: var(--font-size-xsmall-dangerous);
-  padding-block: var(--spacing-xsmall);
 }
 
 .betaContainer {

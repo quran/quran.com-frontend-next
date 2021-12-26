@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import styles from './ResetButton.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
-import { toast, ToastContainer, ToastStatus } from 'src/components/dls/Toast/Toast';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import resetSettings from 'src/redux/slices/reset-settings';
 import { logButtonClick } from 'src/utils/eventLogger';
 
@@ -14,6 +14,7 @@ import { logButtonClick } from 'src/utils/eventLogger';
 const ResetButton = () => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
+  const toast = useToast();
 
   const onResetSettingsClicked = () => {
     logButtonClick('reset_settings');
@@ -23,7 +24,6 @@ const ResetButton = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className={styles.resetButtonContainer}>
         <Button onClick={onResetSettingsClicked}>{t('settings.reset-cta')}</Button>
       </div>

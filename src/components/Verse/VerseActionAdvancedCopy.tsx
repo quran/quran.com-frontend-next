@@ -9,6 +9,7 @@ import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 import Modal from 'src/components/dls/Modal/Modal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
 
 type VerseActionAdvancedCopyProps = {
@@ -21,10 +22,22 @@ const VerseActionAdvancedCopy = ({ verse }: VerseActionAdvancedCopyProps) => {
 
   return (
     <>
-      <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={() => setIsModalOpen(true)}>
+      <PopoverMenu.Item
+        icon={<AdvancedCopyIcon />}
+        onClick={() => {
+          logEvent('advanced_copy_modal_open');
+          setIsModalOpen(true);
+        }}
+      >
         {t('advanced-copy')}
       </PopoverMenu.Item>
-      <Modal isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        onClickOutside={() => {
+          logEvent('advanced_copy_modal_close');
+          setIsModalOpen(false);
+        }}
+      >
         <VerseAdvancedCopy verse={verse}>
           {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
             <>
