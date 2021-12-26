@@ -23,7 +23,7 @@ const EmbeddableContent = ({
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay}>
-          <Dialog.Content className={styles.content} onInteractOutside={onClose}>
+          <Dialog.Content className={styles.contentWrapper} onInteractOutside={onClose}>
             {hasCloseButton && (
               <Dialog.Close className={styles.closeIcon}>
                 <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onClose}>
@@ -31,7 +31,7 @@ const EmbeddableContent = ({
                 </Button>
               </Dialog.Close>
             )}
-            {children}
+            <div className={styles.content}>{children}</div>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Portal>
