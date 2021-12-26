@@ -12,7 +12,6 @@ type EmbeddableContentProps = {
   hasCloseButton?: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const EmbeddableContent = ({
   isOpen,
   onClose,

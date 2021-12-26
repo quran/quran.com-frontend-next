@@ -11,7 +11,7 @@ import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
 import ShareIcon from '../../../public/icons/share.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
-import TafsirModal from '../QuranReader/TafsirView/TafsirModal';
+import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 import { onShareClicked } from '../QuranReader/TranslationView/ShareVerseButton';
 
 import styles from './OverflowVerseActionsMenyBody.module.scss';
@@ -93,7 +93,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
 
       <VerseActionAdvancedCopy verse={verse} />
 
-      <TafsirModal verse={verse} />
+      <TafsirVerseAction chapterId={Number(verse.chapterId)} verseNumber={verse.verseNumber} />
 
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}

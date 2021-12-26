@@ -13,14 +13,14 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
-import Verse from 'types/Verse';
 
-type TafsirModalProps = {
-  verse: Verse;
+type TafsirVerseActionProps = {
+  verseNumber: number;
+  chapterId: number;
 };
 
-const TafsirModal = ({ verse }: TafsirModalProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) => {
+  const [isEmbeddableContentOpen, setIsEmbeddableContentOpen] = useState(false);
   const { t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const router = useRouter();
@@ -31,29 +31,27 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
         icon={<TafsirIcon />}
         onClick={() => {
           logButtonClick('verse_actions_menu_tafsir');
-          setIsModalOpen(true);
-          fakeNavigate(
-            getVerseTafsirNavigationUrl(verse.chapterId, verse.verseNumber, tafsirs[0].toString()),
-          );
+          setIsEmbeddableContentOpen(true);
+          fakeNavigate(getVerseTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0].toString()));
         }}
       >
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <EmbeddableContent
-        isOpen={isModalOpen}
+        isOpen={isEmbeddableContentOpen}
         hasCloseButton
         onClose={() => {
           fakeNavigate(router.asPath);
-          setIsModalOpen(false);
+          setIsEmbeddableContentOpen(false);
         }}
       >
         <TafsirBody
-          initialChapterId={verse.chapterId.toString()}
-          initialVerseNumber={verse.verseNumber.toString()}
+          initialChapterId={chapterId.toString()}
+          initialVerseNumber={verseNumber.toString()}
         />
       </EmbeddableContent>
     </>
   );
 };
 
-export default TafsirModal;
+export default TafsirVerseAction;
