@@ -101,7 +101,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   height: auto;
   padding-block: var(--spacing-xxsmall);
   padding-inline: var(--spacing-small);
-  margin-inline-end: var(--spacing-medium);
+  margin-inline-start: var(--spacing-medium);
   border: none;
   color: var(--color-text-default);
   &:hover {
@@ -161,6 +161,11 @@ $container-max-width: calc(23 * var(--spacing-mega));
   border-radius: var(--border-radius-default);
   border: 1px solid var(--color-success-faint);
   font-size: var(--font-size-normal);
+}
+
+.languageSelection {
+  min-width: calc(6 * var(--spacing-medium));
+  width: calc(6 * var(--spacing-medium));
 }
 
 @include utility.generate-font-sizes("tafsir");

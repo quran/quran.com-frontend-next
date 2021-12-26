@@ -39,6 +39,7 @@ const TafsirModal = ({ verse }: TafsirModalProps) => {
       </PopoverMenu.Item>
       <EmbeddableContent
         isOpen={isModalOpen}
+        hasCloseButton
         onClose={() => {
           fakeNavigate(router.asPath);
           setIsModalOpen(false);

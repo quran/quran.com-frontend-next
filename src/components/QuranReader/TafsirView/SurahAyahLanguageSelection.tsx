@@ -1,19 +1,14 @@
-import capitalize from 'lodash/capitalize';
-
 import styles from './TafsirView.module.scss';
 
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
-const SurahAyahLanguageSelection = ({
+const SurahAndAyahSelection = ({
   selectedChapterId,
   selectedVerseNumber,
   onChapterIdChange,
   onVerseNumberChange,
-  onLanguageChange,
-  selectedLanguage,
-  languageOptions,
 }) => {
   const chapterData = getAllChaptersData();
   const verses = generateChapterVersesKeys(selectedChapterId);
@@ -47,22 +42,8 @@ const SurahAyahLanguageSelection = ({
           value={selectedVerseNumber}
         />
       </div>
-
-      <div className={styles.selectionItem}>
-        <Select
-          size={SelectSize.Small}
-          id="lang-selection"
-          name="lang-selection"
-          options={languageOptions.map((lng) => ({
-            label: capitalize(lng),
-            value: lng,
-          }))}
-          onChange={onLanguageChange}
-          value={selectedLanguage}
-        />
-      </div>
     </div>
   );
 };
 
-export default SurahAyahLanguageSelection;
+export default SurahAndAyahSelection;

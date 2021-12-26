@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import { useCallback, useEffect, useState } from 'react';
 
@@ -9,7 +10,7 @@ import useSWR from 'swr/immutable';
 
 import SurahAndAyahLanguageSelection from './SurahAyahLanguageSelection';
 import TafsirGroupMessage from './TafsirGroupMessage';
-import TafsirSelection from './TafsirSelection';
+import TafsirAndLanguageSelection from './TafsirSelection';
 import TafsirSkeleton from './TafsirSkeleton';
 import styles from './TafsirView.module.scss';
 
@@ -131,19 +132,20 @@ const TafsirBody = ({
       <SurahAndAyahLanguageSelection
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
-        selectedLanguage={selectedLanguage}
         onChapterIdChange={(val) => {
           setSelectedChapterId(val.toString());
           setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
         }}
         onVerseNumberChange={(val) => setSelectedVerseNumber(val)}
-        onLanguageChange={(newLang) => setSelectedLanguage(newLang)}
-        languageOptions={languageOptions}
       />
-      <TafsirSelection
+      <TafsirAndLanguageSelection
         selectedTafsirs={selectedTafsirs}
         selectedLanguage={selectedLanguage}
         onTafsirSelected={onTafsirSelected}
+        onSelectLanguage={(newLang) => {
+          setSelectedLanguage(newLang);
+        }}
+        languageOptions={languageOptions}
       />
       <div
         className={classNames(
@@ -170,6 +172,7 @@ const TafsirBody = ({
  * @param {Tafsir[]} tafsirs
  * @returns {string[]} list of available language options
  */
-const getTafsirsLanguageOptions = (tafsirs) => uniq(tafsirs.map((tafsir) => tafsir.languageName));
+const getTafsirsLanguageOptions = (tafsirs): string[] =>
+  uniq(tafsirs.map((tafsir) => tafsir.languageName));
 
 export default TafsirBody;
