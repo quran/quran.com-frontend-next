@@ -34,9 +34,6 @@ $container-max-width: calc(23 * var(--spacing-mega));
   padding-inline-end: 0;
   letter-spacing: 0;
   line-height: normal;
-  direction: ltr;
-  /* stylelint-disable-next-line csstools/use-logical */
-  text-align: left;
   p {
     margin-block-end: var(--spacing-small);
     opacity: var(--opacity-85);
@@ -101,12 +98,16 @@ $container-max-width: calc(23 * var(--spacing-mega));
   height: auto;
   padding-block: var(--spacing-xxsmall);
   padding-inline: var(--spacing-small);
-  margin-inline-start: var(--spacing-medium);
   border: none;
   color: var(--color-text-default);
   &:hover {
     background-color: var(--color-background-alternative-faint);
     opacity: var(--opacity-75);
+  }
+
+  margin-inline-start: var(--spacing-medium);
+  [dir="rtl"] & {
+    margin-inline-end: var(--spacing-medium);
   }
 }
 

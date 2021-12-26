@@ -89,10 +89,8 @@ const TafsirBody = ({
 
   useEffect(() => {
     if (tafsirListData) {
-      const selectedTafsir = tafsirListData.tafsirs.find(
-        (tafsir) => tafsir.id === selectedTafsirId,
-      );
-      setSelectedLanguage(selectedTafsir.languageName);
+      const languageName = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
+      setSelectedLanguage(languageName);
       onTafsirSelected(selectedTafsirId);
     }
   }, [onTafsirSelected, selectedTafsirId, tafsirListData]);
@@ -127,8 +125,10 @@ const TafsirBody = ({
     );
   }, []);
 
+  const selectedTafsirLanguage = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
+
   return (
-    <div>
+    <div dir={isRTLLanguage(selectedTafsirLanguage) ? 'rtl' : 'ltr'}>
       <SurahAndAyahLanguageSelection
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
@@ -176,3 +176,13 @@ const getTafsirsLanguageOptions = (tafsirs): string[] =>
   uniq(tafsirs.map((tafsir) => tafsir.languageName));
 
 export default TafsirBody;
+
+const getSelectedTafsirLanguage = (tafsirListData, selectedTafsirId) => {
+  const selectedTafsir = tafsirListData?.tafsirs.find((tafsir) => tafsir.id === selectedTafsirId);
+  return selectedTafsir?.languageName;
+};
+
+const rtlLanguage = ['arabic', 'urdu'];
+const isRTLLanguage = (lang: string) => {
+  return rtlLanguage.includes(lang);
+};
