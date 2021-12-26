@@ -1,23 +1,36 @@
+import { useEffect } from 'react';
+
 import * as Dialog from '@radix-ui/react-dialog';
+import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
-import styles from './EmbeddableContent.module.scss';
+import styles from './ContentModal.module.scss';
 
-type EmbeddableContentProps = {
+import { fakeNavigate } from 'src/utils/navigation';
+
+type ContentModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
   children: React.ReactNode;
   hasCloseButton?: boolean;
+  url?: string;
 };
 
-const EmbeddableContent = ({
-  isOpen,
-  onClose,
-  hasCloseButton,
-  children,
-}: EmbeddableContentProps) => {
+const ContentModal = ({ isOpen, onClose, hasCloseButton, children, url }: ContentModalProps) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isOpen) fakeNavigate(url);
+    else fakeNavigate(router.asPath);
+
+    return () => {
+      fakeNavigate(router.asPath);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
@@ -39,4 +52,4 @@ const EmbeddableContent = ({
   );
 };
 
-export default EmbeddableContent;
+export default ContentModal;
