@@ -38,3 +38,8 @@
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
+
+.list {
+  list-style: unset;
+  padding-inline-start: var(--spacing-mega);
+}
