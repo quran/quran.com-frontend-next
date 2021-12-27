@@ -24,6 +24,7 @@ import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
@@ -95,43 +96,40 @@ const TafsirBody = ({
 
   // there's no 1:1 data that can map our locale options to the tafsir language options
   // so we're using options that's available from tafsir for now
-  // TODO: update lanague options, to use the same options as our LanguageSelector
+  // TODO: update language options, to use the same options as our LanguageSelector
   const languageOptions = tafsirSelectionList
     ? getTafsirsLanguageOptions(tafsirSelectionList.tafsirs)
     : [];
 
-  const selectedTafsirLanguage = getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirId);
+  const renderTafsir = useCallback((data) => {
+    if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-  const renderTafsir = useCallback(
-    (data) => {
-      if (!data) return <TafsirSkeleton />;
-      const tafsirVerses = data?.tafsir.verses;
-      const htmlText = data?.tafsir.text;
-      const words = Object.values(tafsirVerses).map(getVerseWords).flat();
+    const { verses, text, languageId } = data.tafsir;
+    const langData = getLanguageDataById(languageId);
+    const words = Object.values(verses).map(getVerseWords).flat();
 
-      if (!htmlText) return <TafsirSkeleton />;
+    if (!text) return <TafsirSkeleton />;
 
-      const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(tafsirVerses);
-      return (
-        <div>
-          {Object.values(tafsirVerses).length > 1 && (
-            <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
-          )}
-          <div className={styles.verseTextContainer}>
-            <VerseText words={words} />
-          </div>
-          <div className={styles.separatorContainer}>
-            <Separator />
-          </div>
-          <div
-            dir={isRTLLanguage(selectedTafsirLanguage) ? 'rtl' : 'ltr'}
-            dangerouslySetInnerHTML={{ __html: htmlText }}
-          />
+    const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
+    return (
+      <div>
+        {Object.values(verses).length > 1 && (
+          <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
+        )}
+        <div className={styles.verseTextContainer}>
+          <VerseText words={words} />
         </div>
-      );
-    },
-    [selectedTafsirLanguage],
-  );
+        <div className={styles.separatorContainer}>
+          <Separator />
+        </div>
+        <div
+          dir={langData.direction}
+          lang={langData.code}
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
+      </div>
+    );
+  }, []);
 
   const tafsirContentQuerykey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
     words: true,
@@ -211,9 +209,4 @@ export default TafsirBody;
 const getSelectedTafsirLanguage = (tafsirListData, selectedTafsirId) => {
   const selectedTafsir = tafsirListData?.tafsirs.find((tafsir) => tafsir.id === selectedTafsirId);
   return selectedTafsir?.languageName;
-};
-
-const rtlLanguage = ['arabic', 'urdu'];
-const isRTLLanguage = (lang: string) => {
-  return rtlLanguage.includes(lang);
 };

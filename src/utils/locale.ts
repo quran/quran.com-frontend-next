@@ -145,6 +145,7 @@ interface LinkLanguageAlternate {
 interface LanguageData {
   direction: string;
   font: string;
+  code: string;
 }
 
 /**
@@ -184,9 +185,12 @@ export const getDir = (locale: string): Direction =>
  * @returns {LanguageData}
  */
 export const getLanguageDataById = (languageId: number): LanguageData => {
+  const lang = Languages[languageId];
+
   return {
-    font: getLanguageFontById(languageId),
-    direction: getLanguageDirectionById(languageId),
+    font: lang?.font,
+    direction: lang?.dir || Direction.LTR,
+    code: lang.locale || 'en',
   };
 };
 
