@@ -10,8 +10,8 @@ import ChatIcon from '../../../public/icons/chat.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
 import ShareIcon from '../../../public/icons/share.svg';
-import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 import { onShareClicked } from '../QuranReader/TranslationView/ShareVerseButton';
 
 import styles from './OverflowVerseActionsMenyBody.module.scss';
@@ -69,14 +69,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
     });
   };
 
-  const onTafsirsClicked = () => {
-    logButtonClick('verse_actions_menu_tafsirs');
-    router.push({
-      pathname: '/[chapterId]/[verseId]/tafsirs',
-      query: { chapterId: verse.chapterId, verseId: verse.verseNumber },
-    });
-  };
-
   const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
 
   const verseUrl = getVerseUrl(verse.verseKey);
@@ -101,9 +93,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
 
       <VerseActionAdvancedCopy verse={verse} />
 
-      <PopoverMenu.Item onClick={onTafsirsClicked} icon={<TafsirIcon />}>
-        {t('quran-reader:tafsirs')}
-      </PopoverMenu.Item>
+      <TafsirVerseAction chapterId={Number(verse.chapterId)} verseNumber={verse.verseNumber} />
 
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}

@@ -4,11 +4,11 @@ import { useState } from 'react';
 
 import Spinner from '../Spinner/Spinner';
 
-import EmbeddableContent from './EmbeddableContent';
+import ContentModal from './ContentModal';
 
 export default {
-  title: 'dls/EmbeddableContent',
-  component: EmbeddableContent,
+  title: 'dls/ContentModal',
+  component: ContentModal,
 };
 
 const content = (
@@ -38,7 +38,7 @@ export const Normal = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <ContentModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {content}
         {content}
         {content}
@@ -46,7 +46,7 @@ export const Normal = () => {
         {content}
         {content}
         {content}
-      </EmbeddableContent>
+      </ContentModal>
     </>
   );
 };
@@ -56,9 +56,9 @@ export const Loading = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <ContentModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Spinner />
-      </EmbeddableContent>
+      </ContentModal>
     </>
   );
 };
@@ -68,14 +68,14 @@ export const UnTriggered = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <ContentModal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {content}
         {content}
         {content}
         {content}
         {content}
         {content}
-      </EmbeddableContent>
+      </ContentModal>
     </>
   );
 };
@@ -85,14 +85,14 @@ export const WithoutCloseIcon = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>Open</button>
-      <EmbeddableContent isOpen={isOpen} onClose={() => setIsOpen(false)} hasCloseButton={false}>
+      <ContentModal isOpen={isOpen} onClose={() => setIsOpen(false)} hasCloseButton={false}>
         {content}
         {content}
         {content}
         {content}
         {content}
         {content}
-      </EmbeddableContent>
+      </ContentModal>
     </>
   );
 };

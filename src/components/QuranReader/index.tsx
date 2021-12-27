@@ -147,6 +147,7 @@ const QuranReader = ({
   };
   const hasMore =
     size < getPageLimit(isVerseData, isTafsirData || isSelectedTafsirData, initialData);
+
   return (
     <>
       <ContextMenu />

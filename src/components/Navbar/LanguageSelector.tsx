@@ -29,6 +29,7 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
 };
+
 const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
