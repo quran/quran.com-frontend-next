@@ -7,7 +7,7 @@ import IconMenu from '../../../../public/icons/menu.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';
-import Logo from '../Logo/Logo';
+import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '../SearchDrawer/SearchDrawer';
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
@@ -64,7 +64,7 @@ const NavbarBody: React.FC = () => {
             </Button>
             <NavigationDrawer />
           </>
-          <Logo />
+          <NavbarLogoWrapper />
         </div>
       </div>
       <div className={styles.centerVertically}>

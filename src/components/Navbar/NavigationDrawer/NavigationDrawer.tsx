@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
-import Logo from '../Logo/Logo';
+import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerBodySkeleton from './NavigationDrawerBodySkeleton';
@@ -27,7 +27,7 @@ const NavigationDrawer = () => {
       header={
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
-            <Logo />
+            <NavbarLogoWrapper />
           </div>
         </div>
       }

@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
 
-import styles from './Logo.module.scss';
+import styles from './NavbarLogoWrapper.module.scss';
 
-const Logo = () => {
+const NavbarLogoWrapper = () => {
   return (
     <Link href="/">
       <a className={styles.logoWrapper}>
@@ -14,4 +14,4 @@ const Logo = () => {
   );
 };
 
-export default Logo;
+export default NavbarLogoWrapper;
