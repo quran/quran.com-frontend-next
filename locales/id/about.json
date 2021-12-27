@@ -1,6 +1,6 @@
 {
     "credits": {
-        "desc": "Pekerjaan ini tidak akan mungkin terjadi tanpa banyak perpustakaan dan proyek sumber terbuka yang telah kami gunakan:",
+        "desc": "Proyek ini tidak akan mungkin terjadi tanpa banyak perpustakaan sumber terbuka dan proyek yang telah kami gunakan:",
         "lokalize": "<0> Lokalize <\/0> : Sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
         "quran-align": "<0> Collin Fair <\/0> : Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
         "quran-complex": "<0> QuranComplex <\/0> : Kompleks Percetakan Al-Qur'an King Fahd adalah pemimpin dalam melayani Al-Qur'an dan Ilmunya, menerjemahkan Maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan yang optimal dari teknologi canggih di bidang percetakan, rekaman audio, penerbitan elektronik dan aplikasi digital.",
@@ -9,5 +9,5 @@
         "title": "Kredit",
         "zekr": "<0> Zekr <\/0> : Sebuah platform terbuka alat belajar Quran untuk browsing dan meneliti Quran"
     },
-    "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan mempelajari Al-Quran. Proyek ini open source dan dibangun sebagai kolaborasi antara anggota tim inti dan <0> tim Tarteel < \/0 > ."
+    "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan mempelajari Al-Quran. Proyek ini open source dan dibangun sebagai kolaborasi antara anggota tim inti dan <0> tim Tarteel <\/0> ."
 }

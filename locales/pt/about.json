@@ -1,6 +1,6 @@
 {
     "credits": {
-        "desc": "Este trabalho não teria sido possível sem as muitas bibliotecas e projetos de código aberto que usamos:",
+        "desc": "Este projeto não teria sido possível sem as muitas bibliotecas e projetos de código aberto que usamos:",
         "lokalize": "<0> Lokalize <\/0> : Um sistema de tradução auxiliado por computador que se concentra na produtividade e na garantia de qualidade e fornece um fluxo de trabalho de localização perfeito.",
         "quran-align": "<0> Collin Fair <\/0> : Uma ferramenta para produzir a segmentação com precisão de palavras da recitação do Alcorão gravada.",
         "quran-complex": "<0> Complexo do Alcorão <\/0> : O Complexo de Impressão do Alcorão Glorioso do Rei Fahd é líder em servir o Alcorão Glorioso e suas Ciências, traduzindo seus significados e salvaguardando o Texto do Alcorão de distorção, por meio do uso otimizado de tecnologias avançadas no campo da impressão, gravações de áudio, edição eletrônica e aplicações digitais.",
@@ -9,5 +9,5 @@
         "title": "Créditos",
         "zekr": "<0> Zekr <\/0> : uma ferramenta de estudo do Alcorão de plataforma aberta para navegar e pesquisar no Alcorão"
     },
-    "main-description": "Quran.com foi fundado em 1995. O site tem como objetivo tornar mais fácil para qualquer pessoa ler, estudar e aprender o Alcorão. O projeto é de código aberto e foi construído como uma colaboração entre os membros da equipe principal e a <0> equipe Tarteel <\/0> ."
+    "main-description": "Quran.com foi fundado em 1995. O site tem como objetivo tornar mais fácil para qualquer pessoa ler, estudar e aprender o Alcorão. O projeto é de código aberto e é construído como uma colaboração entre os membros da equipe principal e a <0> equipe Tarteel <\/0> ."
 }

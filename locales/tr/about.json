@@ -1,6 +1,6 @@
 {
     "credits": {
-        "desc": "Bu çalışma, kullandığımız birçok açık kaynak kitaplık ve proje olmadan mümkün olmazdı:",
+        "desc": "Bu proje, kullandığımız birçok açık kaynak kitaplık ve proje olmadan mümkün olmazdı:",
         "lokalize": "<0> Lokalize <\/0> : Verimlilik ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemi.",
         "quran-align": "<0> Collin Fair <\/0> : Kaydedilmiş Kur'an tilavetinin kelime-kesin olarak bölümlemesini üretmek için bir araç.",
         "quran-complex": "<0> <\/0> : Kral Fahd Şanlı Kuran Basım Kompleksi, Kur'an-ı Kerim'e ve Bilimlerine hizmet etmede, Anlamlarını tercüme etmede ve Kuran Metnini bozulmadan korumada liderdir. baskı, ses kayıtları, elektronik yayıncılık ve dijital uygulamalar alanında ileri teknolojiler.",
@@ -9,5 +9,5 @@
         "title": "Kredi",
         "zekr": "<0> Zekr <\/0> : Kuran'a göz atmak ve araştırmak için açık platform Kuran çalışma aracı"
     },
-    "main-description": "Kuran.com 1995 yılında kuruldu. Web sitesi herkesin Kuran'ı okumasını, incelemesini ve öğrenmesini kolaylaştırmayı amaçlıyor. Proje açık kaynaktır ve çekirdek ekip üyeleri ile <0> Tarteel ekibi < \/0 > arasında bir işbirliği olarak oluşturulmuştur."
+    "main-description": "Kuran.com 1995 yılında kuruldu. Web sitesi herkesin Kuran'ı okumasını, incelemesini ve öğrenmesini kolaylaştırmayı amaçlıyor. Proje açık kaynaktır ve çekirdek ekip üyeleri ile <0> Tarteel ekibi <\/0> arasında bir işbirliği olarak oluşturulmuştur."
 }

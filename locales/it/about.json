@@ -1,6 +1,6 @@
 {
     "credits": {
-        "desc": "Questo lavoro non sarebbe stato possibile senza le numerose librerie e progetti open source che abbiamo utilizzato:",
+        "desc": "Questo progetto non sarebbe stato possibile senza le numerose librerie e progetti open source che abbiamo utilizzato:",
         "lokalize": "<0> Lokalize <\/0> : un sistema di traduzione assistita da computer che si concentra sulla produttività e sul controllo della qualità e fornisce un flusso di lavoro di localizzazione senza interruzioni.",
         "quran-align": "<0> Collin Fair <\/0> : Uno strumento per produrre una segmentazione precisa delle parole della recitazione coranica registrata.",
         "quran-complex": "<0> QuranComplex <\/0> : King Fahd Glorious Qur'an Printing Complex è leader nel servire il glorioso Corano e le sue scienze, traducendo i suoi significati e salvaguardando il testo coranico dalla distorsione, attraverso l'uso ottimale di tecnologie avanzate nel campo della stampa, delle registrazioni audio, dell'editoria elettronica e delle applicazioni digitali.",
@@ -9,5 +9,5 @@
         "title": "Titoli di coda",
         "zekr": "<0> Zekr <\/0> : Uno strumento di studio del Corano a piattaforma aperta per la navigazione e la ricerca sul Corano"
     },
-    "main-description": "Quran.com è stato fondato nel 1995. Il sito web mira a rendere facile per chiunque leggere, studiare e imparare il Corano. Il progetto è open source ed è stato realizzato come una collaborazione tra i membri del core team e il <0> team Tarteel < \/0 > ."
+    "main-description": "Quran.com è stato fondato nel 1995. Il sito web mira a rendere facile per chiunque leggere, studiare e imparare il Corano. Il progetto è open source ed è costruito come una collaborazione tra i membri del core team e il <0> team Tarteel <\/0> ."
 }

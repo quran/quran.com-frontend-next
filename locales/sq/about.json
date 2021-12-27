@@ -1,6 +1,6 @@
 {
     "credits": {
-        "desc": "Kjo punë nuk do të ishte e mundur pa shumë biblioteka dhe projekte me burim të hapur që kemi përdorur:",
+        "desc": "Ky projekt nuk do të ishte i mundur pa shumë biblioteka dhe projekte me burim të hapur që kemi përdorur:",
         "lokalize": "<0> Lokalize <\/0> : Një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune lokalizimi pa probleme.",
         "quran-align": "<0> Collin Fair <\/0> : Një mjet për prodhimin e segmentimit të saktë të fjalëve të recitimit të regjistruar Kur'anor.",
         "quran-complex": "<0> Kompleksi i Kuranit <\/0> : Kompleksi i Shtypjes së Kur'anit të Lavdishëm Mbreti Fahd është një lider në shërbimin e Kur'anit të lavdishëm dhe shkencave të tij, në përkthimin e kuptimeve të tij dhe në mbrojtjen e tekstit kuranor nga shtrembërimi, nëpërmjet përdorimit optimal të teknologji të avancuara në fushën e printimit, regjistrimeve audio, publikimeve elektronike dhe aplikacioneve dixhitale.",
@@ -9,5 +9,5 @@
         "title": "Kreditë",
         "zekr": "<0> Zekr <\/0> : Një platformë e hapur mjet studimi i Kuranit për shfletimin dhe kërkimin mbi Kuranin"
     },
-    "main-description": "Quran.com u themelua në vitin 1995. Faqja e internetit synon ta bëjë të lehtë për këdo leximin, studimin dhe mësimin e Kuranit. Projekti është me burim të hapur dhe u ndërtua si një bashkëpunim midis anëtarëve të ekipit kryesor dhe ekipit <0> Tarteel < \/0 > ."
+    "main-description": "Quran.com u themelua në vitin 1995. Faqja e internetit synon ta bëjë të lehtë për këdo leximin, studimin dhe mësimin e Kuranit. Projekti është me kod të hapur dhe është ndërtuar si një bashkëpunim midis anëtarëve të ekipit kryesor dhe ekipit <0> Tarteel <\/0> ."
 }
