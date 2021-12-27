@@ -1,14 +1,13 @@
 import React, { memo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 
 import IconMenu from '../../../../public/icons/menu.svg';
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';
+import Logo from '../Logo/Logo';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '../SearchDrawer/SearchDrawer';
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
@@ -65,11 +64,7 @@ const NavbarBody: React.FC = () => {
             </Button>
             <NavigationDrawer />
           </>
-          <Link href="/">
-            <a className={styles.logoWrapper}>
-              <QuranTextLogo />
-            </a>
-          </Link>
+          <Logo />
         </div>
       </div>
       <div className={styles.centerVertically}>

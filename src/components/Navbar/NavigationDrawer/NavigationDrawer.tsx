@@ -2,11 +2,10 @@
 import React from 'react';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
 import Drawer, { DrawerSide, DrawerType } from '../Drawer';
+import Logo from '../Logo/Logo';
 
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerBodySkeleton from './NavigationDrawerBodySkeleton';
@@ -28,11 +27,7 @@ const NavigationDrawer = () => {
       header={
         <div className={styles.centerVertically}>
           <div className={styles.leftCTA}>
-            <Link href="/">
-              <a className={styles.logoLink}>
-                <QuranTextLogo />
-              </a>
-            </Link>
+            <Logo />
           </div>
         </div>
       }
