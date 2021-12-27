@@ -8,9 +8,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import useSWR from 'swr/immutable';
 
-import SurahAndAyahLanguageSelection from './SurahAndAyahSelection';
+import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
+import SurahAndAyahSelection from './SurahAndAyahSelection';
 import TafsirGroupMessage from './TafsirGroupMessage';
-import TafsirAndLanguageSelection from './TafsirSelection';
 import TafsirSkeleton from './TafsirSkeleton';
 import styles from './TafsirView.module.scss';
 
@@ -25,7 +25,7 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
-import { getFirstAndLastFirstKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 type TafsirBodyProps = {
@@ -48,7 +48,7 @@ const TafsirBody = ({
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
-  const [selectedLanguage, setSelectedLanguage] = useState(lang);
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
   const [selectedTafsirId, setSelectedTafsirId] = useState(userPreferredTafsirIds?.[0]);
 
@@ -98,32 +98,38 @@ const TafsirBody = ({
   // TODO: update lanague options, to use the same options as our LanguageSelector
   const languageOptions = tafsirListData ? getTafsirsLanguageOptions(tafsirListData.tafsirs) : [];
 
-  const renderTafsir = useCallback((data) => {
-    if (!data) return <TafsirSkeleton />;
-    const tafsirVerses = data?.tafsir.verses;
-    const htmlText = data?.tafsir.text;
-    const words = Object.values(tafsirVerses).map(getVerseWords).flat();
-
-    if (!htmlText) return <TafsirSkeleton />;
-
-    const [firstVerseKey, lastVerseKey] = getFirstAndLastFirstKeys(tafsirVerses);
-    return (
-      <div>
-        {Object.values(tafsirVerses).length > 1 && (
-          <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
-        )}
-        <div className={styles.verseTextContainer}>
-          <VerseText words={words} />
-        </div>
-        <div className={styles.separatorContainer}>
-          <Separator />
-        </div>
-        <div dangerouslySetInnerHTML={{ __html: htmlText }} />
-      </div>
-    );
-  }, []);
-
   const selectedTafsirLanguage = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
+
+  const renderTafsir = useCallback(
+    (data) => {
+      if (!data) return <TafsirSkeleton />;
+      const tafsirVerses = data?.tafsir.verses;
+      const htmlText = data?.tafsir.text;
+      const words = Object.values(tafsirVerses).map(getVerseWords).flat();
+
+      if (!htmlText) return <TafsirSkeleton />;
+
+      const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(tafsirVerses);
+      return (
+        <div>
+          {Object.values(tafsirVerses).length > 1 && (
+            <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
+          )}
+          <div className={styles.verseTextContainer}>
+            <VerseText words={words} />
+          </div>
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+          <div
+            dir={isRTLLanguage(selectedTafsirLanguage) ? 'rtl' : 'ltr'}
+            dangerouslySetInnerHTML={{ __html: htmlText }}
+          />
+        </div>
+      );
+    },
+    [selectedTafsirLanguage],
+  );
 
   const tafsirContentQuerykey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
     words: true,
@@ -131,8 +137,8 @@ const TafsirBody = ({
   });
 
   return (
-    <div dir={isRTLLanguage(selectedTafsirLanguage) ? 'rtl' : 'ltr'}>
-      <SurahAndAyahLanguageSelection
+    <div>
+      <SurahAndAyahSelection
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
         onChapterIdChange={(newChapterId) => {
@@ -157,7 +163,7 @@ const TafsirBody = ({
           );
         }}
       />
-      <TafsirAndLanguageSelection
+      <LanguageAndTafsirSelection
         selectedTafsirId={selectedTafsirId}
         selectedLanguage={selectedLanguage}
         onTafsirSelected={onTafsirSelected}

@@ -337,7 +337,7 @@ export const shortenVerseText = (text: string, length = 150): string => {
  * @param {Verse[]} verses
  * @returns {string[]} [firstVerseKey, lastVerseKey]
  */
-export const getFirstAndLastFirstKeys = (verses: Verse[]) => {
+export const getFirstAndLastVerseKeys = (verses: Verse[]) => {
   const verseKeys = Object.keys(verses).sort(sortByVerseKey);
   return [verseKeys[0], verseKeys[verseKeys.length - 1]];
 };

@@ -7,7 +7,7 @@ import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
 import TafsirBody from './TafsirBody';
 
-import ContentModal from 'src/components/dls/EmbeddableContent/ContentModal';
+import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -19,7 +19,7 @@ type TafsirVerseActionProps = {
 };
 
 const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) => {
-  const [isEmbeddableContentOpen, setIsEmbeddableContentOpen] = useState(false);
+  const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
 
@@ -29,17 +29,17 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
         icon={<TafsirIcon />}
         onClick={() => {
           logButtonClick('verse_actions_menu_tafsir');
-          setIsEmbeddableContentOpen(true);
+          setIsContentModalOpen(true);
         }}
       >
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <ContentModal
         url={getVerseTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0].toString())}
-        isOpen={isEmbeddableContentOpen}
+        isOpen={isContentModalOpen}
         hasCloseButton
         onClose={() => {
-          setIsEmbeddableContentOpen(false);
+          setIsContentModalOpen(false);
         }}
       >
         <TafsirBody

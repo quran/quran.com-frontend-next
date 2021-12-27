@@ -37,7 +37,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   p {
     margin-block-end: var(--spacing-small);
     opacity: var(--opacity-85);
-    font-size: 1.15rem;
+    font-size: var(--font-size-large);
     line-height: 1.5;
   }
   br {
@@ -85,7 +85,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
 }
 .tafsirSelectionContainer {
   display: flex;
-  margin-block-start: 1rem;
+  margin-block-start: var(--spacing-medium);
   overflow-x: scroll;
   width: 100%;
   padding-block-end: var(--spacing-medium);

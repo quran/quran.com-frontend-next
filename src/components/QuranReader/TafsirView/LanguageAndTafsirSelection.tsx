@@ -17,7 +17,7 @@ type TafsirSelectionProps = {
   onSelectLanguage: (lang: string) => void;
   languageOptions: string[];
 };
-const TafsirAndLanguageSelection = ({
+const LanguageAndTafsirSelection = ({
   selectedTafsirId,
   onTafsirSelected,
   selectedLanguage,
@@ -70,4 +70,4 @@ const TafsirAndLanguageSelection = ({
   );
 };
 
-export default TafsirAndLanguageSelection;
+export default LanguageAndTafsirSelection;
