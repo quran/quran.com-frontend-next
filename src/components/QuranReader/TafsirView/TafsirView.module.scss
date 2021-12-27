@@ -106,9 +106,6 @@ $container-max-width: calc(23 * var(--spacing-mega));
   }
 
   margin-inline-start: var(--spacing-medium);
-  [dir="rtl"] & {
-    margin-inline-end: var(--spacing-medium);
-  }
 }
 
 .tafsirItemSelected {
