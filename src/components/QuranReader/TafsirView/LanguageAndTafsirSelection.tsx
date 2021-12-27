@@ -10,7 +10,7 @@ import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { TafsirsResponse } from 'types/ApiResponses';
 
-type TafsirSelectionProps = {
+type LanguageAndTafsirSelectionProps = {
   selectedTafsirId: number;
   onTafsirSelected: (tafsirId: number) => void;
   selectedLanguage: string;
@@ -23,7 +23,7 @@ const LanguageAndTafsirSelection = ({
   selectedLanguage,
   onSelectLanguage,
   languageOptions,
-}: TafsirSelectionProps) => {
+}: LanguageAndTafsirSelectionProps) => {
   const { lang } = useTranslation();
   return (
     <DataFetcher
