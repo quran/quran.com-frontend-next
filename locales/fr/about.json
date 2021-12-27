@@ -1,18 +1,13 @@
 {
     "credits": {
-        "desc": "Ce site Web a été créé par quelques bénévoles et a été rendu possible grâce à la volonté d'Allah (Gloire à Lui) et avec l'aide de la communauté musulmane open source en ligne. Les sources de données incluent <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> travail sur les segments audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> et projet de coran en ligne.",
-        "lokalize": "La localisation a été rendue possible grâce à l'aide de <0> Lokalise <\/0>qui est un système de traduction assistée par ordinateur qui met l'accent sur la productivité et l'assurance qualité et fournit un flux de travail de localisation transparent.",
-        "title": "Crédits"
+        "desc": "Ce travail n'aurait pas été possible sans les nombreuses bibliothèques et projets open source que nous avons utilisés :",
+        "lokalize": "<0> Lokalize <\/0> : Un système de traduction assistée par ordinateur qui met l'accent sur la productivité et l'assurance qualité et fournit un flux de travail de localisation transparent.",
+        "quran-align": "<0> Collin Fair <\/0> : Un outil pour produire une segmentation précise des mots de la récitation coranique enregistrée.",
+        "quran-complex": "<0> QuranComplex <\/0> : King Fahd Glorious Qur'an Printing Complex est un chef de file au service du Glorieux Coran et de ses sciences, en traduisant ses significations et en protégeant le texte coranique de la distorsion, grâce à l'utilisation optimale de technologies de pointe dans le domaine de l'impression, des enregistrements audio, de l'édition électronique et des applications numériques.",
+        "quran-enc": "<0> QuranEnc <\/0> : Un portail proposant des traductions gratuites et fiables des significations et des exégèses du noble Coran dans de nombreuses langues du monde.",
+        "tanzil": "<0> Tanzil <\/0> : Un projet coranique international visant à fournir un texte coranique précis hautement vérifié.",
+        "title": "Crédits",
+        "zekr": "<0> Zekr <\/0> : Un outil d'étude du Coran à plate-forme ouverte pour la navigation et la recherche sur le Coran"
     },
-    "main-desc": "Le Noble Coran est le texte religieux central de l'Islam. Les musulmans croient que le Coran est le livre de la direction et de la direction divines pour l'humanité, et considèrent le texte arabe original comme la révélation finale d'Allah (Dieu). Toutes les traductions du texte arabe original sont donc des interprétations des significations originales et doivent être acceptées comme telles.",
-    "meccan": {
-        "desc": "Les sourates mecquoises sont les chapitres (sourates) chronologiquement antérieurs du Coran qui, selon la tradition islamique, ont été révélés à tout moment avant la migration du prophète islamique Muhammed (ﷺ) et de ses disciples de La Mecque à Médine (Hijra). Les sourates médinoises sont ces révélations qui se sont produites après le déménagement dans la ville de ce nom.",
-        "surahs": "Sourates mecquoises"
-    },
-    "median": {
-        "desc": "Les sourates médinoises ou chapitres médinois du Coran sont les 24 dernières sourates qui, selon la tradition islamique, ont été révélées à Médine après la hijra de Mahomet (ﷺ) de la Mecque. Ces sourates ont été révélées par Allah lorsque la communauté musulmane était plus nombreuse et plus développée, par opposition à leur position minoritaire à La Mecque.",
-        "surahs": "Sourates de Médine"
-    },
-    "questions": "Si vous avez des questions, vous pouvez visiter la page <0> commentaires <\/0> .",
-    "redesign": "Nous avons repensé le site Web avec une approche conviviale à l'esprit. Pour parcourir les sourates, cliquez sur le bouton (illustré à gauche) dans la page LIRE ET ÉCOUTER et parcourir la sourate par titre ou par page. Dans les prochaines itérations, nous intégrerons plus de fonctionnalités de recherche et audio inchaAllah. Si vous avez des suggestions sur la façon dont nous pouvons améliorer l'expérience du site Web, n'hésitez pas à <0> nous faire part de vos commentaires <\/0> ."
+    "main-description": "Quran.com a été fondé en 1995. Le site Web vise à faciliter la lecture, l'étude et l'apprentissage du Coran pour tous. Le projet est open source et a été construit comme une collaboration entre les membres de l'équipe principale et l'équipe <0> Tarteel < \/0 > ."
 }

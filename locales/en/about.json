@@ -1,18 +1,13 @@
 {
     "credits": {
-        "desc": "This website was created by a few volunteers and was made possible with the will of Allah (Glory be unto Him) and with the help of the open source Muslim community online. Data sources include <0>Tanzil<\/0>, <1>QuranComplex<\/1>, <2>Collin Fair<\/2>'s work on audio segments, <3>QuranEnc<\/3>, <4>Zekr<\/4> and Online Quran Project.",
-        "lokalize": "Localization was made possible by the help of <0>Lokalise<\/0> which is a computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.",
-        "title": "Credits"
+        "desc": "This work wouldn't have been possible without the many open source libraries and projects we've used:",
+        "lokalize": "<0>Lokalize<\/0>: A computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.",
+        "quran-align": "<0>Collin Fair<\/0>: A tool for producing word-precise segmentation of recorded Qur'anic recitation.",
+        "quran-complex": "<0>QuranComplex<\/0>: King Fahd Glorious Qur'an Printing Complex is a leader in serving the Glorious Qur’an and its Sciences, translating its Meanings, and safeguarding the Qur’anic Text from distortion, through the optimal use of advanced technologies in the field of printing, audio recordings, electronic publishing and digital applications.",
+        "quran-enc": "<0>QuranEnc<\/0>: A portal featuring free and trustworthy translations of the meanings and exegeses of the noble Qur'an in many world languages.",
+        "tanzil": "<0>Tanzil<\/0>: An international Quranic project aimed at providing a highly-verified precise Quran text.",
+        "title": "Credits",
+        "zekr": "<0>Zekr<\/0>: An open platform Quran study tool for browsing and researching on the Quran"
     },
-    "main-desc": "The Noble Quran is the central religious text of Islam. Muslims believe the Qur’an is the book of Divine guidance and direction for mankind, and consider the original Arabic text the final revelation of Allah (God). All translations of the original Arabic text are thus interpretations of the original meanings and should be embraced as such.",
-    "meccan": {
-        "desc": "The Meccan surahs are the chronologically earlier chapters (suras) of the Quran that were, according to Islamic tradition, revealed anytime before the migration of the Islamic prophet Muhammed (ﷺ) and his followers from Mecca to Medina (Hijra). The Medinan suras are those revelations that occurred after the move to the city of that name.",
-        "surahs": "Meccan Surahs"
-    },
-    "median": {
-        "desc": "The Medinan suras or Medinan chapters of the Quran are the latest 24 suras that, according to Islamic tradition, were revealed at Medina after Muhammad's (ﷺ) hijra from Mecca. These suras were revealed by Allah when the Muslim community was larger and more developed, as opposed to their minority position in Mecca.",
-        "surahs": "Medinan Surahs"
-    },
-    "questions": "If you have any questions, you may visit the <0>feedback<\/0> page.",
-    "redesign": "We have redesigned the website with a user friendly approach in mind. To browse through the surahs, click on the button (shown left) in the READ & LISTEN page and navigate surah by title or by page. In future iterations, we will be integrating more search and audio features inshaAllah. If you have any suggestions on how we can make the website a better experience please do not hesitate to <0>give us feedback<\/0>."
+    "main-description": "Quran.com was founded in 1995. The website aims to make it easy for anyone to read, study, and learn the Quran. The project is open source and was built as a collaboration between core team members and the <0>Tarteel team<\/0>."
 }
