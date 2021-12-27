@@ -14,6 +14,7 @@
   inset-block-start: -1px;
   min-height: var(--spacing-medium);
   will-change: transform;
+
   &:after {
     display: block;
     content: "";
@@ -66,15 +67,19 @@
   align-items: center;
   box-sizing: border-box;
   padding-inline: calc(1.3 * var(--spacing-large));
+
   @include breakpoints.tablet {
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
 }
 
 .section {
-  width: 50%;
   display: flex;
   align-items: center;
+}
+
+.leftSection {
+  margin-right: auto;
 }
 
 .alignStart {
@@ -95,6 +100,7 @@
 .primaryInfo {
   font-weight: var(--font-weight-semibold);
 }
+
 .secondaryInfo {
   font-weight: lighter;
 }
@@ -104,6 +110,7 @@
   align-items: center;
   cursor: pointer;
 }
+
 .chevronIconContainer {
   display: inline-flex;
   align-items: center;
@@ -111,12 +118,15 @@
   margin-inline-start: var(--spacing-xxsmall);
   box-sizing: border-box;
 }
+
 .rotate180 {
   transition: var(--transition-fast);
   transform: rotate(180deg);
 }
+
 .disabledOnMobile {
   pointer-events: none;
+
   @include breakpoints.tablet {
     pointer-events: inherit;
   }

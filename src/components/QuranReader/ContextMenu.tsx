@@ -63,7 +63,7 @@ const ContextMenu = () => {
       style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
       <div className={styles.sectionsContainer}>
-        <div className={styles.section}>
+        <div className={classNames(styles.section, styles.leftSection)}>
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.bold, styles.alignStart, styles.surahName, {
@@ -90,7 +90,7 @@ const ContextMenu = () => {
             </p>
           </div>
         </div>
-        <div className={classNames(styles.section, styles.leftSection)}>
+        <div className={styles.section}>
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.alignEnd, {
