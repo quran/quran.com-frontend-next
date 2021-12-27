@@ -26,12 +26,12 @@ import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
-import { TafsirsResponse } from 'types/ApiResponses';
+import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 
 type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
-  initialTafsirData?: TafsirsResponse;
+  initialTafsirData?: TafsirContentResponse;
   initialTafsirId?: number;
 };
 
@@ -81,24 +81,26 @@ const TafsirBody = ({
     [dispatch, lang, selectedChapterId, selectedVerseNumber],
   );
 
-  const { data: tafsirListData } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
+  const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
 
   // selectedLanguage is based on selectedTafir's language
   // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirId`
   // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
-    if (tafsirListData) {
-      const languageName = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
+    if (tafsirSelectionList) {
+      const languageName = getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirId);
       setSelectedLanguage(languageName);
     }
-  }, [onTafsirSelected, selectedTafsirId, tafsirListData]);
+  }, [onTafsirSelected, selectedTafsirId, tafsirSelectionList]);
 
   // there's no 1:1 data that can map our locale options to the tafsir language options
   // so we're using options that's available from tafsir for now
   // TODO: update lanague options, to use the same options as our LanguageSelector
-  const languageOptions = tafsirListData ? getTafsirsLanguageOptions(tafsirListData.tafsirs) : [];
+  const languageOptions = tafsirSelectionList
+    ? getTafsirsLanguageOptions(tafsirSelectionList.tafsirs)
+    : [];
 
-  const selectedTafsirLanguage = getSelectedTafsirLanguage(tafsirListData, selectedTafsirId);
+  const selectedTafsirLanguage = getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirId);
 
   const renderTafsir = useCallback(
     (data) => {
@@ -181,7 +183,7 @@ const TafsirBody = ({
         {initialTafsirData &&
         initialChapterId === selectedChapterId &&
         initialVerseNumber === selectedVerseNumber &&
-        initialTafsirId === selectedTafsirId ? (
+        selectedTafsirId === initialTafsirData?.tafsir?.resourceId ? (
           renderTafsir(initialTafsirData)
         ) : (
           <DataFetcher

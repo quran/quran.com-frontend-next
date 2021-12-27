@@ -28,6 +28,9 @@ const ContentModal = ({ isOpen, onClose, hasCloseButton, children, url }: Conten
     return () => {
       fakeNavigate(router.asPath);
     };
+
+    // we only want to run this effect when `isOpen` changed, not when `url` changed
+    // this is important because sometime the url props is changed, but we don't want to trigger `fakeNavigate` again.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
