@@ -10,7 +10,12 @@ import CloseIcon from '../../../../../public/icons/close.svg';
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
 
-import Button, { ButtonSize, ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
+import Button, {
+  ButtonSize,
+  ButtonShape,
+  ButtonType,
+  ButtonVariant,
+} from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { getLanguageDataById, findLanguageIdByLocale } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
@@ -39,6 +44,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <p>{t('footnote')}</p>
         <Button
           size={ButtonSize.Small}
+          variant={ButtonVariant.Ghost}
           shape={ButtonShape.Circle}
           type={ButtonType.Secondary}
           onClick={onCloseClicked}
