@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
+import QuranAppLogo from '../../public/images/quran-app-logo.png';
 import QuranAppImage from '../../public/images/quran-app.png';
 import TarteelAppImage from '../../public/images/tarteel-app.png';
 
@@ -24,6 +25,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
       key={app.title}
     >
       <div className={styles.texts}>
+        <Image className={styles.appLogo} src={app.logo} height={60} width={60} alt={app.title} />
         {isMain ? (
           <h1 className={styles.heading}>{app.title}</h1>
         ) : (
@@ -64,13 +66,15 @@ const AppsPage = () => {
       android:
         'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&utm_source=quran-com&utm_campaign=download',
       preview: QuranAppImage,
+      logo: QuranAppLogo,
     },
     tarteel: {
       title: 'Tarteel.ai',
-      description: t('apps:quran-desc'),
+      description: t('apps:tarteel-desc'),
       ios: 'https://apps.apple.com/app/tarteel/id1391009396',
       android: 'https://play.google.com/store/apps/details?id=com.mmmoussa.iqra',
       preview: TarteelAppImage,
+      logo: '/icons/tarteel-logo.svg',
     },
   };
 
