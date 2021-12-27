@@ -22,8 +22,9 @@ const ContentModal = ({ isOpen, onClose, hasCloseButton, children, url }: Conten
   const router = useRouter();
 
   useEffect(() => {
-    if (isOpen && url) fakeNavigate(url);
-    else if (url) fakeNavigate(router.asPath);
+    if (!url) return null;
+    if (isOpen) fakeNavigate(url);
+    else fakeNavigate(router.asPath);
 
     return () => {
       fakeNavigate(router.asPath);
