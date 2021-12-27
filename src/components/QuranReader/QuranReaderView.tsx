@@ -4,7 +4,6 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
-import TafsirView from './TafsirView';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -20,16 +19,7 @@ interface Props {
   quranReaderStyles: QuranReaderStyles;
 }
 
-const QuranReaderView: React.FC<Props> = ({
-  isTafsirData,
-  isSelectedTafsirData,
-  isReadingPreference,
-  verses,
-  quranReaderStyles,
-}) => {
-  if (isTafsirData || isSelectedTafsirData) {
-    return <TafsirView verse={verses[0]} />;
-  }
+const QuranReaderView: React.FC<Props> = ({ isReadingPreference, verses, quranReaderStyles }) => {
   if (isReadingPreference) {
     return (
       <>

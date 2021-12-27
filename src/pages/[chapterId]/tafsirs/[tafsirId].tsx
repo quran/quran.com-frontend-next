@@ -3,10 +3,14 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getChapterVerses } from 'src/api';
+import styles from '../[verseId]/tafsirs.module.scss';
+
+import { fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import QuranReader from 'src/components/QuranReader';
+import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
+import { getDefaultWordFields } from 'src/utils/api';
+import { makeTafsirContentUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import {
@@ -15,28 +19,30 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { isValidTafsirId, isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
-import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
+import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
-  verses?: VersesResponse;
   hasError?: boolean;
   verseNumber?: string;
   tafsirId?: string;
+  chapterId?: string;
+  tafsirData?: TafsirContentResponse;
 };
 
 const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   hasError,
   chapter,
-  verses,
   verseNumber,
+  chapterId,
+  tafsirData,
   tafsirId,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
+
   return (
     <>
       <NextSeoWrapper
@@ -45,11 +51,14 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           lang,
         )}`}
       />
-      <QuranReader
-        initialData={verses}
-        id={tafsirId}
-        quranReaderDataType={QuranReaderDataType.SelectedTafsir}
-      />
+      <div className={styles.tafsirContainer}>
+        <TafsirBody
+          initialChapterId={chapterId}
+          initialVerseNumber={verseNumber.toString()}
+          initialTafsirData={tafsirData}
+          initialTafsirId={tafsirId ? Number(tafsirId) : undefined}
+        />
+      </div>
     </>
   );
 };
@@ -63,18 +72,18 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   try {
-    const versesResponse = await getChapterVerses(chapterNumber, locale, {
-      page: verseNumber, // we pass the verse id as a the page and then fetch only 1 verse per page.
-      perPage: 1, // only 1 verse per page
-      translations: null,
-      tafsirs: tafsirId,
-      wordFields: 'location, verse_key, text_uthmani',
-      tafsirFields: 'resource_name,language_name',
-    });
+    const tafsirData = await fetcher<TafsirContentResponse>(
+      makeTafsirContentUrl(Number(tafsirId), verseKey, {
+        words: true,
+        ...getDefaultWordFields(),
+      }),
+    );
+
     return {
       props: {
+        chapterId: chapterNumber,
+        tafsirData,
         chapter: { chapter: getChapterData(chapterNumber, locale) },
-        verses: versesResponse,
         verseNumber,
         tafsirId,
       },
