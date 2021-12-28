@@ -138,9 +138,8 @@ const TafsirBody = ({
     ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
 
-  // if selected verse and tafsirId are the same as initialTafsirData, we don't need to fetch the data again
-  // and can SSG the page
-  const canStaticRender = useMemo(
+  // Whether we should use the initial tafsir data or fetch the data on the client side
+  const shouldUseInitialTafsirData = useMemo(
     () =>
       initialTafsirData &&
       Object.keys(initialTafsirData.tafsir.verses).includes(
@@ -188,7 +187,7 @@ const TafsirBody = ({
           styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
         )}
       >
-        {canStaticRender ? (
+        {shouldUseInitialTafsirData ? (
           renderTafsir(initialTafsirData)
         ) : (
           <DataFetcher
