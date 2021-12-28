@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
-import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
+// import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
               <Navbar />
               <DeveloperUtility />
               <Component {...pageProps} />
-              <FeedbackWidget />
+              {/* <FeedbackWidget /> */}
               <AudioPlayer />
             </ToastContainerProvider>
           </IdProvider>
