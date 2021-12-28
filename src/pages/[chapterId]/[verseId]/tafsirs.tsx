@@ -21,6 +21,7 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { stripHTMLTags } from 'src/utils/string';
 import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
+import { makeVerseKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse, VersesResponse } from 'types/ApiResponses';
 
 type AyahTafsirProp = {
@@ -89,10 +90,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const chapterData = getChapterData(chapterIdOrSlug, locale);
 
     const tafsirData = await fetcher<TafsirContentResponse>(
-      makeTafsirContentUrl(getTafsirsInitialState(locale).selectedTafsirs[0], verseId, {
-        words: true,
-        ...getDefaultWordFields(),
-      }),
+      makeTafsirContentUrl(
+        getTafsirsInitialState(locale).selectedTafsirs[0],
+        makeVerseKey(Number(chapterIdOrSlug), Number(verseId)),
+        {
+          words: true,
+          ...getDefaultWordFields(),
+        },
+      ),
     );
 
     if (!chapterData) return notFoundResponse;
