@@ -28,7 +28,7 @@ const NavigationDrawerItem = ({
   <LinkContainer href={href} isExternalLink={isExternalLink}>
     <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
       <div className={styles.innerContainer}>
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <IconContainer
             icon={icon}
             size={IconSize.Xsmall}

@@ -1,3 +1,6 @@
+.container {
+  display: inline-flex;
+}
 .container[dir="rtl"][data-auto-flip-icon="true"] {
   > svg {
     transform: scaleX(-1);
