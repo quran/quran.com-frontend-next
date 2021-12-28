@@ -11,7 +11,7 @@ import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getVerseTafsirNavigationUrl } from 'src/utils/navigation';
+import { getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 
 type TafsirVerseActionProps = {
   verseNumber: number;
@@ -35,7 +35,7 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <ContentModal
-        url={getVerseTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0].toString())}
+        url={getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0])}
         isOpen={isContentModalOpen}
         hasCloseButton
         onClose={() => {

@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import uniq from 'lodash/uniq';
@@ -25,7 +25,7 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { getLanguageDataById } from 'src/utils/locale';
-import { fakeNavigate, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
+import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 
@@ -51,7 +51,9 @@ const TafsirBody = ({
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const selectedVerseKey = makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber));
-  const [selectedTafsirId, setSelectedTafsirId] = useState(userPreferredTafsirIds?.[0]);
+  const [selectedTafsirId, setSelectedTafsirId] = useState(
+    initialTafsirId || userPreferredTafsirIds?.[0],
+  );
 
   // if user opened tafsirBody via a url, we will have initialTafsirId
   // we need to set this `initialTafsirId` as a selectedTafsirId
@@ -66,10 +68,10 @@ const TafsirBody = ({
     (id: number) => {
       setSelectedTafsirId(id);
       fakeNavigate(
-        getVerseTafsirNavigationUrl(
+        getVerseSelectedTafsirNavigationUrl(
           Number(selectedChapterId),
           Number(selectedVerseNumber),
-          id.toString(),
+          id,
         ),
       );
       dispatch(
@@ -136,6 +138,18 @@ const TafsirBody = ({
     ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
 
+  // if selected verse and tafsirId are the same as initialTafsirData, we don't need to fetch the data again
+  // and can SSG the page
+  const canStaticRender = useMemo(
+    () =>
+      initialTafsirData &&
+      Object.keys(initialTafsirData.tafsir.verses).includes(
+        makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
+      ) &&
+      selectedTafsirId === initialTafsirData?.tafsir?.resourceId,
+    [initialTafsirData, selectedChapterId, selectedTafsirId, selectedVerseNumber],
+  );
+
   return (
     <div>
       <SurahAndAyahSelection
@@ -143,11 +157,7 @@ const TafsirBody = ({
         selectedVerseNumber={selectedVerseNumber}
         onChapterIdChange={(newChapterId) => {
           fakeNavigate(
-            getVerseTafsirNavigationUrl(
-              Number(newChapterId),
-              Number(1),
-              selectedTafsirId.toString(),
-            ),
+            getVerseSelectedTafsirNavigationUrl(Number(newChapterId), Number(1), selectedTafsirId),
           );
           setSelectedChapterId(newChapterId.toString());
           setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
@@ -155,10 +165,10 @@ const TafsirBody = ({
         onVerseNumberChange={(newVerseNumber) => {
           setSelectedVerseNumber(newVerseNumber);
           fakeNavigate(
-            getVerseTafsirNavigationUrl(
+            getVerseSelectedTafsirNavigationUrl(
               Number(selectedChapterId),
               Number(newVerseNumber),
-              selectedTafsirId.toString(),
+              selectedTafsirId,
             ),
           );
         }}
@@ -178,10 +188,7 @@ const TafsirBody = ({
           styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
         )}
       >
-        {initialTafsirData &&
-        initialChapterId === selectedChapterId &&
-        initialVerseNumber === selectedVerseNumber &&
-        selectedTafsirId === initialTafsirData?.tafsir?.resourceId ? (
+        {canStaticRender ? (
           renderTafsir(initialTafsirData)
         ) : (
           <DataFetcher
