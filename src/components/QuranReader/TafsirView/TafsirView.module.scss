@@ -82,6 +82,15 @@ $container-max-width: calc(23 * var(--spacing-mega));
 
 .surahAndAyahSelectionContainer {
   display: flex;
+  position: sticky;
+  padding-block: var(--spacing-small);
+  @include breakpoints.tablet {
+    padding-block: 0;
+    position: initial;
+  }
+  inset-block-start: 0;
+  background-color: var(--color-background-default);
+  z-index: 1;
 }
 .tafsirSelectionContainer {
   display: flex;
