@@ -154,6 +154,10 @@ $container-max-width: calc(23 * var(--spacing-mega));
   width: 60%;
 }
 
+.tafsirSelectionSkeleton {
+  margin-block-start: var(--spacing-small);
+}
+
 .tafsirGroupMessage {
   position: relative;
   padding: var(--spacing-medium);
