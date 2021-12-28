@@ -10,7 +10,7 @@ import TafsirBody from './TafsirBody';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 
 type TafsirVerseActionProps = {
@@ -39,6 +39,7 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
         isOpen={isContentModalOpen}
         hasCloseButton
         onClose={() => {
+          logEvent('tafsir_modal_close');
           setIsContentModalOpen(false);
         }}
       >

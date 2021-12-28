@@ -24,10 +24,12 @@ import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logEvent, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
+import Tafsir from 'types/Tafsir';
 
 type TafsirBodyProps = {
   initialChapterId: string;
@@ -60,12 +62,14 @@ const TafsirBody = ({
   // we did not use `useState(initialTafsirId)` because `useRouter`'s query string is undefined on first render
   useEffect(() => {
     if (initialTafsirId) {
+      logEvent('tafsir_url_access');
       setSelectedTafsirId(initialTafsirId);
     }
   }, [initialTafsirId]);
 
   const onTafsirSelected = useCallback(
     (id: number) => {
+      logItemSelectionChange('tafsir', id);
       setSelectedTafsirId(id);
       fakeNavigate(
         getVerseSelectedTafsirNavigationUrl(
@@ -155,6 +159,7 @@ const TafsirBody = ({
         selectedChapterId={selectedChapterId}
         selectedVerseNumber={selectedVerseNumber}
         onChapterIdChange={(newChapterId) => {
+          logItemSelectionChange('tafsir_chapter_id', newChapterId);
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(Number(newChapterId), Number(1), selectedTafsirId),
           );
@@ -162,6 +167,7 @@ const TafsirBody = ({
           setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
         }}
         onVerseNumberChange={(newVerseNumber) => {
+          logItemSelectionChange('tafsir_verse_number', newVerseNumber);
           setSelectedVerseNumber(newVerseNumber);
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(
@@ -177,6 +183,7 @@ const TafsirBody = ({
         selectedLanguage={selectedLanguage}
         onTafsirSelected={onTafsirSelected}
         onSelectLanguage={(newLang) => {
+          logValueChange('tafsir_locale', selectedLanguage, newLang);
           setSelectedLanguage(newLang);
         }}
         languageOptions={languageOptions}
@@ -207,12 +214,22 @@ const TafsirBody = ({
  * @param {Tafsir[]} tafsirs
  * @returns {string[]} list of available language options
  */
-const getTafsirsLanguageOptions = (tafsirs): string[] =>
+const getTafsirsLanguageOptions = (tafsirs: Tafsir[]): string[] =>
   uniq(tafsirs.map((tafsir) => tafsir.languageName));
 
-export default TafsirBody;
-
-const getSelectedTafsirLanguage = (tafsirListData, selectedTafsirId) => {
+/**
+ * Get the language of the selected Tafsir.
+ *
+ * @param {TafsirsResponse} tafsirListData
+ * @param {number} selectedTafsirId
+ * @returns {string}
+ */
+const getSelectedTafsirLanguage = (
+  tafsirListData: TafsirsResponse,
+  selectedTafsirId: number,
+): string => {
   const selectedTafsir = tafsirListData?.tafsirs.find((tafsir) => tafsir.id === selectedTafsirId);
   return selectedTafsir?.languageName;
 };
+
+export default TafsirBody;
