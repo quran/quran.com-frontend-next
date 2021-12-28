@@ -127,6 +127,9 @@ $container-max-width: calc(23 * var(--spacing-mega));
 .selectionItem {
   margin-inline-start: var(--spacing-medium);
 }
+.ayahSelection {
+  max-width: calc(2.5 * var(--spacing-mega));
+}
 
 .tafsirSkeletonItem {
   height: var(--spacing-mega);

@@ -46,6 +46,7 @@ const SurahAndAyahSelection = ({
       />
       <div className={styles.selectionItem}>
         <Select
+          className={styles.ayahSelection}
           size={SelectSize.Small}
           id="ayah-selection"
           name="ayah-selection"
