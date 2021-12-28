@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TafsirView.module.scss';
@@ -9,6 +8,7 @@ import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
+import { getLocaleNameByFullName } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 type LanguageAndTafsirSelectionProps = {
@@ -43,7 +43,7 @@ const LanguageAndTafsirSelection = ({
               id="lang-selection"
               name="lang-selection"
               options={languageOptions.map((lng) => ({
-                label: capitalize(lng),
+                label: getLocaleNameByFullName(lng),
                 value: lng,
               }))}
               onChange={onSelectLanguage}

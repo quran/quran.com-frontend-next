@@ -133,7 +133,7 @@ const TafsirBody = ({
     );
   }, []);
 
-  const tafsirContentQuerykey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
+  const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirId, selectedVerseKey, {
     words: true,
     ...getDefaultWordFields(quranReaderStyles.quranFont),
   });
@@ -192,7 +192,7 @@ const TafsirBody = ({
         ) : (
           <DataFetcher
             loading={TafsirSkeleton}
-            queryKey={tafsirContentQuerykey}
+            queryKey={tafsirContentQueryKey}
             render={renderTafsir}
           />
         )}
