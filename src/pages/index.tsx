@@ -12,7 +12,7 @@ import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzList
 import Footer from 'src/components/dls/Footer/Footer';
 import Separator from 'src/components/dls/Separator/Separator';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
-import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
+// import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -45,9 +45,9 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
       <div className={styles.pageContainer}>
         <div className={classNames(styles.listContainer, styles.flow)}>
           <HomePageHero />
-          <div className={styles.flowItem}>
+          {/* <div className={styles.flowItem}>
             <HomePageWelcomeMessage />
-          </div>
+          </div> */}
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
             <RecentReadingSessions />
           </div>
