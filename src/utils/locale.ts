@@ -31,6 +31,14 @@ const LOCALE_NAME = {
   hi: 'हिन्दी',
 };
 
+const LOCALE_NAME_TO_CODE = {
+  bengali: 'bn',
+  english: 'en',
+  arabic: 'ar',
+  russian: 'ru',
+  urdu: 'ur',
+};
+
 export const LANG_LOCALE_MAP = {
   en: 'en-US',
   ar: 'ar-EG',
@@ -256,6 +264,15 @@ export const getLanguageAlternates = (path: string): LinkLanguageAlternate[] => 
  * @returns {string}
  */
 export const getLocaleName = (locale: string): string => LOCALE_NAME[locale];
+
+/**
+ * Converts a locale name e.g. 'english' to its code e.g. 'en'.
+ *
+ * @param {string} fullName
+ * @returns {string}
+ */
+export const getLocaleNameByFullName = (fullName: string): string =>
+  LOCALE_NAME[LOCALE_NAME_TO_CODE[fullName]];
 
 /**
  * Takes a number and returns a localized string based on the provided locale.
