@@ -1,19 +1,16 @@
 @use "src/styles/breakpoints";
 
-.highlightedContainer {
-  background: var(--color-background-alternative-faded);
-}
-
 .cellContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block-start: var(--spacing-medium);
-  padding-block-end: var(--spacing-medium);
-  padding-inline-start: 0;
-  padding-inline-end: 0;
-  padding-block-end: 0;
+  padding: var(--spacing-medium);
 }
+
+.highlightedContainer {
+  background: var(--color-background-alternative-faded);
+}
+
 .contentContainer {
   flex: 1;
   padding-block-start: var(--spacing-medium);
