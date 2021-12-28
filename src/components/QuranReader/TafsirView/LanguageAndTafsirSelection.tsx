@@ -7,6 +7,7 @@ import styles from './TafsirView.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
+import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { TafsirsResponse } from 'types/ApiResponses';
 
@@ -27,6 +28,11 @@ const LanguageAndTafsirSelection = ({
   const { lang } = useTranslation();
   return (
     <DataFetcher
+      loading={() => (
+        <Skeleton
+          className={classNames(styles.tafsirSkeletonItem, styles.tafsirSelectionSkeleton)}
+        />
+      )}
       queryKey={makeTafsirsUrl(lang)}
       render={(data: TafsirsResponse) => {
         return (
