@@ -12,8 +12,6 @@ import Verse from 'types/Verse';
 const ReadingView = dynamic(() => import('./ReadingView'));
 
 interface Props {
-  isTafsirData: boolean;
-  isSelectedTafsirData: boolean;
   isReadingPreference: boolean;
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;

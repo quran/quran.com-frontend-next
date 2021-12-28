@@ -8,26 +8,16 @@ import Verse from 'types/Verse';
 
 interface Props {
   verses: Verse[];
-  isTafsirData: boolean;
-  isSelectedTafsirData: boolean;
   isReadingPreference: boolean;
   quranReaderStyles: QuranReaderStyles;
 }
 
-const QuranReaderBody: React.FC<Props> = ({
-  quranReaderStyles,
-  verses,
-  isTafsirData,
-  isSelectedTafsirData,
-  isReadingPreference,
-}) => {
+const QuranReaderBody: React.FC<Props> = ({ quranReaderStyles, verses, isReadingPreference }) => {
   useQcfFont(quranReaderStyles.quranFont, verses);
   return (
     <>
       <QuranReaderView
         verses={verses}
-        isTafsirData={isTafsirData}
-        isSelectedTafsirData={isSelectedTafsirData}
         isReadingPreference={isReadingPreference}
         quranReaderStyles={quranReaderStyles}
       />
