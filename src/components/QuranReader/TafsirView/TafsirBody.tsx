@@ -83,6 +83,7 @@ const TafsirBody = ({
           Number(selectedVerseNumber),
           slug,
         ),
+        lang,
       );
       dispatch(
         setSelectedTafsirs({
@@ -172,6 +173,7 @@ const TafsirBody = ({
             Number(1),
             selectedTafsirIdOrSlug,
           ),
+          lang,
         );
         setSelectedChapterId(newChapterId.toString());
         setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
@@ -185,6 +187,7 @@ const TafsirBody = ({
             Number(newVerseNumber),
             selectedTafsirIdOrSlug,
           ),
+          lang,
         );
       }}
     />
