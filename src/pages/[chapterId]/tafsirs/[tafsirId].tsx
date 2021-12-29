@@ -17,7 +17,7 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
-import { isValidTafsirId, isValidVerseKey } from 'src/utils/validator';
+import { isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
 
@@ -25,7 +25,7 @@ type AyahTafsirProp = {
   chapter?: ChapterResponse;
   hasError?: boolean;
   verseNumber?: string;
-  tafsirId?: string;
+  tafsirIdOrSlug?: string;
   chapterId?: string;
   tafsirData?: TafsirContentResponse;
 };
@@ -36,7 +36,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   verseNumber,
   chapterId,
   tafsirData,
-  tafsirId,
+  tafsirIdOrSlug,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
@@ -56,7 +56,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           initialChapterId={chapterId}
           initialVerseNumber={verseNumber.toString()}
           initialTafsirData={tafsirData}
-          initialTafsirId={tafsirId ? Number(tafsirId) : undefined}
+          initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
         />
       </div>
     </>
@@ -64,16 +64,16 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { chapterId, tafsirId } = params;
+  const { chapterId, tafsirId: tafsirIdOrSlug } = params;
   const verseKey = String(chapterId);
   // if the verse key or the tafsir id is not valid
-  if (!isValidVerseKey(verseKey) || !isValidTafsirId(String(tafsirId))) {
+  if (!isValidVerseKey(verseKey)) {
     return { notFound: true };
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   try {
     const tafsirData = await fetcher<TafsirContentResponse>(
-      makeTafsirContentUrl(Number(tafsirId), verseKey, {
+      makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
         words: true,
         ...getDefaultWordFields(),
       }),
@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         tafsirData,
         chapter: { chapter: getChapterData(chapterNumber, locale) },
         verseNumber,
-        tafsirId,
+        tafsirIdOrSlug,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };

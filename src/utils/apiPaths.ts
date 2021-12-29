@@ -123,7 +123,7 @@ export const makeTafsirsUrl = (language: string): string =>
   makeUrl('/resources/tafsirs', { language });
 
 export const makeTafsirContentUrl = (
-  tafsirId: number,
+  tafsirId: number | string,
   verseKey: string,
   params: Record<string, unknown>,
 ) => makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);

@@ -75,13 +75,13 @@ export const getVerseTafsirNavigationUrl = (
  *
  * @param {string | number} chapterId
  * @param {number} verseNumber
- * @param {number} tafsirId
+ * @param {number |string} tafsirId
  * @returns {string}
  */
 export const getVerseSelectedTafsirNavigationUrl = (
   chapterId: string | number,
   verseNumber: number,
-  tafsirId: number,
+  tafsirId: number | string,
 ): string => `/${chapterId}:${verseNumber}/tafsirs/${tafsirId}`;
 
 /**

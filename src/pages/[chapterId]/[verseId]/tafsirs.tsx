@@ -59,7 +59,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
           initialChapterId={chapterId.toString()}
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}
-          initialTafsirId={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
+          initialTafsirIdOrSlug={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
         />
       </div>
     </>

@@ -2,7 +2,7 @@ import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
 import { ReadingPreference } from 'types/QuranReader';
 
-const DEFAULT_TAFSIR = 90; // AlQurtubi
+const DEFAULT_TAFSIR = 'ar-tafseer-al-qurtubi"';
 
 export default {
   ...DEFAULT_SETTINGS,
