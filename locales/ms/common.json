@@ -207,6 +207,7 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Saiz fon Tafsir",
+        "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat {{from}} hingga {{to}}",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },

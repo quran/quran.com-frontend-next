@@ -207,6 +207,7 @@
     "surah": "sure",
     "tafsir": {
         "font-size": "tefsir yazı tipi boyutu",
+        "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",
         "surah": "Tefsir Suresi",
         "title": "tefsir"
     },
