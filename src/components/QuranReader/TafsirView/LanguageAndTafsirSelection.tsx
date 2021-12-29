@@ -35,6 +35,13 @@ const LanguageAndTafsirSelection = ({
       )}
       queryKey={makeTafsirsUrl(lang)}
       render={(data: TafsirsResponse) => {
+        if (!data) {
+          return (
+            <Skeleton
+              className={classNames(styles.tafsirSkeletonItem, styles.tafsirSelectionSkeleton)}
+            />
+          );
+        }
         return (
           <div className={styles.tafsirSelectionContainer}>
             <Select
