@@ -12,14 +12,14 @@ import { getLocaleNameByFullName } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 type LanguageAndTafsirSelectionProps = {
-  selectedTafsirId: number;
-  onTafsirSelected: (tafsirId: number) => void;
+  selectedTafsirIdOrSlug: number | string;
+  onTafsirSelected: (tafsirId: number, tafsirSlug: string) => void;
   selectedLanguage: string;
   onSelectLanguage: (lang: string) => void;
   languageOptions: string[];
 };
 const LanguageAndTafsirSelection = ({
-  selectedTafsirId,
+  selectedTafsirIdOrSlug,
   onTafsirSelected,
   selectedLanguage,
   onSelectLanguage,
@@ -52,13 +52,17 @@ const LanguageAndTafsirSelection = ({
             {data.tafsirs
               .filter(
                 (tafsir) =>
-                  tafsir.languageName === selectedLanguage || selectedTafsirId === tafsir.id,
+                  tafsir.languageName === selectedLanguage ||
+                  selectedTafsirIdOrSlug === tafsir.slug ||
+                  Number(selectedTafsirIdOrSlug) === tafsir.id,
               )
               .map((tafsir) => {
-                const selected = selectedTafsirId === tafsir.id;
+                const selected =
+                  selectedTafsirIdOrSlug === tafsir.slug ||
+                  Number(selectedTafsirIdOrSlug) === tafsir.id;
                 return (
                   <Button
-                    onClick={() => onTafsirSelected(tafsir.id)}
+                    onClick={() => onTafsirSelected(tafsir.id, tafsir.slug)}
                     size={ButtonSize.Small}
                     key={tafsir.id}
                     className={classNames(styles.tafsirSelectionItem, {

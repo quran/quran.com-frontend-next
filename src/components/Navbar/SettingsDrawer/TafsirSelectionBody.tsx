@@ -50,8 +50,8 @@ const TafsirsSelectionBody = () => {
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
     const nextTafsirs = isChecked
-      ? [...selectedTafsirs, Number(selectedTafsirId)]
-      : selectedTafsirs.filter((id) => id !== Number(selectedTafsirId)); // remove the id
+      ? [...selectedTafsirs, selectedTafsirId]
+      : selectedTafsirs.filter((id) => id !== selectedTafsirId); // remove the id
 
     logItemSelectionChange('tafsir', selectedTafsirId, isChecked);
     logValueChange('selected_tafsirs', selectedTafsirs, nextTafsirs);
@@ -84,15 +84,15 @@ const TafsirsSelectionBody = () => {
                   <div className={styles.group} key={language}>
                     <div className={styles.language}>{language}</div>
                     {tafsirs.map((tafsir) => (
-                      <div key={tafsir.id} className={styles.item}>
+                      <div key={tafsir.slug} className={styles.item}>
                         <input
-                          id={tafsir.id.toString()}
+                          id={tafsir.slug.toString()}
                           type="checkbox"
-                          value={tafsir.id}
-                          checked={selectedTafsirs.includes(tafsir.id)}
+                          value={tafsir.slug}
+                          checked={selectedTafsirs.includes(tafsir.slug)}
                           onChange={onTafsirsChange}
                         />
-                        <label className={styles.label} htmlFor={tafsir.id.toString()}>
+                        <label className={styles.label} htmlFor={tafsir.slug.toString()}>
                           <span>{tafsir.name}</span>{' '}
                           <span className={styles.author}>{tafsir.authorName}</span>
                         </label>

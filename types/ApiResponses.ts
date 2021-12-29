@@ -95,5 +95,6 @@ export interface TafsirContentResponse extends BaseResponse {
       languageName: string;
     };
     text: string;
+    slug?: string;
   };
 }
