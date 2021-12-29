@@ -57,6 +57,15 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           initialVerseNumber={verseNumber.toString()}
           initialTafsirData={tafsirData}
           initialTafsirId={tafsirId ? Number(tafsirId) : undefined}
+          render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
+            return (
+              <div>
+                {surahAndAyahSelection}
+                {languageAndTafsirSelection}
+                {body}
+              </div>
+            );
+          }}
         />
       </div>
     </>

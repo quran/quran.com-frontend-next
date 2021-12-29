@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import uniq from 'lodash/uniq';
@@ -36,6 +36,11 @@ type TafsirBodyProps = {
   initialVerseNumber: string;
   initialTafsirData?: TafsirContentResponse;
   initialTafsirId?: number;
+  render: (renderProps: {
+    surahAndAyahSelection: JSX.Element;
+    languageAndTafsirSelection: JSX.Element;
+    body: JSX.Element;
+  }) => JSX.Element;
 };
 
 const TafsirBody = ({
@@ -43,6 +48,7 @@ const TafsirBody = ({
   initialVerseNumber,
   initialTafsirData,
   initialTafsirId,
+  render,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -153,59 +159,65 @@ const TafsirBody = ({
     [initialTafsirData, selectedChapterId, selectedTafsirId, selectedVerseNumber],
   );
 
-  return (
-    <div>
-      <SurahAndAyahSelection
-        selectedChapterId={selectedChapterId}
-        selectedVerseNumber={selectedVerseNumber}
-        onChapterIdChange={(newChapterId) => {
-          logItemSelectionChange('tafsir_chapter_id', newChapterId);
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(Number(newChapterId), Number(1), selectedTafsirId),
-          );
-          setSelectedChapterId(newChapterId.toString());
-          setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
-        }}
-        onVerseNumberChange={(newVerseNumber) => {
-          logItemSelectionChange('tafsir_verse_number', newVerseNumber);
-          setSelectedVerseNumber(newVerseNumber);
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirId,
-            ),
-          );
-        }}
-      />
-      <LanguageAndTafsirSelection
-        selectedTafsirId={selectedTafsirId}
-        selectedLanguage={selectedLanguage}
-        onTafsirSelected={onTafsirSelected}
-        onSelectLanguage={(newLang) => {
-          logValueChange('tafsir_locale', selectedLanguage, newLang);
-          setSelectedLanguage(newLang);
-        }}
-        languageOptions={languageOptions}
-      />
-      <div
-        className={classNames(
-          styles.tafsirContainer,
-          styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
-        )}
-      >
-        {shouldUseInitialTafsirData ? (
-          renderTafsir(initialTafsirData)
-        ) : (
-          <DataFetcher
-            loading={TafsirSkeleton}
-            queryKey={tafsirContentQueryKey}
-            render={renderTafsir}
-          />
-        )}
-      </div>
+  const surahAndAyahSelection = (
+    <SurahAndAyahSelection
+      selectedChapterId={selectedChapterId}
+      selectedVerseNumber={selectedVerseNumber}
+      onChapterIdChange={(newChapterId) => {
+        logItemSelectionChange('tafsir_chapter_id', newChapterId);
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(Number(newChapterId), Number(1), selectedTafsirId),
+        );
+        setSelectedChapterId(newChapterId.toString());
+        setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
+      }}
+      onVerseNumberChange={(newVerseNumber) => {
+        logItemSelectionChange('tafsir_verse_number', newVerseNumber);
+        setSelectedVerseNumber(newVerseNumber);
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirId,
+          ),
+        );
+      }}
+    />
+  );
+
+  const languageAndTafsirSelection = (
+    <LanguageAndTafsirSelection
+      selectedTafsirId={selectedTafsirId}
+      selectedLanguage={selectedLanguage}
+      onTafsirSelected={onTafsirSelected}
+      onSelectLanguage={(newLang) => {
+        logValueChange('tafsir_locale', selectedLanguage, newLang);
+        setSelectedLanguage(newLang);
+      }}
+      languageOptions={languageOptions}
+    />
+  );
+
+  const body = (
+    <div
+      className={classNames(
+        styles.tafsirContainer,
+        styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
+      )}
+    >
+      {shouldUseInitialTafsirData ? (
+        renderTafsir(initialTafsirData)
+      ) : (
+        <DataFetcher
+          loading={TafsirSkeleton}
+          queryKey={tafsirContentQueryKey}
+          render={renderTafsir}
+        />
+      )}
     </div>
   );
+
+  return render({ surahAndAyahSelection, languageAndTafsirSelection, body });
 };
 
 /**
