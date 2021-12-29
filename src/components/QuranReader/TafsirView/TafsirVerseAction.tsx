@@ -6,13 +6,15 @@ import { useSelector } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
-import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 
 const TafsirBody = dynamic(() => import('./TafsirBody'), { ssr: false });
+const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
+  ssr: false,
+});
 
 type TafsirVerseActionProps = {
   verseNumber: number;
