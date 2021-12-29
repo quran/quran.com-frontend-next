@@ -60,6 +60,15 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}
           initialTafsirId={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
+          render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
+            return (
+              <div>
+                {surahAndAyahSelection}
+                {languageAndTafsirSelection}
+                {body}
+              </div>
+            );
+          }}
         />
       </div>
     </>
