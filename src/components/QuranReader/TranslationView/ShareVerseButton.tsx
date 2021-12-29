@@ -3,6 +3,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ShareIcon from '../../../../public/icons/share.svg';
 
+import styles from './TranslationViewCell.module.scss';
+
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -29,6 +31,7 @@ const ShareVerseButton = ({ verseKey }: ShareVerseButtonProps) => {
   return (
     <>
       <Button
+        className={styles.actionButton}
         onClick={() =>
           onShareClicked(verseKey, () => toast(t('shared'), { status: ToastStatus.Success }))
         }

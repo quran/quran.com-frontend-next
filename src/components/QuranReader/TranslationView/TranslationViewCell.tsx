@@ -86,10 +86,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}
                 timestamp={verse.timestamps.timestampFrom}
+                className={styles.actionButton}
               />
             </div>
             <div className={styles.actionItem}>
-              <OverflowVerseActionsMenu verse={verse} />
+              <OverflowVerseActionsMenu verse={verse} className={styles.actionButton} />
             </div>
           </div>
         </div>

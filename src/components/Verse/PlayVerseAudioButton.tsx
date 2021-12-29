@@ -23,8 +23,9 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 interface PlayVerseAudioProps {
   verseKey: string;
   timestamp: number;
+  className?: string;
 }
-const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
+const PlayVerseAudioButton = ({ verseKey, timestamp, className }: PlayVerseAudioProps) => {
   const { t } = useTranslation('common');
 
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   if (isVerseBeingPlayed)
     return (
       <Button
+        className={className}
         size={ButtonSize.Small}
         tooltip={t('audio.player.pause')}
         type={ButtonType.Secondary}
@@ -82,6 +84,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
 
   return (
     <Button
+      className={className}
       size={ButtonSize.Small}
       tooltip={t('audio.player.play')}
       type={ButtonType.Secondary}

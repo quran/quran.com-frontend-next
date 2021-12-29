@@ -2,6 +2,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
 
+import styles from './TranslationViewCell.module.scss';
+
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getQuranReflectVerseUrl } from 'src/utils/navigation';
@@ -15,6 +17,7 @@ const QuranReflectButton = ({ verseKey }: QuranReflectButtonProps) => {
   const { t } = useTranslation('common');
   return (
     <Button
+      className={styles.actionButton}
       onClick={() => {
         logButtonClick('translation_view_reflect');
         navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));

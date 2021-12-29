@@ -60,3 +60,15 @@
     display: initial;
   }
 }
+
+// TODO: make this styele part of button dls
+.actionButton {
+  background-color: var(--color-background-default);
+  &:hover {
+    border: 1px solid var(--color-success-faded);
+    background-color: var(--color-background-default);
+    & > span > svg > path {
+      fill: var(--color-success-medium);
+    }
+  }
+}

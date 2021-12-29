@@ -21,15 +21,21 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 
 interface Props {
   verse: Verse;
+  className?: string;
 }
 
-const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
+const OverflowVerseActionsMenu: React.FC<Props> = ({ verse, className }) => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
       <PopoverMenu
         trigger={
-          <Button size={ButtonSize.Small} tooltip={t('more')} type={ButtonType.Secondary}>
+          <Button
+            className={className}
+            size={ButtonSize.Small}
+            tooltip={t('more')}
+            type={ButtonType.Secondary}
+          >
             <OverflowMenuIcon />
           </Button>
         }
