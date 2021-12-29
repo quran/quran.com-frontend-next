@@ -58,7 +58,7 @@ const TafsirSection = () => {
   }, [dispatch]);
   const renderTafsirs = useCallback(
     (data: TafsirsResponse) => {
-      const firstSelectedTafsir = data.tafsirs.find((tafsir) => tafsir.id === selectedTafsirs[0]);
+      const firstSelectedTafsir = data.tafsirs.find((tafsir) => tafsir.slug === selectedTafsirs[0]);
 
       let selectedValueString = t('settings.no-tafsir-selected');
       if (selectedTafsirs.length === 1) selectedValueString = firstSelectedTafsir.name;
