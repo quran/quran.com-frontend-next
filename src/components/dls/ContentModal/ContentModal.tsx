@@ -31,11 +31,11 @@ const ContentModal = ({
 
   useEffect(() => {
     if (!url) return null;
-    if (isOpen) fakeNavigate(url);
-    else fakeNavigate(router.asPath);
+    if (isOpen) fakeNavigate(url, router.locale);
+    else fakeNavigate(router.asPath, router.locale);
 
     return () => {
-      fakeNavigate(router.asPath);
+      fakeNavigate(router.asPath, router.locale);
     };
 
     // we only want to run this effect when `isOpen` changed, not when `url` changed

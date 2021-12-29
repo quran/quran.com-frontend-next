@@ -162,11 +162,12 @@ export const getQuranReflectVerseUrl = (verseKey: string) => {
 
 /**
  * Update the browser history with the new url.
- * withohut actually navigating into that url.
- * So it does not trigger re render or page visit on nextjs
+ * without actually navigating into that url.
+ * So it does not trigger re render or page visit on Next.js
  *
  * @param {string} url
+ * @param {string} locale
  */
-export const fakeNavigate = (url: string) => {
-  window.history.pushState({}, '', url);
+export const fakeNavigate = (url: string, locale: string) => {
+  window.history.pushState({}, '', `${locale === 'en' ? '' : `/${locale}`}${url}`);
 };
