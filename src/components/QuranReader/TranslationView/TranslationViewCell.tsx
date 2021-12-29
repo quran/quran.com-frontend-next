@@ -55,11 +55,13 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   return (
     <div ref={selectedItemRef}>
       {verse.verseNumber === 1 && (
-        <ChapterHeader
-          chapterId={String(verse.chapterId)}
-          pageNumber={verse.pageNumber}
-          hizbNumber={verse.hizbNumber}
-        />
+        <div className={styles.chapterHeaderContainer}>
+          <ChapterHeader
+            chapterId={String(verse.chapterId)}
+            pageNumber={verse.pageNumber}
+            hizbNumber={verse.hizbNumber}
+          />
+        </div>
       )}
       <div
         className={classNames(styles.cellContainer, {

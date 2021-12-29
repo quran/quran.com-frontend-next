@@ -4,7 +4,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--spacing-medium);
+}
+.chapterHeaderContainer,
+.cellContainer {
+  padding: var(--spacing-small);
+  @include breakpoints.tablet {
+    padding: var(--spacing-medium);
+  }
 }
 
 .highlightedContainer {
