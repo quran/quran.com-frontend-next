@@ -207,9 +207,9 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir font size",
+        "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}",
         "surah": "Tafsir Surah",
-        "title": "Tafsir",
-        "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}"
+        "title": "Tafsir"
     },
     "tarteel": {
         "app": "Tarteel app",

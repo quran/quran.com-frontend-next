@@ -207,6 +207,7 @@
     "surah": "古兰经",
     "tafsir": {
         "font-size": "Tafsir 字体大小",
+        "group-message": "{{from}}至{{to}}诗句组的 tafsir",
         "surah": "Tafsir Surah",
         "title": "塔夫西尔"
     },

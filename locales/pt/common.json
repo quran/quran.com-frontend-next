@@ -207,6 +207,7 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tamanho da fonte Tafsir",
+        "group-message": "Você está lendo um tafsir para o grupo de versos {{from}} a {{to}}",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },

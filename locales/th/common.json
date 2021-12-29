@@ -207,6 +207,7 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "ขนาดตัวอักษร Tafsir",
+        "group-message": "คุณกำลังอ่าน tafsir สำหรับกลุ่มโองการ {{from}} ถึง {{to}}",
         "surah": "ตัฟซีร ซูเราะฮฺ",
         "title": "ตัฟซีร"
     },
