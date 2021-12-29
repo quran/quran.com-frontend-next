@@ -16,9 +16,17 @@ type ContentModalProps = {
   children: React.ReactNode;
   hasCloseButton?: boolean;
   url?: string;
+  header?: React.ReactNode;
 };
 
-const ContentModal = ({ isOpen, onClose, hasCloseButton, children, url }: ContentModalProps) => {
+const ContentModal = ({
+  isOpen,
+  onClose,
+  hasCloseButton,
+  children,
+  url,
+  header,
+}: ContentModalProps) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -40,14 +48,20 @@ const ContentModal = ({ isOpen, onClose, hasCloseButton, children, url }: Conten
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay}>
           <Dialog.Content className={styles.contentWrapper} onInteractOutside={onClose}>
-            {hasCloseButton && (
-              <Dialog.Close className={styles.closeIcon}>
-                <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onClose}>
-                  <CloseIcon />
-                </Button>
-              </Dialog.Close>
-            )}
-
+            <div className={styles.header}>
+              {header}
+              {hasCloseButton && (
+                <Dialog.Close className={styles.closeIcon}>
+                  <Button
+                    variant={ButtonVariant.Ghost}
+                    shape={ButtonShape.Circle}
+                    onClick={onClose}
+                  >
+                    <CloseIcon />
+                  </Button>
+                </Dialog.Close>
+              )}
+            </div>
             <div className={styles.content}>{children}</div>
           </Dialog.Content>
         </Dialog.Overlay>

@@ -2,6 +2,7 @@
 
 .tafsirContainer {
   width: 100vw;
+  padding: calc(1.5 * var(--spacing-small));
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
     width: 85vw;
@@ -9,7 +10,6 @@
   @include breakpoints.desktop {
     width: 50vw;
   }
-  padding: var(--spacing-mega);
   box-sizing: border-box;
   margin-block: var(--spacing-mega);
 

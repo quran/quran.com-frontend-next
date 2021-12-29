@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import uniq from 'lodash/uniq';
@@ -36,6 +36,11 @@ type TafsirBodyProps = {
   initialVerseNumber: string;
   initialTafsirData?: TafsirContentResponse;
   initialTafsirIdOrSlug?: number | string;
+  render: (renderProps: {
+    surahAndAyahSelection: JSX.Element;
+    languageAndTafsirSelection: JSX.Element;
+    body: JSX.Element;
+  }) => JSX.Element;
 };
 
 const TafsirBody = ({
@@ -43,6 +48,7 @@ const TafsirBody = ({
   initialVerseNumber,
   initialTafsirData,
   initialTafsirIdOrSlug,
+  render,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -210,6 +216,8 @@ const TafsirBody = ({
       </div>
     </div>
   );
+
+  return render({ surahAndAyahSelection, languageAndTafsirSelection, body });
 };
 
 /**
