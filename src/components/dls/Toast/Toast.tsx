@@ -36,8 +36,10 @@ const toast = (content: React.ReactNode, options: Options = {}) => {
       {content}
       {options.actions && (
         <div className={styles.actionsContainer}>
-          {options.actions.map((action) => (
+          {options.actions.map((action, index) => (
             <Button
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
               type={action.primary ? ButtonType.Primary : ButtonType.Secondary}
               className={styles.action}
               size={ButtonSize.Small}
