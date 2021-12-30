@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import styles from './contentPage.module.scss';
 
+import Link from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { getBlurDataUrl } from 'src/utils/image';
 import { getLanguageAlternates } from 'src/utils/locale';
@@ -82,19 +83,45 @@ const AboutUsPage = () => {
                 <a key={0} target="_blank" href="https://lokalise.com/" rel="noreferrer" />,
               ]}
             />
+            <div className={styles.image}>
+              <Image
+                src="/images/lokalize.png"
+                layout="fixed"
+                width={300}
+                height={70}
+                placeholder="blur"
+                blurDataURL={getBlurDataUrl(300, 70)}
+                alt="Lokalise"
+              />
+            </div>
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.vercel"
+              components={[
+                <a
+                  key={0}
+                  target="_blank"
+                  href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss"
+                  rel="noreferrer"
+                />,
+              ]}
+            />
+            <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" newTab>
+              <div className={styles.image}>
+                <Image
+                  src="/images/powered-by-vercel.svg"
+                  layout="fixed"
+                  width={150}
+                  height={70}
+                  placeholder="blur"
+                  blurDataURL={getBlurDataUrl(300, 70)}
+                  alt="Lokalise"
+                />
+              </div>
+            </Link>
           </li>
         </ul>
-        <div className={styles.lokalizeImage}>
-          <Image
-            src="/images/lokalize.png"
-            layout="fixed"
-            width={300}
-            height={70}
-            placeholder="blur"
-            blurDataURL={getBlurDataUrl(300, 70)}
-            alt="Lokalise"
-          />
-        </div>
       </div>
     </>
   );
