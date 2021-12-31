@@ -20,7 +20,7 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { stripHTMLTags } from 'src/utils/string';
-import { isValidChapterId, isValidVerseId } from 'src/utils/validator';
+import { isValidVerseId } from 'src/utils/validator';
 import { makeVerseKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse, VersesResponse } from 'types/ApiResponses';
 
@@ -86,18 +86,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     let chapterIdOrSlug = String(params.chapterId);
     const verseId = String(params.verseId);
-    // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-    if (!isValidChapterId(chapterIdOrSlug) || !isValidVerseId(chapterIdOrSlug, verseId)) {
-      const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
-      // if it's not a valid slug
-      if (!sluggedChapterId) {
-        return { notFound: true };
-      }
+    // 1. make sure the chapter Id/slug is valid using BE since slugs are stored in BE first
+    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
+    if (sluggedChapterId) {
       chapterIdOrSlug = sluggedChapterId;
+    }
+    // 2. make sure that verse id is valid before calling BE to get the verses.
+    if (!isValidVerseId(chapterIdOrSlug, verseId)) {
+      return { notFound: true };
     }
 
     const chapterData = getChapterData(chapterIdOrSlug, locale);
-
     const tafsirData = await fetcher<TafsirContentResponse>(
       makeTafsirContentUrl(
         getTafsirsInitialState(locale).selectedTafsirs[0],
