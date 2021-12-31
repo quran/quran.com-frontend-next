@@ -25,6 +25,6 @@ $container-min-height: calc(3 * var(--spacing-large));
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-block-end: var(--spacing-xxsmall);
   font-weight: var(--font-weight-bold);
+  font-size: calc(0.8 * var(--font-size));
 }
