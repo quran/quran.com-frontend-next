@@ -8,6 +8,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
+import useScrollTo from 'src/hooks/useScrollTo';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -50,6 +51,8 @@ const SurahList = () => {
   const filteredChapters = searchQuery
     ? filterSurah(chapterDataArray, searchQuery)
     : chapterDataArray;
+
+  const selectedVerseRef = useScrollTo((node) => node.parentNode.parentNode);
   return (
     <div className={styles.surahListContainer}>
       <input
@@ -62,6 +65,7 @@ const SurahList = () => {
         {filteredChapters.map((chapter) => (
           <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)}>
             <div
+              ref={chapter.id.toString() === currentChapterId ? selectedVerseRef : null}
               className={classNames(styles.listItem, {
                 [styles.selectedItem]: chapter.id.toString() === currentChapterId,
               })}
