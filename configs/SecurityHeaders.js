@@ -45,6 +45,11 @@ const securityHeaders = [
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(self), geolocation=(self), fullscreen=*', // camera is disabled for all, microphone only for the current origin, geolocation only for the current origin and fullscreen for all including iframes.
   },
+  // Enables caching all resources for a week so that we can use Vercel's Edge Cache See: https://vercel.com/docs/concepts/functions/edge-caching.
+  {
+    key: 'Cache-Control',
+    value: 'max-age=604800',
+  },
 ];
 
 module.exports = securityHeaders;
