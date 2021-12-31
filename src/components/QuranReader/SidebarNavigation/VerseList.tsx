@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
@@ -20,7 +20,7 @@ const VerseList = () => {
   const { t, lang } = useTranslation('common');
   const chapterIds = useChapterIdsByUrlPath(lang);
   const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey, shallowEqual);
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),
@@ -59,10 +59,10 @@ const VerseList = () => {
           return (
             <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)} key={verseKey}>
               <div
-                ref={verseKey === lastReadVerseKey.verseKey ? selectedVerseRef : null}
+                ref={verseKey === lastReadVerseKey ? selectedVerseRef : null}
                 className={classNames(
                   styles.listItem,
-                  verseKey === lastReadVerseKey.verseKey && styles.selectedItem,
+                  verseKey === lastReadVerseKey && styles.selectedItem,
                 )}
               >
                 {localizedVerseNumber}

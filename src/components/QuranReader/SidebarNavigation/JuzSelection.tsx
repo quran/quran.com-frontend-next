@@ -5,18 +5,15 @@ import { useSelector } from 'react-redux';
 
 import ScrollableSelection from './ScrollableSelection';
 
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectLastReadHizb } from 'src/redux/slices/QuranReader/readingTracker';
 import { getJuzIds, getJuzNumberByHizb } from 'src/utils/juz';
 import { getJuzNavigationUrl } from 'src/utils/navigation';
 
 const JuzSelection = () => {
   const { t, lang } = useTranslation('common');
   const juzIds = getJuzIds(lang);
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  const selectedJuz = useMemo(
-    () => getJuzNumberByHizb(Number(lastReadVerseKey.hizb)),
-    [lastReadVerseKey.hizb],
-  );
+  const lastReadHizb = useSelector(selectLastReadHizb);
+  const selectedJuz = useMemo(() => getJuzNumberByHizb(Number(lastReadHizb)), [lastReadHizb]);
 
   return (
     <ScrollableSelection

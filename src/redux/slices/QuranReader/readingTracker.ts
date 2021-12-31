@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
-import { getJuzNumberByHizb } from 'src/utils/juz';
 import { getDistanceBetweenVerses } from 'src/utils/verse';
 
 interface LastReadVerse {
@@ -85,9 +84,10 @@ const generateNewState = (
 
 export const { setLastReadVerse } = readingTrackerSlice.actions;
 
-export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerse;
-export const selectLastReadJuz = (state: RootState) =>
-  getJuzNumberByHizb(Number(state.readingTracker.lastReadVerse.hizb));
+export const selectLastReadVerse = (state: RootState) => state.readingTracker.lastReadVerse;
+export const selectLastReadVerseKey = (state: RootState) =>
+  state.readingTracker.lastReadVerse.verseKey;
+export const selectLastReadHizb = (state: RootState) => state.readingTracker.lastReadVerse.hizb;
 export const selectedLastReadPage = (state: RootState) => state.readingTracker.lastReadVerse.page;
 
 export const selectRecentReadingSessions = (state: RootState) =>

@@ -13,7 +13,7 @@ import styles from './ContextMenu.module.scss';
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import {
   selectIsSidebarNavigationVisible,
   setIsVisible,
@@ -31,7 +31,7 @@ const ContextMenu = () => {
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
-  const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
+  const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerse, shallowEqual);
   const chapterData = useMemo(() => {
     return chapterId ? getChapterData(chapterId, lang) : null;
   }, [chapterId, lang]);
