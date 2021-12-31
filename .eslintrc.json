@@ -8,7 +8,7 @@
         "plugin:@next/next/recommended",
         "plugin:i18next/recommended"
     ],
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
         "prettier",
         "react",
@@ -25,6 +25,9 @@
         "@typescript-eslint/no-shadow": ["error"],
         "react/jsx-filename-extension": 0,
         "react/jsx-props-no-spreading": 0,
+        "react/function-component-definition": 0,
+        "react/jsx-no-useless-fragment": 0,
+        "react/no-unstable-nested-components": 0,
         "react/boolean-prop-naming": ["error", { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }],
         "react/destructuring-assignment": 2,
         "react/no-children-prop": 2,
@@ -223,5 +226,8 @@
                 ]
             }
         }
+    },
+    "parserOptions": {
+        "requireConfigFile": false
     }
 }

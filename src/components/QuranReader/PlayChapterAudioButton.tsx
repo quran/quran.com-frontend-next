@@ -12,12 +12,12 @@ import { logButtonClick } from 'src/utils/eventLogger';
 interface Props {
   chapterId: number;
 }
-const PlayChapterAudioButton = (props: Props) => {
+const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const play = () => {
     logButtonClick('chapter_header_play_audio');
-    dispatch(loadAndPlayAudioData(props.chapterId));
+    dispatch(loadAndPlayAudioData(chapterId));
   };
   return (
     <div className={styles.container}>
