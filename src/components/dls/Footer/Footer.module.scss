@@ -91,8 +91,27 @@
   padding-block-start: var(--spacing-medium);
   justify-content: space-between;
 }
-.languageSelectorContainer {
+.actionsSections {
   margin-block-end: var(--spacing-small);
+  display: flex;
+  flex-direction: column;
+  @include breakpoints.tablet {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+.actionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    margin-inline-start: var(--spacing-mega);
+  }
+}
+.actionLabel {
+  line-height: 1;
+  margin-inline-end: var(--spacing-small);
 }
 
 .bottomLinks {

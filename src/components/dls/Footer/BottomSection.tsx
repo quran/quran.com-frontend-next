@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
+import FooterThemeSwitcher from './FooterThemeSwitcher';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import LanguageSelector from 'src/components/Navbar/LanguageSelector';
@@ -11,9 +12,14 @@ import { toLocalizedDate } from 'src/utils/locale';
 const BottomSection = () => {
   const { t, lang } = useTranslation('common');
   const localizedCurrentYear = useMemo(
-    () => toLocalizedDate(new Date(), lang, { year: 'numeric', calendar: 'gregory' }),
+    () =>
+      toLocalizedDate(new Date(), lang, {
+        year: 'numeric',
+        calendar: 'gregory',
+      }),
     [lang],
   );
+
   return (
     <div className={styles.bottomSectionContainer}>
       <div>
@@ -33,8 +39,13 @@ const BottomSection = () => {
           . {t('home:footer.rights')}
         </div>
       </div>
-      <div className={styles.languageSelectorContainer}>
-        <LanguageSelector shouldShowSelectedLang />
+      <div className={styles.actionsSections}>
+        <div className={styles.actionContainer}>
+          <FooterThemeSwitcher />
+        </div>
+        <div className={styles.actionContainer}>
+          <LanguageSelector shouldShowSelectedLang />
+        </div>
       </div>
     </div>
   );
