@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CircleIcon from '../../../../public/icons/circle.svg';
+import AutoIcon from '../../../../public/icons/auto.svg';
 import MoonIcon from '../../../../public/icons/moon-outline.svg';
 import SunIcon from '../../../../public/icons/sun-outline.svg';
 
@@ -19,7 +19,7 @@ import { logValueChange } from 'src/utils/eventLogger';
 const icons = {
   [ThemeType.Dark]: <MoonIcon />,
   [ThemeType.Light]: <SunIcon />,
-  [ThemeType.Auto]: <CircleIcon />,
+  [ThemeType.Auto]: <AutoIcon />,
 };
 
 const ThemeSection = () => {
