@@ -1,24 +1,24 @@
-import { useMemo } from 'react'
+import { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation'
+import useTranslation from 'next-translate/useTranslation';
 
-import styles from './Footer.module.scss'
-import FooterThemeSwitcher from './FooterThemeSwitcher'
+import styles from './Footer.module.scss';
+import FooterThemeSwitcher from './FooterThemeSwitcher';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link'
-import LanguageSelector from 'src/components/Navbar/LanguageSelector'
-import { toLocalizedDate } from 'src/utils/locale'
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import LanguageSelector from 'src/components/Navbar/LanguageSelector';
+import { toLocalizedDate } from 'src/utils/locale';
 
 const BottomSection = () => {
-  const { t, lang } = useTranslation('common')
+  const { t, lang } = useTranslation('common');
   const localizedCurrentYear = useMemo(
     () =>
       toLocalizedDate(new Date(), lang, {
         year: 'numeric',
         calendar: 'gregory',
       }),
-    [lang]
-  )
+    [lang],
+  );
 
   return (
     <div className={styles.bottomSectionContainer}>
@@ -48,7 +48,7 @@ const BottomSection = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BottomSection
+export default BottomSection;

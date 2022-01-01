@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
+import ChevronSelectIcon from '../../../../public/icons/chevron-select.svg';
 import Button, { ButtonVariant } from '../Button/Button';
 import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
@@ -31,8 +31,8 @@ const FooterThemeSwitcher = () => {
           tooltip={t('languages')}
           variant={ButtonVariant.Ghost}
           suffix={
-            <span className={styles.suffixContainer}>
-              <ChevronDownIcon />
+            <span className={styles.suffixIconContainer}>
+              <ChevronSelectIcon />
             </span>
           }
         >
