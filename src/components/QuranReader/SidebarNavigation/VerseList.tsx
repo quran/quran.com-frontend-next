@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useStore } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
@@ -20,7 +20,8 @@ const VerseList = () => {
   const { t, lang } = useTranslation('common');
   const chapterIds = useChapterIdsByUrlPath(lang);
   const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
-  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const store = useStore();
+  const lastReadVerseKey = selectLastReadVerseKey(store.getState());
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),

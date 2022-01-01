@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useStore } from 'react-redux';
 
 import ScrollableSelection from './ScrollableSelection';
 
@@ -12,7 +12,8 @@ import { getJuzNavigationUrl } from 'src/utils/navigation';
 const JuzSelection = () => {
   const { t, lang } = useTranslation('common');
   const juzIds = getJuzIds(lang);
-  const lastReadHizb = useSelector(selectLastReadHizb);
+  const store = useStore();
+  const lastReadHizb = selectLastReadHizb(store.getState());
   const selectedJuz = useMemo(() => getJuzNumberByHizb(Number(lastReadHizb)), [lastReadHizb]);
 
   return (

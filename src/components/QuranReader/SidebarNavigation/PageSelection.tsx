@@ -1,5 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useSelector, useStore } from 'react-redux';
 
 import ScrollableSelection from './ScrollableSelection';
 
@@ -12,7 +12,8 @@ const PageSelection = () => {
   const { t, lang } = useTranslation('common');
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles);
   const pageIds = getPageIdsByMushaf(lang, quranFont, mushafLines);
-  const lastReadPage = useSelector(selectedLastReadPage);
+  const store = useStore();
+  const lastReadPage = selectedLastReadPage(store.getState());
   const selectedPage = Number(lastReadPage);
 
   return (
