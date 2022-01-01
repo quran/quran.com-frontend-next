@@ -11,6 +11,7 @@ import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '../SearchDrawer/SearchDrawer';
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
+import FooterThemeSwitcher from 'src/components/dls/Footer/FooterThemeSwitcher';
 
 import styles from './NavbarBody.module.scss';
 
@@ -70,7 +71,9 @@ const NavbarBody: React.FC = () => {
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
           <>
+            <FooterThemeSwitcher/>
             <LanguageSelector />
+
             <Button
               tooltip={t('settings.title')}
               shape={ButtonShape.Circle}
