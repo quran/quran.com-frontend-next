@@ -143,15 +143,10 @@ const TranslationText: React.FC<Props> = ({
 
   const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
-    <>
+    <div className={styles[`translation-font-size-${translationFontScale}`]}>
       <div
         onClick={(event) => onTextClicked(event)}
-        className={classNames(
-          styles.text,
-          styles[`translation-font-size-${translationFontScale}`],
-          styles[langData.direction],
-          styles[langData.font],
-        )}
+        className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
         dangerouslySetInnerHTML={{ __html: text }}
       />
       {shouldShowFootnote && (
@@ -179,7 +174,7 @@ const TranslationText: React.FC<Props> = ({
       >
         — {resourceName}
       </p>
-    </>
+    </div>
   );
 };
 

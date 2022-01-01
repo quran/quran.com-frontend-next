@@ -17,7 +17,6 @@ import {
 } from 'src/utils/staticPageGeneration';
 import {
   getToAndFromFromRange,
-  isValidChapterId,
   isValidVerseRange,
   isValidVerseId,
   isValidVerseNumber,
@@ -65,22 +64,17 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let chapterIdOrSlug = String(params.chapterId);
   const verseIdOrRange = String(params.verseId);
-  /*
-    we need to validate the chapterId and verseId and range first to save
-    calling BE since we haven't set the valid paths inside getStaticPaths
-    to avoid pre-rendering them at build time.
-  */
-  if (
-    !isValidChapterId(chapterIdOrSlug) ||
-    (!isValidVerseId(chapterIdOrSlug, verseIdOrRange) &&
-      !isValidVerseRange(chapterIdOrSlug, verseIdOrRange))
-  ) {
-    const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
-    // if it's not a valid slug
-    if (!sluggedChapterId) {
-      return { notFound: true };
-    }
+  // 1. make sure the chapter Id/slug is valid using BE since slugs are stored in BE first
+  const sluggedChapterId = await getChapterIdBySlug(chapterIdOrSlug, locale);
+  if (sluggedChapterId) {
     chapterIdOrSlug = sluggedChapterId;
+  }
+  // 2. make sure that verse id/range are valid before calling BE to get the verses.
+  if (
+    !isValidVerseId(chapterIdOrSlug, verseIdOrRange) &&
+    !isValidVerseRange(chapterIdOrSlug, verseIdOrRange)
+  ) {
+    return { notFound: true };
   }
 
   /*
