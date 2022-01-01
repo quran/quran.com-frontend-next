@@ -1,20 +1,25 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 
-import useTranslation from 'next-translate/useTranslation';
+import useTranslation from 'next-translate/useTranslation'
 
-import styles from './Footer.module.scss';
-import FooterThemeSwitcher from './FooterThemeSwitcher';
+import styles from './Footer.module.scss'
+import FooterThemeSwitcher from './FooterThemeSwitcher'
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import LanguageSelector from 'src/components/Navbar/LanguageSelector';
-import { toLocalizedDate } from 'src/utils/locale';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link'
+import LanguageSelector from 'src/components/Navbar/LanguageSelector'
+import { toLocalizedDate } from 'src/utils/locale'
 
 const BottomSection = () => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('common')
   const localizedCurrentYear = useMemo(
-    () => toLocalizedDate(new Date(), lang, { year: 'numeric', calendar: 'gregory' }),
-    [lang],
-  );
+    () =>
+      toLocalizedDate(new Date(), lang, {
+        year: 'numeric',
+        calendar: 'gregory',
+      }),
+    [lang]
+  )
+
   return (
     <div className={styles.bottomSectionContainer}>
       <div>
@@ -36,16 +41,14 @@ const BottomSection = () => {
       </div>
       <div className={styles.actionsSections}>
         <div className={styles.actionContainer}>
-          <span className={styles.actionLabel}>{t('theme')}</span>
           <FooterThemeSwitcher />
         </div>
         <div className={styles.actionContainer}>
-          <span className={styles.actionLabel}>{t('language')}</span>
           <LanguageSelector shouldShowSelectedLang />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default BottomSection;
+export default BottomSection

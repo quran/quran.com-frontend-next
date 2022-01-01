@@ -106,7 +106,7 @@
   justify-content: space-between;
   margin-block-end: var(--spacing-medium);
   @include breakpoints.tablet {
-    margin-inline-start: calc(1.5 * var(--spacing-mega));
+    margin-inline-start: var(--spacing-mega);
   }
 }
 .actionLabel {
