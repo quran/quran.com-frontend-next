@@ -14,6 +14,7 @@ import styles from './LanguageSelector.module.scss';
 import i18nConfig from 'i18n.json';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
+import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 
 const { locales } = i18nConfig;
@@ -28,6 +29,7 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
 };
+
 const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
@@ -51,6 +53,7 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
     if (isUsingDefaultSettings) {
       dispatch(resetSettings(newLocale));
     }
+    logValueChange('locale', lang, newLocale);
     await setLanguage(newLocale);
     const date = new Date();
     date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
@@ -87,6 +90,13 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
           </Button>
         )
       }
+      onOpenChange={(open: boolean) => {
+        logEvent(
+          `${shouldShowSelectedLang ? 'footer' : 'navbar'}_language_selector_${
+            open ? 'open' : 'close'
+          }`,
+        );
+      }}
     >
       {options.map((option) => (
         <PopoverMenu.Item

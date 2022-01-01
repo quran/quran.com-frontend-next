@@ -14,9 +14,7 @@ interface RequestKeyInput {
   initialData: VersesResponse;
   quranReaderStyles: QuranReaderStyles;
   selectedTranslations: number[];
-  selectedTafsirs: number[];
   isVerseData: boolean;
-  isTafsirData: boolean;
   isSelectedTafsirData: boolean;
   id: string | number;
   reciter: number;
@@ -33,23 +31,17 @@ interface RequestKeyInput {
 export const getRequestKey = ({
   id,
   isVerseData,
-  isTafsirData,
-  isSelectedTafsirData,
   initialData,
   index,
   quranReaderStyles,
   quranReaderDataType,
   selectedTranslations,
-  selectedTafsirs,
   reciter,
   locale,
   wordByWordLocale,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page =
-    isVerseData || isTafsirData || isSelectedTafsirData
-      ? initialData.verses[0].verseNumber
-      : index + 1;
+  const page = isVerseData ? initialData.verses[0].verseNumber : index + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
       wordTranslationLanguage: wordByWordLocale,
@@ -67,18 +59,6 @@ export const getRequestKey = ({
       reciter,
       translations: selectedTranslations.join(', '),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-    });
-  }
-  if (isSelectedTafsirData || isTafsirData) {
-    return makeVersesUrl(isSelectedTafsirData ? initialData.verses[0].chapterId : id, locale, {
-      wordTranslationLanguage: wordByWordLocale,
-      page,
-      perPage: 1,
-      translations: null,
-      tafsirs: isTafsirData ? selectedTafsirs.join(',') : id,
-      wordFields: `location, verse_key, ${quranReaderStyles.quranFont}`,
-      tafsirFields: 'resource_name,language_name',
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
   }
@@ -127,16 +107,11 @@ export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Prom
  *
  *
  * @param {boolean} isVerseData
- * @param {boolean} isTafsirData
  * @param {VersesResponse} initialData
  * @returns {number}
  */
-export const getPageLimit = (
-  isVerseData: boolean,
-  isTafsirData: boolean,
-  initialData: VersesResponse,
-): number => {
-  if (isVerseData || isTafsirData) {
+export const getPageLimit = (isVerseData: boolean, initialData: VersesResponse): number => {
+  if (isVerseData) {
     return 1;
   }
 

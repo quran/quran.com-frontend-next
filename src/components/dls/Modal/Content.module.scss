@@ -1,6 +1,7 @@
 /* stylelint-disable csstools/use-logical */
 @use "src/styles/breakpoints";
 @use "src/components/dls/Modal/constants";
+@use "src/styles/theme";
 
 @keyframes desktopContentIn {
   0% {
@@ -81,7 +82,12 @@
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
   overflow: hidden;
-  box-shadow: var(--shadow-jumbo);
+  @include theme.light {
+    box-shadow: var(--shadow-jumbo);
+  }
+  @include theme.dark {
+    box-shadow: none;
+  }
   position: fixed;
   bottom: 0%;
   left: 0%;
@@ -104,6 +110,7 @@
       bottom: unset;
     }
   }
+  z-index: var(--z-index-modal);
 }
 .content[data-state="open"] {
   animation: mobileContentIn constants.$animationDuration

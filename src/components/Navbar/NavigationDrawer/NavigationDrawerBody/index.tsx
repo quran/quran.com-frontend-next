@@ -79,6 +79,12 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem
+        title="Previous.quran.com"
+        icon={<IconQ />}
+        href="https://previous.quran.com"
+        isExternalLink
+      />
+      <NavigationDrawerItem
         title="Corpus.quran.com"
         icon={<IconQ />}
         href="https://corpus.quran.com"

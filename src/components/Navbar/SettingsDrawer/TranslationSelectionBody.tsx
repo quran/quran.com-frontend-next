@@ -17,6 +17,11 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import {
+  logEmptySearchResults,
+  logValueChange,
+  logItemSelectionChange,
+} from 'src/utils/eventLogger';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
@@ -27,6 +32,9 @@ const filterTranslations = (translations, searchQuery: string): AvailableTransla
   });
 
   const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
+  if (!filteredTranslations.length) {
+    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+  }
   return filteredTranslations;
 };
 
@@ -39,14 +47,17 @@ const TranslationSelectionBody = () => {
 
   const onTranslationsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedTranslationId = e.target.value;
+    const isChecked = e.target.checked;
 
     // when the checkbox is checked
     // add the selectedTranslationId to redux
     // if unchecked, remove it from redux
-    const nextTranslations = e.target.checked
+    const nextTranslations = isChecked
       ? [...selectedTranslations, Number(selectedTranslationId)]
       : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
 
+    logItemSelectionChange('translation', selectedTranslationId, isChecked);
+    logValueChange('selected_translations', selectedTranslations, nextTranslations);
     dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
   };
 

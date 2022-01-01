@@ -11,9 +11,9 @@ $container-min-height: calc(3 * var(--spacing-large));
   margin-block-end: var(--spacing-xxsmall);
   margin-inline-start: 0;
   margin-inline-end: 0;
-  border: 1px solid var(--color-primary-medium);
+  border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
-  background-color: var(--color-background-alternative-medium);
+  background-color: var(--color-background-alternative-faded);
   min-height: $container-min-height;
 }
 
@@ -25,6 +25,6 @@ $container-min-height: calc(3 * var(--spacing-large));
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-block-end: var(--spacing-xxsmall);
   font-weight: var(--font-weight-bold);
+  font-size: calc(0.8 * var(--font-size));
 }

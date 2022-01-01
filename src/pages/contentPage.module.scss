@@ -29,7 +29,7 @@
   }
 }
 
-.lokalizeImage {
+.image {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -37,4 +37,9 @@
   padding-block-end: var(--spacing-medium);
   padding-inline-start: 0;
   padding-inline-end: 0;
+}
+
+.list {
+  list-style: unset;
+  padding-inline-start: var(--spacing-mega);
 }

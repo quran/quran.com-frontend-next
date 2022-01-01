@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Osmani"
     },
+    "footer": {
+        "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor."
+    },
     "from": "Nga",
     "help": "Ndihmë",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Aplikacionet celulare",
     "mode": "Modaliteti",
     "more": "Më shumë",
+    "navigate": "Navigoni",
     "network": "Rrjeti",
     "next": "Tjetra",
     "no": "Nr",
@@ -113,6 +117,7 @@
     "page": "Faqe",
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
+    "popular-links": "Lidhje popullore",
     "powered-by": "Mundësuar nga",
     "prayer-times": {
         "access-denied": "Qasja në vendndodhje u refuzua. Ju lutemi aktivizoni qasjen në vendndodhje për të marrë kohët e sakta të lutjes",
@@ -151,6 +156,7 @@
         "translation": "Përkthimi"
     },
     "reciter": "Recitues",
+    "reflect": "Pasqyrim",
     "remove": "Hiq",
     "retry": "Provo sërish",
     "search": {
@@ -201,13 +207,12 @@
     "surah": "Surja",
     "tafsir": {
         "font-size": "Madhësia e shkronjave Tafsir",
+        "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
         "surah": "Surja Tefsir",
         "title": "Tefsir"
     },
     "tarteel": {
         "app": "Aplikacioni Tarteel",
-        "desc": "kërkimi me zë kuranor",
-        "learn": "mësoni se si të përdorni kërkimin me zë",
         "name": "Tarteel.ai"
     },
     "theme": "Tema",
@@ -234,7 +239,10 @@
         "error": "Nje gabim ka ndodhur.Ju lutemi, provojeni perseri me vone. Ose shkarkoni",
         "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
         "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
-        "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet."
+        "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet.",
+        "suggest-subtitle": "Recitoni çdo varg në arabisht dhe vargu do të shfaqet",
+        "suggest-title": "Recitoni tani",
+        "voice-search-powered-by": "Kërkimi me zë Mundësuar nga"
     },
     "wbw": "Fjalë Për Fjalë",
     "wbw-trans-lang": "Fjalë për fjalë Gjuha",

@@ -16,6 +16,7 @@ import {
   selectWordByWordLocale,
   setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 
 export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
@@ -39,7 +40,18 @@ const WordByWordSection = () => {
    * @param {string} value
    */
   const onWordByWordLocaleChange = (value: string) => {
+    logValueChange('wbw_locale', wordByWordLocale, value);
     dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
+  };
+
+  const onShowWordByWordTranslationChange = (checked) => {
+    logValueChange('wbw_translation', !checked, checked);
+    dispatch(setShowWordByWordTranslation(checked));
+  };
+
+  const onShowWordByWordTransliterationChange = (checked) => {
+    logValueChange('wbw_transliteration', !checked, checked);
+    dispatch(setShowWordByWordTransliteration(checked));
   };
 
   return (
@@ -56,7 +68,7 @@ const WordByWordSection = () => {
               id="wbw-translation"
               name="wbw-translation"
               label={t('translation')}
-              onChange={(checked) => dispatch(setShowWordByWordTranslation(checked))}
+              onChange={onShowWordByWordTranslationChange}
             />
           </div>
           <div>
@@ -65,7 +77,7 @@ const WordByWordSection = () => {
               id="wbw-transliteration"
               name="wbw-transliteration"
               label={t('transliteration')}
-              onChange={(checked) => dispatch(setShowWordByWordTransliteration(checked))}
+              onChange={onShowWordByWordTransliterationChange}
             />
           </div>
         </div>

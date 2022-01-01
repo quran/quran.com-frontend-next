@@ -2,7 +2,7 @@
 @use "src/styles/breakpoints";
 
 .container {
-  max-width: 90%;
+  max-width: 100%;
   @include breakpoints.tablet {
     max-width: 80%;
   }

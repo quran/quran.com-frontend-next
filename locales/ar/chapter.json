@@ -1,3 +1,3 @@
 {
-    "meta-description": "اقرأ واستمع إلى سورة {{transliteratedName}}. تم الكشف عن السورة في {{revelationPlace}}، مرتبة {{chapterOrder}} في القرآن. عنوان السورة يعني \"{{translatedName}}\" في {{localeName}} وتتألف من آيات {{versesCount}} ."
+    "meta-description": "اقرأ واستمع إلى سورة {{transliteratedName}}. نزلت في {{revelationPlace}}، وترتيبها في القرآن {{chapterOrder}}، وآياتها {{versesCount}}."
 }

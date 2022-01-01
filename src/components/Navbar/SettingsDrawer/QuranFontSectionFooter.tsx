@@ -19,7 +19,10 @@ const QuranFontSectionFooter: React.FC<Props> = ({ quranFont }) => {
   return (
     <Section.Footer visible={isQCFFont(quranFont) || isTajweed}>
       {isTajweed ? (
-        <Trans i18nKey="common:fonts.tajweed-desc" components={[<Link href="/tajweed-colors" />]} />
+        <Trans
+          i18nKey="common:fonts.tajweed-desc"
+          components={[<Link key={0} href="/tajweed-colors" />]}
+        />
       ) : (
         t('fonts.qcf-desc')
       )}

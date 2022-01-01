@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import styles from './contentPage.module.scss';
 
+import Link from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { getBlurDataUrl } from 'src/utils/image';
 import { getLanguageAlternates } from 'src/utils/locale';
@@ -22,67 +23,105 @@ const AboutUsPage = () => {
         languageAlternates={getLanguageAlternates(path)}
       />
       <div className={styles.contentPage}>
-        <h1>
-          <Trans i18nKey="common:quran-com" />
-        </h1>
-        <p>{t('main-desc')}</p>
-        <p className={styles.heading}>{t('meccan.surahs')}</p>
-        <p>{t('meccan.desc')}</p>
-        <p className={styles.heading}>{t('median.surahs')}</p>
-        <p>{t('median.desc')}</p>
+        <h1>{t('common:about')}</h1>
         <p>
           <Trans
-            i18nKey="about:redesign"
-            components={[
-              <a key={0} target="_blank" href="https://feedback.quran.com" rel="noreferrer" />,
-            ]}
+            i18nKey="about:main-description"
+            components={[<a key={0} href="https://tarteel.ai" target="_blank" rel="noreferrer" />]}
           />
         </p>
         <p className={styles.heading}>{t('credits.title')}</p>
-        <p>
-          <Trans
-            i18nKey="about:credits.desc"
-            components={[
-              <a key={0} target="_blank" href="https://tanzil.net/" rel="noreferrer" />,
-              <a key={1} target="_blank" href="https://qurancomplex.gov.sa/" rel="noreferrer" />,
-              <a
-                key={2}
-                target="_blank"
-                href="https://github.com/cpfair/quran-align"
-                rel="noreferrer"
-              />,
-              <a key={3} target="_blank" href="https://quranenc.com/en/home" rel="noreferrer" />,
-              <a key={4} target="_blank" href="https://zekr.org" rel="noreferrer" />,
-            ]}
-          />
-        </p>
-        <div>
-          <Trans
-            i18nKey="about:credits.lokalize"
-            components={[
-              <a key={0} target="_blank" href="https://lokalise.com/" rel="noreferrer" />,
-            ]}
-          />
-          <div className={styles.lokalizeImage}>
-            <Image
-              src="/images/lokalize.png"
-              layout="fixed"
-              width={300}
-              height={70}
-              placeholder="blur"
-              blurDataURL={getBlurDataUrl(300, 70)}
-              alt="Lokalise"
+        <p>{t('credits.desc')}</p>
+        <ul className={styles.list}>
+          <li>
+            <Trans
+              i18nKey="about:credits.tanzil"
+              components={[
+                <a key={0} target="_blank" href="https://tanzil.net/" rel="noreferrer" />,
+              ]}
             />
-          </div>
-        </div>
-        <p>
-          <Trans
-            i18nKey="about:questions"
-            components={[
-              <a key={0} target="_blank" href="https://feedback.quran.com" rel="noreferrer" />,
-            ]}
-          />
-        </p>
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.quran-complex"
+              components={[
+                <a key={0} target="_blank" href="https://qurancomplex.gov.sa/" rel="noreferrer" />,
+              ]}
+            />
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.quran-align"
+              components={[
+                <a
+                  key={0}
+                  target="_blank"
+                  href="https://github.com/cpfair/quran-align"
+                  rel="noreferrer"
+                />,
+              ]}
+            />
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.quran-enc"
+              components={[
+                <a key={0} target="_blank" href="https://quranenc.com/en/home" rel="noreferrer" />,
+              ]}
+            />
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.zekr"
+              components={[<a key={0} target="_blank" href="https://zekr.org" rel="noreferrer" />]}
+            />
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.lokalize"
+              components={[
+                <a key={0} target="_blank" href="https://lokalise.com/" rel="noreferrer" />,
+              ]}
+            />
+            <div className={styles.image}>
+              <Image
+                src="/images/lokalize.png"
+                layout="fixed"
+                width={300}
+                height={70}
+                placeholder="blur"
+                blurDataURL={getBlurDataUrl(300, 70)}
+                alt="Lokalise"
+              />
+            </div>
+          </li>
+          <li>
+            <Trans
+              i18nKey="about:credits.vercel"
+              components={[
+                <a
+                  key={0}
+                  target="_blank"
+                  href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss"
+                  rel="noreferrer"
+                />,
+              ]}
+            />
+            <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" newTab>
+              <div className={styles.image}>
+                <Image
+                  src="/images/powered-by-vercel.svg"
+                  layout="fixed"
+                  width={150}
+                  height={70}
+                  placeholder="blur"
+                  blurDataURL={getBlurDataUrl(300, 70)}
+                  alt="Lokalise"
+                />
+              </div>
+            </Link>
+          </li>
+        </ul>
       </div>
     </>
   );

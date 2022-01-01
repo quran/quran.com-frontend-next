@@ -1,3 +1,7 @@
+.container {
+  display: flex;
+  align-items: center;
+}
 .container[dir="rtl"][data-auto-flip-icon="true"] {
   > svg {
     transform: scaleX(-1);

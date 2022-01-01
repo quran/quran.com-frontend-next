@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor."
+    },
     "from": "A partire dal",
     "help": "Aiuto",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "App mobili",
     "mode": "Modalità",
     "more": "Di più",
+    "navigate": "Navigare",
     "network": "Rete",
     "next": "Prossimo",
     "no": "No",
@@ -113,6 +117,7 @@
     "page": "Pagina",
     "pages": "Pagine",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
+    "popular-links": "Link popolari",
     "powered-by": "Offerto da",
     "prayer-times": {
         "access-denied": "Accesso alla posizione negato. Si prega di abilitare l'accesso alla posizione per ottenere orari di preghiera precisi",
@@ -151,6 +156,7 @@
         "translation": "Traduzione"
     },
     "reciter": "Recitatore",
+    "reflect": "Riflettere",
     "remove": "Rimuovere",
     "retry": "Riprova",
     "search": {
@@ -201,13 +207,12 @@
     "surah": "sura",
     "tafsir": {
         "font-size": "Dimensione del carattere Tafsir",
+        "group-message": "Stai leggendo un tafsir per il gruppo di versi {{from}} a {{to}}",
         "surah": "Tafsir Sura",
         "title": "Tafsir"
     },
     "tarteel": {
         "app": "App Tarteel",
-        "desc": "ricerca vocale coranica",
-        "learn": "impara a usare la ricerca vocale",
         "name": "Tarteel.ai"
     },
     "theme": "Tema",
@@ -234,7 +239,10 @@
         "error": "Si è verificato un errore, riprova più tardi. Oppure scarica il",
         "no-permission": "Sembra che tu non abbia le autorizzazioni per il microfono abilitate. Abilita i permessi del microfono e riprova o scarica il",
         "not-supported": "Sembra che il tuo browser non supporti il microfono. Si prega di provare un browser diverso o scaricare il",
-        "suggest": "Per favore inizia a recitare e il tuo verso apparirà."
+        "suggest": "Per favore, inizia a recitare e il tuo verso apparirà.",
+        "suggest-subtitle": "Recita qualsiasi versetto in arabo e il versetto apparirà",
+        "suggest-title": "Recita ora",
+        "voice-search-powered-by": "Ricerca vocale Powered by"
     },
     "wbw": "Parola per parola",
     "wbw-trans-lang": "Parola per parola lingua",

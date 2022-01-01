@@ -1,3 +1,5 @@
+import { stringify } from 'querystring';
+
 import { getChapterData } from './chapter';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey } from './verse';
@@ -64,20 +66,22 @@ export const getPageNavigationUrl = (pageNumber: string | number): string => `/p
 export const getVerseTafsirNavigationUrl = (
   chapterIdOrSlug: string | number,
   verseNumber: number,
-): string => `/${chapterIdOrSlug}/${verseNumber}/tafsirs`;
+  tafsirId?: string,
+): string =>
+  `/${chapterIdOrSlug}/${verseNumber}/tafsirs${tafsirId ? `?${stringify({ tafsirId })}` : ''}`;
 
 /**
  * Get the href link to selected tafsir for Ayah.
  *
  * @param {string | number} chapterId
  * @param {number} verseNumber
- * @param {number} tafsirId
+ * @param {number |string} tafsirId
  * @returns {string}
  */
 export const getVerseSelectedTafsirNavigationUrl = (
   chapterId: string | number,
   verseNumber: number,
-  tafsirId: number,
+  tafsirId: number | string,
 ): string => `/${chapterId}:${verseNumber}/tafsirs/${tafsirId}`;
 
 /**
@@ -154,4 +158,16 @@ export const getProductUpdatesUrl = (id = ''): string =>
 export const getQuranReflectVerseUrl = (verseKey: string) => {
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+};
+
+/**
+ * Update the browser history with the new url.
+ * without actually navigating into that url.
+ * So it does not trigger re render or page visit on Next.js
+ *
+ * @param {string} url
+ * @param {string} locale
+ */
+export const fakeNavigate = (url: string, locale: string) => {
+  window.history.pushState({}, '', `${locale === 'en' ? '' : `/${locale}`}${url}`);
 };

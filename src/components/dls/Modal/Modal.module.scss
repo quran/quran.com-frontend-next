@@ -26,6 +26,7 @@
   }
   position: fixed;
   inset: 0;
+  z-index: var(--z-index-overlay);
 }
 .overlay[data-state="open"] {
   animation: fadeIn constants.$animationDuration constants.$animationEasing;

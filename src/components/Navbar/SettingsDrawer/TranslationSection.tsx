@@ -22,6 +22,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 
@@ -50,6 +51,11 @@ const TranslationSection = () => {
     [selectedTranslations, lang],
   );
 
+  const onSelectionCardClicked = useCallback(() => {
+    dispatch(setSettingsView(SettingsView.Translation));
+    logValueChange('settings_view', SettingsView.Translation, SettingsView.Body);
+  }, [dispatch]);
+
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
       const firstSelectedTranslation = data.translations.find(
@@ -68,12 +74,22 @@ const TranslationSection = () => {
         <SelectionCard
           label={t('settings.selected-translations')}
           value={selectedValueString}
-          onClick={() => dispatch(setSettingsView(SettingsView.Translation))}
+          onClick={onSelectionCardClicked}
         />
       );
     },
-    [dispatch, localizedSelectedTranslations, selectedTranslations, t],
+    [localizedSelectedTranslations, onSelectionCardClicked, selectedTranslations, t],
   );
+
+  const onFontScaleDecreaseClicked = () => {
+    logValueChange('translation_font_scale', translationFontScale, translationFontScale - 1);
+    dispatch(decreaseTranslationFontScale());
+  };
+
+  const onFontScaleIncreaseClicked = () => {
+    logValueChange('translation_font_scale', translationFontScale, translationFontScale + 1);
+    dispatch(increaseTranslationFontScale());
+  };
 
   return (
     <div className={styles.container}>
@@ -95,14 +111,10 @@ const TranslationSection = () => {
           <Counter
             count={translationFontScale}
             onIncrement={
-              MAXIMUM_FONT_STEP === translationFontScale
-                ? null
-                : () => dispatch(increaseTranslationFontScale())
+              MAXIMUM_FONT_STEP === translationFontScale ? null : onFontScaleIncreaseClicked
             }
             onDecrement={
-              MINIMUM_FONT_STEP === translationFontScale
-                ? null
-                : () => dispatch(decreaseTranslationFontScale())
+              MINIMUM_FONT_STEP === translationFontScale ? null : onFontScaleDecreaseClicked
             }
           />
         </Section.Row>

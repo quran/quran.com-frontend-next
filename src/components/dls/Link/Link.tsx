@@ -19,6 +19,8 @@ type LinkProps = {
   newTab?: boolean;
   download?: string;
   className?: string;
+  onClick?: React.MouseEventHandler;
+  passHref?: boolean;
 };
 
 const Link: React.FC<LinkProps> = ({
@@ -28,8 +30,17 @@ const Link: React.FC<LinkProps> = ({
   variant,
   download,
   className,
+  onClick,
+  passHref,
 }) => (
-  <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
+  <Wrapper
+    shouldWrap={!download}
+    wrapper={(node) => (
+      <NextLink href={href} {...(passHref && { passHref })}>
+        {node}
+      </NextLink>
+    )}
+  >
     <a
       href={href}
       download={download}
@@ -41,6 +52,7 @@ const Link: React.FC<LinkProps> = ({
         [styles.secondary]: variant === LinkVariant.Secondary,
         [styles.blend]: variant === LinkVariant.Blend,
       })}
+      {...(onClick && { onClick })}
     >
       {children}
     </a>

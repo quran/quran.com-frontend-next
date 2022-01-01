@@ -109,3 +109,9 @@ Thank you for taking time to file a bug! We'd appreciate your help on fixing it 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/15169499/139687128-15ed6189-6be2-44bf-9173-75cce317d546.png" width="400">
 </p>
+
+- Deployment was made possible by the help of [Vercel](https://vercel.com/?utm_source=quran-pro&utm_campaign=oss) which is a deployment and collaboration platform for frontend developers which puts the frontend developer first, giving them comprehensive tools to build high-performance websites and applications.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/15169499/147745340-b7e84819-d1b0-4399-87a0-d5276ba21bca.png" width="250">
+</p>

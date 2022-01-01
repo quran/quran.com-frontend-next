@@ -34,10 +34,7 @@ import {
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import {
-  selectIsUsingDefaultTafsirs,
-  selectSelectedTafsirs,
-} from 'src/redux/slices/QuranReader/tafsirs';
+import { selectIsUsingDefaultTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import {
   selectIsUsingDefaultTranslations,
   selectSelectedTranslations,
@@ -65,14 +62,12 @@ const QuranReader = ({
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
-  const isTafsirData = quranReaderDataType === QuranReaderDataType.Tafsir;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const wordByWordLocale = useSelector(selectWordByWordLocale);
   const reciter = useSelector(selectReciter, shallowEqual);
@@ -86,9 +81,7 @@ const QuranReader = ({
         initialData,
         quranReaderStyles,
         selectedTranslations,
-        selectedTafsirs,
         isVerseData,
-        isTafsirData,
         isSelectedTafsirData,
         id,
         reciter: reciter.id,
@@ -145,8 +138,8 @@ const QuranReader = ({
       setSize(size + 1);
     }
   };
-  const hasMore =
-    size < getPageLimit(isVerseData, isTafsirData || isSelectedTafsirData, initialData);
+  const hasMore = size < getPageLimit(isVerseData, initialData);
+
   return (
     <>
       <ContextMenu />
@@ -171,8 +164,6 @@ const QuranReader = ({
             }
           >
             <QuranReaderBody
-              isTafsirData={isTafsirData}
-              isSelectedTafsirData={isSelectedTafsirData}
               isReadingPreference={isReadingPreference}
               quranReaderStyles={quranReaderStyles}
               verses={verses}

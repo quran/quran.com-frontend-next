@@ -1,8 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import QuranReflectIcon from '../../../../public/icons/QR.svg';
+import ChatIcon from '../../../../public/icons/chat.svg';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getQuranReflectVerseUrl } from 'src/utils/navigation';
 import { navigateToExternalUrl } from 'src/utils/url';
 
@@ -14,13 +15,16 @@ const QuranReflectButton = ({ verseKey }: QuranReflectButtonProps) => {
   const { t } = useTranslation('common');
   return (
     <Button
-      onClick={() => navigateToExternalUrl(getQuranReflectVerseUrl(verseKey))}
+      onClick={() => {
+        logButtonClick('translation_view_reflect');
+        navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
+      }}
       size={ButtonSize.Small}
-      tooltip={t('q-reflect')}
+      tooltip={t('reflect')}
       type={ButtonType.Secondary}
       shouldFlipOnRTL={false}
     >
-      <QuranReflectIcon />
+      <ChatIcon />
     </Button>
   );
 };

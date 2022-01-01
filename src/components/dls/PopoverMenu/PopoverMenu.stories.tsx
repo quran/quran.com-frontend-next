@@ -77,19 +77,23 @@ export const WithSubMenu = () => {
   const menus = useMemo(() => {
     return {
       parent: [
-        <PopoverMenu.Item>Download Audio</PopoverMenu.Item>,
-        <PopoverMenu.Item onClick={() => setSelection('speed')} icon={<RepeatIcon size={18} />}>
+        <PopoverMenu.Item key={0}>Download Audio</PopoverMenu.Item>,
+        <PopoverMenu.Item
+          key={1}
+          onClick={() => setSelection('speed')}
+          icon={<RepeatIcon size={18} />}
+        >
           Audio speed
         </PopoverMenu.Item>,
-        <PopoverMenu.Divider />,
-        <PopoverMenu.Item>Close Audio Player</PopoverMenu.Item>,
+        <PopoverMenu.Divider key={2} />,
+        <PopoverMenu.Item key={3}>Close Audio Player</PopoverMenu.Item>,
       ],
       speed: [
-        <PopoverMenu.Item icon={<BackIcon />} onClick={() => setSelection('parent')}>
+        <PopoverMenu.Item key={0} icon={<BackIcon />} onClick={() => setSelection('parent')}>
           Audio Speed
         </PopoverMenu.Item>,
-        <PopoverMenu.Divider />,
-        <PopoverMenu.Item>Logout</PopoverMenu.Item>,
+        <PopoverMenu.Divider key={1} />,
+        <PopoverMenu.Item key={2}>Logout</PopoverMenu.Item>,
       ],
     };
   }, []);

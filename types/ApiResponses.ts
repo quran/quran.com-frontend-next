@@ -84,3 +84,17 @@ export interface ChapterInfoResponse extends BaseResponse {
 export interface FootnoteResponse extends BaseResponse {
   footNote?: Footnote;
 }
+
+export interface TafsirContentResponse extends BaseResponse {
+  tafsir: {
+    verses: Record<string, Verse>;
+    resourceId: number;
+    resourceName: string;
+    translatedName: {
+      name: string;
+      languageName: string;
+    };
+    text: string;
+    slug?: string;
+  };
+}
