@@ -13,7 +13,8 @@ const getTextToCopy = ({
   rangeEndVerse,
   translations,
   shouldCopyFootnotes,
-  shouldCopyText,
+  shouldIncludeTranslatorName,
+  shouldCopyFont,
 }) => {
   // by default the from and to will be the current verse.
   let fromVerse = verseKey;
@@ -32,10 +33,13 @@ const getTextToCopy = ({
     from: fromVerse,
     to: toVerse,
     footnote: shouldCopyFootnotes,
+    includeTranslator: shouldIncludeTranslatorName,
     ...(toBeCopiedTranslations.length > 0 && {
       translations: toBeCopiedTranslations.join(', '),
     }), // only include the translations when at least 1 translation has been selected.
-    ...(shouldCopyText && { ...getMushafId() }), // only include the Quranic text if the user chose to.
+    ...(shouldCopyFont && {
+      ...getMushafId(shouldCopyFont),
+    }), // only include the fonts when at least 1 font has been selected.
   }).then((res) => res.result);
 };
 
