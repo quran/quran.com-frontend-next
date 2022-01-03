@@ -15,6 +15,8 @@ import {
   setEnableAutoScrolling,
   selectPlaybackRate,
   setPlaybackRate,
+  selectShowTooltipWhenPlayingAudio,
+  setShowTooltipWhenPlayingAudio,
 } from 'src/redux/slices/AudioPlayer/state';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
@@ -35,6 +37,7 @@ const AudioSection = () => {
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
   const playbackRate = useSelector(selectPlaybackRate);
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
+  const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
   const onPlaybackRateChanged = (value) => {
     logValueChange('audio_playback_rate', playbackRate, value);
@@ -73,6 +76,16 @@ const AudioSection = () => {
     dispatch(setWordClickFunctionality(newValue));
   };
 
+  const onShowTooltipWhenPlayingAudioChange = () => {
+    const newValue = !showTooltipWhenPlayingAudio;
+    logValueChange(
+      'audio_settings_show_tooltip_when_playing_audio',
+      showTooltipWhenPlayingAudio,
+      newValue,
+    );
+    dispatch(setShowTooltipWhenPlayingAudio(newValue));
+  };
+
   return (
     <div className={styles.container}>
       <Section>
@@ -109,6 +122,13 @@ const AudioSection = () => {
           <SelectionCard
             value={t('audio.player.repeat-settings')}
             onClick={onRepeatSettingsSelectionCardClicked}
+          />
+        </Section.Row>
+        <Section.Row>
+          <Section.Label>{t('settings.tooltip-highlighted-ayah')}</Section.Label>
+          <Toggle
+            isChecked={showTooltipWhenPlayingAudio}
+            onClick={onShowTooltipWhenPlayingAudioChange}
           />
         </Section.Row>
       </Section>

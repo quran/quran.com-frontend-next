@@ -73,7 +73,6 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   isUsingDefaultWordByWordLocale: true,
   showTooltipFor: [WordByWordType.Translation],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
-  showTooltipHighlightedWord: true,
 };
 
 const THEME_INITIAL_STATE: Theme = {
@@ -107,6 +106,7 @@ const AUDIO_INITIAL_STATE: AudioState = {
   isDownloadingAudio: false,
   playbackRate: DEFAULT_PLAYBACK_RATE,
   isUsingDefaultReciter: true,
+  showTooltipWhenPlayingAudio: false,
 };
 
 export default {
