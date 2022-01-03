@@ -7,6 +7,7 @@ import styles from './AudioSection.module.scss';
 import Section from './Section';
 
 import Select from 'src/components/dls/Forms/Select';
+import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
@@ -119,16 +120,19 @@ const AudioSection = () => {
           />
         </Section.Row>
         <Section.Row>
-          <SelectionCard
-            value={t('audio.player.repeat-settings')}
-            onClick={onRepeatSettingsSelectionCardClicked}
-          />
-        </Section.Row>
-        <Section.Row>
-          <Section.Label>{t('settings.tooltip-highlighted-ayah')}</Section.Label>
+          <Section.Label>
+            {t('settings.show-tooltip')}
+            <HelperTooltip>{t('settings.settings.wbw-helper')}</HelperTooltip>
+          </Section.Label>
           <Toggle
             isChecked={showTooltipWhenPlayingAudio}
             onClick={onShowTooltipWhenPlayingAudioChange}
+          />
+        </Section.Row>
+        <Section.Row>
+          <SelectionCard
+            value={t('audio.player.repeat-settings')}
+            onClick={onRepeatSettingsSelectionCardClicked}
           />
         </Section.Row>
       </Section>
