@@ -14,14 +14,16 @@ import TextWord from './TextWord';
 import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import {
+  selectReciter,
+  selectShowTooltipWhenPlayingAudio,
+} from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
-  selectShowTooltipHighlightedWord,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
@@ -58,7 +60,7 @@ const QuranWord = ({
     () => getChapterAudioData(reciter.id, chapterId, true),
   );
 
-  const showTooltipHighlightedWord = useSelector(selectShowTooltipHighlightedWord);
+  const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -141,7 +143,7 @@ const QuranWord = ({
         shouldWrap={showTooltip}
         wrapper={(children) => (
           <MobilePopover
-            shouldOpen={shouldBeHighLighted && showTooltipHighlightedWord}
+            isOpen={shouldBeHighLighted && showTooltipWhenPlayingAudio}
             defaultStyling={false}
             content={tooltipContent}
             onOpenChange={setIsTooltipOpened}
