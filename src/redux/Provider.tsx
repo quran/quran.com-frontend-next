@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -14,8 +16,8 @@ import getStore from './store';
  * @returns {Provider}
  */
 const ReduxProvider = ({ children, locale }) => {
-  const store = getStore(locale);
-  const persistor = persistStore(store);
+  const store = useMemo(() => getStore(locale), [locale]);
+  const persistor = useMemo(() => persistStore(store), [store]);
 
   const isClient = !!(
     typeof window !== 'undefined' &&
