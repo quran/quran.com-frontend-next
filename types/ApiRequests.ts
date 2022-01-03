@@ -12,7 +12,7 @@ export type AdvancedCopyRequest = {
   footnote: boolean;
   includeTranslator: boolean;
   translations?: string;
-  mushaf?: string;
+  mushaf?: number;
   fields?: string;
   raw: boolean;
 };
