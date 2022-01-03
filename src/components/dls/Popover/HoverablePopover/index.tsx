@@ -31,7 +31,7 @@ const HoverablePopover: React.FC<Props> = ({
   tip = true,
   tooltipDelay = 0,
   defaultStyling = true,
-  isOpen: shouldOpen,
+  isOpen,
 }: Props): JSX.Element => (
   <Popover
     contentSide={contentSide}
@@ -40,7 +40,7 @@ const HoverablePopover: React.FC<Props> = ({
     defaultStyling={defaultStyling}
     trigger={
       <Tooltip
-        open={shouldOpen}
+        open={isOpen}
         tip={tip}
         text={content}
         contentSide={contentSide}

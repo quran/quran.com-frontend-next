@@ -114,9 +114,9 @@ export default {
   }),
   18: (state) => ({
     ...state,
-    readingPreferences: {
+    audioPlayerState: {
       ...state.readingPreferences,
-      showTooltipHighlightedWord: true,
+      showTooltipWhenPlayingAudio: false,
     },
   }),
 };

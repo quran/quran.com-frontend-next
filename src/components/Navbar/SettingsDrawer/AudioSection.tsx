@@ -122,7 +122,7 @@ const AudioSection = () => {
         <Section.Row>
           <Section.Label>
             {t('settings.show-tooltip')}
-            <HelperTooltip>{t('settings.settings.wbw-helper')}</HelperTooltip>
+            <HelperTooltip>{t('settings.tooltip-playing-audio-helper')}</HelperTooltip>
           </Section.Label>
           <Toggle
             isChecked={showTooltipWhenPlayingAudio}
