@@ -10,11 +10,14 @@ import styles from './WordByWordSection.module.scss';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
+import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
   setShowTooltipFor,
   selectShowTooltipFor,
   selectWordByWordLocale,
   setSelectedWordByWordLocale,
+  selectShowTooltipHighlightedWord,
+  setShowTooltipHighlightedWord,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { removeItemFromArray, areArraysEqual } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
@@ -24,8 +27,8 @@ const WordTooltipSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-
   const wordByWordLocale = useSelector(selectWordByWordLocale);
+  const showTooltipHighlightedWord = useSelector(selectShowTooltipHighlightedWord);
 
   const onWordByWordLocaleChange = (value: string) => {
     logValueChange('wbw_tooltip_locale', wordByWordLocale, value);
@@ -81,6 +84,14 @@ const WordTooltipSection = () => {
           />
         </Section.Row>
       )}
+
+      <Section.Row>
+        <Section.Label>{t('settings.tooltip-highlighted-ayah')}</Section.Label>
+        <Toggle
+          isChecked={showTooltipHighlightedWord}
+          onClick={() => dispatch(setShowTooltipHighlightedWord(!showTooltipHighlightedWord))}
+        />
+      </Section.Row>
     </Section>
   );
 };

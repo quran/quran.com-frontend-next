@@ -47,6 +47,10 @@ export const readingPreferencesSlice = createSlice({
       ...state,
       wordClickFunctionality: action.payload,
     }),
+    setShowTooltipHighlightedWord: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      showTooltipHighlightedWord: action.payload,
+    }),
   },
   // reset the state to initial state
   // when `reset` action is dispatched
@@ -66,6 +70,7 @@ export const {
   setSelectedWordByWordLocale,
   setShowTooltipFor,
   setWordClickFunctionality,
+  setShowTooltipHighlightedWord,
 } = readingPreferencesSlice.actions;
 
 export const selectWordByWordByWordPreferences = (state: RootState) => ({
@@ -84,5 +89,7 @@ export const selectWordByWordLocale = (state: RootState) =>
   state.readingPreferences.selectedWordByWordLocale;
 export const selectIsUsingDefaultWordByWordLocale = (state: RootState) =>
   state.readingPreferences.isUsingDefaultWordByWordLocale;
+export const selectShowTooltipHighlightedWord = (state: RootState) =>
+  state.readingPreferences.showTooltipHighlightedWord;
 
 export default readingPreferencesSlice.reducer;

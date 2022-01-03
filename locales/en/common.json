@@ -188,7 +188,8 @@
         "title": "Settings",
         "value-and-others": "{{value}}, and {{othersCount}} others",
         "wbw-helper": "Display the translation or transliteration directly under the word",
-        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
+        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word",
+        "tooltip-highlighted-ayah": "Show word translation tooltip while playing ayah"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",

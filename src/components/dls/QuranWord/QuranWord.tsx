@@ -1,9 +1,10 @@
-import React, { ReactNode, useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
 import onQuranWordClick from './onQuranWordClick';
 import styles from './QuranWord.module.scss';
@@ -20,18 +21,14 @@ import {
   selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordByWordPreferences,
+  selectShowTooltipHighlightedWord,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
-import {
-  ReadingPreference,
-  QuranFont,
-  WordByWordType,
-  WordClickFunctionality,
-} from 'types/QuranReader';
+import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -60,6 +57,8 @@ const QuranWord = ({
     chapterId ? makeChapterAudioDataUrl(reciter.id, chapterId, true) : null,
     () => getChapterAudioData(reciter.id, chapterId, true),
   );
+
+  const showTooltipHighlightedWord = useSelector(selectShowTooltipHighlightedWord);
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
@@ -142,6 +141,7 @@ const QuranWord = ({
         shouldWrap={showTooltip}
         wrapper={(children) => (
           <MobilePopover
+            shouldOpen={shouldBeHighLighted && showTooltipHighlightedWord ? true : undefined}
             defaultStyling={false}
             content={tooltipContent}
             onOpenChange={setIsTooltipOpened}
@@ -163,22 +163,5 @@ const QuranWord = ({
     </div>
   );
 };
-
-/**
- * Generate the Tooltip content based on the settings.
- *
- * @param {WordByWordType[]} showTooltipFor
- * @param {Word} word
- * @returns {ReactNode}
- */
-const getTooltipText = (showTooltipFor: WordByWordType[], word: Word): ReactNode => (
-  <>
-    {showTooltipFor.map((tooltipTextType) => (
-      <p key={tooltipTextType} className={styles.tooltipText}>
-        {word[tooltipTextType].text}
-      </p>
-    ))}
-  </>
-);
 
 export default QuranWord;

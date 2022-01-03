@@ -10,6 +10,7 @@ type ReadingPreferences = {
   showTooltipFor: WordByWordType[];
   wordClickFunctionality: WordClickFunctionality;
   isUsingDefaultWordByWordLocale: boolean;
+  showTooltipHighlightedWord: boolean;
 };
 
 export default ReadingPreferences;

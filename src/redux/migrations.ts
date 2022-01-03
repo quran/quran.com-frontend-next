@@ -112,4 +112,11 @@ export default {
       loadedFontFaces: [],
     },
   }),
+  18: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      showTooltipHighlightedWord: true,
+    },
+  }),
 };
