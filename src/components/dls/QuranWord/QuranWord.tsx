@@ -141,7 +141,7 @@ const QuranWord = ({
         shouldWrap={showTooltip}
         wrapper={(children) => (
           <MobilePopover
-            shouldOpen={shouldBeHighLighted && showTooltipHighlightedWord ? true : undefined}
+            shouldOpen={shouldBeHighLighted && showTooltipHighlightedWord}
             defaultStyling={false}
             content={tooltipContent}
             onOpenChange={setIsTooltipOpened}
