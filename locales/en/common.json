@@ -190,7 +190,7 @@
         "wbw-helper": "Display the translation or transliteration directly under the word",
         "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word",
         "tooltip-playing-audio-helper": "Show word translation in tooltip while playing ayah",
-        "show-tooltip": "Show tootip"
+        "show-tooltip": "Show tooltip"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",

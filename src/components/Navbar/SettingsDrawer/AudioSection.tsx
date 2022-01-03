@@ -110,16 +110,6 @@ const AudioSection = () => {
           />
         </Section.Row>
         <Section.Row>
-          <Section.Label>{t('audio.playback-speed')}</Section.Label>
-          <Select
-            id="theme-section"
-            name="theme"
-            options={playbackRatesOptions}
-            value={playbackRate.toString()}
-            onChange={onPlaybackRateChanged}
-          />
-        </Section.Row>
-        <Section.Row>
           <Section.Label>
             {t('settings.show-tooltip')}
             <HelperTooltip>{t('settings.tooltip-playing-audio-helper')}</HelperTooltip>
@@ -127,6 +117,16 @@ const AudioSection = () => {
           <Toggle
             isChecked={showTooltipWhenPlayingAudio}
             onClick={onShowTooltipWhenPlayingAudioChange}
+          />
+        </Section.Row>
+        <Section.Row>
+          <Section.Label>{t('audio.playback-speed')}</Section.Label>
+          <Select
+            id="theme-section"
+            name="theme"
+            options={playbackRatesOptions}
+            value={playbackRate.toString()}
+            onChange={onPlaybackRateChanged}
           />
         </Section.Row>
         <Section.Row>
