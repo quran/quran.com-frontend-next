@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor."
+    },
     "from": "From",
     "help": "Help",
     "hizb": "Hizb",
@@ -99,11 +102,13 @@
     },
     "juz": "Juz",
     "languages": "Languages",
+    "language": "Language",
     "loading": "Loading",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "more": "More",
+    "navigate": "Navigate",
     "network": "Network",
     "next": "Next",
     "no": "No",
@@ -113,6 +118,7 @@
     "page": "Page",
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
+    "popular-links": "Popular Links",
     "powered-by": "Powered by",
     "prayer-times": {
         "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
@@ -151,6 +157,7 @@
         "translation": "Translation"
     },
     "reciter": "Reciter",
+    "reflect": "Reflect",
     "remove": "Remove",
     "retry": "Retry",
     "search": {
@@ -201,13 +208,12 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir font size",
+        "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },
     "tarteel": {
         "app": "Tarteel app",
-        "desc": "quranic voice search",
-        "learn": "learn how to use voice search",
         "name": "Tarteel.ai"
     },
     "theme": "Theme",
@@ -234,7 +240,10 @@
         "error": "An error has occurred, please try again later. Or download the ",
         "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ",
         "not-supported": "It looks like your browser does not support microphone. Please try a different browser or download the ",
-        "suggest": "Please begin reciting and your verse will appear."
+        "suggest": "Please begin reciting and your verse will appear.",
+        "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",
+        "suggest-title": "Recite now",
+        "voice-search-powered-by": "Voice Search Powered by"
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",

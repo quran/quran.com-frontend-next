@@ -5,4 +5,8 @@ export default {
   component: Footer,
 };
 
-export const Preview = () => <Footer />;
+export const Preview = () => (
+  <span className="previewWrapper">
+    <Footer />
+  </span>
+);

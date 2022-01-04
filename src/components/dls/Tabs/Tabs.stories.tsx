@@ -15,7 +15,11 @@ const tabs = [
 const Template = (args) => {
   const [selected, setSelected] = useState('translation');
 
-  return <Tabs tabs={tabs} selected={selected} onSelect={setSelected} {...args} />;
+  return (
+    <span className="previewWrapper">
+      <Tabs tabs={tabs} selected={selected} onSelect={setSelected} {...args} />
+    </span>
+  );
 };
 
 export const Default = Template.bind({});

@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com ialah Sadaqah Jariyah. Kami berharap dapat memudahkan semua orang membaca, mempelajari dan mempelajari Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, dan Al-Noor."
+    },
     "from": "Dari",
     "help": "Bantuan",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Aplikasi Mudah Alih",
     "mode": "Mod",
     "more": "Lagi",
+    "navigate": "Navigasi",
     "network": "Rangkaian",
     "next": "Seterusnya",
     "no": "Tidak",
@@ -113,6 +117,7 @@
     "page": "Halaman",
     "pages": "Muka Surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
+    "popular-links": "Pautan Popular",
     "powered-by": "Dikuasai oleh",
     "prayer-times": {
         "access-denied": "Akses ke lokasi dinafikan. Sila dayakan akses lokasi untuk mendapatkan waktu solat yang tepat",
@@ -151,6 +156,7 @@
         "translation": "Terjemahan"
     },
     "reciter": "Qari",
+    "reflect": "Renungkan",
     "remove": "Alih keluar",
     "retry": "Cuba semula",
     "search": {
@@ -201,13 +207,12 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Saiz fon Tafsir",
+        "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat {{from}} hingga {{to}}",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },
     "tarteel": {
         "app": "Aplikasi Tarteel",
-        "desc": "carian suara al-quran",
-        "learn": "belajar cara menggunakan carian suara",
         "name": "Tarteel.ai"
     },
     "theme": "Tema",
@@ -234,7 +239,10 @@
         "error": "Kesilapan telah berlaku. Sila cuba sebentar lagi. Atau muat turun",
         "no-permission": "Nampaknya anda tidak memberi kebenaran kepada pemasangan mikrofon. Sila benarkan pemasangan mikrofon dan cuba lagi sekali atau muat turun",
         "not-supported": "Nampaknya web anda tidak menyokong mikrofon. Sila cuba web lain atau muat turun",
-        "suggest": "Sila mula membaca dan ayat anda akan muncul."
+        "suggest": "Sila mulakan membaca dan ayat anda akan muncul.",
+        "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab, dan ayat itu akan muncul",
+        "suggest-title": "Mengaji sekarang",
+        "voice-search-powered-by": "Carian Suara Dikuasakan oleh"
     },
     "wbw": "Perkataan demi perkataan",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",

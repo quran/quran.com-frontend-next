@@ -5,4 +5,8 @@ export default {
   component: HelperTooltip,
 };
 
-export const Example = () => <HelperTooltip>This is a helper tooltip example</HelperTooltip>;
+export const Example = () => (
+  <span className="previewWrapper">
+    <HelperTooltip>This is a helper tooltip example</HelperTooltip>
+  </span>
+);

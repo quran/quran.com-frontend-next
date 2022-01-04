@@ -6,6 +6,32 @@ import styles from './Switch.stories.module.scss';
 export default {
   title: 'dls/Switch',
   component: Switch,
+  argTypes: {
+    size: {
+      description: `[OPTIONAL] The size of the Switch`,
+      options: Object.values(SwitchSize),
+      control: { type: 'radio' },
+      defaultValue: SwitchSize.Normal,
+      table: {
+        category: 'Optional',
+      },
+    },
+    items: {
+      table: {
+        category: 'Required',
+      },
+    },
+    selected: {
+      table: {
+        category: 'Required',
+      },
+    },
+    onSelect: {
+      table: {
+        category: 'Required',
+      },
+    },
+  },
 };
 
 const items = [
@@ -21,18 +47,8 @@ const Template = (args) => {
   );
 };
 
-export const Medium = Template.bind({});
-Medium.args = {};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: SwitchSize.Small,
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: SwitchSize.Large,
-};
+export const Default = Template.bind({});
+Default.args = {};
 
 export const WithThreeItems = Template.bind({});
 WithThreeItems.args = {

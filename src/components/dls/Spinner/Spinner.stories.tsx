@@ -12,10 +12,14 @@ export default {
       description: `[OPTIONAL] The size of the button`,
       options: Object.values(SpinnerSize),
       control: { type: 'radio' },
+      defaultValue: SpinnerSize.Medium,
+    },
+    isCentered: {
+      control: { type: 'boolean' },
+      defaultValue: true,
     },
   },
 };
 
-export const Small = () => <Spinner size={SpinnerSize.Small} />;
-export const Medium = () => <Spinner size={SpinnerSize.Medium} />;
-export const Large = () => <Spinner size={SpinnerSize.Large} />;
+const PreviewTemplate = (args) => <Spinner {...args} />;
+export const Preview = PreviewTemplate.bind({});

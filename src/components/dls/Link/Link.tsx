@@ -18,21 +18,41 @@ type LinkProps = {
   variant?: LinkVariant;
   newTab?: boolean;
   download?: string;
+  className?: string;
+  onClick?: React.MouseEventHandler;
+  passHref?: boolean;
 };
 
-const Link: React.FC<LinkProps> = ({ href, children, newTab = false, variant, download }) => (
-  <Wrapper shouldWrap={!download} wrapper={(node) => <NextLink href={href}>{node}</NextLink>}>
+const Link: React.FC<LinkProps> = ({
+  href,
+  children,
+  newTab = false,
+  variant,
+  download,
+  className,
+  onClick,
+  passHref,
+}) => (
+  <Wrapper
+    shouldWrap={!download}
+    wrapper={(node) => (
+      <NextLink href={href} {...(passHref && { passHref })}>
+        {node}
+      </NextLink>
+    )}
+  >
     <a
       href={href}
       download={download}
       target={newTab ? '_blank' : undefined}
       rel={newTab ? 'noreferrer' : undefined}
-      className={classNames(styles.base, {
+      className={classNames(styles.base, className, {
         [styles.highlight]: variant === LinkVariant.Highlight,
         [styles.primary]: variant === LinkVariant.Primary,
         [styles.secondary]: variant === LinkVariant.Secondary,
         [styles.blend]: variant === LinkVariant.Blend,
       })}
+      {...(onClick && { onClick })}
     >
       {children}
     </a>

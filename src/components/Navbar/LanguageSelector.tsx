@@ -4,6 +4,7 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
 import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
@@ -13,6 +14,7 @@ import styles from './LanguageSelector.module.scss';
 import i18nConfig from 'i18n.json';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
+import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 
 const { locales } = i18nConfig;
@@ -24,7 +26,11 @@ const options = locales.map((lng) => ({
 
 const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
-const LanguageSelector = () => {
+type LanguageSelectorProps = {
+  shouldShowSelectedLang?: boolean;
+};
+
+const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
@@ -47,6 +53,7 @@ const LanguageSelector = () => {
     if (isUsingDefaultSettings) {
       dispatch(resetSettings(newLocale));
     }
+    logValueChange('locale', lang, newLocale);
     await setLanguage(newLocale);
     const date = new Date();
     date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
@@ -57,12 +64,39 @@ const LanguageSelector = () => {
   return (
     <PopoverMenu
       trigger={
-        <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
-          <span className={styles.globeIconWrapper}>
-            <GlobeIcon />
-          </span>
-        </Button>
+        shouldShowSelectedLang ? (
+          <Button
+            className={styles.triggerButton}
+            prefix={
+              <span className={styles.globeIconWrapper}>
+                <GlobeIcon />
+              </span>
+            }
+            tooltip={t('languages')}
+            variant={ButtonVariant.Ghost}
+            suffix={
+              <span className={styles.triggerSuffixContainer}>
+                <ChevronSelectIcon />
+              </span>
+            }
+          >
+            {getLocaleName(lang)}
+          </Button>
+        ) : (
+          <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+            <span className={styles.globeIconWrapper}>
+              <GlobeIcon />
+            </span>
+          </Button>
+        )
       }
+      onOpenChange={(open: boolean) => {
+        logEvent(
+          `${shouldShowSelectedLang ? 'footer' : 'navbar'}_language_selector_${
+            open ? 'open' : 'close'
+          }`,
+        );
+      }}
     >
       {options.map((option) => (
         <PopoverMenu.Item

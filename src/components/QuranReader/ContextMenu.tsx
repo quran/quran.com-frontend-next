@@ -19,6 +19,7 @@ import {
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
+import { logEvent } from 'src/utils/eventLogger';
 import { getJuzNumberByHizb } from 'src/utils/juz';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseNumberFromKey } from 'src/utils/verse';
@@ -71,6 +72,9 @@ const ContextMenu = () => {
                 // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
               })}
               onClick={(e) => {
+                logEvent(
+                  `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
+                );
                 e.stopPropagation();
                 dispatch(setIsVisible(!isSidebarNavigationVisible));
               }}

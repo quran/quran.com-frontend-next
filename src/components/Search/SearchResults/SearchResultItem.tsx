@@ -3,27 +3,41 @@
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 
 import styles from './SearchResultItem.module.scss';
 
+import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
-interface Props {
-  result: Verse;
+export enum Source {
+  SearchDrawer = 'search_drawer',
+  SearchPage = 'search_page',
+  Tarteel = 'tarteel',
 }
 
-const SearchResultItem: React.FC<Props> = ({ result }) => {
+interface Props {
+  result: Verse;
+  source: Source;
+}
+
+const SearchResultItem: React.FC<Props> = ({ result, source }) => {
   const { lang } = useTranslation('quran-reader');
   const localizedVerseKey = useMemo(
     () => toLocalizedVerseKey(result.verseKey, lang),
     [lang, result.verseKey],
   );
   return (
-    <Link href={getVerseNavigationUrlByVerseKey(result.verseKey)} passHref>
+    <Link
+      href={getVerseNavigationUrlByVerseKey(result.verseKey)}
+      passHref
+      onClick={() => {
+        logButtonClick(`${source}_result_item`);
+      }}
+    >
       <a className={styles.link}>
         <div className={styles.itemContainer}>
           <div className={styles.quranTextContainer}>

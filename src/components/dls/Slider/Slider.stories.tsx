@@ -20,6 +20,9 @@ export default {
 
   argTypes: {
     label: {
+      control: {
+        type: 'text',
+      },
       description: 'The value that will be used with aria-label',
       table: {
         category: 'Required',
@@ -84,16 +87,14 @@ export default {
     },
     showThumbs: {
       description: 'Whether we should show any thumbs or not.',
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
     disabled: {
       description: 'Whether sliding is disabled or not.',
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -126,7 +127,7 @@ const ControlledTemplate = (args) => {
   }, []);
   return (
     <div style={{ width: 500 }}>
-      <Slider {...args} value={value} onValueChange={onChange} />
+      <Slider value={value} onValueChange={onChange} {...args} />
     </div>
   );
 };
@@ -135,35 +136,18 @@ export const DefaultSlider = Template.bind({});
 DefaultSlider.args = {
   defaultValue: [0],
 };
-export const RightToLeftSlider = Template.bind({});
-RightToLeftSlider.args = {
-  defaultValue: [0],
-  direction: Direction.rtl,
-};
-export const VerticalSlider = Template.bind({});
-VerticalSlider.args = {
-  defaultValue: [0],
-  orientation: Orientation.Vertical,
-};
+
 export const WithMultipleThumbsSlider = Template.bind({});
 WithMultipleThumbsSlider.args = {
   defaultValue: [0, 50],
   minStepsBetweenThumbs: 1,
 };
+
 export const WithBigStepsSlider = Template.bind({});
 WithBigStepsSlider.args = {
   defaultValue: [0],
   step: 10,
 };
-export const DisabledSlider = Template.bind({});
-DisabledSlider.args = {
-  defaultValue: [0],
-  disabled: true,
-};
-export const WithNoThumbsSlider = Template.bind({});
-WithNoThumbsSlider.args = {
-  defaultValue: [0],
-  showThumbs: false,
-};
+
 export const ControlledSlider = ControlledTemplate.bind({});
 ControlledSlider.args = {};

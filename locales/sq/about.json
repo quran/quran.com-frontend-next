@@ -1,18 +1,14 @@
 {
     "credits": {
-        "desc": "Kjo faqe interneti u krijua nga disa vullnetarë dhe u bë e mundur me vullnetin e Allahut (Lavdia qoftë mbi të) dhe me ndihmën e komunitetit mysliman me burim të hapur në internet. Burimet e të dhënave përfshijnë <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Puna e Collin Fair <\/2> në segmentet audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> dhe Projekti i Kuranit në internet.",
-        "lokalize": "Lokalizimi u bë i mundur me ndihmën e <0> Lokalise <\/0>cili është një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune të pandërprerë të lokalizimit.",
-        "title": "Kreditë"
+        "desc": "Ky projekt nuk do të ishte i mundur pa shumë biblioteka dhe projekte me burim të hapur që kemi përdorur:",
+        "lokalize": "<0> Lokalize <\/0> : Një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune lokalizimi pa probleme.",
+        "quran-align": "<0> Collin Fair <\/0> : Një mjet për prodhimin e segmentimit të saktë të fjalëve të recitimit të regjistruar Kur'anor.",
+        "quran-complex": "<0> Kompleksi i Kuranit <\/0> : Kompleksi i Shtypjes së Kur'anit të Lavdishëm Mbreti Fahd është një lider në shërbimin e Kur'anit të lavdishëm dhe shkencave të tij, në përkthimin e kuptimeve të tij dhe në mbrojtjen e tekstit kuranor nga shtrembërimi, nëpërmjet përdorimit optimal të teknologji të avancuara në fushën e printimit, regjistrimeve audio, publikimeve elektronike dhe aplikacioneve dixhitale.",
+        "quran-enc": "<0> QuranEnc <\/0> : Një portal që paraqet përkthime falas dhe të besueshme të kuptimeve dhe interpretimeve të Kuranit fisnik në shumë gjuhë të botës.",
+        "tanzil": "<0> Tanzil <\/0> : Një projekt ndërkombëtar Kur'anor që synon të sigurojë një tekst të saktë të Kur'anit shumë të verifikuar.",
+        "title": "Kreditë",
+        "vercel": "<0> <\/0> : është një platformë vendosjeje dhe bashkëpunimi për zhvilluesit e front-endit, e cila e vendos në plan të parë zhvilluesin e frontendit, duke u dhënë atyre mjete gjithëpërfshirëse për të ndërtuar faqe interneti dhe aplikacione me performancë të lartë.",
+        "zekr": "<0> Zekr <\/0> : Një platformë e hapur mjet studimi i Kuranit për shfletimin dhe kërkimin mbi Kuranin"
     },
-    "main-desc": "Kurani Fisnik është teksti qendror fetar i Islamit. Myslimanët besojnë se Kur'ani është libri i udhëzimit dhe drejtimit hyjnor për njerëzimin dhe e konsiderojnë tekstin origjinal arab si shpalljen përfundimtare të Allahut (Perëndisë). Kështu, të gjitha përkthimet e tekstit origjinal arab janë interpretime të kuptimeve origjinale dhe duhet të përqafohen si të tilla.",
-    "meccan": {
-        "desc": "Suret mekase janë kapitujt (suret) kronologjikisht të hershëm të Kuranit që, sipas traditës islame, janë shpallur në çdo kohë përpara migrimit të profetit islam Muhamed dhe pasuesve të tij nga Meka në Medine (hixhra). Suret medinase janë ato shpallje që kanë ndodhur pas zhvendosjes në qytetin me atë emër.",
-        "surahs": "Suret mekase"
-    },
-    "median": {
-        "desc": "Suret medinase ose kapitujt medinas të Kuranit janë 24 suret e fundit që, sipas traditës islame, u shpallën në Medine pas hixhrës së Muhamedit nga Meka. Këto sure u shpallën nga Allahu kur komuniteti mysliman ishte më i madh dhe më i zhvilluar, në krahasim me pozitën e tyre pakicë në Mekë.",
-        "surahs": "Suret medinase"
-    },
-    "questions": "Nëse keni ndonjë pyetje, mund të vizitoni faqen <0> komente <\/0> .",
-    "redesign": "Ne kemi ridizajnuar faqen e internetit me një qasje miqësore për përdoruesit. Për të shfletuar suret, klikoni në butonin (tregohet majtas) në faqen LEXO & LISTEN dhe lundroni suren sipas titullit ose faqes. Në përsëritjet e ardhshme, ne do të integrojmë më shumë veçori kërkimi dhe audio inshaAllah. Nëse keni ndonjë sugjerim se si mund ta bëjmë faqen e internetit një përvojë më të mirë, ju lutemi mos hezitoni të <0> na jepni komente <\/0> ."
+    "main-description": "Quran.com u themelua në vitin 1995. Faqja e internetit synon ta bëjë të lehtë për këdo leximin, studimin dhe mësimin e Kuranit. Projekti është me kod të hapur dhe është ndërtuar si një bashkëpunim midis anëtarëve të ekipit kryesor dhe ekipit <0> Tarteel <\/0> ."
 }

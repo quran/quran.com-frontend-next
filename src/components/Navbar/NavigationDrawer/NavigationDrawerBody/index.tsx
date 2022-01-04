@@ -13,7 +13,6 @@ import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
 import Tarteel from '../../../../../public/icons/tarteel.svg';
-import CommunitySection from '../CommunitySection';
 // import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
 
@@ -54,8 +53,6 @@ const NavigationDrawerBody = () => {
       {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Revelation" icon={<IconCollection />} />  */}
-      <h3 className={styles.subtitle}>{t('community.title')}</h3>
-      <CommunitySection />
       <h3 className={styles.subtitle}>{t('network')}</h3>
       <NavigationDrawerItem
         title="Quranicaudio.com"
@@ -79,6 +76,12 @@ const NavigationDrawerBody = () => {
         title="Legacy.quran.com"
         icon={<IconQ />}
         href="https://legacy.quran.com"
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Previous.quran.com"
+        icon={<IconQ />}
+        href="https://previous.quran.com"
         isExternalLink
       />
       <NavigationDrawerItem

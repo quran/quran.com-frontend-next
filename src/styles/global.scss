@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 body {
   min-height: 100vh;
   background: var(--color-background-default);
@@ -21,8 +23,7 @@ body {
     font-family: "nafees", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
   :lang(bn) {
-    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
-      Arial;
+    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 }
 
@@ -36,5 +37,10 @@ textarea {
 }
 
 a {
+  color: var(--color-text-default);
+}
+
+select option {
+  background-color: var(--color-background-default);
   color: var(--color-text-default);
 }

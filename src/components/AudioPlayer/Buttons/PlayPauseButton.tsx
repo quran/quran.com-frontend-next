@@ -20,6 +20,7 @@ import {
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const PlayPauseButton = () => {
   const { t, lang } = useTranslation('common');
@@ -29,7 +30,7 @@ const PlayPauseButton = () => {
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
 
   const audioData = useSelector(selectAudioData, shallowEqual);
-  const currentReadingChapterIds = useChapterIdsByUrlPath();
+  const currentReadingChapterIds = useChapterIdsByUrlPath(lang);
   const currentAudioChapterId = audioData?.chapterId?.toString();
 
   const [isMismatchModalVisible, setIsMismatchModalVisible] = useState(false);
@@ -38,6 +39,7 @@ const PlayPauseButton = () => {
   // continue playing if it matches
   // otherwise, show the mismatch modal
   const onClickPlay = () => {
+    logButtonClick('audio_player_play');
     const noReadingChapterIdsFound = currentReadingChapterIds.length === 0; // e.g : homepage
     if (currentReadingChapterIds.includes(currentAudioChapterId) || noReadingChapterIdsFound) {
       triggerPlayAudio();

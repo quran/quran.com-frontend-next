@@ -41,20 +41,36 @@ export default {
         'A function that will be called when an option is selected. The function will pass value of the option selected.',
     },
     disabled: {
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
+      defaultValue: false,
       table: {
         category: 'Optional',
       },
       description: 'Whether the select is disabled or not.',
     },
     required: {
-      options: [true, false],
-      control: { type: 'radio' },
+      control: { type: 'boolean' },
+      defaultValue: false,
       table: {
         category: 'Optional',
       },
       description: 'Whether the select is required or not for when submitting a form that has it.',
+    },
+    defaultStyle: {
+      control: { type: 'boolean' },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+      description: 'Whether the select is default styled or not.',
+    },
+    withBackground: {
+      control: { type: 'boolean' },
+      defaultValue: true,
+      table: {
+        category: 'Optional',
+      },
+      description: 'Whether the select is with a background or not.',
     },
     size: {
       description: `The size of the select.`,
@@ -93,7 +109,11 @@ const generateOptions = (numberOfOptions = 10, generateDisabled = false) => {
   return options;
 };
 
-const Template = (args) => <Select {...args} />;
+const Template = (args) => (
+  <span className="previewWrapper">
+    <Select {...args} />
+  </span>
+);
 
 const ControlledRemoteValueTemplate = (args) => {
   const [value, setValue] = useState(null);
@@ -113,13 +133,15 @@ const ControlledRemoteValueTemplate = (args) => {
     setValue(newSelectedValue);
   };
   return (
-    <Select
-      {...args}
-      value={value}
-      onChange={onChange}
-      placeholder={isLoading ? 'Loading...' : null}
-      disabled={disabled || isLoading}
-    />
+    <span className="previewWrapper">
+      <Select
+        {...args}
+        value={value}
+        onChange={onChange}
+        placeholder={isLoading ? 'Loading...' : null}
+        disabled={disabled || isLoading}
+      />
+    </span>
   );
 };
 
@@ -144,14 +166,16 @@ const ControlledRemoteOptionsAndValueTemplate = (args) => {
   };
 
   return (
-    <Select
-      {...args}
-      options={options}
-      value={value}
-      onChange={onChange}
-      placeholder={isLoading ? 'Loading...' : null}
-      disabled={disabled || isLoading}
-    />
+    <span className="previewWrapper">
+      <Select
+        {...args}
+        options={options}
+        value={value}
+        onChange={onChange}
+        placeholder={isLoading ? 'Loading...' : null}
+        disabled={disabled || isLoading}
+      />
+    </span>
   );
 };
 

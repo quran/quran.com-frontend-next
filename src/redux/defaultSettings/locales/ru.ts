@@ -1,7 +1,7 @@
 import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
 const DEFAULT_TRANSLATION = 45; // Elmir Kuliev
-const DEFAULT_TAFSIR = 170; // Russian Tafseer Al Saddi
+const DEFAULT_TAFSIR = 'ru-tafseer-al-saddi'; // Russian Tafseer Al Saddi
 
 export default {
   ...DEFAULT_SETTINGS,
