@@ -1,14 +1,8 @@
-import Bismillah, { BismillahSize } from './Bismillah';
+import Bismillah from './Bismillah';
 
 export default {
   title: 'dls/Bismillah',
-  argTypes: {
-    size: {
-      description: `[OPTIONAL] The size of bismillah`,
-      options: Object.values(BismillahSize),
-      control: { type: 'radio' },
-    },
-  },
+  argTypes: {},
 };
 
 const Template = (args) => (
