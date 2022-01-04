@@ -4770,6 +4770,26 @@
     regenerator-runtime "^0.13.7"
     ts-dedent "^2.0.0"
 
+"@storybook/addon-storysource@^6.4.9":
+  version "6.4.9"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-storysource/-/addon-storysource-6.4.9.tgz#bf814304209a48d74631ac81eea1aaaa8fe5e89c"
+  integrity sha512-vLdRY7D2ECz8tjTMQUjI0C/qj7+4Zzh3+MX3rkJRgs6u8hUELO00AIXv3BZpo7gp5tw32jPSdHdj5a24Q242ig==
+  dependencies:
+    "@storybook/addons" "6.4.9"
+    "@storybook/api" "6.4.9"
+    "@storybook/client-logger" "6.4.9"
+    "@storybook/components" "6.4.9"
+    "@storybook/router" "6.4.9"
+    "@storybook/source-loader" "6.4.9"
+    "@storybook/theming" "6.4.9"
+    core-js "^3.8.2"
+    estraverse "^5.2.0"
+    loader-utils "^2.0.0"
+    prettier "^2.2.1"
+    prop-types "^15.7.2"
+    react-syntax-highlighter "^13.5.3"
+    regenerator-runtime "^0.13.7"
+
 "@storybook/addon-toolbars@6.4.9":
   version "6.4.9"
   resolved "https://registry.yarnpkg.com/@storybook/addon-toolbars/-/addon-toolbars-6.4.9.tgz#147534d0b185a1782f3381a47c627b4a4193297d"

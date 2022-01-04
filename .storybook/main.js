@@ -18,6 +18,7 @@ module.exports = {
         "@storybook/addon-essentials",
         "@storybook/addon-a11y",
         "storybook-addon-next-router",
+        "@storybook/addon-storysource"
     ],
     typescript: {
         check: false,
@@ -40,9 +41,8 @@ module.exports = {
             path.resolve('./'),
         ];
 
-        const fileLoaderRule = config.module.rules.find(rule => rule.test.test('.svg'));
+        const fileLoaderRule = config.module.rules.find(rule => Array.isArray(rule.test) ? rule.test[0].test('.svg') : rule.test.test('.svg'));
         fileLoaderRule.exclude = /\.svg$/;
-
         // This is needed for inline svg imports
         config.module.rules.push({
             test: /\.svg$/,
