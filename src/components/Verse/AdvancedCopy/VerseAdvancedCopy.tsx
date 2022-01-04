@@ -63,7 +63,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // the key of the range end verse.
   const [rangeEndVerse, setRangeEndVerse] = useState(null);
   // Which font to copy.
-  const [shouldCopyFont, setShouldCopyFont] = useState<QuranFont | string>('');
+  const [shouldCopyFont, setShouldCopyFont] = useState<QuranFont>(QuranFont.Uthmani);
   // whether the selected verses' footnotes should be copied or not.
   const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(false);
   // whether we should include the translator name or not.
@@ -115,7 +115,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       .filter((translation) => selectedTranslations.includes(translation.id))
       .forEach((translation) => {
         responseTranslations[translation.id] = {
-          shouldBeCopied: false, // the default is to not copy the translation
+          shouldBeCopied: true, // the default is to copy the translation
           name: translation.translatedName.name,
         };
       });
@@ -335,6 +335,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         clearable
         id="wordByWord"
         value={shouldCopyFont}
+        initialInputValue={t(`common:fonts.${QuranFont.Uthmani}`)}
         items={TO_COPY_FONTS.map((font) => ({
           id: font,
           name: font,
