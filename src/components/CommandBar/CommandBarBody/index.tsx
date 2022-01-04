@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -11,13 +12,14 @@ import CommandsList, { Command } from '../CommandsList';
 import styles from './CommandBarBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { truncateString } from 'src/utils/string';
 import { getVerseTextByWords } from 'src/utils/word';
@@ -165,7 +167,15 @@ const CommandBarBody: React.FC = () => {
             />
           </div>
         )}
-        <TarteelVoiceSearchTrigger isCommandBar />
+        <TarteelVoiceSearchTrigger
+          isCommandBar
+          onClick={(startFlow: boolean) => {
+            logButtonClick(
+              // eslint-disable-next-line i18next/no-literal-string
+              `command_bar_voice_search_${startFlow ? 'start' : 'stop'}_flow`,
+            );
+          }}
+        />
       </div>
       <div className={styles.bodyContainer}>
         {isVoiceSearchFlowStarted ? (
@@ -177,11 +187,8 @@ const CommandBarBody: React.FC = () => {
           />
         )}
       </div>
-
-      <div className={styles.poweredBy}>
-        <Link variant={LinkVariant.Primary} newTab href="https://download.tarteel.ai/">{`${t(
-          'command-bar.powered-by',
-        )} `}</Link>
+      <div className={styles.attribution}>
+        <TarteelAttribution />
       </div>
     </div>
   );

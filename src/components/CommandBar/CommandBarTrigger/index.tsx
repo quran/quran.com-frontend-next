@@ -10,11 +10,13 @@ import styles from './CommandBarTrigger.module.scss';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const CommandBarTrigger: React.FC = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const onClick = useCallback(() => {
+    logButtonClick('command_bar_homepage_trigger');
     dispatch({ type: toggleIsOpen.type });
   }, [dispatch]);
   return (
@@ -34,7 +36,12 @@ const CommandBarTrigger: React.FC = () => {
       <div className={styles.actionsContainer}>
         <KeyboardInput meta keyboardKey="K" />
         <div className={styles.searchButtonWrapper}>
-          <TarteelVoiceSearchTrigger isCommandBar />
+          <TarteelVoiceSearchTrigger
+            isCommandBar
+            onClick={() => {
+              logButtonClick('command_bar_homepage_voice_search_trigger');
+            }}
+          />
         </div>
       </div>
     </div>

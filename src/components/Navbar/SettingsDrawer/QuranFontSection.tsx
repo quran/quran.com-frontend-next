@@ -23,6 +23,7 @@ import {
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { logValueChange } from 'src/utils/eventLogger';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
@@ -105,6 +106,31 @@ const QuranFontSection = () => {
     [t],
   );
 
+  const onFontChange = (value) => {
+    logValueChange('font_family', selectedType, value);
+    dispatch(setQuranFont(getDefaultFont(value)));
+  };
+
+  const onFontStyleChange = (value) => {
+    logValueChange('font_style', quranFont, value);
+    dispatch(setQuranFont(value as QuranFont));
+  };
+
+  const onMushafLinesChange = (value: MushafLines) => {
+    logValueChange('mushaf_lines', mushafLines, value);
+    dispatch(setMushafLines(value));
+  };
+
+  const onFontScaleDecreaseClicked = () => {
+    logValueChange('font_scale', quranTextFontScale, quranTextFontScale - 1);
+    dispatch(decreaseQuranTextFontScale());
+  };
+
+  const onFontScaleIncreaseClicked = () => {
+    logValueChange('font_scale', quranTextFontScale, quranTextFontScale + 1);
+    dispatch(increaseQuranTextFontScale());
+  };
+
   return (
     <Section>
       <Section.Title>{t('fonts.quran-font')}</Section.Title>
@@ -114,11 +140,7 @@ const QuranFontSection = () => {
         </div>
       </Section.Row>
       <Section.Row>
-        <Switch
-          items={types}
-          selected={selectedType}
-          onSelect={(value) => dispatch(setQuranFont(getDefaultFont(value)))}
-        />
+        <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
       <Section.Row>
         <Section.Label>{t('style')}</Section.Label>
@@ -127,7 +149,7 @@ const QuranFontSection = () => {
           name="quranFontStyles"
           options={fonts[selectedType]}
           value={quranFont}
-          onChange={(value) => dispatch(setQuranFont(value as QuranFont))}
+          onChange={onFontStyleChange}
         />
       </Section.Row>
       {selectedType === QuranFont.IndoPak && (
@@ -138,7 +160,7 @@ const QuranFontSection = () => {
             name="lines"
             options={lines}
             value={mushafLines}
-            onChange={(value: MushafLines) => dispatch(setMushafLines(value))}
+            onChange={onMushafLinesChange}
           />
         </Section.Row>
       )}
@@ -146,16 +168,8 @@ const QuranFontSection = () => {
         <Section.Label>{t('fonts.font-size')}</Section.Label>
         <Counter
           count={quranTextFontScale}
-          onDecrement={
-            quranTextFontScale === MINIMUM_FONT_STEP
-              ? null
-              : () => dispatch(decreaseQuranTextFontScale())
-          }
-          onIncrement={
-            quranTextFontScale === MAXIMUM_FONT_STEP
-              ? null
-              : () => dispatch(increaseQuranTextFontScale())
-          }
+          onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
+          onIncrement={quranTextFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
         />
       </Section.Row>
       <QuranFontSectionFooter quranFont={quranFont} />

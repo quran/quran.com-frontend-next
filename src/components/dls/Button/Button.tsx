@@ -106,7 +106,12 @@ const Button: React.FC<ButtonProps> = ({
   if (href && !disabled)
     return (
       <Link href={href}>
-        <a dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
+        <a
+          {...(onClick && { onClick })}
+          dir={direction}
+          className={classes}
+          data-auto-flip-icon={shouldFlipOnRTL}
+        >
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}

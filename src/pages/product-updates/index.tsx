@@ -25,7 +25,7 @@ const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-
+  // TODO: add getLanguageAlternates when we internationalize this page
   return (
     <>
       <NextSeoWrapper

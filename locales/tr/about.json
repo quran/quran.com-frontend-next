@@ -1,18 +1,14 @@
 {
     "credits": {
-        "desc": "Bu web sitesi birkaç gönüllü tarafından oluşturuldu ve Allah'ın izniyle (O'na hamd olsun) ve çevrimiçi açık kaynak Müslüman topluluğunun yardımıyla mümkün oldu. Veri kaynakları arasında <0> Tanzil <\/0> , <1> KuranComplex <\/1> , <2> Collin Fair <\/2> 'nin ses segmentleri üzerindeki çalışmaları, <3> KuranEnc <\/3> , <4> Zekr <\/4> ve Çevrimiçi Kuran Projesi.",
-        "lokalize": "Yerelleştirme, üretkenlik ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemi <0> Lokalise <\/0>sayesinde mümkün oldu.",
-        "title": "Kredi"
+        "desc": "Bu proje, kullandığımız birçok açık kaynak kitaplık ve proje olmadan mümkün olmazdı:",
+        "lokalize": "<0> Lokalize <\/0> : Verimlilik ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemi.",
+        "quran-align": "<0> Collin Fair <\/0> : Kaydedilmiş Kur'an tilavetinin kelime-kesin olarak bölümlemesini üretmek için bir araç.",
+        "quran-complex": "<0> <\/0> : Kral Fahd Şanlı Kuran Basım Kompleksi, Kur'an-ı Kerim'e ve Bilimlerine hizmet etmede, Anlamlarını tercüme etmede ve Kuran Metnini bozulmadan korumada liderdir. baskı, ses kayıtları, elektronik yayıncılık ve dijital uygulamalar alanında ileri teknolojiler.",
+        "quran-enc": "<0> KuranEnc <\/0> : Kur'an-ı Kerim'in birçok dünya dilindeki anlam ve tefsirlerinin ücretsiz ve güvenilir tercümelerini içeren bir portal.",
+        "tanzil": "<0> Tanzil <\/0> : Yüksek düzeyde doğrulanmış kesin bir Kuran metni sağlamayı amaçlayan uluslararası bir Kuran projesi.",
+        "title": "Kredi",
+        "vercel": "<0> Vercel <\/0> : ön uç geliştiricilere öncelik veren ve onlara yüksek performanslı web siteleri ve uygulamalar oluşturmaları için kapsamlı araçlar sunan bir dağıtım ve işbirliği platformudur.",
+        "zekr": "<0> Zekr <\/0> : Kuran'a göz atmak ve araştırmak için açık platform Kuran çalışma aracı"
     },
-    "main-desc": "Kur'an-ı Kerim, İslam'ın merkezi dini metnidir. Müslümanlar, Kuran'ın insanlık için ilahi rehberlik ve yönlendirme kitabı olduğuna inanırlar ve orijinal Arapça metni Allah'ın (Tanrı) son vahyi olarak kabul ederler. Orijinal Arapça metnin tüm çevirileri bu nedenle orijinal anlamların yorumlarıdır ve bu şekilde benimsenmelidir.",
-    "meccan": {
-        "desc": "Mekke sureleri, İslam geleneğine göre, İslam peygamberi Muhammed'in ve takipçilerinin Mekke'den Medine'ye (Hicret) hicretinden önce herhangi bir zamanda vahyedilmiş olan Kuran'ın kronolojik olarak daha önceki bölümleridir (süreler). Medine sureleri, bu isimle anılan şehre taşınmadan sonra meydana gelen vahiylerdir.",
-        "surahs": "Mekke Sureleri"
-    },
-    "median": {
-        "desc": "Kuran'ın Medine sureleri veya Medine bölümleri, İslami geleneğe göre Muhammed'in Mekke'den hicretinden sonra Medine'de vahyedilen en son 24 suredir. Bu sureler, Mekke'deki azınlık konumlarının aksine, Müslüman topluluk daha geniş ve daha gelişmişken Allah tarafından indirilmiştir.",
-        "surahs": "Medine Sureleri"
-    },
-    "questions": "Herhangi bir sorunuz varsa, <0> geri bildirim <\/0> sayfasını ziyaret edebilirsiniz.",
-    "redesign": "Web sitesini kullanıcı dostu bir yaklaşımla yeniden tasarladık. Sureleri taramak için, OKU ve DİNLE sayfasındaki (solda gösterilen) düğmesine tıklayın ve sûreleri başlığa veya sayfaya göre gezinin. İlerleyen sürümlerde daha fazla arama ve ses özelliğini entegre edeceğiz inşaAllah. Web sitesini nasıl daha iyi bir deneyim haline getirebileceğimize dair herhangi bir öneriniz varsa, lütfen <0> bize geri bildirimde bulunmaktan <\/0> çekinmeyin."
+    "main-description": "Kuran.com 1995 yılında kuruldu. Web sitesi herkesin Kuran'ı okumasını, incelemesini ve öğrenmesini kolaylaştırmayı amaçlıyor. Proje açık kaynaktır ve çekirdek ekip üyeleri ile <0> Tarteel ekibi <\/0> arasında bir işbirliği olarak oluşturulmuştur."
 }

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import EndOfScrollingButton from './EndOfScrollingButton';
 
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getPageNavigationUrl } from 'src/utils/navigation';
 import { isFirstPage, isLastPage } from 'src/utils/page';
 import Verse from 'types/Verse';
@@ -22,10 +23,22 @@ const PageControls: React.FC<Props> = ({ lastVerse }) => {
   return (
     <>
       {!isFirstPage(page) && (
-        <EndOfScrollingButton text={t('prev-page')} href={getPageNavigationUrl(page - 1)} />
+        <EndOfScrollingButton
+          text={t('prev-page')}
+          href={getPageNavigationUrl(page - 1)}
+          onClick={() => {
+            logButtonClick('page_control_prev_page');
+          }}
+        />
       )}
       {!isLastPage(page, quranFont, mushafLines) && (
-        <EndOfScrollingButton text={t('next-page')} href={getPageNavigationUrl(page + 1)} />
+        <EndOfScrollingButton
+          text={t('next-page')}
+          href={getPageNavigationUrl(page + 1)}
+          onClick={() => {
+            logButtonClick('page_control_next_page');
+          }}
+        />
       )}
     </>
   );

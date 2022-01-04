@@ -1,18 +1,14 @@
 {
     "credits": {
-        "desc": "Este site foi criado por alguns voluntários e foi possível com a vontade de Allah (Glória a Ele) e com a ajuda da comunidade muçulmana de código aberto online. As fontes de dados incluem <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> trabalho em segmentos de áudio, <3> QuranEnc <\/3> , <4> Zekr <\/4> e Projeto Alcorão Online.",
-        "lokalize": "A localização foi possível com a ajuda de <0> Lokalise <\/0> que é um sistema de tradução auxiliado por computador que se concentra na produtividade e garantia de qualidade e fornece um fluxo de trabalho de localização perfeito.",
-        "title": "Créditos"
+        "desc": "Este projeto não teria sido possível sem as muitas bibliotecas e projetos de código aberto que usamos:",
+        "lokalize": "<0> Lokalize <\/0> : Um sistema de tradução auxiliado por computador que se concentra na produtividade e na garantia de qualidade e fornece um fluxo de trabalho de localização perfeito.",
+        "quran-align": "<0> Collin Fair <\/0> : Uma ferramenta para produzir a segmentação com precisão de palavras da recitação do Alcorão gravada.",
+        "quran-complex": "<0> Complexo do Alcorão <\/0> : O Complexo de Impressão do Alcorão Glorioso do Rei Fahd é líder em servir o Alcorão Glorioso e suas Ciências, traduzindo seus significados e salvaguardando o Texto do Alcorão de distorção, por meio do uso otimizado de tecnologias avançadas no campo da impressão, gravações de áudio, edição eletrônica e aplicações digitais.",
+        "quran-enc": "<0> Alcorão <\/0> : Um portal com traduções gratuitas e confiáveis dos significados e exegeses do nobre Alcorão em muitas línguas do mundo.",
+        "tanzil": "<0> Tanzil <\/0> : Um projeto internacional do Alcorão com o objetivo de fornecer um texto do Alcorão altamente verificado e preciso.",
+        "title": "Créditos",
+        "vercel": "<0> Vercel <\/0> : é uma plataforma de implantação e colaboração para desenvolvedores front-end que coloca o desenvolvedor front-end em primeiro lugar, dando-lhes ferramentas abrangentes para construir sites e aplicativos de alto desempenho.",
+        "zekr": "<0> Zekr <\/0> : uma ferramenta de estudo do Alcorão de plataforma aberta para navegar e pesquisar no Alcorão"
     },
-    "main-desc": "O Nobre Alcorão é o texto religioso central do Islã. Os muçulmanos acreditam que o Alcorão é o livro da orientação e direção Divina para a humanidade e consideram o texto original em árabe a revelação final de Alá (Deus). Todas as traduções do texto original em árabe são, portanto, interpretações dos significados originais e devem ser consideradas como tal.",
-    "meccan": {
-        "desc": "As suratas de Meca são os capítulos cronologicamente anteriores (suras) do Alcorão que foram, de acordo com a tradição islâmica, revelados a qualquer momento antes da migração do profeta islâmico Maomé e seus seguidores de Meca para Medina (Hijra). As suras Medinan são aquelas revelações que ocorreram após a mudança para a cidade com aquele nome.",
-        "surahs": "Suratas de Meca"
-    },
-    "median": {
-        "desc": "As suras de Medina ou capítulos de Medina do Alcorão são as últimas 24 suras que, de acordo com a tradição islâmica, foram reveladas em Medina após a hijra de Maomé em Meca. Essas suras foram reveladas por Allah quando a comunidade muçulmana era maior e mais desenvolvida, em oposição à sua posição minoritária em Meca.",
-        "surahs": "Suratas de Medinan"
-    },
-    "questions": "Se você tiver alguma dúvida, pode visitar a página de <0> feedback <\/0> .",
-    "redesign": "Redesenhamos o site com uma abordagem amigável em mente. Para navegar pelas suratas, clique no botão (mostrado à esquerda) na página LEIA E ESCUTE e navegue pela surata por título ou página. Em iterações futuras, estaremos integrando mais recursos de pesquisa e áudio do inshaAllah. Se você tiver alguma sugestão sobre como podemos tornar o site uma experiência melhor, não hesite em <0> enviar seus comentários <\/0> ."
+    "main-description": "Quran.com foi fundado em 1995. O site tem como objetivo tornar mais fácil para qualquer pessoa ler, estudar e aprender o Alcorão. O projeto é de código aberto e é construído como uma colaboração entre os membros da equipe principal e a <0> equipe Tarteel <\/0> ."
 }

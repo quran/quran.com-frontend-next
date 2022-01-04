@@ -6,9 +6,12 @@ import dynamic from 'next/dynamic';
 
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 
+import styles from './OverflowVerseActionsMenuBody.module.scss';
+
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
 
 const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseActionsMenuBody'), {
@@ -23,15 +26,22 @@ interface Props {
 const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
   const { t } = useTranslation('common');
   return (
-    <PopoverMenu
-      trigger={
-        <Button size={ButtonSize.Small} tooltip={t('more')} type={ButtonType.Secondary}>
-          <OverflowMenuIcon />
-        </Button>
-      }
-    >
-      <OverflowVerseActionsMenuBody verse={verse} />
-    </PopoverMenu>
+    <div className={styles.container}>
+      <PopoverMenu
+        trigger={
+          <Button size={ButtonSize.Small} tooltip={t('more')} type={ButtonType.Secondary}>
+            <OverflowMenuIcon />
+          </Button>
+        }
+        isModal={false}
+        isPortalled={false}
+        onOpenChange={(open: boolean) => {
+          logEvent(`verse_actions_menu_${open ? 'open' : 'close'}`);
+        }}
+      >
+        <OverflowVerseActionsMenuBody verse={verse} />
+      </PopoverMenu>
+    </div>
   );
 };
 

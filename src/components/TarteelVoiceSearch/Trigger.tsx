@@ -19,9 +19,10 @@ import {
 
 interface Props {
   isCommandBar?: boolean;
+  onClick: (startFlow: boolean) => void;
 }
 
-const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false }) => {
+const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false, onClick }) => {
   const { t } = useTranslation('common');
   const isSupported = useRef(true);
   const dispatch = useDispatch();
@@ -34,7 +35,12 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false }) =>
     shallowEqual,
   );
 
+  const showCloseIcon =
+    (isCommandBar && isCommandBarVoiceFlowStarted) ||
+    (!isCommandBar && isSearchDrawerVoiceFlowStarted);
+
   const onMicClicked = () => {
+    onClick(!showCloseIcon);
     dispatch({
       type: isCommandBar
         ? toggleIsCommandBarVoiceFlowStarted.type
@@ -58,10 +64,6 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false }) =>
   if (!isSupported.current) {
     return <></>;
   }
-
-  const showCloseIcon =
-    (isCommandBar && isCommandBarVoiceFlowStarted) ||
-    (!isCommandBar && isSearchDrawerVoiceFlowStarted);
 
   return (
     <Button

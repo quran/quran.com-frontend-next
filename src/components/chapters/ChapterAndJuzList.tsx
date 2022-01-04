@@ -12,6 +12,7 @@ import Tabs from '../dls/Tabs/Tabs';
 import styles from './ChapterAndJuzList.module.scss';
 import JuzView from './JuzView';
 
+import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import Chapter from 'types/Chapter';
 
@@ -37,7 +38,12 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
   const onSort = () => {
-    setSortBy((prevValue) => (prevValue === Sort.DESC ? Sort.ASC : Sort.DESC));
+    setSortBy((prevValue) => {
+      const newValue = prevValue === Sort.DESC ? Sort.ASC : Sort.DESC;
+      // eslint-disable-next-line i18next/no-literal-string
+      logValueChange(`homepage_${view}_sorting`, prevValue, newValue);
+      return newValue;
+    });
   };
 
   const tabs = useMemo(
@@ -56,10 +62,16 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
     [sortBy, chapters],
   );
 
+  const onTabSelected = (newView) => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`homepage_${newView}_tab`);
+    setView(newView as View);
+  };
+
   return (
     <>
       <div className={styles.tabsContainer}>
-        <Tabs tabs={tabs} selected={view} onSelect={(newView) => setView(newView as View)} />
+        <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
           <div className={styles.uppercase}>{t('sort.by')}:</div>
           <div

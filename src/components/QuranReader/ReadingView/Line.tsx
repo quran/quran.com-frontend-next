@@ -19,9 +19,11 @@ export type LineProps = {
   lineKey: string;
   isBigTextLayout: boolean;
   quranReaderStyles: QuranReaderStyles;
+  pageIndex: number;
+  lineIndex: number;
 };
 
-const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => {
+const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
@@ -43,7 +45,12 @@ const Line = ({ lineKey, words, isBigTextLayout }: LineProps) => {
       })}
     >
       <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
-        <VerseText words={words} isReadingMode isHighlighted={isHighlighted} />
+        <VerseText
+          words={words}
+          isReadingMode
+          isHighlighted={isHighlighted}
+          shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
+        />
       </div>
     </div>
   );

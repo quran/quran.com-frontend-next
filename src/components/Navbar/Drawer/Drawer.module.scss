@@ -2,6 +2,8 @@
 @use "src/styles/constants";
 
 .container {
+  display: flex;
+  flex-direction: column;
   background: var(--color-background-elevated);
   position: fixed;
   height: 100vh;
@@ -56,6 +58,7 @@
 }
 
 .bodyContainer {
+  flex: 1;
   margin-block-start: constants.$navbar-height;
   padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);

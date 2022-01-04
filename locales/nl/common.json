@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
+    "footer": {
+        "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor."
+    },
     "from": "Van",
     "help": "Helpen",
     "hizb": "Hizb",
@@ -104,6 +107,7 @@
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
     "more": "Meer",
+    "navigate": "Navigeren",
     "network": "Netwerk",
     "next": "Volgende",
     "no": "Nee",
@@ -113,6 +117,7 @@
     "page": "Bladzijde",
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
+    "popular-links": "Populaire links",
     "powered-by": "Aangedreven door",
     "prayer-times": {
         "access-denied": "Toegang tot locatie geweigerd. Schakel locatietoegang in om nauwkeurige gebedstijden te krijgen",
@@ -151,6 +156,7 @@
         "translation": "Vertaling"
     },
     "reciter": "Voordrager",
+    "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
     "search": {
@@ -201,13 +207,12 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir-lettergrootte",
+        "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },
     "tarteel": {
         "app": "Tarteel-app",
-        "desc": "koran spraakgestuurd zoeken",
-        "learn": "leren hoe u gesproken zoekopdrachten kunt gebruiken",
         "name": "Tarteel.ai"
     },
     "theme": "Thema",
@@ -234,7 +239,10 @@
         "error": "Er is een fout opgetreden, probeer het later opnieuw. Of download de",
         "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw of download de",
         "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser of download de",
-        "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen."
+        "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
+        "suggest-subtitle": "Reciteer een vers in het Arabisch, en het vers zal verschijnen",
+        "suggest-title": "Reciteer nu",
+        "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
     },
     "wbw": "Woord voor woord",
     "wbw-trans-lang": "Woord voor woord taal",

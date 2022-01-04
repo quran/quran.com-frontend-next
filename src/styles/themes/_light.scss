@@ -8,7 +8,7 @@
 
   --color-secondary-faded: #eaeaea;
   --color-secondary-faint: #999;
-  --color-secondary-medium: #eaeaea; // temporary placeholder for the beta.
+  --color-secondary-medium: #f2f2f2; // temporary placeholder for the beta.
   --color-secondary-deep: #333;
 
   --color-success-faded: #ebf9fa;
@@ -42,7 +42,7 @@
   --color-background-alternative-deep: var(--shade-6);
 
   --color-background-inverse: #000;
-  --color-background-backdrop: rgba(0, 0, 0, 0.25);
+  --color-background-backdrop: rgba(0, 0, 0, 0.6);
   --color-background-lighten: hsla(0, 0%, 100%, 0.8);
   // lighten the `background-color` by using it in `background-image`. check Button's ghost variant for example
 

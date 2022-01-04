@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
-import FeedbackWidget from 'src/components/FeedbackWidget/FeedbackWidget';
+import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
@@ -16,6 +16,7 @@ import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScript
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
+import { logUnsupportedLogicalCSS } from 'src/utils/css';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
 
@@ -25,11 +26,12 @@ import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
-  const { locale, asPath } = useRouter();
+  const { locale } = useRouter();
   const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
+    logUnsupportedLogicalCSS();
   }, [locale]);
   return (
     <>
@@ -45,18 +47,18 @@ function MyApp({ Component, pageProps }): JSX.Element {
       <ReduxProvider locale={locale}>
         <ThemeProvider>
           <IdProvider>
-            <DefaultSeo
-              {...createSEOConfig({ path: asPath, locale, description: t('default-description') })}
-            />
-            <GlobalListeners />
-            <Navbar />
-            <DeveloperUtility />
-            <Component {...pageProps} />
-            <FeedbackWidget />
-            <AudioPlayer />
+            <ToastContainerProvider>
+              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
+              <GlobalListeners />
+              <Navbar />
+              <DeveloperUtility />
+              <Component {...pageProps} />
+              <AudioPlayer />
+            </ToastContainerProvider>
           </IdProvider>
         </ThemeProvider>
       </ReduxProvider>
+
       <ThirdPartyScripts />
     </>
   );

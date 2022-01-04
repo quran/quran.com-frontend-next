@@ -1,18 +1,14 @@
 {
     "credits": {
-        "desc": "Deze website is gemaakt door een paar vrijwilligers en is mogelijk gemaakt met de wil van Allah (Glorie zij Hem) en met de hulp van de open source moslimgemeenschap online. Gegevensbronnen zijn onder meer <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> 's werk op audiosegmenten <3> <\/3> , <4> Zekr <\/4> en online koranproject.",
-        "lokalize": "Lokalisering werd mogelijk gemaakt door de hulp van <0> Lokalise <\/0>, een computerondersteund vertaalsysteem dat zich richt op productiviteit en kwaliteitsborging en een naadloze lokalisatieworkflow biedt.",
-        "title": "Credits"
+        "desc": "Dit project zou niet mogelijk zijn geweest zonder de vele open source bibliotheken en projecten die we hebben gebruikt:",
+        "lokalize": "<0> Lokalize <\/0> : Een computerondersteund vertaalsysteem dat zich richt op productiviteit en kwaliteitsborging en een naadloze lokalisatieworkflow biedt.",
+        "quran-align": "<0> Collin Fair <\/0> : Een hulpmiddel voor het produceren van woordprecieze segmentatie van opgenomen koranrecitatie.",
+        "quran-complex": "<0> QuranComplex <\/0> : King Fahd Glorious Qur'an Printing Complex is een leider in het dienen van de Glorious Qur'an en zijn wetenschappen, het vertalen van de betekenissen ervan en het beschermen van de korantekst tegen vervorming, door optimaal gebruik van geavanceerde technologieën op het gebied van printen, audio-opnames, elektronische publicaties en digitale toepassingen.",
+        "quran-enc": "<0> QuranEnc <\/0> : Een portaal met gratis en betrouwbare vertalingen van de betekenissen en exegese van de nobele Koran in vele wereldtalen.",
+        "tanzil": "<0> Tanzil <\/0> : Een internationaal koranproject gericht op het leveren van een zeer geverifieerde nauwkeurige korantekst.",
+        "title": "Credits",
+        "vercel": "<0> Vercel <\/0> : is een implementatie- en samenwerkingsplatform voor frontend-ontwikkelaars waarbij de frontend-ontwikkelaar op de eerste plaats komt en hen uitgebreide tools geeft om hoogwaardige websites en applicaties te bouwen.",
+        "zekr": "<0> Zekr <\/0> : Een open platform Koran-studietool om te bladeren en onderzoek te doen naar de Koran"
     },
-    "main-desc": "De Edele Koran is de centrale religieuze tekst van de islam. Moslims geloven dat de Koran het boek is van goddelijke leiding en leiding voor de mensheid, en beschouwen de originele Arabische tekst als de laatste openbaring van Allah (God). Alle vertalingen van de oorspronkelijke Arabische tekst zijn dus interpretaties van de oorspronkelijke betekenissen en moeten als zodanig worden omarmd.",
-    "meccan": {
-        "desc": "De Mekkaanse soera's zijn de chronologisch eerdere hoofdstukken (soera's) van de koran die volgens de islamitische traditie op elk moment vóór de migratie van de islamitische profeet Mohammed en zijn volgelingen van Mekka naar Medina (Hijra) werden geopenbaard. De Medinaanse soera's zijn die onthullingen die plaatsvonden na de verhuizing naar de stad met die naam.",
-        "surahs": "Mekkaanse soera's"
-    },
-    "median": {
-        "desc": "De Medinaanse soera's of Medinan-hoofdstukken van de koran zijn de laatste 24 soera's die, volgens de islamitische traditie, in Medina zijn geopenbaard na Mohammeds hijra uit Mekka. Deze soera's werden door Allah geopenbaard toen de moslimgemeenschap groter en meer ontwikkeld was, in tegenstelling tot hun minderheidspositie in Mekka.",
-        "surahs": "Medinaanse soera's"
-    },
-    "questions": "Als je vragen hebt, kun je de pagina <0> feedback <\/0> .",
-    "redesign": "We hebben de website opnieuw ontworpen met een gebruiksvriendelijke aanpak in het achterhoofd. Om door de soera's te bladeren, klikt u op de knop (links afgebeeld) op de LEES & LUISTER-pagina en navigeert u door de soera op titel of pagina. In toekomstige iteraties zullen we inshaAllah meer zoek- en audiofuncties integreren. Als je suggesties hebt over hoe we de website een betere ervaring kunnen maken, aarzel dan niet om <0> ons feedback te geven <\/0> ."
+    "main-description": "Quran.com is opgericht in 1995. De website is bedoeld om het voor iedereen gemakkelijk te maken om de Koran te lezen, te bestuderen en te leren. Het project is open source en is gebouwd als een samenwerking tussen kernteamleden en het <0> Tarteel-team <\/0> ."
 }

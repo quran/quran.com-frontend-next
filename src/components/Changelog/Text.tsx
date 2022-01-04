@@ -12,12 +12,14 @@ const Text: React.FC<Props> = ({ text }) => {
   if (!text) {
     return null;
   }
-  return text.map((value) => {
+  return text.map((value, index) => {
     const {
       annotations: { bold, color, italic, strikethrough, underline },
     } = value;
     return (
       <span
+        // eslint-disable-next-line react/no-array-index-key
+        key={index}
         className={classNames({
           [styles.bold]: bold,
           [styles.italic]: italic,

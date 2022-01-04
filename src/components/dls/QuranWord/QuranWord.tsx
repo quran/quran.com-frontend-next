@@ -23,6 +23,7 @@ import {
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
 import {
@@ -114,8 +115,12 @@ const QuranWord = ({
   );
 
   const onClick = useCallback(() => {
-    if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData)
+    if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData) {
+      logButtonClick('quran_word_pronounce');
       onQuranWordClick(word, audioData);
+    } else {
+      logButtonClick('quran_word');
+    }
   }, [audioData, word, wordClickFunctionality]);
   return (
     <div
