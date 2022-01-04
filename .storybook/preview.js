@@ -6,6 +6,7 @@ import GlobalFonts from '../src/styles/fonts.scss';
 import GlobalStyles from '../src/styles/global.scss';
 import Styles from '../.storybook/styles.scss';
 import I18nProvider from 'next-translate/I18nProvider';
+import { themes } from '@storybook/theming';
 
 import commonEn from '../locales/en/common.json';
 import homeEn from '../locales/en/home.json';
@@ -95,5 +96,8 @@ export const parameters = {
   },
   nextRouter: {
     Provider: RouterContext.Provider,
+  },
+  docs: {
+    theme: themes.dark,
   },
 }
