@@ -1,0 +1,18 @@
+@use "src/styles/breakpoints";
+
+.logoWrapper {
+  display: flex;
+  align-self: center;
+  justify-content: flex-start;
+  & > svg {
+    margin-block-start: 1px;
+    height: var(--spacing-medium);
+    width: auto;
+    @include breakpoints.tablet {
+      height: var(--spacing-large);
+    }
+    & > path {
+      fill: var(--color-text-default);
+    }
+  }
+}

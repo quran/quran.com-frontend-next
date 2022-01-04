@@ -7,23 +7,23 @@ import styles from './QuickLinks.module.scss';
 
 const QUICK_LINKS = [
   {
-    slug: '67',
+    slug: 'surah-al-mulk',
     key: 'mulk',
   },
   {
-    slug: '36',
+    slug: 'surah-ya-sin',
     key: 'yaseen',
   },
   {
-    slug: '2/255',
+    slug: 'ayatul-kursi',
     key: 'ayat-ul-kursi',
   },
   {
-    slug: '18',
+    slug: 'surah-al-kahf',
     key: 'kahf',
   },
   {
-    slug: '56',
+    slug: 'surah-al-waqiah',
     key: 'waqiah',
   },
   // {

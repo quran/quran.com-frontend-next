@@ -60,7 +60,11 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
             [styles.commandBarContainer]: isCommandBar,
           })}
         >
-          <PartialResult partialTranscript={partialTranscript} volume={volume} />
+          <PartialResult
+            verticalLayout={!isCommandBar}
+            partialTranscript={partialTranscript}
+            volume={volume}
+          />
         </div>
       )}
     </>

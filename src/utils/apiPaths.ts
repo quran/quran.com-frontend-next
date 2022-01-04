@@ -122,6 +122,12 @@ export const makeNavigationSearchUrl = (query: string): string => makeUrl('/navi
 export const makeTafsirsUrl = (language: string): string =>
   makeUrl('/resources/tafsirs', { language });
 
+export const makeTafsirContentUrl = (
+  tafsirId: number | string,
+  verseKey: string,
+  params: Record<string, unknown>,
+) => makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);
+
 /**
  * Compose the url for the chapter's info API.
  *

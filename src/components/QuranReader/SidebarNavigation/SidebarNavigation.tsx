@@ -23,6 +23,7 @@ import {
   NavigationItem,
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
+import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
 
 const Loading = () => (
   <div className={styles.loadingContainer}>
@@ -40,11 +41,7 @@ const JuzSelection = dynamic(() => import('./JuzSelection'), {
   loading: Loading,
 });
 
-interface Props {
-  id: string;
-}
-
-const SidebarNavigation: React.FC<Props> = ({ id }) => {
+const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isVisible = useSelector(selectIsSidebarNavigationVisible);
   const selectedNavigationItem = useSelector(selectSelectedNavigationItem);
@@ -55,6 +52,7 @@ const SidebarNavigation: React.FC<Props> = ({ id }) => {
   useOutsideClickDetector(
     sidebarRef,
     () => {
+      logEvent('sidebar_navigation_close_outside_click');
       dispatch(setIsVisible(false));
     },
     isMobile(),
@@ -89,6 +87,7 @@ const SidebarNavigation: React.FC<Props> = ({ id }) => {
             items={navigationItems}
             selected={selectedNavigationItem}
             onSelect={(value) => {
+              logValueChange('sidebar_navigation_view', selectedNavigationItem, value);
               dispatch(selectNavigationItem(value as NavigationItem));
             }}
           />
@@ -99,6 +98,7 @@ const SidebarNavigation: React.FC<Props> = ({ id }) => {
           size={ButtonSize.Small}
           variant={ButtonVariant.Ghost}
           onClick={() => {
+            logButtonClick('sidebar_navigation_close');
             dispatch(setIsVisible(false));
           }}
         >
@@ -110,7 +110,7 @@ const SidebarNavigation: React.FC<Props> = ({ id }) => {
         <KeyboardInput meta keyboardKey="K" />
       </p>
       <div className={styles.contentContainer}>
-        {selectedNavigationItem === NavigationItem.Surah && <SurahSelection id={id} />}
+        {selectedNavigationItem === NavigationItem.Surah && <SurahSelection />}
         {selectedNavigationItem === NavigationItem.Juz && <JuzSelection />}
         {selectedNavigationItem === NavigationItem.Page && <PageSelection />}
       </div>

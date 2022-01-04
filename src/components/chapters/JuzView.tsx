@@ -40,7 +40,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
         const [juzId, chapterAndVerseMappings] = juzEntry;
         const chapterIds = Object.keys(chapterAndVerseMappings);
         return (
-          <div className={styles.juzContainer}>
+          <div key={juzId} className={styles.juzContainer}>
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
               <div className={styles.juzTitle}>
                 {t('juz')} {toLocalizedNumber(juzId, lang)}

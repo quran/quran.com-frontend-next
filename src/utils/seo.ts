@@ -1,13 +1,14 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { NextSeoProps } from 'next-seo';
 
-import { getLanguageAlternates, getOpenGraphLocale } from './locale';
+import { getOpenGraphLocale } from './locale';
+import { getBasePath } from './url';
 
 import { VersesResponse } from 'types/ApiResponses';
 
 export const config = {
   siteName: 'Quran.com',
-  websiteLogo: 'https://next.quran.com/images/homepage.png', // TODO: update this once we are live
+  websiteLogo: `${getBasePath()}/images/homepage.png`,
   twitterHandle: '@app_quran',
   twitterCardType: 'summary_large_image',
   facebookApp: '342185219529773',
@@ -38,7 +39,6 @@ export function createSEOConfig({
   title,
   description,
   canonicalUrl,
-  path,
   locale,
 }: SeoConfigType = {}): SEOProps {
   const seoTitle = title || '';
@@ -51,7 +51,6 @@ export function createSEOConfig({
     dangerouslySetAllPagesToNoFollow: !isProduction, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoFollow
     dangerouslySetAllPagesToNoIndex: !isProduction, // @see https://github.com/garmeeh/next-seo#dangerouslySetAllPagesToNoIndex
     canonical: canonicalUrl,
-    languageAlternates: getLanguageAlternates(path), // @see https://developers.google.com/search/docs/advanced/crawling/localized-versions
     openGraph: {
       type: 'website',
       locale: getOpenGraphLocale(locale),
@@ -61,8 +60,8 @@ export function createSEOConfig({
       images: [
         {
           url: config.websiteLogo,
-          width: 640,
-          height: 217,
+          width: 2026,
+          height: 588,
           alt: config.siteName,
         },
       ],

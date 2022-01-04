@@ -3,7 +3,7 @@ import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 import { QuranFont } from 'types/QuranReader';
 
 const DEFAULT_TRANSLATION = 158; // Bayan Ul Quran
-const DEFAULT_TAFSIR = 159; // Bayan ul Quran
+const DEFAULT_TAFSIR = 'tafseer-ibn-e-kaseer-urdu'; // Bayan ul Quran
 
 export default {
   ...DEFAULT_SETTINGS,

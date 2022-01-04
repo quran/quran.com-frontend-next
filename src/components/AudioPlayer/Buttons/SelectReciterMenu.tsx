@@ -10,6 +10,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 
 const SelectReciterMenu = ({ onBack }) => {
@@ -23,8 +24,12 @@ const SelectReciterMenu = ({ onBack }) => {
         <div>
           {data.reciters.map((reciter) => (
             <PopoverMenu.Item
+              key={reciter.id}
               icon={selectedReciter.id === reciter.id ? <CheckIcon /> : <span />}
               onClick={() => {
+                logButtonClick('audio_player_overflow_menu_reciter_item');
+                logValueChange('reciter', selectedReciter.id, reciter.id);
+                logItemSelectionChange('reciter', reciter.id);
                 dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
                 onBack();
               }}

@@ -9,12 +9,13 @@ import styles from './ChapterHeader.module.scss';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import Bismillah, { BismillahSize } from 'src/components/dls/Bismillah/Bismillah';
+import Bismillah from 'src/components/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { getChapterData } from 'src/utils/chapter';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
 
@@ -62,6 +63,9 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
               prefix={<InfoIcon />}
               href={getSurahInfoNavigationUrl(chapterId)}
               hasSidePadding={false}
+              onClick={() => {
+                logButtonClick('chapter_header_info');
+              }}
             >
               {t('quran-reader:surah-info')}
             </Button>
@@ -82,9 +86,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
         </div>
       </div>
       <div className={styles.bismillahContainer}>
-        {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && (
-          <Bismillah size={BismillahSize.Large} />
-        )}
+        {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && <Bismillah />}
       </div>
     </div>
   );

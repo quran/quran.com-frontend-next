@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import range from 'lodash/range';
 
@@ -328,4 +329,15 @@ export const shortenVerseText = (text: string, length = 150): string => {
     shortenedText = `${shortenedText}${character}`;
   }
   return shortenedText;
+};
+
+/**
+ * Given list of verses, get all the first and the last verseKeys
+ *
+ * @param {Verse[]} verses
+ * @returns {string[]} [firstVerseKey, lastVerseKey]
+ */
+export const getFirstAndLastVerseKeys = (verses: Verse[]) => {
+  const verseKeys = Object.keys(verses).sort(sortByVerseKey);
+  return [verseKeys[0], verseKeys[verseKeys.length - 1]];
 };

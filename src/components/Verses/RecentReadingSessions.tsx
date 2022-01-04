@@ -10,6 +10,7 @@ import styles from './RecentReadingSessions.module.scss';
 import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPreview/SurahPreview';
 import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
@@ -18,6 +19,9 @@ const RecentReadingSessions = () => {
   const { t, lang } = useTranslation('home');
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const verseKeys = Object.keys(recentReadingSessions);
+  const onRecentReadingSessionClicked = () => {
+    logButtonClick('homepage_recently_read_card');
+  };
   return (
     <>
       {verseKeys.length > 0 && (
@@ -29,7 +33,10 @@ const RecentReadingSessions = () => {
               const surah = getChapterData(chapterId, lang);
               return (
                 <div className={styles.verseLink} key={verseKey}>
-                  <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)}>
+                  <Link
+                    href={getVerseToEndOfChapterNavigationUrl(verseKey)}
+                    onClick={onRecentReadingSessionClicked}
+                  >
                     <SurahPreview
                       display={SurahPreviewDisplay.Block}
                       chapterId={Number(chapterId)}

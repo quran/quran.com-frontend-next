@@ -19,9 +19,12 @@
   display: flex;
   justify-content: space-between;
 }
+.itemContainer {
+  display: flex;
+}
 
 .titleContainer {
   margin-inline-start: var(--spacing-medium);
   font-size: var(--font-size-normal);
-  vertical-align: text-top;
+  line-height: normal;
 }

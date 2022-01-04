@@ -6,13 +6,20 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 
+const PATH = '/privacy';
 const PrivacyPage = () => {
   const { t, lang } = useTranslation('privacy');
+
   return (
     <>
-      <NextSeoWrapper title={t('header')} url={getCanonicalUrl(lang, '/privacy')} />
+      <NextSeoWrapper
+        title={t('header')}
+        url={getCanonicalUrl(lang, PATH)}
+        languageAlternates={getLanguageAlternates(PATH)}
+      />
       <div className={styles.contentPage}>
         <h1>{t('header')}</h1>
         <p>

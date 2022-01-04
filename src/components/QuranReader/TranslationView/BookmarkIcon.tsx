@@ -5,6 +5,7 @@ import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
 
 import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
   const { t } = useTranslation('quran-reader');
@@ -17,7 +18,10 @@ const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
   return (
     <Button
       type={ButtonType.Secondary}
-      onClick={() => dispatch(toggleVerseBookmark(verseKey))}
+      onClick={() => {
+        logButtonClick('translation_view_un_bookmark_verse');
+        dispatch(toggleVerseBookmark(verseKey));
+      }}
       tooltip={t('remove-bookmark')}
       size={ButtonSize.Small}
     >

@@ -6,19 +6,24 @@ import { useRouter } from 'next/router';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
+import ChatIcon from '../../../public/icons/chat.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
-import QuranReflectIcon from '../../../public/icons/QR.svg';
 import ShareIcon from '../../../public/icons/share.svg';
-import TafsirIcon from '../../../public/icons/tafsir.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
+import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
+import { onShareClicked } from '../QuranReader/TranslationView/ShareVerseButton';
 
+import styles from './OverflowVerseActionsMenyBody.module.scss';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { getWindowOrigin, navigateToExternalUrl } from 'src/utils/url';
+import { logButtonClick } from 'src/utils/eventLogger';
+import { getQuranReflectVerseUrl } from 'src/utils/navigation';
+import { navigateToExternalUrl } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -34,6 +39,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
+  const toast = useToast();
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
     // if the user has just copied the text, we should change the text back to Copy after 3 seconds.
@@ -57,33 +63,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   }, [isShared]);
 
   const onCopyClicked = () => {
+    logButtonClick('verse_actions_menu_copy');
     clipboardCopy(verse.textUthmani).then(() => {
       setIsCopied(true);
     });
-  };
-
-  const onTafsirsClicked = () => {
-    router.push({
-      pathname: '/[chapterId]/[verseId]/tafsirs',
-      query: { chapterId: verse.chapterId, verseId: verse.verseNumber },
-    });
-  };
-
-  // we do navigation programmatically because using <a> or <Link> doesn't work with PopOver.Item.
-  const onQuranReflectClicked = () => {
-    navigateToExternalUrl(
-      // eslint-disable-next-line i18next/no-literal-string
-      `https://quranreflect.com/${verse.chapterId}/${verse.verseNumber}?feed=true`,
-    );
-  };
-
-  const onShareClicked = () => {
-    const origin = getWindowOrigin();
-    if (origin) {
-      clipboardCopy(`${origin}/${verse.chapterId}/${verse.verseNumber}`).then(() => {
-        setIsShared(true);
-      });
-    }
   };
 
   const isVerseBookmarked = !!bookmarkedVerses[verse.verseKey];
@@ -92,8 +75,16 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
   const shouldShowGoToAyah = router.asPath !== verseUrl;
   const dispatch = useDispatch();
   const onToggleBookmarkClicked = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`verse_actions_menu_${isVerseBookmarked ? 'un_bookmark' : 'bookmark'}`);
     dispatch({ type: toggleVerseBookmark.type, payload: verse.verseKey });
   };
+
+  const onGoToAyahClicked = () => {
+    logButtonClick('verse_actions_menu_go_to_verse');
+    router.push(verseUrl);
+  };
+
   return (
     <>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
@@ -102,16 +93,30 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
 
       <VerseActionAdvancedCopy verse={verse} />
 
-      <PopoverMenu.Item onClick={onTafsirsClicked} icon={<TafsirIcon />}>
-        {t('quran-reader:tafsirs')}
+      <TafsirVerseAction chapterId={Number(verse.chapterId)} verseNumber={verse.verseNumber} />
+
+      <PopoverMenu.Item
+        className={styles.hiddenOnDesktop}
+        onClick={() => {
+          logButtonClick('verse_actions_menu_reflect');
+          navigateToExternalUrl(getQuranReflectVerseUrl(verse.verseKey));
+        }}
+        icon={<ChatIcon />}
+      >
+        {t('reflect')}
       </PopoverMenu.Item>
 
-      <PopoverMenu.Item onClick={onShareClicked} icon={<ShareIcon />}>
-        {isShared ? `${t('shared')}` : `${t('share')}`}
-      </PopoverMenu.Item>
-
-      <PopoverMenu.Item onClick={onQuranReflectClicked} icon={<QuranReflectIcon />}>
-        {t('q-reflect')}
+      <PopoverMenu.Item
+        className={styles.hiddenOnDesktop}
+        onClick={() =>
+          onShareClicked(verse.verseKey, () => {
+            setIsShared(true);
+            toast(t('shared'), { status: ToastStatus.Success });
+          })
+        }
+        icon={<ShareIcon />}
+      >
+        {t('share')}
       </PopoverMenu.Item>
 
       <PopoverMenu.Item
@@ -124,7 +129,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse }) => {
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
 
       {shouldShowGoToAyah && (
-        <PopoverMenu.Item onClick={() => router.push(verseUrl)} icon={<LinkIcon />}>
+        <PopoverMenu.Item onClick={onGoToAyahClicked} icon={<LinkIcon />}>
           {t('quran-reader:go-ayah')}
         </PopoverMenu.Item>
       )}
