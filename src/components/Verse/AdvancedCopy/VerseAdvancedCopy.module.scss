@@ -19,6 +19,11 @@
   margin-block: var(--spacing-xsmall);
 }
 
+.fontLabelContainer {
+  display: flex;
+  align-items: center;
+}
+
 // clone of checkbox properties
 .emptyCheckbox {
   min-height: var(--spacing-medium);

@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
@@ -13,7 +14,9 @@ import VersesRangeSelector from './VersesRangeSelector';
 
 import { getAvailableTranslations } from 'src/api';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
+import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
@@ -27,6 +30,7 @@ import {
 } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { generateChapterVersesKeys } from 'src/utils/verse';
+import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -40,6 +44,13 @@ const MULTIPLE_VERSES = 'multiple';
 const TRUE_STRING = String(true);
 const FALSE_STRING = String(false);
 
+const TO_COPY_FONTS = [
+  QuranFont.Uthmani,
+  QuranFont.MadaniV1,
+  QuranFont.MadaniV2,
+  QuranFont.IndoPak,
+];
+
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang, t } = useTranslation('quran-reader');
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -51,10 +62,12 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const [rangeStartVerse, setRangeStartVerse] = useState(null);
   // the key of the range end verse.
   const [rangeEndVerse, setRangeEndVerse] = useState(null);
-  // whether the Arabic Quran text should be copied or not.
-  const [shouldCopyText, setShouldCopyText] = useState(true);
+  // Which font to copy.
+  const [shouldCopyFont, setShouldCopyFont] = useState<QuranFont>(QuranFont.Uthmani);
   // whether the selected verses' footnotes should be copied or not.
   const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(false);
+  // whether we should include the translator name or not.
+  const [shouldIncludeTranslatorName, setShouldIncludeTranslatorName] = useState(true);
   // a map of the IDs of the translations the users had selected and whether it should be copied or not. Will not be copied by default.
   const [translations, setTranslations] = useState<
     Record<number, { shouldBeCopied: boolean; name: string }>
@@ -102,7 +115,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       .filter((translation) => selectedTranslations.includes(translation.id))
       .forEach((translation) => {
         responseTranslations[translation.id] = {
-          shouldBeCopied: false, // the default is to not copy the translation
+          shouldBeCopied: true, // the default is to copy the translation
           name: translation.translatedName.name,
         };
       });
@@ -185,7 +198,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       rangeEndVerse,
       rangeStartVerse,
       shouldCopyFootnotes,
-      shouldCopyText,
+      shouldIncludeTranslatorName,
+      shouldCopyFont,
       translations,
       verseKey: verse.verseKey,
     })
@@ -199,14 +213,18 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       });
   };
 
-  const onShouldCopyTextChange = () => {
-    setShouldCopyText((prevShouldCopyText) => {
-      logEvent(
-        // eslint-disable-next-line i18next/no-literal-string
-        `advanced_copy_modal_copy_arabic_${prevShouldCopyText ? 'unselected' : 'selected'}`,
-      );
-      return !prevShouldCopyText;
-    });
+  const onShouldCopyFontsChange = (font: string) => {
+    logItemSelectionChange('advanced_copy_modal_font', font);
+    setShouldCopyFont(font as QuranFont);
+  };
+
+  const onShouldIncludeTranslatorNameChange = (includeTranslatorName: string) => {
+    const shouldInclude = includeTranslatorName === TRUE_STRING;
+    logEvent(
+      // eslint-disable-next-line i18next/no-literal-string
+      `advanced_copy_modal_include_translator_${shouldInclude ? 'selected' : 'unselected'}`,
+    );
+    setShouldIncludeTranslatorName(shouldInclude);
   };
 
   /**
@@ -273,13 +291,6 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           onChange={onRangeBoundariesChange}
         />
       )}
-      <p className={styles.label}>{t('copy-what')}</p>
-      <Checkbox
-        onChange={onShouldCopyTextChange}
-        checked={shouldCopyText}
-        id="quranText"
-        label={t('copy-arabic')}
-      />
       {selectedTranslations.length !== 0 && (
         <>
           <p className={styles.label}>{t('common:translations')}:</p>
@@ -296,8 +307,44 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
               <div key={translationId} className={styles.emptyCheckbox} />
             ),
           )}
+          <p className={styles.label}>{t('include-translator')}</p>
+          <RadioGroup
+            label="include_translator"
+            value={shouldIncludeTranslatorName ? TRUE_STRING : FALSE_STRING}
+            onChange={onShouldIncludeTranslatorNameChange}
+            items={[
+              {
+                value: FALSE_STRING,
+                id: FALSE_STRING,
+                label: t('common:no'),
+              },
+              {
+                value: TRUE_STRING,
+                id: TRUE_STRING,
+                label: t('common:yes'),
+              },
+            ]}
+          />
         </>
       )}
+      <div className={classNames(styles.label, styles.fontLabelContainer)}>
+        <p>{t('font')}</p>
+        <HelperTooltip>{t('font-tooltip')}</HelperTooltip>
+      </div>
+      <Combobox
+        clearable
+        id="wordByWord"
+        value={shouldCopyFont}
+        initialInputValue={t(`common:fonts.${QuranFont.Uthmani}`)}
+        items={TO_COPY_FONTS.map((font) => ({
+          id: font,
+          name: font,
+          label: t(`common:fonts.${font}`),
+          value: font,
+        }))}
+        onChange={onShouldCopyFontsChange}
+        placeholder={t('font-placeholder')}
+      />
       <p className={styles.label}>{t('copy-footnote-q')}</p>
       <RadioGroup
         label="copy_footnotes"

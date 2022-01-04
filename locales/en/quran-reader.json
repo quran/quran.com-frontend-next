@@ -5,7 +5,9 @@
     "copy-arabic": "Arabic text (Uthmani text)",
     "copy-footnote-q": "Also copy Footnote(s)?",
     "copy-success": "Text is copied successfully in your clipboard.",
-    "copy-what": "What do you want to copy?",
+    "font": "Arabic font to copy",
+    "font-tooltip": "King Fahad V1 and V2 fonts will be in unicode.",
+    "font-placeholder": "Select a font",
     "current-verse": "Current verse",
     "download-copy": "if you want to download text file.",
     "footnote": "Footnote",
@@ -29,5 +31,6 @@
     "surah-beginning": "Beginning of Surah",
     "surah-info": "Surah Info",
     "tafsirs": "Tafsirs",
-    "verses-range": "Range of verses"
+    "verses-range": "Range of verses",
+    "include-translator": "Include translator name?"
 }
