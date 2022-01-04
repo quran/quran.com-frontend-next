@@ -1,5 +1,6 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
+@use "src/styles/theme";
 
 .container {
   width: 100%;
@@ -11,7 +12,12 @@
 }
 
 .cellContainer {
-  background-color: #fafafa;
+  @include theme.dark {
+    background-color: var(--color-background-alternative-faint);
+  }
+  @include theme.light {
+    background-color: var(--color-background-alternative-faded);
+  }
   display: flex;
   flex-direction: column;
   margin-block-end: var(--spacing-mega);
@@ -44,6 +50,8 @@
 }
 
 .translationContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .translationText {
