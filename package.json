@@ -109,6 +109,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-func": "^0.1.17",
+    "eslint-plugin-storybook": "^0.5.3",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-sonarjs": "^0.11.0",
     "eslint-plugin-unicorn": "^39.0.0",
