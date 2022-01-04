@@ -1,0 +1,52 @@
+@use "src/styles/breakpoints";
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  @include breakpoints.tablet {
+    max-width: 80%;
+  }
+  margin-inline: auto;
+}
+
+.cellContainer {
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  margin-block-end: var(--spacing-mega);
+  padding: var(--spacing-medium);
+  box-sizing: content-box;
+  border-radius: var(--border-radius-rounded);
+}
+
+.actionsContainers {
+  height: calc(2 * var(--spacing-medium));
+  display: flex;
+  justify-content: space-between;
+}
+
+.actionContainerLeft {
+  height: 100%;
+  width: calc(2.5 * var(--spacing-mega));
+}
+
+.actionContainerRight {
+  height: 100%;
+  width: 200px;
+}
+
+.verseContainer {
+  width: 80%;
+  margin-inline-start: auto;
+  height: calc(2 * var(--spacing-mega));
+  margin-block-start: var(--spacing-large);
+}
+
+.translationContainer {
+}
+
+.translationText {
+  width: 100%;
+  height: calc(1 * var(--spacing-mega));
+  margin-block-start: var(--spacing-large);
+}

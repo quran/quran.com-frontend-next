@@ -20,6 +20,7 @@ import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
+import TranslationViewSkeleton from './TranslationView/TranslationViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -158,9 +159,13 @@ const QuranReader = ({
             hasMore={hasMore}
             loadMore={loadMore}
             loader={
-              <div key={0}>
-                <Loader isValidating={isValidating} loadMore={loadMore} />
-              </div>
+              readingPreference === ReadingPreference.Translation ? (
+                <TranslationViewSkeleton />
+              ) : (
+                <div key={0}>
+                  <Loader isValidating={isValidating} loadMore={loadMore} />
+                </div>
+              )
             }
           >
             <QuranReaderBody
