@@ -45,15 +45,15 @@ export default {
     },
     avoidCollisions: {
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
     },
     open: {
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -61,8 +61,8 @@ export default {
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
     tip: {
-      options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
@@ -94,7 +94,7 @@ export default {
 };
 
 const Template = (args) => (
-  <div style={{ width: 150, marginLeft: 50 }}>
+  <div style={{ width: 150, marginLeft: 50 }} className="previewWrapper">
     <HoverCard {...args} />
   </div>
 );

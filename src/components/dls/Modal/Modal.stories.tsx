@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable no-alert */
 import { useState } from 'react';
@@ -8,10 +9,69 @@ import Button, { ButtonVariant, ButtonType } from 'src/components/dls/Button/But
 
 export default {
   title: 'dls/Modal',
+  component: Modal,
+  argTypes: {
+    isOpen: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    isInvertedOverlay: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    isBottomSheetOnMobile: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    isPropagationStopped: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    children: {
+      table: {
+        category: 'Required',
+      },
+    },
+    trigger: {
+      table: {
+        category: 'Optional',
+      },
+    },
+    onClickOutside: {
+      table: {
+        category: 'Optional',
+      },
+    },
+    contentClassName: {
+      table: {
+        category: 'Optional',
+      },
+    },
+  },
 };
 
-export const Default = () => (
-  <Modal trigger={<Button>This is a regular button component</Button>}>
+const DefaultTemplate = (args) => (
+  <Modal trigger={<Button>This is a regular button component</Button>} {...args}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -22,10 +82,13 @@ export const Default = () => (
   </Modal>
 );
 
-export const WithoutBottomSheetOnMobile = () => (
+export const Default = DefaultTemplate.bind({});
+
+const WithoutBottomSheetOnMobileTemplate = (args) => (
   <Modal
     trigger={<Button>This is a regular button component</Button>}
     isBottomSheetOnMobile={false}
+    {...args}
   >
     <Modal.Body>
       <Modal.Header>
@@ -37,13 +100,16 @@ export const WithoutBottomSheetOnMobile = () => (
   </Modal>
 );
 
-export const WithGhostButtonTrigger = () => (
+export const WithoutBottomSheetOnMobile = WithoutBottomSheetOnMobileTemplate.bind({});
+
+const WithGhostButtonTriggerTemplate = (args) => (
   <Modal
     trigger={
       <Button variant={ButtonVariant.Ghost} type={ButtonType.Success}>
         I am a ghost button with type success
       </Button>
     }
+    {...args}
   >
     <Modal.Body>
       <Modal.Header>
@@ -55,8 +121,10 @@ export const WithGhostButtonTrigger = () => (
   </Modal>
 );
 
-export const WithAction = () => (
-  <Modal trigger={<Button>With Action</Button>}>
+export const WithGhostButtonTrigger = WithGhostButtonTriggerTemplate.bind({});
+
+const WithActionTemplate = (args) => (
+  <Modal trigger={<Button>With Action</Button>} {...args}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -71,8 +139,10 @@ export const WithAction = () => (
   </Modal>
 );
 
-export const WithActionCallback = () => (
-  <Modal trigger={<Button>With Action</Button>}>
+export const WithAction = WithActionTemplate.bind({});
+
+const WithActionCallbackTemplate = (args) => (
+  <Modal trigger={<Button>With Action</Button>} {...args}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -90,8 +160,10 @@ export const WithActionCallback = () => (
   </Modal>
 );
 
-export const WithDisabledAction = () => (
-  <Modal trigger={<Button>With Action</Button>}>
+export const WithActionCallback = WithActionCallbackTemplate.bind({});
+
+const WithDisabledActionTemplate = (args) => (
+  <Modal trigger={<Button>With Action</Button>} {...args}>
     <Modal.Body>
       <Modal.Header>
         <Modal.Title>MODAL</Modal.Title>
@@ -106,13 +178,15 @@ export const WithDisabledAction = () => (
   </Modal>
 );
 
-export const WithControlledComponent = () => {
+export const WithDisabledAction = WithDisabledActionTemplate.bind({});
+
+const WithControlledComponentTemplate = (args) => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
       <Button onClick={() => setOpen(true)}>a trigger button</Button>
-      <Modal isOpen={open} onClickOutside={() => setOpen(false)}>
+      <Modal isOpen={open} onClickOutside={() => setOpen(false)} {...args}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>MODAL</Modal.Title>
@@ -128,3 +202,5 @@ export const WithControlledComponent = () => {
     </>
   );
 };
+
+export const WithControlledComponent = WithControlledComponentTemplate.bind({});

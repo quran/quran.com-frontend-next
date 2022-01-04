@@ -27,17 +27,20 @@ export default {
     placeholder: {
       control: { type: 'text' },
       table: { category: 'Optional' },
+      defaultValue: 'Start Typing...',
       description: 'The placeholder of the input.',
     },
     fixedWidth: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: true,
+      control: { type: 'boolean' },
       table: { category: 'Optional' },
       description: 'Whether the input should have a fixed width or take the width of its parent.',
     },
     disabled: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: { category: 'Optional' },
       description: 'Whether the input is disabled or not.',
     },
@@ -51,7 +54,8 @@ export default {
     },
     clearable: {
       options: [true, false],
-      control: { type: 'radio' },
+      defaultValue: false,
+      control: { type: 'boolean' },
       table: { category: 'Optional' },
       description: 'Whether we should show the clear icon or not when an input value is present.',
     },
@@ -89,6 +93,7 @@ export default {
       control: { type: 'text' },
       table: { category: 'Optional' },
       description: 'The label of the input.',
+      defaultValue: 'Some Label',
     },
   },
 };
@@ -116,14 +121,16 @@ const ControlledRemoteTemplate = (args) => {
   }, []);
 
   return (
-    <Input
-      {...args}
-      value={value}
-      placeholder={isLoading ? 'Loading...' : ''}
-      disabled={isLoading || disabled}
-      onChange={onChange}
-      onClearClicked={onClearClicked}
-    />
+    <span className="previewWrapper">
+      <Input
+        value={value}
+        placeholder={isLoading ? 'Loading...' : ''}
+        disabled={isLoading || disabled}
+        onChange={onChange}
+        onClearClicked={onClearClicked}
+        {...args}
+      />
+    </span>
   );
 };
 
@@ -137,10 +144,18 @@ const ControlledLocalTemplate = (args) => {
     setValue('');
   }, []);
 
-  return <Input {...args} value={value} onChange={onChange} onClearClicked={onClearClicked} />;
+  return (
+    <span className="previewWrapper">
+      <Input value={value} onChange={onChange} onClearClicked={onClearClicked} {...args} />
+    </span>
+  );
 };
 
-const Template = (args) => <Input {...args} />;
+const Template = (args) => (
+  <span className="previewWrapper">
+    <Input {...args} />
+  </span>
+);
 const PrefixIcon = <SettingIcon />;
 const SuffixIcon = <SearchIcon />;
 const Prefix = <p>https://</p>;

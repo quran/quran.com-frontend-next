@@ -6,23 +6,57 @@ import Button from 'src/components/dls/Button/Button';
 export default {
   title: 'dls/Skeleton',
   component: Skeleton,
+  argTypes: {
+    children: {
+      table: {
+        category: 'Optional',
+      },
+    },
+    isRounded: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        category: 'Optional',
+      },
+      defaultValue: false,
+    },
+    isSquared: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        category: 'Optional',
+      },
+      defaultValue: false,
+    },
+    isActive: {
+      control: {
+        type: 'boolean',
+      },
+      table: {
+        category: 'Optional',
+      },
+      defaultValue: true,
+    },
+    style: {
+      table: {
+        category: 'Optional',
+      },
+    },
+    className: {
+      table: {
+        category: 'Optional',
+      },
+    },
+  },
 };
 
-export const Normal = () => <Skeleton />;
-export const Rounded = () => <Skeleton isRounded />;
-export const Squared = () => <Skeleton isSquared />;
+export const Normal = (args) => <Skeleton {...args} />;
 
-export const WrappingAChildren = () => (
+export const WrappingAChildren = (args) => (
   <div style={{ display: 'flex' }}>
-    <Skeleton>
-      <Button>I am a button</Button>
-    </Skeleton>
-  </div>
-);
-
-export const WrappingAChildrenNotActive = () => (
-  <div style={{ display: 'flex' }}>
-    <Skeleton isActive={false}>
+    <Skeleton {...args}>
       <Button>I am a button</Button>
     </Skeleton>
   </div>

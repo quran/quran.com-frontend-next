@@ -3,9 +3,23 @@ import SurahAudioMismatchModal from './SurahAudioMismatchModal';
 export default {
   title: 'AudioPlayer/Alert',
   component: SurahAudioMismatchModal,
+  argTypes: {
+    isOpen: {
+      defaultValue: true,
+      control: 'boolean',
+    },
+    currentAudioChapter: {
+      defaultValue: 'Al-Baqarah',
+      control: 'text',
+    },
+    currentReadingChapter: {
+      defaultValue: "Ali 'Imran",
+      control: 'text',
+    },
+  },
 };
 
-export const Preview = () => (
+const Template = (args) => (
   <SurahAudioMismatchModal
     isOpen
     currentAudioChapter="Al-Baqarah"
@@ -16,5 +30,8 @@ export const Preview = () => (
     onStartOver={() => {
       // logic to play Ali Imran
     }}
+    {...args}
   />
 );
+
+export const Preview = Template.bind({});

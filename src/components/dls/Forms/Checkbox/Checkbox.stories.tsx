@@ -44,16 +44,29 @@ export default {
       },
       description: 'Control whether the checkbox input should be disabled or not.',
     },
+    required: {
+      options: [true, false],
+      control: { type: 'boolean' },
+      table: {
+        category: 'Optional',
+      },
+      description: 'Control whether the checkbox input should be required or not.',
+    },
     label: {
       table: {
         category: 'Optional',
       },
       description: 'The label of the checkbox.',
+      control: { type: 'text' },
     },
   },
 };
 
-const Template = (args) => <Checkbox {...args} />;
+const Template = (args) => (
+  <span className="previewWrapper">
+    <Checkbox {...args} />
+  </span>
+);
 
 export const DefaultCheckbox = Template.bind({});
 DefaultCheckbox.args = {

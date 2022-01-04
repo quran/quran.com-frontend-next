@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+/* eslint-disable react/no-multi-comp */
 import { useState, useMemo } from 'react';
 
 import LinkIcon from '../../../../public/icons/east.svg';
@@ -12,11 +14,41 @@ import PopoverMenu from './PopoverMenu';
 export default {
   title: 'dls/PopoverMenu',
   component: PopoverMenu,
+  argTypes: {
+    isOpen: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    trigger: {
+      table: {
+        category: 'Optional',
+      },
+    },
+    isPortalled: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    children: {
+      table: {
+        category: 'Required',
+      },
+    },
+  },
 };
 
-export const unTriggered = () => {
+const UnTriggeredTemplate = (args) => {
   return (
-    <PopoverMenu trigger={<button type="button">Trigger</button>}>
+    <PopoverMenu trigger={<button type="button">Trigger</button>} {...args}>
       <PopoverMenu.Item>Dashboard</PopoverMenu.Item>
 
       <PopoverMenu.Divider />
@@ -32,9 +64,11 @@ export const unTriggered = () => {
   );
 };
 
-export const withIcon = () => {
+export const UnTriggered = UnTriggeredTemplate.bind({});
+
+const WithIconTemplate = (args) => {
   return (
-    <PopoverMenu isOpen trigger={<button type="button">Trigger</button>}>
+    <PopoverMenu isOpen trigger={<button type="button">Trigger</button>} {...args}>
       <PopoverMenu.Item icon={<TafsirIcon />}>Tafsirs</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
@@ -43,9 +77,11 @@ export const withIcon = () => {
   );
 };
 
-export const withDivider = () => {
+export const WithIcon = WithIconTemplate.bind({});
+
+const WithDivider = (args) => {
   return (
-    <PopoverMenu isOpen trigger={<button type="button">test</button>}>
+    <PopoverMenu isOpen trigger={<button type="button">test</button>} {...args}>
       <PopoverMenu.Item icon={<TafsirIcon />}>Tafsirs</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
@@ -57,9 +93,11 @@ export const withDivider = () => {
   );
 };
 
-export const withIconDisabled = () => {
+export const WithDividerTemplate = WithDivider.bind({});
+
+const WithIconDisabledTemplate = (args) => {
   return (
-    <PopoverMenu isOpen trigger={<button type="button">test</button>}>
+    <PopoverMenu isOpen trigger={<button type="button">test</button>} {...args}>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
       <PopoverMenu.Item icon={<RepeatIcon size={18} />} isDisabled>
@@ -71,7 +109,9 @@ export const withIconDisabled = () => {
   );
 };
 
-export const WithSubMenu = () => {
+export const WithIconDisabled = WithIconDisabledTemplate.bind({});
+
+const WithSubMenuTemplate = (args) => {
   const [selection, setSelection] = useState<'parent' | 'speed'>('parent');
 
   const menus = useMemo(() => {
@@ -99,6 +139,10 @@ export const WithSubMenu = () => {
   }, []);
 
   return (
-    <PopoverMenu trigger={<button type="button">Trigger</button>}>{menus[selection]}</PopoverMenu>
+    <PopoverMenu trigger={<button type="button">Trigger</button>} {...args}>
+      {menus[selection]}
+    </PopoverMenu>
   );
 };
+
+export const WithSubMenu = WithSubMenuTemplate.bind({});

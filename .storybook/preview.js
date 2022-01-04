@@ -4,6 +4,7 @@ import ResetCSS from '../src/styles/reset.scss';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 import GlobalStyles from '../src/styles/global.scss';
+import Styles from '../.storybook/styles.scss';
 import I18nProvider from 'next-translate/I18nProvider';
 
 import commonEn from '../locales/en/common.json';
@@ -17,6 +18,7 @@ const themeDecorator = (Story, context) => {
       <link rel="stylesheet" href={ResetCSS} />
       <link rel="stylesheet" href={Theme} />
       <link rel="stylesheet" href={GlobalStyles} />
+      <link rel="stylesheet" href={Styles} />
       <div data-theme={theme}>
         <div style={{
            backgroundColor: 'var(--color-background-default)',

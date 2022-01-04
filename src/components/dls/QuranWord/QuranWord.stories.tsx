@@ -17,52 +17,101 @@ export default {
     font: QuranFont.QPCHafs,
     key: '1:1:2',
   },
-  argTypes: {},
+  argTypes: {
+    font: {
+      table: {
+        category: 'Optional',
+      },
+    },
+    isHighlighted: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    isWordByWordAllowed: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    isAudioHighlightingAllowed: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+    word: {
+      table: {
+        category: 'Required',
+      },
+    },
+    isFontLoaded: {
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+      table: {
+        category: 'Optional',
+      },
+    },
+  },
 };
 
 const Template = (args) => (
   <Provider store={getStore('en')}>
-    <QuranWord {...args} />
+    <span className="previewWrapper" style={{ direction: 'rtl' }}>
+      <QuranWord {...args} />
+    </span>
   </Provider>
 );
 
-export const withQPCUthmaniText = Template.bind({});
-withQPCUthmaniText.args = {
+export const WithQPCUthmaniText = Template.bind({});
+WithQPCUthmaniText.args = {
   word: mockWord({ text: 'ٱللَّهِ' }),
   key: '1:1:2',
   font: QuranFont.QPCHafs,
 };
 
-export const withUthmaniText = Template.bind({});
-withUthmaniText.args = {
+export const WithUthmaniText = Template.bind({});
+WithUthmaniText.args = {
   word: mockWord({ text: 'ٱللَّهِ' }),
   key: '1:1:2',
   font: QuranFont.Uthmani,
 };
 
-export const withIndopakText = Template.bind({});
-withIndopakText.args = {
+export const WithIndopakText = Template.bind({});
+WithIndopakText.args = {
   word: mockWord({ text: 'اللهِ' }),
   key: '1:1:2',
   font: QuranFont.IndoPak,
 };
 
-export const withQPCV1Text = Template.bind({});
-withQPCV1Text.args = {
+export const WithQPCV1Text = Template.bind({});
+WithQPCV1Text.args = {
   word: mockWord({ text: 'ﭒ' }),
   key: '1:1:2',
   font: QuranFont.MadaniV1,
 };
 
-export const withQPCV2Text = Template.bind({});
-withQPCV2Text.args = {
+export const WithQPCV2Text = Template.bind({});
+WithQPCV2Text.args = {
   word: mockWord({ text: 'ﱂ' }),
   key: '1:1:2',
   font: QuranFont.MadaniV2,
 };
 
-export const withTajweedImages = Template.bind({});
-withTajweedImages.args = {
+export const WithTajweedImages = Template.bind({});
+WithTajweedImages.args = {
   word: mockWord({ text: 'w/rq-color/1/1/2.png' }),
   key: '1:1:2',
   font: QuranFont.Tajweed,
