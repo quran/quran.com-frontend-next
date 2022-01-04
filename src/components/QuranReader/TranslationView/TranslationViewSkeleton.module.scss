@@ -1,4 +1,5 @@
 @use "src/styles/breakpoints";
+@use "src/styles/utility";
 
 .container {
   width: 100%;
@@ -27,19 +28,19 @@
 
 .actionContainerLeft {
   height: 100%;
-  width: calc(2.5 * var(--spacing-mega));
+  width: calc(1.8 * var(--spacing-mega));
 }
 
 .actionContainerRight {
   height: 100%;
-  width: 200px;
+  width: calc(5 * var(--spacing-mega));
 }
 
 .verseContainer {
   width: 80%;
   margin-inline-start: auto;
-  height: calc(2 * var(--spacing-mega));
   margin-block-start: var(--spacing-large);
+  height: calc(1.7 * var(--font-size));
 }
 
 .translationContainer {
@@ -47,6 +48,12 @@
 
 .translationText {
   width: 100%;
-  height: calc(1 * var(--spacing-mega));
+  height: calc(1.1 * var(--font-size));
   margin-block-start: var(--spacing-large);
 }
+
+@include utility.generate-font-sizes("code_v1");
+@include utility.generate-font-sizes("code_v2");
+@include utility.generate-font-sizes("text_indopak");
+@include utility.generate-font-sizes("qpc_uthmani_hafs");
+@include utility.generate-font-sizes("translation");
