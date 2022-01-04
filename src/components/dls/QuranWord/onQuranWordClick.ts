@@ -18,9 +18,7 @@ import Word from 'types/Word';
 const onQuranWordClick = (word: Word, audioData?: AudioData) => {
   if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
     const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
-    const segment = verseTiming.segments.find(
-      ([location]) => word.position === location + 1, // segment location start at 0, while word.position starts at 1
-    );
+    const segment = verseTiming.segments.find(([location]) => word.position === location);
     if (!segment) {
       playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
       return;

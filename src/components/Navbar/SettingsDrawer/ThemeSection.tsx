@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CircleIcon from '../../../../public/icons/circle.svg';
+import AutoIcon from '../../../../public/icons/auto.svg';
 import MoonIcon from '../../../../public/icons/moon-outline.svg';
 import SunIcon from '../../../../public/icons/sun-outline.svg';
 
@@ -14,11 +14,12 @@ import styles from './ThemeSection.module.scss';
 import Switch from 'src/components/dls/Switch/Switch';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
+import { logValueChange } from 'src/utils/eventLogger';
 
-const icons = {
+export const themeIcons = {
   [ThemeType.Dark]: <MoonIcon />,
   [ThemeType.Light]: <SunIcon />,
-  [ThemeType.Auto]: <CircleIcon />,
+  [ThemeType.Auto]: <AutoIcon />,
 };
 
 const ThemeSection = () => {
@@ -34,7 +35,7 @@ const ThemeSection = () => {
             theme.type === themeValue && styles.iconActive,
           )}
         >
-          {icons[themeValue]}
+          {themeIcons[themeValue]}
         </span>
         <span className={styles.themeNameContainer}>{t(`themes.${themeValue}`)}</span>
       </div>
@@ -42,15 +43,16 @@ const ThemeSection = () => {
     value: themeValue,
   }));
 
+  const onThemeSelected = (value) => {
+    logValueChange('theme', theme.type, value);
+    dispatch({ type: setTheme.type, payload: value });
+  };
+
   return (
     <Section>
       <Section.Title>{t('theme')}</Section.Title>
       <Section.Row>
-        <Switch
-          items={themes}
-          selected={theme.type}
-          onSelect={(value) => dispatch({ type: setTheme.type, payload: value })}
-        />
+        <Switch items={themes} selected={theme.type} onSelect={onThemeSelected} />
       </Section.Row>
       <Section.Footer visible={theme.type === ThemeType.Auto}>
         {t('themes.system-desc')}

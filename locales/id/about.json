@@ -1,18 +1,14 @@
 {
     "credits": {
-        "desc": "Situs web ini dibuat oleh beberapa sukarelawan dan dijayakan dengan kehendak Allah (Maha Suci Allah) dan dengan bantuan komunitas Muslim open source online. Sumber data meliputi <0> Tanzil <\/0> , <1> QuranComplex <\/1> , <2> Collin Fair <\/2> karya pada segmen audio, <3> QuranEnc <\/3> , <4> Zekr <\/4> dan Projek Quran Online.",
-        "lokalize": "Pelokalan dilakukan dengan bantuan <0> Lokalise <\/0>yang merupakan sistem terjemahan berbantuan komputer yang memfokuskan pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
-        "title": "Kredit"
+        "desc": "Proyek ini tidak akan mungkin terjadi tanpa banyak perpustakaan sumber terbuka dan proyek yang telah kami gunakan:",
+        "lokalize": "<0> Lokalize <\/0> : Sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
+        "quran-align": "<0> Collin Fair <\/0> : Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
+        "quran-complex": "<0> QuranComplex <\/0> : Kompleks Percetakan Al-Qur'an King Fahd adalah pemimpin dalam melayani Al-Qur'an dan Ilmunya, menerjemahkan Maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan yang optimal dari teknologi canggih di bidang percetakan, rekaman audio, penerbitan elektronik dan aplikasi digital.",
+        "quran-enc": "<0> QuranEnc <\/0> : Sebuah portal yang menampilkan terjemahan gratis dan terpercaya dari makna dan tafsir Al-Qur'an yang mulia dalam banyak bahasa dunia.",
+        "tanzil": "<0> Tanzil <\/0> : Sebuah proyek Al-Qur'an internasional yang bertujuan untuk menyediakan teks Al-Qur'an yang sangat terverifikasi.",
+        "title": "Kredit",
+        "vercel": "<0> Vercel <\/0> : adalah platform penyebaran dan kolaborasi untuk pengembang frontend yang mengutamakan pengembang frontend, memberi mereka alat yang komprehensif untuk membangun situs web dan aplikasi berkinerja tinggi.",
+        "zekr": "<0> Zekr <\/0> : Sebuah platform terbuka alat belajar Quran untuk browsing dan meneliti Quran"
     },
-    "main-desc": "Al-Quran suci adalah teks agama utama Islam. Muslim- dan muslimat percaya bahwa Al-Qur'an adalah kitab petunjuk dan petunjuk Ilahi bagi umat manusia, dan menganggap teks asli bahasa Arab sebagai wahyu terakhir dari Allah (Tuhan). Semua terjemahan teks Arab asli dengan demikian merupakan interpretasi dari makna aslinya dan harus dianut seperti itu.",
-    "meccan": {
-        "desc": "Surat-surat Mekah adalah surat-surat (surah) Al-Qur'an yang secara kronologis, menurut tradisi Islam, diturunkan kapan saja sebelum migrasi nabi Islam Muhammad dan para pengikutnya dari Mekah ke Madinah (Hijrah). Surat-surat Medina adalah wahyu yang terjadi setelah pindah ke kota dengan nama itu.",
-        "surahs": "Surah Mekah"
-    },
-    "median": {
-        "desc": "Surah Medina atau bab Medina dalam Quran adalah 24 surah terbaru yang menurut tradisi Islam, diturunkan di Medina setelah Hijrah Muhammad dari Mekah. Surat-surat ini diturunkan oleh Allah ketika komunitas Muslim lebih besar dan lebih berkembang, berlawanan dengan posisi minoritas mereka di Mekah.",
-        "surahs": "Surah Madinah"
-    },
-    "questions": "Jika Anda memiliki pertanyaan, Anda dapat mengunjungi halaman <0> maklum balik <\/0> .",
-    "redesign": "Kami telah mendesain semula situs web dengan pendekatan yang ramah pengguna. Untuk menelusuri surah, klik tombol (ditampilkan di kiri) di halaman BACA & DENGARKAN dan navigasi surah berdasarkan judul atau halaman. Pada mendatangnya, kami akan mengintegrasikan lebih banyak fitur pencarian dan audio insyaAllah. Jika Anda memiliki saran tentang bagaimana kami dapat membuat situs web menjadi pengalaman yang lebih baik, jangan ragu untuk <0> memberi kami maklum balik <\/0> ."
+    "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan mempelajari Al-Quran. Proyek ini open source dan dibangun sebagai kolaborasi antara anggota tim inti dan <0> tim Tarteel <\/0> ."
 }

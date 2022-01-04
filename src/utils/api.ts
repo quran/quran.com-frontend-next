@@ -60,6 +60,7 @@ export const getDefaultWordFields = (
  * @returns {{mushaf: number}}
  */
 export const getMushafId = (
+  // eslint-disable-next-line default-param-last
   quranFont: QuranFont = QuranFont.QPCHafs,
   mushafLines?: MushafLines,
 ): { mushaf: number } => {

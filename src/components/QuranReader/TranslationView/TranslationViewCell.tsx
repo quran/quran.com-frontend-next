@@ -10,6 +10,8 @@ import {
 } from '../utils/memoization';
 
 import BookmarkIcon from './BookmarkIcon';
+import QuranReflectButton from './QuranReflectButton';
+import ShareVerseButton from './ShareVerseButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
@@ -30,9 +32,14 @@ import Verse from 'types/Verse';
 type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
+  verseIndex: number;
 };
 
-const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranReaderStyles }) => {
+const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
+  verse,
+  quranReaderStyles,
+  verseIndex,
+}) => {
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
@@ -48,11 +55,13 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
   return (
     <div ref={selectedItemRef}>
       {verse.verseNumber === 1 && (
-        <ChapterHeader
-          chapterId={String(verse.chapterId)}
-          pageNumber={verse.pageNumber}
-          hizbNumber={verse.hizbNumber}
-        />
+        <div className={styles.chapterHeaderContainer}>
+          <ChapterHeader
+            chapterId={String(verse.chapterId)}
+            pageNumber={verse.pageNumber}
+            hizbNumber={verse.hizbNumber}
+          />
+        </div>
       )}
       <div
         className={classNames(styles.cellContainer, {
@@ -69,6 +78,12 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
             </div>
           </div>
           <div className={styles.actionContainerRight}>
+            <div className={classNames(styles.actionItem, styles.secondaryActionItem)}>
+              <ShareVerseButton verseKey={verse.verseKey} />
+            </div>
+            <div className={classNames(styles.actionItem, styles.secondaryActionItem)}>
+              <QuranReflectButton verseKey={verse.verseKey} />
+            </div>
             <div className={styles.actionItem}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}
@@ -81,13 +96,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({ verse, quranR
           </div>
         </div>
 
-        <div
-          className={classNames(styles.contentContainer, {
-            [styles.splitView]: verse.translations?.length === 1,
-          })}
-        >
+        <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
-            <VerseText words={getVerseWords(verse)} />
+            <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={verseIndex === 0} />
           </div>
           <div className={styles.verseTranslationsContainer}>
             {verse.translations?.map((translation: Translation) => (

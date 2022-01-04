@@ -1,5 +1,5 @@
 type TafsirsSettings = {
-  selectedTafsirs: number[];
+  selectedTafsirs: string[];
   isUsingDefaultTafsirs: boolean;
 };
 

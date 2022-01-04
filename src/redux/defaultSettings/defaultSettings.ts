@@ -29,7 +29,7 @@ export interface DefaultSettings {
 }
 
 // Tafsir Ibn Kathir in English
-export const DEFAULT_TAFSIRS = [169];
+export const DEFAULT_TAFSIRS = ['en-tafisr-ibn-kathir'];
 
 export const DEFAULT_RECITER: Reciter = {
   id: 7,

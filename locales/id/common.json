@@ -90,6 +90,9 @@
         "text_indopak": "IndoPak",
         "text_uthmani": "Usmani"
     },
+    "footer": {
+        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap dapat memberikan kemudahan bagi semua orang untuk membaca, mempelajari, dan mempelajari Al-Qur'an yang Mulia. Al-Qur'an yang Mulia memiliki banyak nama termasuk Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, dan Al-Noor."
+    },
     "from": "Dari",
     "help": "Membantu",
     "hizb": "Hizbut Tahrir",
@@ -104,6 +107,7 @@
     "mobile-apps": "Aplikasi Seluler",
     "mode": "Mode",
     "more": "Lagi",
+    "navigate": "Navigasi",
     "network": "Jaringan",
     "next": "Lanjut",
     "no": "Tidak",
@@ -113,6 +117,7 @@
     "page": "Halaman",
     "pages": "halaman-halaman",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
+    "popular-links": "Tautan Populer",
     "powered-by": "Dipersembahkan oleh",
     "prayer-times": {
         "access-denied": "Akses ke lokasi ditolak. Harap aktifkan akses lokasi untuk mendapatkan waktu sholat yang akurat",
@@ -151,6 +156,7 @@
         "translation": "Terjemahan"
     },
     "reciter": "Tukang Qari",
+    "reflect": "Mencerminkan",
     "remove": "Menghapus",
     "retry": "Mencoba kembali",
     "search": {
@@ -201,13 +207,12 @@
     "surah": "surah",
     "tafsir": {
         "font-size": "Ukuran font tafsir",
+        "group-message": "Anda sedang membaca tafsir untuk sekelompok ayat {{from}} hingga {{to}}",
         "surah": "Surah Tafsir",
         "title": "tafsir"
     },
     "tarteel": {
         "app": "aplikasi tarteel",
-        "desc": "pencarian suara quran",
-        "learn": "pelajari cara menggunakan pencarian suara",
         "name": "Tarteel.ai"
     },
     "theme": "Tema",
@@ -234,7 +239,10 @@
         "error": "Terjadi kesalahan, coba lagi nanti. Atau unduh",
         "no-permission": "Sepertinya Anda tidak mengaktifkan izin menggunakan mikrofon. Harap aktifkan izin mikrofon dan coba lagi atau unduh",
         "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Silakan coba browser lain atau unduh",
-        "suggest": "Silakan mulai membaca dan ayat Anda akan muncul."
+        "suggest": "Silakan mulai membaca dan ayat Anda akan muncul.",
+        "suggest-subtitle": "Bacalah ayat apa saja dalam bahasa Arab, dan ayat itu akan muncul",
+        "suggest-title": "Baca sekarang",
+        "voice-search-powered-by": "Pencarian Suara Didukung oleh"
     },
     "wbw": "Kata dari kata",
     "wbw-trans-lang": "kata daripada bahasa kata",

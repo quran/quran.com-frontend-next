@@ -9,7 +9,7 @@ export const tafsirsSlice = createSlice({
   name: 'tafsirs',
   initialState: getTafsirsInitialState(),
   reducers: {
-    setSelectedTafsirs: (state, action: PayloadAction<{ tafsirs: number[]; locale: string }>) => ({
+    setSelectedTafsirs: (state, action: PayloadAction<{ tafsirs: string[]; locale: string }>) => ({
       ...state,
       // we need to before we compare because there is a corner case when the user changes the default tafsirs then re-selects them which results in the same array as the default one but reversed e.g. instead of [20, 131] it becomes [131, 20].
       isUsingDefaultTafsirs: areArraysEqual(

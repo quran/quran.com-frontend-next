@@ -16,6 +16,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { areArraysEqual } from 'src/utils/array';
+import { logButtonClick, logEmptySearchResults } from 'src/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
@@ -69,6 +70,10 @@ const SearchDrawer: React.FC = () => {
             setHasError(true);
           } else {
             setSearchResult(response);
+            // if there is no navigations nor verses in the response
+            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
+              logEmptySearchResults(debouncedSearchQuery, 'search_drawer');
+            }
           }
         })
         .catch(() => {
@@ -84,6 +89,7 @@ const SearchDrawer: React.FC = () => {
   }, [debouncedSearchQuery, selectedTranslations, dispatch]);
 
   const resetQueryAndResults = () => {
+    logButtonClick('search_drawer_clear_input');
     // reset the search query
     setSearchQuery('');
     // reset the result

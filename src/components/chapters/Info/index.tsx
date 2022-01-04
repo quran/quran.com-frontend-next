@@ -10,6 +10,7 @@ import BackIcon from '../../../../public/icons/west.svg';
 import styles from './Info.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { getBlurDataUrl } from 'src/utils/image';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
@@ -34,6 +35,9 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
               className={styles.backIcon}
               prefix={<BackIcon />}
               size={ButtonSize.Small}
+              onClick={() => {
+                logButtonClick('chapter_info_go_back');
+              }}
             >
               {t('surah-info:go-to-surah')}
             </Button>

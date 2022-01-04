@@ -12,6 +12,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
@@ -22,6 +23,9 @@ const filterReciters = (reciters, searchQuery: string): Reciter[] => {
   });
 
   const filteredReciter = fuse.search(searchQuery).map(({ item }) => item);
+  if (!filteredReciter.length) {
+    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+  }
   return filteredReciter as Reciter[];
 };
 
@@ -36,6 +40,7 @@ const SettingsReciter = () => {
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
+    logItemSelectionChange('selected_reciter', reciter.id);
     dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
   };
 
@@ -59,22 +64,28 @@ const SettingsReciter = () => {
             : data.reciters;
           return (
             <div>
-              {filteredReciters.map((reciter) => (
-                <label className={styles.reciter} htmlFor={reciter.id.toString()} key={reciter.id}>
-                  <input
-                    id={reciter.id.toString()}
-                    type="radio"
-                    name="reciter"
-                    value={reciter.id}
-                    checked={reciter.id === selectedReciter.id}
-                    onChange={(e) => {
-                      onSelectedReciterChange(e.target.value, data.reciters);
-                    }}
-                  />
-                  <span>{reciter.name}</span>
-                  <span className={styles.recitationStyle}>{reciter.style.name}</span>
-                </label>
-              ))}
+              {filteredReciters
+                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .map((reciter) => (
+                  <label
+                    className={styles.reciter}
+                    htmlFor={reciter.id.toString()}
+                    key={reciter.id}
+                  >
+                    <input
+                      id={reciter.id.toString()}
+                      type="radio"
+                      name="reciter"
+                      value={reciter.id}
+                      checked={reciter.id === selectedReciter.id}
+                      onChange={(e) => {
+                        onSelectedReciterChange(e.target.value, data.reciters);
+                      }}
+                    />
+                    <span>{reciter.name}</span>
+                    <span className={styles.recitationStyle}>{reciter.style.name}</span>
+                  </label>
+                ))}
             </div>
           );
         }}

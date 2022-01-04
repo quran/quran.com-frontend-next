@@ -20,6 +20,12 @@ import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
+import {
+  logButtonClick,
+  logEmptySearchResults,
+  logEvent,
+  logValueChange,
+} from 'src/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -91,6 +97,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   };
 
   const onClearClicked = () => {
+    logButtonClick('search_page_clear_query');
     setSearchQuery('');
   };
 
@@ -117,6 +124,10 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
             setHasError(true);
           } else {
             setSearchResult(response);
+            // if there is no navigations nor verses in the response
+            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
+              logEmptySearchResults(query, 'search_page');
+            }
           }
         })
         .catch(() => {
@@ -138,6 +149,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   }, [currentPage, debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
 
   const onPageChange = (page: number) => {
+    logEvent('search_page_number_change');
     setCurrentPage(page);
   };
 
@@ -148,12 +160,20 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
    */
   const onLanguageChange = useCallback((languageIsoCodes: string[]) => {
     // convert the array into a string
-    setSelectedLanguages(languageIsoCodes.join(','));
+    setSelectedLanguages((prevLanguages) => {
+      const newLanguages = languageIsoCodes.join(',');
+      logValueChange('search_page_selected_languages', prevLanguages, newLanguages);
+      return newLanguages;
+    });
   }, []);
 
   const onTranslationChange = useCallback((translationIds: string[]) => {
     // convert the array into a string
-    setSelectedTranslations(translationIds.join(','));
+    setSelectedTranslations((prevTranslationIds) => {
+      const newTranslationIds = translationIds.join(',');
+      logValueChange('search_page_selected_translations', prevTranslationIds, newTranslationIds);
+      return newTranslationIds;
+    });
     // reset the current page since most probable the results will change.
     setCurrentPage(1);
   }, []);
