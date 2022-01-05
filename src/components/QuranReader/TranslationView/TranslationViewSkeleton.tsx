@@ -1,4 +1,4 @@
-import styles from './TranslationViewSkeleton.module.scss';
+import styles from './TranslationView.module.scss';
 import TranslationViewCellSkeleton from './TranslatioViewCellSkeleton';
 
 const TranslationViewSkeleton = () => {

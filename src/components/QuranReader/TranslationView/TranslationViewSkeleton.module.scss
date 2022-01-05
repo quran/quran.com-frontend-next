@@ -2,66 +2,26 @@
 @use "src/styles/utility";
 @use "src/styles/theme";
 
-.container {
-  width: 100%;
-  max-width: 100%;
-  @include breakpoints.tablet {
-    max-width: 80%;
-  }
-  margin-inline: auto;
-}
-
 .cellContainer {
-  display: flex;
-  flex-direction: column;
-  margin-block-end: var(--spacing-mega);
-  padding: var(--spacing-medium);
-  box-sizing: border-box;
   border-block-end: 1px solid var(--color-borders-hairline);
-}
-
-.actionsContainers {
-  height: calc(2 * var(--spacing-medium));
-  display: flex;
-  justify-content: space-between;
-}
-
-.actionContainerLeft {
-  height: 100%;
-  width: calc(1.8 * var(--spacing-mega));
-}
-
-.actionContainerRight {
-  display: flex;
-  height: 100%;
-}
-
-.actionItem {
-  width: calc(2 * var(--spacing-medium));
-  height: 100%;
-  margin-inline-start: var(--spacing-xxsmall);
 }
 
 .verseContainer {
   width: 80%;
   margin-inline-start: auto;
-  margin-block-start: var(--spacing-large);
+  margin-block: var(--spacing-large);
   height: calc(1.7 * var(--font-size));
-}
-
-.translationContainer {
 }
 
 .translationText {
   display: inline-flex;
   width: auto;
-  margin-block-start: var(--spacing-large);
 }
 
 .translationAuthor {
   display: inline-flex;
   width: auto;
-  margin-block-start: var(--spacing-large);
+  margin-block-start: var(--spacing-micro);
   font-size: var(--font-size-small);
 }
 
