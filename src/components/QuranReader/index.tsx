@@ -19,7 +19,7 @@ import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '.
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
-import ReadingPreviewSkeleton from './ReadingView/ReadingViewSkeleton';
+import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
@@ -146,7 +146,7 @@ const QuranReader = ({
   //   loader = <TranslationViewSkeleton />;
   // } else
   if (readingPreference === ReadingPreference.Reading) {
-    loader = <ReadingPreviewSkeleton />;
+    loader = <ReadingViewSkeleton />;
   } else {
     loader = (
       <div key={0}>

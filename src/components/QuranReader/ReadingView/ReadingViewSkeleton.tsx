@@ -8,7 +8,7 @@ import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 
-const ReadingPreviewSkeleton = () => {
+const ReadingViewSkeleton = () => {
   const numberOfLines = 15;
   const { quranFont, quranTextFontScale } = useSelector(
     selectQuranReaderStyles,
@@ -31,4 +31,4 @@ const ReadingPreviewSkeleton = () => {
   );
 };
 
-export default ReadingPreviewSkeleton;
+export default ReadingViewSkeleton;
