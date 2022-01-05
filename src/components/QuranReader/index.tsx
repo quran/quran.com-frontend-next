@@ -21,6 +21,7 @@ import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
+import TranslationViewSkeleton from './TranslationView/TranslationViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -142,10 +143,9 @@ const QuranReader = ({
   const hasMore = size < getPageLimit(isVerseData, initialData);
 
   let loader;
-  // if (readingPreference === ReadingPreference.Translation) {
-  //   loader = <TranslationViewSkeleton />;
-  // } else
-  if (readingPreference === ReadingPreference.Reading) {
+  if (readingPreference === ReadingPreference.Translation) {
+    loader = <TranslationViewSkeleton />;
+  } else if (readingPreference === ReadingPreference.Reading) {
     loader = <ReadingViewSkeleton />;
   } else {
     loader = (
