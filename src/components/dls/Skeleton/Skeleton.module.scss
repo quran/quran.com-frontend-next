@@ -28,10 +28,9 @@ $animationDuration: 8s;
   content: " ";
   position: absolute;
 
-  // using -1px to avoid some part of children border leaking outside
-  inset-block: -1px;
-  inset-inline-start: -1px;
-  inset-inline-end: -1px;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
 }
 
 .rounded::before {
@@ -48,4 +47,8 @@ $animationDuration: 8s;
   100% {
     opacity: 1;
   }
+}
+
+.content {
+  opacity: 0;
 }
