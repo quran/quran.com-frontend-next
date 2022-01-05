@@ -21,7 +21,7 @@ type ContentModalProps = {
   hasCloseButton?: boolean;
   url?: string;
   header?: React.ReactNode;
-  innerRef: ForwardedRef<ContentModalHandles>;
+  innerRef?: ForwardedRef<ContentModalHandles>;
   // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
 };
 
