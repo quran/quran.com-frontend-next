@@ -6,10 +6,13 @@ import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
+import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
+import { makeVerseKey } from 'src/utils/verse';
 
 export enum RepetitionMode {
   Single = 'single',
   Range = 'range',
+  Chapter = 'chapter',
 }
 
 const SelectRepetitionMode = ({
@@ -22,7 +25,7 @@ const SelectRepetitionMode = ({
   onRepetitionModeChange,
   verseKey,
 }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const repetitionModeRadioGroupItems = useMemo(
     () => [
       {
@@ -35,9 +38,28 @@ const SelectRepetitionMode = ({
         id: RepetitionMode.Range,
         label: t('audio.player.verses-range'),
       },
+      {
+        value: RepetitionMode.Chapter,
+        id: RepetitionMode.Chapter,
+        label: t('surah'),
+      },
     ],
     [t],
   );
+
+  const surahList = useMemo(() => {
+    const chapterData = getAllChaptersData(lang);
+
+    const initialState = Object.entries(chapterData).map(([id, chapter]) => ({
+      id,
+      name: id,
+      value: id,
+      label: chapter.transliteratedName,
+    }));
+
+    return initialState;
+  }, [lang]);
+
   return (
     <>
       <RadioGroup
@@ -71,6 +93,23 @@ const SelectRepetitionMode = ({
             rangeEndVerse={rangeEndVerse}
           />
         </div>
+      )}
+      {repetitionMode === RepetitionMode.Chapter && (
+        <Combobox
+          clearable={false}
+          id={RepetitionMode.Chapter}
+          value="1"
+          items={surahList}
+          onChange={(val) => {
+            const chapterData = getChapterData(val.toString(), lang);
+            onRangeChange({
+              from: makeVerseKey(Number(val), 1),
+              to: makeVerseKey(Number(val), chapterData.versesCount),
+            });
+          }}
+          placeholder={t('audio.player.search-verse')}
+          initialInputValue="1"
+        />
       )}
     </>
   );
