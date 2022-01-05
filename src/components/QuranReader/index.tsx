@@ -5,11 +5,10 @@ import React, { useCallback } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-import InfiniteScroll from 'react-infinite-scroller';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWRInfinite from 'swr/infinite';
 
-import { getPageLimit, getRequestKey, verseFetcher } from './api';
+import { getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Loader from './Loader';
@@ -54,7 +53,6 @@ type QuranReaderProps = {
   quranReaderDataType?: QuranReaderDataType;
 };
 
-const INFINITE_SCROLLER_THRESHOLD = 2000; // Number of pixels before the sentinel reaches the viewport to trigger loadMore()
 const QuranReader = ({
   initialData,
   id,
@@ -73,7 +71,7 @@ const QuranReader = ({
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const { data, size, setSize, isValidating } = useSWRInfinite(
+  const { data, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
         quranReaderDataType,
@@ -133,12 +131,10 @@ const QuranReader = ({
   if (!verses.length) {
     return <Error />;
   }
-  const loadMore = () => {
-    if (!isValidating) {
-      setSize(size + 1);
-    }
-  };
-  const hasMore = size < getPageLimit(isVerseData, initialData);
+
+  if (isValidating) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -152,29 +148,15 @@ const QuranReader = ({
         })}
       >
         <div className={styles.infiniteScroll}>
-          <InfiniteScroll
-            initialLoad={false}
-            threshold={INFINITE_SCROLLER_THRESHOLD}
-            hasMore={hasMore}
-            loadMore={loadMore}
-            loader={
-              <div key={0}>
-                <Loader isValidating={isValidating} loadMore={loadMore} />
-              </div>
-            }
-          >
-            <QuranReaderBody
-              isReadingPreference={isReadingPreference}
-              quranReaderStyles={quranReaderStyles}
-              verses={verses}
-            />
-          </InfiniteScroll>
-          {!hasMore && !isValidating && (
-            <EndOfScrollingControls
-              quranReaderDataType={quranReaderDataType}
-              lastVerse={verses[verses.length - 1]}
-            />
-          )}
+          <QuranReaderBody
+            isReadingPreference={isReadingPreference}
+            quranReaderStyles={quranReaderStyles}
+            verses={verses}
+          />
+          <EndOfScrollingControls
+            quranReaderDataType={quranReaderDataType}
+            lastVerse={verses[verses.length - 1]}
+          />
         </div>
       </div>
       <SidebarNavigation />
