@@ -13,6 +13,7 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { scrollWindowToTop } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -53,6 +54,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
+          scrollToTop={scrollWindowToTop}
           initialChapterId={chapterId}
           initialVerseNumber={verseNumber.toString()}
           initialTafsirData={tafsirData}

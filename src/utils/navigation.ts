@@ -171,3 +171,12 @@ export const getQuranReflectVerseUrl = (verseKey: string) => {
 export const fakeNavigate = (url: string, locale: string) => {
   window.history.pushState({}, '', `${locale === 'en' ? '' : `/${locale}`}${url}`);
 };
+
+/**
+ * Scroll to the top of the page.
+ */
+export const scrollWindowToTop = (): void => {
+  if (typeof window !== 'undefined') {
+    window.scrollTo(0, 0);
+  }
+};
