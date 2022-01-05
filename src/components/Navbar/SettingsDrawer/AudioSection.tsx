@@ -111,7 +111,7 @@ const AudioSection = () => {
         </Section.Row>
         <Section.Row>
           <Section.Label>
-            {t('settings.show-tooltip')}
+            {t('settings.show-tooltip-when-playing-audio')}
             <HelperTooltip>{t('settings.tooltip-playing-audio-helper')}</HelperTooltip>
           </Section.Label>
           <Toggle
