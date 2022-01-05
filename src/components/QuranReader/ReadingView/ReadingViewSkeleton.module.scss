@@ -10,8 +10,3 @@
   height: calc(1.2 * var(--font-size));
   margin-block-end: calc(0.75 * var(--font-size));
 }
-
-@include utility.generate-font-sizes("code_v1");
-@include utility.generate-font-sizes("code_v2");
-@include utility.generate-font-sizes("text_indopak");
-@include utility.generate-font-sizes("qpc_uthmani_hafs");

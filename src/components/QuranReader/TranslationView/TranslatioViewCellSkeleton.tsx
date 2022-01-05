@@ -3,6 +3,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 import cellStyles from './TranslationViewCell.module.scss';
 import skeletonStyles from './TranslationViewSkeleton.module.scss';
+import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
@@ -51,7 +52,7 @@ const TranslationViewCellSkeleton = () => {
       because it has layout shift problem when loading the font. Which is not ideal for skeleton */}
       <Skeleton
         className={classNames(skeletonStyles.verseContainer, {
-          [skeletonStyles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+          [verseTextStyles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
         })}
       />
       <div className={classNames(skeletonStyles[`translation-font-size-${translationFontScale}`])}>
