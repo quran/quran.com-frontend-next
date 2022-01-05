@@ -174,7 +174,6 @@ const QuranReader = ({
             loadMore={loadMore}
             loader={loader}
           >
-            <ReadingPreviewSkeleton />
             <QuranReaderBody
               isReadingPreference={isReadingPreference}
               quranReaderStyles={quranReaderStyles}
