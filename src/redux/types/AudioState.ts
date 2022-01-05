@@ -17,6 +17,7 @@ type AudioState = {
   isDownloadingAudio: boolean;
   playbackRate: number;
   isUsingDefaultReciter: boolean;
+  showTooltipWhenPlayingAudio: boolean;
 };
 
 export default AudioState;

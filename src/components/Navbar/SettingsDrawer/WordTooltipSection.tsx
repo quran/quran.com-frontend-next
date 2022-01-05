@@ -24,7 +24,6 @@ const WordTooltipSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-
   const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const onWordByWordLocaleChange = (value: string) => {

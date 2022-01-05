@@ -112,4 +112,11 @@ export default {
       loadedFontFaces: [],
     },
   }),
+  18: (state) => ({
+    ...state,
+    audioPlayerState: {
+      ...state.readingPreferences,
+      showTooltipWhenPlayingAudio: false,
+    },
+  }),
 };

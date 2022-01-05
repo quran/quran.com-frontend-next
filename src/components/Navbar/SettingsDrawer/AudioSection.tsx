@@ -7,6 +7,7 @@ import styles from './AudioSection.module.scss';
 import Section from './Section';
 
 import Select from 'src/components/dls/Forms/Select';
+import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
@@ -15,6 +16,8 @@ import {
   setEnableAutoScrolling,
   selectPlaybackRate,
   setPlaybackRate,
+  selectShowTooltipWhenPlayingAudio,
+  setShowTooltipWhenPlayingAudio,
 } from 'src/redux/slices/AudioPlayer/state';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
@@ -35,6 +38,7 @@ const AudioSection = () => {
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
   const playbackRate = useSelector(selectPlaybackRate);
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
+  const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
   const onPlaybackRateChanged = (value) => {
     logValueChange('audio_playback_rate', playbackRate, value);
@@ -73,6 +77,16 @@ const AudioSection = () => {
     dispatch(setWordClickFunctionality(newValue));
   };
 
+  const onShowTooltipWhenPlayingAudioChange = () => {
+    const newValue = !showTooltipWhenPlayingAudio;
+    logValueChange(
+      'audio_settings_show_tooltip_when_playing_audio',
+      showTooltipWhenPlayingAudio,
+      newValue,
+    );
+    dispatch(setShowTooltipWhenPlayingAudio(newValue));
+  };
+
   return (
     <div className={styles.container}>
       <Section>
@@ -93,6 +107,16 @@ const AudioSection = () => {
           <Toggle
             isChecked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
             onClick={onWordClickChange}
+          />
+        </Section.Row>
+        <Section.Row>
+          <Section.Label>
+            {t('settings.show-tooltip-when-playing-audio')}
+            <HelperTooltip>{t('settings.tooltip-playing-audio-helper')}</HelperTooltip>
+          </Section.Label>
+          <Toggle
+            isChecked={showTooltipWhenPlayingAudio}
+            onClick={onShowTooltipWhenPlayingAudioChange}
           />
         </Section.Row>
         <Section.Row>

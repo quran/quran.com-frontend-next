@@ -42,6 +42,8 @@ export const selectRemainingRangeRepeatCount = (state: RootState) => {
   return 1 + (repeatSettings.repeatRange - repeatProgress.repeatRange);
   // +1 to account for the current cycle, current implementation doesn't account for the current cycle
 };
+export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>
+  state.audioPlayerState.showTooltipWhenPlayingAudio;
 
 /**
  * get the audio file for the current reciter
@@ -210,6 +212,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       playbackRate: action.payload,
     }),
+    setShowTooltipWhenPlayingAudio: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      showTooltipWhenPlayingAudio: action.payload,
+    }),
   },
   // reset reciter to the default based on the locale
   // WHEN `reset` action is dispatched
@@ -237,6 +243,7 @@ export const {
   finishRepeatEachVerseProgress,
   resetRepeatEachVerseProgress,
   setPlaybackRate,
+  setShowTooltipWhenPlayingAudio,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

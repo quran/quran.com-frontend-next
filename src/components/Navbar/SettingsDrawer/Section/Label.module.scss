@@ -1,4 +1,6 @@
 .label {
   color: var(--color-text-default);
   opacity: var(--opacity-75);
+  display: flex;
+  align-items: center;
 }
