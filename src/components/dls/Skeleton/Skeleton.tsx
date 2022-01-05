@@ -28,7 +28,7 @@ const Skeleton = ({
         [className]: className,
       })}
     >
-      {children}
+      {children && <span className={styles.content}>{children}</span>}
     </span>
   );
 };

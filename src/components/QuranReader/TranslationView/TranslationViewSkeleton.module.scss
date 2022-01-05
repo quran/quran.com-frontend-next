@@ -1,0 +1,32 @@
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+@use "src/styles/theme";
+
+.cellContainer {
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.verseContainer {
+  width: 80%;
+  margin-inline-start: auto;
+  margin-block: var(--spacing-large);
+  height: calc(1.7 * var(--font-size));
+}
+
+.translationText {
+  display: inline-flex;
+  width: auto;
+}
+
+.translationAuthor {
+  display: inline-flex;
+  width: auto;
+  margin-block-start: var(--spacing-micro);
+  font-size: var(--font-size-small);
+}
+
+@include utility.generate-font-sizes("code_v1");
+@include utility.generate-font-sizes("code_v2");
+@include utility.generate-font-sizes("text_indopak");
+@include utility.generate-font-sizes("qpc_uthmani_hafs");
+@include utility.generate-font-sizes("translation");
