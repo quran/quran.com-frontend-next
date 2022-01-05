@@ -144,7 +144,7 @@ const QuranReader = ({
   let loader;
   // if (readingPreference === ReadingPreference.Translation) {
   //   loader = <TranslationViewSkeleton />;
-  // } else 
+  // } else
   if (readingPreference === ReadingPreference.Reading) {
     loader = <ReadingPreviewSkeleton />;
   } else {
