@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { useRouter } from 'next/router';
@@ -10,6 +10,10 @@ import styles from './ContentModal.module.scss';
 
 import { fakeNavigate } from 'src/utils/navigation';
 
+export type ContentModalHandles = {
+  scrollToTop: () => void;
+};
+
 type ContentModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
@@ -17,6 +21,8 @@ type ContentModalProps = {
   hasCloseButton?: boolean;
   url?: string;
   header?: React.ReactNode;
+  innerRef: ForwardedRef<ContentModalHandles>;
+  // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
 };
 
 const ContentModal = ({
@@ -26,8 +32,17 @@ const ContentModal = ({
   children,
   url,
   header,
+  innerRef,
 }: ContentModalProps) => {
   const router = useRouter();
+
+  const overlayRef = useRef<HTMLDivElement>();
+
+  useImperativeHandle(innerRef, () => ({
+    scrollToTop: () => {
+      if (overlayRef.current) overlayRef.current.scrollTop = 0;
+    },
+  }));
 
   useEffect(() => {
     if (!url) return null;
@@ -46,7 +61,7 @@ const ContentModal = ({
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.overlay}>
+        <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
           <Dialog.Content className={styles.contentWrapper} onInteractOutside={onClose}>
             <div className={styles.header}>
               {header}
@@ -69,5 +84,4 @@ const ContentModal = ({
     </Dialog.Root>
   );
 };
-
 export default ContentModal;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
+import { ContentModalHandles } from 'src/components/dls/ContentModal/ContentModal';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
@@ -26,6 +27,8 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
   const { t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
 
+  const contentModalRef = useRef<ContentModalHandles>();
+
   return (
     <>
       <PopoverMenu.Item
@@ -41,9 +44,13 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
         <TafsirBody
           initialChapterId={chapterId.toString()}
           initialVerseNumber={verseNumber.toString()}
+          scrollToTop={() => {
+            contentModalRef.current.scrollToTop();
+          }}
           render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
             return (
               <ContentModal
+                innerRef={contentModalRef}
                 url={getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0])}
                 isOpen={isContentModalOpen}
                 hasCloseButton

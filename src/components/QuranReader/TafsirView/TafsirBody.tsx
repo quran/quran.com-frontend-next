@@ -42,6 +42,7 @@ type TafsirBodyProps = {
   initialVerseNumber: string;
   initialTafsirData?: TafsirContentResponse;
   initialTafsirIdOrSlug?: number | string;
+  scrollToTop: () => void;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -55,6 +56,7 @@ const TafsirBody = ({
   initialTafsirData,
   initialTafsirIdOrSlug,
   render,
+  scrollToTop,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -234,6 +236,7 @@ const TafsirBody = ({
         currentChapterId={selectedChapterId}
         onNextButtonClicked={() => {
           logButtonClick('tafsir_next_verse');
+          scrollToTop();
           const newVerseNumber = String(Number(selectedVerseNumber) + 1);
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(
@@ -248,6 +251,7 @@ const TafsirBody = ({
         onPreviousButtonClicked={() => {
           const newVerseNumber = String(Number(selectedVerseNumber) + -1);
           logButtonClick('tafsir_prev_verse');
+          scrollToTop();
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(
               Number(selectedChapterId),
