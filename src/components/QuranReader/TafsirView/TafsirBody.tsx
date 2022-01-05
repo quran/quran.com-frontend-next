@@ -10,6 +10,7 @@ import useSWR from 'swr/immutable';
 
 import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
 import SurahAndAyahSelection from './SurahAndAyahSelection';
+import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
 import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirSkeleton from './TafsirSkeleton';
 import styles from './TafsirView.module.scss';
@@ -222,6 +223,35 @@ const TafsirBody = ({
           render={renderTafsir}
         />
       )}
+
+      <TafsirEndOfScrollingActions
+        currentVerseNumber={selectedVerseNumber}
+        currentChapterId={selectedChapterId}
+        onNextButtonClicked={() => {
+          const newVerseNumber = String(Number(selectedVerseNumber) + 1);
+          fakeNavigate(
+            getVerseSelectedTafsirNavigationUrl(
+              Number(selectedChapterId),
+              Number(newVerseNumber),
+              selectedTafsirIdOrSlug,
+            ),
+            lang,
+          );
+          setSelectedVerseNumber(newVerseNumber);
+        }}
+        onPreviousButtonClicked={() => {
+          const newVerseNumber = String(Number(selectedVerseNumber) + -1);
+          fakeNavigate(
+            getVerseSelectedTafsirNavigationUrl(
+              Number(selectedChapterId),
+              Number(newVerseNumber),
+              selectedTafsirIdOrSlug,
+            ),
+            lang,
+          );
+          setSelectedVerseNumber(newVerseNumber);
+        }}
+      />
     </div>
   );
 
