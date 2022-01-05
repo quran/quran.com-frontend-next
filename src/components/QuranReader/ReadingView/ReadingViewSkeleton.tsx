@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import range from 'lodash/range';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import styles from './ReadingPreviewSkeleton.module.scss';
+import styles from './ReadingViewSkeleton.module.scss';
 
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
