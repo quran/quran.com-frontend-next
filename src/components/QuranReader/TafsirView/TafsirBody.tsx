@@ -25,7 +25,12 @@ import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logEvent, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
+import {
+  logButtonClick,
+  logEvent,
+  logItemSelectionChange,
+  logValueChange,
+} from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
@@ -228,6 +233,7 @@ const TafsirBody = ({
         currentVerseNumber={selectedVerseNumber}
         currentChapterId={selectedChapterId}
         onNextButtonClicked={() => {
+          logButtonClick('tafsir_next_verse');
           const newVerseNumber = String(Number(selectedVerseNumber) + 1);
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(
@@ -241,6 +247,7 @@ const TafsirBody = ({
         }}
         onPreviousButtonClicked={() => {
           const newVerseNumber = String(Number(selectedVerseNumber) + -1);
+          logButtonClick('tafsir_prev_verse');
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(
               Number(selectedChapterId),
