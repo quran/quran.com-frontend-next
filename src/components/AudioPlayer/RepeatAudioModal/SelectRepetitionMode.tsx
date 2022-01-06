@@ -10,6 +10,7 @@ import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSel
 export enum RepetitionMode {
   Single = 'single',
   Range = 'range',
+  Chapter = 'chapter',
 }
 
 const SelectRepetitionMode = ({
@@ -30,14 +31,21 @@ const SelectRepetitionMode = ({
         id: RepetitionMode.Single,
         label: t('audio.player.single-verse'),
       },
+
       {
         value: RepetitionMode.Range,
         id: RepetitionMode.Range,
         label: t('audio.player.verses-range'),
       },
+      {
+        value: RepetitionMode.Chapter,
+        id: RepetitionMode.Chapter,
+        label: t('audio.player.full-surah'),
+      },
     ],
     [t],
   );
+
   return (
     <>
       <RadioGroup
