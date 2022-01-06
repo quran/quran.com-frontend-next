@@ -75,3 +75,8 @@ export const getPageIdsByMushaf = (
     const page = index + 1;
     return { value: page, label: toLocalizedNumber(page, lang) };
   });
+
+export const getMushafLinesNumber = (mushafLines: MushafLines): number => {
+  if (mushafLines === MushafLines.FifteenLines) return 15;
+  return 16;
+};

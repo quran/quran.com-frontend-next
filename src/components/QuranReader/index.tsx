@@ -19,6 +19,7 @@ import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '.
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
+import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 import TranslationViewSkeleton from './TranslationView/TranslationViewSkeleton';
 
@@ -141,6 +142,19 @@ const QuranReader = ({
   };
   const hasMore = size < getPageLimit(isVerseData, initialData);
 
+  let loader;
+  if (readingPreference === ReadingPreference.Translation) {
+    loader = <TranslationViewSkeleton />;
+  } else if (readingPreference === ReadingPreference.Reading) {
+    loader = <ReadingViewSkeleton />;
+  } else {
+    loader = (
+      <div key={0}>
+        <Loader isValidating={isValidating} loadMore={loadMore} />
+      </div>
+    );
+  }
+
   return (
     <>
       <ContextMenu />
@@ -158,15 +172,7 @@ const QuranReader = ({
             threshold={INFINITE_SCROLLER_THRESHOLD}
             hasMore={hasMore}
             loadMore={loadMore}
-            loader={
-              readingPreference === ReadingPreference.Translation ? (
-                <TranslationViewSkeleton />
-              ) : (
-                <div key={0}>
-                  <Loader isValidating={isValidating} loadMore={loadMore} />
-                </div>
-              )
-            }
+            loader={loader}
           >
             <QuranReaderBody
               isReadingPreference={isReadingPreference}

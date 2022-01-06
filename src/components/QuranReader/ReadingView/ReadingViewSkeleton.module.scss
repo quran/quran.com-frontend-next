@@ -1,0 +1,12 @@
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+@use "src/styles/theme";
+
+.skeleton {
+  width: 100%;
+  min-width: calc(9.5 * var(--spacing-mega));
+  max-width: calc(15 * var(--font-size));
+  margin-inline: auto;
+  height: calc(1.2 * var(--font-size));
+  margin-block-end: calc(0.75 * var(--font-size));
+}
