@@ -145,6 +145,7 @@ const RepeatAudioModal = ({
             label={t('audio.player.play-range')}
             value={verseRepetition.repeatRange}
             minValue={1}
+            infinityThreshold={3}
             onChange={(val) => {
               logValueChange('repeat_play_range', verseRepetition.repeatRange, val);
               setVerseRepetition({ ...verseRepetition, repeatRange: val });
@@ -155,6 +156,7 @@ const RepeatAudioModal = ({
             label={t('audio.player.repeat-verse')}
             value={verseRepetition.repeatEachVerse}
             minValue={1}
+            infinityThreshold={3}
             onChange={(val) => {
               logValueChange('repeat_verse', verseRepetition.repeatEachVerse, val);
               setVerseRepetition({ ...verseRepetition, repeatEachVerse: val });
