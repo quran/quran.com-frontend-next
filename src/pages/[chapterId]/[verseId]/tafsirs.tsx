@@ -14,7 +14,11 @@ import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl, getVerseTafsirNavigationUrl } from 'src/utils/navigation';
+import {
+  getCanonicalUrl,
+  getVerseTafsirNavigationUrl,
+  scrollWindowToTop,
+} from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -60,6 +64,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}
           initialTafsirIdOrSlug={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
+          scrollToTop={scrollWindowToTop}
           render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
             return (
               <div>

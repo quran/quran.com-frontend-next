@@ -10,6 +10,7 @@ import useSWR from 'swr/immutable';
 
 import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
 import SurahAndAyahSelection from './SurahAndAyahSelection';
+import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
 import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirSkeleton from './TafsirSkeleton';
 import styles from './TafsirView.module.scss';
@@ -24,7 +25,12 @@ import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { logEvent, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
+import {
+  logButtonClick,
+  logEvent,
+  logItemSelectionChange,
+  logValueChange,
+} from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
@@ -36,6 +42,7 @@ type TafsirBodyProps = {
   initialVerseNumber: string;
   initialTafsirData?: TafsirContentResponse;
   initialTafsirIdOrSlug?: number | string;
+  scrollToTop: () => void;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -49,6 +56,7 @@ const TafsirBody = ({
   initialTafsirData,
   initialTafsirIdOrSlug,
   render,
+  scrollToTop,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
@@ -222,6 +230,39 @@ const TafsirBody = ({
           render={renderTafsir}
         />
       )}
+
+      <TafsirEndOfScrollingActions
+        currentVerseNumber={selectedVerseNumber}
+        currentChapterId={selectedChapterId}
+        onNextButtonClicked={() => {
+          logButtonClick('tafsir_next_verse');
+          scrollToTop();
+          const newVerseNumber = String(Number(selectedVerseNumber) + 1);
+          fakeNavigate(
+            getVerseSelectedTafsirNavigationUrl(
+              Number(selectedChapterId),
+              Number(newVerseNumber),
+              selectedTafsirIdOrSlug,
+            ),
+            lang,
+          );
+          setSelectedVerseNumber(newVerseNumber);
+        }}
+        onPreviousButtonClicked={() => {
+          const newVerseNumber = String(Number(selectedVerseNumber) + -1);
+          logButtonClick('tafsir_prev_verse');
+          scrollToTop();
+          fakeNavigate(
+            getVerseSelectedTafsirNavigationUrl(
+              Number(selectedChapterId),
+              Number(newVerseNumber),
+              selectedTafsirIdOrSlug,
+            ),
+            lang,
+          );
+          setSelectedVerseNumber(newVerseNumber);
+        }}
+      />
     </div>
   );
 

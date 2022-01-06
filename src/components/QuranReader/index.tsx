@@ -18,7 +18,9 @@ import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '.
 import onCopyQuranWords from './onCopyQuranWords';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
+import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
+import TranslationViewSkeleton from './TranslationView/TranslationViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -132,8 +134,17 @@ const QuranReader = ({
     return <Error />;
   }
 
+  let loader;
+  if (readingPreference === ReadingPreference.Translation) {
+    loader = <TranslationViewSkeleton />;
+  } else if (readingPreference === ReadingPreference.Reading) {
+    loader = <ReadingViewSkeleton />;
+  } else {
+    loader = <Loader />;
+  }
+
   if (isValidating) {
-    return <Loader />;
+    return loader;
   }
 
   return (
