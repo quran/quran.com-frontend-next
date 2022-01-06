@@ -34,7 +34,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
           </Button>
         }
         isModal={false}
-        isPortalled={false}
+        isPortalled
         onOpenChange={(open: boolean) => {
           logEvent(`verse_actions_menu_${open ? 'open' : 'close'}`);
         }}

@@ -63,6 +63,7 @@
     "react-hotkeys-hook": "^3.4.4",
     "react-redux": "^7.2.6",
     "react-toastify": "^8.1.0",
+    "react-virtuoso": "^2.4.0",
     "redux-persist": "^6.0.0",
     "swr": "^1.1.2"
   },
