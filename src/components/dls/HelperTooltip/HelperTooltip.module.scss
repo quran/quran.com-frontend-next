@@ -1,3 +1,4 @@
+$tooltip-max-width: 200px;
 .questionMarkIconContainer {
   display: flex;
   align-items: center;
@@ -6,4 +7,13 @@
   & > svg {
     width: var(--spacing-large);
   }
+}
+
+.trigger {
+  display: flex;
+}
+
+.content {
+  display: flex;
+  max-width: $tooltip-max-width;
 }

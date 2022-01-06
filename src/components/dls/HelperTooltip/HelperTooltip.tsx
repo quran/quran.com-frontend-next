@@ -1,8 +1,7 @@
 import QuestionMarkIcon from '../../../../public/icons/help-circle.svg';
+import HoverablePopover from '../Popover/HoverablePopover';
 
 import styles from './HelperTooltip.module.scss';
-
-import Tooltip from 'src/components/dls/Tooltip';
 
 interface HelperTooltipProps {
   children: React.ReactNode;
@@ -10,11 +9,14 @@ interface HelperTooltipProps {
 
 const HelperTooltip = ({ children }: HelperTooltipProps) => {
   return (
-    <Tooltip text={children}>
+    <HoverablePopover
+      triggerStyles={styles.trigger}
+      content={<span style={{ maxWidth: 200, display: 'flex' }}>{children}</span>}
+    >
       <span className={styles.questionMarkIconContainer}>
         <QuestionMarkIcon />
       </span>
-    </Tooltip>
+    </HoverablePopover>
   );
 };
 
