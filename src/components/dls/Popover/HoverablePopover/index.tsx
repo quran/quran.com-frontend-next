@@ -12,6 +12,7 @@ interface Props {
   onOpenChange?: (open: boolean) => void;
   defaultStyling?: boolean;
   isOpen?: boolean;
+  triggerStyles?: string;
 }
 
 /**
@@ -32,8 +33,11 @@ const HoverablePopover: React.FC<Props> = ({
   tooltipDelay = 0,
   defaultStyling = true,
   isOpen,
+  triggerStyles,
 }: Props): JSX.Element => (
   <Popover
+    open={isOpen}
+    triggerStyles={triggerStyles}
     contentSide={contentSide}
     useTooltipStyles
     {...(onOpenChange && { onOpenChange })}
