@@ -11,7 +11,9 @@ type RepeatSettingProps = {
   maxValue?: number;
   format?: (val: number) => string;
   step?: number;
+  infinityThreshold?: number;
 };
+
 const RepeatSetting = ({
   label,
   value,
@@ -20,6 +22,7 @@ const RepeatSetting = ({
   maxValue = Infinity,
   step = 1,
   suffix,
+  infinityThreshold,
   format = (val: number) => val.toString(),
 }: RepeatSettingProps) => {
   return (
@@ -27,8 +30,20 @@ const RepeatSetting = ({
       <span className={styles.label}>{label}</span>{' '}
       <span className={styles.input}>
         <Counter
-          onIncrement={value < maxValue ? () => onChange(value + step) : null}
-          onDecrement={value > minValue ? () => onChange(value - step) : null}
+          onIncrement={
+            value < maxValue
+              ? // when value is reaching infinityThreshold. set the value to Infinity
+                // otherwise increment the value
+                () => onChange(value >= infinityThreshold ? Infinity : value + step)
+              : null
+          }
+          onDecrement={
+            value > minValue
+              ? // When the value equals to Infinity, set the value to `infinityThreshold`
+                // otherwise decrement normally
+                () => onChange(value === Infinity ? infinityThreshold : value - step)
+              : null
+          }
           count={format(value)}
         />{' '}
         {suffix}
