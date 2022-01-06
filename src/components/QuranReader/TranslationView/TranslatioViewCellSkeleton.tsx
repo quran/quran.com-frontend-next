@@ -3,10 +3,10 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 import cellStyles from './TranslationViewCell.module.scss';
 import skeletonStyles from './TranslationViewSkeleton.module.scss';
-import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
