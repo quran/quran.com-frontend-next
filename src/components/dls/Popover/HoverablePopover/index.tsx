@@ -34,13 +34,13 @@ const HoverablePopover: React.FC<Props> = ({
   isOpen,
 }: Props): JSX.Element => (
   <Popover
-    open={isOpen}
     contentSide={contentSide}
     useTooltipStyles
     {...(onOpenChange && { onOpenChange })}
     defaultStyling={defaultStyling}
     trigger={
       <Tooltip
+        open={isOpen}
         tip={tip}
         text={content}
         contentSide={contentSide}
