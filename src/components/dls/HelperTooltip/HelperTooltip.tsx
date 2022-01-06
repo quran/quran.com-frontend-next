@@ -11,7 +11,7 @@ const HelperTooltip = ({ children }: HelperTooltipProps) => {
   return (
     <HoverablePopover
       triggerStyles={styles.trigger}
-      content={<span style={{ maxWidth: 200, display: 'flex' }}>{children}</span>}
+      content={<span className={styles.content}>{children}</span>}
     >
       <span className={styles.questionMarkIconContainer}>
         <QuestionMarkIcon />
