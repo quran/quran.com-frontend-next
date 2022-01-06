@@ -132,10 +132,14 @@ const RepeatAudioModal = ({
             rangeStartVerse={verseRepetition.from}
             comboboxVerseItems={comboboxVerseItems}
             onRepetitionModeChange={onRepetitionModeChange}
-            onSingleVerseChange={(verseKey) =>
-              setVerseRepetition({ ...verseRepetition, from: verseKey, to: verseKey })
-            }
-            onRangeChange={(range) => setVerseRepetition({ ...verseRepetition, ...range })}
+            onSingleVerseChange={(verseKey) => {
+              logValueChange('repeat_single_verse', verseRepetition.repeatRange, verseKey);
+              setVerseRepetition({ ...verseRepetition, from: verseKey, to: verseKey });
+            }}
+            onRangeChange={(range) => {
+              logValueChange('repeat_verse_range', verseRepetition.repeatRange, range);
+              setVerseRepetition({ ...verseRepetition, ...range });
+            }}
             verseKey={verseRepetition.from}
           />
           <div className={styles.separator}>
