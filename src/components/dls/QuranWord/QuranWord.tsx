@@ -143,7 +143,7 @@ const QuranWord = ({
         shouldWrap={showTooltip}
         wrapper={(children) => (
           <MobilePopover
-            isOpen={shouldBeHighLighted && showTooltipWhenPlayingAudio}
+            isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
             defaultStyling={false}
             content={tooltipContent}
             onOpenChange={setIsTooltipOpened}
