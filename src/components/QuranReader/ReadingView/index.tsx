@@ -1,6 +1,8 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useMemo, memo, useRef } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
@@ -10,16 +12,24 @@ import groupPagesByVerses from './groupPagesByVerses';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
+
+const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
 
 type ReadingViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
+  quranReaderDataType: QuranReaderDataType;
 };
 
-const ReadingView = ({ verses, quranReaderStyles }: ReadingViewProps) => {
+const ReadingView = ({ verses, quranReaderStyles, quranReaderDataType }: ReadingViewProps) => {
   const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
   const pageNumbers = Object.keys(pages);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
@@ -64,6 +74,14 @@ const ReadingView = ({ verses, quranReaderStyles }: ReadingViewProps) => {
               pageIndex={index}
             />
           ) : null;
+        }}
+        components={{
+          Footer: () => (
+            <EndOfScrollingControls
+              quranReaderDataType={quranReaderDataType}
+              lastVerse={verses[verses.length - 1]}
+            />
+          ),
         }}
       />
     </div>

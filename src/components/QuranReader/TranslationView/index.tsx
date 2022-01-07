@@ -1,21 +1,35 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useRef } from 'react';
 
+import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type TranslationViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
+  quranReaderDataType: QuranReaderDataType;
 };
 
-const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) => {
+const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
+  ssr: false,
+  loading: () => <Spinner />,
+});
+
+const TranslationView = ({
+  verses,
+  quranReaderStyles,
+  quranReaderDataType,
+}: TranslationViewProps) => {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const dispatch = useDispatch();
   return (
@@ -48,6 +62,14 @@ const TranslationView = ({ verses, quranReaderStyles }: TranslationViewProps) =>
               quranReaderStyles={quranReaderStyles}
             />
           ) : null;
+        }}
+        components={{
+          Footer: () => (
+            <EndOfScrollingControls
+              quranReaderDataType={quranReaderDataType}
+              lastVerse={verses[verses.length - 1]}
+            />
+          ),
         }}
       />
     </div>
