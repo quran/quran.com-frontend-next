@@ -4,7 +4,6 @@ import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWRInfinite from 'swr/infinite';
 
@@ -22,7 +21,6 @@ import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 import TranslationViewSkeleton from './TranslationView/TranslationViewSkeleton';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import Error from 'src/pages/_error';
 import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
@@ -43,11 +41,6 @@ import {
 import { areArraysEqual } from 'src/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranFont, QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
-
-const EndOfScrollingControls = dynamic(() => import('./EndOfScrollingControls'), {
-  ssr: false,
-  loading: () => <Spinner />,
-});
 
 type QuranReaderProps = {
   initialData: VersesResponse;
@@ -163,10 +156,7 @@ const QuranReader = ({
             isReadingPreference={isReadingPreference}
             quranReaderStyles={quranReaderStyles}
             verses={verses}
-          />
-          <EndOfScrollingControls
             quranReaderDataType={quranReaderDataType}
-            lastVerse={verses[verses.length - 1]}
           />
         </div>
       </div>
