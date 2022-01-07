@@ -8,6 +8,7 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';
 
+import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -32,6 +33,8 @@ const TranslationView = ({
 }: TranslationViewProps) => {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const dispatch = useDispatch();
+  const [firstVerse] = verses;
+  const showChapterHeader = firstVerse.verseNumber === 1;
   return (
     <div className={styles.container}>
       <Virtuoso
@@ -70,6 +73,15 @@ const TranslationView = ({
               lastVerse={verses[verses.length - 1]}
             />
           ),
+          ...(showChapterHeader && {
+            Header: () => (
+              <ChapterHeader
+                chapterId={String(firstVerse.chapterId)}
+                pageNumber={firstVerse.pageNumber}
+                hizbNumber={firstVerse.hizbNumber}
+              />
+            ),
+          }),
         }}
       />
     </div>

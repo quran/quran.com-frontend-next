@@ -12,6 +12,7 @@ import groupPagesByVerses from './groupPagesByVerses';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
 
+import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -35,6 +36,9 @@ const ReadingView = ({ verses, quranReaderStyles, quranReaderDataType }: Reading
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const dispatch = useDispatch();
   const { quranTextFontScale } = quranReaderStyles;
+  const [firstPage] = pageNumbers;
+  const [firstVerseOfFirstPage] = pages[firstPage];
+  const showChapterHeader = firstVerseOfFirstPage.verseNumber === 1;
 
   return (
     <div
@@ -82,6 +86,15 @@ const ReadingView = ({ verses, quranReaderStyles, quranReaderDataType }: Reading
               lastVerse={verses[verses.length - 1]}
             />
           ),
+          ...(showChapterHeader && {
+            Header: () => (
+              <ChapterHeader
+                chapterId={firstVerseOfFirstPage.chapterId}
+                pageNumber={firstVerseOfFirstPage.pageNumber}
+                hizbNumber={firstVerseOfFirstPage.hizbNumber}
+              />
+            ),
+          }),
         }}
       />
     </div>

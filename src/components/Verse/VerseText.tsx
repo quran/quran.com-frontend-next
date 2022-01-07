@@ -8,7 +8,6 @@ import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
@@ -63,18 +62,14 @@ const VerseText = ({
       (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration)) ||
     isTajweedFont;
 
-  const { chapterId, isFirstWordOfSurah } = firstWordData;
+  const { chapterId } = firstWordData;
 
   const VerseTextContainer = shouldShowH1ForSEO ? 'h1' : 'div';
   return (
     <>
-      {isReadingMode && isFirstWordOfSurah && (
-        <div className={styles.chapterHeaderContainer}>
-          <ChapterHeader chapterId={chapterId} pageNumber={pageNumber} hizbNumber={hizbNumber} />
-        </div>
-      )}
       <VerseTextContainer
         ref={textRef}
+        // TODO: remove all the data-{} when removing the intersection observer
         data-verse-key={verseKey}
         data-page={pageNumber}
         data-chapter-id={chapterId}

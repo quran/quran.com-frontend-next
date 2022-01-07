@@ -15,7 +15,6 @@ import ShareVerseButton from './ShareVerseButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Separator from 'src/components/dls/Separator/Separator';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
@@ -54,15 +53,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   return (
     <div ref={selectedItemRef}>
-      {verse.verseNumber === 1 && (
-        <div className={styles.chapterHeaderContainer}>
-          <ChapterHeader
-            chapterId={String(verse.chapterId)}
-            pageNumber={verse.pageNumber}
-            hizbNumber={verse.hizbNumber}
-          />
-        </div>
-      )}
       <div
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
