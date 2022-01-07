@@ -5,10 +5,11 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
+import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { logEvent } from 'src/utils/eventLogger';
@@ -29,8 +30,15 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
     <div className={styles.container}>
       <PopoverMenu
         trigger={
-          <Button size={ButtonSize.Small} tooltip={t('more')} type={ButtonType.Secondary}>
-            <OverflowMenuIcon />
+          <Button
+            size={ButtonSize.Small}
+            tooltip={t('more')}
+            type={ButtonType.Secondary}
+            variant={ButtonVariant.Ghost}
+          >
+            <span className={cellStyles.icon}>
+              <OverflowMenuIcon />
+            </span>
           </Button>
         }
         isModal={false}

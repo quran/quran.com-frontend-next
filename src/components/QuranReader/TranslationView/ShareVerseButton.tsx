@@ -1,9 +1,11 @@
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import ShareIcon from '../../../../public/icons/share.svg';
+import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
 
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import styles from './TranslationViewCell.module.scss';
+
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
@@ -32,12 +34,14 @@ const ShareVerseButton = ({ verseKey }: ShareVerseButtonProps) => {
         onClick={() =>
           onShareClicked(verseKey, () => toast(t('shared'), { status: ToastStatus.Success }))
         }
+        variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
         tooltip={t('share')}
-        type={ButtonType.Secondary}
         shouldFlipOnRTL={false}
       >
-        <ShareIcon />
+        <span className={styles.icon}>
+          <CopyLinkIcon />
+        </span>
       </Button>
     </>
   );

@@ -74,7 +74,6 @@ const Button: React.FC<ButtonProps> = ({
     [styles.withText]: typeof children === 'string',
     [styles.withIcon]: typeof children !== 'string',
     // type
-    [styles.primary]: type === ButtonType.Primary,
     [styles.secondary]: type === ButtonType.Secondary,
     [styles.success]: type === ButtonType.Success,
     [styles.warning]: type === ButtonType.Warning,
