@@ -67,6 +67,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-text-default);
   & > svg {
     --icon-size: calc(1.1 * var(--spacing-medium));
     width: var(--icon-size);
