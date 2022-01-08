@@ -11,7 +11,8 @@
 }
 
 .icon svg {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   width: var(--spacing-small);
   height: var(--spacing-small);
   overflow: hidden;
