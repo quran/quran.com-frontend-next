@@ -67,6 +67,8 @@
 .iconContainer.verseAction {
   color: var(--color-text-default);
   opacity: var(--opacity-75);
+  height: calc(2.2 * var(--spacing-medium));
+  width: calc(2.2 * var(--spacing-medium));
   &:hover {
     color: var(--color-success-medium);
     background-color: var(--color-success-medium);
@@ -81,4 +83,10 @@
     width: calc(1.1 * var(--spacing-medium));
     height: calc(1.1 * var(--spacing-medium));
   }
+}
+
+// fix optical illussion for triangle icon inside circle button
+.playIcon {
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-left: calc(0.5 * var(--spacing-xxsmall));
 }

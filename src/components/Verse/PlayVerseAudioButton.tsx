@@ -99,7 +99,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
       shape={ButtonShape.Circle}
       className={classNames(styles.iconContainer, styles.verseAction)}
     >
-      <span className={styles.icon}>
+      <span className={classNames(styles.icon, styles.playIcon)}>
         <PlayIcon />
       </span>
     </Button>
