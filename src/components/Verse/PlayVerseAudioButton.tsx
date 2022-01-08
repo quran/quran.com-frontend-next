@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
@@ -9,7 +10,12 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, {
+  ButtonShape,
+  ButtonSize,
+  ButtonType,
+  ButtonVariant,
+} from 'src/components/dls/Button/Button';
 import {
   selectReciter,
   playFrom,
@@ -90,6 +96,8 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
       variant={ButtonVariant.Ghost}
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
+      shape={ButtonShape.Circle}
+      className={classNames(styles.iconContainer, styles.verseAction)}
     >
       <span className={styles.icon}>
         <PlayIcon />

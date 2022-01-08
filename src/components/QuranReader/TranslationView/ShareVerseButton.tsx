@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -5,7 +6,7 @@ import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
 
 import styles from './TranslationViewCell.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
@@ -38,6 +39,8 @@ const ShareVerseButton = ({ verseKey }: ShareVerseButtonProps) => {
         size={ButtonSize.Small}
         tooltip={t('share')}
         shouldFlipOnRTL={false}
+        shape={ButtonShape.Circle}
+        className={classNames(styles.iconContainer, styles.verseAction)}
       >
         <span className={styles.icon}>
           <CopyLinkIcon />
