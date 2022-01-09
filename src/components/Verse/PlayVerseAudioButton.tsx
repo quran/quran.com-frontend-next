@@ -70,7 +70,14 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
 
   if (isLoading)
     return (
-      <Button size={ButtonSize.Small} tooltip={t('loading')} type={ButtonType.Secondary}>
+      <Button
+        variant={ButtonVariant.Ghost}
+        size={ButtonSize.Small}
+        tooltip={t('loading')}
+        type={ButtonType.Secondary}
+        className={classNames(styles.iconContainer, styles.verseAction)}
+        shape={ButtonShape.Circle}
+      >
         <Spinner />
       </Button>
     );
@@ -82,8 +89,10 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
         size={ButtonSize.Small}
         tooltip={t('audio.player.pause')}
         onClick={onPauseClicked}
+        className={classNames(styles.iconContainer, styles.verseAction)}
+        shape={ButtonShape.Circle}
       >
-        <span className={styles.icon}>
+        <span className={classNames(styles.icon)}>
           <PauseIcon />
         </span>
       </Button>
