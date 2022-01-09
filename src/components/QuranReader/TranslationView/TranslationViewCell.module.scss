@@ -4,6 +4,9 @@
 .cellContainer {
   display: flex;
   flex-direction: column;
+  @include breakpoints.tablet {
+    flex-direction: row;
+  }
   justify-content: space-between;
 }
 .chapterHeaderContainer,
@@ -26,6 +29,10 @@
 .actionContainer {
   display: flex;
   justify-content: space-between;
+  @include breakpoints.tablet {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
   direction: ltr;
 }
 .arabicVerseContainer {
@@ -42,6 +49,10 @@
 .actionContainerLeft,
 .actionContainerRight {
   display: flex;
+
+  @include breakpoints.tablet {
+    flex-direction: column;
+  }
   align-items: center;
 }
 .actionContainerLeft {
