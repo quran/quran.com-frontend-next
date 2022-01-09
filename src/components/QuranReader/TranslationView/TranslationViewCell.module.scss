@@ -56,14 +56,6 @@
   margin-inline-start: var(--spacing-xxsmall);
 }
 
-.secondaryActionItem {
-  transition: opacity var(--transition-fast) ease-in-out;
-  display: none;
-  @include breakpoints.tablet {
-    display: initial;
-  }
-}
-
 .iconContainer.verseAction {
   color: var(--color-text-default);
   opacity: var(--opacity-75);
