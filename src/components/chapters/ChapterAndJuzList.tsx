@@ -1,7 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useMemo } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import CaretDownIcon from '../../../public/icons/caret-down.svg';
@@ -88,14 +87,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
           </div>
         </div>
       </div>
-      <div
-        className={classNames({
-          [styles.surahLayout]: view === View.Surah,
-          [styles.juzLayout]: view === View.Juz,
-        })}
-      >
-        {view === View.Surah &&
-          sortedChapters.map((chapter) => (
+      {view === View.Surah && (
+        <div className={styles.surahLayout}>
+          {sortedChapters.map((chapter) => (
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link href={`/${chapter.id}`}>
                 <SurahPreviewRow
@@ -109,8 +103,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               </Link>
             </div>
           ))}
-        {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
-      </div>
+        </div>
+      )}
+      {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
     </>
   );
 };

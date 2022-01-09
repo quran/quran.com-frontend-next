@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import Masonry from 'react-masonry-css';
 
 import Link, { LinkVariant } from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
@@ -35,7 +36,11 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
   }
 
   return (
-    <>
+    <Masonry
+      breakpointCols={3}
+      className={styles.masonryGrid}
+      columnClassName={styles.masonryGridColumn}
+    >
       {sortedJuzIds.map((juzEntry) => {
         const [juzId, chapterAndVerseMappings] = juzEntry;
         const chapterIds = Object.keys(chapterAndVerseMappings);
@@ -66,7 +71,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
           </div>
         );
       })}
-    </>
+    </Masonry>
   );
 };
 

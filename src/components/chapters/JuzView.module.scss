@@ -36,3 +36,19 @@
 .loadingContainer {
   min-height: 100vh; // reduce layout shift
 }
+
+.masonryGrid {
+  display: flex;
+  --gutter: calc(2 * var(--spacing-medium));
+  margin-inline-start: calc(-1 * var(--gutter));
+  width: auto;
+}
+
+.masonryGridColumn {
+  padding-inline-start: var(--gutter);
+  background-clip: padding-box;
+}
+
+.masonryGridColumn > div {
+  margin-block-end: 30px;
+}
