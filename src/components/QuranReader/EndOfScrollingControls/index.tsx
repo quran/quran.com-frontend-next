@@ -4,7 +4,6 @@ import ChapterControls from './ChapterControls';
 import styles from './EndOfScrollingControls.module.scss';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
-import TafsirControls from './TafsirControls';
 import VerseControls from './VerseControls';
 
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -16,7 +15,6 @@ interface Props {
 }
 
 const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVerse }) => {
-  const isTafsirIdSetFromUrl = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   return (
     <div className={styles.container}>
       <div className={styles.buttonsContainer}>
@@ -29,9 +27,6 @@ const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVers
         )}
         {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
         {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
-        {(quranReaderDataType === QuranReaderDataType.Tafsir || isTafsirIdSetFromUrl) && (
-          <TafsirControls lastVerse={lastVerse} isTafsirIdSetFromUrl={isTafsirIdSetFromUrl} />
-        )}
       </div>
     </div>
   );
