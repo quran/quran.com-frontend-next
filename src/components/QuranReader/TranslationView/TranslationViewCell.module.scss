@@ -1,4 +1,5 @@
 @use "src/styles/breakpoints";
+@use "src/styles/utility";
 
 .cellContainer {
   display: flex;
@@ -19,7 +20,6 @@
 
 .contentContainer {
   flex: 1;
-  padding-block-start: var(--spacing-medium);
   position: relative;
 }
 
@@ -56,10 +56,29 @@
   margin-inline-start: var(--spacing-xxsmall);
 }
 
-.secondaryActionItem {
-  transition: opacity var(--transition-fast) ease-in-out;
-  display: none;
-  @include breakpoints.tablet {
-    display: initial;
+.iconContainer.verseAction {
+  color: var(--color-text-default);
+  opacity: var(--opacity-75);
+  height: calc(2.2 * var(--spacing-medium));
+  width: calc(2.2 * var(--spacing-medium));
+  &:hover {
+    color: var(--color-success-medium);
+    background-color: var(--color-success-medium);
+    @include utility.lighten-background-color;
   }
+}
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  & > svg {
+    width: calc(1.1 * var(--spacing-medium));
+    height: calc(1.1 * var(--spacing-medium));
+  }
+}
+
+// fix optical illussion for triangle icon inside circle button
+.playIcon {
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-left: calc(0.5 * var(--spacing-xxsmall));
 }
