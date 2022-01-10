@@ -1,7 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
@@ -10,7 +9,7 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { logEvent } from 'src/utils/eventLogger';
@@ -31,13 +30,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
     <div className={styles.container}>
       <PopoverMenu
         trigger={
-          <Button
-            size={ButtonSize.Small}
-            tooltip={t('more')}
-            variant={ButtonVariant.Ghost}
-            shape={ButtonShape.Circle}
-            className={classNames(cellStyles.iconContainer, cellStyles.verseAction)}
-          >
+          <Button type={ButtonType.Secondary} size={ButtonSize.Small} tooltip={t('more')}>
             <span className={cellStyles.icon}>
               <OverflowMenuIcon />
             </span>
