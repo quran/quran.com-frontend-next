@@ -58,15 +58,10 @@
 
 .iconContainer.verseAction {
   color: var(--color-text-default);
-  opacity: var(--opacity-75);
   height: calc(2.2 * var(--spacing-medium));
   width: calc(2.2 * var(--spacing-medium));
-  &:hover {
-    color: var(--color-success-medium);
-    background-color: var(--color-success-medium);
-    @include utility.lighten-background-color;
-  }
 }
+
 .icon {
   display: inline-flex;
   align-items: center;

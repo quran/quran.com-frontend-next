@@ -4,18 +4,13 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause-outline.svg';
-import PlayIcon from '../../../public/icons/play-outline.svg';
+import PauseIcon from '../../../public/icons/pause.svg';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
-import Button, {
-  ButtonShape,
-  ButtonSize,
-  ButtonType,
-  ButtonVariant,
-} from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 import {
   selectReciter,
   playFrom,
@@ -78,7 +73,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   if (isVerseBeingPlayed)
     return (
       <Button
-        variant={ButtonVariant.Ghost}
+        type={ButtonType.Secondary}
         size={ButtonSize.Small}
         tooltip={t('audio.player.pause')}
         onClick={onPauseClicked}
@@ -93,13 +88,11 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
     <Button
       size={ButtonSize.Small}
       tooltip={t('audio.player.play')}
-      variant={ButtonVariant.Ghost}
+      type={ButtonType.Secondary}
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
-      shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction)}
     >
-      <span className={classNames(styles.icon, styles.playIcon)}>
+      <span className={classNames(styles.icon)}>
         <PlayIcon />
       </span>
     </Button>
