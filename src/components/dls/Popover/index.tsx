@@ -53,11 +53,8 @@ const Popover: React.FC<Props> = ({
       {...(typeof open !== 'undefined' && { open })}
       {...(onOpenChange && { onOpenChange })}
     >
-      <RadixPopover.Trigger
-        aria-label="Open popover"
-        className={classNames(styles.trigger, triggerStyles)}
-      >
-        {trigger}
+      <RadixPopover.Trigger aria-label="Open popover" asChild>
+        <span className={classNames(styles.trigger, triggerStyles)}>{trigger}</span>
       </RadixPopover.Trigger>
       <RadixPopover.Content
         sideOffset={2}
