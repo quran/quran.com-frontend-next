@@ -65,11 +65,11 @@ const QuranReader = ({
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const { data, isValidating } = useSWRInfinite(
-    (index) =>
+  const { data, size, setSize } = useSWRInfinite(
+    (pageIndex) =>
       getRequestKey({
         quranReaderDataType,
-        index,
+        pageIndex,
         initialData,
         quranReaderStyles,
         selectedTranslations,
@@ -120,7 +120,7 @@ const QuranReader = ({
     loader = <Loader />;
   }
   // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
-  if (isValidating || !data) {
+  if (!data) {
     return loader;
   }
   const verses = data.flat(1);
@@ -146,6 +146,8 @@ const QuranReader = ({
             initialData={initialData}
             verses={verses}
             quranReaderDataType={quranReaderDataType}
+            size={size}
+            setSize={setSize}
           />
         </div>
       </div>

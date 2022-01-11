@@ -19,6 +19,8 @@ interface Props {
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
+  size: number;
+  setSize: (size: number | ((_size: number) => number)) => Promise<Verse[]>;
 }
 
 const QuranReaderView: React.FC<Props> = ({
@@ -27,6 +29,8 @@ const QuranReaderView: React.FC<Props> = ({
   quranReaderStyles,
   quranReaderDataType,
   initialData,
+  size,
+  setSize,
 }) => {
   if (isReadingPreference) {
     return (
@@ -48,6 +52,8 @@ const QuranReaderView: React.FC<Props> = ({
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}
         initialData={initialData}
+        size={size}
+        setSize={setSize}
       />
     </>
   );
