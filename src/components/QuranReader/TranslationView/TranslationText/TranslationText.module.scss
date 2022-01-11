@@ -1,12 +1,14 @@
 @use "src/styles/utility";
 @use "src/components/QuranReader/TranslationView/TranslationText/footnote";
 
+$translation-line-height: 1.5;
+
 .text {
+  @include footnote.footnote-styling;
   letter-spacing: 0;
-  line-height: normal;
+  line-height: $translation-line-height;
   padding-block-end: var(--spacing-micro);
   opacity: var(--opacity-85);
-  @include footnote.footnote-styling;
 }
 
 @include utility.generate-font-sizes("translation");
@@ -36,6 +38,7 @@
 }
 
 .translationName {
+  margin-block-start: calc(0.5 * var(--spacing-xxsmall));
   color: var(--color-text-faded);
   font-size: var(--font-size-small);
 }

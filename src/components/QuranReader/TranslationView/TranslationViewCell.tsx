@@ -68,10 +68,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             </div>
           </div>
           <div className={styles.actionContainerRight}>
-            <div className={classNames(styles.actionItem, styles.secondaryActionItem)}>
+            <div className={classNames(styles.actionItem)}>
               <ShareVerseButton verseKey={verse.verseKey} />
             </div>
-            <div className={classNames(styles.actionItem, styles.secondaryActionItem)}>
+            <div className={classNames(styles.actionItem)}>
               <QuranReflectButton verseKey={verse.verseKey} />
             </div>
             <div className={styles.actionItem}>

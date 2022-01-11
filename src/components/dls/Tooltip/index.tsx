@@ -59,8 +59,8 @@ const Tooltip: React.FC<Props> = ({
     {...(typeof open !== 'undefined' && { open })}
     {...(onOpenChange && { onOpenChange })}
   >
-    <RadixTooltip.Trigger aria-label="Open tooltip" className={styles.trigger}>
-      {children}
+    <RadixTooltip.Trigger aria-label="Open tooltip" asChild>
+      <span className={styles.trigger}>{children}</span>
     </RadixTooltip.Trigger>
     <RadixTooltip.Content
       sideOffset={2}
