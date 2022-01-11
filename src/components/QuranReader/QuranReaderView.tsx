@@ -7,6 +7,7 @@ import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -17,6 +18,9 @@ interface Props {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
+  initialData: VersesResponse;
+  size: number;
+  setSize: (size: number | ((_size: number) => number)) => Promise<Verse[]>;
 }
 
 const QuranReaderView: React.FC<Props> = ({
@@ -24,6 +28,9 @@ const QuranReaderView: React.FC<Props> = ({
   verses,
   quranReaderStyles,
   quranReaderDataType,
+  initialData,
+  size,
+  setSize,
 }) => {
   if (isReadingPreference) {
     return (
@@ -44,6 +51,9 @@ const QuranReaderView: React.FC<Props> = ({
         verses={verses}
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}
+        initialData={initialData}
+        size={size}
+        setSize={setSize}
       />
     </>
   );

@@ -11,7 +11,6 @@ import { getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Loader from './Loader';
-import Loading from './Loading';
 import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import onCopyQuranWords from './onCopyQuranWords';
@@ -66,11 +65,11 @@ const QuranReader = ({
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const { data, isValidating } = useSWRInfinite(
-    (index) =>
+  const { data, size, setSize } = useSWRInfinite(
+    (pageIndex) =>
       getRequestKey({
         quranReaderDataType,
-        index,
+        pageIndex,
         initialData,
         quranReaderStyles,
         selectedTranslations,
@@ -112,21 +111,6 @@ const QuranReader = ({
     onElementVisible,
     QURAN_READER_OBSERVER_ID,
   );
-  // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
-  if (!data) {
-    return (
-      <Loading
-        containerClassName={styles.container}
-        visibleSideBarClassName={styles.withVisibleSideBar}
-        isSideBarVisible={isSideBarVisible}
-      />
-    );
-  }
-  const verses = data.flat(1);
-  if (!verses.length) {
-    return <Error />;
-  }
-
   let loader;
   if (readingPreference === ReadingPreference.Translation) {
     loader = <TranslationViewSkeleton />;
@@ -135,9 +119,13 @@ const QuranReader = ({
   } else {
     loader = <Loader />;
   }
-
-  if (isValidating) {
+  // if we are fetching the data (this will only happen when the user has changed the default translations/tafsirs so the initialData will be set to null).
+  if (!data) {
     return loader;
+  }
+  const verses = data.flat(1);
+  if (!verses.length) {
+    return <Error />;
   }
 
   return (
@@ -155,8 +143,11 @@ const QuranReader = ({
           <QuranReaderBody
             isReadingPreference={isReadingPreference}
             quranReaderStyles={quranReaderStyles}
+            initialData={initialData}
             verses={verses}
             quranReaderDataType={quranReaderDataType}
+            size={size}
+            setSize={setSize}
           />
         </div>
       </div>

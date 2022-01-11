@@ -10,7 +10,7 @@ import Verse from 'types/Verse';
 
 interface RequestKeyInput {
   quranReaderDataType: QuranReaderDataType;
-  index: number;
+  pageIndex: number;
   initialData: VersesResponse;
   quranReaderStyles: QuranReaderStyles;
   selectedTranslations: number[];
@@ -32,7 +32,7 @@ export const getRequestKey = ({
   id,
   isVerseData,
   initialData,
-  index,
+  pageIndex,
   quranReaderStyles,
   quranReaderDataType,
   selectedTranslations,
@@ -41,7 +41,7 @@ export const getRequestKey = ({
   wordByWordLocale,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page = isVerseData ? initialData.verses[0].verseNumber : index + 1;
+  const page = isVerseData ? initialData.verses[0].verseNumber : pageIndex + 1;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
       wordTranslationLanguage: wordByWordLocale,
