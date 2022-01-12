@@ -29,17 +29,15 @@ const QuranReaderBody: React.FC<Props> = ({
 }) => {
   useQcfFont(quranReaderStyles.quranFont, verses);
   return (
-    <>
-      <QuranReaderView
-        initialData={initialData}
-        verses={verses}
-        isReadingPreference={isReadingPreference}
-        quranReaderStyles={quranReaderStyles}
-        quranReaderDataType={quranReaderDataType}
-        size={size}
-        setSize={setSize}
-      />
-    </>
+    <QuranReaderView
+      initialData={initialData}
+      verses={verses}
+      isReadingPreference={isReadingPreference}
+      quranReaderStyles={quranReaderStyles}
+      quranReaderDataType={quranReaderDataType}
+      size={size}
+      setSize={setSize}
+    />
   );
 };
 

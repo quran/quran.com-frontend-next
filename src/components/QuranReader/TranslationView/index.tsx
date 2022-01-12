@@ -22,7 +22,6 @@ type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
-  size: number;
   setSize: (size: number | ((_size: number) => number)) => Promise<Verse[]>;
 };
 
@@ -58,7 +57,6 @@ const TranslationView = ({
   initialData,
   verses,
   setSize,
-  size,
 }: TranslationViewProps) => {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useQcfFont(quranReaderStyles.quranFont, verses);
@@ -67,10 +65,13 @@ const TranslationView = ({
   const showChapterHeader = firstVerseNumber === 1;
 
   const onRangeChange = (renderedRange: ListRange) => {
-    if (size * ITEMS_PER_PAGE - renderedRange.endIndex + 1 <= FETCHING_THRESHOLD) {
-      const pageNumberOfRange = Math.floor(renderedRange.endIndex / ITEMS_PER_PAGE) + 1;
-      setSize(pageNumberOfRange);
-    }
+    setSize((prevSize) => {
+      if (prevSize * ITEMS_PER_PAGE - renderedRange.endIndex + 1 <= FETCHING_THRESHOLD) {
+        const pageNumberOfRange = Math.floor(renderedRange.endIndex / ITEMS_PER_PAGE) + 1;
+        return pageNumberOfRange;
+      }
+      return prevSize;
+    });
   };
 
   const itemContentRenderer = (currentVerseIndex: number) => {

@@ -3,19 +3,19 @@ import React, { useMemo, memo, useRef } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import { useDispatch } from 'react-redux';
-import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { verseFontChanged } from '../utils/memoization';
 
 import groupPagesByVerses from './groupPagesByVerses';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
+import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -28,17 +28,55 @@ type ReadingViewProps = {
   verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
+  setSize: (size: number | ((_size: number) => number)) => Promise<Verse[]>;
+  initialData: VersesResponse;
 };
 
-const ReadingView = ({ verses, quranReaderStyles, quranReaderDataType }: ReadingViewProps) => {
+const getTotalCount = (
+  quranReaderDataType: QuranReaderDataType,
+  initialData: VersesResponse,
+): number => {
+  if (quranReaderDataType === QuranReaderDataType.Verse) {
+    return 1;
+  }
+  // TODO: a problem of number of pages
+  // TODO: add page/juz
+  return initialData.pagination.totalPages;
+};
+
+const ReadingView = ({
+  verses,
+  quranReaderStyles,
+  quranReaderDataType,
+  setSize,
+  initialData,
+}: ReadingViewProps) => {
   const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
   const pageNumbers = Object.keys(pages);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
-  const dispatch = useDispatch();
   const { quranTextFontScale } = quranReaderStyles;
   const [firstPage] = pageNumbers;
   const [firstVerseOfFirstPage] = pages[firstPage];
   const showChapterHeader = firstVerseOfFirstPage.verseNumber === 1;
+
+  const onRangeChange = (range: ListRange) => {
+    setSize(range.endIndex + 1);
+  };
+
+  const itemContentRenderer = (currentPageIndex: number) => {
+    const pageNumber = pageNumbers[currentPageIndex];
+    return pageNumber ? (
+      <Page
+        verses={pages[pageNumber]}
+        key={`page-${pageNumber}`}
+        page={Number(pageNumber)}
+        quranReaderStyles={quranReaderStyles}
+        pageIndex={currentPageIndex}
+      />
+    ) : (
+      <ReadingViewSkeleton />
+    );
+  };
 
   return (
     <div
@@ -50,35 +88,12 @@ const ReadingView = ({ verses, quranReaderStyles, quranReaderDataType }: Reading
       <Virtuoso
         ref={virtuosoRef}
         useWindowScroll
-        overscan={1}
+        overscan={800}
         style={{ width: '100%' }}
-        rangeChanged={(range) => {
-          const pageNumber = pageNumbers[range.startIndex];
-          const firstVisibleVerse = pages[pageNumber][0];
-          dispatch({
-            type: setLastReadVerse.type,
-            payload: {
-              verseKey: firstVisibleVerse.verseKey,
-              chapterId: firstVisibleVerse.chapterId,
-              page: firstVisibleVerse.pageNumber,
-              hizb: firstVisibleVerse.hizbNumber,
-            },
-          });
-        }}
-        initialItemCount={1} // needed for SSR
-        totalCount={pageNumbers.length}
-        itemContent={(index) => {
-          const pageNumber = pageNumbers[index];
-          return pageNumber ? (
-            <Page
-              verses={pages[pageNumber]}
-              key={`page-${pageNumber}`}
-              page={Number(pageNumber)}
-              quranReaderStyles={quranReaderStyles}
-              pageIndex={index}
-            />
-          ) : null;
-        }}
+        rangeChanged={onRangeChange}
+        initialItemCount={1} // needed for SSR.
+        totalCount={getTotalCount(quranReaderDataType, initialData)}
+        itemContent={itemContentRenderer}
         components={{
           Footer: () => (
             <EndOfScrollingControls

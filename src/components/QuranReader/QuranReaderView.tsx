@@ -29,7 +29,6 @@ const QuranReaderView: React.FC<Props> = ({
   quranReaderStyles,
   quranReaderDataType,
   initialData,
-  size,
   setSize,
 }) => {
   if (isReadingPreference) {
@@ -40,6 +39,8 @@ const QuranReaderView: React.FC<Props> = ({
           verses={verses}
           quranReaderStyles={quranReaderStyles}
           quranReaderDataType={quranReaderDataType}
+          setSize={setSize}
+          initialData={initialData}
         />
       </>
     );
@@ -52,7 +53,6 @@ const QuranReaderView: React.FC<Props> = ({
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}
         initialData={initialData}
-        size={size}
         setSize={setSize}
       />
     </>
