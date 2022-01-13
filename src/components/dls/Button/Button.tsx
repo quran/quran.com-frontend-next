@@ -50,6 +50,7 @@ export type ButtonProps = {
   className?: string;
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
+  shallowRouting?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -68,6 +69,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   hasSidePadding = true,
   shouldFlipOnRTL = true,
+  shallowRouting = false,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -105,7 +107,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href && !disabled)
     return (
-      <Link href={href}>
+      <Link href={href} shallow={shallowRouting}>
         <a
           {...(onClick && { onClick })}
           dir={direction}
