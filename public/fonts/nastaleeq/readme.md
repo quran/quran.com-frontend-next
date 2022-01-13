@@ -1,0 +1,4 @@
+- v3.7 font contains waqf-lazim margin indicator
+- and v3.6 does not contain waqf-lazim margin indicator
+- We can toggle b/w these fonts using a switch in the UI
+- For now, just show the waqf lazim glyph
