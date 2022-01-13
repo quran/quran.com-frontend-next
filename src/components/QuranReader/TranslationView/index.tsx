@@ -12,7 +12,6 @@ import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useQcfFont from 'src/hooks/useQcfFont';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getChapterData } from 'src/utils/chapter';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -31,21 +30,13 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
 });
 
 const getTotalCount = (
-  firstVerse: Verse,
   quranReaderDataType: QuranReaderDataType,
   initialData: VersesResponse,
 ): number => {
-  const { chapterId } = firstVerse;
   if (quranReaderDataType === QuranReaderDataType.Verse) {
     return 1;
   }
-  if (quranReaderDataType === QuranReaderDataType.VerseRange) {
-    return Number(initialData.metaData.to) - Number(initialData.metaData.from) + 1;
-  }
-
-  // TODO: add page/juz
-  const chapterData = getChapterData(String(chapterId));
-  return chapterData.versesCount;
+  return initialData.pagination.totalRecords;
 };
 
 const FETCHING_THRESHOLD = 5;
@@ -60,9 +51,6 @@ const TranslationView = ({
 }: TranslationViewProps) => {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useQcfFont(quranReaderStyles.quranFont, verses);
-  const [firstVerse] = verses;
-  const { verseNumber: firstVerseNumber } = firstVerse;
-  const showChapterHeader = firstVerseNumber === 1;
 
   const onRangeChange = (renderedRange: ListRange) => {
     setSize((prevSize) => {
@@ -75,13 +63,23 @@ const TranslationView = ({
   };
 
   const itemContentRenderer = (currentVerseIndex: number) => {
-    return verses[currentVerseIndex] ? (
-      <TranslationViewCell
-        verseIndex={currentVerseIndex}
-        verse={verses[currentVerseIndex]}
-        key={verses[currentVerseIndex].id}
-        quranReaderStyles={quranReaderStyles}
-      />
+    const currentVerse = verses[currentVerseIndex];
+    return currentVerse ? (
+      <>
+        {currentVerse.verseNumber === 1 && (
+          <ChapterHeader
+            chapterId={String(currentVerse.chapterId)}
+            pageNumber={currentVerse.pageNumber}
+            hizbNumber={currentVerse.hizbNumber}
+          />
+        )}
+        <TranslationViewCell
+          verseIndex={currentVerseIndex}
+          verse={verses[currentVerseIndex]}
+          key={verses[currentVerseIndex].id}
+          quranReaderStyles={quranReaderStyles}
+        />
+      </>
     ) : (
       <TranslationViewCellSkeleton />
     );
@@ -92,10 +90,10 @@ const TranslationView = ({
       <Virtuoso
         ref={virtuosoRef}
         useWindowScroll
-        totalCount={getTotalCount(firstVerse, quranReaderDataType, initialData)}
+        totalCount={getTotalCount(quranReaderDataType, initialData)}
         overscan={800}
         rangeChanged={onRangeChange}
-        initialItemCount={verses.length} // needed for SSR.
+        initialItemCount={initialData.verses.length} // needed for SSR.
         itemContent={itemContentRenderer}
         components={{
           Footer: () => (
@@ -104,15 +102,6 @@ const TranslationView = ({
               lastVerse={verses[verses.length - 1]}
             />
           ),
-          ...(showChapterHeader && {
-            Header: () => (
-              <ChapterHeader
-                chapterId={String(firstVerse.chapterId)}
-                pageNumber={firstVerse.pageNumber}
-                hizbNumber={firstVerse.hizbNumber}
-              />
-            ),
-          }),
         }}
       />
     </div>

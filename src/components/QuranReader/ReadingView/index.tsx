@@ -12,7 +12,6 @@ import Page from './Page';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
@@ -39,8 +38,6 @@ const getTotalCount = (
   if (quranReaderDataType === QuranReaderDataType.Verse) {
     return 1;
   }
-  // TODO: a problem of number of pages
-  // TODO: add page/juz
   return initialData.pagination.totalPages;
 };
 
@@ -55,9 +52,6 @@ const ReadingView = ({
   const pageNumbers = Object.keys(pages);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const { quranTextFontScale } = quranReaderStyles;
-  const [firstPage] = pageNumbers;
-  const [firstVerseOfFirstPage] = pages[firstPage];
-  const showChapterHeader = firstVerseOfFirstPage.verseNumber === 1;
 
   const onRangeChange = (range: ListRange) => {
     setSize(range.endIndex + 1);
@@ -101,15 +95,6 @@ const ReadingView = ({
               lastVerse={verses[verses.length - 1]}
             />
           ),
-          ...(showChapterHeader && {
-            Header: () => (
-              <ChapterHeader
-                chapterId={firstVerseOfFirstPage.chapterId}
-                pageNumber={firstVerseOfFirstPage.pageNumber}
-                hizbNumber={firstVerseOfFirstPage.hizbNumber}
-              />
-            ),
-          }),
         }}
       />
     </div>
