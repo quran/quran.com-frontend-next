@@ -18,6 +18,17 @@ export const getVerseNavigationUrlByVerseKey = (verseKey: string): string => {
 };
 
 /**
+ * Get the scroll to link of a verseKey.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getScrollToNavigationUrlByVerseKey = (verseKey: string): string => {
+  const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  return `/${chapterId}?startingVerse=${verseNumber}`;
+};
+
+/**
  * Get the href link to a verse.
  *
  * @param {string} chapterIdOrSlug

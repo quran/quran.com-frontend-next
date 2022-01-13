@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
+import { getScrollToNavigationUrlByVerseKey } from 'src/utils/navigation';
 
 interface Props {
   verseKey: string;
@@ -16,7 +16,8 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
   return (
     <Button
       size={ButtonSize.Small}
-      href={getVerseNavigationUrlByVerseKey(verseKey)}
+      href={getScrollToNavigationUrlByVerseKey(verseKey)}
+      shallowRouting
       variant={ButtonVariant.Ghost}
       onClick={() => {
         logButtonClick('translation_view_verse_link');

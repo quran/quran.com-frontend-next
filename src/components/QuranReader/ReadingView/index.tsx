@@ -1,8 +1,10 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, memo, useRef } from 'react';
+import React, { useMemo, memo, useRef, useEffect } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import { verseFontChanged } from '../utils/memoization';
@@ -12,8 +14,12 @@ import Page from './Page';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
+import { fetcher } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import useQcfFont from 'src/hooks/useQcfFont';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getMushafId } from 'src/utils/api';
+import { makeVersesFilterUrl } from 'src/utils/apiPaths';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -48,10 +54,52 @@ const ReadingView = ({
   setSize,
   initialData,
 }: ReadingViewProps) => {
+  const router = useRouter();
+  const { startingVerse, chapterId } = router.query;
+  useQcfFont(quranReaderStyles.quranFont, verses);
   const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
   const pageNumbers = Object.keys(pages);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const { quranTextFontScale } = quranReaderStyles;
+
+  useEffect(() => {
+    // if startingVerse is present in the url
+    if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
+      const startingVerseNumber = Number(startingVerse);
+      // if the startingVerse is a valid integer and is above 1
+      if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
+        const firstPageOfCurrentChapter = initialData.verses[0].pageNumber;
+        // search for the verse number in the already fetched verses first
+        const startFromVerse = verses.find((verse) => verse.verseNumber === startingVerseNumber);
+        if (startFromVerse) {
+          virtuosoRef.current.scrollToIndex(startFromVerse.pageNumber - firstPageOfCurrentChapter);
+        } else {
+          // get the page number by the verse key and the mushafId (because the page will be different for Indopak Mushafs)
+          fetcher(
+            makeVersesFilterUrl({
+              filters: `${chapterId}:${startingVerseNumber}`,
+              fields: `page_number`,
+              ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+            }),
+          ).then((response: VersesResponse) => {
+            if (response.verses.length) {
+              virtuosoRef.current.scrollToIndex(
+                response.verses[0].pageNumber - firstPageOfCurrentChapter,
+              );
+            }
+          });
+        }
+      }
+    }
+  }, [
+    startingVerse,
+    quranReaderDataType,
+    chapterId,
+    verses,
+    quranReaderStyles.quranFont,
+    quranReaderStyles.mushafLines,
+    initialData.verses,
+  ]);
 
   const onRangeChange = (range: ListRange) => {
     setSize(range.endIndex + 1);

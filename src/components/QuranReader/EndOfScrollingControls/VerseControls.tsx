@@ -6,7 +6,7 @@ import EndOfScrollingButton from './EndOfScrollingButton';
 
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getSurahNavigationUrl, getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
+import { getSurahNavigationUrl, getScrollToNavigationUrlByVerseKey } from 'src/utils/navigation';
 import { isLastVerseOfSurah as isLastVerse } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -16,7 +16,7 @@ interface Props {
 
 const VerseControls: React.FC<Props> = ({ lastVerse }) => {
   const { t } = useTranslation('quran-reader');
-  const { chapterId, verseNumber } = lastVerse;
+  const { chapterId, verseNumber, verseKey } = lastVerse;
   const chapterNumber = Number(chapterId);
   const isLastVerseOfSurah = isLastVerse(String(chapterId), verseNumber);
   return (
@@ -41,7 +41,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
           />
           <EndOfScrollingButton
             text={t('common:continue')}
-            href={getVerseToEndOfChapterNavigationUrl(`${chapterId}:${verseNumber}`)}
+            href={getScrollToNavigationUrlByVerseKey(verseKey)}
             onClick={() => {
               logButtonClick('verse_control_continue');
             }}

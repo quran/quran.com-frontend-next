@@ -19,7 +19,6 @@ interface Props {
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
-  size: number;
   setSize: (size: number | ((_size: number) => number)) => Promise<Verse[]>;
 }
 

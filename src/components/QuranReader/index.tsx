@@ -1,5 +1,4 @@
 /* eslint-disable react/no-multi-comp */
-/* eslint-disable max-lines */
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
@@ -65,7 +64,7 @@ const QuranReader = ({
   const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const { data, size, setSize } = useSWRInfinite(
+  const { data, setSize } = useSWRInfinite(
     (pageIndex) =>
       getRequestKey({
         quranReaderDataType,
@@ -146,7 +145,6 @@ const QuranReader = ({
             initialData={initialData}
             verses={verses}
             quranReaderDataType={quranReaderDataType}
-            size={size}
             setSize={setSize}
           />
         </div>
