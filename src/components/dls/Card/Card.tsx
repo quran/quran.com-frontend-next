@@ -44,6 +44,9 @@ const Card = ({ size, title, description, onClick, imgSrc }: CardProps) => {
           </Button>
         )}
       </div>
+      <div className={styles.cardHoverEffectContainer} data-theme="dark">
+        <PlayIcon />
+      </div>
     </div>
   );
 };
