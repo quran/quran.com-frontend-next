@@ -1,9 +1,12 @@
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
 
-import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import styles from './TranslationViewCell.module.scss';
+
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { logButtonClick } from 'src/utils/eventLogger';
 
@@ -17,7 +20,7 @@ const BookmarkIcon = ({ verseKey }: { verseKey: string }) => {
 
   return (
     <Button
-      type={ButtonType.Secondary}
+      className={classNames(styles.iconContainer, styles.verseAction)}
       onClick={() => {
         logButtonClick('translation_view_un_bookmark_verse');
         dispatch(toggleVerseBookmark(verseKey));
