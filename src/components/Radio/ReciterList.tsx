@@ -7,7 +7,7 @@ import styles from './ReciterList.module.scss';
 
 import { exitRepeatMode, playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
-import { getChapterNumberFromKey, getRandomVerseKey } from 'src/utils/verse';
+import { getRandomChapterId } from 'src/utils/chapter';
 import { RecitersResponse } from 'types/ApiResponses';
 
 const ReciterList = () => {
@@ -15,15 +15,14 @@ const ReciterList = () => {
 
   const playRandomVerseFromSelectedReciter = async (reciterId: number) => {
     // clean up, make sure we're not in repeat mode
-    const randomVerseKey = await getRandomVerseKey();
 
     dispatch(exitRepeatMode());
 
     dispatch(
       playFrom({
-        chapterId: getChapterNumberFromKey(randomVerseKey),
+        chapterId: getRandomChapterId(),
         reciterId,
-        verseKey: randomVerseKey,
+        shouldUseRandomTimestamp: true,
       }),
     );
   };

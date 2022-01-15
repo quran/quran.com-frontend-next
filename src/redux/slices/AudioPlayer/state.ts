@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import random from 'lodash/random';
 
 import { getChapterAudioData } from 'src/api';
 import {
@@ -107,10 +108,11 @@ interface PlayFromInput {
   chapterId: number;
   reciterId: number;
   timestamp?: number;
+  shouldUseRandomTimestamp?: boolean;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
-  async ({ verseKey, chapterId, reciterId, timestamp }, thunkApi) => {
+  async ({ verseKey, chapterId, reciterId, timestamp, shouldUseRandomTimestamp }, thunkApi) => {
     const state = thunkApi.getState();
     const selectedReciter = selectReciter(state);
     let selectedAudioData = selectAudioData(state);
@@ -123,6 +125,12 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       selectedAudioData = await getChapterAudioData(reciterId, chapterId);
       thunkApi.dispatch(setAudioData(selectedAudioData));
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
+    }
+
+    if (shouldUseRandomTimestamp) {
+      const randomTimestamp = random(0, selectedAudioData.duration);
+      playFromTimestamp(randomTimestamp / 1000);
+      return;
     }
 
     // if `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
