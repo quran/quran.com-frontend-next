@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
@@ -17,9 +18,10 @@ type CardProps = {
   title: string;
   description?: string;
   onClick?: () => void;
+  imgSrc?: string;
 };
 
-const Card = ({ size, title, description, onClick }: CardProps) => {
+const Card = ({ size, title, description, onClick, imgSrc }: CardProps) => {
   return (
     <div
       onClick={onClick}
@@ -28,7 +30,9 @@ const Card = ({ size, title, description, onClick }: CardProps) => {
         [styles.medium]: size === CardSize.Medium,
       })}
     >
-      <div className={styles.imageContainer} />
+      <div className={styles.imageContainer}>
+        {imgSrc && <img alt={title} className={styles.img} src={imgSrc} />}
+      </div>
       <div className={styles.bodyContainer}>
         <div className={styles.textsContainer}>
           <div className={styles.title}>{title}</div>
