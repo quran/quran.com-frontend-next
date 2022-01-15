@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 
+import PlayIcon from '../../../public/icons/play-arrow.svg';
 import DataFetcher from '../DataFetcher';
 import Card, { CardSize } from '../dls/Card/Card';
 
@@ -53,6 +54,7 @@ const ReciterList = () => {
           <div className={styles.container}>
             {data.reciters.map((reciter) => (
               <Card
+                hoverIcon={<PlayIcon />}
                 imgSrc={reciterPictures[reciter.id]}
                 key={reciter.id}
                 onClick={() => {

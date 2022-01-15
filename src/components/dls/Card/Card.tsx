@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { ReactNode } from 'react';
+
 import classNames from 'classnames';
 
-import PlayIcon from '../../../../public/icons/play-outline.svg';
+import PlayIcon from '../../../../public/icons/play-arrow.svg';
 import Button, { ButtonVariant } from '../Button/Button';
 
 import styles from './Card.module.scss';
@@ -19,9 +21,10 @@ type CardProps = {
   description?: string;
   onClick?: () => void;
   imgSrc?: string;
+  hoverIcon: ReactNode;
 };
 
-const Card = ({ size, title, description, onClick, imgSrc }: CardProps) => {
+const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProps) => {
   return (
     <div
       onClick={onClick}
@@ -44,9 +47,11 @@ const Card = ({ size, title, description, onClick, imgSrc }: CardProps) => {
           </Button>
         )}
       </div>
-      <div className={styles.cardHoverEffectContainer} data-theme="dark">
-        <PlayIcon />
-      </div>
+      {hoverIcon && (
+        <div className={styles.cardHoverEffectContainer} data-theme="dark">
+          {hoverIcon}
+        </div>
+      )}
     </div>
   );
 };
