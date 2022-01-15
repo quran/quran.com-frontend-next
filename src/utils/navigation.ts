@@ -117,7 +117,7 @@ export const resolveUrlBySearchNavigationType = (
 ): string => {
   const stringKey = String(key);
   if (type === SearchNavigationType.AYAH) {
-    return getVerseNavigationUrlByVerseKey(stringKey);
+    return getChapterWithStartingVerseUrl(stringKey);
   }
   if (type === SearchNavigationType.JUZ) {
     return getJuzNavigationUrl(key);
