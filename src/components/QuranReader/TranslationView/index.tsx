@@ -1,10 +1,10 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import useScrollToTranslationViewVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import styles from './TranslationView.module.scss';
 import TranslationViewCell from './TranslationViewCell';
 import TranslationViewCellSkeleton from './TranslatioViewCellSkeleton';
@@ -50,21 +50,9 @@ const TranslationView = ({
   verses,
   setSize,
 }: TranslationViewProps) => {
-  const router = useRouter();
-  const { startingVerse } = router.query;
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useQcfFont(quranReaderStyles.quranFont, verses);
-
-  useEffect(() => {
-    // if startingVerse is present in the url
-    if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
-      const startingVerseNumber = Number(startingVerse);
-      // if the startingVerse is a valid integer and is above 1
-      if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
-        virtuosoRef.current.scrollToIndex(startingVerseNumber - 1);
-      }
-    }
-  }, [quranReaderDataType, startingVerse]);
+  useScrollToTranslationViewVirtualizedVerse(quranReaderDataType, virtuosoRef);
 
   const onRangeChange = (renderedRange: ListRange) => {
     setSize((prevSize) => {
