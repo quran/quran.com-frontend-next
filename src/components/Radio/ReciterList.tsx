@@ -15,6 +15,7 @@ const ReciterList = () => {
 
   const playRandomVerseFromSelectedReciter = async (reciterId: number) => {
     // clean up, make sure we're not in repeat mode
+    // TODO: add logging
 
     dispatch(exitRepeatMode());
 
@@ -38,7 +39,6 @@ const ReciterList = () => {
               <Card
                 key={reciter.id}
                 onClick={() => {
-                  console.log(reciter);
                   playRandomVerseFromSelectedReciter(reciter.id);
                 }}
                 title={reciter.name}
