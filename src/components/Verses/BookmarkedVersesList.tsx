@@ -32,6 +32,7 @@ const BookmarkedVersesList: React.FC = () => {
               return (
                 <Button
                   href={getVerseNavigationUrlByVerseKey(verseKey)}
+                  className={styles.bookmarkItem}
                   type={ButtonType.Success}
                   shape={ButtonShape.Pill}
                   key={verseKey}
