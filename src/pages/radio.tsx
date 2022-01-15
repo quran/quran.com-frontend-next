@@ -3,8 +3,8 @@ import classNames from 'classnames';
 
 import styles from './index.module.scss';
 
-import PlaylistGroup from 'src/components/Radio/PlaylistGroup';
 import RandomPlaylist from 'src/components/Radio/RandomPlaylist';
+import ReciterList from 'src/components/Radio/ReciterList';
 
 const Radio = () => {
   return (
@@ -14,13 +14,9 @@ const Radio = () => {
         <div className={classNames(styles.flowItem, styles.fullWidth)}>
           <RandomPlaylist />
         </div>
-        <div className={classNames(styles.flowItem)}>Popular Playlist</div>
+        <div className={classNames(styles.flowItem)}>All Reciters</div>
         <div className={classNames(styles.flowItem, styles.fullWidth)}>
-          <PlaylistGroup />
-        </div>
-        <div className={classNames(styles.flowItem)}>Classic Playlist</div>
-        <div className={classNames(styles.flowItem, styles.fullWidth)}>
-          <PlaylistGroup />
+          <ReciterList />
         </div>
       </div>
     </div>

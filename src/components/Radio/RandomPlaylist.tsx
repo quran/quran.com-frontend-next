@@ -1,4 +1,5 @@
-import PlaylistCard, { PlayListCardSize } from './PlaylistCard';
+import Card, { CardSize } from '../dls/Card/Card';
+
 import styles from './RandomPlaylist.module.scss';
 
 const playlists = [
@@ -20,7 +21,9 @@ const RandomPlaylist = () => {
   return (
     <div className={styles.container}>
       {playlists.map((playlist) => (
-        <PlaylistCard size={PlayListCardSize.Large} {...playlist} />
+        <div className={styles.item}>
+          <Card size={CardSize.Large} {...playlist} />
+        </div>
       ))}
     </div>
   );

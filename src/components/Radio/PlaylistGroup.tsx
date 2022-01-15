@@ -1,4 +1,5 @@
-import PlaylistCard, { PlayListCardSize } from './PlaylistCard';
+import Card, { CardSize } from '../dls/Card/Card';
+
 import styles from './PlaylistGroup.module.scss';
 
 const playlists = [
@@ -32,7 +33,7 @@ const PlaylistGroup = () => {
   return (
     <div className={styles.container}>
       {playlists.map((playlist) => (
-        <PlaylistCard size={PlayListCardSize.Medium} {...playlist} />
+        <Card size={CardSize.Medium} {...playlist} />
       ))}
     </div>
   );

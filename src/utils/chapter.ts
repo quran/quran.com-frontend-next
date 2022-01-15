@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
+import random from 'lodash/random';
+
 import Chapter from 'types/Chapter';
 
 const DEFAULT_LANGUAGE = 'en';
@@ -127,3 +129,8 @@ export const getChapterReadingProgress = (
   currentVerse: number,
   totalNumberOfVerses: number,
 ): number => Math.ceil((currentVerse * 100) / totalNumberOfVerses);
+
+const TOTAL_CHAPTERS = 114;
+export const getRandomChapterId = () => {
+  return random(1, TOTAL_CHAPTERS);
+};

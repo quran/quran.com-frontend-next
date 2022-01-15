@@ -1,27 +1,31 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
 
-import PlayIcon from '../../../public/icons/play-outline.svg';
-import Button, { ButtonVariant } from '../dls/Button/Button';
+import PlayIcon from '../../../../public/icons/play-outline.svg';
+import Button, { ButtonVariant } from '../Button/Button';
 
-import styles from './PlaylistCard.module.scss';
+import styles from './Card.module.scss';
 
-export enum PlayListCardSize {
+export enum CardSize {
   Medium = 'medium',
   Large = 'large',
 }
 
-type PlayListCardProps = {
-  size: PlayListCardSize;
+type CardProps = {
+  size: CardSize;
   title: string;
   description?: string;
+  onClick?: () => void;
 };
 
-const PlaylistCard = ({ size, title, description }: PlayListCardProps) => {
+const Card = ({ size, title, description, onClick }: CardProps) => {
   return (
     <div
+      onClick={onClick}
       className={classNames(styles.container, {
-        [styles.large]: size === PlayListCardSize.Large,
-        [styles.medium]: size === PlayListCardSize.Medium,
+        [styles.large]: size === CardSize.Large,
+        [styles.medium]: size === CardSize.Medium,
       })}
     >
       <div className={styles.imageContainer} />
@@ -30,7 +34,7 @@ const PlaylistCard = ({ size, title, description }: PlayListCardProps) => {
           <div className={styles.title}>{title}</div>
           <div className={styles.description}>{description}</div>
         </div>
-        {size === PlayListCardSize.Large && (
+        {size === CardSize.Large && (
           <Button className={styles.playIconContainer} variant={ButtonVariant.Ghost}>
             <PlayIcon />
           </Button>
@@ -40,4 +44,4 @@ const PlaylistCard = ({ size, title, description }: PlayListCardProps) => {
   );
 };
 
-export default PlaylistCard;
+export default Card;
