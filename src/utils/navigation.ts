@@ -23,7 +23,7 @@ export const getVerseNavigationUrlByVerseKey = (verseKey: string): string => {
  * @param {string} verseKey
  * @returns {string}
  */
-export const getScrollToNavigationUrlByVerseKey = (verseKey: string): string => {
+export const getChapterWithStartingVerseUrl = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterId}?startingVerse=${verseNumber}`;
 };

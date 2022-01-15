@@ -12,7 +12,7 @@ import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readin
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getScrollToNavigationUrlByVerseKey } from 'src/utils/navigation';
+import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 const RecentReadingSessions = () => {
@@ -34,7 +34,7 @@ const RecentReadingSessions = () => {
               return (
                 <div className={styles.verseLink} key={verseKey}>
                   <Link
-                    href={getScrollToNavigationUrlByVerseKey(verseKey)}
+                    href={getChapterWithStartingVerseUrl(verseKey)}
                     onClick={onRecentReadingSessionClicked}
                   >
                     <SurahPreview
