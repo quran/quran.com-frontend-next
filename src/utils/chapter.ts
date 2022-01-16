@@ -130,7 +130,7 @@ export const getChapterReadingProgress = (
   totalNumberOfVerses: number,
 ): number => Math.ceil((currentVerse * 100) / totalNumberOfVerses);
 
-const TOTAL_CHAPTERS = 114;
+export const TOTAL_QURAN_CHAPTERS = 114;
 export const getRandomChapterId = () => {
-  return random(1, TOTAL_CHAPTERS);
+  return random(1, TOTAL_QURAN_CHAPTERS);
 };

@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
@@ -6,10 +7,11 @@ import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './ReciterList.module.scss';
 
-import { exitRepeatMode, playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { exitRepeatMode, playFrom, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { RecitersResponse } from 'types/ApiResponses';
+import Reciter from 'types/Reciter';
 
 // temporary image placeholders
 // TODO: put image to our cdn or to nextjs repo
@@ -29,17 +31,22 @@ const reciterPictures = {
 
 const ReciterList = () => {
   const dispatch = useDispatch();
+  const { lang } = useTranslation();
 
-  const playRandomVerseFromSelectedReciter = async (reciterId: number) => {
-    // clean up, make sure we're not in repeat mode
+  const playRandomVerseFromSelectedReciter = async (reciter: Reciter) => {
     // TODO: add logging
-
     dispatch(exitRepeatMode());
 
     dispatch(
+      setReciter({
+        locale: lang,
+        reciter,
+      }),
+    );
+    dispatch(
       playFrom({
         chapterId: getRandomChapterId(),
-        reciterId,
+        reciterId: reciter.id,
         shouldUseRandomTimestamp: true,
       }),
     );
@@ -58,9 +65,9 @@ const ReciterList = () => {
                 imgSrc={reciterPictures[reciter.id]}
                 key={reciter.id}
                 onClick={() => {
-                  playRandomVerseFromSelectedReciter(reciter.id);
+                  playRandomVerseFromSelectedReciter(reciter);
                 }}
-                title={` ${reciter.id} ${reciter.name}`}
+                title={`${reciter.id} ${reciter.name}`}
                 description={`${reciter.qirat.name} - ${reciter.style.name}`}
                 size={CardSize.Medium}
               />

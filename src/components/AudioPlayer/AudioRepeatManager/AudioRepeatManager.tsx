@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useRef, useCallback } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -8,6 +9,7 @@ import useActiveVerseTiming from '../hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
 
 import useMemoizedVerseTiming from './useMemoizedVerseTiming';
+import usePlayNextSurah from './usePlayNextSurah';
 
 import { getChapterAudioData } from 'src/api';
 import {
@@ -88,6 +90,8 @@ const AudioRepeatManager = ({
     }
   }, [repeatSettings.delayMultiplier]);
 
+  usePlayNextSurah(audioPlayerElRef?.current?.ended, isInRepeatMode, audioData, reciterId);
+
   /**
    * 1) When the current verse ended,
    *   - if current repeatEachVerse progress < expected repetition, repeat current verse
@@ -102,6 +106,7 @@ const AudioRepeatManager = ({
   useEffect(() => {
     if (!lastActiveVerseTiming.current) return null;
     if (!audioData || isValidating) return null;
+
     if (!isInRepeatMode) return null;
 
     const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
@@ -118,7 +123,7 @@ const AudioRepeatManager = ({
     }
 
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
-    const isAudioEnded = currentTimeInMs >= audioData.duration;
+    const isAudioEnded = audioPlayerElRef.current.ended;
 
     // When we're done repeating this verse. Reset the progress state so it can be used for the next verse repetition
     // also delay the audio when the verse changed to the next verse
@@ -143,6 +148,7 @@ const AudioRepeatManager = ({
       triggerPauseAudio();
       dispatch(setRepeatProgress({ repeatRange: 1 }));
       dispatch(exitRepeatMode());
+      return null;
     }
 
     return null;

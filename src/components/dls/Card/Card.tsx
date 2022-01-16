@@ -21,7 +21,7 @@ type CardProps = {
   description?: string;
   onClick?: () => void;
   imgSrc?: string;
-  hoverIcon: ReactNode;
+  hoverIcon?: ReactNode;
 };
 
 const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProps) => {

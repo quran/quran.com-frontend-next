@@ -1,4 +1,5 @@
 import sample from 'lodash/sample';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import Card, { CardSize } from '../dls/Card/Card';
@@ -6,7 +7,7 @@ import Card, { CardSize } from '../dls/Card/Card';
 import styles from './RandomPlaylist.module.scss';
 
 import { fetcher } from 'src/api';
-import { exitRepeatMode, playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { exitRepeatMode, playFrom, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { RecitersResponse } from 'types/ApiResponses';
@@ -25,27 +26,33 @@ const playlists = [
     description: 'Mishary Al-fasy',
   },
 ];
-const getRandomReciterId = async () => {
+const getRandomReciter = async () => {
   const recitersResponse: RecitersResponse = await fetcher(makeRecitersUrl());
-  const recitersId = recitersResponse.reciters.map((reciter) => reciter.id);
+  const recitersId = recitersResponse.reciters;
   return sample(recitersId);
 };
 
 const RandomPlaylist = () => {
   const dispatch = useDispatch();
+  const { lang } = useTranslation();
 
   const playRandomAudio = async () => {
     // clean up, make sure we're not in repeat mode
     dispatch(exitRepeatMode());
 
-    // TODO: add logging
+    const randomReciter = await getRandomReciter();
 
-    const randomRecitersId = await getRandomReciterId();
+    dispatch(
+      setReciter({
+        locale: lang,
+        reciter: randomReciter,
+      }),
+    );
 
     dispatch(
       playFrom({
         chapterId: getRandomChapterId(),
-        reciterId: randomRecitersId,
+        reciterId: randomReciter.id,
         shouldUseRandomTimestamp: true,
       }),
     );
