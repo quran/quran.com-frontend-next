@@ -86,7 +86,7 @@ export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
  * @returns {string}
  */
 export const makeTranslationsInfoUrl = (locale: string, translations: number[]): string =>
-  makeUrl('/resources/translations/filter', { locale, translations: translations.join(', ') });
+  makeUrl('/resources/translations/filter', { locale, translations: translations.join(',') });
 
 /**
  * Compose the url for the advanced copy API.

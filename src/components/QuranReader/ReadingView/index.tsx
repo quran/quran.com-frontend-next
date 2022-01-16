@@ -9,7 +9,7 @@ import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import { verseFontChanged } from '../utils/memoization';
 
 import groupPagesByVerses from './groupPagesByVerses';
-import useScrollToReadingViewVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
+import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
@@ -44,6 +44,8 @@ const getTotalCount = (
   return initialData.pagination.totalPages;
 };
 
+// TODO: add onCopy here
+
 const ReadingView = ({
   verses,
   quranReaderStyles,
@@ -56,7 +58,7 @@ const ReadingView = ({
   const pageNumbers = Object.keys(pages);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const { quranTextFontScale } = quranReaderStyles;
-  useScrollToReadingViewVirtualizedVerse(
+  useScrollToVirtualizedVerse(
     quranReaderDataType,
     virtuosoRef,
     initialData,

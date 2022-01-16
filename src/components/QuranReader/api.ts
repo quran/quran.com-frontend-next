@@ -8,9 +8,11 @@ import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
+export const DEFAULT_ITEMS_PER_PAGE = 10;
+
 interface RequestKeyInput {
   quranReaderDataType: QuranReaderDataType;
-  pageIndex: number;
+  pageNumber: number;
   initialData: VersesResponse;
   quranReaderStyles: QuranReaderStyles;
   selectedTranslations: number[];
@@ -32,7 +34,7 @@ export const getRequestKey = ({
   id,
   isVerseData,
   initialData,
-  pageIndex,
+  pageNumber,
   quranReaderStyles,
   quranReaderDataType,
   selectedTranslations,
@@ -41,13 +43,13 @@ export const getRequestKey = ({
   wordByWordLocale,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page = isVerseData ? initialData.verses[0].verseNumber : pageIndex + 1;
+  const page = isVerseData ? initialData.verses[0].verseNumber : pageNumber;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
-      translations: selectedTranslations.join(', '),
+      translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
@@ -57,7 +59,7 @@ export const getRequestKey = ({
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
-      translations: selectedTranslations.join(', '),
+      translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
@@ -69,7 +71,7 @@ export const getRequestKey = ({
       page,
       from: initialData.metaData.from,
       to: initialData.metaData.to,
-      translations: selectedTranslations.join(', '),
+      translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
@@ -79,10 +81,10 @@ export const getRequestKey = ({
     wordTranslationLanguage: wordByWordLocale,
     reciter,
     page,
-    translations: selectedTranslations.join(', '),
+    perPage: isVerseData ? 1 : DEFAULT_ITEMS_PER_PAGE, // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
+    translations: selectedTranslations.join(','),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-    ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
   });
 };
 
@@ -91,29 +93,10 @@ export const getRequestKey = ({
  * We need this workaround as useSWRInfinite requires the data from the api
  * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
  *
- * @returns {Promise<Verse>}
+ * @returns {Promise<Verse[]>}
  */
-export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse> => {
+export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse[]> => {
   const res = await fetcher<VersesResponse>(input, init);
   // @ts-ignore ignore this typing for now, we'll get back into this when we fix the "initial data not being used" issue
   return res.verses;
-};
-
-/**
- * Get the page limit by checking:
- *
- * 1. if it's tafsir data or a verse data, the limit is 1.
- * 2. otherwise, return the initial data's totalPages.
- *
- *
- * @param {boolean} isVerseData
- * @param {VersesResponse} initialData
- * @returns {number}
- */
-export const getPageLimit = (isVerseData: boolean, initialData: VersesResponse): number => {
-  if (isVerseData) {
-    return 1;
-  }
-
-  return initialData.pagination.totalPages;
 };
