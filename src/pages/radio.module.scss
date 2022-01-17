@@ -3,3 +3,7 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-semibold);
 }
+
+.footerContainer {
+  margin-block-start: calc(3 * var(--spacing-mega));
+}

@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
 
+import Footer from 'src/components/dls/Footer/Footer';
 import RandomPlaylist from 'src/components/Radio/RandomPlaylist';
 import ReciterList from 'src/components/Radio/ReciterList';
 
@@ -19,6 +20,10 @@ const Radio = () => {
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
           <ReciterList />
         </div>
+      </div>
+
+      <div className={classNames(pageStyle.flowItem, radioStyle.footerContainer)}>
+        <Footer />
       </div>
     </div>
   );
