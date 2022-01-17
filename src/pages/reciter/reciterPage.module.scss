@@ -1,0 +1,48 @@
+@use "src/styles/breakpoints";
+
+.reciterImage {
+  min-height: calc(15 * var(--spacing-medium));
+  background-color: var(--color-background-alternative-faint);
+  margin-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    margin-block-start: var(--spacing-mega);
+    min-height: calc(20 * var(--spacing-medium));
+  }
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--spacing-large);
+  padding-block-start: var(--spacing-large);
+}
+
+.reciterName {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+}
+
+.surahListContainer {
+}
+
+.sectionTitle {
+  margin-block-end: var(--spacing-medium);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chapterListItem {
+  display: flex;
+  padding: var(--spacing-medium) var(--spacing-small);
+  background-color: var(--color-background-alternative-faded);
+  margin-block-end: var(--spacing-medium);
+  border-radius: var(--border-radius-rounded);
+}
+
+.chapterId {
+  margin-inline-end: var(--spacing-medium);
+}
+
+.chapterName {
+  font-weight: var(--font-weight-semibold);
+}
