@@ -1,10 +1,16 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-
 import { fetcher } from 'src/api';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
-import { VersesResponse } from 'types/ApiResponses';
+import {
+  makeJuzVersesUrl,
+  makePageVersesUrl,
+  makeVersesUrl,
+  makePagesLookupUrl,
+} from 'src/utils/apiPaths';
+import { PagesLookUpRequest } from 'types/ApiRequests';
+import { PagesLookUpResponse, VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -23,6 +29,16 @@ interface RequestKeyInput {
   locale: string;
   wordByWordLocale: string;
 }
+
+interface ReadingViewRequestKeyInput {
+  pageNumber: number;
+  quranReaderStyles: QuranReaderStyles;
+  reciter: number;
+  locale: string;
+  wordByWordLocale: string;
+  pageVersesRange?: { from: string; to: string };
+}
+
 /**
  * Generate the request key (the API url based on the params)
  * which will be used by useSwr to determine whether to call BE
@@ -87,6 +103,70 @@ export const getRequestKey = ({
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
   });
 };
+
+export const getReaderViewRequestKey = ({
+  pageNumber,
+  locale,
+  quranReaderStyles,
+  reciter,
+  wordByWordLocale,
+  pageVersesRange,
+}: ReadingViewRequestKeyInput): string => {
+  return makePageVersesUrl(pageNumber, locale, {
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    reciter,
+    wordTranslationLanguage: wordByWordLocale,
+    ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
+  });
+};
+
+const getPagesLookupParams = (
+  resourceId: number | string,
+  quranReaderDataType: QuranReaderDataType,
+  mushafId: number,
+  initialData: VersesResponse,
+) => {
+  const params: PagesLookUpRequest = { mushaf: mushafId };
+  const resourceIdNumber = Number(resourceId);
+  switch (quranReaderDataType) {
+    case QuranReaderDataType.Chapter:
+      params.chapterNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Hizb:
+      params.hizbNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Juz:
+      params.juzNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Page:
+      params.pageNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Rub:
+      params.rubElHizbNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.VerseRange:
+      params.chapterNumber = resourceIdNumber;
+      params.from = `${initialData.verses[0].chapterId}:${initialData.metaData.from}`;
+      params.to = `${initialData.verses[0].chapterId}:${initialData.metaData.to}`;
+      break;
+    default:
+      break;
+  }
+  return params;
+};
+
+export const fetchResourceMushafPagesDetails = (
+  resourceId: number | string,
+  quranReaderDataType: QuranReaderDataType,
+  mushafId: number,
+  initialData: VersesResponse,
+): Promise<PagesLookUpResponse> =>
+  fetcher(
+    makePagesLookupUrl(
+      getPagesLookupParams(resourceId, quranReaderDataType, mushafId, initialData),
+    ),
+  );
 
 /**
  * A custom fetcher that returns the verses array from the api result.

@@ -31,7 +31,7 @@ type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
-  id: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
+  resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
 
 const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
@@ -47,7 +47,7 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
  * @param {VersesResponse} initialData
  * @returns {number}
  */
-const getVersesTotalCount = (
+const getVersesCount = (
   quranReaderDataType: QuranReaderDataType,
   initialData: VersesResponse,
 ): number => {
@@ -64,16 +64,18 @@ const getVersesTotalCount = (
  * @param {number} verseIndex
  * @returns {number}
  */
-const verseIndexToPageNumber = (verseIndex: number): number =>
+const verseIndexToApiPageNumber = (verseIndex: number): number =>
   Math.floor(verseIndex / DEFAULT_ITEMS_PER_PAGE) + 1;
 
 const TranslationView = ({
   quranReaderStyles,
   quranReaderDataType,
   initialData,
-  id,
+  resourceId,
 }: TranslationViewProps) => {
-  const [pageVerses, setPageVerses] = useState<Record<number, Verse[]>>({ 1: initialData.verses });
+  const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
+    1: initialData.verses,
+  });
   const [currentPage, setCurrentPage] = useState(1);
   const reciter = useSelector(selectReciter, shallowEqual);
   const { lang } = useTranslation();
@@ -90,27 +92,27 @@ const TranslationView = ({
       selectedTranslations,
       isVerseData: quranReaderDataType === QuranReaderDataType.Verse,
       isSelectedTafsirData: quranReaderDataType === QuranReaderDataType.SelectedTafsir,
-      id,
+      id: resourceId,
       reciter: reciter.id,
       locale: lang,
       wordByWordLocale,
     }),
     verseFetcher,
   );
-  const verses = useMemo(() => Object.values(pageVerses).flat(), [pageVerses]);
+  const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
   useEffect(() => {
     if (data) {
-      setPageVerses((prevVerses) => ({ ...prevVerses, [currentPage]: data }));
+      setApiPageToVersesMap((prevVerses) => ({ ...prevVerses, [currentPage]: data }));
     }
   }, [currentPage, data]);
 
   const itemContentRenderer = (currentVerseIndex: number) => {
-    const versePage = verseIndexToPageNumber(currentVerseIndex);
+    const versePage = verseIndexToApiPageNumber(currentVerseIndex);
     // if the page of the current verse has already been fetched
-    if (pageVerses[versePage]) {
+    if (apiPageToVersesMap[versePage]) {
       // search for the verse inside its page.
-      const filteredVerses = pageVerses[versePage].filter(
+      const filteredVerses = apiPageToVersesMap[versePage].filter(
         (verse) => verse.verseNumber === initialData.verses[0].verseNumber + currentVerseIndex,
       );
       return (
@@ -142,17 +144,19 @@ const TranslationView = ({
    * set the current page to it so that useSwr will fetch the verses of that page
    * (if it's has not been called before and cached already).
    *
-   * @param {ListItem<Verse>[]} items
+   * @param {ListItem<Verse>[]} renderedVerses
    */
-  const onItemsRendered = (items: ListItem<Verse>[]) => {
-    if (items.length) {
+  const onItemsRendered = (renderedVerses: ListItem<Verse>[]) => {
+    if (renderedVerses.length) {
       setCurrentPage((prevPage) => {
-        const firstRenderedItemPage = verseIndexToPageNumber(items[0].index);
+        const firstRenderedItemPage = verseIndexToApiPageNumber(renderedVerses[0].index);
         // if the first verse is outside the current page
         if (firstRenderedItemPage !== prevPage) {
           return firstRenderedItemPage;
         }
-        const lastRenderedItemPage = verseIndexToPageNumber(items[items.length - 1].index);
+        const lastRenderedItemPage = verseIndexToApiPageNumber(
+          renderedVerses[renderedVerses.length - 1].index,
+        );
         // if the last verse is outside the current page
         if (lastRenderedItemPage !== prevPage) {
           return lastRenderedItemPage;
@@ -167,7 +171,7 @@ const TranslationView = ({
       <Virtuoso
         ref={virtuosoRef}
         useWindowScroll
-        totalCount={getVersesTotalCount(quranReaderDataType, initialData)}
+        totalCount={getVersesCount(quranReaderDataType, initialData)}
         overscan={800}
         initialItemCount={initialData.verses.length} // needed for SSR.
         itemsRendered={onItemsRendered}

@@ -9,7 +9,7 @@ import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import styles from './QuranReader.module.scss';
-import QuranReaderBody from './QuranReaderBody';
+import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
@@ -64,12 +64,12 @@ const QuranReader = ({
         })}
       >
         <div className={styles.infiniteScroll}>
-          <QuranReaderBody
+          <QuranReaderView
             isReadingPreference={isReadingPreference}
             quranReaderStyles={quranReaderStyles}
             initialData={initialData}
             quranReaderDataType={quranReaderDataType}
-            id={id}
+            resourceId={id}
           />
         </div>
       </div>

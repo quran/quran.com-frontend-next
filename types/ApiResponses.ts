@@ -85,6 +85,11 @@ export interface FootnoteResponse extends BaseResponse {
   footNote?: Footnote;
 }
 
+export interface PagesLookUpResponse extends BaseResponse {
+  pages?: Record<number, { from: string; to: string }>;
+  totalPage?: number;
+}
+
 export interface TafsirContentResponse extends BaseResponse {
   tafsir: {
     verses: Record<string, Verse>;
