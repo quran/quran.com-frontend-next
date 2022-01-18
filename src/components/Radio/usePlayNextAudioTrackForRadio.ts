@@ -30,7 +30,7 @@ const usePlayNextAudioTrackForRadio = (
     const currentRadioStationState = selectRadioStation(state);
     const { type } = currentRadioStationState;
     const stationOperator = stationOperators[type];
-    const nextAudio = stationOperator.getNextAudio(currentRadioStationState);
+    const nextAudio = stationOperator.getNextAudioTrack(currentRadioStationState);
 
     dispatch(
       playFrom({
