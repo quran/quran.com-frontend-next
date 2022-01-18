@@ -11,6 +11,16 @@ import {
   setRadioStationState,
 } from 'src/redux/slices/radioStation';
 
+/**
+ * When the current audio player ended,
+ * depending on the type of current station (either curated or reciter station),
+ * 1) get the next AudioItem from the station and play it
+ * 2) update the radioStation state in redux
+ *
+ * This function only run when `isInRadioMode` is true
+ *
+ * @param {React.MutableRefObject<HTMLAudioElement>} audioPlayerElRef
+ */
 const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>) => {
   const isInRadioMode = useSelector(selectIsInRadioMode);
 

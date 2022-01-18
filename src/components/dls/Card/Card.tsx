@@ -1,11 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
 import Button, { ButtonVariant } from '../Button/Button';
 
 import styles from './Card.module.scss';
@@ -21,12 +17,15 @@ type CardProps = {
   description?: string;
   onClick?: () => void;
   imgSrc?: string;
-  hoverIcon?: ReactNode;
+  actionIcon?: ReactNode;
 };
 
-const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProps) => {
+const Card = ({ size, title, description, onClick, imgSrc, actionIcon }: CardProps) => {
   return (
     <div
+      role="button"
+      tabIndex={0}
+      onKeyPress={onClick}
       onClick={onClick}
       className={classNames(styles.container, {
         [styles.large]: size === CardSize.Large,
@@ -36,9 +35,9 @@ const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProp
       <div className={styles.imageContainer}>
         {imgSrc && <img alt={title} className={styles.img} src={imgSrc} />}
 
-        {hoverIcon && (
+        {actionIcon && (
           <div className={styles.cardHoverEffectContainer} data-theme="dark">
-            {hoverIcon}
+            {actionIcon}
           </div>
         )}
       </div>
@@ -49,7 +48,7 @@ const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProp
         </div>
         {size === CardSize.Large && (
           <Button className={styles.playIconContainer} variant={ButtonVariant.Ghost}>
-            <PlayIcon />
+            {actionIcon}
           </Button>
         )}
       </div>

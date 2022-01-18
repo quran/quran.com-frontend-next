@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useRef, useCallback } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';

@@ -1,11 +1,11 @@
 import { CuratedStation } from './types';
 
+// TODO: localize title & description?
 const curatedStations: Record<string, CuratedStation> = {
   '1': {
     title: 'Ar-Rahman, Al-Waqiah, Yaseen',
     description: 'Mishary Al-fasy, and others',
-    bannerImgSrc:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEmUbwwLCH95IjmlwCU0gpxtNPkK-qbV1Pkg&usqp=CAU',
+    bannerImgSrc: '/images/stations/1.jpeg',
     audioItems: [
       {
         chapterId: '55',
@@ -24,8 +24,7 @@ const curatedStations: Record<string, CuratedStation> = {
   '2': {
     title: 'Classic Recitations',
     description: 'Abu Bakr al-Shatri',
-    bannerImgSrc:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEmUbwwLCH95IjmlwCU0gpxtNPkK-qbV1Pkg&usqp=CAU',
+    bannerImgSrc: '/images/stations/1.jpeg',
     audioItems: [
       {
         chapterId: '33',
@@ -40,7 +39,7 @@ const curatedStations: Record<string, CuratedStation> = {
   '3': {
     title: 'Friday Night Recitations',
     description: 'Mishary Al-fasy & Abu Bakr al-Shatri',
-    bannerImgSrc: 'https://salattimes.com/wp-content/uploads/2020/10/018.svg',
+    bannerImgSrc: '/images/stations/3.svg',
     audioItems: [
       {
         chapterId: '36',

@@ -1,3 +1,8 @@
+$card-hover-background-color: rgba(
+  $color: #000000,
+  $alpha: 0.6,
+);
+
 .container {
   position: relative;
   scroll-snap-align: start;
@@ -10,7 +15,6 @@
 .large {
   min-width: calc(12 * var(--spacing-mega));
 }
-
 .medium {
   min-width: calc(10 * var(--spacing-medium));
 }
@@ -69,5 +73,5 @@
   inset: 0;
   border-radius: var(--border-radius-rounded);
   z-index: 1;
-  background-color: rgba($color: #000000, $alpha: 0.6); // TODO: use var
+  background-color: $card-hover-background-color;
 }

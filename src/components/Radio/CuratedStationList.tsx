@@ -4,19 +4,25 @@ import { useDispatch } from 'react-redux';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Card, { CardSize } from '../dls/Card/Card';
 
+import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
-import styles from './RandomPlaylist.module.scss';
 import { CuratedStation, StationState, StationType } from './types';
 
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radioStation';
+import { logEvent } from 'src/utils/eventLogger';
 
 const RandomPlaylist = () => {
   const dispatch = useDispatch();
 
   const playStation = async (id: string, station: CuratedStation) => {
+    logEvent('station_played', {
+      stationId: id,
+      type: StationType.Curated,
+    });
+
     const randomAudioItem = sample(curatedStations[id].audioItems);
-    const stationState: StationState = {
+    const nextStationState: StationState = {
       id,
       type: StationType.Curated,
       title: station.title,
@@ -24,12 +30,12 @@ const RandomPlaylist = () => {
       chapterId: randomAudioItem.chapterId,
       reciterId: randomAudioItem.reciterId,
     };
-    dispatch(setRadioStationState(stationState));
+    dispatch(setRadioStationState(nextStationState));
 
     dispatch(
       playFrom({
-        chapterId: Number(stationState.chapterId),
-        reciterId: Number(stationState.reciterId),
+        chapterId: Number(nextStationState.chapterId),
+        reciterId: Number(nextStationState.reciterId),
         shouldUseRandomTimestamp: true,
         isRadioMode: true,
       }),
@@ -41,7 +47,7 @@ const RandomPlaylist = () => {
       {Object.entries(curatedStations).map(([id, station]) => (
         <div className={styles.item} key={id}>
           <Card
-            hoverIcon={<PlayIcon />}
+            actionIcon={<PlayIcon />}
             imgSrc={station.bannerImgSrc}
             size={CardSize.Large}
             title={station.title}
