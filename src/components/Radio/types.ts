@@ -1,4 +1,4 @@
-export type AudioItem = {
+export type AudioTrack = {
   reciterId: string;
   chapterId: string;
 };
@@ -18,11 +18,11 @@ export type StationState = {
 };
 
 export type StationOperator = {
-  getNextAudio: (stationState: StationState) => AudioItem;
+  getNextAudio: (stationState: StationState) => AudioTrack;
 };
 
 export type CuratedStation = {
-  audioItems: AudioItem[];
+  audioTracks: AudioTrack[];
   title: string;
   description: string;
   bannerImgSrc?: string;

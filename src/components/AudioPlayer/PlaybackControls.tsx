@@ -10,15 +10,15 @@ import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 type PlaybackControlsProps = {
-  isInRadioMode: boolean;
+  isRadioMode: boolean;
 };
-const PlaybackControls = ({ isInRadioMode }: PlaybackControlsProps) => {
+const PlaybackControls = ({ isRadioMode }: PlaybackControlsProps) => {
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isLoading = audioDataStatus === AudioDataStatus.Loading;
 
   return (
     <div className={styles.container}>
-      {!isInRadioMode && (
+      {!isRadioMode && (
         <>
           <div className={styles.actionItem}>
             <RepeatAudioButton />
@@ -32,7 +32,7 @@ const PlaybackControls = ({ isInRadioMode }: PlaybackControlsProps) => {
         <PlayPauseButton />
       </div>
 
-      {!isInRadioMode && (
+      {!isRadioMode && (
         <>
           <div className={styles.actionItem}>
             <SeekButton type={SeekButtonType.NextAyah} isLoading={isLoading} />

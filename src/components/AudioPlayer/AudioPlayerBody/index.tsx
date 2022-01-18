@@ -12,8 +12,7 @@ import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
 
 import styles from './AudioPlayerBody.module.scss';
 
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import { selectIsInRadioMode } from 'src/redux/slices/radioStation';
+import { selectReciter, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
 import AudioData from 'types/AudioData';
 
 interface Props {
@@ -28,7 +27,10 @@ const AudioPlayerBody: React.FC<Props> = ({
   audioData,
 }) => {
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
-  const isInRadioMode = useSelector(selectIsInRadioMode);
+  const isRadioMode = useSelector(selectIsRadioMode);
+
+  const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
+  const isAudioRepeatManagerEnabled = !isRadioMode && reciterId && audioData?.chapterId;
 
   return (
     <>
@@ -40,14 +42,14 @@ const AudioPlayerBody: React.FC<Props> = ({
           togglePlaying={() => togglePlaying()}
           isAudioPlayerHidden={false}
         />
-        {!isInRadioMode && reciterId && audioData?.chapterId && (
+        {isQuranReaderHighlightDispatcherEnabled && (
           <QuranReaderHighlightDispatcher
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
             chapterId={audioData?.chapterId}
           />
         )}
-        {!isInRadioMode && reciterId && audioData?.chapterId && (
+        {isAudioRepeatManagerEnabled && (
           <AudioRepeatManager
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
@@ -63,7 +65,7 @@ const AudioPlayerBody: React.FC<Props> = ({
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        {!isInRadioMode && (
+        {!isRadioMode && (
           <div className={styles.sliderContainer}>
             <AudioPlayerSlider
               audioPlayerElRef={audioPlayerElRef}
@@ -72,7 +74,7 @@ const AudioPlayerBody: React.FC<Props> = ({
           </div>
         )}
       </div>
-      <PlaybackControls isInRadioMode={isInRadioMode} />
+      <PlaybackControls isRadioMode={isRadioMode} />
     </>
   );
 };

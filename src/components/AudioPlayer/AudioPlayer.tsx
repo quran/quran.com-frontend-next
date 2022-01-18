@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import usePlayNextAudioForRadio from '../Radio/usePlayNextAudioForRadio';
+import usePlayNextAudioTrackForRadio from '../Radio/usePlayNextAudioTrackForRadio';
 
 import styles from './AudioPlayer.module.scss';
 
@@ -43,7 +43,7 @@ const AudioPlayer = () => {
     dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
   }, [dispatch]);
 
-  usePlayNextAudioForRadio(audioPlayerElRef);
+  usePlayNextAudioTrackForRadio(audioPlayerElRef);
 
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {

@@ -1,6 +1,7 @@
 import sample from 'lodash/sample';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
+import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Card, { CardSize } from '../dls/Card/Card';
 
@@ -9,11 +10,17 @@ import curatedStations from './curatedStations';
 import { CuratedStation, StationState, StationType } from './types';
 
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { setRadioStationState } from 'src/redux/slices/radioStation';
+import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';
 
-const RandomPlaylist = () => {
+// When one of the curated station is clicked,
+// 1) Pick (randomly) one of the audioTrack listen in the station
+//    the listen can be found in curatadStations.ts
+// 2) Update the current station state in the redux
+// 3) Play the audio
+const CuratedStationList = () => {
   const dispatch = useDispatch();
+  const stationState = useSelector(selectRadioStation, shallowEqual);
 
   const playStation = async (id: string, station: CuratedStation) => {
     logEvent('station_played', {
@@ -21,14 +28,14 @@ const RandomPlaylist = () => {
       type: StationType.Curated,
     });
 
-    const randomAudioItem = sample(curatedStations[id].audioItems);
+    const randomAudioTrack = sample(curatedStations[id].audioTracks);
     const nextStationState: StationState = {
       id,
       type: StationType.Curated,
       title: station.title,
       description: station.description,
-      chapterId: randomAudioItem.chapterId,
-      reciterId: randomAudioItem.reciterId,
+      chapterId: randomAudioTrack.chapterId,
+      reciterId: randomAudioTrack.reciterId,
     };
     dispatch(setRadioStationState(nextStationState));
 
@@ -36,7 +43,7 @@ const RandomPlaylist = () => {
       playFrom({
         chapterId: Number(nextStationState.chapterId),
         reciterId: Number(nextStationState.reciterId),
-        shouldUseRandomTimestamp: true,
+        shouldStartFromRandomTimestamp: true,
         isRadioMode: true,
       }),
     );
@@ -44,20 +51,24 @@ const RandomPlaylist = () => {
 
   return (
     <div className={styles.container}>
-      {Object.entries(curatedStations).map(([id, station]) => (
-        <div className={styles.item} key={id}>
-          <Card
-            actionIcon={<PlayIcon />}
-            imgSrc={station.bannerImgSrc}
-            size={CardSize.Large}
-            title={station.title}
-            description={station.description}
-            onClick={() => playStation(id, station)}
-          />
-        </div>
-      ))}
+      {Object.entries(curatedStations).map(([id, station]) => {
+        const isSelectedStation =
+          stationState.type === StationType.Curated && stationState.id === id;
+        return (
+          <div className={styles.item} key={id}>
+            <Card
+              actionIcon={isSelectedStation ? <PauseIcon /> : <PlayIcon />}
+              imgSrc={station.bannerImgSrc}
+              size={CardSize.Large}
+              title={station.title}
+              description={station.description}
+              onClick={() => playStation(id, station)}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
 
-export default RandomPlaylist;
+export default CuratedStationList;

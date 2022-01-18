@@ -5,8 +5,8 @@ import { RootState } from 'src/redux/RootState';
 
 const initialState = {} as StationState;
 
-export const radioStation = createSlice({
-  name: 'radioStation',
+export const radioSlice = createSlice({
+  name: 'radio',
   initialState,
   reducers: {
     exitRadioMode: () => initialState,
@@ -19,11 +19,8 @@ export const radioStation = createSlice({
   },
 });
 
-export const { setRadioStationState, exitRadioMode } = radioStation.actions;
+export const { setRadioStationState, exitRadioMode } = radioSlice.actions;
 
-export const selectRadioStation = (state: RootState) => state.radioStation;
+export const selectRadioStation = (state: RootState) => state.radio;
 
-// taking one of the property as indicator, if `type` is empty that mean we're not in radio mode
-export const selectIsInRadioMode = (state: RootState) => !!state.radioStation?.type;
-
-export default radioStation.reducer;
+export default radioSlice.reducer;

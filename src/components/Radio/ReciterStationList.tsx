@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
+import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import DataFetcher from '../DataFetcher';
 import Card, { CardSize } from '../dls/Card/Card';
@@ -8,7 +9,7 @@ import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { setRadioStationState } from 'src/redux/slices/radioStation';
+import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
@@ -32,8 +33,9 @@ const reciterPictures = {
   12: '/images/reciters/12.jpg',
 };
 
-const ReciterList = () => {
+const ReciterStationList = () => {
   const dispatch = useDispatch();
+  const stationState = useSelector(selectRadioStation, shallowEqual);
 
   const playReciterStation = async (reciter: Reciter) => {
     logEvent('station_played', {
@@ -55,7 +57,7 @@ const ReciterList = () => {
       playFrom({
         chapterId: Number(nextStationState.chapterId),
         reciterId: Number(nextStationState.reciterId),
-        shouldUseRandomTimestamp: true,
+        shouldStartFromRandomTimestamp: true,
         isRadioMode: true,
       }),
     );
@@ -68,17 +70,21 @@ const ReciterList = () => {
         if (!data) return null;
         return (
           <div className={styles.container}>
-            {data.reciters.map((reciter) => (
-              <Card
-                actionIcon={<PlayIcon />}
-                imgSrc={reciterPictures[reciter.id]}
-                key={reciter.id}
-                onClick={() => playReciterStation(reciter)}
-                title={reciter.name}
-                description={reciter.style.name}
-                size={CardSize.Medium}
-              />
-            ))}
+            {data.reciters.map((reciter) => {
+              const isSelectedStation =
+                stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
+              return (
+                <Card
+                  actionIcon={isSelectedStation ? <PauseIcon /> : <PlayIcon />}
+                  imgSrc={reciterPictures[reciter.id]}
+                  key={reciter.id}
+                  onClick={() => playReciterStation(reciter)}
+                  title={reciter.name}
+                  description={reciter.style.name}
+                  size={CardSize.Medium}
+                />
+              );
+            })}
           </div>
         );
       }}
@@ -86,4 +92,4 @@ const ReciterList = () => {
   );
 };
 
-export default ReciterList;
+export default ReciterStationList;

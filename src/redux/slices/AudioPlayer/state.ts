@@ -3,8 +3,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import random from 'lodash/random';
 
-import { exitRadioMode } from '../radioStation';
-
 import { getChapterAudioData } from 'src/api';
 import {
   triggerPlayAudio,
@@ -47,6 +45,7 @@ export const selectRemainingRangeRepeatCount = (state: RootState) => {
 };
 export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>
   state.audioPlayerState.showTooltipWhenPlayingAudio;
+export const selectIsRadioMode = (state: RootState) => state.audioPlayerState.isRadioMode;
 
 /**
  * get the audio file for the current reciter
@@ -110,19 +109,25 @@ interface PlayFromInput {
   chapterId: number;
   reciterId: number;
   timestamp?: number;
-  shouldUseRandomTimestamp?: boolean;
+  shouldStartFromRandomTimestamp?: boolean;
   isRadioMode?: boolean;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
   async (
-    { verseKey, chapterId, reciterId, timestamp, shouldUseRandomTimestamp, isRadioMode },
+    {
+      verseKey,
+      chapterId,
+      reciterId,
+      timestamp,
+      shouldStartFromRandomTimestamp,
+      isRadioMode = false,
+    },
     thunkApi,
   ) => {
+    thunkApi.dispatch(setIsRadioMode(isRadioMode));
     if (isRadioMode) {
       thunkApi.dispatch(exitRepeatMode());
-    } else {
-      thunkApi.dispatch(exitRadioMode());
     }
 
     const state = thunkApi.getState();
@@ -139,7 +144,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
     }
 
-    if (shouldUseRandomTimestamp) {
+    if (shouldStartFromRandomTimestamp) {
       const randomTimestamp = random(0, selectedAudioData.duration);
       playFromTimestamp(randomTimestamp / 1000);
       return;
@@ -240,6 +245,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       showTooltipWhenPlayingAudio: action.payload,
     }),
+    setIsRadioMode: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isRadioMode: action.payload,
+    }),
   },
   // reset reciter to the default based on the locale
   // WHEN `reset` action is dispatched
@@ -268,6 +277,7 @@ export const {
   resetRepeatEachVerseProgress,
   setPlaybackRate,
   setShowTooltipWhenPlayingAudio,
+  setIsRadioMode,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

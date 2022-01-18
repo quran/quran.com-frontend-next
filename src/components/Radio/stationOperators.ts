@@ -6,13 +6,13 @@ import { TOTAL_QURAN_CHAPTERS } from 'src/utils/chapter';
 const curatedStationOperator: StationOperator = {
   /**
    * Given current chapterId, reciterId, and stationId from current stationState,
-   * return the next audio item from the station
+   * return the next audio track from the station
    *
-   * If the the current audio item is the last one in the station,
-   * return the first audio item in the station
+   * If the the current audio track is the last one in the station,
+   * return the first audio track in the station
    *
    * @param {StationState} stationState
-   * @returns {AudioItem} next audio item
+   * @returns {AudioTrack} next audio track
    */
   getNextAudio: (stationState: StationState) => {
     const currentChapterId = stationState.chapterId;
@@ -20,15 +20,15 @@ const curatedStationOperator: StationOperator = {
     const stationId = stationState.id;
 
     const station = curatedStations[stationId];
-    const currentAudioIndex = station.audioItems.findIndex(
+    const currentAudioIndex = station.audioTracks.findIndex(
       ({ chapterId, reciterId }) =>
         chapterId === currentChapterId && reciterId === currentReciterId,
     );
 
     const nextAudioIndex =
-      currentAudioIndex >= station.audioItems.length - 1 ? 0 : currentAudioIndex + 1;
+      currentAudioIndex >= station.audioTracks.length - 1 ? 0 : currentAudioIndex + 1;
 
-    const nextAudio = station.audioItems[nextAudioIndex];
+    const nextAudio = station.audioTracks[nextAudioIndex];
 
     return { chapterId: nextAudio.chapterId, reciterId: nextAudio.reciterId };
   },
@@ -43,7 +43,7 @@ const reciterStationOperator: StationOperator = {
    * go back to chapter 1
    *
    * @param {StationState} stationState
-   * @returns {AudioItem} next audio item
+   * @returns {AudioTrack} next audio track
    */
   getNextAudio: ({ chapterId, reciterId }: StationState) => {
     const nextReciterId = reciterId;

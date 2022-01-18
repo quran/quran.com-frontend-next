@@ -4,25 +4,23 @@ import { useDispatch, useSelector, useStore } from 'react-redux';
 
 import stationOperators from './stationOperators';
 
-import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import {
-  selectIsInRadioMode,
-  selectRadioStation,
-  setRadioStationState,
-} from 'src/redux/slices/radioStation';
+import { playFrom, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
+import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 
 /**
  * When the current audio player ended,
  * depending on the type of current station (either curated or reciter station),
- * 1) get the next AudioItem from the station and play it
+ * 1) get the next AudioTrack from the station and play it
  * 2) update the radioStation state in redux
  *
- * This function only run when `isInRadioMode` is true
+ * This function only run when `isRadioMode` is true
  *
  * @param {React.MutableRefObject<HTMLAudioElement>} audioPlayerElRef
  */
-const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>) => {
-  const isInRadioMode = useSelector(selectIsInRadioMode);
+const usePlayNextAudioTrackForRadio = (
+  audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>,
+) => {
+  const isRadioMode = useSelector(selectIsRadioMode);
 
   const store = useStore();
   const dispatch = useDispatch();
@@ -53,7 +51,7 @@ const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLA
   }, [dispatch, store]);
 
   useEffect(() => {
-    if (!isInRadioMode) return null;
+    if (!isRadioMode) return null;
 
     if (audioPlayerElRef.current) {
       const audioPlayerEl = audioPlayerElRef.current;
@@ -64,7 +62,7 @@ const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLA
     }
 
     return null;
-  }, [audioPlayerElRef, playNextAudio, isInRadioMode]);
+  }, [audioPlayerElRef, playNextAudio, isRadioMode]);
 };
 
-export default usePlayNextAudioForRadio;
+export default usePlayNextAudioTrackForRadio;
