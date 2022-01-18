@@ -13,6 +13,7 @@ import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
 import styles from './AudioPlayerBody.module.scss';
 
 import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsInRadioMode } from 'src/redux/slices/radioStation';
 import AudioData from 'types/AudioData';
 
 interface Props {
@@ -27,6 +28,8 @@ const AudioPlayerBody: React.FC<Props> = ({
   audioData,
 }) => {
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
+  const isInRadioMode = useSelector(selectIsInRadioMode);
+
   return (
     <>
       <div className={styles.innerContainer}>
@@ -37,14 +40,14 @@ const AudioPlayerBody: React.FC<Props> = ({
           togglePlaying={() => togglePlaying()}
           isAudioPlayerHidden={false}
         />
-        {reciterId && audioData?.chapterId && (
+        {!isInRadioMode && reciterId && audioData?.chapterId && (
           <QuranReaderHighlightDispatcher
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
             chapterId={audioData?.chapterId}
           />
         )}
-        {reciterId && audioData?.chapterId && (
+        {!isInRadioMode && reciterId && audioData?.chapterId && (
           <AudioRepeatManager
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
@@ -60,14 +63,16 @@ const AudioPlayerBody: React.FC<Props> = ({
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <div className={styles.sliderContainer}>
-          <AudioPlayerSlider
-            audioPlayerElRef={audioPlayerElRef}
-            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-          />
-        </div>
+        {!isInRadioMode && (
+          <div className={styles.sliderContainer}>
+            <AudioPlayerSlider
+              audioPlayerElRef={audioPlayerElRef}
+              isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+            />
+          </div>
+        )}
       </div>
-      <PlaybackControls />
+      <PlaybackControls isInRadioMode={isInRadioMode} />
     </>
   );
 };

@@ -7,7 +7,7 @@ import Card, { CardSize } from '../dls/Card/Card';
 import styles from './ReciterList.module.scss';
 import { StationState, StationType } from './types';
 
-import { exitRepeatMode, playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radioStation';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
@@ -34,9 +34,6 @@ const ReciterList = () => {
   const dispatch = useDispatch();
 
   const playReciterStation = async (reciter: Reciter) => {
-    // clean up, make sure we're not in repeat mode
-    dispatch(exitRepeatMode());
-
     const stationState: StationState = {
       id: reciter.id.toString(),
       type: StationType.Reciter,
@@ -52,6 +49,7 @@ const ReciterList = () => {
         chapterId: Number(stationState.chapterId),
         reciterId: Number(stationState.reciterId),
         timestamp: 0,
+        isRadioMode: true,
       }),
     );
   };

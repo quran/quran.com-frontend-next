@@ -6,16 +6,13 @@ import curatedStations from './curatedStations';
 import styles from './RandomPlaylist.module.scss';
 import { CuratedStation, StationState, StationType } from './types';
 
-import { exitRepeatMode, playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radioStation';
 
 const RandomPlaylist = () => {
   const dispatch = useDispatch();
 
   const playStation = async (id: string, station: CuratedStation) => {
-    // clean up, make sure we're not in repeat mode
-    dispatch(exitRepeatMode());
-
     const firstAudioItem = curatedStations[id].audioItems[0];
     const stationState: StationState = {
       id,
@@ -32,6 +29,7 @@ const RandomPlaylist = () => {
         chapterId: Number(stationState.chapterId),
         reciterId: Number(stationState.reciterId),
         timestamp: 0,
+        isRadioMode: true,
       }),
     );
   };

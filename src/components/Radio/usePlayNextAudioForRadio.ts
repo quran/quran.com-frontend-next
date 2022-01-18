@@ -1,13 +1,19 @@
 import { useCallback, useEffect } from 'react';
 
-import { useDispatch, useStore } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 
 import stationOperators from './stationOperators';
 
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radioStation';
+import {
+  selectIsInRadioMode,
+  selectRadioStation,
+  setRadioStationState,
+} from 'src/redux/slices/radioStation';
 
 const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>) => {
+  const isInRadioMode = useSelector(selectIsInRadioMode);
+
   const store = useStore();
   const dispatch = useDispatch();
 
@@ -23,6 +29,7 @@ const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLA
         chapterId: Number(nextAudio.chapterId),
         reciterId: Number(nextAudio.reciterId),
         timestamp: 0,
+        isRadioMode: true,
       }),
     );
 
@@ -36,6 +43,8 @@ const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLA
   }, [dispatch, store]);
 
   useEffect(() => {
+    if (!isInRadioMode) return null;
+
     if (audioPlayerElRef.current) {
       const audioPlayerEl = audioPlayerElRef.current;
       audioPlayerEl.addEventListener('ended', playNextAudio);
@@ -45,7 +54,7 @@ const usePlayNextAudioForRadio = (audioPlayerElRef: React.MutableRefObject<HTMLA
     }
 
     return null;
-  }, [audioPlayerElRef, playNextAudio]);
+  }, [audioPlayerElRef, playNextAudio, isInRadioMode]);
 };
 
 export default usePlayNextAudioForRadio;

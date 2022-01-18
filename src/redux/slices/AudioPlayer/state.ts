@@ -3,6 +3,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import random from 'lodash/random';
 
+import { exitRadioMode } from '../radioStation';
+
 import { getChapterAudioData } from 'src/api';
 import {
   triggerPlayAudio,
@@ -109,10 +111,20 @@ interface PlayFromInput {
   reciterId: number;
   timestamp?: number;
   shouldUseRandomTimestamp?: boolean;
+  isRadioMode?: boolean;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
-  async ({ verseKey, chapterId, reciterId, timestamp, shouldUseRandomTimestamp }, thunkApi) => {
+  async (
+    { verseKey, chapterId, reciterId, timestamp, shouldUseRandomTimestamp, isRadioMode },
+    thunkApi,
+  ) => {
+    if (isRadioMode) {
+      thunkApi.dispatch(exitRepeatMode());
+    } else {
+      thunkApi.dispatch(exitRadioMode());
+    }
+
     const state = thunkApi.getState();
     const selectedReciter = selectReciter(state);
     let selectedAudioData = selectAudioData(state);
