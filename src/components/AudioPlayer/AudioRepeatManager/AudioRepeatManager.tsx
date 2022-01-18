@@ -9,7 +9,6 @@ import useActiveVerseTiming from '../hooks/useActiveVerseTiming';
 import useAudioPlayerCurrentTime from '../hooks/useCurrentTime';
 
 import useMemoizedVerseTiming from './useMemoizedVerseTiming';
-import usePlayNextSurah from './usePlayNextSurah';
 
 import { getChapterAudioData } from 'src/api';
 import {
@@ -89,8 +88,6 @@ const AudioRepeatManager = ({
       setTimeout(triggerPlayAudio, delayInMs);
     }
   }, [repeatSettings.delayMultiplier]);
-
-  usePlayNextSurah(audioPlayerElRef?.current?.ended, isInRepeatMode, audioData, reciterId);
 
   /**
    * 1) When the current verse ended,

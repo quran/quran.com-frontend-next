@@ -5,7 +5,7 @@ import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
 
 import Footer from 'src/components/dls/Footer/Footer';
-import RandomPlaylist from 'src/components/Radio/RandomPlaylist';
+import RandomPlaylist from 'src/components/Radio/CurantedStationList';
 import ReciterList from 'src/components/Radio/ReciterList';
 
 const Radio = () => {

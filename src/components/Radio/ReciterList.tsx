@@ -1,4 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
@@ -6,8 +5,10 @@ import DataFetcher from '../DataFetcher';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './ReciterList.module.scss';
+import { StationState, StationType } from './types';
 
-import { exitRepeatMode, playFrom, setReciter } from 'src/redux/slices/AudioPlayer/state';
+import { exitRepeatMode, playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { setRadioStationState } from 'src/redux/slices/radioStation';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { RecitersResponse } from 'types/ApiResponses';
@@ -31,23 +32,26 @@ const reciterPictures = {
 
 const ReciterList = () => {
   const dispatch = useDispatch();
-  const { lang } = useTranslation();
 
-  const playRandomVerseFromSelectedReciter = async (reciter: Reciter) => {
-    // TODO: add logging
+  const playReciterStation = async (reciter: Reciter) => {
+    // clean up, make sure we're not in repeat mode
     dispatch(exitRepeatMode());
 
-    dispatch(
-      setReciter({
-        locale: lang,
-        reciter,
-      }),
-    );
+    const stationState: StationState = {
+      id: reciter.id.toString(),
+      type: StationType.Reciter,
+      title: reciter.name,
+      description: reciter.style.name,
+      chapterId: getRandomChapterId().toString(),
+      reciterId: reciter.id.toString(),
+    };
+    dispatch(setRadioStationState(stationState));
+
     dispatch(
       playFrom({
-        chapterId: getRandomChapterId(),
-        reciterId: reciter.id,
-        shouldUseRandomTimestamp: true,
+        chapterId: Number(stationState.chapterId),
+        reciterId: Number(stationState.reciterId),
+        timestamp: 0,
       }),
     );
   };
@@ -64,11 +68,9 @@ const ReciterList = () => {
                 hoverIcon={<PlayIcon />}
                 imgSrc={reciterPictures[reciter.id]}
                 key={reciter.id}
-                onClick={() => {
-                  playRandomVerseFromSelectedReciter(reciter);
-                }}
+                onClick={() => playReciterStation(reciter)}
                 title={`${reciter.id} ${reciter.name}`}
-                description={`${reciter.qirat.name} - ${reciter.style.name}`}
+                description={reciter.style.name}
                 size={CardSize.Medium}
               />
             ))}

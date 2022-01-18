@@ -32,6 +32,7 @@ import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
+import radioStation from './slices/radioStation';
 import search from './slices/Search/search';
 import theme from './slices/theme';
 import voiceSearch from './slices/voiceSearch';
@@ -81,6 +82,7 @@ export const rootReducer = combineReducers({
   defaultSettings,
   fontFaces,
   sidebarNavigation,
+  radioStation,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
