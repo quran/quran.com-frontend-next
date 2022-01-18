@@ -1,7 +1,7 @@
 import curatedStations from './curatedStations';
 import { StationOperator, StationState, StationType } from './types';
 
-import { TOTAL_QURAN_CHAPTERS } from 'src/utils/chapter';
+import { QURAN_CHAPTERS_COUNT } from 'src/utils/chapter';
 
 const curatedStationOperator: StationOperator = {
   /**
@@ -14,7 +14,7 @@ const curatedStationOperator: StationOperator = {
    * @param {StationState} stationState
    * @returns {AudioTrack} next audio track
    */
-  getNextAudio: (stationState: StationState) => {
+  getNextAudioTrack: (stationState: StationState) => {
     const currentChapterId = stationState.chapterId;
     const currentReciterId = stationState.reciterId;
     const stationId = stationState.id;
@@ -45,9 +45,9 @@ const reciterStationOperator: StationOperator = {
    * @param {StationState} stationState
    * @returns {AudioTrack} next audio track
    */
-  getNextAudio: ({ chapterId, reciterId }: StationState) => {
+  getNextAudioTrack: ({ chapterId, reciterId }: StationState) => {
     const nextReciterId = reciterId;
-    const nextChapterId = Number(chapterId) >= TOTAL_QURAN_CHAPTERS ? 1 : Number(chapterId) + 1;
+    const nextChapterId = Number(chapterId) >= QURAN_CHAPTERS_COUNT ? 1 : Number(chapterId) + 1;
     return { reciterId: nextReciterId, chapterId: nextChapterId.toString() };
   },
 };

@@ -18,7 +18,7 @@ export type StationState = {
 };
 
 export type StationOperator = {
-  getNextAudio: (stationState: StationState) => AudioTrack;
+  getNextAudioTrack: (stationState: StationState) => AudioTrack;
 };
 
 export type CuratedStation = {
