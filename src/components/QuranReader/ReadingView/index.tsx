@@ -1,14 +1,18 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, memo, useRef } from 'react';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-import { ListRange, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import { shallowEqual, useSelector } from 'react-redux';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
+import useSWRImmutable from 'swr/immutable';
 
-import { verseFontChanged } from '../utils/memoization';
+import { getReaderViewRequestKey, verseFetcher } from '../api';
+import onCopyQuranWords from '../onCopyQuranWords';
 
-import groupPagesByVerses from './groupPagesByVerses';
+import useFetchPagesCount from './hooks/useFetchTotalPages';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
@@ -16,6 +20,9 @@ import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useQcfFont from 'src/hooks/useQcfFont';
+import Error from 'src/pages/_error';
+import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -27,35 +34,48 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
 });
 
 type ReadingViewProps = {
-  verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
   quranReaderDataType: QuranReaderDataType;
-  setSize: (size: number | ((_size: number) => number)) => Promise<Verse[]>;
   initialData: VersesResponse;
+  resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
-
-const getTotalCount = (
-  quranReaderDataType: QuranReaderDataType,
-  initialData: VersesResponse,
-): number => {
-  if (quranReaderDataType === QuranReaderDataType.Verse) {
-    return 1;
-  }
-  return initialData.pagination.totalPages;
-};
-
-// TODO: add onCopy here
 
 const ReadingView = ({
-  verses,
   quranReaderStyles,
   quranReaderDataType,
-  setSize,
   initialData,
+  resourceId,
 }: ReadingViewProps) => {
+  const initialFirstMushafPage = initialData.verses[0].pageNumber;
+  const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>({
+    [initialFirstMushafPage]: initialData.verses,
+  });
+  const { lang } = useTranslation();
+  const [currentMushafPage, setCurrentMushafPage] = useState(initialFirstMushafPage);
+  const verses = useMemo(
+    () => Object.values(mushafPageToVersesMap).flat(),
+    [mushafPageToVersesMap],
+  );
+  const reciter = useSelector(selectReciter, shallowEqual);
+  const wordByWordLocale = useSelector(selectWordByWordLocale);
   useQcfFont(quranReaderStyles.quranFont, verses);
-  const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
-  const pageNumbers = Object.keys(pages);
+  const { pagesCount, hasError, pagesVersesRange } = useFetchPagesCount(
+    resourceId,
+    quranReaderDataType,
+    initialData,
+    quranReaderStyles,
+  );
+  const { data } = useSWRImmutable(
+    getReaderViewRequestKey({
+      pageNumber: currentMushafPage,
+      pageVersesRange: pagesVersesRange[currentMushafPage],
+      quranReaderStyles,
+      reciter: reciter.id,
+      locale: lang,
+      wordByWordLocale,
+    }),
+    verseFetcher,
+  );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const { quranTextFontScale } = quranReaderStyles;
   useScrollToVirtualizedVerse(
@@ -65,16 +85,18 @@ const ReadingView = ({
     quranReaderStyles,
     verses,
   );
-
-  const onRangeChange = (range: ListRange) => {
-    setSize(range.endIndex + 1);
-  };
+  useEffect(() => {
+    if (data) {
+      setMushafPageToVersesMap((prevVerses) => ({ ...prevVerses, [currentMushafPage]: data }));
+    }
+  }, [currentMushafPage, data]);
 
   const itemContentRenderer = (currentPageIndex: number) => {
-    const pageNumber = pageNumbers[currentPageIndex];
-    return pageNumber ? (
+    const pageNumber = initialFirstMushafPage + currentPageIndex;
+    const pageVerses = mushafPageToVersesMap[pageNumber];
+    return pageVerses ? (
       <Page
-        verses={pages[pageNumber]}
+        verses={pageVerses}
         key={`page-${pageNumber}`}
         page={Number(pageNumber)}
         quranReaderStyles={quranReaderStyles}
@@ -85,8 +107,30 @@ const ReadingView = ({
     );
   };
 
+  const onItemsRendered = (renderedPages) => {
+    if (renderedPages.length) {
+      setCurrentMushafPage((prevMushafPage) => {
+        const firstRenderedMushafPage = initialFirstMushafPage + renderedPages[0].index;
+        if (firstRenderedMushafPage !== prevMushafPage) {
+          return firstRenderedMushafPage;
+        }
+        const lastRenderedMushafPage =
+          initialFirstMushafPage + renderedPages[renderedPages.length - 1].index;
+        if (lastRenderedMushafPage !== prevMushafPage) {
+          return lastRenderedMushafPage;
+        }
+        return prevMushafPage;
+      });
+    }
+  };
+
+  if (hasError) {
+    return <Error />;
+  }
+
   return (
     <div
+      onCopy={(event) => onCopyQuranWords(event, verses)}
       className={classNames(styles.container, {
         [styles.largeDesktopContainer]: quranTextFontScale === 4,
         [styles.xLargeDesktopContainer]: quranTextFontScale === 5,
@@ -95,11 +139,11 @@ const ReadingView = ({
       <Virtuoso
         ref={virtuosoRef}
         useWindowScroll
-        overscan={800}
+        increaseViewportBy={300}
         style={{ width: '100%' }}
-        rangeChanged={onRangeChange}
+        itemsRendered={onItemsRendered}
         initialItemCount={1} // needed for SSR.
-        totalCount={getTotalCount(quranReaderDataType, initialData)}
+        totalCount={pagesCount}
         itemContent={itemContentRenderer}
         components={{
           Footer: () => (
@@ -114,28 +158,4 @@ const ReadingView = ({
   );
 };
 
-/**
- * Since we are passing verses and it's an array
- * even if the same verses are passed, their reference will change
- * on fetching a new page and since Memo only does shallow comparison,
- * we need to use custom comparing logic:
- *
- *  1. Check if the number of verses are the same.
- *  2. Check if the fonts changed.
- *
- * If the above condition is met, it's safe to assume that the result
- * of both renders are the same.
- *
- * @param {ReadingViewProps} prevProps
- * @param {ReadingViewProps} nextProps
- * @returns {boolean}
- */
-const areVersesEqual = (prevProps: ReadingViewProps, nextProps: ReadingViewProps): boolean =>
-  prevProps.verses.length === nextProps.verses.length &&
-  !verseFontChanged(
-    prevProps.quranReaderStyles,
-    nextProps.quranReaderStyles,
-    prevProps.verses[0].words,
-    nextProps.verses[0].words,
-  );
-export default memo(ReadingView, areVersesEqual);
+export default ReadingView;
