@@ -1,6 +1,7 @@
 import sample from 'lodash/sample';
 import { useDispatch } from 'react-redux';
 
+import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import curatedStations from './curatedStations';
@@ -40,6 +41,8 @@ const RandomPlaylist = () => {
       {Object.entries(curatedStations).map(([id, station]) => (
         <div className={styles.item} key={id}>
           <Card
+            hoverIcon={<PlayIcon />}
+            imgSrc={station.bannerImgSrc}
             size={CardSize.Large}
             title={station.title}
             description={station.description}

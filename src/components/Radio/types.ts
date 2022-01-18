@@ -25,4 +25,5 @@ export type CuratedStation = {
   audioItems: AudioItem[];
   title: string;
   description: string;
+  bannerImgSrc?: string;
 };

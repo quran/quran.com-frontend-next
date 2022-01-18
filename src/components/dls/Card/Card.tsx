@@ -35,6 +35,12 @@ const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProp
     >
       <div className={styles.imageContainer}>
         {imgSrc && <img alt={title} className={styles.img} src={imgSrc} />}
+
+        {hoverIcon && (
+          <div className={styles.cardHoverEffectContainer} data-theme="dark">
+            {hoverIcon}
+          </div>
+        )}
       </div>
       <div className={styles.bodyContainer}>
         <div className={styles.textsContainer}>
@@ -47,11 +53,6 @@ const Card = ({ size, title, description, onClick, imgSrc, hoverIcon }: CardProp
           </Button>
         )}
       </div>
-      {hoverIcon && (
-        <div className={styles.cardHoverEffectContainer} data-theme="dark">
-          {hoverIcon}
-        </div>
-      )}
     </div>
   );
 };
