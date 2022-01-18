@@ -48,7 +48,7 @@ const ReciterList = () => {
       playFrom({
         chapterId: Number(stationState.chapterId),
         reciterId: Number(stationState.reciterId),
-        timestamp: 0,
+        shouldUseRandomTimestamp: true,
         isRadioMode: true,
       }),
     );

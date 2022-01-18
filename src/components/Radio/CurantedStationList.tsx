@@ -1,3 +1,4 @@
+import sample from 'lodash/sample';
 import { useDispatch } from 'react-redux';
 
 import Card, { CardSize } from '../dls/Card/Card';
@@ -13,14 +14,14 @@ const RandomPlaylist = () => {
   const dispatch = useDispatch();
 
   const playStation = async (id: string, station: CuratedStation) => {
-    const firstAudioItem = curatedStations[id].audioItems[0];
+    const randomAudioItem = sample(curatedStations[id].audioItems);
     const stationState: StationState = {
       id,
       type: StationType.Curated,
       title: station.title,
       description: station.description,
-      chapterId: firstAudioItem.chapterId,
-      reciterId: firstAudioItem.reciterId,
+      chapterId: randomAudioItem.chapterId,
+      reciterId: randomAudioItem.reciterId,
     };
     dispatch(setRadioStationState(stationState));
 
@@ -28,7 +29,7 @@ const RandomPlaylist = () => {
       playFrom({
         chapterId: Number(stationState.chapterId),
         reciterId: Number(stationState.reciterId),
-        timestamp: 0,
+        shouldUseRandomTimestamp: true,
         isRadioMode: true,
       }),
     );
