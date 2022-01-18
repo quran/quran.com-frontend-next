@@ -3,13 +3,14 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
+import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
 import { CuratedStation, StationState, StationType } from './types';
 
-import { playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';
 
@@ -21,6 +22,7 @@ import { logEvent } from 'src/utils/eventLogger';
 const CuratedStationList = () => {
   const dispatch = useDispatch();
   const stationState = useSelector(selectRadioStation, shallowEqual);
+  const isAudioPlaying = useSelector(selectIsPlaying);
 
   const playStation = async (id: string, station: CuratedStation) => {
     logEvent('station_played', {
@@ -54,15 +56,23 @@ const CuratedStationList = () => {
       {Object.entries(curatedStations).map(([id, station]) => {
         const isSelectedStation =
           stationState.type === StationType.Curated && stationState.id === id;
+
+        let onClick;
+        if (!isSelectedStation) onClick = () => playStation(id, station);
+        if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
+        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
+
+        const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
+
         return (
           <div className={styles.item} key={id}>
             <Card
-              actionIcon={isSelectedStation ? <PauseIcon /> : <PlayIcon />}
+              actionIcon={actionIcon}
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}
               title={station.title}
               description={station.description}
-              onClick={() => playStation(id, station)}
+              onClick={onClick}
             />
           </div>
         );

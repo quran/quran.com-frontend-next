@@ -2,13 +2,14 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
+import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import DataFetcher from '../DataFetcher';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
-import { playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
@@ -36,6 +37,7 @@ const reciterPictures = {
 const ReciterStationList = () => {
   const dispatch = useDispatch();
   const stationState = useSelector(selectRadioStation, shallowEqual);
+  const isAudioPlaying = useSelector(selectIsPlaying);
 
   const playReciterStation = async (reciter: Reciter) => {
     logEvent('station_played', {
@@ -73,12 +75,19 @@ const ReciterStationList = () => {
             {data.reciters.map((reciter) => {
               const isSelectedStation =
                 stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
+
+              let onClick;
+              if (!isSelectedStation) onClick = () => playReciterStation(reciter);
+              if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
+              if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
+
+              const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
               return (
                 <Card
-                  actionIcon={isSelectedStation ? <PauseIcon /> : <PlayIcon />}
+                  actionIcon={actionIcon}
                   imgSrc={reciterPictures[reciter.id]}
                   key={reciter.id}
-                  onClick={() => playReciterStation(reciter)}
+                  onClick={onClick}
                   title={reciter.name}
                   description={reciter.style.name}
                   size={CardSize.Medium}
