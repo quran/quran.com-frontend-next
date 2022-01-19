@@ -1,0 +1,29 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 100%;
+  padding-inline: var(--spacing-medium);
+  @include breakpoints.tablet {
+    max-width: calc(20 * var(--spacing-mega));
+    margin-inline: auto;
+  }
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+}
+.description {
+  text-align: start;
+  line-height: normal;
+}
