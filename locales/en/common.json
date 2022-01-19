@@ -1,6 +1,5 @@
 {
     "about": "About Us",
-    "all-reciters": "All Reciters",
     "audio": {
         "auto-scroll": {
             "off": "Off",
@@ -105,7 +104,6 @@
     "juz": "Juz",
     "languages": "Languages",
     "language": "Language",
-    "listen-now": "Listen Now",
     "loading": "Loading",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
