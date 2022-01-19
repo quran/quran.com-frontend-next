@@ -12,7 +12,7 @@ import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
 
 import styles from './AudioPlayerBody.module.scss';
 
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectReciter, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
 import AudioData from 'types/AudioData';
 
 interface Props {
@@ -27,6 +27,11 @@ const AudioPlayerBody: React.FC<Props> = ({
   audioData,
 }) => {
   const { id: reciterId } = useSelector(selectReciter, shallowEqual);
+  const isRadioMode = useSelector(selectIsRadioMode);
+
+  const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
+  const isAudioRepeatManagerEnabled = !isRadioMode && reciterId && audioData?.chapterId;
+
   return (
     <>
       <div className={styles.innerContainer}>
@@ -37,14 +42,14 @@ const AudioPlayerBody: React.FC<Props> = ({
           togglePlaying={() => togglePlaying()}
           isAudioPlayerHidden={false}
         />
-        {reciterId && audioData?.chapterId && (
+        {isQuranReaderHighlightDispatcherEnabled && (
           <QuranReaderHighlightDispatcher
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
             chapterId={audioData?.chapterId}
           />
         )}
-        {reciterId && audioData?.chapterId && (
+        {isAudioRepeatManagerEnabled && (
           <AudioRepeatManager
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
@@ -60,14 +65,16 @@ const AudioPlayerBody: React.FC<Props> = ({
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <div className={styles.sliderContainer}>
-          <AudioPlayerSlider
-            audioPlayerElRef={audioPlayerElRef}
-            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-          />
-        </div>
+        {!isRadioMode && (
+          <div className={styles.sliderContainer}>
+            <AudioPlayerSlider
+              audioPlayerElRef={audioPlayerElRef}
+              isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+            />
+          </div>
+        )}
       </div>
-      <PlaybackControls />
+      <PlaybackControls isRadioMode={isRadioMode} />
     </>
   );
 };

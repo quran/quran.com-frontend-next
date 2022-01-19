@@ -102,6 +102,7 @@ const AudioRepeatManager = ({
   useEffect(() => {
     if (!lastActiveVerseTiming.current) return null;
     if (!audioData || isValidating) return null;
+
     if (!isInRepeatMode) return null;
 
     const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
@@ -118,7 +119,7 @@ const AudioRepeatManager = ({
     }
 
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
-    const isAudioEnded = currentTimeInMs >= audioData.duration;
+    const isAudioEnded = audioPlayerElRef.current.ended;
 
     // When we're done repeating this verse. Reset the progress state so it can be used for the next verse repetition
     // also delay the audio when the verse changed to the next verse
@@ -143,6 +144,7 @@ const AudioRepeatManager = ({
       triggerPauseAudio();
       dispatch(setRepeatProgress({ repeatRange: 1 }));
       dispatch(exitRepeatMode());
+      return null;
     }
 
     return null;

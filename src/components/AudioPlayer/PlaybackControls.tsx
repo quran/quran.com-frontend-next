@@ -9,27 +9,39 @@ import SeekButton, { SeekButtonType } from './SeekButton';
 import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
-const PlaybackControls = () => {
+type PlaybackControlsProps = {
+  isRadioMode: boolean;
+};
+const PlaybackControls = ({ isRadioMode }: PlaybackControlsProps) => {
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isLoading = audioDataStatus === AudioDataStatus.Loading;
 
   return (
     <div className={styles.container}>
-      <div className={styles.actionItem}>
-        <RepeatAudioButton />
-      </div>
-      <div className={styles.actionItem}>
-        <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />
-      </div>
+      {!isRadioMode && (
+        <>
+          <div className={styles.actionItem}>
+            <RepeatAudioButton />
+          </div>
+          <div className={styles.actionItem}>
+            <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />
+          </div>
+        </>
+      )}
       <div className={styles.actionItem}>
         <PlayPauseButton />
       </div>
-      <div className={styles.actionItem}>
-        <SeekButton type={SeekButtonType.NextAyah} isLoading={isLoading} />
-      </div>
-      <div className={styles.actionItem}>
-        <OverflowAudioPlayerActionsMenu />
-      </div>
+
+      {!isRadioMode && (
+        <>
+          <div className={styles.actionItem}>
+            <SeekButton type={SeekButtonType.NextAyah} isLoading={isLoading} />
+          </div>
+          <div className={styles.actionItem}>
+            <OverflowAudioPlayerActionsMenu />
+          </div>
+        </>
+      )}
     </div>
   );
 };

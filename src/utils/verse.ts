@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+import { random } from 'lodash';
 import range from 'lodash/range';
 
-import { getAllChaptersData, getChapterData } from './chapter';
+import { getAllChaptersData, getChapterData, getRandomChapterId } from './chapter';
 
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -340,4 +341,15 @@ export const shortenVerseText = (text: string, length = 150): string => {
 export const getFirstAndLastVerseKeys = (verses: Verse[]) => {
   const verseKeys = Object.keys(verses).sort(sortByVerseKey);
   return [verseKeys[0], verseKeys[verseKeys.length - 1]];
+};
+
+const getRandomVerseNumber = async (chapterId: string) => {
+  const chapterData = await getChapterData(chapterId);
+  return random(1, chapterData.versesCount);
+};
+
+export const getRandomVerseKey = async () => {
+  const chapterId = getRandomChapterId();
+  const verseNumber = await getRandomVerseNumber(chapterId.toString());
+  return makeVerseKey(Number(chapterId), Number(verseNumber));
 };
