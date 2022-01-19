@@ -5,13 +5,11 @@
 }
 
 .verseLinksContainer {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--spacing-small);
-  @include breakpoints.tablet {
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
 }
 
 .container {
@@ -19,4 +17,12 @@
   padding-block-end: 0;
   padding-inline-start: var(--flow-side-spacing);
   padding-inline-end: var(--flow-side-spacing);
+  overflow-x: auto;
+}
+
+.bookmarkItem {
+  white-space: nowrap;
+  & + & {
+    margin-inline-start: var(--spacing-small);
+  }
 }
