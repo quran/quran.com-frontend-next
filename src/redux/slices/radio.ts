@@ -9,7 +9,6 @@ export const radioSlice = createSlice({
   name: 'radio',
   initialState,
   reducers: {
-    exitRadioMode: () => initialState,
     setRadioStationState: (state, action: PayloadAction<StationState>) => {
       return {
         ...state,
@@ -19,7 +18,7 @@ export const radioSlice = createSlice({
   },
 });
 
-export const { setRadioStationState, exitRadioMode } = radioSlice.actions;
+export const { setRadioStationState } = radioSlice.actions;
 
 export const selectRadioStation = (state: RootState) => state.radio;
 
