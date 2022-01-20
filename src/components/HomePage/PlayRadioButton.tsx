@@ -4,7 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
-import Button, { ButtonVariant } from '../dls/Button/Button';
+import Button from '../dls/Button/Button';
 import Link from '../dls/Link/Link';
 
 import styles from './PlayRadioButton.module.scss';
@@ -43,24 +43,18 @@ const PlayRadioButton = () => {
   };
 
   return (
-    <div className={styles.container} data-theme="dark">
+    <div className={styles.container}>
       <div className={styles.playRadioSection}>
         {isAudioPlaying ? (
           <Button
             prefix={<PauseIcon />}
-            variant={ButtonVariant.Ghost}
             onClick={onPauseClicked}
             className={styles.playPauseButton}
           >
             {t('pause-radio')}
           </Button>
         ) : (
-          <Button
-            prefix={<PlayIcon />}
-            className={styles.playPauseButton}
-            variant={ButtonVariant.Ghost}
-            onClick={onPlayClicked}
-          >
+          <Button prefix={<PlayIcon />} className={styles.playPauseButton} onClick={onPlayClicked}>
             {t('play-radio')}
           </Button>
         )}
@@ -69,7 +63,7 @@ const PlayRadioButton = () => {
           <div className={styles.stationInfo}>
             <span className={styles.stationTitle}>
               {t(`curated-station.${stationState.title}`, null, { default: stationState.title })}
-            </span>
+            </span>{' '}
             <Link href="/radio" className={styles.editStationButton}>
               ({t('change')})
             </Link>

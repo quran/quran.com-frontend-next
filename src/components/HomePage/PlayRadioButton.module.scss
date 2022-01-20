@@ -1,6 +1,10 @@
 @use "src/styles/breakpoints";
 
 $text-colors: #fff; // text color should be white on both light and dark theme
+$button-hover-color: rgba(
+  $color: #000000,
+  $alpha: 0.3,
+);
 
 .container {
   position: absolute;
@@ -31,7 +35,17 @@ $text-colors: #fff; // text color should be white on both light and dark theme
 }
 
 .editStationButton {
-  margin-inline: var(--spacing-xsmall);
+  margin-inline-end: var(--spacing-xsmall);
   color: $text-colors;
   text-decoration: underline;
+}
+
+.playPauseButton {
+  background-color: transparent;
+  border: none;
+  color: $text-colors;
+  &:hover {
+    color: $text-colors;
+    background-color: $button-hover-color;
+  }
 }
