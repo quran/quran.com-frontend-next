@@ -19,14 +19,6 @@ $text-colors: #fff; // text color should be white on both light and dark theme
   }
 }
 
-.playPauseButton {
-  background-color: transparent;
-  color: $text-colors;
-  &:hover {
-    background-color: transparent;
-  }
-}
-
 .playRadioSection {
   display: flex;
   flex-direction: column;
@@ -37,12 +29,9 @@ $text-colors: #fff; // text color should be white on both light and dark theme
   margin-block-start: var(--spacing-medium);
   color: $text-colors;
 }
-.stationInfo {
-  margin-block-start: var(--spacing-xsmall);
-}
 
 .editStationButton {
-  margin-inline: var(--spacing-small);
+  margin-inline: var(--spacing-xsmall);
   color: $text-colors;
   text-decoration: underline;
 }
