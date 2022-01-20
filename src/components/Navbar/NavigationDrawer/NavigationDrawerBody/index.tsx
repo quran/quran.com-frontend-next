@@ -29,6 +29,7 @@ const NavigationDrawerBody = () => {
     <div className={styles.listItemsContainer}>
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
+      <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />
       <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
       <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
@@ -47,7 +48,6 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
-      <NavigationDrawerItem href="/radio" title="Quran Radio" icon={<IconRadio2 />} />
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
       {/* <NavigationDrawerItem title="Duaas" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}
