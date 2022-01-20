@@ -67,7 +67,9 @@ const PlayRadioButton = () => {
 
         {shouldShowStationName && (
           <div className={styles.stationInfo}>
-            <span className={styles.stationTitle}>{stationState.title}</span>
+            <span className={styles.stationTitle}>
+              {t(`curated-station.${stationState.title}`, null, { default: stationState.title })}
+            </span>
             <Link href="/radio" className={styles.editStationButton}>
               ({t('change')})
             </Link>
