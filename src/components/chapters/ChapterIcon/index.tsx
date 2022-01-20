@@ -1,13 +1,13 @@
 import React from 'react';
 
-import styles from './ChapterIcon.module.scss';
-
 interface Props {
   id?: string;
 }
 
 const ChapterIcon: React.FC<Props> = ({ id }) => (
-  <span className={styles[`icon${id ? `-${id}` : ''}`]} />
+    <span>
+      {id.padStart(3, '0')}
+    </span>
 );
 
 export default ChapterIcon;

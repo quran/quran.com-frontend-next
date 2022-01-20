@@ -79,12 +79,11 @@
 
 @font-face {
   font-family: "surahnames";
-  src: url("/fonts/surah-names/surah-names.eot");
-  src: url("/fonts/surah-names/surah-names.eot#iefix")
+  src: url("/fonts/surah-names/v2/sura_names.woff2");
+  src: url("/fonts/surah-names/v2/sura_names.eot#iefix")
       format("embedded-opentype"),
-    url("/fonts/surah-names/surah-names.ttf") format("truetype"),
-    url("/fonts/surah-names/surah-names.woff") format("woff"),
-    url("/fonts/surah-names/surah-names.svg#surah-names") format("svg");
+    url("/fonts/surah-names/v2/sura_names.ttf") format("truetype"),
+    url("/fonts/surah-names/v2/sura_names.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
