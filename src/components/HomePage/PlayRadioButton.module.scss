@@ -19,7 +19,6 @@ $button-hover-color: rgba(
   padding-block: var(--spacing-medium);
   @include breakpoints.tablet {
     padding-inline: calc(1.3 * var(--spacing-mega));
-    padding-block: var(--spacing-mega);
   }
 }
 

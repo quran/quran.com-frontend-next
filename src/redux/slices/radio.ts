@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import sample from 'lodash/sample';
 
+import resetSettings from './reset-settings';
+
 import curatedStations from 'src/components/Radio/curatedStations';
 import { StationState, StationType } from 'src/components/Radio/types';
 import { RootState } from 'src/redux/RootState';
@@ -27,6 +29,11 @@ export const radioSlice = createSlice({
         ...action.payload,
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(resetSettings, () => {
+      return initialState;
+    });
   },
 });
 
