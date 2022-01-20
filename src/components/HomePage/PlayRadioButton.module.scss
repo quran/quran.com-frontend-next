@@ -12,10 +12,11 @@ $text-colors: #fff; // text color should be white on both light and dark theme
 
   box-sizing: border-box;
   padding-inline: calc(1.3 * var(--spacing-medium));
+  padding-block: var(--spacing-medium);
   @include breakpoints.tablet {
     padding-inline: calc(1.3 * var(--spacing-mega));
+    padding-block: var(--spacing-mega);
   }
-  padding-block: var(--spacing-mega);
 }
 
 .playPauseButton {
@@ -34,7 +35,6 @@ $text-colors: #fff; // text color should be white on both light and dark theme
 
 .stationTitle {
   margin-block-start: var(--spacing-medium);
-  margin-inline-end: var(--spacing-small);
   color: $text-colors;
 }
 .stationInfo {
@@ -42,6 +42,7 @@ $text-colors: #fff; // text color should be white on both light and dark theme
 }
 
 .editStationButton {
+  margin-inline: var(--spacing-small);
   color: $text-colors;
   text-decoration: underline;
 }
