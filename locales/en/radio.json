@@ -5,19 +5,19 @@
     "curated-station": {
         "popular-recitations": {
             "title": "Popular Recitations",
-            "description": "The most popular recitations in the world"
+            "description": "Daily curated feed of recitations"
         },
         "yaseen-alwaqiah-al-mulk": {
             "title": "Yaseen, Al-Waqiah, Al-Mulk",
-            "description": "The most popular recitations in the world"
+            "description": "The Surahs from a curation of reciters"
         },
-        "surah-al-kahf":  {
-            "title": "Surah Al-Kahf", 
-            "description":"The most popular recitations in the world"
+        "surah-al-kahf": {
+            "title": "Surah Al-Kahf",
+            "description": "Listen to Surah Alkahf on repeat"
         },
         "juz-amma": {
             "title": "Juz Amma",
-            "description":"The most popular recitations in the world"
+            "description": "Listen to the final Juz of the Quran"
         }
     }
 }

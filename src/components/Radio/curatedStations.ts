@@ -30,7 +30,7 @@ const generateJuzAmmaAudioTracks = (): AudioTrack[] => {
 };
 
 const curatedStations: Record<string, CuratedStation> = {
-  popular: {
+  '1': {
     title: 'popular-recitations.title',
     description: 'popular-recitations.description',
     bannerImgSrc: '/images/stations/1.jpeg',
