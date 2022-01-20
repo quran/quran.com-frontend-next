@@ -1,6 +1,5 @@
 @use "src/styles/breakpoints";
-
-$page-max-width: 80rem;
+@use "src/styles/utility";
 
 .container {
   display: flex;
@@ -10,9 +9,9 @@ $page-max-width: 80rem;
   max-width: 100%;
   padding-inline: var(--spacing-medium);
   @include breakpoints.tablet {
-    max-width: $page-max-width;
     margin-inline: auto;
   }
+  @include utility.pageContainer();
 }
 
 .infoContainer {
