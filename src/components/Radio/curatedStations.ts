@@ -39,7 +39,7 @@ const curatedStations: Record<string, CuratedStation> = {
   '2': {
     title: 'yaseen-alwaqiah-al-mulk.title',
     description: 'yaseen-alwaqiah-al-mulk.description',
-    bannerImgSrc: '/images/stations/1.jpeg',
+    bannerImgSrc: '/images/stations/2.jpg',
     audioTracks: [
       {
         chapterId: '36',
@@ -58,7 +58,7 @@ const curatedStations: Record<string, CuratedStation> = {
   '3': {
     title: 'surah-al-kahf.title',
     description: 'surah-al-kahf.description',
-    bannerImgSrc: '/images/stations/3.svg',
+    bannerImgSrc: '/images/stations/3.jpeg',
     audioTracks: popularRecitersId.map((reciterId) => ({
       chapterId: '18',
       reciterId,
@@ -67,7 +67,7 @@ const curatedStations: Record<string, CuratedStation> = {
   '4': {
     title: 'juz-amma.title',
     description: 'juz-amma.description',
-    bannerImgSrc: '/images/stations/3.svg',
+    bannerImgSrc: '/images/stations/4.jpeg',
     audioTracks: generateJuzAmmaAudioTracks(),
   },
 };
