@@ -17,7 +17,9 @@ import QueryParam from 'types/QueryParam';
 
 const SelectReciterMenu = ({ onBack }) => {
   const { lang, t } = useTranslation('common');
-  const selectedReciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: selectedReciterId }: { value: number } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+  );
 
   const dispatch = useDispatch();
 

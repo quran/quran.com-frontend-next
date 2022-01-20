@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable max-lines */
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -18,6 +18,7 @@ import Loading from './Loading';
 import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import onCopyQuranWords from './onCopyQuranWords';
+import QueryParamMessage from './QueryParamMessage';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
@@ -61,19 +62,39 @@ const QuranReader = ({
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
+  const [shouldOverrideQueryParam, setShouldOverrideQueryParam] = useState(false);
+  const [shouldPersistQueryParam, setShouldPersistQueryParam] = useState(false);
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const selectedTranslations = useGetQueryParamOrReduxValue(QueryParam.Translations) as number[];
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const {
+    value: selectedTranslations,
+    queryParamUsed: translationsQueryParamUsed,
+  }: { value: number[]; queryParamUsed: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Translations,
+    shouldOverrideQueryParam,
+  );
+  const {
+    value: reciterId,
+    queryParamUsed: reciterQueryParamUsed,
+  }: { value: number; queryParamUsed: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+    shouldOverrideQueryParam,
+  );
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
-  const wordByWordLocale = useGetQueryParamOrReduxValue(QueryParam.WBW_LOCALE) as string;
+  const {
+    value: wordByWordLocale,
+    queryParamUsed: wordByWordLocaleQueryParamUsed,
+  }: { value: string; queryParamUsed: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.WBW_LOCALE,
+    shouldOverrideQueryParam,
+  );
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  useSyncReduxAndQueryParams();
+  useSyncReduxAndQueryParams(shouldPersistQueryParam);
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
@@ -154,6 +175,9 @@ const QuranReader = ({
     );
   }
 
+  const urlParamsUsed =
+    translationsQueryParamUsed || reciterQueryParamUsed || wordByWordLocaleQueryParamUsed;
+
   return (
     <>
       <ContextMenu />
@@ -173,6 +197,15 @@ const QuranReader = ({
             loadMore={loadMore}
             loader={loader}
           >
+            {urlParamsUsed && (
+              <QueryParamMessage
+                translationsQueryParamUsed={translationsQueryParamUsed}
+                reciterQueryParamUsed={reciterQueryParamUsed}
+                wordByWordLocaleQueryParamUsed={wordByWordLocaleQueryParamUsed}
+                setShouldOverrideQueryParam={setShouldOverrideQueryParam}
+                setShouldPersistQueryParam={setShouldPersistQueryParam}
+              />
+            )}
             <QuranReaderBody
               isReadingPreference={isReadingPreference}
               quranReaderStyles={quranReaderStyles}

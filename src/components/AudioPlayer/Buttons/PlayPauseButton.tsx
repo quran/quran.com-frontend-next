@@ -30,7 +30,7 @@ const PlayPauseButton = () => {
 
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData, shallowEqual);
   const currentReadingChapterIds = useChapterIdsByUrlPath(lang);
   const currentAudioChapterId = audioData?.chapterId?.toString();

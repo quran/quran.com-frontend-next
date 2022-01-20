@@ -18,7 +18,9 @@ const TRANSLATION_AUTHOR_SAMPLE = '— Dr. Mustafa Khattab, the Clear Quran';
 const VERSE_KEY_SAMPLE = '1:12';
 
 const TranslationViewCellSkeleton = () => {
-  const selectedTranslations = useGetQueryParamOrReduxValue(QueryParam.Translations) as number[];
+  const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
+    QueryParam.Translations,
+  );
   const { quranFont, quranTextFontScale, translationFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,

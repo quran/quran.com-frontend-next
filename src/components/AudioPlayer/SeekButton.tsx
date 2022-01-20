@@ -39,7 +39,7 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chapterData = useMemo(

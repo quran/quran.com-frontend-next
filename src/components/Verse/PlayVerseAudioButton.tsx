@@ -37,7 +37,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
   const audioDataStatus = useSelector(selectAudioDataStatus);
