@@ -21,6 +21,6 @@
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
     "/apps": ["apps"],
-    "/radio": ["home"]
+    "/radio": ["home", "quick-links", "radio"]
   }
 }

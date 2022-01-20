@@ -1,0 +1,77 @@
+$card-hover-background-color: rgba(
+  $color: #000000,
+  $alpha: 0.6,
+);
+
+.container {
+  position: relative;
+  scroll-snap-align: start;
+  scroll-margin: var(--spacing-medium);
+  border-radius: var(--border-radius-rounded);
+  cursor: pointer;
+}
+
+// size
+.large {
+  min-width: calc(12 * var(--spacing-mega));
+}
+.medium {
+  min-width: calc(10 * var(--spacing-medium));
+}
+
+.imageContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-rounded);
+  background-color: var(--color-background-alternative-deep);
+
+  .medium & {
+    min-height: calc(9 * var(--spacing-medium));
+  }
+  .large & {
+    min-height: calc(15 * var(--spacing-medium));
+  }
+}
+
+.bodyContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faded);
+}
+
+.textsContainer {
+  overflow: hidden;
+}
+
+.title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.description {
+  opacity: var(--opacity-75);
+}
+
+.img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardHoverEffectContainer {
+  color: var(--color-text-default);
+  display: none;
+  .container:hover & {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  position: absolute;
+  inset: 0;
+  border-radius: var(--border-radius-rounded);
+  z-index: 1;
+  background-color: $card-hover-background-color;
+}
