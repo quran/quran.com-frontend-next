@@ -22,7 +22,7 @@ const PlayRadioButton = () => {
 
   const shouldShowStationName = isRadioMode && isAudioPlaying;
 
-  const onPlayClick = () => {
+  const onPlayClicked = () => {
     logEvent('play_radio_clicked', {
       stationId: stationState.id,
       type: stationState.type,
@@ -38,7 +38,7 @@ const PlayRadioButton = () => {
     );
   };
 
-  const onPauseClick = () => {
+  const onPauseClicked = () => {
     triggerPauseAudio();
   };
 
@@ -49,7 +49,7 @@ const PlayRadioButton = () => {
           <Button
             prefix={<PauseIcon />}
             variant={ButtonVariant.Ghost}
-            onClick={onPauseClick}
+            onClick={onPauseClicked}
             className={styles.playPauseButton}
           >
             {t('pause-radio')}
@@ -59,7 +59,7 @@ const PlayRadioButton = () => {
             prefix={<PlayIcon />}
             className={styles.playPauseButton}
             variant={ButtonVariant.Ghost}
-            onClick={onPlayClick}
+            onClick={onPlayClicked}
           >
             {t('play-radio')}
           </Button>
