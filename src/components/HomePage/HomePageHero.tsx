@@ -3,7 +3,7 @@ import Head from 'next/head';
 import AlQuranulKarimSVG from '../../../public/images/alquranul-karim.svg';
 
 import styles from './HomePageHero.module.scss';
-import PrayerTimes from './PrayerTimes/PrayerTimes';
+import PlayRadioButton from './PlayRadioButton';
 import QuickLinks from './QuickLinks';
 
 import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
@@ -16,7 +16,7 @@ const HomePageHero = () => {
       </Head>
       <div className={styles.backgroundImage} />
       <div data-theme="light">
-        <PrayerTimes />
+        <PlayRadioButton />
         <div className={styles.innerContainer}>
           <div className={styles.imageContainer}>
             <AlQuranulKarimSVG />

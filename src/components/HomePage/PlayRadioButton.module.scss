@@ -1,0 +1,47 @@
+@use "src/styles/breakpoints";
+
+$text-colors: #fff; // text color should be white on both light and dark theme
+
+.container {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+
+  display: flex;
+  justify-content: flex-end;
+
+  box-sizing: border-box;
+  padding-inline: calc(1.3 * var(--spacing-medium));
+  @include breakpoints.tablet {
+    padding-inline: calc(1.3 * var(--spacing-mega));
+  }
+  padding-block: var(--spacing-mega);
+}
+
+.playPauseButton {
+  background-color: transparent;
+  color: $text-colors;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.playRadioSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stationTitle {
+  margin-block-start: var(--spacing-medium);
+  margin-inline-end: var(--spacing-small);
+  color: $text-colors;
+}
+.stationInfo {
+  margin-block-start: var(--spacing-xsmall);
+}
+
+.editStationButton {
+  color: $text-colors;
+  text-decoration: underline;
+}

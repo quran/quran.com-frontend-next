@@ -2,7 +2,7 @@ import { CuratedStation } from './types';
 
 // TODO: localize title & description?
 const curatedStations: Record<string, CuratedStation> = {
-  '1': {
+  popular: {
     title: 'Ar-Rahman, Al-Waqiah, Yaseen',
     description: 'Mishary Al-fasy, and others',
     bannerImgSrc: '/images/stations/1.jpeg',
