@@ -41,14 +41,14 @@ const PlayRadioButton = () => {
   };
 
   /**
-   * If user has preffered station, continue playing that station
-   * otherwise play from "popular station"
+   * If preferred station is not set in redux, set it to the popular station & play the audio
+   * otherwise, play the current preferred station
    */
   const onPlayClick = () => {
-    const userHasPrefferedStation = !!stationState?.id;
-    const nextStationState = userHasPrefferedStation ? stationState : getPopularStationState();
+    const isPreferredStationAvailable = !!stationState?.id;
+    const nextStationState = isPreferredStationAvailable ? stationState : getPopularStationState();
 
-    if (!userHasPrefferedStation) {
+    if (!isPreferredStationAvailable) {
       dispatch(setRadioStationState(nextStationState));
     }
 
