@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import { RootState } from 'src/redux/RootState';
+import { selectReciterId } from 'src/redux/slices/AudioPlayer/state';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
-import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
+import {
+  isValidReciterId,
+  isValidTranslationsQueryParamValue,
+} from 'src/utils/queryParamValidator';
 import QueryParam from 'types/QueryParam';
 
 enum ValueType {
   String = 'String',
+  Number = 'Number',
   ArrayOfNumbers = 'ArrayOfNumbers',
   ArrayOfStrings = 'ArrayOfStrings',
 }
@@ -20,6 +25,11 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectSelectedTranslations,
     reduxEqualityFunction: areArraysEqual,
     valueType: ValueType.ArrayOfNumbers,
+  },
+  [QueryParam.Reciter]: {
+    reduxSelector: selectReciterId,
+    reduxEqualityFunction: shallowEqual,
+    valueType: ValueType.Number,
   },
 } as Record<
   QueryParam,
@@ -57,11 +67,15 @@ const useGetQueryParamOrReduxValue = (queryParam: QueryParam): unknown => {
       let isValidValue = true;
       if (queryParam === QueryParam.Translations) {
         isValidValue = isValidTranslationsQueryParamValue(paramStringValue);
+      } else if (queryParam === QueryParam.Reciter) {
+        isValidValue = isValidReciterId(paramStringValue);
       }
       if (isValidValue) {
         // return an array of numbers instead of a string
         if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.ArrayOfNumbers) {
           setValue(paramStringValue.split(',').map((stringValue) => Number(stringValue)));
+        } else if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.Number) {
+          setValue(Number(query[queryParam]));
         } else {
           setValue(query[queryParam]);
         }

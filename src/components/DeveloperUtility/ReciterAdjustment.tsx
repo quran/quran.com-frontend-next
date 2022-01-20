@@ -1,14 +1,16 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
-import { useDispatch, shallowEqual, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import styles from './ReciterAdjustment.module.scss';
 
 import { getAvailableReciters } from 'src/api';
-import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import { setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
+import QueryParam from 'types/QueryParam';
 import Reciter from 'types/Reciter';
 
 const ReciterAdjustment: React.FC = () => {
@@ -18,7 +20,7 @@ const ReciterAdjustment: React.FC = () => {
       res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
     ),
   );
-  const selectedReciter = useSelector(selectReciter, shallowEqual);
+  const selectedReciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
   const reciters = data || [];
 
   const onSelectedReciterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -35,7 +37,7 @@ const ReciterAdjustment: React.FC = () => {
         name="reciters"
         onChange={onSelectedReciterChange}
         className={styles.select}
-        value={selectedReciter.id}
+        value={selectedReciterId}
       >
         {(reciters as Reciter[]).map((reciter) => (
           <option key={reciter.id} value={reciter.id}>
