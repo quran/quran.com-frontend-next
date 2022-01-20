@@ -5,6 +5,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 
 import { RootState } from 'src/redux/RootState';
 import { selectReciterId } from 'src/redux/slices/AudioPlayer/state';
+import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -30,6 +31,11 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectReciterId,
     reduxEqualityFunction: shallowEqual,
     valueType: ValueType.Number,
+  },
+  [QueryParam.WBW_LOCALE]: {
+    reduxSelector: selectWordByWordLocale,
+    reduxEqualityFunction: shallowEqual,
+    valueType: ValueType.String,
   },
 } as Record<
   QueryParam,
