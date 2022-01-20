@@ -20,6 +20,7 @@ import Reciter from 'types/Reciter';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
 export const selectReciter = (state: RootState) => state.audioPlayerState.reciter;
+export const selectReciterId = (state: RootState) => state.audioPlayerState.reciter.id;
 export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.isUsingDefaultReciter;
 export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
@@ -55,26 +56,22 @@ export const selectIsRadioMode = (state: RootState) => state.audioPlayerState.is
  * @param {number} chapter the chapter id
  *
  */
-export const loadAndPlayAudioData = createAsyncThunk<void, number, { state: RootState }>(
-  'audioPlayerState/loadAndPlayAudioData',
-  async (chapter, thunkAPI) => {
-    // play directly the audio file for this chapter is already loaded.
-    const currentAudioData = selectAudioData(thunkAPI.getState());
-    if (currentAudioData && currentAudioData.chapterId === chapter) {
-      triggerPlayAudio();
-      return;
-    }
-
-    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
-
-    const reciter = selectReciter(thunkAPI.getState());
-    const audioData = await getChapterAudioData(reciter.id, chapter);
-
-    thunkAPI.dispatch(setAudioData(audioData));
-
+export const loadAndPlayAudioData = createAsyncThunk<
+  void,
+  { chapter: number; reciterId: number },
+  { state: RootState }
+>('audioPlayerState/loadAndPlayAudioData', async ({ chapter, reciterId }, thunkAPI) => {
+  // play directly the audio file for this chapter is already loaded.
+  const currentAudioData = selectAudioData(thunkAPI.getState());
+  if (currentAudioData && currentAudioData.chapterId === chapter) {
     triggerPlayAudio();
-  },
-);
+    return;
+  }
+  thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
+  const audioData = await getChapterAudioData(reciterId, chapter);
+  thunkAPI.dispatch(setAudioData(audioData));
+  triggerPlayAudio();
+});
 
 /**
  * 1) pause the audio player

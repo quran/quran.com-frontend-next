@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, shallowEqual, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause-outline.svg';
 import PlayIcon from '../../../public/icons/play-outline.svg';
@@ -16,8 +16,8 @@ import Button, {
   ButtonType,
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
-  selectReciter,
   playFrom,
   selectAudioDataStatus,
   exitRepeatMode,
@@ -26,6 +26,7 @@ import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlight
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterNumberFromKey } from 'src/utils/verse';
+import QueryParam from 'types/QueryParam';
 
 interface PlayVerseAudioProps {
   verseKey: string;
@@ -36,7 +37,7 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const { id: reciterId } = useSelector(selectReciter, shallowEqual);
+  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
   const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
   const audioDataStatus = useSelector(selectAudioDataStatus);

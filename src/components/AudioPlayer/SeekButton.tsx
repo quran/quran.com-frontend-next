@@ -11,12 +11,12 @@ import { triggerSetCurrentTime } from './EventTriggers';
 
 import { getChapterAudioData } from 'src/api';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   finishRepeatEachVerseProgress,
   resetRepeatEachVerseProgress,
   selectAudioData,
   selectIsInRepeatMode,
-  selectReciter,
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectHighlightedLocation } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
@@ -24,6 +24,7 @@ import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { makeVerseKey } from 'src/utils/verse';
+import QueryParam from 'types/QueryParam';
 
 export enum SeekButtonType {
   NextAyah = 'nextAyah',
@@ -38,7 +39,7 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
-  const reciter = useSelector(selectReciter);
+  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
   const audioData = useSelector(selectAudioData);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chapterData = useMemo(
@@ -47,10 +48,10 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   );
 
   const { data: chapterAudioData } = useSWRImmutable(
-    reciter.id && audioData?.chapterId
-      ? makeChapterAudioDataUrl(reciter.id, audioData?.chapterId, true)
+    reciterId && audioData?.chapterId
+      ? makeChapterAudioDataUrl(reciterId, audioData?.chapterId, true)
       : null, // only fetch when reciterId and chapterId is available
-    () => getChapterAudioData(reciter.id, audioData?.chapterId, true),
+    () => getChapterAudioData(reciterId, audioData?.chapterId, true),
   );
 
   const verseTimingData = chapterAudioData?.verseTimings || [];

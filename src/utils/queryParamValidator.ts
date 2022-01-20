@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   // if it's empty string, we shouldn't consider it as a valid translation
   if (!value) {
@@ -21,4 +19,23 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
     }
   }
   return isValid;
+};
+
+/**
+ * Check whether the value of the query param is a valid
+ * reciter Id.
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export const isValidReciterId = (value: string): boolean => {
+  // if it's empty string, we shouldn't consider it as a valid reciter id
+  if (!value) {
+    return false;
+  }
+  const reciterId = Number(value);
+  if (reciterId === 0 || Number.isNaN(reciterId)) {
+    return false;
+  }
+  return true;
 };

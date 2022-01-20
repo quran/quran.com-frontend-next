@@ -12,7 +12,7 @@ import useSWRInfinite from 'swr/infinite';
 import { getPageLimit, getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
-import useSyncQueryParams from './hooks/useSyncQueryParams';
+import useSyncReduxAndQueryParams from './hooks/useSyncReduxAndQueryParams';
 import Loader from './Loader';
 import Loading from './Loading';
 import Notes from './Notes/Notes';
@@ -28,7 +28,7 @@ import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import Error from 'src/pages/_error';
-import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
   selectIsUsingDefaultWordByWordLocale,
@@ -67,14 +67,14 @@ const QuranReader = ({
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const selectedTranslations = useGetQueryParamOrReduxValue(QueryParam.Translations) as number[];
+  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const wordByWordLocale = useSelector(selectWordByWordLocale);
-  const reciter = useSelector(selectReciter, shallowEqual);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  useSyncQueryParams();
+  useSyncReduxAndQueryParams();
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
@@ -86,7 +86,7 @@ const QuranReader = ({
         isVerseData,
         isSelectedTafsirData,
         id,
-        reciter: reciter.id,
+        reciter: reciterId,
         locale: lang,
         wordByWordLocale,
       }),
