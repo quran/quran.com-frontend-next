@@ -174,7 +174,7 @@ $quran-max-container-width: 112rem;
 
   @include breakpoints.tablet {
     width: $large-device-width-ratio;
-    max-width: $max-container-width;
+    max-width: $quran-max-container-width;
   }
 }
 
