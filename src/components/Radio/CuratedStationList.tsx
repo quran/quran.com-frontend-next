@@ -1,4 +1,5 @@
 import sample from 'lodash/sample';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -23,6 +24,7 @@ const CuratedStationList = () => {
   const dispatch = useDispatch();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
+  const { t } = useTranslation('radio');
 
   const playStation = async (id: string, station: CuratedStation) => {
     logEvent('station_played', {
@@ -70,8 +72,8 @@ const CuratedStationList = () => {
               actionIcon={actionIcon}
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}
-              title={station.title}
-              description={station.description}
+              title={t(`curated-station.${station.title}.title`)}
+              description={t(`curated-station.${station.description}.description`)}
               onClick={onClick}
             />
           </div>
