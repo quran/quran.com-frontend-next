@@ -72,8 +72,8 @@ const CuratedStationList = () => {
               actionIcon={actionIcon}
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}
-              title={t(`curated-station.${station.title}.title`)}
-              description={t(`curated-station.${station.description}.description`)}
+              title={t(`curated-station.${station.title}`)}
+              description={t(`curated-station.${station.description}`)}
               onClick={onClick}
             />
           </div>

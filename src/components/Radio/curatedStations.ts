@@ -31,14 +31,14 @@ const generateJuzAmmaAudioTracks = (): AudioTrack[] => {
 
 const curatedStations: Record<string, CuratedStation> = {
   popular: {
-    title: 'popular-recitations',
-    description: 'popular-recitations',
+    title: 'popular-recitations.title',
+    description: 'popular-recitations.description',
     bannerImgSrc: '/images/stations/1.jpeg',
     audioTracks: generatePopularRecitersAudioTracks(),
   },
   '2': {
-    title: 'yaseen-alwaqiah-al-mulk',
-    description: 'yaseen-alwaqiah-al-mulk',
+    title: 'yaseen-alwaqiah-al-mulk.title',
+    description: 'yaseen-alwaqiah-al-mulk.description',
     bannerImgSrc: '/images/stations/1.jpeg',
     audioTracks: [
       {
@@ -56,8 +56,8 @@ const curatedStations: Record<string, CuratedStation> = {
     ],
   },
   '3': {
-    title: 'surah-al-kahf',
-    description: 'surah-al-kahf',
+    title: 'surah-al-kahf.title',
+    description: 'surah-al-kahf.description',
     bannerImgSrc: '/images/stations/3.svg',
     audioTracks: popularRecitersId.map((reciterId) => ({
       chapterId: '18',
@@ -65,8 +65,8 @@ const curatedStations: Record<string, CuratedStation> = {
     })),
   },
   '4': {
-    title: 'juz-amma',
-    description: 'juz-amma',
+    title: 'juz-amma.title',
+    description: 'juz-amma.description',
     bannerImgSrc: '/images/stations/3.svg',
     audioTracks: generateJuzAmmaAudioTracks(),
   },
