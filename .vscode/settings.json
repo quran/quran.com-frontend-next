@@ -9,7 +9,7 @@
         "source.fixAll.eslint": true,
         "source.fixAll.stylelint": true,
     },
-    // "editor.formatOnSave": true,
+    "editor.formatOnSave": true,
     "typescript.format.enable": false,
     "javascript.format.enable": false,
     "cssVariables.lookupFiles": [
