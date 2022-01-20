@@ -1,0 +1,30 @@
+@use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 100%;
+  padding-inline: var(--spacing-medium);
+  @include breakpoints.tablet {
+    margin-inline: auto;
+  }
+  @include utility.pageContainer();
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-weight: var(--font-weight-semibold);
+  line-height: normal;
+}
+.description {
+  text-align: start;
+  line-height: normal;
+}
