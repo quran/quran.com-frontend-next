@@ -75,7 +75,7 @@ const AudioPlayerBody: React.FC<Props> = ({
           </div>
         )}
       </div>
-      {isRadioMode ? <RadioPlaybackControl /> : <PlaybackControls isRadioMode={isRadioMode} />}
+      {isRadioMode ? <RadioPlaybackControl /> : <PlaybackControls />}
     </>
   );
 };
