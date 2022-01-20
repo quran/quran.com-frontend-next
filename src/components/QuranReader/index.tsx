@@ -33,7 +33,6 @@ import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
   selectIsUsingDefaultWordByWordLocale,
   selectReadingPreference,
-  selectWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
@@ -71,7 +70,7 @@ const QuranReader = ({
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
-  const wordByWordLocale = useSelector(selectWordByWordLocale);
+  const wordByWordLocale = useGetQueryParamOrReduxValue(QueryParam.WBW_LOCALE) as string;
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   useSyncReduxAndQueryParams();

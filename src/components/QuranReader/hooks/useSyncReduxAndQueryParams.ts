@@ -5,6 +5,10 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import { selectIsUsingDefaultReciter, selectReciterId } from 'src/redux/slices/AudioPlayer/state';
 import {
+  selectIsUsingDefaultWordByWordLocale,
+  selectWordByWordLocale,
+} from 'src/redux/slices/QuranReader/readingPreferences';
+import {
   selectIsUsingDefaultTranslations,
   selectSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
@@ -15,8 +19,10 @@ const useSyncReduxAndQueryParams = () => {
   const router = useRouter();
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
+  const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const selectedReciterId = useSelector(selectReciterId, shallowEqual);
+  const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
 
   useEffect(() => {
     if (router.isReady) {
@@ -59,6 +65,24 @@ const useSyncReduxAndQueryParams = () => {
       }
     }
   }, [isUsingDefaultReciter, router, selectedReciterId]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (isUsingDefaultWordByWordLocale) {
+        // when the user resets the default settings, we should remove the value from the url
+        if (
+          router.query[QueryParam.WBW_LOCALE] &&
+          router.query[QueryParam.WBW_LOCALE] === selectedWordByWordLocale
+        ) {
+          delete router.query[QueryParam.WBW_LOCALE];
+          router.push(router, undefined, { shallow: true });
+        }
+      } else if (!router.query[QueryParam.WBW_LOCALE]) {
+        router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
+        router.push(router, undefined, { shallow: true });
+      }
+    }
+  }, [isUsingDefaultWordByWordLocale, router, selectedWordByWordLocale]);
 };
 
 export default useSyncReduxAndQueryParams;
