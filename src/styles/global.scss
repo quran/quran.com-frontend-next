@@ -18,10 +18,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  :lang(ar),
-  :lang(ur) {
+  .ltr, :dir(ltr) {
+    /* stylelint-disable-next-line csstools/use-logical */
+    text-align: left;
+    direction: ltr;
+  }
+
+  .rtl, :dir(rtl) {
+    direction: rtl;
+    /* stylelint-disable-next-line csstools/use-logical */
+    text-align: right;
+  }
+
+  :lang(ur), .ur, .urdu {
     font-family: "nafees", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
+
+  :lang(ar){
+    font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  }
+
   :lang(bn) {
     font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
       Arial;

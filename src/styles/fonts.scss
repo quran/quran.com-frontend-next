@@ -1,13 +1,12 @@
-@font-face {
-  font-family: "quran-common";
-  src: url("/fonts/quran-common/quran_common.ttf") format("truetype");
-}
+$font-cdn: 'https://static.qurancdn.com/fonts/';
 
+//#TODO: figure out a way to generate font faces on the fly. We're creating lot of font faces that browsers might not need.
 @font-face {
   font-family: "IndoPak";
-  src: url("/fonts/nastaleeq/naskh-nastaleeq-wbw-3-7.woff2"),
-    url("/fonts/nastaleeq/naskh-nastaleeq-wbw-3-7.woff") format("woff"),
-    url("/fonts/nastaleeq/naskh-nastaleeq-wbw-3-7.ttf") format("truetype");
+  src: local('AlQuran IndoPak by QuranWBW. Version 4.0-WL'),
+      url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2"),
+    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff") format("woff"),
+    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf") format("truetype");
 }
 
 @font-face {

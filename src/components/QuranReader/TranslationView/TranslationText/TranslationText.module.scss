@@ -13,6 +13,10 @@ $translation-line-height: 1.5;
 
 @include utility.generate-font-sizes("translation");
 
+/*
+#TODO: should move language specific fonts and direction to
+/styles/global.scss. See line#21
+*/
 .ltr {
   /* stylelint-disable-next-line csstools/use-logical */
   text-align: left;
