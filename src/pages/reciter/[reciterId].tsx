@@ -3,6 +3,7 @@
 /* eslint-disable i18next/no-literal-string */
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import useSWR from 'swr';
@@ -15,17 +16,20 @@ import pageStyle from './reciterPage.module.scss';
 import { getAvailableReciters } from 'src/api';
 import Button from 'src/components/dls/Button/Button';
 import Footer from 'src/components/dls/Footer/Footer';
+import SurahPreviewRow from 'src/components/dls/SurahPreview/SurahPreviewRow';
 import { StationState, StationType } from 'src/components/Radio/types';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getAllChaptersData, getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
+import { toLocalizedNumber } from 'src/utils/locale';
 
 const Reciterpage = () => {
   const allChapterData = getAllChaptersData();
   const dispatch = useDispatch();
   const router = useRouter();
+  const { lang, t } = useTranslation();
 
   const reciters = useSWR(makeRecitersUrl(), async () => {
     return getAvailableReciters();
@@ -77,14 +81,23 @@ const Reciterpage = () => {
         <div className={pageStyle.sectionTitle}>Surah List</div>
         <div className={pageStyle.surahListContainer}>
           {Object.entries(allChapterData).map(([chapterId, chapterData]) => (
-            <div
+            <SurahPreviewRow
               key={chapterId}
-              className={pageStyle.chapterListItem}
-              onClick={() => onPlayClick(chapterId)}
-            >
-              <div className={pageStyle.chapterId}>{chapterId}</div>
-              <div className={pageStyle.chapterName}>{chapterData.transliteratedName}</div>
-            </div>
+              chapterId={Number(chapterId)}
+              description={`${toLocalizedNumber(chapterData.versesCount, lang)} ${t('ayahs')}`}
+              surahName={chapterData.transliteratedName}
+              surahNumber={Number(chapterId)}
+              translatedSurahName={chapterData.translatedName as string}
+              isMinimalLayout={false}
+            />
+            // <div
+            //   key={chapterId}
+            //   className={pageStyle.chapterListItem}
+            //   onClick={() => onPlayClick(chapterId)}
+            // >
+            //   <div className={pageStyle.chapterId}>{chapterId}</div>
+            //   <div className={pageStyle.chapterName}>{chapterData.transliteratedName}</div>
+            // </div>
           ))}
           <div />
         </div>

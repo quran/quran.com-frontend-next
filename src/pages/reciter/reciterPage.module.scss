@@ -24,6 +24,11 @@
 }
 
 .surahListContainer {
+  display: grid;
+  gap: var(--spacing-medium);
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .sectionTitle {
