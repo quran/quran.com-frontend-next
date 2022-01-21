@@ -12,23 +12,23 @@ import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 
 const Radio = () => {
-  const { t, lang } = useTranslation('radio');
+  const { t, lang } = useTranslation('');
   return (
     <div className={pageStyle.pageContainer}>
       <NextSeoWrapper
-        title={t('radio')}
+        title={t('common:quran-radio')}
         url={getCanonicalUrl(lang, '')}
         languageAlternates={getLanguageAlternates('')}
       />
       <div className={pageStyle.flow}>
         <div className={classNames(pageStyle.flowItem, radioStyle.title)}>
-          {t('curated-stations')}
+          {t('radio:curated-stations')}
         </div>
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
           <CuratedStationList />
         </div>
         <div className={classNames(pageStyle.flowItem, radioStyle.title)}>
-          {t('reciter-stations')}
+          {t('radio:reciter-stations')}
         </div>
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
           <ReciterStationList />

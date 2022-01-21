@@ -9,6 +9,7 @@ import { togglePlaying, triggerPauseAudio, triggerPlayAudio, triggerSeek } from 
 import MediaSessionApiListeners from '../MediaSessionApiListeners';
 import PlaybackControls from '../PlaybackControls';
 import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
+import RadioPlaybackControl from '../RadioPlaybackControl';
 
 import styles from './AudioPlayerBody.module.scss';
 
@@ -75,7 +76,7 @@ const AudioPlayerBody: React.FC<Props> = ({
           </div>
         )}
       </div>
-      <PlaybackControls isRadioMode={isRadioMode} />
+      {isRadioMode ? <RadioPlaybackControl /> : <PlaybackControls />}
     </>
   );
 };
