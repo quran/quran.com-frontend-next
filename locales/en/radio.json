@@ -1,6 +1,9 @@
 {
     "curated-stations": "Curated Stations",
     "reciter-stations": "Reciter Stations",
+    "play-radio": "Play Radio",
+    "pause-radio": "Pause Radio",
+    "change": "Change",
     "curated-station": {
         "popular-recitations": {
             "title": "Popular Recitations",

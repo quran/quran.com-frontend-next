@@ -18,6 +18,7 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
       size={ButtonSize.Small}
       href={getVerseNavigationUrlByVerseKey(verseKey)}
       variant={ButtonVariant.Ghost}
+      prefetch={false}
       onClick={() => {
         logButtonClick('translation_view_verse_link');
       }}

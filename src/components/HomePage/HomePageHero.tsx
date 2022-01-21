@@ -1,12 +1,14 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import AlQuranulKarimSVG from '../../../public/images/alquranul-karim.svg';
 
 import styles from './HomePageHero.module.scss';
-import PrayerTimes from './PrayerTimes/PrayerTimes';
 import QuickLinks from './QuickLinks';
 
 import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
+
+const PlayRadioButton = dynamic(() => import('./PlayRadioButton'));
 
 const HomePageHero = () => {
   return (
@@ -16,7 +18,7 @@ const HomePageHero = () => {
       </Head>
       <div className={styles.backgroundImage} />
       <div data-theme="light">
-        <PrayerTimes />
+        <PlayRadioButton />
         <div className={styles.innerContainer}>
           <div className={styles.imageContainer}>
             <AlQuranulKarimSVG />
