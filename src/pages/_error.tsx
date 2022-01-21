@@ -32,7 +32,7 @@ const Error = ({ statusCode }: ErrorProps) => {
       </div>
       <p className={styles.reportBug}>
         {t('if-persist')}{' '}
-        <Link href="https://feedback.quran.com/" variant={LinkVariant.Highlight} prefetch={false}>
+        <Link href="https://feedback.quran.com/" variant={LinkVariant.Highlight}>
           {t('report-cta')}
         </Link>
       </p>

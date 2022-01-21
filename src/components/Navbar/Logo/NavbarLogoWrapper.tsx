@@ -6,7 +6,7 @@ import Link from 'src/components/dls/Link/Link';
 
 const NavbarLogoWrapper = () => {
   return (
-    <Link href="/" prefetch={false}>
+    <Link href="/">
       <a className={styles.logoWrapper}>
         <QuranTextLogo />
       </a>

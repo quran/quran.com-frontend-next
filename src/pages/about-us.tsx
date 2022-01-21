@@ -107,11 +107,7 @@ const AboutUsPage = () => {
                 />,
               ]}
             />
-            <Link
-              href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss"
-              newTab
-              prefetch={false}
-            >
+            <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" newTab>
               <div className={styles.image}>
                 <Image
                   src="/images/powered-by-vercel.svg"

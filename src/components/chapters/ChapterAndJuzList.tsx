@@ -30,6 +30,19 @@ enum Sort {
   DESC = 'descending',
 }
 
+const MOST_VISITED_CHAPTERS = {
+  67: false,
+  2: false,
+  36: false,
+  1: false,
+  18: false,
+  56: false,
+  55: false,
+  3: false,
+  4: false,
+  32: false,
+};
+
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
@@ -97,7 +110,10 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
         {view === View.Surah &&
           sortedChapters.map((chapter) => (
             <div className={styles.chapterContainer} key={chapter.id}>
-              <Link href={`/${chapter.id}`} prefetch={false}>
+              <Link
+                href={`/${chapter.id}`}
+                prefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] !== false}
+              >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
                   description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}

@@ -58,7 +58,7 @@ const Links = () => {
           <div>
             {group.links.map((link) => (
               <div key={link.url} className={styles.linkContainer}>
-                <Link href={link.url} variant={LinkVariant.Primary} prefetch={false}>
+                <Link href={link.url} variant={LinkVariant.Primary}>
                   {link.text}
                 </Link>
               </div>
