@@ -21,15 +21,11 @@ $list-max-width: 80rem;
 }
 
 .flowItem {
-  max-width: $list-max-width;
+  @include utility.pageContainer();
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: auto;
   margin-inline-end: auto;
-
-  @include breakpoints.tablet {
-    width: 80%;
-  }
 
   --flow-side-spacing: var(--spacing-small);
   padding-inline-start: var(--flow-side-spacing);

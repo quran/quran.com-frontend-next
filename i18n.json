@@ -3,7 +3,7 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common", "error"],
-    "/": ["home", "quick-links"],
+    "/": ["home", "quick-links", "radio"],
     "/[chapterId]": ["quran-reader", "chapter", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],

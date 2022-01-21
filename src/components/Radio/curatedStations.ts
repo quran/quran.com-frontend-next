@@ -1,55 +1,74 @@
-import { CuratedStation } from './types';
+import range from 'lodash/range';
 
-// TODO: localize title & description?
+import { AudioTrack, CuratedStation } from './types';
+
+import { QURAN_CHAPTERS_COUNT } from 'src/utils/chapter';
+
+const popularRecitersId = ['7', '3', '10', '4'];
+
+const generatePopularRecitersAudioTracks = (): AudioTrack[] => {
+  return popularRecitersId
+    .map((reciter) =>
+      range(1, QURAN_CHAPTERS_COUNT).map((chapter) => ({
+        chapterId: chapter.toString(),
+        reciterId: reciter.toString(),
+      })),
+    )
+    .flat();
+};
+
+const JUZ_AMMA_FIRST_CHAPTER = 78;
+const generateJuzAmmaAudioTracks = (): AudioTrack[] => {
+  return popularRecitersId
+    .map((reciter) =>
+      range(JUZ_AMMA_FIRST_CHAPTER, QURAN_CHAPTERS_COUNT).map((chapter) => ({
+        chapterId: chapter.toString(),
+        reciterId: reciter.toString(),
+      })),
+    )
+    .flat();
+};
+
 const curatedStations: Record<string, CuratedStation> = {
   '1': {
-    title: 'Ar-Rahman, Al-Waqiah, Yaseen',
-    description: 'Mishary Al-fasy, and others',
+    title: 'popular-recitations.title',
+    description: 'popular-recitations.description',
     bannerImgSrc: '/images/stations/1.jpeg',
-    audioTracks: [
-      {
-        chapterId: '55',
-        reciterId: '7',
-      },
-      {
-        chapterId: '56',
-        reciterId: '7',
-      },
-      {
-        chapterId: '49',
-        reciterId: '7',
-      },
-    ],
+    audioTracks: generatePopularRecitersAudioTracks(),
   },
   '2': {
-    title: 'Classic Recitations',
-    description: 'Abu Bakr al-Shatri',
-    bannerImgSrc: '/images/stations/1.jpeg',
-    audioTracks: [
-      {
-        chapterId: '33',
-        reciterId: '4',
-      },
-      {
-        chapterId: '35',
-        reciterId: '4',
-      },
-    ],
-  },
-  '3': {
-    title: 'Friday Night Recitations',
-    description: 'Mishary Al-fasy & Abu Bakr al-Shatri',
-    bannerImgSrc: '/images/stations/3.svg',
+    title: 'yaseen-alwaqiah-al-mulk.title',
+    description: 'yaseen-alwaqiah-al-mulk.description',
+    bannerImgSrc: '/images/stations/2.jpg',
     audioTracks: [
       {
         chapterId: '36',
         reciterId: '7',
       },
       {
-        chapterId: '18',
-        reciterId: '4',
+        chapterId: '96',
+        reciterId: '7',
+      },
+      {
+        chapterId: '67',
+        reciterId: '7',
       },
     ],
+  },
+  '3': {
+    title: 'surah-al-kahf.title',
+    description: 'surah-al-kahf.description',
+    bannerImgSrc: '/images/stations/3.jpeg',
+    audioTracks: popularRecitersId.map((reciterId) => ({
+      chapterId: '18',
+      reciterId,
+    })),
+  },
+  '4': {
+    title: 'juz-amma.title',
+    description: 'juz-amma.description',
+    bannerImgSrc: '/images/stations/4.jpeg',
+    audioTracks: generateJuzAmmaAudioTracks(),
   },
 };
 

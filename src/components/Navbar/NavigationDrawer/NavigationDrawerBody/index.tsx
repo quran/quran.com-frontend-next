@@ -12,6 +12,7 @@ import IconProductUpdates from '../../../../../public/icons/product-updates.svg'
 import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
+import IconRadio2 from '../../../../../public/icons/radio-2.svg';
 import Tarteel from '../../../../../public/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
@@ -19,7 +20,6 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 import styles from './NavigationDrawerBody.module.scss';
 
 // import IconDonate from '../../../../../public/icons/donate.svg';
-// import IconRadio2 from '../../../../../public/icons/radio-2.svg';
 // import IconUpdates from '../../../../../public/icons/updates.svg';
 // import IconCollection from '../../../../../public/icons/collection.svg';
 
@@ -29,6 +29,7 @@ const NavigationDrawerBody = () => {
     <div className={styles.listItemsContainer}>
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
+      <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />
       <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
       <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
@@ -47,7 +48,6 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
-      {/* <NavigationDrawerItem title="Quran Radio" icon={<IconRadio2 />} /> */}
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
       {/* <NavigationDrawerItem title="Duaas" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}
