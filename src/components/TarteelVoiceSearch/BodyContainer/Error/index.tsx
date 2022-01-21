@@ -42,7 +42,12 @@ const Error: React.FC<Props> = ({ error, isWaitingForPermission }) => {
     errorBody = (
       <div>
         <span>{errorText}</span>
-        <Link href="https://download.tarteel.ai" newTab variant={LinkVariant.Highlight}>
+        <Link
+          href="https://download.tarteel.ai"
+          newTab
+          variant={LinkVariant.Highlight}
+          prefetch={false}
+        >
           {t('tarteel.app')}
         </Link>
       </div>

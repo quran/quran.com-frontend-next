@@ -50,7 +50,11 @@ const VerseList = () => {
           const verseNumber = getVerseNumberFromKey(verseKey);
           const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
           return (
-            <Link href={getVerseToEndOfChapterNavigationUrl(verseKey)} key={verseKey}>
+            <Link
+              href={getVerseToEndOfChapterNavigationUrl(verseKey)}
+              key={verseKey}
+              prefetch={false}
+            >
               <div className={styles.listItem}>{localizedVerseNumber}</div>
             </Link>
           );

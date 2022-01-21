@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Link from 'next/link';
-
 import styles from './LinkContainer.module.scss';
+
+import Link from 'src/components/dls/Link/Link';
 
 type LinkContainerProps = {
   href?: string;
@@ -22,7 +22,7 @@ const LinkContainer = ({ href, isExternalLink, children }: LinkContainerProps) =
     );
   }
   return (
-    <Link href={href} passHref>
+    <Link href={href} passHref prefetch={false}>
       <a className={styles.anchor}>{children}</a>
     </Link>
   );

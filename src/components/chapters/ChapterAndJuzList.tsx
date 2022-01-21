@@ -97,7 +97,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
         {view === View.Surah &&
           sortedChapters.map((chapter) => (
             <div className={styles.chapterContainer} key={chapter.id}>
-              <Link href={`/${chapter.id}`}>
+              <Link href={`/${chapter.id}`} prefetch={false}>
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
                   description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}

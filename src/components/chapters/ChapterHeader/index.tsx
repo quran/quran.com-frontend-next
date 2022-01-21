@@ -62,6 +62,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
               variant={ButtonVariant.Ghost}
               prefix={<InfoIcon />}
               href={getSurahInfoNavigationUrl(chapterId)}
+              prefetch={false}
               hasSidePadding={false}
               onClick={() => {
                 logButtonClick('chapter_header_info');

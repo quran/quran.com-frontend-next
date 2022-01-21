@@ -56,7 +56,9 @@ const SupportPage = () => {
         <p>
           <Trans
             i18nKey="support:developer-a"
-            components={[<Link key={0} href="/developers" variant={LinkVariant.Blend} />]}
+            components={[
+              <Link key={0} href="/developers" variant={LinkVariant.Blend} prefetch={false} />,
+            ]}
           />
         </p>
         <h2>{t('fiqh-q')}</h2>
@@ -83,7 +85,10 @@ const SupportPage = () => {
         </p>
         <h2>{t('mobile-q')}</h2>
         <p>
-          <Trans i18nKey="support:mobile-a" components={[<Link key={0} href="/apps" />]} />
+          <Trans
+            i18nKey="support:mobile-a"
+            components={[<Link key={0} href="/apps" prefetch={false} />]}
+          />
         </p>
         {/* <h2>
         <Trans i18nKey="support:donate-q" />
@@ -91,7 +96,7 @@ const SupportPage = () => {
       <p>
         <Trans
           i18nKey="support:donate-a"
-          components={[<Link href="/donations" variant={LinkVariant.Blend} />]}
+          components={[<Link href="/donations" variant={LinkVariant.Blend} prefetch={false} />]}
         />
       </p> */}
       </div>
