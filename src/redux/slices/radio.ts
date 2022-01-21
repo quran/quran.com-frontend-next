@@ -10,14 +10,12 @@ import { RootState } from 'src/redux/RootState';
 const POPULAR_STATION_ID = '1';
 const popularStation = curatedStations[POPULAR_STATION_ID];
 const randomAudioTrack = sample(popularStation.audioTracks);
-const initialState = {
+const initialState: StationState = {
   id: POPULAR_STATION_ID,
   type: StationType.Curated,
-  title: popularStation.title,
-  description: popularStation.description,
   chapterId: randomAudioTrack.chapterId,
   reciterId: randomAudioTrack.reciterId,
-} as StationState;
+};
 
 export const radioSlice = createSlice({
   name: 'radio',
