@@ -21,7 +21,7 @@ const FONT_SIZE_CLASS_MAP = {
   5: styles.xl,
 };
 
-const IMAGE_BASE_PATH = 'https://static.quran.com';
+const IMAGE_BASE_PATH = 'https://static.qurancdn.com/images';
 
 const TajweedWord: React.FC<Props> = ({ path, alt }) => {
   const { quranTextFontScale } = useSelector(selectQuranReaderStyles);
