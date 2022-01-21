@@ -29,7 +29,7 @@ const Text: React.FC<Props> = ({ text }) => {
         style={color !== 'default' ? { color } : {}}
       >
         {value.text.link ? (
-          <Link href={value.text.link.url} newTab>
+          <Link href={value.text.link.url} newTab prefetch={false}>
             {value.text.content}
           </Link>
         ) : (

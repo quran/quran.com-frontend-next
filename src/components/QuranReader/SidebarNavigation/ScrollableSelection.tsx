@@ -31,7 +31,7 @@ const ScrollableSelection = ({ items, searchPlaceholder, renderItem, getHref, is
       />
       <div className={styles.list}>
         {filteredItems.map((item) => (
-          <Link href={getHref(item.value)} key={item.value}>
+          <Link href={getHref(item.value)} key={item.value} prefetch={false}>
             <div className={styles.listItem}>{renderItem(item)}</div>
           </Link>
         ))}
