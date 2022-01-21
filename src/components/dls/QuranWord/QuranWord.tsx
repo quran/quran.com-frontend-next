@@ -52,7 +52,7 @@ const QuranWord = ({
   isFontLoaded = true,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const chapterId = word.verseKey ? getChapterNumberFromKey(word.verseKey) : null;
   const { data: audioData } = useSWRImmutable(

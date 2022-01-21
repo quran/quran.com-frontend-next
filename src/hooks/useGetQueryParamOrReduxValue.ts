@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
@@ -40,9 +41,9 @@ const QUERY_PARAMS_DATA = {
 } as Record<
   QueryParam,
   {
-    reduxSelector: (state: RootState) => unknown;
+    reduxSelector: (state: RootState) => any;
     valueType: ValueType;
-    reduxEqualityFunction?: (left: unknown, right: unknown) => boolean;
+    reduxEqualityFunction?: (left: any, right: any) => boolean;
   }
 >;
 
@@ -51,9 +52,12 @@ const QUERY_PARAMS_DATA = {
  * parses them if found and if not, falls back to the Redux value.
  *
  * @param {QueryParam} queryParam
- * @returns {unknown}
+ * @returns {{value: any, queryParamUsed: boolean}}
  */
-const useGetQueryParamOrReduxValue = (queryParam: QueryParam): unknown => {
+const useGetQueryParamOrReduxValue = (
+  queryParam: QueryParam,
+  shouldOverrideQueryParam = false,
+): { value: any; queryParamUsed: boolean } => {
   const { query, isReady } = useRouter();
   let useSelectorArguments = [QUERY_PARAMS_DATA[queryParam].reduxSelector];
   if (QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction) {
@@ -66,6 +70,14 @@ const useGetQueryParamOrReduxValue = (queryParam: QueryParam): unknown => {
   // @ts-ignore
   const selectedValue = useSelector(...useSelectorArguments);
   const [value, setValue] = useState(selectedValue);
+  const [queryParamUsed, setQueryParamUsed] = useState(false);
+
+  useEffect(() => {
+    if (shouldOverrideQueryParam) {
+      setValue(selectedValue);
+    }
+  }, [selectedValue, shouldOverrideQueryParam]);
+
   useEffect(() => {
     // if the param exists in the url
     if (isReady && query[queryParam]) {
@@ -77,20 +89,23 @@ const useGetQueryParamOrReduxValue = (queryParam: QueryParam): unknown => {
         isValidValue = isValidReciterId(paramStringValue);
       }
       if (isValidValue) {
+        let queryParamValue;
         // return an array of numbers instead of a string
         if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.ArrayOfNumbers) {
-          setValue(paramStringValue.split(',').map((stringValue) => Number(stringValue)));
+          queryParamValue = paramStringValue.split(',').map((stringValue) => Number(stringValue));
         } else if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.Number) {
-          setValue(Number(query[queryParam]));
+          queryParamValue = Number(query[queryParam]);
         } else {
-          setValue(query[queryParam]);
+          queryParamValue = query[queryParam];
         }
+        setValue(queryParamValue);
+        setQueryParamUsed(true);
       }
     } else {
       setValue(selectedValue);
     }
   }, [isReady, query, queryParam, selectedValue]);
-  return value;
+  return { value, queryParamUsed };
 };
 
 export default useGetQueryParamOrReduxValue;

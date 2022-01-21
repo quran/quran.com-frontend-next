@@ -43,7 +43,7 @@ const RepeatAudioModal = ({
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const repeatSettings = useSelector(selectRepeatSettings);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);

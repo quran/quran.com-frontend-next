@@ -20,7 +20,9 @@ const ReciterAdjustment: React.FC = () => {
       res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
     ),
   );
-  const selectedReciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: selectedReciterId }: { value: number } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+  );
   const reciters = data || [];
 
   const onSelectedReciterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

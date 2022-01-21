@@ -29,7 +29,7 @@ const AudioPlayerBody: React.FC<Props> = ({
   audioData,
 }) => {
   const isRadioMode = useSelector(selectIsRadioMode);
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
   const isAudioRepeatManagerEnabled = !isRadioMode && reciterId && audioData?.chapterId;
 

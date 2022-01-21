@@ -17,7 +17,7 @@ interface Props {
 const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const reciterId = useGetQueryParamOrReduxValue(QueryParam.Reciter) as number;
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const play = () => {
     logButtonClick('chapter_header_play_audio');
     dispatch(loadAndPlayAudioData({ chapter: chapterId, reciterId }));
