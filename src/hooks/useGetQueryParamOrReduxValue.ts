@@ -104,7 +104,7 @@ const useGetQueryParamOrReduxValue = (
         });
       }
     } else {
-      setValueDetails((prevData) => ({ ...prevData, value: selectedValue }));
+      setValueDetails({ isQueryParamDifferent: false, value: selectedValue });
     }
   }, [isReady, query, queryParam, selectedValue]);
   return valueDetails;
