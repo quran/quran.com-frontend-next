@@ -1,89 +1,67 @@
-$font-cdn: 'https://static.qurancdn.com/fonts/';
+$font-cdn: 'https://static.qurancdn.com/fonts';
 
-//#TODO: figure out a way to generate font faces on the fly. We're creating lot of font faces that browsers might not need.
+// TODO: figure out a way to generate font faces on the fly. We're creating lot of font faces that browsers might not need.
+
+/*Fonts for rendering different Mushaf scripts*/
 @font-face {
   font-family: "IndoPak";
   src: local('AlQuran IndoPak by QuranWBW. Version 4.0-WL'),
-      url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2"),
-    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff") format("woff"),
-    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf") format("truetype");
+  url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2"),
+  url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff") format("woff"),
+  url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf") format("truetype");
 }
 
-@font-face {
-  font-family: "divehi";
-  src: url("/fonts/dhivehi/DhivehiAkuru.woff") format("woff"),
-    url("/fonts/dhivehi/DhivehiAkuru.otf") format("opentype");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "nafees";
-  src: local("Noto Naskh Arabic"), local("Nafees Regular"),
-    url("/fonts/urdu/NotoNaskhArabic-Regular.eot"),
-    url("/fonts/urdu/NotoNaskhArabic-Regular.eot?#iefix")
-      format("embedded-opentype"),
-    url("/fonts/urdu/NotoNaskhArabic-Regular.woff") format("woff"),
-    url("/fonts/urdu/NotoNaskhArabic-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "DroidArabicNaskh";
-  src: url("/fonts/kurdish/droid-naskh-regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
+// TODO: we're not rendering text_uthmani anymore, do we need this font face?
 @font-face {
   font-family: "meQuran";
-  src: local("me_quranR3HOQ"), url("/fonts/madani/me_quran.woff2"),
-    url("/fonts/madani/me_quran.ttf") format("truetype");
+  src: local("me_quran2"),
+  url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2"),
+  url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2") format("truetype");
 }
 
 @font-face {
-  font-family: "UthmanicHafs1Ver17";
-  src: local("KFGQPC HAFS Uthmanic Script Regular. Version 0.17"),
-    url("/fonts/uthmanic_hafs/UthmanicHafs1Ver18.woff2"),
-    url("/fonts/uthmanic_hafs/UthmanicHafs1Ver18.ttf") format("truetype");
+  font-family: "UthmanicHafs";
+  src: local("KFGQPC HAFS Uthmanic Script"),
+  url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2"),
+  url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf") format("truetype");
 }
 
-// Fallback for browsers that don't support variable fonts
-@font-face {
-  font-family: "ProximaVara";
-  src: url("/fonts/ProximaVara/proxima_vara_regular.woff2"),
-    url("/fonts/ProximaVara/proxima_vara_regular.woff");
-  font-weight: normal;
-  font-display: swap;
-}
-
-// Fallback for browsers that don't support variable fonts
-@font-face {
-  font-family: "ProximaVara";
-  src: url("/fonts/ProximaVara/proxima_vara_bold.woff2"),
-    url("/fonts/ProximaVara/proxima_vara_bold.woff");
-  font-weight: bold;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "ProximaVara";
-  src: url("/fonts/ProximaVara/proxima_vara_semibold.woff2"),
-    url("/fonts/ProximaVara/proxima_vara_semibold.woff");
-  font-weight: 600;
-  font-display: swap;
-}
-
+// TODO: regenerate this font and add font-family name
 @font-face {
   font-family: "surahnames";
-  src: url("/fonts/surah-names/surah-names.eot");
-  src: url("/fonts/surah-names/surah-names.eot#iefix")
-      format("embedded-opentype"),
-    url("/fonts/surah-names/surah-names.ttf") format("truetype"),
-    url("/fonts/surah-names/surah-names.woff") format("woff"),
-    url("/fonts/surah-names/surah-names.svg#surah-names") format("svg");
+  src: url("#{$font-cdn}/fonts/quran/surah-names/v1/sura_names.woff2");
+  src: url("#{$font-cdn}/surah-names/v1/surah-names.eot#iefix") format("embedded-opentype"),
+    url("#{$font-cdn}/fonts/quran/surah-names/v1/sura_names.ttf") format("truetype"),
+    url("#{$font-cdn}/fonts/quran/surah-names/v1/sura_names.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*Language specific fonts*/
+@font-face {
+  font-family: "divehi";
+  src: local('Dhivehi Akuru'), url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff2"),
+  url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff") format("woff"),
+  url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.otf") format("opentype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "NotoNastaliq";
+  src: local("Noto Naskh Arabic"), local("Nafees Regular"),
+    url("#{$font-cdn}/lang/noto/NotoNaskhArabic-Regular.woff2"),
+    url("#{$font-cdn}/lang/noto/NotoNaskhArabic-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Noto Nastaliq Urdu https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400&display=swap
+@font-face {
+  font-family: "NotoNastaliqUrdu";
+  src: local("Noto Nastaliq Urdu"), local("Nafees Regular"),
+  url("#{$font-cdn}/lang/noto/notonastaliqurdu.woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -91,5 +69,25 @@ $font-cdn: 'https://static.qurancdn.com/fonts/';
 
 @font-face {
   font-family: "NotoSerifBengali";
-  src: url("/fonts/NotoSerifBengali/NotoSerifBengali-Regular.ttf");
+  src: local("Noto Serif Bengali"), url("#{$font-cdn}/noto/NotoSerifBengali-Regular.woff2");
+}
+
+@font-face {
+  font-family: "DroidArabicNaskh";
+  src: local("Droid Arabic Naskh"), url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.woff2"),
+  url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Fallback for browsers that don't support variable fonts
+@font-face {
+  font-family: "ProximaVara";
+  src: local("Proxima Vara"), url("#{$font-cdn}/lang/ProximaVara/ProximaVara.woff2");
+  font-weight: 100 900;
+  /* default 400 */
+  font-stretch: 50% 100%;
+  /* default 100% */
+  font-display: swap;
 }

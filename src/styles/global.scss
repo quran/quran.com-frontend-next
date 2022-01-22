@@ -14,7 +14,7 @@ body {
   }
 
   overscroll-behavior-y: none;
-  font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  font-family: "Helvetica Neue", Helvetica, Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -31,15 +31,15 @@ body {
   }
 
   :lang(ur), .ur, .urdu {
-    font-family: "nafees", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+    font-family: "NotoNastaliqUrdu", "Noto Nastaliq Urdu", "Noto Nastaliq Arabic", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 
   :lang(ar){
-    font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 
   :lang(bn) {
-    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
+    font-family: "NotoSerifBengali", "Helvetica Neue", Helvetica,
       Arial;
   }
 }
