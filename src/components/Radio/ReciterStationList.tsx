@@ -16,6 +16,7 @@ import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
+import useTranslation from 'next-translate/useTranslation';
 
 // TODO:
 // - these images url should come from backend.
@@ -36,6 +37,7 @@ const reciterPictures = {
 
 const ReciterStationList = () => {
   const dispatch = useDispatch();
+  const {lang} = useTranslation();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
 
@@ -67,7 +69,7 @@ const ReciterStationList = () => {
 
   return (
     <DataFetcher
-      queryKey={makeRecitersUrl()}
+      queryKey={makeRecitersUrl(lang)}
       render={(data: RecitersResponse) => {
         if (!data) return null;
         return (

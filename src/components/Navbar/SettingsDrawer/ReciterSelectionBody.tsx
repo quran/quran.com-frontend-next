@@ -18,7 +18,7 @@ import Reciter from 'types/Reciter';
 
 const filterReciters = (reciters, searchQuery: string): Reciter[] => {
   const fuse = new Fuse(reciters, {
-    keys: ['name', 'languageName', 'authorName'],
+    keys: ['name', 'languageName', 'translatedName.name', 'qirat.name', 'style.name' ],
     threshold: 0.3,
   });
 
@@ -57,7 +57,7 @@ const SettingsReciter = () => {
         />
       </div>
       <DataFetcher
-        queryKey={makeRecitersUrl()}
+        queryKey={makeRecitersUrl(lang)}
         render={(data: RecitersResponse) => {
           const filteredReciters = searchQuery
             ? filterReciters(data.reciters, searchQuery)
@@ -82,7 +82,7 @@ const SettingsReciter = () => {
                         onSelectedReciterChange(e.target.value, data.reciters);
                       }}
                     />
-                    <span>{reciter.name}</span>
+                    <span lang={reciter.translatedName.languageName}>{reciter.translatedName.name}</span>
                     <span className={styles.recitationStyle}>{reciter.style.name}</span>
                   </label>
                 ))}
