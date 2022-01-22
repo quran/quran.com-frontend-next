@@ -68,6 +68,9 @@ const TranslationSelectionBody = () => {
 
   const renderTranslationGroup = useCallback(
     (language, translations) => {
+      if (!translations) {
+        return <></>;
+      }
       return (
         <div className={styles.group} key={language}>
           <div className={styles.language}>{language}</div>
