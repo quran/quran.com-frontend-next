@@ -1,26 +1,26 @@
 import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { selectIsUsingDefaultReciter, selectReciterId } from 'src/redux/slices/AudioPlayer/state';
 import {
   selectIsUsingDefaultWordByWordLocale,
   selectWordByWordLocale,
-  setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import {
   selectIsUsingDefaultTranslations,
   selectSelectedTranslations,
-  setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
-import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
 import QueryParam from 'types/QueryParam';
 
-const useSyncReduxAndQueryParams = (shouldPersistQueryParam: boolean) => {
+/**
+ * A hook that syncs between Redux values and the url by adding the redux
+ * value to its corresponding query param in certain cases.
+ */
+const useSyncReduxAndQueryParams = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
@@ -28,32 +28,12 @@ const useSyncReduxAndQueryParams = (shouldPersistQueryParam: boolean) => {
   const selectedReciterId = useSelector(selectReciterId, shallowEqual);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
 
-  useEffect(() => {
-    if (shouldPersistQueryParam) {
-      if (
-        router.query[QueryParam.Translations] &&
-        isValidTranslationsQueryParamValue(router.query[QueryParam.Translations] as string)
-      ) {
-        dispatch(
-          setSelectedTranslations({
-            translations: (router.query[QueryParam.Translations] as string)
-              .split(',')
-              .map((stringValue) => Number(stringValue)),
-            locale: router.locale,
-          }),
-        );
-      }
-      if (router.query[QueryParam.WBW_LOCALE]) {
-        dispatch(
-          setSelectedWordByWordLocale({
-            value: router.query[QueryParam.WBW_LOCALE] as string,
-            locale: router.locale,
-          }),
-        );
-      }
-    }
-  }, [dispatch, router.locale, router.query, shouldPersistQueryParam]);
-
+  /**
+   * Listen to changes in the translations and:
+   *
+   * 1. Remove translations query param if the user is using the default translations, or if the user un-selects all of the translations.
+   * 2. Add translations query param if there was no query param in the url.
+   */
   useEffect(() => {
     if (router.isReady) {
       if (isUsingDefaultTranslations) {
@@ -78,6 +58,12 @@ const useSyncReduxAndQueryParams = (shouldPersistQueryParam: boolean) => {
     }
   }, [isUsingDefaultTranslations, router, selectedTranslations]);
 
+  /**
+   * Listen to changes in the reciter id and:
+   *
+   * 1. Remove reciter query param if the user is using the default reciter id.
+   * 2. Add reciter query param if there was no query param in the url.
+   */
   useEffect(() => {
     if (router.isReady) {
       if (isUsingDefaultReciter) {
@@ -96,6 +82,12 @@ const useSyncReduxAndQueryParams = (shouldPersistQueryParam: boolean) => {
     }
   }, [isUsingDefaultReciter, router, selectedReciterId]);
 
+  /**
+   * Listen to changes in the word by word locale and:
+   *
+   * 1. Remove word by word locale query param if the user is using the default translations.
+   * 2. Add word by word locale query param if there was no query param in the url.
+   */
   useEffect(() => {
     if (router.isReady) {
       if (isUsingDefaultWordByWordLocale) {

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable max-lines */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -62,39 +62,34 @@ const QuranReader = ({
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
-  const [shouldOverrideQueryParam, setShouldOverrideQueryParam] = useState(false);
-  const [shouldPersistQueryParam, setShouldPersistQueryParam] = useState(false);
   const isVerseData = quranReaderDataType === QuranReaderDataType.Verse;
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     value: selectedTranslations,
-    queryParamUsed: translationsQueryParamUsed,
-  }: { value: number[]; queryParamUsed: boolean } = useGetQueryParamOrReduxValue(
+    isQueryParamDifferent: translationsQueryParamDifferent,
+  }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.Translations,
-    shouldOverrideQueryParam,
   );
   const {
     value: reciterId,
-    queryParamUsed: reciterQueryParamUsed,
-  }: { value: number; queryParamUsed: boolean } = useGetQueryParamOrReduxValue(
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.Reciter,
-    shouldOverrideQueryParam,
   );
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const {
     value: wordByWordLocale,
-    queryParamUsed: wordByWordLocaleQueryParamUsed,
-  }: { value: string; queryParamUsed: boolean } = useGetQueryParamOrReduxValue(
+    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
+  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
-    shouldOverrideQueryParam,
   );
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  useSyncReduxAndQueryParams(shouldPersistQueryParam);
+  useSyncReduxAndQueryParams();
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
@@ -175,9 +170,6 @@ const QuranReader = ({
     );
   }
 
-  const urlParamsUsed =
-    translationsQueryParamUsed || reciterQueryParamUsed || wordByWordLocaleQueryParamUsed;
-
   return (
     <>
       <ContextMenu />
@@ -189,6 +181,11 @@ const QuranReader = ({
           [styles.withSidebarNavigationOpen]: isSidebarNavigationVisible,
         })}
       >
+        <QueryParamMessage
+          translationsQueryParamDifferent={translationsQueryParamDifferent}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+        />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}
@@ -197,15 +194,6 @@ const QuranReader = ({
             loadMore={loadMore}
             loader={loader}
           >
-            {urlParamsUsed && (
-              <QueryParamMessage
-                translationsQueryParamUsed={translationsQueryParamUsed}
-                reciterQueryParamUsed={reciterQueryParamUsed}
-                wordByWordLocaleQueryParamUsed={wordByWordLocaleQueryParamUsed}
-                setShouldOverrideQueryParam={setShouldOverrideQueryParam}
-                setShouldPersistQueryParam={setShouldPersistQueryParam}
-              />
-            )}
             <QuranReaderBody
               isReadingPreference={isReadingPreference}
               quranReaderStyles={quranReaderStyles}

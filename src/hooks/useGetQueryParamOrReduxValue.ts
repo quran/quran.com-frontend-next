@@ -49,15 +49,15 @@ const QUERY_PARAMS_DATA = {
 
 /**
  * A hook that searches the query params of the url for specific values,
- * parses them if found and if not, falls back to the Redux value.
+ * parses them if found and if not, falls back to the Redux value and detects
+ * when there is a mismatch between the query param value and the Redux value.
  *
  * @param {QueryParam} queryParam
- * @returns {{value: any, queryParamUsed: boolean}}
+ * @returns {{value: any, isQueryParamDifferent: boolean}}
  */
 const useGetQueryParamOrReduxValue = (
   queryParam: QueryParam,
-  shouldOverrideQueryParam = false,
-): { value: any; queryParamUsed: boolean } => {
+): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
   let useSelectorArguments = [QUERY_PARAMS_DATA[queryParam].reduxSelector];
   if (QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction) {
@@ -69,14 +69,10 @@ const useGetQueryParamOrReduxValue = (
   }
   // @ts-ignore
   const selectedValue = useSelector(...useSelectorArguments);
-  const [value, setValue] = useState(selectedValue);
-  const [queryParamUsed, setQueryParamUsed] = useState(false);
-
-  useEffect(() => {
-    if (shouldOverrideQueryParam) {
-      setValue(selectedValue);
-    }
-  }, [selectedValue, shouldOverrideQueryParam]);
+  const [valueDetails, setValueDetails] = useState({
+    value: selectedValue,
+    isQueryParamDifferent: false,
+  });
 
   useEffect(() => {
     // if the param exists in the url
@@ -90,22 +86,28 @@ const useGetQueryParamOrReduxValue = (
       }
       if (isValidValue) {
         let queryParamValue;
+        let isQueryParamDifferent = true;
         // return an array of numbers instead of a string
         if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.ArrayOfNumbers) {
           queryParamValue = paramStringValue.split(',').map((stringValue) => Number(stringValue));
+          isQueryParamDifferent = !areArraysEqual(queryParamValue, selectedValue);
         } else if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.Number) {
           queryParamValue = Number(query[queryParam]);
+          isQueryParamDifferent = queryParamValue !== selectedValue;
         } else {
           queryParamValue = query[queryParam];
+          isQueryParamDifferent = queryParamValue !== selectedValue;
         }
-        setValue(queryParamValue);
-        setQueryParamUsed(true);
+        setValueDetails({
+          value: queryParamValue,
+          isQueryParamDifferent,
+        });
       }
     } else {
-      setValue(selectedValue);
+      setValueDetails((prevData) => ({ ...prevData, value: selectedValue }));
     }
   }, [isReady, query, queryParam, selectedValue]);
-  return { value, queryParamUsed };
+  return valueDetails;
 };
 
 export default useGetQueryParamOrReduxValue;
