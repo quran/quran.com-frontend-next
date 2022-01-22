@@ -6,7 +6,7 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import Button from '../dls/Button/Button';
 import Link from '../dls/Link/Link';
-import useStationInfo from '../Radio/useStationInfo';
+import useCurrentStationInfo from '../Radio/useStationInfo';
 
 import styles from './PlayRadioButton.module.scss';
 
@@ -20,7 +20,7 @@ const PlayRadioButton = () => {
   const isAudioPlaying = useSelector(selectIsPlaying);
   const isRadioMode = useSelector(selectIsRadioMode);
   const stationState = useSelector(selectRadioStation, shallowEqual);
-  const stationInfo = useStationInfo();
+  const stationInfo = useCurrentStationInfo();
 
   const shouldShowStationName = isRadioMode && isAudioPlaying;
 

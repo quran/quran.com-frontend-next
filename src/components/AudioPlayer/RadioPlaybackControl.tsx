@@ -1,10 +1,10 @@
-import useStationInfo from '../Radio/useStationInfo';
+import useCurrentStationInfo from '../Radio/useStationInfo';
 
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import styles from './RadioPlaybackControl.module.scss';
 
 const RadioPlaybackControl = () => {
-  const stationInfo = useStationInfo();
+  const stationInfo = useCurrentStationInfo();
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>

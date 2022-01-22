@@ -9,10 +9,12 @@ import { getAvailableReciters } from 'src/api';
 import { selectRadioStation } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 
-const useStationInfo = (): StationInfo => {
+const useCurrentStationInfo = (): StationInfo => {
   const { t } = useTranslation('radio');
 
   const stationState = useSelector(selectRadioStation);
+  // TODO: once the backend API to fetch 1 reciter is ready, use that API
+  // instead of fetching all reciters with `getAvailableReciters`
   const { data: recitersData } = useSWRImmutable(
     stationState.type === StationType.Reciter ? makeRecitersUrl() : null,
     getAvailableReciters,
@@ -31,8 +33,8 @@ const useStationInfo = (): StationInfo => {
       (reciter) => reciter.id === Number(stationState.id),
     );
     return {
-      title: selectedReciter.name,
-      description: selectedReciter.style.name,
+      title: selectedReciter?.name,
+      description: selectedReciter?.style?.name,
     };
   };
 
@@ -40,4 +42,4 @@ const useStationInfo = (): StationInfo => {
   return getReciterStationInfo();
 };
 
-export default useStationInfo;
+export default useCurrentStationInfo;
