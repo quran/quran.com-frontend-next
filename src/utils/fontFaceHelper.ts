@@ -35,12 +35,11 @@ export const getPagesByVerses = (verses: Verse[]): number[] => {
 export const getV1OrV2FontFaceSource = (isV1: boolean, pageNumber: number): string => {
   const pageName = String(pageNumber).padStart(3, '0');
 
-  if(isV1) {
-    return `local(QCF_P${pageName}), url('${FONT_CDN}/fonts/v1/woff2/p${pageNumber}.woff2') format('woff2'), url('${FONT_CDN}/fonts/v1/woff/p${pageNumber}.woff') format('woff'), url('${FONT_CDN}/fonts/v1/ttf/p${pageNumber}.ttf') format('truetype')`
-  } else {
-    return `local(QCF2${pageName}), url('${FONT_CDN}/fonts/v2/woff2/p${pageNumber}.woff2') format('woff2'), url('${FONT_CDN}/fonts/v2/woff/p${pageNumber}.woff') format('woff')`;
+  if (isV1) {
+    return `local(QCF_P${pageName}), url('${FONT_CDN}/fonts/v1/woff2/p${pageNumber}.woff2') format('woff2'), url('${FONT_CDN}/fonts/v1/woff/p${pageNumber}.woff') format('woff'), url('${FONT_CDN}/fonts/v1/ttf/p${pageNumber}.ttf') format('truetype')`;
   }
-}
+  return `local(QCF2${pageName}), url('${FONT_CDN}/fonts/v2/woff2/p${pageNumber}.woff2') format('woff2'), url('${FONT_CDN}/fonts/v2/woff/p${pageNumber}.woff') format('woff')`;
+};
 
 /**
  * A function that will return the value of the font-face of QCF's font V1 and V2.
