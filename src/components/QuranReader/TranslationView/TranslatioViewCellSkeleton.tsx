@@ -7,9 +7,9 @@ import skeletonStyles from './TranslationViewSkeleton.module.scss';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
+import QueryParam from 'types/QueryParam';
 import { QuranFont } from 'types/QuranReader';
 
 const TRANSLATION_TEXT_SAMPLE =
@@ -18,7 +18,9 @@ const TRANSLATION_AUTHOR_SAMPLE = '— Dr. Mustafa Khattab, the Clear Quran';
 const VERSE_KEY_SAMPLE = '1:12';
 
 const TranslationViewCellSkeleton = () => {
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
+    QueryParam.Translations,
+  );
   const { quranFont, quranTextFontScale, translationFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,

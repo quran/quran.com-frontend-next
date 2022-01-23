@@ -12,11 +12,13 @@ import useSWRInfinite from 'swr/infinite';
 import { getPageLimit, getRequestKey, verseFetcher } from './api';
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
+import useSyncReduxAndQueryParams from './hooks/useSyncReduxAndQueryParams';
 import Loader from './Loader';
 import Loading from './Loading';
 import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import onCopyQuranWords from './onCopyQuranWords';
+import QueryParamMessage from './QueryParamMessage';
 import styles from './QuranReader.module.scss';
 import QuranReaderBody from './QuranReaderBody';
 import ReadingViewSkeleton from './ReadingView/ReadingViewSkeleton';
@@ -24,25 +26,22 @@ import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 import TranslationViewSkeleton from './TranslationView/TranslationViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import Error from 'src/pages/_error';
-import { selectIsUsingDefaultReciter, selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import {
   selectIsUsingDefaultWordByWordLocale,
   selectReadingPreference,
-  selectWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import {
-  selectIsUsingDefaultTranslations,
-  selectSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
+import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
 import { VersesResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
 import { QuranFont, QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
 const EndOfScrollingControls = dynamic(() => import('./EndOfScrollingControls'), {
@@ -67,14 +66,30 @@ const QuranReader = ({
   const isSelectedTafsirData = quranReaderDataType === QuranReaderDataType.SelectedTafsir;
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const {
+    value: selectedTranslations,
+    isQueryParamDifferent: translationsQueryParamDifferent,
+  }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Translations,
+  );
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+  );
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultTafsirs = useSelector(selectIsUsingDefaultTafsirs);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
-  const wordByWordLocale = useSelector(selectWordByWordLocale);
-  const reciter = useSelector(selectReciter, shallowEqual);
+  const {
+    value: wordByWordLocale,
+    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
+  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.WBW_LOCALE,
+  );
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
+  useSyncReduxAndQueryParams();
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       getRequestKey({
@@ -86,7 +101,7 @@ const QuranReader = ({
         isVerseData,
         isSelectedTafsirData,
         id,
-        reciter: reciter.id,
+        reciter: reciterId,
         locale: lang,
         wordByWordLocale,
       }),
@@ -166,6 +181,11 @@ const QuranReader = ({
           [styles.withSidebarNavigationOpen]: isSidebarNavigationVisible,
         })}
       >
+        <QueryParamMessage
+          translationsQueryParamDifferent={translationsQueryParamDifferent}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+        />
         <div className={styles.infiniteScroll}>
           <InfiniteScroll
             initialLoad={false}

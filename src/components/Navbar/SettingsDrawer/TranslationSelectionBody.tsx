@@ -4,6 +4,7 @@ import Fuse from 'fuse.js';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
@@ -26,8 +27,12 @@ import {
 import { getLocaleName } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
+import QueryParam from 'types/QueryParam';
 
-const filterTranslations = (translations, searchQuery: string): AvailableTranslation[] => {
+const filterTranslations = (
+  translations: AvailableTranslation[],
+  searchQuery: string,
+): AvailableTranslation[] => {
   const fuse = new Fuse(translations, {
     keys: ['name', 'languageName', 'authorName'],
     threshold: 0.3,
@@ -41,17 +46,16 @@ const filterTranslations = (translations, searchQuery: string): AvailableTransla
 };
 
 const TranslationSelectionBody = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
+  const router = useRouter();
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const { lang } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
   const onTranslationsChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const selectedTranslationId = e.target.value;
       const isChecked = e.target.checked;
-
       // when the checkbox is checked
       // add the selectedTranslationId to redux
       // if unchecked, remove it from redux
@@ -62,8 +66,12 @@ const TranslationSelectionBody = () => {
       logItemSelectionChange('translation', selectedTranslationId, isChecked);
       logValueChange('selected_translations', selectedTranslations, nextTranslations);
       dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
+      if (nextTranslations.length) {
+        router.query[QueryParam.Translations] = nextTranslations.join(',');
+        router.push(router, undefined, { shallow: true });
+      }
     },
-    [dispatch, lang, selectedTranslations],
+    [dispatch, lang, router, selectedTranslations],
   );
 
   const renderTranslationGroup = useCallback(
@@ -75,8 +83,10 @@ const TranslationSelectionBody = () => {
         <div className={styles.group} key={language}>
           <div className={styles.language}>{language}</div>
           {translations
-            .sort((a, b) => a.authorName.localeCompare(b.authorName))
-            .map((translation) => (
+            .sort((a: AvailableTranslation, b: AvailableTranslation) =>
+              a.authorName.localeCompare(b.authorName),
+            )
+            .map((translation: AvailableTranslation) => (
               <div key={translation.id} className={styles.item}>
                 <input
                   id={translation.id.toString()}
@@ -112,12 +122,9 @@ const TranslationSelectionBody = () => {
           const filteredTranslations = searchQuery
             ? filterTranslations(data.translations, searchQuery)
             : data.translations;
-
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');
-
           const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];
-
           const translationByLanguagesWithoutSelectedLanguage = omit(translationByLanguages, [
             selectedTranslationLanguage,
           ]);

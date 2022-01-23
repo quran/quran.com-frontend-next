@@ -14,10 +14,8 @@ import TextWord from './TextWord';
 import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import {
-  selectReciter,
-  selectShowTooltipWhenPlayingAudio,
-} from 'src/redux/slices/AudioPlayer/state';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectWordClickFunctionality,
@@ -30,6 +28,7 @@ import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
+import QueryParam from 'types/QueryParam';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
@@ -53,11 +52,12 @@ const QuranWord = ({
   isFontLoaded = true,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
-  const reciter = useSelector(selectReciter, shallowEqual);
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+
   const chapterId = word.verseKey ? getChapterNumberFromKey(word.verseKey) : null;
   const { data: audioData } = useSWRImmutable(
-    chapterId ? makeChapterAudioDataUrl(reciter.id, chapterId, true) : null,
-    () => getChapterAudioData(reciter.id, chapterId, true),
+    chapterId ? makeChapterAudioDataUrl(reciterId, chapterId, true) : null,
+    () => getChapterAudioData(reciterId, chapterId, true),
   );
 
   const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);

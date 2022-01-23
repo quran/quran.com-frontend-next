@@ -11,6 +11,7 @@ import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   loadAndPlayAudioData,
   selectAudioData,
@@ -21,6 +22,7 @@ import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 import { logButtonClick } from 'src/utils/eventLogger';
+import QueryParam from 'types/QueryParam';
 
 const PlayPauseButton = () => {
   const { t, lang } = useTranslation('common');
@@ -28,7 +30,7 @@ const PlayPauseButton = () => {
 
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
-
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData, shallowEqual);
   const currentReadingChapterIds = useChapterIdsByUrlPath(lang);
   const currentAudioChapterId = audioData?.chapterId?.toString();
@@ -100,7 +102,9 @@ const PlayPauseButton = () => {
           setIsMismatchModalVisible(false);
         }}
         onStartOver={() => {
-          dispatch(loadAndPlayAudioData(Number(firstCurrentReadingChapterId)));
+          dispatch(
+            loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }),
+          );
           setIsMismatchModalVisible(false);
         }}
       />
