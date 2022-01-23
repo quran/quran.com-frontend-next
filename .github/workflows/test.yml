@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '14'
       # Utilize a cache when installing deps for a potentially quicker build
       - uses: bahmutov/npm-install@v1
       - run: yarn test
