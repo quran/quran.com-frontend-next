@@ -1,0 +1,25 @@
+{
+    "change": "Wijziging",
+    "curated-station": {
+        "juz-amma": {
+            "description": "Luister naar de laatste Juz van de Koran",
+            "title": "Juz Amma"
+        },
+        "popular-recitations": {
+            "description": "Dagelijks samengestelde feed van recitaties",
+            "title": "Populaire recitaties"
+        },
+        "surah-al-kahf": {
+            "description": "Luister naar Surah Alkahf bij herhaling",
+            "title": "Surah Al-Kahfi"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "De soera's van een verzameling voordragers",
+            "title": "Yaseen, Al-Waqiah, Al-Mulk"
+        }
+    },
+    "curated-stations": "Beheerde stations",
+    "pause-radio": "Radio pauzeren",
+    "play-radio": "Radio afspelen",
+    "reciter-stations": "Voordragerstations"
+}

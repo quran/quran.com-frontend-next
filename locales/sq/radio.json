@@ -1,0 +1,25 @@
+{
+    "change": "Ndryshimi",
+    "curated-station": {
+        "juz-amma": {
+            "description": "Dëgjoni Xhuzin e fundit të Kuranit",
+            "title": "Juz Amma"
+        },
+        "popular-recitations": {
+            "description": "Furnizimi i përditshëm i recitimeve",
+            "title": "Recitime popullore"
+        },
+        "surah-al-kahf": {
+            "description": "Dëgjojeni suren Alkahf në mënyrë të përsëritur",
+            "title": "Surja El-Kehf"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "Suret nga një kurim recituesish",
+            "title": "Jasin, El-Vakiah, El-Mulk"
+        }
+    },
+    "curated-stations": "Stacione të kuruara",
+    "pause-radio": "Ndalo radion",
+    "play-radio": "Luaj Radio",
+    "reciter-stations": "Stacione recituese"
+}
