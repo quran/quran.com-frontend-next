@@ -115,7 +115,7 @@ const QueryParamMessage: React.FC<Props> = ({
    * push them into the url params so that the useGetQueryParamOrReduxValue hook
    * picks and applies them.
    */
-  const onUseReduxClicked = () => {
+  const onResetToReduxStateClicked = () => {
     if (translationsQueryParamDifferent) {
       router.query[QueryParam.Translations] = selectedTranslations.join(',');
     }
@@ -171,7 +171,7 @@ const QueryParamMessage: React.FC<Props> = ({
         i18nKey="quran-reader:query-param-message"
         components={[
           <span key={0}>{text}</span>,
-          <span key={1} onClick={onUseReduxClicked} className={styles.link} />,
+          <span key={1} onClick={onResetToReduxStateClicked} className={styles.link} />,
           <span key={2} onClick={onPersistQueryParamsClicked} className={styles.link} />,
         ]}
       />
