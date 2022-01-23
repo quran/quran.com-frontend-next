@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  padding: var(--spacing-medium);
+  margin-inline: var(--spacing-xxsmall);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-faint);
+
+  text-align: start;
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
+
+.link {
+  cursor: pointer;
+  color: var(--color-text-link);
+  &:hover {
+    text-decoration: underline;
+  }
+}

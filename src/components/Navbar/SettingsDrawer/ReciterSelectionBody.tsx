@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
@@ -14,6 +15,7 @@ import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPl
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
 import Reciter from 'types/Reciter';
 
 const filterReciters = (reciters, searchQuery: string): Reciter[] => {
@@ -32,6 +34,7 @@ const filterReciters = (reciters, searchQuery: string): Reciter[] => {
 const SettingsReciter = () => {
   const { lang, t } = useTranslation('common');
   const dispatch = useDispatch();
+  const router = useRouter();
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -41,6 +44,8 @@ const SettingsReciter = () => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
     logItemSelectionChange('selected_reciter', reciter.id);
+    router.query[QueryParam.Reciter] = String(reciter.id);
+    router.push(router, undefined, { shallow: true });
     dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
   };
 

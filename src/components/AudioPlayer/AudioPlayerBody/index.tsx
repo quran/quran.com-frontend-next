@@ -1,6 +1,6 @@
 import React, { MutableRefObject } from 'react';
 
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import AudioKeyBoardListeners from '../AudioKeyboardListeners';
 import AudioPlayerSlider from '../AudioPlayerSlider';
@@ -13,8 +13,10 @@ import RadioPlaybackControl from '../RadioPlaybackControl';
 
 import styles from './AudioPlayerBody.module.scss';
 
-import { selectReciter, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import { selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
 import AudioData from 'types/AudioData';
+import QueryParam from 'types/QueryParam';
 
 interface Props {
   audioPlayerElRef: MutableRefObject<HTMLAudioElement>;
@@ -27,9 +29,8 @@ const AudioPlayerBody: React.FC<Props> = ({
   isMobileMinimizedForScrolling,
   audioData,
 }) => {
-  const { id: reciterId } = useSelector(selectReciter, shallowEqual);
   const isRadioMode = useSelector(selectIsRadioMode);
-
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
   const isAudioRepeatManagerEnabled = !isRadioMode && reciterId && audioData?.chapterId;
 
