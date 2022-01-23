@@ -68,12 +68,25 @@ export const makeLanguagesUrl = (language: string): string =>
 /**
  * Compose the url for reciters API.
  *
+ * @param {string} locale the user's language code.
  * @returns {string}
  */
-export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
+export const makeRecitersUrl = (locale: string): string => makeUrl('/audio/reciters', { locale });
 
-export const makeChapterAudioDataUrl = (reciterId: number, chapter: number, segments: boolean) =>
-  makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments });
+/**
+ * Compose the url of the audio file of a surah.
+ *
+ * @param {number} reciterId id of reciter
+ * @param {number} chapter the surah number.
+ * @param {boolean} segments include segments info
+ *
+ * @returns {string}
+ */
+export const makeChapterAudioDataUrl = (
+  reciterId: number,
+  chapter: number,
+  segments: boolean,
+): string => makeUrl(`/audio/reciters/${reciterId}/audio_files`, { chapter, segments });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
   makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);

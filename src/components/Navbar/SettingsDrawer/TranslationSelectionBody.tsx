@@ -34,7 +34,7 @@ const filterTranslations = (
   searchQuery: string,
 ): AvailableTranslation[] => {
   const fuse = new Fuse(translations, {
-    keys: ['name', 'languageName', 'authorName'],
+    keys: ['name', 'languageName', 'authorName', 'translatedName.name'],
     threshold: 0.3,
   });
 
@@ -95,7 +95,12 @@ const TranslationSelectionBody = () => {
                   checked={selectedTranslations.includes(translation.id)}
                   onChange={onTranslationsChange}
                 />
-                <label htmlFor={translation.id.toString()}>{translation.authorName}</label>
+                <label
+                  htmlFor={translation.id.toString()}
+                  lang={translation.translatedName.languageName}
+                >
+                  {translation.translatedName.name}
+                </label>
               </div>
             ))}
         </div>

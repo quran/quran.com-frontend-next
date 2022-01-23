@@ -48,7 +48,7 @@ const SelectReciterMenu = ({ onBack }) => {
     [selectedReciterId, lang, dispatch, onBack],
   );
 
-  const reciters = <DataFetcher queryKey={makeRecitersUrl()} render={renderReciter} />;
+  const reciters = <DataFetcher queryKey={makeRecitersUrl(lang)} render={renderReciter} />;
 
   return (
     <>
