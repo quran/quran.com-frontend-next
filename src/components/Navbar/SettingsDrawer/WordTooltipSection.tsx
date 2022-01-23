@@ -1,6 +1,7 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
@@ -18,16 +19,20 @@ import {
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { removeItemFromArray, areArraysEqual } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
+import QueryParam from 'types/QueryParam';
 import { WordByWordType } from 'types/QuranReader';
 
 const WordTooltipSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const router = useRouter();
   const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
   const wordByWordLocale = useSelector(selectWordByWordLocale);
 
   const onWordByWordLocaleChange = (value: string) => {
     logValueChange('wbw_tooltip_locale', wordByWordLocale, value);
+    router.query[QueryParam.WBW_LOCALE] = value;
+    router.push(router, undefined, { shallow: true });
     dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
   };
 

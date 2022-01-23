@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -36,6 +37,7 @@ const reciterPictures = {
 
 const ReciterStationList = () => {
   const dispatch = useDispatch();
+  const { lang } = useTranslation();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
 
@@ -67,7 +69,7 @@ const ReciterStationList = () => {
 
   return (
     <DataFetcher
-      queryKey={makeRecitersUrl()}
+      queryKey={makeRecitersUrl(lang)}
       render={(data: RecitersResponse) => {
         if (!data) return null;
         return (
