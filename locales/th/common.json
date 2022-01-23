@@ -1,5 +1,6 @@
 {
     "about": "เกี่ยวกับเรา",
+    "and": "และ",
     "audio": {
         "auto-scroll": {
             "off": "ปิด",
@@ -15,6 +16,7 @@
             "currently-playing": "คุณกำลังเล่น",
             "delay-verse": "ความล่าช้าระหว่างข้อ",
             "download": "ดาวน์โหลด",
+            "full-surah": "Surah เต็ม",
             "mismatch": "คลิกที่ \"เริ่มใหม่\" หากคุณต้องการเล่น {{currentReadingChapter}} แทน",
             "next-ayah": "ต่อไป Ayah",
             "pause": "หยุดชั่วคราว",
@@ -101,6 +103,7 @@
         "clear": "ชัดเจน"
     },
     "juz": "จูซ",
+    "language": "ภาษา",
     "languages": "ภาษา",
     "loading": "กำลังโหลด",
     "menu": "เมนู",
@@ -151,6 +154,7 @@
     "product-updates": "อัพเดทสินค้า",
     "q-reflect": "คัมภีร์กุรอานสะท้อน",
     "quran-com": "Quran.com",
+    "quran-radio": "คัมภีร์กุรอานวิทยุ",
     "reading-preference": {
         "reading": "การอ่าน",
         "translation": "การแปล"
@@ -184,7 +188,9 @@
         "selected-reciter": "ผู้อ่านที่เลือก",
         "selected-tafsirs": "Tafsirs ที่เลือก",
         "selected-translations": "การแปลที่เลือก",
+        "show-tooltip-when-playing-audio": "แสดงคำแนะนำเครื่องมือเมื่อเล่นเสียง",
         "title": "การตั้งค่า",
+        "tooltip-playing-audio-helper": "แสดงการแปลคำในคำแนะนำเครื่องมือขณะเล่น ayah",
         "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
         "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
         "word-tooltip-helper": "แสดงการแปลหรือการทับศัพท์เมื่อวางเมาส์เหนือหรือคลิกที่คำ"

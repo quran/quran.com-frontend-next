@@ -1,5 +1,6 @@
 {
     "about": "ہمارے بارے میں",
+    "and": "اور",
     "audio": {
         "auto-scroll": {
             "off": "بند",
@@ -15,6 +16,7 @@
             "currently-playing": "آپ فی الحال کھیل رہے ہیں۔",
             "delay-verse": "آیت کے درمیان تاخیر",
             "download": "ڈاؤن لوڈ کریں",
+            "full-surah": "مکمل سورہ",
             "mismatch": "اگر آپ اس کے بجائے {{currentReadingChapter}} کھیلنا چاہتے ہیں تو \"Start Over\" پر کلک کریں۔",
             "next-ayah": "اگلی آیت",
             "pause": "توقف",
@@ -101,6 +103,7 @@
         "clear": "صاف"
     },
     "juz": "جوز",
+    "language": "زبان",
     "languages": "زبانیں",
     "loading": "لوڈ ہو رہا ہے۔",
     "menu": "مینو",
@@ -151,6 +154,7 @@
     "product-updates": "پروڈکٹ اپڈیٹس",
     "q-reflect": "قرآن کی عکاسی",
     "quran-com": "Quran.com",
+    "quran-radio": "قرآن ریڈیو",
     "reading-preference": {
         "reading": "پڑھنا",
         "translation": "ترجمہ"
@@ -184,7 +188,9 @@
         "selected-reciter": "منتخب قاری",
         "selected-tafsirs": "منتخب تفسیر",
         "selected-translations": "منتخب ترجمہ",
+        "show-tooltip-when-playing-audio": "آڈیو چلاتے وقت ٹول ٹِپ دکھائیں۔",
         "title": "ترتیبات",
+        "tooltip-playing-audio-helper": "آیت کو بجاتے ہوئے ٹول ٹپ میں لفظ کا ترجمہ دکھائیں۔",
         "value-and-others": "{{value}} ، اور {{othersCount}} دیگر",
         "wbw-helper": "ترجمہ یا نقل حرفی کو براہ راست لفظ کے نیچے دکھائیں۔",
         "word-tooltip-helper": "لفظ کو ہوور کرتے یا کلک کرتے وقت ترجمہ یا نقل حرفی دکھائیں۔"
