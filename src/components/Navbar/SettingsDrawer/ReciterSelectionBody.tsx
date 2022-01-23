@@ -18,7 +18,7 @@ import Reciter from 'types/Reciter';
 
 const filterReciters = (reciters, searchQuery: string): Reciter[] => {
   const fuse = new Fuse(reciters, {
-    keys: ['name', 'languageName', 'translatedName.name', 'qirat.name', 'style.name' ],
+    keys: ['name', 'languageName', 'translatedName.name', 'qirat.name', 'style.name'],
     threshold: 0.3,
   });
 
@@ -82,7 +82,9 @@ const SettingsReciter = () => {
                         onSelectedReciterChange(e.target.value, data.reciters);
                       }}
                     />
-                    <span lang={reciter.translatedName.languageName}>{reciter.translatedName.name}</span>
+                    <span lang={reciter.translatedName.languageName}>
+                      {reciter.translatedName.name}
+                    </span>
                     <span className={styles.recitationStyle}>{reciter.style.name}</span>
                   </label>
                 ))}

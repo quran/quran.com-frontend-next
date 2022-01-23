@@ -1,6 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -10,13 +11,12 @@ import { getAvailableReciters } from 'src/api';
 import { selectReciter, setReciter } from 'src/redux/slices/AudioPlayer/state';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import Reciter from 'types/Reciter';
-import useTranslation from 'next-translate/useTranslation';
 
 const ReciterAdjustment: React.FC = () => {
   const dispatch = useDispatch();
-    const { lang } = useTranslation();
+  const { lang } = useTranslation();
 
-    const { data, error } = useSWRImmutable(makeRecitersUrl(lang), () =>
+  const { data, error } = useSWRImmutable(makeRecitersUrl(lang), () =>
     getAvailableReciters(lang).then((res) =>
       res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
     ),

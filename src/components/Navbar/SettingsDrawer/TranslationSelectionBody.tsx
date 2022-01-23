@@ -85,7 +85,12 @@ const TranslationSelectionBody = () => {
                   checked={selectedTranslations.includes(translation.id)}
                   onChange={onTranslationsChange}
                 />
-                <label htmlFor={translation.id.toString()} lang={translation.translatedName.languageName}>{translation.translatedName.name}</label>
+                <label
+                  htmlFor={translation.id.toString()}
+                  lang={translation.translatedName.languageName}
+                >
+                  {translation.translatedName.name}
+                </label>
               </div>
             ))}
         </div>

@@ -81,7 +81,9 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
 
 /**
  * Get list of available reciters.
+ *
  * @param {string} locale  the locale.
+ *
  * @returns {Promise<RecitersResponse>}
  */
 export const getAvailableReciters = async (locale: string): Promise<RecitersResponse> =>

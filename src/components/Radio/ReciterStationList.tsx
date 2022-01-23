@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -16,7 +17,6 @@ import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
-import useTranslation from 'next-translate/useTranslation';
 
 // TODO:
 // - these images url should come from backend.
@@ -37,7 +37,7 @@ const reciterPictures = {
 
 const ReciterStationList = () => {
   const dispatch = useDispatch();
-  const {lang} = useTranslation();
+  const { lang } = useTranslation();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
 
