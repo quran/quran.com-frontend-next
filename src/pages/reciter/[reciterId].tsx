@@ -2,34 +2,53 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable i18next/no-literal-string */
 
+import { useState, useMemo } from 'react';
+
 import classNames from 'classnames';
+import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
+import IconSearch from '../../../public/icons/search.svg';
 import layoutStyle from '../index.module.scss';
 
 import pageStyle from './reciterPage.module.scss';
 
 import { getAvailableReciters } from 'src/api';
-import Button from 'src/components/dls/Button/Button';
+import ChapterIconContainer from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Footer from 'src/components/dls/Footer/Footer';
-import SurahPreviewRow from 'src/components/dls/SurahPreview/SurahPreviewRow';
+import Input from 'src/components/dls/Forms/Input';
 import { StationState, StationType } from 'src/components/Radio/types';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getAllChaptersData, getRandomChapterId } from 'src/utils/chapter';
-import { logEvent } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { logEmptySearchResults, logEvent } from 'src/utils/eventLogger';
+import Chapter from 'types/Chapter';
+
+const filterChapters = (chapters, searchQuery: string) => {
+  const fuse = new Fuse(chapters, {
+    keys: ['transliteratedName'],
+    threshold: 0.3,
+  });
+
+  const filteredReciter = fuse.search(searchQuery);
+  const resultItems = filteredReciter.map(({ item }) => item);
+  if (!filteredReciter.length) {
+    logEmptySearchResults(searchQuery, 'reciter_page_chapter_list');
+  }
+  return resultItems as (Chapter & { id: number })[];
+};
 
 const Reciterpage = () => {
   const allChapterData = getAllChaptersData();
   const dispatch = useDispatch();
   const router = useRouter();
-  const { lang, t } = useTranslation();
+  const { t } = useTranslation('common');
 
   const reciters = useSWR(makeRecitersUrl(), async () => {
     return getAvailableReciters();
@@ -66,38 +85,66 @@ const Reciterpage = () => {
     );
   };
 
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const allChaptersWithId = useMemo(
+    () =>
+      Object.entries(allChapterData).map(([chapterId, chapter]) => ({
+        id: chapterId,
+        ...chapter,
+      })),
+    [allChapterData],
+  );
+
+  const filteredChapters = useMemo(
+    () => (searchQuery ? filterChapters(allChaptersWithId, searchQuery) : allChaptersWithId),
+    [searchQuery, allChaptersWithId],
+  );
+
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
-      <div className={pageStyle.reciterImage} />
-
       <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
-        <div className={pageStyle.reciterName}>{selectedReciter?.name}</div>
-        <Button onClick={() => onPlayClick()}>
-          <PlayIcon />
-        </Button>
+        <div className={pageStyle.reciterContainer}>
+          <div className={pageStyle.reciterImage} />
+          <div>
+            <div className={pageStyle.reciterName}>{selectedReciter?.name}</div>
+            <Button prefix={<PlayIcon />} onClick={() => onPlayClick()}>
+              Play Audio
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
+        <Input
+          prefix={<IconSearch />}
+          id="translations-search"
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder={t('settings.search-reciter')}
+          fixedWidth={false}
+        />
       </div>
 
       <div className={classNames(layoutStyle.flowItem)}>
-        <div className={pageStyle.sectionTitle}>Surah List</div>
         <div className={pageStyle.surahListContainer}>
-          {Object.entries(allChapterData).map(([chapterId, chapterData]) => (
-            <SurahPreviewRow
-              key={chapterId}
-              chapterId={Number(chapterId)}
-              description={`${toLocalizedNumber(chapterData.versesCount, lang)} ${t('ayahs')}`}
-              surahName={chapterData.transliteratedName}
-              surahNumber={Number(chapterId)}
-              translatedSurahName={chapterData.translatedName as string}
-              isMinimalLayout={false}
-            />
-            // <div
-            //   key={chapterId}
-            //   className={pageStyle.chapterListItem}
-            //   onClick={() => onPlayClick(chapterId)}
-            // >
-            //   <div className={pageStyle.chapterId}>{chapterId}</div>
-            //   <div className={pageStyle.chapterName}>{chapterData.transliteratedName}</div>
-            // </div>
+          {filteredChapters.map((chapter) => (
+            <div
+              key={chapter.id}
+              className={pageStyle.chapterListItem}
+              onClick={() => onPlayClick(chapter.id.toString())}
+            >
+              <span style={{ display: 'flex', alignItems: 'center' }}>
+                <div className={pageStyle.chapterId}>{chapter.id}</div>
+                <div>
+                  <div className={pageStyle.chapterName}>{chapter.transliteratedName}</div>
+                  <ChapterIconContainer chapterId={chapter.id.toString()} hasSurahPrefix={false} />
+                </div>
+              </span>
+              <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+                <PlayIcon />
+              </Button>
+            </div>
           ))}
           <div />
         </div>
