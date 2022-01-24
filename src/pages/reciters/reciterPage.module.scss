@@ -4,7 +4,7 @@
   min-width: calc(5 * var(--spacing-mega));
   min-height: calc(5 * var(--spacing-mega));
   background-color: var(--color-background-alternative-deep);
-  border-radius: var(--border-radius-rounded);
+  border-radius: var(--border-radius-circle);
   margin-inline-end: var(--spacing-medium);
   position: relative;
   overflow: hidden;
@@ -40,7 +40,6 @@
 .chapterListItem {
   display: flex;
   padding: var(--spacing-medium) var(--spacing-small);
-  margin-block-end: var(--spacing-medium);
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
