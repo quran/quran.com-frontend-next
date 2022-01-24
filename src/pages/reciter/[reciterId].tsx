@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable i18next/no-literal-string */
@@ -22,6 +23,7 @@ import ChapterIconContainer from 'src/components/chapters/ChapterIcon/ChapterIco
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Footer from 'src/components/dls/Footer/Footer';
 import Input from 'src/components/dls/Forms/Input';
+import { reciterPictures } from 'src/components/Radio/ReciterStationList';
 import { StationState, StationType } from 'src/components/Radio/types';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radio';
@@ -48,10 +50,12 @@ const Reciterpage = () => {
   const allChapterData = getAllChaptersData();
   const dispatch = useDispatch();
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
-  const reciters = useSWR(makeRecitersUrl(), async () => {
-    return getAvailableReciters();
+  const reciterId = router.query.reciterId as string;
+
+  const reciters = useSWR(makeRecitersUrl(lang), async () => {
+    return getAvailableReciters(lang);
   });
 
   const selectedReciter = reciters.data?.reciters.find(
@@ -71,14 +75,14 @@ const Reciterpage = () => {
       title: selectedReciter?.name,
       description: selectedReciter?.style.name,
       chapterId: selectedChapterId,
-      reciterId: router.query.reciterId as string,
+      reciterId,
     };
     dispatch(setRadioStationState(nextStationState));
 
     dispatch(
       playFrom({
         chapterId: Number(selectedChapterId),
-        reciterId: Number(router.query.reciterId),
+        reciterId: Number(reciterId),
         timestamp: 0,
         isRadioMode: true,
       }),
@@ -105,7 +109,13 @@ const Reciterpage = () => {
     <div className={classNames(layoutStyle.pageContainer)}>
       <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
         <div className={pageStyle.reciterContainer}>
-          <div className={pageStyle.reciterImage} />
+          <div className={pageStyle.reciterImageContainer}>
+            <img
+              className={pageStyle.reciterImage}
+              src={reciterPictures[reciterId]}
+              alt={selectedReciter?.name}
+            />
+          </div>
           <div>
             <div className={pageStyle.reciterName}>{selectedReciter?.name}</div>
             <Button prefix={<PlayIcon />} onClick={() => onPlayClick()}>
@@ -134,16 +144,23 @@ const Reciterpage = () => {
               className={pageStyle.chapterListItem}
               onClick={() => onPlayClick(chapter.id.toString())}
             >
-              <span style={{ display: 'flex', alignItems: 'center' }}>
+              <div className={pageStyle.chapterInfoContainer}>
                 <div className={pageStyle.chapterId}>{chapter.id}</div>
                 <div>
                   <div className={pageStyle.chapterName}>{chapter.transliteratedName}</div>
-                  <ChapterIconContainer chapterId={chapter.id.toString()} hasSurahPrefix={false} />
+                  <span className={pageStyle.chapterIconContainer}>
+                    <ChapterIconContainer
+                      chapterId={chapter.id.toString()}
+                      hasSurahPrefix={false}
+                    />
+                  </span>
                 </div>
-              </span>
-              <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
-                <PlayIcon />
-              </Button>
+              </div>
+              <div className={pageStyle.actionsContainer}>
+                <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
+                  <PlayIcon />
+                </Button>
+              </div>
             </div>
           ))}
           <div />

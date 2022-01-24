@@ -21,7 +21,7 @@ import Reciter from 'types/Reciter';
 // TODO:
 // - these images url should come from backend.
 // - find better images
-const reciterPictures = {
+export const reciterPictures = {
   1: '/images/reciters/1.jpg',
   2: '/images/reciters/2.jpeg',
   3: '/images/reciters/3.jpeg',
