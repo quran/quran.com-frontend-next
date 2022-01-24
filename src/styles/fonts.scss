@@ -56,8 +56,8 @@ $font-cdn: "https://static.qurancdn.com/fonts";
 @font-face {
   font-family: "NotoNastaliq";
   src: local("Noto Naskh Arabic"), local("Nafees Regular"),
-    url("#{$font-cdn}/lang/noto/NotoNaskhArabic-Regular.woff2"),
-    url("#{$font-cdn}/lang/noto/NotoNaskhArabic-Regular.ttf") format("truetype");
+    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.woff2"),
+    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -67,7 +67,7 @@ $font-cdn: "https://static.qurancdn.com/fonts";
 @font-face {
   font-family: "NotoNastaliqUrdu";
   src: local("Noto Nastaliq Urdu"), local("Nafees Regular"),
-    url("#{$font-cdn}/lang/noto/notonastaliqurdu.woff2");
+    url("#{$font-cdn}/lang/urdu/notonastaliqurdu.woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -76,7 +76,7 @@ $font-cdn: "https://static.qurancdn.com/fonts";
 @font-face {
   font-family: "NotoSerifBengali";
   src: local("Noto Serif Bengali"),
-    url("#{$font-cdn}/noto/NotoSerifBengali-Regular.woff2");
+    url("#{$font-cdn}/bengali/NotoSerifBengali-Regular.woff2");
 }
 
 @font-face {

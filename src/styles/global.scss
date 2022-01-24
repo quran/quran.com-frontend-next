@@ -18,29 +18,39 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  .ltr, :dir(ltr) {
+  .ltr,
+  :dir(ltr) {
     /* stylelint-disable-next-line csstools/use-logical */
     text-align: left;
     direction: ltr;
   }
 
-  .rtl, :dir(rtl) {
+  .rtl,
+  :dir(rtl) {
     direction: rtl;
     /* stylelint-disable-next-line csstools/use-logical */
     text-align: right;
   }
 
-  :lang(ur), .ur, .urdu {
-    font-family: "NotoNastaliqUrdu", "Noto Nastaliq Urdu", "Noto Nastaliq Arabic", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  // Note: Reciter and translation names are adding full locale names( i.e urdu instead of ur)
+  // and these names are coming from BE. It is easie to add another rule in css instead of changing BE
+  :lang(ur),
+  :lang(urdu),
+  .ur,
+  .urdu {
+    font-family: "NotoNastaliqUrdu", "Noto Nastaliq Urdu",
+      "Noto Nastaliq Arabic", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 
-  :lang(ar){
-    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  :lang(ar),
+  :lang(arabic) .ar {
+    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara",
+      "Helvetica Neue", Helvetica, Arial;
   }
 
-  :lang(bn) {
-    font-family: "NotoSerifBengali", "Helvetica Neue", Helvetica,
-      Arial;
+  :lang(bn),
+  :lang(bengali) {
+    font-family: "NotoSerifBengali", "Helvetica Neue", Helvetica, Arial;
   }
 }
 
