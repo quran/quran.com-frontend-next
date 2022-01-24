@@ -1,0 +1,25 @@
+{
+    "change": "Изменять",
+    "curated-station": {
+        "juz-amma": {
+            "description": "Слушайте последний жуз Корана",
+            "title": "Джуз Амма"
+        },
+        "popular-recitations": {
+            "description": "Ежедневная кураторская лента декламаций",
+            "title": "Популярные чтения"
+        },
+        "surah-al-kahf": {
+            "description": "Слушайте суру Алькахф на повторе",
+            "title": "Сура Аль-Кахф"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "Суры от кураторов чтецов",
+            "title": "Ясин, Аль-Вакиа, Аль-Мульк"
+        }
+    },
+    "curated-stations": "Кураторские станции",
+    "pause-radio": "Пауза Радио",
+    "play-radio": "Воспроизвести радио",
+    "reciter-stations": "Чтец станции"
+}

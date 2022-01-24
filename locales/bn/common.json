@@ -1,5 +1,6 @@
 {
     "about": "আমাদের সম্পর্কে",
+    "and": "এবং",
     "audio": {
         "auto-scroll": {
             "off": "বন্ধ",
@@ -15,6 +16,7 @@
             "currently-playing": "আপনি বর্তমানে খেলছেন",
             "delay-verse": "আয়াতের মধ্যে বিলম্ব",
             "download": "ডাউনলোড করুন",
+            "full-surah": "সম্পূর্ণ সূরা",
             "mismatch": "আপনি যদি পরিবর্তে {{currentReadingChapter}} খেলতে চান তাহলে \"Start Over\" এ ক্লিক করুন",
             "next-ayah": "পরবর্তী আয়াত",
             "pause": "বিরতি",
@@ -101,6 +103,7 @@
         "clear": "পরিষ্কার"
     },
     "juz": "জুজ",
+    "language": "ভাষা",
     "languages": "ভাষা",
     "loading": "লোড হচ্ছে",
     "menu": "তালিকা",
@@ -151,6 +154,7 @@
     "product-updates": "পণ্য আপডেট",
     "q-reflect": "কুরআন প্রতিফলন",
     "quran-com": "কুরআন ডট কম",
+    "quran-radio": "কোরআন রেডিও",
     "reading-preference": {
         "reading": "পড়া",
         "translation": "অনুবাদ"
@@ -184,7 +188,9 @@
         "selected-reciter": "নির্বাচিত আবৃত্তিকার",
         "selected-tafsirs": "নির্বাচিত তাফসির",
         "selected-translations": "নির্বাচিত অনুবাদ",
+        "show-tooltip-when-playing-audio": "অডিও চালানোর সময় টুলটিপ দেখান",
         "title": "সেটিংস",
+        "tooltip-playing-audio-helper": "আয়াত খেলার সময় টুলটিপে শব্দ অনুবাদ দেখান",
         "value-and-others": "{{value}} , এবং {{othersCount}} অন্যান্য",
         "wbw-helper": "সরাসরি শব্দের নিচে অনুবাদ বা প্রতিবর্ণীকরণ প্রদর্শন করুন",
         "word-tooltip-helper": "শব্দটি ঘোরানো বা ক্লিক করার সময় অনুবাদ বা প্রতিবর্ণীকরণ প্রদর্শন করুন"
