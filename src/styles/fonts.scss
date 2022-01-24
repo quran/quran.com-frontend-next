@@ -5,7 +5,7 @@ $font-cdn: "https://static.qurancdn.com/fonts";
 /*Fonts for rendering different Mushaf scripts*/
 @font-face {
   font-family: "IndoPak";
-  src: local("AlQuran IndoPak by QuranWBW. Version 4.0-WL"),
+  src: local("AlQuran IndoPak by QuranWBW"),
     url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2"),
     url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff")
       format("woff"),
@@ -57,7 +57,8 @@ $font-cdn: "https://static.qurancdn.com/fonts";
   font-family: "NotoNastaliq";
   src: local("Noto Naskh Arabic"), local("Nafees Regular"),
     url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.woff2"),
-    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.ttf") format("truetype");
+    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.ttf")
+      format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
