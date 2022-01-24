@@ -84,10 +84,10 @@ export const ToastContainer = () => {
 };
 
 export const useToast = () => {
-  const setShouldRenderTosat = useContext(ToastContext);
+  const setShouldRenderToast = useContext(ToastContext);
 
   return (content: React.ReactNode, options: Options = {}) => {
-    setShouldRenderTosat(true);
+    setShouldRenderToast(true);
     toast(content, options);
   };
 };

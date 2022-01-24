@@ -1,0 +1,25 @@
+{
+    "change": "تغییر دادن",
+    "curated-station": {
+        "juz-amma": {
+            "description": "جملات پایانی قرآن را بشنوید",
+            "title": "جوز اما"
+        },
+        "popular-recitations": {
+            "description": "فید تنظیم شده روزانه از تلاوت ها",
+            "title": "تلاوت های مردمی"
+        },
+        "surah-al-kahf": {
+            "description": "سوره الکهف را با تکرار بشنوید",
+            "title": "سوره کهف"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "سوره هایی از جمع قاریان",
+            "title": "یاسین، الواقعه، الملک"
+        }
+    },
+    "curated-stations": "ایستگاه های انتخاب شده",
+    "pause-radio": "مکث رادیو",
+    "play-radio": "پخش رادیو",
+    "reciter-stations": "ایستگاه های تلاوت"
+}

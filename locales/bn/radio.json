@@ -1,0 +1,25 @@
+{
+    "change": "পরিবর্তন",
+    "curated-station": {
+        "juz-amma": {
+            "description": "কুরআনের শেষ জুজ শুনুন",
+            "title": "জুজ আম্মা"
+        },
+        "popular-recitations": {
+            "description": "আবৃত্তির দৈনিক কিউরেটেড ফিড",
+            "title": "জনপ্রিয় আবৃত্তি"
+        },
+        "surah-al-kahf": {
+            "description": "সূরা আলকাফ বারবার শুনুন",
+            "title": "সূরা আল কাহফ"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "তিলাওয়াতকারীদের কিউরেশন থেকে সূরাগুলো",
+            "title": "ইয়াসিন, আল-ওয়াকিয়া, আল-মুলক"
+        }
+    },
+    "curated-stations": "কিউরেটেড স্টেশন",
+    "pause-radio": "রেডিও থামান",
+    "play-radio": "রেডিও চালান",
+    "reciter-stations": "আবৃত্তিকারী স্টেশন"
+}
