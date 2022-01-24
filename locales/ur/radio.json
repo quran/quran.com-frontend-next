@@ -1,0 +1,25 @@
+{
+    "change": "تبدیلی",
+    "curated-station": {
+        "juz-amma": {
+            "description": "قرآن مجید کا آخری جوز سنیں۔",
+            "title": "جوز اماں"
+        },
+        "popular-recitations": {
+            "description": "تلاوت کی روزانہ کیوریٹ شدہ فیڈ",
+            "title": "مقبول قرات"
+        },
+        "surah-al-kahf": {
+            "description": "سورہ الکہف کو بار بار سنیں۔",
+            "title": "سورہ کہف"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "تلاوت کرنے والوں کی ترتیب سے سورتیں۔",
+            "title": "یٰسین، الواقیہ، الملک"
+        }
+    },
+    "curated-stations": "کیوریٹڈ اسٹیشنز",
+    "pause-radio": "ریڈیو موقوف کریں۔",
+    "play-radio": "ریڈیو چلائیں۔",
+    "reciter-stations": "تلاوت کرنے والے اسٹیشنز"
+}

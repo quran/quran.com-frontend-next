@@ -1,5 +1,6 @@
 {
     "about": "Tentang Kami",
+    "and": "dan",
     "audio": {
         "auto-scroll": {
             "off": "Tutup",
@@ -15,6 +16,7 @@
             "currently-playing": "Anda sedang memainkan",
             "delay-verse": "Kelewatan antara ayat",
             "download": "Muat turun",
+            "full-surah": "Surah penuh",
             "mismatch": "Klik pada \"Mula Semula\" jika anda mahu teruskan {{currentReadingChapter}} sebaliknya",
             "next-ayah": "Ayat Seterusnya",
             "pause": "Henti",
@@ -101,6 +103,7 @@
         "clear": "Hilangkan"
     },
     "juz": "Juz",
+    "language": "Bahasa",
     "languages": "Bahasa",
     "loading": "Sedang proses",
     "menu": "Menu",
@@ -151,6 +154,7 @@
     "product-updates": "Kemas kini produk",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
+    "quran-radio": "Radio Al-Quran",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"
@@ -184,7 +188,9 @@
         "selected-reciter": "qari yang terpilih",
         "selected-tafsirs": "Tafsir Terpilih",
         "selected-translations": "Terjemahan Terpilih",
+        "show-tooltip-when-playing-audio": "Tunjukkan petua alat semasa memainkan audio",
         "title": "Tetapan",
+        "tooltip-playing-audio-helper": "Tunjukkan terjemahan perkataan dalam petua alat semasa bermain ayah",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",
         "wbw-helper": "Paparkan terjemahan atau transliterasi terus di bawah perkataan",
         "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila melayang atau mengklik perkataan"

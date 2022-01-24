@@ -1,0 +1,25 @@
+{
+    "change": "เปลี่ยน",
+    "curated-station": {
+        "juz-amma": {
+            "description": "ฟัง Juz สุดท้ายของคัมภีร์กุรอาน",
+            "title": "Juz Amma"
+        },
+        "popular-recitations": {
+            "description": "ฟีดที่รวบรวมทุกวันของการบรรยาย",
+            "title": "บทสวดยอดนิยม"
+        },
+        "surah-al-kahf": {
+            "description": "ฟัง Surah Alkahf ซ้ำ",
+            "title": "Surah Al-Kahf"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "Surahs จากการดูแลของผู้อ่าน",
+            "title": "ยาซีน อัล-วาเกียห์ อัล-มุลค์"
+        }
+    },
+    "curated-stations": "สถานีดูแลจัดการ",
+    "pause-radio": "หยุดวิทยุชั่วคราว",
+    "play-radio": "เล่นวิทยุ",
+    "reciter-stations": "สถานีผู้อ่าน"
+}

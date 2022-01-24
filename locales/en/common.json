@@ -1,5 +1,6 @@
 {
     "about": "About Us",
+    "and": "and",
     "audio": {
         "auto-scroll": {
             "off": "Off",
@@ -15,6 +16,7 @@
             "currently-playing": "You are currently playing",
             "delay-verse": "Delay between verse",
             "download": "Download",
+            "full-surah": "Full Surah",
             "mismatch": "Click on \"Start Over\" if you would like to play {{currentReadingChapter}} instead",
             "next-ayah": "Next Ayah",
             "pause": "Pause",
@@ -30,8 +32,7 @@
             "start-playing": "Start Playing",
             "stop-repeating": "Stop Repeating",
             "times": "times",
-            "verses-range": "Range of verses",
-            "full-surah": "Full Surah"
+            "verses-range": "Range of verses"
         },
         "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
         "select-reciter": "Select Reciter",
@@ -46,7 +47,6 @@
     "cancel": "Cancel",
     "click-here": "Click here",
     "close": "Close",
-    "and": "and",
     "command-bar": {
         "navigations": "Navigations",
         "no-nav-results": "No navigation results",
@@ -103,8 +103,8 @@
         "clear": "Clear"
     },
     "juz": "Juz",
-    "languages": "Languages",
     "language": "Language",
+    "languages": "Languages",
     "loading": "Loading",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
@@ -188,12 +188,12 @@
         "selected-reciter": "Selected Reciter",
         "selected-tafsirs": "Selected Tafsirs",
         "selected-translations": "Selected Translations",
+        "show-tooltip-when-playing-audio": "Show tooltip when playing audio",
         "title": "Settings",
+        "tooltip-playing-audio-helper": "Show word translation in tooltip while playing ayah",
         "value-and-others": "{{value}}, and {{othersCount}} others",
         "wbw-helper": "Display the translation or transliteration directly under the word",
-        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word",
-        "tooltip-playing-audio-helper": "Show word translation in tooltip while playing ayah",
-        "show-tooltip-when-playing-audio": "Show tooltip when playing audio"
+        "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
     },
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",

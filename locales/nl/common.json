@@ -1,5 +1,6 @@
 {
     "about": "Over ons",
+    "and": "en",
     "audio": {
         "auto-scroll": {
             "off": "Uit",
@@ -15,6 +16,7 @@
             "currently-playing": "Je speelt momenteel",
             "delay-verse": "Vertraging tussen vers",
             "download": "Downloaden",
+            "full-surah": "volledige soera",
             "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
             "next-ayah": "Volgende Aya",
             "pause": "Pauze",
@@ -101,6 +103,7 @@
         "clear": "Duidelijk"
     },
     "juz": "Juz",
+    "language": "Taal",
     "languages": "Talen",
     "loading": "Bezig met laden",
     "menu": "Menu",
@@ -151,6 +154,7 @@
     "product-updates": "Productupdates",
     "q-reflect": "KoranReflect",
     "quran-com": "koran.com",
+    "quran-radio": "Koran Radio",
     "reading-preference": {
         "reading": "Lezing",
         "translation": "Vertaling"
@@ -184,7 +188,9 @@
         "selected-reciter": "Geselecteerde voordrager",
         "selected-tafsirs": "Geselecteerde Tafsirs",
         "selected-translations": "Geselecteerde vertalingen",
+        "show-tooltip-when-playing-audio": "Knopinfo weergeven bij het afspelen van audio",
         "title": "Instellingen",
+        "tooltip-playing-audio-helper": "Toon woordvertaling in tooltip tijdens het spelen van ayah",
         "value-and-others": "{{value}} en {{othersCount}} anderen",
         "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
         "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
