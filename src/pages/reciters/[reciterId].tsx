@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -6,23 +7,28 @@
 import { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
+import clipboardCopy from 'clipboard-copy';
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
+import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import IconSearch from '../../../public/icons/search.svg';
+import SearchIcon from '../../../public/icons/search.svg';
+import ShareIcon from '../../../public/icons/share.svg';
 import layoutStyle from '../index.module.scss';
 
 import pageStyle from './reciterPage.module.scss';
 
 import { getAvailableReciters } from 'src/api';
 import ChapterIconContainer from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Footer from 'src/components/dls/Footer/Footer';
 import Input from 'src/components/dls/Forms/Input';
+import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { reciterPictures } from 'src/components/Radio/ReciterStationList';
 import { StationState, StationType } from 'src/components/Radio/types';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
@@ -30,6 +36,7 @@ import { setRadioStationState } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
 import { getAllChaptersData, getRandomChapterId } from 'src/utils/chapter';
 import { logEmptySearchResults, logEvent } from 'src/utils/eventLogger';
+import { getWindowOrigin } from 'src/utils/url';
 import Chapter from 'types/Chapter';
 
 const filterChapters = (chapters, searchQuery: string) => {
@@ -105,6 +112,8 @@ const Reciterpage = () => {
     [searchQuery, allChaptersWithId],
   );
 
+  const toast = useToast();
+
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
       <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
@@ -127,7 +136,7 @@ const Reciterpage = () => {
 
       <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
         <Input
-          prefix={<IconSearch />}
+          prefix={<SearchIcon />}
           id="translations-search"
           value={searchQuery}
           onChange={setSearchQuery}
@@ -142,7 +151,9 @@ const Reciterpage = () => {
             <div
               key={chapter.id}
               className={pageStyle.chapterListItem}
-              onClick={() => onPlayClick(chapter.id.toString())}
+              onClick={() => {
+                onPlayClick(chapter.id.toString());
+              }}
             >
               <div className={pageStyle.chapterInfoContainer}>
                 <div className={pageStyle.chapterId}>{chapter.id}</div>
@@ -160,6 +171,31 @@ const Reciterpage = () => {
                 <Button variant={ButtonVariant.Ghost} size={ButtonSize.Small}>
                   <PlayIcon />
                 </Button>
+                <PopoverMenu
+                  trigger={
+                    <Button
+                      size={ButtonSize.Small}
+                      tooltip={t('more')}
+                      variant={ButtonVariant.Ghost}
+                      shape={ButtonShape.Circle}
+                    >
+                      <OverflowMenuIcon />
+                    </Button>
+                  }
+                >
+                  <PopoverMenu.Item
+                    shouldStopPropagation
+                    onClick={() => {
+                      const origin = getWindowOrigin();
+                      clipboardCopy(`${origin}/${chapter.id}`).then(() => {
+                        toast(t('shared'), { status: ToastStatus.Success });
+                      });
+                    }}
+                    icon={<ShareIcon />}
+                  >
+                    {t('share')}
+                  </PopoverMenu.Item>
+                </PopoverMenu>
               </div>
             </div>
           ))}
