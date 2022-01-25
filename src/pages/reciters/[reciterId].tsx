@@ -1,13 +1,9 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable max-lines */
 import { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 
 import SearchIcon from '../../../public/icons/search.svg';
 import layoutStyle from '../index.module.scss';
@@ -18,7 +14,7 @@ import { getReciterData } from 'src/api';
 import Footer from 'src/components/dls/Footer/Footer';
 import Input from 'src/components/dls/Forms/Input';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import ChapterList from 'src/components/Reciter/ChapterList';
+import ChaptersList from 'src/components/Reciter/ChaptersList';
 import ReciterInfo from 'src/components/Reciter/ReciterInfo';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
@@ -48,13 +44,12 @@ const filterChapters = (chapters, searchQuery: string) => {
 type ReciterPageProps = { selectedReciter: Reciter };
 const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
   const allChapterData = getAllChaptersData();
-  const router = useRouter();
   const { t, lang } = useTranslation();
-
-  const reciterId = router.query.reciterId as string;
 
   const [searchQuery, setSearchQuery] = useState('');
 
+  // `allChaptersData` type is Record<string, Chapter>, but we need Chapter[] format with `id` inside the object
+  // because `Fuse` library expects Array of objects, not Record<string, Chapter>
   const allChaptersWithId = useMemo(
     () =>
       Object.entries(allChapterData).map(([chapterId, chapter]) => {
@@ -71,7 +66,9 @@ const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
     [searchQuery, allChaptersWithId],
   );
 
-  const navigationUrl = getSurahInfoNavigationUrl(getReciterNavigationUrl(reciterId));
+  const navigationUrl = getSurahInfoNavigationUrl(
+    getReciterNavigationUrl(selectedReciter.id.toString()),
+  );
 
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
@@ -98,7 +95,7 @@ const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
       </div>
 
       <div className={classNames(layoutStyle.flowItem)}>
-        <ChapterList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
+        <ChaptersList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
       </div>
 
       <div className={classNames(layoutStyle.flowItem, pageStyle.footerContainer)}>

@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
@@ -19,27 +17,25 @@ import styles from './ChapterList.module.scss';
 
 import { getChapterAudioData } from 'src/api';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { getRandomChapterId } from 'src/utils/chapter';
-import { logEvent } from 'src/utils/eventLogger';
+import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
-// import Chapter from 'types/Chapter';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
-type ChapterListProps = {
+type ChaptersListProps = {
   filteredChapters: Chapter[];
   selectedReciter: Reciter;
 };
 
-const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) => {
+const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) => {
   const toast = useToast();
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const [downloadingChapterAudio, setDownloadingChapterAudio] = useState(null);
+  const [currentlyDownloadChapterAudioId, setCurrentlyDownloadChapterAudioId] = useState(null);
 
-  const onPlayChapter = (chapterId?: string) => {
-    const selectedChapterId = chapterId || getRandomChapterId().toString();
+  const onPlayChapterClicked = (chapterId: string) => {
+    const selectedChapterId = chapterId;
 
     logEvent('reciter_page_chapter_played', {
       stationId: selectedChapterId,
@@ -54,15 +50,34 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
     );
   };
 
+  const onCopyUrlClicked = (chapterId) => {
+    logButtonClick('reciter_page_chapter_url_copy');
+    const origin = getWindowOrigin();
+    clipboardCopy(`${origin}/${chapterId}`).then(() => {
+      toast(t('common:shared'), { status: ToastStatus.Success });
+    });
+  };
+
+  const onAudioDownloadClicked = async (chapterId) => {
+    logButtonClick('reciter_page_chapter_audio_download');
+    const audioData = await getChapterAudioData(Number(selectedReciter.id), Number(chapterId));
+
+    setCurrentlyDownloadChapterAudioId(chapterId);
+    download(audioData.audioUrl, () => {
+      setCurrentlyDownloadChapterAudioId(null);
+    });
+  };
+
   return (
     <div className={styles.chapterListContainer}>
       {filteredChapters.map((chapter) => (
         <div
           key={chapter.id}
           className={styles.chapterListItem}
-          onClick={() => {
-            onPlayChapter(chapter.id.toString());
-          }}
+          role="button"
+          tabIndex={0}
+          onKeyPress={() => onPlayChapterClicked(chapter.id.toString())}
+          onClick={() => onPlayChapterClicked(chapter.id.toString())}
         >
           <div className={styles.chapterInfoContainer}>
             <div className={styles.playIconWrapper}>
@@ -86,10 +101,7 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
               shape={ButtonShape.Circle}
               onClick={(e) => {
                 e.stopPropagation();
-                const origin = getWindowOrigin();
-                clipboardCopy(`${origin}/${chapter.id}`).then(() => {
-                  toast(t('common:shared'), { status: ToastStatus.Success });
-                });
+                onCopyUrlClicked(chapter.id);
               }}
             >
               <CopyLinkIcon />
@@ -100,18 +112,10 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
               size={ButtonSize.Small}
               onClick={async (e) => {
                 e.stopPropagation();
-                const audioData = await getChapterAudioData(
-                  Number(selectedReciter.id),
-                  Number(chapter.id),
-                );
-
-                setDownloadingChapterAudio(chapter.id);
-                download(audioData.audioUrl, () => {
-                  setDownloadingChapterAudio(null);
-                });
+                onAudioDownloadClicked(chapter.id);
               }}
             >
-              {downloadingChapterAudio === chapter.id ? (
+              {currentlyDownloadChapterAudioId === chapter.id ? (
                 <Spinner size={SpinnerSize.Small} />
               ) : (
                 <DownloadIcon />
@@ -125,4 +129,4 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
   );
 };
 
-export default ChapterList;
+export default ChaptersList;
