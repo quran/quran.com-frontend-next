@@ -32,8 +32,8 @@ body {
     text-align: right;
   }
 
-  // Note: Reciter and translation names are adding full locale names( i.e urdu instead of ur)
-  // and these names are coming from BE. It is easie to add another rule in css instead of changing BE
+  // Note: Reciter and translation names have full locale names e.g. "urdu" instead of "ur"
+  // and these names are coming from BE. It is easier to add another selector in css instead of changing BE
   :lang(ur),
   :lang(urdu),
   .ur,
@@ -50,7 +50,8 @@ body {
 
   :lang(bn),
   :lang(bengali) {
-    font-family: "NotoSerifBengali", "Helvetica Neue", Helvetica, Arial;
+    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
+      Arial;
   }
 }
 
