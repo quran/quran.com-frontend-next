@@ -12,13 +12,9 @@
 }
 
 .item {
-  font-size: var(--font-size-large);
   margin-block-end: var(--spacing-xsmall);
   display: flex;
   align-items: center;
-  & > input {
-    margin-inline-end: var(--spacing-small);
-  }
 }
 
 .group {

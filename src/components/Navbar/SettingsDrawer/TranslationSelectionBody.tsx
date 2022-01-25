@@ -12,6 +12,7 @@ import IconSearch from '../../../../public/icons/search.svg';
 import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';
 import {
   selectSelectedTranslations,
@@ -53,23 +54,23 @@ const TranslationSelectionBody = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const onTranslationsChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const selectedTranslationId = e.target.value;
-      const isChecked = e.target.checked;
-      // when the checkbox is checked
-      // add the selectedTranslationId to redux
-      // if unchecked, remove it from redux
-      const nextTranslations = isChecked
-        ? [...selectedTranslations, Number(selectedTranslationId)]
-        : selectedTranslations.filter((id) => id !== Number(selectedTranslationId)); // remove the id
+    (selectedTranslationId: number) => {
+      return (isChecked: boolean) => {
+        // when the checkbox is checked
+        // add the selectedTranslationId to redux
+        // if unchecked, remove it from redux
+        const nextTranslations = isChecked
+          ? [...selectedTranslations, selectedTranslationId]
+          : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
 
-      logItemSelectionChange('translation', selectedTranslationId, isChecked);
-      logValueChange('selected_translations', selectedTranslations, nextTranslations);
-      dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
-      if (nextTranslations.length) {
-        router.query[QueryParam.Translations] = nextTranslations.join(',');
-        router.push(router, undefined, { shallow: true });
-      }
+        logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
+        logValueChange('selected_translations', selectedTranslations, nextTranslations);
+        dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
+        if (nextTranslations.length) {
+          router.query[QueryParam.Translations] = nextTranslations.join(',');
+          router.push(router, undefined, { shallow: true });
+        }
+      };
     },
     [dispatch, lang, router, selectedTranslations],
   );
@@ -88,19 +89,12 @@ const TranslationSelectionBody = () => {
             )
             .map((translation: AvailableTranslation) => (
               <div key={translation.id} className={styles.item}>
-                <input
+                <Checkbox
                   id={translation.id.toString()}
-                  type="checkbox"
-                  value={translation.id}
                   checked={selectedTranslations.includes(translation.id)}
-                  onChange={onTranslationsChange}
+                  label={translation.translatedName.name}
+                  onChange={onTranslationsChange(translation.id)}
                 />
-                <label
-                  htmlFor={translation.id.toString()}
-                  lang={translation.translatedName.languageName}
-                >
-                  {translation.translatedName.name}
-                </label>
               </div>
             ))}
         </div>
