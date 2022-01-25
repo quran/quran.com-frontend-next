@@ -88,7 +88,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   if (isVerse) {
     apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };
   } else {
-    [from, to] = getToAndFromFromRange(verseIdOrRange);
+    [from, to] = getToAndFromFromRange(verseIdOrRange).map(ayah => `${chapterIdOrSlug}:${ayah}`);
     apiParams = { ...apiParams, ...{ from, to } };
   }
   try {

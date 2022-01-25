@@ -13,7 +13,7 @@ import { QuranFont } from 'types/QuranReader';
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
   translationFields: 'resource_name,language_id', // needed to show the name of the translation
-  limit: ITEMS_PER_PAGE,
+  perPage: ITEMS_PER_PAGE,
   fields: `${QuranFont.Uthmani},chapter_id,hizb_number,text_imlaei_simple`, // we need text_uthmani field when copying the verse. text_imlaei_simple is for SEO description meta tag. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
 };
 
