@@ -10,13 +10,11 @@ import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import { ToastStatus, useToast } from '../dls/Toast/Toast';
-import { StationState, StationType } from '../Radio/types';
 
 import styles from './ChapterList.module.scss';
 
 import { getChapterAudioData } from 'src/api';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { setRadioStationState } from 'src/redux/slices/radio';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
@@ -39,17 +37,6 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
     logEvent('reciter_page_chapter_played', {
       stationId: selectedChapterId,
     });
-
-    const nextStationState: StationState = {
-      id: selectedReciter.id.toString(),
-      type: StationType.Reciter,
-      title: selectedReciter?.name,
-      description: selectedReciter?.style.name,
-      chapterId: selectedChapterId,
-      reciterId: selectedReciter.id.toString(),
-    };
-
-    dispatch(setRadioStationState(nextStationState));
 
     dispatch(
       playFrom({
