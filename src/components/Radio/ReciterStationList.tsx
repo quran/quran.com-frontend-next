@@ -12,7 +12,7 @@ import { StationState, StationType } from './types';
 
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
-import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
@@ -69,7 +69,7 @@ const ReciterStationList = () => {
 
   return (
     <DataFetcher
-      queryKey={makeRecitersUrl(lang)}
+      queryKey={makeAvailableRecitersUrl(lang)}
       render={(data: RecitersResponse) => {
         if (!data) return null;
         return (

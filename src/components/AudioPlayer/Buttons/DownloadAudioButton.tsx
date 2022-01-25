@@ -14,7 +14,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick } from 'src/utils/eventLogger';
 
-const download = (url: string, onDone: () => void) => {
+export const download = (url: string, onDone: () => void) => {
   const splits = url.substring(url.lastIndexOf('/') + 1).split('?');
   const [filename] = splits;
   const xhr = new XMLHttpRequest();

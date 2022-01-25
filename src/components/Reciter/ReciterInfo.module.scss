@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  align-items: center;
+  margin-block-end: var(--spacing-medium);
+}
+
+.reciterImage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.reciterBio {
+  margin-block-end: var(--spacing-medium);
+}
+
+.reciterName {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  margin-block-end: var(--spacing-medium);
+}
+
+.reciterImageContainer {
+  min-width: calc(5 * var(--spacing-mega));
+  min-height: calc(5 * var(--spacing-mega));
+  background-color: var(--color-background-alternative-deep);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-medium);
+  position: relative;
+  overflow: hidden;
+}
