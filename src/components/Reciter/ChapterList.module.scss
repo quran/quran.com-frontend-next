@@ -20,19 +20,34 @@
   border-block-end: 1px solid var(--color-borders-hairline);
 }
 
-.chapterId {
+.playIconWrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: var(--color-background-alternative-faint);
   padding: var(--spacing-large);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-medium);
+
+  &:hover {
+    background-color: var(--color-success-faded);
+    color: var(--color-success-medium);
+  }
+}
+
+.playIcon {
+  display: flex;
+  align-items: center;
+  position: relative;
+  inset-inline-start: calc(0.25 * var(--spacing-xxsmall));
+
   height: var(--spacing-large);
   width: var(--spacing-large);
-  margin-inline-end: var(--spacing-medium);
-  border-radius: var(--border-radius-circle);
 }
 
 .chapterName {
   font-weight: var(--font-weight-semibold);
+  margin-block: var(--spacing-xxsmall);
 }
 
 .chapterInfoContainer {

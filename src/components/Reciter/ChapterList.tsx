@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 
 import CopyLinkIcon from '../../../public/icons/copy-link.svg';
 import DownloadIcon from '../../../public/icons/download.svg';
+import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
@@ -64,9 +65,15 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
           }}
         >
           <div className={styles.chapterInfoContainer}>
-            <div className={styles.chapterId}>{chapter.id}</div>
+            <div className={styles.playIconWrapper}>
+              <span className={styles.playIcon}>
+                <PlayIcon />
+              </span>
+            </div>
             <div>
-              <div className={styles.chapterName}>{chapter.transliteratedName}</div>
+              <div className={styles.chapterName}>
+                {chapter.id}. {chapter.transliteratedName}
+              </div>
               <span className={styles.chapterIconContainer}>
                 <ChapterIconContainer chapterId={chapter.id.toString()} hasSurahPrefix={false} />
               </span>

@@ -5,9 +5,9 @@ import { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
 
 import SearchIcon from '../../../public/icons/search.svg';
 import layoutStyle from '../index.module.scss';
@@ -17,12 +17,19 @@ import pageStyle from './reciterPage.module.scss';
 import { getReciterData } from 'src/api';
 import Footer from 'src/components/dls/Footer/Footer';
 import Input from 'src/components/dls/Forms/Input';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ChapterList from 'src/components/Reciter/ChapterList';
 import ReciterInfo from 'src/components/Reciter/ReciterInfo';
-import { makeReciterUrl } from 'src/utils/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
+import { getLanguageAlternates } from 'src/utils/locale';
+import {
+  getCanonicalUrl,
+  getReciterNavigationUrl,
+  getSurahInfoNavigationUrl,
+} from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
+import Reciter from 'types/Reciter';
 
 const filterChapters = (chapters, searchQuery: string) => {
   const fuse = new Fuse(chapters, {
@@ -38,18 +45,13 @@ const filterChapters = (chapters, searchQuery: string) => {
   return resultItems as Chapter[];
 };
 
-const Reciterpage = () => {
+type ReciterPageProps = { selectedReciter: Reciter };
+const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
   const allChapterData = getAllChaptersData();
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const reciterId = router.query.reciterId as string;
-
-  const { data } = useSWR(makeReciterUrl(reciterId), async () => {
-    return getReciterData(reciterId);
-  });
-
-  const selectedReciter = data?.reciter;
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -69,10 +71,19 @@ const Reciterpage = () => {
     [searchQuery, allChaptersWithId],
   );
 
+  const navigationUrl = getSurahInfoNavigationUrl(getReciterNavigationUrl(reciterId));
+
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
+      <NextSeoWrapper
+        title={selectedReciter?.name}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+        description={selectedReciter?.bio}
+      />
+
       <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
-        {selectedReciter && <ReciterInfo selectedReciter={selectedReciter} />}
+        <ReciterInfo selectedReciter={selectedReciter} />
       </div>
 
       <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
@@ -81,15 +92,13 @@ const Reciterpage = () => {
           id="translations-search"
           value={searchQuery}
           onChange={setSearchQuery}
-          placeholder={t('common:settings.search-reciter')}
+          placeholder={t('reciter:search-chapter')}
           fixedWidth={false}
         />
       </div>
 
       <div className={classNames(layoutStyle.flowItem)}>
-        {selectedReciter && (
-          <ChapterList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
-        )}
+        <ChapterList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
       </div>
 
       <div className={classNames(layoutStyle.flowItem, pageStyle.footerContainer)}>
@@ -98,5 +107,28 @@ const Reciterpage = () => {
     </div>
   );
 };
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  try {
+    const reciterId = params.reciterId as string;
+
+    const reciterData = await getReciterData(reciterId);
+
+    return {
+      props: {
+        selectedReciter: reciterData.reciter,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+};
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [], // no pre-rendered chapters at build time.
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+});
 
 export default Reciterpage;
