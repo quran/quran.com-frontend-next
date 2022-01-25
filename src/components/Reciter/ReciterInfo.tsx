@@ -4,14 +4,11 @@ import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button from '../dls/Button/Button';
-import { StationState, StationType } from '../Radio/types';
+import { playReciterStation } from '../Radio/ReciterStationList';
 
 import styles from './ReciterInfo.module.scss';
 
-import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { setRadioStationState } from 'src/redux/slices/radio';
 import { getImageCDNPath } from 'src/utils/api';
-import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import Reciter from 'types/Reciter';
 
@@ -26,30 +23,8 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   const dispatch = useDispatch();
 
   const onPlayReciterStation = () => {
-    const selectedChapterId = getRandomChapterId().toString();
-
-    logEvent('reciter_page_play_station', {
-      stationId: selectedChapterId,
-    });
-
-    const nextStationState: StationState = {
-      id: selectedReciter.id.toString(),
-      type: StationType.Reciter,
-      title: selectedReciter?.name,
-      description: selectedReciter?.style.name,
-      chapterId: selectedChapterId,
-      reciterId: selectedReciter.id.toString(),
-    };
-    dispatch(setRadioStationState(nextStationState));
-
-    dispatch(
-      playFrom({
-        chapterId: Number(selectedChapterId),
-        reciterId: Number(selectedReciter.id),
-        shouldStartFromRandomTimestamp: true,
-        isRadioMode: true,
-      }),
-    );
+    logEvent('reciter_page_play_station');
+    playReciterStation(selectedReciter, dispatch);
   };
 
   return (

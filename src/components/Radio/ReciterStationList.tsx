@@ -1,3 +1,4 @@
+import { Dispatch } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -21,7 +22,7 @@ import Reciter from 'types/Reciter';
 // TODO:
 // - these images url should come from backend.
 // - find better images
-export const reciterPictures = {
+const reciterPictures = {
   1: '/images/reciters/1.jpg',
   2: '/images/reciters/2.jpeg',
   3: '/images/reciters/3.jpeg',
@@ -35,37 +36,32 @@ export const reciterPictures = {
   12: '/images/reciters/12.jpg',
 };
 
+export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<any>) => {
+  const nextStationState: StationState = {
+    id: reciter.id.toString(),
+    type: StationType.Reciter,
+    title: reciter.name,
+    description: reciter.style.name,
+    chapterId: getRandomChapterId().toString(),
+    reciterId: reciter.id.toString(),
+  };
+  dispatch(setRadioStationState(nextStationState));
+
+  dispatch(
+    playFrom({
+      chapterId: Number(nextStationState.chapterId),
+      reciterId: Number(nextStationState.reciterId),
+      shouldStartFromRandomTimestamp: true,
+      isRadioMode: true,
+    }),
+  );
+};
+
 const ReciterStationList = () => {
   const dispatch = useDispatch();
   const { lang } = useTranslation();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
-
-  const playReciterStation = async (reciter: Reciter) => {
-    logEvent('station_played', {
-      stationId: reciter.id,
-      type: StationType.Curated,
-    });
-
-    const nextStationState: StationState = {
-      id: reciter.id.toString(),
-      type: StationType.Reciter,
-      title: reciter.name,
-      description: reciter.style.name,
-      chapterId: getRandomChapterId().toString(),
-      reciterId: reciter.id.toString(),
-    };
-    dispatch(setRadioStationState(nextStationState));
-
-    dispatch(
-      playFrom({
-        chapterId: Number(nextStationState.chapterId),
-        reciterId: Number(nextStationState.reciterId),
-        shouldStartFromRandomTimestamp: true,
-        isRadioMode: true,
-      }),
-    );
-  };
 
   return (
     <DataFetcher
@@ -79,7 +75,14 @@ const ReciterStationList = () => {
                 stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
 
               let onClick;
-              if (!isSelectedStation) onClick = () => playReciterStation(reciter);
+              if (!isSelectedStation)
+                onClick = () => {
+                  logEvent('station_played', {
+                    stationId: reciter.id,
+                    type: StationType.Curated,
+                  });
+                  playReciterStation(reciter, dispatch);
+                };
               if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
               if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
 

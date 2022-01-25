@@ -16,3 +16,7 @@
 .searchContainer {
   margin-block-end: var(--spacing-medium);
 }
+
+.chaptersListContainer {
+  min-height: calc(25 * var(--spacing-mega));
+}

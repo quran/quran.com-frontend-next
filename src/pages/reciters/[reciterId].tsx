@@ -94,7 +94,7 @@ const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
         />
       </div>
 
-      <div className={classNames(layoutStyle.flowItem)}>
+      <div className={classNames(layoutStyle.flowItem, pageStyle.chaptersListContainer)}>
         <ChaptersList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
       </div>
 

@@ -16,6 +16,10 @@
   cursor: pointer;
   &:hover {
     background-color: var(--color-background-alternative-faded);
+    .playIconWrapper {
+      background-color: var(--color-success-faded);
+      color: var(--color-success-medium);
+    }
   }
   border-block-end: 1px solid var(--color-borders-hairline);
 }
@@ -28,21 +32,18 @@
   padding: var(--spacing-large);
   border-radius: var(--border-radius-circle);
   margin-inline-end: var(--spacing-medium);
-
-  &:hover {
-    background-color: var(--color-success-faded);
-    color: var(--color-success-medium);
-  }
 }
 
-.playIcon {
+.playPauseIcon {
   display: flex;
   align-items: center;
   position: relative;
-  inset-inline-start: calc(0.25 * var(--spacing-xxsmall));
 
   height: var(--spacing-large);
   width: var(--spacing-large);
+}
+.playIcon {
+  inset-inline-start: calc(0.25 * var(--spacing-xxsmall));
 }
 
 .chapterName {
