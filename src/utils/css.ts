@@ -9,3 +9,9 @@ export const logUnsupportedLogicalCSS = () => {
     }
   }
 };
+
+export const redirectUnsupportedLogicalCSS = () => {
+  if (window.CSS && window.CSS.supports) {
+    window.location.replace('https://previous.quran.com/');
+  }
+};

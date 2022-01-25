@@ -16,7 +16,7 @@ import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScript
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
-import { logUnsupportedLogicalCSS } from 'src/utils/css';
+import { logUnsupportedLogicalCSS, redirectUnsupportedLogicalCSS } from 'src/utils/css';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
 
@@ -32,6 +32,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
     logUnsupportedLogicalCSS();
+    redirectUnsupportedLogicalCSS();
   }, [locale]);
   return (
     <>
