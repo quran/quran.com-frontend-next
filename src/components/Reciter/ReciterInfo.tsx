@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
@@ -7,9 +8,9 @@ import { StationState, StationType } from '../Radio/types';
 
 import styles from './ReciterInfo.module.scss';
 
-import { reciterPictures } from 'src/components/Radio/ReciterStationList';
 import { playFrom } from 'src/redux/slices/AudioPlayer/state';
 import { setRadioStationState } from 'src/redux/slices/radio';
+import { getImageCDNPath } from 'src/utils/api';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import Reciter from 'types/Reciter';
@@ -56,7 +57,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       <div className={styles.reciterImageContainer}>
         <img
           className={styles.reciterImage}
-          src={reciterPictures[selectedReciter.id.toString()]}
+          src={getImageCDNPath(selectedReciter?.profilePicture)}
           alt={selectedReciter?.name}
         />
       </div>
