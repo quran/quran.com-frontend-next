@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useState } from 'react';
+
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -9,6 +11,7 @@ import DownloadIcon from '../../../public/icons/download.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
+import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './ChapterList.module.scss';
@@ -19,10 +22,11 @@ import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
 // import Chapter from 'types/Chapter';
+import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
 type ChapterListProps = {
-  filteredChapters: any;
+  filteredChapters: Chapter[];
   selectedReciter: Reciter;
 };
 
@@ -30,6 +34,8 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
   const toast = useToast();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const [downloadingChapterAudio, setDownloadingChapterAudio] = useState(null);
 
   const onPlayChapter = (chapterId?: string) => {
     const selectedChapterId = chapterId || getRandomChapterId().toString();
@@ -92,13 +98,17 @@ const ChapterList = ({ filteredChapters, selectedReciter }: ChapterListProps) =>
                   Number(chapter.id),
                 );
 
-                toast(t('reciter:downloading-audio'), { status: ToastStatus.Success });
+                setDownloadingChapterAudio(chapter.id);
                 download(audioData.audioUrl, () => {
-                  toast(t('reciter:audio-downloaded'), { status: ToastStatus.Success });
+                  setDownloadingChapterAudio(null);
                 });
               }}
             >
-              <DownloadIcon />
+              {downloadingChapterAudio === chapter.id ? (
+                <Spinner size={SpinnerSize.Small} />
+              ) : (
+                <DownloadIcon />
+              )}
             </Button>
           </div>
         </div>

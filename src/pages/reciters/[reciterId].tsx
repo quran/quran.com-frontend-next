@@ -35,7 +35,7 @@ const filterChapters = (chapters, searchQuery: string) => {
   if (!filteredReciter.length) {
     logEmptySearchResults(searchQuery, 'reciter_page_chapter_list');
   }
-  return resultItems as (Chapter & { id: string })[];
+  return resultItems as Chapter[];
 };
 
 const Reciterpage = () => {
