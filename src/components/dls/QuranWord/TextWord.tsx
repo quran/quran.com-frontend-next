@@ -13,7 +13,7 @@ type MadaniWordTextProps = {
   charType: CharType;
 };
 
-const DEFAULT_FONT_FAMILY = 'UthmanicHafs1Ver17';
+const DEFAULT_FONT_FAMILY = 'UthmanicHafs';
 const ME_QURAN = 'meQuran';
 const INDO_PAK = 'IndoPak';
 

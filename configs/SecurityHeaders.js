@@ -10,7 +10,7 @@
   - connect-src: restricts the URLs that we can connect to using script interfaces including <a>, XMLHttpRequest, WebSocket. Currently we allow all URLs.
 */
 const ContentSecurityPolicy = `
-  default-src 'self';
+  default-src 'self' *.qurancdn.com;
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://vitals.vercel-insights.com;
   frame-src 'self';
   style-src 'self' 'unsafe-inline';

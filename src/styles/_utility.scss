@@ -31,22 +31,24 @@
 // make sure it will not break the layout
 
 $scales-map: (
-  qpc_uthmani_hafs: (
-    tablet: (
-      1: 1.5rem,
-      2: 1.8rem,
-      3: 2.15rem,
-      4: 2.65rem,
-      5: 3.5rem,
+  //TODO: rename qpc_uthmani_hafs to text_qpc_hafs
+  qpc_uthmani_hafs:
+    (
+      tablet: (
+        1: 1.5rem,
+        2: 1.8rem,
+        3: 2.15rem,
+        4: 2.65rem,
+        5: 3.5rem,
+      ),
+      mobile: (
+        1: 4vw,
+        2: 5vw,
+        3: 5.4vw,
+        4: 8.9vw,
+        5: 11vw,
+      ),
     ),
-    mobile: (
-      1: 4vw,
-      2: 5vw,
-      3: 5.4vw,
-      4: 8.9vw,
-      5: 11vw,
-    ),
-  ),
   text_indopak: (
     tablet: (
       1: 1.5rem,
@@ -126,7 +128,7 @@ $scales-map: (
       4: 1.2rem,
       5: 1.4rem,
     ),
-  ),
+  )
 );
 
 @function map-deep-get($map, $keys...) {
