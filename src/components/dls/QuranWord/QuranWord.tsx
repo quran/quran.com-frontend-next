@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useMemo, useCallback, memo } from 'react';
 
 import classNames from 'classnames';
@@ -32,6 +33,8 @@ import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
 import QueryParam from 'types/QueryParam';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
+
+export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 
 export type QuranWordProps = {
   word: Word;
@@ -126,7 +129,7 @@ const QuranWord = ({
       role="button"
       tabIndex={0}
       {...{
-        'data-word-location': wordLocation,
+        [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
