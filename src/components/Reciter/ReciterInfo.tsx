@@ -68,7 +68,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
 const maxBioLength = 400;
 
 const truncateText = (text: string, maxTextLength: number) => {
-  return text.slice(0, maxTextLength);
+  return `${text.slice(0, maxTextLength)}...`;
 };
 
 export default ReciterInfo;
