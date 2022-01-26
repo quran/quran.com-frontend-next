@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, memo } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import TextWord from './TextWord';
 
 import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
@@ -31,8 +32,6 @@ import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
 import QueryParam from 'types/QueryParam';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
-
-export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
 
 export type QuranWordProps = {
   word: Word;
@@ -96,7 +95,6 @@ const QuranWord = ({
   } else if (word.charTypeName !== CharType.Pause) {
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
-
   /*
     Only show the tooltip when the following conditions are met:
 
@@ -106,11 +104,9 @@ const QuranWord = ({
   */
   const showTooltip =
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
-
   const shouldBeHighLighted =
     isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
-
-  const tooltipContent = useMemo(
+  const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
   );
@@ -123,14 +119,14 @@ const QuranWord = ({
       logButtonClick('quran_word');
     }
   }, [audioData, word, wordClickFunctionality]);
+
   return (
     <div
-      onClick={onClick}
-      onKeyPress={onClick}
+      {...(readingPreference === ReadingPreference.Translation && { onClick, onKeyPress: onClick })}
       role="button"
       tabIndex={0}
       {...{
-        [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
+        'data-word-location': wordLocation,
       }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
@@ -141,16 +137,26 @@ const QuranWord = ({
     >
       <Wrapper
         shouldWrap={showTooltip}
-        wrapper={(children) => (
-          <MobilePopover
-            isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
-            defaultStyling={false}
-            content={tooltipContent}
-            onOpenChange={setIsTooltipOpened}
-          >
-            {children}
-          </MobilePopover>
-        )}
+        wrapper={(children) =>
+          readingPreference === ReadingPreference.Translation ? (
+            <MobilePopover
+              isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
+              defaultStyling={false}
+              content={translationViewTooltipContent}
+              onOpenChange={setIsTooltipOpened}
+            >
+              {children}
+            </MobilePopover>
+          ) : (
+            <ReadingViewWordPopover
+              open={!!isTooltipOpened}
+              setIsTooltipOpened={setIsTooltipOpened}
+              word={word}
+            >
+              {children}
+            </ReadingViewWordPopover>
+          )
+        }
       >
         {wordText}
       </Wrapper>
@@ -166,4 +172,4 @@ const QuranWord = ({
   );
 };
 
-export default QuranWord;
+export default memo(QuranWord);

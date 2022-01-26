@@ -30,6 +30,7 @@ interface Props {
   avoidCollisions?: boolean;
   useTooltipStyles?: boolean;
   defaultStyling?: boolean;
+  portalled?: boolean;
   triggerStyles?: string;
 }
 
@@ -45,6 +46,7 @@ const Popover: React.FC<Props> = ({
   tip = false,
   useTooltipStyles = false,
   defaultStyling = true,
+  portalled = true,
   triggerStyles,
 }) => (
   <div className={classNames({ [styles.container]: defaultStyling })}>
@@ -58,6 +60,7 @@ const Popover: React.FC<Props> = ({
       </RadixPopover.Trigger>
       <RadixPopover.Content
         sideOffset={2}
+        portalled={portalled}
         side={contentSide}
         align={contentAlign}
         avoidCollisions={avoidCollisions}

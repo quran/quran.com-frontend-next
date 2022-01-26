@@ -28,6 +28,7 @@ import highlightedLocation from './slices/QuranReader/highlightedLocation';
 import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
+import readingViewVerse from './slices/QuranReader/readingViewVerse';
 import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
@@ -84,6 +85,7 @@ export const rootReducer = combineReducers({
   fontFaces,
   sidebarNavigation,
   radio,
+  readingViewVerse,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -203,12 +203,19 @@ export const makeWordLocation = (verseKey: string, wordPosition: number): string
  * the BE response of each word to add custom fields.
  *
  * @param {Verse} verse
+ * @param {boolean} isReadingView
  * @returns {Word[]}
  */
-export const getVerseWords = (verse: Verse): Word[] => {
+export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
   const words = [];
   verse.words.forEach((word) => {
-    words.push({ ...word, hizbNumber: verse.hizbNumber });
+    const wordVerse = { ...verse };
+    delete wordVerse.words;
+    words.push({
+      ...word,
+      hizbNumber: verse.hizbNumber,
+      ...(isReadingView && { verse: wordVerse }),
+    });
   });
   return words;
 };

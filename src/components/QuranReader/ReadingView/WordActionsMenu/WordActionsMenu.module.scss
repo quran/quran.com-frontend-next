@@ -1,0 +1,18 @@
+.readingViewOverflowVerseActionsMenu {
+  display: inline-block;
+}
+
+.container {
+  & button {
+    &:hover {
+      // important is needed to override the default styling of the popover when hovering
+      background-color: var(--color-background-inverse) !important;
+    }
+  }
+  & svg {
+    fill: var(--color-background-default);
+    > path {
+      color: var(--color-background-default);
+    }
+  }
+}
