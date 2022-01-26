@@ -86,8 +86,8 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
  *
  * @returns {Promise<RecitersResponse>}
  */
-export const getAvailableReciters = async (locale: string): Promise<RecitersResponse> =>
-  fetcher(makeRecitersUrl(locale));
+export const getAvailableReciters = async (locale: string, fields: []): Promise<RecitersResponse> =>
+  fetcher(makeRecitersUrl(locale, fields));
 
 /**
  * Get audio file for a specific reciter and chapter.
@@ -254,3 +254,5 @@ export const getChapterIdBySlug = async (slug: string, locale: string): Promise<
     return false;
   }
 };
+
+export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;

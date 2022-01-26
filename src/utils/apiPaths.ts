@@ -71,7 +71,8 @@ export const makeLanguagesUrl = (language: string): string =>
  * @param {string} locale the user's language code.
  * @returns {string}
  */
-export const makeRecitersUrl = (locale: string): string => makeUrl('/audio/reciters', { locale });
+export const makeRecitersUrl = (locale: string, fields?: string[]): string =>
+  makeUrl('/audio/reciters', { locale, fields });
 
 /**
  * Compose the url of the audio file of a surah.
@@ -99,7 +100,10 @@ export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
  * @returns {string}
  */
 export const makeTranslationsInfoUrl = (locale: string, translations: number[]): string =>
-  makeUrl('/resources/translations/filter', { locale, translations: translations.join(', ') });
+  makeUrl('/resources/translations/filter', {
+    locale,
+    translations: translations.join(', '),
+  });
 
 /**
  * Compose the url for the advanced copy API.

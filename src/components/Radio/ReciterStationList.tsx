@@ -10,6 +10,7 @@ import Card, { CardSize } from '../dls/Card/Card';
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
+import { getImageCDNPath } from 'src/api';
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { makeRecitersUrl } from 'src/utils/apiPaths';
@@ -17,23 +18,6 @@ import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
-
-// TODO:
-// - these images url should come from backend.
-// - find better images
-const reciterPictures = {
-  1: '/images/reciters/1.jpg',
-  2: '/images/reciters/2.jpeg',
-  3: '/images/reciters/3.jpeg',
-  4: '/images/reciters/4.jpg',
-  5: '/images/reciters/5.jpg',
-  6: '/images/reciters/6.jpg',
-  7: '/images/reciters/7.jpg',
-  9: '/images/reciters/9.jpg',
-  10: '/images/reciters/10.jpg',
-  161: '/images/reciters/161.jpg',
-  12: '/images/reciters/12.jpg',
-};
 
 const ReciterStationList = () => {
   const dispatch = useDispatch();
@@ -67,7 +51,7 @@ const ReciterStationList = () => {
 
   return (
     <DataFetcher
-      queryKey={makeRecitersUrl(lang)}
+      queryKey={makeRecitersUrl(lang, ['profile_picture'])}
       render={(data: RecitersResponse) => {
         if (!data) return null;
         return (
@@ -85,7 +69,7 @@ const ReciterStationList = () => {
               return (
                 <Card
                   actionIcon={actionIcon}
-                  imgSrc={reciterPictures[reciter.id]}
+                  imgSrc={getImageCDNPath(reciter.profilePicture)}
                   key={reciter.id}
                   onClick={onClick}
                   title={reciter.name}
