@@ -20,10 +20,9 @@ type Props = {
 };
 
 /**
- * A component to show the verse text without the extra functionalities for specific
- * scenarios e.g. ayah highlighting when audio is playing or showing a tooltip when
+ * A component to only show the verse text without extra functionalities such as ayah
+ * highlighting when audio is playing or showing a tooltip when
  * hovering over a verse or showing the word by word translation/transliteration.
- * This component was initially designed for the Tafsir view.
  *
  * @param {Props} param0
  * @returns {JSX.Element}
