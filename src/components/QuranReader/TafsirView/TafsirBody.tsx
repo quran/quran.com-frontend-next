@@ -18,7 +18,7 @@ import styles from './TafsirView.module.scss';
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import VerseText from 'src/components/Verse/VerseText';
+import VerseText from 'src/components/Verse/PlainVerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
