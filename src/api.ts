@@ -86,8 +86,10 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
  *
  * @returns {Promise<RecitersResponse>}
  */
-export const getAvailableReciters = async (locale: string, fields: []): Promise<RecitersResponse> =>
-  fetcher(makeRecitersUrl(locale, fields));
+export const getAvailableReciters = async (
+  locale: string,
+  fields?: [],
+): Promise<RecitersResponse> => fetcher(makeRecitersUrl(locale, fields));
 
 /**
  * Get audio file for a specific reciter and chapter.
