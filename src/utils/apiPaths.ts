@@ -71,8 +71,13 @@ export const makeLanguagesUrl = (language: string): string =>
  * @param {string} locale the user's language code.
  * @returns {string}
  */
-export const makeRecitersUrl = (locale: string, fields?: string[]): string =>
+export const makeAvailableRecitersUrl = (locale: string, fields?: string[]): string =>
   makeUrl('/audio/reciters', { locale, fields });
+
+export const makeReciterUrl = (reciterId: string): string =>
+  makeUrl(`/audio/reciters/${reciterId}`, {
+    fields: ['profile_picture', 'cover_image', 'bio'],
+  });
 
 /**
  * Compose the url of the audio file of a surah.

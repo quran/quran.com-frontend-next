@@ -12,7 +12,7 @@ import styles from './ReciterSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
-import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
@@ -62,7 +62,7 @@ const SettingsReciter = () => {
         />
       </div>
       <DataFetcher
-        queryKey={makeRecitersUrl(lang)}
+        queryKey={makeAvailableRecitersUrl(lang)}
         render={(data: RecitersResponse) => {
           const filteredReciters = searchQuery
             ? filterReciters(data.reciters, searchQuery)

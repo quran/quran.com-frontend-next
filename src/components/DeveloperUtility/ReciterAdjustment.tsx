@@ -10,7 +10,7 @@ import styles from './ReciterAdjustment.module.scss';
 import { getAvailableReciters } from 'src/api';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { setReciter } from 'src/redux/slices/AudioPlayer/state';
-import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import QueryParam from 'types/QueryParam';
 import Reciter from 'types/Reciter';
 
@@ -18,7 +18,7 @@ const ReciterAdjustment: React.FC = () => {
   const dispatch = useDispatch();
   const { lang } = useTranslation();
 
-  const { data, error } = useSWRImmutable(makeRecitersUrl(lang), () =>
+  const { data, error } = useSWRImmutable(makeAvailableRecitersUrl(lang), () =>
     getAvailableReciters(lang).then((res) =>
       res.status === 500 ? Promise.reject(error) : Promise.resolve(res.reciters),
     ),

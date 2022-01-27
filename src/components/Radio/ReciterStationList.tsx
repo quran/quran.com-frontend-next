@@ -1,3 +1,4 @@
+import { Dispatch } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -13,11 +14,30 @@ import { StationState, StationType } from './types';
 import { getImageCDNPath } from 'src/api';
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
-import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
+
+export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<any>) => {
+  const nextStationState: StationState = {
+    id: reciter.id.toString(),
+    type: StationType.Reciter,
+    chapterId: getRandomChapterId().toString(),
+    reciterId: reciter.id.toString(),
+  };
+  dispatch(setRadioStationState(nextStationState));
+
+  dispatch(
+    playFrom({
+      chapterId: Number(nextStationState.chapterId),
+      reciterId: Number(nextStationState.reciterId),
+      shouldStartFromRandomTimestamp: true,
+      isRadioMode: true,
+    }),
+  );
+};
 
 const ReciterStationList = () => {
   const dispatch = useDispatch();
@@ -25,33 +45,9 @@ const ReciterStationList = () => {
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
 
-  const playReciterStation = async (reciter: Reciter) => {
-    logEvent('station_played', {
-      stationId: reciter.id,
-      type: StationType.Curated,
-    });
-
-    const nextStationState: StationState = {
-      id: reciter.id.toString(),
-      type: StationType.Reciter,
-      chapterId: getRandomChapterId().toString(),
-      reciterId: reciter.id.toString(),
-    };
-    dispatch(setRadioStationState(nextStationState));
-
-    dispatch(
-      playFrom({
-        chapterId: Number(nextStationState.chapterId),
-        reciterId: Number(nextStationState.reciterId),
-        shouldStartFromRandomTimestamp: true,
-        isRadioMode: true,
-      }),
-    );
-  };
-
   return (
     <DataFetcher
-      queryKey={makeRecitersUrl(lang, ['profile_picture'])}
+      queryKey={makeAvailableRecitersUrl(lang)}
       render={(data: RecitersResponse) => {
         if (!data) return null;
         return (
@@ -61,7 +57,14 @@ const ReciterStationList = () => {
                 stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
 
               let onClick;
-              if (!isSelectedStation) onClick = () => playReciterStation(reciter);
+              if (!isSelectedStation)
+                onClick = () => {
+                  logEvent('station_played', {
+                    stationId: reciter.id,
+                    type: StationType.Curated,
+                  });
+                  playReciterStation(reciter, dispatch);
+                };
               if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
               if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
 

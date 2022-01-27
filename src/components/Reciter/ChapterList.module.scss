@@ -1,0 +1,60 @@
+@use "src/styles/breakpoints";
+
+.chapterListContainer {
+  display: grid;
+  gap: var(--spacing-mega);
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.chapterListItem {
+  display: flex;
+  padding: var(--spacing-medium) var(--spacing-small);
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-background-alternative-faded);
+    .playIconWrapper {
+      background-color: var(--color-success-faded);
+      color: var(--color-success-medium);
+    }
+  }
+  border-block-end: 1px solid var(--color-borders-hairline);
+}
+
+.playIconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background-alternative-faint);
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-medium);
+}
+
+.playPauseIcon {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  height: var(--spacing-large);
+  width: var(--spacing-large);
+}
+.playIcon {
+  inset-inline-start: calc(0.25 * var(--spacing-xxsmall));
+}
+
+.chapterName {
+  font-weight: var(--font-weight-semibold);
+  margin-block: var(--spacing-xxsmall);
+}
+
+.chapterInfoContainer {
+  display: flex;
+  align-items: center;
+}
+.chapterIconContainer {
+  margin-inline-start: calc(-1 * var(--spacing-xxsmall));
+}

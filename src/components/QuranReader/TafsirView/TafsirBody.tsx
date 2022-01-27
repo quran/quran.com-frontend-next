@@ -18,7 +18,7 @@ import styles from './TafsirView.module.scss';
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import VerseText from 'src/components/Verse/VerseText';
+import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -138,7 +138,7 @@ const TafsirBody = ({
           <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
         )}
         <div className={styles.verseTextContainer}>
-          <VerseText words={words} />
+          <PlainVerseText words={words} />
         </div>
         <div className={styles.separatorContainer}>
           <Separator />

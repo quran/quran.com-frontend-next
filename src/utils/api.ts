@@ -72,3 +72,5 @@ export const getMushafId = (
   }
   return { mushaf };
 };
+
+export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;

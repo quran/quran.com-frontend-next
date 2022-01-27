@@ -51,6 +51,10 @@ export interface RecitersResponse extends BaseResponse {
   reciters?: Reciter[];
 }
 
+export interface ReciterResponse extends BaseResponse {
+  reciter?: Reciter;
+}
+
 export interface AudioDataResponse extends BaseResponse {
   audioFiles: AudioData[];
 }
