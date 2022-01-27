@@ -2,17 +2,15 @@ import React from 'react';
 
 import Head from 'next/head';
 
+import { FONT_CDN } from 'src/utils/fontFaceHelper';
+
 const DEFAULT_LOCALE = 'en';
 
 const LOCALE_PRELOADED_FONTS = {
-  [DEFAULT_LOCALE]: [
-    { type: 'font/woff2', location: 'ProximaVara/proxima_vara_regular.woff2' },
-    { type: 'font/woff2', location: 'ProximaVara/proxima_vara_semibold.woff2' },
-    { type: 'font/woff2', location: 'ProximaVara/proxima_vara_bold.woff2' },
-  ],
-  ar: [{ type: 'font/woff2', location: 'urdu/NotoNaskhArabic-Regular.woff' }],
-  bn: [{ type: 'font/ttf', location: 'NotoSerifBengali/NotoSerifBengali-Regular.ttf' }],
-  ur: [{ type: 'font/woff2', location: 'urdu/NotoNaskhArabic-Regular.woff' }],
+  [DEFAULT_LOCALE]: [{ type: 'font/woff2', location: 'lang/ProximaVara/ProximaVara.woff2' }],
+  ar: [{ type: 'font/woff2', location: 'lang/arabic/NotoNaskhArabic-Regular.woff2' }],
+  bn: [{ type: 'font/ttf', location: 'lang/bengali/NotoSerifBengali-Regular.woff2' }],
+  ur: [{ type: 'font/woff2', location: 'lang/urdu/notonastaliqurdu.woff2' }],
 } as Record<string, { type: string; location: string }[]>;
 
 interface Props {
@@ -30,7 +28,7 @@ const FontPreLoader: React.FC<Props> = ({ locale }) => {
           rel="preload"
           as="font"
           type={fontDetails.type}
-          href={`/fonts/${fontDetails.location}`}
+          href={`${FONT_CDN}/${fontDetails.location}`}
           crossOrigin="anonymous"
         />
       ))}

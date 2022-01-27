@@ -11,8 +11,6 @@ export enum StationType {
 export type StationState = {
   type: StationType;
   id: string;
-  title: string;
-  description: string;
   reciterId: string;
   chapterId: string;
 };
@@ -26,4 +24,9 @@ export type CuratedStation = {
   title: string;
   description: string;
   bannerImgSrc?: string;
+};
+
+export type StationInfo = {
+  title: string;
+  description: string;
 };

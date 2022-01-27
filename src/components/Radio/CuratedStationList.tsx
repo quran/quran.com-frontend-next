@@ -9,7 +9,7 @@ import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
-import { CuratedStation, StationState, StationType } from './types';
+import { StationState, StationType } from './types';
 
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
@@ -26,7 +26,7 @@ const CuratedStationList = () => {
   const isAudioPlaying = useSelector(selectIsPlaying);
   const { t } = useTranslation('radio');
 
-  const playStation = async (id: string, station: CuratedStation) => {
+  const playStation = async (id: string) => {
     logEvent('station_played', {
       stationId: id,
       type: StationType.Curated,
@@ -36,8 +36,6 @@ const CuratedStationList = () => {
     const nextStationState: StationState = {
       id,
       type: StationType.Curated,
-      title: station.title,
-      description: station.description,
       chapterId: randomAudioTrack.chapterId,
       reciterId: randomAudioTrack.reciterId,
     };
@@ -60,7 +58,7 @@ const CuratedStationList = () => {
           stationState.type === StationType.Curated && stationState.id === id;
 
         let onClick;
-        if (!isSelectedStation) onClick = () => playStation(id, station);
+        if (!isSelectedStation) onClick = () => playStation(id);
         if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
         if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
 

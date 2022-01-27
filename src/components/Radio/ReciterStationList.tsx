@@ -40,8 +40,6 @@ export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<an
   const nextStationState: StationState = {
     id: reciter.id.toString(),
     type: StationType.Reciter,
-    title: reciter.name,
-    description: reciter.style.name,
     chapterId: getRandomChapterId().toString(),
     reciterId: reciter.id.toString(),
   };

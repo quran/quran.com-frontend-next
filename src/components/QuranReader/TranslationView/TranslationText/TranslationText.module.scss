@@ -13,6 +13,10 @@ $translation-line-height: 1.5;
 
 @include utility.generate-font-sizes("translation");
 
+/*
+#TODO: should move language specific fonts and direction to
+/styles/global.scss. See line#21
+*/
 .ltr {
   /* stylelint-disable-next-line csstools/use-logical */
   text-align: left;
@@ -26,11 +30,12 @@ $translation-line-height: 1.5;
 }
 
 .urdu {
-  font-family: "nafees" !important; // important is needed to over-ride the language specific font-family
+  font-family: "NotoNastaliqUrdu", "Noto Nastaliq Urdu", "Noto Nastaliq Arabic",
+    "Helvetica Neue", Helvetica, Arial !important; // important is needed to over-ride the language specific font-family
 }
 
 .kurdish {
-  font-family: "DroidArabicNaskh" !important; // important is needed to over-ride the language specific font-family
+  font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "Noto Nastaliq Urdu" !important; // important is needed to over-ride the language specific font-family
 }
 
 .divehi {
