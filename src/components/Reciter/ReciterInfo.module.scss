@@ -1,0 +1,69 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.reciterImage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.reciterBio {
+  margin-block-end: var(--spacing-medium);
+}
+
+.reciterName {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  text-align: center;
+  margin-block-end: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    text-align: start;
+    margin-block-end: var(--spacing-medium);
+  }
+}
+
+.reciterImageContainer {
+  min-width: calc(5 * var(--spacing-mega));
+  min-height: calc(5 * var(--spacing-mega));
+  background-color: var(--color-background-alternative-deep);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-medium);
+  position: relative;
+  overflow: hidden;
+
+  margin-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    margin-block-end: initial;
+  }
+}
+
+.moreLessButton {
+  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  margin-inline-start: var(--spacing-small);
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: center;
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+.playButton {
+  width: 100%;
+  @include breakpoints.tablet {
+    width: auto;
+  }
+}

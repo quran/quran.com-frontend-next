@@ -6,7 +6,7 @@ import {
   makeLanguagesUrl,
   makeAudioTimestampsUrl,
   makeChapterAudioDataUrl,
-  makeRecitersUrl,
+  makeAvailableRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
@@ -16,6 +16,7 @@ import {
   makePageVersesUrl,
   makeFootnoteUrl,
   makeChapterUrl,
+  makeReciterUrl,
 } from './utils/apiPaths';
 
 import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
@@ -32,6 +33,7 @@ import {
   ChapterInfoResponse,
   FootnoteResponse,
   ChapterResponse,
+  ReciterResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -87,7 +89,10 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
  * @returns {Promise<RecitersResponse>}
  */
 export const getAvailableReciters = async (locale: string): Promise<RecitersResponse> =>
-  fetcher(makeRecitersUrl(locale));
+  fetcher(makeAvailableRecitersUrl(locale));
+
+export const getReciterData = async (reciterId: string): Promise<ReciterResponse> =>
+  fetcher(makeReciterUrl(reciterId));
 
 /**
  * Get audio file for a specific reciter and chapter.

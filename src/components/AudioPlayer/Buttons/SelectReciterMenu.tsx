@@ -10,7 +10,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
-import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
@@ -48,7 +48,7 @@ const SelectReciterMenu = ({ onBack }) => {
     [selectedReciterId, lang, dispatch, onBack],
   );
 
-  const reciters = <DataFetcher queryKey={makeRecitersUrl(lang)} render={renderReciter} />;
+  const reciters = <DataFetcher queryKey={makeAvailableRecitersUrl(lang)} render={renderReciter} />;
 
   return (
     <>

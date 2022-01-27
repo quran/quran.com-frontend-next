@@ -1,0 +1,22 @@
+@use "src/styles/breakpoints";
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--spacing-large);
+  padding-block-start: var(--spacing-large);
+}
+
+.sectionTitle {
+  margin-block-end: var(--spacing-medium);
+  font-weight: var(--font-weight-semibold);
+}
+
+.searchContainer {
+  margin-block-end: var(--spacing-medium);
+}
+
+.chaptersListContainer {
+  min-height: calc(25 * var(--spacing-mega));
+}
