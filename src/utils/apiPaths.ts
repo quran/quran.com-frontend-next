@@ -71,8 +71,8 @@ export const makeLanguagesUrl = (language: string): string =>
  * @param {string} locale the user's language code.
  * @returns {string}
  */
-export const makeAvailableRecitersUrl = (locale: string): string =>
-  makeUrl('/audio/reciters', { locale });
+export const makeAvailableRecitersUrl = (locale: string, fields?: string[]): string =>
+  makeUrl('/audio/reciters', { locale, fields });
 
 export const makeReciterUrl = (reciterId: string): string =>
   makeUrl(`/audio/reciters/${reciterId}`, {
@@ -105,7 +105,10 @@ export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
  * @returns {string}
  */
 export const makeTranslationsInfoUrl = (locale: string, translations: number[]): string =>
-  makeUrl('/resources/translations/filter', { locale, translations: translations.join(', ') });
+  makeUrl('/resources/translations/filter', {
+    locale,
+    translations: translations.join(', '),
+  });
 
 /**
  * Compose the url for the advanced copy API.
