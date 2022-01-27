@@ -47,7 +47,7 @@ const ReciterStationList = () => {
 
   return (
     <DataFetcher
-      queryKey={makeAvailableRecitersUrl(lang)}
+      queryKey={makeAvailableRecitersUrl(lang, ['profile_picture', 'cover_image', 'bio'])}
       render={(data: RecitersResponse) => {
         if (!data) return null;
         return (
