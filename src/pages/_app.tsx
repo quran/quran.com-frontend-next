@@ -30,6 +30,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
+    console.log('[MyApp] useEffect is running');
     document.documentElement.dir = getDir(locale);
     logAndRedirectUnsupportedLogicalCSS();
   }, [locale]);
