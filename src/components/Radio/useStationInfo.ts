@@ -7,7 +7,7 @@ import { StationInfo, StationType } from './types';
 
 import { getAvailableReciters } from 'src/api';
 import { selectRadioStation } from 'src/redux/slices/radio';
-import { makeRecitersUrl } from 'src/utils/apiPaths';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 
 const useCurrentStationInfo = (): StationInfo => {
   const { t, lang } = useTranslation('radio');
@@ -16,7 +16,7 @@ const useCurrentStationInfo = (): StationInfo => {
   // TODO: once the backend API to fetch 1 reciter is ready, use that API
   // instead of fetching all reciters with `getAvailableReciters`
   const { data: recitersData } = useSWRImmutable(
-    stationState.type === StationType.Reciter ? makeRecitersUrl(lang) : null,
+    stationState.type === StationType.Reciter ? makeAvailableRecitersUrl(lang) : null,
     getAvailableReciters,
   );
 
