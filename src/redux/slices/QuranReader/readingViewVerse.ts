@@ -2,18 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
 
-export type ReadingViewHoveredVerseState = {
+export type ReadingViewVerseState = {
   hoveredVerseKey: string | null;
-  clickedVerseKey: string | null;
+  selectedVerseKey: string | null;
 };
 
-export const initialState: ReadingViewHoveredVerseState = {
+export const initialState: ReadingViewVerseState = {
   hoveredVerseKey: null,
-  clickedVerseKey: null,
+  selectedVerseKey: null,
 };
 
 /**
- * This slice keep track of the current hovered verse in the reading mode
+ * This slice keep track of the current hovered and selected verses in the reading mode.
  *
  */
 const readingViewVerse = createSlice({
@@ -26,10 +26,10 @@ const readingViewVerse = createSlice({
         hoveredVerseKey: payload,
       };
     },
-    setReadingViewClickedVerseKey: (state, { payload }: PayloadAction<string | null>) => {
+    setReadingViewSelectedVerseKey: (state, { payload }: PayloadAction<string | null>) => {
       return {
         ...state,
-        clickedVerseKey: payload,
+        selectedVerseKey: payload,
       };
     },
   },
@@ -38,9 +38,9 @@ const readingViewVerse = createSlice({
 export const selectReadingViewHoveredVerseKey = (state: RootState) =>
   state.readingViewVerse.hoveredVerseKey;
 
-export const selectReadingViewClickedVerseKey = (state: RootState) =>
-  state.readingViewVerse.clickedVerseKey;
+export const selectReadingViewSelectedVerseKey = (state: RootState) =>
+  state.readingViewVerse.selectedVerseKey;
 
-export const { setReadingViewHoveredVerseKey, setReadingViewClickedVerseKey } =
+export const { setReadingViewHoveredVerseKey, setReadingViewSelectedVerseKey } =
   readingViewVerse.actions;
 export default readingViewVerse.reducer;

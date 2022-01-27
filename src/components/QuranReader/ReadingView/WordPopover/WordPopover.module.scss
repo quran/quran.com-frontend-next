@@ -1,0 +1,11 @@
+.content {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  background-color: var(--color-background-inverse);
+  & > span {
+    // the tip color
+    fill: var(--color-background-inverse);
+  }
+}

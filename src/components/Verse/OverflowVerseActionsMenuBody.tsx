@@ -113,7 +113,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse, isPortalled }) =
       {...{
         [DATA_POPOVER_PORTALLED]: isPortalled,
       }}
-      data-popover-portalled={isPortalled}
     >
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
         {isCopied ? `${t('copied')}!` : `${t('copy')}`}

@@ -14,7 +14,7 @@ import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
 import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import {
-  selectReadingViewClickedVerseKey,
+  selectReadingViewSelectedVerseKey,
   selectReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -56,8 +56,8 @@ const VerseText = ({
     selectWordByWordByWordPreferences,
     shallowEqual,
   );
-  const clickedVerseKey = useSelector(selectReadingViewClickedVerseKey, shallowEqual);
-  const HoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
+  const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);
+  const hoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
@@ -106,7 +106,8 @@ const VerseText = ({
               word={word}
               font={quranFont}
               isFontLoaded={isFontLoaded}
-              isHighlighted={word.verseKey === clickedVerseKey || word.verseKey === HoveredVerseKey}
+              isHighlighted={word.verseKey === selectedVerseKey}
+              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
             />
           ))}
         </div>

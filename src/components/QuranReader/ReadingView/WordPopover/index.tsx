@@ -4,9 +4,11 @@ import { useDispatch } from 'react-redux';
 
 import ReadingViewWordActionsMenu from '../WordActionsMenu';
 
+import styles from './WordPopover.module.scss';
+
 import Popover, { ContentSide } from 'src/components/dls/Popover';
 import {
-  setReadingViewClickedVerseKey,
+  setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
 import Word from 'types/Word';
@@ -21,20 +23,21 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, open, children, setIsTo
   const dispatch = useDispatch();
   const onOpenChange = (isOpen: boolean) => {
     setIsTooltipOpened(isOpen);
-    dispatch(setReadingViewClickedVerseKey(isOpen ? word.verseKey : null));
+    dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
   };
 
-  const onHoverChange = (isHovering = true) => {
+  const onHoverChange = (isHovering: boolean) => {
     dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
   };
 
   return (
     <Popover
       contentSide={ContentSide.TOP}
+      contentSideOffset={-10}
       trigger={
         <div
           onMouseEnter={() => {
-            onHoverChange();
+            onHoverChange(true);
           }}
           onMouseLeave={() => {
             onHoverChange(false);
@@ -46,8 +49,8 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, open, children, setIsTo
       tip
       isModal
       portalled={false}
+      contentStyles={styles.content}
       open={open}
-      useTooltipStyles
       onOpenChange={onOpenChange}
     >
       <ReadingViewWordActionsMenu word={word} />

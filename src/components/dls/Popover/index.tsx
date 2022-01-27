@@ -32,6 +32,8 @@ interface Props {
   defaultStyling?: boolean;
   portalled?: boolean;
   triggerStyles?: string;
+  contentStyles?: string;
+  contentSideOffset?: number;
 }
 
 const Popover: React.FC<Props> = ({
@@ -47,7 +49,9 @@ const Popover: React.FC<Props> = ({
   useTooltipStyles = false,
   defaultStyling = true,
   portalled = true,
+  contentSideOffset = 2,
   triggerStyles,
+  contentStyles,
 }) => (
   <div className={classNames({ [styles.container]: defaultStyling })}>
     <RadixPopover.Root
@@ -56,15 +60,24 @@ const Popover: React.FC<Props> = ({
       {...(onOpenChange && { onOpenChange })}
     >
       <RadixPopover.Trigger aria-label="Open popover" asChild>
-        <span className={classNames(styles.trigger, triggerStyles)}>{trigger}</span>
+        <span
+          className={classNames(styles.trigger, {
+            [triggerStyles]: triggerStyles,
+          })}
+        >
+          {trigger}
+        </span>
       </RadixPopover.Trigger>
       <RadixPopover.Content
-        sideOffset={2}
+        sideOffset={contentSideOffset}
         portalled={portalled}
         side={contentSide}
         align={contentAlign}
         avoidCollisions={avoidCollisions}
-        className={classNames(styles.content, { [styles.tooltipContent]: useTooltipStyles })}
+        className={classNames(styles.content, {
+          [styles.tooltipContent]: useTooltipStyles,
+          [contentStyles]: contentStyles,
+        })}
       >
         {children}
         {tip && <RadixPopover.Arrow />}
