@@ -47,7 +47,7 @@ const PlayRadioButton = () => {
   return (
     <div className={styles.container}>
       <div className={styles.playRadioSection}>
-        {isAudioPlaying ? (
+        {isAudioPlaying && isRadioMode ? (
           <Button
             prefix={<PauseIcon />}
             onClick={onPauseClicked}
