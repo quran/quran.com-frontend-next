@@ -36,6 +36,7 @@ import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/nav
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import Tafsir from 'types/Tafsir';
+import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
   initialChapterId: string;
@@ -125,9 +126,12 @@ const TafsirBody = ({
   const renderTafsir = useCallback((data) => {
     if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-    const { verses, text, languageId } = data.tafsir;
+    const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
+      data.tafsir;
     const langData = getLanguageDataById(languageId);
-    const words = Object.values(verses).map(getVerseWords).flat();
+    const words = Object.values(verses)
+      .map((verse) => getVerseWords(verse))
+      .flat();
 
     if (!text) return <TafsirSkeleton />;
 

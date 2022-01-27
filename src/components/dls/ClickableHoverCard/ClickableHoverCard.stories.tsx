@@ -1,10 +1,10 @@
 import React from 'react';
 
-import HoverCard, { ContentAlign, ContentSide } from '.';
+import ClickableHoverCard, { ContentAlign, ContentSide } from '.';
 
 export default {
-  title: 'dls/HoverCard/DefaultHoverCard',
-  component: HoverCard,
+  title: 'dls/HoverCard/ClickableHoverCard',
+  component: ClickableHoverCard,
   args: {
     contentSide: ContentSide.BOTTOM,
     contentAlign: ContentAlign.CENTER,
@@ -95,7 +95,7 @@ export default {
 
 const Template = (args) => (
   <div style={{ width: 150, marginLeft: 50 }} className="previewWrapper">
-    <HoverCard {...args} />
+    <ClickableHoverCard {...args} />
   </div>
 );
 const Body = 'Hover Card Body!';

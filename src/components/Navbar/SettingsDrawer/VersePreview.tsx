@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import styles from './VersePreview.module.scss';
 
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import VerseText from 'src/components/Verse/VerseText';
+import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { addLoadedFontFace } from 'src/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {
@@ -67,7 +67,7 @@ const VersePreview = () => {
 
   return (
     <div dir="rtl">
-      <VerseText words={verse.words as Word[]} />
+      <PlainVerseText words={verse.words as Word[]} />
     </div>
   );
 };

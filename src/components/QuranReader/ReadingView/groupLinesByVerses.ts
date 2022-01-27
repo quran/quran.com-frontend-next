@@ -21,7 +21,7 @@ const groupLinesByVerses = (verses: Verse[]): Record<string, Word[]> => {
 
   // Flattens the verses into an array of words
   verses.forEach((verse) => {
-    words = [...words, ...getVerseWords(verse)];
+    words = [...words, ...getVerseWords(verse, true)];
   });
 
   // Groups the words based on their (page and) line number

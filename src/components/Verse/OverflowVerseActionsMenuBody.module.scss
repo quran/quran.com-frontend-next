@@ -1,4 +1,8 @@
 .container {
+  line-height: var(--spacing-small);
+  > span {
+    line-height: var(--spacing-small);
+  }
   [data-radix-popper-content-wrapper] {
     z-index: var(--z-index-default);
   }

@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback } from 'react';
+/* eslint-disable max-lines */
+import React, { useState, useMemo, useCallback, memo } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -13,6 +14,7 @@ import TextWord from './TextWord';
 
 import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
@@ -41,6 +43,7 @@ export type QuranWordProps = {
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
+  shouldShowSecondaryHighlight?: boolean;
 };
 
 const QuranWord = ({
@@ -49,6 +52,7 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
+  shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
@@ -96,7 +100,6 @@ const QuranWord = ({
   } else if (word.charTypeName !== CharType.Pause) {
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
-
   /*
     Only show the tooltip when the following conditions are met:
 
@@ -106,11 +109,9 @@ const QuranWord = ({
   */
   const showTooltip =
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
-
   const shouldBeHighLighted =
     isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
-
-  const tooltipContent = useMemo(
+  const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
   );
@@ -123,10 +124,10 @@ const QuranWord = ({
       logButtonClick('quran_word');
     }
   }, [audioData, word, wordClickFunctionality]);
+
   return (
     <div
-      onClick={onClick}
-      onKeyPress={onClick}
+      {...(readingPreference === ReadingPreference.Translation && { onClick, onKeyPress: onClick })}
       role="button"
       tabIndex={0}
       {...{
@@ -134,6 +135,7 @@ const QuranWord = ({
       }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
+        [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
         [styles.tajweedWord]: font === QuranFont.Tajweed,
@@ -141,16 +143,26 @@ const QuranWord = ({
     >
       <Wrapper
         shouldWrap={showTooltip}
-        wrapper={(children) => (
-          <MobilePopover
-            isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
-            defaultStyling={false}
-            content={tooltipContent}
-            onOpenChange={setIsTooltipOpened}
-          >
-            {children}
-          </MobilePopover>
-        )}
+        wrapper={(children) =>
+          readingPreference === ReadingPreference.Translation ? (
+            <MobilePopover
+              isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
+              defaultStyling={false}
+              content={translationViewTooltipContent}
+              onOpenChange={setIsTooltipOpened}
+            >
+              {children}
+            </MobilePopover>
+          ) : (
+            <ReadingViewWordPopover
+              open={!!isTooltipOpened}
+              setIsTooltipOpened={setIsTooltipOpened}
+              word={word}
+            >
+              {children}
+            </ReadingViewWordPopover>
+          )
+        }
       >
         {wordText}
       </Wrapper>
@@ -166,4 +178,4 @@ const QuranWord = ({
   );
 };
 
-export default QuranWord;
+export default memo(QuranWord);
