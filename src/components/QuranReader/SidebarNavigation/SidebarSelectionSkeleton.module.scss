@@ -1,0 +1,10 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  width: auto;
+  height: calc(2 * var(--spacing-large));
+  margin-block-end: var(--spacing-large);
+}
