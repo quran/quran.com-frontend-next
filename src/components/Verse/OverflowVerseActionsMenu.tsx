@@ -26,6 +26,7 @@ interface Props {
   isModal?: boolean;
   isPortalled?: boolean;
   isTranslationView?: boolean;
+  onActionTriggered?: () => void;
 }
 
 const OverflowVerseActionsMenu: React.FC<Props> = ({
@@ -33,6 +34,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isModal = false,
   isPortalled = false,
   isTranslationView = true,
+  onActionTriggered,
 }) => {
   const { t } = useTranslation('common');
   return (
@@ -65,6 +67,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           verse={verse}
           isPortalled={isPortalled}
           isTranslationView={isTranslationView}
+          onActionTriggered={onActionTriggered}
         />
       </PopoverMenu>
     </div>

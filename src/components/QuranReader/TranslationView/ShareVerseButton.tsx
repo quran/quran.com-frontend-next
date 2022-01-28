@@ -15,6 +15,7 @@ import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 type ShareVerseButtonProps = {
   verseKey: string;
   isTranslationView?: boolean;
+  onActionTriggered?: () => void;
 };
 
 export const onShareClicked = (
@@ -33,18 +34,27 @@ export const onShareClicked = (
   }
 };
 
-const ShareVerseButton = ({ verseKey, isTranslationView = true }: ShareVerseButtonProps) => {
+const ShareVerseButton = ({
+  verseKey,
+  isTranslationView = true,
+  onActionTriggered,
+}: ShareVerseButtonProps) => {
   const { t } = useTranslation('common');
   const toast = useToast();
+
+  const onButtonClicked = () => {
+    onShareClicked(verseKey, isTranslationView, () =>
+      toast(t('shared'), { status: ToastStatus.Success }),
+    );
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  };
 
   return (
     <>
       <Button
-        onClick={() =>
-          onShareClicked(verseKey, isTranslationView, () =>
-            toast(t('shared'), { status: ToastStatus.Success }),
-          )
-        }
+        onClick={onButtonClicked}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
         tooltip={t('share')}

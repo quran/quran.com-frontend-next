@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -22,16 +22,23 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const dispatch = useDispatch();
 
-  const onOpenChange = (isOpen: boolean) => {
-    setIsTooltipOpened(isOpen);
-    // eslint-disable-next-line i18next/no-literal-string
-    logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
-    dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
-  };
+  const onOpenChange = useCallback(
+    (isOpen: boolean) => {
+      setIsTooltipOpened(isOpen);
+      // eslint-disable-next-line i18next/no-literal-string
+      logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
+      dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
+    },
+    [dispatch, word.verseKey],
+  );
 
   const onHoverChange = (isHovering: boolean) => {
     dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
   };
+
+  const onActionTriggered = useCallback(() => {
+    onOpenChange(false);
+  }, [onOpenChange]);
 
   return (
     <Popover
@@ -56,7 +63,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       open={isTooltipOpened}
       onOpenChange={onOpenChange}
     >
-      <ReadingViewWordActionsMenu word={word} />
+      <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />
     </Popover>
   );
 };

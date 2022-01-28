@@ -33,15 +33,17 @@ interface Props {
   verse: Verse;
   isPortalled?: boolean;
   isTranslationView: boolean;
+  onActionTriggered?: () => void;
 }
 
-const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
+const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
 const DATA_POPOVER_PORTALLED = 'data-popover-portalled';
 
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   verse,
   isPortalled,
   isTranslationView,
+  onActionTriggered,
 }) => {
   const { t } = useTranslation('common');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
@@ -73,18 +75,23 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     let timeoutId: ReturnType<typeof setTimeout>;
     // if the user has just copied the text, we should change the text back to Copy after 3 seconds.
     if (isCopied === true) {
-      timeoutId = setTimeout(() => setIsCopied(false), RESET_COPY_TEXT_TIMEOUT_MS);
+      timeoutId = setTimeout(() => {
+        setIsCopied(false);
+        if (onActionTriggered) {
+          onActionTriggered();
+        }
+      }, RESET_ACTION_TEXT_TIMEOUT_MS);
     }
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [isCopied]);
+  }, [isCopied, onActionTriggered]);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
-    // if the user has just copied the link, we should change the text back after 3 seconds.
+    // if the user has just clicked the share action, we should change the text back after 3 seconds.
     if (isShared === true) {
-      timeoutId = setTimeout(() => setIsShared(false), RESET_COPY_TEXT_TIMEOUT_MS);
+      timeoutId = setTimeout(() => setIsShared(false), RESET_ACTION_TEXT_TIMEOUT_MS);
     }
     return () => {
       clearTimeout(timeoutId);
@@ -115,6 +122,9 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       }`,
     );
     dispatch({ type: toggleVerseBookmark.type, payload: verse.verseKey });
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   const onGoToAyahClicked = () => {
@@ -150,6 +160,9 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
             `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_reflect`,
           );
           navigateToExternalUrl(getQuranReflectVerseUrl(verse.verseKey));
+          if (onActionTriggered) {
+            onActionTriggered();
+          }
         }}
         icon={<ChatIcon />}
       >
@@ -158,12 +171,15 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
 
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}
-        onClick={() =>
+        onClick={() => {
           onShareClicked(verse.verseKey, isTranslationView, () => {
             setIsShared(true);
             toast(t('shared'), { status: ToastStatus.Success });
-          })
-        }
+          });
+          if (onActionTriggered) {
+            onActionTriggered();
+          }
+        }}
         icon={<ShareIcon />}
       >
         {t('share')}
