@@ -14,9 +14,10 @@ import Verse from 'types/Verse';
 
 type VerseActionAdvancedCopyProps = {
   verse: Verse;
+  isTranslationView: boolean;
 };
 
-const VerseActionAdvancedCopy = ({ verse }: VerseActionAdvancedCopyProps) => {
+const VerseActionAdvancedCopy = ({ verse, isTranslationView }: VerseActionAdvancedCopyProps) => {
   const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -25,7 +26,9 @@ const VerseActionAdvancedCopy = ({ verse }: VerseActionAdvancedCopyProps) => {
       <PopoverMenu.Item
         icon={<AdvancedCopyIcon />}
         onClick={() => {
-          logEvent('advanced_copy_modal_open');
+          logEvent(
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_open`,
+          );
           setIsModalOpen(true);
         }}
       >
@@ -34,7 +37,9 @@ const VerseActionAdvancedCopy = ({ verse }: VerseActionAdvancedCopyProps) => {
       <Modal
         isOpen={isModalOpen}
         onClickOutside={() => {
-          logEvent('advanced_copy_modal_close');
+          logEvent(
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_close`,
+          );
           setIsModalOpen(false);
         }}
       >

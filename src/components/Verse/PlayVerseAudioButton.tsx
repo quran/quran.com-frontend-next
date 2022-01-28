@@ -31,8 +31,13 @@ import QueryParam from 'types/QueryParam';
 interface PlayVerseAudioProps {
   verseKey: string;
   timestamp: number;
+  isTranslationView?: boolean;
 }
-const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
+const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
+  verseKey,
+  timestamp,
+  isTranslationView = true,
+}) => {
   const { t } = useTranslation('common');
 
   const dispatch = useDispatch();
@@ -49,7 +54,8 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   }, [audioDataStatus]);
 
   const onPlayClicked = () => {
-    logButtonClick('translation_view_play_verse');
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
     dispatch(exitRepeatMode());
     dispatch(
       playFrom({
@@ -65,7 +71,8 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   };
 
   const onPauseClicked = () => {
-    logButtonClick('translation_view_pause_verse');
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_pause_verse`);
     triggerPauseAudio();
   };
 

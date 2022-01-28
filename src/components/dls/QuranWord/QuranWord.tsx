@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React, { useState, useMemo, useCallback, memo } from 'react';
 
 import classNames from 'classnames';
@@ -154,13 +153,7 @@ const QuranWord = ({
               {children}
             </MobilePopover>
           ) : (
-            <ReadingViewWordPopover
-              open={!!isTooltipOpened}
-              setIsTooltipOpened={setIsTooltipOpened}
-              word={word}
-            >
-              {children}
-            </ReadingViewWordPopover>
+            <ReadingViewWordPopover word={word}>{children}</ReadingViewWordPopover>
           )
         }
       >
