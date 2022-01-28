@@ -31,6 +31,8 @@ const filterReciters = (reciters, searchQuery: string): Reciter[] => {
   return filteredReciter as Reciter[];
 };
 
+const DEFAULT_RECITATION_STYLE = 'Murattal';
+
 const SettingsReciter = () => {
   const { lang, t } = useTranslation('common');
   const dispatch = useDispatch();
@@ -90,7 +92,9 @@ const SettingsReciter = () => {
                     <span lang={reciter.translatedName.languageName}>
                       {reciter.translatedName.name}
                     </span>
-                    <span className={styles.recitationStyle}>{reciter.style.name}</span>
+                    {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
+                      <span className={styles.recitationStyle}>{reciter.style.name}</span>
+                    )}
                   </label>
                 ))}
             </div>
