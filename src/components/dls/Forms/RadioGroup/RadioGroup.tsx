@@ -32,7 +32,7 @@ interface Props {
   required?: boolean;
   loop?: boolean;
   orientation?: RadioGroupOrientation;
-  renderItem: (item: RadioItem) => React.ReactNode;
+  renderItem?: (item: RadioItem) => React.ReactNode;
 }
 
 const RadioGroup: React.FC<Props> & {
