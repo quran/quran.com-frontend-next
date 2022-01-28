@@ -72,7 +72,7 @@ const CuratedStationList = () => {
               size={CardSize.Large}
               title={t(`curated-station.${station.title}`)}
               description={t(`curated-station.${station.description}`)}
-              onClick={onClick}
+              onImgClick={onClick}
             />
           </div>
         );

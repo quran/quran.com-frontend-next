@@ -8,7 +8,6 @@ $card-hover-background-color: rgba(
   scroll-snap-align: start;
   scroll-margin: var(--spacing-medium);
   border-radius: var(--border-radius-rounded);
-  cursor: pointer;
 }
 
 // size
@@ -24,6 +23,7 @@ $card-hover-background-color: rgba(
   overflow: hidden;
   border-radius: var(--border-radius-rounded);
   background-color: var(--color-background-alternative-deep);
+  cursor: pointer;
 
   .medium & {
     min-height: calc(9 * var(--spacing-medium));
@@ -64,7 +64,7 @@ $card-hover-background-color: rgba(
 .cardHoverEffectContainer {
   color: var(--color-text-default);
   display: none;
-  .container:hover & {
+  .imageContainer:hover & {
     display: flex;
     justify-content: center;
     align-items: center;
