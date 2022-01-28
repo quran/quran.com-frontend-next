@@ -90,7 +90,7 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
  */
 export const getAvailableReciters = async (
   locale: string,
-  fields?: [],
+  fields?: string[],
 ): Promise<RecitersResponse> => fetcher(makeAvailableRecitersUrl(locale, fields));
 
 export const getReciterData = async (reciterId: string): Promise<ReciterResponse> =>
