@@ -11,9 +11,10 @@ import Word from 'types/Word';
 
 type Props = {
   word: Word;
+  onActionTriggered?: () => void;
 };
 
-const ReadingViewWordActionsMenu: React.FC<Props> = ({ word }) => {
+const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }) => {
   return (
     <div className={styles.container}>
       <div className={styles.readingViewOverflowVerseActionsMenu}>
@@ -22,6 +23,7 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word }) => {
           verse={word.verse}
           isModal
           isPortalled
+          onActionTriggered={onActionTriggered}
         />
       </div>
       {word?.verse?.timestamps && (
@@ -29,10 +31,19 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word }) => {
           verseKey={word.verseKey}
           timestamp={word.verse.timestamps.timestampFrom}
           isTranslationView={false}
+          onActionTriggered={onActionTriggered}
         />
       )}
-      <QuranReflectButton verseKey={word.verseKey} isTranslationView={false} />
-      <ShareVerseButton verseKey={word.verseKey} isTranslationView={false} />
+      <QuranReflectButton
+        verseKey={word.verseKey}
+        isTranslationView={false}
+        onActionTriggered={onActionTriggered}
+      />
+      <ShareVerseButton
+        verseKey={word.verseKey}
+        isTranslationView={false}
+        onActionTriggered={onActionTriggered}
+      />
     </div>
   );
 };

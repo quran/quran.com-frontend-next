@@ -32,11 +32,13 @@ interface PlayVerseAudioProps {
   verseKey: string;
   timestamp: number;
   isTranslationView?: boolean;
+  onActionTriggered?: () => void;
 }
 const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   verseKey,
   timestamp,
   isTranslationView = true,
+  onActionTriggered,
 }) => {
   const { t } = useTranslation('common');
 
@@ -68,12 +70,20 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     if (audioDataStatus !== AudioDataStatus.Ready) {
       setIsLoading(true);
     }
+
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   const onPauseClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_pause_verse`);
     triggerPauseAudio();
+
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   if (isLoading)

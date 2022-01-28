@@ -13,17 +13,29 @@ import { navigateToExternalUrl } from 'src/utils/url';
 type QuranReflectButtonProps = {
   verseKey: string;
   isTranslationView?: boolean;
+  onActionTriggered?: () => void;
 };
 
-const QuranReflectButton = ({ verseKey, isTranslationView = true }: QuranReflectButtonProps) => {
+const QuranReflectButton = ({
+  verseKey,
+  isTranslationView = true,
+  onActionTriggered,
+}: QuranReflectButtonProps) => {
   const { t } = useTranslation('common');
+
+  const onButtonClicked = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
+    navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  };
+
   return (
     <Button
       variant={ButtonVariant.Ghost}
-      onClick={() => {
-        logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
-        navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
-      }}
+      onClick={onButtonClicked}
       size={ButtonSize.Small}
       tooltip={t('reflect')}
       shouldFlipOnRTL={false}
