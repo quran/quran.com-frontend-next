@@ -13,27 +13,30 @@ export enum CardSize {
 
 type CardProps = {
   size: CardSize;
-  title: string;
-  description?: string;
-  onClick?: () => void;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  onImgClick?: () => void;
   imgSrc?: string;
+  imgAlt?: string;
   actionIcon?: ReactNode;
 };
 
-const Card = ({ size, title, description, onClick, imgSrc, actionIcon }: CardProps) => {
+const Card = ({ size, title, description, onImgClick, imgSrc, actionIcon, imgAlt }: CardProps) => {
   return (
     <div
-      role="button"
-      tabIndex={0}
-      onKeyPress={onClick}
-      onClick={onClick}
       className={classNames(styles.container, {
         [styles.large]: size === CardSize.Large,
         [styles.medium]: size === CardSize.Medium,
       })}
     >
-      <div className={styles.imageContainer}>
-        {imgSrc && <img alt={title} className={styles.img} src={imgSrc} />}
+      <div
+        className={styles.imageContainer}
+        role="button"
+        tabIndex={0}
+        onKeyPress={onImgClick}
+        onClick={onImgClick}
+      >
+        {imgSrc && <img alt={imgAlt} className={styles.img} src={imgSrc} />}
 
         {actionIcon && (
           <div className={styles.cardHoverEffectContainer} data-theme="dark">

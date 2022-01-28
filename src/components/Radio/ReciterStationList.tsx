@@ -7,6 +7,7 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import DataFetcher from '../DataFetcher';
 import Card, { CardSize } from '../dls/Card/Card';
+import Link, { LinkVariant } from '../dls/Link/Link';
 
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
@@ -17,6 +18,7 @@ import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
+import { getReciterNavigationUrl } from 'src/utils/navigation';
 import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
@@ -74,8 +76,15 @@ const ReciterStationList = () => {
                   actionIcon={actionIcon}
                   imgSrc={getImageCDNPath(reciter.profilePicture)}
                   key={reciter.id}
-                  onClick={onClick}
-                  title={reciter.name}
+                  onImgClick={onClick}
+                  title={
+                    <Link
+                      variant={LinkVariant.Primary}
+                      href={getReciterNavigationUrl(reciter.id.toString())}
+                    >
+                      {reciter.name}
+                    </Link>
+                  }
                   description={reciter.style.name}
                   size={CardSize.Medium}
                 />
