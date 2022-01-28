@@ -32,9 +32,13 @@ interface Props {
   required?: boolean;
   loop?: boolean;
   orientation?: RadioGroupOrientation;
+  renderItem: (item: RadioItem) => React.ReactNode;
 }
 
-const RadioGroup: React.FC<Props> = ({
+const RadioGroup: React.FC<Props> & {
+  Item: (props: RadioGroupPrimitive.RadioGroupItemProps) => React.ReactElement;
+  Indicator: (props: RadioGroupPrimitive.RadioIndicatorProps) => React.ReactElement;
+} = ({
   items,
   label,
   onChange,
@@ -44,6 +48,7 @@ const RadioGroup: React.FC<Props> = ({
   required,
   disabled = false,
   orientation = RadioGroupOrientation.Vertical,
+  renderItem,
 }) => {
   const direction = useDirection();
 
@@ -60,6 +65,8 @@ const RadioGroup: React.FC<Props> = ({
       {...(required && { required })}
     >
       {items.map((item) => {
+        if (renderItem) return renderItem(item);
+
         const isDisabled = disabled === true || item.disabled === true;
         return (
           <div className={styles.radioItemContainer} key={item.id}>
@@ -84,5 +91,15 @@ const RadioGroup: React.FC<Props> = ({
     </RadioGroupPrimitive.Root>
   );
 };
+
+// eslint-disable-next-line react/no-multi-comp
+RadioGroup.Item = ({ className, ...props }) => (
+  <RadioGroupPrimitive.Item className={classNames(styles.radioItem, className)} {...props} />
+);
+
+// eslint-disable-next-line react/no-multi-comp
+RadioGroup.Indicator = ({ className, ...props }) => (
+  <RadioGroupPrimitive.Indicator className={classNames(styles.indicator, className)} {...props} />
+);
 
 export default RadioGroup;
