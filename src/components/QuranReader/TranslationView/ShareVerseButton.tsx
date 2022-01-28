@@ -14,10 +14,18 @@ import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 type ShareVerseButtonProps = {
   verseKey: string;
+  isTranslationView?: boolean;
 };
 
-export const onShareClicked = (verseKey, callback: () => void) => {
-  logButtonClick('verse_actions_menu_copy');
+export const onShareClicked = (
+  verseKey: string,
+  isTranslationView: boolean,
+  callback: () => void,
+) => {
+  logButtonClick(
+    // eslint-disable-next-line i18next/no-literal-string
+    `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
+  );
   const origin = getWindowOrigin();
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   if (origin) {
@@ -25,7 +33,7 @@ export const onShareClicked = (verseKey, callback: () => void) => {
   }
 };
 
-const ShareVerseButton = ({ verseKey }: ShareVerseButtonProps) => {
+const ShareVerseButton = ({ verseKey, isTranslationView = true }: ShareVerseButtonProps) => {
   const { t } = useTranslation('common');
   const toast = useToast();
 
@@ -33,7 +41,9 @@ const ShareVerseButton = ({ verseKey }: ShareVerseButtonProps) => {
     <>
       <Button
         onClick={() =>
-          onShareClicked(verseKey, () => toast(t('shared'), { status: ToastStatus.Success }))
+          onShareClicked(verseKey, isTranslationView, () =>
+            toast(t('shared'), { status: ToastStatus.Success }),
+          )
         }
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}

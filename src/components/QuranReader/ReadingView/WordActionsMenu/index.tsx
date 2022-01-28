@@ -17,16 +17,22 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word }) => {
   return (
     <div className={styles.container}>
       <div className={styles.readingViewOverflowVerseActionsMenu}>
-        <OverflowVerseActionsMenu verse={word.verse} isModal isPortalled />
+        <OverflowVerseActionsMenu
+          isTranslationView={false}
+          verse={word.verse}
+          isModal
+          isPortalled
+        />
       </div>
       {word?.verse?.timestamps && (
         <PlayVerseAudioButton
           verseKey={word.verseKey}
           timestamp={word.verse.timestamps.timestampFrom}
+          isTranslationView={false}
         />
       )}
-      <QuranReflectButton verseKey={word.verseKey} />
-      <ShareVerseButton verseKey={word.verseKey} />
+      <QuranReflectButton verseKey={word.verseKey} isTranslationView={false} />
+      <ShareVerseButton verseKey={word.verseKey} isTranslationView={false} />
     </div>
   );
 };

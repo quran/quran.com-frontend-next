@@ -25,12 +25,14 @@ interface Props {
   verse: Verse;
   isModal?: boolean;
   isPortalled?: boolean;
+  isTranslationView?: boolean;
 }
 
 const OverflowVerseActionsMenu: React.FC<Props> = ({
   verse,
   isModal = false,
   isPortalled = false,
+  isTranslationView = true,
 }) => {
   const { t } = useTranslation('common');
   return (
@@ -52,10 +54,18 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         isModal={isModal}
         isPortalled={isPortalled}
         onOpenChange={(open: boolean) => {
-          logEvent(`verse_actions_menu_${open ? 'open' : 'close'}`);
+          logEvent(
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+              open ? 'open' : 'close'
+            }`,
+          );
         }}
       >
-        <OverflowVerseActionsMenuBody verse={verse} isPortalled={isPortalled} />
+        <OverflowVerseActionsMenuBody
+          verse={verse}
+          isPortalled={isPortalled}
+          isTranslationView={isTranslationView}
+        />
       </PopoverMenu>
     </div>
   );

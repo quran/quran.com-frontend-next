@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
@@ -31,12 +32,17 @@ import Verse from 'types/Verse';
 interface Props {
   verse: Verse;
   isPortalled?: boolean;
+  isTranslationView: boolean;
 }
 
 const RESET_COPY_TEXT_TIMEOUT_MS = 3 * 1000;
 const DATA_POPOVER_PORTALLED = 'data-popover-portalled';
 
-const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse, isPortalled }) => {
+const OverflowVerseActionsMenuBody: React.FC<Props> = ({
+  verse,
+  isPortalled,
+  isTranslationView,
+}) => {
   const { t } = useTranslation('common');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const [isCopied, setIsCopied] = useState(false);
@@ -86,7 +92,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse, isPortalled }) =
   }, [isShared]);
 
   const onCopyClicked = () => {
-    logButtonClick('verse_actions_menu_copy');
+    logButtonClick(
+      // eslint-disable-next-line i18next/no-literal-string
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
+    );
     clipboardCopy(verse.textUthmani).then(() => {
       setIsCopied(true);
     });
@@ -99,12 +108,20 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse, isPortalled }) =
   const dispatch = useDispatch();
   const onToggleBookmarkClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`verse_actions_menu_${isVerseBookmarked ? 'un_bookmark' : 'bookmark'}`);
+    logButtonClick(
+      // eslint-disable-next-line i18next/no-literal-string
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+        isVerseBookmarked ? 'un_bookmark' : 'bookmark'
+      }`,
+    );
     dispatch({ type: toggleVerseBookmark.type, payload: verse.verseKey });
   };
 
   const onGoToAyahClicked = () => {
-    logButtonClick('verse_actions_menu_go_to_verse');
+    logButtonClick(
+      // eslint-disable-next-line i18next/no-literal-string
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_go_to_verse`,
+    );
     router.push(verseUrl);
   };
 
@@ -118,14 +135,20 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse, isPortalled }) =
         {isCopied ? `${t('copied')}!` : `${t('copy')}`}
       </PopoverMenu.Item>
 
-      <VerseActionAdvancedCopy verse={verse} />
+      <VerseActionAdvancedCopy verse={verse} isTranslationView={isTranslationView} />
 
-      <TafsirVerseAction chapterId={Number(verse.chapterId)} verseNumber={verse.verseNumber} />
+      <TafsirVerseAction
+        chapterId={Number(verse.chapterId)}
+        verseNumber={verse.verseNumber}
+        isTranslationView={isTranslationView}
+      />
 
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}
         onClick={() => {
-          logButtonClick('verse_actions_menu_reflect');
+          logButtonClick(
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_reflect`,
+          );
           navigateToExternalUrl(getQuranReflectVerseUrl(verse.verseKey));
         }}
         icon={<ChatIcon />}
@@ -136,7 +159,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({ verse, isPortalled }) =
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}
         onClick={() =>
-          onShareClicked(verse.verseKey, () => {
+          onShareClicked(verse.verseKey, isTranslationView, () => {
             setIsShared(true);
             toast(t('shared'), { status: ToastStatus.Success });
           })

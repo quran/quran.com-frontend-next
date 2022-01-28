@@ -12,15 +12,16 @@ import { navigateToExternalUrl } from 'src/utils/url';
 
 type QuranReflectButtonProps = {
   verseKey: string;
+  isTranslationView?: boolean;
 };
 
-const QuranReflectButton = ({ verseKey }: QuranReflectButtonProps) => {
+const QuranReflectButton = ({ verseKey, isTranslationView = true }: QuranReflectButtonProps) => {
   const { t } = useTranslation('common');
   return (
     <Button
       variant={ButtonVariant.Ghost}
       onClick={() => {
-        logButtonClick('translation_view_reflect');
+        logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
         navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
       }}
       size={ButtonSize.Small}

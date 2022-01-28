@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -11,18 +11,21 @@ import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
+import { logEvent } from 'src/utils/eventLogger';
 import Word from 'types/Word';
 
 type Props = {
   word: Word;
-  open: boolean;
-  setIsTooltipOpened: (isOpen: boolean) => void;
 };
 
-const ReadingViewWordPopover: React.FC<Props> = ({ word, open, children, setIsTooltipOpened }) => {
+const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
+  const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const dispatch = useDispatch();
+
   const onOpenChange = (isOpen: boolean) => {
     setIsTooltipOpened(isOpen);
+    // eslint-disable-next-line i18next/no-literal-string
+    logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
     dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
   };
 
@@ -50,7 +53,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, open, children, setIsTo
       isModal
       portalled={false}
       contentStyles={styles.content}
-      open={open}
+      open={isTooltipOpened}
       onOpenChange={onOpenChange}
     >
       <ReadingViewWordActionsMenu word={word} />
