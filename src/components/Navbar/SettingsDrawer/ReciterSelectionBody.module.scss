@@ -11,15 +11,15 @@
 $recitation-padding: calc(0.5 * var(--spacing-xxsmall));
 
 .recitationStyle {
-  background-color: var(--color-background-alternative-faint);
+  background-color: var(--color-success-faded);
   margin-inline-start: var(--spacing-xsmall);
   border-radius: var(--border-radius-pill);
-  color: var(--color-text-default);
+  color: var(--color-success-deep);
   font-size: var(--font-size-normal);
   padding-block-start: $recitation-padding;
   padding-block-end: $recitation-padding;
-  padding-inline-start: var(--spacing-xsmall);
-  padding-inline-end: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-small);
 }
 
 .searchInputContainer {
