@@ -22,6 +22,7 @@
     "/product-updates/[id]": ["product-updates"],
     "/apps": ["apps"],
     "/radio": ["home", "quick-links", "radio"],
-    "/reciters/[reciterId]": ["home", "quick-links", "radio", "reciter"]
+    "/reciters/[reciterId]": ["home", "quick-links", "radio", "reciter"],
+    "/reciters": [ "reciter", "home", "quick-links"]
   }
 }

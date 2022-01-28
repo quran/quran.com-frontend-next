@@ -18,7 +18,7 @@ import { RecitersResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import Reciter from 'types/Reciter';
 
-const filterReciters = (reciters, searchQuery: string): Reciter[] => {
+export const filterReciters = (reciters, searchQuery: string): Reciter[] => {
   const fuse = new Fuse(reciters, {
     keys: ['name', 'languageName', 'translatedName.name', 'qirat.name', 'style.name'],
     threshold: 0.3,
