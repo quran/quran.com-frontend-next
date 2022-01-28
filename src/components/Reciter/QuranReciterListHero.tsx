@@ -15,7 +15,7 @@ const QuranReciterListHero = ({ onSearchQueryChange, searchQuery }: QuranReciter
   return (
     <div className={classNames(styles.container)}>
       <div className={styles.backgroundImage} />
-      <div className={styles.title}>{t('reciter:quran-reciter')}</div>
+      <div className={styles.title}>{t('reciter:quran-reciters')}</div>
 
       <div className={styles.searchInputContainer}>
         <Input
