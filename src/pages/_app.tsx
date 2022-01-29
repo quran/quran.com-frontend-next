@@ -16,7 +16,7 @@ import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScript
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
-import { logUnsupportedLogicalCSS } from 'src/utils/css';
+import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
 
@@ -30,8 +30,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
+    console.log('[MyApp] useEffect is running');
     document.documentElement.dir = getDir(locale);
-    logUnsupportedLogicalCSS();
+    logAndRedirectUnsupportedLogicalCSS();
   }, [locale]);
   return (
     <>
