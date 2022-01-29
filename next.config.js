@@ -103,7 +103,33 @@ const config = {
         ];
   },
   async redirects() {
-    return [];
+    return [
+      {
+        source: '/:surah/:from(\\d{1,})\\::to(\\d{1,})', // 1/2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah\\::from(\\d{1,})\\::to(\\d{1,})', // 1:2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})-:from\\::to', // 1-2:3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})-:from(\\d{1,})-:to(\\d{1,})', // 1-2-3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+      {
+        source: '/:surah(\\d{1,})\\::from(\\d{1,})-:to(\\d{1,})', // 1:2-3 => 1/2-3
+        destination: '/:surah/:from-:to',
+        permanent: true,
+      },
+    ];
   },
 };
 
