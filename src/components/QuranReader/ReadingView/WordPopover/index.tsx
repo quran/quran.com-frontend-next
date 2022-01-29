@@ -36,7 +36,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
   const onLongPress = useCallback(() => {
     onOpenChange(true);
   }, [onOpenChange]);
-  const [onStart, onEnd] = useLongPress(onLongPress, 1000);
+  const [onStart, onEnd] = useLongPress(onLongPress);
   const onHoverChange = (isHovering: boolean) => {
     dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
   };
