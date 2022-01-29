@@ -82,7 +82,7 @@ const ShareRecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitati
       <div className={classNames(layoutStyle.flowItem, styles.container)}>
         <img
           className={styles.reciterImage}
-          alt=""
+          alt={selectedReciter.name}
           src={getImageCDNPath(selectedReciter.profilePicture)}
         />
         <div>
