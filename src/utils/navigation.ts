@@ -145,7 +145,7 @@ export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
 export const getReciterNavigationUrl = (reciterId: string): string => `/reciters/${reciterId}`;
 
 /**
- * Get href link to a recitation page by reciterId and chapterId
+ * Get href link to an audio recitation page by reciterId and chapterId
  *
  * @param {string} reciterId
  * @param {string} chapterId
