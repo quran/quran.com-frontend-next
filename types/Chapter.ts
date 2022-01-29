@@ -2,7 +2,7 @@ import Slug from './Slug';
 import TranslatedName from './TranslatedName';
 
 interface Chapter {
-  id: number | string;
+  id?: number | string;
   localizedId?: string;
   versesCount: number;
   bismillahPre: boolean;
