@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
 import React, { useMemo, useRef, useState, useEffect } from 'react';
@@ -5,12 +6,8 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import useSWRImmutable from 'swr/immutable';
-
-import { getReaderViewRequestKey, verseFetcher } from '../api';
-import onCopyQuranWords from '../onCopyQuranWords';
 
 import useFetchPagesCount from './hooks/useFetchTotalPages';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
@@ -19,19 +16,25 @@ import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
+import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
+import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useQcfFont from 'src/hooks/useQcfFont';
 import Error from 'src/pages/_error';
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
-const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls'), {
-  ssr: false,
-  loading: () => <Spinner />,
-});
+const EndOfScrollingControls = dynamic(
+  () => import('src/components/QuranReader/EndOfScrollingControls'),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  },
+);
 
 type ReadingViewProps = {
   quranReaderStyles: QuranReaderStyles;
@@ -56,8 +59,18 @@ const ReadingView = ({
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
   );
-  const reciter = useSelector(selectReciter, shallowEqual);
-  const wordByWordLocale = useSelector(selectWordByWordLocale);
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+  );
+  const {
+    value: wordByWordLocale,
+    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
+  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.WBW_LOCALE,
+  );
   useQcfFont(quranReaderStyles.quranFont, verses);
   const { pagesCount, hasError, pagesVersesRange } = useFetchPagesCount(
     resourceId,
@@ -70,7 +83,7 @@ const ReadingView = ({
       pageNumber: currentMushafPage,
       pageVersesRange: pagesVersesRange[currentMushafPage],
       quranReaderStyles,
-      reciter: reciter.id,
+      reciter: reciterId,
       locale: lang,
       wordByWordLocale,
     }),
@@ -129,32 +142,39 @@ const ReadingView = ({
   }
 
   return (
-    <div
-      onCopy={(event) => onCopyQuranWords(event, verses)}
-      className={classNames(styles.container, {
-        [styles.largeDesktopContainer]: quranTextFontScale === 4,
-        [styles.xLargeDesktopContainer]: quranTextFontScale === 5,
-      })}
-    >
-      <Virtuoso
-        ref={virtuosoRef}
-        useWindowScroll
-        increaseViewportBy={300}
-        style={{ width: '100%' }}
-        itemsRendered={onItemsRendered}
-        initialItemCount={1} // needed for SSR.
-        totalCount={pagesCount}
-        itemContent={itemContentRenderer}
-        components={{
-          Footer: () => (
-            <EndOfScrollingControls
-              quranReaderDataType={quranReaderDataType}
-              lastVerse={verses[verses.length - 1]}
-            />
-          ),
-        }}
+    <>
+      <QueryParamMessage
+        translationsQueryParamDifferent={false}
+        reciterQueryParamDifferent={reciterQueryParamDifferent}
+        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-    </div>
+      <div
+        onCopy={(event) => onCopyQuranWords(event, verses)}
+        className={classNames(styles.container, {
+          [styles.largeDesktopContainer]: quranTextFontScale === 4,
+          [styles.xLargeDesktopContainer]: quranTextFontScale === 5,
+        })}
+      >
+        <Virtuoso
+          ref={virtuosoRef}
+          useWindowScroll
+          increaseViewportBy={300}
+          style={{ width: '100%' }}
+          itemsRendered={onItemsRendered}
+          initialItemCount={1} // needed for SSR.
+          totalCount={pagesCount}
+          itemContent={itemContentRenderer}
+          components={{
+            Footer: () => (
+              <EndOfScrollingControls
+                quranReaderDataType={quranReaderDataType}
+                lastVerse={verses[verses.length - 1]}
+              />
+            ),
+          }}
+        />
+      </div>
+    </>
   );
 };
 

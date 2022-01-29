@@ -17,6 +17,24 @@ type Props = {
 const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }) => {
   return (
     <div className={styles.container}>
+      <ShareVerseButton
+        verseKey={word.verseKey}
+        isTranslationView={false}
+        onActionTriggered={onActionTriggered}
+      />
+      <QuranReflectButton
+        verseKey={word.verseKey}
+        isTranslationView={false}
+        onActionTriggered={onActionTriggered}
+      />
+      {word?.verse?.timestamps && (
+        <PlayVerseAudioButton
+          verseKey={word.verseKey}
+          timestamp={word.verse.timestamps.timestampFrom}
+          isTranslationView={false}
+          onActionTriggered={onActionTriggered}
+        />
+      )}
       <div className={styles.readingViewOverflowVerseActionsMenu}>
         <OverflowVerseActionsMenu
           isTranslationView={false}
@@ -26,24 +44,6 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
           onActionTriggered={onActionTriggered}
         />
       </div>
-      {word?.verse?.timestamps && (
-        <PlayVerseAudioButton
-          verseKey={word.verseKey}
-          timestamp={word.verse.timestamps.timestampFrom}
-          isTranslationView={false}
-          onActionTriggered={onActionTriggered}
-        />
-      )}
-      <QuranReflectButton
-        verseKey={word.verseKey}
-        isTranslationView={false}
-        onActionTriggered={onActionTriggered}
-      />
-      <ShareVerseButton
-        verseKey={word.verseKey}
-        isTranslationView={false}
-        onActionTriggered={onActionTriggered}
-      />
     </div>
   );
 };

@@ -58,7 +58,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       }
       tip
       isModal
-      portalled={false}
+      portalled
       contentStyles={styles.content}
       open={isTooltipOpened}
       onOpenChange={onOpenChange}

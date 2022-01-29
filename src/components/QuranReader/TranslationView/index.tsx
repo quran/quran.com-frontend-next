@@ -1,14 +1,15 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-import { shallowEqual, useSelector } from 'react-redux';
 import { ListItem, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import useSWRImmutable from 'swr/immutable';
 
 import { getRequestKey, verseFetcher, DEFAULT_ITEMS_PER_PAGE } from '../api';
 import onCopyQuranWords from '../onCopyQuranWords';
+import QueryParamMessage from '../QueryParamMessage';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import styles from './TranslationView.module.scss';
@@ -17,13 +18,11 @@ import TranslationViewCellSkeleton from './TranslatioViewCellSkeleton';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useQcfFont from 'src/hooks/useQcfFont';
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
-import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { areArraysEqual } from 'src/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -77,10 +76,25 @@ const TranslationView = ({
     1: initialData.verses,
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const reciter = useSelector(selectReciter, shallowEqual);
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+  );
   const { lang } = useTranslation();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const wordByWordLocale = useSelector(selectWordByWordLocale);
+  const {
+    value: selectedTranslations,
+    isQueryParamDifferent: translationsQueryParamDifferent,
+  }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Translations,
+  );
+  const {
+    value: wordByWordLocale,
+    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
+  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.WBW_LOCALE,
+  );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef);
   const { data } = useSWRImmutable(
@@ -93,7 +107,7 @@ const TranslationView = ({
       isVerseData: quranReaderDataType === QuranReaderDataType.Verse,
       isSelectedTafsirData: quranReaderDataType === QuranReaderDataType.SelectedTafsir,
       id: resourceId,
-      reciter: reciter.id,
+      reciter: reciterId,
       locale: lang,
       wordByWordLocale,
     }),
@@ -167,25 +181,32 @@ const TranslationView = ({
   };
 
   return (
-    <div className={styles.container} onCopy={(event) => onCopyQuranWords(event, verses)}>
-      <Virtuoso
-        ref={virtuosoRef}
-        useWindowScroll
-        totalCount={getVersesCount(quranReaderDataType, initialData)}
-        overscan={800}
-        initialItemCount={initialData.verses.length} // needed for SSR.
-        itemsRendered={onItemsRendered}
-        itemContent={itemContentRenderer}
-        components={{
-          Footer: () => (
-            <EndOfScrollingControls
-              quranReaderDataType={quranReaderDataType}
-              lastVerse={verses[verses.length - 1]}
-            />
-          ),
-        }}
+    <>
+      <QueryParamMessage
+        translationsQueryParamDifferent={translationsQueryParamDifferent}
+        reciterQueryParamDifferent={reciterQueryParamDifferent}
+        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-    </div>
+      <div className={styles.container} onCopy={(event) => onCopyQuranWords(event, verses)}>
+        <Virtuoso
+          ref={virtuosoRef}
+          useWindowScroll
+          totalCount={getVersesCount(quranReaderDataType, initialData)}
+          overscan={800}
+          initialItemCount={initialData.verses.length} // needed for SSR.
+          itemsRendered={onItemsRendered}
+          itemContent={itemContentRenderer}
+          components={{
+            Footer: () => (
+              <EndOfScrollingControls
+                quranReaderDataType={quranReaderDataType}
+                lastVerse={verses[verses.length - 1]}
+              />
+            ),
+          }}
+        />
+      </div>
+    </>
   );
 };
 
