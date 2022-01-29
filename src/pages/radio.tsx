@@ -50,7 +50,7 @@ const RadioPage = ({ reciters }: RadioPageProps) => {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
-    const { reciters } = await getAvailableReciters(locale);
+    const { reciters } = await getAvailableReciters(locale, ['profile_picture']);
     return {
       props: {
         reciters,
