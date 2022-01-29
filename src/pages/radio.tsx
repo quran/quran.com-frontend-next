@@ -51,7 +51,6 @@ const RadioPage = ({ reciters }: RadioPageProps) => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale);
-    console.log(reciters);
     return {
       props: {
         reciters,
