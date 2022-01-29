@@ -1,17 +1,23 @@
 import classNames from 'classnames';
+import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
 
+import { getAvailableReciters } from 'src/api';
 import Footer from 'src/components/dls/Footer/Footer';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import CuratedStationList from 'src/components/Radio/CuratedStationList';
 import ReciterStationList from 'src/components/Radio/ReciterStationList';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
+import Reciter from 'types/Reciter';
 
-const Radio = () => {
+type RadioPageProps = {
+  reciters: Reciter[];
+};
+const RadioPage = ({ reciters }: RadioPageProps) => {
   const { t, lang } = useTranslation('');
   return (
     <div className={pageStyle.pageContainer}>
@@ -31,7 +37,7 @@ const Radio = () => {
           {t('radio:reciter-stations')}
         </div>
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
-          <ReciterStationList />
+          <ReciterStationList reciters={reciters} />
         </div>
       </div>
 
@@ -42,4 +48,20 @@ const Radio = () => {
   );
 };
 
-export default Radio;
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  try {
+    const { reciters } = await getAvailableReciters(locale);
+    console.log(reciters);
+    return {
+      props: {
+        reciters,
+      },
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
+};
+
+export default RadioPage;
