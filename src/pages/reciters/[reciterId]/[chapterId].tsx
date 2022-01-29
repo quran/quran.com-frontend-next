@@ -93,14 +93,25 @@ const ShareRecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitati
           <Button className={styles.playButton} onClick={onPlayAudioClicked} prefix={<PlayIcon />}>
             {t('common:word-click.play-audio')}
           </Button>
-          <div className={styles.secondaryActions}>
-            <Button onClick={onReadClicked} prefix={<LinkIcon />} type={ButtonType.Secondary}>
+          <div className={styles.secondaryActionsContainer}>
+            <Button
+              className={styles.secondaryAction}
+              onClick={onReadClicked}
+              prefix={<LinkIcon />}
+              type={ButtonType.Secondary}
+            >
               {t('reciter:read')}
             </Button>
-            <Button onClick={onCopyLinkClicked} prefix={<CopyIcon />} type={ButtonType.Secondary}>
+            <Button
+              className={styles.secondaryAction}
+              onClick={onCopyLinkClicked}
+              prefix={<CopyIcon />}
+              type={ButtonType.Secondary}
+            >
               {t('reciter:copy-link')}
             </Button>
             <Button
+              className={styles.secondaryAction}
               onClick={onDownloadClicked}
               prefix={isDownloadingAudio ? <Spinner /> : <DownloadIcon />}
               type={ButtonType.Secondary}

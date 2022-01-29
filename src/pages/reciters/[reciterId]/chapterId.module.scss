@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .container {
   display: flex;
   flex-direction: column;
@@ -6,6 +8,7 @@
 }
 
 .reciterImage {
+  width: 80%;
   max-width: calc(20 * var(--spacing-medium));
   border-radius: var(--border-radius-circle);
   margin-block-end: var(--spacing-medium);
@@ -23,9 +26,24 @@
   margin-block-end: var(--spacing-medium);
 }
 
-.secondaryActions {
+.secondaryActionsContainer {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  @include breakpoints.tablet {
+    flex-direction: row;
+  }
+}
+
+.secondaryAction {
+  margin-block-end: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    flex: 1;
+    margin-inline-end: var(--spacing-xxsmall);
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
 }
 .chapterName {
   text-align: center;
