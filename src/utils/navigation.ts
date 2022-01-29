@@ -136,7 +136,23 @@ export const getSearchQueryNavigationUrl = (query?: string): string =>
 export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
   `/surah/${chapterIdOrSlug}/info`;
 
+/**
+ * Get href link to the reciter page
+ *
+ * @param {string} reciterId
+ * @returns {string} reciterPageUrl
+ */
 export const getReciterNavigationUrl = (reciterId: string): string => `/reciters/${reciterId}`;
+
+/**
+ * Get href link to a recitation page by reciterId and chapterId
+ *
+ * @param {string} reciterId
+ * @param {string} chapterId
+ * @returns {string} recitationPageUrl
+ */
+export const getRecitationNavigationUrl = (reciterId: string, chapterId: string) =>
+  `/reciters/${reciterId}/${chapterId}`;
 
 /**
  * Get the canonical url. Will include the language in the url except for English.
