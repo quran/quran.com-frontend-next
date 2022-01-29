@@ -147,6 +147,8 @@ export const getSearchQueryNavigationUrl = (query?: string): string =>
 export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
   `/surah/${chapterIdOrSlug}/info`;
 
+export const getReciterNavigationUrl = (reciterId: string): string => `/reciters/${reciterId}`;
+
 /**
  * Get the canonical url. Will include the language in the url except for English.
  *

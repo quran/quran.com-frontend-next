@@ -1,5 +1,6 @@
 {
     "about": "Rreth Nesh",
+    "and": "dhe",
     "audio": {
         "auto-scroll": {
             "off": "Joaktiv",
@@ -15,6 +16,7 @@
             "currently-playing": "Aktualisht jeni duke luajtur",
             "delay-verse": "Vonesa mes vargjeve",
             "download": "Shkarko",
+            "full-surah": "Surja e plotë",
             "mismatch": "Klikoni në \"Start Over\" nëse dëshironi të luani {{currentReadingChapter}} në vend të kësaj",
             "next-ayah": "Ajeti tjetër",
             "pause": "Ndalo",
@@ -101,6 +103,7 @@
         "clear": "Qartë"
     },
     "juz": "Juz",
+    "language": "Gjuhe",
     "languages": "Gjuhët",
     "loading": "Po ngarkohet",
     "menu": "Menu",
@@ -151,6 +154,7 @@
     "product-updates": "Përditësimet e produktit",
     "q-reflect": "Kurani Reflekto",
     "quran-com": "Kurani.com",
+    "quran-radio": "Radio Kurani",
     "reading-preference": {
         "reading": "Leximi",
         "translation": "Përkthimi"
@@ -184,7 +188,9 @@
         "selected-reciter": "Recitues i zgjedhur",
         "selected-tafsirs": "Tefsire të zgjedhura",
         "selected-translations": "Përkthime të zgjedhura",
+        "show-tooltip-when-playing-audio": "Shfaq këshillën e veglave kur luhet audio",
         "title": "Cilësimet",
+        "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në udhëzuesin e veglave ndërsa luani ayah",
         "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
         "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
         "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"

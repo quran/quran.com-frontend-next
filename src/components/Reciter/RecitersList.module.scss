@@ -1,0 +1,12 @@
+@use "src/styles/breakpoints";
+
+.container {
+  @include breakpoints.tablet {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-small);
+  }
+  @include breakpoints.desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

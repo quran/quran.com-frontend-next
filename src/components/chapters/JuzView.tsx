@@ -41,7 +41,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
         const chapterIds = Object.keys(chapterAndVerseMappings);
         return (
           <div key={juzId} className={styles.juzContainer}>
-            <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary}>
+            <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} prefetch={false}>
               <div className={styles.juzTitle}>
                 {t('juz')} {toLocalizedNumber(juzId, lang)}
               </div>
@@ -50,7 +50,10 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
               const chapter = getChapterData(chapterId, lang);
               return (
                 <div className={styles.chapterContainer} key={chapterId}>
-                  <Link href={`/${chapterId}/${chapterAndVerseMappings[chapterId]}`}>
+                  <Link
+                    href={`/${chapterId}/${chapterAndVerseMappings[chapterId]}`}
+                    prefetch={false}
+                  >
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
                       description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}

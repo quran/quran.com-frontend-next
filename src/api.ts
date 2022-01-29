@@ -6,7 +6,7 @@ import {
   makeLanguagesUrl,
   makeAudioTimestampsUrl,
   makeChapterAudioDataUrl,
-  makeRecitersUrl,
+  makeAvailableRecitersUrl,
   makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
@@ -16,6 +16,7 @@ import {
   makePageVersesUrl,
   makeFootnoteUrl,
   makeChapterUrl,
+  makeReciterUrl,
 } from './utils/apiPaths';
 
 import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
@@ -32,6 +33,7 @@ import {
   ChapterInfoResponse,
   FootnoteResponse,
   ChapterResponse,
+  ReciterResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -82,10 +84,17 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
 /**
  * Get list of available reciters.
  *
+ * @param {string} locale  the locale.
+ *
  * @returns {Promise<RecitersResponse>}
  */
-export const getAvailableReciters = async (): Promise<RecitersResponse> =>
-  fetcher(makeRecitersUrl());
+export const getAvailableReciters = async (
+  locale: string,
+  fields?: string[],
+): Promise<RecitersResponse> => fetcher(makeAvailableRecitersUrl(locale, fields));
+
+export const getReciterData = async (reciterId: string): Promise<ReciterResponse> =>
+  fetcher(makeReciterUrl(reciterId));
 
 /**
  * Get audio file for a specific reciter and chapter.
@@ -252,3 +261,5 @@ export const getChapterIdBySlug = async (slug: string, locale: string): Promise<
     return false;
   }
 };
+
+export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;

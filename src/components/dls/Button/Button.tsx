@@ -1,10 +1,10 @@
 import React, { MouseEventHandler } from 'react';
 
 import classNames from 'classnames';
-import Link from 'next/link';
 
 import styles from './Button.module.scss';
 
+import Link from 'src/components/dls/Link/Link';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import Tooltip from 'src/components/dls/Tooltip';
 import Wrapper from 'src/components/Wrapper/Wrapper';
@@ -51,6 +51,7 @@ export type ButtonProps = {
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
   shallowRouting?: boolean;
+  prefetch?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -70,6 +71,7 @@ const Button: React.FC<ButtonProps> = ({
   hasSidePadding = true,
   shouldFlipOnRTL = true,
   shallowRouting = false,
+  prefetch = true,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -107,7 +109,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href && !disabled)
     return (
-      <Link href={href} shallow={shallowRouting}>
+      <Link href={href} prefetch={prefetch} shallow={shallowRouting}>
         <a
           {...(onClick && { onClick })}
           dir={direction}

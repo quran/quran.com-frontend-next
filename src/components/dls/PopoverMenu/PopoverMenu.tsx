@@ -53,6 +53,7 @@ type PopoverMenuItemProps = {
   shouldFlipOnRTL?: boolean;
   className?: string;
   isSelected?: boolean;
+  shouldStopPropagation?: boolean;
 };
 PopoverMenu.Item = ({
   children,
@@ -63,11 +64,13 @@ PopoverMenu.Item = ({
   shouldFlipOnRTL = false,
   className,
   isSelected,
+  shouldStopPropagation,
 }: PopoverMenuItemProps) => {
   return (
     <PrimitiveDropdownMenu.Item
       className={classNames(styles.item, className, { [styles.selected]: isSelected })}
       onClick={(e) => {
+        if (shouldStopPropagation) e.stopPropagation();
         if (!shouldCloseMenuAfterClick) {
           // PopoverMenu automatically close itself when one of item is clicked
           // this code prevent that, so it only close when user click outside of the PopoverMenu

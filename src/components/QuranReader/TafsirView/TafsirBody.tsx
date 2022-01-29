@@ -18,7 +18,7 @@ import styles from './TafsirView.module.scss';
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import VerseText from 'src/components/Verse/VerseText';
+import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -36,6 +36,7 @@ import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/nav
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import Tafsir from 'types/Tafsir';
+import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
   initialChapterId: string;
@@ -125,9 +126,12 @@ const TafsirBody = ({
   const renderTafsir = useCallback((data) => {
     if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-    const { verses, text, languageId } = data.tafsir;
+    const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
+      data.tafsir;
     const langData = getLanguageDataById(languageId);
-    const words = Object.values(verses).map(getVerseWords).flat();
+    const words = Object.values(verses)
+      .map((verse) => getVerseWords(verse))
+      .flat();
 
     if (!text) return <TafsirSkeleton />;
 
@@ -138,7 +142,7 @@ const TafsirBody = ({
           <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
         )}
         <div className={styles.verseTextContainer}>
-          <VerseText words={words} />
+          <PlainVerseText words={words} />
         </div>
         <div className={styles.separatorContainer}>
           <Separator />

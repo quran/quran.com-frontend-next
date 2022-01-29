@@ -3,7 +3,7 @@ import React from 'react';
 import HoverCard, { ContentAlign, ContentSide } from '.';
 
 export default {
-  title: 'dls/HoverCard',
+  title: 'dls/HoverCard/DefaultHoverCard',
   component: HoverCard,
   args: {
     contentSide: ContentSide.BOTTOM,

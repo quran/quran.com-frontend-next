@@ -3,7 +3,7 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common", "error"],
-    "/": ["home", "quick-links"],
+    "/": ["home", "quick-links", "radio"],
     "/[chapterId]": ["quran-reader", "chapter", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader"],
@@ -20,6 +20,9 @@
     "/tajweed-colors": ["tajweed"],
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
-    "/apps": ["apps"]
+    "/apps": ["apps"],
+    "/radio": ["home", "quick-links", "radio"],
+    "/reciters/[reciterId]": ["home", "quick-links", "radio", "reciter"],
+    "/reciters": [ "reciter", "home", "quick-links"]
   }
 }

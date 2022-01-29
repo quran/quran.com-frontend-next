@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.item {
+  &:first-child {
+    margin-inline-start: var(--flow-side-spacing);
+  }
+  & + & {
+    margin-inline-start: var(--spacing-medium);
+  }
+}

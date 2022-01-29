@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, shallowEqual, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause-outline.svg';
 import PlayIcon from '../../../public/icons/play-outline.svg';
@@ -16,8 +16,8 @@ import Button, {
   ButtonType,
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
-  selectReciter,
   playFrom,
   selectAudioDataStatus,
   exitRepeatMode,
@@ -26,17 +26,25 @@ import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlight
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterNumberFromKey } from 'src/utils/verse';
+import QueryParam from 'types/QueryParam';
 
 interface PlayVerseAudioProps {
   verseKey: string;
   timestamp: number;
+  isTranslationView?: boolean;
+  onActionTriggered?: () => void;
 }
-const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
+const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
+  verseKey,
+  timestamp,
+  isTranslationView = true,
+  onActionTriggered,
+}) => {
   const { t } = useTranslation('common');
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const { id: reciterId } = useSelector(selectReciter, shallowEqual);
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
   const audioDataStatus = useSelector(selectAudioDataStatus);
@@ -48,7 +56,8 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
   }, [audioDataStatus]);
 
   const onPlayClicked = () => {
-    logButtonClick('translation_view_play_verse');
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
     dispatch(exitRepeatMode());
     dispatch(
       playFrom({
@@ -61,11 +70,20 @@ const PlayVerseAudioButton = ({ verseKey, timestamp }: PlayVerseAudioProps) => {
     if (audioDataStatus !== AudioDataStatus.Ready) {
       setIsLoading(true);
     }
+
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   const onPauseClicked = () => {
-    logButtonClick('translation_view_pause_verse');
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_pause_verse`);
     triggerPauseAudio();
+
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   if (isLoading)

@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+import { random } from 'lodash';
 import range from 'lodash/range';
 
-import { getAllChaptersData, getChapterData } from './chapter';
+import { getAllChaptersData, getChapterData, getRandomChapterId } from './chapter';
 
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -202,12 +203,19 @@ export const makeWordLocation = (verseKey: string, wordPosition: number): string
  * the BE response of each word to add custom fields.
  *
  * @param {Verse} verse
+ * @param {boolean} isReadingView
  * @returns {Word[]}
  */
-export const getVerseWords = (verse: Verse): Word[] => {
+export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
   const words = [];
   verse.words.forEach((word) => {
-    words.push({ ...word, hizbNumber: verse.hizbNumber });
+    const wordVerse = { ...verse };
+    delete wordVerse.words;
+    words.push({
+      ...word,
+      hizbNumber: verse.hizbNumber,
+      ...(isReadingView && { verse: wordVerse }),
+    });
   });
   return words;
 };
@@ -340,4 +348,15 @@ export const shortenVerseText = (text: string, length = 150): string => {
 export const getFirstAndLastVerseKeys = (verses: Verse[]) => {
   const verseKeys = Object.keys(verses).sort(sortByVerseKey);
   return [verseKeys[0], verseKeys[verseKeys.length - 1]];
+};
+
+const getRandomVerseNumber = async (chapterId: string) => {
+  const chapterData = await getChapterData(chapterId);
+  return random(1, chapterData.versesCount);
+};
+
+export const getRandomVerseKey = async () => {
+  const chapterId = getRandomChapterId();
+  const verseNumber = await getRandomVerseNumber(chapterId.toString());
+  return makeVerseKey(Number(chapterId), Number(verseNumber));
 };

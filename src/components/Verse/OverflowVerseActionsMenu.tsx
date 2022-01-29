@@ -23,9 +23,19 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 
 interface Props {
   verse: Verse;
+  isModal?: boolean;
+  isPortalled?: boolean;
+  isTranslationView?: boolean;
+  onActionTriggered?: () => void;
 }
 
-const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
+const OverflowVerseActionsMenu: React.FC<Props> = ({
+  verse,
+  isModal = false,
+  isPortalled = false,
+  isTranslationView = true,
+  onActionTriggered,
+}) => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
@@ -43,13 +53,22 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({ verse }) => {
             </span>
           </Button>
         }
-        isModal={false}
-        isPortalled
+        isModal={isModal}
+        isPortalled={isPortalled}
         onOpenChange={(open: boolean) => {
-          logEvent(`verse_actions_menu_${open ? 'open' : 'close'}`);
+          logEvent(
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+              open ? 'open' : 'close'
+            }`,
+          );
         }}
       >
-        <OverflowVerseActionsMenuBody verse={verse} />
+        <OverflowVerseActionsMenuBody
+          verse={verse}
+          isPortalled={isPortalled}
+          isTranslationView={isTranslationView}
+          onActionTriggered={onActionTriggered}
+        />
       </PopoverMenu>
     </div>
   );

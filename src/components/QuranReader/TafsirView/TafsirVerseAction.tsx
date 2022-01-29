@@ -20,9 +20,14 @@ const ContentModal = dynamic(() => import('src/components/dls/ContentModal/Conte
 type TafsirVerseActionProps = {
   verseNumber: number;
   chapterId: number;
+  isTranslationView: boolean;
 };
 
-const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) => {
+const TafsirVerseAction = ({
+  chapterId,
+  verseNumber,
+  isTranslationView,
+}: TafsirVerseActionProps) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
@@ -34,7 +39,9 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
       <PopoverMenu.Item
         icon={<TafsirIcon />}
         onClick={() => {
-          logButtonClick('verse_actions_menu_tafsir');
+          logButtonClick(
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,
+          );
           setIsContentModalOpen(true);
         }}
       >
@@ -55,7 +62,9 @@ const TafsirVerseAction = ({ chapterId, verseNumber }: TafsirVerseActionProps) =
                 isOpen={isContentModalOpen}
                 hasCloseButton
                 onClose={() => {
-                  logEvent('tafsir_modal_close');
+                  logEvent(
+                    `${isTranslationView ? 'translation_view' : 'reading_view'}_tafsir_modal_close`,
+                  );
                   setIsContentModalOpen(false);
                 }}
                 header={surahAndAyahSelection}

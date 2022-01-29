@@ -9,10 +9,10 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import IconClose from '../../../../public/icons/close.svg';
 
 import styles from './SidebarNavigation.module.scss';
+import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
-import Spinner from 'src/components/dls/Spinner/Spinner';
 import Switch from 'src/components/dls/Switch/Switch';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
@@ -25,20 +25,14 @@ import {
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
 
-const Loading = () => (
-  <div className={styles.loadingContainer}>
-    <Spinner />
-  </div>
-);
-
 const PageSelection = dynamic(() => import('./PageSelection'), {
-  loading: Loading,
+  loading: SidebarSelectionSkeleton,
 });
 const SurahSelection = dynamic(() => import('./SurahSelection'), {
-  loading: Loading,
+  loading: SidebarSelectionSkeleton,
 });
 const JuzSelection = dynamic(() => import('./JuzSelection'), {
-  loading: Loading,
+  loading: SidebarSelectionSkeleton,
 });
 
 const SidebarNavigation = () => {

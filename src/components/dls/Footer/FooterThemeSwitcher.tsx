@@ -28,7 +28,7 @@ const FooterThemeSwitcher = () => {
         <Button
           className={styles.triggerContainer}
           prefix={<span className={styles.iconContainer}>{themeIcons[theme.type]}</span>}
-          tooltip={t('languages')}
+          tooltip={t('theme')}
           variant={ButtonVariant.Ghost}
           suffix={
             <span className={styles.suffixIconContainer}>

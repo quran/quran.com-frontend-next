@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import random from 'lodash/random';
 
 import { getChapterAudioData } from 'src/api';
 import {
@@ -19,6 +20,7 @@ import Reciter from 'types/Reciter';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
 export const selectReciter = (state: RootState) => state.audioPlayerState.reciter;
+export const selectReciterId = (state: RootState) => state.audioPlayerState.reciter.id;
 export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.isUsingDefaultReciter;
 export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
@@ -44,6 +46,7 @@ export const selectRemainingRangeRepeatCount = (state: RootState) => {
 };
 export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>
   state.audioPlayerState.showTooltipWhenPlayingAudio;
+export const selectIsRadioMode = (state: RootState) => state.audioPlayerState.isRadioMode;
 
 /**
  * get the audio file for the current reciter
@@ -53,26 +56,22 @@ export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>
  * @param {number} chapter the chapter id
  *
  */
-export const loadAndPlayAudioData = createAsyncThunk<void, number, { state: RootState }>(
-  'audioPlayerState/loadAndPlayAudioData',
-  async (chapter, thunkAPI) => {
-    // play directly the audio file for this chapter is already loaded.
-    const currentAudioData = selectAudioData(thunkAPI.getState());
-    if (currentAudioData && currentAudioData.chapterId === chapter) {
-      triggerPlayAudio();
-      return;
-    }
-
-    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
-
-    const reciter = selectReciter(thunkAPI.getState());
-    const audioData = await getChapterAudioData(reciter.id, chapter);
-
-    thunkAPI.dispatch(setAudioData(audioData));
-
+export const loadAndPlayAudioData = createAsyncThunk<
+  void,
+  { chapter: number; reciterId: number },
+  { state: RootState }
+>('audioPlayerState/loadAndPlayAudioData', async ({ chapter, reciterId }, thunkAPI) => {
+  // play directly the audio file for this chapter is already loaded.
+  const currentAudioData = selectAudioData(thunkAPI.getState());
+  if (currentAudioData && currentAudioData.chapterId === chapter) {
     triggerPlayAudio();
-  },
-);
+    return;
+  }
+  thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
+  const audioData = await getChapterAudioData(reciterId, chapter);
+  thunkAPI.dispatch(setAudioData(audioData));
+  triggerPlayAudio();
+});
 
 /**
  * 1) pause the audio player
@@ -107,18 +106,45 @@ interface PlayFromInput {
   chapterId: number;
   reciterId: number;
   timestamp?: number;
+  shouldStartFromRandomTimestamp?: boolean;
+  isRadioMode?: boolean;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
   'audioPlayerState/playFrom',
-  async ({ verseKey, chapterId, reciterId, timestamp }, thunkApi) => {
+  async (
+    {
+      verseKey,
+      chapterId,
+      reciterId,
+      timestamp,
+      shouldStartFromRandomTimestamp,
+      isRadioMode = false,
+    },
+    thunkApi,
+  ) => {
+    thunkApi.dispatch(setIsRadioMode(isRadioMode));
+    if (isRadioMode) {
+      thunkApi.dispatch(exitRepeatMode());
+    }
+
     const state = thunkApi.getState();
-    const reciter = selectReciter(state);
-    let audioData = selectAudioData(state);
-    if (!audioData || audioData.chapterId !== chapterId || reciter.id !== reciterId) {
+    const selectedReciter = selectReciter(state);
+    let selectedAudioData = selectAudioData(state);
+    if (
+      !selectedAudioData ||
+      selectedAudioData.chapterId !== chapterId ||
+      selectedReciter.id !== reciterId
+    ) {
       thunkApi.dispatch(setAudioStatus(AudioDataStatus.Loading));
-      audioData = await getChapterAudioData(reciter.id, chapterId);
-      thunkApi.dispatch(setAudioData(audioData));
+      selectedAudioData = await getChapterAudioData(reciterId, chapterId);
+      thunkApi.dispatch(setAudioData(selectedAudioData));
       window.audioPlayerEl.load(); // load the audio file, it's not preloaded on safari mobile https://stackoverflow.com/questions/49792768/js-html5-audio-why-is-canplaythrough-not-fired-on-ios-safari
+    }
+
+    if (shouldStartFromRandomTimestamp) {
+      const randomTimestamp = random(0, selectedAudioData.duration);
+      playFromTimestamp(randomTimestamp / 1000);
+      return;
     }
 
     // if `timestamp` is not provided, we need to get the timestamp data for the verseKey by fetching it from the API
@@ -216,6 +242,10 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       showTooltipWhenPlayingAudio: action.payload,
     }),
+    setIsRadioMode: (state, action: PayloadAction<boolean>) => ({
+      ...state,
+      isRadioMode: action.payload,
+    }),
   },
   // reset reciter to the default based on the locale
   // WHEN `reset` action is dispatched
@@ -244,6 +274,7 @@ export const {
   resetRepeatEachVerseProgress,
   setPlaybackRate,
   setShowTooltipWhenPlayingAudio,
+  setIsRadioMode,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

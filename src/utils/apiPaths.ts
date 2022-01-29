@@ -13,7 +13,7 @@ import { QuranFont } from 'types/QuranReader';
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
   translationFields: 'resource_name,language_id', // needed to show the name of the translation
-  limit: ITEMS_PER_PAGE,
+  perPage: ITEMS_PER_PAGE,
   fields: `${QuranFont.Uthmani},chapter_id,hizb_number,text_imlaei_simple`, // we need text_uthmani field when copying the verse. text_imlaei_simple is for SEO description meta tag. Also the chapter_id for when we want to share the verse or navigate to Tafsir, hizb_number is for when we show the context menu.
 };
 
@@ -68,12 +68,31 @@ export const makeLanguagesUrl = (language: string): string =>
 /**
  * Compose the url for reciters API.
  *
+ * @param {string} locale the user's language code.
  * @returns {string}
  */
-export const makeRecitersUrl = (): string => makeUrl('/audio/reciters');
+export const makeAvailableRecitersUrl = (locale: string, fields?: string[]): string =>
+  makeUrl('/audio/reciters', { locale, fields });
 
-export const makeChapterAudioDataUrl = (reciterId: number, chapter: number, segments: boolean) =>
-  makeUrl(`/audio/reciters/${reciterId}`, { chapter, segments });
+export const makeReciterUrl = (reciterId: string): string =>
+  makeUrl(`/audio/reciters/${reciterId}`, {
+    fields: ['profile_picture', 'cover_image', 'bio'],
+  });
+
+/**
+ * Compose the url of the audio file of a surah.
+ *
+ * @param {number} reciterId id of reciter
+ * @param {number} chapter the surah number.
+ * @param {boolean} segments include segments info
+ *
+ * @returns {string}
+ */
+export const makeChapterAudioDataUrl = (
+  reciterId: number,
+  chapter: number,
+  segments: boolean,
+): string => makeUrl(`/audio/reciters/${reciterId}/audio_files`, { chapter, segments });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
   makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);
@@ -86,7 +105,10 @@ export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
  * @returns {string}
  */
 export const makeTranslationsInfoUrl = (locale: string, translations: number[]): string =>
-  makeUrl('/resources/translations/filter', { locale, translations: translations.join(',') });
+  makeUrl('/resources/translations/filter', {
+    locale,
+    translations: translations.join(', '),
+  });
 
 /**
  * Compose the url for the advanced copy API.

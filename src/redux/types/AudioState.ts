@@ -18,6 +18,7 @@ type AudioState = {
   playbackRate: number;
   isUsingDefaultReciter: boolean;
   showTooltipWhenPlayingAudio: boolean;
+  isRadioMode: boolean;
 };
 
 export default AudioState;

@@ -1,0 +1,25 @@
+{
+    "change": "Değişiklik",
+    "curated-station": {
+        "juz-amma": {
+            "description": "Kuran'ın son Cüz'ünü dinleyin",
+            "title": "Cüz Amma"
+        },
+        "popular-recitations": {
+            "description": "Günlük küratörlü anlatım beslemesi",
+            "title": "Popüler Anlatımlar"
+        },
+        "surah-al-kahf": {
+            "description": "Alkahf Suresini tekrar tekrar dinleyin",
+            "title": "Kehf Suresi"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "Okurlardan oluşan bir küratörlüğünden Sureler",
+            "title": "Yasin, Al-Waqiah, Al-Mülk"
+        }
+    },
+    "curated-stations": "Küratörlü İstasyonlar",
+    "pause-radio": "Radyoyu Duraklat",
+    "play-radio": "Radyo Çal",
+    "reciter-stations": "Okuyucu İstasyonları"
+}

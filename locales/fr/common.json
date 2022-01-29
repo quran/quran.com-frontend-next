@@ -1,5 +1,6 @@
 {
     "about": "À propos de nous",
+    "and": "et",
     "audio": {
         "auto-scroll": {
             "off": "Désactivé",
@@ -15,6 +16,7 @@
             "currently-playing": "Vous jouez actuellement",
             "delay-verse": "Délai entre le verset",
             "download": "Télécharger",
+            "full-surah": "Sourate complète",
             "mismatch": "Cliquez sur « Recommencer » si vous souhaitez plutôt {{currentReadingChapter}}",
             "next-ayah": "Suivant Ayah",
             "pause": "Pause",
@@ -101,6 +103,7 @@
         "clear": "Dégager"
     },
     "juz": "Juz",
+    "language": "Langue",
     "languages": "Langues",
     "loading": "Chargement",
     "menu": "Menu",
@@ -151,6 +154,7 @@
     "product-updates": "Mises à jour du produit",
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
+    "quran-radio": "Radio Coran",
     "reading-preference": {
         "reading": "En train de lire",
         "translation": "Traduction"
@@ -184,7 +188,9 @@
         "selected-reciter": "Réciteur sélectionné",
         "selected-tafsirs": "Tafsirs sélectionnés",
         "selected-translations": "Traductions sélectionnées",
+        "show-tooltip-when-playing-audio": "Afficher l'info-bulle lors de la lecture audio",
         "title": "Paramètres",
+        "tooltip-playing-audio-helper": "Afficher la traduction des mots dans l'info-bulle pendant la lecture d'ayah",
         "value-and-others": "{{value}} , et {{othersCount}} autres",
         "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
         "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"

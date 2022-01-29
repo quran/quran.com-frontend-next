@@ -1,296 +1,149 @@
 {
-  "id": 12,
-  "verseNumber": 5,
-  "verseKey": "2: 5",
-  "juzNumber": 1,
-  "hizbNumber": 1,
-  "rubNumber": 1,
-  "sajdahType": null,
-  "sajdahNumber": null,
-  "textUthmani": "أُو۟لَـٰٓئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
-  "chapterId": 2,
-  "pageNumber": 2,
-  "verseIndex": 5,
-  "words": [
-    {
-      "id": 5544,
-      "position": 1,
-      "audioUrl": "wbw/002_005_001.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 1",
-      "codeV1": "ﭳ",
-      "codeV2": "ﱣ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": "أُوْلَٰٓئِكَ",
-      "text": "أُوْلَٰٓئِكَ",
-      "textImage": "w/rq-color/2/5/1.png",
-      "translation": {
-        "text": "Those",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "ulāika",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5545,
-      "position": 2,
-      "audioUrl": "wbw/002_005_002.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 2",
-      "codeV1": "ﭴ",
-      "codeV2": "ﱤ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": "عَلَىٰ",
-      "text": "عَلَىٰ",
-      "textImage": "w/rq-color/2/5/2.png",
-      "translation": {
-        "text": "(are) on",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "ʿalā",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5546,
-      "position": 3,
-      "audioUrl": "wbw/002_005_003.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 3",
-      "codeV1": "ﭵ",
-      "codeV2": "ﱥ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": "هُدٗى",
-      "text": "هُدٗى",
-      "textImage": "w/rq-color/2/5/3.png",
-      "translation": {
-        "text": "Guidance",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "hudan",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5547,
-      "position": 4,
-      "audioUrl": "wbw/002_005_004.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 4",
-      "codeV1": "ﭶ",
-      "codeV2": "ﱦ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": "مِّن",
-      "text": "مِّن",
-      "textImage": "w/rq-color/2/5/4.png",
-      "translation": {
-        "text": "from",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "min",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5548,
-      "position": 5,
-      "audioUrl": "wbw/002_005_005.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 5",
-      "codeV1": "ﭷ",
-      "codeV2": "ﱧ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": "رَّبِّهِمۡۖ",
-      "text": "رَّبِّهِمۡۖ",
-      "textImage": "w/rq-color/2/5/5.png",
-      "translation": {
-        "text": "their Lord",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "rabbihim",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5550,
-      "position": 6,
-      "audioUrl": "wbw/002_005_007.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 6",
-      "codeV1": "ﭹ",
-      "codeV2": "ﱩ",
-      "pageNumber": 2,
-      "lineNumber": 7,
-      "qpcUthmaniHafs": "وَأُوْلَٰٓئِكَ",
-      "text": "وَأُوْلَٰٓئِكَ",
-      "textImage": "w/rq-color/2/5/6.png",
-      "translation": {
-        "text": "and those ",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "wa-ulāika",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5551,
-      "position": 7,
-      "audioUrl": "wbw/002_005_008.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 7",
-      "codeV1": "ﭺ",
-      "codeV2": "ﱪ",
-      "pageNumber": 2,
-      "lineNumber": 8,
-      "qpcUthmaniHafs": "هُمُ",
-      "text": "هُمُ",
-      "textImage": "w/rq-color/2/5/7.png",
-      "translation": {
-        "text": "they",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "humu",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5552,
-      "position": 8,
-      "audioUrl": "wbw/002_005_009.mp3",
-      "charTypeName": "word",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 8",
-      "codeV1": "ﭻ",
-      "codeV2": "ﱫ",
-      "pageNumber": 2,
-      "lineNumber": 8,
-      "qpcUthmaniHafs": "ٱلۡمُفۡلِحُونَ",
-      "text": "ٱلۡمُفۡلِحُونَ",
-      "textImage": "w/rq-color/2/5/8.png",
-      "translation": {
-        "text": "(are) the successful ones",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": "l-muf'liḥūna",
-        "languageName": "english"
-      }
-    },
-    {
-      "id": 5553,
-      "position": 9,
-      "audioUrl": null,
-      "charTypeName": "end",
-      "verseKey": "2: 5",
-      "verseId": 12,
-      "location": "2: 5: 10",
-      "codeV1": "ﭼ",
-      "codeV2": "ﱬ",
-      "pageNumber": 2,
-      "lineNumber": 8,
-      "qpcUthmaniHafs": "٥",
-      "text": "٥",
-      "textImage": "w/common/5.png",
-      "translation": {
-        "text": "Ayah 5",
-        "languageName": "english"
-      },
-      "transliteration": {
-        "text": null,
-        "languageName": "english"
-      }
-    }
-  ],
-  "timestamps": {
+    "id": 12,
+    "verseNumber": 5,
     "verseKey": "2:5",
-    "timestampFrom": 48564,
-    "timestampTo": 61064,
-    "duration": 13000,
-    "segments": [
-      [
-        0,
-        48564,
-        50884
-      ],
-      [
-        1,
-        50894,
-        51344
-      ],
-      [
-        2,
-        51354,
-        51844
-      ],
-      [
-        3,
-        51854,
-        52634
-      ],
-      [
-        4,
-        52644,
-        54494
-      ],
-      [
-        5,
-        54504,
-        57364
-      ],
-      [
-        6,
-        57374,
-        57754
-      ],
-      [
-        7,
-        57764,
-        60364
-      ]
+    "juzNumber": 1,
+    "hizbNumber": 1,
+    "rubNumber": 1,
+    "textUthmani": "أُو۟لَـٰٓئِكَ عَلَىٰ هُدًى مِّن رَّبِّهِمْ ۖ وَأُو۟لَـٰٓئِكَ هُمُ ٱلْمُفْلِحُونَ",
+    "chapterId": 2,
+    "pageNumber": 2,
+    "verseIndex": 5,
+    "words": [
+        {
+            "id": 5544,
+            "position": 1,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:1",
+            "codeV1": "ﭳ",
+            "codeV2": "ﱣ",
+            "pageNumber": 2,
+            "lineNumber": 7,
+            "qpcUthmaniHafs": "أُوْلَٰٓئِكَ",
+            "text": "أُوْلَٰٓئِكَ",
+            "textImage": "w/rq-color/2/5/1.png"
+        },
+        {
+            "id": 5545,
+            "position": 2,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:2",
+            "codeV1": "ﭴ",
+            "codeV2": "ﱤ",
+            "pageNumber": 2,
+            "lineNumber": 7,
+            "qpcUthmaniHafs": "عَلَىٰ",
+            "text": "عَلَىٰ",
+            "textImage": "w/rq-color/2/5/2.png"
+        },
+        {
+            "id": 5546,
+            "position": 3,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:3",
+            "codeV1": "ﭵ",
+            "codeV2": "ﱥ",
+            "pageNumber": 2,
+            "lineNumber": 7,
+            "qpcUthmaniHafs": "هُدٗى",
+            "text": "هُدٗى",
+            "textImage": "w/rq-color/2/5/3.png"
+        },
+        {
+            "id": 5547,
+            "position": 4,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:4",
+            "codeV1": "ﭶ",
+            "codeV2": "ﱦ",
+            "pageNumber": 2,
+            "lineNumber": 7,
+            "qpcUthmaniHafs": "مِّن",
+            "text": "مِّن",
+            "textImage": "w/rq-color/2/5/4.png"
+        },
+        {
+            "id": 5548,
+            "position": 5,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:5",
+            "codeV1": "ﭷ",
+            "codeV2": "ﱧ",
+            "pageNumber": 2,
+            "lineNumber": 7,
+            "qpcUthmaniHafs": "رَّبِّهِمۡۖ",
+            "text": "رَّبِّهِمۡۖ",
+            "textImage": "w/rq-color/2/5/5.png"
+        },
+        {
+            "id": 5550,
+            "position": 6,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:6",
+            "codeV1": "ﭹ",
+            "codeV2": "ﱩ",
+            "pageNumber": 2,
+            "lineNumber": 7,
+            "qpcUthmaniHafs": "وَأُوْلَٰٓئِكَ",
+            "text": "وَأُوْلَٰٓئِكَ",
+            "textImage": "w/rq-color/2/5/6.png"
+        },
+        {
+            "id": 5551,
+            "position": 7,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:7",
+            "codeV1": "ﭺ",
+            "codeV2": "ﱪ",
+            "pageNumber": 2,
+            "lineNumber": 8,
+            "qpcUthmaniHafs": "هُمُ",
+            "text": "هُمُ",
+            "textImage": "w/rq-color/2/5/7.png"
+        },
+        {
+            "id": 5552,
+            "position": 8,
+            "charTypeName": "word",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:8",
+            "codeV1": "ﭻ",
+            "codeV2": "ﱫ",
+            "pageNumber": 2,
+            "lineNumber": 8,
+            "qpcUthmaniHafs": "ٱلۡمُفۡلِحُونَ",
+            "text": "ٱلۡمُفۡلِحُونَ",
+            "textImage": "w/rq-color/2/5/8.png"
+        },
+        {
+            "id": 5553,
+            "position": 9,
+            "charTypeName": "end",
+            "verseKey": "2:5",
+            "verseId": 12,
+            "location": "2:5:10",
+            "codeV1": "ﭼ",
+            "codeV2": "ﱬ",
+            "pageNumber": 2,
+            "lineNumber": 8,
+            "qpcUthmaniHafs": "٥",
+            "text": "٥",
+            "textImage": "w/common/5.png"
+        }
     ]
-  },
-  "translations": [
-    {
-      "id": 903969,
-      "resourceId": 131,
-      "text": "It is they who are ˹truly˺ guided by their Lord, and it is they who will be successful.",
-      "resourceName": "Dr. Mustafa Khattab, the Clear Quran",
-      "languageName": "english"
-    },
-    {
-      "id": 97997,
-      "resourceId": 20,
-      "text": "Those are upon [right] guidance from their Lord, and it is those who are the successful.",
-      "resourceName": "Saheeh International",
-      "languageName": "english"
-    }
-  ]
 }

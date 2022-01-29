@@ -1,6 +1,6 @@
 import React, { MutableRefObject } from 'react';
 
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import AudioKeyBoardListeners from '../AudioKeyboardListeners';
 import AudioPlayerSlider from '../AudioPlayerSlider';
@@ -9,11 +9,14 @@ import { togglePlaying, triggerPauseAudio, triggerPlayAudio, triggerSeek } from 
 import MediaSessionApiListeners from '../MediaSessionApiListeners';
 import PlaybackControls from '../PlaybackControls';
 import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
+import RadioPlaybackControl from '../RadioPlaybackControl';
 
 import styles from './AudioPlayerBody.module.scss';
 
-import { selectReciter } from 'src/redux/slices/AudioPlayer/state';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import { selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
 import AudioData from 'types/AudioData';
+import QueryParam from 'types/QueryParam';
 
 interface Props {
   audioPlayerElRef: MutableRefObject<HTMLAudioElement>;
@@ -26,7 +29,11 @@ const AudioPlayerBody: React.FC<Props> = ({
   isMobileMinimizedForScrolling,
   audioData,
 }) => {
-  const { id: reciterId } = useSelector(selectReciter, shallowEqual);
+  const isRadioMode = useSelector(selectIsRadioMode);
+  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+  const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
+  const isAudioRepeatManagerEnabled = !isRadioMode && reciterId && audioData?.chapterId;
+
   return (
     <>
       <div className={styles.innerContainer}>
@@ -37,14 +44,14 @@ const AudioPlayerBody: React.FC<Props> = ({
           togglePlaying={() => togglePlaying()}
           isAudioPlayerHidden={false}
         />
-        {reciterId && audioData?.chapterId && (
+        {isQuranReaderHighlightDispatcherEnabled && (
           <QuranReaderHighlightDispatcher
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
             chapterId={audioData?.chapterId}
           />
         )}
-        {reciterId && audioData?.chapterId && (
+        {isAudioRepeatManagerEnabled && (
           <AudioRepeatManager
             audioPlayerElRef={audioPlayerElRef}
             reciterId={reciterId}
@@ -60,14 +67,16 @@ const AudioPlayerBody: React.FC<Props> = ({
           playNextTrack={null}
           playPreviousTrack={null}
         />
-        <div className={styles.sliderContainer}>
-          <AudioPlayerSlider
-            audioPlayerElRef={audioPlayerElRef}
-            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-          />
-        </div>
+        {!isRadioMode && (
+          <div className={styles.sliderContainer}>
+            <AudioPlayerSlider
+              audioPlayerElRef={audioPlayerElRef}
+              isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
+            />
+          </div>
+        )}
       </div>
-      <PlaybackControls />
+      {isRadioMode ? <RadioPlaybackControl /> : <PlaybackControls />}
     </>
   );
 };

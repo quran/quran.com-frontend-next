@@ -1,0 +1,26 @@
+@use "src/styles/theme";
+
+$black: #000;
+$white: #fff;
+
+.content {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  @include theme.light {
+    background-color: $black;
+  }
+  @include theme.dark {
+    background-color: $white;
+  }
+  & > span {
+    // the tip color
+    @include theme.light {
+      fill: $black;
+    }
+    @include theme.dark {
+      fill: $white;
+    }
+  }
+}

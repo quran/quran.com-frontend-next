@@ -3,6 +3,9 @@ interface Reciter {
   name: string;
   recitationStyle: string;
   relativePath: string;
+  profilePicture?: string;
+  coverImage?: string;
+  bio?: string;
   qirat?: {
     languageName: string;
     name: string;

@@ -1,5 +1,6 @@
 {
     "about": "Hakkımızda",
+    "and": "ve",
     "audio": {
         "auto-scroll": {
             "off": "Kapalı",
@@ -15,6 +16,7 @@
             "currently-playing": "şu anda oynuyorsun",
             "delay-verse": "Ayet arası gecikme",
             "download": "İndirmek",
+            "full-surah": "tam sure",
             "mismatch": "Bunun yerine {{currentReadingChapter}} oynamak istiyorsanız \"Baştan Başla\"yı tıklayın.",
             "next-ayah": "Sonraki Ayah",
             "pause": "Duraklat",
@@ -101,6 +103,7 @@
         "clear": "Açık"
     },
     "juz": "cüz",
+    "language": "Dilim",
     "languages": "Diller",
     "loading": "Yükleniyor",
     "menu": "Menü",
@@ -151,6 +154,7 @@
     "product-updates": "Ürün güncellemeleri",
     "q-reflect": "KuranYansıtmak",
     "quran-com": "Kuran.com",
+    "quran-radio": "Kuran Radyo",
     "reading-preference": {
         "reading": "Okuma",
         "translation": "Tercüme"
@@ -184,7 +188,9 @@
         "selected-reciter": "Seçilmiş Okur",
         "selected-tafsirs": "Seçilmiş Tefsirler",
         "selected-translations": "Seçilmiş Çeviriler",
+        "show-tooltip-when-playing-audio": "Ses çalarken araç ipucunu göster",
         "title": "Ayarlar",
+        "tooltip-playing-audio-helper": "Ayah oynarken kelime çevirisini araç ipucunda göster",
         "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
         "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
         "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"

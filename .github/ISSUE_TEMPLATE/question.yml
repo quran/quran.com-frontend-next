@@ -1,0 +1,24 @@
+name: Question
+description: Anything else we need to discuss.
+title: "[question]: "
+labels: [question]
+body:
+- type: markdown
+  attributes:
+    value: |
+      ### Generally, file an issue and expect a response from a maintainer when...
+        - You've found a bug with clear reproduction steps.
+        - You have an idea for new functionality you'd like to share for discussion.
+        - You've thoroughly searched previous issues for related problems and haven't found anything.
+      ### Avoid filing an issue and/or don't expect a response from a maintainer when...
+        - You're wondering how stuff works.
+        - You'd like help fitting the project into your specific workflow.
+        - Any other questions that wouldn't require changes to the project or be uniquely answered by project maintainers.
+      This second set of questions is better handled by community discussions (which maintainers also participate in 😃).  
+      Thank you for respecting the time of everyone involved in keeping this project going!
+- type: textarea
+  attributes:
+    label: Summary
+    description: A clear and concise description of issue
+  validations:
+    required: true

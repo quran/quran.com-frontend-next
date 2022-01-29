@@ -5,7 +5,7 @@
 $quran-reader-padding: 3rem;
 
 .infiniteScroll {
-  @include utility.container;
+  @include utility.quranContainer;
   width: 95%;
   margin-block-start: 0;
   margin-block-end: 0;
