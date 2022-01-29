@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -7,6 +7,7 @@ import ReadingViewWordActionsMenu from '../WordActionsMenu';
 import styles from './WordPopover.module.scss';
 
 import Popover, { ContentSide } from 'src/components/dls/Popover';
+import useLongPress from 'src/hooks/useLongPress';
 import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
@@ -32,6 +33,10 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
     [dispatch, word.verseKey],
   );
 
+  const onLongPress = useCallback(() => {
+    onOpenChange(true);
+  }, [onOpenChange]);
+  const [onStart, onEnd] = useLongPress(onLongPress, 1000);
   const onHoverChange = (isHovering: boolean) => {
     dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
   };
@@ -52,6 +57,8 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
           onMouseLeave={() => {
             onHoverChange(false);
           }}
+          onTouchStart={onStart}
+          onTouchEnd={onEnd}
         >
           {children}
         </div>
@@ -62,6 +69,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       contentStyles={styles.content}
       open={isTooltipOpened}
       onOpenChange={onOpenChange}
+      triggerStyles={styles.trigger}
     >
       <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />
     </Popover>
