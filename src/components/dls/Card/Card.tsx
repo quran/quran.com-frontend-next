@@ -19,19 +19,9 @@ type CardProps = {
   imgSrc?: string;
   imgAlt?: string;
   actionIcon?: ReactNode;
-  imgClassName?: string;
 };
 
-const Card = ({
-  size,
-  title,
-  description,
-  onImgClick,
-  imgSrc,
-  actionIcon,
-  imgAlt,
-  imgClassName,
-}: CardProps) => {
+const Card = ({ size, title, description, onImgClick, imgSrc, actionIcon, imgAlt }: CardProps) => {
   return (
     <div
       className={classNames(styles.container, {
@@ -40,7 +30,7 @@ const Card = ({
       })}
     >
       <div
-        className={classNames(styles.imageContainer, imgClassName)}
+        className={classNames(styles.imageContainer)}
         role="button"
         tabIndex={0}
         onKeyPress={onImgClick}
