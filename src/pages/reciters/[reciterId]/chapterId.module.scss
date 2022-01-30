@@ -13,6 +13,8 @@
   border-radius: var(--border-radius-circle);
   margin-block-end: var(--spacing-medium);
   margin-inline: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .actionsContainer {
