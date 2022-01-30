@@ -30,7 +30,7 @@ const Card = ({ size, title, description, onImgClick, imgSrc, actionIcon, imgAlt
       })}
     >
       <div
-        className={styles.imageContainer}
+        className={classNames(styles.imageContainer)}
         role="button"
         tabIndex={0}
         onKeyPress={onImgClick}

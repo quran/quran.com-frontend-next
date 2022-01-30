@@ -1,9 +1,31 @@
+@use "src/styles/theme";
+
 .title {
   padding-block-start: var(--spacing-mega);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-semibold);
+  position: relative;
+}
+
+$ribbon-text-color: #fff;
+.titleOnRibbon {
+  color: $ribbon-text-color;
 }
 
 .footerContainer {
   margin-block-start: calc(3 * var(--spacing-mega));
+}
+
+.ribbon {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: calc(20 * var(--spacing-medium));
+  width: 100%;
+  @include theme.light {
+    background-color: var(--color-success-medium);
+  }
+  @include theme.dark {
+    background-color: var(--color-background-elevated);
+  }
 }
