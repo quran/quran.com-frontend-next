@@ -22,7 +22,7 @@ const Radio = () => {
       />
       <div className={radioStyle.ribbon} />
       <div className={pageStyle.flow}>
-        <div className={classNames(pageStyle.flowItem, radioStyle.title)}>
+        <div className={classNames(pageStyle.flowItem, radioStyle.title, radioStyle.titleOnRibbon)}>
           {t('radio:curated-stations')}
         </div>
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>

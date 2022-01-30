@@ -1,12 +1,15 @@
 @use "src/styles/theme";
 
-$title-text-color: #fff;
 .title {
   padding-block-start: var(--spacing-mega);
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-semibold);
   position: relative;
-  color: $title-text-color;
+}
+
+$ribbon-text-color: #fff;
+.titleOnRibbon {
+  color: $ribbon-text-color;
 }
 
 .footerContainer {
