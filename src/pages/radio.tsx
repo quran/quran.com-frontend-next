@@ -20,6 +20,7 @@ const Radio = () => {
         url={getCanonicalUrl(lang, '')}
         languageAlternates={getLanguageAlternates('')}
       />
+      <div className={radioStyle.ribbon} />
       <div className={pageStyle.flow}>
         <div className={classNames(pageStyle.flowItem, radioStyle.title)}>
           {t('radio:curated-stations')}

@@ -74,6 +74,7 @@ const ReciterStationList = () => {
               return (
                 <Card
                   actionIcon={actionIcon}
+                  imgClassName={styles.imgClassName}
                   imgSrc={getImageCDNPath(reciter.profilePicture)}
                   key={reciter.id}
                   onImgClick={onClick}
