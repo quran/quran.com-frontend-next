@@ -1,16 +1,25 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-
 import { fetcher } from 'src/api';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
-import { VersesResponse } from 'types/ApiResponses';
+import {
+  makeJuzVersesUrl,
+  makePageVersesUrl,
+  makeVersesUrl,
+  makePagesLookupUrl,
+} from 'src/utils/apiPaths';
+import { PagesLookUpRequest } from 'types/ApiRequests';
+import { PagesLookUpResponse, VersesResponse } from 'types/ApiResponses';
+import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
+export const DEFAULT_ITEMS_PER_PAGE = 10;
+
 interface RequestKeyInput {
   quranReaderDataType: QuranReaderDataType;
-  index: number;
+  pageNumber: number;
   initialData: VersesResponse;
   quranReaderStyles: QuranReaderStyles;
   selectedTranslations: number[];
@@ -21,6 +30,16 @@ interface RequestKeyInput {
   locale: string;
   wordByWordLocale: string;
 }
+
+interface ReadingViewRequestKeyInput {
+  pageNumber: number;
+  quranReaderStyles: QuranReaderStyles;
+  reciter: number;
+  locale: string;
+  wordByWordLocale: string;
+  pageVersesRange?: LookupRecord;
+}
+
 /**
  * Generate the request key (the API url based on the params)
  * which will be used by useSwr to determine whether to call BE
@@ -32,7 +51,7 @@ export const getRequestKey = ({
   id,
   isVerseData,
   initialData,
-  index,
+  pageNumber,
   quranReaderStyles,
   quranReaderDataType,
   selectedTranslations,
@@ -41,13 +60,13 @@ export const getRequestKey = ({
   wordByWordLocale,
 }: RequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
-  const page = isVerseData ? initialData.verses[0].verseNumber : index + 1;
+  const page = isVerseData ? initialData.verses[0].verseNumber : pageNumber;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
-      translations: selectedTranslations.join(', '),
+      translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
@@ -57,7 +76,7 @@ export const getRequestKey = ({
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
-      translations: selectedTranslations.join(', '),
+      translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
@@ -69,7 +88,7 @@ export const getRequestKey = ({
       page,
       from: initialData.metaData.from,
       to: initialData.metaData.to,
-      translations: selectedTranslations.join(', '),
+      translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     });
@@ -79,41 +98,92 @@ export const getRequestKey = ({
     wordTranslationLanguage: wordByWordLocale,
     reciter,
     page,
-    translations: selectedTranslations.join(', '),
+    perPage: isVerseData ? 1 : DEFAULT_ITEMS_PER_PAGE, // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
+    translations: selectedTranslations.join(','),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-    ...(isVerseData && { perPage: 1 }), // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
   });
 };
+
+export const getReaderViewRequestKey = ({
+  pageNumber,
+  locale,
+  quranReaderStyles,
+  reciter,
+  wordByWordLocale,
+  pageVersesRange,
+}: ReadingViewRequestKeyInput): string => {
+  return makePageVersesUrl(pageNumber, locale, {
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    reciter,
+    wordTranslationLanguage: wordByWordLocale,
+    filterPageWords: true,
+    ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
+  });
+};
+
+const getPagesLookupParams = (
+  resourceId: number | string,
+  quranReaderDataType: QuranReaderDataType,
+  mushafId: number,
+  initialData: VersesResponse,
+) => {
+  const params: PagesLookUpRequest = { mushaf: mushafId };
+  const resourceIdNumber = Number(resourceId);
+  switch (quranReaderDataType) {
+    case QuranReaderDataType.Chapter:
+      params.chapterNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Hizb:
+      params.hizbNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Juz:
+      params.juzNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Page:
+      params.pageNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Rub:
+      params.rubElHizbNumber = resourceIdNumber;
+      break;
+    case QuranReaderDataType.Verse:
+      params.chapterNumber = resourceIdNumber;
+      params.from = initialData.verses[0].verseKey;
+      params.to = initialData.verses[0].verseKey;
+      break;
+    case QuranReaderDataType.VerseRange:
+      params.chapterNumber = resourceIdNumber;
+      params.from = initialData.metaData.from;
+      params.to = initialData.metaData.to;
+      break;
+    default:
+      break;
+  }
+  return params;
+};
+
+export const fetchResourceMushafPagesDetails = (
+  resourceId: number | string,
+  quranReaderDataType: QuranReaderDataType,
+  mushafId: number,
+  initialData: VersesResponse,
+): Promise<PagesLookUpResponse> =>
+  fetcher(
+    makePagesLookupUrl(
+      getPagesLookupParams(resourceId, quranReaderDataType, mushafId, initialData),
+    ),
+  );
 
 /**
  * A custom fetcher that returns the verses array from the api result.
  * We need this workaround as useSWRInfinite requires the data from the api
  * to be an array, while the result we get is formatted as {meta: {}, verses: Verse[]}
  *
- * @returns {Promise<Verse>}
+ * @returns {Promise<Verse[]>}
  */
-export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse> => {
+export const verseFetcher = async (input: RequestInfo, init?: RequestInit): Promise<Verse[]> => {
   const res = await fetcher<VersesResponse>(input, init);
   // @ts-ignore ignore this typing for now, we'll get back into this when we fix the "initial data not being used" issue
   return res.verses;
-};
-
-/**
- * Get the page limit by checking:
- *
- * 1. if it's tafsir data or a verse data, the limit is 1.
- * 2. otherwise, return the initial data's totalPages.
- *
- *
- * @param {boolean} isVerseData
- * @param {VersesResponse} initialData
- * @returns {number}
- */
-export const getPageLimit = (isVerseData: boolean, initialData: VersesResponse): number => {
-  if (isVerseData) {
-    return 1;
-  }
-
-  return initialData.pagination.totalPages;
 };

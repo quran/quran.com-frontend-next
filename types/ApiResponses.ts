@@ -4,6 +4,8 @@ import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
+import LookupRange from './LookupRange';
+import LookupRecord from './LookupRecord';
 import Reciter from './Reciter';
 import { SearchNavigationResult } from './SearchNavigationResult';
 import TafsirInfo from './TafsirInfo';
@@ -87,6 +89,12 @@ export interface ChapterInfoResponse extends BaseResponse {
 
 export interface FootnoteResponse extends BaseResponse {
   footNote?: Footnote;
+}
+
+export interface PagesLookUpResponse extends BaseResponse {
+  lookupRange: LookupRange;
+  pages?: Record<string, LookupRecord>;
+  totalPage?: number;
 }
 
 export interface TafsirContentResponse extends BaseResponse {

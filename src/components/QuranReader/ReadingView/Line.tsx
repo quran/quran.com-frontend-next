@@ -7,11 +7,13 @@ import { verseFontChanged } from '../utils/memoization';
 
 import styles from './Line.module.scss';
 
+import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getWordDataByLocation } from 'src/utils/verse';
 import Word from 'types/Word';
 
 export type LineProps = {
@@ -35,6 +37,9 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
 
+  const firstWordData = getWordDataByLocation(words[0].location);
+  const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
+
   return (
     <div
       ref={selectedItemRef}
@@ -44,6 +49,13 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
         [styles.mobileInline]: isBigTextLayout,
       })}
     >
+      {shouldShowChapterHeader && (
+        <ChapterHeader
+          chapterId={firstWordData[0]}
+          pageNumber={words[0].pageNumber}
+          hizbNumber={words[0].hizbNumber}
+        />
+      )}
       <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
         <VerseText
           words={words}

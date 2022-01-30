@@ -8,7 +8,7 @@ import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
+import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
 const VerseList = () => {
@@ -51,8 +51,9 @@ const VerseList = () => {
           const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
           return (
             <Link
-              href={getVerseToEndOfChapterNavigationUrl(verseKey)}
+              href={getChapterWithStartingVerseUrl(verseKey)}
               key={verseKey}
+              isShallow
               prefetch={false}
             >
               <div className={styles.listItem}>{localizedVerseNumber}</div>

@@ -10,7 +10,7 @@ import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
+import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
 export enum Source {
@@ -32,7 +32,7 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
   );
   return (
     <Link
-      href={getVerseNavigationUrlByVerseKey(result.verseKey)}
+      href={getChapterWithStartingVerseUrl(result.verseKey)}
       passHref
       onClick={() => {
         logButtonClick(`${source}_result_item`);

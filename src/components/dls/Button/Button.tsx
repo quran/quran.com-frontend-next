@@ -50,6 +50,7 @@ export type ButtonProps = {
   className?: string;
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
+  shallowRouting?: boolean;
   prefetch?: boolean;
 };
 
@@ -69,6 +70,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   hasSidePadding = true,
   shouldFlipOnRTL = true,
+  shallowRouting = false,
   prefetch = true,
 }) => {
   const direction = useDirection();
@@ -107,7 +109,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href && !disabled)
     return (
-      <Link href={href} prefetch={prefetch}>
+      <Link href={href} prefetch={prefetch} isShallow={shallowRouting}>
         <a
           {...(onClick && { onClick })}
           dir={direction}

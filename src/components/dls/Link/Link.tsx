@@ -21,6 +21,7 @@ type LinkProps = {
   className?: string;
   onClick?: React.MouseEventHandler;
   passHref?: boolean;
+  isShallow?: boolean;
   prefetch?: boolean;
 };
 
@@ -33,6 +34,7 @@ const Link: React.FC<LinkProps> = ({
   className,
   onClick,
   passHref,
+  isShallow = false,
   prefetch = true,
 }) => (
   <Wrapper
@@ -42,6 +44,7 @@ const Link: React.FC<LinkProps> = ({
         href={href}
         {...(passHref && { passHref })}
         {...(prefetch === false && { prefetch: false })}
+        shallow={isShallow}
       >
         {node}
       </NextLink>

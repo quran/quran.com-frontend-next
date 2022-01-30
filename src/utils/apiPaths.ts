@@ -7,7 +7,7 @@ import {
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
 import { CalculationMethod, Madhab } from 'src/redux/slices/prayerTimes';
-import { AdvancedCopyRequest, SearchRequest } from 'types/ApiRequests';
+import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import { QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
@@ -149,6 +149,15 @@ export const makeTafsirContentUrl = (
   verseKey: string,
   params: Record<string, unknown>,
 ) => makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);
+
+/**
+ * Compose the url for the pages look up API.
+ *
+ * @param {PagesLookUpRequest} params
+ * @returns {string}
+ */
+export const makePagesLookupUrl = (params: PagesLookUpRequest): string =>
+  makeUrl('/pages/lookup', params);
 
 /**
  * Compose the url for the chapter's info API.
