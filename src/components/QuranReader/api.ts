@@ -11,6 +11,7 @@ import {
 } from 'src/utils/apiPaths';
 import { PagesLookUpRequest } from 'types/ApiRequests';
 import { PagesLookUpResponse, VersesResponse } from 'types/ApiResponses';
+import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -36,7 +37,7 @@ interface ReadingViewRequestKeyInput {
   reciter: number;
   locale: string;
   wordByWordLocale: string;
-  pageVersesRange?: { from: string; to: string };
+  pageVersesRange?: LookupRecord;
 }
 
 /**
@@ -146,10 +147,15 @@ const getPagesLookupParams = (
     case QuranReaderDataType.Rub:
       params.rubElHizbNumber = resourceIdNumber;
       break;
+    case QuranReaderDataType.Verse:
+      params.chapterNumber = resourceIdNumber;
+      params.from = initialData.verses[0].verseKey;
+      params.to = initialData.verses[0].verseKey;
+      break;
     case QuranReaderDataType.VerseRange:
       params.chapterNumber = resourceIdNumber;
-      params.from = `${initialData.verses[0].chapterId}:${initialData.metaData.from}`;
-      params.to = `${initialData.verses[0].chapterId}:${initialData.metaData.to}`;
+      params.from = initialData.metaData.from;
+      params.to = initialData.metaData.to;
       break;
     default:
       break;

@@ -4,6 +4,7 @@ import { fetchResourceMushafPagesDetails } from 'src/components/QuranReader/api'
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getMushafId } from 'src/utils/api';
 import { VersesResponse } from 'types/ApiResponses';
+import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 
 /**
@@ -25,7 +26,7 @@ const useFetchPagesCount = (
 ): {
   pagesCount: number;
   hasError: boolean;
-  pagesVersesRange: Record<number, { from: string; to: string }>;
+  pagesVersesRange: Record<number, LookupRecord>;
 } => {
   const [pagesDetails, setPagesDetails] = useState({
     pagesCount: 1,
@@ -34,21 +35,18 @@ const useFetchPagesCount = (
   const [hasError, setHasError] = useState(false);
   useEffect(() => {
     setHasError(false);
-    // we don't need to call BE for a verse since it will always be 1
-    if (quranReaderDataType !== QuranReaderDataType.Verse) {
-      fetchResourceMushafPagesDetails(
-        resourceId,
-        quranReaderDataType,
-        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-        initialData,
-      )
-        .then((response) => {
-          setPagesDetails({ pagesCount: response.totalPage, pages: response.pages });
-        })
-        .catch(() => {
-          setHasError(true);
-        });
-    }
+    fetchResourceMushafPagesDetails(
+      resourceId,
+      quranReaderDataType,
+      getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+      initialData,
+    )
+      .then((response) => {
+        setPagesDetails({ pagesCount: response.totalPage, pages: response.pages });
+      })
+      .catch(() => {
+        setHasError(true);
+      });
   }, [
     resourceId,
     quranReaderDataType,

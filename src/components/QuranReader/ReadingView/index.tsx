@@ -24,6 +24,7 @@ import useQcfFont from 'src/hooks/useQcfFont';
 import Error from 'src/pages/_error';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
+import LookupRecord from 'types/LookupRecord';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -41,6 +42,17 @@ type ReadingViewProps = {
   quranReaderDataType: QuranReaderDataType;
   initialData: VersesResponse;
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
+};
+
+const getPageVersesRange = (
+  currentMushafPage: number,
+  apiPagesVersesRange: Record<number, LookupRecord>,
+): LookupRecord => {
+  const lookupRecord = { ...apiPagesVersesRange[currentMushafPage] };
+  // we remove firstVerseKey and lastVerseKey before we send the params to BE as BE doesn't need them
+  delete lookupRecord.firstVerseKey;
+  delete lookupRecord.lastVerseKey;
+  return lookupRecord;
 };
 
 const ReadingView = ({
@@ -81,7 +93,7 @@ const ReadingView = ({
   const { data } = useSWRImmutable(
     getReaderViewRequestKey({
       pageNumber: currentMushafPage,
-      pageVersesRange: pagesVersesRange[currentMushafPage],
+      pageVersesRange: getPageVersesRange(currentMushafPage, pagesVersesRange),
       quranReaderStyles,
       reciter: reciterId,
       locale: lang,
