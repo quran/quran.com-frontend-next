@@ -20,7 +20,9 @@
             "mismatch": "Click on \"Start Over\" if you would like to play {{currentReadingChapter}} instead",
             "next-ayah": "Next Ayah",
             "pause": "Pause",
+            "pause-audio": "Pause Audio",
             "play": "Play",
+            "play-audio": "Play Audio",
             "play-range": "Play range",
             "previous-ayah": "Previous Ayah",
             "repeat-1-verse": "Repeat Verse",
@@ -255,7 +257,6 @@
     "wbw-trans-lang": "Word By Word Language",
     "word-click": {
         "no-audio": "No Audio",
-        "play-audio": "Play Audio",
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
