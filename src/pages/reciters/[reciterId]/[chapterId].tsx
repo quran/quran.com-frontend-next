@@ -55,7 +55,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
   };
 
   const onCopyLinkClicked = () => {
-    logButtonClick('share-recitation__copy-link');
+    logButtonClick('share-recitation-copy-link');
     const path = getCurrentPath();
     if (origin) {
       clipboardCopy(path).then(() => {
@@ -65,13 +65,13 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
   };
 
   const onReadClicked = () => {
-    logButtonClick('share-recitation__read');
+    logButtonClick('share-recitation-read');
     router.push(getSurahNavigationUrl(selectedChapter.id));
   };
 
   const onDownloadClicked = async () => {
     setIsDownloadingAudio(true);
-    logButtonClick('share-recitation__download');
+    logButtonClick('share-recitation-download');
     const audioData = await getChapterAudioData(
       Number(selectedReciter.id),
       Number(selectedChapter.id),
