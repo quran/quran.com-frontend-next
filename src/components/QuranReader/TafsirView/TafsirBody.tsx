@@ -22,7 +22,7 @@ import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -35,6 +35,7 @@ import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
+import { QuranFont } from 'types/QuranReader';
 import Tafsir from 'types/Tafsir';
 import Verse from 'types/Verse';
 
@@ -159,18 +160,26 @@ const TafsirBody = ({
   const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
     words: true,
     ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont),
   });
 
   // Whether we should use the initial tafsir data or fetch the data on the client side
   const shouldUseInitialTafsirData = useMemo(
     () =>
       (initialTafsirData &&
+        quranReaderStyles.quranFont === QuranFont.QPCHafs &&
         Object.keys(initialTafsirData.tafsir.verses).includes(
           makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
         ) &&
         selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug) ||
       Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId,
-    [initialTafsirData, selectedChapterId, selectedTafsirIdOrSlug, selectedVerseNumber],
+    [
+      initialTafsirData,
+      quranReaderStyles.quranFont,
+      selectedChapterId,
+      selectedTafsirIdOrSlug,
+      selectedVerseNumber,
+    ],
   );
 
   const surahAndAyahSelection = (
