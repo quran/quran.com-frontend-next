@@ -12,7 +12,7 @@ import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
 
 const FooterThemeSwitcher = () => {
-  const { lang, t } = useTranslation('common');
+  const { t } = useTranslation('common');
   const dispatch = useDispatch();
 
   const theme = useSelector(selectTheme, shallowEqual);
@@ -42,7 +42,7 @@ const FooterThemeSwitcher = () => {
     >
       {themes.map((option) => (
         <PopoverMenu.Item
-          isSelected={option.value === lang}
+          isSelected={option.value === theme.type}
           shouldCloseMenuAfterClick
           key={option.value}
           onClick={() => dispatch({ type: setTheme.type, payload: option.value })}
