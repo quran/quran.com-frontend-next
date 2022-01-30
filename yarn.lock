@@ -15385,10 +15385,10 @@ react-toastify@^8.1.0:
   dependencies:
     clsx "^1.1.1"
 
-react-virtuoso@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-2.4.0.tgz#9058eea25c6da29c3b8db1c8f5746edca6620f5e"
-  integrity sha512-hjo+ERHcZU5XOnpXMVEhm6mSiPi6oz8xbwKjWTfozbUGPaVAT+9wzU202Y50NOHVXekBVCGL02W2++PKi8z2Tw==
+react-virtuoso@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-2.5.1.tgz#73d562ea1760eed6c39b6357873040beac37057a"
+  integrity sha512-qHNuUEeSoORN6mQq1nLtGfE82ctMCRg+WOdLCrF8loXNl0VCAV2zj5jxXVPWuUJWbkmjgKugBu3wNyFM6dy2NA==
   dependencies:
     "@virtuoso.dev/react-urx" "^0.2.12"
     "@virtuoso.dev/urx" "^0.2.12"
