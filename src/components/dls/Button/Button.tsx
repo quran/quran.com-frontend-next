@@ -109,7 +109,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href && !disabled)
     return (
-      <Link href={href} prefetch={prefetch} shallow={shallowRouting}>
+      <Link href={href} prefetch={prefetch} isShallow={shallowRouting}>
         <a
           {...(onClick && { onClick })}
           dir={direction}
