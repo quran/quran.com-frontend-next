@@ -4,6 +4,7 @@ import { fetchResourceMushafPagesDetails } from 'src/components/QuranReader/api'
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getMushafId } from 'src/utils/api';
 import { VersesResponse } from 'types/ApiResponses';
+import LookupRange from 'types/LookupRange';
 import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 
@@ -27,10 +28,12 @@ const useFetchPagesCount = (
   pagesCount: number;
   hasError: boolean;
   pagesVersesRange: Record<number, LookupRecord>;
+  lookupRange: LookupRange;
 } => {
   const [pagesDetails, setPagesDetails] = useState({
     pagesCount: 1,
     pages: {},
+    lookupRange: { from: '1:1', to: '1:1' },
   });
   const [hasError, setHasError] = useState(false);
   useEffect(() => {
@@ -42,7 +45,11 @@ const useFetchPagesCount = (
       initialData,
     )
       .then((response) => {
-        setPagesDetails({ pagesCount: response.totalPage, pages: response.pages });
+        setPagesDetails({
+          pagesCount: response.totalPage,
+          pages: response.pages,
+          lookupRange: response.lookupRange,
+        });
       })
       .catch(() => {
         setHasError(true);
@@ -54,7 +61,12 @@ const useFetchPagesCount = (
     quranReaderStyles.mushafLines,
     initialData,
   ]);
-  return { pagesCount: pagesDetails.pagesCount, pagesVersesRange: pagesDetails.pages, hasError };
+  return {
+    pagesCount: pagesDetails.pagesCount,
+    pagesVersesRange: pagesDetails.pages,
+    lookupRange: pagesDetails.lookupRange,
+    hasError,
+  };
 };
 
 export default useFetchPagesCount;

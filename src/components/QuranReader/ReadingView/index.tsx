@@ -9,7 +9,6 @@ import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import useSWRImmutable from 'swr/immutable';
 
-import useFetchPagesCount from './hooks/useFetchTotalPages';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import Page from './Page';
 import styles from './ReadingView.module.scss';
@@ -17,6 +16,7 @@ import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
+import useFetchPagesCount from 'src/components/QuranReader/hooks/useFetchTotalPages';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';

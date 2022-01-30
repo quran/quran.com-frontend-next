@@ -8,6 +8,7 @@ import { ListItem, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import useSWRImmutable from 'swr/immutable';
 
 import { getRequestKey, verseFetcher, DEFAULT_ITEMS_PER_PAGE } from '../api';
+import useFetchPagesCount from '../hooks/useFetchTotalPages';
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
 
@@ -20,8 +21,11 @@ import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useQcfFont from 'src/hooks/useQcfFont';
+import Error from 'src/pages/_error';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { VersesResponse } from 'types/ApiResponses';
+import LookupRange from 'types/LookupRange';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -55,6 +59,9 @@ const getVersesCount = (
   }
   return initialData.pagination.totalRecords;
 };
+
+const generateResourceVerseKeys = (lookupRange: LookupRange) =>
+  generateVerseKeysBetweenTwoVerseKeys(lookupRange.from, lookupRange.to);
 
 /**
  * Convert a verse index to a page number by dividing the index
@@ -95,6 +102,17 @@ const TranslationView = ({
   }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
+  const { hasError, lookupRange } = useFetchPagesCount(
+    resourceId,
+    quranReaderDataType,
+    initialData,
+    quranReaderStyles,
+  );
+  const totalVersesCount = useMemo(
+    () => getVersesCount(quranReaderDataType, initialData),
+    [initialData, quranReaderDataType],
+  );
+  const resourceVerseKeys = useMemo(() => generateResourceVerseKeys(lookupRange), [lookupRange]);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef);
   const { data } = useSWRImmutable(
@@ -121,14 +139,21 @@ const TranslationView = ({
     }
   }, [currentPage, data]);
 
+  if (hasError) {
+    return <Error />;
+  }
+
   const itemContentRenderer = (currentVerseIndex: number) => {
     const versePage = verseIndexToApiPageNumber(currentVerseIndex);
     // if the page of the current verse has already been fetched
     if (apiPageToVersesMap[versePage]) {
       // search for the verse inside its page.
       const filteredVerses = apiPageToVersesMap[versePage].filter(
-        (verse) => verse.verseNumber === initialData.verses[0].verseNumber + currentVerseIndex,
+        (verse) => verse.verseKey === resourceVerseKeys[currentVerseIndex],
       );
+      if (!filteredVerses.length) {
+        return <></>;
+      }
       return (
         <>
           {filteredVerses[0].verseNumber === 1 && (
@@ -191,7 +216,7 @@ const TranslationView = ({
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
-          totalCount={getVersesCount(quranReaderDataType, initialData)}
+          totalCount={totalVersesCount}
           overscan={800}
           initialItemCount={initialData.verses.length} // needed for SSR.
           itemsRendered={onItemsRendered}

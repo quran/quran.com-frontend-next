@@ -1,7 +1,7 @@
-type LookupRecord = {
-  from: string;
-  to: string;
-  firstVerseKey?: string;
-  lastVerseKey?: string;
-};
+import LookupRange from './LookupRange';
+
+interface LookupRecord extends LookupRange {
+  firstVerseKey: string;
+  lastVerseKey: string;
+}
 export default LookupRecord;

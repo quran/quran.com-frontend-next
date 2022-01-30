@@ -4,6 +4,7 @@ import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
+import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
 import Reciter from './Reciter';
 import { SearchNavigationResult } from './SearchNavigationResult';
@@ -91,7 +92,7 @@ export interface FootnoteResponse extends BaseResponse {
 }
 
 export interface PagesLookUpResponse extends BaseResponse {
-  lookupRange: { from: string; to: string };
+  lookupRange: LookupRange;
   pages?: Record<string, LookupRecord>;
   totalPage?: number;
 }
