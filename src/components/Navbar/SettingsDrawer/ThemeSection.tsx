@@ -20,6 +20,7 @@ export const themeIcons = {
   [ThemeType.Dark]: <MoonIcon />,
   [ThemeType.Light]: <SunIcon />,
   [ThemeType.Auto]: <AutoIcon />,
+  [ThemeType.Sepia]: <AutoIcon />,
 };
 
 const ThemeSection = () => {
