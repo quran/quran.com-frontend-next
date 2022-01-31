@@ -1,9 +1,3 @@
-// TODO:
-// - generate css with SCSS
-// - use better pattern
-//    - https://cube.fyi/composition.html#examples (looks like vercel is using similar pattern like this)
-//    - https://cube.fyi/exception.html#why-data-attributes
-
 @use "src/styles/utility";
 
 .base {
@@ -13,6 +7,13 @@
   text-decoration: none;
   box-sizing: border-box;
   transition: transform var(--transition-fast);
+  color: var(--themed-fg, var(--color-text-default));
+  background-color: var(--themed-bg, var(--color-background-default));
+  border: 1px solid var(--themed-border);
+  &:hover {
+    background-color: transparent;
+    color: var(--themed-bg);
+  }
   &:active {
     transform: scale(0.92);
   }
@@ -33,53 +34,37 @@
 
 // type
 .primary {
-  background-color: var(--color-primary-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-primary-medium);
-  &:hover {
-    color: var(--color-text-default);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-primary-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-primary-medium);
 }
 
 .secondary {
-  background-color: var(--color-secondary-medium);
-  color: var(--color-text-default);
-  border: 1px solid var(--color-secondary-medium);
+  --themed-bg: var(--color-background-default);
+  --themed-fg: var(--color-text-default);
+  --themed-border: var(--color-borders-hairline);
   &:hover {
-    color: var(--color-text-default);
-    background-color: var(--color-background-alternative-deep);
+    --themed-bg: var(--color-text-default);
+    --themed-border: var(--color-primary-medium);
   }
 }
 
 .success {
-  background-color: var(--color-success-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-success-medium);
-  &:hover {
-    color: var(--color-success-medium);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-success-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-success-medium);
 }
 
 .warning {
-  background-color: var(--color-warning-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-warning-medium);
-  &:hover {
-    color: var(--color-warning-medium);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-warning-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-warning-medium);
 }
 
 .error {
-  background-color: var(--color-error-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-error-medium);
-  &:hover {
-    color: var(--color-error-medium);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-error-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-error-medium);
 }
 
 // size
