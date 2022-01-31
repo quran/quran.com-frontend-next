@@ -104,6 +104,12 @@
 // variant
 .shadow {
   box-shadow: var(--shadow-large);
+  &:hover {
+    background-color: var(--themed-bg);
+    color: var(--themed-fg);
+    position: relative;
+    inset-block-start: -1px;
+  }
 }
 
 .ghost {
