@@ -1,24 +1,8 @@
-@use "src/styles/breakpoints";
-
 .container {
   max-width: 100%;
+  direction: rtl;
   display: flex;
   flex-direction: column;
-  margin: auto;
-  @include breakpoints.tablet {
-    width: 50%;
-  }
   flex-wrap: wrap;
   align-content: center;
-}
-
-.largeDesktopContainer {
-  @include breakpoints.tablet {
-    width: 60%;
-  }
-}
-.xLargeDesktopContainer {
-  @include breakpoints.tablet {
-    width: 75%;
-  }
 }
