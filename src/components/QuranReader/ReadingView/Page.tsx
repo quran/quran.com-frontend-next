@@ -15,12 +15,12 @@ import Verse from 'types/Verse';
 
 type PageProps = {
   verses: Verse[];
-  page: number;
+  pageNumber: number;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
 };
 
-const Page = ({ verses, page, quranReaderStyles, pageIndex }: PageProps) => {
+const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) => {
   const lines = useMemo(
     () => (verses && verses.length ? groupLinesByVerses(verses) : {}),
     [verses],
@@ -36,7 +36,7 @@ const Page = ({ verses, page, quranReaderStyles, pageIndex }: PageProps) => {
 
   return (
     <div
-      id={`page-${page}`}
+      id={`page-${pageNumber}`}
       className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
       {Object.keys(lines).map((key, lineIndex) => (
@@ -50,7 +50,7 @@ const Page = ({ verses, page, quranReaderStyles, pageIndex }: PageProps) => {
           quranReaderStyles={quranReaderStyles}
         />
       ))}
-      <PageFooter page={page} />
+      <PageFooter page={pageNumber} />
     </div>
   );
 };

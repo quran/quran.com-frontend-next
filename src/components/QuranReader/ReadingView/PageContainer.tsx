@@ -40,6 +40,13 @@ const getPageVersesRange = (
   return lookupRecord;
 };
 
+/**
+ * A component that will fetch the verses of the current mushaf page
+ * and will render a skeleton while it's loading.
+ *
+ * @param {Props} param0
+ * @returns {JSX.Element}
+ */
 const PageContainer: React.FC<Props> = ({
   pagesVersesRange,
   quranReaderStyles,
@@ -93,7 +100,7 @@ const PageContainer: React.FC<Props> = ({
     <Page
       verses={verses}
       key={`page-${pageNumber}`}
-      page={Number(pageNumber)}
+      pageNumber={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}
       pageIndex={pageIndex}
     />

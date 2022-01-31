@@ -84,15 +84,15 @@ const ReadingView = ({
     verses,
   );
 
-  const itemContentRenderer = (currentPageIndex: number) => (
+  const itemContentRenderer = (pageIndex: number) => (
     <PageContainer
       pagesVersesRange={pagesVersesRange}
       quranReaderStyles={quranReaderStyles}
       reciterId={reciterId}
       lang={lang}
       wordByWordLocale={wordByWordLocale}
-      pageNumber={initialFirstMushafPage + currentPageIndex}
-      pageIndex={currentPageIndex}
+      pageNumber={initialFirstMushafPage + pageIndex}
+      pageIndex={pageIndex}
       setMushafPageToVersesMap={setMushafPageToVersesMap}
       initialData={initialData}
     />
