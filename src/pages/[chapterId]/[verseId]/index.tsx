@@ -7,6 +7,7 @@ import { getChapterIdBySlug, getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
@@ -83,7 +84,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   */
   const isVerse = isValidVerseNumber(verseIdOrRange);
   // common API params between a single verse and range of verses.
-  let apiParams = { ...getDefaultWordFields(), ...getMushafId() };
+  let apiParams = {
+    ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+    ...getMushafId(
+      getQuranReaderStylesInitialState(locale).quranFont,
+      getQuranReaderStylesInitialState(locale).mushafLines,
+    ),
+  };
   let [from, to] = [null, null];
   if (isVerse) {
     apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };

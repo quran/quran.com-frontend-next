@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -8,6 +9,7 @@ import { getChapterIdBySlug, getChapterVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from 'src/utils/locale';
@@ -136,7 +138,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   }
   // common API params between a chapter and the verse key.
-  let apiParams = { ...getDefaultWordFields(), ...getMushafId() };
+  let apiParams = {
+    ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+    ...getMushafId(
+      getQuranReaderStylesInitialState(locale).quranFont,
+      getQuranReaderStylesInitialState(locale).mushafLines,
+    ),
+  };
   // if it's a verseKey
   if (!isChapter) {
     const [extractedChapterId, verseNumber] =
