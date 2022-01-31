@@ -1,21 +1,18 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, useRef, useState, useEffect } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
-import useSWRImmutable from 'swr/immutable';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
-import Page from './Page';
+import PageContainer from './PageContainer';
 import styles from './ReadingView.module.scss';
-import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
 import useFetchPagesCount from 'src/components/QuranReader/hooks/useFetchTotalPages';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
@@ -24,7 +21,6 @@ import useQcfFont from 'src/hooks/useQcfFont';
 import Error from 'src/pages/_error';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
-import LookupRecord from 'types/LookupRecord';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -44,17 +40,6 @@ type ReadingViewProps = {
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
 
-const getPageVersesRange = (
-  currentMushafPage: number,
-  apiPagesVersesRange: Record<number, LookupRecord>,
-): LookupRecord => {
-  const lookupRecord = { ...apiPagesVersesRange[currentMushafPage] };
-  // we remove firstVerseKey and lastVerseKey before we send the params to BE as BE doesn't need them
-  delete lookupRecord.firstVerseKey;
-  delete lookupRecord.lastVerseKey;
-  return lookupRecord;
-};
-
 const ReadingView = ({
   quranReaderStyles,
   quranReaderDataType,
@@ -66,7 +51,6 @@ const ReadingView = ({
     [initialFirstMushafPage]: initialData.verses,
   });
   const { lang } = useTranslation();
-  const [currentMushafPage, setCurrentMushafPage] = useState(initialFirstMushafPage);
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -90,17 +74,6 @@ const ReadingView = ({
     initialData,
     quranReaderStyles,
   );
-  const { data } = useSWRImmutable(
-    getReaderViewRequestKey({
-      pageNumber: currentMushafPage,
-      pageVersesRange: getPageVersesRange(currentMushafPage, pagesVersesRange),
-      quranReaderStyles,
-      reciter: reciterId,
-      locale: lang,
-      wordByWordLocale,
-    }),
-    verseFetcher,
-  );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const { quranTextFontScale } = quranReaderStyles;
   useScrollToVirtualizedVerse(
@@ -110,44 +83,19 @@ const ReadingView = ({
     quranReaderStyles,
     verses,
   );
-  useEffect(() => {
-    if (data) {
-      setMushafPageToVersesMap((prevVerses) => ({ ...prevVerses, [currentMushafPage]: data }));
-    }
-  }, [currentMushafPage, data]);
 
-  const itemContentRenderer = (currentPageIndex: number) => {
-    const pageNumber = initialFirstMushafPage + currentPageIndex;
-    const pageVerses = mushafPageToVersesMap[pageNumber];
-    return pageVerses ? (
-      <Page
-        verses={pageVerses}
-        key={`page-${pageNumber}`}
-        page={Number(pageNumber)}
-        quranReaderStyles={quranReaderStyles}
-        pageIndex={currentPageIndex}
-      />
-    ) : (
-      <ReadingViewSkeleton />
-    );
-  };
-
-  const onItemsRendered = (renderedPages) => {
-    if (renderedPages.length) {
-      setCurrentMushafPage((prevMushafPage) => {
-        const firstRenderedMushafPage = initialFirstMushafPage + renderedPages[0].index;
-        if (firstRenderedMushafPage !== prevMushafPage) {
-          return firstRenderedMushafPage;
-        }
-        const lastRenderedMushafPage =
-          initialFirstMushafPage + renderedPages[renderedPages.length - 1].index;
-        if (lastRenderedMushafPage !== prevMushafPage) {
-          return lastRenderedMushafPage;
-        }
-        return prevMushafPage;
-      });
-    }
-  };
+  const itemContentRenderer = (currentPageIndex: number) => (
+    <PageContainer
+      pagesVersesRange={pagesVersesRange}
+      quranReaderStyles={quranReaderStyles}
+      reciterId={reciterId}
+      lang={lang}
+      wordByWordLocale={wordByWordLocale}
+      pageNumber={initialFirstMushafPage + currentPageIndex}
+      pageIndex={currentPageIndex}
+      setMushafPageToVersesMap={setMushafPageToVersesMap}
+    />
+  );
 
   if (hasError) {
     return <Error />;
@@ -172,7 +120,6 @@ const ReadingView = ({
           useWindowScroll
           increaseViewportBy={300}
           style={{ width: '100%' }}
-          itemsRendered={onItemsRendered}
           initialItemCount={1} // needed for SSR.
           totalCount={pagesCount}
           itemContent={itemContentRenderer}

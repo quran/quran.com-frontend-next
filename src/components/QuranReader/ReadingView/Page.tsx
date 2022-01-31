@@ -1,9 +1,7 @@
-import React, { useMemo, memo } from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
-
-import { verseFontChanged } from '../utils/memoization';
 
 import groupLinesByVerses from './groupLinesByVerses';
 import Line from './Line';
@@ -23,7 +21,10 @@ type PageProps = {
 };
 
 const Page = ({ verses, page, quranReaderStyles, pageIndex }: PageProps) => {
-  const lines = useMemo(() => groupLinesByVerses(verses), [verses]);
+  const lines = useMemo(
+    () => (verses && verses.length ? groupLinesByVerses(verses) : {}),
+    [verses],
+  );
   const { quranTextFontScale, quranFont } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordByWordPreferences,
@@ -54,31 +55,4 @@ const Page = ({ verses, page, quranReaderStyles, pageIndex }: PageProps) => {
   );
 };
 
-/**
- * Since we are passing verses and it's an array
- * even if the same verses are passed, their reference will change
- * on fetching a new page and since Memo only does shallow comparison,
- * we need to use custom comparing logic:
- *
- *  1. Check if the page numbers are the same.
- *  2. Check if the number of verses are the same.
- *  3. Check if the font changed.
- *
- * If the above conditions are met, it's safe to assume that the result
- * of both renders are the same.
- *
- * @param {PageProps} prevProps
- * @param {PageProps} nextProps
- * @returns {boolean}
- */
-const arePagesEqual = (prevProps: PageProps, nextProps: PageProps): boolean =>
-  prevProps.page === nextProps.page &&
-  prevProps.verses.length === nextProps.verses.length &&
-  !verseFontChanged(
-    prevProps.quranReaderStyles,
-    nextProps.quranReaderStyles,
-    prevProps.verses[0].words,
-    nextProps.verses[0].words,
-  );
-
-export default memo(Page, arePagesEqual);
+export default Page;
