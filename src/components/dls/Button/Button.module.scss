@@ -109,39 +109,10 @@
 .ghost {
   background-color: transparent;
   border: none;
+  color: var(--themed-bg);
   &:hover {
+    background-color: var(--themed-bg);
     @include utility.lighten-background-color;
-  }
-}
-.ghost.primary {
-  color: var(--color-text-default);
-  &:hover {
-    background-color: var(--color-primary-medium);
-  }
-}
-.ghost.secondary {
-  color: var(--color-secondary-medium);
-  &:hover {
-    background-color: var(--color-secondary-medium);
-  }
-}
-.ghost.warning {
-  color: var(--color-warning-medium);
-  &:hover {
-    background-color: var(--color-warning-medium);
-  }
-}
-
-.ghost.success {
-  color: var(--color-success-medium);
-  &:hover {
-    background-color: var(--color-success-medium);
-  }
-}
-.ghost.error {
-  color: var(--color-error-medium);
-  &:hover {
-    background-color: var(--color-error-medium);
   }
 }
 
