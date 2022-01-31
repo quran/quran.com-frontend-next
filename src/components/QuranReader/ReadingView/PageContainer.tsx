@@ -43,7 +43,7 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
 }) => {
-  const { data, isValidating } = useSWRImmutable(
+  const { data: verses, isValidating } = useSWRImmutable(
     getReaderViewRequestKey({
       pageNumber,
       pageVersesRange: getPageVersesRange(pageNumber, pagesVersesRange),
@@ -56,22 +56,22 @@ const PageContainer: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    if (data) {
+    if (verses) {
       // @ts-ignore
       setMushafPageToVersesMap((prevMushafPageToVersesMap) => ({
         ...prevMushafPageToVersesMap,
-        [pageNumber]: data,
+        [pageNumber]: verses,
       }));
     }
-  }, [data, pageNumber, setMushafPageToVersesMap]);
+  }, [verses, pageNumber, setMushafPageToVersesMap]);
 
-  if (isValidating) {
+  if (!verses || isValidating) {
     return <ReadingViewSkeleton />;
   }
 
   return (
     <Page
-      verses={data}
+      verses={verses}
       key={`page-${pageNumber}`}
       page={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}
