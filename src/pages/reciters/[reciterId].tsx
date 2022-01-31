@@ -79,8 +79,10 @@ const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
         description={selectedReciter?.bio}
       />
 
-      <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
-        <ReciterInfo selectedReciter={selectedReciter} />
+      <div className={pageStyle.reciterInfoContainer}>
+        <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
+          <ReciterInfo selectedReciter={selectedReciter} />
+        </div>
       </div>
 
       <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
