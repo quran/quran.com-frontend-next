@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { getReaderViewRequestKey, verseFetcher } from '../api';
@@ -7,8 +8,13 @@ import { getReaderViewRequestKey, verseFetcher } from '../api';
 import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
+import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type Props = {
@@ -20,6 +26,7 @@ type Props = {
   wordByWordLocale: string;
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
+  initialData: VersesResponse;
 };
 
 const getPageVersesRange = (
@@ -42,7 +49,16 @@ const PageContainer: React.FC<Props> = ({
   pageNumber,
   pageIndex,
   setMushafPageToVersesMap,
+  initialData,
 }) => {
+  const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
+  const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
+  const shouldUseInitialData =
+    pageIndex === 0 &&
+    quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+    isUsingDefaultReciter &&
+    isUsingDefaultWordByWordLocale &&
+    quranReaderStyles.quranFont !== QuranFont.Tajweed;
   const { data: verses, isValidating } = useSWRImmutable(
     getReaderViewRequestKey({
       pageNumber,
@@ -53,6 +69,10 @@ const PageContainer: React.FC<Props> = ({
       wordByWordLocale,
     }),
     verseFetcher,
+    {
+      fallbackData: shouldUseInitialData ? initialData.verses : null,
+      revalidateOnMount: !shouldUseInitialData,
+    },
   );
 
   useEffect(() => {

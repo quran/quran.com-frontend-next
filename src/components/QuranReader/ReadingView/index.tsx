@@ -94,6 +94,7 @@ const ReadingView = ({
       pageNumber={initialFirstMushafPage + currentPageIndex}
       pageIndex={currentPageIndex}
       setMushafPageToVersesMap={setMushafPageToVersesMap}
+      initialData={initialData}
     />
   );
 
