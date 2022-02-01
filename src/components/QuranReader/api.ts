@@ -76,7 +76,6 @@ export const getRequestKey = ({
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
-      perPage: 'all',
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
