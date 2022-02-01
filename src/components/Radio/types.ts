@@ -29,4 +29,5 @@ export type CuratedStation = {
 export type StationInfo = {
   title: string;
   description: string;
+  imgUrl?: string;
 };

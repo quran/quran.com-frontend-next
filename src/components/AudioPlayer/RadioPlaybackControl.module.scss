@@ -29,3 +29,17 @@
   text-align: start;
   line-height: normal;
 }
+
+.leftContainer {
+  display: flex;
+  align-items: center;
+}
+
+.stationImageContainer {
+  width: calc(2 * var(--spacing-medium));
+  margin-inline-end: var(--spacing-xsmall);
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: var(--border-radius-circle);
+}

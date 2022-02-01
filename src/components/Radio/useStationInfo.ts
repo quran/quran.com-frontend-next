@@ -25,6 +25,7 @@ const useCurrentStationInfo = (): StationInfo => {
     return {
       title: t(`curated-station.${curatedStation.title}`),
       description: t(`curated-station.${curatedStation.description}`),
+      imgUrl: curatedStation.bannerImgSrc,
     };
   };
 
@@ -35,6 +36,7 @@ const useCurrentStationInfo = (): StationInfo => {
     return {
       title: selectedReciter?.name,
       description: selectedReciter?.style?.name,
+      imgUrl: selectedReciter?.profilePicture,
     };
   };
 
