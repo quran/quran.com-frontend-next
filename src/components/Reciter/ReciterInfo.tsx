@@ -28,6 +28,11 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
     playReciterStation(selectedReciter, dispatch);
   };
 
+  const bio =
+    isbioTruncated && selectedReciter?.bio?.length > maxBioLength
+      ? truncateText(selectedReciter?.bio, maxBioLength)
+      : selectedReciter?.bio;
+
   return (
     <div className={styles.container}>
       <div className={styles.reciterImageContainer}>
@@ -39,11 +44,9 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       </div>
       <div>
         <div className={styles.reciterName}>{selectedReciter?.name}</div>
-        {selectedReciter?.bio && (
-          <div className={styles.reciterBio}>
-            {isbioTruncated
-              ? truncateText(selectedReciter?.bio, maxBioLength)
-              : selectedReciter?.bio}
+        <div className={styles.reciterBio}>
+          {bio}
+          {selectedReciter?.bio.length > maxBioLength && (
             <span
               className={styles.moreLessButton}
               role="button"
@@ -53,8 +56,8 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
             >
               {isbioTruncated ? t('common:more') : t('common:less')}
             </span>
-          </div>
-        )}
+          )}
+        </div>
         <div className={styles.actionContainer}>
           <Button
             className={styles.playButton}
