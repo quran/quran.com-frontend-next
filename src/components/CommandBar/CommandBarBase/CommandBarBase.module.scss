@@ -1,6 +1,9 @@
+@use "src/styles/theme";
+
 $content-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 $overlay-background-light: hsla(0, 0%, 100%, 0.8);
 $overlay-background-dark: rgba(0, 0, 0, 0.8);
+$overlay-background-sepia: rgba(239, 226, 205, 0.7);
 $shadow: 0 16px 70px rgb(0 0 0 / 20%); // using custom shadow for now until we fix our token and design in dark theme;
 $width: 95vw;
 $max-width: calc(20 * var(--spacing-mega));
@@ -81,12 +84,14 @@ $min-height: calc(9 * var(--spacing-mega));
 }
 
 .overlay {
-  background-color: $overlay-background-light;
-  @media (prefers-color-scheme: dark) {
+  @include theme.light {
+    background-color: $overlay-background-light;
+  }
+  @include theme.dark {
     background-color: $overlay-background-dark;
   }
-  [data-theme="dark"] & {
-    background-color: $overlay-background-dark;
+  @include theme.sepia {
+    background-color: $overlay-background-sepia;
   }
   backdrop-filter: blur(6px);
   position: fixed;

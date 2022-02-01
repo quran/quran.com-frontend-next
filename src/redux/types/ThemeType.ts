@@ -1,8 +1,8 @@
 enum ThemeType {
   Auto = 'auto',
   Light = 'light',
+  Sepia = 'sepia',
   Dark = 'dark',
-  // Sepia = 'sepia',
 }
 
 export default ThemeType;

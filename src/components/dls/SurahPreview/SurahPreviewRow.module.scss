@@ -13,8 +13,7 @@
 
   &:hover {
     border: 1px solid var(--color-success-medium);
-    background-color: var(--color-success-faded);
-    @include utility.lighten-background-color;
+    background-color: var(--color-background-alternative-faded);
 
     .surahNumber {
       background-color: var(--color-success-medium);
