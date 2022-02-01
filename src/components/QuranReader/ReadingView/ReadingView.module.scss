@@ -7,8 +7,9 @@
   align-content: center;
 }
 
-.scroller {
+.virtuosoScroller {
   & [data-viewport-type="window"] {
+    // virtuoso adds position: absolute by default so we need to over-ride it
     position: unset !important;
   }
 }
