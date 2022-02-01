@@ -112,6 +112,7 @@ const ReadingView = ({
           ref={virtuosoRef}
           useWindowScroll
           increaseViewportBy={300}
+          className={styles.scroller}
           initialItemCount={1} // needed for SSR.
           totalCount={pagesCount}
           itemContent={itemContentRenderer}

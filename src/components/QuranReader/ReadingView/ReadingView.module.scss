@@ -6,3 +6,9 @@
   flex-wrap: wrap;
   align-content: center;
 }
+
+.scroller {
+  & [data-viewport-type="window"] {
+    position: unset !important;
+  }
+}
