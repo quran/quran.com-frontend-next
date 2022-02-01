@@ -21,8 +21,6 @@
 }
 
 .bookmarkItem {
+  margin-inline-end: var(--spacing-small);
   white-space: nowrap;
-  & + & {
-    margin-inline-start: var(--spacing-small);
-  }
 }
