@@ -7,7 +7,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import AutoIcon from '../../../../public/icons/auto.svg';
 import MoonIcon from '../../../../public/icons/moon-outline.svg';
 import SunIcon from '../../../../public/icons/sun-outline.svg';
-import SunriseIcon from '../../../../public/icons/sunrise.svg';
+import SunsetIcon from '../../../../public/icons/sunset.svg';
 
 import Section from './Section';
 import styles from './ThemeSection.module.scss';
@@ -21,7 +21,7 @@ export const themeIcons = {
   [ThemeType.Dark]: <MoonIcon />,
   [ThemeType.Light]: <SunIcon />,
   [ThemeType.Auto]: <AutoIcon />,
-  [ThemeType.Sepia]: <SunriseIcon />,
+  [ThemeType.Sepia]: <SunsetIcon />,
 };
 
 const ThemeSection = () => {
