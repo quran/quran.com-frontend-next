@@ -7,7 +7,6 @@ export default {
   component: Button,
   args: {
     size: ButtonSize.Medium,
-    shape: ButtonShape.Square,
     type: ButtonType.Primary,
     disabled: false,
     loading: false,
