@@ -336,7 +336,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         name="arabic-font-to-copy"
         placeholder={t('font-placeholder')}
         options={[
-          { label: t('common:yes'), value: '' },
+          { label: t('common:none'), value: '' },
           ...TO_COPY_FONTS.map((font) => ({
             label: t(`common:fonts.${font}`),
             value: font,
