@@ -4,6 +4,7 @@
 }
 
 .container {
+  padding-inline: calc(0.5 * var(--spacing-xxsmall));
   line-height: var(--spacing-micro);
   & button {
     width: var(--spacing-mega) !important;

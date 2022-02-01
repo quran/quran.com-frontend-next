@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import ChatIcon from '../../../../public/icons/chat.svg';
+import ChatIcon from '../../../../public/icons/chat-filled.svg';
 
 import styles from './TranslationViewCell.module.scss';
 
