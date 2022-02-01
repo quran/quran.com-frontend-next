@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import { ListItem, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import useSWRImmutable from 'swr/immutable';
 
-import { getRequestKey, verseFetcher, DEFAULT_ITEMS_PER_PAGE } from '../api';
+import { getRequestKey, verseFetcher } from '../api';
 import useFetchPagesCount from '../hooks/useFetchTotalPages';
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
@@ -68,10 +68,11 @@ const generateResourceVerseKeys = (lookupRange: LookupRange) =>
  * by how many items there are in a page.
  *
  * @param {number} verseIndex
+ * @param {VersesResponse} initialData
  * @returns {number}
  */
-const verseIndexToApiPageNumber = (verseIndex: number): number =>
-  Math.floor(verseIndex / DEFAULT_ITEMS_PER_PAGE) + 1;
+const verseIndexToApiPageNumber = (verseIndex: number, initialData: VersesResponse): number =>
+  Math.floor(verseIndex / initialData.pagination.perPage) + 1;
 
 const TranslationView = ({
   quranReaderStyles,
@@ -144,7 +145,7 @@ const TranslationView = ({
   }
 
   const itemContentRenderer = (currentVerseIndex: number) => {
-    const versePage = verseIndexToApiPageNumber(currentVerseIndex);
+    const versePage = verseIndexToApiPageNumber(currentVerseIndex, initialData);
     // if the page of the current verse has already been fetched
     if (apiPageToVersesMap[versePage]) {
       // search for the verse inside its page.
@@ -188,13 +189,17 @@ const TranslationView = ({
   const onItemsRendered = (renderedVerses: ListItem<Verse>[]) => {
     if (renderedVerses.length) {
       setCurrentPage((prevPage) => {
-        const firstRenderedItemPage = verseIndexToApiPageNumber(renderedVerses[0].index);
+        const firstRenderedItemPage = verseIndexToApiPageNumber(
+          renderedVerses[0].index,
+          initialData,
+        );
         // if the first verse is outside the current page
         if (firstRenderedItemPage !== prevPage) {
           return firstRenderedItemPage;
         }
         const lastRenderedItemPage = verseIndexToApiPageNumber(
           renderedVerses[renderedVerses.length - 1].index,
+          initialData,
         );
         // if the last verse is outside the current page
         if (lastRenderedItemPage !== prevPage) {
