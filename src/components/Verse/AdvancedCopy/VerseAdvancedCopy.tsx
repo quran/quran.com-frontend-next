@@ -14,8 +14,8 @@ import VersesRangeSelector from './VersesRangeSelector';
 
 import { getAvailableTranslations } from 'src/api';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
-import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import Select from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
@@ -331,19 +331,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         <p>{t('font')}</p>
         <HelperTooltip>{t('font-tooltip')}</HelperTooltip>
       </div>
-      <Combobox
-        clearable
-        id="wordByWord"
-        value={shouldCopyFont}
-        initialInputValue={t(`common:fonts.${QuranFont.Uthmani}`)}
-        items={TO_COPY_FONTS.map((font) => ({
-          id: font,
-          name: font,
-          label: t(`common:fonts.${font}`),
-          value: font,
-        }))}
-        onChange={onShouldCopyFontsChange}
+      <Select
+        id="arabic-font-to-copy"
+        name="arabic-font-to-copy"
         placeholder={t('font-placeholder')}
+        options={[
+          { label: t('common:yes'), value: '' },
+          ...TO_COPY_FONTS.map((font) => ({
+            label: t(`common:fonts.${font}`),
+            value: font,
+          })),
+        ]}
+        value={shouldCopyFont}
+        onChange={(val) => onShouldCopyFontsChange(val as string)}
       />
       <p className={styles.label}>{t('copy-footnote-q')}</p>
       <RadioGroup
