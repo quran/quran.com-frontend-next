@@ -23,6 +23,7 @@
     "/apps": ["apps"],
     "/radio": ["home", "quick-links", "radio"],
     "/reciters/[reciterId]": ["home", "quick-links", "radio", "reciter"],
-    "/reciters": [ "reciter", "home", "quick-links"]
+    "/reciters/[reciterId]/[chapterId]": ["reciter"],
+    "/reciters": ["reciter", "home", "quick-links"]
   }
 }

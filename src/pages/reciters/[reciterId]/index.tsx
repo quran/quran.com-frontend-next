@@ -5,10 +5,9 @@ import Fuse from 'fuse.js';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchIcon from '../../../public/icons/search.svg';
-import layoutStyle from '../index.module.scss';
-
-import pageStyle from './reciterPage.module.scss';
+import SearchIcon from '../../../../public/icons/search.svg';
+import layoutStyle from '../../index.module.scss';
+import pageStyle from '../reciterPage.module.scss';
 
 import { getReciterData } from 'src/api';
 import Footer from 'src/components/dls/Footer/Footer';

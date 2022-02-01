@@ -8,6 +8,7 @@ import { getJuzVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getJuzNavigationUrl } from 'src/utils/navigation';
@@ -61,8 +62,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   try {
     const juzVersesResponse = await getJuzVerses(juzId, locale, {
-      ...getDefaultWordFields(),
-      ...getMushafId(),
+      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+      ...getMushafId(
+        getQuranReaderStylesInitialState(locale).quranFont,
+        getQuranReaderStylesInitialState(locale).mushafLines,
+      ),
     });
     return {
       props: {

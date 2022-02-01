@@ -1,0 +1,59 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.reciterImage {
+  width: 80%;
+  max-width: calc(20 * var(--spacing-medium));
+  border-radius: var(--border-radius-circle);
+  margin-block-end: var(--spacing-medium);
+  margin-inline: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: calc(30 * var(--spacing-medium));
+}
+
+.playButton {
+  margin-block-end: var(--spacing-medium);
+}
+
+.secondaryActionsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  @include breakpoints.tablet {
+    flex-direction: row;
+  }
+}
+
+.secondaryAction {
+  margin-block-end: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    flex: 1;
+    margin-inline-end: var(--spacing-xxsmall);
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
+}
+.chapterName {
+  text-align: center;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
+}
+.reciterName {
+  text-align: center;
+  font-size: var(--font-size-large);
+  margin-block-end: var(--spacing-medium);
+}
