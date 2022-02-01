@@ -18,9 +18,6 @@ type ReciterInfoProps = {
   selectedReciter: Reciter;
 };
 
-// clean up html tags frorm the string, such as "<p>", "</p>"
-const removeHTMLTags = (str: string) => str.replace(/<\/?[^>]+(>|$)/g, '');
-
 const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -31,8 +28,6 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
     logEvent('reciter_page_play_station');
     playReciterStation(selectedReciter, dispatch);
   };
-
-  const bio = removeHTMLTags(selectedReciter.bio);
 
   return (
     <div className={styles.container}>
@@ -46,7 +41,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       <div>
         <div className={styles.reciterName}>{selectedReciter?.name}</div>
         <div className={styles.reciterBio}>
-          {isbioTruncated ? truncateText(bio, maxBioLength) : bio}
+          {isbioTruncated ? truncateText(selectedReciter?.bio, maxBioLength) : selectedReciter?.bio}
           <span
             className={styles.moreLessButton}
             role="button"
