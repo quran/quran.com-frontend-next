@@ -33,7 +33,12 @@ import {
 } from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
-import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
+import {
+  getVerseNumberFromKey,
+  getFirstAndLastVerseKeys,
+  getVerseWords,
+  makeVerseKey,
+} from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import Tafsir from 'types/Tafsir';
 import Verse from 'types/Verse';
@@ -123,38 +128,74 @@ const TafsirBody = ({
     ? getTafsirsLanguageOptions(tafsirSelectionList.tafsirs)
     : [];
 
-  const renderTafsir = useCallback((data) => {
-    if (!data || !data.tafsir) return <TafsirSkeleton />;
+  const renderTafsir = useCallback(
+    (data) => {
+      if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-    const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
-      data.tafsir;
-    const langData = getLanguageDataById(languageId);
-    const words = Object.values(verses)
-      .map((verse) => getVerseWords(verse))
-      .flat();
+      const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
+        data.tafsir;
+      const langData = getLanguageDataById(languageId);
+      const words = Object.values(verses)
+        .map((verse) => getVerseWords(verse))
+        .flat();
 
-    if (!text) return <TafsirSkeleton />;
+      if (!text) return <TafsirSkeleton />;
 
-    const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
-    return (
-      <div>
-        {Object.values(verses).length > 1 && (
-          <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
-        )}
-        <div className={styles.verseTextContainer}>
-          <PlainVerseText words={words} />
+      const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
+      return (
+        <div>
+          {Object.values(verses).length > 1 && (
+            <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
+          )}
+          <div className={styles.verseTextContainer}>
+            <PlainVerseText words={words} />
+          </div>
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+          <div
+            dir={langData.direction}
+            lang={langData.code}
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
+
+          <TafsirEndOfScrollingActions
+            currentVerseNumber={selectedVerseNumber}
+            currentChapterId={selectedChapterId}
+            onNextButtonClicked={() => {
+              logButtonClick('tafsir_next_verse');
+              scrollToTop();
+              const newVerseNumber = String(Number(getVerseNumberFromKey(lastVerseKey)) + 1);
+              fakeNavigate(
+                getVerseSelectedTafsirNavigationUrl(
+                  Number(selectedChapterId),
+                  Number(newVerseNumber),
+                  selectedTafsirIdOrSlug,
+                ),
+                lang,
+              );
+              setSelectedVerseNumber(newVerseNumber);
+            }}
+            onPreviousButtonClicked={() => {
+              const newVerseNumber = String(Number(getVerseNumberFromKey(firstVerseKey)) - 1);
+              logButtonClick('tafsir_prev_verse');
+              scrollToTop();
+              fakeNavigate(
+                getVerseSelectedTafsirNavigationUrl(
+                  Number(selectedChapterId),
+                  Number(newVerseNumber),
+                  selectedTafsirIdOrSlug,
+                ),
+                lang,
+              );
+              setSelectedVerseNumber(newVerseNumber);
+            }}
+          />
         </div>
-        <div className={styles.separatorContainer}>
-          <Separator />
-        </div>
-        <div
-          dir={langData.direction}
-          lang={langData.code}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
-      </div>
-    );
-  }, []);
+      );
+    },
+    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, selectedVerseNumber],
+  );
 
   const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
     words: true,
@@ -234,39 +275,6 @@ const TafsirBody = ({
           render={renderTafsir}
         />
       )}
-
-      <TafsirEndOfScrollingActions
-        currentVerseNumber={selectedVerseNumber}
-        currentChapterId={selectedChapterId}
-        onNextButtonClicked={() => {
-          logButtonClick('tafsir_next_verse');
-          scrollToTop();
-          const newVerseNumber = String(Number(selectedVerseNumber) + 1);
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirIdOrSlug,
-            ),
-            lang,
-          );
-          setSelectedVerseNumber(newVerseNumber);
-        }}
-        onPreviousButtonClicked={() => {
-          const newVerseNumber = String(Number(selectedVerseNumber) + -1);
-          logButtonClick('tafsir_prev_verse');
-          scrollToTop();
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirIdOrSlug,
-            ),
-            lang,
-          );
-          setSelectedVerseNumber(newVerseNumber);
-        }}
-      />
     </div>
   );
 
