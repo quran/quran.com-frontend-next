@@ -3,7 +3,6 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useMemo, useRef, useState } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -75,7 +74,6 @@ const ReadingView = ({
     quranReaderStyles,
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
-  const { quranTextFontScale } = quranReaderStyles;
   useScrollToVirtualizedVerse(
     quranReaderDataType,
     virtuosoRef,
@@ -109,18 +107,12 @@ const ReadingView = ({
         reciterQueryParamDifferent={reciterQueryParamDifferent}
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-      <div
-        onCopy={(event) => onCopyQuranWords(event, verses)}
-        className={classNames(styles.container, {
-          [styles.largeDesktopContainer]: quranTextFontScale === 4,
-          [styles.xLargeDesktopContainer]: quranTextFontScale === 5,
-        })}
-      >
+      <div onCopy={(event) => onCopyQuranWords(event, verses)} className={styles.container}>
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
           increaseViewportBy={300}
-          style={{ width: '100%' }}
+          className={styles.virtuosoScroller}
           initialItemCount={1} // needed for SSR.
           totalCount={pagesCount}
           itemContent={itemContentRenderer}
