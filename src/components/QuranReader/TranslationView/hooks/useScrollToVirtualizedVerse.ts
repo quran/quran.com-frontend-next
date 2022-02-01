@@ -30,6 +30,7 @@ const useScrollToVirtualizedTranslationView = (
         virtuosoRef.current.scrollToIndex({
           index: startingVerseNumber - 1,
           align: 'start',
+          offset: -10,
         });
       }
     }
