@@ -1,4 +1,5 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .headerContainer {
   display: flex;
@@ -23,4 +24,18 @@
 
 .recitersListContainer {
   min-height: calc(22 * var(--spacing-mega));
+}
+
+.reciterInfoContainer {
+  @include theme.light {
+    background-color: var(--color-success-medium);
+    color: #fff; // white text on "success" background;
+  }
+  @include theme.dark {
+    background-color: var(--color-background-elevated);
+  }
+
+  padding-block: var(--spacing-medium);
+  background-color: var(--color-success-medium);
+  margin-block-end: var(--spacing-large);
 }

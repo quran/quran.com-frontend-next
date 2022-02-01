@@ -17,6 +17,7 @@ import Reciter from 'types/Reciter';
 type ReciterInfoProps = {
   selectedReciter: Reciter;
 };
+
 const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
