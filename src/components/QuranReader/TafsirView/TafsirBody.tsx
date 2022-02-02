@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
-import uniq from 'lodash/uniq';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import useSWR from 'swr/immutable';
@@ -34,14 +33,16 @@ import {
 } from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
+import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from 'src/utils/tafsir';
 import {
   getVerseNumberFromKey,
   getFirstAndLastVerseKeys,
   getVerseWords,
   makeVerseKey,
+  isLastVerseOfSurah,
+  getVerseAndChapterNumbersFromKey,
 } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
-import Tafsir from 'types/Tafsir';
 import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
@@ -143,6 +144,11 @@ const TafsirBody = ({
       if (!text) return <TafsirSkeleton />;
 
       const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
+
+      const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastVerseKey);
+      const hasNextVerseGroup = !isLastVerseOfSurah(chapterNumber, Number(verseNumber));
+      const hasPrevVerseGroup = getVerseNumberFromKey(firstVerseKey) !== 1;
+
       return (
         <div>
           {Object.values(verses).length > 1 && (
@@ -161,8 +167,8 @@ const TafsirBody = ({
           />
 
           <TafsirEndOfScrollingActions
-            currentVerseNumber={selectedVerseNumber}
-            currentChapterId={selectedChapterId}
+            hasNextVerseGroup={hasNextVerseGroup}
+            hasPrevVersegroup={hasPrevVerseGroup}
             onNextButtonClicked={() => {
               logButtonClick('tafsir_next_verse');
               scrollToTop();
@@ -195,7 +201,7 @@ const TafsirBody = ({
         </div>
       );
     },
-    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, selectedVerseNumber],
+    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug],
   );
 
   const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
@@ -207,13 +213,13 @@ const TafsirBody = ({
   // Whether we should use the initial tafsir data or fetch the data on the client side
   const shouldUseInitialTafsirData = useMemo(
     () =>
-      (initialTafsirData &&
-        quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
-        Object.keys(initialTafsirData.tafsir.verses).includes(
-          makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-        ) &&
-        selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug) ||
-      Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId,
+      initialTafsirData &&
+      quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+      Object.keys(initialTafsirData.tafsir.verses).includes(
+        makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
+      ) &&
+      (selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug ||
+        Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId),
     [
       initialTafsirData,
       quranReaderStyles.quranFont,
@@ -289,33 +295,6 @@ const TafsirBody = ({
   );
 
   return render({ surahAndAyahSelection, languageAndTafsirSelection, body });
-};
-
-/**
- * Given list of tafsirs, get all available language options
- *
- * @param {Tafsir[]} tafsirs
- * @returns {string[]} list of available language options
- */
-const getTafsirsLanguageOptions = (tafsirs: Tafsir[]): string[] =>
-  uniq(tafsirs.map((tafsir) => tafsir.languageName));
-
-/**
- * Get the language of the selected Tafsir.
- *
- * @param {TafsirsResponse} tafsirListData
- * @param {number|string} selectedTafsirIdOrSlug
- * @returns {string}
- */
-const getSelectedTafsirLanguage = (
-  tafsirListData: TafsirsResponse,
-  selectedTafsirIdOrSlug: number | string,
-): string => {
-  const selectedTafsir = tafsirListData?.tafsirs.find(
-    (tafsir) =>
-      tafsir.slug === selectedTafsirIdOrSlug || tafsir.id === Number(selectedTafsirIdOrSlug),
-  );
-  return selectedTafsir?.languageName;
 };
 
 export default TafsirBody;
