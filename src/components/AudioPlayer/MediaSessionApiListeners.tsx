@@ -18,6 +18,15 @@ type MediaSessionApiListenersProps = {
   playNextTrack: () => void;
 };
 
+const QURAN_COM_ARTWORK = [
+  { src: '/images/logo/Logo@96x96.png', sizes: '96x96', type: 'image/png' },
+  { src: '/images/logo/Logo@128x128.png', sizes: '128x128', type: 'image/png' },
+  { src: '/images/logo/Logo@192x192.png', sizes: '192x192', type: 'image/png' },
+  { src: '/images/logo/Logo@256x256.png', sizes: '256x256', type: 'image/png' },
+  { src: '/images/logo/Logo@384x384.png', sizes: '384x384', type: 'image/png' },
+  { src: '/images/logo/Logo@512x512.png', sizes: '512x512', type: 'image/png' },
+];
+
 const MediaSessionApiListeners = ({
   play,
   pause,
@@ -35,15 +44,8 @@ const MediaSessionApiListeners = ({
       title: stationInfo.title,
       artist: stationInfo.description,
       album: 'Quran.com',
-      artwork: [
-        // TODO: replace with station image
-        { src: '/images/logo/Logo@96x96.png', sizes: '96x96', type: 'image/png' },
-        { src: '/images/logo/Logo@128x128.png', sizes: '128x128', type: 'image/png' },
-        { src: '/images/logo/Logo@192x192.png', sizes: '192x192', type: 'image/png' },
-        { src: '/images/logo/Logo@256x256.png', sizes: '256x256', type: 'image/png' },
-        { src: '/images/logo/Logo@384x384.png', sizes: '384x384', type: 'image/png' },
-        { src: '/images/logo/Logo@512x512.png', sizes: '512x512', type: 'image/png' },
-      ],
+      // TODO: replace with station image
+      artwork: QURAN_COM_ARTWORK,
     });
   }, [stationInfo.description, stationInfo.title]);
 
@@ -55,15 +57,8 @@ const MediaSessionApiListeners = ({
       title: chapterData.transliteratedName,
       artist: reciterData?.reciter?.name,
       album: 'Quran.com',
-      artwork: [
-        // TODO: replace with reciter image
-        { src: '/images/logo/Logo@96x96.png', sizes: '96x96', type: 'image/png' },
-        { src: '/images/logo/Logo@128x128.png', sizes: '128x128', type: 'image/png' },
-        { src: '/images/logo/Logo@192x192.png', sizes: '192x192', type: 'image/png' },
-        { src: '/images/logo/Logo@256x256.png', sizes: '256x256', type: 'image/png' },
-        { src: '/images/logo/Logo@384x384.png', sizes: '384x384', type: 'image/png' },
-        { src: '/images/logo/Logo@512x512.png', sizes: '512x512', type: 'image/png' },
-      ],
+      // TODO: replace with reciter image
+      artwork: QURAN_COM_ARTWORK,
     });
   }, [audioPlayerState.audioData.chapterId, audioPlayerState.reciter.id]);
 
