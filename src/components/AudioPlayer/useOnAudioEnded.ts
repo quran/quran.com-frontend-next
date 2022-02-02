@@ -5,7 +5,11 @@ import { useDispatch, useStore } from 'react-redux';
 import stationOperators from '../Radio/stationOperators';
 
 import { RootState } from 'src/redux/RootState';
-import { playFrom, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
+import {
+  playFrom,
+  selectIsInRepeatMode,
+  selectIsRadioMode,
+} from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { QURAN_CHAPTERS_COUNT } from 'src/utils/chapter';
 
@@ -52,24 +56,25 @@ const useOnAudioEnded = () => {
     const reciterId = state.audioPlayerState.reciter.id;
     const nextChapterId = chapterId === QURAN_CHAPTERS_COUNT ? 1 : chapterId + 1;
 
-    playFrom({
-      chapterId: nextChapterId,
-      reciterId,
-      timestamp: 0,
-    });
-  }, [store]);
+    dispatch(
+      playFrom({
+        chapterId: nextChapterId,
+        reciterId,
+        timestamp: 0,
+      }),
+    );
+  }, [dispatch, store]);
 
-  const callback = useCallback(() => {
+  return useCallback(() => {
     const state: RootState = store.getState();
     const isRadioMode = selectIsRadioMode(state);
+    const isInRepeatMode = selectIsInRepeatMode(state);
 
     if (isRadioMode) {
       playNextRadioAudioTrack();
-    } else {
+    } else if (!isInRepeatMode) {
       playNextChapter();
     }
-
-    return callback;
   }, [playNextChapter, playNextRadioAudioTrack, store]);
 };
 

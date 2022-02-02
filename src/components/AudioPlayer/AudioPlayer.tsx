@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioPlayer.module.scss';
-import useOnAudioEnded from './OnAudioEnded';
+import useOnAudioEnded from './useOnAudioEnded';
 
 import {
   setIsPlaying,
@@ -35,10 +35,10 @@ const AudioPlayer = () => {
   const onAudioPause = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: false });
   }, [dispatch]);
+  const onAudioEnded = useOnAudioEnded();
   const onAudioLoaded = useCallback(() => {
     dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
   }, [dispatch]);
-  const onAudioEnded = useOnAudioEnded();
 
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
