@@ -70,40 +70,32 @@ const SettingsReciter = () => {
           const filteredReciters = searchQuery
             ? filterReciters(data.reciters, searchQuery)
             : data.reciters;
-          return (
-            <RadioGroup
-              value={selectedReciter.id.toString()}
-              orientation={RadioGroupOrientation.Vertical}
-              label="reciter"
-              onChange={(newId) => onSelectedReciterChange(newId, data.reciters)}
-              items={filteredReciters
-                .sort((a, b) => (a.name > b.name ? 1 : -1))
-                .map((reciter) => ({
-                  value: reciter.id.toString(),
-                  id: reciter.id.toString(),
-                  label:
-                    reciter.style.name !== DEFAULT_RECITATION_STYLE
-                      ? `${reciter.translatedName.name}/${reciter.style.name}`
-                      : reciter.translatedName.name,
-                }))}
-              renderItem={(item) => {
-                const [reciterName, reciterStyle] = item.label.split('/');
 
-                return (
-                  <div className={styles.reciter} key={item.id}>
-                    <RadioGroup.Item value={item.value} id={item.id}>
-                      <RadioGroup.Indicator />
-                    </RadioGroup.Item>
-                    <label htmlFor={item.id} className={styles.reciterLabel}>
-                      {reciterName}
-                      {reciterStyle && (
-                        <span className={styles.recitationStyle}>{reciterStyle}</span>
-                      )}
-                    </label>
-                  </div>
-                );
-              }}
-            />
+          return (
+            <RadioGroup.Root
+              label="reciter"
+              orientation={RadioGroupOrientation.Vertical}
+              value={selectedReciter.id.toString()}
+              onChange={(newId) => onSelectedReciterChange(newId, data.reciters)}
+            >
+              {filteredReciters
+                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .map((reciter) => {
+                  const reciterId = reciter.id.toString();
+                  return (
+                    <div className={styles.reciter} key={reciterId}>
+                      <RadioGroup.Item value={reciterId} id={reciterId} />
+
+                      <label htmlFor={reciterId} className={styles.reciterLabel}>
+                        {reciter.translatedName.name}
+                        {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
+                          <span className={styles.recitationStyle}>{reciter.style.name}</span>
+                        )}
+                      </label>
+                    </div>
+                  );
+                })}
+            </RadioGroup.Root>
           );
         }}
       />

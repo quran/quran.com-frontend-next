@@ -1,12 +1,10 @@
 import React from 'react';
 
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import classNames from 'classnames';
 
+import Item from './Item';
 import styles from './RadioGroup.module.scss';
-
-import useDirection from 'src/hooks/useDirection';
-import { Direction } from 'src/utils/locale';
+import Root, { Props as RootProps } from './Root';
 
 export interface RadioItem {
   value: string;
@@ -16,69 +14,25 @@ export interface RadioItem {
   required?: boolean;
 }
 
-export enum RadioGroupOrientation {
-  Horizontal = 'horizontal',
-  Vertical = 'vertical',
-}
-
-interface Props {
+interface Props extends RootProps {
   items: RadioItem[];
-  label: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
   disabled?: boolean;
-  value?: string;
-  name?: string;
-  required?: boolean;
-  loop?: boolean;
-  orientation?: RadioGroupOrientation;
-  renderItem?: (item: RadioItem) => React.ReactNode;
 }
 
-const RadioGroup: React.FC<Props> & {
-  Item: (props: RadioGroupPrimitive.RadioGroupItemProps) => React.ReactElement;
-  Indicator: (props: RadioGroupPrimitive.RadioIndicatorProps) => React.ReactElement;
-} = ({
-  items,
-  label,
-  onChange,
-  defaultValue,
-  value,
-  name,
-  required,
-  disabled = false,
-  orientation = RadioGroupOrientation.Vertical,
-  renderItem,
-}) => {
-  const direction = useDirection();
-
+const RadioGroup = ({ items, disabled = false, ...props }: Props) => {
   return (
-    <RadioGroupPrimitive.Root
-      className={styles.container}
-      dir={direction as Direction}
-      aria-label={label}
-      orientation={orientation}
-      {...(onChange && { onValueChange: onChange })}
-      {...(defaultValue && { defaultValue })}
-      {...(value && { value })}
-      {...(name && { name })}
-      {...(required && { required })}
-    >
+    <Root {...props}>
       {items.map((item) => {
-        if (renderItem) return renderItem(item);
-
         const isDisabled = disabled === true || item.disabled === true;
         return (
           <div className={styles.radioItemContainer} key={item.id}>
-            <RadioGroupPrimitive.Item
+            <Item
               value={item.value}
               id={item.id}
-              className={styles.radioItem}
               disabled={isDisabled}
               required={item.required || false}
-            >
-              <RadioGroupPrimitive.Indicator className={styles.indicator} />
-            </RadioGroupPrimitive.Item>
+            />
+
             <label
               htmlFor={item.id}
               className={classNames(styles.label, { [styles.disabled]: isDisabled })}
@@ -88,18 +42,14 @@ const RadioGroup: React.FC<Props> & {
           </div>
         );
       })}
-    </RadioGroupPrimitive.Root>
+    </Root>
   );
 };
 
-// eslint-disable-next-line react/no-multi-comp
-RadioGroup.Item = ({ className, ...props }) => (
-  <RadioGroupPrimitive.Item className={classNames(styles.radioItem, className)} {...props} />
-);
+RadioGroup.Root = Root;
+RadioGroup.Item = Item;
 
-// eslint-disable-next-line react/no-multi-comp
-RadioGroup.Indicator = ({ className, ...props }) => (
-  <RadioGroupPrimitive.Indicator className={classNames(styles.indicator, className)} {...props} />
-);
+// export `RadioGroupOrientation` type from here so that files that are using it don't break
+export { RadioRootOrientation as RadioGroupOrientation } from './Root';
 
 export default RadioGroup;
