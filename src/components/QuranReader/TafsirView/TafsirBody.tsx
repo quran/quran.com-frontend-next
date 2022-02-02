@@ -19,10 +19,11 @@ import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getDefaultWordFields } from 'src/utils/api';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -200,18 +201,27 @@ const TafsirBody = ({
   const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
     words: true,
     ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
   });
 
   // Whether we should use the initial tafsir data or fetch the data on the client side
   const shouldUseInitialTafsirData = useMemo(
     () =>
       (initialTafsirData &&
+        quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
         Object.keys(initialTafsirData.tafsir.verses).includes(
           makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
         ) &&
         selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug) ||
       Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId,
-    [initialTafsirData, selectedChapterId, selectedTafsirIdOrSlug, selectedVerseNumber],
+    [
+      initialTafsirData,
+      quranReaderStyles.quranFont,
+      selectedChapterId,
+      selectedTafsirIdOrSlug,
+      selectedVerseNumber,
+      lang,
+    ],
   );
 
   const surahAndAyahSelection = (

@@ -5,12 +5,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../[verseId]/tafsirs.module.scss';
 
-import { fetcher } from 'src/api';
+import { getTafsirContent } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
-import { getDefaultWordFields } from 'src/utils/api';
-import { makeTafsirContentUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { scrollWindowToTop } from 'src/utils/navigation';
@@ -83,13 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   try {
-    const tafsirData = await fetcher<TafsirContentResponse>(
-      makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-        words: true,
-        ...getDefaultWordFields(),
-      }),
-    );
-
+    const tafsirData = await getTafsirContent(tafsirIdOrSlug as string, verseKey, locale);
     return {
       props: {
         chapterId: chapterNumber,

@@ -27,7 +27,11 @@ const useScrollToVirtualizedTranslationView = (
       const startingVerseNumber = Number(startingVerse);
       // if the startingVerse is a valid integer and is above 1
       if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
-        virtuosoRef.current.scrollToIndex(startingVerseNumber - 1);
+        virtuosoRef.current.scrollToIndex({
+          index: startingVerseNumber - 1,
+          align: 'start',
+          offset: -20,
+        });
       }
     }
   }, [quranReaderDataType, startingVerse, virtuosoRef]);

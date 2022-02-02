@@ -80,6 +80,7 @@ const ReadingView = ({
     initialData,
     quranReaderStyles,
     verses,
+    pagesVersesRange,
   );
 
   const itemContentRenderer = (pageIndex: number) => (
