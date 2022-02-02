@@ -2,8 +2,8 @@ import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './RecitersList.module.scss';
 
-import { getImageCDNPath } from 'src/api';
 import Link from 'src/components/dls/Link/Link';
+import { getImageCDNPath } from 'src/utils/api';
 import { getReciterNavigationUrl } from 'src/utils/navigation';
 import Reciter from 'types/Reciter';
 

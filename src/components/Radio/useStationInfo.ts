@@ -7,6 +7,7 @@ import { StationInfo, StationType } from './types';
 
 import { getReciterData } from 'src/api';
 import { selectRadioStation } from 'src/redux/slices/radio';
+import { getImageCDNPath } from 'src/utils/api';
 import { makeReciterUrl } from 'src/utils/apiPaths';
 
 const useCurrentStationInfo = (): StationInfo => {
@@ -33,7 +34,7 @@ const useCurrentStationInfo = (): StationInfo => {
     return {
       title: selectedReciter?.name,
       description: selectedReciter?.style?.name,
-      imgUrl: selectedReciter?.profilePicture,
+      imgUrl: getImageCDNPath(selectedReciter?.profilePicture),
     };
   };
 

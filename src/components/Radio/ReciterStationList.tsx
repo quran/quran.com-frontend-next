@@ -10,9 +10,9 @@ import Link, { LinkVariant } from '../dls/Link/Link';
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
-import { getImageCDNPath } from 'src/api';
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
+import { getImageCDNPath } from 'src/utils/api';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { getReciterNavigationUrl } from 'src/utils/navigation';
