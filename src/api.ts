@@ -1,5 +1,7 @@
 import { camelizeKeys } from 'humps';
 
+import { getQuranReaderStylesInitialState } from './redux/defaultSettings/util';
+import { getDefaultWordFields, getMushafId } from './utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -17,6 +19,7 @@ import {
   makeFootnoteUrl,
   makeChapterUrl,
   makeReciterUrl,
+  makeTafsirContentUrl,
 } from './utils/apiPaths';
 
 import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
@@ -34,6 +37,7 @@ import {
   FootnoteResponse,
   ChapterResponse,
   ReciterResponse,
+  TafsirContentResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -260,6 +264,17 @@ export const getChapterIdBySlug = async (slug: string, locale: string): Promise<
   } catch (error) {
     return false;
   }
+};
+
+export const getTafsirContent = (tafsirIdOrSlug: string, verseKey: string, locale: string) => {
+  const quranStyle = getQuranReaderStylesInitialState(locale);
+  return fetcher<TafsirContentResponse>(
+    makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
+      words: true,
+      ...getDefaultWordFields(),
+      ...getMushafId(quranStyle.quranFont, quranStyle.mushafLines),
+    }),
+  );
 };
 
 export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;
