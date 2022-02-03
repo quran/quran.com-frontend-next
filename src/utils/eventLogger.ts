@@ -4,7 +4,7 @@
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   import('src/lib/firebase').then((firebaseModule) => {
     // eslint-disable-next-line i18next/no-literal-string
-    firebaseModule.analytics().logEvent(eventName, params);
+    // firebaseModule.analytics().logEvent(eventName, params);
   });
 };
 
