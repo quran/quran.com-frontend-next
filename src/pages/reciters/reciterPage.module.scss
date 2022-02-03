@@ -34,6 +34,10 @@
   @include theme.dark {
     background-color: var(--color-background-elevated);
   }
+  @include theme.sepia {
+    background-color: var(--color-background-alternative-deep);
+    color: var(--color-text-default);
+  }
 
   padding-block: var(--spacing-medium);
   background-color: var(--color-success-medium);

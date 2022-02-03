@@ -32,6 +32,9 @@ $fallbackColor: #22a5ad;
   @include theme.light {
     filter: none;
   }
+  @include theme.sepia {
+    filter: sepia(1);
+  }
 }
 
 .searchInputContainer {
