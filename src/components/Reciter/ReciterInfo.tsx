@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
@@ -45,8 +46,11 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       </div>
       <div>
         <div className={styles.reciterName}>{selectedReciter?.name}</div>
-        <div className={styles.reciterBio}>
-          {bio}
+        <div className={styles.reciterBioContainer}>
+          <div
+            className={classNames(styles.reciterBio, isbioTruncated && styles.bioTruncated)}
+            dangerouslySetInnerHTML={{ __html: bio }}
+          />
           {selectedReciter?.bio.length > maxBioLength && (
             <span
               className={styles.moreLessButton}

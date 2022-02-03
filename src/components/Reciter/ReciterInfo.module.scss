@@ -19,8 +19,9 @@
   object-fit: cover;
 }
 
-.reciterBio {
+.reciterBioContainer {
   margin-block-end: var(--spacing-medium);
+  line-height: var(--line-height-large);
 }
 
 .reciterName {
@@ -52,7 +53,6 @@
 .moreLessButton {
   cursor: pointer;
   font-weight: var(--font-weight-bold);
-  margin-inline-start: var(--spacing-small);
 }
 
 .actionContainer {
@@ -67,4 +67,15 @@
   @include breakpoints.tablet {
     width: auto;
   }
+}
+
+.reciterBio p {
+  line-height: var(--line-height-xlarge);
+}
+
+.bioTruncated {
+  height: calc(4 * var(--spacing-medium));
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, #fff 50%, transparent);
+  mask-image: linear-gradient(180deg, #fff 50%, transparent);
 }
