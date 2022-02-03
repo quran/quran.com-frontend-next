@@ -16,6 +16,9 @@ const securityHeaders = require('./configs/SecurityHeaders.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const config = {
+  experimental: {
+    outputStandalone: true,
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
