@@ -42,7 +42,6 @@ export type QuranWordProps = {
   isWordByWordAllowed?: boolean;
   isAudioHighlightingAllowed?: boolean;
   isFontLoaded?: boolean;
-  shouldShowSecondaryHighlight?: boolean;
 };
 
 const QuranWord = ({
@@ -51,7 +50,6 @@ const QuranWord = ({
   isWordByWordAllowed = true,
   isAudioHighlightingAllowed = true,
   isHighlighted,
-  shouldShowSecondaryHighlight = false,
   isFontLoaded = true,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
@@ -134,7 +132,6 @@ const QuranWord = ({
       }}
       className={classNames(styles.container, {
         [styles.highlighted]: shouldBeHighLighted,
-        [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
         [styles.tajweedWord]: font === QuranFont.Tajweed,

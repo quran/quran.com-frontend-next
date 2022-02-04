@@ -25,7 +25,7 @@ export type LineProps = {
 };
 
 const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
-  const lineVerseKeys = lineData.verseKeys()
+  const lineVerseKeys = lineData.verseKeys();
   const isHighlighted = useSelector(selectIsLineHighlighted(lineVerseKeys));
   const firstWordOfLine = lineData.words()[0];
 
