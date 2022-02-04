@@ -39,6 +39,9 @@
 .verseTextWrap {
   flex-wrap: wrap;
 }
+.verseTextInline {
+  display: inline;
+}
 
 @include utility.generate-font-sizes("code_v1");
 @include utility.generate-font-sizes("code_v2");
