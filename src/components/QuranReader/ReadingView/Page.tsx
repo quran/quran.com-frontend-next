@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import groupWordsByLineAndVerse from './groupLinesByVerses';
+import { groupWordsByLineAndVerse } from './groupLinesByVerses';
 import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
