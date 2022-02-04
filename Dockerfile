@@ -7,11 +7,37 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 # If using npm with a `package-lock.json` comment out above and use below instead
-# COPY package.json package-lock.json ./ 
+# COPY package.json package-lock.json ./
 # RUN npm ci
 
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
+ARG NOTION_TOKEN
+ARG NOTION_DATABASE_ID
+ARG NEXT_PUBLIC_VERCEL_ENV
+ARG NEXT_PUBLIC_VERCEL_URL
+ARG NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+ARG NEXT_PUBLIC_TARTEEL_VS_API_KEY
+ARG NEXT_PUBLIC_FS_API_KEY
+ARG NEXT_PUBLIC_FS_AUTH_DOMAIN
+ARG NEXT_PUBLIC_FS_PROJECT_ID
+ARG NEXT_PUBLIC_FS_STORAGE_BUCKET
+ARG NEXT_PUBLIC_FS_MESSAGING_SENDER_ID
+ARG NEXT_PUBLIC_FS_APP_ID
+ARG NEXT_PUBLIC_FS_MEASUREMENT_ID
+ENV NOTION_TOKEN=$NOTION_TOKEN
+ENV NOTION_DATABASE_ID=$NOTION_DATABASE_ID
+ENV NEXT_PUBLIC_VERCEL_ENV=$NEXT_PUBLIC_VERCEL_ENV
+ENV NEXT_PUBLIC_VERCEL_URL=$NEXT_PUBLIC_VERCEL_URL
+ENV NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=$NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+ENV NEXT_PUBLIC_TARTEEL_VS_API_KEY=$NEXT_PUBLIC_TARTEEL_VS_API_KEY
+ENV NEXT_PUBLIC_FS_API_KEY=$NEXT_PUBLIC_FS_API_KEY
+ENV NEXT_PUBLIC_FS_AUTH_DOMAIN=$NEXT_PUBLIC_FS_AUTH_DOMAIN
+ENV NEXT_PUBLIC_FS_PROJECT_ID=$NEXT_PUBLIC_FS_PROJECT_ID
+ENV NEXT_PUBLIC_FS_STORAGE_BUCKET=$NEXT_PUBLIC_FS_STORAGE_BUCKET
+ENV NEXT_PUBLIC_FS_MESSAGING_SENDER_ID=$NEXT_PUBLIC_FS_MESSAGING_SENDER_ID
+ENV NEXT_PUBLIC_FS_APP_ID=$NEXT_PUBLIC_FS_APP_ID
+ENV NEXT_PUBLIC_FS_MEASUREMENT_ID=$NEXT_PUBLIC_FS_MEASUREMENT_ID
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -31,7 +57,7 @@ RUN adduser -S nextjs -u 1001
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
-# Automatically leverage output traces to reduce image size 
+# Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
