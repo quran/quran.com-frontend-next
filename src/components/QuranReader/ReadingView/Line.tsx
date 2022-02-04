@@ -18,7 +18,6 @@ import LineData from 'types/LineData';
 
 export type LineProps = {
   lineData: LineData;
-  lineKey: string;
   isBigTextLayout: boolean;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
@@ -26,7 +25,10 @@ export type LineProps = {
 };
 
 const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
-  const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
+  const lineVerseKeys = lineData.verseKeys()
+  const isHighlighted = useSelector(selectIsLineHighlighted(lineVerseKeys));
+  const firstWordOfLine = lineData.words()[0];
+
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
@@ -37,13 +39,13 @@ const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) =>
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
 
-  const firstWordData = getWordDataByLocation(words[0].location);
+  const firstWordData = getWordDataByLocation(firstWordOfLine.location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
 
   return (
     <div
       ref={selectedItemRef}
-      id={lineKey}
+      id={lineData.lineNumber}
       className={classNames(styles.container, {
         [styles.highlighted]: isHighlighted,
         [styles.mobileInline]: isBigTextLayout,
@@ -52,17 +54,20 @@ const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) =>
       {shouldShowChapterHeader && (
         <ChapterHeader
           chapterId={firstWordData[0]}
-          pageNumber={words[0].pageNumber}
-          hizbNumber={words[0].hizbNumber}
+          pageNumber={firstWordOfLine.pageNumber}
+          hizbNumber={firstWordOfLine.hizbNumber}
         />
       )}
       <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
-        <VerseText
-          words={words}
-          isReadingMode
-          isHighlighted={isHighlighted}
-          shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
-        />
+        {lineVerseKeys.map((key) => (
+          <VerseText
+            key={key}
+            words={lineData.verseWords(key)}
+            isReadingMode
+            isHighlighted={isHighlighted}
+            shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
+          />
+        ))}
       </div>
     </div>
   );
@@ -87,13 +92,13 @@ const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) =>
  * @returns {boolean}
  */
 const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
-  prevProps.lineKey === nextProps.lineKey &&
+  prevProps.lineData.lineNumber === nextProps.lineData.lineNumber &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,
-    prevProps.words,
-    nextProps.words,
+    prevProps.lineData.words(),
+    nextProps.lineData.words(),
   );
 
 export default memo(Line, areLinesEqual);
