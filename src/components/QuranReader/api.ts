@@ -76,6 +76,7 @@ export const getRequestKey = ({
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
+      perPage: 'all',
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
@@ -117,6 +118,7 @@ export const getReaderViewRequestKey = ({
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
     reciter,
+    perPage: 'all',
     wordTranslationLanguage: wordByWordLocale,
     filterPageWords: true,
     ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page

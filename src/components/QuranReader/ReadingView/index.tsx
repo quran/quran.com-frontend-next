@@ -94,6 +94,7 @@ const ReadingView = ({
       pageIndex={pageIndex}
       setMushafPageToVersesMap={setMushafPageToVersesMap}
       initialData={initialData}
+      quranReaderDataType={quranReaderDataType}
     />
   );
 
