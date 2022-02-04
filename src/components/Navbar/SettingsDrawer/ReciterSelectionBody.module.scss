@@ -3,9 +3,10 @@
   display: flex;
   align-items: center;
   font-size: var(--font-size-large);
-  & > input {
-    margin-inline-end: var(--spacing-small);
-  }
+}
+
+.reciterLabel {
+  padding-inline-start: var(--spacing-small);
 }
 
 $recitation-padding: calc(0.5 * var(--spacing-xxsmall));

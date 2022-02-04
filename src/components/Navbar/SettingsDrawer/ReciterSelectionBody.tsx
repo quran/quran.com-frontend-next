@@ -11,6 +11,7 @@ import styles from './ReciterSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
+import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
@@ -69,35 +70,32 @@ const SettingsReciter = () => {
           const filteredReciters = searchQuery
             ? filterReciters(data.reciters, searchQuery)
             : data.reciters;
+
           return (
-            <div>
+            <RadioGroup.Root
+              label="reciter"
+              orientation={RadioGroupOrientation.Vertical}
+              value={selectedReciter.id.toString()}
+              onChange={(newId) => onSelectedReciterChange(newId, data.reciters)}
+            >
               {filteredReciters
                 .sort((a, b) => (a.name > b.name ? 1 : -1))
-                .map((reciter) => (
-                  <label
-                    className={styles.reciter}
-                    htmlFor={reciter.id.toString()}
-                    key={reciter.id}
-                  >
-                    <input
-                      id={reciter.id.toString()}
-                      type="radio"
-                      name="reciter"
-                      value={reciter.id}
-                      checked={reciter.id === selectedReciter.id}
-                      onChange={(e) => {
-                        onSelectedReciterChange(e.target.value, data.reciters);
-                      }}
-                    />
-                    <span lang={reciter.translatedName.languageName}>
-                      {reciter.translatedName.name}
-                    </span>
-                    {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
-                      <span className={styles.recitationStyle}>{reciter.style.name}</span>
-                    )}
-                  </label>
-                ))}
-            </div>
+                .map((reciter) => {
+                  const reciterId = reciter.id.toString();
+                  return (
+                    <div className={styles.reciter} key={reciterId}>
+                      <RadioGroup.Item value={reciterId} id={reciterId} />
+
+                      <label htmlFor={reciterId} className={styles.reciterLabel}>
+                        {reciter.translatedName.name}
+                        {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
+                          <span className={styles.recitationStyle}>{reciter.style.name}</span>
+                        )}
+                      </label>
+                    </div>
+                  );
+                })}
+            </RadioGroup.Root>
           );
         }}
       />

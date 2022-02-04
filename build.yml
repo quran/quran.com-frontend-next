@@ -1,0 +1,8 @@
+version: 0.2
+phases:
+  build:
+    commands:
+      - docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) $ECR_ENDPOINT
+      - docker build -t builtimage --build-arg NOTION_TOKEN=$NOTION_TOKEN --build-arg NOTION_DATABASE_ID=$NOTION_DATABASE_ID . 
+      - docker tag builtimage:latest $ECR_IMAGE_URL:latest
+      - docker push $ECR_IMAGE_URL:latest

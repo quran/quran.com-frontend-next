@@ -153,7 +153,7 @@ const TranslationView = ({
         (verse) => verse.verseKey === resourceVerseKeys[currentVerseIndex],
       );
       if (!filteredVerses.length) {
-        return <></>;
+        return <TranslationViewCellSkeleton />;
       }
       return (
         <>
