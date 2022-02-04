@@ -82,7 +82,7 @@ const VerseText = ({
         data-hizb={hizbNumber}
         className={classNames(styles.verseTextContainer, {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
-          [styles.highlighted]: isHighlighted || hoveredVerseKey == verseKey,
+          [styles.highlighted]: isHighlighted || hoveredVerseKey === verseKey,
           [styles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
           [styles.tafsirOrTranslationMode]: !isReadingMode,
         })}

@@ -21,10 +21,9 @@ export type LineProps = {
   isBigTextLayout: boolean;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
-  lineIndex: number;
 };
 
-const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
+const Line = ({ lineData, isBigTextLayout, pageIndex }: LineProps) => {
   const lineVerseKeys = lineData.verseKeys();
   const isHighlighted = useSelector(selectIsLineHighlighted(lineVerseKeys));
   const firstWordOfLine = lineData.words()[0];
@@ -65,7 +64,7 @@ const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) =>
             words={lineData.verseWords(key)}
             isReadingMode
             isHighlighted={isHighlighted}
-            shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
+            shouldShowH1ForSEO={pageIndex === 0 && lineData.lineNumber === '0'}
           />
         ))}
       </div>

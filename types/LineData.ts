@@ -3,7 +3,7 @@ import Word from './Word';
 export default class LineData {
   lineNumber: string;
 
-  protected lineVerses: {};
+  protected lineVerses: Record<string, Word[]>;
 
   protected lineWords: Word[];
 

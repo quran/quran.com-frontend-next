@@ -39,12 +39,11 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
       id={`page-${pageNumber}`}
       className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
-      {Object.values(lines).map((lineData, lineIndex) => (
+      {Object.values(lines).map((lineData) => (
         <Line
           pageIndex={pageIndex}
-          lineIndex={lineIndex}
           lineData={lineData}
-          key={lineIndex}
+          key={lineData.lineNumber}
           isBigTextLayout={isBigTextLayout}
           quranReaderStyles={quranReaderStyles}
         />
