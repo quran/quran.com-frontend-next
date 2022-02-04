@@ -14,10 +14,10 @@ import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from 'src/utils/verse';
-import Word from 'types/Word';
+import LineData from 'types/LineData';
 
 export type LineProps = {
-  words: Word[];
+  lineData: LineData;
   lineKey: string;
   isBigTextLayout: boolean;
   quranReaderStyles: QuranReaderStyles;
@@ -25,7 +25,7 @@ export type LineProps = {
   lineIndex: number;
 };
 
-const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
+const Line = ({ lineData, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
