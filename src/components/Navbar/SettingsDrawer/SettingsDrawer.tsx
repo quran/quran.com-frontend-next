@@ -61,7 +61,7 @@ const SettingsDrawer = () => {
     );
 
   return (
-    <Drawer type={DrawerType.Settings} header={header}>
+    <Drawer type={DrawerType.Settings} header={header} closeOnNavigation={false}>
       {isSettingsDrawerOpen && settingsView === SettingsView.Body && <SettingsBody />}
       {isSettingsDrawerOpen && settingsView === SettingsView.Translation && (
         <TranslationSelectionBody />

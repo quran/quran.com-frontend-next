@@ -39,6 +39,7 @@ interface Props {
   header: ReactNode;
   hideCloseButton?: boolean;
   children: ReactNode;
+  closeOnNavigation?: boolean;
 }
 
 /**
@@ -80,6 +81,7 @@ const Drawer: React.FC<Props> = ({
   header,
   children,
   hideCloseButton = false,
+  closeOnNavigation = true,
 }) => {
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
@@ -110,11 +112,11 @@ const Drawer: React.FC<Props> = ({
   // Hide navbar after successful navigation
   useEffect(() => {
     router.events.on('routeChangeComplete', () => {
-      if (isOpen && type !== DrawerType.Settings) {
+      if (isOpen && closeOnNavigation) {
         closeDrawer('navigation');
       }
     });
-  }, [closeDrawer, router.events, isOpen, type]);
+  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
