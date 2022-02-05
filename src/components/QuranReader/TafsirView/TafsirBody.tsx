@@ -166,13 +166,13 @@ const TafsirBody = ({
   // Whether we should use the initial tafsir data or fetch the data on the client side
   const shouldUseInitialTafsirData = useMemo(
     () =>
-      (initialTafsirData &&
-        quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
-        Object.keys(initialTafsirData.tafsir.verses).includes(
-          makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-        ) &&
-        selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug) ||
-      Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId,
+      initialTafsirData &&
+      quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+      Object.keys(initialTafsirData.tafsir.verses).includes(
+        makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
+      ) &&
+      (selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug ||
+        Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId),
     [
       initialTafsirData,
       quranReaderStyles.quranFont,
