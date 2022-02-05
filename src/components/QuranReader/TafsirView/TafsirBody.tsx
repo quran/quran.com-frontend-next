@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
-import uniq from 'lodash/uniq';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import useSWR from 'swr/immutable';
@@ -34,9 +33,16 @@ import {
 } from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
-import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from 'src/utils/tafsir';
+import {
+  getVerseNumberFromKey,
+  getFirstAndLastVerseKeys,
+  getVerseWords,
+  makeVerseKey,
+  isLastVerseOfSurah,
+  getVerseAndChapterNumbersFromKey,
+} from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
-import Tafsir from 'types/Tafsir';
 import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
@@ -124,38 +130,83 @@ const TafsirBody = ({
     ? getTafsirsLanguageOptions(tafsirSelectionList.tafsirs)
     : [];
 
-  const renderTafsir = useCallback((data) => {
-    if (!data || !data.tafsir) return <TafsirSkeleton />;
+  const renderTafsir = useCallback(
+    (data) => {
+      if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-    const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
-      data.tafsir;
-    const langData = getLanguageDataById(languageId);
-    const words = Object.values(verses)
-      .map((verse) => getVerseWords(verse))
-      .flat();
+      const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
+        data.tafsir;
+      const langData = getLanguageDataById(languageId);
+      const words = Object.values(verses)
+        .map((verse) => getVerseWords(verse))
+        .flat();
 
-    if (!text) return <TafsirSkeleton />;
+      if (!text) return <TafsirSkeleton />;
 
-    const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
-    return (
-      <div>
-        {Object.values(verses).length > 1 && (
-          <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
-        )}
-        <div className={styles.verseTextContainer}>
-          <PlainVerseText words={words} />
+      const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
+
+      const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastVerseKey);
+      const hasNextVerseGroup = !isLastVerseOfSurah(chapterNumber, Number(verseNumber));
+      const hasPrevVerseGroup = getVerseNumberFromKey(firstVerseKey) !== 1;
+
+      const loadNextVerseGroup = () => {
+        logButtonClick('tafsir_next_verse');
+        scrollToTop();
+        const newVerseNumber = String(Number(getVerseNumberFromKey(lastVerseKey)) + 1);
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirIdOrSlug,
+          ),
+          lang,
+        );
+        setSelectedVerseNumber(newVerseNumber);
+      };
+
+      const loadPrevVerseGroup = () => {
+        const newVerseNumber = String(Number(getVerseNumberFromKey(firstVerseKey)) - 1);
+        logButtonClick('tafsir_prev_verse');
+        scrollToTop();
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirIdOrSlug,
+          ),
+          lang,
+        );
+        setSelectedVerseNumber(newVerseNumber);
+      };
+
+      return (
+        <div>
+          {Object.values(verses).length > 1 && (
+            <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
+          )}
+          <div className={styles.verseTextContainer}>
+            <PlainVerseText words={words} />
+          </div>
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+          <div
+            dir={langData.direction}
+            lang={langData.code}
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
+
+          <TafsirEndOfScrollingActions
+            hasNextVerseGroup={hasNextVerseGroup}
+            hasPrevVersegroup={hasPrevVerseGroup}
+            onNextButtonClicked={loadNextVerseGroup}
+            onPreviousButtonClicked={loadPrevVerseGroup}
+          />
         </div>
-        <div className={styles.separatorContainer}>
-          <Separator />
-        </div>
-        <div
-          dir={langData.direction}
-          lang={langData.code}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
-      </div>
-    );
-  }, []);
+      );
+    },
+    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug],
+  );
 
   const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
     words: true,
@@ -244,70 +295,10 @@ const TafsirBody = ({
           render={renderTafsir}
         />
       )}
-
-      <TafsirEndOfScrollingActions
-        currentVerseNumber={selectedVerseNumber}
-        currentChapterId={selectedChapterId}
-        onNextButtonClicked={() => {
-          logButtonClick('tafsir_next_verse');
-          scrollToTop();
-          const newVerseNumber = String(Number(selectedVerseNumber) + 1);
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirIdOrSlug,
-            ),
-            lang,
-          );
-          setSelectedVerseNumber(newVerseNumber);
-        }}
-        onPreviousButtonClicked={() => {
-          const newVerseNumber = String(Number(selectedVerseNumber) + -1);
-          logButtonClick('tafsir_prev_verse');
-          scrollToTop();
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirIdOrSlug,
-            ),
-            lang,
-          );
-          setSelectedVerseNumber(newVerseNumber);
-        }}
-      />
     </div>
   );
 
   return render({ surahAndAyahSelection, languageAndTafsirSelection, body });
-};
-
-/**
- * Given list of tafsirs, get all available language options
- *
- * @param {Tafsir[]} tafsirs
- * @returns {string[]} list of available language options
- */
-const getTafsirsLanguageOptions = (tafsirs: Tafsir[]): string[] =>
-  uniq(tafsirs.map((tafsir) => tafsir.languageName));
-
-/**
- * Get the language of the selected Tafsir.
- *
- * @param {TafsirsResponse} tafsirListData
- * @param {number|string} selectedTafsirIdOrSlug
- * @returns {string}
- */
-const getSelectedTafsirLanguage = (
-  tafsirListData: TafsirsResponse,
-  selectedTafsirIdOrSlug: number | string,
-): string => {
-  const selectedTafsir = tafsirListData?.tafsirs.find(
-    (tafsir) =>
-      tafsir.slug === selectedTafsirIdOrSlug || tafsir.id === Number(selectedTafsirIdOrSlug),
-  );
-  return selectedTafsir?.languageName;
 };
 
 export default TafsirBody;

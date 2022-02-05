@@ -3,18 +3,17 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './TafsirEndOfScrollingActions.module.scss';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import { isFirstVerseOfSurah, isLastVerseOfSurah } from 'src/utils/verse';
 
 type TafsirEndOfScrollingActionsProps = {
-  currentVerseNumber: string;
-  currentChapterId: string;
+  hasNextVerseGroup: boolean;
+  hasPrevVersegroup: boolean;
   onNextButtonClicked: () => void;
   onPreviousButtonClicked: () => void;
 };
 
 const TafsirEndOfScrollingActions = ({
-  currentVerseNumber,
-  currentChapterId,
+  hasNextVerseGroup,
+  hasPrevVersegroup,
   onNextButtonClicked,
   onPreviousButtonClicked,
 }: TafsirEndOfScrollingActionsProps) => {
@@ -22,14 +21,14 @@ const TafsirEndOfScrollingActions = ({
   return (
     <div className={styles.container}>
       <div>
-        {!isFirstVerseOfSurah(Number(currentVerseNumber)) && (
+        {hasPrevVersegroup && (
           <Button type={ButtonType.Secondary} onClick={onPreviousButtonClicked}>
             {t('prev')}
           </Button>
         )}
       </div>
       <div>
-        {!isLastVerseOfSurah(currentChapterId, Number(currentVerseNumber)) && (
+        {hasNextVerseGroup && (
           <Button type={ButtonType.Secondary} onClick={onNextButtonClicked}>
             {t('next')}
           </Button>
