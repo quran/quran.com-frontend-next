@@ -149,6 +149,36 @@ const TafsirBody = ({
       const hasNextVerseGroup = !isLastVerseOfSurah(chapterNumber, Number(verseNumber));
       const hasPrevVerseGroup = getVerseNumberFromKey(firstVerseKey) !== 1;
 
+      const loadNextVerseGroup = () => {
+        logButtonClick('tafsir_next_verse');
+        scrollToTop();
+        const newVerseNumber = String(Number(getVerseNumberFromKey(lastVerseKey)) + 1);
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirIdOrSlug,
+          ),
+          lang,
+        );
+        setSelectedVerseNumber(newVerseNumber);
+      };
+
+      const loadPrevVerseGroup = () => {
+        const newVerseNumber = String(Number(getVerseNumberFromKey(firstVerseKey)) - 1);
+        logButtonClick('tafsir_prev_verse');
+        scrollToTop();
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirIdOrSlug,
+          ),
+          lang,
+        );
+        setSelectedVerseNumber(newVerseNumber);
+      };
+
       return (
         <div>
           {Object.values(verses).length > 1 && (
@@ -169,34 +199,8 @@ const TafsirBody = ({
           <TafsirEndOfScrollingActions
             hasNextVerseGroup={hasNextVerseGroup}
             hasPrevVersegroup={hasPrevVerseGroup}
-            onNextButtonClicked={() => {
-              logButtonClick('tafsir_next_verse');
-              scrollToTop();
-              const newVerseNumber = String(Number(getVerseNumberFromKey(lastVerseKey)) + 1);
-              fakeNavigate(
-                getVerseSelectedTafsirNavigationUrl(
-                  Number(selectedChapterId),
-                  Number(newVerseNumber),
-                  selectedTafsirIdOrSlug,
-                ),
-                lang,
-              );
-              setSelectedVerseNumber(newVerseNumber);
-            }}
-            onPreviousButtonClicked={() => {
-              const newVerseNumber = String(Number(getVerseNumberFromKey(firstVerseKey)) - 1);
-              logButtonClick('tafsir_prev_verse');
-              scrollToTop();
-              fakeNavigate(
-                getVerseSelectedTafsirNavigationUrl(
-                  Number(selectedChapterId),
-                  Number(newVerseNumber),
-                  selectedTafsirIdOrSlug,
-                ),
-                lang,
-              );
-              setSelectedVerseNumber(newVerseNumber);
-            }}
+            onNextButtonClicked={loadNextVerseGroup}
+            onPreviousButtonClicked={loadPrevVerseGroup}
           />
         </div>
       );
