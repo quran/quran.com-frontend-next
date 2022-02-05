@@ -1,7 +1,7 @@
-import React, { useRef, useCallback, ReactNode } from 'react';
+import React, { useRef, useEffect, useCallback, ReactNode } from 'react';
 
 import classNames from 'classnames';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -86,7 +86,7 @@ const Drawer: React.FC<Props> = ({
   const navbar = useSelector(selectNavbar, shallowEqual);
   const isOpen = getIsOpen(type, navbar);
   usePreventBodyScrolling(isOpen);
-  // const router = useRouter();
+  const router = useRouter();
 
   const closeDrawer = useCallback(
     (actionSource = 'click') => {
@@ -108,13 +108,13 @@ const Drawer: React.FC<Props> = ({
   );
 
   // Hide navbar after successful navigation
-  // useEffect(() => {
-  //   router.events.on('routeChangeComplete', () => {
-  //     if (isOpen) {
-  //       closeDrawer('navigation');
-  //     }
-  //   });
-  // }, [closeDrawer, router.events, isOpen]);
+  useEffect(() => {
+    router.events.on('routeChangeComplete', () => {
+      if (isOpen && type !== DrawerType.Settings) {
+        closeDrawer('navigation');
+      }
+    });
+  }, [closeDrawer, router.events, isOpen, type]);
 
   useOutsideClickDetector(
     drawerRef,
