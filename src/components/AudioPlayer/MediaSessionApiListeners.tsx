@@ -49,7 +49,7 @@ const MediaSessionApiListeners = ({
     });
   }, [stationInfo.description, stationInfo.title]);
 
-  const getAudioPlayerMediaMetadata = useCallback(async () => {
+  const getAudioMediaMetadata = useCallback(async () => {
     const chapterData = getChapterData(audioPlayerState.audioData.chapterId.toString());
     const reciterData = await getReciterData(audioPlayerState.reciter.id.toString());
 
@@ -64,12 +64,12 @@ const MediaSessionApiListeners = ({
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
-      const mediaMetaData = isRadioMode ? getRadioMediaMetadata() : getAudioPlayerMediaMetadata();
+      const mediaMetaData = isRadioMode ? getRadioMediaMetadata() : getAudioMediaMetadata();
       mediaMetaData.then((metaData) => {
         navigator.mediaSession.metadata = metaData;
       });
     }
-  }, [getAudioPlayerMediaMetadata, getRadioMediaMetadata, isRadioMode]);
+  }, [getAudioMediaMetadata, getRadioMediaMetadata, isRadioMode]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
