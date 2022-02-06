@@ -50,6 +50,8 @@ const MediaSessionApiListeners = ({
   }, [stationInfo.description, stationInfo.title]);
 
   const getAudioMediaMetadata = useCallback(async () => {
+    if (!audioPlayerState.audioData?.chapterId) return null;
+
     const chapterData = getChapterData(audioPlayerState.audioData.chapterId.toString());
     const reciterData = await getReciterData(audioPlayerState.reciter.id.toString());
 
@@ -60,7 +62,7 @@ const MediaSessionApiListeners = ({
       // TODO: replace with reciter image
       artwork: QURAN_COM_ARTWORK,
     });
-  }, [audioPlayerState.audioData.chapterId, audioPlayerState.reciter.id]);
+  }, [audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
