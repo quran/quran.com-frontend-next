@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: center;
   margin-block-start: var(--spacing-xsmall);
+  flex-direction: row-reverse;
   > a {
     margin-block-start: var(--spacing-xxsmall);
     margin-inline-end: var(--spacing-xxsmall);
