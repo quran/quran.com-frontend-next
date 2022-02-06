@@ -2,7 +2,7 @@
   "locales": ["en", "ar", "bn", "fa", "fr", "id", "it", "nl", "pt", "ru", "sq", "th", "tr", "ur", "zh", "ms"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common", "error"],
+    "*": ["common", "error", "radio"],
     "/": ["home", "quick-links", "radio"],
     "/[chapterId]": ["quran-reader", "chapter", "surah-info"],
     "/[chapterId]/[verseId]": ["quran-reader"],
