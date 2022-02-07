@@ -107,12 +107,12 @@
     "juz": "Juz",
     "language": "Language",
     "languages": "Languages",
+    "less": "Less",
     "loading": "Loading",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "more": "More",
-    "less": "Less",
     "navigate": "Navigate",
     "network": "Network",
     "next": "Next",
@@ -257,6 +257,7 @@
     "wbw-trans-lang": "Word By Word Language",
     "word-click": {
         "no-audio": "No Audio",
+        "play-audio": "Play Audio",
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",

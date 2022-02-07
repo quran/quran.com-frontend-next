@@ -8,7 +8,7 @@
             "title": "Gelongsor secara Atomatik"
         },
         "play": "Mainkan Audio",
-        "playback-normal": "Biasalah",
+        "playback-normal": "Normal",
         "playback-speed": "Kelajuan Pemain",
         "playback-speed-unit": "x",
         "player": {
@@ -16,11 +16,13 @@
             "currently-playing": "Anda sedang memainkan",
             "delay-verse": "Kelewatan antara ayat",
             "download": "Muat turun",
-            "full-surah": "Surah penuh",
+            "full-surah": "Surah Penuh",
             "mismatch": "Klik pada \"Mula Semula\" jika anda mahu teruskan {{currentReadingChapter}} sebaliknya",
             "next-ayah": "Ayat Seterusnya",
             "pause": "Henti",
+            "pause-audio": "Jeda Audio",
             "play": "Mainkan",
+            "play-audio": "Mainkan Audio",
             "play-range": "Jangka Rangka Pemain",
             "previous-ayah": "Ayat Sebelumnya",
             "repeat-1-verse": "Ulang Ayat",
@@ -34,8 +36,8 @@
             "times": "kali",
             "verses-range": "Jangka rangka ayat"
         },
-        "repeat-moved": "Tetapan ulangan telah berpindah ke pemain audio. Klik pada <0> <\/0> untuk mengaksesnya",
-        "select-reciter": "Pilih Qari",
+        "repeat-moved": "Ketetapan ulangan telah pindah ke pemain audio. Klik pada <0> <\/0> untuk akses",
+        "select-reciter": "Pilih Qari (Pembaca)",
         "title": "Audio"
     },
     "ayah": "Ayat",
@@ -88,12 +90,12 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Fon Quran",
         "tajweed": "Tajwid",
-        "tajweed-desc": "Fon Tajwid menunjukkan Mushaf berwarna Tajwid. Anda boleh membaca lebih lanjut tentang peraturan warna Tajwid <0> di sini <\/0>",
+        "tajweed-desc": "Fon tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda boleh membaca lebih lanjut tentang aturan warna Tajwid <0> di sini <\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com ialah Sadaqah Jariyah. Kami berharap dapat memudahkan semua orang membaca, mempelajari dan mempelajari Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, dan Al-Noor."
+        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur."
     },
     "from": "Dari",
     "help": "Bantuan",
@@ -105,6 +107,7 @@
     "juz": "Juz",
     "language": "Bahasa",
     "languages": "Bahasa",
+    "less": "Kurang",
     "loading": "Sedang proses",
     "menu": "Menu",
     "mobile-apps": "Aplikasi Mudah Alih",
@@ -120,7 +123,7 @@
     "page": "Halaman",
     "pages": "Muka Surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
-    "popular-links": "Pautan Popular",
+    "popular-links": "Pautan LINK yang popular",
     "powered-by": "Dikuasai oleh",
     "prayer-times": {
         "access-denied": "Akses ke lokasi dinafikan. Sila dayakan akses lokasi untuk mendapatkan waktu solat yang tepat",
@@ -141,7 +144,7 @@
         },
         "find-accurate-location": "Cari Lokasi Tepat",
         "location-access": "Akses Lokasi",
-        "location-updated": "Lokasi waktu solat dikemas kini",
+        "location-updated": "Lokasi waktu solat telahpun dikemas kini (updated)",
         "madhab": "Mazhab",
         "madhabs": {
             "Hanafi": "Hanafi",
@@ -177,31 +180,31 @@
         "title": "Cari"
     },
     "settings": {
-        "no-tafsir-selected": "Tiada tafsir dipilih",
-        "no-translation-selected": "Tiada terjemahan dipilih",
+        "no-tafsir-selected": "Tiada tafsir yang dipilih",
+        "no-translation-selected": "Tiada terjemahan yang dipilih",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Tetapkan pada asal",
-        "reset-notif": "Tetapan anda telah ditetapkan semula kepada tetapan lalai",
-        "search-reciter": "Cari Qari",
-        "search-tafsirs": "Cari Tafsir",
+        "reset-notif": "Ketetapan (settings) anda telah 'reset' kepada yang asal",
+        "search-reciter": "Cari Qari (Pembaca)",
+        "search-tafsirs": "Carian Tafsir",
         "search-translations": "Cari Terjemahan",
-        "selected-reciter": "qari yang terpilih",
-        "selected-tafsirs": "Tafsir Terpilih",
-        "selected-translations": "Terjemahan Terpilih",
-        "show-tooltip-when-playing-audio": "Tunjukkan petua alat semasa memainkan audio",
+        "selected-reciter": "Qari yang dipilih",
+        "selected-tafsirs": "Tafsir yang dipilih",
+        "selected-translations": "Terjemahan yang dipilih",
+        "show-tooltip-when-playing-audio": "Paparkan tips semasa audio dimainkan",
         "title": "Tetapan",
-        "tooltip-playing-audio-helper": "Tunjukkan terjemahan perkataan dalam petua alat semasa bermain ayah",
+        "tooltip-playing-audio-helper": "Paparkan terjemahan perkataan dalam tips semasa ayat audio dimainkan",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",
         "wbw-helper": "Paparkan terjemahan atau transliterasi terus di bawah perkataan",
-        "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila melayang atau mengklik perkataan"
+        "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila anda mengerakkan 'cursor mouse' atau apabila anda tekan (mouse) klik pada perkataan"
     },
     "share": "Kongsi",
     "shared": "Pautan telah disalin ke papan keratan!",
     "sidebar": {
-        "search-juz": "Cari Juz",
+        "search-juz": "Cari Juzuk",
         "search-page": "Halaman Carian",
         "search-surah": "Cari surah",
-        "try-navigating-with": "Petua: cuba menavigasi dengan"
+        "try-navigating-with": "Nasihat: cuba navigasi dengan"
     },
     "sitemap": "Peta laman",
     "sort": {
@@ -213,7 +216,7 @@
     "surah": "Surah",
     "tafsir": {
         "font-size": "Saiz fon Tafsir",
-        "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat {{from}} hingga {{to}}",
+        "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat dari {{from}} hingga {{to}}",
         "surah": "Tafsir Surah",
         "title": "Tafsir"
     },
@@ -223,7 +226,7 @@
     },
     "theme": "Tema",
     "themes": {
-        "auto": "Auto",
+        "auto": "Automatik",
         "dark": "Gelap",
         "light": "Terang",
         "sepia": "Sepia",
@@ -232,7 +235,7 @@
     },
     "to": "Ke",
     "tooltip": "Alat",
-    "tooltip-trans-lang": "Bahasa Petua Alat",
+    "tooltip-trans-lang": "Tooltip Language",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
@@ -245,10 +248,10 @@
         "error": "Kesilapan telah berlaku. Sila cuba sebentar lagi. Atau muat turun",
         "no-permission": "Nampaknya anda tidak memberi kebenaran kepada pemasangan mikrofon. Sila benarkan pemasangan mikrofon dan cuba lagi sekali atau muat turun",
         "not-supported": "Nampaknya web anda tidak menyokong mikrofon. Sila cuba web lain atau muat turun",
-        "suggest": "Sila mulakan membaca dan ayat anda akan muncul.",
-        "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab, dan ayat itu akan muncul",
-        "suggest-title": "Mengaji sekarang",
-        "voice-search-powered-by": "Carian Suara Dikuasakan oleh"
+        "suggest": "Mulakan bacaan anda, ayat daripada surah itu akan muncul dan dipaparkan",
+        "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab dan ayat itu akan muncul",
+        "suggest-title": "Bacalah sekarang",
+        "voice-search-powered-by": "Enjin carian suara dihasilkan oleh"
     },
     "wbw": "Perkataan demi perkataan",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
@@ -257,6 +260,6 @@
         "play-audio": "Mainkan Audio",
         "title": "Klik Perkataan"
     },
-    "word-tooltip": "Petua Alat Perkataan",
+    "word-tooltip": "Kata-kata nasihat",
     "yes": "Ya"
 }
