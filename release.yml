@@ -10,3 +10,5 @@ phases:
     on-failure: CONTINUE
     commands:
       - aws ecs update-service --service $SERVICE_NAME --cluster $CLUSTER_ARN --force-new-deployment
+      - aws ecs wait services-stable --service $SERVICE_NAME --cluster $CLUSTER_ARN
+      - aws cloudfront create-invalidation --distribution-id E2UVKUV034N7DM --paths "/"
