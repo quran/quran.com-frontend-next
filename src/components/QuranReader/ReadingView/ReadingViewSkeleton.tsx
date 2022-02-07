@@ -8,6 +8,7 @@ import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getFontClassName } from 'src/utils/fontFaceHelper';
 import { getMushafLinesNumber } from 'src/utils/page';
 
 const ReadingViewSkeleton = () => {
@@ -24,7 +25,7 @@ const ReadingViewSkeleton = () => {
         <Skeleton
           key={i}
           className={classNames(styles.skeleton, [
-            verseTextStyles[`${quranFont}-font-size-${quranTextFontScale}`],
+            verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)],
           ])}
         />
       ))}

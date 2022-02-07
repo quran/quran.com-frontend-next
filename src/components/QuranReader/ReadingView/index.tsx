@@ -7,10 +7,13 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
+
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
 import styles from './ReadingView.module.scss';
 
+import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useFetchPagesCount from 'src/components/QuranReader/hooks/useFetchTotalPages';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
@@ -50,6 +53,7 @@ const ReadingView = ({
     [initialFirstMushafPage]: initialData.verses,
   });
   const { lang } = useTranslation();
+  const currentPageIndex = useRef<number>(0);
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
     [mushafPageToVersesMap],
@@ -102,6 +106,15 @@ const ReadingView = ({
     return <Error />;
   }
 
+  /**
+   * A callback triggered each time the list of pages are rendered due to scrolling.
+   */
+  const onPagesRendered = (renderedPages) => {
+    if (renderedPages[0]) {
+      currentPageIndex.current = renderedPages[0].index + 1;
+    }
+  };
+
   return (
     <>
       <QueryParamMessage
@@ -118,6 +131,7 @@ const ReadingView = ({
           initialItemCount={1} // needed for SSR.
           totalCount={pagesCount}
           itemContent={itemContentRenderer}
+          itemsRendered={onPagesRendered}
           components={{
             Footer: () => (
               <EndOfScrollingControls
@@ -127,6 +141,33 @@ const ReadingView = ({
             ),
           }}
         />
+      </div>
+      <div className={styles.buttonsContainer}>
+        <Button
+          size={ButtonSize.Small}
+          className={styles.prevButton}
+          onClick={() => {
+            virtuosoRef.current.scrollToIndex({
+              index: currentPageIndex.current - 1,
+              align: 'start',
+              offset: -70,
+            });
+          }}
+        >
+          <ChevronDownIcon />
+        </Button>
+        <Button
+          size={ButtonSize.Small}
+          onClick={() => {
+            virtuosoRef.current.scrollToIndex({
+              index: currentPageIndex.current + 1,
+              align: 'start',
+              offset: 10,
+            });
+          }}
+        >
+          <ChevronDownIcon />
+        </Button>
       </div>
     </>
   );

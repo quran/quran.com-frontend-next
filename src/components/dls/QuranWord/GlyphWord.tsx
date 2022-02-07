@@ -7,6 +7,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getFontClassName } from 'src/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 
 type UthmaniWordTextProps = {
@@ -53,7 +54,7 @@ const GlyphWord = ({
   isFontLoaded,
 }: UthmaniWordTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { quranTextFontScale } = quranReaderStyles;
+  const { quranTextFontScale, mushafLines } = quranReaderStyles;
   return (
     <span
       dangerouslySetInnerHTML={{
@@ -61,9 +62,9 @@ const GlyphWord = ({
       }}
       data-font-scale={quranTextFontScale}
       data-font={font}
-      className={classNames(styles.styledWord, {
+      className={classNames({
         [styles.fallbackText]: !isFontLoaded,
-        [styles[`${fallbackFont}-font-size-${quranTextFontScale}`]]: !isFontLoaded,
+        [styles[getFontClassName(fallbackFont, quranTextFontScale, mushafLines)]]: !isFontLoaded,
       })}
       {...(isFontLoaded && {
         // eslint-disable-next-line i18next/no-literal-string

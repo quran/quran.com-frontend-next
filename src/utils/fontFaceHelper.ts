@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 
-import { QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
@@ -52,3 +52,24 @@ export const getV1OrV2FontFaceSource = (isV1: boolean, pageNumber: number): stri
  */
 export const getFontFaceNameForPage = (isV1: boolean, pageNumber: number): string =>
   isV1 ? `p${pageNumber}-v1` : `p${pageNumber}-v2`;
+
+/**
+ * Dynamically generate the className of the combination between the font
+ * name + size + mushafLines(when its Indopak) that will match the output of
+ * generate-font-sizes function inside {@see _utility.scss}.
+ *
+ * @param {QuranFont} quranFont
+ * @param {number} fontScale
+ * @param {MushafLines} mushafLines
+ * @returns {string}
+ */
+export const getFontClassName = (
+  quranFont: QuranFont,
+  fontScale: number,
+  mushafLines: MushafLines,
+): string => {
+  if (quranFont === QuranFont.IndoPak) {
+    return `${quranFont}_${mushafLines}-font-size-${fontScale}`;
+  }
+  return `${quranFont}-font-size-${fontScale}`;
+};

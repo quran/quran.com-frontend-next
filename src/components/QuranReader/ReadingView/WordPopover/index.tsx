@@ -70,6 +70,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       open={isTooltipOpened}
       onOpenChange={onOpenChange}
       triggerStyles={styles.trigger}
+      defaultStyling={false}
     >
       <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />
     </Popover>
