@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import groupLinesByVerses from './groupLinesByVerses';
+import { groupWordsByLineAndVerse } from './groupLinesByVerses';
 import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
@@ -22,7 +22,7 @@ type PageProps = {
 
 const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) => {
   const lines = useMemo(
-    () => (verses && verses.length ? groupLinesByVerses(verses) : {}),
+    () => (verses && verses.length ? groupWordsByLineAndVerse(verses) : {}),
     [verses],
   );
   const { quranTextFontScale, quranFont } = quranReaderStyles;
@@ -39,13 +39,11 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
       id={`page-${pageNumber}`}
       className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
     >
-      {Object.keys(lines).map((key, lineIndex) => (
+      {Object.values(lines).map((lineData) => (
         <Line
           pageIndex={pageIndex}
-          lineIndex={lineIndex}
-          lineKey={key}
-          words={lines[key]}
-          key={key}
+          lineData={lineData}
+          key={lineData.lineNumber}
           isBigTextLayout={isBigTextLayout}
           quranReaderStyles={quranReaderStyles}
         />

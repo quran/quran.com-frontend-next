@@ -14,19 +14,20 @@ import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from 'src/utils/verse';
-import Word from 'types/Word';
+import LineData from 'types/LineData';
 
 export type LineProps = {
-  words: Word[];
-  lineKey: string;
+  lineData: LineData;
   isBigTextLayout: boolean;
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
-  lineIndex: number;
 };
 
-const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
-  const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
+const Line = ({ lineData, isBigTextLayout, pageIndex }: LineProps) => {
+  const lineVerseKeys = lineData.verseKeys();
+  const isHighlighted = useSelector(selectIsLineHighlighted(lineVerseKeys));
+  const firstWordOfLine = lineData.words()[0];
+
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
@@ -37,13 +38,13 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
 
-  const firstWordData = getWordDataByLocation(words[0].location);
+  const firstWordData = getWordDataByLocation(firstWordOfLine.location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
 
   return (
     <div
       ref={selectedItemRef}
-      id={lineKey}
+      id={lineData.lineNumber}
       className={classNames(styles.container, {
         [styles.highlighted]: isHighlighted,
         [styles.mobileInline]: isBigTextLayout,
@@ -52,17 +53,20 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       {shouldShowChapterHeader && (
         <ChapterHeader
           chapterId={firstWordData[0]}
-          pageNumber={words[0].pageNumber}
-          hizbNumber={words[0].hizbNumber}
+          pageNumber={firstWordOfLine.pageNumber}
+          hizbNumber={firstWordOfLine.hizbNumber}
         />
       )}
       <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
-        <VerseText
-          words={words}
-          isReadingMode
-          isHighlighted={isHighlighted}
-          shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
-        />
+        {lineVerseKeys.map((key) => (
+          <VerseText
+            key={key}
+            words={lineData.verseWords(key)}
+            isReadingMode
+            isHighlighted={isHighlighted}
+            shouldShowH1ForSEO={pageIndex === 0 && lineData.lineNumber === '0'}
+          />
+        ))}
       </div>
     </div>
   );
@@ -87,13 +91,13 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
  * @returns {boolean}
  */
 const areLinesEqual = (prevProps: LineProps, nextProps: LineProps): boolean =>
-  prevProps.lineKey === nextProps.lineKey &&
+  prevProps.lineData.lineNumber === nextProps.lineData.lineNumber &&
   prevProps.isBigTextLayout === nextProps.isBigTextLayout &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,
-    prevProps.words,
-    nextProps.words,
+    prevProps.lineData.words(),
+    nextProps.lineData.words(),
   );
 
 export default memo(Line, areLinesEqual);

@@ -13,4 +13,5 @@
 
 .IndoPak {
   font-family: IndoPak !important; // important is needed to over-ride the language specific font-family
+  unicode-bidi: unset !important;
 }

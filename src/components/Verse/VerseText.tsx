@@ -82,9 +82,10 @@ const VerseText = ({
         data-hizb={hizbNumber}
         className={classNames(styles.verseTextContainer, {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
-          [styles.highlighted]: isHighlighted,
+          [styles.highlighted]: isHighlighted || hoveredVerseKey === verseKey,
           [styles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
           [styles.tafsirOrTranslationMode]: !isReadingMode,
+          [styles.verseTextInline]: isReadingMode,
         })}
       >
         <div
@@ -92,7 +93,7 @@ const VerseText = ({
             [styles.verseTextWrap]: !isReadingMode,
             [styles.largeQuranTextLayout]: isBigTextLayout,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
-            [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
+            [styles.verseTextInline]: isReadingMode,
           })}
         >
           {words?.map((word) => (
@@ -102,7 +103,6 @@ const VerseText = ({
               font={quranFont}
               isFontLoaded={isFontLoaded}
               isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
             />
           ))}
         </div>
