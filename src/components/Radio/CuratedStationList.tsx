@@ -67,6 +67,7 @@ const CuratedStationList = () => {
         return (
           <div className={styles.item} key={id}>
             <Card
+              shouldFlipIconOnRTL={false}
               actionIcon={actionIcon}
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}

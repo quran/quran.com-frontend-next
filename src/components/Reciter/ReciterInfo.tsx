@@ -64,6 +64,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
             className={styles.playButton}
             prefix={<PlayIcon />}
             onClick={onPlayReciterStation}
+            shouldFlipOnRTL={false}
           >
             {t('radio:play-radio')}
           </Button>

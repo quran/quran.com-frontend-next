@@ -19,9 +19,19 @@ type CardProps = {
   imgSrc?: string;
   imgAlt?: string;
   actionIcon?: ReactNode;
+  shouldFlipIconOnRTL?: boolean;
 };
 
-const Card = ({ size, title, description, onImgClick, imgSrc, actionIcon, imgAlt }: CardProps) => {
+const Card = ({
+  size,
+  title,
+  description,
+  onImgClick,
+  imgSrc,
+  actionIcon,
+  imgAlt,
+  shouldFlipIconOnRTL = true,
+}: CardProps) => {
   return (
     <div
       className={classNames(styles.container, {
@@ -50,7 +60,11 @@ const Card = ({ size, title, description, onImgClick, imgSrc, actionIcon, imgAlt
           <div className={styles.description}>{description}</div>
         </div>
         {size === CardSize.Large && (
-          <Button className={styles.playIconContainer} variant={ButtonVariant.Ghost}>
+          <Button
+            className={styles.playIconContainer}
+            variant={ButtonVariant.Ghost}
+            shouldFlipOnRTL={shouldFlipIconOnRTL}
+          >
             {actionIcon}
           </Button>
         )}
