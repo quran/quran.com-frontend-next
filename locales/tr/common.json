@@ -13,33 +13,35 @@
         "playback-speed-unit": "x",
         "player": {
             "close": "Ses Oynatıcıyı Kapat",
-            "currently-playing": "şu anda oynuyorsun",
+            "currently-playing": "Şu anda çalıyor",
             "delay-verse": "Ayet arası gecikme",
-            "download": "İndirmek",
-            "full-surah": "tam sure",
-            "mismatch": "Bunun yerine {{currentReadingChapter}} oynamak istiyorsanız \"Baştan Başla\"yı tıklayın.",
-            "next-ayah": "Sonraki Ayah",
+            "download": "İndir",
+            "full-surah": "Tam sure",
+            "mismatch": "Bunun yerine {{currentReadingChapter}} çalmak istiyorsanız \"Baştan Başla\"yı tıklayın.",
+            "next-ayah": "Sonraki Ayet",
             "pause": "Duraklat",
-            "play": "Oynamak",
-            "play-range": "oyun aralığı",
+            "pause-audio": "Sesi Duraklat",
+            "play": "Çal",
+            "play-audio": "Ses Çal",
+            "play-range": "Çalma aralığı",
             "previous-ayah": "Önceki Ayet",
             "repeat-1-verse": "Ayeti Tekrarla",
             "repeat-settings": "Ayarları Tekrarla",
             "repeat-verse": "Her ayeti tekrarla",
-            "search-verse": "Bir ayet ara",
+            "search-verse": "Ayet ara",
             "single-verse": "Tek Ayet",
-            "start-over": "Baştan başlamak",
-            "start-playing": "Oyuna başla",
+            "start-over": "Baştan başla",
+            "start-playing": "Çalmaya başla",
             "stop-repeating": "Tekrarlamayı Durdur",
-            "times": "zamanlar",
-            "verses-range": "ayet aralığı"
+            "times": "Zamanlar",
+            "verses-range": "Ayet aralığı"
         },
-        "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Bunlara <0> <\/0> simgesine tıklayın",
+        "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> <\/0> simgesine tıklayın",
         "select-reciter": "Okuyucu Seçin",
         "title": "Ses"
     },
-    "ayah": "Aya",
-    "ayahs": "ayetler",
+    "ayah": "Ayet",
+    "ayahs": "Ayetler",
     "beta": "Beta",
     "bookmark": "Yer imi",
     "bookmarked": "İşaretli",
@@ -54,62 +56,63 @@
         "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
         "recent-navigations": "Son gezinmeler",
         "search-by-voice": "Sesle ara",
-        "try-navigating": "gezinmeyi deneyin"
+        "try-navigating": "Gezinmeyi deneyin"
     },
     "community": {
         "cta": "Topluluğa Katılın",
-        "header": "Müslüman inşaatçılar ve teknoloji uzmanlarından oluşan QDC Topluluğuna katılın.",
+        "header": "Müslüman geliştiriciler ve teknoloji uzmanlarından oluşan QDC Topluluğuna katılın.",
         "sub-header": "İslami teknoloji inşa eden önde gelen toplulukla işbirliği yapmak ve katılmak için Kuran.com Discord'a kaydolun.",
         "title": "Toplum"
     },
     "continue": "Devam et",
     "copied": "kopyalandı",
     "copied-to-clipboard": "Panoya kopyalandı",
-    "copy": "kopyala",
+    "copy": "Kopyala",
     "counter": {
-        "decrease": "Azalmak",
-        "increase": "Arttırmak"
+        "decrease": "Azalt",
+        "increase": "Arttır"
     },
     "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
-    "developers": "geliştiriciler",
+    "developers": "Geliştiriciler",
     "error": {
-        "general": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin.",
+        "general": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
         "offline": "Bağlantınızı kaybettiniz gibi görünüyor. Lütfen kontrol edip tekrar deneyin."
     },
-    "feedback": "Geri bildirim",
+    "feedback": "Geri Bildirim",
     "fonts": {
         "15_lines": "15 satır",
         "16_lines": "16 satır",
         "code_v1": "Kral Fahd Kompleksi V1",
         "code_v2": "Kral Fahd Kompleksi V2",
         "font-size": "Yazı Boyutu",
-        "lines": "çizgiler",
+        "lines": "Çizgiler",
         "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Kuran Yazı Tipi",
-        "tajweed": "tecvid",
-        "tajweed-desc": "Tajweed yazı tipi, Tajweed renkli bir Mushaf gösterir. Tajweed renk kuralları hakkında daha fazla bilgiyi <0> buradan <\/0>",
+        "tajweed": "Tecvid",
+        "tajweed-desc": "Tecvid yazı tipi, Tecvid renkli bir Mushaf gösterir. Tacvid renk kuralları hakkında daha fazla bilgiyi <0> buradan <\/0> okuyabilirsiniz",
         "text_indopak": "Hint Paketi",
         "text_uthmani": "Osmanca"
     },
     "footer": {
-        "description": "Kuran.com bir Sadaqah Jariyah'dır. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır."
+        "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır."
     },
     "from": "İtibaren",
     "help": "Yardım",
     "hizb": "Hizb",
-    "home": "Ev",
+    "home": "Anasayfa",
     "input": {
         "clear": "Açık"
     },
-    "juz": "cüz",
-    "language": "Dilim",
+    "juz": "Cüz",
+    "language": "Dil",
     "languages": "Diller",
+    "less": "Daha az",
     "loading": "Yükleniyor",
     "menu": "Menü",
-    "mobile-apps": "Mobil uygulamalar",
-    "mode": "mod",
-    "more": "Daha",
+    "mobile-apps": "Mobil Uygulamalar",
+    "mode": "Mod",
+    "more": "Daha fazla",
     "navigate": "Gezin",
     "network": "Ağ",
     "next": "Sonraki",
@@ -124,7 +127,7 @@
     "powered-by": "Tarafından desteklenmektedir",
     "prayer-times": {
         "access-denied": "Konum erişimi reddedildi. Doğru namaz vakitlerini almak için lütfen konum erişimini etkinleştirin",
-        "calculation-method": "Hesaplama yöntemi",
+        "calculation-method": "Hesaplama Yöntemi",
         "calculation-methods": {
             "Dubai": "Dubai",
             "Egyptian": "Mısırlı",
@@ -142,16 +145,16 @@
         "find-accurate-location": "Doğru Konum Bul",
         "location-access": "Konum Erişimi",
         "location-updated": "Namaz vakitleri konumu güncellendi",
-        "madhab": "mezheb",
+        "madhab": "Mezhep",
         "madhabs": {
             "Hanafi": "Hanefi",
             "Shafi": "Şafii"
         },
         "title": "İbadet zamanları"
     },
-    "prev": "Öncesi",
-    "privacy": "Mahremiyet",
-    "product-updates": "Ürün güncellemeleri",
+    "prev": "Önceki",
+    "privacy": "Gizlilik",
+    "product-updates": "Ürün Güncellemeleri",
     "q-reflect": "KuranYansıtmak",
     "quran-com": "Kuran.com",
     "quran-radio": "Kuran Radyo",
@@ -159,14 +162,14 @@
         "reading": "Okuma",
         "translation": "Tercüme"
     },
-    "reciter": "okuyucu",
-    "reflect": "Yansıtmak",
+    "reciter": "Okuyucu",
+    "reflect": "Yansıt",
     "remove": "Kaldırmak",
-    "retry": "yeniden dene",
+    "retry": "Yeniden dene",
     "search": {
         "filters": "Filtreler",
         "hint": "Aramayı deneyin",
-        "jump-to": "Atlamak",
+        "jump-to": "Atla",
         "no-results": "Sonuç bulunamadı",
         "no-results-suggestion": "{{searchQuery}} \" için eşleşen bir arama sonucu bulamadık. farklı bir anahtar kelime aramayı deneyin.",
         "popular": "Popüler aramalar",
@@ -174,7 +177,7 @@
         "results": "Sonuçlar",
         "show-all": "Tüm sonuçları göster",
         "switch-mode": "Gelişmiş Aramaya Geç",
-        "title": "Arama"
+        "title": "Ara"
     },
     "settings": {
         "no-tafsir-selected": "Tefsir seçilmedi",
@@ -183,14 +186,14 @@
         "reset-cta": "Ayarları Sıfırla",
         "reset-notif": "Ayarlarınız varsayılanlara sıfırlandı",
         "search-reciter": "Okuyucu Ara",
-        "search-tafsirs": "tefsir ara",
+        "search-tafsirs": "Tefsir ara",
         "search-translations": "Çevirileri Ara",
         "selected-reciter": "Seçilmiş Okur",
         "selected-tafsirs": "Seçilmiş Tefsirler",
         "selected-translations": "Seçilmiş Çeviriler",
         "show-tooltip-when-playing-audio": "Ses çalarken araç ipucunu göster",
         "title": "Ayarlar",
-        "tooltip-playing-audio-helper": "Ayah oynarken kelime çevirisini araç ipucunda göster",
+        "tooltip-playing-audio-helper": "Ayet çalarken kelime çevirisini araç ipucunda göster",
         "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
         "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
         "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
@@ -198,24 +201,24 @@
     "share": "Paylaş",
     "shared": "Bağlantı panoya kopyalandı!",
     "sidebar": {
-        "search-juz": "Cüz'de Ara",
+        "search-juz": "Cüz ara",
         "search-page": "Arama Sayfası",
-        "search-surah": "sure ara",
+        "search-surah": "Sure ara",
         "try-navigating-with": "İpucu: ile gezinmeyi deneyin"
     },
     "sitemap": "Site Haritası",
     "sort": {
-        "ascending": "artan",
-        "by": "Göre sırala",
+        "ascending": "Artan",
+        "by": "Sırala",
         "descending": "Azalan"
     },
-    "style": "stil",
-    "surah": "sure",
+    "style": "Stil",
+    "surah": "Sure",
     "tafsir": {
         "font-size": "tefsir yazı tipi boyutu",
         "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",
         "surah": "Tefsir Suresi",
-        "title": "tefsir"
+        "title": "Tefsir"
     },
     "tarteel": {
         "app": "Tarteel uygulaması",
@@ -225,10 +228,10 @@
     "themes": {
         "auto": "Oto",
         "dark": "Karanlık",
-        "light": "Işık",
+        "light": "Aydınlık",
         "sepia": "Sepya",
-        "system": "sistem",
-        "system-desc": "Sistem teması, aydınlık\/karanlık modu ayarlarınıza otomatik olarak uyar"
+        "system": "Sistem",
+        "system-desc": "Sistem teması, aydınlık\/karanlık modu ayarlarınıza otomatik olarak uyarlar"
     },
     "to": "NS",
     "tooltip": "Araç ipucu",
@@ -237,23 +240,23 @@
     "translations": "Çeviriler",
     "transliteration": "Harf çevirisi",
     "type": "Tip",
-    "verse": "ayet",
-    "verses": "ayetler",
-    "view": "görüş",
+    "verse": "Ayet",
+    "verses": "Ayetler",
+    "view": "Görüş",
     "voice": {
         "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
-        "error": "Bir hata oluştu, lütfen tekrar deneyin. Ya da indirin",
-        "no-permission": "Mikrofon izinlerini etkinleştirmemişsiniz gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin veya",
-        "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin veya",
+        "error": "Bir hata oluştu, lütfen tekrar deneyin",
+        "no-permission": "Mikrofon izinlerini etkinleştirmemişsiniz gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin",
+        "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin",
         "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir.",
         "suggest-subtitle": "Arapça herhangi bir ayeti okuyun ve ayet görünecektir",
         "suggest-title": "Şimdi oku",
-        "voice-search-powered-by": "Sesli Arama Destekleyen"
+        "voice-search-powered-by": "Sesli Aramayı Destekleyen"
     },
     "wbw": "Kelime kelime",
     "wbw-trans-lang": "Kelime Dilinden Kelime",
     "word-click": {
-        "no-audio": "Ses yok",
+        "no-audio": "Ses Yok",
         "play-audio": "Ses Çal",
         "title": "Kelime Tıklaması"
     },

@@ -3,8 +3,8 @@
     "and": "اور",
     "audio": {
         "auto-scroll": {
-            "off": "بند",
-            "on": "پر",
+            "off": "نہیں",
+            "on": "ہاں",
             "title": "آٹو سکرول"
         },
         "play": "آڈیو چلائیں۔",
@@ -14,28 +14,30 @@
         "player": {
             "close": "آڈیو پلیئر بند کریں۔",
             "currently-playing": "آپ فی الحال کھیل رہے ہیں۔",
-            "delay-verse": "آیت کے درمیان تاخیر",
+            "delay-verse": "آیت کے درمیان وقفہ",
             "download": "ڈاؤن لوڈ کریں",
             "full-surah": "مکمل سورہ",
             "mismatch": "اگر آپ اس کے بجائے {{currentReadingChapter}} کھیلنا چاہتے ہیں تو \"Start Over\" پر کلک کریں۔",
             "next-ayah": "اگلی آیت",
             "pause": "توقف",
+            "pause-audio": "آڈیو موقوف کریں۔",
             "play": "کھیلیں",
+            "play-audio": "آڈیو چلائیں۔",
             "play-range": "کھیل کی حد",
             "previous-ayah": "پچھلی آیت",
             "repeat-1-verse": "آیت کو دہرائیں۔",
-            "repeat-settings": "ترتیبات کو دہرائیں۔",
+            "repeat-settings": "آیات کی دہرائی",
             "repeat-verse": "ہر آیت کو دہرائیں۔",
             "search-verse": "ایک آیت تلاش کریں۔",
             "single-verse": "واحد آیت",
             "start-over": "پھر سے شروع",
             "start-playing": "کھیلنا شروع کریں۔",
             "stop-repeating": "دہرانا بند کریں۔",
-            "times": "اوقات",
+            "times": "بار",
             "verses-range": "آیات کی حد"
         },
         "repeat-moved": "دہرائی جانے والی ترتیبات آڈیو پلیئر میں منتقل ہو گئی ہیں۔ ان تک رسائی کے لیے <0> <\/0> آئیکن پر کلک کریں۔",
-        "select-reciter": "تلاوت کرنے والا منتخب کریں۔",
+        "select-reciter": "قاری منتخب کریں.",
         "title": "آڈیو"
     },
     "ayah": "آیہ",
@@ -78,13 +80,13 @@
     },
     "feedback": "تاثرات",
     "fonts": {
-        "15_lines": "15 لائنیں",
-        "16_lines": "16 لائنز",
+        "15_lines": "15 ستری",
+        "16_lines": "16 ستری",
         "code_v1": "کنگ فہد کمپلیکس V1",
         "code_v2": "کنگ فہد کمپلیکس V2",
         "font-size": "حرف کا سائز",
-        "lines": "لکیریں",
-        "qcf-desc": "KPFG فونٹس اعلیٰ معیار فراہم کرتے ہیں لیکن لوڈ ہونے میں زیادہ وقت لیتے ہیں۔",
+        "lines": "سطریں",
+        "qcf-desc": "کنگ فہد کمپلیکس کے فونٹس اعلیٰ معیار فراہم کے ہیں لیکن لوڈ ہونے میں زیادہ وقت لیتے ہیں۔",
         "qpc_uthmani_hafs": "QPC عثمانی حفص",
         "quran-font": "قرآن کا فونٹ",
         "tajweed": "تجوید",
@@ -102,9 +104,10 @@
     "input": {
         "clear": "صاف"
     },
-    "juz": "جوز",
+    "juz": "سپارے",
     "language": "زبان",
     "languages": "زبانیں",
+    "less": "کم",
     "loading": "لوڈ ہو رہا ہے۔",
     "menu": "مینو",
     "mobile-apps": "موبائل ایپس",
@@ -156,7 +159,7 @@
     "quran-com": "Quran.com",
     "quran-radio": "قرآن ریڈیو",
     "reading-preference": {
-        "reading": "پڑھنا",
+        "reading": "پڑہائی",
         "translation": "ترجمہ"
     },
     "reciter": "تلاوت کرنے والا",
@@ -182,15 +185,15 @@
         "reading-experience": "پڑھنے کا تجربہ",
         "reset-cta": "ترتیبات کو دوبارہ ترتیب دیں۔",
         "reset-notif": "آپ کی ترتیبات کو ڈیفالٹ پر دوبارہ ترتیب دیا گیا ہے۔",
-        "search-reciter": "تلاوت کرنے والے کو تلاش کریں۔",
-        "search-tafsirs": "تفسیریں تلاش کریں۔",
+        "search-reciter": "قاری تلاش کریں۔",
+        "search-tafsirs": "تفسیر تلاش کریں۔",
         "search-translations": "ترجمہ تلاش کریں۔",
-        "selected-reciter": "منتخب قاری",
-        "selected-tafsirs": "منتخب تفسیر",
-        "selected-translations": "منتخب ترجمہ",
+        "selected-reciter": "موجودہ قاری",
+        "selected-tafsirs": "موجودہ تفسیر",
+        "selected-translations": "منتخب ترجمے",
         "show-tooltip-when-playing-audio": "آڈیو چلاتے وقت ٹول ٹِپ دکھائیں۔",
         "title": "ترتیبات",
-        "tooltip-playing-audio-helper": "آیت کو بجاتے ہوئے ٹول ٹپ میں لفظ کا ترجمہ دکھائیں۔",
+        "tooltip-playing-audio-helper": "آیت چلاتے ہوئے لفظ کا ترجمہ\/تلفظ دکھائیں.",
         "value-and-others": "{{value}} ، اور {{othersCount}} دیگر",
         "wbw-helper": "ترجمہ یا نقل حرفی کو براہ راست لفظ کے نیچے دکھائیں۔",
         "word-tooltip-helper": "لفظ کو ہوور کرتے یا کلک کرتے وقت ترجمہ یا نقل حرفی دکھائیں۔"
@@ -198,7 +201,7 @@
     "share": "بانٹیں",
     "shared": "لنک کو کلپ بورڈ پر کاپی کر دیا گیا ہے!",
     "sidebar": {
-        "search-juz": "Juz تلاش کریں۔",
+        "search-juz": "سپارے میں تلاش کریں۔",
         "search-page": "صفحہ تلاش کریں۔",
         "search-surah": "سورہ تلاش کریں۔",
         "try-navigating-with": "ٹپ: اس کے ساتھ نیویگیٹ کرنے کی کوشش کریں۔"
@@ -224,8 +227,8 @@
     "theme": "خیالیہ",
     "themes": {
         "auto": "آٹو",
-        "dark": "اندھیرا",
-        "light": "روشنی",
+        "dark": "رات",
+        "light": "دن",
         "sepia": "سیپیا",
         "system": "سسٹم",
         "system-desc": "سسٹم تھیم خود بخود آپ کی لائٹ\/ڈارک موڈ سیٹنگز کو اپناتا ہے۔"
@@ -235,7 +238,7 @@
     "tooltip-trans-lang": "ٹول ٹپ کی زبان",
     "translation": "ترجمہ",
     "translations": "ترجمے",
-    "transliteration": "نقل حرفی",
+    "transliteration": "تلفظ",
     "type": "قسم",
     "verse": "آیت",
     "verses": "آیات",
@@ -257,6 +260,6 @@
         "play-audio": "آڈیو چلائیں۔",
         "title": "ورڈ کلک"
     },
-    "word-tooltip": "ورڈ ٹول ٹِپ",
+    "word-tooltip": "لفظ کے اوپر",
     "yes": "جی ہاں"
 }

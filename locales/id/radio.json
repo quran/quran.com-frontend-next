@@ -1,25 +1,25 @@
 {
-    "change": "Mengubah",
+    "change": "Tukar",
     "curated-station": {
         "juz-amma": {
-            "description": "Dengarkan Juz terakhir Al-Qur'an",
+            "description": "Dengarkan Juz terakhir Al-Quran",
             "title": "Juz Amma"
         },
         "popular-recitations": {
-            "description": "Umpan bacaan harian yang dikuratori",
-            "title": "Bacaan Populer"
+            "description": "Susun-atur bacaan harian",
+            "title": "Bacaan popular"
         },
         "surah-al-kahf": {
-            "description": "Dengarkan Surah Alkahfi berulang-ulang",
-            "title": "Surat Al Kahfi"
+            "description": "Dengar surah Al-Kahf secara berulang-ulang",
+            "title": "Surah Al Kahfi"
         },
         "yaseen-alwaqiah-al-mulk": {
-            "description": "Surah dari kurasi qari",
+            "description": "Bacaan surah-surah dari jemaah jemaah qari",
             "title": "Yasin, Al-Waqiah, Al-Mulk"
         }
     },
-    "curated-stations": "Stasiun yang Dikurasi",
-    "pause-radio": "Jeda Radio",
+    "curated-stations": "Stesen yang telah disusun-atur",
+    "pause-radio": "Hentikan Radio",
     "play-radio": "Putar Radio",
-    "reciter-stations": "Stasiun Penghafal"
+    "reciter-stations": "Stesen bacaan para Qari"
 }

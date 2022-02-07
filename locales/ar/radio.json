@@ -1,25 +1,25 @@
 {
-    "change": "يتغير",
+    "change": "غَيِّر",
     "curated-station": {
         "juz-amma": {
-            "description": "الاستماع إلى الجزء الأخير من القرآن",
-            "title": "جوز عمّا"
+            "description": "استمع إلى الجزء الأخير من القرآن",
+            "title": "جزء عم"
         },
         "popular-recitations": {
-            "description": "تغذية يومية منسقة للقراءات",
-            "title": "التلاوات الشعبية"
+            "description": "تلاوات يومية منتقاة",
+            "title": "التلاوات الشائعة"
         },
         "surah-al-kahf": {
             "description": "استمع لسورة الكهف على التكرار",
             "title": "سورة الكهف"
         },
         "yaseen-alwaqiah-al-mulk": {
-            "description": "السور من انتقاء القراء",
-            "title": "ياسين الواقية الملك"
+            "description": "السور لقراء مختارين",
+            "title": "سور يس والواقعة والملك"
         }
     },
     "curated-stations": "المحطات المنسقة",
-    "pause-radio": "راديو وقفة",
+    "pause-radio": "إيقاف الراديو",
     "play-radio": "تشغيل الراديو",
-    "reciter-stations": "محطات القارئ"
+    "reciter-stations": "محطات القراء"
 }

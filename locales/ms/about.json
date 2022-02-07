@@ -1,14 +1,14 @@
 {
     "credits": {
-        "desc": "Projek ini tidak mungkin dilakukan tanpa banyak perpustakaan dan projek sumber terbuka yang telah kami gunakan:",
-        "lokalize": "<0> Lokalize <\/0> : Sistem terjemahan berbantukan komputer yang memfokuskan pada produktiviti dan jaminan kualiti serta menyediakan aliran kerja penyetempatan yang lancar.",
-        "quran-align": "<0> Collin Fair <\/0> : Alat untuk menghasilkan segmentasi bacaan Al-Quran yang direkodkan dengan tepat.",
-        "quran-complex": "<0> <\/0> : Kompleks Percetakan Al-Quran King Fahd adalah peneraju dalam melayani Al-Quran dan Ilmunya, menterjemah Maknanya, dan menjaga Teks Al-Quran daripada penyelewengan, melalui penggunaan optimum teknologi canggih dalam bidang percetakan, rakaman audio, penerbitan elektronik dan aplikasi digital.",
-        "quran-enc": "<0> QuranEnc <\/0> : Sebuah portal yang memaparkan terjemahan percuma dan boleh dipercayai bagi maksud dan tafsir Al-Quran yang mulia dalam banyak bahasa dunia.",
-        "tanzil": "<0> Tanzil <\/0> : Projek al-Quran antarabangsa yang bertujuan untuk menyediakan teks al-Quran yang sangat disahkan dengan tepat.",
+        "desc": "Projek ini tidak mungkin dapat dilakukan dan dihasilkan tanpa adanya perpustakaan sumber terbuka dan juga rujukan daripada projek sedia-ada yang lain yang telah kami gunakan:",
+        "lokalize": "<0> Lokalize <\/0> : Sistem terjemahan berbantukan komputer yang memberi fokus kepada produktiviti dan jaminan kualiti serta menyediakan aliran kerja setempatan (Lokalize) yang lancar.",
+        "quran-align": "<0> Collin Fair <\/0> : Alat untuk menghasilkan segmen bacaan Al-Quran yang direkodkan dengan tepat.",
+        "quran-complex": "<0> <\/0> : Kompleks Percetakan Al-Quran King Fahd adalah peneraju dalam mempersembahkan Al-Quran dan Ilmunya, terjemahan maknanya dan menjaga Teks Al-Quran daripada penyelewengan, melalui penggunaan optimum teknologi canggih dalam bidang percetakan, rakaman audio, penerbitan elektronik dan aplikasi digital.",
+        "quran-enc": "<0> QuranEnc <\/0> : Sebuah portal yang memaparkan terjemahan percuma yang boleh dipercayai bagi maksud dan tafsir Al-Quran yang mulia dalam pelbagai bahasa dunia.",
+        "tanzil": "<0> Tanzil <\/0> : Projek al-Quran antarabangsa yang bertujuan untuk menyediakan teks al-Quran yang sangat tulen dan tepat.",
         "title": "Kredit",
-        "vercel": "<0> Vercel <\/0> : ialah platform penggunaan dan kerjasama untuk pembangun bahagian hadapan yang mengutamakan pembangun bahagian hadapan, memberi mereka alatan yang komprehensif untuk membina tapak web dan aplikasi berprestasi tinggi.",
-        "zekr": "<0> Zekr <\/0> : Alat belajar al-Quran platform terbuka untuk menyemak imbas dan menyelidik al-Quran"
+        "vercel": "<0> Vercel <\/0> : ialah platform penggunaan dan kerjasama untuk para Front-End Developer yang mengutamakan pembangunan Front-End Development , memberi mereka alatan yang komprehensif untuk membina tapak web dan aplikasi berprestasi tinggi.",
+        "zekr": "<0> Zekr <\/0> : Pentas terbuka untuk mempelajari, menyemak dan menyelidik serta mengulangkaji al-Quran"
     },
-    "main-description": "Quran.com telah diasaskan pada tahun 1995. Laman web ini bertujuan untuk memudahkan sesiapa sahaja membaca, mempelajari dan mempelajari al-Quran. Projek ini adalah sumber terbuka dan dibina sebagai kerjasama antara ahli pasukan teras dan <0> pasukan Tarteel <\/0> ."
+    "main-description": "Quran.com telah diasaskan pada tahun 1995. Laman web ini bertujuan untuk memudahkan sesiapa sahaja membaca, mempelajari dan memahami al-Quran. Projek ini adalah sumber terbuka (Open Source Project) dan dibina dengan kerjasama diantara ahli pasukan Teras dan <0> ahli pasukan Tarteel <\/0> ."
 }
