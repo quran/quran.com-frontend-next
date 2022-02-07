@@ -64,11 +64,12 @@ $font-cdn: "https://static.qurancdn.com/fonts";
   font-display: swap;
 }
 
-// Noto Nastaliq Urdu https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400&display=swap
 @font-face {
-  font-family: "NotoNastaliqUrdu";
-  src: local("Noto Nastaliq Urdu"), local("Nafees Regular"),
-    url("#{$font-cdn}/lang/urdu/notonastaliqurdu.woff2");
+  font-family: "MehrNastaliq";
+  src: local("Mehr Nastaliq Web"),
+    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff2"),
+    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff") format("woff"),
+    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;

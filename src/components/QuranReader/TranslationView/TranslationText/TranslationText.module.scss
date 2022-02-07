@@ -30,12 +30,12 @@ $translation-line-height: 1.5;
 }
 
 .urdu {
-  font-family: "NotoNastaliqUrdu", "Noto Nastaliq Urdu", "Noto Nastaliq Arabic",
-    "Helvetica Neue", Helvetica, Arial !important; // important is needed to over-ride the language specific font-family
+  font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica,
+    Arial, serif !important; // important is needed to over-ride the language specific font-family
 }
 
 .kurdish {
-  font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "Noto Nastaliq Urdu" !important; // important is needed to over-ride the language specific font-family
+  font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "MehrNastaliq" !important; // important is needed to over-ride the language specific font-family
 }
 
 .divehi {
