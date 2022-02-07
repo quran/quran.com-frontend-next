@@ -12,7 +12,7 @@
             "2": "Safar",
             "3": "Rabi' ben",
             "4": "Rabi' II",
-            "5": "Cumada ben",
+            "5": "Cumada",
             "6": "Cumada Ahira",
             "7": "Recep",
             "8": "Şaban",
@@ -22,17 +22,17 @@
     "no-bookmarks": "Henüz yer işaretiniz yok",
     "noble-quran": "Kur'an-ı Kerim",
     "prayer-names": {
-        "asr": "ikindi",
-        "dhuhr": "öğle",
-        "fajr": "sabah namazı",
-        "isha": "yatsı",
-        "maghrib": "akşam yemeği",
-        "sunrise": "gündoğumu"
+        "asr": "İkindi",
+        "dhuhr": "Öğle",
+        "fajr": "Sabah namazı",
+        "isha": "Yatsı",
+        "maghrib": "Akşam",
+        "sunrise": "Gün doğumu"
     },
     "prayer-times": {
         "use-location": "Doğru konumu kullan"
     },
-    "recently-read": "Son Okunan",
+    "recently-read": "Son Okunanlar",
     "tab": {
         "bookmarks": "Yer imleri",
         "popular": "Popüler"
@@ -43,7 +43,7 @@
     "welcome": {
         "changes-cta": "Son Değişiklikleri Görüntüle",
         "desc": "Aktif olarak yeni özellikler ekliyor ve değişiklikleri zorluyoruz. Herhangi bir sorunla karşılaşırsanız lütfen geri bildirimde bulunun.",
-        "feedback-cta": "Geribildirim sağlamak",
+        "feedback-cta": "Geribildirim ver",
         "title": "Yeni Kuran.com'un Yayın Öncesi Beta'sına hoş geldiniz!"
     }
 }
