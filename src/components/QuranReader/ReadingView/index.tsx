@@ -53,7 +53,7 @@ const ReadingView = ({
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>({
     [initialFirstMushafPage]: initialData.verses,
   });
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('quran-reader');
   const currentPageIndex = useRef<number>(0);
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
@@ -166,10 +166,11 @@ const ReadingView = ({
           size={ButtonSize.Small}
           className={styles.prevButton}
           onClick={scrollToPreviousPage}
+          tooltip={t('next-page')}
         >
           <ChevronDownIcon />
         </Button>
-        <Button size={ButtonSize.Small} onClick={scrollToNextPage}>
+        <Button size={ButtonSize.Small} onClick={scrollToNextPage} tooltip={t('prev-page')}>
           <ChevronDownIcon />
         </Button>
       </div>
