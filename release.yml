@@ -11,4 +11,5 @@ phases:
     commands:
       - aws ecs update-service --service $SERVICE_NAME --cluster $CLUSTER_ARN --force-new-deployment
       - aws ecs wait services-stable --service $SERVICE_NAME --cluster $CLUSTER_ARN
+    finally:
       - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
