@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
@@ -85,23 +85,31 @@ const PageContainer: React.FC<Props> = ({
     },
   );
 
+  const pageVerses = useMemo(() => {
+    // we need to filter only the verses that belong to the current page because sometimes the initial data number of verses exceeds the number of verses of the page e.g. /2 page 2
+    if (shouldUseInitialData) {
+      return verses.filter((verse) => pageNumber === verse.pageNumber);
+    }
+    return verses;
+  }, [pageNumber, shouldUseInitialData, verses]);
+
   useEffect(() => {
-    if (verses) {
+    if (pageVerses) {
       // @ts-ignore
       setMushafPageToVersesMap((prevMushafPageToVersesMap) => ({
         ...prevMushafPageToVersesMap,
-        [pageNumber]: verses,
+        [pageNumber]: pageVerses,
       }));
     }
-  }, [verses, pageNumber, setMushafPageToVersesMap]);
+  }, [pageNumber, setMushafPageToVersesMap, pageVerses]);
 
-  if (!verses || isValidating) {
+  if (!pageVerses || isValidating) {
     return <ReadingViewSkeleton />;
   }
 
   return (
     <Page
-      verses={verses}
+      verses={pageVerses}
       key={`page-${pageNumber}`}
       pageNumber={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}
