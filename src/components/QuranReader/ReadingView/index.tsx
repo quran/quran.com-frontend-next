@@ -22,6 +22,7 @@ import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue
 import useQcfFont from 'src/hooks/useQcfFont';
 import Error from 'src/pages/_error';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -115,6 +116,24 @@ const ReadingView = ({
     }
   };
 
+  const scrollToPreviousPage = () => {
+    logButtonClick('reading_view_prev_page');
+    virtuosoRef.current.scrollToIndex({
+      index: currentPageIndex.current - 1,
+      align: 'start',
+      offset: -70,
+    });
+  };
+
+  const scrollToNextPage = () => {
+    logButtonClick('reading_view_next_page');
+    virtuosoRef.current.scrollToIndex({
+      index: currentPageIndex.current + 1,
+      align: 'start',
+      offset: 10,
+    });
+  };
+
   return (
     <>
       <QueryParamMessage
@@ -146,26 +165,11 @@ const ReadingView = ({
         <Button
           size={ButtonSize.Small}
           className={styles.prevButton}
-          onClick={() => {
-            virtuosoRef.current.scrollToIndex({
-              index: currentPageIndex.current - 1,
-              align: 'start',
-              offset: -70,
-            });
-          }}
+          onClick={scrollToPreviousPage}
         >
           <ChevronDownIcon />
         </Button>
-        <Button
-          size={ButtonSize.Small}
-          onClick={() => {
-            virtuosoRef.current.scrollToIndex({
-              index: currentPageIndex.current + 1,
-              align: 'start',
-              offset: 10,
-            });
-          }}
-        >
+        <Button size={ButtonSize.Small} onClick={scrollToNextPage}>
           <ChevronDownIcon />
         </Button>
       </div>
