@@ -62,7 +62,7 @@ const GlyphWord = ({
       }}
       data-font-scale={quranTextFontScale}
       data-font={font}
-      className={classNames({
+      className={classNames(styles.styledWord, {
         [styles.fallbackText]: !isFontLoaded,
         [styles[getFontClassName(fallbackFont, quranTextFontScale, mushafLines)]]: !isFontLoaded,
       })}

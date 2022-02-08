@@ -25,4 +25,4 @@
   font-size: var(--font-size-small);
 }
 
-@include utility.generate-font-sizes("translation");
+@include utility.generate-font-scales("translation");

@@ -56,7 +56,7 @@ export const getFontFaceNameForPage = (isV1: boolean, pageNumber: number): strin
 /**
  * Dynamically generate the className of the combination between the font
  * name + size + mushafLines(when its Indopak) that will match the output of
- * generate-font-sizes function inside {@see _utility.scss}.
+ * generate-font-scales function inside {@see _utility.scss}.
  *
  * @param {QuranFont} quranFont
  * @param {number} fontScale
