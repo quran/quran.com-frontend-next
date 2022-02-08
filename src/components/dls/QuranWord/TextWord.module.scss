@@ -1,6 +1,6 @@
 .word {
   unicode-bidi: bidi-override;
-  line-height: normal;
+  line-height: var(--line-height);
 }
 
 .UthmanicHafs {

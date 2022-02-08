@@ -11,7 +11,7 @@ $translation-line-height: 1.5;
   opacity: var(--opacity-85);
 }
 
-@include utility.generate-font-sizes("translation");
+@include utility.generate-font-scales("translation");
 
 /*
 #TODO: should move language specific fonts and direction to

@@ -40,10 +40,11 @@
   flex-wrap: wrap;
 }
 
-@include utility.generate-font-sizes("code_v1");
-@include utility.generate-font-sizes("code_v2");
-@include utility.generate-font-sizes("text_indopak");
-@include utility.generate-font-sizes("qpc_uthmani_hafs");
+@include utility.generate-font-scales("code_v1");
+@include utility.generate-font-scales("code_v2");
+@include utility.generate-font-scales("text_indopak_15_lines");
+@include utility.generate-font-scales("text_indopak_16_lines");
+@include utility.generate-font-scales("qpc_uthmani_hafs");
 
 .highlighted {
   background-color: var(--color-background-alternative-faded);

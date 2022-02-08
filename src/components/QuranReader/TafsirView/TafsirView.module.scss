@@ -173,4 +173,4 @@ $container-max-width: calc(23 * var(--spacing-mega));
   width: calc(6 * var(--spacing-medium));
 }
 
-@include utility.generate-font-sizes("tafsir");
+@include utility.generate-font-scales("tafsir");

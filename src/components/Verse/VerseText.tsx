@@ -18,7 +18,7 @@ import {
 } from 'src/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
+import { getFontClassName, isQCFFont } from 'src/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
@@ -39,7 +39,7 @@ const VerseText = ({
   const textRef = useRef(null);
   const loadedFonts = useSelector(selectLoadedFontFaces);
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
-  const { quranFont, quranTextFontScale } = useSelector(
+  const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   ) as QuranReaderStyles;
@@ -75,7 +75,6 @@ const VerseText = ({
     <>
       <VerseTextContainer
         ref={textRef}
-        // TODO: remove all the data-{} when removing the intersection observer
         data-verse-key={verseKey}
         data-page={pageNumber}
         data-chapter-id={chapterId}
@@ -83,7 +82,7 @@ const VerseText = ({
         className={classNames(styles.verseTextContainer, {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
-          [styles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+          [styles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]: !isTajweedFont,
           [styles.tafsirOrTranslationMode]: !isReadingMode,
         })}
       >

@@ -9,6 +9,7 @@ import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getFontClassName } from 'src/utils/fontFaceHelper';
 import QueryParam from 'types/QueryParam';
 import { QuranFont } from 'types/QuranReader';
 
@@ -21,7 +22,7 @@ const TranslationViewCellSkeleton = () => {
   const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.Translations,
   );
-  const { quranFont, quranTextFontScale, translationFontScale } = useSelector(
+  const { quranFont, quranTextFontScale, translationFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   );
@@ -54,7 +55,8 @@ const TranslationViewCellSkeleton = () => {
       because it has layout shift problem when loading the font. Which is not ideal for skeleton */}
       <Skeleton
         className={classNames(skeletonStyles.verseContainer, {
-          [verseTextStyles[`${quranFont}-font-size-${quranTextFontScale}`]]: !isTajweedFont,
+          [verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
+            !isTajweedFont,
         })}
       />
       <div className={classNames(skeletonStyles[`translation-font-size-${translationFontScale}`])}>

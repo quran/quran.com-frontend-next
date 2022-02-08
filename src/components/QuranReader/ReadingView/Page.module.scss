@@ -2,9 +2,10 @@
 @use "src/styles/constants";
 
 $container-min-width: calc(9.5 * var(--spacing-mega));
+$container-margin-top: 1.5vh;
 .container {
   border-bottom: 1px var(--color-borders-hairline) solid;
-  margin-block-start: var(--spacing-xsmall);
+  margin-block-start: $container-margin-top;
   margin-block-end: var(--spacing-mega);
   max-width: 100%;
   min-width: $container-min-width;
