@@ -16,6 +16,7 @@ import styles from './ReadingView.module.scss';
 
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { ContentSide } from 'src/components/dls/Tooltip';
 import useFetchPagesCount from 'src/components/QuranReader/hooks/useFetchTotalPages';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
@@ -54,7 +55,7 @@ const ReadingView = ({
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>({
     [initialFirstMushafPage]: initialData.verses,
   });
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('quran-reader');
   const currentPageIndex = useRef<number>(0);
   const verses = useMemo(
     () => Object.values(mushafPageToVersesMap).flat(),
@@ -184,10 +185,17 @@ const ReadingView = ({
           size={ButtonSize.Small}
           className={styles.prevButton}
           onClick={scrollToPreviousPage}
+          tooltip={t('prev-page')}
+          tooltipContentSide={ContentSide.LEFT}
         >
           <ChevronDownIcon />
         </Button>
-        <Button size={ButtonSize.Small} onClick={scrollToNextPage}>
+        <Button
+          size={ButtonSize.Small}
+          onClick={scrollToNextPage}
+          tooltip={t('next-page')}
+          tooltipContentSide={ContentSide.LEFT}
+        >
           <ChevronDownIcon />
         </Button>
       </div>

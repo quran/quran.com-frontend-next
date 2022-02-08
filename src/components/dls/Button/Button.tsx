@@ -6,7 +6,7 @@ import styles from './Button.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import Tooltip from 'src/components/dls/Tooltip';
+import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import useDirection from 'src/hooks/useDirection';
 
@@ -47,6 +47,7 @@ export type ButtonProps = {
   disabled?: boolean;
   onClick?: MouseEventHandler;
   tooltip?: string;
+  tooltipContentSide?: ContentSide;
   className?: string;
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
@@ -67,6 +68,7 @@ const Button: React.FC<ButtonProps> = ({
   suffix,
   variant,
   tooltip,
+  tooltipContentSide = ContentSide.BOTTOM,
   className,
   hasSidePadding = true,
   shouldFlipOnRTL = true,
@@ -134,7 +136,11 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <Wrapper
       shouldWrap={!!tooltip}
-      wrapper={(tooltipChildren) => <Tooltip text={tooltip}>{tooltipChildren}</Tooltip>}
+      wrapper={(tooltipChildren) => (
+        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
+          {tooltipChildren}
+        </Tooltip>
+      )}
     >
       <button
         type="button"
