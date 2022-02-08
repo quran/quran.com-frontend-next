@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
@@ -88,6 +89,41 @@ const ReadingView = ({
     pagesVersesRange,
   );
 
+  const scrollToPreviousPage = useCallback(() => {
+    logButtonClick('reading_view_prev_page');
+    virtuosoRef.current.scrollToIndex({
+      index: currentPageIndex.current - 1,
+      align: 'start',
+      offset: -70,
+    });
+  }, []);
+
+  const scrollToNextPage = useCallback(() => {
+    logButtonClick('reading_view_next_page');
+    virtuosoRef.current.scrollToIndex({
+      index: currentPageIndex.current + 1,
+      align: 'start',
+      offset: 10,
+    });
+  }, []);
+
+  useHotkeys(
+    'Up',
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      scrollToPreviousPage();
+    },
+    [scrollToPreviousPage],
+  );
+  useHotkeys(
+    'Down',
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      scrollToNextPage();
+    },
+    [scrollToNextPage],
+  );
+
   const itemContentRenderer = (pageIndex: number) => (
     <PageContainer
       pagesVersesRange={pagesVersesRange}
@@ -114,24 +150,6 @@ const ReadingView = ({
     if (renderedPages[0]) {
       currentPageIndex.current = renderedPages[0].index + 1;
     }
-  };
-
-  const scrollToPreviousPage = () => {
-    logButtonClick('reading_view_prev_page');
-    virtuosoRef.current.scrollToIndex({
-      index: currentPageIndex.current - 1,
-      align: 'start',
-      offset: -70,
-    });
-  };
-
-  const scrollToNextPage = () => {
-    logButtonClick('reading_view_next_page');
-    virtuosoRef.current.scrollToIndex({
-      index: currentPageIndex.current + 1,
-      align: 'start',
-      offset: 10,
-    });
   };
 
   return (
