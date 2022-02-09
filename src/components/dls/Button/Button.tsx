@@ -46,7 +46,7 @@ export type ButtonProps = {
   href?: string;
   disabled?: boolean;
   onClick?: MouseEventHandler;
-  tooltip?: string;
+  tooltip?: string | React.ReactNode;
   tooltipContentSide?: ContentSide;
   className?: string;
   hasSidePadding?: boolean;
