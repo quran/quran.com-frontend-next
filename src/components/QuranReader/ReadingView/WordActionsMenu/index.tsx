@@ -5,6 +5,7 @@ import ShareVerseButton from '../../TranslationView/ShareVerseButton';
 
 import styles from './WordActionsMenu.module.scss';
 
+import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import Word from 'types/Word';
@@ -14,9 +15,17 @@ type Props = {
   onActionTriggered?: () => void;
 };
 
+const DATA_POPOVER_PORTALLED = 'data-popover-menu-portalled';
+
 const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }) => {
+  useSetPortalledZIndex(DATA_POPOVER_PORTALLED);
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      {...{
+        [DATA_POPOVER_PORTALLED]: true,
+      }}
+    >
       <ShareVerseButton
         verseKey={word.verseKey}
         isTranslationView={false}
