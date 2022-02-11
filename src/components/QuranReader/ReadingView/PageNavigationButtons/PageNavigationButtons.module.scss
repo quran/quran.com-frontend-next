@@ -1,0 +1,28 @@
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  inset-block-end: var(--spacing-mega);
+  transition: var(--transition-regular);
+  z-index: var(--z-index-sticky);
+  inset-inline-end: var(--spacing-large);
+}
+
+.prevButton {
+  margin-block-end: var(--spacing-micro);
+  & svg {
+    transform: rotate(180deg);
+  }
+}
+
+.audioPlayerOpen {
+  margin-block-end: constants.$audio-player-default-height;
+  @include breakpoints.tablet {
+    margin-block-end: constants.$audio-player-default-desktop-height;
+  }
+  inset-block-end: var(--spacing-medium);
+}
