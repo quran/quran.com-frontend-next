@@ -27,7 +27,7 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
         [DATA_POPOVER_PORTALLED]: true,
       }}
     >
-      <TranslationsButton verse={word.verse} />
+      <TranslationsButton verse={word.verse} onActionTriggered={onActionTriggered} />
       <ShareVerseButton
         verseKey={word.verseKey}
         isTranslationView={false}

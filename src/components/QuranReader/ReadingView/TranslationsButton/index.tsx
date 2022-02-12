@@ -28,8 +28,10 @@ const ContentModal = dynamic(() => import('src/components/dls/ContentModal/Conte
 
 interface Props {
   verse: Verse;
-  onActionTriggered?: () => void;
+  onActionTriggered: () => void;
 }
+
+const CLOSE_POPOVER_AFTER_MS = 200;
 
 const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
@@ -66,9 +68,10 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
     // eslint-disable-next-line i18next/no-literal-string
     logEvent(`reading_view_translations_modal_close`);
     setIsContentModalOpen(false);
-    if (onActionTriggered) {
+    setTimeout(() => {
+      // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
       onActionTriggered();
-    }
+    }, CLOSE_POPOVER_AFTER_MS);
   };
 
   const loading = useCallback(() => <TranslationViewCellSkeleton hasActionMenuItems={false} />, []);
