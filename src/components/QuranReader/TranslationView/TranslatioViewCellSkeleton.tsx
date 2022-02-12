@@ -18,7 +18,11 @@ const TRANSLATION_TEXT_SAMPLE =
 const TRANSLATION_AUTHOR_SAMPLE = '— Dr. Mustafa Khattab, the Clear Quran';
 const VERSE_KEY_SAMPLE = '1:12';
 
-const TranslationViewCellSkeleton = () => {
+interface Props {
+  hasActionMenuItems?: boolean;
+}
+
+const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = true }) => {
   const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.Translations,
   );
@@ -35,20 +39,22 @@ const TranslationViewCellSkeleton = () => {
         <Skeleton className={cellStyles.actionContainerLeft}>
           <Button size={ButtonSize.Small}>{VERSE_KEY_SAMPLE}</Button>
         </Skeleton>
-        <div className={cellStyles.actionContainerRight}>
-          <Skeleton className={cellStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-          <Skeleton className={cellStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-          <Skeleton className={cellStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-          <Skeleton className={cellStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-        </div>
+        {hasActionMenuItems && (
+          <div className={cellStyles.actionContainerRight}>
+            <Skeleton className={cellStyles.actionItem}>
+              <Button size={ButtonSize.Small} />
+            </Skeleton>
+            <Skeleton className={cellStyles.actionItem}>
+              <Button size={ButtonSize.Small} />
+            </Skeleton>
+            <Skeleton className={cellStyles.actionItem}>
+              <Button size={ButtonSize.Small} />
+            </Skeleton>
+            <Skeleton className={cellStyles.actionItem}>
+              <Button size={ButtonSize.Small} />
+            </Skeleton>
+          </div>
+        )}
       </div>
 
       {/* We're not using VersePreview as Skeleton's children here 

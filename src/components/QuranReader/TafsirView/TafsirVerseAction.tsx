@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/tafsir.svg';
 
-import { ContentModalHandles } from 'src/components/dls/ContentModal/ContentModal';
+import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
