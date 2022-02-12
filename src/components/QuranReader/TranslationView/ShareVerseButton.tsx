@@ -52,21 +52,19 @@ const ShareVerseButton = ({
   };
 
   return (
-    <>
-      <Button
-        onClick={onButtonClicked}
-        variant={ButtonVariant.Ghost}
-        size={ButtonSize.Small}
-        tooltip={t('share')}
-        shouldFlipOnRTL={false}
-        shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction)}
-      >
-        <span className={styles.icon}>
-          <CopyLinkIcon />
-        </span>
-      </Button>
-    </>
+    <Button
+      onClick={onButtonClicked}
+      variant={ButtonVariant.Ghost}
+      size={ButtonSize.Small}
+      tooltip={t('share')}
+      shouldFlipOnRTL={false}
+      shape={ButtonShape.Circle}
+      className={classNames(styles.iconContainer, styles.verseAction)}
+    >
+      <span className={styles.icon}>
+        <CopyLinkIcon />
+      </span>
+    </Button>
   );
 };
 

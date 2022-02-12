@@ -22,7 +22,6 @@ import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
-import TranslationVerseAction from 'src/components/QuranReader/ReadingView/TranslationVerseAction';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -155,8 +154,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verseNumber={verse.verseNumber}
         isTranslationView={isTranslationView}
       />
-
-      {!isTranslationView && <TranslationVerseAction verse={verse} />}
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}
         onClick={() => {

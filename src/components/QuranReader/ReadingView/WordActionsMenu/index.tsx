@@ -6,6 +6,7 @@ import ShareVerseButton from '../../TranslationView/ShareVerseButton';
 import styles from './WordActionsMenu.module.scss';
 
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
+import TranslationsButton from 'src/components/QuranReader/ReadingView/TranslationsButton';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import Word from 'types/Word';
@@ -26,6 +27,7 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
         [DATA_POPOVER_PORTALLED]: true,
       }}
     >
+      <TranslationsButton verse={word.verse} />
       <ShareVerseButton
         verseKey={word.verseKey}
         isTranslationView={false}

@@ -1,16 +1,17 @@
 import { useCallback, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
 import TranslationsIcon from '../../../../../public/icons/collection.svg';
 
-import styles from './TranslationVerseAction.module.scss';
+import styles from './TranslationsButton.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import TranslationsView from 'src/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from 'src/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -25,11 +26,12 @@ const ContentModal = dynamic(() => import('src/components/dls/ContentModal/Conte
   ssr: false,
 });
 
-type Props = {
+interface Props {
   verse: Verse;
-};
+  onActionTriggered?: () => void;
+}
 
-const TranslationVerseAction: React.FC<Props> = ({ verse }) => {
+const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t, lang } = useTranslation('common');
   const selectedTranslations = useSelector(selectSelectedTranslations);
@@ -52,28 +54,46 @@ const TranslationVerseAction: React.FC<Props> = ({ verse }) => {
     [quranReaderStyles],
   );
 
+  const onButtonClicked = () => {
+    logButtonClick(
+      // eslint-disable-next-line i18next/no-literal-string
+      `reading_view_translations_modal_open`,
+    );
+    setIsContentModalOpen(true);
+  };
+
+  const onModalClosed = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logEvent(`reading_view_translations_modal_close`);
+    setIsContentModalOpen(false);
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  };
+
   const loading = useCallback(() => <TranslationViewCellSkeleton hasActionMenuItems={false} />, []);
 
   return (
     <>
-      <PopoverMenu.Item
-        icon={<TranslationsIcon />}
-        onClick={() => {
-          logButtonClick(`reading_view_verse_actions_menu_translations`);
-          setIsContentModalOpen(true);
-        }}
+      <Button
+        onClick={onButtonClicked}
+        variant={ButtonVariant.Ghost}
+        size={ButtonSize.Small}
+        tooltip={t('translations')}
+        shouldFlipOnRTL={false}
+        shape={ButtonShape.Circle}
+        className={classNames(styles.iconContainer, styles.verseAction)}
       >
-        {t('translations')}
-      </PopoverMenu.Item>
+        <span className={styles.icon}>
+          <TranslationsIcon />
+        </span>
+      </Button>
       <ContentModal
         innerRef={contentModalRef}
         isOpen={isContentModalOpen}
         header={<p className={styles.header}>{t('translations')}</p>}
         hasCloseButton
-        onClose={() => {
-          logEvent(`reading_view_translations_modal_close`);
-          setIsContentModalOpen(false);
-        }}
+        onClose={onModalClosed}
       >
         <DataFetcher
           loading={loading}
@@ -85,4 +105,4 @@ const TranslationVerseAction: React.FC<Props> = ({ verse }) => {
   );
 };
 
-export default TranslationVerseAction;
+export default TranslationsButton;
