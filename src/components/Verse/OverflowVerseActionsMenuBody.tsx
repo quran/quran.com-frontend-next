@@ -154,7 +154,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verseNumber={verse.verseNumber}
         isTranslationView={isTranslationView}
       />
-
       <PopoverMenu.Item
         className={styles.hiddenOnDesktop}
         onClick={() => {

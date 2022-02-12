@@ -8,11 +8,8 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
 
+import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import { fakeNavigate } from 'src/utils/navigation';
-
-export type ContentModalHandles = {
-  scrollToTop: () => void;
-};
 
 type ContentModalProps = {
   isOpen?: boolean;
