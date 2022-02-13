@@ -24,7 +24,7 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 
 interface Props {
   verse: Verse;
-  word: Word;
+  word?: Word;
   isModal?: boolean;
   isPortalled?: boolean;
   isTranslationView?: boolean;
