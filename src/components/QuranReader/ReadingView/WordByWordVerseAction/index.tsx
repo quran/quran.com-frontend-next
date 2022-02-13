@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
-import TranslationsIcon from '../../../../../public/icons/collection.svg';
+import ReaderIcon from '../../../../../public/icons/reader.svg';
 
 import styles from './WordByWordVerseAction.module.scss';
 
@@ -49,7 +49,7 @@ const WordByWordVerseAction: React.FC<Props> = ({ word, onActionTriggered }) => 
 
   return (
     <>
-      <PopoverMenu.Item icon={<TranslationsIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item icon={<ReaderIcon />} onClick={onIconClicked}>
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal
