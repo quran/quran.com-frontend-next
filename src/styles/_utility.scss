@@ -213,6 +213,105 @@ $scales-map: (
   )
 );
 
+$skeleton-height-map: (
+  qpc_uthmani_hafs: (
+    desktop: (
+      1: 4.57vh,
+      2: 4.57vh,
+      3: 4.65vh,
+      4: 4.56vh,
+      5: 4.63vh,
+    ),
+    mobile: (
+      1: 4.2vw,
+      2: 5.2vw,
+      3: 5.9vw,
+      4: 8.9vw,
+      5: 11vw,
+    ),
+  ),
+  text_indopak_15_lines: (
+    desktop: (
+      1: 4.56vh,
+      2: 4.56vh,
+      3: 4.66vh,
+      4: 4.65vh,
+      5: 4.56vh,
+    ),
+    mobile: (
+      1: 4.4vw,
+      2: 4.9vw,
+      3: 5.8vw,
+      4: 6vw,
+      5: 9.3vw,
+    ),
+  ),
+  text_indopak_16_lines: (
+    desktop: (
+      1: 4.24vh,
+      2: 4.24vh,
+      3: 4.24vh,
+      4: 4.13vh,
+      5: 4.32vh,
+    ),
+    mobile: (
+      1: 4.4vw,
+      2: 5vw,
+      3: 5.7vw,
+      4: 6vw,
+      5: 9.3vw,
+    ),
+  ),
+  code_v2: (
+    desktop: (
+      1: 4.65vh,
+      2: 4.65vh,
+      3: 4.65vh,
+      4: 4.65vh,
+      5: 4.65vh,
+    ),
+    mobile: (
+      1: 4vw,
+      2: 5.1vw,
+      3: 6.8vw,
+      4: 8.4vw,
+      5: 10vw,
+    ),
+  ),
+  code_v1: (
+    desktop: (
+      1: 4.62vh,
+      2: 4.55vh,
+      3: 4.5vh,
+      4: 4.45vh,
+      5: 4.65vh,
+    ),
+    mobile: (
+      1: 4.18vw,
+      2: 5.3vw,
+      3: 7.3vw,
+      4: 10vw,
+      5: 12vw,
+    ),
+  ),
+  default: (
+    desktop: (
+      1: 4.57vh,
+      2: 4.57vh,
+      3: 4.65vh,
+      4: 4.56vh,
+      5: 4.63vh,
+    ),
+    mobile: (
+      1: 4vw,
+      2: 5vw,
+      3: 5.4vw,
+      4: 8.9vw,
+      5: 11vw,
+    ),
+  ),
+);
+
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
     $map: map-get($map, $key);
@@ -228,14 +327,38 @@ $scales-map: (
   $mobile-scales: null;
   $tablet-scales: null;
   $tablet-line-height-scales: null;
+  $desktop-skeleton-height-scales: null;
+  $mobile-skeleton-height-scales: null;
 
-  @if map.has-key($scales-map, $name) {
-    $mobile-scales: get-scales($name, "mobile", $scales-map);
-    $tablet-scales: get-scales($name, "tablet", $scales-map);
+  // reading view skeletons mapping
+  @if map.has-key($skeleton-height-map, $name) {
+    $desktop-skeleton-height-scales: get-scales(
+      $name,
+      "desktop",
+      $skeleton-height-map
+    );
+    $mobile-skeleton-height-scales: get-scales(
+      $name,
+      "mobile",
+      $skeleton-height-map
+    );
+  } @else {
+    $desktop-skeleton-height-scales: get-scales(
+      "default",
+      "desktop",
+      $skeleton-height-map
+    );
+    $mobile-skeleton-height-scales: get-scales(
+      "default",
+      "mobile",
+      $skeleton-height-map
+    );
+  }
+
+  // line heights mapping
+  @if map.has-key($line-heights-map, $name) {
     $tablet-line-height-scales: get-scales($name, "tablet", $line-heights-map);
   } @else {
-    $mobile-scales: get-scales("default", "mobile", $scales-map);
-    $tablet-scales: get-scales("default", "tablet", $scales-map);
     $tablet-line-height-scales: get-scales(
       "default",
       "tablet",
@@ -243,13 +366,24 @@ $scales-map: (
     );
   }
 
+  // font scales mapping
+  @if map.has-key($scales-map, $name) {
+    $mobile-scales: get-scales($name, "mobile", $scales-map);
+    $tablet-scales: get-scales($name, "tablet", $scales-map);
+  } @else {
+    $mobile-scales: get-scales("default", "mobile", $scales-map);
+    $tablet-scales: get-scales("default", "tablet", $scales-map);
+  }
+
   @for $i from 1 through constants.$maximum-font-step {
     .#{$name}-font-size-#{$i} {
+      --skeleton-height: #{map.get($mobile-skeleton-height-scales, $i)};
       --font-size: #{map.get($mobile-scales, $i)};
       --line-height: unset;
       @include breakpoints.tablet {
         --font-size: #{map.get($tablet-scales, $i)};
         --line-height: #{map.get($tablet-line-height-scales, $i)};
+        --skeleton-height: #{map.get($desktop-skeleton-height-scales, $i)};
       }
       font-size: var(--font-size);
     }

@@ -76,7 +76,19 @@ export const getPageIdsByMushaf = (
     return { value: page, label: toLocalizedNumber(page, lang) };
   });
 
-export const getMushafLinesNumber = (mushafLines: MushafLines): number => {
-  if (mushafLines === MushafLines.FifteenLines) return 15;
+/**
+ * Get the number of lines in a Mushaf page based on the Mushaf.
+ * All Mushafs have 15 lines except for Indopak 16-line one.
+ *
+ * @param {QuranFont} quranFont
+ * @param {MushafLines} mushafLines
+ * @returns {number}
+ */
+export const getMushafLinesNumber = (quranFont: QuranFont, mushafLines: MushafLines): number => {
+  if (
+    quranFont !== QuranFont.IndoPak ||
+    (quranFont === QuranFont.IndoPak && mushafLines === MushafLines.FifteenLines)
+  )
+    return 15;
   return 16;
 };

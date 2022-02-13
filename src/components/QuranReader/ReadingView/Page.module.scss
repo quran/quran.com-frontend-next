@@ -1,14 +1,12 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
 
-$container-min-width: calc(9.5 * var(--spacing-mega));
-$container-margin-top: 1.5vh;
 .container {
   border-bottom: 1px var(--color-borders-hairline) solid;
-  margin-block-start: $container-margin-top;
+  margin-block-start: constants.$reading-view-container-top-margin;
   margin-block-end: var(--spacing-mega);
   max-width: 100%;
-  min-width: $container-min-width;
+  min-width: constants.$reading-view-page-min-width;
 }
 
 .mobileCenterText {
