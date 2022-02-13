@@ -1,12 +1,19 @@
-@use "src/styles/breakpoints";
 @use "src/styles/utility";
-@use "src/styles/theme";
+@use "src/styles/constants";
+@use "src/styles/breakpoints";
+
+.skeletonContainer {
+  // the page's bottom margin + the height of the page footer
+  margin-block-end: calc(var(--spacing-mega) + var(--spacing-large));
+}
 
 .skeleton {
   width: 100%;
-  min-width: calc(9.5 * var(--spacing-mega));
   max-width: calc(15 * var(--font-size));
-  margin-inline: auto;
-  height: calc(1.2 * var(--font-size));
-  margin-block-end: calc(0.75 * var(--font-size));
+  min-width: constants.$reading-view-page-min-width;
+  @include breakpoints.tablet {
+    margin-block-start: constants.$reading-view-container-top-margin;
+  }
+  margin-block-start: var(--spacing-xsmall);
+  height: var(--skeleton-height);
 }

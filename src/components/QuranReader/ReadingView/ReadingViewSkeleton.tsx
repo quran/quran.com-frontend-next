@@ -17,10 +17,10 @@ const ReadingViewSkeleton = () => {
     shallowEqual,
   ) as QuranReaderStyles;
 
-  const numberOfLines = getMushafLinesNumber(mushafLines);
+  const numberOfLines = getMushafLinesNumber(quranFont, mushafLines);
 
   return (
-    <div>
+    <div className={styles.skeletonContainer}>
       {range(numberOfLines).map((i) => (
         <Skeleton
           key={i}

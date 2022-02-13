@@ -59,7 +59,7 @@ const PageContainer: React.FC<Props> = ({
   setMushafPageToVersesMap,
   initialData,
   quranReaderDataType,
-}) => {
+}: Props): JSX.Element => {
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const shouldUseInitialData =
@@ -96,7 +96,7 @@ const PageContainer: React.FC<Props> = ({
   useEffect(() => {
     if (pageVerses) {
       // @ts-ignore
-      setMushafPageToVersesMap((prevMushafPageToVersesMap) => ({
+      setMushafPageToVersesMap((prevMushafPageToVersesMap: Record<number, Verse[]>) => ({
         ...prevMushafPageToVersesMap,
         [pageNumber]: pageVerses,
       }));

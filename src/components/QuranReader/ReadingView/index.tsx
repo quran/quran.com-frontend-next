@@ -92,7 +92,7 @@ const ReadingView = ({
     virtuosoRef.current.scrollToIndex({
       index: currentPageIndex.current - 1,
       align: 'start',
-      offset: -70,
+      offset: -35,
     });
   }, []);
 
