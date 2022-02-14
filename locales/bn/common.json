@@ -255,6 +255,8 @@
     },
     "wbw": "শব্দ দ্বারা শব্দ",
     "wbw-trans-lang": "শব্দ দ্বারা শব্দ ভাষা",
+    "wbw-translation": "শব্দ দ্বারা শব্দ অনুবাদ",
+    "wbw-transliteration": "শব্দ দ্বারা শব্দ প্রতিবর্ণীকরণ",
     "word-click": {
         "no-audio": "অডিও নেই",
         "play-audio": "অডিও চালান",

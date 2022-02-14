@@ -255,6 +255,8 @@
     },
     "wbw": "كلمة بكلمة",
     "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
+    "wbw-translation": "ترجمة كلمة بكلمة",
+    "wbw-transliteration": "كلمة بكلمة حرفي",
     "word-click": {
         "no-audio": "لا صوت",
         "play-audio": "تشغيل الصوت",

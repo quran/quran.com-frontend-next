@@ -255,6 +255,8 @@
     },
     "wbw": "Слово за слово",
     "wbw-trans-lang": "Слово за словом язык",
+    "wbw-translation": "Пословный перевод",
+    "wbw-transliteration": "Пословная транслитерация",
     "word-click": {
         "no-audio": "Нет звука",
         "play-audio": "Воспроизвести аудио",

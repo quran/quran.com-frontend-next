@@ -255,6 +255,8 @@
     },
     "wbw": "คำต่อคำ",
     "wbw-trans-lang": "คำต่อคำ ภาษา",
+    "wbw-translation": "การแปลคำต่อคำ",
+    "wbw-transliteration": "คำต่อคำทับศัพท์",
     "word-click": {
         "no-audio": "ไม่มีเสียง",
         "play-audio": "เล่นเสียง",

@@ -255,6 +255,8 @@
     },
     "wbw": "Palavra por palavra",
     "wbw-trans-lang": "Linguagem palavra por palavra",
+    "wbw-translation": "Tradução palavra por palavra",
+    "wbw-transliteration": "Transliteração palavra por palavra",
     "word-click": {
         "no-audio": "Sem áudio",
         "play-audio": "Tocar áudio",

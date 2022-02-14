@@ -255,6 +255,8 @@
     },
     "wbw": "کلمه به کلمه",
     "wbw-trans-lang": "زبان کلمه به کلمه",
+    "wbw-translation": "ترجمه کلمه به کلمه",
+    "wbw-transliteration": "نویسه گردانی کلمه به کلمه",
     "word-click": {
         "no-audio": "بی صدا",
         "play-audio": "پخش صدا",
