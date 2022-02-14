@@ -34,6 +34,15 @@ const TafsirVerseAction = ({
 
   const contentModalRef = useRef<ContentModalHandles>();
 
+  const closeModal = () => {
+    if (isTranslationView) {
+      logEvent('translation_view_tafsir_modal_close');
+    } else {
+      logEvent('reading_view_tafsir_modal_close');
+    }
+    setIsContentModalOpen(false);
+  };
+
   return (
     <>
       <PopoverMenu.Item
@@ -61,12 +70,8 @@ const TafsirVerseAction = ({
                 url={getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0])}
                 isOpen={isContentModalOpen}
                 hasCloseButton
-                onClose={() => {
-                  logEvent(
-                    `${isTranslationView ? 'translation_view' : 'reading_view'}_tafsir_modal_close`,
-                  );
-                  setIsContentModalOpen(false);
-                }}
+                onClose={closeModal}
+                onHitEsc={closeModal}
                 header={surahAndAyahSelection}
               >
                 {languageAndTafsirSelection}

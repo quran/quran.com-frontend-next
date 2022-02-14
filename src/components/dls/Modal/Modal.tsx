@@ -22,12 +22,14 @@ type ModalProps = {
   onClickOutside?: () => void;
   isPropagationStopped?: boolean;
   contentClassName?: string;
+  onHitEsc?: () => void;
 };
 const Modal = ({
   children,
   trigger,
   isOpen,
   onClickOutside,
+  onHitEsc,
   isPropagationStopped,
   contentClassName,
   isBottomSheetOnMobile = true,
@@ -45,7 +47,8 @@ const Modal = ({
       />
       <Content
         isPropagationStopped={isPropagationStopped}
-        onInteractOutside={onClickOutside}
+        onEscapeKeyDown={onHitEsc}
+        onPointerDownOutside={onClickOutside}
         isBottomSheetOnMobile={isBottomSheetOnMobile}
         contentClassName={contentClassName}
       >
