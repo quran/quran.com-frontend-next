@@ -24,7 +24,7 @@ const config = {
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
   pwa: {
-    disable: isDev,
+    disable: true,
     dest: 'public',
     runtimeCaching,
     publicExcludes: ['!fonts/v1/**/*', '!fonts/v2/**/*'],
