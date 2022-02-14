@@ -50,7 +50,6 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
         <OverflowVerseActionsMenu
           isTranslationView={false}
           verse={word.verse}
-          word={word}
           isModal
           isPortalled
           onActionTriggered={onActionTriggered}

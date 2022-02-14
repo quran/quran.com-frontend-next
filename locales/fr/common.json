@@ -255,6 +255,8 @@
     },
     "wbw": "Mot par mot",
     "wbw-trans-lang": "Langage mot à mot",
+    "wbw-translation": "Traduction mot à mot",
+    "wbw-transliteration": "Translittération mot à mot",
     "word-click": {
         "no-audio": "Pas de son",
         "play-audio": "Lire le son",

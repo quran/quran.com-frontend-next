@@ -37,7 +37,7 @@
             "verses-range": "诗句范围"
         },
         "repeat-moved": "重复设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
-        "select-reciter": "选择朗诵者",
+        "select-reciter": "选择诵读家",
         "title": "音频"
     },
     "ayah": "节",
@@ -82,20 +82,20 @@
     "fonts": {
         "15_lines": "15行",
         "16_lines": "16 行",
-        "code_v1": "法赫德国王综合大楼 V1",
-        "code_v2": "法赫德国王复合体 V2",
+        "code_v1": "King Fahad Complex V1",
+        "code_v2": "King Fahad Complex V2",
         "font-size": "字体大小",
         "lines": "线",
         "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长。",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-        "quran-font": "古兰经字体",
-        "tajweed": "泰姬草",
-        "tajweed-desc": "Tajweed 字体显示 Tajweed 色的 Mushaf。 <0>此处阅读有关 Tajweed 颜色规则的更多信息<\/0>",
-        "text_indopak": "印巴",
-        "text_uthmani": "奥斯曼尼"
+        "quran-font": "经文字体",
+        "tajweed": "泰知卫德",
+        "tajweed-desc": "泰知卫德字体显示带有泰知卫德颜色的 Mushaf。 <0>此处是泰知卫德颜色规则<\/0>",
+        "text_indopak": "纳斯泰阿利格体",
+        "text_uthmani": "纳斯赫体"
     },
     "footer": {
-        "description": "Quran.com 是 Sadaqah Jariyah。我们希望让每个人都能轻松阅读、学习和学习《高贵的古兰经》。高贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。"
+        "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。"
     },
     "from": "从",
     "help": "帮助",
@@ -130,7 +130,7 @@
         "calculation-method": "计算方法",
         "calculation-methods": {
             "Dubai": "迪拜",
-            "Egyptian": "埃及人",
+            "Egyptian": "埃及",
             "Karachi": "卡拉奇",
             "Kuwait": "科威特",
             "MoonsightingCommittee": "探月委员会",
@@ -139,7 +139,7 @@
             "Qatark": "卡塔尔语",
             "Singapore": "新加坡",
             "Tehran": "德黑兰",
-            "Turkey": "火鸡",
+            "Turkey": "土耳其",
             "UmmAlQura": "乌玛库拉"
         },
         "find-accurate-location": "查找准确位置",
@@ -147,17 +147,17 @@
         "location-updated": "祈祷时间地点更新",
         "madhab": "马达卜",
         "madhabs": {
-            "Hanafi": "哈纳菲",
-            "Shafi": "沙菲"
+            "Hanafi": "哈纳斐",
+            "Shafi": "沙斐仪"
         },
-        "title": "祷告时间"
+        "title": "礼拜时间"
     },
     "prev": "以前的",
     "privacy": "隐私",
     "product-updates": "产品更新",
     "q-reflect": "古兰经反射",
     "quran-com": "Quran.com",
-    "quran-radio": "古兰经电台",
+    "quran-radio": "在线听古兰经",
     "reading-preference": {
         "reading": "读",
         "translation": "翻译"
@@ -180,30 +180,30 @@
         "title": "搜索"
     },
     "settings": {
-        "no-tafsir-selected": "未选择 tafsir",
-        "no-translation-selected": "未选择翻译",
+        "no-tafsir-selected": "尚未选择经注",
+        "no-translation-selected": "尚未选择译文",
         "reading-experience": "阅读体验",
         "reset-cta": "恢复默认值",
         "reset-notif": "您的设置已重置为默认设置",
-        "search-reciter": "搜索朗诵者",
+        "search-reciter": "搜索诵读家",
         "search-tafsirs": "搜索 Tafsirs",
         "search-translations": "搜索翻译",
         "selected-reciter": "精选朗诵者",
-        "selected-tafsirs": "精选 Tafsir",
-        "selected-translations": "精选译文",
+        "selected-tafsirs": "选择经注",
+        "selected-translations": "选择译文",
         "show-tooltip-when-playing-audio": "播放声音时显示提示信息",
         "title": "设置",
-        "tooltip-playing-audio-helper": "播放 ayah 时在工具提示中显示单词翻译",
-        "value-and-others": "{{value}}和{{othersCount}}其他",
-        "wbw-helper": "直接在单词下方显示翻译或音译",
-        "word-tooltip-helper": "悬停或单击单词时显示翻译或音译"
+        "tooltip-playing-audio-helper": "播放节文时显示单词翻译",
+        "value-and-others": "{{value}}和其他{{othersCount}}种译本",
+        "wbw-helper": "直接在单词下方显示对应意译或音译",
+        "word-tooltip-helper": "鼠标悬停或单击单词时显示对应意译或音译"
     },
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
     "sidebar": {
-        "search-juz": "搜索 Juz",
-        "search-page": "搜索页面",
-        "search-surah": "搜索古兰经",
+        "search-juz": "按卷数搜索",
+        "search-page": "按页数搜索",
+        "search-surah": "按章节搜索",
         "try-navigating-with": "提示：尝试导航"
     },
     "sitemap": "网站地图",
@@ -235,13 +235,13 @@
     },
     "to": "到",
     "tooltip": "工具提示",
-    "tooltip-trans-lang": "工具提示语言",
+    "tooltip-trans-lang": "翻译成：",
     "translation": "意译",
     "translations": "翻译",
     "transliteration": "音译",
     "type": "类型",
     "verse": "诗",
-    "verses": "诗句",
+    "verses": "节",
     "view": "看法",
     "voice": {
         "ask-permission": "请启用麦克风权限以开始使用语音搜索",
@@ -253,13 +253,15 @@
         "suggest-title": "现在背诵",
         "voice-search-powered-by": "语音搜索 技术支持"
     },
-    "wbw": "逐词地",
-    "wbw-trans-lang": "逐字语言",
+    "wbw": "在单词下方显示对应意译或音译",
+    "wbw-trans-lang": "翻译成：",
+    "wbw-translation": "逐字翻译",
+    "wbw-transliteration": "逐字音译",
     "word-click": {
         "no-audio": "无音频",
         "play-audio": "播放音频",
         "title": "字点击"
     },
-    "word-tooltip": "文字工具提示",
+    "word-tooltip": "文字提示",
     "yes": "是的"
 }

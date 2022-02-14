@@ -30,11 +30,9 @@ import { getQuranReflectVerseUrl } from 'src/utils/navigation';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 interface Props {
   verse: Verse;
-  word: Word;
   isPortalled?: boolean;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
@@ -48,7 +46,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   isPortalled,
   isTranslationView,
   onActionTriggered,
-  word,
 }) => {
   const { t } = useTranslation('common');
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
@@ -153,7 +150,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
 
       <VerseActionAdvancedCopy verse={verse} isTranslationView={isTranslationView} />
       {!isTranslationView && (
-        <WordByWordVerseAction word={word} onActionTriggered={onActionTriggered} />
+        <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
       <TafsirVerseAction
         chapterId={Number(verse.chapterId)}

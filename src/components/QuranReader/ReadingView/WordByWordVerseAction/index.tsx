@@ -5,26 +5,28 @@ import dynamic from 'next/dynamic';
 
 import ReaderIcon from '../../../../../public/icons/reader.svg';
 
+import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import Separator from 'src/components/dls/Separator/Separator';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
-import Word from 'types/Word';
+import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 
 type Props = {
-  word: Word;
+  verse: Verse;
   onActionTriggered?: () => void;
 };
 
 const CLOSE_POPOVER_AFTER_MS = 150;
 
-const WordByWordVerseAction: React.FC<Props> = ({ word, onActionTriggered }) => {
+const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { t } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
@@ -55,17 +57,15 @@ const WordByWordVerseAction: React.FC<Props> = ({ word, onActionTriggered }) => 
       <ContentModal
         innerRef={contentModalRef}
         isOpen={isContentModalOpen}
-        header={<p className={styles.header}>{t('wbw')}</p>}
+        header={<p className={styles.header} />}
         hasCloseButton
         onClose={onModalClosed}
       >
-        <PlainVerseText words={[word]} />
-        <div>
-          <span className={styles.name}>{t('transliteration')}:</span> {word.transliteration.text}
-        </div>
-        <div>
-          <span className={styles.name}>{t('translation')}</span>: {word.translation.text}
-        </div>
+        <WordByWordHeading isTranslation />
+        <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />
+        <Separator className={styles.separator} />
+        <WordByWordHeading isTranslation={false} />
+        <PlainVerseText words={verse.words} shouldShowWordByWordTransliteration />
       </ContentModal>
     </>
   );

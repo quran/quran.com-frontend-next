@@ -255,6 +255,8 @@
     },
     "wbw": "Woord voor woord",
     "wbw-trans-lang": "Woord voor woord taal",
+    "wbw-translation": "Woord voor woord vertaling",
+    "wbw-transliteration": "Woord voor woord transliteratie",
     "word-click": {
         "no-audio": "Geen geluid",
         "play-audio": "Audio afspelen",

@@ -1,0 +1,11 @@
+.plainVerseWordContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.plainVerseWbwText {
+  margin-block: var(--spacing-xxsmall);
+  margin-inline: var(--spacing-xxsmall);
+  font-size: var(--font-size-small);
+}

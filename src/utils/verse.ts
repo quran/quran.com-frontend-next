@@ -210,7 +210,6 @@ export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
   const words = [];
   verse.words.forEach((word) => {
     const wordVerse = { ...verse };
-    delete wordVerse.words;
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
