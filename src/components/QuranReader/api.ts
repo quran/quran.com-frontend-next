@@ -22,7 +22,6 @@ interface RequestKeyInput {
   quranReaderStyles: QuranReaderStyles;
   selectedTranslations: number[];
   isVerseData: boolean;
-  isSelectedTafsirData: boolean;
   id: string | number;
   reciter: number;
   locale: string;
