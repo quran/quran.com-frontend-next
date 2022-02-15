@@ -20,9 +20,10 @@ import {
   makeChapterUrl,
   makeReciterUrl,
   makeTafsirContentUrl,
+  makePagesLookupUrl,
 } from './utils/apiPaths';
 
-import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
+import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
   SearchResponse,
@@ -38,6 +39,7 @@ import {
   ChapterResponse,
   ReciterResponse,
   TafsirContentResponse,
+  PagesLookUpResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 
@@ -249,6 +251,16 @@ export const getPageVerses = async (
  */
 export const getFootnote = async (footnoteId: string): Promise<FootnoteResponse> =>
   fetcher(makeFootnoteUrl(footnoteId));
+
+/**
+ * Get the footnote details.
+ *
+ * @param {PagesLookUpRequest} params
+ *
+ * @returns {Promise<PagesLookUpResponse>}
+ */
+export const getPagesLookup = async (params: PagesLookUpRequest): Promise<PagesLookUpResponse> =>
+  fetcher(makePagesLookupUrl(params));
 
 /**
  * Get the chapter id by a slug.
