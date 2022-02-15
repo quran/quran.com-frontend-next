@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getJuzVerses } from 'src/api';
+import { getJuzVerses, getPagesLookup } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
@@ -18,6 +18,7 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidJuzId } from 'src/utils/validator';
+import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 
@@ -52,6 +53,7 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
   );
 };
 
+// eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const juzId = String(params.juzId);
   // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
@@ -60,14 +62,25 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       notFound: true,
     };
   }
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
   try {
+    const pagesLookupResponse = await getPagesLookup({
+      juzNumber: Number(juzId),
+      mushaf: defaultMushafId,
+    });
+    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+      pagesLookupResponse.lookupRange.from,
+      pagesLookupResponse.lookupRange.to,
+    ).length;
     const juzVersesResponse = await getJuzVerses(juzId, locale, {
       ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-      ...getMushafId(
-        getQuranReaderStylesInitialState(locale).quranFont,
-        getQuranReaderStylesInitialState(locale).mushafLines,
-      ),
+      mushaf: defaultMushafId,
     });
+    const metaData = { numberOfVerses };
+    juzVersesResponse.metaData = metaData;
     return {
       props: {
         juzVerses: juzVersesResponse,

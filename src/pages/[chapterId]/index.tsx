@@ -5,7 +5,7 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getChapterIdBySlug, getChapterVerses } from 'src/api';
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
@@ -24,6 +24,7 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 
@@ -137,24 +138,48 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       isChapter = true;
     }
   }
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
   // common API params between a chapter and the verse key.
   let apiParams = {
     ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-    ...getMushafId(
-      getQuranReaderStylesInitialState(locale).quranFont,
-      getQuranReaderStylesInitialState(locale).mushafLines,
-    ),
+    mushaf: defaultMushafId,
   };
-  // if it's a verseKey
-  if (!isChapter) {
-    const [extractedChapterId, verseNumber] =
-      getVerseAndChapterNumbersFromKey(chapterIdOrVerseKeyOrSlug);
-    chapterId = extractedChapterId;
-    // only get 1 verse
-    apiParams = { ...apiParams, ...{ page: verseNumber, perPage: 1 } };
-  }
+  let numberOfVerses = 1;
   try {
+    // if it's a verseKey
+    if (!isChapter) {
+      const [extractedChapterId, verseNumber] =
+        getVerseAndChapterNumbersFromKey(chapterIdOrVerseKeyOrSlug);
+      chapterId = extractedChapterId;
+      // only get 1 verse
+      apiParams = { ...apiParams, ...{ page: verseNumber, perPage: 1 } };
+    } else {
+      const pagesLookupResponse = await getPagesLookup({
+        chapterNumber: Number(chapterId),
+        mushaf: defaultMushafId,
+      });
+      numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+        pagesLookupResponse.lookupRange.from,
+        pagesLookupResponse.lookupRange.to,
+      ).length;
+
+      const firstPageOfChapter = Object.keys(pagesLookupResponse.pages)[0];
+      const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfChapter];
+      apiParams = {
+        ...apiParams,
+        ...{
+          perPage: 'all',
+          from: firstPageOfChapterLookup.from,
+          to: firstPageOfChapterLookup.to,
+        },
+      };
+    }
     const versesResponse = await getChapterVerses(chapterId, locale, apiParams);
+    const metaData = { numberOfVerses };
+    versesResponse.metaData = metaData;
     return {
       props: {
         chapterResponse: { chapter: { ...getChapterData(chapterId, locale), id: chapterId } },

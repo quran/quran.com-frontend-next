@@ -23,6 +23,7 @@ import {
   isValidVerseNumber,
 } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import MetaData from 'types/MetaData';
 import { QuranReaderDataType } from 'types/QuranReader';
 
 type VerseProps = {
@@ -77,26 +78,31 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   ) {
     return { notFound: true };
   }
-
   /*
     Since we already validated the value, if the verseIdOrRange is a number it means we are
     viewing the verse's page otherwise it's a range page.
   */
   const isVerse = isValidVerseNumber(verseIdOrRange);
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
   // common API params between a single verse and range of verses.
   let apiParams = {
     ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-    ...getMushafId(
-      getQuranReaderStylesInitialState(locale).quranFont,
-      getQuranReaderStylesInitialState(locale).mushafLines,
-    ),
+    mushaf: defaultMushafId,
   };
+  const metaData = { numberOfVerses: 1 } as MetaData;
   let [from, to] = [null, null];
   if (isVerse) {
     apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };
   } else {
+    const [fromVerseNumber, toVerseNumber] = getToAndFromFromRange(verseIdOrRange);
     [from, to] = getToAndFromFromRange(verseIdOrRange).map((ayah) => `${chapterIdOrSlug}:${ayah}`);
     apiParams = { ...apiParams, ...{ from, to } };
+    metaData.from = from;
+    metaData.to = to;
+    metaData.numberOfVerses = Number(toVerseNumber) - Number(fromVerseNumber) + 1;
   }
   try {
     const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
@@ -117,13 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         },
         versesResponse: {
           ...versesResponse,
-          ...(!isVerse && {
-            // when it's range, attach metaData so that it can be used inside the QuranReader's useSWRInfinite fetcher.
-            metaData: {
-              from,
-              to,
-            },
-          }),
+          metaData,
         },
         isVerse,
       },

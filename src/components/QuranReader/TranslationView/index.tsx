@@ -46,18 +46,11 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
  * Get the total number of verses of the current view e.g. /2 or /juz/30 or /2/20-50
  * by using the totalRecords returned from BE which indicates how many verses there are.
  *
- * @param {QuranReaderDataType} quranReaderDataType
  * @param {VersesResponse} initialData
  * @returns {number}
  */
-const getVersesCount = (
-  quranReaderDataType: QuranReaderDataType,
-  initialData: VersesResponse,
-): number => {
-  if (quranReaderDataType === QuranReaderDataType.Verse) {
-    return 1;
-  }
-  return initialData.pagination.totalRecords;
+const getVersesCount = (initialData: VersesResponse): number => {
+  return initialData.metaData.numberOfVerses as number;
 };
 
 const generateResourceVerseKeys = (lookupRange: LookupRange) =>
@@ -109,10 +102,7 @@ const TranslationView = ({
     initialData,
     quranReaderStyles,
   );
-  const totalVersesCount = useMemo(
-    () => getVersesCount(quranReaderDataType, initialData),
-    [initialData, quranReaderDataType],
-  );
+  const totalVersesCount = useMemo(() => getVersesCount(initialData), [initialData]);
   const resourceVerseKeys = useMemo(() => generateResourceVerseKeys(lookupRange), [lookupRange]);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef);

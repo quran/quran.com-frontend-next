@@ -52,6 +52,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   );
 };
 
+// eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const pageId = String(params.pageId);
   // we need to validate the pageId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
@@ -71,7 +72,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     });
     return {
       props: {
-        pageVerses: pageVersesResponse,
+        pageVerses: {
+          ...pageVersesResponse,
+          metaData: { numberOfVerses: pageVersesResponse.verses.length },
+        },
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };

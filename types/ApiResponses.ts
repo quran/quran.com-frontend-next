@@ -6,6 +6,7 @@ import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
 import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
+import MetaData from './MetaData';
 import Reciter from './Reciter';
 import { SearchNavigationResult } from './SearchNavigationResult';
 import TafsirInfo from './TafsirInfo';
@@ -28,7 +29,7 @@ interface Pagination {
 export interface VersesResponse extends BaseResponse {
   pagination: Pagination;
   verses: Verse[];
-  metaData?: Record<string, string>;
+  metaData?: MetaData;
 }
 
 // The response from the chapters endpoint that returns a list of the chapters
