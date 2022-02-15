@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
+import useDebounce from '../../../hooks/useDebounce';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
@@ -49,11 +50,16 @@ const NAVIGATE_TO = [
   },
 ];
 
+const DEBOUNCING_PERIOD_MS = 500;
+
 const CommandBarBody: React.FC = () => {
   const { t, lang } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
+
+  const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+
   /**
    * Handle when the search query is changed.
    *
@@ -182,7 +188,9 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
+            queryKey={
+              debouncedSearchQuery ? makeSearchResultsUrl({ query: debouncedSearchQuery }) : null
+            }
             render={dataFetcherRender}
           />
         )}
