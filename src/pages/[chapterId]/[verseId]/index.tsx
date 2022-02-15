@@ -23,6 +23,7 @@ import {
   isValidVerseNumber,
 } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import MetaData from 'types/MetaData';
 import { QuranReaderDataType } from 'types/QuranReader';
 
 type VerseProps = {
@@ -91,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
     mushaf: defaultMushafId,
   };
-  const metaData = { numberOfVerses: 1 } as { numberOfVerses: number; from?: string; to?: string };
+  const metaData = { numberOfVerses: 1 } as MetaData;
   let [from, to] = [null, null];
   if (isVerse) {
     apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };
