@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'react-redux';
 import { ListItem, Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import useSWRImmutable from 'swr/immutable';
 
@@ -22,6 +23,9 @@ import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useQcfFont from 'src/hooks/useQcfFont';
 import Error from 'src/pages/_error';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { VersesResponse } from 'types/ApiResponses';
@@ -73,6 +77,8 @@ const TranslationView = ({
   initialData,
   resourceId,
 }: TranslationViewProps) => {
+  const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
+  const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
   });
@@ -106,6 +112,12 @@ const TranslationView = ({
   const resourceVerseKeys = useMemo(() => generateResourceVerseKeys(lookupRange), [lookupRange]);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef);
+  const shouldUseInitialData =
+    currentPage === 1 &&
+    quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+    isUsingDefaultReciter &&
+    isUsingDefaultWordByWordLocale &&
+    quranReaderDataType !== QuranReaderDataType.Juz;
   const { data } = useSWRImmutable(
     getRequestKey({
       quranReaderDataType,
@@ -114,13 +126,16 @@ const TranslationView = ({
       quranReaderStyles,
       selectedTranslations,
       isVerseData: quranReaderDataType === QuranReaderDataType.Verse,
-      isSelectedTafsirData: quranReaderDataType === QuranReaderDataType.SelectedTafsir,
       id: resourceId,
       reciter: reciterId,
       locale: lang,
       wordByWordLocale,
     }),
     verseFetcher,
+    {
+      fallbackData: shouldUseInitialData ? initialData.verses : null,
+      revalidateOnMount: !shouldUseInitialData,
+    },
   );
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
@@ -213,7 +228,7 @@ const TranslationView = ({
           useWindowScroll
           totalCount={totalVersesCount}
           overscan={800}
-          initialItemCount={initialData.verses.length} // needed for SSR.
+          initialItemCount={initialData.metaData.numberOfVerses} // needed for SSR.
           itemsRendered={onItemsRendered}
           itemContent={itemContentRenderer}
           components={{

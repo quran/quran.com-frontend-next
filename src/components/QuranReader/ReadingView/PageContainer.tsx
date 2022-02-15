@@ -14,7 +14,7 @@ import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranRead
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
-import { QuranFont, QuranReaderDataType } from 'types/QuranReader';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type Props = {
@@ -67,7 +67,6 @@ const PageContainer: React.FC<Props> = ({
     quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
     isUsingDefaultReciter &&
     isUsingDefaultWordByWordLocale &&
-    quranReaderStyles.quranFont !== QuranFont.Tajweed &&
     quranReaderDataType !== QuranReaderDataType.Juz;
   const { data: verses, isValidating } = useSWRImmutable(
     getReaderViewRequestKey({
