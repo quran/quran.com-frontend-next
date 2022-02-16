@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .readingViewOverflowVerseActionsMenu {
   display: inline-block;
   line-height: var(--spacing-small);
@@ -15,6 +17,9 @@
   & svg {
     > path {
       color: var(--color-background-default);
+      @include theme.sepia {
+        color: var(--color-background-inverse);
+      }
     }
   }
 }
