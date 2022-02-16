@@ -31,6 +31,15 @@
 // make sure it will not break the layout
 
 $line-heights-map: (
+  tajweed: (
+    tablet: (
+      1: 1rem,
+      2: 1rem,
+      3: 1rem,
+      4: 1rem,
+      5: 1rem,
+    ),
+  ),
   qpc_uthmani_hafs: (
     tablet: (
       1: 6vh,
@@ -210,10 +219,42 @@ $scales-map: (
       4: 1.2rem,
       5: 1.4rem,
     ),
+  ),
+  tajweed: (
+    tablet: (
+      1: 1rem,
+      2: 1rem,
+      3: 1rem,
+      4: 1rem,
+      5: 1rem,
+    ),
+    mobile: (
+      1: 1rem,
+      2: 1rem,
+      3: 1rem,
+      4: 1rem,
+      5: 1rem,
+    ),
   )
 );
 
 $skeleton-height-map: (
+  tajweed: (
+    desktop: (
+      1: 2.52rem,
+      2: 3.47rem,
+      3: 4.1rem,
+      4: 5.03rem,
+      5: 7.24rem,
+    ),
+    mobile: (
+      1: 2.52rem,
+      2: 3.47rem,
+      3: 4.1rem,
+      4: 5.03rem,
+      5: 7.24rem,
+    ),
+  ),
   qpc_uthmani_hafs: (
     desktop: (
       1: 4.57vh,

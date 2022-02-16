@@ -45,6 +45,7 @@
 @include utility.generate-font-scales("text_indopak_15_lines");
 @include utility.generate-font-scales("text_indopak_16_lines");
 @include utility.generate-font-scales("qpc_uthmani_hafs");
+@include utility.generate-font-scales("tajweed");
 
 .highlighted {
   background-color: var(--color-background-alternative-faded);
