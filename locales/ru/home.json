@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "У вас еще нет закладок",
     "noble-quran": "Благородный Коран",
-    "prayer-names": {
-        "asr": "Аср",
-        "dhuhr": "Зухр",
-        "fajr": "Фаджр",
-        "isha": "Иша",
-        "maghrib": "Магриб",
-        "sunrise": "Восход"
-    },
-    "prayer-times": {
-        "use-location": "Используйте точное местоположение"
-    },
     "recently-read": "Недавно прочитал",
     "tab": {
         "bookmarks": "Закладки",

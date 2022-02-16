@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
     "popular-links": "热门链接",
     "powered-by": "Powered by",
-    "prayer-times": {
-        "access-denied": "拒绝访问位置。请启用位置访问以获取准确的祈祷时间",
-        "calculation-method": "计算方法",
-        "calculation-methods": {
-            "Dubai": "迪拜",
-            "Egyptian": "埃及",
-            "Karachi": "卡拉奇",
-            "Kuwait": "科威特",
-            "MoonsightingCommittee": "探月委员会",
-            "MuslimWorldLeague": "穆斯林世界联盟",
-            "NorthAmerica": "北美",
-            "Qatark": "卡塔尔语",
-            "Singapore": "新加坡",
-            "Tehran": "德黑兰",
-            "Turkey": "土耳其",
-            "UmmAlQura": "乌玛库拉"
-        },
-        "find-accurate-location": "查找准确位置",
-        "location-access": "定位访问",
-        "location-updated": "祈祷时间地点更新",
-        "madhab": "马达卜",
-        "madhabs": {
-            "Hanafi": "哈纳斐",
-            "Shafi": "沙斐仪"
-        },
-        "title": "礼拜时间"
-    },
     "prev": "以前的",
     "privacy": "隐私",
     "product-updates": "产品更新",

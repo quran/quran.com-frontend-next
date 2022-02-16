@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "شما هنوز هیچ نشانکی ندارید",
     "noble-quran": "قرآن کریم",
-    "prayer-names": {
-        "asr": "عصر",
-        "dhuhr": "ظهر",
-        "fajr": "فجر",
-        "isha": "ایشا",
-        "maghrib": "مغرب",
-        "sunrise": "طلوع خورشید"
-    },
-    "prayer-times": {
-        "use-location": "از مکان دقیق استفاده کنید"
-    },
     "recently-read": "اخیرا خوانده شده است",
     "tab": {
         "bookmarks": "نشانک ها",

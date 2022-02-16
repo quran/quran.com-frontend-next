@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "popular-links": "Lidhje popullore",
     "powered-by": "Mundësuar nga",
-    "prayer-times": {
-        "access-denied": "Qasja në vendndodhje u refuzua. Ju lutemi aktivizoni qasjen në vendndodhje për të marrë kohët e sakta të lutjes",
-        "calculation-method": "Mënyra e Llogaritjes",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Egjiptiane",
-            "Karachi": "Karaçi",
-            "Kuwait": "Kuvajti",
-            "MoonsightingCommittee": "Komiteti i shikimit të hënës",
-            "MuslimWorldLeague": "Lidhja Botërore Muslimane",
-            "NorthAmerica": "Amerika e Veriut",
-            "Qatark": "Katark",
-            "Singapore": "Singapor",
-            "Tehran": "Teherani",
-            "Turkey": "Turqia",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Gjeni vendndodhjen e saktë",
-        "location-access": "Qasja në vendndodhje",
-        "location-updated": "Vendndodhja e kohës së namazit u përditësua",
-        "madhab": "medhhebi",
-        "madhabs": {
-            "Hanafi": "Hanefi",
-            "Shafi": "Shafi"
-        },
-        "title": "Kohët e lutjes"
-    },
     "prev": "E mëparshme",
     "privacy": "Privatësia",
     "product-updates": "Përditësimet e produktit",

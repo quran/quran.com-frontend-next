@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "คุณยังไม่มีบุ๊คมาร์คใดๆ",
     "noble-quran": "คัมภีร์กุรอานอันสูงส่ง",
-    "prayer-names": {
-        "asr": "อัสรี",
-        "dhuhr": "Dhuhr",
-        "fajr": "Fajr",
-        "isha": "อิชา",
-        "maghrib": "มักริบ",
-        "sunrise": "พระอาทิตย์ขึ้น"
-    },
-    "prayer-times": {
-        "use-location": "ใช้ตำแหน่งที่ถูกต้อง"
-    },
     "recently-read": "อ่านล่าสุด",
     "tab": {
         "bookmarks": "ที่คั่นหนังสือ",

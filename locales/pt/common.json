@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "popular-links": "Links populares",
     "powered-by": "Distribuído por",
-    "prayer-times": {
-        "access-denied": "Acesso ao local negado. Ative o acesso à localização para obter horários de oração precisos",
-        "calculation-method": "Método de cálculo",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "egípcio",
-            "Karachi": "Carachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "Comitê de Moonsighting",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "América do Norte",
-            "Qatark": "Qatark",
-            "Singapore": "Cingapura",
-            "Tehran": "Teerã",
-            "Turkey": "Turquia",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Encontre a localização exata",
-        "location-access": "Acesso de localização",
-        "location-updated": "Localização dos horários de oração atualizada",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Momentos de Oração"
-    },
     "prev": "Anterior",
     "privacy": "Privacidade",
     "product-updates": "Atualizações de produtos",

@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "popular-links": "Popüler Bağlantılar",
     "powered-by": "Tarafından desteklenmektedir",
-    "prayer-times": {
-        "access-denied": "Konum erişimi reddedildi. Doğru namaz vakitlerini almak için lütfen konum erişimini etkinleştirin",
-        "calculation-method": "Hesaplama Yöntemi",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Mısırlı",
-            "Karachi": "Karaçi",
-            "Kuwait": "Kuveyt",
-            "MoonsightingCommittee": "Mehtap Komitesi",
-            "MuslimWorldLeague": "Müslüman Dünya Ligi",
-            "NorthAmerica": "Kuzey Amerika",
-            "Qatark": "Katar",
-            "Singapore": "Singapur",
-            "Tehran": "Tahran",
-            "Turkey": "Türkiye",
-            "UmmAlQura": "Ümmü Kura"
-        },
-        "find-accurate-location": "Doğru Konum Bul",
-        "location-access": "Konum Erişimi",
-        "location-updated": "Namaz vakitleri konumu güncellendi",
-        "madhab": "Mezhep",
-        "madhabs": {
-            "Hanafi": "Hanefi",
-            "Shafi": "Şafii"
-        },
-        "title": "İbadet zamanları"
-    },
     "prev": "Önceki",
     "privacy": "Gizlilik",
     "product-updates": "Ürün Güncellemeleri",

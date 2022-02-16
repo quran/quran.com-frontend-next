@@ -28,8 +28,6 @@ const OBSERVED_ACTIONS = [
   'audioPlayerState/setEnableAutoScrolling',
   'audioPlayerState/setPlaybackRate',
   'audioPlayerState/setReciter',
-  'prayerTimes/setCalculationMethod',
-  'prayerTimes/setMadhab',
 ];
 
 /**

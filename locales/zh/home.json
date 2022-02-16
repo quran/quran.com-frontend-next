@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "您还没有任何书签",
     "noble-quran": "尊贵的古兰经",
-    "prayer-names": {
-        "asr": "阿斯尔",
-        "dhuhr": "杜尔",
-        "fajr": "晨练",
-        "isha": "伊莎",
-        "maghrib": "马格里布",
-        "sunrise": "日出"
-    },
-    "prayer-times": {
-        "use-location": "使用准确的位置"
-    },
     "recently-read": "最近阅读",
     "tab": {
         "bookmarks": "书签",

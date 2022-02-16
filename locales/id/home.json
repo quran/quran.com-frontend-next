@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "Anda belum memiliki penanda buku apa pun",
     "noble-quran": "Al-Quran yang mulia",
-    "prayer-names": {
-        "asr": "Ashar",
-        "dhuhr": "Dhuhr",
-        "fajr": "Fajar",
-        "isha": "isya",
-        "maghrib": "Maghrib",
-        "sunrise": "matahari terbit"
-    },
-    "prayer-times": {
-        "use-location": "Gunakan lokasi yang tepat"
-    },
     "recently-read": "Baru-baru ini dibaca",
     "tab": {
         "bookmarks": "penanda buku",

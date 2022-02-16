@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "popular-links": "Populaire links",
     "powered-by": "Aangedreven door",
-    "prayer-times": {
-        "access-denied": "Toegang tot locatie geweigerd. Schakel locatietoegang in om nauwkeurige gebedstijden te krijgen",
-        "calculation-method": "Rekenmethode",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Egyptische",
-            "Karachi": "Karachi",
-            "Kuwait": "Koeweit",
-            "MoonsightingCommittee": "MoonsightingComité",
-            "MuslimWorldLeague": "MoslimWereldLeague",
-            "NorthAmerica": "Noord Amerika",
-            "Qatark": "Qatark",
-            "Singapore": "Singapore",
-            "Tehran": "Teheran",
-            "Turkey": "kalkoen",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Vind nauwkeurige locatie",
-        "location-access": "Locatietoegang",
-        "location-updated": "Locatie gebedstijden bijgewerkt",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Gebedstijden"
-    },
     "prev": "Vorig",
     "privacy": "Privacy",
     "product-updates": "Productupdates",

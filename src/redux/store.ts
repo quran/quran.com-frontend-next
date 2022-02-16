@@ -20,7 +20,6 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
-import prayerTimes from './slices/prayerTimes';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
@@ -56,7 +55,6 @@ const persistConfig = {
     'search',
     'readingTracker',
     'welcomeMessage',
-    'prayerTimes',
     'defaultSettings',
     'sidebarNavigation',
     'radio',
@@ -80,7 +78,6 @@ export const rootReducer = combineReducers({
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
   voiceSearch,
-  prayerTimes,
   defaultSettings,
   fontFaces,
   sidebarNavigation,

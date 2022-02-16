@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
     "popular-links": "Pautan LINK yang popular",
     "powered-by": "Dipersembahkan oleh",
-    "prayer-times": {
-        "access-denied": "Akses ke lokasi ditolak. Harap aktifkan akses lokasi untuk mendapatkan waktu sholat yang akurat",
-        "calculation-method": "Metode kalkulasi",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Mesir",
-            "Karachi": "Karachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "Komite Penampakan Bulan",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "Amerika Utara",
-            "Qatark": "Qatar",
-            "Singapore": "Singapura",
-            "Tehran": "Teheran",
-            "Turkey": "Turki",
-            "UmmAlQura": "Ummu AlQura"
-        },
-        "find-accurate-location": "Temukan Lokasi Akurat",
-        "location-access": "Akses Lokasi",
-        "location-updated": "Lokasi waktu sholat diperbarui",
-        "madhab": "mazhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Syafii"
-        },
-        "title": "Waktu Sholat"
-    },
     "prev": "Sebelumnya",
     "privacy": "Pribadi",
     "product-updates": "Pembaruan produk",

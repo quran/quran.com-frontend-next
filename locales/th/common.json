@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
     "popular-links": "ลิงค์ยอดนิยม",
     "powered-by": "ขับเคลื่อนโดย",
-    "prayer-times": {
-        "access-denied": "การเข้าถึงตำแหน่งถูกปฏิเสธ โปรดเปิดใช้งานการเข้าถึงตำแหน่งเพื่อรับเวลาละหมาดที่ถูกต้อง",
-        "calculation-method": "วิธีการคำนวณ",
-        "calculation-methods": {
-            "Dubai": "ดูไบ",
-            "Egyptian": "ชาวอียิปต์",
-            "Karachi": "การาจี",
-            "Kuwait": "คูเวต",
-            "MoonsightingCommittee": "คณะกรรมการ Moonsighting",
-            "MuslimWorldLeague": "มุสลิมเวิลด์ลีก",
-            "NorthAmerica": "อเมริกาเหนือ",
-            "Qatark": "กาตาร์",
-            "Singapore": "สิงคโปร์",
-            "Tehran": "เตหะราน",
-            "Turkey": "ไก่งวง",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "ค้นหาตำแหน่งที่ถูกต้อง",
-        "location-access": "การเข้าถึงตำแหน่ง",
-        "location-updated": "อัปเดตสถานที่เวลาละหมาด",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "ฮานาฟี",
-            "Shafi": "ชาฟี"
-        },
-        "title": "เวลาละหมาด"
-    },
     "prev": "ก่อนหน้า",
     "privacy": "ความเป็นส่วนตัว",
     "product-updates": "อัพเดทสินค้า",
