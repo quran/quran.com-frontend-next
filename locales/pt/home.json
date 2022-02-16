@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "Você ainda não tem favoritos",
     "noble-quran": "O Nobre Alcorão",
-    "prayer-names": {
-        "asr": "Asr",
-        "dhuhr": "Dhuhr",
-        "fajr": "Fajr",
-        "isha": "Isha",
-        "maghrib": "Magreb",
-        "sunrise": "nascer do sol"
-    },
-    "prayer-times": {
-        "use-location": "Use localização precisa"
-    },
     "recently-read": "Lidos recentemente",
     "tab": {
         "bookmarks": "Favoritos",

@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "You do not have any bookmarks yet",
     "noble-quran": "The Noble Quran",
-    "prayer-names": {
-        "asr": "Asr",
-        "dhuhr": "Dhuhr",
-        "fajr": "Fajr",
-        "isha": "Isha",
-        "maghrib": "Maghrib",
-        "sunrise": "Sunrise"
-    },
-    "prayer-times": {
-        "use-location": "Use accurate location"
-    },
     "recently-read": "Recently Read",
     "tab": {
         "bookmarks": "Bookmarks",

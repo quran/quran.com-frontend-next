@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "Henüz yer işaretiniz yok",
     "noble-quran": "Kur'an-ı Kerim",
-    "prayer-names": {
-        "asr": "İkindi",
-        "dhuhr": "Öğle",
-        "fajr": "Sabah namazı",
-        "isha": "Yatsı",
-        "maghrib": "Akşam",
-        "sunrise": "Gün doğumu"
-    },
-    "prayer-times": {
-        "use-location": "Doğru konumu kullan"
-    },
     "recently-read": "Son Okunanlar",
     "tab": {
         "bookmarks": "Yer imleri",

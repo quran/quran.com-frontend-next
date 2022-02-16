@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
     "noble-quran": "Kurani Fisnik",
-    "prayer-names": {
-        "asr": "Asr",
-        "dhuhr": "Dhuhr",
-        "fajr": "sabahun",
-        "isha": "Isha",
-        "maghrib": "Akshami",
-        "sunrise": "Lindja e diellit"
-    },
-    "prayer-times": {
-        "use-location": "Përdor vendndodhjen e saktë"
-    },
     "recently-read": "Lexuar së fundmi",
     "tab": {
         "bookmarks": "Faqerojtësit",

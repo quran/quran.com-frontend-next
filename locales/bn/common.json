@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} totalNumberOfResults}}টি ফলাফলের মধ্যে {{totalNumberOfResults}} - {{endOfResultNumber}}",
     "popular-links": "জনপ্রিয় লিঙ্ক",
     "powered-by": "দ্বারা চালিত",
-    "prayer-times": {
-        "access-denied": "অবস্থানে অ্যাক্সেস অস্বীকার করা হয়েছে৷ সঠিক প্রার্থনার সময় পেতে অনুগ্রহ করে অবস্থান অ্যাক্সেস সক্ষম করুন",
-        "calculation-method": "হিসাব পদ্ধতি",
-        "calculation-methods": {
-            "Dubai": "দুবাই",
-            "Egyptian": "মিশরীয়",
-            "Karachi": "করাচি",
-            "Kuwait": "কুয়েত",
-            "MoonsightingCommittee": "চাঁদ দেখা কমিটি",
-            "MuslimWorldLeague": "মুসলিম ওয়ার্ল্ড লিগ",
-            "NorthAmerica": "উত্তর আমেরিকা",
-            "Qatark": "কাতার্ক",
-            "Singapore": "সিঙ্গাপুর",
-            "Tehran": "তেহরান",
-            "Turkey": "তুরস্ক",
-            "UmmAlQura": "উম্মুল কুরা"
-        },
-        "find-accurate-location": "সঠিক অবস্থান খুঁজুন",
-        "location-access": "অবস্থান অ্যাক্সেস",
-        "location-updated": "নামাজের সময় অবস্থান আপডেট করা হয়েছে",
-        "madhab": "মাধব",
-        "madhabs": {
-            "Hanafi": "হানাফী",
-            "Shafi": "শফি"
-        },
-        "title": "নামাজের সময়"
-    },
     "prev": "আগে",
     "privacy": "গোপনীয়তা",
     "product-updates": "পণ্য আপডেট",
