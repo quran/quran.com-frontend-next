@@ -1,8 +1,8 @@
 {
     "advanced-copy": "高级复制",
-    "ayatul-kursi": "阿亚图尔·库尔西",
+    "ayatul-kursi": "阿叶提库尔西",
     "back-to-ayah": "回到阿亚",
-    "copy-arabic": "阿拉伯文（奥斯曼文）",
+    "copy-arabic": "阿拉伯文（纳斯赫体）",
     "copy-footnote-q": "还要复制脚注？",
     "copy-success": "文本已成功复制到剪贴板中。",
     "current-verse": "当前诗句",
@@ -32,6 +32,6 @@
     "select-range": "选择经文范围",
     "surah-beginning": "古兰经的开始",
     "surah-info": "古兰经信息",
-    "tafsirs": "塔夫西斯",
+    "tafsirs": "经注",
     "verses-range": "诗句范围"
 }
