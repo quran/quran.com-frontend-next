@@ -26,7 +26,7 @@ const TajweedWord: React.FC<Props> = ({ path, alt }) => {
   const { quranTextFontScale } = useSelector(selectQuranReaderStyles);
   return (
     <span className={classNames(styles.imageContainer, FONT_SIZE_CLASS_MAP[quranTextFontScale])}>
-      <img src={`${makeCDNUrl(path)}`} alt={alt} />
+      <img src={`${makeCDNUrl(`images/${path}`)}`} alt={alt} />
     </span>
   );
 };
