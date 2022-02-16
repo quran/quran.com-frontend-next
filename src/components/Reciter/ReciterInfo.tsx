@@ -10,7 +10,7 @@ import { playReciterStation } from '../Radio/ReciterStationList';
 
 import styles from './ReciterInfo.module.scss';
 
-import { getImageCDNPath } from 'src/utils/api';
+import { makeCDNUrl } from 'src/utils/cdn';
 import { logEvent } from 'src/utils/eventLogger';
 import Reciter from 'types/Reciter';
 
@@ -39,7 +39,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       <div className={styles.reciterImageContainer}>
         <img
           className={styles.reciterImage}
-          src={getImageCDNPath(selectedReciter?.profilePicture)}
+          src={makeCDNUrl(selectedReciter?.profilePicture)}
           alt={selectedReciter?.name}
         />
       </div>

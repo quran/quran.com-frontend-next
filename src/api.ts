@@ -288,5 +288,3 @@ export const getTafsirContent = (tafsirIdOrSlug: string, verseKey: string, local
     }),
   );
 };
-
-export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;
