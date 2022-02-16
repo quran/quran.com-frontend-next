@@ -1,7 +1,0 @@
-@use "src/styles/breakpoints";
-
-.hiddenOnDesktop {
-  @include breakpoints.tablet {
-    display: none;
-  }
-}
