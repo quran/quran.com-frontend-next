@@ -50,11 +50,8 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <Spinner />
       ) : (
         <div
-          className={classNames(
-            styles.text,
-            transStyles[landData.direction],
-            transStyles[landData.font],
-          )}
+          lang={landData.code}
+          className={classNames(styles.text, transStyles[landData.direction])}
           dangerouslySetInnerHTML={{ __html: footnote.text }}
           {...(onTextClicked && { onClick: onTextClicked })}
         />

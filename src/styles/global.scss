@@ -32,12 +32,21 @@ body {
   :lang(arabic) .ar {
     font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara",
       "Helvetica Neue", Helvetica, Arial;
+    direction: rtl;
   }
 
   :lang(bn),
   :lang(bengali) {
     font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
       Arial;
+  }
+
+  :lang(en),
+  :lang(english),
+  .en,
+  .english {
+    font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+    direction: ltr;
   }
 }
 

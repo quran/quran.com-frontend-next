@@ -162,9 +162,15 @@ const QuranWord = ({
       {isWordByWordAllowed && (
         <>
           {showWordByWordTransliteration && (
-            <p className={styles.wbwText}>{word.transliteration?.text}</p>
+            <p className={styles.wbwText} lang={word.transliteration?.languageName}>
+              {word.transliteration?.text}
+            </p>
           )}
-          {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
+          {showWordByWordTranslation && (
+            <p className={styles.wbwText} lang={word.translation?.languageName}>
+              {word.translation?.text}
+            </p>
+          )}
         </>
       )}
     </div>
