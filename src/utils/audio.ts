@@ -25,5 +25,5 @@ export const getWordByWordAudioUrl = (chapter: number, verse: number, wordLocati
   const formattedVerse = formatNumber(verse);
   const formattedWordLocation = formatNumber(wordLocation);
 
-  return `${QURANCDN_AUDIO_BASE_URL}/wbw/${formattedChapter}_${formattedVerse}_${formattedWordLocation}.mp3`;
+  return `${QURANCDN_AUDIO_BASE_URL}wbw/${formattedChapter}_${formattedVerse}_${formattedWordLocation}.mp3`;
 };
