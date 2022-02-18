@@ -42,9 +42,9 @@ const VerseList = () => {
   // Handle when user press `Enter` in input box
   const handleVerseInputSubmit = (e) => {
     e.preventDefault();
-    const selectedVerseKey = filteredVerseKeys.find((verseKey) => verseKey.endsWith(searchQuery));
-    if (selectedVerseKey)
-      router.push(getChapterWithStartingVerseUrl(selectedVerseKey), undefined, {
+    const firstFilteredVerseKey = filteredVerseKeys[0];
+    if (firstFilteredVerseKey)
+      router.push(getChapterWithStartingVerseUrl(firstFilteredVerseKey), undefined, {
         shallow: true, // https://nextjs.org/docs/routing/shallow-routing
       });
   };
