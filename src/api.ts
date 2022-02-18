@@ -1,6 +1,6 @@
+/* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
-import { getQuranReaderStylesInitialState } from './redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from './utils/api';
 import {
   makeAdvancedCopyUrl,
@@ -42,6 +42,7 @@ import {
   PagesLookUpResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
@@ -278,13 +279,26 @@ export const getChapterIdBySlug = async (slug: string, locale: string): Promise<
   }
 };
 
-export const getTafsirContent = (tafsirIdOrSlug: string, verseKey: string, locale: string) => {
-  const quranStyle = getQuranReaderStylesInitialState(locale);
-  return fetcher<TafsirContentResponse>(
+/**
+ * Get the Tafsir content of a verse by the tafsir ID.
+ *
+ * @param {string} tafsirIdOrSlug
+ * @param {string} verseKey
+ * @param {QuranFont} quranFont
+ * @param {MushafLines} mushafLines
+ * @returns {Promise<TafsirContentResponse>}
+ */
+export const getTafsirContent = (
+  tafsirIdOrSlug: string,
+  verseKey: string,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+): Promise<TafsirContentResponse> => {
+  return fetcher(
     makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
       words: true,
-      ...getDefaultWordFields(),
-      ...getMushafId(quranStyle.quranFont, quranStyle.mushafLines),
+      ...getDefaultWordFields(quranFont),
+      ...getMushafId(quranFont, mushafLines),
     }),
   );
 };

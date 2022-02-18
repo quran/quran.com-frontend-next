@@ -103,6 +103,7 @@ export interface TafsirContentResponse extends BaseResponse {
     verses: Record<string, Verse>;
     resourceId: number;
     resourceName: string;
+    languageId: number;
     translatedName: {
       name: string;
       languageName: string;
