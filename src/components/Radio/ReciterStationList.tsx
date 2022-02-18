@@ -9,9 +9,9 @@ import Card, { CardSize } from '../dls/Card/Card';
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
-import { getImageCDNPath } from 'src/api';
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
+import { makeCDNUrl } from 'src/utils/cdn';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import Reciter from 'types/Reciter';
@@ -65,7 +65,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
         return (
           <Card
             actionIcon={actionIcon}
-            imgSrc={getImageCDNPath(reciter.profilePicture)}
+            imgSrc={makeCDNUrl(reciter.profilePicture)}
             key={reciter.id}
             onImgClick={onClick}
             title={reciter.name}
