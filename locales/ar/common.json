@@ -214,6 +214,8 @@
     "transliteration": "النقل الحرفي",
     "type": "النوع",
     "verse": "آية",
+    "verse-bookmark-removed": "تمت إزالة إشارة مرجعية الآية!",
+    "verse-bookmarked": "تم وضع إشارة مرجعية على الآية!",
     "verses": "آيات",
     "view": "عرض",
     "voice": {

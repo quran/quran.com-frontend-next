@@ -214,6 +214,8 @@
     "transliteration": "Транслитерация",
     "type": "Тип",
     "verse": "Стих",
+    "verse-bookmark-removed": "Закладка стиха удалена!",
+    "verse-bookmarked": "Стих в закладки!",
     "verses": "Стихи",
     "view": "Вид",
     "voice": {
