@@ -1,11 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
+import useScrollTo from 'src/hooks/useScrollTo';
+import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
@@ -16,6 +20,7 @@ const VerseList = () => {
   const { t, lang } = useTranslation('common');
   const chapterIds = useChapterIdsByUrlPath(lang);
   const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey, shallowEqual);
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),
@@ -37,6 +42,8 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
+  const selectedVerseRef = useScrollTo((node) => node.parentNode.parentNode);
+
   return (
     <div className={styles.verseListContainer}>
       <input
@@ -56,7 +63,15 @@ const VerseList = () => {
               isShallow
               prefetch={false}
             >
-              <div className={styles.listItem}>{localizedVerseNumber}</div>
+              <div
+                ref={verseKey === lastReadVerseKey.verseKey ? selectedVerseRef : null}
+                className={classNames(
+                  styles.listItem,
+                  verseKey === lastReadVerseKey.verseKey && styles.selectedItem,
+                )}
+              >
+                {localizedVerseNumber}
+              </div>
             </Link>
           );
         })}

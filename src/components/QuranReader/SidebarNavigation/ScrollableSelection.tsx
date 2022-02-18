@@ -1,11 +1,21 @@
 import { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
+
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
+import useScrollTo from 'src/hooks/useScrollTo';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 
-const ScrollableSelection = ({ items, searchPlaceholder, renderItem, getHref, isJuz = true }) => {
+const ScrollableSelection = ({
+  items,
+  searchPlaceholder,
+  renderItem,
+  getHref,
+  isJuz = true,
+  selectedItem,
+}) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredItems = items.filter(
@@ -21,6 +31,7 @@ const ScrollableSelection = ({ items, searchPlaceholder, renderItem, getHref, is
     }
   }, [searchQuery, filteredItems, isJuz]);
 
+  const selectedItemRef = useScrollTo((node) => node.parentNode.parentNode);
   return (
     <div>
       <input
@@ -32,7 +43,15 @@ const ScrollableSelection = ({ items, searchPlaceholder, renderItem, getHref, is
       <div className={styles.list}>
         {filteredItems.map((item) => (
           <Link href={getHref(item.value)} key={item.value} prefetch={false}>
-            <div className={styles.listItem}>{renderItem(item)}</div>
+            <div
+              ref={item.value === selectedItem ? selectedItemRef : null}
+              className={classNames(
+                styles.listItem,
+                item.value === selectedItem && styles.selectedItem,
+              )}
+            >
+              {renderItem(item)}
+            </div>
           </Link>
         ))}
       </div>
