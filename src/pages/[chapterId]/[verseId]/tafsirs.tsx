@@ -39,7 +39,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
-    query: { verseId, chapterId },
+    query: { verseId },
   } = router;
   if (hasError) {
     return <Error statusCode={500} />;
@@ -60,7 +60,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
-          initialChapterId={chapterId.toString()}
+          initialChapterId={chapter.chapter.id.toString()}
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}
           initialTafsirIdOrSlug={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
