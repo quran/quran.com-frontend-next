@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './SidebarNavigation.module.scss';
 
@@ -16,6 +17,7 @@ const VerseList = () => {
   const { t, lang } = useTranslation('common');
   const chapterIds = useChapterIdsByUrlPath(lang);
   const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
+  const router = useRouter();
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),
@@ -37,14 +39,26 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
+  // Handle when user press `Enter` in input box
+  const handleVerseInputSubmit = (e) => {
+    e.preventDefault();
+    const selectedVerseKey = filteredVerseKeys.find((verseKey) => verseKey.endsWith(searchQuery));
+    if (selectedVerseKey)
+      router.push(getChapterWithStartingVerseUrl(selectedVerseKey), undefined, {
+        shallow: true, // https://nextjs.org/docs/routing/shallow-routing
+      });
+  };
+
   return (
     <div className={styles.verseListContainer}>
-      <input
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className={styles.searchInput}
-        placeholder={t('verse')}
-      />
+      <form onSubmit={handleVerseInputSubmit}>
+        <input
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+          placeholder={t('verse')}
+        />
+      </form>
       <div className={styles.list}>
         {filteredVerseKeys.map((verseKey) => {
           const verseNumber = getVerseNumberFromKey(verseKey);
