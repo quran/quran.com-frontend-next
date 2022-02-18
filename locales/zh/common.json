@@ -14,7 +14,7 @@
         "player": {
             "close": "关闭音频播放器",
             "currently-playing": "您正在播放",
-            "delay-verse": "诗歌之间的延迟",
+            "delay-verse": "节文之间的延迟",
             "download": "下载",
             "full-surah": "完整的古兰经",
             "mismatch": "{{currentReadingChapter}}单击“重新开始”",
@@ -28,13 +28,13 @@
             "repeat-1-verse": "重复经文",
             "repeat-settings": "重复设置",
             "repeat-verse": "重复每一节",
-            "search-verse": "寻找诗句",
+            "search-verse": "搜索章节",
             "single-verse": "单节",
             "start-over": "重新播放",
             "start-playing": "开始播放",
             "stop-repeating": "停止重复",
             "times": "次",
-            "verses-range": "诗句范围"
+            "verses-range": "多节经文"
         },
         "repeat-moved": "重复设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
@@ -91,7 +91,7 @@
         "quran-font": "经文字体",
         "tajweed": "泰知卫德",
         "tajweed-desc": "泰知卫德字体显示带有泰知卫德颜色的 Mushaf。 <0>此处是泰知卫德颜色规则<\/0>",
-        "text_indopak": "纳斯泰阿利格体",
+        "text_indopak": "波斯体",
         "text_uthmani": "纳斯赫体"
     },
     "footer": {
@@ -159,24 +159,24 @@
         "reset-cta": "恢复默认值",
         "reset-notif": "您的设置已重置为默认设置",
         "search-reciter": "搜索诵读家",
-        "search-tafsirs": "搜索 Tafsirs",
+        "search-tafsirs": "搜索经注",
         "search-translations": "搜索翻译",
-        "selected-reciter": "精选朗诵者",
+        "selected-reciter": "诵读家",
         "selected-tafsirs": "选择经注",
         "selected-translations": "选择译文",
         "show-tooltip-when-playing-audio": "播放声音时显示提示信息",
         "title": "设置",
         "tooltip-playing-audio-helper": "播放节文时显示单词翻译",
         "value-and-others": "{{value}}和其他{{othersCount}}种译本",
-        "wbw-helper": "直接在单词下方显示对应意译或音译",
+        "wbw-helper": "直接在单词下方显示对应的意译或音译",
         "word-tooltip-helper": "鼠标悬停或单击单词时显示对应意译或音译"
     },
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
     "sidebar": {
-        "search-juz": "按卷数搜索",
-        "search-page": "按页数搜索",
-        "search-surah": "按章节搜索",
+        "search-juz": "按卷搜索",
+        "search-page": "按页搜索",
+        "search-surah": "按章搜索",
         "try-navigating-with": "提示：尝试导航"
     },
     "sitemap": "网站地图",
@@ -189,7 +189,7 @@
     "surah": "章",
     "tafsir": {
         "font-size": "Tafsir 字体大小",
-        "group-message": "{{from}}至{{to}}诗句组的 tafsir",
+        "group-message": "{{from}}至{{to}}节的经注",
         "surah": "Tafsir Surah",
         "title": "经注"
     },
@@ -213,7 +213,9 @@
     "translations": "翻译",
     "transliteration": "音译",
     "type": "类型",
-    "verse": "诗",
+    "verse": "节",
+    "verse-bookmark-removed": "诗句书签已删除！",
+    "verse-bookmarked": "诗作书签！",
     "verses": "节",
     "view": "看法",
     "voice": {
@@ -221,20 +223,20 @@
         "error": "发生错误，请稍后重试。或下载",
         "no-permission": "您似乎没有启用麦克风权限。请启用麦克风权限并重试或下载",
         "not-supported": "您的浏览器似乎不支持麦克风。请尝试不同的浏览器或下载",
-        "suggest": "请开始背诵，你的诗句就会出现。",
+        "suggest": "请开始诵读，经文就会显示",
         "suggest-subtitle": "用阿拉伯语背诵任何一节经文，这节经文就会出现",
         "suggest-title": "现在背诵",
-        "voice-search-powered-by": "语音搜索 技术支持"
+        "voice-search-powered-by": "语音搜索 技术支持单位"
     },
-    "wbw": "在单词下方显示对应意译或音译",
+    "wbw": "在单词下方显示对应的译文",
     "wbw-trans-lang": "翻译成：",
-    "wbw-translation": "逐字翻译",
+    "wbw-translation": "逐字意译",
     "wbw-transliteration": "逐字音译",
     "word-click": {
         "no-audio": "无音频",
         "play-audio": "播放音频",
         "title": "字点击"
     },
-    "word-tooltip": "文字提示",
+    "word-tooltip": "鼠标悬停在单词上时弹出对应意译或音译",
     "yes": "是的"
 }

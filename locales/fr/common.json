@@ -214,6 +214,8 @@
     "transliteration": "Translitération",
     "type": "Taper",
     "verse": "Verset",
+    "verse-bookmark-removed": "Signet verset supprimé !",
+    "verse-bookmarked": "Verset mis en signet !",
     "verses": "Versets",
     "view": "Vue",
     "voice": {
