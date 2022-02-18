@@ -38,7 +38,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   const {
     query: { verseId },
   } = useRouter();
-  if (hasError) {
+  if (hasError || !versesResponse.verses.length) {
     return <Error statusCode={500} />;
   }
   const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
