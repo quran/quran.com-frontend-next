@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import TafsirIcon from '../../../../public/icons/tafsir.svg';
+import TafsirIcon from '../../../../public/icons/book-open.svg';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
