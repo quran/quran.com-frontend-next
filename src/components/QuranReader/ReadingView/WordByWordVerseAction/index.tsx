@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
-import SearchIcon from '../../../../../public/icons/search.svg';
+import SearchIcon from '../../../../../public/icons/search-book.svg';
 
 import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';
