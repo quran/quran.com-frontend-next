@@ -9,6 +9,7 @@ import { getTafsirContent } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { scrollWindowToTop } from 'src/utils/navigation';
@@ -80,8 +81,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return { notFound: true };
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   try {
-    const tafsirData = await getTafsirContent(tafsirIdOrSlug as string, verseKey, locale);
+    const tafsirData = await getTafsirContent(
+      tafsirIdOrSlug as string,
+      verseKey,
+      quranFont,
+      mushafLines,
+    );
     return {
       props: {
         chapterId: chapterNumber,

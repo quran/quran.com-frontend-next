@@ -6,14 +6,14 @@ import Button, { ButtonType } from 'src/components/dls/Button/Button';
 
 type TafsirEndOfScrollingActionsProps = {
   hasNextVerseGroup: boolean;
-  hasPrevVersegroup: boolean;
+  hasPrevVerseGroup: boolean;
   onNextButtonClicked: () => void;
   onPreviousButtonClicked: () => void;
 };
 
 const TafsirEndOfScrollingActions = ({
   hasNextVerseGroup,
-  hasPrevVersegroup,
+  hasPrevVerseGroup,
   onNextButtonClicked,
   onPreviousButtonClicked,
 }: TafsirEndOfScrollingActionsProps) => {
@@ -21,7 +21,7 @@ const TafsirEndOfScrollingActions = ({
   return (
     <div className={styles.container}>
       <div>
-        {hasPrevVersegroup && (
+        {hasPrevVerseGroup && (
           <Button type={ButtonType.Secondary} onClick={onPreviousButtonClicked}>
             {t('prev')}
           </Button>
