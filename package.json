@@ -52,7 +52,7 @@
     "fuse.js": "^6.5.3",
     "humps": "^2.0.1",
     "lodash": "^4.17.21",
-    "next": "^12.0.10",
+    "next": "^12.1.0",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.0.3",
     "next-pwa": "^5.4.4",
