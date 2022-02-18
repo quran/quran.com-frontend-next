@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -14,16 +14,22 @@ interface Props {
 
 const TafsirVerseText: React.FC<Props> = ({ verses }) => {
   const { quranFont } = useSelector(selectQuranReaderStyles, shallowEqual);
-  useQcfFont(
-    quranFont,
-    Object.values(verses).map((verse) => ({
-      ...verse,
-      pageNumber: verse.words[0].pageNumber,
-    })),
+  const tafsirVerses = useMemo(
+    () =>
+      Object.values(verses).map((verse) => ({
+        ...verse,
+        pageNumber: verse.words[0].pageNumber,
+      })),
+    [verses],
   );
-  const words = Object.values(verses)
-    .map((verse) => getVerseWords(verse))
-    .flat();
+  useQcfFont(quranFont, tafsirVerses);
+  const words = useMemo(
+    () =>
+      Object.values(verses)
+        .map((verse) => getVerseWords(verse))
+        .flat(),
+    [verses],
+  );
   return <PlainVerseText words={words} />;
 };
 
