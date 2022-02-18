@@ -16,6 +16,7 @@ import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
@@ -45,6 +46,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
+  const toast = useToast();
   useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
 
   /**
@@ -117,6 +119,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       }`,
     );
     dispatch({ type: toggleVerseBookmark.type, payload: verse.verseKey });
+
+    toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
+      status: ToastStatus.Success,
+    });
+
     if (onActionTriggered) {
       onActionTriggered();
     }
