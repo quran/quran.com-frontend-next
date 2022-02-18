@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
@@ -8,7 +8,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import useScrollTo from 'src/hooks/useScrollTo';
+import { useScrollToElement } from 'src/hooks/useScrollToElement';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -52,7 +52,11 @@ const SurahList = () => {
     ? filterSurah(chapterDataArray, searchQuery)
     : chapterDataArray;
 
-  const selectedChapterRef = useScrollTo((node) => node.parentNode.parentNode);
+  const [scrollTo, selectedChapterRef] = useScrollToElement<HTMLDivElement>({ block: 'nearest' });
+
+  useEffect(() => {
+    scrollTo();
+  }, [selectedChapterRef, currentChapterId, scrollTo]);
 
   return (
     <div className={styles.surahListContainer}>
@@ -62,20 +66,22 @@ const SurahList = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder={t('sidebar.search-surah')}
       />
-      <div className={styles.list}>
-        {filteredChapters.map((chapter) => (
-          <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)} prefetch={false}>
-            <div
-              ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
-              className={classNames(styles.listItem, {
-                [styles.selectedItem]: chapter.id.toString() === currentChapterId,
-              })}
-            >
-              <span className={styles.chapterNumber}>{chapter.localizedId}</span>
-              <span>{chapter.transliteratedName}</span>
-            </div>
-          </Link>
-        ))}
+      <div className={styles.listContainer}>
+        <div className={styles.list}>
+          {filteredChapters.map((chapter) => (
+            <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)} prefetch={false}>
+              <div
+                ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
+                className={classNames(styles.listItem, {
+                  [styles.selectedItem]: chapter.id.toString() === currentChapterId,
+                })}
+              >
+                <span className={styles.chapterNumber}>{chapter.localizedId}</span>
+                <span>{chapter.transliteratedName}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

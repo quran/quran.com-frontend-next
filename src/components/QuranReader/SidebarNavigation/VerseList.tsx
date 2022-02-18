@@ -8,7 +8,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import useScrollTo from 'src/hooks/useScrollTo';
+import { useScrollToElement } from 'src/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -42,7 +42,11 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
-  const selectedVerseRef = useScrollTo((node) => node.parentNode.parentNode);
+  const [scrollTo, selectedVerseRef] = useScrollToElement<HTMLDivElement>({ block: 'nearest' });
+
+  useEffect(() => {
+    scrollTo();
+  }, [scrollTo, selectedVerseRef, lastReadVerseKey.verseKey]);
 
   return (
     <div className={styles.verseListContainer}>
@@ -52,29 +56,31 @@ const VerseList = () => {
         className={styles.searchInput}
         placeholder={t('verse')}
       />
-      <div className={styles.list}>
-        {filteredVerseKeys.map((verseKey) => {
-          const verseNumber = getVerseNumberFromKey(verseKey);
-          const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
-          return (
-            <Link
-              href={getChapterWithStartingVerseUrl(verseKey)}
-              key={verseKey}
-              isShallow
-              prefetch={false}
-            >
-              <div
-                ref={verseKey === lastReadVerseKey.verseKey ? selectedVerseRef : null}
-                className={classNames(
-                  styles.listItem,
-                  verseKey === lastReadVerseKey.verseKey && styles.selectedItem,
-                )}
+      <div className={styles.listContainer}>
+        <div className={styles.list}>
+          {filteredVerseKeys.map((verseKey) => {
+            const verseNumber = getVerseNumberFromKey(verseKey);
+            const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
+            return (
+              <Link
+                href={getChapterWithStartingVerseUrl(verseKey)}
+                key={verseKey}
+                isShallow
+                prefetch={false}
               >
-                {localizedVerseNumber}
-              </div>
-            </Link>
-          );
-        })}
+                <div
+                  ref={verseKey === lastReadVerseKey.verseKey ? selectedVerseRef : null}
+                  className={classNames(
+                    styles.listItem,
+                    verseKey === lastReadVerseKey.verseKey && styles.selectedItem,
+                  )}
+                >
+                  {localizedVerseNumber}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

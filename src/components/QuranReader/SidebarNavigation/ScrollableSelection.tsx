@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
-import useScrollTo from 'src/hooks/useScrollTo';
+import { useScrollToElement } from 'src/hooks/useScrollToElement';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 
 const ScrollableSelection = ({
@@ -31,29 +31,37 @@ const ScrollableSelection = ({
     }
   }, [searchQuery, filteredItems, isJuz]);
 
-  const selectedItemRef = useScrollTo((node) => node.parentNode.parentNode);
+  const [scroll, selectedItemRef] = useScrollToElement<HTMLDivElement>({
+    block: 'nearest',
+  });
+  useEffect(() => {
+    scroll();
+  }, [selectedItemRef, selectedItem, scroll]);
+
   return (
-    <div>
+    <div className={styles.scrollableSectionContainer}>
       <input
         className={styles.searchInput}
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder={searchPlaceholder}
       />
-      <div className={styles.list}>
-        {filteredItems.map((item) => (
-          <Link href={getHref(item.value)} key={item.value} prefetch={false}>
-            <div
-              ref={item.value === selectedItem ? selectedItemRef : null}
-              className={classNames(
-                styles.listItem,
-                item.value === selectedItem && styles.selectedItem,
-              )}
-            >
-              {renderItem(item)}
-            </div>
-          </Link>
-        ))}
+      <div className={styles.listContainer}>
+        <div className={styles.list}>
+          {filteredItems.map((item) => (
+            <Link href={getHref(item.value)} key={item.value} prefetch={false}>
+              <div
+                ref={item.value === selectedItem ? selectedItemRef : null}
+                className={classNames(
+                  styles.listItem,
+                  item.value === selectedItem && styles.selectedItem,
+                )}
+              >
+                {renderItem(item)}
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
