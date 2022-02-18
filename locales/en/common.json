@@ -45,6 +45,8 @@
     "beta": "Beta",
     "bookmark": "Bookmark",
     "bookmarked": "Bookmarked",
+    "verse-bookmarked": "Verse bookmarked",
+    "verse-bookmark-removed": "Verse bookmark removed",
     "both": "Both",
     "cancel": "Cancel",
     "click-here": "Click here",
