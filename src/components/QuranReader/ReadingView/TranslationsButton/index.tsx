@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import TranslationsIcon from '../../../../../public/icons/collection.svg';
+import TranslationsIcon from '../../../../../public/icons/translation.svg';
 
 import styles from './TranslationsButton.module.scss';
 
