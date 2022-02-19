@@ -214,6 +214,8 @@
     "transliteration": "Harf çevirisi",
     "type": "Tip",
     "verse": "Ayet",
+    "verse-bookmark-removed": "Ayet imi kaldırıldı!",
+    "verse-bookmarked": "Ayet işaretlendi!",
     "verses": "Ayetler",
     "view": "Görüş",
     "voice": {

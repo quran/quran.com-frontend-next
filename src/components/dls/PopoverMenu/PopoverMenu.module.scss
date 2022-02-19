@@ -106,9 +106,6 @@ $separator-size: 1px;
     transform: scaleX(-1);
   }
   & .iconWrapper {
-    & > svg > path {
-      fill: var(--color-text-default);
-    }
     margin-inline-end: var(--spacing-small);
     display: flex;
     align-items: center;

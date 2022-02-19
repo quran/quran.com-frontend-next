@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './SidebarNavigation.module.scss';
 
@@ -32,6 +33,7 @@ const SurahList = () => {
   const { t, lang } = useTranslation('common');
   const chapterIds = useChapterIdsByUrlPath(lang);
   const currentChapterId = chapterIds[0];
+  const router = useRouter();
 
   const chaptersData = getAllChaptersData(lang);
   const [searchQuery, setSearchQuery] = useState('');
@@ -59,14 +61,25 @@ const SurahList = () => {
     scrollTo();
   }, [currentChapterId, scrollTo]);
 
+  // Handle when user press `Enter` in input box
+  const handleSurahInputSubmit = (e) => {
+    e.preventDefault();
+    const firstFilteredChapter = filteredChapters[0];
+    if (firstFilteredChapter) {
+      router.push(getSurahNavigationUrl(firstFilteredChapter.id));
+    }
+  };
+
   return (
     <div className={styles.surahListContainer}>
-      <input
-        className={styles.searchInput}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={t('sidebar.search-surah')}
-      />
+      <form onSubmit={handleSurahInputSubmit}>
+        <input
+          className={styles.searchInput}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={t('sidebar.search-surah')}
+        />
+      </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
           {filteredChapters.map((chapter) => (

@@ -12,12 +12,12 @@ import SurahAndAyahSelection from './SurahAndAyahSelection';
 import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
 import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirSkeleton from './TafsirSkeleton';
+import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
@@ -37,13 +37,11 @@ import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from 'src/utils/
 import {
   getVerseNumberFromKey,
   getFirstAndLastVerseKeys,
-  getVerseWords,
   makeVerseKey,
   isLastVerseOfSurah,
   getVerseAndChapterNumbersFromKey,
 } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
-import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
   initialChapterId: string;
@@ -131,20 +129,15 @@ const TafsirBody = ({
     : [];
 
   const renderTafsir = useCallback(
-    (data) => {
+    (data: TafsirContentResponse) => {
       if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-      const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
-        data.tafsir;
+      const { verses, text, languageId } = data.tafsir;
       const langData = getLanguageDataById(languageId);
-      const words = Object.values(verses)
-        .map((verse) => getVerseWords(verse))
-        .flat();
 
       if (!text) return <TafsirSkeleton />;
 
       const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
-
       const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastVerseKey);
       const hasNextVerseGroup = !isLastVerseOfSurah(chapterNumber, Number(verseNumber));
       const hasPrevVerseGroup = getVerseNumberFromKey(firstVerseKey) !== 1;
@@ -185,7 +178,7 @@ const TafsirBody = ({
             <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
           )}
           <div className={styles.verseTextContainer}>
-            <PlainVerseText words={words} />
+            <TafsirVerseText verses={verses} />
           </div>
           <div className={styles.separatorContainer}>
             <Separator />
@@ -198,7 +191,7 @@ const TafsirBody = ({
 
           <TafsirEndOfScrollingActions
             hasNextVerseGroup={hasNextVerseGroup}
-            hasPrevVersegroup={hasPrevVerseGroup}
+            hasPrevVerseGroup={hasPrevVerseGroup}
             onNextButtonClicked={loadNextVerseGroup}
             onPreviousButtonClicked={loadPrevVerseGroup}
           />
@@ -207,12 +200,6 @@ const TafsirBody = ({
     },
     [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug],
   );
-
-  const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
-    words: true,
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-  });
 
   // Whether we should use the initial tafsir data or fetch the data on the client side
   const shouldUseInitialTafsirData = useMemo(
@@ -276,6 +263,7 @@ const TafsirBody = ({
         setSelectedLanguage(newLang);
       }}
       languageOptions={languageOptions}
+      data={tafsirSelectionList}
     />
   );
 
@@ -291,7 +279,11 @@ const TafsirBody = ({
       ) : (
         <DataFetcher
           loading={TafsirSkeleton}
-          queryKey={tafsirContentQueryKey}
+          queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
+            words: true,
+            ...getDefaultWordFields(quranReaderStyles.quranFont),
+            ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+          })}
           render={renderTafsir}
         />
       )}

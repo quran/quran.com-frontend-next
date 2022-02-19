@@ -214,6 +214,8 @@
     "transliteration": "Transliteration",
     "type": "Type",
     "verse": "Verse",
+    "verse-bookmark-removed": "Verse bookmark removed!",
+    "verse-bookmarked": "Verse bookmarked!",
     "verses": "Verses",
     "view": "View",
     "voice": {

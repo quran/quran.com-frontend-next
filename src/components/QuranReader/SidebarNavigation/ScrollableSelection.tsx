@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import styles from './SidebarNavigation.module.scss';
 
@@ -17,6 +18,7 @@ const ScrollableSelection = ({
   selectedItem,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
 
   const filteredItems = items.filter(
     (item) =>
@@ -36,14 +38,26 @@ const ScrollableSelection = ({
     scroll();
   }, [selectedItem, scroll]);
 
+  // handle when user press `Enter` in input box
+  const handleInputSubmit = (e) => {
+    e.preventDefault();
+    const firstFilteredItem = filteredItems[0];
+    if (filteredItems) {
+      const href = getHref(firstFilteredItem.value);
+      router.push(href);
+    }
+  };
+
   return (
     <div className={styles.scrollableSectionContainer}>
-      <input
-        className={styles.searchInput}
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder={searchPlaceholder}
-      />
+      <form onSubmit={handleInputSubmit}>
+        <input
+          className={styles.searchInput}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={searchPlaceholder}
+        />
+      </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
           {filteredItems.map((item) => (
