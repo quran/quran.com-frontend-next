@@ -60,12 +60,12 @@ const TranslationView = ({
     QueryParam.WBW_LOCALE,
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
-  useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef);
-  const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   const numberOfPages = useMemo(
     () => Math.ceil(initialData.metaData.numberOfVerses / initialData.pagination.perPage),
     [initialData.metaData.numberOfVerses, initialData.pagination.perPage],
   );
+  useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef, initialData.pagination.perPage);
+  const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
 
   const itemContentRenderer = (currentPageIndex: number) => {
