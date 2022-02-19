@@ -7,33 +7,43 @@ $asset-version: "1";
 @font-face {
   font-family: "IndoPak";
   src: local("AlQuran IndoPak by QuranWBW"),
-  url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2?v=#{$asset-version}") format("woff2"),
-  url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff?v=#{$asset-version}") format("woff"),
-  url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf?v=#{$asset-version}") format("truetype");
+    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2?v=#{$asset-version}")
+      format("woff2"),
+    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff?v=#{$asset-version}")
+      format("woff"),
+    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf?v=#{$asset-version}")
+      format("truetype");
 }
 
 // TODO: we're not rendering text_uthmani anymore, do we need this font face?
 @font-face {
   font-family: "meQuran";
   src: local("me_quran2"),
-  url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2?v=#{$asset-version}") format("woff2"),
-  url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2?v=#{$asset-version}") format("truetype");
+    url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2?v=#{$asset-version}")
+      format("woff2"),
+    url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2?v=#{$asset-version}")
+      format("truetype");
 }
 
 @font-face {
   font-family: "UthmanicHafs";
   src: local("KFGQPC HAFS Uthmanic Script"),
-  url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2?v=#{$asset-version}") format("woff2"),
-  url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf?v=#{$asset-version}") format("truetype");
+    url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2?v=#{$asset-version}")
+      format("woff2"),
+    url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf?v=#{$asset-version}")
+      format("truetype");
 }
 
 // TODO: regenerate this font and add font-family name
 @font-face {
   font-family: "surahnames";
   src: url("#{$font-cdn}/quran/surah-names/v1/sura_names.woff2?v=#{$asset-version}");
-  src: url("#{$font-cdn}/quran/surah-names/v1/surah-names.eot?v=#{$asset-version}") format("embedded-opentype"),
-  url("#{$font-cdn}/quran/surah-names/v1/sura_names.ttf?v=#{$asset-version}") format("truetype"),
-  url("#{$font-cdn}/quran/quran/surah-names/v1/sura_names.woff?v=#{$asset-version}") format("woff");
+  src: url("#{$font-cdn}/quran/surah-names/v1/surah-names.eot?v=#{$asset-version}")
+      format("embedded-opentype"),
+    url("#{$font-cdn}/quran/surah-names/v1/sura_names.ttf?v=#{$asset-version}")
+      format("truetype"),
+    url("#{$font-cdn}/quran/quran/surah-names/v1/sura_names.woff?v=#{$asset-version}")
+      format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -43,18 +53,20 @@ $asset-version: "1";
 @font-face {
   font-family: "divehi";
   src: local("Dhivehi Akuru"),
-  url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff2?v=#{$asset-version}"),
-  url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff?v=#{$asset-version}") format("woff"),
-  url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.otf?v=#{$asset-version}") format("opentype");
+    url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff2?v=#{$asset-version}"),
+    url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff?v=#{$asset-version}")
+      format("woff"),
+    url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.otf?v=#{$asset-version}")
+      format("opentype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "NotoNastaliq";
-  src: local("Noto Naskh Arabic"),
-  local("Nafees Regular"),
-  url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.woff2?v=#{$asset-version}"),
-  url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.ttf?v=#{$asset-version}") format("truetype");
+  src: local("Noto Naskh Arabic"), local("Nafees Regular"),
+    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.woff2?v=#{$asset-version}"),
+    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.ttf?v=#{$asset-version}")
+      format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -63,9 +75,11 @@ $asset-version: "1";
 @font-face {
   font-family: "MehrNastaliq";
   src: local("Mehr Nastaliq Web"),
-  url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff2?v=#{$asset-version}"),
-  url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff?v=#{$asset-version}") format("woff"),
-  url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.ttf?v=#{$asset-version}") format("truetype");
+    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff2?v=#{$asset-version}"),
+    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff?v=#{$asset-version}")
+      format("woff"),
+    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.ttf?v=#{$asset-version}")
+      format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -74,14 +88,15 @@ $asset-version: "1";
 @font-face {
   font-family: "NotoSerifBengali";
   src: local("Noto Serif Bengali"),
-  url("#{$font-cdn}/bengali/NotoSerifBengali-Regular.woff2?v=#{$asset-version}");
+    url("#{$font-cdn}/bengali/NotoSerifBengali-Regular.woff2?v=#{$asset-version}");
 }
 
 @font-face {
   font-family: "DroidArabicNaskh";
   src: local("Droid Arabic Naskh"),
-  url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.woff2?v=#{$asset-version}"),
-  url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.ttf?v=#{$asset-version}") format("truetype");
+    url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.woff2?v=#{$asset-version}"),
+    url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.ttf?v=#{$asset-version}")
+      format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -91,7 +106,7 @@ $asset-version: "1";
 @font-face {
   font-family: "ProximaVara";
   src: local("Proxima Vara"),
-  url("#{$font-cdn}/lang/ProximaVara/ProximaVara.woff2?v=#{$asset-version}");
+    url("#{$font-cdn}/lang/ProximaVara/ProximaVara.woff2?v=#{$asset-version}");
   font-weight: 100 900;
   /* default 400 */
   font-stretch: 50% 100%;

@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 import styles from './SidebarNavigation.module.scss';
+import VerseListItem from './VerseListItem';
 
-import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -59,21 +59,12 @@ const VerseList = () => {
           placeholder={t('verse')}
         />
       </form>
-      <div className={styles.list}>
-        {filteredVerseKeys.map((verseKey) => {
-          const verseNumber = getVerseNumberFromKey(verseKey);
-          const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
-          return (
-            <Link
-              href={getChapterWithStartingVerseUrl(verseKey)}
-              key={verseKey}
-              isShallow
-              prefetch={false}
-            >
-              <div className={styles.listItem}>{localizedVerseNumber}</div>
-            </Link>
-          );
-        })}
+      <div className={styles.listContainer}>
+        <div className={styles.list}>
+          {filteredVerseKeys.map((verseKey) => {
+            return <VerseListItem verseKey={verseKey} key={verseKey} />;
+          })}
+        </div>
       </div>
     </div>
   );
