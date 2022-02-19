@@ -1,8 +1,4 @@
-@use "src/styles/theme";
 @use "src/styles/breakpoints";
-
-$black: #000;
-$white: #fff;
 
 .content {
   padding-block-start: var(--spacing-micro);
