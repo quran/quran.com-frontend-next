@@ -1,6 +1,7 @@
 import React, { RefObject, useEffect, memo } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import {
@@ -39,6 +40,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   quranReaderStyles,
   verseIndex,
 }) => {
+  const router = useRouter();
+  const { startingVerse } = router.query;
+
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
@@ -46,10 +50,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
   useEffect(() => {
-    if (isHighlighted && enableAutoScrolling) {
+    if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
       scrollToSelectedItem();
     }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
+  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
 
   return (
     <div ref={selectedItemRef}>
