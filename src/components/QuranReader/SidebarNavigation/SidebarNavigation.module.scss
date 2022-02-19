@@ -50,7 +50,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-block-end: 1rem;
+  padding-block-end: var(--spacing-medium);
 }
 .surahBodyContainer {
   display: flex;

@@ -13,7 +13,6 @@ const PageSelection = () => {
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles);
   const pageIds = getPageIdsByMushaf(lang, quranFont, mushafLines);
   const lastReadPage = useSelector(selectedLastReadPage);
-  const selectedPage = Number(lastReadPage);
 
   return (
     <ScrollableSelection
@@ -22,7 +21,7 @@ const PageSelection = () => {
       searchPlaceholder={t('sidebar.search-page')}
       renderItem={(page) => `${t('page')} ${page.label}`}
       isJuz={false}
-      selectedItem={selectedPage}
+      selectedItem={Number(lastReadPage)}
     />
   );
 };

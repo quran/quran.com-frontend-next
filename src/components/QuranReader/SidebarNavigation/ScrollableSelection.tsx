@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
-import { useScrollToElement } from 'src/hooks/useScrollToElement';
+import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 
 const ScrollableSelection = ({
@@ -31,12 +31,10 @@ const ScrollableSelection = ({
     }
   }, [searchQuery, filteredItems, isJuz]);
 
-  const [scroll, selectedItemRef] = useScrollToElement<HTMLDivElement>({
-    block: 'nearest',
-  });
+  const [scroll, selectedItemRef] = useScrollToElement<HTMLDivElement>(SCROLL_TO_NEAREST_ELEMENT);
   useEffect(() => {
     scroll();
-  }, [selectedItemRef, selectedItem, scroll]);
+  }, [selectedItem, scroll]);
 
   return (
     <div className={styles.scrollableSectionContainer}>

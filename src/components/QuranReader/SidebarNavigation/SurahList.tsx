@@ -8,7 +8,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import { useScrollToElement } from 'src/hooks/useScrollToElement';
+import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -52,11 +52,12 @@ const SurahList = () => {
     ? filterSurah(chapterDataArray, searchQuery)
     : chapterDataArray;
 
-  const [scrollTo, selectedChapterRef] = useScrollToElement<HTMLDivElement>({ block: 'nearest' });
+  const [scrollTo, selectedChapterRef] =
+    useScrollToElement<HTMLDivElement>(SCROLL_TO_NEAREST_ELEMENT);
 
   useEffect(() => {
     scrollTo();
-  }, [selectedChapterRef, currentChapterId, scrollTo]);
+  }, [currentChapterId, scrollTo]);
 
   return (
     <div className={styles.surahListContainer}>

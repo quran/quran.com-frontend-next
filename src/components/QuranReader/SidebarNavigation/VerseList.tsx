@@ -8,7 +8,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import { useScrollToElement } from 'src/hooks/useScrollToElement';
+import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -42,11 +42,12 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
-  const [scrollTo, selectedVerseRef] = useScrollToElement<HTMLDivElement>({ block: 'nearest' });
+  const [scrollTo, selectedVerseRef] =
+    useScrollToElement<HTMLDivElement>(SCROLL_TO_NEAREST_ELEMENT);
 
   useEffect(() => {
     scrollTo();
-  }, [scrollTo, selectedVerseRef, lastReadVerseKey.verseKey]);
+  }, [scrollTo, lastReadVerseKey.verseKey]);
 
   return (
     <div className={styles.verseListContainer}>
@@ -70,10 +71,9 @@ const VerseList = () => {
               >
                 <div
                   ref={verseKey === lastReadVerseKey.verseKey ? selectedVerseRef : null}
-                  className={classNames(
-                    styles.listItem,
-                    verseKey === lastReadVerseKey.verseKey && styles.selectedItem,
-                  )}
+                  className={classNames(styles.listItem, {
+                    [styles.selectedItem]: verseKey === lastReadVerseKey.verseKey,
+                  })}
                 >
                   {localizedVerseNumber}
                 </div>
