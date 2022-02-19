@@ -11,13 +11,8 @@ import { getVerseNumberFromKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
+import ScrollAlign from 'types/ScrollAlign';
 import Verse from 'types/Verse';
-
-enum ScrollAlign {
-  Start = 'start',
-  Center = 'center',
-  End = 'end',
-}
 
 /**
  * Get where a verse lies in a mushaf page. This is achieved by:

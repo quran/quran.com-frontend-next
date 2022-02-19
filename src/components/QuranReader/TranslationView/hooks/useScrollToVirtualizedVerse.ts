@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import { QuranReaderDataType } from 'types/QuranReader';
+import ScrollAlign from 'types/ScrollAlign';
 
 /**
  * Convert a verse index to a page number by dividing the index
@@ -15,6 +16,26 @@ import { QuranReaderDataType } from 'types/QuranReader';
  */
 const verseIndexToApiPageNumber = (verseNumber: number, versesPerPage: number): number =>
   Math.floor(verseNumber / versesPerPage) + 1;
+
+const getVersePositionWithinAPage = (
+  startingVerseNumber: number,
+  versesPerPage: number,
+  scrollToPageNumber: number,
+): ScrollAlign => {
+  const pageStartVerseNumber =
+    scrollToPageNumber === 1
+      ? scrollToPageNumber
+      : scrollToPageNumber * versesPerPage - versesPerPage;
+  const verseOrderWithinPage = startingVerseNumber - pageStartVerseNumber + 1;
+  const verseKeyPosition = (verseOrderWithinPage * 100) / versesPerPage;
+  if (verseKeyPosition <= 33.3) {
+    return ScrollAlign.Start;
+  }
+  if (verseKeyPosition <= 66.6) {
+    return ScrollAlign.Center;
+  }
+  return ScrollAlign.End;
+};
 
 /**
  * This hook listens to startingVerse query param and navigate to
@@ -40,10 +61,14 @@ const useScrollToVirtualizedTranslationView = (
       const startingVerseNumber = Number(startingVerse);
       // if the startingVerse is a valid integer and is above 1
       if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
-        const scrollToPageIndex = verseIndexToApiPageNumber(startingVerseNumber, versesPerPage) - 1;
+        const scrollToPageNumber = verseIndexToApiPageNumber(startingVerseNumber, versesPerPage);
         virtuosoRef.current.scrollToIndex({
-          index: scrollToPageIndex,
-          align: 'start',
+          index: scrollToPageNumber - 1,
+          align: getVersePositionWithinAPage(
+            startingVerseNumber,
+            versesPerPage,
+            scrollToPageNumber,
+          ),
         });
       }
     }
