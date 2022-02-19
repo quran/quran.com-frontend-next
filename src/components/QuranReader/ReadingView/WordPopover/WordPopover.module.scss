@@ -9,20 +9,9 @@ $white: #fff;
   padding-block-end: var(--spacing-micro);
   padding-inline-start: var(--spacing-micro);
   padding-inline-end: var(--spacing-micro);
-  @include theme.light {
-    background-color: $black;
-  }
-  @include theme.dark {
-    background-color: $white;
-  }
+  background-color: var(--color-background-elevated);
   & > span {
-    // the tip color
-    @include theme.light {
-      fill: $black;
-    }
-    @include theme.dark {
-      fill: $white;
-    }
+    fill: var(--color-background-elevated);
   }
 }
 
