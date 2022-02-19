@@ -88,5 +88,9 @@ export const selectLastReadVerseKey = (state: RootState) => state.readingTracker
 export const selectRecentReadingSessions = (state: RootState) =>
   state.readingTracker.recentReadingSessions;
 export const selectedLastReadPage = (state: RootState) => state.readingTracker.lastReadVerse.page;
+export const selectIsVerseKeySelected = (verseKey: string) => (state: RootState) => {
+  const lastReadVerseKey = selectLastReadVerseKey(state);
+  return verseKey === lastReadVerseKey.verseKey;
+};
 
 export default readingTrackerSlice.reducer;
