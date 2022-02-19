@@ -4,6 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import styles from '../TranslationView.module.scss';
+
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import { getRequestKey, verseFetcher } from 'src/components/QuranReader/api';
 import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
@@ -84,7 +86,7 @@ const TranslationPage: React.FC<Props> = ({
     return <TranslationViewSkeleton numberOfSkeletons={versesPerPage} />;
   }
   return (
-    <>
+    <div className={styles.container}>
       {verses.map((verse, index) => {
         const currentVerseIndex =
           pageNumber === 1 ? index : index + (pageNumber - 1) * versesPerPage;
@@ -106,7 +108,7 @@ const TranslationPage: React.FC<Props> = ({
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 

@@ -10,7 +10,6 @@ import QueryParamMessage from '../QueryParamMessage';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
-import styles from './TranslationView.module.scss';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
@@ -93,7 +92,7 @@ const TranslationView = ({
         reciterQueryParamDifferent={reciterQueryParamDifferent}
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-      <div className={styles.container} onCopy={(event) => onCopyQuranWords(event, verses)}>
+      <div onCopy={(event) => onCopyQuranWords(event, verses)}>
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
