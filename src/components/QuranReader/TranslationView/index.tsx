@@ -32,6 +32,8 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
   loading: () => <Spinner />,
 });
 
+const INCREASE_VIEWPORT_BY_PIXELS = 1000;
+
 const TranslationView = ({
   quranReaderStyles,
   quranReaderDataType,
@@ -97,7 +99,7 @@ const TranslationView = ({
           ref={virtuosoRef}
           useWindowScroll
           totalCount={numberOfPages}
-          increaseViewportBy={300}
+          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
           initialItemCount={1} // needed for SSR.
           itemContent={itemContentRenderer}
           components={{

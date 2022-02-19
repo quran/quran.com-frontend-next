@@ -42,6 +42,8 @@ type ReadingViewProps = {
   resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
 
+const INCREASE_VIEWPORT_BY_PIXELS = 1200;
+
 const ReadingView = ({
   quranReaderStyles,
   quranReaderDataType,
@@ -161,7 +163,7 @@ const ReadingView = ({
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
-          increaseViewportBy={300}
+          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
           className={styles.virtuosoScroller}
           initialItemCount={1} // needed for SSR.
           totalCount={pagesCount}
