@@ -37,6 +37,10 @@ export interface ChaptersResponse extends BaseResponse {
   chapters: Chapter[];
 }
 
+export interface VerseResponse extends BaseResponse {
+  verse: Verse;
+}
+
 // The response from the chapter endpoint that returns information on a chapter
 export interface ChapterResponse extends BaseResponse {
   chapter: Chapter;
