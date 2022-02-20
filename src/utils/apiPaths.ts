@@ -192,6 +192,16 @@ export const makeJuzVersesUrl = (
 ): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(currentLocale, params));
 
 /**
+ * Compose the url for by verse key API.
+ *
+ * @param {string} verseKey  the Id of the juz.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeByVerseKeyUrl = (verseKey: string, params?: Record<string, unknown>): string =>
+  makeUrl(`/verses/by_key/${verseKey}`, params);
+
+/**
  * Compose the url for page's verses API.
  *
  * @param {string} id  the Id of the page.

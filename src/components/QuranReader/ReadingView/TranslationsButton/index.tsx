@@ -17,9 +17,9 @@ import TranslationViewCellSkeleton from 'src/components/QuranReader/TranslationV
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeVersesUrl } from 'src/utils/apiPaths';
+import { makeByVerseKeyUrl } from 'src/utils/apiPaths';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
-import { VersesResponse } from 'types/ApiResponses';
+import { VerseResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
@@ -35,23 +35,23 @@ const CLOSE_POPOVER_AFTER_MS = 200;
 
 const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const selectedTranslations = useSelector(selectSelectedTranslations);
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const contentModalRef = useRef<ContentModalHandles>();
-  const translationsQueryKey = makeVersesUrl(verse.chapterId, lang, {
-    page: verse.pageNumber,
-    perPage: 1,
+  const translationsQueryKey = makeByVerseKeyUrl(`${verse.chapterId}:${verse.verseNumber}`, {
+    words: true,
+    translationFields: 'resource_name,language_id',
     translations: selectedTranslations.join(','),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
   });
 
   const renderTranslationsView = useCallback(
-    (data: VersesResponse) => {
+    (data: VerseResponse) => {
       if (!data) return <TranslationViewCellSkeleton hasActionMenuItems={false} />;
-      const { verses } = data;
-      return <TranslationsView verses={verses} quranReaderStyles={quranReaderStyles} />;
+      const { verse: responseVerse } = data;
+      return <TranslationsView verse={responseVerse} quranReaderStyles={quranReaderStyles} />;
     },
     [quranReaderStyles],
   );

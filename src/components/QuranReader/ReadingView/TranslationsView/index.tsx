@@ -11,34 +11,27 @@ import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
 type Props = {
-  verses: Verse[];
+  verse: Verse;
   quranReaderStyles: QuranReaderStyles;
 };
 
-const TranslationsView: React.FC<Props> = ({ verses, quranReaderStyles }) => {
-  const words = Object.values(verses)
-    .map((responseVerse) => getVerseWords(responseVerse))
-    .flat();
+const TranslationsView: React.FC<Props> = ({ verse, quranReaderStyles }) => {
   return (
     <>
       <div className={styles.arabicVerseContainer}>
-        <PlainVerseText words={words} />
+        <PlainVerseText words={getVerseWords(verse)} />
       </div>
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
-      {verses.map((responseVerse) => (
-        <div key={responseVerse.verseKey}>
-          {responseVerse.translations?.map((translation: Translation) => (
-            <div key={translation.id} className={styles.verseTranslationContainer}>
-              <TranslationText
-                translationFontScale={quranReaderStyles.translationFontScale}
-                text={translation.text}
-                languageId={translation.languageId}
-                resourceName={translation.resourceName}
-              />
-            </div>
-          ))}
+      {verse.translations?.map((translation: Translation) => (
+        <div key={translation.id} className={styles.verseTranslationContainer}>
+          <TranslationText
+            translationFontScale={quranReaderStyles.translationFontScale}
+            text={translation.text}
+            languageId={translation.languageId}
+            resourceName={translation.resourceName}
+          />
         </div>
       ))}
     </>
