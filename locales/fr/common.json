@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "popular-links": "Liens populaires",
     "powered-by": "Alimenté par",
-    "prayer-times": {
-        "access-denied": "Accès à l'emplacement refusé. Veuillez activer l'accès à la localisation pour obtenir des heures de prière précises",
-        "calculation-method": "Méthode de calcul",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "égyptien",
-            "Karachi": "Karachi",
-            "Kuwait": "Koweit",
-            "MoonsightingCommittee": "Comité d'observation de la lune",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "Amérique du Nord",
-            "Qatark": "qatarien",
-            "Singapore": "Singapour",
-            "Tehran": "Téhéran",
-            "Turkey": "Turquie",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Trouver un emplacement précis",
-        "location-access": "Accès à l'emplacement",
-        "location-updated": "Emplacement des heures de prière mis à jour",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Horaires de prière"
-    },
     "prev": "Précédent",
     "privacy": "Intimité",
     "product-updates": "Mises à jour du produit",
@@ -241,6 +214,8 @@
     "transliteration": "Translitération",
     "type": "Taper",
     "verse": "Verset",
+    "verse-bookmark-removed": "Signet verset supprimé !",
+    "verse-bookmarked": "Verset mis en signet !",
     "verses": "Versets",
     "view": "Vue",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "Mot par mot",
     "wbw-trans-lang": "Langage mot à mot",
+    "wbw-translation": "Traduction mot à mot",
+    "wbw-transliteration": "Translittération mot à mot",
     "word-click": {
         "no-audio": "Pas de son",
         "play-audio": "Lire le son",

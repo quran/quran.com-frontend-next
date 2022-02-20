@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتائج البحث",
     "popular-links": "روابط شائعة",
     "powered-by": "مشغل بواسطة",
-    "prayer-times": {
-        "access-denied": "تم رفض الوصول إلى الموقع. يرجى تمكين الوصول إلى الموقع للحصول على أوقات صلاة دقيقة",
-        "calculation-method": "طريقة الحساب",
-        "calculation-methods": {
-            "Dubai": "دبي",
-            "Egyptian": "الهيئة المصرية العامة للمساحة",
-            "Karachi": "جامعة العلوم الإسلامية - كراتشي",
-            "Kuwait": "الكويت",
-            "MoonsightingCommittee": "لجنة رؤية الهلال",
-            "MuslimWorldLeague": "رابطة العالم الإسلامي",
-            "NorthAmerica": "الجمعية الإسلامية بأمريكا الشمالية",
-            "Qatark": "قطر",
-            "Singapore": "سنغافورة",
-            "Tehran": "طهران",
-            "Turkey": "تركيا",
-            "UmmAlQura": "أم القرى"
-        },
-        "find-accurate-location": "البحث عن موقع دقيق",
-        "location-access": "الوصول إلى الموقع",
-        "location-updated": "تم تحديث موقع مواقيت الصلاة",
-        "madhab": "المذهب",
-        "madhabs": {
-            "Hanafi": "حنفي",
-            "Shafi": "شافعي"
-        },
-        "title": "أوقات الصلاة"
-    },
     "prev": "السابق",
     "privacy": "الخصوصية",
     "product-updates": "تحديثات المنتج",
@@ -241,6 +214,8 @@
     "transliteration": "النقل الحرفي",
     "type": "النوع",
     "verse": "آية",
+    "verse-bookmark-removed": "تمت إزالة إشارة مرجعية الآية!",
+    "verse-bookmarked": "تم وضع إشارة مرجعية على الآية!",
     "verses": "آيات",
     "view": "عرض",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "كلمة بكلمة",
     "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
+    "wbw-translation": "ترجمة كلمة بكلمة",
+    "wbw-transliteration": "كلمة بكلمة حرفي",
     "word-click": {
         "no-audio": "لا صوت",
         "play-audio": "تشغيل الصوت",

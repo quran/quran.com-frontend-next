@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "آپ کے پاس ابھی تک کوئی بک مارکس نہیں ہیں۔",
     "noble-quran": "نوبل قرآن",
-    "prayer-names": {
-        "asr": "عصر",
-        "dhuhr": "ظہر",
-        "fajr": "فجر",
-        "isha": "عشاء",
-        "maghrib": "مغرب",
-        "sunrise": "طلوع آفتاب"
-    },
-    "prayer-times": {
-        "use-location": "درست مقام کا استعمال کریں۔"
-    },
     "recently-read": "حال ہی میں پڑھا۔",
     "tab": {
         "bookmarks": "بک مارکس",

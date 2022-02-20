@@ -1,11 +1,11 @@
 import range from 'lodash/range';
 
+import { makeCDNUrl } from './cdn';
+
 import { MushafLines, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];
-export const FONT_CDN = 'https://static.qurancdn.com/fonts';
-
 export const isQCFFont = (font: QuranFont) => QCFFontCodes.includes(font);
 
 /**
@@ -36,9 +36,16 @@ export const getV1OrV2FontFaceSource = (isV1: boolean, pageNumber: number): stri
   const pageName = String(pageNumber).padStart(3, '0');
 
   if (isV1) {
-    return `local(QCF_P${pageName}), url('${FONT_CDN}/quran/hafs/v1/woff2/p${pageNumber}.woff2') format('woff2'), url('${FONT_CDN}/quran/hafs/v1/woff/p${pageNumber}.woff') format('woff'), url('${FONT_CDN}/quran/hafs/v1/ttf/p${pageNumber}.ttf') format('truetype')`;
+    const woff2 = makeCDNUrl(`fonts/quran/hafs/v1/woff2/p${pageNumber}.woff2`);
+    const woff = makeCDNUrl(`fonts/quran/hafs/v1/woff/p${pageNumber}.woff`);
+    const ttf = makeCDNUrl(`fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`);
+    return `local(QCF_P${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
   }
-  return `local(QCF2${pageName}), url('${FONT_CDN}/quran/hafs/v2/woff2/p${pageNumber}.woff2') format('woff2'), url('${FONT_CDN}/quran/hafs/v2/woff/p${pageNumber}.woff') format('woff')`;
+
+  const woff2 = makeCDNUrl(`fonts/quran/hafs/v2/woff2/p${pageNumber}.woff2`);
+  const woff = makeCDNUrl(`fonts/quran/hafs/v2/woff/p${pageNumber}.woff`);
+
+  return `local(QCF2${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff')`;
 };
 
 /**

@@ -5,13 +5,14 @@ import { useRouter } from 'next/router';
 
 import styles from './tafsirs.module.scss';
 
-import { getChapterIdBySlug, fetcher } from 'src/api';
+import { getChapterIdBySlug, getTafsirContent } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
-import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
-import { getDefaultWordFields } from 'src/utils/api';
-import { makeTafsirContentUrl } from 'src/utils/apiPaths';
+import {
+  getQuranReaderStylesInitialState,
+  getTafsirsInitialState,
+} from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import {
@@ -31,7 +32,7 @@ import { ChapterResponse, TafsirContentResponse, VersesResponse } from 'types/Ap
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
   verses?: VersesResponse;
-  tafsirData?: any;
+  tafsirData?: TafsirContentResponse;
   hasError?: boolean;
 };
 
@@ -39,7 +40,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
-    query: { verseId, chapterId },
+    query: { verseId },
   } = router;
   if (hasError) {
     return <Error statusCode={500} />;
@@ -60,7 +61,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
-          initialChapterId={chapterId.toString()}
+          initialChapterId={chapter.chapter.id.toString()}
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}
           initialTafsirIdOrSlug={router.query.tafsirId ? Number(router.query.tafsirId) : undefined}
@@ -102,15 +103,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
 
     const chapterData = getChapterData(chapterIdOrSlug, locale);
-    const tafsirData = await fetcher<TafsirContentResponse>(
-      makeTafsirContentUrl(
-        getTafsirsInitialState(locale).selectedTafsirs[0],
-        makeVerseKey(Number(chapterIdOrSlug), Number(verseId)),
-        {
-          words: true,
-          ...getDefaultWordFields(),
-        },
-      ),
+    const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
+    const tafsirData = await getTafsirContent(
+      getTafsirsInitialState(locale).selectedTafsirs[0],
+      makeVerseKey(Number(chapterIdOrSlug), Number(verseId)),
+      quranFont,
+      mushafLines,
     );
 
     if (!chapterData) return notFoundResponse;

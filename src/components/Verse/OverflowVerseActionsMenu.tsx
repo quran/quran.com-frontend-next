@@ -15,7 +15,6 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
-import Word from 'types/Word';
 
 const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseActionsMenuBody'), {
   ssr: false,
@@ -24,7 +23,6 @@ const OverflowVerseActionsMenuBody = dynamic(() => import('./OverflowVerseAction
 
 interface Props {
   verse: Verse;
-  word?: Word;
   isModal?: boolean;
   isPortalled?: boolean;
   isTranslationView?: boolean;
@@ -37,7 +35,6 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isPortalled = false,
   isTranslationView = true,
   onActionTriggered,
-  word,
 }) => {
   const { t } = useTranslation('common');
   return (
@@ -71,7 +68,6 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           isPortalled={isPortalled}
           isTranslationView={isTranslationView}
           onActionTriggered={onActionTriggered}
-          word={word}
         />
       </PopoverMenu>
     </div>

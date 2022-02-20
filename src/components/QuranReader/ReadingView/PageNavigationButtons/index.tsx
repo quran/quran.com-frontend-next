@@ -33,6 +33,7 @@ const PageNavigationButtons: React.FC<Props> = ({ scrollToNextPage, scrollToPrev
         size={ButtonSize.Small}
         className={styles.prevButton}
         onClick={scrollToPreviousPage}
+        shouldFlipOnRTL={false}
         tooltip={
           <>
             {t('prev-page')} <KeyboardInput invertColors keyboardKey="⬆" />

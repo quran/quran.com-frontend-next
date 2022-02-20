@@ -23,7 +23,7 @@ import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
-import { getImageCDNPath } from 'src/utils/api';
+import { makeCDNUrl } from 'src/utils/cdn';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
@@ -91,7 +91,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
         <img
           className={styles.reciterImage}
           alt={selectedReciter.name}
-          src={getImageCDNPath(selectedReciter.profilePicture)}
+          src={makeCDNUrl(selectedReciter.profilePicture)}
         />
         <div>
           <div className={styles.chapterName}>

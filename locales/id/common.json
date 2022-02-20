@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
     "popular-links": "Pautan LINK yang popular",
     "powered-by": "Dipersembahkan oleh",
-    "prayer-times": {
-        "access-denied": "Akses ke lokasi ditolak. Harap aktifkan akses lokasi untuk mendapatkan waktu sholat yang akurat",
-        "calculation-method": "Metode kalkulasi",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Mesir",
-            "Karachi": "Karachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "Komite Penampakan Bulan",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "Amerika Utara",
-            "Qatark": "Qatar",
-            "Singapore": "Singapura",
-            "Tehran": "Teheran",
-            "Turkey": "Turki",
-            "UmmAlQura": "Ummu AlQura"
-        },
-        "find-accurate-location": "Temukan Lokasi Akurat",
-        "location-access": "Akses Lokasi",
-        "location-updated": "Lokasi waktu sholat diperbarui",
-        "madhab": "mazhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Syafii"
-        },
-        "title": "Waktu Sholat"
-    },
     "prev": "Sebelumnya",
     "privacy": "Pribadi",
     "product-updates": "Pembaruan produk",
@@ -241,6 +214,8 @@
     "transliteration": "Transliterasi",
     "type": "Jenis",
     "verse": "Ayat",
+    "verse-bookmark-removed": "Penanda ayat dihapus!",
+    "verse-bookmarked": "Ayat di-bookmark!",
     "verses": "Ayat",
     "view": "Melihat",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "Kata dari kata",
     "wbw-trans-lang": "kata daripada bahasa kata",
+    "wbw-translation": "Terjemahan Kata demi Kata",
+    "wbw-transliteration": "Transliterasi Kata demi Kata",
     "word-click": {
         "no-audio": "Tidak ada suara",
         "play-audio": "Putar Audio",

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import GeoLocationPermissionListener from './GeoLocationPermissionListener';
-
 import GlobalKeyboardListeners from 'src/components/GlobalKeyboardListeners';
 import GlobalScrollListener from 'src/components/GlobalScrollListener';
 
@@ -10,7 +8,6 @@ const GlobalListeners = () => {
     <>
       <GlobalKeyboardListeners />
       <GlobalScrollListener />
-      <GeoLocationPermissionListener />
     </>
   );
 };

@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} از {{totalNumberOfResults}} نتایج جستجو",
     "popular-links": "لینک های محبوب",
     "powered-by": "پشتیبانی شده توسط",
-    "prayer-times": {
-        "access-denied": "دسترسی به مکان ممنوع شد. لطفاً دسترسی به مکان را فعال کنید تا اوقات دقیق نماز را دریافت کنید",
-        "calculation-method": "روش محاسبه",
-        "calculation-methods": {
-            "Dubai": "دبی",
-            "Egyptian": "مصری",
-            "Karachi": "کراچی",
-            "Kuwait": "کویت",
-            "MoonsightingCommittee": "کمیته مهتاب",
-            "MuslimWorldLeague": "لیگ جهانی مسلمانان",
-            "NorthAmerica": "آمریکای شمالی",
-            "Qatark": "قطر",
-            "Singapore": "سنگاپور",
-            "Tehran": "تهران",
-            "Turkey": "بوقلمون",
-            "UmmAlQura": "ام القری"
-        },
-        "find-accurate-location": "مکان دقیق را پیدا کنید",
-        "location-access": "دسترسی به موقعیت مکانی",
-        "location-updated": "مکان اوقات نماز به روز شد",
-        "madhab": "مداح",
-        "madhabs": {
-            "Hanafi": "حنفی",
-            "Shafi": "شفیع"
-        },
-        "title": "اوقات نماز"
-    },
     "prev": "قبلی",
     "privacy": "حریم خصوصی",
     "product-updates": "به روز رسانی محصول",
@@ -241,6 +214,8 @@
     "transliteration": "نویسه گردانی",
     "type": "تایپ کنید",
     "verse": "آیه",
+    "verse-bookmark-removed": "نشانک آیه حذف شد!",
+    "verse-bookmarked": "آیه نشانه گذاری شد!",
     "verses": "آیات",
     "view": "چشم انداز",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "کلمه به کلمه",
     "wbw-trans-lang": "زبان کلمه به کلمه",
+    "wbw-translation": "ترجمه کلمه به کلمه",
+    "wbw-transliteration": "نویسه گردانی کلمه به کلمه",
     "word-click": {
         "no-audio": "بی صدا",
         "play-audio": "پخش صدا",

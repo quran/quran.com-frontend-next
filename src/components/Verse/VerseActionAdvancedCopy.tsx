@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import AdvancedCopyIcon from '../../../public/icons/advanced_copy.svg';
+import AdvancedCopyIcon from '../../../public/icons/clipboard.svg';
 
 import VerseAdvancedCopy from './AdvancedCopy/VerseAdvancedCopy';
 

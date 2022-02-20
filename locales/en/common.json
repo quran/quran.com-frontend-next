@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "popular-links": "Popular Links",
     "powered-by": "Powered by",
-    "prayer-times": {
-        "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
-        "calculation-method": "Calculation Method",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Egyptian",
-            "Karachi": "Karachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "MoonsightingCommittee",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "NorthAmerica",
-            "Qatark": "Qatark",
-            "Singapore": "Singapore",
-            "Tehran": "Tehran",
-            "Turkey": "Turkey",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Find Accurate Location",
-        "location-access": "Location Access",
-        "location-updated": "Prayer times location updated",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Prayer Times"
-    },
     "prev": "Previous",
     "privacy": "Privacy",
     "product-updates": "Product Updates",
@@ -241,6 +214,8 @@
     "transliteration": "Transliteration",
     "type": "Type",
     "verse": "Verse",
+    "verse-bookmark-removed": "Verse bookmark removed!",
+    "verse-bookmarked": "Verse bookmarked!",
     "verses": "Verses",
     "view": "View",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",
+    "wbw-translation": "Word By Word Translation",
+    "wbw-transliteration": "Word By Word Transliteration",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",

@@ -28,4 +28,8 @@ export const SMOOTH_SCROLL_TO_CENTER = {
   behavior: 'smooth',
 } as ScrollIntoViewOptions;
 
+export const SCROLL_TO_NEAREST_ELEMENT = {
+  block: 'nearest',
+} as ScrollIntoViewOptions;
+
 export default useScrollToElement;

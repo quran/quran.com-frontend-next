@@ -210,7 +210,6 @@ export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
   const words = [];
   verse.words.forEach((word) => {
     const wordVerse = { ...verse };
-    delete wordVerse.words;
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
@@ -342,10 +341,10 @@ export const shortenVerseText = (text: string, length = 150): string => {
 /**
  * Given list of verses, get all the first and the last verseKeys
  *
- * @param {Verse[]} verses
+ * @param {Record<string, Verse>} verses
  * @returns {string[]} [firstVerseKey, lastVerseKey]
  */
-export const getFirstAndLastVerseKeys = (verses: Verse[]) => {
+export const getFirstAndLastVerseKeys = (verses: Record<string, Verse>): string[] => {
   const verseKeys = Object.keys(verses).sort(sortByVerseKey);
   return [verseKeys[0], verseKeys[verseKeys.length - 1]];
 };

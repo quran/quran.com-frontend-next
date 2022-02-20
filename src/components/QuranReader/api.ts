@@ -15,8 +15,6 @@ import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
-export const DEFAULT_ITEMS_PER_PAGE = 10;
-
 interface RequestKeyInput {
   quranReaderDataType: QuranReaderDataType;
   pageNumber: number;
@@ -24,7 +22,6 @@ interface RequestKeyInput {
   quranReaderStyles: QuranReaderStyles;
   selectedTranslations: number[];
   isVerseData: boolean;
-  isSelectedTafsirData: boolean;
   id: string | number;
   reciter: number;
   locale: string;
@@ -99,7 +96,7 @@ export const getRequestKey = ({
     wordTranslationLanguage: wordByWordLocale,
     reciter,
     page,
-    perPage: isVerseData ? 1 : DEFAULT_ITEMS_PER_PAGE, // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
+    perPage: isVerseData ? 1 : initialData.pagination.perPage, // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
     translations: selectedTranslations.join(','),
     ...getDefaultWordFields(quranReaderStyles.quranFont),
     ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),

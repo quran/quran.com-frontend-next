@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} کی {{totalNumberOfResults}} تلاش کے نتائج",
     "popular-links": "مقبول لنکس",
     "powered-by": "کی طرف سے طاقت",
-    "prayer-times": {
-        "access-denied": "مقام تک رسائی سے انکار کر دیا گیا۔ نماز کے درست اوقات جاننے کے لیے براہ کرم مقام تک رسائی کو فعال کریں۔",
-        "calculation-method": "حساب کتاب کا طریقہ",
-        "calculation-methods": {
-            "Dubai": "دبئی",
-            "Egyptian": "مصری",
-            "Karachi": "کراچی",
-            "Kuwait": "کویت",
-            "MoonsightingCommittee": "چاند دیکھنے والی کمیٹی",
-            "MuslimWorldLeague": "مسلم ورلڈ لیگ",
-            "NorthAmerica": "شمالی امریکہ",
-            "Qatark": "قطر",
-            "Singapore": "سنگاپور",
-            "Tehran": "تہران",
-            "Turkey": "ترکی",
-            "UmmAlQura": "ام القریٰ"
-        },
-        "find-accurate-location": "درست مقام تلاش کریں۔",
-        "location-access": "مقام تک رسائی",
-        "location-updated": "نماز کے اوقات کا مقام اپ ڈیٹ ہو گیا۔",
-        "madhab": "مادھب",
-        "madhabs": {
-            "Hanafi": "حنفی",
-            "Shafi": "شفیع"
-        },
-        "title": "نماز کے اوقات"
-    },
     "prev": "پچھلا",
     "privacy": "رازداری",
     "product-updates": "پروڈکٹ اپڈیٹس",
@@ -241,6 +214,8 @@
     "transliteration": "تلفظ",
     "type": "قسم",
     "verse": "آیت",
+    "verse-bookmark-removed": "آیت کا بک مارک ہٹا دیا گیا!",
+    "verse-bookmarked": "آیت بک مارک شدہ!",
     "verses": "آیات",
     "view": "دیکھیں",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "لفظ بہ لفظ",
     "wbw-trans-lang": "لفظ بہ لفظ زبان",
+    "wbw-translation": "لفظ بہ لفظ ترجمہ",
+    "wbw-transliteration": "لفظ بہ لفظ نقل",
     "word-click": {
         "no-audio": "کوئی آڈیو نہیں۔",
         "play-audio": "آڈیو چلائیں۔",

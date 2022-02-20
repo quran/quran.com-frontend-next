@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
     "popular-links": "Link popolari",
     "powered-by": "Offerto da",
-    "prayer-times": {
-        "access-denied": "Accesso alla posizione negato. Si prega di abilitare l'accesso alla posizione per ottenere orari di preghiera precisi",
-        "calculation-method": "Metodo di calcolo",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "egiziano",
-            "Karachi": "Karachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "Comitato per l'avvistamento della luna",
-            "MuslimWorldLeague": "MuslimWorldLega",
-            "NorthAmerica": "Nord America",
-            "Qatark": "Qatark",
-            "Singapore": "Singapore",
-            "Tehran": "Teheran",
-            "Turkey": "tacchino",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Trova una posizione precisa",
-        "location-access": "Accesso alla posizione",
-        "location-updated": "Posizione degli orari di preghiera aggiornata",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Tempi di preghiera"
-    },
     "prev": "Precedente",
     "privacy": "Privacy",
     "product-updates": "Aggiornamenti del prodotto",
@@ -241,6 +214,8 @@
     "transliteration": "Traslitterazione",
     "type": "Tipo",
     "verse": "Versetto",
+    "verse-bookmark-removed": "Segnalibro versetto rimosso!",
+    "verse-bookmarked": "Versetto aggiunto ai segnalibri!",
     "verses": "versi",
     "view": "Visualizzazione",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "Parola per parola",
     "wbw-trans-lang": "Parola per parola lingua",
+    "wbw-translation": "Traduzione parola per parola",
+    "wbw-transliteration": "Traslitterazione parola per parola",
     "word-click": {
         "no-audio": "Nessun audio",
         "play-audio": "Riproduci audio",

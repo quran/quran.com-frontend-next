@@ -125,33 +125,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} из {{totalNumberOfResults}} результатов поиска",
     "popular-links": "Популярные ссылки",
     "powered-by": "Питаться от",
-    "prayer-times": {
-        "access-denied": "Доступ к местоположению запрещен. Пожалуйста, включите доступ к местоположению, чтобы получать точное время молитвы",
-        "calculation-method": "Метод расчета",
-        "calculation-methods": {
-            "Dubai": "Дубай",
-            "Egyptian": "Египтянин",
-            "Karachi": "Карачи",
-            "Kuwait": "Кувейт",
-            "MoonsightingCommittee": "Комитет по наблюдению за луной",
-            "MuslimWorldLeague": "МусульманскийМирлига",
-            "NorthAmerica": "Северная Америка",
-            "Qatark": "Катарк",
-            "Singapore": "Сингапур",
-            "Tehran": "Тегеран",
-            "Turkey": "Турция",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Найти точное местоположение",
-        "location-access": "Доступ к местоположению",
-        "location-updated": "Обновлено время молитв.",
-        "madhab": "Мазхаб",
-        "madhabs": {
-            "Hanafi": "Ханафи",
-            "Shafi": "Шафи"
-        },
-        "title": "Время молитв"
-    },
     "prev": "Предыдущий",
     "privacy": "Конфиденциальность",
     "product-updates": "Обновления продуктов",
@@ -241,6 +214,8 @@
     "transliteration": "Транслитерация",
     "type": "Тип",
     "verse": "Стих",
+    "verse-bookmark-removed": "Закладка стиха удалена!",
+    "verse-bookmarked": "Стих в закладки!",
     "verses": "Стихи",
     "view": "Вид",
     "voice": {
@@ -255,6 +230,8 @@
     },
     "wbw": "Слово за слово",
     "wbw-trans-lang": "Слово за словом язык",
+    "wbw-translation": "Пословный перевод",
+    "wbw-transliteration": "Пословная транслитерация",
     "word-click": {
         "no-audio": "Нет звука",
         "play-audio": "Воспроизвести аудио",
