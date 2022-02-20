@@ -14,12 +14,4 @@
       background-color: var(--color-background-inverse) !important;
     }
   }
-  & svg {
-    > path {
-      color: var(--color-background-default);
-      @include theme.sepia {
-        color: var(--color-background-inverse);
-      }
-    }
-  }
 }
