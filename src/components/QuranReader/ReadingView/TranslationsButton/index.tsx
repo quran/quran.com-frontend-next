@@ -97,6 +97,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
         header={<p className={styles.header}>{t('translations')}</p>}
         hasCloseButton
         onClose={onModalClosed}
+        onEscapeKeyDown={onModalClosed}
       >
         <DataFetcher
           loading={loading}

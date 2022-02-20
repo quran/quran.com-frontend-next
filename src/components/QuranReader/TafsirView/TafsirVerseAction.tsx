@@ -34,7 +34,7 @@ const TafsirVerseAction = ({
 
   const contentModalRef = useRef<ContentModalHandles>();
 
-  const closeModal = () => {
+  const onModalClose = () => {
     if (isTranslationView) {
       logEvent('translation_view_tafsir_modal_close');
     } else {
@@ -70,8 +70,8 @@ const TafsirVerseAction = ({
                 url={getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0])}
                 isOpen={isContentModalOpen}
                 hasCloseButton
-                onClose={closeModal}
-                onHitEsc={closeModal}
+                onClose={onModalClose}
+                onEscapeKeyDown={onModalClose}
                 header={surahAndAyahSelection}
               >
                 {languageAndTafsirSelection}

@@ -14,7 +14,7 @@ import { fakeNavigate } from 'src/utils/navigation';
 type ContentModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
-  onHitEsc?: () => void;
+  onEscapeKeyDown?: () => void;
   children: React.ReactNode;
   hasCloseButton?: boolean;
   url?: string;
@@ -26,7 +26,7 @@ type ContentModalProps = {
 const ContentModal = ({
   isOpen,
   onClose,
-  onHitEsc,
+  onEscapeKeyDown,
   hasCloseButton,
   children,
   url,
@@ -63,7 +63,7 @@ const ContentModal = ({
         <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
           <Dialog.Content
             className={styles.contentWrapper}
-            onEscapeKeyDown={onHitEsc}
+            onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onClose}
           >
             <div className={styles.header}>

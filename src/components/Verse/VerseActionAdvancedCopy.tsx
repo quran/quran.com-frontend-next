@@ -21,7 +21,7 @@ const VerseActionAdvancedCopy = ({ verse, isTranslationView }: VerseActionAdvanc
   const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const closeModal = () => {
+  const onModalClose = () => {
     if (isTranslationView) {
       logEvent('translation_view_advanced_copy_modal_close');
     } else {
@@ -46,8 +46,8 @@ const VerseActionAdvancedCopy = ({ verse, isTranslationView }: VerseActionAdvanc
       <Modal
         isOpen={isModalOpen}
         isPropagationStopped
-        onHitEsc={closeModal}
-        onClickOutside={closeModal}
+        onEscapeKeyDown={onModalClose}
+        onClickOutside={onModalClose}
       >
         <VerseAdvancedCopy verse={verse}>
           {({ ayahSelectionComponent, actionText, onCopy, loading }) => (

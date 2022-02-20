@@ -60,6 +60,7 @@ const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) =>
         header={<p className={styles.header} />}
         hasCloseButton
         onClose={onModalClosed}
+        onEscapeKeyDown={onModalClosed}
       >
         <WordByWordHeading isTranslation />
         <PlainVerseText words={verse.words} shouldShowWordByWordTranslation />

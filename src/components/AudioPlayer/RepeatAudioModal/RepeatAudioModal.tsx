@@ -121,7 +121,7 @@ const RepeatAudioModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClose} onHitEsc={onClose}>
+    <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{t('audio.player.repeat-settings')}</Modal.Title>
