@@ -118,8 +118,8 @@ $scales-map: (
       ),
       mobile: (
         1: 4vw,
-        2: 5vw,
-        3: 5.4vw,
+        2: 4.5vw,
+        3: 4.6vw,
         4: 8.9vw,
         5: 11vw,
       ),
@@ -135,7 +135,7 @@ $scales-map: (
     mobile: (
       1: 4.4vw,
       2: 4.8vw,
-      3: 5.4vw,
+      3: 5.1vw,
       4: 6vw,
       5: 9.3vw,
     ),
@@ -151,7 +151,7 @@ $scales-map: (
     mobile: (
       1: 4.4vw,
       2: 4.8vw,
-      3: 5.4vw,
+      3: 5.1vw,
       4: 6vw,
       5: 9.3vw,
     ),
@@ -167,7 +167,7 @@ $scales-map: (
     mobile: (
       1: 4vw,
       2: 5vw,
-      3: 5.9vw,
+      3: 5.3vw,
       4: 8.4vw,
       5: 10vw,
     ),
@@ -183,7 +183,7 @@ $scales-map: (
     mobile: (
       1: 4vw,
       2: 5vw,
-      3: 6.3vw,
+      3: 5.9vw,
       4: 10vw,
       5: 12vw,
     ),
@@ -264,9 +264,9 @@ $skeleton-height-map: (
       5: 4.63vh,
     ),
     mobile: (
-      1: 4.2vw,
-      2: 5.2vw,
-      3: 5.9vw,
+      1: 3.3vw,
+      2: 3.85vw,
+      3: 4vw,
       4: 8.9vw,
       5: 11vw,
     ),
@@ -282,7 +282,7 @@ $skeleton-height-map: (
     mobile: (
       1: 4.4vw,
       2: 4.9vw,
-      3: 5.8vw,
+      3: 4.8vw,
       4: 6vw,
       5: 9.3vw,
     ),
@@ -298,7 +298,7 @@ $skeleton-height-map: (
     mobile: (
       1: 4.4vw,
       2: 5vw,
-      3: 5.7vw,
+      3: 4.83vw,
       4: 6vw,
       5: 9.3vw,
     ),
@@ -314,7 +314,7 @@ $skeleton-height-map: (
     mobile: (
       1: 4vw,
       2: 5.1vw,
-      3: 6.8vw,
+      3: 5.15vw,
       4: 8.4vw,
       5: 10vw,
     ),
@@ -330,7 +330,7 @@ $skeleton-height-map: (
     mobile: (
       1: 4.18vw,
       2: 5.3vw,
-      3: 7.3vw,
+      3: 6vw,
       4: 10vw,
       5: 12vw,
     ),
@@ -435,7 +435,7 @@ $skeleton-height-map: (
 $large-device-width-ratio: 95%;
 $quran-max-container-width: 112rem;
 @mixin quranContainer() {
-  width: 100%;
+  width: 85%;
 
   @include breakpoints.tablet {
     width: $large-device-width-ratio;
