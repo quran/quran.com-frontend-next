@@ -21,6 +21,15 @@ const VerseActionAdvancedCopy = ({ verse, isTranslationView }: VerseActionAdvanc
   const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const onModalClose = () => {
+    if (isTranslationView) {
+      logEvent('translation_view_advanced_copy_modal_close');
+    } else {
+      logEvent('reading_view_advanced_copy_modal_close');
+    }
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <PopoverMenu.Item
@@ -36,12 +45,9 @@ const VerseActionAdvancedCopy = ({ verse, isTranslationView }: VerseActionAdvanc
       </PopoverMenu.Item>
       <Modal
         isOpen={isModalOpen}
-        onClickOutside={() => {
-          logEvent(
-            `${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_close`,
-          );
-          setIsModalOpen(false);
-        }}
+        isPropagationStopped
+        onEscapeKeyDown={onModalClose}
+        onClickOutside={onModalClose}
       >
         <VerseAdvancedCopy verse={verse}>
           {({ ayahSelectionComponent, actionText, onCopy, loading }) => (
