@@ -1,0 +1,22 @@
+@use "src/styles/breakpoints";
+
+$desktop-max-width: calc(16 * var(--spacing-mega));
+.header {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+  text-align: center;
+}
+
+.footerContainer {
+  margin-block-start: calc(2 * var(--spacing-small));
+}
+
+.contentWrapper {
+  @include breakpoints.desktop {
+    padding-block-start: var(--spacing-mega);
+    padding-block-end: var(--spacing-medium);
+    padding-inline-start: var(--spacing-mega);
+    padding-inline-end: var(--spacing-mega);
+    max-width: $desktop-max-width;
+  }
+}
