@@ -60,12 +60,17 @@ const ContentModal = ({
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
-          <Dialog.Content
-            className={styles.contentWrapper}
-            onEscapeKeyDown={onEscapeKeyDown}
-            onPointerDownOutside={onClose}
-          >
+        <Dialog.Overlay
+          className={styles.overlay}
+          ref={overlayRef}
+          onClick={(e) => {
+            if (e.target !== overlayRef.current) return;
+            if (onClose) {
+              onClose();
+            }
+          }}
+        >
+          <Dialog.Content className={styles.contentWrapper} onEscapeKeyDown={onEscapeKeyDown}>
             <div className={styles.header}>
               {header}
               {hasCloseButton && (
