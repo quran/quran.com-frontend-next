@@ -63,7 +63,11 @@ const QuranReader = ({
           [styles.withSidebarNavigationOpen]: isSidebarNavigationVisible,
         })}
       >
-        <div className={styles.infiniteScroll}>
+        <div
+          className={classNames(styles.infiniteScroll, {
+            [styles.readingView]: isReadingPreference,
+          })}
+        >
           <QuranReaderView
             isReadingPreference={isReadingPreference}
             quranReaderStyles={quranReaderStyles}

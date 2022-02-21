@@ -12,6 +12,12 @@ $quran-reader-padding: 3rem;
   margin-inline-end: auto;
 }
 
+.readingView {
+  @include breakpoints.smallerThanTablet {
+    width: 85%;
+  }
+}
+
 .loading {
   text-align: center;
   max-width: 80%;

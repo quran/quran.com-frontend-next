@@ -435,7 +435,7 @@ $skeleton-height-map: (
 $large-device-width-ratio: 95%;
 $quran-max-container-width: 112rem;
 @mixin quranContainer() {
-  width: 85%;
+  width: 95%;
 
   @include breakpoints.tablet {
     width: $large-device-width-ratio;
