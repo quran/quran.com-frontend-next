@@ -24,7 +24,7 @@ const BottomSection = () => {
     <div className={styles.bottomSectionContainer}>
       <div>
         <div className={styles.bottomLinks}>
-          <Link href="/sitemap" prefetch={false}>
+          <Link href="/sitemap" prefetch={false} isHidden>
             {t('sitemap')}
           </Link>
           <Link href="/privacy" prefetch={false}>

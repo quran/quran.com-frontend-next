@@ -23,6 +23,7 @@ type LinkProps = {
   passHref?: boolean;
   isShallow?: boolean;
   prefetch?: boolean;
+  isHidden?: boolean;
 };
 
 const Link: React.FC<LinkProps> = ({
@@ -36,6 +37,7 @@ const Link: React.FC<LinkProps> = ({
   passHref,
   isShallow = false,
   prefetch = true,
+  isHidden = false,
 }) => (
   <Wrapper
     shouldWrap={!download}
@@ -60,6 +62,7 @@ const Link: React.FC<LinkProps> = ({
         [styles.primary]: variant === LinkVariant.Primary,
         [styles.secondary]: variant === LinkVariant.Secondary,
         [styles.blend]: variant === LinkVariant.Blend,
+        [styles.hidden]: isHidden,
       })}
       {...(onClick && { onClick })}
     >

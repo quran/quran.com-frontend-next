@@ -2,6 +2,9 @@
   text-decoration: none;
   color: inherit;
 }
+.hidden {
+  display: none;
+}
 // variants
 .highlight {
   color: var(--color-text-link);
