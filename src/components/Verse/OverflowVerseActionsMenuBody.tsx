@@ -159,6 +159,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         chapterId={Number(verse.chapterId)}
         verseNumber={verse.verseNumber}
         isTranslationView={isTranslationView}
+        onActionTriggered={onActionTriggered}
       />
 
       <PopoverMenu.Item
