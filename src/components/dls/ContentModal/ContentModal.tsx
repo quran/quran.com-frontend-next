@@ -1,6 +1,7 @@
 import { useEffect, useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../public/icons/close.svg';
@@ -20,6 +21,7 @@ type ContentModalProps = {
   url?: string;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
+  contentClassName?: string;
   // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
 };
 
@@ -32,6 +34,7 @@ const ContentModal = ({
   url,
   header,
   innerRef,
+  contentClassName,
 }: ContentModalProps) => {
   const router = useRouter();
 
@@ -70,7 +73,13 @@ const ContentModal = ({
             }
           }}
         >
-          <Dialog.Content className={styles.contentWrapper} onEscapeKeyDown={onEscapeKeyDown}>
+          <Dialog.Content
+            className={classNames(styles.contentWrapper, {
+              [contentClassName]: contentClassName,
+            })}
+            onEscapeKeyDown={onEscapeKeyDown}
+            onPointerDownOutside={onClose}
+          >
             <div className={styles.header}>
               {header}
               {hasCloseButton && (
