@@ -15,7 +15,7 @@ import {
 } from 'src/redux/slices/QuranReader/styles';
 import { logValueChange } from 'src/utils/eventLogger';
 
-type Props = {
+type TafsirTextProps = {
   direction: string;
   languageCode: string;
   text: string;
@@ -29,7 +29,7 @@ const FONT_SIZE_CLASS_MAP = {
   5: styles.xl,
 };
 
-const TafsirText: React.FC<Props> = ({ direction, languageCode, text }) => {
+const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const { tafsirFontScale } = quranReaderStyles;
