@@ -14,7 +14,6 @@ import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranRead
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type Props = {
@@ -27,7 +26,6 @@ type Props = {
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
-  quranReaderDataType: QuranReaderDataType;
 };
 
 const getPageVersesRange = (
@@ -58,7 +56,6 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
-  quranReaderDataType,
 }: Props): JSX.Element => {
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
@@ -66,8 +63,7 @@ const PageContainer: React.FC<Props> = ({
     pageIndex === 0 &&
     quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
     isUsingDefaultReciter &&
-    isUsingDefaultWordByWordLocale &&
-    quranReaderDataType !== QuranReaderDataType.Juz;
+    isUsingDefaultWordByWordLocale;
   const { data: verses, isValidating } = useSWRImmutable(
     getReaderViewRequestKey({
       pageNumber,
