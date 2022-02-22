@@ -4,12 +4,6 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import {
-  verseFontChanged,
-  verseTranslationChanged,
-  verseTranslationFontChanged,
-} from '../utils/memoization';
-
 import BookmarkIcon from './BookmarkIcon';
 import QuranReflectButton from './QuranReflectButton';
 import ShareVerseButton from './ShareVerseButton';
@@ -17,6 +11,11 @@ import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
 import Separator from 'src/components/dls/Separator/Separator';
+import {
+  verseFontChanged,
+  verseTranslationChanged,
+  verseTranslationFontChanged,
+} from 'src/components/QuranReader/utils/memoization';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
