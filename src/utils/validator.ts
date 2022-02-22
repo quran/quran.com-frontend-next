@@ -45,9 +45,10 @@ export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
   const verseIdNumber = Number(verseId);
   // is not a valid number, below 1 or above the maximum number of verses for the chapter.
   if (Number.isNaN(verseIdNumber) || verseIdNumber < 1) {
-    if (!getChapterData(chapterId) || verseIdNumber > getChapterData(chapterId).versesCount) {
-      return false;
-    }
+    return false;
+  }
+  if (!getChapterData(chapterId) || verseIdNumber > getChapterData(chapterId).versesCount) {
+    return false;
   }
   return true;
 };
