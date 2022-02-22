@@ -5,6 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './ReadingViewSkeleton.module.scss';
 
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import VersePreview from 'src/components/Navbar/SettingsDrawer/VersePreview';
 import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -27,7 +28,11 @@ const ReadingViewSkeleton = () => {
           className={classNames(styles.skeleton, [
             verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)],
           ])}
-        />
+        >
+          {/* <span className={styles.versePreviewContainer}> */}
+          <VersePreview />
+          {/* </span> */}
+        </Skeleton>
       ))}
     </div>
   );
