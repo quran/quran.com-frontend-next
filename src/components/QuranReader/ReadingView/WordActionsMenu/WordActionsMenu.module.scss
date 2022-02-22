@@ -9,9 +9,5 @@
   line-height: var(--spacing-micro);
   & button {
     width: var(--spacing-mega) !important;
-    &:hover {
-      // important is needed to override the default styling of the popover when hovering
-      background-color: var(--color-background-inverse) !important;
-    }
   }
 }
