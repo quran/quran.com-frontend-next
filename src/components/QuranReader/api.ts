@@ -15,7 +15,7 @@ import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
-interface RequestKeyInput {
+interface TranslationViewRequestKeyInput {
   quranReaderDataType: QuranReaderDataType;
   pageNumber: number;
   initialData: VersesResponse;
@@ -44,7 +44,7 @@ interface ReadingViewRequestKeyInput {
  *
  * @returns {string}
  */
-export const getRequestKey = ({
+export const getTranslationViewRequestKey = ({
   id,
   isVerseData,
   initialData,
@@ -55,7 +55,7 @@ export const getRequestKey = ({
   reciter,
   locale,
   wordByWordLocale,
-}: RequestKeyInput): string => {
+}: TranslationViewRequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page = isVerseData ? initialData.verses[0].verseNumber : pageNumber;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
@@ -66,6 +66,7 @@ export const getRequestKey = ({
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      perPage: initialData.pagination.perPage,
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {

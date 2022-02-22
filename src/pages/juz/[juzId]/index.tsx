@@ -71,6 +71,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       juzNumber: Number(juzId),
       mushaf: defaultMushafId,
     });
+    const firstPageOfJuz = Object.keys(pagesLookupResponse.pages)[0];
+    const firstPageOfJuzLookup = pagesLookupResponse.pages[firstPageOfJuz];
     const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
       pagesLookupResponse.lookupRange.from,
       pagesLookupResponse.lookupRange.to,
@@ -78,6 +80,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const juzVersesResponse = await getJuzVerses(juzId, locale, {
       ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
       mushaf: defaultMushafId,
+      perPage: 'all',
+      from: firstPageOfJuzLookup.from,
+      to: firstPageOfJuzLookup.to,
     });
     const metaData = { numberOfVerses };
     juzVersesResponse.metaData = metaData;

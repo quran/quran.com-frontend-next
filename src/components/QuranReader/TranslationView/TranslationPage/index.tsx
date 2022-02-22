@@ -7,7 +7,7 @@ import useSWRImmutable from 'swr/immutable';
 import styles from '../TranslationView.module.scss';
 
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import { getRequestKey, verseFetcher } from 'src/components/QuranReader/api';
+import { getTranslationViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
 import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
 import TranslationViewSkeleton from 'src/components/QuranReader/TranslationView/TranslationViewSkeleton';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
@@ -29,7 +29,6 @@ interface Props {
   reciterId: number;
   initialData: VersesResponse;
   resourceId: number | string;
-  versesPerPage: number;
 }
 
 const TranslationPage: React.FC<Props> = ({
@@ -42,7 +41,6 @@ const TranslationPage: React.FC<Props> = ({
   initialData,
   resourceId,
   setApiPageToVersesMap,
-  versesPerPage,
 }) => {
   const { lang } = useTranslation();
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
@@ -53,10 +51,9 @@ const TranslationPage: React.FC<Props> = ({
     quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
     isUsingDefaultReciter &&
     isUsingDefaultWordByWordLocale &&
-    isUsingDefaultTranslations &&
-    quranReaderDataType !== QuranReaderDataType.Juz;
+    isUsingDefaultTranslations;
   const { data: verses } = useSWRImmutable(
-    getRequestKey({
+    getTranslationViewRequestKey({
       quranReaderDataType,
       pageNumber,
       initialData,
@@ -86,13 +83,13 @@ const TranslationPage: React.FC<Props> = ({
   }, [pageNumber, setApiPageToVersesMap, verses]);
 
   if (!verses) {
-    return <TranslationViewSkeleton numberOfSkeletons={versesPerPage} />;
+    return <TranslationViewSkeleton numberOfSkeletons={initialData.pagination.perPage} />;
   }
   return (
     <div className={styles.container}>
       {verses.map((verse, index) => {
         const currentVerseIndex =
-          pageNumber === 1 ? index : index + (pageNumber - 1) * versesPerPage;
+          pageNumber === 1 ? index : index + (pageNumber - 1) * initialData.pagination.perPage;
         return (
           <div key={currentVerseIndex}>
             {verse.verseNumber === 1 && (

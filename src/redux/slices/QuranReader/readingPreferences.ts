@@ -68,7 +68,7 @@ export const {
   setWordClickFunctionality,
 } = readingPreferencesSlice.actions;
 
-export const selectWordByWordByWordPreferences = (state: RootState) => ({
+export const selectWordByWordPreferences = (state: RootState) => ({
   showWordByWordTranslation: state.readingPreferences.showWordByWordTranslation,
   selectedWordByWordTranslation: state.readingPreferences.selectedWordByWordTranslation,
   showWordByWordTransliteration: state.readingPreferences.showWordByWordTransliteration,
