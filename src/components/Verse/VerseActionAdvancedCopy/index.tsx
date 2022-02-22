@@ -19,7 +19,7 @@ import Verse from 'types/Verse';
 type VerseActionAdvancedCopyProps = {
   verse: Verse;
   isTranslationView: boolean;
-  onActionTriggered: () => void;
+  onActionTriggered?: () => void;
 };
 
 const CLOSE_POPOVER_AFTER_MS = 150;
@@ -39,10 +39,12 @@ const VerseActionAdvancedCopy = ({
       `${isTranslationView ? 'translation_view' : 'reading_view'}_advanced_copy_modal_close`,
     );
     setIsModalOpen(false);
-    setTimeout(() => {
-      // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
-      onActionTriggered();
-    }, CLOSE_POPOVER_AFTER_MS);
+    if (onActionTriggered) {
+      setTimeout(() => {
+        // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
+        onActionTriggered();
+      }, CLOSE_POPOVER_AFTER_MS);
+    }
   };
 
   const onModalOpen = () => {

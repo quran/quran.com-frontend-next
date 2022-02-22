@@ -12,6 +12,7 @@ import SurahAndAyahSelection from './SurahAndAyahSelection';
 import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
 import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirSkeleton from './TafsirSkeleton';
+import TafsirText from './TafsirText';
 import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
@@ -183,12 +184,7 @@ const TafsirBody = ({
           <div className={styles.separatorContainer}>
             <Separator />
           </div>
-          <div
-            dir={langData.direction}
-            lang={langData.code}
-            dangerouslySetInnerHTML={{ __html: text }}
-          />
-
+          <TafsirText direction={langData.direction} languageCode={langData.code} text={text} />
           <TafsirEndOfScrollingActions
             hasNextVerseGroup={hasNextVerseGroup}
             hasPrevVerseGroup={hasPrevVerseGroup}
