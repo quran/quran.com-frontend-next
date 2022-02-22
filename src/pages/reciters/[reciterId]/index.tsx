@@ -41,7 +41,7 @@ const filterChapters = (chapters, searchQuery: string) => {
 };
 
 type ReciterPageProps = { selectedReciter: Reciter };
-const Reciterpage = ({ selectedReciter }: ReciterPageProps) => {
+const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
   const allChapterData = getAllChaptersData();
   const { t, lang } = useTranslation();
 
@@ -129,4 +129,4 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
 });
 
-export default Reciterpage;
+export default ReciterPage;
