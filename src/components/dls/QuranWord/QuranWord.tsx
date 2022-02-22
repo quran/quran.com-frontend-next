@@ -124,9 +124,12 @@ const QuranWord = ({
     }
   }, [audioData, word, wordClickFunctionality]);
 
+  const shouldHandleWordClicking =
+    readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;
+
   return (
     <div
-      {...(readingPreference === ReadingPreference.Translation && { onClick, onKeyPress: onClick })}
+      {...(shouldHandleWordClicking && { onClick, onKeyPress: onClick })}
       role="button"
       tabIndex={0}
       {...{
