@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 
@@ -22,7 +23,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [isbioTruncated, setIsBioTruncated] = useState(true);
+  const [isBioTruncated, setIsBioTruncated] = useState(true);
 
   const onPlayReciterStation = () => {
     logEvent('reciter_page_play_station');
@@ -30,7 +31,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   };
 
   const bio =
-    isbioTruncated && selectedReciter?.bio?.length > maxBioLength
+    isBioTruncated && selectedReciter?.bio?.length > maxBioLength
       ? truncateText(selectedReciter?.bio, maxBioLength)
       : selectedReciter?.bio;
 
@@ -46,7 +47,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
       <div>
         <div className={styles.reciterName}>{selectedReciter?.name}</div>
         <div className={styles.reciterBio}>
-          {bio}
+          <span dangerouslySetInnerHTML={{ __html: bio }} />
           {selectedReciter?.bio.length > maxBioLength && (
             <span
               className={styles.moreLessButton}
@@ -55,7 +56,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
               onKeyPress={() => setIsBioTruncated((isTruncated) => !isTruncated)}
               onClick={() => setIsBioTruncated((isTruncated) => !isTruncated)}
             >
-              {isbioTruncated ? t('common:more') : t('common:less')}
+              {isBioTruncated ? t('common:more') : t('common:less')}
             </span>
           )}
         </div>
