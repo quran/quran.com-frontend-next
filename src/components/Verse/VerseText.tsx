@@ -11,7 +11,7 @@ import styles from './VerseText.module.scss';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
-import { selectWordByWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import {
   selectReadingViewSelectedVerseKey,
   selectReadingViewHoveredVerseKey,
@@ -52,7 +52,7 @@ const VerseText = ({
   }, [firstWord.pageNumber, loadedFonts, quranFont]);
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);

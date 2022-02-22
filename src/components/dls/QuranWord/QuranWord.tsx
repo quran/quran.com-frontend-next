@@ -22,7 +22,7 @@ import {
   selectWordClickFunctionality,
   selectReadingPreference,
   selectShowTooltipFor,
-  selectWordByWordByWordPreferences,
+  selectWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
@@ -67,7 +67,7 @@ const QuranWord = ({
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const readingPreference = useSelector(selectReadingPreference);
