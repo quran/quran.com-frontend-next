@@ -82,7 +82,6 @@ const TranslationView = ({
         reciterId={reciterId}
         initialData={initialData}
         resourceId={resourceId}
-        versesPerPage={initialData.pagination.perPage}
       />
     );
   };
