@@ -12,7 +12,7 @@ import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import {
   setShowWordByWordTranslation,
   setShowWordByWordTransliteration,
-  selectWordByWordByWordPreferences,
+  selectWordByWordPreferences,
   selectWordByWordLocale,
   setSelectedWordByWordLocale,
 } from 'src/redux/slices/QuranReader/readingPreferences';
@@ -29,7 +29,7 @@ const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordByWordPreferences,
+    selectWordByWordPreferences,
     shallowEqual,
   );
   const wordByWordLocale = useSelector(selectWordByWordLocale);
