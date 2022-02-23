@@ -15,5 +15,6 @@
     margin-block-start: constants.$reading-view-container-top-margin;
   }
   margin-block-start: var(--spacing-xsmall);
+  height: calc(1.5 * var(--font-size));
   height: var(--skeleton-height);
 }
