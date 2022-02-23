@@ -20,6 +20,7 @@ type Props = {
   words: Word[];
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
+  isReadingMode?: boolean;
 };
 
 /**
@@ -34,6 +35,7 @@ const PlainVerseText: React.FC<Props> = ({
   words,
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
+  isReadingMode,
 }: Props): JSX.Element => {
   const loadedFonts = useSelector(selectLoadedFontFaces);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
@@ -45,7 +47,8 @@ const PlainVerseText: React.FC<Props> = ({
     !isQcfFont || loadedFonts.includes(`p${words[0].pageNumber}-${quranFont.replace('code_', '')}`);
   return (
     <div
-      className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
+      className={classNames(styles.verseTextContainer, {
+        [styles.tafsirOrTranslationMode]: !isReadingMode,
         [styles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
           quranFont !== QuranFont.Tajweed,
       })}

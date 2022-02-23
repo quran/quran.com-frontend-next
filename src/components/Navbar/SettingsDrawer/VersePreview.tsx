@@ -67,7 +67,7 @@ const VersePreview = () => {
 
   return (
     <div dir="rtl">
-      <PlainVerseText words={verse.words as Word[]} />
+      <PlainVerseText words={verse.words as Word[]} isReadingMode />
     </div>
   );
 };

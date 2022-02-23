@@ -101,7 +101,7 @@ const PageContainer: React.FC<Props> = ({
   if (!pageVerses || isValidating) {
     return <ReadingViewSkeleton />;
   }
-  // return <ReadingViewSkeleton />;
+  return <ReadingViewSkeleton />;
 
   return (
     <Page
