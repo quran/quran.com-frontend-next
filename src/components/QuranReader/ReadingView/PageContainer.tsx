@@ -8,7 +8,6 @@ import { getReaderViewRequestKey, verseFetcher } from '../api';
 import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -20,12 +19,12 @@ type Props = {
   pagesVersesRange: Record<number, LookupRecord>;
   quranReaderStyles: QuranReaderStyles;
   reciterId: number;
-  pageNumber: number;
   lang: string;
   wordByWordLocale: string;
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
+  isUsingDefaultFont: boolean;
 };
 
 const getPageVersesRange = (
@@ -33,11 +32,36 @@ const getPageVersesRange = (
   apiPagesVersesRange: Record<number, LookupRecord>,
 ): LookupRecord => {
   const lookupRecord = { ...apiPagesVersesRange[currentMushafPage] };
+  // TODO: remove this from BE
   // we remove firstVerseKey and lastVerseKey before we send the params to BE as BE doesn't need them
   delete lookupRecord.firstVerseKey;
   delete lookupRecord.lastVerseKey;
   return lookupRecord;
 };
+
+/**
+ * Get the current page number this is calculated by added the pageIndex
+ * to the page number of the first page of the current resource e.g. chapterId.
+ * (when we are not using the default font, the first page number of the resource
+ * will change based on the mushaf so we will resort to using pagesVersesRange of
+ * the selected Mushaf instead of the initialData instead.
+ * )
+ *
+ * @param {VersesResponse} initialData
+ * @param {number} pageIndex
+ * @param {boolean} isUsingDefaultFont
+ * @param {Record<number, LookupRecord>} pagesVersesRange
+ * @returns {number}
+ */
+const getPageNumber = (
+  initialData: VersesResponse,
+  pageIndex: number,
+  isUsingDefaultFont: boolean,
+  pagesVersesRange: Record<number, LookupRecord>,
+): number =>
+  isUsingDefaultFont
+    ? initialData.verses[0].pageNumber + pageIndex
+    : Number(Object.keys(pagesVersesRange)[0]) + pageIndex;
 
 /**
  * A component that will fetch the verses of the current mushaf page
@@ -52,16 +76,17 @@ const PageContainer: React.FC<Props> = ({
   reciterId,
   lang,
   wordByWordLocale,
-  pageNumber,
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
+  isUsingDefaultFont,
 }: Props): JSX.Element => {
+  const pageNumber = getPageNumber(initialData, pageIndex, isUsingDefaultFont, pagesVersesRange);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const shouldUseInitialData =
     pageIndex === 0 &&
-    quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+    isUsingDefaultFont &&
     isUsingDefaultReciter &&
     isUsingDefaultWordByWordLocale;
   const { data: verses, isValidating } = useSWRImmutable(
