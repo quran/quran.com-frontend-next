@@ -86,6 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     });
     const metaData = { numberOfVerses };
     juzVersesResponse.metaData = metaData;
+    juzVersesResponse.pagesLookup = pagesLookupResponse;
     return {
       props: {
         juzVerses: juzVersesResponse,
