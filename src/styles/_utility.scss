@@ -355,7 +355,7 @@ $skeleton-height-map: (
 );
 
 // for now, we're only doing fixed witdth for tablet & desktop.
-// becaues mobile is relatively more stable compared to desktop
+// because mobile is relatively more stable compared to desktop
 // TODO: implement fixed on mobile as well
 $line-width-map: (
   tajweed: (
@@ -397,10 +397,10 @@ $line-width-map: (
   code_v1: (
     tablet: (
       1: 54vh,
-      2: 54vh,
-      3: 56vh,
-      4: 61vh,
-      5: 62vh,
+      2: 56.5vh,
+      3: 59.5vh,
+      4: 63vh,
+      5: 66vh,
     ),
   ),
 );
