@@ -48,6 +48,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
           key={key}
           isBigTextLayout={isBigTextLayout}
           quranReaderStyles={quranReaderStyles}
+          isFixedWidth
         />
       ))}
       <PageFooter page={pageNumber} />

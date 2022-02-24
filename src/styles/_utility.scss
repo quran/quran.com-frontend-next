@@ -105,6 +105,7 @@ $line-heights-map: (
   ),
 );
 
+// TODO: rename to $font-size-scales-map
 $scales-map: (
   //TODO: rename qpc_uthmani_hafs to text_qpc_hafs
   qpc_uthmani_hafs:
@@ -353,6 +354,67 @@ $skeleton-height-map: (
   ),
 );
 
+// for now, we're only doing fixed witdth for tablet & desktop.
+// becaues mobile is relatively more stable compared to desktop
+// TODO: implement fixed on mobile as well
+$line-width-map: (
+  tajweed: (
+    desktop: (
+      1: calc(12 * var(--spacing-mega)),
+      2: calc(15 * var(--spacing-mega)),
+      3: calc(17 * var(--spacing-mega)),
+      4: calc(20.5 * var(--spacing-mega)),
+      5: calc(28.5 * var(--spacing-mega)),
+    ),
+  ),
+  qpc_uthmani_hafs: (
+    j desktop:
+      (
+        1: calc(18 * var(--spacing-mega)),
+        2: calc(19 * var(--spacing-mega)),
+        3: calc(22 * var(--spacing-mega)),
+        4: calc(22.5 * var(--spacing-mega)),
+        5: calc(25.5 * var(--spacing-mega)),
+      ),
+  ),
+  text_indopak: (
+    desktop: (
+      1: calc(18 * var(--spacing-mega)),
+      2: calc(18.5 * var(--spacing-mega)),
+      3: calc(19 * var(--spacing-mega)),
+      4: calc(21 * var(--spacing-mega)),
+      5: calc(23 * var(--spacing-mega)),
+    ),
+  ),
+  code_v2: (
+    desktop: (
+      1: calc(15.5 * var(--spacing-mega)),
+      2: calc(16 * var(--spacing-mega)),
+      3: calc(17.5 * var(--spacing-mega)),
+      4: calc(18.5 * var(--spacing-mega)),
+      5: calc(19.5 * var(--spacing-mega)),
+    ),
+  ),
+  code_v1: (
+    desktop: (
+      1: calc(17 * var(--spacing-mega)),
+      2: calc(18 * var(--spacing-mega)),
+      3: calc(19 * var(--spacing-mega)),
+      4: calc(20 * var(--spacing-mega)),
+      5: calc(21 * var(--spacing-mega)),
+    ),
+  ),
+  default: (
+    desktop: (
+      1: 4.57vh,
+      2: 4.57vh,
+      3: 4.65vh,
+      4: 4.56vh,
+      5: 4.63vh,
+    ),
+  ),
+);
+
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
     $map: map-get($map, $key);
@@ -362,6 +424,33 @@ $skeleton-height-map: (
 
 @function get-scales($name, $device-type, $map) {
   @return map-deep-get($map, $name, $device-type);
+}
+
+// generate line-width based on font type, font-scale, and screen width;
+@mixin generate-line-width-scales($name) {
+  $mobile-scales: get-scales($name, "mobile", $line-width-map);
+  $tablet-scales: get-scales($name, "tablet", $line-width-map);
+  $desktop-scales: get-scales($name, "desktop", $line-width-map);
+
+  @for $i from 1 through constants.$maximum-font-step {
+    .#{$name}-line-width-#{$i} {
+      @if $mobile-scales != null and map.has-key($tablet-scales, $i) {
+        --line-width: #{map.get($mobile-scales, $i)};
+      }
+
+      @if $tablet-scales != null and map.has-key($tablet-scales, $i) {
+        @include breakpoints.tablet {
+          --line-width: #{map.get($tablet-scales, $i)};
+        }
+      }
+
+      @if $desktop-scales != null and map.has-key($desktop-scales, $i) {
+        @include breakpoints.desktop {
+          --line-width: #{map.get($desktop-scales, $i)};
+        }
+      }
+    }
+  }
 }
 
 @mixin generate-font-scales($name) {

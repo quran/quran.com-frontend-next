@@ -80,3 +80,13 @@ export const getFontClassName = (
   }
   return `${quranFont}-font-size-${fontScale}`;
 };
+
+/**
+ * Dynamically generate the className of the combination between the font
+ * name + size that will match the output of
+ * generate-font-scales function inside {@see _utility.scss}.
+ */
+
+export const getLineWidthClassName = (quranFont, fontScale) => {
+  return `${quranFont}-line-width-${fontScale}`;
+};

@@ -5,7 +5,7 @@
 .verseText {
   display: flex;
   align-items: center;
-  height: calc(1.5 * var(--font-size));
+  line-height: var(--line-height);
 }
 .verseTextContainer {
   display: block;

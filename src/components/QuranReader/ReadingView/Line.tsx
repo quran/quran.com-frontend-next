@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, memo } from 'react';
 
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { verseFontChanged } from '../utils/memoization';
 
@@ -12,7 +12,9 @@ import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getLineWidthClassName } from 'src/utils/fontFaceHelper';
 import { getWordDataByLocation } from 'src/utils/verse';
 import Word from 'types/Word';
 
@@ -23,9 +25,17 @@ export type LineProps = {
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
+  isFixedWidth?: boolean;
 };
 
-const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
+const Line = ({
+  lineKey,
+  words,
+  isBigTextLayout,
+  pageIndex,
+  lineIndex,
+  isFixedWidth,
+}: LineProps) => {
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
@@ -40,6 +50,11 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
 
+  const { quranFont, quranTextFontScale } = useSelector(
+    selectQuranReaderStyles,
+    shallowEqual,
+  ) as QuranReaderStyles;
+
   return (
     <div
       ref={selectedItemRef}
@@ -47,6 +62,8 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       className={classNames(styles.container, {
         [styles.highlighted]: isHighlighted,
         [styles.mobileInline]: isBigTextLayout,
+        [styles[getLineWidthClassName(quranFont, quranTextFontScale)]]: isFixedWidth,
+        [getLineWidthClassName(quranFont, quranTextFontScale)]: true,
       })}
     >
       {shouldShowChapterHeader && (
@@ -56,7 +73,11 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
           hizbNumber={words[0].hizbNumber}
         />
       )}
-      <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
+      <div
+        className={classNames(styles.line, {
+          [styles.mobileInline]: isBigTextLayout,
+        })}
+      >
         <VerseText
           words={words}
           isReadingMode
