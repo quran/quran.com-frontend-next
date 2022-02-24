@@ -148,6 +148,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     mushaf: defaultMushafId,
   };
   let numberOfVerses = 1;
+  let pagesLookupResponse = null;
   try {
     // if it's a verseKey
     if (!isChapter) {
@@ -156,8 +157,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chapterId = extractedChapterId;
       // only get 1 verse
       apiParams = { ...apiParams, ...{ page: verseNumber, perPage: 1 } };
+      pagesLookupResponse = await getPagesLookup({
+        chapterNumber: Number(chapterId),
+        mushaf: defaultMushafId,
+        from: chapterIdOrVerseKeyOrSlug,
+        to: chapterIdOrVerseKeyOrSlug,
+      });
     } else {
-      const pagesLookupResponse = await getPagesLookup({
+      pagesLookupResponse = await getPagesLookup({
         chapterNumber: Number(chapterId),
         mushaf: defaultMushafId,
       });
@@ -180,6 +187,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const versesResponse = await getChapterVerses(chapterId, locale, apiParams);
     const metaData = { numberOfVerses };
     versesResponse.metaData = metaData;
+    versesResponse.pagesLookup = pagesLookupResponse;
     return {
       props: {
         chapterResponse: { chapter: { ...getChapterData(chapterId, locale), id: chapterId } },

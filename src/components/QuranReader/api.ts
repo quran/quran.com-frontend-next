@@ -3,14 +3,9 @@
 import { fetcher } from 'src/api';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import {
-  makeJuzVersesUrl,
-  makePageVersesUrl,
-  makeVersesUrl,
-  makePagesLookupUrl,
-} from 'src/utils/apiPaths';
+import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { PagesLookUpRequest } from 'types/ApiRequests';
-import { PagesLookUpResponse, VersesResponse } from 'types/ApiResponses';
+import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -123,7 +118,7 @@ export const getReaderViewRequestKey = ({
   });
 };
 
-const getPagesLookupParams = (
+export const getPagesLookupParams = (
   resourceId: number | string,
   quranReaderDataType: QuranReaderDataType,
   mushafId: number,
@@ -162,18 +157,6 @@ const getPagesLookupParams = (
   }
   return params;
 };
-
-export const fetchResourceMushafPagesDetails = (
-  resourceId: number | string,
-  quranReaderDataType: QuranReaderDataType,
-  mushafId: number,
-  initialData: VersesResponse,
-): Promise<PagesLookUpResponse> =>
-  fetcher(
-    makePagesLookupUrl(
-      getPagesLookupParams(resourceId, quranReaderDataType, mushafId, initialData),
-    ),
-  );
 
 /**
  * A custom fetcher that returns the verses array from the api result.

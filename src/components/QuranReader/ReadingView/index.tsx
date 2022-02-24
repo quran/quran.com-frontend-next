@@ -16,7 +16,7 @@ import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import useFetchPagesCount from 'src/components/QuranReader/hooks/useFetchTotalPages';
+import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
@@ -76,11 +76,12 @@ const ReadingView = ({
     QueryParam.WBW_LOCALE,
   );
   useQcfFont(quranReaderStyles.quranFont, verses);
-  const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesCount(
+  const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesLookup(
     resourceId,
     quranReaderDataType,
     initialData,
     quranReaderStyles,
+    isUsingDefaultFont,
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(
@@ -154,8 +155,6 @@ const ReadingView = ({
     }
   };
 
-  //  if the user is not using the default font, we should wait until pagesLookup API finishes loading since we need it to determine the correct pageNumber that we will page to the API
-  const isLoadingMushafPagesLookup = !isUsingDefaultFont && isLoading;
   return (
     <>
       <QueryParamMessage
@@ -164,7 +163,7 @@ const ReadingView = ({
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
       <div onCopy={(event) => onCopyQuranWords(event, verses)} className={styles.container}>
-        {isLoadingMushafPagesLookup ? (
+        {isLoading ? (
           <div className={styles.virtuosoScroller}>
             <ReadingViewSkeleton />
           </div>

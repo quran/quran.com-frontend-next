@@ -4,7 +4,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getPageVerses } from 'src/api';
+import { getPagesLookup, getPageVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
@@ -61,19 +61,25 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       notFound: true,
     };
   }
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
   try {
     const pageVersesResponse = await getPageVerses(pageId, locale, {
       perPage: 'all',
+      mushaf: defaultMushafId,
       ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-      ...getMushafId(
-        getQuranReaderStylesInitialState(locale).quranFont,
-        getQuranReaderStylesInitialState(locale).mushafLines,
-      ),
+    });
+    const pagesLookupResponse = await getPagesLookup({
+      pageNumber: Number(pageId),
+      mushaf: defaultMushafId,
     });
     return {
       props: {
         pageVerses: {
           ...pageVersesResponse,
+          pagesLookup: pagesLookupResponse,
           metaData: { numberOfVerses: pageVersesResponse.verses.length },
         },
       },
