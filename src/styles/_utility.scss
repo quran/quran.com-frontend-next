@@ -375,6 +375,13 @@ $line-width-map: (
       4: calc(22.5 * var(--spacing-mega)),
       5: calc(25.5 * var(--spacing-mega)),
     ),
+    tablet: (
+      1: calc(18 * var(--spacing-mega)),
+      2: calc(20.5 * var(--spacing-mega)),
+      3: calc(23 * var(--spacing-mega)),
+      4: calc(22.5 * var(--spacing-mega)),
+      5: calc(25 * var(--spacing-mega)),
+    ),
   ),
   text_indopak: (
     desktop: (
