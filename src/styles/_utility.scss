@@ -403,15 +403,6 @@ $line-width-map: (
       5: 62vh,
     ),
   ),
-  default: (
-    desktop: (
-      1: 4.57vh,
-      2: 4.57vh,
-      3: 4.65vh,
-      4: 4.56vh,
-      5: 4.63vh,
-    ),
-  ),
 );
 
 @function map-deep-get($map, $keys...) {
