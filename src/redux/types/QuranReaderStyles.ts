@@ -6,6 +6,7 @@ type QuranReaderStyles = {
   quranTextFontScale: number;
   quranFont: QuranFont;
   mushafLines: MushafLines;
+  isUsingDefaultFont: boolean;
 };
 
 export default QuranReaderStyles;

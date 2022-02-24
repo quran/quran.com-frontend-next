@@ -10,9 +10,9 @@ import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import { getTranslationViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
 import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
 import TranslationViewSkeleton from 'src/components/QuranReader/TranslationView/TranslationViewSkeleton';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
@@ -46,9 +46,10 @@ const TranslationPage: React.FC<Props> = ({
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
+  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const shouldUseInitialData =
     pageNumber === 1 &&
-    quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+    isUsingDefaultFont &&
     isUsingDefaultReciter &&
     isUsingDefaultWordByWordLocale &&
     isUsingDefaultTranslations;

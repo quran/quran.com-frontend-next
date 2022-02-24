@@ -29,6 +29,7 @@ const useFetchPagesCount = (
   hasError: boolean;
   pagesVersesRange: Record<number, LookupRecord>;
   lookupRange: LookupRange;
+  isLoading: boolean;
 } => {
   const [pagesDetails, setPagesDetails] = useState({
     pagesCount: 1,
@@ -36,7 +37,10 @@ const useFetchPagesCount = (
     lookupRange: { from: '1:1', to: '1:1' },
   });
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
+    setIsLoading(true);
     setHasError(false);
     fetchResourceMushafPagesDetails(
       resourceId,
@@ -53,6 +57,9 @@ const useFetchPagesCount = (
       })
       .catch(() => {
         setHasError(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [
     resourceId,
@@ -66,6 +73,7 @@ const useFetchPagesCount = (
     pagesVersesRange: pagesDetails.pages,
     lookupRange: pagesDetails.lookupRange,
     hasError,
+    isLoading,
   };
 };
 

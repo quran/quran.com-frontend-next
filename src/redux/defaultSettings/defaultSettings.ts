@@ -57,6 +57,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   translationFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
+  isUsingDefaultFont: true,
 };
 
 const DEFAULT_WBW_TRANSLATION = 20;

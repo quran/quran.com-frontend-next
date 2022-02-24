@@ -19,8 +19,10 @@ import styles from './TafsirView.module.scss';
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import {
+  selectIsUsingDefaultFont,
+  selectQuranReaderStyles,
+} from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
@@ -69,6 +71,7 @@ const TafsirBody = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
   const { lang } = useTranslation();
   const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -201,7 +204,7 @@ const TafsirBody = ({
   const shouldUseInitialTafsirData = useMemo(
     () =>
       initialTafsirData &&
-      quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+      isUsingDefaultFont &&
       Object.keys(initialTafsirData.tafsir.verses).includes(
         makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
       ) &&
@@ -209,11 +212,10 @@ const TafsirBody = ({
         Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId),
     [
       initialTafsirData,
-      quranReaderStyles.quranFont,
+      isUsingDefaultFont,
       selectedChapterId,
       selectedTafsirIdOrSlug,
       selectedVerseNumber,
-      lang,
     ],
   );
 
