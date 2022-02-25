@@ -197,9 +197,6 @@ const ReadingView = ({
             }}
           />
         )}
-        <div className={styles.virtuosoScroller}>
-          <ReadingViewSkeleton />
-        </div>
       </div>
       <PageNavigationButtons
         scrollToNextPage={scrollToNextPage}
