@@ -8,8 +8,10 @@ import Line from './Line';
 import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
+import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getLineWidthClassName, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -25,7 +27,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
     () => (verses && verses.length ? groupLinesByVerses(verses) : {}),
     [verses],
   );
-  const { quranTextFontScale, quranFont } = quranReaderStyles;
+  const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordPreferences,
     shallowEqual,
@@ -33,11 +35,25 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   const isBigTextLayout =
     isWordByWordLayout || quranTextFontScale > 3 || quranFont === QuranFont.Tajweed;
+  const loadedFonts = useSelector(selectLoadedFontFaces);
+
+  const isFontLoaded = useMemo(() => {
+    if (!isQCFFont(quranFont)) {
+      return true;
+    }
+    return loadedFonts.includes(`p${pageNumber}-${quranFont.replace('code_', '')}`);
+  }, [pageNumber, loadedFonts, quranFont]);
+
+  const fallbackFont = QuranFont.QPCHafs;
 
   return (
     <div
       id={`page-${pageNumber}`}
-      className={classNames(styles.container, { [styles.mobileCenterText]: isBigTextLayout })}
+      className={classNames(styles.container, {
+        [styles.mobileCenterText]: isBigTextLayout,
+        [styles[getLineWidthClassName(fallbackFont, quranTextFontScale, mushafLines)]]:
+          !isFontLoaded,
+      })}
     >
       {Object.keys(lines).map((key, lineIndex) => (
         <Line
