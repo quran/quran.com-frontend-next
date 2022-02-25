@@ -91,6 +91,10 @@ const ReadingView = ({
     quranReaderStyles,
     verses,
     pagesVersesRange,
+    isUsingDefaultFont,
+    quranReaderStyles.quranFont,
+    quranReaderStyles.mushafLines,
+    isLoading,
   );
 
   const scrollToPreviousPage = useCallback(() => {
