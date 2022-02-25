@@ -3,6 +3,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -25,6 +26,7 @@ import Error from 'src/pages/_error';
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { getLineWidthClassName } from 'src/utils/fontFaceHelper';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -156,6 +158,7 @@ const ReadingView = ({
 
   //  if the user is not using the default font, we should wait until pagesLookup API finishes loading since we need it to determine the correct pageNumber that we will page to the API
   const isLoadingMushafPagesLookup = !isUsingDefaultFont && isLoading;
+  const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   return (
     <>
       <QueryParamMessage
@@ -163,7 +166,13 @@ const ReadingView = ({
         reciterQueryParamDifferent={reciterQueryParamDifferent}
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-      <div onCopy={(event) => onCopyQuranWords(event, verses)} className={styles.container}>
+      <div
+        onCopy={(event) => onCopyQuranWords(event, verses)}
+        className={classNames(
+          styles.container,
+          styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
+        )}
+      >
         {isLoadingMushafPagesLookup ? (
           <div className={styles.virtuosoScroller}>
             <ReadingViewSkeleton />
@@ -188,6 +197,9 @@ const ReadingView = ({
             }}
           />
         )}
+        <div className={styles.virtuosoScroller}>
+          <ReadingViewSkeleton />
+        </div>
       </div>
       <PageNavigationButtons
         scrollToNextPage={scrollToNextPage}

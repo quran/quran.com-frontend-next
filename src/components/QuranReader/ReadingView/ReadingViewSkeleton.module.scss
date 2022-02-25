@@ -8,7 +8,8 @@
 }
 
 .skeleton {
-  width: 100%;
+  width: var(--line-width);
+  margin-inline: auto;
   @include breakpoints.tablet {
     margin-block-start: constants.$reading-view-container-top-margin;
   }

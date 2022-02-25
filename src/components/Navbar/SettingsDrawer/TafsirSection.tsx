@@ -19,7 +19,6 @@ import {
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
@@ -29,7 +28,7 @@ import { TafsirsResponse } from 'types/ApiResponses';
 const TafsirSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { tafsirFontScale } = quranReaderStyles;
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
 

@@ -17,7 +17,6 @@ import {
   selectReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getFontClassName, isQCFFont } from 'src/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import { QuranFont } from 'types/QuranReader';
@@ -42,7 +41,7 @@ const VerseText = ({
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
-  ) as QuranReaderStyles;
+  );
   const [firstWord] = words;
   const isFontLoaded = useMemo(() => {
     if (!isQCFFont(quranFont)) {

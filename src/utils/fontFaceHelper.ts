@@ -87,6 +87,9 @@ export const getFontClassName = (
  * generate-font-scales function inside {@see _utility.scss}.
  */
 
-export const getLineWidthClassName = (quranFont, fontScale) => {
+export const getLineWidthClassName = (quranFont, fontScale, mushafLines) => {
+  if (quranFont === QuranFont.IndoPak) {
+    return `${quranFont}_${mushafLines}-line-width-${fontScale}`;
+  }
   return `${quranFont}-line-width-${fontScale}`;
 };

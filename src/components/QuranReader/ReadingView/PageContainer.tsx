@@ -128,13 +128,16 @@ const PageContainer: React.FC<Props> = ({
   }
 
   return (
-    <Page
-      verses={pageVerses}
-      key={`page-${pageNumber}`}
-      pageNumber={Number(pageNumber)}
-      quranReaderStyles={quranReaderStyles}
-      pageIndex={pageIndex}
-    />
+    <div>
+      <Page
+        verses={pageVerses}
+        key={`page-${pageNumber}`}
+        pageNumber={Number(pageNumber)}
+        quranReaderStyles={quranReaderStyles}
+        pageIndex={pageIndex}
+      />
+      <ReadingViewSkeleton />
+    </div>
   );
 };
 

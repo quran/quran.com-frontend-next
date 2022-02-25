@@ -22,14 +22,13 @@ import {
   setQuranFont,
   setMushafLines,
 } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { logValueChange } from 'src/utils/eventLogger';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
   const fonts = useMemo(() => {
