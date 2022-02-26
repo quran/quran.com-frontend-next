@@ -1,5 +1,10 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
+@use "src/styles/utility";
+
+@include utility.generate-line-width-scales(
+  "qpc_uthmani_hafs"
+); // fallback font's line-width
 
 .container {
   border-bottom: 1px var(--color-borders-hairline) solid;
