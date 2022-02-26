@@ -100,7 +100,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
                   translationFontScale={quranReaderStyles.translationFontScale}
                   text={translation.text}
                   languageId={translation.languageId}
-                  resourceName={translation.resourceName}
+                  resourceName={verse.translations?.length > 1 ? translation.resourceName : null}
                 />
               </div>
             ))}
