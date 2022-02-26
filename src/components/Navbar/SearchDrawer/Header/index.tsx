@@ -49,6 +49,7 @@ const Header: React.FC<Props> = ({
           >
             <input
               className={styles.searchInput}
+              inputMode="search"
               type="text"
               ref={inputRef}
               dir="auto"
