@@ -34,6 +34,7 @@ $quran-reader-padding: 3rem;
   padding-inline-end: 0;
   background-color: var(--color-background-default);
   background-image: var(--color-background-lighten);
+  margin-block-end: calc(3 * var(--spacing-mega));
   @include breakpoints.tablet {
     transition: var(--transition-regular);
     margin-inline-end: 0;
