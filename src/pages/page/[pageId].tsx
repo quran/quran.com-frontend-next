@@ -69,6 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const pageVersesResponse = await getPageVerses(pageId, locale, {
       perPage: 'all',
       mushaf: defaultMushafId,
+      filterPageWords: true,
       ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
     });
     const pagesLookupResponse = await getPagesLookup({
