@@ -6,7 +6,7 @@ jobs:
   purge_cache:
     name: Purge CF Cache
     runs-on: ubuntu-latest
-    if: ${{ github.event.deployment_status.state == 'success' }} && ${{ github.event.deployment_status.environment == 'Preview' }}
+    if: ${{ github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Preview' }}
     steps:
       - uses: actions/checkout@v2
       - name: Call CF
