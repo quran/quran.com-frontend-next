@@ -42,7 +42,7 @@
     },
     "ayah": "Ayat",
     "ayahs": "Ayat-ayat",
-    "beta": "Beta",
+    "beta": "Beta (Ujian)",
     "bookmark": "Penanda buku",
     "bookmarked": "Ditanda buku",
     "both": "Kedua-duanya",
@@ -73,7 +73,7 @@
         "increase": "Meningkat"
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
-    "developers": "Pemaju",
+    "developers": "Pemaju (Developers)",
     "error": {
         "general": "Kesilapan telah berlaku. Sila cuba lagi.",
         "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi."
@@ -100,7 +100,7 @@
     "from": "Dari",
     "help": "Bantuan",
     "hizb": "Hizb",
-    "home": "Rumah",
+    "home": "Halaman Utama",
     "input": {
         "clear": "Hilangkan"
     },
@@ -110,7 +110,7 @@
     "less": "Kurang",
     "loading": "Sedang proses",
     "menu": "Menu",
-    "mobile-apps": "Aplikasi Mudah Alih",
+    "mobile-apps": "Aplikasi Fon",
     "mode": "Mod",
     "more": "Lagi",
     "navigate": "Navigasi",
@@ -129,7 +129,7 @@
     "privacy": "Privasi",
     "product-updates": "Kemas kini produk",
     "q-reflect": "QuranReflect",
-    "quran-com": "Quran.com",
+    "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
     "reading-preference": {
         "reading": "Membaca",
@@ -137,8 +137,8 @@
     },
     "reciter": "Qari",
     "reflect": "Renungkan",
-    "remove": "Alih keluar",
-    "retry": "Cuba semula",
+    "remove": "Keluarkan",
+    "retry": "Cuba lagi (Retry)",
     "search": {
         "filters": "Penapis",
         "hint": "Cuba cari",
@@ -214,8 +214,8 @@
     "transliteration": "Transliterasi",
     "type": "Jenis",
     "verse": "Ayat",
-    "verse-bookmark-removed": "Penanda halaman ayat dialih keluar!",
-    "verse-bookmarked": "Ayat ditanda buku!",
+    "verse-bookmark-removed": "Tanda-Ingat dikeluarkan",
+    "verse-bookmarked": "Ayat telah di-Tanda-Ingat",
     "verses": "Ayat-ayat",
     "view": "Lihat",
     "voice": {
@@ -230,8 +230,8 @@
     },
     "wbw": "Perkataan demi perkataan",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
-    "wbw-translation": "Terjemahan Perkataan Demi Perkataan",
-    "wbw-transliteration": "Alih Huruf Perkataan Demi Perkataan",
+    "wbw-translation": "Terjemahan Perkataan demi Perkataan",
+    "wbw-transliteration": "Transliterasi Kata demi Kata",
     "word-click": {
         "no-audio": "Tiada Audio",
         "play-audio": "Mainkan Audio",
