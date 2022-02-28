@@ -1,0 +1,18 @@
+name: Purge CF Cache
+
+on: [deployment_status]
+
+jobs:
+  purge_cache:
+    name: Purge CF Cache
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Call CF
+        env:
+          CF_AUTH_KEY: ${{ secrets.CF_AUTH_KEY }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: |
+          echo "${BRANCH_NAME}"
+          echo "${{ github.event }}"
