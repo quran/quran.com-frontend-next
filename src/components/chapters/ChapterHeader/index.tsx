@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import InfoIcon from '../../../../public/icons/info.svg';
 
@@ -14,6 +15,7 @@ import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/But
 import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
+import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
@@ -23,11 +25,13 @@ interface Props {
   chapterId: string;
   pageNumber: number;
   hizbNumber: number;
+  translationName?: string;
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
-const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) => {
+const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber, translationName }) => {
+  const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
   const headerRef = useRef(null);
   const isMinimalLayout = shouldUseMinimalLayout(lang);
@@ -41,6 +45,11 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
 
   const { translatedName } = chapterData;
   const { transliteratedName } = chapterData;
+
+  const onChangeTranslationClicked = () => {
+    dispatch(setIsSettingsDrawerOpen(true));
+    dispatch(setSettingsView(SettingsView.Translation));
+  };
 
   return (
     <div
@@ -57,6 +66,48 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
             {t('surah')} <br /> {transliteratedName}
           </div>
           <div className={styles.infoContainer}>
+            {translationName ? (
+              <div className={styles.translation}>
+                <div className={styles.translationBy}>{t('quran-reader:translation-by')}</div>
+                <span>{translationName}</span>{' '}
+                <span
+                  onKeyPress={onChangeTranslationClicked}
+                  tabIndex={0}
+                  role="button"
+                  onClick={onChangeTranslationClicked}
+                  className={styles.changeTranslation}
+                >
+                  ({t('quran-reader:change')})
+                </span>
+                <span className={styles.changeTranslation} />
+              </div>
+            ) : (
+              <Button
+                size={ButtonSize.Small}
+                variant={ButtonVariant.Ghost}
+                prefix={<InfoIcon />}
+                href={getSurahInfoNavigationUrl(chapterId)}
+                prefetch={false}
+                hasSidePadding={false}
+                onClick={() => {
+                  logButtonClick('chapter_header_info');
+                }}
+              >
+                {t('quran-reader:surah-info')}
+              </Button>
+            )}
+          </div>
+        </div>
+        <div className={styles.right}>
+          <div className={styles.chapterId}>{toLocalizedNumber(Number(chapterId), lang, true)}</div>
+          <div className={styles.arabicSurahNameContainer}>
+            <ChapterIconContainer
+              chapterId={chapterId}
+              size={ChapterIconsSize.Large}
+              hasSurahPrefix={false}
+            />
+          </div>
+          {translationName && (
             <Button
               size={ButtonSize.Small}
               variant={ButtonVariant.Ghost}
@@ -70,17 +121,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber }) =
             >
               {t('quran-reader:surah-info')}
             </Button>
-          </div>
-        </div>
-        <div className={styles.right}>
-          <div className={styles.chapterId}>{toLocalizedNumber(Number(chapterId), lang, true)}</div>
-          <div className={styles.arabicSurahNameContainer}>
-            <ChapterIconContainer
-              chapterId={chapterId}
-              size={ChapterIconsSize.Large}
-              hasSurahPrefix={false}
-            />
-          </div>
+          )}
           <div className={styles.actionContainer}>
             <PlayChapterAudioButton chapterId={Number(chapterId)} />
           </div>
