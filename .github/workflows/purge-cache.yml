@@ -15,6 +15,6 @@ jobs:
         run: |
           # curl -X POST https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache \
           curl -X POST https://eo7owu0qgn8n4n0.m.pipedream.net/zones/$CF_ZONE_ID/purge_cache \
-            -d '{"purge_everything":true}'
+            -d '{"purge_everything":true}' \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.CF_AUTH_KEY }}" \
