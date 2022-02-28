@@ -77,7 +77,8 @@ const ReadingView = ({
   }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
-  useQcfFont(quranReaderStyles.quranFont, verses);
+  const { quranFont, mushafLines, quranTextFontScale } = quranReaderStyles;
+  useQcfFont(quranFont, verses);
   const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesLookup(
     resourceId,
     quranReaderDataType,
@@ -94,8 +95,8 @@ const ReadingView = ({
     verses,
     pagesVersesRange,
     isUsingDefaultFont,
-    quranReaderStyles.quranFont,
-    quranReaderStyles.mushafLines,
+    quranFont,
+    mushafLines,
     isLoading,
   );
 
@@ -172,13 +173,7 @@ const ReadingView = ({
         onCopy={(event) => onCopyQuranWords(event, verses)}
         className={classNames(
           styles.container,
-          styles[
-            getLineWidthClassName(
-              quranReaderStyles.quranFont,
-              quranReaderStyles.quranTextFontScale,
-              quranReaderStyles.mushafLines,
-            )
-          ],
+          styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
         )}
       >
         {isLoading ? (
