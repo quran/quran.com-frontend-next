@@ -13,8 +13,8 @@ jobs:
         env:
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
         run: |
-          curl -X POST -d "CF_AUTH_KEY=${{ secrets.CF_AUTH_KEY }}" https://eo7owu0qgn8n4n0.m.pipedream.net/zones/$CF_ZONE_ID/purge_cache
           # curl -X POST https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache \
-          #   -d '{"purge_everything":true}'
-          #   -H "Content-Type: application/json" \
-          #   -H "Authorization: Bearer ${{ secrets.CF_AUTH_KEY }}" \
+          curl -X POST https://eo7owu0qgn8n4n0.m.pipedream.net/zones/$CF_ZONE_ID/purge_cache \
+            -d '{"purge_everything":true}'
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.CF_AUTH_KEY }}" \
