@@ -42,11 +42,11 @@
     },
     "ayah": "Ayah",
     "ayahs": "Ayah",
-    "beta": "Beta",
+    "beta": "Beta (Ujian)",
     "bookmark": "Penanda buku",
     "bookmarked": "Ditandai",
     "both": "Keduanya",
-    "cancel": "Membatalkan",
+    "cancel": "Batal",
     "click-here": "Klik disini",
     "close": "Menutup",
     "command-bar": {
@@ -73,12 +73,12 @@
         "increase": "Meningkatkan"
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
-    "developers": "Pengembang",
+    "developers": "Pemaju (Developers)",
     "error": {
         "general": "Ada yang salah. Silakan coba lagi.",
         "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi."
     },
-    "feedback": "Maklum Balik Anda",
+    "feedback": "Maklum balas",
     "fonts": {
         "15_lines": "15 Baris",
         "16_lines": "16 Baris",
@@ -98,7 +98,7 @@
         "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur."
     },
     "from": "Dari",
-    "help": "Membantu",
+    "help": "Bantuan",
     "hizb": "Hizbut Tahrir",
     "home": "Halaman Utama",
     "input": {
@@ -107,10 +107,10 @@
     "juz": "Juzu",
     "language": "Bahasa",
     "languages": "Bahasa",
-    "less": "Lebih sedikit",
+    "less": "Kurang",
     "loading": "Memuat",
     "menu": "Menu",
-    "mobile-apps": "Aplikasi Seluler",
+    "mobile-apps": "Aplikasi Fon",
     "mode": "Mode",
     "more": "Lagi",
     "navigate": "Navigasi",
@@ -129,16 +129,16 @@
     "privacy": "Pribadi",
     "product-updates": "Pembaruan produk",
     "q-reflect": "QuranReflect",
-    "quran-com": "Quran.com",
+    "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"
     },
-    "reciter": "Tukang Qari",
+    "reciter": "Qari",
     "reflect": "Mencerminkan",
-    "remove": "Menghapus",
-    "retry": "Mencoba kembali",
+    "remove": "Keluarkan",
+    "retry": "Cuba lagi (Retry)",
     "search": {
         "filters": "Filter",
         "hint": "Coba cari",
@@ -179,7 +179,7 @@
         "search-surah": "Cari surah",
         "try-navigating-with": "Tips: coba navigasikan dengan"
     },
-    "sitemap": "Peta Situs",
+    "sitemap": "Peta laman",
     "sort": {
         "ascending": "menaik",
         "by": "Sortir dengan",
@@ -214,8 +214,8 @@
     "transliteration": "Transliterasi",
     "type": "Jenis",
     "verse": "Ayat",
-    "verse-bookmark-removed": "Penanda ayat dihapus!",
-    "verse-bookmarked": "Ayat di-bookmark!",
+    "verse-bookmark-removed": "Tanda-Ingat dikeluarkan",
+    "verse-bookmarked": "Ayat telah di-Tanda-Ingat",
     "verses": "Ayat",
     "view": "Melihat",
     "voice": {
