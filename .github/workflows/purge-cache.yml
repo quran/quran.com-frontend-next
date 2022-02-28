@@ -13,4 +13,4 @@ jobs:
           CF_AUTH_KEY: ${{ secrets.CF_AUTH_KEY }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
         run: |
-          echo '${{ toJSON(github.deployment_status) }}'
+          echo '${{ toJSON(github) }}'
