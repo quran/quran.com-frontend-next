@@ -12,7 +12,5 @@ jobs:
         env:
           CF_AUTH_KEY: ${{ secrets.CF_AUTH_KEY }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
-          echo "$BRANCH_NAME"
-          echo "${{ github.event }}"
+          echo '${{ toJSON(github) }}'
