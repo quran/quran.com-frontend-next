@@ -17,7 +17,7 @@ import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import useFetchPagesCount from 'src/components/QuranReader/hooks/useFetchTotalPages';
+import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
@@ -78,11 +78,12 @@ const ReadingView = ({
     QueryParam.WBW_LOCALE,
   );
   useQcfFont(quranReaderStyles.quranFont, verses);
-  const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesCount(
+  const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesLookup(
     resourceId,
     quranReaderDataType,
     initialData,
     quranReaderStyles,
+    isUsingDefaultFont,
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(
@@ -92,6 +93,10 @@ const ReadingView = ({
     quranReaderStyles,
     verses,
     pagesVersesRange,
+    isUsingDefaultFont,
+    quranReaderStyles.quranFont,
+    quranReaderStyles.mushafLines,
+    isLoading,
   );
 
   const scrollToPreviousPage = useCallback(() => {
@@ -156,9 +161,6 @@ const ReadingView = ({
     }
   };
 
-  //  if the user is not using the default font, we should wait until pagesLookup API finishes loading since we need it to determine the correct pageNumber that we will page to the API
-  const isLoadingMushafPagesLookup = !isUsingDefaultFont && isLoading;
-  const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   return (
     <>
       <QueryParamMessage
@@ -170,10 +172,16 @@ const ReadingView = ({
         onCopy={(event) => onCopyQuranWords(event, verses)}
         className={classNames(
           styles.container,
-          styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
+          styles[
+            getLineWidthClassName(
+              quranReaderStyles.quranFont,
+              quranReaderStyles.quranTextFontScale,
+              quranReaderStyles.mushafLines,
+            )
+          ],
         )}
       >
-        {isLoadingMushafPagesLookup ? (
+        {isLoading ? (
           <div className={styles.virtuosoScroller}>
             <ReadingViewSkeleton />
           </div>

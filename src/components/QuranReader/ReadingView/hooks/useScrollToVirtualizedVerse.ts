@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
@@ -10,7 +10,7 @@ import { makeVersesFilterUrl } from 'src/utils/apiPaths';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
-import { QuranReaderDataType } from 'types/QuranReader';
+import { MushafLines, QuranFont, QuranReaderDataType } from 'types/QuranReader';
 import ScrollAlign from 'types/ScrollAlign';
 import Verse from 'types/Verse';
 
@@ -61,6 +61,10 @@ const getVersePositionWithinAMushafPage = (
  * @param {QuranReaderStyles} quranReaderStyles
  * @param {Verse[]} verses
  * @param {Record<number, LookupRecord>} pagesVersesRange
+ * @param {boolean} isUsingDefaultFont
+ * @param {QuranFont} quranFont
+ * @param {MushafLines} mushafLines
+ * @param {boolean} isPagesLookupLoading
  */
 const useScrollToVirtualizedReadingView = (
   quranReaderDataType: QuranReaderDataType,
@@ -69,35 +73,56 @@ const useScrollToVirtualizedReadingView = (
   quranReaderStyles: QuranReaderStyles,
   verses: Verse[],
   pagesVersesRange: Record<number, LookupRecord>,
+  isUsingDefaultFont: boolean,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  isPagesLookupLoading: boolean,
 ) => {
   const router = useRouter();
   const { startingVerse, chapterId } = router.query;
+  const shouldScroll = useRef(true);
+
+  /**
+   * We need to scroll again when we have just changed the font since the same
+   * verse might lie on another page/position. Same for when we change the
+   * verse.
+   */
+  useEffect(() => {
+    shouldScroll.current = true;
+  }, [quranFont, mushafLines, startingVerse]);
 
   useEffect(
     // eslint-disable-next-line react-func/max-lines-per-function
     () => {
       // if we have the data of the page lookup
-      if (Object.keys(pagesVersesRange).length) {
+      if (!isPagesLookupLoading && virtuosoRef.current && Object.keys(pagesVersesRange).length) {
         // if startingVerse is present in the url
         if (quranReaderDataType === QuranReaderDataType.Chapter && startingVerse) {
           const startingVerseNumber = Number(startingVerse);
           // if the startingVerse is a valid integer and is above 1
           if (Number.isInteger(startingVerseNumber) && startingVerseNumber > 0) {
-            const firstPageOfCurrentChapter = initialData.verses[0].pageNumber;
+            const firstPageOfCurrentChapter = isUsingDefaultFont
+              ? initialData.verses[0].pageNumber
+              : Number(Object.keys(pagesVersesRange)[0]);
             // search for the verse number in the already fetched verses first
-            const startFromVerse = verses.find(
+            const startFromVerseData = verses.find(
               (verse) => verse.verseNumber === startingVerseNumber,
             );
-            if (startFromVerse) {
-              const scrollToPageIndex = startFromVerse.pageNumber - firstPageOfCurrentChapter;
+            if (
+              startFromVerseData &&
+              shouldScroll.current === true &&
+              pagesVersesRange[startFromVerseData.pageNumber]
+            ) {
+              const scrollToPageIndex = startFromVerseData.pageNumber - firstPageOfCurrentChapter;
               virtuosoRef.current.scrollToIndex({
                 index: scrollToPageIndex,
                 align: getVersePositionWithinAMushafPage(
                   `${chapterId}:${startingVerseNumber}`,
-                  startFromVerse.pageNumber,
+                  startFromVerseData.pageNumber,
                   pagesVersesRange,
                 ),
               });
+              shouldScroll.current = false;
             } else {
               // get the page number by the verse key and the mushafId (because the page will be different for Indopak Mushafs)
               fetcher(
@@ -107,17 +132,20 @@ const useScrollToVirtualizedReadingView = (
                   ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
                 }),
               ).then((response: VersesResponse) => {
-                if (response.verses.length) {
+                if (response.verses.length && shouldScroll.current === true) {
                   const scrollToPageIndex =
                     response.verses[0].pageNumber - firstPageOfCurrentChapter;
-                  virtuosoRef.current.scrollToIndex({
-                    index: scrollToPageIndex,
-                    align: getVersePositionWithinAMushafPage(
-                      `${chapterId}:${startingVerseNumber}`,
-                      response.verses[0].pageNumber,
-                      pagesVersesRange,
-                    ),
-                  });
+                  if (pagesVersesRange[response.verses[0].pageNumber]) {
+                    virtuosoRef.current.scrollToIndex({
+                      index: scrollToPageIndex,
+                      align: getVersePositionWithinAMushafPage(
+                        `${chapterId}:${startingVerseNumber}`,
+                        response.verses[0].pageNumber,
+                        pagesVersesRange,
+                      ),
+                    });
+                    shouldScroll.current = false;
+                  }
                 }
               });
             }
@@ -125,16 +153,17 @@ const useScrollToVirtualizedReadingView = (
         }
       }
     },
-    // we want to exclude verses as a dependency so that when the user scroll past the starting verse, this hook won't run again and force scroll to the initial startingVerse.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       chapterId,
       initialData.verses,
+      isPagesLookupLoading,
+      isUsingDefaultFont,
       pagesVersesRange,
       quranReaderDataType,
       quranReaderStyles.mushafLines,
       quranReaderStyles.quranFont,
       startingVerse,
+      verses,
       virtuosoRef,
     ],
   );

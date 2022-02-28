@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getChapterIdBySlug, getChapterVerses } from 'src/api';
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import Error from 'src/pages/_error';
@@ -106,6 +106,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   try {
     const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
+    const pagesLookupResponse = await getPagesLookup({
+      chapterNumber: Number(chapterIdOrSlug),
+      mushaf: defaultMushafId,
+      from: isVerse ? `${chapterIdOrSlug}:${verseIdOrRange}` : metaData.from,
+      to: isVerse ? `${chapterIdOrSlug}:${verseIdOrRange}` : metaData.to,
+    });
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
     const chapterData = getChapterData(chapterIdOrSlug, locale);
     if (!chapterData) {
@@ -123,6 +129,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         },
         versesResponse: {
           ...versesResponse,
+          pagesLookup: pagesLookupResponse,
           metaData,
         },
         isVerse,

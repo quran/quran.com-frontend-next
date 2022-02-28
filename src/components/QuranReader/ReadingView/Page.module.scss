@@ -15,6 +15,7 @@
 
 .mobileCenterText {
   text-align: center;
+  direction: rtl;
   @include breakpoints.tablet {
     text-align: start;
   }

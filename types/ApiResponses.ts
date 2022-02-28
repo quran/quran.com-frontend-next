@@ -30,6 +30,7 @@ export interface VersesResponse extends BaseResponse {
   pagination: Pagination;
   verses: Verse[];
   metaData?: MetaData;
+  pagesLookup?: PagesLookUpResponse;
 }
 
 // The response from the chapters endpoint that returns a list of the chapters

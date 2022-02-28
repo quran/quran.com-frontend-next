@@ -169,7 +169,7 @@
         "tooltip-playing-audio-helper": "播放节文时显示单词翻译",
         "value-and-others": "{{value}}和其他{{othersCount}}种译本",
         "wbw-helper": "直接在单词下方显示对应的意译或音译",
-        "word-tooltip-helper": "鼠标悬停或单击单词时显示对应意译或音译"
+        "word-tooltip-helper": "鼠标悬停或单击单词时显示其意译或音译"
     },
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
@@ -214,8 +214,8 @@
     "transliteration": "音译",
     "type": "类型",
     "verse": "节",
-    "verse-bookmark-removed": "诗句书签已删除！",
-    "verse-bookmarked": "诗作书签！",
+    "verse-bookmark-removed": "已删除节文书签！",
+    "verse-bookmarked": "已添加节文书签！",
     "verses": "节",
     "view": "看法",
     "voice": {
@@ -228,7 +228,7 @@
         "suggest-title": "现在背诵",
         "voice-search-powered-by": "语音搜索 技术支持单位"
     },
-    "wbw": "在单词下方显示对应的译文",
+    "wbw": "在单词下方显示其译文",
     "wbw-trans-lang": "翻译成：",
     "wbw-translation": "逐字意译",
     "wbw-transliteration": "逐字音译",
@@ -237,6 +237,6 @@
         "play-audio": "播放音频",
         "title": "字点击"
     },
-    "word-tooltip": "鼠标悬停在单词上时弹出对应意译或音译",
+    "word-tooltip": "鼠标悬停在单词上时弹出其译文",
     "yes": "是的"
 }
