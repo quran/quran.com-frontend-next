@@ -9,15 +9,15 @@ import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import useIsFontLoaded from 'src/components/QuranReader/hooks/useIsFontLoaded';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
-import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import {
   selectReadingViewSelectedVerseKey,
   selectReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getFontClassName, isQCFFont } from 'src/utils/fontFaceHelper';
+import { getFontClassName } from 'src/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from 'src/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
@@ -36,20 +36,14 @@ const VerseText = ({
   shouldShowH1ForSEO = false,
 }: VerseTextProps) => {
   const textRef = useRef(null);
-  const loadedFonts = useSelector(selectLoadedFontFaces);
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   );
   const [firstWord] = words;
-  const isFontLoaded = useMemo(() => {
-    if (!isQCFFont(quranFont)) {
-      return true;
-    }
-    return loadedFonts.includes(`p${firstWord.pageNumber}-${quranFont.replace('code_', '')}`);
-  }, [firstWord.pageNumber, loadedFonts, quranFont]);
   const { lineNumber, pageNumber, location, verseKey, hizbNumber } = firstWord;
+  const isFontLoaded = useIsFontLoaded(firstWord.pageNumber, quranFont);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordPreferences,
     shallowEqual,

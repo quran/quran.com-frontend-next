@@ -10,7 +10,7 @@ import PlainVerseTextWord from './PlainVerseTextWord';
 import GlyphWord from 'src/components/dls/QuranWord/GlyphWord';
 import TajweedWord from 'src/components/dls/QuranWord/TajweedWordImage';
 import TextWord from 'src/components/dls/QuranWord/TextWord';
-import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
+import useIsFontLoaded from 'src/components/QuranReader/hooks/useIsFontLoaded';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFontClassName, isQCFFont } from 'src/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
@@ -35,14 +35,12 @@ const PlainVerseText: React.FC<Props> = ({
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
 }: Props): JSX.Element => {
-  const loadedFonts = useSelector(selectLoadedFontFaces);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   );
   const isQcfFont = isQCFFont(quranFont);
-  const isFontLoaded =
-    !isQcfFont || loadedFonts.includes(`p${words[0].pageNumber}-${quranFont.replace('code_', '')}`);
+  const isFontLoaded = useIsFontLoaded(words[0].pageNumber, quranFont);
   return (
     <div
       className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
