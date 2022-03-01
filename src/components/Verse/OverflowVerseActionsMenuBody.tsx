@@ -7,8 +7,11 @@ import { useRouter } from 'next/router';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
 import BookmarkedIcon from '../../../public/icons/bookmark.svg';
+import ChatIcon from '../../../public/icons/chat.svg';
+import CopyLinkIcon from '../../../public/icons/copy-link.svg';
 import CopyIcon from '../../../public/icons/copy.svg';
 import LinkIcon from '../../../public/icons/east.svg';
+import PlayIcon from '../../../public/icons/play-outline.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 
@@ -167,6 +170,31 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
       >
         {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
+      </PopoverMenu.Item>
+      <PopoverMenu.Item
+        onClick={() => {
+          // just a test
+        }}
+        icon={<PlayIcon />}
+      >
+        {t('audio.player.play')}
+      </PopoverMenu.Item>
+
+      <PopoverMenu.Item
+        onClick={() => {
+          // just a test
+        }}
+        icon={<ChatIcon />}
+      >
+        {t('reflect')}
+      </PopoverMenu.Item>
+      <PopoverMenu.Item
+        onClick={() => {
+          // just a test
+        }}
+        icon={<CopyLinkIcon />}
+      >
+        {t('share')}
       </PopoverMenu.Item>
 
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
