@@ -64,6 +64,7 @@ const VerseActionAdvancedCopy = ({
         header={<p className={styles.header}>{t('advanced-copy')}</p>}
         hasCloseButton
         onClose={onModalClose}
+        onEscapeKeyDown={onModalClose}
         contentClassName={styles.contentWrapper}
       >
         <VerseAdvancedCopy verse={verse}>
