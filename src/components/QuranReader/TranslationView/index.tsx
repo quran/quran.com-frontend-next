@@ -12,6 +12,7 @@ import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { getNumberOfPages } from 'src/components/QuranReader/utils/page';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useQcfFont from 'src/hooks/useQcfFont';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -63,7 +64,7 @@ const TranslationView = ({
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const numberOfPages = useMemo(
-    () => Math.ceil(initialData.metaData.numberOfVerses / initialData.pagination.perPage),
+    () => getNumberOfPages(initialData.metaData.numberOfVerses, initialData.pagination.perPage),
     [initialData.metaData.numberOfVerses, initialData.pagination.perPage],
   );
   useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef, initialData.pagination.perPage);

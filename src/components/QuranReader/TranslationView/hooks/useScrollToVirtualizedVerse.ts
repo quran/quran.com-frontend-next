@@ -3,19 +3,9 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
+import { verseIndexToApiPageNumber } from 'src/components/QuranReader/utils/page';
 import { QuranReaderDataType } from 'types/QuranReader';
 import ScrollAlign from 'types/ScrollAlign';
-
-/**
- * Convert a verse index to a page number by dividing the index
- * by how many items there are in a page.
- *
- * @param {number} verseNumber
- * @param {number} versesPerPage
- * @returns {number}
- */
-const verseIndexToApiPageNumber = (verseNumber: number, versesPerPage: number): number =>
-  Math.floor(verseNumber / versesPerPage) + 1;
 
 const getVersePositionWithinAPage = (
   startingVerseNumber: number,
