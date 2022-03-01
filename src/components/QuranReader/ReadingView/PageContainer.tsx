@@ -7,6 +7,7 @@ import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
+import { getPageNumberByPageIndex } from 'src/components/QuranReader/utils/page';
 import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -39,17 +40,6 @@ const getPageVersesRange = (
 };
 
 /**
- * Get the page number by adding the first page number of the current
- * resource e.g. chapter to the item (page) index from the virtualized list.
- *
- * @param {number} pageIndex
- * @param {Record<number, LookupRecord>} pagesVersesRange
- * @returns {number}
- */
-const getPageNumber = (pageIndex: number, pagesVersesRange: Record<number, LookupRecord>): number =>
-  Number(Object.keys(pagesVersesRange)[0]) + pageIndex;
-
-/**
  * A component that will fetch the verses of the current mushaf page
  * and will render a skeleton while it's loading.
  *
@@ -68,7 +58,7 @@ const PageContainer: React.FC<Props> = ({
   isUsingDefaultFont,
 }: Props): JSX.Element => {
   const pageNumber = useMemo(
-    () => getPageNumber(pageIndex, pagesVersesRange),
+    () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
     [pageIndex, pagesVersesRange],
   );
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
