@@ -19,7 +19,7 @@ interface Props {
   hasError: boolean;
   searchResult: SearchResponse;
   onSearchKeywordClicked: (keyword: string) => void;
-  onSearchResultClicked: () => void;
+  onSearchResultClicked?: () => void;
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;

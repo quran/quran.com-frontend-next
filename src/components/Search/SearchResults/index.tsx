@@ -19,7 +19,7 @@ interface Props {
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
-  onSearchResultClicked: () => void;
+  onSearchResultClicked?: () => void;
 }
 
 const SearchResults: React.FC<Props> = ({
@@ -67,7 +67,7 @@ const SearchResults: React.FC<Props> = ({
                   href={`/search?query=${searchQuery}`}
                   passHref
                   onClick={() => {
-                    onSearchResultClicked();
+                    if (onSearchResultClicked) onSearchResultClicked();
                     logButtonClick('search_drawer_show_all');
                   }}
                 >
