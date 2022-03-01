@@ -57,10 +57,18 @@
   color: var(--color-text-default);
   height: calc(2.2 * var(--spacing-medium));
   width: calc(2.2 * var(--spacing-medium));
+
   &:hover {
-    color: var(--color-success-medium);
-    background-color: var(--color-success-medium);
-    @include utility.lighten-background-color;
+    color: var(--color-text-default);
+    background-color: transparent;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-success-medium);
+      background-color: var(--color-success-medium);
+      @include utility.lighten-background-color;
+    }
   }
 }
 .icon {
