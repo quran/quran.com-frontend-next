@@ -19,7 +19,7 @@ import {
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFontClassName, isQCFFont } from 'src/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from 'src/utils/verse';
-import { QuranFont } from 'types/QuranReader';
+import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type VerseTextProps = {
@@ -70,6 +70,9 @@ const VerseText = ({
   const { chapterId } = firstWordData;
 
   const VerseTextContainer = shouldShowH1ForSEO ? 'h1' : 'div';
+  const fontClassName = isFontLoaded
+    ? getFontClassName(quranFont, quranTextFontScale, mushafLines)
+    : getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true);
   return (
     <>
       <VerseTextContainer
@@ -81,7 +84,7 @@ const VerseText = ({
         className={classNames(styles.verseTextContainer, {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
-          [styles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]: !isTajweedFont,
+          [styles[fontClassName]]: !isTajweedFont,
           [styles.tafsirOrTranslationMode]: !isReadingMode,
         })}
       >

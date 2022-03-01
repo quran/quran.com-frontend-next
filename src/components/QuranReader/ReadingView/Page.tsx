@@ -12,7 +12,7 @@ import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getLineWidthClassName, isQCFFont } from 'src/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
+import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type PageProps = {
@@ -44,14 +44,12 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
     return loadedFonts.includes(`p${pageNumber}-${quranFont.replace('code_', '')}`);
   }, [pageNumber, loadedFonts, quranFont]);
 
-  const fallbackFont = QuranFont.QPCHafs;
-
   return (
     <div
       id={`page-${pageNumber}`}
       className={classNames(styles.container, {
         [styles.mobileCenterText]: isBigTextLayout,
-        [styles[getLineWidthClassName(fallbackFont, quranTextFontScale, mushafLines)]]:
+        [styles[getLineWidthClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
           !isFontLoaded,
       })}
     >

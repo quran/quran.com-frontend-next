@@ -3,7 +3,7 @@
 @use "src/styles/utility";
 
 @include utility.generate-line-width-scales(
-  "qpc_uthmani_hafs"
+  "fallback_qpc_uthmani_hafs"
 ); // fallback font's line-width
 
 .container {
