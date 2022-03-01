@@ -26,11 +26,18 @@ interface Props {
   pageNumber: number;
   hizbNumber: number;
   translationName?: string;
+  isTranslationSelected?: boolean;
 }
 
 const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
 
-const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber, translationName }) => {
+const ChapterHeader: React.FC<Props> = ({
+  chapterId,
+  pageNumber,
+  hizbNumber,
+  translationName,
+  isTranslationSelected,
+}) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
   const headerRef = useRef(null);
@@ -49,6 +56,7 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber, tra
   const onChangeTranslationClicked = () => {
     dispatch(setIsSettingsDrawerOpen(true));
     dispatch(setSettingsView(SettingsView.Translation));
+    logButtonClick('change_translation');
   };
 
   return (
@@ -68,7 +76,9 @@ const ChapterHeader: React.FC<Props> = ({ chapterId, pageNumber, hizbNumber, tra
           <div className={styles.infoContainer}>
             {translationName ? (
               <div className={styles.translation}>
-                <div className={styles.translationBy}>{t('quran-reader:translation-by')}</div>
+                {isTranslationSelected && (
+                  <div className={styles.translationBy}>{t('quran-reader:translation-by')}</div>
+                )}
                 <span>{translationName}</span>{' '}
                 <span
                   onKeyPress={onChangeTranslationClicked}

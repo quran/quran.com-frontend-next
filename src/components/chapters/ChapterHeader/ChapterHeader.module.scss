@@ -68,7 +68,10 @@
 }
 
 .translation {
-  max-width: calc(7 * var(--spacing-mega));
+  max-width: calc(5 * var(--spacing-mega));
+  @include breakpoints.mobileM {
+    max-width: calc(7 * var(--spacing-mega));
+  }
   @include breakpoints.tablet {
     max-width: calc(11 * var(--spacing-mega));
   }

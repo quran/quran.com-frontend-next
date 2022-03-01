@@ -114,6 +114,7 @@ const TranslationPage: React.FC<Props> = ({
                 chapterId={String(verse.chapterId)}
                 pageNumber={verse.pageNumber}
                 hizbNumber={verse.hizbNumber}
+                isTranslationSelected={selectedTranslations?.length > 0}
               />
             )}
             <TranslationViewCell
