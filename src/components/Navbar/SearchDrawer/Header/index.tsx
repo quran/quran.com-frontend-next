@@ -47,18 +47,23 @@ const Header: React.FC<Props> = ({
               [styles.searchInputContainerRTL]: isRTLInput,
             })}
           >
-            <input
-              className={styles.searchInput}
-              inputMode="search"
-              enterKeyHint="search"
-              type="text"
-              ref={inputRef}
-              dir="auto"
-              placeholder={t('search.title')}
-              onChange={onSearchQueryChange}
-              value={searchQuery}
-              disabled={isSearching}
-            />
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                inputRef.current.blur();
+              }}
+            >
+              <input
+                className={styles.searchInput}
+                type="text"
+                ref={inputRef}
+                dir="auto"
+                placeholder={t('search.title')}
+                onChange={onSearchQueryChange}
+                value={searchQuery}
+                disabled={isSearching}
+              />
+            </form>
             <TarteelVoiceSearchTrigger
               onClick={() => {
                 logButtonClick('search_drawer_voice_search_start_flow');
