@@ -7,7 +7,7 @@ $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
 ); // library react-virtuoso's inline `height` is less than the required `height`.
 // so we're adding a little extra padding at the bottom to make sure the other components are visible.
-// for example for EndOfScrollingButton components
+// for example for EndOfScrollingButton component
 
 .infiniteScroll {
   @include utility.quranContainer;
