@@ -5,6 +5,7 @@
 .verseText {
   display: flex;
   align-items: center;
+  line-height: var(--line-height);
 }
 .verseTextContainer {
   display: block;
@@ -45,6 +46,7 @@
 @include utility.generate-font-scales("text_indopak_15_lines");
 @include utility.generate-font-scales("text_indopak_16_lines");
 @include utility.generate-font-scales("qpc_uthmani_hafs");
+@include utility.generate-font-scales("fallback_qpc_uthmani_hafs");
 @include utility.generate-font-scales("tajweed");
 
 .highlighted {

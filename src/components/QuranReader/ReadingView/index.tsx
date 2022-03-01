@@ -3,6 +3,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -25,6 +26,7 @@ import Error from 'src/pages/_error';
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { getLineWidthClassName } from 'src/utils/fontFaceHelper';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -75,7 +77,8 @@ const ReadingView = ({
   }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
-  useQcfFont(quranReaderStyles.quranFont, verses);
+  const { quranFont, mushafLines, quranTextFontScale } = quranReaderStyles;
+  useQcfFont(quranFont, verses);
   const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesLookup(
     resourceId,
     quranReaderDataType,
@@ -92,8 +95,8 @@ const ReadingView = ({
     verses,
     pagesVersesRange,
     isUsingDefaultFont,
-    quranReaderStyles.quranFont,
-    quranReaderStyles.mushafLines,
+    quranFont,
+    mushafLines,
     isLoading,
   );
 
@@ -166,7 +169,13 @@ const ReadingView = ({
         reciterQueryParamDifferent={reciterQueryParamDifferent}
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-      <div onCopy={(event) => onCopyQuranWords(event, verses)} className={styles.container}>
+      <div
+        onCopy={(event) => onCopyQuranWords(event, verses)}
+        className={classNames(
+          styles.container,
+          styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
+        )}
+      >
         {isLoading ? (
           <div className={styles.virtuosoScroller}>
             <ReadingViewSkeleton />

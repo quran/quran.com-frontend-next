@@ -54,9 +54,9 @@ $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg)
 }
 .xl {
   img {
-    zoom: 1.2;
+    zoom: 1;
     @include breakpoints.tablet {
-      zoom: 1.25;
+      zoom: 0.92;
     }
   }
 }

@@ -24,7 +24,6 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
@@ -68,7 +67,7 @@ const TafsirBody = ({
   scrollToTop,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang } = useTranslation();
   const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);

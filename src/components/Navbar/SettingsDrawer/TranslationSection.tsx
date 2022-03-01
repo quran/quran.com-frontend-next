@@ -19,7 +19,6 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
@@ -30,7 +29,7 @@ const TranslationSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { translationFontScale } = quranReaderStyles;
 
   const translationLoading = useCallback(

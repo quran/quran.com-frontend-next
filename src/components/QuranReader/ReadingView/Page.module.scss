@@ -1,12 +1,16 @@
 @use "src/styles/breakpoints";
 @use "src/styles/constants";
+@use "src/styles/utility";
+
+@include utility.generate-line-width-scales(
+  "fallback_qpc_uthmani_hafs"
+); // fallback font's line-width
 
 .container {
   border-bottom: 1px var(--color-borders-hairline) solid;
   margin-block-start: constants.$reading-view-container-top-margin;
   margin-block-end: var(--spacing-mega);
   max-width: 100%;
-  min-width: constants.$reading-view-page-min-width;
 }
 
 .mobileCenterText {

@@ -14,7 +14,6 @@ import {
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
 } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { QuranFont } from 'types/QuranReader';
 
 /**
@@ -24,7 +23,7 @@ import { QuranFont } from 'types/QuranReader';
  */
 const FontAdjustment = (): JSX.Element => {
   const dispatch = useDispatch();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranTextFontScale, quranFont, translationFontScale, tafsirFontScale } =
     quranReaderStyles;
   const availableFonts = [];

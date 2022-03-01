@@ -40,6 +40,15 @@ $line-heights-map: (
       5: 1rem,
     ),
   ),
+  fallback_qpc_uthmani_hafs: (
+    tablet: (
+      1: 6vh,
+      2: 6vh,
+      3: 6.1vh,
+      4: 6vh,
+      5: 5.68vh,
+    ),
+  ),
   qpc_uthmani_hafs: (
     tablet: (
       1: 6vh,
@@ -105,7 +114,24 @@ $line-heights-map: (
   ),
 );
 
+// TODO: rename to $font-size-scales-map
 $scales-map: (
+  fallback_qpc_uthmani_hafs: (
+    tablet: (
+      1: 3.19vh,
+      2: 3.2vh,
+      3: 3.39vh,
+      4: 3.6vh,
+      5: 3.89vh,
+    ),
+    mobile: (
+      1: 4vw,
+      2: 4.5vw,
+      3: 5vw,
+      4: 8.9vw,
+      5: 11vw,
+    ),
+  ),
   //TODO: rename qpc_uthmani_hafs to text_qpc_hafs
   qpc_uthmani_hafs:
     (
@@ -235,7 +261,7 @@ $scales-map: (
       4: 1rem,
       5: 1rem,
     ),
-  )
+  ),
 );
 
 $skeleton-height-map: (
@@ -353,6 +379,89 @@ $skeleton-height-map: (
   ),
 );
 
+// for now, we're only doing fixed witdth for tablet & desktop.
+// because mobile is relatively more stable compared to desktop
+// TODO: implement fixed on mobile as well
+$line-width-map: (
+  tajweed: (
+    tablet: (
+      1: calc(12.5 * var(--spacing-mega)),
+      2: calc(15.5 * var(--spacing-mega)),
+      3: calc(18 * var(--spacing-mega)),
+      4: calc(20.5 * var(--spacing-mega)),
+      5: calc(22 * var(--spacing-mega)),
+    ),
+  ),
+  fallback_qpc_uthmani_hafs: (
+    tablet: (
+      1: 55vh,
+      2: 59vh,
+      3: 63.8vh,
+      4: 65vh,
+      5: 66vh,
+    ),
+    desktop: (
+      1: 56vh,
+      2: 56.2vh,
+      3: 60vh,
+      4: 63vh,
+      5: 68vh,
+    ),
+  ),
+  qpc_uthmani_hafs: (
+    tablet: (
+      1: 55vh,
+      2: 59vh,
+      3: 63.8vh,
+      4: 65vh,
+      5: 66vh,
+    ),
+    desktop: (
+      1: 60vh,
+      2: 65vh,
+      3: 73.5vh,
+      4: 74vh,
+      5: 81vh,
+    ),
+  ),
+  text_indopak_15_lines: (
+    tablet: (
+      1: 58vh,
+      2: 64vh,
+      3: 76vh,
+      4: 75vh,
+      5: 76vh,
+    ),
+  ),
+  text_indopak_16_lines: (
+    tablet: (
+      1: 55vh,
+      2: 61vh,
+      3: 63vh,
+      4: 65vh,
+      5: 69vh,
+    ),
+  ),
+  code_v2: (
+    tablet: (
+      1: 52vh,
+      2: 54vh,
+      3: 56vh,
+      4: 61vh,
+      5: 64.5vh,
+    ),
+  ),
+  code_v1: (
+    tablet: (
+      1: 54vh,
+      2: 56.5vh,
+      3: 59.5vh,
+      4: 63vh,
+      5: 66vh,
+    ),
+  ),
+);
+
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
     $map: map-get($map, $key);
@@ -362,6 +471,33 @@ $skeleton-height-map: (
 
 @function get-scales($name, $device-type, $map) {
   @return map-deep-get($map, $name, $device-type);
+}
+
+// generate line-width based on font type, font-scale, and screen width;
+@mixin generate-line-width-scales($name) {
+  $mobile-scales: get-scales($name, "mobile", $line-width-map);
+  $tablet-scales: get-scales($name, "tablet", $line-width-map);
+  $desktop-scales: get-scales($name, "desktop", $line-width-map);
+
+  @for $i from 1 through constants.$maximum-font-step {
+    .#{$name}-line-width-#{$i} {
+      @if $mobile-scales != null and map.has-key($tablet-scales, $i) {
+        --line-width: #{map.get($mobile-scales, $i)};
+      }
+
+      @if $tablet-scales != null and map.has-key($tablet-scales, $i) {
+        @include breakpoints.tablet {
+          --line-width: #{map.get($tablet-scales, $i)};
+        }
+      }
+
+      @if $desktop-scales != null and map.has-key($desktop-scales, $i) {
+        @include breakpoints.desktop {
+          --line-width: #{map.get($desktop-scales, $i)};
+        }
+      }
+    }
+  }
 }
 
 @mixin generate-font-scales($name) {

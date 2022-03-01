@@ -56,7 +56,11 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
           hizbNumber={words[0].hizbNumber}
         />
       )}
-      <div className={classNames(styles.line, { [styles.mobileInline]: isBigTextLayout })}>
+      <div
+        className={classNames(styles.line, {
+          [styles.mobileInline]: isBigTextLayout,
+        })}
+      >
         <VerseText
           words={words}
           isReadingMode

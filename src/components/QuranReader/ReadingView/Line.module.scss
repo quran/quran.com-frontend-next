@@ -1,7 +1,10 @@
 @use "src/styles/breakpoints";
+@use "src/styles/utility";
 
 .line {
   text-align: center;
+  width: var(--line-width, auto);
+  margin-inline: auto;
 }
 
 .container {
