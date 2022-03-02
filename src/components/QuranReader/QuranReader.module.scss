@@ -33,11 +33,15 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-background-elevated),
+    transparent
+  );
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;
   padding-inline-end: 0;
-  background-color: var(--color-background-default);
-  background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;
   @include breakpoints.tablet {
     transition: var(--transition-regular);
