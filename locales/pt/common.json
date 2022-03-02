@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Mostrar dica de ferramenta ao reproduzir áudio",
         "title": "Definições",
         "tooltip-playing-audio-helper": "Mostrar tradução de palavras na dica de ferramenta ao jogar ayah",
+        "value-and-other": "{{value}} e {{othersCount}} outros",
         "value-and-others": "{{value}} e {{othersCount}} outros",
         "wbw-helper": "Exibir a tradução ou transliteração diretamente abaixo da palavra",
         "word-tooltip-helper": "Exibir a tradução ou transliteração ao passar o mouse ou clicar na palavra"

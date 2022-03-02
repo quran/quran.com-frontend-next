@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Shfaq këshillën e veglave kur luhet audio",
         "title": "Cilësimet",
         "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në udhëzuesin e veglave ndërsa luani ayah",
+        "value-and-other": "{{value}} , dhe {{othersCount}} të tjera",
         "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
         "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
         "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"

@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "آڈیو چلاتے وقت ٹول ٹِپ دکھائیں۔",
         "title": "ترتیبات",
         "tooltip-playing-audio-helper": "آیت چلاتے ہوئے لفظ کا ترجمہ\/تلفظ دکھائیں.",
+        "value-and-other": "{{value}} ، اور {{othersCount}} دیگر",
         "value-and-others": "{{value}} ، اور {{othersCount}} دیگر",
         "wbw-helper": "ترجمہ یا نقل حرفی کو براہ راست لفظ کے نیچے دکھائیں۔",
         "word-tooltip-helper": "لفظ کو ہوور کرتے یا کلک کرتے وقت ترجمہ یا نقل حرفی دکھائیں۔"

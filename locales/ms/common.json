@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Paparkan tips semasa audio dimainkan",
         "title": "Tetapan",
         "tooltip-playing-audio-helper": "Paparkan terjemahan perkataan dalam tips semasa ayat audio dimainkan",
+        "value-and-other": "{{value}} , dan {{othersCount}} lain",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",
         "wbw-helper": "Paparkan terjemahan atau transliterasi terus di bawah perkataan",
         "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila anda mengerakkan 'cursor mouse' atau apabila anda tekan (mouse) klik pada perkataan"

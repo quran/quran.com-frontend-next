@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "播放声音时显示提示信息",
         "title": "设置",
         "tooltip-playing-audio-helper": "播放节文时显示单词翻译",
+        "value-and-other": "{{value}}和{{othersCount}}其他",
         "value-and-others": "{{value}}和其他{{othersCount}}种译本",
         "wbw-helper": "直接在单词下方显示对应的意译或音译",
         "word-tooltip-helper": "鼠标悬停或单击单词时显示其意译或音译"

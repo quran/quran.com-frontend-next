@@ -92,7 +92,12 @@ const TranslationPage: React.FC<Props> = ({
   const getTranslationNameString = (translations?: Translation[]) => {
     let translationName = t('settings.no-translation-selected');
     if (translations?.length === 1) translationName = translations?.[0].resourceName;
-    if (translations?.length > 1)
+    if (translations?.length === 2)
+      translationName = t('settings.value-and-other', {
+        value: translations?.[0].resourceName,
+        othersCount: toLocalizedNumber(translations.length - 1, lang),
+      });
+    if (translations?.length > 2)
       translationName = t('settings.value-and-others', {
         value: translations?.[0].resourceName,
         othersCount: toLocalizedNumber(translations.length - 1, lang),
