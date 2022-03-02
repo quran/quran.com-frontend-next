@@ -8,6 +8,7 @@ import styles from './contentPage.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import { getBlurDataUrl } from 'src/utils/image';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
@@ -15,6 +16,11 @@ import { getCanonicalUrl } from 'src/utils/navigation';
 const path = '/about-us';
 const AboutUsPage = () => {
   const { t, lang } = useTranslation('about');
+
+  const onTarteelLinkClicked = () => {
+    logTarteelLinkClick('about_us_page');
+  };
+
   return (
     <>
       <NextSeoWrapper
@@ -27,7 +33,9 @@ const AboutUsPage = () => {
         <p>
           <Trans
             i18nKey="about:main-description"
-            components={[<a key={0} href="https://tarteel.ai" target="_blank" rel="noreferrer" />]}
+            components={[
+              <Link key={0} href="https://tarteel.ai" newTab onClick={onTarteelLinkClicked} />,
+            ]}
           />
         </p>
         <p className={styles.heading}>{t('credits.title')}</p>

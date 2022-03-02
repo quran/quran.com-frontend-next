@@ -9,7 +9,9 @@ import TarteelAppImage from '../../public/images/tarteel-app.png';
 
 import styles from './apps.module.scss';
 
+import Link from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 
@@ -19,6 +21,11 @@ type AppProps = {
   isMain?: boolean;
 };
 const App = ({ app, isFlipped, isMain }: AppProps) => {
+  const onTarteelAppClicked = (isIOS: boolean) => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logTarteelLinkClick(`apps_page_${isIOS ? 'iOS' : 'android'}`);
+  };
+
   return (
     <div
       className={classNames(styles.sideBySideLayout, isFlipped && styles.layoutFlipped)}
@@ -33,12 +40,28 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         )}
         <p>{app.description}</p>
         <div className={styles.downloadButtonsContainer}>
-          <a href={app.ios}>
+          <Link
+            href={app.ios}
+            newTab
+            {...(app.isTarteel && {
+              onClick: () => {
+                onTarteelAppClicked(true);
+              },
+            })}
+          >
             <Image src="/images/app-store.svg" width={135} height={40} alt="App Store" />
-          </a>
-          <a href={app.android}>
+          </Link>
+          <Link
+            href={app.android}
+            newTab
+            {...(app.isTarteel && {
+              onClick: () => {
+                onTarteelAppClicked(false);
+              },
+            })}
+          >
             <Image src="/images/play-store.svg" width={135} height={40} alt="Play Store" />
-          </a>
+          </Link>
         </div>
       </div>
       <div>
@@ -75,6 +98,7 @@ const AppsPage = () => {
       android: 'https://play.google.com/store/apps/details?id=com.mmmoussa.iqra',
       preview: TarteelAppImage,
       logo: '/icons/tarteel-logo.svg',
+      isTarteel: true,
     },
   };
 
