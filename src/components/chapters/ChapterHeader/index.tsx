@@ -87,7 +87,7 @@ const ChapterHeader: React.FC<Props> = ({
                   onClick={onChangeTranslationClicked}
                   className={styles.changeTranslation}
                 >
-                  ({t('quran-reader:change')})
+                  ({t('quran-reader:trans-change')})
                 </span>
                 <span className={styles.changeTranslation} />
               </div>
