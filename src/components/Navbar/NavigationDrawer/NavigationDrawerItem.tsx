@@ -16,6 +16,7 @@ type NavigationDrawerItemProps = {
   href?: string;
   isStale?: boolean;
   shouldFlipOnRTL?: boolean;
+  onClick?: () => void;
 };
 
 const NavigationDrawerItem = ({
@@ -24,8 +25,9 @@ const NavigationDrawerItem = ({
   isExternalLink,
   href,
   isStale = false,
+  onClick,
 }: NavigationDrawerItemProps) => (
-  <LinkContainer href={href} isExternalLink={isExternalLink}>
+  <LinkContainer href={href} isExternalLink={isExternalLink} onClick={onClick}>
     <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
       <div className={styles.innerContainer}>
         <div className={styles.itemContainer}>

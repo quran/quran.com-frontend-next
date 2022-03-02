@@ -19,6 +19,8 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
 
+import { logTarteelLinkClick } from 'src/utils/eventLogger';
+
 // import IconDonate from '../../../../../public/icons/donate.svg';
 // import IconUpdates from '../../../../../public/icons/updates.svg';
 // import IconCollection from '../../../../../public/icons/collection.svg';
@@ -97,6 +99,9 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem
+        onClick={() => {
+          logTarteelLinkClick('navigation_menu_network');
+        }}
         isExternalLink
         title={t('tarteel.name')}
         icon={<Tarteel />}

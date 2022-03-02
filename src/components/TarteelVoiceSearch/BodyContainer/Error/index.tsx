@@ -9,15 +9,22 @@ import NoMicrophoneIcon from '../../../../../public/icons/no-mic.svg';
 import styles from './Error.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import VoiceError from 'types/Tarteel/VoiceError';
 
 interface Props {
   error: VoiceError;
   isWaitingForPermission: boolean;
+  isCommandBar: boolean;
 }
 
-const Error: React.FC<Props> = ({ error, isWaitingForPermission }) => {
+const Error: React.FC<Props> = ({ error, isWaitingForPermission, isCommandBar }) => {
   const { t } = useTranslation('common');
+
+  const onTarteelLinkClicked = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logTarteelLinkClick(`${isCommandBar ? 'command_bar' : 'search_drawer'}_error`);
+  };
   let icon = null;
   let errorBody = null;
   if (isWaitingForPermission) {
@@ -42,7 +49,12 @@ const Error: React.FC<Props> = ({ error, isWaitingForPermission }) => {
     errorBody = (
       <div>
         <span>{errorText}</span>
-        <Link href="https://download.tarteel.ai" newTab variant={LinkVariant.Highlight}>
+        <Link
+          href="https://download.tarteel.ai"
+          newTab
+          variant={LinkVariant.Highlight}
+          onClick={onTarteelLinkClicked}
+        >
           {t('tarteel.app')}
         </Link>
       </div>

@@ -188,7 +188,7 @@ const CommandBarBody: React.FC = () => {
         )}
       </div>
       <div className={styles.attribution}>
-        <TarteelAttribution />
+        <TarteelAttribution isCommandBar />
       </div>
     </div>
   );
