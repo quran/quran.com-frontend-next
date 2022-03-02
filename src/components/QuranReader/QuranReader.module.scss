@@ -35,9 +35,9 @@ $virtual-scrolling-height-bandage: calc(
 .container {
   background: linear-gradient(
     90deg,
-    transparent,
+    #0000000a,
     var(--color-background-elevated),
-    transparent
+    #0000000a
   );
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;
