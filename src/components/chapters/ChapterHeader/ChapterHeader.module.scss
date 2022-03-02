@@ -1,3 +1,4 @@
+@use "src/styles/breakpoints";
 .container {
   display: flex;
   justify-content: space-between;
@@ -32,7 +33,6 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
-  margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 
@@ -65,4 +65,24 @@
 .actionContainer {
   position: relative;
   z-index: var(--z-index-default);
+}
+
+.translation {
+  max-width: calc(5 * var(--spacing-mega));
+  @include breakpoints.mobileM {
+    max-width: calc(7 * var(--spacing-mega));
+  }
+  @include breakpoints.tablet {
+    max-width: calc(11 * var(--spacing-mega));
+  }
+}
+.translationBy {
+  color: var(--color-text-faded);
+}
+.changeTranslation {
+  color: var(--color-success-medium);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }

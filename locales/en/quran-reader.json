@@ -2,6 +2,7 @@
     "advanced-copy": "Advanced Copy",
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",
+    "change": "Change",
     "copy-arabic": "Arabic text (Uthmani text)",
     "copy-footnote-q": "Also copy Footnote(s)?",
     "copy-success": "Text is copied successfully in your clipboard.",
@@ -33,5 +34,6 @@
     "surah-beginning": "Beginning of Surah",
     "surah-info": "Surah Info",
     "tafsirs": "Tafsirs",
+    "translation-by": "Translation by",
     "verses-range": "Range of verses"
 }

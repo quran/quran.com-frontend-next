@@ -15,8 +15,10 @@ import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranRead
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
+import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -42,7 +44,7 @@ const TranslationPage: React.FC<Props> = ({
   resourceId,
   setApiPageToVersesMap,
 }) => {
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('common');
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
@@ -86,6 +88,19 @@ const TranslationPage: React.FC<Props> = ({
   if (!verses) {
     return <TranslationViewSkeleton numberOfSkeletons={initialData.pagination.perPage} />;
   }
+
+  const getTranslationNameString = (translations?: Translation[]) => {
+    let translationName = t('settings.no-translation-selected');
+    if (translations?.length === 1) translationName = translations?.[0].resourceName;
+    if (translations?.length > 1)
+      translationName = t('settings.value-and-others', {
+        value: translations?.[0].resourceName,
+        othersCount: toLocalizedNumber(translations.length - 1, lang),
+      });
+
+    return translationName;
+  };
+
   return (
     <div className={styles.container}>
       {verses.map((verse, index) => {
@@ -95,9 +110,11 @@ const TranslationPage: React.FC<Props> = ({
           <div key={currentVerseIndex}>
             {verse.verseNumber === 1 && (
               <ChapterHeader
+                translationName={getTranslationNameString(verse.translations)}
                 chapterId={String(verse.chapterId)}
                 pageNumber={verse.pageNumber}
                 hizbNumber={verse.hizbNumber}
+                isTranslationSelected={selectedTranslations?.length > 0}
               />
             )}
             <TranslationViewCell
