@@ -1,17 +1,14 @@
-$font-cdn: "https://static.qurancdn.com/fonts";
-$asset-version: "1";
-
 // TODO: figure out a way to generate font faces on the fly. We're creating lot of font faces that browsers might not need.
 
 /*Fonts for rendering different Mushaf scripts*/
 @font-face {
   font-family: "IndoPak";
   src: local("AlQuran IndoPak by QuranWBW"),
-    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2?v=#{$asset-version}")
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2")
       format("woff2"),
-    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff?v=#{$asset-version}")
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff")
       format("woff"),
-    url("#{$font-cdn}/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf?v=#{$asset-version}")
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf")
       format("truetype");
 }
 
@@ -19,31 +16,27 @@ $asset-version: "1";
 @font-face {
   font-family: "meQuran";
   src: local("me_quran2"),
-    url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2?v=#{$asset-version}")
-      format("woff2"),
-    url("#{$font-cdn}/quran/hafs/me_quran/me_quran-2.woff2?v=#{$asset-version}")
-      format("truetype");
+    url("/fonts/quran/hafs/me_quran/me_quran-2.woff2") format("woff2"),
+    url("/fonts/quran/hafs/me_quran/me_quran-2.woff2") format("truetype");
 }
 
 @font-face {
   font-family: "UthmanicHafs";
   src: local("KFGQPC HAFS Uthmanic Script"),
-    url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2?v=#{$asset-version}")
+    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2")
       format("woff2"),
-    url("#{$font-cdn}/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf?v=#{$asset-version}")
+    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf")
       format("truetype");
 }
 
 // TODO: regenerate this font and add font-family name
 @font-face {
   font-family: "surahnames";
-  src: url("#{$font-cdn}/quran/surah-names/v1/sura_names.woff2?v=#{$asset-version}");
-  src: url("#{$font-cdn}/quran/surah-names/v1/surah-names.eot?v=#{$asset-version}")
+  src: url("/fonts/quran/surah-names/v1/sura_names.woff2");
+  src: url("/fonts/quran/surah-names/v1/surah-names.eot")
       format("embedded-opentype"),
-    url("#{$font-cdn}/quran/surah-names/v1/sura_names.ttf?v=#{$asset-version}")
-      format("truetype"),
-    url("#{$font-cdn}/quran/quran/surah-names/v1/sura_names.woff?v=#{$asset-version}")
-      format("woff");
+    url("/fonts/quran/surah-names/v1/sura_names.ttf") format("truetype"),
+    url("/fonts/quran/quran/surah-names/v1/sura_names.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -53,20 +46,17 @@ $asset-version: "1";
 @font-face {
   font-family: "divehi";
   src: local("Dhivehi Akuru"),
-    url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff2?v=#{$asset-version}"),
-    url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.woff?v=#{$asset-version}")
-      format("woff"),
-    url("#{$font-cdn}/lang/dhivehi/dhivehi/DhivehiAkuru.otf?v=#{$asset-version}")
-      format("opentype");
+    url("/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.woff2"),
+    url("/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.woff") format("woff"),
+    url("/fonts/lang/dhivehi/dhivehi/DhivehiAkuru.otf") format("opentype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "NotoNastaliq";
   src: local("Noto Naskh Arabic"), local("Nafees Regular"),
-    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.woff2?v=#{$asset-version}"),
-    url("#{$font-cdn}/lang/arabic/NotoNaskhArabic-Regular.ttf?v=#{$asset-version}")
-      format("truetype");
+    url("/fonts/lang/arabic/NotoNaskhArabic-Regular.woff2"),
+    url("/fonts/lang/arabic/NotoNaskhArabic-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -74,12 +64,9 @@ $asset-version: "1";
 
 @font-face {
   font-family: "MehrNastaliq";
-  src: local("Mehr Nastaliq Web"),
-    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff2?v=#{$asset-version}"),
-    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.woff?v=#{$asset-version}")
-      format("woff"),
-    url("#{$font-cdn}/lang/urdu/MehrNastaliqWeb.ttf?v=#{$asset-version}")
-      format("truetype");
+  src: local("Mehr Nastaliq Web"), url("/fonts/lang/urdu/MehrNastaliqWeb.woff2"),
+    url("/fonts/lang/urdu/MehrNastaliqWeb.woff") format("woff"),
+    url("/fonts/lang/urdu/MehrNastaliqWeb.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -88,15 +75,14 @@ $asset-version: "1";
 @font-face {
   font-family: "NotoSerifBengali";
   src: local("Noto Serif Bengali"),
-    url("#{$font-cdn}/bengali/NotoSerifBengali-Regular.woff2?v=#{$asset-version}");
+    url("/fonts/bengali/NotoSerifBengali-Regular.woff2");
 }
 
 @font-face {
   font-family: "DroidArabicNaskh";
   src: local("Droid Arabic Naskh"),
-    url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.woff2?v=#{$asset-version}"),
-    url("#{$font-cdn}/lang/kurdish/droid-naskh-regular.ttf?v=#{$asset-version}")
-      format("truetype");
+    url("/fonts/lang/kurdish/droid-naskh-regular.woff2"),
+    url("/fonts/lang/kurdish/droid-naskh-regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -105,8 +91,7 @@ $asset-version: "1";
 // Fallback for browsers that don't support variable fonts
 @font-face {
   font-family: "ProximaVara";
-  src: local("Proxima Vara"),
-    url("#{$font-cdn}/lang/ProximaVara/ProximaVara.woff2?v=#{$asset-version}");
+  src: local("Proxima Vara"), url("/fonts/lang/ProximaVara/ProximaVara.woff2");
   font-weight: 100 900;
   /* default 400 */
   font-stretch: 50% 100%;
