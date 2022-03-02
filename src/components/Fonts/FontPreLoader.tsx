@@ -2,8 +2,6 @@ import React from 'react';
 
 import Head from 'next/head';
 
-import { makeCDNUrl } from 'src/utils/cdn';
-
 const DEFAULT_LOCALE = 'en';
 
 const LOCALE_PRELOADED_FONTS = {
@@ -28,7 +26,7 @@ const FontPreLoader: React.FC<Props> = ({ locale }) => {
           rel="preload"
           as="font"
           type={fontDetails.type}
-          href={makeCDNUrl(fontDetails.location)}
+          href={fontDetails.location}
           crossOrigin="anonymous"
         />
       ))}
