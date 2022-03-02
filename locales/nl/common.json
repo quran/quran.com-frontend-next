@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Knopinfo weergeven bij het afspelen van audio",
         "title": "Instellingen",
         "tooltip-playing-audio-helper": "Toon woordvertaling in tooltip tijdens het spelen van ayah",
+        "value-and-other": "{{value}} en {{othersCount}} andere",
         "value-and-others": "{{value}} en {{othersCount}} anderen",
         "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
         "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"

@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Ses çalarken araç ipucunu göster",
         "title": "Ayarlar",
         "tooltip-playing-audio-helper": "Ayet çalarken kelime çevirisini araç ipucunda göster",
+        "value-and-other": "{{value}} ve {{othersCount}} diğer",
         "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
         "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
         "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"

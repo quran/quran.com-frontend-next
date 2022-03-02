@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Tampilkan tooltip saat memutar audio",
         "title": "Pengaturan",
         "tooltip-playing-audio-helper": "Tampilkan terjemahan kata di tooltip saat bermain ayah",
+        "value-and-other": "{{value}} , dan {{othersCount}} lainnya",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",
         "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
         "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan 'cursor mouse' atau mengklik perkataan"

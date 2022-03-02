@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Mostra la descrizione comando durante la riproduzione dell'audio",
         "title": "Impostazioni",
         "tooltip-playing-audio-helper": "Mostra la traduzione delle parole nella descrizione comando durante la riproduzione di ayah",
+        "value-and-other": "{{value}} e {{othersCount}} altro",
         "value-and-others": "{{value}} e {{othersCount}} altri",
         "wbw-helper": "Visualizza la traduzione o la traslitterazione direttamente sotto la parola",
         "word-tooltip-helper": "Visualizza la traduzione o la traslitterazione quando si passa con il mouse o si fa clic sulla parola"

@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Afficher l'info-bulle lors de la lecture audio",
         "title": "Paramètres",
         "tooltip-playing-audio-helper": "Afficher la traduction des mots dans l'info-bulle pendant la lecture d'ayah",
+        "value-and-other": "{{value}} et {{othersCount}} autre",
         "value-and-others": "{{value}} , et {{othersCount}} autres",
         "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
         "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"

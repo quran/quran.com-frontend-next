@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "অডিও চালানোর সময় টুলটিপ দেখান",
         "title": "সেটিংস",
         "tooltip-playing-audio-helper": "আয়াত খেলার সময় টুলটিপে শব্দ অনুবাদ দেখান",
+        "value-and-other": "{{value}} , এবং {{othersCount}} অন্যান্য৷",
         "value-and-others": "{{value}} , এবং {{othersCount}} অন্যান্য",
         "wbw-helper": "সরাসরি শব্দের নিচে অনুবাদ বা প্রতিবর্ণীকরণ প্রদর্শন করুন",
         "word-tooltip-helper": "শব্দটি ঘোরানো বা ক্লিক করার সময় অনুবাদ বা প্রতিবর্ণীকরণ প্রদর্শন করুন"

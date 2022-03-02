@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "แสดงคำแนะนำเครื่องมือเมื่อเล่นเสียง",
         "title": "การตั้งค่า",
         "tooltip-playing-audio-helper": "แสดงการแปลคำในคำแนะนำเครื่องมือขณะเล่น ayah",
+        "value-and-other": "{{value}} และอีก {{othersCount}}",
         "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
         "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
         "word-tooltip-helper": "แสดงการแปลหรือการทับศัพท์เมื่อวางเมาส์เหนือหรือคลิกที่คำ"

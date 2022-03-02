@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "Show tooltip when playing audio",
         "title": "Settings",
         "tooltip-playing-audio-helper": "Show word translation in tooltip while playing ayah",
+        "value-and-other": "{{value}}, and {{othersCount}} other",
         "value-and-others": "{{value}}, and {{othersCount}} others",
         "wbw-helper": "Display the translation or transliteration directly under the word",
         "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"

@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "إظهار تلميح الأداة عند تشغيل الصوت",
         "title": "الإعدادات",
         "tooltip-playing-audio-helper": "إظهار ترجمة الكلمات في تلميح الأداة أثناء تشغيل الآية",
+        "value-and-other": "{{value}} و {{othersCount}} آخر",
         "value-and-others": "{{value}} و {{othersCount}} أخرى",
         "wbw-helper": "اعرض الترجمة أو النقل الحرفي مباشرة تحت الكلمة",
         "word-tooltip-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) عند التمرير أو النقر فوق الكلمة"

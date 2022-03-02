@@ -63,7 +63,12 @@ const TranslationSection = () => {
 
       let selectedValueString = t('settings.no-translation-selected');
       if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation.name;
-      if (selectedTranslations.length > 1)
+      if (selectedTranslations.length === 2)
+        selectedValueString = t('settings.value-and-other', {
+          value: firstSelectedTranslation.name,
+          othersCount: localizedSelectedTranslations,
+        });
+      if (selectedTranslations.length > 2)
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTranslation.name,
           othersCount: localizedSelectedTranslations,

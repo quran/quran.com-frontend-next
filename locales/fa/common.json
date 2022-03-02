@@ -167,6 +167,7 @@
         "show-tooltip-when-playing-audio": "نمایش راهنمای ابزار هنگام پخش صدا",
         "title": "تنظیمات",
         "tooltip-playing-audio-helper": "نمایش ترجمه کلمه در راهنمای ابزار هنگام پخش ayah",
+        "value-and-other": "{{value}} و {{othersCount}} دیگر",
         "value-and-others": "{{value}} و {{othersCount}} دیگر",
         "wbw-helper": "ترجمه یا نویسه‌گردانی را مستقیماً زیر کلمه نمایش دهید",
         "word-tooltip-helper": "نمایش ترجمه یا نویسه‌گردانی هنگام نگه‌داشتن روی کلمه یا کلیک کردن روی آن"
