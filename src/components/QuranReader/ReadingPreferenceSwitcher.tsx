@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,7 +37,8 @@ const ReadingPreferenceSwitcher = () => {
     logValueChange('reading_preference', readingPreference, view);
 
     // drop `startingVerse` from query params
-    const newQueryParams = omit(router.query, ['startingVerse']);
+    const newQueryParams = { ...router.query };
+    delete newQueryParams.startingVerse;
     const newUrlObject = {
       pathname: router.pathname,
       query: newQueryParams,
