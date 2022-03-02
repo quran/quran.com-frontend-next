@@ -1,6 +1,10 @@
 .base {
   text-decoration: none;
   color: inherit;
+  &:active,
+  &:focus {
+    outline: none;
+  }
 }
 // variants
 .highlight {

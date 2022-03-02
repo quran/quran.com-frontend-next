@@ -4,6 +4,7 @@ import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { logTarteelLinkClick } from 'src/utils/eventLogger';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');
@@ -21,20 +22,27 @@ const Links = () => {
         { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
-        { text: t('feedback'), url: 'https://feedback.quran.com/' },
+        { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
         { text: t('help'), url: '/support' },
       ],
     },
     {
       title: t('network'),
       links: [
-        { text: 'QuranicAudio.com', url: 'https://quranicaudio.com' },
-        { text: 'Salah.com', url: 'https://salah.com' },
-        { text: 'Sunnah.com', url: 'https://sunnah.com' },
-        { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com' },
-        { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com' },
-        { text: 'QuranReflect.com', url: 'https://quranreflect.com' },
-        { text: 'Tarteel.ai', url: 'https://www.tarteel.ai/' },
+        { text: 'QuranicAudio.com', url: 'https://quranicaudio.com', isExternal: true },
+        { text: 'Salah.com', url: 'https://salah.com', isExternal: true },
+        { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
+        { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
+        { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
+        { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
+        {
+          text: 'Tarteel.ai',
+          url: 'https://www.tarteel.ai/',
+          isExternal: true,
+          onClick: () => {
+            logTarteelLinkClick('footer_network_attribution');
+          },
+        },
       ],
     },
     {
@@ -58,7 +66,12 @@ const Links = () => {
           <div>
             {group.links.map((link) => (
               <div key={link.url} className={styles.linkContainer}>
-                <Link href={link.url} variant={LinkVariant.Primary}>
+                <Link
+                  href={link.url}
+                  variant={LinkVariant.Primary}
+                  newTab={!!link.isExternal}
+                  {...(link.onClick && { onClick: link.onClick })}
+                >
                   {link.text}
                 </Link>
               </div>

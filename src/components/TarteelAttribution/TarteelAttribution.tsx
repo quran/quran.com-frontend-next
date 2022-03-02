@@ -5,21 +5,28 @@ import TarteelText from '../../../public/icons/tarteel-text.svg';
 
 import styles from './TarteelAttribution.module.scss';
 
-const TarteelAttribution = () => {
+import Link from 'src/components/dls/Link/Link';
+import { logTarteelLinkClick } from 'src/utils/eventLogger';
+
+interface Props {
+  isCommandBar?: boolean;
+}
+
+const TarteelAttribution: React.FC<Props> = ({ isCommandBar = false }) => {
   const { t } = useTranslation('common');
+  const onLinkClicked = () => {
+    logTarteelLinkClick(isCommandBar ? 'command_bar' : 'search_drawer');
+  };
   return (
-    <a
-      href="https://download.tarteel.ai/"
-      className={styles.container}
-      target="_blank"
-      rel="noreferrer"
-    >
-      <span className={styles.poweredBy}>{t('voice.voice-search-powered-by')}</span>
-      <TarteelLogo />
-      <span className={styles.tarteelTextWrapper}>
-        <TarteelText />
-      </span>
-    </a>
+    <Link href="https://download.tarteel.ai/" onClick={onLinkClicked} newTab>
+      <div className={styles.container}>
+        <span className={styles.poweredBy}>{t('voice.voice-search-powered-by')}</span>
+        <TarteelLogo />
+        <span className={styles.tarteelTextWrapper}>
+          <TarteelText />
+        </span>
+      </div>
+    </Link>
   );
 };
 

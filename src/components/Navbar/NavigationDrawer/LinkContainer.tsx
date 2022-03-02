@@ -8,22 +8,16 @@ type LinkContainerProps = {
   href?: string;
   isExternalLink?: boolean;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
-const LinkContainer = ({ href, isExternalLink, children }: LinkContainerProps) => {
+const LinkContainer = ({ href, isExternalLink, children, onClick }: LinkContainerProps) => {
   if (!href) {
     return <>{children}</>;
   }
-  if (isExternalLink) {
-    return (
-      <a className={styles.anchor} href={href} target="_blank" rel="noreferrer">
-        {children}
-      </a>
-    );
-  }
   return (
-    <Link href={href} passHref prefetch={false}>
-      <a className={styles.anchor}>{children}</a>
+    <Link href={href} passHref prefetch={false} onClick={onClick} newTab={isExternalLink}>
+      <div className={styles.anchor}>{children}</div>
     </Link>
   );
 };
