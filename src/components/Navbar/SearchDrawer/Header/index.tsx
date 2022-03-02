@@ -31,6 +31,12 @@ const Header: React.FC<Props> = ({
   const { t } = useTranslation('common');
   // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
   const isRTLInput = useElementComputedPropertyValue(inputRef, 'direction') === 'rtl';
+
+  const onKeyboardReturnPressed = (e) => {
+    e.preventDefault();
+    inputRef.current.blur();
+  };
+
   return (
     <>
       {isVoiceFlowStarted ? (
@@ -47,18 +53,18 @@ const Header: React.FC<Props> = ({
               [styles.searchInputContainerRTL]: isRTLInput,
             })}
           >
-            <input
-              className={styles.searchInput}
-              inputMode="search"
-              enterKeyHint="search"
-              type="text"
-              ref={inputRef}
-              dir="auto"
-              placeholder={t('search.title')}
-              onChange={onSearchQueryChange}
-              value={searchQuery}
-              disabled={isSearching}
-            />
+            <form onSubmit={onKeyboardReturnPressed}>
+              <input
+                className={styles.searchInput}
+                type="text"
+                ref={inputRef}
+                dir="auto"
+                placeholder={t('search.title')}
+                onChange={onSearchQueryChange}
+                value={searchQuery}
+                disabled={isSearching}
+              />
+            </form>
             <TarteelVoiceSearchTrigger
               onClick={() => {
                 logButtonClick('search_drawer_voice_search_start_flow');
