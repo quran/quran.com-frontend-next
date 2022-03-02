@@ -31,6 +31,12 @@ const Header: React.FC<Props> = ({
   const { t } = useTranslation('common');
   // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
   const isRTLInput = useElementComputedPropertyValue(inputRef, 'direction') === 'rtl';
+
+  const onKeyboardReturnPressed = (e) => {
+    e.preventDefault();
+    inputRef.current.blur();
+  };
+
   return (
     <>
       {isVoiceFlowStarted ? (
@@ -47,12 +53,7 @@ const Header: React.FC<Props> = ({
               [styles.searchInputContainerRTL]: isRTLInput,
             })}
           >
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                inputRef.current.blur();
-              }}
-            >
+            <form onSubmit={onKeyboardReturnPressed}>
               <input
                 className={styles.searchInput}
                 type="text"
