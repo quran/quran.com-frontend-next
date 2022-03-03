@@ -27,6 +27,7 @@
 
 .mainContent {
   background-color: var(--quran-reader-content-background);
+  padding-block-end: calc(4 * var(--spacing-mega));
 }
 
 .virtuosoScroller {

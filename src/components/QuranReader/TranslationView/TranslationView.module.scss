@@ -14,6 +14,7 @@
   margin-inline-start: auto;
   margin-inline-end: auto;
   background-color: var(--quran-reader-content-background);
+  padding-block-end: calc(2 * var(--spacing-mega));
 }
 
 .leftShadow {

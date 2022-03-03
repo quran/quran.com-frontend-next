@@ -5,11 +5,6 @@
 
 $quran-reader-padding-mobile: 2rem;
 $quran-reader-padding-tablet: 2.1rem;
-$virtual-scrolling-height-bandage: calc(
-  4 * var(--spacing-mega)
-); // library react-virtuoso's inline `height` is less than the required `height`.
-// so we're adding a little extra padding at the bottom to make sure the other components are visible.
-// for example for EndOfScrollingButton component
 
 .infiniteScroll {
   @include utility.quranContainer;
@@ -65,7 +60,6 @@ $virtual-scrolling-height-bandage: calc(
   padding-block-start: $quran-reader-padding-mobile;
   padding-inline-start: 0;
   padding-inline-end: 0;
-  padding-block-end: $virtual-scrolling-height-bandage;
   background-color: var(--quran-reader-background);
   @include breakpoints.tablet {
     padding-block-start: $quran-reader-padding-tablet;

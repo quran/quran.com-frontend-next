@@ -87,7 +87,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div className={styles.emptySpacePlaceholder} />
+      {!isHidden && <div className={styles.emptySpacePlaceholder} />}
       <div
         className={classNames(styles.container, styles.containerDefault, {
           [styles.containerHidden]: isHidden,
