@@ -1,5 +1,6 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
+@use "src/styles/theme";
 
 @include utility.generate-line-width-scales("code_v1");
 @include utility.generate-line-width-scales("code_v2");
@@ -17,23 +18,15 @@
 
 .leftShadow {
   flex: 1;
-  background: linear-gradient(
-    to right,
-    var(--color-background-default),
-    var(--color-background-elevated)
-  );
+  background: var(--quran-reader-left-shadow);
 }
 .rightShadow {
   flex: 1;
-  background: linear-gradient(
-    to left,
-    var(--color-background-default),
-    var(--color-background-elevated)
-  );
+  background: var(--quran-reader-right-shadow);
 }
 
 .mainContent {
-  background-color: var(--color-background-elevated);
+  background-color: var(--quran-reader-content-background);
 }
 
 .virtuosoScroller {

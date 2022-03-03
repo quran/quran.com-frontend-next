@@ -1,33 +1,26 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .outerContainer {
   display: flex;
 }
 
 .container {
-  min-width: 100%;
+  min-width: 95%;
 
   @include breakpoints.tablet {
     min-width: 80%;
   }
   margin-inline-start: auto;
   margin-inline-end: auto;
-  background-color: var(--color-background-elevated);
+  background-color: var(--quran-reader-content-background);
 }
 
 .leftShadow {
   flex: 1;
-  background: linear-gradient(
-    to right,
-    var(--color-background-default),
-    var(--color-background-elevated)
-  );
+  background: var(--quran-reader-left-shadow);
 }
 .rightShadow {
   flex: 1;
-  background: linear-gradient(
-    to left,
-    var(--color-background-default),
-    var(--color-background-elevated)
-  );
+  background: var(--quran-reader-right-shadow);
 }

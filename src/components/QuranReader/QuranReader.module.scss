@@ -1,8 +1,9 @@
 @use "src/styles/constants";
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
+@use "src/styles/theme";
 
-$quran-reader-padding-mobile: 3rem;
+$quran-reader-padding-mobile: 2rem;
 $quran-reader-padding-tablet: 2.1rem;
 $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
@@ -18,12 +19,6 @@ $virtual-scrolling-height-bandage: calc(
   margin-inline-end: auto;
 }
 
-.readingView {
-  @include breakpoints.smallerThanTablet {
-    width: 85%;
-  }
-}
-
 .loading {
   text-align: center;
   max-width: 80%;
@@ -34,14 +29,46 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
+  --quran-reader-background: var(--color-background-default);
+
+  --quran-reader-content-background: var(--color-background-elevated);
+  --shadow-color: var(--quran-reader-background);
+  --quran-reader-left-shadow: linear-gradient(
+    to right,
+    var(--shadow-color),
+    var(--quran-reader-content-background)
+  );
+  --quran-reader-right-shadow: linear-gradient(
+    to left,
+    var(--shadow-color),
+    var(--quran-reader-content-background)
+  );
+
+  @include breakpoints.tablet {
+    --quran-reader-background: var(--color-background-default);
+
+    @include theme.light {
+      --quran-reader-background: var(--color-background-alternative-faint);
+    }
+    @include theme.dark {
+      --quran-reader-background: var(--shade-9);
+    }
+  }
+
+  @include theme.dark {
+    --quran-reader-content-background: var(--color-background-default);
+  }
+  @include theme.sepia {
+    --quran-reader-content-background: #faf1e2; // TODO: turn into constants
+  }
+
   padding-block-start: $quran-reader-padding-mobile;
   padding-inline-start: 0;
   padding-inline-end: 0;
   padding-block-end: $virtual-scrolling-height-bandage;
-  background-color: var(--color-background-elevated);
+  background-color: var(--quran-reader-background);
   @include breakpoints.tablet {
     padding-block-start: $quran-reader-padding-tablet;
-    background-color: var(--color-background-default);
     transition: var(--transition-regular);
     margin-inline-end: 0;
   }
