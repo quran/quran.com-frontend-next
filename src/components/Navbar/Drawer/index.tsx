@@ -83,6 +83,7 @@ const Drawer: React.FC<Props> = ({
   hideCloseButton = false,
   closeOnNavigation = true,
 }) => {
+  const { isVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
@@ -129,6 +130,7 @@ const Drawer: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.container, {
+        [styles.navbarInvisible]: !isVisible,
         [styles.containerOpen]: isOpen,
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
