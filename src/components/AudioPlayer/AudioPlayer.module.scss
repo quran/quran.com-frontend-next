@@ -7,6 +7,9 @@
 // we need to add an empty space placeholder, so the AudioPlayer doesn't cover the other elements in the page
 .emptySpacePlaceholder {
   height: constants.$audio-player-default-height;
+  @include breakpoints.tablet {
+    height: constants.$audio-player-default-desktop-height;
+  }
 }
 
 .container {
