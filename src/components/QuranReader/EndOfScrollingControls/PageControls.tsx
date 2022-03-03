@@ -17,7 +17,13 @@ interface Props {
 
 const PageControls: React.FC<Props> = ({ lastVerse }) => {
   const { t } = useTranslation('quran-reader');
-  const { pageNumber } = lastVerse;
+  /**
+   * We need to access the last word of the the last verse instead
+   * since the pageNumber of the last verse in the case of the 16-line
+   * Mushaf can point to the next page instead of the current one when
+   * the verse spans across 2 pages e.g. /ur/page/30 (verse 16).
+   */
+  const { pageNumber } = lastVerse.words[lastVerse.words.length - 1];
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles);
   const page = Number(pageNumber);
   return (
