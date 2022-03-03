@@ -48,6 +48,16 @@
   justify-content: flex-end;
 }
 
+.secondaryAction {
+  opacity: 0;
+}
+
+@include breakpoints.tablet {
+  .cellContainer:hover .secondaryAction {
+    opacity: 1;
+  }
+}
+
 .actionContainerLeft > .actionItem + .actionItem,
 .actionContainerRight > .actionItem + .actionItem {
   margin-inline-start: var(--spacing-xxsmall);

@@ -5,8 +5,8 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import BookmarkIcon from './BookmarkIcon';
-// import QuranReflectButton from './QuranReflectButton';
-// import ShareVerseButton from './ShareVerseButton';
+import QuranReflectButton from './QuranReflectButton';
+import ShareVerseButton from './ShareVerseButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
@@ -17,7 +17,7 @@ import {
   verseTranslationFontChanged,
 } from 'src/components/QuranReader/utils/memoization';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
-// import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
+import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
@@ -71,19 +71,19 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             </div>
           </div>
           <div className={styles.actionContainerRight}>
-            {/* <div className={classNames(styles.actionItem)}>
+            <div className={classNames(styles.actionItem, styles.secondaryAction)}>
               <ShareVerseButton verseKey={verse.verseKey} />
             </div>
-            <div className={classNames(styles.actionItem)}>
+            <div className={classNames(styles.actionItem, styles.secondaryAction)}>
               <QuranReflectButton verseKey={verse.verseKey} />
             </div>
-            <div className={styles.actionItem}>
+            <div className={(styles.actionItem, styles.secondaryAction)}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}
                 timestamp={verse.timestamps.timestampFrom}
               />
-            </div> */}
-            <div className={styles.actionItem}>
+            </div>
+            <div className={classNames(styles.actionItem, styles.overflowMenu)}>
               <OverflowVerseActionsMenu verse={verse} isModal isPortalled />
             </div>
           </div>
