@@ -12,6 +12,7 @@ import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getJuzNavigationUrl } from 'src/utils/navigation';
+import { formatStringNumber } from 'src/utils/number';
 import { getPageOrJuzMetaDescription } from 'src/utils/seo';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -55,13 +56,15 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
 
 // eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const juzId = String(params.juzId);
+  let juzId = String(params.juzId);
   // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
   if (!isValidJuzId(juzId)) {
     return {
       notFound: true,
     };
   }
+  juzId = formatStringNumber(juzId);
+
   const defaultMushafId = getMushafId(
     getQuranReaderStylesInitialState(locale).quranFont,
     getQuranReaderStylesInitialState(locale).mushafLines,
