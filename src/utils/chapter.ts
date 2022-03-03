@@ -2,6 +2,8 @@
 /* eslint-disable global-require */
 import random from 'lodash/random';
 
+import { formatStringNumber } from './number';
+
 import Chapter from 'types/Chapter';
 
 const DEFAULT_LANGUAGE = 'en';
@@ -42,7 +44,8 @@ export const getAllChaptersData = (lang: string = DEFAULT_LANGUAGE): Record<stri
  */
 export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Chapter => {
   const chapters = getAllChaptersData(lang);
-  return chapters[id];
+  const chapterNumberString = formatStringNumber(id);
+  return chapters[chapterNumberString];
 };
 
 /**

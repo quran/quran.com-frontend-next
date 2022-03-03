@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 import { getChapterIdBySlug } from 'src/api';
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
+import { formatStringNumber } from 'src/utils/number';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
@@ -30,7 +31,7 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         const chapterIdOrVerseKeyOrSlug = chapterId as string;
         // if it's a chapter id
         if (isValidChapterId(chapterIdOrVerseKeyOrSlug)) {
-          setChapterIds([chapterIdOrVerseKeyOrSlug]);
+          setChapterIds([formatStringNumber(chapterIdOrVerseKeyOrSlug)]);
         } else if (isValidVerseKey(chapterIdOrVerseKeyOrSlug)) {
           // if it's a verse key e.g 5:1
           setChapterIds([getChapterNumberFromKey(chapterIdOrVerseKeyOrSlug).toString()]);
@@ -46,10 +47,10 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
           }
         }
       } else if (pageId) {
-        const chapterIdsForPage = await getChapterIdsForPage(pageId as string);
+        const chapterIdsForPage = await getChapterIdsForPage(formatStringNumber(pageId as string));
         setChapterIds(chapterIdsForPage);
       } else if (juzId) {
-        setChapterIds(await getChapterIdsForJuz(juzId as string));
+        setChapterIds(await getChapterIdsForJuz(formatStringNumber(juzId as string)));
       }
     })();
   }, [pageId, juzId, lang, chapterId]);

@@ -4,6 +4,7 @@ import { random } from 'lodash';
 import range from 'lodash/range';
 
 import { getAllChaptersData, getChapterData, getRandomChapterId } from './chapter';
+import { formatStringNumber } from './number';
 
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -18,8 +19,11 @@ const COLON_SPLITTER = ':';
  */
 export const generateChapterVersesKeys = (chapterId: string): string[] => {
   const data = getAllChaptersData();
+  const chapterNumberString = formatStringNumber(chapterId);
 
-  return range(data[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
+  return range(data[chapterNumberString].versesCount).map(
+    (verseId) => `${chapterNumberString}:${verseId + 1}`,
+  );
 };
 
 /**

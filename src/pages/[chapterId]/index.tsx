@@ -18,6 +18,7 @@ import {
   getSurahNavigationUrl,
   getVerseNavigationUrl,
 } from 'src/utils/navigation';
+import { formatStringNumber } from 'src/utils/number';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -184,7 +185,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         },
       };
     }
-    const versesResponse = await getChapterVerses(chapterId, locale, apiParams);
+    const versesResponse = await getChapterVerses(formatStringNumber(chapterId), locale, apiParams);
     const metaData = { numberOfVerses };
     versesResponse.metaData = metaData;
     versesResponse.pagesLookup = pagesLookupResponse;
