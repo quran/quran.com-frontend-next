@@ -40,6 +40,23 @@ const getPageVersesRange = (
 };
 
 /**
+ * Get the verses returned from the initialData of the first page.
+ * This function will filter out all the words that don't
+ * belong to the first page in-case we have some verses
+ * that contain words that don't belong to the first page
+ * (applies to 16-line Indopak Mushaf e.g. /ur/haji/25 or /ur/2/211-216)
+ *
+ * @param {number} pageNumber
+ * @param {Verse[]} initialVerses
+ * @returns {Verse[]}
+ */
+const getInitialVerses = (pageNumber: number, initialVerses: Verse[]): Verse[] =>
+  initialVerses.map((verse) => ({
+    ...verse,
+    words: verse.words.filter((word) => word.pageNumber === pageNumber),
+  }));
+
+/**
  * A component that will fetch the verses of the current mushaf page
  * and will render a skeleton while it's loading.
  *
@@ -61,6 +78,10 @@ const PageContainer: React.FC<Props> = ({
     () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
     [pageIndex, pagesVersesRange],
   );
+  const initialVerses = useMemo(
+    () => (pageIndex === 0 ? getInitialVerses(pageNumber, initialData.verses) : initialData.verses),
+    [initialData.verses, pageIndex, pageNumber],
+  );
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const shouldUseInitialData =
@@ -79,7 +100,7 @@ const PageContainer: React.FC<Props> = ({
     }),
     verseFetcher,
     {
-      fallbackData: shouldUseInitialData ? initialData.verses : null,
+      fallbackData: shouldUseInitialData ? initialVerses : null,
       revalidateOnMount: !shouldUseInitialData,
     },
   );
