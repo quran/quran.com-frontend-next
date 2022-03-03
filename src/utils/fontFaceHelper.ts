@@ -34,14 +34,14 @@ export const getV1OrV2FontFaceSource = (isV1: boolean, pageNumber: number): stri
   const pageName = String(pageNumber).padStart(3, '0');
 
   if (isV1) {
-    const woff2 = `fonts/quran/hafs/v1/woff2/p${pageNumber}.woff2`;
-    const woff = `fonts/quran/hafs/v1/woff/p${pageNumber}.woff`;
-    const ttf = `fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`;
+    const woff2 = `/fonts/quran/hafs/v1/woff2/p${pageNumber}.woff2`;
+    const woff = `/fonts/quran/hafs/v1/woff/p${pageNumber}.woff`;
+    const ttf = `/fonts/quran/hafs/v1/ttf/p${pageNumber}.ttf`;
     return `local(QCF_P${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
   }
 
-  const woff2 = `fonts/quran/hafs/v2/woff2/p${pageNumber}.woff2`;
-  const woff = `fonts/quran/hafs/v2/woff/p${pageNumber}.woff`;
+  const woff2 = `/fonts/quran/hafs/v2/woff2/p${pageNumber}.woff2`;
+  const woff = `/fonts/quran/hafs/v2/woff/p${pageNumber}.woff`;
 
   return `local(QCF2${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff')`;
 };

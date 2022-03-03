@@ -5,10 +5,10 @@ import Head from 'next/head';
 const DEFAULT_LOCALE = 'en';
 
 const LOCALE_PRELOADED_FONTS = {
-  [DEFAULT_LOCALE]: [{ type: 'font/woff2', location: 'fonts/lang/ProximaVara/ProximaVara.woff2' }],
-  ar: [{ type: 'font/woff2', location: 'fonts/lang/arabic/NotoNaskhArabic-Regular.woff2' }],
-  bn: [{ type: 'font/ttf', location: 'fonts/lang/bengali/NotoSerifBengali-Regular.woff2' }],
-  ur: [{ type: 'font/woff2', location: 'fonts/lang/urdu/MehrNastaliqWeb.woff2' }],
+  [DEFAULT_LOCALE]: [{ type: 'font/woff2', location: '/fonts/lang/ProximaVara/ProximaVara.woff2' }],
+  ar: [{ type: 'font/woff2', location: '/fonts/lang/arabic/NotoNaskhArabic-Regular.woff2' }],
+  bn: [{ type: 'font/ttf', location: '/fonts/lang/bengali/NotoSerifBengali-Regular.woff2' }],
+  ur: [{ type: 'font/woff2', location: '/fonts/lang/urdu/MehrNastaliqWeb.woff2' }],
 } as Record<string, { type: string; location: string }[]>;
 
 interface Props {
