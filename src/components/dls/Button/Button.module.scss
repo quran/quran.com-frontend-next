@@ -15,9 +15,12 @@
   justify-content: center;
   border-radius: var(--border-radius-default);
   padding-inline: var(--spacing-small);
-  &:hover {
-    background-color: transparent;
-    color: var(--themed-bg);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+      color: var(--themed-bg);
+    }
   }
   &:active {
     transform: scale(0.92);
@@ -35,9 +38,12 @@
   --themed-bg: var(--color-background-default);
   --themed-fg: var(--color-text-faded);
   --themed-border: var(--color-borders-hairline);
-  &:hover {
-    --themed-bg: var(--color-text-default);
-    --themed-border: var(--color-primary-medium);
+
+  @media (hover: hover) {
+    &:hover {
+      --themed-bg: var(--color-text-default);
+      --themed-border: var(--color-primary-medium);
+    }
   }
 }
 
@@ -91,11 +97,13 @@
 // variant
 .shadow {
   box-shadow: var(--shadow-large);
-  &:hover {
-    background-color: var(--themed-bg);
-    color: var(--themed-fg);
-    position: relative;
-    inset-block-start: -1px;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--themed-bg);
+      color: var(--themed-fg);
+      position: relative;
+      inset-block-start: -1px;
+    }
   }
 }
 
@@ -142,16 +150,20 @@
   border: 1px solid var(--color-secondary-medium);
   color: var(--color-text-default);
   opacity: 0.7;
-  &:hover {
-    background-color: var(--color-background-alternative-medium);
-    opacity: 0.7;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-background-alternative-medium);
+      opacity: 0.7;
+    }
   }
 }
 .ghost.disabled {
   border: none;
   background: inherit;
-  &:hover {
-    background: inherit;
+  @media (hover: hover) {
+    &:hover {
+      background: inherit;
+    }
   }
 }
 
