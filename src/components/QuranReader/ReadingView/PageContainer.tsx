@@ -42,9 +42,9 @@ const getPageVersesRange = (
 /**
  * Get the verses returned from the initialData of the first page.
  * This function will filter out all the words that don't
- * belong to the first page to in-case we have have verses
+ * belong to the first page in-case we have some verses
  * that contain words that don't belong to the first page
- * for 16-line Indopak Mushaf e.g. /ur/haji/25 or ur/2/211-216
+ * (applies to 16-line Indopak Mushaf e.g. /ur/haji/25 or /ur/2/211-216)
  *
  * @param {number} pageNumber
  * @param {Verse[]} initialVerses
