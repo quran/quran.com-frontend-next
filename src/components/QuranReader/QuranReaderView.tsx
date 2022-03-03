@@ -3,7 +3,6 @@ import React from 'react';
 
 import dynamic from 'next/dynamic';
 
-import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -30,7 +29,6 @@ const QuranReaderView: React.FC<Props> = ({
   if (isReadingPreference) {
     return (
       <>
-        <ReadingPreferenceSwitcher />
         <ReadingView
           quranReaderStyles={quranReaderStyles}
           quranReaderDataType={quranReaderDataType}
@@ -42,7 +40,6 @@ const QuranReaderView: React.FC<Props> = ({
   }
   return (
     <>
-      <ReadingPreferenceSwitcher />
       <TranslationView
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}

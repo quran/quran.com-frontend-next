@@ -7,6 +7,7 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
+import ReadingPreferenceSwitcher from '../ReadingPreferenceSwitcher';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
@@ -98,6 +99,7 @@ const TranslationView = ({
       <div onCopy={(event) => onCopyQuranWords(event, verses)} className={styles.outerContainer}>
         <div className={styles.leftShadow} />
         <div className={styles.container}>
+          <ReadingPreferenceSwitcher />
           <Virtuoso
             ref={virtuosoRef}
             useWindowScroll

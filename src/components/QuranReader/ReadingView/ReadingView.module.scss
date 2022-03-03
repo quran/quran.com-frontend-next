@@ -32,8 +32,11 @@
   );
 }
 
-.virtuosoScroller {
+.mainContent {
   background-color: var(--color-background-elevated);
+}
+
+.virtuosoScroller {
   & [data-viewport-type="window"] {
     // virtuoso adds position: absolute by default so we need to over-ride it
     position: unset !important;

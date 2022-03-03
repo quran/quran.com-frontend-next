@@ -2,7 +2,8 @@
 @use "src/styles/breakpoints";
 @use "src/styles/utility";
 
-$quran-reader-padding: 3rem;
+$quran-reader-padding-mobile: 3rem;
+$quran-reader-padding-tablet: 2.1rem;
 $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
 ); // library react-virtuoso's inline `height` is less than the required `height`.
@@ -33,12 +34,13 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
-  padding-block-start: $quran-reader-padding;
+  padding-block-start: $quran-reader-padding-mobile;
   padding-inline-start: 0;
   padding-inline-end: 0;
   padding-block-end: $virtual-scrolling-height-bandage;
   background-color: var(--color-background-elevated);
   @include breakpoints.tablet {
+    padding-block-start: $quran-reader-padding-tablet;
     background-color: var(--color-background-default);
     transition: var(--transition-regular);
     margin-inline-end: 0;

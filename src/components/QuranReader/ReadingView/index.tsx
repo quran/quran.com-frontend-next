@@ -10,6 +10,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import ReadingPreferenceSwitcher from '../ReadingPreferenceSwitcher';
+
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
 import PageNavigationButtons from './PageNavigationButtons';
@@ -174,7 +176,8 @@ const ReadingView = ({
         )}
       >
         <div className={styles.leftShadow} />
-        <div>
+        <div className={styles.mainContent}>
+          <ReadingPreferenceSwitcher />
           {isLoading ? (
             <div className={styles.virtuosoScroller}>
               <ReadingViewSkeleton />
