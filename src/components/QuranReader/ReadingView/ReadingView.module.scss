@@ -11,12 +11,29 @@
 .container {
   max-width: 100%;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   align-content: center;
 }
 
+.leftShadow {
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    var(--color-background-default),
+    var(--color-background-elevated)
+  );
+}
+.rightShadow {
+  flex: 1;
+  background: linear-gradient(
+    to left,
+    var(--color-background-default),
+    var(--color-background-elevated)
+  );
+}
+
 .virtuosoScroller {
+  background-color: var(--color-background-elevated);
   & [data-viewport-type="window"] {
     // virtuoso adds position: absolute by default so we need to over-ride it
     position: unset !important;

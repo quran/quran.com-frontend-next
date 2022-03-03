@@ -1,10 +1,33 @@
 @use "src/styles/breakpoints";
 
+.outerContainer {
+  display: flex;
+}
+
 .container {
-  max-width: 100%;
+  min-width: 100%;
+
   @include breakpoints.tablet {
-    max-width: 80%;
+    min-width: 80%;
   }
   margin-inline-start: auto;
   margin-inline-end: auto;
+  background-color: var(--color-background-elevated);
+}
+
+.leftShadow {
+  flex: 1;
+  background: linear-gradient(
+    to right,
+    var(--color-background-default),
+    var(--color-background-elevated)
+  );
+}
+.rightShadow {
+  flex: 1;
+  background: linear-gradient(
+    to left,
+    var(--color-background-default),
+    var(--color-background-elevated)
+  );
 }

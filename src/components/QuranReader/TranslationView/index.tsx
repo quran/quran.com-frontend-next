@@ -10,6 +10,7 @@ import QueryParamMessage from '../QueryParamMessage';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
+import styles from './TranslationView.module.scss';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { getNumberOfPages } from 'src/components/QuranReader/utils/page';
@@ -94,23 +95,27 @@ const TranslationView = ({
         reciterQueryParamDifferent={reciterQueryParamDifferent}
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-      <div onCopy={(event) => onCopyQuranWords(event, verses)}>
-        <Virtuoso
-          ref={virtuosoRef}
-          useWindowScroll
-          totalCount={numberOfPages}
-          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-          initialItemCount={1} // needed for SSR.
-          itemContent={itemContentRenderer}
-          components={{
-            Footer: () => (
-              <EndOfScrollingControls
-                quranReaderDataType={quranReaderDataType}
-                lastVerse={verses[verses.length - 1]}
-              />
-            ),
-          }}
-        />
+      <div onCopy={(event) => onCopyQuranWords(event, verses)} className={styles.outerContainer}>
+        <div className={styles.leftShadow} />
+        <div className={styles.container}>
+          <Virtuoso
+            ref={virtuosoRef}
+            useWindowScroll
+            totalCount={numberOfPages}
+            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+            initialItemCount={1} // needed for SSR.
+            itemContent={itemContentRenderer}
+            components={{
+              Footer: () => (
+                <EndOfScrollingControls
+                  quranReaderDataType={quranReaderDataType}
+                  lastVerse={verses[verses.length - 1]}
+                />
+              ),
+            }}
+          />
+        </div>
+        <div className={styles.rightShadow} />
       </div>
     </>
   );

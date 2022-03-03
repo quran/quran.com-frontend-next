@@ -173,30 +173,35 @@ const ReadingView = ({
           styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
         )}
       >
-        {isLoading ? (
-          <div className={styles.virtuosoScroller}>
-            <ReadingViewSkeleton />
-          </div>
-        ) : (
-          <Virtuoso
-            ref={virtuosoRef}
-            useWindowScroll
-            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-            className={styles.virtuosoScroller}
-            initialItemCount={1} // needed for SSR.
-            totalCount={pagesCount}
-            itemContent={itemContentRenderer}
-            components={{
-              Footer: () => (
-                <EndOfScrollingControls
-                  quranReaderDataType={quranReaderDataType}
-                  lastVerse={verses[verses.length - 1]}
-                />
-              ),
-            }}
-          />
-        )}
+        <div className={styles.leftShadow} />
+        <div>
+          {isLoading ? (
+            <div className={styles.virtuosoScroller}>
+              <ReadingViewSkeleton />
+            </div>
+          ) : (
+            <Virtuoso
+              ref={virtuosoRef}
+              useWindowScroll
+              increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+              className={styles.virtuosoScroller}
+              initialItemCount={1} // needed for SSR.
+              totalCount={pagesCount}
+              itemContent={itemContentRenderer}
+              components={{
+                Footer: () => (
+                  <EndOfScrollingControls
+                    quranReaderDataType={quranReaderDataType}
+                    lastVerse={verses[verses.length - 1]}
+                  />
+                ),
+              }}
+            />
+          )}
+        </div>
+        <div className={styles.rightShadow} />
       </div>
+
       <PageNavigationButtons
         scrollToNextPage={scrollToNextPage}
         scrollToPreviousPage={scrollToPreviousPage}
