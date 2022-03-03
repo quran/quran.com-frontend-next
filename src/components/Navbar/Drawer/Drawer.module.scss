@@ -116,3 +116,7 @@
 .hiddenButtonHeaderContentContainer {
   align-items: flex-end;
 }
+
+.navbarInvisible {
+  transform: translate3d(0, 0 + constants.$navbar-height, 0);
+}
