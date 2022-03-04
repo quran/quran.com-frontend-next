@@ -20,6 +20,7 @@ type CardProps = {
   imgAlt?: string;
   actionIcon?: ReactNode;
   shouldFlipIconOnRTL?: boolean;
+  onActionIconClick?: () => void;
 };
 
 const Card = ({
@@ -31,6 +32,7 @@ const Card = ({
   actionIcon,
   imgAlt,
   shouldFlipIconOnRTL = true,
+  onActionIconClick,
 }: CardProps) => {
   return (
     <div
@@ -61,6 +63,9 @@ const Card = ({
         </div>
         {size === CardSize.Large && (
           <Button
+            onClick={() => {
+              if (onActionIconClick) onActionIconClick();
+            }}
             className={styles.playIconContainer}
             variant={ButtonVariant.Ghost}
             shouldFlipOnRTL={shouldFlipIconOnRTL}
