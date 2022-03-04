@@ -96,6 +96,15 @@ export const getVerseSelectedTafsirNavigationUrl = (
 ): string => `/${chapterId}:${verseNumber}/tafsirs/${tafsirId}`;
 
 /**
+ * Get the href link to selected tafsir for Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseSelectedReflectionNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/reflections`;
+
+/**
  * Get the href link to a surah.
  *
  * @param {string | number} surahIdOrSlug
