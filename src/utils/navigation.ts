@@ -125,6 +125,9 @@ export const resolveUrlBySearchNavigationType = (
   if (type === SearchNavigationType.PAGE) {
     return getPageNavigationUrl(key);
   }
+  if (type === SearchNavigationType.SEARCH_PAGE) {
+    return getSearchQueryNavigationUrl(key);
+  }
   // for the Surah navigation
   return getSurahNavigationUrl(key);
 };
