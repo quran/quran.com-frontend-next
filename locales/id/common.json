@@ -139,6 +139,7 @@
     "reflect": "Mencerminkan",
     "remove": "Keluarkan",
     "retry": "Cuba lagi (Retry)",
+    "search-for": "Telusuri '{{searchQuery}}'",
     "search": {
         "filters": "Filter",
         "hint": "Coba cari",

@@ -139,6 +139,7 @@
     "reflect": "Réfléchir",
     "remove": "Supprimer",
     "retry": "Réessayez",
+    "search-for": "Rechercher '{{searchQuery}}'",
     "search": {
         "filters": "Filtres",
         "hint": "Essayez de rechercher",

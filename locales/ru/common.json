@@ -139,6 +139,7 @@
     "reflect": "Отражать",
     "remove": "Удалять",
     "retry": "Повторить",
+    "search-for": "Найдите '{{searchQuery}}'",
     "search": {
         "filters": "Фильтры",
         "hint": "Попробуйте поискать",

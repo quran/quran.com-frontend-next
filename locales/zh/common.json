@@ -139,6 +139,7 @@
     "reflect": "反映",
     "remove": "消除",
     "retry": "重试",
+    "search-for": "搜索 '{{searchQuery}}'",
     "search": {
         "filters": "过滤器",
         "hint": "尝试搜索",
