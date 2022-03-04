@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
+import ReflectionDisclaimerMessage from '../ReflectionView/ReflectionDisclaimerMessage';
 
 import styles from './TranslationViewCell.module.scss';
 
@@ -66,7 +67,7 @@ const QuranReflectButton = ({
         onEscapeKeyDown={onModalClose}
         header={<div />}
       >
-        <div>a</div>
+        <ReflectionDisclaimerMessage />
       </ContentModal>
     </>
   );
