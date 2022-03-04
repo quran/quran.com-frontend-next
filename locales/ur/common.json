@@ -139,6 +139,7 @@
     "reflect": "عکاسی کرنا",
     "remove": "دور",
     "retry": "دوبارہ کوشش کریں۔",
+    "search-for": "'{{searchQuery}}' تلاش کریں",
     "search": {
         "filters": "فلٹرز",
         "hint": "تلاش کرنے کی کوشش کریں۔",

@@ -139,6 +139,7 @@
     "reflect": "Pasqyrim",
     "remove": "Hiq",
     "retry": "Provo sërish",
+    "search-for": "Kërko për \"{{searchQuery}}\"",
     "search": {
         "filters": "Filtrat",
         "hint": "Provoni të kërkoni për",

@@ -139,6 +139,7 @@
     "reflect": "สะท้อน",
     "remove": "ลบ",
     "retry": "ลองอีกครั้ง",
+    "search-for": "ค้นหา '{{searchQuery}}'",
     "search": {
         "filters": "ตัวกรอง",
         "hint": "ลองค้นหาดู",

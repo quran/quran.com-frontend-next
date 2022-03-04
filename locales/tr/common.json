@@ -82,15 +82,15 @@
     "fonts": {
         "15_lines": "15 satır",
         "16_lines": "16 satır",
-        "code_v1": "Kral Fahd Kompleksi V1",
-        "code_v2": "Kral Fahd Kompleksi V2",
+        "code_v1": "Kral Fehd Kompleksi V1",
+        "code_v2": "Kral Fehd Kompleksi V2",
         "font-size": "Yazı Boyutu",
         "lines": "Çizgiler",
         "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Kuran Yazı Tipi",
         "tajweed": "Tecvid",
-        "tajweed-desc": "Tecvid yazı tipi, Tecvid renkli bir Mushaf gösterir. Tacvid renk kuralları hakkında daha fazla bilgiyi <0> buradan <\/0> okuyabilirsiniz",
+        "tajweed-desc": "Tecvid yazı tipi, Tecvid renkli bir Mushaf gösterir. Tacvid renk kuralları hakkında daha fazla bilgiyi <0>buradan<\/0> okuyabilirsiniz",
         "text_indopak": "Hint Paketi",
         "text_uthmani": "Osmanca"
     },
@@ -129,7 +129,7 @@
     "privacy": "Gizlilik",
     "product-updates": "Ürün Güncellemeleri",
     "q-reflect": "KuranYansıtmak",
-    "quran-com": "Kuran.com",
+    "quran-com": "Quran.com",
     "quran-radio": "Kuran Radyo",
     "reading-preference": {
         "reading": "Okuma",
@@ -139,6 +139,7 @@
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
     "retry": "Yeniden dene",
+    "search-for": "'{{searchQuery}}' için arama yapın",
     "search": {
         "filters": "Filtreler",
         "hint": "Aramayı deneyin",

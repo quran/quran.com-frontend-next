@@ -139,6 +139,7 @@
     "reflect": "Renungkan",
     "remove": "Keluarkan",
     "retry": "Cuba lagi (Retry)",
+    "search-for": "Cari '{{searchQuery}}'",
     "search": {
         "filters": "Penapis",
         "hint": "Cuba cari",

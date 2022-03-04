@@ -139,6 +139,7 @@
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
+    "search-for": "Zoeken naar '{{searchQuery}}'",
     "search": {
         "filters": "Filters",
         "hint": "Probeer te zoeken naar",
