@@ -53,6 +53,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
+          shouldRender
           scrollToTop={scrollWindowToTop}
           initialChapterId={chapterId}
           initialVerseNumber={verseNumber.toString()}

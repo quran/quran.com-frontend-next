@@ -68,6 +68,7 @@ const TafsirVerseAction = ({
       </PopoverMenu.Item>
 
       <TafsirBody
+        shouldRender={isContentModalOpen}
         initialChapterId={chapterId.toString()}
         initialVerseNumber={verseNumber.toString()}
         scrollToTop={() => {

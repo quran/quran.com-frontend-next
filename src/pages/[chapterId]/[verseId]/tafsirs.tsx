@@ -61,6 +61,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
+          shouldRender
           initialChapterId={chapter.chapter.id.toString()}
           initialVerseNumber={verseId.toString()}
           initialTafsirData={tafsirData}

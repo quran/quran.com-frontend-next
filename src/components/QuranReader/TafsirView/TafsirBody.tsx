@@ -51,6 +51,7 @@ type TafsirBodyProps = {
   initialTafsirData?: TafsirContentResponse;
   initialTafsirIdOrSlug?: number | string;
   scrollToTop: () => void;
+  shouldRender?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -65,6 +66,7 @@ const TafsirBody = ({
   initialTafsirIdOrSlug,
   render,
   scrollToTop,
+  shouldRender,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -112,7 +114,10 @@ const TafsirBody = ({
     [dispatch, lang, selectedChapterId, selectedVerseNumber],
   );
 
-  const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
+  const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(
+    shouldRender ? makeTafsirsUrl(lang) : null,
+    fetcher,
+  );
 
   // selectedLanguage is based on selectedTafir's language
   // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirIdOrSlug`
