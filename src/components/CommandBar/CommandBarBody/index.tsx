@@ -11,13 +11,16 @@ import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
+import DataFetcher from 'src/components/DataFetcher';
 import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
+import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 const NAVIGATE_TO = [
@@ -58,12 +61,18 @@ const CommandBarBody: React.FC = () => {
     setSearchQuery(event.currentTarget.value || null);
   }, []);
 
-  const renderCommands = useCallback(() => {
-    let toBeGroupedCommands = [] as Command[];
-    let numberOfCommands = 0;
-    // if it's pre-input
-    if (!searchQuery) {
-      toBeGroupedCommands = recentNavigations
+  /**
+   * Generate an array of commands that will show in the pre-input view.
+   * The function takes the original recentNavigations + NAVIGATE_TO and appends
+   * to each the group name + which command is clearable and which is not. The group
+   * will be used by {@see groupBy} to compose the list of commands for each group.
+   *
+   * @param {SearchNavigationResult[]} recentNavigations the history of the command bar navigations.
+   * @returns {Command[]}
+   */
+  const getPreInputCommands = useCallback(
+    (): Command[] =>
+      recentNavigations
         .map((recentNavigation) => ({
           ...recentNavigation,
           group: t('command-bar.recent-navigations'),
@@ -75,31 +84,59 @@ const CommandBarBody: React.FC = () => {
             group: t('command-bar.try-navigating'),
             isClearable: false,
           })),
-        );
-      numberOfCommands = recentNavigations.length + NAVIGATE_TO.length;
-    } else {
-      toBeGroupedCommands = [
-        {
-          key: searchQuery,
-          resultType: SearchNavigationType.SEARCH_PAGE,
-          name: searchQuery,
-          group: t('search.title'),
-        },
-      ];
-      numberOfCommands = 1;
-    }
-    return (
-      <CommandsList
-        commandGroups={{
-          groups: groupBy(
-            toBeGroupedCommands.map((item, index) => ({ ...item, index })), // append the index so that it can be used for keyboard navigation.
-            (item) => item.group, // we group by the group name that has been attached to each command.
-          ),
-          numberOfCommands, // this is needed so that we can know when we have reached the last command when using keyboard navigation across multiple groups
-        }}
-      />
-    );
-  }, [recentNavigations, searchQuery, t]);
+        ),
+    [recentNavigations, t],
+  );
+
+  /**
+   * This function will be used by DataFetcher and will run only when there is no API error
+   * or the connections is offline. When we receive the response from DataFetcher,
+   * the data can be:
+   *
+   * 1. empty: which means we are in the initial state where there is no searchQuery and
+   *           in this case we want to show the recent navigations from Redux (if any) + suggestions
+   *           on where to navigate to.
+   * 2. not empty: and this means we called the API and we got the response. The response will
+   *               either have results or not (in the case when there are no matches for
+   *               the search query).
+   */
+  const dataFetcherRender = useCallback(
+    (data: SearchResponse) => {
+      let toBeGroupedCommands = [] as Command[];
+      let numberOfCommands = 0;
+      // if it's pre-input
+      if (!data) {
+        toBeGroupedCommands = getPreInputCommands();
+        numberOfCommands = recentNavigations.length + NAVIGATE_TO.length;
+      } else {
+        toBeGroupedCommands = [
+          ...data.result.navigation.map((navigationItem) => ({
+            ...navigationItem,
+            group: t('command-bar.navigations'),
+          })),
+          {
+            key: searchQuery,
+            resultType: SearchNavigationType.SEARCH_PAGE,
+            name: searchQuery,
+            group: t('search.title'),
+          },
+        ];
+        numberOfCommands = data.result.navigation.length + 1;
+      }
+      return (
+        <CommandsList
+          commandGroups={{
+            groups: groupBy(
+              toBeGroupedCommands.map((item, index) => ({ ...item, index })), // append the index so that it can be used for keyboard navigation.
+              (item) => item.group, // we group by the group name that has been attached to each command.
+            ),
+            numberOfCommands, // this is needed so that we can know when we have reached the last command when using keyboard navigation across multiple groups
+          }}
+        />
+      );
+    },
+    [getPreInputCommands, recentNavigations.length, searchQuery, t],
+  );
 
   return (
     <div className={styles.container}>
@@ -133,7 +170,14 @@ const CommandBarBody: React.FC = () => {
         />
       </div>
       <div className={styles.bodyContainer}>
-        {isVoiceSearchFlowStarted ? <VoiceSearchBodyContainer isCommandBar /> : renderCommands()}
+        {isVoiceSearchFlowStarted ? (
+          <VoiceSearchBodyContainer isCommandBar />
+        ) : (
+          <DataFetcher
+            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
+            render={dataFetcherRender}
+          />
+        )}
       </div>
       <div className={styles.attribution}>
         <TarteelAttribution isCommandBar />
