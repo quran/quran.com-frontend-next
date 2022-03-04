@@ -20,9 +20,6 @@ import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch
 import { makeSearchResultsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedVerseKey } from 'src/utils/locale';
-import { truncateString } from 'src/utils/string';
-import { getVerseTextByWords } from 'src/utils/word';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -50,7 +47,7 @@ const NAVIGATE_TO = [
 ];
 
 const CommandBarBody: React.FC = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -117,19 +114,14 @@ const CommandBarBody: React.FC = () => {
             ...navigationItem,
             group: t('command-bar.navigations'),
           })),
-          ...data.result.verses.map((verse) => {
-            return {
-              key: verse.verseKey,
-              resultType: SearchNavigationType.AYAH,
-              name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${truncateString(
-                getVerseTextByWords(verse),
-                150,
-              )}`,
-              group: t('verses'),
-            };
-          }),
+          {
+            key: searchQuery,
+            resultType: SearchNavigationType.SEARCH_PAGE,
+            name: searchQuery,
+            group: t('search.title'),
+          },
         ];
-        numberOfCommands = data.result.navigation.length + data.result.verses.length;
+        numberOfCommands = data.result.navigation.length + 1;
       }
       return (
         <CommandsList
@@ -143,7 +135,7 @@ const CommandBarBody: React.FC = () => {
         />
       );
     },
-    [getPreInputCommands, lang, recentNavigations.length, t],
+    [getPreInputCommands, recentNavigations.length, searchQuery, t],
   );
 
   return (
