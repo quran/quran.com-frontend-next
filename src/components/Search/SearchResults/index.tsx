@@ -51,6 +51,7 @@ const SearchResults: React.FC<Props> = ({
         <>
           {searchResult.result.verses.map((result) => (
             <SearchResultItem
+              onClick={onSearchResultClicked}
               key={result.verseKey}
               result={result}
               source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
@@ -67,7 +68,6 @@ const SearchResults: React.FC<Props> = ({
                   href={`/search?query=${searchQuery}`}
                   passHref
                   onClick={() => {
-                    if (onSearchResultClicked) onSearchResultClicked();
                     logButtonClick('search_drawer_show_all');
                   }}
                 >
