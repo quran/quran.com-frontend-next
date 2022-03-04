@@ -78,6 +78,23 @@
   inset: 0;
   overflow-y: scroll;
   padding-block-end: calc(9 * var(--spacing-mega));
+  &::-webkit-scrollbar {
+    width: calc(0.8 * var(--spacing-xsmall));
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #d6dee1;
+      border-radius: var(--spacing-mega);
+      border: none;
+      background-clip: content-box;
+    }
+  }
 }
 
 .listItem {
