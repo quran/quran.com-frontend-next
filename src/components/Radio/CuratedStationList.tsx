@@ -74,6 +74,7 @@ const CuratedStationList = () => {
               title={t(`curated-station.${station.title}`)}
               description={t(`curated-station.${station.description}`)}
               onImgClick={onClick}
+              onActionIconClick={onClick}
             />
           </div>
         );
