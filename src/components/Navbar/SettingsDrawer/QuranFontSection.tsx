@@ -16,11 +16,11 @@ import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
-  MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   setQuranFont,
   setMushafLines,
+  MAXIMUM_QURAN_FONT_STEP,
 } from 'src/redux/slices/QuranReader/styles';
 import { logValueChange } from 'src/utils/eventLogger';
 import { MushafLines, QuranFont } from 'types/QuranReader';
@@ -167,7 +167,9 @@ const QuranFontSection = () => {
         <Counter
           count={quranTextFontScale}
           onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-          onIncrement={quranTextFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
+          onIncrement={
+            quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
+          }
         />
       </Section.Row>
       <QuranFontSectionFooter quranFont={quranFont} />

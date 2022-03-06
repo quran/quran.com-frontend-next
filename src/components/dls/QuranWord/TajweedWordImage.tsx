@@ -20,6 +20,11 @@ const FONT_SIZE_CLASS_MAP = {
   3: styles.md,
   4: styles.lg,
   5: styles.xl,
+  6: styles.xxl,
+  7: styles.xxxl,
+  8: styles.xxxxl,
+  9: styles.xxxxxl,
+  10: styles.xxxxxxl,
 };
 
 const TajweedWord: React.FC<Props> = ({ path, alt }) => {

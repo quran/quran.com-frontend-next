@@ -6,6 +6,7 @@ import resetSettings from 'src/redux/slices/reset-settings';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
+export const MAXIMUM_QURAN_FONT_STEP = 10;
 export const MAXIMUM_FONT_STEP = 5;
 export const MINIMUM_FONT_STEP = 1;
 
