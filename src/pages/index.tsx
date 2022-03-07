@@ -3,6 +3,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
@@ -47,30 +48,26 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
           <HomePageHero />
           <div className={styles.flowItem}>
             <HomePageMessage
-              title="Welcome to the new Quran.com!"
+              title={t('home:welcome.title')}
               body={
-                <>
-                  After over a year of hard work we are excited to present to you the new Quran.com.
-                  We have put great effort to providing you with new experiences such as sepia mode,
-                  word-by-word view, command bar, IndoPak Mushafs, and more.
-                  <br />
-                  <br />
-                  We hope you enjoy the new Quran.com as much as we do. Please let us know about
-                  bugs, feature requests on{' '}
-                  <a href="https://feedback.quran.com" target="_blank" rel="noreferrer">
-                    feedback.quran.com
-                  </a>
-                  . We are all in this together and want to improve the product to serve you better.
-                  <br />
-                  <br />
-                  If you wish to go back to the old site at any time, please visit{' '}
-                  <a href="https://previous.quran.com" target="_blank" rel="noreferrer">
-                    previous.quran.com
-                  </a>
-                  .
-                  <br />
-                  <br />- Quran.com team
-                </>
+                <Trans
+                  i18nKey="home:welcome.body"
+                  components={[
+                    <a
+                      href="https://feedback.quran.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      key="0"
+                    />,
+                    <a
+                      href="https://previous.quran.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      key="1"
+                    />,
+                    <br />,
+                  ]}
+                />
               }
             />
           </div>
