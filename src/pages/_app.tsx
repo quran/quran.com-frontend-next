@@ -33,6 +33,19 @@ function MyApp({ Component, pageProps }): JSX.Element {
     document.documentElement.dir = getDir(locale);
     logAndRedirectUnsupportedLogicalCSS();
   }, [locale]);
+
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      // @ts-ignore
+      if (window.gtag) window.gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <>
       <Head>
