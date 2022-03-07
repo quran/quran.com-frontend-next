@@ -12,6 +12,7 @@ import styles from './TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 type QuranReflectButtonProps = {
@@ -70,6 +71,7 @@ const QuranReflectButton = ({
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
             innerRef={contentModalRef}
+            url={getVerseSelectedReflectionNavigationUrl(verseKey)}
             isOpen={isContentModalOpen}
             hasCloseButton
             onClose={onModalClose}
