@@ -62,12 +62,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <ThemeProvider>
           <IdProvider>
             <ToastContainerProvider>
-              <DefaultSeo
-                {...createSEOConfig({
-                  locale,
-                  description: t('default-description'),
-                })}
-              />
+              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
               <GlobalListeners />
               <Navbar />
               <DeveloperUtility />
