@@ -1,17 +1,18 @@
+/* eslint-disable react/no-array-index-key */
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
-import ReflectionDisclaimerMessage from '../ReflectionView/ReflectionDisclaimerMessage';
+import ReflectionBody from '../ReflectionView/ReflectionBody';
 
 import styles from './TranslationViewCell.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
+import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 type QuranReflectButtonProps = {
   verseKey: string;
@@ -43,6 +44,8 @@ const QuranReflectButton = ({
     setIsContentModalOpen(false);
   };
 
+  const [initialChapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+
   return (
     <>
       <Button
@@ -58,17 +61,25 @@ const QuranReflectButton = ({
           <ChatIcon />
         </span>
       </Button>
-      <ContentModal
-        innerRef={contentModalRef}
-        url={getVerseSelectedReflectionNavigationUrl(verseKey)}
-        isOpen={isContentModalOpen}
-        hasCloseButton
-        onClose={onModalClose}
-        onEscapeKeyDown={onModalClose}
-        header={<div />}
-      >
-        <ReflectionDisclaimerMessage />
-      </ContentModal>
+      <ReflectionBody
+        initialChapterId={initialChapterId}
+        initialVerseNumber={verseNumber}
+        scrollToTop={() => {
+          // noop
+        }}
+        render={({ surahAndAyahSelection, body }) => (
+          <ContentModal
+            innerRef={contentModalRef}
+            isOpen={isContentModalOpen}
+            hasCloseButton
+            onClose={onModalClose}
+            onEscapeKeyDown={onModalClose}
+            header={surahAndAyahSelection}
+          >
+            {body}
+          </ContentModal>
+        )}
+      />
     </>
   );
 };

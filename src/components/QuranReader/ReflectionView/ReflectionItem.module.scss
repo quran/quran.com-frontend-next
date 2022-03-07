@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-small);
+  --avatar-size: calc(var(--spacing-mega) * 1.5);
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+}
+
+.author {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+}
+.date {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+}
+
+.container {
+  margin-block-end: var(--spacing-large);
+}
+
+.body {
+  margin-block-start: var(--spacing-small);
+  cursor: pointer;
+  opacity: var(--opacity-85);
+}
