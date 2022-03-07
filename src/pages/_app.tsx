@@ -26,7 +26,8 @@ import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
-  const { locale } = useRouter();
+  const router = useRouter();
+  const { locale } = router;
   const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
@@ -34,7 +35,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
     logAndRedirectUnsupportedLogicalCSS();
   }, [locale]);
 
-  const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
       // @ts-ignore
