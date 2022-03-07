@@ -12,6 +12,7 @@ import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
+import { ANALYTICS_ID } from 'src/components/ThirdPartyScripts/GoogleAnalyticsScript';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
@@ -24,6 +25,9 @@ import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
+
+const ANALYTICS_ID = 'UA-8496014-1';
+// const ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
@@ -38,7 +42,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
   useEffect(() => {
     const handleRouteChange = (url) => {
       // @ts-ignore
-      if (window.gtag) window.gtag.pageview(url);
+      if (window.gtag)
+        // @ts-ignore
+        window.gtag('config', ANALYTICS_ID, {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          page_path: url,
+        });
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
@@ -61,7 +70,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <ThemeProvider>
           <IdProvider>
             <ToastContainerProvider>
-              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
+              <DefaultSeo
+                {...createSEOConfig({
+                  locale,
+                  description: t('default-description'),
+                })}
+              />
               <GlobalListeners />
               <Navbar />
               <DeveloperUtility />
