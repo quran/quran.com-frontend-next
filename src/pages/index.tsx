@@ -12,7 +12,7 @@ import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzList
 import Footer from 'src/components/dls/Footer/Footer';
 import Separator from 'src/components/dls/Separator/Separator';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
-// import HomePageMessage from 'src/components/HomePage/HomePageMessage';
+import HomePageMessage from 'src/components/HomePage/HomePageMessage';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -45,9 +45,35 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
       <div className={styles.pageContainer}>
         <div className={classNames(styles.listContainer, styles.flow)}>
           <HomePageHero />
-          {/* <div className={styles.flowItem}>
-            <HomePageMessage />
-          </div> */}
+          <div className={styles.flowItem}>
+            <HomePageMessage
+              title="Welcome to the new Quran.com!"
+              body={
+                <>
+                  After over a year of hard work we are excited to present to you the new Quran.com.
+                  We have put great effort to providing you with new experiences such as sepia mode,
+                  word-by-word view, command bar, IndoPak Mushafs, and more.
+                  <br />
+                  <br />
+                  We hope you enjoy the new Quran.com as much as we do. Please let us know about
+                  bugs, feature requests on{' '}
+                  <a href="https://feedback.quran.com" target="_blank" rel="noreferrer">
+                    feedback.quran.com
+                  </a>
+                  . We are all in this together and want to improve the product to serve you better.
+                  <br />
+                  <br />
+                  If you wish to go back to the old site at any time, please visit{' '}
+                  <a href="https://previous.quran.com" target="_blank" rel="noreferrer">
+                    previous.quran.com
+                  </a>
+                  .
+                  <br />
+                  <br />- Quran.com team
+                </>
+              }
+            />
+          </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
             <RecentReadingSessions />
           </div>
