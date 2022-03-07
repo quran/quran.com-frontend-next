@@ -2,6 +2,7 @@ import clipboardCopy from 'clipboard-copy';
 
 import { DATA_ATTRIBUTE_WORD_LOCATION } from 'src/components/dls/QuranWord/QuranWord';
 import { getWordDataByLocation } from 'src/utils/verse';
+import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 /**
@@ -14,8 +15,13 @@ import Verse from 'types/Verse';
  *
  * @param {React.ClipboardEvent<HTMLDivElement>} event
  * @param {Verse[]} verses all verses to scan for `data-word-location`
+ * @param {QuranFont} quranFont font to copy, if not `text_indopak` or `text_uthmani` then will use `text_uthmani` to support unicode based fonts
  */
-const onCopyQuranWords = (event: React.ClipboardEvent<HTMLDivElement>, verses: Verse[]) => {
+const onCopyQuranWords = (
+  event: React.ClipboardEvent<HTMLDivElement>,
+  verses: Verse[],
+  quranFont: QuranFont,
+) => {
   const selection = document.getSelection();
   const quranWordsToCopy = Array.from(
     document.querySelectorAll(`[${DATA_ATTRIBUTE_WORD_LOCATION}]`),
@@ -23,7 +29,7 @@ const onCopyQuranWords = (event: React.ClipboardEvent<HTMLDivElement>, verses: V
     .filter((node) => selection.containsNode(node, true))
     .map((node) => {
       const wordLocation = node.getAttribute(DATA_ATTRIBUTE_WORD_LOCATION);
-      return extractUthmaniText(wordLocation, verses);
+      return extractText(wordLocation, verses, quranFont);
     });
 
   if (quranWordsToCopy.length > 0) {
@@ -38,9 +44,10 @@ const onCopyQuranWords = (event: React.ClipboardEvent<HTMLDivElement>, verses: V
  *
  * @param {string} wordLocation example: "1:1:1" (chapter 1, verse 1, word position 1)
  * @param {Verse[]} verses list of verses to search for wordLocation
- * @returns {string} uthmani_text of the wordLocation. example "ٱلْحَمْدُ"
+ * @param {QuranFont} quranFont font to copy, if not `text_indopak` or `text_uthmani` then will use `text_uthmani` to support unicode based fonts
+ * @returns {string} text of the wordLocation. example "ٱلْحَمْدُ"
  */
-const extractUthmaniText = (wordLocation: string, verses: Verse[]) => {
+const extractText = (wordLocation: string, verses: Verse[], quranFont: QuranFont) => {
   const [chapter, verse, location] = getWordDataByLocation(wordLocation);
 
   // find the verse
@@ -53,6 +60,7 @@ const extractUthmaniText = (wordLocation: string, verses: Verse[]) => {
   );
   if (!selectedWord) return '';
 
+  if (quranFont === QuranFont.IndoPak) return selectedWord.textIndopak;
   return selectedWord.textUthmani;
 };
 

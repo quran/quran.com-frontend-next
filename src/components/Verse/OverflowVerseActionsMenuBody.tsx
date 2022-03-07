@@ -21,8 +21,10 @@ import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortal
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getVerseUrl } from 'src/utils/verse';
+import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -45,6 +47,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const router = useRouter();
   const toast = useToast();
   useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
@@ -100,7 +103,14 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       // eslint-disable-next-line i18next/no-literal-string
       `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
     );
-    clipboardCopy(verse.textUthmani).then(() => {
+
+    const verseText = verse.words
+      .map((word) =>
+        quranReaderStyles.quranFont === QuranFont.IndoPak ? word.textIndopak : word.textUthmani,
+      )
+      .join(' ');
+
+    clipboardCopy(verseText).then(() => {
       setIsCopied(true);
     });
   };

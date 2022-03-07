@@ -167,7 +167,7 @@ const ReadingView = ({
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
       <div
-        onCopy={(event) => onCopyQuranWords(event, verses)}
+        onCopy={(event) => onCopyQuranWords(event, verses, quranFont)}
         className={classNames(
           styles.container,
           styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
