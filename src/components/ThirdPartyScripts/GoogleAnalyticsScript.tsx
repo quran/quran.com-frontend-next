@@ -1,13 +1,14 @@
 /* eslint-disable i18next/no-literal-string */
 import Script from 'next/script';
 
-const ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
-const ENABLE_ANALYTICS = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+const ANALYTICS_ID = 'UA-8496014-1';
+// const ENABLE_ANALYTICS = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 
 const GoogleAnalyticsScript = () => {
-  if (!ENABLE_ANALYTICS) {
-    return <></>;
-  }
+  // TODO: PLEASE REVERT BACK BEFORE MERGING HOHOHO
+  // if (!ENABLE_ANALYTICS) {
+  //   return <></>;
+  // }
 
   return (
     <>
