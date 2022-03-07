@@ -7,5 +7,6 @@ declare global {
     quranReaderObserver: IntersectionObserver;
     wordByWordAudioPlayerEl: HTMLAudioElement;
     webkitAudioContext: typeof AudioContext;
+    gtag: any;
   }
 }

@@ -1,15 +1,13 @@
 /* eslint-disable i18next/no-literal-string */
 import Script from 'next/script';
 
-const ANALYTICS_ID = 'UA-8496014-1';
-// const ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
-// const ENABLE_ANALYTICS = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+const ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+const ENABLE_ANALYTICS = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 
 const GoogleAnalyticsScript = () => {
-  // TODO: PLEASE REVERT BACK BEFORE MERGING HOHOHO
-  // if (!ENABLE_ANALYTICS) {
-  //   return <></>;
-  // }
+  if (!ENABLE_ANALYTICS) {
+    return <></>;
+  }
 
   return (
     <>
@@ -22,7 +20,9 @@ const GoogleAnalyticsScript = () => {
         {`window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
          gtag('js', new Date());
-         gtag('config', '${ANALYTICS_ID}');`}
+         gtag('config', '${ANALYTICS_ID}', {
+            page_path: window.location.pathname,
+         });`}
       </Script>
     </>
   );

@@ -17,6 +17,7 @@ import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
 import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
+import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
 
@@ -24,9 +25,6 @@ import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
-
-const ANALYTICS_ID = 'UA-8496014-1';
-// const ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
@@ -38,15 +36,10 @@ function MyApp({ Component, pageProps }): JSX.Element {
     logAndRedirectUnsupportedLogicalCSS();
   }, [locale]);
 
+  // Record page view to Google analytics when user navigate to a new page.
   useEffect(() => {
     const handleRouteChange = (url) => {
-      // @ts-ignore
-      if (window.gtag)
-        // @ts-ignore
-        window.gtag('config', ANALYTICS_ID, {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
-          page_path: url,
-        });
+      gtag.pageView(url);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
