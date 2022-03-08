@@ -1,9 +1,11 @@
+/* eslint-disable max-lines */
 import { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import SurahAndAyahSelection from '../TafsirView/SurahAndAyahSelection';
+import TafsirEndOfScrollingActions from '../TafsirView/TafsirEndOfScrollingActions';
 import TafsirSkeleton from '../TafsirView/TafsirSkeleton';
 import TranslationText from '../TranslationView/TranslationText';
 
@@ -20,13 +22,13 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { logItemSelectionChange } from 'src/utils/eventLogger';
+import { logButtonClick, logItemSelectionChange } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
   getVerseSelectedReflectionNavigationUrl,
 } from 'src/utils/navigation';
-import { makeVerseKey } from 'src/utils/verse';
+import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils/verse';
 
 type ReflectionBodyProps = {
   initialChapterId: string;
@@ -41,6 +43,7 @@ const ReflectionBody = ({
   initialChapterId,
   initialVerseNumber,
   initialData,
+  scrollToTop,
 }: ReflectionBodyProps) => {
   const { t } = useTranslation('quran-reader');
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
@@ -83,8 +86,37 @@ const ReflectionBody = ({
     </div>
   );
 
+  const loadNextVerse = useCallback(() => {
+    logButtonClick('reflection_next_verse');
+    scrollToTop();
+    const newVerseNumber = String(Number(selectedVerseNumber) + 1);
+    fakeNavigate(
+      getVerseSelectedReflectionNavigationUrl(
+        makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
+      ),
+      lang,
+    );
+    setSelectedVerseNumber(newVerseNumber);
+  }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber]);
+
+  const loadPrevVerse = useCallback(() => {
+    const newVerseNumber = String(Number(selectedVerseNumber) - 1);
+    logButtonClick('reflection_prev_verse');
+    scrollToTop();
+    fakeNavigate(
+      getVerseSelectedReflectionNavigationUrl(
+        makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
+      ),
+      lang,
+    );
+    setSelectedVerseNumber(newVerseNumber);
+  }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber]);
+
   const renderBody = useCallback(
     (data) => {
+      const hasNextVerse = !isLastVerseOfSurah(selectedChapterId, Number(selectedVerseNumber));
+      const hasPrevVerse = !isFirstVerseOfSurah(Number(selectedVerseNumber));
+
       return (
         <div className={styles.container}>
           <ReflectionDisclaimerMessage />
@@ -125,10 +157,17 @@ const ReflectionBody = ({
               {t('read-more-quran-reflect')}
             </Button>
           </div>
+
+          <TafsirEndOfScrollingActions
+            hasNextVerseGroup={hasNextVerse}
+            hasPrevVerseGroup={hasPrevVerse}
+            onNextButtonClicked={loadNextVerse}
+            onPreviousButtonClicked={loadPrevVerse}
+          />
         </div>
       );
     },
-    [selectedChapterId, selectedVerseNumber, t, translationFontScale],
+    [loadNextVerse, loadPrevVerse, selectedChapterId, selectedVerseNumber, t, translationFontScale],
   );
 
   const shouldUseInitialData =
