@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
@@ -12,7 +15,7 @@ import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzList
 import Footer from 'src/components/dls/Footer/Footer';
 import Separator from 'src/components/dls/Separator/Separator';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
-// import HomePageMessage from 'src/components/HomePage/HomePageMessage';
+import HomePageMessage from 'src/components/HomePage/HomePageMessage';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -45,9 +48,31 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }) => {
       <div className={styles.pageContainer}>
         <div className={classNames(styles.listContainer, styles.flow)}>
           <HomePageHero />
-          {/* <div className={styles.flowItem}>
-            <HomePageMessage />
-          </div> */}
+          <div className={styles.flowItem}>
+            <HomePageMessage
+              title={t('home:welcome.title')}
+              body={
+                <Trans
+                  i18nKey="home:welcome.body"
+                  components={[
+                    <a
+                      href="https://feedback.quran.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      key="0"
+                    />,
+                    <a
+                      href="https://previous.quran.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      key="1"
+                    />,
+                    <br />,
+                  ]}
+                />
+              }
+            />
+          </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
             <RecentReadingSessions />
           </div>

@@ -30,9 +30,7 @@
         "trigger": "Quick access to anything"
     },
     "welcome": {
-        "changes-cta": "View Recent Changes",
-        "desc": "We are actively adding new features and pushing changes. If you run into any issues please do provide feedback.",
-        "feedback-cta": "Provide Feedback",
-        "title": "Welcome to the Pre-Release Beta of the new Quran.com!"
+        "title": "Welcome to the new Quran.com!",
+        "body": "After over a year of hard work we are excited to present to you the new Quran.com. We have put great effort to provide you with new experiences such as sepia mode, word-by-word view, command bar, IndoPak Mushafs, and more. <2/><2/> We hope you enjoy the new Quran.com as much as we do. Please let us know about bugs and feature requests on <0>feedback.quran.com</0>. We are all in this together and want to improve the product to serve you better. <2/><2/> If you wish to go back to the old site at any time, please visit <1>previous.quran.com</1>. <2/><2/>- Quran.com team"
     }
 }
