@@ -8,3 +8,11 @@
   padding-block-start: var(--spacing-xxsmall);
   padding-block-end: var(--spacing-small);
 }
+
+.readMoreButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+.surahSelectionContainer {
+  padding-block-end: var(--spacing-medium);
+}

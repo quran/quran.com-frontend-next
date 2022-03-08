@@ -12,6 +12,7 @@ import ReflectionDisclaimerMessage from './ReflectionDisclaimerMessage';
 import ReflectionItem from './ReflectionItem';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Button from 'src/components/dls/Button/Button';
 import Separator from 'src/components/dls/Separator/Separator';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import {
@@ -20,7 +21,11 @@ import {
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { logItemSelectionChange } from 'src/utils/eventLogger';
-import { fakeNavigate, getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
+import {
+  fakeNavigate,
+  getQuranReflectVerseUrl,
+  getVerseSelectedReflectionNavigationUrl,
+} from 'src/utils/navigation';
 import { makeVerseKey } from 'src/utils/verse';
 
 type ReflectionBodyProps = {
@@ -37,6 +42,7 @@ const ReflectionBody = ({
   initialVerseNumber,
   initialData,
 }: ReflectionBodyProps) => {
+  const { t } = useTranslation('quran-reader');
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const { lang } = useTranslation();
@@ -48,31 +54,33 @@ const ReflectionBody = ({
   );
 
   const surahAndAyahSelection = (
-    <SurahAndAyahSelection
-      selectedChapterId={selectedChapterId}
-      selectedVerseNumber={selectedVerseNumber}
-      onChapterIdChange={(newChapterId) => {
-        logItemSelectionChange('reflection_chapter_id', newChapterId);
-        fakeNavigate(
-          getVerseSelectedReflectionNavigationUrl(
-            makeVerseKey(newChapterId, Number(selectedVerseNumber)),
-          ),
-          lang,
-        );
-        setSelectedChapterId(newChapterId.toString());
-        setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
-      }}
-      onVerseNumberChange={(newVerseNumber) => {
-        logItemSelectionChange('reflection_verse_number', newVerseNumber);
-        fakeNavigate(
-          getVerseSelectedReflectionNavigationUrl(
-            makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-          ),
-          lang,
-        );
-        setSelectedVerseNumber(newVerseNumber);
-      }}
-    />
+    <div className={styles.surahSelectionContainer}>
+      <SurahAndAyahSelection
+        selectedChapterId={selectedChapterId}
+        selectedVerseNumber={selectedVerseNumber}
+        onChapterIdChange={(newChapterId) => {
+          logItemSelectionChange('reflection_chapter_id', newChapterId);
+          fakeNavigate(
+            getVerseSelectedReflectionNavigationUrl(
+              makeVerseKey(newChapterId, Number(selectedVerseNumber)),
+            ),
+            lang,
+          );
+          setSelectedChapterId(newChapterId.toString());
+          setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
+        }}
+        onVerseNumberChange={(newVerseNumber) => {
+          logItemSelectionChange('reflection_verse_number', newVerseNumber);
+          fakeNavigate(
+            getVerseSelectedReflectionNavigationUrl(
+              makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
+            ),
+            lang,
+          );
+          setSelectedVerseNumber(newVerseNumber);
+        }}
+      />
+    </div>
   );
 
   const renderBody = useCallback(
@@ -107,10 +115,20 @@ const ReflectionBody = ({
               avatarUrl={reflection?.author?.profileImg}
             />
           ))}
+          <div className={styles.readMoreButtonContainer}>
+            <Button
+              href={getQuranReflectVerseUrl(
+                makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
+              )}
+              newTab
+            >
+              {t('read-more-quran-reflect')}
+            </Button>
+          </div>
         </div>
       );
     },
-    [translationFontScale],
+    [selectedChapterId, selectedVerseNumber, t, translationFontScale],
   );
 
   const shouldUseInitialData =
