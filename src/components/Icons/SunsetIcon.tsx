@@ -1,0 +1,52 @@
+import { BaseIconProps } from './BaseIcon';
+
+const SunsetIcon = (props: BaseIconProps) => (
+  <svg
+    width="24"
+    height="18"
+    viewBox="0 0 24 18"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M17 13C17 11.6739 16.4732 10.4021 15.5355 9.46447C14.5979 8.52678 13.3261 8 12 8C10.6739 8 9.40215 8.52678 8.46447 9.46447C7.52678 10.4021 7 11.6739 7 13"
+      stroke="black"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M12 1V4" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M4.21973 5.21997L5.63973 6.63997"
+      stroke="black"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M1 13H3" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M21 13H23"
+      stroke="black"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M18.3604 6.63997L19.7804 5.21997"
+      stroke="black"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M23 17H1"
+      stroke="black"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export default SunsetIcon;

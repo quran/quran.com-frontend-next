@@ -1,0 +1,16 @@
+import { BaseIconProps } from './BaseIcon';
+
+const SouthIcon = (props: BaseIconProps) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M19 15L17.59 13.59L13 18.17V2H11V18.17L6.41 13.58L5 15L12 22L19 15Z" fill="#323232" />
+  </svg>
+);
+
+export default SouthIcon;

@@ -1,0 +1,16 @@
+import { BaseIconProps } from './BaseIcon';
+
+const NorthIcon = (props: BaseIconProps) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M5 9L6.41 10.41L11 5.83V22H13V5.83L17.59 10.42L19 9L12 2L5 9Z" fill="#323232" />
+  </svg>
+);
+
+export default NorthIcon;
