@@ -1,0 +1,19 @@
+import { BaseIconProps } from './BaseIcon';
+
+const MenuIcon = (props: BaseIconProps) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M0 19.5H23.25V16.9165H0V19.5ZM0 13.0415H23.25V10.4585H0V13.0415ZM0 4V6.58353H23.25V4H0Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+export default MenuIcon;
