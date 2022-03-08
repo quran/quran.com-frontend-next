@@ -6,20 +6,23 @@ import { useSelector } from 'react-redux';
 
 import ChevronDownIcon from '../../../../../public/icons/chevron-down.svg';
 
-import styles from './PageNavigationButtons.module.scss';
+import styles from './ScrollToTopButton.module.scss';
 
-import Button, { ButtonSize } from 'src/components/dls/Button/Button';
-import KeyboardInput from 'src/components/dls/KeyboardInput';
+import Button, {
+  ButtonShape,
+  ButtonSize,
+  ButtonType,
+  ButtonVariant,
+} from 'src/components/dls/Button/Button';
 import { ContentSide } from 'src/components/dls/Tooltip';
 import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 interface Props {
-  scrollToNextPage: () => void;
-  scrollToPreviousPage: () => void;
+  scrollToTop: () => void;
 }
 
-const PageNavigationButtons: React.FC<Props> = ({ scrollToNextPage, scrollToPreviousPage }) => {
+const PageNavigationButtons: React.FC<Props> = ({ scrollToTop }) => {
   const { t } = useTranslation('quran-reader');
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isAudioPlayerHidden = audioDataStatus === AudioDataStatus.NoFile;
@@ -30,27 +33,14 @@ const PageNavigationButtons: React.FC<Props> = ({ scrollToNextPage, scrollToPrev
       })}
     >
       <Button
-        size={ButtonSize.Small}
-        className={styles.prevButton}
-        onClick={scrollToPreviousPage}
+        size={ButtonSize.Large}
+        className={styles.button}
+        onClick={scrollToTop}
+        variant={ButtonVariant.Shadow}
+        type={ButtonType.Secondary}
+        shape={ButtonShape.Circle}
         shouldFlipOnRTL={false}
-        tooltip={
-          <>
-            {t('prev-page')} <KeyboardInput invertColors keyboardKey="⬆" />
-          </>
-        }
-        tooltipContentSide={ContentSide.LEFT}
-      >
-        <ChevronDownIcon />
-      </Button>
-      <Button
-        size={ButtonSize.Small}
-        onClick={scrollToNextPage}
-        tooltip={
-          <>
-            {t('next-page')} <KeyboardInput invertColors keyboardKey="⬇" />
-          </>
-        }
+        tooltip="Scroll to top"
         tooltipContentSide={ContentSide.LEFT}
       >
         <ChevronDownIcon />

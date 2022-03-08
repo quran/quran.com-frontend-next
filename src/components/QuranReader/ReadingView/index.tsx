@@ -12,9 +12,9 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
-import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
+import ScrollToTopButton from './ScrollToTopButton';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
@@ -124,6 +124,14 @@ const ReadingView = ({
     });
   }, [currentPageIndex]);
 
+  const scrollToTop = useCallback(() => {
+    logButtonClick('reading_view_top');
+    virtuosoRef.current.scrollToIndex({
+      index: 0,
+      align: 'start',
+    });
+  }, []);
+
   useHotkeys(
     'Up',
     (event: KeyboardEvent) => {
@@ -197,10 +205,7 @@ const ReadingView = ({
           />
         )}
       </div>
-      <PageNavigationButtons
-        scrollToNextPage={scrollToNextPage}
-        scrollToPreviousPage={scrollToPreviousPage}
-      />
+      <ScrollToTopButton scrollToTop={scrollToTop} />
     </>
   );
 };
