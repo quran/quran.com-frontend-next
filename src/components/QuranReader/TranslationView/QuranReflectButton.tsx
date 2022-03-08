@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
@@ -35,7 +34,6 @@ const QuranReflectButton = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
     setIsContentModalOpen(true);
-    // navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
     if (onActionTriggered) {
       onActionTriggered();
     }
