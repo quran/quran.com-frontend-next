@@ -2,9 +2,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import IconClose from '../../../../public/icons/close.svg';
-
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import { CloseIcon } from 'src/components/Icons';
 
 interface Props {
   onClick: () => void;
@@ -19,7 +18,7 @@ const DrawerCloseButton: React.FC<Props> = ({ onClick }) => {
       variant={ButtonVariant.Ghost}
       onClick={onClick}
     >
-      <IconClose />
+      <CloseIcon />
     </Button>
   );
 };

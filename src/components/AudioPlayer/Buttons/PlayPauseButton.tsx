@@ -3,13 +3,12 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../EventTriggers';
 import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import { PauseIcon, PlayIcon } from 'src/components/Icons';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {

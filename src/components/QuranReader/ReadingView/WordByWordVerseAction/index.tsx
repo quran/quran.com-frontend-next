@@ -3,14 +3,13 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
-import SearchIcon from '../../../../../public/icons/search-book.svg';
-
 import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Separator from 'src/components/dls/Separator/Separator';
+import { SearchBookIcon } from 'src/components/Icons';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
@@ -51,7 +50,7 @@ const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) =>
 
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item icon={<SearchBookIcon />} onClick={onIconClicked}>
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal

@@ -5,13 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import TranslationsIcon from '../../../../../public/icons/translation.svg';
-
 import styles from './TranslationsButton.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
+import { TranslationIcon } from 'src/components/Icons';
 import TranslationsView from 'src/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from 'src/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -88,7 +87,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
         className={classNames(styles.iconContainer, styles.verseAction)}
       >
         <span className={styles.icon}>
-          <TranslationsIcon />
+          <TranslationIcon />
         </span>
       </Button>
       <ContentModal

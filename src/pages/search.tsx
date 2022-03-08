@@ -6,12 +6,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import IconSearch from '../../public/icons/search.svg';
-
 import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import Input from 'src/components/dls/Forms/Input';
+import { SearchIcon } from 'src/components/Icons';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
@@ -189,7 +188,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
         <p className={styles.header}>{t('search.title')}</p>
         <Input
           id="searchQuery"
-          prefix={<IconSearch />}
+          prefix={<SearchIcon />}
           onChange={onSearchQueryChange}
           onClearClicked={onClearClicked}
           clearable

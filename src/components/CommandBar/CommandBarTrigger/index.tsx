@@ -3,11 +3,10 @@ import React, { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './CommandBarTrigger.module.scss';
 
 import KeyboardInput from 'src/components/dls/KeyboardInput';
+import { SearchIcon } from 'src/components/Icons';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -30,7 +29,7 @@ const CommandBarTrigger: React.FC = () => {
       id="command-bar"
     >
       <div className={styles.leftSection}>
-        <IconSearch />
+        <SearchIcon />
         <span className={styles.placeholder}>{t('command-bar.placeholder')}</span>
       </div>
       <div className={styles.actionsContainer}>

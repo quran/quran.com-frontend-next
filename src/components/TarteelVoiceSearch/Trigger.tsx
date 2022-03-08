@@ -3,12 +3,10 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
-import MicrophoneIcon from '../../../public/icons/microphone.svg';
-
 import styles from './Trigger.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import { CloseIcon, MicrophoneIcon } from 'src/components/Icons';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import {
   toggleIsSearchDrawerVoiceFlowStarted,

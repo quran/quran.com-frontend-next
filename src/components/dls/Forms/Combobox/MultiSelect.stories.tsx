@@ -2,12 +2,11 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
 
-import SearchIcon from '../../../../../public/icons/search.svg';
-import SettingIcon from '../../../../../public/icons/settings.svg';
-
 import ComboboxSize from './types/ComboboxSize';
 
 import Combobox from './index';
+
+import { SearchIcon, SettingsIcon } from 'src/components/Icons';
 
 export default {
   title: 'dls/Combobox/MultiSelect',
@@ -198,7 +197,7 @@ const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false)
       value: `Item${index}`,
       label: `Item ${index}`,
       ...(hasSuffix && { suffix: index % 2 ? `Item` : 'Another-Item' }),
-      ...(hasPrefix && { prefix: index % 2 ? <SettingIcon /> : <SearchIcon /> }),
+      ...(hasPrefix && { prefix: index % 2 ? <SettingsIcon /> : <SearchIcon /> }),
     });
   }
   return items;

@@ -5,13 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './ReciterSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import { SearchIcon } from 'src/components/Icons';
 import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
@@ -56,7 +55,7 @@ const SettingsReciter = () => {
     <div>
       <div className={styles.searchInputContainer}>
         <Input
-          prefix={<IconSearch />}
+          prefix={<SearchIcon />}
           id="translations-search"
           value={searchQuery}
           onChange={setSearchQuery}

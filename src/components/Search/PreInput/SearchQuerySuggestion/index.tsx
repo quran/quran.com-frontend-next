@@ -1,12 +1,11 @@
 import React, { MouseEvent, KeyboardEvent } from 'react';
 
-import CloseIcon from '../../../../../public/icons/close.svg';
-import SearchIcon from '../../../../../public/icons/search.svg';
 import SearchItem from '../SearchItem';
 
 import styles from './SearchQuerySuggestion.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { CloseIcon, SearchIcon } from 'src/components/Icons';
 
 interface Props {
   searchQuery: string;

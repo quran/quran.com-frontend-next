@@ -3,12 +3,12 @@ import React from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import BackIcon from '../../../../public/icons/west.svg';
 import Blocks from '../Blocks';
 
 import styles from './Page.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { BackIcon } from 'src/components/Icons';
 import { getPageTitle } from 'src/utils/notion';
 
 interface Props {

@@ -7,11 +7,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import CopyIcon from '../../../../public/icons/copy.svg';
-import DownloadIcon from '../../../../public/icons/download.svg';
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
-import ReaderIcon from '../../../../public/icons/reader.svg';
 import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
@@ -22,6 +17,7 @@ import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { CopyIcon, DownloadIcon, PauseIcon, PlayIcon, ReaderIcon } from 'src/components/Icons';
 import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { getChapterData } from 'src/utils/chapter';
@@ -171,6 +167,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       notFound: true,
     };
+    // eslint-disable-next-line max-lines
   }
 };
 

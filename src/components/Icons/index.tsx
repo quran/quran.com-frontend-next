@@ -1,256 +1,126 @@
-/* eslint-disable max-lines */
-import AddIcon from './AddIcon';
-import AdvancedCopyIcon from './AdvancedCopyIcon';
-import AirplayIcon from './AirplayIcon';
-import AutoIcon from './AutoIcon';
-import AvTimerIcon from './AvTimerIcon';
-import BackwardIcon from './BackwardIcon';
-import BarsIcon from './BarsIcon';
-import BookmarkAddIcon from './BookmarkAddIcon';
-import BookmarkIcon from './BookmarkIcon';
-import BookmarkRemoveIcon from './BookmarkRemoveIcon';
-import BookOpenIcon from './BookOpenIcon';
-import CancelIcon from './CancelIcon';
-import CaretBackIcon from './CaretBackIcon';
-import CaretDownIcon from './CaretDownIcon';
-import CaretForwardIcon from './CaretForwardIcon';
-import CaretUpIcon from './CaretUpIcon';
-import CastIcon from './CastIcon';
-import ChatIcon from './ChatIcon';
-import CheckIcon from './CheckIcon';
-import ChevronDownIcon from './ChevronDownIcon';
-import ChevronLeftIcon from './ChevronLeftIcon';
-import ChevronRightIcon from './ChevronRightIcon';
-import ChevronSelectIcon from './ChevronSelectIcon';
-import CircleIcon from './CircleIcon';
-import ClipboardIcon from './ClipboardIcon';
-import CloseIcon from './CloseIcon';
-import CollectionIcon from './CollectionIcon';
-import CopyIcon from './CopyIcon';
-import CopyLinkIcon from './CopyLinkIcon';
-import DevelopersIcon from './DevelopersIcon';
-import DiscordIconIcon from './DiscordIconIcon';
-import DividerHorizontalIcon from './DividerHorizontalIcon';
-import DonateIcon from './DonateIcon';
-import DownloadIcon from './DownloadIcon';
-import EastIcon from './EastIcon';
-import Feedback1Icon from './Feedback1Icon';
-import FeedbackIcon from './FeedbackIcon';
-import FillerIcon from './FillerIcon';
-import FindLocationIcon from './FindLocationIcon';
-import Forward10Icon from './Forward10Icon';
-import ForwardIcon from './ForwardIcon';
-import GlobeIcon from './GlobeIcon';
-import HelpCircleIcon from './HelpCircleIcon';
-import HistoryIcon from './HistoryIcon';
-import HomeIcon from './HomeIcon';
-import IcRepeatOne24px1Icon from './IcRepeatOne24px1Icon';
-import Info1Icon from './Info1Icon';
-import InfoIcon from './InfoIcon';
-import LockIcon from './LockIcon';
-import LogoIcon from './LogoIcon';
-import MarkerIcon from './MarkerIcon';
-import MenuIcon from './MenuIcon';
-import MenuMoreHorizIcon from './MenuMoreHorizIcon';
-import MenuMoreIcon from './MenuMoreIcon';
-import MicrophoneIcon from './MicrophoneIcon';
-import MinusIcon from './MinusIcon';
-import MinusTenIcon from './MinusTenIcon';
-import MobileIcon from './MobileIcon';
-import MoonIcon from './MoonIcon';
-import MoonOutlineIcon from './MoonOutlineIcon';
-import NoMicIcon from './NoMicIcon';
-import NorthEastIcon from './NorthEastIcon';
-import NorthIcon from './NorthIcon';
-import NorthWestIcon from './NorthWestIcon';
-import OldQIcon from './OldQIcon';
-import PauseCircleFilledIcon from './PauseCircleFilledIcon';
-import PauseCircleOutlineIcon from './PauseCircleOutlineIcon';
-import PauseIcon from './PauseIcon';
-import PauseOutlineIcon from './PauseOutlineIcon';
-import PersonIcon from './PersonIcon';
-import PlayArrowIcon from './PlayArrowIcon';
-import PlayCircleFilledIcon from './PlayCircleFilledIcon';
-import PlayCircleOutlineIcon from './PlayCircleOutlineIcon';
-import PlaylistAddIcon from './PlaylistAddIcon';
-import PlaylistPlayIcon from './PlaylistPlayIcon';
-import PlayOutlineIcon from './PlayOutlineIcon';
-import PlusIcon from './PlusIcon';
-import PolygonIcon from './PolygonIcon';
-import ProductUpdatesIcon from './ProductUpdatesIcon';
-import QIcon from './QIcon';
-import QOutlineIcon from './QOutlineIcon';
-import QrIcon from './QrIcon';
-import QSimpleIcon from './QSimpleIcon';
-import QuestionMarkIcon from './QuestionMarkIcon';
-import QuickInsertIcon from './QuickInsertIcon';
-import QuranTextLogoIcon from './QuranTextLogoIcon';
-import Radio2Icon from './Radio2Icon';
-import RadioIcon from './RadioIcon';
-import ReaderIcon from './ReaderIcon';
-import RepeatIcon from './RepeatIcon';
-import Replay10Icon from './Replay10Icon';
-import RetryIcon from './RetryIcon';
-import SearchBookIcon from './SearchBookIcon';
-import SearchIcon from './SearchIcon';
-import SettingsIcon from './SettingsIcon';
-import ShareIcon from './ShareIcon';
-import SkipNextIcon from './SkipNextIcon';
-import SkipPreviousIcon from './SkipPreviousIcon';
-import SlowMotionVideoIcon from './SlowMotionVideoIcon';
-import SouthEastIcon from './SouthEastIcon';
-import SouthIcon from './SouthIcon';
-import SouthWestIcon from './SouthWestIcon';
-import Speed1Icon from './Speed1Icon';
-import SpeedIcon from './SpeedIcon';
-import SplitmodeIcon from './SplitmodeIcon';
-import StarIcon from './StarIcon';
-import StopCircleIcon from './StopCircleIcon';
-import StopIcon from './StopIcon';
-import SubdirectoryArrowLeftIcon from './SubdirectoryArrowLeftIcon';
-import SubdirectoryArrowRightIcon from './SubdirectoryArrowRightIcon';
-import SunOutlineIcon from './SunOutlineIcon';
-import SunsetIcon from './SunsetIcon';
-import TafsirIcon from './TafsirIcon';
-import TarteelIcon from './TarteelIcon';
-import TarteelLogoIcon from './TarteelLogoIcon';
-import TarteelTextIcon from './TarteelTextIcon';
-import TickIcon from './TickIcon';
-import TranslationIcon from './TranslationIcon';
-import TrendUpIcon from './TrendUpIcon';
-import UnbookmarkedIcon from './UnbookmarkedIcon';
-import UnfoldLessIcon from './UnfoldLessIcon';
-import UnfoldMoreIcon from './UnfoldMoreIcon';
-import UpdatesIcon from './UpdatesIcon';
-import UserIcon from './UserIcon';
-import WestIcon from './WestIcon';
-import WrenchIcon from './WrenchIcon';
-
-export default {
-  AddIcon,
-  AdvancedCopyIcon,
-  AirplayIcon,
-  AutoIcon,
-  AvTimerIcon,
-  BackwardIcon,
-  BarsIcon,
-  BookOpenIcon,
-  BookmarkRemoveIcon,
-  BookmarkAddIcon,
-  BookmarkIcon,
-  CancelIcon,
-  CaretBackIcon,
-  CaretDownIcon,
-  CaretForwardIcon,
-  CaretUpIcon,
-  CastIcon,
-  ChatIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronSelectIcon,
-  CircleIcon,
-  ClipboardIcon,
-  CloseIcon,
-  CollectionIcon,
-  CopyLinkIcon,
-  CopyIcon,
-  DevelopersIcon,
-  DiscordIconIcon,
-  DividerHorizontalIcon,
-  DonateIcon,
-  DownloadIcon,
-  EastIcon,
-  Feedback1Icon,
-  FeedbackIcon,
-  FillerIcon,
-  FindLocationIcon,
-  ForwardIcon,
-  Forward10Icon,
-  GlobeIcon,
-  HelpCircleIcon,
-  HistoryIcon,
-  HomeIcon,
-  IcRepeatOne24px1Icon,
-  Info1Icon,
-  InfoIcon,
-  LockIcon,
-  LogoIcon,
-  MarkerIcon,
-  MenuIcon,
-  MenuMoreIcon,
-  MenuMoreHorizIcon,
-  MicrophoneIcon,
-  MinusTenIcon,
-  MinusIcon,
-  MobileIcon,
-  MoonOutlineIcon,
-  MoonIcon,
-  NoMicIcon,
-  NorthIcon,
-  NorthEastIcon,
-  NorthWestIcon,
-  OldQIcon,
-  PauseCircleOutlineIcon,
-  PauseOutlineIcon,
-  PauseIcon,
-  PauseCircleFilledIcon,
-  PersonIcon,
-  PlayArrowIcon,
-  PlayCircleOutlineIcon,
-  PlayOutlineIcon,
-  PlaylistAddIcon,
-  PlaylistPlayIcon,
-  PlayCircleFilledIcon,
-  PlusIcon,
-  PolygonIcon,
-  ProductUpdatesIcon,
-  QOutlineIcon,
-  QIcon,
-  QrIcon,
-  QuestionMarkIcon,
-  QuickInsertIcon,
-  QuranTextLogoIcon,
-  QSimpleIcon,
-  Radio2Icon,
-  RadioIcon,
-  ReaderIcon,
-  RepeatIcon,
-  Replay10Icon,
-  RetryIcon,
-  SearchBookIcon,
-  SearchIcon,
-  SettingsIcon,
-  ShareIcon,
-  SkipNextIcon,
-  SkipPreviousIcon,
-  SlowMotionVideoIcon,
-  SouthIcon,
-  SouthEastIcon,
-  SouthWestIcon,
-  Speed1Icon,
-  SpeedIcon,
-  SplitmodeIcon,
-  StarIcon,
-  StopIcon,
-  StopCircleIcon,
-  SubdirectoryArrowLeftIcon,
-  SubdirectoryArrowRightIcon,
-  SunOutlineIcon,
-  SunsetIcon,
-  TafsirIcon,
-  TarteelLogoIcon,
-  TarteelTextIcon,
-  TarteelIcon,
-  TickIcon,
-  TranslationIcon,
-  TrendUpIcon,
-  UnbookmarkedIcon,
-  UnfoldLessIcon,
-  UnfoldMoreIcon,
-  UpdatesIcon,
-  UserIcon,
-  WestIcon,
-  WrenchIcon,
-};
+export { default as AdvancedCopyIcon } from './AdvancedCopyIcon';
+export { default as AirplayIcon } from './AirplayIcon';
+export { default as AutoIcon } from './AutoIcon';
+export { default as AvTimerIcon } from './AvTimerIcon';
+export { default as BackwardIcon } from './BackwardIcon';
+export { default as BarsIcon } from './BarsIcon';
+export { default as BookmarkAddIcon } from './BookmarkAddIcon';
+export { default as BookmarkIcon } from './BookmarkIcon';
+export { default as BookmarkRemoveIcon } from './BookmarkRemoveIcon';
+export { default as BookOpenIcon } from './BookOpenIcon';
+export { default as CancelIcon } from './CancelIcon';
+export { default as CaretBackIcon } from './CaretBackIcon';
+export { default as CaretDownIcon } from './CaretDownIcon';
+export { default as CaretForwardIcon } from './CaretForwardIcon';
+export { default as CaretUpIcon } from './CaretUpIcon';
+export { default as CastIcon } from './CastIcon';
+export { default as ChatIcon } from './ChatIcon';
+export { default as CheckIcon } from './CheckIcon';
+export { default as ChevronDownIcon } from './ChevronDownIcon';
+export { default as ChevronLeftIcon } from './ChevronLeftIcon';
+export { default as ChevronRightIcon } from './ChevronRightIcon';
+export { default as ChevronSelectIcon } from './ChevronSelectIcon';
+export { default as CircleIcon } from './CircleIcon';
+export { default as ClipboardIcon } from './ClipboardIcon';
+export { default as CloseIcon } from './CloseIcon';
+export { default as CollectionIcon } from './CollectionIcon';
+export { default as CopyIcon } from './CopyIcon';
+export { default as CopyLinkIcon } from './CopyLinkIcon';
+export { default as DevelopersIcon } from './DevelopersIcon';
+export { default as DiscordIcon } from './DiscordIcon';
+export { default as DividerHorizontalIcon } from './DividerHorizontalIcon';
+export { default as DonateIcon } from './DonateIcon';
+export { default as DownloadIcon } from './DownloadIcon';
+export { default as NavigateIcon } from './NavigateIcon';
+export { default as Feedback1Icon } from './Feedback1Icon';
+export { default as FeedbackIcon } from './FeedbackIcon';
+export { default as FillerIcon } from './FillerIcon';
+export { default as FindLocationIcon } from './FindLocationIcon';
+export { default as Forward10Icon } from './Forward10Icon';
+export { default as ForwardIcon } from './ForwardIcon';
+export { default as GlobeIcon } from './GlobeIcon';
+export { default as HelpCircleIcon } from './HelpCircleIcon';
+export { default as HistoryIcon } from './HistoryIcon';
+export { default as HomeIcon } from './HomeIcon';
+export { default as IcRepeatOne24px1Icon } from './IcRepeatOne24px1Icon';
+export { default as Info1Icon } from './Info1Icon';
+export { default as InfoIcon } from './InfoIcon';
+export { default as LockIcon } from './LockIcon';
+export { default as LogoIcon } from './LogoIcon';
+export { default as MarkerIcon } from './MarkerIcon';
+export { default as MenuIcon } from './MenuIcon';
+export { default as OverflowMenuIcon } from './OverflowMenuIcon';
+export { default as MenuMoreIcon } from './MenuMoreIcon';
+export { default as MicrophoneIcon } from './MicrophoneIcon';
+export { default as MinusIcon } from './MinusIcon';
+export { default as MinusTenIcon } from './MinusTenIcon';
+export { default as MobileIcon } from './MobileIcon';
+export { default as MoonIcon } from './MoonIcon';
+export { default as MoonOutlineIcon } from './MoonOutlineIcon';
+export { default as NoMicrophoneIcon } from './NoMicrophoneIcon';
+export { default as NorthEastIcon } from './NorthEastIcon';
+export { default as NorthIcon } from './NorthIcon';
+export { default as NorthWestIcon } from './NorthWestIcon';
+export { default as OldQIcon } from './OldQIcon';
+export { default as PauseCircleFilledIcon } from './PauseCircleFilledIcon';
+export { default as PauseCircleOutlineIcon } from './PauseCircleOutlineIcon';
+export { default as PauseIcon } from './PauseIcon';
+export { default as PauseOutlineIcon } from './PauseOutlineIcon';
+export { default as PersonIcon } from './PersonIcon';
+export { default as PlayIcon } from './PlayIcon';
+export { default as PlayCircleFilledIcon } from './PlayCircleFilledIcon';
+export { default as PlayCircleOutlineIcon } from './PlayCircleOutlineIcon';
+export { default as PlaylistAddIcon } from './PlaylistAddIcon';
+export { default as PlaylistPlayIcon } from './PlaylistPlayIcon';
+export { default as PlayOutlineIcon } from './PlayOutlineIcon';
+export { default as PlusIcon } from './PlusIcon';
+export { default as PolygonIcon } from './PolygonIcon';
+export { default as ProductUpdatesIcon } from './ProductUpdatesIcon';
+export { default as QIcon } from './QIcon';
+export { default as QOutlineIcon } from './QOutlineIcon';
+export { default as QuranReflectIcon } from './QuranReflectIcon';
+export { default as QSimpleIcon } from './QSimpleIcon';
+export { default as QuestionMarkIcon } from './QuestionMarkIcon';
+export { default as QuickInsertIcon } from './QuickInsertIcon';
+export { default as QuranTextLogoIcon } from './QuranTextLogoIcon';
+export { default as Radio2Icon } from './Radio2Icon';
+export { default as RadioIcon } from './RadioIcon';
+export { default as ReaderIcon } from './ReaderIcon';
+export { default as RepeatIcon } from './RepeatIcon';
+export { default as Replay10Icon } from './Replay10Icon';
+export { default as RetryIcon } from './RetryIcon';
+export { default as SearchBookIcon } from './SearchBookIcon';
+export { default as SearchIcon } from './SearchIcon';
+export { default as SettingsIcon } from './SettingsIcon';
+export { default as ShareIcon } from './ShareIcon';
+export { default as SkipNextIcon } from './SkipNextIcon';
+export { default as SkipPreviousIcon } from './SkipPreviousIcon';
+export { default as SlowMotionVideoIcon } from './SlowMotionVideoIcon';
+export { default as SouthEastIcon } from './SouthEastIcon';
+export { default as SouthIcon } from './SouthIcon';
+export { default as SouthWestIcon } from './SouthWestIcon';
+export { default as Speed1Icon } from './Speed1Icon';
+export { default as SpeedIcon } from './SpeedIcon';
+export { default as SplitmodeIcon } from './SplitmodeIcon';
+export { default as StarIcon } from './StarIcon';
+export { default as StopCircleIcon } from './StopCircleIcon';
+export { default as StopIcon } from './StopIcon';
+export { default as SubdirectoryArrowLeftIcon } from './SubdirectoryArrowLeftIcon';
+export { default as SubdirectoryArrowRightIcon } from './SubdirectoryArrowRightIcon';
+export { default as SunOutlineIcon } from './SunOutlineIcon';
+export { default as SunsetIcon } from './SunsetIcon';
+export { default as TafsirIcon } from './TafsirIcon';
+export { default as TarteelIcon } from './TarteelIcon';
+export { default as TarteelLogoIcon } from './TarteelLogoIcon';
+export { default as TarteelTextIcon } from './TarteelTextIcon';
+export { default as TickIcon } from './TickIcon';
+export { default as TranslationIcon } from './TranslationIcon';
+export { default as TrendUpIcon } from './TrendUpIcon';
+export { default as UnbookmarkedIcon } from './UnbookmarkedIcon';
+export { default as UnfoldLessIcon } from './UnfoldLessIcon';
+export { default as UnfoldMoreIcon } from './UnfoldMoreIcon';
+export { default as UpdatesIcon } from './UpdatesIcon';
+export { default as UserIcon } from './UserIcon';
+export { default as BackIcon } from './BackIcon';
+export { default as WrenchIcon } from './WrenchIcon';
+export { default as AddIcon } from './AddIcon';

@@ -4,22 +4,18 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import AutoIcon from '../../../../public/icons/auto.svg';
-import MoonIcon from '../../../../public/icons/moon-outline.svg';
-import SunIcon from '../../../../public/icons/sun-outline.svg';
-import SunsetIcon from '../../../../public/icons/sunset.svg';
-
 import Section from './Section';
 import styles from './ThemeSection.module.scss';
 
 import Switch, { SwitchSize } from 'src/components/dls/Switch/Switch';
+import { AutoIcon, MoonOutlineIcon, SunOutlineIcon, SunsetIcon } from 'src/components/Icons';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
 import { logValueChange } from 'src/utils/eventLogger';
 
 export const themeIcons = {
-  [ThemeType.Dark]: <MoonIcon />,
-  [ThemeType.Light]: <SunIcon />,
+  [ThemeType.Dark]: <MoonOutlineIcon />,
+  [ThemeType.Light]: <SunOutlineIcon />,
   [ThemeType.Auto]: <AutoIcon />,
   [ThemeType.Sepia]: <SunsetIcon />,
 };

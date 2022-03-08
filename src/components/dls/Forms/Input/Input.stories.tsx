@@ -2,10 +2,9 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
 
-import SearchIcon from '../../../../../public/icons/search.svg';
-import SettingIcon from '../../../../../public/icons/settings.svg';
-
 import Input, { InputSize, InputType } from '.';
+
+import { SearchIcon, SettingsIcon } from 'src/components/Icons';
 
 export default {
   title: 'dls/Input',
@@ -156,7 +155,7 @@ const Template = (args) => (
     <Input {...args} />
   </span>
 );
-const PrefixIcon = <SettingIcon />;
+const PrefixIcon = <SettingsIcon />;
 const SuffixIcon = <SearchIcon />;
 const Prefix = <p>https://</p>;
 const Suffix = <p>.com</p>;

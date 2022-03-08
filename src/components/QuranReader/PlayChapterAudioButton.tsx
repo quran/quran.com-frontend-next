@@ -1,13 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import { PauseIcon, PlayIcon } from 'src/components/Icons';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   playFrom,

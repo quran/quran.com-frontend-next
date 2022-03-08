@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import AdvancedCopyIcon from '../../../../public/icons/clipboard.svg';
 import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
 
 import styles from './VerseActionAdvancedCopy.module.scss';
@@ -13,6 +12,7 @@ import Action from 'src/components/dls/Modal/Action';
 import Footer from 'src/components/dls/Modal/Footer';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { ClipboardIcon } from 'src/components/Icons';
 import { logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
 
@@ -55,7 +55,7 @@ const VerseActionAdvancedCopy = ({
 
   return (
     <>
-      <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={onModalOpen}>
+      <PopoverMenu.Item icon={<ClipboardIcon />} onClick={onModalOpen}>
         {t('advanced-copy')}
       </PopoverMenu.Item>
       <ContentModal

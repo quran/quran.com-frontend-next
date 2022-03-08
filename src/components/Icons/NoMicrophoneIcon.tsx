@@ -1,6 +1,6 @@
 import { BaseIconProps } from './BaseIcon';
 
-const NoMicIcon = (props: BaseIconProps) => (
+const NoMicrophoneIcon = (props: BaseIconProps) => (
   <svg
     width="80"
     height="61"
@@ -21,4 +21,4 @@ const NoMicIcon = (props: BaseIconProps) => (
   </svg>
 );
 
-export default NoMicIcon;
+export default NoMicrophoneIcon;

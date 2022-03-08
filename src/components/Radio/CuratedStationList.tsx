@@ -2,8 +2,6 @@ import sample from 'lodash/sample';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import Card, { CardSize } from '../dls/Card/Card';
 
@@ -11,6 +9,7 @@ import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
 import { StationState, StationType } from './types';
 
+import { PauseIcon, PlayIcon } from 'src/components/Icons';
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';

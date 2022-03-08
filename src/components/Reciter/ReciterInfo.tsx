@@ -5,12 +5,12 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button from '../dls/Button/Button';
 import { playReciterStation } from '../Radio/ReciterStationList';
 
 import styles from './ReciterInfo.module.scss';
 
+import { PlayIcon } from 'src/components/Icons';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { logEvent } from 'src/utils/eventLogger';
 import Reciter from 'types/Reciter';

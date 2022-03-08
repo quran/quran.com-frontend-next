@@ -5,10 +5,6 @@ import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CopyLinkIcon from '../../../public/icons/copy-link.svg';
-import DownloadIcon from '../../../public/icons/download.svg';
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
@@ -19,6 +15,7 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 import styles from './ChapterList.module.scss';
 
 import { getChapterAudioData } from 'src/api';
+import { CopyLinkIcon, DownloadIcon, PauseIcon, PlayIcon } from 'src/components/Icons';
 import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getRecitationNavigationUrl } from 'src/utils/navigation';

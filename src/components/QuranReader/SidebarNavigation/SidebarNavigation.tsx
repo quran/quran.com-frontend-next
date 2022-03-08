@@ -6,14 +6,13 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import IconClose from '../../../../public/icons/close.svg';
-
 import styles from './SidebarNavigation.module.scss';
 import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import Switch from 'src/components/dls/Switch/Switch';
+import { CloseIcon } from 'src/components/Icons';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import {
@@ -96,7 +95,7 @@ const SidebarNavigation = () => {
             dispatch(setIsVisible(false));
           }}
         >
-          <IconClose />
+          <CloseIcon />
         </Button>
       </div>
       <p className={styles.tip}>

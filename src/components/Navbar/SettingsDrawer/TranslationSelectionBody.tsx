@@ -7,13 +7,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';
+import { SearchIcon } from 'src/components/Icons';
 import {
   selectSelectedTranslations,
   setSelectedTranslations,
@@ -107,7 +106,7 @@ const TranslationSelectionBody = () => {
     <div>
       <div className={styles.searchInputContainer}>
         <Input
-          prefix={<IconSearch />}
+          prefix={<SearchIcon />}
           id="translations-search"
           value={searchQuery}
           onChange={setSearchQuery}

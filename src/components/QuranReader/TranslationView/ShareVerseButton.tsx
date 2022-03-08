@@ -2,12 +2,11 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { CopyLinkIcon } from 'src/components/Icons';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getWindowOrigin } from 'src/utils/url';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';

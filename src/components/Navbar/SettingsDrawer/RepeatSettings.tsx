@@ -1,10 +1,9 @@
 import Trans from 'next-translate/Trans';
 
-import RepeatIcon from '../../../../public/icons/repeat.svg';
-
 import styles from './RepeatSettings.module.scss';
 
 import IconContainer, { IconSize } from 'src/components/dls/IconContainer/IconContainer';
+import { RepeatIcon } from 'src/components/Icons';
 
 const RepeatSettings = () => {
   return (

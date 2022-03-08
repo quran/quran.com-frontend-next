@@ -2,12 +2,11 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import IconNorthEast from '../../../../public/icons/north_east.svg';
-
 import LinkContainer from './LinkContainer';
 import styles from './NavigationDrawerItem.module.scss';
 
 import IconContainer, { IconColor, IconSize } from 'src/components/dls/IconContainer/IconContainer';
+import { NorthEastIcon } from 'src/components/Icons';
 
 type NavigationDrawerItemProps = {
   title?: string;
@@ -42,7 +41,7 @@ const NavigationDrawerItem = ({
         <div>
           {isExternalLink && (
             <IconContainer
-              icon={<IconNorthEast />}
+              icon={<NorthEastIcon />}
               size={IconSize.Xsmall}
               color={IconColor.secondary}
             />

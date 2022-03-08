@@ -1,6 +1,6 @@
 import { BaseIconProps } from './BaseIcon';
 
-const DiscordIconIcon = (props: BaseIconProps) => (
+const DiscordIcon = (props: BaseIconProps) => (
   <svg
     width="200"
     height="200"
@@ -20,4 +20,4 @@ const DiscordIconIcon = (props: BaseIconProps) => (
   </svg>
 );
 
-export default DiscordIconIcon;
+export default DiscordIcon;
