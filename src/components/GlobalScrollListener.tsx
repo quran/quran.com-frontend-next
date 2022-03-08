@@ -6,6 +6,7 @@ import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirectio
 import { setIsMobileMinimizedForScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { setIsVisible } from 'src/redux/slices/navbar';
 import { setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
+import { setShowScrollToTop } from 'src/redux/slices/QuranReader/scrollToTop';
 
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();
@@ -21,11 +22,15 @@ const GlobalScrollListener = () => {
         dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: true });
         dispatch({ type: setIsExpanded.type, payload: false });
         dispatch({ type: setIsVisible.type, payload: false });
+        dispatch({ type: setShowScrollToTop.type, payload: true });
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
         dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: false });
         dispatch({ type: setIsExpanded.type, payload: true });
         dispatch({ type: setIsVisible.type, payload: true });
       }
+
+      if (newYPosition <= 50 && direction === ScrollDirection.Up)
+        dispatch({ type: setShowScrollToTop.type, payload: false });
     },
     [dispatch],
   );

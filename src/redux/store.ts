@@ -28,6 +28,7 @@ import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
 import readingViewVerse from './slices/QuranReader/readingViewVerse';
+import scrollToTop from './slices/QuranReader/scrollToTop';
 import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
@@ -64,6 +65,7 @@ const persistConfig = {
 export const rootReducer = combineReducers({
   audioPlayerState: persistReducer(audioPlayerPersistConfig, audioPlayerState),
   contextMenu,
+  scrollToTop,
   navbar,
   notes,
   quranReaderStyles,

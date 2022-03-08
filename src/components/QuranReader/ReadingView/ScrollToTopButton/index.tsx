@@ -16,6 +16,7 @@ import Button, {
 } from 'src/components/dls/Button/Button';
 import { ContentSide } from 'src/components/dls/Tooltip';
 import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
+import { selectScrollToTop } from 'src/redux/slices/QuranReader/scrollToTop';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 interface Props {
@@ -24,12 +25,14 @@ interface Props {
 
 const PageNavigationButtons: React.FC<Props> = ({ scrollToTop }) => {
   const { t } = useTranslation('quran-reader');
+  const { showScrollToTop } = useSelector(selectScrollToTop);
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isAudioPlayerHidden = audioDataStatus === AudioDataStatus.NoFile;
   return (
     <div
       className={classNames(styles.buttonsContainer, {
         [styles.audioPlayerOpen]: !isAudioPlayerHidden,
+        [styles.active]: showScrollToTop,
       })}
     >
       <Button
@@ -40,7 +43,7 @@ const PageNavigationButtons: React.FC<Props> = ({ scrollToTop }) => {
         type={ButtonType.Secondary}
         shape={ButtonShape.Circle}
         shouldFlipOnRTL={false}
-        tooltip="Scroll to top"
+        tooltip={showScrollToTop ? 'Scroll to top' : undefined}
         tooltipContentSide={ContentSide.LEFT}
       >
         <ChevronDownIcon />

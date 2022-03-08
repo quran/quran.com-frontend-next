@@ -2,22 +2,9 @@
 @use "src/styles/constants";
 
 .button {
-  // background: var(--color-background-elevated);
-  // color: var(--color-success-medium);
-  // width: calc(2.5 * var(--spacing-medium));
-  // height: calc(2.5 * var(--spacing-medium));
-  // border-radius: var(--border-radius-circle);
-  // box-shadow: var(--shadow-xlarge);
-  // border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  // &:hover {
-  //   box-shadow: var(--shadow-xlarge-hover);
-  //   background: var(--color-background-default);
-  //   box-shadow: var(--shadow-);
-  // }
   color: var(--color-success-medium) !important;
 
   & svg {
@@ -34,6 +21,15 @@
   transition: var(--transition-regular);
   z-index: var(--z-index-sticky);
   inset-inline-end: var(--spacing-large);
+
+  opacity: 0;
+  transition: var(--transition-fast);
+  pointer-events: none;
+
+  &.active {
+    opacity: 1;
+    pointer-events: initial;
+  }
 }
 
 
