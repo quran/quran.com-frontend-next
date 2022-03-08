@@ -41,7 +41,7 @@ export const readingPreferencesSlice = createSlice({
     }),
     setShowTooltipFor: (state, action: PayloadAction<WordByWordType[]>) => ({
       ...state,
-      showTooltipFor: action.payload,
+      showTooltipFor: action.payload.sort((a, b) => b.length - a.length),
     }),
     setWordClickFunctionality: (state, action: PayloadAction<WordClickFunctionality>) => ({
       ...state,

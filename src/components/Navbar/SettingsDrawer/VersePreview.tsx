@@ -66,7 +66,7 @@ const VersePreview = () => {
   else verse = sampleVerse;
 
   return (
-    <div dir="rtl">
+    <div dir="rtl" lang="ar">
       <PlainVerseText words={verse.words as Word[]} />
     </div>
   );

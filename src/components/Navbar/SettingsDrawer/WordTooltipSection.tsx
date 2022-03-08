@@ -37,6 +37,8 @@ const WordTooltipSection = () => {
   };
 
   const onChange = (type: WordByWordType) => (checked: boolean) => {
+    // eslint-disable-next-line no-debugger
+    debugger;
     const nextShowTooltipFor = checked
       ? [...showTooltipFor, type]
       : removeItemFromArray(type, showTooltipFor);
