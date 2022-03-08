@@ -24,7 +24,7 @@ interface Props {
 }
 
 const PageNavigationButtons: React.FC<Props> = ({ scrollToTop }) => {
-  const { t } = useTranslation('quran-reader');
+  const { t } = useTranslation('common');
   const { showScrollToTop } = useSelector(selectScrollToTop);
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const isAudioPlayerHidden = audioDataStatus === AudioDataStatus.NoFile;
@@ -43,7 +43,7 @@ const PageNavigationButtons: React.FC<Props> = ({ scrollToTop }) => {
         type={ButtonType.Secondary}
         shape={ButtonShape.Circle}
         shouldFlipOnRTL={false}
-        tooltip={showScrollToTop ? 'Scroll to top' : undefined}
+        tooltip={showScrollToTop ? t('scroll-top') : undefined}
         tooltipContentSide={ContentSide.LEFT}
       >
         <ChevronDownIcon />

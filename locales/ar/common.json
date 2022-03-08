@@ -139,6 +139,7 @@
     "reflect": "تدبر",
     "remove": "إزالة",
     "retry": "أعد المحاولة",
+    "scroll-top": "تحريك للأعلى",
     "search-for": "ابحث عن '{{searchQuery}}'",
     "search": {
         "filters": "تصفية البحث",
