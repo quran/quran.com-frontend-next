@@ -5,6 +5,7 @@
 }
 
 .avatar {
+  background-color: var(--color-background-alternative-medium);
   border-radius: var(--border-radius-circle);
   margin-inline-end: var(--spacing-small);
   --avatar-size: calc(var(--spacing-mega) * 1.5);

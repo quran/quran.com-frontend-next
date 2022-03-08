@@ -18,7 +18,9 @@ const ReflectionItem = ({ authorName, date, avatarUrl, reflectionText }: Reflect
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        {avatarUrl && <img alt="avatar" className={styles.avatar} src={avatarUrl} />}
+        <div className={styles.avatar}>
+          {avatarUrl && <img alt={authorName} className={styles.avatar} src={avatarUrl} />}
+        </div>
         <div>
           <div className={styles.author}>{authorName}</div>
           <div className={styles.date}>{date}</div>
