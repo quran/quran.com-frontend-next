@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import SurahAndAyahSelection from '../TafsirView/SurahAndAyahSelection';
+import TafsirSkeleton from '../TafsirView/TafsirSkeleton';
 import TranslationText from '../TranslationView/TranslationText';
 
 import styles from './ReflectionBody.module.scss';
@@ -27,7 +28,6 @@ type ReflectionBodyProps = {
   initialVerseNumber: string;
   scrollToTop: () => void;
   render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
-  shouldRender?: boolean;
   initialData?: any;
 };
 
@@ -35,7 +35,6 @@ const ReflectionBody = ({
   render,
   initialChapterId,
   initialVerseNumber,
-  shouldRender = true,
   initialData,
 }: ReflectionBodyProps) => {
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
@@ -114,8 +113,6 @@ const ReflectionBody = ({
     [translationFontScale],
   );
 
-  if (!shouldRender) return render({ surahAndAyahSelection: null, body: null });
-
   const shouldUseInitialData =
     initialData &&
     isUsingDefaultFont &&
@@ -126,6 +123,7 @@ const ReflectionBody = ({
     renderBody(initialData)
   ) : (
     <DataFetcher
+      loading={TafsirSkeleton}
       queryKey={`/api/quran-reflect?chapterId=${selectedChapterId}&verseNumber=${selectedVerseNumber}&quranFont=${quranFont}&mushafLines=${mushafLines}&translation=${selectedTranslation?.[0]}`}
       render={(data: any) => {
         return renderBody(data);
