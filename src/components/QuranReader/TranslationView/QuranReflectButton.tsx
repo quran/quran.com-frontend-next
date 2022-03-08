@@ -3,9 +3,9 @@ import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
-import ReflectionBody from '../ReflectionView/ReflectionBody';
 
 import styles from './TranslationViewCell.module.scss';
 
@@ -14,6 +14,8 @@ import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+
+const ReflectionBody = dynamic(() => import('../ReflectionView/ReflectionBody'), { ssr: false });
 
 type QuranReflectButtonProps = {
   verseKey: string;
