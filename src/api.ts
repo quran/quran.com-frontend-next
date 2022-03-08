@@ -21,6 +21,7 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
+  makeByVerseKeyUrl,
 } from './utils/apiPaths';
 
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -302,3 +303,47 @@ export const getTafsirContent = (
     }),
   );
 };
+
+/**
+ * Get reflections from QuranReflect API
+ *
+ * @param {string} chapterId
+ * @param {string} verseFrom
+ * @param {string} verseTo
+ * @returns {Promise}
+ */
+export const getQuranReflectData = (chapterId: string, verseFrom: string, verseTo: string) => {
+  // eslint-disable-next-line i18next/no-literal-string
+  const url = `https://quranreflect.com/posts.json?client_auth_token=tUqQpl4f87wIGnLRLzG61dGYe03nkBQj&q%5Bfilters_attributes%5D%5B0%5D%5Bchapter_id%5D=${chapterId}&q%5Bfilters_attributes%5D%5B0%5D%5Bfrom%5D=${verseFrom}&q%5Bfilters_attributes%5D%5B0%5D%5Bto%5D=${verseTo}&q%5Bfilters_operation%5D=OR&q%5Btags_operation%5D=OR&page=1&tab=most_popular&lang=en&feed=&verified=&student=&scholar=&approved=&exact_ayah=&within_range=&prioritize_ayah=`;
+  return fetcher(url);
+};
+
+/**
+ * Get reflection data
+ *
+ * @returns {Promise<Object>}
+ */
+export default async function getReflectionData({
+  chapterId,
+  verseNumber,
+  quranFont,
+  mushafLines,
+  translation,
+}) {
+  const reflections = (await getQuranReflectData(chapterId, verseNumber, verseNumber)) as any;
+
+  const translationsQueryKey = makeByVerseKeyUrl(`${chapterId}:${verseNumber}`, {
+    words: true,
+    translationFields: 'resource_name,language_id',
+    translations: translation,
+    ...getDefaultWordFields(quranFont),
+    ...getMushafId(quranFont, mushafLines),
+  });
+
+  const verseData = (await fetcher(translationsQueryKey)) as any;
+
+  return {
+    reflections: reflections.posts,
+    verse: verseData?.verse,
+  };
+}

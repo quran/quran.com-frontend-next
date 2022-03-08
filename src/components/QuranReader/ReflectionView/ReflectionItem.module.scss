@@ -1,6 +1,7 @@
 .header {
   display: flex;
   align-items: center;
+  margin-block-end: var(--spacing-xxsmall);
 }
 
 .avatar {
@@ -21,11 +22,18 @@
 }
 
 .container {
-  margin-block-end: var(--spacing-large);
+  margin-block-end: calc(1.5 * var(--spacing-large));
 }
 
 .body {
-  margin-block-start: var(--spacing-small);
+  margin-block-start: var(--spacing-mega);
   cursor: pointer;
-  opacity: var(--opacity-85);
+  opacity: var(--opacity-75);
+}
+
+.moreOrLessText {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  display: inline-block;
+  margin-inline-start: var(--spacing-xxsmall);
 }

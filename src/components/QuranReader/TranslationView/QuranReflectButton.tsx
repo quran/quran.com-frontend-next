@@ -65,6 +65,7 @@ const QuranReflectButton = ({
       <ReflectionBody
         initialChapterId={initialChapterId}
         initialVerseNumber={verseNumber}
+        shouldRender={isContentModalOpen}
         scrollToTop={() => {
           // noop
         }}

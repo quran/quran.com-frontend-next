@@ -1,50 +1,56 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWR from 'swr';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import SurahAndAyahSelection from '../TafsirView/SurahAndAyahSelection';
-import TafsirVerseText from '../TafsirView/TafsirVerseText';
+import TranslationText from '../TranslationView/TranslationText';
 
+import styles from './ReflectionBody.module.scss';
 import ReflectionDisclaimerMessage from './ReflectionDisclaimerMessage';
 import ReflectionItem from './ReflectionItem';
 
+import DataFetcher from 'src/components/DataFetcher';
+import Separator from 'src/components/dls/Separator/Separator';
+import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import {
+  selectIsUsingDefaultFont,
+  selectQuranReaderStyles,
+} from 'src/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { logItemSelectionChange } from 'src/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
-import getSampleVerse from 'src/utils/sampleVerse';
 import { makeVerseKey } from 'src/utils/verse';
-
-const sampleReflection = {
-  authorName: 'Sheikh Osama',
-  createdAt: '1 days ago',
-  avatarUrl:
-    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YXZhdGFyfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
-  // eslint-disable-next-line i18next/no-literal-string
-  expandedText: `Maybe 3 years ago you helped someone who was really sad feel better. And you haven’t thought about that moment again, but in their story, it was pivotal.
-Maybe 10 years ago you did something for a stranger which took a few extra minutes and has left your memory, but they still regale your act of kindness to others.
-You might have forgotten. But God doesn't forget.
-So when you’re sitting in a puddle of despising yourself- remember, He judges your intentions and records your actions from all of those years of good you’ve done even when it's passed and gone from your memory.
-But it isn't gone from your record of good deeds. And the blessings of that action you don't even remember doing may still be yet to come in this life- and without doubt, when it's presented to you in the Next. less
-`,
-  // eslint-disable-next-line i18next/no-literal-string
-  minimizedText: `If one is in the dark, physically or spiritually, what may they be feeling and what may they hope for ? Perhaps they feel lost, scared, alone, or uncertain and in turn, they are ...more`,
-};
 
 type ReflectionBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
   scrollToTop: () => void;
   render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
+  shouldRender?: boolean;
+  initialData?: any;
 };
 
-const ReflectionBody = ({ render, initialChapterId, initialVerseNumber }: ReflectionBodyProps) => {
-  const [selecterChapterId, setSelectedChapterId] = useState(initialChapterId);
+const ReflectionBody = ({
+  render,
+  initialChapterId,
+  initialVerseNumber,
+  shouldRender = true,
+  initialData,
+}: ReflectionBodyProps) => {
+  const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const { lang } = useTranslation();
+  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
+  const selectedTranslation = useSelector(selectSelectedTranslations);
+  const { translationFontScale, quranFont, mushafLines } = useSelector(
+    selectQuranReaderStyles,
+    shallowEqual,
+  );
 
   const surahAndAyahSelection = (
     <SurahAndAyahSelection
-      selectedChapterId={selecterChapterId}
+      selectedChapterId={selectedChapterId}
       selectedVerseNumber={selectedVerseNumber}
       onChapterIdChange={(newChapterId) => {
         logItemSelectionChange('reflection_chapter_id', newChapterId);
@@ -61,7 +67,7 @@ const ReflectionBody = ({ render, initialChapterId, initialVerseNumber }: Reflec
         logItemSelectionChange('reflection_verse_number', newVerseNumber);
         fakeNavigate(
           getVerseSelectedReflectionNavigationUrl(
-            makeVerseKey(Number(selecterChapterId), Number(selectedVerseNumber)),
+            makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
           ),
           lang,
         );
@@ -70,43 +76,61 @@ const ReflectionBody = ({ render, initialChapterId, initialVerseNumber }: Reflec
     />
   );
 
-  const { data } = useSWR(
-    // eslint-disable-next-line i18next/no-literal-string
-    `/api-path-to-reflection-content-${selecterChapterId}-${selectedVerseNumber}`,
-    async () => {
-      const sampleVerse = await getSampleVerse();
-      const sampleReflections = Array(10)
-        .fill(10)
-        .map((reflection, index) => ({
-          ...sampleReflection,
-          id: index,
-        }));
-
-      return {
-        reflections: sampleReflections,
-        verses: {
-          '1:2': sampleVerse,
-        },
-      };
+  const renderBody = useCallback(
+    (data) => {
+      return (
+        <div className={styles.container}>
+          <ReflectionDisclaimerMessage />
+          {data?.verse && (
+            <div className={styles.verseContainer}>
+              <PlainVerseText words={data.verse?.words} />
+            </div>
+          )}
+          {data?.verse?.translations?.length > 0 && (
+            <div className={styles.translationContainer}>
+              <TranslationText
+                languageId={data.verse.translations?.[0].languageId}
+                resourceName={data.verse.translations?.[0].resourceName}
+                translationFontScale={translationFontScale}
+                text={data.verse.translations?.[0].text}
+              />
+            </div>
+          )}
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+          {data?.reflections?.map((reflection) => (
+            <ReflectionItem
+              key={reflection.id}
+              date={reflection.createdAt}
+              authorName={reflection?.author?.name}
+              reflectionText={reflection?.body}
+              avatarUrl={reflection?.author?.profileImg}
+            />
+          ))}
+        </div>
+      );
     },
+    [translationFontScale],
   );
 
-  if (!data) return null;
+  if (!shouldRender) return render({ surahAndAyahSelection: null, body: null });
 
-  const body = (
-    <div>
-      <TafsirVerseText verses={data.verses} />
-      <ReflectionDisclaimerMessage />
-      {data.reflections.map((reflection) => (
-        <ReflectionItem
-          key={reflection.id}
-          date={reflection.createdAt}
-          authorName={reflection.authorName}
-          reflectionText={reflection.expandedText}
-          avatarUrl={reflection.avatarUrl}
-        />
-      ))}
-    </div>
+  const shouldUseInitialData =
+    initialData &&
+    isUsingDefaultFont &&
+    initialChapterId === selectedChapterId &&
+    initialVerseNumber === selectedVerseNumber;
+
+  const body = shouldUseInitialData ? (
+    renderBody(initialData)
+  ) : (
+    <DataFetcher
+      queryKey={`/api/quran-reflect?chapterId=${selectedChapterId}&verseNumber=${selectedVerseNumber}&quranFont=${quranFont}&mushafLines=${mushafLines}&translation=${selectedTranslation?.[0]}`}
+      render={(data: any) => {
+        return renderBody(data);
+      }}
+    />
   );
 
   return render({ surahAndAyahSelection, body });

@@ -18,17 +18,18 @@ const ReflectionItem = ({ authorName, date, avatarUrl, reflectionText }: Reflect
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <img alt="avatar" className={styles.avatar} src={avatarUrl} />
+        {avatarUrl && <img alt="avatar" className={styles.avatar} src={avatarUrl} />}
         <div>
           <div className={styles.author}>{authorName}</div>
           <div className={styles.date}>{date}</div>
         </div>
       </div>
       <div>
-        <span>{isExpanded ? reflectionText : truncateString(reflectionText, 220)}</span>
+        <span className={styles.body}>
+          {isExpanded ? reflectionText : truncateString(reflectionText, 220)}
+        </span>
         <span
-          style={{ fontWeight: 'bold' }}
-          className={styles.body}
+          className={styles.moreOrLessText}
           tabIndex={0}
           role="button"
           onKeyDown={() => setIsExpanded(!isExpanded)}
