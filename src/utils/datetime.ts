@@ -46,31 +46,25 @@ export const parseDate = (date: string): number => Date.parse(date);
  * @param {string} locale
  * @returns {string} date
  */
-export const formatDate = (date: Date, locale) => {
+export const formatDateRelatively = (date: Date, locale, now: Date = new Date()) => {
   const fullLocale = LANG_LOCALE_MAP[locale];
 
   // Formatter for "Today" and "Yesterday" etc
   const relative = new Intl.RelativeTimeFormat(fullLocale, { numeric: 'auto' });
 
-  // Formatter for weekdays, e.g. "Monday"
-  const short = new Intl.DateTimeFormat(fullLocale, { weekday: 'long' });
-
-  // Formatter for dates, e.g. "Mon, 31 May 2021"
-  const long = new Intl.DateTimeFormat(fullLocale, {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-
-  const now = new Date().setHours(0, 0, 0, 0);
+  const nowDate = now.setHours(0, 0, 0, 0);
   const then = date.setHours(0, 0, 0, 0);
-  const days = (then - now) / 86400000;
-  if (days > -6) {
-    if (days > -2) {
-      return relative.format(days, 'day');
-    }
-    return short.format(date);
+  const days = (then - nowDate) / 86400000;
+
+  if (days < -365) {
+    const years = Math.round(days / 365);
+    return relative.format(years, 'year');
   }
-  return long.format(date);
+
+  if (days < -7) {
+    const weeks = Math.round(days / 7);
+    return relative.format(weeks, 'weeks');
+  }
+
+  return relative.format(days, 'day');
 };

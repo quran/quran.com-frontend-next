@@ -10,7 +10,7 @@ import styles from './ReflectionItem.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import { formatDate } from 'src/utils/datetime';
+import { formatDateRelatively } from 'src/utils/datetime';
 import { getQuranReflectPostUrl } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
@@ -36,7 +36,7 @@ const ReflectionItem = ({
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation('common');
-  const formattedDate = formatDate(new Date(date), lang);
+  const formattedDate = formatDateRelatively(new Date(date), lang);
   const onMoreLessClicked = () => setIsExpanded(!isExpanded);
   return (
     <div className={styles.container}>
