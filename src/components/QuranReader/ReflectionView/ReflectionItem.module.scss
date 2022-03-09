@@ -19,6 +19,8 @@
 }
 
 .author {
+  display: flex;
+  align-items: center;
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-semibold);
 }
@@ -42,4 +44,10 @@
   font-weight: var(--font-weight-semibold);
   display: inline-block;
   margin-inline-start: var(--spacing-xxsmall);
+}
+
+.verifiedIcon {
+  display: inline-flex;
+  margin-inline-start: var(--spacing-xxsmall);
+  color: var(--color-success-medium);
 }

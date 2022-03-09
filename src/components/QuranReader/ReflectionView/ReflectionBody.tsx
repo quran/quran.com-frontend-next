@@ -145,6 +145,7 @@ const ReflectionBody = ({
               key={reflection.id}
               date={reflection.createdAt}
               authorName={reflection?.author?.name}
+              isAuthorVerified={reflection?.author?.verified}
               reflectionText={reflection?.body}
               avatarUrl={reflection?.author?.profileImg}
             />

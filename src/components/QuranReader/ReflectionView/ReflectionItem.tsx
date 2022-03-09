@@ -4,6 +4,7 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
+import VerifiedIcon from '../../../../public/icons/verified.svg';
 
 import styles from './ReflectionItem.module.scss';
 
@@ -19,6 +20,7 @@ type ReflectionItemProps = {
   avatarUrl: string;
   date: string;
   reflectionText: string;
+  isAuthorVerified: boolean;
 };
 
 const ReflectionItem = ({
@@ -27,6 +29,7 @@ const ReflectionItem = ({
   date,
   avatarUrl,
   reflectionText,
+  isAuthorVerified,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation('common');
@@ -38,7 +41,14 @@ const ReflectionItem = ({
             {avatarUrl && <img alt={authorName} className={styles.avatar} src={avatarUrl} />}
           </div>
           <div>
-            <div className={styles.author}>{authorName}</div>
+            <div className={styles.author}>
+              {authorName}
+              {isAuthorVerified && (
+                <span className={styles.verifiedIcon}>
+                  <VerifiedIcon />
+                </span>
+              )}
+            </div>
             <div className={styles.date}>{date}</div>
           </div>
         </div>
