@@ -24,6 +24,7 @@ type ReflectionItemProps = {
   isAuthorVerified: boolean;
 };
 
+const DEFAULT_IMAGE = '/images/quran-reflect.png';
 const ReflectionItem = ({
   id,
   authorName,
@@ -39,9 +40,7 @@ const ReflectionItem = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <div className={styles.avatar}>
-            {avatarUrl && <img alt={authorName} className={styles.avatar} src={avatarUrl} />}
-          </div>
+          <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
           <div>
             <div className={styles.author}>
               {authorName}
@@ -72,7 +71,7 @@ const ReflectionItem = ({
                 navigateToExternalUrl(getQuranReflectPostUrl(id));
               }}
             >
-              {t('quran-reader:read-more-quran-reflect')}
+              {t('quran-reader:view-on-quran-reflect')}
             </PopoverMenu.Item>
           </PopoverMenu>
         </div>

@@ -34,15 +34,15 @@ const QuranReflectButton = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
     setIsContentModalOpen(true);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
   };
 
   const contentModalRef = useRef(null);
 
   const onModalClose = () => {
     setIsContentModalOpen(false);
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   const [initialChapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
