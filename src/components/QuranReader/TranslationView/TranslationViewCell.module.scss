@@ -3,11 +3,12 @@
 
 .cellContainer {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  padding: var(--spacing-small);
+  flex-direction: column;
+  padding: var(--spacing-medium) var(--spacing-small);
   @include breakpoints.tablet {
-    padding: var(--spacing-mega) 0;
+    flex-direction: row;
+    padding: calc(1.5 * var(--spacing-mega)) 0;
   }
 }
 
@@ -23,20 +24,23 @@
 .actionContainer {
   display: flex;
   direction: ltr;
-  flex-direction: column;
+  flex-direction: row;
+  @include breakpoints.tablet {
+    flex-direction: column;
+  }
   align-items: center;
-  margin-inline-end: var(--spacing-medium);
+  margin-inline-end: calc(2 * var(--spacing-mega));
 }
 .arabicVerseContainer {
   direction: rtl;
-  padding-block: var(--spacing-mega);
-  padding-block: var(--spacing-mega);
+  padding-block-start: var(--spacing-xxsmall);
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-xsmall);
+  }
+  padding-block-end: var(--spacing-mega);
 }
 .verseTranslationContainer {
   padding-block-end: 0;
-}
-.translationContainer {
-  padding-block-end: var(--spacing-xsmall);
 }
 
 .actionContainerLeft,
@@ -60,6 +64,7 @@
   color: var(--color-text-default);
   height: calc(2.2 * var(--spacing-medium));
   width: calc(2.2 * var(--spacing-medium));
+  opacity: var(--opacity-50);
 
   &:hover {
     color: var(--color-text-default);
@@ -69,6 +74,7 @@
 
   @media (hover: hover) {
     &:hover {
+      opacity: 1;
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
