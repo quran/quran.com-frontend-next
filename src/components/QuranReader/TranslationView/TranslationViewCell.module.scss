@@ -5,11 +5,12 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: var(--spacing-medium) var(--spacing-small);
+  padding: var(--spacing-small);
   @include breakpoints.tablet {
     flex-direction: row;
-    padding: calc(1.5 * var(--spacing-mega)) 0;
+    padding: 0;
   }
+  --gap-size: calc(1.5 * var(--spacing-mega));
 }
 
 .highlightedContainer {
@@ -22,6 +23,7 @@
 }
 
 .actionContainer {
+  margin-block-start: var(--gap-size);
   display: flex;
   direction: ltr;
   flex-direction: row;
@@ -33,14 +35,15 @@
 }
 .arabicVerseContainer {
   direction: rtl;
-  padding-block-start: var(--spacing-xxsmall);
-  @include breakpoints.tablet {
-    padding-block-start: var(--spacing-xsmall);
-  }
-  padding-block-end: var(--spacing-mega);
+  margin-block-start: var(--gap-size);
+  margin-block-end: var(--gap-size);
 }
+.verseTranslationsContainer {
+  margin-block-end: var(--gap-size);
+}
+
 .verseTranslationContainer {
-  padding-block-end: 0;
+  margin-block-end: var(--spacing-mega);
 }
 
 .actionContainerLeft,
