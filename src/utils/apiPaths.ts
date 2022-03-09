@@ -20,21 +20,32 @@ export const DEFAULT_VERSES_PARAMS = {
  *
  * @param {string} currentLocale
  * @param {Record<string, unknown>} params
+ * @param {boolean} includeTranslationFields
  * @returns {Record<string, unknown>}
  */
 const getVersesParams = (
   currentLocale: string,
   params?: Record<string, unknown>,
-): Record<string, unknown> => ({
-  ...{
+  includeTranslationFields = true,
+): Record<string, unknown> => {
+  const defaultParams = {
     ...DEFAULT_VERSES_PARAMS,
     translations: getTranslationsInitialState(currentLocale).selectedTranslations.join(', '),
     reciter: getAudioPlayerStateInitialState(currentLocale).reciter.id,
     wordTranslationLanguage:
       getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
-  },
-  ...params,
-});
+  };
+
+  if (!includeTranslationFields) {
+    delete defaultParams.translationFields;
+    delete defaultParams.translations;
+  }
+
+  return {
+    ...defaultParams,
+    ...params,
+  };
+};
 
 export const makeVersesUrl = (
   id: string | number,
@@ -207,13 +218,19 @@ export const makeByVerseKeyUrl = (verseKey: string, params?: Record<string, unkn
  * @param {string} id  the Id of the page.
  * @param {string} currentLocale  the locale.
  * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @param {boolean} includeTranslationFields
  * @returns {string}
  */
 export const makePageVersesUrl = (
   id: string | number,
   currentLocale: string,
   params?: Record<string, unknown>,
-): string => makeUrl(`/verses/by_page/${id}`, getVersesParams(currentLocale, params));
+  includeTranslationFields = true,
+): string =>
+  makeUrl(
+    `/verses/by_page/${id}`,
+    getVersesParams(currentLocale, params, includeTranslationFields),
+  );
 
 /**
  * Compose the url for footnote's API.
