@@ -73,7 +73,6 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { chapterId } = params;
   const verseKey = String(chapterId);
-  // if the verse key or the tafsir id is not valid
   if (!isValidVerseKey(verseKey)) {
     return { notFound: true };
   }

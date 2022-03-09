@@ -88,7 +88,7 @@ const ReflectionItem = ({
             onKeyDown={() => setIsExpanded(!isExpanded)}
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {isExpanded ? 'less' : 'more'}
+            {isExpanded ? t('less') : t('more')}
           </span>
         )}
       </div>

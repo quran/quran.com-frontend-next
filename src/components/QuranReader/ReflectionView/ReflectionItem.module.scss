@@ -41,6 +41,7 @@
 }
 
 .moreOrLessText {
+  text-transform: lowercase;
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
   display: inline-block;
