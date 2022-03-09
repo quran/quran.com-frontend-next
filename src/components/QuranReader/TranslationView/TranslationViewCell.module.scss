@@ -6,11 +6,12 @@
   justify-content: space-between;
   flex-direction: column;
   padding: var(--spacing-small);
+  --gap-size: calc(0.5 * var(--spacing-mega));
   @include breakpoints.tablet {
+    --gap-size: calc(1.5 * var(--spacing-mega));
     flex-direction: row;
     padding: 0;
   }
-  --gap-size: calc(1.5 * var(--spacing-mega));
 }
 
 .highlightedContainer {
@@ -27,19 +28,22 @@
   display: flex;
   direction: ltr;
   flex-direction: row;
+  justify-content: space-between;
   @include breakpoints.tablet {
     flex-direction: column;
+    justify-content: start;
+    margin-inline-end: calc(2 * var(--spacing-mega));
   }
   align-items: center;
-  margin-inline-end: calc(2 * var(--spacing-mega));
 }
 .arabicVerseContainer {
   direction: rtl;
+  padding-block-start: var(--spacing-xxsmall);
   margin-block-start: var(--gap-size);
   margin-block-end: var(--gap-size);
 }
 .verseTranslationsContainer {
-  margin-block-end: var(--gap-size);
+  margin-block-end: calc(1.3 * var(--gap-size));
 }
 
 .verseTranslationContainer {
@@ -50,17 +54,16 @@
 .actionContainerRight {
   display: flex;
   align-items: center;
+  @include breakpoints.tablet {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 .actionContainerLeft {
   justify-content: flex-start;
 }
 .actionContainerRight {
   justify-content: flex-end;
-}
-
-.actionContainerLeft > .actionItem + .actionItem,
-.actionContainerRight > .actionItem + .actionItem {
-  margin-inline-start: var(--spacing-xxsmall);
 }
 
 .iconContainer.verseAction {
@@ -98,4 +101,8 @@
 .playIcon {
   /* stylelint-disable-next-line csstools/use-logical */
   margin-left: calc(0.5 * var(--spacing-xxsmall));
+}
+
+.actionItem {
+  display: inline-block;
 }
