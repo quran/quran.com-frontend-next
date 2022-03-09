@@ -1,7 +1,12 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin-block-end: var(--spacing-xxsmall);
+  margin-block-end: var(--spacing-xsmall);
+}
+.authorInfo {
+  display: flex;
+  align-items: center;
 }
 
 .avatar {
@@ -23,7 +28,7 @@
 }
 
 .container {
-  margin-block-end: calc(1.5 * var(--spacing-large));
+  margin-block-end: calc(2 * var(--spacing-large));
 }
 
 .body {

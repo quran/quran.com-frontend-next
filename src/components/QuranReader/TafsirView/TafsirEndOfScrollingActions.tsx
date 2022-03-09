@@ -23,14 +23,14 @@ const TafsirEndOfScrollingActions = ({
       <div>
         {hasPrevVerseGroup && (
           <Button type={ButtonType.Secondary} onClick={onPreviousButtonClicked}>
-            {t('prev')}
+            {t('previous-ayah')}
           </Button>
         )}
       </div>
       <div>
         {hasNextVerseGroup && (
           <Button type={ButtonType.Secondary} onClick={onNextButtonClicked}>
-            {t('next')}
+            {t('next-ayah')}
           </Button>
         )}
       </div>

@@ -104,6 +104,9 @@ export const getVerseSelectedTafsirNavigationUrl = (
 export const getVerseSelectedReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
+export const getQuranReflectPostUrl = (postId: number) =>
+  `https://quranreflect.com/posts/${postId}`;
+
 /**
  * Get the href link to a surah.
  *

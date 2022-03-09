@@ -119,7 +119,6 @@ const ReflectionBody = ({
 
       return (
         <div className={styles.container}>
-          <ReflectionDisclaimerMessage />
           {data?.verse && (
             <div className={styles.verseContainer}>
               <PlainVerseText words={data.verse?.words} />
@@ -138,8 +137,10 @@ const ReflectionBody = ({
           <div className={styles.separatorContainer}>
             <Separator />
           </div>
+          <ReflectionDisclaimerMessage />
           {data?.reflections?.map((reflection) => (
             <ReflectionItem
+              id={reflection.id}
               key={reflection.id}
               date={reflection.createdAt}
               authorName={reflection?.author?.name}
