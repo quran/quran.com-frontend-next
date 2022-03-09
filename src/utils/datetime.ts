@@ -1,4 +1,4 @@
-import { getLangFullLocale } from './locale';
+import { getLangFullLocale, LANG_LOCALE_MAP } from './locale';
 
 // Converts seconds to (hours), minutes, and seconds
 export const secondsFormatter = (seconds: number, locale: string) => {
@@ -39,21 +39,30 @@ export const getEarliestDate = (dates: string[]): number =>
  */
 export const parseDate = (date: string): number => Date.parse(date);
 
-// Formatter for "Today" and "Yesterday" etc
-const relative = new Intl.RelativeTimeFormat('en-GB', { numeric: 'auto' });
+/**
+ * Format date to a string
+ *
+ * @param {Date} date
+ * @param {string} locale
+ * @returns {string} date
+ */
+export const formatDate = (date: Date, locale) => {
+  const fullLocale = LANG_LOCALE_MAP[locale];
 
-// Formatter for weekdays, e.g. "Monday"
-const short = new Intl.DateTimeFormat('en-GB', { weekday: 'long' });
+  // Formatter for "Today" and "Yesterday" etc
+  const relative = new Intl.RelativeTimeFormat(fullLocale, { numeric: 'auto' });
 
-// Formatter for dates, e.g. "Mon, 31 May 2021"
-const long = new Intl.DateTimeFormat('en-GB', {
-  weekday: 'short',
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
-});
+  // Formatter for weekdays, e.g. "Monday"
+  const short = new Intl.DateTimeFormat(fullLocale, { weekday: 'long' });
 
-export const formatDate = (date) => {
+  // Formatter for dates, e.g. "Mon, 31 May 2021"
+  const long = new Intl.DateTimeFormat(fullLocale, {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+
   const now = new Date().setHours(0, 0, 0, 0);
   const then = date.setHours(0, 0, 0, 0);
   const days = (then - now) / 86400000;

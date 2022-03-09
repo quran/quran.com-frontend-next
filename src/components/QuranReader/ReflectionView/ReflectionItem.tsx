@@ -25,6 +25,7 @@ type ReflectionItemProps = {
 };
 
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
+const MAX_REFLECTION_LENGTH = 220;
 const ReflectionItem = ({
   id,
   authorName,
@@ -34,8 +35,9 @@ const ReflectionItem = ({
   isAuthorVerified,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { t } = useTranslation('common');
-  const formattedDate = formatDate(new Date(date));
+  const { t, lang } = useTranslation('common');
+  const formattedDate = formatDate(new Date(date), lang);
+  const onMoreLessClicked = () => setIsExpanded(!isExpanded);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -78,15 +80,15 @@ const ReflectionItem = ({
       </div>
       <div>
         <span className={styles.body}>
-          {isExpanded ? reflectionText : truncateString(reflectionText, 220)}
+          {isExpanded ? reflectionText : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
         </span>
-        {reflectionText.length > 220 && (
+        {reflectionText.length > MAX_REFLECTION_LENGTH && (
           <span
             className={styles.moreOrLessText}
             tabIndex={0}
             role="button"
-            onKeyDown={() => setIsExpanded(!isExpanded)}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onKeyDown={onMoreLessClicked}
+            onClick={onMoreLessClicked}
           >
             {isExpanded ? t('less') : t('more')}
           </span>

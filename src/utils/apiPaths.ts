@@ -6,7 +6,7 @@ import {
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
-import { QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
@@ -222,3 +222,12 @@ export const makePageVersesUrl = (
  * @returns {string}
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
+
+export const makeVerseReflectionsUrl = (
+  chapterId: string,
+  verseNumber: string,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  translation: number,
+) =>
+  `/api/quran-reflect?chapterId=${chapterId}&verseNumber=${verseNumber}&quranFont=${quranFont}&mushafLines=${mushafLines}&translation=${translation}`;

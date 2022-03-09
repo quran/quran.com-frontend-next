@@ -21,7 +21,11 @@ import {
   selectIsUsingDefaultFont,
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import {
+  selectIsUsingDefaultTranslations,
+  selectSelectedTranslations,
+} from 'src/redux/slices/QuranReader/translations';
+import { makeVerseReflectionsUrl } from 'src/utils/apiPaths';
 import { logButtonClick, logItemSelectionChange } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
@@ -50,6 +54,7 @@ const ReflectionBody = ({
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const { lang } = useTranslation();
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
+  const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const selectedTranslation = useSelector(selectSelectedTranslations);
   const { translationFontScale, quranFont, mushafLines } = useSelector(
     selectQuranReaderStyles,
@@ -176,6 +181,7 @@ const ReflectionBody = ({
   const shouldUseInitialData =
     initialData &&
     isUsingDefaultFont &&
+    isUsingDefaultTranslations &&
     initialChapterId === selectedChapterId &&
     initialVerseNumber === selectedVerseNumber;
 
@@ -184,10 +190,14 @@ const ReflectionBody = ({
   ) : (
     <DataFetcher
       loading={TafsirSkeleton}
-      queryKey={`/api/quran-reflect?chapterId=${selectedChapterId}&verseNumber=${selectedVerseNumber}&quranFont=${quranFont}&mushafLines=${mushafLines}&translation=${selectedTranslation?.[0]}`}
-      render={(data: any) => {
-        return renderBody(data);
-      }}
+      queryKey={makeVerseReflectionsUrl(
+        selectedChapterId,
+        selectedVerseNumber,
+        quranFont,
+        mushafLines,
+        selectedTranslation?.[0],
+      )}
+      render={renderBody}
     />
   );
 

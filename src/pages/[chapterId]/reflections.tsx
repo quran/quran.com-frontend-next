@@ -5,12 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './[verseId]/tafsirs.module.scss';
 
-import getReflectionData from 'src/api';
+import { getVerseReflections } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ReflectionBody from 'src/components/QuranReader/ReflectionView/ReflectionBody';
 import Error from 'src/pages/_error';
-import { DEFAULT_TRANSLATIONS } from 'src/redux/defaultSettings/defaultSettings';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import {
+  getQuranReaderStylesInitialState,
+  getTranslationsInitialState,
+} from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { scrollWindowToTop } from 'src/utils/navigation';
@@ -22,7 +24,7 @@ import { isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse } from 'types/ApiResponses';
 
-type AyahTafsirProp = {
+type AyahReflectionProp = {
   chapter?: ChapterResponse;
   hasError?: boolean;
   verseNumber?: string;
@@ -30,7 +32,7 @@ type AyahTafsirProp = {
   initialData?: any;
 };
 
-const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
+const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   hasError,
   chapter,
   verseNumber,
@@ -79,11 +81,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   try {
-    const data = await getReflectionData({
+    const data = await getVerseReflections({
       chapterId: chapterNumber,
       mushafLines,
       quranFont,
-      translation: DEFAULT_TRANSLATIONS[0],
+      translation: getTranslationsInitialState(locale).selectedTranslations,
       verseNumber,
     });
     return {
@@ -108,4 +110,4 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
 });
 
-export default SelectedTafsirOfAyah;
+export default SelectedAyahReflection;
