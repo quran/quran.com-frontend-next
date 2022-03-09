@@ -62,30 +62,27 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         })}
       >
         <div className={styles.actionContainer}>
-          <div className={styles.actionContainerLeft}>
-            <div className={styles.actionItem}>
-              <VerseLink verseKey={verse.verseKey} />
-            </div>
-            <div className={styles.actionItem}>
-              <BookmarkIcon verseKey={verse.verseKey} />
-            </div>
+          <div className={styles.actionItem}>
+            <VerseLink verseKey={verse.verseKey} />
           </div>
-          <div className={styles.actionContainerRight}>
-            <div className={classNames(styles.actionItem)}>
-              <ShareVerseButton verseKey={verse.verseKey} />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <QuranReflectButton verseKey={verse.verseKey} />
-            </div>
-            <div className={styles.actionItem}>
-              <PlayVerseAudioButton
-                verseKey={verse.verseKey}
-                timestamp={verse.timestamps.timestampFrom}
-              />
-            </div>
-            <div className={styles.actionItem}>
-              <OverflowVerseActionsMenu verse={verse} isModal isPortalled />
-            </div>
+          <div className={styles.actionItem}>
+            <BookmarkIcon verseKey={verse.verseKey} />
+          </div>
+
+          <div className={classNames(styles.actionItem)}>
+            <ShareVerseButton verseKey={verse.verseKey} />
+          </div>
+          <div className={classNames(styles.actionItem)}>
+            <QuranReflectButton verseKey={verse.verseKey} />
+          </div>
+          <div className={styles.actionItem}>
+            <PlayVerseAudioButton
+              verseKey={verse.verseKey}
+              timestamp={verse.timestamps.timestampFrom}
+            />
+          </div>
+          <div className={styles.actionItem}>
+            <OverflowVerseActionsMenu verse={verse} isModal isPortalled />
           </div>
         </div>
 

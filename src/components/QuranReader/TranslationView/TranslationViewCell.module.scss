@@ -3,11 +3,11 @@
 
 .cellContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   padding: var(--spacing-small);
   @include breakpoints.tablet {
-    padding: var(--spacing-medium);
+    padding: var(--spacing-mega) 0;
   }
 }
 
@@ -22,15 +22,18 @@
 
 .actionContainer {
   display: flex;
-  justify-content: space-between;
   direction: ltr;
+  flex-direction: column;
+  align-items: center;
+  margin-inline-end: var(--spacing-medium);
 }
 .arabicVerseContainer {
   direction: rtl;
-  padding-block-end: var(--spacing-medium);
+  padding-block: var(--spacing-mega);
+  padding-block: var(--spacing-mega);
 }
 .verseTranslationContainer {
-  padding-block-end: var(--spacing-xsmall);
+  padding-block-end: 0;
 }
 .translationContainer {
   padding-block-end: var(--spacing-xsmall);
