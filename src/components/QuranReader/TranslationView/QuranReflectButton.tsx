@@ -66,7 +66,7 @@ const QuranReflectButton = ({
         initialChapterId={initialChapterId}
         initialVerseNumber={verseNumber}
         scrollToTop={() => {
-          // noop
+          contentModalRef.current.scrollToTop();
         }}
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal

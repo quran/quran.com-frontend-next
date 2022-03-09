@@ -63,24 +63,25 @@ const ReflectionBody = ({
         selectedVerseNumber={selectedVerseNumber}
         onChapterIdChange={(newChapterId) => {
           logItemSelectionChange('reflection_chapter_id', newChapterId);
+          setSelectedChapterId(newChapterId.toString());
+          const newVerseNumber = '1';
+          setSelectedVerseNumber(newVerseNumber); // reset verse number to 1 every time chapter changes
           fakeNavigate(
             getVerseSelectedReflectionNavigationUrl(
-              makeVerseKey(newChapterId, Number(selectedVerseNumber)),
+              makeVerseKey(newChapterId, Number(newVerseNumber)),
             ),
             lang,
           );
-          setSelectedChapterId(newChapterId.toString());
-          setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
         }}
         onVerseNumberChange={(newVerseNumber) => {
           logItemSelectionChange('reflection_verse_number', newVerseNumber);
+          setSelectedVerseNumber(newVerseNumber.toString());
           fakeNavigate(
             getVerseSelectedReflectionNavigationUrl(
-              makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
+              makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
             ),
             lang,
           );
-          setSelectedVerseNumber(newVerseNumber);
         }}
       />
     </div>
@@ -103,13 +104,13 @@ const ReflectionBody = ({
     const newVerseNumber = String(Number(selectedVerseNumber) - 1);
     logButtonClick('reflection_prev_verse');
     scrollToTop();
+    setSelectedVerseNumber(newVerseNumber);
     fakeNavigate(
       getVerseSelectedReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
       lang,
     );
-    setSelectedVerseNumber(newVerseNumber);
   }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber]);
 
   const renderBody = useCallback(
