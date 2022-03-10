@@ -90,8 +90,8 @@
 
 // Fallback for browsers that don't support variable fonts
 @font-face {
-  font-family: "ProximaVara";
-  src: local("Proxima Vara"), url("/fonts/lang/ProximaVara/ProximaVara.woff2");
+  font-family: "Inter";
+  src: local("Inter"), url("/fonts/lang/Inter/Inter-VariableFont.ttf");
   font-weight: 100 900;
   /* default 400 */
   font-stretch: 50% 100%;

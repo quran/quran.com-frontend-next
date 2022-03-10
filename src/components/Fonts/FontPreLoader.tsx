@@ -5,7 +5,7 @@ import Head from 'next/head';
 const DEFAULT_LOCALE = 'en';
 
 const LOCALE_PRELOADED_FONTS = {
-  [DEFAULT_LOCALE]: [{ type: 'font/woff2', location: '/fonts/lang/ProximaVara/ProximaVara.woff2' }],
+  [DEFAULT_LOCALE]: [{ type: 'font/ttf', location: '/fonts/lang/Inter/Inter-VariableFont.ttf' }],
   ar: [{ type: 'font/woff2', location: '/fonts/lang/arabic/NotoNaskhArabic-Regular.woff2' }],
   bn: [{ type: 'font/ttf', location: '/fonts/lang/bengali/NotoSerifBengali-Regular.woff2' }],
   ur: [{ type: 'font/woff2', location: '/fonts/lang/urdu/MehrNastaliqWeb.woff2' }],
