@@ -19,7 +19,6 @@
     "include-translator": "包括译者姓名？",
     "juz-beginning": "回到本卷开头",
     "load-more": "继续显示",
-    "next-ayah": "下一节",
     "next-juz": "下一卷",
     "next-page": "下一页",
     "next-surah": "下一章",
@@ -28,6 +27,8 @@
     "prev-page": "上一页",
     "prev-surah": "上一章",
     "query-param-message": "您正在使用<0> <\/0>设置源自从默认的不同，您可以通过点击使用默认设置的URL <1>这里<\/1>或你可以从URL默认通过点击设置<2>这里<\/2> 。",
+    "read-more-quran-reflect": "阅读更多关于古兰经反映",
+    "reflection-disclaimer": "反思不代表 Quran.com 的观点，不应断章取义",
     "remove-bookmark": "删除书签",
     "select-range": "选择经文范围",
     "surah-beginning": "回到本章开头",
@@ -35,5 +36,6 @@
     "tafsirs": "经注",
     "trans-change": "改变",
     "translation-by": "翻译者",
-    "verses-range": "节文范围"
+    "verses-range": "节文范围",
+    "view-on-quran-reflect": "查看 QuranReflect"
 }
