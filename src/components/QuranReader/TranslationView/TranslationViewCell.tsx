@@ -69,20 +69,20 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             <div className={styles.actionItem}>
               <BookmarkIcon verseKey={verse.verseKey} />
             </div>
-          </div>
-          <div className={styles.actionContainerRight}>
-            <div className={classNames(styles.actionItem)}>
-              <ShareVerseButton verseKey={verse.verseKey} />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <QuranReflectButton verseKey={verse.verseKey} />
-            </div>
             <div className={styles.actionItem}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}
                 timestamp={verse.timestamps.timestampFrom}
               />
             </div>
+            <div className={classNames(styles.actionItem)}>
+              <QuranReflectButton verseKey={verse.verseKey} />
+            </div>
+            <div className={classNames(styles.actionItem)}>
+              <ShareVerseButton verseKey={verse.verseKey} />
+            </div>
+          </div>
+          <div className={styles.actionContainerRight}>
             <div className={styles.actionItem}>
               <OverflowVerseActionsMenu verse={verse} isModal isPortalled />
             </div>
