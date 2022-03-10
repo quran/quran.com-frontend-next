@@ -312,10 +312,11 @@ export const getTafsirContent = (
  * @param {string} verseTo
  * @returns {Promise}
  */
+const quranReflectToken = process.env.NEXT_PUBLIC_QURAN_REFLECT_TOKEN;
 const getQuranReflectVerseData = (chapterId: string, verseFrom: string, verseTo: string) => {
   // eslint-disable-next-line i18next/no-literal-string
   const formattedChapterId = Number(chapterId) + 1;
-  const url = `https://quranreflect.com/posts.json?client_auth_token=tUqQpl4f87wIGnLRLzG61dGYe03nkBQj&q%5Bfilters_attributes%5D%5B0%5D%5Bchapter_id%5D=${formattedChapterId}&q%5Bfilters_attributes%5D%5B0%5D%5Bfrom%5D=${verseFrom}&q%5Bfilters_attributes%5D%5B0%5D%5Bto%5D=${verseTo}&q%5Bfilters_operation%5D=AND&page=1&tab=most_popular&exact_ayah=&prioritize_ayah=`;
+  const url = `https://quranreflect.com/posts.json?client_auth_token=${quranReflectToken}&q%5Bfilters_attributes%5D%5B0%5D%5Bchapter_id%5D=${formattedChapterId}&q%5Bfilters_attributes%5D%5B0%5D%5Bfrom%5D=${verseFrom}&q%5Bfilters_attributes%5D%5B0%5D%5Bto%5D=${verseTo}&q%5Bfilters_operation%5D=AND&page=1&tab=most_popular&exact_ayah=&prioritize_ayah=`;
   return fetcher(url);
 };
 
