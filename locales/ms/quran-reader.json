@@ -19,7 +19,6 @@
     "include-translator": "Sertakan nama penterjemah?",
     "juz-beginning": "Permulaan Juz",
     "load-more": "Buka Lagi",
-    "next-ayah": "Ayat seterusnya",
     "next-juz": "Juz seterusnya",
     "next-page": "Muka surat seterusnya",
     "next-surah": "Surah seterusnya",
@@ -28,6 +27,8 @@
     "prev-page": "Halaman sebelumnya",
     "prev-surah": "Surah sebelumnya",
     "query-param-message": "Anda menggunakan <0> <\/0> ketetapan daripada URL yang berbeza daripada ketetapan sedia-ada, anda boleh menggunakan ketetapan sedia-ada anda dengan klik-kan <1> di sini <\/1> atau anda boleh menjadikan ketetapan daripada URL sedia-ada anda dengan klik-kan <2> di sini <\/2> .",
+    "read-more-quran-reflect": "Baca Lebih Lanjut tentang Quran Reflect",
+    "reflection-disclaimer": "Renungan tidak mewakili pendapat Quran.com dan tidak boleh dibawa keluar dari konteks",
     "remove-bookmark": "Alih keluar penanda halaman",
     "select-range": "Pilih jarak rangka ayat",
     "surah-beginning": "Permulaan Surah",
@@ -35,5 +36,6 @@
     "tafsirs": "Tafsir",
     "trans-change": "Ubah",
     "translation-by": "Terjemahan oleh",
-    "verses-range": "Jarak rangka ayat"
+    "verses-range": "Jarak rangka ayat",
+    "view-on-quran-reflect": "Lihat di QuranReflect"
 }

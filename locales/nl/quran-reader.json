@@ -19,7 +19,6 @@
     "include-translator": "Naam van de vertaler toevoegen?",
     "juz-beginning": "begin van Juzo",
     "load-more": "Meer laden",
-    "next-ayah": "Volgende Aya",
     "next-juz": "volgende Juz",
     "next-page": "Volgende bladzijde",
     "next-surah": "volgende soera",
@@ -28,6 +27,8 @@
     "prev-page": "Vorige pagina",
     "prev-surah": "vorige soera",
     "query-param-message": "U gebruikt <0> <\/0> instellingen van de url die afwijken van de standaardinstellingen, u kunt uw standaardinstellingen gebruiken door <1> hier <\/1> klikken of u kunt de instellingen van de url uw standaardinstellingen maken door te klikken op <2> hier <\/2> .",
+    "read-more-quran-reflect": "Lees meer over Koran Reflect",
+    "reflection-disclaimer": "Reflecties vertegenwoordigen niet de mening van Quran.com en mogen niet uit hun verband worden gehaald",
     "remove-bookmark": "Bladwijzer verwijderen",
     "select-range": "Selecteer verzen bereik",
     "surah-beginning": "Begin van Surah",
@@ -35,5 +36,6 @@
     "tafsirs": "Tafsirs",
     "trans-change": "Wijziging",
     "translation-by": "Vertaling door",
-    "verses-range": "Bereik van verzen"
+    "verses-range": "Bereik van verzen",
+    "view-on-quran-reflect": "Bekijk op KoranReflect"
 }

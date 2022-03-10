@@ -19,7 +19,6 @@
     "include-translator": "Të përfshihet emri i përkthyesit?",
     "juz-beginning": "Fillimi i Xhuzit",
     "load-more": "Ngarko më shumë",
-    "next-ayah": "Ajeti tjetër",
     "next-juz": "Juz tjetër",
     "next-page": "Faqja tjetër",
     "next-surah": "Surja tjetër",
@@ -28,6 +27,8 @@
     "prev-page": "Faqja e meparshme",
     "prev-surah": "Surja e mëparshme",
     "query-param-message": "Ju jeni duke përdorur <0> <\/0> cilësimet nga url-ja që janë të ndryshme nga ato të paracaktuara, mund të përdorni cilësimet tuaja të paracaktuara duke klikuar <1> këtu <\/1> ose mund t'i bëni cilësimet nga url-ja të paracaktuara duke klikuar <2> këtu <\/2> .",
+    "read-more-quran-reflect": "Lexoni më shumë mbi Reflektimin e Kuranit",
+    "reflection-disclaimer": "Reflektimet nuk përfaqësojnë opinionin e Quran.com dhe nuk duhet të nxirren jashtë kontekstit",
     "remove-bookmark": "Hiq faqerojtësin",
     "select-range": "Zgjidh vargun e vargjeve",
     "surah-beginning": "Fillimi i sures",
@@ -35,5 +36,6 @@
     "tafsirs": "Tefsiret",
     "trans-change": "Ndryshimi",
     "translation-by": "Përkthim nga",
-    "verses-range": "Gama e vargjeve"
+    "verses-range": "Gama e vargjeve",
+    "view-on-quran-reflect": "Shiko në Kuran Reflect"
 }
