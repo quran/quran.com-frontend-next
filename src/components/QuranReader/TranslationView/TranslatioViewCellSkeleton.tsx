@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import range from 'lodash/range';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import cellStyles from './TranslationViewCell.module.scss';
@@ -36,18 +37,11 @@ const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = tru
     <div className={classNames(cellStyles.cellContainer, skeletonStyles.cellContainer)}>
       <div className={cellStyles.actionContainer}>
         <div className={cellStyles.actionContainerLeft}>
-          <Skeleton className={skeletonStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-          <Skeleton className={skeletonStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-          <Skeleton className={skeletonStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
-          <Skeleton className={skeletonStyles.actionItem}>
-            <Button size={ButtonSize.Small} />
-          </Skeleton>
+          {range(0, 4).map((index) => (
+            <Skeleton key={index} className={skeletonStyles.actionItem}>
+              <Button size={ButtonSize.Small} />
+            </Skeleton>
+          ))}
         </div>
         {hasActionMenuItems && (
           <div className={cellStyles.actionContainerRight}>
