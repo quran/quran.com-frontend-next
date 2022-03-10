@@ -37,7 +37,7 @@ const ReflectionItem = ({
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation('common');
   const formattedDate = formatDateRelatively(new Date(date), lang);
-  const onMoreLessClicked = (pervIsExpanded) => setIsExpanded(!pervIsExpanded);
+  const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   return (
     <div className={styles.container}>
       <div className={styles.header}>
