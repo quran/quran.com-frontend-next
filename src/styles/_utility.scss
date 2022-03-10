@@ -351,8 +351,8 @@ $skeleton-height-map: (
       10: 6.15rem,
     ),
     mobile: (
-      1: 2.52rem,
-      2: 3.47rem,
+      1: 1.9rem,
+      2: 3.4rem,
       3: 4.1rem,
       4: 5.03rem,
       5: 7.24rem,
@@ -377,9 +377,9 @@ $skeleton-height-map: (
       10: 16.6vh,
     ),
     mobile: (
-      1: 3.3vw,
-      2: 3.85vw,
-      3: 4vw,
+      1: 4.55vw,
+      2: 5.5vw,
+      3: 5.5vw,
       4: 8.9vw,
       5: 11vw,
       6: 1rem,
@@ -403,9 +403,9 @@ $skeleton-height-map: (
       10: 17.65vh,
     ),
     mobile: (
-      1: 4.4vw,
-      2: 4.9vw,
-      3: 4.8vw,
+      1: 6.8vw,
+      2: 7.6vw,
+      3: 8.26vw,
       4: 6vw,
       5: 9.3vw,
       6: 1rem,
@@ -429,9 +429,9 @@ $skeleton-height-map: (
       10: 12.86vh,
     ),
     mobile: (
-      1: 4.4vw,
-      2: 5vw,
-      3: 4.83vw,
+      1: 6.8vw,
+      2: 7.6vw,
+      3: 8.26vw,
       4: 6vw,
       5: 9.3vw,
       6: 1rem,
@@ -455,9 +455,9 @@ $skeleton-height-map: (
       10: 20.6vh,
     ),
     mobile: (
-      1: 4vw,
-      2: 5.1vw,
-      3: 5.15vw,
+      1: 4.17vw,
+      2: 6.54vw,
+      3: 7.1vw,
       4: 8.4vw,
       5: 10vw,
       6: 1rem,
@@ -481,9 +481,9 @@ $skeleton-height-map: (
       10: 18.6vh,
     ),
     mobile: (
-      1: 4.18vw,
-      2: 5.3vw,
-      3: 6vw,
+      1: 5.08vw,
+      2: 7.05vw,
+      3: 8.78vw,
       4: 10vw,
       5: 12vw,
       6: 1rem,
@@ -743,7 +743,7 @@ $line-width-map: (
     .#{$name}-font-size-#{$i} {
       --skeleton-height: #{map.get($mobile-skeleton-height-scales, $i)};
       --font-size: #{map.get($mobile-scales, $i)};
-      --line-height: unset;
+      --line-height: normal;
       @include breakpoints.tablet {
         --font-size: #{map.get($tablet-scales, $i)};
         --line-height: #{map.get($tablet-line-height-scales, $i)};
