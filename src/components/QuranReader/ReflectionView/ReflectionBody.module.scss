@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .separatorContainer {
   margin-block: var(--spacing-large);
 }
@@ -14,5 +16,11 @@
   justify-content: center;
 }
 .surahSelectionContainer {
-  padding-block-end: var(--spacing-medium);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-medium);
+  }
+}
+
+.endOfScrollActionsContainer {
+  padding-block-end: var(--spacing-large);
 }
