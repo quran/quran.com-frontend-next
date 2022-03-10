@@ -103,6 +103,10 @@
   margin-left: calc(0.5 * var(--spacing-xxsmall));
 }
 
-.actionItem {
+.actionContainerLeft .actionItem {
   display: inline-block;
+  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
+  @include breakpoints.tablet {
+    margin-inline-end: 0;
+  }
 }

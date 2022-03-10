@@ -25,6 +25,7 @@
 .actionItem {
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
   @include breakpoints.tablet {
+    margin-inline-end: 0;
     margin-block-end: calc(0.5 * var(--spacing-xxsmall));
   }
 }
