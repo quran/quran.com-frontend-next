@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--spacing-xsmall);
+}
+.authorInfo {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  background-color: var(--color-background-alternative-medium);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-small);
+  --avatar-size: calc(var(--spacing-mega) * 1.5);
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+  border: 1px solid var(--color-borders-hairline);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+}
+.date {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+}
+
+.container {
+  margin-block-end: calc(2 * var(--spacing-large));
+}
+
+.body {
+  margin-block-start: var(--spacing-mega);
+  cursor: pointer;
+  opacity: var(--opacity-75);
+}
+
+.moreOrLessText {
+  text-transform: lowercase;
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  display: inline-block;
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.verifiedIcon {
+  display: inline-flex;
+  margin-inline-start: var(--spacing-xxsmall);
+  color: var(--color-success-medium);
+}

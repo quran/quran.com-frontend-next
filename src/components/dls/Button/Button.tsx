@@ -53,6 +53,7 @@ export type ButtonProps = {
   shouldFlipOnRTL?: boolean;
   shallowRouting?: boolean;
   prefetch?: boolean;
+  newTab?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -74,6 +75,7 @@ const Button: React.FC<ButtonProps> = ({
   shouldFlipOnRTL = true,
   shallowRouting = false,
   prefetch = true,
+  newTab,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -111,7 +113,7 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href && !disabled)
     return (
-      <Link href={href} prefetch={prefetch} isShallow={shallowRouting}>
+      <Link href={href} newTab={newTab} prefetch={prefetch} isShallow={shallowRouting}>
         <a
           {...(onClick && { onClick })}
           dir={direction}
