@@ -166,12 +166,14 @@ const ReflectionBody = ({
             </Button>
           </div>
 
-          <TafsirEndOfScrollingActions
-            hasNextVerseGroup={hasNextVerse}
-            hasPrevVerseGroup={hasPrevVerse}
-            onNextButtonClicked={loadNextVerse}
-            onPreviousButtonClicked={loadPrevVerse}
-          />
+          <div className={styles.endOfScrollActionsContainer}>
+            <TafsirEndOfScrollingActions
+              hasNextVerseGroup={hasNextVerse}
+              hasPrevVerseGroup={hasPrevVerse}
+              onNextButtonClicked={loadNextVerse}
+              onPreviousButtonClicked={loadPrevVerse}
+            />
+          </div>
         </div>
       );
     },
