@@ -19,7 +19,6 @@
     "include-translator": "Çevirmen adı dahil edilsin mi?",
     "juz-beginning": "Cüz'ün Başlangıcı",
     "load-more": "Daha fazla yükle",
-    "next-ayah": "Sonraki Ayet",
     "next-juz": "Sonraki Cüz",
     "next-page": "Sonraki Sayfa",
     "next-surah": "Sonraki Sure",
@@ -28,6 +27,8 @@
     "prev-page": "Önceki sayfa",
     "prev-surah": "Önceki Sure",
     "query-param-message": "Varsayılanlardan farklı olan url'den <0> <\/0> <1>burayı<\/1> tıklayarak varsayılan ayarlarınızı kullanabilir veya url'den gelen ayarları tıklayarak varsayılan ayarlarınızı yapabilirsiniz. <2>burada<\/2> .",
+    "read-more-quran-reflect": "Kuran Yansıtması hakkında devamını oku",
+    "reflection-disclaimer": "Düşünceler Kuran.com'un görüşünü temsil etmemektedir ve bağlamdan çıkarılmamalıdır.",
     "remove-bookmark": "Yer işaretini kaldır",
     "select-range": "Ayet aralığını seçin",
     "surah-beginning": "Surenin Başlangıcı",
@@ -35,5 +36,6 @@
     "tafsirs": "Tefsirler",
     "trans-change": "Değiştirmek",
     "translation-by": "Çeviri:",
-    "verses-range": "Ayet aralığı"
+    "verses-range": "Ayet aralığı",
+    "view-on-quran-reflect": "Kuran'da görüntüle"
 }

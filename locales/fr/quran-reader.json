@@ -19,7 +19,6 @@
     "include-translator": "Inclure le nom du traducteur ?",
     "juz-beginning": "Début de Juz",
     "load-more": "Charger plus",
-    "next-ayah": "Suivant Ayah",
     "next-juz": "Juz suivant",
     "next-page": "Page suivante",
     "next-surah": "Sourate suivante",
@@ -28,6 +27,8 @@
     "prev-page": "Page précédente",
     "prev-surah": "Sourate précédente",
     "query-param-message": "Vous utilisez <0> <\/0> paramètres de l'url qui sont différents de ceux par défaut, vous pouvez utiliser vos paramètres par défaut en cliquant <1> ici <\/1> ou vous pouvez définir les paramètres de l'url par défaut en cliquant sur <2> ici <\/2> .",
+    "read-more-quran-reflect": "En savoir plus sur Quran Reflect",
+    "reflection-disclaimer": "Les réflexions ne représentent pas l'opinion de Quran.com et ne doivent pas être prises hors contexte",
     "remove-bookmark": "Supprimer le signet",
     "select-range": "Sélectionnez la plage de vers",
     "surah-beginning": "Début de la sourate",
@@ -35,5 +36,6 @@
     "tafsirs": "Tafsirs",
     "trans-change": "Changement",
     "translation-by": "Traduction par",
-    "verses-range": "Gamme de vers"
+    "verses-range": "Gamme de vers",
+    "view-on-quran-reflect": "Voir sur QuranReflect"
 }
