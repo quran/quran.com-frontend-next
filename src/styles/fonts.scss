@@ -90,8 +90,9 @@
 
 // Fallback for browsers that don't support variable fonts
 @font-face {
-  font-family: "ProximaVara";
-  src: local("Proxima Vara"), url("/fonts/lang/ProximaVara/ProximaVara.woff2");
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url("/fonts/lang/Montserrat/Montserrat-VariableFont_wght.ttf");
   font-weight: 100 900;
   /* default 400 */
   font-stretch: 50% 100%;
