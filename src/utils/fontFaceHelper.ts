@@ -42,8 +42,9 @@ export const getV1OrV2FontFaceSource = (isV1: boolean, pageNumber: number): stri
 
   const woff2 = `/fonts/quran/hafs/v2/woff2/p${pageNumber}.woff2`;
   const woff = `/fonts/quran/hafs/v2/woff/p${pageNumber}.woff`;
+  const ttf = `/fonts/quran/hafs/v2/ttf/p${pageNumber}.ttf`;
 
-  return `local(QCF2${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff')`;
+  return `local(QCF2${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
 };
 
 /**
