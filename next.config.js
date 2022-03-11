@@ -27,7 +27,7 @@ const config = {
     disable: isDev,
     dest: 'public',
     runtimeCaching,
-    publicExcludes: ['!fonts/**/*'],
+    publicExcludes: ['!fonts/quran/hafs/v1/**/*', '!fonts/quran/hafs/v2/**/*'],
   },
   // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
