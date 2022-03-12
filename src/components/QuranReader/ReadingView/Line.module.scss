@@ -3,7 +3,6 @@
 
 .line {
   text-align: center;
-  width: var(--line-width, auto);
   margin-inline: auto;
 }
 
@@ -16,4 +15,8 @@
   @include breakpoints.tablet {
     display: block;
   }
+}
+
+.fixedWidth {
+  width: var(--line-width, auto);
 }
