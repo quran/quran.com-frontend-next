@@ -146,9 +146,7 @@ const TranslationText: React.FC<Props> = ({
     <div className={styles[`translation-font-size-${translationFontScale}`]}>
       <div
         onClick={(event) => onTextClicked(event)}
-        className={classNames(styles.text, styles[langData.direction], styles[langData.font], {
-          [styles.en]: langData.code === 'en',
-        })}
+        className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
         dangerouslySetInnerHTML={{ __html: text }}
       />
       {shouldShowFootnote && (

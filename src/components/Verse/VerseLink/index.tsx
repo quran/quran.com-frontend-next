@@ -1,6 +1,5 @@
 import React from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './VerseLink.module.scss';
@@ -18,7 +17,7 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
   const { lang } = useTranslation('');
   return (
     <Button
-      className={classNames(styles.verseLink, { [styles.en]: lang === 'en' })}
+      className={styles.verseLink}
       size={ButtonSize.Small}
       shape={ButtonShape.Circle}
       href={getChapterWithStartingVerseUrl(verseKey)}
