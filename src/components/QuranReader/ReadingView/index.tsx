@@ -124,22 +124,25 @@ const ReadingView = ({
     });
   }, [currentPageIndex]);
 
-  useHotkeys(
-    'Up',
+  const allowKeyboardNavigation = quranTextFontScale <= 5;
+  const onUpClicked = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
       scrollToPreviousPage();
     },
     [scrollToPreviousPage],
   );
-  useHotkeys(
-    'Down',
+
+  const onDownClicked = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
       scrollToNextPage();
     },
     [scrollToNextPage],
   );
+
+  useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
+  useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
   const itemContentRenderer = (pageIndex: number) => (
     <PageContainer
@@ -197,10 +200,12 @@ const ReadingView = ({
           />
         )}
       </div>
-      <PageNavigationButtons
-        scrollToNextPage={scrollToNextPage}
-        scrollToPreviousPage={scrollToPreviousPage}
-      />
+      {allowKeyboardNavigation && (
+        <PageNavigationButtons
+          scrollToNextPage={scrollToNextPage}
+          scrollToPreviousPage={scrollToPreviousPage}
+        />
+      )}
     </>
   );
 };
