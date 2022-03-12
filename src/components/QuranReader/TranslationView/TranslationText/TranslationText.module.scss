@@ -9,7 +9,6 @@ $translation-line-height: 1.5;
   line-height: $translation-line-height;
   padding-block-end: var(--spacing-micro);
   opacity: var(--opacity-75);
-  letter-spacing: -0.5px;
 }
 
 @include utility.generate-font-scales("translation");
@@ -28,6 +27,10 @@ $translation-line-height: 1.5;
   direction: rtl;
   /* stylelint-disable-next-line csstools/use-logical */
   text-align: right;
+}
+
+.en {
+  letter-spacing: -0.5px;
 }
 
 .urdu {
