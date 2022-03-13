@@ -1,14 +1,7 @@
 name: Analyze Bundle Size
 
 # Run this workflow on every Pull Request action as well as all pushes to master
-on:
-  pull_request:
-  push:
-    branches:
-      - master
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [push, pull_request]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -16,7 +9,8 @@ jobs:
   analyze:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    # only run when the deployment is successful
+    if: ${{ github.event.deployment_status.state == 'success' }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -24,7 +18,7 @@ jobs:
 
       # Next.js runs on Node—we need to set this up first.
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: "14"
 
