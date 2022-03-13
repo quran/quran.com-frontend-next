@@ -28,8 +28,8 @@ const pageSizes = Object.keys(bundle.pages).map((p) => {
     .map((filename) => {
       const fn = path.join(process.cwd(), prefix, filename);
       const bytes = fs.readFileSync(fn);
-      const gZipped = zlib.gzipSync(bytes);
-      return gZipped.byteLength;
+      const gzipped = zlib.gzipSync(bytes);
+      return gzipped.byteLength;
     })
     .reduce((s, b) => s + b, 0);
 
@@ -42,7 +42,7 @@ const sizes = pageSizes
   .join('\n');
 
 const output = `# Bundle Size
-| Route | Size (gZipped) |
+| Route | Size (gzipped) |
 | --- | --- |
 ${sizes}
 <!-- GH BOT -->`;
