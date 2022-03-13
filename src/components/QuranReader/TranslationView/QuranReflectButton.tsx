@@ -56,7 +56,9 @@ const QuranReflectButton = ({
         tooltip={t('reflect')}
         shouldFlipOnRTL={false}
         shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction)}
+        className={classNames(styles.iconContainer, styles.verseAction, {
+          [styles.fadedVerseAction]: isTranslationView,
+        })}
       >
         <span className={styles.icon}>
           <ChatIcon />

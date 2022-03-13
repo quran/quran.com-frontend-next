@@ -79,12 +79,18 @@
 
   @media (hover: hover) {
     &:hover {
+      opacity: 1;
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
     }
   }
 }
+
+.fadedVerseAction {
+  opacity: var(--opacity-50);
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
