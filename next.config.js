@@ -27,7 +27,11 @@ const config = {
     disable: isDev,
     dest: 'public',
     runtimeCaching,
-    publicExcludes: ['!fonts/quran/hafs/v1/**/*', '!fonts/quran/hafs/v2/**/*'],
+    publicExcludes: [
+      '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
+      '!icons/**', // exclude all icons
+      '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
+    ],
   },
   // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
@@ -100,6 +104,24 @@ const config = {
               {
                 key: 'cache-control',
                 value: 'public, max-age=31536000, immutable', // Max-age is 1 year. immutable indicates that the font will not change over the expiry time.
+              },
+            ],
+          },
+          {
+            source: '/images/:image*', // match wildcard images' path which will match any image file on any level under /images.
+            headers: [
+              {
+                key: 'cache-control',
+                value: 'public, max-age=604800, immutable', // Max-age is 1 week. immutable indicates that the image will not change over the expiry time.
+              },
+            ],
+          },
+          {
+            source: '/icons/:icon*', // match wildcard icons' path which will match any icon file on any level under /icons.
+            headers: [
+              {
+                key: 'cache-control',
+                value: 'public, max-age=604800, immutable', // Max-age is 1 week. immutable indicates that the icon will not change over the expiry time.
               },
             ],
           },

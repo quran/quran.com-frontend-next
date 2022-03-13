@@ -5,8 +5,8 @@
 /* eslint-disable import/no-dynamic-require */
 const range = require('lodash/range');
 
+const englishChaptersData = require('./data/chapters/en.json');
 const { locales } = require('./i18n.json');
-const englishChaptersData = require('./public/data/chapters/en.json');
 
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const isDevelopment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
@@ -40,7 +40,7 @@ const getAlternateRefs = (chapterId = null, appendSlug = true, prefix = '', suff
       href = `${href}/${prefix}`;
     }
     if (appendSlug) {
-      const localeChaptersData = require(`./public/data/chapters/${locale}.json`);
+      const localeChaptersData = require(`./data/chapters/${locale}.json`);
       href = `${href}/${localeChaptersData[chapterId].slug}`;
     }
     if (suffix) {

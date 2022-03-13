@@ -106,7 +106,9 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         size={ButtonSize.Small}
         tooltip={t('audio.player.pause')}
         onClick={onPauseClicked}
-        className={classNames(styles.iconContainer, styles.verseAction)}
+        className={classNames(styles.iconContainer, styles.verseAction, {
+          [styles.fadedVerseAction]: isTranslationView,
+        })}
         shape={ButtonShape.Circle}
       >
         <span className={styles.icon}>
@@ -123,7 +125,9 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction)}
+      className={classNames(styles.iconContainer, styles.verseAction, {
+        [styles.fadedVerseAction]: isTranslationView,
+      })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
         <PlayIcon />

@@ -11,7 +11,11 @@ import styles from './TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
+import {
+  getQuranReflectVerseUrl,
+  getVerseSelectedReflectionNavigationUrl,
+} from 'src/utils/navigation';
+import { navigateToExternalUrl } from 'src/utils/url';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 const ReflectionBody = dynamic(() => import('../ReflectionView/ReflectionBody'), { ssr: false });
@@ -33,7 +37,8 @@ const QuranReflectButton = ({
   const onButtonClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
-    setIsContentModalOpen(true);
+    navigateToExternalUrl(getQuranReflectVerseUrl(verseKey));
+    // setIsContentModalOpen(true); // temporarily disable inline reflection feature
   };
 
   const contentModalRef = useRef(null);
@@ -56,7 +61,9 @@ const QuranReflectButton = ({
         tooltip={t('reflect')}
         shouldFlipOnRTL={false}
         shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction)}
+        className={classNames(styles.iconContainer, styles.verseAction, {
+          [styles.fadedVerseAction]: isTranslationView,
+        })}
       >
         <span className={styles.icon}>
           <ChatIcon />
