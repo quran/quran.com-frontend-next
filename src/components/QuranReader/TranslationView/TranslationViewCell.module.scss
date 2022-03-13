@@ -70,7 +70,6 @@
   color: var(--color-text-default);
   height: calc(2.2 * var(--spacing-medium));
   width: calc(2.2 * var(--spacing-medium));
-  opacity: var(--opacity-50);
 
   &:hover {
     color: var(--color-text-default);
@@ -80,7 +79,6 @@
 
   @media (hover: hover) {
     &:hover {
-      opacity: 1;
       color: var(--color-success-medium);
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
