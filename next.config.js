@@ -103,6 +103,24 @@ const config = {
               },
             ],
           },
+          {
+            source: '/images/:image*', // match wildcard images' path which will match any image file on any level under /images.
+            headers: [
+              {
+                key: 'cache-control',
+                value: 'public, max-age=604800, immutable', // Max-age is 1 week. immutable indicates that the image will not change over the expiry time.
+              },
+            ],
+          },
+          {
+            source: '/icons/:icon*', // match wildcard icons' path which will match any icon file on any level under /icons.
+            headers: [
+              {
+                key: 'cache-control',
+                value: 'public, max-age=604800, immutable', // Max-age is 1 week. immutable indicates that the icon will not change over the expiry time.
+              },
+            ],
+          },
         ];
   },
   async redirects() {
