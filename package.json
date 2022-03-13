@@ -15,6 +15,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:scss": "yarn stylelint '**/*.scss' --fix",
     "generate-sitemap": "next-sitemap --config next-sitemap.js && node scripts/format-sitemap.js",
+    "analyze-bundles": "node scripts/analyze-bundles.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
