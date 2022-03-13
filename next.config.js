@@ -94,15 +94,15 @@ const config = {
             source: '/:route*', // apply security rules to all routes.
             headers: securityHeaders,
           },
-          {
-            source: '/fonts/:font*', // match wildcard fonts' path which will match any font file on any level under /fonts.
-            headers: [
-              {
-                key: 'cache-control',
-                value: 'public, max-age=31536000, immutable', // Max-age is 1 year. immutable indicates that the font will not change over the expiry time.
-              },
-            ],
-          },
+          // {
+          //   source: '/fonts/:font*', // match wildcard fonts' path which will match any font file on any level under /fonts.
+          //   headers: [
+          //     {
+          //       key: 'cache-control',
+          //       value: 'public, max-age=31536000, immutable', // Max-age is 1 year. immutable indicates that the font will not change over the expiry time.
+          //     },
+          //   ],
+          // },
           {
             source: '/images/:image*', // match wildcard images' path which will match any image file on any level under /images.
             headers: [
