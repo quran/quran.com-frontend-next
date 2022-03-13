@@ -27,7 +27,11 @@ const config = {
     disable: isDev,
     dest: 'public',
     runtimeCaching,
-    publicExcludes: ['!fonts/quran/hafs/v1/**/*', '!fonts/quran/hafs/v2/**/*'],
+    publicExcludes: [
+      '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
+      '!icons/**', // exclude all icons
+      '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
+    ],
   },
   // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
