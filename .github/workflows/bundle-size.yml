@@ -25,6 +25,9 @@ jobs:
         uses: bahmutov/npm-install@v1
 
       - name: Build & analyze
+        env:
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: mkdir -p .next/analyze/master && npm run analyze-bundles | tee .next/analyze/output.txt
 
       - name: Upload bundle
