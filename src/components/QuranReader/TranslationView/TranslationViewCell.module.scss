@@ -70,7 +70,6 @@
   color: var(--color-text-default);
   height: calc(2.2 * var(--spacing-medium));
   width: calc(2.2 * var(--spacing-medium));
-  opacity: var(--opacity-50);
 
   &:hover {
     color: var(--color-text-default);
@@ -87,6 +86,11 @@
     }
   }
 }
+
+.fadedVerseAction {
+  opacity: var(--opacity-50);
+}
+
 .icon {
   display: inline-flex;
   align-items: center;
