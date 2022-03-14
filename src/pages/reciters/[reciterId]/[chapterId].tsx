@@ -90,14 +90,14 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
       <div className={classNames(layoutStyle.flowItem, styles.container)}>
         <img
           className={styles.reciterImage}
-          alt={selectedReciter.name}
+          alt={selectedReciter.translatedName.name}
           src={makeCDNUrl(selectedReciter.profilePicture)}
         />
         <div>
           <div className={styles.chapterName}>
             {selectedChapter.id}. {selectedChapter.transliteratedName}
           </div>
-          <div className={styles.reciterName}>{selectedReciter.name}</div>
+          <div className={styles.reciterName}>{selectedReciter.translatedName.name}</div>
         </div>
         <div className={styles.actionsContainer}>
           {isCurrentlyPlayingThisChapter ? (
@@ -153,7 +153,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const reciterId = params.reciterId as string;
     const chapterId = params.chapterId as string;
 
-    const reciterData = await getReciterData(reciterId);
+    const reciterData = await getReciterData(reciterId, locale);
     const chapterData = await getChapterData(chapterId, locale);
 
     if (!reciterData || !chapterData) {

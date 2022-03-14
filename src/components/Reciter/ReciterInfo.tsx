@@ -41,11 +41,11 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
         <img
           className={styles.reciterImage}
           src={makeCDNUrl(selectedReciter?.profilePicture)}
-          alt={selectedReciter?.name}
+          alt={selectedReciter?.translatedName?.name}
         />
       </div>
       <div>
-        <div className={styles.reciterName}>{selectedReciter?.name}</div>
+        <div className={styles.reciterName}>{selectedReciter?.translatedName?.name}</div>
         <div className={styles.reciterBio}>
           <span dangerouslySetInnerHTML={{ __html: bio }} />
           {selectedReciter?.bio.length > maxBioLength && (

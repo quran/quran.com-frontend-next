@@ -72,7 +72,7 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
       <NextSeoWrapper
-        title={selectedReciter?.name}
+        title={selectedReciter?.translatedName?.name}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={selectedReciter?.bio}
@@ -106,11 +106,11 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const reciterId = params.reciterId as string;
 
-    const reciterData = await getReciterData(reciterId);
+    const reciterData = await getReciterData(reciterId, locale);
 
     return {
       props: {
