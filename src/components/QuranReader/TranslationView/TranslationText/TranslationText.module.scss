@@ -8,7 +8,7 @@ $translation-line-height: 1.5;
   letter-spacing: 0;
   line-height: $translation-line-height;
   padding-block-end: var(--spacing-micro);
-  opacity: var(--opacity-75);
+  opacity: var(--opacity-90);
 }
 
 @include utility.generate-font-scales("translation");
