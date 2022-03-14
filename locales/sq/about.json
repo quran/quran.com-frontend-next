@@ -1,14 +1,14 @@
 {
     "credits": {
         "desc": "Ky projekt nuk do të ishte i mundur pa shumë biblioteka dhe projekte me burim të hapur që kemi përdorur:",
-        "lokalize": "<0> Lokalize <\/0> : Një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune lokalizimi pa probleme.",
-        "quran-align": "<0> Collin Fair <\/0> : Një mjet për prodhimin e segmentimit të saktë të fjalëve të recitimit të regjistruar Kur'anor.",
-        "quran-complex": "<0> Kompleksi i Kuranit <\/0> : Kompleksi i Shtypjes së Kur'anit të Lavdishëm Mbreti Fahd është një lider në shërbimin e Kur'anit të lavdishëm dhe shkencave të tij, në përkthimin e kuptimeve të tij dhe në mbrojtjen e tekstit kuranor nga shtrembërimi, nëpërmjet përdorimit optimal të teknologji të avancuara në fushën e printimit, regjistrimeve audio, publikimeve elektronike dhe aplikacioneve dixhitale.",
-        "quran-enc": "<0> QuranEnc <\/0> : Një portal që paraqet përkthime falas dhe të besueshme të kuptimeve dhe interpretimeve të Kuranit fisnik në shumë gjuhë të botës.",
-        "tanzil": "<0> Tanzil <\/0> : Një projekt ndërkombëtar Kur'anor që synon të sigurojë një tekst të saktë të Kur'anit shumë të verifikuar.",
+        "lokalize": "<0>Lokalize<\/0>: Një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune lokalizimi pa probleme.",
+        "quran-align": "<0>Collin Fair<\/0>: Një mjet për prodhimin e segmentimit të saktë të fjalëve të recitimit të regjistruar Kur'anor.",
+        "quran-complex": "<0>Kompleksi Mbretit Fehd për shtypjen e Kur'anit të ndershëm<\/0>: Kompleksi i Shtypjes së Kur'anit të Lavdishëm Mbreti Fahd është një lider në shërbimin e Kur'anit të lavdishëm dhe shkencave të tij, në përkthimin e kuptimeve të tij dhe në mbrojtjen e tekstit kuranor nga shtrembërimi, nëpërmjet përdorimit optimal të teknologji të avancuara në fushën e printimit, regjistrimeve audio, publikimeve elektronike dhe aplikacioneve dixhitale.",
+        "quran-enc": "<0>QuranEnc<\/0>: Një portal që paraqet përkthime falas dhe të besueshme të kuptimeve dhe interpretimeve të Kuranit fisnik në shumë gjuhë të botës.",
+        "tanzil": "<0>Tanzil<\/0> : Një projekt ndërkombëtar Kur'anor që synon të sigurojë një tekst të saktë të Kur'anit shumë të verifikuar.",
         "title": "Kreditë",
-        "vercel": "<0> <\/0> : është një platformë vendosjeje dhe bashkëpunimi për zhvilluesit e front-endit, e cila e vendos në plan të parë zhvilluesin e frontendit, duke u dhënë atyre mjete gjithëpërfshirëse për të ndërtuar faqe interneti dhe aplikacione me performancë të lartë.",
-        "zekr": "<0> Zekr <\/0> : Një platformë e hapur mjet studimi i Kuranit për shfletimin dhe kërkimin mbi Kuranin"
+        "vercel": "<0>Vercel<\/0>: është një platformë vendosjeje dhe bashkëpunimi për zhvilluesit e front-endit, e cila e vendos në plan të parë zhvilluesin e frontendit, duke u dhënë atyre mjete gjithëpërfshirëse për të ndërtuar faqe interneti dhe aplikacione me performancë të lartë.",
+        "zekr": "<0>Zekr<\/0>: Një platformë e hapur mjet studimi i Kuranit për shfletimin dhe kërkimin mbi Kuranin"
     },
-    "main-description": "Quran.com u themelua në vitin 1995. Faqja e internetit synon ta bëjë të lehtë për këdo leximin, studimin dhe mësimin e Kuranit. Projekti është me kod të hapur dhe është ndërtuar si një bashkëpunim midis anëtarëve të ekipit kryesor dhe ekipit <0> Tarteel <\/0> ."
+    "main-description": "Quran.com u themelua në vitin 1995. Faqja e internetit synon ta bëjë të lehtë për këdo leximin, studimin dhe mësimin e Kuranit. Projekti është me kod të hapur dhe është ndërtuar si një bashkëpunim midis anëtarëve të ekipit kryesor dhe ekipit <0>Tarteel<\/0> ."
 }
