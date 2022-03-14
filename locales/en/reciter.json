@@ -2,5 +2,6 @@
     "copy-link": "Copy Link",
     "quran-reciters": "Quran Reciters",
     "read": "Read",
-    "search-chapter": "Search Chapter"
+    "search-chapter": "Search Chapter",
+    "reciter-desc": "Listen to beautiful Holy Quran recitation by {{reciterName}}."
 }
