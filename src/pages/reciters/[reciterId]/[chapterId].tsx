@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -16,7 +17,7 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
-import { getChapterAudioData, getReciterData } from 'src/api';
+import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
@@ -151,7 +152,12 @@ export default RecitationPage;
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const reciterId = params.reciterId as string;
-    const chapterId = params.chapterId as string;
+    let chapterId = params.chapterId as string;
+    const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
+    if (!sluggedChapterId) {
+      return { notFound: true };
+    }
+    chapterId = sluggedChapterId;
 
     const reciterData = await getReciterData(reciterId);
     const chapterData = await getChapterData(chapterId, locale);
