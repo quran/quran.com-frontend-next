@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useRef, useCallback } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -100,56 +101,66 @@ const AudioRepeatManager = ({
    * the progress is tracked in redux (`repeatProgress`), and the repetition settings is stored in redux too as `repeatSettings`
    */
   useEffect(() => {
-    if (!lastActiveVerseTiming.current) return null;
-    if (!audioData || isValidating) return null;
+    const callback = () => {
+      const timestamp = window?.audioPlayerEl?.currentTime;
+      const timestmapInMs = timestamp * 1000;
 
-    if (!isInRepeatMode) return null;
+      if (!lastActiveVerseTiming.current) return requestAnimationFrame(callback);
+      if (!audioData || isValidating) return requestAnimationFrame(callback);
 
-    const isVerseEnded = currentTimeInMs >= lastActiveVerseTiming.current.timestampTo;
+      if (!isInRepeatMode) return requestAnimationFrame(callback);
 
-    // When verses ended, and current repeatEachVerse progress < expected repetition
-    // 1) set the current time to the beginning of the verse
-    // 2) pause the audio when delayMultiplier is set
-    // 3) increment repeatEachVerse progress by 1
-    if (isVerseEnded && repeatProgress.repeatEachVerse < repeatSettings.repeatEachVerse) {
-      triggerSetCurrentTime(lastActiveVerseTiming.current.timestampFrom / 1000);
-      delayAudioWhenNeeded();
-      dispatch(setRepeatProgress({ repeatEachVerse: repeatProgress.repeatEachVerse + 1 }));
-      return null;
-    }
+      const isVerseEnded = timestmapInMs >= lastActiveVerseTiming.current.timestampTo;
 
-    const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
-    const isAudioEnded = audioPlayerElRef.current.ended;
+      // When verses ended, and current repeatEachVerse progress < expected repetition
+      // 1) set the current time to the beginning of the verse
+      // 2) pause the audio when delayMultiplier is set
+      // 3) increment repeatEachVerse progress by 1
+      if (isVerseEnded && repeatProgress.repeatEachVerse < repeatSettings.repeatEachVerse) {
+        triggerSetCurrentTime(lastActiveVerseTiming.current.timestampFrom / 1000);
+        delayAudioWhenNeeded();
+        dispatch(setRepeatProgress({ repeatEachVerse: repeatProgress.repeatEachVerse + 1 }));
+        return requestAnimationFrame(callback);
+      }
 
-    // When we're done repeating this verse. Reset the progress state so it can be used for the next verse repetition
-    // also delay the audio when the verse changed to the next verse
-    if (isVerseEnded && repeatProgress.repeatEachVerse === repeatSettings.repeatEachVerse) {
-      dispatch(setRepeatProgress({ repeatEachVerse: 1 }));
-      if (!isRangeEnded) delayAudioWhenNeeded();
-    }
+      const isRangeEnded = timestmapInMs >= verseRangeTo.timestampTo;
+      const isAudioEnded = audioPlayerElRef.current.ended;
 
-    // When the range ended, and repeatRange progress < expected repetition
-    // 1) set the current time to the beginning of the range
-    // 2) pause the audio when the delayMultiplier is set
-    // 3) increment repeatRange progress by 1
-    if ((isRangeEnded || isAudioEnded) && repeatProgress.repeatRange < repeatSettings.repeatRange) {
-      triggerSetCurrentTime(verseRangeFrom.timestampFrom / 1000);
-      delayAudioWhenNeeded();
-      dispatch(setRepeatProgress({ repeatRange: repeatProgress.repeatRange + 1 }));
-      triggerPlayAudio();
-      return null;
-    }
+      // When we're done repeating this verse. Reset the progress state so it can be used for the next verse repetition
+      // also delay the audio when the verse changed to the next verse
+      if (isVerseEnded && repeatProgress.repeatEachVerse === repeatSettings.repeatEachVerse) {
+        dispatch(setRepeatProgress({ repeatEachVerse: 1 }));
+        if (!isRangeEnded) delayAudioWhenNeeded();
+      }
 
-    if (isRangeEnded && repeatProgress.repeatRange === repeatSettings.repeatRange) {
-      triggerPauseAudio();
-      dispatch(setRepeatProgress({ repeatRange: 1 }));
-      dispatch(exitRepeatMode());
-      return null;
-    }
+      // When the range ended, and repeatRange progress < expected repetition
+      // 1) set the current time to the beginning of the range
+      // 2) pause the audio when the delayMultiplier is set
+      // 3) increment repeatRange progress by 1
+      if (
+        (isRangeEnded || isAudioEnded) &&
+        repeatProgress.repeatRange < repeatSettings.repeatRange
+      ) {
+        triggerSetCurrentTime(verseRangeFrom.timestampFrom / 1000);
+        delayAudioWhenNeeded();
+        dispatch(setRepeatProgress({ repeatRange: repeatProgress.repeatRange + 1 }));
+        triggerPlayAudio();
+        return requestAnimationFrame(callback);
+      }
 
-    return null;
+      if (isRangeEnded && repeatProgress.repeatRange === repeatSettings.repeatRange) {
+        triggerPauseAudio();
+        dispatch(setRepeatProgress({ repeatRange: 1 }));
+        dispatch(exitRepeatMode());
+        return requestAnimationFrame(callback);
+      }
+
+      return requestAnimationFrame(callback);
+    };
+
+    requestAnimationFrame(callback);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTimeInMs]);
+  }, []);
   // We only use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
   // it will cause the hook to execute dispatch, setCurrentTime, delay, etc multiples times, which is unintended
 
