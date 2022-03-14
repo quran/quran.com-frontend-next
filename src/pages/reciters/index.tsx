@@ -15,9 +15,13 @@ import { filterReciters } from 'src/components/Navbar/SettingsDrawer/ReciterSele
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReciterListHero from 'src/components/Reciter/QuranReciterListHero';
 import RecitersList from 'src/components/Reciter/RecitersList';
+import { getLanguageAlternates } from 'src/utils/locale';
+import { getCanonicalUrl } from 'src/utils/navigation';
+
+const NAVIGATION_URL = '/reciters';
 
 const RecitersListPage = ({ reciters, hasError }) => {
-  const { t } = useTranslation('reciter');
+  const { t, lang } = useTranslation('reciter');
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredReciters = useMemo(
@@ -26,9 +30,15 @@ const RecitersListPage = ({ reciters, hasError }) => {
   );
 
   if (hasError) return <Error statusCode={500} />;
+
   return (
     <>
-      <NextSeoWrapper title={t('quran-reciters')} description={t('reciters-desc')} />
+      <NextSeoWrapper
+        title={t('quran-reciters')}
+        description={t('reciters-desc')}
+        canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
+        languageAlternates={getLanguageAlternates(NAVIGATION_URL)}
+      />
       <div className={layoutStyle.flow}>
         <QuranReciterListHero searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
         <div className={classNames(layoutStyle.flowItem, pageStyle.recitersListContainer)}>
