@@ -81,34 +81,34 @@ export function createSEOConfig({
         property: 'fb:pages',
         content: config.facebookPage,
       },
-      {
-        name: 'al:ios:url',
-        content: config.appleAppUrl,
-      },
-      {
-        name: 'al:ios:app_name',
-        content: config.appleAppName,
-      },
-      {
-        name: 'al:ios:app_store_id',
-        content: config.appleAppId,
-      },
-      {
-        name: 'al:android:url',
-        content: config.androidAppUrl,
-      },
-      {
-        name: 'al:android:app_name',
-        content: config.androidAppName,
-      },
-      {
-        name: 'al:android:package',
-        content: config.androidPackage,
-      },
-      {
-        name: 'apple-itunes-app',
-        content: `app-id=${config.appleAppId}`,
-      },
+      // {
+      //   name: 'al:ios:url',
+      //   content: config.appleAppUrl,
+      // },
+      // {
+      //   name: 'al:ios:app_name',
+      //   content: config.appleAppName,
+      // },
+      // {
+      //   name: 'al:ios:app_store_id',
+      //   content: config.appleAppId,
+      // },
+      // {
+      //   name: 'al:android:url',
+      //   content: config.androidAppUrl,
+      // },
+      // {
+      //   name: 'al:android:app_name',
+      //   content: config.androidAppName,
+      // },
+      // {
+      //   name: 'al:android:package',
+      //   content: config.androidPackage,
+      // },
+      // {
+      //   name: 'apple-itunes-app',
+      //   content: `app-id=${config.appleAppId}`,
+      // },
       {
         name: 'Charset',
         content: 'UTF-8',
