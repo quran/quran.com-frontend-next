@@ -13,6 +13,7 @@ import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
 import IconRadio2 from '../../../../../public/icons/radio-2.svg';
+import IconRadio from '../../../../../public/icons/radio.svg';
 import Tarteel from '../../../../../public/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
@@ -32,6 +33,7 @@ const NavigationDrawerBody = () => {
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
       <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />
+      <NavigationDrawerItem href="/reciters" title={t('reciters')} icon={<IconRadio />} />
       <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
       <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
