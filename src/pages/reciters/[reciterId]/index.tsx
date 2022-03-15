@@ -17,7 +17,7 @@ import ChaptersList from 'src/components/Reciter/ChaptersList';
 import ReciterInfo from 'src/components/Reciter/ReciterInfo';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
-import { getLanguageAlternates } from 'src/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getReciterNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
@@ -38,8 +38,8 @@ const filterChapters = (chapters, searchQuery: string) => {
 
 type ReciterPageProps = { selectedReciter: Reciter };
 const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
-  const allChapterData = getAllChaptersData();
   const { t, lang } = useTranslation();
+  const allChapterData = getAllChaptersData(lang);
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -50,10 +50,11 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
       Object.entries(allChapterData).map(([chapterId, chapter]) => {
         return {
           id: chapterId.toString(),
+          localizedId: toLocalizedNumber(Number(chapterId), lang),
           ...chapter,
         };
       }),
-    [allChapterData],
+    [allChapterData, lang],
   );
 
   const filteredChapters = useMemo(

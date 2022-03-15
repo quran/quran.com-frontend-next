@@ -3,5 +3,6 @@
     "quran-reciters": "Quran Reciters",
     "read": "Read",
     "search-chapter": "Search Chapter",
-    "reciter-desc": "Listen to and download beautiful Holy Quran recitation by {{reciterName}}."
+    "reciter-desc": "Listen to and download beautiful Holy Quran recitation by {{reciterName}}.",
+    "reciters-desc": "Listen to and download beautiful Holy Quran recitations by various reciters."
 }

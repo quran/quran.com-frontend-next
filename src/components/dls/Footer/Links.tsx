@@ -18,6 +18,7 @@ const Links = () => {
       links: [
         { text: t('home'), url: '/' },
         { text: t('quran-radio'), url: '/radio' },
+        { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
         { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
