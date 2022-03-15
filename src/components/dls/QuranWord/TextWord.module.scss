@@ -1,5 +1,4 @@
 .word {
-  unicode-bidi: bidi-override;
   line-height: var(--line-height);
 }
 
@@ -13,4 +12,5 @@
 
 .IndoPak {
   font-family: IndoPak !important; // important is needed to over-ride the language specific font-family
+  line-height: calc(var(--line-height) * 1.1);
 }

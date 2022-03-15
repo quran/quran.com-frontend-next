@@ -97,7 +97,14 @@ const QuranWord = ({
   } else if (font === QuranFont.Tajweed) {
     wordText = <TajweedWord path={word.text} alt={word.textUthmani} />;
   } else if (word.charTypeName !== CharType.Pause) {
-    wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
+    wordText = (
+      <TextWord
+        font={font}
+        text={word.text}
+        charType={word.charTypeName}
+        cssClass={word.cssClass}
+      />
+    );
   }
   /*
     Only show the tooltip when the following conditions are met:
