@@ -110,6 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       makeVerseKey(Number(chapterIdOrSlug), Number(verseId)),
       quranFont,
       mushafLines,
+      locale,
     );
 
     if (!chapterData) return notFoundResponse;

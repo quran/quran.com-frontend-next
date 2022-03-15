@@ -294,9 +294,11 @@ export const getTafsirContent = (
   verseKey: string,
   quranFont: QuranFont,
   mushafLines: MushafLines,
+  locale: string,
 ): Promise<TafsirContentResponse> => {
   return fetcher(
     makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
+      locale,
       words: true,
       ...getDefaultWordFields(quranFont),
       ...getMushafId(quranFont, mushafLines),

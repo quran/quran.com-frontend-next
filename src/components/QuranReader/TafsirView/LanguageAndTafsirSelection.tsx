@@ -62,7 +62,7 @@ const LanguageAndTafsirSelection = ({
                 [styles.tafsirItemSelected]: selected,
               })}
             >
-              {tafsir.name}
+              {tafsir.translatedName.name}
             </Button>
           );
         })}
