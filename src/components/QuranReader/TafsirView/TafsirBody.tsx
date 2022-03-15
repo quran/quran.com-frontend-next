@@ -282,6 +282,7 @@ const TafsirBody = ({
         <DataFetcher
           loading={TafsirSkeleton}
           queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
+            locale: lang,
             words: true,
             ...getDefaultWordFields(quranReaderStyles.quranFont),
             ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),

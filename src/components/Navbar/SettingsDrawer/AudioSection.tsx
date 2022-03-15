@@ -94,7 +94,11 @@ const AudioSection = () => {
         <Section.Row>
           <SelectionCard
             label={t('settings.selected-reciter')}
-            value={selectedReciter.name}
+            value={
+              selectedReciter.translatedName
+                ? selectedReciter.translatedName.name
+                : selectedReciter.name
+            }
             onClick={onSelectionCardClicked}
           />
         </Section.Row>

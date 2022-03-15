@@ -83,8 +83,9 @@ export const makeLanguagesUrl = (language: string): string =>
 export const makeAvailableRecitersUrl = (locale: string, fields?: string[]): string =>
   makeUrl('/audio/reciters', { locale, fields });
 
-export const makeReciterUrl = (reciterId: string): string =>
+export const makeReciterUrl = (reciterId: string, locale: string): string =>
   makeUrl(`/audio/reciters/${reciterId}`, {
+    locale,
     fields: ['profile_picture', 'cover_image', 'bio'],
   });
 

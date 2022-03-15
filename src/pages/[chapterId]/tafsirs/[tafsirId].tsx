@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
@@ -89,6 +90,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       verseKey,
       quranFont,
       mushafLines,
+      locale,
     );
     return {
       props: {
