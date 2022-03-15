@@ -25,9 +25,24 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-semibold);
 }
+
 .date {
   font-size: var(--font-size-small);
   opacity: var(--opacity-75);
+}
+
+.separator {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+}
+
+.referredVerses {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .container {
@@ -52,4 +67,12 @@
   display: inline-flex;
   margin-inline-start: var(--spacing-xxsmall);
   color: var(--color-success-medium);
+}
+
+.verseAndTranslationContainer {
+  margin-block-end: var(--spacing-mega);
+  padding: var(--spacing-medium);
+  background: var(--color-success-faded);
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--color-success-faint);
 }

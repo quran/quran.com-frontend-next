@@ -153,6 +153,7 @@ const ReflectionBody = ({
               isAuthorVerified={reflection?.author?.verified}
               reflectionText={reflection?.body}
               avatarUrl={reflection?.author?.profileImg}
+              referredVerseKeys={getVerseKeysFromReflection(reflection)}
             />
           ))}
           <div className={styles.readMoreButtonContainer}>
@@ -207,3 +208,13 @@ const ReflectionBody = ({
 };
 
 export default ReflectionBody;
+
+const getVerseKeysFromReflection = (reflection: any) => {
+  return reflection.filters.map((filter) => {
+    const chapter = filter.surahNumber;
+    const { from, to } = filter;
+    let verseKey = `${chapter}:${from}`;
+    if (to !== from) verseKey += `-${to}`;
+    return verseKey;
+  });
+};

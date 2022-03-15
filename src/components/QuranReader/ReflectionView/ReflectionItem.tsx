@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 
@@ -10,10 +11,12 @@ import styles from './ReflectionItem.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { getQuranReflectPostUrl } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
+import { getChapterNumberFromKey } from 'src/utils/verse';
 
 type ReflectionItemProps = {
   id: number;
@@ -22,6 +25,7 @@ type ReflectionItemProps = {
   date: string;
   reflectionText: string;
   isAuthorVerified: boolean;
+  referredVerseKeys?: string[];
 };
 
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
@@ -33,11 +37,18 @@ const ReflectionItem = ({
   avatarUrl,
   reflectionText,
   isAuthorVerified,
+  referredVerseKeys,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation('common');
   const formattedDate = formatDateRelatively(new Date(date), lang);
   const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
+  const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
+
+  const onReferredVersesHeaderClicked = () => {
+    setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -52,7 +63,23 @@ const ReflectionItem = ({
                 </span>
               )}
             </div>
-            <div className={styles.date}>{formattedDate}</div>
+            <div>
+              <span className={styles.date}>{formattedDate}</span>
+              {referredVerseKeys && (
+                <>
+                  <span className={styles.separator}> · </span>
+                  <span
+                    tabIndex={0}
+                    role="button"
+                    onKeyPress={onReferredVersesHeaderClicked}
+                    onClick={onReferredVersesHeaderClicked}
+                    className={styles.referredVerses}
+                  >
+                    referring verses {referredVerseKeys.join(',')}
+                  </span>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div>
@@ -79,6 +106,16 @@ const ReflectionItem = ({
         </div>
       </div>
       <div>
+        {shouldShowReferredVerses &&
+          referredVerseKeys &&
+          referredVerseKeys.map((verseKey) => (
+            <div className={styles.verseAndTranslationContainer} key={verseKey}>
+              {referredVerseKeys.length > 1 && (
+                <span>Surah {getChapterNumberFromKey(verseKey)}</span>
+              )}
+              <VerseAndTranslation verseKey={verseKey} />
+            </div>
+          ))}
         <span className={styles.body}>
           {isExpanded ? reflectionText : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
         </span>

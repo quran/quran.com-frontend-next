@@ -47,6 +47,19 @@ export const getVerseNumberFromKey = (verseKey: string): number =>
   Number(verseKey.split(COLON_SPLITTER)[1]);
 
 /**
+ * If the verse is a range of verses, for example 1:3-5
+ * we'll return {from: 3, to: 5}
+ *
+ * @param {string} verseKey
+ * @returns {from: Number, to: Number}
+ */
+export const getVerseNumberRangeFromKey = (verseKey: string): { from: number; to: number } => {
+  const verseNumber = verseKey.split(COLON_SPLITTER)[1]; // for example (3-5)
+  const [from, to] = verseNumber.split('-'); // for example [3, 5]
+  return { from: Number(from), to: to ? Number(to) : Number(from) };
+};
+
+/**
  * Get the chapter and verse number of a verse from its key.
  *
  * @param {string} verseKey
