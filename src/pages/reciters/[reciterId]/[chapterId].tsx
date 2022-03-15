@@ -17,7 +17,7 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
-import { getChapterAudioData, getReciterData } from 'src/api';
+import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
@@ -29,6 +29,7 @@ import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import { getCurrentPath } from 'src/utils/url';
+import { isValidChapterId } from 'src/utils/validator';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
@@ -156,7 +157,17 @@ export default RecitationPage;
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const reciterId = params.reciterId as string;
-    const chapterId = params.chapterId as string;
+    let chapterId = params.chapterId as string;
+    const isValidId = isValidChapterId(chapterId);
+    // if it's not a valid number or a number that exceed 114 or below 1
+    if (!isValidId) {
+      const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
+      // if it's not a valid number nor a valid slug
+      if (!sluggedChapterId) {
+        return { notFound: true };
+      }
+      chapterId = sluggedChapterId;
+    }
 
     const reciterData = await getReciterData(reciterId, locale);
     const chapterData = await getChapterData(chapterId, locale);
