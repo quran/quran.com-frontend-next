@@ -18,11 +18,7 @@ import ReciterInfo from 'src/components/Reciter/ReciterInfo';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import {
-  getCanonicalUrl,
-  getReciterNavigationUrl,
-  getSurahInfoNavigationUrl,
-} from 'src/utils/navigation';
+import { getCanonicalUrl, getReciterNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
@@ -66,9 +62,7 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
     [searchQuery, allChaptersWithId],
   );
 
-  const navigationUrl = getSurahInfoNavigationUrl(
-    getReciterNavigationUrl(selectedReciter.id.toString()),
-  );
+  const navigationUrl = getReciterNavigationUrl(selectedReciter.id.toString());
 
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
@@ -76,7 +70,9 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
         title={selectedReciter?.name}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={selectedReciter?.bio}
+        description={t('reciter:reciter-desc', {
+          reciterName: selectedReciter?.name,
+        })}
       />
 
       <div className={pageStyle.reciterInfoContainer}>
