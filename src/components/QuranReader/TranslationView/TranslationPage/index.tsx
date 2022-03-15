@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -50,9 +50,11 @@ const TranslationPage: React.FC<Props> = ({
   const { lang, t } = useTranslation('common');
   const router = useRouter();
   const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
-  const translationParams = (router.query.translations as string)
-    ?.split(',')
-    ?.map((translation) => Number(translation));
+  const translationParams = useMemo(
+    () =>
+      (router.query.translations as string)?.split(',')?.map((translation) => Number(translation)),
+    [router.query.translations],
+  );
 
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
