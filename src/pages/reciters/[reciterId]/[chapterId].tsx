@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -101,7 +102,11 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
         </div>
         <div className={styles.actionsContainer}>
           {isCurrentlyPlayingThisChapter ? (
-            <Button onClick={() => triggerPauseAudio()} prefix={<PauseIcon />}>
+            <Button
+              onClick={() => triggerPauseAudio()}
+              prefix={<PauseIcon />}
+              className={styles.playButton}
+            >
               {t('common:audio.player.pause-audio')}
             </Button>
           ) : (

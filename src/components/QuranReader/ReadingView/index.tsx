@@ -190,12 +190,18 @@ const ReadingView = ({
             totalCount={pagesCount}
             itemContent={itemContentRenderer}
             components={{
-              Footer: () => (
-                <EndOfScrollingControls
-                  quranReaderDataType={quranReaderDataType}
-                  lastVerse={verses[verses.length - 1]}
-                />
-              ),
+              Footer: () => {
+                const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
+                const lastVerse = pageVerses?.[pageVerses.length - 1];
+                if (lastVerse)
+                  return (
+                    <EndOfScrollingControls
+                      quranReaderDataType={quranReaderDataType}
+                      lastVerse={lastVerse}
+                    />
+                  );
+                return null;
+              },
             }}
           />
         )}
