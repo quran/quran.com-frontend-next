@@ -21,6 +21,7 @@ import styles from './ChapterList.module.scss';
 import { getChapterAudioData } from 'src/api';
 import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { getRecitationNavigationUrl } from 'src/utils/navigation';
 import { getWindowOrigin } from 'src/utils/url';
 import Chapter from 'types/Chapter';
@@ -34,7 +35,7 @@ type ChaptersListProps = {
 const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) => {
   const toast = useToast();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const isAudioPlaying = useSelector(selectIsPlaying);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
 
@@ -109,7 +110,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
               </div>
               <div>
                 <div className={styles.chapterName}>
-                  {chapter.id}. {chapter.transliteratedName}
+                  {toLocalizedNumber(chapter.id as number, lang)}. {chapter.transliteratedName}
                 </div>
                 <span className={styles.chapterIconContainer}>
                   <ChapterIconContainer chapterId={chapter.id.toString()} hasSurahPrefix={false} />

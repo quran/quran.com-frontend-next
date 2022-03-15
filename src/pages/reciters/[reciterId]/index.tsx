@@ -42,8 +42,8 @@ const filterChapters = (chapters, searchQuery: string) => {
 
 type ReciterPageProps = { selectedReciter: Reciter };
 const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
-  const allChapterData = getAllChaptersData();
   const { t, lang } = useTranslation();
+  const allChapterData = getAllChaptersData(lang);
 
   const [searchQuery, setSearchQuery] = useState('');
 
