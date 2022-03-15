@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import TafsirIcon from '../../../../public/icons/book-open.svg';
@@ -10,7 +11,7 @@ import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentMo
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
-import { getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
+import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
 
 const TafsirBody = dynamic(() => import('./TafsirBody'), { ssr: false });
 const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
@@ -33,8 +34,9 @@ const TafsirVerseAction = ({
   onActionTriggered,
 }: TafsirVerseActionProps) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
+  const router = useRouter();
 
   const contentModalRef = useRef<ContentModalHandles>();
 
@@ -45,6 +47,7 @@ const TafsirVerseAction = ({
       logEvent('reading_view_tafsir_modal_close');
     }
     setIsContentModalOpen(false);
+    fakeNavigate(router.asPath, router.locale);
     if (onActionTriggered) {
       setTimeout(() => {
         // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
@@ -62,6 +65,10 @@ const TafsirVerseAction = ({
             `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,
           );
           setIsContentModalOpen(true);
+          fakeNavigate(
+            getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0]),
+            lang,
+          );
         }}
       >
         {t('quran-reader:tafsirs')}
@@ -78,7 +85,6 @@ const TafsirVerseAction = ({
           return (
             <ContentModal
               innerRef={contentModalRef}
-              url={getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0])}
               isOpen={isContentModalOpen}
               hasCloseButton
               onClose={onModalClose}
