@@ -37,7 +37,7 @@ type ShareRecitationPageProps = {
   selectedChapter: Chapter;
 };
 const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const router = useRouter();
@@ -57,7 +57,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
 
   const onCopyLinkClicked = () => {
     logButtonClick('share-recitation-copy-link');
-    const path = getCurrentPath(lang);
+    const path = getCurrentPath();
     if (origin) {
       clipboardCopy(path).then(() => {
         toast(t('common:shared'), { status: ToastStatus.Success });

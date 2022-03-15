@@ -1,7 +1,10 @@
 const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
 
-export const getCurrentPath = (locale: string) => {
+export const getCurrentPath = (locale?: string) => {
   if (typeof window !== 'undefined') {
+    if (!locale) {
+      return window.location.href;
+    }
     return `${window.location.href}${getLocalePostfix(locale)}`;
   }
   return '';
