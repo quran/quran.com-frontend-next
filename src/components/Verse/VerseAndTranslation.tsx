@@ -12,8 +12,10 @@ import styles from './VerseAndTranslation.module.scss';
 import { fetcher } from 'src/api';
 // import useQcfFont from 'src/hooks/useQcfFont';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
+import { areArraysEqual } from 'src/utils/array';
 import {
   getChapterNumberFromKey,
   getVerseNumberRangeFromKey,
@@ -30,6 +32,7 @@ const VerseAndTranslation: React.FC<Props> = ({ verseKey }) => {
   const { from, to } = getVerseNumberRangeFromKey(verseKey);
 
   const { lang } = useTranslation();
+  const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { quranFont, mushafLines, translationFontScale } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
@@ -38,6 +41,8 @@ const VerseAndTranslation: React.FC<Props> = ({ verseKey }) => {
   const defaultMushafId = getMushafId(quranFont, mushafLines).mushaf;
   const apiParams = {
     ...getDefaultWordFields(quranFont),
+    translationFields: 'resource_name,language_id',
+    translations: translations.join(','),
     mushaf: defaultMushafId,
     from: `${chapter}:${from}`,
     to: `${chapter}:${to}`,
@@ -61,17 +66,21 @@ const VerseAndTranslation: React.FC<Props> = ({ verseKey }) => {
   return (
     <div className={styles.container}>
       {data?.verses.map((verse) => (
-        <div key={verse.verseKey}>
-          <div className={styles.verseContainer}>
+        <div key={verse.verseKey} className={styles.verseContainer}>
+          <div className={styles.arabicVerseContainer}>
             <PlainVerseText words={getVerseWords(verse)} />
           </div>
-          <div className={styles.translationContainer}>
-            <TranslationText
-              languageId={verse.translations?.[0].languageId}
-              resourceName={verse.translations?.[0].resourceName}
-              translationFontScale={translationFontScale}
-              text={verse.translations?.[0].text}
-            />
+          <div className={styles.translationsListContainer}>
+            {verse.translations?.map((translation) => (
+              <div key={translation.id} className={styles.translationContainer}>
+                <TranslationText
+                  languageId={translation.languageId}
+                  resourceName={translation.resourceName}
+                  translationFontScale={translationFontScale}
+                  text={translation.text}
+                />
+              </div>
+            ))}
           </div>
         </div>
       ))}

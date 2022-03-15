@@ -46,7 +46,7 @@
 }
 
 .container {
-  margin-block-end: calc(2 * var(--spacing-large));
+  margin-block-end: calc(2.5 * var(--spacing-large));
 }
 
 .body {
@@ -70,6 +70,7 @@
 }
 
 .verseAndTranslationContainer {
+  margin-block-start: var(--spacing-mega);
   margin-block-end: var(--spacing-mega);
   padding: var(--spacing-medium);
   background: var(--color-success-faded);
