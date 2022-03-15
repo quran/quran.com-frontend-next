@@ -125,6 +125,24 @@ const config = {
               },
             ],
           },
+          {
+            source: '/.well-known/apple-app-site-association',
+            headers: [
+              {
+                key: 'Content-Type',
+                value: 'application/json',
+              },
+            ],
+          },
+          {
+            source: '/.well-known/asset-links.json',
+            headers: [
+              {
+                key: 'Content-Type',
+                value: 'application/json',
+              },
+            ],
+          },
         ];
   },
   async redirects() {

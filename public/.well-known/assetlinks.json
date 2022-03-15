@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.mmmoussa.iqra",
+    "sha256_cert_fingerprints":
+    ["EF:BC:B8:01:20:66:0D:07:B8:F1:23:76:8F:E0:58:84:64:90:23:BD:0A:B4:38:54:56:33:B3:3B:83:DE:76:DC"]
+  }
+}]
