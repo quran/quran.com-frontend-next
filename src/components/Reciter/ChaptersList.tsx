@@ -34,7 +34,7 @@ type ChaptersListProps = {
 const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) => {
   const toast = useToast();
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const isAudioPlaying = useSelector(selectIsPlaying);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
 
@@ -58,7 +58,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
 
   const onCopyUrlClicked = (chapterId) => {
     logButtonClick('reciter_page_chapter_url_copy');
-    const origin = getWindowOrigin();
+    const origin = getWindowOrigin(lang);
     const path = getRecitationNavigationUrl(selectedReciter.id.toString(), chapterId);
     clipboardCopy(origin + path).then(() => {
       toast(t('common:shared'), { status: ToastStatus.Success });
