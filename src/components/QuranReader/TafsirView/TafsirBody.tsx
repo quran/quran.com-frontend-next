@@ -11,6 +11,7 @@ import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
 import SurahAndAyahSelection from './SurahAndAyahSelection';
 import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
 import TafsirGroupMessage from './TafsirGroupMessage';
+import TafsirMessage from './TafsirMessage';
 import TafsirSkeleton from './TafsirSkeleton';
 import TafsirText from './TafsirText';
 import TafsirVerseText from './TafsirVerseText';
@@ -70,7 +71,7 @@ const TafsirBody = ({
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('common');
   const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
 
@@ -143,8 +144,6 @@ const TafsirBody = ({
       const { verses, text, languageId } = data.tafsir;
       const langData = getLanguageDataById(languageId);
 
-      if (!text) return <TafsirSkeleton />;
-
       const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
       const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastVerseKey);
       const hasNextVerseGroup = !isLastVerseOfSurah(chapterNumber, Number(verseNumber));
@@ -182,7 +181,14 @@ const TafsirBody = ({
 
       return (
         <div>
-          {Object.values(verses).length > 1 && (
+          {!text && (
+            <TafsirMessage>
+              {t('tafsir.no-text', {
+                tafsirName: data.tafsir.translatedName.name,
+              })}
+            </TafsirMessage>
+          )}
+          {Object.values(verses).length > 1 && !!text && (
             <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
           )}
           <div className={styles.verseTextContainer}>
@@ -191,7 +197,9 @@ const TafsirBody = ({
           <div className={styles.separatorContainer}>
             <Separator />
           </div>
-          <TafsirText direction={langData.direction} languageCode={langData.code} text={text} />
+          {!!text && (
+            <TafsirText direction={langData.direction} languageCode={langData.code} text={text} />
+          )}
           <TafsirEndOfScrollingActions
             hasNextVerseGroup={hasNextVerseGroup}
             hasPrevVerseGroup={hasPrevVerseGroup}
@@ -201,7 +209,7 @@ const TafsirBody = ({
         </div>
       );
     },
-    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug],
+    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
   );
 
   // Whether we should use the initial tafsir data or fetch the data on the client side
