@@ -2,7 +2,7 @@
     "copy-link": "Copy Link",
     "quran-reciters": "Quran Reciters",
     "read": "Read",
-    "search-chapter": "Search Chapter",
     "reciter-desc": "Listen to and download beautiful Holy Quran recitation by {{reciterName}}.",
-    "reciters-desc": "Listen to and download beautiful Holy Quran recitations by various reciters."
+    "reciters-desc": "Listen to and download beautiful Holy Quran recitations by various reciters.",
+    "search-chapter": "Search Chapter"
 }
