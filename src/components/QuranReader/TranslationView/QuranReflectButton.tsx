@@ -12,11 +12,7 @@ import styles from './TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import { logButtonClick } from 'src/utils/eventLogger';
-import {
-  fakeNavigate,
-  getQuranReflectVerseUrl,
-  // getVerseSelectedReflectionNavigationUrl,
-} from 'src/utils/navigation';
+import { fakeNavigate, getQuranReflectVerseUrl } from 'src/utils/navigation';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
