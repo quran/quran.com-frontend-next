@@ -177,7 +177,7 @@ export const getReciterNavigationUrl = (reciterId: string): string => `/reciters
  * @param {string} chapterId
  * @returns {string} recitationPageUrl
  */
-export const getRecitationNavigationUrl = (reciterId: string, chapterId: string) =>
+export const getReciterChapterNavigationUrl = (reciterId: string, chapterId: string) =>
   `/reciters/${reciterId}/${chapterId}`;
 
 /**
