@@ -29,6 +29,7 @@ import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
 import { getCurrentPath } from 'src/utils/url';
+import { isValidChapterId } from 'src/utils/validator';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
@@ -153,11 +154,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const reciterId = params.reciterId as string;
     let chapterId = params.chapterId as string;
-    const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
-    if (!sluggedChapterId) {
-      return { notFound: true };
+    const isValidId = isValidChapterId(chapterId);
+    // if it's not a valid number or a number that exceed 114 or below 1
+    if (!isValidId) {
+      const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
+      // if it's not a valid number nor a valid slug
+      if (!sluggedChapterId) {
+        return { notFound: true };
+      }
+      chapterId = sluggedChapterId;
     }
-    chapterId = sluggedChapterId;
 
     const reciterData = await getReciterData(reciterId);
     const chapterData = await getChapterData(chapterId, locale);
