@@ -25,6 +25,7 @@ const QuranReciterListHero = ({ onSearchQueryChange, searchQuery }: QuranReciter
           onChange={onSearchQueryChange}
           placeholder={t('common:settings.search-reciter')}
           fixedWidth={false}
+          shouldFlipOnRTL
         />
       </div>
     </div>
