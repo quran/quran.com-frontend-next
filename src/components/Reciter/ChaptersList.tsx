@@ -109,7 +109,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
               </div>
               <div>
                 <div className={styles.chapterName}>
-                  {chapter.id}. {chapter.transliteratedName}
+                  {chapter.localizedId}. {chapter.transliteratedName}
                 </div>
                 <span className={styles.chapterIconContainer}>
                   <ChapterIconContainer chapterId={chapter.id.toString()} hasSurahPrefix={false} />
