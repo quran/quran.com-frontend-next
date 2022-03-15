@@ -59,7 +59,9 @@ const ShareVerseButton = ({
       tooltip={t('share')}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction)}
+      className={classNames(styles.iconContainer, styles.verseAction, {
+        [styles.fadedVerseAction]: isTranslationView,
+      })}
     >
       <span className={styles.icon}>
         <CopyLinkIcon />

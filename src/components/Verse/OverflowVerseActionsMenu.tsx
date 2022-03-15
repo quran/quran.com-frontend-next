@@ -46,7 +46,9 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             tooltip={t('more')}
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
-            className={classNames(cellStyles.iconContainer, cellStyles.verseAction)}
+            className={classNames(cellStyles.iconContainer, cellStyles.verseAction, {
+              [cellStyles.fadedVerseAction]: isTranslationView,
+            })}
           >
             <span className={cellStyles.icon}>
               <OverflowMenuIcon />

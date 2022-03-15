@@ -72,7 +72,6 @@ const ContentModal = ({
             onPointerDownOutside={onClose}
           >
             <div className={styles.header}>
-              {header}
               {hasCloseButton && (
                 <Dialog.Close className={styles.closeIcon}>
                   <Button
@@ -84,6 +83,7 @@ const ContentModal = ({
                   </Button>
                 </Dialog.Close>
               )}
+              {header}
             </div>
             <div className={styles.content}>{children}</div>
           </Dialog.Content>

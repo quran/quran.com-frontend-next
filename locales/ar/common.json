@@ -122,7 +122,7 @@
     "on": "تشغيل",
     "page": "صفحة",
     "pages": "الصفحات",
-    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتائج البحث",
+    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتيجة للبحث",
     "popular-links": "روابط شائعة",
     "powered-by": "مشغل بواسطة",
     "prev": "السابق",
@@ -137,6 +137,7 @@
         "translation": "الترجمة"
     },
     "reciter": "القارئ",
+    "reciters": "القراء",
     "reflect": "تدبر",
     "remove": "إزالة",
     "retry": "أعد المحاولة",
