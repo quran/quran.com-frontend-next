@@ -16,6 +16,7 @@ type MediaSessionApiListenersProps = {
   seek: (duration: number) => void;
   playPreviousTrack: () => void;
   playNextTrack: () => void;
+  locale: string;
 };
 
 const QURAN_COM_ARTWORK = [
@@ -33,6 +34,7 @@ const MediaSessionApiListeners = ({
   seek,
   playPreviousTrack,
   playNextTrack,
+  locale,
 }: MediaSessionApiListenersProps) => {
   const audioPlayerState = useSelector(selectAudioPlayerState, shallowEqual);
   const stationInfo = useCurrentStationInfo();
@@ -53,16 +55,16 @@ const MediaSessionApiListeners = ({
     if (!audioPlayerState.audioData?.chapterId) return null;
 
     const chapterData = getChapterData(audioPlayerState.audioData.chapterId.toString());
-    const reciterData = await getReciterData(audioPlayerState.reciter.id.toString());
+    const reciterData = await getReciterData(audioPlayerState.reciter.id.toString(), locale);
 
     return new MediaMetadata({
       title: chapterData.transliteratedName,
-      artist: reciterData?.reciter?.name,
+      artist: reciterData?.reciter?.translatedName?.name,
       album: 'Quran.com',
       // TODO: replace with reciter image
       artwork: QURAN_COM_ARTWORK,
     });
-  }, [audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id]);
+  }, [audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id, locale]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
