@@ -71,7 +71,7 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('reciter:reciter-desc', {
-          reciterName: selectedReciter?.name,
+          reciterName: selectedReciter?.translatedName?.name,
         })}
       />
 
