@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
 
@@ -11,7 +12,7 @@ import styles from './TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
+import { fakeNavigate } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 const ReflectionBody = dynamic(() => import('../ReflectionView/ReflectionBody'), { ssr: false });
@@ -28,6 +29,7 @@ const QuranReflectButton = ({
   onActionTriggered,
 }: QuranReflectButtonProps) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
   const onButtonClicked = () => {
@@ -40,6 +42,7 @@ const QuranReflectButton = ({
 
   const onModalClose = () => {
     setIsContentModalOpen(false);
+    fakeNavigate(router.asPath, router.locale);
     if (onActionTriggered) {
       onActionTriggered();
     }
@@ -73,7 +76,6 @@ const QuranReflectButton = ({
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
             innerRef={contentModalRef}
-            url={getVerseSelectedReflectionNavigationUrl(verseKey)}
             isOpen={isContentModalOpen}
             hasCloseButton
             onClose={onModalClose}

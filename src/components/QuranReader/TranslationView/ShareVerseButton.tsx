@@ -22,12 +22,13 @@ export const onShareClicked = (
   verseKey: string,
   isTranslationView: boolean,
   callback: () => void,
+  locale: string,
 ) => {
   logButtonClick(
     // eslint-disable-next-line i18next/no-literal-string
     `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
   );
-  const origin = getWindowOrigin();
+  const origin = getWindowOrigin(locale);
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   if (origin) {
     clipboardCopy(`${origin}/${chapter}/${verse}`).then(callback);
@@ -39,12 +40,15 @@ const ShareVerseButton = ({
   isTranslationView = true,
   onActionTriggered,
 }: ShareVerseButtonProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const toast = useToast();
 
   const onButtonClicked = () => {
-    onShareClicked(verseKey, isTranslationView, () =>
-      toast(t('shared'), { status: ToastStatus.Success }),
+    onShareClicked(
+      verseKey,
+      isTranslationView,
+      () => toast(t('shared'), { status: ToastStatus.Success }),
+      lang,
     );
     if (onActionTriggered) {
       onActionTriggered();

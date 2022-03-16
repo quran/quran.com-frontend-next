@@ -1,5 +1,6 @@
 import React, { MutableRefObject } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import AudioKeyBoardListeners from '../AudioKeyboardListeners';
@@ -29,6 +30,7 @@ const AudioPlayerBody: React.FC<Props> = ({
   isMobileMinimizedForScrolling,
   audioData,
 }) => {
+  const { lang } = useTranslation();
   const isRadioMode = useSelector(selectIsRadioMode);
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
@@ -66,6 +68,7 @@ const AudioPlayerBody: React.FC<Props> = ({
           }}
           playNextTrack={null}
           playPreviousTrack={null}
+          locale={lang}
         />
         {!isRadioMode && (
           <div className={styles.sliderContainer}>
