@@ -24,6 +24,12 @@ const getAvailableTafsirs = async () => {
   return data;
 };
 
+const getAvailableReciters = async () => {
+  const res = await fetch(`https://api.qurancdn.com/api/qdc/audio/reciters`);
+  const data = await res.json();
+  return data;
+};
+
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
  * next-sitemap library appends the alternate ref to the beginning
@@ -80,8 +86,12 @@ module.exports = {
   additionalPaths: async (config) => {
     const result = [];
     let tafsirSlugs = [];
+    let reciterIds = [];
     await getAvailableTafsirs().then((response) => {
       tafsirSlugs = response.tafsirs.map((tafsir) => tafsir.slug);
+    });
+    await getAvailableReciters().then((response) => {
+      reciterIds = response.reciters.map((reciter) => reciter.id);
     });
     chapters.forEach((chapterId) => {
       // 1. add the chapter slugs in English along with the localized slugs in every locale
@@ -135,6 +145,14 @@ module.exports = {
     // 7. /page/[pageId]
     range(1, 605).forEach(async (pageId) => {
       result.push(await config.transform(config, `/page/${pageId}`));
+    });
+    // 8. /reciters/[reciterId]
+    reciterIds.forEach((reciterId) => {
+      const location = `/reciters/${reciterId}`;
+      result.push({
+        loc: location,
+        alternateRefs: getAlternateRefs('', false, '', location),
+      });
     });
 
     return result;
