@@ -4,6 +4,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 const range = require('lodash/range');
+const fetch = require('node-fetch');
 
 const englishChaptersData = require('./data/chapters/en.json');
 const { locales } = require('./i18n.json');
@@ -16,6 +17,12 @@ const BASE_PATH =
   'https://quran.com';
 
 const chapters = range(1, 115);
+
+const getAvailableTafsirs = async () => {
+  const res = await fetch(`https://api.qurancdn.com/api/qdc/resources/tafsirs`);
+  const data = await res.json();
+  return data;
+};
 
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
@@ -72,6 +79,10 @@ module.exports = {
   },
   additionalPaths: async (config) => {
     const result = [];
+    let tafsirSlugs = [];
+    await getAvailableTafsirs().then((response) => {
+      tafsirSlugs = response.tafsirs.map((tafsir) => tafsir.slug);
+    });
     chapters.forEach((chapterId) => {
       // 1. add the chapter slugs in English along with the localized slugs in every locale
       const englishChapterSlug = englishChaptersData[chapterId].slug;
@@ -107,13 +118,21 @@ module.exports = {
           loc: `/${englishChapterSlug}/${verseIdValue}/tafsirs`,
           alternateRefs: getAlternateRefs(chapterId, true, '', `${verseIdValue}/tafsirs`),
         });
+        // 5. /[verseKey]/tafsirs/[tafsirSlug]
+        tafsirSlugs.forEach((tafsirSlug) => {
+          const location = `${`${chapterId}:${verseIdValue}`}/tafsirs/${tafsirSlug}`;
+          result.push({
+            loc: location,
+            alternateRefs: getAlternateRefs(chapterId, false, '', location),
+          });
+        });
       });
     });
-    // 5. /juz/[juzId]
+    // 6. /juz/[juzId]
     range(1, 31).forEach(async (juzId) => {
       result.push(await config.transform(config, `/juz/${juzId}`));
     });
-    // 6. /page/[pageId]
+    // 7. /page/[pageId]
     range(1, 605).forEach(async (pageId) => {
       result.push(await config.transform(config, `/page/${pageId}`));
     });
