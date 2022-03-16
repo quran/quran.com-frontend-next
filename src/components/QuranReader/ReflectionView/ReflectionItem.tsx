@@ -58,7 +58,7 @@ const ReflectionItem = ({
   );
 
   const referredVerseText = useMemo(() => {
-    let text = 'referring ';
+    let text = `${t('quran-reader:referring')} `;
     const chapters = referredVerseKeys
       .filter((key) => !getVerseNumberFromKey(key))
       .map(getChapterNumberFromKey);
