@@ -4,7 +4,7 @@
         "details": [
             {
                 "appID": "GLXDQKH95X.com.iqraapp.Iqra",
-                "paths": ["/*"]
+                "paths": ["*"]
             }
         ]
     }
