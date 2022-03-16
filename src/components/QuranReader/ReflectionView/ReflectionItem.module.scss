@@ -37,8 +37,12 @@
 }
 
 .referredVerses {
+  text-transform: capitalize;
   font-size: var(--font-size-small);
   opacity: var(--opacity-75);
+}
+
+.clickable {
   cursor: pointer;
   &:hover {
     text-decoration: underline;

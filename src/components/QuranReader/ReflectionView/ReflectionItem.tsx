@@ -1,6 +1,8 @@
+/* eslint-disable max-lines */
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
@@ -50,10 +52,38 @@ const ReflectionItem = ({
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
   };
 
-  // temporary solution to hide verse that's referring the entire chapter
-  // TODO: filter this the API level
-  if (referredVerseKeys && referredVerseKeys.find((verseKey) => !getVerseNumberFromKey(verseKey)))
-    return null;
+  const validReferredVerseKeys = useMemo(
+    () => referredVerseKeys?.filter((key) => key !== '' && !!getVerseNumberFromKey(key)),
+    [referredVerseKeys],
+  );
+
+  const referredVerseText = useMemo(() => {
+    let text = 'referring ';
+    const chapters = referredVerseKeys
+      .filter((key) => !getVerseNumberFromKey(key))
+      .map(getChapterNumberFromKey);
+
+    if (chapters.length > 0) {
+      text += `${t('common:surah')} ${chapters.join(',')}`;
+    }
+
+    if (validReferredVerseKeys.length > 0) {
+      if (chapters.length > 0) text += ` ${t('common:and')} `;
+      text += `${t('common:ayah')} ${validReferredVerseKeys.join(',')}`;
+    }
+
+    return text;
+  }, [referredVerseKeys, t, validReferredVerseKeys]);
+
+  const getSurahName = useCallback(
+    (verseKey) => {
+      const chapterNumber = getChapterNumberFromKey(verseKey);
+      const surahName = getChapterData(chapterNumber.toString())?.transliteratedName;
+      return `${t('common:surah')} ${surahName} (${chapterNumber})
+      `;
+    },
+    [t],
+  );
 
   return (
     <div className={styles.container}>
@@ -79,9 +109,11 @@ const ReflectionItem = ({
                     role="button"
                     onKeyPress={onReferredVersesHeaderClicked}
                     onClick={onReferredVersesHeaderClicked}
-                    className={styles.referredVerses}
+                    className={classNames(styles.referredVerses, {
+                      [styles.clickable]: validReferredVerseKeys.length > 0,
+                    })}
                   >
-                    {t('quran-reader:referring-verses')} {referredVerseKeys.join(',')}
+                    {referredVerseText}
                   </span>
                 </>
               )}
@@ -113,15 +145,10 @@ const ReflectionItem = ({
       </div>
       <div>
         {shouldShowReferredVerses &&
-          referredVerseKeys &&
-          referredVerseKeys.map((verseKey) => (
+          validReferredVerseKeys?.map((verseKey) => (
             <div className={styles.verseAndTranslationContainer} key={verseKey}>
-              {referredVerseKeys.length > 1 && (
-                <span className={styles.surahName}>
-                  {t('surah')}{' '}
-                  {getChapterData(getChapterNumberFromKey(verseKey).toString()).transliteratedName}{' '}
-                  ({getChapterNumberFromKey(verseKey)})
-                </span>
+              {validReferredVerseKeys.length > 1 && (
+                <span className={styles.surahName}>{getSurahName(verseKey)}</span>
               )}
               <VerseAndTranslation verseKey={verseKey} />
             </div>
