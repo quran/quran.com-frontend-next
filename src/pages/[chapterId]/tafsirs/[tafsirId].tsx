@@ -12,8 +12,12 @@ import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { scrollWindowToTop } from 'src/utils/navigation';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+import {
+  getCanonicalUrl,
+  getVerseSelectedTafsirNavigationUrl,
+  scrollWindowToTop,
+} from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -44,6 +48,11 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
     return <Error statusCode={500} />;
   }
 
+  const navigationUrl = getVerseSelectedTafsirNavigationUrl(
+    chapterId,
+    Number(verseNumber),
+    tafsirData.tafsir.slug,
+  );
   return (
     <>
       <NextSeoWrapper
@@ -51,6 +60,13 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           Number(verseNumber),
           lang,
         )}`}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        description={t('tafsir.tafsir-desc', {
+          verseNumber,
+          tafsirName: tafsirData.tafsir.translatedName.name,
+          surahName: chapter.chapter.transliteratedName,
+        })}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
