@@ -12,11 +12,12 @@ import styles from './ReflectionItem.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { getQuranReflectPostUrl } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
-import { getChapterNumberFromKey } from 'src/utils/verse';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
 
 type ReflectionItemProps = {
   id: number;
@@ -48,6 +49,11 @@ const ReflectionItem = ({
   const onReferredVersesHeaderClicked = () => {
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
   };
+
+  // temporary solution to hide verse that's referring the entire chapter
+  // TODO: filter this the API level
+  if (referredVerseKeys && referredVerseKeys.find((verseKey) => !getVerseNumberFromKey(verseKey)))
+    return null;
 
   return (
     <div className={styles.container}>
@@ -111,7 +117,11 @@ const ReflectionItem = ({
           referredVerseKeys.map((verseKey) => (
             <div className={styles.verseAndTranslationContainer} key={verseKey}>
               {referredVerseKeys.length > 1 && (
-                <span>Surah {getChapterNumberFromKey(verseKey)}</span>
+                <span className={styles.surahName}>
+                  {t('surah')}{' '}
+                  {getChapterData(getChapterNumberFromKey(verseKey).toString()).transliteratedName}{' '}
+                  ({getChapterNumberFromKey(verseKey)})
+                </span>
               )}
               <VerseAndTranslation verseKey={verseKey} />
             </div>

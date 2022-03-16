@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
+import Spinner from '../dls/Spinner/Spinner';
 import TranslationText from '../QuranReader/TranslationView/TranslationText';
 
 import PlainVerseText from './PlainVerseText';
@@ -61,8 +62,7 @@ const VerseAndTranslation: React.FC<Props> = ({ verseKey }) => {
 
   if (error) return <div>{JSON.stringify(error)}</div>;
 
-  if (!data) return null;
-
+  if (!data) return <Spinner />;
   return (
     <div className={styles.container}>
       {data?.verses.map((verse) => (
