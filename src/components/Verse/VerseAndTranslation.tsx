@@ -12,6 +12,7 @@ import styles from './VerseAndTranslation.module.scss';
 
 import { fetcher } from 'src/api';
 // import useQcfFont from 'src/hooks/useQcfFont';
+import useQcfFont from 'src/hooks/useQcfFont';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
@@ -58,7 +59,7 @@ const VerseAndTranslation: React.FC<Props> = ({ verseKey }) => {
     },
   );
 
-  // useQcfFont(quranFont, data?.verses ? data.verses : []);
+  useQcfFont(quranFont, data?.verses ? data.verses : []);
 
   if (error) return <div>{JSON.stringify(error)}</div>;
 
