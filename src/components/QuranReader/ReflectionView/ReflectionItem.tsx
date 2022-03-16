@@ -1,4 +1,3 @@
-/* eslint-disable i18next/no-literal-string */
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 
@@ -29,6 +28,7 @@ type ReflectionItemProps = {
   referredVerseKeys?: string[];
 };
 
+const SEPARATOR = ' · ';
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
 const MAX_REFLECTION_LENGTH = 220;
 const ReflectionItem = ({
@@ -41,7 +41,7 @@ const ReflectionItem = ({
   referredVerseKeys,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
   const formattedDate = formatDateRelatively(new Date(date), lang);
   const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
@@ -73,7 +73,7 @@ const ReflectionItem = ({
               <span className={styles.date}>{formattedDate}</span>
               {referredVerseKeys && (
                 <>
-                  <span className={styles.separator}> · </span>
+                  <span className={styles.separator}>{SEPARATOR}</span>
                   <span
                     tabIndex={0}
                     role="button"
@@ -81,7 +81,7 @@ const ReflectionItem = ({
                     onClick={onReferredVersesHeaderClicked}
                     className={styles.referredVerses}
                   >
-                    referring verses {referredVerseKeys.join(',')}
+                    {t('quran-reader:referring-verses')} {referredVerseKeys.join(',')}
                   </span>
                 </>
               )}
@@ -93,7 +93,7 @@ const ReflectionItem = ({
             trigger={
               <Button
                 size={ButtonSize.Small}
-                tooltip={t('more')}
+                tooltip={t('common:more')}
                 variant={ButtonVariant.Ghost}
                 shape={ButtonShape.Circle}
               >

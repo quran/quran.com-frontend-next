@@ -35,7 +35,7 @@ const QuranReflectButton = ({
   const onButtonClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
-    setIsContentModalOpen(true); // temporarily disable inline reflection feature
+    setIsContentModalOpen(true);
   };
 
   const contentModalRef = useRef(null);
