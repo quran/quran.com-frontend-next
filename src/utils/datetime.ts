@@ -46,7 +46,7 @@ export const parseDate = (date: string): number => Date.parse(date);
  * @param {string} locale
  * @returns {string} date
  */
-export const formatDateRelatively = (date: Date, locale, now: Date = new Date()) => {
+export const formatDateRelatively = (date: Date, locale: string, now: Date = new Date()) => {
   const fullLocale = LANG_LOCALE_MAP[locale];
 
   // Formatter for "Today" and "Yesterday" etc
