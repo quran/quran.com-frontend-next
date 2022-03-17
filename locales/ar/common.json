@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "حجم خط التفسير",
         "group-message": "أنت تقرأ التفسير لمجموعة الآيات {{from}} إلى {{to}}",
-        "surah": "تفسير السورة",
+        "no-text": "{{tafsirName}} غير متوفر للآية الحالية.",
+        "surah": "تفسير سورة",
+        "tafsir-desc": "اقرأ {{tafsirName}} عن آية {{verseNumber}} من السورة {{surahName}}",
         "title": "التفسير"
     },
     "tarteel": {

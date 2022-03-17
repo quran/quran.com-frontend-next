@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "Размер шрифта тафсира",
         "group-message": "Вы читаете тафсир для группы стихов {{from}} до {{to}}",
+        "no-text": "{{tafsirName}} недоступен для текущего стиха.",
         "surah": "Тафсир Сура",
+        "tafsir-desc": "Прочтите {{tafsirName}} {{verseNumber}} суры {{surahName}}",
         "title": "Тафсир"
     },
     "tarteel": {

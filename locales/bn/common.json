@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "তাফসির ফন্ট সাইজ",
         "group-message": "{{from}} {{to}} আয়াতের গ্রুপের জন্য একটি তাফসির পড়ছেন",
+        "no-text": "বর্তমান আয়াতের জন্য {{tafsirName}} উপলব্ধ নেই৷",
         "surah": "তাফসীর সূরা",
+        "tafsir-desc": "সূরা {{surahName}} {{verseNumber}} এর {{verseNumber} {{tafsirName}} আয়াতের জন্য {{tafsirName}} পড়ুন",
         "title": "তাফসির"
     },
     "tarteel": {

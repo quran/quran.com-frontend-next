@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "Madhësia e shkronjave Tafsir",
         "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
+        "no-text": "{{tafsirName}} nuk është i disponueshëm për vargun aktual.",
         "surah": "Surja Tefsir",
+        "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
         "title": "Tefsir"
     },
     "tarteel": {

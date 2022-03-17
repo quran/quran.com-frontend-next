@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "Tafsir 字体大小",
         "group-message": "{{from}}至{{to}}节的经注",
+        "no-text": "{{tafsirName}}不适用于当前经文。",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "阅读{{tafsirName}}以了解 Surah {{surahName} {{verseNumber}}的{{surahName}}",
         "title": "经注"
     },
     "tarteel": {
