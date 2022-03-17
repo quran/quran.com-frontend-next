@@ -132,6 +132,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
                 className={styles.playButton}
                 onClick={onPlayAudioClicked}
                 prefix={<PlayIcon />}
+                shouldFlipOnRTL={false}
               >
                 {t('common:audio.player.play-audio')}
               </Button>

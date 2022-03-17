@@ -24,7 +24,7 @@ import Reciter from 'types/Reciter';
 
 const filterChapters = (chapters, searchQuery: string) => {
   const fuse = new Fuse(chapters, {
-    keys: ['transliteratedName'],
+    keys: ['transliteratedName', 'id', 'localizedId'],
     threshold: 0.3,
   });
 
