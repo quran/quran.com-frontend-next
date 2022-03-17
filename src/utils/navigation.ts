@@ -204,6 +204,10 @@ export const getQuranReflectVerseUrl = (verseKey: string) => {
   return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
 };
 
+export const getQuranReflectAuthorUrl = (username: string) => {
+  return `https://quranreflect.com/${username}`;
+};
+
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.
