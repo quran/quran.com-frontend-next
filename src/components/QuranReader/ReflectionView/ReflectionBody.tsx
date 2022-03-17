@@ -150,6 +150,7 @@ const ReflectionBody = ({
               key={reflection.id}
               date={reflection.createdAt}
               authorName={reflection?.author?.name}
+              authorUsername={reflection?.author?.username}
               isAuthorVerified={reflection?.author?.verified}
               reflectionText={reflection?.body}
               avatarUrl={reflection?.author?.profileImg}

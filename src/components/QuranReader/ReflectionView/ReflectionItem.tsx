@@ -11,11 +11,12 @@ import VerifiedIcon from '../../../../public/icons/verified.svg';
 import styles from './ReflectionItem.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
-import { getQuranReflectPostUrl } from 'src/utils/navigation';
+import { getQuranReflectAuthorUrl, getQuranReflectPostUrl } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
@@ -29,6 +30,7 @@ export type VerseReference = {
 type ReflectionItemProps = {
   id: number;
   authorName: string;
+  authorUsername: string;
   avatarUrl: string;
   date: string;
   reflectionText: string;
@@ -42,6 +44,7 @@ const MAX_REFLECTION_LENGTH = 220;
 const ReflectionItem = ({
   id,
   authorName,
+  authorUsername,
   date,
   avatarUrl,
   reflectionText,
@@ -101,14 +104,19 @@ const ReflectionItem = ({
         <div className={styles.authorInfo}>
           <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
           <div>
-            <div className={styles.author}>
+            <Link
+              newTab
+              href={getQuranReflectAuthorUrl(authorUsername)}
+              variant={LinkVariant.Primary}
+              className={styles.author}
+            >
               {authorName}
               {isAuthorVerified && (
                 <span className={styles.verifiedIcon}>
                   <VerifiedIcon />
                 </span>
               )}
-            </div>
+            </Link>
             <div>
               <span className={styles.date}>{formattedDate}</span>
               {verseReferences && (
