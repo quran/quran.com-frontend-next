@@ -106,7 +106,16 @@ module.exports = {
         alternateRefs: getAlternateRefs(chapterId, true, 'surah', 'info'),
       });
 
-      // 3. generate the verses for each of the chapters in each locale as well
+      // 3. /reciters/[reciterId]/[chapterSlug]
+      reciterIds.forEach((reciterId) => {
+        const location = `/reciters/${reciterId}/${englishChapterSlug}`;
+        result.push({
+          loc: location,
+          alternateRefs: getAlternateRefs(chapterId, false, '', location),
+        });
+      });
+
+      // 4. generate the verses for each of the chapters in each locale as well
       range(englishChaptersData[chapterId].versesCount).forEach((verseId) => {
         const verseNumber = verseId + 1;
         const verseIdValue = verseNumber;
@@ -123,12 +132,12 @@ module.exports = {
             alternateRefs: getAlternateRefs(chapterId, true, '', verseIdValue),
           });
         }
-        // 4. add /[chapterId]/[verseId]/tafsirs route
+        // 5. add /[chapterId]/[verseId]/tafsirs route
         result.push({
           loc: `/${englishChapterSlug}/${verseIdValue}/tafsirs`,
           alternateRefs: getAlternateRefs(chapterId, true, '', `${verseIdValue}/tafsirs`),
         });
-        // 5. /[verseKey]/tafsirs/[tafsirSlug]
+        // 6. /[verseKey]/tafsirs/[tafsirSlug]
         tafsirSlugs.forEach((tafsirSlug) => {
           const location = `${`${chapterId}:${verseIdValue}`}/tafsirs/${tafsirSlug}`;
           result.push({
@@ -138,15 +147,15 @@ module.exports = {
         });
       });
     });
-    // 6. /juz/[juzId]
+    // 7. /juz/[juzId]
     range(1, 31).forEach(async (juzId) => {
       result.push(await config.transform(config, `/juz/${juzId}`));
     });
-    // 7. /page/[pageId]
+    // 8. /page/[pageId]
     range(1, 605).forEach(async (pageId) => {
       result.push(await config.transform(config, `/page/${pageId}`));
     });
-    // 8. /reciters/[reciterId]
+    // 9. /reciters/[reciterId]
     reciterIds.forEach((reciterId) => {
       const location = `/reciters/${reciterId}`;
       result.push({
