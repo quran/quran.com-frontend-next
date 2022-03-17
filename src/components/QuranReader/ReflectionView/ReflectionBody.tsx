@@ -153,7 +153,7 @@ const ReflectionBody = ({
               isAuthorVerified={reflection?.author?.verified}
               reflectionText={reflection?.body}
               avatarUrl={reflection?.author?.profileImg}
-              referencedVerses={getReferencedVersesFromReflection(reflection)}
+              verseReferences={getVerseReferencesFromReflection(reflection)}
             />
           ))}
           <div className={styles.readMoreButtonContainer}>
@@ -210,13 +210,13 @@ const ReflectionBody = ({
 export default ReflectionBody;
 
 /**
- * From reflection data, extract the verseKeys
+ * From reflection data, extract the verse references
  * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
  *
  * @param {Object} reflection
  * @returns {VerseReference[]} verseReferences
  */
-const getReferencedVersesFromReflection = (reflection: any): VerseReference[] => {
+const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
   return reflection.filters.map((filter) => {
     const chapter = filter.surahNumber;
     const { from, to } = filter;

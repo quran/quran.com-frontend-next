@@ -33,7 +33,7 @@ type ReflectionItemProps = {
   date: string;
   reflectionText: string;
   isAuthorVerified: boolean;
-  referencedVerses?: VerseReference[];
+  verseReferences?: VerseReference[];
 };
 
 const SEPARATOR = ' · ';
@@ -46,7 +46,7 @@ const ReflectionItem = ({
   avatarUrl,
   reflectionText,
   isAuthorVerified,
-  referencedVerses,
+  verseReferences,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation();
@@ -60,14 +60,14 @@ const ReflectionItem = ({
 
   // some reference, are referencing to the entire chapter (doesn't have from/to properties)
   // we only want to show the data for references that have from/to properties
-  const nonChapterReferencedVerses = useMemo(
-    () => referencedVerses.filter((verse) => !!verse.from && !!verse.to),
-    [referencedVerses],
+  const nonChapterVerseReferences = useMemo(
+    () => verseReferences.filter((verse) => !!verse.from && !!verse.to),
+    [verseReferences],
   );
 
   const referredVerseText = useMemo(() => {
     let text = '';
-    const chapters = referencedVerses
+    const chapters = verseReferences
       .filter((verse) => !verse.from || !verse.to)
       .map((verse) => verse.chapter);
 
@@ -75,7 +75,7 @@ const ReflectionItem = ({
       text += `${t('common:surah')} ${chapters.join(',')}`;
     }
 
-    const verses = nonChapterReferencedVerses.map((verse) =>
+    const verses = nonChapterVerseReferences.map((verse) =>
       makeVerseKey(verse.chapter, verse.from, verse.to),
     );
 
@@ -85,7 +85,7 @@ const ReflectionItem = ({
     }
 
     return text;
-  }, [nonChapterReferencedVerses, referencedVerses, t]);
+  }, [nonChapterVerseReferences, verseReferences, t]);
 
   const getSurahName = useCallback(
     (chapterNumber) => {
@@ -111,7 +111,7 @@ const ReflectionItem = ({
             </div>
             <div>
               <span className={styles.date}>{formattedDate}</span>
-              {referencedVerses && (
+              {verseReferences && (
                 <>
                   <span className={styles.separator}>{SEPARATOR}</span>
                   <span
@@ -119,14 +119,14 @@ const ReflectionItem = ({
                     role="button"
                     onKeyPress={onReferredVersesHeaderClicked}
                     onClick={onReferredVersesHeaderClicked}
-                    className={classNames(styles.referencedVersesContainer, {
-                      [styles.clickable]: nonChapterReferencedVerses.length > 0,
+                    className={classNames(styles.verseReferencesContainer, {
+                      [styles.clickable]: nonChapterVerseReferences.length > 0,
                     })}
                   >
                     <span className={styles.referencedVersesPrefix}>
                       {t('quran-reader:referencing')}{' '}
                     </span>
-                    <span className={styles.referencedVerses}>{referredVerseText}</span>
+                    <span className={styles.verseReferencesPrefix}>{referredVerseText}</span>
                   </span>
                 </>
               )}
@@ -157,14 +157,14 @@ const ReflectionItem = ({
         </div>
       </div>
 
-      {shouldShowReferredVerses && nonChapterReferencedVerses?.length > 0 && (
+      {shouldShowReferredVerses && nonChapterVerseReferences?.length > 0 && (
         <div className={styles.verseAndTranslationsListContainer}>
-          {nonChapterReferencedVerses.map(({ chapter, from, to }) => (
+          {nonChapterVerseReferences.map(({ chapter, from, to }) => (
             <div
               className={styles.verseAndTranslationContainer}
               key={makeVerseKey(chapter, from, to)}
             >
-              {referencedVerses.length > 1 && (
+              {verseReferences.length > 1 && (
                 <span className={styles.surahName}>{getSurahName(chapter)}</span>
               )}
               <VerseAndTranslation chapter={chapter} from={from} to={to} />
