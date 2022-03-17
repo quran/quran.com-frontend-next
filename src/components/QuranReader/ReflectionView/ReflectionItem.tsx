@@ -18,7 +18,13 @@ import { formatDateRelatively } from 'src/utils/datetime';
 import { getQuranReflectPostUrl } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
-import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
+import { makeVerseKey } from 'src/utils/verse';
+
+export type VerseReference = {
+  chapter: number;
+  from?: number;
+  to?: number;
+};
 
 type ReflectionItemProps = {
   id: number;
@@ -27,7 +33,7 @@ type ReflectionItemProps = {
   date: string;
   reflectionText: string;
   isAuthorVerified: boolean;
-  referredVerseKeys?: string[];
+  referencedVerses?: VerseReference[];
 };
 
 const SEPARATOR = ' · ';
@@ -40,7 +46,7 @@ const ReflectionItem = ({
   avatarUrl,
   reflectionText,
   isAuthorVerified,
-  referredVerseKeys,
+  referencedVerses,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation();
@@ -52,35 +58,39 @@ const ReflectionItem = ({
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
   };
 
-  const validReferredVerseKeys = useMemo(
-    () => referredVerseKeys?.filter((key) => key !== '' && !!getVerseNumberFromKey(key)),
-    [referredVerseKeys],
+  // some reference, are referencing to the entire chapter (doesn't have from/to properties)
+  // we only want to show the data for references that have from/to properties
+  const nonChapterReferencedVerses = useMemo(
+    () => referencedVerses.filter((verse) => !!verse.from && !!verse.to),
+    [referencedVerses],
   );
 
   const referredVerseText = useMemo(() => {
-    let text = `${t('quran-reader:referring')} `;
-    const chapters = referredVerseKeys
-      .filter((key) => !getVerseNumberFromKey(key))
-      .map(getChapterNumberFromKey);
+    let text = '';
+    const chapters = referencedVerses
+      .filter((verse) => !verse.from || !verse.to)
+      .map((verse) => verse.chapter);
 
     if (chapters.length > 0) {
       text += `${t('common:surah')} ${chapters.join(',')}`;
     }
 
-    if (validReferredVerseKeys.length > 0) {
+    const verses = nonChapterReferencedVerses.map((verse) =>
+      makeVerseKey(verse.chapter, verse.from, verse.to),
+    );
+
+    if (verses.length > 0) {
       if (chapters.length > 0) text += ` ${t('common:and')} `;
-      text += `${t('common:ayah')} ${validReferredVerseKeys.join(',')}`;
+      text += `${t('common:ayah')} ${verses.join(',')}`;
     }
 
     return text;
-  }, [referredVerseKeys, t, validReferredVerseKeys]);
+  }, [nonChapterReferencedVerses, referencedVerses, t]);
 
   const getSurahName = useCallback(
-    (verseKey) => {
-      const chapterNumber = getChapterNumberFromKey(verseKey);
+    (chapterNumber) => {
       const surahName = getChapterData(chapterNumber.toString())?.transliteratedName;
-      return `${t('common:surah')} ${surahName} (${chapterNumber})
-      `;
+      return `${t('common:surah')} ${surahName} (${chapterNumber})`;
     },
     [t],
   );
@@ -101,7 +111,7 @@ const ReflectionItem = ({
             </div>
             <div>
               <span className={styles.date}>{formattedDate}</span>
-              {referredVerseKeys && (
+              {referencedVerses && (
                 <>
                   <span className={styles.separator}>{SEPARATOR}</span>
                   <span
@@ -109,11 +119,14 @@ const ReflectionItem = ({
                     role="button"
                     onKeyPress={onReferredVersesHeaderClicked}
                     onClick={onReferredVersesHeaderClicked}
-                    className={classNames(styles.referredVerses, {
-                      [styles.clickable]: validReferredVerseKeys.length > 0,
+                    className={classNames(styles.referencedVersesContainer, {
+                      [styles.clickable]: nonChapterReferencedVerses.length > 0,
                     })}
                   >
-                    {referredVerseText}
+                    <span className={styles.referencedVersesPrefix}>
+                      {t('quran-reader:referencing')}{' '}
+                    </span>
+                    <span className={styles.referencedVerses}>{referredVerseText}</span>
                   </span>
                 </>
               )}
@@ -143,31 +156,37 @@ const ReflectionItem = ({
           </PopoverMenu>
         </div>
       </div>
-      <div>
-        {shouldShowReferredVerses &&
-          validReferredVerseKeys?.map((verseKey) => (
-            <div className={styles.verseAndTranslationContainer} key={verseKey}>
-              {validReferredVerseKeys.length > 1 && (
-                <span className={styles.surahName}>{getSurahName(verseKey)}</span>
+
+      {shouldShowReferredVerses && nonChapterReferencedVerses?.length > 0 && (
+        <div className={styles.verseAndTranslationsListContainer}>
+          {nonChapterReferencedVerses.map(({ chapter, from, to }) => (
+            <div
+              className={styles.verseAndTranslationContainer}
+              key={makeVerseKey(chapter, from, to)}
+            >
+              {referencedVerses.length > 1 && (
+                <span className={styles.surahName}>{getSurahName(chapter)}</span>
               )}
-              <VerseAndTranslation verseKey={verseKey} />
+              <VerseAndTranslation chapter={chapter} from={from} to={to} />
             </div>
           ))}
-        <span className={styles.body}>
-          {isExpanded ? reflectionText : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
+        </div>
+      )}
+
+      <span className={styles.body}>
+        {isExpanded ? reflectionText : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
+      </span>
+      {reflectionText.length > MAX_REFLECTION_LENGTH && (
+        <span
+          className={styles.moreOrLessText}
+          tabIndex={0}
+          role="button"
+          onKeyDown={onMoreLessClicked}
+          onClick={onMoreLessClicked}
+        >
+          {isExpanded ? t('less') : t('more')}
         </span>
-        {reflectionText.length > MAX_REFLECTION_LENGTH && (
-          <span
-            className={styles.moreOrLessText}
-            tabIndex={0}
-            role="button"
-            onKeyDown={onMoreLessClicked}
-            onClick={onMoreLessClicked}
-          >
-            {isExpanded ? t('less') : t('more')}
-          </span>
-        )}
-      </div>
+      )}
     </div>
   );
 };

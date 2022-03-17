@@ -1,12 +1,11 @@
 .translationsListContainer {
-  margin-block-start: var(--spacing-mega);
-  margin-block-end: var(--spacing-large);
+  margin-block-start: var(--spacing-large);
 }
 .translationContainer {
   margin-block-end: var(--spacing-medium);
 }
 .arabicVerseContainer {
-  margin-block-start: var(--spacing-medium);
+  margin-block-start: var(--spacing-large);
 }
 
 .verseContainer + .verseContainer {

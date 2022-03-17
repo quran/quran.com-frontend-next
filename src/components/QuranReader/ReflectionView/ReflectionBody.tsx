@@ -11,7 +11,7 @@ import TranslationText from '../TranslationView/TranslationText';
 
 import styles from './ReflectionBody.module.scss';
 import ReflectionDisclaimerMessage from './ReflectionDisclaimerMessage';
-import ReflectionItem from './ReflectionItem';
+import ReflectionItem, { VerseReference } from './ReflectionItem';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Button from 'src/components/dls/Button/Button';
@@ -153,7 +153,7 @@ const ReflectionBody = ({
               isAuthorVerified={reflection?.author?.verified}
               reflectionText={reflection?.body}
               avatarUrl={reflection?.author?.profileImg}
-              referredVerseKeys={getVerseKeysFromReflection(reflection)}
+              referencedVerses={getReferencedVersesFromReflection(reflection)}
             />
           ))}
           <div className={styles.readMoreButtonContainer}>
@@ -209,12 +209,17 @@ const ReflectionBody = ({
 
 export default ReflectionBody;
 
-const getVerseKeysFromReflection = (reflection: any) => {
+/**
+ * From reflection data, extract the verseKeys
+ * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
+ *
+ * @param {Object} reflection
+ * @returns {VerseReference[]} verseReferences
+ */
+const getReferencedVersesFromReflection = (reflection: any): VerseReference[] => {
   return reflection.filters.map((filter) => {
     const chapter = filter.surahNumber;
     const { from, to } = filter;
-    let verseKey = `${chapter}:${from}`;
-    if (to !== from) verseKey += `-${to}`;
-    return verseKey;
+    return { chapter, from, to };
   });
 };

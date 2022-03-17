@@ -202,8 +202,14 @@ export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record
  * @returns
  */
 
-export const makeVerseKey = (chapterNumber: number, verseNumber: number): string =>
-  `${chapterNumber}:${verseNumber}`;
+export const makeVerseKey = (
+  chapterNumber: number,
+  from: number | string,
+  to?: number | string,
+): string => {
+  if (to && from !== to) return `${chapterNumber}:${from}-${to}`;
+  return `${chapterNumber}:${from}`;
+};
 
 /**
  * make wordLocation from verseKey and wordPosition, example "1:1:2"

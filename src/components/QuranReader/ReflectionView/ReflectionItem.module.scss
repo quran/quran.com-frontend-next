@@ -36,17 +36,20 @@
   opacity: var(--opacity-75);
 }
 
-.referredVerses {
-  text-transform: capitalize;
+.referencedVersesContainer {
   font-size: var(--font-size-small);
   opacity: var(--opacity-75);
+}
+.referencedVerses {
+  text-transform: lowercase;
+}
+.referencedVersesPrefix {
+  text-transform: capitalize;
 }
 
 .clickable {
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
 }
 
 .container {
@@ -72,13 +75,17 @@
   color: var(--color-success-medium);
 }
 
-.verseAndTranslationContainer {
-  margin-block-start: var(--spacing-mega);
-  margin-block-end: var(--spacing-mega);
-  padding: var(--spacing-medium);
-  background: var(--color-success-faded);
+.verseAndTranslationsListContainer {
+  background-color: var(--color-background-alternative-faded);
   border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-success-faint);
+  padding-inline: var(--spacing-mega);
+  margin-block: var(--spacing-large);
+}
+.verseAndTranslationContainer {
+  padding-block: var(--spacing-mega);
+  & + & {
+    border-block-start: 1px solid var(--color-borders-hairline);
+  }
 }
 
 .surahName {

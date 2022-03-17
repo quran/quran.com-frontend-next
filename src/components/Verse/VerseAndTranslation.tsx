@@ -11,28 +11,31 @@ import PlainVerseText from './PlainVerseText';
 import styles from './VerseAndTranslation.module.scss';
 
 import { fetcher } from 'src/api';
-// import useQcfFont from 'src/hooks/useQcfFont';
 import useQcfFont from 'src/hooks/useQcfFont';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import {
-  getChapterNumberFromKey,
-  getVerseNumberRangeFromKey,
-  getVerseWords,
-} from 'src/utils/verse';
+import { getVerseWords } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 
+/**
+ * Given a verse range
+ * - Fetch the verse + translations data
+ * - and return it
+ *
+ * The use case of this component is mainly for Verse and Translation that needs to be fetched on client
+ * dynamically (not SSR). For example, for the reflection's feature verse reference
+ *
+ */
 interface Props {
-  verseKey: string;
+  chapter: number;
+  from: number;
+  to: number;
 }
 
-const VerseAndTranslation: React.FC<Props> = ({ verseKey }) => {
-  const chapter = getChapterNumberFromKey(verseKey);
-  const { from, to } = getVerseNumberRangeFromKey(verseKey);
-
+const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
   const { lang } = useTranslation();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { quranFont, mushafLines, translationFontScale } = useSelector(
