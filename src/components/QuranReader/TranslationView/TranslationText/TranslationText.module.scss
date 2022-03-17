@@ -1,5 +1,6 @@
 @use "src/styles/utility";
 @use "src/components/QuranReader/TranslationView/TranslationText/footnote";
+@use "src/styles/theme";
 
 $translation-line-height: 1.5;
 
@@ -8,6 +9,9 @@ $translation-line-height: 1.5;
   letter-spacing: 0;
   line-height: $translation-line-height;
   padding-block-end: var(--spacing-micro);
+  @include theme.dark {
+    opacity: var(--opacity-85);
+  }
 }
 
 @include utility.generate-font-scales("translation");
