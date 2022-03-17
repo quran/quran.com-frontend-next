@@ -184,7 +184,7 @@ const ReflectionItem = ({
           onKeyDown={onMoreLessClicked}
           onClick={onMoreLessClicked}
         >
-          {isExpanded ? t('less') : t('more')}
+          {isExpanded ? t('common:less') : t('common:more')}
         </span>
       )}
     </div>

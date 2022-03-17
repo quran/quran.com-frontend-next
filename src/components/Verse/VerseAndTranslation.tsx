@@ -11,6 +11,7 @@ import PlainVerseText from './PlainVerseText';
 import styles from './VerseAndTranslation.module.scss';
 
 import { fetcher } from 'src/api';
+import Error from 'src/components/Error';
 import useQcfFont from 'src/hooks/useQcfFont';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
@@ -43,28 +44,26 @@ const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
     shallowEqual,
   );
 
-  const defaultMushafId = getMushafId(quranFont, mushafLines).mushaf;
+  const mushafId = getMushafId(quranFont, mushafLines).mushaf;
   const apiParams = {
     ...getDefaultWordFields(quranFont),
     translationFields: 'resource_name,language_id',
     translations: translations.join(','),
-    mushaf: defaultMushafId,
+    mushaf: mushafId,
     from: `${chapter}:${from}`,
     to: `${chapter}:${to}`,
   };
 
   const shouldFetchData = !!from;
 
-  const { data, error } = useSWR<VersesResponse>(
+  const { data, error, mutate } = useSWR<VersesResponse>(
     shouldFetchData ? makeVersesUrl(chapter, lang, apiParams) : null,
-    (url) => {
-      return fetcher(url);
-    },
+    fetcher,
   );
 
   useQcfFont(quranFont, data?.verses ? data.verses : []);
 
-  if (error) return <div>{JSON.stringify(error)}</div>;
+  if (error) return <Error error={error} onRetryClicked={mutate} />;
 
   if (!data) return <Spinner />;
   return (
