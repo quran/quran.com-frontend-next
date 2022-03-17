@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "Taille de la police Tafsir",
         "group-message": "Vous lisez un tafsir pour le groupe de versets {{from}} à {{to}}",
+        "no-text": "{{tafsirName}} n'est pas disponible pour le verset actuel.",
         "surah": "Sourate Tafsir",
+        "tafsir-desc": "Lisez {{tafsirName}} pour Ayah {{verseNumber}} de la sourate {{surahName}}",
         "title": "Tafsir"
     },
     "tarteel": {

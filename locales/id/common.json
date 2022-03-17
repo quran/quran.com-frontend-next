@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "Ukuran font tafsir",
         "group-message": "Anda sedang membaca tafsir untuk sekelompok ayat dari {{from}} hingga {{to}}",
+        "no-text": "{{tafsirName}} tidak tersedia untuk ayat saat ini.",
         "surah": "Surah Tafsir",
+        "tafsir-desc": "Baca {{tafsirName}} untuk Ayah {{verseNumber}} Surah {{surahName}}",
         "title": "tafsir"
     },
     "tarteel": {

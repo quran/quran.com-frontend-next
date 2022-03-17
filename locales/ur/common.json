@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "تفسیر فونٹ سائز",
         "group-message": "{{to}} {{from}} ایک تفسیر پڑھ رہے ہیں",
+        "no-text": "موجودہ آیت کے لیے {{tafsirName}} دستیاب نہیں ہے۔",
         "surah": "تفسیر سورہ",
+        "tafsir-desc": "سورہ {{surahName} {{tafsirName}} کی آیت {{verseNumber}} کے لیے {{surahName}}",
         "title": "تفسیر"
     },
     "tarteel": {

@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "tefsir yazı tipi boyutu",
         "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",
+        "no-text": "{{tafsirName}} mevcut ayet için mevcut değil.",
         "surah": "Tefsir Suresi",
+        "tafsir-desc": "{{tafsirName}} {{verseNumber}} Suresi {{surahName}} için {{tafsirName}} okuyun",
         "title": "Tefsir"
     },
     "tarteel": {

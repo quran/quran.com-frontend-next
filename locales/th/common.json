@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "ขนาดตัวอักษร Tafsir",
         "group-message": "คุณกำลังอ่าน tafsir สำหรับกลุ่มโองการ {{from}} ถึง {{to}}",
+        "no-text": "{{tafsirName}} ไม่สามารถใช้ได้สำหรับกลอนปัจจุบัน",
         "surah": "ตัฟซีร ซูเราะฮฺ",
+        "tafsir-desc": "อ่าน {{tafsirName}} สำหรับ Ayah {{verseNumber}} ของ Surah {{surahName}}",
         "title": "ตัฟซีร"
     },
     "tarteel": {

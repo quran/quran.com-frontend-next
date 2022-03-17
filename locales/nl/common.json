@@ -194,7 +194,9 @@
     "tafsir": {
         "font-size": "Tafsir-lettergrootte",
         "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",
+        "no-text": "{{tafsirName}} is niet beschikbaar voor het huidige couplet.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
         "title": "Tafsir"
     },
     "tarteel": {

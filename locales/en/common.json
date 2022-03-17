@@ -194,10 +194,10 @@
     "tafsir": {
         "font-size": "Tafsir font size",
         "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}",
-        "surah": "Tafsir Surah",
-        "title": "Tafsir",
         "no-text": "{{tafsirName}} is not available for the current verse.",
-        "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}"
+        "surah": "Tafsir Surah",
+        "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}",
+        "title": "Tafsir"
     },
     "tarteel": {
         "app": "Tarteel app",
