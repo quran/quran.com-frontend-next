@@ -21,7 +21,11 @@ import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
-import { getQuranReflectAuthorUrl, getQuranReflectPostUrl } from 'src/utils/navigation';
+import {
+  getQuranReflectAuthorUrl,
+  getQuranReflectPostCommentUrl,
+  getQuranReflectPostUrl,
+} from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
@@ -230,7 +234,7 @@ const ReflectionItem = ({
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
           prefix={<ChatIcon />}
-          href={getQuranReflectPostUrl(id)}
+          href={getQuranReflectPostCommentUrl(id)}
           size={ButtonSize.Small}
         >
           {t('quran-reader:comment')}
