@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { MouseEventHandler } from 'react';
 
 import classNames from 'classnames';
@@ -33,6 +34,7 @@ export enum ButtonType {
 export enum ButtonVariant {
   Shadow = 'shadow',
   Ghost = 'ghost',
+  Compact = 'compact',
 }
 
 export type ButtonProps = {
@@ -101,6 +103,7 @@ const Button: React.FC<ButtonProps> = ({
     // variant
     [styles.shadow]: variant === ButtonVariant.Shadow,
     [styles.ghost]: variant === ButtonVariant.Ghost,
+    [styles.compact]: variant === ButtonVariant.Compact,
 
     [styles.disabled]: disabled || loading,
     [styles.noSidePadding]: !hasSidePadding,

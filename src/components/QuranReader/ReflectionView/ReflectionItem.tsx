@@ -3,9 +3,13 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
+import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
+import ChatIcon from '../../../../public/icons/chat.svg';
+import LoveIcon from '../../../../public/icons/love.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
+import ShareIcon from '../../../../public/icons/share.svg';
 import VerifiedIcon from '../../../../public/icons/verified.svg';
 
 import styles from './ReflectionItem.module.scss';
@@ -13,6 +17,7 @@ import styles from './ReflectionItem.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
@@ -36,6 +41,8 @@ type ReflectionItemProps = {
   reflectionText: string;
   isAuthorVerified: boolean;
   verseReferences?: VerseReference[];
+  likesCount?: number;
+  commentsCount?: number;
 };
 
 const SEPARATOR = ' · ';
@@ -50,7 +57,10 @@ const ReflectionItem = ({
   reflectionText,
   isAuthorVerified,
   verseReferences,
+  likesCount,
+  commentsCount,
 }: ReflectionItemProps) => {
+  const toast = useToast();
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation();
   const formattedDate = formatDateRelatively(new Date(date), lang);
@@ -97,6 +107,12 @@ const ReflectionItem = ({
     },
     [t],
   );
+
+  const onShareClicked = () => {
+    clipboardCopy(getQuranReflectPostUrl(id)).then(() =>
+      toast(t('common:shared'), { status: ToastStatus.Success }),
+    );
+  };
 
   return (
     <div className={styles.container}>
@@ -195,6 +211,40 @@ const ReflectionItem = ({
           {isExpanded ? t('common:less') : t('common:more')}
         </span>
       )}
+      <div className={styles.socialStats}>
+        {t('quran-reader:likes-count', { count: likesCount })}
+        {SEPARATOR}
+        {t('quran-reader:comments-count', { count: commentsCount })}
+      </div>
+      <div className={styles.socialInteractionContainer}>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          href={getQuranReflectPostUrl(id)}
+          prefix={<LoveIcon />}
+          size={ButtonSize.Small}
+        >
+          {t('quran-reader:like')}
+        </Button>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          prefix={<ChatIcon />}
+          href={getQuranReflectPostUrl(id)}
+          size={ButtonSize.Small}
+        >
+          {t('quran-reader:comment')}
+        </Button>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          prefix={<ShareIcon />}
+          onClick={onShareClicked}
+          size={ButtonSize.Small}
+        >
+          {t('common:share')}
+        </Button>
+      </div>
     </div>
   );
 };
