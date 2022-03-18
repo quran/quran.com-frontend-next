@@ -4,8 +4,9 @@
     "back-to-ayah": "Back to Ayah",
     "comment": "Comment",
     "comments-count": {
+        "0": "Comment",
         "one": "1 comment",
-        "other":"{{count}} comments"
+        "other": "{{count}} comments"
     },
     "copy-arabic": "Arabic text (Uthmani text)",
     "copy-footnote-q": "Also copy Footnote(s)?",
@@ -25,7 +26,8 @@
     "juz-beginning": "Beginning of Juz",
     "like": "Like",
     "likes-count": {
-        "one": "1 likes",
+        "0": "Like",
+        "one": "1 like",
         "other": "{{count}} likes"
     },
     "load-more": "Load More",
