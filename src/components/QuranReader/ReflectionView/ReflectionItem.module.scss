@@ -101,7 +101,7 @@
 .actionItemContainer {
   display: inline-flex;
   align-items: center;
-  margin-inline-end: calc(1 * var(--spacing-mega));
+  margin-inline-end: var(--spacing-large);
   opacity: var(--opacity-75);
 }
 .actionItemText {

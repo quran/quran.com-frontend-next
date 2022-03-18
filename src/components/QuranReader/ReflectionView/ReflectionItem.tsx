@@ -225,6 +225,7 @@ const ReflectionItem = ({
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(id)}
+          newTab
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
         >
@@ -235,6 +236,7 @@ const ReflectionItem = ({
           variant={ButtonVariant.Compact}
           prefix={<ChatIcon />}
           href={getQuranReflectPostCommentUrl(id)}
+          newTab
           size={ButtonSize.Small}
         >
           {commentsCount}
