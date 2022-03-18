@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -7,7 +8,7 @@ import { getChapterAudioData } from 'src/api';
 import {
   triggerPlayAudio,
   triggerPauseAudio,
-  playFromTimestamp,
+  playAudioRange,
 } from 'src/components/AudioPlayer/EventTriggers';
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
@@ -129,6 +130,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     const state = thunkApi.getState();
     const selectedReciter = selectReciter(state);
+    // const isInRepeatMode = selectIsInRepeatMode(state);
     let selectedAudioData = selectAudioData(state);
     if (
       !selectedAudioData ||
@@ -143,7 +145,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     if (shouldStartFromRandomTimestamp) {
       const randomTimestamp = random(0, selectedAudioData.duration);
-      playFromTimestamp(randomTimestamp / 1000);
+      playAudioRange(randomTimestamp / 1000);
       return;
     }
 
@@ -151,10 +153,18 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     if (timestamp === undefined || timestamp === null) {
       const timestampsData = await getChapterAudioData(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
-      playFromTimestamp(verseTiming.timestampFrom / 1000);
+
+      // when in repeat mode, add "end" to media fragment url, so it audio will be paused when the verse ended.
+      // when not in repeat mode, don't add "end" to media fragment
+      // if (isInRepeatMode)
+      //   playAudioRange(verseTiming.timestampFrom / 1000, verseTiming.timestampTo / 1000);
+      // else
+      playAudioRange(verseTiming.timestampTo / 1000);
+
       return;
     }
-    playFromTimestamp(timestamp / 1000);
+
+    playAudioRange(timestamp / 1000);
   },
 );
 

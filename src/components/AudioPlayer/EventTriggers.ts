@@ -26,6 +26,10 @@ export const togglePlaying = () => {
   }
 };
 
+/**
+ * @deprecated
+ * use media fragment uri instead
+ */
 export const triggerSetCurrentTime = (newTime: number) => {
   if (process.browser && window) {
     let currentTime = newTime;
@@ -52,18 +56,35 @@ export const triggerSeek = (duration: number) => {
  * @param timestamp timestamp in seconds
  */
 const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
-export const playFromTimestamp = (timestamp: number) => {
+export const playAudioRange = (
+  from: number,
+  // to?: number
+) => {
+  // force re-set the audio src
+  if (window.audioPlayerEl) {
+    const currentUrl = getAudioUrlWithoutMediaFragment(window?.audioPlayerEl.src);
+    const url = `${currentUrl}#t=${from}`;
+    // if (to) url += `,${to}`;
+    window.audioPlayerEl.src = url;
+  }
+
   if (window.audioPlayerEl.readyState === AUDIO_PLAYER_STATE_READY) {
-    triggerSetCurrentTime(timestamp);
     triggerPlayAudio();
   } else {
     const playWhenReady = () => {
-      triggerSetCurrentTime(timestamp);
       triggerPlayAudio();
       window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
     };
     window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
   }
+};
+
+// example
+// getAudioUrulWithoutMediaFragment("https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/114.mp3#t=10,15")
+// returns "https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/114.mp3"
+const getAudioUrlWithoutMediaFragment = (url: string) => {
+  if (url.includes('#')) return url.slice(0, url.indexOf('#'));
+  return url;
 };
 
 export default { triggerPlayAudio, triggerPauseAudio, triggerSetCurrentTime };
