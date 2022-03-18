@@ -1,21 +1,22 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg);
+$light-theme-filter: contrast(100%) hue-rotate(50deg);
 .imageContainer {
-  // Detect OS dark mode
-  @media (prefers-color-scheme: dark) {
+  @include theme.light {
+    img {
+      filter: $light-theme-filter;
+    }
+  }
+  @include theme.dark {
     img {
       filter: $dark-theme-filter;
     }
   }
-  [data-theme="light"] & {
+  @include theme.sepia {
     img {
-      filter: unset;
-    }
-  }
-  [data-theme="dark"] & {
-    img {
-      filter: $dark-theme-filter;
+      filter: $light-theme-filter;
     }
   }
 }
