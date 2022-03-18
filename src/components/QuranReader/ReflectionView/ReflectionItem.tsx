@@ -21,9 +21,10 @@ import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
-  getQuranReflectAuthorUrl,
   getQuranReflectPostCommentUrl,
+  getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
 } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
@@ -86,14 +87,18 @@ const ReflectionItem = ({
     let text = '';
     const chapters = verseReferences
       .filter((verse) => !verse.from || !verse.to)
-      .map((verse) => verse.chapter);
+      .map((verse) => toLocalizedNumber(verse.chapter, lang));
 
     if (chapters.length > 0) {
       text += `${t('common:surah')} ${chapters.join(',')}`;
     }
 
     const verses = nonChapterVerseReferences.map((verse) =>
-      makeVerseKey(verse.chapter, verse.from, verse.to),
+      makeVerseKey(
+        toLocalizedNumber(verse.chapter, lang),
+        toLocalizedNumber(verse.from, lang),
+        toLocalizedNumber(verse.to, lang),
+      ),
     );
 
     if (verses.length > 0) {
@@ -102,7 +107,7 @@ const ReflectionItem = ({
     }
 
     return text;
-  }, [nonChapterVerseReferences, verseReferences, t]);
+  }, [verseReferences, nonChapterVerseReferences, lang, t]);
 
   const getSurahName = useCallback(
     (chapterNumber) => {
@@ -154,7 +159,7 @@ const ReflectionItem = ({
                     <span className={styles.referencedVersesPrefix}>
                       {t('quran-reader:referencing')}{' '}
                     </span>
-                    <span className={styles.verseReferencesPrefix}>{referredVerseText}</span>
+                    <span className={styles.verseReferences}>{referredVerseText}</span>
                   </span>
                 </>
               )}

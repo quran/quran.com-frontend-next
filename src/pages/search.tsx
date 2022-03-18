@@ -26,6 +26,8 @@ import {
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
+import { getLanguageAlternates } from 'src/utils/locale';
+import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -39,7 +41,7 @@ type SearchProps = {
 };
 
 const Search: NextPage<SearchProps> = ({ languages, translations }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -182,9 +184,22 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     setSearchQuery(keyword);
   }, []);
 
+  const navigationUrl = '/search';
+
   return (
     <>
-      <NextSeoWrapper title={debouncedSearchQuery} />
+      <NextSeoWrapper
+        title={
+          debouncedSearchQuery !== ''
+            ? t('search:search-title', {
+                searchQuery: debouncedSearchQuery,
+              })
+            : t('search:search')
+        }
+        description={t('search:search-desc')}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+      />
       <div className={styles.pageContainer}>
         <p className={styles.header}>{t('search.title')}</p>
         <Input

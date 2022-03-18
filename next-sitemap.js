@@ -119,6 +119,7 @@ module.exports = {
       range(englishChaptersData[chapterId].versesCount).forEach((verseId) => {
         const verseNumber = verseId + 1;
         const verseIdValue = verseNumber;
+        const verseKey = `${chapterId}:${verseIdValue}`;
         const isAyatulKursi = chapterId === 2 && verseNumber === 255;
         if (isAyatulKursi) {
           // instead of /al-baqarah/255, we push /ayatul-kursi
@@ -139,11 +140,17 @@ module.exports = {
         });
         // 6. /[verseKey]/tafsirs/[tafsirSlug]
         tafsirSlugs.forEach((tafsirSlug) => {
-          const location = `${`${chapterId}:${verseIdValue}`}/tafsirs/${tafsirSlug}`;
+          const location = `${verseKey}/tafsirs/${tafsirSlug}`;
           result.push({
             loc: location,
             alternateRefs: getAlternateRefs(chapterId, false, '', location),
           });
+        });
+        // 7. /[verseKey]/reflections
+        const reflectionsLocation = `${verseKey}/reflections`;
+        result.push({
+          loc: reflectionsLocation,
+          alternateRefs: getAlternateRefs(chapterId, false, '', reflectionsLocation),
         });
       });
     });
