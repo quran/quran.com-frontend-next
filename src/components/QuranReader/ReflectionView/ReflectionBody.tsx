@@ -30,7 +30,7 @@ import { logButtonClick, logItemSelectionChange } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
-  getVerseSelectedReflectionNavigationUrl,
+  getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils/verse';
 
@@ -72,9 +72,7 @@ const ReflectionBody = ({
           const newVerseNumber = '1';
           setSelectedVerseNumber(newVerseNumber); // reset verse number to 1 every time chapter changes
           fakeNavigate(
-            getVerseSelectedReflectionNavigationUrl(
-              makeVerseKey(newChapterId, Number(newVerseNumber)),
-            ),
+            getVerseReflectionNavigationUrl(makeVerseKey(newChapterId, Number(newVerseNumber))),
             lang,
           );
         }}
@@ -82,7 +80,7 @@ const ReflectionBody = ({
           logItemSelectionChange('reflection_verse_number', newVerseNumber);
           setSelectedVerseNumber(newVerseNumber.toString());
           fakeNavigate(
-            getVerseSelectedReflectionNavigationUrl(
+            getVerseReflectionNavigationUrl(
               makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
             ),
             lang,
@@ -97,7 +95,7 @@ const ReflectionBody = ({
     scrollToTop();
     const newVerseNumber = String(Number(selectedVerseNumber) + 1);
     fakeNavigate(
-      getVerseSelectedReflectionNavigationUrl(
+      getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
       lang,
@@ -111,7 +109,7 @@ const ReflectionBody = ({
     scrollToTop();
     setSelectedVerseNumber(newVerseNumber);
     fakeNavigate(
-      getVerseSelectedReflectionNavigationUrl(
+      getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
       lang,

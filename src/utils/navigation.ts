@@ -101,7 +101,7 @@ export const getVerseSelectedTafsirNavigationUrl = (
  * @param {string} verseKey
  * @returns {string}
  */
-export const getVerseSelectedReflectionNavigationUrl = (verseKey: string): string =>
+export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
 export const getQuranReflectPostUrl = (postId: number) =>
