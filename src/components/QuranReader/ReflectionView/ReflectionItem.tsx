@@ -7,9 +7,9 @@ import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
+import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
 import LoveIcon from '../../../../public/icons/love.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
 import VerifiedIcon from '../../../../public/icons/verified.svg';
 
 import styles from './ReflectionItem.module.scss';
@@ -223,7 +223,7 @@ const ReflectionItem = ({
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
         >
-          {t('quran-reader:likes-count', { count: likesCount })}
+          {likesCount}
         </Button>
         <Button
           className={styles.actionItemContainer}
@@ -232,16 +232,15 @@ const ReflectionItem = ({
           href={getQuranReflectPostCommentUrl(id)}
           size={ButtonSize.Small}
         >
-          {t('quran-reader:comments-count', { count: commentsCount })}
+          {commentsCount}
         </Button>
         <Button
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
-          prefix={<ShareIcon />}
           onClick={onShareClicked}
           size={ButtonSize.Small}
         >
-          {t('common:share')}
+          <CopyLinkIcon />
         </Button>
       </div>
     </div>

@@ -96,11 +96,12 @@
 
 .socialInteractionContainer {
   opacity: var(--opacity-75);
+  margin-block-start: calc(0.5 * var(--spacing-xxsmall));
 }
 .actionItemContainer {
   display: inline-flex;
   align-items: center;
-  margin-inline-end: var(--spacing-small);
+  margin-inline-end: calc(1 * var(--spacing-mega));
   opacity: var(--opacity-75);
 }
 .actionItemText {
