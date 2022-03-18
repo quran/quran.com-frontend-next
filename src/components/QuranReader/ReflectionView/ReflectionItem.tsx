@@ -215,11 +215,6 @@ const ReflectionItem = ({
           {isExpanded ? t('common:less') : t('common:more')}
         </span>
       )}
-      <div className={styles.socialStats}>
-        {t('quran-reader:likes-count', { count: likesCount })}
-        {SEPARATOR}
-        {t('quran-reader:comments-count', { count: commentsCount })}
-      </div>
       <div className={styles.socialInteractionContainer}>
         <Button
           className={styles.actionItemContainer}
@@ -228,7 +223,7 @@ const ReflectionItem = ({
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
         >
-          {t('quran-reader:like')}
+          {t('quran-reader:likes-count', { count: likesCount })}
         </Button>
         <Button
           className={styles.actionItemContainer}
@@ -237,7 +232,7 @@ const ReflectionItem = ({
           href={getQuranReflectPostCommentUrl(id)}
           size={ButtonSize.Small}
         >
-          {t('quran-reader:comment')}
+          {t('quran-reader:comments-count', { count: commentsCount })}
         </Button>
         <Button
           className={styles.actionItemContainer}

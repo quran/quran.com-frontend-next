@@ -101,6 +101,7 @@
   display: inline-flex;
   align-items: center;
   margin-inline-end: var(--spacing-small);
+  opacity: var(--opacity-75);
 }
 .actionItemText {
   margin-inline-start: var(--spacing-xxsmall);
