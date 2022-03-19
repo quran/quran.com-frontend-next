@@ -54,16 +54,7 @@ const ChapterHeader: React.FC<Props> = ({
 
   return (
     <>
-      <div
-        style={{
-          position: 'relative',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minWidth: '30rem',
-          marginTop: '2rem',
-        }}
-      >
+      <div className={styles.header}>
         <div>
           <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Mega} />
         </div>
