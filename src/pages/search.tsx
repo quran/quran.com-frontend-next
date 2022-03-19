@@ -60,7 +60,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     () => ({
       page: currentPage,
       languages: selectedLanguages,
-      query: debouncedSearchQuery,
+      q: debouncedSearchQuery,
       translations: selectedTranslations,
     }),
     [currentPage, debouncedSearchQuery, selectedLanguages, selectedTranslations],
@@ -73,8 +73,8 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
     if (router.isReady) {
-      if (router.query.query) {
-        setSearchQuery(router.query.query as string);
+      if (router.query.q) {
+        setSearchQuery(router.query.q as string);
       }
       if (router.query.page) {
         setCurrentPage(Number(router.query.page));
