@@ -86,3 +86,10 @@
     text-decoration: underline;
   }
 }
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: var(--spacing-mega);
+}
