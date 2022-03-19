@@ -18,7 +18,7 @@ const PlainVerseTextWord: React.FC<Props> = ({
   shouldShowWordByWordTranslation,
 }) => {
   return (
-    <div className={styles.plainVerseWordContainer} key={word.location}>
+    <div className={styles.plainVerseWordContainer} key={word.location} translate="no">
       {children}
       {shouldShowWordByWordTranslation && (
         <p className={styles.plainVerseWbwText}>{word?.translation?.text}</p>
