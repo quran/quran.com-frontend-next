@@ -89,6 +89,7 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
           onChange={setSearchQuery}
           placeholder={t('reciter:search-chapter')}
           fixedWidth={false}
+          shouldFlipOnRTL
         />
       </div>
 
