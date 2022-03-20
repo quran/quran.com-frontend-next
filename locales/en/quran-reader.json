@@ -2,12 +2,6 @@
     "advanced-copy": "Advanced Copy",
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",
-    "comment": "Comment",
-    "comments-count": {
-        "0": "Comment",
-        "one": "1 comment",
-        "other": "{{count}} comments"
-    },
     "copy-arabic": "Arabic text (Uthmani text)",
     "copy-footnote-q": "Also copy Footnote(s)?",
     "copy-success": "Text is copied successfully in your clipboard.",
@@ -24,12 +18,6 @@
     "go-ayah": "Go to Ayah",
     "include-translator": "Include translator name?",
     "juz-beginning": "Beginning of Juz",
-    "like": "Like",
-    "likes-count": {
-        "0": "Like",
-        "one": "1 like",
-        "other": "{{count}} likes"
-    },
     "load-more": "Load More",
     "next-juz": "Next Juz",
     "next-page": "Next page",
