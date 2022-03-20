@@ -18,7 +18,7 @@ import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
-  getVerseSelectedReflectionNavigationUrl,
+  getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils/verse';
 
@@ -63,7 +63,7 @@ const ReflectionBody: React.FC<Props> = ({
     scrollToTop();
     const newVerseNumber = String(Number(selectedVerseNumber) + 1);
     fakeNavigate(
-      getVerseSelectedReflectionNavigationUrl(
+      getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
       lang,
@@ -77,7 +77,7 @@ const ReflectionBody: React.FC<Props> = ({
     scrollToTop();
     setSelectedVerseNumber(newVerseNumber);
     fakeNavigate(
-      getVerseSelectedReflectionNavigationUrl(
+      getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
       lang,
