@@ -133,11 +133,6 @@ const QuranFontSection = () => {
     <Section>
       <Section.Title>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
-        <div className={styles.versePreviewContainer}>
-          <VersePreview />
-        </div>
-      </Section.Row>
-      <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
       <Section.Row>
@@ -172,7 +167,14 @@ const QuranFontSection = () => {
           }
         />
       </Section.Row>
-      <QuranFontSectionFooter quranFont={quranFont} />
+      <Section.Row>
+        <QuranFontSectionFooter quranFont={quranFont} />
+      </Section.Row>
+      <Section.Row>
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+      </Section.Row>
     </Section>
   );
 };
