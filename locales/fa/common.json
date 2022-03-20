@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} برای آیه فعلی موجود نیست.",
         "surah": "سوره تفسیر",
         "tafsir-desc": "آیه {{verseNumber}} {{tafsirName}} {{surahName}}",
+        "tafsirs-desc": "تفسیرهای مختلف آیات {{ayahNumber}} سوره {{surahName}} توسط تفسیرگران مورد اعتماد را بخوانید.",
         "title": "تفسیر"
     },
     "tarteel": {

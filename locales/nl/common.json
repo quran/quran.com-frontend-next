@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} is niet beschikbaar voor het huidige couplet.",
         "surah": "Tafsir Surah",
         "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
+        "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
         "title": "Tafsir"
     },
     "tarteel": {

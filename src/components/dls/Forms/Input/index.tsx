@@ -51,7 +51,7 @@ const Input: React.FC<Props> = ({
   onClearClicked,
   onChange,
   value = '',
-  shouldFlipOnRTL = false,
+  shouldFlipOnRTL = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.

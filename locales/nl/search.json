@@ -1,5 +1,8 @@
 {
     "language-filter-label": "Doorzoek alle vertalingen van een taal",
     "language-select": "Selecteer een taal",
+    "search": "Zoekopdracht",
+    "search-desc": "Doorzoek het corpus van de Heilige Koran en zijn vertalingen met behulp van een krachtige en zeer nauwkeurige meertalige zoekmachine.",
+    "search-title": "Zoeken naar ' {{searchQuery}} '",
     "translation-select": "Selecteer een vertaling"
 }

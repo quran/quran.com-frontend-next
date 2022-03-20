@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} недоступен для текущего стиха.",
         "surah": "Тафсир Сура",
         "tafsir-desc": "Прочтите {{tafsirName}} {{verseNumber}} суры {{surahName}}",
+        "tafsirs-desc": "Прочтите различные тафсиры аята {{ayahNumber}} суры {{surahName}} от доверенных ученых-тафсиров",
         "title": "Тафсир"
     },
     "tarteel": {

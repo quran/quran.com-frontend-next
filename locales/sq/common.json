@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} nuk është i disponueshëm për vargun aktual.",
         "surah": "Surja Tefsir",
         "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
+        "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
         "title": "Tefsir"
     },
     "tarteel": {

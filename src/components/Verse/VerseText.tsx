@@ -83,6 +83,7 @@ const VerseText = ({
         })}
       >
         <div
+          translate="no"
           className={classNames(styles.verseText, {
             [styles.verseTextWrap]: !isReadingMode,
             [styles.largeQuranTextLayout]: isBigTextLayout,

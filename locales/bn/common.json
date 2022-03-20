@@ -197,6 +197,7 @@
         "no-text": "বর্তমান আয়াতের জন্য {{tafsirName}} উপলব্ধ নেই৷",
         "surah": "তাফসীর সূরা",
         "tafsir-desc": "সূরা {{surahName}} {{verseNumber}} এর {{verseNumber} {{tafsirName}} আয়াতের জন্য {{tafsirName}} পড়ুন",
+        "tafsirs-desc": "বিশ্বস্ত তাফসির আলেমদের দ্বারা {{surahName}} সূরার {{surahName}} {{ayahNumber}} আয়াতের বিভিন্ন তাফসির পড়ুন",
         "title": "তাফসির"
     },
     "tarteel": {

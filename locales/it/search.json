@@ -1,5 +1,8 @@
 {
     "language-filter-label": "Cerca tutte le traduzioni di una lingua",
     "language-select": "Seleziona una lingua",
+    "search": "Ricerca",
+    "search-desc": "Cerca nel corpus del Sacro Corano e nelle sue traduzioni utilizzando un motore di ricerca multilingue potente e altamente accurato.",
+    "search-title": "Cerca ' {{searchQuery}} '",
     "translation-select": "Seleziona una traduzione"
 }

@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} غير متوفر للآية الحالية.",
         "surah": "تفسير سورة",
         "tafsir-desc": "اقرأ {{tafsirName}} عن آية {{verseNumber}} من السورة {{surahName}}",
+        "tafsirs-desc": "اقرأ العديد من التفسيرات للآية {{ayahNumber}} من سورة {{surahName}} لعلماء تفسير موثوقين",
         "title": "التفسير"
     },
     "tarteel": {
