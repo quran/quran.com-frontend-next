@@ -30,6 +30,7 @@
     "read-more-quran-reflect": "Read More on QuranReflect",
     "referencing": "Referencing",
     "reflection-disclaimer": "Reflections do not represent the opinion of Quran.com and should not be taken out of context",
+    "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
     "remove-bookmark": "Remove bookmark",
     "select-range": "Select verses range",
     "surah-beginning": "Beginning of Surah",
@@ -38,6 +39,5 @@
     "trans-change": "Change",
     "translation-by": "Translation by",
     "verses-range": "Range of verses",
-    "view-on-quran-reflect": "View on QuranReflect",
-    "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}"
+    "view-on-quran-reflect": "View on QuranReflect"
 }

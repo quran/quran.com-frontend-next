@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} não está disponível para o verso atual.",
         "surah": "Tafsir Surah",
         "tafsir-desc": "Leia {{tafsirName}} para Ayah {{verseNumber}} da Surata {{surahName}}",
+        "tafsirs-desc": "Leia vários Tafsirs de Ayah {{ayahNumber}} de Sura {{surahName}} por estudiosos Tafsir confiáveis",
         "title": "Tafsir"
     },
     "tarteel": {

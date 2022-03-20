@@ -1,5 +1,8 @@
 {
     "language-filter-label": "Bir dilin tüm çevirilerini arayın",
     "language-select": "Bir dil seç",
+    "search": "Arama",
+    "search-desc": "Güçlü ve son derece doğru çok dilli bir arama motoru kullanarak Kur'an-ı Kerim külliyatını ve çevirilerini arayın.",
+    "search-title": "' {{searchQuery}} ' için arama yapın",
     "translation-select": "Bir çeviri seçin"
 }
