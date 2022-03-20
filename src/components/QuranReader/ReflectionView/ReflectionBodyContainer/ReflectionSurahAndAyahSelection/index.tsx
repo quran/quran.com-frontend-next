@@ -6,7 +6,7 @@ import styles from './ReflectionSurahAndAyahSelection.module.scss';
 
 import SurahAndAyahSelection from 'src/components/QuranReader/TafsirView/SurahAndAyahSelection';
 import { logItemSelectionChange } from 'src/utils/eventLogger';
-import { fakeNavigate, getVerseSelectedReflectionNavigationUrl } from 'src/utils/navigation';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from 'src/utils/navigation';
 import { makeVerseKey } from 'src/utils/verse';
 
 interface Props {
@@ -29,7 +29,7 @@ const ReflectionSurahAndAyahSelection: React.FC<Props> = ({
     const newVerseNumber = '1';
     setSelectedVerseNumber(newVerseNumber); // reset verse number to 1 every time chapter changes
     fakeNavigate(
-      getVerseSelectedReflectionNavigationUrl(makeVerseKey(newChapterId, Number(newVerseNumber))),
+      getVerseReflectionNavigationUrl(makeVerseKey(newChapterId, Number(newVerseNumber))),
       lang,
     );
   };
@@ -38,7 +38,7 @@ const ReflectionSurahAndAyahSelection: React.FC<Props> = ({
     logItemSelectionChange('reflection_verse_number', newVerseNumber);
     setSelectedVerseNumber(newVerseNumber.toString());
     fakeNavigate(
-      getVerseSelectedReflectionNavigationUrl(
+      getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
       lang,
