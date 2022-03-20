@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { random } from 'lodash';
+import random from 'lodash/random';
 import range from 'lodash/range';
 
 import { getAllChaptersData, getChapterData, getRandomChapterId } from './chapter';
