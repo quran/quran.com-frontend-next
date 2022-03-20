@@ -116,6 +116,8 @@ const ReflectionBody: React.FC<Props> = ({
           reflectionText={reflection?.body}
           avatarUrl={reflection?.author?.profileImg}
           verseReferences={getVerseReferencesFromReflection(reflection)}
+          likesCount={reflection?.likes}
+          commentsCount={reflection?.commentsCount}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>

@@ -21,6 +21,7 @@ import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
@@ -118,9 +119,18 @@ const ReflectionItem = ({
   );
 
   const onShareClicked = () => {
+    logButtonClick('reflection_item_share');
     clipboardCopy(getQuranReflectPostUrl(id)).then(() =>
       toast(t('common:shared'), { status: ToastStatus.Success }),
     );
+  };
+
+  const onLikesCountClicked = () => {
+    logButtonClick('reflection_item_likes');
+  };
+
+  const onCommentsCountClicked = () => {
+    logButtonClick('reflection_item_comments');
   };
 
   return (
@@ -228,6 +238,7 @@ const ReflectionItem = ({
           newTab
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
+          onClick={onLikesCountClicked}
         >
           {likesCount}
         </Button>
@@ -238,6 +249,7 @@ const ReflectionItem = ({
           href={getQuranReflectPostCommentUrl(id)}
           newTab
           size={ButtonSize.Small}
+          onClick={onCommentsCountClicked}
         >
           {commentsCount}
         </Button>
