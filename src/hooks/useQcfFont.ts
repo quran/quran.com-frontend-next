@@ -45,7 +45,7 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
 
   // listen to changes in verses (this is due to infinite scrolling fetching more verses).
   useEffect(() => {
-    if (isFontQCF) {
+    if (isFontQCF && verses.length > 0) {
       // loop through unique page numbers of the current verses
       getPagesByVerses(verses).forEach((pageNumber) => {
         const isV1 = quranFont === QuranFont.MadaniV1;

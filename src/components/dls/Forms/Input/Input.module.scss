@@ -33,6 +33,12 @@
   }
 }
 
+.rtlInput {
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
+
 .smallContainer {
   height: var(--spacing-mega);
 }

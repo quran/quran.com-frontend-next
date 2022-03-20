@@ -137,6 +137,7 @@
         "translation": "Tradução"
     },
     "reciter": "Recitador",
+    "reciters": "Recitadores",
     "reflect": "Refletir",
     "remove": "Retirar",
     "retry": "Tentar novamente",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "Tamanho da fonte Tafsir",
         "group-message": "Você está lendo um tafsir para o grupo de versos {{from}} a {{to}}",
+        "no-text": "{{tafsirName}} não está disponível para o verso atual.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Leia {{tafsirName}} para Ayah {{verseNumber}} da Surata {{surahName}}",
+        "tafsirs-desc": "Leia vários Tafsirs de Ayah {{ayahNumber}} de Sura {{surahName}} por estudiosos Tafsir confiáveis",
         "title": "Tafsir"
     },
     "tarteel": {

@@ -137,6 +137,7 @@
         "translation": "Translation"
     },
     "reciter": "Reciter",
+    "reciters": "Reciters",
     "reflect": "Reflect",
     "remove": "Remove",
     "retry": "Retry",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "Tafsir font size",
         "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}",
+        "no-text": "{{tafsirName}} is not available for the current verse.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}",
+        "tafsirs-desc": "Read various Tafsirs of Ayah {{ayahNumber}} of Surah {{surahName}} by trusted Tafsir scholars",
         "title": "Tafsir"
     },
     "tarteel": {

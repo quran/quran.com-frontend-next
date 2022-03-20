@@ -137,6 +137,7 @@
         "translation": "ترجمه"
     },
     "reciter": "قاری",
+    "reciters": "قاریان",
     "reflect": "منعکس کنید",
     "remove": "برداشتن",
     "retry": "دوباره امتحان کنید",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "اندازه فونت تفسیر",
         "group-message": "شما در حال خواندن تفسیری برای گروه آیات {{from}} تا {{to}}",
+        "no-text": "{{tafsirName}} برای آیه فعلی موجود نیست.",
         "surah": "سوره تفسیر",
+        "tafsir-desc": "آیه {{verseNumber}} {{tafsirName}} {{surahName}}",
+        "tafsirs-desc": "تفسیرهای مختلف آیات {{ayahNumber}} سوره {{surahName}} توسط تفسیرگران مورد اعتماد را بخوانید.",
         "title": "تفسیر"
     },
     "tarteel": {

@@ -101,11 +101,14 @@ export const getVerseSelectedTafsirNavigationUrl = (
  * @param {string} verseKey
  * @returns {string}
  */
-export const getVerseSelectedReflectionNavigationUrl = (verseKey: string): string =>
+export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
 export const getQuranReflectPostUrl = (postId: number) =>
   `https://quranreflect.com/posts/${postId}`;
+
+export const getQuranReflectPostCommentUrl = (postId: number) =>
+  `https://quranreflect.com/posts/${postId}#comments`;
 
 /**
  * Get the href link to a surah.
@@ -177,7 +180,7 @@ export const getReciterNavigationUrl = (reciterId: string): string => `/reciters
  * @param {string} chapterId
  * @returns {string} recitationPageUrl
  */
-export const getRecitationNavigationUrl = (reciterId: string, chapterId: string) =>
+export const getReciterChapterNavigationUrl = (reciterId: string, chapterId: string) =>
   `/reciters/${reciterId}/${chapterId}`;
 
 /**
@@ -202,6 +205,10 @@ export const getProductUpdatesUrl = (id = ''): string =>
 export const getQuranReflectVerseUrl = (verseKey: string) => {
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+};
+
+export const getQuranReflectAuthorUrl = (username: string) => {
+  return `https://quranreflect.com/${username}`;
 };
 
 /**

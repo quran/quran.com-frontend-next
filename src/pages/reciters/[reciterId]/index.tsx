@@ -17,18 +17,14 @@ import ChaptersList from 'src/components/Reciter/ChaptersList';
 import ReciterInfo from 'src/components/Reciter/ReciterInfo';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
-import { getLanguageAlternates } from 'src/utils/locale';
-import {
-  getCanonicalUrl,
-  getReciterNavigationUrl,
-  getSurahInfoNavigationUrl,
-} from 'src/utils/navigation';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+import { getCanonicalUrl, getReciterNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
 const filterChapters = (chapters, searchQuery: string) => {
   const fuse = new Fuse(chapters, {
-    keys: ['transliteratedName'],
+    keys: ['transliteratedName', 'id', 'localizedId'],
     threshold: 0.3,
   });
 
@@ -42,8 +38,8 @@ const filterChapters = (chapters, searchQuery: string) => {
 
 type ReciterPageProps = { selectedReciter: Reciter };
 const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
-  const allChapterData = getAllChaptersData();
   const { t, lang } = useTranslation();
+  const allChapterData = getAllChaptersData(lang);
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -54,10 +50,11 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
       Object.entries(allChapterData).map(([chapterId, chapter]) => {
         return {
           id: chapterId.toString(),
+          localizedId: toLocalizedNumber(Number(chapterId), lang),
           ...chapter,
         };
       }),
-    [allChapterData],
+    [allChapterData, lang],
   );
 
   const filteredChapters = useMemo(
@@ -65,17 +62,17 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
     [searchQuery, allChaptersWithId],
   );
 
-  const navigationUrl = getSurahInfoNavigationUrl(
-    getReciterNavigationUrl(selectedReciter.id.toString()),
-  );
+  const navigationUrl = getReciterNavigationUrl(selectedReciter.id.toString());
 
   return (
     <div className={classNames(layoutStyle.pageContainer)}>
       <NextSeoWrapper
-        title={selectedReciter?.name}
+        title={selectedReciter?.translatedName?.name}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={selectedReciter?.bio}
+        description={t('reciter:reciter-desc', {
+          reciterName: selectedReciter?.translatedName?.name,
+        })}
       />
 
       <div className={pageStyle.reciterInfoContainer}>
@@ -106,11 +103,11 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const reciterId = params.reciterId as string;
 
-    const reciterData = await getReciterData(reciterId);
+    const reciterData = await getReciterData(reciterId, locale);
 
     return {
       props: {

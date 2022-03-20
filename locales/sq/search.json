@@ -1,5 +1,8 @@
 {
     "language-filter-label": "Kërkoni të gjitha përkthimet e një gjuhe",
     "language-select": "Zgjidhni një gjuhë",
+    "search": "Kërko",
+    "search-desc": "Kërkoni korpusin e Kuranit të Shenjtë dhe përkthimet e tij duke përdorur një motor kërkimi shumëgjuhësh të fuqishëm dhe shumë të saktë.",
+    "search-title": "Kërko për \" {{searchQuery}} \"",
     "translation-select": "Zgjidhni një përkthim"
 }

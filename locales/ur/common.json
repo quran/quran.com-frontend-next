@@ -137,6 +137,7 @@
         "translation": "ترجمہ"
     },
     "reciter": "تلاوت کرنے والا",
+    "reciters": "تلاوت کرنے والے",
     "reflect": "عکاسی کرنا",
     "remove": "دور",
     "retry": "دوبارہ کوشش کریں۔",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "تفسیر فونٹ سائز",
         "group-message": "{{to}} {{from}} ایک تفسیر پڑھ رہے ہیں",
+        "no-text": "موجودہ آیت کے لیے {{tafsirName}} دستیاب نہیں ہے۔",
         "surah": "تفسیر سورہ",
+        "tafsir-desc": "سورہ {{surahName} {{tafsirName}} کی آیت {{verseNumber}} کے لیے {{surahName}}",
+        "tafsirs-desc": "سورہ {{surahName}} سورہ {{ayahNumber}} کی مختلف تفسیریں معتبر علماء کے ذریعہ پڑھیں",
         "title": "تفسیر"
     },
     "tarteel": {

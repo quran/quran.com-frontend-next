@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  direction: ltr;
   padding: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
   @include breakpoints.tablet {

@@ -26,6 +26,8 @@ import {
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
+import { getLanguageAlternates } from 'src/utils/locale';
+import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -39,7 +41,7 @@ type SearchProps = {
 };
 
 const Search: NextPage<SearchProps> = ({ languages, translations }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -58,7 +60,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     () => ({
       page: currentPage,
       languages: selectedLanguages,
-      query: debouncedSearchQuery,
+      q: debouncedSearchQuery,
       translations: selectedTranslations,
     }),
     [currentPage, debouncedSearchQuery, selectedLanguages, selectedTranslations],
@@ -71,8 +73,12 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
     if (router.isReady) {
-      if (router.query.query) {
-        setSearchQuery(router.query.query as string);
+      if (router.query.q || router.query.query) {
+        let query = router.query.q as string;
+        if (router.query.query) {
+          query = router.query.query as string;
+        }
+        setSearchQuery(query);
       }
       if (router.query.page) {
         setCurrentPage(Number(router.query.page));
@@ -182,9 +188,22 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     setSearchQuery(keyword);
   }, []);
 
+  const navigationUrl = '/search';
+
   return (
     <>
-      <NextSeoWrapper title={debouncedSearchQuery} />
+      <NextSeoWrapper
+        title={
+          debouncedSearchQuery !== ''
+            ? t('search:search-title', {
+                searchQuery: debouncedSearchQuery,
+              })
+            : t('search:search')
+        }
+        description={t('search:search-desc')}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+      />
       <div className={styles.pageContainer}>
         <p className={styles.header}>{t('search.title')}</p>
         <Input

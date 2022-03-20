@@ -1,8 +1,7 @@
-import { useEffect, useRef, useImperativeHandle, ForwardedRef } from 'react';
+import { useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
@@ -10,7 +9,6 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
-import { fakeNavigate } from 'src/utils/navigation';
 
 type ContentModalProps = {
   isOpen?: boolean;
@@ -18,7 +16,6 @@ type ContentModalProps = {
   onEscapeKeyDown?: () => void;
   children: React.ReactNode;
   hasCloseButton?: boolean;
-  url?: string;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
   contentClassName?: string;
@@ -31,13 +28,10 @@ const ContentModal = ({
   onEscapeKeyDown,
   hasCloseButton,
   children,
-  url,
   header,
   innerRef,
   contentClassName,
 }: ContentModalProps) => {
-  const router = useRouter();
-
   const overlayRef = useRef<HTMLDivElement>();
 
   useImperativeHandle(innerRef, () => ({
@@ -45,20 +39,6 @@ const ContentModal = ({
       if (overlayRef.current) overlayRef.current.scrollTop = 0;
     },
   }));
-
-  useEffect(() => {
-    if (!url) return null;
-    if (isOpen) fakeNavigate(url, router.locale);
-    else fakeNavigate(router.asPath, router.locale);
-
-    return () => {
-      fakeNavigate(router.asPath, router.locale);
-    };
-
-    // we only want to run this effect when `isOpen` changed, not when `url` changed
-    // this is important because sometime the url props is changed, but we don't want to trigger `fakeNavigate` again.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
 
   return (
     <Dialog.Root open={isOpen}>

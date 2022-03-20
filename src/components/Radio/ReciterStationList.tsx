@@ -68,7 +68,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
             imgSrc={makeCDNUrl(reciter.profilePicture)}
             key={reciter.id}
             onImgClick={onClick}
-            title={reciter.name}
+            title={reciter.translatedName.name}
             description={reciter.style.name}
             size={CardSize.Medium}
           />

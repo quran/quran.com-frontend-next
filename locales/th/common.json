@@ -137,6 +137,7 @@
         "translation": "การแปล"
     },
     "reciter": "ผู้อ่าน",
+    "reciters": "ผู้อ่าน",
     "reflect": "สะท้อน",
     "remove": "ลบ",
     "retry": "ลองอีกครั้ง",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "ขนาดตัวอักษร Tafsir",
         "group-message": "คุณกำลังอ่าน tafsir สำหรับกลุ่มโองการ {{from}} ถึง {{to}}",
+        "no-text": "{{tafsirName}} ไม่สามารถใช้ได้สำหรับกลอนปัจจุบัน",
         "surah": "ตัฟซีร ซูเราะฮฺ",
+        "tafsir-desc": "อ่าน {{tafsirName}} สำหรับ Ayah {{verseNumber}} ของ Surah {{surahName}}",
+        "tafsirs-desc": "อ่าน Tafsirs ต่างๆของ Ayah {{ayahNumber}} ของ Surah {{surahName}} โดยนักวิชาการ Tafsir ที่เชื่อถือได้",
         "title": "ตัฟซีร"
     },
     "tarteel": {

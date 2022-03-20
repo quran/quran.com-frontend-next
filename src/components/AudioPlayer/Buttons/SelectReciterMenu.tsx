@@ -39,7 +39,7 @@ const SelectReciterMenu = ({ onBack }) => {
                 onBack();
               }}
             >
-              {reciter.name}
+              {reciter.translatedName.name}
             </PopoverMenu.Item>
           ))}
         </div>

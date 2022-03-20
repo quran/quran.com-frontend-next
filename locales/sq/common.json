@@ -89,7 +89,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Fonti i Kuranit",
         "tajweed": "Texhvidi",
-        "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0> këtu <\/0>",
+        "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu<\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Osmani"
     },
@@ -137,6 +137,7 @@
         "translation": "Përkthimi"
     },
     "reciter": "Recitues",
+    "reciters": "Recituesit",
     "reflect": "Pasqyrim",
     "remove": "Hiq",
     "retry": "Provo sërish",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "Madhësia e shkronjave Tafsir",
         "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
+        "no-text": "{{tafsirName}} nuk është i disponueshëm për vargun aktual.",
         "surah": "Surja Tefsir",
+        "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
+        "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
         "title": "Tefsir"
     },
     "tarteel": {

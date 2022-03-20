@@ -17,25 +17,29 @@ import Reciter from 'types/Reciter';
 type RadioPageProps = {
   reciters: Reciter[];
 };
+
+const NAVIGATION_URL = '/radio';
+
 const RadioPage = ({ reciters }: RadioPageProps) => {
-  const { t, lang } = useTranslation('');
+  const { t, lang } = useTranslation('radio');
   return (
     <div className={pageStyle.pageContainer}>
       <NextSeoWrapper
         title={t('common:quran-radio')}
-        url={getCanonicalUrl(lang, '')}
-        languageAlternates={getLanguageAlternates('')}
+        canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
+        languageAlternates={getLanguageAlternates(NAVIGATION_URL)}
+        description={t('radio-desc')}
       />
       <div className={radioStyle.ribbon} />
       <div className={pageStyle.flow}>
         <div className={classNames(pageStyle.flowItem, radioStyle.title, radioStyle.titleOnRibbon)}>
-          {t('radio:curated-stations')}
+          {t('curated-stations')}
         </div>
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
           <CuratedStationList />
         </div>
         <div className={classNames(pageStyle.flowItem, radioStyle.title)}>
-          {t('radio:reciter-stations')}
+          {t('reciter-stations')}
         </div>
         <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
           <ReciterStationList reciters={reciters} />

@@ -89,7 +89,7 @@
         "qpc_uthmani_hafs": "QPC উসমানী হাফস",
         "quran-font": "কুরআন হরফ",
         "tajweed": "তাজবীদ",
-        "tajweed-desc": "তাজবীদ হরফ একটি তাজবীদ রঙিন মুশাফ দেখায়। আপনি তাজউইদের রঙের নিয়ম <0> এখানে <\/0>",
+        "tajweed-desc": "তাজবীদ হরফ একটি তাজবীদ রঙিন মুশাফ দেখায়। আপনি তাজউইদের রঙের নিয়ম <0>এখানে<\/0>",
         "text_indopak": "ইন্দোপাক",
         "text_uthmani": "উসমানী"
     },
@@ -137,6 +137,7 @@
         "translation": "অনুবাদ"
     },
     "reciter": "আবৃত্তিকারী",
+    "reciters": "আবৃত্তিকারী",
     "reflect": "প্রতিফলিত করা",
     "remove": "অপসারণ",
     "retry": "পুনরায় চেষ্টা করা",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "তাফসির ফন্ট সাইজ",
         "group-message": "{{from}} {{to}} আয়াতের গ্রুপের জন্য একটি তাফসির পড়ছেন",
+        "no-text": "বর্তমান আয়াতের জন্য {{tafsirName}} উপলব্ধ নেই৷",
         "surah": "তাফসীর সূরা",
+        "tafsir-desc": "সূরা {{surahName}} {{verseNumber}} এর {{verseNumber} {{tafsirName}} আয়াতের জন্য {{tafsirName}} পড়ুন",
+        "tafsirs-desc": "বিশ্বস্ত তাফসির আলেমদের দ্বারা {{surahName}} সূরার {{surahName}} {{ayahNumber}} আয়াতের বিভিন্ন তাফসির পড়ুন",
         "title": "তাফসির"
     },
     "tarteel": {

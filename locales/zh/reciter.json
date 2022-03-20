@@ -2,5 +2,7 @@
     "copy-link": "复制链接",
     "quran-reciters": "古兰经诵读家",
     "read": "读",
+    "reciter-desc": "聆听并下载{{reciterName}}的优美古兰经朗诵。",
+    "reciters-desc": "聆听并下载各种朗诵者的优美的古兰经朗诵。",
     "search-chapter": "搜索章节"
 }

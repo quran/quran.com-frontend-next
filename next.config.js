@@ -15,6 +15,7 @@ const nextTranslate = require('next-translate');
 const securityHeaders = require('./configs/SecurityHeaders.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const config = {
   experimental: {
     outputStandalone: true,
@@ -24,7 +25,7 @@ const config = {
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
   pwa: {
-    disable: isDev,
+    disable: !isProduction,
     dest: 'public',
     runtimeCaching,
     publicExcludes: [

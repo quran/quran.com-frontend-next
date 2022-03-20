@@ -137,6 +137,7 @@
         "translation": "Terjemahan"
     },
     "reciter": "Qari",
+    "reciters": "qari",
     "reflect": "Renungkan",
     "remove": "Keluarkan",
     "retry": "Cuba lagi (Retry)",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "Saiz fon Tafsir",
         "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat dari {{from}} hingga {{to}}",
+        "no-text": "{{tafsirName}} tidak tersedia untuk ayat semasa.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Baca {{tafsirName}} untuk Ayah {{verseNumber}} Surah {{surahName}}",
+        "tafsirs-desc": "Baca pelbagai Tafsir Ayah {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir yang dipercayai",
         "title": "Tafsir"
     },
     "tarteel": {

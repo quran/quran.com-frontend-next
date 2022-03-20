@@ -42,7 +42,7 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
         <div className={styles.itemContainer}>
           <div className={styles.quranTextContainer}>
             <p className={styles.verseKey}>{localizedVerseKey}</p>
-            <div className={styles.quranTextResult}>
+            <div className={styles.quranTextResult} translate="no">
               {result.words.map((word, index) => {
                 return (
                   <QuranWord

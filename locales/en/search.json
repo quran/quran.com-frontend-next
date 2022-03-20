@@ -1,5 +1,8 @@
 {
     "language-filter-label": "Search all translations of a language",
     "language-select": "Select a language",
+    "search": "Search",
+    "search-desc": "Search the corpus of the Holy Quran and its translations using a powerful and highly accurate multi-lingual search engine.",
+    "search-title": "Search for '{{searchQuery}}'",
     "translation-select": "Select a translation"
 }

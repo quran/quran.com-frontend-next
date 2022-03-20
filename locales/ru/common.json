@@ -137,6 +137,7 @@
         "translation": "Перевод"
     },
     "reciter": "Чтец",
+    "reciters": "Чтецы",
     "reflect": "Отражать",
     "remove": "Удалять",
     "retry": "Повторить",
@@ -193,7 +194,10 @@
     "tafsir": {
         "font-size": "Размер шрифта тафсира",
         "group-message": "Вы читаете тафсир для группы стихов {{from}} до {{to}}",
+        "no-text": "{{tafsirName}} недоступен для текущего стиха.",
         "surah": "Тафсир Сура",
+        "tafsir-desc": "Прочтите {{tafsirName}} {{verseNumber}} суры {{surahName}}",
+        "tafsirs-desc": "Прочтите различные тафсиры аята {{ayahNumber}} суры {{surahName}} от доверенных ученых-тафсиров",
         "title": "Тафсир"
     },
     "tarteel": {

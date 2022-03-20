@@ -7,15 +7,19 @@ import styles from './[verseId]/tafsirs.module.scss';
 
 import { getVerseReflections } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import ReflectionBody from 'src/components/QuranReader/ReflectionView/ReflectionBody';
+import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import Error from 'src/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { scrollWindowToTop } from 'src/utils/navigation';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+import {
+  getCanonicalUrl,
+  getVerseReflectionNavigationUrl,
+  scrollWindowToTop,
+} from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -39,21 +43,29 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   chapterId,
   initialData,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('quran-reader');
   if (hasError) {
     return <Error statusCode={500} />;
   }
 
+  const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
+
   return (
     <>
       <NextSeoWrapper
-        title={`${t('reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
+        title={`${t('common:reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
           lang,
         )}`}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+        description={t('reflections-desc', {
+          ayahNumber: verseNumber,
+          surahName: chapter.chapter.transliteratedName,
+        })}
       />
       <div className={styles.tafsirContainer}>
-        <ReflectionBody
+        <ReflectionBodyContainer
           scrollToTop={scrollWindowToTop}
           initialChapterId={chapterId}
           initialVerseNumber={verseNumber.toString()}

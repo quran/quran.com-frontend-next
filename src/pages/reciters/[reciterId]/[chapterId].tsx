@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -16,18 +17,24 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
-import { getChapterAudioData, getReciterData } from 'src/api';
+import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
 import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getSurahNavigationUrl } from 'src/utils/navigation';
+import {
+  getCanonicalUrl,
+  getReciterChapterNavigationUrl,
+  getSurahNavigationUrl,
+} from 'src/utils/navigation';
 import { getCurrentPath } from 'src/utils/url';
+import { isValidChapterId } from 'src/utils/validator';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
@@ -36,7 +43,7 @@ type ShareRecitationPageProps = {
   selectedChapter: Chapter;
 };
 const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
   const router = useRouter();
@@ -86,63 +93,81 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
     isAudioPlaying && currentAudioData.chapterId === Number(selectedChapter.id);
 
   return (
-    <div className={classNames(layoutStyle.flow)}>
-      <div className={classNames(layoutStyle.flowItem, styles.container)}>
-        <img
-          className={styles.reciterImage}
-          alt={selectedReciter.name}
-          src={makeCDNUrl(selectedReciter.profilePicture)}
-        />
-        <div>
-          <div className={styles.chapterName}>
-            {selectedChapter.id}. {selectedChapter.transliteratedName}
+    <>
+      <NextSeoWrapper
+        title={`${selectedReciter.translatedName.name} - ${selectedChapter.transliteratedName}`}
+        description={t('reciter:reciter-chapter-desc', {
+          surahName: selectedChapter.transliteratedName,
+          reciterName: selectedReciter.translatedName.name,
+        })}
+        canonical={getCanonicalUrl(
+          lang,
+          getReciterChapterNavigationUrl(selectedReciter.id.toString(), selectedChapter.slug),
+        )}
+      />
+      <div className={classNames(layoutStyle.flow)}>
+        <div className={classNames(layoutStyle.flowItem, styles.container)}>
+          <img
+            className={styles.reciterImage}
+            alt={selectedReciter.translatedName.name}
+            src={makeCDNUrl(selectedReciter.profilePicture)}
+          />
+          <div>
+            <div className={styles.chapterName}>
+              {selectedChapter.id}. {selectedChapter.transliteratedName}
+            </div>
+            <div className={styles.reciterName}>{selectedReciter.translatedName.name}</div>
           </div>
-          <div className={styles.reciterName}>{selectedReciter.name}</div>
-        </div>
-        <div className={styles.actionsContainer}>
-          {isCurrentlyPlayingThisChapter ? (
-            <Button onClick={() => triggerPauseAudio()} prefix={<PauseIcon />}>
-              {t('common:audio.player.pause-audio')}
-            </Button>
-          ) : (
-            <Button
-              className={styles.playButton}
-              onClick={onPlayAudioClicked}
-              prefix={<PlayIcon />}
-            >
-              {t('common:audio.player.play-audio')}
-            </Button>
-          )}
+          <div className={styles.actionsContainer}>
+            {isCurrentlyPlayingThisChapter ? (
+              <Button
+                onClick={() => triggerPauseAudio()}
+                prefix={<PauseIcon />}
+                className={styles.playButton}
+              >
+                {t('common:audio.player.pause-audio')}
+              </Button>
+            ) : (
+              <Button
+                className={styles.playButton}
+                onClick={onPlayAudioClicked}
+                prefix={<PlayIcon />}
+                shouldFlipOnRTL={false}
+              >
+                {t('common:audio.player.play-audio')}
+              </Button>
+            )}
 
-          <div className={styles.secondaryActionsContainer}>
-            <Button
-              className={styles.secondaryAction}
-              onClick={onReadClicked}
-              prefix={<ReaderIcon />}
-              type={ButtonType.Secondary}
-            >
-              {t('reciter:read')}
-            </Button>
-            <Button
-              className={styles.secondaryAction}
-              onClick={onCopyLinkClicked}
-              prefix={<CopyIcon />}
-              type={ButtonType.Secondary}
-            >
-              {t('reciter:copy-link')}
-            </Button>
-            <Button
-              className={styles.secondaryAction}
-              onClick={onDownloadClicked}
-              prefix={isDownloadingAudio ? <Spinner /> : <DownloadIcon />}
-              type={ButtonType.Secondary}
-            >
-              {t('common:audio.player.download')}
-            </Button>
+            <div className={styles.secondaryActionsContainer}>
+              <Button
+                className={styles.secondaryAction}
+                onClick={onReadClicked}
+                prefix={<ReaderIcon />}
+                type={ButtonType.Secondary}
+              >
+                {t('reciter:read')}
+              </Button>
+              <Button
+                className={styles.secondaryAction}
+                onClick={onCopyLinkClicked}
+                prefix={<CopyIcon />}
+                type={ButtonType.Secondary}
+              >
+                {t('reciter:copy-link')}
+              </Button>
+              <Button
+                className={styles.secondaryAction}
+                onClick={onDownloadClicked}
+                prefix={isDownloadingAudio ? <Spinner /> : <DownloadIcon />}
+                type={ButtonType.Secondary}
+              >
+                {t('common:audio.player.download')}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -151,9 +176,19 @@ export default RecitationPage;
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const reciterId = params.reciterId as string;
-    const chapterId = params.chapterId as string;
+    let chapterId = params.chapterId as string;
+    const isValidId = isValidChapterId(chapterId);
+    // if it's not a valid number or a number that exceed 114 or below 1
+    if (!isValidId) {
+      const sluggedChapterId = await getChapterIdBySlug(chapterId, locale);
+      // if it's not a valid number nor a valid slug
+      if (!sluggedChapterId) {
+        return { notFound: true };
+      }
+      chapterId = sluggedChapterId;
+    }
 
-    const reciterData = await getReciterData(reciterId);
+    const reciterData = await getReciterData(reciterId, locale);
     const chapterData = await getChapterData(chapterId, locale);
 
     if (!reciterData || !chapterData) {

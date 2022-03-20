@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
@@ -11,8 +12,12 @@ import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { scrollWindowToTop } from 'src/utils/navigation';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+import {
+  getCanonicalUrl,
+  getVerseSelectedTafsirNavigationUrl,
+  scrollWindowToTop,
+} from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -43,13 +48,25 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
     return <Error statusCode={500} />;
   }
 
+  const navigationUrl = getVerseSelectedTafsirNavigationUrl(
+    chapterId,
+    Number(verseNumber),
+    tafsirData.tafsir.slug,
+  );
+  const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
   return (
     <>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
-          Number(verseNumber),
-          lang,
-        )}`}
+        title={`${t('tafsir.surah')} ${
+          chapter.chapter.transliteratedName
+        } - ${localizedVerseNumber}`}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        description={t('tafsir.tafsir-desc', {
+          verseNumber: localizedVerseNumber,
+          tafsirName: tafsirData.tafsir.translatedName.name,
+          surahName: chapter.chapter.transliteratedName,
+        })}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
@@ -89,6 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       verseKey,
       quranFont,
       mushafLines,
+      locale,
     );
     return {
       props: {
