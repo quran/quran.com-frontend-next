@@ -39,7 +39,8 @@
 .bismillahContainer {
   display: flex;
   justify-content: center;
-  margin-block: var(--spacing-mega);
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: calc(1.5 * var(--spacing-mega));
 }
 .translatedName {
   font-weight: var(--font-weight-bold);
@@ -92,4 +93,10 @@
   justify-content: center;
   align-items: center;
   margin-block-start: var(--spacing-mega);
+}
+
+.chapterIconContainer {
+  // a hack to center the surah name, because the font width is not correct
+  // leave a lot of empty space on the left
+  margin-inline-start: 15px;
 }

@@ -55,7 +55,7 @@ const ChapterHeader: React.FC<Props> = ({
   return (
     <>
       <div className={styles.header}>
-        <div>
+        <div className={styles.chapterIconContainer}>
           <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Mega} />
         </div>
       </div>
