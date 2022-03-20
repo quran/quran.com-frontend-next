@@ -1,5 +1,8 @@
 {
     "language-filter-label": "Cari semua terjemahan bahasa",
     "language-select": "Pilih bahasa",
+    "search": "Cari",
+    "search-desc": "Cari korpus Al-Quran dan terjemahannya menggunakan enjin carian pelbagai bahasa yang berkuasa dan sangat tepat.",
+    "search-title": "Cari ' {{searchQuery}} '",
     "translation-select": "Pilih terjemahan"
 }

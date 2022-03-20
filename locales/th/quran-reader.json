@@ -30,6 +30,7 @@
     "read-more-quran-reflect": "อ่านเพิ่มเติมเกี่ยวกับคัมภีร์กุรอานสะท้อน",
     "referencing": "อ้างอิง",
     "reflection-disclaimer": "การไตร่ตรองไม่ได้เป็นตัวแทนของความคิดเห็นของ Quran.com และไม่ควรนำออกจากบริบท",
+    "reflections-desc": "อ่านและแบ่งปันการสะท้อนอัลกุรอานของ Ayah {{ayahNumber}} ของ Surah {{surahName}}",
     "remove-bookmark": "ลบบุ๊คมาร์ค",
     "select-range": "เลือกช่วงโองการ",
     "surah-beginning": "จุดเริ่มต้นของ Surah",

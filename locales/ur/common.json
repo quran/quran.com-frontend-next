@@ -197,6 +197,7 @@
         "no-text": "موجودہ آیت کے لیے {{tafsirName}} دستیاب نہیں ہے۔",
         "surah": "تفسیر سورہ",
         "tafsir-desc": "سورہ {{surahName} {{tafsirName}} کی آیت {{verseNumber}} کے لیے {{surahName}}",
+        "tafsirs-desc": "سورہ {{surahName}} سورہ {{ayahNumber}} کی مختلف تفسیریں معتبر علماء کے ذریعہ پڑھیں",
         "title": "تفسیر"
     },
     "tarteel": {

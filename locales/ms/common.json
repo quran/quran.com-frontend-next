@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}} tidak tersedia untuk ayat semasa.",
         "surah": "Tafsir Surah",
         "tafsir-desc": "Baca {{tafsirName}} untuk Ayah {{verseNumber}} Surah {{surahName}}",
+        "tafsirs-desc": "Baca pelbagai Tafsir Ayah {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir yang dipercayai",
         "title": "Tafsir"
     },
     "tarteel": {

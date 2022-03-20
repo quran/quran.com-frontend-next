@@ -197,6 +197,7 @@
         "no-text": "{{tafsirName}}不适用于当前经文。",
         "surah": "Tafsir Surah",
         "tafsir-desc": "阅读{{tafsirName}}以了解 Surah {{surahName} {{verseNumber}}的{{surahName}}",
+        "tafsirs-desc": "阅读由值得信赖的 Tafsir 学者撰写的各种 Ayah {{ayahNumber}} of Surah {{surahName}}的 Tafsirs",
         "title": "经注"
     },
     "tarteel": {
