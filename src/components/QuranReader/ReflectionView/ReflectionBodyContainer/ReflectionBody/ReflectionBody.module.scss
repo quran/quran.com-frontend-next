@@ -1,5 +1,3 @@
-@use "src/styles/breakpoints";
-
 .separatorContainer {
   margin-block: var(--spacing-large);
 }
@@ -14,11 +12,6 @@
 .readMoreButtonContainer {
   display: flex;
   justify-content: center;
-}
-.surahSelectionContainer {
-  @include breakpoints.tablet {
-    padding-block-end: var(--spacing-medium);
-  }
 }
 
 .endOfScrollActionsContainer {

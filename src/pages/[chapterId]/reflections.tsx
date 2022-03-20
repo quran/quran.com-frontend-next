@@ -7,7 +7,7 @@ import styles from './[verseId]/tafsirs.module.scss';
 
 import { getVerseReflections } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import ReflectionBody from 'src/components/QuranReader/ReflectionView/ReflectionBody';
+import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import Error from 'src/pages/_error';
 import {
   getQuranReaderStylesInitialState,
@@ -53,7 +53,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
         )}`}
       />
       <div className={styles.tafsirContainer}>
-        <ReflectionBody
+        <ReflectionBodyContainer
           scrollToTop={scrollWindowToTop}
           initialChapterId={chapterId}
           initialVerseNumber={verseNumber.toString()}
