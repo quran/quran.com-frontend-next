@@ -137,7 +137,14 @@ const ReflectionItem = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+          <Link
+            newTab
+            href={getQuranReflectAuthorUrl(authorUsername)}
+            variant={LinkVariant.Primary}
+            className={styles.author}
+          >
+            <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+          </Link>
           <div>
             <Link
               newTab
