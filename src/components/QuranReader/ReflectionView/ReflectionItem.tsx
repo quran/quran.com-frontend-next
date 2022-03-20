@@ -3,8 +3,12 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
+import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
+import ChatIcon from '../../../../public/icons/chat.svg';
+import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
+import LoveIcon from '../../../../public/icons/love.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import VerifiedIcon from '../../../../public/icons/verified.svg';
 
@@ -13,11 +17,17 @@ import styles from './ReflectionItem.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
+import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getQuranReflectAuthorUrl, getQuranReflectPostUrl } from 'src/utils/navigation';
+import {
+  getQuranReflectPostCommentUrl,
+  getQuranReflectAuthorUrl,
+  getQuranReflectPostUrl,
+} from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
@@ -37,6 +47,8 @@ type ReflectionItemProps = {
   reflectionText: string;
   isAuthorVerified: boolean;
   verseReferences?: VerseReference[];
+  likesCount?: number;
+  commentsCount?: number;
 };
 
 const SEPARATOR = ' · ';
@@ -51,7 +63,10 @@ const ReflectionItem = ({
   reflectionText,
   isAuthorVerified,
   verseReferences,
+  likesCount,
+  commentsCount,
 }: ReflectionItemProps) => {
+  const toast = useToast();
   const [isExpanded, setIsExpanded] = useState(false);
   const { t, lang } = useTranslation();
   const formattedDate = formatDateRelatively(new Date(date), lang);
@@ -103,6 +118,21 @@ const ReflectionItem = ({
     [t],
   );
 
+  const onShareClicked = () => {
+    logButtonClick('reflection_item_share');
+    clipboardCopy(getQuranReflectPostUrl(id)).then(() =>
+      toast(t('common:shared'), { status: ToastStatus.Success }),
+    );
+  };
+
+  const onLikesCountClicked = () => {
+    logButtonClick('reflection_item_likes');
+  };
+
+  const onCommentsCountClicked = () => {
+    logButtonClick('reflection_item_comments');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -139,7 +169,7 @@ const ReflectionItem = ({
                     <span className={styles.referencedVersesPrefix}>
                       {t('quran-reader:referencing')}{' '}
                     </span>
-                    <span className={styles.verseReferencesPrefix}>{referredVerseText}</span>
+                    <span className={styles.verseReferences}>{referredVerseText}</span>
                   </span>
                 </>
               )}
@@ -200,6 +230,38 @@ const ReflectionItem = ({
           {isExpanded ? t('common:less') : t('common:more')}
         </span>
       )}
+      <div className={styles.socialInteractionContainer}>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          href={getQuranReflectPostUrl(id)}
+          newTab
+          prefix={<LoveIcon />}
+          size={ButtonSize.Small}
+          onClick={onLikesCountClicked}
+        >
+          {likesCount}
+        </Button>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          prefix={<ChatIcon />}
+          href={getQuranReflectPostCommentUrl(id)}
+          newTab
+          size={ButtonSize.Small}
+          onClick={onCommentsCountClicked}
+        >
+          {commentsCount}
+        </Button>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          onClick={onShareClicked}
+          size={ButtonSize.Small}
+        >
+          <CopyLinkIcon />
+        </Button>
+      </div>
     </div>
   );
 };

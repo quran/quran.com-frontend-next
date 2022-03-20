@@ -93,3 +93,22 @@
   opacity: var(--opacity-75);
   text-transform: capitalize;
 }
+
+.socialInteractionContainer {
+  opacity: var(--opacity-75);
+  margin-block-start: calc(0.5 * var(--spacing-xxsmall));
+}
+.actionItemContainer {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-end: var(--spacing-large);
+  opacity: var(--opacity-75);
+}
+.actionItemText {
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.socialStats {
+  margin-block-start: var(--spacing-xxsmall);
+  opacity: var(--opacity-75);
+}

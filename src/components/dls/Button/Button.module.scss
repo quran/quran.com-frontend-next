@@ -121,6 +121,16 @@
   --themed-bg: var(--color-text-faded);
 }
 
+.compact {
+  padding-inline: 0;
+  background-color: transparent;
+  color: var(--themed-bg);
+  border: none;
+  &:hover {
+    opacity: var(--opacity-50);
+  }
+}
+
 // suffix, prefix and content contaniner
 .suffix {
   display: flex;
