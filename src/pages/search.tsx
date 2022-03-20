@@ -212,7 +212,6 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
           disabled={isSearching}
           placeholder={t('search.title')}
           fixedWidth={false}
-          shouldFlipOnRTL
         />
         <p className={styles.filtersHeader}>{t('search.filters')}</p>
         <div className={styles.filtersContainer}>

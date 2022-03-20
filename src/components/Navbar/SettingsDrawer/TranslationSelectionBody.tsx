@@ -113,7 +113,6 @@ const TranslationSelectionBody = () => {
           onChange={setSearchQuery}
           placeholder={t('settings.search-translations')}
           fixedWidth={false}
-          shouldFlipOnRTL
         />
       </div>
       <DataFetcher

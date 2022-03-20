@@ -62,7 +62,6 @@ const SettingsReciter = () => {
           onChange={setSearchQuery}
           placeholder={t('settings.search-reciter')}
           fixedWidth={false}
-          shouldFlipOnRTL
         />
       </div>
       <DataFetcher
