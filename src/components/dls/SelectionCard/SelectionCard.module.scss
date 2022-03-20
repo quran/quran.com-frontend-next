@@ -16,6 +16,9 @@ $iconSize: calc(1.5 * var(--spacing-medium));
   @include theme.light {
     background-color: var(--color-background-alternative-faded);
   }
+  @include theme.sepia {
+    background-color: var(--color-background-alternative-faded);
+  }
 }
 
 .label {

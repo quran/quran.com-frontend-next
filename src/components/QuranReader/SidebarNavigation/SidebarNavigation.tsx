@@ -3,13 +3,12 @@ import { useRef } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import IconClose from '../../../../public/icons/close.svg';
 
 import styles from './SidebarNavigation.module.scss';
-import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
+import SidebarNavigationSelections from './SidebarNavigationSelections';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
@@ -24,16 +23,6 @@ import {
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
-
-const PageSelection = dynamic(() => import('./PageSelection'), {
-  loading: SidebarSelectionSkeleton,
-});
-const SurahSelection = dynamic(() => import('./SurahSelection'), {
-  loading: SidebarSelectionSkeleton,
-});
-const JuzSelection = dynamic(() => import('./JuzSelection'), {
-  loading: SidebarSelectionSkeleton,
-});
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
@@ -104,9 +93,10 @@ const SidebarNavigation = () => {
         <KeyboardInput meta keyboardKey="K" />
       </p>
       <div className={styles.contentContainer}>
-        {selectedNavigationItem === NavigationItem.Surah && <SurahSelection />}
-        {selectedNavigationItem === NavigationItem.Juz && <JuzSelection />}
-        {selectedNavigationItem === NavigationItem.Page && <PageSelection />}
+        <SidebarNavigationSelections
+          isVisible={isVisible}
+          selectedNavigationItem={selectedNavigationItem}
+        />
       </div>
     </div>
   );
