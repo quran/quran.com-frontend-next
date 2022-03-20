@@ -53,16 +53,16 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
     Number(verseNumber),
     tafsirData.tafsir.slug,
   );
+  const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
   return (
     <>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
-          Number(verseNumber),
-          lang,
-        )}`}
+        title={`${t('tafsir.surah')} ${
+          chapter.chapter.transliteratedName
+        } - ${localizedVerseNumber}`}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         description={t('tafsir.tafsir-desc', {
-          verseNumber,
+          verseNumber: localizedVerseNumber,
           tafsirName: tafsirData.tafsir.translatedName.name,
           surahName: chapter.chapter.transliteratedName,
         })}

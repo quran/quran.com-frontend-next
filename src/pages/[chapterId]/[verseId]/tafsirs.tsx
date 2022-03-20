@@ -24,7 +24,6 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
-import { stripHTMLTags } from 'src/utils/string';
 import { isValidVerseId } from 'src/utils/validator';
 import { makeVerseKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse, VersesResponse } from 'types/ApiResponses';
@@ -45,19 +44,21 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const description = tafsirData?.tafsir.text ? stripHTMLTags(tafsirData.tafsir.text) : null;
   const path = getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId));
 
+  const localizedVerseNumber = toLocalizedNumber(Number(verseId), lang);
   return (
     <>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
-          Number(verseId),
-          lang,
-        )}`}
+        title={`${t('tafsir.surah')} ${
+          chapter.chapter.transliteratedName
+        } - ${localizedVerseNumber}`}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
-        {...(description && { description })} // some verses won't have Tafsirs so we cannot set the description in that case
+        description={t('tafsir.tafsirs-desc', {
+          ayahNumber: localizedVerseNumber,
+          surahName: chapter.chapter.transliteratedName,
+        })}
       />
       <div className={styles.tafsirContainer}>
         <TafsirBody
