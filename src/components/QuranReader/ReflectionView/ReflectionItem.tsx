@@ -133,6 +133,10 @@ const ReflectionItem = ({
     logButtonClick('reflection_item_comments');
   };
 
+  const onReflectAuthorClicked = () => {
+    logButtonClick('reflection_item_author');
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -144,6 +148,7 @@ const ReflectionItem = ({
               href={getQuranReflectAuthorUrl(authorUsername)}
               variant={LinkVariant.Primary}
               className={styles.author}
+              onClick={onReflectAuthorClicked}
             >
               {authorName}
               {isAuthorVerified && (
