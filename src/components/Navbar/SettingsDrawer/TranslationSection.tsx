@@ -14,7 +14,7 @@ import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
-  MAXIMUM_FONT_STEP,
+  MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
@@ -115,7 +115,9 @@ const TranslationSection = () => {
           <Counter
             count={translationFontScale}
             onIncrement={
-              MAXIMUM_FONT_STEP === translationFontScale ? null : onFontScaleIncreaseClicked
+              MAXIMUM_TRANSLATIONS_FONT_STEP === translationFontScale
+                ? null
+                : onFontScaleIncreaseClicked
             }
             onDecrement={
               MINIMUM_FONT_STEP === translationFontScale ? null : onFontScaleDecreaseClicked
