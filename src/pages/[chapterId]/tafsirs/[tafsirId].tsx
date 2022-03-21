@@ -126,6 +126,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
           [tafsirListUrl]: tafsirListData,
           [tafsirContentUrl]: tafsirContentData,
         },
+        tafsirData: tafsirContentData,
         chapterId: chapterNumber,
         chapter: { chapter: getChapterData(chapterNumber, locale) },
         verseNumber,
