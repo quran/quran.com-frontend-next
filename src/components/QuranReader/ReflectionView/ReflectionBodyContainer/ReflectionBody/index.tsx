@@ -12,8 +12,7 @@ import ReflectionItem, {
   VerseReference,
 } from 'src/components/QuranReader/ReflectionView/ReflectionItem';
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
-import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
@@ -66,7 +65,6 @@ const ReflectionBody: React.FC<Props> = ({
   data,
   scrollToTop,
   setSelectedVerseNumber,
-  translationFontScale,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const hasNextVerse = !isLastVerseOfSurah(selectedChapterId, Number(selectedVerseNumber));
@@ -100,21 +98,11 @@ const ReflectionBody: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      {data?.verse && (
-        <div className={styles.verseContainer}>
-          <PlainVerseText words={data.verse?.words} />
-        </div>
-      )}
-      {data?.verse?.translations?.length > 0 && (
-        <div className={styles.translationContainer}>
-          <TranslationText
-            languageId={data.verse.translations?.[0].languageId}
-            resourceName={data.verse.translations?.[0].resourceName}
-            translationFontScale={translationFontScale}
-            text={data.verse.translations?.[0].text}
-          />
-        </div>
-      )}
+      <VerseAndTranslation
+        from={Number(selectedVerseNumber)}
+        to={Number(selectedVerseNumber)}
+        chapter={Number(selectedChapterId)}
+      />
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
