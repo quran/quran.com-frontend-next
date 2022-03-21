@@ -12,7 +12,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/d
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { fakeNavigate } from 'src/utils/navigation';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 type QuranReflectButtonProps = {
@@ -34,6 +34,7 @@ const QuranReflectButton = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
     setIsContentModalOpen(true);
+    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), router.locale);
   };
 
   const contentModalRef = useRef(null);
