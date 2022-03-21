@@ -7,7 +7,7 @@ import styles from './TafsirText.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
 import {
-  MAXIMUM_FONT_STEP,
+  MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
@@ -49,7 +49,9 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
         <Counter
           count={tafsirFontScale}
           onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-          onIncrement={tafsirFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
+          onIncrement={
+            tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
+          }
         />
       </div>
       <div
