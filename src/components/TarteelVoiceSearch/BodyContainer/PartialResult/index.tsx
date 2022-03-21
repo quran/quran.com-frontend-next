@@ -3,11 +3,10 @@ import React from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
-
 import styles from './PartialResult.module.scss';
 
 import { getVolumeLevelMultiplier } from 'src/audioInput/voice';
+import { MicrophoneIcon } from 'src/components/Icons';
 
 interface Props {
   partialTranscript: string;

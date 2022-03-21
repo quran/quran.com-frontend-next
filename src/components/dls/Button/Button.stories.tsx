@@ -1,6 +1,6 @@
-import SettingIcon from '../../../../public/icons/settings.svg';
-
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
+
+import { SettingsIcon } from 'src/components/Icons';
 
 export default {
   title: 'dls/Button',
@@ -75,24 +75,24 @@ ButtonSmall.args = {
 
 export const WithIconPrefix = Template.bind({});
 WithIconPrefix.args = {
-  prefix: <SettingIcon />,
+  prefix: <SettingsIcon />,
 };
 
 export const WithIconLoading = Template.bind({});
 WithIconLoading.args = {
-  prefix: <SettingIcon />,
+  prefix: <SettingsIcon />,
   loading: true,
 };
 
 export const WithIconSuffix = Template.bind({});
 WithIconSuffix.args = {
-  suffix: <SettingIcon />,
+  suffix: <SettingsIcon />,
 };
 
 // eslint-disable-next-line react/no-multi-comp
 const TemplateIcon = (args) => (
   <Button {...args}>
-    <SettingIcon />
+    <SettingsIcon />
   </Button>
 );
 

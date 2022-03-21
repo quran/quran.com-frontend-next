@@ -2,13 +2,10 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ErrorIcon from '../../../../../public/icons/info.svg';
-import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
-import NoMicrophoneIcon from '../../../../../public/icons/no-mic.svg';
-
 import styles from './Error.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import { InfoIcon, MicrophoneIcon, NoMicrophoneIcon } from 'src/components/Icons';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import VoiceError from 'types/Tarteel/VoiceError';
 
@@ -43,7 +40,7 @@ const Error: React.FC<Props> = ({ error, isWaitingForPermission, isCommandBar })
         break;
       default:
         errorText = t('voice.error');
-        icon = <ErrorIcon />;
+        icon = <InfoIcon />;
         break;
     }
     errorBody = (

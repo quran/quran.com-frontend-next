@@ -2,14 +2,13 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import TrendUpIcon from '../../../../public/icons/trend-up.svg';
-
 import Header from './Header';
 import styles from './PreInput.module.scss';
 import SearchItem from './SearchItem';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
 import Link from 'src/components/dls/Link/Link';
+import { TrendUpIcon } from 'src/components/Icons';
 import SearchHistory from 'src/components/Search/SearchHistory';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';

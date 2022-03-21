@@ -6,10 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 
-import BookmarkedIcon from '../../../public/icons/bookmark.svg';
-import CopyIcon from '../../../public/icons/copy.svg';
-import LinkIcon from '../../../public/icons/east.svg';
-import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
@@ -17,6 +13,7 @@ import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { NavigateIcon, CopyIcon, BookmarkIcon, UnbookmarkedIcon } from 'src/components/Icons';
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
@@ -164,7 +161,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
 
       <PopoverMenu.Item
         onClick={onToggleBookmarkClicked}
-        icon={isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
+        icon={isVerseBookmarked ? <BookmarkIcon /> : <UnbookmarkedIcon />}
       >
         {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
       </PopoverMenu.Item>
@@ -172,7 +169,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
 
       {shouldShowGoToAyah && (
-        <PopoverMenu.Item onClick={onGoToAyahClicked} icon={<LinkIcon />}>
+        <PopoverMenu.Item onClick={onGoToAyahClicked} icon={<NavigateIcon />}>
           {t('quran-reader:go-ayah')}
         </PopoverMenu.Item>
       )}

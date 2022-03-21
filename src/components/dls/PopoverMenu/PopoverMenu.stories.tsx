@@ -2,14 +2,16 @@
 /* eslint-disable react/no-multi-comp */
 import { useState, useMemo } from 'react';
 
-import LinkIcon from '../../../../public/icons/east.svg';
-import RepeatIcon from '../../../../public/icons/repeat.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
-import TafsirIcon from '../../../../public/icons/tafsir.svg';
-import UnBookmarkedIcon from '../../../../public/icons/unbookmarked.svg';
-import BackIcon from '../../../../public/icons/west.svg';
-
 import PopoverMenu from './PopoverMenu';
+
+import {
+  NavigateIcon,
+  BackIcon,
+  RepeatIcon,
+  ShareIcon,
+  TafsirIcon,
+  UnbookmarkedIcon,
+} from 'src/components/Icons';
 
 export default {
   title: 'dls/PopoverMenu',
@@ -55,7 +57,7 @@ const UnTriggeredTemplate = (args) => {
 
       <PopoverMenu.Item>My Teams</PopoverMenu.Item>
 
-      <PopoverMenu.Item icon={<RepeatIcon size={18} />}>Repeat</PopoverMenu.Item>
+      <PopoverMenu.Item icon={<RepeatIcon width={18} height={18} />}>Repeat</PopoverMenu.Item>
 
       <PopoverMenu.Divider />
 
@@ -71,8 +73,8 @@ const WithIconTemplate = (args) => {
     <PopoverMenu isOpen trigger={<button type="button">Trigger</button>} {...args}>
       <PopoverMenu.Item icon={<TafsirIcon />}>Tafsirs</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
-      <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
-      <PopoverMenu.Item icon={<LinkIcon />}>Go to Ayah</PopoverMenu.Item>
+      <PopoverMenu.Item icon={<UnbookmarkedIcon />}>Bookmark</PopoverMenu.Item>
+      <PopoverMenu.Item icon={<NavigateIcon />}>Go to Ayah</PopoverMenu.Item>
     </PopoverMenu>
   );
 };
@@ -84,8 +86,8 @@ const WithDivider = (args) => {
     <PopoverMenu isOpen trigger={<button type="button">test</button>} {...args}>
       <PopoverMenu.Item icon={<TafsirIcon />}>Tafsirs</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
-      <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
-      <PopoverMenu.Item icon={<LinkIcon />}>Go to Ayah</PopoverMenu.Item>
+      <PopoverMenu.Item icon={<UnbookmarkedIcon />}>Bookmark</PopoverMenu.Item>
+      <PopoverMenu.Item icon={<NavigateIcon />}>Go to Ayah</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Divider />
       <PopoverMenu.Item>Logout</PopoverMenu.Item>
@@ -99,8 +101,8 @@ const WithIconDisabledTemplate = (args) => {
   return (
     <PopoverMenu isOpen trigger={<button type="button">test</button>} {...args}>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
-      <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
-      <PopoverMenu.Item icon={<RepeatIcon size={18} />} isDisabled>
+      <PopoverMenu.Item icon={<UnbookmarkedIcon />}>Bookmark</PopoverMenu.Item>
+      <PopoverMenu.Item icon={<RepeatIcon width={18} height={18} />} isDisabled>
         Repeat
       </PopoverMenu.Item>
       <PopoverMenu.Divider />
@@ -121,7 +123,7 @@ const WithSubMenuTemplate = (args) => {
         <PopoverMenu.Item
           key={1}
           onClick={() => setSelection('speed')}
-          icon={<RepeatIcon size={18} />}
+          icon={<RepeatIcon width={18} height={18} />}
         >
           Audio speed
         </PopoverMenu.Item>,

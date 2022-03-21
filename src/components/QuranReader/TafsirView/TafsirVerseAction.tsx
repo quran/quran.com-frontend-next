@@ -5,10 +5,9 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import TafsirIcon from '../../../../public/icons/book-open.svg';
-
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { BookOpenIcon } from 'src/components/Icons';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
@@ -59,7 +58,7 @@ const TafsirVerseAction = ({
   return (
     <>
       <PopoverMenu.Item
-        icon={<TafsirIcon />}
+        icon={<BookOpenIcon />}
         onClick={() => {
           logButtonClick(
             `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,

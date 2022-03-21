@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause-outline.svg';
-import PlayIcon from '../../../public/icons/play-outline.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
@@ -16,6 +14,7 @@ import Button, {
   ButtonType,
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
+import { PlayOutlineIcon, PauseOutlineIcon } from 'src/components/Icons';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   playFrom,
@@ -112,7 +111,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         shape={ButtonShape.Circle}
       >
         <span className={styles.icon}>
-          <PauseIcon />
+          <PauseOutlineIcon />
         </span>
       </Button>
     );
@@ -130,7 +129,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
-        <PlayIcon />
+        <PlayOutlineIcon />
       </span>
     </Button>
   );

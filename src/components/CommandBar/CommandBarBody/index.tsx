@@ -6,12 +6,12 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import { SearchIcon } from 'src/components/Icons';
 import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
@@ -147,7 +147,7 @@ const CommandBarBody: React.FC = () => {
       >
         {!isVoiceSearchFlowStarted && (
           <div className={styles.textInputContainer}>
-            <IconSearch />
+            <SearchIcon />
             <input
               onChange={onSearchQueryChange}
               placeholder={t('command-bar.placeholder')}

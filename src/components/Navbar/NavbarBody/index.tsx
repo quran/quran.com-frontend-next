@@ -3,9 +3,6 @@ import React, { memo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import IconMenu from '../../../../public/icons/menu.svg';
-import IconSearch from '../../../../public/icons/search.svg';
-import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
@@ -15,6 +12,7 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 import styles from './NavbarBody.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import { MenuIcon, SearchIcon, SettingsIcon } from 'src/components/Icons';
 import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
@@ -60,7 +58,7 @@ const NavbarBody: React.FC = () => {
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
             >
-              <IconMenu />
+              <MenuIcon />
             </Button>
             <NavigationDrawer />
           </>
@@ -77,7 +75,7 @@ const NavbarBody: React.FC = () => {
               variant={ButtonVariant.Ghost}
               onClick={openSettingsDrawer}
             >
-              <IconSettings />
+              <SettingsIcon />
             </Button>
             <SettingsDrawer />
           </>
@@ -89,7 +87,7 @@ const NavbarBody: React.FC = () => {
               shape={ButtonShape.Circle}
               shouldFlipOnRTL={false}
             >
-              <IconSearch />
+              <SearchIcon />
             </Button>
             <SearchDrawer />
           </>

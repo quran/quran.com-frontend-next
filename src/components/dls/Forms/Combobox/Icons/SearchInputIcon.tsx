@@ -2,9 +2,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import IconSearch from '../../../../../../public/icons/search.svg';
-
 import styles from './SearchInputIcon.module.scss';
+
+import { SearchIcon } from 'src/components/Icons';
 
 const SearchInputIcon: React.FC = () => (
   <span
@@ -13,7 +13,7 @@ const SearchInputIcon: React.FC = () => (
     aria-hidden="true"
   >
     <span role="img" className={styles.icon}>
-      <IconSearch />
+      <SearchIcon />
     </span>
   </span>
 );

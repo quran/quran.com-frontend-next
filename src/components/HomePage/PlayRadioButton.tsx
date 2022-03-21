@@ -1,8 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import Button from '../dls/Button/Button';
 import Link from '../dls/Link/Link';
@@ -10,6 +8,7 @@ import useCurrentStationInfo from '../Radio/useStationInfo';
 
 import styles from './PlayRadioButton.module.scss';
 
+import { PauseIcon, PlayIcon } from 'src/components/Icons';
 import { playFrom, selectIsPlaying, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';

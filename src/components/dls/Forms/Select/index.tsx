@@ -2,9 +2,9 @@ import React, { ChangeEvent, useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import CaretIcon from '../../../../../public/icons/caret-down.svg';
-
 import styles from './Select.module.scss';
+
+import { CaretDownIcon } from 'src/components/Icons';
 
 export interface SelectOption {
   label: string;
@@ -90,7 +90,7 @@ const Select: React.FC<Props> = ({
         ))}
       </select>
       <div className={classNames(styles.arrow, { [styles.disabledArrow]: disabled })}>
-        <CaretIcon />
+        <CaretDownIcon />
       </div>
     </div>
   );

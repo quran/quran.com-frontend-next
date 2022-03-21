@@ -2,9 +2,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import CaretIcon from '../../../../../../public/icons/caret-down.svg';
-
 import styles from './CaretInputIcon.module.scss';
+
+import { CaretDownIcon } from 'src/components/Icons';
 
 interface Props {
   shouldShowIcon: boolean;
@@ -22,7 +22,7 @@ const CaretInputIcon: React.FC<Props> = ({ shouldShowIcon, isOpened }) => {
       })}
       aria-label="Show more"
     >
-      <CaretIcon />
+      <CaretDownIcon />
     </div>
   );
 };

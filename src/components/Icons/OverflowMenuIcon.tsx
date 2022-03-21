@@ -1,6 +1,6 @@
 import { BaseIconProps } from './BaseIcon';
 
-const MenuMoreHorizIcon = (props: BaseIconProps) => (
+const OverflowMenuIcon = (props: BaseIconProps) => (
   <svg
     width="24"
     height="24"
@@ -33,4 +33,4 @@ const MenuMoreHorizIcon = (props: BaseIconProps) => (
   </svg>
 );
 
-export default MenuMoreHorizIcon;
+export default OverflowMenuIcon;

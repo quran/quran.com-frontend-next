@@ -2,10 +2,11 @@ import React, { ReactNode, useState, useEffect, ChangeEvent } from 'react';
 
 import classNames from 'classnames';
 
-import ClearIcon from '../../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../../Button/Button';
 
 import styles from './Input.module.scss';
+
+import { CloseIcon } from 'src/components/Icons';
 
 export enum InputSize {
   Small = 'small',
@@ -111,7 +112,7 @@ const Input: React.FC<Props> = ({
                   size={ButtonSize.Small}
                   onClick={onClearClicked}
                 >
-                  <ClearIcon />
+                  <CloseIcon />
                 </Button>
               </div>
             )}

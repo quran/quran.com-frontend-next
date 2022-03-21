@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchIcon from '../../../public/icons/search.svg';
 import Input from '../dls/Forms/Input';
 
 import styles from './QuranReciterListHero.module.scss';
+
+import { SearchIcon } from 'src/components/Icons';
 
 type QuranReciterListHeroProps = {
   searchQuery: string;

@@ -2,10 +2,9 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import NavigateIcon from '../../../../../public/icons/east.svg';
-
 import styles from './CommandPrefix.module.scss';
 
+import { NavigateIcon } from 'src/components/Icons';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 interface Props {

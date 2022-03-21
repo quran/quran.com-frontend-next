@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import WrenchIcon from '../../../public/icons/wrench.svg';
+import { WrenchIcon } from '../Icons';
 
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';

@@ -1,9 +1,10 @@
 import React from 'react';
 
-import CloseIcon from '../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './HomePageMessage.module.scss';
+
+import { CloseIcon } from 'src/components/Icons';
 
 type HomePageMessageProps = {
   title?: string;

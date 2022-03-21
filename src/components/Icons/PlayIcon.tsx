@@ -1,6 +1,6 @@
 import { BaseIconProps } from './BaseIcon';
 
-const WestIcon = (props: BaseIconProps) => (
+const PlayIcon = (props: BaseIconProps) => (
   <svg
     width="24"
     height="24"
@@ -9,8 +9,8 @@ const WestIcon = (props: BaseIconProps) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path d="M9 19L10.41 17.59L5.83 13H22V11H5.83L10.42 6.41L9 5L2 12L9 19Z" fill="currentColor" />
+    <path d="M4 2V22.3636L20 12.1818L4 2Z" fill="currentColor" />
   </svg>
 );
 
-export default WestIcon;
+export default PlayIcon;

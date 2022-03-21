@@ -3,8 +3,6 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import InfoIcon from '../../../../public/icons/info.svg';
-
 import styles from './ChapterHeader.module.scss';
 
 import ChapterIconContainer, {
@@ -12,6 +10,7 @@ import ChapterIconContainer, {
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
 import Bismillah from 'src/components/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { InfoIcon } from 'src/components/Icons';
 import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';

@@ -2,11 +2,10 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import { BookmarkIcon as BookmarkedIcon } from 'src/components/Icons';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { logButtonClick } from 'src/utils/eventLogger';
 

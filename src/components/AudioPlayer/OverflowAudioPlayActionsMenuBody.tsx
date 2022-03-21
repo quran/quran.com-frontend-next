@@ -3,9 +3,8 @@ import { useState, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
-import PersonIcon from '../../../public/icons/person.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
+import { ChevronRightIcon, PersonIcon } from '../Icons/index';
 
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
 import CloseButton from './Buttons/CloseButton';

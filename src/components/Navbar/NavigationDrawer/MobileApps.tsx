@@ -3,16 +3,16 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import IconMobile from '../../../../public/icons/mobile.svg';
-
 import styles from './MobileApps.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
+
+import { MobileIcon } from 'src/components/Icons';
 
 const MobileApps = () => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
-      <NavigationDrawerItem title={t('mobile-apps')} icon={<IconMobile />} isStale />
+      <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} isStale />
       <div className={styles.centerHorizontally}>
         <div className={styles.imagesContainer}>
           <a

@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
+import { OverflowMenuIcon } from '../Icons';
 
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';

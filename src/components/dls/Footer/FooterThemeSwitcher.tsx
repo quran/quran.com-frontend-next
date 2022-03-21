@@ -1,12 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import ChevronSelectIcon from '../../../../public/icons/chevron-select.svg';
 import Button, { ButtonVariant } from '../Button/Button';
 import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
 import styles from './FooterThemeSwitcher.module.scss';
 
+import { ChevronSelectIcon } from 'src/components/Icons';
 import { themeIcons } from 'src/components/Navbar/SettingsDrawer/ThemeSection';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';

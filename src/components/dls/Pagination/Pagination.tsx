@@ -4,12 +4,10 @@ import classNames from 'classnames';
 import range from 'lodash/range';
 import useTranslation from 'next-translate/useTranslation';
 
-import PreviousIcon from '../../../../public/icons/caret-back.svg';
-import NextIcon from '../../../../public/icons/caret-forward.svg';
-
 import styles from './Pagination.module.scss';
 
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+import { CaretBackIcon, CaretForwardIcon } from 'src/components/Icons';
 import { toLocalizedNumber } from 'src/utils/locale';
 
 interface Props {
@@ -100,7 +98,7 @@ const Pagination: React.FC<Props> = ({
           disabled={currentPage === 1}
           onClick={onPrevious}
         >
-          <PreviousIcon />
+          <CaretBackIcon />
         </Button>
       </div>
       {paginationRange.map((pageNumber) => {
@@ -131,7 +129,7 @@ const Pagination: React.FC<Props> = ({
           disabled={currentPage === paginationRange[paginationRange.length - 1]}
           onClick={onNext}
         >
-          <NextIcon />
+          <CaretForwardIcon />
         </Button>
       </div>
       {showSummary && (

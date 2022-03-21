@@ -4,14 +4,13 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
-import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import styles from './LanguageSelector.module.scss';
 
 import i18nConfig from 'i18n.json';
+import { ChevronSelectIcon, GlobeIcon } from 'src/components/Icons';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import resetSettings from 'src/redux/slices/reset-settings';
 import { logEvent, logValueChange } from 'src/utils/eventLogger';

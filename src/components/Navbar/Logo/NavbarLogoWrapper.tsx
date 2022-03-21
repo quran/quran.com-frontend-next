@@ -1,14 +1,13 @@
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
-
 import styles from './NavbarLogoWrapper.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
+import { QuranTextLogoIcon } from 'src/components/Icons';
 
 const NavbarLogoWrapper = () => {
   return (
     <Link href="/">
       <a className={styles.logoWrapper}>
-        <QuranTextLogo />
+        <QuranTextLogoIcon />
       </a>
     </Link>
   );

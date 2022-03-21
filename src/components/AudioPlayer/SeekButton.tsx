@@ -4,8 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import BackwardIcon from '../../../public/icons/backward.svg';
-import ForwardIcon from '../../../public/icons/forward.svg';
+import { BackwardIcon, ForwardIcon } from '../Icons';
 
 import { triggerSetCurrentTime } from './EventTriggers';
 

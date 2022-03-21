@@ -4,12 +4,11 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import ChatIcon from '../../../../public/icons/chat.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
+import { ChatIcon } from 'src/components/Icons';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { fakeNavigate } from 'src/utils/navigation';

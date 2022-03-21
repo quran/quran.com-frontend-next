@@ -3,12 +3,12 @@ import { useRef, useImperativeHandle, ForwardedRef } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
 
-import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
+import { CloseIcon } from 'src/components/Icons';
 
 type ContentModalProps = {
   isOpen?: boolean;

@@ -4,13 +4,12 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import ChevronDownIcon from '../../../../../public/icons/chevron-down.svg';
-
 import styles from './PageNavigationButtons.module.scss';
 
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import { ContentSide } from 'src/components/dls/Tooltip';
+import { ChevronDownIcon } from 'src/components/Icons';
 import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 

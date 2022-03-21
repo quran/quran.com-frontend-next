@@ -6,10 +6,9 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
-
 import styles from './ContextMenu.module.scss';
 
+import { ChevronDownIcon } from 'src/components/Icons';
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';

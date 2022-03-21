@@ -3,11 +3,9 @@ import React, { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import CheckIcon from '../../../../public/icons/check.svg';
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { CheckIcon, ChevronLeftIcon } from 'src/components/Icons';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
