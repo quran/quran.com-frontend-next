@@ -140,7 +140,7 @@ const ReflectionItem = ({
 
     const textToCopy = `${reflectionText} -- ${getQuranReflectPostUrl(id)}`;
     clipboardCopy(textToCopy).then(() =>
-      toast(t('common:shared'), { status: ToastStatus.Success }),
+      toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
     );
   };
 
