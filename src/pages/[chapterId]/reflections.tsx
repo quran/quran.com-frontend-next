@@ -1,11 +1,13 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { SWRConfig } from 'swr';
 
 import styles from './[verseId]/tafsirs.module.scss';
 
-import { getVerseReflections } from 'src/api';
+import { fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import Error from 'src/pages/_error';
@@ -13,6 +15,8 @@ import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
+import { getDefaultWordFields, getMushafId } from 'src/utils/api';
+import { makeVerseReflectionsUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import {
@@ -33,7 +37,7 @@ type AyahReflectionProp = {
   hasError?: boolean;
   verseNumber?: string;
   chapterId?: string;
-  initialData?: any;
+  fallback?: any;
 };
 
 const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
@@ -41,7 +45,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   chapter,
   verseNumber,
   chapterId,
-  initialData,
+  fallback,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   if (hasError) {
@@ -64,22 +68,23 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           surahName: chapter.chapter.transliteratedName,
         })}
       />
-      <div className={styles.tafsirContainer}>
-        <ReflectionBodyContainer
-          scrollToTop={scrollWindowToTop}
-          initialChapterId={chapterId}
-          initialVerseNumber={verseNumber.toString()}
-          initialData={initialData}
-          render={({ body, surahAndAyahSelection }) => {
-            return (
-              <div>
-                {surahAndAyahSelection}
-                {body}
-              </div>
-            );
-          }}
-        />
-      </div>
+      <SWRConfig value={{ fallback }}>
+        <div className={styles.tafsirContainer}>
+          <ReflectionBodyContainer
+            scrollToTop={scrollWindowToTop}
+            initialChapterId={chapterId}
+            initialVerseNumber={verseNumber.toString()}
+            render={({ body, surahAndAyahSelection }) => {
+              return (
+                <div>
+                  {surahAndAyahSelection}
+                  {body}
+                </div>
+              );
+            }}
+          />
+        </div>
+      </SWRConfig>
     </>
   );
 };
@@ -92,20 +97,38 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
+  const translations = getTranslationsInitialState(locale).selectedTranslations;
   try {
-    const data = await getVerseReflections({
-      chapterId: chapterNumber,
-      mushafLines,
-      quranFont,
-      translation: getTranslationsInitialState(locale).selectedTranslations,
-      verseNumber,
-    });
+    const verseReflectionUrl = makeVerseReflectionsUrl(chapterNumber, verseNumber);
+
+    const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+    const apiParams = {
+      ...getDefaultWordFields(quranFont),
+      translationFields: 'resource_name,language_id',
+      translations: translations.join(','),
+      mushaf: mushafId,
+      from: `${chapterNumber}:${verseNumber}`,
+      to: `${chapterNumber}:${verseNumber}`,
+    };
+
+    const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
+
+    const [verseReflectionsData, versesData] = await Promise.all([
+      fetcher(verseReflectionUrl),
+      fetcher(versesUrl),
+    ]);
+
+    const fallback = {
+      [verseReflectionUrl]: verseReflectionsData,
+      [versesUrl]: versesData,
+    };
+
     return {
       props: {
         chapterId: chapterNumber,
         chapter: { chapter: getChapterData(chapterNumber, locale) },
         verseNumber,
-        initialData: data,
+        fallback,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
