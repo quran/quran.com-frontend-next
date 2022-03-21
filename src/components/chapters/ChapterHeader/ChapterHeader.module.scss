@@ -98,5 +98,6 @@
 .chapterIconContainer {
   // a hack to center the surah name, because the font width is not correct
   // leave a lot of empty space on the left
-  margin-inline-start: 15px;
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-right: 0.5em;
 }
