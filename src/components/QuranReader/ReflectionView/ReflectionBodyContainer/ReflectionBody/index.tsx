@@ -118,7 +118,7 @@ const ReflectionBody: React.FC<Props> = ({
           reflectionText={reflection?.body}
           avatarUrl={reflection?.author?.profileImg}
           verseReferences={getVerseReferencesFromReflection(reflection)}
-          likesCount={reflection?.likes}
+          likesCount={reflection?.likesCount}
           commentsCount={reflection?.commentsCount}
         />
       ))}
