@@ -20,7 +20,12 @@ import {
   getQuranReflectVerseUrl,
   getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';
-import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils/verse';
+import {
+  getVerseAndChapterNumbersFromKey,
+  isFirstVerseOfSurah,
+  isLastVerseOfSurah,
+  makeVerseKey,
+} from 'src/utils/verse';
 
 /**
  * From reflection data, extract the verse references
@@ -30,10 +35,19 @@ import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils
  * @returns {VerseReference[]} verseReferences
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
-  return reflection.filters.map((filter) => {
-    const chapter = filter.surahNumber;
-    const { from, to } = filter;
-    return { chapter, from, to };
+  return reflection.referencedAyahs.map((reference) => {
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key);
+    let from;
+    let to;
+
+    if (verseNumber.includes('-')) {
+      [from, to] = verseNumber.split('-');
+    } else {
+      from = verseNumber;
+      to = verseNumber;
+    }
+
+    return { chapter: Number(chapterNumber), from: Number(from), to: Number(to) };
   });
 };
 
@@ -105,7 +119,7 @@ const ReflectionBody: React.FC<Props> = ({
         <Separator />
       </div>
       <ReflectionDisclaimerMessage />
-      {data?.reflections?.map((reflection) => (
+      {data?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
           key={reflection.id}

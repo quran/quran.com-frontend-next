@@ -248,4 +248,10 @@ export const makeVerseReflectionsUrl = (
   mushafLines: MushafLines,
   translation: number,
 ) =>
-  `/api/quran-reflect?chapterId=${chapterId}&verseNumber=${verseNumber}&quranFont=${quranFont}&mushafLines=${mushafLines}&translation=${translation}`;
+  makeUrl('/qr/reflections', {
+    ranges: `${chapterId}:${verseNumber}`,
+    author: true,
+    fields: 'created_at,body',
+    filter: 'popular',
+    verified: true,
+  });
