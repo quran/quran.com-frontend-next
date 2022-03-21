@@ -3,6 +3,8 @@
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",
     "copy-arabic": "Arabic text (Uthmani text)",
+    "copy-link": "Copy link",
+    "copy-text": "Copy text",
     "copy-footnote-q": "Also copy Footnote(s)?",
     "copy-success": "Text is copied successfully in your clipboard.",
     "current-verse": "Current verse",

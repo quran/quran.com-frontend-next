@@ -8,8 +8,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
 import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
+import CopyIcon from '../../../../public/icons/copy.svg';
 import LoveIcon from '../../../../public/icons/love.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
+import ShareIcon from '../../../../public/icons/share.svg';
 import VerifiedIcon from '../../../../public/icons/verified.svg';
 
 import styles from './ReflectionItem.module.scss';
@@ -118,8 +120,8 @@ const ReflectionItem = ({
     [t],
   );
 
-  const onShareClicked = () => {
-    logButtonClick('reflection_item_share');
+  const onCopyLinkClicked = () => {
+    logButtonClick('reflection_item_copy_link');
     clipboardCopy(getQuranReflectPostUrl(id)).then(() =>
       toast(t('common:shared'), { status: ToastStatus.Success }),
     );
@@ -131,6 +133,15 @@ const ReflectionItem = ({
 
   const onCommentsCountClicked = () => {
     logButtonClick('reflection_item_comments');
+  };
+
+  const onCopyTextClicked = () => {
+    logButtonClick('reflection_item_copy_text');
+
+    const textToCopy = `${reflectionText} -- ${getQuranReflectPostUrl(id)}`;
+    clipboardCopy(textToCopy).then(() =>
+      toast(t('common:shared'), { status: ToastStatus.Success }),
+    );
   };
 
   return (
@@ -260,14 +271,26 @@ const ReflectionItem = ({
         >
           {commentsCount}
         </Button>
-        <Button
-          className={styles.actionItemContainer}
-          variant={ButtonVariant.Compact}
-          onClick={onShareClicked}
-          size={ButtonSize.Small}
+
+        <PopoverMenu
+          trigger={
+            <Button
+              className={styles.actionItemContainer}
+              variant={ButtonVariant.Compact}
+              size={ButtonSize.Small}
+              tooltip={t('common:share')}
+            >
+              <ShareIcon />
+            </Button>
+          }
         >
-          <CopyLinkIcon />
-        </Button>
+          <PopoverMenu.Item icon={<CopyLinkIcon />} onClick={onCopyLinkClicked}>
+            {t('quran-reader:copy-link')}
+          </PopoverMenu.Item>
+          <PopoverMenu.Item icon={<CopyIcon />} onClick={onCopyTextClicked}>
+            {t('quran-reader:copy-text')}
+          </PopoverMenu.Item>
+        </PopoverMenu>
       </div>
     </div>
   );
