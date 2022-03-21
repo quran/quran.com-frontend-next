@@ -1,5 +1,6 @@
 .counter {
   margin-block-end: var(--spacing-xsmall);
+  font-size: initial;
   [dir="rtl"] & {
     direction: rtl;
   }

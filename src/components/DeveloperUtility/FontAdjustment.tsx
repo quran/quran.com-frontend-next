@@ -10,7 +10,7 @@ import {
   decreaseTafsirFontScale,
   selectQuranReaderStyles,
   setQuranFont,
-  MAXIMUM_FONT_STEP,
+  MAXIMUM_TAFSIR_FONT_STEP,
   MAXIMUM_QURAN_FONT_STEP,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   decreaseTranslationFontScale,
@@ -98,7 +98,7 @@ const FontAdjustment = (): JSX.Element => {
         <button
           onClick={() => dispatch({ type: increaseTafsirFontScale.type })}
           type="button"
-          disabled={tafsirFontScale === MAXIMUM_FONT_STEP}
+          disabled={tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP}
         >
           +
         </button>
