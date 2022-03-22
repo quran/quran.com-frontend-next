@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,12 +20,8 @@ import styles from './TafsirView.module.scss';
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import {
-  selectIsUsingDefaultFont,
-  selectQuranReaderStyles,
-} from 'src/redux/slices/QuranReader/styles';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -49,7 +45,6 @@ import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
-  initialTafsirData?: TafsirContentResponse;
   initialTafsirIdOrSlug?: number | string;
   scrollToTop: () => void;
   shouldRender?: boolean;
@@ -63,7 +58,6 @@ type TafsirBodyProps = {
 const TafsirBody = ({
   initialChapterId,
   initialVerseNumber,
-  initialTafsirData,
   initialTafsirIdOrSlug,
   render,
   scrollToTop,
@@ -73,7 +67,6 @@ const TafsirBody = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
   const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
-  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -212,25 +205,6 @@ const TafsirBody = ({
     [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
   );
 
-  // Whether we should use the initial tafsir data or fetch the data on the client side
-  const shouldUseInitialTafsirData = useMemo(
-    () =>
-      initialTafsirData &&
-      isUsingDefaultFont &&
-      Object.keys(initialTafsirData.tafsir.verses).includes(
-        makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-      ) &&
-      (selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug ||
-        Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId),
-    [
-      initialTafsirData,
-      isUsingDefaultFont,
-      selectedChapterId,
-      selectedTafsirIdOrSlug,
-      selectedVerseNumber,
-    ],
-  );
-
   const surahAndAyahSelection = (
     <SurahAndAyahSelection
       selectedChapterId={selectedChapterId}
@@ -284,20 +258,15 @@ const TafsirBody = ({
         styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
       )}
     >
-      {shouldUseInitialTafsirData ? (
-        renderTafsir(initialTafsirData)
-      ) : (
-        <DataFetcher
-          loading={TafsirSkeleton}
-          queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
-            locale: lang,
-            words: true,
-            ...getDefaultWordFields(quranReaderStyles.quranFont),
-            ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-          })}
-          render={renderTafsir}
-        />
-      )}
+      <DataFetcher
+        loading={TafsirSkeleton}
+        queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
+          lang,
+          quranFont: quranReaderStyles.quranFont,
+          mushafLines: quranReaderStyles.mushafLines,
+        })}
+        render={renderTafsir}
+      />
     </div>
   );
 
