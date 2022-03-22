@@ -249,11 +249,12 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
-export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string) =>
+export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) =>
   makeUrl('/qr/reflections', {
     ranges: `${chapterId}:${verseNumber}`,
     author: true,
     fields: 'created_at,body,comments_count,likes_count',
     filter: 'popular',
     verified: true,
+    lang,
   });
