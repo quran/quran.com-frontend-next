@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
@@ -27,6 +28,7 @@ import QueryParam from 'types/QueryParam';
 const PlayPauseButton = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const chaptersData = useContext(DataContext);
 
   const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
@@ -93,9 +95,11 @@ const PlayPauseButton = () => {
       {button}
       <SurahAudioMismatchModal
         isOpen={isMismatchModalVisible}
-        currentAudioChapter={getChapterData(currentAudioChapterId, lang)?.transliteratedName}
+        currentAudioChapter={
+          getChapterData(chaptersData, currentAudioChapterId)?.transliteratedName
+        }
         currentReadingChapter={
-          getChapterData(firstCurrentReadingChapterId, lang)?.transliteratedName
+          getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
         }
         onContinue={() => {
           triggerPlayAudio();

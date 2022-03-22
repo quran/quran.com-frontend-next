@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,6 +20,7 @@ import styles from './TafsirView.module.scss';
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
+import DataContext from 'src/contexts/DataContext';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
@@ -67,6 +68,7 @@ const TafsirBody = ({
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
   const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const chaptersData = useContext(DataContext);
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -139,7 +141,11 @@ const TafsirBody = ({
 
       const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
       const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastVerseKey);
-      const hasNextVerseGroup = !isLastVerseOfSurah(chapterNumber, Number(verseNumber));
+      const hasNextVerseGroup = !isLastVerseOfSurah(
+        chaptersData,
+        chapterNumber,
+        Number(verseNumber),
+      );
       const hasPrevVerseGroup = getVerseNumberFromKey(firstVerseKey) !== 1;
 
       const loadNextVerseGroup = () => {
@@ -202,7 +208,7 @@ const TafsirBody = ({
         </div>
       );
     },
-    [lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
+    [chaptersData, lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
   );
 
   const surahAndAyahSelection = (

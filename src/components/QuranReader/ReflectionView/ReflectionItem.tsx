@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
@@ -20,6 +20,7 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -73,6 +74,7 @@ const ReflectionItem = ({
   const formattedDate = formatDateRelatively(new Date(date), lang);
   const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
+  const chaptersData = useContext(DataContext);
 
   const onReferredVersesHeaderClicked = () => {
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
@@ -113,10 +115,10 @@ const ReflectionItem = ({
 
   const getSurahName = useCallback(
     (chapterNumber) => {
-      const surahName = getChapterData(chapterNumber.toString())?.transliteratedName;
+      const surahName = getChapterData(chaptersData, chapterNumber.toString())?.transliteratedName;
       return `${t('common:surah')} ${surahName} (${chapterNumber})`;
     },
-    [t],
+    [chaptersData, t],
   );
 
   const onShareClicked = () => {

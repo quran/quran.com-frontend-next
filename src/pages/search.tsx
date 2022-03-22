@@ -16,10 +16,12 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
+import DataContext from 'src/contexts/DataContext';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
+import { getAllChaptersData } from 'src/utils/chapter';
 import {
   logButtonClick,
   logEmptySearchResults,
@@ -31,6 +33,7 @@ import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
+import ChaptersData from 'types/ChaptersData';
 
 const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -38,9 +41,10 @@ const DEBOUNCING_PERIOD_MS = 1000;
 type SearchProps = {
   languages: AvailableLanguage[];
   translations: AvailableTranslation[];
+  chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ languages, translations }) => {
+const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -191,7 +195,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   const navigationUrl = '/search';
 
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={
           debouncedSearchQuery !== ''
@@ -244,7 +248,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
           />
         </div>
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -264,9 +268,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const { translations: responseTranslations } = availableTranslationsResponse;
     translations = responseTranslations;
   }
+  const chaptersData = await getAllChaptersData(locale);
 
   return {
     props: {
+      chaptersData,
       languages,
       translations,
     },

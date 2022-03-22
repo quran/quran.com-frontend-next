@@ -24,9 +24,10 @@ import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import DataContext from 'src/contexts/DataContext';
 import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { makeCDNUrl } from 'src/utils/cdn';
-import { getChapterData } from 'src/utils/chapter';
+import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import {
   getCanonicalUrl,
@@ -36,13 +37,19 @@ import {
 import { getCurrentPath } from 'src/utils/url';
 import { isValidChapterId } from 'src/utils/validator';
 import Chapter from 'types/Chapter';
+import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 
 type ShareRecitationPageProps = {
   selectedReciter: Reciter;
   selectedChapter: Chapter;
+  chaptersData: ChaptersData;
 };
-const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {
+const RecitationPage = ({
+  selectedReciter,
+  selectedChapter,
+  chaptersData,
+}: ShareRecitationPageProps) => {
   const { t, lang } = useTranslation();
   const dispatch = useDispatch();
   const toast = useToast();
@@ -93,7 +100,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
     isAudioPlaying && currentAudioData.chapterId === Number(selectedChapter.id);
 
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${selectedReciter.translatedName.name} - ${selectedChapter.transliteratedName}`}
         description={t('reciter:reciter-chapter-desc', {
@@ -167,7 +174,7 @@ const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPag
           </div>
         </div>
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -189,7 +196,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
 
     const reciterData = await getReciterData(reciterId, locale);
-    const chapterData = await getChapterData(chapterId, locale);
+    const chaptersData = await getAllChaptersData(locale);
+    const chapterData = await getChapterData(chaptersData, chapterId);
 
     if (!reciterData || !chapterData) {
       return { notFound: true };
@@ -197,6 +205,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     return {
       props: {
+        chaptersData,
         selectedReciter: reciterData.reciter,
         selectedChapter: { ...chapterData, id: chapterId },
       },
