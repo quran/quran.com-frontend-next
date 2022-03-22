@@ -72,7 +72,7 @@ const Links = () => {
                 <Link
                   href={link.url}
                   variant={LinkVariant.Primary}
-                  newTab={!!link.isExternal}
+                  isNewTab={!!link.isExternal}
                   {...(link.onClick && { onClick: link.onClick })}
                 >
                   {link.text}

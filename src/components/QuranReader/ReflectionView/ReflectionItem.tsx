@@ -144,12 +144,12 @@ const ReflectionItem = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <Link newTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
+          <Link isNewTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
             <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
           </Link>
           <div>
             <Link
-              newTab
+              isNewTab
               href={getQuranReflectAuthorUrl(authorUsername)}
               variant={LinkVariant.Primary}
               className={styles.author}
@@ -252,7 +252,7 @@ const ReflectionItem = ({
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(id)}
-          newTab
+          isNewTab
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
           onClick={onLikesCountClicked}
@@ -264,7 +264,7 @@ const ReflectionItem = ({
           variant={ButtonVariant.Compact}
           prefix={<ChatIcon />}
           href={getQuranReflectPostCommentUrl(id)}
-          newTab
+          isNewTab
           size={ButtonSize.Small}
           onClick={onCommentsCountClicked}
         >

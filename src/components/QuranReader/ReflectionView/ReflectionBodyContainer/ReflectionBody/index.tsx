@@ -133,7 +133,7 @@ const ReflectionBody: React.FC<Props> = ({
           href={getQuranReflectVerseUrl(
             makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
           )}
-          newTab
+          isNewTab
         >
           {t('read-more-quran-reflect')}
         </Button>
