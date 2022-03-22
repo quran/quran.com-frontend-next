@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE, makeUrl } from './api';
+import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
 import {
   getAudioPlayerStateInitialState,
@@ -157,8 +157,16 @@ export const makeTafsirsUrl = (language: string): string =>
 export const makeTafsirContentUrl = (
   tafsirId: number | string,
   verseKey: string,
-  params: Record<string, unknown>,
-) => makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);
+  options: { lang: string; quranFont: QuranFont; mushafLines: MushafLines },
+) => {
+  const params = {
+    locale: options.lang,
+    words: true,
+    ...getDefaultWordFields(options.quranFont),
+    ...getMushafId(options.quranFont, options.mushafLines),
+  };
+  return makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);
+};
 
 /**
  * Compose the url for the pages look up API.

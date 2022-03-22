@@ -22,7 +22,6 @@ import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -262,10 +261,9 @@ const TafsirBody = ({
       <DataFetcher
         loading={TafsirSkeleton}
         queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
-          locale: lang,
-          words: true,
-          ...getDefaultWordFields(quranReaderStyles.quranFont),
-          ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+          lang,
+          quranFont: quranReaderStyles.quranFont,
+          mushafLines: quranReaderStyles.mushafLines,
         })}
         render={renderTafsir}
       />

@@ -14,7 +14,6 @@ import {
   getQuranReaderStylesInitialState,
   getTafsirsInitialState,
 } from 'src/redux/defaultSettings/util';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
@@ -117,10 +116,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       getTafsirsInitialState(locale).selectedTafsirs[0],
       makeVerseKey(Number(chapterIdOrSlug), Number(verseId)),
       {
-        locale,
-        words: true,
-        ...getDefaultWordFields(quranFont),
-        ...getMushafId(quranFont, mushafLines),
+        lang: locale,
+        quranFont,
+        mushafLines,
       },
     );
     const tafsirListUrl = makeTafsirsUrl(locale);

@@ -12,7 +12,6 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
@@ -108,10 +107,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   try {
     const tafsirContentUrl = makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-      locale,
-      words: true,
-      ...getDefaultWordFields(quranFont),
-      ...getMushafId(quranFont, mushafLines),
+      lang: locale,
+      quranFont,
+      mushafLines,
     });
     const tafsirListUrl = makeTafsirsUrl(locale);
 
