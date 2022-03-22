@@ -110,6 +110,9 @@ export const getQuranReflectPostUrl = (postId: number) =>
 export const getQuranReflectPostCommentUrl = (postId: number) =>
   `https://quranreflect.com/posts/${postId}#comments`;
 
+export const getQuranReflectTagUrl = (tag: string) =>
+  ` https://quranreflect.com/?tags=${encodeURIComponent(tag)}`;
+
 /**
  * Get the href link to a surah.
  *
