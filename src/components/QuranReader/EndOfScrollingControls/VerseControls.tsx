@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import EndOfScrollingButton from './EndOfScrollingButton';
 
+import DataContext from 'src/contexts/DataContext';
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl, getChapterWithStartingVerseUrl } from 'src/utils/navigation';
@@ -16,9 +17,10 @@ interface Props {
 
 const VerseControls: React.FC<Props> = ({ lastVerse }) => {
   const { t } = useTranslation('quran-reader');
+  const chaptersData = useContext(DataContext);
   const { chapterId, verseNumber, verseKey } = lastVerse;
   const chapterNumber = Number(chapterId);
-  const isLastVerseOfSurah = isLastVerse(String(chapterId), verseNumber);
+  const isLastVerseOfSurah = isLastVerse(chaptersData, String(chapterId), verseNumber);
   return (
     <>
       {isLastVerseOfSurah && !isFirstSurah(chapterNumber) && (

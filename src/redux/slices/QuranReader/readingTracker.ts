@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
 import { getDistanceBetweenVerses } from 'src/utils/verse';
+import ChaptersData from 'types/ChaptersData';
 
 interface LastReadVerse {
   verseKey: string;
@@ -27,15 +28,22 @@ export const readingTrackerSlice = createSlice({
   name: 'readingTracker',
   initialState,
   reducers: {
-    setLastReadVerse: (state: ReadingTracker, action: PayloadAction<LastReadVerse>) => {
+    setLastReadVerse: (
+      state: ReadingTracker,
+      action: PayloadAction<{
+        lastReadVerse: LastReadVerse;
+        chaptersData: ChaptersData;
+      }>,
+    ) => {
+      const { lastReadVerse, chaptersData } = action.payload;
       let newRecentReadingSessions = { ...state.recentReadingSessions };
       // if the verse key already exists, and he re-visited it again, we need to mark it as the latest session.
-      if (newRecentReadingSessions[action.payload.verseKey]) {
+      if (newRecentReadingSessions[lastReadVerse.verseKey]) {
         // delete the old entry
-        delete newRecentReadingSessions[action.payload.verseKey];
+        delete newRecentReadingSessions[lastReadVerse.verseKey];
         // insert the same entry again but at the beginning
-        newRecentReadingSessions = { [action.payload.verseKey]: true, ...newRecentReadingSessions };
-        return generateNewState(state, action.payload, newRecentReadingSessions);
+        newRecentReadingSessions = { [lastReadVerse.verseKey]: true, ...newRecentReadingSessions };
+        return generateNewState(state, lastReadVerse, newRecentReadingSessions);
       }
       const sessionsVerseKeys = Object.keys(newRecentReadingSessions);
       const numberOfSessions = sessionsVerseKeys.length;
@@ -43,21 +51,24 @@ export const readingTrackerSlice = createSlice({
       // if there are some last read sessions already and the new verse key is not far enough to be considered a new session
       if (
         numberOfSessions &&
-        getDistanceBetweenVerses(lastReadingSessionVerseKey, action.payload.verseKey) <=
-          NEW_SESSION_BOUNDARY
+        getDistanceBetweenVerses(
+          chaptersData,
+          lastReadingSessionVerseKey,
+          lastReadVerse.verseKey,
+        ) <= NEW_SESSION_BOUNDARY
       ) {
         delete newRecentReadingSessions[lastReadingSessionVerseKey];
-        newRecentReadingSessions = { [action.payload.verseKey]: true, ...newRecentReadingSessions };
-        return generateNewState(state, action.payload, newRecentReadingSessions);
+        newRecentReadingSessions = { [lastReadVerse.verseKey]: true, ...newRecentReadingSessions };
+        return generateNewState(state, lastReadVerse, newRecentReadingSessions);
       }
       const earliestSession = sessionsVerseKeys[numberOfSessions - 1];
       // insert a new entry at the beginning
-      newRecentReadingSessions = { [action.payload.verseKey]: true, ...newRecentReadingSessions };
+      newRecentReadingSessions = { [lastReadVerse.verseKey]: true, ...newRecentReadingSessions };
       // if the number of sessions already exceeded the maximum, delete the latest session
       if (numberOfSessions + 1 > MAXIMUM_NUMBER_OF_SESSIONS) {
         delete newRecentReadingSessions[earliestSession];
       }
-      return generateNewState(state, action.payload, newRecentReadingSessions);
+      return generateNewState(state, lastReadVerse, newRecentReadingSessions);
     },
   },
 });

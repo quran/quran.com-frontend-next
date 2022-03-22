@@ -9,9 +9,10 @@ import styles from '../[verseId]/tafsirs.module.scss';
 import { getTafsirContent } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
-import { getChapterData } from 'src/utils/chapter';
+import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import {
   getCanonicalUrl,
@@ -25,6 +26,7 @@ import {
 import { isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -33,6 +35,7 @@ type AyahTafsirProp = {
   tafsirIdOrSlug?: string;
   chapterId?: string;
   tafsirData?: TafsirContentResponse;
+  chaptersData: ChaptersData;
 };
 
 const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
@@ -42,6 +45,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   chapterId,
   tafsirData,
   tafsirIdOrSlug,
+  chaptersData,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
@@ -55,7 +59,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   );
   const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('tafsir.surah')} ${
           chapter.chapter.transliteratedName
@@ -87,15 +91,16 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           }}
         />
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { chapterId, tafsirId: tafsirIdOrSlug } = params;
   const verseKey = String(chapterId);
+  const chaptersData = await getAllChaptersData(locale);
   // if the verse key or the tafsir id is not valid
-  if (!isValidVerseKey(verseKey)) {
+  if (!isValidVerseKey(chaptersData, verseKey)) {
     return { notFound: true };
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -110,9 +115,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     );
     return {
       props: {
+        chaptersData,
         chapterId: chapterNumber,
         tafsirData,
-        chapter: { chapter: getChapterData(chapterNumber, locale) },
+        chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
         verseNumber,
         tafsirIdOrSlug,
       },

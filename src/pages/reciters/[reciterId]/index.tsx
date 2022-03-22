@@ -15,11 +15,13 @@ import Input from 'src/components/dls/Forms/Input';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ChaptersList from 'src/components/Reciter/ChaptersList';
 import ReciterInfo from 'src/components/Reciter/ReciterInfo';
+import DataContext from 'src/contexts/DataContext';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getReciterNavigationUrl } from 'src/utils/navigation';
 import Chapter from 'types/Chapter';
+import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 
 const filterChapters = (chapters, searchQuery: string) => {
@@ -36,10 +38,12 @@ const filterChapters = (chapters, searchQuery: string) => {
   return resultItems as Chapter[];
 };
 
-type ReciterPageProps = { selectedReciter: Reciter };
-const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
+type ReciterPageProps = {
+  selectedReciter: Reciter;
+  chaptersData: ChaptersData;
+};
+const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
   const { t, lang } = useTranslation();
-  const allChapterData = getAllChaptersData(lang);
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -47,14 +51,14 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
   // because `Fuse` library expects Array of objects, not Record<string, Chapter>
   const allChaptersWithId = useMemo(
     () =>
-      Object.entries(allChapterData).map(([chapterId, chapter]) => {
+      Object.entries(chaptersData).map(([chapterId, chapter]) => {
         return {
           id: chapterId.toString(),
           localizedId: toLocalizedNumber(Number(chapterId), lang),
           ...chapter,
         };
       }),
-    [allChapterData, lang],
+    [chaptersData, lang],
   );
 
   const filteredChapters = useMemo(
@@ -65,7 +69,7 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
   const navigationUrl = getReciterNavigationUrl(selectedReciter.id.toString());
 
   return (
-    <div className={classNames(layoutStyle.pageContainer)}>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={selectedReciter?.translatedName?.name}
         canonical={getCanonicalUrl(lang, navigationUrl)}
@@ -74,32 +78,33 @@ const ReciterPage = ({ selectedReciter }: ReciterPageProps) => {
           reciterName: selectedReciter?.translatedName?.name,
         })}
       />
+      <div className={classNames(layoutStyle.pageContainer)}>
+        <div className={pageStyle.reciterInfoContainer}>
+          <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
+            <ReciterInfo selectedReciter={selectedReciter} />
+          </div>
+        </div>
 
-      <div className={pageStyle.reciterInfoContainer}>
-        <div className={classNames(layoutStyle.flowItem, pageStyle.headerContainer)}>
-          <ReciterInfo selectedReciter={selectedReciter} />
+        <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
+          <Input
+            prefix={<SearchIcon />}
+            id="translations-search"
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder={t('reciter:search-chapter')}
+            fixedWidth={false}
+          />
+        </div>
+
+        <div className={classNames(layoutStyle.flowItem, pageStyle.chaptersListContainer)}>
+          <ChaptersList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
+        </div>
+
+        <div className={classNames(layoutStyle.flowItem, pageStyle.footerContainer)}>
+          <Footer />
         </div>
       </div>
-
-      <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
-        <Input
-          prefix={<SearchIcon />}
-          id="translations-search"
-          value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder={t('reciter:search-chapter')}
-          fixedWidth={false}
-        />
-      </div>
-
-      <div className={classNames(layoutStyle.flowItem, pageStyle.chaptersListContainer)}>
-        <ChaptersList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
-      </div>
-
-      <div className={classNames(layoutStyle.flowItem, pageStyle.footerContainer)}>
-        <Footer />
-      </div>
-    </div>
+    </DataContext.Provider>
   );
 };
 
@@ -108,9 +113,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const reciterId = params.reciterId as string;
 
     const reciterData = await getReciterData(reciterId, locale);
+    const chaptersData = await getAllChaptersData(locale);
 
     return {
       props: {
+        chaptersData,
         selectedReciter: reciterData.reciter,
       },
     };

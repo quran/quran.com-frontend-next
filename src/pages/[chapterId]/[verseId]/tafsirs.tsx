@@ -8,12 +8,13 @@ import styles from './tafsirs.module.scss';
 import { getChapterIdBySlug, getTafsirContent } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTafsirsInitialState,
 } from 'src/redux/defaultSettings/util';
-import { getChapterData } from 'src/utils/chapter';
+import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import {
   getCanonicalUrl,
@@ -27,15 +28,17 @@ import {
 import { isValidVerseId } from 'src/utils/validator';
 import { makeVerseKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse, VersesResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
   verses?: VersesResponse;
   tafsirData?: TafsirContentResponse;
   hasError?: boolean;
+  chaptersData: ChaptersData;
 };
 
-const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData }) => {
+const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
@@ -48,7 +51,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
 
   const localizedVerseNumber = toLocalizedNumber(Number(verseId), lang);
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('tafsir.surah')} ${
           chapter.chapter.transliteratedName
@@ -79,7 +82,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, tafsirData })
           }}
         />
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -99,12 +102,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     if (sluggedChapterId) {
       chapterIdOrSlug = sluggedChapterId;
     }
+    const chaptersData = await getAllChaptersData(locale);
     // 2. make sure that verse id is valid before calling BE to get the verses.
-    if (!isValidVerseId(chapterIdOrSlug, verseId)) {
+    if (!isValidVerseId(chaptersData, chapterIdOrSlug, verseId)) {
       return { notFound: true };
     }
 
-    const chapterData = getChapterData(chapterIdOrSlug, locale);
+    const chapterData = getChapterData(chaptersData, chapterIdOrSlug);
     const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
     const tafsirData = await getTafsirContent(
       getTafsirsInitialState(locale).selectedTafsirs[0],
@@ -118,6 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     return {
       props: {
+        chaptersData,
         tafsirData,
         chapter: {
           chapter: { ...chapterData, id: chapterIdOrSlug },

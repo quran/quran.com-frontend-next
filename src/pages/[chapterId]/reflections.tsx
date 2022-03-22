@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
@@ -8,12 +9,13 @@ import styles from './[verseId]/tafsirs.module.scss';
 import { getVerseReflections } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
-import { getChapterData } from 'src/utils/chapter';
+import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import {
   getCanonicalUrl,
@@ -27,6 +29,7 @@ import {
 import { isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 
 type AyahReflectionProp = {
   chapter?: ChapterResponse;
@@ -34,6 +37,7 @@ type AyahReflectionProp = {
   verseNumber?: string;
   chapterId?: string;
   initialData?: any;
+  chaptersData: ChaptersData;
 };
 
 const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
@@ -42,6 +46,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   verseNumber,
   chapterId,
   initialData,
+  chaptersData,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   if (hasError) {
@@ -51,7 +56,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
 
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('common:reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
@@ -80,14 +85,15 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           }}
         />
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { chapterId } = params;
   const verseKey = String(chapterId);
-  if (!isValidVerseKey(verseKey)) {
+  const chaptersData = await getAllChaptersData(locale);
+  if (!isValidVerseKey(chaptersData, verseKey)) {
     return { notFound: true };
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -102,8 +108,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     });
     return {
       props: {
+        chaptersData,
         chapterId: chapterNumber,
-        chapter: { chapter: getChapterData(chapterNumber, locale) },
+        chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
         verseNumber,
         initialData: data,
       },

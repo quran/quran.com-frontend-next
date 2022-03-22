@@ -1,14 +1,16 @@
+import { useContext } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import { getAllChaptersData } from 'src/utils/chapter';
+import DataContext from 'src/contexts/DataContext';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 
 const Links = () => {
-  const { t, lang } = useTranslation('common');
-  const chaptersData = getAllChaptersData(lang);
+  const { t } = useTranslation('common');
+  const chaptersData = useContext(DataContext);
 
   const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
 

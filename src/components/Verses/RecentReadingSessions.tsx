@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import Link from '../dls/Link/Link';
 import styles from './RecentReadingSessions.module.scss';
 
 import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPreview/SurahPreview';
+import DataContext from 'src/contexts/DataContext';
 import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -19,6 +20,7 @@ const RecentReadingSessions = () => {
   const { t, lang } = useTranslation('home');
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const verseKeys = Object.keys(recentReadingSessions);
+  const chaptersData = useContext(DataContext);
   const onRecentReadingSessionClicked = () => {
     logButtonClick('homepage_recently_read_card');
   };
@@ -30,7 +32,7 @@ const RecentReadingSessions = () => {
           <div className={styles.verseLinksContainer}>
             {verseKeys.map((verseKey) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-              const surah = getChapterData(chapterId, lang);
+              const surah = getChapterData(chaptersData, chapterId);
               return (
                 <div className={styles.verseLink} key={verseKey}>
                   <Link

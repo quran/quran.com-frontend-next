@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -14,6 +14,7 @@ import ReflectionItem, {
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import DataContext from 'src/contexts/DataContext';
 import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
@@ -55,7 +56,12 @@ const ReflectionBody: React.FC<Props> = ({
   translationFontScale,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const hasNextVerse = !isLastVerseOfSurah(selectedChapterId, Number(selectedVerseNumber));
+  const chaptersData = useContext(DataContext);
+  const hasNextVerse = !isLastVerseOfSurah(
+    chaptersData,
+    selectedChapterId,
+    Number(selectedVerseNumber),
+  );
   const hasPrevVerse = !isFirstVerseOfSurah(Number(selectedVerseNumber));
 
   const loadNextVerse = useCallback(() => {
