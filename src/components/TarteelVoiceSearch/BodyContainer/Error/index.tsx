@@ -51,7 +51,7 @@ const Error: React.FC<Props> = ({ error, isWaitingForPermission, isCommandBar })
         <span>{errorText}</span>
         <Link
           href="https://download.tarteel.ai"
-          newTab
+          isNewTab
           variant={LinkVariant.Highlight}
           onClick={onTarteelLinkClicked}
         >

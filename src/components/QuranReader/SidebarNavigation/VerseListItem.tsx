@@ -30,7 +30,12 @@ const VerseListItem = React.memo(({ verseKey }: VerseListItemProps) => {
   }, [scrollTo, isVerseKeySelected]);
 
   return (
-    <Link href={getChapterWithStartingVerseUrl(verseKey)} key={verseKey} isShallow prefetch={false}>
+    <Link
+      href={getChapterWithStartingVerseUrl(verseKey)}
+      key={verseKey}
+      isShallow
+      shouldPrefetch={false}
+    >
       <div
         ref={verseRef}
         className={classNames(styles.listItem, {

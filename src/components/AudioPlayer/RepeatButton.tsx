@@ -50,7 +50,7 @@ const RepeatAudioButton = () => {
         wrapper={(children) => <Badge content={remainingRangeRepeatCount}>{children}</Badge>}
       >
         <Button
-          disabled={!audioData}
+          isDisabled={!audioData}
           variant={ButtonVariant.Ghost}
           shape={ButtonShape.Circle}
           onClick={onButtonClicked}

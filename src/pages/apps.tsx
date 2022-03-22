@@ -42,7 +42,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         <div className={styles.downloadButtonsContainer}>
           <Link
             href={app.ios}
-            newTab
+            isNewTab
             {...(app.isTarteel && {
               onClick: () => {
                 onTarteelAppClicked(true);
@@ -53,7 +53,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
           </Link>
           <Link
             href={app.android}
-            newTab
+            isNewTab
             {...(app.isTarteel && {
               onClick: () => {
                 onTarteelAppClicked(false);
