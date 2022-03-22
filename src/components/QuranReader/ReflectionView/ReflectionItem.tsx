@@ -7,6 +7,7 @@ import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
+import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
 import LoveIcon from '../../../../public/icons/love.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
@@ -141,12 +142,7 @@ const ReflectionItem = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <Link
-            newTab
-            href={getQuranReflectAuthorUrl(authorUsername)}
-            variant={LinkVariant.Primary}
-            className={styles.author}
-          >
+          <Link newTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
             <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
           </Link>
           <div>
@@ -182,6 +178,13 @@ const ReflectionItem = ({
                       {t('quran-reader:referencing')}{' '}
                     </span>
                     <span className={styles.verseReferences}>{referredVerseText}</span>
+                    <span
+                      className={classNames(styles.chevronContainer, {
+                        [styles.flipChevron]: shouldShowReferredVerses,
+                      })}
+                    >
+                      {nonChapterVerseReferences.length > 0 && <ChevronDownIcon />}
+                    </span>
                   </span>
                 </>
               )}

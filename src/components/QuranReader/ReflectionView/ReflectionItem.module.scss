@@ -37,6 +37,8 @@
 }
 
 .verseReferencesContainer {
+  display: inline-flex;
+  align-items: center;
   font-size: var(--font-size-small);
   opacity: var(--opacity-75);
 }
@@ -49,7 +51,7 @@
 
 .clickable {
   cursor: pointer;
-  text-decoration: underline;
+  border-bottom: 1px solid var(--color-text-default);
 }
 
 .container {
@@ -111,4 +113,14 @@
 .socialStats {
   margin-block-start: var(--spacing-xxsmall);
   opacity: var(--opacity-75);
+}
+
+.chevronContainer {
+  display: inline-flex;
+}
+.flipChevron {
+  transform: rotate(180deg);
+}
+.referencedVersesPrefix {
+  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
 }
