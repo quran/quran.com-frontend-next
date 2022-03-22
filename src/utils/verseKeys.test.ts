@@ -1,10 +1,15 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+import { getAllChaptersData } from './chapter';
 import { generateVerseKeysBetweenTwoVerseKeys } from './verseKeys';
 
-it('generates verse keys within the same chapter', () => {
-  expect(generateVerseKeysBetweenTwoVerseKeys('78:1', '78:2')).toEqual(['78:1', '78:2']);
-  expect(generateVerseKeysBetweenTwoVerseKeys('78:1', '78:30')).toEqual([
+it('generates verse keys within the same chapter', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '78:1', '78:2')).toEqual([
+    '78:1',
+    '78:2',
+  ]);
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '78:1', '78:30')).toEqual([
     '78:1',
     '78:2',
     '78:3',
@@ -38,15 +43,16 @@ it('generates verse keys within the same chapter', () => {
   ]);
 });
 
-it('generates verse keys for 2 chapters', () => {
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:1', '113:1')).toEqual([
+it('generates verse keys for 2 chapters', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:1', '113:1')).toEqual([
     '112:1',
     '112:2',
     '112:3',
     '112:4',
     '113:1',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:1', '113:2')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:1', '113:2')).toEqual([
     '112:1',
     '112:2',
     '112:3',
@@ -54,7 +60,7 @@ it('generates verse keys for 2 chapters', () => {
     '113:1',
     '113:2',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:1', '113:5')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:1', '113:5')).toEqual([
     '112:1',
     '112:2',
     '112:3',
@@ -65,20 +71,20 @@ it('generates verse keys for 2 chapters', () => {
     '113:4',
     '113:5',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:2', '113:1')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:2', '113:1')).toEqual([
     '112:2',
     '112:3',
     '112:4',
     '113:1',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:2', '113:2')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:2', '113:2')).toEqual([
     '112:2',
     '112:3',
     '112:4',
     '113:1',
     '113:2',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:2', '113:5')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:2', '113:5')).toEqual([
     '112:2',
     '112:3',
     '112:4',
@@ -88,13 +94,16 @@ it('generates verse keys for 2 chapters', () => {
     '113:4',
     '113:5',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:4', '113:1')).toEqual(['112:4', '113:1']);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:4', '113:2')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:4', '113:1')).toEqual([
+    '112:4',
+    '113:1',
+  ]);
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:4', '113:2')).toEqual([
     '112:4',
     '113:1',
     '113:2',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:4', '113:5')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:4', '113:5')).toEqual([
     '112:4',
     '113:1',
     '113:2',
@@ -103,8 +112,9 @@ it('generates verse keys for 2 chapters', () => {
     '113:5',
   ]);
 });
-it('generates verse keys for 3 chapters', () => {
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:1', '114:1')).toEqual([
+it('generates verse keys for 3 chapters', async () => {
+  const chaptersData = await getAllChaptersData();
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:1', '114:1')).toEqual([
     '112:1',
     '112:2',
     '112:3',
@@ -116,7 +126,7 @@ it('generates verse keys for 3 chapters', () => {
     '113:5',
     '114:1',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:1', '114:2')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:1', '114:2')).toEqual([
     '112:1',
     '112:2',
     '112:3',
@@ -129,7 +139,7 @@ it('generates verse keys for 3 chapters', () => {
     '114:1',
     '114:2',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:1', '114:6')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:1', '114:6')).toEqual([
     '112:1',
     '112:2',
     '112:3',
@@ -146,7 +156,7 @@ it('generates verse keys for 3 chapters', () => {
     '114:5',
     '114:6',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:2', '114:1')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:2', '114:1')).toEqual([
     '112:2',
     '112:3',
     '112:4',
@@ -157,7 +167,7 @@ it('generates verse keys for 3 chapters', () => {
     '113:5',
     '114:1',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:2', '114:2')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:2', '114:2')).toEqual([
     '112:2',
     '112:3',
     '112:4',
@@ -169,7 +179,7 @@ it('generates verse keys for 3 chapters', () => {
     '114:1',
     '114:2',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:2', '114:6')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:2', '114:6')).toEqual([
     '112:2',
     '112:3',
     '112:4',
@@ -185,7 +195,7 @@ it('generates verse keys for 3 chapters', () => {
     '114:5',
     '114:6',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:4', '114:1')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:4', '114:1')).toEqual([
     '112:4',
     '113:1',
     '113:2',
@@ -194,7 +204,7 @@ it('generates verse keys for 3 chapters', () => {
     '113:5',
     '114:1',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:4', '114:2')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:4', '114:2')).toEqual([
     '112:4',
     '113:1',
     '113:2',
@@ -204,7 +214,7 @@ it('generates verse keys for 3 chapters', () => {
     '114:1',
     '114:2',
   ]);
-  expect(generateVerseKeysBetweenTwoVerseKeys('112:4', '114:6')).toEqual([
+  expect(generateVerseKeysBetweenTwoVerseKeys(chaptersData, '112:4', '114:6')).toEqual([
     '112:4',
     '113:1',
     '113:2',
