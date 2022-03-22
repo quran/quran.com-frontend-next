@@ -6,7 +6,7 @@ import {
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
-import { QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
