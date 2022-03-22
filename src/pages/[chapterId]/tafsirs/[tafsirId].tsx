@@ -3,15 +3,17 @@ import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { SWRConfig } from 'swr';
 
 import styles from '../[verseId]/tafsirs.module.scss';
 
-import { getTafsirContent } from 'src/api';
+import { fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import {
@@ -36,6 +38,7 @@ type AyahTafsirProp = {
   chapterId?: string;
   tafsirData?: TafsirContentResponse;
   chaptersData: ChaptersData;
+  fallback: any;
 };
 
 const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
@@ -46,6 +49,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   tafsirData,
   tafsirIdOrSlug,
   chaptersData,
+  fallback,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
@@ -72,25 +76,26 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
         })}
         languageAlternates={getLanguageAlternates(navigationUrl)}
       />
-      <div className={styles.tafsirContainer}>
-        <TafsirBody
-          shouldRender
-          scrollToTop={scrollWindowToTop}
-          initialChapterId={chapterId}
-          initialVerseNumber={verseNumber.toString()}
-          initialTafsirData={tafsirData}
-          initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
-          render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
-            return (
-              <div>
-                {surahAndAyahSelection}
-                {languageAndTafsirSelection}
-                {body}
-              </div>
-            );
-          }}
-        />
-      </div>
+      <SWRConfig value={{ fallback }}>
+        <div className={styles.tafsirContainer}>
+          <TafsirBody
+            shouldRender
+            scrollToTop={scrollWindowToTop}
+            initialChapterId={chapterId}
+            initialVerseNumber={verseNumber.toString()}
+            initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
+            render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
+              return (
+                <div>
+                  {surahAndAyahSelection}
+                  {languageAndTafsirSelection}
+                  {body}
+                </div>
+              );
+            }}
+          />
+        </div>
+      </SWRConfig>
     </DataContext.Provider>
   );
 };
@@ -106,19 +111,28 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   try {
-    const tafsirData = await getTafsirContent(
-      tafsirIdOrSlug as string,
-      verseKey,
+    const tafsirContentUrl = makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
+      lang: locale,
       quranFont,
       mushafLines,
-      locale,
-    );
+    });
+    const tafsirListUrl = makeTafsirsUrl(locale);
+
+    const [tafsirContentData, tafsirListData] = await Promise.all([
+      fetcher(tafsirContentUrl),
+      fetcher(tafsirListUrl),
+    ]);
+
     return {
       props: {
         chaptersData,
         chapterId: chapterNumber,
-        tafsirData,
         chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
+        fallback: {
+          [tafsirListUrl]: tafsirListData,
+          [tafsirContentUrl]: tafsirContentData,
+        },
+        tafsirData: tafsirContentData,
         verseNumber,
         tafsirIdOrSlug,
       },
