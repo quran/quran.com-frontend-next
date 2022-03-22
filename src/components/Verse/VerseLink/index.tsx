@@ -21,9 +21,9 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
       size={ButtonSize.Small}
       shape={ButtonShape.Circle}
       href={getChapterWithStartingVerseUrl(verseKey)}
-      shallowRouting
+      shouldShallowRoute
       variant={ButtonVariant.Ghost}
-      prefetch={false}
+      shouldPrefetch={false}
       onClick={() => {
         logButtonClick('translation_view_verse_link');
       }}

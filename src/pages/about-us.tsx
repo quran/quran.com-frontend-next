@@ -34,7 +34,7 @@ const AboutUsPage = () => {
           <Trans
             i18nKey="about:main-description"
             components={[
-              <Link key={0} href="https://tarteel.ai" newTab onClick={onTarteelLinkClicked} />,
+              <Link key={0} href="https://tarteel.ai" isNewTab onClick={onTarteelLinkClicked} />,
             ]}
           />
         </p>
@@ -115,7 +115,7 @@ const AboutUsPage = () => {
                 />,
               ]}
             />
-            <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" newTab>
+            <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" isNewTab>
               <div className={styles.image}>
                 <Image
                   src="/images/powered-by-vercel.svg"

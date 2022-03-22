@@ -95,7 +95,7 @@ const ChapterHeader: React.FC<Props> = ({
                   variant={ButtonVariant.Ghost}
                   prefix={<InfoIcon />}
                   href={getSurahInfoNavigationUrl(chapterId)}
-                  prefetch={false}
+                  shouldPrefetch={false}
                   hasSidePadding={false}
                   onClick={() => {
                     logButtonClick('chapter_header_info');
@@ -113,7 +113,7 @@ const ChapterHeader: React.FC<Props> = ({
                 variant={ButtonVariant.Ghost}
                 prefix={<InfoIcon />}
                 href={getSurahInfoNavigationUrl(chapterId)}
-                prefetch={false}
+                shouldPrefetch={false}
                 hasSidePadding={false}
                 onClick={() => {
                   logButtonClick('chapter_header_info');

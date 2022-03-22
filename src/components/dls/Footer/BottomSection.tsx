@@ -24,16 +24,16 @@ const BottomSection = () => {
     <div className={styles.bottomSectionContainer}>
       <div>
         <div className={styles.bottomLinks}>
-          <Link href="/sitemap.xml" prefetch={false} newTab>
+          <Link href="/sitemap.xml" shouldPrefetch={false} isNewTab>
             {t('sitemap')}
           </Link>
-          <Link href="/privacy" prefetch={false}>
+          <Link href="/privacy" shouldPrefetch={false}>
             {t('privacy')}
           </Link>
         </div>
         <div className={styles.copyright}>
           © {localizedCurrentYear}{' '}
-          <Link href="https://quran.com" variant={LinkVariant.Highlight} prefetch={false}>
+          <Link href="https://quran.com" variant={LinkVariant.Highlight} shouldPrefetch={false}>
             {
               // we don't want to localize Quran.com text
               // eslint-disable-next-line i18next/no-literal-string
