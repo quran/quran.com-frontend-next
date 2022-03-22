@@ -12,15 +12,19 @@ import ReflectionItem, {
   VerseReference,
 } from 'src/components/QuranReader/ReflectionView/ReflectionItem';
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
-import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
   getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';
-import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils/verse';
+import {
+  getVerseAndChapterNumbersFromKey,
+  isFirstVerseOfSurah,
+  isLastVerseOfSurah,
+  makeVerseKey,
+} from 'src/utils/verse';
 
 /**
  * From reflection data, extract the verse references
@@ -30,10 +34,19 @@ import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils
  * @returns {VerseReference[]} verseReferences
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
-  return reflection.filters.map((filter) => {
-    const chapter = filter.surahNumber;
-    const { from, to } = filter;
-    return { chapter, from, to };
+  return reflection.referencedAyahs.map((reference) => {
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key);
+    let from;
+    let to;
+
+    if (verseNumber.includes('-')) {
+      [from, to] = verseNumber.split('-');
+    } else {
+      from = verseNumber;
+      to = verseNumber;
+    }
+
+    return { chapter: Number(chapterNumber), from: Number(from), to: Number(to) };
   });
 };
 
@@ -52,7 +65,6 @@ const ReflectionBody: React.FC<Props> = ({
   data,
   scrollToTop,
   setSelectedVerseNumber,
-  translationFontScale,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const hasNextVerse = !isLastVerseOfSurah(selectedChapterId, Number(selectedVerseNumber));
@@ -86,26 +98,16 @@ const ReflectionBody: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      {data?.verse && (
-        <div className={styles.verseContainer}>
-          <PlainVerseText words={data.verse?.words} />
-        </div>
-      )}
-      {data?.verse?.translations?.length > 0 && (
-        <div className={styles.translationContainer}>
-          <TranslationText
-            languageId={data.verse.translations?.[0].languageId}
-            resourceName={data.verse.translations?.[0].resourceName}
-            translationFontScale={translationFontScale}
-            text={data.verse.translations?.[0].text}
-          />
-        </div>
-      )}
+      <VerseAndTranslation
+        from={Number(selectedVerseNumber)}
+        to={Number(selectedVerseNumber)}
+        chapter={Number(selectedChapterId)}
+      />
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
       <ReflectionDisclaimerMessage />
-      {data?.reflections?.map((reflection) => (
+      {data?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
           key={reflection.id}
@@ -116,7 +118,7 @@ const ReflectionBody: React.FC<Props> = ({
           reflectionText={reflection?.body}
           avatarUrl={reflection?.author?.profileImg}
           verseReferences={getVerseReferencesFromReflection(reflection)}
-          likesCount={reflection?.likes}
+          likesCount={reflection?.likesCount}
           commentsCount={reflection?.commentsCount}
         />
       ))}
