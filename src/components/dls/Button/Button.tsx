@@ -56,6 +56,7 @@ export type ButtonProps = {
   shouldShallowRoute?: boolean;
   shouldPrefetch?: boolean;
   isNewTab?: boolean;
+  ariaLabel?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -78,6 +79,7 @@ const Button: React.FC<ButtonProps> = ({
   shouldShallowRoute: shallowRouting = false,
   shouldPrefetch: prefetch = true,
   isNewTab: newTab,
+  ariaLabel,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -155,6 +157,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled={disabled}
         onClick={onClick}
         data-auto-flip-icon={shouldFlipOnRTL}
+        {...(ariaLabel && { 'aria-label': ariaLabel })}
       >
         {prefixFinal && (
           <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
