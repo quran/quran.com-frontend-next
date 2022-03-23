@@ -39,6 +39,7 @@ const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => 
     if (typeof reference.key === 'number') {
       return { chapter: reference.key };
     }
+
     const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key);
     let from;
     let to;
