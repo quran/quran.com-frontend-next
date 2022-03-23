@@ -101,7 +101,6 @@ const AUDIO_INITIAL_STATE: AudioState = {
   audioData: null,
   reciter: DEFAULT_RECITER,
   audioDataStatus: AudioDataStatus.NoFile,
-  isMobileMinimizedForScrolling: false,
   repeatSettings: DEFAULT_REPEAT_SETTINGS,
   repeatProgress: DEFAULT_REPEAT_PROGRESS,
   isDownloadingAudio: false,
