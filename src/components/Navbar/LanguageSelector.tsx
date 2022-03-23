@@ -83,7 +83,12 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
             {getLocaleName(lang)}
           </Button>
         ) : (
-          <Button tooltip={t('languages')} shape={ButtonShape.Circle} variant={ButtonVariant.Ghost}>
+          <Button
+            tooltip={t('languages')}
+            shape={ButtonShape.Circle}
+            variant={ButtonVariant.Ghost}
+            ariaLabel={t('aria.select-lng')}
+          >
             <span className={styles.globeIconWrapper}>
               <GlobeIcon />
             </span>
