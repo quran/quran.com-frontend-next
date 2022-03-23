@@ -23,6 +23,7 @@ type LinkProps = {
   shouldPassHref?: boolean;
   isShallow?: boolean;
   shouldPrefetch?: boolean;
+  title?: string;
 };
 
 const Link: React.FC<LinkProps> = ({
@@ -36,6 +37,7 @@ const Link: React.FC<LinkProps> = ({
   shouldPassHref,
   isShallow = false,
   shouldPrefetch = true,
+  title,
 }) => (
   <Wrapper
     shouldWrap={!download}
@@ -62,6 +64,7 @@ const Link: React.FC<LinkProps> = ({
         [styles.blend]: variant === LinkVariant.Blend,
       })}
       {...(onClick && { onClick })}
+      {...(title && { title })}
     >
       {children}
     </a>
