@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -33,6 +34,7 @@ const ReflectionBodyContainer = ({
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const { translationFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { lang } = useTranslation();
 
   const renderBody = useCallback(
     (data) => (
@@ -51,7 +53,7 @@ const ReflectionBodyContainer = ({
   const body = (
     <DataFetcher
       loading={TafsirSkeleton}
-      queryKey={makeVerseReflectionsUrl(selectedChapterId, selectedVerseNumber)}
+      queryKey={makeVerseReflectionsUrl(selectedChapterId, selectedVerseNumber, lang)}
       render={renderBody}
     />
   );

@@ -104,7 +104,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   const translations = getTranslationsInitialState(locale).selectedTranslations;
   try {
-    const verseReflectionUrl = makeVerseReflectionsUrl(chapterNumber, verseNumber);
+    const verseReflectionUrl = makeVerseReflectionsUrl(chapterNumber, verseNumber, locale);
 
     const mushafId = getMushafId(quranFont, mushafLines).mushaf;
     const apiParams = {
