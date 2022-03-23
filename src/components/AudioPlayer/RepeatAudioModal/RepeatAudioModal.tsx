@@ -24,6 +24,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 import { generateChapterVersesKeys, getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 import QueryParam from 'types/QueryParam';
 
@@ -65,15 +66,15 @@ const RepeatAudioModal = ({
     }
     const keys = generateChapterVersesKeys(chaptersData, chapterId);
 
-    const initialState = keys.map((chapterVerseKeys) => ({
-      id: chapterVerseKeys,
-      name: chapterVerseKeys,
-      value: chapterVerseKeys,
-      label: chapterVerseKeys,
+    const initialState = keys.map((chapterVerseKey) => ({
+      id: chapterVerseKey,
+      name: chapterVerseKey,
+      value: chapterVerseKey,
+      label: toLocalizedVerseKey(chapterVerseKey, lang),
     }));
 
     return initialState;
-  }, [chapterId, chaptersData]);
+  }, [chapterId, chaptersData, lang]);
 
   const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] = getChapterFirstAndLastVerseKey(
     chaptersData,
