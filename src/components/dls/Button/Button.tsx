@@ -116,13 +116,14 @@ const Button: React.FC<ButtonProps> = ({
 
   if (href && !disabled)
     return (
-      <Link href={href} isNewTab={newTab} shouldPrefetch={prefetch} isShallow={shallowRouting}>
-        <a
-          {...(onClick && { onClick })}
-          dir={direction}
-          className={classes}
-          data-auto-flip-icon={shouldFlipOnRTL}
-        >
+      <Link
+        href={href}
+        isNewTab={newTab}
+        shouldPrefetch={prefetch}
+        isShallow={shallowRouting}
+        {...(onClick && { onClick })}
+      >
+        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
@@ -134,7 +135,7 @@ const Button: React.FC<ButtonProps> = ({
               {suffix}
             </span>
           )}
-        </a>
+        </div>
       </Link>
     );
 
