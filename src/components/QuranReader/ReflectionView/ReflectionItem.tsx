@@ -145,6 +145,8 @@ const ReflectionItem = ({
     clipboardCopy(textToCopy).then(() =>
       toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
     );
+  };
+
   const onReflectAuthorClicked = () => {
     logButtonClick('reflection_item_author');
   };
