@@ -146,7 +146,7 @@ const ReflectionItem = ({
       if (word.startsWith('#'))
         return (
           <Link
-            newTab
+            isNewTab
             href={getQuranReflectTagUrl(word)}
             onClick={() => {
               logButtonClick('reflection_item_tag');
@@ -257,7 +257,7 @@ const ReflectionItem = ({
       <span className={styles.body}>
         {isExpanded
           ? reflectionWithHashtags(reflectionText)
-          : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
+          : reflectionWithHashtags(truncateString(reflectionText, MAX_REFLECTION_LENGTH))}
       </span>
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
         <span
