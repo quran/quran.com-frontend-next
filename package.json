@@ -121,7 +121,7 @@
     "lint-staged": "^12.3.7",
     "next-sitemap": "^2.5.13",
     "node-fetch": "3.2.3",
-    "prettier": "^2.6.0",
+    "prettier": "^2.5.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "replace-in-file": "^6.3.2",
     "sass": "^1.49.9",
