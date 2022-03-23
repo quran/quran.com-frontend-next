@@ -29,6 +29,7 @@ import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
+  getQuranReflectTagUrl,
 } from 'src/utils/navigation';
 import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
@@ -140,6 +141,26 @@ const ReflectionItem = ({
     logButtonClick('reflection_item_author');
   };
 
+  const reflectionWithHashtags = (text: string) => {
+    const textArray = text.split(' ').map((word) => {
+      if (word.startsWith('#'))
+        return (
+          <Link
+            isNewTab
+            href={getQuranReflectTagUrl(word)}
+            onClick={() => {
+              logButtonClick('reflection_item_tag');
+            }}
+            variant={LinkVariant.Highlight}
+          >
+            {`${word} `}
+          </Link>
+        );
+      return `${word} `;
+    });
+    return textArray;
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -234,7 +255,9 @@ const ReflectionItem = ({
       )}
 
       <span className={styles.body}>
-        {isExpanded ? reflectionText : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
+        {isExpanded
+          ? reflectionWithHashtags(reflectionText)
+          : reflectionWithHashtags(truncateString(reflectionText, MAX_REFLECTION_LENGTH))}
       </span>
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
         <span
