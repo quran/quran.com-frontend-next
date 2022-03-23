@@ -36,6 +36,9 @@ import {
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
   return reflection.referencedAyahs.map((reference) => {
+    if (typeof reference.key === 'number') {
+      return { chapter: reference.key };
+    }
     const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key);
     let from;
     let to;
@@ -47,7 +50,11 @@ const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => 
       to = verseNumber;
     }
 
-    return { chapter: Number(chapterNumber), from: Number(from), to: Number(to) };
+    return {
+      chapter: Number(chapterNumber),
+      from: Number(from),
+      to: Number(to),
+    };
   });
 };
 
