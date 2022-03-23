@@ -3,10 +3,9 @@
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",
     "copy-arabic": "Arabic text (Uthmani text)",
-    "copy-link": "Copy link",
-    "copy-text": "Copy text",
     "copy-footnote-q": "Also copy Footnote(s)?",
     "copy-success": "Text is copied successfully in your clipboard.",
+    "copy-text": "Copy text",
     "current-verse": "Current verse",
     "download-copy": "if you want to download text file.",
     "font": "Arabic font to copy",
@@ -38,9 +37,9 @@
     "surah-beginning": "Beginning of Surah",
     "surah-info": "Surah Info",
     "tafsirs": "Tafsirs",
+    "text-copied": "Text has been copied to the clipboard!",
     "trans-change": "Change",
     "translation-by": "Translation by",
-    "text-copied": "Text has been copied to the clipboard!",
     "verses-range": "Range of verses",
     "view-on-quran-reflect": "View on QuranReflect"
 }
