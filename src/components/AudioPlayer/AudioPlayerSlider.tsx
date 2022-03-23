@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
