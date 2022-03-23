@@ -66,20 +66,18 @@ const Links = () => {
       {linksGroup.map((group) => (
         <div className={styles.group} key={group.title}>
           <div className={styles.groupTitle}>{group.title}</div>
-          <div>
-            {group.links.map((link) => (
-              <div key={link.url} className={styles.linkContainer}>
-                <Link
-                  href={link.url}
-                  variant={LinkVariant.Primary}
-                  isNewTab={!!link.isExternal}
-                  {...(link.onClick && { onClick: link.onClick })}
-                >
-                  {link.text}
-                </Link>
-              </div>
-            ))}
-          </div>
+          {group.links.map((link) => (
+            <div key={link.url} className={styles.linkContainer}>
+              <Link
+                href={link.url}
+                variant={LinkVariant.Primary}
+                isNewTab={!!link.isExternal}
+                {...(link.onClick && { onClick: link.onClick })}
+              >
+                {link.text}
+              </Link>
+            </div>
+          ))}
         </div>
       ))}
     </div>
