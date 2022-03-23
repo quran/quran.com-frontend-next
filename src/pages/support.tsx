@@ -57,7 +57,12 @@ const SupportPage = () => {
           <Trans
             i18nKey="support:developer-a"
             components={[
-              <Link key={0} href="/developers" variant={LinkVariant.Blend} prefetch={false} />,
+              <Link
+                key={0}
+                href="/developers"
+                variant={LinkVariant.Blend}
+                shouldPrefetch={false}
+              />,
             ]}
           />
         </p>
@@ -87,7 +92,7 @@ const SupportPage = () => {
         <p>
           <Trans
             i18nKey="support:mobile-a"
-            components={[<Link key={0} href="/apps" prefetch={false} />]}
+            components={[<Link key={0} href="/apps" shouldPrefetch={false} />]}
           />
         </p>
         {/* <h2>

@@ -1,12 +1,13 @@
 /* eslint-disable max-lines */
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
+import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
 import CopyIcon from '../../../../public/icons/copy.svg';
 import LoveIcon from '../../../../public/icons/love.svg';
@@ -21,6 +22,7 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -74,6 +76,7 @@ const ReflectionItem = ({
   const formattedDate = formatDateRelatively(new Date(date), lang);
   const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
+  const chaptersData = useContext(DataContext);
 
   const onReferredVersesHeaderClicked = () => {
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
@@ -114,10 +117,10 @@ const ReflectionItem = ({
 
   const getSurahName = useCallback(
     (chapterNumber) => {
-      const surahName = getChapterData(chapterNumber.toString())?.transliteratedName;
+      const surahName = getChapterData(chaptersData, chapterNumber.toString())?.transliteratedName;
       return `${t('common:surah')} ${surahName} (${chapterNumber})`;
     },
-    [t],
+    [chaptersData, t],
   );
 
   const onCopyLinkClicked = () => {
@@ -142,26 +145,24 @@ const ReflectionItem = ({
     clipboardCopy(textToCopy).then(() =>
       toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
     );
+  const onReflectAuthorClicked = () => {
+    logButtonClick('reflection_item_author');
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <Link
-            newTab
-            href={getQuranReflectAuthorUrl(authorUsername)}
-            variant={LinkVariant.Primary}
-            className={styles.author}
-          >
+          <Link isNewTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
             <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
           </Link>
           <div>
             <Link
-              newTab
+              isNewTab
               href={getQuranReflectAuthorUrl(authorUsername)}
               variant={LinkVariant.Primary}
               className={styles.author}
+              onClick={onReflectAuthorClicked}
             >
               {authorName}
               {isAuthorVerified && (
@@ -188,6 +189,13 @@ const ReflectionItem = ({
                       {t('quran-reader:referencing')}{' '}
                     </span>
                     <span className={styles.verseReferences}>{referredVerseText}</span>
+                    <span
+                      className={classNames(styles.chevronContainer, {
+                        [styles.flipChevron]: shouldShowReferredVerses,
+                      })}
+                    >
+                      {nonChapterVerseReferences.length > 0 && <ChevronDownIcon />}
+                    </span>
                   </span>
                 </>
               )}
@@ -253,7 +261,7 @@ const ReflectionItem = ({
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(id)}
-          newTab
+          isNewTab
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
           onClick={onLikesCountClicked}
@@ -265,7 +273,7 @@ const ReflectionItem = ({
           variant={ButtonVariant.Compact}
           prefix={<ChatIcon />}
           href={getQuranReflectPostCommentUrl(id)}
-          newTab
+          isNewTab
           size={ButtonSize.Small}
           onClick={onCommentsCountClicked}
         >

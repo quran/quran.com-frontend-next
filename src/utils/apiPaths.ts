@@ -1,4 +1,4 @@
-import { ITEMS_PER_PAGE, makeUrl } from './api';
+import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
 import {
   getAudioPlayerStateInitialState,
@@ -157,8 +157,16 @@ export const makeTafsirsUrl = (language: string): string =>
 export const makeTafsirContentUrl = (
   tafsirId: number | string,
   verseKey: string,
-  params: Record<string, unknown>,
-) => makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);
+  options: { lang: string; quranFont: QuranFont; mushafLines: MushafLines },
+) => {
+  const params = {
+    locale: options.lang,
+    words: true,
+    ...getDefaultWordFields(options.quranFont),
+    ...getMushafId(options.quranFont, options.mushafLines),
+  };
+  return makeUrl(`/tafsirs/${tafsirId}/by_ayah/${verseKey}`, params);
+};
 
 /**
  * Compose the url for the pages look up API.
@@ -241,11 +249,11 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
-export const makeVerseReflectionsUrl = (
-  chapterId: string,
-  verseNumber: string,
-  quranFont: QuranFont,
-  mushafLines: MushafLines,
-  translation: number,
-) =>
-  `/api/quran-reflect?chapterId=${chapterId}&verseNumber=${verseNumber}&quranFont=${quranFont}&mushafLines=${mushafLines}&translation=${translation}`;
+export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string) =>
+  makeUrl('/qr/reflections', {
+    ranges: `${chapterId}:${verseNumber}`,
+    author: true,
+    fields: 'created_at,body,comments_count,likes_count',
+    filter: 'popular',
+    verified: true,
+  });

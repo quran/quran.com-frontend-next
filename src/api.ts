@@ -298,10 +298,9 @@ export const getTafsirContent = (
 ): Promise<TafsirContentResponse> => {
   return fetcher(
     makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-      locale,
-      words: true,
-      ...getDefaultWordFields(quranFont),
-      ...getMushafId(quranFont, mushafLines),
+      lang: locale,
+      quranFont,
+      mushafLines,
     }),
   );
 };

@@ -35,7 +35,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
         tooltip={t('counter.decrease')}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
-        disabled={!onDecrement}
+        isDisabled={!onDecrement}
         onClick={onDecrement}
       >
         <MinusIcon />
@@ -45,7 +45,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
         tooltip={t('counter.increase')}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
-        disabled={!onIncrement}
+        isDisabled={!onIncrement}
         onClick={() => {
           onIncrement();
         }}
