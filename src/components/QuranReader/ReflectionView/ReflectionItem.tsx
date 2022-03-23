@@ -143,7 +143,14 @@ const ReflectionItem = ({
     const textArray = text.split(' ').map((word) => {
       if (word.startsWith('#'))
         return (
-          <Link newTab href={getQuranReflectTagUrl(word)} variant={LinkVariant.Highlight}>
+          <Link
+            newTab
+            href={getQuranReflectTagUrl(word)}
+            onClick={() => {
+              logButtonClick('reflection_item_tag');
+            }}
+            variant={LinkVariant.Highlight}
+          >
             {`${word} `}
           </Link>
         );
