@@ -61,7 +61,7 @@ const ScrollableSelection = ({
       <div className={styles.listContainer}>
         <div className={styles.list}>
           {filteredItems.map((item) => (
-            <Link href={getHref(item.value)} key={item.value} prefetch={false}>
+            <Link href={getHref(item.value)} key={item.value} shouldPrefetch={false}>
               <div
                 ref={item.value === selectedItem ? selectedItemRef : null}
                 className={classNames(

@@ -13,6 +13,7 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
+import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   exitRepeatMode,
@@ -48,14 +49,21 @@ const RepeatAudioModal = ({
   const repeatSettings = useSelector(selectRepeatSettings);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
+  const chaptersData = useGetChaptersData(lang);
 
   const chapterName = useMemo(() => {
-    const chapterData = getChapterData(chapterId, lang);
+    if (!chaptersData) {
+      return null;
+    }
+    const chapterData = getChapterData(chaptersData, chapterId);
     return chapterData?.transliteratedName;
-  }, [chapterId, lang]);
+  }, [chapterId, chaptersData]);
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
-    const keys = generateChapterVersesKeys(chapterId);
+    if (!chaptersData) {
+      return [];
+    }
+    const keys = generateChapterVersesKeys(chaptersData, chapterId);
 
     const initialState = keys.map((chapterVerseKeys) => ({
       id: chapterVerseKeys,
@@ -65,10 +73,12 @@ const RepeatAudioModal = ({
     }));
 
     return initialState;
-  }, [chapterId]);
+  }, [chapterId, chaptersData]);
 
-  const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] =
-    getChapterFirstAndLastVerseKey(chapterId);
+  const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] = getChapterFirstAndLastVerseKey(
+    chaptersData,
+    chapterId,
+  );
 
   const [verseRepetition, setVerseRepetition] = useState({
     repeatRange: repeatSettings.repeatRange,

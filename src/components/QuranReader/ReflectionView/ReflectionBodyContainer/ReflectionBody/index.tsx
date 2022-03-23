@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,6 +13,7 @@ import ReflectionItem, {
 } from 'src/components/QuranReader/ReflectionView/ReflectionItem';
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import DataContext from 'src/contexts/DataContext';
 import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
@@ -67,7 +68,12 @@ const ReflectionBody: React.FC<Props> = ({
   setSelectedVerseNumber,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const hasNextVerse = !isLastVerseOfSurah(selectedChapterId, Number(selectedVerseNumber));
+  const chaptersData = useContext(DataContext);
+  const hasNextVerse = !isLastVerseOfSurah(
+    chaptersData,
+    selectedChapterId,
+    Number(selectedVerseNumber),
+  );
   const hasPrevVerse = !isFirstVerseOfSurah(Number(selectedVerseNumber));
 
   const loadNextVerse = useCallback(() => {
@@ -127,7 +133,7 @@ const ReflectionBody: React.FC<Props> = ({
           href={getQuranReflectVerseUrl(
             makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
           )}
-          newTab
+          isNewTab
         >
           {t('read-more-quran-reflect')}
         </Button>

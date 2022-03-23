@@ -5,6 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useCurrentStationInfo from '../Radio/useStationInfo';
 
 import { getReciterData } from 'src/api';
+import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { selectAudioPlayerState } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 
@@ -38,6 +39,7 @@ const MediaSessionApiListeners = ({
 }: MediaSessionApiListenersProps) => {
   const audioPlayerState = useSelector(selectAudioPlayerState, shallowEqual);
   const stationInfo = useCurrentStationInfo();
+  const chaptersData = useGetChaptersData(locale);
 
   const { isRadioMode } = audioPlayerState;
 
@@ -52,9 +54,12 @@ const MediaSessionApiListeners = ({
   }, [stationInfo.description, stationInfo.title]);
 
   const getAudioMediaMetadata = useCallback(async () => {
-    if (!audioPlayerState.audioData?.chapterId) return null;
+    if (!audioPlayerState.audioData?.chapterId || !chaptersData) return null;
 
-    const chapterData = getChapterData(audioPlayerState.audioData.chapterId.toString());
+    const chapterData = getChapterData(
+      chaptersData,
+      audioPlayerState.audioData.chapterId.toString(),
+    );
     const reciterData = await getReciterData(audioPlayerState.reciter.id.toString(), locale);
 
     return new MediaMetadata({
@@ -64,7 +69,7 @@ const MediaSessionApiListeners = ({
       // TODO: replace with reciter image
       artwork: QURAN_COM_ARTWORK,
     });
-  }, [audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id, locale]);
+  }, [chaptersData, audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id, locale]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {

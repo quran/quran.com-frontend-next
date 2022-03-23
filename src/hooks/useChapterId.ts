@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 
 import { getChapterIdBySlug } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
 import { formatStringNumber } from 'src/utils/number';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
@@ -25,6 +26,7 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
   const router = useRouter();
   const { chapterId, juzId, pageId } = router.query;
   const [chapterIds, setChapterIds] = useState([]);
+  const chaptersData = useContext(DataContext);
   useEffect(() => {
     (async () => {
       if (chapterId) {
@@ -32,7 +34,7 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         // if it's a chapter id
         if (isValidChapterId(chapterIdOrVerseKeyOrSlug)) {
           setChapterIds([formatStringNumber(chapterIdOrVerseKeyOrSlug)]);
-        } else if (isValidVerseKey(chapterIdOrVerseKeyOrSlug)) {
+        } else if (isValidVerseKey(chaptersData, chapterIdOrVerseKeyOrSlug)) {
           // if it's a verse key e.g 5:1
           setChapterIds([getChapterNumberFromKey(chapterIdOrVerseKeyOrSlug).toString()]);
         } else if (AYAH_KURSI_SLUGS.includes(chapterIdOrVerseKeyOrSlug.toLowerCase())) {
@@ -53,7 +55,7 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         setChapterIds(await getChapterIdsForJuz(formatStringNumber(juzId as string)));
       }
     })();
-  }, [pageId, juzId, lang, chapterId]);
+  }, [pageId, juzId, lang, chapterId, chaptersData]);
 
   return chapterIds;
 };

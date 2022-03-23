@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -7,6 +7,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
 import styles from './JuzView.module.scss';
 
+import DataContext from 'src/contexts/DataContext';
 import { getAllJuzMappings, getChapterData } from 'src/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 
@@ -17,6 +18,7 @@ type JuzViewProps = {
 const JuzView = ({ isDescending }: JuzViewProps) => {
   const { t, lang } = useTranslation('common');
   const [juzMappings, setJuzMappings] = useState([]);
+  const chaptersData = useContext(DataContext);
 
   useEffect(() => {
     getAllJuzMappings()
@@ -41,18 +43,18 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
         const chapterIds = Object.keys(chapterAndVerseMappings);
         return (
           <div key={juzId} className={styles.juzContainer}>
-            <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} prefetch={false}>
+            <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} shouldPrefetch={false}>
               <div className={styles.juzTitle}>
                 {t('juz')} {toLocalizedNumber(juzId, lang)}
               </div>
             </Link>
             {chapterIds.map((chapterId) => {
-              const chapter = getChapterData(chapterId, lang);
+              const chapter = getChapterData(chaptersData, chapterId);
               return (
                 <div className={styles.chapterContainer} key={chapterId}>
                   <Link
                     href={`/${chapterId}/${chapterAndVerseMappings[chapterId]}`}
-                    prefetch={false}
+                    shouldPrefetch={false}
                   >
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}

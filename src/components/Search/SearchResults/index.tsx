@@ -65,7 +65,7 @@ const SearchResults: React.FC<Props> = ({
               {searchResult.pagination.totalRecords > 0 && (
                 <Link
                   href={`/search?query=${searchQuery}`}
-                  passHref
+                  shouldPassHref
                   onClick={() => {
                     if (onSearchResultClicked) onSearchResultClicked();
                     logButtonClick('search_drawer_show_all');
