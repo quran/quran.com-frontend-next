@@ -36,19 +36,17 @@ import {
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
   return reflection.referencedAyahs.map((reference) => {
-    if (typeof reference.key === 'number') {
-      return { chapter: reference.key };
-    }
-
-    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key);
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key.toString());
     let from;
     let to;
 
-    if (verseNumber.includes('-')) {
-      [from, to] = verseNumber.split('-');
+    const verseRange = verseNumber || '';
+
+    if (verseRange.includes('-')) {
+      [from, to] = verseRange.split('-');
     } else {
-      from = verseNumber;
-      to = verseNumber;
+      from = verseRange;
+      to = verseRange;
     }
 
     return {
