@@ -31,6 +31,7 @@ import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
+  getQuranReflectTagUrl,
 } from 'src/utils/navigation';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
@@ -57,6 +58,8 @@ type ReflectionItemProps = {
 const SEPARATOR = ' · ';
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
 const MAX_REFLECTION_LENGTH = 220;
+
+const hashtagRegex = /(#+[a-zA-Z0-9(_)]{1,})/;
 const ReflectionItem = ({
   id,
   authorName,
@@ -150,6 +153,12 @@ const ReflectionItem = ({
     logButtonClick('reflection_item_author');
   };
 
+  const highlightHashtag = (text: string) =>
+    text.replace(
+      hashtagRegex,
+      // eslint-disable-next-line i18next/no-literal-string
+      (val) => `<a href="${getQuranReflectTagUrl(val)}" class="${styles.hashtag}">${val}</a>`,
+    );
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -246,7 +255,7 @@ const ReflectionItem = ({
       <span className={styles.body}>
         <div
           className={classNames({ [styles.minimizedContent]: !isExpanded })}
-          dangerouslySetInnerHTML={{ __html: reflectionText }}
+          dangerouslySetInnerHTML={{ __html: highlightHashtag(reflectionText) }}
         />
       </span>
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
