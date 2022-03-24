@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
@@ -8,6 +10,7 @@ import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTrigger
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   playFrom,
@@ -15,6 +18,7 @@ import {
   selectIsPlaying,
   selectIsRadioMode,
 } from 'src/redux/slices/AudioPlayer/state';
+import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import QueryParam from 'types/QueryParam';
 
@@ -27,6 +31,8 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const isAudioPlaying = useSelector(selectIsPlaying);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
   const isRadioMode = useSelector(selectIsRadioMode);
+  const chaptersData = useContext(DataContext);
+  const chapterData = getChapterData(chaptersData, chapterId.toString());
 
   const isPlayingCurrentChapter = isAudioPlaying && currentAudioData?.chapterId === chapterId;
 
@@ -68,6 +74,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           onClick={play}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
+          ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
         >
           {t('audio.play')}
         </Button>

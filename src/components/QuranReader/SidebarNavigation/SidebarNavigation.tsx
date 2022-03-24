@@ -84,6 +84,7 @@ const SidebarNavigation = () => {
             logButtonClick('sidebar_navigation_close');
             dispatch(setIsVisible(false));
           }}
+          ariaLabel={t('aria.sidebar-nav-close')}
         >
           <IconClose />
         </Button>

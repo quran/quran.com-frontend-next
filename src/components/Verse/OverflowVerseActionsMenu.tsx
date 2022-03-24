@@ -49,6 +49,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             className={classNames(cellStyles.iconContainer, cellStyles.verseAction, {
               [cellStyles.fadedVerseAction]: isTranslationView,
             })}
+            ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>
               <OverflowMenuIcon />
