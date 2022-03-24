@@ -50,6 +50,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
   return (
     <>
       <Head>
+        <link rel="apple-touch-icon" sizes="192x192" href="/images/logo/Logo@192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
         <meta
