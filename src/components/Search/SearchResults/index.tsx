@@ -19,6 +19,7 @@ interface Props {
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
+  onSearchResultClicked?: () => void;
 }
 
 const SearchResults: React.FC<Props> = ({
@@ -28,6 +29,7 @@ const SearchResults: React.FC<Props> = ({
   currentPage,
   onPageChange,
   pageSize,
+  onSearchResultClicked,
 }) => {
   const { t, lang } = useTranslation('common');
   return (
@@ -63,8 +65,9 @@ const SearchResults: React.FC<Props> = ({
               {searchResult.pagination.totalRecords > 0 && (
                 <Link
                   href={`/search?query=${searchQuery}`}
-                  passHref
+                  shouldPassHref
                   onClick={() => {
+                    if (onSearchResultClicked) onSearchResultClicked();
                     logButtonClick('search_drawer_show_all');
                   }}
                 >

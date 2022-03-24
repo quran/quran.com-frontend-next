@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -14,10 +14,11 @@ import VersesRangeSelector from './VersesRangeSelector';
 
 import { getAvailableTranslations } from 'src/api';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
-import Combobox from 'src/components/dls/Forms/Combobox';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import Select from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import DataContext from 'src/contexts/DataContext';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
@@ -53,6 +54,7 @@ const TO_COPY_FONTS = [
 
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang, t } = useTranslation('quran-reader');
+  const chaptersData = useContext(DataContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
@@ -145,7 +147,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     setShowRangeOfVerses(true);
     // we only need to generate the verse keys + set the range start and end only when the user hadn't selected the range already to avoid re-calculating the keys and to avoid resetting his selected range boundaries when he switches back and forth between current verse/range of verses options.
     if (!rangeStartVerse || !rangeEndVerse) {
-      const keys = generateChapterVersesKeys(verse.chapterId as string);
+      const keys = generateChapterVersesKeys(chaptersData, verse.chapterId as string);
       setRangeVersesItems(
         keys.map((chapterVersesKey) => ({
           id: chapterVersesKey,
@@ -331,19 +333,19 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         <p>{t('font')}</p>
         <HelperTooltip>{t('font-tooltip')}</HelperTooltip>
       </div>
-      <Combobox
-        clearable
-        id="wordByWord"
-        value={shouldCopyFont}
-        initialInputValue={t(`common:fonts.${QuranFont.Uthmani}`)}
-        items={TO_COPY_FONTS.map((font) => ({
-          id: font,
-          name: font,
-          label: t(`common:fonts.${font}`),
-          value: font,
-        }))}
-        onChange={onShouldCopyFontsChange}
+      <Select
+        id="arabic-font-to-copy"
+        name="arabic-font-to-copy"
         placeholder={t('font-placeholder')}
+        options={[
+          { label: t('common:none'), value: '' },
+          ...TO_COPY_FONTS.map((font) => ({
+            label: t(`common:fonts.${font}`),
+            value: font,
+          })),
+        ]}
+        value={shouldCopyFont}
+        onChange={(val) => onShouldCopyFontsChange(val as string)}
       />
       <p className={styles.label}>{t('copy-footnote-q')}</p>
       <RadioGroup

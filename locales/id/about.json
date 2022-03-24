@@ -1,14 +1,14 @@
 {
     "credits": {
-        "desc": "Proyek ini tidak akan mungkin terjadi tanpa banyak perpustakaan sumber terbuka dan proyek yang telah kami gunakan:",
+        "desc": "Projek ini tidak mungkin terjadi tanpa adanya banyak sumber perpustakaan terbuka dan rujukan projek sedia-ada yang lain yang telah kami gunakan:",
         "lokalize": "<0> Lokalize <\/0> : Sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
         "quran-align": "<0> Collin Fair <\/0> : Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
-        "quran-complex": "<0> QuranComplex <\/0> : Kompleks Percetakan Al-Qur'an King Fahd adalah pemimpin dalam melayani Al-Qur'an dan Ilmunya, menerjemahkan Maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan yang optimal dari teknologi canggih di bidang percetakan, rekaman audio, penerbitan elektronik dan aplikasi digital.",
+        "quran-complex": "<0> QuranComplex <\/0> : Kompleks Percetakan Al-Qur'an King Fahd adalah pemimpin dalam melayani Al-Qur'an dan Ilmunya, menerjemahkan maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan yang optimal dengan teknologi canggih di bidang percetakan, rakaman audio, penerbitan elektronik dan aplikasi digital.",
         "quran-enc": "<0> QuranEnc <\/0> : Sebuah portal yang menampilkan terjemahan gratis dan terpercaya dari makna dan tafsir Al-Qur'an yang mulia dalam banyak bahasa dunia.",
         "tanzil": "<0> Tanzil <\/0> : Sebuah proyek Al-Qur'an internasional yang bertujuan untuk menyediakan teks Al-Qur'an yang sangat terverifikasi.",
-        "title": "Kredit",
-        "vercel": "<0> Vercel <\/0> : adalah platform penyebaran dan kolaborasi untuk pengembang frontend yang mengutamakan pengembang frontend, memberi mereka alat yang komprehensif untuk membangun situs web dan aplikasi berkinerja tinggi.",
-        "zekr": "<0> Zekr <\/0> : Sebuah platform terbuka alat belajar Quran untuk browsing dan meneliti Quran"
+        "title": "Kredit (Penghargaan)",
+        "vercel": "<0> Vercel <\/0> : ialah platform penggunaan dan kerjasama untuk para Front-End Developer yang mengutamakan pembangunan Front-End Development , memberi mereka alatan yang komprehensif untuk membina tapak web dan aplikasi berprestasi tinggi.",
+        "zekr": "<0> Zekr <\/0> : Pentas terbuka untuk mempelajari, menyemak dan menyelidik serta mengulangkaji al-Quran"
     },
-    "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan mempelajari Al-Quran. Proyek ini open source dan dibangun sebagai kolaborasi antara anggota tim inti dan <0> tim Tarteel <\/0> ."
+    "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan memahami Al-Quran. Projek ini adalah sumber terbuka (open source project) dan dibangunkan secara kolaborasi antara anggota tim Inti dan <0> tim Tarteel <\/0> ."
 }

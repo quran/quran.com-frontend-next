@@ -18,9 +18,10 @@
             "download": "ডাউনলোড করুন",
             "full-surah": "সম্পূর্ণ সূরা",
             "mismatch": "আপনি যদি পরিবর্তে {{currentReadingChapter}} খেলতে চান তাহলে \"Start Over\" এ ক্লিক করুন",
-            "next-ayah": "পরবর্তী আয়াত",
             "pause": "বিরতি",
+            "pause-audio": "অডিও পজ করুন",
             "play": "খেলা",
+            "play-audio": "অডিও চালান",
             "play-range": "খেলা পরিসীমা",
             "previous-ayah": "আগের আয়াত",
             "repeat-1-verse": "আয়াত পুনরাবৃত্তি করুন",
@@ -88,7 +89,7 @@
         "qpc_uthmani_hafs": "QPC উসমানী হাফস",
         "quran-font": "কুরআন হরফ",
         "tajweed": "তাজবীদ",
-        "tajweed-desc": "তাজবীদ হরফ একটি তাজবীদ রঙিন মুশাফ দেখায়। আপনি তাজউইদের রঙের নিয়ম <0> এখানে <\/0>",
+        "tajweed-desc": "তাজবীদ হরফ একটি তাজবীদ রঙিন মুশাফ দেখায়। আপনি তাজউইদের রঙের নিয়ম <0>এখানে<\/0>",
         "text_indopak": "ইন্দোপাক",
         "text_uthmani": "উসমানী"
     },
@@ -105,6 +106,7 @@
     "juz": "জুজ",
     "language": "ভাষা",
     "languages": "ভাষা",
+    "less": "কম",
     "loading": "লোড হচ্ছে",
     "menu": "তালিকা",
     "mobile-apps": "মোবাইল অ্যাপস",
@@ -113,6 +115,7 @@
     "navigate": "নেভিগেট করুন",
     "network": "অন্তর্জাল",
     "next": "পরবর্তী",
+    "next-ayah": "পরবর্তী আয়াত",
     "no": "না",
     "none": "কোনোটিই নয়",
     "off": "বন্ধ",
@@ -122,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}} totalNumberOfResults}}টি ফলাফলের মধ্যে {{totalNumberOfResults}} - {{endOfResultNumber}}",
     "popular-links": "জনপ্রিয় লিঙ্ক",
     "powered-by": "দ্বারা চালিত",
-    "prayer-times": {
-        "access-denied": "অবস্থানে অ্যাক্সেস অস্বীকার করা হয়েছে৷ সঠিক প্রার্থনার সময় পেতে অনুগ্রহ করে অবস্থান অ্যাক্সেস সক্ষম করুন",
-        "calculation-method": "হিসাব পদ্ধতি",
-        "calculation-methods": {
-            "Dubai": "দুবাই",
-            "Egyptian": "মিশরীয়",
-            "Karachi": "করাচি",
-            "Kuwait": "কুয়েত",
-            "MoonsightingCommittee": "চাঁদ দেখা কমিটি",
-            "MuslimWorldLeague": "মুসলিম ওয়ার্ল্ড লিগ",
-            "NorthAmerica": "উত্তর আমেরিকা",
-            "Qatark": "কাতার্ক",
-            "Singapore": "সিঙ্গাপুর",
-            "Tehran": "তেহরান",
-            "Turkey": "তুরস্ক",
-            "UmmAlQura": "উম্মুল কুরা"
-        },
-        "find-accurate-location": "সঠিক অবস্থান খুঁজুন",
-        "location-access": "অবস্থান অ্যাক্সেস",
-        "location-updated": "নামাজের সময় অবস্থান আপডেট করা হয়েছে",
-        "madhab": "মাধব",
-        "madhabs": {
-            "Hanafi": "হানাফী",
-            "Shafi": "শফি"
-        },
-        "title": "নামাজের সময়"
-    },
     "prev": "আগে",
+    "previous-ayah": "আগের আয়াত",
     "privacy": "গোপনীয়তা",
     "product-updates": "পণ্য আপডেট",
     "q-reflect": "কুরআন প্রতিফলন",
@@ -160,9 +137,11 @@
         "translation": "অনুবাদ"
     },
     "reciter": "আবৃত্তিকারী",
+    "reciters": "আবৃত্তিকারী",
     "reflect": "প্রতিফলিত করা",
     "remove": "অপসারণ",
     "retry": "পুনরায় চেষ্টা করা",
+    "search-for": "'{{searchQuery}}' অনুসন্ধান করুন",
     "search": {
         "filters": "ফিল্টার",
         "hint": "খোঁজার চেষ্টা করুন",
@@ -191,6 +170,7 @@
         "show-tooltip-when-playing-audio": "অডিও চালানোর সময় টুলটিপ দেখান",
         "title": "সেটিংস",
         "tooltip-playing-audio-helper": "আয়াত খেলার সময় টুলটিপে শব্দ অনুবাদ দেখান",
+        "value-and-other": "{{value}} , এবং {{othersCount}} অন্যান্য৷",
         "value-and-others": "{{value}} , এবং {{othersCount}} অন্যান্য",
         "wbw-helper": "সরাসরি শব্দের নিচে অনুবাদ বা প্রতিবর্ণীকরণ প্রদর্শন করুন",
         "word-tooltip-helper": "শব্দটি ঘোরানো বা ক্লিক করার সময় অনুবাদ বা প্রতিবর্ণীকরণ প্রদর্শন করুন"
@@ -214,7 +194,10 @@
     "tafsir": {
         "font-size": "তাফসির ফন্ট সাইজ",
         "group-message": "{{from}} {{to}} আয়াতের গ্রুপের জন্য একটি তাফসির পড়ছেন",
+        "no-text": "বর্তমান আয়াতের জন্য {{tafsirName}} উপলব্ধ নেই৷",
         "surah": "তাফসীর সূরা",
+        "tafsir-desc": "সূরা {{surahName}} {{verseNumber}} এর {{verseNumber} {{tafsirName}} আয়াতের জন্য {{tafsirName}} পড়ুন",
+        "tafsirs-desc": "বিশ্বস্ত তাফসির আলেমদের দ্বারা {{surahName}} সূরার {{surahName}} {{ayahNumber}} আয়াতের বিভিন্ন তাফসির পড়ুন",
         "title": "তাফসির"
     },
     "tarteel": {
@@ -238,6 +221,8 @@
     "transliteration": "ট্রান্সলিটারেশন",
     "type": "টাইপ",
     "verse": "আয়াত",
+    "verse-bookmark-removed": "আয়াত বুকমার্ক সরানো!",
+    "verse-bookmarked": "আয়াত বুকমার্ক!",
     "verses": "আয়াত",
     "view": "দেখুন",
     "voice": {
@@ -252,6 +237,8 @@
     },
     "wbw": "শব্দ দ্বারা শব্দ",
     "wbw-trans-lang": "শব্দ দ্বারা শব্দ ভাষা",
+    "wbw-translation": "শব্দ দ্বারা শব্দ অনুবাদ",
+    "wbw-transliteration": "শব্দ দ্বারা শব্দ প্রতিবর্ণীকরণ",
     "word-click": {
         "no-audio": "অডিও নেই",
         "play-audio": "অডিও চালান",

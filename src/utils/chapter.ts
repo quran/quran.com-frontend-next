@@ -2,7 +2,10 @@
 /* eslint-disable global-require */
 import random from 'lodash/random';
 
+import { formatStringNumber } from './number';
+
 import Chapter from 'types/Chapter';
+import ChaptersData from 'types/ChaptersData';
 
 const DEFAULT_LANGUAGE = 'en';
 const SUPPORTED_CHAPTER_LOCALES = [
@@ -23,27 +26,35 @@ const SUPPORTED_CHAPTER_LOCALES = [
  * Get chapters data from the json file, by language
  *
  * @param {string} lang
- * @returns {Record<string, Chapter>} chapter
+ * @returns {Promise<Record<string, Chapter>>} chapter
  */
-export const getAllChaptersData = (lang: string = DEFAULT_LANGUAGE): Record<string, Chapter> => {
+export const getAllChaptersData = (
+  lang: string = DEFAULT_LANGUAGE,
+): Promise<Record<string, Chapter>> => {
   if (SUPPORTED_CHAPTER_LOCALES.includes(lang)) {
-    // eslint-disable-next-line import/no-dynamic-require
-    return require(`../../public/data/chapters/${lang}.json`);
+    return new Promise((res) => {
+      import(`../../data/chapters/${lang}.json`).then((data) => {
+        res(data.default);
+      });
+    });
   }
-  return require('../../public/data/chapters/en.json');
+  return new Promise((res) => {
+    import(`../../data/chapters/en.json`).then((data) => {
+      // @ts-ignore
+      res(data.default);
+    });
+  });
 };
 
 /**
  * Get chapter data by id from the json file
  *
- * @param {string} id  chapterId
- * @param {string} lang language
+ * @param {ChaptersData} chapters
+ * @param {string} id
  * @returns {Chapter} chapter
  */
-export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Chapter => {
-  const chapters = getAllChaptersData(lang);
-  return chapters[id];
-};
+export const getChapterData = (chapters: ChaptersData, id: string): Chapter =>
+  chapters[formatStringNumber(id)];
 
 /**
  * Given a pageId, get chapter ids from a json file
@@ -53,7 +64,7 @@ export const getChapterData = (id: string, lang: string = DEFAULT_LANGUAGE): Cha
  */
 export const getChapterIdsForPage = (pageId: string): Promise<string[]> => {
   return new Promise((res) => {
-    import(`../../public/data/page-to-chapter-mappings.json`).then((data) => {
+    import(`../../data/page-to-chapter-mappings.json`).then((data) => {
       res(data.default[pageId]);
     });
   });
@@ -66,8 +77,11 @@ export const getChapterIdsForPage = (pageId: string): Promise<string[]> => {
  * @returns {string[]} chapterIds
  */
 export const getChapterIdsForJuz = async (juzId: string): Promise<string[]> => {
-  const juzsData = await import('../../public/data/juz-to-chapter-mappings.json');
-  return juzsData[juzId];
+  return new Promise((res) => {
+    import(`../../data/juz-to-chapter-mappings.json`).then((data) => {
+      res(data.default[juzId]);
+    });
+  });
 };
 
 type ChapterAndVerseMapping = { [chapter: string]: string };
@@ -77,9 +91,11 @@ type ChapterAndVerseMapping = { [chapter: string]: string };
  * @returns {[juz: string]: ChapterAndVerseMapping}
  */
 export const getAllJuzMappings = (): Promise<{ [juz: string]: ChapterAndVerseMapping }> => {
-  return import('../../public/data/juz-to-chapter-verse-mappings.json').then(
-    (data) => data.default,
-  );
+  return new Promise((res) => {
+    import('../../data/juz-to-chapter-verse-mappings.json').then((data) => {
+      res(data.default);
+    });
+  });
 };
 
 /**

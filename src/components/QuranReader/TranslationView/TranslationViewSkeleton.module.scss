@@ -7,9 +7,6 @@
 }
 
 .verseContainer {
-  width: 80%;
-  margin-inline-start: auto;
-  margin-block: var(--spacing-large);
   height: calc(1.7 * var(--font-size));
 }
 
@@ -25,4 +22,12 @@
   font-size: var(--font-size-small);
 }
 
-@include utility.generate-font-sizes("translation");
+.actionItem {
+  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
+  @include breakpoints.tablet {
+    margin-inline-end: 0;
+    margin-block-end: calc(0.5 * var(--spacing-xxsmall));
+  }
+}
+
+@include utility.generate-font-scales("translation");

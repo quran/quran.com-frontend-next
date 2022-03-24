@@ -1,9 +1,3 @@
-// TODO:
-// - generate css with SCSS
-// - use better pattern
-//    - https://cube.fyi/composition.html#examples (looks like vercel is using similar pattern like this)
-//    - https://cube.fyi/exception.html#why-data-attributes
-
 @use "src/styles/utility";
 
 .base {
@@ -13,104 +7,88 @@
   text-decoration: none;
   box-sizing: border-box;
   transition: transform var(--transition-fast);
+  color: var(--themed-fg, var(--color-text-default));
+  background-color: var(--themed-bg, var(--color-background-default));
+  font-weight: var(--font-weight-medium);
+  border: 1px solid var(--themed-border);
+  height: var(--button-size);
+  justify-content: center;
+  border-radius: var(--border-radius-default);
+  padding-inline: var(--spacing-small);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: transparent;
+      color: var(--themed-bg);
+    }
+  }
   &:active {
     transform: scale(0.92);
-  }
-}
-.withText {
-  padding-block-start: 0;
-  padding-block-end: 0;
-  padding-inline-start: var(--spacing-small);
-  padding-inline-end: var(--spacing-small);
-  justify-content: center;
-}
-.withIcon {
-  justify-content: center;
-  &[dir="rtl"][data-auto-flip-icon="true"] {
-    transform: scaleX(-1);
   }
 }
 
 // type
 .primary {
-  background-color: var(--color-primary-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-primary-medium);
-  &:hover {
-    color: var(--color-text-default);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-primary-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-primary-medium);
 }
 
 .secondary {
-  background-color: var(--color-secondary-medium);
-  color: var(--color-text-default);
-  border: 1px solid var(--color-secondary-medium);
-  &:hover {
-    color: var(--color-text-default);
-    background-color: var(--color-background-alternative-deep);
+  --themed-bg: var(--color-background-default);
+  --themed-fg: var(--color-text-faded);
+  --themed-border: var(--color-borders-hairline);
+
+  @media (hover: hover) {
+    &:hover {
+      --themed-bg: var(--color-text-default);
+      --themed-border: var(--color-primary-medium);
+    }
   }
 }
 
 .success {
-  background-color: var(--color-success-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-success-medium);
-  &:hover {
-    color: var(--color-success-medium);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-success-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-success-medium);
 }
 
 .warning {
-  background-color: var(--color-warning-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-warning-medium);
-  &:hover {
-    color: var(--color-warning-medium);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-warning-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-warning-medium);
 }
 
 .error {
-  background-color: var(--color-error-medium);
-  color: var(--color-text-inverse);
-  border: 1px solid var(--color-error-medium);
-  &:hover {
-    color: var(--color-error-medium);
-    background-color: var(--color-text-inverse);
-  }
+  --themed-bg: var(--color-error-medium);
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: var(--color-error-medium);
 }
 
 // size
 .large {
   font-size: var(--font-size-large);
-  height: calc(3 * var(--spacing-medium));
-}
-.withIcon.large {
-  width: calc(3 * var(--spacing-medium));
+  --button-size: calc(3 * var(--spacing-medium));
 }
 .normal {
   font-size: var(--font-size-normal);
-  height: calc(2.5 * var(--spacing-medium));
-}
-.withIcon.normal {
-  width: calc(2.5 * var(--spacing-medium));
+  --button-size: calc(2.5 * var(--spacing-medium));
 }
 .small {
   font-size: var(--font-size-normal);
-  height: calc(2 * var(--spacing-medium));
-}
-.withIcon.small {
-  width: calc(2 * var(--spacing-medium));
+  --button-size: calc(2 * var(--spacing-medium));
 }
 
 // shape
 .square {
   border-radius: var(--border-radius-default);
+  width: var(--button-size);
+  padding: 0;
 }
 .circle {
   border-radius: var(--border-radius-circle);
+  width: var(--button-size);
+  padding: 0;
 }
 .pill {
   border-radius: var(--border-radius-pill);
@@ -119,61 +97,48 @@
 // variant
 .shadow {
   box-shadow: var(--shadow-large);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--themed-bg);
+      color: var(--themed-fg);
+      position: relative;
+      inset-block-start: -1px;
+    }
+  }
 }
 
 .ghost {
   background-color: transparent;
   border: none;
+  color: var(--themed-bg);
   &:hover {
+    background-color: var(--themed-bg);
     @include utility.lighten-background-color;
   }
 }
-.ghost.primary {
-  color: var(--color-text-default);
-  &:hover {
-    background-color: var(--color-primary-medium);
-  }
-}
+// corner case for secondary ghost button
 .ghost.secondary {
-  color: var(--color-secondary-medium);
-  &:hover {
-    background-color: var(--color-secondary-medium);
-  }
+  --themed-bg: var(--color-text-faded);
 }
-.ghost.warning {
-  color: var(--color-warning-medium);
+
+.compact {
+  padding-inline: 0;
+  background-color: transparent;
+  color: var(--themed-bg);
+  border: none;
   &:hover {
-    background-color: var(--color-warning-medium);
+    opacity: var(--opacity-50);
   }
 }
 
-.ghost.success {
-  color: var(--color-success-medium);
-  &:hover {
-    background-color: var(--color-success-medium);
-  }
-}
-.ghost.error {
-  color: var(--color-error-medium);
-  &:hover {
-    background-color: var(--color-error-medium);
-  }
-}
-
-// suffix and prefix container
+// suffix, prefix and content contaniner
 .suffix {
   display: flex;
   margin-inline-start: calc(0.5 * var(--spacing-medium));
-  &[dir="rtl"][data-auto-flip-icon="true"] svg {
-    transform: scaleX(-1);
-  }
 }
 .prefix {
   display: flex;
   margin-inline-end: calc(0.5 * var(--spacing-medium));
-  &[dir="rtl"][data-auto-flip-icon="true"] svg {
-    transform: scaleX(-1);
-  }
 }
 .content {
   display: flex;
@@ -181,17 +146,12 @@
 }
 
 // svg sizes
-.large > span > svg {
-  height: calc(1.5 * var(--spacing-medium));
-  width: calc(1.5 * var(--spacing-medium));
+.base > span > svg {
+  height: calc(0.5 * var(--button-size));
+  width: calc(0.5 * var(--button-size));
 }
-.normal > span > svg {
-  height: calc(1.25 * var(--spacing-medium));
-  width: calc(1.25 * var(--spacing-medium));
-}
-.small > span > svg {
-  height: calc(1 * var(--spacing-medium));
-  width: calc(1 * var(--spacing-medium));
+.base[dir="rtl"][data-auto-flip-icon="true"] svg {
+  transform: scaleX(-1);
 }
 
 .base.disabled {
@@ -200,26 +160,25 @@
   border: 1px solid var(--color-secondary-medium);
   color: var(--color-text-default);
   opacity: 0.7;
-  &:hover {
-    background-color: var(--color-background-alternative-medium);
-    opacity: 0.7;
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-background-alternative-medium);
+      opacity: 0.7;
+    }
   }
 }
 .ghost.disabled {
   border: none;
   background: inherit;
-  &:hover {
-    background: inherit;
+  @media (hover: hover) {
+    &:hover {
+      background: inherit;
+    }
   }
 }
 
+// TODO: remove .noSidePadding usage
 .noSidePadding {
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
-
-// // when button used as Popover's trigger, add style when Popover is open
-// [data-state="open"] > button > .base {
-//   background-color: var(--color-primary-medium);
-//   @include utility.lighten-background-color;
-// }

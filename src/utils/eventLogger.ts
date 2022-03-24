@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
 
+import { isFirebaseEnabled } from 'src/lib/firebase';
+
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
-  import('src/lib/firebase').then((firebaseModule) => {
-    // eslint-disable-next-line i18next/no-literal-string
-    firebaseModule.analytics().logEvent(eventName, params);
-  });
+  if (isFirebaseEnabled) {
+    import('src/lib/firebase').then((firebaseModule) => {
+      // eslint-disable-next-line i18next/no-literal-string
+      firebaseModule.analytics().logEvent(eventName, params);
+    });
+  }
 };
 
 /**
@@ -46,6 +50,12 @@ export const logEmptySearchResults = (searchQuery: string, source: string, type 
   logEvent(`${type}_search_query_with_no_result`, {
     query: searchQuery,
     source,
+  });
+};
+
+export const logTarteelLinkClick = (type: string) => {
+  logEvent('tarteel_link_click', {
+    type: `${type}_attribution`,
   });
 };
 

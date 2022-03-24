@@ -1,41 +1,37 @@
-import { useEffect, useRef, useImperativeHandle, ForwardedRef } from 'react';
+import { useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
 
-import { fakeNavigate } from 'src/utils/navigation';
-
-export type ContentModalHandles = {
-  scrollToTop: () => void;
-};
+import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 
 type ContentModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
+  onEscapeKeyDown?: () => void;
   children: React.ReactNode;
   hasCloseButton?: boolean;
-  url?: string;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
+  contentClassName?: string;
   // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
 };
 
 const ContentModal = ({
   isOpen,
   onClose,
+  onEscapeKeyDown,
   hasCloseButton,
   children,
-  url,
   header,
   innerRef,
+  contentClassName,
 }: ContentModalProps) => {
-  const router = useRouter();
-
   const overlayRef = useRef<HTMLDivElement>();
 
   useImperativeHandle(innerRef, () => ({
@@ -44,27 +40,18 @@ const ContentModal = ({
     },
   }));
 
-  useEffect(() => {
-    if (!url) return null;
-    if (isOpen) fakeNavigate(url, router.locale);
-    else fakeNavigate(router.asPath, router.locale);
-
-    return () => {
-      fakeNavigate(router.asPath, router.locale);
-    };
-
-    // we only want to run this effect when `isOpen` changed, not when `url` changed
-    // this is important because sometime the url props is changed, but we don't want to trigger `fakeNavigate` again.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
-
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
-          <Dialog.Content className={styles.contentWrapper} onInteractOutside={onClose}>
+          <Dialog.Content
+            className={classNames(styles.contentWrapper, {
+              [contentClassName]: contentClassName,
+            })}
+            onEscapeKeyDown={onEscapeKeyDown}
+            onPointerDownOutside={onClose}
+          >
             <div className={styles.header}>
-              {header}
               {hasCloseButton && (
                 <Dialog.Close className={styles.closeIcon}>
                   <Button
@@ -76,6 +63,7 @@ const ContentModal = ({
                   </Button>
                 </Dialog.Close>
               )}
+              {header}
             </div>
             <div className={styles.content}>{children}</div>
           </Dialog.Content>

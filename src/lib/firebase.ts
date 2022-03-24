@@ -11,12 +11,15 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FS_MEASUREMENT_ID,
 };
 
+export const isFirebaseEnabled =
+  typeof window !== 'undefined' && process.env.NEXT_PUBLIC_ENABLE_FS_LOGGING === 'true';
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
 export const analytics = () => {
-  if (typeof window !== 'undefined') {
+  if (isFirebaseEnabled) {
     return firebase.analytics();
   }
   return null;

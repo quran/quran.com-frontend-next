@@ -1,19 +1,26 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { SWRConfig } from 'swr';
 
 import styles from '../[verseId]/tafsirs.module.scss';
 
 import { fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getDefaultWordFields } from 'src/utils/api';
-import { makeTafsirContentUrl } from 'src/utils/apiPaths';
-import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { scrollWindowToTop } from 'src/utils/navigation';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
+import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+import {
+  getCanonicalUrl,
+  getVerseSelectedTafsirNavigationUrl,
+  scrollWindowToTop,
+} from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -21,6 +28,7 @@ import {
 import { isValidVerseKey } from 'src/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
@@ -29,6 +37,8 @@ type AyahTafsirProp = {
   tafsirIdOrSlug?: string;
   chapterId?: string;
   tafsirData?: TafsirContentResponse;
+  chaptersData: ChaptersData;
+  fallback: any;
 };
 
 const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
@@ -38,63 +48,91 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   chapterId,
   tafsirData,
   tafsirIdOrSlug,
+  chaptersData,
+  fallback,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
 
+  const navigationUrl = getVerseSelectedTafsirNavigationUrl(
+    chapterId,
+    Number(verseNumber),
+    tafsirData.tafsir.slug,
+  );
+  const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
-        title={`${t('tafsir.surah')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
-          Number(verseNumber),
-          lang,
-        )}`}
+        title={`${t('tafsir.surah')} ${
+          chapter.chapter.transliteratedName
+        } - ${localizedVerseNumber}`}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        description={t('tafsir.tafsir-desc', {
+          verseNumber: localizedVerseNumber,
+          tafsirName: tafsirData.tafsir.translatedName.name,
+          surahName: chapter.chapter.transliteratedName,
+        })}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
       />
-      <div className={styles.tafsirContainer}>
-        <TafsirBody
-          scrollToTop={scrollWindowToTop}
-          initialChapterId={chapterId}
-          initialVerseNumber={verseNumber.toString()}
-          initialTafsirData={tafsirData}
-          initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
-          render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
-            return (
-              <div>
-                {surahAndAyahSelection}
-                {languageAndTafsirSelection}
-                {body}
-              </div>
-            );
-          }}
-        />
-      </div>
-    </>
+      <SWRConfig value={{ fallback }}>
+        <div className={styles.tafsirContainer}>
+          <TafsirBody
+            shouldRender
+            scrollToTop={scrollWindowToTop}
+            initialChapterId={chapterId}
+            initialVerseNumber={verseNumber.toString()}
+            initialTafsirIdOrSlug={tafsirIdOrSlug || undefined}
+            render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
+              return (
+                <div>
+                  {surahAndAyahSelection}
+                  {languageAndTafsirSelection}
+                  {body}
+                </div>
+              );
+            }}
+          />
+        </div>
+      </SWRConfig>
+    </DataContext.Provider>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { chapterId, tafsirId: tafsirIdOrSlug } = params;
   const verseKey = String(chapterId);
+  const chaptersData = await getAllChaptersData(locale);
   // if the verse key or the tafsir id is not valid
-  if (!isValidVerseKey(verseKey)) {
+  if (!isValidVerseKey(chaptersData, verseKey)) {
     return { notFound: true };
   }
   const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   try {
-    const tafsirData = await fetcher<TafsirContentResponse>(
-      makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-        words: true,
-        ...getDefaultWordFields(),
-      }),
-    );
+    const tafsirContentUrl = makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
+      lang: locale,
+      quranFont,
+      mushafLines,
+    });
+    const tafsirListUrl = makeTafsirsUrl(locale);
+
+    const [tafsirContentData, tafsirListData] = await Promise.all([
+      fetcher(tafsirContentUrl),
+      fetcher(tafsirListUrl),
+    ]);
 
     return {
       props: {
+        chaptersData,
         chapterId: chapterNumber,
-        tafsirData,
-        chapter: { chapter: getChapterData(chapterNumber, locale) },
+        chapter: { chapter: getChapterData(chaptersData, chapterNumber) },
+        fallback: {
+          [tafsirListUrl]: tafsirListData,
+          [tafsirContentUrl]: tafsirContentData,
+        },
+        tafsirData: tafsirContentData,
         verseNumber,
         tafsirIdOrSlug,
       },

@@ -2,24 +2,25 @@
     "change": "改变",
     "curated-station": {
         "juz-amma": {
-            "description": "聆听《古兰经》的最后 Juz",
+            "description": "聆听《古兰经》的最后一卷",
             "title": "尤兹阿玛"
         },
         "popular-recitations": {
-            "description": "每日精选的朗诵供稿",
+            "description": "每日精选的诵读",
             "title": "流行朗诵"
         },
         "surah-al-kahf": {
-            "description": "重复听 Surah Alkahf",
-            "title": "古兰经"
+            "description": "重复听山洞章",
+            "title": "山洞章"
         },
         "yaseen-alwaqiah-al-mulk": {
             "description": "朗诵者策展的古兰经",
-            "title": "Yaseen、Al-Waqiah、Al-Mulk"
+            "title": "雅辛章、大事章、国权章"
         }
     },
     "curated-stations": "策划站",
     "pause-radio": "暂停电台",
     "play-radio": "播放电台",
+    "radio-desc": "聆听各种朗诵者不停优美地朗诵《古兰经》。",
     "reciter-stations": "朗诵站"
 }

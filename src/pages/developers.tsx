@@ -34,7 +34,7 @@ const DevelopersPage = () => {
           <Trans
             i18nKey="developers:projects.all"
             components={[
-              <a key={0} href="http://github.com/quran" target="_blank" rel="noreferrer" />,
+              <a key={0} href="https://github.com/quran" target="_blank" rel="noreferrer" />,
             ]}
           />
         </p>

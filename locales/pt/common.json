@@ -18,9 +18,10 @@
             "download": "Download",
             "full-surah": "Surata completa",
             "mismatch": "Clique em \"Recomeçar\" se preferir jogar {{currentReadingChapter}}",
-            "next-ayah": "Próxima Ayah",
             "pause": "Pausa",
+            "pause-audio": "Pausar áudio",
             "play": "Toque",
+            "play-audio": "Reproduzir áudio",
             "play-range": "Alcance de jogo",
             "previous-ayah": "Ayah anterior",
             "repeat-1-verse": "Repita o verso",
@@ -105,6 +106,7 @@
     "juz": "Juz",
     "language": "Língua",
     "languages": "línguas",
+    "less": "Menos",
     "loading": "Carregando",
     "menu": "Cardápio",
     "mobile-apps": "Aplicativos móveis",
@@ -113,6 +115,7 @@
     "navigate": "Navegar",
     "network": "Rede",
     "next": "Próximo",
+    "next-ayah": "Próxima Aia",
     "no": "Não",
     "none": "Nenhum",
     "off": "Desligado",
@@ -122,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "popular-links": "Links populares",
     "powered-by": "Distribuído por",
-    "prayer-times": {
-        "access-denied": "Acesso ao local negado. Ative o acesso à localização para obter horários de oração precisos",
-        "calculation-method": "Método de cálculo",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "egípcio",
-            "Karachi": "Carachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "Comitê de Moonsighting",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "América do Norte",
-            "Qatark": "Qatark",
-            "Singapore": "Cingapura",
-            "Tehran": "Teerã",
-            "Turkey": "Turquia",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Encontre a localização exata",
-        "location-access": "Acesso de localização",
-        "location-updated": "Localização dos horários de oração atualizada",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Momentos de Oração"
-    },
     "prev": "Anterior",
+    "previous-ayah": "Anterior Ayah",
     "privacy": "Privacidade",
     "product-updates": "Atualizações de produtos",
     "q-reflect": "QuranReflect",
@@ -160,9 +137,11 @@
         "translation": "Tradução"
     },
     "reciter": "Recitador",
+    "reciters": "Recitadores",
     "reflect": "Refletir",
     "remove": "Retirar",
     "retry": "Tentar novamente",
+    "search-for": "Procure por '{{searchQuery}}'",
     "search": {
         "filters": "Filtros",
         "hint": "Tente pesquisar por",
@@ -191,6 +170,7 @@
         "show-tooltip-when-playing-audio": "Mostrar dica de ferramenta ao reproduzir áudio",
         "title": "Definições",
         "tooltip-playing-audio-helper": "Mostrar tradução de palavras na dica de ferramenta ao jogar ayah",
+        "value-and-other": "{{value}} e {{othersCount}} outros",
         "value-and-others": "{{value}} e {{othersCount}} outros",
         "wbw-helper": "Exibir a tradução ou transliteração diretamente abaixo da palavra",
         "word-tooltip-helper": "Exibir a tradução ou transliteração ao passar o mouse ou clicar na palavra"
@@ -214,7 +194,10 @@
     "tafsir": {
         "font-size": "Tamanho da fonte Tafsir",
         "group-message": "Você está lendo um tafsir para o grupo de versos {{from}} a {{to}}",
+        "no-text": "{{tafsirName}} não está disponível para o verso atual.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Leia {{tafsirName}} para Ayah {{verseNumber}} da Surata {{surahName}}",
+        "tafsirs-desc": "Leia vários Tafsirs de Ayah {{ayahNumber}} de Sura {{surahName}} por estudiosos Tafsir confiáveis",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -238,6 +221,8 @@
     "transliteration": "Transliteração",
     "type": "Modelo",
     "verse": "Versículo",
+    "verse-bookmark-removed": "Marcador de versículo removido!",
+    "verse-bookmarked": "Versículo marcado!",
     "verses": "Versos",
     "view": "Visualizar",
     "voice": {
@@ -252,6 +237,8 @@
     },
     "wbw": "Palavra por palavra",
     "wbw-trans-lang": "Linguagem palavra por palavra",
+    "wbw-translation": "Tradução palavra por palavra",
+    "wbw-transliteration": "Transliteração palavra por palavra",
     "word-click": {
         "no-audio": "Sem áudio",
         "play-audio": "Tocar áudio",

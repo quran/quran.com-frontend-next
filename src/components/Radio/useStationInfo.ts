@@ -5,19 +5,18 @@ import useSWRImmutable from 'swr/immutable';
 import curatedStations from './curatedStations';
 import { StationInfo, StationType } from './types';
 
-import { getAvailableReciters } from 'src/api';
+import { getReciterData } from 'src/api';
 import { selectRadioStation } from 'src/redux/slices/radio';
-import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
+import { makeReciterUrl } from 'src/utils/apiPaths';
 
 const useCurrentStationInfo = (): StationInfo => {
   const { t, lang } = useTranslation('radio');
 
   const stationState = useSelector(selectRadioStation);
-  // TODO: once the backend API to fetch 1 reciter is ready, use that API
-  // instead of fetching all reciters with `getAvailableReciters`
-  const { data: recitersData } = useSWRImmutable(
-    stationState.type === StationType.Reciter ? makeAvailableRecitersUrl(lang) : null,
-    getAvailableReciters,
+
+  const { data: reciterData } = useSWRImmutable(
+    stationState.type === StationType.Reciter ? makeReciterUrl(stationState.id, lang) : null,
+    () => getReciterData(stationState.id, lang),
   );
 
   const getCuratedStationInfo = (): StationInfo => {
@@ -29,11 +28,9 @@ const useCurrentStationInfo = (): StationInfo => {
   };
 
   const getReciterStationInfo = (): StationInfo => {
-    const selectedReciter = recitersData?.reciters.find(
-      (reciter) => reciter.id === Number(stationState.id),
-    );
+    const selectedReciter = reciterData?.reciter;
     return {
-      title: selectedReciter?.name,
+      title: selectedReciter?.translatedName?.name,
       description: selectedReciter?.style?.name,
     };
   };

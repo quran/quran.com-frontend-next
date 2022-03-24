@@ -10,7 +10,7 @@ import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
+import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import Verse from 'types/Verse';
 
 export enum Source {
@@ -32,8 +32,8 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
   );
   return (
     <Link
-      href={getVerseNavigationUrlByVerseKey(result.verseKey)}
-      passHref
+      href={getChapterWithStartingVerseUrl(result.verseKey)}
+      shouldPassHref
       onClick={() => {
         logButtonClick(`${source}_result_item`);
       }}
@@ -42,7 +42,7 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
         <div className={styles.itemContainer}>
           <div className={styles.quranTextContainer}>
             <p className={styles.verseKey}>{localizedVerseKey}</p>
-            <div className={styles.quranTextResult}>
+            <div className={styles.quranTextResult} translate="no">
               {result.words.map((word, index) => {
                 return (
                   <QuranWord

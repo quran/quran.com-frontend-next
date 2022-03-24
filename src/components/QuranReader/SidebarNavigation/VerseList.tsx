@@ -1,25 +1,29 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './SidebarNavigation.module.scss';
+import VerseListItem from './VerseListItem';
 
-import Link from 'src/components/dls/Link/Link';
+import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { getVerseToEndOfChapterNavigationUrl } from 'src/utils/navigation';
+import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
 
 const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
   const chapterIds = useChapterIdsByUrlPath(lang);
+  const chaptersData = useContext(DataContext);
   const currentChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
+  const router = useRouter();
 
   const verseKeys = useMemo(
-    () => (currentChapterId ? generateChapterVersesKeys(currentChapterId) : []),
-    [currentChapterId],
+    () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),
+    [chaptersData, currentChapterId],
   );
 
   const filteredVerseKeys = verseKeys.filter((verseKey) => {
@@ -37,28 +41,32 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
+  // Handle when user press `Enter` in input box
+  const handleVerseInputSubmit = (e) => {
+    e.preventDefault();
+    const firstFilteredVerseKey = filteredVerseKeys[0];
+    if (firstFilteredVerseKey)
+      router.push(getChapterWithStartingVerseUrl(firstFilteredVerseKey), undefined, {
+        shallow: true, // https://nextjs.org/docs/routing/shallow-routing
+      });
+  };
+
   return (
     <div className={styles.verseListContainer}>
-      <input
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className={styles.searchInput}
-        placeholder={t('verse')}
-      />
-      <div className={styles.list}>
-        {filteredVerseKeys.map((verseKey) => {
-          const verseNumber = getVerseNumberFromKey(verseKey);
-          const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
-          return (
-            <Link
-              href={getVerseToEndOfChapterNavigationUrl(verseKey)}
-              key={verseKey}
-              prefetch={false}
-            >
-              <div className={styles.listItem}>{localizedVerseNumber}</div>
-            </Link>
-          );
-        })}
+      <form onSubmit={handleVerseInputSubmit}>
+        <input
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className={styles.searchInput}
+          placeholder={t('verse')}
+        />
+      </form>
+      <div className={styles.listContainer}>
+        <div className={styles.list}>
+          {filteredVerseKeys.map((verseKey) => {
+            return <VerseListItem verseKey={verseKey} key={verseKey} />;
+          })}
+        </div>
       </div>
     </div>
   );

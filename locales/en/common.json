@@ -18,9 +18,10 @@
             "download": "Download",
             "full-surah": "Full Surah",
             "mismatch": "Click on \"Start Over\" if you would like to play {{currentReadingChapter}} instead",
-            "next-ayah": "Next Ayah",
             "pause": "Pause",
+            "pause-audio": "Pause Audio",
             "play": "Play",
+            "play-audio": "Play Audio",
             "play-range": "Play range",
             "previous-ayah": "Previous Ayah",
             "repeat-1-verse": "Repeat Verse",
@@ -105,15 +106,16 @@
     "juz": "Juz",
     "language": "Language",
     "languages": "Languages",
+    "less": "Less",
     "loading": "Loading",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "more": "More",
-    "less": "Less",
     "navigate": "Navigate",
     "network": "Network",
     "next": "Next",
+    "next-ayah": "Next Ayah",
     "no": "No",
     "none": "None",
     "off": "Off",
@@ -123,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "popular-links": "Popular Links",
     "powered-by": "Powered by",
-    "prayer-times": {
-        "access-denied": "Access to location denied. Please enable location access to get accurate prayer times",
-        "calculation-method": "Calculation Method",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Egyptian",
-            "Karachi": "Karachi",
-            "Kuwait": "Kuwait",
-            "MoonsightingCommittee": "MoonsightingCommittee",
-            "MuslimWorldLeague": "MuslimWorldLeague",
-            "NorthAmerica": "NorthAmerica",
-            "Qatark": "Qatark",
-            "Singapore": "Singapore",
-            "Tehran": "Tehran",
-            "Turkey": "Turkey",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Find Accurate Location",
-        "location-access": "Location Access",
-        "location-updated": "Prayer times location updated",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Prayer Times"
-    },
     "prev": "Previous",
+    "previous-ayah": "Previous Ayah",
     "privacy": "Privacy",
     "product-updates": "Product Updates",
     "q-reflect": "QuranReflect",
@@ -161,9 +137,11 @@
         "translation": "Translation"
     },
     "reciter": "Reciter",
+    "reciters": "Reciters",
     "reflect": "Reflect",
     "remove": "Remove",
     "retry": "Retry",
+    "search-for": "Search for '{{searchQuery}}'",
     "search": {
         "filters": "Filters",
         "hint": "Try searching for",
@@ -192,6 +170,7 @@
         "show-tooltip-when-playing-audio": "Show tooltip when playing audio",
         "title": "Settings",
         "tooltip-playing-audio-helper": "Show word translation in tooltip while playing ayah",
+        "value-and-other": "{{value}}, and {{othersCount}} other",
         "value-and-others": "{{value}}, and {{othersCount}} others",
         "wbw-helper": "Display the translation or transliteration directly under the word",
         "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
@@ -215,7 +194,10 @@
     "tafsir": {
         "font-size": "Tafsir font size",
         "group-message": "You are reading a tafsir for the group of verses {{from}} to {{to}}",
+        "no-text": "{{tafsirName}} is not available for the current verse.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}",
+        "tafsirs-desc": "Read various Tafsirs of Ayah {{ayahNumber}} of Surah {{surahName}} by trusted Tafsir scholars",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -239,6 +221,8 @@
     "transliteration": "Transliteration",
     "type": "Type",
     "verse": "Verse",
+    "verse-bookmark-removed": "Verse bookmark removed!",
+    "verse-bookmarked": "Verse bookmarked!",
     "verses": "Verses",
     "view": "View",
     "voice": {
@@ -253,11 +237,20 @@
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",
+    "wbw-translation": "Word By Word Translation",
+    "wbw-transliteration": "Word By Word Transliteration",
     "word-click": {
         "no-audio": "No Audio",
         "play-audio": "Play Audio",
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes"
+    "yes": "Yes",
+    "aria": {
+        "msg-close":"Close Message",
+        "select-lng": "Select Language",
+        "drawer-close": "Close Drawer",
+        "change-settings" : "Change Settings",
+        "nav-drawer-open": "Open Navigation Drawer"
+    }
 }

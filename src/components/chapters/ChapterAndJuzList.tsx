@@ -112,7 +112,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link
                 href={`/${chapter.id}`}
-                prefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] !== false}
+                shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] !== false}
               >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}

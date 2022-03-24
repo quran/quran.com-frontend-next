@@ -8,6 +8,7 @@ $card-hover-background-color: rgba(
   scroll-snap-align: start;
   scroll-margin: var(--spacing-medium);
   border-radius: var(--border-radius-rounded);
+  overflow: hidden;
 }
 
 // size

@@ -18,7 +18,7 @@ const AdvancedSearchLink: React.FC<Props> = ({ searchUrl }) => {
     <div className={styles.linkContainer}>
       <Link
         href={searchUrl || getSearchQueryNavigationUrl()}
-        passHref
+        shouldPassHref
         onClick={() => {
           logButtonClick('search_drawer_advanced_search');
         }}

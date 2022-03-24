@@ -1,0 +1,126 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--spacing-xsmall);
+}
+.authorInfo {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  background-color: var(--color-background-alternative-medium);
+  border-radius: var(--border-radius-circle);
+  margin-inline-end: var(--spacing-small);
+  --avatar-size: calc(var(--spacing-mega) * 1.5);
+  height: var(--avatar-size);
+  width: var(--avatar-size);
+  border: 1px solid var(--color-borders-hairline);
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+}
+
+.date {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+}
+
+.separator {
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+}
+
+.verseReferencesContainer {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-size-small);
+  opacity: var(--opacity-75);
+}
+.verseReferences {
+  text-transform: lowercase;
+}
+.verseReferencesPrefix {
+  text-transform: capitalize;
+}
+
+.clickable {
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-text-default);
+}
+
+.container {
+  margin-block-end: calc(2.5 * var(--spacing-large));
+}
+
+.body {
+  margin-block-start: var(--spacing-mega);
+  opacity: var(--opacity-75);
+}
+
+.moreOrLessText {
+  text-transform: lowercase;
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  display: inline-block;
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.verifiedIcon {
+  display: inline-flex;
+  margin-inline-start: var(--spacing-xxsmall);
+  color: var(--color-success-medium);
+}
+
+.verseAndTranslationsListContainer {
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-default);
+  padding-inline: var(--spacing-mega);
+  margin-block: var(--spacing-large);
+}
+.verseAndTranslationContainer {
+  padding-block: var(--spacing-mega);
+  & + & {
+    border-block-start: 1px solid var(--color-borders-hairline);
+  }
+}
+
+.surahName {
+  font-weight: var(--font-weight-semibold);
+  opacity: var(--opacity-75);
+  text-transform: capitalize;
+}
+
+.socialInteractionContainer {
+  opacity: var(--opacity-75);
+  margin-block-start: calc(0.5 * var(--spacing-xxsmall));
+}
+.actionItemContainer {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-end: var(--spacing-large);
+  opacity: var(--opacity-75);
+}
+.actionItemText {
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.socialStats {
+  margin-block-start: var(--spacing-xxsmall);
+  opacity: var(--opacity-75);
+}
+
+.chevronContainer {
+  display: inline-flex;
+}
+.flipChevron {
+  transform: rotate(180deg);
+}
+.referencedVersesPrefix {
+  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
+}

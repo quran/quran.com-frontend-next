@@ -16,32 +16,37 @@ export enum LinkVariant {
 type LinkProps = {
   href: string;
   variant?: LinkVariant;
-  newTab?: boolean;
+  isNewTab?: boolean;
   download?: string;
   className?: string;
   onClick?: React.MouseEventHandler;
-  passHref?: boolean;
-  prefetch?: boolean;
+  shouldPassHref?: boolean;
+  isShallow?: boolean;
+  shouldPrefetch?: boolean;
+  title?: string;
 };
 
 const Link: React.FC<LinkProps> = ({
   href,
   children,
-  newTab = false,
+  isNewTab = false,
   variant,
   download,
   className,
   onClick,
-  passHref,
-  prefetch = true,
+  shouldPassHref,
+  isShallow = false,
+  shouldPrefetch = true,
+  title,
 }) => (
   <Wrapper
     shouldWrap={!download}
     wrapper={(node) => (
       <NextLink
         href={href}
-        {...(passHref && { passHref })}
-        {...(prefetch === false && { prefetch: false })}
+        {...(shouldPassHref && { shouldPassHref })}
+        {...(shouldPrefetch === false && { prefetch: false })}
+        shallow={isShallow}
       >
         {node}
       </NextLink>
@@ -50,8 +55,8 @@ const Link: React.FC<LinkProps> = ({
     <a
       href={href}
       download={download}
-      target={newTab ? '_blank' : undefined}
-      rel={newTab ? 'noreferrer' : undefined}
+      target={isNewTab ? '_blank' : undefined}
+      rel={isNewTab ? 'noreferrer' : undefined}
       className={classNames(styles.base, className, {
         [styles.highlight]: variant === LinkVariant.Highlight,
         [styles.primary]: variant === LinkVariant.Primary,
@@ -59,6 +64,7 @@ const Link: React.FC<LinkProps> = ({
         [styles.blend]: variant === LinkVariant.Blend,
       })}
       {...(onClick && { onClick })}
+      {...(title && { title })}
     >
       {children}
     </a>

@@ -1,25 +1,19 @@
 import { Dispatch } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
-import DataFetcher from '../DataFetcher';
 import Card, { CardSize } from '../dls/Card/Card';
-import Link, { LinkVariant } from '../dls/Link/Link';
 
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
-import { getImageCDNPath } from 'src/api';
 import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
-import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
+import { makeCDNUrl } from 'src/utils/cdn';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
-import { getReciterNavigationUrl } from 'src/utils/navigation';
-import { RecitersResponse } from 'types/ApiResponses';
 import Reciter from 'types/Reciter';
 
 export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<any>) => {
@@ -41,59 +35,46 @@ export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<an
   );
 };
 
-const ReciterStationList = () => {
+type ReciterStationListProps = {
+  reciters: Reciter[];
+};
+const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
   const dispatch = useDispatch();
-  const { lang } = useTranslation();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
 
   return (
-    <DataFetcher
-      queryKey={makeAvailableRecitersUrl(lang, ['profile_picture', 'cover_image', 'bio'])}
-      render={(data: RecitersResponse) => {
-        if (!data) return null;
+    <div className={styles.container}>
+      {reciters.map((reciter) => {
+        const isSelectedStation =
+          stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
+
+        let onClick;
+        if (!isSelectedStation)
+          onClick = () => {
+            logEvent('station_played', {
+              stationId: reciter.id,
+              type: StationType.Curated,
+            });
+            playReciterStation(reciter, dispatch);
+          };
+        if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
+        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
+
+        const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
         return (
-          <div className={styles.container}>
-            {data.reciters.map((reciter) => {
-              const isSelectedStation =
-                stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
-
-              let onClick;
-              if (!isSelectedStation)
-                onClick = () => {
-                  logEvent('station_played', {
-                    stationId: reciter.id,
-                    type: StationType.Curated,
-                  });
-                  playReciterStation(reciter, dispatch);
-                };
-              if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
-              if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
-
-              const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
-              return (
-                <Card
-                  actionIcon={actionIcon}
-                  imgSrc={getImageCDNPath(reciter.profilePicture)}
-                  key={reciter.id}
-                  onImgClick={onClick}
-                  title={
-                    <Link
-                      variant={LinkVariant.Primary}
-                      href={getReciterNavigationUrl(reciter.id.toString())}
-                    >
-                      {reciter.name}
-                    </Link>
-                  }
-                  description={reciter.style.name}
-                  size={CardSize.Medium}
-                />
-              );
-            })}
-          </div>
+          <Card
+            actionIcon={actionIcon}
+            imgSrc={makeCDNUrl(reciter.profilePicture)}
+            key={reciter.id}
+            onImgClick={onClick}
+            title={reciter.translatedName.name}
+            description={reciter.style.name}
+            size={CardSize.Medium}
+          />
         );
-      }}
-    />
+      })}
+    </div>
   );
 };
 

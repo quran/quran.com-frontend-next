@@ -2,6 +2,7 @@ export enum SearchNavigationType {
   SURAH = 'surah',
   JUZ = 'juz',
   AYAH = 'ayah',
+  SEARCH_PAGE = 'search_page',
   PAGE = 'page',
 }
 

@@ -47,8 +47,8 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string } => ({
-  wordFields: `verse_key, verse_id, page_number, location, text_uthmani, ${quranFont}${
-    quranFont === QuranFont.QPCHafs ? '' : `, ${QuranFont.QPCHafs}`
+  wordFields: `verse_key,verse_id,page_number,location,text_uthmani,${quranFont}${
+    quranFont === QuranFont.QPCHafs ? '' : `,${QuranFont.QPCHafs}`
   }`,
 });
 
@@ -72,5 +72,3 @@ export const getMushafId = (
   }
   return { mushaf };
 };
-
-export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;

@@ -18,9 +18,10 @@
             "download": "Shkarko",
             "full-surah": "Surja e plotë",
             "mismatch": "Klikoni në \"Start Over\" nëse dëshironi të luani {{currentReadingChapter}} në vend të kësaj",
-            "next-ayah": "Ajeti tjetër",
             "pause": "Ndalo",
+            "pause-audio": "Ndalo audion",
             "play": "Luaj",
+            "play-audio": "Luaj Audio",
             "play-range": "Gama e luajtjes",
             "previous-ayah": "Ajeti i mëparshëm",
             "repeat-1-verse": "Përsëritni vargun",
@@ -88,7 +89,7 @@
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Fonti i Kuranit",
         "tajweed": "Texhvidi",
-        "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0> këtu <\/0>",
+        "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu<\/0>",
         "text_indopak": "IndoPak",
         "text_uthmani": "Osmani"
     },
@@ -105,6 +106,7 @@
     "juz": "Juz",
     "language": "Gjuhe",
     "languages": "Gjuhët",
+    "less": "Më pak",
     "loading": "Po ngarkohet",
     "menu": "Menu",
     "mobile-apps": "Aplikacionet celulare",
@@ -113,6 +115,7 @@
     "navigate": "Navigoni",
     "network": "Rrjeti",
     "next": "Tjetra",
+    "next-ayah": "Ajeti tjetër",
     "no": "Nr",
     "none": "Asnje",
     "off": "Joaktiv",
@@ -122,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "popular-links": "Lidhje popullore",
     "powered-by": "Mundësuar nga",
-    "prayer-times": {
-        "access-denied": "Qasja në vendndodhje u refuzua. Ju lutemi aktivizoni qasjen në vendndodhje për të marrë kohët e sakta të lutjes",
-        "calculation-method": "Mënyra e Llogaritjes",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Egjiptiane",
-            "Karachi": "Karaçi",
-            "Kuwait": "Kuvajti",
-            "MoonsightingCommittee": "Komiteti i shikimit të hënës",
-            "MuslimWorldLeague": "Lidhja Botërore Muslimane",
-            "NorthAmerica": "Amerika e Veriut",
-            "Qatark": "Katark",
-            "Singapore": "Singapor",
-            "Tehran": "Teherani",
-            "Turkey": "Turqia",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Gjeni vendndodhjen e saktë",
-        "location-access": "Qasja në vendndodhje",
-        "location-updated": "Vendndodhja e kohës së namazit u përditësua",
-        "madhab": "medhhebi",
-        "madhabs": {
-            "Hanafi": "Hanefi",
-            "Shafi": "Shafi"
-        },
-        "title": "Kohët e lutjes"
-    },
     "prev": "E mëparshme",
+    "previous-ayah": "Ajeti i mëparshëm",
     "privacy": "Privatësia",
     "product-updates": "Përditësimet e produktit",
     "q-reflect": "Kurani Reflekto",
@@ -160,9 +137,11 @@
         "translation": "Përkthimi"
     },
     "reciter": "Recitues",
+    "reciters": "Recituesit",
     "reflect": "Pasqyrim",
     "remove": "Hiq",
     "retry": "Provo sërish",
+    "search-for": "Kërko për \"{{searchQuery}}\"",
     "search": {
         "filters": "Filtrat",
         "hint": "Provoni të kërkoni për",
@@ -191,6 +170,7 @@
         "show-tooltip-when-playing-audio": "Shfaq këshillën e veglave kur luhet audio",
         "title": "Cilësimet",
         "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në udhëzuesin e veglave ndërsa luani ayah",
+        "value-and-other": "{{value}} , dhe {{othersCount}} të tjera",
         "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
         "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
         "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
@@ -214,7 +194,10 @@
     "tafsir": {
         "font-size": "Madhësia e shkronjave Tafsir",
         "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
+        "no-text": "{{tafsirName}} nuk është i disponueshëm për vargun aktual.",
         "surah": "Surja Tefsir",
+        "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
+        "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
         "title": "Tefsir"
     },
     "tarteel": {
@@ -238,6 +221,8 @@
     "transliteration": "Transliterimi",
     "type": "Lloji",
     "verse": "Ajeti",
+    "verse-bookmark-removed": "Faqerojtësi i vargut u hoq!",
+    "verse-bookmarked": "Vargu u shënua!",
     "verses": "Vargjet",
     "view": "Pamje",
     "voice": {
@@ -252,6 +237,8 @@
     },
     "wbw": "Fjalë Për Fjalë",
     "wbw-trans-lang": "Fjalë për fjalë Gjuha",
+    "wbw-translation": "Përkthim fjalë pas fjale",
+    "wbw-transliteration": "Transliterimi fjalë për fjalë",
     "word-click": {
         "no-audio": "Nuk ka audio",
         "play-audio": "Luaj Audio",

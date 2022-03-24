@@ -1,0 +1,13 @@
+.separatorContainer {
+  margin-block: var(--spacing-medium);
+}
+
+.arabicVerseContainer {
+  direction: rtl;
+  padding-block-end: var(--spacing-medium);
+  padding-block-start: calc(1.25 * var(--spacing-mega));
+}
+
+.verseTranslationContainer {
+  padding-block-end: var(--spacing-xsmall);
+}

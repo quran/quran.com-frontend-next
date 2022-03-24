@@ -18,9 +18,10 @@
             "download": "Скачать",
             "full-surah": "Полная сура",
             "mismatch": "Нажмите \"Начать заново\", если вы хотите вместо этого {{currentReadingChapter}}",
-            "next-ayah": "Следующий ая",
             "pause": "Пауза",
+            "pause-audio": "Пауза аудио",
             "play": "Играть",
+            "play-audio": "Воспроизвести аудио",
             "play-range": "Диапазон игры",
             "previous-ayah": "Предыдущий аят",
             "repeat-1-verse": "Повторить стих",
@@ -105,6 +106,7 @@
     "juz": "Джуз",
     "language": "Язык",
     "languages": "Языки",
+    "less": "Меньше",
     "loading": "Загрузка",
     "menu": "Меню",
     "mobile-apps": "Мобильные приложения",
@@ -113,6 +115,7 @@
     "navigate": "Навигация",
     "network": "Сеть",
     "next": "Следующий",
+    "next-ayah": "Следующий ая",
     "no": "Нет",
     "none": "Никто",
     "off": "Выключенный",
@@ -122,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} из {{totalNumberOfResults}} результатов поиска",
     "popular-links": "Популярные ссылки",
     "powered-by": "Питаться от",
-    "prayer-times": {
-        "access-denied": "Доступ к местоположению запрещен. Пожалуйста, включите доступ к местоположению, чтобы получать точное время молитвы",
-        "calculation-method": "Метод расчета",
-        "calculation-methods": {
-            "Dubai": "Дубай",
-            "Egyptian": "Египтянин",
-            "Karachi": "Карачи",
-            "Kuwait": "Кувейт",
-            "MoonsightingCommittee": "Комитет по наблюдению за луной",
-            "MuslimWorldLeague": "МусульманскийМирлига",
-            "NorthAmerica": "Северная Америка",
-            "Qatark": "Катарк",
-            "Singapore": "Сингапур",
-            "Tehran": "Тегеран",
-            "Turkey": "Турция",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Найти точное местоположение",
-        "location-access": "Доступ к местоположению",
-        "location-updated": "Обновлено время молитв.",
-        "madhab": "Мазхаб",
-        "madhabs": {
-            "Hanafi": "Ханафи",
-            "Shafi": "Шафи"
-        },
-        "title": "Время молитв"
-    },
     "prev": "Предыдущий",
+    "previous-ayah": "Предыдущий аят",
     "privacy": "Конфиденциальность",
     "product-updates": "Обновления продуктов",
     "q-reflect": "Коран",
@@ -160,9 +137,11 @@
         "translation": "Перевод"
     },
     "reciter": "Чтец",
+    "reciters": "Чтецы",
     "reflect": "Отражать",
     "remove": "Удалять",
     "retry": "Повторить",
+    "search-for": "Найдите '{{searchQuery}}'",
     "search": {
         "filters": "Фильтры",
         "hint": "Попробуйте поискать",
@@ -191,6 +170,7 @@
         "show-tooltip-when-playing-audio": "Показывать всплывающую подсказку при воспроизведении аудио",
         "title": "Настройки",
         "tooltip-playing-audio-helper": "Показывать перевод слова во всплывающей подсказке во время игры в аят",
+        "value-and-other": "{{value}} и {{othersCount}} другое",
         "value-and-others": "{{value}} и {{othersCount}} другие",
         "wbw-helper": "Отображать перевод или транслитерацию прямо под словом",
         "word-tooltip-helper": "Отображение перевода или транслитерации при наведении курсора на слово или нажатии на него"
@@ -214,7 +194,10 @@
     "tafsir": {
         "font-size": "Размер шрифта тафсира",
         "group-message": "Вы читаете тафсир для группы стихов {{from}} до {{to}}",
+        "no-text": "{{tafsirName}} недоступен для текущего стиха.",
         "surah": "Тафсир Сура",
+        "tafsir-desc": "Прочтите {{tafsirName}} {{verseNumber}} суры {{surahName}}",
+        "tafsirs-desc": "Прочтите различные тафсиры аята {{ayahNumber}} суры {{surahName}} от доверенных ученых-тафсиров",
         "title": "Тафсир"
     },
     "tarteel": {
@@ -238,6 +221,8 @@
     "transliteration": "Транслитерация",
     "type": "Тип",
     "verse": "Стих",
+    "verse-bookmark-removed": "Закладка стиха удалена!",
+    "verse-bookmarked": "Стих в закладки!",
     "verses": "Стихи",
     "view": "Вид",
     "voice": {
@@ -252,6 +237,8 @@
     },
     "wbw": "Слово за слово",
     "wbw-trans-lang": "Слово за словом язык",
+    "wbw-translation": "Пословный перевод",
+    "wbw-transliteration": "Пословная транслитерация",
     "word-click": {
         "no-audio": "Нет звука",
         "play-audio": "Воспроизвести аудио",

@@ -18,9 +18,10 @@
             "download": "Downloaden",
             "full-surah": "volledige soera",
             "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
-            "next-ayah": "Volgende Aya",
             "pause": "Pauze",
+            "pause-audio": "Audio pauzeren",
             "play": "Toneelstuk",
+            "play-audio": "Audio afspelen",
             "play-range": "Speelbereik",
             "previous-ayah": "Vorige Aya",
             "repeat-1-verse": "Herhaal vers",
@@ -105,6 +106,7 @@
     "juz": "Juz",
     "language": "Taal",
     "languages": "Talen",
+    "less": "Minder",
     "loading": "Bezig met laden",
     "menu": "Menu",
     "mobile-apps": "Mobiele apps",
@@ -113,6 +115,7 @@
     "navigate": "Navigeren",
     "network": "Netwerk",
     "next": "Volgende",
+    "next-ayah": "Volgende Aya",
     "no": "Nee",
     "none": "Geen",
     "off": "Uit",
@@ -122,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "popular-links": "Populaire links",
     "powered-by": "Aangedreven door",
-    "prayer-times": {
-        "access-denied": "Toegang tot locatie geweigerd. Schakel locatietoegang in om nauwkeurige gebedstijden te krijgen",
-        "calculation-method": "Rekenmethode",
-        "calculation-methods": {
-            "Dubai": "Dubai",
-            "Egyptian": "Egyptische",
-            "Karachi": "Karachi",
-            "Kuwait": "Koeweit",
-            "MoonsightingCommittee": "MoonsightingComité",
-            "MuslimWorldLeague": "MoslimWereldLeague",
-            "NorthAmerica": "Noord Amerika",
-            "Qatark": "Qatark",
-            "Singapore": "Singapore",
-            "Tehran": "Teheran",
-            "Turkey": "kalkoen",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "Vind nauwkeurige locatie",
-        "location-access": "Locatietoegang",
-        "location-updated": "Locatie gebedstijden bijgewerkt",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "Hanafi",
-            "Shafi": "Shafi"
-        },
-        "title": "Gebedstijden"
-    },
     "prev": "Vorig",
+    "previous-ayah": "Vorige Aya",
     "privacy": "Privacy",
     "product-updates": "Productupdates",
     "q-reflect": "KoranReflect",
@@ -160,9 +137,11 @@
         "translation": "Vertaling"
     },
     "reciter": "Voordrager",
+    "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
+    "search-for": "Zoeken naar '{{searchQuery}}'",
     "search": {
         "filters": "Filters",
         "hint": "Probeer te zoeken naar",
@@ -191,6 +170,7 @@
         "show-tooltip-when-playing-audio": "Knopinfo weergeven bij het afspelen van audio",
         "title": "Instellingen",
         "tooltip-playing-audio-helper": "Toon woordvertaling in tooltip tijdens het spelen van ayah",
+        "value-and-other": "{{value}} en {{othersCount}} andere",
         "value-and-others": "{{value}} en {{othersCount}} anderen",
         "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
         "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
@@ -214,7 +194,10 @@
     "tafsir": {
         "font-size": "Tafsir-lettergrootte",
         "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",
+        "no-text": "{{tafsirName}} is niet beschikbaar voor het huidige couplet.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
+        "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -238,6 +221,8 @@
     "transliteration": "Transliteratie",
     "type": "Type",
     "verse": "Vers",
+    "verse-bookmark-removed": "Vers bladwijzer verwijderd!",
+    "verse-bookmarked": "Vers bladwijzer!",
     "verses": "verzen",
     "view": "Weergave",
     "voice": {
@@ -252,6 +237,8 @@
     },
     "wbw": "Woord voor woord",
     "wbw-trans-lang": "Woord voor woord taal",
+    "wbw-translation": "Woord voor woord vertaling",
+    "wbw-transliteration": "Woord voor woord transliteratie",
     "word-click": {
         "no-audio": "Geen geluid",
         "play-audio": "Audio afspelen",

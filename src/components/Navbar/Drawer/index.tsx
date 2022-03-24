@@ -39,6 +39,7 @@ interface Props {
   header: ReactNode;
   hideCloseButton?: boolean;
   children: ReactNode;
+  closeOnNavigation?: boolean;
 }
 
 /**
@@ -80,7 +81,9 @@ const Drawer: React.FC<Props> = ({
   header,
   children,
   hideCloseButton = false,
+  closeOnNavigation = true,
 }) => {
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
@@ -110,11 +113,11 @@ const Drawer: React.FC<Props> = ({
   // Hide navbar after successful navigation
   useEffect(() => {
     router.events.on('routeChangeComplete', () => {
-      if (isOpen) {
+      if (isOpen && closeOnNavigation) {
         closeDrawer('navigation');
       }
     });
-  }, [closeDrawer, router.events, isOpen]);
+  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
@@ -127,13 +130,18 @@ const Drawer: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.container, {
+        [styles.navbarInvisible]: !isNavbarVisible,
         [styles.containerOpen]: isOpen,
         [styles.left]: side === DrawerSide.Left,
         [styles.right]: side === DrawerSide.Right,
       })}
       ref={drawerRef}
     >
-      <div className={classNames(styles.header, { [styles.hiddenButtonHeader]: hideCloseButton })}>
+      <div
+        className={classNames(styles.header, {
+          [styles.hiddenButtonHeader]: hideCloseButton,
+        })}
+      >
         <div
           className={classNames(styles.headerContentContainer, {
             [styles.hiddenButtonHeaderContentContainer]: hideCloseButton,

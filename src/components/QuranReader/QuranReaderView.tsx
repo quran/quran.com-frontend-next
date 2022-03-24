@@ -7,29 +7,48 @@ import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import Verse from 'types/Verse';
+import { VersesResponse } from 'types/ApiResponses';
+import { QuranReaderDataType } from 'types/QuranReader';
 
 const ReadingView = dynamic(() => import('./ReadingView'));
 
 interface Props {
   isReadingPreference: boolean;
-  verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
+  quranReaderDataType: QuranReaderDataType;
+  initialData: VersesResponse;
+  resourceId: number | string;
 }
 
-const QuranReaderView: React.FC<Props> = ({ isReadingPreference, verses, quranReaderStyles }) => {
+const QuranReaderView: React.FC<Props> = ({
+  isReadingPreference,
+  quranReaderStyles,
+  quranReaderDataType,
+  initialData,
+  resourceId,
+}) => {
   if (isReadingPreference) {
     return (
       <>
         <ReadingPreferenceSwitcher />
-        <ReadingView verses={verses} quranReaderStyles={quranReaderStyles} />
+        <ReadingView
+          quranReaderStyles={quranReaderStyles}
+          quranReaderDataType={quranReaderDataType}
+          initialData={initialData}
+          resourceId={resourceId}
+        />
       </>
     );
   }
   return (
     <>
       <ReadingPreferenceSwitcher />
-      <TranslationView verses={verses} quranReaderStyles={quranReaderStyles} />
+      <TranslationView
+        quranReaderStyles={quranReaderStyles}
+        quranReaderDataType={quranReaderDataType}
+        initialData={initialData}
+        resourceId={resourceId}
+      />
     </>
   );
 };

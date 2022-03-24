@@ -1,0 +1,52 @@
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    width: var(--spacing-xsmall);
+    height: var(--spacing-xsmall);
+    border-radius: var(--border-radius-circle);
+    background-color: black;
+  }
+}
+
+.indicator[data-state="checked"][data-disabled] {
+  &:after {
+    background-color: var(--color-secondary-medium);
+  }
+}
+
+.radioItem {
+  all: unset;
+  background-color: var(--color-primary-faded);
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
+  border-radius: var(--border-radius-circle);
+  border: 1px solid var(--color-secondary-medium);
+}
+
+.radioItem:not([data-disabled]) {
+  &:hover {
+    cursor: pointer;
+    border: 1px solid var(--color-primary-medium);
+  }
+}
+
+.radioItem[data-state="checked"] {
+  border: 1px solid var(--color-primary-medium);
+}
+
+.radioItem[data-state="checked"][data-disabled] {
+  border: 1px solid var(--color-secondary-medium);
+}
+
+.radioItem[data-focus-visible-added] {
+  &:focus {
+    box-shadow: var(--shadow-small);
+  }
+}

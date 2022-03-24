@@ -73,6 +73,7 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false, onCl
       className={styles.button}
       tooltip={t('command-bar.search-by-voice')}
       hasSidePadding={false}
+      ariaLabel={t('command-bar.search-by-voice')}
     >
       {showCloseIcon ? <CloseIcon /> : <MicrophoneIcon />}
     </Button>

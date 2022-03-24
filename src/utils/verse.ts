@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { random } from 'lodash';
 import range from 'lodash/range';
 
-import { getAllChaptersData, getChapterData, getRandomChapterId } from './chapter';
+import { getChapterData } from './chapter';
+import { formatStringNumber } from './number';
 
+import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
 
@@ -13,13 +14,16 @@ const COLON_SPLITTER = ':';
 /**
  * This will generate all the keys for the verses of a chapter. a key is `{chapterId}:{verseId}`.
  *
+ * @param {ChaptersData} data
  * @param {string} chapterId
  * @returns {string[]}
  */
-export const generateChapterVersesKeys = (chapterId: string): string[] => {
-  const data = getAllChaptersData();
+export const generateChapterVersesKeys = (data: ChaptersData, chapterId: string): string[] => {
+  const chapterNumberString = formatStringNumber(chapterId);
 
-  return range(data[chapterId].versesCount).map((verseId) => `${chapterId}:${verseId + 1}`);
+  return range(data[chapterNumberString].versesCount).map(
+    (verseId) => `${chapterNumberString}:${verseId + 1}`,
+  );
 };
 
 /**
@@ -41,6 +45,19 @@ export const getChapterNumberFromKey = (verseKey: string): number =>
  */
 export const getVerseNumberFromKey = (verseKey: string): number =>
   Number(verseKey.split(COLON_SPLITTER)[1]);
+
+/**
+ * If the verse is a range of verses, for example 1:3-5
+ * we'll return {from: 3, to: 5}
+ *
+ * @param {string} verseKey
+ * @returns {from: Number, to: Number}
+ */
+export const getVerseNumberRangeFromKey = (verseKey: string): { from: number; to: number } => {
+  const verseNumber = verseKey.split(COLON_SPLITTER)[1]; // for example (3-5)
+  const [from, to] = verseNumber.split('-'); // for example [3, 5]
+  return { from: Number(from), to: to ? Number(to) : Number(from) };
+};
 
 /**
  * Get the chapter and verse number of a verse from its key.
@@ -180,13 +197,19 @@ export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record
 /**
  * make verseKey from chapterNumber and verseNumber, example "1:5"
  *
- * @param {number} chapterNumber
+ * @param {number|string} chapterNumber
  * @param {number} verseNumber
  * @returns
  */
 
-export const makeVerseKey = (chapterNumber: number, verseNumber: number): string =>
-  `${chapterNumber}:${verseNumber}`;
+export const makeVerseKey = (
+  chapterNumber: number | string,
+  from: number | string,
+  to?: number | string,
+): string => {
+  if (to && from !== to) return `${chapterNumber}:${from}-${to}`;
+  return `${chapterNumber}:${from}`;
+};
 
 /**
  * make wordLocation from verseKey and wordPosition, example "1:1:2"
@@ -210,7 +233,6 @@ export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
   const words = [];
   verse.words.forEach((word) => {
     const wordVerse = { ...verse };
-    delete wordVerse.words;
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
@@ -223,14 +245,19 @@ export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
 /**
  * Calculate the number of verses in a range of chapters.
  *
+ * @param {ChaptersData} chaptersData
  * @param {number} startChapter
  * @param {number} endChapter
  * @returns {number}
  */
-const getNumberOfVersesInRangeOfChapters = (startChapter: number, endChapter: number): number => {
+const getNumberOfVersesInRangeOfChapters = (
+  chaptersData: ChaptersData,
+  startChapter: number,
+  endChapter: number,
+): number => {
   let total = 0;
   for (let currentChapterId = startChapter; currentChapterId < endChapter; currentChapterId += 1) {
-    total += getChapterData(String(currentChapterId)).versesCount;
+    total += getChapterData(chaptersData, String(currentChapterId)).versesCount;
   }
   return total;
 };
@@ -239,12 +266,17 @@ const getNumberOfVersesInRangeOfChapters = (startChapter: number, endChapter: nu
  * Calculate how far apart 2 verses are from each other. The order of the verses
  * won't matter as we swap them if they are not in the same order of the Mushaf.
  *
+ * @param {ChaptersData} chaptersData
  * @param {string} firstVerseKey
  * @param {string} secondVerseKey
  *
  * @returns {number}
  */
-export const getDistanceBetweenVerses = (firstVerseKey: string, secondVerseKey: string): number => {
+export const getDistanceBetweenVerses = (
+  chaptersData: ChaptersData,
+  firstVerseKey: string,
+  secondVerseKey: string,
+): number => {
   // eslint-disable-next-line prefer-const
   let [firstChapterString, firstVerseNumberString] =
     getVerseAndChapterNumbersFromKey(firstVerseKey);
@@ -280,14 +312,21 @@ export const getDistanceBetweenVerses = (firstVerseKey: string, secondVerseKey: 
   let distance = 0;
   // if there is more than 1 full chapter in between the verses' chapters being checked, we sum the number of verses in each chapter.
   if (secondChapterNumber - firstChapterNumber > 1) {
-    distance += getNumberOfVersesInRangeOfChapters(firstChapterNumber + 1, secondChapterNumber);
+    distance += getNumberOfVersesInRangeOfChapters(
+      chaptersData,
+      firstChapterNumber + 1,
+      secondChapterNumber,
+    );
   }
   /*
     1. we add the number of verses from beginning of the second verse's chapter -> the verse itself.
     2. we add the difference between the last verse of the first verse's chapter and the first verse itself.
   */
   return (
-    distance + secondVerseNumber + getChapterData(firstChapterString).versesCount - firstVerseNumber
+    distance +
+    secondVerseNumber +
+    getChapterData(chaptersData, firstChapterString).versesCount -
+    firstVerseNumber
   );
 };
 
@@ -302,15 +341,22 @@ export const isFirstVerseOfSurah = (verseNumber: number): boolean => verseNumber
 /**
  * Whether the current verse is the last in surah.
  *
+ * @param {ChaptersData} chaptersData
  * @param {string} chapterNumber
  * @param {number} verseNumber
  * @returns {boolean}
  */
-export const isLastVerseOfSurah = (chapterNumber: string, verseNumber: number): boolean =>
-  verseNumber === getChapterData(chapterNumber).versesCount;
+export const isLastVerseOfSurah = (
+  chaptersData: ChaptersData,
+  chapterNumber: string,
+  verseNumber: number,
+): boolean => verseNumber === getChapterData(chaptersData, chapterNumber).versesCount;
 
-export const getChapterFirstAndLastVerseKey = (chapterId: string) => {
-  const chapterData = getChapterData(chapterId);
+export const getChapterFirstAndLastVerseKey = (chaptersData: ChaptersData, chapterId: string) => {
+  if (!chaptersData) {
+    return ['', ''];
+  }
+  const chapterData = getChapterData(chaptersData, chapterId);
   return [
     makeVerseKey(Number(chapterId), 1),
     makeVerseKey(Number(chapterId), chapterData.versesCount),
@@ -342,21 +388,10 @@ export const shortenVerseText = (text: string, length = 150): string => {
 /**
  * Given list of verses, get all the first and the last verseKeys
  *
- * @param {Verse[]} verses
+ * @param {Record<string, Verse>} verses
  * @returns {string[]} [firstVerseKey, lastVerseKey]
  */
-export const getFirstAndLastVerseKeys = (verses: Verse[]) => {
+export const getFirstAndLastVerseKeys = (verses: Record<string, Verse>): string[] => {
   const verseKeys = Object.keys(verses).sort(sortByVerseKey);
   return [verseKeys[0], verseKeys[verseKeys.length - 1]];
-};
-
-const getRandomVerseNumber = async (chapterId: string) => {
-  const chapterData = await getChapterData(chapterId);
-  return random(1, chapterData.versesCount);
-};
-
-export const getRandomVerseKey = async () => {
-  const chapterId = getRandomChapterId();
-  const verseNumber = await getRandomVerseNumber(chapterId.toString());
-  return makeVerseKey(Number(chapterId), Number(verseNumber));
 };

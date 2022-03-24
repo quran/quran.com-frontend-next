@@ -1,11 +1,11 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .container {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin-block-end: var(--spacing-medium);
   @include breakpoints.tablet {
     flex-direction: row;
     align-items: flex-start;
@@ -16,10 +16,28 @@
   position: absolute;
   height: 100%;
   width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 .reciterBio {
   margin-block-end: var(--spacing-medium);
+  span {
+    @include theme.light {
+      background-color: var(--color-success-medium) !important;
+      color: var(
+        --color-text-inverse
+      ) !important; // white text on "success" background;
+    }
+    @include theme.dark {
+      background-color: var(--color-background-elevated) !important;
+      color: var(--color-text-default) !important;
+    }
+    @include theme.sepia {
+      background-color: var(--color-background-alternative-deep) !important;
+      color: var(--color-text-default) !important;
+    }
+  }
 }
 
 .reciterName {
@@ -51,7 +69,6 @@
 .moreLessButton {
   cursor: pointer;
   font-weight: var(--font-weight-bold);
-  margin-inline-start: var(--spacing-small);
 }
 
 .actionContainer {

@@ -7,7 +7,8 @@
   @include breakpoints.tablet {
     --sidebar-size: calc(10 * var(--spacing-mega));
   }
-  height: 100%;
+  height: 100vh;
+  max-height: 100vh;
   position: fixed;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -17,7 +18,6 @@
   z-index: var(--z-index-default);
   box-sizing: border-box;
   border-inline-end: 1px solid var(--color-borders-hairline);
-  overflow: hidden;
   width: var(--sidebar-size);
   padding-inline: var(--spacing-large);
   transform: translateX(-100%);
@@ -25,6 +25,9 @@
     transform: translateX(100%);
   }
   transition: transform var(--transition-regular);
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
 }
 
 .visibleContainer {
@@ -36,6 +39,7 @@
 
 .header {
   display: flex;
+  align-items: center;
 }
 .switchContainer {
   flex: 1;
@@ -44,23 +48,38 @@
 
 .contentContainer {
   margin-block-start: var(--spacing-medium);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-block-end: var(--spacing-medium);
 }
 .surahBodyContainer {
   display: flex;
+  flex: 1;
   & > .verseListContainer {
     margin-inline-start: var(--spacing-xsmall);
   }
 }
 
-.list {
-  height: 90vh;
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding-block-end: calc(9 * var(--spacing-mega));
+.scrollableSectionContainer {
   display: flex;
   flex-direction: column;
-  direction: ltr;
+  flex: 1;
+  position: relative;
 }
+
+.listContainer {
+  flex: 1;
+  position: relative;
+}
+
+.list {
+  position: absolute;
+  inset: 0;
+  overflow-y: scroll;
+  padding-block-end: calc(9 * var(--spacing-mega));
+}
+
 .listItem {
   [dir="rtl"] & {
     direction: rtl;
@@ -78,11 +97,15 @@
 
 .surahListContainer {
   flex: 2;
+  display: flex;
+  flex-direction: column;
 }
 .verseListContainer {
   padding-inline-start: var(--spacing-xsmall);
   border-inline-start: 1px solid var(--color-borders-hairline);
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .searchInput {
@@ -122,4 +145,3 @@
     margin-inline-end: var(--spacing-xsmall);
   }
 }
-

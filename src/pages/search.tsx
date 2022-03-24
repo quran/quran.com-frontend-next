@@ -16,19 +16,24 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
+import DataContext from 'src/contexts/DataContext';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
+import { getAllChaptersData } from 'src/utils/chapter';
 import {
   logButtonClick,
   logEmptySearchResults,
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
+import { getLanguageAlternates } from 'src/utils/locale';
+import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
+import ChaptersData from 'types/ChaptersData';
 
 const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -36,10 +41,11 @@ const DEBOUNCING_PERIOD_MS = 1000;
 type SearchProps = {
   languages: AvailableLanguage[];
   translations: AvailableTranslation[];
+  chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ languages, translations }) => {
-  const { t } = useTranslation('common');
+const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }) => {
+  const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -58,7 +64,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     () => ({
       page: currentPage,
       languages: selectedLanguages,
-      query: debouncedSearchQuery,
+      q: debouncedSearchQuery,
       translations: selectedTranslations,
     }),
     [currentPage, debouncedSearchQuery, selectedLanguages, selectedTranslations],
@@ -71,8 +77,12 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
     if (router.isReady) {
-      if (router.query.query) {
-        setSearchQuery(router.query.query as string);
+      if (router.query.q || router.query.query) {
+        let query = router.query.q as string;
+        if (router.query.query) {
+          query = router.query.query as string;
+        }
+        setSearchQuery(query);
       }
       if (router.query.page) {
         setCurrentPage(Number(router.query.page));
@@ -182,9 +192,22 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
     setSearchQuery(keyword);
   }, []);
 
+  const navigationUrl = '/search';
+
   return (
-    <>
-      <NextSeoWrapper title={debouncedSearchQuery} />
+    <DataContext.Provider value={chaptersData}>
+      <NextSeoWrapper
+        title={
+          debouncedSearchQuery !== ''
+            ? t('search:search-title', {
+                searchQuery: debouncedSearchQuery,
+              })
+            : t('search:search')
+        }
+        description={t('search:search-desc')}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+      />
       <div className={styles.pageContainer}>
         <p className={styles.header}>{t('search.title')}</p>
         <Input
@@ -225,7 +248,7 @@ const Search: NextPage<SearchProps> = ({ languages, translations }) => {
           />
         </div>
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -245,9 +268,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const { translations: responseTranslations } = availableTranslationsResponse;
     translations = responseTranslations;
   }
+  const chaptersData = await getAllChaptersData(locale);
 
   return {
     props: {
+      chaptersData,
       languages,
       translations,
     },

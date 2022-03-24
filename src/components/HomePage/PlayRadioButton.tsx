@@ -56,7 +56,12 @@ const PlayRadioButton = () => {
             {t('pause-radio')}
           </Button>
         ) : (
-          <Button prefix={<PlayIcon />} className={styles.playPauseButton} onClick={onPlayClicked}>
+          <Button
+            prefix={<PlayIcon />}
+            className={styles.playPauseButton}
+            onClick={onPlayClicked}
+            shouldFlipOnRTL={false}
+          >
             {t('play-radio')}
           </Button>
         )}

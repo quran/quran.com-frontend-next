@@ -37,8 +37,7 @@ $container-max-width: calc(23 * var(--spacing-mega));
   p {
     margin-block-end: var(--spacing-small);
     opacity: var(--opacity-85);
-    font-size: var(--font-size-large);
-    line-height: 1.5;
+    line-height: normal;
   }
   br {
     content: "";
@@ -158,19 +157,9 @@ $container-max-width: calc(23 * var(--spacing-mega));
   margin-block-start: var(--spacing-small);
 }
 
-.tafsirGroupMessage {
-  position: relative;
-  padding: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
-  background: var(--color-success-faded);
-  border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-success-faint);
-  font-size: var(--font-size-normal);
-}
-
 .languageSelection {
   min-width: calc(6 * var(--spacing-medium));
   width: calc(6 * var(--spacing-medium));
 }
 
-@include utility.generate-font-sizes("tafsir");
+@include utility.generate-font-scales("tafsir");

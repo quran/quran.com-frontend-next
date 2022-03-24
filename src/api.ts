@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
 import {
@@ -17,9 +18,11 @@ import {
   makeFootnoteUrl,
   makeChapterUrl,
   makeReciterUrl,
+  makeTafsirContentUrl,
+  makePagesLookupUrl,
 } from './utils/apiPaths';
 
-import { SearchRequest, AdvancedCopyRequest } from 'types/ApiRequests';
+import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
   SearchResponse,
@@ -34,8 +37,11 @@ import {
   FootnoteResponse,
   ChapterResponse,
   ReciterResponse,
+  TafsirContentResponse,
+  PagesLookUpResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
@@ -93,8 +99,8 @@ export const getAvailableReciters = async (
   fields?: string[],
 ): Promise<RecitersResponse> => fetcher(makeAvailableRecitersUrl(locale, fields));
 
-export const getReciterData = async (reciterId: string): Promise<ReciterResponse> =>
-  fetcher(makeReciterUrl(reciterId));
+export const getReciterData = async (reciterId: string, locale: string): Promise<ReciterResponse> =>
+  fetcher(makeReciterUrl(reciterId, locale));
 
 /**
  * Get audio file for a specific reciter and chapter.
@@ -247,6 +253,16 @@ export const getFootnote = async (footnoteId: string): Promise<FootnoteResponse>
   fetcher(makeFootnoteUrl(footnoteId));
 
 /**
+ * Get the footnote details.
+ *
+ * @param {PagesLookUpRequest} params
+ *
+ * @returns {Promise<PagesLookUpResponse>}
+ */
+export const getPagesLookup = async (params: PagesLookUpRequest): Promise<PagesLookUpResponse> =>
+  fetcher(makePagesLookupUrl(params));
+
+/**
  * Get the chapter id by a slug.
  *
  * @param {string} slug
@@ -262,4 +278,27 @@ export const getChapterIdBySlug = async (slug: string, locale: string): Promise<
   }
 };
 
-export const getImageCDNPath = (path: string) => `https://static.qurancdn.com/images/${path}`;
+/**
+ * Get the Tafsir content of a verse by the tafsir ID.
+ *
+ * @param {string} tafsirIdOrSlug
+ * @param {string} verseKey
+ * @param {QuranFont} quranFont
+ * @param {MushafLines} mushafLines
+ * @returns {Promise<TafsirContentResponse>}
+ */
+export const getTafsirContent = (
+  tafsirIdOrSlug: string,
+  verseKey: string,
+  quranFont: QuranFont,
+  mushafLines: MushafLines,
+  locale: string,
+): Promise<TafsirContentResponse> => {
+  return fetcher(
+    makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
+      lang: locale,
+      quranFont,
+      mushafLines,
+    }),
+  );
+};

@@ -1,3 +1,4 @@
+@use "src/styles/breakpoints";
 .container {
   display: flex;
   justify-content: space-between;
@@ -32,14 +33,14 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
-  margin-block-end: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 
 .bismillahContainer {
   display: flex;
   justify-content: center;
-  margin-block: var(--spacing-mega);
+  margin-block-start: var(--spacing-xxsmall);
+  margin-block-end: calc(1.5 * var(--spacing-mega));
 }
 .translatedName {
   font-weight: var(--font-weight-bold);
@@ -65,4 +66,38 @@
 .actionContainer {
   position: relative;
   z-index: var(--z-index-default);
+}
+
+.translation {
+  max-width: calc(5 * var(--spacing-mega));
+  @include breakpoints.mobileM {
+    max-width: calc(7 * var(--spacing-mega));
+  }
+  @include breakpoints.tablet {
+    max-width: calc(11 * var(--spacing-mega));
+  }
+}
+.translationBy {
+  color: var(--color-text-faded);
+}
+.changeTranslation {
+  color: var(--color-success-medium);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: var(--spacing-mega);
+}
+
+.chapterIconContainer {
+  // a hack to center the surah name, because the font width is not correct
+  // leave a lot of empty space on the left
+  /* stylelint-disable-next-line csstools/use-logical */
+  margin-right: 0.5em;
 }

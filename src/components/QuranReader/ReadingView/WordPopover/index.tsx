@@ -36,12 +36,26 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
   const onLongPress = useCallback(() => {
     onOpenChange(true);
   }, [onOpenChange]);
-  const [onStart, onEnd] = useLongPress(onLongPress);
-  const onHoverChange = (isHovering: boolean) => {
-    dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
-  };
-
+  const [onTouchStart, onTouchEnd] = useLongPress(onLongPress);
+  const onHoverChange = useCallback(
+    (isHovering: boolean) => {
+      dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
+    },
+    [dispatch, word.verseKey],
+  );
   const onActionTriggered = useCallback(() => {
+    onOpenChange(false);
+  }, [onOpenChange]);
+
+  const onMouseEnter = useCallback(() => {
+    onHoverChange(true);
+  }, [onHoverChange]);
+
+  const onMouseLeave = useCallback(() => {
+    onHoverChange(false);
+  }, [onHoverChange]);
+
+  const onTouchMove = useCallback(() => {
     onOpenChange(false);
   }, [onOpenChange]);
 
@@ -51,25 +65,23 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       contentSideOffset={-10}
       trigger={
         <div
-          onMouseEnter={() => {
-            onHoverChange(true);
-          }}
-          onMouseLeave={() => {
-            onHoverChange(false);
-          }}
-          onTouchStart={onStart}
-          onTouchEnd={onEnd}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onTouchMove={onTouchMove}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
         >
           {children}
         </div>
       }
       tip
       isModal
-      portalled={false}
+      portalled
       contentStyles={styles.content}
       open={isTooltipOpened}
       onOpenChange={onOpenChange}
       triggerStyles={styles.trigger}
+      defaultStyling={false}
     >
       <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />
     </Popover>

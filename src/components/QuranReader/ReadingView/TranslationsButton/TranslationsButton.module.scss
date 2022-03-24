@@ -1,0 +1,35 @@
+@use "src/styles/utility";
+
+.header {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+}
+
+.iconContainer.verseAction {
+  color: var(--color-text-default);
+  height: calc(2.2 * var(--spacing-medium));
+  width: calc(2.2 * var(--spacing-medium));
+  &:hover {
+    color: var(--color-text-default);
+    background-color: transparent;
+    background-image: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+      color: var(--color-success-medium);
+      background-color: var(--color-success-medium);
+      @include utility.lighten-background-color;
+    }
+  }
+}
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  & > svg {
+    width: calc(1.1 * var(--spacing-medium));
+    height: calc(1.1 * var(--spacing-medium));
+  }
+}

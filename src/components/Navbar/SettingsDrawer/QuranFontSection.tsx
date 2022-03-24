@@ -16,24 +16,23 @@ import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
-  MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   setQuranFont,
   setMushafLines,
+  MAXIMUM_QURAN_FONT_STEP,
 } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { logValueChange } from 'src/utils/eventLogger';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
-  const fonts = useMemo(
-    () => ({
+  const fonts = useMemo(() => {
+    return {
       [QuranFont.IndoPak]: [
         { id: QuranFont.IndoPak, label: t(`fonts.${QuranFont.IndoPak}`), value: QuranFont.IndoPak },
       ],
@@ -60,9 +59,8 @@ const QuranFontSection = () => {
           name: QuranFont.QPCHafs,
         },
       ],
-    }),
-    [t],
-  );
+    } as Record<QuranFont, { id: QuranFont; label: string; value: QuranFont; name: QuranFont }[]>;
+  }, [t]);
 
   // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
   // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
@@ -81,7 +79,7 @@ const QuranFontSection = () => {
 
   // get default font for selected type. We take the first font in this case
   // for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
-  const getDefaultFont = (selectedType: string) => {
+  const getDefaultFont = (selectedType: QuranFont): QuranFont => {
     const [font] = fonts[selectedType];
     return font.value;
   };
@@ -106,19 +104,19 @@ const QuranFontSection = () => {
     [t],
   );
 
-  const onFontChange = (value) => {
+  const onFontChange = (value: QuranFont) => {
     logValueChange('font_family', selectedType, value);
-    dispatch(setQuranFont(getDefaultFont(value)));
+    dispatch(setQuranFont({ quranFont: getDefaultFont(value), locale: lang }));
   };
 
-  const onFontStyleChange = (value) => {
+  const onFontStyleChange = (value: QuranFont) => {
     logValueChange('font_style', quranFont, value);
-    dispatch(setQuranFont(value as QuranFont));
+    dispatch(setQuranFont({ quranFont: value, locale: lang }));
   };
 
   const onMushafLinesChange = (value: MushafLines) => {
     logValueChange('mushaf_lines', mushafLines, value);
-    dispatch(setMushafLines(value));
+    dispatch(setMushafLines({ mushafLines: value, locale: lang }));
   };
 
   const onFontScaleDecreaseClicked = () => {
@@ -134,11 +132,6 @@ const QuranFontSection = () => {
   return (
     <Section>
       <Section.Title>{t('fonts.quran-font')}</Section.Title>
-      <Section.Row>
-        <div className={styles.versePreviewContainer}>
-          <VersePreview />
-        </div>
-      </Section.Row>
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
@@ -169,10 +162,19 @@ const QuranFontSection = () => {
         <Counter
           count={quranTextFontScale}
           onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-          onIncrement={quranTextFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
+          onIncrement={
+            quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
+          }
         />
       </Section.Row>
-      <QuranFontSectionFooter quranFont={quranFont} />
+      <Section.Row>
+        <QuranFontSectionFooter quranFont={quranFont} />
+      </Section.Row>
+      <Section.Row>
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+      </Section.Row>
     </Section>
   );
 };

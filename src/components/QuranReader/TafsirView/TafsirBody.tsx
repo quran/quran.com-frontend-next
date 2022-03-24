@@ -1,9 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
-import uniq from 'lodash/uniq';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import useSWR from 'swr/immutable';
@@ -12,17 +11,18 @@ import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
 import SurahAndAyahSelection from './SurahAndAyahSelection';
 import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
 import TafsirGroupMessage from './TafsirGroupMessage';
+import TafsirMessage from './TafsirMessage';
 import TafsirSkeleton from './TafsirSkeleton';
+import TafsirText from './TafsirText';
+import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import DataContext from 'src/contexts/DataContext';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getDefaultWordFields } from 'src/utils/api';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -33,17 +33,22 @@ import {
 } from 'src/utils/eventLogger';
 import { getLanguageDataById } from 'src/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
-import { getFirstAndLastVerseKeys, getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from 'src/utils/tafsir';
+import {
+  getVerseNumberFromKey,
+  getFirstAndLastVerseKeys,
+  makeVerseKey,
+  isLastVerseOfSurah,
+  getVerseAndChapterNumbersFromKey,
+} from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
-import Tafsir from 'types/Tafsir';
-import Verse from 'types/Verse';
 
 type TafsirBodyProps = {
   initialChapterId: string;
   initialVerseNumber: string;
-  initialTafsirData?: TafsirContentResponse;
   initialTafsirIdOrSlug?: number | string;
   scrollToTop: () => void;
+  shouldRender?: boolean;
   render: (renderProps: {
     surahAndAyahSelection: JSX.Element;
     languageAndTafsirSelection: JSX.Element;
@@ -54,15 +59,16 @@ type TafsirBodyProps = {
 const TafsirBody = ({
   initialChapterId,
   initialVerseNumber,
-  initialTafsirData,
   initialTafsirIdOrSlug,
   render,
   scrollToTop,
+  shouldRender,
 }: TafsirBodyProps) => {
   const dispatch = useDispatch();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
-  const { lang } = useTranslation();
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { lang, t } = useTranslation('common');
   const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const chaptersData = useContext(DataContext);
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -104,7 +110,10 @@ const TafsirBody = ({
     [dispatch, lang, selectedChapterId, selectedVerseNumber],
   );
 
-  const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(makeTafsirsUrl(lang), fetcher);
+  const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(
+    shouldRender ? makeTafsirsUrl(lang) : null,
+    fetcher,
+  );
 
   // selectedLanguage is based on selectedTafir's language
   // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirIdOrSlug`
@@ -123,54 +132,83 @@ const TafsirBody = ({
     ? getTafsirsLanguageOptions(tafsirSelectionList.tafsirs)
     : [];
 
-  const renderTafsir = useCallback((data) => {
-    if (!data || !data.tafsir) return <TafsirSkeleton />;
+  const renderTafsir = useCallback(
+    (data: TafsirContentResponse) => {
+      if (!data || !data.tafsir) return <TafsirSkeleton />;
 
-    const { verses, text, languageId }: { languageId: number; text: string; verses: Verse[] } =
-      data.tafsir;
-    const langData = getLanguageDataById(languageId);
-    const words = Object.values(verses)
-      .map((verse) => getVerseWords(verse))
-      .flat();
+      const { verses, text, languageId } = data.tafsir;
+      const langData = getLanguageDataById(languageId);
 
-    if (!text) return <TafsirSkeleton />;
+      const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
+      const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastVerseKey);
+      const hasNextVerseGroup = !isLastVerseOfSurah(
+        chaptersData,
+        chapterNumber,
+        Number(verseNumber),
+      );
+      const hasPrevVerseGroup = getVerseNumberFromKey(firstVerseKey) !== 1;
 
-    const [firstVerseKey, lastVerseKey] = getFirstAndLastVerseKeys(verses);
-    return (
-      <div>
-        {Object.values(verses).length > 1 && (
-          <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
-        )}
-        <div className={styles.verseTextContainer}>
-          <PlainVerseText words={words} />
+      const loadNextVerseGroup = () => {
+        logButtonClick('tafsir_next_verse');
+        scrollToTop();
+        const newVerseNumber = String(Number(getVerseNumberFromKey(lastVerseKey)) + 1);
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirIdOrSlug,
+          ),
+          lang,
+        );
+        setSelectedVerseNumber(newVerseNumber);
+      };
+
+      const loadPrevVerseGroup = () => {
+        const newVerseNumber = String(Number(getVerseNumberFromKey(firstVerseKey)) - 1);
+        logButtonClick('tafsir_prev_verse');
+        scrollToTop();
+        fakeNavigate(
+          getVerseSelectedTafsirNavigationUrl(
+            Number(selectedChapterId),
+            Number(newVerseNumber),
+            selectedTafsirIdOrSlug,
+          ),
+          lang,
+        );
+        setSelectedVerseNumber(newVerseNumber);
+      };
+
+      return (
+        <div>
+          {!text && (
+            <TafsirMessage>
+              {t('tafsir.no-text', {
+                tafsirName: data.tafsir.translatedName.name,
+              })}
+            </TafsirMessage>
+          )}
+          {Object.values(verses).length > 1 && !!text && (
+            <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
+          )}
+          <div className={styles.verseTextContainer}>
+            <TafsirVerseText verses={verses} />
+          </div>
+          <div className={styles.separatorContainer}>
+            <Separator />
+          </div>
+          {!!text && (
+            <TafsirText direction={langData.direction} languageCode={langData.code} text={text} />
+          )}
+          <TafsirEndOfScrollingActions
+            hasNextVerseGroup={hasNextVerseGroup}
+            hasPrevVerseGroup={hasPrevVerseGroup}
+            onNextButtonClicked={loadNextVerseGroup}
+            onPreviousButtonClicked={loadPrevVerseGroup}
+          />
         </div>
-        <div className={styles.separatorContainer}>
-          <Separator />
-        </div>
-        <div
-          dir={langData.direction}
-          lang={langData.code}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
-      </div>
-    );
-  }, []);
-
-  const tafsirContentQueryKey = makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
-    words: true,
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-  });
-
-  // Whether we should use the initial tafsir data or fetch the data on the client side
-  const shouldUseInitialTafsirData = useMemo(
-    () =>
-      (initialTafsirData &&
-        Object.keys(initialTafsirData.tafsir.verses).includes(
-          makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-        ) &&
-        selectedTafsirIdOrSlug === initialTafsirData?.tafsir?.slug) ||
-      Number(selectedTafsirIdOrSlug) === initialTafsirData?.tafsir?.resourceId,
-    [initialTafsirData, selectedChapterId, selectedTafsirIdOrSlug, selectedVerseNumber],
+      );
+    },
+    [chaptersData, lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
   );
 
   const surahAndAyahSelection = (
@@ -215,6 +253,7 @@ const TafsirBody = ({
         setSelectedLanguage(newLang);
       }}
       languageOptions={languageOptions}
+      data={tafsirSelectionList}
     />
   );
 
@@ -225,79 +264,19 @@ const TafsirBody = ({
         styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
       )}
     >
-      {shouldUseInitialTafsirData ? (
-        renderTafsir(initialTafsirData)
-      ) : (
-        <DataFetcher
-          loading={TafsirSkeleton}
-          queryKey={tafsirContentQueryKey}
-          render={renderTafsir}
-        />
-      )}
-
-      <TafsirEndOfScrollingActions
-        currentVerseNumber={selectedVerseNumber}
-        currentChapterId={selectedChapterId}
-        onNextButtonClicked={() => {
-          logButtonClick('tafsir_next_verse');
-          scrollToTop();
-          const newVerseNumber = String(Number(selectedVerseNumber) + 1);
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirIdOrSlug,
-            ),
-            lang,
-          );
-          setSelectedVerseNumber(newVerseNumber);
-        }}
-        onPreviousButtonClicked={() => {
-          const newVerseNumber = String(Number(selectedVerseNumber) + -1);
-          logButtonClick('tafsir_prev_verse');
-          scrollToTop();
-          fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(
-              Number(selectedChapterId),
-              Number(newVerseNumber),
-              selectedTafsirIdOrSlug,
-            ),
-            lang,
-          );
-          setSelectedVerseNumber(newVerseNumber);
-        }}
+      <DataFetcher
+        loading={TafsirSkeleton}
+        queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
+          lang,
+          quranFont: quranReaderStyles.quranFont,
+          mushafLines: quranReaderStyles.mushafLines,
+        })}
+        render={renderTafsir}
       />
     </div>
   );
 
   return render({ surahAndAyahSelection, languageAndTafsirSelection, body });
-};
-
-/**
- * Given list of tafsirs, get all available language options
- *
- * @param {Tafsir[]} tafsirs
- * @returns {string[]} list of available language options
- */
-const getTafsirsLanguageOptions = (tafsirs: Tafsir[]): string[] =>
-  uniq(tafsirs.map((tafsir) => tafsir.languageName));
-
-/**
- * Get the language of the selected Tafsir.
- *
- * @param {TafsirsResponse} tafsirListData
- * @param {number|string} selectedTafsirIdOrSlug
- * @returns {string}
- */
-const getSelectedTafsirLanguage = (
-  tafsirListData: TafsirsResponse,
-  selectedTafsirIdOrSlug: number | string,
-): string => {
-  const selectedTafsir = tafsirListData?.tafsirs.find(
-    (tafsir) =>
-      tafsir.slug === selectedTafsirIdOrSlug || tafsir.id === Number(selectedTafsirIdOrSlug),
-  );
-  return selectedTafsir?.languageName;
 };
 
 export default TafsirBody;

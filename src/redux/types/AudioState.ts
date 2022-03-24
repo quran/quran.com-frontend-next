@@ -10,7 +10,6 @@ type AudioState = {
   reciter: Reciter;
   audioData: AudioData;
   audioDataStatus: AudioDataStatus;
-  isMobileMinimizedForScrolling: boolean;
   enableAutoScrolling: boolean;
   repeatSettings: RepeatSettings;
   repeatProgress: RepeatProgress;

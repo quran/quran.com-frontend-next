@@ -57,6 +57,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   translationFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
+  isUsingDefaultFont: true,
 };
 
 const DEFAULT_WBW_TRANSLATION = 20;
@@ -100,7 +101,6 @@ const AUDIO_INITIAL_STATE: AudioState = {
   audioData: null,
   reciter: DEFAULT_RECITER,
   audioDataStatus: AudioDataStatus.NoFile,
-  isMobileMinimizedForScrolling: false,
   repeatSettings: DEFAULT_REPEAT_SETTINGS,
   repeatProgress: DEFAULT_REPEAT_PROGRESS,
   isDownloadingAudio: false,

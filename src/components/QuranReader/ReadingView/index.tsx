@@ -1,59 +1,219 @@
-import React, { useMemo, memo } from 'react';
+/* eslint-disable max-lines */
+/* eslint-disable react-func/max-lines-per-function */
+/* eslint-disable react/no-multi-comp */
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
-import { verseFontChanged } from '../utils/memoization';
+import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
+import { useHotkeys } from 'react-hotkeys-hook';
+import { shallowEqual, useSelector } from 'react-redux';
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
-import groupPagesByVerses from './groupPagesByVerses';
-import Page from './Page';
+import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
+import PageContainer from './PageContainer';
+import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
+import ReadingViewSkeleton from './ReadingViewSkeleton';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
+import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
+import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
+import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
+import { getPageIndexByPageNumber } from 'src/components/QuranReader/utils/page';
+import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import useQcfFont from 'src/hooks/useQcfFont';
+import Error from 'src/pages/_error';
+import { selectedLastReadPage } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { logButtonClick } from 'src/utils/eventLogger';
+import { getLineWidthClassName } from 'src/utils/fontFaceHelper';
+import { VersesResponse } from 'types/ApiResponses';
+import QueryParam from 'types/QueryParam';
+import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
+const EndOfScrollingControls = dynamic(
+  () => import('src/components/QuranReader/EndOfScrollingControls'),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  },
+);
+
 type ReadingViewProps = {
-  verses: Verse[];
   quranReaderStyles: QuranReaderStyles;
+  quranReaderDataType: QuranReaderDataType;
+  initialData: VersesResponse;
+  resourceId: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
 };
 
-const ReadingView = ({ verses, quranReaderStyles }: ReadingViewProps) => {
-  const pages = useMemo(() => groupPagesByVerses(verses), [verses]);
+const INCREASE_VIEWPORT_BY_PIXELS = 1200;
+
+const ReadingView = ({
+  quranReaderStyles,
+  quranReaderDataType,
+  initialData,
+  resourceId,
+}: ReadingViewProps) => {
+  const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>({
+    [initialData.verses[0].pageNumber]: initialData.verses,
+  });
+  const { lang } = useTranslation('quran-reader');
+  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
+  const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
+  const verses = useMemo(
+    () => Object.values(mushafPageToVersesMap).flat(),
+    [mushafPageToVersesMap],
+  );
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.Reciter,
+  );
+  const {
+    value: wordByWordLocale,
+    isQueryParamDifferent: wordByWordLocaleQueryParamDifferent,
+  }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+    QueryParam.WBW_LOCALE,
+  );
+  const { quranFont, mushafLines, quranTextFontScale } = quranReaderStyles;
+  useQcfFont(quranFont, verses);
+  const { pagesCount, hasError, pagesVersesRange, isLoading } = useFetchPagesLookup(
+    resourceId,
+    quranReaderDataType,
+    initialData,
+    quranReaderStyles,
+    isUsingDefaultFont,
+  );
+  const currentPageIndex = useMemo(
+    () => getPageIndexByPageNumber(Number(lastReadPageNumber), pagesVersesRange),
+    [lastReadPageNumber, pagesVersesRange],
+  );
+  const virtuosoRef = useRef<VirtuosoHandle>(null);
+  useScrollToVirtualizedVerse(
+    quranReaderDataType,
+    virtuosoRef,
+    initialData,
+    quranReaderStyles,
+    verses,
+    pagesVersesRange,
+    isUsingDefaultFont,
+    quranFont,
+    mushafLines,
+    isLoading,
+  );
+
+  const scrollToPreviousPage = useCallback(() => {
+    logButtonClick('reading_view_prev_page');
+    virtuosoRef.current.scrollToIndex({
+      index: currentPageIndex - 1,
+      align: 'start',
+      offset: -35,
+    });
+  }, [currentPageIndex]);
+
+  const scrollToNextPage = useCallback(() => {
+    logButtonClick('reading_view_next_page');
+    virtuosoRef.current.scrollToIndex({
+      index: currentPageIndex + 1,
+      align: 'start',
+      offset: 25,
+    });
+  }, [currentPageIndex]);
+
+  const allowKeyboardNavigation = quranTextFontScale <= 5;
+  const onUpClicked = useCallback(
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      scrollToPreviousPage();
+    },
+    [scrollToPreviousPage],
+  );
+
+  const onDownClicked = useCallback(
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+      scrollToNextPage();
+    },
+    [scrollToNextPage],
+  );
+
+  useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
+  useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
+
+  const itemContentRenderer = (pageIndex: number) => (
+    <PageContainer
+      isUsingDefaultFont={isUsingDefaultFont}
+      pagesVersesRange={pagesVersesRange}
+      quranReaderStyles={quranReaderStyles}
+      reciterId={reciterId}
+      lang={lang}
+      wordByWordLocale={wordByWordLocale}
+      pageIndex={pageIndex}
+      setMushafPageToVersesMap={setMushafPageToVersesMap}
+      initialData={initialData}
+    />
+  );
+
+  if (hasError) {
+    return <Error />;
+  }
 
   return (
-    <div className={styles.container}>
-      {Object.keys(pages).map((pageNumber, index) => (
-        <Page
-          verses={pages[pageNumber]}
-          key={`page-${pageNumber}`}
-          page={Number(pageNumber)}
-          quranReaderStyles={quranReaderStyles}
-          pageIndex={index}
+    <>
+      <QueryParamMessage
+        translationsQueryParamDifferent={false}
+        reciterQueryParamDifferent={reciterQueryParamDifferent}
+        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+      />
+      <div
+        onCopy={(event) => onCopyQuranWords(event, verses)}
+        className={classNames(
+          styles.container,
+          styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
+        )}
+      >
+        {isLoading ? (
+          <div className={styles.virtuosoScroller}>
+            <ReadingViewSkeleton />
+          </div>
+        ) : (
+          <Virtuoso
+            ref={virtuosoRef}
+            useWindowScroll
+            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+            className={styles.virtuosoScroller}
+            initialItemCount={1} // needed for SSR.
+            totalCount={pagesCount}
+            itemContent={itemContentRenderer}
+            components={{
+              Footer: () => {
+                const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
+                const lastVerse = pageVerses?.[pageVerses.length - 1];
+                if (lastVerse)
+                  return (
+                    <EndOfScrollingControls
+                      quranReaderDataType={quranReaderDataType}
+                      lastVerse={lastVerse}
+                    />
+                  );
+                return null;
+              },
+            }}
+          />
+        )}
+      </div>
+      {allowKeyboardNavigation && (
+        <PageNavigationButtons
+          scrollToNextPage={scrollToNextPage}
+          scrollToPreviousPage={scrollToPreviousPage}
         />
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
-/**
- * Since we are passing verses and it's an array
- * even if the same verses are passed, their reference will change
- * on fetching a new page and since Memo only does shallow comparison,
- * we need to use custom comparing logic:
- *
- *  1. Check if the number of verses are the same.
- *  2. Check if the fonts changed.
- *
- * If the above condition is met, it's safe to assume that the result
- * of both renders are the same.
- *
- * @param {ReadingViewProps} prevProps
- * @param {ReadingViewProps} nextProps
- * @returns {boolean}
- */
-const areVersesEqual = (prevProps: ReadingViewProps, nextProps: ReadingViewProps): boolean =>
-  prevProps.verses.length === nextProps.verses.length &&
-  !verseFontChanged(
-    prevProps.quranReaderStyles,
-    nextProps.quranReaderStyles,
-    prevProps.verses[0].words,
-    nextProps.verses[0].words,
-  );
-export default memo(ReadingView, areVersesEqual);
+export default ReadingView;

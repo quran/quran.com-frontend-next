@@ -1,0 +1,19 @@
+.separatorContainer {
+  margin-block: var(--spacing-large);
+}
+.container {
+  min-height: calc(10 * var(--spacing-mega));
+}
+.verseContainer {
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-small);
+}
+
+.readMoreButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.endOfScrollActionsContainer {
+  padding-block-end: var(--spacing-large);
+}

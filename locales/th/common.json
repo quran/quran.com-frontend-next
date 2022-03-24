@@ -18,9 +18,10 @@
             "download": "ดาวน์โหลด",
             "full-surah": "Surah เต็ม",
             "mismatch": "คลิกที่ \"เริ่มใหม่\" หากคุณต้องการเล่น {{currentReadingChapter}} แทน",
-            "next-ayah": "ต่อไป Ayah",
             "pause": "หยุดชั่วคราว",
+            "pause-audio": "หยุดเสียงชั่วคราว",
             "play": "เล่น",
+            "play-audio": "เล่นเสียง",
             "play-range": "ช่วงการเล่น",
             "previous-ayah": "ก่อนหน้า Ayah",
             "repeat-1-verse": "กลอนซ้ำ",
@@ -105,6 +106,7 @@
     "juz": "จูซ",
     "language": "ภาษา",
     "languages": "ภาษา",
+    "less": "น้อย",
     "loading": "กำลังโหลด",
     "menu": "เมนู",
     "mobile-apps": "แอพมือถือ",
@@ -113,6 +115,7 @@
     "navigate": "นำทาง",
     "network": "เครือข่าย",
     "next": "ต่อไป",
+    "next-ayah": "ต่อไป Ayah",
     "no": "เลขที่",
     "none": "ไม่มี",
     "off": "ปิด",
@@ -122,34 +125,8 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
     "popular-links": "ลิงค์ยอดนิยม",
     "powered-by": "ขับเคลื่อนโดย",
-    "prayer-times": {
-        "access-denied": "การเข้าถึงตำแหน่งถูกปฏิเสธ โปรดเปิดใช้งานการเข้าถึงตำแหน่งเพื่อรับเวลาละหมาดที่ถูกต้อง",
-        "calculation-method": "วิธีการคำนวณ",
-        "calculation-methods": {
-            "Dubai": "ดูไบ",
-            "Egyptian": "ชาวอียิปต์",
-            "Karachi": "การาจี",
-            "Kuwait": "คูเวต",
-            "MoonsightingCommittee": "คณะกรรมการ Moonsighting",
-            "MuslimWorldLeague": "มุสลิมเวิลด์ลีก",
-            "NorthAmerica": "อเมริกาเหนือ",
-            "Qatark": "กาตาร์",
-            "Singapore": "สิงคโปร์",
-            "Tehran": "เตหะราน",
-            "Turkey": "ไก่งวง",
-            "UmmAlQura": "UmmAlQura"
-        },
-        "find-accurate-location": "ค้นหาตำแหน่งที่ถูกต้อง",
-        "location-access": "การเข้าถึงตำแหน่ง",
-        "location-updated": "อัปเดตสถานที่เวลาละหมาด",
-        "madhab": "Madhab",
-        "madhabs": {
-            "Hanafi": "ฮานาฟี",
-            "Shafi": "ชาฟี"
-        },
-        "title": "เวลาละหมาด"
-    },
     "prev": "ก่อนหน้า",
+    "previous-ayah": "ก่อนหน้า Ayah",
     "privacy": "ความเป็นส่วนตัว",
     "product-updates": "อัพเดทสินค้า",
     "q-reflect": "คัมภีร์กุรอานสะท้อน",
@@ -160,9 +137,11 @@
         "translation": "การแปล"
     },
     "reciter": "ผู้อ่าน",
+    "reciters": "ผู้อ่าน",
     "reflect": "สะท้อน",
     "remove": "ลบ",
     "retry": "ลองอีกครั้ง",
+    "search-for": "ค้นหา '{{searchQuery}}'",
     "search": {
         "filters": "ตัวกรอง",
         "hint": "ลองค้นหาดู",
@@ -191,6 +170,7 @@
         "show-tooltip-when-playing-audio": "แสดงคำแนะนำเครื่องมือเมื่อเล่นเสียง",
         "title": "การตั้งค่า",
         "tooltip-playing-audio-helper": "แสดงการแปลคำในคำแนะนำเครื่องมือขณะเล่น ayah",
+        "value-and-other": "{{value}} และอีก {{othersCount}}",
         "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
         "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
         "word-tooltip-helper": "แสดงการแปลหรือการทับศัพท์เมื่อวางเมาส์เหนือหรือคลิกที่คำ"
@@ -214,7 +194,10 @@
     "tafsir": {
         "font-size": "ขนาดตัวอักษร Tafsir",
         "group-message": "คุณกำลังอ่าน tafsir สำหรับกลุ่มโองการ {{from}} ถึง {{to}}",
+        "no-text": "{{tafsirName}} ไม่สามารถใช้ได้สำหรับกลอนปัจจุบัน",
         "surah": "ตัฟซีร ซูเราะฮฺ",
+        "tafsir-desc": "อ่าน {{tafsirName}} สำหรับ Ayah {{verseNumber}} ของ Surah {{surahName}}",
+        "tafsirs-desc": "อ่าน Tafsirs ต่างๆของ Ayah {{ayahNumber}} ของ Surah {{surahName}} โดยนักวิชาการ Tafsir ที่เชื่อถือได้",
         "title": "ตัฟซีร"
     },
     "tarteel": {
@@ -238,6 +221,8 @@
     "transliteration": "การทับศัพท์",
     "type": "พิมพ์",
     "verse": "กลอน",
+    "verse-bookmark-removed": "บุ๊กมาร์กถูกลบ!",
+    "verse-bookmarked": "กลอนคั่นหน้า!",
     "verses": "โองการ",
     "view": "ดู",
     "voice": {
@@ -252,6 +237,8 @@
     },
     "wbw": "คำต่อคำ",
     "wbw-trans-lang": "คำต่อคำ ภาษา",
+    "wbw-translation": "การแปลคำต่อคำ",
+    "wbw-transliteration": "คำต่อคำทับศัพท์",
     "word-click": {
         "no-audio": "ไม่มีเสียง",
         "play-audio": "เล่นเสียง",

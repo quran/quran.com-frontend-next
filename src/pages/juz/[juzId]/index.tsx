@@ -4,28 +4,35 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { getJuzVerses } from 'src/api';
+import { getJuzVerses, getPagesLookup } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
+import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
+import { getAllChaptersData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getJuzNavigationUrl } from 'src/utils/navigation';
+import { formatStringNumber } from 'src/utils/number';
 import { getPageOrJuzMetaDescription } from 'src/utils/seo';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidJuzId } from 'src/utils/validator';
+import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { VersesResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;
   hasError?: boolean;
+  chaptersData: ChaptersData;
 }
 
-const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
+const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { juzId },
@@ -35,7 +42,7 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
   }
   const path = getJuzNavigationUrl(Number(juzId));
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('juz')} ${toLocalizedNumber(Number(juzId), lang)}`}
         description={getPageOrJuzMetaDescription(juzVerses)}
@@ -47,25 +54,51 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
         id={String(juzId)}
         quranReaderDataType={QuranReaderDataType.Juz}
       />
-    </>
+    </DataContext.Provider>
   );
 };
 
+// eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const juzId = String(params.juzId);
+  let juzId = String(params.juzId);
   // we need to validate the chapterId and verseId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
   if (!isValidJuzId(juzId)) {
     return {
       notFound: true,
     };
   }
+  const chaptersData = await getAllChaptersData(locale);
+  juzId = formatStringNumber(juzId);
+
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
   try {
-    const juzVersesResponse = await getJuzVerses(juzId, locale, {
-      ...getDefaultWordFields(),
-      ...getMushafId(),
+    const pagesLookupResponse = await getPagesLookup({
+      juzNumber: Number(juzId),
+      mushaf: defaultMushafId,
     });
+    const firstPageOfJuz = Object.keys(pagesLookupResponse.pages)[0];
+    const firstPageOfJuzLookup = pagesLookupResponse.pages[firstPageOfJuz];
+    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+      chaptersData,
+      pagesLookupResponse.lookupRange.from,
+      pagesLookupResponse.lookupRange.to,
+    ).length;
+    const juzVersesResponse = await getJuzVerses(juzId, locale, {
+      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+      mushaf: defaultMushafId,
+      perPage: 'all',
+      from: firstPageOfJuzLookup.from,
+      to: firstPageOfJuzLookup.to,
+    });
+    const metaData = { numberOfVerses };
+    juzVersesResponse.metaData = metaData;
+    juzVersesResponse.pagesLookup = pagesLookupResponse;
     return {
       props: {
+        chaptersData,
         juzVerses: juzVersesResponse,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.

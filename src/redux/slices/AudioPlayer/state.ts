@@ -26,8 +26,6 @@ export const selectIsUsingDefaultReciter = (state: RootState) =>
 export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
 export const selectAudioDataStatus = (state: RootState) => state.audioPlayerState.audioDataStatus;
 export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPlaying;
-export const selectIsMobileMinimizedForScrolling = (state: RootState) =>
-  state.audioPlayerState.isMobileMinimizedForScrolling;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectPlaybackRate = (state: RootState) => state.audioPlayerState.playbackRate;
@@ -166,10 +164,6 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       isPlaying: action.payload,
     }),
-    setIsMobileMinimizedForScrolling: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      isMobileMinimizedForScrolling: action.payload,
-    }),
     setReciter: (state, action: PayloadAction<{ reciter: Reciter; locale: string }>) => ({
       ...state,
       isUsingDefaultReciter:
@@ -264,7 +258,6 @@ export const {
   setAudioData,
   setAudioStatus,
   resetAudioData,
-  setIsMobileMinimizedForScrolling,
   setEnableAutoScrolling,
   setRepeatSettings,
   setRepeatProgress,

@@ -1,13 +1,8 @@
 import React, { RefObject, useEffect, memo } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
-
-import {
-  verseFontChanged,
-  verseTranslationChanged,
-  verseTranslationFontChanged,
-} from '../utils/memoization';
 
 import BookmarkIcon from './BookmarkIcon';
 import QuranReflectButton from './QuranReflectButton';
@@ -15,8 +10,12 @@ import ShareVerseButton from './ShareVerseButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import Separator from 'src/components/dls/Separator/Separator';
+import {
+  verseFontChanged,
+  verseTranslationChanged,
+  verseTranslationFontChanged,
+} from 'src/components/QuranReader/utils/memoization';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
@@ -40,6 +39,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   quranReaderStyles,
   verseIndex,
 }) => {
+  const router = useRouter();
+  const { startingVerse } = router.query;
+
   const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
@@ -47,22 +49,13 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
   useEffect(() => {
-    if (isHighlighted && enableAutoScrolling) {
+    if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
       scrollToSelectedItem();
     }
-  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling]);
+  }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
 
   return (
     <div ref={selectedItemRef}>
-      {verse.verseNumber === 1 && (
-        <div className={styles.chapterHeaderContainer}>
-          <ChapterHeader
-            chapterId={String(verse.chapterId)}
-            pageNumber={verse.pageNumber}
-            hizbNumber={verse.hizbNumber}
-          />
-        </div>
-      )}
       <div
         className={classNames(styles.cellContainer, {
           [styles.highlightedContainer]: isHighlighted,
@@ -76,22 +69,22 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             <div className={styles.actionItem}>
               <BookmarkIcon verseKey={verse.verseKey} />
             </div>
-          </div>
-          <div className={styles.actionContainerRight}>
-            <div className={classNames(styles.actionItem)}>
-              <ShareVerseButton verseKey={verse.verseKey} />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <QuranReflectButton verseKey={verse.verseKey} />
-            </div>
             <div className={styles.actionItem}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}
                 timestamp={verse.timestamps.timestampFrom}
               />
             </div>
+            <div className={classNames(styles.actionItem)}>
+              <QuranReflectButton verseKey={verse.verseKey} />
+            </div>
+            <div className={classNames(styles.actionItem)}>
+              <ShareVerseButton verseKey={verse.verseKey} />
+            </div>
+          </div>
+          <div className={styles.actionContainerRight}>
             <div className={styles.actionItem}>
-              <OverflowVerseActionsMenu verse={verse} />
+              <OverflowVerseActionsMenu verse={verse} isModal isPortalled />
             </div>
           </div>
         </div>
@@ -107,7 +100,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
                   translationFontScale={quranReaderStyles.translationFontScale}
                   text={translation.text}
                   languageId={translation.languageId}
-                  resourceName={translation.resourceName}
+                  resourceName={verse.translations?.length > 1 ? translation.resourceName : null}
                 />
               </div>
             ))}

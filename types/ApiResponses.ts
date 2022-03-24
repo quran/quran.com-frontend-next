@@ -4,6 +4,9 @@ import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
+import LookupRange from './LookupRange';
+import LookupRecord from './LookupRecord';
+import MetaData from './MetaData';
 import Reciter from './Reciter';
 import { SearchNavigationResult } from './SearchNavigationResult';
 import TafsirInfo from './TafsirInfo';
@@ -26,12 +29,17 @@ interface Pagination {
 export interface VersesResponse extends BaseResponse {
   pagination: Pagination;
   verses: Verse[];
-  metaData?: Record<string, string>;
+  metaData?: MetaData;
+  pagesLookup?: PagesLookUpResponse;
 }
 
 // The response from the chapters endpoint that returns a list of the chapters
 export interface ChaptersResponse extends BaseResponse {
   chapters: Chapter[];
+}
+
+export interface VerseResponse extends BaseResponse {
+  verse: Verse;
 }
 
 // The response from the chapter endpoint that returns information on a chapter
@@ -89,11 +97,18 @@ export interface FootnoteResponse extends BaseResponse {
   footNote?: Footnote;
 }
 
+export interface PagesLookUpResponse extends BaseResponse {
+  lookupRange: LookupRange;
+  pages?: Record<string, LookupRecord>;
+  totalPage?: number;
+}
+
 export interface TafsirContentResponse extends BaseResponse {
   tafsir: {
     verses: Record<string, Verse>;
     resourceId: number;
     resourceName: string;
+    languageId: number;
     translatedName: {
       name: string;
       languageName: string;

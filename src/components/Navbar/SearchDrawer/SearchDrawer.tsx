@@ -148,6 +148,7 @@ const SearchDrawer: React.FC = () => {
               <VoiceSearchBodyContainer />
             ) : (
               <SearchBodyContainer
+                onSearchResultClicked={() => searchInputRef?.current?.blur()}
                 onSearchKeywordClicked={onSearchKeywordClicked}
                 searchQuery={searchQuery}
                 searchResult={searchResult}

@@ -67,12 +67,14 @@ const CuratedStationList = () => {
         return (
           <div className={styles.item} key={id}>
             <Card
+              shouldFlipIconOnRTL={false}
               actionIcon={actionIcon}
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}
               title={t(`curated-station.${station.title}`)}
               description={t(`curated-station.${station.description}`)}
               onImgClick={onClick}
+              onActionIconClick={onClick}
             />
           </div>
         );

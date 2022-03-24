@@ -21,17 +21,6 @@
     },
     "no-bookmarks": "U heeft nog geen bladwijzers",
     "noble-quran": "De Edele Koran",
-    "prayer-names": {
-        "asr": "asr",
-        "dhuhr": "Dhuhr",
-        "fajr": "Fajr",
-        "isha": "Isha",
-        "maghrib": "Maghreb",
-        "sunrise": "zonsopkomst"
-    },
-    "prayer-times": {
-        "use-location": "Nauwkeurige locatie gebruiken"
-    },
     "recently-read": "Recent gelezen",
     "tab": {
         "bookmarks": "Bladwijzers",
@@ -41,9 +30,7 @@
         "trigger": "Snelle toegang tot alles"
     },
     "welcome": {
-        "changes-cta": "Recente wijzigingen bekijken",
-        "desc": "We zijn actief bezig met het toevoegen van nieuwe functies en het doorvoeren van veranderingen. Als u problemen ondervindt, geef dan alstublieft feedback.",
-        "feedback-cta": "Geef feedback",
-        "title": "Welkom bij de Pre-Release Beta van de nieuwe Quran.com!"
+        "body": "Na meer dan een jaar hard werken zijn we verheugd om u de nieuwe Quran.com te presenteren. We hebben veel moeite gedaan om u nieuwe ervaringen te bieden, zoals sepia-modus, woord-voor-woordweergave, opdrachtbalk, IndoPak Mushafs en meer. <2\/> <2\/> We hopen dat je net zoveel geniet van de nieuwe Quran.com als wij. Laat het ons weten over bugs en functieverzoeken op <0>feedback.quran.com<\/0> . We zitten hier allemaal samen in en willen het product verbeteren om u beter van dienst te kunnen zijn. <2\/> <2\/> Als je op enig moment terug wilt naar de oude site, ga dan naar <1>previous.quran.com<\/1> . <2\/> <2\/> - Quran.com team",
+        "title": "Welkom op de nieuwe Koran.com!"
     }
 }

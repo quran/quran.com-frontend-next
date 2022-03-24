@@ -20,18 +20,7 @@
         }
     },
     "no-bookmarks": "Anda belum memiliki penanda buku apa pun",
-    "noble-quran": "Alquran yang Mulia",
-    "prayer-names": {
-        "asr": "Ashar",
-        "dhuhr": "Dhuhr",
-        "fajr": "Fajar",
-        "isha": "isya",
-        "maghrib": "Maghrib",
-        "sunrise": "matahari terbit"
-    },
-    "prayer-times": {
-        "use-location": "Gunakan lokasi yang akurat"
-    },
+    "noble-quran": "Al-Quran yang mulia",
     "recently-read": "Baru-baru ini dibaca",
     "tab": {
         "bookmarks": "penanda buku",
@@ -41,9 +30,7 @@
         "trigger": "Akses cepat ke semuanya"
     },
     "welcome": {
-        "changes-cta": "Lihat Perubahan Terbaru",
-        "desc": "Kami secara aktif menambahkan fitur baru dan mendorong perubahan. Jika Anda mengalami masalah, harap berikan maklum balik.",
-        "feedback-cta": "Berikan maklum balik",
-        "title": "Selamat datang di Beta Pra-Rilis dari Quran.com baru!"
+        "body": "Setelah lebih dari satu tahun kerja keras, kami dengan senang hati mempersembahkan kepada Anda Quran.com yang baru. Kami telah berupaya keras untuk memberi Anda pengalaman baru seperti mode sepia, tampilan kata demi kata, bilah perintah, Mushaf IndoPak, dan banyak lagi. <2\/> <2\/> Kami harap Anda menikmati Quran.com baru seperti kami. Harap beri tahu kami tentang bug dan permintaan fitur di <0> feedback.quran.com <\/0> . Kita semua bersama-sama dan ingin meningkatkan produk untuk melayani Anda lebih baik. <2\/> <2\/> Jika Anda ingin kembali ke situs lama kapan saja, silakan kunjungi <1> sebelumnya.quran.com <\/1> . <2\/> <2\/> - tim Quran.com",
+        "title": "Selamat datang di Quran.com baru!"
     }
 }

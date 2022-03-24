@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import { triggerSetCurrentTime } from './EventTriggers';
 
 import { getChapterAudioData } from 'src/api';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   finishRepeatEachVerseProgress,
@@ -38,13 +39,14 @@ type SeekButtonProps = {
 const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const chaptersData = useContext(DataContext);
   const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chapterData = useMemo(
-    () => getChapterData(highlightedChapter?.toString()),
-    [highlightedChapter],
+    () => getChapterData(chaptersData, highlightedChapter?.toString()),
+    [chaptersData, highlightedChapter],
   );
 
   const { data: chapterAudioData } = useSWRImmutable(
@@ -84,14 +86,10 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
 
   return (
     <Button
-      tooltip={
-        type === SeekButtonType.PrevAyah
-          ? t('audio.player.previous-ayah')
-          : t('audio.player.next-ayah')
-      }
+      tooltip={type === SeekButtonType.PrevAyah ? t('previous-ayah') : t('next-ayah')}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
-      disabled={isDisabled}
+      isDisabled={isDisabled}
       onClick={onSeek}
     >
       {type === SeekButtonType.PrevAyah ? <BackwardIcon /> : <ForwardIcon />}

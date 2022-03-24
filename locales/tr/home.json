@@ -12,7 +12,7 @@
             "2": "Safar",
             "3": "Rabi' ben",
             "4": "Rabi' II",
-            "5": "Cumada ben",
+            "5": "Cumada",
             "6": "Cumada Ahira",
             "7": "Recep",
             "8": "Şaban",
@@ -21,18 +21,7 @@
     },
     "no-bookmarks": "Henüz yer işaretiniz yok",
     "noble-quran": "Kur'an-ı Kerim",
-    "prayer-names": {
-        "asr": "ikindi",
-        "dhuhr": "öğle",
-        "fajr": "sabah namazı",
-        "isha": "yatsı",
-        "maghrib": "akşam yemeği",
-        "sunrise": "gündoğumu"
-    },
-    "prayer-times": {
-        "use-location": "Doğru konumu kullan"
-    },
-    "recently-read": "Son Okunan",
+    "recently-read": "Son Okunanlar",
     "tab": {
         "bookmarks": "Yer imleri",
         "popular": "Popüler"
@@ -41,9 +30,7 @@
         "trigger": "Her şeye hızlı erişim"
     },
     "welcome": {
-        "changes-cta": "Son Değişiklikleri Görüntüle",
-        "desc": "Aktif olarak yeni özellikler ekliyor ve değişiklikleri zorluyoruz. Herhangi bir sorunla karşılaşırsanız lütfen geri bildirimde bulunun.",
-        "feedback-cta": "Geribildirim sağlamak",
-        "title": "Yeni Kuran.com'un Yayın Öncesi Beta'sına hoş geldiniz!"
+        "body": "Bir yılı aşkın yoğun çalışmanın ardından size yeni Kuran.com'u sunmaktan heyecan duyuyoruz. Size sepya modu, kelime kelime görünüm, komut çubuğu, IndoPak Mushaflar ve daha fazlası gibi yeni deneyimler sunmak için büyük çaba harcadık. <2\/> <2\/> Yeni Kuran.com'u bizim kadar beğeneceğinizi umuyoruz. Lütfen <0> feedback.quran.com <\/0> adresindeki hatalar ve özellik istekleri hakkında bize bildirin. Hepimiz bu işte beraberiz ve size daha iyi hizmet verebilmek için ürünü geliştirmek istiyoruz. <2\/> <2\/> Herhangi bir zamanda eski siteye geri dönmek isterseniz, lütfen <1> önceki.quran.com <\/1> adresini ziyaret edin. <2\/> <2\/> - Kuran.com ekibi",
+        "title": "Yeni Kuran.com'a hoş geldiniz!"
     }
 }

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import styles from './TajweedWordImage.module.scss';
 
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { makeCDNUrl } from 'src/utils/cdn';
 
 interface Props {
   path: string;
@@ -19,15 +20,18 @@ const FONT_SIZE_CLASS_MAP = {
   3: styles.md,
   4: styles.lg,
   5: styles.xl,
+  6: styles.xl2,
+  7: styles.xl3,
+  8: styles.xl4,
+  9: styles.xl5,
+  10: styles.xl6,
 };
-
-const IMAGE_BASE_PATH = 'https://static.qurancdn.com/images';
 
 const TajweedWord: React.FC<Props> = ({ path, alt }) => {
   const { quranTextFontScale } = useSelector(selectQuranReaderStyles);
   return (
     <span className={classNames(styles.imageContainer, FONT_SIZE_CLASS_MAP[quranTextFontScale])}>
-      <img src={`${IMAGE_BASE_PATH}/${path}`} alt={alt} />
+      <img src={`${makeCDNUrl(`images/${path}`)}`} alt={alt} />
     </span>
   );
 };
