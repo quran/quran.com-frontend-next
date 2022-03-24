@@ -63,12 +63,17 @@
   opacity: var(--opacity-75);
 }
 
+.minimizedContent {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .moreOrLessText {
-  text-transform: lowercase;
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
   display: inline-block;
-  margin-inline-start: var(--spacing-xxsmall);
 }
 
 .verifiedIcon {

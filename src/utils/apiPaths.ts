@@ -253,7 +253,7 @@ export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, 
   makeUrl('/qr/reflections', {
     ranges: `${chapterId}:${verseNumber}`,
     author: true,
-    fields: 'created_at,body,comments_count,likes_count',
+    fields: 'created_at,html_body,comments_count,likes_count',
     filter: 'popular',
     verified: true,
     lang,

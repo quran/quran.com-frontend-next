@@ -31,9 +31,7 @@ import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
-  getQuranReflectTagUrl,
 } from 'src/utils/navigation';
-import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
 
@@ -152,26 +150,6 @@ const ReflectionItem = ({
     logButtonClick('reflection_item_author');
   };
 
-  const reflectionWithHashtags = (text: string) => {
-    const textArray = text.split(' ').map((word) => {
-      if (word.startsWith('#'))
-        return (
-          <Link
-            isNewTab
-            href={getQuranReflectTagUrl(word)}
-            onClick={() => {
-              logButtonClick('reflection_item_tag');
-            }}
-            variant={LinkVariant.Highlight}
-          >
-            {`${word} `}
-          </Link>
-        );
-      return `${word} `;
-    });
-    return textArray;
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -266,9 +244,10 @@ const ReflectionItem = ({
       )}
 
       <span className={styles.body}>
-        {isExpanded
-          ? reflectionWithHashtags(reflectionText)
-          : reflectionWithHashtags(truncateString(reflectionText, MAX_REFLECTION_LENGTH))}
+        <div
+          className={classNames({ [styles.minimizedContent]: !isExpanded })}
+          dangerouslySetInnerHTML={{ __html: reflectionText }}
+        />
       </span>
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
         <span
@@ -278,7 +257,7 @@ const ReflectionItem = ({
           onKeyDown={onMoreLessClicked}
           onClick={onMoreLessClicked}
         >
-          {isExpanded ? t('common:less') : t('common:more')}
+          {isExpanded ? t('quran-reader:see-less') : t('quran-reader:see-more')}
         </span>
       )}
       <div className={styles.socialInteractionContainer}>
