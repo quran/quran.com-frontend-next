@@ -15,12 +15,12 @@ type TabsProps = {
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
   return (
     <div className={styles.container}>
-      {tabs.map((tab, index) => (
+      {tabs.map((tab) => (
         <div
           className={classNames(styles.tabItem, selected === tab.value && styles.tabItemSelected)}
           key={tab.value}
           role="tab"
-          tabIndex={index}
+          tabIndex={0}
           {...(onSelect && {
             onKeyDown: () => onSelect(tab.value),
             onClick: () => onSelect(tab.value),
