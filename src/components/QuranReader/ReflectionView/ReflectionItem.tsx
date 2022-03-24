@@ -4,6 +4,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
+import truncate from 'html-truncate';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
@@ -256,9 +257,12 @@ const ReflectionItem = ({
       )}
 
       <span className={styles.body}>
-        <div
-          className={classNames({ [styles.minimizedContent]: !isExpanded })}
-          dangerouslySetInnerHTML={{ __html: highlightHashtag(reflectionText) }}
+        <span
+          dangerouslySetInnerHTML={{
+            __html: highlightHashtag(
+              isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
+            ),
+          }}
         />
       </span>
       {reflectionText.length > MAX_REFLECTION_LENGTH && (

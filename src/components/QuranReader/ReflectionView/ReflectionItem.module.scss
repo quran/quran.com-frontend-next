@@ -61,13 +61,9 @@
 .body {
   margin-block-start: var(--spacing-mega);
   opacity: var(--opacity-75);
-}
-
-.minimizedContent {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  & p + p {
+    margin-block-start: var(--spacing-small);
+  }
 }
 
 .moreOrLessText {
