@@ -53,10 +53,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="apple-touch-icon" sizes="192x192" href="/images/logo/Logo@192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
-        <meta
-          name="ahrefs-site-verification"
-          content="d9e06610b3345cfc8c1e17a750df73c73ad1934603f0201751d6f88c1b96410c"
-        />
       </Head>
       <FontPreLoader locale={locale} />
       <ReduxProvider locale={locale}>
