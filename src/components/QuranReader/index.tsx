@@ -2,6 +2,7 @@
 import React, { useCallback, useContext } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import ContextMenu from './ContextMenu';
@@ -12,6 +13,7 @@ import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
+import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import DataContext from 'src/contexts/DataContext';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
@@ -33,6 +35,7 @@ const QuranReader = ({
   id,
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
+  const { lang } = useTranslation();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
@@ -60,6 +63,7 @@ const QuranReader = ({
 
   return (
     <>
+      <FontPreLoader isQuranReader locale={lang} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div
