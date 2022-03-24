@@ -19,5 +19,7 @@ $body-min-height-mobile: 65vh;
 }
 
 .commandBarContainer {
-  margin-block-start: calc(2 * var(--spacing-mega));
+  @include breakpoints.tablet {
+    margin-block-start: calc(2 * var(--spacing-mega));
+  }
 }
