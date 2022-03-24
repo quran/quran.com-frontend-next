@@ -156,8 +156,11 @@ const ReflectionItem = ({
   const highlightHashtag = (text: string) =>
     text.replace(
       hashtagRegex,
-      // eslint-disable-next-line i18next/no-literal-string
-      (val) => `<a href="${getQuranReflectTagUrl(val)}" class="${styles.hashtag}">${val}</a>`,
+      (val) =>
+        // eslint-disable-next-line i18next/no-literal-string
+        `<a target="_blank" href="${getQuranReflectTagUrl(val)}" class="${
+          styles.hashtag
+        }">${val}</a>`,
     );
   return (
     <div className={styles.container}>
