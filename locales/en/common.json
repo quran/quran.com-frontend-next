@@ -251,6 +251,10 @@
         "select-lng": "Select Language",
         "drawer-close": "Close Drawer",
         "change-settings" : "Change Settings",
-        "nav-drawer-open": "Open Navigation Drawer"
+        "nav-drawer-open": "Open Navigation Drawer",
+        "play-surah": "Play Surah {{surahName}}",
+        "read-ayah-refls": "Read Ayah Reflections",
+        "share-ayah": "Share Ayah",
+        "sidebar-nav-close": "Close Navigation Sidebar"
     }
 }
