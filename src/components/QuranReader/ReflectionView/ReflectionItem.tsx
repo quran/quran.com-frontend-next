@@ -256,15 +256,14 @@ const ReflectionItem = ({
         </div>
       )}
 
-      <span className={styles.body}>
-        <span
-          dangerouslySetInnerHTML={{
-            __html: highlightHashtag(
-              isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
-            ),
-          }}
-        />
-      </span>
+      <span
+        className={styles.body}
+        dangerouslySetInnerHTML={{
+          __html: highlightHashtag(
+            isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
+          ),
+        }}
+      />
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
         <span
           className={styles.moreOrLessText}

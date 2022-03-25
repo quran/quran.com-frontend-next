@@ -62,7 +62,15 @@
   margin-block-start: var(--spacing-mega);
   opacity: var(--opacity-75);
   & p + p {
-    margin-block-start: var(--spacing-small);
+    margin-block-start: var(--spacing-medium);
+  }
+  & p:last-child {
+    &::before {
+      margin-block-start: var(--spacing-medium);
+      display: block;
+      content: "\A";
+    }
+    display: inline;
   }
 }
 
@@ -70,6 +78,7 @@
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
   display: inline-block;
+  margin-inline-start: var(--spacing-xxsmall);
 }
 .hashtag {
   color: var(--color-success-medium);
