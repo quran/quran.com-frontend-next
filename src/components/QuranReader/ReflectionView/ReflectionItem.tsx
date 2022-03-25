@@ -60,7 +60,6 @@ const SEPARATOR = ' · ';
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
 const MAX_REFLECTION_LENGTH = 220;
 
-const hashtagRegex = /(#+[a-zA-Z0-9(_)]{1,})/;
 const ReflectionItem = ({
   id,
   authorName,
@@ -155,14 +154,20 @@ const ReflectionItem = ({
   };
 
   const highlightHashtag = (text: string) =>
-    text.replace(
-      hashtagRegex,
-      (val) =>
-        // eslint-disable-next-line i18next/no-literal-string
-        `<a target="_blank" href="${getQuranReflectTagUrl(val)}" class="${
-          styles.hashtag
-        }">${val}</a>`,
-    );
+    text
+      .split(' ')
+      .map((word) => {
+        if (word.startsWith('<tag>') && word.endsWith('</tag>')) {
+          const val = word.substring(5, word.length - 6);
+          // eslint-disable-next-line i18next/no-literal-string
+          return `<a target="_blank" href="${getQuranReflectTagUrl(val)}" class="${
+            styles.hashtag
+          }">${val}</a>`;
+        }
+
+        return word;
+      })
+      .join(' ');
   return (
     <div className={styles.container}>
       <div className={styles.header}>
