@@ -36,7 +36,7 @@ const SearchResults: React.FC<Props> = ({
     <>
       <div>
         {!!searchResult.result.navigation?.length && (
-          <>
+          <div className={styles.navigationItemsListContainer}>
             <p className={styles.boldHeader}>{t('search.jump-to')}</p>
             {searchResult.result.navigation.map((navigationResult) => (
               <NavigationItem
@@ -45,7 +45,7 @@ const SearchResults: React.FC<Props> = ({
                 navigation={navigationResult}
               />
             ))}
-          </>
+          </div>
         )}
         <p className={styles.boldHeader}>{t('search.results')}</p>
         <>

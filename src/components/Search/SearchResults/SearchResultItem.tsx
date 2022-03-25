@@ -8,6 +8,7 @@ import styles from './SearchResultItem.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
@@ -43,6 +44,7 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
           <div className={styles.quranTextContainer}>
             <p className={styles.verseKey}>{localizedVerseKey}</p>
             <div className={styles.quranTextResult} translate="no">
+              <PlainVerseText words={result.words} />
               {result.words.map((word, index) => {
                 return (
                   <QuranWord
