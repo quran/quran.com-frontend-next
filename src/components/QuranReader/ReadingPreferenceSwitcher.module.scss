@@ -2,7 +2,7 @@ $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
 .container {
   max-width: $readingPreferenceMaxWidth;
   margin-block-start: var(--spacing-small);
-  margin-block-end: var(--spacing-small);
+  margin-block-end: var(--spacing-xxsmall);
   margin-inline-start: auto;
   margin-inline-end: auto;
   padding-block-start: 0;
