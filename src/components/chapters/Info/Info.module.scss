@@ -52,7 +52,7 @@
   border: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
   height: 200px;
-  width: 250px;
+  width: 200px;
   position: relative;
   @include breakpoints.tablet {
     margin-inline-end: var(--spacing-large);
