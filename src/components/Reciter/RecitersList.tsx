@@ -21,6 +21,7 @@ const RecitersList = ({ reciters }: RecitersListProps) => {
               imgSrc={makeCDNUrl(reciter.profilePicture)}
               key={reciter.id}
               title={reciter.translatedName.name}
+              imgAlt={reciter.translatedName.name}
               description={reciter.style.name}
               size={CardSize.Medium}
             />
