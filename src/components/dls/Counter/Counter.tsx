@@ -37,6 +37,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
         variant={ButtonVariant.Ghost}
         isDisabled={!onDecrement}
         onClick={onDecrement}
+        ariaLabel={t('counter.decrease')}
       >
         <MinusIcon />
       </Button>
@@ -46,9 +47,8 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Circle}
         isDisabled={!onIncrement}
-        onClick={() => {
-          onIncrement();
-        }}
+        onClick={onIncrement}
+        ariaLabel={t('counter.increase')}
       >
         <PlusIcon />
       </Button>
