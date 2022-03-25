@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 
 import CaretDownIcon from '../../../public/icons/caret-down.svg';
 import Link from '../dls/Link/Link';
@@ -10,7 +11,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
-import JuzView from './JuzView';
+import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
 
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
@@ -20,6 +21,11 @@ enum View {
   Surah = 'surah',
   Juz = 'juz',
 }
+
+const JuzView = dynamic(() => import('./JuzView'), {
+  ssr: false,
+  loading: () => <ChapterAndJuzListSkeleton />,
+});
 
 type ChapterAndJuzListProps = {
   chapters: Chapter[];

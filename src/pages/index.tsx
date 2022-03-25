@@ -4,11 +4,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
 
 import styles from './index.module.scss';
 
-import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzListSkeleton';
+import ChapterAndJuzListWrapper from 'src/components/chapters/ChapterAndJuzList';
 import Footer from 'src/components/dls/Footer/Footer';
 import Separator from 'src/components/dls/Separator/Separator';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
@@ -22,14 +21,6 @@ import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-
-const ChapterAndJuzListWrapper = dynamic(
-  () => import('src/components/chapters/ChapterAndJuzList'),
-  {
-    ssr: false,
-    loading: () => <ChapterAndJuzListSkeleton />,
-  },
-);
 
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
