@@ -47,22 +47,20 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
             const url = getSurahNavigationUrl(POPULAR_SEARCH_QUERIES[popularSearchQuery]);
             const chapterData = getChapterData(chaptersData, chapterId);
             return (
-              <Link href={url} key={url}>
-                <a className={styles.popularSearchItem}>
-                  <SearchItem
-                    prefix={<TrendUpIcon />}
-                    title={chapterData.transliteratedName}
-                    url={url}
-                    key={url}
-                    onClick={() => {
-                      logButtonClick(
-                        `search_${
-                          isSearchDrawer ? 'drawer' : 'page'
-                        }_popular_search_${popularSearchQuery}`,
-                      );
-                    }}
-                  />
-                </a>
+              <Link href={url} key={url} className={styles.popularSearchItem}>
+                <SearchItem
+                  prefix={<TrendUpIcon />}
+                  title={chapterData.transliteratedName}
+                  url={url}
+                  key={url}
+                  onClick={() => {
+                    logButtonClick(
+                      `search_${
+                        isSearchDrawer ? 'drawer' : 'page'
+                      }_popular_search_${popularSearchQuery}`,
+                    );
+                  }}
+                />
               </Link>
             );
           })}
