@@ -49,6 +49,9 @@ const Card = ({
         tabIndex={0}
         onKeyPress={onImgClick}
         onClick={onImgClick}
+        {...{
+          'aria-label': title,
+        }}
       >
         {imgSrc && <img alt={imgAlt} className={styles.img} src={imgSrc} />}
 
