@@ -69,6 +69,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
             key={reciter.id}
             onImgClick={onClick}
             title={reciter.translatedName.name}
+            imgAlt={reciter.translatedName.name}
             description={reciter.style.name}
             size={CardSize.Medium}
           />
