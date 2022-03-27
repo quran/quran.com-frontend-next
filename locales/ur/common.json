@@ -1,6 +1,17 @@
 {
     "about": "ہمارے بارے میں",
     "and": "اور",
+    "aria": {
+        "change-settings": "سیٹنگ کو تبدیل کریں",
+        "drawer-close": "دراز بند کریں۔",
+        "msg-close": "پیغام بند کریں۔",
+        "nav-drawer-open": "نیویگیشن دراز کھولیں۔",
+        "play-surah": "سورہ {{surahName}} کھیلیں",
+        "read-ayah-refls": "آیات مظاہر پڑھیں",
+        "select-lng": "زبان منتخب کریں۔",
+        "share-ayah": "شیئر کریں آیت",
+        "sidebar-nav-close": "نیویگیشن سائڈبار بند کریں۔"
+    },
     "audio": {
         "auto-scroll": {
             "off": "نہیں",

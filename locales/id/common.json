@@ -1,6 +1,17 @@
 {
     "about": "Tentang kami",
     "and": "dan",
+    "aria": {
+        "change-settings": "Ubah pengaturan",
+        "drawer-close": "Tutup Laci",
+        "msg-close": "Tutup Pesan",
+        "nav-drawer-open": "Buka Laci Navigasi",
+        "play-surah": "Mainkan Surah {{surahName}}",
+        "read-ayah-refls": "Baca Refleksi Ayah",
+        "select-lng": "Pilih bahasa",
+        "share-ayah": "Bagikan Ayah",
+        "sidebar-nav-close": "Tutup Bilah Sisi Navigasi"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Mati",

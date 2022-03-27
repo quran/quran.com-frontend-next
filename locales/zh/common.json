@@ -1,6 +1,17 @@
 {
     "about": "关于我们",
     "and": "和",
+    "aria": {
+        "change-settings": "更改设置",
+        "drawer-close": "关闭抽屉",
+        "msg-close": "关闭消息",
+        "nav-drawer-open": "打开导航抽屉",
+        "play-surah": "播放古兰经{{surahName}}",
+        "read-ayah-refls": "阅读阿亚反思",
+        "select-lng": "选择语言",
+        "share-ayah": "分享Ayah",
+        "sidebar-nav-close": "关闭导航侧边栏"
+    },
     "audio": {
         "auto-scroll": {
             "off": "离开",
