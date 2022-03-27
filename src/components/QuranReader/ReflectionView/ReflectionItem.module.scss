@@ -74,9 +74,9 @@
   }
 
   [dir="rtl"] & {
-    & p:not([lang="ar"]):last-child,
-    & p:not([lang="fa"]):last-child,
-    & p:not([lang="ur"]):last-child {
+    & p:not([lang="ar"]),
+    & p:not([lang="fa"]),
+    & p:not([lang="ur"]) {
       direction: ltr;
       display: block;
     }

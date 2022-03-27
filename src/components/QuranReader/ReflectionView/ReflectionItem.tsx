@@ -4,7 +4,6 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
-import truncate from 'html-truncate';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
@@ -27,6 +26,7 @@ import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
+import truncate from 'src/utils/html-truncate';
 import { toLocalizedNumber } from 'src/utils/locale';
 import {
   getQuranReflectPostCommentUrl,

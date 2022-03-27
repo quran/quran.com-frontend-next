@@ -50,7 +50,6 @@
     "clipboard-copy": "^4.0.1",
     "firebase": "^9.6.9",
     "fuse.js": "^6.5.3",
-    "html-truncate": "^1.2.2",
     "humps": "^2.0.1",
     "lodash": "^4.17.21",
     "next": "^12.1.0",
