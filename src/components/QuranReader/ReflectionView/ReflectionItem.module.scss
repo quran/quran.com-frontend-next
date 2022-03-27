@@ -72,10 +72,14 @@
     }
     display: inline;
   }
-  [dir="rtl"] & p[dir="ltr"]:last-child {
-    /* stylelint-disable-next-line csstools/use-logical */
-    direction: ltr;
-    display: block;
+
+  [dir="rtl"] & {
+    & p:not([lang="ar"]):last-child,
+    & p:not([lang="fa"]):last-child,
+    & p:not([lang="ur"]):last-child {
+      direction: ltr;
+      display: block;
+    }
   }
 }
 

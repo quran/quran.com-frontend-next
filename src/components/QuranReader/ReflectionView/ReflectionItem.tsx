@@ -27,7 +27,7 @@ import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { RTL_LOCALES, toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber } from 'src/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
@@ -169,15 +169,6 @@ const ReflectionItem = ({
       })
       .join(' ');
 
-  const addDirAttribute = (text: string) =>
-    text.replace(/lang="([A-Za-z0-9 _]*)"/g, (val) => {
-      const langAttr = val.substring(6, val.length - 1);
-      const isRTL = RTL_LOCALES.includes(langAttr);
-
-      // eslint-disable-next-line i18next/no-literal-string
-      return `${val} dir=${isRTL ? 'rtl' : 'ltr'}`;
-    });
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -275,9 +266,7 @@ const ReflectionItem = ({
         className={styles.body}
         dangerouslySetInnerHTML={{
           __html: highlightHashtag(
-            isExpanded
-              ? addDirAttribute(reflectionText)
-              : truncate(addDirAttribute(reflectionText), MAX_REFLECTION_LENGTH),
+            isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
           ),
         }}
       />
