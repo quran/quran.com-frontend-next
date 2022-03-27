@@ -1,6 +1,17 @@
 {
     "about": "معلومات عنا",
     "and": "و",
+    "aria": {
+        "change-settings": "تغيير الاعدادات",
+        "drawer-close": "أغلق الدرج",
+        "msg-close": "إغلاق الرسالة",
+        "nav-drawer-open": "افتح درج التنقل",
+        "play-surah": "تشغيل السورة {{surahName}}",
+        "read-ayah-refls": "اقرأ تأملات آية",
+        "select-lng": "اختار اللغة",
+        "share-ayah": "مشاركة آية",
+        "sidebar-nav-close": "إغلاق شريط التنقل الجانبي"
+    },
     "audio": {
         "auto-scroll": {
             "off": "إيقاف",
@@ -196,7 +207,7 @@
         "group-message": "أنت تقرأ التفسير لمجموعة الآيات {{from}} إلى {{to}}",
         "no-text": "{{tafsirName}} غير متوفر للآية الحالية.",
         "surah": "تفسير سورة",
-        "tafsir-desc": "اقرأ {{tafsirName}} عن آية {{verseNumber}} من السورة {{surahName}}",
+        "tafsir-desc": "اقرأ {{tafsirName}} عن آية {{verseNumber}} من سورة {{surahName}}",
         "tafsirs-desc": "اقرأ العديد من التفسيرات للآية {{ayahNumber}} من سورة {{surahName}} لعلماء تفسير موثوقين",
         "title": "التفسير"
     },

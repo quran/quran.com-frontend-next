@@ -1,6 +1,17 @@
 {
     "about": "আমাদের সম্পর্কে",
     "and": "এবং",
+    "aria": {
+        "change-settings": "সেটিংস্ পরিবর্তন করুন",
+        "drawer-close": "ড্রয়ার বন্ধ করুন",
+        "msg-close": "বার্তা বন্ধ করুন",
+        "nav-drawer-open": "নেভিগেশন ড্রয়ার খুলুন",
+        "play-surah": "সূরা {{surahName}} খেলুন",
+        "read-ayah-refls": "আয়াত প্রতিফলন পড়ুন",
+        "select-lng": "ভাষা নির্বাচন কর",
+        "share-ayah": "শেয়ার করুন আয়াহ",
+        "sidebar-nav-close": "নেভিগেশন সাইডবার বন্ধ করুন"
+    },
     "audio": {
         "auto-scroll": {
             "off": "বন্ধ",

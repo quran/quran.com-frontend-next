@@ -322,7 +322,7 @@ const ReflectionItem = ({
             icon={<CopyLinkIcon />}
             onClick={onCopyLinkClicked}
           >
-            {t('quran-reader:copy-link')}
+            {t('quran-reader:cpy-link')}
           </PopoverMenu.Item>
           <PopoverMenu.Item
             shouldCloseMenuAfterClick

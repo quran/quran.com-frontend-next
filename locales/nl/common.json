@@ -1,6 +1,17 @@
 {
     "about": "Over ons",
     "and": "en",
+    "aria": {
+        "change-settings": "Instellingen veranderen",
+        "drawer-close": "Sluit lade",
+        "msg-close": "Bericht sluiten",
+        "nav-drawer-open": "Navigatielade openen",
+        "play-surah": "Speel Surah {{surahName}}",
+        "read-ayah-refls": "Lees Ayah Reflections",
+        "select-lng": "Selecteer taal",
+        "share-ayah": "Deel Ayah",
+        "sidebar-nav-close": "Navigatiezijbalk sluiten"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Uit",

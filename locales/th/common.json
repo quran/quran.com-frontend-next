@@ -1,6 +1,17 @@
 {
     "about": "เกี่ยวกับเรา",
     "and": "และ",
+    "aria": {
+        "change-settings": "เปลี่ยนการตั้งค่า",
+        "drawer-close": "ปิดลิ้นชัก",
+        "msg-close": "ปิดข้อความ",
+        "nav-drawer-open": "เปิดลิ้นชักการนำทาง",
+        "play-surah": "เล่น Surah {{surahName}}",
+        "read-ayah-refls": "อ่าน Ayah Reflections",
+        "select-lng": "เลือกภาษา",
+        "share-ayah": "แบ่งปัน Ayah",
+        "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง"
+    },
     "audio": {
         "auto-scroll": {
             "off": "ปิด",

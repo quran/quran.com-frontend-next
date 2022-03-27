@@ -1,6 +1,17 @@
 {
     "about": "درباره ما",
     "and": "و",
+    "aria": {
+        "change-settings": "تغییر تنظیمات",
+        "drawer-close": "کشو را ببندید",
+        "msg-close": "بستن پیام",
+        "nav-drawer-open": "کشوی پیمایش را باز کنید",
+        "play-surah": "پخش سوره {{surahName}}",
+        "read-ayah-refls": "بازتاب آیه را بخوانید",
+        "select-lng": "زبان را انتخاب کنید",
+        "share-ayah": "آیه را به اشتراک بگذارید",
+        "sidebar-nav-close": "نوار کناری ناوبری را ببندید"
+    },
     "audio": {
         "auto-scroll": {
             "off": "خاموش",
