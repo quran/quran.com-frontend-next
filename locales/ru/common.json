@@ -1,6 +1,17 @@
 {
     "about": "О нас",
     "and": "и",
+    "aria": {
+        "change-settings": "Изменить настройки",
+        "drawer-close": "Закрыть ящик",
+        "msg-close": "Закрыть сообщение",
+        "nav-drawer-open": "Открыть панель навигации",
+        "play-surah": "Воспроизвести суру {{surahName}}",
+        "read-ayah-refls": "Читать размышления аята",
+        "select-lng": "Выбрать язык",
+        "share-ayah": "Поделиться",
+        "sidebar-nav-close": "Закрыть боковую панель навигации"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Выключенный",

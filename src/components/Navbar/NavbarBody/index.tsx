@@ -59,6 +59,7 @@ const NavbarBody: React.FC = () => {
               variant={ButtonVariant.Ghost}
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
+              ariaLabel={t('aria.nav-drawer-open')}
             >
               <IconMenu />
             </Button>
@@ -76,6 +77,7 @@ const NavbarBody: React.FC = () => {
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               onClick={openSettingsDrawer}
+              ariaLabel={t('aria.change-settings')}
             >
               <IconSettings />
             </Button>
@@ -88,6 +90,7 @@ const NavbarBody: React.FC = () => {
               onClick={openSearchDrawer}
               shape={ButtonShape.Circle}
               shouldFlipOnRTL={false}
+              ariaLabel={t('search.title')}
             >
               <IconSearch />
             </Button>

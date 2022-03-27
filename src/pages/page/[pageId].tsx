@@ -7,9 +7,11 @@ import { useRouter } from 'next/router';
 import { getPagesLookup, getPageVerses } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
+import { getAllChaptersData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from 'src/utils/navigation';
 import { getPageOrJuzMetaDescription } from 'src/utils/seo';
@@ -19,14 +21,16 @@ import {
 } from 'src/utils/staticPageGeneration';
 import { isValidPageId } from 'src/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';
 
 interface Props {
   pageVerses: VersesResponse;
   hasError?: boolean;
+  chaptersData: ChaptersData;
 }
 
-const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
+const QuranicPage: NextPage<Props> = ({ hasError, pageVerses, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { pageId },
@@ -36,7 +40,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   }
   const path = getPageNavigationUrl(Number(pageId));
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('page')} ${toLocalizedNumber(Number(pageId), lang)}`}
         description={getPageOrJuzMetaDescription(pageVerses)}
@@ -48,7 +52,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
         id={String(pageId)}
         quranReaderDataType={QuranReaderDataType.Page}
       />
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -76,8 +80,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       pageNumber: Number(pageId),
       mushaf: defaultMushafId,
     });
+    const chaptersData = await getAllChaptersData(locale);
     return {
       props: {
+        chaptersData,
         pageVerses: {
           ...pageVersesResponse,
           pagesLookup: pagesLookupResponse,

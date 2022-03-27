@@ -12,7 +12,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/d
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { fakeNavigate } from 'src/utils/navigation';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 
 type QuranReflectButtonProps = {
@@ -26,7 +26,7 @@ const QuranReflectButton = ({
   isTranslationView = true,
   onActionTriggered,
 }: QuranReflectButtonProps) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
@@ -34,13 +34,14 @@ const QuranReflectButton = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
     setIsContentModalOpen(true);
+    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
   };
 
   const contentModalRef = useRef(null);
 
   const onModalClose = () => {
     setIsContentModalOpen(false);
-    fakeNavigate(router.asPath, router.locale);
+    fakeNavigate(router.asPath, lang);
     if (onActionTriggered) {
       onActionTriggered();
     }
@@ -60,6 +61,7 @@ const QuranReflectButton = ({
         className={classNames(styles.iconContainer, styles.verseAction, {
           [styles.fadedVerseAction]: isTranslationView,
         })}
+        ariaLabel={t('aria.read-ayah-refls')}
       >
         <span className={styles.icon}>
           <ChatIcon />

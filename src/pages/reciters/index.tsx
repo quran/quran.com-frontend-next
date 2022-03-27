@@ -15,12 +15,14 @@ import { filterReciters } from 'src/components/Navbar/SettingsDrawer/ReciterSele
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReciterListHero from 'src/components/Reciter/QuranReciterListHero';
 import RecitersList from 'src/components/Reciter/RecitersList';
+import DataContext from 'src/contexts/DataContext';
+import { getAllChaptersData } from 'src/utils/chapter';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 
 const NAVIGATION_URL = '/reciters';
 
-const RecitersListPage = ({ reciters, hasError }) => {
+const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
   const { t, lang } = useTranslation('reciter');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -32,7 +34,7 @@ const RecitersListPage = ({ reciters, hasError }) => {
   if (hasError) return <Error statusCode={500} />;
 
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={t('quran-reciters')}
         description={t('reciters-desc')}
@@ -49,7 +51,7 @@ const RecitersListPage = ({ reciters, hasError }) => {
           <Footer />
         </div>
       </div>
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -60,9 +62,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       'cover_image',
       'bio',
     ]);
+    const chaptersData = await getAllChaptersData(locale);
 
     return {
       props: {
+        chaptersData,
         reciters: reciters || [],
       },
     };

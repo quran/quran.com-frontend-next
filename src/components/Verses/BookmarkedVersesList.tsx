@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './BookmarkedVersesList.module.scss';
 
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -15,6 +16,7 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 
 const BookmarkedVersesList: React.FC = () => {
   const { t, lang } = useTranslation('home');
+  const chaptersData = useContext(DataContext);
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const verseKeys = Object.keys(bookmarkedVerses);
   return (
@@ -24,7 +26,7 @@ const BookmarkedVersesList: React.FC = () => {
           <div className={styles.verseLinksContainer}>
             {verseKeys.slice(0, 10).map((verseKey) => {
               const chapterNumber = getChapterNumberFromKey(verseKey);
-              const chapterData = getChapterData(chapterNumber.toString(), lang);
+              const chapterData = getChapterData(chaptersData, chapterNumber.toString());
               const bookmarkText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
                 verseKey,
                 lang,

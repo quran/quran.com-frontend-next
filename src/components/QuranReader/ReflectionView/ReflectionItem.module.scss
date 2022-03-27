@@ -37,6 +37,8 @@
 }
 
 .verseReferencesContainer {
+  display: inline-flex;
+  align-items: center;
   font-size: var(--font-size-small);
   opacity: var(--opacity-75);
 }
@@ -49,7 +51,7 @@
 
 .clickable {
   cursor: pointer;
-  text-decoration: underline;
+  border-bottom: 1px solid var(--color-text-default);
 }
 
 .container {
@@ -59,14 +61,36 @@
 .body {
   margin-block-start: var(--spacing-mega);
   opacity: var(--opacity-75);
+  & p + p {
+    margin-block-start: var(--spacing-medium);
+  }
+  & p:last-child {
+    &::before {
+      margin-block-start: var(--spacing-medium);
+      display: block;
+      content: "\A";
+    }
+    display: inline;
+  }
+
+  [dir="rtl"] & {
+    & p:not([lang="ar"]),
+    & p:not([lang="fa"]),
+    & p:not([lang="ur"]) {
+      direction: ltr;
+      display: block;
+    }
+  }
 }
 
 .moreOrLessText {
-  text-transform: lowercase;
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
   display: inline-block;
   margin-inline-start: var(--spacing-xxsmall);
+}
+.hashtag {
+  color: var(--color-success-medium);
 }
 
 .verifiedIcon {
@@ -111,4 +135,14 @@
 .socialStats {
   margin-block-start: var(--spacing-xxsmall);
   opacity: var(--opacity-75);
+}
+
+.chevronContainer {
+  display: inline-flex;
+}
+.flipChevron {
+  transform: rotate(180deg);
+}
+.referencedVersesPrefix {
+  margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
 }

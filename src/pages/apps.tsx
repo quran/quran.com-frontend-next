@@ -32,7 +32,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
       key={app.title}
     >
       <div className={styles.texts}>
-        <Image className={styles.appLogo} src={app.logo} height={60} width={60} alt={app.title} />
+        <Image src={app.logo} height={60} width={60} alt={app.title} />
         {isMain ? (
           <h1 className={styles.heading}>{app.title}</h1>
         ) : (
@@ -42,7 +42,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         <div className={styles.downloadButtonsContainer}>
           <Link
             href={app.ios}
-            newTab
+            isNewTab
             {...(app.isTarteel && {
               onClick: () => {
                 onTarteelAppClicked(true);
@@ -53,7 +53,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
           </Link>
           <Link
             href={app.android}
-            newTab
+            isNewTab
             {...(app.isTarteel && {
               onClick: () => {
                 onTarteelAppClicked(false);
@@ -68,8 +68,8 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         <Image
           className={styles.appImage}
           src={app.preview}
-          height={1396}
-          width={1176}
+          height={1012}
+          width={801}
           alt={app.title}
         />
       </div>

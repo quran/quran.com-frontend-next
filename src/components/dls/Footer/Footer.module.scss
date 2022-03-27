@@ -72,9 +72,10 @@
 
 .linkContainer {
   opacity: var(--opacity-75);
-  & + & {
-    margin-block-start: var(--spacing-xxsmall);
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-xxsmall);
   }
+  margin-block-start: var(--spacing-xxsmall);
 }
 
 .titleAndDescriptionContainer {

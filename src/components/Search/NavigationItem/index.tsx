@@ -17,7 +17,7 @@ const NavigationItem: React.FC<Props> = ({ navigation, isSearchDrawer }) => {
   return (
     <Link
       href={url}
-      passHref
+      shouldPassHref
       onClick={() => {
         logButtonClick(`search_${isSearchDrawer ? 'drawer' : 'page'}_navigation_result`);
       }}

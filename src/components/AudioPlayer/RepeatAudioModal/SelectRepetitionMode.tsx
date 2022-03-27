@@ -8,6 +8,7 @@ import Combobox from 'src/components/dls/Forms/Combobox';
 import Switch from 'src/components/dls/Switch/Switch';
 import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 
 export enum RepetitionMode {
   Single = 'single',
@@ -25,7 +26,7 @@ const SelectRepetitionMode = ({
   onRepetitionModeChange,
   verseKey,
 }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const repetitionModeItems = useMemo(
     () => [
       {
@@ -62,7 +63,7 @@ const SelectRepetitionMode = ({
           items={comboboxVerseItems}
           onChange={(val) => onSingleVerseChange(val)}
           placeholder={t('audio.player.search-verse')}
-          initialInputValue={verseKey}
+          initialInputValue={verseKey ? toLocalizedVerseKey(verseKey, lang) : null}
         />
       )}
       {repetitionMode === RepetitionMode.Range && (
@@ -74,8 +75,8 @@ const SelectRepetitionMode = ({
             }}
             dropdownItems={comboboxVerseItems}
             isVisible
-            rangeStartVerse={rangeStartVerse}
-            rangeEndVerse={rangeEndVerse}
+            rangeStartVerse={rangeStartVerse ? toLocalizedVerseKey(rangeStartVerse, lang) : null}
+            rangeEndVerse={rangeEndVerse ? toLocalizedVerseKey(rangeEndVerse, lang) : null}
           />
         </div>
       )}

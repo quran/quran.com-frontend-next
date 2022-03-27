@@ -21,15 +21,10 @@ import QueryParam from 'types/QueryParam';
 
 interface Props {
   audioPlayerElRef: MutableRefObject<HTMLAudioElement>;
-  isMobileMinimizedForScrolling: boolean;
   audioData: AudioData;
 }
 
-const AudioPlayerBody: React.FC<Props> = ({
-  audioPlayerElRef,
-  isMobileMinimizedForScrolling,
-  audioData,
-}) => {
+const AudioPlayerBody: React.FC<Props> = ({ audioPlayerElRef, audioData }) => {
   const { lang } = useTranslation();
   const isRadioMode = useSelector(selectIsRadioMode);
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
@@ -72,10 +67,7 @@ const AudioPlayerBody: React.FC<Props> = ({
         />
         {!isRadioMode && (
           <div className={styles.sliderContainer}>
-            <AudioPlayerSlider
-              audioPlayerElRef={audioPlayerElRef}
-              isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-            />
+            <AudioPlayerSlider audioPlayerElRef={audioPlayerElRef} />
           </div>
         )}
       </div>

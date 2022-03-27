@@ -1,6 +1,5 @@
 import { stringify } from 'querystring';
 
-import { getChapterData } from './chapter';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey } from './verse';
 
@@ -37,19 +36,6 @@ export const getChapterWithStartingVerseUrl = (verseKey: string): string => {
  */
 export const getVerseNavigationUrl = (chapterIdOrSlug: string, verseNumber: string): string =>
   `/${chapterIdOrSlug}/${verseNumber}`;
-
-/**
- * Get the href link to a the range of verses from a specific verse
- * to the end of the chapter.
- *
- * @param {string} verseKey
- * @returns {string}
- */
-export const getVerseToEndOfChapterNavigationUrl = (verseKey: string): string => {
-  const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const lastVerseOfChapter = getChapterData(chapterId).versesCount;
-  return `/${chapterId}/${verseNumber}-${lastVerseOfChapter}`;
-};
 
 /**
  * Get the href link to a juz.
@@ -109,6 +95,9 @@ export const getQuranReflectPostUrl = (postId: number) =>
 
 export const getQuranReflectPostCommentUrl = (postId: number) =>
   `https://quranreflect.com/posts/${postId}#comments`;
+
+export const getQuranReflectTagUrl = (tag: string) =>
+  ` https://quranreflect.com/?tags=${encodeURIComponent(tag)}`;
 
 /**
  * Get the href link to a surah.

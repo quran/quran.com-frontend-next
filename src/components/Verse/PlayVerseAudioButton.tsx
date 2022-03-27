@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,6 +16,7 @@ import Button, {
   ButtonType,
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   playFrom,
@@ -24,6 +25,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
+import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 import QueryParam from 'types/QueryParam';
@@ -41,13 +43,14 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   onActionTriggered,
 }) => {
   const { t } = useTranslation('common');
-
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
   const audioDataStatus = useSelector(selectAudioDataStatus);
+  const chaptersData = useContext(DataContext);
+  const chapterData = getChapterData(chaptersData, chapterId.toString());
 
   useEffect(() => {
     if (audioDataStatus === AudioDataStatus.Ready) {
@@ -128,6 +131,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       className={classNames(styles.iconContainer, styles.verseAction, {
         [styles.fadedVerseAction]: isTranslationView,
       })}
+      ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
         <PlayIcon />

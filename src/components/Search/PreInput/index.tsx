@@ -11,6 +11,7 @@ import SearchQuerySuggestion from './SearchQuerySuggestion';
 
 import Link from 'src/components/dls/Link/Link';
 import SearchHistory from 'src/components/Search/SearchHistory';
+import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from 'src/utils/locale';
@@ -25,10 +26,14 @@ const POPULAR_SEARCH_QUERIES = { Mulk: 67, Noah: 71, Kahf: 18, Yaseen: 36 };
 
 const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) => {
   const { t, lang } = useTranslation('common');
+  const chaptersData = useGetChaptersData(lang);
+  if (!chaptersData) {
+    return <></>;
+  }
   const SEARCH_FOR_KEYWORDS = [
     `${t('juz')} ${toLocalizedNumber(1, lang)}`,
     `${t('page')} ${toLocalizedNumber(1, lang)}`,
-    getChapterData('36', lang).transliteratedName,
+    getChapterData(chaptersData, '36').transliteratedName,
     toLocalizedNumber(36, lang),
     toLocalizedVerseKey('2:255', lang),
   ];
@@ -40,24 +45,22 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
           {Object.keys(POPULAR_SEARCH_QUERIES).map((popularSearchQuery) => {
             const chapterId = POPULAR_SEARCH_QUERIES[popularSearchQuery];
             const url = getSurahNavigationUrl(POPULAR_SEARCH_QUERIES[popularSearchQuery]);
-            const chapterData = getChapterData(chapterId, lang);
+            const chapterData = getChapterData(chaptersData, chapterId);
             return (
-              <Link href={url} key={url}>
-                <a className={styles.popularSearchItem}>
-                  <SearchItem
-                    prefix={<TrendUpIcon />}
-                    title={chapterData.transliteratedName}
-                    url={url}
-                    key={url}
-                    onClick={() => {
-                      logButtonClick(
-                        `search_${
-                          isSearchDrawer ? 'drawer' : 'page'
-                        }_popular_search_${popularSearchQuery}`,
-                      );
-                    }}
-                  />
-                </a>
+              <Link href={url} key={url} className={styles.popularSearchItem}>
+                <SearchItem
+                  prefix={<TrendUpIcon />}
+                  title={chapterData.transliteratedName}
+                  url={url}
+                  key={url}
+                  onClick={() => {
+                    logButtonClick(
+                      `search_${
+                        isSearchDrawer ? 'drawer' : 'page'
+                      }_popular_search_${popularSearchQuery}`,
+                    );
+                  }}
+                />
               </Link>
             );
           })}

@@ -1,15 +1,18 @@
 /* eslint-disable max-lines */
 /* eslint-disable @next/next/no-img-element */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import ChatIcon from '../../../../public/icons/chat.svg';
+import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
+import CopyIcon from '../../../../public/icons/copy.svg';
 import LoveIcon from '../../../../public/icons/love.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
+import ShareIcon from '../../../../public/icons/share.svg';
 import VerifiedIcon from '../../../../public/icons/verified.svg';
 
 import styles from './ReflectionItem.module.scss';
@@ -19,16 +22,18 @@ import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
+import truncate from 'src/utils/html-truncate';
 import { toLocalizedNumber } from 'src/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
+  getQuranReflectTagUrl,
 } from 'src/utils/navigation';
-import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
 
@@ -54,6 +59,7 @@ type ReflectionItemProps = {
 const SEPARATOR = ' · ';
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
 const MAX_REFLECTION_LENGTH = 220;
+
 const ReflectionItem = ({
   id,
   authorName,
@@ -72,6 +78,7 @@ const ReflectionItem = ({
   const formattedDate = formatDateRelatively(new Date(date), lang);
   const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
+  const chaptersData = useContext(DataContext);
 
   const onReferredVersesHeaderClicked = () => {
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
@@ -112,14 +119,14 @@ const ReflectionItem = ({
 
   const getSurahName = useCallback(
     (chapterNumber) => {
-      const surahName = getChapterData(chapterNumber.toString())?.transliteratedName;
+      const surahName = getChapterData(chaptersData, chapterNumber.toString())?.transliteratedName;
       return `${t('common:surah')} ${surahName} (${chapterNumber})`;
     },
-    [t],
+    [chaptersData, t],
   );
 
-  const onShareClicked = () => {
-    logButtonClick('reflection_item_share');
+  const onCopyLinkClicked = () => {
+    logButtonClick('reflection_item_copy_link');
     clipboardCopy(getQuranReflectPostUrl(id)).then(() =>
       toast(t('common:shared'), { status: ToastStatus.Success }),
     );
@@ -133,17 +140,49 @@ const ReflectionItem = ({
     logButtonClick('reflection_item_comments');
   };
 
+  const onCopyTextClicked = () => {
+    logButtonClick('reflection_item_copy_text');
+
+    const textToCopy = `${reflectionText} -- ${getQuranReflectPostUrl(id)}`;
+    clipboardCopy(textToCopy).then(() =>
+      toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
+    );
+  };
+
+  const onReflectAuthorClicked = () => {
+    logButtonClick('reflection_item_author');
+  };
+
+  const highlightHashtag = (text: string) =>
+    text
+      .split(' ')
+      .map((word) => {
+        if (word.startsWith('<tag>') && word.endsWith('</tag>')) {
+          const val = word.substring(5, word.length - 6);
+          // eslint-disable-next-line i18next/no-literal-string
+          return `<a target="_blank" href="${getQuranReflectTagUrl(val)}" class="${
+            styles.hashtag
+          }">${val}</a>`;
+        }
+
+        return word;
+      })
+      .join(' ');
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+          <Link isNewTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
+            <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+          </Link>
           <div>
             <Link
-              newTab
+              isNewTab
               href={getQuranReflectAuthorUrl(authorUsername)}
               variant={LinkVariant.Primary}
               className={styles.author}
+              onClick={onReflectAuthorClicked}
             >
               {authorName}
               {isAuthorVerified && (
@@ -170,6 +209,13 @@ const ReflectionItem = ({
                       {t('quran-reader:referencing')}{' '}
                     </span>
                     <span className={styles.verseReferences}>{referredVerseText}</span>
+                    <span
+                      className={classNames(styles.chevronContainer, {
+                        [styles.flipChevron]: shouldShowReferredVerses,
+                      })}
+                    >
+                      {nonChapterVerseReferences.length > 0 && <ChevronDownIcon />}
+                    </span>
                   </span>
                 </>
               )}
@@ -216,9 +262,14 @@ const ReflectionItem = ({
         </div>
       )}
 
-      <span className={styles.body}>
-        {isExpanded ? reflectionText : truncateString(reflectionText, MAX_REFLECTION_LENGTH)}
-      </span>
+      <span
+        className={styles.body}
+        dangerouslySetInnerHTML={{
+          __html: highlightHashtag(
+            isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
+          ),
+        }}
+      />
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
         <span
           className={styles.moreOrLessText}
@@ -227,7 +278,7 @@ const ReflectionItem = ({
           onKeyDown={onMoreLessClicked}
           onClick={onMoreLessClicked}
         >
-          {isExpanded ? t('common:less') : t('common:more')}
+          {isExpanded ? t('quran-reader:see-less') : t('quran-reader:see-more')}
         </span>
       )}
       <div className={styles.socialInteractionContainer}>
@@ -235,7 +286,7 @@ const ReflectionItem = ({
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(id)}
-          newTab
+          isNewTab
           prefix={<LoveIcon />}
           size={ButtonSize.Small}
           onClick={onLikesCountClicked}
@@ -247,20 +298,40 @@ const ReflectionItem = ({
           variant={ButtonVariant.Compact}
           prefix={<ChatIcon />}
           href={getQuranReflectPostCommentUrl(id)}
-          newTab
+          isNewTab
           size={ButtonSize.Small}
           onClick={onCommentsCountClicked}
         >
           {commentsCount}
         </Button>
-        <Button
-          className={styles.actionItemContainer}
-          variant={ButtonVariant.Compact}
-          onClick={onShareClicked}
-          size={ButtonSize.Small}
+
+        <PopoverMenu
+          trigger={
+            <Button
+              className={styles.actionItemContainer}
+              variant={ButtonVariant.Compact}
+              size={ButtonSize.Small}
+              tooltip={t('common:share')}
+            >
+              <ShareIcon />
+            </Button>
+          }
         >
-          <CopyLinkIcon />
-        </Button>
+          <PopoverMenu.Item
+            shouldCloseMenuAfterClick
+            icon={<CopyLinkIcon />}
+            onClick={onCopyLinkClicked}
+          >
+            {t('quran-reader:cpy-link')}
+          </PopoverMenu.Item>
+          <PopoverMenu.Item
+            shouldCloseMenuAfterClick
+            icon={<CopyIcon />}
+            onClick={onCopyTextClicked}
+          >
+            {t('quran-reader:copy-text')}
+          </PopoverMenu.Item>
+        </PopoverMenu>
       </div>
     </div>
   );

@@ -1,18 +1,12 @@
 import { useCallback, useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import DataFetcher from 'src/components/DataFetcher';
 import TafsirSkeleton from 'src/components/QuranReader/TafsirView/TafsirSkeleton';
-import {
-  selectIsUsingDefaultFont,
-  selectQuranReaderStyles,
-} from 'src/redux/slices/QuranReader/styles';
-import {
-  selectIsUsingDefaultTranslations,
-  selectSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { makeVerseReflectionsUrl } from 'src/utils/apiPaths';
 
 const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
@@ -35,18 +29,12 @@ const ReflectionBodyContainer = ({
   render,
   initialChapterId,
   initialVerseNumber,
-  initialData,
   scrollToTop,
 }: ReflectionBodyProps) => {
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
-  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
-  const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
-  const selectedTranslation = useSelector(selectSelectedTranslations);
-  const { translationFontScale, quranFont, mushafLines } = useSelector(
-    selectQuranReaderStyles,
-    shallowEqual,
-  );
+  const { translationFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { lang } = useTranslation();
 
   const renderBody = useCallback(
     (data) => (
@@ -62,25 +50,10 @@ const ReflectionBodyContainer = ({
     [scrollToTop, selectedChapterId, selectedVerseNumber, translationFontScale],
   );
 
-  const shouldUseInitialData =
-    initialData &&
-    isUsingDefaultFont &&
-    isUsingDefaultTranslations &&
-    initialChapterId === selectedChapterId &&
-    initialVerseNumber === selectedVerseNumber;
-
-  const body = shouldUseInitialData ? (
-    renderBody(initialData)
-  ) : (
+  const body = (
     <DataFetcher
       loading={TafsirSkeleton}
-      queryKey={makeVerseReflectionsUrl(
-        selectedChapterId,
-        selectedVerseNumber,
-        quranFont,
-        mushafLines,
-        selectedTranslation?.[0],
-      )}
+      queryKey={makeVerseReflectionsUrl(selectedChapterId, selectedVerseNumber, lang)}
       render={renderBody}
     />
   );

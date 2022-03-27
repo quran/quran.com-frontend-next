@@ -1,6 +1,17 @@
 {
     "about": "Sobre nós",
     "and": "e",
+    "aria": {
+        "change-settings": "Mudar configurações",
+        "drawer-close": "Fechar gaveta",
+        "msg-close": "Fechar mensagem",
+        "nav-drawer-open": "Abrir gaveta de navegação",
+        "play-surah": "Jogue Sura {{surahName}}",
+        "read-ayah-refls": "Leia Reflexões Ayah",
+        "select-lng": "Selecione o idioma",
+        "share-ayah": "Compartilhe Ayah",
+        "sidebar-nav-close": "Fechar a barra lateral de navegação"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Desligado",

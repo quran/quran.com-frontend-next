@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
-import { getDefaultWordFields, getMushafId } from './utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -21,7 +20,6 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
-  makeByVerseKeyUrl,
 } from './utils/apiPaths';
 
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
@@ -298,56 +296,9 @@ export const getTafsirContent = (
 ): Promise<TafsirContentResponse> => {
   return fetcher(
     makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-      locale,
-      words: true,
-      ...getDefaultWordFields(quranFont),
-      ...getMushafId(quranFont, mushafLines),
+      lang: locale,
+      quranFont,
+      mushafLines,
     }),
   );
-};
-
-/**
- * Get reflections from QuranReflect API
- *
- * @param {string} chapterId
- * @param {string} verseFrom
- * @param {string} verseTo
- * @returns {Promise}
- */
-const quranReflectToken = process.env.NEXT_PUBLIC_QURAN_REFLECT_TOKEN;
-const getQuranReflectVerseData = (chapterId: string, verseFrom: string, verseTo: string) => {
-  // eslint-disable-next-line i18next/no-literal-string
-  const formattedChapterId = Number(chapterId) + 1;
-  const url = `https://quranreflect.com/posts.json?client_auth_token=${quranReflectToken}&q%5Bfilters_attributes%5D%5B0%5D%5Bchapter_id%5D=${formattedChapterId}&q%5Bfilters_attributes%5D%5B0%5D%5Bfrom%5D=${verseFrom}&q%5Bfilters_attributes%5D%5B0%5D%5Bto%5D=${verseTo}&q%5Bfilters_operation%5D=AND&page=1&tab=most_popular&feed=true&exact_ayah=&prioritize_ayah=`;
-  return fetcher(url);
-};
-
-/**
- * Get reflection data
- *
- * @returns {Promise<Object>}
- */
-export const getVerseReflections = async ({
-  chapterId,
-  verseNumber,
-  quranFont,
-  mushafLines,
-  translation,
-}) => {
-  const reflections = (await getQuranReflectVerseData(chapterId, verseNumber, verseNumber)) as any;
-
-  const translationsQueryKey = makeByVerseKeyUrl(`${chapterId}:${verseNumber}`, {
-    words: true,
-    translationFields: 'resource_name,language_id',
-    translations: translation,
-    ...getDefaultWordFields(quranFont),
-    ...getMushafId(quranFont, mushafLines),
-  });
-
-  const verseData = (await fetcher(translationsQueryKey)) as any;
-
-  return {
-    reflections: reflections.posts,
-    verse: verseData?.verse,
-  };
 };

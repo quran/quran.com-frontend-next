@@ -11,7 +11,6 @@ export default {
       ...state.audioPlayerState,
       visibility: undefined,
       isExpanded: false,
-      isMobileMinimizedForScrolling: false,
     },
   }),
   4: (state) => ({

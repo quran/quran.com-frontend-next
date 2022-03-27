@@ -2,18 +2,20 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import { getChapterIdBySlug, getChapterInfo } from 'src/api';
 import InfoPage from 'src/components/chapters/Info/InfoPage';
-import { getChapterData } from 'src/utils/chapter';
+import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
 } from 'src/utils/staticPageGeneration';
 import { isValidChapterId } from 'src/utils/validator';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   chapterResponse?: ChapterResponse;
   chapterInfoResponse?: ChapterInfoResponse;
   hasError?: boolean;
+  chaptersData: ChaptersData;
 }
 
 const ChapterInfo: NextPage<Props> = (props) => {
@@ -31,12 +33,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
     chapterIdOrSlug = sluggedChapterId;
   }
+  const chaptersData = await getAllChaptersData(locale);
   try {
     const chapterInfoResponse = await getChapterInfo(chapterIdOrSlug, locale);
     return {
       props: {
+        chaptersData,
         chapterInfoResponse,
-        chapterResponse: { chapter: getChapterData(chapterIdOrSlug, locale) },
+        chapterResponse: { chapter: getChapterData(chaptersData, chapterIdOrSlug) },
       },
       revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
     };

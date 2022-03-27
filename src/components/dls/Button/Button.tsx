@@ -44,26 +44,27 @@ export type ButtonProps = {
   suffix?: React.ReactNode;
   type?: ButtonType;
   variant?: ButtonVariant;
-  loading?: boolean;
+  isLoading?: boolean;
   href?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   onClick?: MouseEventHandler;
   tooltip?: string | React.ReactNode;
   tooltipContentSide?: ContentSide;
   className?: string;
   hasSidePadding?: boolean;
   shouldFlipOnRTL?: boolean;
-  shallowRouting?: boolean;
-  prefetch?: boolean;
-  newTab?: boolean;
+  shouldShallowRoute?: boolean;
+  shouldPrefetch?: boolean;
+  isNewTab?: boolean;
+  ariaLabel?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
   href,
   onClick,
   children,
-  disabled = false,
-  loading,
+  isDisabled: disabled = false,
+  isLoading,
   type = ButtonType.Primary,
   size = ButtonSize.Medium,
   shape,
@@ -75,9 +76,10 @@ const Button: React.FC<ButtonProps> = ({
   className,
   hasSidePadding = true,
   shouldFlipOnRTL = true,
-  shallowRouting = false,
-  prefetch = true,
-  newTab,
+  shouldShallowRoute: shallowRouting = false,
+  shouldPrefetch: prefetch = true,
+  isNewTab: newTab,
+  ariaLabel,
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -105,24 +107,25 @@ const Button: React.FC<ButtonProps> = ({
     [styles.ghost]: variant === ButtonVariant.Ghost,
     [styles.compact]: variant === ButtonVariant.Compact,
 
-    [styles.disabled]: disabled || loading,
+    [styles.disabled]: disabled || isLoading,
     [styles.noSidePadding]: !hasSidePadding,
   });
 
   // when loading, replace the prefix icon with loading icon
   let prefixFinal;
-  if (loading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
+  if (isLoading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
   else prefixFinal = prefix;
 
   if (href && !disabled)
     return (
-      <Link href={href} newTab={newTab} prefetch={prefetch} isShallow={shallowRouting}>
-        <a
-          {...(onClick && { onClick })}
-          dir={direction}
-          className={classes}
-          data-auto-flip-icon={shouldFlipOnRTL}
-        >
+      <Link
+        href={href}
+        isNewTab={newTab}
+        shouldPrefetch={prefetch}
+        isShallow={shallowRouting}
+        {...(onClick && { onClick })}
+      >
+        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
@@ -134,7 +137,7 @@ const Button: React.FC<ButtonProps> = ({
               {suffix}
             </span>
           )}
-        </a>
+        </div>
       </Link>
     );
 
@@ -154,6 +157,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled={disabled}
         onClick={onClick}
         data-auto-flip-icon={shouldFlipOnRTL}
+        {...(ariaLabel && { 'aria-label': ariaLabel })}
       >
         {prefixFinal && (
           <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>

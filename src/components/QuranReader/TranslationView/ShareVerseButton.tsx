@@ -66,6 +66,7 @@ const ShareVerseButton = ({
       className={classNames(styles.iconContainer, styles.verseAction, {
         [styles.fadedVerseAction]: isTranslationView,
       })}
+      ariaLabel={t('aria.share-ayah')}
     >
       <span className={styles.icon}>
         <CopyLinkIcon />

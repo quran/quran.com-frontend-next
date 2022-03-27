@@ -6,10 +6,11 @@ import { useRouter } from 'next/router';
 import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
+import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { getChapterData } from 'src/utils/chapter';
+import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
 import { getCanonicalUrl, getVerseNavigationUrl } from 'src/utils/navigation';
 import {
@@ -23,6 +24,7 @@ import {
   isValidVerseNumber,
 } from 'src/utils/validator';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 import MetaData from 'types/MetaData';
 import { QuranReaderDataType } from 'types/QuranReader';
 
@@ -31,9 +33,16 @@ type VerseProps = {
   versesResponse?: VersesResponse;
   isVerse?: boolean;
   hasError?: boolean;
+  chaptersData?: ChaptersData;
 };
 
-const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
+const Verse: NextPage<VerseProps> = ({
+  chapterResponse,
+  versesResponse,
+  hasError,
+  isVerse,
+  chaptersData,
+}) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
@@ -43,7 +52,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
   }
   const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
   return (
-    <>
+    <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${
           isVerse
@@ -59,7 +68,7 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
         id={chapterResponse.chapter.id}
         quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
       />
-    </>
+    </DataContext.Provider>
   );
 };
 
@@ -71,10 +80,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   if (sluggedChapterId) {
     chapterIdOrSlug = sluggedChapterId;
   }
+  const chaptersData = await getAllChaptersData(locale);
   // 2. make sure that verse id/range are valid before calling BE to get the verses.
   if (
-    !isValidVerseId(chapterIdOrSlug, verseIdOrRange) &&
-    !isValidVerseRange(chapterIdOrSlug, verseIdOrRange)
+    !isValidVerseId(chaptersData, chapterIdOrSlug, verseIdOrRange) &&
+    !isValidVerseRange(chaptersData, chapterIdOrSlug, verseIdOrRange)
   ) {
     return { notFound: true };
   }
@@ -113,7 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       to: isVerse ? `${chapterIdOrSlug}:${verseIdOrRange}` : metaData.to,
     });
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
-    const chapterData = getChapterData(chapterIdOrSlug, locale);
+    const chapterData = getChapterData(chaptersData, chapterIdOrSlug);
     if (!chapterData) {
       return {
         props: {
@@ -124,6 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
     return {
       props: {
+        chaptersData,
         chapterResponse: {
           chapter: { ...chapterData, id: chapterIdOrSlug },
         },

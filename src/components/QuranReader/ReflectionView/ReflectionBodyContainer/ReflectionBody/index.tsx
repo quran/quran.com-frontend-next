@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,15 +12,20 @@ import ReflectionItem, {
   VerseReference,
 } from 'src/components/QuranReader/ReflectionView/ReflectionItem';
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
-import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import DataContext from 'src/contexts/DataContext';
 import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
   getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';
-import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils/verse';
+import {
+  getVerseAndChapterNumbersFromKey,
+  isFirstVerseOfSurah,
+  isLastVerseOfSurah,
+  makeVerseKey,
+} from 'src/utils/verse';
 
 /**
  * From reflection data, extract the verse references
@@ -30,10 +35,25 @@ import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from 'src/utils
  * @returns {VerseReference[]} verseReferences
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
-  return reflection.filters.map((filter) => {
-    const chapter = filter.surahNumber;
-    const { from, to } = filter;
-    return { chapter, from, to };
+  return reflection.referencedAyahs.map((reference) => {
+    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key.toString());
+    let from;
+    let to;
+
+    const verseRange = verseNumber || '';
+
+    if (verseRange.includes('-')) {
+      [from, to] = verseRange.split('-');
+    } else {
+      from = verseRange;
+      to = verseRange;
+    }
+
+    return {
+      chapter: Number(chapterNumber),
+      from: Number(from),
+      to: Number(to),
+    };
   });
 };
 
@@ -52,10 +72,14 @@ const ReflectionBody: React.FC<Props> = ({
   data,
   scrollToTop,
   setSelectedVerseNumber,
-  translationFontScale,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const hasNextVerse = !isLastVerseOfSurah(selectedChapterId, Number(selectedVerseNumber));
+  const chaptersData = useContext(DataContext);
+  const hasNextVerse = !isLastVerseOfSurah(
+    chaptersData,
+    selectedChapterId,
+    Number(selectedVerseNumber),
+  );
   const hasPrevVerse = !isFirstVerseOfSurah(Number(selectedVerseNumber));
 
   const loadNextVerse = useCallback(() => {
@@ -86,26 +110,16 @@ const ReflectionBody: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      {data?.verse && (
-        <div className={styles.verseContainer}>
-          <PlainVerseText words={data.verse?.words} />
-        </div>
-      )}
-      {data?.verse?.translations?.length > 0 && (
-        <div className={styles.translationContainer}>
-          <TranslationText
-            languageId={data.verse.translations?.[0].languageId}
-            resourceName={data.verse.translations?.[0].resourceName}
-            translationFontScale={translationFontScale}
-            text={data.verse.translations?.[0].text}
-          />
-        </div>
-      )}
+      <VerseAndTranslation
+        from={Number(selectedVerseNumber)}
+        to={Number(selectedVerseNumber)}
+        chapter={Number(selectedChapterId)}
+      />
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
       <ReflectionDisclaimerMessage />
-      {data?.reflections?.map((reflection) => (
+      {data?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
           key={reflection.id}
@@ -113,10 +127,10 @@ const ReflectionBody: React.FC<Props> = ({
           authorName={reflection?.author?.name}
           authorUsername={reflection?.author?.username}
           isAuthorVerified={reflection?.author?.verified}
-          reflectionText={reflection?.body}
+          reflectionText={reflection?.htmlBody}
           avatarUrl={reflection?.author?.profileImg}
           verseReferences={getVerseReferencesFromReflection(reflection)}
-          likesCount={reflection?.likes}
+          likesCount={reflection?.likesCount}
           commentsCount={reflection?.commentsCount}
         />
       ))}
@@ -125,7 +139,7 @@ const ReflectionBody: React.FC<Props> = ({
           href={getQuranReflectVerseUrl(
             makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
           )}
-          newTab
+          isNewTab
         >
           {t('read-more-quran-reflect')}
         </Button>

@@ -1,7 +1,8 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import ContextMenu from './ContextMenu';
@@ -12,6 +13,8 @@ import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
+import FontPreLoader from 'src/components/Fonts/FontPreLoader';
+import DataContext from 'src/contexts/DataContext';
 import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
@@ -32,20 +35,25 @@ const QuranReader = ({
   id,
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
+  const { lang } = useTranslation();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
+  const chaptersData = useContext(DataContext);
   const onElementVisible = useCallback(
     (element: Element) => {
       dispatch({
         type: setLastReadVerse.type,
-        payload: getObservedVersePayload(element),
+        payload: {
+          lastReadVerse: getObservedVersePayload(element),
+          chaptersData,
+        },
       });
     },
-    [dispatch],
+    [chaptersData, dispatch],
   );
   useGlobalIntersectionObserver(
     getOptions(isReadingPreference),
@@ -55,6 +63,7 @@ const QuranReader = ({
 
   return (
     <>
+      <FontPreLoader isQuranReader locale={lang} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div

@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR from 'swr';
+import useSWR from 'swr/immutable';
 
 import Spinner from '../dls/Spinner/Spinner';
 import TranslationText from '../QuranReader/TranslationView/TranslationText';

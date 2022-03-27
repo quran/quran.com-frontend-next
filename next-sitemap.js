@@ -69,7 +69,7 @@ const getAlternateRefs = (chapterId = null, appendSlug = true, prefix = '', suff
 
 module.exports = {
   siteUrl: BASE_PATH,
-  sitemapSize: 30000,
+  sitemapSize: 20000,
   generateRobotsTxt: isProduction,
   exclude: [...locales.map((locale) => `/${locale}`), '/*/product-updates*', '/*/search'],
   alternateRefs: locales.map((locale) => ({

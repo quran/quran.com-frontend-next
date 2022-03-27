@@ -13,6 +13,7 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
+import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   exitRepeatMode,
@@ -23,6 +24,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
+import { toLocalizedVerseKey } from 'src/utils/locale';
 import { generateChapterVersesKeys, getChapterFirstAndLastVerseKey } from 'src/utils/verse';
 import QueryParam from 'types/QueryParam';
 
@@ -48,27 +50,36 @@ const RepeatAudioModal = ({
   const repeatSettings = useSelector(selectRepeatSettings);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
+  const chaptersData = useGetChaptersData(lang);
 
   const chapterName = useMemo(() => {
-    const chapterData = getChapterData(chapterId, lang);
+    if (!chaptersData) {
+      return null;
+    }
+    const chapterData = getChapterData(chaptersData, chapterId);
     return chapterData?.transliteratedName;
-  }, [chapterId, lang]);
+  }, [chapterId, chaptersData]);
 
   const comboboxVerseItems = useMemo<RangeVerseItem[]>(() => {
-    const keys = generateChapterVersesKeys(chapterId);
+    if (!chaptersData) {
+      return [];
+    }
+    const keys = generateChapterVersesKeys(chaptersData, chapterId);
 
-    const initialState = keys.map((chapterVerseKeys) => ({
-      id: chapterVerseKeys,
-      name: chapterVerseKeys,
-      value: chapterVerseKeys,
-      label: chapterVerseKeys,
+    const initialState = keys.map((chapterVerseKey) => ({
+      id: chapterVerseKey,
+      name: chapterVerseKey,
+      value: chapterVerseKey,
+      label: toLocalizedVerseKey(chapterVerseKey, lang),
     }));
 
     return initialState;
-  }, [chapterId]);
+  }, [chapterId, chaptersData, lang]);
 
-  const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] =
-    getChapterFirstAndLastVerseKey(chapterId);
+  const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] = getChapterFirstAndLastVerseKey(
+    chaptersData,
+    chapterId,
+  );
 
   const [verseRepetition, setVerseRepetition] = useState({
     repeatRange: repeatSettings.repeatRange,

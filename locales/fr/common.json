@@ -1,6 +1,17 @@
 {
     "about": "À propos de nous",
     "and": "et",
+    "aria": {
+        "change-settings": "Modifier les paramètres",
+        "drawer-close": "Fermer le tiroir",
+        "msg-close": "Fermer le message",
+        "nav-drawer-open": "Ouvrir le tiroir de navigation",
+        "play-surah": "Jouez la sourate {{surahName}}",
+        "read-ayah-refls": "Lire les réflexions d'Ayah",
+        "select-lng": "Choisir la langue",
+        "share-ayah": "Partager Ayah",
+        "sidebar-nav-close": "Fermer la barre latérale de navigation"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Désactivé",

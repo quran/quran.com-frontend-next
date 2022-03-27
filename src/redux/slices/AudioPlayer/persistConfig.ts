@@ -4,7 +4,7 @@ const audioPlayerPersistConfig = {
   key: 'audioPlayerState',
   storage: sessionStorage,
   version: 3,
-  blacklist: ['isPlaying', 'isMobileMinimizedForScrolling', 'isDownloadingAudio', 'isRadioMode'],
+  blacklist: ['isPlaying', 'isDownloadingAudio', 'isRadioMode'],
 };
 
 export default audioPlayerPersistConfig;

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import CloseIcon from '../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
@@ -13,6 +15,7 @@ type HomePageMessageProps = {
 };
 
 const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProps) => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{title}</h3>
@@ -24,6 +27,7 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
           shape={ButtonShape.Circle}
           variant={ButtonVariant.Ghost}
           onClick={onClose}
+          ariaLabel={t('aria.msg-close')}
         >
           <CloseIcon />
         </Button>
