@@ -7,7 +7,7 @@ import i18nConfig from '../../i18n.json';
 
 import { getBasePath } from './url';
 
-const RTL_LOCALES = ['ar', 'fa', 'ur'];
+export const RTL_LOCALES = ['ar', 'fa', 'ur'];
 const LOCALE_NAME = {
   en: 'English',
   ar: 'العربية',

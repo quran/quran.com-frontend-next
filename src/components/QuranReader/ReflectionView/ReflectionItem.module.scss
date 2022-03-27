@@ -72,9 +72,7 @@
     }
     display: inline;
   }
-  [dir="rtl"] & [lang="en"],
-  [dir="rtl"] & [lang="id"],
-  [dir="rtl"] & [lang="ms"] {
+  [dir="rtl"] & p[dir="ltr"]:last-child {
     /* stylelint-disable-next-line csstools/use-logical */
     direction: ltr;
     display: block;
