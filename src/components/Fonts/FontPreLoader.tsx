@@ -11,7 +11,7 @@ const SURAH_NAMES_FONT = {
 
 const LOCALE_PRELOADED_FONTS = {
   [DEFAULT_LOCALE]: [
-    { type: 'font/woff2', location: '/fonts/lang/ProximaVara/ProximaVara.woff2' },
+    { type: 'font/woff2', location: '/fonts/lang/InterVarLatin/InterVarLatin.woff2' },
     { ...SURAH_NAMES_FONT },
   ],
   ar: [

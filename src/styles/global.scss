@@ -14,7 +14,7 @@ body {
   }
 
   overscroll-behavior-y: none;
-  font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  font-family: "InterVarLatin", "Helvetica Neue", Helvetica, Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -30,19 +30,19 @@ body {
 
   :lang(ar),
   :lang(arabic) .ar {
-    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara",
+    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "InterVarLatin",
       "Helvetica Neue", Helvetica, Arial;
   }
 
   :lang(bn),
   :lang(bengali) {
-    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
-      Arial;
+    font-family: "NotoSerifBengali", "InterVarLatin", "Helvetica Neue",
+      Helvetica, Arial;
   }
 
   :lang(ku) {
     font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "NotoNastaliq",
-      "ProximaVara", Helvetica, Arial;
+      "InterVarLatin", Helvetica, Arial;
   }
 }
 
