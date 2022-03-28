@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Tutti i diritti riservati",
-        "title": "Leggi, studia e impara il Nobile Corano."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharram",
-            "10": "Shawwal",
-            "11": "Dhu Al-Qida",
-            "2": "Safari",
-            "3": "Rabi' io",
-            "4": "Rabi' II",
-            "5": "Jumada io",
-            "6": "Jumada Akhira",
-            "7": "Rajab",
-            "8": "Sha'ban",
-            "9": "Ramadan"
-        }
-    },
     "no-bookmarks": "Non hai ancora nessun segnalibro",
     "noble-quran": "Il Nobile Corano",
     "recently-read": "Letto di recente",

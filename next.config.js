@@ -27,6 +27,7 @@ const config = {
   pwa: {
     disable: !isProduction,
     dest: 'public',
+    mode: isProduction ? 'production' : 'development',
     runtimeCaching,
     publicExcludes: [
       '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara

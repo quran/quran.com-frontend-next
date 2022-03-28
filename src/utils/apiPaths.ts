@@ -1,3 +1,5 @@
+import { stringify } from 'querystring';
+
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
 import {
@@ -249,12 +251,14 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
-export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) =>
-  makeUrl('/qr/reflections', {
+export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) => {
+  // TODO: revert this back once the API is ready
+  return `https://staging.quran.com/api/qdc/qr/reflections?${stringify({
     ranges: `${chapterId}:${verseNumber}`,
     author: true,
     fields: 'created_at,html_body,comments_count,likes_count',
     filter: 'popular',
     verified: true,
     lang,
-  });
+  })}`;
+};

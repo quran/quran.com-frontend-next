@@ -1,17 +1,18 @@
-import { useContext } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import DataContext from 'src/contexts/DataContext';
+import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 
 const Links = () => {
-  const { t } = useTranslation('common');
-  const chaptersData = useContext(DataContext);
+  const { t, lang } = useTranslation('common');
+  const chaptersData = useGetChaptersData(lang);
 
+  if (!chaptersData) {
+    return <></>;
+  }
   const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
 
   const linksGroup = [
