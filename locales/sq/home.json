@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Të gjitha të drejtat e rezervuara",
-        "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharrem",
-            "10": "Shevali",
-            "11": "Dhu Al-Kida",
-            "2": "Safar",
-            "3": "Rabi' I",
-            "4": "Rabi' II",
-            "5": "Xhumada I",
-            "6": "Jumada Akhira",
-            "7": "Rexheb",
-            "8": "Shaban",
-            "9": "Ramazani"
-        }
-    },
     "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
     "noble-quran": "Kurani Fisnik",
     "recently-read": "Lexuar së fundmi",
