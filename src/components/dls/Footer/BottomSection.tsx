@@ -40,7 +40,7 @@ const BottomSection = () => {
               'Quran.com'
             }
           </Link>
-          . {t('home:footer.rights')}
+          . {t('footer.rights')}
         </div>
       </div>
       <div className={styles.actionsSections}>

@@ -1,8 +1,4 @@
 {
-    "footer": {
-        "rights": "All Rights Reserved",
-        "title": "Read, study, and learn The Noble Quran."
-    },
     "hijri-date": {
         "format": "{{month}} {{date}}, {{year}} AH",
         "month": {
