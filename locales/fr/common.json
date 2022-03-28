@@ -105,7 +105,9 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com est une Sadaqah Jariyah. Nous espérons faciliter la lecture, l'étude et l'apprentissage du Noble Coran pour tous. Le Noble Coran a de nombreux noms dont Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr et Al-Noor."
+        "description": "Quran.com est une Sadaqah Jariyah. Nous espérons faciliter la lecture, l'étude et l'apprentissage du Noble Coran pour tous. Le Noble Coran a de nombreux noms dont Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr et Al-Noor.",
+        "rights": "Tous les droits sont réservés",
+        "title": "Lisez, étudiez et apprenez Le Noble Coran."
     },
     "from": "De",
     "help": "Aider",

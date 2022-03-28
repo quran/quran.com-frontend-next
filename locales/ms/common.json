@@ -105,7 +105,9 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur."
+        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
+        "rights": "Hak cipta terpelihara",
+        "title": "Baca, kaji dan pelajari Al-Quran."
     },
     "from": "Dari",
     "help": "Bantuan",

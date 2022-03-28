@@ -105,7 +105,9 @@
         "text_uthmani": "อุทุมณี"
     },
     "footer": {
-        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor"
+        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor",
+        "rights": "สงวนลิขสิทธิ์",
+        "title": "อ่านศึกษาและเรียนรู้คัมภีร์อัลกุรอานอันสูงส่ง"
     },
     "from": "จาก",
     "help": "ช่วย",
