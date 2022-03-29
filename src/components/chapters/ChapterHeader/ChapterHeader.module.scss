@@ -93,6 +93,8 @@
   justify-content: center;
   align-items: center;
   margin-block-start: var(--spacing-large);
+  // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
+  min-height: calc(3.75 * var(--spacing-medium));
 }
 
 .chapterIconContainer {

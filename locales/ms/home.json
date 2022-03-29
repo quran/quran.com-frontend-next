@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Hak Cipta Terpelihara",
-        "title": "Baca, telaah, dan pelajari Al-Quran."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} H",
-        "month": {
-            "1": "Muharam",
-            "10": "Syawal",
-            "11": "Dhu Al-Qida",
-            "2": "Safar",
-            "3": "Rabiul Awal",
-            "4": "Rabiul Akhir",
-            "5": "Jamadil Awal",
-            "6": "Jamadil Akhir",
-            "7": "Rejab",
-            "8": "Sya'ban",
-            "9": "Ramadhan"
-        }
-    },
     "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
     "noble-quran": "Al-Quran yang mulia",
     "recently-read": "Bacaan Terkini",

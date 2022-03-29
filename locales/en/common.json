@@ -1,6 +1,17 @@
 {
     "about": "About Us",
     "and": "and",
+    "aria": {
+        "change-settings": "Change Settings",
+        "drawer-close": "Close Drawer",
+        "msg-close": "Close Message",
+        "nav-drawer-open": "Open Navigation Drawer",
+        "play-surah": "Play Surah {{surahName}}",
+        "read-ayah-refls": "Read Ayah Reflections",
+        "select-lng": "Select Language",
+        "share-ayah": "Share Ayah",
+        "sidebar-nav-close": "Close Navigation Sidebar"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Off",
@@ -94,7 +105,9 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor."
+        "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.",
+        "rights": "All Rights Reserved",
+        "title": "Read, study, and learn The Noble Quran."
     },
     "from": "From",
     "help": "Help",
@@ -245,16 +258,5 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes",
-    "aria": {
-        "msg-close":"Close Message",
-        "select-lng": "Select Language",
-        "drawer-close": "Close Drawer",
-        "change-settings" : "Change Settings",
-        "nav-drawer-open": "Open Navigation Drawer",
-        "play-surah": "Play Surah {{surahName}}",
-        "read-ayah-refls": "Read Ayah Reflections",
-        "share-ayah": "Share Ayah",
-        "sidebar-nav-close": "Close Navigation Sidebar"
-    }
+    "yes": "Yes"
 }

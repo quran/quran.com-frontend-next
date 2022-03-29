@@ -1,6 +1,17 @@
 {
     "about": "Chi siamo",
     "and": "e",
+    "aria": {
+        "change-settings": "Cambia impostazioni",
+        "drawer-close": "Chiudere il cassetto",
+        "msg-close": "Chiudi messaggio",
+        "nav-drawer-open": "Apri il cassetto di navigazione",
+        "play-surah": "Suona Sura {{surahName}}",
+        "read-ayah-refls": "Leggi Ayah Riflessioni",
+        "select-lng": "Seleziona la lingua",
+        "share-ayah": "Condividi Sì",
+        "sidebar-nav-close": "Chiudi la barra laterale di navigazione"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Spento",
@@ -94,7 +105,9 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor."
+        "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
+        "rights": "Tutti i diritti riservati",
+        "title": "Leggi, studia e impara Il Nobile Corano."
     },
     "from": "A partire dal",
     "help": "Aiuto",

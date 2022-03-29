@@ -1,6 +1,17 @@
 {
     "about": "Rreth Nesh",
     "and": "dhe",
+    "aria": {
+        "change-settings": "Ndrysho Cilësimet",
+        "drawer-close": "Mbylle sirtarin",
+        "msg-close": "Mbyll Mesazhin",
+        "nav-drawer-open": "Hapni sirtarin e navigimit",
+        "play-surah": "Luaj suren {{surahName}}",
+        "read-ayah-refls": "Lexoni Reflektime të Ajetit",
+        "select-lng": "Zgjidh gjuhen",
+        "share-ayah": "Shpërndaje Ajet",
+        "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Joaktiv",
@@ -94,7 +105,9 @@
         "text_uthmani": "Osmani"
     },
     "footer": {
-        "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor."
+        "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor.",
+        "rights": "Të gjitha të drejtat e rezervuara",
+        "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
     },
     "from": "Nga",
     "help": "Ndihmë",

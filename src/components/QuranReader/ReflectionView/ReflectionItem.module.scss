@@ -61,14 +61,36 @@
 .body {
   margin-block-start: var(--spacing-mega);
   opacity: var(--opacity-75);
+  & p + p {
+    margin-block-start: var(--spacing-medium);
+  }
+  & p:last-child {
+    &::before {
+      margin-block-start: var(--spacing-medium);
+      display: block;
+      content: "\A";
+    }
+    display: inline;
+  }
+
+  [dir="rtl"] & {
+    & p:not([lang="ar"]),
+    & p:not([lang="fa"]),
+    & p:not([lang="ur"]) {
+      direction: ltr;
+      display: block;
+    }
+  }
 }
 
 .moreOrLessText {
-  text-transform: lowercase;
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
   display: inline-block;
   margin-inline-start: var(--spacing-xxsmall);
+}
+.hashtag {
+  color: var(--color-success-medium);
 }
 
 .verifiedIcon {

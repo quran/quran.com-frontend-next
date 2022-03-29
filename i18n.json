@@ -2,8 +2,8 @@
   "locales": ["en", "ar", "bn", "fa", "fr", "id", "it", "nl", "pt", "ru", "sq", "th", "tr", "ur", "zh", "ms"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common", "error", "radio"],
-    "/": ["home", "quick-links", "radio"],
+    "*": ["common", "error", "radio", "quick-links"],
+    "/": ["home", "radio"],
     "/[chapterId]": ["quran-reader", "chapter", "surah-info"],
     "/[chapterId]/reflections": ["quran-reader"],
     "/[chapterId]/[verseId]": ["quran-reader"],
@@ -22,9 +22,9 @@
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
     "/apps": ["apps"],
-    "/radio": ["home", "quick-links", "radio"],
-    "/reciters/[reciterId]": ["home", "quick-links", "radio", "reciter"],
+    "/radio": ["home", "radio"],
+    "/reciters/[reciterId]": ["home", "radio", "reciter"],
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
-    "/reciters": ["reciter", "home", "quick-links"]
+    "/reciters": ["reciter", "home"]
   }
 }

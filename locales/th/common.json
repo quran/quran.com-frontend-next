@@ -1,6 +1,17 @@
 {
     "about": "เกี่ยวกับเรา",
     "and": "และ",
+    "aria": {
+        "change-settings": "เปลี่ยนการตั้งค่า",
+        "drawer-close": "ปิดลิ้นชัก",
+        "msg-close": "ปิดข้อความ",
+        "nav-drawer-open": "เปิดลิ้นชักการนำทาง",
+        "play-surah": "เล่น Surah {{surahName}}",
+        "read-ayah-refls": "อ่าน Ayah Reflections",
+        "select-lng": "เลือกภาษา",
+        "share-ayah": "แบ่งปัน Ayah",
+        "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง"
+    },
     "audio": {
         "auto-scroll": {
             "off": "ปิด",
@@ -94,7 +105,9 @@
         "text_uthmani": "อุทุมณี"
     },
     "footer": {
-        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor"
+        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor",
+        "rights": "สงวนลิขสิทธิ์",
+        "title": "อ่านศึกษาและเรียนรู้คัมภีร์อัลกุรอานอันสูงส่ง"
     },
     "from": "จาก",
     "help": "ช่วย",

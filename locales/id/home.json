@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Seluruh hak cipta",
-        "title": "Baca, belajar, dan pelajari Al-Quran yang mulia."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharram",
-            "10": "Syawal",
-            "11": "Dzulqaidah",
-            "2": "Safar",
-            "3": "Rabi' awal",
-            "4": "Rabi'  akhir",
-            "5": "Jamadil awal",
-            "6": "Jamadil Akhir",
-            "7": "Rejab",
-            "8": "Sya'ban",
-            "9": "Ramadan"
-        }
-    },
     "no-bookmarks": "Anda belum memiliki penanda buku apa pun",
     "noble-quran": "Al-Quran yang mulia",
     "recently-read": "Baru-baru ini dibaca",
