@@ -21,6 +21,7 @@ const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
   const scrollToTop = useScrollToTop();
   const { chapterId } = lastVerse;
   const chapterNumber = Number(chapterId);
+
   return (
     <>
       {!isFirstSurah(chapterNumber) && (
