@@ -232,6 +232,8 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
       (translation) => translation.id.toString() === selectedTranslationsArray[0],
     );
 
+    if (!firstSelectedTranslation) return t('search:all-translations');
+
     if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
     if (selectedTranslationsArray.length === 2)
       selectedValueString = t('settings.value-and-other', {
