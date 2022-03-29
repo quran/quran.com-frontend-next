@@ -34,6 +34,7 @@ interface Props {
   triggerStyles?: string;
   contentStyles?: string;
   contentSideOffset?: number;
+  className?: string;
 }
 
 const Popover: React.FC<Props> = ({
@@ -52,8 +53,9 @@ const Popover: React.FC<Props> = ({
   contentSideOffset = 2,
   triggerStyles,
   contentStyles,
+  className,
 }) => (
-  <div className={classNames({ [styles.container]: defaultStyling })}>
+  <div className={classNames({ [styles.container]: defaultStyling }, className)}>
     <RadixPopover.Root
       modal={isModal}
       {...(typeof open !== 'undefined' && { open })}

@@ -6,12 +6,17 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import IconSearch from '../../public/icons/search.svg';
+import BookIcon from '../../public/icons/book.svg';
+import ChevronDownIcon from '../../public/icons/chevron-down.svg';
+import GlobeIcon from '../../public/icons/globe.svg';
+import SearchIcon from '../../public/icons/search.svg';
 
 import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import Input from 'src/components/dls/Forms/Input';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Input, { InputVariant } from 'src/components/dls/Forms/Input';
+import Popover, { ContentAlign } from 'src/components/dls/Popover';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
@@ -28,7 +33,7 @@ import {
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
-import { getLanguageAlternates } from 'src/utils/locale';
+import { getLanguageAlternates, getLocaleName, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
@@ -194,6 +199,54 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
 
   const navigationUrl = '/search';
 
+  const formattedSelectedLanguage = useMemo(() => {
+    if (!selectedLanguages) return t('search:all-languages');
+
+    const selectedLanguagesArray = selectedLanguages.split(',');
+    let selectedValueString;
+
+    if (selectedLanguagesArray.length === 1)
+      selectedValueString = getLocaleName(selectedLanguagesArray[0]);
+    if (selectedLanguagesArray.length === 2)
+      selectedValueString = t('settings.value-and-other', {
+        value: getLocaleName(selectedLanguagesArray[0]),
+        othersCount: toLocalizedNumber(selectedLanguagesArray.length - 1, lang),
+      });
+    if (selectedLanguagesArray.length > 2)
+      selectedValueString = t('settings.value-and-others', {
+        value: getLocaleName(selectedLanguagesArray[0]),
+        othersCount: toLocalizedNumber(selectedLanguagesArray.length - 1, lang),
+      });
+
+    return selectedValueString;
+  }, [lang, selectedLanguages, t]);
+
+  const formattedSelectedTranslations = useMemo(() => {
+    if (!selectedTranslations) return t('search:all-translations');
+
+    let selectedValueString;
+
+    const selectedTranslationsArray = selectedTranslations.split(',');
+
+    const firstSelectedTranslation = translations.find(
+      (translation) => translation.id.toString() === selectedTranslationsArray[0],
+    );
+
+    if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
+    if (selectedTranslationsArray.length === 2)
+      selectedValueString = t('settings.value-and-other', {
+        value: firstSelectedTranslation?.name,
+        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
+      });
+    if (selectedTranslationsArray.length > 2)
+      selectedValueString = t('settings.value-and-others', {
+        value: firstSelectedTranslation?.name,
+        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
+      });
+
+    return selectedValueString;
+  }, [lang, selectedTranslations, t, translations]);
+
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -209,43 +262,81 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
         languageAlternates={getLanguageAlternates(navigationUrl)}
       />
       <div className={styles.pageContainer}>
-        <p className={styles.header}>{t('search.title')}</p>
-        <Input
-          id="searchQuery"
-          prefix={<IconSearch />}
-          onChange={onSearchQueryChange}
-          onClearClicked={onClearClicked}
-          clearable
-          value={searchQuery}
-          disabled={isSearching}
-          placeholder={t('search.title')}
-          fixedWidth={false}
-        />
-        <p className={styles.filtersHeader}>{t('search.filters')}</p>
-        <div className={styles.filtersContainer}>
-          <LanguagesFilter
-            languages={languages}
-            selectedLanguages={selectedLanguages}
-            onLanguageChange={onLanguageChange}
-          />
-          <TranslationsFilter
-            translations={translations}
-            selectedTranslations={selectedTranslations}
-            onTranslationChange={onTranslationChange}
-          />
+        <div className={styles.headerOuterContainer}>
+          <div className={styles.headerInnerContainer}>
+            <Input
+              id="searchQuery"
+              prefix={<SearchIcon />}
+              onChange={onSearchQueryChange}
+              onClearClicked={onClearClicked}
+              clearable
+              value={searchQuery}
+              disabled={isSearching}
+              placeholder={t('search.title')}
+              fixedWidth={false}
+              variant={InputVariant.Main}
+            />
+            <div className={styles.filtersContainer}>
+              <Popover
+                contentAlign={ContentAlign.START}
+                className={styles.languagePopover}
+                trigger={
+                  <Button
+                    size={ButtonSize.Small}
+                    variant={ButtonVariant.Compact}
+                    className={styles.filterButton}
+                    prefix={<GlobeIcon />}
+                    suffix={<ChevronDownIcon />}
+                  >
+                    {formattedSelectedLanguage}
+                  </Button>
+                }
+              >
+                <LanguagesFilter
+                  languages={languages}
+                  selectedLanguages={selectedLanguages}
+                  onLanguageChange={onLanguageChange}
+                />
+              </Popover>
+              <Popover
+                contentAlign={ContentAlign.START}
+                className={styles.translationPopover}
+                trigger={
+                  <Button
+                    size={ButtonSize.Small}
+                    variant={ButtonVariant.Compact}
+                    prefix={<BookIcon />}
+                    suffix={<ChevronDownIcon />}
+                  >
+                    {formattedSelectedTranslations}
+                  </Button>
+                }
+              >
+                <div className={styles.translationFilterContainer}>
+                  <TranslationsFilter
+                    translations={translations}
+                    selectedTranslations={selectedTranslations}
+                    onTranslationChange={onTranslationChange}
+                  />
+                </div>
+              </Popover>
+            </div>
+          </div>
         </div>
         <div className={styles.pageBody}>
-          <SearchBodyContainer
-            onSearchKeywordClicked={onSearchKeywordClicked}
-            isSearchDrawer={false}
-            searchQuery={debouncedSearchQuery}
-            searchResult={searchResult}
-            currentPage={currentPage}
-            onPageChange={onPageChange}
-            pageSize={PAGE_SIZE}
-            isSearching={isSearching}
-            hasError={hasError}
-          />
+          <div className={styles.searchBodyContainer}>
+            <SearchBodyContainer
+              onSearchKeywordClicked={onSearchKeywordClicked}
+              isSearchDrawer={false}
+              searchQuery={debouncedSearchQuery}
+              searchResult={searchResult}
+              currentPage={currentPage}
+              onPageChange={onPageChange}
+              pageSize={PAGE_SIZE}
+              isSearching={isSearching}
+              hasError={hasError}
+            />
+          </div>
         </div>
       </div>
     </DataContext.Provider>

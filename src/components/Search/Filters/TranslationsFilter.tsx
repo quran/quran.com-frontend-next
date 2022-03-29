@@ -54,7 +54,6 @@ const TranslationsFilter: React.FC<Props> = memo(
           items={translationsItems}
           onChange={onTranslationChange}
           placeholder={t('translation-select')}
-          label={<div className={styles.dropdownLabel}>{t('common:translation')}</div>}
         />
       </div>
     );

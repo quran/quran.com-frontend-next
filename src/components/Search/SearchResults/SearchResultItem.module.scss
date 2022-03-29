@@ -9,29 +9,27 @@
   margin-inline-start: 0;
   margin-inline-end: 0;
   em {
-    color: var(--color-success-medium);
+    font-weight: var(--font-weight-semibold);
   }
 }
 
-.link {
+.container {
   text-decoration: none;
+  border-bottom: 1px solid var(--color-borders-hairline);
+  padding-block: var(--spacing-medium);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .itemContainer {
-  border-bottom: 1px solid var(--color-borders-hairline);
   border-radius: var(--border-radius-default);
-  padding-block: var(--spacing-large);
-  padding-inline: var(--spacing-large);
-  margin-block-start: var(--spacing-xsmall);
-  margin-block-end: var(--spacing-xsmall);
   margin-inline-start: auto;
   margin-inline-end: auto;
 }
 
 .quranTextContainer {
-  display: flex;
-  justify-content: space-between;
-  direction: ltr;
+}
+
+.verseLink {
 }
 
 .quranTextResult {
@@ -45,5 +43,8 @@
 }
 
 .verseKey {
-  padding-block-start: var(--spacing-xxsmall);
+  color: var(--color-success-medium);
+  display: block;
+  margin-block-end: var(--spacing-medium);
+  font-weight: var(--font-weight-bold);
 }

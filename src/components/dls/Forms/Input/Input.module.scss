@@ -1,7 +1,6 @@
 @use "src/styles/theme";
 
 .container {
-  border-radius: var(--border-radius-default);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,6 +23,18 @@
   }
   &.warning {
     border-color: var(--color-warning-medium);
+  }
+  border-radius: var(--border-radius-rounded);
+}
+
+.main {
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xsmall);
+
+  & .input {
+    font-size: var(--font-size-large);
+    color: var(--color-text-default);
+    font-weight: var(--font-weight-semibold);
   }
 }
 

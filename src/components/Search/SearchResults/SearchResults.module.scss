@@ -6,10 +6,10 @@
   padding-block-end: var(--spacing-medium);
 }
 
-.boldHeader {
-  font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-small);
+.header {
+  margin-block-start: var(--spacing-large);
   text-transform: capitalize;
+  color: var(--color-text-faded);
 }
 
 .showAll {
@@ -17,5 +17,5 @@
 }
 
 .navigationItemsListContainer {
-  margin-block-end: var(--spacing-mega);
+  margin-block-start: var(--spacing-large);
 }
