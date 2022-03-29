@@ -12,12 +12,14 @@ import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import useDebounce from 'src/hooks/useDebounce';
 import useFocus from 'src/hooks/useFocusElement';
 import { selectNavbar } from 'src/redux/slices/navbar';
+import { setReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick, logEmptySearchResults } from 'src/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
+import { ReadingPreference } from 'types/QuranReader';
 
 const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
   ssr: false,
@@ -126,6 +128,11 @@ const SearchDrawer: React.FC = () => {
     focusInput();
   };
 
+  const onSearchResultClicked = () => {
+    searchInputRef?.current?.blur();
+    dispatch(setReadingPreference(ReadingPreference.Translation));
+  };
+
   return (
     <Drawer
       hideCloseButton={isVoiceSearchFlowStarted}
@@ -148,7 +155,7 @@ const SearchDrawer: React.FC = () => {
               <VoiceSearchBodyContainer />
             ) : (
               <SearchBodyContainer
-                onSearchResultClicked={() => searchInputRef?.current?.blur()}
+                onSearchResultClicked={onSearchResultClicked}
                 onSearchKeywordClicked={onSearchKeywordClicked}
                 searchQuery={searchQuery}
                 searchResult={searchResult}

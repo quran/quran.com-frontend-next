@@ -22,9 +22,10 @@ export enum Source {
 interface Props {
   result: Verse;
   source: Source;
+  onClick?: () => void;
 }
 
-const SearchResultItem: React.FC<Props> = ({ result, source }) => {
+const SearchResultItem: React.FC<Props> = ({ result, source, onClick }) => {
   const { lang } = useTranslation('quran-reader');
   const localizedVerseKey = useMemo(
     () => toLocalizedVerseKey(result.verseKey, lang),
@@ -35,6 +36,7 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
       href={getChapterWithStartingVerseUrl(result.verseKey)}
       shouldPassHref
       onClick={() => {
+        if (onClick) onClick();
         logButtonClick(`${source}_result_item`);
       }}
     >
