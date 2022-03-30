@@ -75,6 +75,10 @@ module.exports = [
     options: {
       rangeRequests: true,
       cacheName: 'static-audio-assets',
+      cacheableResponse: {
+        // workbox by default only caches response with 200 HTTP status
+        statuses: [0, 200, 206],
+      },
       expiration: {
         maxEntries: 32,
         maxAgeSeconds: 24 * 60 * 60, // 24 hours
