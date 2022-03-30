@@ -2,8 +2,10 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import EndOfScrollingButton from './EndOfScrollingButton';
+import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
+import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 
+import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import useScrollToTop from 'src/hooks/useScrollToTop';
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -19,32 +21,42 @@ const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
   const scrollToTop = useScrollToTop();
   const { chapterId } = lastVerse;
   const chapterNumber = Number(chapterId);
+
   return (
     <>
       {!isFirstSurah(chapterNumber) && (
-        <EndOfScrollingButton
-          text={t('prev-surah')}
+        <Button
+          type={ButtonType.Secondary}
+          prefix={<ChevronLeftIcon />}
           href={getSurahNavigationUrl(chapterNumber - 1)}
           onClick={() => {
             logButtonClick('chapter_control_prev_chapter');
           }}
-        />
+        >
+          {t('prev-surah')}
+        </Button>
       )}
-      <EndOfScrollingButton
-        text={t('surah-beginning')}
+      <Button
+        type={ButtonType.Secondary}
+        href={getSurahNavigationUrl(chapterNumber + 1)}
         onClick={() => {
           logButtonClick('chapter_control_scroll_to_beginning');
           scrollToTop();
         }}
-      />
+      >
+        {t('surah-beginning')}
+      </Button>
       {!isLastSurah(chapterNumber) && (
-        <EndOfScrollingButton
-          text={t('next-surah')}
+        <Button
+          type={ButtonType.Secondary}
+          suffix={<ChevronRightIcon />}
           href={getSurahNavigationUrl(chapterNumber + 1)}
           onClick={() => {
             logButtonClick('chapter_control_next_chapter');
           }}
-        />
+        >
+          {t('next-surah')}
+        </Button>
       )}
     </>
   );

@@ -20,13 +20,13 @@ const onQuranWordClick = (word: Word, audioData?: AudioData) => {
     const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
     const segment = verseTiming.segments.find(([location]) => word.position === location);
     if (!segment) {
-      playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
+      playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`);
       return;
     }
     const [, startTime] = segment;
     triggerSetCurrentTime(startTime / 1000);
   } else {
-    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}/${word.audioUrl}`);
+    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`);
   }
 };
 

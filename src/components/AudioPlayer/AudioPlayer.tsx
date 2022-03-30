@@ -45,7 +45,7 @@ const AudioPlayer = () => {
 
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
-    if (process.browser && window) {
+    if (typeof window !== 'undefined') {
       window.audioPlayerEl = audioPlayerElRef.current;
     }
   }, [audioPlayerElRef]);
@@ -53,35 +53,13 @@ const AudioPlayer = () => {
   // sync playback rate from redux to audioplayer
   useEffect(() => {
     if (
-      process.browser &&
-      window &&
+      typeof window !== 'undefined' &&
       window.audioPlayerEl &&
       window.audioPlayerEl.playbackRate !== playbackRate
     ) {
       window.audioPlayerEl.playbackRate = playbackRate;
     }
   }, [audioPlayerElRef, playbackRate]);
-
-  // eventListeners useEffect
-  useEffect(() => {
-    let currentRef = null;
-    if (audioPlayerElRef && audioPlayerElRef.current) {
-      currentRef = audioPlayerElRef.current;
-      currentRef.addEventListener('play', onAudioPlay);
-      currentRef.addEventListener('pause', onAudioPause);
-      currentRef.addEventListener('ended', onAudioEnded);
-      currentRef.addEventListener('canplaythrough', onAudioLoaded);
-    }
-
-    return () => {
-      if (currentRef) {
-        currentRef.removeEventListener('play', onAudioPlay);
-        currentRef.removeEventListener('pause', onAudioPause);
-        currentRef.removeEventListener('ended', onAudioEnded);
-        currentRef.removeEventListener('canplaythrough', onAudioLoaded);
-      }
-    };
-  }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
 
   return (
     <>
@@ -96,6 +74,11 @@ const AudioPlayer = () => {
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerElRef}
+          preload="auto"
+          onPlay={onAudioPlay}
+          onPause={onAudioPause}
+          onEnded={onAudioEnded}
+          onCanPlayThrough={onAudioLoaded}
         />
         {!isHidden && <AudioPlayerBody audioData={audioData} audioPlayerElRef={audioPlayerElRef} />}
       </div>
