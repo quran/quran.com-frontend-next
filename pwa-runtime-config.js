@@ -69,22 +69,22 @@ module.exports = [
       },
     },
   },
-  {
-    urlPattern: /^https:\/\/download.quranicaudio.com\/.*.mp3/i,
-    handler: 'CacheFirst',
-    options: {
-      rangeRequests: true,
-      cacheName: 'static-audio-assets',
-      cacheableResponse: {
-        // workbox by default only caches response with 200 HTTP status
-        statuses: [0, 200, 206],
-      },
-      expiration: {
-        maxEntries: 500,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
-      },
-    },
-  },
+  // {
+  //   urlPattern: /^https:\/\/download.quranicaudio.com\/.*.mp3/i,
+  //   handler: 'CacheFirst',
+  //   options: {
+  //     rangeRequests: true,
+  //     cacheName: 'static-audio-assets',
+  //     cacheableResponse: {
+  //       // workbox by default only caches response with 200 HTTP status
+  //       statuses: [0, 200, 206],
+  //     },
+  //     expiration: {
+  //       maxEntries: 500,
+  //       maxAgeSeconds: 24 * 60 * 60, // 24 hours
+  //     },
+  //   },
+  // },
   {
     urlPattern: /\.(?:mp4)$/i,
     handler: 'CacheFirst',
