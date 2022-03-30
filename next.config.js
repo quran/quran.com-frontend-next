@@ -26,7 +26,7 @@ const config = {
   },
   pwa: {
     // TODO: This will be reverted back before merging the PR
-    disable: !isDev,
+    disable: isDev,
     dest: 'public',
     mode: isProduction ? 'production' : 'development',
     runtimeCaching,
