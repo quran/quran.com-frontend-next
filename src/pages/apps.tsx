@@ -11,6 +11,7 @@ import styles from './apps.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import PageContainer from 'src/components/PageContainer';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
@@ -109,10 +110,10 @@ const AppsPage = () => {
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
-      <div className={styles.container}>
+      <PageContainer>
         <App app={apps.quran} isMain />
         <App app={apps.tarteel} isFlipped />
-      </div>
+      </PageContainer>
     </>
   );
 };

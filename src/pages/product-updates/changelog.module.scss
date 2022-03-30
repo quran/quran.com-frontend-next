@@ -1,14 +1,6 @@
 @use "src/styles/breakpoints";
 
-$container-max-width: calc(35 * var(--spacing-mega));
-
 .container {
-  padding-block-start: var(--spacing-medium);
-  width: 95%;
-  margin: 0 auto;
-  @include breakpoints.tablet {
-    max-width: $container-max-width;
-  }
   direction: ltr;
 }
 
