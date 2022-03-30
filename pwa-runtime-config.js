@@ -80,7 +80,7 @@ module.exports = [
         statuses: [0, 200, 206],
       },
       expiration: {
-        maxEntries: 32,
+        maxEntries: 500,
         maxAgeSeconds: 24 * 60 * 60, // 24 hours
       },
     },
