@@ -25,8 +25,7 @@ const config = {
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
   pwa: {
-    // TODO: This will be reverted back before merging the PR
-    disable: isDev,
+    disable: !isProduction,
     dest: 'public',
     mode: isProduction ? 'production' : 'development',
     runtimeCaching,
