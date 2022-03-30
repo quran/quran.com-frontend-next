@@ -70,7 +70,7 @@ module.exports = [
     },
   },
   {
-    urlPattern: /\.(?:mp3|wav|ogg)$/i,
+    urlPattern: /^https:\/\/download.quranicaudio.com\/.*.mp3/i,
     handler: 'CacheFirst',
     options: {
       rangeRequests: true,
@@ -178,19 +178,21 @@ module.exports = [
       networkTimeoutSeconds: 10,
     },
   },
-  // {
-  //   urlPattern: ({ url }) => {
-  //     const isSameOrigin = self.origin === url.origin;
-  //     return !isSameOrigin;
-  //   },
-  //   handler: 'NetworkFirst',
-  //   options: {
-  //     cacheName: 'cross-origin',
-  //     expiration: {
-  //       maxEntries: 32,
-  //       maxAgeSeconds: 60 * 60, // 1 hour
-  //     },
-  //     networkTimeoutSeconds: 10,
-  //   },
-  // },
+  {
+    urlPattern: ({ url }) => {
+      const { pathname } = url;
+      const isSameOrigin = self.origin === url.origin;
+      // cache everything except mp3 files
+      return !isSameOrigin && !pathname.endsWith('.mp3');
+    },
+    handler: 'NetworkFirst',
+    options: {
+      cacheName: 'cross-origin',
+      expiration: {
+        maxEntries: 32,
+        maxAgeSeconds: 60 * 60, // 1 hour
+      },
+      networkTimeoutSeconds: 10,
+    },
+  },
 ];
