@@ -77,7 +77,7 @@ module.exports = [
       cacheName: 'static-audio-assets',
       cacheableResponse: {
         // workbox by default only caches response with 200 HTTP status
-        statuses: [200, 206],
+        statuses: [0, 200, 206],
       },
       expiration: {
         maxEntries: 32,
