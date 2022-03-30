@@ -9,10 +9,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache');
 const nextTranslate = require('next-translate');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
+const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
@@ -25,7 +25,8 @@ const config = {
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
   pwa: {
-    disable: !isProduction,
+    // TODO: This will be reverted back before merging the PR
+    disable: !isDev,
     dest: 'public',
     mode: isProduction ? 'production' : 'development',
     runtimeCaching,
