@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 
-import Fuse from 'fuse.js';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
@@ -21,30 +20,15 @@ import {
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
-  logEmptySearchResults,
   logValueChange,
   logItemSelectionChange,
+  logEmptySearchResults,
 } from 'src/utils/eventLogger';
+import filterTranslations from 'src/utils/filter-translations';
 import { getLocaleName } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 import QueryParam from 'types/QueryParam';
-
-export const filterTranslations = (
-  translations: AvailableTranslation[],
-  searchQuery: string,
-): AvailableTranslation[] => {
-  const fuse = new Fuse(translations, {
-    keys: ['name', 'languageName', 'authorName', 'translatedName.name'],
-    threshold: 0.3,
-  });
-
-  const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
-  if (!filteredTranslations.length) {
-    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
-  }
-  return filteredTranslations;
-};
 
 const TranslationSelectionBody = () => {
   const { t, lang } = useTranslation('common');
@@ -121,6 +105,11 @@ const TranslationSelectionBody = () => {
           const filteredTranslations = searchQuery
             ? filterTranslations(data.translations, searchQuery)
             : data.translations;
+
+          if (!filteredTranslations.length) {
+            logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+          }
+
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');
           const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];

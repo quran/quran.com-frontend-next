@@ -37,7 +37,6 @@ const SearchResults: React.FC<Props> = ({
       <div>
         {!!searchResult.result.navigation?.length && (
           <div className={styles.navigationItemsListContainer}>
-            {/* <p className={styles.boldHeader}>{t('search.jump-to')}</p> */}
             {searchResult.result.navigation.map((navigationResult) => (
               <NavigationItem
                 isSearchDrawer={isSearchDrawer}
@@ -48,7 +47,7 @@ const SearchResults: React.FC<Props> = ({
           </div>
         )}
         <p className={styles.header}>
-          {t('search:search-results', {
+          {t('common:search-results', {
             count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
           })}
         </p>

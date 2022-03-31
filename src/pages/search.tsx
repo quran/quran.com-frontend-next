@@ -15,7 +15,6 @@ import { getAvailableLanguages, getAvailableTranslations, getSearchResults } fro
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
 import Input, { InputVariant } from 'src/components/dls/Forms/Input';
-import { filterTranslations } from 'src/components/Navbar/SettingsDrawer/TranslationSelectionBody';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
@@ -32,6 +31,7 @@ import {
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
+import filterTranslations from 'src/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';

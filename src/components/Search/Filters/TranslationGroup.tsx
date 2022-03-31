@@ -15,16 +15,16 @@ const TranslationGroup = ({
   selectedTranslations,
   onTranslationsChange,
 }: TranslationGroupProps) => {
-  const isAllTranslationsSelected = translations.every((translation) =>
+  const areAllTranslationsSelected = translations.every((translation) =>
     selectedTranslations.includes(translation.id.toString()),
   );
 
-  const isSomeTranslationsSelected = translations.some((translation) =>
+  const areSomeTranslationsSelected = translations.some((translation) =>
     selectedTranslations.includes(translation.id.toString()),
   );
 
   const onLanguageSelected = () => {
-    const nextSelectedTranslations = isAllTranslationsSelected
+    const nextSelectedTranslations = areAllTranslationsSelected
       ? []
       : translations.map((translation) => translation.id.toString());
     onTranslationsChange(nextSelectedTranslations);
@@ -38,9 +38,9 @@ const TranslationGroup = ({
   };
 
   let languageCheckboxCheckedStatus;
-  if (isSomeTranslationsSelected) languageCheckboxCheckedStatus = 'indeterminate';
-  if (isAllTranslationsSelected) languageCheckboxCheckedStatus = true;
-  if (!isSomeTranslationsSelected && !isAllTranslationsSelected)
+  if (areSomeTranslationsSelected) languageCheckboxCheckedStatus = 'indeterminate';
+  if (areAllTranslationsSelected) languageCheckboxCheckedStatus = true;
+  if (!areSomeTranslationsSelected && !areAllTranslationsSelected)
     languageCheckboxCheckedStatus = false;
 
   return (
