@@ -80,8 +80,13 @@ $translateYDistance: 200px;
   height: 100%;
   overflow-y: scroll;
   @include breakpoints.tablet {
-    height: auto;
     overflow-y: visible;
+  }
+}
+
+.autoHeight {
+  @include breakpoints.tablet {
+    height: auto;
   }
 }
 

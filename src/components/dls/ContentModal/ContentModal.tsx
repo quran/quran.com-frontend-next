@@ -23,9 +23,10 @@ type ContentModalProps = {
   hasCloseButton?: boolean;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
+  // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
   contentClassName?: string;
   size?: ContentModalSize;
-  // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
+  isFixedHeight?: boolean;
 };
 
 const ContentModal = ({
@@ -38,6 +39,7 @@ const ContentModal = ({
   innerRef,
   contentClassName,
   size = ContentModalSize.MEDIUM,
+  isFixedHeight,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
 
@@ -56,6 +58,7 @@ const ContentModal = ({
               [contentClassName]: contentClassName,
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
+              [styles.autoHeight]: !isFixedHeight,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onClose}

@@ -269,6 +269,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }) => {
             />
             <ContentModal
               size={ContentModalSize.SMALL}
+              isFixedHeight
               header={
                 <div className={styles.modalContainer}>
                   <div className={styles.translationSearchContainer}>
