@@ -62,6 +62,9 @@ $tablet-max-width: 50rem;
 }
 
 .filtersContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   @include breakpoints.tablet {
     margin-inline: var(--spacing-large);
   }
@@ -93,4 +96,19 @@ $tablet-max-width: 50rem;
 
 .translationFilterContainer {
   min-width: calc(10 * var(--spacing-mega));
+}
+.filterButton,
+.resetButton {
+  text-transform: uppercase;
+}
+
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.translationSearchContainer {
+  flex: 1;
+  margin-inline-end: var(--spacing-small);
 }

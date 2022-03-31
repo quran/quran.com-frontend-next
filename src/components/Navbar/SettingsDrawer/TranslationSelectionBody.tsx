@@ -30,7 +30,7 @@ import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 import QueryParam from 'types/QueryParam';
 
-const filterTranslations = (
+export const filterTranslations = (
   translations: AvailableTranslation[],
   searchQuery: string,
 ): AvailableTranslation[] => {

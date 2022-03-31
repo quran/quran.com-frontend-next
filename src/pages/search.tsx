@@ -6,24 +6,23 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import BookIcon from '../../public/icons/book.svg';
-import ChevronDownIcon from '../../public/icons/chevron-down.svg';
-import GlobeIcon from '../../public/icons/globe.svg';
+import FilterIcon from '../../public/icons/filter.svg';
 import SearchIcon from '../../public/icons/search.svg';
 
 import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
 import Input, { InputVariant } from 'src/components/dls/Forms/Input';
-import Popover, { ContentAlign } from 'src/components/dls/Popover';
+import { filterTranslations } from 'src/components/Navbar/SettingsDrawer/TranslationSelectionBody';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import DataContext from 'src/contexts/DataContext';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
+import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -33,7 +32,7 @@ import {
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
-import { getLanguageAlternates, getLocaleName, toLocalizedNumber } from 'src/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
@@ -49,7 +48,7 @@ type SearchProps = {
   chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }) => {
+const Search: NextPage<SearchProps> = ({ translations, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -59,6 +58,8 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
   const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
     userTranslations.join(','),
   );
+  const [translationSearchQuery, setTranslationSearchQuery] = useState('');
+  const [isContentModalOpen, setIsContentModalOpen] = useState<boolean>(false);
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
@@ -168,20 +169,6 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
     setCurrentPage(page);
   };
 
-  /**
-   * Handle when the selected language changes.
-   *
-   * @param {string} languageIsoCode
-   */
-  const onLanguageChange = useCallback((languageIsoCodes: string[]) => {
-    // convert the array into a string
-    setSelectedLanguages((prevLanguages) => {
-      const newLanguages = languageIsoCodes.join(',');
-      logValueChange('search_page_selected_languages', prevLanguages, newLanguages);
-      return newLanguages;
-    });
-  }, []);
-
   const onTranslationChange = useCallback((translationIds: string[]) => {
     // convert the array into a string
     setSelectedTranslations((prevTranslationIds) => {
@@ -199,30 +186,8 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
 
   const navigationUrl = '/search';
 
-  const formattedSelectedLanguage = useMemo(() => {
-    if (!selectedLanguages) return t('search:all-languages');
-
-    const selectedLanguagesArray = selectedLanguages.split(',');
-    let selectedValueString;
-
-    if (selectedLanguagesArray.length === 1)
-      selectedValueString = getLocaleName(selectedLanguagesArray[0]);
-    if (selectedLanguagesArray.length === 2)
-      selectedValueString = t('settings.value-and-other', {
-        value: getLocaleName(selectedLanguagesArray[0]),
-        othersCount: toLocalizedNumber(selectedLanguagesArray.length - 1, lang),
-      });
-    if (selectedLanguagesArray.length > 2)
-      selectedValueString = t('settings.value-and-others', {
-        value: getLocaleName(selectedLanguagesArray[0]),
-        othersCount: toLocalizedNumber(selectedLanguagesArray.length - 1, lang),
-      });
-
-    return selectedValueString;
-  }, [lang, selectedLanguages, t]);
-
   const formattedSelectedTranslations = useMemo(() => {
-    if (!selectedTranslations) return t('search:all-translations');
+    if (!selectedTranslations) return t('search:default-translations');
 
     let selectedValueString;
 
@@ -248,6 +213,30 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
 
     return selectedValueString;
   }, [lang, selectedTranslations, t, translations]);
+
+  const filteredTranslations = translationSearchQuery
+    ? filterTranslations(translations, translationSearchQuery)
+    : translations;
+
+  const onResetButtonClicked = () => {
+    logButtonClick('search_page_reset_button');
+    const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
+    onTranslationChange(defaultTranslations.map((translation) => translation.toString()));
+  };
+
+  const onTranslationSearchQueryChange = (newTranslationSearchQuery: string) => {
+    logValueChange(
+      'search_page_translation_search_query',
+      translationSearchQuery,
+      newTranslationSearchQuery,
+    );
+    setTranslationSearchQuery(newTranslationSearchQuery);
+  };
+
+  const onTranslationSearchClearClicked = () => {
+    logButtonClick('search_page_translation_search_clear');
+    setTranslationSearchQuery('');
+  };
 
   return (
     <DataContext.Provider value={chaptersData}>
@@ -278,50 +267,52 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
               fixedWidth={false}
               variant={InputVariant.Main}
             />
-            <div className={styles.filtersContainer}>
-              <Popover
-                contentAlign={ContentAlign.START}
-                className={styles.languagePopover}
-                trigger={
+            <ContentModal
+              size={ContentModalSize.SMALL}
+              header={
+                <div className={styles.modalContainer}>
+                  <div className={styles.translationSearchContainer}>
+                    <Input
+                      id="searchQuery"
+                      prefix={<SearchIcon />}
+                      onChange={onTranslationSearchQueryChange}
+                      onClearClicked={onTranslationSearchClearClicked}
+                      clearable
+                      value={translationSearchQuery}
+                      placeholder={t('search.title')}
+                      fixedWidth={false}
+                      variant={InputVariant.Main}
+                    />
+                  </div>
                   <Button
-                    size={ButtonSize.Small}
-                    variant={ButtonVariant.Compact}
-                    className={styles.filterButton}
-                    prefix={<GlobeIcon />}
-                    suffix={<ChevronDownIcon />}
+                    className={styles.resetButton}
+                    variant={ButtonVariant.Ghost}
+                    onClick={onResetButtonClicked}
                   >
-                    {formattedSelectedLanguage}
+                    {t('search:reset')}
                   </Button>
-                }
-              >
-                <LanguagesFilter
-                  languages={languages}
-                  selectedLanguages={selectedLanguages}
-                  onLanguageChange={onLanguageChange}
-                />
-              </Popover>
-              <Popover
-                contentAlign={ContentAlign.START}
-                className={styles.translationPopover}
-                trigger={
-                  <Button
-                    size={ButtonSize.Small}
-                    variant={ButtonVariant.Compact}
-                    prefix={<BookIcon />}
-                    suffix={<ChevronDownIcon />}
-                  >
-                    {formattedSelectedTranslations}
-                  </Button>
-                }
-              >
-                <div className={styles.translationFilterContainer}>
-                  <TranslationsFilter
-                    translations={translations}
-                    selectedTranslations={selectedTranslations}
-                    onTranslationChange={onTranslationChange}
-                  />
                 </div>
-              </Popover>
+              }
+              isOpen={isContentModalOpen}
+              onClose={() => setIsContentModalOpen(false)}
+            >
+              <TranslationsFilter
+                translations={filteredTranslations}
+                selectedTranslations={selectedTranslations}
+                onTranslationChange={onTranslationChange}
+              />
+            </ContentModal>
+            <div className={styles.filtersContainer}>
+              <Button
+                onClick={() => setIsContentModalOpen(true)}
+                size={ButtonSize.Small}
+                variant={ButtonVariant.Compact}
+                prefix={<FilterIcon />}
+                className={styles.filterButton}
+              >
+                {t('search:filter')}
+              </Button>
+              <div>{formattedSelectedTranslations}</div>
             </div>
           </div>
         </div>
