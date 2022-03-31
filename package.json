@@ -45,7 +45,7 @@
     "@radix-ui/react-tooltip": "^0.1.7",
     "@radix-ui/react-visually-hidden": "^0.1.4",
     "@reduxjs/toolkit": "^1.8.0",
-    "@sentry/nextjs": "^6.19.1",
+    "@sentry/nextjs": "^6.19.3",
     "classnames": "^2.3.1",
     "clipboard-copy": "^4.0.1",
     "firebase": "^9.6.9",
