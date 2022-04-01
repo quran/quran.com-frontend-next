@@ -8,6 +8,7 @@ import Spinner from 'src/components/dls/Spinner/Spinner';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import NotionPage from 'src/components/Notion/Page';
+import PageContainer from 'src/components/PageContainer';
 import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
 import { getCanonicalUrl, getProductUpdatesUrl } from 'src/utils/navigation';
@@ -39,11 +40,13 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
   return (
     <>
       <NextSeoWrapper title={pageTitle} url={getCanonicalUrl(lang, getProductUpdatesUrl(id))} />
-      <div className={styles.container}>
-        <div className={styles.backIconContainer} />
-        <LocalizationMessage />
-        <NotionPage page={page} blocks={blocks} isPageLayout />
-      </div>
+      <PageContainer>
+        <div className={styles.container}>
+          <div className={styles.backIconContainer} />
+          <LocalizationMessage />
+          <NotionPage page={page} blocks={blocks} isPageLayout />
+        </div>
+      </PageContainer>
     </>
   );
 };
