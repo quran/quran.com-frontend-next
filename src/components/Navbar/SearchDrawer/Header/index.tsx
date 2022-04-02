@@ -8,7 +8,6 @@ import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
 import styles from './Header.module.scss';
 
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import useElementComputedPropertyValue from 'src/hooks/useElementComputedPropertyValue';
 import { logButtonClick } from 'src/utils/eventLogger';
 
 interface Props {
@@ -29,8 +28,6 @@ const Header: React.FC<Props> = ({
   searchQuery,
 }) => {
   const { t } = useTranslation('common');
-  // we detect whether the user is inputting a right-to-left text or not so we can change the layout accordingly
-  const isRTLInput = useElementComputedPropertyValue(inputRef, 'direction') === 'rtl';
 
   const onKeyboardReturnPressed = (e) => {
     e.preventDefault();
@@ -48,11 +45,7 @@ const Header: React.FC<Props> = ({
       ) : (
         <>
           <DrawerSearchIcon />
-          <div
-            className={classNames(styles.searchInputContainer, {
-              [styles.searchInputContainerRTL]: isRTLInput,
-            })}
-          >
+          <div className={classNames(styles.searchInputContainer)}>
             <form onSubmit={onKeyboardReturnPressed}>
               <input
                 className={styles.searchInput}
