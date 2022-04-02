@@ -7,6 +7,7 @@ import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
 
 import styles from './Header.module.scss';
 
+import Separator from 'src/components/dls/Separator/Separator';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { logButtonClick } from 'src/utils/eventLogger';
 
@@ -58,16 +59,19 @@ const Header: React.FC<Props> = ({
                 disabled={isSearching}
               />
             </form>
+            {searchQuery && (
+              <>
+                <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
+                  {t('input.clear')}
+                </button>
+                <Separator isVertical className={styles.separator} />
+              </>
+            )}
             <TarteelVoiceSearchTrigger
               onClick={() => {
                 logButtonClick('search_drawer_voice_search_start_flow');
               }}
             />
-            {searchQuery && (
-              <button type="button" className={styles.clear} onClick={resetQueryAndResults}>
-                {t('input.clear')}
-              </button>
-            )}
           </div>
         </>
       )}
