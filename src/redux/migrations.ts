@@ -1,5 +1,6 @@
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
 import { getAudioPlayerStateInitialState } from './defaultSettings/util';
+import { RootState } from './RootState';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { MushafLines } from 'types/QuranReader';
@@ -22,7 +23,12 @@ export default {
   5: (state) => ({
     ...state,
     readingTracker: {
-      lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
+      lastReadVerse: {
+        verseKey: null,
+        chapterId: null,
+        page: null,
+        hizb: null,
+      },
     },
   }),
   6: (state) => ({
@@ -118,4 +124,12 @@ export default {
       showTooltipWhenPlayingAudio: false,
     },
   }),
+  19: (state: RootState) =>
+    ({
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    } as RootState),
 };

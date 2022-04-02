@@ -30,9 +30,8 @@ const HomePageWelcomeMessage = () => {
         <Trans
           i18nKey="home:welcome.body"
           components={[
-            <a href="https://feedback.quran.com" target="_blank" rel="noreferrer" key="0" />,
-            <a href="https://previous.quran.com" target="_blank" rel="noreferrer" key="1" />,
-            <br key="2" />,
+            <a href="https://donate.quran.com" target="_blank" rel="noreferrer" key="0" />,
+            <br key="1" />,
           ]}
         />
       }
