@@ -124,12 +124,11 @@ export default {
       showTooltipWhenPlayingAudio: false,
     },
   }),
-  19: (state: RootState) =>
-    ({
-      ...state,
-      welcomeMessage: {
-        ...state.welcomeMessage,
-        isVisible: true,
-      },
-    } as RootState),
+  19: (state) => ({
+    ...state,
+    welcomeMessage: {
+      ...state.welcomeMessage,
+      isVisible: true,
+    },
+  }),
 };
