@@ -11,7 +11,12 @@ const FundraisingBanner = () => {
     <div className={styles.container}>
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
-      <Button type={ButtonType.Success} className={styles.ctaContainer}>
+      <Button
+        href="https://donate.quran.com"
+        isNewTab
+        type={ButtonType.Success}
+        className={styles.ctaContainer}
+      >
         {t('fundraising.cta')}
       </Button>
       <div className={styles.backgroundImageContainer}>
