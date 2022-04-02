@@ -15,8 +15,8 @@ const renderLinesSkeleton = (index) => {
 const NavigationDrawerBodySkeleton = () => {
   return (
     <span className={styles.skeletonContainer}>
-      {renderLinesSkeleton(1)}
       <Skeleton isActive isSquared className={styles.blockRow} />
+      {renderLinesSkeleton(1)}
       {renderLinesSkeleton(2)}
     </span>
   );
