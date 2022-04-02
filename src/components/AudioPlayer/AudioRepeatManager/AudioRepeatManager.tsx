@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useRef, useCallback } from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -118,6 +119,9 @@ const AudioRepeatManager = ({
       return null;
     }
 
+    if (verseRangeTo === undefined) {
+      return null;
+    }
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
     const isAudioEnded = audioPlayerElRef.current.ended;
 
