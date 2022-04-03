@@ -1,6 +1,9 @@
 {
+    "default-translations": "Traductions par défaut",
+    "filter": "filtre",
     "language-filter-label": "Rechercher toutes les traductions d'une langue",
     "language-select": "Sélectionnez une langue",
+    "reset": "réinitialiser",
     "search": "Rechercher",
     "search-desc": "Recherchez le corpus du Saint Coran et ses traductions à l'aide d'un moteur de recherche multilingue puissant et très précis.",
     "search-title": "Rechercher ' {{searchQuery}} '",

@@ -110,6 +110,11 @@
         "title": "Baca, kaji dan pelajari Al-Quran."
     },
     "from": "Dari",
+    "fundraising": {
+        "cta": "MENDERMA",
+        "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
+        "title": "Menjadi Penderma Bulanan"
+    },
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
@@ -155,6 +160,7 @@
     "remove": "Keluarkan",
     "retry": "Cuba lagi (Retry)",
     "search-for": "Cari '{{searchQuery}}'",
+    "search-results": "{{count}} hasil carian",
     "search": {
         "filters": "Penapis",
         "hint": "Cuba cari",

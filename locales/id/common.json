@@ -6,8 +6,8 @@
         "drawer-close": "Tutup Laci",
         "msg-close": "Tutup Pesan",
         "nav-drawer-open": "Buka Laci Navigasi",
-        "play-surah": "Mainkan Surah {{surahName}}",
-        "read-ayah-refls": "Baca Refleksi Ayah",
+        "play-surah": "Putar Surah {{surahName}}",
+        "read-ayah-refls": "Baca Refleksi Ayat",
         "select-lng": "Pilih bahasa",
         "share-ayah": "Bagikan Ayah",
         "sidebar-nav-close": "Tutup Bilah Sisi Navigasi"
@@ -34,7 +34,7 @@
             "play": "Mainkan",
             "play-audio": "Putar Audio",
             "play-range": "Jankau memainkan",
-            "previous-ayah": "Ayah sebelumnya",
+            "previous-ayah": "Ayat sebelumnya",
             "repeat-1-verse": "Ulangi Ayat",
             "repeat-settings": "Ulangi Pengaturan",
             "repeat-verse": "Ulangi setiap ayat",
@@ -47,13 +47,13 @@
             "verses-range": "Jangkauan ayat"
         },
         "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
-        "select-reciter": "Pilih Pembaca",
+        "select-reciter": "Pilih Qari",
         "title": "audio"
     },
-    "ayah": "Ayah",
-    "ayahs": "Ayah",
+    "ayah": "Ayat",
+    "ayahs": "Ayat",
     "beta": "Beta (Ujian)",
-    "bookmark": "Penanda buku",
+    "bookmark": "Penanda",
     "bookmarked": "Ditandai",
     "both": "Keduanya",
     "cancel": "Batal",
@@ -83,12 +83,12 @@
         "increase": "Meningkatkan"
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
-    "developers": "Pemaju (Developers)",
+    "developers": "Pengembang (Developers)",
     "error": {
         "general": "Ada yang salah. Silakan coba lagi.",
         "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi."
     },
-    "feedback": "Maklum balas",
+    "feedback": "Beri Masukan",
     "fonts": {
         "15_lines": "15 Baris",
         "16_lines": "16 Baris",
@@ -110,36 +110,41 @@
         "title": "Baca, pelajari, dan pelajari The Noble Quran."
     },
     "from": "Dari",
+    "fundraising": {
+        "cta": "MENYUMBANGKAN",
+        "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
+        "title": "Menjadi Donatur Bulanan"
+    },
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
     "input": {
         "clear": "Jernih"
     },
-    "juz": "Juzu",
+    "juz": "Juz",
     "language": "Bahasa",
     "languages": "Bahasa",
     "less": "Kurang",
     "loading": "Memuat",
     "menu": "Menu",
-    "mobile-apps": "Aplikasi Fon",
+    "mobile-apps": "Aplikasi ",
     "mode": "Mode",
     "more": "Lagi",
     "navigate": "Navigasi",
     "network": "Jaringan",
     "next": "Lanjut",
-    "next-ayah": "Ayah Berikutnya",
+    "next-ayah": "Ayat Berikutnya",
     "no": "Tidak",
     "none": "Tidak ada",
     "off": "Mati",
-    "on": "hidup",
+    "on": "Hidup",
     "page": "Halaman",
     "pages": "halaman-halaman",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
-    "popular-links": "Pautan LINK yang popular",
+    "popular-links": "Link populer",
     "powered-by": "Dipersembahkan oleh",
     "prev": "Sebelumnya",
-    "previous-ayah": "Ayah sebelumnya",
+    "previous-ayah": "Ayat sebelumnya",
     "privacy": "Pribadi",
     "product-updates": "Pembaruan produk",
     "q-reflect": "QuranReflect",
@@ -150,11 +155,12 @@
         "translation": "Terjemahan"
     },
     "reciter": "Qari",
-    "reciters": "qari",
+    "reciters": "Qari",
     "reflect": "Mencerminkan",
     "remove": "Keluarkan",
     "retry": "Cuba lagi (Retry)",
     "search-for": "Telusuri '{{searchQuery}}'",
+    "search-results": "{{count}} hasil penelusuran",
     "search": {
         "filters": "Filter",
         "hint": "Coba cari",
@@ -173,8 +179,8 @@
         "no-translation-selected": "Tidak ada terjemahan yang dipilih",
         "reading-experience": "Pengalaman Membaca",
         "reset-cta": "Atur Semula Pengaturan",
-        "reset-notif": "Aturan settings anda telah diatur semula kembali ke default",
-        "search-reciter": "Cari Pembaca",
+        "reset-notif": "Pengaturan telah diatur ke semula",
+        "search-reciter": "Cari Qari",
         "search-tafsirs": "Carian Tafsir",
         "search-translations": "Cari Terjemahan",
         "selected-reciter": "Pembaca yang dipilih",
@@ -182,9 +188,9 @@
         "selected-translations": "Terjemahan yang dipilih",
         "show-tooltip-when-playing-audio": "Tampilkan tooltip saat memutar audio",
         "title": "Pengaturan",
-        "tooltip-playing-audio-helper": "Tampilkan terjemahan kata di tooltip saat bermain ayah",
+        "tooltip-playing-audio-helper": "Tampilkan terjemahan per kata di tooltip saat memutar ayat",
         "value-and-other": "{{value}} , dan {{othersCount}} lainnya",
-        "value-and-others": "{{value}} , dan {{othersCount}} lain",
+        "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
         "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
         "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan 'cursor mouse' atau mengklik perkataan"
     },
@@ -192,9 +198,9 @@
     "shared": "Tautan telah disalin ke papan klip!",
     "sidebar": {
         "search-juz": "Cari Juz",
-        "search-page": "Halaman Pencarian",
-        "search-surah": "Cari surah",
-        "try-navigating-with": "Tips: coba navigasikan dengan"
+        "search-page": "Cari Halaman",
+        "search-surah": "Cari Surat",
+        "try-navigating-with": "Tips: coba navigasi dengan"
     },
     "sitemap": "Peta laman",
     "sort": {
@@ -209,17 +215,17 @@
         "group-message": "Anda sedang membaca tafsir untuk sekelompok ayat dari {{from}} hingga {{to}}",
         "no-text": "{{tafsirName}} tidak tersedia untuk ayat saat ini.",
         "surah": "Surah Tafsir",
-        "tafsir-desc": "Baca {{tafsirName}} untuk Ayah {{verseNumber}} Surah {{surahName}}",
-        "tafsirs-desc": "Baca berbagai Tafsir Ayah {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir terpercaya",
+        "tafsir-desc": "Baca {{tafsirName}} untuk Ayat {{verseNumber}} Surah {{surahName}}",
+        "tafsirs-desc": "Baca berbagai Tafsir Ayat {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir terpercaya",
         "title": "tafsir"
     },
     "tarteel": {
-        "app": "aplikasi tarteel",
+        "app": "Aplikasi Tarteel",
         "name": "Tarteel.ai"
     },
     "theme": "Tema",
     "themes": {
-        "auto": "Automatik",
+        "auto": "Otomatis",
         "dark": "Gelap",
         "light": "Terang",
         "sepia": "sepia",
@@ -234,8 +240,8 @@
     "transliteration": "Transliterasi",
     "type": "Jenis",
     "verse": "Ayat",
-    "verse-bookmark-removed": "Tanda-Ingat dikeluarkan",
-    "verse-bookmarked": "Ayat telah di-Tanda-Ingat",
+    "verse-bookmark-removed": "Penanda ayat telah dihapus!",
+    "verse-bookmarked": "Ayat telah ditandai",
     "verses": "Ayat",
     "view": "Melihat",
     "voice": {
@@ -243,20 +249,20 @@
         "error": "Terjadi kesalahan, coba lagi nanti. Atau unduh",
         "no-permission": "Sepertinya Anda tidak mengaktifkan izin menggunakan mikrofon. Harap aktifkan izin mikrofon dan coba lagi atau unduh",
         "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Silakan coba browser lain atau unduh",
-        "suggest": "Mulakan bacaan anda, ayat daripada surah itu akan muncul dan dipaparkan",
+        "suggest": "Mulai membaca ayat, dan ayat akan mulai muncul",
         "suggest-subtitle": "Bacalah apa apa sahaja ayat dalam bahasa Arab dan ayat itu akan muncul",
-        "suggest-title": "Bacalah sekarang",
-        "voice-search-powered-by": "Enjin carian suara dihasilkan oleh"
+        "suggest-title": "Baca sekarang",
+        "voice-search-powered-by": "Pencarian suara dipersembahkan oleh"
     },
     "wbw": "Kata dari kata",
-    "wbw-trans-lang": "kata daripada bahasa kata",
-    "wbw-translation": "Terjemahan Kata demi Kata",
-    "wbw-transliteration": "Transliterasi Kata demi Kata",
+    "wbw-trans-lang": "Bahasa kata per kata",
+    "wbw-translation": "Terjemahan per kata",
+    "wbw-transliteration": "Transliterasi per kata",
     "word-click": {
         "no-audio": "Tidak ada suara",
         "play-audio": "Putar Audio",
         "title": "Klik Kata"
     },
-    "word-tooltip": "Kata-kata nasihat",
+    "word-tooltip": "Word tooltip",
     "yes": "Ya"
 }

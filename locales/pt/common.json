@@ -110,6 +110,11 @@
         "title": "Leia, estude e aprenda O Nobre Alcorão."
     },
     "from": "A partir de",
+    "fundraising": {
+        "cta": "DOAR",
+        "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
+        "title": "Seja um doador mensal"
+    },
     "help": "Ajuda",
     "hizb": "Hizb",
     "home": "Casa",
@@ -155,6 +160,7 @@
     "remove": "Retirar",
     "retry": "Tentar novamente",
     "search-for": "Procure por '{{searchQuery}}'",
+    "search-results": "{{count}} resultados de pesquisa",
     "search": {
         "filters": "Filtros",
         "hint": "Tente pesquisar por",

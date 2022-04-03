@@ -110,6 +110,11 @@
         "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
     },
     "from": "Nga",
+    "fundraising": {
+        "cta": "DHURONI",
+        "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+        "title": "Bëhuni një donator mujor"
+    },
     "help": "Ndihmë",
     "hizb": "Hizb",
     "home": "Shtëpi",
@@ -155,6 +160,7 @@
     "remove": "Hiq",
     "retry": "Provo sërish",
     "search-for": "Kërko për \"{{searchQuery}}\"",
+    "search-results": "{{count}} rezultate kërkimi",
     "search": {
         "filters": "Filtrat",
         "hint": "Provoni të kërkoni për",
