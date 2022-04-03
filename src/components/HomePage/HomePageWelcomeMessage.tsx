@@ -32,7 +32,7 @@ const HomePageWelcomeMessage = () => {
           i18nKey="home:welcome.body"
           components={[
             <a href="https://donate.quran.com" target="_blank" rel="noreferrer" key="0" />,
-            <br key="1" />,
+            <span key="1" />,
             <br key="2" />,
           ]}
         />
