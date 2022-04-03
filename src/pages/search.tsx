@@ -6,19 +6,22 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import IconSearch from '../../public/icons/search.svg';
+import FilterIcon from '../../public/icons/filter.svg';
+import SearchIcon from '../../public/icons/search.svg';
 
 import styles from './search.module.scss';
 
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import Input from 'src/components/dls/Forms/Input';
+import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
+import Input, { InputVariant } from 'src/components/dls/Forms/Input';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import LanguagesFilter from 'src/components/Search/Filters/LanguagesFilter';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import DataContext from 'src/contexts/DataContext';
 import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
+import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -28,7 +31,8 @@ import {
   logEvent,
   logValueChange,
 } from 'src/utils/eventLogger';
-import { getLanguageAlternates } from 'src/utils/locale';
+import filterTranslations from 'src/utils/filter-translations';
+import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
@@ -44,7 +48,7 @@ type SearchProps = {
   chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }) => {
+const Search: NextPage<SearchProps> = ({ translations, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -54,6 +58,8 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
   const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
     userTranslations.join(','),
   );
+  const [translationSearchQuery, setTranslationSearchQuery] = useState('');
+  const [isContentModalOpen, setIsContentModalOpen] = useState<boolean>(false);
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
@@ -163,20 +169,6 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
     setCurrentPage(page);
   };
 
-  /**
-   * Handle when the selected language changes.
-   *
-   * @param {string} languageIsoCode
-   */
-  const onLanguageChange = useCallback((languageIsoCodes: string[]) => {
-    // convert the array into a string
-    setSelectedLanguages((prevLanguages) => {
-      const newLanguages = languageIsoCodes.join(',');
-      logValueChange('search_page_selected_languages', prevLanguages, newLanguages);
-      return newLanguages;
-    });
-  }, []);
-
   const onTranslationChange = useCallback((translationIds: string[]) => {
     // convert the array into a string
     setSelectedTranslations((prevTranslationIds) => {
@@ -194,6 +186,58 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
 
   const navigationUrl = '/search';
 
+  const formattedSelectedTranslations = useMemo(() => {
+    if (!selectedTranslations) return t('search:default-translations');
+
+    let selectedValueString;
+
+    const selectedTranslationsArray = selectedTranslations.split(',');
+
+    const firstSelectedTranslation = translations.find(
+      (translation) => translation.id.toString() === selectedTranslationsArray[0],
+    );
+
+    if (!firstSelectedTranslation) return t('search:all-translations');
+
+    if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
+    if (selectedTranslationsArray.length === 2)
+      selectedValueString = t('settings.value-and-other', {
+        value: firstSelectedTranslation?.name,
+        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
+      });
+    if (selectedTranslationsArray.length > 2)
+      selectedValueString = t('settings.value-and-others', {
+        value: firstSelectedTranslation?.name,
+        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
+      });
+
+    return selectedValueString;
+  }, [lang, selectedTranslations, t, translations]);
+
+  const filteredTranslations = translationSearchQuery
+    ? filterTranslations(translations, translationSearchQuery)
+    : translations;
+
+  const onResetButtonClicked = () => {
+    logButtonClick('search_page_reset_button');
+    const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
+    onTranslationChange(defaultTranslations.map((translation) => translation.toString()));
+  };
+
+  const onTranslationSearchQueryChange = (newTranslationSearchQuery: string) => {
+    logValueChange(
+      'search_page_translation_search_query',
+      translationSearchQuery,
+      newTranslationSearchQuery,
+    );
+    setTranslationSearchQuery(newTranslationSearchQuery);
+  };
+
+  const onTranslationSearchClearClicked = () => {
+    logButtonClick('search_page_translation_search_clear');
+    setTranslationSearchQuery('');
+  };
+
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -209,43 +253,84 @@ const Search: NextPage<SearchProps> = ({ languages, translations, chaptersData }
         languageAlternates={getLanguageAlternates(navigationUrl)}
       />
       <div className={styles.pageContainer}>
-        <p className={styles.header}>{t('search.title')}</p>
-        <Input
-          id="searchQuery"
-          prefix={<IconSearch />}
-          onChange={onSearchQueryChange}
-          onClearClicked={onClearClicked}
-          clearable
-          value={searchQuery}
-          disabled={isSearching}
-          placeholder={t('search.title')}
-          fixedWidth={false}
-        />
-        <p className={styles.filtersHeader}>{t('search.filters')}</p>
-        <div className={styles.filtersContainer}>
-          <LanguagesFilter
-            languages={languages}
-            selectedLanguages={selectedLanguages}
-            onLanguageChange={onLanguageChange}
-          />
-          <TranslationsFilter
-            translations={translations}
-            selectedTranslations={selectedTranslations}
-            onTranslationChange={onTranslationChange}
-          />
+        <div className={styles.headerOuterContainer}>
+          <div className={styles.headerInnerContainer}>
+            <Input
+              id="searchQuery"
+              prefix={<SearchIcon />}
+              onChange={onSearchQueryChange}
+              onClearClicked={onClearClicked}
+              clearable
+              value={searchQuery}
+              disabled={isSearching}
+              placeholder={t('search.title')}
+              fixedWidth={false}
+              variant={InputVariant.Main}
+            />
+            <ContentModal
+              size={ContentModalSize.SMALL}
+              isFixedHeight
+              header={
+                <div className={styles.modalContainer}>
+                  <div className={styles.translationSearchContainer}>
+                    <Input
+                      id="searchQuery"
+                      prefix={<SearchIcon />}
+                      onChange={onTranslationSearchQueryChange}
+                      onClearClicked={onTranslationSearchClearClicked}
+                      clearable
+                      value={translationSearchQuery}
+                      placeholder={t('search.title')}
+                      fixedWidth={false}
+                      variant={InputVariant.Main}
+                    />
+                  </div>
+                  <Button
+                    className={styles.resetButton}
+                    variant={ButtonVariant.Ghost}
+                    onClick={onResetButtonClicked}
+                  >
+                    {t('search:reset')}
+                  </Button>
+                </div>
+              }
+              isOpen={isContentModalOpen}
+              onClose={() => setIsContentModalOpen(false)}
+            >
+              <TranslationsFilter
+                translations={filteredTranslations}
+                selectedTranslations={selectedTranslations}
+                onTranslationChange={onTranslationChange}
+              />
+            </ContentModal>
+            <div className={styles.filtersContainer}>
+              <Button
+                onClick={() => setIsContentModalOpen(true)}
+                size={ButtonSize.Small}
+                variant={ButtonVariant.Compact}
+                prefix={<FilterIcon />}
+                className={styles.filterButton}
+              >
+                {t('search:filter')}
+              </Button>
+              <div>{formattedSelectedTranslations}</div>
+            </div>
+          </div>
         </div>
         <div className={styles.pageBody}>
-          <SearchBodyContainer
-            onSearchKeywordClicked={onSearchKeywordClicked}
-            isSearchDrawer={false}
-            searchQuery={debouncedSearchQuery}
-            searchResult={searchResult}
-            currentPage={currentPage}
-            onPageChange={onPageChange}
-            pageSize={PAGE_SIZE}
-            isSearching={isSearching}
-            hasError={hasError}
-          />
+          <div className={styles.searchBodyContainer}>
+            <SearchBodyContainer
+              onSearchKeywordClicked={onSearchKeywordClicked}
+              isSearchDrawer={false}
+              searchQuery={debouncedSearchQuery}
+              searchResult={searchResult}
+              currentPage={currentPage}
+              onPageChange={onPageChange}
+              pageSize={PAGE_SIZE}
+              isSearching={isSearching}
+              hasError={hasError}
+            />
+          </div>
         </div>
       </div>
     </DataContext.Provider>

@@ -1,8 +1,6 @@
 @use "src/styles/theme";
 
 .container {
-  background: var(--color-background-alternative-faded);
-  border-radius: var(--border-radius-default);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,12 +14,7 @@
     pointer-events: none;
     cursor: not-allowed;
   }
-  @include theme.light {
-    border: 1px solid var(--color-borders-hairline);
-  }
-  @include theme.dark {
-    border: none;
-  }
+  border: 1px solid var(--color-borders-hairline);
   &.error {
     border-color: var(--color-error-deep);
   }
@@ -30,6 +23,18 @@
   }
   &.warning {
     border-color: var(--color-warning-medium);
+  }
+  border-radius: var(--border-radius-rounded);
+}
+
+.main {
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xsmall);
+
+  & .input {
+    font-size: var(--font-size-large);
+    color: var(--color-text-default);
+    font-weight: var(--font-weight-semibold);
   }
 }
 
@@ -67,7 +72,7 @@
   width: 100%;
   font-size: var(--font-size-normal);
   color: var(--color-text-default);
-  background: var(--color-background-alternative-faded);
+  background: transparent;
   &:focus {
     outline: none;
   }

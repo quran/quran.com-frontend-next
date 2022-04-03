@@ -203,6 +203,7 @@
         "descending": "Descending"
     },
     "style": "Style",
+    "search-results": "{{ count }} search results",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir font size",
