@@ -49,19 +49,19 @@
 
 .success {
   --themed-bg: var(--color-success-medium);
-  --themed-fg: var(--color-text-inverse);
+  --themed-fg: var(--shade-0);
   --themed-border: var(--color-success-medium);
 }
 
 .warning {
   --themed-bg: var(--color-warning-medium);
-  --themed-fg: var(--color-text-inverse);
+  --themed-fg: var(--shade-0);
   --themed-border: var(--color-warning-medium);
 }
 
 .error {
   --themed-bg: var(--color-error-medium);
-  --themed-fg: var(--color-text-inverse);
+  --themed-fg: var(--shade-0);
   --themed-border: var(--color-error-medium);
 }
 
