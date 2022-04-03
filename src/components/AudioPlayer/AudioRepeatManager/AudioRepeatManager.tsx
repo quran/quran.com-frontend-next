@@ -119,9 +119,6 @@ const AudioRepeatManager = ({
       return null;
     }
 
-    if (verseRangeTo === undefined) {
-      return null;
-    }
     const isRangeEnded = currentTimeInMs >= verseRangeTo.timestampTo;
     const isAudioEnded = audioPlayerElRef.current.ended;
 

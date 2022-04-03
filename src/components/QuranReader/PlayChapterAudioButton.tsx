@@ -13,6 +13,7 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dl
 import DataContext from 'src/contexts/DataContext';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
+  exitRepeatMode,
   playFrom,
   selectAudioData,
   selectIsPlaying,
@@ -39,6 +40,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const play = () => {
     logButtonClick('chapter_header_play_audio');
+    dispatch(exitRepeatMode());
     if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
       triggerPlayAudio();
     } else {
