@@ -23,6 +23,7 @@ const HomePageWelcomeMessage = () => {
   };
 
   if (!isVisible) return null;
+
   return (
     <HomePageMessage
       title={t('home:welcome.title')}
