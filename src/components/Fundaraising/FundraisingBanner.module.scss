@@ -13,7 +13,6 @@
 .paragraph {
   margin-block-start: var(--spacing-small);
   color: var(--color-success-deep);
-  max-width: calc(7.5 * var(--spacing-mega));
 }
 
 .ctaContainer {
@@ -25,8 +24,9 @@
   width: calc(4 * var(--spacing-mega));
   height: calc(4 * var(--spacing-mega));
   position: absolute;
-  inset-block-start: 0;
+  inset-block-end: 0;
   inset-inline-end: 0;
   color: var(--color-success-medium);
   opacity: var(--opacity-10);
+  color: var(--color-success-deep);
 }

@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import TrophySVG from '../../../public/images/trophy.svg';
+import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonType } from '../dls/Button/Button';
 
 import styles from './FundraisingBanner.module.scss';
@@ -20,7 +20,7 @@ const FundraisingBanner = () => {
         {t('fundraising.cta')}
       </Button>
       <div className={styles.backgroundImageContainer}>
-        <TrophySVG />
+        <MoonIllustrationSVG />
       </div>
     </div>
   );
