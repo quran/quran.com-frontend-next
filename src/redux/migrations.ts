@@ -1,6 +1,5 @@
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
 import { getAudioPlayerStateInitialState } from './defaultSettings/util';
-import { RootState } from './RootState';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { MushafLines } from 'types/QuranReader';
