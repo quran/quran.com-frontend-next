@@ -14,6 +14,9 @@
   --flow-side-spacing: var(--spacing-small);
   padding-inline-start: var(--flow-side-spacing);
   padding-inline-end: var(--flow-side-spacing);
+  @include breakpoints.tablet {
+    --flow-side-spacing: 0;
+  }
 
   /**
   * On mobile, a few components can't have padding at parent level.
@@ -27,10 +30,6 @@
   &.fullWidth {
     padding-inline-end: 0;
     padding-inline-start: 0;
-
-    @include breakpoints.tablet {
-      --flow-side-spacing: 0;
-    }
   }
 }
 

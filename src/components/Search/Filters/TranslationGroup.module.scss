@@ -1,0 +1,13 @@
+.header {
+  display: block;
+  text-transform: capitalize;
+  margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-xsmall);
+}
+.item {
+  margin-block: var(--spacing-xsmall);
+}
+
+.itemsContainer {
+  margin-inline-start: var(--spacing-medium);
+}

@@ -110,6 +110,11 @@
         "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
     },
     "from": "İtibaren",
+    "fundraising": {
+        "cta": "BAĞIŞ YAPMAK",
+        "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
+        "title": "Aylık Bağışçı Olun"
+    },
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
@@ -155,6 +160,7 @@
     "remove": "Kaldırmak",
     "retry": "Yeniden dene",
     "search-for": "'{{searchQuery}}' için arama yapın",
+    "search-results": "{{count}} arama sonucu",
     "search": {
         "filters": "Filtreler",
         "hint": "Aramayı deneyin",

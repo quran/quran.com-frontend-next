@@ -20,6 +20,7 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
 
+import FundraisingBanner from 'src/components/Fundaraising/FundraisingBanner';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 
 // import IconDonate from '../../../../../public/icons/donate.svg';
@@ -30,6 +31,7 @@ const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.listItemsContainer}>
+      <FundraisingBanner />
       <h3 className={styles.subtitle}>{t('menu')}</h3>
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
       <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />

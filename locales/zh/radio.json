@@ -7,7 +7,7 @@
         },
         "popular-recitations": {
             "description": "每日精选的诵读",
-            "title": "流行朗诵"
+            "title": "广泛收听的诵读"
         },
         "surah-al-kahf": {
             "description": "重复听山洞章",
@@ -19,8 +19,8 @@
         }
     },
     "curated-stations": "策划站",
-    "pause-radio": "暂停电台",
-    "play-radio": "播放电台",
+    "pause-radio": "暂停播放",
+    "play-radio": "在线听古兰经",
     "radio-desc": "聆听各种朗诵者不停优美地朗诵《古兰经》。",
     "reciter-stations": "朗诵站"
 }

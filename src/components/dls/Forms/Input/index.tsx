@@ -18,6 +18,11 @@ export enum InputType {
   Warning = 'warning',
   Success = 'success',
 }
+
+export enum InputVariant {
+  Default = 'default',
+  Main = 'main',
+}
 interface Props {
   id: string;
   name?: string;
@@ -34,6 +39,7 @@ interface Props {
   label?: string;
   type?: InputType;
   shouldFlipOnRTL?: boolean;
+  variant?: InputVariant;
 }
 
 const Input: React.FC<Props> = ({
@@ -46,6 +52,7 @@ const Input: React.FC<Props> = ({
   disabled = false,
   clearable = false,
   type,
+  variant,
   prefix,
   suffix,
   onClearClicked,
@@ -80,6 +87,7 @@ const Input: React.FC<Props> = ({
           [styles.error]: type === InputType.Error,
           [styles.success]: type === InputType.Success,
           [styles.warning]: type === InputType.Warning,
+          [styles.main]: variant === InputVariant.Main,
         })}
       >
         {prefix && (

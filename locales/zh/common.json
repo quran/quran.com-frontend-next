@@ -7,7 +7,7 @@
         "msg-close": "关闭消息",
         "nav-drawer-open": "打开导航抽屉",
         "play-surah": "播放古兰经{{surahName}}",
-        "read-ayah-refls": "阅读阿亚反思",
+        "read-ayah-refls": "阅读相关参悟",
         "select-lng": "选择语言",
         "share-ayah": "分享Ayah",
         "sidebar-nav-close": "关闭导航侧边栏"
@@ -16,7 +16,7 @@
         "auto-scroll": {
             "off": "离开",
             "on": "在",
-            "title": "自动滚屏"
+            "title": "播放声音时自动滚屏"
         },
         "play": "播放音频",
         "playback-normal": "普通",
@@ -25,28 +25,28 @@
         "player": {
             "close": "关闭音频播放器",
             "currently-playing": "您正在播放",
-            "delay-verse": "节文之间的延迟",
+            "delay-verse": "每节之间停顿",
             "download": "下载",
-            "full-surah": "完整的古兰经",
+            "full-surah": "播放整章",
             "mismatch": "{{currentReadingChapter}}单击“重新开始”",
             "pause": "暂停",
             "pause-audio": "暂停音频",
             "play": "播放",
             "play-audio": "播放音频",
-            "play-range": "播放范围",
+            "play-range": "整体重复次数",
             "previous-ayah": "上一节",
             "repeat-1-verse": "重复经文",
-            "repeat-settings": "重复设置",
-            "repeat-verse": "重复每一节",
+            "repeat-settings": "重复播放设置",
+            "repeat-verse": "每一节重复次数",
             "search-verse": "搜索章节",
-            "single-verse": "单节",
+            "single-verse": "播放单节",
             "start-over": "重新播放",
             "start-playing": "开始播放",
-            "stop-repeating": "停止重复",
+            "stop-repeating": "停止重复播放",
             "times": "次",
-            "verses-range": "多节经文"
+            "verses-range": "播放多节"
         },
-        "repeat-moved": "重复设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
+        "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
         "title": "音频"
     },
@@ -110,6 +110,11 @@
         "title": "阅读、学习和学习《古兰经》。"
     },
     "from": "从",
+    "fundraising": {
+        "cta": "捐",
+        "description": "每月的捐款帮助我们改进 Quran.com 并维持运营，因此我们减少对筹款的关注，而更多地关注创造影响。",
+        "title": "成为每月捐助者"
+    },
     "help": "帮助",
     "hizb": "希兹",
     "home": "首页",
@@ -146,15 +151,16 @@
     "quran-com": "Quran.com",
     "quran-radio": "在线听古兰经",
     "reading-preference": {
-        "reading": "读",
+        "reading": "诵读",
         "translation": "翻译"
     },
     "reciter": "诵读家",
     "reciters": "朗诵者",
-    "reflect": "反映",
+    "reflect": "参悟",
     "remove": "消除",
     "retry": "重试",
     "search-for": "搜索 '{{searchQuery}}'",
+    "search-results": "{{count}}搜索结果",
     "search": {
         "filters": "过滤器",
         "hint": "尝试搜索",
@@ -255,7 +261,7 @@
     "word-click": {
         "no-audio": "无音频",
         "play-audio": "播放音频",
-        "title": "字点击"
+        "title": "鼠标点击单词时发音"
     },
     "word-tooltip": "鼠标悬停在单词上时弹出其译文",
     "yes": "是的"

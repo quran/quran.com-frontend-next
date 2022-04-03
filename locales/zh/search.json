@@ -1,6 +1,9 @@
 {
+    "default-translations": "默认翻译",
+    "filter": "筛选",
     "language-filter-label": "搜索一种语言的所有翻译",
     "language-select": "选择语言",
+    "reset": "重置",
     "search": "搜索",
     "search-desc": "使用功能强大且高度准确的多语言搜索引擎搜索《古兰经》的语料库及其翻译。",
     "search-title": "搜索“ {{searchQuery}} ”",

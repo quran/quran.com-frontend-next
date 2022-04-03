@@ -22,7 +22,12 @@ export default {
   5: (state) => ({
     ...state,
     readingTracker: {
-      lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
+      lastReadVerse: {
+        verseKey: null,
+        chapterId: null,
+        page: null,
+        hizb: null,
+      },
     },
   }),
   6: (state) => ({
@@ -116,6 +121,13 @@ export default {
     audioPlayerState: {
       ...state.readingPreferences,
       showTooltipWhenPlayingAudio: false,
+    },
+  }),
+  19: (state) => ({
+    ...state,
+    welcomeMessage: {
+      ...state.welcomeMessage,
+      isVisible: true,
     },
   }),
 };

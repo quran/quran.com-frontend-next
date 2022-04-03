@@ -31,13 +31,12 @@ const SearchResults: React.FC<Props> = ({
   pageSize,
   onSearchResultClicked,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
   return (
     <>
       <div>
         {!!searchResult.result.navigation?.length && (
-          <>
-            <p className={styles.boldHeader}>{t('search.jump-to')}</p>
+          <div className={styles.navigationItemsListContainer}>
             {searchResult.result.navigation.map((navigationResult) => (
               <NavigationItem
                 isSearchDrawer={isSearchDrawer}
@@ -45,9 +44,13 @@ const SearchResults: React.FC<Props> = ({
                 navigation={navigationResult}
               />
             ))}
-          </>
+          </div>
         )}
-        <p className={styles.boldHeader}>{t('search.results')}</p>
+        <p className={styles.header}>
+          {t('common:search-results', {
+            count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
+          })}
+        </p>
         <>
           {searchResult.result.verses.map((result) => (
             <SearchResultItem
@@ -60,7 +63,7 @@ const SearchResults: React.FC<Props> = ({
             <div className={styles.resultsSummaryContainer}>
               <p>
                 {toLocalizedNumber(searchResult.pagination.totalRecords, lang)}{' '}
-                {t('search.results')}
+                {t('common:search.results')}
               </p>
               {searchResult.pagination.totalRecords > 0 && (
                 <Link
@@ -72,7 +75,7 @@ const SearchResults: React.FC<Props> = ({
                   }}
                 >
                   <a>
-                    <p className={styles.showAll}>{t('search.show-all')}</p>
+                    <p className={styles.showAll}>{t('common:search.show-all')}</p>
                   </a>
                 </Link>
               )}
