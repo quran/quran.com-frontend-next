@@ -1,6 +1,9 @@
 {
+    "default-translations": "Traduções padrão",
+    "filter": "filtro",
     "language-filter-label": "Pesquise todas as traduções de um idioma",
     "language-select": "Selecione um idioma",
+    "reset": "Redefinir",
     "search": "Procurar",
     "search-desc": "Pesquise o corpus do Alcorão Sagrado e suas traduções usando um mecanismo de pesquisa multilíngue poderoso e altamente preciso.",
     "search-title": "Procure por ' {{searchQuery}} '",

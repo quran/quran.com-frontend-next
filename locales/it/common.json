@@ -110,6 +110,11 @@
         "title": "Leggi, studia e impara Il Nobile Corano."
     },
     "from": "A partire dal",
+    "fundraising": {
+        "cta": "DONARE",
+        "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
+        "title": "Diventa un donatore mensile"
+    },
     "help": "Aiuto",
     "hizb": "Hizb",
     "home": "Casa",
@@ -155,6 +160,7 @@
     "remove": "Rimuovere",
     "retry": "Riprova",
     "search-for": "Cerca '{{searchQuery}}'",
+    "search-results": "{{count}} risultati di ricerca",
     "search": {
         "filters": "Filtri",
         "hint": "Prova a cercare",

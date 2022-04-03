@@ -1,6 +1,9 @@
 {
+    "default-translations": "الترجمات الافتراضية",
+    "filter": "منقي",
     "language-filter-label": "ابحث في جميع ترجمات لغة",
     "language-select": "اختر لغة",
+    "reset": "إعادة تعيين",
     "search": "بحث",
     "search-desc": "ابحث في نصوص القرآن الكريم وترجماته باستخدام محرك بحث متعدد اللغات قوي ودقيق للغاية.",
     "search-title": "ابحث عن ' {{searchQuery}} '",
