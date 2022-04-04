@@ -58,8 +58,13 @@
 .cta {
   margin-inline-start: var(--spacing-medium);
   font-size: var(--font-size-small);
+  padding-inline: var(--spacing-small);
+  padding-block: var(--spacing-xxsmall);
+  font-weight: var(--font-weight-semibold);
+  display: inline-block;
+  height: auto;
   @include breakpoints.tablet {
-    font-size: var(--font-size-normal);
+    font-size: 14px; // hard code value for tablet to make the sizing looks right
   }
 }
 
