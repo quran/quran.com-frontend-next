@@ -1,5 +1,4 @@
 @use "src/styles/breakpoints";
-@use "src/styles/constants";
 
 .container {
   box-sizing: border-box;
@@ -14,8 +13,16 @@
   padding-block: var(--spacing-xsmall);
 
   @include breakpoints.tablet {
+    position: absolute;
+    display: inline-flex;
+    background-color: transparent;
     padding-inline: var(--spacing-mega);
     justify-content: center;
+    max-width: calc(20 * var(--spacing-mega));
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
   }
 }
 
@@ -29,6 +36,7 @@
   }
 }
 .illustrationContainer {
+  display: flex;
   @include breakpoints.tablet {
     display: inline-block;
     height: var(--spacing-mega);
@@ -41,6 +49,9 @@
 
 .ctaContainer {
   padding-inline-end: var(--spacing-mega);
+  @include breakpoints.tablet {
+    padding-inline-end: calc(1.5 * var(--spacing-medium));
+  }
 }
 .cta {
   margin-inline-start: var(--spacing-medium);
@@ -62,7 +73,7 @@
 
   inset-inline-end: var(--spacing-small);
   @include breakpoints.tablet {
-    inset-inline-end: var(--spacing-mega);
-    margin-inline-end: var(--spacing-small);
+    position: relative;
+    margin-inline-start: var(--spacing-xxsmall);
   }
 }
