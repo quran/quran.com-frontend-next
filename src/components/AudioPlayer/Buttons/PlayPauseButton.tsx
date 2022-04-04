@@ -30,7 +30,7 @@ const PlayPauseButton = () => {
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
 
-  const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
+  const { isPlaying, playbackRate } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData, shallowEqual);
@@ -46,7 +46,7 @@ const PlayPauseButton = () => {
     logButtonClick('audio_player_play');
     const noReadingChapterIdsFound = currentReadingChapterIds.length === 0; // e.g : homepage
     if (currentReadingChapterIds.includes(currentAudioChapterId) || noReadingChapterIdsFound) {
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
     } else {
       setIsMismatchModalVisible(true);
     }
@@ -102,7 +102,7 @@ const PlayPauseButton = () => {
           getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
         }
         onContinue={() => {
-          triggerPlayAudio();
+          triggerPlayAudio(playbackRate);
           setIsMismatchModalVisible(false);
         }}
         onStartOver={() => {

@@ -60,15 +60,17 @@ export const loadAndPlayAudioData = createAsyncThunk<
   { state: RootState }
 >('audioPlayerState/loadAndPlayAudioData', async ({ chapter, reciterId }, thunkAPI) => {
   // play directly the audio file for this chapter is already loaded.
-  const currentAudioData = selectAudioData(thunkAPI.getState());
+  const state = thunkAPI.getState();
+  const currentAudioData = selectAudioData(state);
+  const playbackRate = selectPlaybackRate(state);
   if (currentAudioData && currentAudioData.chapterId === chapter) {
-    triggerPlayAudio();
+    triggerPlayAudio(playbackRate);
     return;
   }
   thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
   const audioData = await getChapterAudioData(reciterId, chapter);
   thunkAPI.dispatch(setAudioData(audioData));
-  triggerPlayAudio();
+  triggerPlayAudio(playbackRate);
 });
 
 /**
@@ -127,6 +129,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     const state = thunkApi.getState();
     const selectedReciter = selectReciter(state);
+    const playbackRate = selectPlaybackRate(state);
     let selectedAudioData = selectAudioData(state);
     if (
       !selectedAudioData ||
@@ -141,7 +144,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     if (shouldStartFromRandomTimestamp) {
       const randomTimestamp = random(0, selectedAudioData.duration);
-      playFromTimestamp(randomTimestamp / 1000);
+      playFromTimestamp(randomTimestamp / 1000, playbackRate);
       return;
     }
 
@@ -149,10 +152,10 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     if (timestamp === undefined || timestamp === null) {
       const timestampsData = await getChapterAudioData(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
-      playFromTimestamp(verseTiming.timestampFrom / 1000);
+      playFromTimestamp(verseTiming.timestampFrom / 1000, playbackRate);
       return;
     }
-    playFromTimestamp(timestamp / 1000);
+    playFromTimestamp(timestamp / 1000, playbackRate);
   },
 );
 

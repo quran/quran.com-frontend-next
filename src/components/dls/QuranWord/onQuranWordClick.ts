@@ -15,18 +15,18 @@ import Word from 'types/Word';
  * @param {Word} word
  * @param {AudioData} audioData
  */
-const onQuranWordClick = (word: Word, audioData?: AudioData) => {
+const onQuranWordClick = (word: Word, audioData?: AudioData, playbackRate: number) => {
   if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
     const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
     const segment = verseTiming.segments.find(([location]) => word.position === location);
     if (!segment) {
-      playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`);
+      playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`, playbackRate);
       return;
     }
     const [, startTime] = segment;
     triggerSetCurrentTime(startTime / 1000);
   } else {
-    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`);
+    playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`, playbackRate);
   }
 };
 
@@ -42,8 +42,9 @@ const onQuranWordClick = (word: Word, audioData?: AudioData) => {
  * - word by word audio player refer to the audio player that play the clicked word
  *
  * @param {string} url
+ * @param {number} playbackRate
  */
-const playWordByWordAudio = (url: string) => {
+const playWordByWordAudio = (url: string, playbackRate: number) => {
   // stop the audio and remove the DOM if it exists
   if (window.wordByWordAudioPlayerEl) {
     window.wordByWordAudioPlayerEl.pause();
@@ -57,7 +58,7 @@ const playWordByWordAudio = (url: string) => {
     window.wordByWordAudioPlayerEl.removeEventListener('ended', removeDOMAndResumeMainAudioPlayer);
     window.wordByWordAudioPlayerEl.remove();
 
-    if (isMainAudioPlayerPlaying) triggerPlayAudio();
+    if (isMainAudioPlayerPlaying) triggerPlayAudio(playbackRate);
   };
 
   window.wordByWordAudioPlayerEl = new Audio(url);

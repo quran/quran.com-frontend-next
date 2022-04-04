@@ -18,6 +18,7 @@ import {
   selectAudioData,
   selectIsPlaying,
   selectIsRadioMode,
+  selectPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -30,6 +31,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isAudioPlaying = useSelector(selectIsPlaying);
+  const playbackRate = useSelector(selectPlaybackRate);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
   const isRadioMode = useSelector(selectIsRadioMode);
   const chaptersData = useContext(DataContext);
@@ -42,7 +44,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     logButtonClick('chapter_header_play_audio');
     dispatch(exitRepeatMode());
     if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
     } else {
       dispatch(playFrom({ chapterId, reciterId, timestamp: 0 }));
     }

@@ -9,7 +9,7 @@ import Card, { CardSize } from '../dls/Card/Card';
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
-import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom, selectIsPlaying, selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { getRandomChapterId } from 'src/utils/chapter';
@@ -42,6 +42,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
   const dispatch = useDispatch();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
+  const playbackRate = useSelector(selectPlaybackRate);
 
   return (
     <div className={styles.container}>
@@ -59,7 +60,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
             playReciterStation(reciter, dispatch);
           };
         if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
-        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
+        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio(playbackRate);
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
         return (
