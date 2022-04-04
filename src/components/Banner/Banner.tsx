@@ -7,6 +7,7 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/But
 import styles from './Banner.module.scss';
 
 import { setIsBannerVisible } from 'src/redux/slices/banner';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 type BannerProps = {
   onClick?: () => void;
@@ -19,6 +20,7 @@ const Banner = ({ text, href, cta, onClick }: BannerProps) => {
   const dispatch = useDispatch();
   const closeBanner = () => {
     dispatch(setIsBannerVisible(false));
+    logButtonClick('banner_close');
   };
   return (
     <div className={styles.container}>
