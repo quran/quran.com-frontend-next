@@ -1,4 +1,3 @@
-import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import CloseIcon from '../../../public/icons/close.svg';
