@@ -123,7 +123,7 @@ const QuranWord = ({
   const onClick = useCallback(() => {
     if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData) {
       logButtonClick('quran_word_pronounce');
-      onQuranWordClick(word, audioData, playbackRate);
+      onQuranWordClick(word, playbackRate, audioData);
     } else {
       logButtonClick('quran_word');
     }

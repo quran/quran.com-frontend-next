@@ -13,9 +13,10 @@ import Word from 'types/Word';
  * - otherwise, play the 'word by word audio'
  *
  * @param {Word} word
+ * @param {number} playbackRate
  * @param {AudioData} audioData
  */
-const onQuranWordClick = (word: Word, audioData?: AudioData, playbackRate: number) => {
+const onQuranWordClick = (word: Word, playbackRate: number, audioData?: AudioData) => {
   if (window.audioPlayerEl && !window.audioPlayerEl.paused && audioData) {
     const verseTiming = getVerseTimingByVerseKey(word.verseKey, audioData.verseTimings);
     const segment = verseTiming.segments.find(([location]) => word.position === location);
