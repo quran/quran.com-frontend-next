@@ -31,14 +31,16 @@
   align-items: center;
   color: var(--color-success-medium);
   font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
+    margin-inline-end: var(--spacing-large);
   }
 }
 .illustrationContainer {
   display: flex;
   @include breakpoints.tablet {
-    display: inline-block;
+    display: inline-flex;
     height: var(--spacing-mega);
     width: var(--spacing-mega);
   }
