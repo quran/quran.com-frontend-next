@@ -1,0 +1,68 @@
+@use "src/styles/breakpoints";
+@use "src/styles/constants";
+
+.container {
+  box-sizing: border-box;
+  height: var(--banner-height);
+  position: relative;
+  background-color: var(--color-success-faded);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-inline: var(--spacing-medium);
+  padding-block: var(--spacing-xsmall);
+
+  @include breakpoints.tablet {
+    padding-inline: var(--spacing-mega);
+    justify-content: center;
+  }
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  color: var(--color-success-medium);
+  font-size: var(--font-size-small);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal);
+  }
+}
+.illustrationContainer {
+  @include breakpoints.tablet {
+    display: inline-block;
+    height: var(--spacing-mega);
+    width: var(--spacing-mega);
+  }
+  height: var(--spacing-large);
+  width: var(--spacing-large);
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.ctaContainer {
+  padding-inline-end: var(--spacing-mega);
+}
+.cta {
+  margin-inline-start: var(--spacing-medium);
+  font-size: var(--font-size-small);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal);
+  }
+}
+
+.closeButton {
+  color: var(--color-success-medium);
+
+  height: 100%;
+  position: absolute;
+  inset-block-start: 0;
+
+  display: flex;
+  align-items: center;
+
+  inset-inline-end: var(--spacing-small);
+  @include breakpoints.tablet {
+    inset-inline-end: var(--spacing-mega);
+    margin-inline-end: var(--spacing-small);
+  }
+}
