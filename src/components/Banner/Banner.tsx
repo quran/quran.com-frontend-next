@@ -26,7 +26,7 @@ const Banner = ({ text, href, cta, onClick }: BannerProps) => {
         <div className={styles.illustrationContainer}>
           <MoonIllustrationSVG />
         </div>
-        <div>{text}</div>
+        <div className={styles.text}>{text}</div>
       </div>
       <div className={styles.ctaContainer}>
         <Button
