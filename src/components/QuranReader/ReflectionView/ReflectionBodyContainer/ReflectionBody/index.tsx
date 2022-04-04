@@ -31,7 +31,7 @@ import {
  * From reflection data, extract the verse references
  * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
  *
- * @param {Object} reflection
+ * @param {object} reflection
  * @returns {VerseReference[]} verseReferences
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
