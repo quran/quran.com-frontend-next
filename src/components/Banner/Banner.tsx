@@ -5,12 +5,18 @@ import CloseIcon from '../../../public/icons/close.svg';
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 
-import styles from './FundraisingStickyHeader.module.scss';
+import styles from './Banner.module.scss';
 
 import { setIsBannerVisible } from 'src/redux/slices/banner';
 
-const FundraisingStickyBanner = () => {
-  const { t } = useTranslation('common');
+type BannerProps = {
+  onClick?: () => void;
+  href?: string;
+  text: string;
+  cta: string;
+};
+
+const Banner = ({ text, href, cta, onClick }: BannerProps) => {
   const dispatch = useDispatch();
   const closeBanner = () => {
     dispatch(setIsBannerVisible(false));
@@ -21,11 +27,18 @@ const FundraisingStickyBanner = () => {
         <div className={styles.illustrationContainer}>
           <MoonIllustrationSVG />
         </div>
-        <div>{t('fundraising-sticky-banner.title')}</div>
+        <div>{text}</div>
       </div>
       <div className={styles.ctaContainer}>
-        <Button className={styles.cta} size={ButtonSize.Small} type={ButtonType.Success}>
-          {t('fundraising-sticky-banner.cta')}
+        <Button
+          isNewTab
+          href={href}
+          onClick={onClick}
+          className={styles.cta}
+          size={ButtonSize.Small}
+          type={ButtonType.Success}
+        >
+          {cta}
         </Button>
       </div>
       <div className={styles.closeButton}>
@@ -37,4 +50,4 @@ const FundraisingStickyBanner = () => {
   );
 };
 
-export default FundraisingStickyBanner;
+export default Banner;
