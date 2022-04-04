@@ -13,6 +13,7 @@ import { getChapterAudioData } from 'src/api';
 import {
   exitRepeatMode,
   selectIsInRepeatMode,
+  selectPlaybackRate,
   selectRepeatProgress,
   selectRepeatSettings,
   setRepeatProgress,
@@ -53,6 +54,7 @@ const AudioRepeatManager = ({
   const repeatSettings = useSelector(selectRepeatSettings, shallowEqual);
   const repeatProgress = useSelector(selectRepeatProgress, shallowEqual);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
+  const playbackRate = useSelector(selectPlaybackRate);
   const dispatch = useDispatch();
 
   const { data: audioData, isValidating } = useSWRImmutable(
@@ -77,6 +79,10 @@ const AudioRepeatManager = ({
     verseTimingsData: audioData?.verseTimings,
   });
 
+  const play = useCallback(() => {
+    triggerPlayAudio(playbackRate);
+  }, [playbackRate]);
+
   // when delayMultiplier is set, delay the audio after the verse ended
   const delayAudioWhenNeeded = useCallback(() => {
     const delayInMs =
@@ -84,9 +90,9 @@ const AudioRepeatManager = ({
       repeatSettings.delayMultiplier;
     if (delayInMs) {
       triggerPauseAudio();
-      setTimeout(triggerPlayAudio, delayInMs);
+      setTimeout(play, delayInMs);
     }
-  }, [repeatSettings.delayMultiplier]);
+  }, [play, repeatSettings.delayMultiplier]);
 
   /**
    * 1) When the current verse ended,
@@ -136,7 +142,7 @@ const AudioRepeatManager = ({
       triggerSetCurrentTime(verseRangeFrom.timestampFrom / 1000);
       delayAudioWhenNeeded();
       dispatch(setRepeatProgress({ repeatRange: repeatProgress.repeatRange + 1 }));
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
       return null;
     }
 
@@ -149,7 +155,7 @@ const AudioRepeatManager = ({
 
     return null;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTimeInMs]);
+  }, [currentTimeInMs, playbackRate]);
   // We only use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
   // it will cause the hook to execute dispatch, setCurrentTime, delay, etc multiples times, which is unintended
 

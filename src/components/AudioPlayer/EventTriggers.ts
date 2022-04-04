@@ -4,8 +4,9 @@
  * blocked by browsers.
  */
 
-export const triggerPlayAudio = () => {
+export const triggerPlayAudio = (playbackRate: number) => {
   if (process.browser && window) {
+    window.audioPlayerEl.playbackRate = playbackRate;
     window.audioPlayerEl.play();
   }
 };
@@ -52,14 +53,14 @@ export const triggerSeek = (duration: number) => {
  * @param timestamp timestamp in seconds
  */
 const AUDIO_PLAYER_STATE_READY = 4; // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
-export const playFromTimestamp = (timestamp: number) => {
+export const playFromTimestamp = (timestamp: number, playbackRate: number) => {
   if (window.audioPlayerEl.readyState === AUDIO_PLAYER_STATE_READY) {
     triggerSetCurrentTime(timestamp);
-    triggerPlayAudio();
+    triggerPlayAudio(playbackRate);
   } else {
     const playWhenReady = () => {
       triggerSetCurrentTime(timestamp);
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
       window.audioPlayerEl.removeEventListener('canplaythrough', playWhenReady);
     };
     window.audioPlayerEl.addEventListener('canplaythrough', playWhenReady);
