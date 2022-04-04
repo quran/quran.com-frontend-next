@@ -14,29 +14,31 @@ import storage from 'redux-persist/lib/storage';
 import { getStoreInitialState } from './defaultSettings/util';
 import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
-import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
-import audioPlayerState from './slices/AudioPlayer/state';
-import commandBarPersistConfig from './slices/CommandBar/persistConfig';
-import commandBar from './slices/CommandBar/state';
-import defaultSettings from './slices/defaultSettings';
-import navbar from './slices/navbar';
-import bookmarks from './slices/QuranReader/bookmarks';
-import contextMenu from './slices/QuranReader/contextMenu';
-import fontFaces from './slices/QuranReader/font-faces';
-import highlightedLocation from './slices/QuranReader/highlightedLocation';
-import notes from './slices/QuranReader/notes';
-import readingPreferences from './slices/QuranReader/readingPreferences';
-import readingTracker from './slices/QuranReader/readingTracker';
-import readingViewVerse from './slices/QuranReader/readingViewVerse';
-import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
-import quranReaderStyles from './slices/QuranReader/styles';
-import tafsirs from './slices/QuranReader/tafsirs';
-import translations from './slices/QuranReader/translations';
-import radio from './slices/radio';
-import search from './slices/Search/search';
-import theme from './slices/theme';
-import voiceSearch from './slices/voiceSearch';
-import welcomeMessage from './slices/welcomeMessage';
+import {
+  audioPlayerPersistConfig,
+  audioPlayerState,
+  commandBarPersistConfig,
+  commandBar,
+  defaultSettings,
+  navbar,
+  bookmarks,
+  contextMenu,
+  fontFaces,
+  highlightedLocation,
+  notes,
+  readingPreferences,
+  readingTracker,
+  readingViewVerse,
+  sidebarNavigation,
+  quranReaderStyles,
+  tafsirs,
+  translations,
+  radio,
+  search,
+  theme,
+  voiceSearch,
+  welcomeMessage,
+} from './slices';
 
 const persistConfig = {
   key: 'root',
