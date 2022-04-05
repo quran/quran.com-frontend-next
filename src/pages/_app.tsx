@@ -26,6 +26,7 @@ import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
+import 'src/styles/variables.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
