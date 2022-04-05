@@ -69,7 +69,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             <div className={styles.actionItem}>
               <BookmarkIcon verseKey={verse.verseKey} />
             </div>
-            <div className={styles.actionItem}>
+            <div className={classNames(styles.actionItem, styles.priorityAction)}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}
                 timestamp={verse.timestamps.timestampFrom}
