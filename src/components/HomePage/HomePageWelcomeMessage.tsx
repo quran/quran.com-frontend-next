@@ -33,7 +33,11 @@ const HomePageWelcomeMessage = () => {
           i18nKey="home:welcome.body"
           components={[
             <a
-              onClick={() => logEvent('fundraising_welcome_message')}
+              onClick={() =>
+                logEvent('donate_button_clicked', {
+                  type: 'welcome_message',
+                })
+              }
               href="https://donate.quran.com"
               target="_blank"
               rel="noreferrer"
