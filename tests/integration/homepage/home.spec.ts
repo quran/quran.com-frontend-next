@@ -11,6 +11,6 @@ test('Navigation drawer icon opens the drawer when clicked', async ({ page }) =>
   // 2. Click to open the drawer [aria-label="Open Navigation Drawer"]
   await page.locator('[aria-label="Open Navigation Drawer"]').click();
 
-  // 3. Make sure the navigation drawer is not visible after opening it
+  // 3. Make sure the navigation drawer is visible after opening it
   await expect(page.locator('text=Menu')).toBeVisible();
 });
