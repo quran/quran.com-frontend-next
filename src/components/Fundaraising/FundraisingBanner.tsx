@@ -5,6 +5,8 @@ import Button, { ButtonType } from '../dls/Button/Button';
 
 import styles from './FundraisingBanner.module.scss';
 
+import { logEvent } from 'src/utils/eventLogger';
+
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
   return (
@@ -13,6 +15,11 @@ const FundraisingBanner = () => {
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
       <Button
         href="https://donate.quran.com"
+        onClick={() => {
+          logEvent('donate_button_clicked', {
+            source: 'sidebar_banner',
+          });
+        }}
         isNewTab
         type={ButtonType.Success}
         className={styles.ctaContainer}

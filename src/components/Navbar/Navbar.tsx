@@ -11,7 +11,7 @@ import NavbarBody from './NavbarBody';
 
 import { selectIsBannerVisible } from 'src/redux/slices/banner';
 import { selectNavbar } from 'src/redux/slices/navbar';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logEvent } from 'src/utils/eventLogger';
 
 const Navbar = () => {
   const { t } = useTranslation('common');
@@ -27,7 +27,9 @@ const Navbar = () => {
             text={t('fundraising-sticky-banner.title')}
             href="https://donate.quran.com"
             onClick={() => {
-              logButtonClick('banner_cta');
+              logEvent('donate_button_clicked', {
+                source: 'sticky_banner',
+              });
             }}
           />
         )}
