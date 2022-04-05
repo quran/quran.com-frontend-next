@@ -27,7 +27,7 @@ const Navbar = () => {
             text={t('fundraising-sticky-banner.title')}
             href="https://donate.quran.com"
             onClick={() => {
-              logButtonClick('banner_cta');
+              logButtonClick('fundraising_banner');
             }}
           />
         )}

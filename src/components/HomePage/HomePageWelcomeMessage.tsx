@@ -12,6 +12,7 @@ import {
   selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
 } from 'src/redux/slices/welcomeMessage';
+import { logEvent } from 'src/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('home');
@@ -31,7 +32,13 @@ const HomePageWelcomeMessage = () => {
         <Trans
           i18nKey="home:welcome.body"
           components={[
-            <a href="https://donate.quran.com" target="_blank" rel="noreferrer" key="0" />,
+            <a
+              onClick={() => logEvent('fundraising_welcome_message')}
+              href="https://donate.quran.com"
+              target="_blank"
+              rel="noreferrer"
+              key="0"
+            />,
             <span key="1" />,
             <br key="2" />,
           ]}
