@@ -17,7 +17,7 @@ const FundraisingBanner = () => {
         href="https://donate.quran.com"
         onClick={() => {
           logEvent('donate_button_clicked', {
-            type: 'sidebar_banner',
+            source: 'sidebar_banner',
           });
         }}
         isNewTab

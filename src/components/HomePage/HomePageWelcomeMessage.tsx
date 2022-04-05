@@ -35,7 +35,7 @@ const HomePageWelcomeMessage = () => {
             <a
               onClick={() =>
                 logEvent('donate_button_clicked', {
-                  type: 'welcome_message',
+                  source: 'welcome_message',
                 })
               }
               href="https://donate.quran.com"

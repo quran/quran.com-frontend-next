@@ -28,7 +28,7 @@ const Navbar = () => {
             href="https://donate.quran.com"
             onClick={() => {
               logEvent('donate_button_clicked', {
-                type: 'sticky_banner',
+                source: 'sticky_banner',
               });
             }}
           />
