@@ -1,0 +1,90 @@
+@use "src/styles/breakpoints";
+
+.container {
+  box-sizing: border-box;
+  height: var(--banner-height);
+  position: relative;
+  background-color: var(--color-success-faded);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-inline: var(--spacing-medium);
+  padding-block: var(--spacing-xsmall);
+
+  @include breakpoints.tablet {
+    position: absolute;
+    display: inline-flex;
+    background-color: transparent;
+    padding-inline: var(--spacing-mega);
+    justify-content: center;
+    max-width: calc(20 * var(--spacing-mega));
+    inset-inline-start: 0;
+    inset-inline-end: 0;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+  }
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  color: var(--color-success-medium);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-semibold);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal);
+    margin-inline-end: var(--spacing-large);
+  }
+}
+.illustrationContainer {
+  display: flex;
+  @include breakpoints.tablet {
+    display: inline-flex;
+    height: var(--spacing-mega);
+    width: var(--spacing-mega);
+  }
+  height: var(--spacing-large);
+  width: var(--spacing-large);
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.ctaContainer {
+  padding-inline-end: var(--spacing-mega);
+  @include breakpoints.tablet {
+    padding-inline-end: calc(1.5 * var(--spacing-medium));
+  }
+}
+.cta {
+  margin-inline-start: var(--spacing-medium);
+  font-size: var(--font-size-small);
+  padding-inline: var(--spacing-small);
+  padding-block: var(--spacing-xxsmall);
+  font-weight: var(--font-weight-semibold);
+  display: inline-block;
+  height: auto;
+  @include breakpoints.tablet {
+    font-size: 14px; // hard code value for tablet to make the sizing looks right
+  }
+}
+
+.closeButton {
+  color: var(--color-success-medium);
+
+  height: 100%;
+  position: absolute;
+  inset-block-start: 0;
+
+  display: flex;
+  align-items: center;
+
+  inset-inline-end: var(--spacing-small);
+  @include breakpoints.tablet {
+    position: relative;
+    margin-inline-start: var(--spacing-xxsmall);
+  }
+}
+
+.text {
+  line-height: normal;
+}

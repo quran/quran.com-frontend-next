@@ -16,6 +16,7 @@ import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
+import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
@@ -58,6 +59,7 @@ const persistConfig = {
     'defaultSettings',
     'sidebarNavigation',
     'radio',
+    'banner',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -83,6 +85,7 @@ export const rootReducer = combineReducers({
   sidebarNavigation,
   radio,
   readingViewVerse,
+  banner,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

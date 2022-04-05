@@ -12,7 +12,7 @@ import { getChapterData } from 'src/utils/chapter';
 const SEEK_DURATION_SECONDS = 5;
 
 type MediaSessionApiListenersProps = {
-  play: () => void;
+  play: (playbackRate: number) => void;
   pause: () => void;
   seek: (duration: number) => void;
   playPreviousTrack: () => void;
@@ -41,7 +41,7 @@ const MediaSessionApiListeners = ({
   const stationInfo = useCurrentStationInfo();
   const chaptersData = useGetChaptersData(locale);
 
-  const { isRadioMode } = audioPlayerState;
+  const { isRadioMode, playbackRate } = audioPlayerState;
 
   const getRadioMediaMetadata = useCallback(async () => {
     return new MediaMetadata({
@@ -80,14 +80,18 @@ const MediaSessionApiListeners = ({
     }
   }, [getAudioMediaMetadata, getRadioMediaMetadata, isRadioMode]);
 
+  const playAudioWithPlaybackRate = useCallback(() => {
+    play(playbackRate);
+  }, [play, playbackRate]);
+
   useEffect(() => {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.setActionHandler('play', play);
+      navigator.mediaSession.setActionHandler('play', playAudioWithPlaybackRate);
       navigator.mediaSession.setActionHandler('pause', pause);
       navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack);
       navigator.mediaSession.setActionHandler('nexttrack', playNextTrack);
     }
-  }, [play, pause, playPreviousTrack, playNextTrack]);
+  }, [play, pause, playPreviousTrack, playNextTrack, playAudioWithPlaybackRate]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {

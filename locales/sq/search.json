@@ -5,7 +5,7 @@
     "language-select": "Zgjidhni një gjuhë",
     "reset": "rivendosur",
     "search": "Kërko",
-    "search-desc": "Kërkoni korpusin e Kuranit të Shenjtë dhe përkthimet e tij duke përdorur një motor kërkimi shumëgjuhësh të fuqishëm dhe shumë të saktë.",
+    "search-desc": "Kërkoni permbajtjen e Kuranit të Shenjtë dhe përkthimet e tij duke përdorur një motor kërkimi shumëgjuhësh të fuqishëm dhe me saktësi të lartë.",
     "search-title": "Kërko për \" {{searchQuery}} \"",
     "translation-select": "Zgjidhni një përkthim"
 }

@@ -9,7 +9,7 @@
         "play-surah": "Luaj suren {{surahName}}",
         "read-ayah-refls": "Lexoni Reflektime të Ajetit",
         "select-lng": "Zgjidh gjuhen",
-        "share-ayah": "Shpërndaje Ajet",
+        "share-ayah": "Shpërndaje Ajetin",
         "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit"
     },
     "audio": {
@@ -50,13 +50,13 @@
         "select-reciter": "Zgjidhni Recitues",
         "title": "Audio"
     },
-    "ayah": "Ajah",
+    "ayah": "Ajeti",
     "ayahs": "Ajetet",
     "beta": "Beta",
     "bookmark": "Shënoni faqeshënues",
     "bookmarked": "Shënuar si faqeshënues",
-    "both": "te dyja",
-    "cancel": "Anulo",
+    "both": "të dyja",
+    "cancel": "Anullo",
     "click-here": "Kliko këtu",
     "close": "Mbylle",
     "command-bar": {
@@ -76,7 +76,7 @@
     },
     "continue": "Vazhdoni",
     "copied": "E kopjuar",
-    "copied-to-clipboard": "Kopjuar në kujtesën e fragmenteve",
+    "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
     "copy": "Kopjo",
     "counter": {
         "decrease": "Ulje",
@@ -94,7 +94,7 @@
         "16_lines": "16 rreshta",
         "code_v1": "Kompleksi Mbreti Fahad V1",
         "code_v2": "Kompleksi King Fahad V2",
-        "font-size": "Përmasa e germave",
+        "font-size": "Përmasa e gërmave",
         "lines": "Linjat",
         "qcf-desc": "Fontet KPFG ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
@@ -110,9 +110,13 @@
         "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
     },
     "from": "Nga",
+    "fundraising-sticky-banner": {
+        "cta": "Dhuroni",
+        "title": "Mbështetni Quran.com këtë Ramazan"
+    },
     "fundraising": {
         "cta": "DHURONI",
-        "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+        "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të vazhdojmë operimin, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
         "title": "Bëhuni një donator mujor"
     },
     "help": "Ndihmë",
@@ -121,8 +125,8 @@
     "input": {
         "clear": "Qartë"
     },
-    "juz": "Juz",
-    "language": "Gjuhe",
+    "juz": "Xhuz",
+    "language": "Gjuhë",
     "languages": "Gjuhët",
     "less": "Më pak",
     "loading": "Po ngarkohet",
@@ -134,22 +138,22 @@
     "network": "Rrjeti",
     "next": "Tjetra",
     "next-ayah": "Ajeti tjetër",
-    "no": "Nr",
-    "none": "Asnje",
+    "no": "Jo",
+    "none": "Asnjëra",
     "off": "Joaktiv",
     "on": "Aktiv",
     "page": "Faqe",
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
-    "popular-links": "Lidhje popullore",
+    "popular-links": "Kërkimet e preferuara",
     "powered-by": "Mundësuar nga",
     "prev": "E mëparshme",
     "previous-ayah": "Ajeti i mëparshëm",
     "privacy": "Privatësia",
     "product-updates": "Përditësimet e produktit",
     "q-reflect": "Kurani Reflekto",
-    "quran-com": "Kurani.com",
-    "quran-radio": "Radio Kurani",
+    "quran-com": "Quran.com",
+    "quran-radio": "Kuran Radio",
     "reading-preference": {
         "reading": "Leximi",
         "translation": "Përkthimi"
@@ -160,7 +164,7 @@
     "remove": "Hiq",
     "retry": "Provo sërish",
     "search-for": "Kërko për \"{{searchQuery}}\"",
-    "search-results": "{{count}} rezultate kërkimi",
+    "search-results": "{{count}} rezultatet e  kërkimit",
     "search": {
         "filters": "Filtrat",
         "hint": "Provoni të kërkoni për",
@@ -178,7 +182,7 @@
         "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
         "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
         "reading-experience": "Përvoja e të lexuarit",
-        "reset-cta": "Rivendos cilësimet",
+        "reset-cta": "Rivendos cilësimet e paracaktuara",
         "reset-notif": "Cilësimet tuaja janë rivendosur në ato të paracaktuara",
         "search-reciter": "Kërko Recitues",
         "search-tafsirs": "Kërkoni tefsirë",
@@ -186,18 +190,18 @@
         "selected-reciter": "Recitues i zgjedhur",
         "selected-tafsirs": "Tefsire të zgjedhura",
         "selected-translations": "Përkthime të zgjedhura",
-        "show-tooltip-when-playing-audio": "Shfaq këshillën e veglave kur luhet audio",
+        "show-tooltip-when-playing-audio": "Shfaq mesazhin sugjerues kur luhet audio",
         "title": "Cilësimet",
-        "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në udhëzuesin e veglave ndërsa luani ayah",
+        "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në mesazhin sugjerues ndërsa luani ayah",
         "value-and-other": "{{value}} , dhe {{othersCount}} të tjera",
         "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
         "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
         "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
     },
     "share": "Shpërndaje",
-    "shared": "Lidhja është kopjuar në kujtesën e fragmenteve!",
+    "shared": "Lidhja është kopjuar në kujtesë!",
     "sidebar": {
-        "search-juz": "Kërko Juz",
+        "search-juz": "Kërko Xhuzin",
         "search-page": "Kërko Faqja",
         "search-surah": "Kërko suren",
         "try-navigating-with": "Këshillë: provoni të lundroni me"
@@ -227,26 +231,26 @@
     "themes": {
         "auto": "Auto",
         "dark": "E errët",
-        "light": "Drita",
+        "light": "Dritë",
         "sepia": "Sepia",
         "system": "Sistemi",
         "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë\/errësirë"
     },
-    "to": "te",
-    "tooltip": "Këshillë mjeti",
-    "tooltip-trans-lang": "Gjuha e këshillës së veglave",
+    "to": "tek",
+    "tooltip": "Mesazh sugjerues",
+    "tooltip-trans-lang": "Gjuha e mesazheve sugjeruese",
     "translation": "Përkthimi",
     "translations": "Përkthime",
     "transliteration": "Transliterimi",
     "type": "Lloji",
-    "verse": "Ajeti",
-    "verse-bookmark-removed": "Faqerojtësi i vargut u hoq!",
+    "verse": "Vargu",
+    "verse-bookmark-removed": "Faqeruajtësi i vargut u hoq!",
     "verse-bookmarked": "Vargu u shënua!",
     "verses": "Vargjet",
     "view": "Pamje",
     "voice": {
         "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
-        "error": "Nje gabim ka ndodhur.Ju lutemi, provojeni perseri me vone. Ose shkarkoni",
+        "error": "Një gabim ka ndodhur.Ju lutemi, provojeni përsëri më vonë. Ose shkarkoni",
         "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
         "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
         "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet.",
@@ -256,13 +260,13 @@
     },
     "wbw": "Fjalë Për Fjalë",
     "wbw-trans-lang": "Fjalë për fjalë Gjuha",
-    "wbw-translation": "Përkthim fjalë pas fjale",
-    "wbw-transliteration": "Transliterimi fjalë për fjalë",
+    "wbw-translation": "Përkthimi fjalë pas fjale",
+    "wbw-transliteration": "Përkthimi fjalë për fjalë",
     "word-click": {
         "no-audio": "Nuk ka audio",
         "play-audio": "Luaj Audio",
         "title": "Klikoni në fjalë"
     },
-    "word-tooltip": "Këshillë për veglat e fjalës",
-    "yes": "po"
+    "word-tooltip": "Mesazh sugjerues për fjalët",
+    "yes": "Po"
 }
