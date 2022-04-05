@@ -110,14 +110,14 @@
         "title": "Read, study, and learn The Noble Quran."
     },
     "from": "From",
+    "fundraising-sticky-banner": {
+        "cta": "Donate",
+        "title": "Support Quran.com this Ramadan"
+    },
     "fundraising": {
         "cta": "DONATE",
         "description": "Monthly donations help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
         "title": "Become A Monthly Donor"
-    },
-    "fundraising-sticky-banner": {
-        "title": "Support Quran.com this Ramadan",
-        "cta": "Donate"
     },
     "help": "Help",
     "hizb": "Hizb",

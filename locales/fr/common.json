@@ -110,6 +110,10 @@
         "title": "Lisez, étudiez et apprenez Le Noble Coran."
     },
     "from": "De",
+    "fundraising-sticky-banner": {
+        "cta": "Faire un don",
+        "title": "Soutenez Quran.com ce Ramadan"
+    },
     "fundraising": {
         "cta": "FAIRE UN DON",
         "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",

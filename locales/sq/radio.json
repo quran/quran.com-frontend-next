@@ -3,7 +3,7 @@
     "curated-station": {
         "juz-amma": {
             "description": "Dëgjoni Xhuzin e fundit të Kuranit",
-            "title": "Juz Amma"
+            "title": "Xhuzi Amma"
         },
         "popular-recitations": {
             "description": "Furnizimi i përditshëm i recitimeve",
@@ -20,7 +20,7 @@
     },
     "curated-stations": "Stacione të kuruara",
     "pause-radio": "Ndalo radion",
-    "play-radio": "Luaj Radio",
+    "play-radio": "Luaj Radion",
     "radio-desc": "Dëgjoni pa ndalur recitimin e bukur të Kuranit të Shenjtë nga recitues të ndryshëm.",
     "reciter-stations": "Stacione recituese"
 }
