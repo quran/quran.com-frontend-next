@@ -8,6 +8,13 @@ import styles from './PopoverMenu.module.scss';
 import useDirection from 'src/hooks/useDirection';
 import { Direction } from 'src/utils/locale';
 
+export enum PopoverMenuSide {
+  TOP = 'top',
+  RIGHT = 'right',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+}
+
 type PopoverMenuProps = {
   isOpen?: boolean;
   children: React.ReactNode;
@@ -15,6 +22,7 @@ type PopoverMenuProps = {
   isPortalled?: boolean;
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
+  side?: PopoverMenuSide;
 };
 const PopoverMenu = ({
   children,
@@ -23,6 +31,7 @@ const PopoverMenu = ({
   isPortalled = true,
   isModal = true,
   onOpenChange,
+  side = PopoverMenuSide.BOTTOM,
 }: PopoverMenuProps) => {
   const direction = useDirection();
   return (
@@ -37,7 +46,7 @@ const PopoverMenu = ({
           <span>{trigger}</span>
         </PrimitiveDropdownMenu.Trigger>
       )}
-      <PrimitiveDropdownMenu.Content className={styles.content} portalled={isPortalled}>
+      <PrimitiveDropdownMenu.Content className={styles.content} portalled={isPortalled} side={side}>
         {children}
       </PrimitiveDropdownMenu.Content>
     </PrimitiveDropdownMenu.Root>

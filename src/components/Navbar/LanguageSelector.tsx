@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
 import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
+import PopoverMenu, { PopoverMenuSide } from '../dls/PopoverMenu/PopoverMenu';
 
 import styles from './LanguageSelector.module.scss';
 
@@ -28,9 +28,13 @@ const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-sin
 
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
+  side?: PopoverMenuSide;
 };
 
-const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => {
+const LanguageSelector = ({
+  shouldShowSelectedLang,
+  side = PopoverMenuSide.BOTTOM,
+}: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
@@ -63,6 +67,7 @@ const LanguageSelector = ({ shouldShowSelectedLang }: LanguageSelectorProps) => 
 
   return (
     <PopoverMenu
+      side={side}
       trigger={
         shouldShowSelectedLang ? (
           <Button
