@@ -6,6 +6,7 @@ name: Playwright Tests
 #     branches: [master]
 #   pull_request:
 #     branches: [master]
+
 on: deployment_status
 jobs:
   get_vercel_deployment_url:
