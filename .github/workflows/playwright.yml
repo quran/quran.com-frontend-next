@@ -1,4 +1,3 @@
-# reference: https://kontent.ai/blog/next-js-playwright-tests-github-action/
 name: Playwright Tests
 on:
   deployment_status:
