@@ -1,12 +1,8 @@
 # reference: https://kontent.ai/blog/next-js-playwright-tests-github-action/
 name: Playwright Tests
-# TODO: revert this back once ready for merging
-# on:
-#   push:
-#     branches: [master]
-#   pull_request:
-#     branches: [master]
-on: deployment_status
+on:
+  deployment_status:
+    branches: [master]
 jobs:
   test_integration:
     name: Playwright Tests
