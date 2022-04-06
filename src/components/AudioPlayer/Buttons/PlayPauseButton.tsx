@@ -14,6 +14,7 @@ import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
+  exitRepeatMode,
   loadAndPlayAudioData,
   selectAudioData,
   selectAudioDataStatus,
@@ -90,6 +91,18 @@ const PlayPauseButton = () => {
     );
 
   const [firstCurrentReadingChapterId] = currentReadingChapterIds; // get the first chapter in this page
+
+  const onStartOverClicked = () => {
+    dispatch(exitRepeatMode());
+    dispatch(loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }));
+    setIsMismatchModalVisible(false);
+  };
+
+  const onContinueClicked = () => {
+    triggerPlayAudio(playbackRate);
+    setIsMismatchModalVisible(false);
+  };
+
   return (
     <>
       {button}
@@ -101,16 +114,8 @@ const PlayPauseButton = () => {
         currentReadingChapter={
           getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
         }
-        onContinue={() => {
-          triggerPlayAudio(playbackRate);
-          setIsMismatchModalVisible(false);
-        }}
-        onStartOver={() => {
-          dispatch(
-            loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }),
-          );
-          setIsMismatchModalVisible(false);
-        }}
+        onContinue={onContinueClicked}
+        onStartOver={onStartOverClicked}
       />
     </>
   );
