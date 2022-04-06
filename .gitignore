@@ -61,3 +61,7 @@ public/sw.js.map
 # sitemap files
 public/sitemap*
 public/robots.txt
+
+# playwright
+test-results/
+playwright-report/
