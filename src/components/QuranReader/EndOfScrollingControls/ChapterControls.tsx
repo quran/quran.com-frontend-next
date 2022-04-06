@@ -38,7 +38,6 @@ const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
       )}
       <Button
         type={ButtonType.Secondary}
-        href={getSurahNavigationUrl(chapterNumber + 1)}
         onClick={() => {
           logButtonClick('chapter_control_scroll_to_beginning');
           scrollToTop();
