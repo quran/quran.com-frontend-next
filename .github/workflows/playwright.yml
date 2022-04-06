@@ -1,4 +1,4 @@
-name: Purge CF Cache
+name: Playwright Test
 
 on: [deployment_status]
 
