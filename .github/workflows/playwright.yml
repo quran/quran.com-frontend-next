@@ -6,23 +6,16 @@ name: Playwright Tests
 #     branches: [master]
 #   pull_request:
 #     branches: [master]
-on: [push, pull_request]
+on: deployment_status
 jobs:
-  test_setup:
-    name: Test setup
+  get_vercel_deployment_url:
+    name: Get Vercel deployment URL
     runs-on: ubuntu-latest
+    if: ${{ github.event.deployment_status.state == 'success' }}
     outputs:
-      preview_url: ${{ steps.waitForVercelPreviewDeployment.outputs.url }}
-    steps:
-      # We’re using the Wait For Vercel Preview GitHub Action to do the waiting for us. It periodically checks the issue comments and outputs the preview URL when the deployment is ready.
-      - name: Wait for Vercel preview deployment to be ready
-        uses: patrickedqvist/wait-for-vercel-preview@main
-        id: waitForVercelPreviewDeployment
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          max_timeout: 300
+      preview_url: ${{ github.event.deployment_status.target_url }}
   test_integration:
-    needs: test_setup
+    needs: get_vercel_deployment_url
     name: Playwright Tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
