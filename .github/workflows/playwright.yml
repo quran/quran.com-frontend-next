@@ -1,13 +1,7 @@
-# reference: https://kontent.ai/blog/next-js-playwright-tests-github-action/
-name: Playwright Tests
-# TODO: revert this back once ready for merging
-# on:
-#   push:
-#     branches: [master]
-#   pull_request:
-#     branches: [master]
+name: Purge CF Cache
 
-on: deployment_status
+on: [deployment_status]
+
 jobs:
   get_vercel_deployment_url:
     name: Get Vercel deployment URL
@@ -15,28 +9,14 @@ jobs:
     if: ${{ github.event.deployment_status.state == 'success' }}
     outputs:
       preview_url: ${{ github.event.deployment_status.target_url }}
-  test_integration:
+  print_preview_url:
     needs: get_vercel_deployment_url
     name: Playwright Tests
-    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "14.x"
-      - name: Install dependencies
-        run: yarn ci
-      - name: Install Playwright
-        run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: yarn run test:integration
+      - name: Print preview url
         env:
-          PLAYWRIGHT_TEST_BASE_URL: ${{ needs.test_setup.outputs.preview_url }}
-          CI: true
-      - uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        run: |
+          echo '${{ needs.test_setup.outputs.preview_url }}'
