@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('/');
 });
 
 test('Navigation drawer icon opens the drawer when clicked', async ({ page }) => {
