@@ -1,16 +1,34 @@
-name: Playwright Test
-
-on: [deployment_status]
-
+# reference: https://kontent.ai/blog/next-js-playwright-tests-github-action/
+name: Playwright Tests
+# TODO: revert this back once ready for merging
+# on:
+#   push:
+#     branches: [master]
+#   pull_request:
+#     branches: [master]
+on: deployment_status
 jobs:
-  print_preview_url:
+  test_integration:
     name: Playwright Tests
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-    if: ${{ github.event.deployment_status.state == 'success' }}
     steps:
       - uses: actions/checkout@v2
-      - name: Print preview url
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - name: Install dependencies
+        run: yarn install
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: yarn run test:integration
         env:
-          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-        run: |
-          echo '${{ github.event.deployment_status.target_url }}'
+          PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          CI: true
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
