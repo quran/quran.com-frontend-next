@@ -4,7 +4,6 @@ on: [deployment_status]
 
 jobs:
   print_preview_url:
-    needs: get_vercel_deployment_url
     name: Playwright Tests
     runs-on: ubuntu-latest
     if: ${{ github.event.deployment_status.state == 'success' }}
