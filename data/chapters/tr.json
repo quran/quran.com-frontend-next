@@ -4,797 +4,911 @@
         "transliteratedName": "Al-Fatihah",
         "versesCount": 7,
         "translatedName": "Fâtiha",
-        "slug": "fatiha"
+        "slug": "fatiha",
+        "nameArabic": "ٱلْفَاتِحَةِ"
     },
     "2": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Baqarah",
         "versesCount": 286,
         "translatedName": "Bakara",
-        "slug": "bakara"
+        "slug": "bakara",
+        "nameArabic": "البَقَرَةِ"
     },
     "3": {
         "revelationPlace": "madinah",
         "transliteratedName": "Ali 'Imran",
         "versesCount": 200,
         "translatedName": "Âl-i İmrân",
-        "slug": "al-i-imran"
+        "slug": "al-i-imran",
+        "nameArabic": "آلِ عِمۡرَانَ"
     },
     "4": {
         "revelationPlace": "madinah",
         "transliteratedName": "An-Nisa",
         "versesCount": 176,
         "translatedName": "Nisâ",
-        "slug": "nisa"
+        "slug": "nisa",
+        "nameArabic": "النِّسَاءِ"
     },
     "5": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Ma'idah",
         "versesCount": 120,
         "translatedName": "Mâide",
-        "slug": "maide"
+        "slug": "maide",
+        "nameArabic": "المَائـِدَةِ"
     },
     "6": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-An'am",
         "versesCount": 165,
         "translatedName": "En'âm",
-        "slug": "enam"
+        "slug": "enam",
+        "nameArabic": "الأَنۡعَامِ"
     },
     "7": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-A'raf",
         "versesCount": 206,
         "translatedName": "A'râf",
-        "slug": "araf"
+        "slug": "araf",
+        "nameArabic": "الأَعۡرَافِ"
     },
     "8": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Anfal",
         "versesCount": 75,
         "translatedName": "Enfâl",
-        "slug": "enfal"
+        "slug": "enfal",
+        "nameArabic": "الأَنفَالِ"
     },
     "9": {
         "revelationPlace": "madinah",
         "transliteratedName": "At-Tawbah",
         "versesCount": 129,
         "translatedName": "Tevbe",
-        "slug": "tevbe"
+        "slug": "tevbe",
+        "nameArabic": "التَّوۡبَةِ"
     },
     "10": {
         "revelationPlace": "makkah",
         "transliteratedName": "Yunus",
         "versesCount": 109,
         "translatedName": "Yûnus",
-        "slug": "yunus"
+        "slug": "yunus",
+        "nameArabic": "يُونُسَ"
     },
     "11": {
         "revelationPlace": "makkah",
         "transliteratedName": "Hud",
         "versesCount": 123,
         "translatedName": "Hûd",
-        "slug": "hud"
+        "slug": "hud",
+        "nameArabic": "هُودٍ"
     },
     "12": {
         "revelationPlace": "makkah",
         "transliteratedName": "Yusuf",
         "versesCount": 111,
         "translatedName": "Yûsuf",
-        "slug": "yusuf"
+        "slug": "yusuf",
+        "nameArabic": "يُوسُفَ"
     },
     "13": {
         "revelationPlace": "madinah",
         "transliteratedName": "Ar-Ra'd",
         "versesCount": 43,
         "translatedName": "Ra'd",
-        "slug": "rad"
+        "slug": "rad",
+        "nameArabic": "الرَّعۡدِ"
     },
     "14": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ibrahim",
         "versesCount": 52,
         "translatedName": "İbrâhîm",
-        "slug": "ibrahim"
+        "slug": "ibrahim",
+        "nameArabic": "إِبۡرَاهِيمَ"
     },
     "15": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Hijr",
         "versesCount": 99,
         "translatedName": "Hicr",
-        "slug": "hicr"
+        "slug": "hicr",
+        "nameArabic": "الحِجۡرِ"
     },
     "16": {
         "revelationPlace": "makkah",
         "transliteratedName": "An-Nahl",
         "versesCount": 128,
         "translatedName": "Nahl",
-        "slug": "nahl"
+        "slug": "nahl",
+        "nameArabic": "النَّحۡلِ"
     },
     "17": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Isra",
         "versesCount": 111,
         "translatedName": "İsrâ",
-        "slug": "isra"
+        "slug": "isra",
+        "nameArabic": "الإِسۡرَاءِ"
     },
     "18": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Kahf",
         "versesCount": 110,
         "translatedName": "Kehf",
-        "slug": "kehf"
+        "slug": "kehf",
+        "nameArabic": "الكَهۡفِ"
     },
     "19": {
         "revelationPlace": "makkah",
         "transliteratedName": "Maryam",
         "versesCount": 98,
         "translatedName": "Meryem",
-        "slug": "meryem"
+        "slug": "meryem",
+        "nameArabic": "مَرۡيَمَ"
     },
     "20": {
         "revelationPlace": "makkah",
         "transliteratedName": "Taha",
         "versesCount": 135,
         "translatedName": "Tâhâ",
-        "slug": "taha"
+        "slug": "taha",
+        "nameArabic": "طه"
     },
     "21": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Anbya",
         "versesCount": 112,
         "translatedName": "Enbiyâ",
-        "slug": "enbiya"
+        "slug": "enbiya",
+        "nameArabic": "الأَنبِيَاءِ"
     },
     "22": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Hajj",
         "versesCount": 78,
         "translatedName": "Hac",
-        "slug": "hac"
+        "slug": "hac",
+        "nameArabic": "الحَجِّ"
     },
     "23": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Mu'minun",
         "versesCount": 118,
         "translatedName": "Mü'minûn",
-        "slug": "muminun"
+        "slug": "muminun",
+        "nameArabic": "المُؤۡمِنُونَ"
     },
     "24": {
         "revelationPlace": "madinah",
         "transliteratedName": "An-Nur",
         "versesCount": 64,
         "translatedName": "Nûr",
-        "slug": "nur"
+        "slug": "nur",
+        "nameArabic": "النُّورِ"
     },
     "25": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Furqan",
         "versesCount": 77,
         "translatedName": "Furkân",
-        "slug": "furkan"
+        "slug": "furkan",
+        "nameArabic": "الفُرۡقَانِ"
     },
     "26": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ash-Shu'ara",
         "versesCount": 227,
         "translatedName": "Şuarâ",
-        "slug": "suara"
+        "slug": "suara",
+        "nameArabic": "الشُّعَرَاءِ"
     },
     "27": {
         "revelationPlace": "makkah",
         "transliteratedName": "An-Naml",
         "versesCount": 93,
         "translatedName": "Neml",
-        "slug": "neml"
+        "slug": "neml",
+        "nameArabic": "النَّمۡلِ"
     },
     "28": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Qasas",
         "versesCount": 88,
         "translatedName": "Kasas",
-        "slug": "kasas"
+        "slug": "kasas",
+        "nameArabic": "القَصَصِ"
     },
     "29": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-'Ankabut",
         "versesCount": 69,
         "translatedName": "Ankebût",
-        "slug": "ankebut"
+        "slug": "ankebut",
+        "nameArabic": "العَنكَبُوتِ"
     },
     "30": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ar-Rum",
         "versesCount": 60,
         "translatedName": "Rûm",
-        "slug": "rum"
+        "slug": "rum",
+        "nameArabic": "الرُّومِ"
     },
     "31": {
         "revelationPlace": "makkah",
         "transliteratedName": "Luqman",
         "versesCount": 34,
         "translatedName": "Lokmân",
-        "slug": "lokman"
+        "slug": "lokman",
+        "nameArabic": "لُقۡمَانَ"
     },
     "32": {
         "revelationPlace": "makkah",
         "transliteratedName": "As-Sajdah",
         "versesCount": 30,
         "translatedName": "Secde",
-        "slug": "secde"
+        "slug": "secde",
+        "nameArabic": "السَّجۡدَةِ"
     },
     "33": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Ahzab",
         "versesCount": 73,
         "translatedName": "Ahzâb",
-        "slug": "ahzab"
+        "slug": "ahzab",
+        "nameArabic": "الأَحۡزَابِ"
     },
     "34": {
         "revelationPlace": "makkah",
         "transliteratedName": "Saba",
         "versesCount": 54,
         "translatedName": "Sebe'",
-        "slug": "sebe"
+        "slug": "sebe",
+        "nameArabic": "سَبَإٍ"
     },
     "35": {
         "revelationPlace": "makkah",
         "transliteratedName": "Fatir",
         "versesCount": 45,
         "translatedName": "Fâtır",
-        "slug": "fatir"
+        "slug": "fatir",
+        "nameArabic": "فَاطِرٍ"
     },
     "36": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ya-Sin",
         "versesCount": 83,
         "translatedName": "Yâsîn",
-        "slug": "yasin"
+        "slug": "yasin",
+        "nameArabic": "يسٓ"
     },
     "37": {
         "revelationPlace": "makkah",
         "transliteratedName": "As-Saffat",
         "versesCount": 182,
         "translatedName": "Sâffât",
-        "slug": "saffat"
+        "slug": "saffat",
+        "nameArabic": "الصَّافَّاتِ"
     },
     "38": {
         "revelationPlace": "makkah",
         "transliteratedName": "Sad",
         "versesCount": 88,
         "translatedName": "Sâd",
-        "slug": "sad"
+        "slug": "sad",
+        "nameArabic": "صٓ"
     },
     "39": {
         "revelationPlace": "makkah",
         "transliteratedName": "Az-Zumar",
         "versesCount": 75,
         "translatedName": "Zümer",
-        "slug": "zumer"
+        "slug": "zumer",
+        "nameArabic": "الزُّمَرِ"
     },
     "40": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ghafir",
         "versesCount": 85,
         "translatedName": "Mü'min",
-        "slug": "mumin"
+        "slug": "mumin",
+        "nameArabic": "غَافِرٍ"
     },
     "41": {
         "revelationPlace": "makkah",
         "transliteratedName": "Fussilat",
         "versesCount": 54,
         "translatedName": "Fussilet",
-        "slug": "fussilet"
+        "slug": "fussilet",
+        "nameArabic": "فُصِّلَتۡ"
     },
     "42": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ash-Shuraa",
         "versesCount": 53,
         "translatedName": "Şûrâ",
-        "slug": "sura"
+        "slug": "sura",
+        "nameArabic": "الشُّورَىٰ"
     },
     "43": {
         "revelationPlace": "makkah",
         "transliteratedName": "Az-Zukhruf",
         "versesCount": 89,
         "translatedName": "Zuhruf",
-        "slug": "zuhruf"
+        "slug": "zuhruf",
+        "nameArabic": "الزُّخۡرُفِ"
     },
     "44": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ad-Dukhan",
         "versesCount": 59,
         "translatedName": "Duhân",
-        "slug": "duhan"
+        "slug": "duhan",
+        "nameArabic": "الدُّخَانِ"
     },
     "45": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Jathiyah",
         "versesCount": 37,
         "translatedName": "Câsiye",
-        "slug": "casiye"
+        "slug": "casiye",
+        "nameArabic": "الجَاثِيَةِ"
     },
     "46": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Ahqaf",
         "versesCount": 35,
         "translatedName": "Ahkâf",
-        "slug": "ahkaf"
+        "slug": "ahkaf",
+        "nameArabic": "الأَحۡقَافِ"
     },
     "47": {
         "revelationPlace": "madinah",
         "transliteratedName": "Muhammad",
         "versesCount": 38,
         "translatedName": "Muhammed",
-        "slug": "muhammed"
+        "slug": "muhammed",
+        "nameArabic": "مُحَمَّدٍ"
     },
     "48": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Fath",
         "versesCount": 29,
         "translatedName": "Fetih",
-        "slug": "fetih"
+        "slug": "fetih",
+        "nameArabic": "الفَتۡحِ"
     },
     "49": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Hujurat",
         "versesCount": 18,
         "translatedName": "Hucurât",
-        "slug": "hucurat"
+        "slug": "hucurat",
+        "nameArabic": "الحُجُرَاتِ"
     },
     "50": {
         "revelationPlace": "makkah",
         "transliteratedName": "Qaf",
         "versesCount": 45,
         "translatedName": "Kâf",
-        "slug": "kaf"
+        "slug": "kaf",
+        "nameArabic": "قٓ"
     },
     "51": {
         "revelationPlace": "makkah",
         "transliteratedName": "Adh-Dhariyat",
         "versesCount": 60,
         "translatedName": "Zâriyât",
-        "slug": "zariyat"
+        "slug": "zariyat",
+        "nameArabic": "الذَّارِيَاتِ"
     },
     "52": {
         "revelationPlace": "makkah",
         "transliteratedName": "At-Tur",
         "versesCount": 49,
         "translatedName": "Tûr",
-        "slug": "tur"
+        "slug": "tur",
+        "nameArabic": "الطُّورِ"
     },
     "53": {
         "revelationPlace": "makkah",
         "transliteratedName": "An-Najm",
         "versesCount": 62,
         "translatedName": "Necm",
-        "slug": "necm"
+        "slug": "necm",
+        "nameArabic": "النَّجۡمِ"
     },
     "54": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Qamar",
         "versesCount": 55,
         "translatedName": "Kamer",
-        "slug": "kamer"
+        "slug": "kamer",
+        "nameArabic": "القَمَرِ"
     },
     "55": {
         "revelationPlace": "madinah",
         "transliteratedName": "Ar-Rahman",
         "versesCount": 78,
         "translatedName": "Rahmân",
-        "slug": "rahman"
+        "slug": "rahman",
+        "nameArabic": "الرَّحۡمَٰن"
     },
     "56": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Waqi'ah",
         "versesCount": 96,
         "translatedName": "Vâkıa",
-        "slug": "vakia"
+        "slug": "vakia",
+        "nameArabic": "الوَاقِعَةِ"
     },
     "57": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Hadid",
         "versesCount": 29,
         "translatedName": "Hadîd",
-        "slug": "hadid"
+        "slug": "hadid",
+        "nameArabic": "الحَدِيدِ"
     },
     "58": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Mujadila",
         "versesCount": 22,
         "translatedName": "Mücâdele",
-        "slug": "mucadele"
+        "slug": "mucadele",
+        "nameArabic": "المُجَادلَةِ"
     },
     "59": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Hashr",
         "versesCount": 24,
         "translatedName": "Haşr",
-        "slug": "hasr"
+        "slug": "hasr",
+        "nameArabic": "الحَشۡرِ"
     },
     "60": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Mumtahanah",
         "versesCount": 13,
         "translatedName": "Mümtehine",
-        "slug": "mumtehine"
+        "slug": "mumtehine",
+        "nameArabic": "المُمۡتَحنَةِ"
     },
     "61": {
         "revelationPlace": "madinah",
         "transliteratedName": "As-Saf",
         "versesCount": 14,
         "translatedName": "Saf",
-        "slug": "saf"
+        "slug": "saf",
+        "nameArabic": "الصَّفِّ"
     },
     "62": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Jumu'ah",
         "versesCount": 11,
         "translatedName": "Cuma",
-        "slug": "cuma"
+        "slug": "cuma",
+        "nameArabic": "الجُمُعَةِ"
     },
     "63": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Munafiqun",
         "versesCount": 11,
         "translatedName": "Münâfikûn",
-        "slug": "munafikun"
+        "slug": "munafikun",
+        "nameArabic": "المُنَافِقُونَ"
     },
     "64": {
         "revelationPlace": "madinah",
         "transliteratedName": "At-Taghabun",
         "versesCount": 18,
         "translatedName": "Tegâbün",
-        "slug": "tegabun"
+        "slug": "tegabun",
+        "nameArabic": "التَّغَابُنِ"
     },
     "65": {
         "revelationPlace": "madinah",
         "transliteratedName": "At-Talaq",
         "versesCount": 12,
         "translatedName": "Talâk",
-        "slug": "talak"
+        "slug": "talak",
+        "nameArabic": "الطَّلَاقِ"
     },
     "66": {
         "revelationPlace": "madinah",
         "transliteratedName": "At-Tahrim",
         "versesCount": 12,
         "translatedName": "Tahrîm",
-        "slug": "tahrim"
+        "slug": "tahrim",
+        "nameArabic": "التَّحۡرِيمِ"
     },
     "67": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Mulk",
         "versesCount": 30,
         "translatedName": "Mülk",
-        "slug": "mulk"
+        "slug": "mulk",
+        "nameArabic": "المُلۡكِ"
     },
     "68": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Qalam",
         "versesCount": 52,
         "translatedName": "Kalem",
-        "slug": "kalem"
+        "slug": "kalem",
+        "nameArabic": "القَلَمِ"
     },
     "69": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Haqqah",
         "versesCount": 52,
         "translatedName": "Hâkka",
-        "slug": "hakka"
+        "slug": "hakka",
+        "nameArabic": "الحَاقَّةِ"
     },
     "70": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Ma'arij",
         "versesCount": 44,
         "translatedName": "Meâric",
-        "slug": "mearic"
+        "slug": "mearic",
+        "nameArabic": "المَعَارِجِ"
     },
     "71": {
         "revelationPlace": "makkah",
         "transliteratedName": "Nuh",
         "versesCount": 28,
         "translatedName": "Nûh",
-        "slug": "nuh"
+        "slug": "nuh",
+        "nameArabic": "نُوحٍ"
     },
     "72": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Jinn",
         "versesCount": 28,
         "translatedName": "Cin",
-        "slug": "cin"
+        "slug": "cin",
+        "nameArabic": "الجِنِّ"
     },
     "73": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Muzzammil",
         "versesCount": 20,
         "translatedName": "Müzzemmil",
-        "slug": "muzzemmil"
+        "slug": "muzzemmil",
+        "nameArabic": "المُزَّمِّلِ"
     },
     "74": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Muddaththir",
         "versesCount": 56,
         "translatedName": "Müddessir",
-        "slug": "muddessir"
+        "slug": "muddessir",
+        "nameArabic": "المُدَّثِّرِ"
     },
     "75": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Qiyamah",
         "versesCount": 40,
         "translatedName": "Kıyâmet",
-        "slug": "kiyamet"
+        "slug": "kiyamet",
+        "nameArabic": "القِيَامَةِ"
     },
     "76": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Insan",
         "versesCount": 31,
         "translatedName": "İnsân",
-        "slug": "insan"
+        "slug": "insan",
+        "nameArabic": "الإِنسَانِ"
     },
     "77": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Mursalat",
         "versesCount": 50,
         "translatedName": "Mürselât",
-        "slug": "murselat"
+        "slug": "murselat",
+        "nameArabic": "المُرۡسَلَاتِ"
     },
     "78": {
         "revelationPlace": "makkah",
         "transliteratedName": "An-Naba",
         "versesCount": 40,
         "translatedName": "Nebe",
-        "slug": "nebe"
+        "slug": "nebe",
+        "nameArabic": "النَّبَإِ"
     },
     "79": {
         "revelationPlace": "makkah",
         "transliteratedName": "An-Nazi'at",
         "versesCount": 46,
         "translatedName": "Naziât",
-        "slug": "naziat"
+        "slug": "naziat",
+        "nameArabic": "النَّازِعَاتِ"
     },
     "80": {
         "revelationPlace": "makkah",
         "transliteratedName": "'Abasa",
         "versesCount": 42,
         "translatedName": "Abese",
-        "slug": "abese"
+        "slug": "abese",
+        "nameArabic": "عَبَسَ"
     },
     "81": {
         "revelationPlace": "makkah",
         "transliteratedName": "At-Takwir",
         "versesCount": 29,
         "translatedName": "Tekvîr",
-        "slug": "tekvir"
+        "slug": "tekvir",
+        "nameArabic": "التَّكۡوِيرِ"
     },
     "82": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Infitar",
         "versesCount": 19,
         "translatedName": "İnfitâr",
-        "slug": "infitar"
+        "slug": "infitar",
+        "nameArabic": "الانفِطَارِ"
     },
     "83": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Mutaffifin",
         "versesCount": 36,
         "translatedName": "Mutaffifîn",
-        "slug": "mutaffifin"
+        "slug": "mutaffifin",
+        "nameArabic": "المُطَفِّفِينَ"
     },
     "84": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Inshiqaq",
         "versesCount": 25,
         "translatedName": "İnşikâk",
-        "slug": "insikak"
+        "slug": "insikak",
+        "nameArabic": "الانشِقَاقِ"
     },
     "85": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Buruj",
         "versesCount": 22,
         "translatedName": "Burûc",
-        "slug": "buruc"
+        "slug": "buruc",
+        "nameArabic": "البُرُوجِ"
     },
     "86": {
         "revelationPlace": "makkah",
         "transliteratedName": "At-Tariq",
         "versesCount": 17,
         "translatedName": "Târık",
-        "slug": "tarik"
+        "slug": "tarik",
+        "nameArabic": "الطَّارِقِ"
     },
     "87": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-A'la",
         "versesCount": 19,
         "translatedName": "A'lâ",
-        "slug": "ala"
+        "slug": "ala",
+        "nameArabic": "الأَعۡلَىٰ"
     },
     "88": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Ghashiyah",
         "versesCount": 26,
         "translatedName": "Gâşiye",
-        "slug": "gasiye"
+        "slug": "gasiye",
+        "nameArabic": "الغَاشِيَةِ"
     },
     "89": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Fajr",
         "versesCount": 30,
         "translatedName": "Fecr",
-        "slug": "fecr"
+        "slug": "fecr",
+        "nameArabic": "الفَجۡرِ"
     },
     "90": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Balad",
         "versesCount": 20,
         "translatedName": "Beled",
-        "slug": "beled"
+        "slug": "beled",
+        "nameArabic": "البَلَدِ"
     },
     "91": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ash-Shams",
         "versesCount": 15,
         "translatedName": "Şems",
-        "slug": "sems"
+        "slug": "sems",
+        "nameArabic": "الشَّمۡسِ"
     },
     "92": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Layl",
         "versesCount": 21,
         "translatedName": "Leyl",
-        "slug": "leyl"
+        "slug": "leyl",
+        "nameArabic": "اللَّيۡلِ"
     },
     "93": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ad-Duhaa",
         "versesCount": 11,
         "translatedName": "Duhâ",
-        "slug": "duha"
+        "slug": "duha",
+        "nameArabic": "الضُّحَىٰ"
     },
     "94": {
         "revelationPlace": "makkah",
         "transliteratedName": "Ash-Sharh",
         "versesCount": 8,
         "translatedName": "İnşirâh",
-        "slug": "insirah"
+        "slug": "insirah",
+        "nameArabic": "الشَّرۡحِ"
     },
     "95": {
         "revelationPlace": "makkah",
         "transliteratedName": "At-Tin",
         "versesCount": 8,
         "translatedName": "Tîn",
-        "slug": "tin"
+        "slug": "tin",
+        "nameArabic": "التِّينِ"
     },
     "96": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-'Alaq",
         "versesCount": 19,
         "translatedName": "Alak",
-        "slug": "alak"
+        "slug": "alak",
+        "nameArabic": "العَلَقِ"
     },
     "97": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Qadr",
         "versesCount": 5,
         "translatedName": "Kadir",
-        "slug": "kadir"
+        "slug": "kadir",
+        "nameArabic": "القَدۡرِ"
     },
     "98": {
         "revelationPlace": "madinah",
         "transliteratedName": "Al-Bayyinah",
         "versesCount": 8,
         "translatedName": "Beyyine",
-        "slug": "beyyine"
+        "slug": "beyyine",
+        "nameArabic": "البَيِّنَةِ"
     },
     "99": {
         "revelationPlace": "madinah",
         "transliteratedName": "Az-Zalzalah",
         "versesCount": 8,
         "translatedName": "Zilzâl",
-        "slug": "zilzal"
+        "slug": "zilzal",
+        "nameArabic": "الزَّلۡزَلَةِ"
     },
     "100": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-'Adiyat",
         "versesCount": 11,
         "translatedName": "Âdiyât",
-        "slug": "adiyat"
+        "slug": "adiyat",
+        "nameArabic": "العَادِيَاتِ"
     },
     "101": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Qari'ah",
         "versesCount": 11,
         "translatedName": "Kâria",
-        "slug": "karia"
+        "slug": "karia",
+        "nameArabic": "القَارِعَةِ"
     },
     "102": {
         "revelationPlace": "makkah",
         "transliteratedName": "At-Takathur",
         "versesCount": 8,
         "translatedName": "Tekâsür",
-        "slug": "tekasur"
+        "slug": "tekasur",
+        "nameArabic": "التَّكَاثُرِ"
     },
     "103": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-'Asr",
         "versesCount": 3,
         "translatedName": "Asr",
-        "slug": "asr"
+        "slug": "asr",
+        "nameArabic": "العَصۡرِ"
     },
     "104": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Humazah",
         "versesCount": 9,
         "translatedName": "Hümeze",
-        "slug": "humeze"
+        "slug": "humeze",
+        "nameArabic": "الهُمَزَةِ"
     },
     "105": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Fil",
         "versesCount": 5,
         "translatedName": "Fîl",
-        "slug": "fil"
+        "slug": "fil",
+        "nameArabic": "الفِيلِ"
     },
     "106": {
         "revelationPlace": "makkah",
         "transliteratedName": "Quraysh",
         "versesCount": 4,
         "translatedName": "Kureyş",
-        "slug": "kureys"
+        "slug": "kureys",
+        "nameArabic": "قُرَيۡشٍ"
     },
     "107": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Ma'un",
         "versesCount": 7,
         "translatedName": "Maûn",
-        "slug": "maun"
+        "slug": "maun",
+        "nameArabic": "المَاعُونِ"
     },
     "108": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Kawthar",
         "versesCount": 3,
         "translatedName": "Kevser",
-        "slug": "kevser"
+        "slug": "kevser",
+        "nameArabic": "الكَوۡثَرِ"
     },
     "109": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Kafirun",
         "versesCount": 6,
         "translatedName": "Kâfirûn",
-        "slug": "kafirun"
+        "slug": "kafirun",
+        "nameArabic": "الكَافِرُونَ"
     },
     "110": {
         "revelationPlace": "madinah",
         "transliteratedName": "An-Nasr",
         "versesCount": 3,
         "translatedName": "Nasr",
-        "slug": "nasr"
+        "slug": "nasr",
+        "nameArabic": "النَّصۡرِ"
     },
     "111": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Masad",
         "versesCount": 5,
         "translatedName": "Tebbet",
-        "slug": "tebbet"
+        "slug": "tebbet",
+        "nameArabic": "المَسَدِ"
     },
     "112": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Ikhlas",
         "versesCount": 4,
         "translatedName": "İhlâs",
-        "slug": "ihlas"
+        "slug": "ihlas",
+        "nameArabic": "الإِخۡلَاصِ"
     },
     "113": {
         "revelationPlace": "makkah",
         "transliteratedName": "Al-Falaq",
         "versesCount": 5,
         "translatedName": "Felak",
-        "slug": "felak"
+        "slug": "felak",
+        "nameArabic": "الفَلَقِ"
     },
     "114": {
         "revelationPlace": "makkah",
         "transliteratedName": "An-Nas",
         "versesCount": 6,
         "translatedName": "Nâs",
-        "slug": "nas"
+        "slug": "nas",
+        "nameArabic": "النَّاسِ"
     }
 }

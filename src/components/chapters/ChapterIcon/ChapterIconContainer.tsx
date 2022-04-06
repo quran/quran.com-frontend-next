@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import classNames from 'classnames';
 
 import styles from './ChapterIconContainer.module.scss';
 
-import ChapterIcon from 'src/components/chapters/ChapterIcon';
+import DataContext from 'src/contexts/DataContext';
+import { getChapterData } from 'src/utils/chapter';
 
 export enum ChapterIconsSize {
   Small = 'small',
@@ -20,21 +21,20 @@ interface Props {
   hasSurahPrefix?: boolean;
 }
 
-const IconContainer: React.FC<Props> = ({
-  chapterId,
-  size = ChapterIconsSize.Medium,
-  hasSurahPrefix = true,
-}) => (
-  <span
-    className={classNames(styles.iconContainer, {
-      [styles.iconContainerSmall]: size === ChapterIconsSize.Small,
-      [styles.iconContainerLarge]: size === ChapterIconsSize.Large,
-      [styles.iconContainerMega]: size === ChapterIconsSize.Mega,
-    })}
-  >
-    <ChapterIcon id={chapterId} />
-    {hasSurahPrefix && <ChapterIcon id="surah" />}
-  </span>
-);
+const IconContainer: React.FC<Props> = ({ chapterId, size = ChapterIconsSize.Medium }) => {
+  const chaptersData = useContext(DataContext);
+  const chapterData = getChapterData(chaptersData, chapterId);
+  return (
+    <span
+      className={classNames(styles.iconContainer, {
+        [styles.iconContainerSmall]: size === ChapterIconsSize.Small,
+        [styles.iconContainerLarge]: size === ChapterIconsSize.Large,
+        [styles.iconContainerMega]: size === ChapterIconsSize.Mega,
+      })}
+    >
+      <span className={styles.nameArabic}>{chapterData.nameArabic}</span>
+    </span>
+  );
+};
 
 export default IconContainer;
