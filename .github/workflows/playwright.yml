@@ -3,20 +3,15 @@ name: Playwright Test
 on: [deployment_status]
 
 jobs:
-  get_vercel_deployment_url:
-    name: Get Vercel deployment URL
-    runs-on: ubuntu-latest
-    if: ${{ github.event.deployment_status.state == 'success' }}
-    outputs:
-      preview_url: ${{ github.event.deployment_status.target_url }}
   print_preview_url:
     needs: get_vercel_deployment_url
     name: Playwright Tests
     runs-on: ubuntu-latest
+    if: ${{ github.event.deployment_status.state == 'success' }}
     steps:
       - uses: actions/checkout@v2
       - name: Print preview url
         env:
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
         run: |
-          echo '${{ needs.test_setup.outputs.preview_url }}'
+          echo '${{ github.event.deployment_status.target_url }}'
