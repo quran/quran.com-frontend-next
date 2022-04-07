@@ -154,8 +154,22 @@ const AudioRepeatManager = ({
     }
 
     return null;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTimeInMs, playbackRate]);
+  }, [
+    audioData,
+    audioPlayerElRef,
+    currentTimeInMs,
+    delayAudioWhenNeeded,
+    dispatch,
+    isInRepeatMode,
+    isValidating,
+    playbackRate,
+    repeatProgress.repeatEachVerse,
+    repeatProgress.repeatRange,
+    repeatSettings.repeatEachVerse,
+    repeatSettings.repeatRange,
+    verseRangeFrom.timestampFrom,
+    verseRangeTo.timestampTo,
+  ]);
   // We only use currentTimeInMs as hook dependency, because we don't want to re render when the redux value changes.
   // it will cause the hook to execute dispatch, setCurrentTime, delay, etc multiples times, which is unintended
 
