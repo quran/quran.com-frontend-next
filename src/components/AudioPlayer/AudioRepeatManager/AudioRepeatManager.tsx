@@ -154,6 +154,7 @@ const AudioRepeatManager = ({
     }
 
     return null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     audioData,
     audioPlayerElRef,
@@ -163,8 +164,6 @@ const AudioRepeatManager = ({
     isInRepeatMode,
     isValidating,
     playbackRate,
-    repeatProgress.repeatEachVerse,
-    repeatProgress.repeatRange,
     repeatSettings.repeatEachVerse,
     repeatSettings.repeatRange,
     verseRangeFrom.timestampFrom,
