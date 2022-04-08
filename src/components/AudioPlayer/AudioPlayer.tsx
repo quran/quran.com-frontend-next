@@ -41,6 +41,14 @@ const AudioPlayer = () => {
     dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
   }, [dispatch]);
 
+  const onSeeked = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
+  }, [dispatch]);
+
+  const onSeeking = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Loading });
+  }, [dispatch]);
+
   usePlayNextAudioTrackForRadio(audioPlayerElRef);
 
   // Sync the global audio player element reference with the AudioPlayer component.
@@ -79,6 +87,8 @@ const AudioPlayer = () => {
           onPause={onAudioPause}
           onEnded={onAudioEnded}
           onCanPlayThrough={onAudioLoaded}
+          onSeeking={onSeeking}
+          onSeeked={onSeeked}
         />
         {!isHidden && <AudioPlayerBody audioData={audioData} audioPlayerElRef={audioPlayerElRef} />}
       </div>
