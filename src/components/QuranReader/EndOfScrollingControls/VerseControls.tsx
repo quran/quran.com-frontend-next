@@ -28,7 +28,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
       {isLastVerseOfSurah && !isFirstSurah(chapterNumber) && (
         <Button
           type={ButtonType.Secondary}
-          suffix={<ChevronLeftIcon />}
+          prefix={<ChevronLeftIcon />}
           href={getSurahNavigationUrl(chapterNumber - 1)}
           onClick={() => {
             logButtonClick('verse_control_prev_chapter');
