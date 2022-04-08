@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
@@ -8,6 +9,7 @@ import usePlayNextAudioTrackForRadio from '../Radio/usePlayNextAudioTrackForRadi
 
 import styles from './AudioPlayer.module.scss';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import {
   setIsPlaying,
   selectAudioDataStatus,
@@ -19,6 +21,11 @@ import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ssr: false,
+  loading: () => (
+    <div className={styles.spinner}>
+      <Spinner />
+    </div>
+  ),
 });
 
 const AudioPlayer = () => {
