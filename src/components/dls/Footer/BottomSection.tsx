@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import { PopoverMenuSide } from '../PopoverMenu/PopoverMenu';
+import { PopoverMenuExpandDirection } from '../PopoverMenu/PopoverMenu';
 
 import styles from './Footer.module.scss';
 import FooterThemeSwitcher from './FooterThemeSwitcher';
@@ -50,7 +50,10 @@ const BottomSection = () => {
           <FooterThemeSwitcher />
         </div>
         <div className={styles.actionContainer}>
-          <LanguageSelector shouldShowSelectedLang side={PopoverMenuSide.TOP} />
+          <LanguageSelector
+            shouldShowSelectedLang
+            expandDirection={PopoverMenuExpandDirection.TOP}
+          />
         </div>
       </div>
     </div>

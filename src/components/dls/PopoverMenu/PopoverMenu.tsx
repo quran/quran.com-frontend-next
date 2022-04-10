@@ -8,7 +8,7 @@ import styles from './PopoverMenu.module.scss';
 import useDirection from 'src/hooks/useDirection';
 import { Direction } from 'src/utils/locale';
 
-export enum PopoverMenuSide {
+export enum PopoverMenuExpandDirection {
   TOP = 'top',
   RIGHT = 'right',
   BOTTOM = 'bottom',
@@ -22,7 +22,7 @@ type PopoverMenuProps = {
   isPortalled?: boolean;
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
-  side?: PopoverMenuSide;
+  expandDirection?: PopoverMenuExpandDirection;
 };
 const PopoverMenu = ({
   children,
@@ -31,7 +31,7 @@ const PopoverMenu = ({
   isPortalled = true,
   isModal = true,
   onOpenChange,
-  side = PopoverMenuSide.BOTTOM,
+  expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
 }: PopoverMenuProps) => {
   const direction = useDirection();
   return (
