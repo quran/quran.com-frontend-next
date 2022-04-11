@@ -125,3 +125,10 @@
     pointer-events: inherit;
   }
 }
+
+.surahNavigationContainer {
+  display: flex;
+  & > p {
+    margin-inline-end: var(--spacing-small);
+  }
+}

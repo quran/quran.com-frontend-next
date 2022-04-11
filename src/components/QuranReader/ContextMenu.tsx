@@ -67,29 +67,54 @@ const ContextMenu = () => {
       <div className={styles.sectionsContainer}>
         <div className={styles.section}>
           <div className={classNames(styles.row)}>
-            <p
-              className={classNames(styles.bold, styles.alignStart, styles.surahName, {
-                [styles.disabledOnMobile]: isSidebarNavigationVisible,
-                // on mobile, the click event is conflicting with `onClickOutside`,
-                // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
-              })}
-              onClick={(e) => {
-                logEvent(
-                  `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
-                );
-                e.stopPropagation();
-                dispatch(setIsVisible(!isSidebarNavigationVisible));
-              }}
-            >
-              {chapterData.transliteratedName}
-              <span
-                className={classNames(styles.chevronIconContainer, {
-                  [styles.rotate180]: isSidebarNavigationVisible,
+            <div className={styles.surahNavigationContainer}>
+              <p
+                className={classNames(styles.bold, styles.alignStart, styles.surahName, {
+                  [styles.disabledOnMobile]: isSidebarNavigationVisible,
+                  // on mobile, the click event is conflicting with `onClickOutside`,
+                  // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
                 })}
+                onClick={(e) => {
+                  logEvent(
+                    `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
+                  );
+                  e.stopPropagation();
+                  dispatch(setIsVisible(!isSidebarNavigationVisible));
+                }}
               >
-                <ChevronDownIcon />
-              </span>
-            </p>
+                {chapterData.transliteratedName}
+                <span
+                  className={classNames(styles.chevronIconContainer, {
+                    [styles.rotate180]: isSidebarNavigationVisible,
+                  })}
+                >
+                  <ChevronDownIcon />
+                </span>
+              </p>
+              <p
+                className={classNames(styles.bold, styles.alignStart, styles.surahName, {
+                  [styles.disabledOnMobile]: isSidebarNavigationVisible,
+                  // on mobile, the click event is conflicting with `onClickOutside`,
+                  // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
+                })}
+                onClick={(e) => {
+                  logEvent(
+                    `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
+                  );
+                  e.stopPropagation();
+                  dispatch(setIsVisible(!isSidebarNavigationVisible));
+                }}
+              >
+                {verse}
+                <span
+                  className={classNames(styles.chevronIconContainer, {
+                    [styles.rotate180]: isSidebarNavigationVisible,
+                  })}
+                >
+                  <ChevronDownIcon />
+                </span>
+              </p>
+            </div>
           </div>
         </div>
         <div className={classNames(styles.section, styles.leftSection)}>
