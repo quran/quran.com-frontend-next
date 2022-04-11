@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import IconMenu from '../../../../public/icons/menu.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
-import LanguageSelector from '../LanguageSelector';
+import LanguageSelector, { LanguageSelectorVariant } from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '../SearchDrawer/SearchDrawer';
@@ -66,12 +66,12 @@ const NavbarBody: React.FC = () => {
             <NavigationDrawer />
           </>
           <NavbarLogoWrapper />
+          <LanguageSelector variant={LanguageSelectorVariant.Simple} />
         </div>
       </div>
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
           <>
-            <LanguageSelector />
             <Button
               tooltip={t('settings.title')}
               shape={ButtonShape.Circle}

@@ -4,9 +4,10 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
 import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
 import GlobeIcon from '../../../public/icons/globe.svg';
-import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu, { PopoverMenuExpandDirection } from '../dls/PopoverMenu/PopoverMenu';
 
 import styles from './LanguageSelector.module.scss';
@@ -26,13 +27,18 @@ const options = locales.map((lng) => ({
 
 const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
+export enum LanguageSelectorVariant {
+  Simple = 'simple',
+  Full = 'full',
+}
+
 type LanguageSelectorProps = {
-  shouldShowSelectedLang?: boolean;
+  variant: LanguageSelectorVariant;
   expandDirection?: PopoverMenuExpandDirection;
 };
 
 const LanguageSelector = ({
-  shouldShowSelectedLang,
+  variant,
   expandDirection = PopoverMenuExpandDirection.BOTTOM,
 }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
@@ -69,7 +75,7 @@ const LanguageSelector = ({
     <PopoverMenu
       expandDirection={expandDirection}
       trigger={
-        shouldShowSelectedLang ? (
+        variant === LanguageSelectorVariant.Full ? (
           <Button
             className={styles.triggerButton}
             prefix={
@@ -89,20 +95,19 @@ const LanguageSelector = ({
           </Button>
         ) : (
           <Button
+            className={styles.selectedLang}
             tooltip={t('languages')}
-            shape={ButtonShape.Circle}
-            variant={ButtonVariant.Ghost}
+            variant={ButtonVariant.Compact}
             ariaLabel={t('aria.select-lng')}
+            suffix={<ChevronDownIcon />}
           >
-            <span className={styles.globeIconWrapper}>
-              <GlobeIcon />
-            </span>
+            {lang}
           </Button>
         )
       }
       onOpenChange={(open: boolean) => {
         logEvent(
-          `${shouldShowSelectedLang ? 'footer' : 'navbar'}_language_selector_${
+          `${variant === LanguageSelectorVariant.Full ? 'footer' : 'navbar'}_language_selector_${
             open ? 'open' : 'close'
           }`,
         );

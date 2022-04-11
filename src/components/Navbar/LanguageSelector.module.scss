@@ -32,3 +32,8 @@
   inset-block-end: 1px;
   transform: rotate(180deg);
 }
+
+.selectedLang {
+  text-transform: uppercase;
+  margin-inline-start: var(--spacing-medium);
+}

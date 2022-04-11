@@ -8,7 +8,7 @@ import styles from './Footer.module.scss';
 import FooterThemeSwitcher from './FooterThemeSwitcher';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import LanguageSelector from 'src/components/Navbar/LanguageSelector';
+import LanguageSelector, { LanguageSelectorVariant } from 'src/components/Navbar/LanguageSelector';
 import { toLocalizedDate } from 'src/utils/locale';
 
 const BottomSection = () => {
@@ -51,7 +51,7 @@ const BottomSection = () => {
         </div>
         <div className={styles.actionContainer}>
           <LanguageSelector
-            shouldShowSelectedLang
+            variant={LanguageSelectorVariant.Full}
             expandDirection={PopoverMenuExpandDirection.TOP}
           />
         </div>
