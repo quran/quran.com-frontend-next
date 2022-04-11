@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import IconMenu from '../../../../public/icons/menu.svg';
 import IconSearch from '../../../../public/icons/search.svg';
 import IconSettings from '../../../../public/icons/settings.svg';
-import LanguageSelector from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
 import SearchDrawer from '../SearchDrawer/SearchDrawer';
@@ -71,19 +70,6 @@ const NavbarBody: React.FC = () => {
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
           <>
-            <LanguageSelector />
-            <Button
-              tooltip={t('settings.title')}
-              shape={ButtonShape.Circle}
-              variant={ButtonVariant.Ghost}
-              onClick={openSettingsDrawer}
-              ariaLabel={t('aria.change-settings')}
-            >
-              <IconSettings />
-            </Button>
-            <SettingsDrawer />
-          </>
-          <>
             <Button
               tooltip={t('search.title')}
               variant={ButtonVariant.Ghost}
@@ -95,6 +81,18 @@ const NavbarBody: React.FC = () => {
               <IconSearch />
             </Button>
             <SearchDrawer />
+          </>
+          <>
+            <Button
+              tooltip={t('settings.title')}
+              shape={ButtonShape.Circle}
+              variant={ButtonVariant.Ghost}
+              onClick={openSettingsDrawer}
+              ariaLabel={t('aria.change-settings')}
+            >
+              <IconSettings />
+            </Button>
+            <SettingsDrawer />
           </>
         </div>
       </div>
