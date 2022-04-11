@@ -1,13 +1,13 @@
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
+// import CloseIcon from '../../../public/icons/close.svg';
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
-import { setIsBannerVisible } from 'src/redux/slices/banner';
-import { logButtonClick } from 'src/utils/eventLogger';
+// import { setIsBannerVisible } from 'src/redux/slices/banner';
+// import { logButtonClick } from 'src/utils/eventLogger';
 
 type BannerProps = {
   onClick?: () => void;
@@ -17,11 +17,11 @@ type BannerProps = {
 };
 
 const Banner = ({ text, href, cta, onClick }: BannerProps) => {
-  const dispatch = useDispatch();
-  const closeBanner = () => {
-    dispatch(setIsBannerVisible(false));
-    logButtonClick('banner_close');
-  };
+  // const dispatch = useDispatch();
+  // const closeBanner = () => {
+  //   dispatch(setIsBannerVisible(false));
+  //   logButtonClick('banner_close');
+  // };
   return (
     <div className={styles.container}>
       <div className={styles.description}>
@@ -42,11 +42,11 @@ const Banner = ({ text, href, cta, onClick }: BannerProps) => {
           {cta}
         </Button>
       </div>
-      <div className={styles.closeButton}>
+      {/* <div className={styles.closeButton}>
         <Button type={ButtonType.Success} variant={ButtonVariant.Compact} onClick={closeBanner}>
           <CloseIcon />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };
