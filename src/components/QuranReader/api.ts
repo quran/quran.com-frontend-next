@@ -81,6 +81,7 @@ export const getTranslationViewRequestKey = ({
       reciter,
       page,
       from: initialData.metaData.from,
+      perPage: initialData.pagination.perPage,
       to: initialData.metaData.to,
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
