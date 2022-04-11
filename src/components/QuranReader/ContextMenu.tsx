@@ -7,6 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
+import SearchInputIcon from '../dls/Forms/Combobox/Icons/SearchInputIcon';
+import Popover from '../dls/Popover';
 
 import styles from './ContextMenu.module.scss';
 
@@ -54,6 +56,13 @@ const ContextMenu = () => {
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
 
+  const chapterItems = Object.entries(chaptersData).map(([chapterId, chapter]) => ({
+    id: chapterId,
+    name: chapterId,
+    value: chapterId,
+    label: chapter.transliteratedName,
+  }));
+
   return (
     <div
       className={classNames(styles.container, {
@@ -68,35 +77,32 @@ const ContextMenu = () => {
         <div className={styles.section}>
           <div className={classNames(styles.row)}>
             <div className={styles.surahNavigationContainer}>
-              <p
-                className={classNames(styles.bold, styles.alignStart, styles.surahName, {
-                  [styles.disabledOnMobile]: isSidebarNavigationVisible,
-                  // on mobile, the click event is conflicting with `onClickOutside`,
-                  // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
-                })}
-                onClick={(e) => {
-                  logEvent(
-                    `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
-                  );
-                  e.stopPropagation();
-                  dispatch(setIsVisible(!isSidebarNavigationVisible));
-                }}
-              >
-                {chapterData.transliteratedName}
-                <span
-                  className={classNames(styles.chevronIconContainer, {
-                    [styles.rotate180]: isSidebarNavigationVisible,
-                  })}
+              <>
+                <Popover
+                  trigger={
+                    <p
+                      className={classNames(styles.bold, styles.alignStart, styles.surahName, {})}
+                      // onClick={(e) => {}}
+                    >
+                      {chapterData.transliteratedName}
+                      <span
+                        className={classNames(styles.chevronIconContainer, {
+                          [styles.rotate180]: isSidebarNavigationVisible,
+                        })}
+                      >
+                        <ChevronDownIcon />
+                      </span>
+                    </p>
+                  }
                 >
-                  <ChevronDownIcon />
-                </span>
-              </p>
+                  <div className={styles.searchContainer}>
+                    <SearchInputIcon />
+                    <input placeholder="aa" />
+                  </div>
+                </Popover>
+              </>
               <p
-                className={classNames(styles.bold, styles.alignStart, styles.surahName, {
-                  [styles.disabledOnMobile]: isSidebarNavigationVisible,
-                  // on mobile, the click event is conflicting with `onClickOutside`,
-                  // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
-                })}
+                className={classNames(styles.bold, styles.alignStart, styles.surahName, {})}
                 onClick={(e) => {
                   logEvent(
                     `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
