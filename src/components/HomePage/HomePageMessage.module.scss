@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .container {
   --text-color: #ff7878;
 
@@ -6,9 +8,15 @@
   padding-block-end: var(--spacing-medium);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
+  background: var(--color-success-faded);
   background: #fff5f5;
   border-radius: var(--border-radius-default);
   border: 1px solid #f9a4a4;
+
+  @include theme.dark {
+    border: 1px solid var(--color-success-faint);
+    background: var(--color-success-faded);
+  }
 
   a {
     color: #ff7878;
