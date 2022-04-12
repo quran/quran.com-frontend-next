@@ -48,3 +48,8 @@
   inset-block-start: var(--spacing-xxsmall);
   inset-inline-end: var(--spacing-xxsmall);
 }
+
+.cta {
+  margin-block-start: var(--spacing-xsmall);
+  font-weight: var(--font-weight-bold);
+}
