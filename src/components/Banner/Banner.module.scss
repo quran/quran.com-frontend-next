@@ -4,7 +4,7 @@
   box-sizing: border-box;
   height: var(--banner-height);
   position: relative;
-  background-color: var(--color-success-faded);
+  background-color: #f7f0f0; // hard coded value, to take more attention
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,9 +29,9 @@
 .description {
   display: flex;
   align-items: center;
-  color: var(--color-success-medium);
-  font-size: var(--font-size-small);
+  font-size: 14px; // hard coded value, because it's not available in our design system
   font-weight: var(--font-weight-semibold);
+  color: #f09b99;
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
     margin-inline-end: var(--spacing-large);
@@ -63,6 +63,8 @@
   font-weight: var(--font-weight-semibold);
   display: inline-block;
   height: auto;
+  background-color: #f09b99;
+  border-color: #f09b99;
   @include breakpoints.tablet {
     font-size: 14px; // hard code value for tablet to make the sizing looks right
   }
