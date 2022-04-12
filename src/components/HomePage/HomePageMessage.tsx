@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonType } from '../dls/Button/Button';
+import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 // import useTranslation from 'next-translate/useTranslation';
 
@@ -52,6 +52,21 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
           type={ButtonType.Success}
         >
           {t('fundraising-sticky-banner.cta')}
+        </Button>
+
+        <Button
+          isNewTab
+          href="https://donate.quran.com"
+          onClick={() => {
+            logEvent('donate_button_clicked', {
+              source: 'learn_more_welcome_message',
+            });
+          }}
+          className={styles.cta}
+          type={ButtonType.Success}
+          variant={ButtonVariant.Ghost}
+        >
+          {t('fundraising.learn-more')}
         </Button>
       </div>
     </div>
