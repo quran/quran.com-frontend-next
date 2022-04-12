@@ -39,7 +39,7 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
           <CloseIcon />
         </Button>
       </div> */}
-      <div className={styles.cta}>
+      <div className={styles.ctaContainer}>
         <Button
           isNewTab
           href="https://donate.quran.com"

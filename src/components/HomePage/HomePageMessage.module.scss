@@ -1,20 +1,23 @@
 .container {
+  --text-color: #ff7878;
+
   position: relative;
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-medium);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
-  background: var(--color-success-faded);
+  background: #fff5f5;
   border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-success-faint);
+  border: 1px solid #f9a4a4;
 
   a {
-    color: var(--color-text-link);
+    color: #ff7878;
   }
+  color: var(--text-color);
 }
 
 .title {
-  color: var(--color-success-deep);
+  color: var(--text-color);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
   margin-block-end: var(--spacing-medium);
@@ -50,6 +53,9 @@
 }
 
 .cta {
-  margin-block-start: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-large);
   font-weight: var(--font-weight-bold);
+  margin-inline-end: var(--spacing-small);
+  --themed-bg: var(--text-color);
+  --themed-border: var(--text-color);
 }
