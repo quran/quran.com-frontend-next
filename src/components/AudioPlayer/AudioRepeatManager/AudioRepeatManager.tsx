@@ -166,8 +166,8 @@ const AudioRepeatManager = ({
     playbackRate,
     repeatSettings.repeatEachVerse,
     repeatSettings.repeatRange,
-    verseRangeFrom.timestampFrom,
-    verseRangeTo.timestampTo,
+    verseRangeFrom,
+    verseRangeTo,
   ]);
 
   useEffect(() => {
