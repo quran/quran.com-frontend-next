@@ -25,7 +25,7 @@ const config = {
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
   pwa: {
-    disable: !isProduction,
+    disable: true,
     dest: 'public',
     mode: isProduction ? 'production' : 'development',
     runtimeCaching,
