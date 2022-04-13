@@ -4,12 +4,12 @@
   box-sizing: border-box;
   height: var(--banner-height);
   position: relative;
-  background-color: var(--color-success-faded);
+  background-color: #f7f0f0; // hard coded value, to take more attention
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding-inline: var(--spacing-medium);
+  padding-inline: var(--spacing-large);
   padding-block: var(--spacing-xsmall);
 
   @include breakpoints.tablet {
@@ -29,9 +29,9 @@
 .description {
   display: flex;
   align-items: center;
-  color: var(--color-success-medium);
-  font-size: var(--font-size-small);
+  font-size: 14px; // hard coded value, because it's not available in our design system
   font-weight: var(--font-weight-semibold);
+  color: #ff7878;
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
     margin-inline-end: var(--spacing-large);
@@ -50,7 +50,6 @@
 }
 
 .ctaContainer {
-  padding-inline-end: var(--spacing-mega);
   @include breakpoints.tablet {
     padding-inline-end: calc(1.5 * var(--spacing-medium));
   }
@@ -63,8 +62,13 @@
   font-weight: var(--font-weight-semibold);
   display: inline-block;
   height: auto;
+  background-color: #ff7878;
+  border-color: #ff7878;
   @include breakpoints.tablet {
     font-size: 14px; // hard code value for tablet to make the sizing looks right
+  }
+  &:hover {
+    color: #ff7878;
   }
 }
 
