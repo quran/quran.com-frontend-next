@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -23,6 +24,7 @@ import {
   isValidVerseId,
   isValidVerseNumber,
 } from 'src/utils/validator';
+import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import MetaData from 'types/MetaData';
@@ -115,13 +117,26 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     metaData.numberOfVerses = Number(toVerseNumber) - Number(fromVerseNumber) + 1;
   }
   try {
-    const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
     const pagesLookupResponse = await getPagesLookup({
       chapterNumber: Number(chapterIdOrSlug),
       mushaf: defaultMushafId,
       from: isVerse ? `${chapterIdOrSlug}:${verseIdOrRange}` : metaData.from,
       to: isVerse ? `${chapterIdOrSlug}:${verseIdOrRange}` : metaData.to,
     });
+
+    // if it's range, we need to set the per page as the number of verses of the first page of the range in the actual Mushaf
+    if (!isVerse) {
+      const firstRangeMushafPage = Object.keys(pagesLookupResponse.pages)[0];
+      const firstRangeMushafPageLookup = pagesLookupResponse.pages[firstRangeMushafPage];
+      const firstRangeMushafPageNumberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+        chaptersData,
+        firstRangeMushafPageLookup.from,
+        firstRangeMushafPageLookup.to,
+      ).length;
+      apiParams = { ...apiParams, ...{ perPage: firstRangeMushafPageNumberOfVerses } };
+    }
+
+    const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
     const chapterData = getChapterData(chaptersData, chapterIdOrSlug);
     if (!chapterData) {
