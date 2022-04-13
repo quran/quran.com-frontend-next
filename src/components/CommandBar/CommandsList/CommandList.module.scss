@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 $itemHeight: calc(1.5 * var(--spacing-mega));
 .noResult {
   text-align: center;
@@ -40,13 +42,15 @@ $itemHeight: calc(1.5 * var(--spacing-mega));
 
 .highlight {
   transition: transform var(--transition-fast);
-  margin-block-start: calc(-1 * var(--spacing-xsmall));
   height: $itemHeight;
   width: 100%;
   position: absolute;
   border-radius: var(--border-radius-rounded);
   background: var(--color-background-alternative-faint);
   z-index: var(--z-index-default);
+  @include breakpoints.tablet {
+    margin-block-start: calc(-1 * var(--spacing-xsmall));
+  }
 }
 
 .keyboardInputContainer {

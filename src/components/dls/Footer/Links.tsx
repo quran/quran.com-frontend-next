@@ -37,6 +37,7 @@ const Links = () => {
         { text: 'Salah.com', url: 'https://salah.com', isExternal: true },
         { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
         { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
+        { text: 'Previous.Quran.com', url: 'https://previous.quran.com', isExternal: true },
         { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
         { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
         {

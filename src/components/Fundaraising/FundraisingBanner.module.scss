@@ -3,16 +3,16 @@
   margin-block: var(--spacing-medium);
   position: relative;
   padding: var(--spacing-mega);
-  background-color: var(--color-success-faint);
+  background-color: var(--color-warning-faint);
 }
 .header {
-  color: var(--color-success-deep);
+  color: var(--color-warning-deep);
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
 }
 .paragraph {
   margin-block-start: var(--spacing-small);
-  color: var(--color-success-deep);
+  color: var(--color-warning-deep);
 }
 
 .ctaContainer {
@@ -26,7 +26,7 @@
   position: absolute;
   inset-block-start: var(--spacing-large);
   inset-inline-end: 0;
-  color: var(--color-success-medium);
+  color: var(--color-warning-deep);
   opacity: var(--opacity-10);
-  color: var(--color-success-deep);
+  color: var(--color-warning-deep);
 }

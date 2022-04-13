@@ -4,25 +4,26 @@ import React from 'react';
 
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import HomePageMessage from './HomePageMessage';
 
 import {
-  selectWelcomeMessage,
+  // selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
 } from 'src/redux/slices/welcomeMessage';
+import { logEvent } from 'src/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('home');
-  const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
+  // const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
   const dispatch = useDispatch();
 
   const onClose = () => {
     dispatch(setIsWelcomeMessageVisible(false));
   };
 
-  if (!isVisible) return null;
+  // if (!isVisible) return null;
 
   return (
     <HomePageMessage
@@ -31,7 +32,17 @@ const HomePageWelcomeMessage = () => {
         <Trans
           i18nKey="home:welcome.body"
           components={[
-            <a href="https://donate.quran.com" target="_blank" rel="noreferrer" key="0" />,
+            <a
+              onClick={() =>
+                logEvent('donate_button_clicked', {
+                  source: 'welcome_message',
+                })
+              }
+              href="https://donate.quran.com"
+              target="_blank"
+              rel="noreferrer"
+              key="0"
+            />,
             <span key="1" />,
             <br key="2" />,
           ]}
