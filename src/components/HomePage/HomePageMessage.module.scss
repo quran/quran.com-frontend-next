@@ -11,11 +11,15 @@
   border: 1px solid var(--color-warning-medium);
 
   @include theme.dark {
-    border: 1px solid var(--color-success-faint);
+    border: 1px solid var(--color-warning-fade);
     color: var(--color-text-inverse);
   }
-
-  color: var(--color-text-default);
+  @include theme.light {
+    color: var(--color-text-default);
+  }
+  @include theme.sepia {
+    color: var(--color-text-default);
+  }
 }
 
 .title {
@@ -62,12 +66,34 @@
     --themed-bg: var(--color-text-inverse);
     --themed-border: var(--color-text-inverse);
   }
+  @include theme.light {
+    --themed-fg: var(--color-text-inverse);
+    --themed-bg: var(--color-text-default);
+    --themed-border: var(--color-text-default);
+  }
+  @include theme.sepia {
+    --themed-fg: var(--color-text-inverse);
+    --themed-bg: var(--color-text-default);
+    --themed-border: var(--color-text-default);
+  }
 }
 
 .ctaSecondary {
   @include theme.dark {
     --themed-fg: var(--color-text-default);
     --themed-bg: var(--color-text-inverse);
+    --themed-border: var(--color-text-inverse);
+  }
+
+  @include theme.light {
+    --themed-fg: var(--color-text-inverse);
+    --themed-bg: var(--color-text-default);
+    --themed-border: var(--color-text-inverse);
+  }
+
+  @include theme.sepia {
+    --themed-fg: var(--color-text-inverse);
+    --themed-bg: var(--color-text-default);
     --themed-border: var(--color-text-inverse);
   }
 }
