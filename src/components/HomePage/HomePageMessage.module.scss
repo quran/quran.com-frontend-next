@@ -1,31 +1,24 @@
 @use "src/styles/theme";
 
 .container {
-  --text-color: #ff7878;
-
   position: relative;
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-medium);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
-  background: var(--color-success-faded);
-  background: #fff5f5;
+  background-color: var(--color-warning-medium);
   border-radius: var(--border-radius-default);
-  border: 1px solid #f9a4a4;
+  border: 1px solid var(--color-warning-medium);
 
   @include theme.dark {
     border: 1px solid var(--color-success-faint);
-    background: var(--color-success-faded);
+    color: var(--color-text-inverse);
   }
 
-  a {
-    color: #ff7878;
-  }
-  color: #da6464;
+  color: var(--color-text-default);
 }
 
 .title {
-  color: var(--text-color);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
   margin-block-end: var(--spacing-medium);
@@ -60,10 +53,21 @@
   inset-inline-end: var(--spacing-xxsmall);
 }
 
-.cta {
+.ctaPrimary {
   margin-block-start: var(--spacing-large);
   font-weight: var(--font-weight-bold);
   margin-inline-end: var(--spacing-small);
-  --themed-bg: var(--text-color);
-  --themed-border: var(--text-color);
+  @include theme.dark {
+    --themed-fg: var(--color-text-default);
+    --themed-bg: var(--color-text-inverse);
+    --themed-border: var(--color-text-inverse);
+  }
+}
+
+.ctaSecondary {
+  @include theme.dark {
+    --themed-fg: var(--color-text-default);
+    --themed-bg: var(--color-text-inverse);
+    --themed-border: var(--color-text-inverse);
+  }
 }

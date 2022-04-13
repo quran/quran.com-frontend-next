@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
+import Button, { ButtonVariant } from '../dls/Button/Button';
 
 // import useTranslation from 'next-translate/useTranslation';
 
@@ -48,8 +48,7 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
               source: 'cta_welcome_message',
             });
           }}
-          className={styles.cta}
-          type={ButtonType.Success}
+          className={styles.ctaPrimary}
         >
           {t('fundraising-sticky-banner.cta')}
         </Button>
@@ -62,9 +61,8 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
               source: 'learn_more_welcome_message',
             });
           }}
-          className={styles.cta}
-          type={ButtonType.Success}
-          variant={ButtonVariant.Ghost}
+          className={styles.ctaSecondary}
+          variant={ButtonVariant.Compact}
         >
           {t('fundraising.learn-more')}
         </Button>
