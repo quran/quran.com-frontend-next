@@ -21,7 +21,7 @@ const FundraisingBanner = () => {
           });
         }}
         isNewTab
-        type={ButtonType.Success}
+        type={ButtonType.Warning}
         className={styles.ctaContainer}
       >
         {t('fundraising.cta')}
