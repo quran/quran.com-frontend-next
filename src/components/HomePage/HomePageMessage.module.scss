@@ -6,20 +6,11 @@
   padding-block-end: var(--spacing-medium);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
-  background-color: var(--color-warning-medium);
   border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-warning-medium);
+  border: 1px solid #ff7878;
 
-  @include theme.dark {
-    border: 1px solid var(--color-warning-fade);
-    color: var(--color-text-inverse);
-  }
-  @include theme.light {
-    color: var(--color-text-default);
-  }
-  @include theme.sepia {
-    color: var(--color-text-inverse);
-  }
+  background-color: #ff9292;
+  color: var(--shade-9);
 }
 
 .title {
@@ -61,39 +52,14 @@
   margin-block-start: var(--spacing-large);
   font-weight: var(--font-weight-bold);
   margin-inline-end: var(--spacing-small);
-  @include theme.dark {
-    --themed-fg: var(--color-text-default);
-    --themed-bg: var(--color-text-inverse);
-    --themed-border: var(--color-text-inverse);
-  }
-  @include theme.light {
-    --themed-fg: var(--color-text-inverse);
-    --themed-bg: var(--color-text-default);
-    --themed-border: var(--color-text-default);
-  }
-  @include theme.sepia {
-    // --themed-fg: var(--color-text-inverse);
-    // --themed-bg: var(--color-text-default);
-    // --themed-border: var(--color-text-default);
-  }
+
+  --themed-fg: var(--shade-1);
+  --themed-bg: var(--shade-9);
+  --themed-border: var(--shade-9);
 }
 
 .ctaSecondary {
-  @include theme.dark {
-    --themed-fg: var(--color-text-default);
-    --themed-bg: var(--color-text-inverse);
-    --themed-border: var(--color-text-inverse);
-  }
-
-  @include theme.light {
-    --themed-fg: var(--color-text-inverse);
-    --themed-bg: var(--color-text-default);
-    --themed-border: var(--color-text-inverse);
-  }
-
-  @include theme.sepia {
-    --themed-fg: var(--color-text-inverse);
-    --themed-bg: var(--color-text-inverse);
-    --themed-border: var(--color-text-inverse);
-  }
+  --themed-fg: var(--shade-1);
+  --themed-bg: var(--shade-9);
+  --themed-border: var(--color-text-inverse);
 }
