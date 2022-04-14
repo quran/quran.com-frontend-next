@@ -257,7 +257,7 @@ export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, 
     ranges: `${chapterId}:${verseNumber}`,
     author: true,
     fields: 'created_at,html_body,comments_count,likes_count',
-    filter: 'popular',
+    filter: 'latest',
     verified: true,
     lang,
   })}`;
