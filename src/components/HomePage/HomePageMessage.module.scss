@@ -18,7 +18,7 @@
     color: var(--color-text-default);
   }
   @include theme.sepia {
-    color: var(--color-text-default);
+    color: var(--color-text-inverse);
   }
 }
 
@@ -72,9 +72,9 @@
     --themed-border: var(--color-text-default);
   }
   @include theme.sepia {
-    --themed-fg: var(--color-text-inverse);
-    --themed-bg: var(--color-text-default);
-    --themed-border: var(--color-text-default);
+    // --themed-fg: var(--color-text-inverse);
+    // --themed-bg: var(--color-text-default);
+    // --themed-border: var(--color-text-default);
   }
 }
 
@@ -93,7 +93,7 @@
 
   @include theme.sepia {
     --themed-fg: var(--color-text-inverse);
-    --themed-bg: var(--color-text-default);
+    --themed-bg: var(--color-text-inverse);
     --themed-border: var(--color-text-inverse);
   }
 }
