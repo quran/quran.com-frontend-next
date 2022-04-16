@@ -2,16 +2,15 @@ import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ReflectionDisclaimerMessage from '../../ReflectionDisclaimerMessage';
-import ReflectionNotAvailableMessage from '../../ReflectionNotAvailableMessage';
-
 import styles from './ReflectionBody.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
 import Separator from 'src/components/dls/Separator/Separator';
+import ReflectionDisclaimerMessage from 'src/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
 import ReflectionItem, {
   VerseReference,
 } from 'src/components/QuranReader/ReflectionView/ReflectionItem';
+import ReflectionNotAvailableMessage from 'src/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import DataContext from 'src/contexts/DataContext';
