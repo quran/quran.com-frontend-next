@@ -3,6 +3,7 @@ import React, { useCallback, useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import ReflectionDisclaimerMessage from '../../ReflectionDisclaimerMessage';
+import ReflectionNotAvailableMessage from '../../ReflectionNotAvailableMessage';
 
 import styles from './ReflectionBody.module.scss';
 
@@ -118,7 +119,11 @@ const ReflectionBody: React.FC<Props> = ({
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
-      <ReflectionDisclaimerMessage />
+      {data?.posts?.length === 0 ? (
+        <ReflectionNotAvailableMessage />
+      ) : (
+        <ReflectionDisclaimerMessage />
+      )}
       {data?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
