@@ -3,21 +3,24 @@
   margin-block: var(--spacing-medium);
   position: relative;
   padding: var(--spacing-mega);
-  background-color: var(--color-warning-faint);
+  background-color: #ffefef;
 }
 .header {
-  color: var(--color-warning-deep);
+  color: #ff7878;
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
 }
 .paragraph {
   margin-block-start: var(--spacing-small);
-  color: var(--color-warning-deep);
+  color: #ff7878;
 }
 
 .ctaContainer {
   margin-block-start: var(--spacing-medium);
   font-weight: var(--font-weight-bold);
+  --themed-fg: var(--shade-0);
+  --themed-bg: #ff7878;
+  --themed-border: #ff7878;
 }
 
 .backgroundImageContainer {
@@ -26,7 +29,6 @@
   position: absolute;
   inset-block-start: var(--spacing-large);
   inset-inline-end: 0;
-  color: var(--color-warning-deep);
   opacity: var(--opacity-10);
   color: var(--color-warning-deep);
 }
