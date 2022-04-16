@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
@@ -94,7 +95,7 @@ const AppsPage = () => {
     },
     tarteel: {
       title: 'Tarteel.ai',
-      description: t('apps:tarteel-desc'),
+      description: <Trans i18nKey="apps:tarteel-desc" components={[<br key="1" />]} />,
       ios: 'https://apps.apple.com/app/tarteel/id1391009396',
       android: 'https://play.google.com/store/apps/details?id=com.mmmoussa.iqra',
       preview: TarteelAppImage,
