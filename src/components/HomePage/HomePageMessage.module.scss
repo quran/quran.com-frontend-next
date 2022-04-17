@@ -1,20 +1,19 @@
+@use "src/styles/theme";
+
 .container {
   position: relative;
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-medium);
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
-  background: var(--color-success-faded);
   border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-success-faint);
+  border: 1px solid #ff7878;
 
-  a {
-    color: var(--color-text-link);
-  }
+  background-color: #ffaeae;
+  color: var(--shade-9);
 }
 
 .title {
-  color: var(--color-success-deep);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
   margin-block-end: var(--spacing-medium);
@@ -47,4 +46,20 @@
   position: absolute;
   inset-block-start: var(--spacing-xxsmall);
   inset-inline-end: var(--spacing-xxsmall);
+}
+
+.ctaPrimary {
+  margin-block-start: var(--spacing-large);
+  font-weight: var(--font-weight-bold);
+  margin-inline-end: var(--spacing-small);
+
+  --themed-fg: var(--shade-1);
+  --themed-bg: var(--shade-9);
+  --themed-border: var(--shade-9);
+}
+
+.ctaSecondary {
+  --themed-fg: var(--shade-1);
+  --themed-bg: var(--shade-9);
+  --themed-border: var(--color-text-inverse);
 }

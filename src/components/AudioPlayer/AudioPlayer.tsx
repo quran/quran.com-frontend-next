@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
@@ -8,6 +9,7 @@ import usePlayNextAudioTrackForRadio from '../Radio/usePlayNextAudioTrackForRadi
 
 import styles from './AudioPlayer.module.scss';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import {
   setIsPlaying,
   selectAudioDataStatus,
@@ -19,6 +21,11 @@ import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ssr: false,
+  loading: () => (
+    <div className={styles.spinner}>
+      <Spinner />
+    </div>
+  ),
 });
 
 const AudioPlayer = () => {
@@ -39,6 +46,14 @@ const AudioPlayer = () => {
   }, [dispatch]);
   const onAudioLoaded = useCallback(() => {
     dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
+  }, [dispatch]);
+
+  const onSeeked = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
+  }, [dispatch]);
+
+  const onSeeking = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Loading });
   }, [dispatch]);
 
   usePlayNextAudioTrackForRadio(audioPlayerElRef);
@@ -79,6 +94,8 @@ const AudioPlayer = () => {
           onPause={onAudioPause}
           onEnded={onAudioEnded}
           onCanPlayThrough={onAudioLoaded}
+          onSeeking={onSeeking}
+          onSeeked={onSeeked}
         />
         {!isHidden && <AudioPlayerBody audioData={audioData} audioPlayerElRef={audioPlayerElRef} />}
       </div>

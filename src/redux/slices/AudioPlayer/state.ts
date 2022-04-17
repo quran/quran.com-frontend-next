@@ -2,6 +2,7 @@
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import random from 'lodash/random';
+import { REHYDRATE } from 'redux-persist';
 
 import { getChapterAudioData } from 'src/api';
 import {
@@ -252,6 +253,29 @@ export const audioPlayerStateSlice = createSlice({
       isUsingDefaultReciter: true,
       reciter: getAudioPlayerStateInitialState(action.payload.locale).reciter,
     }));
+    // listen to redux-persist's REHYDRATE event
+    builder.addCase(REHYDRATE, (state, action) => {
+      // @ts-ignore
+      const { key, payload } = action;
+      /**
+       * There is an issue with redux-persists (https://github.com/rt2zz/redux-persist/issues/290)
+       * that converts Infinite to null which affects when the user chooses to
+       * repeat a verse(s) infinitely and leads to repeatRange being persisted
+       * as null which is an invalid value so we need to convert it back to Infinity.
+       */
+      if (key === 'audioPlayerState' && payload?.repeatSettings?.repeatRange === null) {
+        return {
+          ...state,
+          ...payload,
+          repeatSettings: {
+            ...state.repeatSettings,
+            ...payload.repeatSettings,
+            repeatRange: Infinity,
+          },
+        };
+      }
+      return { ...state, ...payload };
+    });
   },
 });
 

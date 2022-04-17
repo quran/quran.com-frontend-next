@@ -4,26 +4,26 @@ import React from 'react';
 
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import HomePageMessage from './HomePageMessage';
 
 import {
-  selectWelcomeMessage,
+  // selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
 } from 'src/redux/slices/welcomeMessage';
 import { logEvent } from 'src/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('home');
-  const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
+  // const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
   const dispatch = useDispatch();
 
   const onClose = () => {
     dispatch(setIsWelcomeMessageVisible(false));
   };
 
-  if (!isVisible) return null;
+  // if (!isVisible) return null;
 
   return (
     <HomePageMessage
