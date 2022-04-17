@@ -16,39 +16,39 @@ const Links = () => {
   const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
 
   const linksGroup = [
-    {
-      title: t('navigate'),
-      links: [
-        { text: t('home'), url: '/' },
-        { text: t('quran-radio'), url: '/radio' },
-        { text: t('reciters'), url: '/reciters' },
-        { text: t('about'), url: '/about-us' },
-        { text: t('mobile-apps'), url: '/apps' },
-        { text: t('developers'), url: '/developers' },
-        { text: t('product-updates'), url: '/product-updates' },
-        { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
-        { text: t('help'), url: '/support' },
-      ],
-    },
-    {
-      title: t('network'),
-      links: [
-        { text: 'QuranicAudio.com', url: 'https://quranicaudio.com', isExternal: true },
-        { text: 'Salah.com', url: 'https://salah.com', isExternal: true },
-        { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
-        { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
-        { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
-        { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
-        {
-          text: 'Tarteel.ai',
-          url: 'https://www.tarteel.ai/',
-          isExternal: true,
-          onClick: () => {
-            logTarteelLinkClick('footer_network_attribution');
-          },
-        },
-      ],
-    },
+    // {
+    //   title: t('navigate'),
+    //   links: [
+    //     { text: t('home'), url: '/' },
+    //     { text: t('quran-radio'), url: '/radio' },
+    //     { text: t('reciters'), url: '/reciters' },
+    //     { text: t('about'), url: '/about-us' },
+    //     { text: t('mobile-apps'), url: '/apps' },
+    //     { text: t('developers'), url: '/developers' },
+    //     { text: t('product-updates'), url: '/product-updates' },
+    //     { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
+    //     { text: t('help'), url: '/support' },
+    //   ],
+    // },
+    // {
+    //   title: t('network'),
+    //   links: [
+    //     { text: 'QuranicAudio.com', url: 'https://quranicaudio.com', isExternal: true },
+    //     { text: 'Salah.com', url: 'https://salah.com', isExternal: true },
+    //     { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
+    //     { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
+    //     { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
+    //     { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
+    //     {
+    //       text: 'Tarteel.ai',
+    //       url: 'https://www.tarteel.ai/',
+    //       isExternal: true,
+    //       onClick: () => {
+    //         logTarteelLinkClick('footer_network_attribution');
+    //       },
+    //     },
+    //   ],
+    // },
     {
       title: t('popular-links'),
       links: [

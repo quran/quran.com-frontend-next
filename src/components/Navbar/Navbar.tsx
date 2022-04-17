@@ -16,7 +16,7 @@ import { logEvent } from 'src/utils/eventLogger';
 const Navbar = () => {
   const { t } = useTranslation('common');
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const isBannerVisible = useSelector(selectIsBannerVisible);
+  const isBannerVisible = false //useSelector(selectIsBannerVisible);
   return (
     <>
       <div className={styles.emptySpacePlaceholder} />

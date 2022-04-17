@@ -1,21 +1,6 @@
 {
   "locales": [
-    "en",
-    "ar",
-    "bn",
-    "fa",
-    "fr",
-    "id",
-    "it",
-    "nl",
-    "pt",
-    "ru",
-    "sq",
-    "th",
-    "tr",
-    "ur",
-    "zh",
-    "ms"
+    "fa"
   ],
   "defaultLocale": "fa",
   "localeDetection": false,

@@ -2,12 +2,12 @@
     "change": "تغییر دادن",
     "curated-station": {
         "juz-amma": {
-            "description": "جملات پایانی قرآن را بشنوید",
-            "title": "جوز اما"
+            "description": "جزء پایانی قرآن را بشنوید",
+            "title": "جزء پایانی"
         },
         "popular-recitations": {
             "description": "فید تنظیم شده روزانه از تلاوت ها",
-            "title": "تلاوت های مردمی"
+            "title": "تلاوت های معروف"
         },
         "surah-al-kahf": {
             "description": "سوره الکهف را با تکرار بشنوید",

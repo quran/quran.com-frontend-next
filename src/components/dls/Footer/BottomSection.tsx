@@ -22,7 +22,7 @@ const BottomSection = () => {
 
   return (
     <div className={styles.bottomSectionContainer}>
-      <div>
+      {/* <div>
         <div className={styles.bottomLinks}>
           <Link href="/sitemap.xml" shouldPrefetch={false} isNewTab>
             {t('sitemap')}
@@ -42,7 +42,7 @@ const BottomSection = () => {
           </Link>
           . {t('footer.rights')}
         </div>
-      </div>
+      </div> */}
       <div className={styles.actionsSections}>
         <div className={styles.actionContainer}>
           <FooterThemeSwitcher />

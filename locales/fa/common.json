@@ -3,7 +3,7 @@
     "and": "و",
     "aria": {
         "change-settings": "تغییر تنظیمات",
-        "drawer-close": "کشو را ببندید",
+        "drawer-close": "منو را ببندید",
         "msg-close": "بستن پیام",
         "nav-drawer-open": "کشوی پیمایش را باز کنید",
         "play-surah": "پخش سوره {{surahName}}",
@@ -24,24 +24,24 @@
         "playback-speed-unit": "ایکس",
         "player": {
             "close": "پخش کننده صوتی را ببندید",
-            "currently-playing": "شما در حال حاضر در حال بازی هستید",
+            "currently-playing": "شما در حال حاضر در حال پخش هستید",
             "delay-verse": "تأخیر بین آیه",
             "download": "دانلود",
             "full-surah": "سوره کامل",
             "mismatch": "اگر می خواهید به جای آن {{currentReadingChapter}} را بازی کنید، روی \"شروع دوباره\" کلیک کنید",
-            "pause": "مکث کنید",
+            "pause": "مکث کن",
             "pause-audio": "مکث صدا",
             "play": "بازی",
             "play-audio": "پخش صدا",
-            "play-range": "محدوده بازی",
+            "play-range": "محدوده پخش",
             "previous-ayah": "آیه قبلی",
             "repeat-1-verse": "آیه را تکرار کن",
             "repeat-settings": "تنظیمات را تکرار کنید",
-            "repeat-verse": "هر آیه را تکرار کنید",
+            "repeat-verse": "هر یک آیه را تکرار کنید",
             "search-verse": "جستجوی یک آیه",
             "single-verse": "تک آیه",
             "start-over": "شروع دوباره",
-            "start-playing": "شروع به بازی کنید",
+            "start-playing": "شروع به پخش کنید",
             "stop-repeating": "تکرار را متوقف کنید",
             "times": "بار",
             "verses-range": "طیف آیات"
@@ -58,11 +58,11 @@
     "both": "هر دو",
     "cancel": "لغو کنید",
     "click-here": "اینجا کلیک کنید",
-    "close": "نزدیک",
+    "close": "ببندید",
     "command-bar": {
         "navigations": "ناوبری ها",
         "no-nav-results": "هیچ نتیجه ناوبری وجود ندارد",
-        "placeholder": "میخواهی چی بخوانی؟",
+        "placeholder": "کدام قسمت از قرآن کریم را میخواهید قرائت کنید؟",
         "powered-by": "جستجوی صوتی ارائه شده توسط Tarteel.ai",
         "recent-navigations": "پیمایش های اخیر",
         "search-by-voice": "جستجوی صوتی",
@@ -79,7 +79,7 @@
     "copied-to-clipboard": "در کلیپ بورد کپی شد",
     "copy": "کپی",
     "counter": {
-        "decrease": "نزول کردن",
+        "decrease": "کاهش دادن",
         "increase": "افزایش دادن"
     },
     "default-description": "قرآن در یک رابط کاربری ساده و آسان به بسیاری از زبان ها ترجمه شده است",
@@ -105,9 +105,9 @@
         "text_uthmani": "عثمانی"
     },
     "footer": {
-        "description": "Quran.com یک جریه صدقه است. امیدواریم بتوانیم خواندن، مطالعه و یادگیری قرآن کریم را برای همگان آسان کنیم. قرآن کریم دارای نام های فراوانی از جمله القرآن الکریم، الکتاب، الفرقان، الماویثه، الذکر و النور است.",
+        "description": "امیدواریم بتوانیم خواندن، مطالعه و یادگیری قرآن کریم را برای همگان آسان کنیم.",
         "rights": "تمامی حقوق محفوظ است",
-        "title": "قرآن کریم را بخوانید، مطالعه کنید و یاد بگیرید."
+        "title": "قرآن کریم را قرائت کنید و یاد بگیرید و به دیگران نیز یاد بدهید."
     },
     "from": "از جانب",
     "fundraising-sticky-banner": {
@@ -125,7 +125,7 @@
     "input": {
         "clear": "پاک کردن"
     },
-    "juz": "جوز",
+    "juz": "جزء",
     "language": "زبان",
     "languages": "زبان ها",
     "less": "کمتر",
@@ -152,7 +152,7 @@
     "privacy": "حریم خصوصی",
     "product-updates": "به روز رسانی محصول",
     "q-reflect": "قرآن انعکاس",
-    "quran-com": "قرآن دات کام",
+    "quran-com": "وبسایت قرآنی آیات",
     "quran-radio": "رادیو قرآن",
     "reading-preference": {
         "reading": "خواندن",
