@@ -16,7 +16,7 @@ type BannerProps = {
   cta: string;
 };
 
-const Banner = ({ text, href, cta, onClick }: BannerProps) => {
+const Banner = ({ text, cta, onClick }: BannerProps) => {
   // const dispatch = useDispatch();
   // const closeBanner = () => {
   //   dispatch(setIsBannerVisible(false));
@@ -33,11 +33,14 @@ const Banner = ({ text, href, cta, onClick }: BannerProps) => {
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
-          href={href}
           onClick={onClick}
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
+          gl-donate-button=""
+          data-gl-monthly="false"
+          data-gl-amount="100"
+          key="become-monthly-donor"
         >
           {cta}
         </Button>

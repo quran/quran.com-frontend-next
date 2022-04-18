@@ -14,7 +14,7 @@ const FundraisingBanner = () => {
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
       <Button
-        href="https://donate.quran.com"
+        // href="https://donate.quran.com"
         onClick={() => {
           logEvent('donate_button_clicked', {
             source: 'sidebar_banner',
@@ -23,6 +23,10 @@ const FundraisingBanner = () => {
         isNewTab
         type={ButtonType.Warning}
         className={styles.ctaContainer}
+        gl-donate-button=""
+        data-gl-monthly="false"
+        data-gl-amount="100"
+        key="become-monthly-donor"
       >
         {t('fundraising.cta')}
       </Button>

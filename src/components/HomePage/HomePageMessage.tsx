@@ -42,13 +42,17 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
-          href="https://donate.quran.com"
+          // href="https://donate.quran.com"
           onClick={() => {
             logEvent('donate_button_clicked', {
               source: 'cta_welcome_message',
             });
           }}
           className={styles.ctaPrimary}
+          gl-donate-button=""
+          data-gl-monthly="false"
+          data-gl-amount="100"
+          key="become-monthly-donor"
         >
           {t('fundraising-sticky-banner.cta')}
         </Button>

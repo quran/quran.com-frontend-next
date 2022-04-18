@@ -80,6 +80,7 @@ const Button: React.FC<ButtonProps> = ({
   shouldPrefetch: prefetch = true,
   isNewTab: newTab,
   ariaLabel,
+  ...props
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -125,7 +126,7 @@ const Button: React.FC<ButtonProps> = ({
         isShallow={shallowRouting}
         {...(onClick && { onClick })}
       >
-        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
+        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
@@ -158,6 +159,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         data-auto-flip-icon={shouldFlipOnRTL}
         {...(ariaLabel && { 'aria-label': ariaLabel })}
+        {...props}
       >
         {prefixFinal && (
           <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
