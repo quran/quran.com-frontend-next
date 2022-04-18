@@ -1,10 +1,15 @@
 // import { useDispatch } from 'react-redux';
 
 // import CloseIcon from '../../../public/icons/close.svg';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
+
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
+
+import { selectIsBannerVisible } from 'src/redux/slices/banner';
 
 // import { setIsBannerVisible } from 'src/redux/slices/banner';
 // import { logButtonClick } from 'src/utils/eventLogger';
@@ -17,13 +22,18 @@ type BannerProps = {
 };
 
 const Banner = ({ text, href, cta, onClick }: BannerProps) => {
+  const isBannerVisible = useSelector(selectIsBannerVisible);
   // const dispatch = useDispatch();
   // const closeBanner = () => {
   //   dispatch(setIsBannerVisible(false));
   //   logButtonClick('banner_close');
   // };
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.isVisible]: isBannerVisible,
+      })}
+    >
       <div className={styles.description}>
         <div className={styles.illustrationContainer}>
           <MoonIllustrationSVG />
