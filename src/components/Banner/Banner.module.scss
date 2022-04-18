@@ -1,6 +1,8 @@
 @use "src/styles/breakpoints";
 
 .container {
+  margin-block-start: calc(-1 * var(--banner-height));
+  transition: var(--transition-regular);
   box-sizing: border-box;
   height: var(--banner-height);
   position: relative;
@@ -24,6 +26,9 @@
     margin-inline-start: auto;
     margin-inline-end: auto;
   }
+}
+.isVisible {
+  margin-block-start: 0;
 }
 
 .description {
