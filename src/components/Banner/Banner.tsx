@@ -16,7 +16,7 @@ type BannerProps = {
   cta: string;
 };
 
-const Banner = ({ text, cta, onClick }: BannerProps) => {
+const Banner = ({ text, cta }: BannerProps) => {
   // const dispatch = useDispatch();
   // const closeBanner = () => {
   //   dispatch(setIsBannerVisible(false));
