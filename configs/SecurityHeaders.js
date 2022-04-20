@@ -13,7 +13,7 @@ const ContentSecurityPolicy = `
   default-src 'self' *.qurancdn.com;
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://vitals.vercel-insights.com  https://www.givingloop.org https://code.jquery.com;
   frame-src 'self';
-  style-src 'self' 'unsafe-inline' 'unsafe-eval' https://givingloop.org;
+  style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org;
   img-src * data:;
   media-src 'self' *.quranicaudio.com *.qurancdn.com https://qurancdn.com;
   connect-src *;
