@@ -44,6 +44,9 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
           isNewTab
           // href="https://donate.quran.com"
           onClick={() => {
+            // @ts-ignore
+            window.givingloop('donate');
+
             logEvent('donate_button_clicked', {
               source: 'cta_welcome_message',
             });

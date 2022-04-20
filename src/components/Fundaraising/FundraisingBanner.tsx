@@ -16,6 +16,9 @@ const FundraisingBanner = () => {
       <Button
         // href="https://donate.quran.com"
         onClick={() => {
+          // @ts-ignore
+          window.givingloop('donate');
+
           logEvent('donate_button_clicked', {
             source: 'sidebar_banner',
           });

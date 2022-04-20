@@ -33,7 +33,10 @@ const Banner = ({ text, cta, onClick }: BannerProps) => {
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
-          onClick={onClick}
+          onClick={() => {
+            // @ts-ignore
+            window.givingloop('donate');
+          }}
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
