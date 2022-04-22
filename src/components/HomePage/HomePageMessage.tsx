@@ -24,6 +24,19 @@ type HomePageMessageProps = {
 const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
+  const onDonateClicked = () => {
+    // @ts-ignore
+    window.givingloop('donate');
+
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    logEvent('donate_button_clicked', {
+      source: 'cta_welcome_message',
+    });
+  };
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{title}</h3>
@@ -45,19 +58,7 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
         <Button
           isNewTab
           // href="https://donate.quran.com"
-          onClick={() => {
-            // @ts-ignore
-            window.givingloop('donate');
-
-            setIsLoading(true);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 5000);
-
-            logEvent('donate_button_clicked', {
-              source: 'cta_welcome_message',
-            });
-          }}
+          onClick={onDonateClicked}
           className={styles.ctaPrimary}
           gl-donate-button=""
           data-gl-monthly="false"

@@ -26,6 +26,16 @@ const Banner = ({ text, cta }: BannerProps) => {
   //   dispatch(setIsBannerVisible(false));
   //   logButtonClick('banner_close');
   // };
+
+  const onDonateClicked = () => {
+    // @ts-ignore
+    window.givingloop('donate');
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.description}>
@@ -37,14 +47,7 @@ const Banner = ({ text, cta }: BannerProps) => {
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
-          onClick={() => {
-            // @ts-ignore
-            window.givingloop('donate');
-            setIsLoading(true);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 5000);
-          }}
+          onClick={onDonateClicked}
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}

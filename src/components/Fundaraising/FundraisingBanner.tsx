@@ -13,25 +13,26 @@ import { logEvent } from 'src/utils/eventLogger';
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
+  const onDonateClicked = () => {
+    // @ts-ignore
+    window.givingloop('donate');
+
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    logEvent('donate_button_clicked', {
+      source: 'sidebar_banner',
+    });
+  };
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
       <Button
         // href="https://donate.quran.com"
-        onClick={() => {
-          // @ts-ignore
-          window.givingloop('donate');
-
-          setIsLoading(true);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 5000);
-
-          logEvent('donate_button_clicked', {
-            source: 'sidebar_banner',
-          });
-        }}
+        onClick={onDonateClicked}
         isNewTab
         type={ButtonType.Warning}
         className={styles.ctaContainer}
