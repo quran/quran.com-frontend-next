@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonVariant } from '../dls/Button/Button';
-
 // import useTranslation from 'next-translate/useTranslation';
 
 // import CloseIcon from '../../../public/icons/close.svg';
 // import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
+import Button, { ButtonVariant } from '../dls/Button/Button';
 import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './HomePageMessage.module.scss';
