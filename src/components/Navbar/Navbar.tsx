@@ -9,14 +9,12 @@ import Banner from '../Banner/Banner';
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
-// import { selectIsBannerVisible } from 'src/redux/slices/banner';
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { logEvent } from 'src/utils/eventLogger';
 
 const Navbar = () => {
   const { t } = useTranslation('common');
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  // const isBannerVisible = useSelector(selectIsBannerVisible);
   return (
     <>
       <div className={styles.emptySpacePlaceholder} />
