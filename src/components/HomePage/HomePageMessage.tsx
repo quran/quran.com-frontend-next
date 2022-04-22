@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -8,6 +8,8 @@ import Button, { ButtonVariant } from '../dls/Button/Button';
 
 // import CloseIcon from '../../../public/icons/close.svg';
 // import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
+
+import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './HomePageMessage.module.scss';
 
@@ -22,6 +24,7 @@ type HomePageMessageProps = {
 
 const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
   const { t } = useTranslation('common');
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{title}</h3>
@@ -47,6 +50,11 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
             // @ts-ignore
             window.givingloop('donate');
 
+            setIsLoading(true);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 5000);
+
             logEvent('donate_button_clicked', {
               source: 'cta_welcome_message',
             });
@@ -57,7 +65,7 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
           data-gl-amount="100"
           key="become-monthly-donor"
         >
-          {t('fundraising-sticky-banner.cta')}
+          {isLoading ? <Spinner /> : t('fundraising-sticky-banner.cta')}
         </Button>
 
         <Button

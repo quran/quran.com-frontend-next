@@ -1,8 +1,11 @@
 // import { useDispatch } from 'react-redux';
 
 // import CloseIcon from '../../../public/icons/close.svg';
+import { useState } from 'react';
+
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
+import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './Banner.module.scss';
 
@@ -17,6 +20,7 @@ type BannerProps = {
 };
 
 const Banner = ({ text, cta }: BannerProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   // const dispatch = useDispatch();
   // const closeBanner = () => {
   //   dispatch(setIsBannerVisible(false));
@@ -36,6 +40,10 @@ const Banner = ({ text, cta }: BannerProps) => {
           onClick={() => {
             // @ts-ignore
             window.givingloop('donate');
+            setIsLoading(true);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 5000);
           }}
           className={styles.cta}
           size={ButtonSize.Small}
@@ -45,7 +53,7 @@ const Banner = ({ text, cta }: BannerProps) => {
           data-gl-amount="100"
           key="become-monthly-donor"
         >
-          {cta}
+          {isLoading ? <Spinner /> : cta}
         </Button>
       </div>
       {/* <div className={styles.closeButton}>

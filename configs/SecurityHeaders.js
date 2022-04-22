@@ -10,11 +10,11 @@
   - connect-src: restricts the URLs that we can connect to using script interfaces including <a>, XMLHttpRequest, WebSocket. Currently we allow all URLs.
 */
 const ContentSecurityPolicy = `
-  default-src 'self' *.qurancdn.com;
+  default-src 'self' *.qurancdn.com cdn.plaid.com;
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://vitals.vercel-insights.com  https://www.givingloop.org https://code.jquery.com https://www.google.com https://js.stripe.com https://ipinfo.io https://snap.licdn.com https://cdn.mouseflow.com https://www.paypal.com  https://wchat.eu.freshchat.com https://cdn.plaid.com https://cdnjs.cloudflare.com https://cdn.amplitude.com https://cdn.logrocket.io https://www.gstatic.com https://js.stripe.com;
-  font-src 'self' 'unsafe-inline' 'unsafe-eval' givingloop.org fonts.gstatic.com;
-  frame-src 'self';
-  style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org fonts.googleapis.com fonts.googleapis.com; 
+  font-src 'self' 'unsafe-inline' 'unsafe-eval' givingloop.org fonts.gstatic.com https://www.givingloop.org;
+  frame-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com/v3 js.stripe.com  https://www.paypal.com www.paypal.com https://wchat.eu.freshchat.com https://www.google.com www.google.com;
+  style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org fonts.googleapis.com fonts.googleapis.com wchat.eu.freshchat.com; 
   img-src * data:;
   media-src 'self' *.quranicaudio.com *.qurancdn.com https://qurancdn.com;
   connect-src *;

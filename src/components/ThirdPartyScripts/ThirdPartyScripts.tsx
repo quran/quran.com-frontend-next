@@ -7,7 +7,6 @@ import GoogleAnalyticsScript from './GoogleAnalyticsScript';
 const ThirdPartyScripts = () => (
   <>
     <GoogleAnalyticsScript />
-    <Script id="gl-elements-test" src="/test.js" />
     <Script
       id="gl-elements"
       src="https://www.givingloop.org/assets/js/gl_elements.js?org_id=1728"
