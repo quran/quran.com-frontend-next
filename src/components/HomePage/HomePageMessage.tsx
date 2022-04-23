@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-
-import Button, { ButtonVariant } from '../dls/Button/Button';
 
 // import useTranslation from 'next-translate/useTranslation';
 
 // import CloseIcon from '../../../public/icons/close.svg';
 // import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
+
+import Button, { ButtonVariant } from '../dls/Button/Button';
+import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './HomePageMessage.module.scss';
 
@@ -22,6 +23,20 @@ type HomePageMessageProps = {
 
 const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
   const { t } = useTranslation('common');
+  const [isLoading, setIsLoading] = useState(false);
+  const onDonateClicked = () => {
+    // @ts-ignore
+    window.givingloop('donate');
+
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    logEvent('donate_button_clicked', {
+      source: 'cta_welcome_message',
+    });
+  };
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>{title}</h3>
@@ -42,15 +57,15 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
-          href="https://donate.quran.com"
-          onClick={() => {
-            logEvent('donate_button_clicked', {
-              source: 'cta_welcome_message',
-            });
-          }}
+          // href="https://donate.quran.com"
+          onClick={onDonateClicked}
           className={styles.ctaPrimary}
+          gl-donate-button=""
+          data-gl-monthly="false"
+          data-gl-amount="100"
+          key="become-monthly-donor"
         >
-          {t('fundraising-sticky-banner.cta')}
+          {isLoading ? <Spinner /> : t('fundraising-sticky-banner.cta')}
         </Button>
 
         <Button
