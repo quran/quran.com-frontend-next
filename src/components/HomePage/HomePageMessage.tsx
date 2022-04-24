@@ -4,10 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 // import useTranslation from 'next-translate/useTranslation';
 
-// import CloseIcon from '../../../public/icons/close.svg';
-// import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-
-import Button, { ButtonVariant } from '../dls/Button/Button';
+import CloseIcon from '../../../public/icons/close.svg';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './HomePageMessage.module.scss';
@@ -21,7 +19,7 @@ type HomePageMessageProps = {
   onClose?: () => void;
 };
 
-const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
+const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProps) => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
@@ -43,7 +41,7 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
       <p className={styles.description}>{subtitle}</p>
       {body}
 
-      {/* <div className={styles.closeIcon}>
+      <div className={styles.closeIcon}>
         <Button
           size={ButtonSize.Small}
           shape={ButtonShape.Circle}
@@ -53,7 +51,7 @@ const HomePageMessage = ({ title, subtitle, body }: HomePageMessageProps) => {
         >
           <CloseIcon />
         </Button>
-      </div> */}
+      </div>
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
