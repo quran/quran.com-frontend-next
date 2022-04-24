@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .container {
   padding: var(--spacing-mega);
   position: relative;
@@ -25,7 +27,7 @@
 
 .action {
   margin-inline-end: var(--spacing-medium);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
 }
 
 .closeIcon {
@@ -34,4 +36,25 @@
   inset-inline-end: 0;
   margin-block-start: var(--spacing-small);
   margin-inline-end: var(--spacing-small);
+}
+
+.outerContainer {
+  display: flex;
+}
+
+.illustrationContainer {
+  display: none;
+  background-color: var(--color-success-faded);
+  color: var(--color-success-medium);
+  @include breakpoints.tablet {
+    display: inline-flex;
+    padding: var(--spacing-medium);
+    width: calc(10 * var(--spacing-mega));
+  }
+}
+
+.modalSize {
+  @include breakpoints.tablet {
+    max-width: calc(50.5 * var(--spacing-medium));
+  }
 }
