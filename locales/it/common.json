@@ -147,6 +147,13 @@
     "pages": "Pagine",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
     "popular-links": "Link popolari",
+    "popup": {
+        "cta-1": "Donare",
+        "cta-2": "Per saperne di più",
+        "text-1": "Ci impegniamo a servire il mondo della conoscenza e della tecnologia coraniche, sempre gratuitamente.",
+        "text-2": "Quran.com è un'opportunità perfetta per la carità continua (Sadaqah Jariyah). Si prega di considerare di investire nell'Aldilà questo Ramadan come donatore mensile (o una tantum).",
+        "title": "Caro compagno del Corano,"
+    },
     "powered-by": "Offerto da",
     "prev": "Precedente",
     "previous-ayah": "Precedente Sì",

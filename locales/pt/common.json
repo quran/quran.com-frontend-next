@@ -147,6 +147,13 @@
     "pages": "Páginas",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "popular-links": "Links populares",
+    "popup": {
+        "cta-1": "Doar",
+        "cta-2": "Saber mais",
+        "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Alcorão, sempre de graça.",
+        "text-2": "Quran.com é uma oportunidade perfeita para caridade contínua (Sadaqah Jariyah). Por favor, considere investir em sua vida futura neste Ramadã como um doador mensal (ou único).",
+        "title": "Caro Companheiro do Alcorão,"
+    },
     "powered-by": "Distribuído por",
     "prev": "Anterior",
     "previous-ayah": "Anterior Ayah",
