@@ -147,6 +147,13 @@
     "pages": "Faqet",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "popular-links": "Kërkimet e preferuara",
+    "popup": {
+        "cta-1": "Dhuroni",
+        "cta-2": "Mëso më shumë",
+        "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
+        "text-2": "Quran.com është një mundësi e përkryer për bamirësi të vazhdueshme (Sadakah Jariyah). Ju lutemi, konsideroni të investoni në Ahiretin tuaj këtë Ramazan si donator mujor (ose një herë).",
+        "title": "I dashur shok i Kur'anit,"
+    },
     "powered-by": "Mundësuar nga",
     "prev": "E mëparshme",
     "previous-ayah": "Ajeti i mëparshëm",

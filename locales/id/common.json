@@ -147,6 +147,13 @@
     "pages": "halaman-halaman",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
     "popular-links": "Link populer",
+    "popup": {
+        "cta-1": "Menyumbangkan",
+        "cta-2": "Belajarlah lagi",
+        "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Al-Qur'an, selalu gratis.",
+        "text-2": "Quran.com adalah kesempatan sempurna untuk amal berkelanjutan (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di Akhirat Ramadhan ini sebagai donor bulanan (atau satu kali).",
+        "title": "Sahabat Al-Qur'an yang terhormat,"
+    },
     "powered-by": "Dipersembahkan oleh",
     "prev": "Sebelumnya",
     "previous-ayah": "Ayat sebelumnya",
