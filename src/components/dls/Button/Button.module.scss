@@ -121,6 +121,19 @@
   --themed-bg: var(--color-text-faded);
 }
 
+.outlined {
+  background-color: transparent;
+  color: var(--themed-bg);
+  &:hover {
+    background-color: var(--themed-bg);
+    color: var(--themed-fg);
+  }
+}
+// corner case for secondary ghost button
+.ghost.secondary {
+  --themed-bg: var(--color-text-faded);
+}
+
 .compact {
   padding-inline: 0;
   background-color: transparent;

@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import CheckIcon from '../../../../public/icons/check.svg';
 import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 
+import styles from './SelectReciterMenu.module.scss';
+
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
@@ -14,6 +16,8 @@ import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
+
+const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SelectReciterMenu = ({ onBack }) => {
   const { lang, t } = useTranslation('common');
@@ -40,6 +44,9 @@ const SelectReciterMenu = ({ onBack }) => {
               }}
             >
               {reciter.translatedName.name}
+              {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
+                <p className={styles.reciterStyle}>{` - ${reciter.style.name}`}</p>
+              )}
             </PopoverMenu.Item>
           ))}
         </div>

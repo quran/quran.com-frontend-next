@@ -35,6 +35,7 @@ export enum ButtonVariant {
   Shadow = 'shadow',
   Ghost = 'ghost',
   Compact = 'compact',
+  Outlined = 'outlined',
 }
 
 export type ButtonProps = {
@@ -80,6 +81,7 @@ const Button: React.FC<ButtonProps> = ({
   shouldPrefetch: prefetch = true,
   isNewTab: newTab,
   ariaLabel,
+  ...props
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -106,6 +108,7 @@ const Button: React.FC<ButtonProps> = ({
     [styles.shadow]: variant === ButtonVariant.Shadow,
     [styles.ghost]: variant === ButtonVariant.Ghost,
     [styles.compact]: variant === ButtonVariant.Compact,
+    [styles.outlined]: variant === ButtonVariant.Outlined,
 
     [styles.disabled]: disabled || isLoading,
     [styles.noSidePadding]: !hasSidePadding,
@@ -125,7 +128,7 @@ const Button: React.FC<ButtonProps> = ({
         isShallow={shallowRouting}
         {...(onClick && { onClick })}
       >
-        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
+        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
@@ -158,6 +161,7 @@ const Button: React.FC<ButtonProps> = ({
         onClick={onClick}
         data-auto-flip-icon={shouldFlipOnRTL}
         {...(ariaLabel && { 'aria-label': ariaLabel })}
+        {...props}
       >
         {prefixFinal && (
           <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>

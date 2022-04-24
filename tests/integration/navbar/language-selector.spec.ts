@@ -39,3 +39,15 @@ test('Choosing a language should navigate the user to the localized page of that
   // 3. select the Bengali language and make sure we are navigated to /bn
   await Promise.all([page.waitForNavigation({ url: '/bn' }), page.locator('text=বাংলা').click()]);
 });
+
+test('Choosing a language should persist', async ({ page, baseURL }) => {
+  // 1. Open the language selector menu
+  await page.locator('[aria-label="Select Language"]').click();
+  // 2. select the Arabic language and make sure we are navigated to /ar
+  await Promise.all([page.waitForNavigation({ url: '/ar' }), page.locator('text=العربية').click()]);
+  // 3. Navigate again to /
+  await page.goto('/');
+  const currentUrl = page.url();
+  // 4. Make sure the user is redirected to /ar
+  expect(currentUrl).toBe(`${baseURL}/ar`);
+});

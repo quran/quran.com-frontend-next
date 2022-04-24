@@ -147,6 +147,13 @@
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "popular-links": "Liens populaires",
+    "popup": {
+        "cta-1": "Donner",
+        "cta-2": "Apprendre encore plus",
+        "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
+        "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre Ci-après ce Ramadan en tant que donateur mensuel (ou ponctuel).",
+        "title": "Cher Compagnon du Coran,"
+    },
     "powered-by": "Alimenté par",
     "prev": "Précédent",
     "previous-ayah": "Ayah précédent",
