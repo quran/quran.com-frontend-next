@@ -59,9 +59,6 @@ const OneTimePopup = () => {
           </div>
           <div className={styles.actionsContainer}>
             <Button
-              gl-donate-button
-              data-gl-monthly="true"
-              data-gl-amount="100"
               className={styles.action}
               type={ButtonType.Success}
               onClick={onDonateButtonClicked}

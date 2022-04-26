@@ -61,10 +61,6 @@ const Banner = ({ text, cta }: BannerProps) => {
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
-          gl-donate-button=""
-          data-gl-monthly="true"
-          data-gl-amount="100"
-          key="become-monthly-donor"
         >
           {isLoading ? <Spinner /> : cta}
         </Button>
