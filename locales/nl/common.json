@@ -148,8 +148,9 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "popular-links": "Populaire links",
     "popup": {
-        "cta-1": "Doneren",
-        "cta-2": "Leer meer",
+        "cta-1": "Doneer maandelijks",
+        "cta-2": "Eenmalig doneren",
+        "cta-3": "Leer meer",
         "text-1": "We zijn toegewijd om de wereld kennis en technologie van de Koran te dienen, altijd gratis.",
         "text-2": "Quran.com is een perfecte gelegenheid voor voortdurende liefdadigheid (Sadaqah Jariyah). Overweeg om te investeren in uw Hiernamaals deze Ramadan als maandelijkse (of eenmalige) donateur.",
         "title": "Beste metgezel van de Koran,"
