@@ -1,4 +1,4 @@
-const openGivingLoopPopup = (monthly = true, amount = 50) => {
+const openGivingLoopPopup = (monthly = true, amount = 25) => {
   // @ts-ignore
   if (window.givingloop) {
     // @ts-ignore

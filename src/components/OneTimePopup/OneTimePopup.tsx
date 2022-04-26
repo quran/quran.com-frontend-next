@@ -19,8 +19,8 @@ const OneTimePopup = () => {
   const [isDonateButtonLoading, setIsDonateButtonLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const onDonateButtonClicked = (monthly: boolean) => {
-    openGivingLoopPopup(monthly);
+  const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
+    openGivingLoopPopup(monthly, amount);
     setIsDonateButtonLoading(true);
     setTimeout(() => {
       setIsDonateButtonLoading(false);
@@ -70,7 +70,7 @@ const OneTimePopup = () => {
             <Button
               className={styles.action}
               type={ButtonType.Success}
-              onClick={() => onDonateButtonClicked(false)}
+              onClick={() => onDonateButtonClicked(false, 100)}
               isLoading={isDonateButtonLoading}
               variant={ButtonVariant.Outlined}
             >
