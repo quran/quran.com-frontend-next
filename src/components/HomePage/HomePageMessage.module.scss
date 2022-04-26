@@ -76,4 +76,8 @@
 
 .ctaSecondary {
   white-space: nowrap;
+
+  --themed-fg: var(--shade-1);
+  --themed-bg: var(--shade-9);
+  --themed-border: var(--shade-9);
 }
