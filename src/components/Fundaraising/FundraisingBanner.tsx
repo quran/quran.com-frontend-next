@@ -4,19 +4,17 @@ import useTranslation from 'next-translate/useTranslation';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonType } from '../dls/Button/Button';
-import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './FundraisingBanner.module.scss';
 
 import { logEvent } from 'src/utils/eventLogger';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
-
+    openGivingLoopPopup();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -36,12 +34,9 @@ const FundraisingBanner = () => {
         isNewTab
         type={ButtonType.Warning}
         className={styles.ctaContainer}
-        gl-donate-button=""
-        data-gl-monthly="false"
-        data-gl-amount="100"
-        key="become-monthly-donor"
+        isLoading={isLoading}
       >
-        {isLoading ? <Spinner /> : t('fundraising.cta')}
+        {t('fundraising.cta')}
       </Button>
       <div className={styles.backgroundImageContainer}>
         <MoonIllustrationSVG />

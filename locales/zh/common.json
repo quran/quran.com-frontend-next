@@ -148,8 +148,9 @@
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
     "popular-links": "热门链接",
     "popup": {
-        "cta-1": "捐",
-        "cta-2": "学到更多",
+        "cta-1": "每月捐赠",
+        "cta-2": "捐赠一次",
+        "cta-3": "学到更多",
         "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
         "text-2": "Quran.com 是持续慈善（Sadaqah Jariyah）的绝佳机会。请考虑以每月（或一次性）捐助者的身份投资您的来世这个斋月。",
         "title": "亲爱的古兰经伴侣，"

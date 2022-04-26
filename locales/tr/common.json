@@ -148,8 +148,9 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "popular-links": "Popüler Bağlantılar",
     "popup": {
-        "cta-1": "Bağış yapmak",
-        "cta-2": "Daha fazla bilgi edin",
+        "cta-1": "Aylık Bağış Yapın",
+        "cta-2": "Bir Kez Bağış Yapın",
+        "cta-3": "Daha fazla bilgi edin",
         "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
         "text-2": "Kuran.com sürekli sadaka (Sadaqah Jariyah) için mükemmel bir fırsattır. Lütfen bu Ramazan'da Ahiretinize aylık (veya bir kerelik) bağışçı olarak yatırım yapmayı düşünün.",
         "title": "Sevgili Kuran Sahabi,"

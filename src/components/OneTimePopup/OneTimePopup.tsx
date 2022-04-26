@@ -11,6 +11,7 @@ import Modal from '../dls/Modal/Modal';
 import styles from './OneTimePopup.module.scss';
 
 import { selectIsPopupVisible, setIsPopupVisible } from 'src/redux/slices/popup';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 const OneTimePopup = () => {
   const { t } = useTranslation('common');
@@ -18,9 +19,8 @@ const OneTimePopup = () => {
   const [isDonateButtonLoading, setIsDonateButtonLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const onDonateButtonClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
+  const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
+    openGivingLoopPopup(monthly, amount);
     setIsDonateButtonLoading(true);
     setTimeout(() => {
       setIsDonateButtonLoading(false);
@@ -61,10 +61,20 @@ const OneTimePopup = () => {
             <Button
               className={styles.action}
               type={ButtonType.Success}
-              onClick={onDonateButtonClicked}
+              onClick={() => onDonateButtonClicked(true)}
               isLoading={isDonateButtonLoading}
             >
               {t('popup.cta-1')}
+            </Button>
+
+            <Button
+              className={styles.action}
+              type={ButtonType.Success}
+              onClick={() => onDonateButtonClicked(false, 100)}
+              isLoading={isDonateButtonLoading}
+              variant={ButtonVariant.Outlined}
+            >
+              {t('popup.cta-2')}
             </Button>
 
             <Button
@@ -74,7 +84,7 @@ const OneTimePopup = () => {
               type={ButtonType.Success}
               variant={ButtonVariant.Outlined}
             >
-              {t('popup.cta-2')}
+              {t('popup.cta-3')}
             </Button>
           </div>
         </div>
