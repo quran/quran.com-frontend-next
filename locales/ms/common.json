@@ -148,8 +148,9 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
     "popular-links": "Pautan LINK yang popular",
     "popup": {
-        "cta-1": "Menderma",
-        "cta-2": "Ketahui lebih lanjut",
+        "cta-1": "Menderma Bulanan",
+        "cta-2": "Menderma Sekali",
+        "cta-3": "Ketahui lebih lanjut",
         "text-1": "Kami komited untuk berkhidmat kepada pengetahuan dan teknologi al-Quran dunia, sentiasa secara percuma.",
         "text-2": "Quran.com adalah peluang sempurna untuk amal berterusan (Sadaqah Jariyah). Sila pertimbangkan untuk melabur di Akhirat anda pada Ramadan ini sebagai penderma bulanan (atau sekali).",
         "title": "Sahabat Al-Quran yang dihormati,"

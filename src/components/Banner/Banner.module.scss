@@ -65,7 +65,6 @@
   padding-inline: var(--spacing-small);
   padding-block: var(--spacing-xxsmall);
   font-weight: var(--font-weight-semibold);
-  display: inline-block;
   height: auto;
   background-color: #ff7878;
   border-color: #ff7878;
@@ -75,6 +74,7 @@
   &:hover {
     color: #ff7878;
   }
+  white-space: nowrap;
 }
 
 .closeButton {

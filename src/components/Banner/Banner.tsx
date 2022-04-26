@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
-import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './Banner.module.scss';
 
 import { selectIsBannerVisible } from 'src/redux/slices/banner';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 // import { setIsBannerVisible } from 'src/redux/slices/banner';
 // import { logButtonClick } from 'src/utils/eventLogger';
@@ -34,8 +34,7 @@ const Banner = ({ text, cta }: BannerProps) => {
   // };
 
   const onDonateClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
+    openGivingLoopPopup();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -61,12 +60,9 @@ const Banner = ({ text, cta }: BannerProps) => {
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
-          gl-donate-button=""
-          data-gl-monthly="false"
-          data-gl-amount="100"
-          key="become-monthly-donor"
+          isLoading={isLoading}
         >
-          {isLoading ? <Spinner /> : cta}
+          {cta}
         </Button>
       </div>
       {/* <div className={styles.closeButton}>

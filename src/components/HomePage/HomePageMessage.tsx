@@ -6,11 +6,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import CloseIcon from '../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './HomePageMessage.module.scss';
 
 import { logEvent } from 'src/utils/eventLogger';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 type HomePageMessageProps = {
   title?: string;
@@ -19,13 +19,15 @@ type HomePageMessageProps = {
   onClose?: () => void;
 };
 
-const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProps) => {
+const HomePageMessage = ({
+  // title, subtitle,
+  body,
+  onClose,
+}: HomePageMessageProps) => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
-
+    openGivingLoopPopup();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -37,33 +39,20 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
   };
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{subtitle}</p>
-      {body}
-
-      <div className={styles.closeIcon}>
-        <Button
-          size={ButtonSize.Small}
-          shape={ButtonShape.Circle}
-          variant={ButtonVariant.Ghost}
-          onClick={onClose}
-          ariaLabel={t('aria.msg-close')}
-        >
-          <CloseIcon />
-        </Button>
+      <div>
+        {/* <h3 className={styles.title}>{title}</h3> */}
+        {/* <p className={styles.description}>{subtitle}</p> */}
+        {body}
       </div>
+
       <div className={styles.ctaContainer}>
         <Button
+          isLoading={isLoading}
           isNewTab
-          // href="https://donate.quran.com"
           onClick={onDonateClicked}
           className={styles.ctaPrimary}
-          gl-donate-button=""
-          data-gl-monthly="false"
-          data-gl-amount="100"
-          key="become-monthly-donor"
         >
-          {isLoading ? <Spinner /> : t('fundraising-sticky-banner.cta')}
+          {t('fundraising-sticky-banner.cta')}
         </Button>
 
         <Button
@@ -75,10 +64,21 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
             });
           }}
           className={styles.ctaSecondary}
-          variant={ButtonVariant.Compact}
+          variant={ButtonVariant.Outlined}
         >
           {t('fundraising.learn-more')}
         </Button>
+        <div className={styles.closeIcon}>
+          <Button
+            size={ButtonSize.Large}
+            variant={ButtonVariant.Compact}
+            shape={ButtonShape.Circle}
+            onClick={onClose}
+            ariaLabel={t('aria.msg-close')}
+          >
+            <CloseIcon />
+          </Button>
+        </div>
       </div>
     </div>
   );
