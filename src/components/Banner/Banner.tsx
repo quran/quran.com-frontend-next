@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
-import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './Banner.module.scss';
 
