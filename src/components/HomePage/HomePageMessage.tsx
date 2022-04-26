@@ -11,6 +11,7 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from './HomePageMessage.module.scss';
 
 import { logEvent } from 'src/utils/eventLogger';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 type HomePageMessageProps = {
   title?: string;
@@ -23,9 +24,7 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
-
+    openGivingLoopPopup();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);

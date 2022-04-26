@@ -11,6 +11,7 @@ import Modal from '../dls/Modal/Modal';
 import styles from './OneTimePopup.module.scss';
 
 import { selectIsPopupVisible, setIsPopupVisible } from 'src/redux/slices/popup';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 const OneTimePopup = () => {
   const { t } = useTranslation('common');
@@ -19,8 +20,7 @@ const OneTimePopup = () => {
   const dispatch = useDispatch();
 
   const onDonateButtonClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
+    openGivingLoopPopup();
     setIsDonateButtonLoading(true);
     setTimeout(() => {
       setIsDonateButtonLoading(false);
@@ -59,6 +59,9 @@ const OneTimePopup = () => {
           </div>
           <div className={styles.actionsContainer}>
             <Button
+              gl-donate-button
+              data-gl-monthly="true"
+              data-gl-amount="100"
               className={styles.action}
               type={ButtonType.Success}
               onClick={onDonateButtonClicked}

@@ -13,6 +13,7 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from './Banner.module.scss';
 
 import { selectIsBannerVisible } from 'src/redux/slices/banner';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 // import { setIsBannerVisible } from 'src/redux/slices/banner';
 // import { logButtonClick } from 'src/utils/eventLogger';
@@ -34,8 +35,7 @@ const Banner = ({ text, cta }: BannerProps) => {
   // };
 
   const onDonateClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
+    openGivingLoopPopup();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -62,7 +62,7 @@ const Banner = ({ text, cta }: BannerProps) => {
           size={ButtonSize.Small}
           type={ButtonType.Success}
           gl-donate-button=""
-          data-gl-monthly="false"
+          data-gl-monthly="true"
           data-gl-amount="100"
           key="become-monthly-donor"
         >

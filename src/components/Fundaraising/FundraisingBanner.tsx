@@ -9,14 +9,13 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from './FundraisingBanner.module.scss';
 
 import { logEvent } from 'src/utils/eventLogger';
+import openGivingLoopPopup from 'src/utils/givingloop';
 
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
-    // @ts-ignore
-    window.givingloop('donate');
-
+    openGivingLoopPopup();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
