@@ -61,8 +61,9 @@ const Banner = ({ text, cta }: BannerProps) => {
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
+          isLoading={isLoading}
         >
-          {isLoading ? <Spinner /> : cta}
+          {cta}
         </Button>
       </div>
       {/* <div className={styles.closeButton}>
