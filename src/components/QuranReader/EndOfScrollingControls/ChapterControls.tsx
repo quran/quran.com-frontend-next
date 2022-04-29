@@ -10,16 +10,23 @@ import useScrollToTop from 'src/hooks/useScrollToTop';
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
+import { VersesResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
 interface Props {
   lastVerse: Verse;
+  initialData: VersesResponse;
 }
 
-const ChapterControls: React.FC<Props> = ({ lastVerse }) => {
+const ChapterControls: React.FC<Props> = ({ initialData }) => {
   const { t } = useTranslation('quran-reader');
   const scrollToTop = useScrollToTop();
-  const { chapterId } = lastVerse;
+  // due to some errors this commented code don't compute right chapter id
+  // const { chapterId } = lastVerse;
+  // const chapterNumber = Number(chapterId);
+  const chaptterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
+  // example : "2:253" -> chapter 2 verse 253
+  const chapterId = chaptterIdAndLastVerse.split(':')[0];
   const chapterNumber = Number(chapterId);
 
   return (
