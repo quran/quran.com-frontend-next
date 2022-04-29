@@ -87,6 +87,7 @@ const OneTimePopup = () => {
               {t('popup.cta-3')}
             </Button>
           </div>
+          <div className={styles.text}>{t('popup.footnote')}</div>
         </div>
       </div>
     </Modal>
