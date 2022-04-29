@@ -26,6 +26,10 @@
 }
 
 .action {
+  width: 100%;
+  @include breakpoints.tablet {
+    width: auto;
+  }
   margin-inline-end: var(--spacing-medium);
   font-weight: var(--font-weight-bold);
   margin-block-end: var(--spacing-small);
