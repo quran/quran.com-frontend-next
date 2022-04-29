@@ -45,9 +45,6 @@ const TranslationView = ({
     1: initialData.verses,
   });
   const [lastVerse, setLastVerse] = useState<Verse>(null);
-
-
-
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
