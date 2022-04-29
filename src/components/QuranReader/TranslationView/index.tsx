@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
+import { findLastIndex } from 'lodash';
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
@@ -20,7 +21,6 @@ import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
-import {findLastIndex} from "lodash";
 
 type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
