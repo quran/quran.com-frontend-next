@@ -20,6 +20,7 @@ import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
+import {findLastIndex} from "lodash";
 
 type TranslationViewProps = {
   quranReaderStyles: QuranReaderStyles;
@@ -72,7 +73,7 @@ const TranslationView = ({
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
   useEffect(() => {
-    const lastVerseIndex = verses.findIndex((verse) => verse.chapterId === Number(resourceId));
+    const lastVerseIndex = findLastIndex(verses, ['chapterId', Number(resourceId)]);
     return lastVerseIndex < 0
       ? setLastVerse(verses[verses.length - 1])
       : setLastVerse(verses[lastVerseIndex]);
