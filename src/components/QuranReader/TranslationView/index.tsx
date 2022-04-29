@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, useRef, useState } from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -44,6 +44,10 @@ const TranslationView = ({
   const [apiPageToVersesMap, setApiPageToVersesMap] = useState<Record<number, Verse[]>>({
     1: initialData.verses,
   });
+  const [lastVerse, setLastVerse] = useState<Verse>(null);
+
+
+
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
@@ -70,6 +74,12 @@ const TranslationView = ({
   useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef, initialData.pagination.perPage);
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
+  useEffect(() => {
+    const lastVerseIndex = verses.findIndex((verse) => verse.chapterId === Number(resourceId));
+    return lastVerseIndex < 0
+      ? setLastVerse(verses[verses.length - 1])
+      : setLastVerse(verses[lastVerseIndex]);
+  }, [resourceId, apiPageToVersesMap, verses]);
 
   const itemContentRenderer = (currentPageIndex: number) => {
     return (
@@ -106,7 +116,7 @@ const TranslationView = ({
             Footer: () => (
               <EndOfScrollingControls
                 quranReaderDataType={quranReaderDataType}
-                lastVerse={verses[verses.length - 1]}
+                lastVerse={lastVerse}
               />
             ),
           }}
