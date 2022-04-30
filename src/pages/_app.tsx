@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IdProvider } from '@radix-ui/react-id';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import chaptersData from '../../types/ChaptersData';
+import { getAllChaptersData } from '../utils/chapter';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
@@ -15,6 +18,7 @@ import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
 import OneTimePopup from 'src/components/OneTimePopup/OneTimePopup';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
+import DataContext from 'src/contexts/DataContext';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
@@ -22,7 +26,6 @@ import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
-
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
@@ -32,11 +35,17 @@ import 'src/styles/variables.scss';
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
+  const [chapterData, setChapterData] = useState<chaptersData>();
   const { t } = useTranslation('common');
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
     logAndRedirectUnsupportedLogicalCSS();
+    const getChapterData = async () => {
+      const data = await getAllChaptersData(locale);
+      setChapterData(data);
+    };
+    getChapterData();
   }, [locale]);
 
   // Record page view to Google analytics when user navigate to a new page.
@@ -67,7 +76,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
               <Navbar />
               <DeveloperUtility />
               <Component {...pageProps} />
-              <AudioPlayer />
+              <DataContext.Provider value={chapterData}>
+                <AudioPlayer />
+              </DataContext.Provider>
               <Footer />
               <OneTimePopup />
             </ToastContainerProvider>
