@@ -84,6 +84,7 @@
     },
     "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
     "developers": "Sviluppatori",
+    "donate": "Donare",
     "error": {
         "general": "Qualcosa è andato storto. Per favore riprova.",
         "offline": "Sembra che tu abbia perso la connessione. Si prega di controllare e riprovare."
@@ -110,16 +111,6 @@
         "title": "Leggi, studia e impara Il Nobile Corano."
     },
     "from": "A partire dal",
-    "fundraising-sticky-banner": {
-        "cta": "Donare",
-        "title": "Sostieni Quran.com questo Ramadan"
-    },
-    "fundraising": {
-        "cta": "DONARE",
-        "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
-        "learn-more": "Per saperne di più",
-        "title": "Diventa un donatore mensile"
-    },
     "help": "Aiuto",
     "hizb": "Hizb",
     "home": "Casa",

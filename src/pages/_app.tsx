@@ -13,7 +13,6 @@ import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
-import OneTimePopup from 'src/components/OneTimePopup/OneTimePopup';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
@@ -69,7 +68,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
               <Component {...pageProps} />
               <AudioPlayer />
               <Footer />
-              <OneTimePopup />
             </ToastContainerProvider>
           </IdProvider>
         </ThemeProvider>

@@ -84,6 +84,7 @@
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
     "developers": "Pengembang (Developers)",
+    "donate": "Menyumbangkan",
     "error": {
         "general": "Ada yang salah. Silakan coba lagi.",
         "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi."
@@ -110,16 +111,6 @@
         "title": "Baca, pelajari, dan pelajari The Noble Quran."
     },
     "from": "Dari",
-    "fundraising-sticky-banner": {
-        "cta": "Menyumbangkan",
-        "title": "Dukung Quran.com di Ramadhan ini"
-    },
-    "fundraising": {
-        "cta": "MENYUMBANGKAN",
-        "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
-        "learn-more": "Belajarlah lagi",
-        "title": "Menjadi Donatur Bulanan"
-    },
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
