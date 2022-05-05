@@ -38,7 +38,7 @@ const SidebarNavigation = () => {
       logEvent('sidebar_navigation_close_outside_click');
       dispatch(setIsVisible(false));
     },
-    isMobile(),
+    isVisible && isMobile(),
   );
 
   const navigationItems = [

@@ -1,5 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
+import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
+
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
@@ -15,6 +17,15 @@ const Links = () => {
   }
   const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
 
+  const donateLink = (
+    <span className={styles.donateLinkContainer}>
+      <span className={styles.prefixContainer}>
+        <MoonIllustrationSVG />
+      </span>
+      {t('donate')}
+    </span>
+  );
+
   const linksGroup = [
     {
       title: t('navigate'),
@@ -28,6 +39,12 @@ const Links = () => {
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
         { text: t('help'), url: '/support' },
+        {
+          text: donateLink,
+          isExternal: true,
+          className: styles.primaryLink,
+          url: 'https://donate.quran.com',
+        },
       ],
     },
     {
@@ -72,6 +89,7 @@ const Links = () => {
             <div key={link.url} className={styles.linkContainer}>
               <Link
                 href={link.url}
+                className={link.className}
                 variant={LinkVariant.Primary}
                 isNewTab={!!link.isExternal}
                 {...(link.onClick && { onClick: link.onClick })}

@@ -84,6 +84,7 @@
     },
     "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
     "developers": "Zhvilluesit",
+    "donate": "Dhuroni",
     "error": {
         "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
         "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri."
@@ -110,16 +111,6 @@
         "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
     },
     "from": "Nga",
-    "fundraising-sticky-banner": {
-        "cta": "Dhuroni",
-        "title": "Mbështetni Quran.com këtë Ramazan"
-    },
-    "fundraising": {
-        "cta": "DHURONI",
-        "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të vazhdojmë operimin, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
-        "learn-more": "Mëso më shumë",
-        "title": "Bëhuni një donator mujor"
-    },
     "help": "Ndihmë",
     "hizb": "Hizb",
     "home": "Shtëpi",

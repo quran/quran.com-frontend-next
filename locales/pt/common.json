@@ -84,6 +84,7 @@
     },
     "default-description": "O Alcorão traduzido para vários idiomas em uma interface simples e fácil",
     "developers": "Desenvolvedores",
+    "donate": "Doar",
     "error": {
         "general": "Algo deu errado. Por favor, tente novamente.",
         "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente."
@@ -110,16 +111,6 @@
         "title": "Leia, estude e aprenda O Nobre Alcorão."
     },
     "from": "A partir de",
-    "fundraising-sticky-banner": {
-        "cta": "Doar",
-        "title": "Apoie Alcorão.com neste Ramadã"
-    },
-    "fundraising": {
-        "cta": "DOAR",
-        "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
-        "learn-more": "Saber mais",
-        "title": "Seja um doador mensal"
-    },
     "help": "Ajuda",
     "hizb": "Hizb",
     "home": "Casa",

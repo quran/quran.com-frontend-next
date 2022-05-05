@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-import Button, { ButtonType } from '../dls/Button/Button';
+import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './FundraisingBanner.module.scss';
 
@@ -29,14 +29,22 @@ const FundraisingBanner = () => {
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
       <Button
-        // href="https://donate.quran.com"
         onClick={onDonateClicked}
         isNewTab
         type={ButtonType.Warning}
-        className={styles.ctaContainer}
+        className={styles.cta}
         isLoading={isLoading}
       >
-        {t('fundraising.cta')}
+        {t('donate')}
+      </Button>
+      <Button
+        href="https://donate.quran.com"
+        isNewTab
+        type={ButtonType.Warning}
+        className={styles.cta}
+        variant={ButtonVariant.Outlined}
+      >
+        {t('fundraising.learn-more')}
       </Button>
       <div className={styles.backgroundImageContainer}>
         <MoonIllustrationSVG />
