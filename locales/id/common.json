@@ -111,6 +111,11 @@
         "title": "Baca, pelajari, dan pelajari The Noble Quran."
     },
     "from": "Dari",
+    "fundraising": {
+        "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
+        "learn-more": "Belajarlah lagi",
+        "title": "Menjadi Donatur Bulanan"
+    },
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
