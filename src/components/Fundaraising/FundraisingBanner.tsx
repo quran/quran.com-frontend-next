@@ -35,7 +35,7 @@ const FundraisingBanner = () => {
         className={styles.cta}
         isLoading={isLoading}
       >
-        {t('fundraising.cta')}
+        {t('donate')}
       </Button>
       <Button
         href="https://donate.quran.com"

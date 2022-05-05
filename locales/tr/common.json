@@ -84,6 +84,7 @@
     },
     "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "Geliştiriciler",
+    "donate": "Bağış yapmak",
     "error": {
         "general": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
         "offline": "Bağlantınızı kaybettiniz gibi görünüyor. Lütfen kontrol edip tekrar deneyin."
@@ -110,16 +111,6 @@
         "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
     },
     "from": "İtibaren",
-    "fundraising-sticky-banner": {
-        "cta": "Bağış yapmak",
-        "title": "Bu Ramazan Kuran.com'u destekleyin"
-    },
-    "fundraising": {
-        "cta": "BAĞIŞ YAPMAK",
-        "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
-        "learn-more": "Daha fazla bilgi edin",
-        "title": "Aylık Bağışçı Olun"
-    },
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
