@@ -161,3 +161,20 @@
 .emptySpacePlaceholder {
   height: constants.$audio-player-default-height;
 }
+
+.linkContainer .primaryLink {
+  color: var(--color-success-medium);
+}
+
+.prefixContainer {
+  display: inline-flex;
+  width: var(--spacing-large);
+  height: var(--spacing-large);
+  color: var(--color-success-deep);
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.donateLinkContainer {
+  display: flex;
+  align-items: center;
+}

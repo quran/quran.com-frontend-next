@@ -84,6 +84,7 @@
     },
     "default-description": "The Quran translated into many languages in a simple and easy interface",
     "developers": "Developers",
+    "donate": "Donate",
     "error": {
         "general": "Something went wrong. Please try again.",
         "offline": "Looks like you lost your connection. Please check it and try again."

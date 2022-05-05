@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from 'src/components/chapters/ChapterAndJuzList';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
-import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
+// import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -42,9 +42,9 @@ const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapter
         <div className={styles.pageContainer}>
           <div className={styles.flow}>
             <HomePageHero />
-            <div className={styles.flowItem}>
+            {/* <div className={styles.flowItem}>
               <HomePageWelcomeMessage />
-            </div>
+            </div> */}
             <div className={classNames(styles.flowItem, styles.fullWidth)}>
               <RecentReadingSessions />
             </div>
