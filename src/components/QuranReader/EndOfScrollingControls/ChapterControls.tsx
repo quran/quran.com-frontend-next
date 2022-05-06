@@ -21,12 +21,9 @@ interface Props {
 const ChapterControls: React.FC<Props> = ({ initialData }) => {
   const { t } = useTranslation('quran-reader');
   const scrollToTop = useScrollToTop();
-  // due to some errors this commented code don't compute right chapter id
-  // const { chapterId } = lastVerse;
-  // const chapterNumber = Number(chapterId);
-  const chaptterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
+  const chapterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
   // example : "2:253" -> chapter 2 verse 253
-  const chapterId = chaptterIdAndLastVerse.split(':')[0];
+  const chapterId = chapterIdAndLastVerse.split(':')[0];
   const chapterNumber = Number(chapterId);
 
   return (
