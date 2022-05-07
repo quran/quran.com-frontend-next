@@ -47,7 +47,7 @@ const Verse: NextPage<VerseProps> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const {
-    query: { verseId },
+    query: { verseId, translations },
   } = useRouter();
   if (hasError || !versesResponse.verses.length) {
     return <Error statusCode={500} />;
@@ -64,8 +64,9 @@ const Verse: NextPage<VerseProps> = ({
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
         description={
-          versesResponse.verses[0].translations?.[0].text ??
-          versesResponse.verses[0].textImlaeiSimple}
+          translations ?
+            versesResponse.verses[0].translations?.[0].text :
+            versesResponse.verses[0].textImlaeiSimple}
       />
       <QuranReader
         initialData={versesResponse}
