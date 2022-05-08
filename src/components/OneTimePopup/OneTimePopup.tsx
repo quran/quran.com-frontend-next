@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import CloseIcon from '../../../public/icons/close.svg';
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
@@ -10,14 +10,18 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './OneTimePopup.module.scss';
 
-import { selectIsPopupVisible, setIsPopupVisible } from 'src/redux/slices/popup';
+import { selectSessionCount } from 'src/redux/slices/popup';
 import openGivingLoopPopup from 'src/utils/givingloop';
 
+const OPEN_POPUP_EVERY_N_SESSIONS = 10;
 const OneTimePopup = () => {
   const { t } = useTranslation('common');
-  const isPopupVisible = useSelector(selectIsPopupVisible);
+  const sessionCount = useSelector(selectSessionCount);
   const [isDonateButtonLoading, setIsDonateButtonLoading] = useState(false);
-  const dispatch = useDispatch();
+
+  const initialIsPopupVisible =
+    sessionCount % OPEN_POPUP_EVERY_N_SESSIONS === 0 && sessionCount > 0;
+  const [isPopupVisible, setIsPopupVisible] = useState(initialIsPopupVisible);
 
   const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
     openGivingLoopPopup(monthly, amount);
@@ -26,14 +30,14 @@ const OneTimePopup = () => {
       setIsDonateButtonLoading(false);
 
       // Unfortunately, we need to close this popup. Otherwise the giving loop popup won't be clickable
-      dispatch(setIsPopupVisible(false));
+      setIsPopupVisible(false);
     }, 5000);
   };
 
   if (!isPopupVisible) return null;
 
   const onCloseButtonClicked = () => {
-    dispatch(setIsPopupVisible(false));
+    setIsPopupVisible(false);
   };
 
   return (

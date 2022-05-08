@@ -1,28 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
 export type PopupState = {
-  isPopupVisible: boolean;
+  sessionCount: number;
 };
 
 const initialState: PopupState = {
-  isPopupVisible: true,
+  sessionCount: 0,
 };
 
 export const popupSlice = createSlice({
   name: 'popup',
   initialState,
   reducers: {
-    setIsPopupVisible: (state: PopupState, action: PayloadAction<boolean>) => ({
+    incrementSessionCount: (state: PopupState) => ({
       ...state,
-      isPopupVisible: action.payload,
+      sessionCount: state.sessionCount + 1,
     }),
   },
 });
 
-export const { setIsPopupVisible } = popupSlice.actions;
+export const { incrementSessionCount } = popupSlice.actions;
 
-export const selectIsPopupVisible = (state: RootState) => state.popup.isPopupVisible;
+export const selectSessionCount = (state: RootState) => state.popup.sessionCount;
 
 export default popupSlice.reducer;
