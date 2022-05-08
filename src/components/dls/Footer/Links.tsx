@@ -1,6 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
+import MoonIllustrationSVG from '../../../../public/icons/moon.svg';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '../Button/Button';
 
 import styles from './Footer.module.scss';
 
@@ -17,19 +18,28 @@ const Links = () => {
   }
   const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
 
-  const donateLink = (
-    <span className={styles.donateLinkContainer}>
-      <span className={styles.prefixContainer}>
-        <MoonIllustrationSVG />
-      </span>
-      {t('donate')}
-    </span>
-  );
-
   const linksGroup = [
     {
       title: t('navigate'),
       links: [
+        {
+          text: t('donate'),
+          isExternal: true,
+          url: 'https://donate.quran.com',
+          render: ({ text, url, isExternalUrl }) => (
+            <Button
+              prefix={<MoonIllustrationSVG />}
+              className={styles.donateButton}
+              isNewTab={isExternalUrl}
+              href={url}
+              type={ButtonType.Success}
+              size={ButtonSize.Small}
+              variant={ButtonVariant.Outlined}
+            >
+              {text}
+            </Button>
+          ),
+        },
         { text: t('home'), url: '/' },
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
@@ -39,12 +49,6 @@ const Links = () => {
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
         { text: t('help'), url: '/support' },
-        {
-          text: donateLink,
-          isExternal: true,
-          className: styles.primaryLink,
-          url: 'https://donate.quran.com',
-        },
       ],
     },
     {
@@ -87,15 +91,19 @@ const Links = () => {
           <div className={styles.groupTitle}>{group.title}</div>
           {group.links.map((link) => (
             <div key={link.url} className={styles.linkContainer}>
-              <Link
-                href={link.url}
-                className={link.className}
-                variant={LinkVariant.Primary}
-                isNewTab={!!link.isExternal}
-                {...(link.onClick && { onClick: link.onClick })}
-              >
-                {link.text}
-              </Link>
+              {link.render ? (
+                link.render({ text: link.text, url: link.url, isExternalUrl: link.isExternal })
+              ) : (
+                <Link
+                  href={link.url}
+                  className={link.className}
+                  variant={LinkVariant.Primary}
+                  isNewTab={!!link.isExternal}
+                  {...(link.onClick && { onClick: link.onClick })}
+                >
+                  {link.text}
+                </Link>
+              )}
             </div>
           ))}
         </div>
