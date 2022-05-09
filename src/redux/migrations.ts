@@ -130,4 +130,10 @@ export default {
       isVisible: true,
     },
   }),
+  20: (state) => ({
+    ...state,
+    popup: {
+      sessionCount: 0,
+    },
+  }),
 };

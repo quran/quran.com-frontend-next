@@ -19,9 +19,9 @@ const OneTimePopup = () => {
   const sessionCount = useSelector(selectSessionCount);
   const [isDonateButtonLoading, setIsDonateButtonLoading] = useState(false);
 
-  const initialIsPopupVisible =
-    sessionCount % OPEN_POPUP_EVERY_N_SESSIONS === 0 && sessionCount > 0;
-  const [isPopupVisible, setIsPopupVisible] = useState(initialIsPopupVisible);
+  const [isPopupVisible, setIsPopupVisible] = useState(
+    () => sessionCount % OPEN_POPUP_EVERY_N_SESSIONS === 0 && sessionCount > 0,
+  );
 
   const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
     openGivingLoopPopup(monthly, amount);
