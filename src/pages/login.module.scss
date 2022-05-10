@@ -1,0 +1,42 @@
+.outerContainer {
+  min-height: 93vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  width: calc(10 * var(--spacing-mega));
+}
+
+.loginButton {
+  margin-block-start: var(--spacing-small);
+  font-weight: var(--font-weight-semibold);
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
+}
+
+.googleButton {
+  --themed-bg: var(--color-background-default);
+  --themed-fg: var(--color-text-default);
+  &:hover {
+    --themed-bg: var(--color-text-default);
+  }
+}
+
+.facebookButton {
+  --themed-bg: #4267b2;
+  --themed-fg: var(--color-text-inverse);
+  --themed-border: #4267b2;
+  &:hover {
+    --themed-bg: var(--color-text-default);
+    --themed-border: var(--color-text-default);
+  }
+}
