@@ -1,7 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
-
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
@@ -17,15 +15,6 @@ const Links = () => {
   }
   const getChapterSlug = (id) => `/${chaptersData[id].slug}`;
 
-  const donateLink = (
-    <span className={styles.donateLinkContainer}>
-      <span className={styles.prefixContainer}>
-        <MoonIllustrationSVG />
-      </span>
-      {t('donate')}
-    </span>
-  );
-
   const linksGroup = [
     {
       title: t('navigate'),
@@ -34,17 +23,12 @@ const Links = () => {
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
+        { text: t('donate'), isExternal: true, url: 'https://donate.quran.com' },
         { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
         { text: t('help'), url: '/support' },
-        {
-          text: donateLink,
-          isExternal: true,
-          className: styles.primaryLink,
-          url: 'https://donate.quran.com',
-        },
       ],
     },
     {
