@@ -132,8 +132,8 @@ export default {
   }),
   20: (state) => ({
     ...state,
-    popup: {
-      sessionCount: 0,
+    session: {
+      count: 0,
     },
   }),
 };

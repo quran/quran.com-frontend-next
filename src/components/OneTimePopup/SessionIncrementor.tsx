@@ -2,7 +2,7 @@ import { useEffect, memo } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { incrementSessionCount } from 'src/redux/slices/popup';
+import { incrementSessionCount } from 'src/redux/slices/session';
 
 const SessionIncrementor = () => {
   const dispatch = useDispatch();

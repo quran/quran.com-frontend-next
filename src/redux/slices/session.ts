@@ -3,26 +3,26 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../RootState';
 
 export type PopupState = {
-  sessionCount: number;
+  count: number;
 };
 
 const initialState: PopupState = {
-  sessionCount: 0,
+  count: 0,
 };
 
 export const popupSlice = createSlice({
-  name: 'popup',
+  name: 'session',
   initialState,
   reducers: {
     incrementSessionCount: (state: PopupState) => ({
       ...state,
-      sessionCount: state.sessionCount + 1,
+      count: state.count + 1,
     }),
   },
 });
 
 export const { incrementSessionCount } = popupSlice.actions;
 
-export const selectSessionCount = (state: RootState) => state.popup.sessionCount;
+export const selectSessionCount = (state: RootState) => state.session.count;
 
 export default popupSlice.reducer;

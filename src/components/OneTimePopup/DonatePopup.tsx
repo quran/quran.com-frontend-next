@@ -8,19 +8,19 @@ import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Modal from '../dls/Modal/Modal';
 
-import styles from './OneTimePopup.module.scss';
+import styles from './DonatePopup.module.scss';
 
-import { selectSessionCount } from 'src/redux/slices/popup';
+import { selectSessionCount } from 'src/redux/slices/session';
 import openGivingLoopPopup from 'src/utils/givingloop';
 
-const OPEN_POPUP_EVERY_N_SESSIONS = 10;
-const OneTimePopup = () => {
+const POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT = 10;
+const DonatePopup = () => {
   const { t } = useTranslation('common');
   const sessionCount = useSelector(selectSessionCount);
   const [isDonateButtonLoading, setIsDonateButtonLoading] = useState(false);
 
   const [isPopupVisible, setIsPopupVisible] = useState(
-    () => sessionCount % OPEN_POPUP_EVERY_N_SESSIONS === 0 && sessionCount > 0,
+    () => sessionCount % POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT === 0 && sessionCount > 0,
   );
 
   const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
@@ -98,4 +98,4 @@ const OneTimePopup = () => {
   );
 };
 
-export default OneTimePopup;
+export default DonatePopup;
