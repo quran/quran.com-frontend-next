@@ -1,8 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../../public/icons/moon.svg';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '../Button/Button';
-
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
@@ -22,28 +19,11 @@ const Links = () => {
     {
       title: t('navigate'),
       links: [
-        {
-          text: t('donate'),
-          isExternal: true,
-          url: 'https://donate.quran.com',
-          render: ({ text, url, isExternalUrl }) => (
-            <Button
-              prefix={<MoonIllustrationSVG />}
-              className={styles.donateButton}
-              isNewTab={isExternalUrl}
-              href={url}
-              type={ButtonType.Success}
-              size={ButtonSize.Small}
-              variant={ButtonVariant.Outlined}
-            >
-              {text}
-            </Button>
-          ),
-        },
         { text: t('home'), url: '/' },
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
+        { text: t('donate'), isExternal: true, url: 'https://donate.quran.com' },
         { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
@@ -91,19 +71,15 @@ const Links = () => {
           <div className={styles.groupTitle}>{group.title}</div>
           {group.links.map((link) => (
             <div key={link.url} className={styles.linkContainer}>
-              {link.render ? (
-                link.render({ text: link.text, url: link.url, isExternalUrl: link.isExternal })
-              ) : (
-                <Link
-                  href={link.url}
-                  className={link.className}
-                  variant={LinkVariant.Primary}
-                  isNewTab={!!link.isExternal}
-                  {...(link.onClick && { onClick: link.onClick })}
-                >
-                  {link.text}
-                </Link>
-              )}
+              <Link
+                href={link.url}
+                className={link.className}
+                variant={LinkVariant.Primary}
+                isNewTab={!!link.isExternal}
+                {...(link.onClick && { onClick: link.onClick })}
+              >
+                {link.text}
+              </Link>
             </div>
           ))}
         </div>
