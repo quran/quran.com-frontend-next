@@ -30,9 +30,12 @@
   @include theme.sepia {
     --themed-border: transparent;
   }
-  &:hover {
-    --themed-bg: var(--color-text-default);
-    --themed-border: var(--color-text-default);
+
+  @media (hover: hover) {
+    &:hover {
+      --themed-bg: var(--color-text-default);
+      --themed-border: var(--color-text-default);
+    }
   }
 }
 
@@ -42,8 +45,10 @@
   --themed-bg: var(--facebook-brand-color);
   --themed-fg: var(--shade-0);
   --themed-border: var(--facebook-brand-color);
-  &:hover {
-    --themed-bg: var(--color-text-default);
-    --themed-border: var(--color-text-default);
+  @media (hover: hover) {
+    &:hover {
+      --themed-bg: var(--color-text-default);
+      --themed-border: var(--color-text-default);
+    }
   }
 }
