@@ -25,6 +25,7 @@
     "/radio": ["home", "radio"],
     "/reciters/[reciterId]": ["home", "radio", "reciter"],
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
-    "/reciters": ["reciter", "home"]
+    "/reciters": ["reciter", "home"],
+    "/profile": ["home", "profile"]
   }
 }
