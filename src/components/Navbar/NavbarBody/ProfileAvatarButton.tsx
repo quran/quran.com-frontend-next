@@ -14,6 +14,7 @@ const ProfileAvatarButton = () => {
 
   const trigger = (
     <Button
+      tooltip={isLoggedIn ? null : t('login')}
       variant={ButtonVariant.Ghost}
       href={isLoggedIn ? null : '/login'}
       shape={ButtonShape.Circle}
