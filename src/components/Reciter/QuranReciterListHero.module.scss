@@ -42,3 +42,7 @@ $fallbackColor: #22a5ad;
   width: 80%;
   max-width: calc(25 * var(--spacing-mega));
 }
+
+.input {
+  background-color: var(--color-background-elevated);
+}

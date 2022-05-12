@@ -19,6 +19,7 @@ const QuranReciterListHero = ({ onSearchQueryChange, searchQuery }: QuranReciter
 
       <div className={styles.searchInputContainer}>
         <Input
+          containerClassName={styles.input}
           prefix={<SearchIcon />}
           id="translations-search"
           value={searchQuery}
