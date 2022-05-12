@@ -26,6 +26,7 @@
 .rightCTA {
   display: flex;
   margin-inline-end: var(--spacing-medium);
+  align-items: center;
 
   > button {
     margin-inline-start: var(--spacing-micro);
@@ -38,4 +39,8 @@
       margin-inline-start: var(--spacing-xsmall);
     }
   }
+}
+
+.avatarButton {
+  background-color: var(--color-background-alternative-faint);
 }
