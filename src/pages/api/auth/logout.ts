@@ -1,7 +1,6 @@
 import cookie from 'cookie';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import withProtect from 'src/middleware/withProtect';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
@@ -44,4 +43,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
   return setResponseCookie(res, cookies).json({ success: true });
 };
 
-export default withProtect(handler);
+export default handler;

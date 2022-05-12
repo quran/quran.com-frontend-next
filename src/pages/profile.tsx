@@ -1,6 +1,9 @@
+/* eslint-disable react-func/max-lines-per-function */
 import classNames from 'classnames';
-import { GetStaticProps } from 'next';
+import Cookies from 'js-cookie';
+import { GetServerSideProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
@@ -9,14 +12,35 @@ import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/But
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
+import Error from 'src/pages/_error';
+import { REFRESH_TOKEN_COOKIE_NAME, USER_NAME_COOKIE_NAME } from 'src/utils/auth/constants';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { getBasePath } from 'src/utils/url';
+import ChaptersData from 'types/ChaptersData';
 
-const ProfilePage = ({ chaptersData }) => {
+interface Props {
+  hasError?: boolean;
+  user?: {
+    email: string;
+  };
+  chaptersData?: ChaptersData;
+}
+
+const ProfilePage: NextPage<Props> = ({ chaptersData, hasError, user }) => {
   const { t } = useTranslation();
+  const router = useRouter();
 
-  // TODO: get user data
-  const name = 'John Doe';
-  const email = 'muhajirframe@gmail.com';
+  const onLogoutClicked = () => {
+    fetch('/api/auth/logout').then(() => {
+      router.push('/');
+    });
+  };
+
+  if (hasError) {
+    return <Error statusCode={500} />;
+  }
+  const name = Cookies.get(USER_NAME_COOKIE_NAME);
+  const { email } = user;
 
   return (
     <DataContext.Provider value={chaptersData}>
@@ -59,7 +83,7 @@ const ProfilePage = ({ chaptersData }) => {
                 </Button>
               </div>
               <div className={styles.action}>
-                <Button>{t('common:logout')}</Button>
+                <Button onClick={onLogoutClicked}>{t('common:logout')}</Button>
               </div>
             </div>
           </div>
@@ -69,14 +93,49 @@ const ProfilePage = ({ chaptersData }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-    },
-  };
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  if (!context.req.cookies[REFRESH_TOKEN_COOKIE_NAME]) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+      props: {},
+    };
+  }
+  try {
+    // eslint-disable-next-line i18next/no-literal-string
+    const response = await fetch(`${getBasePath()}/api/users/profile`, {
+      credentials: 'include',
+      headers: {
+        Cookie: context.req.headers.cookie,
+      },
+    });
+    if (response.status !== 200) {
+      return {
+        props: {
+          hasError: true,
+        },
+      };
+    }
+    const jsonResponse = await response.json();
+    // if we just refreshed the token
+    if (jsonResponse.cookies) {
+      context.res.setHeader('set-cookie', jsonResponse.cookies);
+    }
+    return {
+      props: {
+        user: jsonResponse.user,
+        chaptersData: await getAllChaptersData(context.locale),
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        hasError: true,
+      },
+    };
+  }
 };
 
 export default ProfilePage;
