@@ -13,7 +13,11 @@ const ProfileAvatarButton = () => {
   const isLoggedIn = true; // TODO: integrate to auth
 
   const trigger = (
-    <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
+    <Button
+      variant={ButtonVariant.Ghost}
+      href={isLoggedIn ? null : '/login'}
+      shape={ButtonShape.Circle}
+    >
       <IconPerson />
     </Button>
   );
