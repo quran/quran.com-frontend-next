@@ -130,4 +130,10 @@ export default {
       isVisible: true,
     },
   }),
+  20: (state) => ({
+    ...state,
+    session: {
+      count: 0,
+    },
+  }),
 };

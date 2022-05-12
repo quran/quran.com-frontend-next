@@ -10,9 +10,11 @@ import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Footer from 'src/components/dls/Footer/Footer';
 import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
+import DonatePopup from 'src/components/DonatePopup/DonatePopup';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
 import Navbar from 'src/components/Navbar/Navbar';
+import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
@@ -68,9 +70,11 @@ function MyApp({ Component, pageProps }): JSX.Element {
               <Component {...pageProps} />
               <AudioPlayer />
               <Footer />
+              <DonatePopup />
             </ToastContainerProvider>
           </IdProvider>
         </ThemeProvider>
+        <SessionIncrementor />
       </ReduxProvider>
 
       <ThirdPartyScripts />
