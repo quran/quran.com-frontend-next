@@ -40,6 +40,7 @@ interface Props {
   type?: InputType;
   shouldFlipOnRTL?: boolean;
   variant?: InputVariant;
+  containerClassName?: string;
 }
 
 const Input: React.FC<Props> = ({
@@ -59,6 +60,7 @@ const Input: React.FC<Props> = ({
   onChange,
   value = '',
   shouldFlipOnRTL = true,
+  containerClassName,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -78,7 +80,7 @@ const Input: React.FC<Props> = ({
     <>
       {label && <p className={styles.label}>{label}</p>}
       <div
-        className={classNames(styles.container, {
+        className={classNames(styles.container, containerClassName, {
           [styles.smallContainer]: size === InputSize.Small,
           [styles.mediumContainer]: size === InputSize.Medium,
           [styles.largeContainer]: size === InputSize.Large,
