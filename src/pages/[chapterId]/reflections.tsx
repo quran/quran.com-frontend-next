@@ -58,6 +58,8 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
 
   const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
 
+  return <Error statusCode={404} />;
+
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
