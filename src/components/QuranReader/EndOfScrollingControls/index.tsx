@@ -6,20 +6,26 @@ import JuzControls from './JuzControls';
 import PageControls from './PageControls';
 import VerseControls from './VerseControls';
 
+import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {
   quranReaderDataType: QuranReaderDataType;
   lastVerse: Verse;
+  initialData: VersesResponse;
 }
 
-const EndOfScrollingControls: React.FC<Props> = ({ quranReaderDataType, lastVerse }) => {
+const EndOfScrollingControls: React.FC<Props> = ({
+  quranReaderDataType,
+  lastVerse,
+  initialData,
+}) => {
   return (
     <div className={styles.container}>
       <div className={styles.buttonsContainer}>
         {quranReaderDataType === QuranReaderDataType.Chapter && (
-          <ChapterControls lastVerse={lastVerse} />
+          <ChapterControls lastVerse={lastVerse} initialData={initialData} />
         )}
         {(quranReaderDataType === QuranReaderDataType.Verse ||
           quranReaderDataType === QuranReaderDataType.VerseRange) && (

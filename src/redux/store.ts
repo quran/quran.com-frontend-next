@@ -21,7 +21,6 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
-import popup from './slices/popup';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
@@ -36,6 +35,7 @@ import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
 import radio from './slices/radio';
 import search from './slices/Search/search';
+import session from './slices/session';
 import theme from './slices/theme';
 import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
@@ -61,7 +61,7 @@ const persistConfig = {
     'sidebarNavigation',
     'radio',
     'banner',
-    'popup',
+    'session',
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -88,7 +88,7 @@ export const rootReducer = combineReducers({
   radio,
   readingViewVerse,
   banner,
-  popup,
+  session,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
