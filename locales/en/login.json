@@ -5,5 +5,6 @@
     "continue-google": "Continue with Google",
     "continue-facebook": "Continue with Facebook",
     "continue-apple": "Continue with Apple",
-    "other-options": "Other Login Options"
+    "other-options": "Other Login Options",
+    "email-sent": "Verification code {{verificationCode}} was sent to {{email}}"
 }

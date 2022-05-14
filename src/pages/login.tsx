@@ -15,9 +15,50 @@ import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/But
 import Input from 'src/components/dls/Forms/Input';
 import { getAuthApiPath } from 'src/utils/url';
 
+// TODO: add email input and required validation
+// TODO: Split the email flow into separate component
 const LoginPage = () => {
   const [isUsingEmail, setIsUsingEmail] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
   const { t } = useTranslation('login');
+
+  const onEmailSubmitted = async () => {
+    // TODO: call BE
+    try {
+      const response = await fetch(getAuthApiPath('auth/magiclogin'), {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: new URLSearchParams({
+          destination: emailInput,
+        }).toString(),
+      });
+      const responseJson = await response.json();
+      const { success, code } = responseJson;
+      if (success === true) {
+        setVerificationCode(code);
+      } else {
+        // TODO: handle this case
+      }
+    } catch (error) {
+      // TODO: handle this case
+    }
+  };
+
+  if (verificationCode) {
+    return (
+      <div className={styles.outerContainer}>
+        <div className={styles.innerContainer}>
+          {t('email-sent', {
+            verificationCode,
+            email: emailInput,
+          })}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.outerContainer}>
@@ -25,8 +66,18 @@ const LoginPage = () => {
         <div className={styles.title}>{t('title')}</div>
         {isUsingEmail ? (
           <>
-            <Input id="email-input" fixedWidth={false} placeholder={t('email-placeholder')} />
-            <Button prefix={<MailIcon />} className={styles.loginButton} type={ButtonType.Success}>
+            <Input
+              id="email-input"
+              onChange={setEmailInput}
+              fixedWidth={false}
+              placeholder={t('email-placeholder')}
+            />
+            <Button
+              prefix={<MailIcon />}
+              className={styles.loginButton}
+              type={ButtonType.Success}
+              onClick={onEmailSubmitted}
+            >
               {t('continue-email')}
             </Button>
             <Button
