@@ -15,6 +15,7 @@ import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
+import { fetcher } from 'src/api';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
@@ -123,6 +124,16 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
       status: ToastStatus.Success,
     });
+
+    if (!isVerseBookmarked) {
+      fetcher('/api/users/bookmarks', {
+        method: 'POST',
+        body: JSON.stringify({
+          chapterNumber: Number(verse.chapterId),
+          verseNumber: verse.verseNumber,
+        }),
+      });
+    }
 
     if (onActionTriggered) {
       onActionTriggered();
