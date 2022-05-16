@@ -45,6 +45,10 @@ import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
+export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
+  return fetcher(input, { ...init, credentials: 'include' });
+};
+
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
   init?: RequestInit,
