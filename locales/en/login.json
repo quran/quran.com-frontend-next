@@ -6,5 +6,8 @@
     "continue-facebook": "Continue with Facebook",
     "continue-apple": "Continue with Apple",
     "other-options": "Other Login Options",
-    "email-sent": "Verification code {{verificationCode}} was sent to {{email}}"
+    "email-sent": "We just sent an email to <strong>{{email}}</strong>",
+    "what-is-your-name": "What is your name?",
+    "your-name": "Your Name",
+    "submit": "Submit"
 }
