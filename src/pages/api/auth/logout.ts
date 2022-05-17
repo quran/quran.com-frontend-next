@@ -8,6 +8,8 @@ import {
 } from 'src/utils/auth/constants';
 import { setResponseCookie } from 'src/utils/cookies';
 
+const COOKIES_DOMAIN = '.quran.com';
+
 /**
  * A protected route that will be called when we want
  * to log the user out by un-settings auth-related
@@ -24,6 +26,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
       secure: process.env.NODE_ENV !== 'development',
       sameSite: true,
       maxAge: +new Date(0),
+      domain: COOKIES_DOMAIN,
       path: '/',
     }),
     cookie.serialize(REFRESH_TOKEN_COOKIE_NAME, '', {
@@ -31,12 +34,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
       secure: process.env.NODE_ENV !== 'development',
       sameSite: true,
       maxAge: +new Date(0),
+      domain: COOKIES_DOMAIN,
       path: '/',
     }),
     cookie.serialize(USER_NAME_COOKIE_NAME, '', {
       secure: process.env.NODE_ENV !== 'development',
       sameSite: true,
       maxAge: +new Date(0),
+      domain: COOKIES_DOMAIN,
       path: '/',
     }),
   ];
