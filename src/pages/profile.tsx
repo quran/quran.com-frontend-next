@@ -1,7 +1,9 @@
 /* eslint-disable react-func/max-lines-per-function */
+import { useEffect, useState } from 'react';
+
 import classNames from 'classnames';
 import Cookies from 'js-cookie';
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
@@ -13,22 +15,47 @@ import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { REFRESH_TOKEN_COOKIE_NAME, USER_NAME_COOKIE_NAME } from 'src/utils/auth/constants';
+import { USER_NAME_COOKIE_NAME } from 'src/utils/auth/constants';
 import { getAllChaptersData } from 'src/utils/chapter';
-import { getBasePath } from 'src/utils/url';
+import { getAuthApiPath } from 'src/utils/url';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
-  hasError?: boolean;
-  user?: {
-    email: string;
-  };
   chaptersData?: ChaptersData;
 }
 
-const ProfilePage: NextPage<Props> = ({ chaptersData, hasError, user }) => {
+const API_PATH = `${getAuthApiPath('users/profile')}`;
+
+const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { t } = useTranslation();
   const router = useRouter();
+  const [isValidating, setIsValidating] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const response = await fetch(API_PATH, {
+        credentials: 'include',
+      });
+      return response;
+    };
+    setIsValidating(true);
+    getProfile()
+      .then(async (response) => {
+        if (response.status !== 200) {
+          setHasError(true);
+        } else {
+          const jsonResponse = await response.json();
+          setUserData(jsonResponse);
+        }
+        setIsValidating(false);
+      })
+      .catch(() => {
+        setIsValidating(false);
+        setHasError(true);
+      });
+  }, []);
 
   const onLogoutClicked = () => {
     fetch('/api/auth/logout').then(() => {
@@ -36,11 +63,17 @@ const ProfilePage: NextPage<Props> = ({ chaptersData, hasError, user }) => {
     });
   };
 
+  if (isValidating) {
+    // TODO: replace with a skeleton
+    // eslint-disable-next-line i18next/no-literal-string
+    return <div>Loading...</div>;
+  }
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
   const name = Cookies.get(USER_NAME_COOKIE_NAME);
-  const { email } = user;
+  const { email } = userData;
 
   return (
     <DataContext.Provider value={chaptersData}>
@@ -93,49 +126,14 @@ const ProfilePage: NextPage<Props> = ({ chaptersData, hasError, user }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  if (!context.req.cookies[REFRESH_TOKEN_COOKIE_NAME]) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/',
-      },
-      props: {},
-    };
-  }
-  try {
-    // eslint-disable-next-line i18next/no-literal-string
-    const response = await fetch(`${getBasePath()}/api/users/profile`, {
-      credentials: 'include',
-      headers: {
-        Cookie: context.req.headers.cookie,
-      },
-    });
-    if (response.status !== 200) {
-      return {
-        props: {
-          hasError: true,
-        },
-      };
-    }
-    const jsonResponse = await response.json();
-    // if we just refreshed the token
-    if (jsonResponse.cookies) {
-      context.res.setHeader('set-cookie', jsonResponse.cookies);
-    }
-    return {
-      props: {
-        user: jsonResponse.user,
-        chaptersData: await getAllChaptersData(context.locale),
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        hasError: true,
-      },
-    };
-  }
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
 };
 
 export default ProfilePage;

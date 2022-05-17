@@ -6,7 +6,7 @@ import useSWR from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
 
-import { fetcher } from 'src/api';
+import { privateFetcher } from 'src/api';
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
@@ -14,6 +14,7 @@ import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
+import { getAuthApiPath } from 'src/utils/url';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 const BookmarkedVersesList: React.FC = () => {
@@ -22,7 +23,7 @@ const BookmarkedVersesList: React.FC = () => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const verseKeys = Object.keys(bookmarkedVerses);
 
-  const { data } = useSWR<any>('/api/users/bookmarks', fetcher);
+  const { data } = useSWR<any>(`${getAuthApiPath('bookmarks')}`, privateFetcher);
 
   if (!data) return null;
 
@@ -31,7 +32,7 @@ const BookmarkedVersesList: React.FC = () => {
       {verseKeys.length > 0 ? (
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
-            {data?.data?.map((item) => {
+            {data?.map((item) => {
               const verseKey = `${item.chapterNumber}:${item.verseNumber}`;
               const chapterNumber = getChapterNumberFromKey(verseKey);
               const chapterData = getChapterData(chaptersData, chapterNumber.toString());
