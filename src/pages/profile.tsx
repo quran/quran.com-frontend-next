@@ -26,11 +26,15 @@ interface Props {
 
 const API_PATH = `${getAuthApiPath('users/profile')}`;
 
+interface UserProfile {
+  email?: string;
+}
+
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const [isValidating, setIsValidating] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<UserProfile>({});
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
