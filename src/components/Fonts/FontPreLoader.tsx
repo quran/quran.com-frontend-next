@@ -28,28 +28,18 @@ const LOCALE_PRELOADED_FONTS = {
   ],
 } as Record<string, { type: string; location: string }[]>;
 
+const INDOPAK = {
+  type: 'font/woff2',
+  location: '/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2',
+};
+
 const QURAN_READER_LOCALE_PRELOADED_FONTS = {
   [DEFAULT_LOCALE]: [
     { type: 'font/woff2', location: '/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2' },
   ],
-  bn: [
-    {
-      type: 'font/woff2',
-      location: '/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2',
-    },
-  ],
-  ur: [
-    {
-      type: 'font/woff2',
-      location: '/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2',
-    },
-  ],
-  id: [
-    {
-      type: 'font/woff2',
-      location: '/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2',
-    },
-  ],
+  bn: [INDOPAK],
+  ur: [INDOPAK],
+  id: [INDOPAK],
 } as Record<string, { type: string; location: string }[]>;
 
 interface Props {
