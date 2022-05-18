@@ -15,7 +15,7 @@ const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
   return (
     <Modal isOpen={isOpen}>
       <form className={styles.container}>
-        <h2 className={styles.title}>{t('what-is-your-name')}</h2>
+        <h2 className={styles.title}>{t('complete-sign-up')}</h2>
         <Input
           id="user-name"
           containerClassName={styles.input}
