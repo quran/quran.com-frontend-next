@@ -14,11 +14,12 @@ type CompleteSignupModalProps = {
 
 const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
   const { t } = useTranslation('login');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [name, setName] = useState('');
 
   const onSubmitClicked = (e) => {
     e.preventDefault();
+    // eslint-disable-next-line no-console
+    console.log(name);
     // TODO: Call BE here
   };
 
