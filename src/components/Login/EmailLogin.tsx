@@ -4,17 +4,17 @@ import useTranslation from 'next-translate/useTranslation';
 
 import MailIcon from '../../../public/icons/mail.svg';
 import ArrowLeft from '../../../public/icons/west.svg';
-import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
-import Input from '../dls/Forms/Input';
 
 import styles from './login.module.scss';
 
+import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import Input from 'src/components/dls/Forms/Input';
 import { getAuthApiPath } from 'src/utils/url';
 
 type EmailLoginProps = { back: () => void; onSubmit: (email: string) => void };
 const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
   const { t } = useTranslation('login');
-  const [emailInput, setEmailInput] = useState('muhajirframe@gmai.com');
+  const [emailInput, setEmailInput] = useState('');
 
   const onFormSubmitted = async (e) => {
     e.preventDefault();

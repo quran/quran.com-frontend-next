@@ -4,10 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 import AppleIcon from '../../../public/icons/apple.svg';
 import FacebookIcon from '../../../public/icons/facebook.svg';
 import GoogleIcon from '../../../public/icons/google.svg';
-import Button from '../dls/Button/Button';
 
 import styles from './login.module.scss';
 
+import Button from 'src/components/dls/Button/Button';
 import { getAuthApiPath } from 'src/utils/url';
 
 const SocialLogin = () => {
