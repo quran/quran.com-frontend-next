@@ -1,10 +1,12 @@
+import { useState } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 
-import Button from '../dls/Button/Button';
-import Input from '../dls/Forms/Input';
-import Modal from '../dls/Modal/Modal';
-
 import styles from './CompleteSignupModal.module.scss';
+
+import Button from 'src/components/dls/Button/Button';
+import Input from 'src/components/dls/Forms/Input';
+import Modal from 'src/components/dls/Modal/Modal';
 
 type CompleteSignupModalProps = {
   isOpen: boolean;
@@ -12,6 +14,14 @@ type CompleteSignupModalProps = {
 
 const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
   const { t } = useTranslation('login');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [name, setName] = useState('');
+
+  const onSubmitClicked = (e) => {
+    e.preventDefault();
+    // TODO: Call BE here
+  };
+
   return (
     <Modal isOpen={isOpen}>
       <form className={styles.container}>
@@ -21,8 +31,11 @@ const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
           containerClassName={styles.input}
           fixedWidth={false}
           placeholder={t('your-name')}
+          onChange={setName}
         />
-        <Button htmlType="submit">{t('submit')}</Button>
+        <Button htmlType="submit" onClick={onSubmitClicked}>
+          {t('submit')}
+        </Button>
       </form>
     </Modal>
   );
