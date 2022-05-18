@@ -1,9 +1,11 @@
 @use "src/styles/theme";
+
 .outerContainer {
-  min-height: 93vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-block-end: calc(5 * var(--spacing-mega));
 }
 
 .innerContainer {
@@ -12,17 +14,17 @@
   width: calc(10 * var(--spacing-mega));
 }
 
-.loginButton {
-  margin-block-start: var(--spacing-small);
-  font-weight: var(--font-weight-semibold);
-  display: flex;
-}
-
 .title {
   font-size: var(--font-size-jumbo);
   font-weight: var(--font-weight-bold);
   text-align: center;
   margin-block-end: var(--spacing-large);
+}
+
+.loginButton {
+  margin-block-start: var(--spacing-small);
+  font-weight: var(--font-weight-semibold);
+  display: flex;
 }
 
 .googleButton {
@@ -52,4 +54,22 @@
       --themed-border: var(--color-text-default);
     }
   }
+}
+
+.emailSentContainer {
+  text-align: center;
+}
+.paragraphContainer {
+  margin-block-end: var(--spacing-medium);
+}
+.emailContainer {
+  font-weight: var(--font-weight-bold);
+}
+
+.verificationCode {
+  padding: var(--spacing-medium);
+  background-color: var(--color-background-alternative-faint);
+  border: 1px solid var(--color-secondary-faded);
+  text-align: center;
+  border-radius: var(--border-radius-rounded);
 }
