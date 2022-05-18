@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
-import Cookies from 'js-cookie';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -11,11 +10,11 @@ import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import CompleteSignupModal from 'src/components/Login/CompleteSignupModal';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { USER_NAME_COOKIE_NAME } from 'src/utils/auth/constants';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { getAuthApiPath } from 'src/utils/url';
 import ChaptersData from 'types/ChaptersData';
@@ -27,7 +26,8 @@ interface Props {
 const API_PATH = `${getAuthApiPath('users/profile')}`;
 
 interface UserProfile {
-  email?: string;
+  email: string;
+  userSignupComplete: boolean;
 }
 
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
@@ -76,11 +76,11 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const name = Cookies.get(USER_NAME_COOKIE_NAME);
-  const { email } = userData;
+  const { email, userSignupComplete, name } = userData;
 
   return (
     <DataContext.Provider value={chaptersData}>
+      <CompleteSignupModal isOpen={!userSignupComplete} />
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
           <div className={styles.container}>

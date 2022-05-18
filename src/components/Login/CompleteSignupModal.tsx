@@ -1,26 +1,39 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './CompleteSignupModal.module.scss';
 
+import { privateFetcher } from 'src/api';
 import Button from 'src/components/dls/Button/Button';
 import Input from 'src/components/dls/Forms/Input';
 import Modal from 'src/components/dls/Modal/Modal';
+import { getAuthApiPath } from 'src/utils/url';
 
 type CompleteSignupModalProps = {
   isOpen: boolean;
 };
 
 const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
-  const { t } = useTranslation('login');
+  const { t } = useTranslation('profile');
   const [name, setName] = useState('');
+
+  const router = useRouter();
 
   const onSubmitClicked = (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(name);
-    // TODO: Call BE here
+    privateFetcher(`${getAuthApiPath('users/completeSignup')}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+      }),
+    }).then(() => {
+      router.reload();
+    });
   };
 
   return (
