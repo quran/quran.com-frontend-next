@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import React, { MouseEventHandler } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 
@@ -58,6 +59,7 @@ export type ButtonProps = {
   shouldPrefetch?: boolean;
   isNewTab?: boolean;
   ariaLabel?: string;
+  htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -81,6 +83,7 @@ const Button: React.FC<ButtonProps> = ({
   shouldPrefetch: prefetch = true,
   isNewTab: newTab,
   ariaLabel,
+  htmlType,
   ...props
 }) => {
   const direction = useDirection();
@@ -154,7 +157,8 @@ const Button: React.FC<ButtonProps> = ({
       )}
     >
       <button
-        type="button"
+        // eslint-disable-next-line react/button-has-type
+        type={htmlType}
         dir={direction}
         className={classes}
         disabled={disabled}
