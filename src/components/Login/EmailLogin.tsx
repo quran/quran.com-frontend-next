@@ -24,7 +24,6 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
 
   return (
     <form className={styles.innerContainer} onSubmit={onFormSubmitted}>
-      <CompleteSignupModal isOpen />
       <Input
         isRequired
         htmlType="email"
