@@ -15,15 +15,14 @@ import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
-import { privateFetcher } from 'src/api';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
+import { addOrRemoveBookmark } from 'src/utils/auth/api';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getAuthApiPath } from 'src/utils/url';
 import { getVerseUrl } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
@@ -127,16 +126,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     });
 
     if (!isVerseBookmarked) {
-      privateFetcher(`${getAuthApiPath('bookmarks')}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chapterNumber: Number(verse.chapterId),
-          verseNumber: verse.verseNumber,
-        }),
-      });
+      addOrRemoveBookmark(Number(verse.chapterId), verse.verseNumber);
     }
 
     if (onActionTriggered) {

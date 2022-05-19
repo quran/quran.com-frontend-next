@@ -277,5 +277,8 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes"
+    "yes": "Yes",
+    "complete-sign-up": "Complete your registration",
+    "your-name": "Your Name",
+    "submit": "Submit"
 }

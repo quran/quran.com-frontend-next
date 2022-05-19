@@ -1,38 +1,30 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 
 import styles from './CompleteSignupModal.module.scss';
 
-import { privateFetcher } from 'src/api';
 import Button from 'src/components/dls/Button/Button';
 import Input from 'src/components/dls/Forms/Input';
 import Modal from 'src/components/dls/Modal/Modal';
-import { getAuthApiPath } from 'src/utils/url';
+import { completeSignup } from 'src/utils/auth/api';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 
 type CompleteSignupModalProps = {
   isOpen: boolean;
 };
 
 const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
-  const { t } = useTranslation('profile');
+  const { mutate } = useSWRConfig();
+  const { t } = useTranslation('common');
   const [name, setName] = useState('');
-
-  const router = useRouter();
 
   const onSubmitClicked = (e) => {
     e.preventDefault();
-    privateFetcher(`${getAuthApiPath('users/completeSignup')}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-      }),
-    }).then(() => {
-      router.reload();
+    completeSignup(name).then(() => {
+      // mutate the cache version of users/profile
+      mutate(makeUserProfileUrl());
     });
   };
 

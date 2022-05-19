@@ -5,54 +5,44 @@ import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import CompleteSignupModal from 'src/components/Login/CompleteSignupModal';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
+import { getUserProfile } from 'src/utils/auth/api';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
-import { getAuthApiPath } from 'src/utils/url';
 import ChaptersData from 'types/ChaptersData';
+import UserProfile from 'types/UserProfile';
 
 interface Props {
   chaptersData?: ChaptersData;
 }
 
-const API_PATH = `${getAuthApiPath('users/profile')}`;
-
-interface UserProfile {
-  email: string;
-  userSignupComplete: boolean;
-}
-
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { t } = useTranslation();
   const router = useRouter();
+  const { mutate } = useSWRConfig();
+
   const [isValidating, setIsValidating] = useState(false);
   const [userData, setUserData] = useState<UserProfile>({});
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     const getProfile = async () => {
-      const response = await fetch(API_PATH, {
-        credentials: 'include',
-      });
+      const response = await getUserProfile();
       return response;
     };
     setIsValidating(true);
     getProfile()
       .then(async (response) => {
-        if (response.status !== 200) {
-          setHasError(true);
-        } else {
-          const jsonResponse = await response.json();
-          setUserData(jsonResponse);
-        }
+        setUserData(response as UserProfile);
         setIsValidating(false);
       })
       .catch(() => {
@@ -63,6 +53,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
 
   const onLogoutClicked = () => {
     fetch('/api/auth/logout').then(() => {
+      mutate(makeUserProfileUrl());
       router.push('/');
     });
   };
@@ -76,11 +67,10 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const { email, userSignupComplete, name } = userData;
+  const { email, name } = userData;
 
   return (
     <DataContext.Provider value={chaptersData}>
-      <CompleteSignupModal isOpen={!userSignupComplete} />
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
           <div className={styles.container}>

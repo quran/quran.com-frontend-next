@@ -8,7 +8,7 @@ import GoogleIcon from '../../../public/icons/google.svg';
 import styles from './login.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
-import { getAuthApiPath } from 'src/utils/url';
+import { makeGoogleLoginUrl } from 'src/utils/auth/apiPaths';
 
 const SocialLogin = () => {
   const { t } = useTranslation('login');
@@ -17,7 +17,7 @@ const SocialLogin = () => {
       <Button
         prefix={<GoogleIcon />}
         className={classNames(styles.loginButton, styles.googleButton)}
-        href={getAuthApiPath('auth/google')}
+        href={makeGoogleLoginUrl()}
       >
         {t('continue-google')}
       </Button>

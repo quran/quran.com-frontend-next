@@ -9,7 +9,7 @@ import styles from './login.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import Input from 'src/components/dls/Forms/Input';
-import { getAuthApiPath } from 'src/utils/url';
+import { makeSendMagicLinkUrl } from 'src/utils/auth/apiPaths';
 
 type EmailLoginProps = { back: () => void; onSubmit: (email: string) => void };
 const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
@@ -51,7 +51,7 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
 };
 
 export const sendMagicLink = async (email) => {
-  const response = await fetch(getAuthApiPath('auth/magiclogin'), {
+  const response = await fetch(makeSendMagicLinkUrl(), {
     method: 'post',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
