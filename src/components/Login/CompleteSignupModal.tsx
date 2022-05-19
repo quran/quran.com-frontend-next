@@ -46,6 +46,7 @@ const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
           fixedWidth={false}
           placeholder={t('your-name')}
           onChange={setName}
+          isRequired
         />
         <Button htmlType="submit" onClick={onSubmitClicked}>
           {t('submit')}
