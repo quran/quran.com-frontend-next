@@ -67,7 +67,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const { email, name } = userData;
+  const { email, firstName, lastName } = userData;
 
   return (
     <DataContext.Provider value={chaptersData}>
@@ -78,7 +78,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               <div className={styles.profileContainer}>
                 <div className={styles.profilePicture} />
                 <div className={styles.profileInfoContainer}>
-                  <h2 className={styles.name}>{name}</h2>
+                  <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
                   <div className={styles.email}>{email}</div>
                 </div>
               </div>

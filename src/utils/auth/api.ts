@@ -4,6 +4,7 @@ import {
   makeCompleteSignupUrl,
   makeUserProfileUrl,
 } from 'src/utils/auth/apiPaths';
+import CompleteSignupRequest from 'types/CompleteSignupRequest';
 import UserProfile from 'types/UserProfile';
 
 export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
@@ -20,8 +21,8 @@ const postRequest = <T>(url: string, body: Record<string, any>): Promise<T> =>
 export const getUserProfile = async (): Promise<UserProfile> =>
   privateFetcher(makeUserProfileUrl());
 
-export const completeSignup = async (name: string): Promise<UserProfile> =>
-  postRequest(makeCompleteSignupUrl(), { name });
+export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
+  postRequest(makeCompleteSignupUrl(), data);
 
 export const addOrRemoveBookmark = (chapterNumber: number, verseNumber: number) =>
   postRequest(makeBookmarksUrl(), { chapterNumber, verseNumber });
