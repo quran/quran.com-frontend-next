@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import MailIcon from '../../../public/icons/mail.svg';
 import ArrowLeft from '../../../public/icons/west.svg';
 
-import CompleteSignupModal from './CompleteSignupModal';
 import styles from './login.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
