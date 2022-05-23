@@ -8,7 +8,7 @@ import GoogleIcon from '../../../public/icons/google.svg';
 import styles from './login.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
-import { makeGoogleLoginUrl } from 'src/utils/auth/apiPaths';
+import { makeGoogleLoginUrl, makeFacebookLoginUrl } from 'src/utils/auth/apiPaths';
 
 const SocialLogin = () => {
   const { t } = useTranslation('login');
@@ -24,6 +24,7 @@ const SocialLogin = () => {
       <Button
         prefix={<FacebookIcon />}
         className={classNames(styles.loginButton, styles.facebookButton)}
+        href={makeFacebookLoginUrl()}
       >
         {t('continue-facebook')}
       </Button>

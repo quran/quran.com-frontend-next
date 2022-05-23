@@ -2,7 +2,7 @@ interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
-  userSignupComplete: boolean;
+  requiredFields: string[];
 }
 
 export default UserProfile;

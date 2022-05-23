@@ -279,7 +279,8 @@
     "word-tooltip": "Word Tooltip",
     "yes": "Yes",
     "complete-sign-up": "Complete your registration",
-    "first-name": "First Name",
-    "last-name": "Last Name",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
     "submit": "Submit"
 }
