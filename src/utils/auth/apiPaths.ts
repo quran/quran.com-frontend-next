@@ -7,6 +7,8 @@ export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
+export const makeDeleteAccountUrl = (): string => makeUrl('users/deleteAccount');
+
 export const makeSendMagicLinkUrl = (): string => makeUrl('auth/magiclogin');
 
 export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');
