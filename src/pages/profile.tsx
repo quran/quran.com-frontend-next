@@ -15,7 +15,7 @@ import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getUserProfile } from 'src/utils/auth/api';
+import { deleteAccount, getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import ChaptersData from 'types/ChaptersData';
@@ -55,6 +55,15 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     fetch('/api/auth/logout').then(() => {
       mutate(makeUserProfileUrl());
       router.push('/');
+    });
+  };
+
+  const onDeleteClicked = () => {
+    deleteAccount().then(() => {
+      fetch('/api/auth/logout').then(() => {
+        mutate(makeUserProfileUrl());
+        router.push('/');
+      });
     });
   };
 
@@ -105,7 +114,11 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               )}
             >
               <div className={styles.action}>
-                <Button type={ButtonType.Error} variant={ButtonVariant.Ghost}>
+                <Button
+                  type={ButtonType.Error}
+                  variant={ButtonVariant.Ghost}
+                  onClick={onDeleteClicked}
+                >
                   {t('profile:delete-account')}
                 </Button>
               </div>
