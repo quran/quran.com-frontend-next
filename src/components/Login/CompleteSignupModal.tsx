@@ -1,53 +1,58 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 
 import styles from './CompleteSignupModal.module.scss';
 
-import { privateFetcher } from 'src/api';
 import Button from 'src/components/dls/Button/Button';
 import Input from 'src/components/dls/Forms/Input';
 import Modal from 'src/components/dls/Modal/Modal';
-import { getAuthApiPath } from 'src/utils/url';
+import { completeSignup } from 'src/utils/auth/api';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type CompleteSignupModalProps = {
-  isOpen: boolean;
+  requiredFields: string[];
 };
 
-const CompleteSignupModal = ({ isOpen }: CompleteSignupModalProps) => {
-  const { t } = useTranslation('profile');
-  const [name, setName] = useState('');
-
-  const router = useRouter();
+const CompleteSignupModal = ({ requiredFields }: CompleteSignupModalProps) => {
+  const { mutate } = useSWRConfig();
+  const { t } = useTranslation('common');
+  const [data, setData] = useState<CompleteSignupRequest>({});
 
   const onSubmitClicked = (e) => {
     e.preventDefault();
-    privateFetcher(`${getAuthApiPath('users/completeSignup')}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-      }),
-    }).then(() => {
-      router.reload();
+    completeSignup(data).then(() => {
+      // mutate the cache version of users/profile
+      mutate(makeUserProfileUrl());
     });
   };
 
+  const isOpen = requiredFields && requiredFields?.length !== 0;
   return (
     <Modal isOpen={isOpen}>
-      <form className={styles.container}>
+      <form
+        className={styles.container}
+        onChange={(event: FormEvent<HTMLFormElement>) => {
+          const formData = new FormData(event.currentTarget) as unknown as Iterable<
+            [CompleteSignupRequest, FormDataEntryValue]
+          >;
+          setData(Object.fromEntries(formData) as CompleteSignupRequest);
+        }}
+      >
         <h2 className={styles.title}>{t('complete-sign-up')}</h2>
-        <Input
-          id="user-name"
-          containerClassName={styles.input}
-          fixedWidth={false}
-          placeholder={t('your-name')}
-          onChange={setName}
-          isRequired
-        />
+        {requiredFields?.map((requiredField) => (
+          <Input
+            key={requiredField}
+            id={requiredField}
+            name={requiredField}
+            containerClassName={styles.input}
+            fixedWidth={false}
+            placeholder={t(requiredField)}
+            isRequired
+          />
+        ))}
         <Button htmlType="submit" onClick={onSubmitClicked}>
           {t('submit')}
         </Button>

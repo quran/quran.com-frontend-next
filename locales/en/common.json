@@ -277,5 +277,10 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes"
+    "yes": "Yes",
+    "complete-sign-up": "Complete your registration",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "submit": "Submit"
 }

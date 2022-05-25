@@ -6,15 +6,15 @@ import useSWR from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
 
-import { privateFetcher } from 'src/api';
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { privateFetcher } from 'src/utils/auth/api';
+import { makeBookmarksUrl } from 'src/utils/auth/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
-import { getAuthApiPath } from 'src/utils/url';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
 const BookmarkedVersesList: React.FC = () => {
@@ -23,7 +23,7 @@ const BookmarkedVersesList: React.FC = () => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const verseKeys = Object.keys(bookmarkedVerses);
 
-  const { data } = useSWR<any>(`${getAuthApiPath('bookmarks')}`, privateFetcher);
+  const { data } = useSWR<any>(makeBookmarksUrl(), privateFetcher);
 
   if (!data) return null;
 

@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
-  USER_NAME_COOKIE_NAME,
+  USER_ID,
 } from 'src/utils/auth/constants';
 import { setResponseCookie } from 'src/utils/cookies';
 
@@ -37,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void>
       domain: COOKIES_DOMAIN,
       path: '/',
     }),
-    cookie.serialize(USER_NAME_COOKIE_NAME, '', {
+    cookie.serialize(USER_ID, '', {
       secure: process.env.NODE_ENV !== 'development',
       sameSite: true,
       maxAge: +new Date(0),

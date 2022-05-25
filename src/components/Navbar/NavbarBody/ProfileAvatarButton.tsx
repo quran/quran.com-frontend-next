@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 
 import ArrowIcon from '../../../../public/icons/east.svg';
 import LogoutIcon from '../../../../public/icons/logout.svg';
@@ -10,14 +11,16 @@ import IconPerson from '../../../../public/icons/person.svg';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import { USER_NAME_COOKIE_NAME } from 'src/utils/auth/constants';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { USER_ID } from 'src/utils/auth/constants';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
+  const { mutate } = useSWRConfig();
   const router = useRouter();
 
-  const isLoggedIn = !!Cookies.get(USER_NAME_COOKIE_NAME);
+  const isLoggedIn = !!Cookies.get(USER_ID);
 
   const trigger = (
     <Button
@@ -32,6 +35,7 @@ const ProfileAvatarButton = () => {
 
   const onLogoutClicked = () => {
     fetch('/api/auth/logout').then(() => {
+      mutate(makeUserProfileUrl());
       router.reload();
     });
   };
