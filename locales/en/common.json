@@ -129,7 +129,7 @@
     "loading": "Loading",
     "login": "Login",
     "login-error": {
-        "auth-error": "Authentication failed. Please try again later"
+        "AuthenticationError": "Authentication failed. Please try again later"
     },
     "logout": "Logout",
     "menu": "Menu",
