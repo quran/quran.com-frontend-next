@@ -1,14 +1,16 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from 'src/components/chapters/ChapterAndJuzList';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
@@ -26,7 +28,30 @@ type IndexProps = {
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapters } }) => {
-  const { t, lang } = useTranslation('home');
+  const { t, lang } = useTranslation('');
+  const toast = useToast();
+  const { query, replace } = useRouter();
+
+  /**
+   * Check if the user is redirected to this because of auth error
+   */
+
+  const getErrorMessage = (errorKey) => {
+    // check her error key valid or not
+    // by default return auth-fail
+  };
+  useEffect(() => {
+    if (query.error) {
+      const errorMessage = getErrorMessage(query.error);
+      toast(errorMessage, {
+        status: ToastStatus.Error,
+      });
+      replace('/', null, { shallow: true });
+
+      // TODO: Record error to Sentry or somewhere
+    }
+  }, [query.error, toast, replace, t]);
+
   return (
     <>
       <Head>
@@ -34,7 +59,7 @@ const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapter
       </Head>
       <DataContext.Provider value={chaptersData}>
         <NextSeoWrapper
-          title={t('noble-quran')}
+          title={t('home:noble-quran')}
           url={getCanonicalUrl(lang, '')}
           languageAlternates={getLanguageAlternates('')}
         />
