@@ -13,4 +13,6 @@ export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');
 
 export const makeFacebookLoginUrl = (): string => makeUrl('auth/facebook');
 
+export const makeAppleLoginUrl = () => makeUrl('auth/apple');
+
 export const makeBookmarksUrl = (): string => makeUrl('bookmarks');
