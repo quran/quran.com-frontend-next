@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
+    "dev:https": "node server.js",
     "build": "next build",
     "postbuild": "yarn run generate-sitemap",
     "snapshots:update": "jest --updateSnapshot",

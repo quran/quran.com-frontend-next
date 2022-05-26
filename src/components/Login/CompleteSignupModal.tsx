@@ -50,6 +50,7 @@ const CompleteSignupModal = ({ requiredFields }: CompleteSignupModalProps) => {
             containerClassName={styles.input}
             fixedWidth={false}
             placeholder={t(requiredField)}
+            isRequired
           />
         ))}
         <Button htmlType="submit" onClick={onSubmitClicked}>
