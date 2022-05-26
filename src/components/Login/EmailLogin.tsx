@@ -24,6 +24,8 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
   return (
     <form className={styles.innerContainer} onSubmit={onFormSubmitted}>
       <Input
+        isRequired
+        htmlType="email"
         id="email-input"
         onChange={setEmailInput}
         fixedWidth={false}
