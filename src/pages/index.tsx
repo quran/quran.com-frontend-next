@@ -26,7 +26,8 @@ type IndexProps = {
 };
 
 const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapters } }) => {
-  const { t, lang } = useTranslation('home');
+  const { t, lang } = useTranslation('');
+
   return (
     <>
       <Head>
@@ -34,7 +35,7 @@ const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapter
       </Head>
       <DataContext.Provider value={chaptersData}>
         <NextSeoWrapper
-          title={t('noble-quran')}
+          title={t('home:noble-quran')}
           url={getCanonicalUrl(lang, '')}
           languageAlternates={getLanguageAlternates('')}
         />
