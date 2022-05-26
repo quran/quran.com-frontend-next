@@ -8,7 +8,7 @@ import {
 } from 'src/utils/auth/constants';
 import { setResponseCookie } from 'src/utils/cookies';
 
-const COOKIES_DOMAIN = '.quran.com';
+const { COOKIES_DOMAIN } = process.env;
 
 /**
  * A protected route that will be called when we want

@@ -65,3 +65,5 @@ public/robots.txt
 # playwright
 test-results/
 playwright-report/
+
+keys
