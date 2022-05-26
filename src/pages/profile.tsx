@@ -31,7 +31,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { mutate } = useSWRConfig();
 
   const [isValidating, setIsValidating] = useState(false);
-  const [userData, setUserData] = useState<UserProfile>({});
+  const [userData, setUserData] = useState<UserProfile>({} as UserProfile);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
