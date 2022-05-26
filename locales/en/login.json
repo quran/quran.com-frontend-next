@@ -8,5 +8,8 @@
     "continue-facebook": "Continue with Facebook",
     "continue-apple": "Continue with Apple",
     "other-options": "Other Login Options",
-    "email-sent": "We just sent an email to <strong>{{email}}</strong>"
+    "email-sent": "We just sent an email to <strong>{{email}}</strong>",
+    "login-error": {
+        "AuthenticationError": "Authentication failed. Please try again later"
+    }
 }

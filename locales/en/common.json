@@ -128,9 +128,6 @@
     "less": "Less",
     "loading": "Loading",
     "login": "Login",
-    "login-error": {
-        "AuthenticationError": "Authentication failed. Please try again later"
-    },
     "logout": "Logout",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",

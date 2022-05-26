@@ -10,14 +10,14 @@ import AuthError from 'types/AuthError';
 const LoginPage = () => {
   const toast = useToast();
   const { query, replace } = useRouter();
-  const { t } = useTranslation();
+  const { t } = useTranslation('login');
 
   const getErrorMessage = useCallback(
     (errorId) => {
       if (errorId in AuthError) {
-        return t(`common:login-error.${errorId}`);
+        return t(`login-error.${errorId}`);
       }
-      return t(`common:login-error.${AuthError.AuthenticationError}`);
+      return t(`login-error.${AuthError.AuthenticationError}`);
     },
     [t],
   );
