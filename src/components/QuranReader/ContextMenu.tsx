@@ -9,6 +9,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
 
 import styles from './ContextMenu.module.scss';
+import { isMobile } from './SidebarNavigation/SidebarNavigation';
 
 import DataContext from 'src/contexts/DataContext';
 import { selectNavbar } from 'src/redux/slices/navbar';
@@ -78,13 +79,20 @@ const ContextMenu = () => {
                   `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
                 );
                 e.stopPropagation();
-                dispatch(setIsVisible(!isSidebarNavigationVisible));
+                if (isSidebarNavigationVisible === 'auto') {
+                  // eslint-disable-next-line no-unneeded-ternary
+                  const shouldBeVisible = isMobile() ? true : false;
+                  dispatch(setIsVisible(shouldBeVisible));
+                } else {
+                  dispatch(setIsVisible(!isSidebarNavigationVisible));
+                }
               }}
             >
               {chapterData.transliteratedName}
               <span
                 className={classNames(styles.chevronIconContainer, {
-                  [styles.rotate180]: isSidebarNavigationVisible,
+                  [styles.rotate180]: isSidebarNavigationVisible === true,
+                  [styles.rotateAuto]: isSidebarNavigationVisible === 'auto',
                 })}
               >
                 <ChevronDownIcon />
