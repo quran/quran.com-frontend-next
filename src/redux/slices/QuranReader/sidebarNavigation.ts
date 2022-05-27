@@ -14,7 +14,7 @@ export enum NavigationItem {
   Page = 'page',
 }
 
-export const initialSidebarIsVisible = 'auto';
+export const initialSidebarIsVisible = 'auto'; // sidebar will be open on desktop and closed on mobile
 const initialState: SidebarNavigation = {
   isVisible: initialSidebarIsVisible,
   selectedNavigationItem: NavigationItem.Surah,
