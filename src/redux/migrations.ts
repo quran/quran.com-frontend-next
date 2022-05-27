@@ -1,5 +1,6 @@
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
 import { getAudioPlayerStateInitialState } from './defaultSettings/util';
+import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { MushafLines } from 'types/QuranReader';
@@ -134,6 +135,12 @@ export default {
     ...state,
     session: {
       count: 0,
+    },
+  }),
+  21: (state) => ({
+    ...state,
+    sidebarNavigation: {
+      isVisible: initialSidebarIsVisible,
     },
   }),
 };

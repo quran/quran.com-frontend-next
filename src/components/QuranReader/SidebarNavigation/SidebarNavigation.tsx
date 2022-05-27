@@ -60,7 +60,8 @@ const SidebarNavigation = () => {
     <div
       ref={sidebarRef}
       className={classNames(styles.container, {
-        [styles.visibleContainer]: isVisible,
+        [styles.visibleContainer]: isVisible === true,
+        [styles.containerAuto]: isVisible === 'auto',
         [styles.spaceOnTop]: isContextMenuExpanded,
       })}
     >
@@ -104,7 +105,7 @@ const SidebarNavigation = () => {
 };
 
 const TABLET_WIDTH = 768;
-const isMobile = () => {
+export const isMobile = () => {
   if (typeof document === 'undefined') return false;
   return document.documentElement.clientWidth < TABLET_WIDTH;
 };
