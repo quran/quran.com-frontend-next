@@ -9,7 +9,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
 
 import styles from './ContextMenu.module.scss';
-import { isMobile } from './SidebarNavigation/SidebarNavigation';
 
 import DataContext from 'src/contexts/DataContext';
 import { selectNavbar } from 'src/redux/slices/navbar';
@@ -24,6 +23,7 @@ import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { getJuzNumberByHizb } from 'src/utils/juz';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { isMobile } from 'src/utils/responsive';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
