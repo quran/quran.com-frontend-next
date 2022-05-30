@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { NextApiResponse } from 'next';
 
-// TODO: convert every function that calls this into a common util
 /**
  * Set the cookies of the response.
  *

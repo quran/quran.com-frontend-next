@@ -1,7 +1,14 @@
-/* eslint-disable import/prefer-default-export */
-import { getAuthApiPath } from 'src/utils/url';
+import stringify from '../qs-stringify';
 
-const makeUrl = (url: string): string => getAuthApiPath(url);
+import { getAuthApiPath } from 'src/utils/url';
+import BookmarkType from 'types/BookmarkType';
+
+const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
+  if (!parameters) {
+    return getAuthApiPath(url);
+  }
+  return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
+};
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
@@ -17,4 +24,19 @@ export const makeFacebookLoginUrl = (): string => makeUrl('auth/facebook');
 
 export const makeAppleLoginUrl = (): string => makeUrl('auth/apple');
 
-export const makeBookmarksUrl = (): string => makeUrl('bookmarks');
+export const makeBookmarksUrl = (mushafId: number): string => makeUrl('bookmarks', { mushafId });
+
+export const makeBookmarksRangeUrl = (
+  mushafId: number,
+  chapterNumber: number,
+  verseNumber: number,
+  perPage: number,
+): string => makeUrl('bookmarks/ayahs-range', { mushafId, chapterNumber, verseNumber, perPage });
+
+export const makeIsResourceBookmarkedUrl = (
+  mushafId: number,
+  key: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): string =>
+  makeUrl('bookmarks/is-bookmarked', { mushafId, key, type, ...(verseNumber && { verseNumber }) });

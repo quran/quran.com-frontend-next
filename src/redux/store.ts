@@ -21,7 +21,6 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
-import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
 import highlightedLocation from './slices/QuranReader/highlightedLocation';
@@ -53,7 +52,6 @@ const persistConfig = {
     'translations',
     'theme',
     'tafsirs',
-    'bookmarks',
     'search',
     'readingTracker',
     'welcomeMessage',
@@ -75,7 +73,6 @@ export const rootReducer = combineReducers({
   translations,
   theme,
   tafsirs,
-  bookmarks,
   search,
   highlightedLocation,
   readingTracker,

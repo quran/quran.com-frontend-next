@@ -4,7 +4,11 @@ import {
   makeCompleteSignupUrl,
   makeUserProfileUrl,
   makeDeleteAccountUrl,
+  makeBookmarksRangeUrl,
+  makeIsResourceBookmarkedUrl,
 } from 'src/utils/auth/apiPaths';
+import BookmarksMap from 'types/BookmarksMap';
+import BookmarkType from 'types/BookmarkType';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 import UserProfile from 'types/UserProfile';
 
@@ -29,5 +33,26 @@ export const completeSignup = async (data: CompleteSignupRequest): Promise<UserP
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
 
-export const addOrRemoveBookmark = (chapterNumber: number, verseNumber: number) =>
-  postRequest(makeBookmarksUrl(), { chapterNumber, verseNumber });
+export const addOrRemoveBookmark = async (
+  key: number,
+  mushafId: number,
+  type: BookmarkType,
+  isAdd: boolean,
+  verseNumber?: number,
+) => postRequest(makeBookmarksUrl(mushafId), { key, mushaf: mushafId, type, verseNumber, isAdd });
+
+export const getPageBookmarks = async (
+  mushafId: number,
+  chapterNumber: number,
+  verseNumber: number,
+  perPage: number,
+): Promise<BookmarksMap> =>
+  privateFetcher(makeBookmarksRangeUrl(mushafId, chapterNumber, verseNumber, perPage));
+
+export const getIsResourceBookmarked = async (
+  mushafId: number,
+  key: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): Promise<boolean> =>
+  privateFetcher(makeIsResourceBookmarkedUrl(mushafId, key, type, verseNumber));

@@ -87,7 +87,8 @@
     "donate": "Donate",
     "error": {
         "general": "Something went wrong. Please try again.",
-        "offline": "Looks like you lost your connection. Please check it and try again."
+        "offline": "Looks like you lost your connection. Please check it and try again.",
+        "bookmark-sync": "Bookmark is out of sync."
     },
     "feedback": "Feedback",
     "fonts": {
