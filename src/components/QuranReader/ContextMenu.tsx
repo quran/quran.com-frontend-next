@@ -23,6 +23,7 @@ import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { getJuzNumberByHizb } from 'src/utils/juz';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { isMobile } from 'src/utils/responsive';
 import { getVerseNumberFromKey } from 'src/utils/verse';
 
 const ContextMenu = () => {
@@ -78,13 +79,20 @@ const ContextMenu = () => {
                   `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
                 );
                 e.stopPropagation();
-                dispatch(setIsVisible(!isSidebarNavigationVisible));
+                if (isSidebarNavigationVisible === 'auto') {
+                  // eslint-disable-next-line no-unneeded-ternary
+                  const shouldBeVisible = isMobile() ? true : false;
+                  dispatch(setIsVisible(shouldBeVisible));
+                } else {
+                  dispatch(setIsVisible(!isSidebarNavigationVisible));
+                }
               }}
             >
               {chapterData.transliteratedName}
               <span
                 className={classNames(styles.chevronIconContainer, {
-                  [styles.rotate180]: isSidebarNavigationVisible,
+                  [styles.rotate180]: isSidebarNavigationVisible === true,
+                  [styles.rotateAuto]: isSidebarNavigationVisible === 'auto',
                 })}
               >
                 <ChevronDownIcon />
