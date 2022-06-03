@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
 import React, { useEffect, useMemo } from 'react';
 
+import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -17,7 +19,11 @@ import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranRead
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getMushafId } from 'src/utils/api';
 import { areArraysEqual } from 'src/utils/array';
+import { getPageBookmarks } from 'src/utils/auth/api';
+import { makeBookmarksRangeUrl } from 'src/utils/auth/apiPaths';
+import { USER_ID } from 'src/utils/auth/constants';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -88,6 +94,29 @@ const TranslationPage: React.FC<Props> = ({
     },
   );
 
+  const isLoggedIn = !!Cookies.get(USER_ID);
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+  const bookmarksRangeUrl = verses
+    ? makeBookmarksRangeUrl(
+        mushafId,
+        Number(verses[0].chapterId),
+        Number(verses[0].verseNumber),
+        initialData.pagination.perPage,
+      )
+    : '';
+  const { data: pageBookmarks } = useSWRImmutable(
+    verses && isLoggedIn ? bookmarksRangeUrl : null,
+    async () => {
+      const response = await getPageBookmarks(
+        mushafId,
+        Number(verses[0].chapterId),
+        Number(verses[0].verseNumber),
+        initialData.pagination.perPage,
+      );
+      return response;
+    },
+  );
+
   useEffect(() => {
     if (verses) {
       // @ts-ignore
@@ -140,6 +169,8 @@ const TranslationPage: React.FC<Props> = ({
               verse={verse}
               key={verse.id}
               quranReaderStyles={quranReaderStyles}
+              pageBookmarks={pageBookmarks}
+              bookmarksRangeUrl={bookmarksRangeUrl}
             />
           </div>
         );

@@ -8,7 +8,8 @@ import styles from './BookmarkedVersesList.module.scss';
 
 import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { getMushafId } from 'src/utils/api';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeBookmarksUrl } from 'src/utils/auth/apiPaths';
 import { getChapterData } from 'src/utils/chapter';
@@ -20,20 +21,24 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 const BookmarkedVersesList: React.FC = () => {
   const { t, lang } = useTranslation('home');
   const chaptersData = useContext(DataContext);
-  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
-  const verseKeys = Object.keys(bookmarkedVerses);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
-  const { data } = useSWR<any>(makeBookmarksUrl(), privateFetcher);
+  const { data } = useSWR<any>(
+    makeBookmarksUrl(
+      getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+    ),
+    privateFetcher,
+  );
 
   if (!data) return null;
 
   return (
     <div className={styles.container}>
-      {verseKeys.length > 0 ? (
+      {data.length > 0 ? (
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
             {data?.map((item) => {
-              const verseKey = `${item.chapterNumber}:${item.verseNumber}`;
+              const verseKey = `${item.key}:${item.verseNumber}`;
               const chapterNumber = getChapterNumberFromKey(verseKey);
               const chapterData = getChapterData(chaptersData, chapterNumber.toString());
               const bookmarkText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
