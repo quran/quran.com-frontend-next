@@ -6,6 +6,7 @@ import {
   makeDeleteAccountUrl,
   makeBookmarksRangeUrl,
   makeIsResourceBookmarkedUrl,
+  makeReadingSessionsUrl,
 } from 'src/utils/auth/apiPaths';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
@@ -56,3 +57,9 @@ export const getIsResourceBookmarked = async (
   verseNumber?: number,
 ): Promise<boolean> =>
   privateFetcher(makeIsResourceBookmarkedUrl(mushafId, key, type, verseNumber));
+
+export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
+  postRequest(makeReadingSessionsUrl(), {
+    chapterNumber,
+    verseNumber,
+  });
