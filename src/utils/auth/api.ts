@@ -1,3 +1,7 @@
+import Cookies from 'js-cookie';
+
+import { USER_ID } from './constants';
+
 import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
@@ -6,6 +10,7 @@ import {
   makeDeleteAccountUrl,
   makeBookmarksRangeUrl,
   makeIsResourceBookmarkedUrl,
+  makeReadingSessionsUrl,
 } from 'src/utils/auth/apiPaths';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
@@ -56,3 +61,11 @@ export const getIsResourceBookmarked = async (
   verseNumber?: number,
 ): Promise<boolean> =>
   privateFetcher(makeIsResourceBookmarkedUrl(mushafId, key, type, verseNumber));
+
+export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
+  postRequest(makeReadingSessionsUrl(), {
+    chapterNumber,
+    verseNumber,
+  });
+
+export const isLoggedIn = () => !!Cookies.get(USER_ID);

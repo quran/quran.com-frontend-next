@@ -1,7 +1,8 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
+import debounce from 'lodash/debounce';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -21,6 +22,8 @@ import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPre
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { addReadingSession, isLoggedIn } from 'src/utils/auth/api';
+import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
@@ -29,6 +32,8 @@ type QuranReaderProps = {
   id: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
   quranReaderDataType?: QuranReaderDataType;
 };
+
+const DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 const QuranReader = ({
   initialData,
@@ -39,22 +44,34 @@ const QuranReader = ({
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const dispatch = useDispatch();
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
   const chaptersData = useContext(DataContext);
+  const dispatch = useDispatch();
+
+  const debouncedAddReadingSession = useMemo(
+    () => debounce(addReadingSession, DEBOUNCE_WAIT_TIME),
+    [],
+  );
+
   const onElementVisible = useCallback(
     (element: Element) => {
-      dispatch({
-        type: setLastReadVerse.type,
-        payload: {
-          lastReadVerse: getObservedVersePayload(element),
+      const lastReadVerse = getObservedVersePayload(element);
+      const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastReadVerse.verseKey);
+      dispatch(
+        setLastReadVerse({
+          lastReadVerse,
           chaptersData,
-        },
-      });
+        }),
+      );
+
+      if (isLoggedIn()) {
+        debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
+      }
     },
-    [chaptersData, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch],
   );
+
   useGlobalIntersectionObserver(
     getOptions(isReadingPreference),
     onElementVisible,
