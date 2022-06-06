@@ -1,7 +1,3 @@
-import Cookies from 'js-cookie';
-
-import { USER_ID } from './constants';
-
 import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
@@ -67,5 +63,3 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     chapterNumber,
     verseNumber,
   });
-
-export const isLoggedIn = () => !!Cookies.get(USER_ID);

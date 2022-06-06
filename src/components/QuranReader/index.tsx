@@ -22,7 +22,8 @@ import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPre
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { addReadingSession, isLoggedIn } from 'src/utils/auth/api';
+import { addReadingSession } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
@@ -33,7 +34,7 @@ type QuranReaderProps = {
   quranReaderDataType?: QuranReaderDataType;
 };
 
-const DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
+const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 const QuranReader = ({
   initialData,
@@ -50,7 +51,7 @@ const QuranReader = ({
   const dispatch = useDispatch();
 
   const debouncedAddReadingSession = useMemo(
-    () => debounce(addReadingSession, DEBOUNCE_WAIT_TIME),
+    () => debounce(addReadingSession, READING_SESSION_DEBOUNCE_WAIT_TIME),
     [],
   );
 
