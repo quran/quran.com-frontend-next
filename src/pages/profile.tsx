@@ -62,7 +62,11 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   if (isValidating) {
     // TODO: replace with a skeleton
     // eslint-disable-next-line i18next/no-literal-string
-    return <div>Loading...</div>;
+    return (
+      <div className={layoutStyle.pageContainer}>
+        <div className={classNames(styles.container)} />;
+      </div>
+    );
   }
 
   if (hasError) {
