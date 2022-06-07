@@ -48,7 +48,7 @@ type SearchProps = {
   chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ translations, chaptersData }) => {
+const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
