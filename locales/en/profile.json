@@ -1,3 +1,10 @@
 {
-    "delete-account": "Delete Account"
+    "delete-account": "Delete Account",
+    "delete-confirmation": {
+        "title": "Are you absolute sure?",
+        "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
+        "confirmation-text": "delete my account",
+        "instruction-text": "Please type <strong>{{text}}</strong> to confirm",
+        "action-text": "I understand the consequence, delete my account"
+    }
 }
