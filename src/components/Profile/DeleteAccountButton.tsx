@@ -38,7 +38,7 @@ const DeleteAccountButton = () => {
       >
         {t('profile:delete-account')}
       </Button>
-      <Modal isOpen={isModalVisible}>
+      <Modal isOpen={isModalVisible} onClickOutside={() => setIsModalVisible(false)}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('profile:delete-confirmation.title')}</Modal.Title>
