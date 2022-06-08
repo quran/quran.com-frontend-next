@@ -18,6 +18,7 @@ import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
 import { getAllChaptersData } from 'src/utils/chapter';
 import ChaptersData from 'types/ChaptersData';
 import UserProfile from 'types/UserProfile';
@@ -72,7 +73,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const { email, firstName, lastName } = userData;
+  const { email, firstName, lastName, photoUrl } = userData;
 
   return (
     <DataContext.Provider value={chaptersData}>
@@ -81,7 +82,14 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
           <div className={styles.container}>
             <div className={classNames(layoutStyle.flowItem)}>
               <div className={styles.profileContainer}>
-                <div className={styles.profilePicture} />
+                <div className={styles.profilePicture}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className={styles.profilePicture}
+                    alt="avatar"
+                    src={photoUrl || DEFAULT_PHOTO_URL}
+                  />
+                </div>
                 <div className={styles.profileInfoContainer}>
                   <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
                   <div className={styles.email}>{email}</div>
