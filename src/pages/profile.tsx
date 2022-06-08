@@ -10,12 +10,13 @@ import { useSWRConfig } from 'swr';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
-import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button from 'src/components/dls/Button/Button';
+import DeleteAccountButton from 'src/components/Profile/DeleteAccountButton';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { deleteAccount, getUserProfile } from 'src/utils/auth/api';
+import { getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import ChaptersData from 'types/ChaptersData';
@@ -58,19 +59,14 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     });
   };
 
-  const onDeleteClicked = () => {
-    deleteAccount().then(() => {
-      fetch('/api/auth/logout').then(() => {
-        mutate(makeUserProfileUrl());
-        router.push('/');
-      });
-    });
-  };
-
   if (isValidating) {
     // TODO: replace with a skeleton
     // eslint-disable-next-line i18next/no-literal-string
-    return <div>Loading...</div>;
+    return (
+      <div className={layoutStyle.pageContainer}>
+        <div className={classNames(styles.container)} />;
+      </div>
+    );
   }
 
   if (hasError) {
@@ -114,13 +110,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               )}
             >
               <div className={styles.action}>
-                <Button
-                  type={ButtonType.Error}
-                  variant={ButtonVariant.Ghost}
-                  onClick={onDeleteClicked}
-                >
-                  {t('profile:delete-account')}
-                </Button>
+                <DeleteAccountButton />
               </div>
               <div className={styles.action}>
                 <Button onClick={onLogoutClicked}>{t('common:logout')}</Button>
