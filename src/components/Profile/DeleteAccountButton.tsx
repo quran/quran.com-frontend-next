@@ -19,7 +19,13 @@ const DeleteAccountButton = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
 
+  const closeModal = () => {
+    setConfirmationText('');
+    setIsModalVisible(false);
+  };
+
   const onDeleteConfirmed = () => {
+    closeModal();
     deleteAccount()
       .then(() => fetch('/api/auth/logout'))
       .then(() => mutate(makeUserProfileUrl()))
@@ -27,7 +33,7 @@ const DeleteAccountButton = () => {
   };
 
   const CONFIRMATION_TEXT = t('profile:delete-confirmation.confirmation-text');
-  const canDeleteAccount = confirmationText === CONFIRMATION_TEXT;
+  const canDeleteAccount = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
 
   return (
     <>
@@ -38,7 +44,7 @@ const DeleteAccountButton = () => {
       >
         {t('profile:delete-account')}
       </Button>
-      <Modal isOpen={isModalVisible} onClickOutside={() => setIsModalVisible(false)}>
+      <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('profile:delete-confirmation.title')}</Modal.Title>
