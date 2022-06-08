@@ -9,9 +9,9 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import PageContainer from 'src/components/PageContainer';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
-
+import { NextPage } from 'next';
 const PATH = '/privacy';
-const PrivacyPage = () => {
+const PrivacyPage: NextPage = (): JSX.Element => {
   const { t, lang } = useTranslation('privacy');
 
   return (

@@ -10,9 +10,10 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import PageContainer from 'src/components/PageContainer';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
+import { NextPage } from 'next';
 
 const PATH = '/support';
-const SupportPage = () => {
+const SupportPage: NextPage  = (): JSX.Element => {
   const { t, lang } = useTranslation('support');
   return (
     <>
