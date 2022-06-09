@@ -9,6 +9,7 @@ import Button from 'src/components/dls/Button/Button';
 import Input from 'src/components/dls/Forms/Input';
 import { completeSignup } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
 import CompleteSignupRequest, { CompleteSignupRequestKey } from 'types/CompleteSignupRequest';
 
 type CompleteSignupFormProps = {
@@ -19,6 +20,19 @@ const requiredFieldType: { [key in CompleteSignupRequestKey]: string } = {
   firstName: 'text',
   lastName: 'text',
   email: 'email',
+};
+
+type ValidationPattern = {
+  [key in string]: {
+    regex: RegExp;
+    validationMessageId: string;
+  };
+};
+const requiredFieldValidationPattern: ValidationPattern = {
+  email: {
+    regex: EMAIL_VALIDATION_REGEX,
+    validationMessageId: 'email',
+  },
 };
 
 const CompleteSignupForm = ({ requiredFields }: CompleteSignupFormProps) => {
@@ -45,6 +59,13 @@ const CompleteSignupForm = ({ requiredFields }: CompleteSignupFormProps) => {
           control={control}
           name={requiredField}
           rules={{
+            pattern: {
+              value: requiredFieldValidationPattern[requiredField]?.regex,
+              message: t(
+                `validation.${requiredFieldValidationPattern[requiredField]?.validationMessageId}`,
+                { field: capitalize(requiredField) },
+              ),
+            },
             required: {
               message: t('validation.required', { field: capitalize(requiredField) }),
               value: true,
