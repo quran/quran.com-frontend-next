@@ -90,6 +90,9 @@
         "offline": "Looks like you lost your connection. Please check it and try again.",
         "bookmark-sync": "Bookmark is out of sync."
     },
+    "validation": {
+        "required": "{{field}} is required"
+    },
     "feedback": "Feedback",
     "fonts": {
         "15_lines": "15 Lines",
