@@ -25,9 +25,11 @@ type IndexProps = {
   chaptersData: ChaptersData;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapters } }) => {
-  const { t, lang } = useTranslation('');
-
+const Index: NextPage<IndexProps> = ({
+  chaptersData,
+  chaptersResponse: { chapters },
+}): JSX.Element => {
+  const { t, lang } = useTranslation('home');
   return (
     <>
       <Head>
