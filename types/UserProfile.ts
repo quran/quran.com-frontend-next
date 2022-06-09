@@ -1,11 +1,11 @@
-import { CompleteSignupRequestKey } from './CompleteSignupRequest';
+import { ProfileRequiredFields } from './CompleteSignupRequest';
 
 interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
   photoUrl?: string;
-  requiredFields: CompleteSignupRequestKey[];
+  requiredFields: ProfileRequiredFields[];
 }
 
 export default UserProfile;

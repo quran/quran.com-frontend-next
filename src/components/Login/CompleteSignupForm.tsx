@@ -10,13 +10,13 @@ import Input from 'src/components/dls/Forms/Input';
 import { completeSignup } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
-import CompleteSignupRequest, { CompleteSignupRequestKey } from 'types/CompleteSignupRequest';
+import CompleteSignupRequest, { ProfileRequiredFields } from 'types/CompleteSignupRequest';
 
 type CompleteSignupFormProps = {
-  requiredFields: CompleteSignupRequestKey[];
+  requiredFields: ProfileRequiredFields[];
 };
 
-const requiredFieldType: { [key in CompleteSignupRequestKey]: string } = {
+const requiredFieldType: { [key in ProfileRequiredFields]: string } = {
   firstName: 'text',
   lastName: 'text',
   email: 'email',

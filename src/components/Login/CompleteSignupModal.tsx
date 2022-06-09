@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
 
 import Modal from 'src/components/dls/Modal/Modal';
-import { CompleteSignupRequestKey } from 'types/CompleteSignupRequest';
+import { ProfileRequiredFields } from 'types/CompleteSignupRequest';
 
 const CompleteSignupForm = dynamic(() => import('./CompleteSignupForm'));
 
 type CompleteSignupModalProps = {
-  requiredFields: CompleteSignupRequestKey[];
+  requiredFields: ProfileRequiredFields[];
 };
 
 const CompleteSignupModal = ({ requiredFields }: CompleteSignupModalProps) => {
