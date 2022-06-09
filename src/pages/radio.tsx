@@ -15,7 +15,6 @@ import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
-import { NextPage } from 'next';
 
 type RadioPageProps = {
   reciters: Reciter[];
@@ -24,7 +23,7 @@ type RadioPageProps = {
 
 const NAVIGATION_URL = '/radio';
 
-const RadioPage: NextPage = ({ reciters, chaptersData }: RadioPageProps): JSX.Element => {
+const RadioPage = ({ reciters, chaptersData }: RadioPageProps) => {
   const { t, lang } = useTranslation('radio');
   return (
     <DataContext.Provider value={chaptersData}>

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import { NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -10,10 +11,9 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import PageContainer from 'src/components/PageContainer';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
-import { NextPage } from 'next';
 
 const PATH = '/support';
-const SupportPage: NextPage  = (): JSX.Element => {
+const SupportPage: NextPage = (): JSX.Element => {
   const { t, lang } = useTranslation('support');
   return (
     <>
