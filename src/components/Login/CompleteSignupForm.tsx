@@ -16,18 +16,12 @@ type CompleteSignupFormProps = {
   requiredFields: ProfileRequiredFields[];
 };
 
-const fieldHtmlType: { [key in ProfileRequiredFields]: string } = {
-  firstName: 'text',
-  lastName: 'text',
-  email: 'email',
-};
-
 const fieldPattern: Record<string, RegExp> = {
   email: EMAIL_VALIDATION_REGEX,
 };
 
 const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields }) => {
-  const { handleSubmit, control } = useForm<CompleteSignupRequest>();
+  const { handleSubmit, control } = useForm<CompleteSignupRequest>({ mode: 'onBlur' });
   const { mutate } = useSWRConfig();
   const { t } = useTranslation('common');
 
@@ -62,7 +56,6 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
             render={({ field, fieldState: { error } }) => (
               <div className={styles.inputContainer}>
                 <Input
-                  htmlType={fieldHtmlType[requiredField]}
                   key={requiredField}
                   onChange={(val) => field.onChange(val)}
                   id={requiredField}
