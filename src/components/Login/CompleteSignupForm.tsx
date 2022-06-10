@@ -9,15 +9,11 @@ import Button from 'src/components/dls/Button/Button';
 import Input from 'src/components/dls/Forms/Input';
 import { completeSignup } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
 import CompleteSignupRequest, { ProfileRequiredFields } from 'types/CompleteSignupRequest';
+import FormField from 'types/FormField';
 
 type CompleteSignupFormProps = {
-  requiredFields: ProfileRequiredFields[];
-};
-
-const fieldPattern: Record<string, RegExp> = {
-  email: EMAIL_VALIDATION_REGEX,
+  requiredFields: FormField[];
 };
 
 const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields }) => {
@@ -35,34 +31,40 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
     <form className={styles.container} onSubmit={onSubmit}>
       <h2 className={styles.title}>{t('complete-sign-up')}</h2>
       {requiredFields?.map((requiredField) => {
-        const capitalizedFieldName = capitalize(requiredField);
+        const capitalizedFieldName = capitalize(requiredField.field);
         return (
           <Controller
-            key={requiredField}
+            key={requiredField.field}
             control={control}
-            name={requiredField}
+            name={requiredField.field as ProfileRequiredFields}
             rules={{
-              required: {
-                message: t('validation.required', { field: capitalizedFieldName }),
-                value: true,
-              },
-              ...(fieldPattern[requiredField] && {
-                pattern: {
-                  value: fieldPattern[requiredField],
-                  message: t(`validation.${requiredField}`, { field: capitalizedFieldName }),
-                },
-              }),
+              required: requiredField.isRequired
+                ? {
+                    message: t('validation.required', { field: capitalizedFieldName }),
+                    value: true,
+                  }
+                : null,
+              ...(requiredField.pattern
+                ? {
+                    pattern: {
+                      value: new RegExp(requiredField.pattern.value),
+                      message: t(`validation.${requiredField.pattern.messageId}`, {
+                        field: capitalizedFieldName,
+                      }),
+                    },
+                  }
+                : {}),
             }}
             render={({ field, fieldState: { error } }) => (
               <div className={styles.inputContainer}>
                 <Input
-                  key={requiredField}
+                  key={requiredField.field}
                   onChange={(val) => field.onChange(val)}
-                  id={requiredField}
-                  name={requiredField}
+                  id={requiredField.field}
+                  name={requiredField.field}
                   containerClassName={styles.input}
                   fixedWidth={false}
-                  placeholder={t(requiredField)}
+                  placeholder={t(requiredField.field)}
                 />
                 {error && <span className={styles.errorText}>{error.message}</span>}
               </div>

@@ -92,7 +92,7 @@
     },
     "validation": {
         "required": "{{field}} is required",
-        "email": "{{field}} must be a valid email address"
+        "invalid-email": "{{field}} must be a valid email address"
     },
     "feedback": "Feedback",
     "fonts": {
