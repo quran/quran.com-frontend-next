@@ -16,31 +16,18 @@ type CompleteSignupFormProps = {
   requiredFields: ProfileRequiredFields[];
 };
 
-const requiredFieldType: { [key in ProfileRequiredFields]: string } = {
+const fieldHtmlType: { [key in ProfileRequiredFields]: string } = {
   firstName: 'text',
   lastName: 'text',
   email: 'email',
 };
 
-type ValidationPattern = {
-  [key in string]: {
-    regex: RegExp;
-    validationMessageId: string;
-  };
-};
-const requiredFieldValidationPattern: ValidationPattern = {
-  email: {
-    regex: EMAIL_VALIDATION_REGEX,
-    validationMessageId: 'email',
-  },
+const fieldPattern: Record<string, RegExp> = {
+  email: EMAIL_VALIDATION_REGEX,
 };
 
-const CompleteSignupForm = ({ requiredFields }: CompleteSignupFormProps) => {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<CompleteSignupRequest>();
+const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields }) => {
+  const { handleSubmit, control } = useForm<CompleteSignupRequest>();
   const { mutate } = useSWRConfig();
   const { t } = useTranslation('common');
 
@@ -53,43 +40,43 @@ const CompleteSignupForm = ({ requiredFields }: CompleteSignupFormProps) => {
   return (
     <form className={styles.container} onSubmit={onSubmit}>
       <h2 className={styles.title}>{t('complete-sign-up')}</h2>
-      {requiredFields?.map((requiredField) => (
-        <Controller
-          key={requiredField}
-          control={control}
-          name={requiredField}
-          rules={{
-            pattern: {
-              value: requiredFieldValidationPattern[requiredField]?.regex,
-              message: t(
-                `validation.${requiredFieldValidationPattern[requiredField]?.validationMessageId}`,
-                { field: capitalize(requiredField) },
-              ),
-            },
-            required: {
-              message: t('validation.required', { field: capitalize(requiredField) }),
-              value: true,
-            },
-          }}
-          render={({ field }) => (
-            <div className={styles.inputContainer}>
-              <Input
-                htmlType={requiredFieldType[requiredField]}
-                key={requiredField}
-                onChange={(val) => field.onChange(val)}
-                id={requiredField}
-                name={requiredField}
-                containerClassName={styles.input}
-                fixedWidth={false}
-                placeholder={t(requiredField)}
-              />
-              {errors[requiredField] && (
-                <span className={styles.errorText}>{errors[requiredField].message}</span>
-              )}
-            </div>
-          )}
-        />
-      ))}
+      {requiredFields?.map((requiredField) => {
+        const capitalizedFieldName = capitalize(requiredField);
+        return (
+          <Controller
+            key={requiredField}
+            control={control}
+            name={requiredField}
+            rules={{
+              required: {
+                message: t('validation.required', { field: capitalizedFieldName }),
+                value: true,
+              },
+              ...(fieldPattern[requiredField] && {
+                pattern: {
+                  value: fieldPattern[requiredField],
+                  message: t(`validation.${requiredField}`, { field: capitalizedFieldName }),
+                },
+              }),
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <div className={styles.inputContainer}>
+                <Input
+                  htmlType={fieldHtmlType[requiredField]}
+                  key={requiredField}
+                  onChange={(val) => field.onChange(val)}
+                  id={requiredField}
+                  name={requiredField}
+                  containerClassName={styles.input}
+                  fixedWidth={false}
+                  placeholder={t(requiredField)}
+                />
+                {error && <span className={styles.errorText}>{error.message}</span>}
+              </div>
+            )}
+          />
+        );
+      })}
       <Button htmlType="submit" className={styles.submitButton}>
         {t('submit')}
       </Button>

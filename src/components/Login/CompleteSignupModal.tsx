@@ -13,7 +13,7 @@ const CompleteSignupModal = ({ requiredFields }: CompleteSignupModalProps) => {
   const isOpen = requiredFields && requiredFields?.length !== 0;
   return (
     <Modal isOpen={isOpen}>
-      <CompleteSignupForm requiredFields={['email', 'firstName', 'lastName']} />
+      <CompleteSignupForm requiredFields={requiredFields} />
     </Modal>
   );
 };
