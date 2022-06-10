@@ -12,7 +12,7 @@ export enum ErrorMessageId {
 type FormField = {
   field: string;
   pattern?: {
-    value: string; // regex in
+    value: string; // regex in string
     messageId: ErrorMessageId;
   };
   isRequired?: boolean;
