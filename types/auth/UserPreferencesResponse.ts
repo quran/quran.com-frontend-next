@@ -1,5 +1,5 @@
-import UserPreference from 'types/auth/UserPreference';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-type UserPreferencesResponse = UserPreference[];
+type UserPreferencesResponse = Record<PreferenceGroup, any>;
 
 export default UserPreferencesResponse;

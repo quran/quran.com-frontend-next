@@ -94,13 +94,9 @@ export const getUserPreferences = async (locale: string): Promise<UserPreference
   const userPreferences = (await privateFetcher(
     makeUserPreferencesUrl(),
   )) as UserPreferencesResponse;
-  const audioPreferencesIndex = userPreferences.findIndex(
-    (userPreference) => userPreference.group === PreferenceGroup.AUDIO,
-  );
   // if the audio Preferences are saved in the DB
-  if (audioPreferencesIndex !== -1) {
-    const audioPreference = userPreferences[audioPreferencesIndex];
-    const { reciter: reciterId } = audioPreference.value;
+  if (userPreferences[PreferenceGroup.AUDIO]) {
+    const { reciter: reciterId } = userPreferences[PreferenceGroup.AUDIO];
     if (reciterId) {
       // we need to convert the id into reciter data
       const recitersResponse = await getAvailableReciters(locale);
@@ -109,9 +105,9 @@ export const getUserPreferences = async (locale: string): Promise<UserPreference
       );
       if (selectedReciters.length) {
         const [selectedReciter] = selectedReciters;
-        userPreferences[audioPreferencesIndex] = {
-          ...audioPreference,
-          value: { ...userPreferences[audioPreferencesIndex].value, reciter: selectedReciter },
+        userPreferences[PreferenceGroup.AUDIO] = {
+          ...userPreferences[PreferenceGroup.AUDIO],
+          reciter: selectedReciter,
         };
       }
     }

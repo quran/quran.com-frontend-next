@@ -8,7 +8,6 @@ import { RootState } from 'src/redux/RootState';
 import Theme from 'src/redux/types/Theme';
 import ThemeType from 'src/redux/types/ThemeType';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 
 export const themeSlice = createSlice({
   name: 'theme',
@@ -27,12 +26,8 @@ export const themeSlice = createSlice({
       const {
         payload: { userPreferences },
       } = action;
-      const themePreferences = userPreferences.filter(
-        (userPreference) => userPreference.group === PreferenceGroup.THEME,
-      ) as UserPreferencesResponse;
-      if (themePreferences.length) {
-        const [themePreference] = themePreferences;
-        return { ...state, ...themePreference.value } as Theme;
+      if (userPreferences[PreferenceGroup.THEME]) {
+        return { ...state, ...userPreferences[PreferenceGroup.THEME] } as Theme;
       }
       return state;
     });
