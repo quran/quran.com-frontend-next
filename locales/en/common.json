@@ -91,7 +91,7 @@
         "bookmark-sync": "Bookmark is out of sync."
     },
     "validation": {
-        "required": "{{field}} is required",
+        "required-field": "{{field}} is required",
         "invalid-email": "{{field}} must be a valid email address"
     },
     "feedback": "Feedback",

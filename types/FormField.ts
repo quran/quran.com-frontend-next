@@ -7,15 +7,23 @@ export enum FormFieldType {
 
 export enum ErrorMessageId {
   InvalidEmail = 'invalid-email',
+  RequiredField = 'required-field',
 }
+export enum RuleType {
+  Required = 'required',
+  Regex = 'regex',
+}
+
+type RuleValue = string | boolean;
+export type FieldRule = {
+  type: RuleType;
+  value: RuleValue;
+  errorId?: ErrorMessageId;
+};
 
 type FormField = {
   field: string;
-  pattern?: {
-    value: string; // regex in string
-    messageId: ErrorMessageId;
-  };
-  isRequired?: boolean;
+  rules?: FieldRule[];
   type: FormFieldType;
 };
 
