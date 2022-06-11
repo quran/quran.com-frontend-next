@@ -2,7 +2,6 @@ interface ReadingSession {
   chapterNumber: number;
   id: number;
   updatedAt: string;
-  userId: string;
   verseNumber: 1;
 }
 
