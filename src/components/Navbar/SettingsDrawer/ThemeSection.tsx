@@ -15,7 +15,10 @@ import styles from './ThemeSection.module.scss';
 import Switch, { SwitchSize } from 'src/components/dls/Switch/Switch';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logValueChange } from 'src/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeIcons = {
   [ThemeType.Dark]: <MoonIcon />,
@@ -45,9 +48,19 @@ const ThemeSection = () => {
     value: themeValue,
   }));
 
-  const onThemeSelected = (value) => {
+  const onThemeSelected = async (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
-    dispatch({ type: setTheme.type, payload: value });
+    if (isLoggedIn()) {
+      addOrUpdateUserPreference({ type: value }, PreferenceGroup.THEME)
+        .then(() => {
+          dispatch({ type: setTheme.type, payload: value });
+        })
+        .catch(() => {
+          // TODO: show an error
+        });
+    } else {
+      dispatch({ type: setTheme.type, payload: value });
+    }
   };
 
   return (

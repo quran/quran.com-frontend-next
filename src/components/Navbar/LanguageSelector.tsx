@@ -12,8 +12,8 @@ import PopoverMenu, { PopoverMenuExpandDirection } from '../dls/PopoverMenu/Popo
 import styles from './LanguageSelector.module.scss';
 
 import i18nConfig from 'i18n.json';
+import resetSettings from 'src/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
-import resetSettings from 'src/redux/slices/reset-settings';
 import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 

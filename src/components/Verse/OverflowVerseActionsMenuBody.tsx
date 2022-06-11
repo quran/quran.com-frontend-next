@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
-import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -29,7 +28,7 @@ import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import { addOrRemoveBookmark, getIsResourceBookmarked } from 'src/utils/auth/api';
 import { makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
-import { USER_ID } from 'src/utils/auth/constants';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getVerseUrl } from 'src/utils/verse';
 import BookmarkType from 'types/BookmarkType';
@@ -62,14 +61,13 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   const { mutate: swrConfigMutate } = useSWRConfig();
   useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
 
-  const isLoggedIn = !!Cookies.get(USER_ID);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const {
     data: isVerseBookmarked,
     isValidating: isVerseBookmarkedLoading,
     mutate,
   } = useSWRImmutable(
-    isLoggedIn
+    isLoggedIn()
       ? makeIsResourceBookmarkedUrl(
           mushafId,
           Number(verse.chapterId),

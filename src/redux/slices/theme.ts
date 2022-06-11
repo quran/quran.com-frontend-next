@@ -2,11 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getThemeInitialState } from '../defaultSettings/util';
 
-import resetSettings from './reset-settings';
-
+import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { RootState } from 'src/redux/RootState';
 import Theme from 'src/redux/types/Theme';
 import ThemeType from 'src/redux/types/ThemeType';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 
 export const themeSlice = createSlice({
   name: 'theme',
@@ -20,6 +22,19 @@ export const themeSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
       return getThemeInitialState(action.payload.locale);
+    });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences },
+      } = action;
+      const themePreferences = userPreferences.filter(
+        (userPreference) => userPreference.group === PreferenceGroup.THEME,
+      ) as UserPreferencesResponse;
+      if (themePreferences.length) {
+        const [themePreference] = themePreferences;
+        return { ...state, ...themePreference.value } as Theme;
+      }
+      return state;
     });
   },
 });

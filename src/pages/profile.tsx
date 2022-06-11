@@ -20,8 +20,8 @@ import { getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
 import { getAllChaptersData } from 'src/utils/chapter';
+import UserProfile from 'types/auth/UserProfile';
 import ChaptersData from 'types/ChaptersData';
-import UserProfile from 'types/UserProfile';
 
 interface Props {
   chaptersData?: ChaptersData;

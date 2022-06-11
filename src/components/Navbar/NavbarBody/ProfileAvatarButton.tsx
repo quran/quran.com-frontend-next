@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
@@ -12,7 +11,7 @@ import IconPerson from '../../../../public/icons/person.svg';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { USER_ID } from 'src/utils/auth/constants';
+import { isLoggedIn } from 'src/utils/auth/login';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,13 +19,13 @@ const ProfileAvatarButton = () => {
   const { mutate } = useSWRConfig();
   const router = useRouter();
 
-  const isLoggedIn = !!Cookies.get(USER_ID);
+  const isUserLoggedIn = isLoggedIn();
 
   const trigger = (
     <Button
-      tooltip={isLoggedIn ? null : t('login')}
+      tooltip={isUserLoggedIn ? null : t('login')}
       variant={ButtonVariant.Ghost}
-      href={isLoggedIn ? null : '/login'}
+      href={isUserLoggedIn ? null : '/login'}
       shape={ButtonShape.Circle}
     >
       <IconPerson />
@@ -45,7 +44,7 @@ const ProfileAvatarButton = () => {
       setIsOpen(false);
     });
   };
-  if (isLoggedIn) {
+  if (isUserLoggedIn) {
     return (
       <PopoverMenu trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
         <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
