@@ -2,7 +2,7 @@ interface ReadingSession {
   chapterNumber: number;
   id: number;
   updatedAt: string;
-  verseNumber: 1;
+  verseNumber: number;
 }
 
 export default ReadingSession;
