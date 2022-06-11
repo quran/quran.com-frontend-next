@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import resetSettings from 'src/redux/actions/reset-settings';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import resetSettings from 'src/redux/slices/reset-settings';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

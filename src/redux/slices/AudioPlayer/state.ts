@@ -10,9 +10,9 @@ import {
   triggerPauseAudio,
   playFromTimestamp,
 } from 'src/components/AudioPlayer/EventTriggers';
+import resetSettings from 'src/redux/actions/reset-settings';
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import resetSettings from 'src/redux/slices/reset-settings';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import AudioState from 'src/redux/types/AudioState';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
