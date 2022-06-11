@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useSWRConfig } from 'swr';
 
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
@@ -23,6 +24,7 @@ import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { addReadingSession } from 'src/utils/auth/api';
+import { makeReadingSessionsUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
@@ -49,6 +51,7 @@ const QuranReader = ({
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
   const chaptersData = useContext(DataContext);
   const dispatch = useDispatch();
+  const { mutate } = useSWRConfig();
 
   const debouncedAddReadingSession = useMemo(
     () => debounce(addReadingSession, READING_SESSION_DEBOUNCE_WAIT_TIME),
@@ -68,9 +71,10 @@ const QuranReader = ({
 
       if (isLoggedIn()) {
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
+        mutate(makeReadingSessionsUrl());
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch, mutate],
   );
 
   useGlobalIntersectionObserver(
