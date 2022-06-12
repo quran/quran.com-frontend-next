@@ -120,8 +120,3 @@ export const addOrUpdateUserPreference = async (value: any, group: PreferenceGro
     value,
     group,
   });
-
-export const deleteUserPreference = async (group: PreferenceGroup) =>
-  deleteRequest(makeUserPreferencesUrl(), {
-    group,
-  });
