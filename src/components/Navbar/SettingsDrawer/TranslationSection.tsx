@@ -21,9 +21,12 @@ import {
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const TranslationSection = () => {
   const { t, lang } = useTranslation('common');
@@ -85,14 +88,42 @@ const TranslationSection = () => {
     [localizedSelectedTranslations, onSelectionCardClicked, selectedTranslations, t],
   );
 
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {string} key
+   * @param {number} value
+   * @param {Action} action
+   */
+  const onSettingsChange = (key: string, value: number, action: Action) => {
+    if (isLoggedIn()) {
+      const newQuranReaderStyles = { ...quranReaderStyles };
+      // no need to persist this since it's calculated and only used internally
+      delete newQuranReaderStyles.isUsingDefaultFont;
+      newQuranReaderStyles[key] = value;
+      addOrUpdateUserPreference(newQuranReaderStyles, PreferenceGroup.QURAN_READER_STYLES)
+        .then(() => {
+          dispatch(action);
+        })
+        .catch(() => {
+          // TODO: show an error
+        });
+    } else {
+      dispatch(action);
+    }
+  };
+
   const onFontScaleDecreaseClicked = () => {
-    logValueChange('translation_font_scale', translationFontScale, translationFontScale - 1);
-    dispatch(decreaseTranslationFontScale());
+    const newValue = translationFontScale - 1;
+    logValueChange('translation_font_scale', translationFontScale, newValue);
+    onSettingsChange('translationFontScale', newValue, decreaseTranslationFontScale());
   };
 
   const onFontScaleIncreaseClicked = () => {
-    logValueChange('translation_font_scale', translationFontScale, translationFontScale + 1);
-    dispatch(increaseTranslationFontScale());
+    const newValue = translationFontScale + 1;
+    logValueChange('translation_font_scale', translationFontScale, newValue);
+    onSettingsChange('translationFontScale', newValue, increaseTranslationFontScale());
   };
 
   return (
