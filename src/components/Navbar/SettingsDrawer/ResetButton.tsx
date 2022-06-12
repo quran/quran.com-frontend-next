@@ -6,7 +6,7 @@ import styles from './ResetButton.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import resetSettings from 'src/redux/slices/reset-settings';
+import resetSettings from 'src/redux/actions/reset-settings';
 import { logButtonClick } from 'src/utils/eventLogger';
 import QueryParam from 'types/QueryParam';
 

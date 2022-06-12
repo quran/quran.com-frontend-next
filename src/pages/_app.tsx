@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import { IdProvider } from '@radix-ui/react-id';
-import Cookies from 'js-cookie';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -24,7 +23,7 @@ import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
 import { getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { USER_ID } from 'src/utils/auth/constants';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
@@ -40,12 +39,14 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
-  const isLoggedIn = !!Cookies.get(USER_ID);
 
-  const { data: userData } = useSWRImmutable(isLoggedIn ? makeUserProfileUrl() : null, async () => {
-    const response = await getUserProfile();
-    return response;
-  });
+  const { data: userData } = useSWRImmutable(
+    isLoggedIn() ? makeUserProfileUrl() : null,
+    async () => {
+      const response = await getUserProfile();
+      return response;
+    },
+  );
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {

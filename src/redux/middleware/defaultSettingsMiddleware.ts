@@ -3,7 +3,8 @@ import { Middleware } from 'redux';
 
 import { RootState } from '../RootState';
 import { setIsUsingDefaultSettings } from '../slices/defaultSettings';
-import { RESET_SETTINGS_EVENT } from '../slices/reset-settings';
+
+import { RESET_SETTINGS_EVENT } from 'src/redux/actions/reset-settings';
 
 const OBSERVED_ACTIONS = [
   'theme/setTheme',
