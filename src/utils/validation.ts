@@ -2,7 +2,9 @@ import capitalize from 'lodash/capitalize';
 import { Translate } from 'next-translate';
 import { UseControllerProps } from 'react-hook-form';
 
-import FormField, { FieldRule, RuleType } from 'types/FormField';
+import ErrorMessageId from 'types/ErrorMessageId';
+import FieldRule, { RuleType } from 'types/FieldRule';
+import FormField from 'types/FormField';
 
 export const EMAIL_VALIDATION_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -55,6 +57,10 @@ export const buildReactHookFormRules = (formField: FormField, t: Translate) => {
   return rules;
 };
 
+const DEFAULT_ERROR_ID = ErrorMessageId.InvalidField;
 const buildTranslatedErrorMessage = (rule: FieldRule, t: Translate, fieldName: string) => {
-  return t(`validation.${rule.errorId}`, { field: capitalize(fieldName) });
+  if (Object.values(ErrorMessageId).includes(rule.errorId)) {
+    return t(`validation.${rule.errorId}`, { field: capitalize(fieldName) });
+  }
+  return t(`validation.${DEFAULT_ERROR_ID}`, { field: capitalize(fieldName) });
 };
