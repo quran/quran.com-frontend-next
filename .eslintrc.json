@@ -214,11 +214,5 @@
   },
   "parserOptions": {
     "requireConfigFile": false
-  },
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto"
-    }
-  ]
+  }
 }
