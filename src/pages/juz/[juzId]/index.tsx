@@ -32,7 +32,11 @@ interface JuzPageProps {
   chaptersData: ChaptersData;
 }
 
-const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses, chaptersData }) => {
+const JuzPage: NextPage<JuzPageProps> = ({
+  hasError,
+  juzVerses,
+  chaptersData,
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const {
     query: { juzId },
@@ -72,7 +76,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   const defaultMushafId = getMushafId(
     getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
+    getQuranReaderStylesInitialState(locale).mushafLines
   ).mushaf;
   try {
     const pagesLookupResponse = await getPagesLookup({
@@ -84,10 +88,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
       chaptersData,
       pagesLookupResponse.lookupRange.from,
-      pagesLookupResponse.lookupRange.to,
+      pagesLookupResponse.lookupRange.to
     ).length;
     const juzVersesResponse = await getJuzVerses(juzId, locale, {
-      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+      ...getDefaultWordFields(
+        getQuranReaderStylesInitialState(locale).quranFont
+      ),
       mushaf: defaultMushafId,
       perPage: 'all',
       from: firstPageOfJuzLookup.from,

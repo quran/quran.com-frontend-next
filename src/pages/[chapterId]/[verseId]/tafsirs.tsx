@@ -40,7 +40,12 @@ type AyahTafsirProp = {
   fallback: any;
 };
 
-const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback, chaptersData }) => {
+const AyahTafsir: NextPage<AyahTafsirProp> = ({
+  hasError,
+  chapter,
+  fallback,
+  chaptersData,
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
@@ -49,7 +54,10 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback, cha
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const path = getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId));
+  const path = getVerseTafsirNavigationUrl(
+    chapter.chapter.slug,
+    Number(verseId)
+  );
 
   const localizedVerseNumber = toLocalizedNumber(Number(verseId), lang);
   return (
@@ -75,7 +83,11 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback, cha
               router.query.tafsirId ? Number(router.query.tafsirId) : undefined
             }
             scrollToTop={scrollWindowToTop}
-            render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
+            render={({
+              body,
+              languageAndTafsirSelection,
+              surahAndAyahSelection,
+            }) => {
               return (
                 <div>
                   {surahAndAyahSelection}
@@ -123,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         lang: locale,
         quranFont,
         mushafLines,
-      },
+      }
     );
     const tafsirListUrl = makeTafsirsUrl(locale);
 
