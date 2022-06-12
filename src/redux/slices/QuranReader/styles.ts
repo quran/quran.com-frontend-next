@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const MAXIMUM_QURAN_FONT_STEP = 10;
@@ -89,6 +91,18 @@ export const quranReaderStylesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
       return getQuranReaderStylesInitialState(action.payload.locale);
+    });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences },
+      } = action;
+      if (userPreferences[PreferenceGroup.QURAN_READER_STYLES]) {
+        return {
+          ...state,
+          ...userPreferences[PreferenceGroup.QURAN_READER_STYLES],
+        } as QuranReaderStyles;
+      }
+      return state;
     });
   },
 });
