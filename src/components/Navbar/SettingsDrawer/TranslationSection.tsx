@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
+import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
