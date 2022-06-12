@@ -49,7 +49,7 @@ export const buildReactHookFormRules = (formField: FormField, t: Translate) => {
 
         if (failedRule) return buildTranslatedErrorMessage(failedRule, t, formField.field);
 
-        return false;
+        return null;
       },
     };
   }
