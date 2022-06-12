@@ -4,4 +4,6 @@ interface CompleteSignupRequest {
   email?: string;
 }
 
+export type ProfileRequiredFields = keyof CompleteSignupRequest;
+
 export default CompleteSignupRequest;
