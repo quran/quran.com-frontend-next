@@ -1,4 +1,4 @@
-import FormField from './FormField';
+import FormField from '../FormField';
 
 interface UserProfile {
   firstName: string;
