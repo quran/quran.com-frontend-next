@@ -42,3 +42,5 @@ export const makeIsResourceBookmarkedUrl = (
   makeUrl('bookmarks/is-bookmarked', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
+
+export const makeUserPreferencesUrl = () => makeUrl('preferences');

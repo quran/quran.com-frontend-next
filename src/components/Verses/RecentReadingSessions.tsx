@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import Link from '../dls/Link/Link';
 
@@ -16,6 +16,7 @@ import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey, makeVerseKey } from 'src/utils/verse';
+import ReadingSession from 'types/ReadingSession';
 
 const RecentReadingSessions = () => {
   const { t, lang } = useTranslation('home');
@@ -24,8 +25,7 @@ const RecentReadingSessions = () => {
     logButtonClick('homepage_recently_read_card');
   };
 
-  // TODO: add last read data type
-  const { data } = useSWR<any[]>(makeReadingSessionsUrl(), privateFetcher);
+  const { data } = useSWRImmutable<ReadingSession[]>(makeReadingSessionsUrl(), privateFetcher);
 
   if (!data) return null;
 

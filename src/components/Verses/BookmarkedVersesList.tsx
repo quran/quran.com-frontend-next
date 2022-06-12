@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import styles from './BookmarkedVersesList.module.scss';
 
@@ -17,13 +17,14 @@ import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
 import { getChapterNumberFromKey } from 'src/utils/verse';
+import Bookmark from 'types/Bookmark';
 
 const BookmarkedVersesList: React.FC = () => {
   const { t, lang } = useTranslation('home');
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
-  const { data } = useSWR<any>(
+  const { data } = useSWRImmutable<Bookmark[]>(
     makeBookmarksUrl(
       getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
     ),
