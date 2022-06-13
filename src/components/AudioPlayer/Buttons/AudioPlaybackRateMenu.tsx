@@ -8,14 +8,24 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
-import { selectPlaybackRate, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import { selectAudioPlayerState, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const currentPlaybackRate = useSelector(selectPlaybackRate);
+  const audioPlayerState = useSelector(selectAudioPlayerState);
+  const {
+    playbackRate: currentPlaybackRate,
+    reciter,
+    showTooltipWhenPlayingAudio,
+    enableAutoScrolling,
+    repeatSettings,
+  } = audioPlayerState;
 
   const getPlaybackRateLabel = useCallback(
     (playbackRate) => {
@@ -26,6 +36,29 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
     [lang, t],
   );
 
+  const onPlaybackRateSelected = (playbackRate: number) => {
+    if (isLoggedIn()) {
+      const newAudioState = {
+        playbackRate,
+        reciter: reciter.id,
+        showTooltipWhenPlayingAudio,
+        enableAutoScrolling,
+        repeatSettings,
+      };
+      addOrUpdateUserPreference(newAudioState, PreferenceGroup.AUDIO)
+        .then(() => {
+          dispatch(setPlaybackRate(playbackRate));
+          onBack();
+        })
+        .catch(() => {
+          // TODO: show an error
+        });
+    } else {
+      dispatch(setPlaybackRate(playbackRate));
+      onBack();
+    }
+  };
+
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item
       key={playbackRate}
@@ -33,8 +66,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
       onClick={() => {
         logButtonClick('audio_player_menu_playback_item');
         logValueChange('audio_playback_rate', currentPlaybackRate, playbackRate);
-        dispatch(setPlaybackRate(playbackRate));
-        onBack();
+        onPlaybackRateSelected(playbackRate);
       }}
     >
       {getPlaybackRateLabel(playbackRate)}

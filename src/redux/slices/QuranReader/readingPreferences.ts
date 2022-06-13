@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getReadingPreferencesInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
 
 export const readingPreferencesSlice = createSlice({
@@ -54,6 +56,15 @@ export const readingPreferencesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
       return getReadingPreferencesInitialState(action.payload.locale);
+    });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences },
+      } = action;
+      if (userPreferences[PreferenceGroup.READING]) {
+        return { ...state, ...userPreferences[PreferenceGroup.READING] } as ReadingPreferences;
+      }
+      return state;
     });
   },
 });

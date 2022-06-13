@@ -8,15 +8,19 @@ import styles from './ReadingPreferenceSwitcher.module.scss';
 
 import Switch from 'src/components/dls/Switch/Switch';
 import {
-  selectReadingPreference,
+  selectReadingPreferences,
   setReadingPreference,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logValueChange } from 'src/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
 const ReadingPreferenceSwitcher = () => {
   const { t } = useTranslation('common');
-  const readingPreference = useSelector(selectReadingPreference);
+  const readingPreferences = useSelector(selectReadingPreferences);
+  const { readingPreference } = readingPreferences;
   const dispatch = useDispatch();
   const router = useRouter();
   const readingPreferencesOptions = useMemo(
@@ -45,7 +49,21 @@ const ReadingPreferenceSwitcher = () => {
     };
 
     router.replace(newUrlObject, null, { shallow: true }).then(() => {
-      dispatch(setReadingPreference(view));
+      if (isLoggedIn()) {
+        const newReadingPreferences = { ...readingPreferences };
+        // no need to persist this since it's calculated and only used internally
+        delete newReadingPreferences.isUsingDefaultWordByWordLocale;
+        newReadingPreferences.readingPreference = view;
+        addOrUpdateUserPreference(newReadingPreferences, PreferenceGroup.READING)
+          .then(() => {
+            dispatch(setReadingPreference(view));
+          })
+          .catch(() => {
+            // TODO: show an error
+          });
+      } else {
+        dispatch(setReadingPreference(view));
+      }
     });
   };
 
