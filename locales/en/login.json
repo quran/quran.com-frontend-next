@@ -9,6 +9,9 @@
     "continue-apple": "Continue with Apple",
     "other-options": "Other Login Options",
     "email-sent": "We just sent an email to <strong>{{email}}</strong>",
+    "check-spam": "Didn't get anything? Please check your promotion or spam",
+    "resend-email-in": "Resend email in {{remainingTime}} sec",
+    "resend-email": "Resend email",
     "login-error": {
         "AuthenticationError": "Authentication failed. Please try again later"
     }
