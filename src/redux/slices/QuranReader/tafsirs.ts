@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import { areArraysEqual } from 'src/utils/array';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const tafsirsSlice = createSlice({
   name: 'tafsirs',
@@ -24,6 +26,18 @@ export const tafsirsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => {
       return getTafsirsInitialState(action.payload.locale);
+    });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences },
+      } = action;
+      if (userPreferences[PreferenceGroup.TAFSIR]) {
+        return {
+          ...state,
+          ...userPreferences[PreferenceGroup.TAFSIR],
+        };
+      }
+      return state;
     });
   },
 });
