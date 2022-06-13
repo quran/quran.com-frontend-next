@@ -59,10 +59,18 @@ export const readingPreferencesSlice = createSlice({
     });
     builder.addCase(syncUserPreferences, (state, action) => {
       const {
-        payload: { userPreferences },
+        payload: { userPreferences, locale },
       } = action;
-      if (userPreferences[PreferenceGroup.READING]) {
-        return { ...state, ...userPreferences[PreferenceGroup.READING] } as ReadingPreferences;
+      const remotePreferences = userPreferences[PreferenceGroup.READING] as ReadingPreferences;
+      if (remotePreferences) {
+        const { selectedWordByWordLocale: defaultWordByWordLocale } =
+          getReadingPreferencesInitialState(locale);
+        return {
+          ...state,
+          ...remotePreferences,
+          isUsingDefaultWordByWordLocale:
+            remotePreferences.selectedWordByWordLocale === defaultWordByWordLocale,
+        };
       }
       return state;
     });

@@ -33,13 +33,19 @@ export const translationsSlice = createSlice({
     });
     builder.addCase(syncUserPreferences, (state, action) => {
       const {
-        payload: { userPreferences },
+        payload: { userPreferences, locale },
       } = action;
-      if (userPreferences[PreferenceGroup.TRANSLATIONS]) {
+      const remotePreferences = userPreferences[
+        PreferenceGroup.TRANSLATIONS
+      ] as TranslationsSettings;
+      if (remotePreferences) {
+        const { selectedTranslations: defaultTranslations } = getTranslationsInitialState(locale);
+        const { selectedTranslations: remoteTranslations } = remotePreferences;
         return {
           ...state,
-          ...userPreferences[PreferenceGroup.TRANSLATIONS],
-        } as TranslationsSettings;
+          ...remotePreferences,
+          isUsingDefaultTranslations: areArraysEqual(defaultTranslations, remoteTranslations),
+        };
       }
       return state;
     });

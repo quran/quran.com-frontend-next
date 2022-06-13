@@ -94,13 +94,18 @@ export const quranReaderStylesSlice = createSlice({
     });
     builder.addCase(syncUserPreferences, (state, action) => {
       const {
-        payload: { userPreferences },
+        payload: { userPreferences, locale },
       } = action;
-      if (userPreferences[PreferenceGroup.QURAN_READER_STYLES]) {
+      const remotePreferences = userPreferences[
+        PreferenceGroup.QURAN_READER_STYLES
+      ] as QuranReaderStyles;
+      if (remotePreferences) {
+        const { quranFont: defaultQuranFont } = getQuranReaderStylesInitialState(locale);
         return {
           ...state,
-          ...userPreferences[PreferenceGroup.QURAN_READER_STYLES],
-        } as QuranReaderStyles;
+          ...remotePreferences,
+          isUsingDefaultFont: defaultQuranFont === remotePreferences.quranFont,
+        };
       }
       return state;
     });

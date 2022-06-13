@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -257,10 +258,18 @@ export const audioPlayerStateSlice = createSlice({
     }));
     builder.addCase(syncUserPreferences, (state, action) => {
       const {
-        payload: { userPreferences },
+        payload: { userPreferences, locale },
       } = action;
-      if (userPreferences[PreferenceGroup.AUDIO]) {
-        return { ...state, ...userPreferences[PreferenceGroup.AUDIO] };
+      const remotePreferences = userPreferences[PreferenceGroup.AUDIO] as AudioState;
+      if (remotePreferences) {
+        const {
+          reciter: { id: defaultReciterId },
+        } = getAudioPlayerStateInitialState(locale);
+        return {
+          ...state,
+          ...remotePreferences,
+          isUsingDefaultReciter: remotePreferences.reciter.id === defaultReciterId,
+        };
       }
       return state;
     });

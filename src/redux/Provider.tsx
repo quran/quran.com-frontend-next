@@ -45,7 +45,7 @@ const ReduxProvider = ({ children, locale }) => {
           await setLanguage(remoteLocale);
           setLocaleCookie(remoteLocale);
         }
-        store.dispatch(syncUserPreferences(userPreferences));
+        store.dispatch(syncUserPreferences(userPreferences, locale));
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }
