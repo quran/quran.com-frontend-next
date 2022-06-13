@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
+import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -18,15 +20,19 @@ import {
   setPlaybackRate,
   selectShowTooltipWhenPlayingAudio,
   setShowTooltipWhenPlayingAudio,
+  selectRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
-  selectWordClickFunctionality,
+  selectReadingPreferences,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { WordClickFunctionality } from 'types/QuranReader';
 
 export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
@@ -37,12 +43,44 @@ const AudioSection = () => {
   const selectedReciter = useSelector(selectReciter, shallowEqual);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
   const playbackRate = useSelector(selectPlaybackRate);
-  const wordClickFunctionality = useSelector(selectWordClickFunctionality);
+  const readingPreferences = useSelector(selectReadingPreferences);
+  const { wordClickFunctionality } = readingPreferences;
   const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
+  const repeatSettings = useSelector(selectRepeatSettings);
+
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {string} key
+   * @param {string | number | boolean} value
+   * @param {Action} action
+   */
+  const onSettingsChange = (key: string, value: string | number | boolean, action: Action) => {
+    if (isLoggedIn()) {
+      const newAudioState = {
+        playbackRate,
+        reciter: selectedReciter.id,
+        showTooltipWhenPlayingAudio,
+        enableAutoScrolling,
+        repeatSettings,
+      };
+      newAudioState[key] = value;
+      addOrUpdateUserPreference(newAudioState, PreferenceGroup.AUDIO)
+        .then(() => {
+          dispatch(action);
+        })
+        .catch(() => {
+          // TODO: show an error
+        });
+    } else {
+      dispatch(action);
+    }
+  };
 
   const onPlaybackRateChanged = (value) => {
     logValueChange('audio_playback_rate', playbackRate, value);
-    dispatch(setPlaybackRate(Number(value)));
+    onSettingsChange('playbackRate', Number(value), dispatch(setPlaybackRate(Number(value))));
   };
 
   const playbackRatesOptions = useMemo(
@@ -65,7 +103,7 @@ const AudioSection = () => {
   const onEnableAutoScrollingChange = () => {
     const newValue = !enableAutoScrolling;
     logValueChange('audio_settings_auto_scrolling_enabled', enableAutoScrolling, newValue);
-    dispatch(setEnableAutoScrolling(newValue));
+    onSettingsChange('enableAutoScrolling', newValue, dispatch(setEnableAutoScrolling(newValue)));
   };
 
   const onWordClickChange = () => {
@@ -74,7 +112,21 @@ const AudioSection = () => {
         ? WordClickFunctionality.NoAudio
         : WordClickFunctionality.PlayAudio;
     logValueChange('audio_settings_word_click_functionality', wordClickFunctionality, newValue);
-    dispatch(setWordClickFunctionality(newValue));
+    if (isLoggedIn()) {
+      const newReadingPreferences = { ...readingPreferences };
+      // no need to persist this since it's calculated and only used internally
+      delete newReadingPreferences.isUsingDefaultWordByWordLocale;
+      newReadingPreferences.wordClickFunctionality = newValue;
+      addOrUpdateUserPreference(newReadingPreferences, PreferenceGroup.READING)
+        .then(() => {
+          dispatch(setWordClickFunctionality(newValue));
+        })
+        .catch(() => {
+          // TODO: show an error
+        });
+    } else {
+      dispatch(setWordClickFunctionality(newValue));
+    }
   };
 
   const onShowTooltipWhenPlayingAudioChange = () => {
@@ -84,7 +136,11 @@ const AudioSection = () => {
       showTooltipWhenPlayingAudio,
       newValue,
     );
-    dispatch(setShowTooltipWhenPlayingAudio(newValue));
+    onSettingsChange(
+      'showTooltipWhenPlayingAudio',
+      newValue,
+      dispatch(setShowTooltipWhenPlayingAudio(newValue)),
+    );
   };
 
   return (
