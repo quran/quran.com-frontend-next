@@ -11,12 +11,14 @@ import {
   playFromTimestamp,
 } from 'src/components/AudioPlayer/EventTriggers';
 import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import AudioState from 'src/redux/types/AudioState';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import AudioData from 'types/AudioData';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import Reciter from 'types/Reciter';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -253,6 +255,15 @@ export const audioPlayerStateSlice = createSlice({
       isUsingDefaultReciter: true,
       reciter: getAudioPlayerStateInitialState(action.payload.locale).reciter,
     }));
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences },
+      } = action;
+      if (userPreferences[PreferenceGroup.AUDIO]) {
+        return { ...state, ...userPreferences[PreferenceGroup.AUDIO] };
+      }
+      return state;
+    });
     // listen to redux-persist's REHYDRATE event
     builder.addCase(REHYDRATE, (state, action) => {
       // @ts-ignore

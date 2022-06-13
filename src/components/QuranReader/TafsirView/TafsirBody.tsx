@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import React, { useCallback, useContext, useEffect, useState } from 'react';
@@ -25,6 +26,8 @@ import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import {
   logButtonClick,
   logEvent,
@@ -42,6 +45,7 @@ import {
   getVerseAndChapterNumbersFromKey,
 } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type TafsirBodyProps = {
   initialChapterId: string;
@@ -100,12 +104,27 @@ const TafsirBody = ({
         ),
         lang,
       );
-      dispatch(
-        setSelectedTafsirs({
-          tafsirs: [slug],
-          locale: lang,
-        }),
-      );
+      if (isLoggedIn()) {
+        addOrUpdateUserPreference({ selectedTafsirs: [slug] }, PreferenceGroup.TAFSIR)
+          .then(() => {
+            dispatch(
+              setSelectedTafsirs({
+                tafsirs: [slug],
+                locale: lang,
+              }),
+            );
+          })
+          .catch(() => {
+            // TODO: show an error
+          });
+      } else {
+        dispatch(
+          setSelectedTafsirs({
+            tafsirs: [slug],
+            locale: lang,
+          }),
+        );
+      }
     },
     [dispatch, lang, selectedChapterId, selectedVerseNumber],
   );

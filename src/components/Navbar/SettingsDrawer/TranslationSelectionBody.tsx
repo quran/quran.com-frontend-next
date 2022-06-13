@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
@@ -19,6 +20,8 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import {
   logValueChange,
   logItemSelectionChange,
@@ -27,6 +30,7 @@ import {
 import filterTranslations from 'src/utils/filter-translations';
 import { getLocaleName } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';
 import QueryParam from 'types/QueryParam';
 
@@ -36,6 +40,30 @@ const TranslationSelectionBody = () => {
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState('');
+
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {number[]} value
+   * @param {Action} action
+   */
+  const onSettingsChange = useCallback(
+    (value: number[], action: Action) => {
+      if (isLoggedIn()) {
+        addOrUpdateUserPreference({ selectedTranslations: value }, PreferenceGroup.TRANSLATIONS)
+          .then(() => {
+            dispatch(action);
+          })
+          .catch(() => {
+            // TODO: show an error
+          });
+      } else {
+        dispatch(action);
+      }
+    },
+    [dispatch],
+  );
 
   const onTranslationsChange = useCallback(
     (selectedTranslationId: number) => {
@@ -49,14 +77,17 @@ const TranslationSelectionBody = () => {
 
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
-        dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
+        onSettingsChange(
+          nextTranslations,
+          setSelectedTranslations({ translations: nextTranslations, locale: lang }),
+        );
         if (nextTranslations.length) {
           router.query[QueryParam.Translations] = nextTranslations.join(',');
           router.push(router, undefined, { shallow: true });
         }
       };
     },
-    [dispatch, lang, router, selectedTranslations],
+    [lang, onSettingsChange, router, selectedTranslations],
   );
 
   const renderTranslationGroup = useCallback(
