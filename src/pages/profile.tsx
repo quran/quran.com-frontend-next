@@ -11,6 +11,7 @@ import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
+import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import DeleteAccountButton from 'src/components/Profile/DeleteAccountButton';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -27,12 +28,14 @@ interface Props {
   chaptersData?: ChaptersData;
 }
 
+const nameSample = 'Mohammad Ali';
+const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const { mutate } = useSWRConfig();
 
-  const [isValidating, setIsValidating] = useState(false);
+  const [isValidating, setIsValidating] = useState(true);
   const [userData, setUserData] = useState<UserProfile>({} as UserProfile);
   const [hasError, setHasError] = useState(false);
 
@@ -60,20 +63,28 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     });
   };
 
-  if (isValidating) {
-    // TODO: replace with a skeleton
-    // eslint-disable-next-line i18next/no-literal-string
-    return (
-      <div className={layoutStyle.pageContainer}>
-        <div className={classNames(styles.container)} />;
-      </div>
-    );
-  }
-
   if (hasError) {
     return <Error statusCode={500} />;
   }
   const { email, firstName, lastName, photoUrl } = userData;
+
+  const profileSkeletonInfoSkeleton = (
+    <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
+      <Skeleton>
+        <h2 className={styles.name}>{nameSample}</h2>
+      </Skeleton>
+      <Skeleton>
+        <div className={styles.email}>{emailSample}</div>
+      </Skeleton>
+    </div>
+  );
+
+  const profileInfo = (
+    <div className={styles.profileInfoContainer}>
+      <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
+      <div className={styles.email}>{email}</div>
+    </div>
+  );
 
   return (
     <DataContext.Provider value={chaptersData}>
@@ -90,10 +101,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
                     src={photoUrl || DEFAULT_PHOTO_URL}
                   />
                 </div>
-                <div className={styles.profileInfoContainer}>
-                  <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
-                  <div className={styles.email}>{email}</div>
-                </div>
+                {isValidating ? profileSkeletonInfoSkeleton : profileInfo}
               </div>
             </div>
 
