@@ -14,8 +14,11 @@ import styles from './LanguageSelector.module.scss';
 import i18nConfig from 'i18n.json';
 import resetSettings from 'src/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { setLocaleCookie } from 'src/utils/cookies';
 import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const { locales } = i18nConfig;
 
@@ -23,8 +26,6 @@ const options = locales.map((lng) => ({
   label: getLocaleName(lng),
   value: lng,
 }));
-
-const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
@@ -58,11 +59,14 @@ const LanguageSelector = ({
       dispatch(resetSettings(newLocale));
     }
     logValueChange('locale', lang, newLocale);
-    await setLanguage(newLocale);
-    const date = new Date();
-    date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
-    // eslint-disable-next-line i18next/no-literal-string
-    document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
+    addOrUpdateUserPreference(newLocale, PreferenceGroup.LANGUAGE)
+      .then(async () => {
+        await setLanguage(newLocale);
+        setLocaleCookie(newLocale);
+      })
+      .catch(() => {
+        // TODO: show an error
+      });
   };
 
   return (
