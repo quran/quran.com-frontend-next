@@ -5,6 +5,7 @@ import curatedStations from 'src/components/Radio/curatedStations';
 import { StationState, StationType } from 'src/components/Radio/types';
 import resetSettings from 'src/redux/actions/reset-settings';
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 const POPULAR_STATION_ID = '1';
 const popularStation = curatedStations[POPULAR_STATION_ID];
@@ -17,7 +18,7 @@ const initialState: StationState = {
 };
 
 export const radioSlice = createSlice({
-  name: 'radio',
+  name: SliceName.RADIO,
   initialState,
   reducers: {
     setRadioStationState: (state, action: PayloadAction<StationState>) => {

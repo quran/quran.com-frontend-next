@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
 import Section from './Section';
@@ -13,22 +13,20 @@ import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Toggle from 'src/components/dls/Toggle/Toggle';
 import {
-  selectEnableAutoScrolling,
-  selectReciter,
   setEnableAutoScrolling,
-  selectPlaybackRate,
   setPlaybackRate,
-  selectShowTooltipWhenPlayingAudio,
   setShowTooltipWhenPlayingAudio,
-  selectRepeatSettings,
+  selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   selectReadingPreferences,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -40,13 +38,15 @@ export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 const AudioSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedReciter = useSelector(selectReciter, shallowEqual);
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
-  const playbackRate = useSelector(selectPlaybackRate);
   const readingPreferences = useSelector(selectReadingPreferences);
   const { wordClickFunctionality } = readingPreferences;
-  const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
-  const repeatSettings = useSelector(selectRepeatSettings);
+  const audioPlayerState = useSelector(selectAudioPlayerState);
+  const {
+    playbackRate,
+    showTooltipWhenPlayingAudio,
+    enableAutoScrolling,
+    reciter: selectedReciter,
+  } = audioPlayerState;
 
   /**
    * Persist settings in the DB if the user is logged in before dispatching
@@ -56,17 +56,19 @@ const AudioSection = () => {
    * @param {string | number | boolean} value
    * @param {Action} action
    */
-  const onSettingsChange = (key: string, value: string | number | boolean, action: Action) => {
+  const onSettingsChange = (
+    key: string,
+    value: string | number | boolean,
+    action: Action,
+    currentSliceValue = audioPlayerState,
+    sliceName = SliceName.AUDIO_PLAYER_STATE,
+    preferenceGroup = PreferenceGroup.AUDIO,
+  ) => {
     if (isLoggedIn()) {
-      const newAudioState = {
-        playbackRate,
-        reciter: selectedReciter.id,
-        showTooltipWhenPlayingAudio,
-        enableAutoScrolling,
-        repeatSettings,
-      };
-      newAudioState[key] = value;
-      addOrUpdateUserPreference(newAudioState, PreferenceGroup.AUDIO)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(sliceName, currentSliceValue, key, value),
+        preferenceGroup,
+      )
         .then(() => {
           dispatch(action);
         })
@@ -112,21 +114,14 @@ const AudioSection = () => {
         ? WordClickFunctionality.NoAudio
         : WordClickFunctionality.PlayAudio;
     logValueChange('audio_settings_word_click_functionality', wordClickFunctionality, newValue);
-    if (isLoggedIn()) {
-      const newReadingPreferences = { ...readingPreferences };
-      // no need to persist this since it's calculated and only used internally
-      delete newReadingPreferences.isUsingDefaultWordByWordLocale;
-      newReadingPreferences.wordClickFunctionality = newValue;
-      addOrUpdateUserPreference(newReadingPreferences, PreferenceGroup.READING)
-        .then(() => {
-          dispatch(setWordClickFunctionality(newValue));
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(setWordClickFunctionality(newValue));
-    }
+    onSettingsChange(
+      'wordClickFunctionality',
+      newValue,
+      setWordClickFunctionality(newValue),
+      readingPreferences,
+      SliceName.READING_PREFERENCES,
+      PreferenceGroup.READING,
+    );
   };
 
   const onShowTooltipWhenPlayingAudioChange = () => {

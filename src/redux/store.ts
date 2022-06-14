@@ -38,6 +38,7 @@ import session from './slices/session';
 import theme from './slices/theme';
 import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
+import SliceName from './types/SliceName';
 
 const persistConfig = {
   key: 'root',
@@ -47,19 +48,19 @@ const persistConfig = {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
   }),
   whitelist: [
-    'quranReaderStyles',
-    'readingPreferences',
-    'translations',
-    'theme',
-    'tafsirs',
-    'search',
-    'readingTracker',
-    'welcomeMessage',
-    'defaultSettings',
-    'sidebarNavigation',
-    'radio',
-    'banner',
-    'session',
+    SliceName.QURAN_READER_STYLES,
+    SliceName.READING_PREFERENCES,
+    SliceName.TRANSLATIONS,
+    SliceName.THEME,
+    SliceName.TAFSIRS,
+    SliceName.SEARCH,
+    SliceName.READING_TRACKER,
+    SliceName.WELCOME_MESSAGE,
+    SliceName.DEFAULT_SETTINGS,
+    SliceName.SIDEBAR_NAVIGATION,
+    SliceName.RADIO,
+    SliceName.BANNER,
+    SliceName.SESSION,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 

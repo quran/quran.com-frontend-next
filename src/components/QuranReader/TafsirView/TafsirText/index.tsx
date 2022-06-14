@@ -14,8 +14,10 @@ import {
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
+import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -48,11 +50,10 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
    */
   const onSettingsChange = (key: string, value: number, action: Action) => {
     if (isLoggedIn()) {
-      const newQuranReaderStyles = { ...quranReaderStyles };
-      // no need to persist this since it's calculated and only used internally
-      delete newQuranReaderStyles.isUsingDefaultFont;
-      newQuranReaderStyles[key] = value;
-      addOrUpdateUserPreference(newQuranReaderStyles, PreferenceGroup.QURAN_READER_STYLES)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(SliceName.QURAN_READER_STYLES, quranReaderStyles, key, value),
+        PreferenceGroup.QURAN_READER_STYLES,
+      )
         .then(() => {
           dispatch(action);
         })

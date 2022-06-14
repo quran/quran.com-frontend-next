@@ -15,9 +15,11 @@ import {
   selectAudioPlayerState,
   setReciterAndPauseAudio,
 } from 'src/redux/slices/AudioPlayer/state';
+import SliceName from 'src/redux/types/SliceName';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -32,22 +34,20 @@ const SelectReciterMenu = ({ onBack }) => {
     QueryParam.Reciter,
   );
   const audioPlayerState = useSelector(selectAudioPlayerState);
-  const { playbackRate, showTooltipWhenPlayingAudio, enableAutoScrolling, repeatSettings } =
-    audioPlayerState;
-
   const dispatch = useDispatch();
 
   const onReciterSelected = useCallback(
     (reciter: Reciter) => {
       if (isLoggedIn()) {
-        const newAudioState = {
-          playbackRate,
-          reciter: reciter.id,
-          showTooltipWhenPlayingAudio,
-          enableAutoScrolling,
-          repeatSettings,
-        };
-        addOrUpdateUserPreference(newAudioState, PreferenceGroup.AUDIO)
+        addOrUpdateUserPreference(
+          formatPreferenceGroupValue(
+            SliceName.AUDIO_PLAYER_STATE,
+            audioPlayerState,
+            'reciter',
+            reciter.id,
+          ),
+          PreferenceGroup.AUDIO,
+        )
           .then(() => {
             dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
             onBack();
@@ -60,15 +60,7 @@ const SelectReciterMenu = ({ onBack }) => {
         onBack();
       }
     },
-    [
-      dispatch,
-      enableAutoScrolling,
-      lang,
-      onBack,
-      playbackRate,
-      repeatSettings,
-      showTooltipWhenPlayingAudio,
-    ],
+    [audioPlayerState, dispatch, lang, onBack],
   );
 
   const renderReciter = useCallback(

@@ -17,9 +17,11 @@ import {
   setSelectedWordByWordLocale,
   selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import SliceName from 'src/redux/types/SliceName';
 import { removeItemFromArray } from 'src/utils/array';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
@@ -42,11 +44,10 @@ const WordTooltipSection = () => {
    */
   const onSettingsChange = (key: string, value: string | string[], action: Action) => {
     if (isLoggedIn()) {
-      const newReadingPreferences = { ...readingPreferences };
-      // no need to persist this since it's calculated and only used internally
-      delete newReadingPreferences.isUsingDefaultWordByWordLocale;
-      newReadingPreferences[key] = value;
-      addOrUpdateUserPreference(newReadingPreferences, PreferenceGroup.READING)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(SliceName.READING_PREFERENCES, readingPreferences, key, value),
+        PreferenceGroup.READING,
+      )
         .then(() => {
           dispatch(action);
         })

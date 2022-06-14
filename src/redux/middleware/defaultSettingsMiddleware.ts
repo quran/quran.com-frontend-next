@@ -3,32 +3,33 @@ import { Middleware } from 'redux';
 
 import { RootState } from '../RootState';
 import { setIsUsingDefaultSettings } from '../slices/defaultSettings';
+import SliceName from '../types/SliceName';
 
 import { RESET_SETTINGS_EVENT } from 'src/redux/actions/reset-settings';
 
 const OBSERVED_ACTIONS = [
-  'theme/setTheme',
-  'readingPreferences/setReadingPreference',
-  'readingPreferences/setSelectedWordByWordLocale',
-  'readingPreferences/setSelectedWordByWordTransliteration',
-  'readingPreferences/setSelectedWordByWordTranslation',
-  'readingPreferences/setShowWordByWordTranslation',
-  'readingPreferences/setShowWordByWordTransliteration',
-  'readingPreferences/setShowTooltipFor',
-  'readingPreferences/setWordClickFunctionality',
-  'quranReaderStyles/setQuranFont',
-  'quranReaderStyles/setMushafLines',
-  'quranReaderStyles/increaseQuranTextFontScale',
-  'quranReaderStyles/decreaseQuranTextFontScale',
-  'quranReaderStyles/decreaseTranslationFontScale',
-  'quranReaderStyles/increaseTranslationFontScale',
-  'translations/setSelectedTranslations',
-  'quranReaderStyles/increaseTafsirFontScale',
-  'quranReaderStyles/decreaseTafsirFontScale',
-  'tafsirs/setSelectedTafsirs',
-  'audioPlayerState/setEnableAutoScrolling',
-  'audioPlayerState/setPlaybackRate',
-  'audioPlayerState/setReciter',
+  `${SliceName.THEME}/setTheme`,
+  `${SliceName.READING_PREFERENCES}/setReadingPreference`,
+  `${SliceName.READING_PREFERENCES}/setSelectedWordByWordLocale`,
+  `${SliceName.READING_PREFERENCES}/setSelectedWordByWordTransliteration`,
+  `${SliceName.READING_PREFERENCES}/setSelectedWordByWordTranslation`,
+  `${SliceName.READING_PREFERENCES}/setShowWordByWordTranslation`,
+  `${SliceName.READING_PREFERENCES}/setShowWordByWordTransliteration`,
+  `${SliceName.READING_PREFERENCES}/setShowTooltipFor`,
+  `${SliceName.READING_PREFERENCES}/setWordClickFunctionality`,
+  `${SliceName.QURAN_READER_STYLES}/setQuranFont`,
+  `${SliceName.QURAN_READER_STYLES}/setMushafLines`,
+  `${SliceName.QURAN_READER_STYLES}/increaseQuranTextFontScale`,
+  `${SliceName.QURAN_READER_STYLES}/decreaseQuranTextFontScale`,
+  `${SliceName.QURAN_READER_STYLES}/decreaseTranslationFontScale`,
+  `${SliceName.QURAN_READER_STYLES}/increaseTranslationFontScale`,
+  `${SliceName.TRANSLATIONS}/setSelectedTranslations`,
+  `${SliceName.QURAN_READER_STYLES}/increaseTafsirFontScale`,
+  `${SliceName.QURAN_READER_STYLES}/decreaseTafsirFontScale`,
+  `${SliceName.TAFSIRS}/setSelectedTafsirs`,
+  `${SliceName.AUDIO_PLAYER_STATE}/setEnableAutoScrolling`,
+  `${SliceName.AUDIO_PLAYER_STATE}/setPlaybackRate`,
+  `${SliceName.AUDIO_PLAYER_STATE}/setReciter`,
 ];
 
 /**

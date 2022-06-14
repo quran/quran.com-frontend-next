@@ -105,7 +105,7 @@ const TafsirBody = ({
         lang,
       );
       if (isLoggedIn()) {
-        addOrUpdateUserPreference({ selectedTafsirs: [slug] }, PreferenceGroup.TAFSIR)
+        addOrUpdateUserPreference({ selectedTafsirs: [slug] }, PreferenceGroup.TAFSIRS)
           .then(() => {
             dispatch(
               setSelectedTafsirs({

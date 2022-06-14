@@ -16,9 +16,11 @@ import {
   selectAudioPlayerState,
   setReciterAndPauseAudio,
 } from 'src/redux/slices/AudioPlayer/state';
+import SliceName from 'src/redux/types/SliceName';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -45,13 +47,7 @@ const SettingsReciter = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const audioPlayerState = useSelector(selectAudioPlayerState);
-  const {
-    reciter: selectedReciter,
-    playbackRate,
-    showTooltipWhenPlayingAudio,
-    enableAutoScrolling,
-    repeatSettings,
-  } = audioPlayerState;
+  const { reciter: selectedReciter } = audioPlayerState;
   const [searchQuery, setSearchQuery] = useState('');
 
   // given the reciterId, get the full reciter object.
@@ -63,14 +59,15 @@ const SettingsReciter = () => {
     router.query[QueryParam.Reciter] = String(reciter.id);
     router.push(router, undefined, { shallow: true });
     if (isLoggedIn()) {
-      const newQuranReaderStyles = {
-        playbackRate,
-        reciter: reciterId,
-        showTooltipWhenPlayingAudio,
-        enableAutoScrolling,
-        repeatSettings,
-      };
-      addOrUpdateUserPreference(newQuranReaderStyles, PreferenceGroup.AUDIO)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(
+          SliceName.AUDIO_PLAYER_STATE,
+          audioPlayerState,
+          'reciter',
+          Number(reciterId),
+        ),
+        PreferenceGroup.AUDIO,
+      )
         .then(() => {
           dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
         })

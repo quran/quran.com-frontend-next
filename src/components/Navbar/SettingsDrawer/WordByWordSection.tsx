@@ -16,8 +16,10 @@ import {
   setSelectedWordByWordLocale,
   selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -48,11 +50,10 @@ const WordByWordSection = () => {
    */
   const onSettingsChange = (key: string, value: string | number | boolean, action: Action) => {
     if (isLoggedIn()) {
-      const newReadingPreferences = { ...readingPreferences };
-      // no need to persist this since it's calculated and only used internally
-      delete newReadingPreferences.isUsingDefaultWordByWordLocale;
-      newReadingPreferences[key] = value;
-      addOrUpdateUserPreference(newReadingPreferences, PreferenceGroup.READING)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(SliceName.READING_PREFERENCES, readingPreferences, key, value),
+        PreferenceGroup.READING,
+      )
         .then(() => {
           dispatch(action);
         })

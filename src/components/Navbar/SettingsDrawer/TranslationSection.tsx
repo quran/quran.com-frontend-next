@@ -20,10 +20,12 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import SliceName from 'src/redux/types/SliceName';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
@@ -99,11 +101,10 @@ const TranslationSection = () => {
    */
   const onSettingsChange = (key: string, value: number, action: Action) => {
     if (isLoggedIn()) {
-      const newQuranReaderStyles = { ...quranReaderStyles };
-      // no need to persist this since it's calculated and only used internally
-      delete newQuranReaderStyles.isUsingDefaultFont;
-      newQuranReaderStyles[key] = value;
-      addOrUpdateUserPreference(newQuranReaderStyles, PreferenceGroup.QURAN_READER_STYLES)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(SliceName.QURAN_READER_STYLES, quranReaderStyles, key, value),
+        PreferenceGroup.QURAN_READER_STYLES,
+      )
         .then(() => {
           dispatch(action);
         })

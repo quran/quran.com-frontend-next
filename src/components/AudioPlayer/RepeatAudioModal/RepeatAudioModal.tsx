@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useMemo, useState, useEffect } from 'react';
 
@@ -23,8 +22,10 @@ import {
   selectIsInRepeatMode,
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
+import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
@@ -55,13 +56,7 @@ const RepeatAudioModal = ({
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chaptersData = useGetChaptersData(lang);
-  const {
-    repeatSettings,
-    playbackRate,
-    reciter,
-    showTooltipWhenPlayingAudio,
-    enableAutoScrolling,
-  } = audioPlayerState;
+  const { repeatSettings } = audioPlayerState;
   const chapterName = useMemo(() => {
     if (!chaptersData) {
       return null;
@@ -123,14 +118,15 @@ const RepeatAudioModal = ({
   const onPlayClick = () => {
     logButtonClick('start_repeat_play');
     if (isLoggedIn()) {
-      const newAudioState = {
-        playbackRate,
-        reciter: reciter.id,
-        showTooltipWhenPlayingAudio,
-        enableAutoScrolling,
-        repeatSettings: verseRepetition,
-      };
-      addOrUpdateUserPreference(newAudioState, PreferenceGroup.AUDIO)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(
+          SliceName.AUDIO_PLAYER_STATE,
+          audioPlayerState,
+          'repeatSettings',
+          verseRepetition,
+        ),
+        PreferenceGroup.AUDIO,
+      )
         .then(() => {
           play();
         })

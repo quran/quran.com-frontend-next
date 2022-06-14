@@ -9,8 +9,10 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import { selectAudioPlayerState, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
+import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -19,13 +21,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const audioPlayerState = useSelector(selectAudioPlayerState);
-  const {
-    playbackRate: currentPlaybackRate,
-    reciter,
-    showTooltipWhenPlayingAudio,
-    enableAutoScrolling,
-    repeatSettings,
-  } = audioPlayerState;
+  const { playbackRate: currentPlaybackRate } = audioPlayerState;
 
   const getPlaybackRateLabel = useCallback(
     (playbackRate) => {
@@ -38,14 +34,15 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
 
   const onPlaybackRateSelected = (playbackRate: number) => {
     if (isLoggedIn()) {
-      const newAudioState = {
-        playbackRate,
-        reciter: reciter.id,
-        showTooltipWhenPlayingAudio,
-        enableAutoScrolling,
-        repeatSettings,
-      };
-      addOrUpdateUserPreference(newAudioState, PreferenceGroup.AUDIO)
+      addOrUpdateUserPreference(
+        formatPreferenceGroupValue(
+          SliceName.AUDIO_PLAYER_STATE,
+          audioPlayerState,
+          'playbackRate',
+          playbackRate,
+        ),
+        PreferenceGroup.AUDIO,
+      )
         .then(() => {
           dispatch(setPlaybackRate(playbackRate));
           onBack();
