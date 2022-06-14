@@ -17,10 +17,11 @@ export const SYNC_USER_PREFERENCES_EVENT = 'syncUserPreferences';
 // - currently being used in `src/redux/Provider.tsx`
 export default createAction(
   SYNC_USER_PREFERENCES_EVENT,
-  (userPreferences: UserPreferencesResponse) => {
+  (userPreferences: UserPreferencesResponse, locale: string) => {
     return {
       payload: {
         userPreferences,
+        locale,
       },
     };
   },
