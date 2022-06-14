@@ -126,10 +126,12 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               )}
             >
               <div className={styles.action}>
-                <DeleteAccountButton />
+                <DeleteAccountButton isDisabled={isValidating} />
               </div>
               <div className={styles.action}>
-                <Button onClick={onLogoutClicked}>{t('common:logout')}</Button>
+                <Button isDisabled={isValidating} onClick={onLogoutClicked}>
+                  {t('common:logout')}
+                </Button>
               </div>
             </div>
           </div>

@@ -14,7 +14,10 @@ import styles from './DeleteAccountButton.module.scss';
 import { deleteAccount } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 
-const DeleteAccountButton = () => {
+type DeleteAccountButtonProps = {
+  isDisabled?: boolean;
+};
+const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
@@ -41,6 +44,7 @@ const DeleteAccountButton = () => {
         type={ButtonType.Error}
         variant={ButtonVariant.Ghost}
         onClick={() => setIsModalVisible(true)}
+        isDisabled={isDisabled}
       >
         {t('profile:delete-account')}
       </Button>
