@@ -55,6 +55,9 @@ const AudioSection = () => {
    * @param {string} key
    * @param {string | number | boolean} value
    * @param {Action} action
+   * @param {any} currentSliceValue
+   * @param {SliceName} sliceName
+   * @param {PreferenceGroup} preferenceGroup
    */
   const onSettingsChange = (
     key: string,
@@ -118,6 +121,7 @@ const AudioSection = () => {
       'wordClickFunctionality',
       newValue,
       setWordClickFunctionality(newValue),
+      // @ts-ignore
       readingPreferences,
       SliceName.READING_PREFERENCES,
       PreferenceGroup.READING,
