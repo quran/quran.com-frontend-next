@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import EmailSent from './EmailSent';
 import styles from './login.module.scss';
+import ResendEmailSection from './ResendEmailSection';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import EmailLogin, { sendMagicLink } from 'src/components/Login/EmailLogin';
@@ -31,6 +32,10 @@ const LoginContainer = () => {
     return (
       <div className={styles.outerContainer}>
         <EmailSent email={email} verificationCode={magicLinkVerificationCode} />
+        <ResendEmailSection
+          onResendButtonClicked={() => onEmailLoginSubmit(email)}
+          key={magicLinkVerificationCode}
+        />
       </div>
     );
   }
