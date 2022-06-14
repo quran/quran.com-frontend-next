@@ -8,22 +8,26 @@ import styles from './login.module.scss';
 
 type ResendEmailSectionProps = {
   onResendButtonClicked: () => void;
-  initialRemainingTimeInSecond?: number;
+  initialRemainingTimeInSeconds?: number;
 };
 
 const ResendEmailSection = ({
   onResendButtonClicked,
-  initialRemainingTimeInSecond = 60,
+  initialRemainingTimeInSeconds = 60,
 }: ResendEmailSectionProps) => {
-  const [remainingTimeInSecond, setRemainingTimeInSecond] = useState(initialRemainingTimeInSecond);
+  const [remainingTimeInSeconds, setRemainingTimeInSeconds] = useState(
+    initialRemainingTimeInSeconds,
+  );
   const { t } = useTranslation('login');
 
-  const disabled = remainingTimeInSecond > 0;
+  const disabled = remainingTimeInSeconds > 0;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRemainingTimeInSecond((prevRemainingTime) => {
-        if (prevRemainingTime > 0) return prevRemainingTime - 1;
+      setRemainingTimeInSeconds((prevRemainingTime) => {
+        if (prevRemainingTime > 0) {
+          return prevRemainingTime - 1;
+        }
         return prevRemainingTime;
       });
     }, 1000);
@@ -42,7 +46,7 @@ const ResendEmailSection = ({
       >
         {disabled
           ? t('resend-email-in', {
-              remainingTime: remainingTimeInSecond,
+              remainingTime: remainingTimeInSeconds,
             })
           : t('resend-email')}
       </Button>
