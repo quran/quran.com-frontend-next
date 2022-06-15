@@ -5,7 +5,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr/immutable';
 
 import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
@@ -22,12 +22,11 @@ import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
 import DataContext from 'src/contexts/DataContext';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import SliceName from 'src/redux/types/SliceName';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
 import {
   logButtonClick,
   logEvent,
@@ -68,11 +67,12 @@ const TafsirBody = ({
   scrollToTop,
   shouldRender,
 }: TafsirBodyProps) => {
-  const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
-  const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const tafsirsState = useSelector(selectTafsirs);
+  const { selectedTafsirs: userPreferredTafsirIds } = tafsirsState;
   const chaptersData = useContext(DataContext);
+  const { onSettingsChange } = usePersistPreferenceGroup();
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -104,29 +104,19 @@ const TafsirBody = ({
         ),
         lang,
       );
-      if (isLoggedIn()) {
-        addOrUpdateUserPreference({ selectedTafsirs: [slug] }, PreferenceGroup.TAFSIR)
-          .then(() => {
-            dispatch(
-              setSelectedTafsirs({
-                tafsirs: [slug],
-                locale: lang,
-              }),
-            );
-          })
-          .catch(() => {
-            // TODO: show an error
-          });
-      } else {
-        dispatch(
-          setSelectedTafsirs({
-            tafsirs: [slug],
-            locale: lang,
-          }),
-        );
-      }
+      onSettingsChange(
+        'selectedTafsirs',
+        [slug],
+        setSelectedTafsirs({
+          tafsirs: [slug],
+          locale: lang,
+        }),
+        tafsirsState,
+        SliceName.TAFSIRS,
+        PreferenceGroup.TAFSIRS,
+      );
     },
-    [dispatch, lang, selectedChapterId, selectedVerseNumber],
+    [lang, onSettingsChange, selectedChapterId, selectedVerseNumber, tafsirsState],
   );
 
   const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(

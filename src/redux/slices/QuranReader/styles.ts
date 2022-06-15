@@ -5,6 +5,7 @@ import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import SliceName from 'src/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
@@ -14,7 +15,7 @@ export const MAXIMUM_TAFSIR_FONT_STEP = 10;
 export const MINIMUM_FONT_STEP = 1;
 
 export const quranReaderStylesSlice = createSlice({
-  name: 'quranReaderStyles',
+  name: SliceName.QURAN_READER_STYLES,
   initialState: getQuranReaderStylesInitialState(),
   reducers: {
     increaseQuranTextFontScale: (state) => ({

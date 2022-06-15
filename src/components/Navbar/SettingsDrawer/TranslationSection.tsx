@@ -11,6 +11,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import Counter from 'src/components/dls/Counter/Counter';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
@@ -20,16 +21,16 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import SliceName from 'src/redux/types/SliceName';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
 import { logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const TranslationSection = () => {
+  const { onSettingsChange } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -97,34 +98,27 @@ const TranslationSection = () => {
    * @param {number} value
    * @param {Action} action
    */
-  const onSettingsChange = (key: string, value: number, action: Action) => {
-    if (isLoggedIn()) {
-      const newQuranReaderStyles = { ...quranReaderStyles };
-      // no need to persist this since it's calculated and only used internally
-      delete newQuranReaderStyles.isUsingDefaultFont;
-      newQuranReaderStyles[key] = value;
-      addOrUpdateUserPreference(newQuranReaderStyles, PreferenceGroup.QURAN_READER_STYLES)
-        .then(() => {
-          dispatch(action);
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(action);
-    }
+  const onTranslationSettingsChange = (key: string, value: number, action: Action) => {
+    onSettingsChange(
+      key,
+      value,
+      action,
+      quranReaderStyles,
+      SliceName.QURAN_READER_STYLES,
+      PreferenceGroup.QURAN_READER_STYLES,
+    );
   };
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = translationFontScale - 1;
     logValueChange('translation_font_scale', translationFontScale, newValue);
-    onSettingsChange('translationFontScale', newValue, decreaseTranslationFontScale());
+    onTranslationSettingsChange('translationFontScale', newValue, decreaseTranslationFontScale());
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = translationFontScale + 1;
     logValueChange('translation_font_scale', translationFontScale, newValue);
-    onSettingsChange('translationFontScale', newValue, increaseTranslationFontScale());
+    onTranslationSettingsChange('translationFontScale', newValue, increaseTranslationFontScale());
   };
 
   return (

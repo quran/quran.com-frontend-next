@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
@@ -13,6 +13,7 @@ import VersePreview from './VersePreview';
 import Counter from 'src/components/dls/Counter/Counter';
 import Select from 'src/components/dls/Forms/Select';
 import Switch from 'src/components/dls/Switch/Switch';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import {
   decreaseQuranTextFontScale,
@@ -23,16 +24,15 @@ import {
   setMushafLines,
   MAXIMUM_QURAN_FONT_STEP,
 } from 'src/redux/slices/QuranReader/styles';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
+import SliceName from 'src/redux/types/SliceName';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
-  const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const { onSettingsChange } = usePersistPreferenceGroup();
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
   const fonts = useMemo(() => {
@@ -116,50 +116,51 @@ const QuranFontSection = () => {
    * @param {string | number} value
    * @param {Action} action
    */
-  const onSettingsChange = (key: string, value: string | number, action: Action) => {
-    if (isLoggedIn()) {
-      const newQuranReaderStyles = { ...quranReaderStyles };
-      // no need to persist this since it's calculated and only used internally
-      delete newQuranReaderStyles.isUsingDefaultFont;
-      newQuranReaderStyles[key] = value;
-      addOrUpdateUserPreference(newQuranReaderStyles, PreferenceGroup.QURAN_READER_STYLES)
-        .then(() => {
-          dispatch(action);
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(action);
-    }
+  const onFontSettingsChange = (key: string, value: string | number, action: Action) => {
+    onSettingsChange(
+      key,
+      value,
+      action,
+      quranReaderStyles,
+      SliceName.QURAN_READER_STYLES,
+      PreferenceGroup.QURAN_READER_STYLES,
+    );
   };
 
   const onFontChange = (value: QuranFont) => {
     logValueChange('font_family', selectedType, value);
     const fontValue = getDefaultFont(value);
-    onSettingsChange('quranFont', fontValue, setQuranFont({ quranFont: fontValue, locale: lang }));
+    onFontSettingsChange(
+      'quranFont',
+      fontValue,
+      setQuranFont({ quranFont: fontValue, locale: lang }),
+    );
   };
 
   const onFontStyleChange = (value: QuranFont) => {
     logValueChange('font_style', quranFont, value);
-    onSettingsChange('quranFont', value, setQuranFont({ quranFont: value, locale: lang }));
+    onFontSettingsChange('quranFont', value, setQuranFont({ quranFont: value, locale: lang }));
   };
 
   const onMushafLinesChange = (value: MushafLines) => {
     logValueChange('mushaf_lines', mushafLines, value);
-    onSettingsChange('mushafLines', value, setMushafLines({ mushafLines: value, locale: lang }));
+    onFontSettingsChange(
+      'mushafLines',
+      value,
+      setMushafLines({ mushafLines: value, locale: lang }),
+    );
   };
 
   const onFontScaleDecreaseClicked = () => {
     const value = quranTextFontScale - 1;
     logValueChange('font_scale', quranTextFontScale, value);
-    onSettingsChange('quranTextFontScale', value, decreaseQuranTextFontScale());
+    onFontSettingsChange('quranTextFontScale', value, decreaseQuranTextFontScale());
   };
 
   const onFontScaleIncreaseClicked = () => {
     const value = quranTextFontScale + 1;
     logValueChange('font_scale', quranTextFontScale, value);
-    onSettingsChange('quranTextFontScale', value, increaseQuranTextFontScale());
+    onFontSettingsChange('quranTextFontScale', value, increaseQuranTextFontScale());
   };
 
   return (

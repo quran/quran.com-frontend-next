@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
+import SliceName from 'src/redux/types/SliceName';
+
 export type BannerState = {
   isBannerVisible: boolean;
 };
@@ -11,7 +13,7 @@ const initialState: BannerState = {
 };
 
 export const bannerSlice = createSlice({
-  name: 'banner',
+  name: SliceName.BANNER,
   initialState,
   reducers: {
     setIsBannerVisible: (state: BannerState, action: PayloadAction<boolean>) => ({
