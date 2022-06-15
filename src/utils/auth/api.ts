@@ -29,7 +29,7 @@ export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit):
  * @param {RequestData} requestData
  * @returns {Promise<T>}
  */
-const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
+export const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

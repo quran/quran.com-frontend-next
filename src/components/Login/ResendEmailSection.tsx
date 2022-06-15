@@ -18,7 +18,7 @@ const ResendEmailSection = ({
   const [remainingTimeInSeconds, setRemainingTimeInSeconds] = useState(
     initialRemainingTimeInSeconds,
   );
-  const { t } = useTranslation('login');
+  const { t } = useTranslation('common');
 
   const disabled = remainingTimeInSeconds > 0;
 
@@ -37,7 +37,7 @@ const ResendEmailSection = ({
 
   return (
     <div className={styles.resendEmailSection}>
-      <div>{t('check-spam')}</div>
+      <div>{t('email-verification.check-spam')}</div>
       <Button
         className={styles.resendButton}
         isDisabled={disabled}
@@ -45,10 +45,10 @@ const ResendEmailSection = ({
         onClick={onResendButtonClicked}
       >
         {disabled
-          ? t('resend-email-in', {
+          ? t('email-verification.resend-email-in', {
               remainingTime: remainingTimeInSeconds,
             })
-          : t('resend-email')}
+          : t('email-verification.resend-email')}
       </Button>
     </div>
   );
