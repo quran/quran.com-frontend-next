@@ -10,7 +10,17 @@ import { isLoggedIn } from 'src/utils/auth/login';
 import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-const usePersistPreferenceGroup = () => {
+/**
+ * A hook that will be used to:
+ * 1. If the user is logged in, we persist settings
+ * to the DB then dispatch the redux action that
+ * would apply the changes locally (and might also persist
+ * it locally in the localStorage depending on the slice)
+ * 2. If not, just dispatch the action.
+ *
+ * @returns {Record<string, any>}
+ */
+const usePersistPreferenceGroup = (): Record<string, any> => {
   const dispatch = useDispatch();
 
   const actions = useMemo(
