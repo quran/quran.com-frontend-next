@@ -22,9 +22,9 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
     if (onSubmitPromise) {
-      onSubmitPromise.then(({ errors }) => {
-        if (errors) {
-          Object.entries(errors).forEach(([field, errorMessage]) => {
+      onSubmitPromise.then((errorData) => {
+        if (errorData && errorData?.errors) {
+          Object.entries(errorData.errors).forEach(([field, errorMessage]) => {
             setError(field, { type: 'manual', message: errorMessage as string });
           });
         }
