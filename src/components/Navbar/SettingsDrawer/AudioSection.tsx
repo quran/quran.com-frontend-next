@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
-import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,6 +11,7 @@ import Select from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Toggle from 'src/components/dls/Toggle/Toggle';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   setEnableAutoScrolling,
   setPlaybackRate,
@@ -24,9 +24,6 @@ import {
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import SliceName from 'src/redux/types/SliceName';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -47,45 +44,18 @@ const AudioSection = () => {
     enableAutoScrolling,
     reciter: selectedReciter,
   } = audioPlayerState;
-
-  /**
-   * Persist settings in the DB if the user is logged in before dispatching
-   * Redux action, otherwise just dispatch it.
-   *
-   * @param {string} key
-   * @param {string | number | boolean} value
-   * @param {Action} action
-   * @param {any} currentSliceValue
-   * @param {SliceName} sliceName
-   * @param {PreferenceGroup} preferenceGroup
-   */
-  const onSettingsChange = (
-    key: string,
-    value: string | number | boolean,
-    action: Action,
-    currentSliceValue = audioPlayerState,
-    sliceName = SliceName.AUDIO_PLAYER_STATE,
-    preferenceGroup = PreferenceGroup.AUDIO,
-  ) => {
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        formatPreferenceGroupValue(sliceName, currentSliceValue, key, value),
-        preferenceGroup,
-      )
-        .then(() => {
-          dispatch(action);
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(action);
-    }
-  };
+  const { onSettingsChange } = usePersistPreferenceGroup();
 
   const onPlaybackRateChanged = (value) => {
     logValueChange('audio_playback_rate', playbackRate, value);
-    onSettingsChange('playbackRate', Number(value), dispatch(setPlaybackRate(Number(value))));
+    onSettingsChange(
+      'playbackRate',
+      Number(value),
+      dispatch(setPlaybackRate(Number(value))),
+      audioPlayerState,
+      SliceName.AUDIO_PLAYER_STATE,
+      PreferenceGroup.AUDIO,
+    );
   };
 
   const playbackRatesOptions = useMemo(
@@ -108,7 +78,14 @@ const AudioSection = () => {
   const onEnableAutoScrollingChange = () => {
     const newValue = !enableAutoScrolling;
     logValueChange('audio_settings_auto_scrolling_enabled', enableAutoScrolling, newValue);
-    onSettingsChange('enableAutoScrolling', newValue, dispatch(setEnableAutoScrolling(newValue)));
+    onSettingsChange(
+      'enableAutoScrolling',
+      newValue,
+      dispatch(setEnableAutoScrolling(newValue)),
+      audioPlayerState,
+      SliceName.AUDIO_PLAYER_STATE,
+      PreferenceGroup.AUDIO,
+    );
   };
 
   const onWordClickChange = () => {
@@ -139,6 +116,9 @@ const AudioSection = () => {
       'showTooltipWhenPlayingAudio',
       newValue,
       dispatch(setShowTooltipWhenPlayingAudio(newValue)),
+      audioPlayerState,
+      SliceName.AUDIO_PLAYER_STATE,
+      PreferenceGroup.AUDIO,
     );
   };
 

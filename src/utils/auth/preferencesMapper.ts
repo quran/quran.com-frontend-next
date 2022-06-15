@@ -3,6 +3,8 @@ import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
 import SliceName from 'src/redux/types/SliceName';
+import TafsirsSettings from 'src/redux/types/TafsirsSettings';
+import TranslationsSettings from 'src/redux/types/TranslationsSettings';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const SLICE_NAME_TO_PREFERENCE_GROUP = {
@@ -52,6 +54,20 @@ const getPreferenceGroupValue = (
       ...currentSliceValue,
     } as ReadingPreferences;
     delete newPreferences.isUsingDefaultWordByWordLocale;
+    return newPreferences;
+  }
+  if (sliceName === SliceName.TRANSLATIONS) {
+    const newPreferences = {
+      ...currentSliceValue,
+    } as TranslationsSettings;
+    delete newPreferences.isUsingDefaultTranslations;
+    return newPreferences;
+  }
+  if (sliceName === SliceName.TAFSIRS) {
+    const newPreferences = {
+      ...currentSliceValue,
+    } as TafsirsSettings;
+    delete newPreferences.isUsingDefaultTafsirs;
     return newPreferences;
   }
   if (sliceName === SliceName.QURAN_READER_STYLES) {

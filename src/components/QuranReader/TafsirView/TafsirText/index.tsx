@@ -2,11 +2,12 @@
 import React from 'react';
 
 import { Action } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './TafsirText.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -15,9 +16,6 @@ import {
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import SliceName from 'src/redux/types/SliceName';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -36,8 +34,8 @@ const FONT_SIZE_CLASS_MAP = {
 };
 
 const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }) => {
-  const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const { onSettingsChange } = usePersistPreferenceGroup();
   const { tafsirFontScale } = quranReaderStyles;
 
   /**
@@ -48,33 +46,27 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
    * @param {number} value
    * @param {Action} action
    */
-  const onSettingsChange = (key: string, value: number, action: Action) => {
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        formatPreferenceGroupValue(SliceName.QURAN_READER_STYLES, quranReaderStyles, key, value),
-        PreferenceGroup.QURAN_READER_STYLES,
-      )
-        .then(() => {
-          dispatch(action);
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(action);
-    }
+  const onTafsirsSettingsChange = (key: string, value: number, action: Action) => {
+    onSettingsChange(
+      key,
+      value,
+      action,
+      quranReaderStyles,
+      SliceName.QURAN_READER_STYLES,
+      PreferenceGroup.QURAN_READER_STYLES,
+    );
   };
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = tafsirFontScale - 1;
     logValueChange('tafsir_font_scale', tafsirFontScale, newValue);
-    onSettingsChange('tafsirFontScale', newValue, decreaseTafsirFontScale());
+    onTafsirsSettingsChange('tafsirFontScale', newValue, decreaseTafsirFontScale());
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = tafsirFontScale + 1;
     logValueChange('tafsir_font_scale', tafsirFontScale, newValue);
-    onSettingsChange('tafsirFontScale', newValue, increaseTafsirFontScale());
+    onTafsirsSettingsChange('tafsirFontScale', newValue, increaseTafsirFontScale());
   };
   return (
     <>

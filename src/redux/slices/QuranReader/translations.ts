@@ -55,6 +55,7 @@ export const translationsSlice = createSlice({
 
 export const { setSelectedTranslations } = translationsSlice.actions;
 
+export const selectTranslations = (state: RootState) => state.translations;
 export const selectSelectedTranslations = (state: RootState) =>
   state.translations.selectedTranslations;
 export const selectIsUsingDefaultTranslations = (state: RootState) =>

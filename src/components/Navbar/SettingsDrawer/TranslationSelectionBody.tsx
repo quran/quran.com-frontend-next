@@ -5,7 +5,7 @@ import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
 
@@ -14,14 +14,13 @@ import styles from './SearchSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
-  selectSelectedTranslations,
+  selectTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
+import SliceName from 'src/redux/types/SliceName';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
 import {
   logValueChange,
   logItemSelectionChange,
@@ -35,10 +34,11 @@ import AvailableTranslation from 'types/AvailableTranslation';
 import QueryParam from 'types/QueryParam';
 
 const TranslationSelectionBody = () => {
+  const { onSettingsChange } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const router = useRouter();
-  const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const translationsState = useSelector(selectTranslations);
+  const { selectedTranslations } = translationsState;
   const [searchQuery, setSearchQuery] = useState('');
 
   /**
@@ -48,21 +48,18 @@ const TranslationSelectionBody = () => {
    * @param {number[]} value
    * @param {Action} action
    */
-  const onSettingsChange = useCallback(
+  const onTranslationsSettingsChange = useCallback(
     (value: number[], action: Action) => {
-      if (isLoggedIn()) {
-        addOrUpdateUserPreference({ selectedTranslations: value }, PreferenceGroup.TRANSLATIONS)
-          .then(() => {
-            dispatch(action);
-          })
-          .catch(() => {
-            // TODO: show an error
-          });
-      } else {
-        dispatch(action);
-      }
+      onSettingsChange(
+        'selectedTranslations',
+        value,
+        action,
+        translationsState,
+        SliceName.TRANSLATIONS,
+        PreferenceGroup.TRANSLATIONS,
+      );
     },
-    [dispatch],
+    [onSettingsChange, translationsState],
   );
 
   const onTranslationsChange = useCallback(
@@ -77,7 +74,7 @@ const TranslationSelectionBody = () => {
 
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
-        onSettingsChange(
+        onTranslationsSettingsChange(
           nextTranslations,
           setSelectedTranslations({ translations: nextTranslations, locale: lang }),
         );
@@ -87,7 +84,7 @@ const TranslationSelectionBody = () => {
         }
       };
     },
-    [lang, onSettingsChange, router, selectedTranslations],
+    [lang, onTranslationsSettingsChange, router, selectedTranslations],
   );
 
   const renderTranslationGroup = useCallback(

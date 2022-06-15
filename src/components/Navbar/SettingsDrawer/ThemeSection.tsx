@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import AutoIcon from '../../../../public/icons/auto.svg';
 import MoonIcon from '../../../../public/icons/moon-outline.svg';
@@ -13,12 +13,10 @@ import Section from './Section';
 import styles from './ThemeSection.module.scss';
 
 import Switch, { SwitchSize } from 'src/components/dls/Switch/Switch';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import SliceName from 'src/redux/types/SliceName';
 import ThemeType from 'src/redux/types/ThemeType';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -30,7 +28,7 @@ export const themeIcons = {
 };
 
 const ThemeSection = () => {
-  const dispatch = useDispatch();
+  const { onSettingsChange } = usePersistPreferenceGroup();
   const { t } = useTranslation('common');
   const theme = useSelector(selectTheme, shallowEqual);
   const themes = Object.values(ThemeType).map((themeValue) => ({
@@ -52,20 +50,7 @@ const ThemeSection = () => {
 
   const onThemeSelected = async (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        formatPreferenceGroupValue(SliceName.THEME, {}, 'type', value),
-        PreferenceGroup.THEME,
-      )
-        .then(() => {
-          dispatch({ type: setTheme.type, payload: value });
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch({ type: setTheme.type, payload: value });
-    }
+    onSettingsChange('type', value, setTheme(value), {}, SliceName.THEME, PreferenceGroup.THEME);
   };
 
   return (

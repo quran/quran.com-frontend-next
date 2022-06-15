@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
 
@@ -12,15 +12,13 @@ import styles from './ReciterSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   selectAudioPlayerState,
   setReciterAndPauseAudio,
 } from 'src/redux/slices/AudioPlayer/state';
 import SliceName from 'src/redux/types/SliceName';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -44,7 +42,7 @@ const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SettingsReciter = () => {
   const { lang, t } = useTranslation('common');
-  const dispatch = useDispatch();
+  const { onSettingsChange } = usePersistPreferenceGroup();
   const router = useRouter();
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const { reciter: selectedReciter } = audioPlayerState;
@@ -58,25 +56,14 @@ const SettingsReciter = () => {
     logItemSelectionChange('selected_reciter', reciter.id);
     router.query[QueryParam.Reciter] = String(reciter.id);
     router.push(router, undefined, { shallow: true });
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        formatPreferenceGroupValue(
-          SliceName.AUDIO_PLAYER_STATE,
-          audioPlayerState,
-          'reciter',
-          Number(reciterId),
-        ),
-        PreferenceGroup.AUDIO,
-      )
-        .then(() => {
-          dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
-    }
+    onSettingsChange(
+      'reciter',
+      Number(reciterId),
+      setReciterAndPauseAudio({ reciter, locale: lang }),
+      audioPlayerState,
+      SliceName.AUDIO_PLAYER_STATE,
+      PreferenceGroup.AUDIO,
+    );
   };
 
   return (

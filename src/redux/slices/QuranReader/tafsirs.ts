@@ -40,7 +40,7 @@ export const tafsirsSlice = createSlice({
         return {
           ...state,
           ...remotePreferences,
-          isUsingDefaultTranslations: areArraysEqual(defaultTafsirs, remoteTafsirs),
+          isUsingDefaultTafsirs: areArraysEqual(defaultTafsirs, remoteTafsirs),
         };
       }
       return state;
@@ -50,6 +50,7 @@ export const tafsirsSlice = createSlice({
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
+export const selectTafsirs = (state: RootState) => state.tafsirs;
 export const selectSelectedTafsirs = (state: RootState) => state.tafsirs.selectedTafsirs;
 export const selectIsUsingDefaultTafsirs = (state: RootState) =>
   state.tafsirs.isUsingDefaultTafsirs;

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import CheckIcon from '../../../../public/icons/check.svg';
 import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
@@ -11,15 +11,13 @@ import styles from './SelectReciterMenu.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   selectAudioPlayerState,
   setReciterAndPauseAudio,
 } from 'src/redux/slices/AudioPlayer/state';
 import SliceName from 'src/redux/types/SliceName';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -34,33 +32,21 @@ const SelectReciterMenu = ({ onBack }) => {
     QueryParam.Reciter,
   );
   const audioPlayerState = useSelector(selectAudioPlayerState);
-  const dispatch = useDispatch();
+  const { onSettingsChange } = usePersistPreferenceGroup();
 
   const onReciterSelected = useCallback(
     (reciter: Reciter) => {
-      if (isLoggedIn()) {
-        addOrUpdateUserPreference(
-          formatPreferenceGroupValue(
-            SliceName.AUDIO_PLAYER_STATE,
-            audioPlayerState,
-            'reciter',
-            reciter.id,
-          ),
-          PreferenceGroup.AUDIO,
-        )
-          .then(() => {
-            dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
-            onBack();
-          })
-          .catch(() => {
-            // TODO: show an error
-          });
-      } else {
-        dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
-        onBack();
-      }
+      onSettingsChange(
+        'reciter',
+        reciter.id,
+        setReciterAndPauseAudio({ reciter, locale: lang }),
+        audioPlayerState,
+        SliceName.AUDIO_PLAYER_STATE,
+        PreferenceGroup.AUDIO,
+        onBack,
+      );
     },
-    [audioPlayerState, dispatch, lang, onBack],
+    [audioPlayerState, lang, onBack, onSettingsChange],
   );
 
   const renderReciter = useCallback(

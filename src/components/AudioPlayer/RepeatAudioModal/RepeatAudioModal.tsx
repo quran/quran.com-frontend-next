@@ -15,6 +15,7 @@ import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   exitRepeatMode,
   playFrom,
@@ -23,9 +24,6 @@ import {
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import SliceName from 'src/redux/types/SliceName';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
@@ -57,6 +55,7 @@ const RepeatAudioModal = ({
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chaptersData = useGetChaptersData(lang);
   const { repeatSettings } = audioPlayerState;
+  const { onSettingsChangeWithoutDispatch } = usePersistPreferenceGroup();
   const chapterName = useMemo(() => {
     if (!chaptersData) {
       return null;
@@ -117,25 +116,14 @@ const RepeatAudioModal = ({
 
   const onPlayClick = () => {
     logButtonClick('start_repeat_play');
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        formatPreferenceGroupValue(
-          SliceName.AUDIO_PLAYER_STATE,
-          audioPlayerState,
-          'repeatSettings',
-          verseRepetition,
-        ),
-        PreferenceGroup.AUDIO,
-      )
-        .then(() => {
-          play();
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      play();
-    }
+    onSettingsChangeWithoutDispatch(
+      'repeatSettings',
+      verseRepetition,
+      audioPlayerState,
+      SliceName.AUDIO_PLAYER_STATE,
+      PreferenceGroup.AUDIO,
+      play,
+    );
   };
 
   const onCancelClick = () => {

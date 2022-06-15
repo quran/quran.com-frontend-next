@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
@@ -10,6 +10,7 @@ import styles from './WordByWordSection.module.scss';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
+import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   setShowWordByWordTranslation,
   setShowWordByWordTransliteration,
@@ -17,9 +18,6 @@ import {
   selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import SliceName from 'src/redux/types/SliceName';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import { logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -32,7 +30,7 @@ export const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
 
 const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
+  const { onSettingsChange } = usePersistPreferenceGroup();
 
   const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
   const {
@@ -48,21 +46,19 @@ const WordByWordSection = () => {
    * @param {string | number|boolean} value
    * @param {Action} action
    */
-  const onSettingsChange = (key: string, value: string | number | boolean, action: Action) => {
-    if (isLoggedIn()) {
-      addOrUpdateUserPreference(
-        formatPreferenceGroupValue(SliceName.READING_PREFERENCES, readingPreferences, key, value),
-        PreferenceGroup.READING,
-      )
-        .then(() => {
-          dispatch(action);
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
-      dispatch(action);
-    }
+  const onWordByWordSettingsChange = (
+    key: string,
+    value: string | number | boolean,
+    action: Action,
+  ) => {
+    onSettingsChange(
+      key,
+      value,
+      action,
+      readingPreferences,
+      SliceName.READING_PREFERENCES,
+      PreferenceGroup.READING,
+    );
   };
 
   /**
@@ -72,7 +68,7 @@ const WordByWordSection = () => {
    */
   const onWordByWordLocaleChange = (value: string) => {
     logValueChange('wbw_locale', wordByWordLocale, value);
-    onSettingsChange(
+    onWordByWordSettingsChange(
       'selectedWordByWordLocale',
       value,
       setSelectedWordByWordLocale({ value, locale: lang }),
@@ -81,14 +77,16 @@ const WordByWordSection = () => {
 
   const onShowWordByWordTranslationChange = (checked: boolean) => {
     logValueChange('wbw_translation', !checked, checked);
-    dispatch(setShowWordByWordTranslation(checked));
-    onSettingsChange('showWordByWordTranslation', checked, setShowWordByWordTranslation(checked));
+    onWordByWordSettingsChange(
+      'showWordByWordTranslation',
+      checked,
+      setShowWordByWordTranslation(checked),
+    );
   };
 
   const onShowWordByWordTransliterationChange = (checked: boolean) => {
     logValueChange('wbw_transliteration', !checked, checked);
-    dispatch(setShowWordByWordTransliteration(checked));
-    onSettingsChange(
+    onWordByWordSettingsChange(
       'showWordByWordTransliteration',
       checked,
       setShowWordByWordTransliteration(checked),
