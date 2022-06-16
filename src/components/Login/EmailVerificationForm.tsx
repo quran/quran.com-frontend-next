@@ -9,8 +9,8 @@ import FormBuilder from '../FormBuilder/FormBuilder';
 import styles from './CompleteSignupForm.module.scss';
 import ResendEmailSection from './ResendEmailSection';
 
-import { completeSignup, postRequest } from 'src/utils/auth/api';
-import { makeUserProfileUrl, makeVerificationCodeUrl } from 'src/utils/auth/apiPaths';
+import { completeSignup, requestVerificationCode } from 'src/utils/auth/api';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import ErrorMessageId from 'types/ErrorMessageId';
 import { RuleType } from 'types/FieldRule';
 import FormField, { FormFieldType } from 'types/FormField';
@@ -18,23 +18,34 @@ import FormField, { FormFieldType } from 'types/FormField';
 type EmailVerificationFormProps = {
   emailFormField: FormField;
 };
+type EmailFormData = {
+  email: string;
+};
+
+type VerificationCodeFormData = {
+  code: string;
+};
+
+const verificationCodeFormField = {
+  field: 'code',
+  type: FormFieldType.Number,
+  rules: [{ type: RuleType.Required, value: true, errorId: ErrorMessageId.RequiredField }],
+};
+
 const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { mutate } = useSWRConfig();
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState<string>();
   const { t } = useTranslation('common');
-  const requestVerificationCode = async (emailToVerify) => {
-    return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
-  };
   const [forceRerenderKey, setForceRerenderKey] = useState(0);
 
-  const onEmailSubmitted = (data) => {
+  const onEmailSubmitted = (data: EmailFormData) => {
     requestVerificationCode(data.email);
     setIsSubmitted(true);
     setEmail(data.email);
   };
 
-  const onVerificationCodeSubmitted = (data) => {
+  const onVerificationCodeSubmitted = (data: VerificationCodeFormData) => {
     return completeSignup({ email, verificationCode: data.code.toString() })
       .then(() => {
         // mutate the cache version of users/profile
@@ -67,17 +78,9 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
             />
           </p>
           <FormBuilder
-            formFields={[
-              {
-                field: 'code',
-                type: FormFieldType.Text,
-                rules: [
-                  { type: RuleType.Required, value: true, errorId: ErrorMessageId.RequiredField },
-                ],
-              },
-            ]}
+            formFields={[verificationCodeFormField]}
             onSubmit={onVerificationCodeSubmitted}
-            actionText="Verify Code"
+            actionText={t('common:email-verification.verify-code')}
           />
 
           <ResendEmailSection

@@ -100,7 +100,8 @@
         "check-spam": "Didn't receive the verification email? Check your spam inbox",
         "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
         "resend-email": "Resend email",
-        "email-verification": "Email verification"
+        "email-verification": "Email verification",
+        "verify-code": "Verify Code"
     },
     "feedback": "Feedback",
     "fonts": {

@@ -34,23 +34,24 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
 
   return (
     <form className={styles.container} onSubmit={handleSubmit(internalOnSubmit)}>
-      {formFields?.map((requiredField) => {
+      {formFields?.map((formField) => {
         return (
           <Controller
-            key={requiredField.field}
+            key={formField.field}
             control={control}
-            rules={buildReactHookFormRules(requiredField, t)}
-            name={requiredField.field}
+            rules={buildReactHookFormRules(formField, t)}
+            name={formField.field}
             render={({ field, fieldState: { error } }) => (
               <div className={styles.inputContainer}>
                 <Input
-                  key={requiredField.field}
+                  htmlType={formField.type}
+                  key={formField.field}
                   onChange={(val) => field.onChange(val)}
-                  id={requiredField.field}
-                  name={requiredField.field}
+                  id={formField.field}
+                  name={formField.field}
                   containerClassName={styles.input}
                   fixedWidth={false}
-                  placeholder={t(capitalize(requiredField.field))}
+                  placeholder={t(capitalize(formField.field))}
                 />
                 {error && <span className={styles.errorText}>{error.message}</span>}
               </div>

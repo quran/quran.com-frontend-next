@@ -8,6 +8,7 @@ import {
   makeIsResourceBookmarkedUrl,
   makeReadingSessionsUrl,
   makeUserPreferencesUrl,
+  makeVerificationCodeUrl,
 } from 'src/utils/auth/apiPaths';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
@@ -120,3 +121,7 @@ export const addOrUpdateUserPreference = async (value: any, group: PreferenceGro
     value,
     group,
   });
+
+export const requestVerificationCode = async (emailToVerify) => {
+  return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
+};
