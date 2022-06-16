@@ -1,11 +1,11 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
@@ -24,10 +24,11 @@ import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
+import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import { addOrRemoveBookmark, getIsResourceBookmarked } from 'src/utils/auth/api';
-import { makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
+import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getVerseUrl } from 'src/utils/verse';
@@ -52,7 +53,9 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   onActionTriggered,
   bookmarksRangeUrl,
 }) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation('common');
+  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
@@ -62,8 +65,9 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+
   const {
-    data: isVerseBookmarked,
+    data: isVerseBookmarkedData,
     isValidating: isVerseBookmarkedLoading,
     mutate,
   } = useSWRImmutable(
@@ -85,6 +89,17 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       return response;
     },
   );
+
+  const isVerseBookmarked = useMemo(() => {
+    const isUserLoggedIn = isLoggedIn();
+    if (isUserLoggedIn && isVerseBookmarkedData) {
+      return isVerseBookmarkedData;
+    }
+    if (!isUserLoggedIn) {
+      return !!bookmarkedVerses[verse.verseKey];
+    }
+    return false;
+  }, [bookmarkedVerses, isVerseBookmarkedData, verse.verseKey]);
 
   /**
    * A hook that will run once to check if the body is portalled or not and if it is,
@@ -153,34 +168,45 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       }`,
     );
 
-    addOrRemoveBookmark(
-      verse.chapterId as number,
-      getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-      BookmarkType.Ayah,
-      !isVerseBookmarked,
-      verse.verseNumber,
-    )
-      .then(() => {
-        mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked);
-        // when it's translation view, we need to invalidate the cached bookmarks range
-        if (bookmarksRangeUrl) {
-          swrConfigMutate(bookmarksRangeUrl);
-        }
-        toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
-          status: ToastStatus.Success,
-        });
-      })
-      .catch((err) => {
-        if (err.status === 400) {
-          toast(t('common:error.bookmark-sync'), {
+    if (isLoggedIn()) {
+      addOrRemoveBookmark(
+        verse.chapterId as number,
+        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+        BookmarkType.Ayah,
+        !isVerseBookmarked,
+        verse.verseNumber,
+      )
+        .then(() => {
+          mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked);
+          // when it's translation view, we need to invalidate the cached bookmarks range
+          if (bookmarksRangeUrl) {
+            swrConfigMutate(bookmarksRangeUrl);
+          }
+
+          swrConfigMutate(
+            makeBookmarksUrl(
+              getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+            ),
+          );
+
+          toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
+            status: ToastStatus.Success,
+          });
+        })
+        .catch((err) => {
+          if (err.status === 400) {
+            toast(t('common:error.bookmark-sync'), {
+              status: ToastStatus.Error,
+            });
+            return;
+          }
+          toast(t('error.general'), {
             status: ToastStatus.Error,
           });
-          return;
-        }
-        toast(t('error.general'), {
-          status: ToastStatus.Error,
         });
-      });
+    } else {
+      dispatch(toggleVerseBookmark(verse.verseKey));
+    }
 
     if (onActionTriggered) {
       onActionTriggered();
