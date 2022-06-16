@@ -1,4 +1,3 @@
-import capitalize from 'lodash/capitalize';
 import useTranslation from 'next-translate/useTranslation';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -51,7 +50,7 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
                   name={formField.field}
                   containerClassName={styles.input}
                   fixedWidth={false}
-                  placeholder={t(capitalize(formField.field))}
+                  placeholder={t(`form.${formField.field}`)}
                 />
                 {error && <span className={styles.errorText}>{error.message}</span>}
               </div>
