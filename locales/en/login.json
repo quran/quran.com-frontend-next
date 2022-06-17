@@ -8,10 +8,6 @@
     "continue-facebook": "Continue with Facebook",
     "continue-apple": "Continue with Apple",
     "other-options": "Other Login Options",
-    "email-sent": "We just sent an email to <strong>{{email}}</strong>",
-    "check-spam": "Didn't receive the verification email? Check your spam inbox",
-    "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
-    "resend-email": "Resend email",
     "login-error": {
         "AuthenticationError": "Authentication failed. Please try again later"
     }

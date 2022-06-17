@@ -16,6 +16,8 @@ export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup
 
 export const makeDeleteAccountUrl = (): string => makeUrl('users/deleteAccount');
 
+export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
+
 export const makeSendMagicLinkUrl = (): string => makeUrl('auth/magiclogin');
 
 export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');

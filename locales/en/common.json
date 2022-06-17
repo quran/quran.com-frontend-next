@@ -95,6 +95,14 @@
         "invalid-email": "{{field}} must be a valid email address",
         "invalid-field": "Please input a valid {{field}} value"
     },
+    "email-verification": {
+        "email-sent": "We just sent an email to <strong>{{email}}</strong>",
+        "check-spam": "Didn't receive the verification email? Check your spam inbox",
+        "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
+        "resend-email": "Resend email",
+        "email-verification": "Email verification",
+        "verify-code": "Verify Code"
+    },
     "feedback": "Feedback",
     "fonts": {
         "15_lines": "15 Lines",
@@ -285,8 +293,10 @@
     "word-tooltip": "Word Tooltip",
     "yes": "Yes",
     "complete-sign-up": "Complete your registration",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "email": "Email",
+    "form": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email"
+    },
     "submit": "Submit"
 }

@@ -8,6 +8,7 @@ import {
   makeIsResourceBookmarkedUrl,
   makeReadingSessionsUrl,
   makeUserPreferencesUrl,
+  makeVerificationCodeUrl,
   makeUserBulkPreferencesUrl,
 } from 'src/utils/auth/apiPaths';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -30,7 +31,7 @@ export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit):
  * @param {RequestData} requestData
  * @returns {Promise<T>}
  */
-const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
+export const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -122,5 +123,8 @@ export const addOrUpdateUserPreference = async (value: any, group: PreferenceGro
     group,
   });
 
+export const requestVerificationCode = async (emailToVerify) => {
+  return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
+};
 export const addOrUpdateBulkUserPreferences = async (preferences: Record<PreferenceGroup, any>) =>
   postRequest(makeUserBulkPreferencesUrl(), preferences);

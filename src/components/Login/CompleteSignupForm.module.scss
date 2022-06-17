@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding-inline: var(--spacing-medium);
-  padding-block: var(--spacing-large);
+  padding-inline: var(--spacing-mega);
+  padding-block: var(--spacing-mega);
 }
 
 .title {
@@ -12,14 +12,11 @@
   margin-block-end: var(--spacing-xsmall);
 }
 
-.inputContainer {
-  margin-block: var(--spacing-xxsmall);
+.strong {
+  font-weight: var(--font-weight-bold);
 }
 
-.errorText {
-  color: var(--color-error-deep);
-}
-
-.submitButton {
-  margin-block-start: var(--spacing-small);
+.emailSent {
+  text-align: center;
+  padding-block-end: var(--spacing-small);
 }

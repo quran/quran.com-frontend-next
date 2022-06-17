@@ -9,21 +9,21 @@ type EmailSentProps = {
 };
 
 const EmailSent = ({ verificationCode, email }: EmailSentProps) => {
-  const { t } = useTranslation('login');
+  const { t } = useTranslation();
   return (
     <div className={styles.emailSentContainer}>
-      <div className={styles.title}>{t('awaiting-confirmation')}</div>
+      <div className={styles.title}>{t('login:awaiting-confirmation')}</div>
       <div className={styles.paragraphContainer}>
         <p>
           <Trans
-            i18nKey="login:email-sent"
-            values={{ email, verificationCode }}
+            i18nKey="common:email-verification.email-sent"
+            values={{ email }}
             components={{
               strong: <strong className={styles.emailContainer} />,
             }}
           />
         </p>
-        <p>{t('verify-code')}</p>
+        <p>{t('login:verify-code')}</p>
       </div>
       <p className={styles.verificationCode}>{verificationCode}</p>
     </div>
