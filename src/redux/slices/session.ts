@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
+import SliceName from 'src/redux/types/SliceName';
+
 export type SessionState = {
   count: number;
 };
@@ -11,7 +13,7 @@ const initialState: SessionState = {
 };
 
 export const sessionSlice = createSlice({
-  name: 'session',
+  name: SliceName.SESSION,
   initialState,
   reducers: {
     incrementSessionCount: (state: SessionState) => ({

@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
+import SliceName from 'src/redux/types/SliceName';
+
 export const initialState = {
   isVisible: true,
 };
 
 export const welcomeMessageSlice = createSlice({
-  name: 'welcomeMessage',
+  name: SliceName.WELCOME_MESSAGE,
   initialState,
   reducers: {
     setIsVisible: (state, action: PayloadAction<boolean>) => ({

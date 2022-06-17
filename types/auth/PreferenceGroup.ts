@@ -1,5 +1,5 @@
 enum PreferenceGroup {
-  TAFSIR = 'tafsir',
+  TAFSIRS = 'tafsirs',
   TRANSLATIONS = 'translations',
   AUDIO = 'audio',
   THEME = 'theme',

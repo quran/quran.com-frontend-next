@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 export enum SettingsView {
   Body = 'body',
@@ -27,7 +28,7 @@ const initialState: Navbar = {
 };
 
 export const navbarSlice = createSlice({
-  name: 'navbar',
+  name: SliceName.NAVBAR,
   initialState,
   reducers: {
     setIsVisible: (state: Navbar, action: PayloadAction<boolean>) => ({

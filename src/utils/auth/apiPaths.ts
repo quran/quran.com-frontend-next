@@ -46,3 +46,5 @@ export const makeIsResourceBookmarkedUrl = (
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 
 export const makeUserPreferencesUrl = () => makeUrl('preferences');
+
+export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');

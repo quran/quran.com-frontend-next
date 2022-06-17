@@ -1,10 +1,10 @@
-import AudioDataStatus from '../types/AudioDataStatus';
-import RepeatProgress from '../types/RepeatProgress';
-import RepeatSettings from '../types/RepeatSettings';
-
+import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
+import RepeatProgress from 'src/redux/types/RepeatProgress';
+import RepeatSettings from 'src/redux/types/RepeatSettings';
+import SliceName from 'src/redux/types/SliceName';
 import TafsirsSettings from 'src/redux/types/TafsirsSettings';
 import Theme from 'src/redux/types/Theme';
 import ThemeType from 'src/redux/types/ThemeType';
@@ -19,13 +19,13 @@ import {
 import Reciter from 'types/Reciter';
 
 export interface DefaultSettings {
-  theme: Theme;
-  readingPreferences: ReadingPreferences;
-  quranReaderStyles: QuranReaderStyles;
-  translations: TranslationsSettings;
-  tafsirs: TafsirsSettings;
-  audioPlayerState: AudioState;
-  defaultSettings: { isUsingDefaultSettings: boolean };
+  [SliceName.THEME]: Theme;
+  [SliceName.READING_PREFERENCES]: ReadingPreferences;
+  [SliceName.QURAN_READER_STYLES]: QuranReaderStyles;
+  [SliceName.TRANSLATIONS]: TranslationsSettings;
+  [SliceName.TAFSIRS]: TafsirsSettings;
+  [SliceName.AUDIO_PLAYER_STATE]: AudioState;
+  [SliceName.DEFAULT_SETTINGS]: { isUsingDefaultSettings: boolean };
 }
 
 // Tafsir Ibn Kathir in English
@@ -111,10 +111,10 @@ const AUDIO_INITIAL_STATE: AudioState = {
 };
 
 export default {
-  theme: THEME_INITIAL_STATE,
-  readingPreferences: READING_PREFERENCES_INITIAL_STATE,
-  quranReaderStyles: QURAN_READER_STYLES_INITIAL_STATE,
-  translations: TRANSLATIONS_INITIAL_STATE,
-  tafsirs: TAFSIRS_INITIAL_STATE,
-  audioPlayerState: AUDIO_INITIAL_STATE,
+  [SliceName.THEME]: THEME_INITIAL_STATE,
+  [SliceName.READING_PREFERENCES]: READING_PREFERENCES_INITIAL_STATE,
+  [SliceName.QURAN_READER_STYLES]: QURAN_READER_STYLES_INITIAL_STATE,
+  [SliceName.TRANSLATIONS]: TRANSLATIONS_INITIAL_STATE,
+  [SliceName.TAFSIRS]: TAFSIRS_INITIAL_STATE,
+  [SliceName.AUDIO_PLAYER_STATE]: AUDIO_INITIAL_STATE,
 } as DefaultSettings;

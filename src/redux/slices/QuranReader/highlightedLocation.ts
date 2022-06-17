@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
 import { selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
+import SliceName from 'src/redux/types/SliceName';
 import { makeVerseKey } from 'src/utils/verse';
 
 export type HighlightedLocationState = {
@@ -22,7 +23,7 @@ export const initialState: HighlightedLocationState = {
  * and update the chapter, verse, and word in this slice
  */
 const highlightedLocation = createSlice({
-  name: 'highlightedLocation',
+  name: SliceName.HIGHLIGHTED_LOCATIONS,
   initialState,
   reducers: {
     setHighlightedLocation: (state, { payload }: PayloadAction<HighlightedLocationState>) => {
