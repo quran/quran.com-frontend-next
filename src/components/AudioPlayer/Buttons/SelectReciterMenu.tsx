@@ -41,6 +41,7 @@ const SelectReciterMenu = ({ onBack }) => {
         reciter.id,
         setReciterAndPauseAudio({ reciter, locale: lang }),
         audioPlayerState,
+        setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
         SliceName.AUDIO_PLAYER_STATE,
         PreferenceGroup.AUDIO,
         onBack,

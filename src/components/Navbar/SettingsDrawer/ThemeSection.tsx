@@ -50,7 +50,15 @@ const ThemeSection = () => {
 
   const onThemeSelected = async (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
-    onSettingsChange('type', value, setTheme(value), {}, SliceName.THEME, PreferenceGroup.THEME);
+    onSettingsChange(
+      'type',
+      value,
+      setTheme(value),
+      {},
+      setTheme(theme.type),
+      SliceName.THEME,
+      PreferenceGroup.THEME,
+    );
   };
 
   return (

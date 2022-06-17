@@ -36,6 +36,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
       playbackRate,
       setPlaybackRate(playbackRate),
       audioPlayerState,
+      setPlaybackRate(audioPlayerState.playbackRate),
       SliceName.AUDIO_PLAYER_STATE,
       PreferenceGroup.AUDIO,
       onBack,

@@ -98,12 +98,18 @@ const TranslationSection = () => {
    * @param {number} value
    * @param {Action} action
    */
-  const onTranslationSettingsChange = (key: string, value: number, action: Action) => {
+  const onTranslationSettingsChange = (
+    key: string,
+    value: number,
+    action: Action,
+    undoAction: Action,
+  ) => {
     onSettingsChange(
       key,
       value,
       action,
       quranReaderStyles,
+      undoAction,
       SliceName.QURAN_READER_STYLES,
       PreferenceGroup.QURAN_READER_STYLES,
     );
@@ -112,13 +118,23 @@ const TranslationSection = () => {
   const onFontScaleDecreaseClicked = () => {
     const newValue = translationFontScale - 1;
     logValueChange('translation_font_scale', translationFontScale, newValue);
-    onTranslationSettingsChange('translationFontScale', newValue, decreaseTranslationFontScale());
+    onTranslationSettingsChange(
+      'translationFontScale',
+      newValue,
+      decreaseTranslationFontScale(),
+      increaseTranslationFontScale(),
+    );
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = translationFontScale + 1;
     logValueChange('translation_font_scale', translationFontScale, newValue);
-    onTranslationSettingsChange('translationFontScale', newValue, increaseTranslationFontScale());
+    onTranslationSettingsChange(
+      'translationFontScale',
+      newValue,
+      increaseTranslationFontScale(),
+      decreaseTranslationFontScale(),
+    );
   };
 
   return (

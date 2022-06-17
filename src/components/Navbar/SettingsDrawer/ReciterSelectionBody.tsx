@@ -61,6 +61,7 @@ const SettingsReciter = () => {
       Number(reciterId),
       setReciterAndPauseAudio({ reciter, locale: lang }),
       audioPlayerState,
+      setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
       SliceName.AUDIO_PLAYER_STATE,
       PreferenceGroup.AUDIO,
     );

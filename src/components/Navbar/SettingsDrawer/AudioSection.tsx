@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
+import { ActionCreatorWithOptionalPayload } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -46,16 +47,25 @@ const AudioSection = () => {
   } = audioPlayerState;
   const { onSettingsChange } = usePersistPreferenceGroup();
 
-  const onPlaybackRateChanged = (value) => {
-    logValueChange('audio_playback_rate', playbackRate, value);
+  const onAudioSettingsChange = (
+    key: string,
+    value: number | boolean,
+    actionCreator: ActionCreatorWithOptionalPayload<number | boolean>,
+  ) => {
     onSettingsChange(
-      'playbackRate',
-      Number(value),
-      dispatch(setPlaybackRate(Number(value))),
+      key,
+      value,
+      actionCreator(value),
       audioPlayerState,
+      actionCreator(audioPlayerState[key]),
       SliceName.AUDIO_PLAYER_STATE,
       PreferenceGroup.AUDIO,
     );
+  };
+
+  const onPlaybackRateChanged = (value) => {
+    logValueChange('audio_playback_rate', playbackRate, value);
+    onAudioSettingsChange('playbackRate', Number(value), setPlaybackRate);
   };
 
   const playbackRatesOptions = useMemo(
@@ -78,14 +88,7 @@ const AudioSection = () => {
   const onEnableAutoScrollingChange = () => {
     const newValue = !enableAutoScrolling;
     logValueChange('audio_settings_auto_scrolling_enabled', enableAutoScrolling, newValue);
-    onSettingsChange(
-      'enableAutoScrolling',
-      newValue,
-      dispatch(setEnableAutoScrolling(newValue)),
-      audioPlayerState,
-      SliceName.AUDIO_PLAYER_STATE,
-      PreferenceGroup.AUDIO,
-    );
+    onAudioSettingsChange('enableAutoScrolling', newValue, setEnableAutoScrolling);
   };
 
   const onWordClickChange = () => {
@@ -112,14 +115,7 @@ const AudioSection = () => {
       showTooltipWhenPlayingAudio,
       newValue,
     );
-    onSettingsChange(
-      'showTooltipWhenPlayingAudio',
-      newValue,
-      dispatch(setShowTooltipWhenPlayingAudio(newValue)),
-      audioPlayerState,
-      SliceName.AUDIO_PLAYER_STATE,
-      PreferenceGroup.AUDIO,
-    );
+    onAudioSettingsChange('showTooltipWhenPlayingAudio', newValue, setShowTooltipWhenPlayingAudio);
   };
 
   return (

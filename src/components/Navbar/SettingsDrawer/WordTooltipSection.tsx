@@ -40,12 +40,18 @@ const WordTooltipSection = () => {
    * @param {string | string[]} value
    * @param {Action} action
    */
-  const onWordTooltipSettingsChange = (key: string, value: string | string[], action: Action) => {
+  const onWordTooltipSettingsChange = (
+    key: string,
+    value: string | string[],
+    action: Action,
+    undoAction: Action,
+  ) => {
     onSettingsChange(
       key,
       value,
       action,
       readingPreferences,
+      undoAction,
       SliceName.READING_PREFERENCES,
       PreferenceGroup.READING,
     );
@@ -59,6 +65,7 @@ const WordTooltipSection = () => {
       'selectedWordByWordLocale',
       value,
       setSelectedWordByWordLocale({ value, locale: lang }),
+      setSelectedWordByWordLocale({ value: wordByWordLocale, locale: lang }),
     );
   };
 
@@ -71,6 +78,7 @@ const WordTooltipSection = () => {
       'showTooltipFor',
       nextShowTooltipFor,
       setShowTooltipFor(nextShowTooltipFor),
+      setShowTooltipFor(showTooltipFor),
     );
   };
 

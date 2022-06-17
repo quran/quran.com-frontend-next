@@ -50,12 +50,14 @@ const WordByWordSection = () => {
     key: string,
     value: string | number | boolean,
     action: Action,
+    undoAction: Action,
   ) => {
     onSettingsChange(
       key,
       value,
       action,
       readingPreferences,
+      undoAction,
       SliceName.READING_PREFERENCES,
       PreferenceGroup.READING,
     );
@@ -72,6 +74,7 @@ const WordByWordSection = () => {
       'selectedWordByWordLocale',
       value,
       setSelectedWordByWordLocale({ value, locale: lang }),
+      setSelectedWordByWordLocale({ value: wordByWordLocale, locale: lang }),
     );
   };
 
@@ -81,6 +84,7 @@ const WordByWordSection = () => {
       'showWordByWordTranslation',
       checked,
       setShowWordByWordTranslation(checked),
+      setShowWordByWordTranslation(!checked),
     );
   };
 
@@ -90,6 +94,7 @@ const WordByWordSection = () => {
       'showWordByWordTransliteration',
       checked,
       setShowWordByWordTransliteration(checked),
+      setShowWordByWordTransliteration(!checked),
     );
   };
 
