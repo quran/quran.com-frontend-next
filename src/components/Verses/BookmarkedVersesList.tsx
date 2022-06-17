@@ -38,11 +38,12 @@ const BookmarkedVersesList: React.FC = () => {
   );
 
   const bookmarkedVersesKeys = useMemo(() => {
-    if (isLoggedIn() && data) {
+    const isUserLoggedIn = isLoggedIn();
+    if (isUserLoggedIn && data) {
       return data.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber));
     }
 
-    if (bookmarkedVerses) {
+    if (!isUserLoggedIn) {
       return Object.keys(bookmarkedVerses);
     }
 
