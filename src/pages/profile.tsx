@@ -1,11 +1,8 @@
-/* eslint-disable react-func/max-lines-per-function */
-import { useEffect, useState } from 'react';
-
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useSWRConfig } from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
@@ -21,7 +18,6 @@ import { getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
 import { getAllChaptersData } from 'src/utils/chapter';
-import UserProfile from 'types/auth/UserProfile';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
@@ -35,26 +31,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const router = useRouter();
   const { mutate } = useSWRConfig();
 
-  const [isValidating, setIsValidating] = useState(true);
-  const [userData, setUserData] = useState<UserProfile>({} as UserProfile);
-  const [hasError, setHasError] = useState(false);
-
-  useEffect(() => {
-    const getProfile = async () => {
-      const response = await getUserProfile();
-      return response;
-    };
-    setIsValidating(true);
-    getProfile()
-      .then(async (response) => {
-        setUserData(response as UserProfile);
-        setIsValidating(false);
-      })
-      .catch(() => {
-        setIsValidating(false);
-        setHasError(true);
-      });
-  }, []);
+  const { data: userData, isValidating, error } = useSWR(makeUserProfileUrl(), getUserProfile);
 
   const onLogoutClicked = () => {
     fetch('/api/auth/logout').then(() => {
@@ -63,10 +40,11 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     });
   };
 
-  if (hasError) {
+  if (error) {
     return <Error statusCode={500} />;
   }
-  const { email, firstName, lastName, photoUrl } = userData;
+
+  const { email, firstName, lastName, photoUrl } = userData || {};
 
   const profileSkeletonInfoSkeleton = (
     <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
