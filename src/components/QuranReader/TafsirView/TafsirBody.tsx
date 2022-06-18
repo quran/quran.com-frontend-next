@@ -112,6 +112,10 @@ const TafsirBody = ({
           locale: lang,
         }),
         tafsirsState,
+        setSelectedTafsirs({
+          tafsirs: tafsirsState.selectedTafsirs,
+          locale: lang,
+        }),
         SliceName.TAFSIRS,
         PreferenceGroup.TAFSIRS,
       );

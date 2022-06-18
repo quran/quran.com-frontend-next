@@ -88,7 +88,8 @@
     "error": {
         "general": "Something went wrong. Please try again.",
         "offline": "Looks like you lost your connection. Please check it and try again.",
-        "bookmark-sync": "Bookmark is out of sync."
+        "bookmark-sync": "Bookmark is out of sync.",
+        "pref-persist-fail": "Something went wrong while syncing."
     },
     "validation": {
         "required-field": "{{field}} is required",
@@ -298,5 +299,6 @@
         "lastName": "Last Name",
         "email": "Email"
     },
-    "submit": "Submit"
+    "submit": "Submit",
+    "undo": "Undo"
 }

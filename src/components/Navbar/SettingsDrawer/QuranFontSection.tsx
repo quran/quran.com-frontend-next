@@ -116,12 +116,18 @@ const QuranFontSection = () => {
    * @param {string | number} value
    * @param {Action} action
    */
-  const onFontSettingsChange = (key: string, value: string | number, action: Action) => {
+  const onFontSettingsChange = (
+    key: string,
+    value: string | number,
+    action: Action,
+    undoAction: Action,
+  ) => {
     onSettingsChange(
       key,
       value,
       action,
       quranReaderStyles,
+      undoAction,
       SliceName.QURAN_READER_STYLES,
       PreferenceGroup.QURAN_READER_STYLES,
     );
@@ -134,12 +140,18 @@ const QuranFontSection = () => {
       'quranFont',
       fontValue,
       setQuranFont({ quranFont: fontValue, locale: lang }),
+      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale: lang }),
     );
   };
 
   const onFontStyleChange = (value: QuranFont) => {
     logValueChange('font_style', quranFont, value);
-    onFontSettingsChange('quranFont', value, setQuranFont({ quranFont: value, locale: lang }));
+    onFontSettingsChange(
+      'quranFont',
+      value,
+      setQuranFont({ quranFont: value, locale: lang }),
+      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale: lang }),
+    );
   };
 
   const onMushafLinesChange = (value: MushafLines) => {
@@ -148,19 +160,30 @@ const QuranFontSection = () => {
       'mushafLines',
       value,
       setMushafLines({ mushafLines: value, locale: lang }),
+      setMushafLines({ mushafLines: quranReaderStyles.mushafLines, locale: lang }),
     );
   };
 
   const onFontScaleDecreaseClicked = () => {
     const value = quranTextFontScale - 1;
     logValueChange('font_scale', quranTextFontScale, value);
-    onFontSettingsChange('quranTextFontScale', value, decreaseQuranTextFontScale());
+    onFontSettingsChange(
+      'quranTextFontScale',
+      value,
+      decreaseQuranTextFontScale(),
+      increaseQuranTextFontScale(),
+    );
   };
 
   const onFontScaleIncreaseClicked = () => {
     const value = quranTextFontScale + 1;
     logValueChange('font_scale', quranTextFontScale, value);
-    onFontSettingsChange('quranTextFontScale', value, increaseQuranTextFontScale());
+    onFontSettingsChange(
+      'quranTextFontScale',
+      value,
+      increaseQuranTextFontScale(),
+      decreaseQuranTextFontScale(),
+    );
   };
 
   return (

@@ -1,9 +1,11 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useMemo } from 'react';
 
-import { Action, AsyncThunkAction } from '@reduxjs/toolkit';
+import { Action } from '@reduxjs/toolkit';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
@@ -22,6 +24,8 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
  */
 const usePersistPreferenceGroup = (): Record<string, any> => {
   const dispatch = useDispatch();
+  const toast = useToast();
+  const { t } = useTranslation('common');
 
   const actions = useMemo(
     () => ({
@@ -37,13 +41,9 @@ const usePersistPreferenceGroup = (): Record<string, any> => {
           addOrUpdateUserPreference(
             formatPreferenceGroupValue(sliceName, currentSliceValue, key, value),
             preferenceGroup,
-          )
-            .then(() => {
-              callback();
-            })
-            .catch(() => {
-              // TODO: show an error
-            });
+          ).then(() => {
+            callback();
+          });
         } else {
           callback();
         }
@@ -51,32 +51,54 @@ const usePersistPreferenceGroup = (): Record<string, any> => {
       onSettingsChange: (
         key: string,
         value: string | number | boolean | Record<string, any>,
-        action: Action | AsyncThunkAction<any, any, any>,
+        action: Action,
         currentSliceValue: any,
+        undoAction: Action,
         sliceName: SliceName,
         preferenceGroup: PreferenceGroup,
         successCallback?: () => void,
       ) => {
         if (isLoggedIn()) {
+          // 1. dispatch the action first
+          dispatch(action);
           addOrUpdateUserPreference(
             formatPreferenceGroupValue(sliceName, currentSliceValue, key, value),
             preferenceGroup,
           )
             .then(() => {
-              dispatch(action);
               if (successCallback) {
                 successCallback();
               }
             })
             .catch(() => {
-              // TODO: show an error
+              toast(t('error.pref-persist-fail'), {
+                status: ToastStatus.Warning,
+                actions: [
+                  {
+                    text: t('undo'),
+                    primary: true,
+                    onClick: () => {
+                      dispatch(undoAction);
+                    },
+                  },
+                  {
+                    text: t('continue'),
+                    primary: false,
+                    onClick: () => {
+                      if (successCallback) {
+                        successCallback();
+                      }
+                    },
+                  },
+                ],
+              });
             });
         } else {
           dispatch(action);
         }
       },
     }),
-    [dispatch],
+    [dispatch, t, toast],
   );
 
   return actions;

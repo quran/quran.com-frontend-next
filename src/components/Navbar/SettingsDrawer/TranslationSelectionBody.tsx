@@ -49,12 +49,13 @@ const TranslationSelectionBody = () => {
    * @param {Action} action
    */
   const onTranslationsSettingsChange = useCallback(
-    (value: number[], action: Action) => {
+    (value: number[], action: Action, undoAction: Action) => {
       onSettingsChange(
         'selectedTranslations',
         value,
         action,
         translationsState,
+        undoAction,
         SliceName.TRANSLATIONS,
         PreferenceGroup.TRANSLATIONS,
       );
@@ -77,6 +78,7 @@ const TranslationSelectionBody = () => {
         onTranslationsSettingsChange(
           nextTranslations,
           setSelectedTranslations({ translations: nextTranslations, locale: lang }),
+          setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
         );
         if (nextTranslations.length) {
           router.query[QueryParam.Translations] = nextTranslations.join(',');

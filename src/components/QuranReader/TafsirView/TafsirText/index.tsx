@@ -46,12 +46,18 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
    * @param {number} value
    * @param {Action} action
    */
-  const onTafsirsSettingsChange = (key: string, value: number, action: Action) => {
+  const onTafsirsSettingsChange = (
+    key: string,
+    value: number,
+    action: Action,
+    undoAction: Action,
+  ) => {
     onSettingsChange(
       key,
       value,
       action,
       quranReaderStyles,
+      undoAction,
       SliceName.QURAN_READER_STYLES,
       PreferenceGroup.QURAN_READER_STYLES,
     );
@@ -60,13 +66,23 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
   const onFontScaleDecreaseClicked = () => {
     const newValue = tafsirFontScale - 1;
     logValueChange('tafsir_font_scale', tafsirFontScale, newValue);
-    onTafsirsSettingsChange('tafsirFontScale', newValue, decreaseTafsirFontScale());
+    onTafsirsSettingsChange(
+      'tafsirFontScale',
+      newValue,
+      decreaseTafsirFontScale(),
+      increaseTafsirFontScale(),
+    );
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = tafsirFontScale + 1;
     logValueChange('tafsir_font_scale', tafsirFontScale, newValue);
-    onTafsirsSettingsChange('tafsirFontScale', newValue, increaseTafsirFontScale());
+    onTafsirsSettingsChange(
+      'tafsirFontScale',
+      newValue,
+      increaseTafsirFontScale(),
+      decreaseTafsirFontScale(),
+    );
   };
   return (
     <>

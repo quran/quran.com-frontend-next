@@ -54,6 +54,7 @@ const ReadingPreferenceSwitcher = () => {
         view,
         setReadingPreference(view),
         readingPreferences,
+        setReadingPreference(readingPreference),
         SliceName.READING_PREFERENCES,
         PreferenceGroup.READING,
       );
