@@ -1,3 +1,4 @@
+import capitalize from 'lodash/capitalize';
 import { Translate } from 'next-translate';
 
 import { FormBuilderFormField } from './FormBuilderTypes';
@@ -30,7 +31,9 @@ const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuil
     rules: formField.rules.map((rule) => ({
       type: rule.type,
       value: rule.value,
-      errorMessage: t(`validation.${rule.errorId}`, { field: formField.field }),
+      errorMessage: t(`validation.${rule.errorId}`, {
+        field: capitalize(formField.field),
+      }),
     })),
   };
 };
