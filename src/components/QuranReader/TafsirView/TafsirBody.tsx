@@ -25,7 +25,6 @@ import DataContext from 'src/contexts/DataContext';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import SliceName from 'src/redux/types/SliceName';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
 import {
   logButtonClick,
@@ -111,12 +110,10 @@ const TafsirBody = ({
           tafsirs: [slug],
           locale: lang,
         }),
-        tafsirsState,
         setSelectedTafsirs({
           tafsirs: tafsirsState.selectedTafsirs,
           locale: lang,
         }),
-        SliceName.TAFSIRS,
         PreferenceGroup.TAFSIRS,
       );
     },

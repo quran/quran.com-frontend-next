@@ -12,7 +12,6 @@ import {
   selectReadingPreferences,
   setReadingPreference,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import SliceName from 'src/redux/types/SliceName';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
@@ -53,9 +52,7 @@ const ReadingPreferenceSwitcher = () => {
         'readingPreference',
         view,
         setReadingPreference(view),
-        readingPreferences,
         setReadingPreference(readingPreference),
-        SliceName.READING_PREFERENCES,
         PreferenceGroup.READING,
       );
     });

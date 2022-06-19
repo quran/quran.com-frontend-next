@@ -10,7 +10,6 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { selectAudioPlayerState, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
-import SliceName from 'src/redux/types/SliceName';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -35,9 +34,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
       'playbackRate',
       playbackRate,
       setPlaybackRate(playbackRate),
-      audioPlayerState,
       setPlaybackRate(audioPlayerState.playbackRate),
-      SliceName.AUDIO_PLAYER_STATE,
       PreferenceGroup.AUDIO,
       onBack,
     );

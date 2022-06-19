@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable react-func/max-lines-per-function */
 import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
@@ -79,29 +80,6 @@ const getPreferenceGroupValue = (
   }
   return {
     ...currentSliceValue,
-  };
-};
-
-/**
- * Convert a slice's value into a format that will be persisted
- * in the DB after update the value of a specific key inside
- * the slice.
- *
- * @param {SliceName} sliceName
- * @param {any} currentSliceValue
- * @param {string} changedKey
- * @param {any} newValue
- * @returns {Record<string, any>}
- */
-export const formatPreferenceGroupValue = (
-  sliceName: SliceName,
-  currentSliceValue: any,
-  changedKey: string,
-  newValue: any,
-): Record<string, any> => {
-  return {
-    ...getPreferenceGroupValue(sliceName, currentSliceValue),
-    [changedKey]: newValue,
   };
 };
 

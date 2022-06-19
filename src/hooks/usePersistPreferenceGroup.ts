@@ -1,16 +1,34 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useMemo } from 'react';
 
-import { Action } from '@reduxjs/toolkit';
+import { Action, AsyncThunkAction } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import SliceName from 'src/redux/types/SliceName';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
-import { formatPreferenceGroupValue } from 'src/utils/auth/preferencesMapper';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+
+type ActionOrThunkAction = Action | AsyncThunkAction<any, any, any>;
+type Value = string | number | boolean | Record<string, any>;
+
+type Actions = {
+  onSettingsChangeWithoutDispatch: (
+    key: string,
+    value: Value,
+    preferenceGroup: PreferenceGroup,
+    callback: () => void,
+  ) => void;
+  onSettingsChange: (
+    key: string,
+    value: Value,
+    action: ActionOrThunkAction,
+    undoAction: ActionOrThunkAction,
+    preferenceGroup: PreferenceGroup,
+    successCallback?: () => void,
+  ) => void;
+};
 
 /**
  * A hook that will be used to:
@@ -22,7 +40,7 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
  *
  * @returns {Record<string, any>}
  */
-const usePersistPreferenceGroup = (): Record<string, any> => {
+const usePersistPreferenceGroup = (): Actions => {
   const dispatch = useDispatch();
   const toast = useToast();
   const { t } = useTranslation('common');
@@ -32,16 +50,11 @@ const usePersistPreferenceGroup = (): Record<string, any> => {
       onSettingsChangeWithoutDispatch: (
         key: string,
         value: string | number | boolean | Record<string, any>,
-        currentSliceValue: any,
-        sliceName: SliceName,
         preferenceGroup: PreferenceGroup,
         callback: () => void,
       ) => {
         if (isLoggedIn()) {
-          addOrUpdateUserPreference(
-            formatPreferenceGroupValue(sliceName, currentSliceValue, key, value),
-            preferenceGroup,
-          ).then(() => {
+          addOrUpdateUserPreference(key, value, preferenceGroup).then(() => {
             callback();
           });
         } else {
@@ -51,20 +64,15 @@ const usePersistPreferenceGroup = (): Record<string, any> => {
       onSettingsChange: (
         key: string,
         value: string | number | boolean | Record<string, any>,
-        action: Action,
-        currentSliceValue: any,
-        undoAction: Action,
-        sliceName: SliceName,
+        action: ActionOrThunkAction,
+        undoAction: ActionOrThunkAction,
         preferenceGroup: PreferenceGroup,
         successCallback?: () => void,
       ) => {
         if (isLoggedIn()) {
           // 1. dispatch the action first
           dispatch(action);
-          addOrUpdateUserPreference(
-            formatPreferenceGroupValue(sliceName, currentSliceValue, key, value),
-            preferenceGroup,
-          )
+          addOrUpdateUserPreference(key, value, preferenceGroup)
             .then(() => {
               if (successCallback) {
                 successCallback();
