@@ -20,29 +20,33 @@ const { COOKIES_DOMAIN } = process.env;
  * @returns {Promise<void>}
  */
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const maxAge = +new Date(0);
+  const sameSite = true;
+  const secure = process.env.NODE_ENV !== 'development';
+  const path = '/';
   const cookies = [
     cookie.serialize(ACCESS_TOKEN_COOKIE_NAME, '', {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== 'development',
-      sameSite: true,
-      maxAge: +new Date(0),
+      secure,
+      sameSite,
+      maxAge,
       domain: COOKIES_DOMAIN,
-      path: '/',
+      path,
     }),
     cookie.serialize(REFRESH_TOKEN_COOKIE_NAME, '', {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== 'development',
-      sameSite: true,
-      maxAge: +new Date(0),
+      secure,
+      sameSite,
+      maxAge,
       domain: COOKIES_DOMAIN,
-      path: '/',
+      path,
     }),
     cookie.serialize(USER_ID, '', {
-      secure: process.env.NODE_ENV !== 'development',
-      sameSite: true,
-      maxAge: +new Date(0),
+      secure,
+      sameSite,
+      maxAge,
       domain: COOKIES_DOMAIN,
-      path: '/',
+      path,
     }),
   ];
   return setResponseCookie(res, cookies).json({ success: true });
