@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -17,6 +19,7 @@ import Error from 'src/pages/_error';
 import { getUserProfile } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { getAllChaptersData } from 'src/utils/chapter';
 import ChaptersData from 'types/ChaptersData';
 
@@ -39,6 +42,12 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
       router.push('/');
     });
   };
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      router.replace('/login');
+    }
+  }, [router]);
 
   if (error) {
     return <Error statusCode={500} />;
