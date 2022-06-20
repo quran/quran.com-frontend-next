@@ -36,18 +36,18 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
 
   const { data: userData, isValidating, error } = useSWR(makeUserProfileUrl(), getUserProfile);
 
-  const onLogoutClicked = () => {
-    fetch('/api/auth/logout').then(() => {
-      mutate(makeUserProfileUrl());
-      router.push('/');
-    });
-  };
-
   useEffect(() => {
     if (!isLoggedIn()) {
       router.replace('/login');
     }
   }, [router]);
+
+  const onLogoutClicked = () => {
+    fetch(isLoggedIn() ? '/api/auth/logout' : null).then(() => {
+      mutate(makeUserProfileUrl());
+      router.push('/');
+    });
+  };
 
   if (error) {
     return <Error statusCode={500} />;
