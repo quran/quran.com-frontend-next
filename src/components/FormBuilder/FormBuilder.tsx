@@ -1,22 +1,20 @@
-import useTranslation from 'next-translate/useTranslation';
 import { Controller, useForm } from 'react-hook-form';
 
 import Button from '../dls/Button/Button';
 import Input from '../dls/Forms/Input';
 
+import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
-
-import { buildReactHookFormRules } from 'src/utils/validation';
-import FormField from 'types/FormField';
+import { FormBuilderFormField } from './FormBuilderTypes';
 
 type FormBuilderProps<T> = {
-  formFields: FormField[];
+  formFields: FormBuilderFormField[];
   onSubmit: (data: T) => void | Promise<void | { errors: { [key: string]: string } }>;
-  actionText?: string;
+  actionText: string;
 };
+
 const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
-  const { t } = useTranslation('common');
 
   const internalOnSubmit = (data: T) => {
     const onSubmitPromise = onSubmit(data);
@@ -38,7 +36,7 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
           <Controller
             key={formField.field}
             control={control}
-            rules={buildReactHookFormRules(formField, t)}
+            rules={buildReactHookFormRules(formField)}
             name={formField.field}
             render={({ field, fieldState: { error } }) => (
               <div className={styles.inputContainer}>
@@ -50,7 +48,7 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
                   name={formField.field}
                   containerClassName={styles.input}
                   fixedWidth={false}
-                  placeholder={t(`form.${formField.field}`)}
+                  placeholder={formField.label}
                 />
                 {error && <span className={styles.errorText}>{error.message}</span>}
               </div>
@@ -59,7 +57,7 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
         );
       })}
       <Button htmlType="submit" className={styles.submitButton}>
-        {actionText || t('submit')}
+        {actionText}
       </Button>
     </form>
   );

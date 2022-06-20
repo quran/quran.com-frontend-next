@@ -4,7 +4,9 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder from '../FormBuilder/FormBuilder';
+import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
 
 import styles from './CompleteSignupForm.module.scss';
 import ResendEmailSection from './ResendEmailSection';
@@ -13,10 +15,10 @@ import { completeSignup, requestVerificationCode } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import ErrorMessageId from 'types/ErrorMessageId';
 import { RuleType } from 'types/FieldRule';
-import FormField, { FormFieldType } from 'types/FormField';
+import { FormFieldType } from 'types/FormField';
 
 type EmailVerificationFormProps = {
-  emailFormField: FormField;
+  emailFormField: FormBuilderFormField;
 };
 type EmailFormData = {
   email: string;
@@ -24,12 +26,6 @@ type EmailFormData = {
 
 type VerificationCodeFormData = {
   code: string;
-};
-
-const verificationCodeFormField = {
-  field: 'code',
-  type: FormFieldType.Number,
-  rules: [{ type: RuleType.Required, value: true, errorId: ErrorMessageId.RequiredField }],
 };
 
 const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) => {
@@ -45,6 +41,19 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
     setEmail(data.email);
   };
 
+  const verificationCodeFormField: FormBuilderFormField = {
+    field: 'code',
+    type: FormFieldType.Number,
+    label: t('form.verification-code'),
+    rules: [
+      {
+        type: RuleType.Required,
+        value: true,
+        errorMessage: buildTranslatedErrorMessageByErrorId(ErrorMessageId.RequiredField, 'code', t),
+      },
+    ],
+  };
+
   const onVerificationCodeSubmitted = (data: VerificationCodeFormData) => {
     return completeSignup({ email, verificationCode: data.code.toString() })
       .then(() => {
@@ -53,8 +62,8 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
       })
       .catch(async (err) => {
         const errMessage = await err.json();
-        const a = { errors: { code: errMessage.message } };
-        return a;
+        const result = { errors: { code: errMessage.message } };
+        return result;
       });
   };
 
@@ -89,7 +98,11 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
           />
         </>
       ) : (
-        <FormBuilder formFields={[emailFormField]} onSubmit={onEmailSubmitted} />
+        <FormBuilder
+          formFields={[emailFormField]}
+          onSubmit={onEmailSubmitted}
+          actionText={t('submit')}
+        />
       )}
     </div>
   );

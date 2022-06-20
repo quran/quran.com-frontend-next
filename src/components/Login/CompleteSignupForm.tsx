@@ -1,6 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import buildFormBuilderFormField from '../FormBuilder/buildFormBuilderFormField';
 import FormBuilder from '../FormBuilder/FormBuilder';
 
 import styles from './CompleteSignupForm.module.scss';
@@ -33,13 +34,17 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
   const emailFormField = requiredFields.find((field) => field.field === 'email');
   const isEmailRequired = !!emailFormField;
   if (isEmailRequired) {
-    return <EmailVerificationForm emailFormField={emailFormField} />;
+    return <EmailVerificationForm emailFormField={buildFormBuilderFormField(emailFormField, t)} />;
   }
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{t('complete-sign-up')}</h2>
-      <FormBuilder formFields={requiredFields} onSubmit={onSubmit} />
+      <FormBuilder
+        formFields={requiredFields.map((field) => buildFormBuilderFormField(field, t))}
+        onSubmit={onSubmit}
+        actionText={t('submit')}
+      />
     </div>
   );
 };
