@@ -10,6 +10,6 @@
     "other-options": "Other Login Options",
     "login-error": {
         "AuthenticationError": "Authentication failed. Please try again later",
-        "TokenExpiredError": "You're logged out. Please login again"
+        "TokenExpiredError": "You have been logged out, please login again"
     }
 }
