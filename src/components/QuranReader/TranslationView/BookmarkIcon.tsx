@@ -1,4 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
+import { useMemo } from 'react';
+
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -10,10 +12,12 @@ import styles from './TranslationViewCell.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import { addOrRemoveBookmark } from 'src/utils/auth/api';
 import { makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
@@ -27,10 +31,18 @@ type Props = {
 
 const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl }) => {
   const { t } = useTranslation('quran-reader');
-  const isVerseBookmarked = pageBookmarks && !!pageBookmarks[verse.verseKey];
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const { mutate } = useSWRConfig();
   const toast = useToast();
+
+  const isVerseBookmarked = useMemo(() => {
+    const isUserLoggedIn = isLoggedIn();
+    if (isUserLoggedIn && pageBookmarks) {
+      return !!pageBookmarks[verse.verseKey];
+    }
+    return !!bookmarkedVerses[verse.verseKey];
+  }, [bookmarkedVerses, pageBookmarks, verse.verseKey]);
 
   if (!isVerseBookmarked) return null;
 
