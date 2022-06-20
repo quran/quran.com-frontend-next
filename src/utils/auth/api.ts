@@ -21,7 +21,20 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 type RequestData = Record<string, any>;
 
 export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
-  return fetcher(input, { ...init, credentials: 'include' });
+  try {
+    const data = await fetcher<T>(input, { ...init, credentials: 'include' });
+    return data;
+  } catch (res) {
+    if (res.status === 401) {
+      res.json().then((errBody) => {
+        if (typeof window !== 'undefined' && errBody.message) {
+          window.location.href = `/login?error=${errBody.message}`;
+        }
+      });
+    }
+
+    throw Error(res);
+  }
 };
 
 /**

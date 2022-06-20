@@ -9,6 +9,7 @@
     "continue-apple": "Continue with Apple",
     "other-options": "Other Login Options",
     "login-error": {
-        "AuthenticationError": "Authentication failed. Please try again later"
+        "AuthenticationError": "Authentication failed. Please try again later",
+        "TokenExpiredError": "You're logged out. Please login again"
     }
 }
