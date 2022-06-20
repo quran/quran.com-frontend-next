@@ -2,6 +2,19 @@
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  
+  &::-webkit-scrollbar {
+    width: 9px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--color-success-faint);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-success-medium);
+    border-radius: var(--border-radius-rounded);
+    border: transparent;
+  }
 }
 
 .item {
