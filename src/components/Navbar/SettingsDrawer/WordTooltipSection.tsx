@@ -18,7 +18,6 @@ import {
   setSelectedWordByWordLocale,
   selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import SliceName from 'src/redux/types/SliceName';
 import { removeItemFromArray } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -46,15 +45,7 @@ const WordTooltipSection = () => {
     action: Action,
     undoAction: Action,
   ) => {
-    onSettingsChange(
-      key,
-      value,
-      action,
-      readingPreferences,
-      undoAction,
-      SliceName.READING_PREFERENCES,
-      PreferenceGroup.READING,
-    );
+    onSettingsChange(key, value, action, undoAction, PreferenceGroup.READING);
   };
 
   const onWordByWordLocaleChange = (value: string) => {

@@ -117,8 +117,9 @@ export const getUserPreferences = async (locale: string): Promise<UserPreference
   return userPreferences;
 };
 
-export const addOrUpdateUserPreference = async (value: any, group: PreferenceGroup) =>
+export const addOrUpdateUserPreference = async (key: string, value: any, group: PreferenceGroup) =>
   postRequest(makeUserPreferencesUrl(), {
+    key,
     value,
     group,
   });

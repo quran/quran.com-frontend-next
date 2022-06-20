@@ -23,7 +23,6 @@ import {
   selectIsInRepeatMode,
   setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
-import SliceName from 'src/redux/types/SliceName';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
@@ -116,14 +115,7 @@ const RepeatAudioModal = ({
 
   const onPlayClick = () => {
     logButtonClick('start_repeat_play');
-    onSettingsChangeWithoutDispatch(
-      'repeatSettings',
-      verseRepetition,
-      audioPlayerState,
-      SliceName.AUDIO_PLAYER_STATE,
-      PreferenceGroup.AUDIO,
-      play,
-    );
+    onSettingsChangeWithoutDispatch('repeatSettings', verseRepetition, PreferenceGroup.AUDIO, play);
   };
 
   const onCancelClick = () => {

@@ -59,7 +59,7 @@ const LanguageSelector = ({
       dispatch(resetSettings(newLocale));
     }
     logValueChange('locale', lang, newLocale);
-    addOrUpdateUserPreference(newLocale, PreferenceGroup.LANGUAGE)
+    addOrUpdateUserPreference(PreferenceGroup.LANGUAGE, newLocale, PreferenceGroup.LANGUAGE)
       .then(async () => {
         await setLanguage(newLocale);
         setLocaleCookie(newLocale);

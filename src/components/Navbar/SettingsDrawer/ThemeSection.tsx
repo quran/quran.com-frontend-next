@@ -15,7 +15,6 @@ import styles from './ThemeSection.module.scss';
 import Switch, { SwitchSize } from 'src/components/dls/Switch/Switch';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
-import SliceName from 'src/redux/types/SliceName';
 import ThemeType from 'src/redux/types/ThemeType';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -50,15 +49,7 @@ const ThemeSection = () => {
 
   const onThemeSelected = async (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
-    onSettingsChange(
-      'type',
-      value,
-      setTheme(value),
-      {},
-      setTheme(theme.type),
-      SliceName.THEME,
-      PreferenceGroup.THEME,
-    );
+    onSettingsChange('type', value, setTheme(value), setTheme(theme.type), PreferenceGroup.THEME);
   };
 
   return (

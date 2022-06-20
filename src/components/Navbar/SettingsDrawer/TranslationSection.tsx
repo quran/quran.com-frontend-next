@@ -21,7 +21,6 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import SliceName from 'src/redux/types/SliceName';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
@@ -104,15 +103,7 @@ const TranslationSection = () => {
     action: Action,
     undoAction: Action,
   ) => {
-    onSettingsChange(
-      key,
-      value,
-      action,
-      quranReaderStyles,
-      undoAction,
-      SliceName.QURAN_READER_STYLES,
-      PreferenceGroup.QURAN_READER_STYLES,
-    );
+    onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
   };
 
   const onFontScaleDecreaseClicked = () => {

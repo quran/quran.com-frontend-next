@@ -19,7 +19,6 @@ import {
   selectTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import SliceName from 'src/redux/types/SliceName';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
 import {
   logValueChange,
@@ -54,13 +53,11 @@ const TranslationSelectionBody = () => {
         'selectedTranslations',
         value,
         action,
-        translationsState,
         undoAction,
-        SliceName.TRANSLATIONS,
         PreferenceGroup.TRANSLATIONS,
       );
     },
-    [onSettingsChange, translationsState],
+    [onSettingsChange],
   );
 
   const onTranslationsChange = useCallback(

@@ -24,7 +24,6 @@ import {
   selectReadingPreferences,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import SliceName from 'src/redux/types/SliceName';
 import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -56,9 +55,7 @@ const AudioSection = () => {
       key,
       value,
       actionCreator(value),
-      audioPlayerState,
       actionCreator(audioPlayerState[key]),
-      SliceName.AUDIO_PLAYER_STATE,
       PreferenceGroup.AUDIO,
     );
   };
@@ -101,9 +98,7 @@ const AudioSection = () => {
       'wordClickFunctionality',
       newValue,
       setWordClickFunctionality(newValue),
-      // @ts-ignore
-      readingPreferences,
-      SliceName.READING_PREFERENCES,
+      setWordClickFunctionality(wordClickFunctionality),
       PreferenceGroup.READING,
     );
   };

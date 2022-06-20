@@ -16,7 +16,6 @@ import {
   selectAudioPlayerState,
   setReciterAndPauseAudio,
 } from 'src/redux/slices/AudioPlayer/state';
-import SliceName from 'src/redux/types/SliceName';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { RecitersResponse } from 'types/ApiResponses';
@@ -40,9 +39,7 @@ const SelectReciterMenu = ({ onBack }) => {
         'reciter',
         reciter.id,
         setReciterAndPauseAudio({ reciter, locale: lang }),
-        audioPlayerState,
         setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
-        SliceName.AUDIO_PLAYER_STATE,
         PreferenceGroup.AUDIO,
         onBack,
       );

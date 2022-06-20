@@ -42,8 +42,8 @@ const ReduxProvider = ({ children, locale }) => {
         const userPreferences = await getUserPreferences(locale);
         const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
         if (remoteLocale) {
-          await setLanguage(remoteLocale);
-          setLocaleCookie(remoteLocale);
+          await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
+          setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
         }
         store.dispatch(syncUserPreferences(userPreferences, locale));
         // eslint-disable-next-line no-empty

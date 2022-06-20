@@ -15,7 +15,6 @@ import {
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
-import SliceName from 'src/redux/types/SliceName';
 import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -52,15 +51,7 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
     action: Action,
     undoAction: Action,
   ) => {
-    onSettingsChange(
-      key,
-      value,
-      action,
-      quranReaderStyles,
-      undoAction,
-      SliceName.QURAN_READER_STYLES,
-      PreferenceGroup.QURAN_READER_STYLES,
-    );
+    onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
   };
 
   const onFontScaleDecreaseClicked = () => {
