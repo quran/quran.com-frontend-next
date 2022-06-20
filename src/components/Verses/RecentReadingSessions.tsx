@@ -11,6 +11,7 @@ import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPrevi
 import DataContext from 'src/contexts/DataContext';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeReadingSessionsUrl } from 'src/utils/auth/apiPaths';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
@@ -25,7 +26,10 @@ const RecentReadingSessions = () => {
     logButtonClick('homepage_recently_read_card');
   };
 
-  const { data } = useSWRImmutable<ReadingSession[]>(makeReadingSessionsUrl(), privateFetcher);
+  const { data } = useSWRImmutable<ReadingSession[]>(
+    isLoggedIn() ? makeReadingSessionsUrl() : null,
+    privateFetcher,
+  );
 
   if (!data) return null;
 
