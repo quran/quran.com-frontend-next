@@ -28,7 +28,7 @@ const BookmarkedVersesList: React.FC = () => {
 
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
 
-  const { data } = useSWRImmutable<Bookmark[]>(
+  const { data, isValidating } = useSWRImmutable<Bookmark[]>(
     isLoggedIn() // only fetch the data when user is loggedIn
       ? makeBookmarksUrl(
           getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
@@ -38,6 +38,8 @@ const BookmarkedVersesList: React.FC = () => {
   );
 
   const bookmarkedVersesKeys = useMemo(() => {
+    if (isValidating) return [];
+
     const isUserLoggedIn = isLoggedIn();
     if (isUserLoggedIn && data) {
       return data.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber));
@@ -48,7 +50,7 @@ const BookmarkedVersesList: React.FC = () => {
     }
 
     return [];
-  }, [bookmarkedVerses, data]);
+  }, [bookmarkedVerses, data, isValidating]);
 
   if (!bookmarkedVersesKeys.length) {
     return null;
