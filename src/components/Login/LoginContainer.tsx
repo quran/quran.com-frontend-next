@@ -2,12 +2,14 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import { SubmissionResult } from '../FormBuilder/FormBuilder';
+
 import EmailSent from './EmailSent';
 import styles from './login.module.scss';
 import ResendEmailSection from './ResendEmailSection';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import EmailLogin, { sendMagicLink } from 'src/components/Login/EmailLogin';
+import EmailLogin, { EmailLoginData, sendMagicLink } from 'src/components/Login/EmailLogin';
 import SocialLogin from 'src/components/Login/SocialLogin';
 
 enum LoginType {
@@ -17,15 +19,22 @@ enum LoginType {
 
 const LoginContainer = () => {
   const [loginType, setLoginType] = useState(LoginType.Social);
-  const { t } = useTranslation('login');
+  const { t } = useTranslation();
 
   const [magicLinkVerificationCode, setMagicLinkVerificationCode] = useState('');
   const [email, setEmail] = useState('');
 
-  const onEmailLoginSubmit = async (emailInput: string) => {
+  const onEmailLoginSubmit = ({ email: emailInput }): SubmissionResult<EmailLoginData> => {
     setEmail(emailInput);
-    //  TODO: handle error
-    sendMagicLink(emailInput).then(setMagicLinkVerificationCode).catch(console.error);
+    return sendMagicLink(emailInput)
+      .then(setMagicLinkVerificationCode)
+      .catch(() => {
+        return {
+          errors: {
+            email: t('common:error.email-login-fail'),
+          },
+        };
+      });
   };
 
   if (magicLinkVerificationCode) {
@@ -33,7 +42,7 @@ const LoginContainer = () => {
       <div className={styles.outerContainer}>
         <EmailSent email={email} verificationCode={magicLinkVerificationCode} />
         <ResendEmailSection
-          onResendButtonClicked={() => onEmailLoginSubmit(email)}
+          onResendButtonClicked={() => onEmailLoginSubmit({ email })}
           key={magicLinkVerificationCode}
         />
       </div>
@@ -43,7 +52,7 @@ const LoginContainer = () => {
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
-        <div className={styles.title}>{t('title')}</div>
+        <div className={styles.title}>{t('login:title')}</div>
 
         {loginType === LoginType.Email && (
           <EmailLogin back={() => setLoginType(LoginType.Social)} onSubmit={onEmailLoginSubmit} />
@@ -59,7 +68,7 @@ const LoginContainer = () => {
               variant={ButtonVariant.Ghost}
               type={ButtonType.Success}
             >
-              {t('continue-email')}
+              {t('login:continue-email')}
             </Button>
           </>
         )}

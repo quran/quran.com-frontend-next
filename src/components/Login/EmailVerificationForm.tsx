@@ -89,7 +89,7 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
           <FormBuilder
             formFields={[verificationCodeFormField]}
             onSubmit={onVerificationCodeSubmitted}
-            actionText={t('common:email-verification.verify-code')}
+            action={t('common:email-verification.verify-code')}
           />
 
           <ResendEmailSection
@@ -101,7 +101,7 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
         <FormBuilder
           formFields={[emailFormField]}
           onSubmit={onEmailSubmitted}
-          actionText={t('submit')}
+          action={t('submit')}
         />
       )}
     </div>

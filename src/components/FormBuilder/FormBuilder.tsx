@@ -7,13 +7,14 @@ import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
 import { FormBuilderFormField } from './FormBuilderTypes';
 
+export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
 type FormBuilderProps<T> = {
   formFields: FormBuilderFormField[];
-  onSubmit: (data: T) => void | Promise<void | { errors: { [key: string]: string } }>;
-  actionText: string;
+  onSubmit: (data: T) => void | SubmissionResult<T>;
+  action: string | React.ReactNode;
 };
 
-const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<T>) => {
+const FormBuilder = <T,>({ formFields, onSubmit, action }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
   const internalOnSubmit = (data: T) => {
@@ -56,9 +57,13 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
           />
         );
       })}
-      <Button htmlType="submit" className={styles.submitButton}>
-        {actionText}
-      </Button>
+      {typeof action === 'string' ? (
+        <Button htmlType="submit" className={styles.submitButton}>
+          {action}
+        </Button>
+      ) : (
+        action
+      )}
     </form>
   );
 };
