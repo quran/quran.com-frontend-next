@@ -1,6 +1,5 @@
 /* eslint-disable max-lines */
-import React, { MouseEventHandler } from 'react';
-import { ButtonHTMLAttributes } from 'react';
+import React, { MouseEventHandler, ButtonHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 
@@ -60,6 +59,7 @@ export type ButtonProps = {
   isNewTab?: boolean;
   ariaLabel?: string;
   htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  children: React.ReactNode;
 };
 
 const Button: React.FC<ButtonProps> = ({
