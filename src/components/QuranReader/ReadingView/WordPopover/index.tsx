@@ -17,6 +17,7 @@ import Word from 'types/Word';
 
 type Props = {
   word: Word;
+  children: React.ReactNode;
 };
 
 const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
