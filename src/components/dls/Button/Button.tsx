@@ -58,6 +58,7 @@ export type ButtonProps = {
   shouldPrefetch?: boolean;
   isNewTab?: boolean;
   ariaLabel?: string;
+  children: React.ReactNode;
 };
 
 const Button: React.FC<ButtonProps> = ({
