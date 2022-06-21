@@ -43,7 +43,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
       <FormBuilder
         formFields={requiredFields.map((field) => buildFormBuilderFormField(field, t))}
         onSubmit={onSubmit}
-        action={t('submit')}
+        actionText={t('submit')}
       />
     </div>
   );

@@ -58,16 +58,12 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
             ],
           },
         ]}
-        action={
-          <Button
-            htmlType="submit"
-            prefix={<MailIcon />}
-            className={styles.loginButton}
-            type={ButtonType.Success}
-          >
-            {t('login:continue-email')}
-          </Button>
-        }
+        actionProps={{
+          prefix: <MailIcon />,
+          className: styles.loginButton,
+          type: ButtonType.Success,
+        }}
+        actionText={t('login:continue-email')}
       />
 
       <Button

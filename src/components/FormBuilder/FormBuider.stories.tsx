@@ -26,7 +26,7 @@ export const FormExample = () => {
           type: FormFieldType.Text,
         },
       ]}
-      action="Submit"
+      actionText="Submit"
       onSubmit={(data) => {
         console.log(data);
       }}
@@ -45,7 +45,7 @@ export const WithRequiredField = () => {
           rules: [{ type: RuleType.Required, value: true, errorMessage: 'name is required' }],
         },
       ]}
-      action="Submit"
+      actionText="Submit"
       onSubmit={(data) => {
         console.log(data);
       }}
@@ -71,7 +71,7 @@ export const WithEmailValidation = () => {
           ],
         },
       ]}
-      action="Submit"
+      actionText="Submit"
       onSubmit={(data) => {
         console.log(data);
       }}
@@ -90,7 +90,7 @@ export const WithFailedOnSubmit = () => {
           rules: [{ type: RuleType.Required, value: true, errorMessage: 'code is required' }],
         },
       ]}
-      action="Submit"
+      actionText="Submit"
       onSubmit={() => {
         return Promise.resolve({ errors: { code: 'Verification code is expired' } });
       }}
