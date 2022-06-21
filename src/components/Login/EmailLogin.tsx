@@ -1,54 +1,82 @@
-import { useState } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 
 import MailIcon from '../../../public/icons/mail.svg';
 import ArrowLeft from '../../../public/icons/west.svg';
+import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';
+import FormBuilder, { SubmissionResult } from '../FormBuilder/FormBuilder';
 
 import styles from './login.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import Input from 'src/components/dls/Forms/Input';
 import { makeSendMagicLinkUrl } from 'src/utils/auth/apiPaths';
+import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
+import ErrorMessageId from 'types/ErrorMessageId';
+import { RuleType } from 'types/FieldRule';
+import { FormFieldType } from 'types/FormField';
 
-type EmailLoginProps = { back: () => void; onSubmit: (email: string) => void };
+export type EmailLoginData = {
+  email: string;
+};
+
+type EmailLoginProps = {
+  back: () => void;
+  onSubmit: (data: { email: string }) => SubmissionResult<EmailLoginData>;
+};
+
+const fieldName = 'email';
 const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
-  const { t } = useTranslation('login');
-  const [emailInput, setEmailInput] = useState('');
-
-  const onFormSubmitted = async (e) => {
-    e.preventDefault();
-    onSubmit(emailInput);
-  };
+  const { t } = useTranslation('common');
 
   return (
-    <form className={styles.innerContainer} onSubmit={onFormSubmitted}>
-      <Input
-        isRequired
-        htmlType="email"
-        id="email-input"
-        onChange={setEmailInput}
-        fixedWidth={false}
-        placeholder={t('email-placeholder')}
+    <>
+      <FormBuilder
+        onSubmit={onSubmit}
+        formFields={[
+          {
+            field: fieldName,
+            type: FormFieldType.Text,
+            label: t('form.email'),
+            rules: [
+              {
+                type: RuleType.Required,
+                value: true,
+                errorMessage: buildTranslatedErrorMessageByErrorId(
+                  ErrorMessageId.RequiredField,
+                  fieldName,
+                  t,
+                ),
+              },
+              {
+                type: RuleType.Regex,
+                value: EMAIL_VALIDATION_REGEX.source,
+                errorMessage: buildTranslatedErrorMessageByErrorId(
+                  ErrorMessageId.InvalidEmail,
+                  fieldName,
+                  t,
+                ),
+              },
+            ],
+          },
+        ]}
+        actionProps={{
+          prefix: <MailIcon />,
+          className: styles.loginButton,
+          type: ButtonType.Success,
+        }}
+        actionText={t('login:continue-email')}
       />
-      <Button
-        htmlType="submit"
-        prefix={<MailIcon />}
-        className={styles.loginButton}
-        type={ButtonType.Success}
-      >
-        {t('continue-email')}
-      </Button>
+
       <Button
         onClick={back}
+        htmlType="submit"
         className={styles.loginButton}
         variant={ButtonVariant.Ghost}
         type={ButtonType.Secondary}
         prefix={<ArrowLeft />}
       >
-        {t('other-options')}
+        {t('login:other-options')}
       </Button>
-    </form>
+    </>
   );
 };
 

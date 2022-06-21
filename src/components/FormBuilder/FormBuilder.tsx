@@ -1,19 +1,27 @@
+import classNames from 'classnames';
 import { Controller, useForm } from 'react-hook-form';
 
-import Button from '../dls/Button/Button';
+import Button, { ButtonProps } from '../dls/Button/Button';
 import Input from '../dls/Forms/Input';
 
 import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
 import { FormBuilderFormField } from './FormBuilderTypes';
 
+export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
 type FormBuilderProps<T> = {
   formFields: FormBuilderFormField[];
-  onSubmit: (data: T) => void | Promise<void | { errors: { [key: string]: string } }>;
+  onSubmit: (data: T) => void | SubmissionResult<T>;
   actionText: string;
+  actionProps?: ButtonProps;
 };
 
-const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<T>) => {
+const FormBuilder = <T,>({
+  formFields,
+  onSubmit,
+  actionText,
+  actionProps = {},
+}: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
   const internalOnSubmit = (data: T) => {
@@ -56,7 +64,11 @@ const FormBuilder = <T,>({ formFields, onSubmit, actionText }: FormBuilderProps<
           />
         );
       })}
-      <Button htmlType="submit" className={styles.submitButton}>
+      <Button
+        {...actionProps}
+        htmlType="submit"
+        className={classNames(styles.submitButton, actionProps.className)}
+      >
         {actionText}
       </Button>
     </form>

@@ -89,7 +89,8 @@
         "general": "Something went wrong. Please try again.",
         "offline": "Looks like you lost your connection. Please check it and try again.",
         "bookmark-sync": "Bookmark is out of sync.",
-        "pref-persist-fail": "Failed to sync your settings to the cloud."
+        "pref-persist-fail": "Failed to sync your settings to the cloud.",
+        "email-login-fail": "Failed to login with email. Please try again"
     },
     "validation": {
         "required-field": "{{field}} is required",
