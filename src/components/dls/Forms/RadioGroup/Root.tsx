@@ -22,6 +22,7 @@ export interface Props {
   name?: string;
   required?: boolean;
   className?: string;
+  children?: React.ReactNode;
 }
 
 const Root: React.FC<Props> = ({

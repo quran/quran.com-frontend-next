@@ -59,7 +59,7 @@ export type ButtonProps = {
   isNewTab?: boolean;
   ariaLabel?: string;
   htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const Button: React.FC<ButtonProps> = ({
