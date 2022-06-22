@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
@@ -32,9 +32,12 @@ const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { mutate } = useSWRConfig();
 
-  const { data: userData, isValidating, error } = useSWR(makeUserProfileUrl(), getUserProfile);
+  const {
+    data: userData,
+    isValidating,
+    error,
+  } = useSWR(isLoggedIn() ? makeUserProfileUrl() : null, getUserProfile);
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -43,12 +46,12 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   }, [router]);
 
   const onLogoutClicked = () => {
-    if (isLoggedIn()) {
+    if (!isLoggedIn()) {
       return;
     }
     logoutUser().then(() => {
-      mutate(makeUserProfileUrl());
       router.push('/');
+      router.reload();
     });
   };
 
