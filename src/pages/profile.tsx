@@ -16,7 +16,7 @@ import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getUserProfile } from 'src/utils/auth/api';
+import { getUserProfile, logoutUser } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
 import { isLoggedIn } from 'src/utils/auth/login';
@@ -43,7 +43,10 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   }, [router]);
 
   const onLogoutClicked = () => {
-    fetch(isLoggedIn() ? '/api/auth/logout' : null).then(() => {
+    if (isLoggedIn()) {
+      return;
+    }
+    logoutUser().then(() => {
       mutate(makeUserProfileUrl());
       router.push('/');
     });

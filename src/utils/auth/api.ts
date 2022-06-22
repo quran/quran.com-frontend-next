@@ -10,6 +10,7 @@ import {
   makeUserPreferencesUrl,
   makeVerificationCodeUrl,
   makeUserBulkPreferencesUrl,
+  makeLogoutUrl,
 } from 'src/utils/auth/apiPaths';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
@@ -142,3 +143,7 @@ export const requestVerificationCode = async (emailToVerify) => {
 };
 export const addOrUpdateBulkUserPreferences = async (preferences: Record<PreferenceGroup, any>) =>
   postRequest(makeUserBulkPreferencesUrl(), preferences);
+
+export const logoutUser = async () => {
+  return postRequest(makeLogoutUrl(), {});
+};
