@@ -11,7 +11,7 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './DeleteAccountButton.module.scss';
 
-import { deleteAccount } from 'src/utils/auth/api';
+import { deleteAccount, logoutUser } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 
 type DeleteAccountButtonProps = {
@@ -30,7 +30,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   const onDeleteConfirmed = () => {
     closeModal();
     deleteAccount()
-      .then(() => fetch('/api/auth/logout'))
+      .then(() => logoutUser())
       .then(() => mutate(makeUserProfileUrl()))
       .then(() => router.push('/'));
   };

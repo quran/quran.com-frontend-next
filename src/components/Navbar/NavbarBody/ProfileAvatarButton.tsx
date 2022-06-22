@@ -10,6 +10,7 @@ import IconPerson from '../../../../public/icons/person.svg';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { logoutUser } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 
@@ -33,7 +34,7 @@ const ProfileAvatarButton = () => {
   );
 
   const onLogoutClicked = () => {
-    fetch('/api/auth/logout').then(() => {
+    logoutUser().then(() => {
       mutate(makeUserProfileUrl());
       router.reload();
     });

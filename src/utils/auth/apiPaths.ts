@@ -48,3 +48,5 @@ export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 export const makeUserPreferencesUrl = () => makeUrl('preferences');
 
 export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');
+
+export const makeLogoutUrl = () => `/api/auth/logout`;
