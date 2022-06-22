@@ -50,7 +50,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
       return;
     }
     logoutUser().then(() => {
-      router.push('/');
+      router.push('/login');
       router.reload();
     });
   };
