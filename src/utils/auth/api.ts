@@ -21,20 +21,47 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
+type ErrorContext = {
+  status: number;
+  body: any;
+};
+
+const handle401Error = async (context: ErrorContext, next) => {
+  const { body, status } = context;
+  if (status !== 401) {
+    next();
+    return;
+  }
+
+  if (typeof window !== 'undefined' && body.message) {
+    const urlToRedirect = `/login?error=${body.message}`;
+    if (window.location.href.endsWith(urlToRedirect)) {
+      next();
+      return;
+    }
+
+    window.location.href = urlToRedirect;
+  }
+};
+
+const handleErrors = async (res) => {
+  const status = res.status();
+  const body = await res.json();
+  const context = { status, body };
+
+  // TODO: make it more generic to support multiple middleware and support async
+  handle401Error(context, () => {
+    throw Error(res);
+  });
+};
+
 export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
   try {
     const data = await fetcher<T>(input, { ...init, credentials: 'include' });
     return data;
   } catch (res) {
-    if (res.status === 401) {
-      res.json().then((errBody) => {
-        if (typeof window !== 'undefined' && errBody.message) {
-          window.location.href = `/login?error=${errBody.message}`;
-        }
-      });
-    }
-
-    throw Error(res);
+    handleErrors(res);
+    return res;
   }
 };
 
@@ -82,7 +109,14 @@ export const addOrRemoveBookmark = async (
   type: BookmarkType,
   isAdd: boolean,
   verseNumber?: number,
-) => postRequest(makeBookmarksUrl(mushafId), { key, mushaf: mushafId, type, verseNumber, isAdd });
+) =>
+  postRequest(makeBookmarksUrl(mushafId), {
+    key,
+    mushaf: mushafId,
+    type,
+    verseNumber,
+    isAdd,
+  });
 
 export const getPageBookmarks = async (
   mushafId: number,
