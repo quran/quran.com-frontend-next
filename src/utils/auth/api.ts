@@ -45,13 +45,13 @@ const handle401Error = async (context: ErrorContext, next) => {
 };
 
 const handleErrors = async (res) => {
-  const status = res.status();
+  const { status } = res;
   const body = await res.json();
   const context = { status, body };
 
   // TODO: make it more generic to support multiple middleware and support async
-  handle401Error(context, () => {
-    throw Error(res);
+  await handle401Error(context, () => {
+    throw new Error(body?.message);
   });
 };
 
@@ -60,8 +60,8 @@ export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit):
     const data = await fetcher<T>(input, { ...init, credentials: 'include' });
     return data;
   } catch (res) {
-    handleErrors(res);
-    return res;
+    await handleErrors(res);
+    return null;
   }
 };
 
