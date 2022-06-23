@@ -49,4 +49,4 @@ export const makeUserPreferencesUrl = () => makeUrl('preferences');
 
 export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');
 
-export const makeLogoutUrl = () => `/api/auth/logout`;
+export const makeLogoutUrl = () => makeUrl('auth/logout');
