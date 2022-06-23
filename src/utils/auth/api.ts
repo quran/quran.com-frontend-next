@@ -109,14 +109,7 @@ export const addOrRemoveBookmark = async (
   type: BookmarkType,
   isAdd: boolean,
   verseNumber?: number,
-) =>
-  postRequest(makeBookmarksUrl(mushafId), {
-    key,
-    mushaf: mushafId,
-    type,
-    verseNumber,
-    isAdd,
-  });
+) => postRequest(makeBookmarksUrl(mushafId), { key, mushaf: mushafId, type, verseNumber, isAdd });
 
 export const getPageBookmarks = async (
   mushafId: number,
