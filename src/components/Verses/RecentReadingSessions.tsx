@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector, shallowEqual } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import Link from '../dls/Link/Link';
@@ -9,6 +10,7 @@ import styles from './RecentReadingSessions.module.scss';
 
 import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPreview/SurahPreview';
 import DataContext from 'src/contexts/DataContext';
+import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeReadingSessionsUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
@@ -22,6 +24,7 @@ import ReadingSession from 'types/ReadingSession';
 const RecentReadingSessions = () => {
   const { t, lang } = useTranslation('home');
   const chaptersData = useContext(DataContext);
+  const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const onRecentReadingSessionClicked = () => {
     logButtonClick('homepage_recently_read_card');
   };
@@ -31,17 +34,27 @@ const RecentReadingSessions = () => {
     privateFetcher,
   );
 
-  if (!data) return null;
+  const recentReadingSessionsVerseKey = useMemo(() => {
+    if (!isLoggedIn()) {
+      return Object.keys(recentReadingSessions);
+    }
 
-  const verseKeys = data.map((item) => makeVerseKey(item.chapterNumber, item.verseNumber));
+    if (isLoggedIn() && data?.length > 0) {
+      return data.map((item) => makeVerseKey(item.chapterNumber, item.verseNumber));
+    }
+
+    return [];
+  }, [data, recentReadingSessions]);
+
+  if (recentReadingSessionsVerseKey.length === 0) return null;
 
   return (
     <>
-      {verseKeys.length > 0 && (
+      {recentReadingSessionsVerseKey.length > 0 && (
         <div className={styles.sessionsContainer}>
           <p className={styles.sessionsHeader}>{t('recently-read')}</p>
           <div className={styles.verseLinksContainer}>
-            {verseKeys.map((verseKey) => {
+            {recentReadingSessionsVerseKey.map((verseKey) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
               const surah = getChapterData(chaptersData, chapterId);
               return (
