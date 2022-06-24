@@ -21,20 +21,57 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
+type ErrorContext = {
+  status: number;
+  body: any;
+};
+
+/**
+ * If the response is 401 (unauthorized)
+ * redirect to login page and show the error message
+ */
+const handle401Error = async (context: ErrorContext, next) => {
+  const { body, status } = context;
+  if (status !== 401) {
+    next();
+    return;
+  }
+
+  /**
+   * If this function is called on client side, and the error has a `message`
+   * redirect to login page and show the error message.
+   *
+   * But, if user is already on the login page, and showing the error. Do nothing
+   */
+  if (typeof window !== 'undefined' && body.message) {
+    const urlToRedirect = `/login?error=${body.message}`;
+    if (window.location.href.endsWith(urlToRedirect)) {
+      next();
+      return;
+    }
+
+    window.location.href = urlToRedirect;
+  }
+};
+
+const handleErrors = async (res) => {
+  const { status } = res;
+  const body = await res.json();
+  const context = { status, body };
+
+  // TODO: make it more generic to support multiple middleware and support async
+  await handle401Error(context, () => {
+    throw new Error(body?.message);
+  });
+};
+
 export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
   try {
     const data = await fetcher<T>(input, { ...init, credentials: 'include' });
     return data;
   } catch (res) {
-    if (res.status === 401) {
-      res.json().then((errBody) => {
-        if (typeof window !== 'undefined' && errBody.message) {
-          window.location.href = `/login?error=${errBody.message}`;
-        }
-      });
-    }
-
-    throw Error(res);
+    await handleErrors(res);
+    return null;
   }
 };
 

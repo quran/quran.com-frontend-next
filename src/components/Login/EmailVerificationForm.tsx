@@ -61,8 +61,7 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
         mutate(makeUserProfileUrl());
       })
       .catch(async (err) => {
-        const errMessage = await err.json();
-        const result = { errors: { code: errMessage.message } };
+        const result = { errors: { code: err?.message } };
         return result;
       });
   };
