@@ -26,6 +26,10 @@ type ErrorContext = {
   body: any;
 };
 
+/**
+ * If the response is 401 (unauthorized)
+ * redirect to login page and show the error message
+ */
 const handle401Error = async (context: ErrorContext, next) => {
   const { body, status } = context;
   if (status !== 401) {
@@ -33,6 +37,12 @@ const handle401Error = async (context: ErrorContext, next) => {
     return;
   }
 
+  /**
+   * If this function is called on client side, and the error has a `message`
+   * redirect to login page and show the error message.
+   *
+   * But, if user is already on the login page, and showing the error. Do nothing
+   */
   if (typeof window !== 'undefined' && body.message) {
     const urlToRedirect = `/login?error=${body.message}`;
     if (window.location.href.endsWith(urlToRedirect)) {
