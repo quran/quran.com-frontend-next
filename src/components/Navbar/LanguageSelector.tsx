@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
@@ -8,6 +9,7 @@ import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
 import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu, { PopoverMenuExpandDirection } from '../dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './LanguageSelector.module.scss';
 
@@ -15,6 +17,7 @@ import i18nConfig from 'i18n.json';
 import resetSettings from 'src/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { setLocaleCookie } from 'src/utils/cookies';
 import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
@@ -39,6 +42,7 @@ const LanguageSelector = ({
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
+  const toast = useToast();
 
   /**
    * When the user changes the language, we will:
@@ -59,14 +63,38 @@ const LanguageSelector = ({
       dispatch(resetSettings(newLocale));
     }
     logValueChange('locale', lang, newLocale);
-    addOrUpdateUserPreference(PreferenceGroup.LANGUAGE, newLocale, PreferenceGroup.LANGUAGE)
-      .then(async () => {
-        await setLanguage(newLocale);
-        setLocaleCookie(newLocale);
-      })
-      .catch(() => {
-        // TODO: show an error
+
+    await setLanguage(newLocale);
+    setLocaleCookie(newLocale);
+
+    if (isLoggedIn()) {
+      addOrUpdateUserPreference(
+        PreferenceGroup.LANGUAGE,
+        newLocale,
+        PreferenceGroup.LANGUAGE,
+      ).catch(() => {
+        toast(t('error.pref-persist-fail'), {
+          status: ToastStatus.Warning,
+          actions: [
+            {
+              text: t('undo'),
+              primary: true,
+              onClick: async () => {
+                await setLanguage(newLocale);
+                setLocaleCookie(newLocale);
+              },
+            },
+            {
+              text: t('continue'),
+              primary: false,
+              onClick: () => {
+                // do nothing
+              },
+            },
+          ],
+        });
       });
+    }
   };
 
   return (
