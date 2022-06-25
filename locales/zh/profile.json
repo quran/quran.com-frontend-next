@@ -1,0 +1,10 @@
+{
+    "delete-account": "删除帐户",
+    "delete-confirmation": {
+        "action-text": "我明白后果，删除我的帐户",
+        "confirmation-text": "删除我的账户",
+        "instruction-text": "请输入<strong> {{text}} <\/strong>进行确认",
+        "subtitle": "此操作无法撤消。这将永久删除您的帐户、保存的书签、阅读会话以及您的所有数据。",
+        "title": "你绝对确定吗？"
+    }
+}

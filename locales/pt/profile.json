@@ -1,0 +1,10 @@
+{
+    "delete-account": "Deletar conta",
+    "delete-confirmation": {
+        "action-text": "Eu entendo a consequência, exclua minha conta",
+        "confirmation-text": "deletar minha conta",
+        "instruction-text": "Digite <strong> {{text}} <\/strong> para confirmar",
+        "subtitle": "Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta, favoritos salvos, sessões de leitura e todos os seus dados.",
+        "title": "Você tem certeza absoluta?"
+    }
+}

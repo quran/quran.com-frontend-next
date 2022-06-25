@@ -1,0 +1,10 @@
+{
+    "delete-account": "Supprimer le compte",
+    "delete-confirmation": {
+        "action-text": "Je comprends la conséquence, supprimer mon compte",
+        "confirmation-text": "supprimer mon compte",
+        "instruction-text": "Veuillez saisir <strong> {{text}} <\/strong> pour confirmer",
+        "subtitle": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre compte, vos signets enregistrés, vos sessions de lecture et toutes vos données.",
+        "title": "Êtes-vous absolument sûr?"
+    }
+}

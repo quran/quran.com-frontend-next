@@ -52,7 +52,7 @@ const LoginContainer = () => {
   return (
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
-        <div className={styles.title}>{t('login:title')}</div>
+        <div className={styles.title}>{t('login:login-title')}</div>
 
         {loginType === LoginType.Email && (
           <EmailLogin back={() => setLoginType(LoginType.Social)} onSubmit={onEmailLoginSubmit} />

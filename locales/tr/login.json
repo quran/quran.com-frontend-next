@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Onay bekleniyor",
+    "continue-apple": "Apple ile devam et",
+    "continue-email": "E-posta ile devam et",
+    "continue-facebook": "Facebook ile devam",
+    "continue-google": "Google ile devam",
+    "email-placeholder": "E-posta Adresi",
+    "login-error": {
+        "AuthenticationError": "Kimlik doğrulama başarısız oldu. Lütfen daha sonra tekrar deneyiniz",
+        "TokenExpiredError": "Çıkış yaptınız, lütfen tekrar giriş yapın."
+    },
+    "login-title": "Kuran.com'a giriş yapın",
+    "other-options": "Diğer Giriş Seçenekleri",
+    "verify-code": "Sağlanan güvenlik kodunun aşağıdaki metinle eşleştiğini doğrulayın:"
+}
