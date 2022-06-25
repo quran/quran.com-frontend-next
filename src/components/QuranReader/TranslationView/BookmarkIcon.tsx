@@ -33,7 +33,7 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
   const { t } = useTranslation('quran-reader');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
-  const { mutate } = useSWRConfig();
+  const { cache } = useSWRConfig();
   const toast = useToast();
 
   const isVerseBookmarked = useMemo(() => {
@@ -60,15 +60,14 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
           verse.verseNumber,
         )
           .then(() => {
-            mutate(bookmarksRangeUrl);
-            mutate(
+            cache.delete(bookmarksRangeUrl);
+            cache.delete(
               makeIsResourceBookmarkedUrl(
                 mushafId,
                 Number(verse.chapterId),
                 BookmarkType.Ayah,
                 Number(verse.verseNumber),
               ),
-              false,
             );
           })
           .catch((err) => {

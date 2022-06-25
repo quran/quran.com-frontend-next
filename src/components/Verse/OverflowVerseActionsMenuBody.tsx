@@ -61,7 +61,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
   const toast = useToast();
-  const { mutate: swrConfigMutate } = useSWRConfig();
+  const { cache } = useSWRConfig();
   useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
@@ -180,10 +180,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
           mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked);
           // when it's translation view, we need to invalidate the cached bookmarks range
           if (bookmarksRangeUrl) {
-            swrConfigMutate(bookmarksRangeUrl);
+            cache.delete(bookmarksRangeUrl);
           }
 
-          swrConfigMutate(
+          cache.delete(
             makeBookmarksUrl(
               getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
             ),
