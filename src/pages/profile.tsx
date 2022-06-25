@@ -55,6 +55,8 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     });
   };
 
+  const isLoading = isValidating || !userData;
+
   if (error) {
     return <Error statusCode={500} />;
   }
@@ -94,7 +96,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
                     src={photoUrl || DEFAULT_PHOTO_URL}
                   />
                 </div>
-                {isValidating ? profileSkeletonInfoSkeleton : profileInfo}
+                {isLoading ? profileSkeletonInfoSkeleton : profileInfo}
               </div>
             </div>
 
@@ -119,10 +121,10 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               )}
             >
               <div className={styles.action}>
-                <DeleteAccountButton isDisabled={isValidating} />
+                <DeleteAccountButton isDisabled={isLoading} />
               </div>
               <div className={styles.action}>
-                <Button isDisabled={isValidating} onClick={onLogoutClicked}>
+                <Button isDisabled={isLoading} onClick={onLogoutClicked}>
                   {t('common:logout')}
                 </Button>
               </div>
