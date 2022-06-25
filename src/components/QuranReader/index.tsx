@@ -51,11 +51,20 @@ const QuranReader = ({
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
   const chaptersData = useContext(DataContext);
   const dispatch = useDispatch();
-  const { mutate } = useSWRConfig();
+  const { cache } = useSWRConfig();
+
+  const addReadingSessionAndClearCache = useCallback(
+    (chapterNumber, verseNumber) => {
+      addReadingSession(chapterNumber, verseNumber).then(() => {
+        cache.delete(makeReadingSessionsUrl());
+      });
+    },
+    [cache],
+  );
 
   const debouncedAddReadingSession = useMemo(
-    () => debounce(addReadingSession, READING_SESSION_DEBOUNCE_WAIT_TIME),
-    [],
+    () => debounce(addReadingSessionAndClearCache, READING_SESSION_DEBOUNCE_WAIT_TIME),
+    [addReadingSessionAndClearCache],
   );
 
   const onElementVisible = useCallback(
@@ -71,10 +80,9 @@ const QuranReader = ({
 
       if (isLoggedIn()) {
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
-        mutate(makeReadingSessionsUrl());
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch, mutate],
+    [chaptersData, debouncedAddReadingSession, dispatch],
   );
 
   useGlobalIntersectionObserver(
@@ -88,6 +96,7 @@ const QuranReader = ({
       <FontPreLoader isQuranReader locale={lang} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
+      {/* <RecentReadingSessions /> */}
       <div
         className={classNames(styles.container, {
           [styles.withVisibleSideBar]: isSideBarVisible,
