@@ -35,7 +35,7 @@
             "play-audio": "播放音频",
             "play-range": "整体重复次数",
             "previous-ayah": "上一节",
-            "repeat-1-verse": "重复经文",
+            "repeat-1-verse": "重复播放",
             "repeat-settings": "重复播放设置",
             "repeat-verse": "每一节重复次数",
             "search-verse": "搜索章节",
@@ -74,6 +74,7 @@
         "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
         "title": "社区"
     },
+    "complete-sign-up": "完成您的注册",
     "continue": "继续",
     "copied": "已复制",
     "copied-to-clipboard": "复制到剪贴板",
@@ -85,9 +86,20 @@
     "default-description": "古兰经翻译成多种语言，界面简单易用",
     "developers": "开发者",
     "donate": "捐",
+    "email-verification": {
+        "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
+        "email-sent": "我们刚刚向<strong> {{email}} <\/strong>发送了一封电子邮件",
+        "email-verification": "电子邮件验证",
+        "resend-email": "重发电子邮件",
+        "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
+        "verify-code": "验证码"
+    },
     "error": {
+        "bookmark-sync": "书签不同步。",
+        "email-login-fail": "使用电子邮件登录失败。请再试一次",
         "general": "出了些问题。请再试一次。",
-        "offline": "看起来你失去了连接。请检查并重试。"
+        "offline": "看起来你失去了连接。请检查并重试。",
+        "pref-persist-fail": "无法将您的设置同步到云端。"
     },
     "feedback": "反馈问题",
     "fonts": {
@@ -106,9 +118,15 @@
         "text_uthmani": "纳斯赫体"
     },
     "footer": {
-        "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
+        "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
         "rights": "版权所有",
         "title": "阅读、学习和学习《古兰经》。"
+    },
+    "form": {
+        "code": "验证码",
+        "email": "电子邮件",
+        "firstName": "名",
+        "lastName": "姓"
     },
     "from": "从",
     "fundraising": {
@@ -117,7 +135,7 @@
         "title": "成为每月捐助者"
     },
     "help": "帮助",
-    "hizb": "希兹",
+    "hizb": "希兹布",
     "home": "首页",
     "input": {
         "clear": "清除"
@@ -127,6 +145,8 @@
     "languages": "语言",
     "less": "较少的",
     "loading": "加载中",
+    "login": "登录",
+    "logout": "登出",
     "menu": "菜单",
     "mobile-apps": "手机App",
     "mode": "模式",
@@ -157,6 +177,7 @@
     "previous-ayah": "上一节文",
     "privacy": "隐私",
     "product-updates": "产品更新",
+    "profile": "轮廓",
     "q-reflect": "古兰经反射",
     "quran-com": "Quran.com",
     "quran-radio": "在线听古兰经",
@@ -219,6 +240,7 @@
         "descending": "倒序"
     },
     "style": "风格",
+    "submit": "提交",
     "surah": "章",
     "tafsir": {
         "font-size": "Tafsir 字体大小",
@@ -249,6 +271,12 @@
     "translations": "翻译",
     "transliteration": "音译",
     "type": "类型",
+    "undo": "撤消",
+    "validation": {
+        "invalid-email": "{{field}}必须是有效的电子邮件地址",
+        "invalid-field": "请输入有效的{{field}}值",
+        "required-field": "{{field}}是必需的"
+    },
     "verse": "节",
     "verse-bookmark-removed": "已删除节文书签！",
     "verse-bookmarked": "已添加节文书签！",
