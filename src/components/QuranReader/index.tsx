@@ -96,7 +96,6 @@ const QuranReader = ({
       <FontPreLoader isQuranReader locale={lang} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
-      {/* <RecentReadingSessions /> */}
       <div
         className={classNames(styles.container, {
           [styles.withVisibleSideBar]: isSideBarVisible,
