@@ -122,8 +122,10 @@ const Button: React.FC<ButtonProps> = ({
   if (isLoading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
   else prefixFinal = prefix;
 
-  if (href && !disabled)
-    return (
+  let content;
+
+  if (href && !disabled) {
+    content = (
       <Link
         href={href}
         isNewTab={newTab}
@@ -146,16 +148,8 @@ const Button: React.FC<ButtonProps> = ({
         </div>
       </Link>
     );
-
-  return (
-    <Wrapper
-      shouldWrap={!!tooltip}
-      wrapper={(tooltipChildren) => (
-        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
-          {tooltipChildren}
-        </Tooltip>
-      )}
-    >
+  } else {
+    content = (
       <button
         // eslint-disable-next-line react/button-has-type
         type={htmlType}
@@ -179,6 +173,19 @@ const Button: React.FC<ButtonProps> = ({
           </span>
         )}
       </button>
+    );
+  }
+
+  return (
+    <Wrapper
+      shouldWrap={!!tooltip}
+      wrapper={(tooltipChildren) => (
+        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
+          {tooltipChildren}
+        </Tooltip>
+      )}
+    >
+      {content}
     </Wrapper>
   );
 };
