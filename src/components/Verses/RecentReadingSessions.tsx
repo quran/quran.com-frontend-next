@@ -34,7 +34,7 @@ const RecentReadingSessions = () => {
     privateFetcher,
   );
 
-  const recentReadingSessionsVerseKey = useMemo(() => {
+  const recentReadVerseKeys = useMemo(() => {
     if (!isLoggedIn()) {
       return Object.keys(recentReadingSessions);
     }
@@ -46,15 +46,15 @@ const RecentReadingSessions = () => {
     return [];
   }, [data, recentReadingSessions]);
 
-  if (recentReadingSessionsVerseKey.length === 0) return null;
+  if (recentReadVerseKeys.length === 0) return null;
 
   return (
     <>
-      {recentReadingSessionsVerseKey.length > 0 && (
+      {recentReadVerseKeys.length > 0 && (
         <div className={styles.sessionsContainer}>
           <p className={styles.sessionsHeader}>{t('recently-read')}</p>
           <div className={styles.verseLinksContainer}>
-            {recentReadingSessionsVerseKey.map((verseKey) => {
+            {recentReadVerseKeys.map((verseKey) => {
               const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
               const surah = getChapterData(chaptersData, chapterId);
               return (
