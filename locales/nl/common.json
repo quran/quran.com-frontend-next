@@ -74,6 +74,7 @@
         "sub-header": "Meld u aan voor de Quran.com Discord om deel te nemen en samen te werken met de toonaangevende islamitische technologie voor gemeenschapsopbouw.",
         "title": "Gemeenschap"
     },
+    "complete-sign-up": "Voltooi je registratie",
     "continue": "Doorgaan met",
     "copied": "gekopieerd",
     "copied-to-clipboard": "Gekopieerd naar het klembord",
@@ -85,9 +86,20 @@
     "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
     "developers": "ontwikkelaars",
     "donate": "Doneren",
+    "email-verification": {
+        "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
+        "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
+        "email-verification": "Email verificatie",
+        "resend-email": "Email opnieuw verzenden",
+        "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
+        "verify-code": "Code verifiëren"
+    },
     "error": {
+        "bookmark-sync": "Bladwijzer loopt niet synchroon.",
+        "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
         "general": "Er is iets fout gegaan. Probeer het opnieuw.",
-        "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw."
+        "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw.",
+        "pref-persist-fail": "Kan je instellingen niet synchroniseren met de cloud."
     },
     "feedback": "Feedback",
     "fonts": {
@@ -110,6 +122,12 @@
         "rights": "Alle rechten voorbehouden",
         "title": "Lees, bestudeer en leer de Edele Koran."
     },
+    "form": {
+        "code": "Verificatie code",
+        "email": "E-mail",
+        "firstName": "Voornaam",
+        "lastName": "Achternaam"
+    },
     "from": "Van",
     "fundraising": {
         "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
@@ -127,6 +145,8 @@
     "languages": "Talen",
     "less": "Minder",
     "loading": "Bezig met laden",
+    "login": "Log in",
+    "logout": "Uitloggen",
     "menu": "Menu",
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
@@ -157,6 +177,7 @@
     "previous-ayah": "Vorige Aya",
     "privacy": "Privacy",
     "product-updates": "Productupdates",
+    "profile": "Profiel",
     "q-reflect": "KoranReflect",
     "quran-com": "koran.com",
     "quran-radio": "Koran Radio",
@@ -219,6 +240,7 @@
         "descending": "Aflopend"
     },
     "style": "Stijl",
+    "submit": "Indienen",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir-lettergrootte",
@@ -249,6 +271,12 @@
     "translations": "Vertalingen",
     "transliteration": "Transliteratie",
     "type": "Type",
+    "undo": "ongedaan maken",
+    "validation": {
+        "invalid-email": "{{field}} moet een geldig e-mailadres zijn",
+        "invalid-field": "Voer een geldige {{field}} waarde in",
+        "required-field": "{{field}} is vereist"
+    },
     "verse": "Vers",
     "verse-bookmark-removed": "Vers bladwijzer verwijderd!",
     "verse-bookmarked": "Vers bladwijzer!",

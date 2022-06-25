@@ -74,6 +74,7 @@
         "sub-header": "Sign up for the Quran.com Discord to participate and collaborate with the leading community building Islamic tech.",
         "title": "Community"
     },
+    "complete-sign-up": "Complete your registration",
     "continue": "Continue",
     "copied": "Copied",
     "copied-to-clipboard": "Copied to clipboard",
@@ -85,25 +86,20 @@
     "default-description": "The Quran translated into many languages in a simple and easy interface",
     "developers": "Developers",
     "donate": "Donate",
+    "email-verification": {
+        "check-spam": "Didn't receive the verification email? Check your spam inbox",
+        "email-sent": "We just sent an email to <strong>{{email}}<\/strong>",
+        "email-verification": "Email verification",
+        "resend-email": "Resend email",
+        "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
+        "verify-code": "Verify Code"
+    },
     "error": {
+        "bookmark-sync": "Bookmark is out of sync.",
+        "email-login-fail": "Failed to login with email. Please try again",
         "general": "Something went wrong. Please try again.",
         "offline": "Looks like you lost your connection. Please check it and try again.",
-        "bookmark-sync": "Bookmark is out of sync.",
-        "pref-persist-fail": "Failed to sync your settings to the cloud.",
-        "email-login-fail": "Failed to login with email. Please try again"
-    },
-    "validation": {
-        "required-field": "{{field}} is required",
-        "invalid-email": "{{field}} must be a valid email address",
-        "invalid-field": "Please input a valid {{field}} value"
-    },
-    "email-verification": {
-        "email-sent": "We just sent an email to <strong>{{email}}</strong>",
-        "check-spam": "Didn't receive the verification email? Check your spam inbox",
-        "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
-        "resend-email": "Resend email",
-        "email-verification": "Email verification",
-        "verify-code": "Verify Code"
+        "pref-persist-fail": "Failed to sync your settings to the cloud."
     },
     "feedback": "Feedback",
     "fonts": {
@@ -125,6 +121,12 @@
         "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.",
         "rights": "All Rights Reserved",
         "title": "Read, study, and learn The Noble Quran."
+    },
+    "form": {
+        "code": "Verification Code",
+        "email": "Email",
+        "firstName": "First Name",
+        "lastName": "Last Name"
     },
     "from": "From",
     "fundraising": {
@@ -238,6 +240,7 @@
         "descending": "Descending"
     },
     "style": "Style",
+    "submit": "Submit",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir font size",
@@ -268,6 +271,12 @@
     "translations": "Translations",
     "transliteration": "Transliteration",
     "type": "Type",
+    "undo": "Undo",
+    "validation": {
+        "invalid-email": "{{field}} must be a valid email address",
+        "invalid-field": "Please input a valid {{field}} value",
+        "required-field": "{{field}} is required"
+    },
     "verse": "Verse",
     "verse-bookmark-removed": "Verse bookmark removed!",
     "verse-bookmarked": "Verse bookmarked!",
@@ -293,14 +302,5 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes",
-    "complete-sign-up": "Complete your registration",
-    "form": {
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email",
-        "code": "Verification Code"
-    },
-    "submit": "Submit",
-    "undo": "Undo"
+    "yes": "Yes"
 }
