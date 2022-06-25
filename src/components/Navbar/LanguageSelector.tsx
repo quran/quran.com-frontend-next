@@ -79,8 +79,8 @@ const LanguageSelector = ({
             {
               text: t('undo'),
               primary: true,
-              onClick: () => {
-                setLanguage(newLocale);
+              onClick: async () => {
+                await setLanguage(newLocale);
                 setLocaleCookie(newLocale);
               },
             },
