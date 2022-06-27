@@ -61,15 +61,16 @@ const LoginContainer = () => {
         {loginType === LoginType.Social && (
           <>
             <SocialLogin />
-
-            <Button
-              onClick={() => setLoginType(LoginType.Email)}
-              className={styles.loginButton}
-              variant={ButtonVariant.Ghost}
-              type={ButtonType.Success}
-            >
-              {t('login:continue-email')}
-            </Button>
+            {process.env.NEXT_PUBLIC_ENABLE_MAGIC_LINK_LOGIN === 'true' && (
+              <Button
+                onClick={() => setLoginType(LoginType.Email)}
+                className={styles.loginButton}
+                variant={ButtonVariant.Ghost}
+                type={ButtonType.Success}
+              >
+                {t('login:continue-email')}
+              </Button>
+            )}
           </>
         )}
       </div>
