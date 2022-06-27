@@ -34,3 +34,17 @@
   font-size: var(--font-size-small);
   color: var(--color-text-faded);
 }
+
+.internalContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.spinner {
+  margin-inline-start: var(--spacing-xsmall);
+}
+
+.input {
+  width: 95%;
+}

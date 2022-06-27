@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.themeNameContainer {
+  display: flex;
+  align-items: center;
+  line-height: normal;
+}
+
+.spinner {
+  margin-inline-end: var(--spacing-xsmall);
+}

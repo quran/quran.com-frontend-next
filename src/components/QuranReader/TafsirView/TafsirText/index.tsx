@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import styles from './TafsirText.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
@@ -34,7 +35,10 @@ const FONT_SIZE_CLASS_MAP = {
 
 const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { tafsirFontScale } = quranReaderStyles;
 
   /**
@@ -78,13 +82,16 @@ const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }
   return (
     <>
       <div dir={direction} className={styles.counter}>
-        <Counter
-          count={tafsirFontScale}
-          onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-          onIncrement={
-            tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
-          }
-        />
+        <div className={styles.internalCounterContainer}>
+          <Counter
+            count={tafsirFontScale}
+            onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
+            onIncrement={
+              tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
+            }
+          />
+          {isLoading && <Spinner className={styles.spinner} />}
+        </div>
       </div>
       <div
         className={FONT_SIZE_CLASS_MAP[tafsirFontScale]}

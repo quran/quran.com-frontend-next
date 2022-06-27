@@ -71,7 +71,10 @@ const TafsirBody = ({
   const tafsirsState = useSelector(selectTafsirs);
   const { selectedTafsirs: userPreferredTafsirIds } = tafsirsState;
   const chaptersData = useContext(DataContext);
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -264,6 +267,7 @@ const TafsirBody = ({
       }}
       languageOptions={languageOptions}
       data={tafsirSelectionList}
+      isLoading={isLoading}
     />
   );
 

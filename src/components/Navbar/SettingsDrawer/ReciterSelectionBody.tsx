@@ -12,6 +12,7 @@ import styles from './ReciterSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   selectAudioPlayerState,
@@ -41,7 +42,10 @@ const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SettingsReciter = () => {
   const { lang, t } = useTranslation('common');
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const router = useRouter();
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const { reciter: selectedReciter } = audioPlayerState;
@@ -67,14 +71,18 @@ const SettingsReciter = () => {
   return (
     <div>
       <div className={styles.searchInputContainer}>
-        <Input
-          prefix={<IconSearch />}
-          id="translations-search"
-          value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder={t('settings.search-reciter')}
-          fixedWidth={false}
-        />
+        <div className={styles.internalContainer}>
+          <Input
+            prefix={<IconSearch />}
+            id="translations-search"
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder={t('settings.search-reciter')}
+            fixedWidth={false}
+            containerClassName={styles.input}
+          />
+          {isLoading && <Spinner className={styles.spinner} />}
+        </div>
       </div>
       <DataFetcher
         queryKey={makeAvailableRecitersUrl(lang)}

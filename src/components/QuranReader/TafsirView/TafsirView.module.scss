@@ -163,3 +163,8 @@ $container-max-width: calc(23 * var(--spacing-mega));
 }
 
 @include utility.generate-font-scales("tafsir");
+
+.selectionWithSpinnerContainer {
+  display: flex;
+  align-items: center;
+}

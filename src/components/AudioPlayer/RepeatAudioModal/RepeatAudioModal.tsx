@@ -54,7 +54,9 @@ const RepeatAudioModal = ({
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const chaptersData = useGetChaptersData(lang);
   const { repeatSettings } = audioPlayerState;
-  const { onSettingsChangeWithoutDispatch } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChangeWithoutDispatch },
+  } = usePersistPreferenceGroup();
   const chapterName = useMemo(() => {
     if (!chaptersData) {
       return null;
