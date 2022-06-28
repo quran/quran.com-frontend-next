@@ -14,7 +14,7 @@ import styles from './SearchSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   selectTranslations,
@@ -121,7 +121,7 @@ const TranslationSelectionBody = () => {
   return (
     <div>
       <div className={styles.searchInputContainer}>
-        <div className={styles.internalContainer}>
+        <SpinnerContainer isLoading={isLoading}>
           <Input
             prefix={<IconSearch />}
             id="translations-search"
@@ -131,8 +131,7 @@ const TranslationSelectionBody = () => {
             fixedWidth={false}
             containerClassName={styles.input}
           />
-          {isLoading && <Spinner className={styles.spinner} />}
-        </div>
+        </SpinnerContainer>
       </div>
       <DataFetcher
         queryKey={makeTranslationsUrl(lang)}

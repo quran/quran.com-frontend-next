@@ -28,16 +28,6 @@ $recitation-padding: calc(0.5 * var(--spacing-xxsmall));
   width: 100%;
 }
 
-.internalContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.spinner {
-  margin-inline-start: var(--spacing-xsmall);
-}
-
 .input {
   width: 95%;
 }

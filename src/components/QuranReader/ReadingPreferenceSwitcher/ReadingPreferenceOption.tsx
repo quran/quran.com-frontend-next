@@ -23,9 +23,7 @@ const LoadingSwitcher: React.FC<Props> = ({
       <span>
         <Spinner className={styles.spinner} />
       </span>
-      <span className={styles.themeNameContainer}>
-        {t(`reading-preference.${readingPreference}`)}
-      </span>
+      <span>{t(`reading-preference.${readingPreference}`)}</span>
     </div>
   ) : (
     t(`reading-preference.${selectedReadingPreference}`)

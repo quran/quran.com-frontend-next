@@ -1,0 +1,9 @@
+.internalContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.spinner {
+  margin-inline-start: var(--spacing-xsmall);
+}

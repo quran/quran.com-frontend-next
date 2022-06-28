@@ -12,7 +12,7 @@ import styles from './ReciterSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   selectAudioPlayerState,
@@ -71,7 +71,7 @@ const SettingsReciter = () => {
   return (
     <div>
       <div className={styles.searchInputContainer}>
-        <div className={styles.internalContainer}>
+        <SpinnerContainer isLoading={isLoading}>
           <Input
             prefix={<IconSearch />}
             id="translations-search"
@@ -81,8 +81,7 @@ const SettingsReciter = () => {
             fixedWidth={false}
             containerClassName={styles.input}
           />
-          {isLoading && <Spinner className={styles.spinner} />}
-        </div>
+        </SpinnerContainer>
       </div>
       <DataFetcher
         queryKey={makeAvailableRecitersUrl(lang)}

@@ -5,7 +5,7 @@ import styles from './TafsirView.module.scss';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
 import { getLocaleNameByFullName } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
@@ -33,7 +33,7 @@ const LanguageAndTafsirSelection = ({
     );
   }
   return (
-    <div className={styles.selectionWithSpinnerContainer}>
+    <SpinnerContainer isLoading={isLoading}>
       <div className={styles.tafsirSelectionContainer}>
         <Select
           className={styles.languageSelection}
@@ -72,8 +72,7 @@ const LanguageAndTafsirSelection = ({
             );
           })}
       </div>
-      {isLoading && <Spinner />}
-    </div>
+    </SpinnerContainer>
   );
 };
 
