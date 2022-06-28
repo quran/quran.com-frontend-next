@@ -18,23 +18,29 @@ const SocialLogin = () => {
   const { t } = useTranslation('login');
   return (
     <>
-      <Button
-        prefix={<GoogleIcon />}
-        className={classNames(styles.loginButton, styles.googleButton)}
-        href={makeGoogleLoginUrl()}
-      >
-        {t('continue-google')}
-      </Button>
-      <Button
-        prefix={<FacebookIcon />}
-        className={classNames(styles.loginButton, styles.facebookButton)}
-        href={makeFacebookLoginUrl()}
-      >
-        {t('continue-facebook')}
-      </Button>
-      <Button href={makeAppleLoginUrl()} prefix={<AppleIcon />} className={styles.loginButton}>
-        {t('continue-apple')}
-      </Button>
+      {process.env.NEXT_PUBLIC_ENABLE_GOOGLE_LOGIN === 'true' && (
+        <Button
+          prefix={<GoogleIcon />}
+          className={classNames(styles.loginButton, styles.googleButton)}
+          href={makeGoogleLoginUrl()}
+        >
+          {t('continue-google')}
+        </Button>
+      )}
+      {process.env.NEXT_PUBLIC_ENABLE_FB_LOGIN === 'true' && (
+        <Button
+          prefix={<FacebookIcon />}
+          className={classNames(styles.loginButton, styles.facebookButton)}
+          href={makeFacebookLoginUrl()}
+        >
+          {t('continue-facebook')}
+        </Button>
+      )}
+      {process.env.NEXT_PUBLIC_ENABLE_APPLE_LOGIN === 'true' && (
+        <Button href={makeAppleLoginUrl()} prefix={<AppleIcon />} className={styles.loginButton}>
+          {t('continue-apple')}
+        </Button>
+      )}
     </>
   );
 };
