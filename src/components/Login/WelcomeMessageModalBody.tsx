@@ -19,50 +19,85 @@ const WelcomeMessageModalBody = () => {
     const userProfileData = cache.get(makeUserProfileUrl());
     const newUserProfileData: UserProfile = {
       ...userProfileData,
-      isOnboarded: true,
+      announcement: [], // clean up the announcement for this session
     };
     mutate(makeUserProfileUrl(), newUserProfileData);
   };
 
-  // Welcome to Quran.com beta
-
-  const content = (
+  // TODO: localize texts
+  const slide1 = (
     <div>
       <div className={styles.illustrationContainer}>
         <MoonIllustrationSVG />
       </div>
-      <h2 className={styles.title}>Welcome to Quran.com Beta</h2>
+      <h2 className={styles.title}>
+        Welcome to Quran.com <br />
+        User Account Beta
+      </h2>
+      <div className={styles.actionContainer}>
+        <Button href="#announcement-slide-2">{`See what's new`}</Button>
+      </div>
+    </div>
+  );
+
+  const slide2 = (
+    <div className={styles.slideContainer}>
+      <h2 className={styles.title}>
+        Your data will be synced <br />
+        across devices
+      </h2>
       <div className={styles.description}>
         <p>
-          Thank you for helping us improve Quran.com. We are looking forward to your feedback and
-          bug report at{' '}
+          Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read
+          verses, and your preferences will be available
+        </p>
+      </div>
+      <div className={styles.actionContainer}>
+        <Button href="#announcement-slide-3">Next</Button>
+      </div>
+    </div>
+  );
+
+  const slide3 = (
+    <div className={styles.slideContainer}>
+      <h2 className={styles.title}>We wanna hear your thoughts</h2>
+      <div className={styles.description}>
+        <p>
+          Thank you for using Quran.com and we would be glad to hear your feedback on{' '}
           <Link href="https://feedback.quran.com" variant={LinkVariant.Blend}>
             feedback.quran.com
           </Link>
         </p>
         <p className={styles.warning}>
-          Please note that this is a beta version. Your data might be deleted when the feature is
-          released to Production
+          <small>
+            NOTE: This is a beta feature <br /> We might have to reset your account data before
+            going Live.
+          </small>
         </p>
       </div>
       <div className={styles.actionContainer}>
-        <Button onClick={handleFinishOnboarding}>Okay, got it</Button>
+        <Button href="#announcement-slide-3" onClick={handleFinishOnboarding}>
+          Okay, got it
+        </Button>
       </div>
     </div>
   );
 
-  // TODO: localize texts
   return (
     <div className={styles.container}>
       <Carousel
         items={[
           {
-            id: 'welcome',
-            component: content,
+            id: 'announcement-slide-1',
+            component: slide1,
           },
           {
-            id: 'bug',
-            component: content,
+            id: 'announcement-slide-2',
+            component: slide2,
+          },
+          {
+            id: 'announcement-slide-3',
+            component: slide3,
           },
         ]}
       />

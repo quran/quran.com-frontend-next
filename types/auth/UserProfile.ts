@@ -1,12 +1,14 @@
 import FormField from '../FormField';
 
+import Announcement from './Announcement';
+
 interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
   photoUrl?: string;
   requiredFields: FormField[];
-  isOnboarded?: boolean;
+  announcement: Announcement[];
 }
 
 export default UserProfile;

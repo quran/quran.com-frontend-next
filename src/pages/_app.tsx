@@ -79,7 +79,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
             <ToastContainerProvider>
               <CompleteSignupModal
                 requiredFields={userData?.requiredFields}
-                isOnboarded={userData?.isOnboarded}
+                announcements={userData?.announcement}
               />
               <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
               <GlobalListeners />

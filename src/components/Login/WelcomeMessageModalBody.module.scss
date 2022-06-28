@@ -3,9 +3,10 @@
 }
 
 .title {
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-xlarge);
   font-weight: var(--font-weight-bold);
   text-align: center;
+  margin-block-end: var(--spacing-large);
 }
 
 .description {
@@ -13,13 +14,12 @@
   font-weight: var(--font-weight-regular);
   text-align: center;
   margin-block: var(--spacing-small);
-  & p {
-    margin-block-end: var(--spacing-small);
-  }
 }
 
 .warning {
-  color: var(--color-text-error);
+  font-size: calc(0.85 * var(--font-size-normal));
+  color: var(--color-text-faded);
+  margin-block-start: var(--spacing-large);
 }
 
 .actionContainer {
@@ -33,4 +33,11 @@
   max-width: calc(5 * var(--spacing-mega));
   margin-inline: auto;
   margin-block-end: var(--spacing-xxsmall);
+}
+
+.slideContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
