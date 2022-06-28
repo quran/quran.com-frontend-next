@@ -6,6 +6,7 @@ interface UserProfile {
   email: string;
   photoUrl?: string;
   requiredFields: FormField[];
+  isOnboarded?: boolean;
 }
 
 export default UserProfile;

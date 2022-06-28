@@ -11,6 +11,7 @@ import {
   makeVerificationCodeUrl,
   makeUserBulkPreferencesUrl,
   makeLogoutUrl,
+  makeCompleteOnboardingUrl,
 } from 'src/utils/auth/apiPaths';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
@@ -110,6 +111,10 @@ export const getUserProfile = async (): Promise<UserProfile> =>
 
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
+
+export const completeOnboarding = async (): Promise<any> => {
+  postRequest(makeCompleteOnboardingUrl(), {});
+};
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
 
