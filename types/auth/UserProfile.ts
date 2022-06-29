@@ -8,7 +8,7 @@ interface UserProfile {
   email: string;
   photoUrl?: string;
   requiredFields: FormField[];
-  announcement: Announcement[];
+  announcement: Announcement;
 }
 
 export default UserProfile;

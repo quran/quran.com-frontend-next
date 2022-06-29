@@ -18,6 +18,7 @@ import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
+import CompleteAnnouncementRequest from 'types/CompleteAnnouncementRequest';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
@@ -112,8 +113,8 @@ export const getUserProfile = async (): Promise<UserProfile> =>
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
 
-export const completeOnboarding = async (): Promise<any> => {
-  postRequest(makeCompleteOnboardingUrl(), {});
+export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
+  postRequest(makeCompleteOnboardingUrl(), data);
 };
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());

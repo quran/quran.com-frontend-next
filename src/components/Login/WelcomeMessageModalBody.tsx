@@ -1,5 +1,4 @@
 /* eslint-disable i18next/no-literal-string */
-import { useSWRConfig } from 'swr';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button from '../dls/Button/Button';
@@ -8,22 +7,10 @@ import Link, { LinkVariant } from '../dls/Link/Link';
 
 import styles from './WelcomeMessageModalBody.module.scss';
 
-import { completeOnboarding } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import UserProfile from 'types/auth/UserProfile';
-
-const WelcomeMessageModalBody = () => {
-  const { mutate, cache } = useSWRConfig();
-  const handleFinishOnboarding = async () => {
-    await completeOnboarding();
-    const userProfileData = cache.get(makeUserProfileUrl());
-    const newUserProfileData: UserProfile = {
-      ...userProfileData,
-      announcement: [], // clean up the announcement for this session
-    };
-    mutate(makeUserProfileUrl(), newUserProfileData);
-  };
-
+type WelcomeMessageModalBodyProps = {
+  onCompleted: () => void;
+};
+const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) => {
   // TODO: localize texts
   const slide1 = (
     <div>
@@ -76,7 +63,7 @@ const WelcomeMessageModalBody = () => {
         </p>
       </div>
       <div className={styles.actionContainer}>
-        <Button href="#announcement-slide-3" onClick={handleFinishOnboarding}>
+        <Button href="#announcement-slide-3" onClick={onCompleted}>
           Okay, got it
         </Button>
       </div>
