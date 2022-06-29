@@ -13,17 +13,13 @@ type AnnouncementModalBodyResolverProps = {
 };
 
 const AnnouncementModalBodyResolver = ({ announcement }: AnnouncementModalBodyResolverProps) => {
-  const { mutate, cache } = useSWRConfig();
+  const { mutate } = useSWRConfig();
 
   const onCompleted = async (announcementType: AnnouncementType) => {
-    const hasil = await completeAnnouncement({ announcementType });
-    alert(hasil);
-    const userProfileData = cache.get(makeUserProfileUrl());
-    const newUserProfileData: UserProfile = {
-      ...userProfileData,
-      announcement: null, // clean up the announcement for this session
-    };
-    mutate(makeUserProfileUrl(), newUserProfileData);
+    await completeAnnouncement({ announcementType });
+    mutate(makeUserProfileUrl(), (currentProfileData: UserProfile) => {
+      return { ...currentProfileData, announcement: null };
+    });
   };
 
   if (announcement.type === AnnouncementType.AuthOnboarding) {
