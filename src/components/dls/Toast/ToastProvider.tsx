@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 
+import { toast } from './Toast';
 import ToastContext from './ToastContext';
 
-const ToastContainer = dynamic(() => import('./Toast').then((toast) => toast.ToastContainer), {
+const ToastContainer = dynamic(() => import('./Toast').then((toaster) => toaster.ToastContainer), {
   ssr: false,
 });
 
@@ -13,6 +14,12 @@ type ToastContainerProviderProps = {
 };
 const ToastContainerProvider = ({ children }: ToastContainerProviderProps) => {
   const [shouldRenderToast, setShouldRenderToast] = useState(false);
+  useEffect(() => {
+    window.toast = (...args) => {
+      setShouldRenderToast(true);
+      toast(...args);
+    };
+  }, []);
   return (
     <ToastContext.Provider value={setShouldRenderToast}>
       {children}

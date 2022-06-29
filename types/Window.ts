@@ -1,3 +1,5 @@
+import { Options } from 'src/components/dls/Toast/Toast';
+
 export {};
 
 // extends the global window object
@@ -8,5 +10,6 @@ declare global {
     wordByWordAudioPlayerEl: HTMLAudioElement;
     webkitAudioContext: typeof AudioContext;
     gtag: any;
+    toast: (content: React.ReactNode, options: Options) => void;
   }
 }

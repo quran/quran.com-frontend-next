@@ -24,13 +24,13 @@ type Action = {
   onClick?: () => void;
   primary?: boolean;
 };
-type Options = {
+export type Options = {
   preserve?: boolean;
   actions?: Action[];
   status?: ToastStatus;
 };
 const TOAST_DURATION = 3000; // 3 second
-const toast = (content: React.ReactNode, options: Options = {}) => {
+export const toast = (content: React.ReactNode, options: Options = {}) => {
   const toastId = primitiveToast(
     <div className={styles.contentContainer}>
       {content}

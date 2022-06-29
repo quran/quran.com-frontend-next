@@ -1,4 +1,5 @@
 import { fetcher, getAvailableReciters } from 'src/api';
+import { ToastStatus } from 'src/components/dls/Toast/Toast';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -44,13 +45,15 @@ const handle401Error = async (context: ErrorContext, next) => {
    * But, if user is already on the login page, and showing the error. Do nothing
    */
   if (typeof window !== 'undefined' && body.message) {
+    // TODO: localize error message
     const urlToRedirect = `/login?error=${body.message}`;
     if (window.location.href.endsWith(urlToRedirect)) {
       next();
       return;
     }
 
-    window.location.href = urlToRedirect;
+    window.toast(body?.message, { status: ToastStatus.Error });
+    // window.location.href = urlToRedirect;
   }
 };
 
