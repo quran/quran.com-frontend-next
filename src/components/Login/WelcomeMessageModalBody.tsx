@@ -1,4 +1,4 @@
-/* eslint-disable i18next/no-literal-string */
+import useTranslation from 'next-translate/useTranslation';
 
 import Button from '../dls/Button/Button';
 import Carousel from '../dls/Carousel/Carousel';
@@ -12,6 +12,7 @@ type WelcomeMessageModalBodyProps = {
   onCompleted: () => void;
 };
 const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
       <Carousel
@@ -19,12 +20,26 @@ const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) 
           {
             id: 'announcement-slide-1',
             component: (
-              <Slide1 action={<Button href="#announcement-slide-2">{`See what's new`}</Button>} />
+              <Slide1
+                action={
+                  <Button href="#announcement-slide-2">
+                    {t('announcements.auth-onboarding.slide-1.action')}
+                  </Button>
+                }
+              />
             ),
           },
           {
             id: 'announcement-slide-2',
-            component: <Slide2 action={<Button href="#announcement-slide-3">Next</Button>} />,
+            component: (
+              <Slide2
+                action={
+                  <Button href="#announcement-slide-3">
+                    {t('announcements.auth-onboarding.slide-2.action')}
+                  </Button>
+                }
+              />
+            ),
           },
           {
             id: 'announcement-slide-3',
@@ -32,7 +47,7 @@ const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) 
               <Slide3
                 action={
                   <Button href="#announcement-slide-3" onClick={onCompleted}>
-                    Okay, got it
+                    {t('announcements.auth-onboarding.slide-3.action')}
                   </Button>
                 }
               />
