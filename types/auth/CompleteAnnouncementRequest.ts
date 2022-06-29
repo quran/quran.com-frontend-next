@@ -1,4 +1,4 @@
-import { AnnouncementType } from './auth/Announcement';
+import { AnnouncementType } from './Announcement';
 
 interface CompleteAnnouncementRequest {
   announcementType: AnnouncementType;

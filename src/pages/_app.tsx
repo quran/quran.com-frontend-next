@@ -14,7 +14,7 @@ import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import DonatePopup from 'src/components/DonatePopup/DonatePopup';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
-import CompleteSignupModal from 'src/components/Login/CompleteSignupModal';
+import UserAccountModal from 'src/components/Login/UserAccountModal';
 import Navbar from 'src/components/Navbar/Navbar';
 import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
@@ -77,7 +77,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <ThemeProvider>
           <IdProvider>
             <ToastContainerProvider>
-              <CompleteSignupModal
+              <UserAccountModal
                 requiredFields={userData?.requiredFields}
                 announcement={userData?.announcement}
               />

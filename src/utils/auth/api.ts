@@ -11,14 +11,14 @@ import {
   makeVerificationCodeUrl,
   makeUserBulkPreferencesUrl,
   makeLogoutUrl,
-  makeCompleteOnboardingUrl,
+  makeCompleteAnnouncementUrl,
 } from 'src/utils/auth/apiPaths';
+import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
-import CompleteAnnouncementRequest from 'types/CompleteAnnouncementRequest';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
@@ -114,7 +114,7 @@ export const completeSignup = async (data: CompleteSignupRequest): Promise<UserP
   postRequest(makeCompleteSignupUrl(), data);
 
 export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
-  postRequest(makeCompleteOnboardingUrl(), data);
+  postRequest(makeCompleteAnnouncementUrl(), data);
 };
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());

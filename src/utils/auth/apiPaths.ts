@@ -14,7 +14,7 @@ export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
-export const makeCompleteOnboardingUrl = (): string => makeUrl('users/completeAnnouncement');
+export const makeCompleteAnnouncementUrl = (): string => makeUrl('users/completeAnnouncement');
 
 export const makeDeleteAccountUrl = (): string => makeUrl('users/deleteAccount');
 
