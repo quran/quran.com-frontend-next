@@ -10,13 +10,6 @@
 .container::-webkit-scrollbar {
   display: none;
 }
-.container::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 10px;
-}
-.container::-webkit-scrollbar-track {
-  background: transparent;
-}
 .container > .slide {
   scroll-snap-align: start;
   flex-shrink: 0;
