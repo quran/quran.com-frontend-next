@@ -27,7 +27,10 @@ export const themeIcons = {
 };
 
 const ThemeSection = () => {
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { t } = useTranslation('common');
   const theme = useSelector(selectTheme, shallowEqual);
   const themes = Object.values(ThemeType).map((themeValue) => ({
@@ -54,7 +57,7 @@ const ThemeSection = () => {
 
   return (
     <Section>
-      <Section.Title>{t('theme')}</Section.Title>
+      <Section.Title isLoading={isLoading}>{t('theme')}</Section.Title>
       <Section.Row>
         <Switch
           items={themes}

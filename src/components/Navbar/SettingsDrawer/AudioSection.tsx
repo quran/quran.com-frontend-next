@@ -44,7 +44,10 @@ const AudioSection = () => {
     enableAutoScrolling,
     reciter: selectedReciter,
   } = audioPlayerState;
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const onAudioSettingsChange = (
     key: string,
@@ -116,7 +119,7 @@ const AudioSection = () => {
   return (
     <div className={styles.container}>
       <Section>
-        <Section.Title>{t('audio.title')}</Section.Title>
+        <Section.Title isLoading={isLoading}>{t('audio.title')}</Section.Title>
         <Section.Row>
           <SelectionCard
             label={t('settings.selected-reciter')}

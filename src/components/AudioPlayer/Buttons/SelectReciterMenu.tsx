@@ -10,6 +10,7 @@ import styles from './SelectReciterMenu.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
@@ -31,7 +32,10 @@ const SelectReciterMenu = ({ onBack }) => {
     QueryParam.Reciter,
   );
   const audioPlayerState = useSelector(selectAudioPlayerState);
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const onReciterSelected = useCallback(
     (reciter: Reciter) => {
@@ -47,6 +51,19 @@ const SelectReciterMenu = ({ onBack }) => {
     [audioPlayerState, lang, onBack, onSettingsChange],
   );
 
+  const getItemIcon = useCallback(
+    (reciterId: number, newlySelectedReciterId: number) => {
+      if (newlySelectedReciterId === reciterId) {
+        if (isLoading) {
+          return <Spinner />;
+        }
+        return <CheckIcon />;
+      }
+      return <span />;
+    },
+    [isLoading],
+  );
+
   const renderReciter = useCallback(
     (data: RecitersResponse) => {
       return (
@@ -54,7 +71,7 @@ const SelectReciterMenu = ({ onBack }) => {
           {data.reciters.map((reciter) => (
             <PopoverMenu.Item
               key={reciter.id}
-              icon={selectedReciterId === reciter.id ? <CheckIcon /> : <span />}
+              icon={getItemIcon(reciter.id, selectedReciterId)}
               onClick={() => {
                 logButtonClick('audio_player_overflow_menu_reciter_item');
                 logValueChange('reciter', selectedReciterId, reciter.id);
@@ -71,7 +88,7 @@ const SelectReciterMenu = ({ onBack }) => {
         </div>
       );
     },
-    [selectedReciterId, onReciterSelected],
+    [getItemIcon, selectedReciterId, onReciterSelected],
   );
 
   const reciters = <DataFetcher queryKey={makeAvailableRecitersUrl(lang)} render={renderReciter} />;

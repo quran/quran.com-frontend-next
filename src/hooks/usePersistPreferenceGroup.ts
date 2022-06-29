@@ -1,5 +1,5 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Action, AsyncThunkAction } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
@@ -30,6 +30,8 @@ type Actions = {
   ) => void;
 };
 
+type PersistPreferences = { actions: Actions; isLoading: boolean };
+
 /**
  * A hook that will be used to:
  * 1. If the user is logged in, we persist settings
@@ -38,12 +40,13 @@ type Actions = {
  * it locally in the localStorage depending on the slice)
  * 2. If not, just dispatch the action.
  *
- * @returns {Record<string, any>}
+ * @returns {PersistPreferences}
  */
-const usePersistPreferenceGroup = (): Actions => {
+const usePersistPreferenceGroup = (): PersistPreferences => {
   const dispatch = useDispatch();
   const toast = useToast();
   const { t } = useTranslation('common');
+  const [isLoading, setIsLoading] = useState(false);
 
   const actions = useMemo(
     () => ({
@@ -54,9 +57,14 @@ const usePersistPreferenceGroup = (): Actions => {
         callback: () => void,
       ) => {
         if (isLoggedIn()) {
-          addOrUpdateUserPreference(key, value, preferenceGroup).then(() => {
-            callback();
-          });
+          setIsLoading(true);
+          addOrUpdateUserPreference(key, value, preferenceGroup)
+            .then(() => {
+              callback();
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
         } else {
           callback();
         }
@@ -72,6 +80,7 @@ const usePersistPreferenceGroup = (): Actions => {
         if (isLoggedIn()) {
           // 1. dispatch the action first
           dispatch(action);
+          setIsLoading(true);
           addOrUpdateUserPreference(key, value, preferenceGroup)
             .then(() => {
               if (successCallback) {
@@ -100,6 +109,9 @@ const usePersistPreferenceGroup = (): Actions => {
                   },
                 ],
               });
+            })
+            .finally(() => {
+              setIsLoading(false);
             });
         } else {
           dispatch(action);
@@ -109,7 +121,7 @@ const usePersistPreferenceGroup = (): Actions => {
     [dispatch, t, toast],
   );
 
-  return actions;
+  return { actions, isLoading };
 };
 
 export default usePersistPreferenceGroup;

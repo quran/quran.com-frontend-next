@@ -27,7 +27,10 @@ import { WordByWordType } from 'types/QuranReader';
 const WordTooltipSection = () => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
   const { selectedWordByWordLocale: wordByWordLocale, showTooltipFor } = readingPreferences;
 
@@ -75,7 +78,7 @@ const WordTooltipSection = () => {
 
   return (
     <Section>
-      <Section.Title>
+      <Section.Title isLoading={isLoading}>
         {t('word-tooltip')}
         <HelperTooltip>{t('settings.word-tooltip-helper')}</HelperTooltip>
       </Section.Title>

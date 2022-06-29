@@ -25,4 +25,9 @@ $recitation-padding: calc(0.5 * var(--spacing-xxsmall));
 
 .searchInputContainer {
   margin-block-end: var(--spacing-small);
+  width: 100%;
+}
+
+.input {
+  width: 95%;
 }

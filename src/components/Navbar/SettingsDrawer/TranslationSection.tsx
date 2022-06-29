@@ -29,7 +29,10 @@ import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const TranslationSection = () => {
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -131,7 +134,7 @@ const TranslationSection = () => {
   return (
     <div className={styles.container}>
       <Section>
-        <Section.Title>{t('translation')}</Section.Title>
+        <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
         <Section.Row>
           <DataFetcher
             loading={translationLoading}
