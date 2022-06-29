@@ -7,6 +7,7 @@ import CheckIcon from '../../../../public/icons/check.svg';
 import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import { selectAudioPlayerState, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
@@ -18,7 +19,10 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const { playbackRate: currentPlaybackRate } = audioPlayerState;
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const getPlaybackRateLabel = useCallback(
     (playbackRate) => {
@@ -40,10 +44,20 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
     );
   };
 
+  const getItemIcon = (playbackRate: number) => {
+    if (currentPlaybackRate === playbackRate) {
+      if (isLoading) {
+        return <Spinner />;
+      }
+      return <CheckIcon />;
+    }
+    return <span />;
+  };
+
   const rates = playbackRates.map((playbackRate) => (
     <PopoverMenu.Item
       key={playbackRate}
-      icon={playbackRate === currentPlaybackRate ? <CheckIcon /> : <span />}
+      icon={getItemIcon(playbackRate)}
       onClick={() => {
         logButtonClick('audio_player_menu_playback_item');
         logValueChange('audio_playback_rate', currentPlaybackRate, playbackRate);

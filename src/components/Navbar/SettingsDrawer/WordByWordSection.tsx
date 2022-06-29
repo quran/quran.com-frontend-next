@@ -29,7 +29,10 @@ export const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
 
 const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
   const {
@@ -91,7 +94,7 @@ const WordByWordSection = () => {
 
   return (
     <Section>
-      <Section.Title>
+      <Section.Title isLoading={isLoading}>
         {t('wbw')}
         <HelperTooltip>{t('settings.wbw-helper')}</HelperTooltip>
       </Section.Title>

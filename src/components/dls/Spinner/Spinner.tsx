@@ -10,11 +10,12 @@ export enum SpinnerSize {
 type SpinnerProps = {
   size?: SpinnerSize;
   isCentered?: boolean;
+  className?: string;
 };
 
-const Spinner = ({ size = SpinnerSize.Medium, isCentered = true }: SpinnerProps) => (
+const Spinner = ({ size = SpinnerSize.Medium, isCentered = true, className }: SpinnerProps) => (
   <div
-    className={classNames(styles.spinner, {
+    className={classNames(styles.spinner, className, {
       [styles.large]: size === SpinnerSize.Large,
       [styles.normal]: size === SpinnerSize.Medium,
       [styles.small]: size === SpinnerSize.Small,

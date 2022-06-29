@@ -31,7 +31,10 @@ import { MushafLines, QuranFont } from 'types/QuranReader';
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { onSettingsChange } = usePersistPreferenceGroup();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
   const fonts = useMemo(() => {
@@ -179,7 +182,7 @@ const QuranFontSection = () => {
 
   return (
     <Section>
-      <Section.Title>{t('fonts.quran-font')}</Section.Title>
+      <Section.Title isLoading={isLoading}>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
