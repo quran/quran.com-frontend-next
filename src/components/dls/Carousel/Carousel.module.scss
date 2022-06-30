@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+.container > .slide {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dotsContainer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-mega);
+}
+
+.dot {
+  width: var(--spacing-xxsmall);
+  height: var(--spacing-xxsmall);
+  border-radius: var(--border-radius-circle);
+  background-color: var(--color-text-default);
+  & + & {
+    margin-inline-start: var(--spacing-xxsmall);
+  }
+}

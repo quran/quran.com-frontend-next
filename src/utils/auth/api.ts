@@ -11,7 +11,9 @@ import {
   makeVerificationCodeUrl,
   makeUserBulkPreferencesUrl,
   makeLogoutUrl,
+  makeCompleteAnnouncementUrl,
 } from 'src/utils/auth/apiPaths';
+import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
@@ -110,6 +112,10 @@ export const getUserProfile = async (): Promise<UserProfile> =>
 
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
+
+export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
+  postRequest(makeCompleteAnnouncementUrl(), data);
+};
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
 

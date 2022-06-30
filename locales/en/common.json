@@ -50,6 +50,25 @@
         "select-reciter": "Select Reciter",
         "title": "Audio"
     },
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "title": "Welcome to Quran.com <br></br> User Account Beta",
+                "action": "See what's new"
+            },
+            "slide-2": {
+                "title": "Your data will be synced <br></br> across devices",
+                "description": "Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
+                "action": "Next"
+            },
+            "slide-3": {
+                "title": "We wanna hear your thoughts",
+                "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com</link>",
+                "note": "NOTE: This is a beta feature <br></br> We might reset your account data before going Live.",
+                "action": "Okay, got it"
+            }
+        }
+    },
     "ayah": "Ayah",
     "ayahs": "Ayahs",
     "beta": "Beta",
