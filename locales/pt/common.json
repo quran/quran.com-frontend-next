@@ -1,6 +1,25 @@
 {
     "about": "Sobre nós",
     "and": "e",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Veja o que é novo",
+                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário beta"
+            },
+            "slide-2": {
+                "action": "Próximo",
+                "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
+                "title": "Seus dados serão sincronizados <br> <\/br> entre dispositivos"
+            },
+            "slide-3": {
+                "action": "Ok, entendi",
+                "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
+                "note": "NOTA: Este é um recurso beta <br> <\/br> Podemos redefinir os dados da sua conta antes de entrar no Live.",
+                "title": "Queremos ouvir seus pensamentos"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Mudar configurações",
         "drawer-close": "Fechar gaveta",

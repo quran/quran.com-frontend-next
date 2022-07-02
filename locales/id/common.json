@@ -1,6 +1,25 @@
 {
     "about": "Tentang kami",
     "and": "dan",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Lihat apa yang baru",
+                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna Beta"
+            },
+            "slide-2": {
+                "action": "Lanjut",
+                "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
+                "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
+            },
+            "slide-3": {
+                "action": "OK saya mengerti",
+                "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
+                "note": "CATATAN: Ini adalah fitur beta <br> <\/br> Kami mungkin menyetel ulang data akun Anda sebelum Live.",
+                "title": "Kami ingin mendengar pendapat Anda"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Ubah pengaturan",
         "drawer-close": "Tutup Laci",

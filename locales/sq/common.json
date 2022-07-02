@@ -1,6 +1,25 @@
 {
     "about": "Rreth Nesh",
     "and": "dhe",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Shihni çfarë ka të re",
+                "title": "Mirë se vini në Quran.com <br> <\/br> Llogaria e përdoruesit Beta"
+            },
+            "slide-2": {
+                "action": "Tjetra",
+                "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
+                "title": "Të dhënat tuaja do të sinkronizohen <br> <\/br> nëpër pajisje"
+            },
+            "slide-3": {
+                "action": "Mirë, e kuptova",
+                "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
+                "note": "SHËNIM: Ky është një veçori beta <br> <\/br> Mund t'i rivendosim të dhënat e llogarisë suaj përpara se të transmetoni drejtpërdrejt.",
+                "title": "Ne duam të dëgjojmë mendimet tuaja"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Ndrysho Cilësimet",
         "drawer-close": "Mbylle sirtarin",

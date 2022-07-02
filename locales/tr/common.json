@@ -1,6 +1,25 @@
 {
     "about": "Hakkımızda",
     "and": "ve",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Yeniliklere bakın",
+                "title": "Kuran.com'a hoş geldiniz <br> <\/br> Kullanıcı Hesabı Beta"
+            },
+            "slide-2": {
+                "action": "Sonraki",
+                "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
+                "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
+            },
+            "slide-3": {
+                "action": "Tamam anladım",
+                "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
+                "note": "NOT: Bu bir beta özelliktir <br> <\/br> Canlı yayına geçmeden önce hesap verilerinizi sıfırlayabiliriz.",
+                "title": "Düşüncelerinizi duymak istiyoruz"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Ayarları değiştir",
         "drawer-close": "Çekmeceyi Kapat",

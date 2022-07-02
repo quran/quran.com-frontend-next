@@ -1,6 +1,25 @@
 {
     "about": "关于我们",
     "and": "和",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "看看有什么新鲜事",
+                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户测试版"
+            },
+            "slide-2": {
+                "action": "下一个",
+                "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
+                "title": "您的数据将在设备间同步<br> <\/br>"
+            },
+            "slide-3": {
+                "action": "好，知道了",
+                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> > 的反馈",
+                "note": "注意：这是一项测试版功能<br> <\/br>我们可能会在上线之前重置您的帐户数据。",
+                "title": "我们想听听你的想法"
+            }
+        }
+    },
     "aria": {
         "change-settings": "更改设置",
         "drawer-close": "关闭抽屉",

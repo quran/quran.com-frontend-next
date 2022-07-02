@@ -1,6 +1,25 @@
 {
     "about": "Over ons",
     "and": "en",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Zie wat nieuw is",
+                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount Beta"
+            },
+            "slide-2": {
+                "action": "Volgende",
+                "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
+                "title": "Uw gegevens worden <br> <\/br> op verschillende apparaten gesynchroniseerd"
+            },
+            "slide-3": {
+                "action": "Oké, snap het",
+                "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
+                "note": "OPMERKING: dit is een bètafunctie <br> <\/br> We kunnen uw accountgegevens resetten voordat we Live gaan.",
+                "title": "We willen je gedachten horen"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Instellingen veranderen",
         "drawer-close": "Sluit lade",
