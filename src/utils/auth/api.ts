@@ -114,7 +114,7 @@ export const completeSignup = async (data: CompleteSignupRequest): Promise<UserP
   postRequest(makeCompleteSignupUrl(), data);
 
 export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
-  postRequest(makeCompleteAnnouncementUrl(), data);
+  return postRequest(makeCompleteAnnouncementUrl(), data);
 };
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
