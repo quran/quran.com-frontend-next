@@ -16,10 +16,16 @@ const AnnouncementModalBodyResolver = ({ announcement }: AnnouncementModalBodyRe
   const { mutate } = useSWRConfig();
 
   const onCompleted = async (announcementType: AnnouncementType) => {
+    mutate(
+      makeUserProfileUrl(),
+      (currentProfileData: UserProfile) => {
+        return { ...currentProfileData, announcement: null };
+      },
+      {
+        revalidate: false,
+      },
+    );
     await completeAnnouncement({ announcementType });
-    mutate(makeUserProfileUrl(), (currentProfileData: UserProfile) => {
-      return { ...currentProfileData, announcement: null };
-    });
   };
 
   if (announcement.type === AnnouncementType.AuthOnboarding) {
