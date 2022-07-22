@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
@@ -12,10 +13,28 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { logoutUser } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
 
+const COOKIES_KEY = 'show-login-button';
+
+const shouldShowButton = () => {
+  if (Cookies.get(COOKIES_KEY)) {
+    return true;
+  }
+  const randomNumber = Math.floor(Math.random() * (100 - 1) + 1);
+  if (randomNumber <= Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD)) {
+    Cookies.set(COOKIES_KEY, 'true');
+    return true;
+  }
+  return false;
+};
+
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
+
+  if (!shouldShowButton()) {
+    return <></>;
+  }
 
   const isUserLoggedIn = isLoggedIn();
 
