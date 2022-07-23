@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import { FiX } from 'react-icons/fi';
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
+import Moon from 'src/components/Icons/Moon/Moon';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Modal from '../dls/Modal/Modal';
 
@@ -44,7 +44,7 @@ const DonatePopup = () => {
     <Modal isOpen contentClassName={styles.modalSize}>
       <div className={styles.outerContainer}>
         <div className={styles.illustrationContainer}>
-          <MoonIllustrationSVG />
+          <Moon />
         </div>
         <div className={styles.container}>
           <Button

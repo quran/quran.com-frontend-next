@@ -1,13 +1,13 @@
 import Trans from 'next-translate/Trans';
 
-import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
+import Moon from 'src/components/Icons/Moon/Moon';
 import styles from '../WelcomeMessageModalBody.module.scss';
 
 const Slide1 = ({ action }) => {
   return (
     <div>
       <div className={styles.illustrationContainer}>
-        <MoonIllustrationSVG />
+        <Moon />
       </div>
       <h2 className={styles.title}>
         <Trans
