@@ -3,6 +3,8 @@
   "version": 2,
   "projects": {
     "next-app": "apps/next-app",
-    "next-app-e2e": "apps/next-app-e2e"
+    "next-app-e2e": "apps/next-app-e2e",
+    "shared-web-ui": "libs/shared/web-ui",
+    "storybook-e2e-web-ui-e2e": "apps/storybook-e2e/web-ui-e2e"
   }
 }
