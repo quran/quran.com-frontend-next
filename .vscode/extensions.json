@@ -3,6 +3,9 @@
     "nrwl.angular-console",
     "esbenp.prettier-vscode",
     "firsttris.vscode-jest-runner",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "clinyong.vscode-css-modules",
+    "stylelint.vscode-stylelint",
+    "vunguyentuan.vscode-css-variables"
   ]
 }
