@@ -2,7 +2,7 @@ import React, { ReactNode, useState, useEffect, ChangeEvent } from 'react';
 
 import classNames from 'classnames';
 
-import ClearIcon from '../../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../../Button/Button';
 
 import styles from './Input.module.scss';
@@ -126,7 +126,7 @@ const Input: React.FC<Props> = ({
                   size={ButtonSize.Small}
                   onClick={onClearClicked}
                 >
-                  <ClearIcon />
+                  <FiX />
                 </Button>
               </div>
             )}

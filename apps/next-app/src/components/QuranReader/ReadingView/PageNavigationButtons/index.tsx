@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import ChevronDownIcon from '../../../../../public/icons/chevron-down.svg';
+import { FiChevronDown } from 'react-icons/fi';
 
 import styles from './PageNavigationButtons.module.scss';
 
@@ -41,7 +41,7 @@ const PageNavigationButtons: React.FC<Props> = ({ scrollToNextPage, scrollToPrev
         }
         tooltipContentSide={ContentSide.LEFT}
       >
-        <ChevronDownIcon />
+        <FiChevronDown />
       </Button>
       <Button
         size={ButtonSize.Small}
@@ -53,7 +53,7 @@ const PageNavigationButtons: React.FC<Props> = ({ scrollToNextPage, scrollToPrev
         }
         tooltipContentSide={ContentSide.LEFT}
       >
-        <ChevronDownIcon />
+        <FiChevronDown />
       </Button>
     </div>
   );

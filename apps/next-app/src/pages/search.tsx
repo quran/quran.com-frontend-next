@@ -6,8 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import FilterIcon from '../../public/icons/filter.svg';
-import SearchIcon from '../../public/icons/search.svg';
+import { FiFilter } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 
 import styles from './search.module.scss';
 
@@ -257,7 +257,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
           <div className={styles.headerInnerContainer}>
             <Input
               id="searchQuery"
-              prefix={<SearchIcon />}
+              prefix={<FiSearch />}
               onChange={onSearchQueryChange}
               onClearClicked={onClearClicked}
               clearable
@@ -275,7 +275,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
                   <div className={styles.translationSearchContainer}>
                     <Input
                       id="searchQuery"
-                      prefix={<SearchIcon />}
+                      prefix={<FiSearch />}
                       onChange={onTranslationSearchQueryChange}
                       onClearClicked={onTranslationSearchClearClicked}
                       clearable
@@ -308,7 +308,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
                 onClick={() => setIsContentModalOpen(true)}
                 size={ButtonSize.Small}
                 variant={ButtonVariant.Compact}
-                prefix={<FilterIcon />}
+                prefix={<FiFilter />}
                 className={styles.filterButton}
               >
                 {t('search:filter')}

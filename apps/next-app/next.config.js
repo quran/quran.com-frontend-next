@@ -23,13 +23,35 @@ const runtimeCaching = require('./pwa-runtime-config.js');
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const nextConfig = {
+  webpack5: true,
   nx: {
     // Set this to true if you would like to to use SVGR
     // See: https://github.com/gregberge/svgr
-    svgr: false,
+    svgr: true,
   },
-  experimental: {
-    outputStandalone: true,
+  output: {
+    standalone: true,
+  },
+  i18n: {
+    locales: [
+      'en',
+      'ar',
+      'bn',
+      'fa',
+      'fr',
+      'id',
+      'it',
+      'nl',
+      'pt',
+      'ru',
+      'sq',
+      'th',
+      'tr',
+      'ur',
+      'zh',
+      'ms',
+    ],
+    defaultLocale: 'en',
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -70,34 +92,6 @@ const nextConfig = {
         worker: ['AudioWorklet from audio-worklet'],
       },
     };
-
-    webpackConfig.module.rules.push({
-      test: /\.svg$/i,
-      issuer: {
-        and: [/\.(js|ts)x?$/],
-      },
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            prettier: false,
-            svgo: true,
-            svgoConfig: {
-              plugins: [
-                {
-                  name: 'preset-default',
-                  params: {
-                    overrides: {
-                      removeViewBox: false,
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        },
-      ],
-    });
 
     return webpackConfig;
   },
@@ -180,14 +174,14 @@ const nextConfig = {
   },
 };
 
-module.exports = withNx(
+module.exports = withPlugins(
   [
-    withPlugins,
-    withBundleAnalyzer,
-    withPWA,
-    withFonts,
-    nextTranslate,
-    withSentryConfig,
+    [withNx],
+    [withBundleAnalyzer],
+    [withPWA],
+    [withFonts],
+    [nextTranslate],
+    [withSentryConfig],
   ],
   nextConfig
 );

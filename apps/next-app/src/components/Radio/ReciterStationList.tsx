@@ -1,8 +1,8 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
+import { FiPause } from 'react-icons/fi';
+import { FiPlay } from 'react-icons/fi';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import Card, { CardSize } from '../dls/Card/Card';
 
@@ -62,7 +62,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
         if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
         if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio(playbackRate);
 
-        const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
+        const actionIcon = isSelectedStation && isAudioPlaying ? <FiPause /> : <FiPlay />;
         return (
           <Card
             actionIcon={actionIcon}

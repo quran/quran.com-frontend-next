@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import NavigateIcon from '../../../../../public/icons/east.svg';
+import { FiChevronLeft } from 'react-icons/fi';
 
 import styles from './CommandPrefix.module.scss';
 
@@ -18,7 +18,7 @@ const CommandPrefix: React.FC<Props> = ({ name, type }) => {
   return (
     <div className={styles.container}>
       <span className={styles.commandPrefix}>
-        <NavigateIcon />
+        <FiChevronLeft />
       </span>
       <p className={styles.name}>
         {type === SearchNavigationType.SEARCH_PAGE

@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
+import { FiSearch } from 'react-icons/fi';
 
 import styles from './ReciterSelectionBody.module.scss';
 
@@ -73,7 +73,7 @@ const SettingsReciter = () => {
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
           <Input
-            prefix={<IconSearch />}
+            prefix={<FiSearch />}
             id="translations-search"
             value={searchQuery}
             onChange={setSearchQuery}

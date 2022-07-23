@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import RepeatIcon from '../../../public/icons/repeat.svg';
+import { FiRepeat } from 'react-icons/fi';
 
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
@@ -55,7 +55,7 @@ const RepeatAudioButton = () => {
           shape={ButtonShape.Circle}
           onClick={onButtonClicked}
         >
-          <RepeatIcon />
+          <FiRepeat />
         </Button>
       </Wrapper>
     </>

@@ -4,9 +4,9 @@ import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import ArrowIcon from '../../../../public/icons/east.svg';
-import LogoutIcon from '../../../../public/icons/logout.svg';
-import IconPerson from '../../../../public/icons/person.svg';
+import { FiArrowLeft } from 'react-icons/fi';
+import { FiLogOut } from 'react-icons/fi';
+import { FiUser } from 'react-icons/fi';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -47,7 +47,7 @@ const ProfileAvatarButton = () => {
       href={isUserLoggedIn ? null : '/login'}
       shape={ButtonShape.Circle}
     >
-      <IconPerson />
+      <FiUser />
     </Button>
   );
 
@@ -65,10 +65,10 @@ const ProfileAvatarButton = () => {
   if (isUserLoggedIn) {
     return (
       <PopoverMenu trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
-        <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
+        <PopoverMenu.Item onClick={onProfileClicked} icon={<FiArrowLeft />}>
           {t('profile')}
         </PopoverMenu.Item>
-        <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
+        <PopoverMenu.Item onClick={onLogoutClicked} icon={<FiLogOut />}>
           {t('logout')}
         </PopoverMenu.Item>
       </PopoverMenu>

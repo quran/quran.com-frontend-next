@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import ChevronSelectIcon from '../../../../public/icons/chevron-select.svg';
+import { FiCode } from 'react-icons/fi';
 import Button, { ButtonVariant } from '../Button/Button';
 import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
@@ -27,12 +27,16 @@ const FooterThemeSwitcher = () => {
       trigger={
         <Button
           className={styles.triggerContainer}
-          prefix={<span className={styles.iconContainer}>{themeIcons[theme.type]}</span>}
+          prefix={
+            <span className={styles.iconContainer}>
+              {themeIcons[theme.type]}
+            </span>
+          }
           tooltip={t('theme')}
           variant={ButtonVariant.Ghost}
           suffix={
             <span className={styles.suffixIconContainer}>
-              <ChevronSelectIcon />
+              <FiCode />
             </span>
           }
         >
@@ -45,7 +49,9 @@ const FooterThemeSwitcher = () => {
           isSelected={option.value === theme.type}
           shouldCloseMenuAfterClick
           key={option.value}
-          onClick={() => dispatch({ type: setTheme.type, payload: option.value })}
+          onClick={() =>
+            dispatch({ type: setTheme.type, payload: option.value })
+          }
         >
           {option.label}
         </PopoverMenu.Item>

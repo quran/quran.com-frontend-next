@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import TarteelLogo from '../../../public/icons/tarteel-logo.svg';
-import TarteelText from '../../../public/icons/tarteel-text.svg';
+import { Tarteel } from 'src/components/Icons/Tarteel/Tarteel';
+import { TarteelText } from 'src/components/Icons/Tarteel/Tarteel';
 
 import styles from './TarteelAttribution.module.scss';
 
@@ -20,8 +20,10 @@ const TarteelAttribution: React.FC<Props> = ({ isCommandBar = false }) => {
   return (
     <Link href="https://download.tarteel.ai/" onClick={onLinkClicked} isNewTab>
       <div className={styles.container}>
-        <span className={styles.poweredBy}>{t('voice.voice-search-powered-by')}</span>
-        <TarteelLogo />
+        <span className={styles.poweredBy}>
+          {t('voice.voice-search-powered-by')}
+        </span>
+        <Tarteel />
         <span className={styles.tarteelTextWrapper}>
           <TarteelText />
         </span>

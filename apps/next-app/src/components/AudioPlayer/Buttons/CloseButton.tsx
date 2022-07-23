@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import CloseIcon from '../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 import { triggerPauseAudio } from '../EventTriggers';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -19,7 +19,7 @@ const CloseButton = () => {
         triggerPauseAudio();
         dispatch(resetAudioData(lang));
       }}
-      icon={<CloseIcon />}
+      icon={<FiX />}
     >
       {t('audio.player.close')}
     </PopoverMenu.Item>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import WrenchIcon from '../../../public/icons/wrench.svg';
+import { FiActivity } from 'react-icons/fi';
 
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';
@@ -33,7 +33,7 @@ const DeveloperUtility = (): JSX.Element => {
         type="button"
         onClick={() => setIsExpanded(true)}
       >
-        <WrenchIcon className={styles.wrench} />
+        <FiActivity className={styles.wrench} />
       </button>
     );
   }

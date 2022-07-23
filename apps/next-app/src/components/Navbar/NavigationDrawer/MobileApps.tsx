@@ -3,7 +3,7 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import IconMobile from '../../../../public/icons/mobile.svg';
+import { FiSmartphone } from 'react-icons/fi';
 
 import styles from './MobileApps.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
@@ -12,7 +12,11 @@ const MobileApps = () => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
-      <NavigationDrawerItem title={t('mobile-apps')} icon={<IconMobile />} isStale />
+      <NavigationDrawerItem
+        title={t('mobile-apps')}
+        icon={<FiSmartphone />}
+        isStale
+      />
       <div className={styles.centerHorizontally}>
         <div className={styles.imagesContainer}>
           <a
@@ -20,14 +24,24 @@ const MobileApps = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Image src="/images/app-store.svg" width={135} height={40} alt="App Store" />
+            <Image
+              src="/images/app-store.svg"
+              width={135}
+              height={40}
+              alt="App Store"
+            />
           </a>
           <a
             href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&utm_source=quran-com&utm_campaign=download"
             target="_blank"
             rel="noreferrer"
           >
-            <Image src="/images/play-store.svg" width={135} height={40} alt="Play Store" />
+            <Image
+              src="/images/play-store.svg"
+              width={135}
+              height={40}
+              alt="Play Store"
+            />
           </a>
         </div>
       </div>

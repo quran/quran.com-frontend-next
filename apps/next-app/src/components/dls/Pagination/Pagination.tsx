@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import range from 'lodash/range';
 import useTranslation from 'next-translate/useTranslation';
 
-import PreviousIcon from '../../../../public/icons/caret-back.svg';
-import NextIcon from '../../../../public/icons/caret-forward.svg';
+import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 
 import styles from './Pagination.module.scss';
 
@@ -100,7 +100,7 @@ const Pagination: React.FC<Props> = ({
           isDisabled={currentPage === 1}
           onClick={onPrevious}
         >
-          <PreviousIcon />
+          <FiChevronLeft />
         </Button>
       </div>
       {paginationRange.map((pageNumber) => {
@@ -128,19 +128,24 @@ const Pagination: React.FC<Props> = ({
         <Button
           tooltip={t('next')}
           variant={ButtonVariant.Ghost}
-          isDisabled={currentPage === paginationRange[paginationRange.length - 1]}
+          isDisabled={
+            currentPage === paginationRange[paginationRange.length - 1]
+          }
           onClick={onNext}
         >
-          <NextIcon />
+          <FiChevronRight />
         </Button>
       </div>
       {showSummary && (
         <p className={styles.uppercase}>
           {t('pagination-summary', {
-            currentResultNumber: toLocalizedNumber(showingUntilItem - (pageSize - 1), lang),
+            currentResultNumber: toLocalizedNumber(
+              showingUntilItem - (pageSize - 1),
+              lang
+            ),
             endOfResultNumber: toLocalizedNumber(
               totalCount < showingUntilItem ? totalCount : showingUntilItem,
-              lang,
+              lang
             ),
             totalNumberOfResults: toLocalizedNumber(totalCount, lang),
           })}

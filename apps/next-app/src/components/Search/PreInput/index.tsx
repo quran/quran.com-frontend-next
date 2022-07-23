@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import TrendUpIcon from '../../../../public/icons/trend-up.svg';
+import { FiBarChart } from 'react-icons/fi';
 
 import Header from './Header';
 import styles from './PreInput.module.scss';
@@ -49,7 +49,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
             return (
               <Link href={url} key={url} className={styles.popularSearchItem}>
                 <SearchItem
-                  prefix={<TrendUpIcon />}
+                  prefix={<FiBarChart />}
                   title={chapterData.transliteratedName}
                   url={url}
                   key={url}
@@ -57,7 +57,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
                     logButtonClick(
                       `search_${
                         isSearchDrawer ? 'drawer' : 'page'
-                      }_popular_search_${popularSearchQuery}`,
+                      }_popular_search_${popularSearchQuery}`
                     );
                   }}
                 />

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import TafsirIcon from '../../../../public/icons/book-open.svg';
+import { FiBookOpen } from 'react-icons/fi';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -59,15 +59,21 @@ const TafsirVerseAction = ({
   return (
     <>
       <PopoverMenu.Item
-        icon={<TafsirIcon />}
+        icon={<FiBookOpen />}
         onClick={() => {
           logButtonClick(
-            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,
+            `${
+              isTranslationView ? 'translation_view' : 'reading_view'
+            }_verse_actions_menu_tafsir`
           );
           setIsContentModalOpen(true);
           fakeNavigate(
-            getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0]),
-            lang,
+            getVerseSelectedTafsirNavigationUrl(
+              chapterId,
+              verseNumber,
+              tafsirs[0]
+            ),
+            lang
           );
         }}
       >
@@ -81,7 +87,11 @@ const TafsirVerseAction = ({
         scrollToTop={() => {
           contentModalRef.current.scrollToTop();
         }}
-        render={({ body, languageAndTafsirSelection, surahAndAyahSelection }) => {
+        render={({
+          body,
+          languageAndTafsirSelection,
+          surahAndAyahSelection,
+        }) => {
           return (
             <ContentModal
               innerRef={contentModalRef}

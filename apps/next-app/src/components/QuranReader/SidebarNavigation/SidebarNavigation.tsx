@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import IconClose from '../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 
 import styles from './SidebarNavigation.module.scss';
 import SidebarNavigationSelections from './SidebarNavigationSelections';
@@ -72,7 +72,11 @@ const SidebarNavigation = () => {
             items={navigationItems}
             selected={selectedNavigationItem}
             onSelect={(value) => {
-              logValueChange('sidebar_navigation_view', selectedNavigationItem, value);
+              logValueChange(
+                'sidebar_navigation_view',
+                selectedNavigationItem,
+                value
+              );
               dispatch(selectNavigationItem(value as NavigationItem));
             }}
           />
@@ -88,7 +92,7 @@ const SidebarNavigation = () => {
           }}
           ariaLabel={t('aria.sidebar-nav-close')}
         >
-          <IconClose />
+          <FiX />
         </Button>
       </div>
       <p className={styles.tip}>

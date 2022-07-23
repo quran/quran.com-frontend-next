@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CloseIcon from '../../../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 
 import styles from './ClearInputIcon.module.scss';
 
@@ -21,7 +21,7 @@ const ClearInputIcon: React.FC<Props> = ({ shouldShowIcon, onClearButtonClicked 
       onClick={onClearButtonClicked}
     >
       <span role="img" aria-label="close-circle" className={styles.icon}>
-        <CloseIcon />
+        <FiX />
       </span>
     </span>
   );

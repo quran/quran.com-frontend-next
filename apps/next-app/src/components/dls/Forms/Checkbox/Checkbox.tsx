@@ -3,8 +3,8 @@ import React from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import classNames from 'classnames';
 
-import DividerHorizontalIcon from '../../../../../public/icons/divider-horizontal.svg';
-import TickIcon from '../../../../../public/icons/tick.svg';
+import { FiMinus } from 'react-icons/fi';
+import { FiCheck } from 'react-icons/fi';
 
 import styles from './Checkbox.module.scss';
 
@@ -40,7 +40,9 @@ const Checkbox: React.FC<Props> = ({
   };
 
   return (
-    <div className={classNames(styles.container, { [styles.disabled]: disabled })}>
+    <div
+      className={classNames(styles.container, { [styles.disabled]: disabled })}
+    >
       <RadixCheckbox.Root
         disabled={disabled}
         name={name}
@@ -51,9 +53,11 @@ const Checkbox: React.FC<Props> = ({
         {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
       >
         <RadixCheckbox.Indicator
-          className={classNames(styles.indicator, { [styles.disabledIndicator]: disabled })}
+          className={classNames(styles.indicator, {
+            [styles.disabledIndicator]: disabled,
+          })}
         >
-          {checked === INDETERMINATE ? <DividerHorizontalIcon /> : <TickIcon />}
+          {checked === INDETERMINATE ? <FiMinus /> : <FiCheck />}
         </RadixCheckbox.Indicator>
       </RadixCheckbox.Root>
       {label && (

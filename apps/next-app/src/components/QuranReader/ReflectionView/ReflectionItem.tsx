@@ -6,14 +6,14 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import ChatIcon from '../../../../public/icons/chat.svg';
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
-import CopyIcon from '../../../../public/icons/copy.svg';
-import LoveIcon from '../../../../public/icons/love.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
-import VerifiedIcon from '../../../../public/icons/verified.svg';
+import { FiMessageCircle } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi';
+import { FiLink } from 'react-icons/fi';
+import { FiCopy } from 'react-icons/fi';
+import { FiHeart } from 'react-icons/fi';
+import { FiMoreHorizontal } from 'react-icons/fi';
+import { FiShare2 } from 'react-icons/fi';
+import { FiAward } from 'react-icons/fi';
 
 import styles from './ReflectionItem.module.scss';
 
@@ -173,8 +173,16 @@ const ReflectionItem = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.authorInfo}>
-          <Link isNewTab href={getQuranReflectAuthorUrl(authorUsername)} className={styles.author}>
-            <img alt={authorName} className={styles.avatar} src={avatarUrl || DEFAULT_IMAGE} />
+          <Link
+            isNewTab
+            href={getQuranReflectAuthorUrl(authorUsername)}
+            className={styles.author}
+          >
+            <img
+              alt={authorName}
+              className={styles.avatar}
+              src={avatarUrl || DEFAULT_IMAGE}
+            />
           </Link>
           <div>
             <Link
@@ -187,7 +195,7 @@ const ReflectionItem = ({
               {authorName}
               {isAuthorVerified && (
                 <span className={styles.verifiedIcon}>
-                  <VerifiedIcon />
+                  <FiAward />
                 </span>
               )}
             </Link>
@@ -208,13 +216,17 @@ const ReflectionItem = ({
                     <span className={styles.referencedVersesPrefix}>
                       {t('quran-reader:referencing')}{' '}
                     </span>
-                    <span className={styles.verseReferences}>{referredVerseText}</span>
+                    <span className={styles.verseReferences}>
+                      {referredVerseText}
+                    </span>
                     <span
                       className={classNames(styles.chevronContainer, {
                         [styles.flipChevron]: shouldShowReferredVerses,
                       })}
                     >
-                      {nonChapterVerseReferences.length > 0 && <ChevronDownIcon />}
+                      {nonChapterVerseReferences.length > 0 && (
+                        <FiChevronDown />
+                      )}
                     </span>
                   </span>
                 </>
@@ -231,7 +243,7 @@ const ReflectionItem = ({
                 variant={ButtonVariant.Ghost}
                 shape={ButtonShape.Circle}
               >
-                <OverflowMenuIcon />
+                <FiMoreHorizontal />
               </Button>
             }
           >
@@ -254,7 +266,9 @@ const ReflectionItem = ({
               key={makeVerseKey(chapter, from, to)}
             >
               {verseReferences.length > 1 && (
-                <span className={styles.surahName}>{getSurahName(chapter)}</span>
+                <span className={styles.surahName}>
+                  {getSurahName(chapter)}
+                </span>
               )}
               <VerseAndTranslation chapter={chapter} from={from} to={to} />
             </div>
@@ -266,7 +280,9 @@ const ReflectionItem = ({
         className={styles.body}
         dangerouslySetInnerHTML={{
           __html: highlightHashtag(
-            isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
+            isExpanded
+              ? reflectionText
+              : truncate(reflectionText, MAX_REFLECTION_LENGTH)
           ),
         }}
       />
@@ -287,7 +303,7 @@ const ReflectionItem = ({
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(id)}
           isNewTab
-          prefix={<LoveIcon />}
+          prefix={<FiHeart />}
           size={ButtonSize.Small}
           onClick={onLikesCountClicked}
         >
@@ -296,7 +312,7 @@ const ReflectionItem = ({
         <Button
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
-          prefix={<ChatIcon />}
+          prefix={<FiMessageCircle />}
           href={getQuranReflectPostCommentUrl(id)}
           isNewTab
           size={ButtonSize.Small}
@@ -313,20 +329,20 @@ const ReflectionItem = ({
               size={ButtonSize.Small}
               tooltip={t('common:share')}
             >
-              <ShareIcon />
+              <FiShare2 />
             </Button>
           }
         >
           <PopoverMenu.Item
             shouldCloseMenuAfterClick
-            icon={<CopyLinkIcon />}
+            icon={<FiLink />}
             onClick={onCopyLinkClicked}
           >
             {t('quran-reader:cpy-link')}
           </PopoverMenu.Item>
           <PopoverMenu.Item
             shouldCloseMenuAfterClick
-            icon={<CopyIcon />}
+            icon={<FiCopy />}
             onClick={onCopyTextClicked}
           >
             {t('quran-reader:copy-text')}

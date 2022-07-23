@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+import { FiArrowRight } from 'react-icons/fi';
 
 import styles from './SelectionCard.module.scss';
 
@@ -18,7 +18,7 @@ const SelectionCard = ({ label, value, onClick }: SelectionCard) => {
         <div className={styles.value}>{value}</div>
       </div>
       <div className={styles.iconContainer}>
-        <ChevronRightIcon />
+        <FiArrowRight />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { MouseEvent, KeyboardEvent } from 'react';
 
-import CloseIcon from '../../../../../public/icons/close.svg';
-import SearchIcon from '../../../../../public/icons/search.svg';
+import { FiX } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import SearchItem from '../SearchItem';
 
 import styles from './SearchQuerySuggestion.module.scss';
@@ -31,7 +31,7 @@ const SearchQuerySuggestion: React.FC<Props> = ({
     <div className={styles.searchSuggestion}>
       <SearchItem
         title={searchQuery}
-        prefix={<SearchIcon />}
+        prefix={<FiSearch />}
         url="/"
         onClick={() => onSearchKeywordClicked(searchQuery)}
         suffix={
@@ -48,7 +48,7 @@ const SearchQuerySuggestion: React.FC<Props> = ({
               variant={ButtonVariant.Ghost}
               size={ButtonSize.Small}
             >
-              <CloseIcon />
+              <FiX />
             </Button>
           )
         }

@@ -3,8 +3,8 @@ import { useContext, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
+import { FiPause } from 'react-icons/fi';
+import { FiPlay } from 'react-icons/fi';
 import { triggerPauseAudio, triggerPlayAudio } from '../EventTriggers';
 import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
@@ -74,7 +74,7 @@ const PlayPauseButton = () => {
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(triggerPauseAudio)}
       >
-        <PauseIcon />
+        <FiPause />
       </Button>
     );
   else if (!isPlaying)
@@ -86,7 +86,7 @@ const PlayPauseButton = () => {
         onClick={withStopPropagation(onClickPlay)}
         shouldFlipOnRTL={false}
       >
-        <PlayIcon />
+        <FiPlay />
       </Button>
     );
 

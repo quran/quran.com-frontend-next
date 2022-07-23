@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import CaretIcon from '../../../../../public/icons/caret-down.svg';
+import { FiChevronDown } from 'react-icons/fi';
 
 import styles from './Select.module.scss';
 
@@ -90,7 +90,7 @@ const Select: React.FC<Props> = ({
         ))}
       </select>
       <div className={classNames(styles.arrow, { [styles.disabledArrow]: disabled })}>
-        <CaretIcon />
+        <FiChevronDown />
       </div>
     </div>
   );

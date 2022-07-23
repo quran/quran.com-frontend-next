@@ -1,6 +1,6 @@
 import Trans from 'next-translate/Trans';
 
-import RepeatIcon from '../../../../public/icons/repeat.svg';
+import { FiRepeat } from 'react-icons/fi';
 
 import styles from './RepeatSettings.module.scss';
 
@@ -13,7 +13,7 @@ const RepeatSettings = () => {
         i18nKey="common:audio.repeat-moved"
         components={[
           <span className={styles.iconContainer} key="repeat-settings">
-            <IconContainer size={IconSize.Small} icon={<RepeatIcon />} />
+            <IconContainer size={IconSize.Small} icon={<FiRepeat />} />
           </span>,
         ]}
       />

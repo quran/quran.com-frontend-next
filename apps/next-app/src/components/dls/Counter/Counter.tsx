@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import MinusIcon from '../../../../public/icons/minus.svg';
-import PlusIcon from '../../../../public/icons/plus.svg';
+import { FiMinus } from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 
 import styles from './Counter.module.scss';
 
@@ -39,7 +39,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
         onClick={onDecrement}
         ariaLabel={t('counter.decrease')}
       >
-        <MinusIcon />
+        <FiMinus />
       </Button>
       <span className={styles.count}>{localizedCount}</span>
       <Button
@@ -50,7 +50,7 @@ const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element
         onClick={onIncrement}
         ariaLabel={t('counter.increase')}
       >
-        <PlusIcon />
+        <FiPlus />
       </Button>
     </div>
   );

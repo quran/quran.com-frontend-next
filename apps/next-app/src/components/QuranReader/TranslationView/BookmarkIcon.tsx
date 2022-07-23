@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
+import { FaBookmark } from 'react-icons/fa';
 
 import styles from './TranslationViewCell.module.scss';
 
@@ -86,7 +86,7 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
       variant={ButtonVariant.Ghost}
       size={ButtonSize.Small}
     >
-      <BookmarkedIcon />
+      <FaBookmark />
     </Button>
   );
 };

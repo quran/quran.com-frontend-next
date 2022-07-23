@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import AutoIcon from '../../../../public/icons/auto.svg';
-import MoonIcon from '../../../../public/icons/moon-outline.svg';
-import SunIcon from '../../../../public/icons/sun-outline.svg';
-import SunsetIcon from '../../../../public/icons/sunset.svg';
+import { FiClock } from 'react-icons/fi';
+import { FiMoon } from 'react-icons/fi';
+import { FiSun } from 'react-icons/fi';
+import { FiSunset } from 'react-icons/fi';
 
 import Section from './Section';
 import styles from './ThemeSection.module.scss';
@@ -20,10 +20,10 @@ import { logValueChange } from 'src/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeIcons = {
-  [ThemeType.Dark]: <MoonIcon />,
-  [ThemeType.Light]: <SunIcon />,
-  [ThemeType.Auto]: <AutoIcon />,
-  [ThemeType.Sepia]: <SunsetIcon />,
+  [ThemeType.Dark]: <FiMoon />,
+  [ThemeType.Light]: <FiSun />,
+  [ThemeType.Auto]: <FiClock />,
+  [ThemeType.Sepia]: <FiSunset />,
 };
 
 const ThemeSection = () => {

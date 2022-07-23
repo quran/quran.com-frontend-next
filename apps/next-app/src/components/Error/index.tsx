@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import RetryIcon from '../../../public/icons/retry.svg';
+import { FiRotateCcw } from 'react-icons/fi';
 
 import styles from './Error.module.scss';
 
@@ -19,10 +19,12 @@ const Error: React.FC<Props> = ({ onRetryClicked, error }) => {
   return (
     <div className={styles.container}>
       <p className={styles.text}>
-        {error.message !== OFFLINE_ERROR ? t('error.general') : t('error.offline')}
+        {error.message !== OFFLINE_ERROR
+          ? t('error.general')
+          : t('error.offline')}
       </p>
       <Button
-        prefix={<RetryIcon />}
+        prefix={<FiRotateCcw />}
         size={ButtonSize.Small}
         type={ButtonType.Secondary}
         onClick={onRetryClicked}

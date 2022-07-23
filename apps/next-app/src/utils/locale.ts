@@ -3,7 +3,7 @@
 import findKey from 'lodash/findKey';
 import { MetaTag } from 'next-seo/lib/types';
 
-import i18nConfig from '../../i18n.json';
+import i18nConfig from 'i18n.json';
 
 import { getBasePath } from './url';
 

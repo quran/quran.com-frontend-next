@@ -1,4 +1,4 @@
-import SettingIcon from '../../../../public/icons/settings.svg';
+import { FiSettings } from 'react-icons/fi';
 
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
 
@@ -75,24 +75,24 @@ ButtonSmall.args = {
 
 export const WithIconPrefix = Template.bind({});
 WithIconPrefix.args = {
-  prefix: <SettingIcon />,
+  prefix: <FiSettings />,
 };
 
 export const WithIconLoading = Template.bind({});
 WithIconLoading.args = {
-  prefix: <SettingIcon />,
+  prefix: <FiSettings />,
   loading: true,
 };
 
 export const WithIconSuffix = Template.bind({});
 WithIconSuffix.args = {
-  suffix: <SettingIcon />,
+  suffix: <FiSettings />,
 };
 
 // eslint-disable-next-line react/no-multi-comp
 const TemplateIcon = (args) => (
   <Button {...args}>
-    <SettingIcon />
+    <FiSettings />
   </Button>
 );
 

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
-import CaretDownIcon from '../../../public/icons/caret-down.svg';
+import { FiArrowDown } from 'react-icons/fi';
 import Link from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
@@ -102,7 +102,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
           >
             <span>{t(`sort.${sortBy}`)}</span>
             <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
-              <CaretDownIcon />
+              <FiArrowDown />
             </span>
           </div>
         </div>

@@ -5,7 +5,7 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import BackIcon from '../../../../public/icons/west.svg';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import styles from './Info.module.scss';
 
@@ -33,7 +33,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
               variant={ButtonVariant.Ghost}
               href={getSurahNavigationUrl(chapterInfo.chapterId)}
               className={styles.backIcon}
-              prefix={<BackIcon />}
+              prefix={<FiArrowLeft />}
               size={ButtonSize.Small}
               onClick={() => {
                 logButtonClick('chapter_info_go_back');

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchIcon from '../../../public/icons/search.svg';
+import { FiSearch } from 'react-icons/fi';
 import Input from '../dls/Forms/Input';
 
 import styles from './QuranReciterListHero.module.scss';
@@ -20,7 +20,7 @@ const QuranReciterListHero = ({ onSearchQueryChange, searchQuery }: QuranReciter
       <div className={styles.searchInputContainer}>
         <Input
           containerClassName={styles.searchInput}
-          prefix={<SearchIcon />}
+          prefix={<FiSearch />}
           id="translations-search"
           value={searchQuery}
           onChange={onSearchQueryChange}

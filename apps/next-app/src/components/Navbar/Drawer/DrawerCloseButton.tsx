@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import IconClose from '../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 
@@ -20,7 +20,7 @@ const DrawerCloseButton: React.FC<Props> = ({ onClick }) => {
       onClick={onClick}
       ariaLabel={t('aria.drawer-close')}
     >
-      <IconClose />
+      <FiX />
     </Button>
   );
 };

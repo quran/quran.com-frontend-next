@@ -3,8 +3,8 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
-import MicrophoneIcon from '../../../public/icons/microphone.svg';
+import { FiX } from 'react-icons/fi';
+import { FiMic } from 'react-icons/fi';
 
 import styles from './Trigger.module.scss';
 
@@ -75,7 +75,7 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false, onCl
       hasSidePadding={false}
       ariaLabel={t('command-bar.search-by-voice')}
     >
-      {showCloseIcon ? <CloseIcon /> : <MicrophoneIcon />}
+      {showCloseIcon ? <FiX /> : <FiMic />}
     </Button>
   );
 };

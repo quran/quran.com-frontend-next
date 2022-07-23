@@ -5,7 +5,7 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
+import { FiSearch } from 'react-icons/fi';
 
 import styles from './SearchSelectionBody.module.scss';
 
@@ -65,7 +65,7 @@ const TafsirsSelectionBody = () => {
     <div>
       <div className={styles.searchInputContainer}>
         <Input
-          prefix={<IconSearch />}
+          prefix={<FiSearch />}
           id="tafsirs-search"
           value={searchQuery}
           onChange={setSearchQuery}

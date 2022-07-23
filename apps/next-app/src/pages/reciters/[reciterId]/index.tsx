@@ -5,7 +5,7 @@ import Fuse from 'fuse.js';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchIcon from '../../../../public/icons/search.svg';
+import { FiSearch } from 'react-icons/fi';
 import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
 
@@ -86,7 +86,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
 
         <div className={classNames(layoutStyle.flowItem, pageStyle.searchContainer)}>
           <Input
-            prefix={<SearchIcon />}
+            prefix={<FiSearch />}
             id="translations-search"
             value={searchQuery}
             onChange={setSearchQuery}

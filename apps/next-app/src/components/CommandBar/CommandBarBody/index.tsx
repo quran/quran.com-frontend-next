@@ -6,7 +6,7 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
+import { FiSearch } from 'react-icons/fi';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
@@ -147,7 +147,7 @@ const CommandBarBody: React.FC = () => {
       >
         {!isVoiceSearchFlowStarted && (
           <div className={styles.textInputContainer}>
-            <IconSearch />
+            <FiSearch />
             <input
               onChange={onSearchQueryChange}
               placeholder={t('command-bar.placeholder')}
@@ -164,7 +164,7 @@ const CommandBarBody: React.FC = () => {
           onClick={(startFlow: boolean) => {
             logButtonClick(
               // eslint-disable-next-line i18next/no-literal-string
-              `command_bar_voice_search_${startFlow ? 'start' : 'stop'}_flow`,
+              `command_bar_voice_search_${startFlow ? 'start' : 'stop'}_flow`
             );
           }}
         />
@@ -174,7 +174,9 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
+            queryKey={
+              searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null
+            }
             render={dataFetcherRender}
           />
         )}

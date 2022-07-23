@@ -3,9 +3,9 @@ import React, { memo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import IconMenu from '../../../../public/icons/menu.svg';
-import IconSearch from '../../../../public/icons/search.svg';
-import IconSettings from '../../../../public/icons/settings.svg';
+import { FiMenu } from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
+import { FiSettings } from 'react-icons/fi';
 import LanguageSelector from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
@@ -62,7 +62,7 @@ const NavbarBody: React.FC = () => {
               onClick={openNavigationDrawer}
               ariaLabel={t('aria.nav-drawer-open')}
             >
-              <IconMenu />
+              <FiMenu />
             </Button>
             <NavigationDrawer />
           </>
@@ -81,7 +81,7 @@ const NavbarBody: React.FC = () => {
               onClick={openSettingsDrawer}
               ariaLabel={t('aria.change-settings')}
             >
-              <IconSettings />
+              <FiSettings />
             </Button>
             <SettingsDrawer />
           </>
@@ -94,7 +94,7 @@ const NavbarBody: React.FC = () => {
               shouldFlipOnRTL={false}
               ariaLabel={t('search.title')}
             >
-              <IconSearch />
+              <FiSearch />
             </Button>
             <SearchDrawer />
           </>

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
+import { FiChevronDown } from 'react-icons/fi';
 
 import styles from './ContextMenu.module.scss';
 
@@ -69,14 +69,21 @@ const ContextMenu = () => {
         <div className={styles.section}>
           <div className={classNames(styles.row)}>
             <p
-              className={classNames(styles.bold, styles.alignStart, styles.surahName, {
-                [styles.disabledOnMobile]: isSidebarNavigationVisible,
-                // on mobile, the click event is conflicting with `onClickOutside`,
-                // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
-              })}
+              className={classNames(
+                styles.bold,
+                styles.alignStart,
+                styles.surahName,
+                {
+                  [styles.disabledOnMobile]: isSidebarNavigationVisible,
+                  // on mobile, the click event is conflicting with `onClickOutside`,
+                  // causing the sidebar to be closed and opened again when this clicked. So we disable one of them for now
+                }
+              )}
               onClick={(e) => {
                 logEvent(
-                  `sidebar_navigation_${isSidebarNavigationVisible ? 'close' : 'open'}_trigger`,
+                  `sidebar_navigation_${
+                    isSidebarNavigationVisible ? 'close' : 'open'
+                  }_trigger`
                 );
                 e.stopPropagation();
                 if (isSidebarNavigationVisible === 'auto') {
@@ -95,7 +102,7 @@ const ContextMenu = () => {
                   [styles.rotateAuto]: isSidebarNavigationVisible === 'auto',
                 })}
               >
-                <ChevronDownIcon />
+                <FiChevronDown />
               </span>
             </p>
           </div>

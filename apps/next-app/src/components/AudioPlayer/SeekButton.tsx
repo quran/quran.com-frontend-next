@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import BackwardIcon from '../../../public/icons/backward.svg';
-import ForwardIcon from '../../../public/icons/forward.svg';
+import { FiRewind } from 'react-icons/fi';
+import { FiFastForward } from 'react-icons/fi';
 
 import { triggerSetCurrentTime } from './EventTriggers';
 
@@ -92,7 +92,7 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
       isDisabled={isDisabled}
       onClick={onSeek}
     >
-      {type === SeekButtonType.PrevAyah ? <BackwardIcon /> : <ForwardIcon />}
+      {type === SeekButtonType.PrevAyah ? <FiRewind /> : <FiFastForward />}
     </Button>
   );
 };

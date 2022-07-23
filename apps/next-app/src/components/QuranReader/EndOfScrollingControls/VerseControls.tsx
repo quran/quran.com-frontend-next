@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowRight } from 'react-icons/fi';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
@@ -28,7 +28,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
       {isLastVerseOfSurah && !isFirstSurah(chapterNumber) && (
         <Button
           type={ButtonType.Secondary}
-          prefix={<ChevronLeftIcon />}
+          prefix={<FiArrowLeft />}
           href={getSurahNavigationUrl(chapterNumber - 1)}
           onClick={() => {
             logButtonClick('verse_control_prev_chapter');
@@ -72,7 +72,7 @@ const VerseControls: React.FC<Props> = ({ lastVerse }) => {
       {isLastVerseOfSurah && !isLastSurah(chapterNumber) && (
         <Button
           type={ButtonType.Secondary}
-          suffix={<ChevronRightIcon />}
+          suffix={<FiArrowRight />}
           href={getSurahNavigationUrl(chapterNumber + 1)}
           onClick={() => {
             logButtonClick('verse_control_next_chapter');

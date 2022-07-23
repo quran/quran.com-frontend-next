@@ -3,8 +3,8 @@ import { useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
+import { FiPause } from 'react-icons/fi';
+import { FiPlay } from 'react-icons/fi';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 
 import styles from './PlayButton.module.scss';
@@ -62,7 +62,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           variant={ButtonVariant.Ghost}
           type={ButtonType.Success}
           size={ButtonSize.Small}
-          prefix={<PauseIcon />}
+          prefix={<FiPause />}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
@@ -74,7 +74,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           variant={ButtonVariant.Ghost}
           type={ButtonType.Success}
           size={ButtonSize.Small}
-          prefix={<PlayIcon />}
+          prefix={<FiPlay />}
           onClick={play}
           hasSidePadding={false}
           shouldFlipOnRTL={false}

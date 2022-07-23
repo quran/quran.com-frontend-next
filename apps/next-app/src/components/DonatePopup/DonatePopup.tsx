@@ -3,7 +3,7 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Modal from '../dls/Modal/Modal';
@@ -54,7 +54,7 @@ const DonatePopup = () => {
             shape={ButtonShape.Circle}
             onClick={onCloseButtonClicked}
           >
-            <CloseIcon />
+            <FiX />
           </Button>
           <h1 className={styles.title}>{t('popup.title')}</h1>
           <div className={styles.textsContainer}>

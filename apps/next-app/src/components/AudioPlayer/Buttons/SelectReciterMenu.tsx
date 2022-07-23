@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import CheckIcon from '../../../../public/icons/check.svg';
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
+import { FiCheck } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import styles from './SelectReciterMenu.module.scss';
 
@@ -57,7 +57,7 @@ const SelectReciterMenu = ({ onBack }) => {
         if (isLoading) {
           return <Spinner />;
         }
-        return <CheckIcon />;
+        return <FiCheck />;
       }
       return <span />;
     },
@@ -95,7 +95,7 @@ const SelectReciterMenu = ({ onBack }) => {
 
   return (
     <>
-      <PopoverMenu.Item icon={<ChevronLeftIcon />} onClick={onBack} shouldFlipOnRTL>
+      <PopoverMenu.Item icon={<FiArrowLeft />} onClick={onBack} shouldFlipOnRTL>
         {t('audio.select-reciter')}
       </PopoverMenu.Item>
       <PopoverMenu.Divider />
