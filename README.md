@@ -1,118 +1,94 @@
-<!--
-*** Thanks for checking out this Quran.com repo. If you have a suggestion that would
-*** make this better, please fork the repo and create a pull request or simply open
-***  an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://quran.com">
-    <img src="public/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
-  <h1 align="center">The Noble Quran</h1>
+# Quran
 
-  <p align="center">
-    The official source code repository for Quran.com
-    <br />
-    <a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com community »</strong></a>
-    <br />
-    <br />
-    <a href="https://quran.com">Visit Quran.com</a>
-    ·
-    <a href="https://github.com/quran/quran.com-frontend-next/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/quran/quran.com-frontend-next/issues">Request Feature</a>
-    •
-    <a href="https://quran.github.io/quran.com-frontend-next/storybook/master">Storybook</a>
-  </p>
-</p>
+This project was generated using [Nx](https://nx.dev).
 
-<!-- PROJECT SHIELDS -->
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Issues][issues-shield]][issues-url]
-[![Stargazers][stars-shield]][stars-url]
-[![MIT License][license-shield]][license-url]
+🔎 **Smart, Fast and Extensible Build System**
 
-This project is the frontend for Quran.com. It is built on top of [next.js](https://nextjs.org/docs/getting-started), a popular framework that takes the trouble and setup of setting up an isomorphic react app. We deploy it on now.sh automatically with automatic generation of builds for PRs.
+## Adding capabilities to your workspace
 
-### How to contribute
+Nx supports many plugins which add capabilities for developing different types of applications and different tools.
 
-We trust that you will not copy this idea/project, this is at the end for the sake of Allah and we all have good intentions while working with this project. But we must stress that copying the code/project is unacceptable.
+These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
 
-### Running the app locally
+Below are our core plugins:
 
-- Ensure you have the latest nodejs and npm installed. Prefer 10+.
-- Ensure you have `yarn` installed. Simply `npm i -g yarn`
-- Clone this repo
-- Run `yarn` on the repo to install `node_modules`
-- Run `yarn dev` to start the app. If you wish to run on a different port, run `yarn dev -p 8000`
-- Open `localhost:3000`
+- [React](https://reactjs.org)
+  - `npm install --save-dev @nrwl/react`
+- Web (no framework frontends)
+  - `npm install --save-dev @nrwl/web`
+- [Angular](https://angular.io)
+  - `npm install --save-dev @nrwl/angular`
+- [Nest](https://nestjs.com)
+  - `npm install --save-dev @nrwl/nest`
+- [Express](https://expressjs.com)
+  - `npm install --save-dev @nrwl/express`
+- [Node](https://nodejs.org)
+  - `npm install --save-dev @nrwl/node`
 
-The app runs on next.js and will automatically hot reload when you make changes.
+There are also many [community plugins](https://nx.dev/community) you could add.
 
-### Environment variables
+## Generate an application
 
-If you have access to a Quran.com associated vercel account, run `vercel env pull`. Otherwise, rename the `env.example` file to  `env.local` and you should be good to go. 
+Run `nx g @nrwl/react:app my-app` to generate an application.
 
-### DLS (design language system)
+> You can use any of the plugins above to generate applications as well.
 
-One mistake we made previously is treated each component as unique. This made our work not scalable. Secondly, when looking at large companies, they often develop a design style language that can be used across the app without the need to create unique components and ensure better consistency across the product. We are trying to take a similar approach. If something can be used elsewhere, please put it inside the `dls/` directory and create stories for it.
+When using Nx, you can create multiple applications and libraries in the same workspace.
 
-### Storybook.js
+## Generate a library
 
-Our components are built within Storybook.js. See files with name `.stories.tsx`. This helps engineers view their work outside of the product, making it super easy to test different configurations of the component.
+Run `nx g @nrwl/react:lib my-lib` to generate a library.
 
-[We also display all our components here](https://quran.github.io/quran.com-frontend-next/storybook/master).
+> You can also use any of the plugins above to generate libraries as well.
 
-### Recommended Extensions
+Libraries are shareable across libraries and applications. They can be imported from `@quran/mylib`.
 
-Check `.vscode/extensions.json` for recommended VSCode Extensions
-### Typescript
+## Development server
 
-We chose typescript as the language of choice of it's ease of type-safety. Please create types where you see fit.
+Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-### Helping out and issues
+## Code scaffolding
 
-If you are interested to help out, please look at issues on the Github repo. This is a good place to start.
+Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
 
-### Filing bugs
+## Build
 
-Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend-next/issues).
+Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-### Community 
-<a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com Discord community »</strong></a>
+## Running unit tests
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
 
-[contributors-shield]: https://img.shields.io/github/contributors/quran/quran.com-frontend-next?style=for-the-badge
-[contributors-url]: https://github.com/quran/quran.com-frontend-next/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/quran/quran.com-frontend-next?style=for-the-badge
-[forks-url]: https://github.com/quran/quran.com-frontend-next/network/members
-[stars-shield]: https://img.shields.io/github/stars/quran/quran.com-frontend-next?style=for-the-badge
-[stars-url]: https://github.com/quran/quran.com-frontend-next/stargazers
-[issues-shield]: https://img.shields.io/github/issues/quran/quran.com-frontend-next?style=for-the-badge
-[issues-url]: https://github.com/quran/quran.com-frontend-next/issues
-[license-shield]: https://img.shields.io/github/license/quran/quran.com-frontend-next?style=for-the-badge
-[license-url]: https://github.com/quran/quran.com-frontend-next/blob/master/LICENSE.txt
-[product-screenshot]: images/screenshot.png
+Run `nx affected:test` to execute the unit tests affected by a change.
 
-### Credits
+## Running end-to-end tests
 
-- Localization was made possible by the help of [Lokalise](https://lokalise.com/) which is a computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.
+Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/15169499/139687128-15ed6189-6be2-44bf-9173-75cce317d546.png" width="400">
-</p>
+Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
 
-- Deployment was made possible by the help of [Vercel](https://vercel.com/?utm_source=quran-pro&utm_campaign=oss) which is a deployment and collaboration platform for frontend developers which puts the frontend developer first, giving them comprehensive tools to build high-performance websites and applications.
+## Understand your workspace
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/15169499/147745340-b7e84819-d1b0-4399-87a0-d5276ba21bca.png" width="250">
-</p>
+Run `nx graph` to see a diagram of the dependencies of your projects.
 
+## Further help
+
+Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+
+
+## ☁ Nx Cloud
+
+### Distributed Computation Caching & Distributed Task Execution
+
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+
+Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+
+Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+
+Visit [Nx Cloud](https://nx.app/) to learn more.
