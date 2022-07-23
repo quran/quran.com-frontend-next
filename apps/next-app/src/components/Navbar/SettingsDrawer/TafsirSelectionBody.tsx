@@ -11,7 +11,10 @@ import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
-import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import {
+  selectSelectedTafsirs,
+  setSelectedTafsirs,
+} from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import {
@@ -79,28 +82,35 @@ const TafsirsSelectionBody = () => {
           const tafsirsByLanguages = groupBy(filteredTafsirs, 'languageName');
           return (
             <div>
-              {Object.entries(tafsirsByLanguages).map(([language, tafsirs]) => {
-                return (
-                  <div className={styles.group} key={language}>
-                    <div className={styles.language}>{language}</div>
-                    {tafsirs.map((tafsir) => (
-                      <div key={tafsir.slug} className={styles.item}>
-                        <input
-                          id={tafsir.slug.toString()}
-                          type="checkbox"
-                          value={tafsir.slug}
-                          checked={selectedTafsirs.includes(tafsir.slug)}
-                          onChange={onTafsirsChange}
-                        />
-                        <label className={styles.label} htmlFor={tafsir.slug.toString()}>
-                          <span>{tafsir.name}</span>{' '}
-                          <span className={styles.author}>{tafsir.authorName}</span>
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })}
+              {Object.entries(tafsirsByLanguages).map(
+                ([language, tafsirs]: [string, TafsirInfo[]]) => {
+                  return (
+                    <div className={styles.group} key={language}>
+                      <div className={styles.language}>{language}</div>
+                      {tafsirs.map((tafsir) => (
+                        <div key={tafsir.slug} className={styles.item}>
+                          <input
+                            id={tafsir.slug.toString()}
+                            type="checkbox"
+                            value={tafsir.slug}
+                            checked={selectedTafsirs.includes(tafsir.slug)}
+                            onChange={onTafsirsChange}
+                          />
+                          <label
+                            className={styles.label}
+                            htmlFor={tafsir.slug.toString()}
+                          >
+                            <span>{tafsir.name}</span>{' '}
+                            <span className={styles.author}>
+                              {tafsir.authorName}
+                            </span>
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                }
+              )}
             </div>
           );
         }}

@@ -1,10 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable import/no-unresolved */
-/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useState, useCallback, useRef } from 'react';
 
-// @ts-ignore
-import { AudioWorklet } from 'audio-worklet';
+import { AudioWorklet } from 'src/audioInput/audio-worklet';
 
 import { getAverageVolume } from 'src/audioInput/voice';
 import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
@@ -13,6 +11,7 @@ import Event from 'types/Tarteel/Event';
 import Result from 'types/Tarteel/Result';
 import SearchResult from 'types/Tarteel/SearchResult';
 import VoiceError from 'types/Tarteel/VoiceError';
+import { Url } from 'url';
 
 const AUDIO_CONFIG = {
   sampleRate: 16000,
@@ -190,15 +189,14 @@ const useTarteelVoiceSearch = (startRecording = true) => {
         }
         // 2. Add the MicInputProcessor to the audioContext
         audioContext.audioWorklet
-          .addModule(
-            new AudioWorklet(new URL('src/audioInput/MicInputProcessor.ts', import.meta.url)),
+          .addModule(AudioWorklet(new URL('src/audioInput/MicInputProcessor.ts', import.meta.url)),
           )
           .then(() => {
             logEvent('tarteel_websocket_initialize');
             setIsLoading(true);
             // 3. Start a new websocket
             webSocket = new WebSocket(
-              `wss://voice-v2.tarteel.io/search/?Authorization=${process.env.NEXT_PUBLIC_TARTEEL_VS_API_KEY}`,
+              `wss://voice-v2.tarteel.io/search/?Authorization=${process.env.NEXT_PUBLIC_TARTEEL_VS_API_KEY}`
             );
             mediaStream.current = stream;
             webSocket.onopen = () => {
@@ -208,7 +206,10 @@ const useTarteelVoiceSearch = (startRecording = true) => {
               analyser.smoothingTimeConstant = ANALYSER_SMOOTHING_CONSTANT;
               analyser.fftSize = FAST_FOURIER_TRANSFORM_SIZE;
               const volumes = new Uint8Array(analyser.frequencyBinCount);
-              micWorkletNode = new AudioWorkletNode(audioContext, 'MicInputProcessor');
+              micWorkletNode = new AudioWorkletNode(
+                audioContext,
+                'MicInputProcessor'
+              );
               webSocket.send(JSON.stringify(START_STREAM_DATA));
               micSourceNode.connect(analyser);
               analyser.connect(micWorkletNode);
@@ -229,7 +230,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
                 analyser,
                 micWorkletNode,
                 micSourceNode,
-                audioContext,
+                audioContext
               );
             };
             webSocket.onerror = () => {

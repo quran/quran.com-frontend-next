@@ -6,7 +6,7 @@
     "build": {
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "defaultConfiguration": "development",
       "options": {
         "root": "apps/next-app",
         "outputPath": "dist/apps/next-app"

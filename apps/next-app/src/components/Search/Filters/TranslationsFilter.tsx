@@ -13,25 +13,30 @@ interface Props {
   translations: AvailableTranslation[];
 }
 
+// eslint-disable-next-line react/display-name
 const TranslationsFilter: React.FC<Props> = memo(
   ({ translations, selectedTranslations, onTranslationChange }) => {
     const translationByLanguages = groupBy(translations, 'languageName');
     return (
       <div className={styles.comboboxItems}>
-        {Object.entries(translationByLanguages).map(([language, languageTranslations]) => {
-          return (
-            <TranslationGroup
-              language={language}
-              key={language}
-              translations={languageTranslations}
-              onTranslationsChange={(nextTranslations) => onTranslationChange(nextTranslations)}
-              selectedTranslations={selectedTranslations.split(',')}
-            />
-          );
-        })}
+        {Object.entries(translationByLanguages).map(
+          ([language, languageTranslations]: [string, AvailableTranslation[]]) => {
+            return (
+              <TranslationGroup
+                language={language}
+                key={language}
+                translations={languageTranslations}
+                onTranslationsChange={(nextTranslations) =>
+                  onTranslationChange(nextTranslations)
+                }
+                selectedTranslations={selectedTranslations.split(',')}
+              />
+            );
+          }
+        )}
       </div>
     );
-  },
+  }
 );
 
 export default TranslationsFilter;
