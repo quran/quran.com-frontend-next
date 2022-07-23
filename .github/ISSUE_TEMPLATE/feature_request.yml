@@ -1,0 +1,28 @@
+name: Feature request
+description: Suggest a feature to improve Quran.com
+title: "[feature]: "
+labels: [feature]
+body:
+- type: markdown
+  attributes:
+    value: |
+      Thank you for taking the time to suggest a new feature for quran.com
+- type: checkboxes
+  attributes:
+    label: Is there an existing issue for this feature?
+    description: Please search to see if an issue already exists for the feature and 👍 it instead of opening new one. 
+    options:
+    - label: There is no exsiting issue for this feature
+      required: true
+- type: textarea
+  attributes:
+    label: Summary
+    description: A clear and concise description of this missing feature. How this feature will improve quran.com?
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Your purposed solution for this feature
+    description: Add any other context or screenshots about the feature request. Feel free to purpose the solution, user experience or link to sites with similar feature.
+  validations:
+    required: true

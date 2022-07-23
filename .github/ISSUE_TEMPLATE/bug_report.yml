@@ -1,0 +1,65 @@
+name: Bug report
+description: File a bug report
+title: "[bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report and help us improving quran.com
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered and 👍 it instead of opening new one.
+      options:
+        - label: There is no exsiting issue for this bug
+          required: true
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is, Also tell us, what did you expect to happen?
+      placeholder: |
+        When I do <X>, <Y> happens and I see the error message attached below:
+        ```...```
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant error log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Please enter the steps to reproduce this behaviour
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Environment (please complete the following information) and Add any other context about this bug
+      description: |
+        - OS: [e.g. iOS]
+        - Browser: [e.g. Chrome, Safari]
+        - Version: [e.g. 22]
+      placeholder: |
+        OS: 
+        Browser: 
+        Version:
+    validations:
+      required: true
+  - type: dropdown
+    id: env
+    attributes:
+      label: Environment
+      options:
+        - Production(quran.com)
+        - Beta(beta.quran.com)
+        - Staging(next.quran.com)
+    validations:
+      required: true
