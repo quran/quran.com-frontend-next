@@ -4,9 +4,8 @@ import React, { useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { FiChevronDown } from 'react-icons/fi';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
 
 import styles from './ContextMenu.module.scss';
 
@@ -95,7 +94,7 @@ const ContextMenu = () => {
                   [styles.rotateAuto]: isSidebarNavigationVisible === 'auto',
                 })}
               >
-                <ChevronDownIcon />
+                <FiChevronDown />
               </span>
             </p>
           </div>

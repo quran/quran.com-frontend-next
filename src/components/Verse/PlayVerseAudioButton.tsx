@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { FiPause, FiPlay } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause-outline.svg';
-import PlayIcon from '../../../public/icons/play-outline.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
@@ -115,7 +114,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         shape={ButtonShape.Circle}
       >
         <span className={styles.icon}>
-          <PauseIcon />
+          <FiPause />
         </span>
       </Button>
     );
@@ -134,7 +133,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
-        <PlayIcon />
+        <FiPlay />
       </span>
     </Button>
   );

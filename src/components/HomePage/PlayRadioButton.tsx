@@ -1,8 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
+import { FiPause, FiPlay } from 'react-icons/fi';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import Button from '../dls/Button/Button';
 import Link from '../dls/Link/Link';
@@ -48,16 +47,12 @@ const PlayRadioButton = () => {
     <div className={styles.container}>
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (
-          <Button
-            prefix={<PauseIcon />}
-            onClick={onPauseClicked}
-            className={styles.playPauseButton}
-          >
+          <Button prefix={<FiPause />} onClick={onPauseClicked} className={styles.playPauseButton}>
             {t('pause-radio')}
           </Button>
         ) : (
           <Button
-            prefix={<PlayIcon />}
+            prefix={<FiPlay />}
             className={styles.playPauseButton}
             onClick={onPlayClicked}
             shouldFlipOnRTL={false}

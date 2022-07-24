@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
+import { FaQuran } from 'react-icons/fa';
 
 import styles from './Footer.module.scss';
 
@@ -11,7 +10,7 @@ const TitleAndDescription = () => {
     <div className={styles.titleAndDescriptionContainer}>
       <div className={styles.headingContainer}>
         <div className={styles.iconContainer}>
-          <QuranTextLogo />
+          <FaQuran />
         </div>
         <div className={styles.title}>{t('footer.title')}</div>
       </div>

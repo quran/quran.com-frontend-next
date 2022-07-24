@@ -3,9 +3,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { FiArrowLeft } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-
-import BackIcon from '../../../../public/icons/west.svg';
 
 import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
@@ -51,7 +50,7 @@ const SettingsDrawer = () => {
     header = (
       <div className={styles.headerContainer}>
         <Button variant={ButtonVariant.Ghost} onClick={onGoBackClicked}>
-          <BackIcon />
+          <FiArrowLeft />
         </Button>
         {settingsView === SettingsView.Translation && t('translations')}
         {settingsView === SettingsView.Reciter && t('reciter')}

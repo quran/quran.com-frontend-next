@@ -1,9 +1,7 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import useScrollToTop from 'src/hooks/useScrollToTop';
@@ -25,7 +23,7 @@ const JuzControls: React.FC<Props> = ({ lastVerse }) => {
       {!isFirstJuz(juzNumber) && (
         <Button
           type={ButtonType.Secondary}
-          prefix={<ChevronLeftIcon />}
+          prefix={<FiArrowLeft />}
           href={getJuzNavigationUrl(juzNumber - 1)}
           onClick={() => {
             logButtonClick('juz_control_prev_juz');
@@ -48,7 +46,7 @@ const JuzControls: React.FC<Props> = ({ lastVerse }) => {
       {!isLastJuz(juzNumber) && (
         <Button
           type={ButtonType.Secondary}
-          suffix={<ChevronRightIcon />}
+          suffix={<FiArrowRight />}
           href={getJuzNavigationUrl(juzNumber + 1)}
           onClick={() => {
             logButtonClick('juz_control_next_juz');

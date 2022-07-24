@@ -2,8 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-
-import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
+import { FiMic } from 'react-icons/fi';
 
 import styles from './PartialResult.module.scss';
 
@@ -31,7 +30,7 @@ const PartialResult: React.FC<Props> = ({ partialTranscript, volume, verticalLay
             style={{ '--volume': getVolumeLevelMultiplier(volume) }}
           />
           <div className={styles.micCircle}>
-            <MicrophoneIcon />
+            <FiMic />
           </div>
         </div>
       </div>

@@ -3,9 +3,7 @@ import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import range from 'lodash/range';
 import useTranslation from 'next-translate/useTranslation';
-
-import PreviousIcon from '../../../../public/icons/caret-back.svg';
-import NextIcon from '../../../../public/icons/caret-forward.svg';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import styles from './Pagination.module.scss';
 
@@ -100,7 +98,7 @@ const Pagination: React.FC<Props> = ({
           isDisabled={currentPage === 1}
           onClick={onPrevious}
         >
-          <PreviousIcon />
+          <FiChevronLeft />
         </Button>
       </div>
       {paginationRange.map((pageNumber) => {
@@ -131,7 +129,7 @@ const Pagination: React.FC<Props> = ({
           isDisabled={currentPage === paginationRange[paginationRange.length - 1]}
           onClick={onNext}
         >
-          <NextIcon />
+          <FiChevronRight />
         </Button>
       </div>
       {showSummary && (

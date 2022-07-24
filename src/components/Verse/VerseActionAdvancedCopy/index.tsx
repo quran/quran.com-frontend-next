@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiClipboard } from 'react-icons/fi';
 
-import AdvancedCopyIcon from '../../../../public/icons/clipboard.svg';
 import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
 
 import styles from './VerseActionAdvancedCopy.module.scss';
@@ -55,7 +55,7 @@ const VerseActionAdvancedCopy = ({
 
   return (
     <>
-      <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={onModalOpen}>
+      <PopoverMenu.Item icon={<FiClipboard />} onClick={onModalOpen}>
         {t('advanced-copy')}
       </PopoverMenu.Item>
       <ContentModal

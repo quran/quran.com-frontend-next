@@ -6,13 +6,9 @@ import clipboardCopy from 'clipboard-copy';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { FiCopy, FiDownload, FiPause, FiPlay, FiBookOpen } from 'react-icons/fi';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
-import CopyIcon from '../../../../public/icons/copy.svg';
-import DownloadIcon from '../../../../public/icons/download.svg';
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
-import ReaderIcon from '../../../../public/icons/reader.svg';
 import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
@@ -129,7 +125,7 @@ const RecitationPage = ({
             {isCurrentlyPlayingThisChapter ? (
               <Button
                 onClick={() => triggerPauseAudio()}
-                prefix={<PauseIcon />}
+                prefix={<FiPause />}
                 className={styles.playButton}
               >
                 {t('common:audio.player.pause-audio')}
@@ -138,7 +134,7 @@ const RecitationPage = ({
               <Button
                 className={styles.playButton}
                 onClick={onPlayAudioClicked}
-                prefix={<PlayIcon />}
+                prefix={<FiPlay />}
                 shouldFlipOnRTL={false}
               >
                 {t('common:audio.player.play-audio')}
@@ -149,7 +145,7 @@ const RecitationPage = ({
               <Button
                 className={styles.secondaryAction}
                 onClick={onReadClicked}
-                prefix={<ReaderIcon />}
+                prefix={<FiBookOpen />}
                 type={ButtonType.Secondary}
               >
                 {t('reciter:read')}
@@ -157,7 +153,7 @@ const RecitationPage = ({
               <Button
                 className={styles.secondaryAction}
                 onClick={onCopyLinkClicked}
-                prefix={<CopyIcon />}
+                prefix={<FiCopy />}
                 type={ButtonType.Secondary}
               >
                 {t('reciter:copy-link')}
@@ -165,7 +161,7 @@ const RecitationPage = ({
               <Button
                 className={styles.secondaryAction}
                 onClick={onDownloadClicked}
-                prefix={isDownloadingAudio ? <Spinner /> : <DownloadIcon />}
+                prefix={isDownloadingAudio ? <Spinner /> : <FiDownload />}
                 type={ButtonType.Secondary}
               >
                 {t('common:audio.player.download')}

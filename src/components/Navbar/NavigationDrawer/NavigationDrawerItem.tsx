@@ -1,8 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
-
-import IconNorthEast from '../../../../public/icons/north_east.svg';
+import { FiArrowUpRight } from 'react-icons/fi';
 
 import LinkContainer from './LinkContainer';
 import styles from './NavigationDrawerItem.module.scss';
@@ -28,7 +27,11 @@ const NavigationDrawerItem = ({
   onClick,
 }: NavigationDrawerItemProps) => (
   <LinkContainer href={href} isExternalLink={isExternalLink} onClick={onClick}>
-    <div className={classNames(styles.container, { [styles.containerStale]: isStale })}>
+    <div
+      className={classNames(styles.container, {
+        [styles.containerStale]: isStale,
+      })}
+    >
       <div className={styles.innerContainer}>
         <div className={styles.itemContainer}>
           <IconContainer
@@ -42,7 +45,7 @@ const NavigationDrawerItem = ({
         <div>
           {isExternalLink && (
             <IconContainer
-              icon={<IconNorthEast />}
+              icon={<FiArrowUpRight />}
               size={IconSize.Xsmall}
               color={IconColor.secondary}
             />

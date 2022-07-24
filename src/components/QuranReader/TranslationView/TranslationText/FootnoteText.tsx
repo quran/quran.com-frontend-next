@@ -4,8 +4,7 @@ import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-
-import CloseIcon from '../../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
@@ -43,7 +42,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
           shape={ButtonShape.Circle}
           onClick={onCloseClicked}
         >
-          <CloseIcon />
+          <FiX />
         </Button>
       </div>
       {isLoading ? (

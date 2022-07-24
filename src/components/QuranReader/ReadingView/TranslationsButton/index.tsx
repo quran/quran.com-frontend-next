@@ -3,9 +3,8 @@ import { useCallback, useRef, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { FaLanguage } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-
-import TranslationsIcon from '../../../../../public/icons/translation.svg';
 
 import styles from './TranslationsButton.module.scss';
 
@@ -88,7 +87,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered }) => {
         className={classNames(styles.iconContainer, styles.verseAction)}
       >
         <span className={styles.icon}>
-          <TranslationsIcon />
+          <FaLanguage />
         </span>
       </Button>
       <ContentModal

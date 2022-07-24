@@ -3,9 +3,8 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { FiBookOpen } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-
-import TafsirIcon from '../../../../public/icons/book-open.svg';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -59,7 +58,7 @@ const TafsirVerseAction = ({
   return (
     <>
       <PopoverMenu.Item
-        icon={<TafsirIcon />}
+        icon={<FiBookOpen />}
         onClick={() => {
           logButtonClick(
             `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,

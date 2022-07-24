@@ -2,8 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
 
-import SearchIcon from '../../../../../public/icons/search.svg';
-import SettingIcon from '../../../../../public/icons/settings.svg';
+import { FiSearch, FiSettings } from 'react-icons/fi';
 
 import ComboboxSize from './types/ComboboxSize';
 
@@ -198,7 +197,7 @@ const generateItems = (numberOfItems = 10, hasSuffix = false, hasPrefix = false)
       value: `Item${index}`,
       label: `Item ${index}`,
       ...(hasSuffix && { suffix: index % 2 ? `Item` : 'Another-Item' }),
-      ...(hasPrefix && { prefix: index % 2 ? <SettingIcon /> : <SearchIcon /> }),
+      ...(hasPrefix && { prefix: index % 2 ? <FiSettings /> : <FiSearch /> }),
     });
   }
   return items;

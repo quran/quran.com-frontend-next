@@ -1,8 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
-
-import CaretIcon from '../../../../../../public/icons/caret-down.svg';
+import { FiChevronDown } from 'react-icons/fi';
 
 import styles from './CaretInputIcon.module.scss';
 
@@ -22,7 +21,7 @@ const CaretInputIcon: React.FC<Props> = ({ shouldShowIcon, isOpened }) => {
       })}
       aria-label="Show more"
     >
-      <CaretIcon />
+      <FiChevronDown />
     </div>
   );
 };

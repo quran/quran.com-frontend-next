@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiRepeat } from 'react-icons/fi';
 
-import RepeatIcon from '../../../public/icons/repeat.svg';
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
@@ -27,7 +27,7 @@ const VerseActionRepeatAudio = ({ verseKey }: VerseActionRepeatAudioProps) => {
         onClose={() => setIsModalOpen(false)}
       />
       <PopoverMenu.Item
-        icon={<RepeatIcon />}
+        icon={<FiRepeat />}
         onClick={() => {
           setIsModalOpen(true);
         }}

@@ -3,9 +3,8 @@ import { useRef } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { FiX } from 'react-icons/fi';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-
-import IconClose from '../../../../public/icons/close.svg';
 
 import styles from './SidebarNavigation.module.scss';
 import SidebarNavigationSelections from './SidebarNavigationSelections';
@@ -88,7 +87,7 @@ const SidebarNavigation = () => {
           }}
           ariaLabel={t('aria.sidebar-nav-close')}
         >
-          <IconClose />
+          <FiX />
         </Button>
       </div>
       <p className={styles.tip}>

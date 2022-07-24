@@ -2,8 +2,8 @@ import React from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { FiArrowLeft } from 'react-icons/fi';
 
-import BackIcon from '../../../../public/icons/west.svg';
 import Blocks from '../Blocks';
 
 import styles from './Page.module.scss';
@@ -32,7 +32,7 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
         {isPageLayout && (
           <Link href="/product-updates" variant={LinkVariant.Secondary} shouldPrefetch={false}>
             <span className={styles.backLink}>
-              <BackIcon />
+              <FiArrowLeft />
               {t('go-back')}
             </span>
           </Link>

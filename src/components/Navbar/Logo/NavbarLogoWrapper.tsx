@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
+import { FaQuran } from 'react-icons/fa';
 
 import styles from './NavbarLogoWrapper.module.scss';
 
@@ -10,7 +9,7 @@ const NavbarLogoWrapper = () => {
   const { t } = useTranslation('common');
   return (
     <Link href="/" className={styles.logoWrapper} title={t('quran-com')}>
-      <QuranTextLogo />
+      <FaQuran />
     </Link>
   );
 };

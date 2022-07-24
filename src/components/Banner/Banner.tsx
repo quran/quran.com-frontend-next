@@ -1,6 +1,6 @@
 // import { useDispatch } from 'react-redux';
 
-// import CloseIcon from '../../../public/icons/close.svg';
+// import { FiX } from 'react-icons/fi';
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -67,7 +67,7 @@ const Banner = ({ text, cta }: BannerProps) => {
       </div>
       {/* <div className={styles.closeButton}>
         <Button type={ButtonType.Success} variant={ButtonVariant.Compact} onClick={closeBanner}>
-          <CloseIcon />
+          <FiX />
         </Button>
       </div> */}
     </div>

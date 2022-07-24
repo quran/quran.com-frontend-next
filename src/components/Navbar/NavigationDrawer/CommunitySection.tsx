@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-
-import DiscordIcon from '../../../../public/icons/discord-icon.svg';
+import { FaDiscord } from 'react-icons/fa';
 
 import styles from './CommunitySection.module.scss';
 
@@ -12,7 +11,7 @@ const CommunitySection = () => {
   return (
     <div className={styles.container}>
       <div className={styles.platformLogoBackground}>
-        <DiscordIcon />
+        <FaDiscord />
       </div>
       <div className={styles.flow}>
         <div className={styles.title}>{t('community.header')}</div>

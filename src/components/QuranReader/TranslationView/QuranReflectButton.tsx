@@ -3,8 +3,7 @@ import { useRef, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-
-import ChatIcon from '../../../../public/icons/chat.svg';
+import { FiMessageCircle } from 'react-icons/fi';
 
 import styles from './TranslationViewCell.module.scss';
 
@@ -70,7 +69,7 @@ const QuranReflectButton = ({
         ariaLabel={t('aria.read-ayah-refls')}
       >
         <span className={styles.icon}>
-          <ChatIcon />
+          <FiMessageCircle />
         </span>
       </Button>
       <ReflectionBodyContainer

@@ -1,9 +1,8 @@
 import sample from 'lodash/sample';
 import useTranslation from 'next-translate/useTranslation';
+import { FiPause, FiPlay } from 'react-icons/fi';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import Card, { CardSize } from '../dls/Card/Card';
 
@@ -63,7 +62,7 @@ const CuratedStationList = () => {
         if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
         if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio(playbackRate);
 
-        const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
+        const actionIcon = isSelectedStation && isAudioPlaying ? <FiPause /> : <FiPlay />;
 
         return (
           <div className={styles.item} key={id}>

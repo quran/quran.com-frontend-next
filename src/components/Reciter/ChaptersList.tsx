@@ -3,12 +3,9 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
+import { FiLink, FiDownload, FiPause, FiPlay } from 'react-icons/fi';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CopyLinkIcon from '../../../public/icons/copy-link.svg';
-import DownloadIcon from '../../../public/icons/download.svg';
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
@@ -98,12 +95,12 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
             <div className={styles.chapterInfoContainer}>
               <div className={styles.playIconWrapper}>
                 {isAudioPlayingThisChapter ? (
-                  <span className={classNames(styles.playPauseIcon)}>
-                    <PauseIcon />
+                  <span className={classNames(styles.playFiPause)}>
+                    <FiPause />
                   </span>
                 ) : (
-                  <span className={classNames(styles.playPauseIcon, styles.playIcon)}>
-                    <PlayIcon />
+                  <span className={classNames(styles.playFiPause, styles.playIcon)}>
+                    <FiPlay />
                   </span>
                 )}
               </div>
@@ -128,7 +125,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
                 tooltip={t('reciter:copy-link')}
                 ariaLabel={t('reciter:copy-link')}
               >
-                <CopyLinkIcon />
+                <FiLink />
               </Button>
               <Button
                 shape={ButtonShape.Circle}
@@ -144,7 +141,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
                 {currentlyDownloadChapterAudioId === chapter.id ? (
                   <Spinner size={SpinnerSize.Small} />
                 ) : (
-                  <DownloadIcon />
+                  <FiDownload />
                 )}
               </Button>
             </div>

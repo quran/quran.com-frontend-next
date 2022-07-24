@@ -3,10 +3,9 @@ import React from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
+import { FiCode, FiGlobe } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
-import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu, { PopoverMenuExpandDirection } from '../dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '../dls/Toast/Toast';
@@ -106,14 +105,14 @@ const LanguageSelector = ({
             className={styles.triggerButton}
             prefix={
               <span className={styles.globeIconWrapper}>
-                <GlobeIcon />
+                <FiGlobe />
               </span>
             }
             tooltip={t('languages')}
             variant={ButtonVariant.Ghost}
             suffix={
               <span className={styles.triggerSuffixContainer}>
-                <ChevronSelectIcon />
+                <FiCode />
               </span>
             }
           >
@@ -127,7 +126,7 @@ const LanguageSelector = ({
             ariaLabel={t('aria.select-lng')}
           >
             <span className={styles.globeIconWrapper}>
-              <GlobeIcon />
+              <FiGlobe />
             </span>
           </Button>
         )

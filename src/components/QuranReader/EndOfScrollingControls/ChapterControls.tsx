@@ -1,9 +1,7 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import useScrollToTop from 'src/hooks/useScrollToTop';
@@ -31,7 +29,7 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
       {!isFirstSurah(chapterNumber) && (
         <Button
           type={ButtonType.Secondary}
-          prefix={<ChevronLeftIcon />}
+          prefix={<FiArrowLeft />}
           href={getSurahNavigationUrl(chapterNumber - 1)}
           onClick={() => {
             logButtonClick('chapter_control_prev_chapter');
@@ -52,7 +50,7 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
       {!isLastSurah(chapterNumber) && (
         <Button
           type={ButtonType.Secondary}
-          suffix={<ChevronRightIcon />}
+          suffix={<FiArrowRight />}
           href={getSurahNavigationUrl(chapterNumber + 1)}
           onClick={() => {
             logButtonClick('chapter_control_next_chapter');

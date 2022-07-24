@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiPlay } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button from '../dls/Button/Button';
 import { playReciterStation } from '../Radio/ReciterStationList';
 
@@ -63,7 +63,7 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
         <div className={styles.actionContainer}>
           <Button
             className={styles.playButton}
-            prefix={<PlayIcon />}
+            prefix={<FiPlay />}
             onClick={onPlayReciterStation}
             shouldFlipOnRTL={false}
           >

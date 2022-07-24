@@ -3,10 +3,9 @@ import { useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { FaBookmark } from 'react-icons/fa';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
-
-import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
 
 import styles from './TranslationViewCell.module.scss';
 
@@ -101,7 +100,7 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
       variant={ButtonVariant.Ghost}
       size={ButtonSize.Small}
     >
-      <BookmarkedIcon />
+      <FaBookmark />
     </Button>
   );
 };

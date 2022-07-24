@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation';
-
-import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
+import { FiMoreHorizontal } from 'react-icons/fi';
 
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
@@ -21,7 +20,7 @@ const OverflowAudioPlayerActionsMenu = () => {
         isModal={false}
         trigger={
           <Button tooltip={t('more')} variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
-            <OverflowMenuIcon />
+            <FiMoreHorizontal />
           </Button>
         }
         onOpenChange={(open: boolean) => {

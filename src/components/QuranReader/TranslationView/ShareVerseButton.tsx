@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
-
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
+import { FiLink } from 'react-icons/fi';
 
 import styles from './TranslationViewCell.module.scss';
 
@@ -69,7 +68,7 @@ const ShareVerseButton = ({
       ariaLabel={t('aria.share-ayah')}
     >
       <span className={styles.icon}>
-        <CopyLinkIcon />
+        <FiLink />
       </span>
     </Button>
   );

@@ -1,9 +1,6 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-
-import AppleIcon from '../../../public/icons/apple.svg';
-import FacebookIcon from '../../../public/icons/facebook.svg';
-import GoogleIcon from '../../../public/icons/google.svg';
+import { BsApple, BsFacebook, BsGoogle } from 'react-icons/bs';
 
 import styles from './login.module.scss';
 
@@ -20,7 +17,7 @@ const SocialLogin = () => {
     <>
       {process.env.NEXT_PUBLIC_ENABLE_GOOGLE_LOGIN === 'true' && (
         <Button
-          prefix={<GoogleIcon />}
+          prefix={<BsGoogle />}
           className={classNames(styles.loginButton, styles.googleButton)}
           href={makeGoogleLoginUrl()}
         >
@@ -29,7 +26,7 @@ const SocialLogin = () => {
       )}
       {process.env.NEXT_PUBLIC_ENABLE_FB_LOGIN === 'true' && (
         <Button
-          prefix={<FacebookIcon />}
+          prefix={<BsFacebook />}
           className={classNames(styles.loginButton, styles.facebookButton)}
           href={makeFacebookLoginUrl()}
         >
@@ -37,7 +34,7 @@ const SocialLogin = () => {
         </Button>
       )}
       {process.env.NEXT_PUBLIC_ENABLE_APPLE_LOGIN === 'true' && (
-        <Button href={makeAppleLoginUrl()} prefix={<AppleIcon />} className={styles.loginButton}>
+        <Button href={makeAppleLoginUrl()} prefix={<BsApple />} className={styles.loginButton}>
           {t('continue-apple')}
         </Button>
       )}

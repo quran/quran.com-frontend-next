@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
+import { FiCode } from 'react-icons/fi';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
-import ChevronSelectIcon from '../../../../public/icons/chevron-select.svg';
 import Button, { ButtonVariant } from '../Button/Button';
 import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
@@ -32,7 +32,7 @@ const FooterThemeSwitcher = () => {
           variant={ButtonVariant.Ghost}
           suffix={
             <span className={styles.suffixIconContainer}>
-              <ChevronSelectIcon />
+              <FiCode />
             </span>
           }
         >

@@ -2,8 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
-
-import IconMobile from '../../../../public/icons/mobile.svg';
+import { FiSmartphone } from 'react-icons/fi';
 
 import styles from './MobileApps.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
@@ -12,7 +11,7 @@ const MobileApps = () => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
-      <NavigationDrawerItem title={t('mobile-apps')} icon={<IconMobile />} isStale />
+      <NavigationDrawerItem title={t('mobile-apps')} icon={<FiSmartphone />} isStale />
       <div className={styles.centerHorizontally}>
         <div className={styles.imagesContainer}>
           <a

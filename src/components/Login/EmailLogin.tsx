@@ -1,7 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
+import { FiMail, FiArrowLeft } from 'react-icons/fi';
 
-import MailIcon from '../../../public/icons/mail.svg';
-import ArrowLeft from '../../../public/icons/west.svg';
 import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder, { SubmissionResult } from '../FormBuilder/FormBuilder';
 
@@ -59,7 +58,7 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
           },
         ]}
         actionProps={{
-          prefix: <MailIcon />,
+          prefix: <FiMail />,
           className: styles.loginButton,
           type: ButtonType.Success,
         }}
@@ -72,7 +71,7 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
         className={styles.loginButton}
         variant={ButtonVariant.Ghost}
         type={ButtonType.Secondary}
-        prefix={<ArrowLeft />}
+        prefix={<FiArrowLeft />}
       >
         {t('login:other-options')}
       </Button>

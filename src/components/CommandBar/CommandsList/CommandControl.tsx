@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 
-import CloseIcon from '../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 // import KeyboardInput from 'src/components/dls/KeyboardInput';
@@ -25,7 +25,7 @@ const CommandControl: React.FC<Props> = ({
         size={ButtonSize.Small}
         onClick={(e) => onRemoveCommandClicked(e, commandKey)}
       >
-        <CloseIcon />
+        <FiX />
       </Button>
     );
   }

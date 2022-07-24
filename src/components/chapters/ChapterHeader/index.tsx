@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiInfo } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-
-import InfoIcon from '../../../../public/icons/info.svg';
 
 import styles from './ChapterHeader.module.scss';
 
@@ -92,7 +91,7 @@ const ChapterHeader: React.FC<Props> = ({
               <Button
                 size={ButtonSize.Small}
                 variant={ButtonVariant.Ghost}
-                prefix={<InfoIcon />}
+                prefix={<FiInfo />}
                 href={getSurahInfoNavigationUrl(chapterId)}
                 shouldPrefetch={false}
                 hasSidePadding={false}
@@ -110,7 +109,7 @@ const ChapterHeader: React.FC<Props> = ({
             <Button
               size={ButtonSize.Small}
               variant={ButtonVariant.Ghost}
-              prefix={<InfoIcon />}
+              prefix={<FiInfo />}
               href={getSurahInfoNavigationUrl(chapterId)}
               shouldPrefetch={false}
               hasSidePadding={false}

@@ -2,8 +2,7 @@ import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
-
-import SearchIcon from '../../../../../public/icons/search-book.svg';
+import { FiSearch } from 'react-icons/fi';
 
 import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';
@@ -51,7 +50,7 @@ const WordByWordVerseAction: React.FC<Props> = ({ verse, onActionTriggered }) =>
 
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item icon={<FiSearch />} onClick={onIconClicked}>
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal

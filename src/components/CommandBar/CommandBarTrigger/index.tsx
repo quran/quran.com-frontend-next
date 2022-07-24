@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiSearch } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-
-import IconSearch from '../../../../public/icons/search.svg';
 
 import styles from './CommandBarTrigger.module.scss';
 
@@ -30,7 +29,7 @@ const CommandBarTrigger: React.FC = () => {
       id="command-bar"
     >
       <div className={styles.leftSection}>
-        <IconSearch />
+        <FiSearch />
         <span className={styles.placeholder}>{t('command-bar.placeholder')}</span>
       </div>
       <div className={styles.actionsContainer}>

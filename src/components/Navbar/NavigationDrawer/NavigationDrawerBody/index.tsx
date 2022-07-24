@@ -1,19 +1,21 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import {
+  FiTerminal,
+  FiMessageSquare,
+  FiHome,
+  FiInfo,
+  FiLock,
+  FiSmartphone,
+  FiLoader,
+  FiHelpCircle,
+  FiRadio,
+  FiRss,
+} from 'react-icons/fi';
 
-import IconDevelopers from '../../../../../public/icons/developers.svg';
-import IconFeedback from '../../../../../public/icons/feedback.svg';
-import IconHome from '../../../../../public/icons/home.svg';
-import IconInfo from '../../../../../public/icons/info.svg';
-import IconLock from '../../../../../public/icons/lock.svg';
-import MobileIcon from '../../../../../public/icons/mobile.svg';
-import IconProductUpdates from '../../../../../public/icons/product-updates.svg';
 import IconQ from '../../../../../public/icons/Q_simple.svg';
 import QuranReflect from '../../../../../public/icons/QR.svg';
-import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
-import IconRadio2 from '../../../../../public/icons/radio-2.svg';
-import IconRadio from '../../../../../public/icons/radio.svg';
 import Tarteel from '../../../../../public/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
@@ -23,9 +25,9 @@ import styles from './NavigationDrawerBody.module.scss';
 import FundraisingBanner from 'src/components/Fundaraising/FundraisingBanner';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 
-// import IconDonate from '../../../../../public/icons/donate.svg';
-// import IconUpdates from '../../../../../public/icons/updates.svg';
-// import IconCollection from '../../../../../public/icons/collection.svg';
+// import { IconDonate } from 'react-icons/fi';
+// import { IconUpdates } from 'react-icons/fi';
+// import { IconCollection } from 'react-icons/fi';
 
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
@@ -33,27 +35,27 @@ const NavigationDrawerBody = () => {
     <div className={styles.listItemsContainer}>
       <FundraisingBanner />
       <h3 className={styles.subtitle}>{t('menu')}</h3>
-      <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
-      <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />
-      <NavigationDrawerItem href="/reciters" title={t('reciters')} icon={<IconRadio />} />
-      <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
-      <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
+      <NavigationDrawerItem title={t('home')} icon={<FiHome />} href="/" />
+      <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<FiRadio />} />
+      <NavigationDrawerItem href="/reciters" title={t('reciters')} icon={<FiRss />} />
+      <NavigationDrawerItem title={t('about')} icon={<FiInfo />} href="/about-us" />
+      <NavigationDrawerItem title={t('mobile-apps')} icon={<FiSmartphone />} href="/apps" />
       {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
-      <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
+      <NavigationDrawerItem title={t('developers')} icon={<FiTerminal />} href="/developers" />
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
-      <NavigationDrawerItem title={t('privacy')} icon={<IconLock />} href="/privacy" />
+      <NavigationDrawerItem title={t('privacy')} icon={<FiLock />} href="/privacy" />
       <NavigationDrawerItem
         title={t('product-updates')}
-        icon={<IconProductUpdates />}
+        icon={<FiLoader />}
         href="/product-updates"
       />
       <NavigationDrawerItem
         title={t('feedback')}
-        icon={<IconFeedback />}
+        icon={<FiMessageSquare />}
         href="https://feedback.quran.com/"
         isExternalLink
       />
-      <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
+      <NavigationDrawerItem title={t('help')} icon={<FiHelpCircle />} href="/support" />
       {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
       {/* <NavigationDrawerItem title="Duaas" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}

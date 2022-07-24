@@ -1,8 +1,7 @@
 import React, { memo } from 'react';
 
 import classNames from 'classnames';
-
-import CloseIcon from '../../../../../../public/icons/close.svg';
+import { FiX } from 'react-icons/fi';
 
 import styles from './Tag.module.scss';
 
@@ -30,7 +29,7 @@ const Tag: React.FC<Props> = ({ onRemoveTagClicked, size, tag }) => (
       }}
     >
       <span role="img" aria-label="close" className={styles.icon}>
-        <CloseIcon />
+        <FiX />
       </span>
     </span>
   </span>

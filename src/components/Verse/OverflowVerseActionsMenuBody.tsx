@@ -5,14 +5,12 @@ import React, { useState, useEffect, useMemo } from 'react';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { FaBookmark, FaRegBookmark } from 'react-icons/fa';
+import { FiCopy, FiArrowRight } from 'react-icons/fi';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import BookmarkedIcon from '../../../public/icons/bookmark.svg';
-import CopyIcon from '../../../public/icons/copy.svg';
-import LinkIcon from '../../../public/icons/east.svg';
-import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
@@ -232,7 +230,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
 
   let bookmarkIcon = <Spinner />;
   if (!isVerseBookmarkedLoading) {
-    bookmarkIcon = isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />;
+    bookmarkIcon = isVerseBookmarked ? <FaBookmark /> : <FaRegBookmark />;
   }
 
   return (
@@ -241,7 +239,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         [DATA_POPOVER_PORTALLED]: isPortalled,
       }}
     >
-      <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
+      <PopoverMenu.Item onClick={onCopyClicked} icon={<FiCopy />}>
         {isCopied ? `${t('copied')}!` : `${t('copy')}`}
       </PopoverMenu.Item>
 
@@ -271,7 +269,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
 
       {shouldShowGoToAyah && (
-        <PopoverMenu.Item onClick={onGoToAyahClicked} icon={<LinkIcon />}>
+        <PopoverMenu.Item onClick={onGoToAyahClicked} icon={<FiArrowRight />}>
           {t('quran-reader:go-ayah')}
         </PopoverMenu.Item>
       )}

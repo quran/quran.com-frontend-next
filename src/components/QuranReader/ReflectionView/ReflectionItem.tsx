@@ -5,15 +5,16 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
-
-import ChatIcon from '../../../../public/icons/chat.svg';
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
-import CopyIcon from '../../../../public/icons/copy.svg';
-import LoveIcon from '../../../../public/icons/love.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
-import VerifiedIcon from '../../../../public/icons/verified.svg';
+import {
+  FiMessageCircle,
+  FiChevronDown,
+  FiLink,
+  FiCopy,
+  FiHeart,
+  FiMoreHorizontal,
+  FiShare2,
+  FiAward,
+} from 'react-icons/fi';
 
 import styles from './ReflectionItem.module.scss';
 
@@ -187,7 +188,7 @@ const ReflectionItem = ({
               {authorName}
               {isAuthorVerified && (
                 <span className={styles.verifiedIcon}>
-                  <VerifiedIcon />
+                  <FiAward />
                 </span>
               )}
             </Link>
@@ -214,7 +215,7 @@ const ReflectionItem = ({
                         [styles.flipChevron]: shouldShowReferredVerses,
                       })}
                     >
-                      {nonChapterVerseReferences.length > 0 && <ChevronDownIcon />}
+                      {nonChapterVerseReferences.length > 0 && <FiChevronDown />}
                     </span>
                   </span>
                 </>
@@ -231,7 +232,7 @@ const ReflectionItem = ({
                 variant={ButtonVariant.Ghost}
                 shape={ButtonShape.Circle}
               >
-                <OverflowMenuIcon />
+                <FiMoreHorizontal />
               </Button>
             }
           >
@@ -287,7 +288,7 @@ const ReflectionItem = ({
           variant={ButtonVariant.Compact}
           href={getQuranReflectPostUrl(id)}
           isNewTab
-          prefix={<LoveIcon />}
+          prefix={<FiHeart />}
           size={ButtonSize.Small}
           onClick={onLikesCountClicked}
         >
@@ -296,7 +297,7 @@ const ReflectionItem = ({
         <Button
           className={styles.actionItemContainer}
           variant={ButtonVariant.Compact}
-          prefix={<ChatIcon />}
+          prefix={<FiMessageCircle />}
           href={getQuranReflectPostCommentUrl(id)}
           isNewTab
           size={ButtonSize.Small}
@@ -313,22 +314,14 @@ const ReflectionItem = ({
               size={ButtonSize.Small}
               tooltip={t('common:share')}
             >
-              <ShareIcon />
+              <FiShare2 />
             </Button>
           }
         >
-          <PopoverMenu.Item
-            shouldCloseMenuAfterClick
-            icon={<CopyLinkIcon />}
-            onClick={onCopyLinkClicked}
-          >
+          <PopoverMenu.Item shouldCloseMenuAfterClick icon={<FiLink />} onClick={onCopyLinkClicked}>
             {t('quran-reader:cpy-link')}
           </PopoverMenu.Item>
-          <PopoverMenu.Item
-            shouldCloseMenuAfterClick
-            icon={<CopyIcon />}
-            onClick={onCopyTextClicked}
-          >
+          <PopoverMenu.Item shouldCloseMenuAfterClick icon={<FiCopy />} onClick={onCopyTextClicked}>
             {t('quran-reader:copy-text')}
           </PopoverMenu.Item>
         </PopoverMenu>

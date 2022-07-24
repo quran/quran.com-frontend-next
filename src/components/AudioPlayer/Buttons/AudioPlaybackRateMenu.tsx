@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiCheck, FiArrowLeft } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-
-import CheckIcon from '../../../../public/icons/check.svg';
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
@@ -49,7 +47,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
       if (isLoading) {
         return <Spinner />;
       }
-      return <CheckIcon />;
+      return <FiCheck />;
     }
     return <span />;
   };
@@ -69,7 +67,7 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
   ));
   return (
     <>
-      <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBack}>
+      <PopoverMenu.Item shouldFlipOnRTL icon={<FiArrowLeft />} onClick={onBack}>
         {t('audio.playback-speed')}
       </PopoverMenu.Item>
       <PopoverMenu.Divider />

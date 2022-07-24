@@ -5,9 +5,8 @@ import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { FiSearch } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-
-import IconSearch from '../../../../public/icons/search.svg';
 
 import styles from './SearchSelectionBody.module.scss';
 
@@ -123,7 +122,7 @@ const TranslationSelectionBody = () => {
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
           <Input
-            prefix={<IconSearch />}
+            prefix={<FiSearch />}
             id="translations-search"
             value={searchQuery}
             onChange={setSearchQuery}

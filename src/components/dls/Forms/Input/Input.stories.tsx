@@ -2,8 +2,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
 
-import SearchIcon from '../../../../../public/icons/search.svg';
-import SettingIcon from '../../../../../public/icons/settings.svg';
+import { FiSearch, FiSettings } from 'react-icons/fi';
 
 import Input, { InputSize, InputType } from '.';
 
@@ -156,8 +155,8 @@ const Template = (args) => (
     <Input {...args} />
   </span>
 );
-const PrefixIcon = <SettingIcon />;
-const SuffixIcon = <SearchIcon />;
+const PrefixIcon = <FiSettings />;
+const SuffixIcon = <FiSearch />;
 const Prefix = <p>https://</p>;
 const Suffix = <p>.com</p>;
 export const DefaultInput = Template.bind({});

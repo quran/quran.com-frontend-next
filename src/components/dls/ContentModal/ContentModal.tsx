@@ -2,8 +2,8 @@ import { useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
+import { FiX } from 'react-icons/fi';
 
-import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
@@ -71,7 +71,7 @@ const ContentModal = ({
                     shape={ButtonShape.Circle}
                     onClick={onClose}
                   >
-                    <CloseIcon />
+                    <FiX />
                   </Button>
                 </Dialog.Close>
               )}

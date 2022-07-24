@@ -1,10 +1,9 @@
 import { useState, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiArrowRight, FiUser } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 
-import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
-import PersonIcon from '../../../public/icons/person.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
@@ -60,12 +59,12 @@ const OverflowAudioPlayActionsMenuBody = () => {
         >
           <div className={styles.menuWithNestedItems}>
             {t('audio.playback-speed')}
-            <ChevronRightIcon />
+            <FiArrowRight />
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
           key={2}
-          icon={<PersonIcon />}
+          icon={<FiUser />}
           onClick={() => {
             logButtonClick(`audio_player_overflow_menu_reciter`);
             setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
@@ -73,7 +72,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
         >
           <div className={styles.menuWithNestedItems}>
             {t('audio.select-reciter')}
-            <ChevronRightIcon />
+            <FiArrowRight />
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Divider key={3} />,

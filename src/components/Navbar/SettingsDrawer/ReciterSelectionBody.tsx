@@ -3,9 +3,8 @@ import { useState } from 'react';
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { FiSearch } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-
-import IconSearch from '../../../../public/icons/search.svg';
 
 import styles from './ReciterSelectionBody.module.scss';
 
@@ -73,7 +72,7 @@ const SettingsReciter = () => {
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
           <Input
-            prefix={<IconSearch />}
+            prefix={<FiSearch />}
             id="translations-search"
             value={searchQuery}
             onChange={setSearchQuery}

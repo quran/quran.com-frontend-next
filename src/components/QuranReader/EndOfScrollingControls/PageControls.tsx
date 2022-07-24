@@ -1,10 +1,8 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
-
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -33,7 +31,7 @@ const PageControls: React.FC<Props> = ({ lastVerse }) => {
       {!isFirstPage(page) && (
         <Button
           type={ButtonType.Secondary}
-          prefix={<ChevronLeftIcon />}
+          prefix={<FiArrowLeft />}
           href={getPageNavigationUrl(page - 1)}
           onClick={() => {
             logButtonClick('page_control_prev_page');
@@ -45,7 +43,7 @@ const PageControls: React.FC<Props> = ({ lastVerse }) => {
       {!isLastPage(page, quranFont, mushafLines) && (
         <Button
           type={ButtonType.Secondary}
-          suffix={<ChevronRightIcon />}
+          suffix={<FiArrowRight />}
           href={getPageNavigationUrl(page + 1)}
           onClick={() => {
             logButtonClick('page_control_next_page');

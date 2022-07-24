@@ -1,9 +1,8 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { FiDownload } from 'react-icons/fi';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-
-import DownloadIcon from '../../../../public/icons/download.svg';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
@@ -49,7 +48,7 @@ const DownloadAudioButton = () => {
   return (
     <PopoverMenu.Item
       onClick={onClick}
-      icon={loading ? <Spinner size={SpinnerSize.Large} /> : <DownloadIcon />}
+      icon={loading ? <Spinner size={SpinnerSize.Large} /> : <FiDownload />}
     >
       {t('audio.player.download')}
     </PopoverMenu.Item>

@@ -4,9 +4,9 @@ import React, { useState, useCallback } from 'react';
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
+import { FiSearch } from 'react-icons/fi';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
@@ -147,7 +147,7 @@ const CommandBarBody: React.FC = () => {
       >
         {!isVoiceSearchFlowStarted && (
           <div className={styles.textInputContainer}>
-            <IconSearch />
+            <FiSearch />
             <input
               onChange={onSearchQueryChange}
               placeholder={t('command-bar.placeholder')}
