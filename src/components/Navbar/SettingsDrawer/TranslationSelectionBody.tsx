@@ -15,7 +15,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';
 import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   selectTranslations,
   setSelectedTranslations,

@@ -39,7 +39,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
-
   const { data: userData } = useSWRImmutable(
     isLoggedIn() ? makeUserProfileUrl() : null,
     async () => {
@@ -80,6 +79,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
               <UserAccountModal
                 requiredFields={userData?.requiredFields}
                 announcement={userData?.announcement}
+                isLocalDataSynced={userData?.isLocalDataSynced}
               />
               <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
               <GlobalListeners />

@@ -10,7 +10,7 @@ import styles from './WordByWordSection.module.scss';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setShowWordByWordTranslation,
   setShowWordByWordTransliteration,

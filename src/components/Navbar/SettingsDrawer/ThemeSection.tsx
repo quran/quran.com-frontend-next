@@ -13,7 +13,7 @@ import Section from './Section';
 import styles from './ThemeSection.module.scss';
 
 import Switch, { SwitchSize } from 'src/components/dls/Switch/Switch';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
 import { logValueChange } from 'src/utils/eventLogger';

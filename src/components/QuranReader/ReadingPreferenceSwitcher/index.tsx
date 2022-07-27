@@ -5,7 +5,7 @@ import LoadingSwitcher from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
 import Switch from 'src/components/dls/Switch/Switch';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   selectReadingPreferences,
   setReadingPreference,
