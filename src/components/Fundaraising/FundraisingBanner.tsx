@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './FundraisingBanner.module.scss';
 
+import Moon from 'src/components/Icons/Moon/Moon';
 import { logEvent } from 'src/utils/eventLogger';
 import openGivingLoopPopup from 'src/utils/givingloop';
 
@@ -47,7 +47,7 @@ const FundraisingBanner = () => {
         {t('fundraising.learn-more')}
       </Button>
       <div className={styles.backgroundImageContainer}>
-        <MoonIllustrationSVG />
+        <Moon />
       </div>
     </div>
   );

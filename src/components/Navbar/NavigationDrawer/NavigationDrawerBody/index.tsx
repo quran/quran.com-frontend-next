@@ -14,13 +14,14 @@ import QuranReflect from '../../../../../public/icons/QR.svg';
 import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
 import IconRadio2 from '../../../../../public/icons/radio-2.svg';
 import IconRadio from '../../../../../public/icons/radio.svg';
-import Tarteel from '../../../../../public/icons/tarteel.svg';
-// import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
+
+// import MobileApps from '../MobileApps';
 
 import styles from './NavigationDrawerBody.module.scss';
 
 import FundraisingBanner from 'src/components/Fundaraising/FundraisingBanner';
+import TarteelLogo from 'src/components/Icons/TarteelLogo/TarteelLogo';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 
 // import IconDonate from '../../../../../public/icons/donate.svg';
@@ -108,7 +109,7 @@ const NavigationDrawerBody = () => {
         }}
         isExternalLink
         title={t('tarteel.name')}
-        icon={<Tarteel />}
+        icon={<TarteelLogo />}
         href="https://download.tarteel.ai/"
       />
     </div>

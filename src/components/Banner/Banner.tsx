@@ -6,11 +6,11 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
+import Moon from 'src/components/Icons/Moon/Moon';
 import { selectIsBannerVisible } from 'src/redux/slices/banner';
 import openGivingLoopPopup from 'src/utils/givingloop';
 
@@ -49,7 +49,7 @@ const Banner = ({ text, cta }: BannerProps) => {
     >
       <div className={styles.description}>
         <div className={styles.illustrationContainer}>
-          <MoonIllustrationSVG />
+          <Moon />
         </div>
         <div className={styles.text}>{text}</div>
       </div>

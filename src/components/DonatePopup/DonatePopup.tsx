@@ -4,12 +4,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import CloseIcon from '../../../public/icons/close.svg';
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Modal from '../dls/Modal/Modal';
 
 import styles from './DonatePopup.module.scss';
 
+import Moon from 'src/components/Icons/Moon/Moon';
 import { selectSessionCount } from 'src/redux/slices/session';
 import openGivingLoopPopup from 'src/utils/givingloop';
 
@@ -44,7 +44,7 @@ const DonatePopup = () => {
     <Modal isOpen contentClassName={styles.modalSize}>
       <div className={styles.outerContainer}>
         <div className={styles.illustrationContainer}>
-          <MoonIllustrationSVG />
+          <Moon />
         </div>
         <div className={styles.container}>
           <Button
