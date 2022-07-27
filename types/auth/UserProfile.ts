@@ -11,7 +11,7 @@ interface UserProfile {
   photoUrl?: string;
   requiredFields: FormField[];
   announcement: Announcement;
-  isLocalDataSynced: boolean;
+  lastSyncAt?: Date;
 }
 
 export default UserProfile;

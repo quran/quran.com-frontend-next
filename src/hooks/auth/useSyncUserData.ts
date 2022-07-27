@@ -1,6 +1,9 @@
-import { shallowEqual, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { selectLastSyncAt, setLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -11,6 +14,7 @@ import {
   makeReadingSessionsUrl,
   makeUserProfileUrl,
 } from 'src/utils/auth/apiPaths';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
@@ -45,38 +49,38 @@ const formatLocalReadingSession = (ayahKey: string) => {
  * once the user signs up so that he doesn't lose them once
  * he logs in again.
  *
- * @param {boolean|undefined} isLocalDataSynced
  */
-const useSyncUserData = (isLocalDataSynced?: boolean) => {
-  const { mutate } = useSWRConfig();
+const useSyncUserData = () => {
+  const dispatch = useDispatch();
+  const { cache, mutate } = useSWRConfig();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const localLastSyncAt = useSelector(selectLastSyncAt, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
-  if (isLocalDataSynced === false) {
-    const requestPayload = {
-      [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
-        formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
-      ),
-      [SyncDataType.READING_SESSIONS]: Object.keys(recentReadingSessions).map((ayahKey) =>
-        formatLocalReadingSession(ayahKey),
-      ),
-    };
-    syncUserLocalData(requestPayload)
-      .then(() => {
-        mutate(makeReadingSessionsUrl(), (data) => ({
-          ...data,
-          ...requestPayload[SyncDataType.READING_SESSIONS],
-        }));
-        mutate(makeBookmarksUrl(mushafId), (data) => ({
-          ...data,
-          ...requestPayload[SyncDataType.BOOKMARKS],
-        }));
-        mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, isLocalDataSynced: true }));
-      })
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      .catch(() => {});
-  }
+  useEffect(() => {
+    // if there is no local last sync stored, we should sync the local data to the DB
+    if (isLoggedIn() && !localLastSyncAt) {
+      const requestPayload = {
+        [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
+          formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
+        ),
+        [SyncDataType.READING_SESSIONS]: Object.keys(recentReadingSessions).map((ayahKey) =>
+          formatLocalReadingSession(ayahKey),
+        ),
+      };
+      syncUserLocalData(requestPayload)
+        .then((response) => {
+          const { lastSyncAt } = response;
+          cache.delete(makeReadingSessionsUrl());
+          cache.delete(makeBookmarksUrl(mushafId));
+          mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
+          dispatch({ type: setLastSyncAt.type, payload: lastSyncAt });
+        })
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        .catch(() => {});
+    }
+  }, [bookmarkedVerses, cache, dispatch, localLastSyncAt, mushafId, mutate, recentReadingSessions]);
 };
 export default useSyncUserData;

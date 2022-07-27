@@ -11,11 +11,10 @@ const AnnouncementModalBodyResolver = dynamic(() => import('./AnnouncementModalB
 type Props = {
   requiredFields: FormField[];
   announcement: Announcement;
-  isLocalDataSynced: boolean;
 };
 
-const UserAccountModal: React.FC<Props> = ({ requiredFields, announcement, isLocalDataSynced }) => {
-  useSyncUserData(isLocalDataSynced);
+const UserAccountModal: React.FC<Props> = ({ requiredFields, announcement }) => {
+  useSyncUserData();
   let modalBody;
   if (requiredFields && requiredFields?.length !== 0) {
     modalBody = <CompleteSignupForm requiredFields={requiredFields} />;

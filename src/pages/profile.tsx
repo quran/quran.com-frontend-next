@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
 import layoutStyle from './index.module.scss';
@@ -16,6 +17,7 @@ import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
+import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { getUserProfile, logoutUser } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
@@ -30,6 +32,7 @@ interface Props {
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const router = useRouter();
 
@@ -50,6 +53,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
       return;
     }
     logoutUser().then(() => {
+      dispatch({ type: removeLastSyncAt.type });
       router.push('/login');
       router.reload();
     });

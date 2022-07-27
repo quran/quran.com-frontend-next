@@ -23,6 +23,7 @@ enum SliceName {
   SIDEBAR_NAVIGATION = 'sidebarNavigation',
   SEARCH = 'search',
   LOCALE = 'locale',
+  USER_DATA_SYNC = 'userDataSync',
 }
 
 export default SliceName;
