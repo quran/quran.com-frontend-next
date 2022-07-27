@@ -61,7 +61,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
   const toast = useToast();
-  const { cache } = useSWRConfig();
+  const { cache, mutate: globalMutate } = useSWRConfig();
   useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
@@ -169,41 +169,50 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     );
 
     if (isLoggedIn()) {
+      // optimistic update, we are making assumption that the bookmark update will succeed
+      mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked, {
+        revalidate: false,
+      });
+
+      // when it's translation view, we need to invalidate the cached bookmarks range
+      if (bookmarksRangeUrl) {
+        const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
+        const nextBookmarkedVersesRange = {
+          ...bookmarkedVersesRange,
+          [verse.verseKey]: !isVerseBookmarked,
+        };
+        globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
+          revalidate: false,
+        });
+      }
+
+      cache.delete(
+        makeBookmarksUrl(
+          getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+        ),
+      );
+
+      toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
+        status: ToastStatus.Success,
+      });
+
       addOrRemoveBookmark(
         verse.chapterId as number,
         getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
         BookmarkType.Ayah,
         !isVerseBookmarked,
         verse.verseNumber,
-      )
-        .then(() => {
-          mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked);
-          // when it's translation view, we need to invalidate the cached bookmarks range
-          if (bookmarksRangeUrl) {
-            cache.delete(bookmarksRangeUrl);
-          }
-
-          cache.delete(
-            makeBookmarksUrl(
-              getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-            ),
-          );
-
-          toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
-            status: ToastStatus.Success,
-          });
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            toast(t('common:error.bookmark-sync'), {
-              status: ToastStatus.Error,
-            });
-            return;
-          }
-          toast(t('error.general'), {
+      ).catch((err) => {
+        if (err.status === 400) {
+          toast(t('common:error.bookmark-sync'), {
             status: ToastStatus.Error,
           });
+          return;
+        }
+        toast(t('error.general'), {
+          status: ToastStatus.Error,
         });
+      });
     } else {
       dispatch(toggleVerseBookmark(verse.verseKey));
     }
@@ -251,7 +260,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
       />
 
-      <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
+      <PopoverMenu.Item
+        onClick={onToggleBookmarkClicked}
+        icon={bookmarkIcon}
+        isDisabled={isVerseBookmarkedLoading}
+      >
         {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
       </PopoverMenu.Item>
 
