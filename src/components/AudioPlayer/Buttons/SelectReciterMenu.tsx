@@ -11,8 +11,8 @@ import styles from './SelectReciterMenu.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
 import {
   selectAudioPlayerState,
   setReciterAndPauseAudio,

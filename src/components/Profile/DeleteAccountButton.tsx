@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import router from 'next/router';
+import { useDispatch } from 'react-redux';
 import { mutate } from 'swr';
 
 import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
@@ -11,6 +12,7 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './DeleteAccountButton.module.scss';
 
+import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { deleteAccount, logoutUser } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 
@@ -18,6 +20,7 @@ type DeleteAccountButtonProps = {
   isDisabled?: boolean;
 };
 const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
@@ -32,7 +35,8 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
     deleteAccount()
       .then(() => logoutUser())
       .then(() => mutate(makeUserProfileUrl()))
-      .then(() => router.push('/'));
+      .then(() => router.push('/'))
+      .then(() => dispatch({ type: removeLastSyncAt.type }));
   };
 
   const CONFIRMATION_TEXT = t('profile:delete-confirmation.confirmation-text');

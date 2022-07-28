@@ -18,6 +18,8 @@ export const makeCompleteAnnouncementUrl = (): string => makeUrl('users/complete
 
 export const makeDeleteAccountUrl = (): string => makeUrl('users/deleteAccount');
 
+export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData');
+
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
 export const makeSendMagicLinkUrl = (): string => makeUrl('auth/magiclogin');

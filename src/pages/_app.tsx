@@ -39,7 +39,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
-
   const { data: userData } = useSWRImmutable(
     isLoggedIn() ? makeUserProfileUrl() : null,
     async () => {

@@ -12,9 +12,12 @@ import {
   makeUserBulkPreferencesUrl,
   makeLogoutUrl,
   makeCompleteAnnouncementUrl,
+  makeSyncLocalDataUrl,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+import SyncDataType from 'types/auth/SyncDataType';
+import SyncUserLocalDataResponse from 'types/auth/SyncUserLocalDataResponse';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarksMap from 'types/BookmarksMap';
@@ -148,6 +151,10 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     chapterNumber,
     verseNumber,
   });
+
+export const syncUserLocalData = async (
+  payload: Record<SyncDataType, any>,
+): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
 export const getUserPreferences = async (locale: string): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
