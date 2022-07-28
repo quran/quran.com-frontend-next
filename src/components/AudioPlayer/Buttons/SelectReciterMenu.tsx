@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import CheckIcon from '../../../../public/icons/check.svg';
 import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
+import { AudioPlayerMachineContext } from '../audioPlayerMachine';
 
 import styles from './SelectReciterMenu.module.scss';
 
@@ -36,19 +37,21 @@ const SelectReciterMenu = ({ onBack }) => {
     actions: { onSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
 
   const onReciterSelected = useCallback(
     (reciter: Reciter) => {
-      onSettingsChange(
-        'reciter',
-        reciter.id,
-        setReciterAndPauseAudio({ reciter, locale: lang }),
-        setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
-        PreferenceGroup.AUDIO,
-        onBack,
-      );
+      audioPlayerService.send({ type: 'REQUEST_CHANGE_RECITER', reciterId: reciter.id });
+      // onSettingsChange(
+      //   'reciter',
+      //   reciter.id,
+      //   setReciterAndPauseAudio({ reciter, locale: lang }),
+      //   setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
+      //   PreferenceGroup.AUDIO,
+      //   onBack,
+      // );
     },
-    [audioPlayerState, lang, onBack, onSettingsChange],
+    [audioPlayerService],
   );
 
   const getItemIcon = useCallback(

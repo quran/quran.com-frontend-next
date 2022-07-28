@@ -1,9 +1,11 @@
 /* eslint-disable i18next/no-literal-string */
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
+
+import { AudioPlayerMachineContext } from '../AudioPlayer/audioPlayerMachine';
 
 import styles from './ReciterAdjustment.module.scss';
 
@@ -17,6 +19,7 @@ import Reciter from 'types/Reciter';
 const ReciterAdjustment: React.FC = () => {
   const dispatch = useDispatch();
   const { lang } = useTranslation();
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
 
   const { data, error } = useSWRImmutable(makeAvailableRecitersUrl(lang), () =>
     getAvailableReciters(lang).then((res) =>
@@ -30,7 +33,8 @@ const ReciterAdjustment: React.FC = () => {
 
   const onSelectedReciterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const reciter = reciters.find((r) => r.id === Number(e.target.value));
-    dispatch(setReciter(reciter));
+    audioPlayerService.send({ type: 'REQUEST_CHANGE_RECITER', reciterId: reciter.id });
+    // dispatch(setReciter(reciter));
   };
 
   if (error) return null;

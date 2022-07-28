@@ -3,10 +3,12 @@ import { useContext, useMemo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
+import { send } from 'xstate/lib/actions';
 
 import BackwardIcon from '../../../public/icons/backward.svg';
 import ForwardIcon from '../../../public/icons/forward.svg';
 
+import { AudioPlayerMachineContext } from './audioPlayerMachine';
 import { triggerSetCurrentTime } from './EventTriggers';
 
 import { getChapterAudioData } from 'src/api';
@@ -36,60 +38,65 @@ type SeekButtonProps = {
   type: SeekButtonType;
   isLoading: boolean;
 };
-const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
-  const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
-  const chaptersData = useContext(DataContext);
-  const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
-  const audioData = useSelector(selectAudioData);
-  const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const chapterData = useMemo(
-    () => getChapterData(chaptersData, highlightedChapter?.toString()),
-    [chaptersData, highlightedChapter],
-  );
+const SeekButton = ({ type }: SeekButtonProps) => {
+  const { t } = useTranslation('common');
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
+  // const dispatch = useDispatch();
+  // const chaptersData = useContext(DataContext);
+  // const { highlightedChapter, highlightedVerse } = useSelector(selectHighlightedLocation);
+  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+  // const audioData = useSelector(selectAudioData);
+  // const isInRepeatMode = useSelector(selectIsInRepeatMode);
+  // const chapterData = useMemo(
+  //   () => getChapterData(chaptersData, highlightedChapter?.toString()),
+  //   [chaptersData, highlightedChapter],
+  // );
 
-  const { data: chapterAudioData } = useSWRImmutable(
-    reciterId && audioData?.chapterId
-      ? makeChapterAudioDataUrl(reciterId, audioData?.chapterId, true)
-      : null, // only fetch when reciterId and chapterId is available
-    () => getChapterAudioData(reciterId, audioData?.chapterId, true),
-  );
+  // const { data: chapterAudioData } = useSWRImmutable(
+  //   reciterId && audioData?.chapterId
+  //     ? makeChapterAudioDataUrl(reciterId, audioData?.chapterId, true)
+  //     : null, // only fetch when reciterId and chapterId is available
+  //   () => getChapterAudioData(reciterId, audioData?.chapterId, true),
+  // );
 
-  const verseTimingData = chapterAudioData?.verseTimings || [];
+  // const verseTimingData = chapterAudioData?.verseTimings || [];
 
   const onSeek = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`audio_player_${type}`);
-    if (isInRepeatMode) {
-      // when in repeatMode, finish the repeat progress for current ayah
-      // otherwise the AudioRepeatManager will replay the current Ayah when we set the new timestamp
-      if (type === SeekButtonType.NextAyah) dispatch(finishRepeatEachVerseProgress());
-      else dispatch(resetRepeatEachVerseProgress(lang));
+    // // eslint-disable-next-line i18next/no-literal-string
+    // logButtonClick(`audio_player_${type}`);
+    // if (isInRepeatMode) {
+    //   // when in repeatMode, finish the repeat progress for current ayah
+    //   // otherwise the AudioRepeatManager will replay the current Ayah when we set the new timestamp
+    //   if (type === SeekButtonType.NextAyah) dispatch(finishRepeatEachVerseProgress());
+    //   else dispatch(resetRepeatEachVerseProgress(lang));
+    // }
+    if (type === SeekButtonType.PrevAyah) {
+      audioPlayerService.send({ type: 'REQUEST_PREVIOUS_AYAH' });
     }
-    const newVerse = type === SeekButtonType.PrevAyah ? highlightedVerse - 1 : highlightedVerse + 1;
-    const verseKey = makeVerseKey(highlightedChapter, newVerse);
-
-    const selectedVerseTiming = getVerseTimingByVerseKey(verseKey, verseTimingData);
-    triggerSetCurrentTime(selectedVerseTiming.timestampFrom / 1000); // AudioPlayer accept 'seconds' instead of 'ms'
+    if (type === SeekButtonType.NextAyah) {
+      audioPlayerService.send({ type: 'REQUEST_NEXT_AYAH' });
+    }
+    // const verseKey = makeVerseKey(highlightedChapter, newVerse);
+    // const selectedVerseTiming = getVerseTimingByVerseKey(verseKey, verseTimingData);
+    // triggerSetCurrentTime(selectedVerseTiming.timestampFrom / 1000); // AudioPlayer accept 'seconds' instead of 'ms'
   };
 
   // disable the button if loading, or chapterAudioData not available, or highlighted verse not available
   // or currently playing first verse or last verse
-  const isDisabled =
-    isLoading ||
-    !highlightedChapter ||
-    !highlightedVerse ||
-    !chapterAudioData ||
-    (type === SeekButtonType.PrevAyah && highlightedVerse <= 1) ||
-    (type === SeekButtonType.NextAyah && highlightedVerse >= chapterData?.versesCount);
+  // const isDisabled =
+  //   isLoading ||
+  //   !highlightedChapter ||
+  //   !highlightedVerse ||
+  //   !chapterAudioData ||
+  //   (type === SeekButtonType.PrevAyah && highlightedVerse <= 1) ||
+  //   (type === SeekButtonType.NextAyah && highlightedVerse >= chapterData?.versesCount);
 
   return (
     <Button
       tooltip={type === SeekButtonType.PrevAyah ? t('previous-ayah') : t('next-ayah')}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
-      isDisabled={isDisabled}
+      // isDisabled={isDisabled}
       onClick={onSeek}
     >
       {type === SeekButtonType.PrevAyah ? <BackwardIcon /> : <ForwardIcon />}

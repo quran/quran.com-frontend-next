@@ -1,18 +1,20 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
+import { inspect } from '@xstate/inspect';
+import { useActor } from '@xstate/react';
 import classNames from 'classnames';
+import { sendError } from 'next/dist/server/api-utils';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import usePlayNextAudioTrackForRadio from '../Radio/usePlayNextAudioTrackForRadio';
 
 import styles from './AudioPlayer.module.scss';
+import { AudioPlayerMachineContext } from './audioPlayerMachine';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import {
-  setIsPlaying,
-  selectAudioDataStatus,
   setAudioStatus,
   selectPlaybackRate,
   selectAudioData,
@@ -29,32 +31,14 @@ const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
 });
 
 const AudioPlayer = () => {
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [current, send] = useActor(audioService);
+
   const dispatch = useDispatch();
   const audioPlayerElRef = useRef<HTMLAudioElement>(null);
-  const audioDataStatus = useSelector(selectAudioDataStatus);
   const audioData = useSelector(selectAudioData, shallowEqual);
-  const isHidden = audioDataStatus === AudioDataStatus.NoFile;
+  const isHidden = current.matches('closed');
   const playbackRate = useSelector(selectPlaybackRate);
-  const onAudioPlay = useCallback(() => {
-    dispatch({ type: setIsPlaying.type, payload: true });
-  }, [dispatch]);
-  const onAudioPause = useCallback(() => {
-    dispatch({ type: setIsPlaying.type, payload: false });
-  }, [dispatch]);
-  const onAudioEnded = useCallback(() => {
-    dispatch({ type: setIsPlaying.type, payload: false });
-  }, [dispatch]);
-  const onAudioLoaded = useCallback(() => {
-    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
-  }, [dispatch]);
-
-  const onSeeked = useCallback(() => {
-    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
-  }, [dispatch]);
-
-  const onSeeking = useCallback(() => {
-    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Loading });
-  }, [dispatch]);
 
   usePlayNextAudioTrackForRadio(audioPlayerElRef);
 
@@ -85,17 +69,44 @@ const AudioPlayer = () => {
       >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
-          src={audioData?.audioUrl}
+          src={current?.context?.audioData?.audioUrl}
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerElRef}
           preload="auto"
-          onPlay={onAudioPlay}
-          onPause={onAudioPause}
-          onEnded={onAudioEnded}
-          onCanPlayThrough={onAudioLoaded}
-          onSeeking={onSeeking}
-          onSeeked={onSeeked}
+          onPlay={() => {
+            send('PLAYED');
+          }}
+          onPause={() => {
+            send('PAUSED');
+          }}
+          onError={(e) => {
+            send('AUDIO_PLAYER_ERROR');
+          }}
+          onAbort={() => {
+            // sendError('')
+          }}
+          onStalled={() => {
+            send('AUDIO_PLAYER_STALLED');
+          }}
+          onEnded={() => {
+            send('ENDED');
+          }}
+          onTimeUpdate={() => {
+            send({ type: 'CURRENT_TIME_CHANGED', timestamp: audioPlayerElRef.current.currentTime });
+          }}
+          onCanPlayThrough={() => {
+            send({
+              type: 'CAN_PLAY',
+              audioPlayerRef: audioPlayerElRef.current,
+            });
+          }}
+          onSeeking={() => {
+            dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Loading });
+          }}
+          onSeeked={() => {
+            dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
+          }}
         />
         {!isHidden && <AudioPlayerBody audioData={audioData} audioPlayerElRef={audioPlayerElRef} />}
       </div>

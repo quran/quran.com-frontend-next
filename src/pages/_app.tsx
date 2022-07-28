@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 
 import { IdProvider } from '@radix-ui/react-id';
+import { inspect } from '@xstate/inspect';
+import { useInterpret } from '@xstate/react';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -8,6 +10,10 @@ import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
+import {
+  audioPlayerMachine,
+  AudioPlayerMachineContext,
+} from 'src/components/AudioPlayer/audioPlayerMachine';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Footer from 'src/components/dls/Footer/Footer';
 import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
@@ -47,6 +53,13 @@ function MyApp({ Component, pageProps }): JSX.Element {
       return response;
     },
   );
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     inspect({
+  //       iframe: false,
+  //     });
+  //   }
+  // }, []);
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
@@ -65,6 +78,8 @@ function MyApp({ Component, pageProps }): JSX.Element {
     };
   }, [router.events]);
 
+  const audioPlayerService = useInterpret(audioPlayerMachine, { devTools: true });
+
   return (
     <>
       <Head>
@@ -73,27 +88,32 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="preconnect" href={API_HOST} />
       </Head>
       <FontPreLoader locale={locale} />
-      <ReduxProvider locale={locale}>
-        <ThemeProvider>
-          <IdProvider>
-            <ToastContainerProvider>
-              <UserAccountModal
-                requiredFields={userData?.requiredFields}
-                announcement={userData?.announcement}
-              />
-              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
-              <GlobalListeners />
-              <Navbar />
-              <DeveloperUtility />
-              <Component {...pageProps} />
-              <AudioPlayer />
-              <Footer />
-              <DonatePopup />
-            </ToastContainerProvider>
-          </IdProvider>
-        </ThemeProvider>
-        <SessionIncrementor />
-      </ReduxProvider>
+
+      <AudioPlayerMachineContext.Provider value={audioPlayerService}>
+        <ReduxProvider locale={locale}>
+          <ThemeProvider>
+            <IdProvider>
+              <ToastContainerProvider>
+                <UserAccountModal
+                  requiredFields={userData?.requiredFields}
+                  announcement={userData?.announcement}
+                />
+                <DefaultSeo
+                  {...createSEOConfig({ locale, description: t('default-description') })}
+                />
+                <GlobalListeners />
+                <Navbar />
+                <DeveloperUtility />
+                <Component {...pageProps} />
+                <AudioPlayer />
+                <Footer />
+                <DonatePopup />
+              </ToastContainerProvider>
+            </IdProvider>
+          </ThemeProvider>
+          <SessionIncrementor />
+        </ReduxProvider>
+      </AudioPlayerMachineContext.Provider>
 
       <ThirdPartyScripts />
     </>

@@ -1,10 +1,11 @@
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useEffect, useCallback, useContext } from 'react';
 
+import { useActor } from '@xstate/react';
 import { useRouter } from 'next/router';
 
+import { AudioPlayerMachineContext } from './audioPlayerMachine';
 import styles from './AudioPlayerSlider.module.scss';
 import { triggerSetCurrentTime } from './EventTriggers';
-import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 
 import Slider, { Direction } from 'src/components/dls/Slider';
 import useDirection from 'src/hooks/useDirection';
@@ -17,8 +18,6 @@ type SliderProps = {
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
 
-const AUDIO_THROTTLE_DURATION = 1000;
-
 /**
  * The slider is divided into {NUMBER_OF_STEPS} steps. These steps represent
  * the audio slider's steps that the user can slide through.
@@ -30,10 +29,12 @@ const AudioPlayerSlider = ({ audioPlayerElRef }: SliderProps): JSX.Element => {
   const router = useRouter();
   const { locale } = router;
   const direction = useDirection();
-  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
   const audioDuration = audioPlayerElRef?.current?.duration || 0;
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
+  const [current] = useActor(audioPlayerService);
 
   const isAudioLoaded = audioDuration !== 0;
+  const currentTime = current.context.currentTimestamp;
 
   const [currentStep, setCurrentStep] = useState(0);
 
