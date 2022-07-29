@@ -18,7 +18,7 @@ import { isLoggedIn } from 'src/utils/auth/login';
 const COOKIES_KEY = 'show-login-button';
 
 const shouldShowButton = () => {
-  if (Cookies.get(COOKIES_KEY)) {
+  if (Cookies.get(COOKIES_KEY) === 'true') {
     return true;
   }
   const randomNumber = Math.floor(Math.random() * (100 - 1) + 1);
@@ -26,6 +26,7 @@ const shouldShowButton = () => {
     Cookies.set(COOKIES_KEY, 'true');
     return true;
   }
+  Cookies.set(COOKIES_KEY, 'false');
   return false;
 };
 
