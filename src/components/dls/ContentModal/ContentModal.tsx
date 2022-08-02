@@ -2,6 +2,7 @@ import { useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
@@ -9,6 +10,7 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
+import { isRTLLocale } from 'src/utils/locale';
 
 export enum ContentModalSize {
   SMALL = 'small',
@@ -29,6 +31,8 @@ type ContentModalProps = {
   isFixedHeight?: boolean;
 };
 
+const SCROLLBAR_WIDTH = 15;
+
 const ContentModal = ({
   isOpen,
   onClose,
@@ -42,6 +46,7 @@ const ContentModal = ({
   isFixedHeight,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
+  const { locale } = useRouter();
 
   useImperativeHandle(innerRef, () => ({
     scrollToTop: () => {
@@ -49,19 +54,38 @@ const ContentModal = ({
     },
   }));
 
+  /**
+   * We need to manually check what the user is targeting. If it lies at the
+   * area where the scroll bar is (assuming the scrollbar width is equivalent
+   * to SCROLLBAR_WIDTH), then we don't close the Modal, otherwise we do.
+   * We also need to check if the current locale is RTL or LTR because the side
+   * where the scrollbar is will be different and therefor the value of
+   * {e.detail.originalEvent.offsetX} will be different.
+   *
+   * inspired by {@see https://github.com/radix-ui/primitives/issues/1280#issuecomment-1198248523}
+   *
+   * @param {any} e
+   */
+  const onPointerDownOutside = (e: any) => {
+    const currentTarget = e.currentTarget as HTMLElement;
+    // since the scroll bar will be flipped on RTL locales, we just need to check the offset X
+    if (isRTLLocale(locale)) {
+      if (e.detail.originalEvent.offsetX < SCROLLBAR_WIDTH) {
+        e.preventDefault();
+      } else {
+        onClose();
+      }
+    } else if (e.detail.originalEvent.offsetX > currentTarget.clientWidth - SCROLLBAR_WIDTH) {
+      e.preventDefault();
+    } else {
+      onClose();
+    }
+  };
+
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay
-          className={styles.overlay}
-          ref={overlayRef}
-          onClick={(e) => {
-            if (e.target !== overlayRef.current) return;
-            if (onClose) {
-              onClose();
-            }
-          }}
-        >
+        <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
           <Dialog.Content
             className={classNames(styles.contentWrapper, {
               [contentClassName]: contentClassName,
@@ -70,7 +94,7 @@ const ContentModal = ({
               [styles.autoHeight]: !isFixedHeight,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
-            onPointerDownOutside={onClose}
+            onPointerDownOutside={onPointerDownOutside}
           >
             <div className={styles.header}>
               {hasCloseButton && (
