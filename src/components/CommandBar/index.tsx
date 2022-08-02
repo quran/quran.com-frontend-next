@@ -37,7 +37,6 @@ const CommandBar: React.FC = () => {
   const isOpen = useSelector(selectCommandBarIsOpen, shallowEqual);
   const toggleShowCommandBar = useCallback(
     (event: KeyboardEvent) => {
-      getPressedShortcut(event);
       // eslint-disable-next-line i18next/no-literal-string
       logEvent(`command_bar_${isOpen ? 'close' : 'open'}`, {
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -49,7 +48,8 @@ const CommandBar: React.FC = () => {
     [dispatch, isOpen],
   );
   const closeCommandBar = useCallback(
-    (isClickedOutside = false) => {
+    (event?: KeyboardEvent) => {
+      const isClickedOutside = !event;
       // eslint-disable-next-line i18next/no-literal-string
       logEvent(`command_bar_close_${isClickedOutside ? 'outside_click' : 'esc_key'}`);
       dispatch({ type: setIsOpen.type, payload: false });
@@ -63,7 +63,7 @@ const CommandBar: React.FC = () => {
   useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnTags: ['INPUT'] }, [dispatch]);
 
   return (
-    <CommandBarBase isOpen={isOpen} onClickOutside={() => closeCommandBar(true)}>
+    <CommandBarBase isOpen={isOpen} onClickOutside={() => closeCommandBar()}>
       <CommandBarBody />
     </CommandBarBase>
   );

@@ -19,7 +19,7 @@ import Footnote from 'types/Footnote';
 interface Props {
   translationFontScale: number;
   text: string;
-  resourceName: string;
+  resourceName?: string;
   languageId: number;
 }
 
@@ -165,15 +165,17 @@ const TranslationText: React.FC<Props> = ({
         />
       )}
       {subFootnote && <FootnoteText footnote={subFootnote} onCloseClicked={resetSubFootnote} />}
-      <p
-        className={classNames(
-          styles.translationName,
-          styles[langData.direction],
-          styles[langData.font],
-        )}
-      >
-        — {resourceName}
-      </p>
+      {resourceName && (
+        <p
+          className={classNames(
+            styles.translationName,
+            styles[langData.direction],
+            styles[langData.font],
+          )}
+        >
+          — {resourceName}
+        </p>
+      )}
     </div>
   );
 };

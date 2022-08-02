@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 interface FontFaceState {
   loadedFontFaces: string[];
@@ -11,7 +12,7 @@ export const initialState: FontFaceState = {
 };
 
 export const fontFacesSlice = createSlice({
-  name: 'fontFaces',
+  name: SliceName.FONT_FACES,
   initialState,
   reducers: {
     addLoadedFontFace: (state: FontFaceState, action: PayloadAction<string>) => {

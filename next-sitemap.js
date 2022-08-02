@@ -4,9 +4,10 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
 const range = require('lodash/range');
+const fetch = require('node-fetch');
 
+const englishChaptersData = require('./data/chapters/en.json');
 const { locales } = require('./i18n.json');
-const englishChaptersData = require('./public/data/chapters/en.json');
 
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const isDevelopment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
@@ -16,6 +17,18 @@ const BASE_PATH =
   'https://quran.com';
 
 const chapters = range(1, 115);
+
+const getAvailableTafsirs = async () => {
+  const res = await fetch(`https://api.qurancdn.com/api/qdc/resources/tafsirs`);
+  const data = await res.json();
+  return data;
+};
+
+const getAvailableReciters = async () => {
+  const res = await fetch(`https://api.qurancdn.com/api/qdc/audio/reciters`);
+  const data = await res.json();
+  return data;
+};
 
 /**
  * Get the alternate ref objects for a path. We append "-remove-from-here" because
@@ -40,7 +53,7 @@ const getAlternateRefs = (chapterId = null, appendSlug = true, prefix = '', suff
       href = `${href}/${prefix}`;
     }
     if (appendSlug) {
-      const localeChaptersData = require(`./public/data/chapters/${locale}.json`);
+      const localeChaptersData = require(`./data/chapters/${locale}.json`);
       href = `${href}/${localeChaptersData[chapterId].slug}`;
     }
     if (suffix) {
@@ -56,7 +69,7 @@ const getAlternateRefs = (chapterId = null, appendSlug = true, prefix = '', suff
 
 module.exports = {
   siteUrl: BASE_PATH,
-  sitemapSize: 30000,
+  sitemapSize: 20000,
   generateRobotsTxt: isProduction,
   exclude: [...locales.map((locale) => `/${locale}`), '/*/product-updates*', '/*/search'],
   alternateRefs: locales.map((locale) => ({
@@ -72,6 +85,14 @@ module.exports = {
   },
   additionalPaths: async (config) => {
     const result = [];
+    let tafsirSlugs = [];
+    let reciterIds = [];
+    await getAvailableTafsirs().then((response) => {
+      tafsirSlugs = response.tafsirs.map((tafsir) => tafsir.slug);
+    });
+    await getAvailableReciters().then((response) => {
+      reciterIds = response.reciters.map((reciter) => reciter.id);
+    });
     chapters.forEach((chapterId) => {
       // 1. add the chapter slugs in English along with the localized slugs in every locale
       const englishChapterSlug = englishChaptersData[chapterId].slug;
@@ -85,10 +106,20 @@ module.exports = {
         alternateRefs: getAlternateRefs(chapterId, true, 'surah', 'info'),
       });
 
-      // 3. generate the verses for each of the chapters in each locale as well
+      // 3. /reciters/[reciterId]/[chapterSlug]
+      reciterIds.forEach((reciterId) => {
+        const location = `/reciters/${reciterId}/${englishChapterSlug}`;
+        result.push({
+          loc: location,
+          alternateRefs: getAlternateRefs(chapterId, false, '', location),
+        });
+      });
+
+      // 4. generate the verses for each of the chapters in each locale as well
       range(englishChaptersData[chapterId].versesCount).forEach((verseId) => {
         const verseNumber = verseId + 1;
         const verseIdValue = verseNumber;
+        const verseKey = `${chapterId}:${verseIdValue}`;
         const isAyatulKursi = chapterId === 2 && verseNumber === 255;
         if (isAyatulKursi) {
           // instead of /al-baqarah/255, we push /ayatul-kursi
@@ -102,20 +133,42 @@ module.exports = {
             alternateRefs: getAlternateRefs(chapterId, true, '', verseIdValue),
           });
         }
-        // 4. add /[chapterId]/[verseId]/tafsirs route
+        // 5. add /[chapterId]/[verseId]/tafsirs route
         result.push({
           loc: `/${englishChapterSlug}/${verseIdValue}/tafsirs`,
           alternateRefs: getAlternateRefs(chapterId, true, '', `${verseIdValue}/tafsirs`),
         });
+        // 6. /[verseKey]/tafsirs/[tafsirSlug]
+        tafsirSlugs.forEach((tafsirSlug) => {
+          const location = `${verseKey}/tafsirs/${tafsirSlug}`;
+          result.push({
+            loc: location,
+            alternateRefs: getAlternateRefs(chapterId, false, '', location),
+          });
+        });
+        // 7. /[verseKey]/reflections
+        const reflectionsLocation = `${verseKey}/reflections`;
+        result.push({
+          loc: reflectionsLocation,
+          alternateRefs: getAlternateRefs(chapterId, false, '', reflectionsLocation),
+        });
       });
     });
-    // 5. /juz/[juzId]
+    // 7. /juz/[juzId]
     range(1, 31).forEach(async (juzId) => {
       result.push(await config.transform(config, `/juz/${juzId}`));
     });
-    // 6. /page/[pageId]
+    // 8. /page/[pageId]
     range(1, 605).forEach(async (pageId) => {
       result.push(await config.transform(config, `/page/${pageId}`));
+    });
+    // 9. /reciters/[reciterId]
+    reciterIds.forEach((reciterId) => {
+      const location = `/reciters/${reciterId}`;
+      result.push({
+        loc: location,
+        alternateRefs: getAlternateRefs('', false, '', location),
+      });
     });
 
     return result;

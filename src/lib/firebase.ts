@@ -12,7 +12,7 @@ const firebaseConfig = {
 };
 
 export const isFirebaseEnabled =
-  typeof window !== 'undefined' && process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+  typeof window !== 'undefined' && process.env.NEXT_PUBLIC_ENABLE_FS_LOGGING === 'true';
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);

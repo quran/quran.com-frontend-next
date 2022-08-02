@@ -1,6 +1,36 @@
 {
     "about": "เกี่ยวกับเรา",
     "and": "และ",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "ดูว่ามีอะไรใหม่",
+                "title": "ยินดีต้อนรับสู่ Quran.com <br> <\/br> บัญชีผู้ใช้ Beta"
+            },
+            "slide-2": {
+                "action": "ต่อไป",
+                "description": "ไม่ว่าคุณจะใช้ Quran.com บนโทรศัพท์หรือแล็ปท็อป บุ๊กมาร์ก บทอ่านล่าสุด และค่ากำหนดของคุณจะพร้อมใช้งาน",
+                "title": "ข้อมูลของคุณจะถูกซิงค์ <br> <\/br> ในอุปกรณ์ต่างๆ"
+            },
+            "slide-3": {
+                "action": "โอเค เข้าใจแล้ว",
+                "description": "ขอบคุณที่ใช้ Quran.com และเรายินดีที่จะรับฟังความคิดเห็นของคุณเกี่ยวกับ <link> feedback.quran.com <\/link>",
+                "note": "หมายเหตุ: นี่เป็นคุณลักษณะเบต้า <br> <\/br> เราอาจรีเซ็ตข้อมูลบัญชีของคุณก่อนที่จะเผยแพร่",
+                "title": "เราอยากได้ยินความคิดของคุณ"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "เปลี่ยนการตั้งค่า",
+        "drawer-close": "ปิดลิ้นชัก",
+        "msg-close": "ปิดข้อความ",
+        "nav-drawer-open": "เปิดลิ้นชักการนำทาง",
+        "play-surah": "เล่นซูเราะห์ {{surahName}}",
+        "read-ayah-refls": "อ่าน Ayah Reflections",
+        "select-lng": "เลือกภาษา",
+        "share-ayah": "แบ่งปัน Ayah",
+        "sidebar-nav-close": "ปิดแถบนำทางด้านข้าง"
+    },
     "audio": {
         "auto-scroll": {
             "off": "ปิด",
@@ -16,9 +46,8 @@
             "currently-playing": "คุณกำลังเล่น",
             "delay-verse": "ความล่าช้าระหว่างข้อ",
             "download": "ดาวน์โหลด",
-            "full-surah": "Surah เต็ม",
+            "full-surah": "ทั้งซูเราะห์",
             "mismatch": "คลิกที่ \"เริ่มใหม่\" หากคุณต้องการเล่น {{currentReadingChapter}} แทน",
-            "next-ayah": "ต่อไป Ayah",
             "pause": "หยุดชั่วคราว",
             "pause-audio": "หยุดเสียงชั่วคราว",
             "play": "เล่น",
@@ -41,7 +70,7 @@
         "title": "เครื่องเสียง"
     },
     "ayah": "อายา",
-    "ayahs": "อายาส",
+    "ayahs": "โองการ",
     "beta": "เบต้า",
     "bookmark": "บุ๊คมาร์ค",
     "bookmarked": "บุ๊คมาร์ค",
@@ -64,6 +93,7 @@
         "sub-header": "ลงชื่อสมัครใช้ Quran.com Discord เพื่อเข้าร่วมและร่วมมือกับชุมชนชั้นนำในการสร้างเทคโนโลยีอิสลาม",
         "title": "ชุมชน"
     },
+    "complete-sign-up": "ลงทะเบียนให้เรียบร้อย",
     "continue": "ดำเนินการต่อ",
     "copied": "คัดลอกแล้ว",
     "copied-to-clipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว",
@@ -74,9 +104,21 @@
     },
     "default-description": "คัมภีร์กุรอานแปลเป็นหลายภาษาในอินเทอร์เฟซที่ง่ายและสะดวก",
     "developers": "นักพัฒนา",
+    "donate": "บริจาค",
+    "email-verification": {
+        "check-spam": "ไม่ได้รับอีเมลยืนยัน? ตรวจสอบกล่องจดหมายสแปมของคุณ",
+        "email-sent": "เราเพิ่งส่งอีเมลไปที่ <strong> {{email}} <\/strong>",
+        "email-verification": "การยืนยันอีเมล",
+        "resend-email": "ส่งอีเมลอีกครั้ง",
+        "resend-email-in": "ส่งอีเมลยืนยันอีกครั้งใน {{remainingTime}} วินาที...",
+        "verify-code": "ตรวจสอบรหัส"
+    },
     "error": {
+        "bookmark-sync": "บุ๊กมาร์กไม่ซิงค์",
+        "email-login-fail": "ไม่สามารถเข้าสู่ระบบด้วยอีเมล กรุณาลองอีกครั้ง",
         "general": "อะไรบางอย่างผิดปกติ. กรุณาลองอีกครั้ง.",
-        "offline": "ดูเหมือนว่าคุณจะขาดการเชื่อมต่อ โปรดตรวจสอบและลองอีกครั้ง"
+        "offline": "ดูเหมือนว่าคุณจะขาดการเชื่อมต่อ โปรดตรวจสอบและลองอีกครั้ง",
+        "pref-persist-fail": "ไม่สามารถซิงค์การตั้งค่าของคุณกับระบบคลาวด์"
     },
     "feedback": "ข้อเสนอแนะ",
     "fonts": {
@@ -95,9 +137,22 @@
         "text_uthmani": "อุทุมณี"
     },
     "footer": {
-        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor"
+        "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor",
+        "rights": "สงวนลิขสิทธิ์",
+        "title": "อ่านศึกษาและเรียนรู้คัมภีร์อัลกุรอานอันสูงส่ง"
+    },
+    "form": {
+        "code": "รหัสยืนยัน",
+        "email": "อีเมล",
+        "firstName": "ชื่อจริง",
+        "lastName": "นามสกุล"
     },
     "from": "จาก",
+    "fundraising": {
+        "description": "การบริจาครายเดือนช่วยให้เราปรับปรุง Quran.com และรักษาให้คงอยู่ต่อไปได้ เมื่อเราไม่ต้องกังวลเรื่องการหาเงินทุน ดังนั้นเราจึงสามารถมุ่งเน้นที่การสร้างผลลัพธ์ได้มากขึ้น ",
+        "learn-more": "เรียนรู้เพิ่มเติม",
+        "title": "ร่วมเป็นผู้บริจาครายเดือน"
+    },
     "help": "ช่วย",
     "hizb": "ฮิซบี",
     "home": "บ้าน",
@@ -109,6 +164,8 @@
     "languages": "ภาษา",
     "less": "น้อย",
     "loading": "กำลังโหลด",
+    "login": "เข้าสู่ระบบ",
+    "logout": "ออกจากระบบ",
     "menu": "เมนู",
     "mobile-apps": "แอพมือถือ",
     "mode": "โหมด",
@@ -116,6 +173,7 @@
     "navigate": "นำทาง",
     "network": "เครือข่าย",
     "next": "ต่อไป",
+    "next-ayah": "ต่อไป Ayah",
     "no": "เลขที่",
     "none": "ไม่มี",
     "off": "ปิด",
@@ -124,10 +182,21 @@
     "pages": "หน้า",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
     "popular-links": "ลิงค์ยอดนิยม",
+    "popup": {
+        "cta-1": "บริจาครายเดือน",
+        "cta-2": "บริจาคครั้งเดียว",
+        "cta-3": "เรียนรู้เพิ่มเติม",
+        "footnote": "การบริจาครายเดือนทำให้เราโฟกัสไปที่การระดมทุนน้อยลง",
+        "text-1": "เรามุ่งมั่นที่จะให้บริการความรู้และเทคโนโลยีอัลกุรอานแก่โลกฟรีเสมอ",
+        "text-2": "Quran.com เป็นอีกหนึ่งโอกาสที่ดีสำหรับการสร้างผลบุญอย่างต่อเนื่อง (เศาะดะเกาะห์ญารียะห์) โปรดพิจารณาลงทุนเพื่อโลกหน้าของคุณในฐานะผู้บริจาครายเดือน (หรือครั้งเดียว).",
+        "title": "สหายของอัลกุรอานที่รัก"
+    },
     "powered-by": "ขับเคลื่อนโดย",
     "prev": "ก่อนหน้า",
+    "previous-ayah": "ก่อนหน้า Ayah",
     "privacy": "ความเป็นส่วนตัว",
     "product-updates": "อัพเดทสินค้า",
+    "profile": "ประวัติโดยย่อ",
     "q-reflect": "คัมภีร์กุรอานสะท้อน",
     "quran-com": "Quran.com",
     "quran-radio": "คัมภีร์กุรอานวิทยุ",
@@ -136,9 +205,12 @@
         "translation": "การแปล"
     },
     "reciter": "ผู้อ่าน",
+    "reciters": "ผู้อ่าน",
     "reflect": "สะท้อน",
     "remove": "ลบ",
     "retry": "ลองอีกครั้ง",
+    "search-for": "ค้นหา '{{searchQuery}}'",
+    "search-results": "{{count}} ผลการค้นหา",
     "search": {
         "filters": "ตัวกรอง",
         "hint": "ลองค้นหาดู",
@@ -167,6 +239,7 @@
         "show-tooltip-when-playing-audio": "แสดงคำแนะนำเครื่องมือเมื่อเล่นเสียง",
         "title": "การตั้งค่า",
         "tooltip-playing-audio-helper": "แสดงการแปลคำในคำแนะนำเครื่องมือขณะเล่น ayah",
+        "value-and-other": "{{value}} และอีก {{othersCount}}",
         "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
         "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
         "word-tooltip-helper": "แสดงการแปลหรือการทับศัพท์เมื่อวางเมาส์เหนือหรือคลิกที่คำ"
@@ -176,7 +249,7 @@
     "sidebar": {
         "search-juz": "ค้นหา Juz",
         "search-page": "ค้นหาหน้า",
-        "search-surah": "ค้นหา Surah",
+        "search-surah": "ค้นหา ซูเราะห์",
         "try-navigating-with": "เคล็ดลับ: ลองนำทางด้วย"
     },
     "sitemap": "แผนผังเว็บไซต์",
@@ -186,11 +259,15 @@
         "descending": "จากมากไปน้อย"
     },
     "style": "สไตล์",
-    "surah": "Surah",
+    "submit": "ส่ง",
+    "surah": "ซูเราะห์",
     "tafsir": {
         "font-size": "ขนาดตัวอักษร Tafsir",
         "group-message": "คุณกำลังอ่าน tafsir สำหรับกลุ่มโองการ {{from}} ถึง {{to}}",
-        "surah": "ตัฟซีร ซูเราะฮฺ",
+        "no-text": "{{tafsirName}} ไม่สามารถใช้ได้สำหรับกลอนปัจจุบัน",
+        "surah": "ตัฟซีร ซูเราะห์",
+        "tafsir-desc": "อ่าน {{tafsirName}} สำหรับโองการที่  {{verseNumber}} ของซูเราะห์ {{surahName}}",
+        "tafsirs-desc": "อ่านตัฟซีรต่างๆของโองกาารที่ {{ayahNumber}} ของซูเราะห์ {{surahName}} โดยนักวิชาการด้านตัฟซีร ที่เชื่อถือได้",
         "title": "ตัฟซีร"
     },
     "tarteel": {
@@ -213,6 +290,12 @@
     "translations": "คำแปล",
     "transliteration": "การทับศัพท์",
     "type": "พิมพ์",
+    "undo": "เลิกทำ",
+    "validation": {
+        "invalid-email": "{{field}} ต้องเป็นที่อยู่อีเมลที่ถูกต้อง",
+        "invalid-field": "โปรดป้อนค่า {{field}} ที่ถูกต้อง",
+        "required-field": "{{field}} จำเป็นต้องระบุ"
+    },
     "verse": "กลอน",
     "verse-bookmark-removed": "บุ๊กมาร์กถูกลบ!",
     "verse-bookmarked": "กลอนคั่นหน้า!",

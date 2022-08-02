@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
@@ -15,7 +14,6 @@ import { logEvent } from 'src/utils/eventLogger';
 const NUMBER_OF_STEPS = 100;
 
 type SliderProps = {
-  isMobileMinimizedForScrolling: boolean;
   audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
 };
 
@@ -28,10 +26,7 @@ const AUDIO_THROTTLE_DURATION = 1000;
  * @param {SliderProps} props
  * @returns {JSX.Element}
  */
-const AudioPlayerSlider = ({
-  isMobileMinimizedForScrolling,
-  audioPlayerElRef,
-}: SliderProps): JSX.Element => {
+const AudioPlayerSlider = ({ audioPlayerElRef }: SliderProps): JSX.Element => {
   const router = useRouter();
   const { locale } = router;
   const direction = useDirection();
@@ -57,17 +52,9 @@ const AudioPlayerSlider = ({
   );
 
   return (
-    <div
-      className={classNames(styles.container, {
-        [styles.containerMinimized]: isMobileMinimizedForScrolling,
-      })}
-    >
+    <div className={styles.container}>
       <span className={styles.currentTime}>{secondsFormatter(currentTime, locale)}</span>
-      <div
-        className={classNames(styles.sliderContainer, {
-          [styles.sliderContainerMinimized]: isMobileMinimizedForScrolling,
-        })}
-      >
+      <div className={styles.sliderContainer}>
         <Slider
           label="audio-player"
           value={currentSteps}

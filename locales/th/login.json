@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "รอการยืนยัน",
+    "continue-apple": "ต่อด้วยApple",
+    "continue-email": "ดำเนินการต่อด้วยอีเมล",
+    "continue-facebook": "ต่อด้วยเฟสบุ๊ค",
+    "continue-google": "ดำเนินการต่อด้วย Google",
+    "email-placeholder": "ที่อยู่อีเมล",
+    "login-error": {
+        "AuthenticationError": "รับรองความถูกต้องล้มเหลว. โปรดลองอีกครั้งในภายหลัง",
+        "TokenExpiredError": "คุณออกจากระบบแล้ว กรุณาเข้าสู่ระบบใหม่อีกครั้ง"
+    },
+    "login-title": "เข้าสู่ระบบ Quran.com",
+    "other-options": "ตัวเลือกการเข้าสู่ระบบอื่น ๆ",
+    "verify-code": "ตรวจสอบว่ารหัสความปลอดภัยที่ให้มาตรงกับข้อความต่อไปนี้:"
+}

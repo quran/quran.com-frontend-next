@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
@@ -8,13 +10,17 @@ import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTrigger
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
+  exitRepeatMode,
   playFrom,
   selectAudioData,
   selectIsPlaying,
   selectIsRadioMode,
+  selectPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
+import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import QueryParam from 'types/QueryParam';
 
@@ -25,16 +31,20 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isAudioPlaying = useSelector(selectIsPlaying);
+  const playbackRate = useSelector(selectPlaybackRate);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
   const isRadioMode = useSelector(selectIsRadioMode);
+  const chaptersData = useContext(DataContext);
+  const chapterData = getChapterData(chaptersData, chapterId.toString());
 
   const isPlayingCurrentChapter = isAudioPlaying && currentAudioData?.chapterId === chapterId;
 
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const play = () => {
     logButtonClick('chapter_header_play_audio');
+    dispatch(exitRepeatMode());
     if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
     } else {
       dispatch(playFrom({ chapterId, reciterId, timestamp: 0 }));
     }
@@ -68,6 +78,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           onClick={play}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
+          ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
         >
           {t('audio.play')}
         </Button>

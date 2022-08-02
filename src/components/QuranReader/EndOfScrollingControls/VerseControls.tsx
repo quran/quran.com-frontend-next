@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import EndOfScrollingButton from './EndOfScrollingButton';
+import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
+import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 
+import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getSurahNavigationUrl, getChapterWithStartingVerseUrl } from 'src/utils/navigation';
@@ -16,55 +19,67 @@ interface Props {
 
 const VerseControls: React.FC<Props> = ({ lastVerse }) => {
   const { t } = useTranslation('quran-reader');
+  const chaptersData = useContext(DataContext);
   const { chapterId, verseNumber, verseKey } = lastVerse;
   const chapterNumber = Number(chapterId);
-  const isLastVerseOfSurah = isLastVerse(String(chapterId), verseNumber);
+  const isLastVerseOfSurah = isLastVerse(chaptersData, String(chapterId), verseNumber);
   return (
     <>
       {isLastVerseOfSurah && !isFirstSurah(chapterNumber) && (
-        <EndOfScrollingButton
-          text={t('prev-surah')}
+        <Button
+          type={ButtonType.Secondary}
+          prefix={<ChevronLeftIcon />}
           href={getSurahNavigationUrl(chapterNumber - 1)}
           onClick={() => {
             logButtonClick('verse_control_prev_chapter');
           }}
-        />
+        >
+          {t('prev-surah')}
+        </Button>
       )}
       {!isLastVerseOfSurah && (
         <>
-          <EndOfScrollingButton
-            text={t('full-surah-cta')}
+          <Button
+            type={ButtonType.Secondary}
             href={getSurahNavigationUrl(chapterNumber)}
             onClick={() => {
               logButtonClick('verse_control_full_chapter');
             }}
-          />
-          <EndOfScrollingButton
-            text={t('common:continue')}
+          >
+            {t('full-surah-cta')}
+          </Button>
+          <Button
             href={getChapterWithStartingVerseUrl(verseKey)}
             onClick={() => {
               logButtonClick('verse_control_continue');
             }}
-          />
+          >
+            {t('common:continue')}
+          </Button>
         </>
       )}
       {isLastVerseOfSurah && (
-        <EndOfScrollingButton
-          text={t('surah-beginning')}
+        <Button
+          type={ButtonType.Secondary}
           href={getSurahNavigationUrl(chapterNumber)}
           onClick={() => {
             logButtonClick('verse_control_chapter_beginning');
           }}
-        />
+        >
+          {t('surah-beginning')}
+        </Button>
       )}
       {isLastVerseOfSurah && !isLastSurah(chapterNumber) && (
-        <EndOfScrollingButton
-          text={t('next-surah')}
+        <Button
+          type={ButtonType.Secondary}
+          suffix={<ChevronRightIcon />}
           href={getSurahNavigationUrl(chapterNumber + 1)}
           onClick={() => {
             logButtonClick('verse_control_next_chapter');
           }}
-        />
+        >
+          {t('next-surah')}
+        </Button>
       )}
     </>
   );

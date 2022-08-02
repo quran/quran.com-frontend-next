@@ -1,4 +1,12 @@
 @use "src/styles/breakpoints";
+@use "src/styles/utility";
+
+@include utility.generate-line-width-scales("code_v1");
+@include utility.generate-line-width-scales("code_v2");
+@include utility.generate-line-width-scales("text_indopak_15_lines");
+@include utility.generate-line-width-scales("text_indopak_16_lines");
+@include utility.generate-line-width-scales("qpc_uthmani_hafs");
+@include utility.generate-line-width-scales("tajweed");
 
 .container {
   max-width: 100%;

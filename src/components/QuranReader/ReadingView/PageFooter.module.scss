@@ -2,16 +2,11 @@
   text-align: center;
   padding-block-start: var(--spacing-xxsmall);
   padding-block-end: var(--spacing-medium);
-  padding-inline-start: 0;
-  padding-inline-end: 0;
-  font-size: var(--font-size-small);
   width: fit-content;
-  margin-block-start: 0;
-  margin-block-end: 0;
+  font-size: 1.6vh;
   margin-inline-start: auto;
   margin-inline-end: auto;
   color: var(--color-text-faded);
-  height: var(--spacing-large);
 }
 
 .pageLink {

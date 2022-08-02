@@ -33,6 +33,7 @@ export enum QuranFont {
   QPCHafs = 'qpc_uthmani_hafs',
   Tajweed = 'tajweed',
 }
+export const FALLBACK_FONT = QuranFont.QPCHafs;
 
 export enum MushafLines {
   FifteenLines = '15_lines',

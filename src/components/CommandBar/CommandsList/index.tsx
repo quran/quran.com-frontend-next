@@ -144,6 +144,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
               </div>
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
+                  const { name, resultType } = command;
                   const isSelected = selectedCommandIndex === command.index;
                   return (
                     <li
@@ -155,7 +156,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(command.index)}
                     >
-                      <CommandPrefix name={command.name} />
+                      <CommandPrefix name={name} type={resultType} />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}

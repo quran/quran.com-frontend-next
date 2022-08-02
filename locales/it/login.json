@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "In attesa di conferma",
+    "continue-apple": "Continua con Apple",
+    "continue-email": "Continua con E-mail",
+    "continue-facebook": "Continua con Facebook",
+    "continue-google": "Continua con Google",
+    "email-placeholder": "Indirizzo e-mail",
+    "login-error": {
+        "AuthenticationError": "Autenticazione fallita. Per favore riprova più tardi",
+        "TokenExpiredError": "Sei stato disconnesso, effettua nuovamente il login."
+    },
+    "login-title": "Accedi a Corano.com",
+    "other-options": "Altre opzioni di accesso",
+    "verify-code": "Verifica che il codice di sicurezza fornito corrisponda al testo seguente:"
+}

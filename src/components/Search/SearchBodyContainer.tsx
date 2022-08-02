@@ -19,6 +19,7 @@ interface Props {
   hasError: boolean;
   searchResult: SearchResponse;
   onSearchKeywordClicked: (keyword: string) => void;
+  onSearchResultClicked?: () => void;
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
@@ -30,6 +31,7 @@ const SearchBodyContainer: React.FC<Props> = ({
   hasError,
   searchResult,
   onSearchKeywordClicked,
+  onSearchResultClicked,
   isSearchDrawer = true,
   currentPage,
   pageSize,
@@ -68,6 +70,7 @@ const SearchBodyContainer: React.FC<Props> = ({
                     />
                   ) : (
                     <SearchResults
+                      onSearchResultClicked={onSearchResultClicked}
                       searchResult={searchResult}
                       searchQuery={searchQuery}
                       isSearchDrawer={isSearchDrawer}

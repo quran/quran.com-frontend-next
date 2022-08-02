@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
-import { getDefaultWordFields, getMushafId } from './utils/api';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -100,8 +99,8 @@ export const getAvailableReciters = async (
   fields?: string[],
 ): Promise<RecitersResponse> => fetcher(makeAvailableRecitersUrl(locale, fields));
 
-export const getReciterData = async (reciterId: string): Promise<ReciterResponse> =>
-  fetcher(makeReciterUrl(reciterId));
+export const getReciterData = async (reciterId: string, locale: string): Promise<ReciterResponse> =>
+  fetcher(makeReciterUrl(reciterId, locale));
 
 /**
  * Get audio file for a specific reciter and chapter.
@@ -293,12 +292,13 @@ export const getTafsirContent = (
   verseKey: string,
   quranFont: QuranFont,
   mushafLines: MushafLines,
+  locale: string,
 ): Promise<TafsirContentResponse> => {
   return fetcher(
     makeTafsirContentUrl(tafsirIdOrSlug as string, verseKey, {
-      words: true,
-      ...getDefaultWordFields(quranFont),
-      ...getMushafId(quranFont, mushafLines),
+      lang: locale,
+      quranFont,
+      mushafLines,
     }),
   );
 };

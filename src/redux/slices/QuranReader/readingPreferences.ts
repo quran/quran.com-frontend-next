@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getReadingPreferencesInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import resetSettings from 'src/redux/slices/reset-settings';
+import ReadingPreferences from 'src/redux/types/ReadingPreferences';
+import SliceName from 'src/redux/types/SliceName';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
 
 export const readingPreferencesSlice = createSlice({
-  name: 'readingPreferences',
+  name: SliceName.READING_PREFERENCES,
   initialState: getReadingPreferencesInitialState(),
   reducers: {
     setReadingPreference: (state, action: PayloadAction<ReadingPreference>) => ({
@@ -54,6 +58,23 @@ export const readingPreferencesSlice = createSlice({
     builder.addCase(resetSettings, (state, action) => {
       return getReadingPreferencesInitialState(action.payload.locale);
     });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences, locale },
+      } = action;
+      const remotePreferences = userPreferences[PreferenceGroup.READING] as ReadingPreferences;
+      if (remotePreferences) {
+        const { selectedWordByWordLocale: defaultWordByWordLocale } =
+          getReadingPreferencesInitialState(locale);
+        return {
+          ...state,
+          ...remotePreferences,
+          isUsingDefaultWordByWordLocale:
+            remotePreferences.selectedWordByWordLocale === defaultWordByWordLocale,
+        };
+      }
+      return state;
+    });
   },
 });
 
@@ -68,13 +89,15 @@ export const {
   setWordClickFunctionality,
 } = readingPreferencesSlice.actions;
 
-export const selectWordByWordByWordPreferences = (state: RootState) => ({
+export const selectWordByWordPreferences = (state: RootState) => ({
   showWordByWordTranslation: state.readingPreferences.showWordByWordTranslation,
   selectedWordByWordTranslation: state.readingPreferences.selectedWordByWordTranslation,
   showWordByWordTransliteration: state.readingPreferences.showWordByWordTransliteration,
   selectedWordByWordTransliteration: state.readingPreferences.selectedWordByWordTransliteration,
   selectedWordByWordLocale: state.readingPreferences.selectedWordByWordLocale,
 });
+export const selectReadingPreferences = (state: RootState): ReadingPreferences =>
+  state.readingPreferences;
 export const selectShowTooltipFor = (state: RootState) => state.readingPreferences.showTooltipFor;
 export const selectReadingPreference = (state: RootState) =>
   state.readingPreferences.readingPreference;

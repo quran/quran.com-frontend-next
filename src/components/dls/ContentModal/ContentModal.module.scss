@@ -76,6 +76,22 @@ $translateYDistance: 200px;
   position: relative;
 
   width: 100vw;
+
+  height: 100%;
+  overflow-y: scroll;
+  @include breakpoints.tablet {
+    overflow-y: visible;
+  }
+}
+
+.autoHeight {
+  @include breakpoints.tablet {
+    height: auto;
+  }
+}
+
+// size
+.medium {
   @include breakpoints.tablet {
     padding: calc(1.5 * var(--spacing-mega));
     width: 85vw;
@@ -83,12 +99,15 @@ $translateYDistance: 200px;
   @include breakpoints.desktop {
     width: 60vw;
   }
+}
 
-  height: 100%;
-  overflow-y: scroll;
+.small {
   @include breakpoints.tablet {
-    height: auto;
-    overflow-y: visible;
+    padding: calc(1.5 * var(--spacing-mega));
+    width: 60vw;
+  }
+  @include breakpoints.desktop {
+    width: 40vw;
   }
 }
 

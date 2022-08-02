@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 export type Notes = {
   isVisible: boolean;
@@ -9,7 +10,7 @@ export type Notes = {
 const initialState: Notes = { isVisible: false };
 
 export const notesSlice = createSlice({
-  name: 'notes',
+  name: SliceName.NOTES,
   initialState,
   reducers: {
     setIsVisible: (state: Notes, action: PayloadAction<boolean>) => ({

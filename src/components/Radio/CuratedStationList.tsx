@@ -11,7 +11,7 @@ import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
 import { StationState, StationType } from './types';
 
-import { playFrom, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
+import { playFrom, selectIsPlaying, selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';
 
@@ -24,6 +24,7 @@ const CuratedStationList = () => {
   const dispatch = useDispatch();
   const stationState = useSelector(selectRadioStation, shallowEqual);
   const isAudioPlaying = useSelector(selectIsPlaying);
+  const playbackRate = useSelector(selectPlaybackRate);
   const { t } = useTranslation('radio');
 
   const playStation = async (id: string) => {
@@ -60,7 +61,7 @@ const CuratedStationList = () => {
         let onClick;
         if (!isSelectedStation) onClick = () => playStation(id);
         if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
-        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio();
+        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio(playbackRate);
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
 
@@ -72,8 +73,10 @@ const CuratedStationList = () => {
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}
               title={t(`curated-station.${station.title}`)}
+              imgAlt={t(`curated-station.${station.title}`)}
               description={t(`curated-station.${station.description}`)}
               onImgClick={onClick}
+              onActionIconClick={onClick}
             />
           </div>
         );

@@ -1,3 +1,5 @@
+const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
+
 export const getCurrentPath = () => {
   if (typeof window !== 'undefined') {
     return window.location.href;
@@ -5,9 +7,9 @@ export const getCurrentPath = () => {
   return '';
 };
 
-export const getWindowOrigin = () => {
+export const getWindowOrigin = (locale: string) => {
   if (typeof window !== 'undefined') {
-    return window.location.origin;
+    return `${window.location.origin}${getLocalePostfix(locale)}`;
   }
   return '';
 };
@@ -44,3 +46,12 @@ export const getBasePath = (): string =>
   `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
     process.env.NEXT_PUBLIC_VERCEL_URL
   }`;
+
+/**
+ * Get the auth api path.
+ *
+ * @param {string} path
+ * @returns  {string}
+ */
+export const getAuthApiPath = (path: string): string =>
+  `${process.env.NEXT_PUBLIC_AUTH_BASE_URL}/${path}`;

@@ -1,18 +1,18 @@
 {
-    "footer": "- Kuran.com ekibi",
+    "footer": "- Quran.com ekibi",
     "header": "Geliştirme Yardımı",
     "issues-cta": "Herhangi bir sorunuz varsa ve bizimle iletişime geçmek isterseniz, bize yazın! Mümkün olan en kısa sürede size geri döneceğiz, inşaAllah.",
-    "issues-guide": "Tipik olarak, daha sonra ne üzerinde çalışılacağı, ne olacağı ve çözülmesi gereken hangi hataların mevcut olduğu konusunda kaynak olarak <0> Github projelerini <\/0> Örneğin <1> bu url <\/1> hataların listesi, yardıma ihtiyacımız olan şeyler ve gelecek özellikler içeriyor.",
+    "issues-guide": "Tipik olarak, daha sonra ne üzerinde çalışılacağı, ne olacağı ve çözülmesi gereken hangi hataların mevcut olduğu konusunda kaynak olarak <0>Github projelerini<\/0> Örneğin <1>bu url<\/1> hataların listesi, yardıma ihtiyacımız olan şeyler ve gelecek özellikler içeriyor.",
     "main-desc": "Esselamü aleyküm, Öncelikle Kuran.com'u ve projelerini geliştirmemize yardımcı olmak için gösterdiğiniz ilgi için çok teşekkür ederiz. Sizinle çalışmaktan heyecan duyuyoruz!",
     "projects": {
-        "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsi <0> burada <\/0> . Özetlemek gerekirse:",
-        "q-android": "<0> Kuran Android <\/0>",
-        "q-api": "<0> Kuran.com API'si <\/0> - Ruby on Rails ile yazılmıştır.",
-        "q-audio": "<0> Kuran Sesleri <\/0> ve <1> Kuran Sesleri mobil uygulamaları <\/1>",
-        "q-audio-segments": "<0> Kuran Ses Bölümleri <\/0>",
-        "q-ios": "<0> Kuran iOS <\/0>",
-        "q-next": "<0> Kuran.com Önyüzü <\/0> - Next.js ile yazılmıştır.",
-        "q-v2": "<0> Kuran.com <\/0> - Ruby on Rails ile yazılmıştır."
+        "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsi <0>burada<\/0> . Özetlemek gerekirse:",
+        "q-android": "<0>Kuran Android<\/0>",
+        "q-api": "<0>Quran.com API'si<\/0> - Ruby on Rails ile yazılmıştır.",
+        "q-audio": "<0>Kuran Sesleri<\/0> ve <1>Kuran Sesleri mobil uygulamaları<\/1>",
+        "q-audio-segments": "<0>Kuran Ses Bölümleri<\/0>",
+        "q-ios": "<0>Kuran iOS<\/0>",
+        "q-next": "<0>Quran.com Önyüzü<\/0> - Next.js ile yazılmıştır.",
+        "q-v2": "<0>Quran.com<\/0> - Ruby on Rails ile yazılmıştır."
     },
     "sub-main-desc": "Kuran.com'da gönüllü olarak çalışan geliştiriciler, tasarımcılar, ürün yöneticileri ve düşünürlerden oluşan bir ekibiz. Elhamdülillah Silikon Vadisi, Toronto ve BAE'deki bazı büyük şirketlerde çalışmaktan dolayı mutluyuz - ve bunun Ümmetimizin dinlerini öğrenme ve çalışması konusunda ilerlemesine yardımcı olmak için yapabileceğimiz en iyi şey olduğunu düşünüyoruz. Kuran.com'da çalışmak çok sevindirici ve Allah hepimizi (ve sizi) çabalarımız için ödüllendirsin.",
     "thanks": "Okuduğunuz için teşekkürler! Bazı kodlar işlediğinizi görmek için sabırsızlanıyorum!"

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  margin-block: var(--spacing-xxsmall);
+}
+
+.errorText {
+  color: var(--color-error-deep);
+}
+
+.submitButton {
+  margin-block-start: var(--spacing-small);
+}

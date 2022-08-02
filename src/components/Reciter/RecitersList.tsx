@@ -20,7 +20,8 @@ const RecitersList = ({ reciters }: RecitersListProps) => {
             <Card
               imgSrc={makeCDNUrl(reciter.profilePicture)}
               key={reciter.id}
-              title={reciter.name}
+              title={reciter.translatedName.name}
+              imgAlt={reciter.translatedName.name}
               description={reciter.style.name}
               size={CardSize.Medium}
             />

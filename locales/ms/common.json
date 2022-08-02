@@ -1,6 +1,36 @@
 {
     "about": "Tentang Kami",
     "and": "dan",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Lihat apa yang baharu",
+                "title": "Selamat datang ke Quran.com <br> <\/br> Akaun Pengguna Beta"
+            },
+            "slide-2": {
+                "action": "Seterusnya",
+                "description": "Sama ada anda menggunakan Quran.com pada telefon atau komputer riba anda, penanda halaman anda, ayat terakhir dibaca dan pilihan anda akan tersedia",
+                "title": "Data anda akan disegerakkan <br> <\/br> merentas peranti"
+            },
+            "slide-3": {
+                "action": "Okay, faham",
+                "description": "Terima kasih kerana menggunakan Quran.com dan kami berbesar hati untuk mendengar maklum balas anda tentang <link> feedback.quran.com <\/link>",
+                "note": "NOTA: Ini ialah ciri beta <br> <\/br> Kami mungkin menetapkan semula data akaun anda sebelum disiarkan secara Langsung.",
+                "title": "Kami mahu mendengar fikiran anda"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "Tukar Tetapan",
+        "drawer-close": "Tutup Laci",
+        "msg-close": "Tutup Mesej",
+        "nav-drawer-open": "Buka Laci Navigasi",
+        "play-surah": "Mainkan Surah {{surahName}}",
+        "read-ayah-refls": "Baca Renungan Ayah",
+        "select-lng": "Pilih Bahasa",
+        "share-ayah": "Kongsi Ayah",
+        "sidebar-nav-close": "Tutup Bar Sisi Navigasi"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Tutup",
@@ -18,7 +48,6 @@
             "download": "Muat turun",
             "full-surah": "Surah Penuh",
             "mismatch": "Klik pada \"Mula Semula\" jika anda mahu teruskan {{currentReadingChapter}} sebaliknya",
-            "next-ayah": "Ayat Seterusnya",
             "pause": "Henti",
             "pause-audio": "Jeda Audio",
             "play": "Mainkan",
@@ -42,7 +71,7 @@
     },
     "ayah": "Ayat",
     "ayahs": "Ayat-ayat",
-    "beta": "Beta",
+    "beta": "Beta (Ujian)",
     "bookmark": "Penanda buku",
     "bookmarked": "Ditanda buku",
     "both": "Kedua-duanya",
@@ -64,6 +93,7 @@
         "sub-header": "Daftar untuk Discord Quran.com untuk mengambil bahagian dan bekerjasama dengan  pembinaan komuniti teknologi Islam.",
         "title": "Komuniti"
     },
+    "complete-sign-up": "Lengkapkan pendaftaran anda",
     "continue": "Teruskan",
     "copied": "Selesai salin",
     "copied-to-clipboard": "Disalin ke papan keratan",
@@ -73,10 +103,22 @@
         "increase": "Meningkat"
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
-    "developers": "Pemaju",
+    "developers": "Pemaju (Developers)",
+    "donate": "Menderma",
+    "email-verification": {
+        "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
+        "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} <\/strong>",
+        "email-verification": "Pengesahan email",
+        "resend-email": "Menghantar semula e-mel",
+        "resend-email-in": "Hantar semula e-mel pengesahan dalam {{remainingTime}} saat...",
+        "verify-code": "Sahkan kod"
+    },
     "error": {
+        "bookmark-sync": "Penanda halaman tidak segerak.",
+        "email-login-fail": "Gagal log masuk dengan e-mel. Sila cuba lagi",
         "general": "Kesilapan telah berlaku. Sila cuba lagi.",
-        "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi."
+        "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi.",
+        "pref-persist-fail": "Gagal menyegerakkan tetapan anda ke awan."
     },
     "feedback": "Maklum balas",
     "fonts": {
@@ -95,12 +137,25 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur."
+        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
+        "rights": "Hak cipta terpelihara",
+        "title": "Baca, kaji dan pelajari Al-Quran."
+    },
+    "form": {
+        "code": "Kod pengesahan",
+        "email": "E-mel",
+        "firstName": "Nama pertama",
+        "lastName": "Nama terakhir"
     },
     "from": "Dari",
+    "fundraising": {
+        "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
+        "learn-more": "Ketahui lebih lanjut",
+        "title": "Menjadi Penderma Bulanan"
+    },
     "help": "Bantuan",
     "hizb": "Hizb",
-    "home": "Rumah",
+    "home": "Halaman Utama",
     "input": {
         "clear": "Hilangkan"
     },
@@ -109,13 +164,16 @@
     "languages": "Bahasa",
     "less": "Kurang",
     "loading": "Sedang proses",
+    "login": "Log masuk",
+    "logout": "Log keluar",
     "menu": "Menu",
-    "mobile-apps": "Aplikasi Mudah Alih",
+    "mobile-apps": "Aplikasi Fon",
     "mode": "Mod",
     "more": "Lagi",
     "navigate": "Navigasi",
     "network": "Rangkaian",
     "next": "Seterusnya",
+    "next-ayah": "Seterusnya Ayah",
     "no": "Tidak",
     "none": "Tiada",
     "off": "Tutup",
@@ -124,21 +182,35 @@
     "pages": "Muka Surat",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
     "popular-links": "Pautan LINK yang popular",
+    "popup": {
+        "cta-1": "Menderma Bulanan",
+        "cta-2": "Menderma Sekali",
+        "cta-3": "Ketahui lebih lanjut",
+        "footnote": "Derma bulanan membolehkan kami kurang memberi tumpuan kepada pengumpulan dana",
+        "text-1": "Kami komited untuk berkhidmat kepada pengetahuan dan teknologi al-Quran dunia, sentiasa secara percuma.",
+        "text-2": "Quran.com adalah peluang sempurna untuk amal berterusan (Sadaqah Jariyah). Sila pertimbangkan untuk melabur di Akhirat anda sebagai penderma bulanan (atau sekali).",
+        "title": "Sahabat Al-Quran yang dihormati,"
+    },
     "powered-by": "Dikuasai oleh",
     "prev": "Sebelumnya",
+    "previous-ayah": "Ayah sebelumnya",
     "privacy": "Privasi",
     "product-updates": "Kemas kini produk",
+    "profile": "Profil",
     "q-reflect": "QuranReflect",
-    "quran-com": "Quran.com",
+    "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"
     },
     "reciter": "Qari",
+    "reciters": "qari",
     "reflect": "Renungkan",
-    "remove": "Alih keluar",
-    "retry": "Cuba semula",
+    "remove": "Keluarkan",
+    "retry": "Cuba lagi (Retry)",
+    "search-for": "Cari '{{searchQuery}}'",
+    "search-results": "{{count}} hasil carian",
     "search": {
         "filters": "Penapis",
         "hint": "Cuba cari",
@@ -167,6 +239,7 @@
         "show-tooltip-when-playing-audio": "Paparkan tips semasa audio dimainkan",
         "title": "Tetapan",
         "tooltip-playing-audio-helper": "Paparkan terjemahan perkataan dalam tips semasa ayat audio dimainkan",
+        "value-and-other": "{{value}} , dan {{othersCount}} lain",
         "value-and-others": "{{value}} , dan {{othersCount}} lain",
         "wbw-helper": "Paparkan terjemahan atau transliterasi terus di bawah perkataan",
         "word-tooltip-helper": "Paparkan terjemahan atau transliterasi apabila anda mengerakkan 'cursor mouse' atau apabila anda tekan (mouse) klik pada perkataan"
@@ -186,11 +259,15 @@
         "descending": "Menurun"
     },
     "style": "Gaya",
+    "submit": "Hantar",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Saiz fon Tafsir",
         "group-message": "Anda sedang membaca tafsir untuk kumpulan ayat dari {{from}} hingga {{to}}",
+        "no-text": "{{tafsirName}} tidak tersedia untuk ayat semasa.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Baca {{tafsirName}} untuk Ayah {{verseNumber}} Surah {{surahName}}",
+        "tafsirs-desc": "Baca pelbagai Tafsir Ayah {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir yang dipercayai",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -213,9 +290,15 @@
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
     "type": "Jenis",
+    "undo": "Buat asal",
+    "validation": {
+        "invalid-email": "{{field}} mestilah alamat e-mel yang sah",
+        "invalid-field": "Sila masukkan nilai {{field}} yang sah",
+        "required-field": "{{field}} diperlukan"
+    },
     "verse": "Ayat",
-    "verse-bookmark-removed": "Penanda halaman ayat dialih keluar!",
-    "verse-bookmarked": "Ayat ditanda buku!",
+    "verse-bookmark-removed": "Tanda-Ingat dikeluarkan",
+    "verse-bookmarked": "Ayat telah di-Tanda-Ingat",
     "verses": "Ayat-ayat",
     "view": "Lihat",
     "voice": {
@@ -230,8 +313,8 @@
     },
     "wbw": "Perkataan demi perkataan",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
-    "wbw-translation": "Terjemahan Perkataan Demi Perkataan",
-    "wbw-transliteration": "Alih Huruf Perkataan Demi Perkataan",
+    "wbw-translation": "Terjemahan Perkataan demi Perkataan",
+    "wbw-transliteration": "Transliterasi Kata demi Kata",
     "word-click": {
         "no-audio": "Tiada Audio",
         "play-audio": "Mainkan Audio",

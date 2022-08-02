@@ -8,7 +8,7 @@ import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFontClassName } from 'src/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
+import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 
 type UthmaniWordTextProps = {
   qpcUthmaniHafs: string;
@@ -43,8 +43,6 @@ const getWordText = (
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
 };
 
-const fallbackFont = QuranFont.QPCHafs;
-
 const GlyphWord = ({
   qpcUthmaniHafs,
   textCodeV1,
@@ -64,7 +62,8 @@ const GlyphWord = ({
       data-font={font}
       className={classNames(styles.styledWord, {
         [styles.fallbackText]: !isFontLoaded,
-        [styles[getFontClassName(fallbackFont, quranTextFontScale, mushafLines)]]: !isFontLoaded,
+        [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
+          !isFontLoaded,
       })}
       {...(isFontLoaded && {
         // eslint-disable-next-line i18next/no-literal-string

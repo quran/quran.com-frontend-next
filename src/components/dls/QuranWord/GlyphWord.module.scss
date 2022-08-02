@@ -1,6 +1,8 @@
 @use "src/styles/utility";
 
-@include utility.generate-font-scales("qpc_uthmani_hafs"); // fallback font size
+@include utility.generate-font-scales(
+  "fallback_qpc_uthmani_hafs"
+); // fallback font size
 
 .styledWord {
   line-height: var(--line-height);

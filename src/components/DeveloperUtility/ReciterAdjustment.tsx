@@ -46,7 +46,7 @@ const ReciterAdjustment: React.FC = () => {
       >
         {(reciters as Reciter[]).map((reciter) => (
           <option key={reciter.id} value={reciter.id}>
-            {reciter.name}
+            {reciter.translatedName.name}
           </option>
         ))}
       </select>

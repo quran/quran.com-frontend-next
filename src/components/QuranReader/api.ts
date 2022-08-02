@@ -3,19 +3,14 @@
 import { fetcher } from 'src/api';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import {
-  makeJuzVersesUrl,
-  makePageVersesUrl,
-  makeVersesUrl,
-  makePagesLookupUrl,
-} from 'src/utils/apiPaths';
+import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { PagesLookUpRequest } from 'types/ApiRequests';
-import { PagesLookUpResponse, VersesResponse } from 'types/ApiResponses';
+import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
-interface RequestKeyInput {
+interface TranslationViewRequestKeyInput {
   quranReaderDataType: QuranReaderDataType;
   pageNumber: number;
   initialData: VersesResponse;
@@ -44,7 +39,7 @@ interface ReadingViewRequestKeyInput {
  *
  * @returns {string}
  */
-export const getRequestKey = ({
+export const getTranslationViewRequestKey = ({
   id,
   isVerseData,
   initialData,
@@ -55,7 +50,7 @@ export const getRequestKey = ({
   reciter,
   locale,
   wordByWordLocale,
-}: RequestKeyInput): string => {
+}: TranslationViewRequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page = isVerseData ? initialData.verses[0].verseNumber : pageNumber;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
@@ -66,6 +61,7 @@ export const getRequestKey = ({
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      perPage: initialData.pagination.perPage,
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
@@ -85,6 +81,7 @@ export const getRequestKey = ({
       reciter,
       page,
       from: initialData.metaData.from,
+      perPage: initialData.pagination.perPage,
       to: initialData.metaData.to,
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
@@ -111,18 +108,23 @@ export const getReaderViewRequestKey = ({
   wordByWordLocale,
   pageVersesRange,
 }: ReadingViewRequestKeyInput): string => {
-  return makePageVersesUrl(pageNumber, locale, {
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-    reciter,
-    perPage: 'all',
-    wordTranslationLanguage: wordByWordLocale,
-    filterPageWords: true,
-    ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
-  });
+  return makePageVersesUrl(
+    pageNumber,
+    locale,
+    {
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      reciter,
+      perPage: 'all',
+      wordTranslationLanguage: wordByWordLocale,
+      filterPageWords: true,
+      ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
+    },
+    false,
+  );
 };
 
-const getPagesLookupParams = (
+export const getPagesLookupParams = (
   resourceId: number | string,
   quranReaderDataType: QuranReaderDataType,
   mushafId: number,
@@ -161,18 +163,6 @@ const getPagesLookupParams = (
   }
   return params;
 };
-
-export const fetchResourceMushafPagesDetails = (
-  resourceId: number | string,
-  quranReaderDataType: QuranReaderDataType,
-  mushafId: number,
-  initialData: VersesResponse,
-): Promise<PagesLookUpResponse> =>
-  fetcher(
-    makePagesLookupUrl(
-      getPagesLookupParams(resourceId, quranReaderDataType, mushafId, initialData),
-    ),
-  );
 
 /**
  * A custom fetcher that returns the verses array from the api result.

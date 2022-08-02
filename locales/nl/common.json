@@ -1,6 +1,36 @@
 {
     "about": "Over ons",
     "and": "en",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Zie wat nieuw is",
+                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount Beta"
+            },
+            "slide-2": {
+                "action": "Volgende",
+                "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
+                "title": "Uw gegevens worden <br> <\/br> op verschillende apparaten gesynchroniseerd"
+            },
+            "slide-3": {
+                "action": "Oké, snap het",
+                "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
+                "note": "OPMERKING: dit is een bètafunctie <br> <\/br> We kunnen uw accountgegevens resetten voordat we Live gaan.",
+                "title": "We willen je gedachten horen"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "Instellingen veranderen",
+        "drawer-close": "Sluit lade",
+        "msg-close": "Bericht sluiten",
+        "nav-drawer-open": "Navigatielade openen",
+        "play-surah": "Speel Surah {{surahName}}",
+        "read-ayah-refls": "Lees Ayah Reflections",
+        "select-lng": "Selecteer taal",
+        "share-ayah": "Deel Ayah",
+        "sidebar-nav-close": "Navigatiezijbalk sluiten"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Uit",
@@ -18,7 +48,6 @@
             "download": "Downloaden",
             "full-surah": "volledige soera",
             "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
-            "next-ayah": "Volgende Aya",
             "pause": "Pauze",
             "pause-audio": "Audio pauzeren",
             "play": "Toneelstuk",
@@ -64,6 +93,7 @@
         "sub-header": "Meld u aan voor de Quran.com Discord om deel te nemen en samen te werken met de toonaangevende islamitische technologie voor gemeenschapsopbouw.",
         "title": "Gemeenschap"
     },
+    "complete-sign-up": "Voltooi je registratie",
     "continue": "Doorgaan met",
     "copied": "gekopieerd",
     "copied-to-clipboard": "Gekopieerd naar het klembord",
@@ -74,9 +104,21 @@
     },
     "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
     "developers": "ontwikkelaars",
+    "donate": "Doneren",
+    "email-verification": {
+        "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
+        "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
+        "email-verification": "Email verificatie",
+        "resend-email": "Email opnieuw verzenden",
+        "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
+        "verify-code": "Code verifiëren"
+    },
     "error": {
+        "bookmark-sync": "Bladwijzer loopt niet synchroon.",
+        "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
         "general": "Er is iets fout gegaan. Probeer het opnieuw.",
-        "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw."
+        "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw.",
+        "pref-persist-fail": "Kan je instellingen niet synchroniseren met de cloud."
     },
     "feedback": "Feedback",
     "fonts": {
@@ -95,9 +137,22 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor."
+        "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor.",
+        "rights": "Alle rechten voorbehouden",
+        "title": "Lees, bestudeer en leer de Edele Koran."
+    },
+    "form": {
+        "code": "Verificatie code",
+        "email": "E-mail",
+        "firstName": "Voornaam",
+        "lastName": "Achternaam"
     },
     "from": "Van",
+    "fundraising": {
+        "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
+        "learn-more": "Leer meer",
+        "title": "Word een maandelijkse donateur"
+    },
     "help": "Helpen",
     "hizb": "Hizb",
     "home": "Huis",
@@ -109,6 +164,8 @@
     "languages": "Talen",
     "less": "Minder",
     "loading": "Bezig met laden",
+    "login": "Log in",
+    "logout": "Uitloggen",
     "menu": "Menu",
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
@@ -116,6 +173,7 @@
     "navigate": "Navigeren",
     "network": "Netwerk",
     "next": "Volgende",
+    "next-ayah": "Volgende Aya",
     "no": "Nee",
     "none": "Geen",
     "off": "Uit",
@@ -124,10 +182,21 @@
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "popular-links": "Populaire links",
+    "popup": {
+        "cta-1": "Doneer maandelijks",
+        "cta-2": "Eenmalig doneren",
+        "cta-3": "Leer meer",
+        "footnote": "Dankzij maandelijkse donaties kunnen we ons minder richten op fondsenwerving",
+        "text-1": "We zijn toegewijd om de wereld kennis en technologie van de Koran te dienen, altijd gratis.",
+        "text-2": "Quran.com is een perfecte gelegenheid voor voortdurende liefdadigheid (Sadaqah Jariyah). Overweeg om te investeren in uw Hiernamaals als maandelijkse (of eenmalige) donateur.",
+        "title": "Beste metgezel van de Koran,"
+    },
     "powered-by": "Aangedreven door",
     "prev": "Vorig",
+    "previous-ayah": "Vorige Aya",
     "privacy": "Privacy",
     "product-updates": "Productupdates",
+    "profile": "Profiel",
     "q-reflect": "KoranReflect",
     "quran-com": "koran.com",
     "quran-radio": "Koran Radio",
@@ -136,9 +205,12 @@
         "translation": "Vertaling"
     },
     "reciter": "Voordrager",
+    "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
+    "search-for": "Zoeken naar '{{searchQuery}}'",
+    "search-results": "{{count}} zoekresultaten",
     "search": {
         "filters": "Filters",
         "hint": "Probeer te zoeken naar",
@@ -167,6 +239,7 @@
         "show-tooltip-when-playing-audio": "Knopinfo weergeven bij het afspelen van audio",
         "title": "Instellingen",
         "tooltip-playing-audio-helper": "Toon woordvertaling in tooltip tijdens het spelen van ayah",
+        "value-and-other": "{{value}} en {{othersCount}} andere",
         "value-and-others": "{{value}} en {{othersCount}} anderen",
         "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
         "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
@@ -186,11 +259,15 @@
         "descending": "Aflopend"
     },
     "style": "Stijl",
+    "submit": "Indienen",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tafsir-lettergrootte",
         "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",
+        "no-text": "{{tafsirName}} is niet beschikbaar voor het huidige couplet.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
+        "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -213,6 +290,12 @@
     "translations": "Vertalingen",
     "transliteration": "Transliteratie",
     "type": "Type",
+    "undo": "ongedaan maken",
+    "validation": {
+        "invalid-email": "{{field}} moet een geldig e-mailadres zijn",
+        "invalid-field": "Voer een geldige {{field}} waarde in",
+        "required-field": "{{field}} is vereist"
+    },
     "verse": "Vers",
     "verse-bookmark-removed": "Vers bladwijzer verwijderd!",
     "verse-bookmarked": "Vers bladwijzer!",

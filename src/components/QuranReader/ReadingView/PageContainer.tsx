@@ -3,31 +3,28 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import { getReaderViewRequestKey, verseFetcher } from '../api';
-
 import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
+import { getPageNumberByPageIndex } from 'src/components/QuranReader/utils/page';
 import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type Props = {
   pagesVersesRange: Record<number, LookupRecord>;
   quranReaderStyles: QuranReaderStyles;
   reciterId: number;
-  pageNumber: number;
   lang: string;
   wordByWordLocale: string;
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
-  quranReaderDataType: QuranReaderDataType;
+  isUsingDefaultFont: boolean;
 };
 
 const getPageVersesRange = (
@@ -35,11 +32,29 @@ const getPageVersesRange = (
   apiPagesVersesRange: Record<number, LookupRecord>,
 ): LookupRecord => {
   const lookupRecord = { ...apiPagesVersesRange[currentMushafPage] };
+  // TODO: remove this from BE
   // we remove firstVerseKey and lastVerseKey before we send the params to BE as BE doesn't need them
   delete lookupRecord.firstVerseKey;
   delete lookupRecord.lastVerseKey;
   return lookupRecord;
 };
+
+/**
+ * Get the verses returned from the initialData of the first page.
+ * This function will filter out all the words that don't
+ * belong to the first page in-case we have some verses
+ * that contain words that don't belong to the first page
+ * (applies to 16-line Indopak Mushaf e.g. /ur/haji/25 or /ur/2/211-216)
+ *
+ * @param {number} pageNumber
+ * @param {Verse[]} initialVerses
+ * @returns {Verse[]}
+ */
+const getInitialVerses = (pageNumber: number, initialVerses: Verse[]): Verse[] =>
+  initialVerses.map((verse) => ({
+    ...verse,
+    words: verse.words.filter((word) => word.pageNumber === pageNumber),
+  }));
 
 /**
  * A component that will fetch the verses of the current mushaf page
@@ -54,20 +69,26 @@ const PageContainer: React.FC<Props> = ({
   reciterId,
   lang,
   wordByWordLocale,
-  pageNumber,
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
-  quranReaderDataType,
+  isUsingDefaultFont,
 }: Props): JSX.Element => {
+  const pageNumber = useMemo(
+    () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
+    [pageIndex, pagesVersesRange],
+  );
+  const initialVerses = useMemo(
+    () => (pageIndex === 0 ? getInitialVerses(pageNumber, initialData.verses) : initialData.verses),
+    [initialData.verses, pageIndex, pageNumber],
+  );
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const shouldUseInitialData =
     pageIndex === 0 &&
-    quranReaderStyles.quranFont === getQuranReaderStylesInitialState(lang).quranFont &&
+    isUsingDefaultFont &&
     isUsingDefaultReciter &&
-    isUsingDefaultWordByWordLocale &&
-    quranReaderDataType !== QuranReaderDataType.Juz;
+    isUsingDefaultWordByWordLocale;
   const { data: verses, isValidating } = useSWRImmutable(
     getReaderViewRequestKey({
       pageNumber,
@@ -79,36 +100,28 @@ const PageContainer: React.FC<Props> = ({
     }),
     verseFetcher,
     {
-      fallbackData: shouldUseInitialData ? initialData.verses : null,
+      fallbackData: shouldUseInitialData ? initialVerses : null,
       revalidateOnMount: !shouldUseInitialData,
     },
   );
 
-  const pageVerses = useMemo(() => {
-    // we need to filter only the verses that belong to the current page because sometimes the initial data number of verses exceeds the number of verses of the page e.g. /2 page 2
-    if (shouldUseInitialData) {
-      return verses.filter((verse) => pageNumber === verse.pageNumber);
-    }
-    return verses;
-  }, [pageNumber, shouldUseInitialData, verses]);
-
   useEffect(() => {
-    if (pageVerses) {
+    if (verses) {
       // @ts-ignore
       setMushafPageToVersesMap((prevMushafPageToVersesMap: Record<number, Verse[]>) => ({
         ...prevMushafPageToVersesMap,
-        [pageNumber]: pageVerses,
+        [pageNumber]: verses,
       }));
     }
-  }, [pageNumber, setMushafPageToVersesMap, pageVerses]);
+  }, [pageNumber, setMushafPageToVersesMap, verses]);
 
-  if (!pageVerses || isValidating) {
+  if (!verses || isValidating) {
     return <ReadingViewSkeleton />;
   }
 
   return (
     <Page
-      verses={pageVerses}
+      verses={verses}
       key={`page-${pageNumber}`}
       pageNumber={Number(pageNumber)}
       quranReaderStyles={quranReaderStyles}

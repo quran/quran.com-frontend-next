@@ -1,0 +1,19 @@
+name: Purge CF Cache
+
+on: [deployment_status]
+
+jobs:
+  purge_cache:
+    name: Purge CF Cache
+    runs-on: ubuntu-latest
+    if: ${{ github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Call CF
+        env:
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        run: |
+          curl -X POST https://api.cloudflare.com/client/v4/zones/$CF_ZONE_ID/purge_cache \
+            -d '{"purge_everything":true}' \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.CF_AUTH_KEY }}" \

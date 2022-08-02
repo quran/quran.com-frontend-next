@@ -47,9 +47,18 @@ export const logValueChange = (
  * @param {string} type the type of the search query. can be voice or text.
  */
 export const logEmptySearchResults = (searchQuery: string, source: string, type = 'text') => {
-  logEvent(`${type}_search_query_with_no_result`, {
-    query: searchQuery,
-    source,
+  // if the searchQuery is not empty
+  if (searchQuery) {
+    logEvent(`${type}_search_query_with_no_result`, {
+      query: searchQuery,
+      source,
+    });
+  }
+};
+
+export const logTarteelLinkClick = (type: string) => {
+  logEvent('tarteel_link_click', {
+    type: `${type}_attribution`,
   });
 };
 

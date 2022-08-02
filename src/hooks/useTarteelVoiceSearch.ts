@@ -200,10 +200,10 @@ const useTarteelVoiceSearch = (startRecording = true) => {
             webSocket = new WebSocket(
               `wss://voice-v2.tarteel.io/search/?Authorization=${process.env.NEXT_PUBLIC_TARTEEL_VS_API_KEY}`,
             );
+            mediaStream.current = stream;
             webSocket.onopen = () => {
               logEvent('tarteel_websocket_open');
               setIsLoading(false);
-              mediaStream.current = stream;
               analyser = audioContext.createAnalyser();
               analyser.smoothingTimeConstant = ANALYSER_SMOOTHING_CONSTANT;
               analyser.fftSize = FAST_FOURIER_TRANSFORM_SIZE;
@@ -236,6 +236,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
               logEvent('tarteel_websocket_error');
               setIsLoading(false);
               setError(VoiceError.SOCKET_ERROR);
+              releaseMicrophone();
             };
           })
           .catch(() => {
@@ -263,7 +264,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
     return () => {
       stopFlow(webSocket, analyser, micWorkletNode, micSourceNode, audioContext);
     };
-  }, [isWebSocketOpen, onWebsocketMessage, stopFlow, startRecording]);
+  }, [isWebSocketOpen, onWebsocketMessage, stopFlow, startRecording, releaseMicrophone]);
 
   return {
     isLoading,

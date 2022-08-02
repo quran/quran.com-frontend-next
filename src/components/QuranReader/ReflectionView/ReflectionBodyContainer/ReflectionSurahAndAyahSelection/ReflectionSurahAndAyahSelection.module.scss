@@ -1,0 +1,7 @@
+@use "src/styles/breakpoints";
+
+.surahSelectionContainer {
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-medium);
+  }
+}

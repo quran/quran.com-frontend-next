@@ -1,5 +1,6 @@
 @use "src/styles/breakpoints";
 
 .verseLink {
-  width: fit-content;
+  opacity: var(--opacity-50);
+  text-align: center;
 }

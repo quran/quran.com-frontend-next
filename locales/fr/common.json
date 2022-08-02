@@ -1,6 +1,36 @@
 {
     "about": "À propos de nous",
     "and": "et",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Regardez ce qu'il y a de nouveau",
+                "title": "Bienvenue sur Quran.com <br> <\/br> Bêta du compte utilisateur"
+            },
+            "slide-2": {
+                "action": "Prochain",
+                "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
+                "title": "Vos données seront synchronisées <br> <\/br> sur tous les appareils"
+            },
+            "slide-3": {
+                "action": "OK, j'ai compris",
+                "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
+                "note": "REMARQUE : Il s'agit d'une fonctionnalité bêta <br> <\/br> Nous pouvons réinitialiser les données de votre compte avant la mise en ligne.",
+                "title": "Nous voulons entendre vos pensées"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "Modifier les paramètres",
+        "drawer-close": "Fermer le tiroir",
+        "msg-close": "Fermer le message",
+        "nav-drawer-open": "Ouvrir le tiroir de navigation",
+        "play-surah": "Jouez la sourate {{surahName}}",
+        "read-ayah-refls": "Lire les réflexions d'Ayah",
+        "select-lng": "Choisir la langue",
+        "share-ayah": "Partager Ayah",
+        "sidebar-nav-close": "Fermer la barre latérale de navigation"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Désactivé",
@@ -18,7 +48,6 @@
             "download": "Télécharger",
             "full-surah": "Sourate complète",
             "mismatch": "Cliquez sur « Recommencer » si vous souhaitez plutôt {{currentReadingChapter}}",
-            "next-ayah": "Suivant Ayah",
             "pause": "Pause",
             "pause-audio": "Suspendre le son",
             "play": "Jouer",
@@ -64,6 +93,7 @@
         "sub-header": "Inscrivez-vous sur Quran.com Discord pour participer et collaborer avec la principale technologie islamique de construction de communauté.",
         "title": "Communauté"
     },
+    "complete-sign-up": "Complétez votre inscription",
     "continue": "Continuer",
     "copied": "Copié",
     "copied-to-clipboard": "Copié dans le presse-papier",
@@ -74,9 +104,21 @@
     },
     "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
     "developers": "Développeurs",
+    "donate": "Donner",
+    "email-verification": {
+        "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
+        "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
+        "email-verification": "Vérification de l'E-mail",
+        "resend-email": "Ré-envoyer l'email",
+        "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}} s...",
+        "verify-code": "Vérifier le code"
+    },
     "error": {
+        "bookmark-sync": "Le signet n'est pas synchronisé.",
+        "email-login-fail": "Échec de la connexion avec l'e-mail. Veuillez réessayer",
         "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
-        "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer."
+        "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer.",
+        "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud."
     },
     "feedback": "Retour d'information",
     "fonts": {
@@ -95,9 +137,22 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com est une Sadaqah Jariyah. Nous espérons faciliter la lecture, l'étude et l'apprentissage du Noble Coran pour tous. Le Noble Coran a de nombreux noms dont Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr et Al-Noor."
+        "description": "Quran.com est une Sadaqah Jariyah. Nous espérons faciliter la lecture, l'étude et l'apprentissage du Noble Coran pour tous. Le Noble Coran a de nombreux noms dont Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr et Al-Noor.",
+        "rights": "Tous les droits sont réservés",
+        "title": "Lisez, étudiez et apprenez Le Noble Coran."
+    },
+    "form": {
+        "code": "Le code de vérification",
+        "email": "E-mail",
+        "firstName": "Prénom",
+        "lastName": "Nom de famille"
     },
     "from": "De",
+    "fundraising": {
+        "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
+        "learn-more": "Apprendre encore plus",
+        "title": "Devenez un donateur mensuel"
+    },
     "help": "Aider",
     "hizb": "Hizb",
     "home": "Accueil",
@@ -109,6 +164,8 @@
     "languages": "Langues",
     "less": "Moins",
     "loading": "Chargement",
+    "login": "Connexion",
+    "logout": "Se déconnecter",
     "menu": "Menu",
     "mobile-apps": "Application mobile",
     "mode": "Mode",
@@ -116,6 +173,7 @@
     "navigate": "Naviguer",
     "network": "Réseau",
     "next": "Prochain",
+    "next-ayah": "Ayah suivant",
     "no": "Non",
     "none": "Rien",
     "off": "Désactivé",
@@ -124,10 +182,21 @@
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "popular-links": "Liens populaires",
+    "popup": {
+        "cta-1": "Faire un don mensuel",
+        "cta-2": "Faire un don unique",
+        "cta-3": "Apprendre encore plus",
+        "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
+        "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
+        "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
+        "title": "Cher Compagnon du Coran,"
+    },
     "powered-by": "Alimenté par",
     "prev": "Précédent",
+    "previous-ayah": "Ayah précédent",
     "privacy": "Intimité",
     "product-updates": "Mises à jour du produit",
+    "profile": "Profil",
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
     "quran-radio": "Radio Coran",
@@ -136,9 +205,12 @@
         "translation": "Traduction"
     },
     "reciter": "Récitant",
+    "reciters": "Récitants",
     "reflect": "Réfléchir",
     "remove": "Supprimer",
     "retry": "Réessayez",
+    "search-for": "Rechercher '{{searchQuery}}'",
+    "search-results": "{{count}} résultats de recherche",
     "search": {
         "filters": "Filtres",
         "hint": "Essayez de rechercher",
@@ -167,6 +239,7 @@
         "show-tooltip-when-playing-audio": "Afficher l'info-bulle lors de la lecture audio",
         "title": "Paramètres",
         "tooltip-playing-audio-helper": "Afficher la traduction des mots dans l'info-bulle pendant la lecture d'ayah",
+        "value-and-other": "{{value}} et {{othersCount}} autre",
         "value-and-others": "{{value}} , et {{othersCount}} autres",
         "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
         "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
@@ -186,11 +259,15 @@
         "descending": "Descendant"
     },
     "style": "Style",
+    "submit": "Soumettre",
     "surah": "Sourate",
     "tafsir": {
         "font-size": "Taille de la police Tafsir",
         "group-message": "Vous lisez un tafsir pour le groupe de versets {{from}} à {{to}}",
+        "no-text": "{{tafsirName}} n'est pas disponible pour le verset actuel.",
         "surah": "Sourate Tafsir",
+        "tafsir-desc": "Lisez {{tafsirName}} pour Ayah {{verseNumber}} de la sourate {{surahName}}",
+        "tafsirs-desc": "Lisez divers Tafsirs d'Ayah {{ayahNumber}} de la sourate {{surahName}} par des érudits Tafsir de confiance",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -213,6 +290,12 @@
     "translations": "Traductions",
     "transliteration": "Translitération",
     "type": "Taper",
+    "undo": "annuler",
+    "validation": {
+        "invalid-email": "{{field}} doit être une adresse e-mail valide",
+        "invalid-field": "Veuillez saisir une valeur {{field}} valide",
+        "required-field": "{{field}} est requis"
+    },
     "verse": "Verset",
     "verse-bookmark-removed": "Signet verset supprimé !",
     "verse-bookmarked": "Verset mis en signet !",

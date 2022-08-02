@@ -1,14 +1,14 @@
 {
     "credits": {
         "desc": "Bu proje, kullandığımız birçok açık kaynak kütüphane ve proje olmadan mümkün olmazdı:",
-        "lokalize": "<0> Lokalize <\/0> : Verimlilik ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemi.",
-        "quran-align": "<0> Collin Fair <\/0> : Kaydedilmiş Kur'an tilavetinin kelime-kesin olarak bölümlemesini üretmek için bir araç.",
-        "quran-complex": "<0> <\/0> : Kral Fahd Şanlı Kuran Basım Kompleksi, Kur'an-ı Kerim'e ve Bilimlerine hizmet etmede, anlamlarını tercüme etmede ve Kuran Metnini bozulmadan korumada liderdir. baskı, ses kayıtları, elektronik yayıncılık ve dijital uygulamalar alanında ileri teknolojiler.",
-        "quran-enc": "<0> KuranEnc <\/0> : Kur'an-ı Kerim'in birçok dünya dilindeki anlam ve tefsirlerinin ücretsiz ve güvenilir tercümelerini içeren bir portal.",
-        "tanzil": "<0> Tanzil <\/0> : Yüksek düzeyde doğrulanmış kesin bir Kuran metni sağlamayı amaçlayan uluslararası bir Kuran projesi.",
+        "lokalize": "<0>Lokalize<\/0>: Verimlilik ve kalite güvencesine odaklanan ve sorunsuz bir yerelleştirme iş akışı sağlayan bilgisayar destekli bir çeviri sistemi.",
+        "quran-align": "<0>Collin Fair<\/0>: Kaydedilmiş Kur'an tilavetinin kelime-kesin olarak bölümlemesini üretmek için bir araç.",
+        "quran-complex": "<0>QuranComplex<\/0>: Kral Fehd Mushaf-ı Şerîf Basım Kurumu, Kur'an-ı Kerim'e ve Bilimlerine hizmet etmede, anlamlarını tercüme etmede ve Kuran Metnini bozulmadan korumada liderdir. baskı, ses kayıtları, elektronik yayıncılık ve dijital uygulamalar alanında ileri teknolojiler.",
+        "quran-enc": "<0>Kur'an-ı Kerim Ansiklopedisi<\/0>: Kur'an-ı Kerim'in birçok dünya dilindeki anlam ve tefsirlerinin ücretsiz ve güvenilir tercümelerini içeren bir portal.",
+        "tanzil": "<0>Tanzil<\/0>: Yüksek düzeyde doğrulanmış kesin bir Kuran metni sağlamayı amaçlayan uluslararası bir Kuran projesi.",
         "title": "Katkıda Bulunanlar",
-        "vercel": "<0> Vercel <\/0> : ön uç geliştiricilere öncelik veren ve onlara yüksek performanslı web siteleri ve uygulamalar oluşturmaları için kapsamlı araçlar sunan bir dağıtım ve işbirliği platformudur.",
-        "zekr": "<0> Zekr <\/0> : Kuran'a göz atmak ve araştırmak için açık platform Kuran çalışma aracı"
+        "vercel": "<0>Vercel<\/0> : ön uç geliştiricilere öncelik veren ve onlara yüksek performanslı web siteleri ve uygulamalar oluşturmaları için kapsamlı araçlar sunan bir dağıtım ve işbirliği platformudur.",
+        "zekr": "<0>Zekr<\/0>: Kuran'a göz atmak ve araştırmak için açık platform Kuran çalışma aracı"
     },
-    "main-description": "Kuran.com 1995 yılında kuruldu. Web sitesi herkesin Kuran'ı okumasını, incelemesini ve öğrenmesini kolaylaştırmayı amaçlıyor. Proje açık kaynaktır ve çekirdek ekip üyeleri ile <0> Tarteel ekibi <\/0> arasında bir işbirliği olarak oluşturulmuştur."
+    "main-description": "Quran.com 1995 yılında kuruldu. Web sitesi herkesin Kuran'ı okumasını, incelemesini ve öğrenmesini kolaylaştırmayı amaçlıyor. Proje açık kaynaktır ve çekirdek ekip üyeleri ile <0>Tarteel ekibi<\/0> arasında bir işbirliği olarak oluşturulmuştur."
 }

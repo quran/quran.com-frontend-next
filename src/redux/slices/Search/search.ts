@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 export type Search = {
   searchHistory: string[];
@@ -11,7 +12,7 @@ const initialState: Search = { searchHistory: [] };
 const MAXIMUM_RECENT_SEARCH_QUERIES = 5;
 
 export const searchSlice = createSlice({
-  name: 'search',
+  name: SliceName.SEARCH,
   initialState,
   reducers: {
     addSearchHistoryRecord: (state: Search, action: PayloadAction<string>) => {

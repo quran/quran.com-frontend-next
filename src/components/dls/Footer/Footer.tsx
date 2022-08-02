@@ -5,13 +5,16 @@ import TitleAndDescription from './TitleAndDescription';
 
 const Footer = () => {
   return (
-    <div>
-      <div className={styles.container}>
-        <TitleAndDescription />
-        <Links />
+    <footer>
+      <div className={styles.flowItem}>
+        <div className={styles.container}>
+          <TitleAndDescription />
+          <Links />
+        </div>
+        <BottomSection />
       </div>
-      <BottomSection />
-    </div>
+      <div className={styles.emptySpacePlaceholder} />
+    </footer>
   );
 };
 

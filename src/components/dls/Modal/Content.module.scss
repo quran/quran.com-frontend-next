@@ -80,7 +80,7 @@
 
 .content {
   background-color: var(--color-background-default);
-  border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
+  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
   overflow: hidden;
   @include theme.light {
     box-shadow: var(--shadow-jumbo);
@@ -96,7 +96,7 @@
     outline: none;
   }
   @include breakpoints.desktop {
-    border-radius: var(--border-radius-default);
+    border-radius: var(--border-radius-rounded);
     width: constants.$desktopWidth;
     max-width: constants.$desktopMaxWidth;
     bottom: inherit;

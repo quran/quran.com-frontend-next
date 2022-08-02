@@ -1,6 +1,5 @@
 import { stringify } from 'querystring';
 
-import { getChapterData } from './chapter';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey } from './verse';
 
@@ -37,19 +36,6 @@ export const getChapterWithStartingVerseUrl = (verseKey: string): string => {
  */
 export const getVerseNavigationUrl = (chapterIdOrSlug: string, verseNumber: string): string =>
   `/${chapterIdOrSlug}/${verseNumber}`;
-
-/**
- * Get the href link to a the range of verses from a specific verse
- * to the end of the chapter.
- *
- * @param {string} verseKey
- * @returns {string}
- */
-export const getVerseToEndOfChapterNavigationUrl = (verseKey: string): string => {
-  const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  const lastVerseOfChapter = getChapterData(chapterId).versesCount;
-  return `/${chapterId}/${verseNumber}-${lastVerseOfChapter}`;
-};
 
 /**
  * Get the href link to a juz.
@@ -96,6 +82,24 @@ export const getVerseSelectedTafsirNavigationUrl = (
 ): string => `/${chapterId}:${verseNumber}/tafsirs/${tafsirId}`;
 
 /**
+ * Get the href link to selected tafsir for Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/reflections`;
+
+export const getQuranReflectPostUrl = (postId: number) =>
+  `https://quranreflect.com/posts/${postId}`;
+
+export const getQuranReflectPostCommentUrl = (postId: number) =>
+  `https://quranreflect.com/posts/${postId}#comments`;
+
+export const getQuranReflectTagUrl = (tag: string) =>
+  ` https://quranreflect.com/?tags=${encodeURIComponent(tag)}`;
+
+/**
  * Get the href link to a surah.
  *
  * @param {string | number} surahIdOrSlug
@@ -124,6 +128,9 @@ export const resolveUrlBySearchNavigationType = (
   }
   if (type === SearchNavigationType.PAGE) {
     return getPageNavigationUrl(key);
+  }
+  if (type === SearchNavigationType.SEARCH_PAGE) {
+    return getSearchQueryNavigationUrl(key as string);
   }
   // for the Surah navigation
   return getSurahNavigationUrl(key);
@@ -162,7 +169,7 @@ export const getReciterNavigationUrl = (reciterId: string): string => `/reciters
  * @param {string} chapterId
  * @returns {string} recitationPageUrl
  */
-export const getRecitationNavigationUrl = (reciterId: string, chapterId: string) =>
+export const getReciterChapterNavigationUrl = (reciterId: string, chapterId: string) =>
   `/reciters/${reciterId}/${chapterId}`;
 
 /**
@@ -187,6 +194,10 @@ export const getProductUpdatesUrl = (id = ''): string =>
 export const getQuranReflectVerseUrl = (verseKey: string) => {
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
   return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+};
+
+export const getQuranReflectAuthorUrl = (username: string) => {
+  return `https://quranreflect.com/${username}`;
 };
 
 /**

@@ -30,7 +30,7 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
     <div key={page.id} className={styles.pageContainer}>
       <div className={styles.headerSection}>
         {isPageLayout && (
-          <Link href="/product-updates" variant={LinkVariant.Secondary} prefetch={false}>
+          <Link href="/product-updates" variant={LinkVariant.Secondary} shouldPrefetch={false}>
             <span className={styles.backLink}>
               <BackIcon />
               {t('go-back')}
@@ -43,7 +43,7 @@ const Page: React.FC<Props> = ({ page, blocks, isPageLayout = false }) => {
         {isPageLayout ? (
           pageTitle
         ) : (
-          <Link href={`/product-updates/${page.id}`} prefetch={false}>
+          <Link href={`/product-updates/${page.id}`} shouldPrefetch={false}>
             {pageTitle}
           </Link>
         )}

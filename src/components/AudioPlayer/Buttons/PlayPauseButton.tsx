@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,11 @@ import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
+  exitRepeatMode,
   loadAndPlayAudioData,
   selectAudioData,
   selectAudioDataStatus,
@@ -27,8 +29,9 @@ import QueryParam from 'types/QueryParam';
 const PlayPauseButton = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const chaptersData = useContext(DataContext);
 
-  const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
+  const { isPlaying, playbackRate } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData, shallowEqual);
@@ -44,7 +47,7 @@ const PlayPauseButton = () => {
     logButtonClick('audio_player_play');
     const noReadingChapterIdsFound = currentReadingChapterIds.length === 0; // e.g : homepage
     if (currentReadingChapterIds.includes(currentAudioChapterId) || noReadingChapterIdsFound) {
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
     } else {
       setIsMismatchModalVisible(true);
     }
@@ -88,25 +91,31 @@ const PlayPauseButton = () => {
     );
 
   const [firstCurrentReadingChapterId] = currentReadingChapterIds; // get the first chapter in this page
+
+  const onStartOverClicked = () => {
+    dispatch(exitRepeatMode());
+    dispatch(loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }));
+    setIsMismatchModalVisible(false);
+  };
+
+  const onContinueClicked = () => {
+    triggerPlayAudio(playbackRate);
+    setIsMismatchModalVisible(false);
+  };
+
   return (
     <>
       {button}
       <SurahAudioMismatchModal
         isOpen={isMismatchModalVisible}
-        currentAudioChapter={getChapterData(currentAudioChapterId, lang)?.transliteratedName}
-        currentReadingChapter={
-          getChapterData(firstCurrentReadingChapterId, lang)?.transliteratedName
+        currentAudioChapter={
+          getChapterData(chaptersData, currentAudioChapterId)?.transliteratedName
         }
-        onContinue={() => {
-          triggerPlayAudio();
-          setIsMismatchModalVisible(false);
-        }}
-        onStartOver={() => {
-          dispatch(
-            loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }),
-          );
-          setIsMismatchModalVisible(false);
-        }}
+        currentReadingChapter={
+          getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
+        }
+        onContinue={onContinueClicked}
+        onStartOver={onStartOverClicked}
       />
     </>
   );

@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 import React, { useMemo } from 'react';
 
+import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
@@ -12,28 +13,32 @@ import VersePreview from './VersePreview';
 import Counter from 'src/components/dls/Counter/Counter';
 import Select from 'src/components/dls/Forms/Select';
 import Switch from 'src/components/dls/Switch/Switch';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
-  MAXIMUM_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   setQuranFont,
   setMushafLines,
+  MAXIMUM_QURAN_FONT_STEP,
 } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { logValueChange } from 'src/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
-  const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual) as QuranReaderStyles;
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
-  const fonts = useMemo(
-    () => ({
+  const fonts = useMemo(() => {
+    return {
       [QuranFont.IndoPak]: [
         { id: QuranFont.IndoPak, label: t(`fonts.${QuranFont.IndoPak}`), value: QuranFont.IndoPak },
       ],
@@ -60,9 +65,8 @@ const QuranFontSection = () => {
           name: QuranFont.QPCHafs,
         },
       ],
-    }),
-    [t],
-  );
+    } as Record<QuranFont, { id: QuranFont; label: string; value: QuranFont; name: QuranFont }[]>;
+  }, [t]);
 
   // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
   // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
@@ -81,7 +85,7 @@ const QuranFontSection = () => {
 
   // get default font for selected type. We take the first font in this case
   // for example for QurantFont.Uthmani, it will be QuranFont.QPCHafs
-  const getDefaultFont = (selectedType: string) => {
+  const getDefaultFont = (selectedType: QuranFont): QuranFont => {
     const [font] = fonts[selectedType];
     return font.value;
   };
@@ -106,39 +110,79 @@ const QuranFontSection = () => {
     [t],
   );
 
-  const onFontChange = (value) => {
-    logValueChange('font_family', selectedType, value);
-    dispatch(setQuranFont(getDefaultFont(value)));
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {string} key
+   * @param {string | number} value
+   * @param {Action} action
+   */
+  const onFontSettingsChange = (
+    key: string,
+    value: string | number,
+    action: Action,
+    undoAction: Action,
+  ) => {
+    onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
   };
 
-  const onFontStyleChange = (value) => {
+  const onFontChange = (value: QuranFont) => {
+    logValueChange('font_family', selectedType, value);
+    const fontValue = getDefaultFont(value);
+    onFontSettingsChange(
+      'quranFont',
+      fontValue,
+      setQuranFont({ quranFont: fontValue, locale: lang }),
+      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale: lang }),
+    );
+  };
+
+  const onFontStyleChange = (value: QuranFont) => {
     logValueChange('font_style', quranFont, value);
-    dispatch(setQuranFont(value as QuranFont));
+    onFontSettingsChange(
+      'quranFont',
+      value,
+      setQuranFont({ quranFont: value, locale: lang }),
+      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale: lang }),
+    );
   };
 
   const onMushafLinesChange = (value: MushafLines) => {
     logValueChange('mushaf_lines', mushafLines, value);
-    dispatch(setMushafLines(value));
+    onFontSettingsChange(
+      'mushafLines',
+      value,
+      setMushafLines({ mushafLines: value, locale: lang }),
+      setMushafLines({ mushafLines: quranReaderStyles.mushafLines, locale: lang }),
+    );
   };
 
   const onFontScaleDecreaseClicked = () => {
-    logValueChange('font_scale', quranTextFontScale, quranTextFontScale - 1);
-    dispatch(decreaseQuranTextFontScale());
+    const value = quranTextFontScale - 1;
+    logValueChange('font_scale', quranTextFontScale, value);
+    onFontSettingsChange(
+      'quranTextFontScale',
+      value,
+      decreaseQuranTextFontScale(),
+      increaseQuranTextFontScale(),
+    );
   };
 
   const onFontScaleIncreaseClicked = () => {
-    logValueChange('font_scale', quranTextFontScale, quranTextFontScale + 1);
-    dispatch(increaseQuranTextFontScale());
+    const value = quranTextFontScale + 1;
+    logValueChange('font_scale', quranTextFontScale, value);
+    onFontSettingsChange(
+      'quranTextFontScale',
+      value,
+      increaseQuranTextFontScale(),
+      decreaseQuranTextFontScale(),
+    );
   };
 
   return (
     <Section>
-      <Section.Title>{t('fonts.quran-font')}</Section.Title>
-      <Section.Row>
-        <div className={styles.versePreviewContainer}>
-          <VersePreview />
-        </div>
-      </Section.Row>
+      <Section.Title isLoading={isLoading}>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
       </Section.Row>
@@ -169,10 +213,19 @@ const QuranFontSection = () => {
         <Counter
           count={quranTextFontScale}
           onDecrement={quranTextFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-          onIncrement={quranTextFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
+          onIncrement={
+            quranTextFontScale === MAXIMUM_QURAN_FONT_STEP ? null : onFontScaleIncreaseClicked
+          }
         />
       </Section.Row>
-      <QuranFontSectionFooter quranFont={quranFont} />
+      <Section.Row>
+        <QuranFontSectionFooter quranFont={quranFont} />
+      </Section.Row>
+      <Section.Row>
+        <div className={styles.versePreviewContainer}>
+          <VersePreview />
+        </div>
+      </Section.Row>
     </Section>
   );
 };

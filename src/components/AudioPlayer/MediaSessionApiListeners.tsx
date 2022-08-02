@@ -5,17 +5,19 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useCurrentStationInfo from '../Radio/useStationInfo';
 
 import { getReciterData } from 'src/api';
+import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { selectAudioPlayerState } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 
 const SEEK_DURATION_SECONDS = 5;
 
 type MediaSessionApiListenersProps = {
-  play: () => void;
+  play: (playbackRate: number) => void;
   pause: () => void;
   seek: (duration: number) => void;
   playPreviousTrack: () => void;
   playNextTrack: () => void;
+  locale: string;
 };
 
 const QURAN_COM_ARTWORK = [
@@ -33,11 +35,13 @@ const MediaSessionApiListeners = ({
   seek,
   playPreviousTrack,
   playNextTrack,
+  locale,
 }: MediaSessionApiListenersProps) => {
   const audioPlayerState = useSelector(selectAudioPlayerState, shallowEqual);
   const stationInfo = useCurrentStationInfo();
+  const chaptersData = useGetChaptersData(locale);
 
-  const { isRadioMode } = audioPlayerState;
+  const { isRadioMode, playbackRate } = audioPlayerState;
 
   const getRadioMediaMetadata = useCallback(async () => {
     return new MediaMetadata({
@@ -50,19 +54,22 @@ const MediaSessionApiListeners = ({
   }, [stationInfo.description, stationInfo.title]);
 
   const getAudioMediaMetadata = useCallback(async () => {
-    if (!audioPlayerState.audioData?.chapterId) return null;
+    if (!audioPlayerState.audioData?.chapterId || !chaptersData) return null;
 
-    const chapterData = getChapterData(audioPlayerState.audioData.chapterId.toString());
-    const reciterData = await getReciterData(audioPlayerState.reciter.id.toString());
+    const chapterData = getChapterData(
+      chaptersData,
+      audioPlayerState.audioData.chapterId.toString(),
+    );
+    const reciterData = await getReciterData(audioPlayerState.reciter.id.toString(), locale);
 
     return new MediaMetadata({
       title: chapterData.transliteratedName,
-      artist: reciterData?.reciter?.name,
+      artist: reciterData?.reciter?.translatedName?.name,
       album: 'Quran.com',
       // TODO: replace with reciter image
       artwork: QURAN_COM_ARTWORK,
     });
-  }, [audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id]);
+  }, [chaptersData, audioPlayerState.audioData?.chapterId, audioPlayerState.reciter?.id, locale]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {
@@ -73,14 +80,18 @@ const MediaSessionApiListeners = ({
     }
   }, [getAudioMediaMetadata, getRadioMediaMetadata, isRadioMode]);
 
+  const playAudioWithPlaybackRate = useCallback(() => {
+    play(playbackRate);
+  }, [play, playbackRate]);
+
   useEffect(() => {
     if ('mediaSession' in navigator) {
-      navigator.mediaSession.setActionHandler('play', play);
+      navigator.mediaSession.setActionHandler('play', playAudioWithPlaybackRate);
       navigator.mediaSession.setActionHandler('pause', pause);
       navigator.mediaSession.setActionHandler('previoustrack', playPreviousTrack);
       navigator.mediaSession.setActionHandler('nexttrack', playNextTrack);
     }
-  }, [play, pause, playPreviousTrack, playNextTrack]);
+  }, [play, pause, playPreviousTrack, playNextTrack, playAudioWithPlaybackRate]);
 
   useEffect(() => {
     if ('mediaSession' in navigator) {

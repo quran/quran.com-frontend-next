@@ -17,7 +17,7 @@ const CommunitySection = () => {
       <div className={styles.flow}>
         <div className={styles.title}>{t('community.header')}</div>
         <div>{t('community.sub-header')}</div>
-        <Link href="https://discord.gg/FxRWSBfWxn" newTab className={styles.joinCommunityLink}>
+        <Link href="https://discord.gg/FxRWSBfWxn" isNewTab className={styles.joinCommunityLink}>
           <Button href="" type={ButtonType.Success}>
             {t('community.cta')}
           </Button>

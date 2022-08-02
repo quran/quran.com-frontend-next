@@ -21,13 +21,6 @@
   }
 }
 
-.containerMinimized {
-  margin-block-end: 0;
-  @include breakpoints.tablet {
-    margin-block: var(--spacing-xsmall);
-  }
-}
-
 .sliderContainer {
   display: inline-block;
   position: fixed;
@@ -41,20 +34,6 @@
   inset-block-end: constants.$audio-player-default-height;
   @include breakpoints.tablet {
     inset-block-end: constants.$audio-player-default-desktop-height;
-  }
-}
-
-.sliderContainerMinimized {
-  /* stylelint-disable-next-line csstools/use-logical */
-  left: 50%;
-  margin: 0 auto;
-  width: 100%;
-  transform: translate(-50%, 0);
-  position: fixed;
-  span[role="slider"] {
-    @include breakpoints.smallerThanTablet {
-      display: none;
-    }
   }
 }
 

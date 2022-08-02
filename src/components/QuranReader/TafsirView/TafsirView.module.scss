@@ -37,7 +37,6 @@ $container-max-width: calc(23 * var(--spacing-mega));
   p {
     margin-block-end: var(--spacing-small);
     opacity: var(--opacity-85);
-    font-size: var(--font-size-large);
     line-height: normal;
   }
   br {
@@ -156,16 +155,6 @@ $container-max-width: calc(23 * var(--spacing-mega));
 
 .tafsirSelectionSkeleton {
   margin-block-start: var(--spacing-small);
-}
-
-.tafsirGroupMessage {
-  position: relative;
-  padding: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
-  background: var(--color-success-faded);
-  border-radius: var(--border-radius-default);
-  border: 1px solid var(--color-success-faint);
-  font-size: var(--font-size-normal);
 }
 
 .languageSelection {

@@ -6,7 +6,7 @@
  * 2. Remove un-necessary data to make the payload size as small as possible.
  *
  * It can be used by running `yarn run chapter-data:format {locale}` e.g. `yarn run chapter-data:format en`
- * after having created a file called `public/data/chapters/en.json` and pasted the API's JSON response into it.
+ * after having created a file called `data/chapters/en.json` and pasted the API's JSON response into it.
  */
 
 /* eslint-disable no-console */
@@ -17,7 +17,7 @@ const locale = process.argv[2];
 if (!locale) {
   console.log('Please enter the locale!');
 } else {
-  const path = `./public/data/chapters/${locale}.json`;
+  const path = `./data/chapters/${locale}.json`;
   if (fs.existsSync(path)) {
     let fileContent;
     try {

@@ -6,6 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
+  background-color: var(--color-background-elevated);
 }
 
 .centerVertically {
@@ -25,6 +26,7 @@
 .rightCTA {
   display: flex;
   margin-inline-end: var(--spacing-medium);
+  align-items: center;
 
   > button {
     margin-inline-start: var(--spacing-micro);

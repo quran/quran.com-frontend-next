@@ -1,8 +1,7 @@
-import { useEffect, useRef, useImperativeHandle, ForwardedRef } from 'react';
+import { useRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 
 import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
@@ -10,7 +9,11 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
-import { fakeNavigate } from 'src/utils/navigation';
+
+export enum ContentModalSize {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+}
 
 type ContentModalProps = {
   isOpen?: boolean;
@@ -18,11 +21,12 @@ type ContentModalProps = {
   onEscapeKeyDown?: () => void;
   children: React.ReactNode;
   hasCloseButton?: boolean;
-  url?: string;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
-  contentClassName?: string;
   // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
+  contentClassName?: string;
+  size?: ContentModalSize;
+  isFixedHeight?: boolean;
 };
 
 const ContentModal = ({
@@ -31,13 +35,12 @@ const ContentModal = ({
   onEscapeKeyDown,
   hasCloseButton,
   children,
-  url,
   header,
   innerRef,
   contentClassName,
+  size = ContentModalSize.MEDIUM,
+  isFixedHeight,
 }: ContentModalProps) => {
-  const router = useRouter();
-
   const overlayRef = useRef<HTMLDivElement>();
 
   useImperativeHandle(innerRef, () => ({
@@ -45,20 +48,6 @@ const ContentModal = ({
       if (overlayRef.current) overlayRef.current.scrollTop = 0;
     },
   }));
-
-  useEffect(() => {
-    if (!url) return null;
-    if (isOpen) fakeNavigate(url, router.locale);
-    else fakeNavigate(router.asPath, router.locale);
-
-    return () => {
-      fakeNavigate(router.asPath, router.locale);
-    };
-
-    // we only want to run this effect when `isOpen` changed, not when `url` changed
-    // this is important because sometime the url props is changed, but we don't want to trigger `fakeNavigate` again.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
 
   return (
     <Dialog.Root open={isOpen}>
@@ -76,12 +65,14 @@ const ContentModal = ({
           <Dialog.Content
             className={classNames(styles.contentWrapper, {
               [contentClassName]: contentClassName,
+              [styles.small]: size === ContentModalSize.SMALL,
+              [styles.medium]: size === ContentModalSize.MEDIUM,
+              [styles.autoHeight]: !isFixedHeight,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onClose}
           >
             <div className={styles.header}>
-              {header}
               {hasCloseButton && (
                 <Dialog.Close className={styles.closeIcon}>
                   <Button
@@ -93,6 +84,7 @@ const ContentModal = ({
                   </Button>
                 </Dialog.Close>
               )}
+              {header}
             </div>
             <div className={styles.content}>{children}</div>
           </Dialog.Content>

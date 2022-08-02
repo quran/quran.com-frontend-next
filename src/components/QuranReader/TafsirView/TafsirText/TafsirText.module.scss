@@ -1,0 +1,23 @@
+.counter {
+  margin-block-end: var(--spacing-xsmall);
+  font-size: initial;
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
+
+.xs {
+  font-size: var(--font-size-small);
+}
+.sm {
+  font-size: var(--font-size-normal);
+}
+.md {
+  font-size: var(--font-size-large);
+}
+.lg {
+  font-size: var(--font-size-xlarge);
+}
+.xl {
+  font-size: var(--font-size-jumbo);
+}

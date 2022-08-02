@@ -1,9 +1,11 @@
 @use "src/styles/theme";
+@use "src/styles/constants";
 
 body {
   min-height: 100vh;
   background: var(--color-background-default);
   color: var(--color-text-default);
+  padding: 0px !important;
 
   ::selection {
     background: var(--color-highlight);
@@ -38,6 +40,11 @@ body {
   :lang(bengali) {
     font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
       Arial;
+  }
+
+  :lang(ku) {
+    font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "NotoNastaliq",
+      "ProximaVara", Helvetica, Arial;
   }
 }
 
