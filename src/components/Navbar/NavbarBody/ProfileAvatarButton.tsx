@@ -15,18 +15,19 @@ import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { logoutUser } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
 
-const COOKIES_KEY = 'show-login-button';
-
 const shouldShowButton = () => {
-  if (Cookies.get(COOKIES_KEY) === 'true') {
+  const allowedPercentageOfUsers = Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD);
+  // eslint-disable-next-line i18next/no-literal-string
+  const cookiesKey = `${allowedPercentageOfUsers}-show-login-button`;
+  if (Cookies.get(cookiesKey) === 'true') {
     return true;
   }
   const randomNumber = Math.floor(Math.random() * (100 - 1) + 1);
-  if (randomNumber <= Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD)) {
-    Cookies.set(COOKIES_KEY, 'true');
+  if (randomNumber <= allowedPercentageOfUsers) {
+    Cookies.set(cookiesKey, 'true');
     return true;
   }
-  Cookies.set(COOKIES_KEY, 'false');
+  Cookies.set(cookiesKey, 'false');
   return false;
 };
 
