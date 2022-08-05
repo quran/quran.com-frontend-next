@@ -19,7 +19,8 @@ const shouldShowButton = () => {
   const allowedPercentageOfUsers = Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD);
   // eslint-disable-next-line i18next/no-literal-string
   const cookiesKey = `${allowedPercentageOfUsers}-show-login-button`;
-  if (Cookies.get(cookiesKey) === 'true') {
+  const FIXED_COOKIES_KEY = 'show-login-button';
+  if (Cookies.get(FIXED_COOKIES_KEY) === 'true' || Cookies.get(cookiesKey) === 'true') {
     return true;
   }
   const randomNumber = Math.floor(Math.random() * (100 - 1) + 1);
