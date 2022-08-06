@@ -23,6 +23,7 @@ const SocialLogin = () => {
           prefix={<GoogleIcon />}
           className={classNames(styles.loginButton, styles.googleButton)}
           href={makeGoogleLoginUrl()}
+          shouldFlipOnRTL={false}
         >
           {t('continue-google')}
         </Button>
@@ -32,12 +33,18 @@ const SocialLogin = () => {
           prefix={<FacebookIcon />}
           className={classNames(styles.loginButton, styles.facebookButton)}
           href={makeFacebookLoginUrl()}
+          shouldFlipOnRTL={false}
         >
           {t('continue-facebook')}
         </Button>
       )}
       {process.env.NEXT_PUBLIC_ENABLE_APPLE_LOGIN === 'true' && (
-        <Button href={makeAppleLoginUrl()} prefix={<AppleIcon />} className={styles.loginButton}>
+        <Button
+          href={makeAppleLoginUrl()}
+          prefix={<AppleIcon />}
+          className={styles.loginButton}
+          shouldFlipOnRTL={false}
+        >
           {t('continue-apple')}
         </Button>
       )}
