@@ -9,6 +9,7 @@ import EmailVerificationForm from './EmailVerificationForm';
 
 import { completeSignup } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { logFormSubmission } from 'src/utils/eventLogger';
 import FormField from 'types/FormField';
 
 type CompleteSignupFormProps = {
@@ -25,6 +26,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
   const { t } = useTranslation('common');
 
   const onSubmit = (data) => {
+    logFormSubmission('complete_signUp');
     completeSignup(data).then(() => {
       // mutate the cache version of users/profile
       mutate(makeUserProfileUrl());

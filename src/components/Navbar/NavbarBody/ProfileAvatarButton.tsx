@@ -14,6 +14,7 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { logoutUser } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 const shouldShowButton = () => {
   const allowedPercentageOfUsers = Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD);
@@ -44,18 +45,26 @@ const ProfileAvatarButton = () => {
 
   const isUserLoggedIn = isLoggedIn();
 
+  const onTriggerClicked = () => {
+    if (!isUserLoggedIn) {
+      logButtonClick('profile_avatar_login');
+    }
+  };
+
   const trigger = (
     <Button
       tooltip={isUserLoggedIn ? t('profile') : t('login')}
       variant={ButtonVariant.Ghost}
       href={isUserLoggedIn ? null : '/login'}
       shape={ButtonShape.Circle}
+      onClick={onTriggerClicked}
     >
       <IconPerson />
     </Button>
   );
 
   const onLogoutClicked = () => {
+    logButtonClick('profile_avatar_logout');
     logoutUser().then(() => {
       dispatch({ type: removeLastSyncAt.type });
       router.reload();
@@ -63,6 +72,7 @@ const ProfileAvatarButton = () => {
   };
 
   const onProfileClicked = () => {
+    logButtonClick('profile_avatar_profile');
     router.push('/profile').then(() => {
       setIsOpen(false);
     });
