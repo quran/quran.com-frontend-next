@@ -133,8 +133,13 @@ const TafsirBody = ({
   // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
     if (tafsirSelectionList) {
-      const languageName = getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirIdOrSlug);
-      setSelectedLanguage(languageName);
+      setSelectedLanguage((prevSelectedLanguage) => {
+        // if we haven't set the language already, we need to detect which language the current tafsir is in.
+        return (
+          prevSelectedLanguage ||
+          getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirIdOrSlug)
+        );
+      });
     }
   }, [onTafsirSelected, selectedTafsirIdOrSlug, tafsirSelectionList]);
 
