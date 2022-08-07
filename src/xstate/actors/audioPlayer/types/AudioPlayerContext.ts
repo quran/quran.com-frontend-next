@@ -1,4 +1,7 @@
+import { InterpreterFrom } from 'xstate';
+
 import { RadioActorRef } from '../../radio/types/RadioActorRef';
+import { createRepeatMachine } from '../../repeatMachine/repeatMachine';
 
 import { AudioFile } from './services/AudioData';
 
@@ -17,7 +20,7 @@ interface AudioPlayerContext {
   playbackRate: number;
   shouldPlayFromRandomTimeStamp: boolean;
   verseDelay: number;
-  repeatActor: any;
+  repeatActor: InterpreterFrom<ReturnType<typeof createRepeatMachine>>;
   radioActor: RadioActorRef;
 }
 

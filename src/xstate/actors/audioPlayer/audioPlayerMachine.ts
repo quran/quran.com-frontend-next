@@ -637,7 +637,7 @@ export const audioPlayerMachine =
           if (context.repeatActor) {
             return send(
               { type: 'REPEAT_SELECTED_AYAH', ayahNumber: event.ayahNumber },
-              { to: context.repeatActor },
+              { to: context.repeatActor.id },
             );
           }
           return [];
@@ -792,7 +792,7 @@ export const audioPlayerMachine =
                   type: 'TIMESTAMP_UPDATED',
                   timestamp: context.audioPlayer.currentTime * 1000,
                 },
-                { to: context.repeatActor },
+                { to: context.repeatActor.id },
               ),
             );
           }
@@ -820,10 +820,10 @@ export const audioPlayerMachine =
           );
           return actions;
         }),
-        stopRepeatActor: pure((context) => {
+        stopRepeatActor: pure((context: any) => {
           if (context.repeatActor) {
             return [
-              stop(context.repeatActor),
+              stop(context.repeatActor.id),
               assign({
                 repeatActor: null,
               }),
@@ -833,7 +833,7 @@ export const audioPlayerMachine =
         }),
         // @ts-ignore
         repeatNextAyah: pure((context) => [
-          send({ type: 'REPEAT_NEXT_AYAH' }, { to: context.repeatActor }),
+          send({ type: 'REPEAT_NEXT_AYAH' }, { to: context.repeatActor.id }),
           'incrementAyah',
           'setAudioPlayerCurrentTime',
         ]),
@@ -841,7 +841,7 @@ export const audioPlayerMachine =
         repeatPreviousAyah: pure((context) => {
           if (context.repeatActor)
             return [
-              send({ type: 'REPEAT_PREV_AYAH' }, { to: context.repeatActor }),
+              send({ type: 'REPEAT_PREV_AYAH' }, { to: context.repeatActor.id }),
               'decrementAyah',
               'setAudioPlayerCurrentTime',
             ];

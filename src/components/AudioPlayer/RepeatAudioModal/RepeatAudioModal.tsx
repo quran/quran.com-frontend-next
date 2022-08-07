@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 import { useMemo, useState, useEffect, useContext } from 'react';
 
+import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { triggerPauseAudio } from '../EventTriggers';
 
@@ -15,11 +16,7 @@ import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import {
-  exitRepeatMode,
-  selectAudioPlayerState,
-  selectIsInRepeatMode,
-} from 'src/redux/slices/AudioPlayer/state';
+import { exitRepeatMode } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
@@ -52,12 +49,13 @@ const RepeatAudioModal = ({
   // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const audioService = useContext(AudioPlayerMachineContext);
+  const [audioState] = useActor(audioService);
+  const repeatState = audioState.context.repeatActor?.getSnapshot();
+  const repeatSettings = repeatState?.context;
 
-  const audioPlayerState = useSelector(selectAudioPlayerState);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
-  const isInRepeatMode = useSelector(selectIsInRepeatMode);
+  const isInRepeatMode = !!audioState.context.repeatActor;
   const chaptersData = useGetChaptersData(lang);
-  const { repeatSettings } = audioPlayerState;
   const {
     actions: { onSettingsChangeWithoutDispatch },
   } = usePersistPreferenceGroup();
@@ -91,11 +89,11 @@ const RepeatAudioModal = ({
   );
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: repeatSettings.repeatRange,
-    repeatEachVerse: repeatSettings.repeatEachVerse,
+    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle || 2,
+    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle || 2,
     from: selectedVerseKey || firstVerseKeyInThisChapter,
     to: selectedVerseKey || lastVerseKeyInThisChapter,
-    delayMultiplier: repeatSettings.delayMultiplier,
+    delayMultiplier: repeatSettings?.delayMultiplier || 1,
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
