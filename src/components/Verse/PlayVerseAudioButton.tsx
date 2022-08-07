@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
+import { useActor } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,7 +28,8 @@ import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlight
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey } from 'src/utils/verse';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
 interface PlayVerseAudioProps {
@@ -38,7 +40,6 @@ interface PlayVerseAudioProps {
 }
 const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   verseKey,
-  timestamp,
   isTranslationView = true,
   onActionTriggered,
 }) => {
@@ -48,9 +49,13 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
   const chapterId = getChapterNumberFromKey(verseKey);
+  const verseNumber = getVerseNumberFromKey(verseKey);
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [state, send] = useActor(audioService);
 
   useEffect(() => {
     if (audioDataStatus === AudioDataStatus.Ready) {
@@ -62,17 +67,11 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
     dispatch(exitRepeatMode());
-    dispatch(
-      playFrom({
-        chapterId,
-        reciterId,
-        timestamp,
-      }),
-    );
+    send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
 
-    if (audioDataStatus !== AudioDataStatus.Ready) {
-      setIsLoading(true);
-    }
+    // if (audioDataStatus !== AudioDataStatus.Ready) {
+    //   setIsLoading(true);
+    // }
 
     if (onActionTriggered) {
       onActionTriggered();

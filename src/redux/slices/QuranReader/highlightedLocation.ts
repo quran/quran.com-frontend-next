@@ -47,10 +47,6 @@ export const selectIsLineHighlighted = (verseKeys: string[]) => (state: RootStat
 
   return verseKeys.includes(`${highlightedChapter}:${highlightedVerse}`);
 };
-export const selectIsVerseHighlighted = (verseKey: string) => (state: RootState) => {
-  const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
-  return verseKey === makeVerseKey(highlightedChapter, highlightedVerse);
-};
 export const selectIsVerseBeingPlayed = (verseKey: string) => (state: RootState) => {
   const { highlightedChapter, highlightedVerse } = selectHighlightedLocation(state);
   const isAudioPlaying = selectIsPlaying(state);

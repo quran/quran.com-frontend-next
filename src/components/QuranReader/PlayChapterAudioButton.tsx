@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 
+import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
@@ -22,6 +23,7 @@ import {
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
 interface Props {
@@ -29,25 +31,30 @@ interface Props {
 }
 const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
   const isAudioPlaying = useSelector(selectIsPlaying);
-  const playbackRate = useSelector(selectPlaybackRate);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
-  const isRadioMode = useSelector(selectIsRadioMode);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [state, send] = useActor(audioService);
+
   const isPlayingCurrentChapter = isAudioPlaying && currentAudioData?.chapterId === chapterId;
 
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const play = () => {
     logButtonClick('chapter_header_play_audio');
-    dispatch(exitRepeatMode());
-    if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
-      triggerPlayAudio(playbackRate);
-    } else {
-      dispatch(playFrom({ chapterId, reciterId, timestamp: 0 }));
-    }
+    send({
+      type: 'PLAY_SURAH',
+      surah: chapterId,
+    });
+
+    // dispatch(exitRepeatMode());
+    // if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
+    //   triggerPlayAudio(playbackRate);
+    // } else {
+    //   dispatch(playFrom({ chapterId, reciterId, timestamp: 0 }));
+    // }
   };
 
   const pause = () => {

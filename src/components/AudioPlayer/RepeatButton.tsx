@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -14,15 +15,18 @@ import Wrapper from 'src/components/Wrapper/Wrapper';
 import {
   selectIsInRepeatMode,
   selectRemainingRangeRepeatCount,
-  selectAudioData,
 } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const RepeatAudioButton = () => {
   const { lang } = useTranslation('common');
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [currentState] = useActor(audioService);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const audioData = useSelector(selectAudioData, shallowEqual);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
   const remainingRangeRepeatCount = toLocalizedNumber(
     useSelector(selectRemainingRangeRepeatCount),
@@ -36,25 +40,18 @@ const RepeatAudioButton = () => {
 
   return (
     <>
-      {audioData && (
-        <RepeatAudioModal
-          defaultRepetitionMode={RepetitionMode.Range}
-          chapterId={audioData?.chapterId.toString()}
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-        />
-      )}
+      <RepeatAudioModal
+        defaultRepetitionMode={RepetitionMode.Range}
+        chapterId={currentState.context.surah.toString()}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
 
       <Wrapper
         shouldWrap={isInRepeatMode}
         wrapper={(children) => <Badge content={remainingRangeRepeatCount}>{children}</Badge>}
       >
-        <Button
-          isDisabled={!audioData}
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          onClick={onButtonClicked}
-        >
+        <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onButtonClicked}>
           <RepeatIcon />
         </Button>
       </Wrapper>

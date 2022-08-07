@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useContext } from 'react';
 
+import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,15 +19,19 @@ import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   exitRepeatMode,
-  playFrom,
   selectAudioPlayerState,
   selectIsInRepeatMode,
-  setRepeatSettings,
 } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { generateChapterVersesKeys, getChapterFirstAndLastVerseKey } from 'src/utils/verse';
+import {
+  generateChapterVersesKeys,
+  getChapterFirstAndLastVerseKey,
+  getChapterNumberFromKey,
+  getVerseNumberFromKey,
+} from 'src/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 
@@ -47,7 +52,10 @@ const RepeatAudioModal = ({
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [state, send] = useActor(audioService);
 
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
@@ -104,14 +112,15 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const play = () => {
-    dispatch(setRepeatSettings({ verseRepetition, locale: lang }));
-    dispatch(
-      playFrom({
-        chapterId: Number(chapterId),
-        reciterId,
-        verseKey: verseRepetition.from,
-      }),
-    );
+    send({
+      type: 'SET_REPEAT_SETTING',
+      delayMultiplier: Number(verseRepetition.delayMultiplier),
+      repeatEachVerse: Number(verseRepetition.repeatEachVerse),
+      from: Number(getVerseNumberFromKey(verseRepetition.from)),
+      to: Number(getVerseNumberFromKey(verseRepetition.to)),
+      repeatRange: Number(verseRepetition.repeatRange),
+      surah: Number(getChapterNumberFromKey(verseRepetition.from)),
+    });
     onClose();
   };
 

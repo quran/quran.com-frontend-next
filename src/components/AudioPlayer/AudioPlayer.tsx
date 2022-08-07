@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import { useActor } from '@xstate/react';
 import classNames from 'classnames';
@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import styles from './AudioPlayer.module.scss';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
-import { audioPlayerService } from 'src/xstate/actors/audioPlayer/audioPlayerMachine';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ssr: false,
@@ -27,7 +27,8 @@ const AudioPlayer = () => {
   // const isHidden = audioDataStatus === AudioDataStatus.NoFile;
 
   const audioPlayerRef = useRef<HTMLAudioElement>();
-  const [currentState, send] = useActor(audioPlayerService);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [currentState, send] = useActor(audioService);
   // const [isRepeatModalOpen, setIsRepeatModalOpen] = useState(false);
   const isVisible = currentState.matches('VISIBLE');
   // const isPlaying = currentState.matches({ VISIBLE: { AUDIO_PLAYER_INITIATED: 'PLAYING' } });

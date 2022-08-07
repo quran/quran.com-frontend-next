@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+
+import { useActor } from '@xstate/react';
 
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
@@ -6,12 +8,13 @@ import styles from './PlaybackControls.module.scss';
 import RepeatAudioButton from './RepeatButton';
 import SeekButton, { SeekButtonType } from './SeekButton';
 
-import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
-import AudioDataStatus from 'src/redux/types/AudioDataStatus';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const PlaybackControls = () => {
-  const audioDataStatus = useSelector(selectAudioDataStatus);
-  const isLoading = audioDataStatus === AudioDataStatus.Loading;
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [currentState] = useActor(audioService);
+
+  const isLoading = currentState.hasTag('loading');
 
   return (
     <div className={styles.container}>
