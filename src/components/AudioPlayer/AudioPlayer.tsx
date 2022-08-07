@@ -20,22 +20,10 @@ const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
 });
 
 const AudioPlayer = () => {
-  // const dispatch = useDispatch();
-  // const audioPlayerElRef = useRef<HTMLAudioElement>(null);
-  // const audioDataStatus = useSelector(selectAudioDataStatus);
-  // const audioData = useSelector(selectAudioData, shallowEqual);
-  // const isHidden = audioDataStatus === AudioDataStatus.NoFile;
-
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const audioService = useContext(AudioPlayerMachineContext);
   const [currentState, send] = useActor(audioService);
-  // const [isRepeatModalOpen, setIsRepeatModalOpen] = useState(false);
   const isVisible = currentState.matches('VISIBLE');
-  // const isPlaying = currentState.matches({ VISIBLE: { AUDIO_PLAYER_INITIATED: 'PLAYING' } });
-  // const isLoading = currentState.hasTag('loading');
-  // const {
-  //   context: { surahVersesCount, elapsed, ayahNumber, surah, duration, radioActor },
-  // } = currentState;
 
   useEffect(() => {
     send({ type: 'SET_AUDIO_REF', audioPlayerRef: audioPlayerRef.current });

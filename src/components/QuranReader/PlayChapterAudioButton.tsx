@@ -2,64 +2,45 @@ import { useContext } from 'react';
 
 import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import {
-  exitRepeatMode,
-  playFrom,
-  selectAudioData,
-  selectIsPlaying,
-  selectIsRadioMode,
-  selectPlaybackRate,
-} from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import QueryParam from 'types/QueryParam';
 
 interface Props {
   chapterId: number;
 }
 const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const currentAudioData = useSelector(selectAudioData, shallowEqual);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
   const audioService = useContext(AudioPlayerMachineContext);
   const [state, send] = useActor(audioService);
 
-  const isPlayingCurrentChapter = isAudioPlaying && currentAudioData?.chapterId === chapterId;
+  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING');
+  const isPlayingCurrentChapter = isAudioPlaying && state.context.surah === chapterId;
 
-  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const play = () => {
     logButtonClick('chapter_header_play_audio');
     send({
       type: 'PLAY_SURAH',
       surah: chapterId,
     });
-
-    // dispatch(exitRepeatMode());
-    // if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
-    //   triggerPlayAudio(playbackRate);
-    // } else {
-    //   dispatch(playFrom({ chapterId, reciterId, timestamp: 0 }));
-    // }
   };
 
   const pause = () => {
     logButtonClick('chapter_header_pause_audio');
-    triggerPauseAudio();
+    send({
+      type: 'PAUSE',
+    });
   };
 
   return (
