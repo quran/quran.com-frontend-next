@@ -19,10 +19,7 @@ import { selectIsInRepeatMode, selectIsRadioMode } from 'src/redux/slices/AudioP
 import AudioData from 'types/AudioData';
 import QueryParam from 'types/QueryParam';
 
-interface Props {
-  audioPlayerElRef: MutableRefObject<HTMLAudioElement>;
-  audioData: AudioData;
-}
+interface Props {}
 
 const AudioPlayerBody: React.FC<Props> = ({ audioPlayerElRef, audioData }) => {
   const { lang } = useTranslation();
