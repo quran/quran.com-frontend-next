@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { useMemo, useState, useEffect, useContext } from 'react';
 
-import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,7 +15,6 @@ import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
   exitRepeatMode,
   selectAudioPlayerState,
@@ -33,7 +31,6 @@ import {
 } from 'src/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import QueryParam from 'types/QueryParam';
 
 type RepeatAudioModalProps = {
   chapterId: string;
@@ -55,7 +52,6 @@ const RepeatAudioModal = ({
   // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
 
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
@@ -112,7 +108,7 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const play = () => {
-    send({
+    audioService.send({
       type: 'SET_REPEAT_SETTING',
       delayMultiplier: Number(verseRepetition.delayMultiplier),
       repeatEachVerse: Number(verseRepetition.repeatEachVerse),

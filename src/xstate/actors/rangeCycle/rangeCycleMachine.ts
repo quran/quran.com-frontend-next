@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable import/prefer-default-export */
@@ -93,13 +95,13 @@ export const createRangeCycleMachine = ({
     },
     {
       guards: {
-        rangeEnded: (context, event: { timestamp: number }) => {
+        rangeEnded: (context) => {
           return context.currentVerseNumber === toVerseNumber;
         },
-        rangeCycleOnProgress: (context, event) => {
+        rangeCycleOnProgress: (context) => {
           return context.currentRangeCycle < context.totalRangeCycle;
         },
-        rangeCycleFinished: (context, event) => {
+        rangeCycleFinished: (context) => {
           return context.currentRangeCycle >= context.totalRangeCycle;
         },
       },
@@ -141,7 +143,7 @@ export const createRangeCycleMachine = ({
             ),
           ];
         }),
-        repeatNextAyah: pure((context, event) => {
+        repeatNextAyah: pure((context) => {
           const currentIndex = context.currentVerseNumber - 1;
           const nextVerseTiming: VerseTiming = context.verseTimings[currentIndex + 1];
           const nextVerseNumber = context.currentVerseNumber + 1;
@@ -167,7 +169,7 @@ export const createRangeCycleMachine = ({
             }),
           ];
         }),
-        repeatPreviousAyah: pure((context, event) => {
+        repeatPreviousAyah: pure((context) => {
           const currentIndex = context.currentVerseNumber - 1;
           const prevVerseTiming: VerseTiming = context.verseTimings[currentIndex - 1];
           const prevVerseNumber = context.currentVerseNumber - 1;
@@ -186,7 +188,7 @@ export const createRangeCycleMachine = ({
             }),
           ];
         }),
-        spawnNextAyahActor: pure((context, event) => {
+        spawnNextAyahActor: pure((context) => {
           const currentIndex = context.currentVerseNumber - 1;
           const currentVerseTiming: VerseTiming = context.verseTimings[currentIndex];
           const nextVerseTiming: VerseTiming = context.verseTimings[currentIndex + 1];
@@ -223,7 +225,7 @@ export const createRangeCycleMachine = ({
         /**
          * Forward the event to parent
          */
-        repeatSameAyah: sendParent((context, event: any) => {
+        repeatSameAyah: sendParent((context) => {
           const verseTiming = context.verseTimings[context.currentVerseNumber - 1];
           const verseDuration = verseTiming.duration;
           return { type: 'REPEAT_AYAH', verseNumber: context.currentVerseNumber, verseDuration };
@@ -235,7 +237,7 @@ export const createRangeCycleMachine = ({
          * - respawn verseCycleActor
          * - send to parent PLAY_FROM_AYAH
          */
-        repeatCycle: pure((context, event) => {
+        repeatCycle: pure((context) => {
           const verseTiming = context.verseTimings[fromVerseNumber - 1];
           const verseDuration = verseTiming.duration;
           return [
@@ -259,7 +261,7 @@ export const createRangeCycleMachine = ({
           ];
         }),
 
-        sendRangeRepeatFinished: pure((context, event) => {
+        sendRangeRepeatFinished: pure(() => {
           return sendParent({ type: 'RANGE_REPEAT_FINISHED' });
         }),
 
@@ -267,7 +269,7 @@ export const createRangeCycleMachine = ({
          * Spawn verseCycleActor, and assign it to context
          */
         spawnVerseCycleActor: assign({
-          verseCycleActor: (context, event) => {
+          verseCycleActor: (context) => {
             const curentVerseTiming = context.verseTimings[context.currentVerseNumber - 1];
             return spawn(
               createVerseCycleMachine({
