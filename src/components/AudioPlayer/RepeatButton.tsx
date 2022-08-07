@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 
 import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
