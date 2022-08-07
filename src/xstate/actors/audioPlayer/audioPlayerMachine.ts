@@ -4,7 +4,7 @@
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable max-lines */
 import random from 'lodash/random';
-import { Action, assign, createMachine, interpret, send, spawn } from 'xstate';
+import { assign, createMachine, interpret, send, spawn } from 'xstate';
 import { pure, stop } from 'xstate/lib/actions';
 
 import { createRadioMachine } from '../radio/radioMachine';
@@ -637,9 +637,10 @@ export const audioPlayerMachine =
           return actions;
         }),
         setRadioStationDetails: assign({
-          shouldPlayFromRandomTimeStamp: (context, event) => event.shouldPlayFromRandomTimeStamp,
-          reciterId: (context, event) => event.reciterId,
-          surah: (context, event) => event.surah,
+          shouldPlayFromRandomTimeStamp: (context, event: any) =>
+            event.shouldPlayFromRandomTimeStamp,
+          reciterId: (context, event: any) => event.reciterId,
+          surah: (context, event: any) => event.surah,
         }),
         setNewSurahAndResetNewAyahNumber: assign({
           newSurah: (context, event) => event.surah,
@@ -676,9 +677,9 @@ export const audioPlayerMachine =
           audioPlayer: (context, event) => event.audioPlayerRef,
         }),
         setAudioData: assign({
-          duration: (context, event) => event.data.audio_files[0].duration / 1000,
-          audioData: (context, event) => event.data.audio_files[0],
-          surahVersesCount: (context, event) => event.data.audio_files[0].verse_timings.length,
+          duration: (context, event: any) => event.data.audio_files[0].duration / 1000,
+          audioData: (context, event: any) => event.data.audio_files[0],
+          surahVersesCount: (context, event: any) => event.data.audio_files[0].verse_timings.length,
         }),
         setAudioPlayerSource: (context) => {
           const {
@@ -752,10 +753,9 @@ export const audioPlayerMachine =
             playbackRate,
           });
         }),
-        // TODO: fix typing
-        // @ts-ignore
         updateTiming: pure((context) => {
-          const actions: Action<any, any>[] = ['setElapsedTime'];
+          const actions = [];
+          actions.push('setElapsedTime');
           if (context.repeatActor) {
             actions.push(
               send(
@@ -767,7 +767,6 @@ export const audioPlayerMachine =
               ),
             );
           }
-
           return actions;
         }),
         forwardPlayToRadioMachine: pure((context, event) => {
@@ -786,8 +785,7 @@ export const audioPlayerMachine =
                 id: event.stationId,
               },
               {
-                // @ts-ignore
-                to: radioActor,
+                to: radioActor.id,
               },
             ),
           );
