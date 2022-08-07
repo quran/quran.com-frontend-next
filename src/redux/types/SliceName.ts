@@ -16,7 +16,6 @@ enum SliceName {
   COMMAND_BAR = 'commandBar',
   CONTEXT_MENU = 'contextMenu',
   FONT_FACES = 'fontFaces',
-  HIGHLIGHTED_LOCATIONS = 'highlightedLocation',
   NOTES = 'notes',
   READING_TRACKER = 'readingTracker',
   READING_VIEW_HOVERED_VERSE = 'readingViewHoveredVerse',

@@ -9,6 +9,7 @@ import { pure, stop } from 'xstate/lib/actions';
 
 import { createRadioMachine } from '../radio/radioMachine';
 import { createRepeatMachine } from '../repeatMachine/repeatMachine';
+import VerseTiming from '../repeatMachine/types/VerseTiming';
 
 import { getStateFromLocalStorage, persistXstateContext } from './audioPlayerPersistHelper';
 import AudioPlayerContext from './types/AudioPlayerContext';
@@ -32,6 +33,47 @@ import { RECITERS } from 'src/xstate/constants';
  */
 const isCurrentTimeInRange = (currentTime: number, timestampFrom: number, timestampTo: number) =>
   currentTime >= timestampFrom && currentTime < timestampTo;
+
+const getActiveVerseTiming = (context) => {
+  const {
+    audioData: { verse_timings: verseTimings },
+    ayahNumber,
+  } = context;
+  const { currentTime } = context.audioPlayer;
+  const currentTimeMS = currentTime * 1000;
+  const lastAyahOfSurahTimestampTo = verseTimings[verseTimings.length - 1].timestamp_to;
+
+  // if the reported time exceeded the maximum timestamp of the Surah from BE, just return the current Ayah which should be the last
+  if (currentTimeMS > lastAyahOfSurahTimestampTo) {
+    return verseTimings[ayahNumber - 1];
+  }
+
+  const activeVerseTiming = verseTimings.find((ayah) => {
+    const isAyahBeingRecited = isCurrentTimeInRange(
+      currentTimeMS,
+      ayah.timestamp_from,
+      ayah.timestamp_to,
+    );
+    return isAyahBeingRecited;
+  });
+
+  return activeVerseTiming;
+};
+
+const getActiveWordLocation = (activeVerseTiming: VerseTiming, currentTime: number) => {
+  const activeAudioSegment = activeVerseTiming.segments.find((segment) => {
+    const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
+    return isCurrentTimeInRange(currentTime, timestampFrom, timestampTo);
+  });
+
+  const wordLocation = activeAudioSegment ? activeAudioSegment[0] : 0;
+  return wordLocation;
+};
+
+const getActiveAyahNumber = (activeVerseTiming: VerseTiming) => {
+  const [, verseNumber] = activeVerseTiming.verse_key.split(':');
+  return Number(verseNumber);
+};
 
 const executeFetchReciter = async (context: AudioPlayerContext): Promise<AudioData> => {
   const { reciterId, surah } = context;
@@ -710,31 +752,18 @@ export const audioPlayerMachine =
         resetElapsedTime: assign({
           elapsed: 0,
         }),
-        setElapsedTime: assign({
-          elapsed: (context) => context.audioPlayer.currentTime,
-          ayahNumber: (context) => {
-            const {
-              audioData: { verse_timings: verseTimings },
-              ayahNumber,
-            } = context;
-            const { currentTime } = context.audioPlayer;
-            const currentTimeMS = currentTime * 1000;
-            const lastAyahOfSurahTimestampTo = verseTimings[verseTimings.length - 1].timestamp_to;
-            // if the reported time exceeded the maximum timestamp of the Surah from BE, just return the current Ayah which should be the last
-            if (currentTimeMS > lastAyahOfSurahTimestampTo) {
-              return ayahNumber;
-            }
-            const activeVerseTiming = verseTimings.find((ayah) => {
-              const isAyahBeingReciter = isCurrentTimeInRange(
-                currentTimeMS,
-                ayah.timestamp_from,
-                ayah.timestamp_to,
-              );
-              return isAyahBeingReciter;
-            });
-            const [, verseNumber] = activeVerseTiming.verse_key.split(':');
-            return Number(verseNumber);
-          },
+        setElapsedTime: pure((context) => {
+          const activeVerseTiming = getActiveVerseTiming(context);
+          const ayahNumber = getActiveAyahNumber(activeVerseTiming);
+          const wordLocation = getActiveWordLocation(
+            activeVerseTiming,
+            context.audioPlayer.currentTime * 1000,
+          );
+          return assign({
+            elapsed: context.audioPlayer.currentTime,
+            ayahNumber,
+            wordLocation,
+          });
         }),
         setReciterId: assign({
           reciterId: (context, event) => event.reciterId,

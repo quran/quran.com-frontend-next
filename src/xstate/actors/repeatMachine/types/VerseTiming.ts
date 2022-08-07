@@ -1,11 +1,12 @@
-import Segment from "./Segment";
+/* eslint-disable @typescript-eslint/naming-convention */
+import Segment from './Segment';
 
 type VerseTiming = {
-    verseKey: string;
-    timestamp_from: number;
-    timestamp_to: number;
-    duration: number;
-    segments: Segment[];
-}
+  verse_key: string;
+  timestamp_from: number;
+  timestamp_to: number;
+  duration: number;
+  segments: Segment[];
+};
 
 export default VerseTiming;

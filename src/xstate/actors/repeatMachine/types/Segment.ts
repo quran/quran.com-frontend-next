@@ -1,3 +1,3 @@
- type Segment = [number, number, number];
+type Segment = [number, number, number];
 
- export default Segment;
+export default Segment;

@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
-import React, { useState, useMemo, useCallback, memo } from 'react';
+import React, { useState, useMemo, useCallback, memo, useContext } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
@@ -21,7 +22,6 @@ import {
   selectShowTooltipWhenPlayingAudio,
   selectPlaybackRate,
 } from 'src/redux/slices/AudioPlayer/state';
-import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
@@ -33,6 +33,7 @@ import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
@@ -60,6 +61,7 @@ const QuranWord = ({
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const chapterId = word.verseKey ? getChapterNumberFromKey(word.verseKey) : null;
   const { data: audioData } = useSWRImmutable(
@@ -83,7 +85,10 @@ const QuranWord = ({
   const playbackRate = useSelector(selectPlaybackRate);
 
   // Determine if the audio player is currently playing the word
-  const isAudioPlayingWord = useSelector(selectIsWordHighlighted(wordLocation));
+  const isAudioPlayingWord = useXstateSelector(audioService, (state) => {
+    const { surah, ayahNumber, wordLocation: wordPosition } = state.context;
+    return `${surah}:${ayahNumber}:${wordPosition}` === wordLocation;
+  });
 
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;

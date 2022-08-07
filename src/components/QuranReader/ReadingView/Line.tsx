@@ -1,5 +1,6 @@
-import React, { RefObject, useEffect, memo } from 'react';
+import React, { useEffect, memo, useContext, RefObject } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -11,10 +12,10 @@ import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
-import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from 'src/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word from 'types/Word';
 
 export type LineProps = {
@@ -27,9 +28,18 @@ export type LineProps = {
 };
 
 const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
-  const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isHighlighted = useXstateSelector(audioService, (state) => {
+    const { surah, ayahNumber } = state.context;
+    const verseKeys = words.map((word) => word.verseKey);
+    return verseKeys.includes(`${surah}:${ayahNumber}`);
+  });
+
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
+
+  // export c  const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
+  useScroll(SMOOTH_SCROLL_TO_CENTER);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordPreferences,

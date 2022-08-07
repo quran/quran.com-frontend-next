@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,19 +18,12 @@ import Button, {
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import {
-  playFrom,
-  selectAudioDataStatus,
-  exitRepeatMode,
-} from 'src/redux/slices/AudioPlayer/state';
-import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
+import { selectAudioDataStatus, exitRepeatMode } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
+import { getChapterNumberFromKey, getVerseNumberFromKey, makeVerseKey } from 'src/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import QueryParam from 'types/QueryParam';
 
 interface PlayVerseAudioProps {
   verseKey: string;
@@ -43,19 +36,23 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   isTranslationView = true,
   onActionTriggered,
 }) => {
+  const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
-  const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
+  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
+  const isVerseBeingPlayed = useXstateSelector(audioService, (state) => {
+    const { surah, ayahNumber } = state.context;
+    return (
+      state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING') &&
+      makeVerseKey(surah, ayahNumber) === verseKey
+    );
+  });
   const chapterId = getChapterNumberFromKey(verseKey);
   const verseNumber = getVerseNumberFromKey(verseKey);
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
-
-  const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
 
   useEffect(() => {
     if (audioDataStatus === AudioDataStatus.Ready) {
@@ -67,7 +64,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
     dispatch(exitRepeatMode());
-    send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
+    audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
 
     // if (audioDataStatus !== AudioDataStatus.Ready) {
     //   setIsLoading(true);
