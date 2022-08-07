@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable import/prefer-default-export */
