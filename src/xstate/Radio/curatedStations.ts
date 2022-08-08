@@ -1,4 +1,5 @@
 import range from 'lodash/range';
+import sample from 'lodash/sample';
 
 import AudioTrack from './types/AudioTrack';
 import CuratedStation from './types/CuratedStation';
@@ -75,6 +76,10 @@ const curatedStations: Record<string, CuratedStation> = {
     bannerImgSrc: '/images/stations/4.jpeg',
     audioTracks: generateJuzAmmaAudioTracks(),
   },
+};
+
+export const getRandomCuratedStationId = () => {
+  return sample(Object.keys(curatedStations));
 };
 
 export default curatedStations;

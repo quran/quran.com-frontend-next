@@ -1,47 +1,70 @@
+/* eslint-disable react/no-multi-comp */
+import { useContext } from 'react';
+
+import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import Button from '../dls/Button/Button';
 import Link from '../dls/Link/Link';
-import useCurrentStationInfo from '../Radio/useStationInfo';
+import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayRadioButton.module.scss';
 
-import { playFrom, selectIsPlaying, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
-import { selectRadioStation } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { getRandomCuratedStationId } from 'src/xstate/Radio/curatedStations';
+import StationType from 'src/xstate/Radio/types/StationType';
+import useCurrentStationInfo from 'src/xstate/Radio/useCurrentStationInfo';
+
+const RadioInformation = ({ radioActor }) => {
+  const [state] = useActor(radioActor);
+
+  const stationInfo = useCurrentStationInfo((state as any).context);
+  const { t } = useTranslation('radio');
+
+  return (
+    <div className={styles.stationInfo}>
+      <span className={styles.stationTitle}>{stationInfo.title}</span>{' '}
+      <Link href="/radio" className={styles.editStationButton}>
+        ({t('change')})
+      </Link>
+    </div>
+  );
+};
 
 const PlayRadioButton = () => {
   const { t } = useTranslation('radio');
-  const dispatch = useDispatch();
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const isRadioMode = useSelector(selectIsRadioMode);
-  const stationState = useSelector(selectRadioStation, shallowEqual);
-  const stationInfo = useCurrentStationInfo();
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [state, send] = useActor(audioService);
 
-  const shouldShowStationName = isRadioMode && isAudioPlaying;
+  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+  const isRadioMode = !!state.context.radioActor;
+  const isLoading = state.hasTag('loading');
 
+  // TODO: handle continue radio from last saved session
   const onPlayClicked = () => {
+    if (isRadioMode) {
+      send('TOGGLE');
+      return;
+    }
+    const randomStationId = getRandomCuratedStationId();
+
     logEvent('play_radio_clicked', {
-      stationId: stationState.id,
-      type: stationState.type,
+      stationId: randomStationId,
+      type: StationType.Curated,
     });
 
-    dispatch(
-      playFrom({
-        chapterId: Number(stationState.chapterId),
-        reciterId: Number(stationState.reciterId),
-        shouldStartFromRandomTimestamp: true,
-        isRadioMode: true,
-      }),
-    );
+    send({
+      type: 'PLAY_RADIO',
+      stationId: Number(randomStationId),
+      stationType: StationType.Curated,
+    });
   };
 
   const onPauseClicked = () => {
-    triggerPauseAudio();
+    send('TOGGLE');
   };
 
   return (
@@ -49,7 +72,7 @@ const PlayRadioButton = () => {
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (
           <Button
-            prefix={<PauseIcon />}
+            prefix={isLoading ? <Spinner /> : <PauseIcon />}
             onClick={onPauseClicked}
             className={styles.playPauseButton}
           >
@@ -65,15 +88,7 @@ const PlayRadioButton = () => {
             {t('play-radio')}
           </Button>
         )}
-
-        {shouldShowStationName && (
-          <div className={styles.stationInfo}>
-            <span className={styles.stationTitle}>{stationInfo.title}</span>{' '}
-            <Link href="/radio" className={styles.editStationButton}>
-              ({t('change')})
-            </Link>
-          </div>
-        )}
+        {state.context.radioActor && <RadioInformation radioActor={state.context.radioActor} />}
       </div>
     </div>
   );
