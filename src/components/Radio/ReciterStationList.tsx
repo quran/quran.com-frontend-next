@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 
-import { Dispatch } from '@reduxjs/toolkit';
 import { useActor } from '@xstate/react';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -8,34 +7,12 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './ReciterStationList.module.scss';
-import { StationState, StationType } from './types';
 
-import { playFrom } from 'src/redux/slices/AudioPlayer/state';
-import { setRadioStationState } from 'src/redux/slices/radio';
 import { makeCDNUrl } from 'src/utils/cdn';
-import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import StationType from 'src/xstate/Radio/types/StationType';
 import Reciter from 'types/Reciter';
-
-export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<any>) => {
-  const nextStationState: StationState = {
-    id: reciter.id.toString(),
-    type: StationType.Reciter,
-    chapterId: getRandomChapterId().toString(),
-    reciterId: reciter.id.toString(),
-  };
-  dispatch(setRadioStationState(nextStationState));
-
-  dispatch(
-    playFrom({
-      chapterId: Number(nextStationState.chapterId),
-      reciterId: Number(nextStationState.reciterId),
-      shouldStartFromRandomTimestamp: true,
-      isRadioMode: true,
-    }),
-  );
-};
 
 type ReciterStationListProps = {
   reciters: Reciter[];

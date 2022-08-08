@@ -1,18 +1,18 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button from '../dls/Button/Button';
-import { playReciterStation } from '../Radio/ReciterStationList';
 
 import styles from './ReciterInfo.module.scss';
 
 import { makeCDNUrl } from 'src/utils/cdn';
 import { logEvent } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import StationType from 'src/xstate/Radio/types/StationType';
 import Reciter from 'types/Reciter';
 
 type ReciterInfoProps = {
@@ -21,13 +21,17 @@ type ReciterInfoProps = {
 
 const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
 
+  const audioService = useContext(AudioPlayerMachineContext);
   const [isBioTruncated, setIsBioTruncated] = useState(true);
 
   const onPlayReciterStation = () => {
     logEvent('reciter_page_play_station');
-    playReciterStation(selectedReciter, dispatch);
+    audioService.send({
+      type: 'PLAY_RADIO',
+      stationId: selectedReciter.id,
+      stationType: StationType.Reciter,
+    });
   };
 
   const bio =
