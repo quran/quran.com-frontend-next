@@ -33,7 +33,6 @@ import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
-import radio from './slices/radio';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
@@ -86,7 +85,6 @@ export const rootReducer = combineReducers({
   defaultSettings,
   fontFaces,
   sidebarNavigation,
-  radio,
   readingViewVerse,
   banner,
   session,
