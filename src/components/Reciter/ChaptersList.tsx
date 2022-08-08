@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import CopyLinkIcon from '../../../public/icons/copy-link.svg';
 import DownloadIcon from '../../../public/icons/download.svg';
@@ -19,10 +19,11 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 import styles from './ChapterList.module.scss';
 
 import { getChapterAudioData } from 'src/api';
-import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
+import { selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getReciterChapterNavigationUrl } from 'src/utils/navigation';
 import { getWindowOrigin } from 'src/utils/url';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
@@ -33,12 +34,13 @@ type ChaptersListProps = {
 
 const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) => {
   const toast = useToast();
-  const dispatch = useDispatch();
   const { t, lang } = useTranslation();
   const isAudioPlaying = useSelector(selectIsPlaying);
   const currentAudioData = useSelector(selectAudioData, shallowEqual);
 
   const [currentlyDownloadChapterAudioId, setCurrentlyDownloadChapterAudioId] = useState(null);
+
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const playChapter = (chapterId: string) => {
     const selectedChapterId = chapterId;
@@ -47,13 +49,8 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
       stationId: selectedChapterId,
     });
 
-    dispatch(
-      playFrom({
-        chapterId: Number(selectedChapterId),
-        reciterId: Number(selectedReciter.id),
-        timestamp: 0,
-      }),
-    );
+    audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciter.id });
+    audioService.send({ type: 'PLAY_SURAH', surah: Number(chapterId) });
   };
 
   const onCopyUrlClicked = (chapterId) => {
