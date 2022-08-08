@@ -1,12 +1,12 @@
 /* eslint-disable max-lines */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import { useActor } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import CopyIcon from '../../../../public/icons/copy.svg';
 import DownloadIcon from '../../../../public/icons/download.svg';
@@ -25,7 +25,6 @@ import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import DataContext from 'src/contexts/DataContext';
-import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -36,6 +35,7 @@ import {
 } from 'src/utils/navigation';
 import { getCurrentPath } from 'src/utils/url';
 import { isValidChapterId } from 'src/utils/validator';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
@@ -51,21 +51,21 @@ const RecitationPage = ({
   chaptersData,
 }: ShareRecitationPageProps) => {
   const { t, lang } = useTranslation();
-  const dispatch = useDispatch();
   const toast = useToast();
   const router = useRouter();
   const [isDownloadingAudio, setIsDownloadingAudio] = useState(false);
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const currentAudioData = useSelector(selectAudioData, shallowEqual);
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [state] = useActor(audioService);
+
+  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+  const isCurrentlyPlayingThisChapter =
+    isAudioPlaying && state.context.surah === Number(selectedChapter.id);
 
   const onPlayAudioClicked = () => {
-    dispatch(
-      playFrom({
-        chapterId: Number(selectedChapter.id),
-        reciterId: selectedReciter.id,
-        timestamp: 0,
-      }),
-    );
+    // TODO: handle playing surah without changing reciter
+    audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciter.id });
+    audioService.send({ type: 'PLAY_SURAH', surah: Number(selectedChapter.id) });
   };
 
   const onCopyLinkClicked = () => {
@@ -95,9 +95,6 @@ const RecitationPage = ({
       setIsDownloadingAudio(false);
     });
   };
-
-  const isCurrentlyPlayingThisChapter =
-    isAudioPlaying && currentAudioData.chapterId === Number(selectedChapter.id);
 
   return (
     <DataContext.Provider value={chaptersData}>
