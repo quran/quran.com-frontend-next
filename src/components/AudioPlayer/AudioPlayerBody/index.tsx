@@ -33,7 +33,11 @@ const AudioPlayerBody = () => {
           </div>
         )}
       </div>
-      {isRadioMode ? <RadioPlaybackControl /> : <PlaybackControls />}
+      {isRadioMode ? (
+        <RadioPlaybackControl radioActor={currentState.context.radioActor} />
+      ) : (
+        <PlaybackControls />
+      )}
     </>
   );
 };
