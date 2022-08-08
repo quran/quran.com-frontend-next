@@ -1,19 +1,21 @@
+import { useContext } from 'react';
+
 import { Dispatch } from '@reduxjs/toolkit';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useActor } from '@xstate/react';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './ReciterStationList.module.scss';
 import { StationState, StationType } from './types';
 
-import { playFrom, selectIsPlaying, selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
-import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
+import { playFrom } from 'src/redux/slices/AudioPlayer/state';
+import { setRadioStationState } from 'src/redux/slices/radio';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { getRandomChapterId } from 'src/utils/chapter';
 import { logEvent } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Reciter from 'types/Reciter';
 
 export const playReciterStation = async (reciter: Reciter, dispatch: Dispatch<any>) => {
@@ -39,16 +41,17 @@ type ReciterStationListProps = {
   reciters: Reciter[];
 };
 const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
-  const dispatch = useDispatch();
-  const stationState = useSelector(selectRadioStation, shallowEqual);
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const playbackRate = useSelector(selectPlaybackRate);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const [state, send] = useActor(audioService);
+
+  const radioContext = state.context?.radioActor?.getSnapshot()?.context || {};
+  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
 
   return (
     <div className={styles.container}>
       {reciters.map((reciter) => {
         const isSelectedStation =
-          stationState.type === StationType.Reciter && Number(stationState.id) === reciter.id;
+          radioContext.type === StationType.Reciter && Number(radioContext.id) === reciter.id;
 
         let onClick;
         if (!isSelectedStation)
@@ -57,10 +60,10 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
               stationId: reciter.id,
               type: StationType.Curated,
             });
-            playReciterStation(reciter, dispatch);
+            send({ type: 'PLAY_RADIO', stationType: StationType.Reciter, stationId: reciter.id });
           };
-        if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
-        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio(playbackRate);
+        if (isSelectedStation && isAudioPlaying) onClick = () => send('TOGGLE');
+        if (isSelectedStation && !isAudioPlaying) onClick = () => send('TOGGLE');
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
         return (
