@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import CheckIcon from '../../../../public/icons/check.svg';
 import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
@@ -9,20 +9,21 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { selectAudioPlayerState, setPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');
-  const audioPlayerState = useSelector(selectAudioPlayerState);
-  const { playbackRate: currentPlaybackRate } = audioPlayerState;
-  const {
-    actions: { onSettingsChange },
-    isLoading,
-  } = usePersistPreferenceGroup();
+  // const audioPlayerState = useSelector(selectAudioPlayerState);
+  // const { playbackRate: currentPlaybackRate } = audioPlayerState;
+  // const {
+  //   actions: { onSettingsChange },
+  //   isLoading,
+  // } = usePersistPreferenceGroup();
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const currentPlaybackRate = useSelector(audioService, (state) => state.context.playbackRate);
 
   const getPlaybackRateLabel = useCallback(
     (playbackRate) => {
@@ -33,15 +34,23 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
     [lang, t],
   );
 
+  // TODO: fix DB persistance issue
+  const isLoading = false;
+
   const onPlaybackRateSelected = (playbackRate: number) => {
-    onSettingsChange(
-      'playbackRate',
+    audioService.send({
+      type: 'SET_PLAYBACK_SPEED',
       playbackRate,
-      setPlaybackRate(playbackRate),
-      setPlaybackRate(audioPlayerState.playbackRate),
-      PreferenceGroup.AUDIO,
-      onBack,
-    );
+    });
+
+    // onSettingsChange(
+    //   'playbackRate',
+    //   playbackRate,
+    //   setPlaybackRate(playbackRate),
+    //   setPlaybackRate(audioPlayerState.playbackRate),
+    //   PreferenceGroup.AUDIO,
+    //   onBack,
+    // );
   };
 
   const getItemIcon = (playbackRate: number) => {
