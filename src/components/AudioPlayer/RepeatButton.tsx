@@ -1,8 +1,7 @@
+/* eslint-disable react/no-multi-comp */
 import { useContext, useState } from 'react';
 
 import { useActor } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
@@ -12,26 +11,29 @@ import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 import Badge from 'src/components/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import {
-  selectIsInRepeatMode,
-  selectRemainingRangeRepeatCount,
-} from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+// import { toLocalizedNumber } from 'src/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const RepeatAudioButton = () => {
-  const { lang } = useTranslation('common');
+// TODO: get remaing repeat count
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const RemainingRangeCount = ({ repeatActor }) => {
+  // const { lang } = useTranslation('common');
+  // const [currentState] = useActor(repeatActor);
+  // const remainingRangeRepeatCount = toLocalizedNumber(
+  //   useSelector(selectRemainingRangeRepeatCount),
+  //   lang,
+  // );
 
+  return null;
+};
+
+const RepeatAudioButton = () => {
   const audioService = useContext(AudioPlayerMachineContext);
   const [currentState] = useActor(audioService);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const remainingRangeRepeatCount = toLocalizedNumber(
-    useSelector(selectRemainingRangeRepeatCount),
-    lang,
-  );
+  const isInRepeatMode = !!currentState.context.repeatActor;
 
   const onButtonClicked = () => {
     logButtonClick('audio_player_repeat');
@@ -49,7 +51,11 @@ const RepeatAudioButton = () => {
 
       <Wrapper
         shouldWrap={isInRepeatMode}
-        wrapper={(children) => <Badge content={remainingRangeRepeatCount}>{children}</Badge>}
+        wrapper={(children) => (
+          <Badge content={<RemainingRangeCount repeatActor={currentState.context.repeatActor} />}>
+            {children}
+          </Badge>
+        )}
       >
         <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onButtonClicked}>
           <RepeatIcon />

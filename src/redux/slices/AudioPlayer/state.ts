@@ -30,7 +30,6 @@ export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.isUsingDefaultReciter;
 export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
 export const selectAudioDataStatus = (state: RootState) => state.audioPlayerState.audioDataStatus;
-export const selectIsPlaying = (state: RootState) => state.audioPlayerState.isPlaying;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectPlaybackRate = (state: RootState) => state.audioPlayerState.playbackRate;
