@@ -161,3 +161,7 @@
 .emptySpacePlaceholder {
   height: constants.$audio-player-default-height;
 }
+
+.donateButton {
+  font-weight: var(--font-weight-semibold);
+}

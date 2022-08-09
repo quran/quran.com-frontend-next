@@ -1,6 +1,24 @@
 {
     "about": "Chi siamo",
     "and": "e",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Guarda cosa c'è di nuovo",
+                "title": "Benvenuto su Quran.com <br> <\/br> Account utente Beta"
+            },
+            "slide-2": {
+                "action": "Prossimo",
+                "description": "Sia che tu stia utilizzando Quran.com sul tuo telefono o sul tuo laptop, i tuoi segnalibri, gli ultimi versetti letti e le tue preferenze saranno disponibili",
+                "title": "I tuoi dati verranno sincronizzati <br> <\/br> su tutti i dispositivi"
+            },
+            "slide-3": {
+                "action": "Ok, capito",
+                "description": "Grazie per aver utilizzato Quran.com e saremo lieti di ricevere il tuo feedback su <link> feedback.quran.com <\/link>",
+                "title": "Vogliamo ascoltare i tuoi pensieri"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Cambia impostazioni",
         "drawer-close": "Chiudere il cassetto",
@@ -74,6 +92,7 @@
         "sub-header": "Iscriviti al Quran.com Discord per partecipare e collaborare con la principale tecnologia islamica per la costruzione di comunità.",
         "title": "Comunità"
     },
+    "complete-sign-up": "Completa la tua registrazione",
     "continue": "Continua",
     "copied": "copiato",
     "copied-to-clipboard": "Copiato negli appunti",
@@ -84,9 +103,21 @@
     },
     "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
     "developers": "Sviluppatori",
+    "donate": "Donare",
+    "email-verification": {
+        "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
+        "email-sent": "Abbiamo appena inviato un'email a <strong> {{email}} <\/strong>",
+        "email-verification": "Verifica email",
+        "resend-email": "Rinvia l'e-mail",
+        "resend-email-in": "Invia nuovamente l'email di verifica tra {{remainingTime}} sec...",
+        "verify-code": "Verificare il codice"
+    },
     "error": {
+        "bookmark-sync": "Il segnalibro non è sincronizzato.",
+        "email-login-fail": "Impossibile accedere con l'e-mail. Per favore riprova",
         "general": "Qualcosa è andato storto. Per favore riprova.",
-        "offline": "Sembra che tu abbia perso la connessione. Si prega di controllare e riprovare."
+        "offline": "Sembra che tu abbia perso la connessione. Si prega di controllare e riprovare.",
+        "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud."
     },
     "feedback": "Feedback",
     "fonts": {
@@ -109,13 +140,14 @@
         "rights": "Tutti i diritti riservati",
         "title": "Leggi, studia e impara Il Nobile Corano."
     },
-    "from": "A partire dal",
-    "fundraising-sticky-banner": {
-        "cta": "Donare",
-        "title": "Sostieni Quran.com questo Ramadan"
+    "form": {
+        "code": "Codice di verifica",
+        "email": "E-mail",
+        "firstName": "Nome di battesimo",
+        "lastName": "Cognome"
     },
+    "from": "A partire dal",
     "fundraising": {
-        "cta": "DONARE",
         "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
         "learn-more": "Per saperne di più",
         "title": "Diventa un donatore mensile"
@@ -131,6 +163,8 @@
     "languages": "Le lingue",
     "less": "Meno",
     "loading": "Caricamento in corso",
+    "login": "Login",
+    "logout": "Disconnettersi",
     "menu": "Menù",
     "mobile-apps": "App mobili",
     "mode": "Modalità",
@@ -153,7 +187,7 @@
         "cta-3": "Per saperne di più",
         "footnote": "Le donazioni mensili ci consentono di concentrarci meno sulla raccolta fondi",
         "text-1": "Ci impegniamo a servire il mondo della conoscenza e della tecnologia coraniche, sempre gratuitamente.",
-        "text-2": "Quran.com è un'opportunità perfetta per la carità continua (Sadaqah Jariyah). Si prega di considerare di investire nell'Aldilà questo Ramadan come donatore mensile (o una tantum).",
+        "text-2": "Quran.com è un'opportunità perfetta per la carità continua (Sadaqah Jariyah). Si prega di considerare di investire nell'Aldilà come donatore mensile (o una tantum).",
         "title": "Caro compagno del Corano,"
     },
     "powered-by": "Offerto da",
@@ -161,6 +195,7 @@
     "previous-ayah": "Precedente Sì",
     "privacy": "Privacy",
     "product-updates": "Aggiornamenti del prodotto",
+    "profile": "Profilo",
     "q-reflect": "CoranoRiflesso",
     "quran-com": "Corano.com",
     "quran-radio": "Radio del Corano",
@@ -223,6 +258,7 @@
         "descending": "Discendente"
     },
     "style": "Stile",
+    "submit": "Invia",
     "surah": "sura",
     "tafsir": {
         "font-size": "Dimensione del carattere Tafsir",
@@ -253,6 +289,12 @@
     "translations": "Traduzioni",
     "transliteration": "Traslitterazione",
     "type": "Tipo",
+    "undo": "Annullare",
+    "validation": {
+        "invalid-email": "{{field}} deve essere un indirizzo email valido",
+        "invalid-field": "Inserisci un valore {{field}} valido",
+        "required-field": "{{field}} è obbligatorio"
+    },
     "verse": "Versetto",
     "verse-bookmark-removed": "Segnalibro versetto rimosso!",
     "verse-bookmarked": "Versetto aggiunto ai segnalibri!",

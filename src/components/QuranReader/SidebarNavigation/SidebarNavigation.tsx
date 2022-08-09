@@ -23,6 +23,7 @@ import {
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
+import { isMobile } from 'src/utils/responsive';
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
@@ -38,7 +39,7 @@ const SidebarNavigation = () => {
       logEvent('sidebar_navigation_close_outside_click');
       dispatch(setIsVisible(false));
     },
-    isMobile(),
+    isVisible && isMobile(),
   );
 
   const navigationItems = [
@@ -60,7 +61,8 @@ const SidebarNavigation = () => {
     <div
       ref={sidebarRef}
       className={classNames(styles.container, {
-        [styles.visibleContainer]: isVisible,
+        [styles.visibleContainer]: isVisible === true,
+        [styles.containerAuto]: isVisible === 'auto',
         [styles.spaceOnTop]: isContextMenuExpanded,
       })}
     >
@@ -101,12 +103,6 @@ const SidebarNavigation = () => {
       </div>
     </div>
   );
-};
-
-const TABLET_WIDTH = 768;
-const isMobile = () => {
-  if (typeof document === 'undefined') return false;
-  return document.documentElement.clientWidth < TABLET_WIDTH;
 };
 
 export default SidebarNavigation;

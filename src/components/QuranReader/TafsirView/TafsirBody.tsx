@@ -1,10 +1,11 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr/immutable';
 
 import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
@@ -21,10 +22,10 @@ import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
 import DataContext from 'src/contexts/DataContext';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
 import {
   logButtonClick,
   logEvent,
@@ -42,6 +43,7 @@ import {
   getVerseAndChapterNumbersFromKey,
 } from 'src/utils/verse';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type TafsirBodyProps = {
   initialChapterId: string;
@@ -64,11 +66,15 @@ const TafsirBody = ({
   scrollToTop,
   shouldRender,
 }: TafsirBodyProps) => {
-  const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang, t } = useTranslation('common');
-  const userPreferredTafsirIds = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const tafsirsState = useSelector(selectTafsirs);
+  const { selectedTafsirs: userPreferredTafsirIds } = tafsirsState;
   const chaptersData = useContext(DataContext);
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
@@ -100,14 +106,21 @@ const TafsirBody = ({
         ),
         lang,
       );
-      dispatch(
+      onSettingsChange(
+        'selectedTafsirs',
+        [slug],
         setSelectedTafsirs({
           tafsirs: [slug],
           locale: lang,
         }),
+        setSelectedTafsirs({
+          tafsirs: tafsirsState.selectedTafsirs,
+          locale: lang,
+        }),
+        PreferenceGroup.TAFSIRS,
       );
     },
-    [dispatch, lang, selectedChapterId, selectedVerseNumber],
+    [lang, onSettingsChange, selectedChapterId, selectedVerseNumber, tafsirsState],
   );
 
   const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(
@@ -120,8 +133,13 @@ const TafsirBody = ({
   // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
     if (tafsirSelectionList) {
-      const languageName = getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirIdOrSlug);
-      setSelectedLanguage(languageName);
+      setSelectedLanguage((prevSelectedLanguage) => {
+        // if we haven't set the language already, we need to detect which language the current tafsir is in.
+        return (
+          prevSelectedLanguage ||
+          getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirIdOrSlug)
+        );
+      });
     }
   }, [onTafsirSelected, selectedTafsirIdOrSlug, tafsirSelectionList]);
 
@@ -254,6 +272,7 @@ const TafsirBody = ({
       }}
       languageOptions={languageOptions}
       data={tafsirSelectionList}
+      isLoading={isLoading}
     />
   );
 

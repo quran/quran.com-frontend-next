@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import resetSettings from 'src/redux/slices/reset-settings';
+import SliceName from 'src/redux/types/SliceName';
+import TranslationsSettings from 'src/redux/types/TranslationsSettings';
 import { areArraysEqual } from 'src/utils/array';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const translationsSlice = createSlice({
-  name: 'translations',
+  name: SliceName.TRANSLATIONS,
   initialState: getTranslationsInitialState(),
   reducers: {
     setSelectedTranslations: (
@@ -28,11 +32,30 @@ export const translationsSlice = createSlice({
     builder.addCase(resetSettings, (state, action) => {
       return getTranslationsInitialState(action.payload.locale);
     });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences, locale },
+      } = action;
+      const remotePreferences = userPreferences[
+        PreferenceGroup.TRANSLATIONS
+      ] as TranslationsSettings;
+      if (remotePreferences) {
+        const { selectedTranslations: defaultTranslations } = getTranslationsInitialState(locale);
+        const { selectedTranslations: remoteTranslations } = remotePreferences;
+        return {
+          ...state,
+          ...remotePreferences,
+          isUsingDefaultTranslations: areArraysEqual(defaultTranslations, remoteTranslations),
+        };
+      }
+      return state;
+    });
   },
 });
 
 export const { setSelectedTranslations } = translationsSlice.actions;
 
+export const selectTranslations = (state: RootState) => state.translations;
 export const selectSelectedTranslations = (state: RootState) =>
   state.translations.selectedTranslations;
 export const selectIsUsingDefaultTranslations = (state: RootState) =>

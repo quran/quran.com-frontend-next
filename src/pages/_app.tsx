@@ -5,6 +5,7 @@ import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import useSWRImmutable from 'swr/immutable';
 
 import chaptersData from '../../types/ChaptersData';
 import { getAllChaptersData } from '../utils/chapter';
@@ -13,15 +14,20 @@ import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import Footer from 'src/components/dls/Footer/Footer';
 import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
+import DonatePopup from 'src/components/DonatePopup/DonatePopup';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
+import UserAccountModal from 'src/components/Login/UserAccountModal';
 import Navbar from 'src/components/Navbar/Navbar';
-import OneTimePopup from 'src/components/OneTimePopup/OneTimePopup';
+import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import DataContext from 'src/contexts/DataContext';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
+import { getUserProfile } from 'src/utils/auth/api';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
@@ -37,6 +43,14 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { locale } = router;
   const [chapterData, setChapterData] = useState<chaptersData>();
   const { t } = useTranslation('common');
+  const { data: userData } = useSWRImmutable(
+    isLoggedIn() ? makeUserProfileUrl() : null,
+    async () => {
+      const response = await getUserProfile();
+      return response;
+    },
+  );
+
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
@@ -71,6 +85,10 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <ThemeProvider>
           <IdProvider>
             <ToastContainerProvider>
+              <UserAccountModal
+                requiredFields={userData?.requiredFields}
+                announcement={userData?.announcement}
+              />
               <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
               <GlobalListeners />
               <Navbar />
@@ -80,10 +98,11 @@ function MyApp({ Component, pageProps }): JSX.Element {
                 <AudioPlayer />
               </DataContext.Provider>
               <Footer />
-              <OneTimePopup />
+              <DonatePopup />
             </ToastContainerProvider>
           </IdProvider>
         </ThemeProvider>
+        <SessionIncrementor />
       </ReduxProvider>
 
       <ThirdPartyScripts />

@@ -1,11 +1,14 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { Action } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 
 import styles from './TafsirText.module.scss';
 
 import Counter from 'src/components/dls/Counter/Counter';
+import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -14,6 +17,7 @@ import {
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import { logValueChange } from 'src/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type TafsirTextProps = {
   direction: string;
@@ -30,29 +34,63 @@ const FONT_SIZE_CLASS_MAP = {
 };
 
 const TafsirText: React.FC<TafsirTextProps> = ({ direction, languageCode, text }) => {
-  const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { tafsirFontScale } = quranReaderStyles;
 
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {string} key
+   * @param {number} value
+   * @param {Action} action
+   */
+  const onTafsirsSettingsChange = (
+    key: string,
+    value: number,
+    action: Action,
+    undoAction: Action,
+  ) => {
+    onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
+  };
+
   const onFontScaleDecreaseClicked = () => {
-    logValueChange('tafsir_font_scale', tafsirFontScale, tafsirFontScale - 1);
-    dispatch(decreaseTafsirFontScale());
+    const newValue = tafsirFontScale - 1;
+    logValueChange('tafsir_font_scale', tafsirFontScale, newValue);
+    onTafsirsSettingsChange(
+      'tafsirFontScale',
+      newValue,
+      decreaseTafsirFontScale(),
+      increaseTafsirFontScale(),
+    );
   };
 
   const onFontScaleIncreaseClicked = () => {
-    logValueChange('tafsir_font_scale', tafsirFontScale, tafsirFontScale + 1);
-    dispatch(increaseTafsirFontScale());
+    const newValue = tafsirFontScale + 1;
+    logValueChange('tafsir_font_scale', tafsirFontScale, newValue);
+    onTafsirsSettingsChange(
+      'tafsirFontScale',
+      newValue,
+      increaseTafsirFontScale(),
+      decreaseTafsirFontScale(),
+    );
   };
   return (
     <>
       <div dir={direction} className={styles.counter}>
-        <Counter
-          count={tafsirFontScale}
-          onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-          onIncrement={
-            tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
-          }
-        />
+        <SpinnerContainer isLoading={isLoading}>
+          <Counter
+            count={tafsirFontScale}
+            onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
+            onIncrement={
+              tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
+            }
+          />
+        </SpinnerContainer>
       </div>
       <div
         className={FONT_SIZE_CLASS_MAP[tafsirFontScale]}

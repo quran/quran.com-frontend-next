@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Ожидает подтверждения",
+    "continue-apple": "Продолжить с Apple",
+    "continue-email": "Продолжить с электронной почтой",
+    "continue-facebook": "Продолжить с Facebook",
+    "continue-google": "Продолжить через Google",
+    "email-placeholder": "Адрес электронной почты",
+    "login-error": {
+        "AuthenticationError": "Ошибка аутентификации. Пожалуйста, попробуйте позже",
+        "TokenExpiredError": "Вы вышли из системы, пожалуйста, войдите снова."
+    },
+    "login-title": "Войти на Quran.com",
+    "other-options": "Другие варианты входа",
+    "verify-code": "Убедитесь, что предоставленный код безопасности соответствует следующему тексту:"
+}

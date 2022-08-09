@@ -46,3 +46,12 @@ export const getBasePath = (): string =>
   `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
     process.env.NEXT_PUBLIC_VERCEL_URL
   }`;
+
+/**
+ * Get the auth api path.
+ *
+ * @param {string} path
+ * @returns  {string}
+ */
+export const getAuthApiPath = (path: string): string =>
+  `${process.env.NEXT_PUBLIC_AUTH_BASE_URL}/${path}`;

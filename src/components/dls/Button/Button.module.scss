@@ -24,6 +24,9 @@
   }
   &:active {
     transform: scale(0.92);
+    &.disabled {
+      transform: none;
+    }
   }
 }
 

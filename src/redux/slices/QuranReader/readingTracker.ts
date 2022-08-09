@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 import { getDistanceBetweenVerses } from 'src/utils/verse';
 import ChaptersData from 'types/ChaptersData';
 
@@ -25,7 +26,7 @@ const NEW_SESSION_BOUNDARY = 20;
 const MAXIMUM_NUMBER_OF_SESSIONS = 10;
 
 export const readingTrackerSlice = createSlice({
-  name: 'readingTracker',
+  name: SliceName.READING_TRACKER,
   initialState,
   reducers: {
     setLastReadVerse: (

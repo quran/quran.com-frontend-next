@@ -2,6 +2,19 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
+@mixin sidebarVisible {
+  transform: translateX(0%);
+  [dir="rtl"] & {
+    transform: translateX(0%); // need to duplicate for specificity
+  }
+}
+@mixin sidebarInvisible {
+  transform: translateX(-100%);
+  [dir="rtl"] & {
+    transform: translateX(100%);
+  }
+}
+
 .container {
   --sidebar-size: calc(100% - (2 * var(--spacing-mega)));
   @include breakpoints.tablet {
@@ -20,20 +33,19 @@
   border-inline-end: 1px solid var(--color-borders-hairline);
   width: var(--sidebar-size);
   padding-inline: var(--spacing-large);
-  transform: translateX(-100%);
-  [dir="rtl"] & {
-    transform: translateX(100%);
-  }
   transition: transform var(--transition-regular);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+  @include sidebarInvisible();
 }
 
 .visibleContainer {
-  transform: translateX(0%);
-  [dir="rtl"] & {
-    transform: translateX(0%); // need to duplicate for specificity
+  @include sidebarVisible();
+}
+.containerAuto {
+  @include breakpoints.tablet {
+    @include sidebarVisible();
   }
 }
 

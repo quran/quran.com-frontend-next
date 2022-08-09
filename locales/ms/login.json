@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Menunggu pengesahan",
+    "continue-apple": "Teruskan dengan Apple",
+    "continue-email": "Teruskan dengan E-mel",
+    "continue-facebook": "Teruskan dengan Facebook",
+    "continue-google": "Teruskan dengan Google",
+    "email-placeholder": "Alamat emel",
+    "login-error": {
+        "AuthenticationError": "Pengesahan gagal. Sila cuba sebentar lagi",
+        "TokenExpiredError": "Anda telah log keluar, sila log masuk semula."
+    },
+    "login-title": "Log masuk ke Quran.com",
+    "other-options": "Pilihan Log Masuk Lain",
+    "verify-code": "Sahkan bahawa kod keselamatan yang diberikan sepadan dengan teks berikut:"
+}
