@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { useMemo, useState } from 'react';
 
@@ -25,6 +26,14 @@ type Actions = {
     value: Value,
     action: ActionOrThunkAction,
     undoAction: ActionOrThunkAction,
+    preferenceGroup: PreferenceGroup,
+    successCallback?: () => void,
+  ) => void;
+  onXstateSettingsChange: (
+    key: string,
+    value: string | number | boolean | Record<string, any>,
+    action: () => void,
+    undoAction: () => void,
     preferenceGroup: PreferenceGroup,
     successCallback?: () => void,
   ) => void;
@@ -70,6 +79,54 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
         }
       },
       // TODO: add onSetttingsChange xstate
+      onXstateSettingsChange: (
+        key: string,
+        value: string | number | boolean | Record<string, any>,
+        action: () => void,
+        undoAction: () => void,
+        preferenceGroup: PreferenceGroup,
+        successCallback?: () => void,
+      ) => {
+        if (isLoggedIn()) {
+          // 1. dispatch the action first
+          action();
+          setIsLoading(true);
+          addOrUpdateUserPreference(key, value, preferenceGroup)
+            .then(() => {
+              if (successCallback) {
+                successCallback();
+              }
+            })
+            .catch(() => {
+              toast(t('error.pref-persist-fail'), {
+                status: ToastStatus.Warning,
+                actions: [
+                  {
+                    text: t('undo'),
+                    primary: true,
+                    onClick: () => {
+                      undoAction();
+                    },
+                  },
+                  {
+                    text: t('continue'),
+                    primary: false,
+                    onClick: () => {
+                      if (successCallback) {
+                        successCallback();
+                      }
+                    },
+                  },
+                ],
+              });
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
+        } else {
+          dispatch(action);
+        }
+      },
       onSettingsChange: (
         key: string,
         value: string | number | boolean | Record<string, any>,

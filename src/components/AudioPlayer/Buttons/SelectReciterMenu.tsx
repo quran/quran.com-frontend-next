@@ -11,45 +11,40 @@ import styles from './SelectReciterMenu.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import Reciter from 'types/Reciter';
 
 const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SelectReciterMenu = ({ onBack }) => {
   const { lang, t } = useTranslation('common');
-  // const { value: selectedReciterId }: { value: number } = useGetQueryParamOrReduxValue(
-  //   QueryParam.Reciter,
-  // );
 
   const audioService = useContext(AudioPlayerMachineContext);
   const selectedReciterId = useSelector(audioService, (state) => state.context.reciterId);
 
-  // const audioPlayerState = useSelector(selectAudioPlayerState);
-  // const {
-  //   actions: { onSettingsChange },
-  //   isLoading,
-  // } = usePersistPreferenceGroup();
-
-  // TODO: fix db persistence issue
-  const isLoading = false;
+  const {
+    actions: { onXstateSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const onReciterSelected = useCallback(
     (reciter: Reciter) => {
-      audioService.send({ type: 'CHANGE_RECITER', reciterId: reciter.id });
-      // onSettingsChange(
-      //   'reciter',
-      //   reciter.id,
-      //   setReciterAndPauseAudio({ reciter, locale: lang }),
-      //   setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
-      //   PreferenceGroup.AUDIO,
-      //   onBack,
-      // );
+      const previousReciterId = selectedReciterId;
+      onXstateSettingsChange(
+        'reciter',
+        reciter.id,
+        () => audioService.send({ type: 'CHANGE_RECITER', reciterId: reciter.id }),
+        () => audioService.send({ type: 'CHANGE_RECITER', reciterId: previousReciterId }),
+        PreferenceGroup.AUDIO,
+        onBack,
+      );
     },
-    [audioService],
+    [audioService, onBack, onXstateSettingsChange, selectedReciterId],
   );
 
   const getItemIcon = useCallback(

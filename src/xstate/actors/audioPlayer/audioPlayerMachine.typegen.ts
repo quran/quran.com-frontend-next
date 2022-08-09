@@ -85,6 +85,7 @@ export interface Typegen0 {
     setAyahNumber: "PLAY_AYAH";
     setCurrentSurahAndAyahAsNewSurahAndAyah: "CONFIRM_PLAY_MISMATCHED_SURAH";
     setElapsedTime: "TOGGLE";
+    setInitialContext: "SET_INITIAL_CONTEXT";
     setMediaSessionMetaData:
       | "CANCEL_PLAY_MISMATCHED_SURAH"
       | "PLAY_AYAH"

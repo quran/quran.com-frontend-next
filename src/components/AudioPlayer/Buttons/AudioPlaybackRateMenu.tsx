@@ -9,18 +9,18 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');
-  // const audioPlayerState = useSelector(selectAudioPlayerState);
-  // const { playbackRate: currentPlaybackRate } = audioPlayerState;
-  // const {
-  //   actions: { onSettingsChange },
-  //   isLoading,
-  // } = usePersistPreferenceGroup();
+  const {
+    actions: { onXstateSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const audioService = useContext(AudioPlayerMachineContext);
   const currentPlaybackRate = useSelector(audioService, (state) => state.context.playbackRate);
@@ -34,23 +34,25 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
     [lang, t],
   );
 
-  // TODO: fix DB persistance issue
-  const isLoading = false;
-
   const onPlaybackRateSelected = (playbackRate: number) => {
-    audioService.send({
-      type: 'SET_PLAYBACK_SPEED',
-      playbackRate,
-    });
+    const previousPlaybackRate = currentPlaybackRate;
 
-    // onSettingsChange(
-    //   'playbackRate',
-    //   playbackRate,
-    //   setPlaybackRate(playbackRate),
-    //   setPlaybackRate(audioPlayerState.playbackRate),
-    //   PreferenceGroup.AUDIO,
-    //   onBack,
-    // );
+    onXstateSettingsChange(
+      'playbackRate',
+      playbackRate,
+      () =>
+        audioService.send({
+          type: 'SET_PLAYBACK_SPEED',
+          playbackRate,
+        }),
+      () =>
+        audioService.send({
+          type: 'SET_PLAYBACK_SPEED',
+          playbackRate: previousPlaybackRate,
+        }),
+      PreferenceGroup.AUDIO,
+      onBack,
+    );
   };
 
   const getItemIcon = (playbackRate: number) => {

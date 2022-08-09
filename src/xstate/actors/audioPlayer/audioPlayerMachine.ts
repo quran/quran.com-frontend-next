@@ -618,10 +618,17 @@ export const audioPlayerMachine =
           actions: 'exitRadio',
           target: '.VISIBLE.LOADING_REPEAT_DATA',
         },
+        SET_INITIAL_CONTEXT: {
+          actions: 'setInitialContext',
+        },
       },
     },
     {
       actions: {
+        setInitialContext: assign({
+          reciterId: (context, event) => event.reciterId,
+          playbackRate: (context, event) => event.playbackRate,
+        }),
         setMediaSessionMetaData: (context) => {
           if ('mediaSession' in navigator) {
             getMediaSessionMetaData(context).then((metaData) => {

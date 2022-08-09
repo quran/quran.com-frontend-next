@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 
 import { useInterpret } from '@xstate/react';
 import { InterpreterFrom } from 'xstate';
@@ -10,12 +10,24 @@ import {
   persistXstateToLocalStorage,
 } from './actors/audioPlayer/audioPlayerPersistHelper';
 
+import { getUserPreferences } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
+
 export const AudioPlayerMachineContext = createContext(
   {} as InterpreterFrom<typeof audioPlayerMachine>,
 );
 
-export const AudioPlayerMachineProvider = ({ children }) => {
+export const AudioPlayerMachineProvider = ({ children, locale }) => {
   const initialXstateContext = getXstateStateFromLocalStorage();
+
+  const isClient = !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  );
+
+  const loggedIn = isLoggedIn();
 
   const audioPlayerService = useInterpret(
     audioPlayerMachine,
@@ -30,6 +42,22 @@ export const AudioPlayerMachineProvider = ({ children }) => {
       persistXstateToLocalStorage({ playbackRate, reciterId });
     },
   );
+
+  useEffect(() => {
+    if (isClient && loggedIn) {
+      getUserPreferences(locale).then((preferences) => {
+        const playbackRate =
+          preferences[PreferenceGroup.AUDIO].playbackRate ||
+          audioPlayerMachine.initialState.context.playbackRate;
+
+        const reciterId =
+          preferences[PreferenceGroup.AUDIO]?.reciter?.id ||
+          audioPlayerMachine.initialState.context.reciterId;
+
+        audioPlayerService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId });
+      });
+    }
+  }, [audioPlayerService, isClient, locale, loggedIn]);
 
   return (
     <AudioPlayerMachineContext.Provider value={audioPlayerService}>

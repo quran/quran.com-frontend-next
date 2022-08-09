@@ -73,7 +73,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="preconnect" href={API_HOST} />
       </Head>
       <FontPreLoader locale={locale} />
-      <AudioPlayerMachineProvider>
+      <AudioPlayerMachineProvider locale={locale}>
         <ReduxProvider locale={locale}>
           <ThemeProvider>
             <IdProvider>

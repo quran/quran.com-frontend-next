@@ -40,6 +40,7 @@ type AudioPlayerEventType =
       shouldPlayFromRandomTimeStamp: boolean;
     }
   | { type: 'REPEAT_FINISHED' }
-  | { type: 'SEEK_TO'; timestamp: number };
+  | { type: 'SEEK_TO'; timestamp: number }
+  | { type: 'SET_INITIAL_CONTEXT'; reciterId: number; playbackRate: number };
 
 export default AudioPlayerEventType;

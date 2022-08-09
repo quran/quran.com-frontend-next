@@ -18,6 +18,7 @@ import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 import Reciter from 'types/Reciter';
 
@@ -38,7 +39,10 @@ const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SettingsReciter = () => {
   const { lang, t } = useTranslation('common');
-  const { isLoading } = usePersistPreferenceGroup();
+  const {
+    isLoading,
+    actions: { onXstateSettingsChange },
+  } = usePersistPreferenceGroup();
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -53,16 +57,15 @@ const SettingsReciter = () => {
     logItemSelectionChange('selected_reciter', reciter.id);
     router.query[QueryParam.Reciter] = String(reciter.id);
     router.push(router, undefined, { shallow: true });
-    audioService.send({ type: 'CHANGE_RECITER', reciterId: reciter.id });
 
-    // TODO: fix this, data not synced to DB
-    // onSettingsChange(
-    //   'reciter',
-    //   Number(reciterId),
-    //   setReciterAndPauseAudio({ reciter, locale: lang }),
-    //   setReciterAndPauseAudio({ reciter: audioPlayerState.reciter, locale: lang }),
-    //   PreferenceGroup.AUDIO,
-    // );
+    const previousReciterId = selectedReciterId;
+    onXstateSettingsChange(
+      'reciter',
+      reciter.id,
+      () => audioService.send({ type: 'CHANGE_RECITER', reciterId: Number(reciterId) }),
+      () => audioService.send({ type: 'CHANGE_RECITER', reciterId: previousReciterId }),
+      PreferenceGroup.AUDIO,
+    );
   };
 
   return (
@@ -95,7 +98,7 @@ const SettingsReciter = () => {
               onChange={(newId) => onSelectedReciterChange(newId, data.reciters)}
             >
               {filteredReciters
-                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .sort((a, b) => (a.name + a.id > b.name + b.id ? 1 : -1))
                 .map((reciter) => {
                   const reciterId = reciter.id.toString();
                   return (
@@ -103,6 +106,7 @@ const SettingsReciter = () => {
                       <RadioGroup.Item value={reciterId} id={reciterId} />
 
                       <label htmlFor={reciterId} className={styles.reciterLabel}>
+                        {reciterId}
                         {reciter.translatedName.name}
                         {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
                           <span className={styles.recitationStyle}>{reciter.style.name}</span>
