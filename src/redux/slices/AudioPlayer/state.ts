@@ -51,11 +51,6 @@ export const audioPlayerStateSlice = createSlice({
       ...state,
       enableAutoScrolling: action.payload,
     }),
-    resetAudioData: (state, action: PayloadAction<string>) => ({
-      ...state,
-      audioData: getAudioPlayerStateInitialState(action.payload).audioData,
-      audioDataStatus: getAudioPlayerStateInitialState(action.payload).audioDataStatus,
-    }),
     setIsDownloadingAudio: (state, action: PayloadAction<boolean>) => ({
       ...state,
       isDownloadingAudio: action.payload,
@@ -120,7 +115,6 @@ export const {
   setReciter,
   setAudioData,
   setAudioStatus,
-  resetAudioData,
   setEnableAutoScrolling,
   setIsDownloadingAudio,
   setShowTooltipWhenPlayingAudio,
