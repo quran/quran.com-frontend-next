@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { useContext, useState } from 'react';
 
-import { useActor, useSelector } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
@@ -29,10 +29,11 @@ const RemainingRangeCount = ({ rangeActor }) => {
 
 const RepeatAudioButton = () => {
   const audioService = useContext(AudioPlayerMachineContext);
-  const [currentState] = useActor(audioService);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isInRepeatMode = !!currentState.context.repeatActor;
+  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
+  const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
 
   const onButtonClicked = () => {
     logButtonClick('audio_player_repeat');
@@ -43,7 +44,7 @@ const RepeatAudioButton = () => {
     <>
       <RepeatAudioModal
         defaultRepetitionMode={RepetitionMode.Range}
-        chapterId={currentState.context.surah.toString()}
+        chapterId={currentSurah.toString()}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
@@ -53,11 +54,9 @@ const RepeatAudioButton = () => {
         wrapper={(children) => (
           <Badge
             content={
-              currentState.context.repeatActor && (
+              repeatActor && (
                 <RemainingRangeCount
-                  rangeActor={
-                    currentState.context.repeatActor.getSnapshot().context.rangeCycleActor
-                  }
+                  rangeActor={repeatActor.getSnapshot().context.rangeCycleActor}
                 />
               )
             }

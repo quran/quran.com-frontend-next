@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -23,7 +23,10 @@ const CuratedStationList = () => {
   const { t } = useTranslation('radio');
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const radioActor = useSelector(audioService, (state) => state.context.radioActor);
 
   const playStation = async (id: string) => {
     logEvent('station_played', {
@@ -38,8 +41,7 @@ const CuratedStationList = () => {
     });
   };
 
-  const radioContext = state.context?.radioActor?.getSnapshot()?.context || {};
-  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+  const radioContext = radioActor?.getSnapshot()?.context || {};
 
   return (
     <div className={styles.container}>
@@ -49,8 +51,8 @@ const CuratedStationList = () => {
 
         let onClick;
         if (!isSelectedStation) onClick = () => playStation(id);
-        if (isSelectedStation && isAudioPlaying) onClick = () => send('TOGGLE');
-        if (isSelectedStation && !isAudioPlaying) onClick = () => send('TOGGLE');
+        if (isSelectedStation && isAudioPlaying) onClick = () => audioService.send('TOGGLE');
+        if (isSelectedStation && !isAudioPlaying) onClick = () => audioService.send('TOGGLE');
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
 

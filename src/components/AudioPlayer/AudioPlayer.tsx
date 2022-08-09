@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useContext, useEffect, useRef } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 
@@ -22,57 +22,56 @@ const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
 const AudioPlayer = () => {
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const audioService = useContext(AudioPlayerMachineContext);
-  const [currentState, send] = useActor(audioService);
-  const isVisible = currentState.matches('VISIBLE');
+  const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
 
   useEffect(() => {
-    send({ type: 'SET_AUDIO_REF', audioPlayerRef: audioPlayerRef.current });
-  }, [send]);
+    audioService.send({ type: 'SET_AUDIO_REF', audioPlayerRef: audioPlayerRef.current });
+  }, [audioService]);
 
   const onCanPlay = () => {
-    send({ type: 'CAN_PLAY' });
+    audioService.send({ type: 'CAN_PLAY' });
   };
 
   const onTimeUpdate = () => {
-    send({ type: 'UPDATE_TIMING' });
+    audioService.send({ type: 'UPDATE_TIMING' });
   };
 
   const onStalled = () => {
-    send({
+    audioService.send({
       type: 'STALL',
     });
   };
 
   const onError = () => {
-    send({
+    audioService.send({
       type: 'FAIL',
     });
   };
 
   const onEnded = () => {
-    send({
+    audioService.send({
       type: 'END',
     });
   };
 
   const onSeeking = () => {
-    send({
+    audioService.send({
       type: 'SEEKING',
     });
   };
 
   const onSeeked = () => {
-    send({
+    audioService.send({
       type: 'SEEKED',
     });
   };
 
   const onPlay = () => {
-    send({ type: 'PLAY' });
+    audioService.send({ type: 'PLAY' });
   };
 
   const onPause = () => {
-    send({ type: 'PAUSE' });
+    audioService.send({ type: 'PAUSE' });
   };
 
   return (

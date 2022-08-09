@@ -36,7 +36,6 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
   const { t, lang } = useTranslation();
   const audioService = useContext(AudioPlayerMachineContext);
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
-  // const [state, send] = useActor(audioService);
   const isAudioPlaying = useSelector(audioService, (state) =>
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );

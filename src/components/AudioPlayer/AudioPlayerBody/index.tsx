@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 
 import AudioKeyBoardListeners from '../AudioKeyboardListeners';
 import AudioPlayerSlider from '../AudioPlayerSlider';
@@ -14,8 +14,7 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 const AudioPlayerBody = () => {
   const audioService = useContext(AudioPlayerMachineContext);
-  const [currentState] = useActor(audioService);
-  const isRadioMode = !!currentState.context.radioActor;
+  const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
 
   return (
     <>
@@ -34,7 +33,7 @@ const AudioPlayerBody = () => {
         )}
       </div>
       {isRadioMode ? (
-        <RadioPlaybackControl radioActor={currentState.context.radioActor} />
+        <RadioPlaybackControl radioActor={audioService.getSnapshot().context.radioActor} />
       ) : (
         <PlaybackControls />
       )}

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useActor, useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -37,16 +37,17 @@ const RadioInformation = ({ radioActor }) => {
 const PlayRadioButton = () => {
   const { t } = useTranslation('radio');
   const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
 
-  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
-  const isRadioMode = !!state.context.radioActor;
-  const isLoading = state.hasTag('loading');
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
+  const isLoading = useSelector(audioService, (state) => state.hasTag('loading'));
 
   // TODO: handle continue radio from last saved session
   const onPlayClicked = () => {
     if (isRadioMode) {
-      send('TOGGLE');
+      audioService.send('TOGGLE');
       return;
     }
     const randomStationId = getRandomCuratedStationId();
@@ -56,7 +57,7 @@ const PlayRadioButton = () => {
       type: StationType.Curated,
     });
 
-    send({
+    audioService.send({
       type: 'PLAY_RADIO',
       stationId: Number(randomStationId),
       stationType: StationType.Curated,
@@ -64,7 +65,7 @@ const PlayRadioButton = () => {
   };
 
   const onPauseClicked = () => {
-    send('TOGGLE');
+    audioService.send('TOGGLE');
   };
 
   return (
@@ -88,7 +89,9 @@ const PlayRadioButton = () => {
             {t('play-radio')}
           </Button>
         )}
-        {state.context.radioActor && <RadioInformation radioActor={state.context.radioActor} />}
+        {audioService.getSnapshot().context.radioActor && (
+          <RadioInformation radioActor={audioService.getSnapshot().context.radioActor} />
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import PauseIcon from '../../../public/icons/pause.svg';
@@ -23,14 +23,15 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
-
-  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING');
-  const isPlayingCurrentChapter = isAudioPlaying && state.context.surah === chapterId;
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const isPlayingCurrentChapter = isAudioPlaying && currentSurah === chapterId;
 
   const play = () => {
     logButtonClick('chapter_header_play_audio');
-    send({
+    audioService.send({
       type: 'PLAY_SURAH',
       surah: chapterId,
     });
@@ -38,7 +39,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
 
   const pause = () => {
     logButtonClick('chapter_header_pause_audio');
-    send({
+    audioService.send({
       type: 'PAUSE',
     });
   };

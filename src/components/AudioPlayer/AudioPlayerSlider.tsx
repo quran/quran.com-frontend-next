@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
@@ -17,28 +17,25 @@ const AudioPlayerSlider = (): JSX.Element => {
   const direction = useDirection();
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [currentState, send] = useActor(audioService);
+  const elapsed = useSelector(audioService, (state) => state.context.elapsed);
+  const duration = useSelector(audioService, (state) => state.context.duration);
 
   return (
     <div className={styles.container}>
-      <span className={styles.currentTime}>
-        {secondsFormatter(currentState.context.elapsed, locale)}
-      </span>
+      <span className={styles.currentTime}>{secondsFormatter(elapsed, locale)}</span>
       <div className={styles.sliderContainer}>
         <Slider
           label="audio-player"
-          value={[currentState.context.elapsed]}
+          value={[elapsed]}
           onValueChange={([newTimestamp]) => {
             logEvent('audio_player_slider_value_change');
-            send({ type: 'SEEK_TO', timestamp: newTimestamp });
+            audioService.send({ type: 'SEEK_TO', timestamp: newTimestamp });
           }}
-          max={currentState.context.duration}
+          max={duration}
           direction={direction as Direction}
         />
       </div>
-      <span className={styles.remainingTime}>
-        {secondsFormatter(currentState.context.duration, locale)}
-      </span>
+      <span className={styles.remainingTime}>{secondsFormatter(duration, locale)}</span>
     </div>
   );
 };

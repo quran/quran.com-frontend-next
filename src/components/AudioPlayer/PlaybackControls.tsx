@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
@@ -12,9 +12,7 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 const PlaybackControls = () => {
   const audioService = useContext(AudioPlayerMachineContext);
-  const [currentState] = useActor(audioService);
-
-  const isLoading = currentState.hasTag('loading');
+  const isLoading = useSelector(audioService, (state) => state.hasTag('loading'));
 
   return (
     <div className={styles.container}>

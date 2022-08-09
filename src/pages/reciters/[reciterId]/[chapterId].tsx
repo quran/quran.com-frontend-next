@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { useContext, useState } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -56,11 +56,13 @@ const RecitationPage = ({
   const [isDownloadingAudio, setIsDownloadingAudio] = useState(false);
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [state] = useActor(audioService);
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const currentSurah = useSelector(audioService, (state) => state.context.surah);
 
-  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
   const isCurrentlyPlayingThisChapter =
-    isAudioPlaying && state.context.surah === Number(selectedChapter.id);
+    isAudioPlaying && currentSurah === Number(selectedChapter.id);
 
   const onPlayAudioClicked = () => {
     // TODO: handle playing surah without changing reciter

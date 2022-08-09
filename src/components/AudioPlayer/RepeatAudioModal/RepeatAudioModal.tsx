@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { useMemo, useState, useEffect, useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './RepeatAudioModal.module.scss';
@@ -44,12 +44,12 @@ const RepeatAudioModal = ({
   // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [audioState] = useActor(audioService);
-  const repeatState = audioState.context.repeatActor?.getSnapshot();
+  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
+  const repeatState = repeatActor?.getSnapshot();
   const repeatSettings = repeatState?.context;
 
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
-  const isInRepeatMode = !!audioState.context.repeatActor;
+  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
   const {
     actions: { onSettingsChangeWithoutDispatch },

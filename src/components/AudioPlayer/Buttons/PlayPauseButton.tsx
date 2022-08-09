@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import PauseIcon from '../../../../public/icons/pause.svg';
@@ -16,10 +16,11 @@ const PlayPauseButton = () => {
   const { t } = useTranslation('common');
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const [currentState, send] = useActor(audioService);
 
-  const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
-  const isLoading = currentState.hasTag('loading');
+  const isPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const isLoading = useSelector(audioService, (state) => state.hasTag('loading'));
 
   let button;
 
@@ -41,7 +42,7 @@ const PlayPauseButton = () => {
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(() => {
           logButtonClick('audio_player_pause');
-          send('TOGGLE');
+          audioService.send('TOGGLE');
         })}
       >
         <PauseIcon />
@@ -55,7 +56,7 @@ const PlayPauseButton = () => {
         variant={ButtonVariant.Ghost}
         onClick={withStopPropagation(() => {
           logButtonClick('audio_player_play');
-          send('TOGGLE');
+          audioService.send('TOGGLE');
         })}
         shouldFlipOnRTL={false}
       >

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
@@ -19,10 +19,12 @@ type ReciterStationListProps = {
 };
 const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
 
-  const radioContext = state.context?.radioActor?.getSnapshot()?.context || {};
-  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+  const radioActor = useSelector(audioService, (state) => state.context.radioActor);
+  const radioContext = radioActor?.getSnapshot()?.context || {};
 
   return (
     <div className={styles.container}>
@@ -37,10 +39,14 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
               stationId: reciter.id,
               type: StationType.Curated,
             });
-            send({ type: 'PLAY_RADIO', stationType: StationType.Reciter, stationId: reciter.id });
+            audioService.send({
+              type: 'PLAY_RADIO',
+              stationType: StationType.Reciter,
+              stationId: reciter.id,
+            });
           };
-        if (isSelectedStation && isAudioPlaying) onClick = () => send('TOGGLE');
-        if (isSelectedStation && !isAudioPlaying) onClick = () => send('TOGGLE');
+        if (isSelectedStation && isAudioPlaying) onClick = () => audioService.send('TOGGLE');
+        if (isSelectedStation && !isAudioPlaying) onClick = () => audioService.send('TOGGLE');
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
         return (
