@@ -67,22 +67,6 @@ const AudioPlayer = () => {
     });
   };
 
-  // const toggle = () => {
-  //   send({ type: 'TOGGLE' });
-  // };
-
-  // const onClosePlayerClicked = () => {
-  //   send({ type: 'CLOSE' });
-  // };
-
-  // const onPreviousAyahClicked = () => {
-  //   send({ type: 'PREV_AYAH' });
-  // };
-
-  // const onNextAyahClicked = () => {
-  //   send({ type: 'NEXT_AYAH' });
-  // };
-
   const onPlay = () => {
     send({ type: 'PLAY' });
   };
@@ -90,14 +74,6 @@ const AudioPlayer = () => {
   const onPause = () => {
     send({ type: 'PAUSE' });
   };
-
-  // const onRepeatSettingsClicked = () => {
-  //   setIsRepeatModalOpen(true);
-  // };
-
-  // const onModalRequestClose = () => {
-  //   setIsRepeatModalOpen(false);
-  // };
 
   return (
     <>
@@ -109,7 +85,6 @@ const AudioPlayer = () => {
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
         <audio
           style={{ display: 'none' }}
-          // controls
           id="audio-player"
           ref={audioPlayerRef}
           preload="auto"
@@ -123,19 +98,6 @@ const AudioPlayer = () => {
           onPlay={onPlay}
           onPause={onPause}
         />
-        {/* <audio
-          src={audioData?.audioUrl}
-          style={{ display: 'none' }}
-          id="audio-player"
-          ref={audioPlayerElRef}
-          preload="auto"
-          onPlay={onAudioPlay}
-          onPause={onAudioPause}
-          onEnded={onAudioEnded}
-          onCanPlayThrough={onAudioLoaded}
-          onSeeking={onSeeking}
-          onSeeked={onSeeked}
-        /> */}
         {isVisible && <AudioPlayerBody />}
       </div>
     </>
