@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { selectIsUsingDefaultReciter, selectReciterId } from 'src/redux/slices/AudioPlayer/state';
+import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import {
   selectIsUsingDefaultWordByWordLocale,
   selectWordByWordLocale,
@@ -13,6 +14,7 @@ import {
   selectSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
 /**
@@ -21,11 +23,12 @@ import QueryParam from 'types/QueryParam';
  */
 const useSyncReduxAndQueryParams = () => {
   const router = useRouter();
+  const audioService = useContext(AudioPlayerMachineContext);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const selectedReciterId = useSelector(selectReciterId, shallowEqual);
+  const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
 
   /**

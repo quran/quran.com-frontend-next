@@ -14,7 +14,6 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 import Reciter from 'types/Reciter';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
-export const selectReciter = (state: RootState) => state.audioPlayerState.reciter;
 export const selectReciterId = (state: RootState) => state.audioPlayerState.reciter.id;
 export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.isUsingDefaultReciter;
