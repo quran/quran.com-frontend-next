@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import { ActionCreatorWithOptionalPayload } from '@reduxjs/toolkit';
+import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -15,7 +16,6 @@ import Toggle from 'src/components/dls/Toggle/Toggle';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setEnableAutoScrolling,
-  setPlaybackRate,
   setShowTooltipWhenPlayingAudio,
   selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
@@ -27,6 +27,7 @@ import {
 import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { WordClickFunctionality } from 'types/QuranReader';
 
@@ -35,19 +36,20 @@ export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 const AudioSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const audioService = useContext(AudioPlayerMachineContext);
   const readingPreferences = useSelector(selectReadingPreferences);
   const { wordClickFunctionality } = readingPreferences;
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const {
-    playbackRate,
     showTooltipWhenPlayingAudio,
     enableAutoScrolling,
     reciter: selectedReciter,
   } = audioPlayerState;
   const {
-    actions: { onSettingsChange },
+    actions: { onSettingsChange, onXstateSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
+  const playbackRate = useXstateSelector(audioService, (state) => state.context.playbackRate);
 
   const onAudioSettingsChange = (
     key: string,
@@ -65,7 +67,22 @@ const AudioSection = () => {
 
   const onPlaybackRateChanged = (value) => {
     logValueChange('audio_playback_rate', playbackRate, value);
-    onAudioSettingsChange('playbackRate', Number(value), setPlaybackRate);
+    const previousPlaybackRate = audioService.getSnapshot().context.playbackRate;
+    onXstateSettingsChange(
+      'playbackRate',
+      value,
+      () =>
+        audioService.send({
+          type: 'SET_PLAYBACK_SPEED',
+          playbackRate,
+        }),
+      () =>
+        audioService.send({
+          type: 'SET_PLAYBACK_SPEED',
+          playbackRate: previousPlaybackRate,
+        }),
+      PreferenceGroup.AUDIO,
+    );
   };
 
   const playbackRatesOptions = useMemo(
