@@ -8,10 +8,8 @@ import resetSettings from 'src/redux/actions/reset-settings';
 import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import AudioState from 'src/redux/types/AudioState';
 import SliceName from 'src/redux/types/SliceName';
-import AudioData from 'types/AudioData';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import Reciter from 'types/Reciter';
 
@@ -38,14 +36,6 @@ export const audioPlayerStateSlice = createSlice({
         getAudioPlayerStateInitialState(action.payload.locale).reciter.id ===
         action.payload.reciter.id,
       reciter: action.payload.reciter,
-    }),
-    setAudioData: (state: AudioState, action: PayloadAction<AudioData>) => ({
-      ...state,
-      audioData: action.payload,
-    }),
-    setAudioStatus: (state, action: PayloadAction<AudioDataStatus>) => ({
-      ...state,
-      audioDataStatus: action.payload,
     }),
     setEnableAutoScrolling: (state, action: PayloadAction<boolean>) => ({
       ...state,
@@ -113,8 +103,6 @@ export const audioPlayerStateSlice = createSlice({
 
 export const {
   setReciter,
-  setAudioData,
-  setAudioStatus,
   setEnableAutoScrolling,
   setIsDownloadingAudio,
   setShowTooltipWhenPlayingAudio,
