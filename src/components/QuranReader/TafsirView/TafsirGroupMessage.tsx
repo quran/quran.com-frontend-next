@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './TafsirView.module.scss';
+import TafsirMessage from './TafsirMessage';
 
 type TafsirGroupMessageProps = {
   from: string;
@@ -10,12 +10,12 @@ type TafsirGroupMessageProps = {
 const TafsirGroupMessage = ({ from, to }: TafsirGroupMessageProps) => {
   const { t } = useTranslation('common');
   return (
-    <div className={styles.tafsirGroupMessage}>
+    <TafsirMessage>
       {t('tafsir.group-message', {
         from,
         to,
       })}
-    </div>
+    </TafsirMessage>
   );
 };
 

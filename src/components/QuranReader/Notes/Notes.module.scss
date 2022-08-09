@@ -8,7 +8,7 @@
   inset-inline-end: 0;
   background-color: #2e75ff;
   overflow-x: hidden;
-  padding-block-start: constants.$navbar-height;
+  padding-block-start: var(--navbar-container-height);
   z-index: var(--z-index-default);
   transition: var(--transition-regular);
   width: 0;

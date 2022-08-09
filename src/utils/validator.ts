@@ -1,5 +1,7 @@
 import { getChapterData } from './chapter';
 
+import ChaptersData from 'types/ChaptersData';
+
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
  *
@@ -37,17 +39,25 @@ export const isValidVerseNumber = (verseId: string): boolean => {
  * 2. if it's a numeric string but below 1.
  * 3. if it's a numeric string but above the maximum number of verses for the chapter. e.g. verseId 8 for chapterId 1 (Alfatiha) is invalid since it only has 7 verses.
  *
+ * @param {ChaptersData} chaptersData
  * @param {string} chapterId the chapter id. We will assume it's valid since we already validated it.
  * @param {string} verseId the verse id being validated.
  * @returns {boolean}
  */
-export const isValidVerseId = (chapterId: string, verseId: string): boolean => {
+export const isValidVerseId = (
+  chaptersData: ChaptersData,
+  chapterId: string,
+  verseId: string,
+): boolean => {
   const verseIdNumber = Number(verseId);
   // is not a valid number, below 1 or above the maximum number of verses for the chapter.
   if (Number.isNaN(verseIdNumber) || verseIdNumber < 1) {
     return false;
   }
-  if (!getChapterData(chapterId) || verseIdNumber > getChapterData(chapterId).versesCount) {
+  if (
+    !getChapterData(chaptersData, chapterId) ||
+    verseIdNumber > getChapterData(chaptersData, chapterId).versesCount
+  ) {
     return false;
   }
   return true;
@@ -109,11 +119,16 @@ export const getToAndFromFromRange = (range: string): string[] => range.split('-
  * 4. If either the from verse number of to verse number exceeds the total number of verses
  *    for the current chapter e.g. for chapter 1: '7-8' or '8-8'.
  *
+ * @param {ChaptersData} chaptersData
  * @param {string} chapterId
  * @param {string} range
  * @returns {boolean}
  */
-export const isValidVerseRange = (chapterId: string, range: string): boolean => {
+export const isValidVerseRange = (
+  chaptersData: ChaptersData,
+  chapterId: string,
+  range: string,
+): boolean => {
   const rangeSplits = getToAndFromFromRange(range);
   // if the splits are not 2, it means it's not in the right format.
   if (rangeSplits.length !== 2) {
@@ -131,10 +146,10 @@ export const isValidVerseRange = (chapterId: string, range: string): boolean => 
     return false;
   }
   // if the chapterId is not a valid chapterId e.g. "word"
-  if (!getChapterData(chapterId)) {
+  if (!getChapterData(chaptersData, chapterId)) {
     return false;
   }
-  const chapterVersesCount = getChapterData(chapterId).versesCount;
+  const chapterVersesCount = getChapterData(chaptersData, chapterId).versesCount;
   // if either the from verse number of to verse number exceeds the chapter's total number.
   if (fromNumber > chapterVersesCount || toNumber > chapterVersesCount) {
     return false;
@@ -151,10 +166,11 @@ export const isValidVerseRange = (chapterId: string, range: string): boolean => 
  * 3. if it's not a valid chapter id {@see isValidChapterId}
  * 4. if it's not a valid verse ID {@see isValidVerseId}
  *
+ * @param {ChaptersData} chaptersData
  * @param {string} verseKey
  * @returns {boolean}
  */
-export const isValidVerseKey = (verseKey: string): boolean => {
+export const isValidVerseKey = (chaptersData: ChaptersData, verseKey: string): boolean => {
   const splits = verseKey.split(':');
   // if the splits are not 2, it means it's not in the right format.
   if (splits.length !== 2) {
@@ -162,7 +178,7 @@ export const isValidVerseKey = (verseKey: string): boolean => {
   }
   const [chapterId, verseId] = splits;
   // if either value is not a number e.g. 'one:2' or if the verseNumber is below 0
-  if (!isValidChapterId(chapterId) || !isValidVerseId(chapterId, verseId)) {
+  if (!isValidChapterId(chapterId) || !isValidVerseId(chaptersData, chapterId, verseId)) {
     return false;
   }
 

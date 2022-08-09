@@ -1,38 +1,16 @@
 {
-    "footer": {
-        "rights": "Seluruh hak cipta",
-        "title": "Baca, belajar, dan pelajari Al-Quran yang mulia."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharram",
-            "10": "Syawal",
-            "11": "Dzulqaidah",
-            "2": "Safar",
-            "3": "Rabi' awal",
-            "4": "Rabi'  akhir",
-            "5": "Jamadil awal",
-            "6": "Jamadil Akhir",
-            "7": "Rejab",
-            "8": "Sya'ban",
-            "9": "Ramadan"
-        }
-    },
-    "no-bookmarks": "Anda belum memiliki penanda buku apa pun",
+    "no-bookmarks": "Anda belum memiliki penanda apa pun",
     "noble-quran": "Al-Quran yang mulia",
     "recently-read": "Baru-baru ini dibaca",
     "tab": {
-        "bookmarks": "penanda buku",
+        "bookmarks": "Penanda",
         "popular": "Populer"
     },
     "voice": {
         "trigger": "Akses cepat ke semuanya"
     },
     "welcome": {
-        "changes-cta": "Lihat Perubahan Terbaru",
-        "desc": "Kami secara aktif menambahkan fitur baru dan mendorong perubahan. Jika Anda mengalami masalah, harap berikan maklum balik.",
-        "feedback-cta": "Berikan maklum balik",
-        "title": "Selamat datang di Beta Pra-Rilis dari Quran.com baru!"
+        "body": "Donasi bulanan membantu kami mempertahankan talenta terbaik dan mempertahankan operasi, sehingga kami dapat kurang fokus pada penggalangan dana dan lebih banyak menciptakan dampak.",
+        "title": "Donasi ke Quran.com hari ini"
     }
 }

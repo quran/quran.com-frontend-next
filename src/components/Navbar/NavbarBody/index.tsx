@@ -13,6 +13,7 @@ import SearchDrawer from '../SearchDrawer/SearchDrawer';
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
 import styles from './NavbarBody.module.scss';
+import ProfileAvatarButton from './ProfileAvatarButton';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
@@ -59,6 +60,7 @@ const NavbarBody: React.FC = () => {
               variant={ButtonVariant.Ghost}
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
+              ariaLabel={t('aria.nav-drawer-open')}
             >
               <IconMenu />
             </Button>
@@ -70,12 +72,14 @@ const NavbarBody: React.FC = () => {
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
           <>
+            <ProfileAvatarButton />
             <LanguageSelector />
             <Button
               tooltip={t('settings.title')}
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
               onClick={openSettingsDrawer}
+              ariaLabel={t('aria.change-settings')}
             >
               <IconSettings />
             </Button>
@@ -88,6 +92,7 @@ const NavbarBody: React.FC = () => {
               onClick={openSearchDrawer}
               shape={ButtonShape.Circle}
               shouldFlipOnRTL={false}
+              ariaLabel={t('search.title')}
             >
               <IconSearch />
             </Button>

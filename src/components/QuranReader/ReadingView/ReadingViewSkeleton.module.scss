@@ -8,11 +8,14 @@
 }
 
 .skeleton {
-  width: var(--line-width, auto);
   margin-inline: auto;
   @include breakpoints.tablet {
     margin-block-start: constants.$reading-view-container-top-margin;
   }
   margin-block-start: var(--spacing-xsmall);
   height: var(--skeleton-height);
+}
+
+.fixedWidth {
+  width: var(--line-width, auto);
 }

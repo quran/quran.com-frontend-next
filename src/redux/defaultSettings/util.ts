@@ -8,6 +8,7 @@ import { DefaultSettings } from 'src/redux/defaultSettings/defaultSettings';
 import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
+import SliceName from 'src/redux/types/SliceName';
 import TafsirsSettings from 'src/redux/types/TafsirsSettings';
 import Theme from 'src/redux/types/Theme';
 import TranslationsSettings from 'src/redux/types/TranslationsSettings';
@@ -20,14 +21,14 @@ import TranslationsSettings from 'src/redux/types/TranslationsSettings';
  */
 export const getStoreInitialState = (locale: string): RootState => {
   return {
-    theme: getThemeInitialState(locale),
-    readingPreferences: getReadingPreferencesInitialState(locale),
-    quranReaderStyles: getQuranReaderStylesInitialState(locale),
-    translations: getTranslationsInitialState(locale),
-    tafsirs: getTafsirsInitialState(locale),
+    [SliceName.THEME]: getThemeInitialState(locale),
+    [SliceName.READING_PREFERENCES]: getReadingPreferencesInitialState(locale),
+    [SliceName.QURAN_READER_STYLES]: getQuranReaderStylesInitialState(locale),
+    [SliceName.TRANSLATIONS]: getTranslationsInitialState(locale),
+    [SliceName.TAFSIRS]: getTafsirsInitialState(locale),
     // @ts-ignore
-    audioPlayerState: getAudioPlayerStateInitialState(locale),
-    defaultSettings: { isUsingDefaultSettings: true },
+    [SliceName.AUDIO_PLAYER_STATE]: getAudioPlayerStateInitialState(locale),
+    [SliceName.DEFAULT_SETTINGS]: { isUsingDefaultSettings: true },
   };
 };
 
@@ -52,25 +53,27 @@ const importLocaleFile = (locale: string): DefaultSettings =>
  */
 const getLocaleInitialStateByKey = (locale: string, key: string) => importLocaleFile(locale)[key];
 
+export const getLocaleInitialState = (locale: string) => importLocaleFile(locale);
+
 export const getThemeInitialState = (locale = DEFAULT_LOCALE): Theme => {
-  return getLocaleInitialStateByKey(locale, 'theme');
+  return getLocaleInitialStateByKey(locale, SliceName.THEME);
 };
 
 export const getReadingPreferencesInitialState = (locale = DEFAULT_LOCALE): ReadingPreferences => {
-  return getLocaleInitialStateByKey(locale, 'readingPreferences');
+  return getLocaleInitialStateByKey(locale, SliceName.READING_PREFERENCES);
 };
 
 export const getQuranReaderStylesInitialState = (locale = DEFAULT_LOCALE): QuranReaderStyles => {
-  return getLocaleInitialStateByKey(locale, 'quranReaderStyles');
+  return getLocaleInitialStateByKey(locale, SliceName.QURAN_READER_STYLES);
 };
 
 export const getTranslationsInitialState = (locale = DEFAULT_LOCALE): TranslationsSettings => {
-  return getLocaleInitialStateByKey(locale, 'translations');
+  return getLocaleInitialStateByKey(locale, SliceName.TRANSLATIONS);
 };
 
 export const getTafsirsInitialState = (locale = DEFAULT_LOCALE): TafsirsSettings => {
-  return getLocaleInitialStateByKey(locale, 'tafsirs');
+  return getLocaleInitialStateByKey(locale, SliceName.TAFSIRS);
 };
 export const getAudioPlayerStateInitialState = (locale = DEFAULT_LOCALE): AudioState => {
-  return getLocaleInitialStateByKey(locale, 'audioPlayerState');
+  return getLocaleInitialStateByKey(locale, SliceName.AUDIO_PLAYER_STATE);
 };

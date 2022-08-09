@@ -18,6 +18,7 @@ const DrawerCloseButton: React.FC<Props> = ({ onClick }) => {
       shape={ButtonShape.Circle}
       variant={ButtonVariant.Ghost}
       onClick={onClick}
+      ariaLabel={t('aria.drawer-close')}
     >
       <IconClose />
     </Button>

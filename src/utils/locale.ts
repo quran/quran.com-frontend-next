@@ -29,6 +29,7 @@ const LOCALE_NAME = {
   inh: 'ʁəlʁɑj mot',
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
+  ku: 'Kurdî',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -37,6 +38,7 @@ const LOCALE_NAME_TO_CODE = {
   arabic: 'ar',
   russian: 'ru',
   urdu: 'ur',
+  Kurdish: 'ku',
 };
 
 export const LANG_LOCALE_MAP = {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import React, { useCallback, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
@@ -8,18 +9,23 @@ import usePlayNextAudioTrackForRadio from '../Radio/usePlayNextAudioTrackForRadi
 
 import styles from './AudioPlayer.module.scss';
 
+import Spinner from 'src/components/dls/Spinner/Spinner';
 import {
   setIsPlaying,
   selectAudioDataStatus,
   setAudioStatus,
   selectPlaybackRate,
-  // selectIsMobileMinimizedForScrolling,
   selectAudioData,
 } from 'src/redux/slices/AudioPlayer/state';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ssr: false,
+  loading: () => (
+    <div className={styles.spinner}>
+      <Spinner />
+    </div>
+  ),
 });
 
 const AudioPlayer = () => {
@@ -28,7 +34,6 @@ const AudioPlayer = () => {
   const audioDataStatus = useSelector(selectAudioDataStatus);
   const audioData = useSelector(selectAudioData, shallowEqual);
   const isHidden = audioDataStatus === AudioDataStatus.NoFile;
-  const isMobileMinimizedForScrolling = false;
   const playbackRate = useSelector(selectPlaybackRate);
   const onAudioPlay = useCallback(() => {
     dispatch({ type: setIsPlaying.type, payload: true });
@@ -43,11 +48,19 @@ const AudioPlayer = () => {
     dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
   }, [dispatch]);
 
+  const onSeeked = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Ready });
+  }, [dispatch]);
+
+  const onSeeking = useCallback(() => {
+    dispatch({ type: setAudioStatus.type, payload: AudioDataStatus.Loading });
+  }, [dispatch]);
+
   usePlayNextAudioTrackForRadio(audioPlayerElRef);
 
   // Sync the global audio player element reference with the AudioPlayer component.
   useEffect(() => {
-    if (process.browser && window) {
+    if (typeof window !== 'undefined') {
       window.audioPlayerEl = audioPlayerElRef.current;
     }
   }, [audioPlayerElRef]);
@@ -55,8 +68,7 @@ const AudioPlayer = () => {
   // sync playback rate from redux to audioplayer
   useEffect(() => {
     if (
-      process.browser &&
-      window &&
+      typeof window !== 'undefined' &&
       window.audioPlayerEl &&
       window.audioPlayerEl.playbackRate !== playbackRate
     ) {
@@ -64,34 +76,11 @@ const AudioPlayer = () => {
     }
   }, [audioPlayerElRef, playbackRate]);
 
-  // eventListeners useEffect
-  useEffect(() => {
-    let currentRef = null;
-    if (audioPlayerElRef && audioPlayerElRef.current) {
-      currentRef = audioPlayerElRef.current;
-      currentRef.addEventListener('play', onAudioPlay);
-      currentRef.addEventListener('pause', onAudioPause);
-      currentRef.addEventListener('ended', onAudioEnded);
-      currentRef.addEventListener('canplaythrough', onAudioLoaded);
-    }
-
-    return () => {
-      if (currentRef) {
-        currentRef.removeEventListener('play', onAudioPlay);
-        currentRef.removeEventListener('pause', onAudioPause);
-        currentRef.removeEventListener('ended', onAudioEnded);
-        currentRef.removeEventListener('canplaythrough', onAudioLoaded);
-      }
-    };
-  }, [audioPlayerElRef, onAudioPlay, onAudioPause, onAudioEnded, onAudioLoaded]);
-
   return (
     <>
-      <div className={styles.emptySpacePlaceholder} />
       <div
         className={classNames(styles.container, styles.containerDefault, {
           [styles.containerHidden]: isHidden,
-          [styles.containerMinimized]: isMobileMinimizedForScrolling,
         })}
       >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}
@@ -100,14 +89,15 @@ const AudioPlayer = () => {
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerElRef}
+          preload="auto"
+          onPlay={onAudioPlay}
+          onPause={onAudioPause}
+          onEnded={onAudioEnded}
+          onCanPlayThrough={onAudioLoaded}
+          onSeeking={onSeeking}
+          onSeeked={onSeeked}
         />
-        {!isHidden && (
-          <AudioPlayerBody
-            audioData={audioData}
-            audioPlayerElRef={audioPlayerElRef}
-            isMobileMinimizedForScrolling={isMobileMinimizedForScrolling}
-          />
-        )}
+        {!isHidden && <AudioPlayerBody audioData={audioData} audioPlayerElRef={audioPlayerElRef} />}
       </div>
     </>
   );

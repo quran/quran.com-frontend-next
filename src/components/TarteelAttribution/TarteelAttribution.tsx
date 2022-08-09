@@ -18,7 +18,7 @@ const TarteelAttribution: React.FC<Props> = ({ isCommandBar = false }) => {
     logTarteelLinkClick(isCommandBar ? 'command_bar' : 'search_drawer');
   };
   return (
-    <Link href="https://download.tarteel.ai/" onClick={onLinkClicked} newTab>
+    <Link href="https://download.tarteel.ai/" onClick={onLinkClicked} isNewTab>
       <div className={styles.container}>
         <span className={styles.poweredBy}>{t('voice.voice-search-powered-by')}</span>
         <TarteelLogo />

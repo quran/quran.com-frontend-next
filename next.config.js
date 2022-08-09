@@ -5,16 +5,17 @@ const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
-// const { withSentryConfig } = require('@sentry/nextjs'); // disabled temporarily until next 12 supports it: https://github.com/vercel/next.js/discussions/30137#discussioncomment-1538436
+const { withSentryConfig } = require('@sentry/nextjs');
 const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache');
 const nextTranslate = require('next-translate');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
+const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const config = {
   experimental: {
     outputStandalone: true,
@@ -24,10 +25,15 @@ const config = {
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
   pwa: {
-    disable: true,
+    disable: !isProduction,
     dest: 'public',
+    mode: isProduction ? 'production' : 'development',
     runtimeCaching,
-    publicExcludes: ['!fonts/v1/**/*', '!fonts/v2/**/*'],
+    publicExcludes: [
+      '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
+      '!icons/**', // exclude all icons
+      '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
+    ],
   },
   // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
@@ -103,6 +109,24 @@ const config = {
               },
             ],
           },
+          {
+            source: '/images/:image*', // match wildcard images' path which will match any image file on any level under /images.
+            headers: [
+              {
+                key: 'cache-control',
+                value: 'public, max-age=604800, immutable', // Max-age is 1 week. immutable indicates that the image will not change over the expiry time.
+              },
+            ],
+          },
+          {
+            source: '/icons/:icon*', // match wildcard icons' path which will match any icon file on any level under /icons.
+            headers: [
+              {
+                key: 'cache-control',
+                value: 'public, max-age=604800, immutable', // Max-age is 1 week. immutable indicates that the icon will not change over the expiry time.
+              },
+            ],
+          },
         ];
   },
   async redirects() {
@@ -136,4 +160,7 @@ const config = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withPWA, withFonts, nextTranslate], config);
+module.exports = withPlugins(
+  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+  config,
+);

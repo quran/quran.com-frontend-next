@@ -10,13 +10,13 @@ import { selectRadioStation } from 'src/redux/slices/radio';
 import { makeReciterUrl } from 'src/utils/apiPaths';
 
 const useCurrentStationInfo = (): StationInfo => {
-  const { t } = useTranslation('radio');
+  const { t, lang } = useTranslation('radio');
 
   const stationState = useSelector(selectRadioStation);
 
   const { data: reciterData } = useSWRImmutable(
-    stationState.type === StationType.Reciter ? makeReciterUrl(stationState.id) : null,
-    () => getReciterData(stationState.id),
+    stationState.type === StationType.Reciter ? makeReciterUrl(stationState.id, lang) : null,
+    () => getReciterData(stationState.id, lang),
   );
 
   const getCuratedStationInfo = (): StationInfo => {
@@ -30,7 +30,7 @@ const useCurrentStationInfo = (): StationInfo => {
   const getReciterStationInfo = (): StationInfo => {
     const selectedReciter = reciterData?.reciter;
     return {
-      title: selectedReciter?.name,
+      title: selectedReciter?.translatedName?.name,
       description: selectedReciter?.style?.name,
     };
   };

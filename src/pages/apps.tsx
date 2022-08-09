@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
@@ -11,6 +12,7 @@ import styles from './apps.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import PageContainer from 'src/components/PageContainer';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import { getLanguageAlternates } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
@@ -32,7 +34,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
       key={app.title}
     >
       <div className={styles.texts}>
-        <Image className={styles.appLogo} src={app.logo} height={60} width={60} alt={app.title} />
+        <Image src={app.logo} height={60} width={60} alt={app.title} />
         {isMain ? (
           <h1 className={styles.heading}>{app.title}</h1>
         ) : (
@@ -42,7 +44,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         <div className={styles.downloadButtonsContainer}>
           <Link
             href={app.ios}
-            newTab
+            isNewTab
             {...(app.isTarteel && {
               onClick: () => {
                 onTarteelAppClicked(true);
@@ -53,7 +55,7 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
           </Link>
           <Link
             href={app.android}
-            newTab
+            isNewTab
             {...(app.isTarteel && {
               onClick: () => {
                 onTarteelAppClicked(false);
@@ -68,8 +70,8 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
         <Image
           className={styles.appImage}
           src={app.preview}
-          height={1396}
-          width={1176}
+          height={1012}
+          width={801}
           alt={app.title}
         />
       </div>
@@ -93,7 +95,7 @@ const AppsPage = () => {
     },
     tarteel: {
       title: 'Tarteel.ai',
-      description: t('apps:tarteel-desc'),
+      description: <Trans i18nKey="apps:tarteel-desc" components={[<br key="1" />]} />,
       ios: 'https://apps.apple.com/app/tarteel/id1391009396',
       android: 'https://play.google.com/store/apps/details?id=com.mmmoussa.iqra',
       preview: TarteelAppImage,
@@ -109,10 +111,10 @@ const AppsPage = () => {
         url={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
-      <div className={styles.container}>
+      <PageContainer>
         <App app={apps.quran} isMain />
         <App app={apps.tarteel} isFlipped />
-      </div>
+      </PageContainer>
     </>
   );
 };

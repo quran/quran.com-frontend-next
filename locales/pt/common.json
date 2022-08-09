@@ -1,6 +1,35 @@
 {
     "about": "Sobre nós",
     "and": "e",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Veja o que é novo",
+                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário beta"
+            },
+            "slide-2": {
+                "action": "Próximo",
+                "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
+                "title": "Seus dados serão sincronizados <br> <\/br> entre dispositivos"
+            },
+            "slide-3": {
+                "action": "Ok, entendi",
+                "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
+                "title": "Queremos ouvir seus pensamentos"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "Mudar configurações",
+        "drawer-close": "Fechar gaveta",
+        "msg-close": "Fechar mensagem",
+        "nav-drawer-open": "Abrir gaveta de navegação",
+        "play-surah": "Jogue Sura {{surahName}}",
+        "read-ayah-refls": "Leia Reflexões Ayah",
+        "select-lng": "Selecione o idioma",
+        "share-ayah": "Compartilhe Ayah",
+        "sidebar-nav-close": "Fechar a barra lateral de navegação"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Desligado",
@@ -18,7 +47,6 @@
             "download": "Download",
             "full-surah": "Surata completa",
             "mismatch": "Clique em \"Recomeçar\" se preferir jogar {{currentReadingChapter}}",
-            "next-ayah": "Próxima Ayah",
             "pause": "Pausa",
             "pause-audio": "Pausar áudio",
             "play": "Toque",
@@ -64,6 +92,7 @@
         "sub-header": "Inscreva-se no Discord do Quran.com para participar e colaborar com a tecnologia islâmica líder na construção de comunidades.",
         "title": "Comunidade"
     },
+    "complete-sign-up": "Complete seu cadastro",
     "continue": "Prosseguir",
     "copied": "Copiado",
     "copied-to-clipboard": "Copiado para a área de transferência",
@@ -74,9 +103,21 @@
     },
     "default-description": "O Alcorão traduzido para vários idiomas em uma interface simples e fácil",
     "developers": "Desenvolvedores",
+    "donate": "Doar",
+    "email-verification": {
+        "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
+        "email-sent": "Acabamos de enviar um e-mail para <strong> {{email}} <\/strong>",
+        "email-verification": "Verificação de e-mail",
+        "resend-email": "Reenviar email",
+        "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
+        "verify-code": "Código de verificação"
+    },
     "error": {
+        "bookmark-sync": "O marcador está fora de sincronia.",
+        "email-login-fail": "Falha ao fazer login com e-mail. Por favor, tente novamente",
         "general": "Algo deu errado. Por favor, tente novamente.",
-        "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente."
+        "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente.",
+        "pref-persist-fail": "Falha ao sincronizar suas configurações com a nuvem."
     },
     "feedback": "Comentários",
     "fonts": {
@@ -95,9 +136,22 @@
         "text_uthmani": "Uthmani"
     },
     "footer": {
-        "description": "Quran.com é um Sadaqah Jariyah. Esperamos tornar mais fácil para todos ler, estudar e aprender o Nobre Alcorão. O Nobre Alcorão tem muitos nomes, incluindo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor."
+        "description": "Quran.com é um Sadaqah Jariyah. Esperamos tornar mais fácil para todos ler, estudar e aprender o Nobre Alcorão. O Nobre Alcorão tem muitos nomes, incluindo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
+        "rights": "Todos os direitos reservados",
+        "title": "Leia, estude e aprenda O Nobre Alcorão."
+    },
+    "form": {
+        "code": "Código de verificação",
+        "email": "E-mail",
+        "firstName": "Primeiro nome",
+        "lastName": "Sobrenome"
     },
     "from": "A partir de",
+    "fundraising": {
+        "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
+        "learn-more": "Saber mais",
+        "title": "Seja um doador mensal"
+    },
     "help": "Ajuda",
     "hizb": "Hizb",
     "home": "Casa",
@@ -109,6 +163,8 @@
     "languages": "línguas",
     "less": "Menos",
     "loading": "Carregando",
+    "login": "Conecte-se",
+    "logout": "Sair",
     "menu": "Cardápio",
     "mobile-apps": "Aplicativos móveis",
     "mode": "Modo",
@@ -116,6 +172,7 @@
     "navigate": "Navegar",
     "network": "Rede",
     "next": "Próximo",
+    "next-ayah": "Próxima Aia",
     "no": "Não",
     "none": "Nenhum",
     "off": "Desligado",
@@ -124,10 +181,21 @@
     "pages": "Páginas",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "popular-links": "Links populares",
+    "popup": {
+        "cta-1": "Doar Mensalmente",
+        "cta-2": "Doe uma vez",
+        "cta-3": "Saber mais",
+        "footnote": "As doações mensais permitem que nos concentremos menos na angariação de fundos",
+        "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Alcorão, sempre de graça.",
+        "text-2": "Quran.com é uma oportunidade perfeita para caridade contínua (Sadaqah Jariyah). Por favor, considere investir no seu Além como um doador mensal (ou único).",
+        "title": "Caro Companheiro do Alcorão,"
+    },
     "powered-by": "Distribuído por",
     "prev": "Anterior",
+    "previous-ayah": "Anterior Ayah",
     "privacy": "Privacidade",
     "product-updates": "Atualizações de produtos",
+    "profile": "Perfil",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "Rádio Alcorão",
@@ -136,10 +204,12 @@
         "translation": "Tradução"
     },
     "reciter": "Recitador",
+    "reciters": "Recitadores",
     "reflect": "Refletir",
     "remove": "Retirar",
     "retry": "Tentar novamente",
     "search-for": "Procure por '{{searchQuery}}'",
+    "search-results": "{{count}} resultados de pesquisa",
     "search": {
         "filters": "Filtros",
         "hint": "Tente pesquisar por",
@@ -188,11 +258,15 @@
         "descending": "descendente"
     },
     "style": "Estilo",
+    "submit": "Enviar",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tamanho da fonte Tafsir",
         "group-message": "Você está lendo um tafsir para o grupo de versos {{from}} a {{to}}",
+        "no-text": "{{tafsirName}} não está disponível para o verso atual.",
         "surah": "Tafsir Surah",
+        "tafsir-desc": "Leia {{tafsirName}} para Ayah {{verseNumber}} da Surata {{surahName}}",
+        "tafsirs-desc": "Leia vários Tafsirs de Ayah {{ayahNumber}} de Sura {{surahName}} por estudiosos Tafsir confiáveis",
         "title": "Tafsir"
     },
     "tarteel": {
@@ -215,6 +289,12 @@
     "translations": "Traduções",
     "transliteration": "Transliteração",
     "type": "Modelo",
+    "undo": "Desfazer",
+    "validation": {
+        "invalid-email": "{{field}} deve ser um endereço de e-mail válido",
+        "invalid-field": "Insira um valor {{field}} válido",
+        "required-field": "{{field}} é obrigatório"
+    },
     "verse": "Versículo",
     "verse-bookmark-removed": "Marcador de versículo removido!",
     "verse-bookmarked": "Versículo marcado!",

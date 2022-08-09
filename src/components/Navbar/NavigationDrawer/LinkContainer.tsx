@@ -16,7 +16,13 @@ const LinkContainer = ({ href, isExternalLink, children, onClick }: LinkContaine
     return <>{children}</>;
   }
   return (
-    <Link href={href} passHref prefetch={false} onClick={onClick} newTab={isExternalLink}>
+    <Link
+      href={href}
+      shouldPassHref
+      shouldPrefetch={false}
+      onClick={onClick}
+      isNewTab={isExternalLink}
+    >
       <div className={styles.anchor}>{children}</div>
     </Link>
   );

@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "All Rights Reserved",
-        "title": "Read, study, and learn The Noble Quran."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharram",
-            "10": "Shawwal",
-            "11": "Dhu Al-Qida",
-            "2": "Safar",
-            "3": "Rabi' I",
-            "4": "Rabi' II",
-            "5": "Jumada I",
-            "6": "Jumada Akhira",
-            "7": "Rajab",
-            "8": "Sha'ban",
-            "9": "Ramadan"
-        }
-    },
     "no-bookmarks": "You do not have any bookmarks yet",
     "noble-quran": "The Noble Quran",
     "recently-read": "Recently Read",
@@ -30,9 +10,7 @@
         "trigger": "Quick access to anything"
     },
     "welcome": {
-        "changes-cta": "View Recent Changes",
-        "desc": "We are actively adding new features and pushing changes. If you run into any issues please do provide feedback.",
-        "feedback-cta": "Provide Feedback",
-        "title": "Welcome to the Pre-Release Beta of the new Quran.com!"
+        "body": "Monthly donations help us retain top talent and sustain operations, so that we can focus less on fundraising and more on creating impact.",
+        "title": "Donate to Quran.com today"
     }
 }

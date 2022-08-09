@@ -9,11 +9,11 @@ import NavbarBody from './NavbarBody';
 import { selectNavbar } from 'src/redux/slices/navbar';
 
 const Navbar = () => {
-  const { isVisible } = useSelector(selectNavbar, shallowEqual);
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   return (
     <>
       <div className={styles.emptySpacePlaceholder} />
-      <nav className={classNames(styles.container, { [styles.hiddenNav]: !isVisible })}>
+      <nav className={classNames(styles.container, { [styles.hiddenNav]: !isNavbarVisible })}>
         <NavbarBody />
       </nav>
     </>

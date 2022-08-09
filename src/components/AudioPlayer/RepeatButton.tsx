@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
@@ -16,12 +17,17 @@ import {
   selectAudioData,
 } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { toLocalizedNumber } from 'src/utils/locale';
 
 const RepeatAudioButton = () => {
+  const { lang } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const audioData = useSelector(selectAudioData, shallowEqual);
   const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const remainingRangeRepeatCount = useSelector(selectRemainingRangeRepeatCount);
+  const remainingRangeRepeatCount = toLocalizedNumber(
+    useSelector(selectRemainingRangeRepeatCount),
+    lang,
+  );
 
   const onButtonClicked = () => {
     logButtonClick('audio_player_repeat');
@@ -44,7 +50,7 @@ const RepeatAudioButton = () => {
         wrapper={(children) => <Badge content={remainingRangeRepeatCount}>{children}</Badge>}
       >
         <Button
-          disabled={!audioData}
+          isDisabled={!audioData}
           variant={ButtonVariant.Ghost}
           shape={ButtonShape.Circle}
           onClick={onButtonClicked}

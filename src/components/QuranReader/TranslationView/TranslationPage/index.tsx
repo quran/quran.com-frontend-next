@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+/* eslint-disable max-lines */
+import React, { useEffect, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -10,11 +12,17 @@ import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import { getTranslationViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
 import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
 import TranslationViewSkeleton from 'src/components/QuranReader/TranslationView/TranslationViewSkeleton';
+import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { getMushafId } from 'src/utils/api';
+import { areArraysEqual } from 'src/utils/array';
+import { getPageBookmarks } from 'src/utils/auth/api';
+import { makeBookmarksRangeUrl } from 'src/utils/auth/apiPaths';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -45,6 +53,14 @@ const TranslationPage: React.FC<Props> = ({
   setApiPageToVersesMap,
 }) => {
   const { lang, t } = useTranslation('common');
+  const router = useRouter();
+  const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
+  const translationParams = useMemo(
+    () =>
+      (router.query.translations as string)?.split(',')?.map((translation) => Number(translation)),
+    [router.query.translations],
+  );
+
   const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
@@ -54,7 +70,9 @@ const TranslationPage: React.FC<Props> = ({
     isUsingDefaultFont &&
     isUsingDefaultReciter &&
     isUsingDefaultWordByWordLocale &&
-    isUsingDefaultTranslations;
+    isUsingDefaultTranslations &&
+    (!translationParams || areArraysEqual(defaultTranslations, translationParams));
+
   const { data: verses } = useSWRImmutable(
     getTranslationViewRequestKey({
       quranReaderDataType,
@@ -72,6 +90,28 @@ const TranslationPage: React.FC<Props> = ({
     {
       fallbackData: shouldUseInitialData ? initialData.verses : null,
       revalidateOnMount: !shouldUseInitialData,
+    },
+  );
+
+  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
+  const bookmarksRangeUrl = verses
+    ? makeBookmarksRangeUrl(
+        mushafId,
+        Number(verses[0].chapterId),
+        Number(verses[0].verseNumber),
+        initialData.pagination.perPage,
+      )
+    : '';
+  const { data: pageBookmarks } = useSWRImmutable(
+    verses && isLoggedIn() ? bookmarksRangeUrl : null,
+    async () => {
+      const response = await getPageBookmarks(
+        mushafId,
+        Number(verses[0].chapterId),
+        Number(verses[0].verseNumber),
+        initialData.pagination.perPage,
+      );
+      return response;
     },
   );
 
@@ -127,6 +167,8 @@ const TranslationPage: React.FC<Props> = ({
               verse={verse}
               key={verse.id}
               quranReaderStyles={quranReaderStyles}
+              pageBookmarks={pageBookmarks}
+              bookmarksRangeUrl={bookmarksRangeUrl}
             />
           </div>
         );

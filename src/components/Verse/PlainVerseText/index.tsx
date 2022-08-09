@@ -48,7 +48,7 @@ const PlainVerseText: React.FC<Props> = ({
           quranFont !== QuranFont.Tajweed,
       })}
     >
-      <div className={classNames(styles.verseText, styles.verseTextWrap)}>
+      <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
         {words?.map((word) => {
           if (isQcfFont) {
             return (

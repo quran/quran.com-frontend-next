@@ -1,0 +1,65 @@
+@use "src/styles/breakpoints";
+
+.container {
+  padding: var(--spacing-mega);
+  position: relative;
+}
+.title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-jumbo);
+  color: var(--color-success-medium);
+  margin-block-end: var(--spacing-small);
+}
+
+.textsContainer {
+  margin-block-end: calc(1.5 * var(--spacing-medium));
+}
+.text {
+  color: var(--color-success-medium);
+  & + & {
+    margin-block-start: var(--spacing-xsmall);
+  }
+}
+
+.actionsContainer {
+  margin-block-start: var(--spacing-medium);
+}
+
+.action {
+  width: 100%;
+  @include breakpoints.tablet {
+    width: auto;
+  }
+  margin-inline-end: var(--spacing-medium);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}
+
+.closeIcon {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  margin-block-start: var(--spacing-small);
+  margin-inline-end: var(--spacing-small);
+}
+
+.outerContainer {
+  display: flex;
+}
+
+.illustrationContainer {
+  display: none;
+  background-color: var(--color-success-faded);
+  color: var(--color-success-medium);
+  @include breakpoints.tablet {
+    display: inline-flex;
+    padding: var(--spacing-medium);
+    width: calc(10 * var(--spacing-mega));
+  }
+}
+
+.modalSize {
+  @include breakpoints.tablet {
+    max-width: calc(50.5 * var(--spacing-medium));
+  }
+}

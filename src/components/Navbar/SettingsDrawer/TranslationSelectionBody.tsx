@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 
-import Fuse from 'fuse.js';
+import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
 
@@ -14,44 +14,55 @@ import styles from './SearchSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';
+import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
-  selectSelectedTranslations,
+  selectTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
 import {
-  logEmptySearchResults,
   logValueChange,
   logItemSelectionChange,
+  logEmptySearchResults,
 } from 'src/utils/eventLogger';
+import filterTranslations from 'src/utils/filter-translations';
 import { getLocaleName } from 'src/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';
 import QueryParam from 'types/QueryParam';
 
-const filterTranslations = (
-  translations: AvailableTranslation[],
-  searchQuery: string,
-): AvailableTranslation[] => {
-  const fuse = new Fuse(translations, {
-    keys: ['name', 'languageName', 'authorName', 'translatedName.name'],
-    threshold: 0.3,
-  });
-
-  const filteredTranslations = fuse.search(searchQuery).map(({ item }) => item);
-  if (!filteredTranslations.length) {
-    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
-  }
-  return filteredTranslations;
-};
-
 const TranslationSelectionBody = () => {
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const router = useRouter();
-  const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const translationsState = useSelector(selectTranslations);
+  const { selectedTranslations } = translationsState;
   const [searchQuery, setSearchQuery] = useState('');
+
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {number[]} value
+   * @param {Action} action
+   */
+  const onTranslationsSettingsChange = useCallback(
+    (value: number[], action: Action, undoAction: Action) => {
+      onSettingsChange(
+        'selectedTranslations',
+        value,
+        action,
+        undoAction,
+        PreferenceGroup.TRANSLATIONS,
+      );
+    },
+    [onSettingsChange],
+  );
 
   const onTranslationsChange = useCallback(
     (selectedTranslationId: number) => {
@@ -65,14 +76,18 @@ const TranslationSelectionBody = () => {
 
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
-        dispatch(setSelectedTranslations({ translations: nextTranslations, locale: lang }));
+        onTranslationsSettingsChange(
+          nextTranslations,
+          setSelectedTranslations({ translations: nextTranslations, locale: lang }),
+          setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
+        );
         if (nextTranslations.length) {
           router.query[QueryParam.Translations] = nextTranslations.join(',');
           router.push(router, undefined, { shallow: true });
         }
       };
     },
-    [dispatch, lang, router, selectedTranslations],
+    [lang, onTranslationsSettingsChange, router, selectedTranslations],
   );
 
   const renderTranslationGroup = useCallback(
@@ -106,14 +121,17 @@ const TranslationSelectionBody = () => {
   return (
     <div>
       <div className={styles.searchInputContainer}>
-        <Input
-          prefix={<IconSearch />}
-          id="translations-search"
-          value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder={t('settings.search-translations')}
-          fixedWidth={false}
-        />
+        <SpinnerContainer isLoading={isLoading}>
+          <Input
+            prefix={<IconSearch />}
+            id="translations-search"
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder={t('settings.search-translations')}
+            fixedWidth={false}
+            containerClassName={styles.input}
+          />
+        </SpinnerContainer>
       </div>
       <DataFetcher
         queryKey={makeTranslationsUrl(lang)}
@@ -121,6 +139,11 @@ const TranslationSelectionBody = () => {
           const filteredTranslations = searchQuery
             ? filterTranslations(data.translations, searchQuery)
             : data.translations;
+
+          if (!filteredTranslations.length) {
+            logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+          }
+
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');
           const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];

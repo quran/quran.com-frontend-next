@@ -34,9 +34,9 @@ $link-shadow: 0px 3px 11px 1px rgb(0 0 0 / 3%);
 
   > span {
     width: max-content;
-    opacity: var(--opacity-75);
+    color: var(--color-text-default);
     &:hover {
-      opacity: 1;
+      color: var(--color-text-faded);
     }
   }
 }

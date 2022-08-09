@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
+import SliceName from 'src/redux/types/SliceName';
+
 export type InitialState = {
   isSearchDrawerVoiceFlowStarted: boolean;
   isCommandBardVoiceFlowStarted: boolean;
@@ -13,7 +15,7 @@ export const initialState: InitialState = {
 };
 
 export const voiceSearchSlice = createSlice({
-  name: 'voiceSearch',
+  name: SliceName.VOICE_SEARCH,
   initialState,
   reducers: {
     toggleIsSearchDrawerVoiceFlowStarted: (state) => ({

@@ -1,11 +1,10 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import groupBy from 'lodash/groupBy';
 
 import styles from './Filter.module.scss';
+import TranslationGroup from './TranslationGroup';
 
-import Combobox from 'src/components/dls/Forms/Combobox';
-import { getTranslatedLabelWithLanguage } from 'src/utils/input';
 import AvailableTranslation from 'types/AvailableTranslation';
 
 interface Props {
@@ -16,48 +15,23 @@ interface Props {
 
 const TranslationsFilter: React.FC<Props> = memo(
   ({ translations, selectedTranslations, onTranslationChange }) => {
-    const { t } = useTranslation('search');
-    /*
-      We need to only pick the translations that exist in the list of available translations
-      to avoid selecting non-existent items since the translations can come from the URL path
-      which the user can edit to enter invalid values.
-    */
-    const matchedTranslations = selectedTranslations
-      ? translations
-          .filter((translation) =>
-            selectedTranslations.split(',').includes(translation.id.toString()),
-          )
-          .map((translation) => translation.id.toString())
-      : [];
-
-    const translationsItems = useMemo(
-      () =>
-        translations.map((translation) => {
-          const stringId = translation.id.toString();
-          return {
-            id: stringId,
-            name: stringId,
-            value: stringId,
-            label: getTranslatedLabelWithLanguage(translation),
-          };
-        }),
-      [translations],
-    );
-
+    const translationByLanguages = groupBy(translations, 'languageName');
     return (
       <div className={styles.comboboxItems}>
-        <Combobox
-          fixedWidth={false}
-          isMultiSelect
-          id="translationsFilter"
-          value={matchedTranslations}
-          items={translationsItems}
-          onChange={onTranslationChange}
-          placeholder={t('translation-select')}
-          label={<div className={styles.dropdownLabel}>{t('common:translation')}</div>}
-        />
+        {Object.entries(translationByLanguages).map(([language, languageTranslations]) => {
+          return (
+            <TranslationGroup
+              language={language}
+              key={language}
+              translations={languageTranslations}
+              onTranslationsChange={(nextTranslations) => onTranslationChange(nextTranslations)}
+              selectedTranslations={selectedTranslations.split(',')}
+            />
+          );
+        })}
       </div>
     );
   },
 );
+
 export default TranslationsFilter;

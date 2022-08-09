@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
@@ -8,9 +8,9 @@ import { useRouter } from 'next/router';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
+import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
-import { getAllChaptersData } from 'src/utils/chapter';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
@@ -34,8 +34,8 @@ const SurahList = () => {
   const chapterIds = useChapterIdsByUrlPath(lang);
   const currentChapterId = chapterIds[0];
   const router = useRouter();
+  const chaptersData = useContext(DataContext);
 
-  const chaptersData = getAllChaptersData(lang);
   const [searchQuery, setSearchQuery] = useState('');
 
   const chapterDataArray = useMemo(
@@ -83,7 +83,7 @@ const SurahList = () => {
       <div className={styles.listContainer}>
         <div className={styles.list}>
           {filteredChapters.map((chapter) => (
-            <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)} prefetch={false}>
+            <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)} shouldPrefetch={false}>
               <div
                 ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
                 className={classNames(styles.listItem, {

@@ -1,6 +1,35 @@
 {
     "about": "Hakkımızda",
     "and": "ve",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Yeniliklere bakın",
+                "title": "Kuran.com'a hoş geldiniz <br> <\/br> Kullanıcı Hesabı Beta"
+            },
+            "slide-2": {
+                "action": "Sonraki",
+                "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
+                "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
+            },
+            "slide-3": {
+                "action": "Tamam anladım",
+                "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
+                "title": "Düşüncelerinizi duymak istiyoruz"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "Ayarları değiştir",
+        "drawer-close": "Çekmeceyi Kapat",
+        "msg-close": "Mesajı Kapat",
+        "nav-drawer-open": "Gezinti Çekmecesini Aç",
+        "play-surah": "{{surahName}} çal",
+        "read-ayah-refls": "Ayah Yansımalarını Okuyun",
+        "select-lng": "Dil Seçin",
+        "share-ayah": "Ayah'ı paylaşın",
+        "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat"
+    },
     "audio": {
         "auto-scroll": {
             "off": "Kapalı",
@@ -18,7 +47,6 @@
             "download": "İndir",
             "full-surah": "Tam sure",
             "mismatch": "Bunun yerine {{currentReadingChapter}} çalmak istiyorsanız \"Baştan Başla\"yı tıklayın.",
-            "next-ayah": "Sonraki Ayet",
             "pause": "Duraklat",
             "pause-audio": "Sesi Duraklat",
             "play": "Çal",
@@ -64,6 +92,7 @@
         "sub-header": "İslami teknoloji inşa eden önde gelen toplulukla işbirliği yapmak ve katılmak için Kuran.com Discord'a kaydolun.",
         "title": "Toplum"
     },
+    "complete-sign-up": "Kaydınızı tamamlayın",
     "continue": "Devam et",
     "copied": "kopyalandı",
     "copied-to-clipboard": "Panoya kopyalandı",
@@ -74,9 +103,21 @@
     },
     "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "Geliştiriciler",
+    "donate": "Bağış yapmak",
+    "email-verification": {
+        "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
+        "email-sent": "Az önce <strong> {{email}} <\/strong> adresine bir e-posta gönderdik.",
+        "email-verification": "Eposta Doğrulama",
+        "resend-email": "Emaili yeniden gönder",
+        "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
+        "verify-code": "Doğrulama kodu"
+    },
     "error": {
+        "bookmark-sync": "Yer imi senkronize değil.",
+        "email-login-fail": "E-posta ile oturum açılamadı. Lütfen tekrar deneyin",
         "general": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
-        "offline": "Bağlantınızı kaybettiniz gibi görünüyor. Lütfen kontrol edip tekrar deneyin."
+        "offline": "Bağlantınızı kaybettiniz gibi görünüyor. Lütfen kontrol edip tekrar deneyin.",
+        "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi."
     },
     "feedback": "Geri Bildirim",
     "fonts": {
@@ -95,9 +136,22 @@
         "text_uthmani": "Osmanca"
     },
     "footer": {
-        "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır."
+        "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır.",
+        "rights": "Her hakkı saklıdır",
+        "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
+    },
+    "form": {
+        "code": "Doğrulama kodu",
+        "email": "E-posta",
+        "firstName": "İlk adı",
+        "lastName": "Soy isim"
     },
     "from": "İtibaren",
+    "fundraising": {
+        "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
+        "learn-more": "Daha fazla bilgi edin",
+        "title": "Aylık Bağışçı Olun"
+    },
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
@@ -109,6 +163,8 @@
     "languages": "Diller",
     "less": "Daha az",
     "loading": "Yükleniyor",
+    "login": "Giriş yapmak",
+    "logout": "Çıkış Yap",
     "menu": "Menü",
     "mobile-apps": "Mobil Uygulamalar",
     "mode": "Mod",
@@ -116,6 +172,7 @@
     "navigate": "Gezin",
     "network": "Ağ",
     "next": "Sonraki",
+    "next-ayah": "Sonraki Ayah",
     "no": "Numara",
     "none": "Hiçbiri",
     "off": "Kapalı",
@@ -124,10 +181,21 @@
     "pages": "Sayfalar",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "popular-links": "Popüler Bağlantılar",
+    "popup": {
+        "cta-1": "Aylık Bağış Yapın",
+        "cta-2": "Bir Kez Bağış Yapın",
+        "cta-3": "Daha fazla bilgi edin",
+        "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
+        "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
+        "text-2": "Kuran.com sürekli sadaka (Sadaqah Jariyah) için mükemmel bir fırsattır. Lütfen Ahiretinize aylık (veya bir kerelik) bağışçı olarak yatırım yapmayı düşünün.",
+        "title": "Sevgili Kuran Sahabi,"
+    },
     "powered-by": "Tarafından desteklenmektedir",
     "prev": "Önceki",
+    "previous-ayah": "Önceki Ayet",
     "privacy": "Gizlilik",
     "product-updates": "Ürün Güncellemeleri",
+    "profile": "Profil",
     "q-reflect": "KuranYansıtmak",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radyo",
@@ -136,10 +204,12 @@
         "translation": "Tercüme"
     },
     "reciter": "Okuyucu",
+    "reciters": "okuyucular",
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
     "retry": "Yeniden dene",
     "search-for": "'{{searchQuery}}' için arama yapın",
+    "search-results": "{{count}} arama sonucu",
     "search": {
         "filters": "Filtreler",
         "hint": "Aramayı deneyin",
@@ -188,11 +258,15 @@
         "descending": "Azalan"
     },
     "style": "Stil",
+    "submit": "Göndermek",
     "surah": "Sure",
     "tafsir": {
         "font-size": "tefsir yazı tipi boyutu",
         "group-message": "{{from}} ile {{to}} arasındaki ayetler grubu için bir tefsir okuyorsunuz",
+        "no-text": "{{tafsirName}} mevcut ayet için mevcut değil.",
         "surah": "Tefsir Suresi",
+        "tafsir-desc": "{{tafsirName}} {{verseNumber}} Suresi {{surahName}} için {{tafsirName}} okuyun",
+        "tafsirs-desc": "{{ayahNumber}} {{surahName}} tefsirlerini güvenilir tefsir alimleri tarafından okuyun",
         "title": "Tefsir"
     },
     "tarteel": {
@@ -215,6 +289,12 @@
     "translations": "Çeviriler",
     "transliteration": "Harf çevirisi",
     "type": "Tip",
+    "undo": "Geri alma",
+    "validation": {
+        "invalid-email": "{{field}} geçerli bir e-posta adresi olmalıdır",
+        "invalid-field": "Lütfen geçerli bir {{field}} değeri girin",
+        "required-field": "{{field}} gerekli"
+    },
     "verse": "Ayet",
     "verse-bookmark-removed": "Ayet imi kaldırıldı!",
     "verse-bookmarked": "Ayet işaretlendi!",

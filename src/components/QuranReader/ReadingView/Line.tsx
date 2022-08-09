@@ -1,7 +1,7 @@
 import React, { RefObject, useEffect, memo } from 'react';
 
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { verseFontChanged } from '../utils/memoization';
 
@@ -12,6 +12,7 @@ import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsLineHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
+import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from 'src/utils/verse';
 import Word from 'types/Word';
@@ -29,7 +30,11 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const isHighlighted = useSelector(selectIsLineHighlighted(words.map((word) => word.verseKey)));
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual);
+  const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
+    selectWordByWordPreferences,
+    shallowEqual,
+  );
 
   useEffect(() => {
     if (isHighlighted && enableAutoScrolling) {
@@ -39,6 +44,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
 
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
+  const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
 
   return (
     <div
@@ -59,6 +65,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       <div
         className={classNames(styles.line, {
           [styles.mobileInline]: isBigTextLayout,
+          [styles.fixedWidth]: !isWordByWordLayout,
         })}
       >
         <VerseText

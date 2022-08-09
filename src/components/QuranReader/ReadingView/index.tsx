@@ -124,22 +124,25 @@ const ReadingView = ({
     });
   }, [currentPageIndex]);
 
-  useHotkeys(
-    'Up',
+  const allowKeyboardNavigation = quranTextFontScale <= 5;
+  const onUpClicked = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
       scrollToPreviousPage();
     },
     [scrollToPreviousPage],
   );
-  useHotkeys(
-    'Down',
+
+  const onDownClicked = useCallback(
     (event: KeyboardEvent) => {
       event.preventDefault();
       scrollToNextPage();
     },
     [scrollToNextPage],
   );
+
+  useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
+  useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
   const itemContentRenderer = (pageIndex: number) => (
     <PageContainer
@@ -187,20 +190,29 @@ const ReadingView = ({
             totalCount={pagesCount}
             itemContent={itemContentRenderer}
             components={{
-              Footer: () => (
-                <EndOfScrollingControls
-                  quranReaderDataType={quranReaderDataType}
-                  lastVerse={verses[verses.length - 1]}
-                />
-              ),
+              Footer: () => {
+                const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
+                const lastVerse = pageVerses?.[pageVerses.length - 1];
+                if (lastVerse)
+                  return (
+                    <EndOfScrollingControls
+                      quranReaderDataType={quranReaderDataType}
+                      lastVerse={lastVerse}
+                      initialData={initialData}
+                    />
+                  );
+                return null;
+              },
             }}
           />
         )}
       </div>
-      <PageNavigationButtons
-        scrollToNextPage={scrollToNextPage}
-        scrollToPreviousPage={scrollToPreviousPage}
-      />
+      {allowKeyboardNavigation && (
+        <PageNavigationButtons
+          scrollToNextPage={scrollToNextPage}
+          scrollToPreviousPage={scrollToPreviousPage}
+        />
+      )}
     </>
   );
 };

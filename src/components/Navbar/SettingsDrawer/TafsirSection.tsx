@@ -12,7 +12,7 @@ import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
-  MAXIMUM_FONT_STEP,
+  MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
@@ -109,7 +109,9 @@ const TafsirSection = () => {
           <Counter
             count={tafsirFontScale}
             onDecrement={tafsirFontScale === MINIMUM_FONT_STEP ? null : onFontScaleDecreaseClicked}
-            onIncrement={tafsirFontScale === MAXIMUM_FONT_STEP ? null : onFontScaleIncreaseClicked}
+            onIncrement={
+              tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP ? null : onFontScaleIncreaseClicked
+            }
           />
         </Section.Row>
       </Section>

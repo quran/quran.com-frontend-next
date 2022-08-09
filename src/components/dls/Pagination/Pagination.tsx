@@ -97,7 +97,7 @@ const Pagination: React.FC<Props> = ({
         <Button
           tooltip={t('prev')}
           variant={ButtonVariant.Ghost}
-          disabled={currentPage === 1}
+          isDisabled={currentPage === 1}
           onClick={onPrevious}
         >
           <PreviousIcon />
@@ -128,7 +128,7 @@ const Pagination: React.FC<Props> = ({
         <Button
           tooltip={t('next')}
           variant={ButtonVariant.Ghost}
-          disabled={currentPage === paginationRange[paginationRange.length - 1]}
+          isDisabled={currentPage === paginationRange[paginationRange.length - 1]}
           onClick={onNext}
         >
           <NextIcon />

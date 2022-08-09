@@ -81,6 +81,7 @@ export const getTranslationViewRequestKey = ({
       reciter,
       page,
       from: initialData.metaData.from,
+      perPage: initialData.pagination.perPage,
       to: initialData.metaData.to,
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
@@ -107,15 +108,20 @@ export const getReaderViewRequestKey = ({
   wordByWordLocale,
   pageVersesRange,
 }: ReadingViewRequestKeyInput): string => {
-  return makePageVersesUrl(pageNumber, locale, {
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-    reciter,
-    perPage: 'all',
-    wordTranslationLanguage: wordByWordLocale,
-    filterPageWords: true,
-    ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
-  });
+  return makePageVersesUrl(
+    pageNumber,
+    locale,
+    {
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      reciter,
+      perPage: 'all',
+      wordTranslationLanguage: wordByWordLocale,
+      filterPageWords: true,
+      ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
+    },
+    false,
+  );
 };
 
 export const getPagesLookupParams = (

@@ -1,4 +1,4 @@
-import { getLangFullLocale } from './locale';
+import { getLangFullLocale, LANG_LOCALE_MAP } from './locale';
 
 // Converts seconds to (hours), minutes, and seconds
 export const secondsFormatter = (seconds: number, locale: string) => {
@@ -38,3 +38,33 @@ export const getEarliestDate = (dates: string[]): number =>
  * @returns {number}
  */
 export const parseDate = (date: string): number => Date.parse(date);
+
+/**
+ * Format date to a string
+ *
+ * @param {Date} date
+ * @param {string} locale
+ * @returns {string} date
+ */
+export const formatDateRelatively = (date: Date, locale: string, now: Date = new Date()) => {
+  const fullLocale = LANG_LOCALE_MAP[locale];
+
+  // Formatter for "Today" and "Yesterday" etc
+  const relative = new Intl.RelativeTimeFormat(fullLocale, { numeric: 'auto' });
+
+  const nowDate = now.setHours(0, 0, 0, 0);
+  const then = date.setHours(0, 0, 0, 0);
+  const days = (then - nowDate) / 86400000;
+
+  if (days < -365) {
+    const years = Math.round(days / 365);
+    return relative.format(years, 'year');
+  }
+
+  if (days < -7) {
+    const weeks = Math.round(days / 7);
+    return relative.format(weeks, 'weeks');
+  }
+
+  return relative.format(days, 'day');
+};

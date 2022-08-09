@@ -1,0 +1,13 @@
+.translationsListContainer {
+  margin-block-start: var(--spacing-large);
+}
+.translationContainer {
+  margin-block-end: var(--spacing-medium);
+}
+.arabicVerseContainer {
+  margin-block-start: var(--spacing-large);
+}
+
+.verseContainer + .verseContainer {
+  margin-block-start: var(--spacing-mega);
+}

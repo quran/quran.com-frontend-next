@@ -10,7 +10,9 @@ import {
   decreaseTafsirFontScale,
   selectQuranReaderStyles,
   setQuranFont,
-  MAXIMUM_FONT_STEP,
+  MAXIMUM_TAFSIR_FONT_STEP,
+  MAXIMUM_QURAN_FONT_STEP,
+  MAXIMUM_TRANSLATIONS_FONT_STEP,
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
 } from 'src/redux/slices/QuranReader/styles';
@@ -60,7 +62,7 @@ const FontAdjustment = (): JSX.Element => {
         <button
           onClick={() => dispatch({ type: increaseQuranTextFontScale.type })}
           type="button"
-          disabled={quranTextFontScale === MAXIMUM_FONT_STEP}
+          disabled={quranTextFontScale === MAXIMUM_QURAN_FONT_STEP}
         >
           +
         </button>
@@ -78,7 +80,7 @@ const FontAdjustment = (): JSX.Element => {
         <button
           onClick={() => dispatch({ type: increaseTranslationFontScale.type })}
           type="button"
-          disabled={translationFontScale === MAXIMUM_FONT_STEP}
+          disabled={translationFontScale === MAXIMUM_TRANSLATIONS_FONT_STEP}
         >
           +
         </button>
@@ -96,7 +98,7 @@ const FontAdjustment = (): JSX.Element => {
         <button
           onClick={() => dispatch({ type: increaseTafsirFontScale.type })}
           type="button"
-          disabled={tafsirFontScale === MAXIMUM_FONT_STEP}
+          disabled={tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP}
         >
           +
         </button>

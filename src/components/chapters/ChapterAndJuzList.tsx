@@ -3,6 +3,7 @@ import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 
 import CaretDownIcon from '../../../public/icons/caret-down.svg';
 import Link from '../dls/Link/Link';
@@ -10,7 +11,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
-import JuzView from './JuzView';
+import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
 
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
@@ -20,6 +21,11 @@ enum View {
   Surah = 'surah',
   Juz = 'juz',
 }
+
+const JuzView = dynamic(() => import('./JuzView'), {
+  ssr: false,
+  loading: () => <ChapterAndJuzListSkeleton />,
+});
 
 type ChapterAndJuzListProps = {
   chapters: Chapter[];
@@ -31,16 +37,16 @@ enum Sort {
 }
 
 const MOST_VISITED_CHAPTERS = {
-  67: false,
-  2: false,
-  36: false,
-  1: false,
-  18: false,
-  56: false,
-  55: false,
-  3: false,
-  4: false,
-  32: false,
+  1: true,
+  2: true,
+  3: true,
+  4: true,
+  18: true,
+  32: true,
+  36: true,
+  55: true,
+  56: true,
+  67: true,
 };
 
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
@@ -112,7 +118,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link
                 href={`/${chapter.id}`}
-                prefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] !== false}
+                shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
               >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}

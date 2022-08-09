@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getTafsirsInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import resetSettings from 'src/redux/slices/reset-settings';
+import SliceName from 'src/redux/types/SliceName';
+import TafsirsSettings from 'src/redux/types/TafsirsSettings';
 import { areArraysEqual } from 'src/utils/array';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const tafsirsSlice = createSlice({
-  name: 'tafsirs',
+  name: SliceName.TAFSIRS,
   initialState: getTafsirsInitialState(),
   reducers: {
     setSelectedTafsirs: (state, action: PayloadAction<{ tafsirs: string[]; locale: string }>) => ({
@@ -25,11 +29,28 @@ export const tafsirsSlice = createSlice({
     builder.addCase(resetSettings, (state, action) => {
       return getTafsirsInitialState(action.payload.locale);
     });
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences, locale },
+      } = action;
+      const remotePreferences = userPreferences[PreferenceGroup.TAFSIRS] as TafsirsSettings;
+      if (remotePreferences) {
+        const { selectedTafsirs: defaultTafsirs } = getTafsirsInitialState(locale);
+        const { selectedTafsirs: remoteTafsirs } = remotePreferences;
+        return {
+          ...state,
+          ...remotePreferences,
+          isUsingDefaultTafsirs: areArraysEqual(defaultTafsirs, remoteTafsirs),
+        };
+      }
+      return state;
+    });
   },
 });
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
+export const selectTafsirs = (state: RootState) => state.tafsirs;
 export const selectSelectedTafsirs = (state: RootState) => state.tafsirs.selectedTafsirs;
 export const selectIsUsingDefaultTafsirs = (state: RootState) =>
   state.tafsirs.isUsingDefaultTafsirs;

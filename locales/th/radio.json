@@ -10,16 +10,17 @@
             "title": "บทสวดยอดนิยม"
         },
         "surah-al-kahf": {
-            "description": "ฟัง Surah Alkahf ซ้ำ",
-            "title": "Surah Al-Kahf"
+            "description": "ฟังซ้ำซูเราะห์อัล-กะฮฟ์",
+            "title": "ซูเราะห์ อัล-กะฮฟ์"
         },
         "yaseen-alwaqiah-al-mulk": {
-            "description": "Surahs จากการดูแลของผู้อ่าน",
+            "description": "ซูเราะห์จากการคัดสรรของผู้อ่าน",
             "title": "ยาซีน อัล-วาเกียห์ อัล-มุลค์"
         }
     },
     "curated-stations": "สถานีดูแลจัดการ",
     "pause-radio": "หยุดวิทยุชั่วคราว",
     "play-radio": "เล่นวิทยุ",
+    "radio-desc": "ฟังการอ่านอัลกุรอานที่สวยงามไม่หยุดโดยผู้อ่านหลายคน",
     "reciter-stations": "สถานีผู้อ่าน"
 }

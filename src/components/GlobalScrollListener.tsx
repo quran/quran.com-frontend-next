@@ -3,7 +3,6 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
-import { setIsMobileMinimizedForScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { setIsVisible } from 'src/redux/slices/navbar';
 import { setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 
@@ -18,11 +17,9 @@ const GlobalScrollListener = () => {
        * a down direction and hides the navbar, context menu and audioPlayer.
        */
       if (newYPosition > 50 && direction === ScrollDirection.Down) {
-        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: true });
         dispatch({ type: setIsExpanded.type, payload: false });
         dispatch({ type: setIsVisible.type, payload: false });
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
-        dispatch({ type: setIsMobileMinimizedForScrolling.type, payload: false });
         dispatch({ type: setIsExpanded.type, payload: true });
         dispatch({ type: setIsVisible.type, payload: true });
       }

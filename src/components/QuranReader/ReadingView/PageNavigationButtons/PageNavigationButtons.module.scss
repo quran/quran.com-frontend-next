@@ -2,14 +2,19 @@
 @use "src/styles/constants";
 
 .buttonsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: fixed;
-  inset-block-end: var(--spacing-mega);
-  transition: var(--transition-regular);
-  z-index: var(--z-index-sticky);
-  inset-inline-end: var(--spacing-large);
+  // disable navigation buttons on mobile
+  display: none;
+
+  @include breakpoints.tablet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    inset-block-end: var(--spacing-mega);
+    transition: var(--transition-regular);
+    z-index: var(--z-index-sticky);
+    inset-inline-end: var(--spacing-large);
+  }
 }
 
 .prevButton {
