@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 export type ContextMenu = {
   isExpanded: boolean;
@@ -9,7 +10,7 @@ export type ContextMenu = {
 const initialState: ContextMenu = { isExpanded: true };
 
 export const contextMenuSlice = createSlice({
-  name: 'contextMenu',
+  name: SliceName.CONTEXT_MENU,
   initialState,
   reducers: {
     setIsExpanded: (state: ContextMenu, action: PayloadAction<boolean>) => ({

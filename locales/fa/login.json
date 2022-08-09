@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "در انتظار تأیید",
+    "continue-apple": "با اپل ادامه دهید",
+    "continue-email": "با ایمیل ادامه دهید",
+    "continue-facebook": "با فیس بوک ادامه دهید",
+    "continue-google": "با گوگل ادامه دهید",
+    "email-placeholder": "آدرس ایمیل",
+    "login-error": {
+        "AuthenticationError": "احراز هویت ناموفق بود. لطفاً بعداً دوباره امتحان کنید",
+        "TokenExpiredError": "شما از سیستم خارج شده اید، لطفا دوباره وارد شوید."
+    },
+    "login-title": "وارد سایت Quran.com شوید",
+    "other-options": "سایر گزینه های ورود",
+    "verify-code": "بررسی کنید که کد امنیتی ارائه شده با متن زیر مطابقت دارد:"
+}

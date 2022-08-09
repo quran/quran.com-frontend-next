@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
@@ -8,14 +9,19 @@ import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
 import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu, { PopoverMenuExpandDirection } from '../dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './LanguageSelector.module.scss';
 
 import i18nConfig from 'i18n.json';
+import resetSettings from 'src/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
-import resetSettings from 'src/redux/slices/reset-settings';
+import { addOrUpdateUserPreference } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
+import { setLocaleCookie } from 'src/utils/cookies';
 import { logEvent, logValueChange } from 'src/utils/eventLogger';
 import { getLocaleName } from 'src/utils/locale';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const { locales } = i18nConfig;
 
@@ -23,8 +29,6 @@ const options = locales.map((lng) => ({
   label: getLocaleName(lng),
   value: lng,
 }));
-
-const COOKIE_PERSISTENCE_PERIOD_MS = 86400000000000; // maximum milliseconds-since-the-epoch value https://stackoverflow.com/a/56980560/1931451
 
 type LanguageSelectorProps = {
   shouldShowSelectedLang?: boolean;
@@ -38,6 +42,7 @@ const LanguageSelector = ({
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
+  const toast = useToast();
 
   /**
    * When the user changes the language, we will:
@@ -58,11 +63,38 @@ const LanguageSelector = ({
       dispatch(resetSettings(newLocale));
     }
     logValueChange('locale', lang, newLocale);
+
     await setLanguage(newLocale);
-    const date = new Date();
-    date.setTime(COOKIE_PERSISTENCE_PERIOD_MS);
-    // eslint-disable-next-line i18next/no-literal-string
-    document.cookie = `NEXT_LOCALE=${newLocale};expires=${date.toUTCString()};path=/`;
+    setLocaleCookie(newLocale);
+
+    if (isLoggedIn()) {
+      addOrUpdateUserPreference(
+        PreferenceGroup.LANGUAGE,
+        newLocale,
+        PreferenceGroup.LANGUAGE,
+      ).catch(() => {
+        toast(t('error.pref-persist-fail'), {
+          status: ToastStatus.Warning,
+          actions: [
+            {
+              text: t('undo'),
+              primary: true,
+              onClick: async () => {
+                await setLanguage(newLocale);
+                setLocaleCookie(newLocale);
+              },
+            },
+            {
+              text: t('continue'),
+              primary: false,
+              onClick: () => {
+                // do nothing
+              },
+            },
+          ],
+        });
+      });
+    }
   };
 
   return (

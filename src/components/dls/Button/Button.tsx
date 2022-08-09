@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, ButtonHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 
@@ -58,6 +58,7 @@ export type ButtonProps = {
   shouldPrefetch?: boolean;
   isNewTab?: boolean;
   ariaLabel?: string;
+  htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   children?: React.ReactNode;
 };
 
@@ -82,6 +83,7 @@ const Button: React.FC<ButtonProps> = ({
   shouldPrefetch: prefetch = true,
   isNewTab: newTab,
   ariaLabel,
+  htmlType,
   ...props
 }) => {
   const direction = useDirection();
@@ -120,8 +122,10 @@ const Button: React.FC<ButtonProps> = ({
   if (isLoading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
   else prefixFinal = prefix;
 
-  if (href && !disabled)
-    return (
+  let content;
+
+  if (href && !disabled) {
+    content = (
       <Link
         href={href}
         isNewTab={newTab}
@@ -144,18 +148,11 @@ const Button: React.FC<ButtonProps> = ({
         </div>
       </Link>
     );
-
-  return (
-    <Wrapper
-      shouldWrap={!!tooltip}
-      wrapper={(tooltipChildren) => (
-        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
-          {tooltipChildren}
-        </Tooltip>
-      )}
-    >
+  } else {
+    content = (
       <button
-        type="button"
+        // eslint-disable-next-line react/button-has-type
+        type={htmlType}
         dir={direction}
         className={classes}
         disabled={disabled}
@@ -176,6 +173,19 @@ const Button: React.FC<ButtonProps> = ({
           </span>
         )}
       </button>
+    );
+  }
+
+  return (
+    <Wrapper
+      shouldWrap={!!tooltip}
+      wrapper={(tooltipChildren) => (
+        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
+          {tooltipChildren}
+        </Tooltip>
+      )}
+    >
+      {content}
     </Wrapper>
   );
 };

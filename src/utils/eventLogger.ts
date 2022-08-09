@@ -22,6 +22,25 @@ export const logButtonClick = (buttonName: string) => {
 };
 
 /**
+ * Log when a form is submitted.
+ *
+ * @param {string} formName
+ */
+export const logFormSubmission = (formName: string) => {
+  logEvent(`${formName}_form_submitted`);
+};
+
+/**
+ * Log when a carousel slide is completed.
+ *
+ * @param {string} carouselName
+ * @param {number|string} slideNumber
+ */
+export const logCarouselSlideCompletion = (carouselName: string, slideNumber: number | string) => {
+  logEvent(`${carouselName}_slide_${slideNumber}_completed`);
+};
+
+/**
  * Log when a value changes.
  *
  * @param {string} name

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--spacing-mega);
+  padding-block: var(--spacing-mega);
+}
+
+.title {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.strong {
+  font-weight: var(--font-weight-bold);
+}
+
+.emailSent {
+  text-align: center;
+  padding-block-end: var(--spacing-small);
+}

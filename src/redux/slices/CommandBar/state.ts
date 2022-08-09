@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 export type CommandBar = {
@@ -13,7 +14,7 @@ const MAXIMUM_RECENT_NAVIGATIONS = 5;
 const initialState: CommandBar = { isOpen: false, recentNavigations: [] };
 
 export const commandBarSlice = createSlice({
-  name: 'commandBar',
+  name: SliceName.COMMAND_BAR,
   initialState,
   reducers: {
     setIsOpen: (state: CommandBar, action: PayloadAction<boolean>) => ({
