@@ -32,10 +32,6 @@ export const audioPlayerStateSlice = createSlice({
   name: SliceName.AUDIO_PLAYER_STATE,
   initialState: getAudioPlayerStateInitialState(),
   reducers: {
-    setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => ({
-      ...state,
-      isPlaying: action.payload,
-    }),
     setReciter: (state, action: PayloadAction<{ reciter: Reciter; locale: string }>) => ({
       ...state,
       isUsingDefaultReciter:
@@ -60,34 +56,6 @@ export const audioPlayerStateSlice = createSlice({
       audioData: getAudioPlayerStateInitialState(action.payload).audioData,
       audioDataStatus: getAudioPlayerStateInitialState(action.payload).audioDataStatus,
     }),
-    setRepeatSettings: (state, action) => ({
-      ...state,
-      repeatSettings: { ...action.payload.verseRepetition },
-      // reset the repeat progress when we set the new repeat settings
-      repeatProgress: { ...getAudioPlayerStateInitialState(action.payload.locale).repeatProgress },
-    }),
-    setRepeatProgress: (state, action) => ({
-      ...state,
-      repeatProgress: {
-        ...state.repeatProgress,
-        ...action.payload,
-      },
-    }),
-    finishRepeatEachVerseProgress: (state) => ({
-      ...state,
-      repeatProgress: {
-        ...state.repeatProgress,
-        repeatEachVerse: state.repeatSettings.repeatEachVerse,
-      },
-    }),
-    resetRepeatEachVerseProgress: (state, action: PayloadAction<string>) => ({
-      ...state,
-      repeatProgress: {
-        ...state.repeatProgress,
-        repeatEachVerse: getAudioPlayerStateInitialState(action.payload).repeatSettings
-          .repeatEachVerse,
-      },
-    }),
     exitRepeatMode: (state) => ({
       ...state,
       repeatSettings: {
@@ -107,10 +75,6 @@ export const audioPlayerStateSlice = createSlice({
     setShowTooltipWhenPlayingAudio: (state, action: PayloadAction<boolean>) => ({
       ...state,
       showTooltipWhenPlayingAudio: action.payload,
-    }),
-    setIsRadioMode: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      isRadioMode: action.payload,
     }),
   },
   // reset reciter to the default based on the locale
@@ -165,21 +129,15 @@ export const audioPlayerStateSlice = createSlice({
 });
 
 export const {
-  setIsPlaying,
   setReciter,
   setAudioData,
   setAudioStatus,
   resetAudioData,
   setEnableAutoScrolling,
-  setRepeatSettings,
-  setRepeatProgress,
   exitRepeatMode,
   setIsDownloadingAudio,
-  finishRepeatEachVerseProgress,
-  resetRepeatEachVerseProgress,
   setPlaybackRate,
   setShowTooltipWhenPlayingAudio,
-  setIsRadioMode,
 } = audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;
