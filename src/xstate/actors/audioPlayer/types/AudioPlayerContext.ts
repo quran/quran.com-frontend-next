@@ -12,7 +12,7 @@ interface AudioPlayerContext {
   newSurah?: number;
   newAyahNumber?: number;
   ayahNumber: number;
-  wordLocation: number;
+  wordLocation?: number;
   audioData: AudioFile;
   surahVersesCount: any;
   elapsed: number;

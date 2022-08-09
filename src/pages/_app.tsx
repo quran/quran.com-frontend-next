@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import { IdProvider } from '@radix-ui/react-id';
-import { useInterpret } from '@xstate/react';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -29,8 +28,7 @@ import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
-import { audioPlayerMachine } from 'src/xstate/actors/audioPlayer/audioPlayerMachine';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
@@ -42,7 +40,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
-  const audioPlayerService = useInterpret(audioPlayerMachine);
   const { data: userData } = useSWRImmutable(
     isLoggedIn() ? makeUserProfileUrl() : null,
     async () => {
@@ -76,7 +73,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="preconnect" href={API_HOST} />
       </Head>
       <FontPreLoader locale={locale} />
-      <AudioPlayerMachineContext.Provider value={audioPlayerService}>
+      <AudioPlayerMachineProvider>
         <ReduxProvider locale={locale}>
           <ThemeProvider>
             <IdProvider>
@@ -100,7 +97,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
           </ThemeProvider>
           <SessionIncrementor />
         </ReduxProvider>
-      </AudioPlayerMachineContext.Provider>
+      </AudioPlayerMachineProvider>
 
       <ThirdPartyScripts />
     </>

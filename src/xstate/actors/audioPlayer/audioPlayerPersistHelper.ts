@@ -1,19 +1,17 @@
-import AudioPlayerEventType from './types/AudioPlayerEventType';
-
-const AUDIO_PLAYER_LOCALSTORAGE_KEY = 'audio-player-state';
-export const persistToLocalStorage = (newState: Record<string, any>) => {
+const AUDIO_PLAYER_LOCAL_STORAGE_KEY = 'audio-player-state';
+export const persistXstateToLocalStorage = (newState: Record<string, any>) => {
   try {
-    const previousState = JSON.parse(localStorage.getItem(AUDIO_PLAYER_LOCALSTORAGE_KEY)) || {};
+    const previousState = JSON.parse(localStorage.getItem(AUDIO_PLAYER_LOCAL_STORAGE_KEY)) || {};
     const nextState = { ...previousState, ...newState };
-    localStorage.setItem(AUDIO_PLAYER_LOCALSTORAGE_KEY, JSON.stringify(nextState));
+    localStorage.setItem(AUDIO_PLAYER_LOCAL_STORAGE_KEY, JSON.stringify(nextState));
   } catch (error) {
     // TODO: log error
   }
 };
 
-export const getStateFromLocalStorage = () => {
+export const getXstateStateFromLocalStorage = () => {
   try {
-    const stateString = localStorage.getItem(AUDIO_PLAYER_LOCALSTORAGE_KEY);
+    const stateString = localStorage.getItem(AUDIO_PLAYER_LOCAL_STORAGE_KEY);
     if (stateString) {
       return JSON.parse(stateString) || {};
     }
@@ -21,18 +19,5 @@ export const getStateFromLocalStorage = () => {
   } catch (e) {
     // TODO: log error
     return {};
-  }
-};
-
-type AudioPlayerEventTypeKey = AudioPlayerEventType['type'];
-const eventTypeToDataPersistSelector: { [key in AudioPlayerEventTypeKey]?: any } = {
-  CHANGE_RECITER: ({ reciterId }) => ({ reciterId }),
-  SET_PLAYBACK_SPEED: ({ playbackRate }) => ({ playbackRate }),
-};
-export const persistXstateContext = (event: AudioPlayerEventType) => {
-  const getDataToPersistFromEvent = eventTypeToDataPersistSelector[event.type];
-  const dataToPersist = getDataToPersistFromEvent?.(event);
-  if (dataToPersist) {
-    persistToLocalStorage(dataToPersist);
   }
 };
