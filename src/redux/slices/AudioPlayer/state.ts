@@ -21,16 +21,8 @@ export const selectReciterId = (state: RootState) => state.audioPlayerState.reci
 export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.isUsingDefaultReciter;
 export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
-export const selectAudioDataStatus = (state: RootState) => state.audioPlayerState.audioDataStatus;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
-export const selectPlaybackRate = (state: RootState) => state.audioPlayerState.playbackRate;
-export const selectRepeatSettings = (state: RootState) => state.audioPlayerState.repeatSettings;
-export const selectRepeatProgress = (state: RootState) => state.audioPlayerState.repeatProgress;
-export const selectIsInRepeatMode = (state: RootState) => {
-  const { repeatSettings } = state.audioPlayerState;
-  return !!repeatSettings.from && !!repeatSettings.to;
-};
 export const selectIsDownloadingAudio = (state: RootState) =>
   state.audioPlayerState.isDownloadingAudio;
 export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>

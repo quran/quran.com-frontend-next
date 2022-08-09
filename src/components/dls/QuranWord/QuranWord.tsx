@@ -4,20 +4,17 @@ import React, { useState, useMemo, useCallback, memo, useContext } from 'react';
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
 
 import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
-import onQuranWordClick from './onQuranWordClick';
+import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
 import TajweedWord from './TajweedWordImage';
 import TextWord from './TextWord';
 
-import { getChapterAudioData } from 'src/api';
 import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
 import {
   selectWordClickFunctionality,
@@ -25,13 +22,12 @@ import {
   selectShowTooltipFor,
   selectWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { makeChapterAudioDataUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
+import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachine';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import QueryParam from 'types/QueryParam';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
@@ -57,14 +53,7 @@ const QuranWord = ({
   isFontLoaded = true,
 }: QuranWordProps) => {
   const wordClickFunctionality = useSelector(selectWordClickFunctionality);
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioService = useContext(AudioPlayerMachineContext);
-
-  const chapterId = word.verseKey ? getChapterNumberFromKey(word.verseKey) : null;
-  const { data: audioData } = useSWRImmutable(
-    chapterId ? makeChapterAudioDataUrl(reciterId, chapterId, true) : null,
-    () => getChapterAudioData(reciterId, chapterId, true),
-  );
 
   const showTooltipWhenPlayingAudio = useSelector(selectShowTooltipWhenPlayingAudio);
 
@@ -79,7 +68,6 @@ const QuranWord = ({
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
   const wordLocation = makeWordLocation(word.verseKey, word.position);
-  const playbackRate = useXstateSelector(audioService, (state) => state.context.playbackRate);
 
   // Determine if the audio player is currently playing the word
   const isAudioPlayingWord = useXstateSelector(audioService, (state) => {
@@ -123,13 +111,25 @@ const QuranWord = ({
   );
 
   const onClick = useCallback(() => {
-    if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData) {
+    if (wordClickFunctionality === WordClickFunctionality.PlayAudio) {
       logButtonClick('quran_word_pronounce');
-      onQuranWordClick(word, playbackRate, audioData);
+      const currentState = audioService.getSnapshot();
+      const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
+      const currentSurah = getChapterNumberFromKey(word.verseKey);
+      const isSameSurah = currentState.context.surah === Number(currentSurah);
+      const shouldSeekTo = isPlaying && isSameSurah;
+      if (shouldSeekTo) {
+        const wordSegment = getWordTimeSegment(currentState.context.audioData.verse_timings, word);
+        if (!wordSegment) return;
+        const [startTime] = wordSegment;
+        audioService.send({ type: 'SEEK_TO', timestamp: startTime / 1000 });
+      } else {
+        playWordAudio(word);
+      }
     } else {
       logButtonClick('quran_word');
     }
-  }, [audioData, playbackRate, word, wordClickFunctionality]);
+  }, [audioService, word, wordClickFunctionality]);
 
   const shouldHandleWordClicking =
     readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;

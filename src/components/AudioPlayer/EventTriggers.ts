@@ -11,6 +11,12 @@ export const triggerPlayAudio = (playbackRate: number) => {
   }
 };
 
+export const triggerResumeAudio = () => {
+  if (process.browser && window) {
+    window.audioPlayerEl.play();
+  }
+};
+
 export const triggerPauseAudio = () => {
   if (process.browser && window) {
     window.audioPlayerEl.pause();

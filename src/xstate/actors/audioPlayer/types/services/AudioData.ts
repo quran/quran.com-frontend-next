@@ -1,3 +1,5 @@
+import Segment from 'types/Segment';
+
 /* eslint-disable @typescript-eslint/naming-convention */
 export type AudioFile = {
   id: number;
@@ -11,7 +13,7 @@ export type AudioFile = {
     timestamp_from: number;
     timestamp_to: number;
     duration: number;
-    segments: number[][];
+    segments: Segment[];
   }[];
 };
 

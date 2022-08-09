@@ -16,6 +16,7 @@ import AudioPlayerEventType from './types/AudioPlayerEventType';
 import AudioData from './types/services/AudioData';
 
 import { RECITERS } from 'src/xstate/constants';
+import Word from 'types/Word';
 
 /**
  * check if currentTime is within range timestampFrom and timestampTo
@@ -59,7 +60,7 @@ const getActiveVerseTiming = (context) => {
   return activeVerseTiming;
 };
 
-const getActiveWordLocation = (activeVerseTiming: VerseTiming, currentTime: number) => {
+export const getActiveWordLocation = (activeVerseTiming: VerseTiming, currentTime: number) => {
   const activeAudioSegment = activeVerseTiming.segments.find((segment) => {
     const [, timestampFrom, timestampTo] = segment; // the structure of the segment is: [wordLocation, timestampFrom, timestampTo]
     return isCurrentTimeInRange(currentTime, timestampFrom, timestampTo);
@@ -67,6 +68,17 @@ const getActiveWordLocation = (activeVerseTiming: VerseTiming, currentTime: numb
 
   const wordLocation = activeAudioSegment ? activeAudioSegment[0] : 0;
   return wordLocation;
+};
+
+const getTimingSegment = (verseTiming: VerseTiming, wordPosition: number) =>
+  verseTiming.segments.find(([location]) => wordPosition === location);
+
+export const getWordTimeSegment = (verseTimings: VerseTiming[], word: Word) => {
+  const verseTiming = verseTimings.find((timing) => timing.verse_key === word.verseKey);
+  if (!verseTiming) return null;
+  const segment = getTimingSegment(verseTiming, word.position);
+  if (segment) return [segment[1], segment[2]];
+  return null;
 };
 
 const getActiveAyahNumber = (activeVerseTiming: VerseTiming) => {
