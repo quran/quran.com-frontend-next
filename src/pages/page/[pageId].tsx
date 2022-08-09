@@ -30,7 +30,11 @@ interface Props {
   chaptersData: ChaptersData;
 }
 
-const QuranicPage: NextPage<Props> = ({ hasError, pageVerses, chaptersData }) => {
+const QuranicPage: NextPage<Props> = ({
+  hasError,
+  pageVerses,
+  chaptersData,
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const {
     query: { pageId },
@@ -67,14 +71,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const defaultMushafId = getMushafId(
     getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
+    getQuranReaderStylesInitialState(locale).mushafLines
   ).mushaf;
   try {
     const pageVersesResponse = await getPageVerses(pageId, locale, {
       perPage: 'all',
       mushaf: defaultMushafId,
       filterPageWords: true,
-      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+      ...getDefaultWordFields(
+        getQuranReaderStylesInitialState(locale).quranFont
+      ),
     });
     const pagesLookupResponse = await getPagesLookup({
       pageNumber: Number(pageId),

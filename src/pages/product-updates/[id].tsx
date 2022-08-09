@@ -9,7 +9,11 @@ import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import NotionPage from 'src/components/Notion/Page';
 import PageContainer from 'src/components/PageContainer';
-import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
+import {
+  retrieveBlockChildren,
+  retrieveDatabase,
+  retrievePage,
+} from 'src/lib/notion';
 import Error from 'src/pages/_error';
 import { getCanonicalUrl, getProductUpdatesUrl } from 'src/utils/navigation';
 import { getPageTitle, getRevalidationTime } from 'src/utils/notion';
@@ -21,7 +25,7 @@ interface Props {
   blocks?: any[];
 }
 
-const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
+const Page: NextPage<Props> = ({ hasError, page, blocks }): JSX.Element => {
   const { lang } = useTranslation();
   const router = useRouter();
   if (router.isFallback) {
@@ -39,7 +43,10 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
   const { id } = page;
   return (
     <>
-      <NextSeoWrapper title={pageTitle} url={getCanonicalUrl(lang, getProductUpdatesUrl(id))} />
+      <NextSeoWrapper
+        title={pageTitle}
+        url={getCanonicalUrl(lang, getProductUpdatesUrl(id))}
+      />
       <PageContainer>
         <div className={styles.container}>
           <div className={styles.backIconContainer} />
@@ -54,7 +61,10 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
 export const getStaticProps = async (context) => {
   const { id } = context.params;
   try {
-    const response = await Promise.all([retrievePage(id), retrieveBlockChildren(id)]);
+    const response = await Promise.all([
+      retrievePage(id),
+      retrieveBlockChildren(id),
+    ]);
     const blocks = response[1];
     return {
       props: {

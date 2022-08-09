@@ -13,7 +13,11 @@ import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from 'src/utils/locale';
+import {
+  toLocalizedNumber,
+  getLocaleName,
+  getLanguageAlternates,
+} from 'src/utils/locale';
 import {
   getCanonicalUrl,
   getSurahNavigationUrl,
@@ -48,7 +52,7 @@ const Chapter: NextPage<ChapterProps> = ({
   hasError,
   isChapter,
   chaptersData,
-}) => {
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
@@ -57,7 +61,7 @@ const Chapter: NextPage<ChapterProps> = ({
     if (isChapter) {
       return `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
         chapterResponse.chapter.versesCount,
-        lang,
+        lang
       )}`;
     }
     const { verseNumber } = versesResponse.verses[0];
@@ -77,7 +81,10 @@ const Chapter: NextPage<ChapterProps> = ({
     if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
       return '/ayatul-kursi';
     }
-    return getVerseNavigationUrl(chapterResponse.chapter.slug, verseNumber.toString());
+    return getVerseNavigationUrl(
+      chapterResponse.chapter.slug,
+      verseNumber.toString()
+    );
   };
   const path = getPath();
   const getCanonicalUrlValue = () => {
@@ -95,18 +102,29 @@ const Chapter: NextPage<ChapterProps> = ({
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
+        title={`${t('surah')} ${
+          chapterResponse.chapter.transliteratedName
+        } - ${getTitle()}`}
         canonical={getCanonicalUrlValue()}
         description={
           !isChapter
             ? versesResponse.verses[0].textImlaeiSimple
             : t('chapter:meta-description', {
                 transliteratedName: chapterResponse.chapter.transliteratedName,
-                translatedName: chapterResponse.chapter.translatedName as string,
-                revelationPlace: t(`surah-info:${chapterResponse.chapter.revelationPlace}`),
-                chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), lang),
+                translatedName: chapterResponse.chapter
+                  .translatedName as string,
+                revelationPlace: t(
+                  `surah-info:${chapterResponse.chapter.revelationPlace}`
+                ),
+                chapterOrder: toLocalizedNumber(
+                  Number(chapterResponse.chapter.id),
+                  lang
+                ),
                 localeName: getLocaleName(lang),
-                versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
+                versesCount: toLocalizedNumber(
+                  chapterResponse.chapter.versesCount,
+                  lang
+                ),
               })
         }
         languageAlternates={getLanguageAlternates(path)}
@@ -114,7 +132,9 @@ const Chapter: NextPage<ChapterProps> = ({
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={isChapter ? QuranReaderDataType.Chapter : QuranReaderDataType.Verse}
+        quranReaderDataType={
+          isChapter ? QuranReaderDataType.Chapter : QuranReaderDataType.Verse
+        }
       />
     </DataContext.Provider>
   );
@@ -135,7 +155,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     if (AYAH_KURSI_SLUGS.includes(chapterIdOrVerseKeyOrSlug.toLowerCase())) {
       chapterIdOrVerseKeyOrSlug = '2:255';
     } else {
-      const sluggedChapterId = await getChapterIdBySlug(chapterIdOrVerseKeyOrSlug, locale);
+      const sluggedChapterId = await getChapterIdBySlug(
+        chapterIdOrVerseKeyOrSlug,
+        locale
+      );
       // if it's not a valid slug
       if (!sluggedChapterId) {
         return { notFound: true };
@@ -146,7 +169,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
   const defaultMushafId = getMushafId(
     getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
+    getQuranReaderStylesInitialState(locale).mushafLines
   ).mushaf;
   // common API params between a chapter and the verse key.
   let apiParams = {
@@ -177,11 +200,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
         chaptersData,
         pagesLookupResponse.lookupRange.from,
-        pagesLookupResponse.lookupRange.to,
+        pagesLookupResponse.lookupRange.to
       ).length;
 
       const firstPageOfChapter = Object.keys(pagesLookupResponse.pages)[0];
-      const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfChapter];
+      const firstPageOfChapterLookup =
+        pagesLookupResponse.pages[firstPageOfChapter];
       apiParams = {
         ...apiParams,
         ...{
@@ -191,14 +215,23 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         },
       };
     }
-    const versesResponse = await getChapterVerses(formatStringNumber(chapterId), locale, apiParams);
+    const versesResponse = await getChapterVerses(
+      formatStringNumber(chapterId),
+      locale,
+      apiParams
+    );
     const metaData = { numberOfVerses };
     versesResponse.metaData = metaData;
     versesResponse.pagesLookup = pagesLookupResponse;
     return {
       props: {
         chaptersData,
-        chapterResponse: { chapter: { ...getChapterData(chaptersData, chapterId), id: chapterId } },
+        chapterResponse: {
+          chapter: {
+            ...getChapterData(chaptersData, chapterId),
+            id: chapterId,
+          },
+        },
         versesResponse,
         isChapter,
       },

@@ -21,7 +21,11 @@ interface Props {
   pagesBlocks?: any[];
 }
 
-const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
+const Changelog: NextPage<Props> = ({
+  pages,
+  pagesBlocks,
+  hasError,
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;

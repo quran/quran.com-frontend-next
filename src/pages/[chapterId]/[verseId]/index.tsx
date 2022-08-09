@@ -12,7 +12,11 @@ import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
-import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
+import {
+  getLanguageAlternates,
+  toLocalizedNumber,
+  toLocalizedVersesRange,
+} from 'src/utils/locale';
 import { getCanonicalUrl, getVerseNavigationUrl } from 'src/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -44,7 +48,7 @@ const Verse: NextPage<VerseProps> = ({
   hasError,
   isVerse,
   chaptersData,
-}) => {
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
@@ -52,7 +56,10 @@ const Verse: NextPage<VerseProps> = ({
   if (hasError || !versesResponse.verses.length) {
     return <Error statusCode={500} />;
   }
-  const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
+  const path = getVerseNavigationUrl(
+    chapterResponse.chapter.slug,
+    verseId as string
+  );
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -68,7 +75,9 @@ const Verse: NextPage<VerseProps> = ({
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
+        quranReaderDataType={
+          isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange
+        }
       />
     </DataContext.Provider>
   );
@@ -97,7 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const isVerse = isValidVerseNumber(verseIdOrRange);
   const defaultMushafId = getMushafId(
     getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
+    getQuranReaderStylesInitialState(locale).mushafLines
   ).mushaf;
   // common API params between a single verse and range of verses.
   let apiParams = {
@@ -109,12 +118,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   if (isVerse) {
     apiParams = { ...apiParams, ...{ page: verseIdOrRange, perPage: 1 } };
   } else {
-    const [fromVerseNumber, toVerseNumber] = getToAndFromFromRange(verseIdOrRange);
-    [from, to] = getToAndFromFromRange(verseIdOrRange).map((ayah) => `${chapterIdOrSlug}:${ayah}`);
+    const [fromVerseNumber, toVerseNumber] =
+      getToAndFromFromRange(verseIdOrRange);
+    [from, to] = getToAndFromFromRange(verseIdOrRange).map(
+      (ayah) => `${chapterIdOrSlug}:${ayah}`
+    );
     apiParams = { ...apiParams, ...{ from, to } };
     metaData.from = from;
     metaData.to = to;
-    metaData.numberOfVerses = Number(toVerseNumber) - Number(fromVerseNumber) + 1;
+    metaData.numberOfVerses =
+      Number(toVerseNumber) - Number(fromVerseNumber) + 1;
   }
   try {
     const pagesLookupResponse = await getPagesLookup({
@@ -127,16 +140,25 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     // if it's range, we need to set the per page as the number of verses of the first page of the range in the actual Mushaf
     if (!isVerse) {
       const firstRangeMushafPage = Object.keys(pagesLookupResponse.pages)[0];
-      const firstRangeMushafPageLookup = pagesLookupResponse.pages[firstRangeMushafPage];
-      const firstRangeMushafPageNumberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-        chaptersData,
-        firstRangeMushafPageLookup.from,
-        firstRangeMushafPageLookup.to,
-      ).length;
-      apiParams = { ...apiParams, ...{ perPage: firstRangeMushafPageNumberOfVerses } };
+      const firstRangeMushafPageLookup =
+        pagesLookupResponse.pages[firstRangeMushafPage];
+      const firstRangeMushafPageNumberOfVerses =
+        generateVerseKeysBetweenTwoVerseKeys(
+          chaptersData,
+          firstRangeMushafPageLookup.from,
+          firstRangeMushafPageLookup.to
+        ).length;
+      apiParams = {
+        ...apiParams,
+        ...{ perPage: firstRangeMushafPageNumberOfVerses },
+      };
     }
 
-    const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
+    const versesResponse = await getChapterVerses(
+      chapterIdOrSlug,
+      locale,
+      apiParams
+    );
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
     const chapterData = getChapterData(chaptersData, chapterIdOrSlug);
     if (!chapterData) {
