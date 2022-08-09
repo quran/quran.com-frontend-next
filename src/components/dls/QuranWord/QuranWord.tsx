@@ -18,10 +18,7 @@ import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import {
-  selectShowTooltipWhenPlayingAudio,
-  selectPlaybackRate,
-} from 'src/redux/slices/AudioPlayer/state';
+import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
@@ -82,7 +79,7 @@ const QuranWord = ({
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
   const wordLocation = makeWordLocation(word.verseKey, word.position);
-  const playbackRate = useSelector(selectPlaybackRate);
+  const playbackRate = useXstateSelector(audioService, (state) => state.context.playbackRate);
 
   // Determine if the audio player is currently playing the word
   const isAudioPlayingWord = useXstateSelector(audioService, (state) => {
