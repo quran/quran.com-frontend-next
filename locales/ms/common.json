@@ -1,6 +1,24 @@
 {
     "about": "Tentang Kami",
     "and": "dan",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Lihat apa yang baharu",
+                "title": "Selamat datang ke Quran.com <br> <\/br> Akaun Pengguna Beta"
+            },
+            "slide-2": {
+                "action": "Seterusnya",
+                "description": "Sama ada anda menggunakan Quran.com pada telefon atau komputer riba anda, penanda halaman anda, ayat terakhir dibaca dan pilihan anda akan tersedia",
+                "title": "Data anda akan disegerakkan <br> <\/br> merentas peranti"
+            },
+            "slide-3": {
+                "action": "Okay, faham",
+                "description": "Terima kasih kerana menggunakan Quran.com dan kami berbesar hati untuk mendengar maklum balas anda tentang <link> feedback.quran.com <\/link>",
+                "title": "Kami mahu mendengar fikiran anda"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Tukar Tetapan",
         "drawer-close": "Tutup Laci",
@@ -74,6 +92,7 @@
         "sub-header": "Daftar untuk Discord Quran.com untuk mengambil bahagian dan bekerjasama dengan  pembinaan komuniti teknologi Islam.",
         "title": "Komuniti"
     },
+    "complete-sign-up": "Lengkapkan pendaftaran anda",
     "continue": "Teruskan",
     "copied": "Selesai salin",
     "copied-to-clipboard": "Disalin ke papan keratan",
@@ -85,9 +104,20 @@
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
     "developers": "Pemaju (Developers)",
     "donate": "Menderma",
+    "email-verification": {
+        "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
+        "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} <\/strong>",
+        "email-verification": "Pengesahan email",
+        "resend-email": "Menghantar semula e-mel",
+        "resend-email-in": "Hantar semula e-mel pengesahan dalam {{remainingTime}} saat...",
+        "verify-code": "Sahkan kod"
+    },
     "error": {
+        "bookmark-sync": "Penanda halaman tidak segerak.",
+        "email-login-fail": "Gagal log masuk dengan e-mel. Sila cuba lagi",
         "general": "Kesilapan telah berlaku. Sila cuba lagi.",
-        "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi."
+        "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi.",
+        "pref-persist-fail": "Gagal menyegerakkan tetapan anda ke awan."
     },
     "feedback": "Maklum balas",
     "fonts": {
@@ -110,6 +140,12 @@
         "rights": "Hak cipta terpelihara",
         "title": "Baca, kaji dan pelajari Al-Quran."
     },
+    "form": {
+        "code": "Kod pengesahan",
+        "email": "E-mel",
+        "firstName": "Nama pertama",
+        "lastName": "Nama terakhir"
+    },
     "from": "Dari",
     "fundraising": {
         "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
@@ -127,6 +163,8 @@
     "languages": "Bahasa",
     "less": "Kurang",
     "loading": "Sedang proses",
+    "login": "Log masuk",
+    "logout": "Log keluar",
     "menu": "Menu",
     "mobile-apps": "Aplikasi Fon",
     "mode": "Mod",
@@ -157,6 +195,7 @@
     "previous-ayah": "Ayah sebelumnya",
     "privacy": "Privasi",
     "product-updates": "Kemas kini produk",
+    "profile": "Profil",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
@@ -219,6 +258,7 @@
         "descending": "Menurun"
     },
     "style": "Gaya",
+    "submit": "Hantar",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Saiz fon Tafsir",
@@ -249,6 +289,12 @@
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
     "type": "Jenis",
+    "undo": "Buat asal",
+    "validation": {
+        "invalid-email": "{{field}} mestilah alamat e-mel yang sah",
+        "invalid-field": "Sila masukkan nilai {{field}} yang sah",
+        "required-field": "{{field}} diperlukan"
+    },
     "verse": "Ayat",
     "verse-bookmark-removed": "Tanda-Ingat dikeluarkan",
     "verse-bookmarked": "Ayat telah di-Tanda-Ingat",

@@ -1,6 +1,24 @@
 {
     "about": "Rreth Nesh",
     "and": "dhe",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Shihni çfarë ka të re",
+                "title": "Mirë se vini në Quran.com <br> <\/br> Llogaria e përdoruesit Beta"
+            },
+            "slide-2": {
+                "action": "Tjetra",
+                "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
+                "title": "Të dhënat tuaja do të sinkronizohen <br> <\/br> nëpër pajisje"
+            },
+            "slide-3": {
+                "action": "Mirë, e kuptova",
+                "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
+                "title": "Ne duam të dëgjojmë mendimet tuaja"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Ndrysho Cilësimet",
         "drawer-close": "Mbylle sirtarin",
@@ -74,6 +92,7 @@
         "sub-header": "Regjistrohu për Quran.com Discord për të marrë pjesë dhe për të bashkëpunuar me komunitetin kryesor që ndërton teknologjinë islame.",
         "title": "Komuniteti"
     },
+    "complete-sign-up": "Plotësoni regjistrimin tuaj",
     "continue": "Vazhdoni",
     "copied": "E kopjuar",
     "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
@@ -85,9 +104,20 @@
     "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
     "developers": "Zhvilluesit",
     "donate": "Dhuroni",
+    "email-verification": {
+        "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
+        "email-sent": "Sapo dërguam një email te <strong> {{email}} <\/strong>",
+        "email-verification": "Verifikimi me email",
+        "resend-email": "Ridërgo email",
+        "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
+        "verify-code": "Verifiko kodin"
+    },
     "error": {
+        "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
+        "email-login-fail": "Identifikimi me email dështoi. Ju lutemi provoni përsëri",
         "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
-        "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri."
+        "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri.",
+        "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi."
     },
     "feedback": "Feedback",
     "fonts": {
@@ -110,6 +140,12 @@
         "rights": "Të gjitha të drejtat e rezervuara",
         "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
     },
+    "form": {
+        "code": "Kodi i Verifikimit",
+        "email": "Email",
+        "firstName": "Emri",
+        "lastName": "Mbiemri"
+    },
     "from": "Nga",
     "fundraising": {
         "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
@@ -127,6 +163,8 @@
     "languages": "Gjuhët",
     "less": "Më pak",
     "loading": "Po ngarkohet",
+    "login": "Identifikohu",
+    "logout": "Shkyç",
     "menu": "Menu",
     "mobile-apps": "Aplikacionet celulare",
     "mode": "Modaliteti",
@@ -157,6 +195,7 @@
     "previous-ayah": "Ajeti i mëparshëm",
     "privacy": "Privatësia",
     "product-updates": "Përditësimet e produktit",
+    "profile": "Profili",
     "q-reflect": "Kurani Reflekto",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radio",
@@ -219,6 +258,7 @@
         "descending": "Duke zbritur"
     },
     "style": "Stili",
+    "submit": "Paraqisni",
     "surah": "Surja",
     "tafsir": {
         "font-size": "Madhësia e shkronjave Tafsir",
@@ -249,6 +289,12 @@
     "translations": "Përkthime",
     "transliteration": "Transliterimi",
     "type": "Lloji",
+    "undo": "Zhbër",
+    "validation": {
+        "invalid-email": "{{field}} duhet të jetë një adresë e vlefshme emaili",
+        "invalid-field": "Fut një vlerë të vlefshme {{field}}",
+        "required-field": "Kërkohet {{field}}"
+    },
     "verse": "Vargu",
     "verse-bookmark-removed": "Faqeruajtësi i vargut u hoq!",
     "verse-bookmarked": "Vargu u shënua!",

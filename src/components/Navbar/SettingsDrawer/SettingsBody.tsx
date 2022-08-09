@@ -3,7 +3,6 @@ import React from 'react';
 import AudioSection from './AudioSection';
 import QuranFontSection from './QuranFontSection';
 import ResetButton from './ResetButton';
-// import TafsirSection from './TafsirSection';
 import ThemeSection from './ThemeSection';
 import TranslationSection from './TranslationSection';
 import WordByWordSection from './WordByWordSection';
@@ -16,7 +15,6 @@ const SettingsBody = () => (
     <WordByWordSection />
     <WordTooltipSection />
     <TranslationSection />
-    {/* <TafsirSection /> */}
     <AudioSection />
     <ResetButton />
   </>

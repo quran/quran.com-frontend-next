@@ -1,6 +1,24 @@
 {
     "about": "Sobre nós",
     "and": "e",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Veja o que é novo",
+                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário beta"
+            },
+            "slide-2": {
+                "action": "Próximo",
+                "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
+                "title": "Seus dados serão sincronizados <br> <\/br> entre dispositivos"
+            },
+            "slide-3": {
+                "action": "Ok, entendi",
+                "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
+                "title": "Queremos ouvir seus pensamentos"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Mudar configurações",
         "drawer-close": "Fechar gaveta",
@@ -74,6 +92,7 @@
         "sub-header": "Inscreva-se no Discord do Quran.com para participar e colaborar com a tecnologia islâmica líder na construção de comunidades.",
         "title": "Comunidade"
     },
+    "complete-sign-up": "Complete seu cadastro",
     "continue": "Prosseguir",
     "copied": "Copiado",
     "copied-to-clipboard": "Copiado para a área de transferência",
@@ -85,9 +104,20 @@
     "default-description": "O Alcorão traduzido para vários idiomas em uma interface simples e fácil",
     "developers": "Desenvolvedores",
     "donate": "Doar",
+    "email-verification": {
+        "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
+        "email-sent": "Acabamos de enviar um e-mail para <strong> {{email}} <\/strong>",
+        "email-verification": "Verificação de e-mail",
+        "resend-email": "Reenviar email",
+        "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
+        "verify-code": "Código de verificação"
+    },
     "error": {
+        "bookmark-sync": "O marcador está fora de sincronia.",
+        "email-login-fail": "Falha ao fazer login com e-mail. Por favor, tente novamente",
         "general": "Algo deu errado. Por favor, tente novamente.",
-        "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente."
+        "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente.",
+        "pref-persist-fail": "Falha ao sincronizar suas configurações com a nuvem."
     },
     "feedback": "Comentários",
     "fonts": {
@@ -110,6 +140,12 @@
         "rights": "Todos os direitos reservados",
         "title": "Leia, estude e aprenda O Nobre Alcorão."
     },
+    "form": {
+        "code": "Código de verificação",
+        "email": "E-mail",
+        "firstName": "Primeiro nome",
+        "lastName": "Sobrenome"
+    },
     "from": "A partir de",
     "fundraising": {
         "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
@@ -127,6 +163,8 @@
     "languages": "línguas",
     "less": "Menos",
     "loading": "Carregando",
+    "login": "Conecte-se",
+    "logout": "Sair",
     "menu": "Cardápio",
     "mobile-apps": "Aplicativos móveis",
     "mode": "Modo",
@@ -157,6 +195,7 @@
     "previous-ayah": "Anterior Ayah",
     "privacy": "Privacidade",
     "product-updates": "Atualizações de produtos",
+    "profile": "Perfil",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "Rádio Alcorão",
@@ -219,6 +258,7 @@
         "descending": "descendente"
     },
     "style": "Estilo",
+    "submit": "Enviar",
     "surah": "Surah",
     "tafsir": {
         "font-size": "Tamanho da fonte Tafsir",
@@ -249,6 +289,12 @@
     "translations": "Traduções",
     "transliteration": "Transliteração",
     "type": "Modelo",
+    "undo": "Desfazer",
+    "validation": {
+        "invalid-email": "{{field}} deve ser um endereço de e-mail válido",
+        "invalid-field": "Insira um valor {{field}} válido",
+        "required-field": "{{field}} é obrigatório"
+    },
     "verse": "Versículo",
     "verse-bookmark-removed": "Marcador de versículo removido!",
     "verse-bookmarked": "Versículo marcado!",

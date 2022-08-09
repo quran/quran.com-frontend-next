@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "等待确认",
+    "continue-apple": "继续使用苹果",
+    "continue-email": "继续使用电子邮件",
+    "continue-facebook": "继续使用 Facebook",
+    "continue-google": "继续使用 Google",
+    "email-placeholder": "电子邮件地址",
+    "login-error": {
+        "AuthenticationError": "身份验证失败。请稍后再试",
+        "TokenExpiredError": "您已登出，请重新登入。"
+    },
+    "login-title": "登录 Quran.com",
+    "other-options": "其他登录选项",
+    "verify-code": "验证提供的安全代码是否与以下文本匹配："
+}

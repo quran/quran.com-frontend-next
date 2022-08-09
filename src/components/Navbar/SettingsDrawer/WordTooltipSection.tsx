@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from './Section';
 import { WORD_BY_WORD_LOCALES_OPTIONS } from './WordByWordSection';
@@ -11,29 +12,55 @@ import styles from './WordByWordSection.module.scss';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setShowTooltipFor,
-  selectShowTooltipFor,
-  selectWordByWordLocale,
   setSelectedWordByWordLocale,
+  selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { removeItemFromArray, areArraysEqual } from 'src/utils/array';
+import { removeItemFromArray } from 'src/utils/array';
 import { logValueChange } from 'src/utils/eventLogger';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 import { WordByWordType } from 'types/QuranReader';
 
 const WordTooltipSection = () => {
   const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
   const router = useRouter();
-  const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
-  const wordByWordLocale = useSelector(selectWordByWordLocale);
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
+  const readingPreferences = useSelector(selectReadingPreferences, shallowEqual);
+  const { selectedWordByWordLocale: wordByWordLocale, showTooltipFor } = readingPreferences;
+
+  /**
+   * Persist settings in the DB if the user is logged in before dispatching
+   * Redux action, otherwise just dispatch it.
+   *
+   * @param {string} key
+   * @param {string | string[]} value
+   * @param {Action} action
+   */
+  const onWordTooltipSettingsChange = (
+    key: string,
+    value: string | string[],
+    action: Action,
+    undoAction: Action,
+  ) => {
+    onSettingsChange(key, value, action, undoAction, PreferenceGroup.READING);
+  };
 
   const onWordByWordLocaleChange = (value: string) => {
     logValueChange('wbw_tooltip_locale', wordByWordLocale, value);
     router.query[QueryParam.WBW_LOCALE] = value;
     router.push(router, undefined, { shallow: true });
-    dispatch(setSelectedWordByWordLocale({ value, locale: lang }));
+    onWordTooltipSettingsChange(
+      'selectedWordByWordLocale',
+      value,
+      setSelectedWordByWordLocale({ value, locale: lang }),
+      setSelectedWordByWordLocale({ value: wordByWordLocale, locale: lang }),
+    );
   };
 
   const onChange = (type: WordByWordType) => (checked: boolean) => {
@@ -41,12 +68,17 @@ const WordTooltipSection = () => {
       ? [...showTooltipFor, type]
       : removeItemFromArray(type, showTooltipFor);
     logValueChange('wbw_tooltip', showTooltipFor, nextShowTooltipFor);
-    dispatch(setShowTooltipFor(nextShowTooltipFor));
+    onWordTooltipSettingsChange(
+      'showTooltipFor',
+      nextShowTooltipFor,
+      setShowTooltipFor(nextShowTooltipFor),
+      setShowTooltipFor(showTooltipFor),
+    );
   };
 
   return (
     <Section>
-      <Section.Title>
+      <Section.Title isLoading={isLoading}>
         {t('word-tooltip')}
         <HelperTooltip>{t('settings.word-tooltip-helper')}</HelperTooltip>
       </Section.Title>

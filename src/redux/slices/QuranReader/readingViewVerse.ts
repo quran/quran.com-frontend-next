@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 export type ReadingViewVerseState = {
   hoveredVerseKey: string | null;
@@ -17,7 +18,7 @@ export const initialState: ReadingViewVerseState = {
  *
  */
 const readingViewVerse = createSlice({
-  name: 'readingViewHoveredVerse',
+  name: SliceName.READING_VIEW_HOVERED_VERSE,
   initialState,
   reducers: {
     setReadingViewHoveredVerseKey: (state, { payload }: PayloadAction<string | null>) => {
