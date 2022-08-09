@@ -23,6 +23,7 @@ const Links = () => {
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
+        { text: t('donate'), isExternal: true, url: 'https://donate.quran.com' },
         { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
@@ -72,6 +73,7 @@ const Links = () => {
             <div key={link.url} className={styles.linkContainer}>
               <Link
                 href={link.url}
+                className={link.className}
                 variant={LinkVariant.Primary}
                 isNewTab={!!link.isExternal}
                 {...(link.onClick && { onClick: link.onClick })}

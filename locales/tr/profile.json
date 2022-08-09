@@ -1,0 +1,10 @@
+{
+    "delete-account": "Hesabı sil",
+    "delete-confirmation": {
+        "action-text": "Sonucu anlıyorum, hesabımı sil",
+        "confirmation-text": "hesabımı sil",
+        "instruction-text": "Lütfen onaylamak için <strong> {{text}} <\/strong> yazın",
+        "subtitle": "Bu işlem geri alınamaz. Bu, hesabınızı, kayıtlı yer imlerinizi, okuma oturumlarınızı ve tüm verilerinizi kalıcı olarak siler.",
+        "title": "Kesinlikle emin misin?"
+    }
+}

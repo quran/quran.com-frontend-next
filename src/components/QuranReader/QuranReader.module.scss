@@ -51,7 +51,7 @@ $virtual-scrolling-height-bandage: calc(
   }
 }
 
-.withSidebarNavigationOpen {
+.withSidebarNavigationOpenOrAuto {
   @include breakpoints.tablet {
     margin-inline-start: calc(10 * var(--spacing-mega));
   }

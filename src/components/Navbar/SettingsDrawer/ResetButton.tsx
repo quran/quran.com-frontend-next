@@ -1,3 +1,4 @@
+import { unwrapResult } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -6,7 +7,9 @@ import styles from './ResetButton.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import resetSettings from 'src/redux/slices/reset-settings';
+import resetSettings from 'src/redux/actions/reset-settings';
+import { persistDefaultSettings } from 'src/redux/slices/defaultSettings';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import QueryParam from 'types/QueryParam';
 
@@ -21,7 +24,19 @@ const ResetButton = () => {
 
   const onResetSettingsClicked = () => {
     logButtonClick('reset_settings');
-    dispatch(resetSettings(lang));
+    if (isLoggedIn()) {
+      dispatch(persistDefaultSettings(lang))
+        // @ts-ignore
+        .then(unwrapResult)
+        .then(() => {
+          dispatch(resetSettings(lang));
+        })
+        .catch(() => {
+          // TODO: show an error
+        });
+    } else {
+      dispatch(resetSettings(lang));
+    }
     let usingQueryParam = false;
     if (router.query[QueryParam.Translations]) {
       usingQueryParam = true;

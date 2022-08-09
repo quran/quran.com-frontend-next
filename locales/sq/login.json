@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Në pritje të konfirmimit",
+    "continue-apple": "Vazhdoni me Apple",
+    "continue-email": "Vazhdo me Email",
+    "continue-facebook": "Vazhdo me Facebook",
+    "continue-google": "Vazhdo me Google",
+    "email-placeholder": "Adresa e emailit",
+    "login-error": {
+        "AuthenticationError": "Autentifikimi dështoi. Ju lutemi provoni sërish më vonë",
+        "TokenExpiredError": "Ju keni dalë nga llogaria, ju lutemi identifikohuni përsëri."
+    },
+    "login-title": "Hyni në Quran.com",
+    "other-options": "Opsione të tjera të hyrjes",
+    "verify-code": "Verifikoni që kodi i sigurisë i dhënë përputhet me tekstin e mëposhtëm:"
+}

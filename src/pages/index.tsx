@@ -10,7 +10,6 @@ import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from 'src/components/chapters/ChapterAndJuzList';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
-import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -26,7 +25,10 @@ type IndexProps = {
   chaptersData: ChaptersData;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapters } }) => {
+const Index: NextPage<IndexProps> = ({
+  chaptersData,
+  chaptersResponse: { chapters },
+}): JSX.Element => {
   const { t, lang } = useTranslation('home');
   return (
     <>
@@ -35,16 +37,13 @@ const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapter
       </Head>
       <DataContext.Provider value={chaptersData}>
         <NextSeoWrapper
-          title={t('noble-quran')}
+          title={t('home:noble-quran')}
           url={getCanonicalUrl(lang, '')}
           languageAlternates={getLanguageAlternates('')}
         />
         <div className={styles.pageContainer}>
           <div className={styles.flow}>
             <HomePageHero />
-            <div className={styles.flowItem}>
-              <HomePageWelcomeMessage />
-            </div>
             <div className={classNames(styles.flowItem, styles.fullWidth)}>
               <RecentReadingSessions />
             </div>

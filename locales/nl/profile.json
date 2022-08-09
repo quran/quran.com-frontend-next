@@ -1,0 +1,10 @@
+{
+    "delete-account": "Account verwijderen",
+    "delete-confirmation": {
+        "action-text": "Ik begrijp de consequentie, verwijder mijn account",
+        "confirmation-text": "Verwijder mijn account",
+        "instruction-text": "Typ a.u.b. <strong> {{text}} <\/strong> om te bevestigen",
+        "subtitle": "Deze actie kan niet ongedaan gemaakt worden. Hiermee worden uw account, opgeslagen bladwijzers, leessessies en al uw gegevens permanent verwijderd.",
+        "title": "Weet je het absoluut zeker?"
+    }
+}

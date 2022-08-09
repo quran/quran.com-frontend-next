@@ -16,12 +16,12 @@ import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
+import userDataSync from './slices/Auth/userDataSync';
 import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
-import popup from './slices/popup';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
@@ -36,9 +36,11 @@ import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
 import radio from './slices/radio';
 import search from './slices/Search/search';
+import session from './slices/session';
 import theme from './slices/theme';
 import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
+import SliceName from './types/SliceName';
 
 const persistConfig = {
   key: 'root',
@@ -48,20 +50,21 @@ const persistConfig = {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
   }),
   whitelist: [
-    'quranReaderStyles',
-    'readingPreferences',
-    'translations',
-    'theme',
-    'tafsirs',
-    'bookmarks',
-    'search',
-    'readingTracker',
-    'welcomeMessage',
-    'defaultSettings',
-    'sidebarNavigation',
-    'radio',
-    'banner',
-    'popup',
+    SliceName.QURAN_READER_STYLES,
+    SliceName.READING_PREFERENCES,
+    SliceName.TRANSLATIONS,
+    SliceName.THEME,
+    SliceName.TAFSIRS,
+    SliceName.SEARCH,
+    SliceName.READING_TRACKER,
+    SliceName.WELCOME_MESSAGE,
+    SliceName.DEFAULT_SETTINGS,
+    SliceName.SIDEBAR_NAVIGATION,
+    SliceName.RADIO,
+    SliceName.BANNER,
+    SliceName.SESSION,
+    SliceName.BOOKMARKS,
+    SliceName.USER_DATA_SYNC,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -88,7 +91,8 @@ export const rootReducer = combineReducers({
   radio,
   readingViewVerse,
   banner,
-  popup,
+  session,
+  userDataSync,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

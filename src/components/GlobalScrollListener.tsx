@@ -3,7 +3,6 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from 'src/hooks/useScrollDirection';
-import { setIsBannerVisible } from 'src/redux/slices/banner';
 import { setIsVisible } from 'src/redux/slices/navbar';
 import { setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
 
@@ -20,13 +19,9 @@ const GlobalScrollListener = () => {
       if (newYPosition > 50 && direction === ScrollDirection.Down) {
         dispatch({ type: setIsExpanded.type, payload: false });
         dispatch({ type: setIsVisible.type, payload: false });
-        dispatch({ type: setIsBannerVisible.type, payload: false });
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
         dispatch({ type: setIsExpanded.type, payload: true });
         dispatch({ type: setIsVisible.type, payload: true });
-        if (newYPosition <= 50) {
-          dispatch({ type: setIsBannerVisible.type, payload: true });
-        }
       }
     },
     [dispatch],

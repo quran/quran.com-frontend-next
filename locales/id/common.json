@@ -1,6 +1,24 @@
 {
     "about": "Tentang kami",
     "and": "dan",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Lihat apa yang baru",
+                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna Beta"
+            },
+            "slide-2": {
+                "action": "Lanjut",
+                "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
+                "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
+            },
+            "slide-3": {
+                "action": "OK saya mengerti",
+                "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
+                "title": "Kami ingin mendengar pendapat Anda"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Ubah pengaturan",
         "drawer-close": "Tutup Laci",
@@ -74,6 +92,7 @@
         "sub-header": "Daftar ke Quran.com Discord untuk berpartisipasi dan berkolaborasi dengan komunitas terkemuka yang membangun teknologi Islami.",
         "title": "Komunitas"
     },
+    "complete-sign-up": "Lengkapi pendaftaran Anda",
     "continue": "Melanjutkan",
     "copied": "disalin",
     "copied-to-clipboard": "Disalin ke papan klip",
@@ -84,9 +103,21 @@
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
     "developers": "Pengembang (Developers)",
+    "donate": "Menyumbangkan",
+    "email-verification": {
+        "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
+        "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} <\/strong>",
+        "email-verification": "Verifikasi email",
+        "resend-email": "Kirim ulang email",
+        "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
+        "verify-code": "Kode verifikasi"
+    },
     "error": {
+        "bookmark-sync": "Bookmark tidak sinkron.",
+        "email-login-fail": "Gagal masuk dengan email. Silakan coba lagi",
         "general": "Ada yang salah. Silakan coba lagi.",
-        "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi."
+        "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi.",
+        "pref-persist-fail": "Gagal menyinkronkan setelan Anda ke cloud."
     },
     "feedback": "Beri Masukan",
     "fonts": {
@@ -109,13 +140,14 @@
         "rights": "Seluruh hak cipta",
         "title": "Baca, pelajari, dan pelajari The Noble Quran."
     },
-    "from": "Dari",
-    "fundraising-sticky-banner": {
-        "cta": "Menyumbangkan",
-        "title": "Dukung Quran.com di Ramadhan ini"
+    "form": {
+        "code": "Kode verifikasi",
+        "email": "Surel",
+        "firstName": "Nama depan",
+        "lastName": "Nama keluarga"
     },
+    "from": "Dari",
     "fundraising": {
-        "cta": "MENYUMBANGKAN",
         "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
         "learn-more": "Belajarlah lagi",
         "title": "Menjadi Donatur Bulanan"
@@ -131,6 +163,8 @@
     "languages": "Bahasa",
     "less": "Kurang",
     "loading": "Memuat",
+    "login": "Gabung",
+    "logout": "Keluar",
     "menu": "Menu",
     "mobile-apps": "Aplikasi ",
     "mode": "Mode",
@@ -153,7 +187,7 @@
         "cta-3": "Belajarlah lagi",
         "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
         "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Al-Qur'an, selalu gratis.",
-        "text-2": "Quran.com adalah kesempatan sempurna untuk amal berkelanjutan (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di Akhirat Ramadhan ini sebagai donor bulanan (atau satu kali).",
+        "text-2": "Quran.com adalah kesempatan sempurna untuk amal berkelanjutan (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di akhirat Anda sebagai donor bulanan (atau satu kali).",
         "title": "Sahabat Al-Qur'an yang terhormat,"
     },
     "powered-by": "Dipersembahkan oleh",
@@ -161,6 +195,7 @@
     "previous-ayah": "Ayat sebelumnya",
     "privacy": "Pribadi",
     "product-updates": "Pembaruan produk",
+    "profile": "Profil",
     "q-reflect": "QuranReflect",
     "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
@@ -223,6 +258,7 @@
         "descending": "Menurun"
     },
     "style": "Gaya",
+    "submit": "Kirim",
     "surah": "surah",
     "tafsir": {
         "font-size": "Ukuran font tafsir",
@@ -253,6 +289,12 @@
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
     "type": "Jenis",
+    "undo": "Membuka",
+    "validation": {
+        "invalid-email": "{{field}} harus berupa alamat email yang valid",
+        "invalid-field": "Harap masukkan nilai {{field}} yang valid",
+        "required-field": "{{field}} wajib diisi"
+    },
     "verse": "Ayat",
     "verse-bookmark-removed": "Penanda ayat telah dihapus!",
     "verse-bookmarked": "Ayat telah ditandai",
