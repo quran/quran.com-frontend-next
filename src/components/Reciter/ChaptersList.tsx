@@ -1,10 +1,9 @@
 import { useContext, useState } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import CopyLinkIcon from '../../../public/icons/copy-link.svg';
 import DownloadIcon from '../../../public/icons/download.svg';
@@ -20,7 +19,6 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 import styles from './ChapterList.module.scss';
 
 import { getChapterAudioData } from 'src/api';
-import { selectAudioData } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getReciterChapterNavigationUrl } from 'src/utils/navigation';
 import { getWindowOrigin } from 'src/utils/url';
@@ -36,14 +34,14 @@ type ChaptersListProps = {
 const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) => {
   const toast = useToast();
   const { t, lang } = useTranslation();
-  const currentAudioData = useSelector(selectAudioData, shallowEqual);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  // const [state, send] = useActor(audioService);
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
 
   const [currentlyDownloadChapterAudioId, setCurrentlyDownloadChapterAudioId] = useState(null);
-
-  const audioService = useContext(AudioPlayerMachineContext);
-  const [state, send] = useActor(audioService);
-
-  const isAudioPlaying = state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
 
   const playChapter = (chapterId: string) => {
     const selectedChapterId = chapterId;
@@ -52,8 +50,9 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
       stationId: selectedChapterId,
     });
 
-    send({ type: 'CHANGE_RECITER', reciterId: selectedReciter.id });
-    send({ type: 'PLAY_SURAH', surah: Number(chapterId) });
+    // TODO: Update xstate to be able to play the surah without changing the reciter in the context
+    audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciter.id });
+    audioService.send({ type: 'PLAY_SURAH', surah: Number(chapterId) });
   };
 
   const onCopyUrlClicked = (chapterId) => {
@@ -78,8 +77,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
   return (
     <div className={styles.chapterListContainer}>
       {filteredChapters.map((chapter) => {
-        const isAudioPlayingThisChapter =
-          isAudioPlaying && currentAudioData.chapterId === Number(chapter.id);
+        const isAudioPlayingThisChapter = isAudioPlaying && currentSurah === Number(chapter.id);
 
         const onClick = () => {
           if (isAudioPlayingThisChapter) triggerPauseAudio();

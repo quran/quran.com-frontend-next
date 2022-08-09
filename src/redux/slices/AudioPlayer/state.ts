@@ -18,7 +18,6 @@ export const selectReciter = (state: RootState) => state.audioPlayerState.recite
 export const selectReciterId = (state: RootState) => state.audioPlayerState.reciter.id;
 export const selectIsUsingDefaultReciter = (state: RootState) =>
   state.audioPlayerState.isUsingDefaultReciter;
-export const selectAudioData = (state: RootState) => state.audioPlayerState.audioData;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectIsDownloadingAudio = (state: RootState) =>
