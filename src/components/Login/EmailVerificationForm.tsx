@@ -13,6 +13,7 @@ import ResendEmailSection from './ResendEmailSection';
 
 import { completeSignup, requestVerificationCode } from 'src/utils/auth/api';
 import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { logFormSubmission } from 'src/utils/eventLogger';
 import ErrorMessageId from 'types/ErrorMessageId';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
@@ -36,6 +37,7 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
   const [forceRerenderKey, setForceRerenderKey] = useState(0);
 
   const onEmailSubmitted = (data: EmailFormData) => {
+    logFormSubmission('email_verification');
     requestVerificationCode(data.email);
     setIsSubmitted(true);
     setEmail(data.email);
@@ -55,6 +57,7 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
   };
 
   const onVerificationCodeSubmitted = (data: VerificationCodeFormData) => {
+    logFormSubmission('verification_code');
     return completeSignup({ email, verificationCode: data.code.toString() })
       .then(() => {
         // mutate the cache version of users/profile

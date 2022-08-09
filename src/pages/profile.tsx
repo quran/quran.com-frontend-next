@@ -23,6 +23,7 @@ import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { logButtonClick } from 'src/utils/eventLogger';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
@@ -52,6 +53,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     if (!isLoggedIn()) {
       return;
     }
+    logButtonClick('profile_logout');
     logoutUser().then(() => {
       dispatch({ type: removeLastSyncAt.type });
       router.push('/login');

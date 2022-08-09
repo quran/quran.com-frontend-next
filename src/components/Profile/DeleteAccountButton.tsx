@@ -13,6 +13,7 @@ import styles from './DeleteAccountButton.module.scss';
 
 import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { deleteAccount } from 'src/utils/auth/api';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 type DeleteAccountButtonProps = {
   isDisabled?: boolean;
@@ -29,10 +30,16 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   };
 
   const onDeleteConfirmed = () => {
+    logButtonClick('profile_confirm_delete_account');
     closeModal();
     deleteAccount()
       .then(() => router.push('/'))
       .then(() => dispatch({ type: removeLastSyncAt.type }));
+  };
+
+  const onDeleteAccountClicked = () => {
+    logButtonClick('profile_delete_account');
+    setIsModalVisible(true);
   };
 
   const CONFIRMATION_TEXT = t('profile:delete-confirmation.confirmation-text');
@@ -43,7 +50,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
       <Button
         type={ButtonType.Error}
         variant={ButtonVariant.Ghost}
-        onClick={() => setIsModalVisible(true)}
+        onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >
         {t('profile:delete-account')}
