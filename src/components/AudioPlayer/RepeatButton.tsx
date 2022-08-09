@@ -1,7 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 import { useContext, useState } from 'react';
 
-import { useActor } from '@xstate/react';
+import { useActor, useSelector } from '@xstate/react';
+import useTranslation from 'next-translate/useTranslation';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
@@ -12,20 +13,18 @@ import Badge from 'src/components/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { logButtonClick } from 'src/utils/eventLogger';
-// import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber } from 'src/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-// TODO: get remaing repeat count
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const RemainingRangeCount = ({ repeatActor }) => {
-  // const { lang } = useTranslation('common');
-  // const [currentState] = useActor(repeatActor);
-  // const remainingRangeRepeatCount = toLocalizedNumber(
-  //   useSelector(selectRemainingRangeRepeatCount),
-  //   lang,
-  // );
+const RemainingRangeCount = ({ rangeActor }) => {
+  const { lang } = useTranslation('common');
+  const remainingCount = useSelector(rangeActor, (state) => {
+    const { totalRangeCycle, currentRangeCycle } = (state as any).context;
+    return totalRangeCycle - currentRangeCycle + 1; // +1 to include the current cycle
+  });
+  const localizedRemainingCount = toLocalizedNumber(remainingCount, lang);
 
-  return null;
+  return <span>{localizedRemainingCount}</span>;
 };
 
 const RepeatAudioButton = () => {
@@ -52,7 +51,17 @@ const RepeatAudioButton = () => {
       <Wrapper
         shouldWrap={isInRepeatMode}
         wrapper={(children) => (
-          <Badge content={<RemainingRangeCount repeatActor={currentState.context.repeatActor} />}>
+          <Badge
+            content={
+              currentState.context.repeatActor && (
+                <RemainingRangeCount
+                  rangeActor={
+                    currentState.context.repeatActor.getSnapshot().context.rangeCycleActor
+                  }
+                />
+              )
+            }
+          >
             {children}
           </Badge>
         )}

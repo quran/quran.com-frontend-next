@@ -41,11 +41,6 @@ export const selectIsInRepeatMode = (state: RootState) => {
 };
 export const selectIsDownloadingAudio = (state: RootState) =>
   state.audioPlayerState.isDownloadingAudio;
-export const selectRemainingRangeRepeatCount = (state: RootState) => {
-  const { repeatProgress, repeatSettings } = state.audioPlayerState;
-  return 1 + (repeatSettings.repeatRange - repeatProgress.repeatRange);
-  // +1 to account for the current cycle, current implementation doesn't account for the current cycle
-};
 export const selectShowTooltipWhenPlayingAudio = (state: RootState) =>
   state.audioPlayerState.showTooltipWhenPlayingAudio;
 export const selectIsRadioMode = (state: RootState) => state.audioPlayerState.isRadioMode;
