@@ -3,9 +3,6 @@ import { useMemo, useState, useEffect, useContext } from 'react';
 
 import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
-
-import { triggerPauseAudio } from '../EventTriggers';
 
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
@@ -16,7 +13,6 @@ import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { exitRepeatMode } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
@@ -45,7 +41,6 @@ const RepeatAudioModal = ({
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
   // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const audioService = useContext(AudioPlayerMachineContext);
@@ -129,8 +124,7 @@ const RepeatAudioModal = ({
   };
   const onStopRepeating = () => {
     logButtonClick('stop_repeating');
-    dispatch(exitRepeatMode());
-    triggerPauseAudio();
+    audioService.send({ type: 'REPEAT_FINISHED' });
     onClose();
   };
 

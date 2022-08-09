@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause-outline.svg';
 import PlayIcon from '../../../public/icons/play-outline.svg';
@@ -18,7 +17,6 @@ import Button, {
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import { exitRepeatMode } from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterNumberFromKey, getVerseNumberFromKey, makeVerseKey } from 'src/utils/verse';
@@ -37,7 +35,6 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
   // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isVerseBeingPlayed = useXstateSelector(audioService, (state) => {
     const { surah, ayahNumber } = state.context;
@@ -55,7 +52,6 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const onPlayClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
-    dispatch(exitRepeatMode());
     audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
 
     if (onActionTriggered) {

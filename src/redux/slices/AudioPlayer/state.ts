@@ -56,14 +56,6 @@ export const audioPlayerStateSlice = createSlice({
       audioData: getAudioPlayerStateInitialState(action.payload).audioData,
       audioDataStatus: getAudioPlayerStateInitialState(action.payload).audioDataStatus,
     }),
-    exitRepeatMode: (state) => ({
-      ...state,
-      repeatSettings: {
-        ...state.repeatSettings,
-        from: null,
-        to: null,
-      },
-    }),
     setIsDownloadingAudio: (state, action: PayloadAction<boolean>) => ({
       ...state,
       isDownloadingAudio: action.payload,
@@ -130,7 +122,6 @@ export const {
   setAudioStatus,
   resetAudioData,
   setEnableAutoScrolling,
-  exitRepeatMode,
   setIsDownloadingAudio,
   setShowTooltipWhenPlayingAudio,
 } = audioPlayerStateSlice.actions;
