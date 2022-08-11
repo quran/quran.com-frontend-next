@@ -8,7 +8,7 @@ import { sendParent } from 'xstate/lib/actions';
 import RadioContext from './types/RadioContext';
 import RadioEventType from './types/RadioEventType';
 
-import curatedStations from 'src/xstate/Radio/curatedStations';
+import curatedStations from 'src/components/Radio/curatedStations';
 import AudioTrack from 'src/xstate/Radio/types/AudioTrack';
 import StationType from 'src/xstate/Radio/types/StationType';
 

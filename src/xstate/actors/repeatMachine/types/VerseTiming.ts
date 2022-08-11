@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import Segment from './Segment';
+
+import Segment from 'types/Segment';
 
 type VerseTiming = {
   verse_key: string;
