@@ -1,37 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
-import { useSelector, shallowEqual } from 'react-redux';
 
-import { RootState } from 'src/redux/RootState';
-import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
 import { equalityCheckerByType, getQueryParamValueByType, ValueType } from 'src/utils/query-params';
-import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
+import { isValidReciterId } from 'src/utils/queryParamValidator';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {
-  [QueryParam.Translations]: {
-    reduxSelector: selectSelectedTranslations,
-    reduxEqualityFunction: areArraysEqual,
-    valueType: ValueType.ArrayOfNumbers,
-    validate: (val) => isValidTranslationsQueryParamValue(val),
-  },
-  [QueryParam.WBW_LOCALE]: {
-    reduxSelector: selectWordByWordLocale,
-    reduxEqualityFunction: shallowEqual,
-    valueType: ValueType.String,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    validate: (val) => true,
+  [QueryParam.Reciter]: {
+    selector: (state: any) => state.context.reciterId,
+    valueType: ValueType.Number,
+    validate: isValidReciterId,
   },
 } as Record<
   QueryParam,
   {
-    reduxSelector: (state: RootState) => any;
+    selector: (state) => any;
     valueType: ValueType;
-    reduxEqualityFunction?: (left: any, right: any) => boolean;
     validate: (val: any) => boolean;
   }
 >;
@@ -48,16 +36,10 @@ const useGetQueryParamOrReduxValue = (
   queryParam: QueryParam,
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
-  let useSelectorArguments = [QUERY_PARAMS_DATA[queryParam].reduxSelector];
-  if (QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction) {
-    useSelectorArguments = [
-      QUERY_PARAMS_DATA[queryParam].reduxSelector,
-      // @ts-ignore
-      QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction,
-    ];
-  }
-  // @ts-ignore
-  const selectedValue = useSelector(...useSelectorArguments);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const { selector } = QUERY_PARAMS_DATA[queryParam];
+
+  const selectedValue = useXstateSelector(audioService, selector);
   const [valueDetails, setValueDetails] = useState({
     value: selectedValue,
     isQueryParamDifferent: false,

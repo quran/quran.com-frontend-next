@@ -50,7 +50,6 @@ const SettingsReciter = () => {
   const selectedReciterId = useSelector(audioService, (state) => state.context.reciterId);
 
   // given the reciterId, get the full reciter object.
-  // and setReciter in redux
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));

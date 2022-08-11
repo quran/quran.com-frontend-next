@@ -11,12 +11,8 @@ import { RootState } from 'src/redux/RootState';
 import AudioState from 'src/redux/types/AudioState';
 import SliceName from 'src/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import Reciter from 'types/Reciter';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
-export const selectReciterId = (state: RootState) => state.audioPlayerState.reciter.id;
-export const selectIsUsingDefaultReciter = (state: RootState) =>
-  state.audioPlayerState.isUsingDefaultReciter;
 export const selectEnableAutoScrolling = (state: RootState) =>
   state.audioPlayerState.enableAutoScrolling;
 export const selectIsDownloadingAudio = (state: RootState) =>
@@ -28,13 +24,6 @@ export const audioPlayerStateSlice = createSlice({
   name: SliceName.AUDIO_PLAYER_STATE,
   initialState: getAudioPlayerStateInitialState(),
   reducers: {
-    setReciter: (state, action: PayloadAction<{ reciter: Reciter; locale: string }>) => ({
-      ...state,
-      isUsingDefaultReciter:
-        getAudioPlayerStateInitialState(action.payload.locale).reciter.id ===
-        action.payload.reciter.id,
-      reciter: action.payload.reciter,
-    }),
     setEnableAutoScrolling: (state, action: PayloadAction<boolean>) => ({
       ...state,
       enableAutoScrolling: action.payload,
@@ -99,11 +88,7 @@ export const audioPlayerStateSlice = createSlice({
   },
 });
 
-export const {
-  setReciter,
-  setEnableAutoScrolling,
-  setIsDownloadingAudio,
-  setShowTooltipWhenPlayingAudio,
-} = audioPlayerStateSlice.actions;
+export const { setEnableAutoScrolling, setIsDownloadingAudio, setShowTooltipWhenPlayingAudio } =
+  audioPlayerStateSlice.actions;
 
 export default audioPlayerStateSlice.reducer;

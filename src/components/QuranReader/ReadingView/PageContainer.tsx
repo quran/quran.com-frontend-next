@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useContext } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -8,9 +9,10 @@ import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
 import { getPageNumberByPageIndex } from 'src/components/QuranReader/utils/page';
-import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -82,7 +84,11 @@ const PageContainer: React.FC<Props> = ({
     () => (pageIndex === 0 ? getInitialVerses(pageNumber, initialData.verses) : initialData.verses),
     [initialData.verses, pageIndex, pageNumber],
   );
-  const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
+    selectIsUsingDefaultReciter(state, lang),
+  );
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const shouldUseInitialData =
     pageIndex === 0 &&

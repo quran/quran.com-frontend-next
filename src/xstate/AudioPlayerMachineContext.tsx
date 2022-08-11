@@ -10,6 +10,7 @@ import {
   persistXstateToLocalStorage,
 } from './actors/audioPlayer/audioPlayerPersistHelper';
 
+import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { getUserPreferences } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -20,6 +21,10 @@ export const AudioPlayerMachineContext = createContext(
 
 export const AudioPlayerMachineProvider = ({ children, locale }) => {
   const initialXstateContext = getXstateStateFromLocalStorage();
+  const defaultAudioStateByLocale = getAudioPlayerStateInitialState(locale);
+  const defaultLocaleContext = {
+    reciterId: defaultAudioStateByLocale.reciter.id,
+  };
 
   const isClient = !!(
     typeof window !== 'undefined' &&
@@ -34,6 +39,7 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
     {
       context: {
         ...audioPlayerMachine.initialState.context,
+        ...defaultLocaleContext,
         ...initialXstateContext,
       },
     },
