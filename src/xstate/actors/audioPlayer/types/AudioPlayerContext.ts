@@ -3,7 +3,7 @@ import { InterpreterFrom } from 'xstate';
 import { RadioActorRef } from '../../radio/types/RadioActorRef';
 import { createRepeatMachine } from '../../repeatMachine/repeatMachine';
 
-import { AudioFile } from './services/AudioData';
+import AudioData from 'types/AudioData';
 
 interface AudioPlayerContext {
   audioPlayer: HTMLAudioElement;
@@ -13,7 +13,7 @@ interface AudioPlayerContext {
   newAyahNumber?: number;
   ayahNumber: number;
   wordLocation?: number;
-  audioData: AudioFile;
+  audioData: AudioData;
   surahVersesCount: any;
   elapsed: number;
   duration: number;

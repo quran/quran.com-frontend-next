@@ -9,8 +9,7 @@ import RadioContext from './types/RadioContext';
 import RadioEventType from './types/RadioEventType';
 
 import curatedStations from 'src/components/Radio/curatedStations';
-import AudioTrack from 'src/xstate/Radio/types/AudioTrack';
-import StationType from 'src/xstate/Radio/types/StationType';
+import { AudioTrack, StationType } from 'src/components/Radio/types';
 
 export const createRadioMachine = () => {
   return createMachine(

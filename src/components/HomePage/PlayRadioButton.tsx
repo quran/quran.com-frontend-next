@@ -10,12 +10,12 @@ import Button from '../dls/Button/Button';
 import Link from '../dls/Link/Link';
 import Spinner from '../dls/Spinner/Spinner';
 import { getRandomCuratedStationId } from '../Radio/curatedStations';
+import { StationType } from '../Radio/types';
 
 import styles from './PlayRadioButton.module.scss';
 
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import StationType from 'src/xstate/Radio/types/StationType';
 import useCurrentStationInfo from 'src/xstate/Radio/useCurrentStationInfo';
 
 const RadioInformation = ({ radioActor }) => {

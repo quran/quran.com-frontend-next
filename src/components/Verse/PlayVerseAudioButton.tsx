@@ -35,7 +35,6 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
-  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const isVerseBeingPlayed = useXstateSelector(audioService, (state) => {
     const { surah, ayahNumber } = state.context;
     return (

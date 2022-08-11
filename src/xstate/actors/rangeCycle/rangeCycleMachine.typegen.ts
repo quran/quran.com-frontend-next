@@ -14,7 +14,7 @@ export interface Typegen0 {
     delays: never;
   };
   eventsCausingActions: {
-    forwardtimestamp_toVerseActor: "TIMESTAMP_UPDATED";
+    forwardtimestampToVerseActor: "TIMESTAMP_UPDATED";
     repeatCycle: "";
     repeatNextAyah: "REPEAT_NEXT_AYAH";
     repeatPreviousAyah: "REPEAT_PREV_AYAH";

@@ -7,11 +7,11 @@ import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './ReciterStationList.module.scss';
+import { StationType } from './types';
 
 import { makeCDNUrl } from 'src/utils/cdn';
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import StationType from 'src/xstate/Radio/types/StationType';
 import Reciter from 'types/Reciter';
 
 type ReciterStationListProps = {

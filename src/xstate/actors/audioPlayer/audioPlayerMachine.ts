@@ -9,13 +9,14 @@ import { pure, stop } from 'xstate/lib/actions';
 
 import { createRadioMachine } from '../radio/radioMachine';
 import { createRepeatMachine } from '../repeatMachine/repeatMachine';
-import VerseTiming from '../repeatMachine/types/VerseTiming';
 
 import AudioPlayerContext from './types/AudioPlayerContext';
 import AudioPlayerEventType from './types/AudioPlayerEventType';
-import AudioData from './types/services/AudioData';
 
+import { fetcher } from 'src/api';
 import { RECITERS } from 'src/xstate/constants';
+import AudioData from 'types/AudioData';
+import VerseTiming from 'types/VerseTiming';
 import Word from 'types/Word';
 
 /**
@@ -36,12 +37,12 @@ const isCurrentTimeInRange = (currentTime: number, timestampFrom: number, timest
 
 const getActiveVerseTiming = (context) => {
   const {
-    audioData: { verse_timings: verseTimings },
+    audioData: { verseTimings },
     ayahNumber,
   } = context;
   const { currentTime } = context.audioPlayer;
   const currentTimeMS = currentTime * 1000;
-  const lastAyahOfSurahTimestampTo = verseTimings[verseTimings.length - 1].timestamp_to;
+  const lastAyahOfSurahTimestampTo = verseTimings[verseTimings.length - 1].timestampTo;
 
   // if the reported time exceeded the maximum timestamp of the Surah from BE, just return the current Ayah which should be the last
   if (currentTimeMS > lastAyahOfSurahTimestampTo) {
@@ -51,8 +52,8 @@ const getActiveVerseTiming = (context) => {
   const activeVerseTiming = verseTimings.find((ayah) => {
     const isAyahBeingRecited = isCurrentTimeInRange(
       currentTimeMS,
-      ayah.timestamp_from,
-      ayah.timestamp_to,
+      ayah.timestampFrom,
+      ayah.timestampTo,
     );
     return isAyahBeingRecited;
   });
@@ -74,7 +75,7 @@ const getTimingSegment = (verseTiming: VerseTiming, wordPosition: number) =>
   verseTiming.segments.find(([location]) => wordPosition === location);
 
 export const getWordTimeSegment = (verseTimings: VerseTiming[], word: Word) => {
-  const verseTiming = verseTimings.find((timing) => timing.verse_key === word.verseKey);
+  const verseTiming = verseTimings.find((timing) => timing.verseKey === word.verseKey);
   if (!verseTiming) return null;
   const segment = getTimingSegment(verseTiming, word.position);
   if (segment) return [segment[1], segment[2]];
@@ -82,16 +83,16 @@ export const getWordTimeSegment = (verseTimings: VerseTiming[], word: Word) => {
 };
 
 const getActiveAyahNumber = (activeVerseTiming: VerseTiming) => {
-  const [, verseNumber] = activeVerseTiming.verse_key.split(':');
+  const [, verseNumber] = activeVerseTiming.verseKey.split(':');
   return Number(verseNumber);
 };
 
 const executeFetchReciter = async (context: AudioPlayerContext): Promise<AudioData> => {
   const { reciterId, surah } = context;
-  const response = await fetch(
+  const response = await fetcher<AudioData>(
     `https://api.qurancdn.com/api/qdc/audio/reciters/${reciterId}/audio_files?chapter=${surah}&segments=true`,
   );
-  return response.json();
+  return response;
 };
 
 const executeFetchReciterFromEvent = async (
@@ -111,7 +112,7 @@ const executeFetchReciterFromEvent = async (
 const getMediaSessionMetaData = async (context: AudioPlayerContext) => {
   const reciterName = RECITERS.find((reciter) => reciter.id === context.reciterId).name;
   return new MediaMetadata({
-    title: `Surah ${context.audioData.chapter_id}`,
+    title: `Surah ${context.audioData.chapterId}`,
     artist: reciterName,
     album: 'Quran.com',
     artwork: [
@@ -540,7 +541,7 @@ export const audioPlayerMachine =
                               toVerseNumber: event.data.to,
                               totalRangeCycle: event.data.repeatRange,
                               totalVerseCycle: event.data.repeatEachVerse,
-                              verseTimings: context.audioData.verse_timings,
+                              verseTimings: context.audioData.verseTimings,
                               delayMultiplier: event.data.delayMultiplier,
                             }),
                           );
@@ -735,20 +736,23 @@ export const audioPlayerMachine =
           audioPlayer: (context, event) => event.audioPlayerRef,
         }),
         setAudioData: assign({
-          duration: (context, event: any) => event.data.audio_files[0].duration / 1000,
-          audioData: (context, event: any) => event.data.audio_files[0],
-          surahVersesCount: (context, event: any) => event.data.audio_files[0].verse_timings.length,
+          duration: (context, event: any) => {
+            console.log('setAudioData', event);
+            return event.data.audioFiles[0].duration / 1000;
+          },
+          audioData: (context, event: any) => event.data.audioFiles[0],
+          surahVersesCount: (context, event: any) => event.data.audioFiles[0].verseTimings.length,
         }),
         setAudioPlayerSource: (context) => {
           const {
-            audioData: { audio_url: audioUrl },
+            audioData: { audioUrl },
           } = context;
           context.audioPlayer.src = audioUrl;
         },
         setAudioPlayerCurrentTime: (context) => {
           const {
             ayahNumber,
-            audioData: { verse_timings: verseTimings },
+            audioData: { verseTimings },
             duration,
             shouldPlayFromRandomTimeStamp,
           } = context;
@@ -757,7 +761,7 @@ export const audioPlayerMachine =
             context.audioPlayer.currentTime = randomTimestamp;
           } else {
             const ayahTimestamps = verseTimings[ayahNumber - 1];
-            const { timestamp_from: timestampFrom } = ayahTimestamps;
+            const { timestampFrom } = ayahTimestamps;
             context.audioPlayer.currentTime = timestampFrom / 1000;
           }
         },
@@ -871,7 +875,7 @@ export const audioPlayerMachine =
               send(
                 {
                   type: 'UPDATE_VERSE_TIMINGS',
-                  verseTimings: context.audioData.verse_timings,
+                  verseTimings: context.audioData.verseTimings,
                 },
                 { to: context.repeatActor.id },
               ),

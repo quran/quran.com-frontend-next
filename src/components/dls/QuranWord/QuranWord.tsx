@@ -119,7 +119,7 @@ const QuranWord = ({
       const isSameSurah = currentState.context.surah === Number(currentSurah);
       const shouldSeekTo = isPlaying && isSameSurah;
       if (shouldSeekTo) {
-        const wordSegment = getWordTimeSegment(currentState.context.audioData.verse_timings, word);
+        const wordSegment = getWordTimeSegment(currentState.context.audioData.verseTimings, word);
         if (!wordSegment) return;
         const [startTime] = wordSegment;
         audioService.send({ type: 'SEEK_TO', timestamp: startTime / 1000 });

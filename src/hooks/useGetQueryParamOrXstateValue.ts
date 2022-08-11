@@ -32,7 +32,7 @@ const QUERY_PARAMS_DATA = {
  * @param {QueryParam} queryParam
  * @returns {{value: any, isQueryParamDifferent: boolean}}
  */
-const useGetQueryParamOrReduxValue = (
+const useGetQueryParamOrXstateValue = (
   queryParam: QueryParam,
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
@@ -70,4 +70,4 @@ const useGetQueryParamOrReduxValue = (
   return valueDetails;
 };
 
-export default useGetQueryParamOrReduxValue;
+export default useGetQueryParamOrXstateValue;

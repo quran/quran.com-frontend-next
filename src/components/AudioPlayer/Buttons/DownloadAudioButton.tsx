@@ -36,10 +36,7 @@ export const download = (url: string, onDone: () => void) => {
 const DownloadAudioButton = () => {
   const { t } = useTranslation('common');
   const audioService = useContext(AudioPlayerMachineContext);
-  const audioDataUrl = useXstateSelector(
-    audioService,
-    (state) => state.context.audioData.audio_url,
-  );
+  const audioDataUrl = useXstateSelector(audioService, (state) => state.context.audioData.audioUrl);
   const loading = useSelector(selectIsDownloadingAudio);
   const dispatch = useDispatch();
 

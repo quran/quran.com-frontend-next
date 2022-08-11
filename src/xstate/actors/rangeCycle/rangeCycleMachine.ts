@@ -6,8 +6,9 @@
 import { createMachine, ActorRefFrom, spawn } from 'xstate';
 import { forwardTo, pure, sendParent, stop, assign, send } from 'xstate/lib/actions';
 
-import VerseTiming from '../repeatMachine/types/VerseTiming';
 import { createVerseCycleMachine } from '../verseCycle/verseCycleMachine';
+
+import VerseTiming from 'types/VerseTiming';
 
 export const createRangeCycleMachine = ({
   totalRangeCycle,
@@ -40,7 +41,7 @@ export const createRangeCycleMachine = ({
               actions: 'updateVerseTimings',
             },
             TIMESTAMP_UPDATED: {
-              actions: 'forwardtimestamp_toVerseActor',
+              actions: 'forwardtimestampToVerseActor',
               description:
                 'Receive TIMESTAMP_UPDATED event from parent. Forward to verseCycleActor',
             },
@@ -116,8 +117,8 @@ export const createRangeCycleMachine = ({
               currentVerseNumber: ayahNumber,
               verseCycleActor: spawn(
                 createVerseCycleMachine({
-                  timestamp_from: selectedVerseTiming.timestamp_from,
-                  timestamp_to: selectedVerseTiming.timestamp_to,
+                  timestampFrom: selectedVerseTiming.timestampFrom,
+                  timestampTo: selectedVerseTiming.timestampTo,
                   totalVerseCycle: context.totalVerseCycle,
                 }),
               ),
@@ -134,8 +135,8 @@ export const createRangeCycleMachine = ({
             send(
               {
                 type: 'UPDATE_VERSE_TIMING',
-                timestamp_from: curentVerseTiming.timestamp_from,
-                timestamp_to: curentVerseTiming.timestamp_to,
+                timestampFrom: curentVerseTiming.timestampFrom,
+                timestampTo: curentVerseTiming.timestampTo,
               },
               {
                 to: context.verseCycleActor.id,
@@ -161,8 +162,8 @@ export const createRangeCycleMachine = ({
               currentVerseNumber: nextVerseNumber,
               verseCycleActor: spawn(
                 createVerseCycleMachine({
-                  timestamp_from: nextVerseTiming.timestamp_from,
-                  timestamp_to: nextVerseTiming.timestamp_to,
+                  timestampFrom: nextVerseTiming.timestampFrom,
+                  timestampTo: nextVerseTiming.timestampTo,
                   totalVerseCycle: context.totalVerseCycle,
                 }),
               ),
@@ -180,8 +181,8 @@ export const createRangeCycleMachine = ({
               currentVerseNumber: prevVerseNumber,
               verseCycleActor: spawn(
                 createVerseCycleMachine({
-                  timestamp_from: prevVerseTiming.timestamp_from,
-                  timestamp_to: prevVerseTiming.timestamp_to,
+                  timestampFrom: prevVerseTiming.timestampFrom,
+                  timestampTo: prevVerseTiming.timestampTo,
                   totalVerseCycle: context.totalVerseCycle,
                 }),
               ),
@@ -206,8 +207,8 @@ export const createRangeCycleMachine = ({
             assign({
               verseCycleActor: spawn(
                 createVerseCycleMachine({
-                  timestamp_from: nextVerseTiming.timestamp_from,
-                  timestamp_to: nextVerseTiming.timestamp_to,
+                  timestampFrom: nextVerseTiming.timestampFrom,
+                  timestampTo: nextVerseTiming.timestampTo,
                   totalVerseCycle: context.totalVerseCycle,
                 }),
               ),
@@ -218,7 +219,7 @@ export const createRangeCycleMachine = ({
         /**
          * forward TIMESTAMP_UPDATED event to verseCycleActor
          */
-        forwardtimestamp_toVerseActor: forwardTo((context) => {
+        forwardtimestampToVerseActor: forwardTo((context) => {
           return context.verseCycleActor;
         }),
 
@@ -246,8 +247,8 @@ export const createRangeCycleMachine = ({
               currentRangeCycle: context.currentRangeCycle + 1,
               verseCycleActor: spawn(
                 createVerseCycleMachine({
-                  timestamp_from: verseTiming.timestamp_from,
-                  timestamp_to: verseTiming.timestamp_to,
+                  timestampFrom: verseTiming.timestampFrom,
+                  timestampTo: verseTiming.timestampTo,
                   totalVerseCycle: context.totalVerseCycle,
                 }),
               ),
@@ -273,8 +274,8 @@ export const createRangeCycleMachine = ({
             const curentVerseTiming = context.verseTimings[context.currentVerseNumber - 1];
             return spawn(
               createVerseCycleMachine({
-                timestamp_from: curentVerseTiming.timestamp_from,
-                timestamp_to: curentVerseTiming.timestamp_to,
+                timestampFrom: curentVerseTiming.timestampFrom,
+                timestampTo: curentVerseTiming.timestampTo,
                 totalVerseCycle: context.totalVerseCycle,
               }),
             );

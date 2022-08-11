@@ -6,13 +6,13 @@
 import { assign, createMachine } from 'xstate';
 import { pure, sendParent } from 'xstate/lib/actions';
 
-export const createVerseCycleMachine = ({ timestamp_from, timestamp_to, totalVerseCycle }) =>
+export const createVerseCycleMachine = ({ timestampFrom, timestampTo, totalVerseCycle }) =>
   /** @xstate-layout N4IgpgJg5mDOIC5QDcwCdZgMIE8DGANmAIJ4AuA9mgHQCWAdgApoVRpywDEAqowCLEAKgFEA+oICSAWQkA5AOKJQABwqxaZWhXpKQAD0QBaAEwB2AJzULxgCznjAZgAMTgBxOLAGhA5EAVktzIKDXP2MARlsbJ3CAX1jvVAxsfCJSShokzGF6CEhOXVV1TW1dAwRwu2oANjdq8PqG41dmh29fBAdTcOpzU1C3G1dw8OdHeISQego8+CQQLJTCEnIqOiYWNg5CtQ0tHXnyw2qHG2obRwdRroHzNp9-B2o-Fxs32vDTCxtq+MT0TC4ZbpNaLHJ5CA7Yr7MqIYxuaiuIYudzhO7mEbtRDhJx+c6uaqmALdGxo0nmP4LAFLNKrGgAMwYtFgAAtIFC9qVDtiHK5eqY7Gi3F9og4-FiEPY+aYImZqh9zNU-KZKYsgbSMhySgdQEclXyLg4rkb+i87hLDGj8S8PFdXATusZfhMgA */
   createMachine(
     {
       context: {
-        timestamp_from,
-        timestamp_to,
+        timestampFrom,
+        timestampTo,
         totalVerseCycle,
         currentVerseCycle: 1,
       },
@@ -56,7 +56,7 @@ export const createVerseCycleMachine = ({ timestamp_from, timestamp_to, totalVer
       guards: {
         verseEnded: (context, event: { timestamp: number }) => {
           return (
-            event.timestamp >= context.timestamp_to - 200 // 200ms is a buffer for the verse end time
+            event.timestamp >= context.timestampTo - 200 // 200ms is a buffer for the verse end time
             // TODO: discuss this
           );
         },
@@ -67,8 +67,8 @@ export const createVerseCycleMachine = ({ timestamp_from, timestamp_to, totalVer
       actions: {
         updateVerseTiming: pure((context, event: any) => {
           return assign({
-            timestamp_from: event.timestamp_from,
-            timestamp_to: event.timestamp_to,
+            timestampFrom: event.timestampFrom,
+            timestampTo: event.timestampTo,
           });
         }),
         sendVerseRepeatFinished: sendParent(() => {

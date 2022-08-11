@@ -1,4 +1,4 @@
-import StationType from 'src/xstate/Radio/types/StationType';
+import { StationType } from 'src/components/Radio/types';
 
 type RadioEventType =
   | { type: 'TRACK_ENDED' }

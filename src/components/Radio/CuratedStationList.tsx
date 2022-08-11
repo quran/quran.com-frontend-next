@@ -9,10 +9,10 @@ import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
+import { StationType } from './types';
 
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import StationType from 'src/xstate/Radio/types/StationType';
 
 // When one of the curated station is clicked,
 // 1) Pick (randomly) one of the audioTrack listen in the station

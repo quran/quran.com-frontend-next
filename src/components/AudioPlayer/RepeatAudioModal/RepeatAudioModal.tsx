@@ -41,7 +41,6 @@ const RepeatAudioModal = ({
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
-  // const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
   const audioService = useContext(AudioPlayerMachineContext);
   const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
