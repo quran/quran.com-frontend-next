@@ -93,12 +93,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           </div>
           <div className={styles.actionContainerRight}>
             <div className={styles.actionItem}>
-              <OverflowVerseActionsMenu
-                bookmarksRangeUrl={bookmarksRangeUrl}
-                verse={verse}
-                isModal
-                isPortalled
-              />
+              <OverflowVerseActionsMenu bookmarksRangeUrl={bookmarksRangeUrl} verse={verse} />
             </div>
           </div>
         </div>

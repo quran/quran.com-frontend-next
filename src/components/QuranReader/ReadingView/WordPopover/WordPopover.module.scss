@@ -1,14 +1,7 @@
 @use "src/styles/breakpoints";
 
 .content {
-  padding-block-start: var(--spacing-micro);
-  padding-block-end: var(--spacing-micro);
-  padding-inline-start: var(--spacing-micro);
-  padding-inline-end: var(--spacing-micro);
-  background-color: var(--color-background-elevated);
-  & > span {
-    fill: var(--color-background-elevated);
-  }
+  z-index: var(--z-index-default);
 }
 
 .trigger {

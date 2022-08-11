@@ -139,6 +139,7 @@ const LanguageSelector = ({
           }`,
         );
       }}
+      isPortalled={false}
     >
       {options.map((option) => (
         <PopoverMenu.Item
