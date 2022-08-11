@@ -31,16 +31,23 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
 
   const play = () => {
     logButtonClick('chapter_header_play_audio');
-    audioService.send({
-      type: 'PLAY_SURAH',
-      surah: chapterId,
-    });
+    const { surah } = audioService.getSnapshot().context;
+
+    // if surah is being played, toggle it
+    if (Number(chapterId) === surah) {
+      audioService.send('TOGGLE');
+    } else {
+      audioService.send({
+        type: 'PLAY_SURAH',
+        surah: chapterId,
+      });
+    }
   };
 
   const pause = () => {
     logButtonClick('chapter_header_pause_audio');
     audioService.send({
-      type: 'PAUSE',
+      type: 'TOGGLE',
     });
   };
 
