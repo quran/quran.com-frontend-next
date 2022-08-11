@@ -1,4 +1,3 @@
-import { triggerPauseAudio, triggerResumeAudio } from 'src/components/AudioPlayer/EventTriggers';
 import { QURANCDN_AUDIO_BASE_URL } from 'src/utils/audio';
 import Word from 'types/Word';
 
@@ -29,18 +28,13 @@ const playWordByWordAudio = (url: string) => {
     window.wordByWordAudioPlayerEl = null;
   }
 
-  const isMainAudioPlayerPlaying = window.audioPlayerEl && !window.audioPlayerEl.paused;
-
-  const removeDOMAndResumeMainAudioPlayer = () => {
-    window.wordByWordAudioPlayerEl.removeEventListener('ended', removeDOMAndResumeMainAudioPlayer);
+  const removeDOM = () => {
+    window.wordByWordAudioPlayerEl.removeEventListener('ended', removeDOM);
     window.wordByWordAudioPlayerEl.remove();
-
-    if (isMainAudioPlayerPlaying) triggerResumeAudio();
   };
 
   window.wordByWordAudioPlayerEl = new Audio(url);
-  if (isMainAudioPlayerPlaying) triggerPauseAudio();
 
   window.wordByWordAudioPlayerEl.play();
-  window.wordByWordAudioPlayerEl.addEventListener('ended', removeDOMAndResumeMainAudioPlayer);
+  window.wordByWordAudioPlayerEl.addEventListener('ended', removeDOM);
 };

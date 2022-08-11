@@ -4,7 +4,6 @@ import { useSelector } from '@xstate/react';
 
 import AudioKeyBoardListeners from '../AudioKeyboardListeners';
 import AudioPlayerSlider from '../AudioPlayerSlider';
-import { togglePlaying, triggerSeek } from '../EventTriggers';
 import PlaybackControls from '../PlaybackControls';
 import RadioPlaybackControl from '../RadioPlaybackControl';
 
@@ -21,9 +20,9 @@ const AudioPlayerBody = () => {
       <div className={styles.innerContainer}>
         <AudioKeyBoardListeners
           seek={(seekDuration) => {
-            triggerSeek(seekDuration);
+            audioService.send({ type: 'SEEK_TO', timestamp: seekDuration });
           }}
-          togglePlaying={() => togglePlaying()}
+          togglePlaying={() => audioService.send('TOGGLE')}
           isAudioPlayerHidden={false}
         />
         {!isRadioMode && (

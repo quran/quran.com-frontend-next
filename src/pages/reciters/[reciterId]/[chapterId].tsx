@@ -19,7 +19,6 @@ import styles from './chapterId.module.scss';
 
 import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
-import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
@@ -65,9 +64,11 @@ const RecitationPage = ({
     isAudioPlaying && currentSurah === Number(selectedChapter.id);
 
   const onPlayAudioClicked = () => {
-    // TODO: handle playing surah without changing reciter
-    audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciter.id });
-    audioService.send({ type: 'PLAY_SURAH', surah: Number(selectedChapter.id) });
+    audioService.send({
+      type: 'PLAY_SURAH',
+      surah: Number(selectedChapter.id),
+      reciterId: selectedReciter.id,
+    });
   };
 
   const onCopyLinkClicked = () => {
@@ -127,7 +128,7 @@ const RecitationPage = ({
           <div className={styles.actionsContainer}>
             {isCurrentlyPlayingThisChapter ? (
               <Button
-                onClick={() => triggerPauseAudio()}
+                onClick={() => audioService.send('TOGGLE')}
                 prefix={<PauseIcon />}
                 className={styles.playButton}
               >

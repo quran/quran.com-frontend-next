@@ -27,12 +27,6 @@ const SeekButton = ({ type }: SeekButtonProps) => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`audio_player_${type}`);
     audioService.send({ type: type === SeekButtonType.NextAyah ? 'NEXT_AYAH' : 'PREV_AYAH' });
-
-    // const newVerse = type === SeekButtonType.PrevAyah ? highlightedVerse - 1 : highlightedVerse + 1;
-    // const verseKey = makeVerseKey(highlightedChapter, newVerse);
-
-    // const selectedVerseTiming = getVerseTimingByVerseKey(verseKey, verseTimingData);
-    // triggerSetCurrentTime(selectedVerseTiming.timestampFrom / 1000); // AudioPlayer accept 'seconds' instead of 'ms'
   };
 
   return (

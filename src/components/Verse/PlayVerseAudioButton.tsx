@@ -9,7 +9,6 @@ import PlayIcon from '../../../public/icons/play-outline.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
-import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, {
   ButtonShape,
   ButtonSize,
@@ -61,7 +60,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const onPauseClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_pause_verse`);
-    triggerPauseAudio();
+    audioService.send('TOGGLE');
 
     if (onActionTriggered) {
       onActionTriggered();

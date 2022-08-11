@@ -172,11 +172,18 @@ export const audioPlayerMachine =
               description: 'User opens the audio player to play an Ayah',
               target: 'VISIBLE',
             },
-            PLAY_SURAH: {
-              actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
-              description: 'User opens the audio player to play a Surah',
-              target: 'VISIBLE',
-            },
+            PLAY_SURAH: [
+              {
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                cond: 'isUsingCustomReciterId',
+                target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+              },
+              {
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                description: 'User opens the audio player to play a Surah',
+                target: 'VISIBLE',
+              },
+            ],
             SET_PLAYBACK_SPEED: {
               actions: 'setPlaybackRate',
               description: 'User change the playback speed',
@@ -428,13 +435,18 @@ export const audioPlayerMachine =
                     ],
                     PLAY_SURAH: [
                       {
-                        actions: ['stopRepeatActor', 'setNewSurahAndResetNewAyahNumber'],
+                        actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                        cond: 'isUsingCustomReciterId',
+                        target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+                      },
+                      {
+                        actions: ['stopRepeatActor', 'setNewSurahAndResetNewAyahNumber', 'test'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
                       },
                       {
-                        actions: ['exitRadio', 'stopRepeatActor'],
+                        actions: ['exitRadio', 'stopRepeatActor', 'test'],
                         description:
                           'When the user chooses to play an Ayah of the same Surah. (can be the same Ayah being recited)',
                         cond: 'isSameSurah',
@@ -500,6 +512,32 @@ export const audioPlayerMachine =
               invoke: {
                 src: 'fetchReciter',
                 id: 'fetchReciter',
+                onDone: [
+                  {
+                    actions: [
+                      'setAudioData',
+                      'setAudioPlayerSource',
+                      'setAudioPlayerCurrentTime',
+                      'updateRepeatVerseTimings',
+                    ],
+                    description: 'The API call to get the selected chapter + Surah succeeded',
+                    target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.LOADING',
+                  },
+                ],
+                onError: [
+                  {
+                    description: 'The API call to get the selected chapter + Surah failed',
+                    target: 'FAILED',
+                  },
+                ],
+              },
+              tags: 'loading',
+            },
+            LOADING_CUSTOM_RECITER_DATA: {
+              description: 'The reciter + Surah data are being fetched',
+              invoke: {
+                src: 'fetchCustomReciter',
+                id: 'fetchCustomReciter',
                 onDone: [
                   {
                     actions: [
@@ -605,6 +643,11 @@ export const audioPlayerMachine =
             ],
             PLAY_SURAH: [
               {
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                cond: 'isUsingCustomReciterId',
+                target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
+              },
+              {
                 actions: 'setNewSurahAndResetNewAyahNumber',
                 description: 'When the user chooses to play another Surah',
                 cond: 'isDifferentSurah',
@@ -638,6 +681,9 @@ export const audioPlayerMachine =
     },
     {
       actions: {
+        test: () => {
+          alert('a');
+        },
         setInitialContext: assign({
           reciterId: (context, event) => event.reciterId,
           playbackRate: (context, event) => event.playbackRate,
@@ -737,7 +783,6 @@ export const audioPlayerMachine =
         }),
         setAudioData: assign({
           duration: (context, event: any) => {
-            console.log('setAudioData', event);
             return event.data.audioFiles[0].duration / 1000;
           },
           audioData: (context, event: any) => event.data.audioFiles[0],
@@ -902,9 +947,15 @@ export const audioPlayerMachine =
         isDifferentSurah: (context, event) => context.surah !== event.surah,
         isSameSurah: (context, event) => context.surah === event.surah,
         isRepeatActive: (context) => !!context.repeatActor,
+        isUsingCustomReciterId: (context, event) => !!event.reciterId,
       },
       services: {
         fetchReciter: (context) => executeFetchReciter(context),
+        fetchCustomReciter: (context, event) => {
+          console.log(event);
+          // @ts-ignore
+          return executeFetchReciter({ surah: event.surah, reciterId: event.reciterId });
+        },
         fetchRepeatData: (context, event) => executeFetchReciterFromEvent(context, event),
         // eslint-disable-next-line react-func/max-lines-per-function
         mediaSessionListener: (context) => (callback) => {

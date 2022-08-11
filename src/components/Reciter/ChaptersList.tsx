@@ -10,7 +10,6 @@ import DownloadIcon from '../../../public/icons/download.svg';
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
-import { triggerPauseAudio } from '../AudioPlayer/EventTriggers';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 import Spinner, { SpinnerSize } from '../dls/Spinner/Spinner';
@@ -49,9 +48,11 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
       stationId: selectedChapterId,
     });
 
-    // TODO: Update xstate to be able to play the surah without changing the reciter in the context
-    audioService.send({ type: 'CHANGE_RECITER', reciterId: selectedReciter.id });
-    audioService.send({ type: 'PLAY_SURAH', surah: Number(chapterId) });
+    audioService.send({
+      type: 'PLAY_SURAH',
+      surah: Number(chapterId),
+      reciterId: selectedReciter.id,
+    });
   };
 
   const onCopyUrlClicked = (chapterId) => {
@@ -79,7 +80,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
         const isAudioPlayingThisChapter = isAudioPlaying && currentSurah === Number(chapter.id);
 
         const onClick = () => {
-          if (isAudioPlayingThisChapter) triggerPauseAudio();
+          if (isAudioPlayingThisChapter) audioService.send('TOGGLE');
           else playChapter(chapter.id.toString());
         };
 

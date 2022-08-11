@@ -3,6 +3,11 @@
 export interface Typegen0 {
   "@@xstate/typegen": true;
   internalEvents: {
+    "done.invoke.fetchCustomReciter": {
+      type: "done.invoke.fetchCustomReciter";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
     "done.invoke.fetchReciter": {
       type: "done.invoke.fetchReciter";
       data: unknown;
@@ -12,6 +17,10 @@ export interface Typegen0 {
       type: "done.invoke.fetchRepeatData";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
+    "error.platform.fetchCustomReciter": {
+      type: "error.platform.fetchCustomReciter";
+      data: unknown;
     };
     "error.platform.fetchReciter": {
       type: "error.platform.fetchReciter";
@@ -27,6 +36,7 @@ export interface Typegen0 {
     "xstate.init": { type: "xstate.init" };
   };
   invokeSrcNameMap: {
+    fetchCustomReciter: "done.invoke.fetchCustomReciter";
     fetchReciter: "done.invoke.fetchReciter";
     fetchRepeatData: "done.invoke.fetchRepeatData";
     mediaSessionListener: "done.invoke.audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED:invocation[0]";
@@ -61,6 +71,7 @@ export interface Typegen0 {
       | "PLAY_SURAH"
       | "PREV_AYAH"
       | "TOGGLE"
+      | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData"
       | "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING";
@@ -69,16 +80,21 @@ export interface Typegen0 {
     resetAyahNumber: "CLOSE" | "PLAY_SURAH";
     resetElapsedTime: "CHANGE_RECITER" | "CLOSE";
     seekTo: "SEEK_TO";
-    setAudioData: "done.invoke.fetchReciter" | "done.invoke.fetchRepeatData";
+    setAudioData:
+      | "done.invoke.fetchCustomReciter"
+      | "done.invoke.fetchReciter"
+      | "done.invoke.fetchRepeatData";
     setAudioPlayerCurrentTime:
       | "NEXT_AYAH"
       | "PLAY_AYAH"
       | "PLAY_SURAH"
       | "PREV_AYAH"
       | "REPEAT_AYAH"
+      | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData";
     setAudioPlayerSource:
+      | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData";
     setAudioRef: "SET_AUDIO_REF";
@@ -90,6 +106,7 @@ export interface Typegen0 {
       | "CANCEL_PLAY_MISMATCHED_SURAH"
       | "PLAY_AYAH"
       | "PLAY_SURAH"
+      | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData";
     setNewSurahAndAyahNumbers: "PLAY_AYAH";
@@ -104,11 +121,15 @@ export interface Typegen0 {
       | "PLAY_RADIO"
       | "PLAY_SURAH"
       | "REPEAT_FINISHED";
+    test: "PLAY_SURAH";
     updateRepeatAyah: "PLAY_AYAH";
-    updateRepeatVerseTimings: "done.invoke.fetchReciter";
+    updateRepeatVerseTimings:
+      | "done.invoke.fetchCustomReciter"
+      | "done.invoke.fetchReciter";
     updateTiming: "UPDATE_TIMING";
   };
   eventsCausingServices: {
+    fetchCustomReciter: "PLAY_SURAH";
     fetchReciter:
       | "CHANGE_RECITER"
       | "CONFIRM_PLAY_MISMATCHED_SURAH"
@@ -121,6 +142,7 @@ export interface Typegen0 {
       | "CANCEL_PLAY_MISMATCHED_SURAH"
       | "PLAY_AYAH"
       | "PLAY_SURAH"
+      | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData";
   };
@@ -130,6 +152,7 @@ export interface Typegen0 {
     isNotLastVerse: "NEXT_AYAH";
     isRepeatActive: "NEXT_AYAH" | "PREV_AYAH";
     isSameSurah: "PLAY_AYAH" | "PLAY_SURAH";
+    isUsingCustomReciterId: "PLAY_SURAH";
   };
   eventsCausingDelays: {
     VERSE_DELAY: "REPEAT_AYAH";
@@ -148,6 +171,7 @@ export interface Typegen0 {
     | "VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE"
     | "VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.LOADING"
     | "VISIBLE.FAILED"
+    | "VISIBLE.LOADING_CUSTOM_RECITER_DATA"
     | "VISIBLE.LOADING_RECITER_DATA"
     | "VISIBLE.LOADING_REPEAT_DATA"
     | "VISIBLE.SURAH_MISMATCH"
@@ -155,6 +179,7 @@ export interface Typegen0 {
         VISIBLE?:
           | "AUDIO_PLAYER_INITIATED"
           | "FAILED"
+          | "LOADING_CUSTOM_RECITER_DATA"
           | "LOADING_RECITER_DATA"
           | "LOADING_REPEAT_DATA"
           | "SURAH_MISMATCH"

@@ -45,6 +45,7 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
     },
     (state) => {
       const { playbackRate, reciterId } = state.context;
+      if (state.event.type !== 'UPDATE_TIMING') console.log(state.value, state.event);
       persistXstateToLocalStorage({ playbackRate, reciterId });
     },
   );
