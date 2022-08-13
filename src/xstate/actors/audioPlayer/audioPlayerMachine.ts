@@ -13,9 +13,9 @@ import { createRepeatMachine } from '../repeatMachine/repeatMachine';
 import AudioPlayerContext from './types/AudioPlayerContext';
 import AudioPlayerEventType from './types/AudioPlayerEventType';
 
-import { fetcher } from 'src/api';
-import { RECITERS } from 'src/xstate/constants';
+import { fetcher, getAvailableReciters } from 'src/api';
 import AudioData from 'types/AudioData';
+import Reciter from 'types/Reciter';
 import VerseTiming from 'types/VerseTiming';
 import Word from 'types/Word';
 
@@ -109,8 +109,8 @@ const executeFetchReciterFromEvent = async (
   };
 };
 
-const getMediaSessionMetaData = async (context: AudioPlayerContext) => {
-  const reciterName = RECITERS.find((reciter) => reciter.id === context.reciterId).name;
+const getMediaSessionMetaData = async (context: AudioPlayerContext, recitersList: Reciter[]) => {
+  const reciterName = recitersList.find((reciter) => reciter.id === context.reciterId).name;
   return new MediaMetadata({
     title: `Surah ${context.audioData.chapterId}`,
     artist: reciterName,
@@ -123,6 +123,12 @@ const getMediaSessionMetaData = async (context: AudioPlayerContext) => {
       },
     ],
   });
+};
+
+const getRecitersList = async (context: AudioPlayerContext) => {
+  const { recitersList } = context;
+  if (recitersList) return recitersList;
+  return getAvailableReciters('en').then((res) => res.reciters);
 };
 
 export const audioPlayerMachine =
@@ -216,7 +222,7 @@ export const audioPlayerMachine =
               initial: 'PAUSED',
               entry: 'setMediaSessionMetaData',
               invoke: {
-                src: 'mediaSessionListener',
+                src: 'initMediaSession',
               },
               states: {
                 PAUSED: {
@@ -677,24 +683,20 @@ export const audioPlayerMachine =
         SET_INITIAL_CONTEXT: {
           actions: 'setInitialContext',
         },
+        SET_RECITERS_LIST: {
+          actions: 'setRecitersList',
+        },
       },
     },
     {
       actions: {
-        test: () => {
-          alert('a');
-        },
+        setRecitersList: assign({
+          recitersList: (context, event) => event.recitersList,
+        }),
         setInitialContext: assign({
           reciterId: (context, event) => event.reciterId,
           playbackRate: (context, event) => event.playbackRate,
         }),
-        setMediaSessionMetaData: (context) => {
-          if ('mediaSession' in navigator) {
-            getMediaSessionMetaData(context).then((metaData) => {
-              navigator.mediaSession.metadata = metaData;
-            });
-          }
-        },
         updateRepeatAyah: pure((context, event) => {
           if (context.repeatActor) {
             return send(
@@ -952,13 +954,21 @@ export const audioPlayerMachine =
       services: {
         fetchReciter: (context) => executeFetchReciter(context),
         fetchCustomReciter: (context, event) => {
-          console.log(event);
           // @ts-ignore
           return executeFetchReciter({ surah: event.surah, reciterId: event.reciterId });
         },
         fetchRepeatData: (context, event) => executeFetchReciterFromEvent(context, event),
         // eslint-disable-next-line react-func/max-lines-per-function
-        mediaSessionListener: (context) => (callback) => {
+        initMediaSession: (context) => (callback) => {
+          if ('mediaSession' in navigator) {
+            getRecitersList(context).then((recitersList) => {
+              callback({ type: 'SET_RECITERS_LIST', recitersList });
+              getMediaSessionMetaData(context, recitersList).then((metaData) => {
+                navigator.mediaSession.metadata = metaData;
+              });
+            });
+          }
+
           const actionHandlers = [
             [
               'previoustrack',

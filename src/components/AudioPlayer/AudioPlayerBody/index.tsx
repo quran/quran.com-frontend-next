@@ -19,9 +19,6 @@ const AudioPlayerBody = () => {
     <>
       <div className={styles.innerContainer}>
         <AudioKeyBoardListeners
-          seek={(seekDuration) => {
-            audioService.send({ type: 'SEEK_TO', timestamp: seekDuration });
-          }}
           togglePlaying={() => audioService.send('TOGGLE')}
           isAudioPlayerHidden={false}
         />

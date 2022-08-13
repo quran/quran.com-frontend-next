@@ -1,4 +1,5 @@
 import { StationType } from 'src/components/Radio/types';
+import Reciter from 'types/Reciter';
 
 type AudioPlayerEventType =
   | { type: 'SET_AUDIO_REF'; audioPlayerRef: HTMLAudioElement }
@@ -41,6 +42,7 @@ type AudioPlayerEventType =
     }
   | { type: 'REPEAT_FINISHED' }
   | { type: 'SEEK_TO'; timestamp: number }
-  | { type: 'SET_INITIAL_CONTEXT'; reciterId: number; playbackRate: number };
+  | { type: 'SET_INITIAL_CONTEXT'; reciterId: number; playbackRate: number }
+  | { type: 'SET_RECITERS_LIST'; recitersList: Reciter[] };
 
 export default AudioPlayerEventType;
