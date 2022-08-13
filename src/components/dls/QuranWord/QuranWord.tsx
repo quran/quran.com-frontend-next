@@ -121,13 +121,17 @@ const QuranWord = ({
   );
 
   const onClick = useCallback(() => {
-    if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData) {
+    if (
+      isWordByWordAllowed &&
+      wordClickFunctionality === WordClickFunctionality.PlayAudio &&
+      audioData
+    ) {
       logButtonClick('quran_word_pronounce');
       onQuranWordClick(word, playbackRate, audioData);
     } else {
       logButtonClick('quran_word');
     }
-  }, [audioData, playbackRate, word, wordClickFunctionality]);
+  }, [audioData, isWordByWordAllowed, playbackRate, word, wordClickFunctionality]);
 
   const shouldHandleWordClicking =
     readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;

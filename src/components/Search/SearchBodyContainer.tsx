@@ -10,14 +10,14 @@ import styles from './SearchBodyContainer.module.scss';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import SearchResults from 'src/components/Search/SearchResults';
 import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
-import { SearchResponse } from 'types/ApiResponses';
+import { VersesResponse } from 'types/ApiResponses';
 
 interface Props {
   searchQuery: string;
   isSearching: boolean;
   isSearchDrawer?: boolean;
   hasError: boolean;
-  searchResult: SearchResponse;
+  searchResult: VersesResponse;
   onSearchKeywordClicked: (keyword: string) => void;
   onSearchResultClicked?: () => void;
   currentPage?: number;
@@ -39,10 +39,7 @@ const SearchBodyContainer: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('common');
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
-  const isEmptyResponse =
-    searchResult &&
-    searchResult.pagination.totalRecords === 0 &&
-    !searchResult.result.navigation.length;
+  const isEmptyResponse = searchResult && searchResult.pagination.totalRecords === 0;
   const isPreInputLayout =
     !searchQuery || isSearching || hasError || (!isSearching && !hasError && isEmptyResponse);
   return (

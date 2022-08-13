@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState, RefObject } from 'react';
 
@@ -6,7 +8,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
 
-import { getSearchResults } from 'src/api';
+import { getFilteredVerses, getKalimatSearchResults } from 'src/api';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import useDebounce from 'src/hooks/useDebounce';
@@ -16,8 +18,9 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick, logEmptySearchResults } from 'src/utils/eventLogger';
-import { SearchResponse } from 'types/ApiResponses';
+import { logButtonClick } from 'src/utils/eventLogger';
+import { VersesResponse } from 'types/ApiResponses';
+import { QuranFont } from 'types/QuranReader';
 
 const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
   ssr: false,
@@ -41,7 +44,7 @@ const SearchDrawer: React.FC = () => {
   const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [searchResult, setSearchResult] = useState<SearchResponse>(null);
+  const [searchResult, setSearchResult] = useState<VersesResponse>(null);
   const isVoiceSearchFlowStarted = useSelector(selectIsSearchDrawerVoiceFlowStarted, shallowEqual);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
@@ -58,28 +61,46 @@ const SearchDrawer: React.FC = () => {
     if (debouncedSearchQuery) {
       dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
       setIsSearching(true);
-      getSearchResults({
-        query: debouncedSearchQuery,
-        ...(selectedTranslations &&
-          !!selectedTranslations.length && {
-            filterTranslations: selectedTranslations.join(','),
-          }),
-      })
-        .then((response) => {
-          if (response.status === 500) {
-            setHasError(true);
+      getKalimatSearchResults({ query: debouncedSearchQuery })
+        .then((kalimatResponse) => {
+          if (kalimatResponse.length) {
+            getFilteredVerses({
+              filters: kalimatResponse.map((result) => `${result.id}`).join(','),
+              fields: QuranFont.QPCHafs,
+              ...(!!selectedTranslations.length && {
+                translations: selectedTranslations.join(','),
+                translationFields: 'text,resource_id,resource_name',
+              }),
+            })
+              .then((response) => {
+                if (response.status === 500) {
+                  setHasError(true);
+                } else {
+                  setSearchResult(response);
+                }
+              })
+              .catch(() => {
+                setHasError(true);
+              })
+              .finally(() => {
+                setIsSearching(false);
+              });
           } else {
-            setSearchResult(response);
-            // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(debouncedSearchQuery, 'search_drawer');
-            }
+            setSearchResult({
+              pagination: {
+                perPage: 1,
+                currentPage: 1,
+                nextPage: 1,
+                totalRecords: 0,
+                totalPages: 1,
+              },
+              verses: [],
+            });
+            setIsSearching(false);
           }
         })
         .catch(() => {
           setHasError(true);
-        })
-        .finally(() => {
           setIsSearching(false);
         });
     } else {

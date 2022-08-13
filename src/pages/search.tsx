@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
@@ -11,10 +12,16 @@ import SearchIcon from '../../public/icons/search.svg';
 
 import styles from './search.module.scss';
 
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
+import {
+  getAvailableLanguages,
+  getAvailableTranslations,
+  getFilteredVerses,
+  getKalimatSearchResults,
+} from 'src/api';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
 import Input, { InputVariant } from 'src/components/dls/Forms/Input';
+import Toggle from 'src/components/dls/Toggle/Toggle';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
@@ -25,19 +32,15 @@ import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { getAllChaptersData } from 'src/utils/chapter';
-import {
-  logButtonClick,
-  logEmptySearchResults,
-  logEvent,
-  logValueChange,
-} from 'src/utils/eventLogger';
+import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
 import filterTranslations from 'src/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
-import { SearchResponse } from 'types/ApiResponses';
+import { VersesResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 import ChaptersData from 'types/ChaptersData';
+import { QuranFont } from 'types/QuranReader';
 
 const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -62,7 +65,8 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const [isContentModalOpen, setIsContentModalOpen] = useState<boolean>(false);
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [searchResult, setSearchResult] = useState<SearchResponse>(null);
+  const [exactMatchesOnly, setExactMatchOnly] = useState(true);
+  const [searchResult, setSearchResult] = useState<VersesResponse>(null);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   // the query params that we want added to the url
@@ -128,32 +132,53 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const getResults = useCallback(
     (query: string, page: number, translation: string, language: string) => {
       setIsSearching(true);
-      getSearchResults({
-        query,
-        filterLanguages: language,
-        size: PAGE_SIZE,
-        page,
-        ...(translation && { filterTranslations: translation }), // translations will be included only when there is a selected translation
-      })
-        .then((response) => {
-          if (response.status === 500) {
-            setHasError(true);
+      getKalimatSearchResults({ query, exactMatchesOnly: exactMatchesOnly ? 1 : 0 })
+        .then((kalimatResponse) => {
+          if (kalimatResponse.length) {
+            getFilteredVerses({
+              filters: kalimatResponse.map((result) => `${result.id}`).join(','),
+              fields: QuranFont.QPCHafs,
+              filterLanguages: language,
+              size: PAGE_SIZE,
+              page,
+              ...(translation && {
+                translations: [translation],
+                translationFields: 'text,resource_id,resource_name',
+              }),
+            })
+              .then((response) => {
+                if (response.status === 500) {
+                  setHasError(true);
+                } else {
+                  setSearchResult(response);
+                }
+              })
+              .catch(() => {
+                setHasError(true);
+              })
+              .finally(() => {
+                setIsSearching(false);
+              });
           } else {
-            setSearchResult(response);
-            // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(query, 'search_page');
-            }
+            setSearchResult({
+              pagination: {
+                perPage: 1,
+                currentPage: 1,
+                nextPage: 1,
+                totalRecords: 0,
+                totalPages: 1,
+              },
+              verses: [],
+            });
+            setIsSearching(false);
           }
         })
         .catch(() => {
           setHasError(true);
-        })
-        .finally(() => {
           setIsSearching(false);
         });
     },
-    [],
+    [exactMatchesOnly],
   );
 
   // listen to any changes in the API params and call BE on change.
@@ -303,6 +328,16 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
                 onTranslationChange={onTranslationChange}
               />
             </ContentModal>
+            <div className={styles.exactMatchContainer}>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
+              <p className={styles.exactMatchText}>Exact match only</p>
+              <Toggle
+                isChecked={exactMatchesOnly}
+                onClick={() => {
+                  setExactMatchOnly((prevExactMatch) => !prevExactMatch);
+                }}
+              />
+            </div>
             <div className={styles.filtersContainer}>
               <Button
                 onClick={() => setIsContentModalOpen(true)}

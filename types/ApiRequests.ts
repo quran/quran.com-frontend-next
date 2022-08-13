@@ -1,3 +1,9 @@
+export type KalimatSearchRequest = {
+  query: string;
+  exactMatchesOnly?: number;
+  numResults?: number;
+};
+
 export type SearchRequest = {
   query: string;
   filterLanguages?: string;

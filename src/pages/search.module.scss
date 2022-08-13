@@ -112,3 +112,13 @@ $tablet-max-width: 50rem;
   flex: 1;
   margin-inline-end: var(--spacing-small);
 }
+
+.exactMatchContainer {
+  display: flex;
+  margin-inline-start: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
+}
+
+.exactMatchText {
+  margin-inline-end: var(--spacing-micro);
+}

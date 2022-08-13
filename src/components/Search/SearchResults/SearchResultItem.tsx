@@ -15,6 +15,7 @@ import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 import Verse from 'types/Verse';
+import { CharType } from 'types/Word';
 
 export enum Source {
   SearchDrawer = 'search_drawer',
@@ -57,12 +58,20 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
         </Link>
         <div className={styles.quranTextContainer}>
           <div className={styles.quranTextResult} translate="no">
-            {result.words.map((word, index) => {
+            {/* @ts-ignore */}
+            {result.qpcUthmaniHafs.split(' ').map((wordText, index) => {
               return (
                 <QuranWord
-                  isHighlighted={!!word.highlight}
+                  isHighlighted={false}
                   key={`${result.verseKey}:${index + 1}`}
-                  word={word}
+                  // @ts-ignore
+                  word={{
+                    ...result,
+                    id: index,
+                    charTypeName: CharType.Word,
+                    hizbNumber: result.hizbNumber,
+                    text: wordText,
+                  }}
                   isWordByWordAllowed={false}
                   isAudioHighlightingAllowed={false}
                 />
