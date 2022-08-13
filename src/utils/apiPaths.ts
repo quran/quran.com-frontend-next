@@ -9,7 +9,12 @@ import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
-import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
+import {
+  AdvancedCopyRequest,
+  KalimatSearchRequest,
+  PagesLookUpRequest,
+  SearchRequest,
+} from 'types/ApiRequests';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
@@ -141,6 +146,17 @@ export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
  */
 export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('/search', params);
 
+export const makeKalimatSearchResultsUrl = ({
+  query,
+  exactMatchesOnly = 1,
+  numResults = 20,
+}: KalimatSearchRequest) =>
+  makeKalimatApiUrl({
+    query,
+    exactMatchesOnly,
+    numResults,
+  });
+
 /**
  * Compose the url for the navigation search API that is used to show results inside the command bar.
  *
@@ -267,3 +283,6 @@ export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, 
     }),
   )}`;
 };
+
+export const makeKalimatApiUrl = (params: KalimatSearchRequest) =>
+  `https://api.kalimat.dev:443/search?${stringify(params)}`;

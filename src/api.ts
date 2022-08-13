@@ -20,9 +20,16 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
+  makeKalimatSearchResultsUrl,
+  makeVersesFilterUrl,
 } from './utils/apiPaths';
 
-import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
+import {
+  SearchRequest,
+  AdvancedCopyRequest,
+  PagesLookUpRequest,
+  KalimatSearchRequest,
+} from 'types/ApiRequests';
 import {
   TranslationsResponse,
   SearchResponse,
@@ -39,11 +46,18 @@ import {
   ReciterResponse,
   TafsirContentResponse,
   PagesLookUpResponse,
+  KalimatSearchResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';
+
+export const KALIMAT_FETCH_OPTIONS = {
+  headers: {
+    'x-api-key': '8ef623eb-fd15-420c-9b5a-1738dc60a54d',
+  },
+};
 
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
@@ -180,6 +194,17 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
   fetcher(makeSearchResultsUrl(params));
 
 /**
+ * Get the search results of a query.
+ *
+ * @param {KalimatSearchRequest} params
+ * @returns  {Promise<KalimatSearchResponse>}
+ */
+export const getKalimatSearchResults = async (
+  params: KalimatSearchRequest,
+): Promise<KalimatSearchResponse> =>
+  fetcher(makeKalimatSearchResultsUrl(params), KALIMAT_FETCH_OPTIONS);
+
+/**
  * Get the list of tafsirs.
  *
  * @param {string} language
@@ -302,3 +327,6 @@ export const getTafsirContent = (
     }),
   );
 };
+
+export const getFilteredVerses = async (params: Record<string, any>): Promise<VersesResponse> =>
+  fetcher(makeVersesFilterUrl(params));

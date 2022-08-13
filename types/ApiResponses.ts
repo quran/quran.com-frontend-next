@@ -81,6 +81,13 @@ export interface SearchResponse extends BaseResponse {
   };
 }
 
+type KalimatResultItem = {
+  id: string;
+  text: string;
+};
+
+export type KalimatSearchResponse = KalimatResultItem[];
+
 export interface AdvancedCopyRawResultResponse extends BaseResponse {
   result?: string;
 }

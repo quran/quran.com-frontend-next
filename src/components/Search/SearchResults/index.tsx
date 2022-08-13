@@ -7,13 +7,12 @@ import styles from './SearchResults.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import Pagination from 'src/components/dls/Pagination/Pagination';
-import NavigationItem from 'src/components/Search/NavigationItem';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
-import { SearchResponse } from 'types/ApiResponses';
+import { VersesResponse } from 'types/ApiResponses';
 
 interface Props {
-  searchResult: SearchResponse;
+  searchResult: VersesResponse;
   searchQuery: string;
   isSearchDrawer?: boolean;
   currentPage?: number;
@@ -35,22 +34,13 @@ const SearchResults: React.FC<Props> = ({
   return (
     <>
       <div>
-        {!!searchResult.result.navigation?.length && (
-          <div className={styles.navigationItemsListContainer}>
-            {searchResult.result.navigation.map((navigationResult) => (
-              <span className={styles.navigationItemContainer} key={navigationResult.key}>
-                <NavigationItem isSearchDrawer={isSearchDrawer} navigation={navigationResult} />
-              </span>
-            ))}
-          </div>
-        )}
         <p className={styles.header}>
           {t('common:search-results', {
             count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
           })}
         </p>
         <>
-          {searchResult.result.verses.map((result) => (
+          {searchResult.verses.map((result) => (
             <SearchResultItem
               key={result.verseKey}
               result={result}
