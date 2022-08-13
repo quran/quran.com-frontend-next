@@ -1,6 +1,7 @@
 .container {
   display: inline-block;
   cursor: pointer;
+  white-space: nowrap;
 }
 .additionalWordGap {
   margin-inline-end: var(--spacing-xxsmall);

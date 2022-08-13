@@ -9,11 +9,7 @@ import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readin
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import { syncUserLocalData } from 'src/utils/auth/api';
-import {
-  makeBookmarksUrl,
-  makeReadingSessionsUrl,
-  makeUserProfileUrl,
-} from 'src/utils/auth/apiPaths';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
@@ -73,8 +69,6 @@ const useSyncUserData = () => {
       syncUserLocalData(requestPayload)
         .then((response) => {
           const { lastSyncAt } = response;
-          cache.delete(makeReadingSessionsUrl());
-          cache.delete(makeBookmarksUrl(mushafId));
           mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
           dispatch({ type: setLastSyncAt.type, payload: lastSyncAt });
         })
