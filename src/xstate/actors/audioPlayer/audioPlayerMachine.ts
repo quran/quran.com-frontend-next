@@ -220,7 +220,6 @@ export const audioPlayerMachine =
             AUDIO_PLAYER_INITIATED: {
               description: 'File has been loaded and is ready to be played',
               initial: 'PAUSED',
-              entry: 'setMediaSessionMetaData',
               invoke: {
                 src: 'initMediaSession',
               },
@@ -446,13 +445,13 @@ export const audioPlayerMachine =
                         target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
                       },
                       {
-                        actions: ['stopRepeatActor', 'setNewSurahAndResetNewAyahNumber', 'test'],
+                        actions: ['stopRepeatActor', 'setNewSurahAndResetNewAyahNumber'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
                       },
                       {
-                        actions: ['exitRadio', 'stopRepeatActor', 'test'],
+                        actions: ['exitRadio', 'stopRepeatActor'],
                         description:
                           'When the user chooses to play an Ayah of the same Surah. (can be the same Ayah being recited)',
                         cond: 'isSameSurah',

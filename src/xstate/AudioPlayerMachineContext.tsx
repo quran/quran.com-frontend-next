@@ -45,7 +45,6 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
     },
     (state) => {
       const { playbackRate, reciterId } = state.context;
-      if (state.event.type !== 'UPDATE_TIMING') console.log(state.value, state.event);
       persistXstateToLocalStorage({ playbackRate, reciterId });
     },
   );
@@ -54,7 +53,7 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
     if (isClient && loggedIn) {
       getUserPreferences(locale).then((preferences) => {
         const playbackRate =
-          preferences[PreferenceGroup.AUDIO].playbackRate ||
+          preferences[PreferenceGroup.AUDIO]?.playbackRate ||
           audioPlayerMachine.initialState.context.playbackRate;
 
         const reciterId =

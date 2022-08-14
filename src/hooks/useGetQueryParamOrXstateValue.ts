@@ -4,7 +4,11 @@ import { useContext, useEffect, useState } from 'react';
 import { useSelector as useXstateSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
 
-import { equalityCheckerByType, getQueryParamValueByType, ValueType } from 'src/utils/query-params';
+import {
+  equalityCheckerByType,
+  getQueryParamValueByType,
+  QueryParamValueType,
+} from 'src/utils/query-params';
 import { isValidReciterId } from 'src/utils/queryParamValidator';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
@@ -12,14 +16,14 @@ import QueryParam from 'types/QueryParam';
 const QUERY_PARAMS_DATA = {
   [QueryParam.Reciter]: {
     selector: (state: any) => state.context.reciterId,
-    valueType: ValueType.Number,
+    valueType: QueryParamValueType.Number,
     validate: isValidReciterId,
   },
 } as Record<
   QueryParam,
   {
     selector: (state) => any;
-    valueType: ValueType;
+    valueType: QueryParamValueType;
     validate: (val: any) => boolean;
   }
 >;

@@ -8,7 +8,11 @@ import { RootState } from 'src/redux/RootState';
 import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
-import { equalityCheckerByType, getQueryParamValueByType, ValueType } from 'src/utils/query-params';
+import {
+  equalityCheckerByType,
+  getQueryParamValueByType,
+  QueryParamValueType,
+} from 'src/utils/query-params';
 import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
 import QueryParam from 'types/QueryParam';
 
@@ -16,13 +20,13 @@ const QUERY_PARAMS_DATA = {
   [QueryParam.Translations]: {
     reduxSelector: selectSelectedTranslations,
     reduxEqualityFunction: areArraysEqual,
-    valueType: ValueType.ArrayOfNumbers,
+    valueType: QueryParamValueType.ArrayOfNumbers,
     validate: (val) => isValidTranslationsQueryParamValue(val),
   },
   [QueryParam.WBW_LOCALE]: {
     reduxSelector: selectWordByWordLocale,
     reduxEqualityFunction: shallowEqual,
-    valueType: ValueType.String,
+    valueType: QueryParamValueType.String,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     validate: (val) => true,
   },
@@ -30,7 +34,7 @@ const QUERY_PARAMS_DATA = {
   QueryParam,
   {
     reduxSelector: (state: RootState) => any;
-    valueType: ValueType;
+    valueType: QueryParamValueType;
     reduxEqualityFunction?: (left: any, right: any) => boolean;
     validate: (val: any) => boolean;
   }

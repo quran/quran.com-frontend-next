@@ -88,7 +88,6 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
         successCallback?: () => void,
       ) => {
         if (isLoggedIn()) {
-          // 1. dispatch the action first
           action();
           setIsLoading(true);
           addOrUpdateUserPreference(key, value, preferenceGroup)
@@ -124,7 +123,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
               setIsLoading(false);
             });
         } else {
-          dispatch(action);
+          action();
         }
       },
       onSettingsChange: (

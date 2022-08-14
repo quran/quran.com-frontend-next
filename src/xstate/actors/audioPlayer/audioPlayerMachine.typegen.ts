@@ -42,7 +42,7 @@ export interface Typegen0 {
     initMediaSession: "done.invoke.audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED:invocation[0]";
   };
   missingImplementations: {
-    actions: "test" | "setMediaSessionMetaData";
+    actions: never;
     services: never;
     guards: never;
     delays: never;
@@ -102,13 +102,6 @@ export interface Typegen0 {
     setCurrentSurahAndAyahAsNewSurahAndAyah: "CONFIRM_PLAY_MISMATCHED_SURAH";
     setElapsedTime: "TOGGLE";
     setInitialContext: "SET_INITIAL_CONTEXT";
-    setMediaSessionMetaData:
-      | "CANCEL_PLAY_MISMATCHED_SURAH"
-      | "PLAY_AYAH"
-      | "PLAY_SURAH"
-      | "done.invoke.fetchCustomReciter"
-      | "done.invoke.fetchReciter"
-      | "done.invoke.fetchRepeatData";
     setNewSurahAndAyahNumbers: "PLAY_AYAH";
     setNewSurahAndResetNewAyahNumber: "PLAY_SURAH";
     setPlaybackRate: "SET_PLAYBACK_SPEED";
@@ -122,7 +115,6 @@ export interface Typegen0 {
       | "PLAY_RADIO"
       | "PLAY_SURAH"
       | "REPEAT_FINISHED";
-    test: "PLAY_SURAH";
     updateRepeatAyah: "PLAY_AYAH";
     updateRepeatVerseTimings:
       | "done.invoke.fetchCustomReciter"
