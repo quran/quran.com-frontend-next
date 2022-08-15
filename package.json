@@ -78,7 +78,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@lokalise/node-api": "^8.0.0",
-    "@next/eslint-plugin-next": "^12.1.0",
+    "@next/eslint-plugin-next": "^12.2.5",
     "@playwright/test": "^1.25.0",
     "@storybook/addon-a11y": "^6.5.10",
     "@storybook/addon-actions": "^6.5.10",
