@@ -19,6 +19,8 @@ export const AudioPlayerMachineContext = createContext(
   {} as InterpreterFrom<typeof audioPlayerMachine>,
 );
 
+const LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER = ['CHANGE_RECITER', 'SET_PLAYBACK_SPEED'];
+
 export const AudioPlayerMachineProvider = ({ children, locale }) => {
   const initialXstateContext = getXstateStateFromLocalStorage();
   const defaultAudioStateByLocale = getAudioPlayerStateInitialState(locale);
@@ -45,7 +47,9 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
     },
     (state) => {
       const { playbackRate, reciterId } = state.context;
-      persistXstateToLocalStorage({ playbackRate, reciterId });
+      if (LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER.includes(state.event.type)) {
+        persistXstateToLocalStorage({ playbackRate, reciterId });
+      }
     },
   );
 
