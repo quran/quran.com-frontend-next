@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.17.0",
+    "@babel/eslint-parser": "^7.18.9",
     "@next/bundle-analyzer": "^12.2.5",
     "@notionhq/client": "^0.4.13",
     "@radix-ui/react-checkbox": "^1.0.0",
