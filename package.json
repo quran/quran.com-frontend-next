@@ -76,7 +76,7 @@
     "swr": "^1.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
+    "@babel/core": "^7.18.10",
     "@lokalise/node-api": "^8.0.0",
     "@next/eslint-plugin-next": "^12.2.5",
     "@playwright/test": "^1.25.0",
@@ -107,9 +107,9 @@
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "adm-zip": "^0.5.9",
     "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.2.4",
-    "babel-plugin-polyfill-corejs2": "^0.3.1",
-    "babel-plugin-polyfill-regenerator": "^0.3.1",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-polyfill-corejs2": "^0.3.2",
+    "babel-plugin-polyfill-regenerator": "^0.4.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.22.0",
     "eslint-config-airbnb": "^19.0.4",
