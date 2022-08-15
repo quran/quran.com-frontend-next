@@ -74,7 +74,7 @@ const AudioSection = () => {
       () =>
         audioService.send({
           type: 'SET_PLAYBACK_SPEED',
-          playbackRate,
+          playbackRate: Number(value),
         }),
       () =>
         audioService.send({
