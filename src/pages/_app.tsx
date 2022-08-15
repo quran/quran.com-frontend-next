@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { IdProvider } from '@radix-ui/react-id';
+import { DirectionProvider } from '@radix-ui/react-direction';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -74,22 +75,26 @@ function MyApp({ Component, pageProps }): JSX.Element {
       <FontPreLoader locale={locale} />
       <ReduxProvider locale={locale}>
         <ThemeProvider>
-          <IdProvider>
-            <ToastContainerProvider>
-              <UserAccountModal
-                requiredFields={userData?.requiredFields}
-                announcement={userData?.announcement}
-              />
-              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
-              <GlobalListeners />
-              <Navbar />
-              <DeveloperUtility />
-              <Component {...pageProps} />
-              <AudioPlayer />
-              <Footer />
-              <DonatePopup />
-            </ToastContainerProvider>
-          </IdProvider>
+          <DirectionProvider dir={getDir(locale)}>
+            <TooltipProvider>
+              <ToastContainerProvider>
+                <UserAccountModal
+                  requiredFields={userData?.requiredFields}
+                  announcement={userData?.announcement}
+                />
+                <DefaultSeo
+                  {...createSEOConfig({ locale, description: t('default-description') })}
+                />
+                <GlobalListeners />
+                <Navbar />
+                <DeveloperUtility />
+                <Component {...pageProps} />
+                <AudioPlayer />
+                <Footer />
+                <DonatePopup />
+              </ToastContainerProvider>
+            </TooltipProvider>
+          </DirectionProvider>
         </ThemeProvider>
         <SessionIncrementor />
       </ReduxProvider>
