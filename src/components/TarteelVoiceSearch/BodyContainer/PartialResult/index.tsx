@@ -28,6 +28,7 @@ const PartialResult: React.FC<Props> = ({ partialTranscript, volume, verticalLay
           <div
             className={styles.volumeCircle}
             // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             style={{ '--volume': getVolumeLevelMultiplier(volume) }}
           />
           <div className={styles.micCircle}>
