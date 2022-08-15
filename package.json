@@ -72,6 +72,7 @@
     "react-redux": "^8.0.2",
     "react-toastify": "^9.0.8",
     "react-virtuoso": "^2.16.6",
+    "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "swr": "^1.2.1"
   },

@@ -27,6 +27,7 @@ const usePlayNextAudioTrackForRadio = (
 
   const playNextAudio = useCallback(() => {
     const state = store.getState();
+    // @ts-ignore
     const currentRadioStationState = selectRadioStation(state);
     const { type } = currentRadioStationState;
     const stationOperator = stationOperators[type];
