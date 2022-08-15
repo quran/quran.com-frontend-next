@@ -1,11 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import BackwardIcon from '../../../public/icons/backward.svg';
 import ForwardIcon from '../../../public/icons/forward.svg';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import DataContext from 'src/contexts/DataContext';
+import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -18,8 +21,17 @@ type SeekButtonProps = {
   type: SeekButtonType;
   isLoading: boolean;
 };
-const SeekButton = ({ type }: SeekButtonProps) => {
+const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
   const audioService = useContext(AudioPlayerMachineContext);
+  const chaptersData = useContext(DataContext);
+
+  const surah = useSelector(audioService, (state) => state.context.surah);
+  const ayahNumber = useSelector(audioService, (state) => state.context.ayahNumber);
+
+  const chapterData = useMemo(
+    () => getChapterData(chaptersData, surah?.toString()),
+    [chaptersData, surah],
+  );
 
   const { t } = useTranslation('common');
 
@@ -29,12 +41,18 @@ const SeekButton = ({ type }: SeekButtonProps) => {
     audioService.send({ type: type === SeekButtonType.NextAyah ? 'NEXT_AYAH' : 'PREV_AYAH' });
   };
 
+  const isDisabled =
+    isLoading ||
+    (type === SeekButtonType.PrevAyah && ayahNumber <= 1) ||
+    (type === SeekButtonType.NextAyah && ayahNumber >= chapterData?.versesCount);
+
   return (
     <Button
       tooltip={type === SeekButtonType.PrevAyah ? t('previous-ayah') : t('next-ayah')}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
       onClick={onSeek}
+      isDisabled={isDisabled}
     >
       {type === SeekButtonType.PrevAyah ? <BackwardIcon /> : <ForwardIcon />}
     </Button>
