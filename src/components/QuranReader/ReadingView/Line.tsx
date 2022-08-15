@@ -38,8 +38,6 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
-  // export c  const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-  useScroll(SMOOTH_SCROLL_TO_CENTER);
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectWordByWordPreferences,

@@ -23,10 +23,11 @@ import {
   selectWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from 'src/utils/array';
+import { milliSecondsToSeconds } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { isQCFFont } from 'src/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
-import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachine';
+import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
@@ -122,7 +123,7 @@ const QuranWord = ({
         const wordSegment = getWordTimeSegment(currentState.context.audioData.verseTimings, word);
         if (!wordSegment) return;
         const [startTime] = wordSegment;
-        audioService.send({ type: 'SEEK_TO', timestamp: startTime / 1000 });
+        audioService.send({ type: 'SEEK_TO', timestamp: milliSecondsToSeconds(startTime) });
       } else {
         playWordAudio(word);
       }

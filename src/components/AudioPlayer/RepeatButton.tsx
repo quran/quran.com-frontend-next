@@ -2,10 +2,10 @@
 import { useContext, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
+import RemainingRangeCount from './RemainingRangeCount';
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
@@ -13,27 +13,15 @@ import Badge from 'src/components/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-
-const RemainingRangeCount = ({ rangeActor }) => {
-  const { lang } = useTranslation('common');
-  const remainingCount = useSelector(rangeActor, (state) => {
-    const { totalRangeCycle, currentRangeCycle } = (state as any).context;
-    return totalRangeCycle - currentRangeCycle + 1; // +1 to include the current cycle
-  });
-  const localizedRemainingCount = toLocalizedNumber(remainingCount, lang);
-
-  return <span>{localizedRemainingCount}</span>;
-};
 
 const RepeatAudioButton = () => {
   const audioService = useContext(AudioPlayerMachineContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
   const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
+  const isInRepeatMode = !!repeatActor;
 
   const onButtonClicked = () => {
     logButtonClick('audio_player_repeat');
@@ -54,7 +42,7 @@ const RepeatAudioButton = () => {
         wrapper={(children) => (
           <Badge
             content={
-              repeatActor && (
+              isInRepeatMode && (
                 <RemainingRangeCount
                   rangeActor={repeatActor.getSnapshot().context.rangeCycleActor}
                 />

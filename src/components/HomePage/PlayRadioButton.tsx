@@ -1,38 +1,21 @@
 /* eslint-disable react/no-multi-comp */
 import { useContext } from 'react';
 
-import { useActor, useSelector } from '@xstate/react';
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button from '../dls/Button/Button';
-import Link from '../dls/Link/Link';
 import Spinner from '../dls/Spinner/Spinner';
 import { getRandomCuratedStationId } from '../Radio/curatedStations';
 import { StationType } from '../Radio/types';
 
 import styles from './PlayRadioButton.module.scss';
+import RadioInformation from './RadioInformation';
 
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import useCurrentStationInfo from 'src/xstate/Radio/useCurrentStationInfo';
-
-const RadioInformation = ({ radioActor }) => {
-  const [state] = useActor(radioActor);
-
-  const stationInfo = useCurrentStationInfo((state as any).context);
-  const { t } = useTranslation('radio');
-
-  return (
-    <div className={styles.stationInfo}>
-      <span className={styles.stationTitle}>{stationInfo.title}</span>{' '}
-      <Link href="/radio" className={styles.editStationButton}>
-        ({t('change')})
-      </Link>
-    </div>
-  );
-};
 
 const PlayRadioButton = () => {
   const { t } = useTranslation('radio');
@@ -68,6 +51,7 @@ const PlayRadioButton = () => {
     audioService.send('TOGGLE');
   };
 
+  const { radioActor } = audioService.getSnapshot().context;
   return (
     <div className={styles.container}>
       <div className={styles.playRadioSection}>
@@ -89,9 +73,7 @@ const PlayRadioButton = () => {
             {t('play-radio')}
           </Button>
         )}
-        {audioService.getSnapshot().context.radioActor && (
-          <RadioInformation radioActor={audioService.getSnapshot().context.radioActor} />
-        )}
+        {radioActor && <RadioInformation radioActor={radioActor} />}
       </div>
     </div>
   );

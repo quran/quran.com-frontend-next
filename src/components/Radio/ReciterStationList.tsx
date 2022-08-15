@@ -45,8 +45,9 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
               stationId: reciter.id,
             });
           };
-        if (isSelectedStation && isAudioPlaying) onClick = () => audioService.send('TOGGLE');
-        if (isSelectedStation && !isAudioPlaying) onClick = () => audioService.send('TOGGLE');
+        if (isSelectedStation) {
+          onClick = () => audioService.send('TOGGLE');
+        }
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
         return (
