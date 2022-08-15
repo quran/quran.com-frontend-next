@@ -105,7 +105,6 @@ const SettingsReciter = () => {
                       <RadioGroup.Item value={reciterId} id={reciterId} />
 
                       <label htmlFor={reciterId} className={styles.reciterLabel}>
-                        {reciterId}
                         {reciter.translatedName.name}
                         {reciter.style.name !== DEFAULT_RECITATION_STYLE && (
                           <span className={styles.recitationStyle}>{reciter.style.name}</span>

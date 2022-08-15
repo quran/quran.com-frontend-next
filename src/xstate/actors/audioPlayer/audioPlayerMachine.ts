@@ -13,7 +13,8 @@ import { createRepeatMachine } from '../repeatMachine/repeatMachine';
 import AudioPlayerContext from './types/AudioPlayerContext';
 import AudioPlayerEventType from './types/AudioPlayerEventType';
 
-import { fetcher, getAvailableReciters } from 'src/api';
+import { getAvailableReciters, getChapterAudioData } from 'src/api';
+import { StationType } from 'src/components/Radio/types';
 import AudioData from 'types/AudioData';
 import Reciter from 'types/Reciter';
 import VerseTiming from 'types/VerseTiming';
@@ -89,10 +90,7 @@ const getActiveAyahNumber = (activeVerseTiming: VerseTiming) => {
 
 const executeFetchReciter = async (context: AudioPlayerContext): Promise<AudioData> => {
   const { reciterId, surah } = context;
-  const response = await fetcher<AudioData>(
-    `https://api.qurancdn.com/api/qdc/audio/reciters/${reciterId}/audio_files?chapter=${surah}&segments=true`,
-  );
-  return response;
+  return getChapterAudioData(reciterId, surah, true);
 };
 
 const executeFetchReciterFromEvent = async (
@@ -194,10 +192,12 @@ export const audioPlayerMachine =
               actions: 'setPlaybackRate',
               description: 'User change the playback speed',
             },
-            CHANGE_RECITER: {
-              actions: 'setReciterId',
-              description: 'User changes the reciter',
-            },
+            CHANGE_RECITER: [
+              {
+                actions: 'setReciterId',
+                description: 'User changes the reciter',
+              },
+            ],
           },
         },
         VISIBLE: {
@@ -434,7 +434,7 @@ export const audioPlayerMachine =
                         ],
                         description:
                           'When the user chooses to play an Ayah of the same Surah. (can be the same Ayah being recited)',
-                        cond: 'isSameSurah',
+                        cond: 'isSameSurahAndReciter',
                         target: 'PLAYING',
                       },
                     ],
@@ -454,7 +454,7 @@ export const audioPlayerMachine =
                         actions: ['exitRadio', 'stopRepeatActor'],
                         description:
                           'When the user chooses to play an Ayah of the same Surah. (can be the same Ayah being recited)',
-                        cond: 'isSameSurah',
+                        cond: 'isSameSurahAndReciter',
                         target: 'PLAYING',
                       },
                     ],
@@ -615,12 +615,18 @@ export const audioPlayerMachine =
               actions: 'setPlaybackRate',
               description: 'User change the playback speed',
             },
-            CHANGE_RECITER: {
-              actions: ['pauseAudio', 'setReciterId', 'resetElapsedTime'],
-              description:
-                'User changes the reciter while the audio player is visible and might be playing',
-              target: '.LOADING_RECITER_DATA',
-            },
+            CHANGE_RECITER: [
+              {
+                cond: 'isRadioActive',
+                actions: 'forwardChangeReciterToRadioMachine',
+              },
+              {
+                actions: ['pauseAudio', 'setReciterId', 'resetElapsedTime'],
+                description:
+                  'User changes the reciter while the audio player is visible and might be playing',
+                target: '.LOADING_RECITER_DATA',
+              },
+            ],
             PLAY_RADIO_TRACK: {
               actions: 'setRadioStationDetails',
               description: 'User opens the audio player to play radio of a certain station',
@@ -642,11 +648,16 @@ export const audioPlayerMachine =
                 ],
                 description:
                   'When the user chooses to play an Ayah of the same Surah. (can be the same Ayah being recited)',
-                cond: 'isSameSurah',
+                cond: 'isSameSurahAndReciter',
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.LOADING',
               },
             ],
             PLAY_SURAH: [
+              {
+                description: 'When the user chooses to play another Surah',
+                cond: 'isSameSurahAndReciter',
+                target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
+              },
               {
                 actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
                 cond: 'isUsingCustomReciterId',
@@ -657,12 +668,6 @@ export const audioPlayerMachine =
                 description: 'When the user chooses to play another Surah',
                 cond: 'isDifferentSurah',
                 target: '.SURAH_MISMATCH',
-              },
-              {
-                actions: ['resetAyahNumber', 'setAudioPlayerCurrentTime'],
-                description: 'When the user chooses to play another Surah',
-                cond: 'isSameSurah',
-                target: '.AUDIO_PLAYER_INITIATED.PLAYING.LOADING',
               },
             ],
             PLAY_RADIO: {
@@ -784,10 +789,10 @@ export const audioPlayerMachine =
         }),
         setAudioData: assign({
           duration: (context, event: any) => {
-            return event.data.audioFiles[0].duration / 1000;
+            return event.data.duration / 1000;
           },
-          audioData: (context, event: any) => event.data.audioFiles[0],
-          surahVersesCount: (context, event: any) => event.data.audioFiles[0].verseTimings.length,
+          audioData: (context, event: any) => event.data,
+          surahVersesCount: (context, event: any) => event.data.verseTimings.length,
         }),
         setAudioPlayerSource: (context) => {
           const {
@@ -887,6 +892,28 @@ export const audioPlayerMachine =
           );
           return actions;
         }),
+        forwardChangeReciterToRadioMachine: pure((context, event) => {
+          const actions = [];
+          let { radioActor } = context;
+          // if the radioActor doesn't exist, spawn a new one
+          if (!radioActor) {
+            radioActor = spawn(createRadioMachine());
+            actions.push(assign({ radioActor }));
+          }
+          actions.push(
+            send(
+              {
+                type: 'PLAY_STATION',
+                stationType: StationType.Reciter,
+                id: event.reciterId,
+              },
+              {
+                to: radioActor.id,
+              },
+            ),
+          );
+          return actions;
+        }),
         stopRepeatActor: pure((context: any) => {
           if (context.repeatActor) {
             return [
@@ -943,10 +970,15 @@ export const audioPlayerMachine =
         }),
       },
       guards: {
+        isRadioActive: (context) => !!context.radioActor,
         isNotLastVerse: (context) => context.ayahNumber < context.surahVersesCount,
         isNotFirstVerse: (context) => context.ayahNumber !== 1,
         isDifferentSurah: (context, event) => context.surah !== event.surah,
-        isSameSurah: (context, event) => context.surah === event.surah,
+        isSameSurahAndReciter: (context, event) => {
+          // @ts-ignore
+          const reciterId = event.reciterId || context.reciterId;
+          return context.surah === event.surah && reciterId === context.audioData.reciterId;
+        },
         isRepeatActive: (context) => !!context.repeatActor,
         isUsingCustomReciterId: (context, event) => !!event.reciterId,
       },

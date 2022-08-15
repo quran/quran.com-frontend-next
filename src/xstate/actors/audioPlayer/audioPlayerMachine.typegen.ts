@@ -54,6 +54,7 @@ export interface Typegen0 {
       | "PLAY_AYAH"
       | "PLAY_SURAH"
       | "SET_REPEAT_SETTING";
+    forwardChangeReciterToRadioMachine: "CHANGE_RECITER";
     forwardEndedToRadioMachine: "END";
     forwardPlayToRadioMachine: "PLAY_RADIO";
     incrementAyah: "NEXT_AYAH";
@@ -77,7 +78,7 @@ export interface Typegen0 {
       | "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING";
     repeatNextAyah: "NEXT_AYAH";
     repeatPreviousAyah: "PREV_AYAH";
-    resetAyahNumber: "CLOSE" | "PLAY_SURAH";
+    resetAyahNumber: "CLOSE";
     resetElapsedTime: "CHANGE_RECITER" | "CLOSE";
     seekTo: "SEEK_TO";
     setAudioData:
@@ -87,7 +88,6 @@ export interface Typegen0 {
     setAudioPlayerCurrentTime:
       | "NEXT_AYAH"
       | "PLAY_AYAH"
-      | "PLAY_SURAH"
       | "PREV_AYAH"
       | "REPEAT_AYAH"
       | "done.invoke.fetchCustomReciter"
@@ -143,8 +143,9 @@ export interface Typegen0 {
     isDifferentSurah: "PLAY_AYAH" | "PLAY_SURAH";
     isNotFirstVerse: "PREV_AYAH";
     isNotLastVerse: "NEXT_AYAH";
+    isRadioActive: "CHANGE_RECITER";
     isRepeatActive: "NEXT_AYAH" | "PREV_AYAH";
-    isSameSurah: "PLAY_AYAH" | "PLAY_SURAH";
+    isSameSurahAndReciter: "PLAY_AYAH" | "PLAY_SURAH";
     isUsingCustomReciterId: "PLAY_SURAH";
   };
   eventsCausingDelays: {

@@ -34,6 +34,7 @@ import {
 } from 'src/utils/navigation';
 import { getCurrentPath } from 'src/utils/url';
 import { isValidChapterId } from 'src/utils/validator';
+import { selectCurrentAudioReciterId } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
@@ -59,9 +60,12 @@ const RecitationPage = ({
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const currentReciterId = useSelector(audioService, selectCurrentAudioReciterId);
 
   const isCurrentlyPlayingThisChapter =
-    isAudioPlaying && currentSurah === Number(selectedChapter.id);
+    isAudioPlaying &&
+    currentSurah === Number(selectedChapter.id) &&
+    currentReciterId === selectedReciter.id;
 
   const onPlayAudioClicked = () => {
     audioService.send({

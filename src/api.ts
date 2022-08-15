@@ -132,7 +132,10 @@ export const getChapterAudioData = async (
     throw new Error('No audio file found');
   }
 
-  return firstAudio;
+  return {
+    ...firstAudio,
+    reciterId,
+  };
 };
 
 /**
