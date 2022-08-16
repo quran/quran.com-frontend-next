@@ -105,7 +105,7 @@ export const getAvailableLanguages = async (language: string): Promise<Languages
   fetcher(makeLanguagesUrl(language));
 
 /**
- * Get list of available reciters.
+ * Get list of available reciters .
  *
  * @param {string} locale  the locale.
  *
