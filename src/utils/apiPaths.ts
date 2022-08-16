@@ -151,7 +151,7 @@ export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('
 export const makeKalimatSearchResultsUrl = ({
   query,
   exactMatchesOnly = 1,
-  numResults = 20,
+  numResults = 30,
 }: KalimatSearchRequest) =>
   makeKalimatApiUrl({
     query,

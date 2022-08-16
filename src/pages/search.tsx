@@ -282,8 +282,12 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     submitKalimatSearchResultFeedback(feedbackRequestParams)
       .then(() => {
         setFeedbackVerseKey('');
-        const textCopied = { ...feedbackRequestParams, comments: data.comments };
-        clipboardCopy(JSON.stringify(textCopied)).then(() =>
+        const textCopied = {
+          ...feedbackRequestParams,
+          result: `https://quran.com/${feedbackVerseKey}`,
+          comments: data.comments,
+        };
+        clipboardCopy(JSON.stringify(textCopied, null, '  ')).then(() =>
           toast('Feedback submitted successfully and copied to clipboard', {
             status: ToastStatus.Success,
           }),
