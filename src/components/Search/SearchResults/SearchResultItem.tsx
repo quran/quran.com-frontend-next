@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SearchResultItem.module.scss';
 
+import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
@@ -26,10 +27,11 @@ export enum Source {
 interface Props {
   result: Verse;
   source: Source;
+  setFeedbackVerseKey?: (verseKey: string) => void;
 }
 
-const SearchResultItem: React.FC<Props> = ({ result, source }) => {
-  const { lang } = useTranslation('quran-reader');
+const SearchResultItem: React.FC<Props> = ({ result, source, setFeedbackVerseKey }) => {
+  const { t, lang } = useTranslation('quran-reader');
   const localizedVerseKey = useMemo(
     () => toLocalizedVerseKey(result.verseKey, lang),
     [lang, result.verseKey],
@@ -44,6 +46,17 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
 
   return (
     <div className={styles.container}>
+      {setFeedbackVerseKey && (
+        <Button
+          tooltip={t('common:feedback')}
+          onClick={() => {
+            setFeedbackVerseKey(result.verseKey);
+          }}
+          variant={ButtonVariant.Compact}
+        >
+          {t('common:feedback')}
+        </Button>
+      )}
       <div className={styles.itemContainer}>
         <Link
           href={getChapterWithStartingVerseUrl(result.verseKey)}

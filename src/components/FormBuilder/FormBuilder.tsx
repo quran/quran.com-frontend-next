@@ -57,6 +57,7 @@ const FormBuilder = <T,>({
                   containerClassName={styles.input}
                   fixedWidth={false}
                   placeholder={formField.label}
+                  typeSpecificProps={formField.typeSpecificProps}
                 />
                 {error && <span className={styles.errorText}>{error.message}</span>}
               </div>

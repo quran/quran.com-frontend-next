@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { stringify } from 'querystring';
 
 import { decamelizeKeys } from 'humps';
@@ -12,6 +13,7 @@ import {
 import {
   AdvancedCopyRequest,
   KalimatSearchRequest,
+  KalimatSearchResultFeedbackRequest,
   PagesLookUpRequest,
   SearchRequest,
 } from 'types/ApiRequests';
@@ -157,6 +159,20 @@ export const makeKalimatSearchResultsUrl = ({
     numResults,
   });
 
+export const makeKalimatSearchResultFeedbackUrl = ({
+  query,
+  result,
+  feedbackScore,
+}: KalimatSearchResultFeedbackRequest) =>
+  makeKalimatApiUrl(
+    {
+      query,
+      result,
+      feedbackScore,
+    },
+    false,
+  );
+
 /**
  * Compose the url for the navigation search API that is used to show results inside the command bar.
  *
@@ -284,5 +300,7 @@ export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, 
   )}`;
 };
 
-export const makeKalimatApiUrl = (params: KalimatSearchRequest) =>
-  `https://api.kalimat.dev:443/search?${stringify(params)}`;
+export const makeKalimatApiUrl = (
+  params: KalimatSearchRequest | KalimatSearchResultFeedbackRequest,
+  isSearch = true,
+) => `https://api.kalimat.dev:443/${isSearch ? 'search' : 'feedback'}?${stringify(params)}`;

@@ -22,6 +22,7 @@ import {
   makePagesLookupUrl,
   makeKalimatSearchResultsUrl,
   makeVersesFilterUrl,
+  makeKalimatSearchResultFeedbackUrl,
 } from './utils/apiPaths';
 
 import {
@@ -29,6 +30,7 @@ import {
   AdvancedCopyRequest,
   PagesLookUpRequest,
   KalimatSearchRequest,
+  KalimatSearchResultFeedbackRequest,
 } from 'types/ApiRequests';
 import {
   TranslationsResponse,
@@ -47,6 +49,7 @@ import {
   TafsirContentResponse,
   PagesLookUpResponse,
   KalimatSearchResponse,
+  KalimatSearchResultFeedbackResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 import { MushafLines, QuranFont } from 'types/QuranReader';
@@ -197,12 +200,25 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
  * Get the search results of a query.
  *
  * @param {KalimatSearchRequest} params
+ * @param {string} method
  * @returns  {Promise<KalimatSearchResponse>}
  */
 export const getKalimatSearchResults = async (
   params: KalimatSearchRequest,
+  method = 'GET',
 ): Promise<KalimatSearchResponse> =>
-  fetcher(makeKalimatSearchResultsUrl(params), KALIMAT_FETCH_OPTIONS);
+  fetcher(makeKalimatSearchResultsUrl(params), { ...KALIMAT_FETCH_OPTIONS, method });
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {KalimatSearchResultFeedbackRequest} params
+ * @returns  {Promise<KalimatSearchResponse>}
+ */
+export const submitKalimatSearchResultFeedback = async (
+  params: KalimatSearchResultFeedbackRequest,
+): Promise<KalimatSearchResultFeedbackResponse> =>
+  fetcher(makeKalimatSearchResultFeedbackUrl(params), { ...KALIMAT_FETCH_OPTIONS, method: 'POST' });
 
 /**
  * Get the list of tafsirs.

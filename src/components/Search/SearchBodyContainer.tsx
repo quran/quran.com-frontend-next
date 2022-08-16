@@ -23,6 +23,7 @@ interface Props {
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
+  setFeedbackVerseKey?: (verseKey: string) => void;
 }
 
 const SearchBodyContainer: React.FC<Props> = ({
@@ -36,6 +37,7 @@ const SearchBodyContainer: React.FC<Props> = ({
   currentPage,
   pageSize,
   onPageChange,
+  setFeedbackVerseKey,
 }) => {
   const { t } = useTranslation('common');
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
@@ -74,6 +76,7 @@ const SearchBodyContainer: React.FC<Props> = ({
                       currentPage={currentPage}
                       onPageChange={onPageChange}
                       pageSize={pageSize}
+                      setFeedbackVerseKey={setFeedbackVerseKey}
                     />
                   )}
                 </>

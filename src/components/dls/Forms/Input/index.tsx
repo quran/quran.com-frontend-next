@@ -43,6 +43,7 @@ interface Props {
   containerClassName?: string;
   htmlType?: React.HTMLInputTypeAttribute;
   isRequired?: boolean;
+  typeSpecificProps?: Record<string, any>;
 }
 
 const Input: React.FC<Props> = ({
@@ -65,6 +66,7 @@ const Input: React.FC<Props> = ({
   containerClassName,
   htmlType,
   isRequired,
+  typeSpecificProps = {},
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -115,6 +117,7 @@ const Input: React.FC<Props> = ({
           value={inputValue}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
+          {...typeSpecificProps}
         />
         {clearable ? (
           <>

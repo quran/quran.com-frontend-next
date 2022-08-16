@@ -88,6 +88,10 @@ type KalimatResultItem = {
 
 export type KalimatSearchResponse = KalimatResultItem[];
 
+export type KalimatSearchResultFeedbackResponse = {
+  message: string;
+};
+
 export interface AdvancedCopyRawResultResponse extends BaseResponse {
   result?: string;
 }

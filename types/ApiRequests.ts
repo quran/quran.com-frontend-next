@@ -4,6 +4,12 @@ export type KalimatSearchRequest = {
   numResults?: number;
 };
 
+export type KalimatSearchResultFeedbackRequest = {
+  query: string;
+  result: string;
+  feedbackScore: number;
+};
+
 export type SearchRequest = {
   query: string;
   filterLanguages?: string;
