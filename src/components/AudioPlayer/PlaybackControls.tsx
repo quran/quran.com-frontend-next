@@ -8,11 +8,12 @@ import styles from './PlaybackControls.module.scss';
 import RepeatAudioButton from './RepeatButton';
 import SeekButton, { SeekButtonType } from './SeekButton';
 
+import { selectIsDownloadingAudio } from 'src/redux/slices/AudioPlayer/state';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const PlaybackControls = () => {
   const audioService = useContext(AudioPlayerMachineContext);
-  const isLoading = useSelector(audioService, (state) => state.hasTag('loading'));
+  const isLoading = useSelector(audioService, selectIsDownloadingAudio);
 
   return (
     <div className={styles.container}>

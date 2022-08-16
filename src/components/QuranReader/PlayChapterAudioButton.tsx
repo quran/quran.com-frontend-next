@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
+import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
@@ -12,6 +13,7 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dl
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface Props {
@@ -27,6 +29,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const isLoading = useSelector(audioService, selectIsLoading);
   const isPlayingCurrentChapter = isAudioPlaying && currentSurah === chapterId;
 
   const play = () => {
@@ -43,6 +46,23 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
       type: 'TOGGLE',
     });
   };
+
+  if (isLoading)
+    return (
+      <div className={styles.container}>
+        <Button
+          variant={ButtonVariant.Ghost}
+          type={ButtonType.Success}
+          size={ButtonSize.Small}
+          prefix={<Spinner />}
+          hasSidePadding={false}
+          shouldFlipOnRTL={false}
+          isDisabled
+        >
+          {t('loading')}
+        </Button>
+      </div>
+    );
 
   return (
     <div className={styles.container}>

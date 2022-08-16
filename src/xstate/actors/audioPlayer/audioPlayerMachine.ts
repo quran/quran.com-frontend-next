@@ -578,7 +578,7 @@ export const audioPlayerMachine =
           actions: 'setAudioRef',
         },
         SET_REPEAT_SETTING: {
-          actions: 'exitRadio',
+          actions: ['exitRadio', 'setSurahAndAyahNumbers'],
           target: '.VISIBLE.LOADING_REPEAT_DATA',
         },
         SET_INITIAL_CONTEXT: {

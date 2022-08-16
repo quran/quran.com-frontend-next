@@ -15,6 +15,7 @@ import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
 import { logEvent } from 'src/utils/eventLogger';
+import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const PlayRadioButton = () => {
@@ -25,7 +26,7 @@ const PlayRadioButton = () => {
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );
   const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
-  const isLoading = useSelector(audioService, (state) => state.hasTag('loading'));
+  const isLoading = useSelector(audioService, selectIsLoading);
 
   // TODO: handle continue radio from last saved session
   const onPlayClicked = () => {

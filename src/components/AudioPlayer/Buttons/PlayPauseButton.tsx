@@ -14,6 +14,7 @@ import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { getChapterData } from 'src/utils/chapter';
 import { withStopPropagation } from 'src/utils/event';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const PlayPauseButton = () => {
@@ -30,7 +31,7 @@ const PlayPauseButton = () => {
   const isPlaying = useSelector(audioService, (state) =>
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );
-  const isLoading = useSelector(audioService, (state) => state.hasTag('loading'));
+  const isLoading = useSelector(audioService, selectIsLoading);
 
   let button;
 

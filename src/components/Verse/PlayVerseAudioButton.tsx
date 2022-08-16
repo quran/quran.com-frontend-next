@@ -19,6 +19,7 @@ import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterNumberFromKey, getVerseNumberFromKey, makeVerseKey } from 'src/utils/verse';
+import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface PlayVerseAudioProps {
@@ -43,7 +44,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   });
   const chapterId = getChapterNumberFromKey(verseKey);
   const verseNumber = getVerseNumberFromKey(verseKey);
-  const isLoading = useXstateSelector(audioService, (state) => state.hasTag('loading'));
+  const isLoading = useXstateSelector(audioService, selectIsLoading);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
