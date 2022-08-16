@@ -55,7 +55,12 @@ const RepeatAudioButton = ({ isLoading }) => {
           </Badge>
         )}
       >
-        <Button variant={ButtonVariant.Ghost} shape={ButtonShape.Circle} onClick={onButtonClicked}>
+        <Button
+          variant={ButtonVariant.Ghost}
+          shape={ButtonShape.Circle}
+          onClick={onButtonClicked}
+          isDisabled={isLoading}
+        >
           <RepeatIcon />
         </Button>
       </Wrapper>

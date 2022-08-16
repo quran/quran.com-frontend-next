@@ -41,6 +41,7 @@ const PlayPauseButton = () => {
         tooltip={`${t('loading')}...`}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
+        isDisabled={isLoading}
       >
         <Spinner size={SpinnerSize.Large} />
       </Button>
