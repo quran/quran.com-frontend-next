@@ -17,7 +17,7 @@ const PlaybackControls = () => {
   return (
     <div className={styles.container}>
       <div className={styles.actionItem}>
-        <RepeatAudioButton />
+        <RepeatAudioButton isLoading={isLoading} />
       </div>
       <div className={styles.actionItem}>
         <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />

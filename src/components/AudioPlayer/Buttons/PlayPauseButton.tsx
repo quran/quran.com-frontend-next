@@ -89,17 +89,19 @@ const PlayPauseButton = () => {
   return (
     <>
       {button}
-      <SurahAudioMismatchModal
-        isOpen={isMismatchModalVisible}
-        currentAudioChapter={
-          getChapterData(chaptersData, currentAudioChapterId.toString())?.transliteratedName
-        }
-        currentReadingChapter={
-          getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
-        }
-        onContinue={onContinueClicked}
-        onStartOver={onStartOverClicked}
-      />
+      {!isLoading && (
+        <SurahAudioMismatchModal
+          isOpen={isMismatchModalVisible}
+          currentAudioChapter={
+            getChapterData(chaptersData, currentAudioChapterId.toString())?.transliteratedName
+          }
+          currentReadingChapter={
+            getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
+          }
+          onContinue={onContinueClicked}
+          onStartOver={onStartOverClicked}
+        />
+      )}
     </>
   );
 };

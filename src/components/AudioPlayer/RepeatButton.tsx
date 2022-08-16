@@ -15,7 +15,7 @@ import Wrapper from 'src/components/Wrapper/Wrapper';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const RepeatAudioButton = () => {
+const RepeatAudioButton = ({ isLoading }) => {
   const audioService = useContext(AudioPlayerMachineContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,12 +30,14 @@ const RepeatAudioButton = () => {
 
   return (
     <>
-      <RepeatAudioModal
-        defaultRepetitionMode={RepetitionMode.Range}
-        chapterId={currentSurah.toString()}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      {!isLoading && (
+        <RepeatAudioModal
+          defaultRepetitionMode={RepetitionMode.Range}
+          chapterId={currentSurah.toString()}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
 
       <Wrapper
         shouldWrap={isInRepeatMode}
