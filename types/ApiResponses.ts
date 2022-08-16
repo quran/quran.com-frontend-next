@@ -83,7 +83,7 @@ export interface SearchResponse extends BaseResponse {
 
 type KalimatResultItem = {
   id: string;
-  text: string;
+  isChapter: boolean;
 };
 
 export type KalimatSearchResponse = KalimatResultItem[];

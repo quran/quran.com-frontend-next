@@ -65,7 +65,10 @@ const SearchDrawer: React.FC = () => {
         .then((kalimatResponse) => {
           if (kalimatResponse.length) {
             getFilteredVerses({
-              filters: kalimatResponse.map((result) => `${result.id}`).join(','),
+              filters: kalimatResponse
+                .filter((result) => !result.isChapter)
+                .map((result) => `${result.id}`)
+                .join(','),
               fields: QuranFont.QPCHafs,
               ...(!!selectedTranslations.length && {
                 translations: selectedTranslations.join(','),
