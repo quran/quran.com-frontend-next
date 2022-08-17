@@ -535,6 +535,12 @@ export const audioPlayerMachine =
             },
             PLAY_AYAH: [
               {
+                description:
+                  'When the user is clicking play ayah. On the currently playing ayah, resume it',
+                cond: 'isSameAyah',
+                target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
+              },
+              {
                 actions: ['setNewSurahAndAyahNumbers', 'stopRepeatActor'],
                 description: 'When the user chooses to play an Ayah of another Surah',
                 cond: 'isDifferentSurah',
@@ -555,7 +561,7 @@ export const audioPlayerMachine =
             ],
             PLAY_SURAH: [
               {
-                description: 'When the user chooses to play another Surah',
+                description: 'When the users is playing the same surah. Just resume it',
                 cond: 'isSameSurahAndReciter',
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
@@ -875,6 +881,8 @@ export const audioPlayerMachine =
         isNotLastVerse: (context) => context.ayahNumber < context.surahVersesCount,
         isNotFirstVerse: (context) => context.ayahNumber !== 1,
         isDifferentSurah: (context, event) => context.surah !== event.surah,
+        isSameAyah: (context, event) =>
+          context.ayahNumber === event.ayahNumber && context.surah === event.surah,
         isSameSurahAndReciter: (context, event) => {
           // @ts-ignore
           const reciterId = event.reciterId || context.reciterId;

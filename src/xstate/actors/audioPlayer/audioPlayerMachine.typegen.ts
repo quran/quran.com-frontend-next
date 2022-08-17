@@ -146,6 +146,7 @@ export interface Typegen0 {
     isNotLastVerse: "NEXT_AYAH";
     isRadioActive: "CHANGE_RECITER";
     isRepeatActive: "NEXT_AYAH" | "PREV_AYAH";
+    isSameAyah: "PLAY_AYAH";
     isSameSurahAndReciter: "PLAY_AYAH" | "PLAY_SURAH";
     isUsingCustomReciterId: "PLAY_SURAH";
   };

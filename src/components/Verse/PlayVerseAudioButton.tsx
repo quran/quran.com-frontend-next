@@ -51,13 +51,8 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const onPlayClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
-    const { surah, ayahNumber } = audioService.getSnapshot().context;
 
-    if (makeVerseKey(surah, ayahNumber) === verseKey) {
-      audioService.send('TOGGLE');
-    } else {
-      audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
-    }
+    audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
 
     if (onActionTriggered) {
       onActionTriggered();
