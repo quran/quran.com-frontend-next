@@ -162,18 +162,30 @@ export const audioPlayerMachine =
                       description: 'Audio data is being fetched',
                       tags: 'loading',
                       on: {
-                        NEXT_AYAH: {
-                          actions: ['incrementAyah', 'setAudioPlayerCurrentTime'],
-                          description:
-                            "User clicks the next ayah button and it's not the last ayah of the surah already",
-                          cond: 'isNotLastVerse',
-                        },
-                        PREV_AYAH: {
-                          actions: ['decrementAyah', 'setAudioPlayerCurrentTime'],
-                          description:
-                            "User clicks the previous ayah button and it's not the first ayah of the surah already",
-                          cond: 'isNotFirstVerse',
-                        },
+                        NEXT_AYAH: [
+                          {
+                            actions: 'repeatNextAyah',
+                            cond: 'canRepeatNextAyah',
+                          },
+                          {
+                            actions: ['incrementAyah', 'setAudioPlayerCurrentTime'],
+                            description:
+                              "User clicks the next ayah button and it's not the last ayah of the surah already",
+                            cond: 'isNotLastVerse',
+                          },
+                        ],
+                        PREV_AYAH: [
+                          {
+                            actions: 'repeatPreviousAyah',
+                            cond: 'canRepeatPrevAyah',
+                          },
+                          {
+                            actions: ['decrementAyah', 'setAudioPlayerCurrentTime'],
+                            description:
+                              "User clicks the previous ayah button and it's not the first ayah of the surah already",
+                            cond: 'isNotFirstVerse',
+                          },
+                        ],
                         FAIL: {
                           description: 'The audio file failed to load',
                           target: '#audioPlayer.VISIBLE.FAILED',
@@ -289,18 +301,30 @@ export const audioPlayerMachine =
                       description: 'Audio data is being fetched',
                       tags: 'loading',
                       on: {
-                        NEXT_AYAH: {
-                          actions: ['incrementAyah', 'setAudioPlayerCurrentTime'],
-                          description:
-                            "User clicks the next ayah button and it's not the last ayah of the surah already",
-                          cond: 'isNotLastVerse',
-                        },
-                        PREV_AYAH: {
-                          actions: ['decrementAyah', 'setAudioPlayerCurrentTime'],
-                          description:
-                            "User clicks the previous ayah button and it's not the first ayah of the surah already",
-                          cond: 'isNotFirstVerse',
-                        },
+                        NEXT_AYAH: [
+                          {
+                            actions: 'repeatNextAyah',
+                            cond: 'canRepeatNextAyah',
+                          },
+                          {
+                            actions: ['incrementAyah', 'setAudioPlayerCurrentTime'],
+                            description:
+                              "User clicks the next ayah button and it's not the last ayah of the surah already",
+                            cond: 'isNotLastVerse',
+                          },
+                        ],
+                        PREV_AYAH: [
+                          {
+                            actions: 'repeatPreviousAyah',
+                            cond: 'canRepeatPrevAyah',
+                          },
+                          {
+                            actions: ['decrementAyah', 'setAudioPlayerCurrentTime'],
+                            description:
+                              "User clicks the previous ayah button and it's not the first ayah of the surah already",
+                            cond: 'isNotFirstVerse',
+                          },
+                        ],
                         FAIL: {
                           description: 'The audio file failed to load',
                           target: '#audioPlayer.VISIBLE.FAILED',
