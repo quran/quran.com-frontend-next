@@ -81,6 +81,7 @@ export interface Typegen0 {
     resetAyahNumber: "CLOSE";
     resetElapsedTime: "CHANGE_RECITER" | "CLOSE";
     seekTo: "SEEK_TO";
+    seekToAndRepeat: "SEEK_TO";
     setAudioData:
       | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
@@ -145,7 +146,7 @@ export interface Typegen0 {
     isNotFirstVerse: "PREV_AYAH";
     isNotLastVerse: "NEXT_AYAH";
     isRadioActive: "CHANGE_RECITER";
-    isRepeatActive: "NEXT_AYAH" | "PREV_AYAH";
+    isRepeatActive: "NEXT_AYAH" | "PREV_AYAH" | "SEEK_TO";
     isSameAyah: "PLAY_AYAH";
     isSameSurahAndReciter: "PLAY_AYAH" | "PLAY_SURAH";
     isUsingCustomReciterId: "PLAY_SURAH";

@@ -2,10 +2,19 @@ import AudioPlayerContext from './types/AudioPlayerContext';
 
 import { getAvailableReciters, getChapterAudioData } from 'src/api';
 import isCurrentTimeInRange from 'src/components/AudioPlayer/hooks/isCurrentTimeInRange';
+import { getVerseNumberFromKey } from 'src/utils/verse';
 import AudioData from 'types/AudioData';
 import Reciter from 'types/Reciter';
 import VerseTiming from 'types/VerseTiming';
 import Word from 'types/Word';
+
+export const getAyahNumberByTimestamp = (verseTimings: VerseTiming[], timestamp: number) => {
+  const verseTiming = verseTimings.find(
+    (timing) => timestamp >= timing.timestampFrom && timestamp <= timing.timestampTo,
+  );
+  if (!verseTiming) return null;
+  return getVerseNumberFromKey(verseTiming.verseKey);
+};
 
 export const getActiveVerseTiming = (context) => {
   const {

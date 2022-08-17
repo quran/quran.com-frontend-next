@@ -18,12 +18,13 @@ import {
   executeFetchReciterFromEvent,
   getRecitersList,
   getMediaSessionMetaData,
+  getAyahNumberByTimestamp,
 } from './audioPlayerMachineHelper';
 import AudioPlayerContext from './types/AudioPlayerContext';
 import AudioPlayerEventType from './types/AudioPlayerEventType';
 
 import { StationType } from 'src/components/Radio/types';
-import { milliSecondsToSeconds } from 'src/utils/datetime';
+import { milliSecondsToSeconds, secondsToMilliSeconds } from 'src/utils/datetime';
 import AudioData from 'types/AudioData';
 
 export const audioPlayerMachine =
@@ -401,9 +402,15 @@ export const audioPlayerMachine =
                 NEXT_AUDIO_TRACK: {
                   actions: 'nextAudioTrack',
                 },
-                SEEK_TO: {
-                  actions: 'seekTo',
-                },
+                SEEK_TO: [
+                  {
+                    cond: 'isRepeatActive',
+                    actions: 'seekToAndRepeat',
+                  },
+                  {
+                    actions: 'seekTo',
+                  },
+                ],
                 PREV_AYAH: [
                   {
                     actions: 'repeatPreviousAyah',
@@ -910,6 +917,21 @@ export const audioPlayerMachine =
           return assign({
             elapsed: event.timestamp,
           });
+        }),
+        seekToAndRepeat: pure((context, event) => {
+          const actions = [];
+
+          const ayahNumber = getAyahNumberByTimestamp(
+            context.audioData.verseTimings,
+            secondsToMilliSeconds(event.timestamp),
+          );
+          if (context.repeatActor) {
+            actions.push(
+              send({ type: 'REPEAT_SELECTED_AYAH', ayahNumber }, { to: context.repeatActor.id }),
+            );
+          }
+
+          return actions;
         }),
       },
       guards: {
