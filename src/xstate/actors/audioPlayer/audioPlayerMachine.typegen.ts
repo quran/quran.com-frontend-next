@@ -169,6 +169,7 @@ export interface Typegen0 {
     | "VISIBLE.FAILED"
     | "VISIBLE.LOADING_CUSTOM_RECITER_DATA"
     | "VISIBLE.LOADING_RECITER_DATA"
+    | "VISIBLE.LOADING_RECITER_DATA_AND_PAUSE"
     | "VISIBLE.LOADING_REPEAT_DATA"
     | "VISIBLE.SURAH_MISMATCH"
     | {
@@ -177,6 +178,7 @@ export interface Typegen0 {
           | "FAILED"
           | "LOADING_CUSTOM_RECITER_DATA"
           | "LOADING_RECITER_DATA"
+          | "LOADING_RECITER_DATA_AND_PAUSE"
           | "LOADING_REPEAT_DATA"
           | "SURAH_MISMATCH"
           | {

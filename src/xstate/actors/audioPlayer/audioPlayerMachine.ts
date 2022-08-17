@@ -229,6 +229,16 @@ export const audioPlayerMachine =
                   entry: 'playAudio',
                   description: 'The audio player is playing the audio',
                   initial: 'ACTIVE',
+                  on: {
+                    CHANGE_RECITER: [
+                      {
+                        actions: ['pauseAudio', 'setReciterId', 'resetElapsedTime'],
+                        description:
+                          'User changes the reciter while the audio player is visible and might be playing',
+                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                      },
+                    ],
+                  },
                   states: {
                     ACTIVE: {
                       on: {
@@ -439,6 +449,32 @@ export const audioPlayerMachine =
               },
               tags: 'loading',
             },
+            LOADING_RECITER_DATA_AND_PAUSE: {
+              description: 'The reciter + Surah data are being fetched',
+              invoke: {
+                src: 'fetchReciter',
+                id: 'fetchReciter',
+                onDone: [
+                  {
+                    actions: [
+                      'setAudioData',
+                      'setAudioPlayerSource',
+                      'setAudioPlayerCurrentTime',
+                      'updateRepeatVerseTimings',
+                    ],
+                    description: 'The API call to get the selected chapter + Surah succeeded',
+                    target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.LOADING',
+                  },
+                ],
+                onError: [
+                  {
+                    description: 'The API call to get the selected chapter + Surah failed',
+                    target: 'FAILED',
+                  },
+                ],
+              },
+              tags: 'loading',
+            },
             LOADING_CUSTOM_RECITER_DATA: {
               description: 'The reciter + Surah data are being fetched',
               invoke: {
@@ -525,7 +561,7 @@ export const audioPlayerMachine =
                 actions: ['pauseAudio', 'setReciterId', 'resetElapsedTime'],
                 description:
                   'User changes the reciter while the audio player is visible and might be playing',
-                target: '.LOADING_RECITER_DATA',
+                target: '.LOADING_RECITER_DATA_AND_PAUSE',
               },
             ],
             PLAY_RADIO_TRACK: {
