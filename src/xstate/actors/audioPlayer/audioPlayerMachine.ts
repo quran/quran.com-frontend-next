@@ -201,7 +201,7 @@ export const audioPlayerMachine =
                     NEXT_AYAH: [
                       {
                         actions: 'repeatNextAyah',
-                        cond: 'isRepeatActive',
+                        cond: 'canRepeatNextAyah',
                         target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
                       },
                       {
@@ -214,7 +214,7 @@ export const audioPlayerMachine =
                     PREV_AYAH: [
                       {
                         actions: 'repeatPreviousAyah',
-                        cond: 'isRepeatActive',
+                        cond: 'canRepeatPrevAyah',
                         target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
                       },
                       {
@@ -390,7 +390,7 @@ export const audioPlayerMachine =
                 NEXT_AYAH: [
                   {
                     actions: 'repeatNextAyah',
-                    cond: 'isRepeatActive',
+                    cond: 'canRepeatNextAyah',
                   },
                   {
                     actions: ['incrementAyah', 'setAudioPlayerCurrentTime'],
@@ -414,7 +414,7 @@ export const audioPlayerMachine =
                 PREV_AYAH: [
                   {
                     actions: 'repeatPreviousAyah',
-                    cond: 'isRepeatActive',
+                    cond: 'canRepeatPrevAyah',
                   },
                   {
                     actions: ['decrementAyah', 'setAudioPlayerCurrentTime'],
@@ -940,6 +940,9 @@ export const audioPlayerMachine =
         isRadioActive: (context) => !!context.radioActor,
         isNotLastVerse: (context) => context.ayahNumber < context.surahVersesCount,
         isNotFirstVerse: (context) => context.ayahNumber !== 1,
+        canRepeatPrevAyah: (context) => context.ayahNumber !== 1 && !!context.repeatActor,
+        canRepeatNextAyah: (context) =>
+          context.ayahNumber < context.surahVersesCount && !!context.repeatActor,
         isDifferentSurah: (context, event) => context.surah !== event.surah,
         isSameAyah: (context, event) =>
           context.ayahNumber === event.ayahNumber && context.surah === event.surah,

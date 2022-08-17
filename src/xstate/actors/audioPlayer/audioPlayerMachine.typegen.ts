@@ -142,11 +142,13 @@ export interface Typegen0 {
       | "done.invoke.fetchRepeatData";
   };
   eventsCausingGuards: {
+    canRepeatNextAyah: "NEXT_AYAH";
+    canRepeatPrevAyah: "PREV_AYAH";
     isDifferentSurah: "PLAY_AYAH" | "PLAY_SURAH";
     isNotFirstVerse: "PREV_AYAH";
     isNotLastVerse: "NEXT_AYAH";
     isRadioActive: "CHANGE_RECITER";
-    isRepeatActive: "NEXT_AYAH" | "PREV_AYAH" | "SEEK_TO";
+    isRepeatActive: "SEEK_TO";
     isSameAyah: "PLAY_AYAH";
     isSameSurahAndReciter: "PLAY_AYAH" | "PLAY_SURAH";
     isUsingCustomReciterId: "PLAY_SURAH";
