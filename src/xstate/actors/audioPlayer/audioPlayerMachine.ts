@@ -931,6 +931,8 @@ export const audioPlayerMachine =
             );
           }
 
+          actions.push('seekTo');
+
           return actions;
         }),
       },
