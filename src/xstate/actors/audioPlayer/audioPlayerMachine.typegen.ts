@@ -114,7 +114,6 @@ export interface Typegen0 {
     stopRepeatActor:
       | "CONFIRM_PLAY_MISMATCHED_SURAH"
       | "PLAY_RADIO"
-      | "PLAY_SURAH"
       | "REPEAT_FINISHED";
     updateRepeatAyah: "PLAY_AYAH";
     updateRepeatVerseTimings:

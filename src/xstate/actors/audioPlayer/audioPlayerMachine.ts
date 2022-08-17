@@ -387,7 +387,7 @@ export const audioPlayerMachine =
                         target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
                       },
                       {
-                        actions: ['exitRadio', 'stopRepeatActor'],
+                        actions: ['exitRadio'],
                         description:
                           'When the user chooses to play an Ayah of the same Surah. (can be the same Ayah being recited)',
                         cond: 'isSameSurahAndReciter',
