@@ -113,7 +113,6 @@ export interface Typegen0 {
     setSurahAndResetAyahNumber: "PLAY_SURAH";
     stopRepeatActor:
       | "CONFIRM_PLAY_MISMATCHED_SURAH"
-      | "PLAY_AYAH"
       | "PLAY_RADIO"
       | "PLAY_SURAH"
       | "REPEAT_FINISHED";

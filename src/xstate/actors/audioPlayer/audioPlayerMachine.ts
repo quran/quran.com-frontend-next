@@ -608,7 +608,7 @@ export const audioPlayerMachine =
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
               {
-                actions: ['setNewSurahAndAyahNumbers', 'stopRepeatActor'],
+                actions: ['setNewSurahAndAyahNumbers'],
                 description: 'When the user chooses to play an Ayah of another Surah',
                 cond: 'isDifferentSurah',
                 target: '.SURAH_MISMATCH',
