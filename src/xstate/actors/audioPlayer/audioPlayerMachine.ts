@@ -104,7 +104,11 @@ export const audioPlayerMachine =
             SURAH_MISMATCH: {
               on: {
                 CONFIRM_PLAY_MISMATCHED_SURAH: {
-                  actions: ['setCurrentSurahAndAyahAsNewSurahAndAyah', 'exitRadio'],
+                  actions: [
+                    'setCurrentSurahAndAyahAsNewSurahAndAyah',
+                    'exitRadio',
+                    'stopRepeatActor',
+                  ],
                   description: 'User confirms to play the new Surah',
                   target: 'LOADING_RECITER_DATA',
                 },
@@ -317,7 +321,7 @@ export const audioPlayerMachine =
                     },
                     PLAY_AYAH: [
                       {
-                        actions: ['setNewSurahAndAyahNumbers', 'stopRepeatActor'],
+                        actions: ['setNewSurahAndAyahNumbers'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
@@ -342,7 +346,7 @@ export const audioPlayerMachine =
                         target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
                       },
                       {
-                        actions: ['stopRepeatActor', 'setNewSurahAndResetNewAyahNumber'],
+                        actions: ['setNewSurahAndResetNewAyahNumber'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
@@ -578,7 +582,7 @@ export const audioPlayerMachine =
           actions: 'setAudioRef',
         },
         SET_REPEAT_SETTING: {
-          actions: ['exitRadio', 'setSurahAndAyahNumbers'],
+          actions: ['exitRadio'],
           target: '.VISIBLE.LOADING_REPEAT_DATA',
         },
         SET_INITIAL_CONTEXT: {

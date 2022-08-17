@@ -108,9 +108,10 @@ export interface Typegen0 {
     setRadioStationDetails: "PLAY_RADIO_TRACK";
     setReciterId: "CHANGE_RECITER";
     setRecitersList: "SET_RECITERS_LIST";
-    setSurahAndAyahNumbers: "PLAY_AYAH" | "SET_REPEAT_SETTING";
+    setSurahAndAyahNumbers: "PLAY_AYAH";
     setSurahAndResetAyahNumber: "PLAY_SURAH";
     stopRepeatActor:
+      | "CONFIRM_PLAY_MISMATCHED_SURAH"
       | "PLAY_AYAH"
       | "PLAY_RADIO"
       | "PLAY_SURAH"
