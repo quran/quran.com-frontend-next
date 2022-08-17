@@ -83,11 +83,11 @@ const RepeatAudioModal = ({
   );
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle || 2,
-    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle || 2,
-    from: selectedVerseKey || firstVerseKeyInThisChapter,
-    to: selectedVerseKey || lastVerseKeyInThisChapter,
-    delayMultiplier: repeatSettings?.delayMultiplier || 1,
+    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
+    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
+    from: selectedVerseKey ?? firstVerseKeyInThisChapter,
+    to: selectedVerseKey ?? lastVerseKeyInThisChapter,
+    delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
