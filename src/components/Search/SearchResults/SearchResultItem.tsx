@@ -2,7 +2,6 @@
 
 import React, { useMemo } from 'react';
 
-import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import ThumbsDownIcon from '../../../../public/icons/thumbsdown-outline.svg';
@@ -65,11 +64,9 @@ const SearchResultItem: React.FC<Props> = ({
     };
     submitKalimatSearchResultFeedback(feedbackRequestParams)
       .then(() => {
-        clipboardCopy(JSON.stringify(feedbackRequestParams, null, '  ')).then(() =>
-          toast('Feedback submitted successfully and copied to clipboard', {
-            status: ToastStatus.Success,
-          }),
-        );
+        toast('Feedback submitted successfully!', {
+          status: ToastStatus.Success,
+        });
       })
       .catch(() => {
         toast(t('common:error.general'), {
