@@ -1014,6 +1014,8 @@ export const audioPlayerMachine =
           }
 
           const actionHandlers = [
+            ['play', () => callback('TOGGLE')],
+            ['pause', () => callback('TOGGLE')],
             [
               'previoustrack',
               () => {
