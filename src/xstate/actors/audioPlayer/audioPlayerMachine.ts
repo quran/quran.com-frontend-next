@@ -190,6 +190,9 @@ export const audioPlayerMachine =
                           description: 'The audio file failed to load',
                           target: '#audioPlayer.VISIBLE.FAILED',
                         },
+                        PROGRESS: {
+                          target: 'ACTIVE',
+                        },
                         CAN_PLAY: {
                           target: 'ACTIVE',
                         },
@@ -335,6 +338,9 @@ export const audioPlayerMachine =
                         FAIL: {
                           description: 'The audio file failed to load',
                           target: '#audioPlayer.VISIBLE.FAILED',
+                        },
+                        PROGRESS: {
+                          target: 'ACTIVE',
                         },
                         CAN_PLAY: {
                           target: 'ACTIVE',

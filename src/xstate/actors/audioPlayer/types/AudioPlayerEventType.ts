@@ -23,6 +23,7 @@ type AudioPlayerEventType =
   | { type: 'NEXT_AYAH' }
   | { type: 'NEXT_AUDIO_TRACK' }
   | { type: 'UPDATE_TIMING' }
+  | { type: 'PROGRESS' }
   | {
       type: 'SET_REPEAT_SETTING';
       from: number;

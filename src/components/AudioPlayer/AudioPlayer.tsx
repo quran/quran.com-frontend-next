@@ -74,6 +74,10 @@ const AudioPlayer = () => {
     audioService.send({ type: 'PAUSE' });
   };
 
+  const onProgress = () => {
+    audioService.send({ type: 'PROGRESS' });
+  };
+
   return (
     <>
       <div
@@ -97,6 +101,7 @@ const AudioPlayer = () => {
           onStalled={onStalled}
           onPlay={onPlay}
           onPause={onPause}
+          onProgress={onProgress}
         />
         {isVisible && <AudioPlayerBody />}
       </div>
