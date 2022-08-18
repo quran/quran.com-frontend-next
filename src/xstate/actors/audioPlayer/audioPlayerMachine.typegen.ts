@@ -18,6 +18,11 @@ export interface Typegen0 {
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
+    "done.invoke.playAudio": {
+      type: "done.invoke.playAudio";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
     "error.platform.fetchCustomReciter": {
       type: "error.platform.fetchCustomReciter";
       data: unknown;
@@ -30,6 +35,10 @@ export interface Typegen0 {
       type: "error.platform.fetchRepeatData";
       data: unknown;
     };
+    "error.platform.playAudio": {
+      type: "error.platform.playAudio";
+      data: unknown;
+    };
     "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING": {
       type: "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING";
     };
@@ -40,6 +49,7 @@ export interface Typegen0 {
     fetchReciter: "done.invoke.fetchReciter";
     fetchRepeatData: "done.invoke.fetchRepeatData";
     initMediaSession: "done.invoke.audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED:invocation[0]";
+    playAudio: "done.invoke.playAudio";
   };
   missingImplementations: {
     actions: never;
@@ -65,17 +75,6 @@ export interface Typegen0 {
       | "REPEAT_AYAH"
       | "REPEAT_FINISHED"
       | "TOGGLE";
-    playAudio:
-      | "NEXT_AYAH"
-      | "PLAY"
-      | "PLAY_AYAH"
-      | "PLAY_SURAH"
-      | "PREV_AYAH"
-      | "TOGGLE"
-      | "done.invoke.fetchCustomReciter"
-      | "done.invoke.fetchReciter"
-      | "done.invoke.fetchRepeatData"
-      | "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING";
     repeatNextAyah: "NEXT_AYAH";
     repeatPreviousAyah: "PREV_AYAH";
     resetAyahNumber: "CLOSE";
@@ -138,6 +137,17 @@ export interface Typegen0 {
       | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData";
+    playAudio:
+      | "NEXT_AYAH"
+      | "PLAY"
+      | "PLAY_AYAH"
+      | "PLAY_SURAH"
+      | "PREV_AYAH"
+      | "TOGGLE"
+      | "done.invoke.fetchCustomReciter"
+      | "done.invoke.fetchReciter"
+      | "done.invoke.fetchRepeatData"
+      | "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING";
   };
   eventsCausingGuards: {
     canRepeatNextAyah: "NEXT_AYAH";

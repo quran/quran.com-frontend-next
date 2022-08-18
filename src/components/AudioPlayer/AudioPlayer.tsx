@@ -86,6 +86,7 @@ const AudioPlayer = () => {
           style={{ display: 'none' }}
           id="audio-player"
           ref={audioPlayerRef}
+          autoPlay
           preload="auto"
           onCanPlay={onCanPlay}
           onTimeUpdate={onTimeUpdate}

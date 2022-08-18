@@ -239,7 +239,14 @@ export const audioPlayerMachine =
                   },
                 },
                 PLAYING: {
-                  entry: 'playAudio',
+                  invoke: {
+                    id: 'playAudio',
+                    src: 'playAudio',
+                    onDone: {},
+                    onError: {
+                      target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.ACTIVE',
+                    },
+                  },
                   description: 'The audio player is playing the audio',
                   initial: 'ACTIVE',
                   on: {
@@ -790,10 +797,6 @@ export const audioPlayerMachine =
             context.audioPlayer.currentTime = milliSecondsToSeconds(timestampFrom);
           }
         },
-        playAudio: (context) => {
-          context.audioPlayer.playbackRate = context.playbackRate;
-          context.audioPlayer.play();
-        },
         resetElapsedTime: assign({
           elapsed: 0,
         }),
@@ -979,6 +982,10 @@ export const audioPlayerMachine =
         isUsingCustomReciterId: (context, event) => !!event.reciterId,
       },
       services: {
+        playAudio: (context) => {
+          context.audioPlayer.playbackRate = context.playbackRate;
+          return context.audioPlayer.play();
+        },
         fetchReciter: (context) => executeFetchReciter(context),
         fetchCustomReciter: (context, event) => {
           // @ts-ignore
