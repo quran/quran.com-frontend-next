@@ -2,6 +2,7 @@
 import { createContext, useEffect } from 'react';
 
 import { useInterpret } from '@xstate/react';
+import useTranslation from 'next-translate/useTranslation';
 import { InterpreterFrom } from 'xstate';
 
 import { audioPlayerMachine } from './actors/audioPlayer/audioPlayerMachine';
@@ -10,6 +11,7 @@ import {
   persistXstateToLocalStorage,
 } from './actors/audioPlayer/audioPlayerPersistHelper';
 
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { getUserPreferences } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
@@ -22,6 +24,8 @@ export const AudioPlayerMachineContext = createContext(
 const LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER = ['CHANGE_RECITER', 'SET_PLAYBACK_SPEED'];
 
 export const AudioPlayerMachineProvider = ({ children, locale }) => {
+  const toast = useToast();
+  const { t } = useTranslation('common');
   const initialXstateContext = getXstateStateFromLocalStorage();
   const defaultAudioStateByLocale = getAudioPlayerStateInitialState(locale);
   const defaultLocaleContext = {
@@ -47,6 +51,10 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
     },
     (state) => {
       const { playbackRate, reciterId } = state.context;
+      if (state.matches('VISIBLE.FAILED')) {
+        toast(t('error.general'), { status: ToastStatus.Error });
+      }
+
       if (LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER.includes(state.event.type)) {
         persistXstateToLocalStorage({ playbackRate, reciterId });
       }

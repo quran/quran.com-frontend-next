@@ -459,7 +459,11 @@ export const audioPlayerMachine =
             FAILED: {
               description:
                 'Either the audio file failed to load or the API to fetch the reciter + Surah data failed',
-              type: 'final',
+              after: {
+                500: {
+                  target: '#audioPlayer.HIDDEN',
+                },
+              },
             },
             LOADING_RECITER_DATA: {
               description: 'The reciter + Surah data are being fetched',
@@ -634,10 +638,6 @@ export const audioPlayerMachine =
               },
             ],
             PLAY_SURAH: [
-              {
-                in: '#audioPlayer.VISIBLE.FAILED',
-                target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
-              },
               {
                 description: 'When the users is playing the same surah. Just resume it',
                 cond: 'isSameSurahAndReciter',

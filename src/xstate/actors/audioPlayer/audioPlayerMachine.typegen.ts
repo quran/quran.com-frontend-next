@@ -39,6 +39,9 @@ export interface Typegen0 {
       type: "error.platform.playAudio";
       data: unknown;
     };
+    "xstate.after(500)#audioPlayer.VISIBLE.FAILED": {
+      type: "xstate.after(500)#audioPlayer.VISIBLE.FAILED";
+    };
     "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING": {
       type: "xstate.after(VERSE_DELAY)#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.DELAYING";
     };

@@ -75,12 +75,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
       </Head>
       <FontPreLoader locale={locale} />
 
-      <DataContext.Provider value={pageProps.chaptersData}>
-        <AudioPlayerMachineProvider locale={locale}>
-          <ReduxProvider locale={locale}>
-            <ThemeProvider>
-              <IdProvider>
-                <ToastContainerProvider>
+      <ToastContainerProvider>
+        <DataContext.Provider value={pageProps.chaptersData}>
+          <AudioPlayerMachineProvider locale={locale}>
+            <ReduxProvider locale={locale}>
+              <ThemeProvider>
+                <IdProvider>
                   <UserAccountModal
                     requiredFields={userData?.requiredFields}
                     announcement={userData?.announcement}
@@ -95,13 +95,13 @@ function MyApp({ Component, pageProps }): JSX.Element {
                   <AudioPlayer />
                   <Footer />
                   <DonatePopup />
-                </ToastContainerProvider>
-              </IdProvider>
-            </ThemeProvider>
-            <SessionIncrementor />
-          </ReduxProvider>
-        </AudioPlayerMachineProvider>
-      </DataContext.Provider>
+                </IdProvider>
+              </ThemeProvider>
+              <SessionIncrementor />
+            </ReduxProvider>
+          </AudioPlayerMachineProvider>
+        </DataContext.Provider>
+      </ToastContainerProvider>
 
       <ThirdPartyScripts />
     </>
