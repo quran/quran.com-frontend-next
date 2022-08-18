@@ -26,10 +26,11 @@
   margin-inline-end: auto;
 }
 
-.quranTextContainer {
-}
-
-.verseLink {
+.iconsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .quranTextResult {

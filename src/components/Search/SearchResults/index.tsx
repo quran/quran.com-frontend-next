@@ -48,6 +48,7 @@ const SearchResults: React.FC<Props> = ({
               result={result}
               source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
               setFeedbackVerseKey={setFeedbackVerseKey}
+              searchQuery={searchQuery}
             />
           ))}
           {isSearchDrawer ? (

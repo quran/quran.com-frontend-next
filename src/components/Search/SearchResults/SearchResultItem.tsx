@@ -2,13 +2,19 @@
 
 import React, { useMemo } from 'react';
 
+import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
+
+import ThumbsDownIcon from '../../../../public/icons/thumbsdown-outline.svg';
+import ThumbsUpIcon from '../../../../public/icons/thumbsup-outline.svg';
 
 import styles from './SearchResultItem.module.scss';
 
+import { submitKalimatSearchResultFeedback } from 'src/api';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -28,9 +34,16 @@ interface Props {
   result: Verse;
   source: Source;
   setFeedbackVerseKey?: (verseKey: string) => void;
+  searchQuery?: string;
 }
 
-const SearchResultItem: React.FC<Props> = ({ result, source, setFeedbackVerseKey }) => {
+const SearchResultItem: React.FC<Props> = ({
+  result,
+  source,
+  setFeedbackVerseKey,
+  searchQuery,
+}) => {
+  const toast = useToast();
   const { t, lang } = useTranslation('quran-reader');
   const localizedVerseKey = useMemo(
     () => toLocalizedVerseKey(result.verseKey, lang),
@@ -43,6 +56,27 @@ const SearchResultItem: React.FC<Props> = ({ result, source, setFeedbackVerseKey
 
   const chapterNumber = getChapterNumberFromKey(result.verseKey);
   const chapterData = getChapterData(chaptersData, chapterNumber.toString());
+
+  const onFeedbackIconClicked = (isThumbsUp: boolean) => {
+    const feedbackRequestParams = {
+      query: searchQuery,
+      feedbackScore: isThumbsUp ? 1 : -1,
+      result: result.verseKey,
+    };
+    submitKalimatSearchResultFeedback(feedbackRequestParams)
+      .then(() => {
+        clipboardCopy(JSON.stringify(feedbackRequestParams, null, '  ')).then(() =>
+          toast('Feedback submitted successfully and copied to clipboard', {
+            status: ToastStatus.Success,
+          }),
+        );
+      })
+      .catch(() => {
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
+      });
+  };
 
   return (
     <div className={styles.container}>
@@ -98,6 +132,26 @@ const SearchResultItem: React.FC<Props> = ({ result, source, setFeedbackVerseKey
             <p className={styles.translationName}> - {translation.resourceName}</p>
           </div>
         ))}
+        {setFeedbackVerseKey && (
+          <div className={styles.iconsContainer}>
+            <Button
+              variant={ButtonVariant.Ghost}
+              onClick={() => {
+                onFeedbackIconClicked(true);
+              }}
+            >
+              <ThumbsUpIcon />
+            </Button>
+            <Button
+              variant={ButtonVariant.Ghost}
+              onClick={() => {
+                onFeedbackIconClicked(false);
+              }}
+            >
+              <ThumbsDownIcon />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
