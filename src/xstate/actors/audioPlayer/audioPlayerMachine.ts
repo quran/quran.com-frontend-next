@@ -635,6 +635,10 @@ export const audioPlayerMachine =
             ],
             PLAY_SURAH: [
               {
+                in: '#audioPlayer.VISIBLE.FAILED',
+                target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+              },
+              {
                 description: 'When the users is playing the same surah. Just resume it',
                 cond: 'isSameSurahAndReciter',
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
@@ -976,7 +980,7 @@ export const audioPlayerMachine =
         isSameSurahAndReciter: (context, event) => {
           // @ts-ignore
           const reciterId = event.reciterId || context.reciterId;
-          return context.surah === event.surah && reciterId === context.audioData.reciterId;
+          return context.surah === event.surah && reciterId === context.audioData?.reciterId;
         },
         isRepeatActive: (context) => !!context.repeatActor,
         isUsingCustomReciterId: (context, event) => !!event.reciterId,
