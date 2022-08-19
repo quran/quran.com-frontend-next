@@ -61,6 +61,7 @@ export interface Typegen0 {
     delays: never;
   };
   eventsCausingActions: {
+    continueFromLastTimestamp: "END";
     decrementAyah: "PREV_AYAH";
     exitRadio:
       | "CONFIRM_PLAY_MISMATCHED_SURAH"
@@ -117,6 +118,7 @@ export interface Typegen0 {
       | "CONFIRM_PLAY_MISMATCHED_SURAH"
       | "PLAY_RADIO"
       | "REPEAT_FINISHED";
+    updateDownloadProgress: "PROGRESS";
     updateRepeatAyah: "PLAY_AYAH";
     updateRepeatVerseTimings:
       | "done.invoke.fetchCustomReciter"

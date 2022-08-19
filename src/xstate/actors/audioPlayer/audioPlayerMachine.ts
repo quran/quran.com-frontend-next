@@ -36,6 +36,7 @@ export const audioPlayerMachine =
         reciterId: 7,
         ayahNumber: 1,
         elapsed: 0,
+        downloadProgress: 0,
         duration: 0,
         audioData: undefined,
         playbackRate: 1,
@@ -143,8 +144,8 @@ export const audioPlayerMachine =
                             'When the mouse or keyboard keys are clicked to jump forward/backward 5 or 10 seconds or when the user wants to navigate to a specific time.',
                           target: 'LOADING',
                         },
-                        STALL: {
-                          description: 'File audio data fetching is stalled',
+                        WAITING: {
+                          description: 'Waiting for the buffer to be filled',
                           target: 'LOADING',
                         },
                         PLAY: {
@@ -152,9 +153,11 @@ export const audioPlayerMachine =
                           target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
                         },
                         END: {
-                          actions: 'forwardEndedToRadioMachine',
-                          description: 'Current file ended playing',
-                          target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
+                          /**
+                           * This is a hack for safari.
+                           * In safari. The audio goes to ended state once the there's not enough data to play the audio.
+                           */
+                          actions: 'continueFromLastTimestamp',
                         },
                       },
                     },
@@ -190,14 +193,16 @@ export const audioPlayerMachine =
                           description: 'The audio file failed to load',
                           target: '#audioPlayer.VISIBLE.FAILED',
                         },
-                        PROGRESS: {
-                          target: 'ACTIVE',
-                        },
                         CAN_PLAY: {
                           target: 'ACTIVE',
                         },
                         SEEKED: {
                           target: 'ACTIVE',
+                        },
+                        END: {
+                          actions: 'forwardEndedToRadioMachine',
+                          description: 'Current file ended playing',
+                          target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
                         },
                       },
                     },
@@ -245,7 +250,6 @@ export const audioPlayerMachine =
                   invoke: {
                     id: 'playAudio',
                     src: 'playAudio',
-                    onDone: {},
                     onError: {
                       target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.ACTIVE',
                     },
@@ -288,8 +292,8 @@ export const audioPlayerMachine =
                             'When the mouse or keyboard keys are clicked to jump forward/backward 5 or 10 seconds or when the user wants to navigate to a specific time.',
                           target: 'LOADING',
                         },
-                        STALL: {
-                          description: 'File audio data fetching is stalled while playing',
+                        WAITING: {
+                          description: 'Waiting for the buffer to be filled',
                           target: 'LOADING',
                         },
                         END: {
@@ -297,6 +301,7 @@ export const audioPlayerMachine =
                           description: 'The audio finished played',
                           target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.ENDED',
                         },
+
                         UPDATE_TIMING: {
                           actions: 'updateTiming',
                           description: 'Update the elapsed time ',
@@ -339,11 +344,12 @@ export const audioPlayerMachine =
                           description: 'The audio file failed to load',
                           target: '#audioPlayer.VISIBLE.FAILED',
                         },
-                        PROGRESS: {
-                          target: 'ACTIVE',
-                        },
                         CAN_PLAY: {
                           target: 'ACTIVE',
+                        },
+                        PAUSE: {
+                          description: 'Pause the audio',
+                          target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.PAUSED.ACTIVE',
                         },
                         SEEKED: {
                           target: 'ACTIVE',
@@ -420,6 +426,9 @@ export const audioPlayerMachine =
                 },
               },
               on: {
+                PROGRESS: {
+                  actions: 'updateDownloadProgress',
+                },
                 REPEAT_FINISHED: {
                   actions: ['stopRepeatActor', 'pauseAudio'],
                   target: '.PAUSED.ACTIVE',
@@ -685,6 +694,13 @@ export const audioPlayerMachine =
     },
     {
       actions: {
+        continueFromLastTimestamp: (context) => {
+          /**
+           * This is hack for safari where the audioplayer goes to ended, instead of waiting for the buffer data
+           */
+          context.audioPlayer.currentTime = context.elapsed - 0.0001;
+          context.audioPlayer.play();
+        },
         setRecitersList: assign({
           recitersList: (context, event) => event.recitersList,
         }),
@@ -809,6 +825,9 @@ export const audioPlayerMachine =
         },
         resetElapsedTime: assign({
           elapsed: 0,
+        }),
+        updateDownloadProgress: assign({
+          downloadProgress: (context, event) => event.timestamp,
         }),
         // @ts-ignore
         setElapsedTime: pure((context) => {

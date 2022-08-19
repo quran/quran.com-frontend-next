@@ -17,6 +17,7 @@ interface AudioPlayerContext {
   surahVersesCount: any;
   elapsed: number;
   duration: number;
+  downloadProgress: number;
   playbackRate: number;
   shouldPlayFromRandomTimeStamp: boolean;
   verseDelay: number;

@@ -20,7 +20,7 @@
 }
 
 .track {
-  background-color: var(--color-background-alternative-medium);
+  opacity: var(--opacity-25);
   position: relative;
   flex-grow: 1;
 
@@ -33,10 +33,21 @@
   }
 }
 
+.trackBackground {
+  background-color: var(--color-background-alternative-faint);
+}
+
 .range {
   position: absolute;
-  background-color: var(--color-background-inverse);
   height: 100%;
+}
+
+.primary {
+  background-color: var(--color-background-inverse);
+}
+.secondary {
+  background-color: var(--color-background-alternative-deep);
+  opacity: var(--opacity-30);
 }
 
 .thumb {

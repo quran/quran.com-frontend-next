@@ -16,6 +16,18 @@ export const getAyahNumberByTimestamp = (verseTimings: VerseTiming[], timestamp:
   return getVerseNumberFromKey(verseTiming.verseKey);
 };
 
+/**
+ * There's an issue on mobile safari. Where the audio doesn't start from the correct timestamp.
+ * For example
+ * verse 1: timestamp : 0 - 1000ms;
+ * verse 2: timestamp: 1000ms - 2000ms;
+ *
+ * When we seek to verse timestamp 1000ms, safari reports that the timestamp is 850ms.
+ * And the UI highlights verse 1. Which is incorrect. Since the user intended to play verse 2 (timestamp 1000)
+ *
+ */
+const TOLERANCE_PERIOD = 200; // ms
+
 export const getActiveVerseTiming = (context) => {
   const {
     audioData: { verseTimings },
@@ -26,15 +38,15 @@ export const getActiveVerseTiming = (context) => {
   const lastAyahOfSurahTimestampTo = verseTimings[verseTimings.length - 1].timestampTo;
 
   // if the reported time exceeded the maximum timestamp of the Surah from BE, just return the current Ayah which should be the last
-  if (currentTimeMS > lastAyahOfSurahTimestampTo) {
+  if (currentTimeMS > lastAyahOfSurahTimestampTo - TOLERANCE_PERIOD) {
     return verseTimings[ayahNumber - 1];
   }
 
   const activeVerseTiming = verseTimings.find((ayah) => {
     const isAyahBeingRecited = isCurrentTimeInRange(
       currentTimeMS,
-      ayah.timestampFrom,
-      ayah.timestampTo,
+      ayah.timestampFrom - TOLERANCE_PERIOD,
+      ayah.timestampTo - TOLERANCE_PERIOD,
     );
     return isAyahBeingRecited;
   });
@@ -63,7 +75,7 @@ export const getWordTimeSegment = (verseTimings: VerseTiming[], word: Word) => {
   return null;
 };
 
-export const getActiveAyahNumber = (activeVerseTiming: VerseTiming) => {
+export const getActiveAyahNumber = (activeVerseTiming?: VerseTiming) => {
   const [, verseNumber] = activeVerseTiming.verseKey.split(':');
   return Number(verseNumber);
 };

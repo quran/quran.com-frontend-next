@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 import React, { useContext, useEffect, useRef } from 'react';
 
@@ -19,12 +20,34 @@ const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ),
 });
 
+const getAudioPlayerDownloadProgress = (audioPlayer: HTMLAudioElement) => {
+  // TODO: Technically this is not accurate, but it's close enough for now.
+  /**
+   * There can be actually multiple time ranges. For example
+   * ------------------------------------------------------
+   * |=============|                    |===========|     |
+   * ------------------------------------------------------
+   * 0             5                    15          19    21
+   *
+   * But here, we're only taking the latest timestamp
+   *
+   * Reference: https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/buffering_seeking_time_ranges
+   */
+  if (audioPlayer.buffered) {
+    const lastIndex = audioPlayer.buffered.length - 1;
+    const timestamp = audioPlayer.buffered.end(lastIndex);
+    return timestamp;
+  }
+  return 0;
+};
+
 const AudioPlayer = () => {
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const audioService = useContext(AudioPlayerMachineContext);
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
 
   useEffect(() => {
+    window.audioPlayerEl = audioPlayerRef.current;
     audioService.send({ type: 'SET_AUDIO_REF', audioPlayerRef: audioPlayerRef.current });
   }, [audioService]);
 
@@ -32,14 +55,26 @@ const AudioPlayer = () => {
     audioService.send({ type: 'CAN_PLAY' });
   };
 
-  const onTimeUpdate = () => {
-    audioService.send({ type: 'UPDATE_TIMING' });
-  };
+  const onTimeUpdate = (e) => {
+    const isLoading = audioService.state.hasTag('loading');
 
-  const onStalled = () => {
-    audioService.send({
-      type: 'STALL',
-    });
+    const audioPlayer: HTMLAudioElement = e.target;
+    const currentTimestamp = audioPlayer.currentTime;
+    const downloadProgress = getAudioPlayerDownloadProgress(audioPlayer);
+    const isWaiting = currentTimestamp > downloadProgress - 2; // 2s tolerance
+
+    /**
+     * simulate onWaiting event on safari.
+     * If the audio is not in loading state already. And `currentTime` is nearby last timestamp of `buffered`
+     * trigger WAITING event.
+     */
+    if (!isLoading && isWaiting) {
+      audioService.send({ type: 'WAITING' });
+    } else if (isLoading && !isWaiting) {
+      audioService.send({ type: 'CAN_PLAY' });
+    }
+
+    audioService.send({ type: 'UPDATE_TIMING' });
   };
 
   const onError = () => {
@@ -74,8 +109,8 @@ const AudioPlayer = () => {
     audioService.send({ type: 'PAUSE' });
   };
 
-  const onProgress = () => {
-    audioService.send({ type: 'PROGRESS' });
+  const onProgress = (e) => {
+    audioService.send({ type: 'PROGRESS', timestamp: getAudioPlayerDownloadProgress(e.target) });
   };
 
   return (
@@ -98,7 +133,6 @@ const AudioPlayer = () => {
           onSeeking={onSeeking}
           onSeeked={onSeeked}
           onError={onError}
-          onStalled={onStalled}
           onPlay={onPlay}
           onPause={onPause}
           onProgress={onProgress}

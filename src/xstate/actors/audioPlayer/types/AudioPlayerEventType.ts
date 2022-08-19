@@ -11,7 +11,7 @@ type AudioPlayerEventType =
   | { type: 'CONFIRM_PLAY_MISMATCHED_SURAH' }
   | { type: 'CLOSE' }
   | { type: 'END' }
-  | { type: 'STALL' }
+  | { type: 'WAITING' }
   | { type: 'SEEKING' }
   | { type: 'SEEKED' }
   | { type: 'TOGGLE' }
@@ -23,7 +23,7 @@ type AudioPlayerEventType =
   | { type: 'NEXT_AYAH' }
   | { type: 'NEXT_AUDIO_TRACK' }
   | { type: 'UPDATE_TIMING' }
-  | { type: 'PROGRESS' }
+  | { type: 'PROGRESS'; timestamp: number }
   | {
       type: 'SET_REPEAT_SETTING';
       from: number;
