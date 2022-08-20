@@ -2,15 +2,15 @@ import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ReflectionDisclaimerMessage from '../../ReflectionDisclaimerMessage';
-
 import styles from './ReflectionBody.module.scss';
 
 import Button from 'src/components/dls/Button/Button';
 import Separator from 'src/components/dls/Separator/Separator';
+import ReflectionDisclaimerMessage from 'src/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
 import ReflectionItem, {
   VerseReference,
 } from 'src/components/QuranReader/ReflectionView/ReflectionItem';
+import ReflectionNotAvailableMessage from 'src/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import DataContext from 'src/contexts/DataContext';
@@ -31,7 +31,7 @@ import {
  * From reflection data, extract the verse references
  * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
  *
- * @param {Object} reflection
+ * @param {object} reflection
  * @returns {VerseReference[]} verseReferences
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
@@ -118,7 +118,11 @@ const ReflectionBody: React.FC<Props> = ({
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
-      <ReflectionDisclaimerMessage />
+      {data?.posts?.length === 0 ? (
+        <ReflectionNotAvailableMessage />
+      ) : (
+        <ReflectionDisclaimerMessage />
+      )}
       {data?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
@@ -127,8 +131,8 @@ const ReflectionBody: React.FC<Props> = ({
           authorName={reflection?.author?.name}
           authorUsername={reflection?.author?.username}
           isAuthorVerified={reflection?.author?.verified}
-          reflectionText={reflection?.body}
-          avatarUrl={reflection?.author?.profileImg}
+          reflectionText={reflection?.htmlBody}
+          avatarUrl={reflection?.author?.avatarUrl}
           verseReferences={getVerseReferencesFromReflection(reflection)}
           likesCount={reflection?.likesCount}
           commentsCount={reflection?.commentsCount}

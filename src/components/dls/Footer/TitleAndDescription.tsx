@@ -13,7 +13,7 @@ const TitleAndDescription = () => {
         <div className={styles.iconContainer}>
           <QuranTextLogo />
         </div>
-        <div className={styles.title}>{t('home:footer.title')}</div>
+        <div className={styles.title}>{t('footer.title')}</div>
       </div>
       <p className={styles.description}>{t('footer.description')}</p>
     </div>

@@ -1,11 +1,40 @@
 {
     "about": "关于我们",
     "and": "和",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "看看有什么新鲜事",
+                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户测试版"
+            },
+            "slide-2": {
+                "action": "下一个",
+                "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
+                "title": "您的数据将在设备间同步<br> <\/br>"
+            },
+            "slide-3": {
+                "action": "好，知道了",
+                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> > 的反馈",
+                "title": "我们想听听你的想法"
+            }
+        }
+    },
+    "aria": {
+        "change-settings": "更改设置",
+        "drawer-close": "关闭抽屉",
+        "msg-close": "关闭消息",
+        "nav-drawer-open": "打开导航抽屉",
+        "play-surah": "播放古兰经{{surahName}}",
+        "read-ayah-refls": "阅读相关参悟",
+        "select-lng": "选择语言",
+        "share-ayah": "分享Ayah",
+        "sidebar-nav-close": "关闭导航侧边栏"
+    },
     "audio": {
         "auto-scroll": {
             "off": "离开",
             "on": "在",
-            "title": "自动滚屏"
+            "title": "播放声音时自动滚屏"
         },
         "play": "播放音频",
         "playback-normal": "普通",
@@ -14,28 +43,28 @@
         "player": {
             "close": "关闭音频播放器",
             "currently-playing": "您正在播放",
-            "delay-verse": "节文之间的延迟",
+            "delay-verse": "每节之间停顿",
             "download": "下载",
-            "full-surah": "完整的古兰经",
+            "full-surah": "播放整章",
             "mismatch": "{{currentReadingChapter}}单击“重新开始”",
             "pause": "暂停",
             "pause-audio": "暂停音频",
             "play": "播放",
             "play-audio": "播放音频",
-            "play-range": "播放范围",
+            "play-range": "整体重复次数",
             "previous-ayah": "上一节",
-            "repeat-1-verse": "重复经文",
-            "repeat-settings": "重复设置",
-            "repeat-verse": "重复每一节",
+            "repeat-1-verse": "重复播放",
+            "repeat-settings": "重复播放设置",
+            "repeat-verse": "每一节重复次数",
             "search-verse": "搜索章节",
-            "single-verse": "单节",
+            "single-verse": "播放单节",
             "start-over": "重新播放",
             "start-playing": "开始播放",
-            "stop-repeating": "停止重复",
+            "stop-repeating": "停止重复播放",
             "times": "次",
-            "verses-range": "多节经文"
+            "verses-range": "播放多节"
         },
-        "repeat-moved": "重复设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
+        "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
         "title": "音频"
     },
@@ -63,6 +92,7 @@
         "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
         "title": "社区"
     },
+    "complete-sign-up": "完成您的注册",
     "continue": "继续",
     "copied": "已复制",
     "copied-to-clipboard": "复制到剪贴板",
@@ -73,9 +103,21 @@
     },
     "default-description": "古兰经翻译成多种语言，界面简单易用",
     "developers": "开发者",
+    "donate": "捐",
+    "email-verification": {
+        "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
+        "email-sent": "我们刚刚向<strong> {{email}} <\/strong>发送了一封电子邮件",
+        "email-verification": "电子邮件验证",
+        "resend-email": "重发电子邮件",
+        "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
+        "verify-code": "验证码"
+    },
     "error": {
+        "bookmark-sync": "书签不同步。",
+        "email-login-fail": "使用电子邮件登录失败。请再试一次",
         "general": "出了些问题。请再试一次。",
-        "offline": "看起来你失去了连接。请检查并重试。"
+        "offline": "看起来你失去了连接。请检查并重试。",
+        "pref-persist-fail": "无法将您的设置同步到云端。"
     },
     "feedback": "反馈问题",
     "fonts": {
@@ -94,11 +136,24 @@
         "text_uthmani": "纳斯赫体"
     },
     "footer": {
-        "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。"
+        "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
+        "rights": "版权所有",
+        "title": "阅读、学习和学习《古兰经》。"
+    },
+    "form": {
+        "code": "验证码",
+        "email": "电子邮件",
+        "firstName": "名",
+        "lastName": "姓"
     },
     "from": "从",
+    "fundraising": {
+        "description": "每月的捐款帮助我们改进 Quran.com 并维持运营，因此我们减少对筹款的关注，而更多地关注创造影响。",
+        "learn-more": "学到更多",
+        "title": "成为每月捐助者"
+    },
     "help": "帮助",
-    "hizb": "希兹",
+    "hizb": "希兹布",
     "home": "首页",
     "input": {
         "clear": "清除"
@@ -108,6 +163,8 @@
     "languages": "语言",
     "less": "较少的",
     "loading": "加载中",
+    "login": "登录",
+    "logout": "登出",
     "menu": "菜单",
     "mobile-apps": "手机App",
     "mode": "模式",
@@ -124,24 +181,35 @@
     "pages": "页面",
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
     "popular-links": "热门链接",
+    "popup": {
+        "cta-1": "每月捐赠",
+        "cta-2": "捐赠一次",
+        "cta-3": "学到更多",
+        "footnote": "每月捐款让我们可以减少对筹款的关注",
+        "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
+        "text-2": "Quran.com 是持续慈善（Sadaqah Jariyah）的绝佳机会。请考虑以每月（或一次性）捐助者的身份投资您的来世。",
+        "title": "亲爱的古兰经伴侣，"
+    },
     "powered-by": "Powered by",
     "prev": "以前的",
     "previous-ayah": "上一节文",
     "privacy": "隐私",
     "product-updates": "产品更新",
+    "profile": "轮廓",
     "q-reflect": "古兰经反射",
     "quran-com": "Quran.com",
     "quran-radio": "在线听古兰经",
     "reading-preference": {
-        "reading": "读",
+        "reading": "诵读",
         "translation": "翻译"
     },
     "reciter": "诵读家",
     "reciters": "朗诵者",
-    "reflect": "反映",
+    "reflect": "参悟",
     "remove": "消除",
     "retry": "重试",
     "search-for": "搜索 '{{searchQuery}}'",
+    "search-results": "{{count}}搜索结果",
     "search": {
         "filters": "过滤器",
         "hint": "尝试搜索",
@@ -190,6 +258,7 @@
         "descending": "倒序"
     },
     "style": "风格",
+    "submit": "提交",
     "surah": "章",
     "tafsir": {
         "font-size": "Tafsir 字体大小",
@@ -220,6 +289,12 @@
     "translations": "翻译",
     "transliteration": "音译",
     "type": "类型",
+    "undo": "撤消",
+    "validation": {
+        "invalid-email": "{{field}}必须是有效的电子邮件地址",
+        "invalid-field": "请输入有效的{{field}}值",
+        "required-field": "{{field}}是必需的"
+    },
     "verse": "节",
     "verse-bookmark-removed": "已删除节文书签！",
     "verse-bookmarked": "已添加节文书签！",
@@ -242,7 +317,7 @@
     "word-click": {
         "no-audio": "无音频",
         "play-audio": "播放音频",
-        "title": "字点击"
+        "title": "鼠标点击单词时发音"
     },
     "word-tooltip": "鼠标悬停在单词上时弹出其译文",
     "yes": "是的"

@@ -1,21 +1,10 @@
 @use "src/styles/breakpoints";
 
-.pageContainer {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
-  width: 90%;
-}
+$tablet-max-width: 50rem;
 
-.header {
+.pageContainer {
   margin-block-start: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  text-align: center;
+  margin-block-end: calc(2 * var(--spacing-mega));
 }
 
 .paginationContainer {
@@ -58,31 +47,68 @@
 }
 
 .pageBody {
-  width: 100%;
-  padding-block-start: var(--spacing-small);
+  padding-inline: calc(1 * var(--spacing-xsmall));
+  @include breakpoints.tablet {
+    max-width: $tablet-max-width;
+    margin-inline: auto;
+    padding-inline: calc(1.5 * var(--spacing-medium));
+  }
 }
 
-.filtersHeader {
-  font-weight: var(--font-weight-bold);
-  padding-block-start: var(--spacing-small);
-  width: 100%;
-  text-align: start;
+.searchBodyContainer {
+  box-sizing: border-box;
+  padding-inline: var(--spacing-small);
+  max-width: 50rem;
 }
 
 .filtersContainer {
-  border: 1px solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-default);
-  background-color: var(--color-background-alternative-medium);
-  padding-block-start: var(--spacing-small);
-  padding-block-end: var(--spacing-small);
-  padding-inline-start: var(--spacing-small);
-  padding-inline-end: var(--spacing-small);
-  margin-block-start: var(--spacing-small);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   @include breakpoints.tablet {
-    display: flex;
-    justify-content: space-between;
-    > div {
-      width: 49%;
-    }
+    margin-inline: var(--spacing-large);
   }
+  margin-block: var(--spacing-xsmall);
+}
+
+.headerInnerContainer {
+  padding-inline: calc(1.5 * var(--spacing-medium));
+  @include breakpoints.tablet {
+    padding-inline: calc(2 * var(--spacing-mega));
+  }
+  max-width: $tablet-max-width;
+  margin-inline: auto;
+}
+
+.headerOuterContainer {
+  border-bottom: 1px solid var(--color-borders-hairline);
+  margin-block-end: var(--spacing-medium);
+}
+
+.filterButton {
+  margin-inline-end: var(--spacing-medium);
+}
+
+.languagePopover,
+.translationPopover {
+  display: inline-block;
+}
+
+.translationFilterContainer {
+  min-width: calc(10 * var(--spacing-mega));
+}
+.filterButton,
+.resetButton {
+  text-transform: uppercase;
+}
+
+.modalContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.translationSearchContainer {
+  flex: 1;
+  margin-inline-end: var(--spacing-small);
 }

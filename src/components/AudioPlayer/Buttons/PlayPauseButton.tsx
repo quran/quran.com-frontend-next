@@ -14,6 +14,7 @@ import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import {
+  exitRepeatMode,
   loadAndPlayAudioData,
   selectAudioData,
   selectAudioDataStatus,
@@ -30,7 +31,7 @@ const PlayPauseButton = () => {
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
 
-  const { isPlaying } = useSelector(selectAudioPlayerState, shallowEqual);
+  const { isPlaying, playbackRate } = useSelector(selectAudioPlayerState, shallowEqual);
   const isLoading = useSelector(selectAudioDataStatus) === AudioDataStatus.Loading;
   const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const audioData = useSelector(selectAudioData, shallowEqual);
@@ -46,7 +47,7 @@ const PlayPauseButton = () => {
     logButtonClick('audio_player_play');
     const noReadingChapterIdsFound = currentReadingChapterIds.length === 0; // e.g : homepage
     if (currentReadingChapterIds.includes(currentAudioChapterId) || noReadingChapterIdsFound) {
-      triggerPlayAudio();
+      triggerPlayAudio(playbackRate);
     } else {
       setIsMismatchModalVisible(true);
     }
@@ -90,6 +91,18 @@ const PlayPauseButton = () => {
     );
 
   const [firstCurrentReadingChapterId] = currentReadingChapterIds; // get the first chapter in this page
+
+  const onStartOverClicked = () => {
+    dispatch(exitRepeatMode());
+    dispatch(loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }));
+    setIsMismatchModalVisible(false);
+  };
+
+  const onContinueClicked = () => {
+    triggerPlayAudio(playbackRate);
+    setIsMismatchModalVisible(false);
+  };
+
   return (
     <>
       {button}
@@ -101,16 +114,8 @@ const PlayPauseButton = () => {
         currentReadingChapter={
           getChapterData(chaptersData, firstCurrentReadingChapterId)?.transliteratedName
         }
-        onContinue={() => {
-          triggerPlayAudio();
-          setIsMismatchModalVisible(false);
-        }}
-        onStartOver={() => {
-          dispatch(
-            loadAndPlayAudioData({ chapter: Number(firstCurrentReadingChapterId), reciterId }),
-          );
-          setIsMismatchModalVisible(false);
-        }}
+        onContinue={onContinueClicked}
+        onStartOver={onStartOverClicked}
       />
     </>
   );

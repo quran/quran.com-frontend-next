@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "অপেক্ষা নিশ্চিতকরণ",
+    "continue-apple": "অ্যাপলের সাথে চালিয়ে যান",
+    "continue-email": "ইমেল দিয়ে চালিয়ে যান",
+    "continue-facebook": "ফেসবুকের সাথে চালিয়ে যান",
+    "continue-google": "Google এর সাথে চালিয়ে যান",
+    "email-placeholder": "ইমেইল ঠিকানা",
+    "login-error": {
+        "AuthenticationError": "প্রমাণীকরণ ব্যর্থ হয়েছে. অনুগ্রহ করে একটু পরে আবার চেষ্টা করুন",
+        "TokenExpiredError": "আপনি লগ আউট করা হয়েছে, আবার লগইন করুন."
+    },
+    "login-title": "Quran.com এ লগইন করুন",
+    "other-options": "অন্যান্য লগইন বিকল্প",
+    "verify-code": "প্রদত্ত নিরাপত্তা কোড নিম্নলিখিত পাঠ্যের সাথে মেলে তা যাচাই করুন:"
+}

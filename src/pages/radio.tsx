@@ -6,7 +6,6 @@ import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
 
 import { getAvailableReciters } from 'src/api';
-import Footer from 'src/components/dls/Footer/Footer';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import CuratedStationList from 'src/components/Radio/CuratedStationList';
 import ReciterStationList from 'src/components/Radio/ReciterStationList';
@@ -51,10 +50,6 @@ const RadioPage = ({ reciters, chaptersData }: RadioPageProps) => {
           <div className={classNames(pageStyle.flowItem, pageStyle.fullWidth)}>
             <ReciterStationList reciters={reciters} />
           </div>
-        </div>
-
-        <div className={classNames(pageStyle.flowItem, radioStyle.footerContainer)}>
-          <Footer />
         </div>
       </div>
     </DataContext.Provider>

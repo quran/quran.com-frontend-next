@@ -1,9 +1,9 @@
 {
     "footer": "- Ekipi i Quran.com",
     "header": "Ndihmë për zhvillimin",
-    "issues-cta": "Nëse keni ndonjë pyetje ose dëshironi të kontaktoni mirëmbajtësit, thjesht shkruani një problem! Ne do të kthehemi tek ju sa më shpejt që të mundemi, inshAllah.",
+    "issues-cta": "Nëse keni ndonjë pyetje ose dëshironi të kontaktoni mirëmbajtësit, thjesht shkruani një mesazh! Ne do të kthehemi tek ju sa më shpejt që të mundemi, inshAllah.",
     "issues-guide": "Në mënyrë tipike ne përdorim <0>projektet Github<\/0> si burim për çfarë të punojmë më pas, çfarë do të ndodhë dhe çfarë gabimesh ekzistojnë që duhen zgjidhur. Për shembull <1>kjo url<\/1> ka një listë të gabimeve, gjëra për të cilat kemi nevojë për ndihmë dhe veçori të ardhshme.",
-    "main-desc": "Asalamu Alykom, Së pari, ju falënderoj shumë për interesimin tuaj për të na ndihmuar të zhvillojmë Quran.com dhe projektet e tij. Ne jemi të ngazëllyer për të punuar me ju!",
+    "main-desc": "Esselamu Alejkum, Së pari, ju falënderojmë shumë për interesimin tuaj për të na ndihmuar të zhvillojmë Quran.com dhe projektet e tij. Ne jemi të ngazëllyer për të punuar me ju!",
     "projects": {
         "all": "Ne kemi një numër projektesh të gjitha të organizuara në Github. Mund t'i gjeni të gjitha <0>këtu<\/0>. Por për t'i përshkruar ato:",
         "q-android": "<0>Kurani Android<\/0>",

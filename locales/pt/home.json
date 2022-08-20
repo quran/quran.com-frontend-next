@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Todos os direitos reservados",
-        "title": "Leia, estude e aprenda O Nobre Alcorão."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharram",
-            "10": "Shawwal",
-            "11": "Dhu Al-Qida",
-            "2": "Safar",
-            "3": "Rabi 'I",
-            "4": "Rabi 'II",
-            "5": "Jumada I",
-            "6": "Jumada Akhira",
-            "7": "Rajab",
-            "8": "Sha'ban",
-            "9": "Ramadã"
-        }
-    },
     "no-bookmarks": "Você ainda não tem favoritos",
     "noble-quran": "O Nobre Alcorão",
     "recently-read": "Lidos recentemente",
@@ -30,7 +10,7 @@
         "trigger": "Acesso rápido a qualquer coisa"
     },
     "welcome": {
-        "body": "Após mais de um ano de trabalho árduo, temos o prazer de apresentar a vocês o novo Quran.com. Fizemos um grande esforço para fornecer a você novas experiências, como modo sépia, visualização palavra por palavra, barra de comando, IndoPak Mushafs e muito mais. <2\/> <2\/> Esperamos que você goste do novo Quran.com tanto quanto nós. Informe-nos sobre bugs e solicitações de recursos em <0> feedback.quran.com <\/0> . Estamos todos juntos nessa e queremos melhorar o produto para melhor atendê-lo. <2\/> <2\/> Se você deseja voltar ao site antigo a qualquer momento, visite <1> previous.quran.com <\/1> . <2\/> <2\/> - equipe Alcorão.com",
-        "title": "Bem-vindo ao novo Quran.com!"
+        "body": "As doações mensais nos ajudam a reter os melhores talentos e sustentar as operações, para que possamos nos concentrar menos na captação de recursos e mais na criação de impacto.",
+        "title": "Doe para Quran.com hoje"
     }
 }

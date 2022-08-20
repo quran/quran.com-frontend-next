@@ -1,7 +1,9 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 // TODO: remove eslint-disable max lines and breakdown the file
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import random from 'lodash/random';
+import { REHYDRATE } from 'redux-persist';
 
 import { getChapterAudioData } from 'src/api';
 import {
@@ -9,13 +11,16 @@ import {
   triggerPauseAudio,
   playFromTimestamp,
 } from 'src/components/AudioPlayer/EventTriggers';
+import resetSettings from 'src/redux/actions/reset-settings';
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
-import resetSettings from 'src/redux/slices/reset-settings';
 import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import AudioState from 'src/redux/types/AudioState';
+import SliceName from 'src/redux/types/SliceName';
 import { getVerseTimingByVerseKey } from 'src/utils/audio';
 import AudioData from 'types/AudioData';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import Reciter from 'types/Reciter';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;
@@ -58,18 +63,23 @@ export const loadAndPlayAudioData = createAsyncThunk<
   void,
   { chapter: number; reciterId: number },
   { state: RootState }
->('audioPlayerState/loadAndPlayAudioData', async ({ chapter, reciterId }, thunkAPI) => {
-  // play directly the audio file for this chapter is already loaded.
-  const currentAudioData = selectAudioData(thunkAPI.getState());
-  if (currentAudioData && currentAudioData.chapterId === chapter) {
-    triggerPlayAudio();
-    return;
-  }
-  thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
-  const audioData = await getChapterAudioData(reciterId, chapter);
-  thunkAPI.dispatch(setAudioData(audioData));
-  triggerPlayAudio();
-});
+>(
+  `${SliceName.AUDIO_PLAYER_STATE}/loadAndPlayAudioData`,
+  async ({ chapter, reciterId }, thunkAPI) => {
+    // play directly the audio file for this chapter is already loaded.
+    const state = thunkAPI.getState();
+    const currentAudioData = selectAudioData(state);
+    const playbackRate = selectPlaybackRate(state);
+    if (currentAudioData && currentAudioData.chapterId === chapter) {
+      triggerPlayAudio(playbackRate);
+      return;
+    }
+    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
+    const audioData = await getChapterAudioData(reciterId, chapter);
+    thunkAPI.dispatch(setAudioData(audioData));
+    triggerPlayAudio(playbackRate);
+  },
+);
 
 /**
  * 1) pause the audio player
@@ -82,15 +92,18 @@ export const setReciterAndPauseAudio = createAsyncThunk<
   void,
   { reciter: Reciter; locale: string },
   { state: RootState }
->('audioPlayerState/setReciterAndPlayAudio', async ({ reciter, locale }, thunkAPI) => {
-  thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
-  triggerPauseAudio();
-  thunkAPI.dispatch(setReciter({ reciter, locale }));
+>(
+  `${SliceName.AUDIO_PLAYER_STATE}/setReciterAndPlayAudio`,
+  async ({ reciter, locale }, thunkAPI) => {
+    thunkAPI.dispatch(setAudioStatus(AudioDataStatus.Loading));
+    triggerPauseAudio();
+    thunkAPI.dispatch(setReciter({ reciter, locale }));
 
-  const state = thunkAPI.getState();
-  const audioData = await getChapterAudioData(reciter.id, selectAudioData(state).chapterId);
-  thunkAPI.dispatch(setAudioData(audioData));
-});
+    const state = thunkAPI.getState();
+    const audioData = await getChapterAudioData(reciter.id, selectAudioData(state).chapterId);
+    thunkAPI.dispatch(setAudioData(audioData));
+  },
+);
 
 /**
  * get the timestamp for the the verseKey
@@ -108,7 +121,7 @@ interface PlayFromInput {
   isRadioMode?: boolean;
 }
 export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState }>(
-  'audioPlayerState/playFrom',
+  `${SliceName.AUDIO_PLAYER_STATE}/playFrom`,
   async (
     {
       verseKey,
@@ -127,6 +140,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     const state = thunkApi.getState();
     const selectedReciter = selectReciter(state);
+    const playbackRate = selectPlaybackRate(state);
     let selectedAudioData = selectAudioData(state);
     if (
       !selectedAudioData ||
@@ -141,7 +155,7 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
 
     if (shouldStartFromRandomTimestamp) {
       const randomTimestamp = random(0, selectedAudioData.duration);
-      playFromTimestamp(randomTimestamp / 1000);
+      playFromTimestamp(randomTimestamp / 1000, playbackRate);
       return;
     }
 
@@ -149,15 +163,15 @@ export const playFrom = createAsyncThunk<void, PlayFromInput, { state: RootState
     if (timestamp === undefined || timestamp === null) {
       const timestampsData = await getChapterAudioData(reciterId, chapterId, true);
       const verseTiming = getVerseTimingByVerseKey(verseKey, timestampsData.verseTimings);
-      playFromTimestamp(verseTiming.timestampFrom / 1000);
+      playFromTimestamp(verseTiming.timestampFrom / 1000, playbackRate);
       return;
     }
-    playFromTimestamp(timestamp / 1000);
+    playFromTimestamp(timestamp / 1000, playbackRate);
   },
 );
 
 export const audioPlayerStateSlice = createSlice({
-  name: 'audioPlayerState',
+  name: SliceName.AUDIO_PLAYER_STATE,
   initialState: getAudioPlayerStateInitialState(),
   reducers: {
     setIsPlaying: (state: AudioState, action: PayloadAction<boolean>) => ({
@@ -249,6 +263,46 @@ export const audioPlayerStateSlice = createSlice({
       isUsingDefaultReciter: true,
       reciter: getAudioPlayerStateInitialState(action.payload.locale).reciter,
     }));
+    builder.addCase(syncUserPreferences, (state, action) => {
+      const {
+        payload: { userPreferences, locale },
+      } = action;
+      const remotePreferences = userPreferences[PreferenceGroup.AUDIO] as AudioState;
+      if (remotePreferences) {
+        const {
+          reciter: { id: defaultReciterId },
+        } = getAudioPlayerStateInitialState(locale);
+        return {
+          ...state,
+          ...remotePreferences,
+          isUsingDefaultReciter: remotePreferences.reciter.id === defaultReciterId,
+        };
+      }
+      return state;
+    });
+    // listen to redux-persist's REHYDRATE event
+    builder.addCase(REHYDRATE, (state, action) => {
+      // @ts-ignore
+      const { key, payload } = action;
+      /**
+       * There is an issue with redux-persists (https://github.com/rt2zz/redux-persist/issues/290)
+       * that converts Infinite to null which affects when the user chooses to
+       * repeat a verse(s) infinitely and leads to repeatRange being persisted
+       * as null which is an invalid value so we need to convert it back to Infinity.
+       */
+      if (key === SliceName.AUDIO_PLAYER_STATE && payload?.repeatSettings?.repeatRange === null) {
+        return {
+          ...state,
+          ...payload,
+          repeatSettings: {
+            ...state.repeatSettings,
+            ...payload.repeatSettings,
+            repeatRange: Infinity,
+          },
+        };
+      }
+      return { ...state, ...payload };
+    });
   },
 });
 

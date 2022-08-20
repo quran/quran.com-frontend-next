@@ -125,6 +125,8 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
                   e.stopPropagation();
                   onCopyUrlClicked(chapter.id);
                 }}
+                tooltip={t('reciter:copy-link')}
+                ariaLabel={t('reciter:copy-link')}
               >
                 <CopyLinkIcon />
               </Button>
@@ -136,6 +138,8 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
                   e.stopPropagation();
                   onAudioDownloadClicked(chapter.id);
                 }}
+                tooltip={t('common:audio.player.download')}
+                ariaLabel={t('common:audio.player.download')}
               >
                 {currentlyDownloadChapterAudioId === chapter.id ? (
                   <Spinner size={SpinnerSize.Small} />

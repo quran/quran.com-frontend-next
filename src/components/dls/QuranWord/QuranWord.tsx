@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState, useMemo, useCallback, memo } from 'react';
 
 import classNames from 'classnames';
@@ -16,7 +17,10 @@ import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
 import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
+import {
+  selectShowTooltipWhenPlayingAudio,
+  selectPlaybackRate,
+} from 'src/redux/slices/AudioPlayer/state';
 import { selectIsWordHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import {
   selectWordClickFunctionality,
@@ -76,6 +80,7 @@ const QuranWord = ({
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
   const wordLocation = makeWordLocation(word.verseKey, word.position);
+  const playbackRate = useSelector(selectPlaybackRate);
 
   // Determine if the audio player is currently playing the word
   const isAudioPlayingWord = useSelector(selectIsWordHighlighted(wordLocation));
@@ -118,11 +123,11 @@ const QuranWord = ({
   const onClick = useCallback(() => {
     if (wordClickFunctionality === WordClickFunctionality.PlayAudio && audioData) {
       logButtonClick('quran_word_pronounce');
-      onQuranWordClick(word, audioData);
+      onQuranWordClick(word, playbackRate, audioData);
     } else {
       logButtonClick('quran_word');
     }
-  }, [audioData, word, wordClickFunctionality]);
+  }, [audioData, playbackRate, word, wordClickFunctionality]);
 
   const shouldHandleWordClicking =
     readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;

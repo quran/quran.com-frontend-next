@@ -20,14 +20,14 @@ const MobileApps = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <Image src="/images/app-store.svg" width={135} height={40} />
+            <Image src="/images/app-store.svg" width={135} height={40} alt="App Store" />
           </a>
           <a
             href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&utm_source=quran-com&utm_campaign=download"
             target="_blank"
             rel="noreferrer"
           >
-            <Image src="/images/play-store.svg" width={135} height={40} />
+            <Image src="/images/play-store.svg" width={135} height={40} alt="Play Store" />
           </a>
         </div>
       </div>

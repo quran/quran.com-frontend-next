@@ -10,7 +10,6 @@ import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
 
 import { getReciterData } from 'src/api';
-import Footer from 'src/components/dls/Footer/Footer';
 import Input from 'src/components/dls/Forms/Input';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ChaptersList from 'src/components/Reciter/ChaptersList';
@@ -98,10 +97,6 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
 
         <div className={classNames(layoutStyle.flowItem, pageStyle.chaptersListContainer)}>
           <ChaptersList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
-        </div>
-
-        <div className={classNames(layoutStyle.flowItem, pageStyle.footerContainer)}>
-          <Footer />
         </div>
       </div>
     </DataContext.Provider>

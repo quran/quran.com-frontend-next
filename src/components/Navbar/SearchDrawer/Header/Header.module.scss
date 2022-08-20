@@ -7,10 +7,6 @@
   justify-content: space-between;
 }
 
-.searchInputContainerRTL {
-  flex-direction: row-reverse;
-}
-
 .searchInput {
   width: 100%;
   border: 0;
@@ -32,4 +28,9 @@
   cursor: pointer;
   color: var(--color-text-default);
   font-size: var(--font-size-small);
+}
+
+.separator {
+  max-height: var(--spacing-mega);
+  margin-inline: calc(0.5 * var(--spacing-xxsmall));
 }

@@ -10,7 +10,6 @@ import layoutStyle from '../index.module.scss';
 import pageStyle from './reciterPage.module.scss';
 
 import { getAvailableReciters } from 'src/api';
-import Footer from 'src/components/dls/Footer/Footer';
 import { filterReciters } from 'src/components/Navbar/SettingsDrawer/ReciterSelectionBody';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReciterListHero from 'src/components/Reciter/QuranReciterListHero';
@@ -45,10 +44,6 @@ const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
         <QuranReciterListHero searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
         <div className={classNames(layoutStyle.flowItem, pageStyle.recitersListContainer)}>
           <RecitersList reciters={filteredReciters} />
-        </div>
-
-        <div className={classNames(layoutStyle.flowItem)}>
-          <Footer />
         </div>
       </div>
     </DataContext.Provider>

@@ -22,6 +22,25 @@ export const logButtonClick = (buttonName: string) => {
 };
 
 /**
+ * Log when a form is submitted.
+ *
+ * @param {string} formName
+ */
+export const logFormSubmission = (formName: string) => {
+  logEvent(`${formName}_form_submitted`);
+};
+
+/**
+ * Log when a carousel slide is completed.
+ *
+ * @param {string} carouselName
+ * @param {number|string} slideNumber
+ */
+export const logCarouselSlideCompletion = (carouselName: string, slideNumber: number | string) => {
+  logEvent(`${carouselName}_slide_${slideNumber}_completed`);
+};
+
+/**
  * Log when a value changes.
  *
  * @param {string} name
@@ -47,10 +66,13 @@ export const logValueChange = (
  * @param {string} type the type of the search query. can be voice or text.
  */
 export const logEmptySearchResults = (searchQuery: string, source: string, type = 'text') => {
-  logEvent(`${type}_search_query_with_no_result`, {
-    query: searchQuery,
-    source,
-  });
+  // if the searchQuery is not empty
+  if (searchQuery) {
+    logEvent(`${type}_search_query_with_no_result`, {
+      query: searchQuery,
+      source,
+    });
+  }
 };
 
 export const logTarteelLinkClick = (type: string) => {

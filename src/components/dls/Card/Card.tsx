@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonVariant } from '../Button/Button';
 
@@ -34,6 +35,7 @@ const Card = ({
   shouldFlipIconOnRTL = true,
   onActionIconClick,
 }: CardProps) => {
+  const { t } = useTranslation('common');
   return (
     <div
       className={classNames(styles.container, {
@@ -69,6 +71,8 @@ const Card = ({
             className={styles.playIconContainer}
             variant={ButtonVariant.Ghost}
             shouldFlipOnRTL={shouldFlipIconOnRTL}
+            tooltip={t('audio.play')}
+            ariaLabel={t('audio.play')}
           >
             {actionIcon}
           </Button>

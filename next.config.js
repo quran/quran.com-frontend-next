@@ -5,14 +5,14 @@ const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
-// const { withSentryConfig } = require('@sentry/nextjs'); // disabled temporarily until next 12 supports it: https://github.com/vercel/next.js/discussions/30137#discussioncomment-1538436
+const { withSentryConfig } = require('@sentry/nextjs');
 const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache');
 const nextTranslate = require('next-translate');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
+const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
@@ -27,6 +27,7 @@ const config = {
   pwa: {
     disable: !isProduction,
     dest: 'public',
+    mode: isProduction ? 'production' : 'development',
     runtimeCaching,
     publicExcludes: [
       '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
@@ -159,4 +160,7 @@ const config = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withPWA, withFonts, nextTranslate], config);
+module.exports = withPlugins(
+  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+  config,
+);

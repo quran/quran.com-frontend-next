@@ -1,7 +1,7 @@
 <!--
 *** Thanks for checking out this Quran.com repo. If you have a suggestion that would
 *** make this better, please fork the repo and create a pull request or simply open
-*** an issue with the tag "enhancement".
+***  an issue with the tag "enhancement".
 *** Thanks again! Now go create something AMAZING! :D
 -->
 
@@ -46,7 +46,7 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 ### Running the app locally
 
-- Ensure you have the latest nodejs and npm installed. Prefer 10+.
+- Ensure you have the latest `nodejs` and `npm` installed. Prefer 10+.
 - Ensure you have `yarn` installed. Simply `npm i -g yarn`
 - Clone this repo
 - Run `yarn` on the repo to install `node_modules`
@@ -115,3 +115,4 @@ Thank you for taking time to file a bug! We'd appreciate your help on fixing it 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/15169499/147745340-b7e84819-d1b0-4399-87a0-d5276ba21bca.png" width="250">
 </p>
+

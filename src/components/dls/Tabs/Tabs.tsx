@@ -14,7 +14,7 @@ type TabsProps = {
 
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} role="tablist">
       {tabs.map((tab) => (
         <div
           className={classNames(styles.tabItem, selected === tab.value && styles.tabItemSelected)}

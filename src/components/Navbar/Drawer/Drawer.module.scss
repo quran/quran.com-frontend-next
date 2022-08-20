@@ -47,11 +47,11 @@
   display: flex;
   flex-direction: column;
   min-height: calc(
-    100% - calc(constants.$navbar-height + calc(4 * var(--spacing-mega)))
+    100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega)))
   );
   @include breakpoints.tablet {
     min-height: calc(
-      100% - calc(constants.$navbar-height + var(--spacing-small))
+      100% - calc(var(--navbar-container-height) + var(--spacing-small))
     );
   }
   justify-content: space-between;
@@ -59,7 +59,7 @@
 
 .bodyContainer {
   flex: 1;
-  margin-block-start: constants.$navbar-height;
+  margin-block-start: var(--navbar-container-height);
   padding-block-start: var(--spacing-small);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
@@ -80,7 +80,7 @@
   font-size: var(--font-size-large);
   width: 100%;
   position: fixed;
-  height: constants.$navbar-height;
+  height: var(--navbar-container-height);
   border-bottom: 1px var(--color-borders-hairline) solid;
   display: flex;
   flex-direction: row;
@@ -118,5 +118,5 @@
 }
 
 .navbarInvisible {
-  transform: translate3d(0, 0 + constants.$navbar-height, 0);
+  transform: translate3d(0, 0 + var(--navbar-container-height), 0);
 }

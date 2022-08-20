@@ -18,6 +18,11 @@ export enum InputType {
   Warning = 'warning',
   Success = 'success',
 }
+
+export enum InputVariant {
+  Default = 'default',
+  Main = 'main',
+}
 interface Props {
   id: string;
   name?: string;
@@ -34,6 +39,10 @@ interface Props {
   label?: string;
   type?: InputType;
   shouldFlipOnRTL?: boolean;
+  variant?: InputVariant;
+  containerClassName?: string;
+  htmlType?: React.HTMLInputTypeAttribute;
+  isRequired?: boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -46,12 +55,16 @@ const Input: React.FC<Props> = ({
   disabled = false,
   clearable = false,
   type,
+  variant,
   prefix,
   suffix,
   onClearClicked,
   onChange,
   value = '',
   shouldFlipOnRTL = true,
+  containerClassName,
+  htmlType,
+  isRequired,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -71,7 +84,7 @@ const Input: React.FC<Props> = ({
     <>
       {label && <p className={styles.label}>{label}</p>}
       <div
-        className={classNames(styles.container, {
+        className={classNames(styles.container, containerClassName, {
           [styles.smallContainer]: size === InputSize.Small,
           [styles.mediumContainer]: size === InputSize.Medium,
           [styles.largeContainer]: size === InputSize.Large,
@@ -80,6 +93,7 @@ const Input: React.FC<Props> = ({
           [styles.error]: type === InputType.Error,
           [styles.success]: type === InputType.Success,
           [styles.warning]: type === InputType.Warning,
+          [styles.main]: variant === InputVariant.Main,
         })}
       >
         {prefix && (
@@ -92,7 +106,8 @@ const Input: React.FC<Props> = ({
             [styles.warning]: type === InputType.Warning,
             [styles.rtlInput]: shouldFlipOnRTL,
           })}
-          type="text"
+          type={htmlType}
+          required={isRequired}
           dir="auto"
           id={id}
           disabled={disabled}

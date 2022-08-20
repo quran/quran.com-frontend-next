@@ -108,6 +108,13 @@
   margin-left: calc(0.5 * var(--spacing-xxsmall));
 }
 
+.priorityAction {
+  order: 1;
+  @include breakpoints.tablet {
+    order: unset;
+  }
+}
+
 .actionContainerLeft .actionItem {
   display: inline-block;
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));

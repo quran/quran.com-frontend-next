@@ -53,7 +53,13 @@ const ChapterHeader: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <div
+      ref={headerRef}
+      data-verse-key={`${chapterId}:1`}
+      data-page={pageNumber}
+      data-chapter-id={chapterId}
+      data-hizb={hizbNumber}
+    >
       <div className={styles.header}>
         <div className={styles.chapterIconContainer}>
           <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Mega} />
@@ -62,52 +68,27 @@ const ChapterHeader: React.FC<Props> = ({
       <div className={styles.bismillahContainer}>
         {!CHAPTERS_WITHOUT_BISMILLAH.includes(chapterId) && <Bismillah />}
       </div>
-      <div
-        ref={headerRef}
-        data-verse-key={`${chapterId}:1`}
-        data-page={pageNumber}
-        data-chapter-id={chapterId}
-        data-hizb={hizbNumber}
-      >
-        <div className={styles.container}>
-          <div className={styles.left}>
-            <div className={styles.infoContainer}>
-              {translationName ? (
-                <div className={styles.translation}>
-                  {isTranslationSelected && (
-                    <div className={styles.translationBy}>{t('quran-reader:translation-by')}</div>
-                  )}
-                  <span>{translationName}</span>{' '}
-                  <span
-                    onKeyPress={onChangeTranslationClicked}
-                    tabIndex={0}
-                    role="button"
-                    onClick={onChangeTranslationClicked}
-                    className={styles.changeTranslation}
-                  >
-                    ({t('quran-reader:trans-change')})
-                  </span>
-                  <span className={styles.changeTranslation} />
-                </div>
-              ) : (
-                <Button
-                  size={ButtonSize.Small}
-                  variant={ButtonVariant.Ghost}
-                  prefix={<InfoIcon />}
-                  href={getSurahInfoNavigationUrl(chapterId)}
-                  shouldPrefetch={false}
-                  hasSidePadding={false}
-                  onClick={() => {
-                    logButtonClick('chapter_header_info');
-                  }}
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <div className={styles.infoContainer}>
+            {translationName ? (
+              <div className={styles.translation}>
+                {isTranslationSelected && (
+                  <div className={styles.translationBy}>{t('quran-reader:translation-by')}</div>
+                )}
+                <span>{translationName}</span>{' '}
+                <span
+                  onKeyPress={onChangeTranslationClicked}
+                  tabIndex={0}
+                  role="button"
+                  onClick={onChangeTranslationClicked}
+                  className={styles.changeTranslation}
                 >
-                  {t('quran-reader:surah-info')}
-                </Button>
-              )}
-            </div>
-          </div>
-          <div className={styles.right}>
-            {translationName && (
+                  ({t('quran-reader:trans-change')})
+                </span>
+                <span className={styles.changeTranslation} />
+              </div>
+            ) : (
               <Button
                 size={ButtonSize.Small}
                 variant={ButtonVariant.Ghost}
@@ -122,13 +103,30 @@ const ChapterHeader: React.FC<Props> = ({
                 {t('quran-reader:surah-info')}
               </Button>
             )}
-            <div className={styles.actionContainer}>
-              <PlayChapterAudioButton chapterId={Number(chapterId)} />
-            </div>
+          </div>
+        </div>
+        <div className={styles.right}>
+          {translationName && (
+            <Button
+              size={ButtonSize.Small}
+              variant={ButtonVariant.Ghost}
+              prefix={<InfoIcon />}
+              href={getSurahInfoNavigationUrl(chapterId)}
+              shouldPrefetch={false}
+              hasSidePadding={false}
+              onClick={() => {
+                logButtonClick('chapter_header_info');
+              }}
+            >
+              {t('quran-reader:surah-info')}
+            </Button>
+          )}
+          <div className={styles.actionContainer}>
+            <PlayChapterAudioButton chapterId={Number(chapterId)} />
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, ButtonHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 
@@ -35,6 +35,7 @@ export enum ButtonVariant {
   Shadow = 'shadow',
   Ghost = 'ghost',
   Compact = 'compact',
+  Outlined = 'outlined',
 }
 
 export type ButtonProps = {
@@ -57,6 +58,8 @@ export type ButtonProps = {
   shouldPrefetch?: boolean;
   isNewTab?: boolean;
   ariaLabel?: string;
+  htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  children?: React.ReactNode;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -80,6 +83,8 @@ const Button: React.FC<ButtonProps> = ({
   shouldPrefetch: prefetch = true,
   isNewTab: newTab,
   ariaLabel,
+  htmlType,
+  ...props
 }) => {
   const direction = useDirection();
   const classes = classNames(styles.base, className, {
@@ -106,6 +111,7 @@ const Button: React.FC<ButtonProps> = ({
     [styles.shadow]: variant === ButtonVariant.Shadow,
     [styles.ghost]: variant === ButtonVariant.Ghost,
     [styles.compact]: variant === ButtonVariant.Compact,
+    [styles.outlined]: variant === ButtonVariant.Outlined,
 
     [styles.disabled]: disabled || isLoading,
     [styles.noSidePadding]: !hasSidePadding,
@@ -116,8 +122,10 @@ const Button: React.FC<ButtonProps> = ({
   if (isLoading) prefixFinal = <Spinner size={size.toString() as SpinnerSize} />;
   else prefixFinal = prefix;
 
-  if (href && !disabled)
-    return (
+  let content;
+
+  if (href && !disabled) {
+    content = (
       <Link
         href={href}
         isNewTab={newTab}
@@ -125,7 +133,7 @@ const Button: React.FC<ButtonProps> = ({
         isShallow={shallowRouting}
         {...(onClick && { onClick })}
       >
-        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL}>
+        <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
           {prefixFinal && (
             <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
               {prefixFinal}
@@ -140,24 +148,18 @@ const Button: React.FC<ButtonProps> = ({
         </div>
       </Link>
     );
-
-  return (
-    <Wrapper
-      shouldWrap={!!tooltip}
-      wrapper={(tooltipChildren) => (
-        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
-          {tooltipChildren}
-        </Tooltip>
-      )}
-    >
+  } else {
+    content = (
       <button
-        type="button"
+        // eslint-disable-next-line react/button-has-type
+        type={htmlType}
         dir={direction}
         className={classes}
         disabled={disabled}
         onClick={onClick}
         data-auto-flip-icon={shouldFlipOnRTL}
         {...(ariaLabel && { 'aria-label': ariaLabel })}
+        {...props}
       >
         {prefixFinal && (
           <span dir={direction} className={styles.prefix} data-auto-flip-icon={shouldFlipOnRTL}>
@@ -171,6 +173,19 @@ const Button: React.FC<ButtonProps> = ({
           </span>
         )}
       </button>
+    );
+  }
+
+  return (
+    <Wrapper
+      shouldWrap={!!tooltip}
+      wrapper={(tooltipChildren) => (
+        <Tooltip text={tooltip} contentSide={tooltipContentSide}>
+          {tooltipChildren}
+        </Tooltip>
+      )}
+    >
+      {content}
     </Wrapper>
   );
 };

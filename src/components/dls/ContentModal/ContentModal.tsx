@@ -10,6 +10,11 @@ import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 
+export enum ContentModalSize {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+}
+
 type ContentModalProps = {
   isOpen?: boolean;
   onClose?: () => void;
@@ -18,8 +23,10 @@ type ContentModalProps = {
   hasCloseButton?: boolean;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
-  contentClassName?: string;
   // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
+  contentClassName?: string;
+  size?: ContentModalSize;
+  isFixedHeight?: boolean;
 };
 
 const ContentModal = ({
@@ -31,6 +38,8 @@ const ContentModal = ({
   header,
   innerRef,
   contentClassName,
+  size = ContentModalSize.MEDIUM,
+  isFixedHeight,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
 
@@ -47,6 +56,9 @@ const ContentModal = ({
           <Dialog.Content
             className={classNames(styles.contentWrapper, {
               [contentClassName]: contentClassName,
+              [styles.small]: size === ContentModalSize.SMALL,
+              [styles.medium]: size === ContentModalSize.MEDIUM,
+              [styles.autoHeight]: !isFixedHeight,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onClose}

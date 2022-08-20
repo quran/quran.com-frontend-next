@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "En attente de confirmation",
+    "continue-apple": "Continuer avec Apple",
+    "continue-email": "Continuer avec l'e-mail",
+    "continue-facebook": "Continuer avec Facebook",
+    "continue-google": "Continuer avec Google",
+    "email-placeholder": "Adresse e-mail",
+    "login-error": {
+        "AuthenticationError": "Authentification échouée. Veuillez réessayer plus tard",
+        "TokenExpiredError": "Vous avez été déconnecté, veuillez vous reconnecter."
+    },
+    "login-title": "Connectez-vous à Quran.com",
+    "other-options": "Autres options de connexion",
+    "verify-code": "Vérifiez que le code de sécurité fourni correspond au texte suivant :"
+}

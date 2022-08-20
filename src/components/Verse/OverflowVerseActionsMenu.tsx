@@ -27,6 +27,7 @@ interface Props {
   isPortalled?: boolean;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
+  bookmarksRangeUrl?: string;
 }
 
 const OverflowVerseActionsMenu: React.FC<Props> = ({
@@ -35,6 +36,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   isPortalled = false,
   isTranslationView = true,
   onActionTriggered,
+  bookmarksRangeUrl,
 }) => {
   const { t } = useTranslation('common');
   return (
@@ -49,6 +51,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             className={classNames(cellStyles.iconContainer, cellStyles.verseAction, {
               [cellStyles.fadedVerseAction]: isTranslationView,
             })}
+            ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>
               <OverflowMenuIcon />
@@ -70,6 +73,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           isPortalled={isPortalled}
           isTranslationView={isTranslationView}
           onActionTriggered={onActionTriggered}
+          bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </PopoverMenu>
     </div>

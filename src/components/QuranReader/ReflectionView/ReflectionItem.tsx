@@ -26,6 +26,7 @@ import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { formatDateRelatively } from 'src/utils/datetime';
 import { logButtonClick } from 'src/utils/eventLogger';
+import truncate from 'src/utils/html-truncate';
 import { toLocalizedNumber } from 'src/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
@@ -33,7 +34,6 @@ import {
   getQuranReflectPostUrl,
   getQuranReflectTagUrl,
 } from 'src/utils/navigation';
-import { truncateString } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
 
@@ -59,6 +59,7 @@ type ReflectionItemProps = {
 const SEPARATOR = ' · ';
 const DEFAULT_IMAGE = '/images/quran-reflect.png';
 const MAX_REFLECTION_LENGTH = 220;
+
 const ReflectionItem = ({
   id,
   authorName,
@@ -152,25 +153,21 @@ const ReflectionItem = ({
     logButtonClick('reflection_item_author');
   };
 
-  const reflectionWithHashtags = (text: string) => {
-    const textArray = text.split(' ').map((word) => {
-      if (word.startsWith('#'))
-        return (
-          <Link
-            isNewTab
-            href={getQuranReflectTagUrl(word)}
-            onClick={() => {
-              logButtonClick('reflection_item_tag');
-            }}
-            variant={LinkVariant.Highlight}
-          >
-            {`${word} `}
-          </Link>
-        );
-      return `${word} `;
-    });
-    return textArray;
-  };
+  const highlightHashtag = (text: string) =>
+    text
+      .split(' ')
+      .map((word) => {
+        if (word.startsWith('<tag>') && word.endsWith('</tag>')) {
+          const val = word.substring(5, word.length - 6);
+          // eslint-disable-next-line i18next/no-literal-string
+          return `<a target="_blank" href="${getQuranReflectTagUrl(val)}" class="${
+            styles.hashtag
+          }">${val}</a>`;
+        }
+
+        return word;
+      })
+      .join(' ');
 
   return (
     <div className={styles.container}>
@@ -265,11 +262,14 @@ const ReflectionItem = ({
         </div>
       )}
 
-      <span className={styles.body}>
-        {isExpanded
-          ? reflectionWithHashtags(reflectionText)
-          : reflectionWithHashtags(truncateString(reflectionText, MAX_REFLECTION_LENGTH))}
-      </span>
+      <span
+        className={styles.body}
+        dangerouslySetInnerHTML={{
+          __html: highlightHashtag(
+            isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
+          ),
+        }}
+      />
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
         <span
           className={styles.moreOrLessText}
@@ -278,7 +278,7 @@ const ReflectionItem = ({
           onKeyDown={onMoreLessClicked}
           onClick={onMoreLessClicked}
         >
-          {isExpanded ? t('common:less') : t('common:more')}
+          {isExpanded ? t('quran-reader:see-less') : t('quran-reader:see-more')}
         </span>
       )}
       <div className={styles.socialInteractionContainer}>
@@ -322,7 +322,7 @@ const ReflectionItem = ({
             icon={<CopyLinkIcon />}
             onClick={onCopyLinkClicked}
           >
-            {t('quran-reader:copy-link')}
+            {t('quran-reader:cpy-link')}
           </PopoverMenu.Item>
           <PopoverMenu.Item
             shouldCloseMenuAfterClick

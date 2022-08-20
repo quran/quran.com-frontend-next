@@ -1,5 +1,5 @@
 {
-    "change": "Tukar",
+    "change": "Ubah",
     "curated-station": {
         "juz-amma": {
             "description": "Dengarkan Juz terakhir Al-Quran",
@@ -18,9 +18,9 @@
             "title": "Yasin, Al-Waqiah, Al-Mulk"
         }
     },
-    "curated-stations": "Stesen yang telah disusun-atur",
+    "curated-stations": "Stasiun terpilih",
     "pause-radio": "Hentikan Radio",
     "play-radio": "Putar Radio",
     "radio-desc": "Dengarkan pembacaan Al-Qur'an yang indah tanpa henti oleh berbagai qari.",
-    "reciter-stations": "Stesen bacaan para Qari"
+    "reciter-stations": "Stasiun Qari"
 }

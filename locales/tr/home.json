@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Her hakkı saklıdır",
-        "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} AH",
-        "month": {
-            "1": "Muharrem",
-            "10": "Şevval",
-            "11": "Zil Kaide",
-            "2": "Safar",
-            "3": "Rabi' ben",
-            "4": "Rabi' II",
-            "5": "Cumada",
-            "6": "Cumada Ahira",
-            "7": "Recep",
-            "8": "Şaban",
-            "9": "Ramazan"
-        }
-    },
     "no-bookmarks": "Henüz yer işaretiniz yok",
     "noble-quran": "Kur'an-ı Kerim",
     "recently-read": "Son Okunanlar",
@@ -30,7 +10,7 @@
         "trigger": "Her şeye hızlı erişim"
     },
     "welcome": {
-        "body": "Bir yılı aşkın yoğun çalışmanın ardından size yeni Kuran.com'u sunmaktan heyecan duyuyoruz. Size sepya modu, kelime kelime görünüm, komut çubuğu, IndoPak Mushaflar ve daha fazlası gibi yeni deneyimler sunmak için büyük çaba harcadık. <2\/> <2\/> Yeni Kuran.com'u bizim kadar beğeneceğinizi umuyoruz. Lütfen <0> feedback.quran.com <\/0> adresindeki hatalar ve özellik istekleri hakkında bize bildirin. Hepimiz bu işte beraberiz ve size daha iyi hizmet verebilmek için ürünü geliştirmek istiyoruz. <2\/> <2\/> Herhangi bir zamanda eski siteye geri dönmek isterseniz, lütfen <1> önceki.quran.com <\/1> adresini ziyaret edin. <2\/> <2\/> - Kuran.com ekibi",
-        "title": "Yeni Kuran.com'a hoş geldiniz!"
+        "body": "Aylık bağışlar, en iyi yetenekleri elde tutmamıza ve operasyonları sürdürmemize yardımcı olur, böylece kaynak yaratmaya daha az ve etki yaratmaya daha fazla odaklanabiliriz.",
+        "title": "Bugün Kuran.com'a bağış yapın"
     }
 }

@@ -4,15 +4,12 @@ import React from 'react';
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
 import styles from './index.module.scss';
 
-import ChapterAndJuzListSkeleton from 'src/components/chapters/ChapterAndJuzListSkeleton';
-import Footer from 'src/components/dls/Footer/Footer';
-import Separator from 'src/components/dls/Separator/Separator';
+import ChapterAndJuzListWrapper from 'src/components/chapters/ChapterAndJuzList';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
-import HomePageWelcomeMessage from 'src/components/HomePage/HomePageWelcomeMessage';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
@@ -23,52 +20,43 @@ import { getCanonicalUrl } from 'src/utils/navigation';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
-const ChapterAndJuzListWrapper = dynamic(
-  () => import('src/components/chapters/ChapterAndJuzList'),
-  {
-    ssr: false,
-    loading: () => <ChapterAndJuzListSkeleton />,
-  },
-);
-
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersData, chaptersResponse: { chapters } }) => {
+const Index: NextPage<IndexProps> = ({
+  chaptersData,
+  chaptersResponse: { chapters },
+}): JSX.Element => {
   const { t, lang } = useTranslation('home');
   return (
-    <DataContext.Provider value={chaptersData}>
-      <NextSeoWrapper
-        title={t('noble-quran')}
-        url={getCanonicalUrl(lang, '')}
-        languageAlternates={getLanguageAlternates('')}
-      />
-      <div className={styles.pageContainer}>
-        <div className={classNames(styles.listContainer, styles.flow)}>
-          <HomePageHero />
-          <div className={styles.flowItem}>
-            <HomePageWelcomeMessage />
-          </div>
-          <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <RecentReadingSessions />
-          </div>
-          <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <BookmarksSection />
-          </div>
-          <div className={styles.flowItem}>
-            <ChapterAndJuzListWrapper chapters={chapters} />
-          </div>
-          <div className={styles.flowItem}>
-            <Separator />
-          </div>
-          <div className={styles.flowItem}>
-            <Footer />
+    <>
+      <Head>
+        <link rel="preload" as="image" href="/images/background.jpg" crossOrigin="anonymous" />
+      </Head>
+      <DataContext.Provider value={chaptersData}>
+        <NextSeoWrapper
+          title={t('home:noble-quran')}
+          url={getCanonicalUrl(lang, '')}
+          languageAlternates={getLanguageAlternates('')}
+        />
+        <div className={styles.pageContainer}>
+          <div className={styles.flow}>
+            <HomePageHero />
+            <div className={classNames(styles.flowItem, styles.fullWidth)}>
+              <RecentReadingSessions />
+            </div>
+            <div className={classNames(styles.flowItem, styles.fullWidth)}>
+              <BookmarksSection />
+            </div>
+            <div className={styles.flowItem}>
+              <ChapterAndJuzListWrapper chapters={chapters} />
+            </div>
           </div>
         </div>
-      </div>
-    </DataContext.Provider>
+      </DataContext.Provider>
+    </>
   );
 };
 

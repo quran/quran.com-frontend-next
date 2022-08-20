@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "تصدیق کے منتظر",
+    "continue-apple": "ایپل کے ساتھ جاری رکھیں",
+    "continue-email": "ای میل کے ساتھ جاری رکھیں",
+    "continue-facebook": "فیس بک کے ساتھ جاری رکھیں",
+    "continue-google": "گوگل کے ساتھ جاری رکھیں",
+    "email-placeholder": "ای میل اڈریس",
+    "login-error": {
+        "AuthenticationError": "تصدیق میں ناکام رہے. براہ کرم کچھ دیر بعد کوشش کریں",
+        "TokenExpiredError": "آپ لاگ آؤٹ ہو چکے ہیں، براہ کرم دوبارہ لاگ ان کریں۔"
+    },
+    "login-title": "Quran.com پر لاگ ان کریں۔",
+    "other-options": "لاگ ان کے دیگر اختیارات",
+    "verify-code": "تصدیق کریں کہ فراہم کردہ سیکیورٹی کوڈ درج ذیل متن سے میل کھاتا ہے:"
+}

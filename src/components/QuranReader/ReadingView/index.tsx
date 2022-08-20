@@ -198,6 +198,7 @@ const ReadingView = ({
                     <EndOfScrollingControls
                       quranReaderDataType={quranReaderDataType}
                       lastVerse={lastVerse}
+                      initialData={initialData}
                     />
                   );
                 return null;

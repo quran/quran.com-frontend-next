@@ -1,6 +1,9 @@
 {
+    "default-translations": "Terjemahan Lalai",
+    "filter": "penapis",
     "language-filter-label": "Cari semua terjemahan bahasa",
     "language-select": "Pilih bahasa",
+    "reset": "set semula",
     "search": "Cari",
     "search-desc": "Cari korpus Al-Quran dan terjemahannya menggunakan enjin carian pelbagai bahasa yang berkuasa dan sangat tepat.",
     "search-title": "Cari ' {{searchQuery}} '",

@@ -1,5 +1,6 @@
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
 import { getAudioPlayerStateInitialState } from './defaultSettings/util';
+import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { MushafLines } from 'types/QuranReader';
@@ -22,7 +23,12 @@ export default {
   5: (state) => ({
     ...state,
     readingTracker: {
-      lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
+      lastReadVerse: {
+        verseKey: null,
+        chapterId: null,
+        page: null,
+        hizb: null,
+      },
     },
   }),
   6: (state) => ({
@@ -116,6 +122,25 @@ export default {
     audioPlayerState: {
       ...state.readingPreferences,
       showTooltipWhenPlayingAudio: false,
+    },
+  }),
+  19: (state) => ({
+    ...state,
+    welcomeMessage: {
+      ...state.welcomeMessage,
+      isVisible: true,
+    },
+  }),
+  20: (state) => ({
+    ...state,
+    session: {
+      count: 0,
+    },
+  }),
+  21: (state) => ({
+    ...state,
+    sidebarNavigation: {
+      isVisible: initialSidebarIsVisible,
     },
   }),
 };

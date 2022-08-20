@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic';
 
 import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
 
-import { NavigationItem } from 'src/redux/slices/QuranReader/sidebarNavigation';
+import {
+  IsSidebarNavigationVisible,
+  NavigationItem,
+} from 'src/redux/slices/QuranReader/sidebarNavigation';
 
 const PageSelection = dynamic(() => import('./PageSelection'), {
   loading: SidebarSelectionSkeleton,
@@ -17,7 +20,7 @@ const JuzSelection = dynamic(() => import('./JuzSelection'), {
 });
 
 type Props = {
-  isVisible: boolean;
+  isVisible: IsSidebarNavigationVisible;
   selectedNavigationItem: string;
 };
 

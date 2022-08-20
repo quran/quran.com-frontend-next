@@ -4,12 +4,13 @@
 @font-face {
   font-family: "IndoPak";
   src: local("AlQuran IndoPak by QuranWBW"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff2")
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2")
       format("woff2"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.woff")
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff")
       format("woff"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.ttf")
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf")
       format("truetype");
+  font-display: swap;
 }
 
 // TODO: we're not rendering text_uthmani anymore, do we need this font face?
@@ -18,6 +19,7 @@
   src: local("me_quran2"),
     url("/fonts/quran/hafs/me_quran/me_quran-2.woff2") format("woff2"),
     url("/fonts/quran/hafs/me_quran/me_quran-2.woff2") format("truetype");
+  font-display: swap;
 }
 
 @font-face {
@@ -27,15 +29,13 @@
       format("woff2"),
     url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf")
       format("truetype");
+  font-display: swap;
 }
 
 // TODO: regenerate this font and add font-family name
 @font-face {
   font-family: "surahnames";
-  src: url("/fonts/quran/surah-names/v1/sura_names.woff2");
-  src: url("/fonts/quran/surah-names/v1/surah-names.eot")
-      format("embedded-opentype"),
-    url("/fonts/quran/surah-names/v1/sura_names.ttf") format("truetype"),
+  src: url("/fonts/quran/surah-names/v1/sura_names.woff2"),
     url("/fonts/quran/quran/surah-names/v1/sura_names.woff") format("woff");
   font-weight: normal;
   font-style: normal;
@@ -70,12 +70,15 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  // only apply this font to Urdu characters https://jrgraphix.net/r/Unicode/0600-06FF
+  unicode-range: U+0600-06FF;
 }
 
 @font-face {
   font-family: "NotoSerifBengali";
   src: local("Noto Serif Bengali"),
     url("/fonts/lang/bengali/NotoSerifBengali-Regular.woff2");
+  font-display: swap;
 }
 
 @font-face {

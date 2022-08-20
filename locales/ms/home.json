@@ -1,24 +1,4 @@
 {
-    "footer": {
-        "rights": "Hak Cipta Terpelihara",
-        "title": "Baca, telaah, dan pelajari Al-Quran."
-    },
-    "hijri-date": {
-        "format": "{{month}} {{date}}, {{year}} H",
-        "month": {
-            "1": "Muharam",
-            "10": "Syawal",
-            "11": "Dhu Al-Qida",
-            "2": "Safar",
-            "3": "Rabiul Awal",
-            "4": "Rabiul Akhir",
-            "5": "Jamadil Awal",
-            "6": "Jamadil Akhir",
-            "7": "Rejab",
-            "8": "Sya'ban",
-            "9": "Ramadhan"
-        }
-    },
     "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
     "noble-quran": "Al-Quran yang mulia",
     "recently-read": "Bacaan Terkini",
@@ -30,7 +10,7 @@
         "trigger": "Akses pantas kepada apa sahaja"
     },
     "welcome": {
-        "body": "Selepas lebih setahun bekerja keras, kami teruja untuk mempersembahkan kepada anda Quran.com baharu. Kami telah berusaha keras untuk memberikan anda pengalaman baharu seperti mod sepia, paparan perkataan demi perkataan, bar arahan, Mushaf IndoPak dan banyak lagi. <2\/> <2\/> Kami harap anda menikmati Quran.com baharu sama seperti kami. Sila maklumkan kepada kami tentang pepijat dan permintaan ciri pada <0> feedback.quran.com <\/0> . Kami semua dalam perkara ini bersama-sama dan ingin menambah baik produk untuk memberi perkhidmatan yang lebih baik kepada anda. <2\/> <2\/> Jika anda ingin kembali ke tapak lama pada bila-bila masa, sila lawati <1> previous.quran.com <\/1> . <2\/> <2\/> - Pasukan Quran.com",
-        "title": "Selamat datang ke Quran.com baharu!"
+        "body": "Derma bulanan membantu kami mengekalkan bakat terbaik dan mengekalkan operasi, supaya kami boleh kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
+        "title": "Derma kepada Quran.com hari ini"
     }
 }
