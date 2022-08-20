@@ -18,8 +18,11 @@ import Button, {
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey, getVerseNumberFromKey, makeVerseKey } from 'src/utils/verse';
-import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
+import {
+  selectIsVerseBeingPlayed,
+  selectIsVerseLoading,
+} from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface PlayVerseAudioProps {
@@ -35,16 +38,15 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
-  const isVerseBeingPlayed = useXstateSelector(audioService, (state) => {
-    const { surah, ayahNumber } = state.context;
-    return (
-      state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING') &&
-      makeVerseKey(surah, ayahNumber) === verseKey
-    );
-  });
+  const isVerseBeingPlayed = useXstateSelector(audioService, (state) =>
+    selectIsVerseBeingPlayed(state, verseKey),
+  );
+
+  const isVerseLoading = useXstateSelector(audioService, (state) =>
+    selectIsVerseLoading(state, verseKey),
+  );
   const chapterId = getChapterNumberFromKey(verseKey);
   const verseNumber = getVerseNumberFromKey(verseKey);
-  const isLoading = useXstateSelector(audioService, selectIsLoading);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
@@ -69,7 +71,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     }
   };
 
-  if (isLoading)
+  if (isVerseLoading)
     return (
       <Button
         size={ButtonSize.Small}

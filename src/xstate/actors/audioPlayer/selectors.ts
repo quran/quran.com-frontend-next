@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
+import { makeVerseKey } from 'src/utils/verse';
 
 export const selectIsUsingDefaultReciter = (state, locale: string) =>
   state.context.reciterId === getAudioPlayerStateInitialState(locale).reciter.id;
@@ -22,4 +23,17 @@ export const selectIsLoadingCurrentChapter = (state, chapterId) => {
   const isLoading = selectIsLoading(state);
   const currentSurah = state.context.surah;
   return isLoading && currentSurah === chapterId;
+};
+
+export const selectIsVerseBeingPlayed = (state, verseKey) => {
+  const { surah, ayahNumber } = state.context;
+  return (
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING') &&
+    makeVerseKey(surah, ayahNumber) === verseKey
+  );
+};
+
+export const selectIsVerseLoading = (state, verseKey) => {
+  const { surah, ayahNumber } = state.context;
+  return selectIsLoading(state) && makeVerseKey(surah, ayahNumber) === verseKey;
 };
