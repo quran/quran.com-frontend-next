@@ -46,7 +46,7 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 ### Running the app locally
 
-- Ensure you have the latest nodejs and npm installed. Prefer 10+.
+- Ensure you have the latest `nodejs` and `npm` installed. Prefer 10+.
 - Ensure you have `yarn` installed. Simply `npm i -g yarn`
 - Clone this repo
 - Run `yarn` on the repo to install `node_modules`

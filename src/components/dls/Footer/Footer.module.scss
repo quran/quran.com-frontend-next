@@ -128,10 +128,11 @@
 .actionsSections {
   margin-block-end: var(--spacing-small);
   display: flex;
-  flex-direction: column;
+  gap: var(--spacing-small);
   @include breakpoints.tablet {
     flex-direction: row;
     align-items: center;
+    gap: 0;
   }
 }
 .actionContainer {
