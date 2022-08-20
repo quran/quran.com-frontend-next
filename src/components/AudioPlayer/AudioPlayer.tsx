@@ -33,7 +33,7 @@ const getAudioPlayerDownloadProgress = (audioPlayer: HTMLAudioElement) => {
    *
    * Reference: https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/buffering_seeking_time_ranges
    */
-  if (audioPlayer.buffered) {
+  if (audioPlayer.buffered && audioPlayer.buffered.length) {
     const lastIndex = audioPlayer.buffered.length - 1;
     const timestamp = audioPlayer.buffered.end(lastIndex);
     return timestamp;
