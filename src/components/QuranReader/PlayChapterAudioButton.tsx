@@ -13,7 +13,10 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dl
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
+import {
+  selectIsLoadingCurrentChapter,
+  selectIsPlayingCurrentChapter,
+} from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface Props {
@@ -25,12 +28,12 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
   const audioService = useContext(AudioPlayerMachineContext);
-  const isAudioPlaying = useSelector(audioService, (state) =>
-    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  const isLoadingCurrentChapter = useSelector(audioService, (state) =>
+    selectIsLoadingCurrentChapter(state, chapterId),
   );
-  const currentSurah = useSelector(audioService, (state) => state.context.surah);
-  const isLoading = useSelector(audioService, selectIsLoading);
-  const isPlayingCurrentChapter = isAudioPlaying && currentSurah === chapterId;
+  const isPlayingCurrentChapter = useSelector(audioService, (state) =>
+    selectIsPlayingCurrentChapter(state, chapterId),
+  );
 
   const play = () => {
     logButtonClick('chapter_header_play_audio');
@@ -47,7 +50,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     });
   };
 
-  if (isLoading)
+  if (isLoadingCurrentChapter)
     return (
       <div className={styles.container}>
         <Button
