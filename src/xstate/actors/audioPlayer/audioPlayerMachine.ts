@@ -1053,8 +1053,6 @@ export const audioPlayerMachine =
           const duration = milliSecondsToSeconds(context.audioData.duration);
           const durationWithTolerancePeriod = duration - 3;
 
-          console.log('almost ended', currentTime > durationWithTolerancePeriod);
-
           return currentTime > durationWithTolerancePeriod;
         },
       },
