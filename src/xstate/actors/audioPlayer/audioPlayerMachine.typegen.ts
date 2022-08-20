@@ -143,6 +143,7 @@ export interface Typegen0 {
       | "done.invoke.fetchReciter"
       | "done.invoke.fetchRepeatData";
     playAudio:
+      | "END"
       | "NEXT_AYAH"
       | "PLAY"
       | "PLAY_AYAH"
@@ -157,6 +158,7 @@ export interface Typegen0 {
   eventsCausingGuards: {
     canRepeatNextAyah: "NEXT_AYAH";
     canRepeatPrevAyah: "PREV_AYAH";
+    isAudioAlmostEnded: "END";
     isDifferentSurah: "PLAY_AYAH" | "PLAY_SURAH";
     isNotFirstVerse: "PREV_AYAH";
     isNotLastVerse: "NEXT_AYAH";
