@@ -1,0 +1,12 @@
+.container {
+  width: fit-content;
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  & > button {
+    margin-block-end: var(--spacing-micro);
+  }
+}

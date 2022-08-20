@@ -2,6 +2,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import KalimatSearchNavigation from '../KalimatSearchNavigation';
+
 import SearchResultItem, { Source } from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
@@ -38,10 +40,26 @@ const SearchResults: React.FC<Props> = ({
       <div>
         <p className={styles.header}>
           {t('common:search-results', {
-            count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
+            count: toLocalizedNumber(
+              searchResult.pagination.totalRecords + Number(searchResult?.chapters?.length),
+              lang,
+            ),
           })}
         </p>
         <>
+          {!!searchResult.chapters?.length && (
+            <div className={styles.navigationItemsListContainer}>
+              {searchResult?.chapters.map((chapterId) => (
+                <span className={styles.navigationItemContainer} key={chapterId}>
+                  <KalimatSearchNavigation
+                    chapterId={chapterId}
+                    isSearchDrawer={isSearchDrawer}
+                    searchQuery={searchQuery}
+                  />
+                </span>
+              ))}
+            </div>
+          )}
           {searchResult.verses.map((result) => (
             <SearchResultItem
               key={result.verseKey}

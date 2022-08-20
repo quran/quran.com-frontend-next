@@ -163,7 +163,12 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
                 if (response.status === 500) {
                   setHasError(true);
                 } else {
-                  setSearchResult(response);
+                  setSearchResult({
+                    ...response,
+                    chapters: kalimatResponse
+                      .filter((result) => result.isChapter)
+                      .map((result) => `${result.id}`),
+                  });
                 }
               })
               .catch(() => {
