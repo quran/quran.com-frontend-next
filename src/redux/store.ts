@@ -14,7 +14,6 @@ import storage from 'redux-persist/lib/storage';
 import { getStoreInitialState } from './defaultSettings/util';
 import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
-import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
 import userDataSync from './slices/Auth/userDataSync';
 import banner from './slices/banner';
@@ -58,7 +57,6 @@ const persistConfig = {
     SliceName.WELCOME_MESSAGE,
     SliceName.DEFAULT_SETTINGS,
     SliceName.SIDEBAR_NAVIGATION,
-    SliceName.RADIO,
     SliceName.BANNER,
     SliceName.SESSION,
     SliceName.BOOKMARKS,
@@ -67,7 +65,7 @@ const persistConfig = {
 };
 
 export const rootReducer = combineReducers({
-  audioPlayerState: persistReducer(audioPlayerPersistConfig, audioPlayerState),
+  audioPlayerState,
   contextMenu,
   navbar,
   notes,

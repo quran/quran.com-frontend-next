@@ -8,7 +8,6 @@ enum SliceName {
   DEFAULT_SETTINGS = 'defaultSettings',
   BANNER = 'banner',
   NAVBAR = 'navbar',
-  RADIO = 'radio',
   SESSION = 'session',
   BOOKMARKS = 'bookmarks',
   VOICE_SEARCH = 'voiceSearch',
