@@ -1,6 +1,5 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-// TODO: remove eslint-disable max lines and breakdown the file
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 
@@ -42,22 +41,17 @@ export const audioPlayerStateSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(resetSettings, (state, action) => ({
       ...state,
-      isUsingDefaultReciter: true,
-      reciter: getAudioPlayerStateInitialState(action.payload.locale).reciter,
+      ...getAudioPlayerStateInitialState(action.payload.locale),
     }));
     builder.addCase(syncUserPreferences, (state, action) => {
       const {
-        payload: { userPreferences, locale },
+        payload: { userPreferences },
       } = action;
       const remotePreferences = userPreferences[PreferenceGroup.AUDIO] as AudioState;
       if (remotePreferences) {
-        const {
-          reciter: { id: defaultReciterId },
-        } = getAudioPlayerStateInitialState(locale);
         return {
           ...state,
           ...remotePreferences,
-          isUsingDefaultReciter: remotePreferences.reciter.id === defaultReciterId,
         };
       }
       return state;
@@ -76,11 +70,6 @@ export const audioPlayerStateSlice = createSlice({
         return {
           ...state,
           ...payload,
-          repeatSettings: {
-            ...state.repeatSettings,
-            ...payload.repeatSettings,
-            repeatRange: Infinity,
-          },
         };
       }
       return { ...state, ...payload };

@@ -1,9 +1,6 @@
-import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
-import RepeatProgress from 'src/redux/types/RepeatProgress';
-import RepeatSettings from 'src/redux/types/RepeatSettings';
 import SliceName from 'src/redux/types/SliceName';
 import TafsirsSettings from 'src/redux/types/TafsirsSettings';
 import Theme from 'src/redux/types/Theme';
@@ -80,34 +77,10 @@ const THEME_INITIAL_STATE: Theme = {
   type: ThemeType.Auto,
 };
 
-const DEFAULT_PLAYBACK_RATE = 1;
-
-const DEFAULT_REPEAT_SETTINGS: RepeatSettings = {
-  delayMultiplier: 0,
-  repeatRange: 3,
-  repeatEachVerse: 1,
-  from: null,
-  to: null,
-};
-
-const DEFAULT_REPEAT_PROGRESS: RepeatProgress = {
-  repeatEachVerse: 1,
-  repeatRange: 1,
-};
-
 const AUDIO_INITIAL_STATE: AudioState = {
   enableAutoScrolling: true,
-  isPlaying: false,
-  audioData: null,
-  reciter: DEFAULT_RECITER,
-  audioDataStatus: AudioDataStatus.NoFile,
-  repeatSettings: DEFAULT_REPEAT_SETTINGS,
-  repeatProgress: DEFAULT_REPEAT_PROGRESS,
   isDownloadingAudio: false,
-  playbackRate: DEFAULT_PLAYBACK_RATE,
-  isUsingDefaultReciter: true,
   showTooltipWhenPlayingAudio: false,
-  isRadioMode: false,
 };
 
 export default {
