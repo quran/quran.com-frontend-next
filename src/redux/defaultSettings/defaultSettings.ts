@@ -83,6 +83,11 @@ const AUDIO_INITIAL_STATE: AudioState = {
   showTooltipWhenPlayingAudio: false,
 };
 
+export const DEFAULT_XSTATE_INITIAL_STATE = {
+  playbackRate: 1,
+  reciterId: DEFAULT_RECITER.id,
+};
+
 export default {
   [SliceName.THEME]: THEME_INITIAL_STATE,
   [SliceName.READING_PREFERENCES]: READING_PREFERENCES_INITIAL_STATE,

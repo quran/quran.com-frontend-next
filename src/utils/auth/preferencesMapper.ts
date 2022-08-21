@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable react-func/max-lines-per-function */
+import { DEFAULT_XSTATE_INITIAL_STATE } from 'src/redux/defaultSettings/defaultSettings';
 import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
@@ -37,6 +38,7 @@ const getPreferenceGroupValue = (
     const { showTooltipWhenPlayingAudio, enableAutoScrolling } = currentSliceValue as AudioState;
     // only partially pick those props
     return {
+      ...DEFAULT_XSTATE_INITIAL_STATE,
       showTooltipWhenPlayingAudio,
       enableAutoScrolling,
     };
