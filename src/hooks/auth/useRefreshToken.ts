@@ -10,7 +10,15 @@ import { milliSecondsToSeconds } from 'src/utils/datetime';
 
 const PRE_EXPIRY_REFRESH_WINDOW_SECONDS = 20;
 
-const getRefreshTokenAfterSeconds = (accessTokenExpiration: number) => {
+/**
+ * Calculate how many seconds until we need to refresh
+ * the access token. If the expiration date has passed,
+ * we should refresh it immediately.
+ *
+ * @param {number} accessTokenExpiration
+ * @returns {number}
+ */
+const getRefreshTokenAfterSeconds = (accessTokenExpiration: number): number => {
   const currentTimeInSeconds = milliSecondsToSeconds(new Date().getTime());
   const timeToExpire = accessTokenExpiration - currentTimeInSeconds;
   return timeToExpire <= PRE_EXPIRY_REFRESH_WINDOW_SECONDS ? 0 : timeToExpire;
