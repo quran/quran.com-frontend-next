@@ -68,6 +68,7 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
           audioPlayerMachine.initialState.context.playbackRate;
 
         const reciterId =
+          preferences[PreferenceGroup.AUDIO]?.reciterId ||
           preferences[PreferenceGroup.AUDIO]?.reciter?.id ||
           audioPlayerMachine.initialState.context.reciterId;
 
