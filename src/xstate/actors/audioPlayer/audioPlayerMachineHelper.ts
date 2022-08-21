@@ -121,5 +121,6 @@ export const getMediaSessionMetaData = async (
 export const getRecitersList = async (context: AudioPlayerContext) => {
   const { recitersList } = context;
   if (recitersList) return recitersList;
+  // TODO: localize this
   return getAvailableReciters('en').then((res) => res.reciters);
 };

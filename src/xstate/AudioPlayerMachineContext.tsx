@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { createContext, useEffect } from 'react';
+import { createContext } from 'react';
 
 import { useInterpret } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,9 +13,6 @@ import {
 
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
-import { getUserPreferences } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const AudioPlayerMachineContext = createContext(
   {} as InterpreterFrom<typeof audioPlayerMachine>,
@@ -23,21 +20,13 @@ export const AudioPlayerMachineContext = createContext(
 
 const LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER = ['CHANGE_RECITER', 'SET_PLAYBACK_SPEED'];
 
-export const AudioPlayerMachineProvider = ({ children, locale }) => {
+export const AudioPlayerMachineProvider = ({ children }) => {
   const toast = useToast();
   const { t } = useTranslation('common');
   const initialXstateContext = getXstateStateFromLocalStorage();
   const defaultLocaleContext = {
     reciterId: DEFAULT_RECITER.id,
   };
-
-  const isClient = !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
-
-  const loggedIn = isLoggedIn();
 
   const audioPlayerService = useInterpret(
     audioPlayerMachine,
@@ -59,23 +48,6 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
       }
     },
   );
-
-  useEffect(() => {
-    if (isClient && loggedIn) {
-      getUserPreferences(locale).then((preferences) => {
-        const playbackRate =
-          preferences[PreferenceGroup.AUDIO]?.playbackRate ||
-          audioPlayerMachine.initialState.context.playbackRate;
-
-        const reciterId =
-          preferences[PreferenceGroup.AUDIO]?.reciterId ||
-          preferences[PreferenceGroup.AUDIO]?.reciter?.id ||
-          audioPlayerMachine.initialState.context.reciterId;
-
-        audioPlayerService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId });
-      });
-    }
-  }, [audioPlayerService, isClient, locale, loggedIn]);
 
   return (
     <AudioPlayerMachineContext.Provider value={audioPlayerService}>

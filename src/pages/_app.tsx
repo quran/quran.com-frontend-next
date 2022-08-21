@@ -77,7 +77,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
 
       <ToastContainerProvider>
         <DataContext.Provider value={pageProps.chaptersData}>
-          <AudioPlayerMachineProvider locale={locale}>
+          <AudioPlayerMachineProvider>
             <ReduxProvider locale={locale}>
               <ThemeProvider>
                 <IdProvider>

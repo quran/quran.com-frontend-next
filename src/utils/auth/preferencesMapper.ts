@@ -38,7 +38,8 @@ const getPreferenceGroupValue = (
     const { showTooltipWhenPlayingAudio, enableAutoScrolling } = currentSliceValue as AudioState;
     // only partially pick those props
     return {
-      ...DEFAULT_XSTATE_INITIAL_STATE,
+      reciter: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
+      playbackRate: DEFAULT_XSTATE_INITIAL_STATE.playbackRate,
       showTooltipWhenPlayingAudio,
       enableAutoScrolling,
     };
