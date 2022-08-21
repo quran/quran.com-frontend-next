@@ -34,20 +34,11 @@ const getPreferenceGroupValue = (
     return currentSliceValue;
   }
   if (sliceName === SliceName.AUDIO_PLAYER_STATE) {
-    const {
-      playbackRate,
-      reciter,
-      showTooltipWhenPlayingAudio,
-      enableAutoScrolling,
-      repeatSettings,
-    } = currentSliceValue as AudioState;
+    const { showTooltipWhenPlayingAudio, enableAutoScrolling } = currentSliceValue as AudioState;
     // only partially pick those props
     return {
-      playbackRate,
-      reciter: reciter.id,
       showTooltipWhenPlayingAudio,
       enableAutoScrolling,
-      repeatSettings,
     };
   }
   if (sliceName === SliceName.READING_PREFERENCES) {

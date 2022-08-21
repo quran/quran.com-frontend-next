@@ -1,10 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 
-import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
+import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
 import { makeVerseKey } from 'src/utils/verse';
 
-export const selectIsUsingDefaultReciter = (state, locale: string) =>
-  state.context.reciterId === getAudioPlayerStateInitialState(locale).reciter.id;
+export const selectIsUsingDefaultReciter = (state) =>
+  state.context.reciterId === DEFAULT_RECITER.id;
 
 export const selectCurrentAudioReciterId = (state) => state.context.audioData?.reciterId;
 

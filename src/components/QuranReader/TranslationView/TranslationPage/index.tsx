@@ -66,7 +66,7 @@ const TranslationPage: React.FC<Props> = ({
   const audioService = useContext(AudioPlayerMachineContext);
 
   const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
-    selectIsUsingDefaultReciter(state, lang),
+    selectIsUsingDefaultReciter(state),
   );
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);

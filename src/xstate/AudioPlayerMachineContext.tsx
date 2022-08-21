@@ -12,7 +12,7 @@ import {
 } from './actors/audioPlayer/audioPlayerPersistHelper';
 
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
+import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
 import { getUserPreferences } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -27,9 +27,8 @@ export const AudioPlayerMachineProvider = ({ children, locale }) => {
   const toast = useToast();
   const { t } = useTranslation('common');
   const initialXstateContext = getXstateStateFromLocalStorage();
-  const defaultAudioStateByLocale = getAudioPlayerStateInitialState(locale);
   const defaultLocaleContext = {
-    reciterId: defaultAudioStateByLocale.reciter.id,
+    reciterId: DEFAULT_RECITER.id,
   };
 
   const isClient = !!(
