@@ -90,6 +90,7 @@ export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit):
 export const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'POST',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(requestData),
   });
@@ -105,6 +106,7 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'DELETE',
     ...(requestData && {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData),
     }),

@@ -67,3 +67,6 @@ test-results/
 playwright-report/
 
 keys
+
+# Sentry
+.sentryclirc
