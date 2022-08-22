@@ -103,7 +103,9 @@ export const getMediaSessionMetaData = async (
   context: AudioPlayerContext,
   recitersList: Reciter[],
 ) => {
-  const reciterName = recitersList.find((reciter) => reciter.id === context.reciterId).name;
+  const reciterName = recitersList.find(
+    (reciter) => reciter.id === context.audioData.reciterId,
+  ).name;
   return new MediaMetadata({
     title: `Surah ${context.audioData.chapterId}`,
     artist: reciterName,
