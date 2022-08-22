@@ -35,6 +35,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
   const { t, lang } = useTranslation();
   const audioService = useContext(AudioPlayerMachineContext);
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const currentReciterId = useSelector(audioService, (state) => state.context.audioData?.reciterId);
   const isAudioPlaying = useSelector(audioService, (state) =>
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );
@@ -77,7 +78,10 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
   return (
     <div className={styles.chapterListContainer}>
       {filteredChapters.map((chapter) => {
-        const isAudioPlayingThisChapter = isAudioPlaying && currentSurah === Number(chapter.id);
+        const isAudioPlayingThisChapter =
+          isAudioPlaying &&
+          currentSurah === Number(chapter.id) &&
+          selectedReciter.id === currentReciterId;
 
         const onClick = () => {
           if (isAudioPlayingThisChapter) audioService.send('TOGGLE');
