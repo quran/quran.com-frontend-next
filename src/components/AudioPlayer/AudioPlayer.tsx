@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import styles from './AudioPlayer.module.scss';
 
 import Spinner from 'src/components/dls/Spinner/Spinner';
+import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
@@ -113,6 +114,10 @@ const AudioPlayer = () => {
     audioService.send({ type: 'PROGRESS', timestamp: getAudioPlayerDownloadProgress(e.target) });
   };
 
+  const onLoadStart = (event) => {
+    logEvent('load_audio_file', { audioUrl: event.target.src });
+  };
+
   return (
     <>
       <div
@@ -136,6 +141,7 @@ const AudioPlayer = () => {
           onPlay={onPlay}
           onPause={onPause}
           onProgress={onProgress}
+          onLoadStart={onLoadStart}
         />
         {isVisible && <AudioPlayerBody />}
       </div>

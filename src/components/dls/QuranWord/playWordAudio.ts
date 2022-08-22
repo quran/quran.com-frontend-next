@@ -1,4 +1,5 @@
 import { QURANCDN_AUDIO_BASE_URL } from 'src/utils/audio';
+import { logEvent } from 'src/utils/eventLogger';
 import Word from 'types/Word';
 
 const playWordAudio = (word: Word) => {
@@ -34,6 +35,7 @@ const playWordByWordAudio = (url: string) => {
   };
 
   window.wordByWordAudioPlayerEl = new Audio(url);
+  logEvent('load_audio_file', { audioUrl: url });
 
   window.wordByWordAudioPlayerEl.play();
   window.wordByWordAudioPlayerEl.addEventListener('ended', removeDOM);
