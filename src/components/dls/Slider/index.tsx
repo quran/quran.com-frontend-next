@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import * as SliderPrimitive from '@radix-ui/react-slider';
+import classNames from 'classnames';
 
 import styles from './Slider.module.scss';
 
@@ -12,6 +13,11 @@ export enum Orientation {
 export enum Direction {
   ltr = 'ltr',
   rtl = 'rtl',
+}
+
+export enum SliderVariant {
+  Primary = 'primary',
+  Secondary = 'secondary',
 }
 
 interface Props {
@@ -28,6 +34,8 @@ interface Props {
   minStepsBetweenThumbs?: number;
   onValueChange?: (value: number[]) => void;
   showThumbs?: boolean;
+  variant?: SliderVariant;
+  withBackground?: boolean;
 }
 
 const Slider: React.FC<Props> = ({
@@ -44,6 +52,8 @@ const Slider: React.FC<Props> = ({
   defaultValue,
   value,
   showThumbs = true,
+  variant = SliderVariant.Primary,
+  withBackground = false,
 }) => {
   const values = value || defaultValue;
 
@@ -63,8 +73,15 @@ const Slider: React.FC<Props> = ({
       {...(onValueChange && { onValueChange })}
       {...(name && { name })}
     >
-      <SliderPrimitive.Track className={styles.track}>
-        <SliderPrimitive.Range className={styles.range} />
+      <SliderPrimitive.Track
+        className={classNames(styles.track, withBackground && styles.trackBackground)}
+      >
+        <SliderPrimitive.Range
+          className={classNames(styles.range, {
+            [styles.primary]: variant === SliderVariant.Primary,
+            [styles.secondary]: variant === SliderVariant.Secondary,
+          })}
+        />
       </SliderPrimitive.Track>
       {showThumbs &&
         values.map((...[, index]) => (

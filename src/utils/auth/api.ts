@@ -1,4 +1,4 @@
-import { fetcher, getAvailableReciters } from 'src/api';
+import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -53,6 +53,7 @@ export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit):
 export const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'POST',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(requestData),
   });
@@ -68,6 +69,7 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'DELETE',
     ...(requestData && {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData),
     }),
@@ -122,28 +124,10 @@ export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
-export const getUserPreferences = async (locale: string): Promise<UserPreferencesResponse> => {
+export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
     makeUserPreferencesUrl(),
   )) as UserPreferencesResponse;
-  // if the audio Preferences are saved in the DB
-  if (userPreferences[PreferenceGroup.AUDIO]) {
-    const { reciter: reciterId } = userPreferences[PreferenceGroup.AUDIO];
-    if (reciterId) {
-      // we need to convert the id into reciter data
-      const recitersResponse = await getAvailableReciters(locale);
-      const selectedReciters = recitersResponse.reciters.filter(
-        (reciter) => reciter.id === Number(reciterId),
-      );
-      if (selectedReciters.length) {
-        const [selectedReciter] = selectedReciters;
-        userPreferences[PreferenceGroup.AUDIO] = {
-          ...userPreferences[PreferenceGroup.AUDIO],
-          reciter: selectedReciter,
-        };
-      }
-    }
-  }
   return userPreferences;
 };
 

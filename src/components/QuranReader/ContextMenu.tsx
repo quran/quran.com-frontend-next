@@ -63,6 +63,7 @@ const ContextMenu = () => {
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}
       // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
       <div className={styles.sectionsContainer}>

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
@@ -11,6 +11,7 @@ import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getUserPreferences } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { setLocaleCookie } from 'src/utils/cookies';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 /**
@@ -25,6 +26,7 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 const ReduxProvider = ({ children, locale }) => {
   const store = useMemo(() => getStore(locale), [locale]);
   const persistor = useMemo(() => persistStore(store), [store]);
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const isClient = !!(
     typeof window !== 'undefined' &&
@@ -39,13 +41,20 @@ const ReduxProvider = ({ children, locale }) => {
   const onBeforeLift = async () => {
     if (isClient && isLoggedIn()) {
       try {
-        const userPreferences = await getUserPreferences(locale);
+        const userPreferences = await getUserPreferences();
         const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
         if (remoteLocale) {
           await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
           setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
         }
         store.dispatch(syncUserPreferences(userPreferences, locale));
+        const playbackRate =
+          userPreferences[PreferenceGroup.AUDIO]?.playbackRate ||
+          audioService.getSnapshot().context.playbackRate;
+        const reciterId =
+          userPreferences[PreferenceGroup.AUDIO]?.reciter ||
+          audioService.getSnapshot().context.reciterId;
+        audioService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId });
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }
