@@ -1,5 +1,6 @@
-import React, { RefObject, useEffect, memo } from 'react';
+import React, { RefObject, useEffect, memo, useContext } from 'react';
 
+import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -22,9 +23,9 @@ import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
-import { selectIsVerseHighlighted } from 'src/redux/slices/QuranReader/highlightedLocation';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getVerseWords } from 'src/utils/verse';
+import { getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -47,7 +48,12 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   const router = useRouter();
   const { startingVerse } = router.query;
 
-  const isHighlighted = useSelector(selectIsVerseHighlighted(verse.verseKey));
+  const audioService = useContext(AudioPlayerMachineContext);
+
+  const isHighlighted = useSelectorXstate(audioService, (state) => {
+    const { ayahNumber, surah } = state.context;
+    return makeVerseKey(surah, ayahNumber) === verse.verseKey;
+  });
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
