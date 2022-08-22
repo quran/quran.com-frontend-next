@@ -25,7 +25,6 @@ import navbar from './slices/navbar';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
-import highlightedLocation from './slices/QuranReader/highlightedLocation';
 import notes from './slices/QuranReader/notes';
 import readingPreferences from './slices/QuranReader/readingPreferences';
 import readingTracker from './slices/QuranReader/readingTracker';
@@ -34,7 +33,6 @@ import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
-import radio from './slices/radio';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
@@ -60,7 +58,6 @@ const persistConfig = {
     SliceName.WELCOME_MESSAGE,
     SliceName.DEFAULT_SETTINGS,
     SliceName.SIDEBAR_NAVIGATION,
-    SliceName.RADIO,
     SliceName.BANNER,
     SliceName.SESSION,
     SliceName.BOOKMARKS,
@@ -80,7 +77,6 @@ export const rootReducer = combineReducers({
   tafsirs,
   bookmarks,
   search,
-  highlightedLocation,
   readingTracker,
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
@@ -88,7 +84,6 @@ export const rootReducer = combineReducers({
   defaultSettings,
   fontFaces,
   sidebarNavigation,
-  radio,
   readingViewVerse,
   banner,
   session,

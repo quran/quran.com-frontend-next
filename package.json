@@ -49,6 +49,7 @@
     "@radix-ui/react-visually-hidden": "^1.0.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@sentry/nextjs": "^7.11.1",
+    "@xstate/react": "^3.0.1",
     "classnames": "^2.3.1",
     "clipboard-copy": "^4.0.1",
     "cookie": "^0.5.0",
@@ -74,7 +75,8 @@
     "react-virtuoso": "^2.17.2",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
-    "swr": "^1.2.1"
+    "swr": "^1.2.1",
+    "xstate": "^4.33.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",

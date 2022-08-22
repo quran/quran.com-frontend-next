@@ -19,6 +19,7 @@ import UserAccountModal from 'src/components/Login/UserAccountModal';
 import Navbar from 'src/components/Navbar/Navbar';
 import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
+import DataContext from 'src/contexts/DataContext';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
@@ -29,6 +30,7 @@ import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
+import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
@@ -73,31 +75,35 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="preconnect" href={API_HOST} />
       </Head>
       <FontPreLoader locale={locale} />
-      <ReduxProvider locale={locale}>
-        <ThemeProvider>
-          <DirectionProvider dir={getDir(locale)}>
-            <TooltipProvider>
-              <ToastContainerProvider>
-                <UserAccountModal
-                  requiredFields={userData?.requiredFields}
-                  announcement={userData?.announcement}
-                />
-                <DefaultSeo
-                  {...createSEOConfig({ locale, description: t('default-description') })}
-                />
-                <GlobalListeners />
-                <Navbar />
-                <DeveloperUtility />
-                <Component {...pageProps} />
-                <AudioPlayer />
-                <Footer />
-                <DonatePopup />
-              </ToastContainerProvider>
-            </TooltipProvider>
-          </DirectionProvider>
-        </ThemeProvider>
-        <SessionIncrementor />
-      </ReduxProvider>
+      <DirectionProvider dir={getDir(locale)}>
+        <TooltipProvider>
+          <ToastContainerProvider>
+            <DataContext.Provider value={pageProps.chaptersData}>
+              <AudioPlayerMachineProvider>
+                <ReduxProvider locale={locale}>
+                  <ThemeProvider>
+                    <UserAccountModal
+                      requiredFields={userData?.requiredFields}
+                      announcement={userData?.announcement}
+                    />
+                    <DefaultSeo
+                      {...createSEOConfig({ locale, description: t('default-description') })}
+                    />
+                    <GlobalListeners />
+                    <Navbar />
+                    <DeveloperUtility />
+                    <Component {...pageProps} />
+                    <AudioPlayer />
+                    <Footer />
+                    <DonatePopup />
+                  </ThemeProvider>
+                  <SessionIncrementor />
+                </ReduxProvider>
+              </AudioPlayerMachineProvider>
+            </DataContext.Provider>
+          </ToastContainerProvider>
+        </TooltipProvider>
+      </DirectionProvider>
 
       <ThirdPartyScripts />
     </>

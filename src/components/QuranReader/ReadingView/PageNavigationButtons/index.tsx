@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import ChevronDownIcon from '../../../../../public/icons/chevron-down.svg';
 
@@ -11,8 +11,7 @@ import styles from './PageNavigationButtons.module.scss';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import { ContentSide } from 'src/components/dls/Tooltip';
-import { selectAudioDataStatus } from 'src/redux/slices/AudioPlayer/state';
-import AudioDataStatus from 'src/redux/types/AudioDataStatus';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface Props {
   scrollToNextPage: () => void;
@@ -21,8 +20,8 @@ interface Props {
 
 const PageNavigationButtons: React.FC<Props> = ({ scrollToNextPage, scrollToPreviousPage }) => {
   const { t } = useTranslation('quran-reader');
-  const audioDataStatus = useSelector(selectAudioDataStatus);
-  const isAudioPlayerHidden = audioDataStatus === AudioDataStatus.NoFile;
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioPlayerHidden = useSelector(audioService, (state) => state.matches('HIDDEN'));
   return (
     <div
       className={classNames(styles.buttonsContainer, {

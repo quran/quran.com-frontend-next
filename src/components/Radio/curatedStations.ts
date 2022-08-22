@@ -1,8 +1,9 @@
 import range from 'lodash/range';
+import sample from 'lodash/sample';
 
 import { AudioTrack, CuratedStation } from './types';
 
-import { QURAN_CHAPTERS_COUNT } from 'src/utils/chapter';
+const QURAN_CHAPTERS_COUNT = 114;
 
 const popularRecitersId = ['7', '3', '10', '4'];
 
@@ -10,7 +11,7 @@ const generatePopularRecitersAudioTracks = (): AudioTrack[] => {
   return popularRecitersId
     .map((reciter) =>
       range(1, QURAN_CHAPTERS_COUNT).map((chapter) => ({
-        chapterId: chapter.toString(),
+        surah: chapter.toString(),
         reciterId: reciter.toString(),
       })),
     )
@@ -22,11 +23,18 @@ const generateJuzAmmaAudioTracks = (): AudioTrack[] => {
   return popularRecitersId
     .map((reciter) =>
       range(JUZ_AMMA_FIRST_CHAPTER, QURAN_CHAPTERS_COUNT).map((chapter) => ({
-        chapterId: chapter.toString(),
+        surah: chapter.toString(),
         reciterId: reciter.toString(),
       })),
     )
     .flat();
+};
+
+const generateSurahAlKahfAudioTracks = (): AudioTrack[] => {
+  return popularRecitersId.map((reciterId) => ({
+    surah: '18',
+    reciterId,
+  }));
 };
 
 const curatedStations: Record<string, CuratedStation> = {
@@ -42,15 +50,15 @@ const curatedStations: Record<string, CuratedStation> = {
     bannerImgSrc: '/images/stations/2.jpg',
     audioTracks: [
       {
-        chapterId: '36',
+        surah: '36',
         reciterId: '7',
       },
       {
-        chapterId: '96',
+        surah: '96',
         reciterId: '7',
       },
       {
-        chapterId: '67',
+        surah: '67',
         reciterId: '7',
       },
     ],
@@ -59,10 +67,7 @@ const curatedStations: Record<string, CuratedStation> = {
     title: 'surah-al-kahf.title',
     description: 'surah-al-kahf.description',
     bannerImgSrc: '/images/stations/3.jpeg',
-    audioTracks: popularRecitersId.map((reciterId) => ({
-      chapterId: '18',
-      reciterId,
-    })),
+    audioTracks: generateSurahAlKahfAudioTracks(),
   },
   '4': {
     title: 'juz-amma.title',
@@ -70,6 +75,10 @@ const curatedStations: Record<string, CuratedStation> = {
     bannerImgSrc: '/images/stations/4.jpeg',
     audioTracks: generateJuzAmmaAudioTracks(),
   },
+};
+
+export const getRandomCuratedStationId = () => {
+  return sample(Object.keys(curatedStations));
 };
 
 export default curatedStations;

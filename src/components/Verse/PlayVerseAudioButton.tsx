@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause-outline.svg';
 import PlayIcon from '../../../public/icons/play-outline.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
-import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, {
   ButtonShape,
   ButtonSize,
@@ -17,18 +16,14 @@ import Button, {
   ButtonVariant,
 } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import {
-  playFrom,
-  selectAudioDataStatus,
-  exitRepeatMode,
-} from 'src/redux/slices/AudioPlayer/state';
-import { selectIsVerseBeingPlayed } from 'src/redux/slices/QuranReader/highlightedLocation';
-import AudioDataStatus from 'src/redux/types/AudioDataStatus';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey } from 'src/utils/verse';
-import QueryParam from 'types/QueryParam';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
+import {
+  selectIsVerseBeingPlayed,
+  selectIsVerseLoading,
+} from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface PlayVerseAudioProps {
   verseKey: string;
@@ -38,41 +33,28 @@ interface PlayVerseAudioProps {
 }
 const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   verseKey,
-  timestamp,
   isTranslationView = true,
   onActionTriggered,
 }) => {
+  const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
-  const isVerseBeingPlayed = useSelector(selectIsVerseBeingPlayed(verseKey));
+  const isVerseBeingPlayed = useXstateSelector(audioService, (state) =>
+    selectIsVerseBeingPlayed(state, verseKey),
+  );
+
+  const isVerseLoading = useXstateSelector(audioService, (state) =>
+    selectIsVerseLoading(state, verseKey),
+  );
   const chapterId = getChapterNumberFromKey(verseKey);
-  const audioDataStatus = useSelector(selectAudioDataStatus);
+  const verseNumber = getVerseNumberFromKey(verseKey);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
-
-  useEffect(() => {
-    if (audioDataStatus === AudioDataStatus.Ready) {
-      setIsLoading(false);
-    }
-  }, [audioDataStatus]);
 
   const onPlayClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
-    dispatch(exitRepeatMode());
-    dispatch(
-      playFrom({
-        chapterId,
-        reciterId,
-        timestamp,
-      }),
-    );
 
-    if (audioDataStatus !== AudioDataStatus.Ready) {
-      setIsLoading(true);
-    }
+    audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
 
     if (onActionTriggered) {
       onActionTriggered();
@@ -82,14 +64,14 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const onPauseClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_pause_verse`);
-    triggerPauseAudio();
+    audioService.send('TOGGLE');
 
     if (onActionTriggered) {
       onActionTriggered();
     }
   };
 
-  if (isLoading)
+  if (isVerseLoading)
     return (
       <Button
         size={ButtonSize.Small}
