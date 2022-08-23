@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Awaiting Confirmation",
+    "continue-apple": "Continue with Apple",
+    "continue-email": "Continue with Email",
+    "continue-facebook": "Continue with Facebook",
+    "continue-google": "Continue with Google",
+    "email-placeholder": "Email Address",
+    "login-error": {
+        "AuthenticationError": "Authentication failed. Please try again later",
+        "TokenExpiredError": "You have been logged out, please login again."
+    },
+    "login-title": "Login to Quran.com",
+    "other-options": "Other Login Options",
+    "verify-code": "Verify that the provided security code matches the following text:"
+}

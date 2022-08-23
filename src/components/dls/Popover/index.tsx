@@ -30,7 +30,7 @@ interface Props {
   avoidCollisions?: boolean;
   useTooltipStyles?: boolean;
   defaultStyling?: boolean;
-  portalled?: boolean;
+  isPortalled?: boolean;
   triggerStyles?: string;
   contentStyles?: string;
   contentSideOffset?: number;
@@ -48,42 +48,46 @@ const Popover: React.FC<Props> = ({
   tip = false,
   useTooltipStyles = false,
   defaultStyling = true,
-  portalled = true,
+  isPortalled = true,
   contentSideOffset = 2,
   triggerStyles,
   contentStyles,
-}) => (
-  <div className={classNames({ [styles.container]: defaultStyling })}>
-    <RadixPopover.Root
-      modal={isModal}
-      {...(typeof open !== 'undefined' && { open })}
-      {...(onOpenChange && { onOpenChange })}
+}) => {
+  const content = (
+    <RadixPopover.Content
+      sideOffset={contentSideOffset}
+      side={contentSide}
+      align={contentAlign}
+      avoidCollisions={avoidCollisions}
+      className={classNames(styles.content, {
+        [styles.tooltipContent]: useTooltipStyles,
+        [contentStyles]: contentStyles,
+      })}
     >
-      <RadixPopover.Trigger aria-label="Open popover" asChild>
-        <span
-          className={classNames(styles.trigger, {
-            [triggerStyles]: triggerStyles,
-          })}
-        >
-          {trigger}
-        </span>
-      </RadixPopover.Trigger>
-      <RadixPopover.Content
-        sideOffset={contentSideOffset}
-        portalled={portalled}
-        side={contentSide}
-        align={contentAlign}
-        avoidCollisions={avoidCollisions}
-        className={classNames(styles.content, {
-          [styles.tooltipContent]: useTooltipStyles,
-          [contentStyles]: contentStyles,
-        })}
+      {children}
+      {tip && <RadixPopover.Arrow />}
+    </RadixPopover.Content>
+  );
+  return (
+    <div className={classNames({ [styles.container]: defaultStyling })}>
+      <RadixPopover.Root
+        modal={isModal}
+        {...(typeof open !== 'undefined' && { open })}
+        {...(onOpenChange && { onOpenChange })}
       >
-        {children}
-        {tip && <RadixPopover.Arrow />}
-      </RadixPopover.Content>
-    </RadixPopover.Root>
-  </div>
-);
+        <RadixPopover.Trigger aria-label="Open popover" asChild>
+          <span
+            className={classNames(styles.trigger, {
+              [triggerStyles]: triggerStyles,
+            })}
+          >
+            {trigger}
+          </span>
+        </RadixPopover.Trigger>
+        {isPortalled ? <RadixPopover.Portal>{content}</RadixPopover.Portal> : content}
+      </RadixPopover.Root>
+    </div>
+  );
+};
 
 export default Popover;

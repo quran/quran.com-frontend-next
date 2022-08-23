@@ -6,7 +6,7 @@
   min-height: calc(var(--spacing-mega) + var(--spacing-small));
   padding-inline-start: var(--spacing-micro);
   padding-inline-end: var(--spacing-micro);
-  border-bottom: 1px var(--color-borders-hairline) solid;
+  border-block-end: 1px var(--color-borders-hairline) solid;
 }
 
 .containerStale {

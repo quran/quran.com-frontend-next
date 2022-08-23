@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Menunggu konfirmasi",
+    "continue-apple": "Lanjutkan dengan Apple",
+    "continue-email": "Lanjutkan dengan Email",
+    "continue-facebook": "Lanjutkan dengan Facebook",
+    "continue-google": "Lanjutkan dengan Google",
+    "email-placeholder": "Alamat email",
+    "login-error": {
+        "AuthenticationError": "Otentikasi gagal. Silakan coba lagi nanti",
+        "TokenExpiredError": "Anda telah logout, silakan login kembali."
+    },
+    "login-title": "Masuk ke Quran.com",
+    "other-options": "Opsi Masuk Lainnya",
+    "verify-code": "Verifikasi bahwa kode keamanan yang diberikan cocok dengan teks berikut:"
+}

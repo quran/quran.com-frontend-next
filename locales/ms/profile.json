@@ -1,0 +1,10 @@
+{
+    "delete-account": "Padam Akaun",
+    "delete-confirmation": {
+        "action-text": "Saya faham akibatnya, padam akaun saya",
+        "confirmation-text": "padamkan akaun saya",
+        "instruction-text": "Sila taip <strong> {{text}} <\/strong> untuk mengesahkan",
+        "subtitle": "Tindakan ini tidak boleh dibuat asal. Ini akan memadamkan akaun anda secara kekal, penanda halaman yang disimpan, sesi membaca dan semua data anda.",
+        "title": "Adakah anda benar-benar pasti?"
+    }
+}

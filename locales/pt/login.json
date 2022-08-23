@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "Aguardando confirmação",
+    "continue-apple": "Continuar com a Apple",
+    "continue-email": "Continuar com e-mail",
+    "continue-facebook": "Continuar com o Facebook",
+    "continue-google": "Continuar com o Google",
+    "email-placeholder": "Endereço de email",
+    "login-error": {
+        "AuthenticationError": "Falha na autenticação. Por favor, tente novamente mais tarde",
+        "TokenExpiredError": "Você foi desconectado, faça o login novamente."
+    },
+    "login-title": "Faça login no Quran.com",
+    "other-options": "Outras opções de login",
+    "verify-code": "Verifique se o código de segurança fornecido corresponde ao seguinte texto:"
+}

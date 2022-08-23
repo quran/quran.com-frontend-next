@@ -1,6 +1,24 @@
 {
     "about": "À propos de nous",
     "and": "et",
+    "announcements": {
+        "auth-onboarding": {
+            "slide-1": {
+                "action": "Regardez ce qu'il y a de nouveau",
+                "title": "Bienvenue sur Quran.com <br> <\/br> Bêta du compte utilisateur"
+            },
+            "slide-2": {
+                "action": "Prochain",
+                "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
+                "title": "Vos données seront synchronisées <br> <\/br> sur tous les appareils"
+            },
+            "slide-3": {
+                "action": "OK, j'ai compris",
+                "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
+                "title": "Nous voulons entendre vos pensées"
+            }
+        }
+    },
     "aria": {
         "change-settings": "Modifier les paramètres",
         "drawer-close": "Fermer le tiroir",
@@ -74,6 +92,7 @@
         "sub-header": "Inscrivez-vous sur Quran.com Discord pour participer et collaborer avec la principale technologie islamique de construction de communauté.",
         "title": "Communauté"
     },
+    "complete-sign-up": "Complétez votre inscription",
     "continue": "Continuer",
     "copied": "Copié",
     "copied-to-clipboard": "Copié dans le presse-papier",
@@ -85,9 +104,20 @@
     "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
     "developers": "Développeurs",
     "donate": "Donner",
+    "email-verification": {
+        "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
+        "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
+        "email-verification": "Vérification de l'E-mail",
+        "resend-email": "Ré-envoyer l'email",
+        "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}} s...",
+        "verify-code": "Vérifier le code"
+    },
     "error": {
+        "bookmark-sync": "Le signet n'est pas synchronisé.",
+        "email-login-fail": "Échec de la connexion avec l'e-mail. Veuillez réessayer",
         "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
-        "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer."
+        "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer.",
+        "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud."
     },
     "feedback": "Retour d'information",
     "fonts": {
@@ -110,6 +140,12 @@
         "rights": "Tous les droits sont réservés",
         "title": "Lisez, étudiez et apprenez Le Noble Coran."
     },
+    "form": {
+        "code": "Le code de vérification",
+        "email": "E-mail",
+        "firstName": "Prénom",
+        "lastName": "Nom de famille"
+    },
     "from": "De",
     "fundraising": {
         "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
@@ -127,6 +163,8 @@
     "languages": "Langues",
     "less": "Moins",
     "loading": "Chargement",
+    "login": "Connexion",
+    "logout": "Se déconnecter",
     "menu": "Menu",
     "mobile-apps": "Application mobile",
     "mode": "Mode",
@@ -157,6 +195,7 @@
     "previous-ayah": "Ayah précédent",
     "privacy": "Intimité",
     "product-updates": "Mises à jour du produit",
+    "profile": "Profil",
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
     "quran-radio": "Radio Coran",
@@ -219,6 +258,7 @@
         "descending": "Descendant"
     },
     "style": "Style",
+    "submit": "Soumettre",
     "surah": "Sourate",
     "tafsir": {
         "font-size": "Taille de la police Tafsir",
@@ -249,6 +289,12 @@
     "translations": "Traductions",
     "transliteration": "Translitération",
     "type": "Taper",
+    "undo": "annuler",
+    "validation": {
+        "invalid-email": "{{field}} doit être une adresse e-mail valide",
+        "invalid-field": "Veuillez saisir une valeur {{field}} valide",
+        "required-field": "{{field}} est requis"
+    },
     "verse": "Verset",
     "verse-bookmark-removed": "Signet verset supprimé !",
     "verse-bookmarked": "Verset mis en signet !",

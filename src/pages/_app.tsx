@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 
-import { IdProvider } from '@radix-ui/react-id';
+import { DirectionProvider } from '@radix-ui/react-direction';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import useSWRImmutable from 'swr/immutable';
 
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
@@ -13,16 +15,22 @@ import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import DonatePopup from 'src/components/DonatePopup/DonatePopup';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';
+import UserAccountModal from 'src/components/Login/UserAccountModal';
 import Navbar from 'src/components/Navbar/Navbar';
 import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
+import DataContext from 'src/contexts/DataContext';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
+import { getUserProfile } from 'src/utils/auth/api';
+import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { isLoggedIn } from 'src/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
+import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
@@ -34,6 +42,14 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
+  const { data: userData } = useSWRImmutable(
+    isLoggedIn() ? makeUserProfileUrl() : null,
+    async () => {
+      const response = await getUserProfile();
+      return response;
+    },
+  );
+
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
@@ -59,23 +75,35 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="preconnect" href={API_HOST} />
       </Head>
       <FontPreLoader locale={locale} />
-      <ReduxProvider locale={locale}>
-        <ThemeProvider>
-          <IdProvider>
-            <ToastContainerProvider>
-              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
-              <GlobalListeners />
-              <Navbar />
-              <DeveloperUtility />
-              <Component {...pageProps} />
-              <AudioPlayer />
-              <Footer />
-              <DonatePopup />
-            </ToastContainerProvider>
-          </IdProvider>
-        </ThemeProvider>
-        <SessionIncrementor />
-      </ReduxProvider>
+      <DirectionProvider dir={getDir(locale)}>
+        <TooltipProvider>
+          <ToastContainerProvider>
+            <DataContext.Provider value={pageProps.chaptersData}>
+              <AudioPlayerMachineProvider>
+                <ReduxProvider locale={locale}>
+                  <ThemeProvider>
+                    <UserAccountModal
+                      requiredFields={userData?.requiredFields}
+                      announcement={userData?.announcement}
+                    />
+                    <DefaultSeo
+                      {...createSEOConfig({ locale, description: t('default-description') })}
+                    />
+                    <GlobalListeners />
+                    <Navbar />
+                    <DeveloperUtility />
+                    <Component {...pageProps} />
+                    <AudioPlayer />
+                    <Footer />
+                    <DonatePopup />
+                  </ThemeProvider>
+                  <SessionIncrementor />
+                </ReduxProvider>
+              </AudioPlayerMachineProvider>
+            </DataContext.Provider>
+          </ToastContainerProvider>
+        </TooltipProvider>
+      </DirectionProvider>
 
       <ThirdPartyScripts />
     </>

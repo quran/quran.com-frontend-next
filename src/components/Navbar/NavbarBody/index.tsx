@@ -13,6 +13,7 @@ import SearchDrawer from '../SearchDrawer/SearchDrawer';
 import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
 import styles from './NavbarBody.module.scss';
+import ProfileAvatarButton from './ProfileAvatarButton';
 
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
@@ -71,6 +72,7 @@ const NavbarBody: React.FC = () => {
       <div className={styles.centerVertically}>
         <div className={styles.rightCTA}>
           <>
+            <ProfileAvatarButton />
             <LanguageSelector />
             <Button
               tooltip={t('settings.title')}

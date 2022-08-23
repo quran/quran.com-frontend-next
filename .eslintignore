@@ -1,5 +1,6 @@
 build
 storybook-static
+*.typegen.ts
 
 # Service Worker Artifacts
 public/workbox-*.js

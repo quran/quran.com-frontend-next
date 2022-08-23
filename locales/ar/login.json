@@ -1,0 +1,15 @@
+{
+    "awaiting-confirmation": "بانتظار التأكيد",
+    "continue-apple": "ادخل عبر أبل",
+    "continue-email": "ادخل عبر البريد الإلكتروني",
+    "continue-facebook": "ادخل عبر فيسبوك",
+    "continue-google": "ادخل عبر جوجل",
+    "email-placeholder": "عنوان البريد الإلكتروني",
+    "login-error": {
+        "AuthenticationError": "المصادقة فشلت. الرجاء معاودة المحاولة في وقت لاحق",
+        "TokenExpiredError": "لقد تم تسجيل خروجك، يرجى تسجيل الدخول مرة أخرى."
+    },
+    "login-title": "تسجيل الدخول إلى موقع قرآن دوت كوم",
+    "other-options": "خيارات تسجيل الدخول الأخرى",
+    "verify-code": "تحقق من أن رمز الحماية المقدم يطابق النص التالي:"
+}

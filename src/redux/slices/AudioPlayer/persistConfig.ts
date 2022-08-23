@@ -1,10 +1,12 @@
-import sessionStorage from 'redux-persist/lib/storage/session';
+import storage from 'redux-persist/lib/storage';
+
+import SliceName from 'src/redux/types/SliceName';
 
 const audioPlayerPersistConfig = {
-  key: 'audioPlayerState',
-  storage: sessionStorage,
+  key: SliceName.AUDIO_PLAYER_STATE,
+  storage,
   version: 3,
-  blacklist: ['isPlaying', 'isDownloadingAudio', 'isRadioMode'],
+  blacklist: ['isDownloadingAudio'],
 };
 
 export default audioPlayerPersistConfig;

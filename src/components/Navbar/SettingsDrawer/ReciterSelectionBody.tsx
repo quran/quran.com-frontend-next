@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import { useSelector } from '@xstate/react';
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import IconSearch from '../../../../public/icons/search.svg';
 
@@ -12,10 +12,13 @@ import styles from './ReciterSelectionBody.module.scss';
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
-import { selectReciter, setReciterAndPauseAudio } from 'src/redux/slices/AudioPlayer/state';
+import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 import Reciter from 'types/Reciter';
 
@@ -36,33 +39,48 @@ const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SettingsReciter = () => {
   const { lang, t } = useTranslation('common');
-  const dispatch = useDispatch();
+  const {
+    isLoading,
+    actions: { onXstateSettingsChange },
+  } = usePersistPreferenceGroup();
   const router = useRouter();
-  const selectedReciter = useSelector(selectReciter, shallowEqual);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const audioService = useContext(AudioPlayerMachineContext);
+  const selectedReciterId = useSelector(audioService, (state) => state.context.reciterId);
+
   // given the reciterId, get the full reciter object.
-  // and setReciter in redux
   const onSelectedReciterChange = (reciterId: string, reciters: Reciter[]) => {
     if (!reciterId) return;
     const reciter = reciters.find((r) => r.id === Number(reciterId));
     logItemSelectionChange('selected_reciter', reciter.id);
     router.query[QueryParam.Reciter] = String(reciter.id);
     router.push(router, undefined, { shallow: true });
-    dispatch(setReciterAndPauseAudio({ reciter, locale: lang }));
+
+    const previousReciterId = selectedReciterId;
+    onXstateSettingsChange(
+      'reciter',
+      reciter.id,
+      () => audioService.send({ type: 'CHANGE_RECITER', reciterId: Number(reciterId) }),
+      () => audioService.send({ type: 'CHANGE_RECITER', reciterId: previousReciterId }),
+      PreferenceGroup.AUDIO,
+    );
   };
 
   return (
     <div>
       <div className={styles.searchInputContainer}>
-        <Input
-          prefix={<IconSearch />}
-          id="translations-search"
-          value={searchQuery}
-          onChange={setSearchQuery}
-          placeholder={t('settings.search-reciter')}
-          fixedWidth={false}
-        />
+        <SpinnerContainer isLoading={isLoading}>
+          <Input
+            prefix={<IconSearch />}
+            id="translations-search"
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder={t('settings.search-reciter')}
+            fixedWidth={false}
+            containerClassName={styles.input}
+          />
+        </SpinnerContainer>
       </div>
       <DataFetcher
         queryKey={makeAvailableRecitersUrl(lang)}
@@ -75,11 +93,11 @@ const SettingsReciter = () => {
             <RadioGroup.Root
               label="reciter"
               orientation={RadioGroupOrientation.Vertical}
-              value={selectedReciter.id.toString()}
+              value={selectedReciterId.toString()}
               onChange={(newId) => onSelectedReciterChange(newId, data.reciters)}
             >
               {filteredReciters
-                .sort((a, b) => (a.name > b.name ? 1 : -1))
+                .sort((a, b) => (a.name + a.id > b.name + b.id ? 1 : -1))
                 .map((reciter) => {
                   const reciterId = reciter.id.toString();
                   return (

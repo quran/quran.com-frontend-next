@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from 'src/redux/RootState';
+import SliceName from 'src/redux/types/SliceName';
 
 export type IsSidebarNavigationVisible = boolean | 'auto';
 export type SidebarNavigation = {
@@ -21,7 +22,7 @@ const initialState: SidebarNavigation = {
 };
 
 export const sidebarNavigationSlice = createSlice({
-  name: 'sidebarNavigation',
+  name: SliceName.SIDEBAR_NAVIGATION,
   initialState,
   reducers: {
     setIsVisible: (state: SidebarNavigation, action: PayloadAction<boolean>) => ({

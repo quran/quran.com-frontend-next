@@ -24,6 +24,7 @@ type LinkProps = {
   isShallow?: boolean;
   shouldPrefetch?: boolean;
   title?: string;
+  children?: React.ReactNode;
 };
 
 const Link: React.FC<LinkProps> = ({

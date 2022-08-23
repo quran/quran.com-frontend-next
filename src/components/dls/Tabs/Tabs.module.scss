@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  border-bottom: 1px solid var(--color-borders-hairline);
+  border-block-end: 1px solid var(--color-borders-hairline);
 }
 
 .tabItem {
@@ -16,5 +16,5 @@
 }
 
 .tabItemSelected {
-  border-bottom: 2px solid var(--color-text-default);
+  border-block-end: 2px solid var(--color-text-default);
 }

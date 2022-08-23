@@ -17,6 +17,7 @@ import Word from 'types/Word';
 
 type Props = {
   word: Word;
+  children: React.ReactNode;
 };
 
 const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
@@ -76,11 +77,10 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       }
       tip
       isModal
-      portalled
-      contentStyles={styles.content}
       open={isTooltipOpened}
       onOpenChange={onOpenChange}
       triggerStyles={styles.trigger}
+      contentStyles={styles.content}
       defaultStyling={false}
     >
       <ReadingViewWordActionsMenu word={word} onActionTriggered={onActionTriggered} />

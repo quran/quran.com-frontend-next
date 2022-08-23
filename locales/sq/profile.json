@@ -1,0 +1,10 @@
+{
+    "delete-account": "Fshij llogarine",
+    "delete-confirmation": {
+        "action-text": "E kuptoj pasojat, fshi llogarinë time",
+        "confirmation-text": "fshini llogarinë time",
+        "instruction-text": "Ju lutemi shkruani <strong> {{text}} <\/strong> për ta konfirmuar",
+        "subtitle": "Ky veprim nuk mund të zhbëhet. Kjo do të fshijë përgjithmonë llogarinë tuaj, faqeshënuesit e ruajtur, seancat e leximit dhe të gjitha të dhënat tuaja.",
+        "title": "Jeni absolutisht i sigurt?"
+    }
+}

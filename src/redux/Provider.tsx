@@ -1,10 +1,18 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 
+import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
+
+import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
+import { getUserPreferences } from 'src/utils/auth/api';
+import { isLoggedIn } from 'src/utils/auth/login';
+import { setLocaleCookie } from 'src/utils/cookies';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 /**
  * A wrapper around the Provider component to skip rendering <PersistGate />
@@ -18,6 +26,7 @@ import getStore from './store';
 const ReduxProvider = ({ children, locale }) => {
   const store = useMemo(() => getStore(locale), [locale]);
   const persistor = useMemo(() => persistStore(store), [store]);
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const isClient = !!(
     typeof window !== 'undefined' &&
@@ -25,10 +34,36 @@ const ReduxProvider = ({ children, locale }) => {
     window.document.createElement
   );
 
+  /**
+   * Before the Gate lifts, we want to get the user preferences
+   * then store in Redux so that they can be used.
+   */
+  const onBeforeLift = async () => {
+    if (isClient && isLoggedIn()) {
+      try {
+        const userPreferences = await getUserPreferences();
+        const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
+        if (remoteLocale) {
+          await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
+          setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
+        }
+        store.dispatch(syncUserPreferences(userPreferences, locale));
+        const playbackRate =
+          userPreferences[PreferenceGroup.AUDIO]?.playbackRate ||
+          audioService.getSnapshot().context.playbackRate;
+        const reciterId =
+          userPreferences[PreferenceGroup.AUDIO]?.reciter ||
+          audioService.getSnapshot().context.reciterId;
+        audioService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId });
+        // eslint-disable-next-line no-empty
+      } catch (error) {}
+    }
+  };
+
   if (isClient) {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
           {children}
         </PersistGate>
       </Provider>

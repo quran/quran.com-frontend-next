@@ -37,7 +37,7 @@ const Index: NextPage<IndexProps> = ({
       </Head>
       <DataContext.Provider value={chaptersData}>
         <NextSeoWrapper
-          title={t('noble-quran')}
+          title={t('home:noble-quran')}
           url={getCanonicalUrl(lang, '')}
           languageAlternates={getLanguageAlternates('')}
         />
