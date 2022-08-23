@@ -4,6 +4,8 @@
 }
 
 .content {
+  z-index: var(--z-index-sticky);
+  font-size: var(--font-size-normal);
   border-radius: var(--border-radius-default);
   padding-block-start: var(--spacing-xxsmall);
   padding-block-end: var(--spacing-xxsmall);

@@ -13,9 +13,15 @@ import {
   makeFacebookLoginUrl,
   makeAppleLoginUrl,
 } from 'src/utils/auth/apiPaths';
+import { logButtonClick } from 'src/utils/eventLogger';
+import AuthType from 'types/auth/AuthType';
 
 const SocialLogin = () => {
   const { t } = useTranslation('login');
+  const logSocialLoginClick = (type: AuthType) => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${type}_login`);
+  };
   return (
     <>
       {process.env.NEXT_PUBLIC_ENABLE_GOOGLE_LOGIN === 'true' && (
@@ -23,6 +29,10 @@ const SocialLogin = () => {
           prefix={<GoogleIcon />}
           className={classNames(styles.loginButton, styles.googleButton)}
           href={makeGoogleLoginUrl()}
+          shouldFlipOnRTL={false}
+          onClick={() => {
+            logSocialLoginClick(AuthType.Google);
+          }}
         >
           {t('continue-google')}
         </Button>
@@ -32,12 +42,24 @@ const SocialLogin = () => {
           prefix={<FacebookIcon />}
           className={classNames(styles.loginButton, styles.facebookButton)}
           href={makeFacebookLoginUrl()}
+          shouldFlipOnRTL={false}
+          onClick={() => {
+            logSocialLoginClick(AuthType.Facebook);
+          }}
         >
           {t('continue-facebook')}
         </Button>
       )}
       {process.env.NEXT_PUBLIC_ENABLE_APPLE_LOGIN === 'true' && (
-        <Button href={makeAppleLoginUrl()} prefix={<AppleIcon />} className={styles.loginButton}>
+        <Button
+          href={makeAppleLoginUrl()}
+          prefix={<AppleIcon />}
+          className={styles.loginButton}
+          shouldFlipOnRTL={false}
+          onClick={() => {
+            logSocialLoginClick(AuthType.Apple);
+          }}
+        >
           {t('continue-apple')}
         </Button>
       )}

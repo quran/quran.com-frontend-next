@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
 
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
 import PersonIcon from '../../../public/icons/person.svg';
@@ -13,8 +13,8 @@ import DownloadAudioButton from './Buttons/DownloadAudioButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
-import { selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 /**
  * We're using (`1x` `1.25x`) as a replacement for `icon` in popover menu
@@ -38,8 +38,9 @@ const OverflowAudioPlayActionsMenuBody = () => {
   const [selectedMenu, setSelectedMenu] = useState<AudioPlayerOverflowMenu>(
     AudioPlayerOverflowMenu.Main,
   );
+  const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
-  const playbackRate = useSelector(selectPlaybackRate);
+  const playbackRate = useSelector(audioService, (state) => state.context.playbackRate);
 
   const menus = useMemo(
     () => ({

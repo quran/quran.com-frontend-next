@@ -1,18 +1,17 @@
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import curatedStations from './curatedStations';
-import { StationInfo, StationType } from './types';
+import RadioContext from '../actors/radio/types/RadioContext';
 
 import { getReciterData } from 'src/api';
-import { selectRadioStation } from 'src/redux/slices/radio';
+import curatedStations from 'src/components/Radio/curatedStations';
+import { StationInfo, StationType } from 'src/components/Radio/types';
 import { makeReciterUrl } from 'src/utils/apiPaths';
 
-const useCurrentStationInfo = (): StationInfo => {
+const useCurrentStationInfo = (context: RadioContext): StationInfo => {
   const { t, lang } = useTranslation('radio');
 
-  const stationState = useSelector(selectRadioStation);
+  const stationState = context;
 
   const { data: reciterData } = useSWRImmutable(
     stationState.type === StationType.Reciter ? makeReciterUrl(stationState.id, lang) : null,

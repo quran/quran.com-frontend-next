@@ -38,11 +38,9 @@ const SearchResults: React.FC<Props> = ({
         {!!searchResult.result.navigation?.length && (
           <div className={styles.navigationItemsListContainer}>
             {searchResult.result.navigation.map((navigationResult) => (
-              <NavigationItem
-                isSearchDrawer={isSearchDrawer}
-                key={navigationResult.key}
-                navigation={navigationResult}
-              />
+              <span className={styles.navigationItemContainer} key={navigationResult.key}>
+                <NavigationItem isSearchDrawer={isSearchDrawer} navigation={navigationResult} />
+              </span>
             ))}
           </div>
         )}

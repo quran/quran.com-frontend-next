@@ -27,7 +27,7 @@ const PrivacyPage: NextPage = (): JSX.Element => {
           <h1>{t('header')}</h1>
           <p>
             <Trans
-              i18nKey="privacy:main-desc"
+              i18nKey="privacy:main-privacy-desc"
               components={[<a key={0} href="salah.com" target="_blank" />]}
             />
           </p>
@@ -45,7 +45,7 @@ const PrivacyPage: NextPage = (): JSX.Element => {
             />
           </p>
           <p>
-            <Trans i18nKey="privacy:footer" />
+            <Trans i18nKey="privacy:privacy-footer" />
           </p>
         </div>
       </PageContainer>

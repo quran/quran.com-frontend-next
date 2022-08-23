@@ -5,45 +5,38 @@ import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import { RootState } from 'src/redux/RootState';
-import { selectReciterId } from 'src/redux/slices/AudioPlayer/state';
 import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import {
-  isValidReciterId,
-  isValidTranslationsQueryParamValue,
-} from 'src/utils/queryParamValidator';
+  equalityCheckerByType,
+  getQueryParamValueByType,
+  QueryParamValueType,
+} from 'src/utils/query-params';
+import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
 import QueryParam from 'types/QueryParam';
-
-enum ValueType {
-  String = 'String',
-  Number = 'Number',
-  ArrayOfNumbers = 'ArrayOfNumbers',
-  ArrayOfStrings = 'ArrayOfStrings',
-}
 
 const QUERY_PARAMS_DATA = {
   [QueryParam.Translations]: {
     reduxSelector: selectSelectedTranslations,
     reduxEqualityFunction: areArraysEqual,
-    valueType: ValueType.ArrayOfNumbers,
-  },
-  [QueryParam.Reciter]: {
-    reduxSelector: selectReciterId,
-    reduxEqualityFunction: shallowEqual,
-    valueType: ValueType.Number,
+    valueType: QueryParamValueType.ArrayOfNumbers,
+    validate: (val) => isValidTranslationsQueryParamValue(val),
   },
   [QueryParam.WBW_LOCALE]: {
     reduxSelector: selectWordByWordLocale,
     reduxEqualityFunction: shallowEqual,
-    valueType: ValueType.String,
+    valueType: QueryParamValueType.String,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    validate: (val) => true,
   },
 } as Record<
   QueryParam,
   {
     reduxSelector: (state: RootState) => any;
-    valueType: ValueType;
+    valueType: QueryParamValueType;
     reduxEqualityFunction?: (left: any, right: any) => boolean;
+    validate: (val: any) => boolean;
   }
 >;
 
@@ -77,34 +70,23 @@ const useGetQueryParamOrReduxValue = (
   useEffect(() => {
     // if the param exists in the url
     if (isReady && query[queryParam]) {
+      const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
+
       const paramStringValue = String(query[queryParam]);
-      let isValidValue = true;
-      if (queryParam === QueryParam.Translations) {
-        isValidValue = isValidTranslationsQueryParamValue(paramStringValue);
-      } else if (queryParam === QueryParam.Reciter) {
-        isValidValue = isValidReciterId(paramStringValue);
+      const isValidValue = validate(paramStringValue);
+      if (!isValidValue) {
+        setValueDetails({ isQueryParamDifferent: false, value: selectedValue });
+        return;
       }
-      if (isValidValue) {
-        let queryParamValue;
-        let isQueryParamDifferent = true;
-        // return an array of numbers instead of a string
-        if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.ArrayOfNumbers) {
-          queryParamValue = paramStringValue.split(',').map((stringValue) => Number(stringValue));
-          isQueryParamDifferent = !areArraysEqual(queryParamValue, selectedValue);
-        } else if (QUERY_PARAMS_DATA[queryParam].valueType === ValueType.Number) {
-          queryParamValue = Number(query[queryParam]);
-          isQueryParamDifferent = queryParamValue !== selectedValue;
-        } else {
-          queryParamValue = query[queryParam];
-          isQueryParamDifferent = queryParamValue !== selectedValue;
-        }
-        setValueDetails({
-          value: queryParamValue,
-          isQueryParamDifferent,
-        });
-      }
-    } else {
-      setValueDetails({ isQueryParamDifferent: false, value: selectedValue });
+
+      const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
+      const checkEquality = equalityCheckerByType[valueType];
+      const isQueryParamDifferent = checkEquality(parsedQueryParamValue, selectedValue);
+
+      setValueDetails({
+        value: parsedQueryParamValue,
+        isQueryParamDifferent,
+      });
     }
   }, [isReady, query, queryParam, selectedValue]);
   return valueDetails;

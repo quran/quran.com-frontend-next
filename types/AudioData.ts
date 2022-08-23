@@ -8,6 +8,7 @@ interface AudioData {
   audioUrl: string;
   duration: number;
   verseTimings?: VerseTiming[];
+  reciterId: number;
 }
 
 export default AudioData;

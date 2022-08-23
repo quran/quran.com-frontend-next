@@ -81,7 +81,7 @@
   width: 100%;
   position: fixed;
   height: var(--navbar-container-height);
-  border-bottom: 1px var(--color-borders-hairline) solid;
+  border-block-end: 1px var(--color-borders-hairline) solid;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -110,7 +110,7 @@
 }
 
 .hiddenButtonHeader {
-  border-bottom: 0;
+  border-block-end: 0;
 }
 
 .hiddenButtonHeaderContentContainer {

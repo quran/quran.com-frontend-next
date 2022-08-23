@@ -1,3 +1,6 @@
+/* eslint-disable react-func/max-lines-per-function */
+import { useContext } from 'react';
+
 import { unwrapResult } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -8,9 +11,11 @@ import styles from './ResetButton.module.scss';
 import Button from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import resetSettings from 'src/redux/actions/reset-settings';
+import { DEFAULT_XSTATE_INITIAL_STATE } from 'src/redux/defaultSettings/defaultSettings';
 import { persistDefaultSettings } from 'src/redux/slices/defaultSettings';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
 // reset button will dispatch a `reset` action
@@ -21,6 +26,7 @@ const ResetButton = () => {
   const router = useRouter();
   const { t, lang } = useTranslation('common');
   const toast = useToast();
+  const audioService = useContext(AudioPlayerMachineContext);
 
   const onResetSettingsClicked = () => {
     logButtonClick('reset_settings');
@@ -30,12 +36,20 @@ const ResetButton = () => {
         .then(unwrapResult)
         .then(() => {
           dispatch(resetSettings(lang));
+          audioService.send({
+            type: 'SET_INITIAL_CONTEXT',
+            ...DEFAULT_XSTATE_INITIAL_STATE,
+          });
         })
         .catch(() => {
           // TODO: show an error
         });
     } else {
       dispatch(resetSettings(lang));
+      audioService.send({
+        type: 'SET_INITIAL_CONTEXT',
+        ...DEFAULT_XSTATE_INITIAL_STATE,
+      });
     }
     let usingQueryParam = false;
     if (router.query[QueryParam.Translations]) {
