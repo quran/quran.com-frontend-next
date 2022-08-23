@@ -84,6 +84,7 @@ export const sendMagicLink = async (email) => {
   const response = await fetch(makeSendMagicLinkUrl(), {
     method: 'post',
     headers: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     },
     body: new URLSearchParams({

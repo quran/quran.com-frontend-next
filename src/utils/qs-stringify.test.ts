@@ -58,6 +58,7 @@ it('should stringify it when if the value need to encoded', () => {
 
 it('should stringify it when if the key and value need to encoded', () => {
   const str = 'test%3D=test%20%26*%20test';
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   expect(stringify({ 'test=': 'test &* test' })).toBe(str);
 });
 
@@ -88,5 +89,6 @@ it('can stringify deep nested value', () => {
 
 it('can stringify deep nested encoded value', () => {
   const str = 'foo[%25aw][%25aw]=baz';
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   expect(stringify({ foo: { '%aw': { '%aw': 'baz' } } })).toBe(str);
 });

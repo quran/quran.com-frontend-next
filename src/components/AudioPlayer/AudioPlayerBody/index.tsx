@@ -1,79 +1,38 @@
-import React, { MutableRefObject } from 'react';
+import React, { useContext } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useSelector } from '@xstate/react';
 
 import AudioKeyBoardListeners from '../AudioKeyboardListeners';
 import AudioPlayerSlider from '../AudioPlayerSlider';
-import AudioRepeatManager from '../AudioRepeatManager/AudioRepeatManager';
-import { togglePlaying, triggerPauseAudio, triggerPlayAudio, triggerSeek } from '../EventTriggers';
-import MediaSessionApiListeners from '../MediaSessionApiListeners';
 import PlaybackControls from '../PlaybackControls';
-import QuranReaderHighlightDispatcher from '../QuranReaderHighlightDispatcher';
 import RadioPlaybackControl from '../RadioPlaybackControl';
 
 import styles from './AudioPlayerBody.module.scss';
 
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import { selectIsInRepeatMode, selectIsRadioMode } from 'src/redux/slices/AudioPlayer/state';
-import AudioData from 'types/AudioData';
-import QueryParam from 'types/QueryParam';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-interface Props {
-  audioPlayerElRef: MutableRefObject<HTMLAudioElement>;
-  audioData: AudioData;
-}
-
-const AudioPlayerBody: React.FC<Props> = ({ audioPlayerElRef, audioData }) => {
-  const { lang } = useTranslation();
-  const isRadioMode = useSelector(selectIsRadioMode);
-  const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
-  const isQuranReaderHighlightDispatcherEnabled = !isRadioMode && reciterId && audioData?.chapterId;
-  const isAudioRepeatManagerEnabled =
-    isInRepeatMode && !isRadioMode && reciterId && audioData?.chapterId;
+const AudioPlayerBody = () => {
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
 
   return (
     <>
       <div className={styles.innerContainer}>
         <AudioKeyBoardListeners
-          seek={(seekDuration) => {
-            triggerSeek(seekDuration);
-          }}
-          togglePlaying={() => togglePlaying()}
+          togglePlaying={() => audioService.send('TOGGLE')}
           isAudioPlayerHidden={false}
-        />
-        {isQuranReaderHighlightDispatcherEnabled && (
-          <QuranReaderHighlightDispatcher
-            audioPlayerElRef={audioPlayerElRef}
-            reciterId={reciterId}
-            chapterId={audioData?.chapterId}
-          />
-        )}
-        {isAudioRepeatManagerEnabled && (
-          <AudioRepeatManager
-            audioPlayerElRef={audioPlayerElRef}
-            reciterId={reciterId}
-            chapterId={audioData?.chapterId}
-          />
-        )}
-        <MediaSessionApiListeners
-          play={triggerPlayAudio}
-          pause={triggerPauseAudio}
-          seek={(seekDuration) => {
-            triggerSeek(seekDuration);
-          }}
-          playNextTrack={null}
-          playPreviousTrack={null}
-          locale={lang}
         />
         {!isRadioMode && (
           <div className={styles.sliderContainer}>
-            <AudioPlayerSlider audioPlayerElRef={audioPlayerElRef} />
+            <AudioPlayerSlider />
           </div>
         )}
       </div>
-      {isRadioMode ? <RadioPlaybackControl /> : <PlaybackControls />}
+      {isRadioMode ? (
+        <RadioPlaybackControl radioActor={audioService.getSnapshot().context.radioActor} />
+      ) : (
+        <PlaybackControls />
+      )}
     </>
   );
 };

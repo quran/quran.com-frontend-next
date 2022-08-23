@@ -14,6 +14,7 @@ import TranslationPage from './TranslationPage';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { getNumberOfPages } from 'src/components/QuranReader/utils/page';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import useGetQueryParamOrXstateValue from 'src/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from 'src/hooks/useQcfFont';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
@@ -47,7 +48,7 @@ const TranslationView = ({
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
-  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
     QueryParam.Reciter,
   );
   const {

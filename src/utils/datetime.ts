@@ -23,6 +23,14 @@ export const secondsFormatter = (seconds: number, locale: string) => {
 export const milliSecondsToSeconds = (milliSeconds: number): number => milliSeconds / 1000;
 
 /**
+ * Convert milliseconds to seconds.
+ *
+ * @param {number} seconds
+ * @returns  {number}
+ */
+export const secondsToMilliSeconds = (seconds: number): number => seconds * 1000;
+
+/**
  * Get the earliest date of a groups of date string.
  *
  * @param {string[]} dates

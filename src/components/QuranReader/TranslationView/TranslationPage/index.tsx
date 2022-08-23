@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
-import React, { useEffect, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -13,7 +14,6 @@ import { getTranslationViewRequestKey, verseFetcher } from 'src/components/Quran
 import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
 import TranslationViewSkeleton from 'src/components/QuranReader/TranslationView/TranslationViewSkeleton';
 import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
-import { selectIsUsingDefaultReciter } from 'src/redux/slices/AudioPlayer/state';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
@@ -24,6 +24,8 @@ import { getPageBookmarks } from 'src/utils/auth/api';
 import { makeBookmarksRangeUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Translation from 'types/Translation';
@@ -61,7 +63,11 @@ const TranslationPage: React.FC<Props> = ({
     [router.query.translations],
   );
 
-  const isUsingDefaultReciter = useSelector(selectIsUsingDefaultReciter);
+  const audioService = useContext(AudioPlayerMachineContext);
+
+  const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
+    selectIsUsingDefaultReciter(state),
+  );
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);

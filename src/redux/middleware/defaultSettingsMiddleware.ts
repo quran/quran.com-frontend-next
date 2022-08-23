@@ -28,8 +28,6 @@ const OBSERVED_ACTIONS = [
   `${SliceName.QURAN_READER_STYLES}/decreaseTafsirFontScale`,
   `${SliceName.TAFSIRS}/setSelectedTafsirs`,
   `${SliceName.AUDIO_PLAYER_STATE}/setEnableAutoScrolling`,
-  `${SliceName.AUDIO_PLAYER_STATE}/setPlaybackRate`,
-  `${SliceName.AUDIO_PLAYER_STATE}/setReciter`,
 ];
 
 /**
