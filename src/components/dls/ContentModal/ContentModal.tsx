@@ -68,18 +68,16 @@ const ContentModal = ({
    */
   const onPointerDownOutside = (e: any) => {
     const currentTarget = e.currentTarget as HTMLElement;
-    // since the scroll bar will be flipped on RTL locales, we just need to check the offset X
-    if (isRTLLocale(locale)) {
-      if (e.detail.originalEvent.offsetX < SCROLLBAR_WIDTH) {
-        e.preventDefault();
-      } else {
-        onClose();
-      }
-    } else if (e.detail.originalEvent.offsetX > currentTarget.clientWidth - SCROLLBAR_WIDTH) {
+
+    const shouldPreventOnClose = isRTLLocale(locale)
+      ? e.detail.originalEvent.offsetX < SCROLLBAR_WIDTH // left side of the screen clicked
+      : e.detail.originalEvent.offsetX > currentTarget.clientWidth - SCROLLBAR_WIDTH; // right side of the screen clicked
+
+    if (shouldPreventOnClose) {
       e.preventDefault();
-    } else {
-      onClose();
+      return;
     }
+    onClose();
   };
 
   return (
