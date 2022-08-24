@@ -1,33 +1,27 @@
-import { useState } from 'react';
+/* eslint-disable react/no-multi-comp */
+import { useContext, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from '@xstate/react';
 
 import RepeatIcon from '../../../public/icons/repeat.svg';
 
+import RemainingRangeCount from './RemainingRangeCount';
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
 import Badge from 'src/components/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import {
-  selectIsInRepeatMode,
-  selectRemainingRangeRepeatCount,
-  selectAudioData,
-} from 'src/redux/slices/AudioPlayer/state';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const RepeatAudioButton = () => {
-  const { lang } = useTranslation('common');
+const RepeatAudioButton = ({ isLoading }) => {
+  const audioService = useContext(AudioPlayerMachineContext);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const audioData = useSelector(selectAudioData, shallowEqual);
-  const isInRepeatMode = useSelector(selectIsInRepeatMode);
-  const remainingRangeRepeatCount = toLocalizedNumber(
-    useSelector(selectRemainingRangeRepeatCount),
-    lang,
-  );
+  const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
+  const isInRepeatMode = !!repeatActor;
 
   const onButtonClicked = () => {
     logButtonClick('audio_player_repeat');
@@ -36,10 +30,10 @@ const RepeatAudioButton = () => {
 
   return (
     <>
-      {audioData && (
+      {!isLoading && (
         <RepeatAudioModal
           defaultRepetitionMode={RepetitionMode.Range}
-          chapterId={audioData?.chapterId.toString()}
+          chapterId={currentSurah.toString()}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
         />
@@ -47,13 +41,25 @@ const RepeatAudioButton = () => {
 
       <Wrapper
         shouldWrap={isInRepeatMode}
-        wrapper={(children) => <Badge content={remainingRangeRepeatCount}>{children}</Badge>}
+        wrapper={(children) => (
+          <Badge
+            content={
+              isInRepeatMode && (
+                <RemainingRangeCount
+                  rangeActor={repeatActor.getSnapshot().context.rangeCycleActor}
+                />
+              )
+            }
+          >
+            {children}
+          </Badge>
+        )}
       >
         <Button
-          isDisabled={!audioData}
           variant={ButtonVariant.Ghost}
           shape={ButtonShape.Circle}
           onClick={onButtonClicked}
+          isDisabled={isLoading}
         >
           <RepeatIcon />
         </Button>

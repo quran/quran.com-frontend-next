@@ -1,12 +1,12 @@
 /* eslint-disable max-lines */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
+import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import CopyIcon from '../../../../public/icons/copy.svg';
 import DownloadIcon from '../../../../public/icons/download.svg';
@@ -19,13 +19,11 @@ import styles from './chapterId.module.scss';
 
 import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
-import { triggerPauseAudio } from 'src/components/AudioPlayer/EventTriggers';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import DataContext from 'src/contexts/DataContext';
-import { playFrom, selectAudioData, selectIsPlaying } from 'src/redux/slices/AudioPlayer/state';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -36,6 +34,8 @@ import {
 } from 'src/utils/navigation';
 import { getCurrentPath } from 'src/utils/url';
 import { isValidChapterId } from 'src/utils/validator';
+import { selectCurrentAudioReciterId } from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
@@ -51,21 +51,28 @@ const RecitationPage = ({
   chaptersData,
 }: ShareRecitationPageProps) => {
   const { t, lang } = useTranslation();
-  const dispatch = useDispatch();
   const toast = useToast();
   const router = useRouter();
   const [isDownloadingAudio, setIsDownloadingAudio] = useState(false);
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const currentAudioData = useSelector(selectAudioData, shallowEqual);
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const currentSurah = useSelector(audioService, (state) => state.context.surah);
+  const currentReciterId = useSelector(audioService, selectCurrentAudioReciterId);
+
+  const isCurrentlyPlayingThisChapter =
+    isAudioPlaying &&
+    currentSurah === Number(selectedChapter.id) &&
+    currentReciterId === selectedReciter.id;
 
   const onPlayAudioClicked = () => {
-    dispatch(
-      playFrom({
-        chapterId: Number(selectedChapter.id),
-        reciterId: selectedReciter.id,
-        timestamp: 0,
-      }),
-    );
+    audioService.send({
+      type: 'PLAY_SURAH',
+      surah: Number(selectedChapter.id),
+      reciterId: selectedReciter.id,
+    });
   };
 
   const onCopyLinkClicked = () => {
@@ -96,9 +103,6 @@ const RecitationPage = ({
     });
   };
 
-  const isCurrentlyPlayingThisChapter =
-    isAudioPlaying && currentAudioData.chapterId === Number(selectedChapter.id);
-
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -128,7 +132,7 @@ const RecitationPage = ({
           <div className={styles.actionsContainer}>
             {isCurrentlyPlayingThisChapter ? (
               <Button
-                onClick={() => triggerPauseAudio()}
+                onClick={() => audioService.send('TOGGLE')}
                 prefix={<PauseIcon />}
                 className={styles.playButton}
               >

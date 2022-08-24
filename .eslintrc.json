@@ -186,7 +186,7 @@
                 {
                     "selector": "memberLike",
                     "filter": {
-                        "regex": "^__",
+                        "regex": "^__|^\\d+",
                         "match": false
                     },
                     "format": [

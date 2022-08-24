@@ -58,6 +58,7 @@ export const OFFLINE_ERROR = 'OFFLINE';
 
 export const KALIMAT_FETCH_OPTIONS = {
   headers: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'x-api-key': '8ef623eb-fd15-420c-9b5a-1738dc60a54d',
   },
 };
@@ -149,7 +150,10 @@ export const getChapterAudioData = async (
     throw new Error('No audio file found');
   }
 
-  return firstAudio;
+  return {
+    ...firstAudio,
+    reciterId,
+  };
 };
 
 /**

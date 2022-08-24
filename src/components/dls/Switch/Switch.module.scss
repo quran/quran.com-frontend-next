@@ -42,7 +42,7 @@ $separatorOpacity: 0.2;
     transform: translateY(75%);
     width: 1px;
     height: 40%;
-    border-left: 1px solid var(--color-text-default);
+    border-inline-start: 1px solid var(--color-text-default);
     opacity: $separatorOpacity;
   }
 }

@@ -1,6 +1,6 @@
 export type AudioTrack = {
   reciterId: string;
-  chapterId: string;
+  surah: string;
 };
 
 export enum StationType {

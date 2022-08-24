@@ -54,3 +54,5 @@ export const makeUserPreferencesUrl = () => makeUrl('preferences');
 export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');
 
 export const makeLogoutUrl = () => makeUrl('auth/logout');
+
+export const makeRefreshTokenUrl = () => makeUrl('tokens/refreshToken');

@@ -1,4 +1,4 @@
-import { fetcher, getAvailableReciters } from 'src/api';
+import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -13,9 +13,11 @@ import {
   makeLogoutUrl,
   makeCompleteAnnouncementUrl,
   makeSyncLocalDataUrl,
+  makeRefreshTokenUrl,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+import RefreshToken from 'types/auth/RefreshToken';
 import SyncDataType from 'types/auth/SyncDataType';
 import SyncUserLocalDataResponse from 'types/auth/SyncUserLocalDataResponse';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
@@ -26,48 +28,9 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
-type ErrorContext = {
-  status: number;
-  body: any;
-};
-
-/**
- * If the response is 401 (unauthorized)
- * redirect to login page and show the error message
- */
-const handle401Error = async (context: ErrorContext, next) => {
-  const { body, status } = context;
-  if (status !== 401) {
-    next();
-    return;
-  }
-
-  /**
-   * If this function is called on client side, and the error has a `message`
-   * redirect to login page and show the error message.
-   *
-   * But, if user is already on the login page, and showing the error. Do nothing
-   */
-  if (typeof window !== 'undefined' && body.message) {
-    const urlToRedirect = `/login?error=${body.message}`;
-    if (window.location.href.endsWith(urlToRedirect)) {
-      next();
-      return;
-    }
-
-    window.location.href = urlToRedirect;
-  }
-};
-
 const handleErrors = async (res) => {
-  const { status } = res;
   const body = await res.json();
-  const context = { status, body };
-
-  // TODO: make it more generic to support multiple middleware and support async
-  await handle401Error(context, () => {
-    throw new Error(body?.message);
-  });
+  throw new Error(body?.message);
 };
 
 export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
@@ -90,6 +53,7 @@ export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit):
 export const postRequest = <T>(url: string, requestData: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'POST',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(requestData),
   });
@@ -105,6 +69,7 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'DELETE',
     ...(requestData && {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData),
     }),
@@ -112,6 +77,9 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
 
 export const getUserProfile = async (): Promise<UserProfile> =>
   privateFetcher(makeUserProfileUrl());
+
+export const refreshToken = async (): Promise<RefreshToken> =>
+  privateFetcher(makeRefreshTokenUrl());
 
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
@@ -156,28 +124,10 @@ export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
-export const getUserPreferences = async (locale: string): Promise<UserPreferencesResponse> => {
+export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
     makeUserPreferencesUrl(),
   )) as UserPreferencesResponse;
-  // if the audio Preferences are saved in the DB
-  if (userPreferences[PreferenceGroup.AUDIO]) {
-    const { reciter: reciterId } = userPreferences[PreferenceGroup.AUDIO];
-    if (reciterId) {
-      // we need to convert the id into reciter data
-      const recitersResponse = await getAvailableReciters(locale);
-      const selectedReciters = recitersResponse.reciters.filter(
-        (reciter) => reciter.id === Number(reciterId),
-      );
-      if (selectedReciters.length) {
-        const [selectedReciter] = selectedReciters;
-        userPreferences[PreferenceGroup.AUDIO] = {
-          ...userPreferences[PreferenceGroup.AUDIO],
-          reciter: selectedReciter,
-        };
-      }
-    }
-  }
   return userPreferences;
 };
 

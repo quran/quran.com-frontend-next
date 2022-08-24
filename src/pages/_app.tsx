@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
-import { IdProvider } from '@radix-ui/react-id';
+import { DirectionProvider } from '@radix-ui/react-direction';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
@@ -18,6 +19,8 @@ import UserAccountModal from 'src/components/Login/UserAccountModal';
 import Navbar from 'src/components/Navbar/Navbar';
 import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
+import DataContext from 'src/contexts/DataContext';
+import useRefreshToken from 'src/hooks/auth/useRefreshToken';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
@@ -28,6 +31,7 @@ import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
 import * as gtag from 'src/utils/gtag';
 import { getDir } from 'src/utils/locale';
 import { createSEOConfig } from 'src/utils/seo';
+import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
@@ -37,6 +41,7 @@ import 'src/styles/variables.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
+  useRefreshToken();
   const { locale } = router;
   const { t } = useTranslation('common');
   const { data: userData } = useSWRImmutable(
@@ -72,27 +77,35 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="preconnect" href={API_HOST} />
       </Head>
       <FontPreLoader locale={locale} />
-      <ReduxProvider locale={locale}>
-        <ThemeProvider>
-          <IdProvider>
-            <ToastContainerProvider>
-              <UserAccountModal
-                requiredFields={userData?.requiredFields}
-                announcement={userData?.announcement}
-              />
-              <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
-              <GlobalListeners />
-              <Navbar />
-              <DeveloperUtility />
-              <Component {...pageProps} />
-              <AudioPlayer />
-              <Footer />
-              <DonatePopup />
-            </ToastContainerProvider>
-          </IdProvider>
-        </ThemeProvider>
-        <SessionIncrementor />
-      </ReduxProvider>
+      <DirectionProvider dir={getDir(locale)}>
+        <TooltipProvider>
+          <ToastContainerProvider>
+            <DataContext.Provider value={pageProps.chaptersData}>
+              <AudioPlayerMachineProvider>
+                <ReduxProvider locale={locale}>
+                  <ThemeProvider>
+                    <UserAccountModal
+                      requiredFields={userData?.requiredFields}
+                      announcement={userData?.announcement}
+                    />
+                    <DefaultSeo
+                      {...createSEOConfig({ locale, description: t('default-description') })}
+                    />
+                    <GlobalListeners />
+                    <Navbar />
+                    <DeveloperUtility />
+                    <Component {...pageProps} />
+                    <AudioPlayer />
+                    <Footer />
+                    <DonatePopup />
+                  </ThemeProvider>
+                  <SessionIncrementor />
+                </ReduxProvider>
+              </AudioPlayerMachineProvider>
+            </DataContext.Provider>
+          </ToastContainerProvider>
+        </TooltipProvider>
+      </DirectionProvider>
 
       <ThirdPartyScripts />
     </>

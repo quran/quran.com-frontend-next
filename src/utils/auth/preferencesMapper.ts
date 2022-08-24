@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable react-func/max-lines-per-function */
+import { DEFAULT_XSTATE_INITIAL_STATE } from 'src/redux/defaultSettings/defaultSettings';
 import AudioState from 'src/redux/types/AudioState';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import ReadingPreferences from 'src/redux/types/ReadingPreferences';
@@ -34,20 +35,13 @@ const getPreferenceGroupValue = (
     return currentSliceValue;
   }
   if (sliceName === SliceName.AUDIO_PLAYER_STATE) {
-    const {
-      playbackRate,
-      reciter,
-      showTooltipWhenPlayingAudio,
-      enableAutoScrolling,
-      repeatSettings,
-    } = currentSliceValue as AudioState;
+    const { showTooltipWhenPlayingAudio, enableAutoScrolling } = currentSliceValue as AudioState;
     // only partially pick those props
     return {
-      playbackRate,
-      reciter: reciter.id,
+      reciter: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
+      playbackRate: DEFAULT_XSTATE_INITIAL_STATE.playbackRate,
       showTooltipWhenPlayingAudio,
       enableAutoScrolling,
-      repeatSettings,
     };
   }
   if (sliceName === SliceName.READING_PREFERENCES) {

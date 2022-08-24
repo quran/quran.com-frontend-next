@@ -20,6 +20,7 @@ import clipboardCopy from 'clipboard-copy';
 const copyText = async (textBlobPromise: Promise<Blob>) => {
   try {
     // Try to copy with promise value (works in safari)
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     navigator.clipboard.write([new ClipboardItem({ 'text/plain': textBlobPromise })]);
   } catch (e) {
     // otherwise fallback to use clipboardCopy library

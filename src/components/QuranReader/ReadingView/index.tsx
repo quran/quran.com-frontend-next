@@ -22,6 +22,7 @@ import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
 import { getPageIndexByPageNumber } from 'src/components/QuranReader/utils/page';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
+import useGetQueryParamOrXstateValue from 'src/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from 'src/hooks/useQcfFont';
 import Error from 'src/pages/_error';
 import { selectedLastReadPage } from 'src/redux/slices/QuranReader/readingTracker';
@@ -70,7 +71,7 @@ const ReadingView = ({
   const {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
-  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
     QueryParam.Reciter,
   );
   const {

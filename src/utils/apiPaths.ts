@@ -5,8 +5,8 @@ import { decamelizeKeys } from 'humps';
 
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
+import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
 import {
-  getAudioPlayerStateInitialState,
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
@@ -42,7 +42,7 @@ const getVersesParams = (
   const defaultParams = {
     ...DEFAULT_VERSES_PARAMS,
     translations: getTranslationsInitialState(currentLocale).selectedTranslations.join(', '),
-    reciter: getAudioPlayerStateInitialState(currentLocale).reciter.id,
+    reciter: DEFAULT_RECITER.id,
     wordTranslationLanguage:
       getReadingPreferencesInitialState(currentLocale).selectedWordByWordLocale,
   };

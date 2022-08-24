@@ -1,59 +1,71 @@
 import { useContext } from 'react';
 
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
+import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import {
-  exitRepeatMode,
-  playFrom,
-  selectAudioData,
-  selectIsPlaying,
-  selectIsRadioMode,
-  selectPlaybackRate,
-} from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import QueryParam from 'types/QueryParam';
+import {
+  selectIsLoadingCurrentChapter,
+  selectIsPlayingCurrentChapter,
+} from 'src/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface Props {
   chapterId: number;
 }
 const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
-  const dispatch = useDispatch();
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const playbackRate = useSelector(selectPlaybackRate);
-  const currentAudioData = useSelector(selectAudioData, shallowEqual);
-  const isRadioMode = useSelector(selectIsRadioMode);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
-  const isPlayingCurrentChapter = isAudioPlaying && currentAudioData?.chapterId === chapterId;
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isLoadingCurrentChapter = useSelector(audioService, (state) =>
+    selectIsLoadingCurrentChapter(state, chapterId),
+  );
+  const isPlayingCurrentChapter = useSelector(audioService, (state) =>
+    selectIsPlayingCurrentChapter(state, chapterId),
+  );
 
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
   const play = () => {
     logButtonClick('chapter_header_play_audio');
-    dispatch(exitRepeatMode());
-    if (currentAudioData?.chapterId === chapterId && !isRadioMode) {
-      triggerPlayAudio(playbackRate);
-    } else {
-      dispatch(playFrom({ chapterId, reciterId, timestamp: 0 }));
-    }
+    audioService.send({
+      type: 'PLAY_SURAH',
+      surah: chapterId,
+    });
   };
 
   const pause = () => {
     logButtonClick('chapter_header_pause_audio');
-    triggerPauseAudio();
+    audioService.send({
+      type: 'TOGGLE',
+    });
   };
+
+  if (isLoadingCurrentChapter)
+    return (
+      <div className={styles.container}>
+        <Button
+          variant={ButtonVariant.Ghost}
+          type={ButtonType.Success}
+          size={ButtonSize.Small}
+          prefix={<Spinner />}
+          hasSidePadding={false}
+          shouldFlipOnRTL={false}
+          isDisabled
+        >
+          {t('loading')}
+        </Button>
+      </div>
+    );
 
   return (
     <div className={styles.container}>
