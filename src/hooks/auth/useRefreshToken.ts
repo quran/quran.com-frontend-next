@@ -56,6 +56,7 @@ const useRefreshToken = () => {
             setAccessTokenExpiration(exp);
           })
           .catch(() => {
+            setAccessTokenExpiration(undefined);
             router.replace('/login');
           });
       }
