@@ -20,6 +20,7 @@ import Navbar from 'src/components/Navbar/Navbar';
 import SessionIncrementor from 'src/components/SessionIncrementor';
 import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScripts';
 import DataContext from 'src/contexts/DataContext';
+import useRefreshToken from 'src/hooks/auth/useRefreshToken';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { API_HOST } from 'src/utils/api';
@@ -40,6 +41,7 @@ import 'src/styles/variables.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
+  useRefreshToken();
   const { locale } = router;
   const { t } = useTranslation('common');
   const { data: userData } = useSWRImmutable(
