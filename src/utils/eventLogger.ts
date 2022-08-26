@@ -75,6 +75,22 @@ export const logEmptySearchResults = (searchQuery: string, source: string, type 
   }
 };
 
+/**
+ * Log text search queries entered by the user.
+ *
+ * @param {string} searchQuery
+ * @param {string} source
+ */
+export const logTextSearchQuery = (searchQuery: string, source: string) => {
+  // if the searchQuery is not empty
+  if (searchQuery) {
+    logEvent('search_query', {
+      query: searchQuery,
+      source,
+    });
+  }
+};
+
 export const logTarteelLinkClick = (type: string) => {
   logEvent('tarteel_link_click', {
     type: `${type}_attribution`,

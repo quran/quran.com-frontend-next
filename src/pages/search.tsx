@@ -29,6 +29,7 @@ import {
   logButtonClick,
   logEmptySearchResults,
   logEvent,
+  logTextSearchQuery,
   logValueChange,
 } from 'src/utils/eventLogger';
 import filterTranslations from 'src/utils/filter-translations';
@@ -128,6 +129,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const getResults = useCallback(
     (query: string, page: number, translation: string, language: string) => {
       setIsSearching(true);
+      logTextSearchQuery(query, 'search_page');
       getSearchResults({
         query,
         filterLanguages: language,
