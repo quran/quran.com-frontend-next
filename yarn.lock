@@ -5917,6 +5917,11 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
+"@types/refresh-fetch@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@types/refresh-fetch/-/refresh-fetch-0.6.1.tgz#7677f8095bcff0e4c2065319469a187d854b92ea"
+  integrity sha512-i/3Fbbkm1+3SSbZh+AjveKmlFkVLAoF82WzRCX6T6xkr9bPmmWlO38OQu1jSNPfqBGN5zdbG9SPdKDqdV/BcEg==
+
 "@types/resolve@1.17.1":
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/@types/resolve/-/resolve-1.17.1.tgz#3afd6ad8967c77e4376c598a82ddd58f46ec45d6"
@@ -15488,6 +15493,13 @@ refractor@^3.6.0:
     hastscript "^6.0.0"
     parse-entities "^2.0.0"
     prismjs "~1.27.0"
+
+refresh-fetch@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/refresh-fetch/-/refresh-fetch-0.8.0.tgz#3d7216fb5377f77d8d8f56019403745cf090743d"
+  integrity sha512-4TjLYV0BWWa8TLxll6s8fzOmBQL/rpeH2D1hYF83QRKyVEQT0aanySl00qpDTMNmovhvVQr5t7efLmU2hm/f4A==
+  dependencies:
+    lodash "^4.17.21"
 
 regenerate-unicode-properties@^10.0.1:
   version "10.0.1"
