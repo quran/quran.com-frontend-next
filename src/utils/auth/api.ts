@@ -144,7 +144,10 @@ const shouldRefreshToken = (error) => {
   return error?.message === 'must refresh token';
 };
 
-export const testFetch = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
+export const withCredentialsFetcher = async <T>(
+  input: RequestInfo,
+  init?: RequestInit,
+): Promise<T> => {
   try {
     const data = await fetcher<T>(input, { ...init, credentials: 'include' });
     return data;
@@ -158,5 +161,5 @@ export const privateFetcher = configureRefreshFetch({
   shouldRefreshToken,
   // @ts-ignore
   refreshToken,
-  fetch: testFetch,
+  fetch: withCredentialsFetcher,
 });
