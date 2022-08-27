@@ -14,10 +14,11 @@ export type Collection = {
 
 type RenameCollectionModalProps = {
   isOpen: boolean;
+  defaultValue: string;
   onSubmit: (data: any) => void;
 };
 
-const RenameCollectionModal = ({ isOpen, onSubmit }: RenameCollectionModalProps) => {
+const RenameCollectionModal = ({ isOpen, onSubmit, defaultValue }: RenameCollectionModalProps) => {
   return (
     <Modal isOpen={isOpen}>
       <Modal.Body>
@@ -28,6 +29,7 @@ const RenameCollectionModal = ({ isOpen, onSubmit }: RenameCollectionModalProps)
               {
                 field: 'name',
                 label: 'New collection name',
+                defaultValue,
                 rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
                 type: FormFieldType.Text,
               },

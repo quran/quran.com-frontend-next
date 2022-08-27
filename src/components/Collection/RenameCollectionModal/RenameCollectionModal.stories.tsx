@@ -9,6 +9,7 @@ export const Example = () => {
   return (
     <RenameCollectionModal
       isOpen
+      defaultValue="Woman in Quran"
       onSubmit={() => {
         // do nothing
       }}
