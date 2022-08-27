@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collectionList {
+  .collectionItem + .collectionItem {
+    margin-block-start: var(--spacing-small);
+  }
+}
+
+.newCollectionFormContainer {
+  margin-block-start: var(--spacing-small);
+}
