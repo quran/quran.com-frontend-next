@@ -1,6 +1,8 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  margin-block-end: var(--spacing-mega);
+  text-align: center;
 }
 
 .collectionList {

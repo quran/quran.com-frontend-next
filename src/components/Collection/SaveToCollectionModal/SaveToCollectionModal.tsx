@@ -34,12 +34,8 @@ const SaveToCollectionModal = ({
 
   return (
     <Modal isOpen={isOpen}>
-      <Modal.Header>
-        <div className={styles.header}>
-          <div>Save to...</div>
-        </div>
-      </Modal.Header>
       <Modal.Body>
+        <div className={styles.header}>Save to...</div>
         <div className={styles.collectionList}>
           {collections.map((collection) => (
             <div className={styles.collectionItem} key={collection.name}>
