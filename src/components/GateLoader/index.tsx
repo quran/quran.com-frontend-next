@@ -1,9 +1,15 @@
 import React from 'react';
 
+import styles from './GateLoader.module.scss';
+
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 
 const GateLoader = () => {
-  return <Spinner size={SpinnerSize.Large} />;
+  return (
+    <span className={styles.container}>
+      <Spinner size={SpinnerSize.Large} />
+    </span>
+  );
 };
 
 export default GateLoader;
