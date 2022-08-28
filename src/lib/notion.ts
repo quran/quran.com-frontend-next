@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Client } from '@notionhq/client';
 
-const isNotionEnabled = () => {
-  return !!process.env.NOTION_TOKEN;
-};
+const isNotionEnabled = !!process.env.NOTION_TOKEN;
 
 let notion: Client;
 
