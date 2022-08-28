@@ -22,6 +22,7 @@ type SaveToCollectionModalProps = {
   collections: Collection[];
   onCollectionToggled: (collection: Collection) => void;
   onNewCollectionCreated: (name: string) => void;
+  isAddingNewCollection?: boolean;
 };
 
 const SaveToCollectionModal = ({

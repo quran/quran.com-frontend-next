@@ -40,22 +40,13 @@ export const Example = () => {
     setCollections(nextCollections);
   };
 
-  const handleNewCollectionCreated = (name: string) => {
-    const nextCollections = [
-      ...collections,
-      {
-        name,
-        checked: true,
-      },
-    ];
-    setCollections(nextCollections);
-  };
-
   return (
     <SaveToCollectionModal
       isOpen
       onCollectionToggled={handleCollectionToggled}
-      onNewCollectionCreated={handleNewCollectionCreated}
+      onNewCollectionCreated={() => {
+        // do nothing here. Will be implemented on the real code base
+      }}
       collections={collections}
     />
   );
