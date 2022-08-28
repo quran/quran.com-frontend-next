@@ -1,10 +1,13 @@
-import useCurrentStationInfo from '../Radio/useStationInfo';
+import { useActor } from '@xstate/react';
 
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import styles from './RadioPlaybackControl.module.scss';
 
-const RadioPlaybackControl = () => {
-  const stationInfo = useCurrentStationInfo();
+import useCurrentStationInfo from 'src/xstate/Radio/useCurrentStationInfo';
+
+const RadioPlaybackControl = ({ radioActor }) => {
+  const [radioService] = useActor(radioActor);
+  const stationInfo = useCurrentStationInfo((radioService as any).context);
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>

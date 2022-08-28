@@ -158,6 +158,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled={disabled}
         onClick={onClick}
         data-auto-flip-icon={shouldFlipOnRTL}
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         {...(ariaLabel && { 'aria-label': ariaLabel })}
         {...props}
       >

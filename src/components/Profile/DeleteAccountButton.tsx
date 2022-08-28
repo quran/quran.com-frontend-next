@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import router from 'next/router';
-import { mutate } from 'swr';
+import { useDispatch } from 'react-redux';
 
 import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Input from '../dls/Forms/Input';
@@ -11,13 +11,15 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './DeleteAccountButton.module.scss';
 
-import { deleteAccount, logoutUser } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
+import { deleteAccount } from 'src/utils/auth/api';
+import { logButtonClick } from 'src/utils/eventLogger';
 
 type DeleteAccountButtonProps = {
   isDisabled?: boolean;
 };
 const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
@@ -28,11 +30,16 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   };
 
   const onDeleteConfirmed = () => {
+    logButtonClick('profile_confirm_delete_account');
     closeModal();
     deleteAccount()
-      .then(() => logoutUser())
-      .then(() => mutate(makeUserProfileUrl()))
-      .then(() => router.push('/'));
+      .then(() => router.push('/'))
+      .then(() => dispatch({ type: removeLastSyncAt.type }));
+  };
+
+  const onDeleteAccountClicked = () => {
+    logButtonClick('profile_delete_account');
+    setIsModalVisible(true);
   };
 
   const CONFIRMATION_TEXT = t('profile:delete-confirmation.confirmation-text');
@@ -43,7 +50,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
       <Button
         type={ButtonType.Error}
         variant={ButtonVariant.Ghost}
-        onClick={() => setIsModalVisible(true)}
+        onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >
         {t('profile:delete-account')}

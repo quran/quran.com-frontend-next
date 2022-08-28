@@ -21,9 +21,7 @@ import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import useSetPortalledZIndex from 'src/components/QuranReader/hooks/useSetPortalledZIndex';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
-import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
@@ -37,18 +35,15 @@ import Verse from 'types/Verse';
 
 interface Props {
   verse: Verse;
-  isPortalled?: boolean;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl: string;
 }
 
 const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
-const DATA_POPOVER_PORTALLED = 'data-popover-portalled';
 
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   verse,
-  isPortalled,
   isTranslationView,
   onActionTriggered,
   bookmarksRangeUrl,
@@ -61,8 +56,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   const [isShared, setIsShared] = useState(false);
   const router = useRouter();
   const toast = useToast();
-  const { cache } = useSWRConfig();
-  useSetPortalledZIndex(DATA_POPOVER_PORTALLED, isPortalled);
+  const { cache, mutate: globalMutate } = useSWRConfig();
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
 
@@ -100,25 +94,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     }
     return false;
   }, [bookmarkedVerses, isVerseBookmarkedData, verse.verseKey]);
-
-  /**
-   * A hook that will run once to check if the body is portalled or not and if it is,
-   * will override the zIndex value manually to 1 so that it doesn't stack on top of
-   * the advanced copy/tafsirs modals since the default behavior of Radix is to set
-   * a really high value of the zIndex of the container of the portalled component which
-   * cause it to be on always on top of our custom Modal.
-   */
-  useBrowserLayoutEffect(() => {
-    // eslint-disable-next-line i18next/no-literal-string
-    const portalledElement = window.document.querySelector(`[${DATA_POPOVER_PORTALLED}="true"]`);
-    if (portalledElement) {
-      // we need to react a few elements up the tree to get to the container that we want to override its zIndex
-      const radixPortalElement = portalledElement.closest('[data-radix-portal]') as HTMLElement;
-      if (radixPortalElement) {
-        radixPortalElement.style.zIndex = '1';
-      }
-    }
-  }, [isPortalled]);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -169,41 +144,50 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     );
 
     if (isLoggedIn()) {
+      // optimistic update, we are making assumption that the bookmark update will succeed
+      mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked, {
+        revalidate: false,
+      });
+
+      // when it's translation view, we need to invalidate the cached bookmarks range
+      if (bookmarksRangeUrl) {
+        const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
+        const nextBookmarkedVersesRange = {
+          ...bookmarkedVersesRange,
+          [verse.verseKey]: !isVerseBookmarked,
+        };
+        globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
+          revalidate: false,
+        });
+      }
+
+      cache.delete(
+        makeBookmarksUrl(
+          getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+        ),
+      );
+
+      toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
+        status: ToastStatus.Success,
+      });
+
       addOrRemoveBookmark(
         verse.chapterId as number,
         getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
         BookmarkType.Ayah,
         !isVerseBookmarked,
         verse.verseNumber,
-      )
-        .then(() => {
-          mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked);
-          // when it's translation view, we need to invalidate the cached bookmarks range
-          if (bookmarksRangeUrl) {
-            cache.delete(bookmarksRangeUrl);
-          }
-
-          cache.delete(
-            makeBookmarksUrl(
-              getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
-            ),
-          );
-
-          toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
-            status: ToastStatus.Success,
-          });
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            toast(t('common:error.bookmark-sync'), {
-              status: ToastStatus.Error,
-            });
-            return;
-          }
-          toast(t('error.general'), {
+      ).catch((err) => {
+        if (err.status === 400) {
+          toast(t('common:error.bookmark-sync'), {
             status: ToastStatus.Error,
           });
+          return;
+        }
+        toast(t('error.general'), {
+          status: ToastStatus.Error,
         });
+      });
     } else {
       dispatch(toggleVerseBookmark(verse.verseKey));
     }
@@ -227,11 +211,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   }
 
   return (
-    <div
-      {...{
-        [DATA_POPOVER_PORTALLED]: isPortalled,
-      }}
-    >
+    <div>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
         {isCopied ? `${t('copied')}!` : `${t('copy')}`}
       </PopoverMenu.Item>
@@ -251,7 +231,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
       />
 
-      <PopoverMenu.Item onClick={onToggleBookmarkClicked} icon={bookmarkIcon}>
+      <PopoverMenu.Item
+        onClick={onToggleBookmarkClicked}
+        icon={bookmarkIcon}
+        isDisabled={isVerseBookmarkedLoading}
+      >
         {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`}
       </PopoverMenu.Item>
 

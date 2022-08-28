@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 import initialState, { DEFAULT_TAFSIRS } from './defaultSettings/defaultSettings';
-import { getAudioPlayerStateInitialState } from './defaultSettings/util';
+import { migrateRecentReadingSessions } from './migration-scripts/migrating-recent-reading-sessions';
 import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
@@ -49,8 +50,6 @@ export default {
     ...state,
     audioPlayerState: {
       ...state.audioPlayerState,
-      repeatSettings: getAudioPlayerStateInitialState().repeatSettings,
-      repeatProgress: getAudioPlayerStateInitialState().repeatProgress,
     },
   }),
   9: (state) => ({
@@ -82,7 +81,6 @@ export default {
     ...state,
     audioPlayerState: {
       ...state.audioPlayerState,
-      reciter: getAudioPlayerStateInitialState().reciter.id,
     },
   }),
   14: (state) => ({
@@ -111,12 +109,14 @@ export default {
         initialState.readingPreferences.isUsingDefaultWordByWordLocale,
     },
   }),
-  17: (state) => ({
-    ...state,
-    fontFaces: {
-      loadedFontFaces: [],
-    },
-  }),
+  17: (state) => {
+    return {
+      ...state,
+      fontFaces: {
+        loadedFontFaces: [],
+      },
+    };
+  },
   18: (state) => ({
     ...state,
     audioPlayerState: {
@@ -124,13 +124,15 @@ export default {
       showTooltipWhenPlayingAudio: false,
     },
   }),
-  19: (state) => ({
-    ...state,
-    welcomeMessage: {
-      ...state.welcomeMessage,
-      isVisible: true,
-    },
-  }),
+  19: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
   20: (state) => ({
     ...state,
     session: {
@@ -143,4 +145,16 @@ export default {
       isVisible: initialSidebarIsVisible,
     },
   }),
+  22: (state) => {
+    return {
+      ...state,
+      readingTracker: {
+        ...state.readingTracker,
+        recentReadingSessions: migrateRecentReadingSessions(
+          // @ts-ignore, old typing, will always have the issue
+          state.readingTracker.recentReadingSessions,
+        ),
+      },
+    };
+  },
 };

@@ -1,19 +1,18 @@
-import sample from 'lodash/sample';
+import { useContext } from 'react';
+
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
-import { triggerPauseAudio, triggerPlayAudio } from '../AudioPlayer/EventTriggers';
 import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './CuratedStationList.module.scss';
 import curatedStations from './curatedStations';
-import { StationState, StationType } from './types';
+import { StationType } from './types';
 
-import { playFrom, selectIsPlaying, selectPlaybackRate } from 'src/redux/slices/AudioPlayer/state';
-import { selectRadioStation, setRadioStationState } from 'src/redux/slices/radio';
 import { logEvent } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 // When one of the curated station is clicked,
 // 1) Pick (randomly) one of the audioTrack listen in the station
@@ -21,11 +20,13 @@ import { logEvent } from 'src/utils/eventLogger';
 // 2) Update the current station state in the redux
 // 3) Play the audio
 const CuratedStationList = () => {
-  const dispatch = useDispatch();
-  const stationState = useSelector(selectRadioStation, shallowEqual);
-  const isAudioPlaying = useSelector(selectIsPlaying);
-  const playbackRate = useSelector(selectPlaybackRate);
   const { t } = useTranslation('radio');
+
+  const audioService = useContext(AudioPlayerMachineContext);
+  const isAudioPlaying = useSelector(audioService, (state) =>
+    state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
+  );
+  const radioActor = useSelector(audioService, (state) => state.context.radioActor);
 
   const playStation = async (id: string) => {
     logEvent('station_played', {
@@ -33,35 +34,25 @@ const CuratedStationList = () => {
       type: StationType.Curated,
     });
 
-    const randomAudioTrack = sample(curatedStations[id].audioTracks);
-    const nextStationState: StationState = {
-      id,
-      type: StationType.Curated,
-      chapterId: randomAudioTrack.chapterId,
-      reciterId: randomAudioTrack.reciterId,
-    };
-    dispatch(setRadioStationState(nextStationState));
-
-    dispatch(
-      playFrom({
-        chapterId: Number(nextStationState.chapterId),
-        reciterId: Number(nextStationState.reciterId),
-        shouldStartFromRandomTimestamp: true,
-        isRadioMode: true,
-      }),
-    );
+    audioService.send({
+      type: 'PLAY_RADIO',
+      stationType: StationType.Curated,
+      stationId: Number(id),
+    });
   };
+
+  const radioContext = radioActor?.getSnapshot()?.context || {};
 
   return (
     <div className={styles.container}>
       {Object.entries(curatedStations).map(([id, station]) => {
         const isSelectedStation =
-          stationState.type === StationType.Curated && stationState.id === id;
+          radioContext.type === StationType.Curated && radioContext.id === Number(id);
 
         let onClick;
         if (!isSelectedStation) onClick = () => playStation(id);
-        if (isSelectedStation && isAudioPlaying) onClick = () => triggerPauseAudio();
-        if (isSelectedStation && !isAudioPlaying) onClick = () => triggerPlayAudio(playbackRate);
+        if (isSelectedStation && isAudioPlaying) onClick = () => audioService.send('TOGGLE');
+        if (isSelectedStation && !isAudioPlaying) onClick = () => audioService.send('TOGGLE');
 
         const actionIcon = isSelectedStation && isAudioPlaying ? <PauseIcon /> : <PlayIcon />;
 

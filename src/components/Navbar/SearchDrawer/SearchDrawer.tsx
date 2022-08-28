@@ -16,7 +16,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick, logEmptySearchResults } from 'src/utils/eventLogger';
+import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from 'src/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
@@ -57,6 +57,7 @@ const SearchDrawer: React.FC = () => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
+      logTextSearchQuery(debouncedSearchQuery, 'search_drawer');
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,

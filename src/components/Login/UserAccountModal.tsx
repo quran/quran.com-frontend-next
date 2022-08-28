@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import Modal from 'src/components/dls/Modal/Modal';
+import useSyncUserData from 'src/hooks/auth/useSyncUserData';
 import Announcement from 'types/auth/Announcement';
 import FormField from 'types/FormField';
 
@@ -13,6 +14,7 @@ type Props = {
 };
 
 const UserAccountModal: React.FC<Props> = ({ requiredFields, announcement }) => {
+  useSyncUserData();
   let modalBody;
   if (requiredFields && requiredFields?.length !== 0) {
     modalBody = <CompleteSignupForm requiredFields={requiredFields} />;

@@ -22,16 +22,6 @@ const Slide3 = ({ action }) => {
             i18nKey="common:announcements.auth-onboarding.slide-3.description"
           />
         </p>
-        <p className={styles.warning}>
-          <small>
-            <Trans
-              components={{
-                br: <br />,
-              }}
-              i18nKey="common:announcements.auth-onboarding.slide-3.note"
-            />
-          </small>
-        </p>
       </div>
       <div className={styles.actionContainer}>{action}</div>
     </div>

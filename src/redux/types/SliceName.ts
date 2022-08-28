@@ -8,7 +8,6 @@ enum SliceName {
   DEFAULT_SETTINGS = 'defaultSettings',
   BANNER = 'banner',
   NAVBAR = 'navbar',
-  RADIO = 'radio',
   SESSION = 'session',
   BOOKMARKS = 'bookmarks',
   VOICE_SEARCH = 'voiceSearch',
@@ -16,13 +15,13 @@ enum SliceName {
   COMMAND_BAR = 'commandBar',
   CONTEXT_MENU = 'contextMenu',
   FONT_FACES = 'fontFaces',
-  HIGHLIGHTED_LOCATIONS = 'highlightedLocation',
   NOTES = 'notes',
   READING_TRACKER = 'readingTracker',
   READING_VIEW_HOVERED_VERSE = 'readingViewHoveredVerse',
   SIDEBAR_NAVIGATION = 'sidebarNavigation',
   SEARCH = 'search',
   LOCALE = 'locale',
+  USER_DATA_SYNC = 'userDataSync',
 }
 
 export default SliceName;

@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
+import { useSelector as useXstateSelector } from '@xstate/react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -10,7 +11,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './QueryParamMessage.module.scss';
 
-import { selectReciterId } from 'src/redux/slices/AudioPlayer/state';
 import {
   selectWordByWordLocale,
   setSelectedWordByWordLocale,
@@ -21,6 +21,7 @@ import {
 } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
 interface Props {
@@ -55,8 +56,9 @@ const QueryParamMessage: React.FC<Props> = ({
   const { t } = useTranslation('common');
   const router = useRouter();
   const dispatch = useDispatch();
+  const audioService = useContext(AudioPlayerMachineContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const selectedReciterId = useSelector(selectReciterId, shallowEqual);
+  const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
 
   // eslint-disable-next-line react-func/max-lines-per-function

@@ -1,21 +1,22 @@
 /* eslint-disable max-lines */
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import { ActionCreatorWithOptionalPayload } from '@reduxjs/toolkit';
+import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
+import DataFetcher from 'src/components/DataFetcher';
 import Select from 'src/components/dls/Forms/Select';
 import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Toggle from 'src/components/dls/Toggle/Toggle';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setEnableAutoScrolling,
-  setPlaybackRate,
   setShowTooltipWhenPlayingAudio,
   selectAudioPlayerState,
 } from 'src/redux/slices/AudioPlayer/state';
@@ -24,9 +25,12 @@ import {
   selectReadingPreferences,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
+import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logValueChange } from 'src/utils/eventLogger';
 import { generateSelectOptions } from 'src/utils/input';
 import { toLocalizedNumber } from 'src/utils/locale';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { WordClickFunctionality } from 'types/QuranReader';
 
@@ -35,19 +39,18 @@ export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 const AudioSection = () => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
+  const audioService = useContext(AudioPlayerMachineContext);
   const readingPreferences = useSelector(selectReadingPreferences);
   const { wordClickFunctionality } = readingPreferences;
   const audioPlayerState = useSelector(selectAudioPlayerState);
+  const { showTooltipWhenPlayingAudio, enableAutoScrolling } = audioPlayerState;
+  const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
+
   const {
-    playbackRate,
-    showTooltipWhenPlayingAudio,
-    enableAutoScrolling,
-    reciter: selectedReciter,
-  } = audioPlayerState;
-  const {
-    actions: { onSettingsChange },
+    actions: { onSettingsChange, onXstateSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
+  const playbackRate = useXstateSelector(audioService, (state) => state.context.playbackRate);
 
   const onAudioSettingsChange = (
     key: string,
@@ -65,7 +68,22 @@ const AudioSection = () => {
 
   const onPlaybackRateChanged = (value) => {
     logValueChange('audio_playback_rate', playbackRate, value);
-    onAudioSettingsChange('playbackRate', Number(value), setPlaybackRate);
+    const previousPlaybackRate = audioService.getSnapshot().context.playbackRate;
+    onXstateSettingsChange(
+      'playbackRate',
+      value,
+      () =>
+        audioService.send({
+          type: 'SET_PLAYBACK_SPEED',
+          playbackRate: Number(value),
+        }),
+      () =>
+        audioService.send({
+          type: 'SET_PLAYBACK_SPEED',
+          playbackRate: previousPlaybackRate,
+        }),
+      PreferenceGroup.AUDIO,
+    );
   };
 
   const playbackRatesOptions = useMemo(
@@ -121,14 +139,24 @@ const AudioSection = () => {
       <Section>
         <Section.Title isLoading={isLoading}>{t('audio.title')}</Section.Title>
         <Section.Row>
-          <SelectionCard
-            label={t('settings.selected-reciter')}
-            value={
-              selectedReciter.translatedName
-                ? selectedReciter.translatedName.name
-                : selectedReciter.name
-            }
-            onClick={onSelectionCardClicked}
+          <DataFetcher
+            queryKey={makeAvailableRecitersUrl(lang)}
+            render={(data: RecitersResponse) => {
+              const selectedReciter = data.reciters.find(
+                (reciter) => reciter.id === selectedReciterId,
+              );
+              return (
+                <SelectionCard
+                  label={t('settings.selected-reciter')}
+                  value={
+                    selectedReciter.translatedName
+                      ? selectedReciter.translatedName.name
+                      : selectedReciter.name
+                  }
+                  onClick={onSelectionCardClicked}
+                />
+              );
+            }}
           />
         </Section.Row>
         <Section.Row>

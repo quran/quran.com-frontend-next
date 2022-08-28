@@ -11,7 +11,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import Counter from 'src/components/dls/Counter/Counter';
 import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,

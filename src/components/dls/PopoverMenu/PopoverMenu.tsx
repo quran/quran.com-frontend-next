@@ -34,6 +34,11 @@ const PopoverMenu = ({
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
 }: PopoverMenuProps) => {
   const direction = useDirection();
+  const content = (
+    <PrimitiveDropdownMenu.Content className={styles.content} side={side}>
+      {children}
+    </PrimitiveDropdownMenu.Content>
+  );
   return (
     <PrimitiveDropdownMenu.Root
       dir={direction as Direction}
@@ -46,9 +51,11 @@ const PopoverMenu = ({
           <span>{trigger}</span>
         </PrimitiveDropdownMenu.Trigger>
       )}
-      <PrimitiveDropdownMenu.Content className={styles.content} portalled={isPortalled} side={side}>
-        {children}
-      </PrimitiveDropdownMenu.Content>
+      {isPortalled ? (
+        <PrimitiveDropdownMenu.Portal>{content}</PrimitiveDropdownMenu.Portal>
+      ) : (
+        content
+      )}
     </PrimitiveDropdownMenu.Root>
   );
 };

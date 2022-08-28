@@ -1,21 +1,20 @@
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 
 import { useHotkeys, Options } from 'react-hotkeys-hook';
 
 import { logEvent } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const SEEK_DURATION = 10;
 type AudioKeyBoardListenersProps = {
   togglePlaying: () => void;
   isAudioPlayerHidden: boolean;
-  seek: (seekDuration: number) => void;
 };
 
 const AudioKeyBoardListeners = ({
-  seek,
   togglePlaying,
   isAudioPlayerHidden,
 }: AudioKeyBoardListenersProps) => {
+  const audioService = useContext(AudioPlayerMachineContext);
   const toggleAudioPlayer = useCallback(
     (event: KeyboardEvent) => {
       logEvent('audio_player_toggle_keyboard_shortcut');
@@ -24,27 +23,21 @@ const AudioKeyBoardListeners = ({
     },
     [togglePlaying],
   );
-  const seekForward = useCallback(
-    (event: KeyboardEvent) => {
-      logEvent('audio_player_fwd_keyboard_shortcut');
-      event.preventDefault();
-      seek(SEEK_DURATION);
-    },
-    [seek],
-  );
-  const seekBackwards = useCallback(
-    (event: KeyboardEvent) => {
-      logEvent('audio_player_bwd_keyboard_shortcut');
-      event.preventDefault();
-      seek(-SEEK_DURATION);
-    },
-    [seek],
-  );
+  const seekForward = (event: KeyboardEvent) => {
+    logEvent('audio_player_fwd_keyboard_shortcut');
+    event.preventDefault();
+    audioService.send({ type: 'NEXT_AYAH' });
+  };
+  const seekBackwards = (event: KeyboardEvent) => {
+    logEvent('audio_player_bwd_keyboard_shortcut');
+    event.preventDefault();
+    audioService.send({ type: 'PREV_AYAH' });
+  };
 
   const options = { enabled: !isAudioPlayerHidden } as Options;
   useHotkeys('space', toggleAudioPlayer, options, [togglePlaying]);
-  useHotkeys('right', seekForward, options, [seek]);
-  useHotkeys('left', seekBackwards, options, [seek]);
+  useHotkeys('right', seekForward, options);
+  useHotkeys('left', seekBackwards, options);
   return <></>;
 };
 

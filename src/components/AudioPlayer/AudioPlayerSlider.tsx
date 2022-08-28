@@ -1,95 +1,59 @@
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useContext } from 'react';
 
+import { useSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
 
 import styles from './AudioPlayerSlider.module.scss';
-import { triggerSetCurrentTime } from './EventTriggers';
-import useAudioPlayerCurrentTime from './hooks/useCurrentTime';
 
-import Slider, { Direction } from 'src/components/dls/Slider';
+import Slider, { Direction, SliderVariant } from 'src/components/dls/Slider';
 import useDirection from 'src/hooks/useDirection';
 import { secondsFormatter } from 'src/utils/datetime';
 import { logEvent } from 'src/utils/eventLogger';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const NUMBER_OF_STEPS = 100;
-
-type SliderProps = {
-  audioPlayerElRef: React.MutableRefObject<HTMLAudioElement>;
-};
-
-const AUDIO_THROTTLE_DURATION = 1000;
-
-/**
- * The slider is divided into {NUMBER_OF_STEPS} steps. These steps represent
- * the audio slider's steps that the user can slide through.
- *
- * @param {SliderProps} props
- * @returns {JSX.Element}
- */
-const AudioPlayerSlider = ({ audioPlayerElRef }: SliderProps): JSX.Element => {
+const AudioPlayerSlider = (): JSX.Element => {
   const router = useRouter();
   const { locale } = router;
   const direction = useDirection();
-  const currentTime = useAudioPlayerCurrentTime(audioPlayerElRef, AUDIO_THROTTLE_DURATION);
-  const audioDuration = audioPlayerElRef?.current?.duration || 0;
 
-  const isAudioLoaded = audioDuration !== 0;
-
-  const [currentStep, setCurrentStep] = useState(0);
-
-  useEffect(() => {
-    setCurrentStep(getCurrentStep(currentTime, isAudioLoaded, audioDuration));
-  }, [currentTime, isAudioLoaded, audioDuration]);
-  const currentSteps = useMemo(() => [currentStep], [currentStep]);
-  const handleOnValueChange = useCallback(
-    (newValue: number[]) => {
-      logEvent('audio_player_slider_value_change');
-      const [newStep] = newValue;
-      setCurrentStep(newStep);
-      triggerSetCurrentTime(getNewCurrentTime(newStep, audioDuration));
-    },
-    [audioDuration],
-  );
+  const audioService = useContext(AudioPlayerMachineContext);
+  const elapsed = useSelector(audioService, (state) => state.context.elapsed);
+  const downloadProgress = useSelector(audioService, (state) => state.context.downloadProgress);
+  const duration = useSelector(audioService, (state) => state.context.duration);
 
   return (
     <div className={styles.container}>
-      <span className={styles.currentTime}>{secondsFormatter(currentTime, locale)}</span>
+      <span className={styles.currentTime}>{secondsFormatter(elapsed, locale)}</span>
+      <div className={styles.sliderContainer}>
+        <Slider
+          showThumbs={false}
+          variant={SliderVariant.Secondary}
+          label="audio-player"
+          value={[downloadProgress]}
+          onValueChange={([newTimestamp]) => {
+            logEvent('audio_player_slider_value_change');
+            audioService.send({ type: 'SEEK_TO', timestamp: newTimestamp });
+          }}
+          max={duration}
+          direction={direction as Direction}
+          withBackground
+        />
+      </div>
       <div className={styles.sliderContainer}>
         <Slider
           label="audio-player"
-          value={currentSteps}
-          onValueChange={handleOnValueChange}
-          max={NUMBER_OF_STEPS}
+          value={[elapsed]}
+          onValueChange={([newTimestamp]) => {
+            logEvent('audio_player_slider_value_change');
+            audioService.send({ type: 'SEEK_TO', timestamp: newTimestamp });
+          }}
+          max={duration}
           direction={direction as Direction}
         />
       </div>
-      <span className={styles.remainingTime}>{secondsFormatter(audioDuration, locale)}</span>
+      <span className={styles.remainingTime}>{secondsFormatter(duration, locale)}</span>
     </div>
   );
 };
-
-/**
- * Get the current step that the slider needs to be set to.
- *
- * @param {number} currentTime
- * @param {boolean} isAudioLoaded
- * @param {number} audioDuration
- * @returns {number}
- */
-const getCurrentStep = (
-  currentTime: number,
-  isAudioLoaded: boolean,
-  audioDuration: number,
-): number => (isAudioLoaded ? Math.floor((currentTime * NUMBER_OF_STEPS) / audioDuration) : 0);
-
-/**
- * Calculate the new current time the needs the audioPlayer needs to be set to.
- *
- * @param {number} newStep
- * @param {number} audioDuration
- * @returns {number}
- */
-const getNewCurrentTime = (newStep: number, audioDuration: number): number =>
-  (newStep * audioDuration) / NUMBER_OF_STEPS;
 
 export default AudioPlayerSlider;

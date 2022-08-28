@@ -1,6 +1,7 @@
 import { RouterContext } from "next/dist/shared/lib/router-context";
 
 import ResetCSS from '../src/styles/reset.scss';
+import { TooltipProvider } from '@radix-ui/react-tooltip';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 import GlobalStyles from '../src/styles/global.scss';
@@ -28,9 +29,11 @@ const themeDecorator = (Story, context) => {
            padding: '1rem',
            boxSizing: 'border-box'
           }}>
-          <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
-            <Story />
-          </I18nProvider>
+          <TooltipProvider>
+            <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
+              <Story />
+            </I18nProvider>
+          </TooltipProvider>
         </div>
       </div>
     </>

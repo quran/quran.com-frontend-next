@@ -22,7 +22,7 @@ import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import Separator from 'src/components/dls/Separator/Separator';
 import DataContext from 'src/contexts/DataContext';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
@@ -133,8 +133,13 @@ const TafsirBody = ({
   // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
     if (tafsirSelectionList) {
-      const languageName = getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirIdOrSlug);
-      setSelectedLanguage(languageName);
+      setSelectedLanguage((prevSelectedLanguage) => {
+        // if we haven't set the language already, we need to detect which language the current tafsir is in.
+        return (
+          prevSelectedLanguage ||
+          getSelectedTafsirLanguage(tafsirSelectionList, selectedTafsirIdOrSlug)
+        );
+      });
     }
   }, [onTafsirSelected, selectedTafsirIdOrSlug, tafsirSelectionList]);
 

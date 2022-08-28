@@ -1,10 +1,8 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useContext } from 'react';
 
+import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { triggerPauseAudio } from '../EventTriggers';
 
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
@@ -13,22 +11,19 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import Modal from 'src/components/dls/Modal/Modal';
 import Separator from 'src/components/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
+import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import usePersistPreferenceGroup from 'src/hooks/usePersistPreferenceGroup';
-import {
-  exitRepeatMode,
-  playFrom,
-  selectAudioPlayerState,
-  selectIsInRepeatMode,
-  setRepeatSettings,
-} from 'src/redux/slices/AudioPlayer/state';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
-import { generateChapterVersesKeys, getChapterFirstAndLastVerseKey } from 'src/utils/verse';
+import {
+  generateChapterVersesKeys,
+  getChapterFirstAndLastVerseKey,
+  getChapterNumberFromKey,
+  getVerseNumberFromKey,
+} from 'src/utils/verse';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import QueryParam from 'types/QueryParam';
 
 type RepeatAudioModalProps = {
   chapterId: string;
@@ -46,14 +41,15 @@ const RepeatAudioModal = ({
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
-  const { value: reciterId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.Reciter);
 
-  const audioPlayerState = useSelector(selectAudioPlayerState);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
+  const repeatState = repeatActor?.getSnapshot();
+  const repeatSettings = repeatState?.context;
+
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
-  const isInRepeatMode = useSelector(selectIsInRepeatMode);
+  const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
   const chaptersData = useGetChaptersData(lang);
-  const { repeatSettings } = audioPlayerState;
   const {
     actions: { onSettingsChangeWithoutDispatch },
   } = usePersistPreferenceGroup();
@@ -87,11 +83,11 @@ const RepeatAudioModal = ({
   );
 
   const [verseRepetition, setVerseRepetition] = useState({
-    repeatRange: repeatSettings.repeatRange,
-    repeatEachVerse: repeatSettings.repeatEachVerse,
-    from: selectedVerseKey || firstVerseKeyInThisChapter,
-    to: selectedVerseKey || lastVerseKeyInThisChapter,
-    delayMultiplier: repeatSettings.delayMultiplier,
+    repeatRange: repeatSettings?.repeatSettings?.totalRangeCycle ?? 2,
+    repeatEachVerse: repeatSettings?.repeatSettings?.totalVerseCycle ?? 2,
+    from: selectedVerseKey ?? firstVerseKeyInThisChapter,
+    to: selectedVerseKey ?? lastVerseKeyInThisChapter,
+    delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
   });
 
   // reset verseRepetition's `to` and `from`, when chapter changed
@@ -104,14 +100,15 @@ const RepeatAudioModal = ({
   }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
 
   const play = () => {
-    dispatch(setRepeatSettings({ verseRepetition, locale: lang }));
-    dispatch(
-      playFrom({
-        chapterId: Number(chapterId),
-        reciterId,
-        verseKey: verseRepetition.from,
-      }),
-    );
+    audioService.send({
+      type: 'SET_REPEAT_SETTING',
+      delayMultiplier: Number(verseRepetition.delayMultiplier),
+      repeatEachVerse: Number(verseRepetition.repeatEachVerse),
+      from: Number(getVerseNumberFromKey(verseRepetition.from)),
+      to: Number(getVerseNumberFromKey(verseRepetition.to)),
+      repeatRange: Number(verseRepetition.repeatRange),
+      surah: Number(getChapterNumberFromKey(verseRepetition.from)),
+    });
     onClose();
   };
 
@@ -126,8 +123,7 @@ const RepeatAudioModal = ({
   };
   const onStopRepeating = () => {
     logButtonClick('stop_repeating');
-    dispatch(exitRepeatMode());
-    triggerPauseAudio();
+    audioService.send({ type: 'REPEAT_FINISHED' });
     onClose();
   };
 

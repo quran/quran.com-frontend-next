@@ -11,6 +11,8 @@ import ResendEmailSection from './ResendEmailSection';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import EmailLogin, { EmailLoginData, sendMagicLink } from 'src/components/Login/EmailLogin';
 import SocialLogin from 'src/components/Login/SocialLogin';
+import { logButtonClick, logFormSubmission } from 'src/utils/eventLogger';
+import AuthType from 'types/auth/AuthType';
 
 enum LoginType {
   Social = 'social',
@@ -37,12 +39,33 @@ const LoginContainer = () => {
       });
   };
 
+  const onMagicLinkClicked = () => {
+    setLoginType(LoginType.Email);
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${AuthType.Email}_login`);
+  };
+
+  const onOtherOptionsClicked = () => {
+    setLoginType(LoginType.Social);
+    logButtonClick('other_auth_options');
+  };
+
+  const onResendEmailButtonClicked = () => {
+    onEmailLoginSubmit({ email });
+    logButtonClick('resend_email');
+  };
+
+  const onLoginWithEmailSubmit = (data) => {
+    logFormSubmission('email_login');
+    return onEmailLoginSubmit(data);
+  };
+
   if (magicLinkVerificationCode) {
     return (
       <div className={styles.outerContainer}>
         <EmailSent email={email} verificationCode={magicLinkVerificationCode} />
         <ResendEmailSection
-          onResendButtonClicked={() => onEmailLoginSubmit({ email })}
+          onResendButtonClicked={onResendEmailButtonClicked}
           key={magicLinkVerificationCode}
         />
       </div>
@@ -55,7 +78,7 @@ const LoginContainer = () => {
         <div className={styles.title}>{t('login:login-title')}</div>
 
         {loginType === LoginType.Email && (
-          <EmailLogin back={() => setLoginType(LoginType.Social)} onSubmit={onEmailLoginSubmit} />
+          <EmailLogin back={onOtherOptionsClicked} onSubmit={onLoginWithEmailSubmit} />
         )}
 
         {loginType === LoginType.Social && (
@@ -63,7 +86,7 @@ const LoginContainer = () => {
             <SocialLogin />
             {process.env.NEXT_PUBLIC_ENABLE_MAGIC_LINK_LOGIN === 'true' && (
               <Button
-                onClick={() => setLoginType(LoginType.Email)}
+                onClick={onMagicLinkClicked}
                 className={styles.loginButton}
                 variant={ButtonVariant.Ghost}
                 type={ButtonType.Success}

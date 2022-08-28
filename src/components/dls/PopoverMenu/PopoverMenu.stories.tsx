@@ -15,20 +15,6 @@ export default {
   title: 'dls/PopoverMenu',
   component: PopoverMenu,
   argTypes: {
-    isOpen: {
-      control: {
-        type: 'boolean',
-      },
-      defaultValue: false,
-      table: {
-        category: 'Optional',
-      },
-    },
-    trigger: {
-      table: {
-        category: 'Optional',
-      },
-    },
     isPortalled: {
       control: {
         type: 'boolean',
@@ -68,7 +54,7 @@ export const UnTriggered = UnTriggeredTemplate.bind({});
 
 const WithIconTemplate = (args) => {
   return (
-    <PopoverMenu isOpen trigger={<button type="button">Trigger</button>} {...args}>
+    <PopoverMenu trigger={<button type="button">Trigger</button>} {...args}>
       <PopoverMenu.Item icon={<TafsirIcon />}>Tafsirs</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
@@ -81,7 +67,7 @@ export const WithIcon = WithIconTemplate.bind({});
 
 const WithDivider = (args) => {
   return (
-    <PopoverMenu isOpen trigger={<button type="button">test</button>} {...args}>
+    <PopoverMenu trigger={<button type="button">Trigger</button>} {...args}>
       <PopoverMenu.Item icon={<TafsirIcon />}>Tafsirs</PopoverMenu.Item>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
@@ -97,7 +83,7 @@ export const WithDividerTemplate = WithDivider.bind({});
 
 const WithIconDisabledTemplate = (args) => {
   return (
-    <PopoverMenu isOpen trigger={<button type="button">test</button>} {...args}>
+    <PopoverMenu trigger={<button type="button">Trigger</button>} {...args}>
       <PopoverMenu.Item icon={<ShareIcon />}>Share</PopoverMenu.Item>
       <PopoverMenu.Item icon={<UnBookmarkedIcon />}>Bookmark</PopoverMenu.Item>
       <PopoverMenu.Item icon={<RepeatIcon size={18} />} isDisabled>
