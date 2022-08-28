@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-large);
+}
+
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemTitle {
+  font-weight: var(--font-weight-bold);
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+}
+
+.itemIcon {
+  display: flex;
+  --icon-size: 16px;
+  width: var(--icon-size);
+  > svg {
+    width: 100%;
+  }
+}
+
+.itemCount {
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.collectionListContainer {
+  > * + * {
+    margin-block-start: var(--spacing-xsmall);
+  }
+}
+
+.sorter {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-small);
+}

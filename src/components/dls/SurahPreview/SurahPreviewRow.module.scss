@@ -50,7 +50,7 @@
   flex-direction: column;
 }
 .translatedSurahName {
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xsmall);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
 }
@@ -71,7 +71,7 @@
 
 .description {
   text-align: end;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xsmall);
   font-weight: var(--font-weight-bold);
 
   color: var(--color-text-faded);
