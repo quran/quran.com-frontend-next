@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
+import GateLoader from 'src/components/GateLoader';
 import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getUserPreferences } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';
@@ -63,7 +64,7 @@ const ReduxProvider = ({ children, locale }) => {
   if (isClient) {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
+        <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
           {children}
         </PersistGate>
       </Provider>
