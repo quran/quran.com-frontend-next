@@ -21,7 +21,7 @@
 
 .itemIcon {
   display: flex;
-  --icon-size: 16px;
+  --icon-size: var(--spacing-medium);
   width: var(--icon-size);
   > svg {
     width: 100%;
