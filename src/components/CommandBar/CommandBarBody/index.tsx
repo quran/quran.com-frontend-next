@@ -31,6 +31,11 @@ const NAVIGATE_TO = [
     resultType: SearchNavigationType.JUZ,
   },
   {
+    name: 'Hizb 1',
+    key: 1,
+    resultType: SearchNavigationType.HIZB,
+  },
+  {
     name: 'Page 1',
     key: 1,
     resultType: SearchNavigationType.PAGE,
