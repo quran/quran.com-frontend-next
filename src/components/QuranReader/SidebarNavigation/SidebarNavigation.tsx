@@ -52,6 +52,10 @@ const SidebarNavigation = () => {
       value: NavigationItem.Juz,
     },
     {
+      name: t('hizb'),
+      value: NavigationItem.Hizb,
+    },
+    {
       name: t('page'),
       value: NavigationItem.Page,
     },
