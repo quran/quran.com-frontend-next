@@ -20,6 +20,7 @@ export type AdvancedCopyRequest = {
 export type PagesLookUpRequest = {
   chapterNumber?: number;
   juzNumber?: number;
+  rubNumber?: number;
   pageNumber?: number;
   manzilNumber?: number;
   rubElHizbNumber?: number;
