@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -158,17 +158,36 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     [],
   );
 
+  // a ref to know weather this is the initial search request made when the user loads the page or not
+  const isInitialSearch = useRef(true);
+
   // listen to any changes in the API params and call BE on change.
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
-      getResults(debouncedSearchQuery, currentPage, selectedTranslations, selectedLanguages);
-    }
-  }, [currentPage, debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
+      // we don't want to reset pagination when the user reloads the page with a ?page={number} in the url query
+      if (!isInitialSearch.current) setCurrentPage(1);
 
-  const onPageChange = (page: number) => {
+      getResults(
+        debouncedSearchQuery,
+        // if it is the initial search request, use the page number in the url, otherwise, reset it
+        isInitialSearch.current ? currentPage : 1,
+        selectedTranslations,
+        selectedLanguages,
+      );
+
+      // if it was the initial request, update the ref
+      if (isInitialSearch.current) isInitialSearch.current = false;
+    }
+    // we don't want to run this effect when currentPage is changed
+    // because we are already handeling this in onPageChange
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
+
+  const onPageChange = async (page: number) => {
     logEvent('search_page_number_change');
     setCurrentPage(page);
+    await getResults(debouncedSearchQuery, page, selectedTranslations, selectedLanguages);
   };
 
   const onTranslationChange = useCallback((translationIds: string[]) => {
