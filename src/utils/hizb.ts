@@ -26,3 +26,17 @@ export const getHizbIds = (lang: string) => {
     };
   });
 };
+
+/**
+ * Given a hizbId, get chapters ids from a json file
+ *
+ * @param {string} hizbId
+ * @returns {string[]} chapterIds
+ */
+// export const getChapterIdsForHizb = async (hizbId: string): Promise<string[]> => {
+//   return new Promise((res) => {
+//     import(`../../data/hizb-to-chapter-mappings.json`).then((data) => {
+//       res(data.default[hizbId]);
+//     });
+//   });
+// };
