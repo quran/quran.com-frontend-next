@@ -145,8 +145,8 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
             // if there is no navigations nor verses in the response
             if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
               logEmptySearchResults(query, 'search_page');
-            } else if (response.pagination.totalPages <= response.pagination.currentPage) {
-              setCurrentPage(response.pagination.totalPages);
+            } else if (response.pagination.totalPages < page) {
+              setCurrentPage(1);
             }
           }
         })
