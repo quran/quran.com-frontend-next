@@ -51,10 +51,10 @@ const SidebarNavigation = () => {
       name: t('juz'),
       value: NavigationItem.Juz,
     },
-    {
-      name: t('hizb'),
-      value: NavigationItem.Hizb,
-    },
+    // {
+    //   name: t('hizb'),
+    //   value: NavigationItem.Hizb,
+    // },
     {
       name: t('page'),
       value: NavigationItem.Page,
