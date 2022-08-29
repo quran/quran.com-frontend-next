@@ -34,7 +34,7 @@ interface RubPageProps {
 
 //FIXME: clarify about rubelhizb ._.
 //FIXME: Playing next surah on a page prompts to replay "undefined"
-
+//FIXME: navigation from 2 or more consecutive rub repeats the same page
 const RubPage: NextPage<RubPageProps> = ({ hasError, rubVerses, chaptersData,}) => {
   const { t, lang } = useTranslation('common');
   const {
