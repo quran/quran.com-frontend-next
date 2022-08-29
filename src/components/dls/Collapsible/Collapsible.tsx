@@ -2,6 +2,8 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 
+import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+
 import styles from './Collapsible.module.scss';
 
 type ChildrenRenderProps = {
@@ -20,16 +22,28 @@ const Collapsible = ({ isDefaultOpen = false, prefix, title, suffix, children }:
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
   return (
-    <div>
-      <div className={styles.header} onClick={() => setIsOpen((preValue) => !preValue)}>
-        <div className={styles.headerLeft}>
-          <div className={styles.prefixContainer}>{prefix}</div>
-          {title}
+    <CollapsiblePrimitive.Root open={isOpen}>
+      <CollapsiblePrimitive.Trigger asChild>
+        <div className={styles.header} onClick={() => setIsOpen((preValue) => !preValue)}>
+          <div className={styles.headerLeft}>
+            <div className={styles.prefixContainer}>{prefix}</div>
+            {title}
+          </div>
+          <div
+            className={styles.suffixContainer}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            {suffix}
+          </div>
         </div>
-        <div className={styles.suffixContainer}>{suffix}</div>
-      </div>
-      {isOpen && children({ isOpen })}
-    </div>
+      </CollapsiblePrimitive.Trigger>
+      <CollapsiblePrimitive.CollapsibleContent>
+        {isOpen && children({ isOpen })}
+      </CollapsiblePrimitive.CollapsibleContent>
+    </CollapsiblePrimitive.Root>
   );
 };
 
