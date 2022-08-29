@@ -24,7 +24,7 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی']; // TODO: this needs to be refactored when we localize Ayatul Kursi
 const useChapterIdsByUrlPath = (lang: string): string[] => {
   const router = useRouter();
-  const { chapterId, juzId, pageId } = router.query;
+  const { chapterId, juzId, pageId, rubId } = router.query;
   const [chapterIds, setChapterIds] = useState([]);
   const chaptersData = useContext(DataContext);
   useEffect(() => {
@@ -55,7 +55,7 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         setChapterIds(await getChapterIdsForJuz(formatStringNumber(juzId as string)));
       }
     })();
-  }, [pageId, juzId, lang, chapterId, chaptersData]);
+  }, [pageId, juzId, rubId, lang, chapterId, chaptersData]);
 
   return chapterIds;
 };

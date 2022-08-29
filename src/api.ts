@@ -13,6 +13,7 @@ import {
   makeTranslationsUrl,
   makeVersesUrl,
   makeJuzVersesUrl,
+  makeRubVersesUrl,
   makeChapterInfoUrl,
   makePageVersesUrl,
   makeFootnoteUrl,
@@ -229,6 +230,21 @@ export const getJuzVerses = async (
   locale: string,
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => fetcher(makeJuzVersesUrl(id, locale, params));
+
+/**
+ * Get the verses of a specific Rub El Hizb.
+ *
+ * @param {string} id the ID of the Rub El Hizb.
+ * @param {string} locale  the locale.
+ * @param {string} params the params that we might need to include that differs from the default ones.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
+ export const getRubVerses = async (
+  id: string,
+  locale: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => fetcher(makeRubVersesUrl(id, locale, params));
 
 /**
  * Get the verses of a specific page.

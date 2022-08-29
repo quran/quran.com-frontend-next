@@ -216,6 +216,20 @@ export const makeJuzVersesUrl = (
 ): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(currentLocale, params));
 
 /**
+ * Compose the url for Rub el Hizb's verses API.
+ *
+ * @param {string} id  the Id of the Rub el Hizb.
+ * @param {string} currentLocale  the locale.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+ export const makeRubVersesUrl = (
+  id: string | number,
+  currentLocale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_rub_el_hizb/${id}`, getVersesParams(currentLocale, params));
+
+/**
  * Compose the url for by verse key API.
  *
  * @param {string} verseKey  the Id of the juz.
