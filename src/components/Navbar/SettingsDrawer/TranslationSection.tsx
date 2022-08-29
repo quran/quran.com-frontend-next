@@ -44,12 +44,12 @@ const TranslationSection = () => {
       <div>
         {selectedTranslations.map((id) => (
           <Skeleton key={id}>
-            <div>{id}</div>
+            <div>{t('loading')}</div>
           </Skeleton>
         ))}
       </div>
     ),
-    [selectedTranslations],
+    [selectedTranslations, t],
   );
 
   const localizedSelectedTranslations = useMemo(
