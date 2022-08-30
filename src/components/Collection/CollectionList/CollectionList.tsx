@@ -1,4 +1,3 @@
-/* eslint-disable i18next/no-literal-string */
 import useTranslation from 'next-translate/useTranslation';
 
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
@@ -11,6 +10,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/d
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 type Collection = {
+  id: string | number;
   name: string;
   itemCount: number;
 };
@@ -23,7 +23,7 @@ const CollectionList = ({ collections }: CollectionListProps) => {
   const { t } = useTranslation();
   const sorter = (
     <div className={styles.sorter}>
-      Recently Added{' '}
+      {t('profile:recently-added')}
       <span className={styles.itemIcon}>
         <ChevronDownIcon />
       </span>
@@ -32,20 +32,22 @@ const CollectionList = ({ collections }: CollectionListProps) => {
   return (
     <div>
       <div className={styles.header}>
-        <div>Collections</div>
+        <div>{t('profile:collections')}</div>
         {sorter}
       </div>
       <div className={styles.collectionListContainer}>
         {collections.map((collection) => {
           return (
-            <div key={collection.name} className={styles.itemContainer}>
+            <div key={collection.id} className={styles.itemContainer}>
               <div>
                 <div className={styles.itemTitle}>{collection.name}</div>
                 <div className={styles.itemInfo}>
                   <div className={styles.itemIcon}>
                     <BookmarkIcon />
                   </div>
-                  <div className={styles.itemCount}>{collection.itemCount} verses</div>
+                  <div className={styles.itemCount}>
+                    {collection.itemCount} {t('common:verses')}
+                  </div>
                 </div>
               </div>
 
@@ -66,8 +68,8 @@ const CollectionList = ({ collections }: CollectionListProps) => {
                 isModal
                 isPortalled
               >
-                <PopoverMenu.Item>Rename</PopoverMenu.Item>
-                <PopoverMenu.Item>Delete</PopoverMenu.Item>
+                <PopoverMenu.Item>{t('profile:rename')}</PopoverMenu.Item>
+                <PopoverMenu.Item>{t('profile:delete')}</PopoverMenu.Item>
               </PopoverMenu>
             </div>
           );
