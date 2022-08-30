@@ -21,21 +21,22 @@ type Props = {
 const Collapsible = ({ isDefaultOpen = false, prefix, title, suffix, children }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
+  const onSuffixClicked = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
+
   return (
     <CollapsiblePrimitive.Root open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
-        <div className={styles.header} onClick={() => setIsOpen((preValue) => !preValue)}>
+        <div className={styles.header} onClick={onHeaderClicked}>
           <div className={styles.headerLeft}>
             <div className={styles.prefixContainer}>{prefix}</div>
             {title}
           </div>
-          <div
-            className={styles.suffixContainer}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-            }}
-          >
+          <div className={styles.suffixContainer} onClick={onSuffixClicked}>
             {suffix}
           </div>
         </div>
