@@ -1,4 +1,5 @@
 {
+    "add-collection": "Add Collection",
     "advanced-copy": "Advanced Copy",
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",
@@ -24,6 +25,7 @@
     "next-juz": "Next Juz",
     "next-page": "Next page",
     "next-surah": "Next Surah",
+    "new-collection-name": "New Collection Name",
     "prev-ayah": "Previous Ayah",
     "prev-juz": "Previous Juz",
     "prev-page": "Previous page",
@@ -35,6 +37,7 @@
     "reflection-not-available": "There are no reviewed reflections for this ayah",
     "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
     "remove-bookmark": "Remove bookmark",
+    "save-to": "Save to...",
     "see-less": "See less",
     "see-more": "See more",
     "select-range": "Select verses range",

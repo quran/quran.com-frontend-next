@@ -10,5 +10,6 @@
     "recently-added": "Recently Added",
     "collections": "Collections",
     "rename": "Rename",
-    "delete": "Delete"
+    "delete": "Delete",
+    "new-collection-name": "New Collection Name"
 }

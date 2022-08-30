@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  justify-content: center;
+  margin-block-end: var(--spacing-mega);
+  text-align: center;
+}
+
+.collectionList {
+  .collectionItem + .collectionItem {
+    margin-block-start: var(--spacing-small);
+  }
+}
+
+.newCollectionFormContainer {
+  margin-block-start: var(--spacing-small);
+}
