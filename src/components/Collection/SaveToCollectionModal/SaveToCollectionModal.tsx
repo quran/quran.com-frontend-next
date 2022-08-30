@@ -1,5 +1,6 @@
-/* eslint-disable i18next/no-literal-string */
 import { useState } from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
 
 import PlusIcon from '../../../../public/icons/plus.svg';
 
@@ -13,6 +14,7 @@ import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
 export type Collection = {
+  id: string | number;
   name: string;
   checked?: boolean;
 };
@@ -32,14 +34,15 @@ const SaveToCollectionModal = ({
   onNewCollectionCreated,
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <Modal isOpen={isOpen}>
       <Modal.Body>
-        <div className={styles.header}>Save to...</div>
+        <div className={styles.header}>{t('quran-reader:save-to')}</div>
         <div className={styles.collectionList}>
           {collections.map((collection) => (
-            <div className={styles.collectionItem} key={collection.name}>
+            <div className={styles.collectionItem} key={collection.id}>
               <Checkbox
                 id={collection.name}
                 checked={collection.checked}
@@ -56,7 +59,7 @@ const SaveToCollectionModal = ({
               prefix={<PlusIcon />}
               onClick={() => setIsAddingNewCollection(true)}
             >
-              Add Collection
+              {t('quran-reader:add-collection')}
             </Button>
           )}
 
@@ -66,12 +69,12 @@ const SaveToCollectionModal = ({
                 formFields={[
                   {
                     field: 'name',
-                    label: 'New collection name',
+                    label: t('quran-reader:new-collection-name'),
                     rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
                     type: FormFieldType.Text,
                   },
                 ]}
-                actionText="Submit"
+                actionText={t('common:submit')}
                 onSubmit={(data: any) => {
                   onNewCollectionCreated(data.name);
                 }}
