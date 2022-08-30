@@ -7,5 +7,9 @@
         "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
         "title": "Are you absolutely sure?"
     },
+    "recently-added": "Recently Added",
+    "collections": "Collections",
+    "rename": "Rename",
+    "delete": "Delete",
     "new-collection-name": "New Collection Name"
 }
