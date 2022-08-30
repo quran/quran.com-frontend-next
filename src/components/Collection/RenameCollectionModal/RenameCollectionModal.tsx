@@ -1,5 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 
+import useTranslation from 'next-translate/useTranslation';
+
 import styles from './RenameCollectionModal.module.scss';
 
 import Modal from 'src/components/dls/Modal/Modal';
@@ -8,6 +10,7 @@ import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
 export type Collection = {
+  id: number | string;
   name: string;
   checked?: boolean;
 };
@@ -19,6 +22,7 @@ type RenameCollectionModalProps = {
 };
 
 const RenameCollectionModal = ({ isOpen, onSubmit, defaultValue }: RenameCollectionModalProps) => {
+  const { t } = useTranslation('profile');
   return (
     <Modal isOpen={isOpen}>
       <Modal.Body>
@@ -28,7 +32,7 @@ const RenameCollectionModal = ({ isOpen, onSubmit, defaultValue }: RenameCollect
             formFields={[
               {
                 field: 'name',
-                label: 'New collection name',
+                label: t('new-collection-name'),
                 defaultValue,
                 rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
                 type: FormFieldType.Text,
