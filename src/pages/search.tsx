@@ -2,7 +2,6 @@
 /* eslint-disable max-lines */
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-import clipboardCopy from 'clipboard-copy';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -18,16 +17,11 @@ import {
   getAvailableTranslations,
   getFilteredVerses,
   getKalimatSearchResults,
-  submitKalimatSearchResultFeedback,
 } from 'src/api';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
 import Input, { InputVariant } from 'src/components/dls/Forms/Input';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import Modal from 'src/components/dls/Modal/Modal';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import Toggle from 'src/components/dls/Toggle/Toggle';
-import FormBuilder from 'src/components/FormBuilder/FormBuilder';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
@@ -51,8 +45,6 @@ import { VersesResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 import ChaptersData from 'types/ChaptersData';
-import { RuleType } from 'types/FieldRule';
-import { FormFieldType } from 'types/FormField';
 import { QuranFont } from 'types/QuranReader';
 
 const PAGE_SIZE = 10;
@@ -80,8 +72,6 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const [hasError, setHasError] = useState(false);
   const [exactMatchesOnly, setExactMatchOnly] = useState(true);
   const [searchResult, setSearchResult] = useState<VersesResponse>(null);
-  const [feedbackVerseKey, setFeedbackVerseKey] = useState('');
-  const toast = useToast();
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   // the query params that we want added to the url
@@ -287,33 +277,6 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     setTranslationSearchQuery('');
   };
 
-  const onFeedbackFormSubmitted = (data: { feedbackScore: number; comments: string }) => {
-    const feedbackRequestParams = {
-      query: debouncedSearchQuery,
-      feedbackScore: data.feedbackScore,
-      result: feedbackVerseKey,
-    };
-    submitKalimatSearchResultFeedback(feedbackRequestParams)
-      .then(() => {
-        setFeedbackVerseKey('');
-        const textCopied = {
-          ...feedbackRequestParams,
-          result: `https://quran.com/${feedbackVerseKey}`,
-          comments: data.comments,
-        };
-        clipboardCopy(JSON.stringify(textCopied, null, '  ')).then(() =>
-          toast('Feedback submitted successfully and copied to clipboard', {
-            status: ToastStatus.Success,
-          }),
-        );
-      })
-      .catch(() => {
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
-        });
-      });
-  };
-
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -329,57 +292,6 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
         languageAlternates={getLanguageAlternates(navigationUrl)}
       />
       <div className={styles.pageContainer}>
-        <Modal
-          isOpen={!!feedbackVerseKey}
-          onClickOutside={() => {
-            setFeedbackVerseKey('');
-          }}
-        >
-          <Modal.Header>
-            <span>
-              <Link
-                shouldPassHref
-                href={`https://quran.com/${feedbackVerseKey}`}
-                isNewTab
-                shouldPrefetch={false}
-                variant={LinkVariant.Highlight}
-              >
-                {feedbackVerseKey}
-              </Link>
-              {` ${t(`common:feedback`)}`}
-            </span>
-          </Modal.Header>
-          <Modal.Body>
-            <FormBuilder
-              formFields={[
-                {
-                  field: 'feedbackScore',
-                  label: 'Feedback Score (-1.0 -> 1.0)',
-                  type: FormFieldType.Number,
-                  rules: [
-                    {
-                      type: RuleType.Required,
-                      value: true,
-                      errorMessage: 'Feedback score is required',
-                    },
-                  ],
-                  typeSpecificProps: {
-                    max: 1,
-                    min: -1,
-                    step: 0.1,
-                  },
-                },
-                {
-                  field: 'comments',
-                  label: 'Comments',
-                  type: FormFieldType.Text,
-                },
-              ]}
-              actionText="Submit"
-              onSubmit={onFeedbackFormSubmitted}
-            />
-          </Modal.Body>
-        </Modal>
         <div className={styles.headerOuterContainer}>
           <div className={styles.headerInnerContainer}>
             <Input
@@ -466,7 +378,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
               pageSize={PAGE_SIZE}
               isSearching={isSearching}
               hasError={hasError}
-              setFeedbackVerseKey={setFeedbackVerseKey}
+              showFeedbackButtons
             />
           </div>
         </div>

@@ -47,21 +47,24 @@ const FormBuilder = <T,>({
             defaultValue={formField.defaultValue}
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
-            render={({ field, fieldState: { error } }) => (
-              <div className={styles.inputContainer}>
-                <Input
-                  htmlType={formField.type}
-                  key={formField.field}
-                  onChange={(val) => field.onChange(val)}
-                  id={formField.field}
-                  name={formField.field}
-                  containerClassName={styles.input}
-                  fixedWidth={false}
-                  placeholder={formField.label}
-                />
-                {error && <span className={styles.errorText}>{error.message}</span>}
-              </div>
-            )}
+            render={({ field, fieldState: { error } }) => {
+              return (
+                <div className={styles.inputContainer}>
+                  <Input
+                    htmlType={formField.type}
+                    key={formField.field}
+                    value={field.value}
+                    onChange={(val) => field.onChange(val)}
+                    id={formField.field}
+                    name={formField.field}
+                    containerClassName={styles.input}
+                    fixedWidth={false}
+                    placeholder={formField.label}
+                  />
+                  {error && <span className={styles.errorText}>{error.message}</span>}
+                </div>
+              );
+            }}
           />
         );
       })}

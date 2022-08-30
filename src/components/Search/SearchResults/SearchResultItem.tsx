@@ -32,15 +32,15 @@ export enum Source {
 interface Props {
   result: Verse;
   source: Source;
-  setFeedbackVerseKey?: (verseKey: string) => void;
+  showFeedbackButtons?: boolean;
   searchQuery?: string;
 }
 
 const SearchResultItem: React.FC<Props> = ({
   result,
   source,
-  setFeedbackVerseKey,
   searchQuery,
+  showFeedbackButtons,
 }) => {
   const toast = useToast();
   const { t, lang } = useTranslation('quran-reader');
@@ -77,17 +77,6 @@ const SearchResultItem: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      {setFeedbackVerseKey && (
-        <Button
-          tooltip={t('common:feedback')}
-          onClick={() => {
-            setFeedbackVerseKey(result.verseKey);
-          }}
-          variant={ButtonVariant.Compact}
-        >
-          {t('common:feedback')}
-        </Button>
-      )}
       <div className={styles.itemContainer}>
         <Link
           href={getChapterWithStartingVerseUrl(result.verseKey)}
@@ -129,7 +118,7 @@ const SearchResultItem: React.FC<Props> = ({
             <p className={styles.translationName}> - {translation.resourceName}</p>
           </div>
         ))}
-        {setFeedbackVerseKey && (
+        {showFeedbackButtons && (
           <div className={styles.iconsContainer}>
             <Button
               variant={ButtonVariant.Ghost}

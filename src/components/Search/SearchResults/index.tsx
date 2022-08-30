@@ -21,7 +21,7 @@ interface Props {
   pageSize?: number;
   onPageChange?: (page: number) => void;
   onSearchResultClicked?: () => void;
-  setFeedbackVerseKey?: (verseKey: string) => void;
+  showFeedbackButtons?: boolean;
 }
 
 const SearchResults: React.FC<Props> = ({
@@ -32,7 +32,7 @@ const SearchResults: React.FC<Props> = ({
   onPageChange,
   pageSize,
   onSearchResultClicked,
-  setFeedbackVerseKey,
+  showFeedbackButtons,
 }) => {
   const { t, lang } = useTranslation();
   return (
@@ -65,8 +65,8 @@ const SearchResults: React.FC<Props> = ({
               key={result.verseKey}
               result={result}
               source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
-              setFeedbackVerseKey={setFeedbackVerseKey}
               searchQuery={searchQuery}
+              showFeedbackButtons={showFeedbackButtons}
             />
           ))}
           {isSearchDrawer ? (
