@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.headerLeft {
+  display: flex;
+}
+
+.prefixContainer {
+  display: flex;
+  align-items: center;
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.suffixContainer {
+  display: flex;
+  align-items: center;
+  margin-inline-end: var(--spacing-xxsmall);
+}
