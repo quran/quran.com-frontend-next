@@ -1,4 +1,5 @@
-/* eslint-disable i18next/no-literal-string */
+import useTranslation from 'next-translate/useTranslation';
+
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 
@@ -7,6 +8,7 @@ import styles from './CollectionDetail.module.scss';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
 
 type CollectionItem = {
+  id: string | number;
   title: string;
   content: string;
 };
@@ -17,9 +19,10 @@ type CollectionDetailProps = {
 };
 
 const CollectionDetail = ({ title, collectionItems }: CollectionDetailProps) => {
+  const { t } = useTranslation();
   const sorter = (
     <div className={styles.sorter}>
-      Recently added
+      {t('collection:recently-added')}
       <div className={styles.sorterIcon}>
         <ChevronDownIcon />
       </div>
@@ -37,7 +40,7 @@ const CollectionDetail = ({ title, collectionItems }: CollectionDetailProps) => 
           return (
             <Collapsible
               title={item.title}
-              key={item.title}
+              key={item.id}
               prefix={<ChevronDownIcon />}
               suffix={<OverflowMenuIcon />}
             >
