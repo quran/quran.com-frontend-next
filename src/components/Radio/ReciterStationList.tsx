@@ -4,7 +4,9 @@ import { useSelector } from '@xstate/react';
 
 import PauseIcon from '../../../public/icons/pause.svg';
 import PlayIcon from '../../../public/icons/play-arrow.svg';
+import { getReciterNavigationUrl } from '../../utils/navigation';
 import Card, { CardSize } from '../dls/Card/Card';
+import Link from '../dls/Link/Link';
 
 import styles from './ReciterStationList.module.scss';
 import { StationType } from './types';
@@ -56,7 +58,11 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
             imgSrc={makeCDNUrl(reciter.profilePicture)}
             key={reciter.id}
             onImgClick={onClick}
-            title={reciter.translatedName.name}
+            title={
+              <Link key={reciter.id} href={getReciterNavigationUrl(reciter.id.toString())}>
+                {reciter.translatedName.name}
+              </Link>
+            }
             imgAlt={reciter.translatedName.name}
             description={reciter.style.name}
             size={CardSize.Medium}

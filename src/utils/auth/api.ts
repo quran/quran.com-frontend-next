@@ -1,3 +1,5 @@
+import { configureRefreshFetch } from 'refresh-fetch';
+
 import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
@@ -31,16 +33,6 @@ type RequestData = Record<string, any>;
 const handleErrors = async (res) => {
   const body = await res.json();
   throw new Error(body?.message);
-};
-
-export const privateFetcher = async <T>(input: RequestInfo, init?: RequestInit): Promise<T> => {
-  try {
-    const data = await fetcher<T>(input, { ...init, credentials: 'include' });
-    return data;
-  } catch (res) {
-    await handleErrors(res);
-    return null;
-  }
 };
 
 /**
@@ -147,3 +139,27 @@ export const addOrUpdateBulkUserPreferences = async (preferences: Record<Prefere
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
 };
+
+const shouldRefreshToken = (error) => {
+  return error?.message === 'must refresh token';
+};
+
+export const withCredentialsFetcher = async <T>(
+  input: RequestInfo,
+  init?: RequestInit,
+): Promise<T> => {
+  try {
+    const data = await fetcher<T>(input, { ...init, credentials: 'include' });
+    return data;
+  } catch (error) {
+    await handleErrors(error);
+    return null;
+  }
+};
+
+export const privateFetcher = configureRefreshFetch({
+  shouldRefreshToken,
+  // @ts-ignore
+  refreshToken,
+  fetch: withCredentialsFetcher,
+});

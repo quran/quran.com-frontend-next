@@ -5,11 +5,14 @@ import { useSWRConfig } from 'swr';
 
 import { selectLastSyncAt, setLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
+import {
+  RecentReadingSessions,
+  selectRecentReadingSessions,
+} from 'src/redux/slices/QuranReader/readingTracker';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import { syncUserLocalData } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { makeReadingSessionsUrl, makeUserProfileUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
@@ -31,10 +34,10 @@ const formatLocalBookmarkRecord = (
   };
 };
 
-const formatLocalReadingSession = (ayahKey: string) => {
+const formatLocalReadingSession = (ayahKey: string, updatedAt: number) => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
-    updatedAt: new Date().toISOString(),
+    updatedAt: new Date(updatedAt).toISOString(),
     chapterNumber: Number(surahNumber),
     verseNumber: Number(ayahNumber),
   };
@@ -50,7 +53,10 @@ const useSyncUserData = () => {
   const dispatch = useDispatch();
   const { cache, mutate } = useSWRConfig();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
-  const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
+  const recentReadingSessions: RecentReadingSessions = useSelector(
+    selectRecentReadingSessions,
+    shallowEqual,
+  );
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const localLastSyncAt = useSelector(selectLastSyncAt, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
@@ -62,14 +68,15 @@ const useSyncUserData = () => {
         [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
           formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
         ),
-        [SyncDataType.READING_SESSIONS]: Object.keys(recentReadingSessions).map((ayahKey) =>
-          formatLocalReadingSession(ayahKey),
+        [SyncDataType.READING_SESSIONS]: Object.entries(recentReadingSessions).map(
+          ([ayahKey, updatedAt]) => formatLocalReadingSession(ayahKey, updatedAt),
         ),
       };
       syncUserLocalData(requestPayload)
         .then((response) => {
           const { lastSyncAt } = response;
           mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
+          mutate(makeReadingSessionsUrl());
           dispatch({ type: setLastSyncAt.type, payload: lastSyncAt });
         })
         // eslint-disable-next-line @typescript-eslint/no-empty-function

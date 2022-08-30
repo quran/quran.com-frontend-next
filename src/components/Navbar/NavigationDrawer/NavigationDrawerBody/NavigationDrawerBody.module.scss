@@ -8,7 +8,7 @@
 
 .subtitle {
   @include utility.center-vertically;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xsmall);
   text-transform: uppercase;
   font-weight: var(--font-weight-bold);
   border-block-end: 1px var(--color-borders-hairline) solid;

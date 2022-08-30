@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xlarge);
+}
+
+.sorter {
+  display: flex;
+  align-items: center;
+}
+
+.sorterIcon {
+  display: flex;
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.collectionItemsContainer {
+  margin-block-start: var(--spacing-medium);
+  > * + * {
+    margin-block-start: var(--spacing-xsmall);
+  }
+}

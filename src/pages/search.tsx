@@ -38,7 +38,12 @@ import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { areArraysEqual } from 'src/utils/array';
 import { getAllChaptersData } from 'src/utils/chapter';
-import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
+import {
+  logButtonClick,
+  logEvent,
+  logTextSearchQuery,
+  logValueChange,
+} from 'src/utils/eventLogger';
 import filterTranslations from 'src/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
 import { getCanonicalUrl } from 'src/utils/navigation';
@@ -142,6 +147,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const getResults = useCallback(
     (query: string, page: number, translation: string, language: string) => {
       setIsSearching(true);
+      logTextSearchQuery(query, 'search_page');
       getKalimatSearchResults({ query, exactMatchesOnly: exactMatchesOnly ? 1 : 0 })
         .then((kalimatResponse) => {
           if (kalimatResponse.length) {

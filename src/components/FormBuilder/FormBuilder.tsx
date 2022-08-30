@@ -44,6 +44,7 @@ const FormBuilder = <T,>({
           <Controller
             key={formField.field}
             control={control}
+            defaultValue={formField.defaultValue}
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
             render={({ field, fieldState: { error } }) => (
@@ -57,7 +58,6 @@ const FormBuilder = <T,>({
                   containerClassName={styles.input}
                   fixedWidth={false}
                   placeholder={formField.label}
-                  typeSpecificProps={formField.typeSpecificProps}
                 />
                 {error && <span className={styles.errorText}>{error.message}</span>}
               </div>

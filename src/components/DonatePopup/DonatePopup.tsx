@@ -11,6 +11,7 @@ import Modal from '../dls/Modal/Modal';
 import styles from './DonatePopup.module.scss';
 
 import { selectSessionCount } from 'src/redux/slices/session';
+import { logEvent } from 'src/utils/eventLogger';
 import openGivingLoopPopup from 'src/utils/givingloop';
 
 const POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT = 10;
@@ -25,6 +26,11 @@ const DonatePopup = () => {
 
   const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
     openGivingLoopPopup(monthly, amount);
+    logEvent('donate_button_clicked', {
+      source: 'donate_popover',
+      monthly,
+      ...(amount && { amount }),
+    });
     setIsDonateButtonLoading(true);
     setTimeout(() => {
       setIsDonateButtonLoading(false);
