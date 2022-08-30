@@ -6,5 +6,6 @@
         "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
         "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
         "title": "Are you absolutely sure?"
-    }
+    },
+    "new-collection-name": "New Collection Name"
 }
