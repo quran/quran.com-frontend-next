@@ -8,7 +8,7 @@
     "dev:https": "node server.js",
     "build": "next build",
     "postbuild": "yarn run generate-sitemap",
-    "snapshots:update": "vitest update",
+    "snapshots:update": "vitest run --update",
     "start": "next start",
     "storybook": "start-storybook -s public -p 6006",
     "build-storybook": "build-storybook -s public",
