@@ -12,32 +12,20 @@ import styles from './DonatePopup.module.scss';
 
 import { selectSessionCount } from 'src/redux/slices/session';
 import { logEvent } from 'src/utils/eventLogger';
-import openGivingLoopPopup from 'src/utils/givingloop';
 
 const POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT = 10;
 const DonatePopup = () => {
   const { t } = useTranslation('common');
   const sessionCount = useSelector(selectSessionCount);
-  const [isDonateButtonLoading, setIsDonateButtonLoading] = useState(false);
 
   const [isPopupVisible, setIsPopupVisible] = useState(
     () => sessionCount % POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT === 0 && sessionCount > 0,
   );
 
-  const onDonateButtonClicked = (monthly: boolean, amount?: number) => {
-    openGivingLoopPopup(monthly, amount);
+  const onDonateButtonClicked = () => {
     logEvent('donate_button_clicked', {
       source: 'donate_popover',
-      monthly,
-      ...(amount && { amount }),
     });
-    setIsDonateButtonLoading(true);
-    setTimeout(() => {
-      setIsDonateButtonLoading(false);
-
-      // Unfortunately, we need to close this popup. Otherwise the giving loop popup won't be clickable
-      setIsPopupVisible(false);
-    }, 5000);
   };
 
   if (!isPopupVisible) return null;
@@ -69,32 +57,14 @@ const DonatePopup = () => {
           </div>
           <div className={styles.actionsContainer}>
             <Button
-              className={styles.action}
-              type={ButtonType.Success}
-              onClick={() => onDonateButtonClicked(true)}
-              isLoading={isDonateButtonLoading}
-            >
-              {t('popup.cta-1')}
-            </Button>
-
-            <Button
-              className={styles.action}
-              type={ButtonType.Success}
-              onClick={() => onDonateButtonClicked(false, 100)}
-              isLoading={isDonateButtonLoading}
-              variant={ButtonVariant.Outlined}
-            >
-              {t('popup.cta-2')}
-            </Button>
-
-            <Button
               href="https://donate.quran.com"
+              onClick={onDonateButtonClicked}
               isNewTab
               className={styles.action}
               type={ButtonType.Success}
               variant={ButtonVariant.Outlined}
             >
-              {t('popup.cta-3')}
+              {t('donate')}
             </Button>
           </div>
           <div className={styles.text}>{t('popup.footnote')}</div>

@@ -149,7 +149,6 @@
     "from": "De",
     "fundraising": {
         "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
-        "learn-more": "Apprendre encore plus",
         "title": "Devenez un donateur mensuel"
     },
     "help": "Aider",
@@ -182,9 +181,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "popular-links": "Liens populaires",
     "popup": {
-        "cta-1": "Faire un don mensuel",
-        "cta-2": "Faire un don unique",
-        "cta-3": "Apprendre encore plus",
         "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
         "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
         "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",

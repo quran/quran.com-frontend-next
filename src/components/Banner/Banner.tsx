@@ -1,8 +1,3 @@
-// import { useDispatch } from 'react-redux';
-
-// import CloseIcon from '../../../public/icons/close.svg';
-import { useState } from 'react';
-
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
@@ -12,10 +7,7 @@ import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 import styles from './Banner.module.scss';
 
 import { selectIsBannerVisible } from 'src/redux/slices/banner';
-import openGivingLoopPopup from 'src/utils/givingloop';
-
-// import { setIsBannerVisible } from 'src/redux/slices/banner';
-// import { logButtonClick } from 'src/utils/eventLogger';
+import { logEvent } from 'src/utils/eventLogger';
 
 type BannerProps = {
   onClick?: () => void;
@@ -25,20 +17,12 @@ type BannerProps = {
 };
 
 const Banner = ({ text, cta }: BannerProps) => {
-  const [isLoading, setIsLoading] = useState(false);
   const isBannerVisible = useSelector(selectIsBannerVisible);
-  // const dispatch = useDispatch();
-  // const closeBanner = () => {
-  //   dispatch(setIsBannerVisible(false));
-  //   logButtonClick('banner_close');
-  // };
 
   const onDonateClicked = () => {
-    openGivingLoopPopup();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
+    logEvent('donate_button_clicked', {
+      source: 'banner',
+    });
   };
 
   return (
@@ -57,19 +41,14 @@ const Banner = ({ text, cta }: BannerProps) => {
         <Button
           isNewTab
           onClick={onDonateClicked}
+          href="https://donate.quran.com"
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
-          isLoading={isLoading}
         >
           {cta}
         </Button>
       </div>
-      {/* <div className={styles.closeButton}>
-        <Button type={ButtonType.Success} variant={ButtonVariant.Compact} onClick={closeBanner}>
-          <CloseIcon />
-        </Button>
-      </div> */}
     </div>
   );
 };
