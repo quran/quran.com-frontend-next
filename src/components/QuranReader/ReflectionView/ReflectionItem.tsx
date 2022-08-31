@@ -224,6 +224,7 @@ const ReflectionItem = ({
         </div>
         <div>
           <PopoverMenu
+            isPortalled={false}
             trigger={
               <Button
                 size={ButtonSize.Small}
