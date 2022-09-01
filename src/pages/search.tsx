@@ -184,10 +184,10 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
 
-  const onPageChange = async (page: number) => {
+  const onPageChange = (page: number) => {
     logEvent('search_page_number_change');
     setCurrentPage(page);
-    await getResults(debouncedSearchQuery, page, selectedTranslations, selectedLanguages);
+    getResults(debouncedSearchQuery, page, selectedTranslations, selectedLanguages);
   };
 
   const onTranslationChange = useCallback((translationIds: string[]) => {
