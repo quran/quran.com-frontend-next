@@ -166,7 +166,9 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       // we don't want to reset pagination when the user reloads the page with a ?page={number} in the url query
-      if (!isInitialSearch.current) setCurrentPage(1);
+      if (!isInitialSearch.current) {
+        setCurrentPage(1);
+      }
 
       getResults(
         debouncedSearchQuery,
@@ -177,7 +179,9 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
       );
 
       // if it was the initial request, update the ref
-      if (isInitialSearch.current) isInitialSearch.current = false;
+      if (isInitialSearch.current) {
+        isInitialSearch.current = false;
+      }
     }
     // we don't want to run this effect when currentPage is changed
     // because we are already handeling this in onPageChange
