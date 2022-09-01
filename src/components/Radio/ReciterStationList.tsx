@@ -35,7 +35,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
           radioContext.type === StationType.Reciter && Number(radioContext.id) === reciter.id;
 
         let onClick;
-        if (!isSelectedStation)
+        if (!isSelectedStation) {
           onClick = () => {
             logEvent('station_played', {
               stationId: reciter.id,
@@ -47,6 +47,7 @@ const ReciterStationList = ({ reciters }: ReciterStationListProps) => {
               stationId: reciter.id,
             });
           };
+        }
         if (isSelectedStation) {
           onClick = () => audioService.send('TOGGLE');
         }

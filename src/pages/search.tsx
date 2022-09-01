@@ -202,16 +202,18 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     if (!firstSelectedTranslation) return t('search:all-translations');
 
     if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
-    if (selectedTranslationsArray.length === 2)
+    if (selectedTranslationsArray.length === 2) {
       selectedValueString = t('settings.value-and-other', {
         value: firstSelectedTranslation?.name,
         othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
       });
-    if (selectedTranslationsArray.length > 2)
+    }
+    if (selectedTranslationsArray.length > 2) {
       selectedValueString = t('settings.value-and-others', {
         value: firstSelectedTranslation?.name,
         othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
       });
+    }
 
     return selectedValueString;
   }, [lang, selectedTranslations, t, translations]);

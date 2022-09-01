@@ -50,7 +50,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     });
   };
 
-  if (isLoadingCurrentChapter)
+  if (isLoadingCurrentChapter) {
     return (
       <div className={styles.container}>
         <Button
@@ -66,6 +66,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
         </Button>
       </div>
     );
+  }
 
   return (
     <div className={styles.container}>
