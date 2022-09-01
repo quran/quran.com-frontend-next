@@ -73,13 +73,11 @@
     display: inline;
   }
 
-  [dir="rtl"] & {
-    & p:not([lang="ar"]),
-    & p:not([lang="fa"]),
-    & p:not([lang="ur"]) {
-      direction: ltr;
-      display: block;
-    }
+  & p[lang="ar"],
+  & p[lang="fa"],
+  & p[lang="ur"] {
+    direction: rtl;
+    display: block;
   }
 }
 
