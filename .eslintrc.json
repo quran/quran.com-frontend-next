@@ -146,6 +146,7 @@
             "react/no-unused-prop-types": 0,
             "react/prop-types": 0,
             "react/react-in-jsx-scope": 0,
+            "curly": "error",
             "import/no-extraneous-dependencies": [
                 "error",
                 {
