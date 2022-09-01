@@ -1,3 +1,5 @@
+import { it, expect, describe } from 'vitest';
+
 import { truncateString, stripHTMLTags } from './string';
 
 describe('Test truncateString', () => {

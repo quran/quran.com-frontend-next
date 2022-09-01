@@ -1,4 +1,5 @@
 import { decamelizeKeys } from 'humps';
+import { it, expect } from 'vitest';
 
 import stringify from './qs-stringify';
 
