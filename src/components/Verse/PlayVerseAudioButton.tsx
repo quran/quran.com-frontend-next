@@ -71,7 +71,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     }
   };
 
-  if (isVerseLoading)
+  if (isVerseLoading) {
     return (
       <Button
         size={ButtonSize.Small}
@@ -83,8 +83,9 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         <Spinner />
       </Button>
     );
+  }
 
-  if (isVerseBeingPlayed)
+  if (isVerseBeingPlayed) {
     return (
       <Button
         variant={ButtonVariant.Ghost}
@@ -101,6 +102,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         </span>
       </Button>
     );
+  }
 
   return (
     <Button

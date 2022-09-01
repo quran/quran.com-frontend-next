@@ -47,7 +47,7 @@ const SettingsDrawer = () => {
   };
   let header;
   if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;
-  if (settingsView !== SettingsView.Body)
+  if (settingsView !== SettingsView.Body) {
     header = (
       <div className={styles.headerContainer}>
         <Button variant={ButtonVariant.Ghost} onClick={onGoBackClicked}>
@@ -59,6 +59,7 @@ const SettingsDrawer = () => {
         {settingsView === SettingsView.RepeatSettings && t('audio.player.repeat-settings')}
       </div>
     );
+  }
 
   return (
     <Drawer type={DrawerType.Settings} header={header} closeOnNavigation={false}>

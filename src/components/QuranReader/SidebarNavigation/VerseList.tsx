@@ -45,10 +45,11 @@ const VerseList = () => {
   const handleVerseInputSubmit = (e) => {
     e.preventDefault();
     const firstFilteredVerseKey = filteredVerseKeys[0];
-    if (firstFilteredVerseKey)
+    if (firstFilteredVerseKey) {
       router.push(getChapterWithStartingVerseUrl(firstFilteredVerseKey), undefined, {
         shallow: true, // https://nextjs.org/docs/routing/shallow-routing
       });
+    }
   };
 
   return (
