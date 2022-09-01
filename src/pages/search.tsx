@@ -158,7 +158,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     [],
   );
 
-  // a ref to know weather this is the initial search request made when the user loads the page or not
+  // a ref to know whether this is the initial search request made when the user loads the page or not
   const isInitialSearch = useRef(true);
 
   // listen to any changes in the API params and call BE on change.
