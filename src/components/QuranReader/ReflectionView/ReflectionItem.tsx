@@ -34,6 +34,7 @@ import {
   getQuranReflectPostUrl,
   getQuranReflectTagUrl,
 } from 'src/utils/navigation';
+import { stripHTMLTags } from 'src/utils/string';
 import { navigateToExternalUrl } from 'src/utils/url';
 import { makeVerseKey } from 'src/utils/verse';
 
@@ -143,7 +144,7 @@ const ReflectionItem = ({
   const onCopyTextClicked = () => {
     logButtonClick('reflection_item_copy_text');
 
-    const textToCopy = `${reflectionText} -- ${getQuranReflectPostUrl(id)}`;
+    const textToCopy = stripHTMLTags(`${reflectionText} -- ${getQuranReflectPostUrl(id)}`);
     clipboardCopy(textToCopy).then(() =>
       toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
     );
@@ -307,6 +308,7 @@ const ReflectionItem = ({
         </Button>
 
         <PopoverMenu
+          isPortalled={false}
           trigger={
             <Button
               className={styles.actionItemContainer}
