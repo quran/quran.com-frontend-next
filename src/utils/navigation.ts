@@ -51,7 +51,15 @@ export const getJuzNavigationUrl = (juzNumber: string | number): string => `/juz
  * @param {string | number} rubNumber
  * @returns  {string}
  */
- export const getRubNavigationUrl = (rubNumber: string | number): string => `/rub/${rubNumber}`;
+export const getRubNavigationUrl = (rubNumber: string | number): string => `/rub/${rubNumber}`;
+
+/**
+ * Get the href link to a hizb.
+ *
+ * @param {string | number} hizbNumber
+ * @returns  {string}
+ */
+export const getHizbNavigationUrl = (hizbNumber: string | number): string => `/hizb/${hizbNumber}`;
 
 /**
  * Get the href link to a page.
@@ -136,6 +144,9 @@ export const resolveUrlBySearchNavigationType = (
   }
   if (type === SearchNavigationType.RUB_EL_HIZB) {
     return getRubNavigationUrl(key);
+  }
+  if (type === SearchNavigationType.HIZB) {
+    return getHizbNavigationUrl(key);
   }
   if (type === SearchNavigationType.PAGE) {
     return getPageNavigationUrl(key);

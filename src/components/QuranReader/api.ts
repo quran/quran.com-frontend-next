@@ -3,7 +3,13 @@
 import { fetcher } from 'src/api';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeJuzVersesUrl, makePageVersesUrl, makeRubVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
+import {
+  makeHizbVersesUrl,
+  makeJuzVersesUrl,
+  makePageVersesUrl,
+  makeVersesUrl,
+  makeRubVersesUrl,
+} from 'src/utils/apiPaths';
 import { PagesLookUpRequest } from 'types/ApiRequests';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
@@ -55,6 +61,17 @@ export const getTranslationViewRequestKey = ({
   const page = isVerseData ? initialData.verses[0].verseNumber : pageNumber;
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
+      wordTranslationLanguage: wordByWordLocale,
+      page,
+      reciter,
+      translations: selectedTranslations.join(','),
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      perPage: initialData.pagination.perPage,
+    });
+  }
+  if (quranReaderDataType === QuranReaderDataType.Hizb) {
+    return makeHizbVersesUrl(id, locale, {
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,

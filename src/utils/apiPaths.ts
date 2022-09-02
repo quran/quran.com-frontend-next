@@ -223,11 +223,25 @@ export const makeJuzVersesUrl = (
  * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
  * @returns {string}
  */
- export const makeRubVersesUrl = (
+export const makeRubVersesUrl = (
   id: string | number,
   currentLocale: string,
   params?: Record<string, unknown>,
 ): string => makeUrl(`/verses/by_rub_el_hizb/${id}`, getVersesParams(currentLocale, params));
+
+/**
+ * Compose the url for Hizb's verses API.
+ *
+ * @param {string} id  the Id of the hizb.
+ * @param {string} currentLocale  the locale.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeHizbVersesUrl = (
+  id: string | number,
+  currentLocale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_hizb/${id}`, getVersesParams(currentLocale, params));
 
 /**
  * Compose the url for by verse key API.

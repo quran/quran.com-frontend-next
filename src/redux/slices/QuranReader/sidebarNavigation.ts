@@ -13,7 +13,8 @@ export enum NavigationItem {
   Surah = 'surah',
   Juz = 'juz',
   Page = 'page',
-  RubElHizb = 'rub_el_hizb'
+  RubElHizb = 'rub_el_hizb',
+  Hizb = 'hizb',
 }
 
 export const initialSidebarIsVisible = 'auto'; // sidebar will be open on desktop and closed on mobile

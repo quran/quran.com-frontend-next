@@ -27,8 +27,9 @@ const useActiveVerseTiming = (currentTime: number, audioData: AudioData): VerseT
       lastActiveVerse.current.timestampFrom,
       lastActiveVerse.current.timestampTo,
     )
-  )
+  ) {
     return lastActiveVerse.current;
+  }
 
   const activeVerseTiming = audioData.verseTimings.find((verse) =>
     isCurrentTimeInRange(currentTime, verse.timestampFrom, verse.timestampTo),

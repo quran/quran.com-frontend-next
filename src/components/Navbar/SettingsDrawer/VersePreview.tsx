@@ -40,7 +40,7 @@ const VersePreview = () => {
     }
   }, [dispatch, quranReaderStyles.quranFont, sampleVerse]);
 
-  if (!sampleVerse)
+  if (!sampleVerse) {
     return (
       <>
         <div className={styles.skeletonContainer}>
@@ -55,15 +55,18 @@ const VersePreview = () => {
         </div>
       </>
     );
+  }
 
   // BE return the path to the png image of each word, instead of returning the text. So we're mocking the same behavior here
   let verse;
-  if (isTajweed)
+  if (isTajweed) {
     verse = {
       ...sampleVerse,
       words: sampleVerse.words.map((word) => ({ ...word, text: word.textImage })),
     };
-  else verse = sampleVerse;
+  } else {
+    verse = sampleVerse;
+  }
 
   return (
     <div dir="rtl">

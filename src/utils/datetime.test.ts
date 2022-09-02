@@ -1,3 +1,5 @@
+import { it, expect } from 'vitest';
+
 import { formatDateRelatively, getEarliestDate } from './datetime';
 
 it('getEarliestDate returns earliest date', () => {
@@ -6,6 +8,7 @@ it('getEarliestDate returns earliest date', () => {
     '2021-12-02T23:21:00.000Z',
     '2021-12-02T23:20:00.000Z',
   ]);
+
   expect(result).toBe(1638487200000);
 });
 
