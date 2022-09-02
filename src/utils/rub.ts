@@ -26,3 +26,11 @@ export const getRubIds = (lang: string) => {
     };
   });
 };
+
+export const getChapterIdsForRub = async (rubId: string): Promise<string[]> => {
+  return new Promise((res) => {
+    import(`../../data/rub-el-hizb-to-chapter-mappings.json`).then((data) => {
+      res(data.default[rubId]);
+    });
+  });
+};
