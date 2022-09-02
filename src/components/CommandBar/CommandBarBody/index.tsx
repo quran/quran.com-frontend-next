@@ -36,6 +36,11 @@ const NAVIGATE_TO = [
     resultType: SearchNavigationType.HIZB,
   },
   {
+    name: 'Rub el Hizb 1',
+    key: 1,
+    resultType: SearchNavigationType.RUB_EL_HIZB,
+  },
+  {
     name: 'Page 1',
     key: 1,
     resultType: SearchNavigationType.PAGE,
