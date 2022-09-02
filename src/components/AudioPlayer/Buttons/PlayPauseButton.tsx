@@ -35,7 +35,7 @@ const PlayPauseButton = () => {
 
   let button;
 
-  if (isLoading)
+  if (isLoading) {
     button = (
       <Button
         tooltip={`${t('loading')}...`}
@@ -46,7 +46,7 @@ const PlayPauseButton = () => {
         <Spinner size={SpinnerSize.Large} />
       </Button>
     );
-  else if (isPlaying)
+  } else if (isPlaying) {
     button = (
       <Button
         tooltip={t('audio.player.pause')}
@@ -60,7 +60,7 @@ const PlayPauseButton = () => {
         <PauseIcon />
       </Button>
     );
-  else if (!isPlaying)
+  } else if (!isPlaying) {
     button = (
       <Button
         tooltip={t('audio.player.play')}
@@ -75,6 +75,7 @@ const PlayPauseButton = () => {
         <PlayIcon />
       </Button>
     );
+  }
 
   const currentReadingChapterIds = useChapterIdsByUrlPath(lang);
 

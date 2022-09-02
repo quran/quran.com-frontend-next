@@ -61,16 +61,18 @@ const TafsirSection = () => {
 
       let selectedValueString = t('settings.no-tafsir-selected');
       if (selectedTafsirs.length === 1) selectedValueString = firstSelectedTafsir.name;
-      if (selectedTafsirs.length === 2)
+      if (selectedTafsirs.length === 2) {
         selectedValueString = t('settings.value-and-other', {
           value: firstSelectedTafsir.name,
           othersCount: localizedSelectedTafsirs,
         });
-      if (selectedTafsirs.length > 2)
+      }
+      if (selectedTafsirs.length > 2) {
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTafsir.name,
           othersCount: localizedSelectedTafsirs,
         });
+      }
 
       return (
         <SelectionCard

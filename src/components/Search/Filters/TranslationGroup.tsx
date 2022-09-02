@@ -40,8 +40,9 @@ const TranslationGroup = ({
   let languageCheckboxCheckedStatus;
   if (areSomeTranslationsSelected) languageCheckboxCheckedStatus = 'indeterminate';
   if (areAllTranslationsSelected) languageCheckboxCheckedStatus = true;
-  if (!areSomeTranslationsSelected && !areAllTranslationsSelected)
+  if (!areSomeTranslationsSelected && !areAllTranslationsSelected) {
     languageCheckboxCheckedStatus = false;
+  }
 
   return (
     <div key={language}>
