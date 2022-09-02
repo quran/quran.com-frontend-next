@@ -10,6 +10,9 @@
     "moduleResolution": "node",
     "rootDirs": ["src", "stories"],
     "baseUrl": "src",
+    "paths": {
+      "@/icons/*": ["../public/icons/*"]
+    },
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,

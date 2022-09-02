@@ -41,6 +41,12 @@ module.exports = {
             path.resolve('./'),
         ];
 
+        // Add support for module aliases (same aliases in tsconfig.json)
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            '@/icons': path.resolve(__dirname, "../public/icons"),
+          };
+
         const fileLoaderRule = config.module.rules.find(rule => Array.isArray(rule.test) ? rule.test[0].test('.svg') : rule.test.test('.svg'));
         fileLoaderRule.exclude = /\.svg$/;
         // This is needed for inline svg imports
