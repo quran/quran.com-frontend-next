@@ -3,12 +3,11 @@ import { useContext, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 
-import RepeatIcon from '../../../public/icons/repeat.svg';
-
 import RemainingRangeCount from './RemainingRangeCount';
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
+import RepeatIcon from '@/icons/repeat.svg';
 import Badge from 'src/components/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Wrapper from 'src/components/Wrapper/Wrapper';

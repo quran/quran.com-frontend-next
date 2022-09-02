@@ -4,11 +4,10 @@ import classNames from 'classnames';
 import range from 'lodash/range';
 import useTranslation from 'next-translate/useTranslation';
 
-import PreviousIcon from '../../../../public/icons/caret-back.svg';
-import NextIcon from '../../../../public/icons/caret-forward.svg';
-
 import styles from './Pagination.module.scss';
 
+import PreviousIcon from '@/icons/caret-back.svg';
+import NextIcon from '@/icons/caret-forward.svg';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import { toLocalizedNumber } from 'src/utils/locale';
 

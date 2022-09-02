@@ -9,15 +9,15 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import BookmarkedIcon from '../../../public/icons/bookmark.svg';
-import CopyIcon from '../../../public/icons/copy.svg';
-import LinkIcon from '../../../public/icons/east.svg';
-import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
+import BookmarkedIcon from '@/icons/bookmark.svg';
+import CopyIcon from '@/icons/copy.svg';
+import LinkIcon from '@/icons/east.svg';
+import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';

@@ -1,5 +1,4 @@
-import RepeatIcon from '../../../../public/icons/repeat.svg';
-
+import RepeatIcon from '@/icons/repeat.svg';
 import Badge from 'src/components/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 

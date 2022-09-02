@@ -3,9 +3,8 @@ import { useContext, useMemo } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import BackwardIcon from '../../../public/icons/backward.svg';
-import ForwardIcon from '../../../public/icons/forward.svg';
-
+import BackwardIcon from '@/icons/backward.svg';
+import ForwardIcon from '@/icons/forward.svg';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';

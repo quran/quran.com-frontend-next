@@ -5,14 +5,14 @@ import setLanguage from 'next-translate/setLanguage';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ChevronSelectIcon from '../../../public/icons/chevron-select.svg';
-import GlobeIcon from '../../../public/icons/globe.svg';
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
 import PopoverMenu, { PopoverMenuExpandDirection } from '../dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './LanguageSelector.module.scss';
 
+import ChevronSelectIcon from '@/icons/chevron-select.svg';
+import GlobeIcon from '@/icons/globe.svg';
 import i18nConfig from 'i18n.json';
 import resetSettings from 'src/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';

@@ -4,11 +4,11 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import PauseIcon from '../../../public/icons/pause-outline.svg';
-import PlayIcon from '../../../public/icons/play-outline.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import PauseIcon from '@/icons/pause-outline.svg';
+import PlayIcon from '@/icons/play-outline.svg';
 import Button, {
   ButtonShape,
   ButtonSize,

@@ -6,17 +6,16 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import ChatIcon from '../../../../public/icons/chat.svg';
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
-import CopyIcon from '../../../../public/icons/copy.svg';
-import LoveIcon from '../../../../public/icons/love.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
-import VerifiedIcon from '../../../../public/icons/verified.svg';
-
 import styles from './ReflectionItem.module.scss';
 
+import ChatIcon from '@/icons/chat.svg';
+import ChevronDownIcon from '@/icons/chevron-down.svg';
+import CopyLinkIcon from '@/icons/copy-link.svg';
+import CopyIcon from '@/icons/copy.svg';
+import LoveIcon from '@/icons/love.svg';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import ShareIcon from '@/icons/share.svg';
+import VerifiedIcon from '@/icons/verified.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';

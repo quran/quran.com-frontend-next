@@ -3,11 +3,10 @@ import React, { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import CheckIcon from '../../../../public/icons/check.svg';
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-
 import styles from './SelectReciterMenu.module.scss';
 
+import CheckIcon from '@/icons/check.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';

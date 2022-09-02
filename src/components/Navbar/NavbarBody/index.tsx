@@ -3,9 +3,6 @@ import React, { memo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import IconMenu from '../../../../public/icons/menu.svg';
-import IconSearch from '../../../../public/icons/search.svg';
-import IconSettings from '../../../../public/icons/settings.svg';
 import LanguageSelector from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
@@ -15,6 +12,9 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import IconMenu from '@/icons/menu.svg';
+import IconSearch from '@/icons/search.svg';
+import IconSettings from '@/icons/settings.svg';
 import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
   setIsSearchDrawerOpen,

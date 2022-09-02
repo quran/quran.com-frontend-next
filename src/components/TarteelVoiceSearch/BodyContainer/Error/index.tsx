@@ -2,12 +2,11 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ErrorIcon from '../../../../../public/icons/info.svg';
-import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
-import NoMicrophoneIcon from '../../../../../public/icons/no-mic.svg';
-
 import styles from './Error.module.scss';
 
+import ErrorIcon from '@/icons/info.svg';
+import MicrophoneIcon from '@/icons/microphone.svg';
+import NoMicrophoneIcon from '@/icons/no-mic.svg';
 import Link, { LinkVariant } from 'src/components/dls/Link/Link';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import VoiceError from 'types/Tarteel/VoiceError';

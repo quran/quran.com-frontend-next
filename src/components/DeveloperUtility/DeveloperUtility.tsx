@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import WrenchIcon from '../../../public/icons/wrench.svg';
-
 import ContextMenuAdjustment from './ContextMenuAdjustment';
 import styles from './DeveloperUtility.module.scss';
 import NavbarAdjustment from './NavbarAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 
+import WrenchIcon from '@/icons/wrench.svg';
 import Separator from 'src/components/dls/Separator/Separator';
 
 /**

@@ -1,10 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import TarteelLogo from '../../../public/icons/tarteel-logo.svg';
-import TarteelText from '../../../public/icons/tarteel-text.svg';
-
 import styles from './TarteelAttribution.module.scss';
 
+import TarteelLogo from '@/icons/tarteel-logo.svg';
+import TarteelText from '@/icons/tarteel-text.svg';
 import Link from 'src/components/dls/Link/Link';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 

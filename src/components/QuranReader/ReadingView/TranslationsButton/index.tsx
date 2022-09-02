@@ -5,10 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import TranslationsIcon from '../../../../../public/icons/translation.svg';
-
 import styles from './TranslationsButton.module.scss';
 
+import TranslationsIcon from '@/icons/translation.svg';
 import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';

@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
-
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { isFirstSurah, isLastSurah } from 'src/utils/chapter';

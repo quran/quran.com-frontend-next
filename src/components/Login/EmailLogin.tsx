@@ -1,12 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MailIcon from '../../../public/icons/mail.svg';
-import ArrowLeft from '../../../public/icons/west.svg';
 import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder, { SubmissionResult } from '../FormBuilder/FormBuilder';
 
 import styles from './login.module.scss';
 
+import MailIcon from '@/icons/mail.svg';
+import ArrowLeft from '@/icons/west.svg';
 import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
 import { makeSendMagicLinkUrl } from 'src/utils/auth/apiPaths';
 import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';

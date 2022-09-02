@@ -6,11 +6,10 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import FilterIcon from '../../public/icons/filter.svg';
-import SearchIcon from '../../public/icons/search.svg';
-
 import styles from './search.module.scss';
 
+import FilterIcon from '@/icons/filter.svg';
+import SearchIcon from '@/icons/search.svg';
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';

@@ -3,9 +3,8 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
-
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { logButtonClick } from 'src/utils/eventLogger';

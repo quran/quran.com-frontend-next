@@ -3,10 +3,9 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import InfoIcon from '../../../../public/icons/info.svg';
-
 import styles from './ChapterHeader.module.scss';
 
+import InfoIcon from '@/icons/info.svg';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';

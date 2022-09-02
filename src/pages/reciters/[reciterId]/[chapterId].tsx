@@ -8,15 +8,15 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import CopyIcon from '../../../../public/icons/copy.svg';
-import DownloadIcon from '../../../../public/icons/download.svg';
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
-import ReaderIcon from '../../../../public/icons/reader.svg';
 import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
+import CopyIcon from '@/icons/copy.svg';
+import DownloadIcon from '@/icons/download.svg';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
+import ReaderIcon from '@/icons/reader.svg';
 import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
